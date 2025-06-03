@@ -654,7 +654,6 @@ const InviteInput = ({
                   : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
-            isAutoFocussed
             onKeyDown={onKeyDown}
             type="search"
             withBorder={false}

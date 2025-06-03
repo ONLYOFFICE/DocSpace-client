@@ -81,7 +81,7 @@ export type TPaymentQuota = {
   id: number;
   title: string;
   price: {
-    value: string;
+    value: number;
     currencySymbol?: string;
     isoCurrencySymbol?: string;
   };

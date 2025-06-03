@@ -280,7 +280,6 @@ const InviteInput = ({
             onChange={onChange}
             placeholder={t("Files:AddAdminByNameOrEmail")}
             value={inputValue}
-            isAutoFocussed
             type={InputType.search}
             withBorder={false}
             isDisabled={isDisabled}

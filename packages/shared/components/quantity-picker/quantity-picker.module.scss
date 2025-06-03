@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 .container {
-  max-width: 272px;
+  width: 100%;
   margin: 0 auto;
 
   .sliderWrapper {
@@ -46,7 +46,7 @@
 
       .sliderTrackValueMin,
       .sliderTrackValueMax {
-        color: var(--payment-price-container-track-number-color);
+        color: var(--quantity-picker-track-number);
       }
 
       .sliderTrackValueMax {
@@ -80,8 +80,8 @@
 
     .circle {
       position: relative;
-      background: var(--payment-rectangle-color);
-      border: 1px solid var(--payment-rectangle-color);
+      background: var(--quantity-picker-rectangle-color);
+      border: 1px solid var(--quantity-picker-rectangle-color);
       border-radius: 50%;
       width: 38px;
       height: 38px;
@@ -95,7 +95,7 @@
         cursor: default;
 
         svg path {
-          fill: var(--payment-price-container-disable-color);
+          fill: var(--quantity-picker-disable-color);
         }
       }
 
@@ -128,7 +128,13 @@
     font-weight: 700;
 
     &.disabled {
-      color: var(--payment-price-container-disable-color);
+      color: var(--quantity-picker-disable-color);
+    }
+    &.isLarge {
+      width: 140px;
+    }
+    &.isContant {
+      width: fit-content;
     }
   }
 
@@ -137,7 +143,7 @@
     text-align: center;
 
     &.disabled {
-      color: var(--payment-price-container-disable-color);
+      color: var(--quantity-picker-disable-color);
     }
   }
 
@@ -145,16 +151,24 @@
     margin-bottom: 8px;
     margin-inline: auto;
     text-align: center;
-    color: var(--payment-price-container-feature-text-color);
+    color: var(--quantity-picker-additional-title);
 
     &.disabled {
-      color: var(--payment-price-container-disable-color);
+      color: var(--quantity-picker-disable-color);
     }
   }
 
   .tabsWrapper {
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
+    margin-top: 12px;
+    width: calc(100% - 16px);
+  }
+
+  .underContorlsText {
+    text-align: center;
+    color: var(--quantity-picker-additional-title);
+
+    &.disabled {
+      color: var(--quantity-picker-disable-color);
+    }
   }
 }

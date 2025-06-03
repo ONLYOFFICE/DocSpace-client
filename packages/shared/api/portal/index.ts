@@ -363,7 +363,10 @@ export function updatePayment(adminCount, isYearTariff) {
   });
 }
 
-export function updateWalletPayment(amount, productQuantityType) {
+export function updateWalletPayment(
+  amount: number | null,
+  productQuantityType: number,
+) {
   return request({
     method: "put",
     url: `/portal/payment/updatewallet`,
@@ -374,6 +377,29 @@ export function updateWalletPayment(amount, productQuantityType) {
       productQuantityType,
     },
   });
+}
+
+export function calcalateWalletPayment(
+  amount: number,
+  productQuantityType: number,
+  signal?: AbortSignal,
+) {
+  return request({
+    method: "put",
+    url: `/portal/payment/calculatewallet`,
+    data: {
+      quantity: {
+        storage: amount,
+      },
+      productQuantityType,
+    },
+    signal,
+  }) as {
+    operationId: number;
+    amount: number;
+    currency: string;
+    quantity: number;
+  };
 }
 
 export function getCurrencies() {

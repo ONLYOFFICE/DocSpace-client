@@ -292,6 +292,7 @@ class BackupStore {
     //     ? serviceTitle === this.connectedThirdPartyAccount?.title
     //     : provider.name === this.connectedThirdPartyAccount?.title;
     const isConnected =
+      provider.name === this.connectedThirdPartyAccount?.providerKey ||
       provider.name === this.connectedThirdPartyAccount?.title;
 
     const isDisabled = !provider.connected && !this.authStore.isAdmin;

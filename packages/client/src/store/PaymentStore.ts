@@ -132,8 +132,6 @@ class PaymentStore {
 
   isTransactionHistoryExist = false;
 
-  payerInfo = null;
-
   autoPayments: TAutoTopUpSettings | null = null;
 
   minBalance: string = "";
@@ -142,19 +140,11 @@ class PaymentStore {
 
   isAutomaticPaymentsEnabled: boolean = false;
 
-  servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
-
-  servicesQuotas: TPaymentQuota | null = null;
-
-  isInitServicesPage = false;
-
   isVisibleWalletSettings = false;
 
   upToBalanceError = false;
 
   minBalanceError = false;
-
-  // wasFirstTopUp = false;
 
   constructor(
     userStore: UserStore,
@@ -380,73 +370,19 @@ class PaymentStore {
     }
   };
 
-  get storageQuotaIncrement() {
-    return (
-      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
-        ?.value || 0
-    );
-  }
-
-  get storageQuotaIncrementPrice() {
-    return (
-      this.servicesQuotas?.price ?? {
-        value: 0,
-        currencySymbol: "",
-        isoCurrencySymbol: "USD",
-      }
-    );
-  }
-
-  setIsInitServicesPage = (isInitServicesPage: boolean) => {
-    this.isInitServicesPage = isInitServicesPage;
-  };
-
-  servicesInit = async (t: TTranslation) => {
-    const isRefresh = window.location.href.includes("complete=true");
-
-    const requests = [
-      getServicesQuotas(),
-      this.fetchBalance(isRefresh),
-      this.fetchWalletPayer(isRefresh),
-    ];
-
-    if (!this.currentTariffStatusStore) return;
-
-    try {
-      const [quotas] = await Promise.all(requests);
-
-      if (!quotas) throw new Error();
-
-      const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
-
-      if (this.isPayerExist && !payerInfo)
-        await setPayerInfo(this.isPayerExist);
-
-      if (this.walletCustomerEmail) {
-        if (this.isPayer) {
-          requests.push(this.setPaymentAccount());
-        }
-
-        requests.push(this.fetchAutoPayments());
-      } else {
-        requests.push(this.fetchCardLinked());
-      }
-
-      quotas[0].features.forEach((feature) => {
-        this.servicesQuotasFeatures.set(feature.id, feature);
-      });
-
-      this.servicesQuotas = quotas[0];
-
-      this.setIsInitServicesPage(true);
-    } catch (e) {
-      toastr.error(t("Common:UnexpectedError"));
-      console.error(e);
-    }
-  };
-
   setVisibleWalletSetting = (isVisibleWalletSettings) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
+  };
+
+  initWalletPayerAndBalance = async (isRefresh) => {
+    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
+
+    await Promise.all([
+      this.fetchWalletPayer(isRefresh),
+      this.fetchBalance(isRefresh),
+    ]);
+
+    if (this.isPayerExist && !payerInfo) await setPayerInfo(this.isPayerExist);
   };
 
   walletInit = async (t: TTranslation) => {
@@ -455,19 +391,11 @@ class PaymentStore {
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
 
-    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
     this.setVisibleWalletSetting(false);
 
     try {
-      await Promise.all([
-        this.fetchWalletPayer(isRefresh),
-        this.fetchBalance(isRefresh),
-      ]);
-
+      await this.initWalletPayerAndBalance(isRefresh);
       this.previousBalance = this.balance;
-
-      if (this.isPayerExist && !payerInfo)
-        await setPayerInfo(this.isPayerExist);
 
       if (this.walletCustomerEmail) {
         if (this.isPayer) {
@@ -837,6 +765,18 @@ class PaymentStore {
     return true;
   }
 
+  get isCardLinkedToPortal() {
+    if (!this.currentQuotaStore) return false;
+
+    const { isNonProfit, isFreeTariff } = this.currentQuotaStore;
+
+    return (
+      this.cardLinkedOnNonProfit ||
+      this.cardLinkedOnFreeTariff ||
+      (!isNonProfit && !isFreeTariff)
+    );
+  }
+
   setRangeStepByQuota = () => {
     if (!this.paymentQuotasStore) return;
 
@@ -856,10 +796,11 @@ class PaymentStore {
     email: string,
     userName: string,
     message: string,
+    t,
   ) => {
     try {
       await api.portal.sendPaymentRequest(email, userName, message);
-      // toastr.success(t("SuccessfullySentMessage"));
+      toastr.success(t("SuccessfullySentMessage"));
     } catch (e) {
       toastr.error(e as TData);
     }

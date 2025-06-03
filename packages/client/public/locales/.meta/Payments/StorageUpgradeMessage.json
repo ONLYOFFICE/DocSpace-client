@@ -1,0 +1,21 @@
+{
+  "key_path": "StorageUpgradeMessage",
+  "content": "{{fromSize}} {{storageUnit}} → {{toSize}} {{storageUnit}} in total",
+  "content_en_sha1_hash": "8aa4e63562d68f897b88c530e236ad896283bb22",
+  "created_at": "2025-05-29T12:12:54.527Z",
+  "updated_at": "2025-05-29T12:12:54.527Z",
+  "comment": {
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

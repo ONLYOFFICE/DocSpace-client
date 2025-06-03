@@ -69,10 +69,10 @@ const Amount = (props: AmountProps) => {
   const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, validity } = e.target;
 
-    if (validity.valid) {
-      setAmount(value);
-      setSelectedAmount(value);
-    }
+    if (!validity.valid) return;
+
+    setAmount(value);
+    setSelectedAmount(value);
   };
 
   const textTooltip = () => {

@@ -160,14 +160,18 @@ const AutoPayments = ({
   };
 
   const onMinBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value, validity } = e.target;
+
+    if (!validity.valid) return;
 
     setMinBalance!(value);
     validateMinBalance(value);
   };
 
   const onMaxUpToBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value, validity } = e.target;
+
+    if (!validity.valid) return;
 
     setUpToBalance!(value);
     validateMaxUpToBalance(value);
@@ -257,7 +261,7 @@ const AutoPayments = ({
           onChange={onMinBalanceChange}
           hasError={minBalanceError}
           type={InputType.text}
-          inputMode="numeric"
+          pattern="\d+"
         />
         {description(5, 1000)}
       </div>
@@ -277,7 +281,7 @@ const AutoPayments = ({
           onChange={onMaxUpToBalanceChange}
           hasError={upToBalanceError}
           type={InputType.text}
-          inputMode="numeric"
+          pattern="\d+"
         />
         {description(minUpToBalance, 5000)}
       </div>

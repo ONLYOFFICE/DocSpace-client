@@ -1,0 +1,28 @@
+{
+  "key_path": "ScheduledTrashMove",
+  "content": "{{date}} will be moved to {{sectionName}}",
+  "content_en_sha1_hash": "dd1133c3ff4ac7d8500d3788b0169671c5cd596e",
+  "created_at": "2025-06-02T10:19:23.365Z",
+  "updated_at": "2025-06-02T10:21:42.113Z",
+  "comment": {
+    "text": "This translation key is used to display a message that announces when a file will be moved to the trash section on a specific date. It appears in the UI as part of a details view for files set to expire or be deleted permanently, providing context for users about upcoming file actions.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:21:42.113Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
+      "line_number": 331,
+      "context": "this.t(\"Files:WillBeDeletedPermanently\", {\n date: parseAndFormatDate(this.item.expired, this.culture),\n }),\n )\n : text(\n this.t(\"Files:ScheduledTrashMove\", {\n date: parseAndFormatDate(this.item.expired, this.culture),\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -223,7 +223,6 @@
   "SharedFiles": "Paylaşılan dosyalar",
   "SharedFilesImportLocation": "Diğer kullanıcılar tarafından paylaşılan dosyalar {{sectionName}} > Bağlantı ile son erişilenler bölümüne aktarılacaktır. Not: İçe aktarma sırasında bazı erişim izinleri kaybolabilir.",
   "SharedFolders": "Paylaşılan klasörler",
-  "SharedFoldersDescription": "Paylaşılan klasörler, erişim hakkı verilen kullanıcıların bulunduğu odalar olarak Odalar bölümüne aktarılacaktır. Lütfen dikkat: içe aktarma sırasında bazı erişim hakları kaybedilebilir",
   "SingleSignOn": "Tek Seferlik Giriş",
   "SMTPSettings": "SMTP Ayarları",
   "SMTPSettingsDescription": "SMTP ayarları {{organizationName}}'in kullandığının yerine kendi SMTP sunucunuzu kullanarak portalınızdan bildirim göndermek için eposta hesabınızı ayarlarken gerekli olacaktır. Lütfen tüm alanları doldurun ve 'Kaydet' tuşuna başın. 'Test Postası Gönder' tuşunu kullanarak girdğiniz tüm ayarların doğru olduğunu ve çalıştığını deneyebilirsiniz.",

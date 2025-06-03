@@ -223,7 +223,6 @@
   "SharedFiles": "Tập tin được chia sẻ",
   "SharedFilesImportLocation": "Các tệp được chia sẻ bởi người dùng khác sẽ được nhập vào {{sectionName}} > Truy cập gần đây qua liên kết. Lưu ý: Một số quyền truy cập có thể bị mất trong quá trình nhập.",
   "SharedFolders": "Thư mục được chia sẻ",
-  "SharedFoldersDescription": "Các thư mục được chia sẻ sẽ được nhập vào phần Phòng dưới dạng phòng có người dùng được cấp quyền truy cập. Xin lưu ý: một số quyền truy cập có thể bị mất trong quá trình nhập",
   "SingleSignOn": "Đăng nhập một lần (SSO)",
   "SMTPSettings": "Cài đặt SMTP",
   "SMTPSettingsDescription": "Cài đặt SMTP là cần thiết để thiết lập một tài khoản email sẽ được sử dụng để gửi thông báo từ cổng thông tin sử dụng SMTP server của chính bạn thay vì từ server mà {{organizationName}} sử dụng. Vui lòng điền vào tất cả các trường và bấm nút 'Lưu'. Bạn có thể sử dụng nút 'Gửi Mail thử nghiệm' để kiểm tra xem tất cả các cài đặt bạn đã nhập có chính xác và hoạt động đúng như dự kiến ​​không.",

@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "キャンセル通知を再表示しない",
   "DisplayFileExtension": "ファイル名の隣にファイル拡張子を表示する",
-  "DisplayNotification": "ゴミ箱への移動時に通知を表示",
   "OpenSameTab": "{{organizationName}}エディタを同じタブで開く",
   "OriginalCopy": "コピーしたファイルをオリジナルの形式にも保存する"
 }

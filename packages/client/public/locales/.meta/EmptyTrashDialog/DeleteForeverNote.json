@@ -3,7 +3,7 @@
   "content": "All items from the {{sectionName}} section will be deleted forever. You won’t be able to restore them.",
   "content_en_sha1_hash": "f63c0cba122e23660d36c3dff04f53bc9ffd90a4",
   "created_at": "2025-05-19T21:30:56.569Z",
-  "updated_at": "2025-05-24T13:02:48.666Z",
+  "updated_at": "2025-06-02T10:20:51.146Z",
   "comment": {
     "text": "This translation key is used to display a message when deleting items from a section permanently. It appears as part of a modal dialog and informs users that deleted items cannot be restored. The translation should convey a clear warning about data loss without being overly alarming or technical.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
-      "line_number": 92,
+      "line_number": 89,
       "context": "window.addEventListener(\"keydown\", onKeyPress);\n \n return () => window.removeEventListener(\"keydown\", onKeyPress);\n }, []);\n \n const description = t(\"DeleteForeverNote\", { sectionName });\n \n return (\n <ModalDialog\n isLoading={!tReady}\n visible={visible}",
       "module": "/packages/client"
     }

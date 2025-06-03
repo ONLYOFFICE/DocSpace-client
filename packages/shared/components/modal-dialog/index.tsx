@@ -50,7 +50,15 @@ import { ModalDialogType } from "./ModalDialog.enums";
 const Header = ({ children }: { children: React.ReactNode }) => null;
 Header.displayName = MODAL_DIALOG_HEADER_NAME;
 
-const Body = ({ children }: { children: React.ReactNode }) => null;
+const Body = ({
+  ref,
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  ref?: React.RefObject<HTMLDivElement | null>;
+  className?: string;
+}) => null;
 Body.displayName = MODAL_DIALOG_BODY_NAME;
 
 const Footer = ({ children }: { children: React.ReactNode }) => null;

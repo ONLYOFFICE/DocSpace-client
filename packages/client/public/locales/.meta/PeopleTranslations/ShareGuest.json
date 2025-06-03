@@ -1,0 +1,298 @@
+{
+  "key_path": "ShareGuest",
+  "content": "Share guest",
+  "content_en_sha1_hash": "3bc1f18e87e31dceec9010b37ce1ea9d3950e820",
+  "created_at": "2025-05-19T21:30:53.513Z",
+  "updated_at": "2025-05-26T07:57:32.845Z",
+  "comment": {
+    "text": "This translation key is used to display a button label that shares contact information with others, likely found on a contact details page or in a shared contacts list. The translated text appears when the \"Share Guest\" option is clicked. Translators should replace \"ShareGuest\" with the corresponding localized text for their language.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:35.370Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
+      "line_number": 295,
+      "context": "case \"share-guest\":\n return {\n id: \"option_share-guest\",\n key: option,\n icon: PersonShareReactSvgUrl,\n label: t(\"PeopleTranslations:ShareGuest\"),\n onClick: () => shareGuest(item, t),\n };\n case \"change-type\":\n return {\n id: \"option_change-type\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Сподели гост' doesn't accurately convey the meaning of 'Share guest'. 'Share guest' typically implies allowing a guest to use something (like a login or access). 'Сподели гост' literally translates to 'Share guest' and lacks the nuance of allowing access or sharing something with a guest.",
+          "suggestion": "Позволи на гост"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Μοιραστείτε τον επισκέπτη\" is a literal translation and doesn't accurately convey the meaning of 'Share guest' in a user interface context. It implies sharing *a* guest, which is not the intended meaning.  It's likely intended to refer to the functionality of sharing a guest's access or details.",
+          "suggestion": "Consider alternatives such as: \"Κοινή χρήση επισκέπτη\" (Shared guest) or a more context-specific phrase depending on the feature's purpose. Something like \"Πρόσβαση επισκέπτη\" (Guest access) might be more appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Partager l'invité' is a literal translation of 'Share guest' and doesn't accurately convey the intended meaning. 'Share guest' likely refers to allowing a guest to share something, or to a guest access feature. A more accurate translation would depend on the context, but options include 'Accès invité', 'Partage d'accès invité', or 'Donner l'accès à un invité'.",
+          "suggestion": "Consider 'Accès invité', 'Partage d'accès invité', or 'Donner l'accès à un invité' depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Կիսվել հյուրով\" literally translates to \"Share with a guest\". While it conveys a similar idea, \"Share guest\" implies sharing *a guest*, not sharing *with* a guest. A more accurate translation would be something like \"Հյուրերի համօժանդակություն\" (Guest Sharing) or \"Հյուրերի հասանելիություն\" (Guest Access), depending on the intended meaning.",
+          "suggestion": "Consider alternatives like \"Հյուրերի համօժանդակություն\" or \"Հյուրերի հասանելիություն\" for a more precise translation of 'Share guest'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ゲストを共有\" (gesuto o kyouyuu) literally translates to 'share a guest'. A more natural and accurate translation for 'Share guest' in a sharing context would be something like \"ゲストを招待する\" (gesuto o shoutai suru - invite a guest) or \"ゲスト共有\" (gesuto kyouyuu - guest sharing). \"ゲストを共有\" implies sharing the guest themselves, which is likely not the intended meaning.",
+          "suggestion": "ゲストを招待する (gesuto o shoutai suru) or ゲスト共有 (gesuto kyouyuu)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Partilhar convidado\" isn't the most natural or idiomatic translation for \"Share guest\" in Portuguese. While literally correct, it doesn't convey the common meaning of allowing a guest to use something (e.g., share a room, share access).",
+          "suggestion": "Consider \"Acessar como convidado\" (Access as guest), \"Compartilhar acesso para convidado\" (Share access for guest), or \"Permitir acesso para convidado\" (Allow access for guest), depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Partajare\" means 'sharing', \"invitat\" translates to 'guest'. The English 'Share guest' implies a feature or permission to allow a guest to share something. A more accurate translation would convey this action. \"Permite acces pentru oaspeți\" (Allow access for guests) or \"Distribuire cu oaspeți\" (Share with guests) would be closer to the intended meaning.",
+          "suggestion": "Distribuire cu oaspeți"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Поделиться данными гостя' is overly literal and not the most natural way to convey 'Share guest'. While technically correct, it's clunky. A better translation would focus on the functionality - allowing someone else to use the guest's access or information.",
+          "suggestion": "Consider translations like 'Предоставить доступ гостю' (Provide access to the guest), 'Поделиться информацией гостя' (Share the guest's information), or 'Гостевой доступ' (Guest Access) depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අමුත්තෙකු බෙදාගන්න' while literally meaning 'share a guest', doesn't accurately convey the intended meaning of 'Share guest' in the context of sharing access or inviting someone. It implies physically sharing a person, which is not the intent.",
+          "suggestion": "A more appropriate translation would depend on the exact context. Possible suggestions include: 'මු Invite කරන්න' (to invite), 'අමුත්තිය අමතන්න' (to refer a guest), or 'අමුත්තිය පంచుන්න' (to share/refer a guest - though less common)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Deli gosta' is technically a literal translation of 'Share guest', it doesn't accurately convey the intended meaning. 'Share guest' in this context likely refers to allowing a guest to share a resource or space, not literally sharing a person. A more accurate translation would depend on the context.",
+          "suggestion": "Possible suggestions: 'Omogoči gostu dostop', 'Gost lahko uporabi', 'Deljenje z gostom' (depending on context)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Подели госту' is not a grammatically correct or natural translation of \"Share guest\". It literally translates to \"Share to guest\" and doesn't convey the intended meaning of allowing a guest to share something.",
+          "suggestion": "A more accurate translation would be something like 'Омогући госту' (Omogući gostu - Allow guest) or 'Подели са гостом' (Podeli sa gostom - Share with guest)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Podeli gostu' while technically meaning 'Share with guest', doesn't quite capture the nuance of 'Share guest' which implies sharing a guest access or invitation. A more accurate translation would reflect the concept of granting guest access.",
+          "suggestion": "Deli pristup gostu"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Konuk paylaş' is a literal translation but doesn't fully capture the meaning of 'Share guest' in the context of sharing access or inviting a guest. It sounds awkward in Turkish.",
+          "suggestion": "Consider 'Misafir paylaşımı' (Guest sharing) or 'Misafir ekle' (Add guest) depending on the specific functionality."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Поділитися гостем' is not the most natural or accurate translation of 'Share guest'. While literally 'Share with a guest', it's unclear what the English phrase intends. 'Share guest' could refer to allowing a guest to share something, or sharing a guest's details. A better translation depends on the context. Possible alternatives include: 'Надати гостя' (Provide a guest), 'Додати гостя' (Add a guest), or 'Розмістити гостя' (Host a guest).",
+          "suggestion": "The best alternative depends on context. Consider 'Надати гостя', 'Додати гостя', or 'Розмістити гостя'."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Chia sẻ khách' is technically correct but lacks nuance. 'Share guest' usually implies sharing access or a booking for a guest. A more natural translation would convey that meaning.",
+          "suggestion": "Phân quyền khách"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

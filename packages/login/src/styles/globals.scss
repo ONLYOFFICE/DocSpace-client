@@ -26,8 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "../../../../public/css/fonts.css";
-@import "../../../shared/styles/theme.scss";
+@use "../../../../public/css/fonts.css";
+@use "../../../shared/styles/theme.scss";
 
 $font-family-base: "Open Sans", sans-serif;
 

@@ -1,0 +1,232 @@
+{
+  "key_path": "MarkAsVersion",
+  "content": "Mark as version",
+  "content_en_sha1_hash": "9f8223cc47438831ca1519c318fd28060ec91cbc",
+  "created_at": "2025-05-19T21:30:55.814Z",
+  "updated_at": "2025-05-26T07:57:32.813Z",
+  "comment": {
+    "text": "This translation key is used to mark a file as a version. It appears as a button label on a version row in a version history page, allowing users to select a version to update or revert to. The exact text may vary depending on the selected context (revision or version).",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:34.672Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
+      "line_number": 285,
+      "context": "t={t}\n title={\n index > 0\n ? isVersion\n ? t(\"Files:MarkAsRevision\")\n : t(\"Files:MarkAsVersion\")\n : \"\"\n }\n />\n <div className=\"version-link-box\">\n <Link",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'وضع علامة كإصدار' while literally meaning 'Place a mark as version', doesn't fully capture the nuance of 'Mark as version'. A more natural and idiomatic translation would be something like 'تحديد كإصدار' (Tahdeed ka isdar) or 'تمييز كإصدار' (Tamyeez ka isdar).",
+          "suggestion": "تحديد كإصدار"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Versiya kimi qeyd edin\" is a literal translation, it doesn't quite capture the nuance of 'Mark as version' in this context. It sounds a bit awkward. A more natural phrasing would convey the action of assigning a version.",
+          "suggestion": "Consider alternatives like \"Versiyanın olaraq seçin\" or \"Versiya olaraq işarə edin\" which better conveys the intended meaning of assigning a version."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"버전으로 표시\" is a literal translation but might not be the most natural or accurate representation of \"Mark as version\" in a software context. It could be interpreted as 'display as a version' rather than 'assign a version number'.",
+          "suggestion": "Consider alternatives like \"버전으로 설정\" (set as version), \"버전 지정\" (assign version), or \"버전 관리\" (version control) depending on the specific functionality."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"අනුවාදයක් ලෙස සලකුණු කරන්න\" literally translates to \"Mark as a translation\". This doesn't accurately convey the meaning of 'Mark as version', which implies assigning a version number or a particular version status to a file. It's translating the word 'translation' instead of 'version'.",
+          "suggestion": "A more accurate translation would depend on the specific context of 'Mark as version'. Possible suggestions include: \"අවස්ථාවක් ලෙස සලකුණු කරන්න\" (Mark as status), \"වර්ෂනයක් ලෙස සලකුණු කරන්න\" (Mark as version - literal, but potentially confusing), or \"අවසම් යථාර්ථයක් ලෙස සලකුණු කරන්න\" (Mark as final version - if appropriate)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

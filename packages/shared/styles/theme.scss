@@ -1,4 +1,4 @@
-@import "./variables/_colors.scss";
+@use "./variables/colors" as *;
 
 .light {
   --row-side-color: #{$gray};
@@ -1080,6 +1080,11 @@
   --info-panel-blur-color: #{$blur-light};
   --info-panel-bg: #{$white};
   --info-panel-border: #{$gray-light-mid};
+  --info-panel-avatar-color: #{$gray-text};
+  --info-panel-link-expired: #{$gray};
+  --info-panel-links-color: #{$light-blue-main};
+  --info-panel-links-primary-color: #{$gray-text};
+  --info-panel-members-create-link: #{$black};
 }
 
 .dark {
@@ -1087,6 +1092,11 @@
   --info-panel-blur-color: #{$blur-dark};
   --info-panel-bg: #{$black};
   --info-panel-border: #{$gray-dark-strong};
+  --info-panel-avatar-color: #{$gray};
+  --info-panel-link-expired: #{$gray};
+  --info-panel-links-color: #{$light-blue-main};
+  --info-panel-links-primary-color: #{$dark-gray-dark};
+  --info-panel-members-create-link: #{$gray-dark};
 }
 
 .light {
@@ -1558,7 +1568,7 @@
   --input-bg: #{$dark-gray-light};
   --input-color: #{$white};
   --input-border-color: #{$gray-dark-strong};
-  --input-border-hover: #{$gray-dark};
+  --input-border-hover: #{$gray-dark-text};
   --input-border-focus: #{$white};
 
   --input-disabled-bg: #{$gray-dark-strong};
@@ -1574,7 +1584,7 @@
   --input-warning-border-hover: #{$dark-status-warning};
   --input-warning-border-focus: #{$dark-status-warning};
 
-  --text-input-placeholder-color: #{$gray-dark};
+  --text-input-placeholder-color: #{$gray-dark-text};
   --text-input-placeholder-disabled-color: #{$gray-dark-text};
 
   // Dimensions
@@ -1962,7 +1972,7 @@
   --settings-arrow-fill: #{$white};
 }
 
-.light{
+.light {
   --icon-cropper-grid-color: #{$gray-strong};
   --icon-cropper-delete-button-bg: #{$gray-light};
   --icon-cropper-delete-button-hover-bg: #{$light-gray-hover};
@@ -1974,6 +1984,13 @@
   --preview-tile-background: #{$white};
   --preview-tile-border: 1px solid #{$gray-strong};
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
+
+  --button-delete-bg: #{$gray-light};
+  --button-delete-bg-hover: #{$light-gray-hover};
+  --button-delete-border: #{$gray-light};
+  --button-delete-border-hover: #{$light-gray-hover};
+  --button-delete-text: #{$gray-text};
+  --button-delete-icon-color: #{$light-gray-dark};
 }
 
 .dark {
@@ -1988,6 +2005,13 @@
   --preview-tile-background: #{$black};
   --preview-tile-border: 1px solid #{$gray-dark-strong};
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
+
+  --button-delete-bg: #{$gray-dark-mid};
+  --button-delete-bg-hover: #{$gray-dark-strong};
+  --button-delete-border: #{$gray};
+  --button-delete-border-hover: #{$light-dark-gray-hover};
+  --button-delete-text: #{$white};
+  --button-delete-icon-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2139,4 +2163,196 @@
 
   --selector-navigation-lifetime-fill: #{$dark-gray-dark};
   --selector-navigation-lifetime-stroke: #{$gray};
+}
+
+.light {
+  --index-bg-button-hover: #{$light-blue-hover};
+  --index-arrow-button-hover: #{$light-blue-main};
+}
+
+.dark {
+  --index-bg-button-hover: #{$dark-grey-hover};
+  --index-arrow-button-hover: #{$white};
+}
+
+.light {
+  --mute-badge-color: var(--accent-main);
+}
+
+.dark {
+  --mute-badge-color: #{$white};
+}
+
+.light {
+  --indicator-loader-bg-color: var(--accent-main);
+}
+
+.dark {
+  --indicator-loader-bg-color: #{$white};
+}
+
+.light {
+  --login-or-text-color: #{$gray};
+  --login-or-line-color: #{$gray-light-mid};
+  --login-header-color: #{$black};
+  --login-help-btn: #{$gray};
+  --login-title-color: #{$black};
+  --login-text-color: #{$gray};
+}
+
+.dark {
+  --login-or-text-color: #{$gray-dark};
+  --login-or-line-color: #{$gray-dark-strong};
+  --login-header-color: #{$white};
+  --login-help-btn: #{$gray-dark};
+  --login-title-color: #{$white};
+  --login-text-color: #{$gray-dark};
+}
+
+.light {
+  --loading-button-default-bg: #{$gray};
+  --loading-button-hover-color: #{$light-gray-dark};
+  --loading-button-color: #{$light-second-main};
+  --loading-button-bg: #{$white};
+}
+
+.dark {
+  --loading-button-default-bg: #{$gray-dark};
+  --loading-button-hover-color: #{$white};
+  --loading-button-color: #{$white};
+  --loading-button-bg: #{$black};
+}
+
+.light {
+  --preparation-portal-progress-bg: #{$light-gray-hover};
+  --preparation-portal-progress-color-percent-big: #{$white};
+  --preparation-portal-progress-color-percent-small: #{$black};
+  --preparation-portal-progress-line-bg: var(--accent-main);
+  --preparation-portal-description-text-color: #{$gray};
+  --preparation-portal-progress-error-text-color: #{$light-error-status};
+}
+
+.dark {
+  --preparation-portal-progress-bg: #{$dark-gray-light};
+  --preparation-portal-progress-color-percent-big: #{$black};
+  --preparation-portal-progress-color-percent-small: #{$white};
+  --preparation-portal-progress-line-bg: #{$white};
+  --preparation-portal-description-text-color: #{$gray-dark};
+  --preparation-portal-progress-error-text-color: #{$dark-error-status};
+}
+
+.light {
+  --files-version-history-badge-default-fill: #{$white};
+  --files-version-history-badge-first-fill: #{$gray};
+  --files-version-history-badge-fill: #{$light-status-warning};
+  --files-version-history-badge-stroke: #{$gray};
+}
+
+.dark {
+  --files-version-history-badge-default-fill: #{$black};
+  --files-version-history-badge-first-fill: #{$gray-dark};
+  --files-version-history-badge-fill: #{$main-orange};
+  --files-version-history-badge-stroke: #{$gray-dark};
+}
+
+.light {
+  --settings-coommon-description-color: #{$light-gray-dark};
+  --settings-common-white-label-paid-badge-bg: #{$favorites-status};
+}
+
+.dark {
+  --settings-coommon-description-color: #{$gray-dark};
+  --settings-common-white-label-paid-badge-bg: #{$favorite-status-dark};
+}
+
+.light {
+  --settings-common-company-info-border: 1px dashed #{$black};
+  --settings-common-company-info-color: #{$gray};
+  --settings-common-branding-description-color: #{$light-gray-dark};
+}
+
+.dark {
+  --settings-common-company-info-border: 1px dashed #{$white};
+  --settings-common-company-info-color: #{$gray-dark};
+  --settings-common-branding-description-color: #{$gray-dark};
+}
+
+.light {
+  --files-editing-wrapper-fill: #{$gray};
+  --files-panels-invite-border: 1px solid #{$gray-strong};
+  --input-block-border-color: #{$light-second-main};
+  --settings-common-white-label-border-img: 1px solid #{$gray-strong};
+  --settings-common-white-label-green-bg-color: 1px solid #{$gray-strong};
+  --settings-common-white-label-not-available-background: #{$gray-light};
+  --settings-common-white-label-text-color: #{$black};
+}
+
+.dark {
+  --files-editing-wrapper-fill: #{$gray-dark};
+  --files-panels-invite-border: 1px solid #{$gray-dark-strong};
+  --input-block-border-color: #{$white};
+  --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
+  --settings-common-white-label-not-available-background: #{$gray-dark};
+  --settings-common-white-label-text-color: #{$white};
+}
+
+.light {
+  --rombs-bg: #{$rombs-loader-red-bg};
+
+  --rombs-loader-blue: #{$blue-romb};
+  --rombs-loader-green: #{$green-romb};
+  --rombs-loader-red: #{$red-romb};
+
+  --rombs-loader-blue-colorStep_1: #{$rombs-loader-apricot-colorStep};
+  --rombs-loader-blue-colorStep_2: #{$white};
+  --rombs-loader-blue-colorStep_3: #{$rombs-loader-gray-colorStep};
+  --rombs-loader-blue-colorStep_4: #{$rombs-loader-dark-gray-colorStep};
+
+  --rombs-loader-red-colorStep_1: #{$rombs-loader-blue-colorStep};
+  --rombs-loader-red-colorStep_2: #{$white};
+  --rombs-loader-red-colorStep_3: #{$rombs-loader-light-gray-colorStep};
+
+  --rombs-loader-green-colorStep_1: #{$rombs-loader-green-colorStep};
+  --rombs-loader-green-colorStep_2: #{$white};
+  --rombs-loader-green-colorStep_3: #{$rombs-loader-light-gray-colorStep};
+  --rombs-loader-green-colorStep_4: #{$rombs-loader-gray-colorStep};
+}
+
+.dark {
+  --rombs-bg: #{$rombs-loader-red-bg};
+
+  --rombs-loader-blue: #{$blue-romb};
+  --rombs-loader-green: #{$green-romb};
+  --rombs-loader-red: #{$red-romb};
+
+  --rombs-loader-blue-colorStep_1: #{$black};
+  --rombs-loader-blue-colorStep_2: #{$black};
+  --rombs-loader-blue-colorStep_3: #{$dark-romb};
+  --rombs-loader-blue-colorStep_4: #{$dark-romb};
+
+  --rombs-loader-red-colorStep_1: #{$black};
+  --rombs-loader-red-colorStep_2: #{$black};
+  --rombs-loader-red-colorStep_3: #{$dark-romb};
+
+  --rombs-loader-green-colorStep_1: #{$black};
+  --rombs-loader-green-colorStep_2: #{$black};
+  --rombs-loader-green-colorStep_3: #{$dark-romb};
+}
+
+.light {
+  --modal-dialog-resolve-color: #{$gray};
+}
+
+.dark {
+  --modal-dialog-resolve-color: #{$gray};
+}
+
+.light {
+  --search-input-default-icon-fill: #{$gray-strong};
+  --search-input-filled-icon-fill: #{$gray};
+}
+
+.dark {
+  --search-input-default-icon-fill: #{$gray-dark-strong};
+  --search-input-filled-icon-fill: #{$gray-dark};
 }

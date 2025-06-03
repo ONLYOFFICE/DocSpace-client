@@ -1,0 +1,475 @@
+{
+  "key_path": "DocumentServiceLocationHeaderHelp",
+  "content": "Document Service is the server service which allows to perform the document editing and allows to convert the document file into the appropriate OfficeOpen XML format. Document service location specifies the address of the server with the document services installed.",
+  "content_en_sha1_hash": "cfefeceae1cc9f8ec4067b4e8fafd1c0a13a9378",
+  "created_at": "2025-05-19T21:30:51.377Z",
+  "updated_at": "2025-05-26T07:57:32.686Z",
+  "comment": {
+    "text": "This translation key is used for a help message that explains the purpose and functionality of Document Service Location in the Portal Settings category. It appears as a header in a dialog or settings page, providing context for users unfamiliar with the term.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:17.165Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
+      "line_number": 237,
+      "context": "return (\n <Styled.Location>\n <Styled.LocationHeader>\n <div className=\"main\">\n {t(\"Settings:DocumentServiceLocationHeaderHelp\")}\n </div>\n {integrationSettingsUrl ? (\n <Link\n className=\"third-party-link\"\n color={currentColorScheme.main?.accent}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'OfficeOpen XML' is written as 'OfficeOpen XML' without the space between 'Open' and 'XML'.",
+          "suggestion": "OfficeOpen XML"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'quraşdırıldığı' could be improved. While technically correct, it's a bit formal and can be replaced with a more natural phrasing.",
+          "suggestion": "Sənəd xidmətlərinin quraşdırıldığı serverin ünvanını göstərir."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and complex. Breaking it into two sentences could improve readability.",
+          "suggestion": "Sənəd Xidməti sənədin redaktə edilməsi və sənəd faylının müvafiq OfficeOpen XML formatına çevrilməsinə imkan verən server xidmətidir. Sənəd xidmətinin yeri sənəd xidmətlərinin quraşdırıldığı serverin ünvanını göstərir."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation uses repeated phrasing (\"позволява извършването на\" and \"позволява\"). It makes the sentence sound clunky.",
+          "suggestion": "Consider rephrasing to avoid repetition, for example: 'Document Service е сървърна услуга, която дава възможност за редактиране на документи и преобразуване на файла в подходящ OfficeOpen XML формат. Местоположението на услугата за документи уточнява адреса на сървъра, на който са инсталирани документите.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Document Service location' is translated literally as 'Местоположението на услугата за документи'. While technically correct, a more natural phrasing in Bulgarian might be more idiomatic.",
+          "suggestion": "Consider alternatives like 'Адресът на услугата за документи' or 'Местоположението на сървъра за документи'."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better flow. The current phrasing is a bit long and complex.",
+          "suggestion": "Break down the sentence into two shorter, more easily digestible sentences."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'allows to perform the document editing' is awkward in Greek.  'Επιτρέπει την εκτέλεση της επεξεργασίας εγγράφων' is overly literal and sounds unnatural.",
+          "suggestion": "Επιτρέπει την επεξεργασία εγγράφων."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'allows to convert the document file into the appropriate OfficeOpen XML format' is also quite literal and can be improved.",
+          "suggestion": "και τη μετατροπή του εγγράφου σε κατάλληλη μορφή OfficeOpen XML."
+        },
+        {
+          "type": "formatting",
+          "description": "Missing period at the end of the sentence. While common to omit in informal writing, for a technical setting, a period is expected.",
+          "suggestion": "Add a period at the end of the sentence."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Asiakirjapalveluiden kanssa' is grammatically awkward. It implies the location is *with* the services, rather than *hosting* them.",
+          "suggestion": "Asiakirjapalvelun sijainti määrittää palvelimen osoitteen, jossa asiakirjapalvelut on asennettu."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation contains long sentences, potentially reducing readability. Breaking them up might improve clarity.",
+          "suggestion": "Asiakirjapalvelu on palvelinpalvelu, joka mahdollistaa asiakirjan muokkaamisen ja asiakirjatiedoston muuntamisen oikeaan OfficeOpen XML-formaattiin. Asiakirjapalvelun sijainti määrittää, missä palvelimessa asiakirjapalvelut on asennettu, ja siten se kertoo palvelimen osoitteen."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"փոխարկել փաստաթղթի ֆայլը\" is a bit awkward. A more natural Armenian phrasing would be something like \"փաստաթղթի ֆայլը վերածել\" or \"փաստաթղթի ֆայլը ձևափոխել\".",
+          "suggestion": "փաստաթղթի ֆայլը վերածել"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repeated use of \"թույլ է տալիս\" is somewhat repetitive and could be improved for a more elegant translation. It's used twice, which can feel clunky.",
+          "suggestion": "Consider rewording to avoid repetition.  For example, the second instance could be rephrased as something like \"և հնարավորություն է ընձեռել փաստաթղթի ֆայլը վերածել համապատասխան OfficeOpen XML ձևաչափի:\""
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຖືກ' (tuk) in 'ອະນຸຍາດໃຫ້ດໍາເນີນການແກ້ໄຂເອກະສານ' (anuyat hai damnoen kan kae khai eksanan) is slightly awkward. While technically correct, it could be improved for smoother reading.",
+          "suggestion": "ອະນຸຍາດໃຫ້ສາມາດແກ້ໄຂເອກະສານ (anuyat hai samat kae khai eksanan)"
+        },
+        {
+          "type": "grammar",
+          "description": "The repetition of 'ອະນຸຍາດໃຫ້' (anuyat hai) is a bit clunky. Consider rephrasing to avoid this.",
+          "suggestion": "ບໍລິການເອກະສານແມ່ນການບໍລິການເຊີຟເວີທີ່ເຮັດໃຫ້ສາມາດດໍາເນີນການແກ້ໄຂເອກະສານ ແລະປ່ຽນໄຟລ໌ເອກະສານເຂົ້າໄປໃນຮູບແບບ OfficeOpen XML ທີ່ເຫມາະສົມ. ສະຖານທີ່ບໍລິການເອກະສານລະບຸທີ່ຢູ່ຂອງເຊີບເວີກັບບໍລິການເອກະສານທີ່ຕິດຕັ້ງ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'ļauj veikt dokumentu rediģēšanu un ļauj konvertēt' is repetitive. Using 'ļauj' twice in close succession is stylistically awkward.",
+          "suggestion": "Dokumentu pakalpojums ir servera pakalpojums, kas ļauj veikt dokumentu rediģēšanu un konvertēt dokumenta failu..."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence 'Dokumentu pakalpojuma atrašanās vieta norāda tā servera adresi, kurā ir instalēti dokumentu pakalpojumi.' is a bit long and could be split for better readability.",
+          "suggestion": "Dokumentu pakalpojuma atrašanās vieta norāda servera adresi, kurā ir instalēti dokumentu pakalpojumi."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The repetition of \"Document Service\" feels slightly awkward. While technically correct, it could be rephrased for better flow.",
+          "suggestion": "Document Service is de serverservice waarmee u documenten kunt bewerken en waarmee documentbestanden kunnen worden geconverteerd naar het juiste OfficeOpen XML-formaat. Document Service specificeert het adres van de server waarop de documentservices zijn geïnstalleerd."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Servicu' is a misspelling of 'Service'.",
+          "suggestion": "Service"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"converter o arquivo do documento\" is a bit awkward. A more natural translation for 'convert the document file' would be 'converter o ficheiro do documento' or simply 'converter o documento'.",
+          "suggestion": "converter o ficheiro do documento"
+        },
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation uses 'Local do serviço de documento' which is slightly less fluent than 'Localização do serviço de documentos' or 'Local do serviço de documentos'. While both are understandable, the latter is more standard.",
+          "suggestion": "Local do serviço de documentos"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Local do serviço de documento' is a bit awkward. It would be more natural to say 'Localização do serviço de documentos'.",
+          "suggestion": "Localização do serviço de documentos"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'converter o arquivo do documento' is wordy. It can be shortened to 'converter o documento'.",
+          "suggestion": "converter o documento"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'Locația' should be 'Locația serviciului de documente' for clarity and consistency.",
+          "suggestion": "Locația serviciului de documente"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'allows to perform' is awkwardly translated as 'permite editarea'. A more natural Romanian phrasing would be 'permite efectuarea'.",
+          "suggestion": "permite efectuarea"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'allows to convert' translates directly, but a better flow is to combine it with the previous action: 'permite editarea și conversia'.",
+          "suggestion": "permite editarea și conversia"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a dash (-) instead of an em dash (—) to connect the phrases 'Служба документов — это серверная служба...'. Using an em dash creates a more natural pause and flow.",
+          "suggestion": "Replace the hyphen (-) with an em dash (—) in the phrase 'Служба документов — это серверная служба...'"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ලේඛන සේවාවේ ස්ථානයේ\" translates literally to \"in the place of the document service\". A more natural phrasing would be something like \"ලේඛන සේවය සඳහා\" or \"ලේඛන සේවයට\".",
+          "suggestion": "ලේඛන සේවයට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ආකෘතියකට' (aakruthyakata) is a bit clunky. It translates to 'into a format,' but a more fluent translation might consider alternatives.",
+          "suggestion": "ආකෘතිය බවට පරිවර්තනය කිරීමට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'සේවා සඳහන් වේ' is awkward. It literally translates to 'service is mentioned'. A better phrasing would be 'සම eingeschlossen වේ' (is included) or a rephrasing of the sentence.",
+          "suggestion": "ලේඛන සේවය ස්ථාපිතව ඇති සේවාදායක ලිපිනය අඩංගු වේ."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability in Sinhala. Consider breaking it down into shorter sentences.",
+          "suggestion": "ලේඛන සේවාව යනු ලේඛන සංස්කරණයට පහසුකම් සලසන සේවාදායක සේවාවකි. එය ලේඛන ගොනුව සුදුසු ඔෆිස් ඕපන් XML ආකෘතිය බවට පරිවර්තනය කිරීමට ඉඩ සලසයි. ලේඛන සේවය ස්ථාපිතව ඇති සේවාදායක ලිපිනය අඩංගු වේ."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Služba dokumentu\" is a literal translation of \"Document Service\" and sounds awkward in Slovak. A more natural phrasing would be \"Služba dokumentov\" (Document Services).",
+          "suggestion": "Služba dokumentov je služba servera..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repetition of \"umožňuje\" (allows) is stylistically clunky. It could be rephrased for better flow.",
+          "suggestion": "Služba dokumentov je služba servera, ktorá umožňuje úpravy dokumentov a konvertovanie súboru dokumentu do vhodného formátu OfficeOpen XML. Umiestnenie služby dokumentov určuje adresu servera s nainštalovanými službami dokumentov."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English content uses a colon after \"Settings:DocumentServiceLocationHeaderHelp\". While not strictly an error, the Slovak translation doesn't mirror this formatting. It's a minor point, but maintaining consistency can improve readability.",
+          "suggestion": "Consider adding a colon after the key name in the Slovak localization file (if the structure demands it)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'allows to perform the document editing' is a bit awkward in both English and Slovenian. The Slovenian translation 'ki omogoča urejanje dokumentov' is grammatically correct but could be improved for clarity and flow.",
+          "suggestion": "Storitve za dokumente je strežniška storitev, ki omogoča urejanje dokumentov in pretvorbo datoteke dokumenta v ustrezen format OfficeOpen XML. Lokacija storitve za dokumente določa naslov strežnika z nameščenimi storitvami za dokumente."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'allows to convert the document file' is not the most fluent way to describe this function. While technically correct, it could be more elegant.  'pretvorbo datoteke dokumenta' is acceptable, but improvement is possible.",
+          "suggestion": "Storitve za dokumente je strežniška storitev, ki omogoča urejanje dokumentov in pretvorbo datotek v ustrezen format OfficeOpen XML. Lokacija storitve za dokumente določa naslov strežnika z nameščenimi storitvami za dokumente."
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistency in word usage: 'datoteke dokumenta' appears twice. Simplifying to just 'datotek' might improve readability.",
+          "suggestion": "Storitve za dokumente je strežniška storitev, ki omogoča urejanje dokumentov in pretvorbo datotek v ustrezen format OfficeOpen XML. Lokacija storitve za dokumente določa naslov strežnika z nameščenimi storitvami za dokumente."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Доцумент' is a direct transliteration and not a proper Serbian equivalent. While understandable, it lacks fluency.",
+          "suggestion": "Документ"
+        },
+        {
+          "type": "formatting",
+          "description": "Inconsistent capitalization. 'Документ сервис' should be 'Документ сервис'.",
+          "suggestion": "Документ сервис"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'обављање уређивања докумената' is a bit verbose and awkward. A more natural phrasing would be better.",
+          "suggestion": "уређивање докумената"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'услуге за документе' is a literal translation of 'Document services' and can be improved for readability.",
+          "suggestion": "услуге за обраду докумената"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'serverska' is a misspelling of 'serverska'.",
+          "suggestion": "serverska"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Lokacija dokument servisa određuje adresu servera na kojem su instalirane usluge za dokumente.' could be more concise. A better phrasing would clarify the connection between the location and the installed services.",
+          "suggestion": "Lokacija dokument servisa određuje adresu servera na kome su instalirani servisi za dokumente."
+        },
+        {
+          "type": "formatting",
+          "description": "Consistent capitalization would improve readability. The word 'Servis' is sometimes capitalized and sometimes not.",
+          "suggestion": "Maintain consistent capitalization for 'Servis' throughout the translation (e.g., always capitalize or always lowercase)."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"Служба документів — це серверна служба, який дозволяє...\" is grammatically incorrect. 'Служба документів' is feminine, so the relative pronoun should be 'яка', not 'який'.",
+          "suggestion": "Служба документів — це серверна служба, яка дозволяє..."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"perform the document editing\" is a bit awkward. A more natural translation would be something like \"thực hiện chỉnh sửa tài liệu\" which is already present, but 'perform' isn't the best fit.",
+          "suggestion": "While the current translation is acceptable, consider 'thực hiện chỉnh sửa tài liệu' for a more fluid reading."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better flow. The repetition of \"cho phép\" (allows) is slightly clunky.",
+          "suggestion": "Consider restructuring the sentence: 'Dịch vụ Tài liệu là dịch vụ máy chủ, cho phép chỉnh sửa tài liệu và chuyển đổi tập tin tài liệu sang định dạng OfficeOpen XML thích hợp. Vị trí dịch vụ tài liệu chỉ định địa chỉ của máy chủ có cài đặt dịch vụ tài liệu.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"可通过文档服务支持执行文档编辑的服务器服务\" is slightly awkward. It essentially repeats 'document service'. A more natural phrasing would be something like \"文档服务是提供文档编辑功能并支持将文档文件转换为合适的 OfficeOpen XML 格式的服务器服务\" (Document service is a server service that provides document editing functionality and supports converting document files into the appropriate OfficeOpen XML format).",
+          "suggestion": "文档服务是提供文档编辑功能并支持将文档文件转换为合适的 OfficeOpen XML 格式的服务器服务"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the translation could benefit from a slightly smoother flow. The two sentences are a bit clunky when read together.",
+          "suggestion": "文档服务是提供文档编辑功能并支持将文档文件转换为合适的 OfficeOpen XML 格式的服务器服务。文档服务位置明确了安装了文档服务的服务器地址。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

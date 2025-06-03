@@ -1,0 +1,578 @@
+{
+  "key_path": "KeyLifetimeDescription",
+  "content": "Set lifetime to automatically deactivate  the secret key after a defined period. Lifetime begins of creation of the key.",
+  "content_en_sha1_hash": "752153e2665fc818eb2ae85c84c0ad47c2f8b75f",
+  "created_at": "2025-05-19T21:30:51.759Z",
+  "updated_at": "2025-05-26T07:57:32.558Z",
+  "comment": {
+    "text": "This translation key is used to describe a setting option that determines when an API key is automatically deactivated after creation. It explains the lifecycle of the key and its deactivation process. This text appears in a dialog where users can configure API key settings, such as creation date and lifetime.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:02.051Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 461,
+      "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className=\"api-key_lifetime-description\"\n >\n {t(\"Settings:KeyLifetimeDescription\")}\n </Text>\n {lifetimeIsChecked ? (\n <div className=\"api-key_lifetime-input-block\">\n <TextInput\n className=\"api-key_lifetime-input\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'اضبطوا مدة الصلاحية' could be improved for better flow and clarity.  'اضبط مدة الصلاحية' (Set the validity period) would be more natural.",
+          "suggestion": "اضبط مدة الصلاحية"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'deactivate' is translated as 'تعطيل'. While technically correct, a more precise translation might be 'إبطال' (invalidates) or 'إلغاء' (cancels) depending on the specific context of key deactivation. 'تعطيل' can imply simply turning off, not necessarily rendering the key unusable.",
+          "suggestion": "اضبط مدة الصلاحية لإبطال المفتاح تلقائيًا"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Set lifetime' is not accurately translated. 'Lifetime' implies a duration, but 'istifadə müddəti' primarily means 'usage period' or 'term of use'. While not entirely wrong, it doesn't capture the precise meaning of 'lifetime' in this context, which relates to an expiry duration.",
+          "suggestion": "Təyin edin ki, gizli açar müəyyən müddətdən sonra avtomatik olaraq keçərli olmayan olsun."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'Gizli açarı avtomatik söndürmək üçün istifadə müddətini təyin edin' is a bit awkward. While grammatically correct, it doesn't flow naturally.",
+          "suggestion": "Gizli açarı müəyyən bir müddətdən sonra avtomatik olaraq söndürmək üçün istifadə müddətini təyin edin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Lifetime begins of creation of the key' is awkward and not accurately translated.  'of creation' isn't a natural phrasing.  The Azerbaijani translation also conveys a similar slightly awkward phrasing.",
+          "suggestion": "İstifadə müddəti açarın yarandığı andan başlayır."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Set lifetime\" is better translated as \"Настройте продължителност\" or \"Задайте срок на валидност\" to more accurately convey the meaning of configuring a duration.",
+          "suggestion": "Настройте продължителност на живота"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'creation' doesn't perfectly map to 'създаването' here. A more natural and precise wording would be related to the key's activation or generation.",
+          "suggestion": "Животът започва от генерирането на ключа."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set lifetime' is not accurately reflected in the Czech translation of 'Nastavte dobu životnosti'. While 'doba životnosti' conveys 'lifetime', 'nastavte' is a bit formal for this context and doesn't quite capture the 'set' action. A more natural phrasing might be 'Určete dobu životnosti' (Define the lifetime) or 'Nastavte platnost' (Set validity).",
+          "suggestion": "Určete dobu životnosti"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'po uplynutí definované doby' could be slightly improved for flow. It's grammatically correct, but a bit clunky.",
+          "suggestion": "po uplynutí stanovené doby"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Legen Sie die Lebensdauer fest' could be slightly improved for flow. While grammatically correct, it's a bit formal for typical user interface text.",
+          "suggestion": "Setzen Sie eine Lebensdauer, um..."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'Die Lebensdauer beginnt mit der Erstellung des Schlüssels.' could be more concise. It essentially reiterates the obvious.",
+          "suggestion": "Die Lebensdauer beginnt bei der Schlüsselgenerierung."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set lifetime' is not directly equivalent to 'Ορίστε τη διάρκεια ζωής'. While understandable, a more accurate translation might be 'Καθορίστε τη διάρκεια ζωής' or 'Ορίστε τη διάρκεια'.",
+          "suggestion": "Καθορίστε τη διάρκεια ζωής"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'deactivate' is translated as 'απενεργοποίηση'. While technically correct, a more natural phrasing in Greek for this context might be 'λήξη' or 'πάροδος'.",
+          "suggestion": "λήξη"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is not accurately translated. \"Establezca la vida útil\" is too literal and awkward. A more natural translation would be something like \"Defina la duración\" or \"Configure la duración\".",
+          "suggestion": "Defina la duración para desactivar automáticamente la clave secreta tras un periodo definido. La duración comienza al crearse la clave."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'tras un periodo definido' is grammatically correct but sounds a little stiff. A more conversational alternative might improve readability.",
+          "suggestion": "después de un período definido"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is a bit awkward in Finnish. A more natural phrasing would be something like \"Määritä avaimen voimassaoloaika\" or \"Määritä avaimen elinikä\".",
+          "suggestion": "Määritä avaimen voimassaoloaika"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ottaaksesi secret key automaattisesti pois käytöstä\" could be more concisely and naturally translated. 'Deactivate' is not always a direct translation for 'pois käytöstä'.",
+          "suggestion": "ottaaksesi secret keyn automaattisesti epävoimaksi"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'epävoimaksi' is not recognized in Finnish. The proper spelling is 'epätehoiseksi'.",
+          "suggestion": "epätehoiseksi"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Set lifetime' is better translated as 'Configure la durée de vie' or 'Définir la durée de vie' to align with standard French terminology for settings.",
+          "suggestion": "Configure la durée de vie"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'deactivate' translates more precisely to 'invalider' in this context of secret keys. 'Désactiver' can mean to disable something, but 'invalider' indicates the key is no longer usable.",
+          "suggestion": "invalider"
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrasing 'La durée de vie commence à la création de la clé' is slightly awkward. A more natural phrasing would be 'La durée de vie débute à la création de la clé' or 'La durée de vie commence lors de la création de la clé'.",
+          "suggestion": "La durée de vie commence lors de la création de la clé."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Set lifetime\" is translated as \"Սահմանեք գործողության տևողությունը\" which is quite literal and a bit clunky. A more natural translation might be \"Установите срок действия\" or something similar.",
+          "suggestion": "Consider a more natural phrasing for 'Set lifetime'. Perhaps 'Установите срок действия' or 'Определите срок действия'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"deactivate\" is translated as \"ապաակտիվացնելու համար.\" While technically correct, 'չեղարկելու համար' (chelegarkelu hamar) or 'անվավերացնելու համար' (anvavratsnelu hamar) might be more common and flow better in this context.",
+          "suggestion": "Consider 'չեղարկելու համար' or 'անվավերացնելու համար' instead of 'ապաակտիվացնելու համար'."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is not accurately translated. \"Lifetime\" implies a duration or length of existence. A more accurate translation for 'lifetime' in this context would be 'Scadenza' or 'Durata massima'.",
+          "suggestion": "Imposta la scadenza/durata massima per disattivare automaticamente la chiave segreta dopo un periodo definito."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"La durata inizia dalla creazione della chiave.\" is grammatically correct but sounds a little awkward. It could be improved for better flow and clarity.",
+          "suggestion": "La durata inizia con la creazione della chiave."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is awkwardly translated as \"有効期限を設定します\" (set expiration date). While technically correct, it doesn't capture the nuance of a lifetime as a configurable duration.  A more natural phrasing might focus on defining a duration.",
+          "suggestion": "シークレットキーの有効期間を、定義された期間後に自動的に無効化されるように設定します。"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow. The use of \"ために\" (tame ni - in order to) is grammatically correct but can make the sentence feel a bit stiff.",
+          "suggestion": "シークレットキーを定義された期間の後に自動的に無効化するために、有効期限を設定します。 becomes シークレットキーを定義された期間の後に自動的に無効化するために、有効期限を設定します。 (no change, but consider other flow options)"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses a somewhat formal tone. While not incorrect, a slightly more conversational tone might be more appropriate depending on the overall user interface style. Consider softening the language.",
+          "suggestion": "정해진 기간 후 시크릿 키가 자동으로 비활성화되도록 수명을 설정하세요. 수명은 키를 만들 때부터 시작됩니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ກຳນົດໄລຍະເວລາເພື່ອປິດການເຄື່ອນໄຫວອັດຕະໂນມັດຂອງກະຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸ\" does not accurately convey the meaning of 'Set lifetime to automatically deactivate the secret key after a defined period. Lifetime begins of creation of the key.' It appears to be a fragmented or incomplete translation.",
+          "suggestion": "A more accurate translation might be something like: 'ຕັ້ງເວລາຄັ້ງໜຶ່ງເພື່ອເຮັດໃຫ້ຄີລັບຖືກປິດອັດຕະໂນມັດຫຼັງຈາກໄລຍະເວລາທີ່ກຳນົດໄວ້ ໄລຍະເວລານີ້ເລີ່ມຕົ້ນເມື່ອສ້າງຄີ.' (Set a lifetime to automatically deactivate the secret key after a defined period. The lifetime begins when the key is created.)"
+        },
+        {
+          "type": "spelling",
+          "description": "The Lao text contains repeated characters, \"ກະຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸຸ\" which is likely a typo.  It's unclear what the intended Lao word was.",
+          "suggestion": "Identify the intended word related to 'key' or 'secret key' and correct the spelling."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure in the Lao translation seems awkward and lacks clarity.  It's not a natural-sounding Lao sentence.",
+          "suggestion": "Re-evaluate the sentence structure to ensure it follows proper Lao grammatical conventions."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'lietderīgās lietošanas laiks' is an awkward and potentially inaccurate translation of 'lifetime'.  'Lifetime' refers to the period a key is valid for use. A more natural Latvian translation would convey this meaning more clearly.",
+          "suggestion": "Iestatiet derīguma termiņu, lai automātiski deaktivizētu privāto atslēgu pēc noteikta perioda."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'privāto atslēgu' (private key) isn't entirely wrong, but 'noslēpumatslēgu' would be more precise and technically correct for a 'secret key'.",
+          "suggestion": "Iestatiet derīguma termiņu, lai automātiski deaktivizētu noslēpumatslēgu pēc noteikta perioda."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence 'Lietderīgās lietošanas laiks sākas no atslēgas izveides brīža' is a bit cumbersome. It can be streamlined.",
+          "suggestion": "Derīguma termiņš sākas ar atslēgas izveidi."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'Stel de levensduur in om de secret key automatisch te deactiveren na een bepaalde periode' is a bit clunky. While grammatically correct, it could be more natural.",
+          "suggestion": "Stel een levensduur in om de secret key automatisch te deactiveren na een bepaalde periode."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Lifetime begins of creation of the key' is translated as 'De levensduur begint bij het aanmaken van de key.'  A more accurate and natural translation would be 'De levensduur start bij de aanmaak van de key' or 'De levensduur start bij het aanmaken van de sleutel'.",
+          "suggestion": "De levensduur start bij de aanmaak van de key."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Ustaw okres ważności' could be improved for clarity and flow. While technically correct, it's a bit clunky.",
+          "suggestion": "Ustaw czas ważności"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Set lifetime' is somewhat ambiguous. 'Lifetime' implies a total duration until deactivation. The Polish 'okres ważności' (validity period) is more precise, but the overall implication of 'lifetime' is lost. It is generally understood to mean how long the key will remain active.",
+          "suggestion": "Ustaw czas aktywności"
+        },
+        {
+          "type": "formatting",
+          "description": "Consistency in capitalization: 'sekretny klucz' (secret key) could be consistent in lowercase or uppercase.",
+          "suggestion": "Consider standardizing capitalization across the translation. For example, 'sekretny klucz' or 'Sekretny klucz'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Set lifetime\" is awkwardly translated to \"Defina o tempo de vida\". A more natural translation would be \"Definir a duração\" or \"Definir o prazo\".",
+          "suggestion": "Definir a duração"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Lifetime begins of creation of the key\" is grammatically incorrect in English and its translation suffers from a similar issue.  'of' is not needed, and it should be 'at creation'.",
+          "suggestion": "A duração começa no momento da criação da chave."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Set lifetime' is awkwardly translated as 'Defina o tempo de vida'. A more natural translation would be 'Definir tempo de vida' or 'Estabelecer tempo de vida'.",
+          "suggestion": "Definir tempo de vida"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'begins of creation' is grammatically incorrect in English. The Portuguese translation reflects this error.",
+          "suggestion": "begins with creation"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'of' is unnecessary in the English sentence 'Lifetime begins of creation of the key.'",
+          "suggestion": "Lifetime begins with the key's creation."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is a bit awkward in Romanian. A more natural phrasing would be something like \"Stabiliți durata de viață\".",
+          "suggestion": "Stabiliți durata de viață"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'begins of creation' is not grammatically correct. It should be 'begins with creation' or 'începe odată cu crearea'.",
+          "suggestion": "începe odată cu crearea cheii"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is better translated as \"Установите срок действия\" rather than simply \"Установите срок\". While understandable, the latter is less idiomatic in this context.",
+          "suggestion": "Установите срок действия"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit clunky. While technically correct, a more natural flow could be achieved.",
+          "suggestion": "Установите срок действия для автоматической деактивации секретного ключа через определенный период. Срок действия отсчитывается с момента создания ключа."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is not accurately translated. \"Set lifetime\" implies configuring a duration.  A more accurate translation would focus on the purpose of setting the duration, not just the action of setting it.",
+          "suggestion": "තහවුරු කරන්න යතුරක් නිර්මාණය කිරීමෙන් පසු, එය ස්වයංක්‍රීයව අක්‍රිය කිරීමට කාලසීමාවක්."
+        },
+        {
+          "type": "spelling",
+          "description": "There's a potential for misinterpretation of 'කාලාසන්නිතිය' vs. 'කාලසීමාව'. 'කාලාසන්නිතිය' suggests a more complex timeline, whereas 'කාලසීමාව' (time period) is likely more appropriate in this context. While not strictly incorrect, 'කාලසීමාව' aligns better with the original English.",
+          "suggestion": "Consider using 'කාලසීමාව' instead of 'කාලාසන්නිතිය'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow.  The passive voice feels a bit awkward.",
+          "suggestion": "නිර්මාණය කිරීමෙන් පසු යතුරක්, එය ස්වයංක්‍රීයව අක්‍රිය කිරීමට කාලසීමාවක් තීරණය කරන්න. (After creating the key, decide on a time period to deactivate it automatically)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is not accurately translated. \"Nastavenie doby platnosti\" is a bit verbose and could be more concise. \"Doba platnosti\" is acceptable, but \"nastavenie\" adds unnecessary complexity.",
+          "suggestion": "Doba trvania"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'begins of creation' is grammatically incorrect. The correct wording is 'begins at creation' or 'starts with creation'.",
+          "suggestion": "začína s vytvorením"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set lifetime' is a bit awkward in Slovenian. A more natural phrasing would be 'Določite življenjsko dobo'.",
+          "suggestion": "Določite življenjsko dobo za samodejno deaktiviranje skrivnega ključa po določenem obdobju. Življenjska doba se začne z ustvarjanjem ključa."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Življenjska doba se začne z ustvarjanjem ključa.' could be improved for clarity.  'z ustvarjanjem' is grammatically correct but sounds slightly formal. A smoother phrasing is preferred.",
+          "suggestion": "Življenjska doba se začne ob ustvarjanju ključa."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set lifetime' is not accurately translated. 'Подесите трајање' literally translates to 'Set duration', which is close but 'Set lifetime' is more fitting within the context of secret key management.",
+          "suggestion": "Подесите животни век"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Век трајања почиње од тренутка креирања кључа.' is a bit clunky. 'Век' is technically correct, but 'живот' (life) or 'важење' (validity) might flow better. Also, the wording 'од тренутка креирања кључа' is verbose.",
+          "suggestion": "Живот почиње од момента креирања кључа."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set lifetime' is not accurately translated. 'Podesite trajanje' is a literal translation, but a more natural phrasing in Serbian might be 'Postavite trajanje' or 'Odredite trajanje'.",
+          "suggestion": "Postavite trajanje kako bi se tajni ključ automatski deaktivirao nakon određenog perioda. Vek trajanja počinje od trenutka kreiranja ključa."
+        },
+        {
+          "type": "grammar",
+          "description": "While 'Vek trajanja počinje od trenutka kreiranja ključa' is grammatically correct, it can be improved for flow. Consider a more concise and natural phrasing.",
+          "suggestion": "Trajanje počinje od trenutka kreiranja ključa."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Set lifetime...' is translated as 'Geçerlilik süresi belirleyin...' which is more literally 'Define validity period...'. A more natural translation would be 'Yaşam süresi ayarlayın...' or 'Geçerlilik süresi tanımlayın...'",
+          "suggestion": "Yaşam süresi ayarlayın..."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'Gizli anahtarın belirli bir sürenin sonunda otomatik olarak devre dışı kalması için...' is slightly awkward. It could be improved for better flow.",
+          "suggestion": "Gizli anahtarın, belirli bir süre sonunda otomatik olarak devre dışı kalmasını sağlamak için geçerlilik süresi belirleyin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Lifetime begins of creation of the key' is translated as 'Süre, anahtarın oluşturulmasıyla başlar'. It should be 'Yaşam süresi, anahtarın oluşturulması anıyla başlar.' to more accurately reflect the English meaning.",
+          "suggestion": "Yaşam süresi, anahtarın oluşturulması anıyla başlar."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set lifetime' is not accurately translated. 'Lifetime' in this context refers to the duration for which the key remains active, not the period of its existence. A better translation would capture the sense of a time limit or expiry.",
+          "suggestion": "Задайте термін дії"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Період існування починається з моменту створення ключа' is slightly awkward. While technically correct, it can be improved for flow.",
+          "suggestion": "Термін дії починає діяти з моменту створення ключа."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set lifetime\" is not accurately translated. \"Lifetime\" implies duration, but the current translation, \"Đặt thời gian tồn tại,\" sounds awkward and literal.",
+          "suggestion": "Consider 'Thiết lập thời hạn' or 'Thiết lập thời lượng' instead of 'Đặt thời gian tồn tại'.  Alternatively, to keep the literal translation, it could be rephrased as 'Đặt thời gian hiệu lực' (Set validity period)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'Thời gian tồn tại bắt đầu khi tạo khóa' is grammatically correct but could be slightly improved for flow. It sounds a bit clunky.",
+          "suggestion": "Consider 'Thời gian tồn tại được tính từ khi tạo khóa' or 'Thời gian tồn tại bắt đầu từ lúc tạo khóa' for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set lifetime' is not accurately translated. 'Lifetime' implies a duration or expiry, and the translation uses '有效期' (validity period), which is close but could be improved to more directly convey the concept of a duration before deactivation.",
+          "suggestion": "设置密钥失效时间，以便在定义的时间段后自动停用密钥。失效时间从密钥创建时开始计算。"
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrase '有效期从密钥创建时开始计算' is grammatically correct, but could be more fluent and natural in Chinese. The placement of '从' could be slightly adjusted.",
+          "suggestion": "有效期从密钥创建之时开始计算。"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

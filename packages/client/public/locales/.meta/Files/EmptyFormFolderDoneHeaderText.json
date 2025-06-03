@@ -1,0 +1,238 @@
+{
+  "key_path": "EmptyFormFolderDoneHeaderText",
+  "content": "No finished forms yet",
+  "content_en_sha1_hash": "43fb198123ae11d4e4ffaad9fdb88dfdf93a092e",
+  "created_at": "2025-05-19T21:30:55.556Z",
+  "updated_at": "2025-06-02T10:20:51.010Z",
+  "comment": {
+    "text": "The translation key \"EmptyFormFolderDoneHeaderText\" is used to display a message when there are no finished forms in an empty folder. It appears on an empty form folder container and indicates that no files have been completed yet. Translators should provide a clear and concise message that suggests action or alternative behavior, such as suggesting a way to create a new file.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:39:52.167Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
+      "line_number": 80,
+      "context": "export const getTranslateHeaderKey = (\n t: TTranslation,\n type: EmptyScreenTypeEnum,\n ) => {\n const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {\n [EmptyScreenTypeEnum.Done]: t(\"EmptyFormFolderDoneHeaderText\"),\n [EmptyScreenTypeEnum.InProgress]: t(\"EmptyFormFolderProgressHeaderText\"),\n [EmptyScreenTypeEnum.Default]: t(\"Common:EmptyScreenFolder\"),\n [EmptyScreenTypeEnum.Corporate]: t(\"RoomCreated\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\"EmptyFormSubFolderHeaderText\"),\n [EmptyScreenTypeEnum.SubFolderinProgress]: t(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
+      "line_number": 225,
+      "context": "folderType: Nullable<FolderType>,\n parentRoomType: Nullable<FolderType>,\n ) => {\n return match([parentRoomType, folderType, access])\n .with([P._, FolderType.Done, P._], () =>\n t(\"Files:EmptyFormFolderDoneHeaderText\"),\n )\n \n .with([P._, FolderType.InProgress, P._], () =>\n t(\"Files:EmptyFormFolderProgressHeaderText\"),\n )",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ավարտված ձևեր դեռ չկան' is a literal translation, but a more natural and concise Armenian translation for 'No finished forms yet' would be 'Համալրված ձևեր չկան' or 'Ավարտված ձևեր առայժմ չկան'.",
+          "suggestion": "Համալրված ձևեր չկան"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Niciun formular finalizat deocamdată\" while understandable, isn't the most natural Romanian phrasing for \"No finished forms yet.\" It sounds a bit formal and verbose. \"Încă niciun formular finalizat\" or \"Nu există formulare finalizate încă\" would be more idiomatic.",
+          "suggestion": "Încă niciun formular finalizat"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"සම්පූර්ණ කළ ආකෘතිපත්‍ර නැත\" is a literal translation and doesn't flow naturally in Sinhala. A more natural phrasing would convey the meaning of \"no finished forms yet\".",
+          "suggestion": "Consider a more idiomatic translation like \"අවසන් වු ආකෘතීන් නොවීය\" or \"පමණක් නොවීය\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '尚无已完成填写的表单' is overly formal and literal. While technically correct, it doesn't read naturally in many Chinese contexts, especially for a UI element. A more natural and concise translation would be better.",
+          "suggestion": "已完成表单"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "key_path": "FailedToConnect",
+  "content": "We couldn’t deliver this payload: failed to connect to host",
+  "content_en_sha1_hash": "1b25cf1f64afabdb272c5f4f640f17f53dbc8be8",
+  "created_at": "2025-05-19T21:30:49.718Z",
+  "updated_at": "2025-05-24T02:27:28.454Z",
+  "comment": {
+    "text": "This translation key is used to display an error message when a connection to a host fails. It appears as a status message in the UI, typically under a request details section, and indicates that the payload delivery was unsuccessful.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:47:04.100Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/RequestDetails.js",
+      "line_number": 63,
+      "context": "const { t } = useTranslation([\"Webhooks\"]);\n \n return (\n <DetailsWrapper>\n {eventDetails.status === 0 ? (\n <StatusMessage message={t(\"FailedToConnect\")} />\n ) : null}\n <Text as=\"h3\" fontWeight={600} className=\"mb-4 mt-7\">\n {t(\"RequestPostHeader\")}\n </Text>\n {!eventDetails.requestHeaders ? (",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'hosta qoşulmadı' is a literal translation of 'failed to connect to host' but doesn't fully convey the meaning in a natural Azerbaijani phrasing. It sounds somewhat robotic.",
+          "suggestion": "Consider a more natural phrasing like 'host ilə əlaqə kurula bilmədi' or 'hosta keçid alınmadı'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks punctuation. A colon is needed after 'məlumat yükünü'.",
+          "suggestion": "Bu məlumat yükünü: host ilə əlaqə kurula bilmədi"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'host' is translated as 'κεντρικός υπολογιστής' which is a more literal translation of 'central computer'.  'host' in this context refers to the server receiving the webhook payload, and a more accurate translation might be 'διακομιστή' (server) or a similar term depending on the technical level of the audience.",
+          "suggestion": "Consider translating 'host' as 'διακομιστή' or a similar term that better reflects the technical context of a server."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'failed to connect' is better translated as 'fallo al conectar' or 'no se pudo conectar'. 'Error al conectarse' implies an error occurred *during* the connection attempt, whereas 'failed to connect' simply means the connection didn't happen.",
+          "suggestion": "No pudimos entregar esta carga útil: fallo al conectar al host"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'payload' is not accurately translated. 'Tietosisältöä' is a general term for 'content' and doesn't convey the specific meaning of a 'payload' in this context (a unit of data).",
+          "suggestion": "Tietopakettia ei voitu toimittaa:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'yhteys hostiin epäonnistui' is grammatically correct, it's a literal translation that might sound slightly unnatural. It's a bit clunky.",
+          "suggestion": "yhteyden muodostaminen hostiin epäonnistui"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'payload' is translated as 'commande'. While 'commande' can sometimes be appropriate, 'payload' in this context refers to a specific data packet or message. A more accurate translation would be something like 'charge utile' or 'paquet de données'.",
+          "suggestion": "Nous n'avons pas pu délivrer cette charge utile : la connexion à l'hôte a échoué."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"payload\" is not accurately translated. \"Ծանրաբեռնվածություն\" (tsanraberdvadutyun) translates to \"load\" or \"cargo,\" which doesn't fully capture the meaning of a webhook payload (which is data).",
+          "suggestion": "Consider using a more technical term like \"տվյալներ\" (tvyalner - data) or rephrasing to clarify the meaning, such as \"Մենք չկարողացանք առաքել այս տվյալները\" (Menk chkaroganak alarek' ayls tvyalner)."
+        },
+        {
+          "type": "spelling",
+          "description": "The Armenian word \"միանալ\" (mianal) while technically correct, feels slightly awkward in this context. It is better to use a more technical term.",
+          "suggestion": "Consider using \"կապվել\" (kapvel) - to connect, or another synonym that sounds more natural."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"failed to connect to host\" is translated as \"ບໍ່​ສໍາ​ເລັດ​ໃນ​ການ​ເຊື່ອມ​ຕໍ່​ກັບ​ແມ່​ຂ່າຍ\". While technically correct, \"ແມ່​ຂ່າຍ\" (mother network/network) is a bit clunky and doesn't directly convey the intended meaning of a server host. A more precise translation would emphasize the server aspect.",
+          "suggestion": "ພວກ​ເຮົາ​ບໍ່​ສາ​ມາດ​ສົ່ງ payload ນີ້​: ບໍ່​ສໍາ​ເລັດ​ໃນ​ການ​ເຊື່ອມ​ຕໍ່​ກັບ​ເຄື່ອງ​ແມ່​ນ້ອຍ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"danych właściwych\" is not the best translation for \"payload\" in this context. 'Payload' refers to the data being sent, and a more appropriate translation would be 'danych' or 'żądania'.",
+          "suggestion": "Nie mogliśmy dostarczyć danych: nie udało się połączyć z hostem"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'conectare la gazdă a eșuat' is a literal translation but sounds unnatural in Romanian. A more natural phrasing would be 'nu s-a putut conecta la gazdă'.",
+          "suggestion": "nu s-a putut conecta la gazdă"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සත්කාරකයට සම්බන්ධ වීමට අසමත් විය' (satārakaya sambandavatā vīmaśātha vī) is a literal translation of 'failed to connect to host'. A more natural and user-friendly translation would be something along the lines of 'සත්කාරකයා සමඟ සම්බන්ධ කිරීමට නොහැකි විය' (satārakaya samāga sambandakaruva nokahiki viya).",
+          "suggestion": "සත්කාරකයා සමඟ සම්බන්ධ කිරීමට නොහැකි විය"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'nepodarilo sa pripojiť k hostu' is a literal translation, but it doesn't quite convey the natural flow of the English phrase. A more natural Slovak phrasing would be 'Nepodarilo sa nám nadviazať spojenie s hosťom' or 'Nebolo možné sa pripojiť k hosťovi'.",
+          "suggestion": "Consider using 'Nebolo možné sa pripojiť k hosťovi' or 'Nepodarilo sa nám nadviazať spojenie s hosťom'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Teh' is likely a typo and should be 'Ni'.",
+          "suggestion": "Ni"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'host' is better translated as 'server' in this context. While 'host' is technically correct, 'server' is more commonly understood by users.",
+          "suggestion": "Нисмо могли доставити овај пакет: није успело повезивање са сервером"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'payload' is not directly translated. While 'paket' is a reasonable alternative depending on the context, it's a bit generic. 'Teret' might be a more precise translation for 'payload' in a technical context.",
+          "suggestion": "Nismo mogli dostaviti ovaj teret: nije uspelo povezivanje sa serverom"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'deliver' is translated as 'видалити' (vydayty), which means 'to delete' or 'to remove'. It should be translated to something like 'доставити' (dostavyty) which means 'to deliver'.",
+          "suggestion": "Не вдалося доставити це корисне навантаження: не вдалося під’єднатися до вузла"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

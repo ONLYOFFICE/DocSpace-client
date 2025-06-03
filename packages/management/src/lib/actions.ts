@@ -57,11 +57,15 @@ import {
 } from "@docspace/shared/utils/common";
 import { TError } from "@docspace/shared/utils/axiosClient";
 
+import { logger } from "@/../logger.mjs";
+
 export async function getUser() {
-  const hdrs = headers();
+  logger.debug(`Start GET /people/@self`);
+
+  const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
-  const [getUser] = createRequest([`/people/@self`], [["", ""]], "GET");
+  const [getUser] = await createRequest([`/people/@self`], [["", ""]], "GET");
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
   const userRes = await fetch(getUser);
@@ -76,10 +80,14 @@ export async function getUser() {
 }
 
 export async function getSettings(share?: string) {
-  const hdrs = headers();
+  const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
-  const [getSettings] = createRequest(
+  logger.debug(
+    `Start GET /settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+  );
+
+  const [getSettings] = await createRequest(
     [
       `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
     ],
@@ -99,7 +107,9 @@ export async function getSettings(share?: string) {
 }
 
 export async function getVersionBuild() {
-  const [getSettings] = createRequest(
+  logger.debug("Start GET /settings/version/build");
+
+  const [getSettings] = await createRequest(
     [`/settings/version/build`],
     [["", ""]],
     "GET",
@@ -115,10 +125,12 @@ export async function getVersionBuild() {
 }
 
 export async function getQuota() {
-  const hdrs = headers();
+  logger.debug("Start GET /portal/payment/quota");
+
+  const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
-  const [getQuota] = createRequest(
+  const [getQuota] = await createRequest(
     [`/portal/payment/quota`],
     [["", ""]],
     "GET",
@@ -137,7 +149,9 @@ export async function getQuota() {
 }
 
 export async function getAllPortals() {
-  const [getAllPortals] = createRequest(
+  logger.debug("Start GET /portal/get?statistics=true");
+
+  const [getAllPortals] = await createRequest(
     [`/portal/get?statistics=true`],
     [["", ""]],
     "GET",
@@ -155,10 +169,12 @@ export async function getAllPortals() {
 }
 
 export async function getPortalTariff() {
-  const hdrs = headers();
+  logger.debug("Start GET /portal/tariff");
+
+  const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
-  const [getPortalTariff] = createRequest(
+  const [getPortalTariff] = await createRequest(
     [`/portal/tariff`],
     [["", ""]],
     "GET",
@@ -177,7 +193,9 @@ export async function getPortalTariff() {
 }
 
 export async function getColorTheme() {
-  const [getSettings] = createRequest(
+  logger.debug("Start GET /settings/colortheme");
+
+  const [getSettings] = await createRequest(
     [`/settings/colortheme`],
     [["", ""]],
     "GET",
@@ -193,7 +211,9 @@ export async function getColorTheme() {
 }
 
 export async function getWhiteLabelLogos() {
-  const [getWhiteLabelLogos] = createRequest(
+  logger.debug("Start GET /settings/whitelabel/logos?isDefault=true");
+
+  const [getWhiteLabelLogos] = await createRequest(
     [`/settings/whitelabel/logos?isDefault=true`],
     [["", ""]],
     "GET",
@@ -209,7 +229,9 @@ export async function getWhiteLabelLogos() {
 }
 
 export async function getWhiteLabelText() {
-  const [getWhiteLabelText] = createRequest(
+  logger.debug("Start GET /settings/whitelabel/logotext?isDefault=true");
+
+  const [getWhiteLabelText] = await createRequest(
     [`/settings/whitelabel/logotext?isDefault=true`],
     [["", ""]],
     "GET",
@@ -225,7 +247,9 @@ export async function getWhiteLabelText() {
 }
 
 export async function getWhiteLabelIsDefault() {
-  const [getWhiteLabelIsDefault] = createRequest(
+  logger.debug("Start GET /settings/whitelabel/logos/isdefault?isDefault=true");
+
+  const [getWhiteLabelIsDefault] = await createRequest(
     [`/settings/whitelabel/logos/isdefault?isDefault=true`],
     [["", ""]],
     "GET",
@@ -241,7 +265,9 @@ export async function getWhiteLabelIsDefault() {
 }
 
 export async function getAdditionalResources() {
-  const [getAdditionalResources] = createRequest(
+  logger.debug("Start GET /settings/rebranding/additional");
+
+  const [getAdditionalResources] = await createRequest(
     [`/settings/rebranding/additional`],
     [["", ""]],
     "GET",
@@ -257,7 +283,9 @@ export async function getAdditionalResources() {
 }
 
 export async function getCompanyInfo() {
-  const [getCompanyInfo] = createRequest(
+  logger.debug("Start GET /settings/rebranding/company");
+
+  const [getCompanyInfo] = await createRequest(
     [`/settings/rebranding/company`],
     [["", ""]],
     "GET",
@@ -273,7 +301,9 @@ export async function getCompanyInfo() {
 }
 
 export async function getPaymentSettings() {
-  const [getPaymentSettings] = createRequest(
+  logger.debug("Start GET /settings/payment");
+
+  const [getPaymentSettings] = await createRequest(
     [`/settings/payment`],
     [["", ""]],
     "GET",
@@ -289,7 +319,9 @@ export async function getPaymentSettings() {
 }
 
 export async function getSettingsThirdParty() {
-  const [getSettingsThirdParty] = createRequest(
+  logger.debug("Start GET /files/thirdparty/backup");
+
+  const [getSettingsThirdParty] = await createRequest(
     [`/files/thirdparty/backup`],
     [["", ""]],
     "GET",
@@ -311,7 +343,9 @@ export async function getBackupSchedule(dump: boolean = true) {
 
   searchParams.append("dump", dump.toString());
 
-  const [getBackupSchedule] = createRequest(
+  logger.debug(`Start GET /portal/getbackupschedule?${searchParams}`);
+
+  const [getBackupSchedule] = await createRequest(
     [`/portal/getbackupschedule?${searchParams}`],
     [["", ""]],
     "GET",
@@ -333,7 +367,9 @@ export async function getBackupStorage(dump: boolean = false) {
 
   searchParams.append("dump", dump.toString());
 
-  const [getBackupStorage] = createRequest(
+  logger.debug(`Start GET /settings/storage/backup?${searchParams}`);
+
+  const [getBackupStorage] = await createRequest(
     [`/settings/storage/backup?${searchParams}`],
     [["", ""]],
     "GET",
@@ -350,7 +386,9 @@ export async function getBackupStorage(dump: boolean = false) {
 }
 
 export async function getStorageRegions() {
-  const [getStorageRegions] = createRequest(
+  logger.debug("Start GET /settings/storage/s3/regions");
+
+  const [getStorageRegions] = await createRequest(
     [`/settings/storage/s3/regions`],
     [["", ""]],
     "GET",
@@ -366,7 +404,9 @@ export async function getStorageRegions() {
 }
 
 export async function getSettingsFiles(): Promise<TFilesSettings> {
-  const [getSettingsFiles] = createRequest(
+  logger.debug("Start GET /files/settings");
+
+  const [getSettingsFiles] = await createRequest(
     [`/files/settings`],
     [["", ""]],
     "GET",
@@ -386,8 +426,10 @@ export async function getBackupProgress(dump = true) {
 
   searchParams.append("dump", dump.toString());
 
+  logger.debug(`Start GET /portal/getbackupprogress?${searchParams}`);
+
   try {
-    const [getBackupProgress] = createRequest(
+    const [getBackupProgress] = await createRequest(
       [`/portal/getbackupprogress?${searchParams}`],
       [["", ""]],
       "GET",
@@ -406,7 +448,9 @@ export async function getBackupProgress(dump = true) {
 }
 
 export async function getFoldersTree() {
-  const [getFoldersTree] = createRequest(
+  logger.debug("Start GET /files/@root?filterType=2&count=1");
+
+  const [getFoldersTree] = await createRequest(
     ["/files/@root?filterType=2&count=1"],
     [["", ""]],
     "GET",
@@ -457,7 +501,9 @@ export async function getFoldersTree() {
 }
 
 export async function getEncryptionSettings() {
-  const [getEncryptionSettings] = createRequest(
+  logger.debug("Start GET /settings/encryption/settings");
+
+  const [getEncryptionSettings] = await createRequest(
     [`/settings/encryption/settings`],
     [["", ""]],
     "GET",

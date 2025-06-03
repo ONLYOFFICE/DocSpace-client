@@ -39,10 +39,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
   },
-  experimental: {
-    instrumentationHook: true,
-    serverComponentsExternalPackages: ["pino", "pino-pretty"],
-  },
+  serverExternalPackages: [
+    "nconf",
+    "date-and-time",
+    "winston",
+    "winston-cloudwatch",
+    "winston-daily-rotate-file",
+    "@aws-sdk/client-cloudwatch-logs",
+  ],
   compiler: {
     styledComponents: true,
   },
@@ -59,6 +63,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  devIndicators: false,
 };
 
 const getBuildDate = () => {
@@ -75,8 +80,6 @@ const getBuildYear = () => {
 
 module.exports = {
   webpack(config) {
-    console.log("ENV", { env: process.env });
-
     config.devtool = "source-map";
 
     if (config.mode === "production") {

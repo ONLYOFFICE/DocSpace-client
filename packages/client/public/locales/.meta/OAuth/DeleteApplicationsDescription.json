@@ -1,0 +1,485 @@
+{
+  "key_path": "DeleteApplicationsDescription",
+  "content": "If you delete this application, all active consents and authorization will be revoked. If a user tries to open the consent screen for this app, an error will occur in the document space and the user will be redirected to the specified redirect URL.",
+  "content_en_sha1_hash": "2724c8ed6771536c27c73fe8a703a88effb6d918",
+  "created_at": "2025-05-19T21:30:53.855Z",
+  "updated_at": "2025-05-24T07:35:10.634Z",
+  "comment": {
+    "text": "This translation key is used to display a warning message when deleting an application on OAuth consent screen. It informs users that revoking active consents will occur and may cause errors or redirects if they try to access the app again. The text appears in a modal dialog as part of the \"Delete Application\" button.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:51.960Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DeleteDialog.tsx",
+      "line_number": 83,
+      "context": "<ModalDialog.Header>\n {isGroup ? t(\"DeleteApplications\") : t(\"DeleteApplication\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {isGroup ? (\n <Trans t={t} i18nKey=\"DeleteApplicationsDescription\" ns=\"OAuth\" />\n ) : (\n <Trans t={t} i18nKey=\"DeleteApplicationDescription\" ns=\"OAuth\" />\n )}\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'applications' (تطبيقات) is used in the Arabic translation, while the English refers to 'application'. While technically not incorrect, it's slightly more accurate to use the singular form 'تطبيق' here to match the English phrasing which refers to one application.",
+          "suggestion": "إذا قمت بحذف هذا التطبيق، فسيتم إلغاء جميع الأذونات النشطة والمصادقة."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'مساحة الوثائق' (document space) might not be the most natural or understandable term for the target audience. It's a very technical term.",
+          "suggestion": "إذا حاول المستخدم فتح شاشة الأذونات لهذا التطبيق، فسيحدث خطأ وسيتم توجيه المستخدم إلى عنوان إعادة التوجيه المحدد."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better readability in Arabic. While technically correct, it reads a bit stiffly.",
+          "suggestion": "إذا حاول المستخدم فتح شاشة الأذونات للتطبيق، فسيحدث خطأ وسيتم توجيه المستخدم إلى عنوان إعادة التوجيه المحدد."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'salahiyyətlər' (authority) is a bit formal and less common in everyday usage. A more natural translation for 'authorization' would be 'razılıq' or 'təsdiq'.",
+          "suggestion": "Bu tətbiqləri silsəniz, bütün aktiv icazə və razılıq ləğv ediləcək."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'göstərilən yönləndirmə URL-inə yönləndiriləcək' is grammatically correct, it sounds clunky. A more fluent phrasing would be 'göstərilən yönləndirmə URL-inə istiqamət veriləcək'.",
+          "suggestion": "Bu tətbiqləri silsəniz, bütün aktiv icazə və səlahiyyətlər ləğv ediləcək. Əgər istifadəçi bu tətbiqin icazə ekranını açmağa çalışarsa, sənəd sahəsində xəta baş verəcək və istifadəçi göstərilən yönləndirmə URL-inə istiqamət veriləcək."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'OAuth:DeleteApplicationsDescription' implies a plural 'applications' but the Czech translation uses singular 'aplikace'. While not a definitive error, the singular form should be consistent with the English if it refers to a group of applications.",
+          "suggestion": "Consider revising to 'Pokud tyto aplikace odstraníte...' to maintain consistency with the original English."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability. The current phrasing is a bit long and convoluted.",
+          "suggestion": "Consider restructuring the first sentence: 'Odstraněním této aplikace budou zrušeny všechny aktivní souhlasy a oprávnění.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"this application\" in the English content is translated as \"αυτές τις εφαρμογές\" (these applications) in Greek. The singular \"this application\" should be reflected with the singular form in Greek, as it refers to one specific application being deleted.",
+          "suggestion": "Εάν διαγράψετε αυτήν την εφαρμογή..."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"Si elimina estas aplicaciones\" should be \"Si elimina esta aplicación\" to match the singular 'this application' in the English source. The translation uses a plural ('estas aplicaciones') when the English refers to a single application.",
+          "suggestion": "Si elimina esta aplicación"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"this application\" is translated as \"nämä sovellukset\" (these applications). The English refers to a single application, while the Finnish implies multiple applications.  While technically not incorrect, it's not the best translation given the context.",
+          "suggestion": "Jos poistat tämän sovelluksen..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'document space' is translated as 'asiakirjatilassa'. While literally translatable, it's unclear and potentially confusing to a Finnish user in this context. It lacks the nuance and clarity of the English original.",
+          "suggestion": "Jos käyttäjä yrittää avata tämän sovelluksen suostumusnäyttöä, järjestelmässä tapahtuu virhe..."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English states \"this application\" but the French uses \"ces applications\" (these applications). The implication is a single application is being deleted, not multiple.",
+          "suggestion": "Si vous supprimez cette application..."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Հավելվածները' (applications) is plural, but the context refers to a single application. While technically not incorrect, it's less precise.",
+          "suggestion": "Եթե ջնջեք այս հավելվածը..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"փաստաթղթի տարածքում սխալ կառաջանա\" is a bit awkward. It doesn't directly translate the intended meaning of an error occurring within the document space.",
+          "suggestion": "Եթե օգտատերը փորձի բացել այս հավելվածի համաձայնության ձևը, համակարգում սխալ կառաջանա..."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"Se si eliminano queste applicazioni\" is grammatically awkward. It's more natural to use a more direct subject. Using 'Si eliminano' is impersonal and less clear in this context.",
+          "suggestion": "Se elimini queste applicazioni..."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the repetition of \"questa applicazione\" feels a little clunky. It could be improved for flow.",
+          "suggestion": "Se un utente tenta di aprire la schermata di consenso per l'applicazione, si verificherà un errore..."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"authorization\" is translated as \"承認 (shou nin)\" which implies an approval or recognition. In the context of OAuth, \"authorization\" refers to the process by which a user grants an application access to their resources. A more accurate translation would be \"認可 (nin ka)\".",
+          "suggestion": "これらのアプリケーションを削除すると、すべてのアクティブな同意および認可が取り消されます。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'active consents' is not accurately translated. '유효한 모든 동의' (all valid consents) is too broad. It should be something like '현재 활성 동의' (currently active consents) or '승인된 모든 동의' (all approved consents) to more closely match the original meaning.",
+          "suggestion": "이러한 애플리케이션을 삭제하면 현재 활성 동의 및 인증이 철회됩니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'authorization' is translated as '인증'. While '인증' can sometimes represent authorization, '인가' is a more accurate translation in this context, referring to granting permission.",
+          "suggestion": "이러한 애플리케이션을 삭제하면 현재 활성 동의 및 인가가 철회됩니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a slightly less formal tone than the original. While not strictly incorrect, it could be adjusted to maintain consistency with the overall documentation style.",
+          "suggestion": "No specific change suggested, but consider reviewing the overall tone and consistency with the original."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'application' is inconsistently translated. It's 'ແອັບພລິເຄຊັນ' in the first instance and 'ແອັບຯ' in the second. While both are acceptable, consistency is preferred.",
+          "suggestion": "Maintain consistent translation: Use 'ແອັບພລິເຄຊັນ' throughout or 'ແອັບຯ' throughout."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'ເຂດແຖວເອກະສານ' is a bit awkward. It doesn't quite convey 'document space' accurately. It literally translates to 'area/zone of documents'.",
+          "suggestion": "Consider rephrasing 'ເຂດແຖວເອກະສານ' to something like 'ພື້ນທີ່ເອກະສານ' (document area) or 'ບໍລິເວນເອກະສານ' (document region) for better clarity.  The best choice will depend on the overall technical terminology used."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'lietojumprogrammas' is slightly awkward. While technically correct, 'lietotne' is more commonly used for 'application' in this context.",
+          "suggestion": "Ja izdzēsīsiet šīs lietotnes, visas aktīvās piekrišanas un autorizācija tiks atsauktas."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'novirzīšanas vietrādi URL' is grammatically incorrect. The correct term would be 'pārvirzīšanas URL'.",
+          "suggestion": "Ja lietotājs mēģinās atvērt šīs lietotnes piekrišanas ekrānu, dokumentu telpā radīsies kļūda un lietotājs tiks novirzīts uz norādīto pārvirzīšanas URL."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The word 'aplikacje' (applications) is in the plural form, but the context refers to a single application. The original English text uses 'this application' (singular).",
+          "suggestion": "Jeśli usuniesz tę aplikację, wszystkie aktywne zgody i autoryzacja zostaną cofnięte."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'document space' is translated as 'obszarze roboczym dokumentu'.  While technically correct, 'obszar roboczy' can have different connotations. A more natural translation, aligned with the technical context (likely a platform or system), might be better.",
+          "suggestion": "Jeśli użytkownik spróbuje otworzyć ekran zgody dla tej aplikacji, wystąpi błąd w systemie, a użytkownik zostanie przekierowany do określonego adresu URL przekierowania."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'esses' (these) in 'Se você excluir esses aplicativos' doesn't align with the English 'this application'. It implies multiple applications are being deleted when the original refers to a single application.",
+          "suggestion": "Se você excluir este aplicativo,"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'utilizador' is a valid Portuguese term for 'user', 'usuário' is more commonly used and generally preferred in modern Portuguese, especially in technical contexts.  'Utilizador' is a bit more formal.",
+          "suggestion": "Se você excluir este aplicativo, todos os consentimentos ativos e autorizações serão revogados. Se um usuário tentar abrir a tela de consentimento para este aplicativo, ocorrerá um erro no espaço do documento e o usuário será redirecionado para a URL de redirecionamento especificada."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'esses' (these) doesn't quite fit the context. 'Este' (this) is more appropriate as it refers to a single application.",
+          "suggestion": "Se você excluir este aplicativo, todos os consentimentos e autorizações ativos serão revogados."
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"aceasta aplicații\" is grammatically incorrect. It should be \"această aplicație\" (this application) to agree with 'this' in the English source.",
+          "suggestion": "Dacă ștergeți *această aplicație*, toate consimțământele și autorizațiile active vor fi revocate."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'acceseze' is slightly awkward. While not strictly incorrect, a more natural Romanian phrasing would be 'deschide' or 'accesează'.",
+          "suggestion": "Dacă utilizatorul încearcă să *deschidă* sau *acceseze* pagina de consimţământ pentru această aplicație..."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to \"this application\" (singular), while the Russian translation uses \"эти приложения\" (these applications - plural). This implies the deletion of multiple applications instead of one.",
+          "suggestion": "Измените на: Если вы удалите это приложение..."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"authorization\" is not accurately translated. \"අවසර\" (awasar) means 'permission' but lacks the nuance of 'authorization' in the OAuth context. A more accurate term would be something closer to \"පි පිළිතුරු\" (piliharu) or a more complex explanation depending on the target audience's familiarity with OAuth concepts.",
+          "suggestion": "Consider using a more precise translation for 'authorization' that reflects its technical meaning. Options include researching common OAuth terminology used in Sinhala technical documentation or providing a brief explanation within the translation."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"redirect URL\" is translated directly, but might not be easily understood by all users. It's a technical term.",
+          "suggestion": "Consider adding a brief explanation of what a redirect URL is, e.g., \"redirect URL ( නැවත හරවන URL) එයින් පරිශීලකයා නැවත යොමු කරනු ලැබේ\" (redirect URL (nawataharaavana URL) ewithin parishilakayaa naewath yomu karunu rahaa) - 'the redirect URL, through which the user will be redirected'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'tieto' (these) is used, referring to 'this application'. The original English specifies 'this application', implying a singular application. Using 'tieto' implies multiple applications.  It should be 'túto' (this).",
+          "suggestion": "Ak túto aplikáciu vymažete..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'na URL adresu zadanú na presmerovanie' is slightly awkward. It's literally 'to the URL address entered for redirection'. It could be more naturally phrased.",
+          "suggestion": "na zadanú presmerovaciu URL adresu"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'Če uporabnik poskuša odpreti zaslon za soglasje za to aplikacijo, se bo v prostoru dokumenta pojavila napaka...' could be improved for smoother reading.  'Odpreti' needs to be conjugated to 'odpre'.",
+          "suggestion": "Če uporabnik poskuša odpreti zaslon za soglasje za to aplikacijo, se bo v prostoru dokumenta pojavila napaka..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'document space' is not directly translatable to a single Slovenian word. 'Prostor dokumenta' is a literal translation but might not convey the intended meaning. A more suitable translation might be 'sistemu' or 'pomočniku' (depending on the technical context).",
+          "suggestion": "Če uporabnik poskuša odpreti zaslon za soglasje za to aplikacijo, se bo v sistemu pojavila napaka..."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"апликације\" (applications) is repeated unnecessarily. While technically correct, it sounds awkward in Serbian. It's better to use it only once.",
+          "suggestion": "Ако обришете ову апликацију, сви активни пристанаци и ауторизација ће бити опозвани. Ако корисник покуша да отвори екран пристанка за њу, доћи ће до грешке у простору за документе и корисник ће бити преусмерен на наведени URL за преусмеравање."
+        },
+        {
+          "type": "grammar",
+          "description": "The pronoun 'њу' is required after 'за' to clarify which application the consent screen refers to. It connects the consent screen action with the previously mentioned application.",
+          "suggestion": "Ако обришете ову апликацију, сви активни пристанаци и ауторизација ће бити опозвани. Ако корисник покуша да отвори екран пристанка за њу, доћи ће до грешке у простору за документе и корисник ће бити преусмерен на наведени URL за преусмеравање."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'If you delete this application' is translated as 'Ako obrišete ove aplikacije'. The original refers to a single application, while the translation implies multiple applications. This is a significant shift in meaning.",
+          "suggestion": "Ako obrišete ovu aplikaciju"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'consent screen' is translated as 'ekran pristanka'. While technically correct, a more common and understandable term in Serbian might be 'ekran za odobrenje'.",
+          "suggestion": "ekran za odobrenje"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'If you delete this application' is translated as 'Bu uygulamaları silerseniz' which implies multiple applications. The original refers to a single application. The Turkish translation should reflect this singular nature.",
+          "suggestion": "Bu uygulamayı silerseniz"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'revoked' is translated to 'iptal edilir'. While 'iptal edilir' conveys cancellation, 'geri çekilir' would be a more precise translation for 'revoked' in the context of permissions and authorizations.",
+          "suggestion": "Bu uygulamayı silerseniz, tüm etkin izinler ve yetkilendirmeler geri çekilir."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'application' is consistently translated as 'застосунки' which is a diminutive form. While not strictly incorrect, it might be perceived as unprofessional or less formal in this context. 'Додаток' or 'Програма' would be more suitable, depending on the specific nuance.",
+          "suggestion": "Consider translating 'application' as 'додаток' or 'програма' for a more formal tone."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'consent screen' is translated as 'екран згоди'. While understandable, 'екран дозволу' might be more commonly used or idiomatic in Ukrainian within a technical/OAuth context.",
+          "suggestion": "Consider translating 'consent screen' as 'екран дозволу'."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"các ứng dụng này\" (these applications) is too general. It should refer specifically to the application being deleted, which is singular in the English context.",
+          "suggestion": "Nếu bạn xóa ứng dụng này..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"đồng ý cho màn hình\" is awkward. It should be rephrased to be more natural.",
+          "suggestion": "Nếu người dùng cố gắng mở màn hình đồng ý cho ứng dụng này..."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"Nếu người dùng cố gắng mở đồng ý cho màn hình cho ứng dụng này, sẽ xảy ra lỗi trong không gian tài liệu\" is grammatically awkward. The order of words can be improved for better flow.",
+          "suggestion": "Nếu người dùng cố gắng mở màn hình đồng ý cho ứng dụng này, sẽ xảy ra lỗi trong không gian tài liệu."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'these' in '如果您删除这些应用程序' is potentially inaccurate. It's unclear what 'these' refers to. The English uses 'this application'.",
+          "suggestion": "如果您删除此应用程序"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

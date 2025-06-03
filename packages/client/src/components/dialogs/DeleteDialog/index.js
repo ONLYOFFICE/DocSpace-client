@@ -90,7 +90,9 @@ const DeleteDialogComponent = (props) => {
     onClose();
 
     const translations = {
-      deleteFromTrash: t("Translations:DeleteFromTrash"),
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
     };
 
     if (!selection.length) return;
@@ -161,7 +163,9 @@ const DeleteDialogComponent = (props) => {
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
-    return t("Common:MoveToTrashTitle");
+    return t("Common:SectionMoveConfirmation", {
+      sectionName: t("Common:TrashSection"),
+    });
   };
 
   const moveToTrashNoteText = () => {
@@ -279,7 +283,9 @@ const DeleteDialogComponent = (props) => {
         ? t("Common:OKButton")
         : unsubscribe
           ? t("UnsubscribeButton")
-          : t("MoveToTrashButton");
+          : t("Common:MoveToSection", {
+              sectionName: t("Common:TrashSection"),
+            });
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
@@ -290,7 +296,7 @@ const DeleteDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={accessButtonLabel}
           size="normal"
           primary

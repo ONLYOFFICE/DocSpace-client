@@ -1,0 +1,311 @@
+{
+  "key_path": "WarningMoveToFormRoom",
+  "content": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
+  "content_en_sha1_hash": "cface7c960be4b02ae0e603f24ae30d94c77c924",
+  "created_at": "2025-05-19T21:30:56.341Z",
+  "updated_at": "2025-05-26T07:57:32.171Z",
+  "comment": {
+    "text": "This translation key is used to display an error message when a file cannot be moved to a form room. The message informs users to try moving the specific organization's PDF form instead. This message appears in the FilesSelector component when attempting to move a file to a form room.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:38:56.512Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
+      "line_number": 223,
+      "context": "? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);\n \n if (isMove)\n return several\n ? t(\"Files:WarningMoveToFormRoomServal\", option)\n : t(\"Files:WarningMoveToFormRoom\", option);\n \n return \"\";\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The file cannot be moved to this room' is translated as 'لا يمكن نقل الملف إلى هذه الغرفة'. While technically correct, it lacks the natural flow of Arabic. A more natural phrasing would be something like 'لا يمكن تحريك الملف إلى هذه الغرفة' or 'لا يمكن نقل هذا الملف إلى الغرفة'.",
+          "suggestion": "لا يمكن تحريك الملف إلى هذه الغرفة"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please try to move the {{ organizationName }} PDF form' is translated as 'يُرجى محاولة نقل نموذج PDF الخاص بـ {{ organizationName }}'.  'الخاص بـ' is slightly awkward.  A more idiomatic translation would be 'نموذج PDF لـ {{ organizationName }}'.",
+          "suggestion": "يُرجى محاولة نقل نموذج PDF لـ {{ organizationName }}"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Please try to move\" is overly literal. A more natural Azerbaijani phrasing would improve readability.",
+          "suggestion": "Fayl bu otağa köçürülə bilməz. Zəhmətinizlə {{ organizationName }} PDF formasını köçürməyə çalışın."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout soubor {{ organizationName }}. PDF formulář.' is slightly awkward. The repeated 'soubor' (file) makes it sound less natural. The English suggests a singular file, specifically a PDF form. It could be improved to reflect that.",
+          "suggestion": "Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout {{ organizationName }} PDF formulář."
+        },
+        {
+          "type": "formatting",
+          "description": "The punctuation after 'prosím' is not consistent with typical Czech sentence structure. A comma would be more natural.",
+          "suggestion": "Soubor nelze do této místnosti přesunout. Zkuste prosím, přesunout {{ organizationName }} PDF formulář."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please try to move the {{ organizationName }} PDF form' is not perfectly translated. A more natural German phrasing would be 'Bitte versuchen Sie, das PDF-Formular von {{ organizationName}} zu verschieben.' The current translation just swaps the position of organizationName, which is not ideal.",
+          "suggestion": "Bitte versuchen Sie, das PDF-Formular von {{ organizationName}} zu verschieben."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English verb 'move' is translated as 'kopioida' (copy) in Finnish. 'Move' implies relocation, while 'copy' implies duplication. A more appropriate translation for 'move' would be 'siirtää', which also means 'move'.",
+          "suggestion": "Tiedostoa ei voi siirtää tähän huoneeseen. Ole hyvä ja siirrä {{ organizationName }} PDF-lomake."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'սենյակ' (room) is used. While technically correct, 'դահլիճ' (hall) might be more appropriate depending on the context of a 'form room'.",
+          "suggestion": "Consider using 'դահլիճ' instead of 'սենյակ' if the 'form room' is intended to be a larger space."
+        },
+        {
+          "type": "grammar",
+          "description": "While the sentence structure is generally correct, it might sound more natural to rephrase the second part. Specifically, the construction 'Փորձել տեղափոխել {{ organizationName }} PDF ձևը:' can be improved for smoother flow.",
+          "suggestion": "Consider 'Փորձեք տեղափոխել {{ organizationName }} PDF ձևը:' or 'Խնդրում ենք փորձել տեղափոխել {{ organizationName }} PDF ձևը:'"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The file cannot be moved to this room' could be more naturally translated. While technically correct, 'O ficheiro não pode ser movido para esta sala' sounds slightly awkward in Portuguese.",
+          "suggestion": "O arquivo não pode ser movido para esta sala."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is awkward and repetitive. The phrase 'formulário PDF' is repeated unnecessarily.",
+          "suggestion": "O arquivo não pode ser movido para esta sala. Tente mover o formulário PDF da {{ organizationName }}. "
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of 'formulário PDF' disrupts the flow and clarity of the sentence.",
+          "suggestion": "O arquivo não pode ser movido para esta sala. Tente mover o formulário PDF da {{ organizationName }}. "
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The word 'acestă' should be 'această'. It's a grammatical error in Romanian. 'această' is the correct form for feminine nouns in the accusative case.",
+          "suggestion": "Imposibil de mutat fișierul în **această** sală."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'thallu kirimu' (තල්ලු කිරීමට) literally translates to 'push' and is not the most natural way to express 'move' in this context. A more appropriate term would be 'transferu kirimu' (transfer කිරිම).",
+          "suggestion": "මෙම කාමරයට ගොනුව transfer කිරිමට හැකියාවක් නැත. කරුණාකර {{ organizationName }} PDF ආකෘතියක් transfer කිරිමට උත්සාහ කරන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The space before the organizationName variable is missing.",
+          "suggestion": "Datoteke ni mogoče premakniti v to sobo. Poskusite premakniti obrazec PDF {{organizationName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'фајл' (file) is spelled correctly, but its usage might be slightly awkward in this context. While technically correct, 'датотека' might be more natural in certain situations.",
+          "suggestion": "Consider using 'датотека' instead of 'фајл' for a more natural flow, though 'фајл' is acceptable."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'Покушајте да преместите {{ organizationName }} PDF образац' is grammatically correct but a slightly more natural phrasing could be considered.",
+          "suggestion": "Consider rephrasing to 'Покушајте да преместите PDF образац {{ organizationName }}.' for slightly improved readability."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Hãy thử di chuyển\" is overly polite and slightly awkward in this context. A more natural phrasing would convey the same meaning with less formality.",
+          "suggestion": "Hãy thử di chuyển biểu mẫu PDF của {{ organizationName }}"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

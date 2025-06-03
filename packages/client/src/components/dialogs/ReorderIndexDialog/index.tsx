@@ -83,7 +83,7 @@ const ReorderIndexDialog = ({
       <ModalDialog.Footer>
         <Button
           id="create-room"
-          key="OkButton"
+          key="OKButton"
           label={t("Files:Reorder")}
           size={ButtonSize.normal}
           primary

@@ -105,6 +105,7 @@ const EmailContainer = ({
             components={{
               1: (
                 <Link
+                  key="component_key"
                   fontWeight={600}
                   className="login-link"
                   type={LinkType.page}

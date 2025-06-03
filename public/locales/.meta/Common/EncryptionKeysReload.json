@@ -1,0 +1,289 @@
+{
+  "key_path": "EncryptionKeysReload",
+  "content": "Encryption keys must be re-entered",
+  "content_en_sha1_hash": "f6c9e7a53732f83f529413953357fb0a3f6c84d3",
+  "created_at": "2025-05-19T21:30:44.961Z",
+  "updated_at": "2025-05-26T07:57:32.991Z",
+  "comment": {
+    "text": "Encryption keys must be re-entered. This message is used to inform users when they need to re-authenticate or update their encryption keys in a login or update process. It typically appears as a notification or confirmation prompt on a desktop application's login page or dialog box.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:25.773Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/desktop.ts",
+      "line_number": 99,
+      "context": "case \"updateEncryptionKeys\": {\n setEncryptionKeys?.(params);\n break;\n }\n case \"relogin\": {\n // toastr.info(t(\"Common:EncryptionKeysReload\"));\n // relogin();\n break;\n }\n case \"getsharingkeys\":\n if (!isEditor || typeof getEncryptionAccess !== \"function\") {",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'düymələri' translates to 'buttons', not 'keys'. The English phrase 'Encryption keys' refers to cryptographic keys, not physical buttons. 'Şifrələmə açarları' would be a more accurate translation for 'Encryption keys'.",
+          "suggestion": "Şifrələmə açarları yenidən daxil edilməlidir"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '暗号化キーの再入力が必要' while generally accurate, could be slightly more natural. '再入力' directly translates to 're-entry' which is a bit literal. A more conversational option would be '暗号化キーを再度入力してください' or '暗号化キーを再度入力する必要があります'.",
+          "suggestion": "暗号化キーを再度入力してください"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ກະລຸນາໃສ່ລະສັດອີກຄັ້ງເພື່ອຢືນຢັນ\" translates to \"Please enter the password again to confirm.\" While understandable, it's not the most accurate reflection of \"Encryption keys must be re-entered.\" 'ລະສັດ' specifically refers to a password.  'Encryption keys' is a more technical term.",
+          "suggestion": "ກະລຸນາໃສ່ຄີຣອດການເຂົ້າລະຫັດອີກຄັ້ງ"
+        },
+        {
+          "type": "spelling",
+          "description": "The suggested correction uses a transliteration of 'encryption'. While 'ຄີຣອດການເຂົ້າລະຫັດ' is a reasonable approximation, consider using a more established Lao term if available for encryption keys.  If no preferred term exists, the transliteration is acceptable, but might need explanation to users.",
+          "suggestion": "Research and potentially adopt a more established Lao term for 'encryption keys' if possible."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'As chaves de Encriptação têm de ser reinseridas' is a literal translation and sounds unnatural in Portuguese. A more natural phrasing would emphasize the need to re-enter the keys.",
+          "suggestion": "As chaves de encriptação precisam ser reinseridas."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, using lowercase 'encriptação' is more consistent with Portuguese style.  While 'Encriptação' could be acceptable (following the English capitalization), lowercase is more common.",
+          "suggestion": "As chaves de encriptação precisam ser reinseridas."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සංකේතන' (sankethana) is misspelled. The correct spelling for 'encryption' is 'කේතන' (kethana).",
+          "suggestion": "සංකේතන යතුරු නැවත ඇතුල් කළ යුතුය"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'znova' is often used colloquially but is not the most formal or accurate translation of 'again' in this context. It can imply repetition or redundancy which isn't necessarily the intended meaning.",
+          "suggestion": "Šifrovacie kľúče je potrebné znovu zadať"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ključe za šifriranje je potrebno znova vnesti\" is a literal translation but sounds unnatural in Slovenian. A more natural phrasing would emphasize the requirement for re-entry.",
+          "suggestion": "Ključ za šifriranje je potrebno ponovno vnesti"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'znova' and 'ponovno' both translate to 'again', 'ponovno' is the preferred term in technical contexts when referring to performing an action once more.",
+          "suggestion": "Use 'ponovno' instead of 'znova' to be more professional."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Шифровани кључеви морају бити поново унешени\" is a literal translation but sounds awkward and less natural in Serbian. 'Re-entered' implies a previous entry. A more natural phrasing would convey the need to re-input or refresh the encryption keys.",
+          "suggestion": "Consider a translation like 'Неопходно је поново унети шифроване кључеве' (It is necessary to re-enter the encryption keys) or 'Потребно је освежити шифроване кључеве' (It is necessary to refresh the encryption keys)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ponešeni' is incorrect. It should be 'uneseni'. 'Ponešeni' means 'carried' or 'taken'.",
+          "suggestion": "Šifrovani ključevi moraju biti unesi"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Потрібно повторно ввести ключі шифрування' is a literal translation but sounds slightly unnatural. A more natural phrasing would convey the sense of needing to re-enter encryption keys for security or functionality.",
+          "suggestion": "Consider alternatives like 'Необхідно повторно ввести ключі шифрування' or 'Потрібно знову ввести ключі шифрування'."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Phải nhập lại các khóa mã hóa' is a literal translation but lacks the urgency and clarity of 'Encryption keys must be re-entered'. It sounds more like a general statement rather than a requirement.",
+          "suggestion": "Cần nhập lại các khóa mã hóa"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

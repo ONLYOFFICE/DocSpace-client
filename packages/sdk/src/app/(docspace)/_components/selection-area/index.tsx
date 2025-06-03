@@ -42,6 +42,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 const SelectionArea = observer(() => {
   const [countTilesInRow, setCountTilesInRow] = useState(0);
+  const [isSSR, setIsSSR] = useState(true);
 
   const { setSelections } = useFilesSelection();
   const { filesViewAs } = useSettingsStore();
@@ -97,7 +98,11 @@ const SelectionArea = observer(() => {
     };
   }, [countTilesInRow]);
 
-  return checkIsSSR() ? null : (
+  useLayoutEffect(() => {
+    setIsSSR(checkIsSSR());
+  }, []);
+
+  return isSSR ? null : (
     <SelectionAreaComponent
       containerClass="section-scroll"
       selectableClass={selectableClass}

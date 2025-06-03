@@ -1,0 +1,274 @@
+{
+  "key_path": "StopFillingTitle",
+  "content": "Stop filling?",
+  "content_en_sha1_hash": "b3fff789a91323a06fd3adcd922650270391f583",
+  "created_at": "2025-05-19T21:30:49.074Z",
+  "updated_at": "2025-05-26T07:57:32.945Z",
+  "comment": {
+    "text": "This translation key is used for the title of a modal dialog that prompts the user to stop filling a form field. It appears on the header of the dialog and is displayed when the \"Stop Filling\" button is clicked or visible in certain contexts.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T08:38:40.901Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/dialogs/stop-filling/StopFillingDialog.tsx",
+      "line_number": 68,
+      "context": "visible={visible}\n displayType={ModalDialogType.modal}\n onClose={onClose}\n data-testid=\"stop-filling-dialog\"\n >\n <ModalDialog.Header>{t(\"Common:StopFillingTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OKButton\"",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Doldurmaq dayandırılsın?' is a literal translation and doesn't convey the intended meaning of 'Stop filling?' in a natural way. It sounds awkward and overly formal in Azerbaijani.",
+          "suggestion": "A more natural translation would be 'Dayandırılsın?' or 'Doldurmağı dayandırılsın?' depending on the context and desired level of formality."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Mit dem Ausfüllen stoppen?\" is grammatically correct but a more natural translation of \"Stop filling?\" would be \"Ausfüllen beenden?\" or \"Ausfüllen abbrechen?\". \"Mit dem Ausfüllen stoppen?\" sounds slightly awkward in German.",
+          "suggestion": "Ausfüllen beenden?"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Դադարե՞լ լրացնելը\" literally translates to 'To stop filling?' which doesn't quite capture the interrogative nature of \"Stop filling?\" which implies a question like 'Do you want to stop filling?' or 'Are you going to stop filling?'",
+          "suggestion": "Consider translating it as \"Կդադարես լրացնելը\" (Kdadares lracnelə) which means 'Will you stop filling?' or \"Դադարեցնելո՞ւ\" (Dadarecnelo՞) which means 'To stop filling?' but is less conversational."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Interrompere la compilazione?' is grammatically correct, it's a bit formal and literal. A more natural and user-friendly translation for 'Stop filling?' might be 'Smetti di compilare?' or 'Vuoi interrompere la compilazione?'",
+          "suggestion": "Smetti di compilare?"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"작성을 중지하시겠습니까?\" is overly formal for the English phrase \"Stop filling?\". While grammatically correct, it's a more polite and formal inquiry than the casual tone of the original.",
+          "suggestion": "Consider a more casual translation like \"작성 중지할까요?\" or \"그만 채울까요?\" depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Doriți să încetați completarea?\" is too literal and formal for a simple question like \"Stop filling?\". It translates to \"Do you want to stop the completion?\"",
+          "suggestion": "Consider a more natural and concise translation like \"Vrei să te oprești?\" or \"Nu mai completezi?\""
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"නොපිරීම නවත්තන්නද?\" while understandable, isn't the most natural way to translate \"Stop filling?\". It directly translates 'not filling' and 'stop'. A more natural phrasing would be something along the lines of 'හිරවන්න නවත්තන්නද?' or 'ඉටු ගන්න නවත්තන්නද?' depending on the context of 'filling'.",
+          "suggestion": "Consider 'හිරවන්න නවත්තන්නද?' or 'ඉටු ගන්න නවත්තන්නද?' based on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ustavi izpolnjevanje?' while technically correct, sounds overly formal and literal for the question 'Stop filling?'. A more natural and user-friendly translation would be preferable.",
+          "suggestion": "Ne želiš več izpolnjevati?"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Зауставите попуњавање?' is a literal translation of \"Stop filling?\" but could be more natural in Serbian. While technically correct, a more common phrasing would be something like 'Престаните са попуњавањем?' or 'Откажите попуњавање?'",
+          "suggestion": "Престаните са попуњавањем?"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Doldurma durdurulsun mu?\" is overly formal and doesn't quite capture the casual tone of \"Stop filling?\". A more natural Turkish equivalent would be closer to \"Doldurmayı bırakır mıyız?\" or \"Doldurmayı keser miyiz?\"",
+          "suggestion": "Doldurmayı bırakır mıyız?"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"Stop filling?\" is a very informal question. \"是否停止填写？\" is more formal and literal. A better translation would convey the informality of the original.",
+          "suggestion": "停止填写吗？"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

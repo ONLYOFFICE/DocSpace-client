@@ -23,9 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.rtl) {
   :local {
@@ -74,7 +74,7 @@
   position: relative;
   outline: none;
 
-  @include mobile {
+  @include mixins.mobile {
     padding-inline-end: var(--scrollbar-padding-inline-end-mobile) !important;
   }
 }
@@ -87,7 +87,7 @@
   background: transparent !important;
   z-index: 201;
 
-  @include desktop {
+  @include mixins.desktop {
     &:hover {
       .thumbVertical {
         width: 8px !important;
@@ -99,7 +99,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     pointer-events: none;
 
     .thumb {
@@ -145,13 +145,13 @@
   width: 4px !important;
   transition: width linear 0.1s;
 
-  @include desktop {
+  @include mixins.desktop {
     &:active {
       width: 8px !important;
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     width: 4px !important;
   }
 }
@@ -160,19 +160,19 @@
   height: 4px !important;
   transition: height linear 0.1s;
 
-  @include desktop {
+  @include mixins.desktop {
     &:active {
       height: 8px !important;
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     height: 4px !important;
   }
 }
 
 .fixedSize {
-  @include desktop {
+  @include mixins.desktop {
     .thumbVertical {
       width: 8px !important;
     }

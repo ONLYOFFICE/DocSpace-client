@@ -77,7 +77,7 @@ const LifetimeDialogComponent = (props) => {
           <div className="modal-dialog_lifetime-buttons">
             <Button
               id="delete-file-modal_submit"
-              key="OkButton"
+              key="OKButton"
               label={t("Common:OKButton")}
               size="normal"
               primary

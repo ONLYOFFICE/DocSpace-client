@@ -34,9 +34,5 @@ export const BreadCrumbsProvider = ({
   children,
   ...rest
 }: TSelectorBreadCrumbs & { children: ReactNode }) => {
-  return (
-    <BreadCrumbsContext.Provider value={rest}>
-      {children}
-    </BreadCrumbsContext.Provider>
-  );
+  return <BreadCrumbsContext value={rest}>{children}</BreadCrumbsContext>;
 };

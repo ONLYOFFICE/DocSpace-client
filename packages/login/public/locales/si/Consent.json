@@ -1,1 +1,9 @@
-{}
+{
+  "AllowButton": "අවසර දෙන්න",
+  "ConsentDescription": "<strong>{{displayName}}</strong> සමඟ බෙදාගත් දත්ත <strong>{{nameApp}}</strong> <6>රහස්‍යතා ප්‍රතිපත්තිය</6> සහ <6>සේවා නියම</6> මගින් පාලනය වේ. ඔබට ඔබගේ {{productName}} ගිණුම් සැකසීම් තුළ ඕනෑම වේලාවක මෙම කැමැත්ත අවලංගු කළ හැක.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> <strong>ඔබේ {{productName}} ගිණුමේ</strong> පහත දත්ත වෙත ප්‍රවේශ වීමේ හැකියාවට කැමතියි:",
+  "DenyButton": "ප්‍රතික්ෂේප කරනවා",
+  "NotYou": "ඔබ නොවේද?",
+  "SignedInAs": "ලෙස පුරනය වී ඇත",
+  "ToContinue": "දිගටම කරගෙන යාමට"
+}

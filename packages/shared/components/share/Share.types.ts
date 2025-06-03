@@ -37,9 +37,9 @@ import { TOption } from "../combobox";
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
   closeCalendar: (formattedDate: moment.Moment) => void;
-  calendarRef: React.RefObject<HTMLDivElement>;
+  calendarRef: React.RefObject<HTMLDivElement | null>;
   locale: string;
-  bodyRef?: React.MutableRefObject<HTMLDivElement | null>;
+  bodyRef?: React.RefObject<HTMLDivElement | null>;
   useDropDown?: boolean;
 };
 export type DefaultCreatePropsType = {

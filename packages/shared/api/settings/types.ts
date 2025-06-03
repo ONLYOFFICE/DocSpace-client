@@ -347,6 +347,7 @@ export type TCompanyInfo = {
   email: string;
   address: string;
   phone: string;
+  hideAbout: boolean;
   isLicensor: boolean;
   isDefault: boolean;
 };

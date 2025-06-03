@@ -1,0 +1,317 @@
+{
+  "key_path": "PortalDescription",
+  "content": "Embed the whole {{productName}} to allow users to interact with all rooms, files, and settings.",
+  "content_en_sha1_hash": "bb2ba090ea6b7d4f2d0a63738da632aa07737985",
+  "created_at": "2025-05-19T21:30:54.616Z",
+  "updated_at": "2025-05-24T09:03:10.090Z",
+  "comment": {
+    "text": "This translation key is used for a portal settings page that instructs users to embed the entire product to interact with all rooms, files, and settings. It appears in the \"PresetWrapper\" component, which is likely part of a dropdown or options menu.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:41:27.810Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 89,
+      "context": "const navigateToViewer = () => navigate(\"viewer\");\n \n const presetsData = [\n {\n title: t(\"Common:ProductName\"),\n description: t(\"PortalDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
+      "line_number": 150,
+      "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"PortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n header={t(\"CreateSamplePortal\", {\n productName: t(\"Common:ProductName\"),\n })}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'İstifadəçilərə bütün otaq, fayl və parametrlərlə qarşılıqlı əlaqə yaratmaq üçün bütün {{productName}}-i daxil edin' is a literal translation and doesn't convey the intended meaning clearly. The word 'daxil edin' (enter/input) doesn't fit the context of embedding a Javascript SDK. It suggests manually inputting something, not embedding.",
+          "suggestion": "Consider a more natural phrasing like 'İstifadəçilərə bütün otaqlar, fayllar və parametrlərə interaktiv təcrübə yaratmaq üçün {{productName}}-i inteqrasiya edin' or '{{productName}}-i istifadəçilərin otaqlar, fayllar və parametrlərə daxil olmalarını və interaktiv şəkildə istifadə edə bilmələri üçün keçirin.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of the variable '{{productName}}' appears correct and consistent with the English content.",
+          "suggestion": "N/A"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'interact with' is not accurately translated by 'pracovat se'. 'Interact' implies a more dynamic engagement. 'Pracovat se' suggests 'working with', which is less accurate.",
+          "suggestion": "Consider alternatives like 'spolupracovat s', 'komunikovat s', or 'ovládat' depending on the precise nuance desired. A more literal, but perhaps less natural, option would be 'povolit uživatelům interagovat s'."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Betten Sie ein' (Embed) feels a bit too formal and literal for this context. While technically correct, it might not sound natural to a German speaker. A more conversational alternative would convey a similar meaning.",
+          "suggestion": "Integrieren Sie den gesamten {{productName}}, um Benutzern die Interaktion mit allen Räumen, Dateien und Einstellungen zu ermöglichen."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to allow users to interact\" is not the best translation of \"to allow users to interact with\". The original English implies a degree of permission and direct engagement.  \"Salliaksesi käyttäjien olla vuorovaikutuksessa\" is more accurately \"to allow users to be in interaction\". While not incorrect, it's less natural.",
+          "suggestion": "Upota koko {{productName}} mahdollistaaksesi käyttäjien vuorovaikutuksen kaikkien huoneiden, tiedostojen ja asetusten kanssa."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation retains the placeholder {{productName}}. While technically correct, it's generally preferred to replace placeholders with the localized version of the product name or omit them entirely if not needed. Consider replacing it with the Armenian product name or removing it.",
+          "suggestion": "Consider replacing {{productName}} with the Armenian product name or removing it if not necessary. Example: \"Տեղադրեք ամբողջ [Արևելյան Ապրանքի Անունը]-ը...\" or \"Տեղադրեք ամբողջը...\""
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ພົວພັນກັບ\" (puan pan gap) translates to \"relate to\" or \"interact with\" but might not fully convey the intended meaning of the English 'interact with'. A more accurate translation might emphasize usage or access.",
+          "suggestion": "ຝັງ {{productName}} ທັງໝົດເພື່ອໃຫ້ຜູ້ໃຊ້ສາມາດນຳໃຊ້ງານກັບທຸກຫ້ອງ, ໄຟລ໌ ແລະການຕັ້ງຄ່າ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Embed\" is not accurately conveyed. \"කාවද්දන්න\" implies protecting or guarding, not embedding or integrating. A better translation would convey the action of integrating or including the product.",
+          "suggestion": "ප්‍රවීශ්ඨ කරන්න (praveeshta kṛṇṇa) - to integrate, to introduce, or to embed"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow and clarity. While grammatically correct, it sounds slightly awkward.",
+          "suggestion": "පරිශ්‍රීලකයින්ට සියලු කාමර, ගොනු සහ සැකසුම් වෙත ප්‍රවීශ්ඨ කිරීම සඳහා සමස්ත {{productName}} භාවිතා කරන්න."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Vložte celý priestor {{productName}}' translates more literally to 'Insert the entire space {{productName}}'. The English 'Embed' implies a deeper integration than simply inserting.",
+          "suggestion": "Zahrňte celý {{productName}} aby ste používateľom umožnili..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pracovať' (work) doesn't quite capture the intended meaning of 'interact'. It suggests active labor rather than general engagement.",
+          "suggestion": "Zahrňte celý {{productName}} aby ste používateľom umožnili interagovať so všetkými miestnosťami, súbormi a nastaveniami."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Embed' is not ideal. 'Vdelajte' literally means 'to embed', but in this context, 'Integrirajte' (integrate) would be a more natural and idiomatic choice.",
+          "suggestion": "Integrirajte celoten prostor {{productName}}, da uporabnikom omogočite interakcijo z vsemi sobami, datotekami in nastavitvami."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"уградите\" (ugradite) implies installation or embedding physically. The English phrase \"Embed\" refers to integrating code or functionality. A more appropriate translation would convey the idea of integration or including.",
+          "suggestion": "Укључите цео {{productName}} да бисте омогуц́или корисницима интеракцију са свим собама, датотекама и подешавањима."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of Cyrillic characters is correct, but consistency in spacing and punctuation should be checked for broader style adherence. While minor, a review of overall style would be beneficial.",
+          "suggestion": "No specific change needed, but review for overall stylistic consistency."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Embed' is better translated as 'Integriraj' or 'Ugradi' rather than 'Ugradite'. 'Ugradite' implies installing something, whereas 'Embed' here means to incorporate or include.",
+          "suggestion": "Integriraj ceo {{productName}} da biste omogućili korisnicima interakciju sa svim sobama, datotekama i podešavanjima."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The single quote used within the Turkish translation for the product name variable \"{{productName}}\" is inconsistent with typical usage. Double quotes are more common in Turkish for this context.",
+          "suggestion": "Kullanıcıların tüm odalar, dosyalar ve ayarlarla etkileşime girmesini sağlamak için tüm \"{{productName}}\"’i gömün."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'простір' (prostir) translates to 'space' or 'area', not 'whole'. 'Вбудуйте весь {{productName}}' is less precise than the English 'Embed the whole {{productName}}'. It implies embedding a space within the product, instead of the product itself.",
+          "suggestion": "Вбудуйте {{productName}} повністю, щоб дозволити користувачам взаємодіяти з усіма кімнатами, файлами та параметрами."
+        },
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation maintains the double curly braces for the variable `{{productName}}` like the English, which is correct, but should be noted for consistency.",
+          "suggestion": "No change needed, consistency maintained."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

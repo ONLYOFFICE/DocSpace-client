@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .flexBoxStyles {
   display: flex;
@@ -59,7 +59,7 @@
     border-color: var(--secondary-text);
   }
 
-  @include mobile {
+  @include mixins.mobile {
     margin-inline-start: 2px;
   }
 
@@ -125,7 +125,7 @@
     padding: 8px;
     padding-inline-start: 8px;
 
-    @include tablet {
+    @include mixins.tablet {
       opacity: 1;
     }
 
@@ -182,7 +182,7 @@
       }
     }
 
-    @include tablet {
+    @include mixins.tablet {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

@@ -82,7 +82,9 @@ const ArchiveDialogComponent = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("ArchiveDialog:ArchiveHeader")}
+        {t("Common:SectionMoveConfirmation", {
+          sectionName: t("Common:Archive"),
+        })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text noSelect>{description}</Text>
@@ -90,7 +92,7 @@ const ArchiveDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="shared_move-to-archived-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:OKButton")}
           size="normal"
           primary

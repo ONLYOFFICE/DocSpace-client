@@ -1,0 +1,322 @@
+{
+  "key_path": "RoomLinkExpired",
+  "content": "The room link you are trying to open does not exist or has expired.",
+  "content_en_sha1_hash": "c16f473a9fbf86a65ac485294a575a3b10d7278a",
+  "created_at": "2025-05-19T21:30:48.190Z",
+  "updated_at": "2025-06-02T10:20:51.254Z",
+  "comment": {
+    "text": "The translation key \"RoomLinkExpired\" is used to display a message indicating that a room link has expired or does not exist. It appears in an error message when trying to open an external item, and serves as a fallback for cases where the item is locked or unavailable.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:31.449Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/ExpiredItem.tsx",
+      "line_number": 88,
+      "context": "size={HeadingSize.xsmall}\n >\n {t(\"Common:RoomNotAvailable\")}\n </Heading>\n <Text className=\"expired-text\" textAlign=\"center\">\n {t(\"Common:RoomLinkExpired\")}\n </Text>\n </div>\n </StyledNoItemContainer>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 242,
+      "context": "onOpenFolder = async (item, t) => {\n const { isExpiredLinkAsync } = this.filesActionsStore;\n \n if (item.external && (item.expired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 242,
+      "context": "onOpenFolder = async (item, t) => {\n const { isExpiredLinkAsync } = this.filesActionsStore;\n \n if (item.external && (item.expired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2617,
+      "context": "if (\n item.external &&\n (item.expired || (await this.isExpiredLinkAsync(item)))\n )\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Açmağa çalışdığınız otaq linki mövcud deyil və ya vaxtı keçib\" is not the most natural or accurate rendering of 'The room link you are trying to open does not exist or has expired.' The phrasing 'Açmağa çalışdığınız' (Trying to open) is a bit clunky. A more natural phrasing would be something like 'Daxil olmağa cəhd etdiyiniz otaq linki...' or 'Açmaq istədiyiniz otaq linki...'",
+          "suggestion": "Daxil olmağa cəhd etdiyiniz otaq linki mövcud deyil və ya vaxtı keçib."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'vaxtı' should be 'vaxtı keçib' for better grammatical accuracy.",
+          "suggestion": "vaxtı keçib"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Odkaz na místnost, který se snažíte otevřít, neexistuje nebo jeho platnost vypršela.' is overly literal and slightly awkward in Czech. A more natural phrasing would be closer to 'The room link you are trying to open is invalid or has expired.'",
+          "suggestion": "Odkaz na místnost, který se snažíte otevřít, je neplatný nebo vypršel."
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but lacks the natural flow of Finnish. 'Huoneen linkki, jota yrität avata' is a bit clunky. A more natural phrasing would be 'Yrität avata huoneen linkkiä...'",
+          "suggestion": "Yrität avata huoneen linkkiä, joka ei ole olemassa tai on vanhentunut."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '開こうとしているルームリンクは存在しないか、または期限切れです。' is technically correct but sounds a bit formal and robotic for a user-facing error message. A more natural phrasing would be more user-friendly.",
+          "suggestion": "ルームリンクがありません、または有効期限切れです。"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'か、または' creates a slightly stilted feel. It's grammatically correct but less common in modern Japanese, especially in user interface text.",
+          "suggestion": "ルームリンクがありません、または有効期限切れです。"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'mēģināt atvērt' (trying to open) is a bit verbose and less natural in this context. A more direct translation would be better.",
+          "suggestion": "Consider using a more direct phrasing like 'ko mēģināt lietot' (trying to use) or simply stating 'atvērt' (to open)."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Link do pokoju, który próbujesz otworzyć, nie istnieje lub wygasł' is technically correct but sounds a bit clunky and formal. A more natural and user-friendly phrasing would be better.",
+          "suggestion": "Link do pokoju, który chcesz otworzyć, nie istnieje lub przestał działać."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'który chcesz otworzyć' could be improved for flow.  While 'który próbujesz otworzyć' is not incorrect, 'który chcesz otworzyć' reads more smoothly.",
+          "suggestion": "Consider replacing 'który próbujesz otworzyć' with 'który chcesz otworzyć'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Lunk-ul' is a misspelling and mistranslation of 'room link'. It should be 'Link-ul'.",
+          "suggestion": "Link-ul de sală pe care încercați să-l deschideți"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'Lunk-ul' contains a spelling error.",
+          "suggestion": "Link-ul"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'a expirat' is correct for 'has expired', the entire phrase 'Link-ul de sală pe care încercați să-l deschideți nu există sau a expirat' sounds clunky and unnatural in Romanian. A more natural translation would rephrase the structure.",
+          "suggestion": "Link-ul către sală pe care încercați să-l accesați nu mai este valid sau a expirat."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'නොපවතී' (nopavatī) is technically correct, but 'තියංගිලා' (thiyangīla) or 'අහෝසි' (ahōsi) might sound more natural in this context, especially for a user facing message.",
+          "suggestion": "Consider replacing 'නොපවතී' with 'තියංගිලා' or 'අහෝසි'."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure could be slightly more conversational.  The order 'The room link... does not exist or has expired' feels a bit formal in Sinhala.",
+          "suggestion": "Consider rephrasing to something like 'ඔබ විවෘත කිරීමට උත්සාහ කරන කාමර සබැඳිය අවසානයේදී අහෝසි වී ඇත' (oba vivrutha karamaru udasahakara kamar sabandiya awasanayedi ahōsi vī ath)."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'собе' should be 'собе' instead of 'собе'.",
+          "suggestion": "Линк собе који покушавате да отворите не постоји или је истекао."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Link sobe koji pokušavate da otvorite ne postoji ili je istekao.' is not the most natural or accurate rendering of 'The room link you are trying to open does not exist or has expired.'  'Sobe' implies rooms, when it should refer to a link.",
+          "suggestion": "Link koji pokušavate da otvorite ne postoji ili je istekao."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Açmaya çalıştığınız oda bağlantısı mevcut değil veya süresi dolmuş.\" is a generally accurate translation, but 'açmaya çalıştığınız' (that you are trying to open) is a bit verbose. A more natural phrasing would be 'Açtığınız oda bağlantısı...'.",
+          "suggestion": "Açtığınız oda bağlantısı mevcut değil veya süresi dolmuş."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

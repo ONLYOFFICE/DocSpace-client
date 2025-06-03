@@ -29,12 +29,12 @@ import { useEffect, useState, useRef, RefObject } from "react";
 import { Scrollbar as ScrollbarType } from "../../scrollbar/custom-scrollbar";
 
 export const useViewTab = (
-  containerRef: RefObject<ScrollbarType>,
-  tabRef: RefObject<HTMLDivElement>,
+  containerRef: RefObject<ScrollbarType | null>,
+  tabRef: RefObject<HTMLDivElement | null>,
   index: number,
 ) => {
   const [isViewTab, setIsViewTab] = useState<boolean>(true);
-  const observerRef = useRef<IntersectionObserver>();
+  const observerRef = useRef<IntersectionObserver>(undefined);
 
   useEffect(() => {
     const container = containerRef.current?.scrollerElement;

@@ -28,7 +28,7 @@ import { http, HttpResponse } from "msw";
 
 import { BASE_URL } from "../../utils";
 
-const url = `${BASE_URL}/files/@root?filterType=2&count=1`;
+const path = `${BASE_URL}/files/@root`;
 
 const foldersTree = [
   {
@@ -512,6 +512,14 @@ const foldersTree = [
 ];
 
 export const createGetFolderTreeHandler = () =>
-  http.get(url, async () => {
-    return HttpResponse.json({ response: foldersTree });
+  http.get(path, async ({ request }) => {
+    const { searchParams } = new URL(request.url);
+
+    // foldersTree params
+    if (
+      searchParams.get("filterType") === "2" &&
+      searchParams.get("count") === "1"
+    ) {
+      return HttpResponse.json({ response: foldersTree });
+    }
   });

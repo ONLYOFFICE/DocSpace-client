@@ -251,7 +251,7 @@ export async function getExternalLinks(id, type) {
 }
 
 export async function getPrimaryLink(id) {
-  const res = await roomsClient.getRoomLinks(id);
+  const res = await roomsClient.getRoomsPrimaryExternalLink(id);
   return res;
 }
 

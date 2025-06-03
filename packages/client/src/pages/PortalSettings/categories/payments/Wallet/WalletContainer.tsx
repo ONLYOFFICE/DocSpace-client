@@ -133,6 +133,8 @@ const Wallet = (props: WalletProps) => {
   const isDisbled = !canUpdateTariff;
 
   const onClick = async () => {
+    if (isRefreshing) return;
+
     setIsRefreshing(true);
 
     const startTime = Date.now();

@@ -1117,7 +1117,7 @@ class FilesActionStore {
       const res = await lockFile(id, locked);
       setFile(res);
     } catch (err) {
-      toastr.error(err);
+      throw new Error(err?.response?.data?.error?.message ?? err);
     }
   };
 

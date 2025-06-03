@@ -941,13 +941,17 @@ export async function versionRestore(fileId: number, lastversion: number) {
 }
 
 export async function lockFile(fileId: number, lock: boolean) {
+  const skipRedirect = true;
   const data = { lockFile: lock };
 
-  const res = (await request({
-    method: "put",
-    url: `/files/file/${fileId}/lock`,
-    data,
-  })) as TFile;
+  const res = (await request(
+    {
+      method: "put",
+      url: `/files/file/${fileId}/lock`,
+      data,
+    },
+    skipRedirect,
+  )) as TFile;
 
   return res;
 }

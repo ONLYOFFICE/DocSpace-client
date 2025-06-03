@@ -68,9 +68,6 @@ const CheckboxTemplate = (args: CheckboxProps) => <Checkbox {...args} />;
 
 export const Default: Story = {
   render: CheckboxTemplate,
-  args: {
-    label: "Default Checkbox",
-  },
 };
 
 export const Checked: Story = {

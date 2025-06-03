@@ -74,7 +74,7 @@ type ChangeUserTypeDialogProps = {
   secondType: string;
   onClose: VoidFunction;
   onChangeUserType: VoidFunction;
-  personalUserFolderTitle?: string;
+
   setDataReassignmentDialogVisible: (visible: boolean) => void;
   setDialogData: (data: any) => void;
   dialogData: TChangeUserTypeDialogData;
@@ -91,7 +91,7 @@ const ChangeUserTypeDialog = ({
   secondType,
   onClose,
   onChangeUserType,
-  personalUserFolderTitle,
+
   setDataReassignmentDialogVisible,
   setDialogData,
   dialogData,
@@ -174,7 +174,7 @@ const ChangeUserTypeDialog = ({
                 i18nKey="PersonalDataDeletion"
                 ns="ChangeUserTypeDialog"
                 t={t}
-                values={{ sectionName: personalUserFolderTitle }}
+                values={{ sectionName: t("Common:MyFilesSection") }}
                 components={{
                   1: <span style={{ fontWeight: 600 }} />,
                 }}
@@ -185,7 +185,7 @@ const ChangeUserTypeDialog = ({
                   i18nKey="DataReassignmentWithFilesDeletion"
                   ns="ChangeUserTypeDialog"
                   t={t}
-                  values={{ sectionName: personalUserFolderTitle }}
+                  values={{ sectionName: t("Common:MyFilesSection") }}
                   components={{
                     1: <span style={{ fontWeight: 600 }} />,
                   }}

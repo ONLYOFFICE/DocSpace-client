@@ -100,7 +100,9 @@ const RootFolderContainer = (props) => {
   const emptyScreenHeader = t("Common:EmptyScreenFolder");
   const archiveHeader = t("ArchiveEmptyScreenHeader");
   const noFilesHeader = t("NoFilesHereYet");
-  const trashDescription = t("TrashEmptyDescription");
+  const trashDescription = t("TrashFunctionalityDescription", {
+    sectionName: t("Common:TrashSection"),
+  });
   const favoritesDescription = t("FavoritesEmptyContainerDescription");
   const recentDescription = t("RecentViaLinkEmptyContainerDescription");
 

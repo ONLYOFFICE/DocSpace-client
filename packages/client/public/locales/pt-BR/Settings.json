@@ -223,7 +223,6 @@
   "SharedFiles": "Arquivos compartilhados",
   "SharedFilesImportLocation": "Os arquivos compartilhados por outros usuários serão importados para {{sectionName}} > Recentemente acessível via link. Observação: alguns direitos de acesso podem ser perdidos durante a importação.",
   "SharedFolders": "Pastas partilhadas",
-  "SharedFoldersDescription": "As pastas compartilhadas serão importadas para a seção salas como salas com usuários aos quais foi concedido acesso. Observação: alguns direitos de acesso podem ser perdidos durante a importação",
   "SingleSignOn": "Logon Único",
   "SMTPSettings": "Configurações de SMTP",
   "SMTPSettingsDescription": "As configurações de SMTP são necessárias para configurar uma conta de e-mail que será usada para enviar notificações do portal usando seu próprio servidor SMTP em vez do que o {{organizationName}} utiliza. Preencha todos os campos e clique no botão \"Salvar\". Você pode usar o botão \"Enviar E-mail de Teste\" para verificar se todas as configurações inseridas estão corretas e funcionam como deveria.",

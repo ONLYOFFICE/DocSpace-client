@@ -245,6 +245,7 @@ const FilesSelectorInput = ({
     <div
       className={classNames(styles.filesSelectorInput, className)}
       style={{ maxWidth }}
+      data-testid="files-selector-input"
     >
       <FileInput
         scale

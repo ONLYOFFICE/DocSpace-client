@@ -1,0 +1,101 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useTranslation } from "react-i18next";
+
+import { classNames } from "@docspace/shared/utils";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/shared/components/text";
+
+import styles from "./EditRoomGroupsDialog.module.scss";
+
+const EditRoomGroupsDialog = ({}) => {
+  const { t } = useTranslation(["Common"]);
+  return (
+    <ModalDialog
+      displayType="aside"
+      withBodyScroll
+      visible={true}
+      className={styles.editRoomGroupsDialog}
+
+      // onClose={onCloseAndDisconnectThirdparty}
+      // isScrollLocked={isScrollLocked}
+      // hideContent={isOauthWindowOpen}
+      // isTemplate={isTemplate}
+      // isBackButton={roomParams.type}
+      // onBackClick={goBack}
+      // onSubmit={handleSubmit}
+      // withForm
+      // containerVisible={isTemplate ? templateDialogIsVisible : false}
+    >
+      <ModalDialog.Header>{"Edit room groups"}</ModalDialog.Header>
+
+      <ModalDialog.Body>
+        <div className={styles.roomGroups}>
+          <div>Room groups</div>
+          <ToggleButton
+
+          // onChange={onClickPermissions}
+          // isChecked={selectedEnableSchedule}
+          // isDisabled={isLoadingData || !isEnableAuto || isInitialError}
+          />
+        </div>
+
+        <Text>
+          You can group rooms into folders and easily switch between them. By
+          disabling grouping, you can re-enable it in the profile settings.
+        </Text>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          id="shared_create-room-modal_submit"
+          tabIndex={5}
+          label={"Save"}
+          size="normal"
+          primary
+          scale
+          // isDisabled={isRoomTitleChanged || isWrongTitle}
+          // isLoading={isLoading}
+          // type="submit"
+          // onClick={onCreateRoom}
+        />
+        <Button
+          id="shared_create-room-modal_cancel"
+          tabIndex={5}
+          label={t("Common:CancelButton")}
+          size="normal"
+          // scale
+          // isDisabled={isLoading}
+          // onClick={onCloseAndDisconnectThirdparty}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};
+
+export default EditRoomGroupsDialog;

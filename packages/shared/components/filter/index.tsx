@@ -93,6 +93,7 @@ const FilterInput = React.memo(
 
     initSearchValue,
     initSelectedFilterData,
+    setEditRoomGroupsDialogVisible,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -182,6 +183,14 @@ const FilterInput = React.memo(
       },
       [selectedItems, removeSelectedItem],
     );
+
+    const onCreateGroup = () => {
+      console.log(
+        "setEditRoomGroupsDialogVisible",
+        setEditRoomGroupsDialogVisible,
+      );
+      setEditRoomGroupsDialogVisible(true);
+    };
 
     React.useEffect(() => {
       mountRef.current = true;
@@ -279,6 +288,26 @@ const FilterInput = React.memo(
             ) : null}
           </div>
         ) : null}
+
+        <div className="filter-input_selected-row-grouping-rooms">
+          <SelectedItem
+            // key={`${item.key}_${item.group}`}
+            // propKey={Array.isArray(item.key) ? item.key[0] : item.key}
+            label="All rooms"
+            // group={item.group}
+            // onClose={removeSelectedItemAction}
+            // onClick={removeSelectedItemAction}
+          />
+
+          <SelectedItem
+            // key={`${item.key}_${item.group}`}
+            // propKey={Array.isArray(item.key) ? item.key[0] : item.key}
+            label="Create group"
+            // group={item.group}
+            // onClose={removeSelectedItemAction}
+            onClick={onCreateGroup}
+          />
+        </div>
       </div>
     );
   },

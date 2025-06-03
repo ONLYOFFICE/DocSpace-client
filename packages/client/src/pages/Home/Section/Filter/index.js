@@ -126,6 +126,7 @@ const SectionFilterContent = ({
   showStorageInfo,
   isDefaultRoomsQuotaSet,
   isTemplatesFolder,
+  setEditRoomGroupsDialogVisible,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1398,6 +1399,7 @@ const SectionFilterContent = ({
       isContactsGroupsPage={isContactsGroupsPage}
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
+      setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
     />
   );
 };
@@ -1417,6 +1419,7 @@ export default inject(
     currentQuotaStore,
     indexingStore,
     selectedFolderStore,
+    dialogsStore,
   }) => {
     const {
       filter,
@@ -1459,7 +1462,12 @@ export default inject(
     const { isIndexEditingMode } = indexingStore;
     const { isIndexedFolder } = selectedFolderStore;
 
-    const { usersStore, groupsStore, viewAs: contactsViewAs } = peopleStore;
+    const {
+      usersStore,
+      groupsStore,
+
+      viewAs: contactsViewAs,
+    } = peopleStore;
 
     const { groups, groupsFilter, setGroupsFilter } = groupsStore;
 
@@ -1470,6 +1478,8 @@ export default inject(
     } = usersStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
+
+    const { setEditRoomGroupsDialogVisible } = dialogsStore;
 
     return {
       isRoomAdmin,
@@ -1525,6 +1535,7 @@ export default inject(
       setRoomsFilter,
       standalone,
       currentDeviceType,
+      setEditRoomGroupsDialogVisible,
     };
   },
 )(

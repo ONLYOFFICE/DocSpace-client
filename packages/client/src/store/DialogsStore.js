@@ -304,6 +304,8 @@ class DialogsStore {
 
   socialAuthWelcomeDialogVisible = false;
 
+  editRoomGroupsDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -1042,6 +1044,10 @@ class DialogsStore {
 
   setSocialAuthWelcomeDialogVisible = (visible) => {
     this.socialAuthWelcomeDialogVisible = visible;
+  };
+
+  setEditRoomGroupsDialogVisible = (visible) => {
+    this.editRoomGroupsDialogVisible = visible;
   };
 }
 

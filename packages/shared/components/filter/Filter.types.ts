@@ -236,4 +236,5 @@ export type FilterProps = SearchInputProps &
 
     currentDeviceType: DeviceType;
     initSelectedFilterData?: TItem[];
+    setEditRoomGroupsDialogVisible: (visible: boolean) => void;
   };

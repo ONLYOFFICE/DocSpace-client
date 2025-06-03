@@ -74,6 +74,7 @@ import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
+import EditRoomGroupsDialog from "./EditRoomGroupsDialog";
 
 export {
   EmptyTrashDialog,
@@ -126,4 +127,5 @@ export {
   FormFillingTipsDialog,
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
+  EditRoomGroupsDialog,
 };

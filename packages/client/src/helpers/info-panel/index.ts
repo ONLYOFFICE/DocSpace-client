@@ -24,12 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Nullable } from "@docspace/shared/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { TGroup } from "@docspace/shared/api/groups/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
-
-import { TPeopleListItem } from "../contacts";
 
 import { InfoPanelEvents } from "./enums";
 
@@ -41,30 +36,6 @@ export const showInfoPanel = () => {
 
 export const hideInfoPanel = () => {
   const event = new CustomEvent(InfoPanelEvents.hideInfoPanel);
-
-  window.dispatchEvent(event);
-};
-
-export const setInfoPanelFile = (file: TFile) => {
-  const event = new CustomEvent(InfoPanelEvents.setInfoPanelFile, {
-    detail: { file },
-  });
-
-  window.dispatchEvent(event);
-};
-
-export const setInfoPanelFolder = (folder: TFolder) => {
-  const event = new CustomEvent(InfoPanelEvents.setInfoPanelFolder, {
-    detail: { folder },
-  });
-
-  window.dispatchEvent(event);
-};
-
-export const setInfoPanelRoom = (room: TRoom) => {
-  const event = new CustomEvent(InfoPanelEvents.setInfoPanelRoom, {
-    detail: { room },
-  });
 
   window.dispatchEvent(event);
 };
@@ -89,45 +60,33 @@ export const openMembersTab = () => {
   window.dispatchEvent(event);
 };
 
-export const setFileView = () => {
-  const event = new CustomEvent(InfoPanelEvents.setFileView);
-
-  window.dispatchEvent(event);
-};
-
-export const setRoomsView = () => {
-  const event = new CustomEvent(InfoPanelEvents.setRoomsView);
-
-  window.dispatchEvent(event);
-};
-
-export const updateInfoPanelGroup = (group: TGroup) => {
-  const event = new CustomEvent(InfoPanelEvents.updateInfoPanelGroup, {
-    detail: { group },
+export const setView = (view: string) => {
+  const event = new CustomEvent(InfoPanelEvents.setView, {
+    detail: { view },
   });
 
   window.dispatchEvent(event);
 };
 
-export const updateInfoPanelFile = (file: TFile) => {
-  const event = new CustomEvent(InfoPanelEvents.updateInfoPanelFile, {
-    detail: { file },
+export const setFileView = (view: string) => {
+  const event = new CustomEvent(InfoPanelEvents.setFileView, {
+    detail: { view },
   });
 
   window.dispatchEvent(event);
 };
 
-export const updateInfoPanelFolder = (folder: TFolder) => {
-  const event = new CustomEvent(InfoPanelEvents.updateInfoPanelFolder, {
-    detail: { folder },
+export const setRoomsView = (view: string) => {
+  const event = new CustomEvent(InfoPanelEvents.setRoomsView, {
+    detail: { view },
   });
 
   window.dispatchEvent(event);
 };
 
-export const updateInfoPanelRoom = (room: TRoom) => {
-  const event = new CustomEvent(InfoPanelEvents.updateInfoPanelRoom, {
-    detail: { room },
+export const setInfoPanelMobileHidden = (value: boolean) => {
+  const event = new CustomEvent(InfoPanelEvents.setInfoPanelMobileHidden, {
+    detail: { value },
   });
 
   window.dispatchEvent(event);
@@ -135,5 +94,6 @@ export const updateInfoPanelRoom = (room: TRoom) => {
 
 export const getInfoPanelOpen = () => {
   const isVisible = !!document.getElementsByClassName("info-panel").length;
+
   return isVisible;
 };

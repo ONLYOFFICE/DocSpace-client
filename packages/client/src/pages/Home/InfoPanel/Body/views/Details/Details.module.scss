@@ -24,43 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { isMobile, isTablet } from "react-device-detect";
+@use "@docspace/shared/styles/mixins";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledThumbnail = styled.div.attrs(injectDefaultTheme)`
+.thumbnail {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: ${isMobile ? (isTablet ? "240" : "188") : "200"}px;
+  height: 188px;
+
+  @include mixins.tablet-and-below {
+    height: 240px;
+  }
+
+  @include mixins.mobile {
+    height: 200px;
+  }
   img {
     box-sizing: border-box;
-    border: ${(props) => `solid 1px ${props.theme.infoPanel.borderColor}`};
+    border: 1px solid var(--info-panel-border-color);
     border-radius: 6px;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: ${(props) => (props.isImageOrMedia ? "center" : "top")};
-  }
-`;
 
-const StyledNoThumbnail = styled.div.attrs(injectDefaultTheme)`
+    object-position: top;
+
+    .isImage {
+      object-position: center;
+    }
+  }
+}
+
+.noThumbnail {
   height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
-  .no-thumbnail-img {
+  .noThumbnailImg {
     height: 96px;
     width: 96px;
   }
-  .is-room {
+  .isRoom {
     border-radius: 16px;
   }
-  .custom-logo {
-    outline: 1px solid
-      ${(props) => props.theme.infoPanel.details.customLogoBorderColor};
+  .customLogo {
+    outline: 1px solid var(--info-panel-details-border-color);
   }
 
   .room-title {
@@ -68,27 +77,25 @@ const StyledNoThumbnail = styled.div.attrs(injectDefaultTheme)`
     font-weight: 700;
     line-height: 56px;
   }
-`;
+}
 
-const StyledPublicRoomBar = styled.div`
+.publicRoomBar {
   display: contents;
 
-  .room-template_bar {
+  .roomTemplateBar {
     margin-top: 0;
     margin-bottom: 1px;
   }
 
-  .room-template_button {
+  .roomTemplateButton {
     margin-top: 10px;
   }
 
-  .room-template_text {
-    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  .roomTemplateText {
+    color: var(--info-panel-links-primary-color);
   }
 
   svg path {
-    fill: ${({ theme }) => theme.infoPanel.links.barIconColor};
+    fill: var(--info-panel-links-bar-color);
   }
-`;
-
-export { StyledThumbnail, StyledNoThumbnail, StyledPublicRoomBar };
+}

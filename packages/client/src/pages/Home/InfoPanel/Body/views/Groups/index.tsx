@@ -47,7 +47,7 @@ import NoItem from "../../sub-components/NoItem";
 import SeveralItems from "../../sub-components/SeveralItems";
 
 type GroupsProps = {
-  groupSelection: TGroup[] | Nullable<TGroup>;
+  groupSelection?: TGroup[] | Nullable<TGroup>;
 };
 
 const Groups = ({ groupSelection }: GroupsProps) => {

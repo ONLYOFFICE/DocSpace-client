@@ -47,10 +47,6 @@ const ChangeQuotaEvent = (props) => {
     abortCallback,
 
     inRoom,
-    setNewInfoPanelSelection,
-    needResetSelection,
-    getPeopleListItem,
-    setInfoPanelSelection,
   } = props;
 
   const { t } = useTranslation("Common");
@@ -82,16 +78,6 @@ const ChangeQuotaEvent = (props) => {
       toastr.success(t("Common:StorageQuotaSet"));
 
       successCallback && successCallback(items);
-
-      if (!needResetSelection) {
-        if (type === "user") {
-          const user = getPeopleListItem(items[0]);
-
-          setInfoPanelSelection(user);
-        } else {
-          setNewInfoPanelSelection();
-        }
-      }
     } catch (e) {
       toastr.error(e);
 
@@ -131,19 +117,17 @@ const ChangeQuotaEvent = (props) => {
 };
 
 export default inject(
-  ({ peopleStore, filesStore, infoPanelStore }, { type }) => {
+  (
+    { peopleStore, filesStore, infoPanelStore, selectedFolderStore },
+    { type },
+  ) => {
     const { usersStore } = peopleStore;
     const { getPeopleListItem, needResetUserSelection } = usersStore;
     const { setCustomRoomQuota, needResetFilesSelection } = filesStore;
 
-    const {
-      infoPanelSelection,
-      setNewInfoPanelSelection,
-      setInfoPanelSelection,
-      isVisible: infoPanelVisible,
-    } = infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const inRoom = !!infoPanelSelection?.navigationPath;
+    const inRoom = !!selectedFolderStore?.navigationPath;
     const needResetSelection =
       type === "user"
         ? !infoPanelVisible || needResetUserSelection
@@ -152,10 +136,8 @@ export default inject(
     return {
       setCustomRoomQuota,
       inRoom,
-      setNewInfoPanelSelection,
       getPeopleListItem,
       needResetSelection,
-      setInfoPanelSelection,
     };
   },
 )(observer(ChangeQuotaEvent));

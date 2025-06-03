@@ -24,38 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
-import { inject, observer } from "mobx-react";
-import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
-import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
-import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
-
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import { FolderType } from "@docspace/shared/enums";
-import { StyledTitle } from "../../../styles/common";
-import RoomsContextBtn from "./context-btn";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
-import Search from "../../Search";
+import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
+import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
+import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
+
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+
+import { StyledTitle } from "../../styles/common";
+
+import Search from "../Search";
+
+import RoomsContextBtn, { type TSelection } from "./ContextButton";
+
+type RoomsItemHeaderProps = {
+  selection: TSelection;
+
+  roomsView?: InfoPanelStore["roomsView"];
+  showSearchBlock?: boolean;
+  setShowSearchBlock?: InfoPanelStore["setShowSearchBlock"];
+  setIsMobileHidden?: InfoPanelStore["setIsMobileHidden"];
+
+  isGracePeriod?: CurrentTariffStatusStore["isGracePeriod"];
+
+  setInvitePanelOptions?: DialogsStore["setInvitePanelOptions"];
+  setQuotaWarningDialogVisible?: DialogsStore["setQuotaWarningDialogVisible"];
+  getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
+  setTemplateAccessSettingsVisible?: DialogsStore["setTemplateAccessSettingsVisible"];
+
+  roomType?: RoomsType;
+  displayFileExtension?: boolean;
+
+  onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
+  getIcon?: FilesSettingsStore["getIcon"];
+};
 
 const RoomsItemHeader = ({
-  t,
   selection,
-  infoPanelSelection,
   setIsMobileHidden,
   isGracePeriod,
   setInvitePanelOptions,
   setQuotaWarningDialogVisible,
   roomsView,
-  setSelection,
-  setBufferSelection,
-  isArchive,
   showSearchBlock,
   setShowSearchBlock,
   roomType,
@@ -63,88 +87,113 @@ const RoomsItemHeader = ({
   getLogoCoverModel,
   onChangeFile,
   setTemplateAccessSettingsVisible,
-}) => {
-  const itemTitleRef = useRef();
+  getIcon,
+}: RoomsItemHeaderProps) => {
+  const { t } = useTranslation([
+    "Files",
+    "Common",
+    "Translations",
+    "InfoPanel",
+    "SharingPanel",
+    "RoomLogoCover",
+  ]);
 
-  if (!selection) return null;
+  const icon: string | undefined =
+    "icon" in selection ? (selection.icon as string) : getIcon?.(32);
+  const isLoadedRoomIcon =
+    "logo" in selection &&
+    (!!selection.logo?.cover || !!selection.logo?.medium);
 
-  const icon = selection.icon;
-  const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.medium;
-  const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
-  const security = infoPanelSelection ? infoPanelSelection.security : {};
-  const canInviteUserInRoomAbility = security?.EditAccess;
+  const showDefaultRoomIcon = !isLoadedRoomIcon;
+
+  const security = selection.security;
+  const canInviteUserInRoomAbility =
+    "EditAccess" in security && security?.EditAccess;
   const isTemplate =
-    (selection.isTemplate ||
-      selection?.rootFolderType === FolderType.RoomTemplates) &&
-    selection?.isRoom;
-  const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
+    ("isTemplate" in selection && selection.isTemplate) ||
+    selection?.rootFolderType === FolderType.RoomTemplates;
 
-  const badgeUrl = getRoomBadgeUrl(selection);
-  const tooltipContent = selection?.external
-    ? t("Files:RecentlyOpenedTooltip")
-    : null;
+  const isRoomMembersPanel = roomsView === "info_members";
 
-  const isFile = !!selection.fileExst;
+  const hasImage = "logo" in selection && !!selection.logo?.original;
+  const model = getLogoCoverModel?.(t, hasImage);
+
+  const badgeUrl =
+    "roomType" in selection && "external" in selection
+      ? getRoomBadgeUrl(selection)
+      : null;
+
+  const tooltipContent =
+    "external" in selection && selection.external
+      ? t("Files:RecentlyOpenedTooltip")
+      : null;
+
+  const isFile = "fileExst" in selection && !!selection.fileExst;
   let title = selection.title;
 
   if (isFile) {
     title = getTitleWithoutExtension(selection, false);
   }
 
-  const onSelectItem = () => {
-    setSelection([]);
-    setBufferSelection(selection);
-  };
-
-  const onChangeFileContext = (e) => {
-    onChangeFile(e, t);
+  const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeFile?.(e, t);
   };
 
   const onClickInviteUsers = () => {
-    onSelectItem();
-    setIsMobileHidden(true);
-    const parentRoomId = infoPanelSelection.id;
+    setIsMobileHidden?.(true);
+    const parentRoomId = selection.id;
 
     if (isGracePeriod) {
-      setQuotaWarningDialogVisible(true);
+      setQuotaWarningDialogVisible?.(true);
       return;
     }
 
-    setInvitePanelOptions({
+    setInvitePanelOptions?.({
       visible: true,
       roomId: parentRoomId,
       hideSelector: false,
-      defaultAccess: getDefaultAccessUser(roomType),
+      defaultAccess: getDefaultAccessUser(roomType ?? RoomsType.CustomRoom),
     });
   };
 
   const onOpenTemplateAccessOptions = () => {
-    setTemplateAccessSettingsVisible(true);
+    setTemplateAccessSettingsVisible?.(true);
   };
 
-  const onSearchClick = () => setShowSearchBlock(true);
-  const hasImage = selection?.logo?.original;
-  const model = getLogoCoverModel(t, hasImage);
+  const onSearchClick = () => setShowSearchBlock?.(true);
 
   return (
-    <StyledTitle ref={itemTitleRef}>
+    <StyledTitle withBottomBorder={false}>
       {isRoomMembersPanel && showSearchBlock ? <Search /> : null}
 
       <div className="item-icon">
         <RoomIcon
           isTemplate={isTemplate}
-          color={selection.logo?.color}
+          color={"logo" in selection ? selection.logo?.color : undefined}
           title={title}
-          isArchive={isArchive}
-          showDefault={showDefaultRoomIcon}
-          imgClassName={`icon ${selection.isRoom && "is-room"}`}
+          isArchive={
+            "rootFolderType" in selection
+              ? selection.rootFolderType === FolderType.Archive
+              : false
+          }
+          showDefault={
+            isFile ||
+            (!("logo" in selection) &&
+              "isFolder" in selection &&
+              selection.isFolder)
+              ? false
+              : showDefaultRoomIcon
+          }
+          imgClassName={`icon ${"isRoom" in selection && selection.isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl || ""}
           tooltipContent={tooltipContent}
           hoverSrc={
-            selection.isRoom && selection.security?.EditRoom
+            "isRoom" in selection &&
+            "EditRoom" in selection.security &&
+            selection.security?.EditRoom
               ? Camera10ReactSvgUrl
-              : null
+              : undefined
           }
           model={model}
           onChangeFile={onChangeFileContext}
@@ -195,20 +244,8 @@ const RoomsItemHeader = ({
             size={16}
           />
         ) : null}
-        {/* Show after adding a calendar request
-        {openHistory && (
-          <CalendarComponent
-            setCalendarDay={setCalendarDay}
-            roomCreationDate={selection.created}
-            setIsScrollLocked={setIsScrollLocked}
-            locale={i18n.language}
-          />
-        )} */}
-        <RoomsContextBtn
-          selection={selection}
-          itemTitleRef={itemTitleRef}
-          onSelectItem={onSelectItem}
-        />
+
+        <RoomsContextBtn selection={selection} />
       </div>
     </StyledTitle>
   );
@@ -219,43 +256,28 @@ export default inject(
     currentTariffStatusStore,
     dialogsStore,
     selectedFolderStore,
-    filesStore,
     infoPanelStore,
     filesSettingsStore,
     publicRoomStore,
-    settingsStore,
     avatarEditorDialogStore,
-  }) => {
+  }: TStore) => {
     const {
-      infoPanelSelection,
       roomsView,
       setIsMobileHidden,
       showSearchBlock,
       setShowSearchBlock,
-      setCalendarDay,
-      setIsScrollLocked,
-      updateInfoPanelSelection,
     } = infoPanelStore;
 
-    const { displayFileExtension } = filesSettingsStore;
+    const { displayFileExtension, getIcon } = filesSettingsStore;
     const { externalLinks } = publicRoomStore;
-    const { setCoverSelection, setTemplateAccessSettingsVisible } =
-      dialogsStore;
-
-    const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
-    const isArchive = selection?.rootFolderType === FolderType.Archive;
+    const { setTemplateAccessSettingsVisible } = dialogsStore;
 
     const { onChangeFile } = avatarEditorDialogStore;
 
-    setCoverSelection(selection);
-    const roomType =
-      selectedFolderStore.roomType ??
-      infoPanelStore.infoPanelSelection?.roomType;
+    const roomType = selectedFolderStore.roomType;
 
     return {
-      selection,
       roomsView,
-      infoPanelSelection,
       setIsMobileHidden,
       showSearchBlock,
       setShowSearchBlock,
@@ -266,29 +288,13 @@ export default inject(
       setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
 
-      setSelection: filesStore.setSelection,
-      setBufferSelection: filesStore.setBufferSelection,
-      isArchive,
       hasLinks: externalLinks.length,
-      setCalendarDay,
       roomType,
-      setIsScrollLocked,
-      isShared: selection?.shared,
 
       displayFileExtension,
-      maxImageUploadSize: settingsStore.maxImageUploadSize,
-      updateInfoPanelSelection,
       onChangeFile,
       setTemplateAccessSettingsVisible,
+      getIcon,
     };
   },
-)(
-  withTranslation([
-    "Files",
-    "Common",
-    "Translations",
-    "InfoPanel",
-    "SharingPanel",
-    "RoomLogoCover",
-  ])(observer(RoomsItemHeader)),
-);
+)(observer(RoomsItemHeader));

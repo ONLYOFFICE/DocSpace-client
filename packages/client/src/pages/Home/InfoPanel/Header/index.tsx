@@ -36,27 +36,24 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import PluginStore from "SRC_DIR/store/PluginStore";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-
-import { TInfoPanelSelection } from "../InfoPanel.types";
-
-import { StyledInfoPanelHeader } from "./Header.styled";
+import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
+import { StyledInfoPanelHeader } from "./Header.styled";
+
 type InfoPanelHeaderContentProps = {
-  // TODO change InfoPanelStore["infoPanelSelection"]
-  selection: TInfoPanelSelection;
-  setIsVisible: InfoPanelStore["setIsVisible"];
+  selection: InfoPanelStore["infoPanelSelection"];
+
   roomsView: InfoPanelStore["roomsView"];
   fileView: InfoPanelStore["fileView"];
   setView: InfoPanelStore["setView"];
 
+  setIsVisible: InfoPanelStore["setIsVisible"];
   getIsTrash: InfoPanelStore["getIsTrash"];
 
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 
   enablePlugins: SettingsStore["enablePlugins"];
-  isSeveralItems: boolean;
 };
 
 const InfoPanelHeaderContent = ({
@@ -69,7 +66,6 @@ const InfoPanelHeaderContent = ({
   getIsTrash,
   infoPanelItemsList,
   enablePlugins,
-  isSeveralItems,
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
@@ -78,7 +74,6 @@ const InfoPanelHeaderContent = ({
   const isTrash = getIsTrash();
 
   const isRoot =
-    !isSeveralItems &&
     selection &&
     "isFolder" in selection &&
     "rootFolderId" in selection &&
@@ -92,7 +87,7 @@ const InfoPanelHeaderContent = ({
 
   const withTabs =
     !isRoot &&
-    !isSeveralItems &&
+    !Array.isArray(selection) &&
     !isGallery &&
     !isContacts &&
     !isTrash &&
@@ -106,10 +101,10 @@ const InfoPanelHeaderContent = ({
 
   const closeInfoPanel = () => setIsVisible(false);
 
-  const setMembers = () => setView("info_members");
-  const setHistory = () => setView("info_history");
-  const setDetails = () => setView("info_details");
-  const setShare = () => setView("info_share");
+  const setMembers = () => setView(InfoPanelView.infoMembers);
+  const setHistory = () => setView(InfoPanelView.infoHistory);
+  const setDetails = () => setView(InfoPanelView.infoDetails);
+  const setShare = () => setView(InfoPanelView.infoShare);
 
   const memberTab = {
     id: "info_members",
@@ -229,44 +224,34 @@ const InfoPanelHeaderContent = ({
 };
 
 export default inject(
-  ({
-    settingsStore,
-    infoPanelStore,
-    pluginStore,
-    selectedFolderStore,
-  }: TStore) => {
-    const selectedId = selectedFolderStore.id;
-
+  ({ settingsStore, infoPanelStore, pluginStore }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
     const {
-      infoPanelSelection,
-      infoPanelSelectedItems,
-      setIsVisible,
       roomsView,
       fileView,
       setView,
 
+      setIsVisible,
       getIsTrash,
     } = infoPanelStore;
 
     const { enablePlugins } = settingsStore;
 
+    const selection = infoPanelStore.infoPanelSelection;
+
     return {
-      selection: infoPanelSelection,
-      isSeveralItems: infoPanelSelectedItems.length > 1,
-      setIsVisible,
+      selection,
       roomsView,
       fileView,
       setView,
 
+      setIsVisible,
       getIsTrash,
 
       infoPanelItemsList,
 
       enablePlugins,
-
-      selectedId,
     };
   },
 )(observer(InfoPanelHeaderContent));

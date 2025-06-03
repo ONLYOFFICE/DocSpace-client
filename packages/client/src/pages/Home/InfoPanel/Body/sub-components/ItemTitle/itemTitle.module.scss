@@ -24,53 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-
-import RoomsItemHeader from "./Rooms";
-
-const ItemTitle = ({
-  infoPanelSelection,
-  isNoItem,
-
-  isGallery,
-
-  setCalendarDay,
-  roomsView,
-  isVDR,
-  isContacts,
-}) => {
-  if (isNoItem || isContacts || !infoPanelSelection || isGallery) return null;
-
-  const openHistory = isVDR && roomsView === "info_history";
-  return (
-    <RoomsItemHeader
-      openHistory={openHistory}
-      setCalendarDay={setCalendarDay}
-    />
-  );
-};
-
-export default inject(
-  ({
-    settingsStore,
-    filesSettingsStore,
-    peopleStore,
-    oformsStore,
-    infoPanelStore,
-  }) => {
-    const { currentColorScheme } = settingsStore;
-    const { getIcon } = filesSettingsStore;
-    const { getGroupContextOptions } = peopleStore.groupsStore;
-    const { gallerySelected } = oformsStore;
-    const { roomsView, setCalendarDay } = infoPanelStore;
-
-    return {
-      currentColorScheme,
-      gallerySelected,
-      getGroupContextOptions,
-      getIcon,
-      roomsView,
-      setCalendarDay,
-    };
-  },
-)(observer(ItemTitle));
+.itemContextOptions {
+  height: 16px;
+  margin-block: auto 0;
+}

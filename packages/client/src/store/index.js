@@ -117,7 +117,7 @@ const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
-const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
+const indexingStore = new IndexingStore(selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,
@@ -190,7 +190,6 @@ const dialogsStore = new DialogsStore(
   filesStore,
   selectedFolderStore,
   versionHistoryStore,
-  infoPanelStore,
 );
 
 const profileActionsStore = new ProfileActionsStore(
@@ -243,7 +242,6 @@ const filesActionsStore = new FilesActionsStore(
   clientLoadingStore,
   publicRoomStore,
   pluginStore,
-  infoPanelStore,
   userStore,
   currentTariffStatusStore,
   peopleStore,
@@ -300,17 +298,17 @@ const tableStore = new TableStore(
   peopleStore,
 );
 
-infoPanelStore.filesSettingsStore = filesSettingsStore;
-infoPanelStore.filesStore = filesStore;
-infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.selectedFolderStore = selectedFolderStore;
+infoPanelStore.filesStore = filesStore;
+infoPanelStore.filesSettingsStore = filesSettingsStore;
+
+infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
 infoPanelStore.publicRoomStore = publicRoomStore;
 
 const avatarEditorDialogStore = new AvatarEditorDialogStore(
   filesStore,
   settingsStore,
-  infoPanelStore,
 );
 
 const createEditRoomStore = new CreateEditRoomStore(
@@ -320,7 +318,6 @@ const createEditRoomStore = new CreateEditRoomStore(
   tagsStore,
   thirdPartyStore,
   settingsStore,
-  infoPanelStore,
   currentQuotaStore,
   clientLoadingStore,
   dialogsStore,

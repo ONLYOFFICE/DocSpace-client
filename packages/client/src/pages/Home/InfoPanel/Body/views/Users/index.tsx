@@ -68,7 +68,7 @@ type UsersProps = {
   getUsersChangeTypeOptions?: ContactsConextOptionsStore["getUsersChangeTypeOptions"];
   getUserContextOptions?: ContactsConextOptionsStore["getUserContextOptions"];
 
-  showStorageInfo: CurrentQuotasStore["showStorageInfo"];
+  showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
 
   standalone?: SettingsStore["standalone"];
 

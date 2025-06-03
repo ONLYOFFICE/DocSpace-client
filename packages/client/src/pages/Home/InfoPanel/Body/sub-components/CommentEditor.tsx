@@ -24,37 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import React, { useState, useEffect } from "react";
-import { inject } from "mobx-react";
+import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
 
+import { TFile } from "@docspace/shared/api/files/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Textarea } from "@docspace/shared/components/textarea";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
-// import infoPanel from "@docspace/shared/components/section/sub-components/info-panel";
+
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+
+import VersionHistoryStore from "SRC_DIR/store/VersionHistoryStore";
+
+type CommentEditorProps = {
+  item: TFile;
+  editing?: boolean;
+  fetchFileVersions?: VersionHistoryStore["fetchFileVersions"];
+  updateCommentVersion?: VersionHistoryStore["updateCommentVersion"];
+  setVerHistoryFileId?: VersionHistoryStore["setVerHistoryFileId"];
+  setVerHistoryFileSecurity?: VersionHistoryStore["setVerHistoryFileSecurity"];
+};
 
 const CommentEditor = ({
-  t,
   item,
   editing,
-  setInfoPanelSelection,
   fetchFileVersions,
   updateCommentVersion,
 
   setVerHistoryFileId,
   setVerHistoryFileSecurity,
-}) => {
+}: CommentEditorProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const { id, comment, version, security } = item;
 
   const changeVersionHistoryAbility = !editing && security?.EditHistory;
 
   useEffect(() => {
-    setVerHistoryFileId(id);
-    setVerHistoryFileSecurity(security);
+    setVerHistoryFileId?.(id);
+    setVerHistoryFileSecurity?.(security);
   }, []);
 
   const [isEdit, setIsEdit] = useState(false);
@@ -62,7 +74,7 @@ const CommentEditor = ({
 
   const [inputValue, setInputValue] = useState(comment || "");
 
-  const onChangeInputValue = (e) => {
+  const onChangeInputValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     if (value.length > MAX_FILE_COMMENT_LENGTH) return;
 
@@ -77,17 +89,16 @@ const CommentEditor = ({
   const onSave = async () => {
     setIsLoading(true);
 
-    await fetchFileVersions(id, security).catch((err) => {
+    await fetchFileVersions?.(id, security).catch((err) => {
       toastr.error(err);
       setIsLoading(false);
     });
 
-    updateCommentVersion(id, inputValue, version).catch((err) => {
+    updateCommentVersion?.(id, inputValue, version).catch((err) => {
       toastr.error(err);
       setIsLoading(false);
     });
 
-    setInfoPanelSelection({ ...item, comment: inputValue });
     setIsEdit(false);
     setIsLoading(false);
   };
@@ -131,13 +142,13 @@ const CommentEditor = ({
               isLoading={isLoading}
               label={t("Common:SaveButton")}
               onClick={onSave}
-              size="extraSmall"
+              size={ButtonSize.extraSmall}
               primary
             />
             <Button
               label={t("Common:CancelButton")}
               onClick={onCancel}
-              size="extraSmall"
+              size={ButtonSize.extraSmall}
             />
           </div>
         </div>
@@ -146,9 +157,7 @@ const CommentEditor = ({
   );
 };
 
-export default inject(({ versionHistoryStore, infoPanelStore }) => {
-  const { setInfoPanelSelection } = infoPanelStore;
-
+export default inject(({ versionHistoryStore }: TStore) => {
   const {
     fetchFileVersions,
     updateCommentVersion,
@@ -161,7 +170,6 @@ export default inject(({ versionHistoryStore, infoPanelStore }) => {
   const editing = isEditingVersion || isEditing;
 
   return {
-    setInfoPanelSelection,
     fetchFileVersions,
     updateCommentVersion,
 
@@ -169,4 +177,4 @@ export default inject(({ versionHistoryStore, infoPanelStore }) => {
     setVerHistoryFileId,
     setVerHistoryFileSecurity,
   };
-})(CommentEditor);
+})(observer(CommentEditor));

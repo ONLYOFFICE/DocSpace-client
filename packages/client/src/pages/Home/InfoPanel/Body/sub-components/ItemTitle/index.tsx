@@ -24,54 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { TSelection } from "./ContextButton";
 
-import Members from "../views/Members";
-import History from "../views/History";
-import Details from "../views/Details";
-import NoItem from "../sub-components/NoItem";
-import SeveralItems from "../sub-components/SeveralItems";
-import Share from "../views/Share";
-import Plugin from "../views/Plugin";
+import RoomsItemHeader from "./RoomsItemTitle";
 
-class ViewHelper {
-  constructor(props) {
-    this.defaultProps = props.defaultProps;
-    this.membersProps = props.membersProps;
-    this.historyProps = props.historyProps;
-    this.detailsProps = props.detailsProps;
-    this.groupsProps = props.groupsProps;
-    this.galleryProps = props.galleryProps;
-    this.pluginProps = props.pluginProps;
-  }
+type ItemTitleProps = {
+  infoPanelSelection?: TSelection;
+  isNoItem?: boolean;
+  isGallery?: boolean;
+  isContacts?: boolean;
+};
 
-  MembersView = () => {
-    return <Members {...this.defaultProps} {...this.membersProps} />;
-  };
+const ItemTitle = ({
+  infoPanelSelection,
 
-  HistoryView = () => {
-    return <History {...this.defaultProps} {...this.historyProps} />;
-  };
+  isNoItem,
 
-  DetailsView = () => {
-    return <Details {...this.defaultProps} {...this.detailsProps} />;
-  };
+  isGallery,
+  isContacts,
+}: ItemTitleProps) => {
+  if (isNoItem || isContacts || !infoPanelSelection || isGallery) return null;
 
-  ShareView = () => {
-    return <Share {...this.defaultProps} />;
-  };
+  return <RoomsItemHeader selection={infoPanelSelection} />;
+};
 
-  NoItemView = () => {
-    return <NoItem {...this.defaultProps} />;
-  };
-
-  SeveralItemsView = () => {
-    return <SeveralItems {...this.defaultProps} />;
-  };
-
-  PluginView = () => {
-    return <Plugin {...this.pluginProps} />;
-  };
-}
-
-export default ViewHelper;
+export default ItemTitle;

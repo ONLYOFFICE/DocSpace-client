@@ -50,8 +50,7 @@ const History = ({
   openUser,
   isVisitor,
   isCollaborator,
-  calendarDay,
-  setCalendarDay,
+
   selectionHistoryTotal,
   fetchMoreHistory,
   setSelectionHistory,
@@ -157,85 +156,6 @@ const History = ({
   ]);
 
   useEffect(() => {
-    if (!calendarDay) return;
-
-    const heightTitleRoom = 80;
-    const heightDayWeek = 40;
-
-    const historyListNode = document.getElementById("history-list-info-panel");
-    if (!historyListNode) return;
-
-    const scroll = historyListNode.closest(".scroller");
-    if (!scroll) return;
-
-    let dateCoincidingWithCalendarDay = null;
-
-    selectionHistory.every((item) => {
-      if (dateCoincidingWithCalendarDay) return false;
-
-      item.feeds.forEach((feed) => {
-        if (feed.date.slice(0, 10) === calendarDay) {
-          dateCoincidingWithCalendarDay = feed.date;
-        }
-      });
-
-      return true;
-    });
-
-    if (dateCoincidingWithCalendarDay) {
-      const dayNode = historyListNode.getElementsByClassName(
-        dateCoincidingWithCalendarDay,
-      );
-      if (!dayNode[0]) return;
-
-      const y = dayNode[0].offsetTop - heightTitleRoom - heightDayWeek;
-      scroll.scrollTo(0, y);
-      setCalendarDay(null);
-
-      return;
-    }
-
-    // If there are no entries in the history for the selected day
-    const calendarDayModified = new Date(calendarDay);
-    let nearestNewerDate = null;
-
-    selectionHistory.every((item, indexItem) => {
-      if (nearestNewerDate) return false;
-
-      for (let i = item.feeds.length - 1; i >= 0; i--) {
-        const feed = item.feeds[i];
-
-        const date = new Date(feed.date);
-
-        // Stop checking all entries for one day
-        if (date > calendarDayModified) break;
-
-        // Looking for the nearest new date
-        if (date < calendarDayModified) {
-          // If there are no nearby new entries in the post history, then scroll to the last one
-          if (indexItem === 0) {
-            nearestNewerDate = feed.date;
-            break;
-          }
-
-          nearestNewerDate = selectionHistory[indexItem - 1].feeds[0].date;
-        }
-      }
-
-      return true;
-    });
-
-    if (!nearestNewerDate) return;
-
-    const dayNode = historyListNode.getElementsByClassName(nearestNewerDate);
-    if (!dayNode[0]) return;
-
-    const y = dayNode[0].offsetTop - heightTitleRoom - heightDayWeek;
-    scroll.scrollTo(0, y);
-    setCalendarDay(null);
-  }, [calendarDay]);
-
-  useEffect(() => {
     const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);
 
     return () => {
@@ -293,8 +213,6 @@ export default inject(
       historyWithFileList,
       getInfoPanelItemIcon,
       openUser,
-      calendarDay,
-      setCalendarDay,
       fetchMoreHistory,
       setSelectionHistory,
     } = infoPanelStore;
@@ -318,8 +236,6 @@ export default inject(
       openUser,
       isVisitor,
       isCollaborator,
-      calendarDay,
-      setCalendarDay,
       fetchMoreHistory,
       setSelectionHistory,
     };

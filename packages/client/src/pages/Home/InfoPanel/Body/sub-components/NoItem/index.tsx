@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { WithFlag } from "@docspace/shared/types";
@@ -64,10 +63,9 @@ const NoItem = ({
   isLockedSharedRoom,
   infoPanelSelection,
 }: NoItemsProps) => {
-  const { t } = useTranslation(["InfoPanel", "FormGallery"]);
-
   if (infoPanelSelection?.expired && infoPanelSelection?.external)
     return <ExpiredItem />;
+
   if (isLockedSharedRoom) return <LockedItem item={infoPanelSelection} />;
 
   if (isGroups || isUsers || isGuests)

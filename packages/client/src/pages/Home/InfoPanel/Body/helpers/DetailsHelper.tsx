@@ -42,17 +42,23 @@ import {
 } from "SRC_DIR/helpers/filesUtils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
+
 import CommentEditor from "../sub-components/CommentEditor";
+import { TCreatedBy, TTranslation } from "@docspace/shared/types";
+import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import { TUser } from "@docspace/shared/api/people/types";
 
 // Property Content Components
 
-const text = (value) => (
+const text = (value: React.ReactNode) => (
   <Text truncate className="property-content">
     {value}
   </Text>
 );
 
-const link = (txt, onClick) => (
+const link = (txt: React.ReactNode, onClick: () => void) => (
   <Link
     isTextOverflow
     className="property-content"
@@ -64,13 +70,17 @@ const link = (txt, onClick) => (
   </Link>
 );
 
-const tagList = (tags, selectTag) => (
+const tagList = (
+  tags: string[],
+  selectTag: (tag: { label: string }) => void,
+) => (
   <div className="property-tag_list">
     {tags.map((tag) => (
       <Tag
         key={tag}
         className="property-tag"
         label={tag}
+        tag={tag}
         onClick={() => selectTag({ label: tag })}
       />
     ))}
@@ -79,33 +89,55 @@ const tagList = (tags, selectTag) => (
 
 // Functional Helpers
 
-export const decodeString = (str) => {
+export const decodeString = (str: string) => {
   const regex = /&#([0-9]{1,4});/gi;
   return str
     ? str.replace(regex, (_, numStr) => String.fromCharCode(+numStr))
     : "...";
 };
 
-export const parseAndFormatDate = (date, culture) => {
-  const locale = getCookie(LANGUAGE) || culture;
-  const correctDate = getCorrectDate(locale, date);
-  return correctDate;
-};
-
 // InfoHelper Class
 
+type DetailsHelperProps = {
+  t: TTranslation;
+  item: TRoom | TFile | TFolder;
+  openUser: InfoPanelStore["openUser"];
+  culture: string;
+  isVisitor: boolean;
+  isCollaborator: boolean;
+  selectTag: (tag: { label: string }) => void;
+  isDefaultRoomsQuotaSet: boolean;
+  roomLifetime: TRoomLifetime;
+};
+
 class DetailsHelper {
-  constructor(props) {
+  t: TTranslation;
+
+  item: TRoom | TFile | TFolder;
+
+  openUser: InfoPanelStore["openUser"];
+
+  culture: string;
+
+  isVisitor: boolean;
+
+  isCollaborator: boolean;
+
+  selectTag: (tag: { label: string }) => void;
+
+  isDefaultRoomsQuotaSet: boolean;
+
+  roomLifetime: TRoomLifetime;
+
+  constructor(props: DetailsHelperProps) {
     this.t = props.t;
     this.item = props.item;
-    this.navigate = props.navigate;
     this.openUser = props.openUser;
     this.culture = props.culture;
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
-    this.setNewInfoPanelSelection = props.setNewInfoPanelSelection;
     this.roomLifetime = props.roomLifetime;
   }
 
@@ -120,7 +152,7 @@ class DetailsHelper {
 
   getNeededProperties = () => {
     return (
-      this.item.isRoom
+      "logo" in this.item && "roomType" in this.item
         ? [
             "Owner",
             this.item.providerKey && "Storage Type",
@@ -152,15 +184,15 @@ class DetailsHelper {
               "Date modified",
               "Last modified by",
               "Creation date",
-              this.item.expired && "Lifetime ends",
+              "expired" in this.item && this.item.expired && "Lifetime ends",
               "Versions",
               this.item.order && "Index",
               "Comments",
             ]
-    ).filter((nP) => !!nP);
+    ).filter((nP) => nP) as string[];
   };
 
-  getPropertyTitle = (propertyId) => {
+  getPropertyTitle = (propertyId: string) => {
     switch (propertyId) {
       case "Owner":
         return this.t("Common:Owner");
@@ -199,7 +231,7 @@ class DetailsHelper {
       case "Tags":
         return this.t("Common:Tags");
       case "Storage":
-        if (this.item.usedSpace !== undefined) {
+        if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
           return this.isDefaultRoomsQuotaSet &&
             this.item.quotaLimit !== undefined
             ? this.t("Common:StorageAndQuota")
@@ -212,7 +244,7 @@ class DetailsHelper {
     }
   };
 
-  getPropertyContent = (propertyId) => {
+  getPropertyContent = (propertyId: string) => {
     switch (propertyId) {
       case "Owner":
         return this.getAuthorDecoration("createdBy");
@@ -227,7 +259,7 @@ class DetailsHelper {
       case "Storage Type":
         return this.getItemStorageType();
       case "Storage account":
-        return this.text("...");
+        return text("...");
 
       case "File extension":
         return this.getItemFileExtention();
@@ -259,13 +291,15 @@ class DetailsHelper {
     }
   };
 
-  /// Property  //
-
   getAuthorDecoration = (byField = "createdBy") => {
-    const onClick = () => this.openUser(this.item[byField], this.navigate);
+    const onClick = () =>
+      this.openUser(this.item[byField as keyof typeof this.item] as TCreatedBy);
 
-    const isAnonim = this.item[byField]?.isAnonim;
-    const displayName = this.item[byField]?.displayName;
+    const createdBy = this.item[
+      byField as keyof typeof this.item
+    ] as TCreatedBy;
+    const isAnonim = createdBy?.isAnonim;
+    const displayName = createdBy?.displayName;
 
     let name = displayName ? decode(displayName) : "";
 
@@ -278,25 +312,30 @@ class DetailsHelper {
       : link(name, onClick);
   };
 
-  getItemType = (t) => {
+  getItemType = (t: TTranslation) => {
+    if (!("fileType" in this.item) || !("roomType" in this.item)) return null;
     return text(
-      this.item.isRoom
+      "logo" in this.item
         ? getRoomTypeName(this.item.roomType, t)
         : getFileTypeName(this.item.fileType, t),
     );
   };
 
   getItemFileExtention = () => {
+    if (!("fileExst" in this.item)) return null;
     return text(
       this.item.fileExst ? this.item.fileExst.split(".")[1].toUpperCase() : "-",
     );
   };
 
   getItemStorageType = () => {
+    if (!("providerKey" in this.item)) return null;
     return text(getProviderTranslation(this.item.providerKey, this.t));
   };
 
   getItemContent = () => {
+    if (!("foldersCount" in this.item) || !("filesCount" in this.item))
+      return null;
     return text(
       `${this.t("Common:Folders")}: ${this.item.foldersCount} | ${this.t(
         "Common:Files",
@@ -305,58 +344,59 @@ class DetailsHelper {
   };
 
   getItemSize = () => {
+    if (!("contentLength" in this.item)) return null;
+
     return text(this.item.contentLength);
   };
 
   getItemIndex = () => {
+    if (!("order" in this.item)) return null;
     return text(this.item.order);
   };
 
   getItemDateModified = () => {
-    return text(parseAndFormatDate(this.item.updated, this.culture));
+    return text(getCorrectDate(this.culture, this.item.updated));
   };
 
   getItemCreationDate = () => {
-    return text(parseAndFormatDate(this.item.created, this.culture));
+    return text(getCorrectDate(this.culture, this.item.created));
   };
 
   getItemExpiredDate = () => {
+    if (!("expired" in this.item)) return null;
     return this.roomLifetime?.deletePermanently
       ? text(
           this.t("Files:WillBeDeletedPermanently", {
-            date: parseAndFormatDate(this.item.expired, this.culture),
+            date: getCorrectDate(this.culture, this.item.expired as string),
           }),
         )
       : text(
           this.t("Files:WillBeMovedToTrash", {
-            date: parseAndFormatDate(this.item.expired, this.culture),
+            date: getCorrectDate(this.culture, this.item.expired as string),
           }),
         );
   };
 
   getItemVersions = () => {
-    return text(this.item.version);
+    if ("version" in this.item) return text(this.item.version);
   };
 
   getItemComments = () => {
-    return <CommentEditor t={this.t} item={this.item} />;
+    if (!("fileExst" in this.item)) return null;
+
+    return <CommentEditor item={this.item} />;
   };
 
   getItemTags = () => {
-    return tagList(this.item.tags, this.selectTag);
+    if ("tags" in this.item) return tagList(this.item.tags, this.selectTag);
   };
 
   getQuotaItem = () => {
-    const onSuccess = () => {
-      this.setNewInfoPanelSelection();
-    };
-
-    if (this.item.usedSpace !== undefined) {
+    if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
       return (
         <SpaceQuota
           item={this.item}
           isReadOnly={!this.item?.security?.EditRoom}
-          onSuccess={onSuccess}
         />
       );
     }

@@ -40,6 +40,7 @@ import {
   setTemplateAvailable,
   updateRoomMemberRole,
 } from "@docspace/shared/api/rooms";
+import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -62,8 +63,6 @@ class CreateEditRoomStore {
 
   settingsStore = null;
 
-  infoPanelStore = null;
-
   currentQuotaStore = null;
 
   watermarksSettings = {};
@@ -83,7 +82,6 @@ class CreateEditRoomStore {
     tagsStore,
     thirdPartyStore,
     settingsStore,
-    infoPanelStore,
     currentQuotaStore,
     clientLoadingStore,
     dialogsStore,
@@ -97,7 +95,6 @@ class CreateEditRoomStore {
     this.filesActionsStore = filesActionsStore;
     this.thirdPartyStore = thirdPartyStore;
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
     this.currentQuotaStore = currentQuotaStore;
     this.clientLoadingStore = clientLoadingStore;
     this.dialogsStore = dialogsStore;
@@ -668,7 +665,6 @@ class CreateEditRoomStore {
   onOpenNewRoom = async (room) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { setSelection } = this.filesStore;
-    const { setView, setIsVisible } = this.infoPanelStore;
     const { getPublicKey } = this.filesActionsStore;
 
     const state = {
@@ -699,8 +695,8 @@ class CreateEditRoomStore {
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
     if (isDesktop()) {
-      setIsVisible(true);
-      setView("info_members");
+      showInfoPanel();
+      openMembersTab();
     }
   };
 }

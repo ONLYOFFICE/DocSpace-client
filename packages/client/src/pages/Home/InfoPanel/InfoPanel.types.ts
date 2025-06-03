@@ -32,25 +32,8 @@ import {
   RoomMember,
   TFeedAction,
   TFeedData,
-  TLogo,
   TRoom,
 } from "@docspace/shared/api/rooms/types";
-
-import { Nullable } from "@docspace/shared/types";
-import { TPeopleListItem } from "SRC_DIR/store/contacts/UsersStore";
-import { TSelectedFolder } from "SRC_DIR/store/SelectedFolderStore";
-
-// export type TInfoPanelSelection =
-//   | TFile
-//   | TFolder
-//   | (TFile | TFolder)[]
-//   | TRoom
-//   | TRoom[]
-//   | TUser
-//   | TUser[]
-//   | TGroup
-//   | TGroup[]
-//   | null;
 
 export enum TInfoPanelMemberType {
   users = "users",
@@ -58,13 +41,6 @@ export enum TInfoPanelMemberType {
   expected = "expected",
   guests = "guests",
   administrators = "administrators",
-}
-
-export const enum InfoPanelView {
-  infoMembers = "info_members",
-  infoHistory = "info_history",
-  infoDetails = "info_details",
-  infoShare = "info_share",
 }
 
 export type HistoryFilter = {
@@ -98,20 +74,11 @@ type TMember = TTitleMember | TInfoPanelMember;
 
 export type TMemberTuple = TMember[];
 
-export type TSelection = (
+export type TSelection =
+  | TRoom
   | TFile
   | TFolder
-  | TPeopleListItem
-  | TGroup
-  | TSelectedFolder
-  | TRoom
-) & {
-  isRoom?: boolean;
-  logo?: Nullable<TLogo>;
-  icon?: string | TLogo;
-};
-
-export type TInfoPanelSelection = Nullable<TSelection>;
+  | Array<TRoom | TFile | TFolder>;
 
 export type TSelectionHistory = {
   day: string;

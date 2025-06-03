@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import debounce from "lodash.debounce";
+import debounce from "lodash/debounce";
 import { inject } from "mobx-react";
 
 import XIconReactSvgUrl from "PUBLIC_DIR/images/x.react.svg?url";
@@ -36,18 +36,20 @@ import {
 } from "@docspace/shared/components/text-input";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+
 import { StyledSearchContainer } from "../styles/common";
 
-interface SearchProps {
-  setSearchValue: (value: string) => void;
-  resetSearch: () => void;
-}
+type SearchProps = {
+  setSearchValue?: InfoPanelStore["setSearchValue"];
+  resetSearch?: InfoPanelStore["resetSearch"];
+};
 
 const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   const [value, setValue] = useState("");
 
   const onClose = () => {
-    resetSearch();
+    resetSearch?.();
   };
 
   const onEscapeUp = (e: KeyboardEvent) => {
@@ -58,7 +60,7 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   };
 
   const debouncedSearch = useCallback(
-    debounce((debouncedValue: string) => setSearchValue(debouncedValue), 300),
+    debounce((debouncedValue: string) => setSearchValue?.(debouncedValue), 300),
     [],
   );
 
@@ -101,7 +103,7 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   );
 };
 
-export default inject(({ infoPanelStore }) => ({
+export default inject(({ infoPanelStore }: TStore) => ({
   resetSearch: infoPanelStore.resetSearch,
   setSearchValue: infoPanelStore.setSearchValue,
 }))(Search);

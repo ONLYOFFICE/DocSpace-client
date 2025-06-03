@@ -50,20 +50,17 @@ import {
 import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
-  getExternalLinks,
   editExternalLink,
   addExternalLink,
   // checkIsPDFForm,
   getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
-import isEqual from "lodash/isEqual";
 
 import api from "@docspace/shared/api";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { TGroup } from "@docspace/shared/api/groups/types";
 import { TUser } from "@docspace/shared/api/people/types";
-import { RoomMember, TLogo } from "@docspace/shared/api/rooms/types";
-import { Nullable, TTranslation } from "@docspace/shared/types";
+import { RoomMember, TLogo, TRoom } from "@docspace/shared/api/rooms/types";
+import { Nullable, TCreatedBy, TTranslation } from "@docspace/shared/types";
 import { ShareProps } from "@docspace/shared/components/share/Share.types";
 import { TError } from "@docspace/shared/utils/axiosClient";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -82,11 +79,9 @@ import PublicRoomStore from "./PublicRoomStore";
 import TreeFoldersStore from "./TreeFoldersStore";
 import {
   HistoryFilter,
-  InfoPanelView,
   TInfoPanelMember,
   TInfoPanelMembers,
   TInfoPanelMemberType,
-  TInfoPanelSelection,
   TMemberTuple,
   TSelection,
   TSelectionHistory,
@@ -104,15 +99,19 @@ const observedKeys = [
   "rootFolderId",
 ] as const;
 
+export const enum InfoPanelView {
+  infoMembers = "info_members",
+  infoHistory = "info_history",
+  infoDetails = "info_details",
+  infoShare = "info_share",
+}
+
 class InfoPanelStore {
   userStore = {} as UserStore;
 
   isVisible = false;
 
   isMobileHidden = false;
-
-  infoPanelSelection: Nullable<TInfoPanelSelection> = null;
-  // getUserContextOptions: ContactsConextOptionsStore["getUserContextOptions"];
 
   selectionHistory: Nullable<TSelectionHistory[]> = null;
 
@@ -142,7 +141,7 @@ class InfoPanelStore {
 
   templateAvailableToEveryone = false;
 
-  infoPanelRoom: Nullable<TInfoPanelSelection> = null;
+  infoPanelRoom: Nullable<TRoom> = null;
 
   membersIsLoading = false;
 
@@ -156,8 +155,6 @@ class InfoPanelStore {
 
   searchValue = "";
 
-  infoPanelSelectedGroup: TGroup | null = null;
-
   historyFilter = {
     page: 0,
     pageCount: 100,
@@ -165,27 +162,48 @@ class InfoPanelStore {
     startIndex: 0,
   };
 
-  groupSelection: Nullable<TGroup> | TGroup[] = null;
-
-  selectedGroup: Nullable<TGroup> = null;
-
   constructor(userStore: UserStore) {
     this.userStore = userStore;
 
     makeAutoObservable(this);
   }
 
-  setGroupSelection = (group: Nullable<TGroup> | TGroup[]) => {
-    this.groupSelection = group;
+  getInfoPanelItemIcon = (
+    item: TSelection,
+    size: number,
+  ): TLogo | string | undefined => {
+    if (!item) return undefined;
+
+    const isRoom = "isRoom" in item && item.isRoom;
+    const roomType = "roomType" in item && item.roomType;
+
+    const isFolder = "isFolder" in item && item.isFolder;
+    const folderType = "type" in item && item.type;
+
+    if ((isRoom || roomType) && "logo" in item)
+      return item.logo?.cover ? item.logo : item.logo?.medium;
+
+    if (isFolder)
+      return this.filesSettingsStore.getIconByFolderType(folderType, size);
+
+    const fileExst = "fileExst" in item && item.fileExst;
+
+    return this.filesSettingsStore.getIcon(size, fileExst || ".file");
   };
 
-  updateGroupSelection = (group: TGroup | null) => {
-    this.groupSelection = group;
-  };
+  get infoPanelSelection(): Nullable<TSelection> {
+    const selection = this.filesStore.selection.length
+      ? this.filesStore.selection.length === 1
+        ? this.filesStore.selection[0]
+        : this.filesStore.selection
+      : (this.filesStore.bufferSelection ?? { ...this.selectedFolderStore });
 
-  setGroup = (group: TGroup | null) => {
-    this.selectedGroup = group;
-  };
+    if (!selection) return null;
+
+    const icon = this.getInfoPanelItemIcon(selection, 32);
+
+    return { ...selection, icon };
+  }
 
   // Setters
 
@@ -201,9 +219,12 @@ class InfoPanelStore {
       this.selectedFolderStore?.rootFolderType === FolderType.Archive;
 
     const isFolderOpenedThroughSectionHeader =
-      (this.infoPanelSelectedItems.length &&
-        this.infoPanelSelectedItems[0].id === this.selectedFolderStore?.id) ||
-      this.infoPanelSelectedItems.length === 0;
+      (this.infoPanelSelection &&
+        !Array.isArray(this.infoPanelSelection) &&
+        this.infoPanelSelection.id === this.selectedFolderStore?.id) ||
+      (this.infoPanelSelection &&
+        Array.isArray(this.infoPanelSelection) &&
+        this.infoPanelSelection.length === 0);
 
     if (
       (selectedFolderIsRoomOrFolderInRoom ||
@@ -219,11 +240,13 @@ class InfoPanelStore {
     this.isScrollLocked = false;
   };
 
-  setIsMobileHidden = (mobileHidden: boolean) =>
-    (this.isMobileHidden = mobileHidden);
+  setIsMobileHidden = (mobileHidden: boolean) => {
+    this.isMobileHidden = mobileHidden;
+  };
 
-  setShowSearchBlock = (showSearchBlock: boolean) =>
-    (this.showSearchBlock = showSearchBlock);
+  setShowSearchBlock = (showSearchBlock: boolean) => {
+    this.showSearchBlock = showSearchBlock;
+  };
 
   setSearchValue = (value: string) => {
     this.searchValue = value;
@@ -241,17 +264,17 @@ class InfoPanelStore {
     this.selectionHistory = obj;
     this.selectionHistoryTotal = total;
 
-    if (obj) {
-      if (this.infoPanelSelection) {
-        const isFolder =
-          "isFolder" in this.infoPanelSelection &&
-          this.infoPanelSelection.isFolder;
-        const isRoom =
-          "isRoom" in this.infoPanelSelection && this.infoPanelSelection.isRoom;
+    // if (obj) {
+    //   if (this.infoPanelSelection) {
+    //     const isFolder =
+    //       "isFolder" in this.infoPanelSelection &&
+    //       this.infoPanelSelection.isFolder;
+    //     const isRoom =
+    //       "isRoom" in this.infoPanelSelection && this.infoPanelSelection.isRoom;
 
-        this.historyWithFileList = Boolean(isFolder || isRoom);
-      }
-    }
+    //     this.historyWithFileList = Boolean(isFolder || isRoom);
+    //   }
+    // }
   };
 
   resetView = () => {
@@ -265,8 +288,6 @@ class InfoPanelStore {
       view === InfoPanelView.infoMembers ? InfoPanelView.infoDetails : view;
     this.isScrollLocked = false;
     if (view !== InfoPanelView.infoMembers) this.setInfoPanelMembers(null);
-
-    this.setNewInfoPanelSelection();
   };
 
   setIsScrollLocked = (isScrollLocked: boolean) => {
@@ -279,50 +300,8 @@ class InfoPanelStore {
 
   // Selection helpers //
 
-  get infoPanelSelectedItems() {
-    const { selection: filesSelection, bufferSelection: filesBufferSelection } =
-      this.filesStore;
-
-    const {
-      selection: peopleSelection,
-      bufferSelection: peopleBufferSelection,
-    } = this.peopleStore.usersStore;
-
-    const {
-      selection: groupsSelection,
-      bufferSelection: groupsBufferSelection,
-    } = this.peopleStore.groupsStore!;
-
-    const contactsTab = this.peopleStore.usersStore.contactsTab;
-
-    const isGroups = contactsTab === "groups";
-
-    if (!isGroups && contactsTab) {
-      if (peopleSelection.length) return [...peopleSelection];
-      if (peopleBufferSelection) return [peopleBufferSelection];
-    }
-
-    if (isGroups) {
-      if (groupsSelection.length) return [...groupsSelection];
-      if (groupsBufferSelection) return [groupsBufferSelection];
-    }
-
-    if (filesSelection?.length) return [...filesSelection];
-    if (filesBufferSelection) return [filesBufferSelection];
-
-    return [];
-  }
-
   getInfoPanelSelectedFolder = () => {
     const isRooms = this.getIsRooms();
-    const currentGroup = this.peopleStore.groupsStore?.currentGroup;
-
-    if (getContactsView() === "groups") {
-      return {
-        ...currentGroup,
-        isGroup: true,
-      } as TGroup;
-    }
 
     return this.roomsView === InfoPanelView.infoMembers &&
       this.infoPanelRoom &&
@@ -330,16 +309,6 @@ class InfoPanelStore {
       ? this.infoPanelRoom
       : this.selectedFolderStore.getSelectedFolder();
   };
-
-  get infoPanelCurrentSelection() {
-    const { selection, bufferSelection } = this.filesStore;
-
-    return this.infoPanelSelection
-      ? this.infoPanelSelection
-      : selection.length
-        ? selection[0]
-        : bufferSelection || null;
-  }
 
   get isRoomMembersPanelOpen() {
     return (
@@ -349,196 +318,27 @@ class InfoPanelStore {
   }
 
   get withPublicRoomBlock() {
-    return this.infoPanelCurrentSelection?.security?.EditAccess;
+    return this.infoPanelSelection?.security?.EditAccess;
   }
-
-  getViewItem = () => {
-    const isRooms = this.getIsRooms();
-
-    const pathname = window.location.pathname.toLowerCase();
-    const isMedia = pathname.indexOf("view") !== -1;
-
-    if (
-      (isRooms || isMedia) &&
-      this.roomsView === InfoPanelView.infoMembers &&
-      !this.infoPanelSelectedItems[0]?.isRoom
-    ) {
-      return this.getInfoPanelSelectedFolder();
-    }
-    return this.infoPanelSelectedItems[0];
-  };
-
-  setNewInfoPanelSelection = () => {
-    const selectedItems = this.infoPanelSelectedItems; // files list
-    const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
-    let newInfoPanelSelection = this.infoPanelSelection;
-
-    if (!selectedItems.length) {
-      newInfoPanelSelection = this.normalizeSelection(selectedFolder);
-    } else if (selectedItems.length === 1) {
-      newInfoPanelSelection = this.normalizeSelection(
-        this.getViewItem() ?? newInfoPanelSelection,
-      );
-    } else {
-      newInfoPanelSelection = null;
-    }
-
-    if (!selectedItems.length && newInfoPanelSelection) {
-      if (
-        "parentId" in newInfoPanelSelection &&
-        !newInfoPanelSelection.parentId
-      ) {
-        this.setSelectionHistory(null, null);
-      }
-    }
-
-    this.setInfoPanelSelection(newInfoPanelSelection);
-    this.resetSearch();
-  };
-
-  normalizeSelection = (
-    selection: TInfoPanelSelection | TSelection,
-  ): TInfoPanelSelection => {
-    if (!selection) {
-      return null;
-    }
-
-    return {
-      ...selection,
-      icon: this.getInfoPanelItemIcon(selection, 32),
-    };
-  };
-
-  updateRoomLogoCacheBreaker = () => {
-    const logo = this.infoPanelSelection?.logo;
-
-    if (!this.infoPanelSelection || !logo) {
-      return;
-    }
-
-    this.setInfoPanelSelection({
-      ...this.infoPanelSelection,
-      logo: {
-        small: `${logo.small.split("?")[0]}?${new Date().getTime()}`,
-        medium: `${logo.medium.split("?")[0]}?${new Date().getTime()}`,
-        large: `${logo.large.split("?")[0]}?${new Date().getTime()}`,
-        original: `${logo.original.split("?")[0]}?${new Date().getTime()}`,
-      },
-    });
-  };
-
-  updateInfoPanelSelection = async (
-    infoPanelSelection: TInfoPanelSelection,
-  ) => {
-    if (infoPanelSelection) {
-      this.setInfoPanelSelection(this.normalizeSelection(infoPanelSelection));
-      if (
-        !Array.isArray(this.infoPanelRoom) &&
-        this.infoPanelRoom?.id === infoPanelSelection?.id
-      ) {
-        this.setInfoPanelRoom(this.normalizeSelection(infoPanelSelection));
-      }
-      return;
-    }
-    this.setNewInfoPanelSelection();
-
-    if (!this.getIsRooms) return;
-
-    const currentFolderRoomId =
-      this.selectedFolderStore.pathParts &&
-      this.selectedFolderStore.pathParts[1]?.id;
-
-    if (!currentFolderRoomId) return;
-
-    const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
-
-    const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
-      (f) => f.id === currentFolderRoomId,
-    );
-    if (roomIndex > -1) {
-      this.selectedFolderStore.navigationPath[roomIndex].title =
-        newInfoPanelSelection.title;
-    }
-
-    this.setInfoPanelSelection(this.normalizeSelection(newInfoPanelSelection));
-  };
-
-  isItemChanged = (oldItem: TSelectedFolder, newItem: TSelectedFolder) => {
-    for (let i = 0; i < observedKeys.length; i++) {
-      const value = observedKeys[i] as keyof TSelectedFolder;
-      if (oldItem[value] !== newItem[value]) return true;
-    }
-    return false;
-  };
-
-  // Icon helpers //
-
-  getInfoPanelItemIcon = (
-    item: TInfoPanelSelection | TSelection,
-    size: number,
-  ): TLogo | string | undefined => {
-    if (!item) return undefined;
-
-    const isRoom = "isRoom" in item && item.isRoom;
-    const roomType = "roomType" in item && item.roomType;
-
-    const isFolder = "isFolder" in item && item.isFolder;
-    const folderType = "type" in item && item.type;
-
-    const rootFolderType = "rootFolderType" in item && item.rootFolderType;
-    const fileExst = "fileExst" in item && item.fileExst;
-
-    // Room case
-    if (isRoom || roomType) {
-      if (rootFolderType === FolderType.Archive && !item?.logo?.cover) {
-        return item.logo?.medium;
-      }
-
-      if (item.logo?.cover) {
-        return item.logo;
-      }
-
-      const icon = this.filesSettingsStore.getIcon(
-        size,
-        "",
-        "",
-        null,
-        roomType || undefined,
-        true,
-      );
-
-      return icon ?? item.logo?.medium ?? item.icon;
-    }
-
-    // Folder case
-    if (isFolder) {
-      return this.filesSettingsStore.getIconByFolderType(folderType, size);
-    }
-
-    // File case
-    return this.filesSettingsStore.getIcon(size, fileExst || ".file");
-  };
 
   // User link actions //
 
-  openUser = async (user: TUser, navigate: NavigateFunction) => {
+  openUser = async (user: TCreatedBy) => {
     if (user.id === this.userStore?.user?.id) {
       this.openSelfProfile();
       return;
     }
 
-    const fetchedUser = await this.fetchUser(user.id);
-    this.openAccountsWithSelectedUser(fetchedUser, navigate);
+    const fetchedUser: TUser = await this.fetchUser(user.id);
+
+    this.openAccountsWithSelectedUser(fetchedUser);
   };
 
   openSelfProfile = () => {
     this.peopleStore.profileActionsStore.onProfileClick();
   };
 
-  openAccountsWithSelectedUser = async (
-    user: TUser,
-    navigate: NavigateFunction,
-  ) => {
+  openAccountsWithSelectedUser = async (user: TUser) => {
     const path = [
       window.ClientConfig?.proxy?.url,
       config.homepage,
@@ -560,7 +360,7 @@ class InfoPanelStore {
     this.treeFoldersStore.setSelectedNode(["accounts"]);
     this.filesStore.resetSelections();
 
-    navigate(combineUrl(...path), { state: { user } });
+    window.DocSpace.navigate(combineUrl(...path), { state: { user } });
   };
 
   fetchUser = async (userId: string) => {
@@ -629,29 +429,8 @@ class InfoPanelStore {
     this.templateAvailableToEveryone = isAvailable;
   };
 
-  isPeopleListItem(
-    selection: TInfoPanelSelection,
-  ): selection is TPeopleListItem {
-    return (
-      typeof selection === "object" &&
-      selection !== null &&
-      "email" in selection &&
-      "displayName" in selection
-    );
-  }
-
-  setInfoPanelSelection = (infoPanelSelection: TInfoPanelSelection) => {
-    if (isEqual(infoPanelSelection, this.infoPanelSelection)) return;
-
-    this.setInfoPanelMembers(null);
-    this.infoPanelSelection = infoPanelSelection;
-    this.isScrollLocked = false;
-  };
-
   setInfoPanelRoom = (infoPanelRoom: TInfoPanelSelection) => {
-    this.infoPanelRoom = infoPanelRoom
-      ? this.normalizeSelection(infoPanelRoom)
-      : infoPanelRoom;
+    this.infoPanelRoom = infoPanelRoom;
   };
 
   setMembersIsLoading = (membersIsLoading: boolean) => {
@@ -1115,11 +894,6 @@ class InfoPanelStore {
     return res;
   };
 
-  getFileLinks = async (...args: Parameters<typeof getExternalLinks>) => {
-    const res = await getExternalLinks(...args);
-    return res;
-  };
-
   editFileLink: ShareProps["editFileLink"] = async (
     fileId,
     linkId,
@@ -1164,10 +938,6 @@ class InfoPanelStore {
 
   setShareChanged = (shareChanged: boolean) => {
     this.shareChanged = shareChanged;
-  };
-
-  setCalendarDay = (calendarDay: Nullable<string>) => {
-    this.calendarDay = calendarDay;
   };
 }
 

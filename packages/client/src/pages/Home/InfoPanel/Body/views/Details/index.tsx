@@ -24,30 +24,64 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router";
-import { inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { useState, useEffect, useCallback } from "react";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
-import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-import { Button } from "@docspace/shared/components/button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
+
+import FilesStore from "SRC_DIR/store/FilesStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
+
 import DetailsHelper from "../../helpers/DetailsHelper";
+
 import { StyledProperties, StyledSubtitle } from "../../styles/common";
 
-import {
-  StyledNoThumbnail,
-  StyledThumbnail,
-  StyledPublicRoomBar,
-} from "../../styles/details";
+import styles from "./Details.module.scss";
+
+type DetailsProps = {
+  selection: TRoom | TFile | TFolder;
+
+  isArchive: boolean;
+
+  culture?: SettingsStore["culture"];
+
+  createThumbnail?: FilesStore["createThumbnail"];
+
+  getInfoPanelItemIcon?: InfoPanelStore["getInfoPanelItemIcon"];
+  openUser?: InfoPanelStore["openUser"];
+
+  isVisitor?: boolean;
+  isCollaborator?: boolean;
+
+  selectTag?: FilesActionStore["selectTag"];
+  onCreateRoomFromTemplate?: FilesActionStore["onCreateRoomFromTemplate"];
+
+  isDefaultRoomsQuotaSet?: boolean;
+
+  getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
+
+  onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
+
+  roomLifetime?: TRoomLifetime;
+};
 
 const Details = ({
-  t,
   selection,
   culture,
   createThumbnail,
@@ -58,77 +92,87 @@ const Details = ({
   selectTag,
   isArchive,
   isDefaultRoomsQuotaSet,
-  setNewInfoPanelSelection,
   getLogoCoverModel,
   onChangeFile,
   roomLifetime,
   onCreateRoomFromTemplate,
-}) => {
-  const [itemProperties, setItemProperties] = useState([]);
-
+}: DetailsProps) => {
+  const { t } = useTranslation([
+    "InfoPanel",
+    "Common",
+    "Translations",
+    "Files",
+    "RoomLogoCover",
+  ]);
+  const [itemProperties, setItemProperties] = useState<
+    ReturnType<DetailsHelper["getPropertyList"]>
+  >([]);
   const [isThumbnailError, setIsThumbmailError] = useState(false);
+
   const onThumbnailError = () => setIsThumbmailError(true);
 
-  const navigate = useNavigate();
-
   const detailsHelper = new DetailsHelper({
-    isCollaborator,
-    isVisitor,
+    isCollaborator: isCollaborator!,
+    isVisitor: isVisitor!,
     t,
     item: selection,
-    openUser,
-    navigate,
-    culture,
-    selectTag,
-    isDefaultRoomsQuotaSet,
-    setNewInfoPanelSelection,
-    roomLifetime,
+    openUser: openUser!,
+    culture: culture!,
+    selectTag: selectTag!,
+    isDefaultRoomsQuotaSet: isDefaultRoomsQuotaSet!,
+    roomLifetime: roomLifetime!,
   });
 
   const createThumbnailAction = useCallback(async () => {
     setItemProperties(detailsHelper.getPropertyList());
 
     if (
+      "isFolder" in selection &&
       !selection.isFolder &&
+      "thumbnailStatus" in selection &&
       selection.thumbnailStatus === 0 &&
       (selection.fileType === FileType.Image ||
         selection.fileType === FileType.Spreadsheet ||
         selection.fileType === FileType.Presentation ||
         selection.fileType === FileType.Document)
     ) {
-      await createThumbnail(selection.id);
+      await createThumbnail?.(selection.id);
     }
   }, [selection]);
 
-  const onChangeFileContext = (e) => {
-    onChangeFile(e, t);
+  const onChangeFileContext = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeFile?.(e, t);
   };
 
   const onCreateRoom = () => {
-    onCreateRoomFromTemplate(selection);
+    onCreateRoomFromTemplate?.(selection);
   };
 
   useEffect(() => {
     createThumbnailAction();
   }, [selection, createThumbnailAction]);
 
-  const currentIcon = selection?.logo?.large
-    ? selection?.logo?.large
-    : selection?.logo?.cover
-      ? selection?.logo
-      : getInfoPanelItemIcon(selection, 96);
+  const currentIcon =
+    "logo" in selection && selection?.logo?.large
+      ? selection?.logo?.large
+      : "logo" in selection && selection?.logo?.cover
+        ? selection?.logo
+        : getInfoPanelItemIcon?.(selection, 96);
 
-  const badgeUrl = getRoomBadgeUrl(selection, 24);
+  const badgeUrl =
+    "external" in selection ? getRoomBadgeUrl(selection, 24) : undefined;
 
-  const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.large;
-  const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
+  const isLoadedRoomIcon =
+    "logo" in selection && !!(selection.logo?.cover || selection.logo?.large);
+  const showDefaultRoomIcon = !isLoadedRoomIcon;
 
-  const hasImage = selection?.logo?.original;
-  const model = getLogoCoverModel(t, hasImage);
+  const hasImage = "logo" in selection && selection?.logo?.original;
+  const model = getLogoCoverModel?.(t, hasImage);
 
-  const tooltipContent = selection?.external
-    ? t("Files:RecentlyOpenedTooltip")
-    : null;
+  const tooltipContent =
+    "external" in selection && selection?.external
+      ? t("Files:RecentlyOpenedTooltip")
+      : null;
 
   const isTemplate =
     selection && "isTemplate" in selection && selection.isTemplate;
@@ -136,9 +180,9 @@ const Details = ({
   return (
     <>
       {isTemplate ? (
-        <StyledPublicRoomBar>
+        <div className={styles.publicRoomBar}>
           <PublicRoomBar
-            className="room-template_bar"
+            className={styles.roomTemplateBar}
             headerText={t("Files:RoomTemplate")}
             iconName={FormReactSvgUrl}
             bodyText={
@@ -146,64 +190,70 @@ const Details = ({
                 <Text
                   fontSize="12px"
                   fontWeight={400}
-                  className="room-template_text"
+                  className={styles.roomTemplateText}
                 >
                   {t("Files:RoomTemplateDescription")}
                 </Text>
                 <Button
                   label={t("Common:CreateRoom")}
-                  className="room-template_button"
+                  className={styles.roomTemplateButton}
                   onClick={onCreateRoom}
-                  size="extraSmall"
+                  size={ButtonSize.extraSmall}
                   primary
                 />
               </>
             }
           />
-        </StyledPublicRoomBar>
-      ) : selection.thumbnailUrl && !isThumbnailError ? (
-        <StyledThumbnail
-          isImageOrMedia={
-            selection?.viewAccessibility?.ImageView ||
-            selection?.viewAccessibility?.MediaView
-          }
+        </div>
+      ) : "thumbnailUrl" in selection &&
+        selection?.thumbnailUrl &&
+        !isThumbnailError ? (
+        <div
+          className={classNames(styles.thumbnail, {
+            [styles.isImageOrMedia]:
+              "viewAccessibility" in selection &&
+              (selection?.viewAccessibility?.ImageView ||
+                selection?.viewAccessibility?.MediaView),
+          })}
         >
           <img
-            src={`${selection.thumbnailUrl}&size=1280x720`}
+            src={`${"thumbnailUrl" in selection ? selection.thumbnailUrl : ""}&size=1280x720`}
             alt="thumbnail-image"
-            // height={260}
-            // width={360}
             onError={onThumbnailError}
           />
-        </StyledThumbnail>
+        </div>
       ) : (
-        <StyledNoThumbnail>
+        <div className={styles.noThumbnail}>
           <RoomIcon
-            color={selection.logo?.color}
-            title={selection.title}
+            color={"logo" in selection ? selection.logo?.color : undefined}
+            title={"title" in selection ? selection.title : ""}
             isArchive={isArchive}
             size="96px"
             radius="16px"
-            isRoom={selection.isRoom}
+            // isRoom={"isRoom" in selection ? selection.isRoom : false}
             showDefault={showDefaultRoomIcon}
-            imgClassName={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
-              selection.isRoom &&
+            imgClassName={`no-thumbnail-img ${"isRoom" in selection && selection.isRoom && "is-room"} ${
+              "logo" in selection &&
               !isArchive &&
               selection.logo?.large &&
               "custom-logo"
             }`}
             logo={currentIcon}
             model={model}
-            withEditing={
-              (selection.isRoom && selection.security?.EditRoom) || false
-            }
+            // withEditing={
+            //   ("isRoom" in selection &&
+            //     "EditRoom" in selection.security &&
+            //     selection.isRoom &&
+            //     selection.security?.EditRoom) ||
+            //   false
+            // }
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
-            badgeUrl={badgeUrl}
+            badgeUrl={badgeUrl ?? undefined}
             tooltipContent={tooltipContent}
             tooltipId="info-panel-details_icon-tooltip"
           />
-        </StyledNoThumbnail>
+        </div>
       )}
       <StyledSubtitle>
         <Text fontWeight="600" fontSize="14px">
@@ -239,14 +289,8 @@ export default inject(
     dialogsStore,
     avatarEditorDialogStore,
     selectedFolderStore,
-  }) => {
-    const {
-      infoPanelSelection,
-      getInfoPanelItemIcon,
-      openUser,
-      setNewInfoPanelSelection,
-      infoPanelRoom,
-    } = infoPanelStore;
+  }: TStore) => {
+    const { getInfoPanelItemIcon, openUser, infoPanelRoom } = infoPanelStore;
 
     const { createThumbnail } = filesStore;
     const { culture } = settingsStore;
@@ -254,36 +298,24 @@ export default inject(
 
     const { selectTag, onCreateRoomFromTemplate } = filesActionsStore;
 
-    const isVisitor = user.isVisitor;
-    const isCollaborator = user.isCollaborator;
+    const isVisitor = user?.isVisitor;
+    const isCollaborator = user?.isCollaborator;
 
-    const isArchive = infoPanelSelection?.rootFolderType === FolderType.Archive;
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
       culture,
-      selection: infoPanelSelection,
       createThumbnail,
       getInfoPanelItemIcon,
       openUser,
       isVisitor,
       isCollaborator,
       selectTag,
-      isArchive,
       isDefaultRoomsQuotaSet,
-      setNewInfoPanelSelection,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,
       roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
       onCreateRoomFromTemplate,
     };
   },
-)(
-  withTranslation([
-    "InfoPanel",
-    "Common",
-    "Translations",
-    "Files",
-    "RoomLogoCover",
-  ])(Details),
-);
+)(observer(Details));

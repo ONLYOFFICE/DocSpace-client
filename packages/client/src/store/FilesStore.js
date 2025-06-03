@@ -26,8 +26,6 @@
 
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
-import merge from "lodash/merge";
-import cloneDeep from "lodash/cloneDeep";
 
 import api from "@docspace/shared/api";
 import {
@@ -437,9 +435,6 @@ class FilesStore {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 
-      const { isVisible, infoPanelSelection, setInfoPanelSelection } =
-        this.infoPanelStore;
-
       if (!socketSubscribers.has(pathParts)) return;
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
@@ -458,16 +453,7 @@ class FilesStore {
         this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
       );
 
-      this.getFileInfo(id).then((file) => {
-        if (
-          isVisible &&
-          file.id === infoPanelSelection?.id &&
-          infoPanelSelection?.fileExst === file.fileExst
-        ) {
-          setInfoPanelSelection(merge(cloneDeep(infoPanelSelection), file));
-        }
-      });
-
+      this.getFileInfo(id);
       this.createThumbnail(this.files[foundIndex]);
     });
 
@@ -597,24 +583,12 @@ class FilesStore {
   };
 
   wsModifyFolderUpdate = (opt) => {
-    const { infoPanelSelection, updateInfoPanelSelection } =
-      this.infoPanelStore;
-
     if (opt?.type === "file" && opt?.data) {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;
 
       this.getFileInfo(file.id); // this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
-
-      if (
-        infoPanelSelection?.id == file.id &&
-        !infoPanelSelection?.isFolder &&
-        !infoPanelSelection?.isRoom
-      ) {
-        const newInfoPanelSelection = this.getFilesListItems([file]);
-        updateInfoPanelSelection(newInfoPanelSelection[0]);
-      }
 
       this.checkSelection(file);
     } else if (opt?.type === "folder" && opt?.data) {
@@ -659,14 +633,6 @@ class FilesStore {
               navigationPath,
               pathParts,
             });
-          }
-
-          if (
-            infoPanelSelection?.id == f.id &&
-            (infoPanelSelection?.isFolder || infoPanelSelection?.isRoom)
-          ) {
-            const newInfoPanelSelection = this.getFilesListItems([f]);
-            updateInfoPanelSelection(newInfoPanelSelection[0]);
           }
 
           this.setFolder(f);
@@ -1750,22 +1716,8 @@ class FilesStore {
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
                 this.infoPanelStore.setInfoPanelRoom(room);
-              } else {
-                const newInfoPanelSelection = this.getFilesListItems([room]);
-
-                if (
-                  !newInfoPanelSelection[0].isFolder &&
-                  !newInfoPanelSelection[0].isRoom &&
-                  data.current.rootFolderType === FolderType.USER &&
-                  this.selectedFolderStore.isFolder
-                ) {
-                  newInfoPanelSelection[0].isFolder = true;
-                }
-
-                this.infoPanelStore.updateInfoPanelSelection(
-                  newInfoPanelSelection[0],
-                );
               }
+
               const { mute } = room;
 
               runInAction(() => {
@@ -4399,9 +4351,7 @@ class FilesStore {
   }
 
   get needResetFilesSelection() {
-    const { isVisible: infoPanelVisible } = this.infoPanelStore;
-
-    return !infoPanelVisible || this.selection.length > 1;
+    return this.selection.length > 1;
   }
 
   get showNewFilesInList() {

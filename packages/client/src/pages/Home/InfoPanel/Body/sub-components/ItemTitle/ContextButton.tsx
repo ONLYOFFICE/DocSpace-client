@@ -24,75 +24,85 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
-import { withTranslation } from "react-i18next";
+import { useRef, useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
-const StyledItemContextOptions = styled.div`
-  height: 16px;
-  margin-block: auto 0;
-`;
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/shared/components/context-menu";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "@docspace/shared/components/context-menu-button";
+
+import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
+
+import styles from "./itemTitle.module.scss";
+
+export type TSelection = TRoom | TFile | TFolder;
+
+type RoomsContextBtnProps = {
+  selection: TSelection;
+
+  getItemContextOptionsActions?: ContextOptionsStore["getFilesContextOptions"];
+};
 
 const RoomsContextBtn = ({
-  t,
   selection,
-  itemTitleRef,
 
   getItemContextOptionsActions,
-  onSelectItem,
-}) => {
-  const contextMenuRef = useRef();
+}: RoomsContextBtnProps) => {
+  const { t } = useTranslation([
+    "Files",
+    "Common",
+    "Translations",
+    "InfoPanel",
+    "SharingPanel",
+  ]);
+  const contextMenuRef = useRef<ContextMenuRefType>(null);
 
-  if (!selection) return null;
-
-  const onContextMenu = (e) => {
-    onSelectItem();
-
-    if (!contextMenuRef?.current.menuRef.current)
-      itemTitleRef?.current.click(e);
-    contextMenuRef?.current?.show(e);
+  const onContextMenu = (e: React.MouseEvent) => {
+    if (!contextMenuRef?.current?.menuRef.current)
+      contextMenuRef?.current?.show(e);
   };
 
-  const getData = () => {
+  const getData = useCallback(() => {
+    if (!getItemContextOptionsActions) return [];
     return getItemContextOptionsActions(selection, t, true);
-  };
+  }, [selection, t, getItemContextOptionsActions]);
+
+  const data = useMemo(() => getData(), [selection, t]);
 
   return (
-    <StyledItemContextOptions>
+    <div className={styles.itemContextOptions}>
       <ContextMenuButton
         id="info-options"
         className="expandButton"
         title={
-          selection.isFolder
+          "isFolder" in selection && selection.isFolder
             ? t("Translations:TitleShowFolderActions")
             : t("Translations:TitleShowActions")
         }
         onClick={onContextMenu}
         getData={getData}
         directionX="right"
-        displayType="toggle"
+        displayType={ContextMenuButtonDisplayType.toggle}
       />
       <ContextMenu
         ref={contextMenuRef}
         getContextModel={getData}
+        model={data}
         withBackdrop
         baseZIndex={310}
       />
-    </StyledItemContextOptions>
+    </div>
   );
 };
 
-export default inject(({ contextOptionsStore }) => ({
+export default inject(({ contextOptionsStore }: TStore) => ({
   getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
-}))(
-  withTranslation([
-    "Files",
-    "Common",
-    "Translations",
-    "InfoPanel",
-    "SharingPanel",
-  ])(observer(RoomsContextBtn)),
-);
+}))(observer(RoomsContextBtn));

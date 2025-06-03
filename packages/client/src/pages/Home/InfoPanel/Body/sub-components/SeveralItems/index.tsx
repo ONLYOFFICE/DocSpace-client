@@ -29,21 +29,22 @@ import { useTheme } from "styled-components";
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
 
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { TPeopleListItem } from "SRC_DIR/helpers/contacts";
 
 import styles from "./SeveralItems.module.scss";
 
 type SeveralItemsProps = {
-  isGroups: boolean;
-  isUsers: boolean;
-  selectedItems: TPeopleListItem[] | InfoPanelStore["infoPanelSelectedItems"];
+  isGroups?: boolean;
+  isUsers?: boolean;
+  selectedItems: TPeopleListItem[] | (TRoom | TFile | TFolder)[];
 };
 
 const SeveralItems = ({
@@ -68,7 +69,7 @@ const SeveralItems = ({
 
   const itemsText = isGroups
     ? t("InfoPanel:SelectedGroups")
-    : isContacts
+    : isUsers
       ? t("InfoPanel:SelectedUsers")
       : t("InfoPanel:ItemsSelected");
 

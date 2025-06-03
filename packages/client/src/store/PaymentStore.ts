@@ -43,7 +43,6 @@ import {
   getPaymentLink,
   getAutoTopUpSettings,
   updateAutoTopUpSettings,
-  getServicesQuotas,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -59,9 +58,6 @@ import {
   TBalance,
   TCustomerInfo,
   TAutoTopUpSettings,
-  TPaymentFeature,
-  TNumericPaymentFeature,
-  TPaymentQuota,
   TTransactionCollection,
 } from "@docspace/shared/api/portal/types";
 

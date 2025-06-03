@@ -78,9 +78,6 @@ export const useServicesActions = () => {
 
   const isPlanUpgrade = (quantity: number, type = "storage") => {
     const plan = type === "storage" ? currentStoragePlanSize : 0;
-    const hasSub = type === "storage" ? hasStorageSubscription : false;
-
-    // if (!hasSub) return false;
 
     return isUpgrade(quantity, plan);
   };

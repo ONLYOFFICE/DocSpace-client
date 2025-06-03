@@ -29,12 +29,12 @@ import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import styles from "../styles/StorageSummary.module.scss";
 import PlanInfo from "./PlanInfo";
 import { useServicesActions } from "../hooks/useServicesActions";
 import PlanUpgradePreview from "./PlanUpgradePreview";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import StorageWarning from "./StorageWarning";
 

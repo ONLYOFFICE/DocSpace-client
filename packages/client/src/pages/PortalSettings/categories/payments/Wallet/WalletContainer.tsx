@@ -68,8 +68,6 @@ type WalletProps = {
   language: string;
   walletCodeCurrency: string;
   cardLinkedOnFreeTariff: boolean;
-  isFreeTariff: boolean;
-  isNonProfit: boolean;
   cardLinkedOnNonProfit: boolean;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;

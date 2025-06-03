@@ -47,12 +47,12 @@ import StorageWarning from "./sub-components/StorageWarning";
 type StorageDialogProps = {
   visible: boolean;
   onClose: () => void;
-  storagePriceIncrement?: number;
   currentStoragePlanSize?: number;
   fetchPortalTariff?: () => void;
   fetchBalance?: () => void;
   totalPrice?: number;
   usedTotalStorageSizeCount?: number;
+  handleServicesQuotas?: () => void;
 };
 
 const StoragePlanCancel: React.FC<StorageDialogProps> = ({

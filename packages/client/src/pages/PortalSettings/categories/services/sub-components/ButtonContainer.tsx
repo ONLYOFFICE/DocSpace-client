@@ -78,8 +78,9 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
         isLoading={isLoading || isWaitingCalculation}
         isDisabled={
-          !isExceedingStorageLimit &&
-          (isPaymentAnavalable || isCurrentStoragePlan)
+          !isExceedingStorageLimit
+            ? isPaymentAnavalable || isCurrentStoragePlan
+            : false
         }
       />
       <Button

@@ -37,6 +37,7 @@ import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffSt
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { TTranslation } from "@docspace/shared/types";
+import { TOTAL_SIZE } from "@docspace/shared/constants";
 
 import {
   TPaymentFeature,
@@ -44,7 +45,6 @@ import {
   TPaymentQuota,
 } from "@docspace/shared/api/portal/types";
 import PaymentStore from "./PaymentStore";
-import { TOTAL_SIZE } from "@docspace/shared/constants";
 
 class ServicesStore {
   userStore: UserStore | null = null;
@@ -114,8 +114,12 @@ class ServicesStore {
 
     res[0].features.forEach((feature) => {
       if (feature.id === TOTAL_SIZE) {
-        feature.enabled = hasStorageSubscription;
-        feature.cancellation = hasScheduledStorageChange;
+        const enhancedFeature = feature as TPaymentFeature & {
+          enabled: boolean;
+          cancellation: boolean;
+        };
+        enhancedFeature.enabled = hasStorageSubscription;
+        enhancedFeature.cancellation = hasScheduledStorageChange;
       }
 
       this.servicesQuotasFeatures.set(feature.id, feature);

@@ -30,7 +30,7 @@
 
 import moment from "moment";
 import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
-import { request, roomsClient } from "../client";
+import { request, roomsClient, filesClient, sharingClient } from "../client";
 import { decodeDisplayName, toUrlParams } from "../../utils/common";
 import RoomsFilter from "./filter";
 
@@ -110,26 +110,6 @@ export async function getHistory(
   };
 
   if (requestToken) options.headers = { "Request-Token": requestToken };
-
-  const res = await request(options);
-  return res;
-}
-
-export async function getRoomHistory(id) {
-  const options = {
-    method: "get",
-    url: `/feed/filter?module=rooms&withRelated=true&id=${id}`,
-  };
-
-  const res = await request(options);
-  return res;
-}
-
-export async function getFileHistory(id) {
-  const options = {
-    method: "get",
-    url: `/feed/filter?module=files&withRelated=true&id=${id}`,
-  };
 
   const res = await request(options);
   return res;
@@ -276,24 +256,20 @@ export async function getPrimaryLink(id) {
 }
 
 export function validatePublicRoomKey(key) {
-  return request<RoomLinkRequest>({
-    method: "get",
-    url: `files/share/${key}`,
-  });
+  const res = sharingClient.getExternalShareData(key);
+  return res;
 }
 
-export async function validatePublicRoomPassword(
+export function validatePublicRoomPassword(
   key: string,
   passwordHash: string,
   signal?: AbortSignal,
 ) {
-  const res = (await request({
-    method: "post",
-    url: `files/share/${key}/password`,
-    data: { password: passwordHash },
-    signal,
-  })) as ExternalShareDto;
-
+  const res = sharingClient.applyExternalSharePassword(
+    key,
+    { password: passwordHash },
+    { signal },
+  );
   return res;
 }
 

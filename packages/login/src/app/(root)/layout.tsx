@@ -70,8 +70,6 @@ export default async function Layout({
     cultures = await getPortalCultures();
   }
 
-  console.log("render second root layout");
-
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav

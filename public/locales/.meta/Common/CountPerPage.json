@@ -3,7 +3,7 @@
   "content": "{{count}} per page",
   "content_en_sha1_hash": "f07055bdc1868a249738e0fb89860a79c00f399e",
   "created_at": "2025-05-19T21:30:43.819Z",
-  "updated_at": "2025-05-26T07:57:32.544Z",
+  "updated_at": "2025-06-02T10:20:51.357Z",
   "comment": {
     "text": "This translation key is used to display the pagination count per page. It should be translated to appear as \"{{count}} items per page\". This text appears in UI elements related to data import and filtering options, typically on a settings or configuration page.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
-      "line_number": 57,
-      "context": "};\n \n const countItems = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
+      "line_number": 59,
+      "context": "};\n \n const countItems: TOption[] = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
-      "line_number": 57,
-      "context": "};\n \n const countItems = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
+      "line_number": 59,
+      "context": "};\n \n const countItems: TOption[] = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AccountsPaging.tsx",
-      "line_number": 57,
-      "context": "};\n \n const countItems = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
+      "line_number": 59,
+      "context": "};\n \n const countItems: TOption[] = [\n {\n key: \"25-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage }),\n count: pagesPerPage,\n },\n {\n key: \"50-items-per-page\",\n label: t(\"Common:CountPerPage\", { count: pagesPerPage * 2 }),",
       "module": "/packages/client"
     }
   ],

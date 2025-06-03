@@ -29,35 +29,56 @@ const { parse } = require("url");
 const next = require("next");
 const config = require("./config/config.json");
 
-const dev = process.env.NODE_ENV === "development";
+import("./logger.mjs").then(({ logger }) => {
+  const dev = process.env.NODE_ENV === "development";
+  const argv = (key) => {
+    if (process.argv.includes(`--${key}`)) return true;
 
-const port = config.PORT ?? 5015;
-const hostname = config.HOSTNAME ?? "localhost";
+    return (
+      process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+      null
+    );
+  };
 
-// when using middleware `hostname` and `port` must be provided below
-const app = next({ dev, hostname, port });
-const handle = app.getRequestHandler();
+  const port = (argv("app.port") || config.PORT) ?? 5015;
+  const hostname = config.HOSTNAME ?? "0.0.0.0";
 
-app.prepare().then(() => {
-  createServer(async (req, res) => {
-    try {
-      // Be sure to pass `true` as the second argument to `url.parse`.
-      // This tells it to parse the query portion of the URL.
-      const parsedUrl = parse(req.url, true);
+  // when using middleware `hostname` and `port` must be provided below
+  const app = next({ dev, hostname, port });
+  const handle = app.getRequestHandler();
 
-      await handle(req, res, parsedUrl);
-    } catch (err) {
-      console.error("Error occurred handling", req.url, err);
-      res.statusCode = 500;
-      res.end("internal server error");
-    }
-  })
-    .once("error", (err) => {
-      console.error(err);
-      process.exit(1);
+  app.prepare().then(() => {
+    createServer(async (req, res) => {
+      try {
+        // Be sure to pass `true` as the second argument to `url.parse`.
+        // This tells it to parse the query portion of the URL.
+        const parsedUrl = parse(req.url, true);
+
+        await handle(req, res, parsedUrl);
+      } catch (err) {
+        logger.error(`url: ${req.url}, error: ${err} Error occurred handling`);
+        res.statusCode = 500;
+        res.end("internal server error");
+      }
     })
-    .listen(port, () => {
-      console.log(`Server is listening on port ${port}`);
-    });
-});
+      .once("error", (err) => {
+        logger.error(err);
+        process.exit(1);
+      })
+      .listen(port, () => {
+        logger.info(`Server is listening on port ${port}`);
+      });
 
+    process.on("unhandledRejection", (reason, process) => {
+      logger.error(
+        `process: ${process}, reason: ${reason} Unhandled rejection at`,
+      );
+    });
+
+    process.on("uncaughtException", (error) => {
+      logger.error(
+        `error: ${error}, stack: ${error.stack} Unhandled exception`,
+      );
+    });
+  });
+});

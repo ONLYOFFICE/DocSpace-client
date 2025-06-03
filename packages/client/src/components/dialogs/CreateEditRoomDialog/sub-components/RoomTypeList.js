@@ -64,7 +64,9 @@ const RoomTypeList = ({
   const getTooltipContent = () => {
     return (
       <Text fontSize="12px" noSelect>
-        {t("Files:WarningCreationFormRoom")}
+        {t("Files:FormRoomCreationLimit", {
+          sectionName: t("Common:Rooms"),
+        })}
       </Text>
     );
   };
@@ -101,6 +103,6 @@ const RoomTypeList = ({
   );
 };
 
-export default withTranslation(["CreateEditRoomDialog"])(
+export default withTranslation(["CreateEditRoomDialog", "Files", "Common"])(
   withLoader(RoomTypeList)(<RoomTypeListLoader />),
 );

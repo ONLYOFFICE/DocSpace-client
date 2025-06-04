@@ -147,4 +147,7 @@ export const AutoFocused: Story = {
     ...Default.args,
     isAutoFocussed: true,
   },
+  parameters: {
+    docs: { disable: true },
+  },
 };

@@ -24,31 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
+
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import { Avatar } from "@docspace/shared/components/avatar";
 import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+
+import {
+  TFeedAction,
+  TFeedData,
+  RoomMember,
+} from "@docspace/shared/api/rooms/types";
+
 import { StyledHistoryBlock } from "../../styles/history";
 import HistoryTitleBlock from "./HistoryBlockContent/HistoryTitleBlock";
 import HistoryBlockContent from "./HistoryBlockContent";
 
-const HistoryBlock = ({ t, feed, isLastEntity }) => {
-  const { action, initiator, date } = feed;
+type HistoryBlockProps = {
+  feed: TFeedAction<TFeedData | RoomMember>;
+  isLastEntity: boolean;
+};
 
-  const isUserAction =
-    action.key === "RoomCreateUser" ||
-    action.key === "RoomUpdateAccessForUser" ||
-    action.key === "RoomRemoveUser";
+const HistoryBlock = ({ feed, isLastEntity }: HistoryBlockProps) => {
+  const { initiator, date } = feed;
 
   return (
-    <StyledHistoryBlock
-      className={date}
-      withBottomDivider={!isLastEntity}
-      isUserAction={isUserAction}
-    >
+    <StyledHistoryBlock className={date} withBottomDivider={!isLastEntity}>
       <Avatar
-        role="user"
+        role={AvatarRole.user}
         className="avatar"
-        size="min"
+        size={AvatarSize.min}
         userName={initiator.displayName}
         source={
           initiator.hasAvatar
@@ -58,7 +66,7 @@ const HistoryBlock = ({ t, feed, isLastEntity }) => {
         }
       />
       <div className="info">
-        <HistoryTitleBlock t={t} feed={feed} />
+        <HistoryTitleBlock feed={feed} />
         <HistoryBlockContent feed={feed} />
       </div>
     </StyledHistoryBlock>

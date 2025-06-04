@@ -49,7 +49,6 @@ import {
   TGetRoomMembers,
   TFeed,
 } from "./types";
-import FilesFilter from "../files/filter";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -131,9 +130,9 @@ export function updateRoomMemberRole(id, data) {
 export function getHistory(
   selectionType: "file" | "folder",
   id: number | string,
-  requestToken?: string,
-  filter: FilesFilter,
+  filter: { page: number; startIndex: number; count: number },
   signal: Nullable<AbortSignal> = null,
+  requestToken?: string,
 ) {
   let params = "";
 
@@ -149,28 +148,6 @@ export function getHistory(
   if (requestToken) options.headers = { "Request-Token": requestToken };
 
   return request<TFeed>(options).then((res) => res);
-}
-
-export function getRoomHistory(id) {
-  const options = {
-    method: "get",
-    url: `/feed/filter?module=rooms&withRelated=true&id=${id}`,
-  };
-
-  return request(options).then((res) => {
-    return res;
-  });
-}
-
-export function getFileHistory(id) {
-  const options = {
-    method: "get",
-    url: `/feed/filter?module=files&withRelated=true&id=${id}`,
-  };
-
-  return request(options).then((res) => {
-    return res;
-  });
 }
 
 export function createRoom(data) {

@@ -51,7 +51,9 @@ const StyledHistorySubtitle = styled.div.attrs(injectDefaultTheme)`
   color: ${(props) => props.theme.infoPanel.history.subtitleColor};
 `;
 
-const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)`
+const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)<{
+  withBottomDivider: boolean;
+}>`
   width: 100%;
   display: flex;
   gap: 8px;

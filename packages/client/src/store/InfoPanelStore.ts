@@ -29,7 +29,6 @@ import clone from "lodash/clone";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { NavigateFunction } from "react-router";
 
 import {
   EmployeeActivationStatus,
@@ -47,7 +46,7 @@ import {
   DEFAULT_CREATE_LINK_SETTINGS,
   getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
-import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
+import { getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
   editExternalLink,
@@ -66,38 +65,21 @@ import { TError } from "@docspace/shared/utils/axiosClient";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getUserStatus } from "../helpers/people-helpers";
-import { type TPeopleListItem, getContactsView } from "../helpers/contacts";
-import {
-  addLinksToHistory,
-  parseHistory,
-} from "../pages/Home/InfoPanel/Body/helpers/HistoryHelper";
-import SelectedFolderStore, { TSelectedFolder } from "./SelectedFolderStore";
+import { getContactsView } from "../helpers/contacts";
+import SelectedFolderStore from "./SelectedFolderStore";
 import FilesSettingsStore from "./FilesSettingsStore";
 import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
 import PublicRoomStore from "./PublicRoomStore";
 import TreeFoldersStore from "./TreeFoldersStore";
 import {
-  HistoryFilter,
   TInfoPanelMember,
   TInfoPanelMembers,
   TInfoPanelMemberType,
   TMemberTuple,
   TSelection,
-  TSelectionHistory,
   TTitleMember,
 } from "../pages/Home/InfoPanel/InfoPanel.types";
-
-const observedKeys = [
-  "id",
-  "title",
-  "thumbnailStatus",
-  "thumbnailUrl",
-  "version",
-  "comment",
-  "roomType",
-  "rootFolderId",
-] as const;
 
 export const enum InfoPanelView {
   infoMembers = "info_members",
@@ -113,17 +95,11 @@ class InfoPanelStore {
 
   isMobileHidden = false;
 
-  selectionHistory: Nullable<TSelectionHistory[]> = null;
-
-  selectionHistoryTotal: Nullable<number> = null;
-
   roomsView = InfoPanelView.infoMembers;
 
   fileView = InfoPanelView.infoHistory;
 
   isScrollLocked = false;
-
-  historyWithFileList = false;
 
   filesSettingsStore = {} as FilesSettingsStore;
 
@@ -154,13 +130,6 @@ class InfoPanelStore {
   showSearchBlock = false;
 
   searchValue = "";
-
-  historyFilter = {
-    page: 0,
-    pageCount: 100,
-    total: 0,
-    startIndex: 0,
-  };
 
   constructor(userStore: UserStore) {
     this.userStore = userStore;
@@ -203,6 +172,19 @@ class InfoPanelStore {
     const icon = this.getInfoPanelItemIcon(selection, 32);
 
     return { ...selection, icon };
+  }
+
+  get historyWithFileList(): boolean {
+    if (Array.isArray(this.infoPanelSelection) || !this.infoPanelSelection)
+      return false;
+
+    return (
+      (("isRoom" in this.infoPanelSelection &&
+        (this.infoPanelSelection.isRoom as boolean)) ||
+        ("isFolder" in this.infoPanelSelection &&
+          this.infoPanelSelection.isFolder)) ??
+      false
+    );
   }
 
   // Setters
@@ -255,26 +237,6 @@ class InfoPanelStore {
   resetSearch = () => {
     this.setShowSearchBlock(false);
     this.setSearchValue("");
-  };
-
-  setSelectionHistory = (
-    obj: Nullable<TSelectionHistory[]>,
-    total: Nullable<number>,
-  ) => {
-    this.selectionHistory = obj;
-    this.selectionHistoryTotal = total;
-
-    // if (obj) {
-    //   if (this.infoPanelSelection) {
-    //     const isFolder =
-    //       "isFolder" in this.infoPanelSelection &&
-    //       this.infoPanelSelection.isFolder;
-    //     const isRoom =
-    //       "isRoom" in this.infoPanelSelection && this.infoPanelSelection.isRoom;
-
-    //     this.historyWithFileList = Boolean(isFolder || isRoom);
-    //   }
-    // }
   };
 
   resetView = () => {
@@ -693,160 +655,6 @@ class InfoPanelStore {
     this.setInfoPanelMembers(fetchedMembers ?? null);
 
     this.setIsMembersPanelUpdating(false);
-  };
-
-  setHistoryFilter = (historyFilter: HistoryFilter) => {
-    this.historyFilter = historyFilter;
-  };
-
-  fetchHistory = async (abortControllerSignal = null) => {
-    const { setExternalLinks } = this.publicRoomStore;
-    const selection = this.infoPanelSelection;
-
-    if (!selection?.id) return;
-
-    const isFolder = "isFolder" in selection && selection.isFolder;
-    const isRoom = "isRoom" in selection && selection.isRoom;
-    const roomType = "roomType" in selection && selection.roomType;
-    const selectionType: "file" | "folder" =
-      isRoom || isFolder ? "folder" : "file";
-    const selectionRequestToken =
-      ("requestToken" in selection && selection.requestToken) || undefined;
-
-    const withLinks =
-      isRoom &&
-      roomType &&
-      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
-        roomType,
-      );
-
-    this.setHistoryFilter({
-      page: 0,
-      pageCount: 100,
-      total: 0,
-      startIndex: 0,
-    });
-
-    const filter = FilesFilter.getDefault();
-
-    filter.startIndex = 0;
-    filter.pageCount = this.historyFilter.pageCount;
-
-    try {
-      const history = await api.rooms.getHistory(
-        selectionType,
-        selection.id,
-        selectionRequestToken,
-        filter,
-        abortControllerSignal,
-      );
-
-      if (withLinks) {
-        const links = await api.rooms
-          .getRoomMembers(String(selection.id), {
-            filterType: 2, // External link
-          })
-          .then((res) => res.items);
-
-        const historyWithLinks = addLinksToHistory(history, links);
-
-        setExternalLinks(links);
-        this.setSelectionHistory(
-          parseHistory(historyWithLinks.items),
-          historyWithLinks.total,
-        );
-        return parseHistory(historyWithLinks.items);
-      }
-
-      setExternalLinks([]);
-      this.setSelectionHistory(parseHistory(history.items), history.total);
-      return parseHistory(history.items);
-    } catch (err) {
-      if ((err as TError).message !== "canceled") {
-        console.error(err);
-      }
-    }
-  };
-
-  fetchMoreHistory = async (
-    abortControllerSignal: AbortSignal | null = null,
-  ) => {
-    if (!this.infoPanelSelection) return;
-
-    const selection = this.infoPanelSelection;
-    const { setExternalLinks } = this.publicRoomStore;
-    const oldHistory = this.selectionHistory;
-
-    const isFolder = "isFolder" in selection && selection.isFolder;
-    const isRoom = "isRoom" in selection && selection.isRoom;
-    const roomType = "roomType" in selection ? selection.roomType : null;
-    const requestToken =
-      "requestToken" in selection ? selection.requestToken : undefined;
-
-    const selectionType: "file" | "folder" =
-      isRoom || isFolder ? "folder" : "file";
-
-    const withLinks =
-      isRoom &&
-      roomType &&
-      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
-        roomType,
-      );
-
-    const newHistoryFilter = clone(this.historyFilter);
-    newHistoryFilter.page += 1;
-    newHistoryFilter.startIndex =
-      newHistoryFilter.page * newHistoryFilter.pageCount;
-    this.setHistoryFilter(newHistoryFilter);
-
-    const filter = FilesFilter.getDefault();
-    filter.startIndex = 0;
-    filter.pageCount = newHistoryFilter.pageCount;
-
-    try {
-      const data = await api.rooms.getHistory(
-        selectionType,
-        selection.id!,
-        requestToken,
-        filter,
-        abortControllerSignal,
-      );
-
-      let finalHistory: ReturnType<typeof addLinksToHistory> = data;
-      if (withLinks) {
-        const links = await api.rooms
-          .getRoomMembers(String(selection.id), {
-            filterType: 2, // External links only
-          })
-          .then((res) => res.items);
-
-        finalHistory = addLinksToHistory(data, links);
-        setExternalLinks(links);
-      } else {
-        setExternalLinks([]);
-      }
-
-      const parsedNewHistory = parseHistory(finalHistory.items);
-      const lastOldDay = oldHistory?.[oldHistory.length - 1]?.day;
-      const firstNewDay = parsedNewHistory?.[0]?.day;
-
-      const mergedHistory = oldHistory ? [...oldHistory] : [];
-
-      if (lastOldDay === firstNewDay) {
-        const lastIndex = mergedHistory.length - 1;
-        mergedHistory[lastIndex].feeds.push(...parsedNewHistory[0].feeds);
-        mergedHistory.push(...parsedNewHistory.slice(1));
-      } else {
-        mergedHistory.push(...parsedNewHistory);
-      }
-
-      this.setSelectionHistory(mergedHistory, finalHistory.total);
-      return mergedHistory;
-    } catch (err: unknown) {
-      if ((err as TError).message !== "canceled") {
-        console.error(err);
-      }
-    }
   };
 
   openShareTab = () => {

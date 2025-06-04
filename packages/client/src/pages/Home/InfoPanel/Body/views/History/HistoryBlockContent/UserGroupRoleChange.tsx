@@ -25,10 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { StyledHistoryBlockMessage } from "../../../styles/history";
-import { Feed } from "./HistoryBlockContent.types";
+import {
+  TFeedAction,
+  TFeedData,
+  RoomMember,
+} from "@docspace/shared/api/rooms/types";
 
 interface HistoryUserRoleChangeProps {
-  feed: Feed;
+  feed: TFeedAction<RoomMember>;
 }
 
 const HistoryUserGroupRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {

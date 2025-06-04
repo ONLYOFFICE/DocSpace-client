@@ -25,20 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Tag } from "@docspace/shared/components/tag";
-import { StyledHistoryBlockTagList } from "../../../styles/history";
-import { ActionByTarget } from "../FeedInfo";
-import { Feed } from "./HistoryBlockContent.types";
 
-interface HistoryRoomTagListProps {
-  feed: Feed;
-  actionType: ActionByTarget<"roomTag">;
-}
+import {
+  FeedAction,
+  TFeedAction,
+  TFeedData,
+} from "@docspace/shared/api/rooms/types";
+
+import { StyledHistoryBlockTagList } from "../../../styles/history";
+
+type HistoryRoomTagListProps = {
+  feed: TFeedAction<TFeedData>;
+  actionType: FeedAction;
+};
 
 const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
   if (actionType === "create")
     return (
       <StyledHistoryBlockTagList>
-        {feed.data?.tags.map((tag: string) => (
+        {feed.data?.tags?.map((tag: string) => (
           <Tag className="history-tag" key={tag} label={tag} tag={tag} />
         ))}
       </StyledHistoryBlockTagList>
@@ -47,7 +52,7 @@ const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
   if (actionType === "delete") {
     return (
       <StyledHistoryBlockTagList>
-        {feed.data?.tags.map((tag: string) => (
+        {feed.data?.tags?.map((tag: string) => (
           <Tag
             className="history-tag deleted-tag"
             key={tag}

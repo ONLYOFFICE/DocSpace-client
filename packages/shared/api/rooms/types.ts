@@ -186,6 +186,7 @@ export type TValidateShareRoom =
 
 export type RoomMember = {
   access: number;
+  oldAccess?: number;
   canEditAccess: boolean;
   isLocked: boolean;
   isOwner: boolean;
@@ -197,6 +198,73 @@ export type TGetRoomMembers = {
   total: number;
   items: RoomMember[];
 };
+
+type TAccessibility = {
+  ImageView: boolean;
+  MediaView: boolean;
+  WebView: boolean;
+  WebEdit: boolean;
+  WebReview: boolean;
+  WebCustomFilterEditing: boolean;
+  WebRestrictedEditing: boolean;
+  WebComment: boolean;
+  CoAuhtoring: boolean;
+  CanConvert: boolean;
+  MustConvert: boolean;
+};
+
+export interface TFeedData {
+  accessibility?: TAccessibility;
+  parentId: number;
+  toFolderId: number;
+  parentTitle: string;
+  parentType: number;
+  fromParentType: number;
+  fromParentTitle: string;
+  fromFolderId?: number;
+  id: string | number;
+  title?: string;
+  newTitle?: string;
+  oldTitle?: string;
+  oldIndex?: number;
+  newIndex?: number;
+  viewUrl?: string;
+  version?: number;
+  lifeTime?: {
+    value: number;
+    period: number;
+  };
+  group?: {
+    id: string;
+    name: string;
+  };
+  tags?: string[];
+  sharedTo?: {
+    title: string;
+    shareLink: string;
+    requestToken: string;
+    primary: boolean;
+    linkType: number;
+    isExpired: boolean;
+    internal: boolean;
+    id: string;
+    denyDownload: boolean;
+  };
+}
+
+interface Initiator {
+  id: string | number;
+  avatar: string;
+  avatarSmall: string;
+  avatarMedium: string;
+  avatarMax: string;
+  avatarOriginal: string;
+  displayName: string;
+  hasAvatar: boolean;
+  isAnonim: boolean;
+  profileUrl: string;
+  email?: string;
+}
 
 export enum FeedAction {
   Create = "create",
@@ -229,57 +297,86 @@ export enum FeedAction {
   CustomFilterEnabled = "customFilterEnabled",
 }
 
+export enum FeedTarget {
+  File = "file",
+  Folder = "folder",
+  Room = "room",
+  RoomTag = "roomTag",
+  RoomLogo = "roomLogo",
+  RoomExternalLink = "roomExternalLink",
+  User = "user",
+  Group = "group",
+}
+
+export enum FeedInfoKey {
+  FileCreated = "FileCreated",
+  FileUploaded = "FileUploaded",
+  UserFileUpdated = "UserFileUpdated",
+  FileConverted = "FileConverted",
+  FileRenamed = "FileRenamed",
+  FileMoved = "FileMoved",
+  FileMovedToTrash = "FileMovedToTrash",
+  FileCopied = "FileCopied",
+  FileDeleted = "FileDeleted",
+  FileIndexChanged = "FileIndexChanged",
+  FormSubmit = "FormSubmit",
+  FormOpenedForFilling = "FormOpenedForFilling",
+  FileLocked = "FileLocked",
+  FileUnlocked = "FileUnlocked",
+  FileVersionRemoved = "FileVersionRemoved",
+  FormStartedToFill = "FormStartedToFill",
+  FormPartiallyFilled = "FormPartiallyFilled",
+  FormCompletelyFilled = "FormCompletelyFilled",
+  FormStopped = "FormStopped",
+  FileCustomFilterDisabled = "FileCustomFilterDisabled",
+  FileCustomFilterEnabled = "FileCustomFilterEnabled",
+  FolderCreated = "FolderCreated",
+  FolderRenamed = "FolderRenamed",
+  FolderMoved = "FolderMoved",
+  FolderMovedToTrash = "FolderMovedToTrash",
+  FolderCopied = "FolderCopied",
+  FolderDeleted = "FolderDeleted",
+  FolderIndexChanged = "FolderIndexChanged",
+  FolderIndexReordered = "FolderIndexReordered",
+  RoomCreated = "RoomCreated",
+  RoomRenamed = "RoomRenamed",
+  RoomCopied = "RoomCopied",
+  RoomWatermarkSet = "RoomWatermarkSet",
+  RoomWatermarkDisabled = "RoomWatermarkDisabled",
+  RoomIndexingEnabled = "RoomIndexingEnabled",
+  RoomIndexingDisabled = "RoomIndexingDisabled",
+  RoomLifeTimeSet = "RoomLifeTimeSet",
+  RoomLifeTimeDisabled = "RoomLifeTimeDisabled",
+  RoomDenyDownloadEnabled = "RoomDenyDownloadEnabled",
+  RoomDenyDownloadDisabled = "RoomDenyDownloadDisabled",
+  RoomArchived = "RoomArchived",
+  RoomUnarchived = "RoomUnarchived",
+  RoomIndexExportLocation = "RoomIndexExportLocation",
+  AddedRoomTags = "AddedRoomTags",
+  DeletedRoomTags = "DeletedRoomTags",
+  RoomLogoCreated = "RoomLogoCreated",
+  RoomLogoDeleted = "RoomLogoDeleted",
+  RoomColorChanged = "RoomColorChanged",
+  RoomCoverChanged = "RoomCoverChanged",
+  RoomExternalLinkCreated = "RoomExternalLinkCreated",
+  RoomExternalLinkRenamed = "RoomExternalLinkRenamed",
+  RoomExternalLinkDeleted = "RoomExternalLinkDeleted",
+  RoomExternalLinkRevoked = "RoomExternalLinkRevoked",
+  RoomCreateUser = "RoomCreateUser",
+  RoomUpdateAccessForUser = "RoomUpdateAccessForUser",
+  RoomRemoveUser = "RoomRemoveUser",
+  RoomInviteResend = "RoomInviteResend",
+  RoomGroupAdded = "RoomGroupAdded",
+  RoomUpdateAccessForGroup = "RoomUpdateAccessForGroup",
+  RoomGroupRemove = "RoomGroupRemove",
+}
+
 export type CapitalizedFeedAction = Capitalize<FeedAction>;
-
-type TAccessibility = {
-  ImageView: boolean;
-  MediaView: boolean;
-  WebView: boolean;
-  WebEdit: boolean;
-  WebReview: boolean;
-  WebCustomFilterEditing: boolean;
-  WebRestrictedEditing: boolean;
-  WebComment: boolean;
-  CoAuhtoring: boolean;
-  CanConvert: boolean;
-  MustConvert: boolean;
-};
-
-export interface TFeedData {
-  accessibility?: TAccessibility;
-  parentId: number;
-  toFolderId: number;
-  parentTitle: string;
-  parentType: number;
-  fromParentType: number;
-  fromParentTitle: string;
-  fromFolderId?: number;
-  id: string | number;
-  title?: string;
-  newTitle?: string;
-  oldTitle?: string;
-  oldIndex?: number;
-  newIndex?: number;
-  viewUrl?: string;
-}
-
-interface Initiator {
-  id: string | number;
-  avatar: string;
-  avatarSmall: string;
-  avatarMedium: string;
-  avatarMax: string;
-  avatarOriginal: string;
-  displayName: string;
-  hasAvatar: boolean;
-  isAnonim: boolean;
-  profileUrl: string;
-}
 
 export type TFeedAction<T = TFeedData> = {
   action: {
     id: number;
-    key: CapitalizedFeedAction;
+    key: FeedInfoKey;
   };
   data: T;
   date: string;

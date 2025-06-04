@@ -51,6 +51,7 @@ import Groups from "./views/Groups";
 import Gallery from "./views/Gallery";
 import Members from "./views/Members";
 import Details from "./views/Details";
+import History from "./views/History";
 import Share from "./views/Share";
 import Plugin from "./views/Plugin";
 
@@ -149,8 +150,8 @@ const InfoPanelBodyContent = ({
     switch (currentView) {
       // case "info_members":
       //   return <Members />;
-      // case "info_history":
-      //   return <History />;
+      case "info_history":
+        return <History infoPanelSelection={selection} />;
       case "info_details":
         return <Details selection={selection} isArchive={false} />;
       // case "info_share":
@@ -199,12 +200,10 @@ const InfoPanelBodyContent = ({
 
 export default inject(
   ({
-    selectedFolderStore,
     infoPanelStore,
     settingsStore,
     avatarEditorDialogStore,
     dialogsStore,
-    filesStore,
   }: TStore) => {
     const {
       roomsView,

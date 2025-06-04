@@ -24,20 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
-import { TTranslation } from "@docspace/shared/types";
+
 import { Text } from "@docspace/shared/components/text";
+import {
+  TFeedAction,
+  TFeedData,
+  RoomMember,
+} from "@docspace/shared/api/rooms/types";
+
 import { StyledHistoryDisplaynameBlock } from "../../../styles/history";
-import { Feed } from "./HistoryBlockContent.types";
 
-interface HistoryMainTextProps {
-  t: TTranslation;
-  feed: Feed;
-}
+type HistoryMainTextProps = {
+  feed: TFeedAction<RoomMember | TFeedData>;
+};
 
-const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
+const HistoryMainText = ({ feed }: HistoryMainTextProps) => {
+  const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
   return (
     <StyledHistoryDisplaynameBlock className="message">
       <span className="main-message">
@@ -56,4 +61,4 @@ export default inject<TStore>(({ infoPanelStore }) => {
   return {
     infoPanelSelection,
   };
-})(withTranslation(["InfoPanel", "Translations"])(observer(HistoryMainText)));
+})(observer(HistoryMainText));

@@ -24,53 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { TGroup } from "@docspace/shared/api/groups/types";
-import { TUser } from "@docspace/shared/api/people/types";
+import {
+  RoomMember,
+  TFeedAction,
+  TFeedData,
+} from "@docspace/shared/api/rooms/types";
 
-import { TRoom } from "@docspace/shared/api/rooms/types";
-
-export enum TInfoPanelMemberType {
-  users = "users",
-  groups = "groups",
-  expected = "expected",
-  guests = "guests",
-  administrators = "administrators",
-}
-
-export type HistoryFilter = {
-  page: number;
-  pageCount: number;
-  total: number;
-  startIndex: number;
+export type TSelectionHistory = {
+  day: string;
+  feeds: TFeedAction<TFeedData | RoomMember>[];
 };
-
-export type TTitleMember = {
-  id: TInfoPanelMemberType;
-  displayName: string;
-  isTitle: true;
-  isExpect?: boolean;
-};
-
-export type TInfoPanelMember = {
-  access: number;
-  canEditAccess: boolean;
-  isExpect?: boolean;
-} & (TUser | TGroup);
-
-export type TInfoPanelMembers = Record<
-  TInfoPanelMemberType,
-  TInfoPanelMember[]
-> & {
-  roomId: number | string;
-};
-
-type TMember = TTitleMember | TInfoPanelMember;
-
-export type TMemberTuple = TMember[];
-
-export type TSelection =
-  | TRoom
-  | TFile
-  | TFolder
-  | Array<TRoom | TFile | TFolder>;

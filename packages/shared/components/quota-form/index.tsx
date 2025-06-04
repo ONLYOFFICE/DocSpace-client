@@ -89,7 +89,7 @@ const getConvertedSize = (value: string, power: number) => {
 export const QuotaForm = ({
   isLoading,
   isDisabled,
-  maxInputWidth = "300px",
+  maxInputWidth,
   onSetQuotaBytesSize,
   initialSize = 0,
   isError,
@@ -217,7 +217,7 @@ export const QuotaForm = ({
       ) : null}
       <div className={classNames(styles.quotaContainer, "quota-container")}>
         <TextInput
-          type={InputType.number}
+          type={InputType.text}
           className={classNames(styles.quotaLimit, "quota_limit")}
           style={{ maxWidth: maxInputWidth }}
           isAutoFocussed={isAutoFocussed}

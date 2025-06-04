@@ -30,7 +30,7 @@ import React, { MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { MobileView } from "@docspace/shared/pages/Branding/mobile-view";
+import { MobileView } from "@docspace/shared/pages/Branding/MobileView";
 import type { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 import type { ICompanySettings } from "@docspace/shared/pages/Branding/CompanyInfo/CompanyInfo.types";
 import type { IBuildInfo } from "@docspace/shared/components/about-dialog/About.types";
@@ -119,21 +119,18 @@ const BrandingPage = ({
         portals={portals}
         quota={quota}
       />
-      {showAbout && (
-        <>
-          <hr />
-          <CompanyInfoPage
-            portals={portals}
-            quota={quota}
-            companyInfoSettingsData={companyInfo}
-            standalone={standalone}
-            licenseAgreementsUrl={licenseAgreementsUrl}
-            buildInfo={buildInfo}
-            isEnterprise={isEnterprise}
-            logoText={logoText}
-          />
-        </>
-      )}
+      <hr />
+      <CompanyInfoPage
+        portals={portals}
+        displayAbout={showAbout}
+        quota={quota}
+        companyInfoSettingsData={companyInfo}
+        standalone={standalone}
+        licenseAgreementsUrl={licenseAgreementsUrl}
+        buildInfo={buildInfo}
+        isEnterprise={isEnterprise}
+        logoText={logoText}
+      />
       <hr />
       <AdditionalResourcesPage
         portals={portals}
@@ -145,4 +142,3 @@ const BrandingPage = ({
 };
 
 export default BrandingPage;
-

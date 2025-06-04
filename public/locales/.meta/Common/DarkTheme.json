@@ -3,7 +3,7 @@
   "content": "Dark theme",
   "content_en_sha1_hash": "d51c5960ec071d2f7d544efc540c4d3f56821bd5",
   "created_at": "2025-05-26T07:15:42.339Z",
-  "updated_at": "2025-05-26T08:06:03.947Z",
+  "updated_at": "2025-06-02T10:20:51.332Z",
   "comment": {
     "text": "This translation key is used for the label \"DarkTheme\" which is displayed as a theme selection option in a UI component. It appears in a theme preview section and allows users to toggle between different themes. The translated text will be shown in a dark theme mode.",
     "is_auto": true,
@@ -30,26 +30,26 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 211,
-      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass=\"logo-header background-dark\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
+      "line_number": 212,
+      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass={classNames(styles.logoHeader, styles.backgroundDark)}\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 211,
-      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass=\"logo-header background-dark\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
+      "line_number": 212,
+      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass={classNames(styles.logoHeader, styles.backgroundDark)}\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 211,
-      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass=\"logo-header background-dark\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
+      "line_number": 212,
+      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass={classNames(styles.logoHeader, styles.backgroundDark)}\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 211,
-      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass=\"logo-header background-dark\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
+      "line_number": 212,
+      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass={classNames(styles.logoHeader, styles.backgroundDark)}\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     }
   ],

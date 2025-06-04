@@ -43,7 +43,9 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 const RoomNoAccessContainer = (props) => {
   const { t, setIsLoading, theme, isFrame, userId } = props;
 
-  const descriptionRoomNoAccess = t("NoAccessRoomDescription");
+  const descriptionRoomNoAccess = t("RoomAccessRedirectNote", {
+    sectionName: t("Common:Rooms"),
+  });
   const titleRoomNoAccess = t("NoAccessRoomTitle");
 
   const navigate = useNavigate();

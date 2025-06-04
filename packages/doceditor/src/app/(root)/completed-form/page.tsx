@@ -40,8 +40,6 @@ import {
 import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
 import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.empty";
 
-const log = logger.child({ module: "Create page" });
-
 interface PageProps {
   searchParams: Promise<Record<string, string | undefined>>;
 }
@@ -51,7 +49,7 @@ async function Page(props: PageProps) {
   const { share, fillingSessionId, roomId, is_file, formId, type, isSDK } =
     searchParams;
 
-  log.info("Open completed form page");
+  logger.info("Open completed form page");
 
   if (type && type === StartFillingMode.StartFilling.toString()) {
     const [formFillingStatus, file, user, settings] = await Promise.all([

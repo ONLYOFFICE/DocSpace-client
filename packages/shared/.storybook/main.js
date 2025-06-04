@@ -9,7 +9,7 @@ export default {
     "../**/*.stories.@(js|jsx|ts|tsx|mdx)", //"../**/*.stories.@(js|mdx)",
   ],
 
-  staticDirs: ["../../../public"],
+  staticDirs: ["../../../public", "../__mocks__/storybook/mockServiceWorker"],
 
   addons: [
     getAbsolutePath("@storybook/addon-links"),

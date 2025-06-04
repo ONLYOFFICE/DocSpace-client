@@ -26,6 +26,7 @@
 
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
@@ -34,8 +35,8 @@ import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import { StyledScheduleComponent } from "./ScheduleComponent.styled";
 import type { ScheduleComponentProps } from "./ScheduleComponent.types";
+import styles from "./ScheduleComponent.module.scss";
 
 const ScheduleComponent = ({
   selectedPeriodLabel,
@@ -70,23 +71,45 @@ const ScheduleComponent = ({
   }, [selectedPeriodNumber]);
 
   const renderHelpContent = () => (
-    <Text className="schedule_description" fontSize="12px">
+    <Text
+      className={classNames(styles.scheduleDescription, "schedule_description")}
+      fontSize="12px"
+    >
       {t("Common:AutoSavePeriodHelp", { productName: t("Common:ProductName") })}
     </Text>
   );
 
   return (
-    <StyledScheduleComponent
-      weeklySchedule={weeklySchedule}
-      monthlySchedule={monthlySchedule}
-      className="backup_schedule-component"
+    <div
+      className={classNames(
+        styles.scheduleComponent,
+        "backup_schedule-component",
+        {
+          [styles.weeklySchedule]: weeklySchedule,
+          [styles.monthlySchedule]: monthlySchedule,
+        },
+      )}
     >
-      <div className="schedule_help-section">
-        <Text className="schedule_description" fontSize="12px">
+      <div
+        className={classNames(
+          styles.scheduleHelpSection,
+          "schedule_help-section",
+        )}
+      >
+        <Text
+          className={classNames(
+            styles.scheduleDescription,
+            "schedule_description",
+          )}
+          fontSize="12px"
+        >
           {t("Common:AutoSavePeriod")}
         </Text>
         <HelpButton
-          className="schedule_help-button"
+          className={classNames(
+            styles.scheduleHelpButton,
+            "schedule_help-button",
+          )}
           iconName={HelpReactSvgUrl}
           getContent={renderHelpContent}
           tooltipMaxWidth="310px"
@@ -95,7 +118,7 @@ const ScheduleComponent = ({
           tooltipContent={undefined}
         />
       </div>
-      <div className="main_options">
+      <div className={classNames(styles.mainOptions, "main_options")}>
         <ComboBox
           options={periodsObject}
           selectedOption={{
@@ -107,7 +130,11 @@ const ScheduleComponent = ({
           noBorder={false}
           scaled={false}
           scaledOptions
-          className="schedule-backup_combobox days_option"
+          className={classNames(
+            styles.scheduleBackupCombobox,
+            styles.daysOption,
+            "schedule-backup_combobox days_option",
+          )}
           showDisabledItems
           directionY="both"
         />
@@ -124,7 +151,11 @@ const ScheduleComponent = ({
             scaled
             scaledOptions
             dropDownMaxHeight={300}
-            className="schedule-backup_combobox weekly_option"
+            className={classNames(
+              styles.scheduleBackupCombobox,
+              styles.weeklyOption,
+              "schedule-backup_combobox weekly_option",
+            )}
             showDisabledItems
             directionY="both"
           />
@@ -142,7 +173,11 @@ const ScheduleComponent = ({
             scaled={false}
             scaledOptions
             dropDownMaxHeight={300}
-            className="schedule-backup_combobox month_options"
+            className={classNames(
+              styles.scheduleBackupCombobox,
+              styles.monthOptions,
+              "schedule-backup_combobox month_options",
+            )}
             showDisabledItems
             directionY="both"
           />
@@ -159,12 +194,16 @@ const ScheduleComponent = ({
           scaled={false}
           scaledOptions
           dropDownMaxHeight={300}
-          className="schedule-backup_combobox time_options"
+          className={classNames(
+            styles.scheduleBackupCombobox,
+            styles.timeOptions,
+            "schedule-backup_combobox time_options",
+          )}
           showDisabledItems
           directionY="both"
         />
       </div>
-      <div className="maxCopiesOption">
+      <div className={classNames(styles.maxCopiesOption, "maxCopiesOption")}>
         <ComboBox
           options={maxNumberCopiesArray}
           selectedOption={{
@@ -179,50 +218,17 @@ const ScheduleComponent = ({
           scaled={false}
           scaledOptions
           dropDownMaxHeight={300}
-          className="schedule-backup_combobox max_copies"
+          className={classNames(
+            styles.scheduleBackupCombobox,
+            styles.maxCopies,
+            "schedule-backup_combobox max_copies",
+          )}
           showDisabledItems
           directionY="both"
         />
       </div>
-    </StyledScheduleComponent>
+    </div>
   );
 };
 
 export default ScheduleComponent;
-
-// export default inject(({ backup }) => {
-//   const {
-//     selectedPeriodLabel,
-//     selectedWeekdayLabel,
-//     selectedHour,
-//     selectedMonthDay,
-//     selectedMaxCopiesNumber,
-//     setPeriod,
-//     setMonthNumber,
-//     setTime,
-//     setMaxCopies,
-//     setWeekday,
-//     selectedPeriodNumber,
-//   } = backup;
-
-//   const weeklySchedule =
-//     +selectedPeriodNumber === AutoBackupPeriod.EveryWeekType;
-//   const monthlySchedule =
-//     +selectedPeriodNumber === AutoBackupPeriod.EveryMonthType;
-
-//   return {
-//     selectedPeriodLabel,
-//     selectedWeekdayLabel,
-//     selectedHour,
-//     selectedMonthDay,
-//     selectedMaxCopiesNumber,
-//     setPeriod,
-//     setMonthNumber,
-//     setTime,
-//     setMaxCopies,
-//     setWeekday,
-
-//     weeklySchedule,
-//     monthlySchedule,
-//   };
-// })(observer(ScheduleComponent));

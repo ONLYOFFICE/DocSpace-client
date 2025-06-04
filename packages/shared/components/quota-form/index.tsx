@@ -115,7 +115,7 @@ export const QuotaForm = ({
     setPower(initPower);
   }, [initSize, initPower, setSize, setPower]);
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const options = getOptions(t);
 
   const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -261,7 +261,7 @@ export const QuotaForm = ({
           onCancelClick={onCancelClick}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:CancelButton")}
-          reminderText={t("YouHaveUnsavedChanges")}
+          reminderText={t("Common:YouHaveUnsavedChanges")}
           displaySettings
           saveButtonDisabled={isDefaultQuota}
           disableRestoreToDefault={isDefaultQuota}

@@ -30,7 +30,7 @@ import styled from "styled-components";
 
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
-import { convertTime } from "@docspace/shared/utils/convertTime";
+import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
@@ -64,7 +64,7 @@ const StyledPeopleRow = styled(TableRow)`
 const PeopleTableRow = (props) => {
   const { item, contextOptionsProps, isSettingNotPaid, locale } = props;
   const { email, position } = item;
-  const dateStr = convertTime(item.date, locale);
+  const dateStr = getCorrectDate(locale, item.date);
 
   return (
     <StyledPeopleRow

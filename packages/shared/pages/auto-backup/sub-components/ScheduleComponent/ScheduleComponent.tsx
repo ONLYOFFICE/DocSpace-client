@@ -89,6 +89,7 @@ const ScheduleComponent = ({
           [styles.monthlySchedule]: monthlySchedule,
         },
       )}
+      data-testid="schedule-component"
     >
       <div
         className={classNames(

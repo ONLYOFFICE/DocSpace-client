@@ -56,20 +56,23 @@ const EditRoomGroupsDialog = ({}) => {
       <ModalDialog.Header>{"Edit room groups"}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <div className={styles.roomGroups}>
-          <div>Room groups</div>
-          <ToggleButton
+        <div className={styles.settingRoomGroups}>
+          <div className={styles.roomGroups}>
+            <div className={styles.title}>Room groups</div>
+            <ToggleButton
 
-          // onChange={onClickPermissions}
-          // isChecked={selectedEnableSchedule}
-          // isDisabled={isLoadingData || !isEnableAuto || isInitialError}
-          />
+            // onChange={onClickPermissions}
+            // isChecked={selectedEnableSchedule}
+            // isDisabled={isLoadingData || !isEnableAuto || isInitialError}
+            />
+          </div>
+
+          <Text className={styles.description}>
+            You can group rooms into folders and easily switch between them. By
+            disabling grouping, you can re-enable it in the profile settings.
+          </Text>
         </div>
-
-        <Text>
-          You can group rooms into folders and easily switch between them. By
-          disabling grouping, you can re-enable it in the profile settings.
-        </Text>
+        <div className={styles.separator}></div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

@@ -39,6 +39,7 @@ import UsefulTipsContainer from "./sub-components/UsefulTipsContainer";
 import RoomsActionsContainer from "./sub-components/RoomsActionsContainer";
 import DailyFeedContainer from "./sub-components/DailyFeedContainer";
 import RoomsActivityContainer from "./sub-components/RoomsActivityContainer";
+import NotificationsChannels from "./NotificationsChannels";
 import { StyledSectionBodyContent, StyledTextContent } from "./StyledComponent";
 
 const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
@@ -157,6 +158,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
 
   return (
     <StyledSectionBodyContent>
+      <NotificationsChannels />
       {badgesContent}
       {emailContent}
     </StyledSectionBodyContent>

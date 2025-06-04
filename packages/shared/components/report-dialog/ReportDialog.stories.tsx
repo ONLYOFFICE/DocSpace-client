@@ -137,11 +137,3 @@ export const Default: Story = {
     currentDeviceType: DeviceType.desktop,
   },
 };
-
-export const Mobile: Story = {
-  render: (args) => <DialogWithToggleButton {...args} />,
-  args: {
-    ...Default.args,
-    currentDeviceType: DeviceType.mobile,
-  },
-};

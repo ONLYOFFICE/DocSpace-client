@@ -96,11 +96,3 @@ export const Complete: Story = {
     status: "All files processed successfully",
   },
 };
-
-export const CustomStyling: Story = {
-  args: {
-    percent: 60,
-    label: "Custom styled progress",
-    className: "custom-progress-bar",
-  },
-};

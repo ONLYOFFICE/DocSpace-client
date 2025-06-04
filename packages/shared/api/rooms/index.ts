@@ -59,7 +59,15 @@ import type {
   CreateRoomFromTemplateDto,
   SetPublicDto,
   SettingsRequestDto,
-  FolderIntegerWrapper,
+  FileShareDto,
+  RoomSecurityDto,
+  FolderDtoString,
+  FolderDtoInteger,
+  FileOperationDto,
+  UploadResultDto,
+  ExternalShareDto,
+  CoversResultDto,
+  DocumentBuilderTaskDto,
 } from "@onlyoffice/docspace-api-typescript";
 
 export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
@@ -86,7 +94,7 @@ export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
     });
   }
 
-  return res;
+  return res as FolderContentDtoInteger;
 }
 
 export async function getRoomInfo(id: number) {
@@ -94,7 +102,7 @@ export async function getRoomInfo(id: number) {
 
   if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
 
-  return res as FolderIntegerWrapper;
+  return res as FolderDtoInteger;
 }
 
 export async function getRoomMembers(id: number, filterType: ShareFilterType) {
@@ -106,7 +114,7 @@ export async function getRoomMembers(id: number, filterType: ShareFilterType) {
     }
   });
 
-  return res;
+  return res as FileShareDto;
 }
 
 export async function updateRoomMemberRole(
@@ -114,7 +122,7 @@ export async function updateRoomMemberRole(
   data: RoomInvitationRequest,
 ) {
   const res = await roomsClient.setRoomSecurity(id, data);
-  return res;
+  return res as RoomSecurityDto;
 }
 
 export async function getHistory(
@@ -143,7 +151,7 @@ export async function getHistory(
 
 export async function createRoom(data: CreateRoomRequestDto) {
   const res = await roomsClient.createRoom(data);
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function createRoomInThirdpary(
@@ -151,22 +159,22 @@ export async function createRoomInThirdpary(
   data: CreateThirdPartyRoom,
 ) {
   const res = await roomsClient.createRoomThirdParty(id, data);
-  return res;
+  return res as FolderDtoString;
 }
 
 export async function editRoom(id: number, data: UpdateRoomRequest) {
   const res = await roomsClient.updateRoom(id, data);
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function pinRoom(id: number) {
   const res = await roomsClient.pinRoom(id);
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function unpinRoom(id: number) {
   const res = await roomsClient.unpinRoom(id);
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function deleteRoom(
@@ -174,7 +182,7 @@ export async function deleteRoom(
   data: DeleteRoomRequest = { deleteAfter: false },
 ) {
   const res = await roomsClient.deleteRoom(id, data);
-  return res;
+  return res as FileOperationDto;
 }
 
 export async function archiveRoom(
@@ -182,49 +190,49 @@ export async function archiveRoom(
   data: ArchiveRoomRequest = { deleteAfter: false },
 ) {
   const res = await roomsClient.archiveRoom(id, data);
-  return res;
+  return res as FileOperationDto;
 }
 
 export async function unarchiveRoom(id: number) {
   const res = await roomsClient.unarchiveRoom(id);
-  return res;
+  return res as FileOperationDto;
 }
 
 export async function createTag(name: string) {
   const res = await roomsClient.createRoomTag({ name });
-  return res;
+  return res as object;
 }
 
 export async function addTagsToRoom(id: number, tags: Array<string>) {
   const res = await roomsClient.addRoomTags(id, { names: tags });
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function removeTagsFromRoom(id: number, tags: Array<string>) {
   const res = await roomsClient.deleteRoomTags(id, { names: tags });
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function getTags() {
   const res = await roomsClient.getRoomTagsInfo();
-  return res;
+  return res as object[];
 }
 
 export async function uploadRoomLogo(
   data: Array<KeyValuePairStringStringValues>,
 ) {
   const res = await roomsClient.uploadRoomLogo(data);
-  return res;
+  return res as UploadResultDto;
 }
 
 export async function addLogoToRoom(id: number, data: LogoRequest) {
   const res = await roomsClient.createRoomLogo(id, data);
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function removeLogoFromRoom(id: number) {
   const res = await roomsClient.deleteRoomLogo(id);
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function setInvitationLinks(
@@ -238,7 +246,7 @@ export async function setInvitationLinks(
     title,
     access,
   });
-  return res;
+  return res as FileShareDto;
 }
 
 export async function resendEmailInvitations(
@@ -246,12 +254,12 @@ export async function resendEmailInvitations(
   data: UserInvitation = { resendAll: true },
 ) {
   const res = await roomsClient.resendEmailInvitations(id, data);
-  return res;
+  return res as void;
 }
 
 export async function getRoomSecurityInfo(id: number) {
   const res = await roomsClient.getRoomSecurityInfo(id, 1);
-  return res;
+  return res as FileShareDto[];
 }
 
 export async function setRoomSecurity(id: number, data: RoomInvitationRequest) {
@@ -263,27 +271,27 @@ export async function setRoomSecurity(id: number, data: RoomInvitationRequest) {
     }
   });
 
-  return res;
+  return res as RoomSecurityDto;
 }
 
 export async function editExternalLink(id: number, data: RoomLinkRequest) {
   const res = await roomsClient.setRoomLink(roomId, data);
-  return res;
+  return res as FileShareDto;
 }
 
 export async function getExternalLinks(id: number, type: LinkType) {
   const res = await roomsClient.getRoomLinks(id, type);
-  return res;
+  return res as FileShareDto[];
 }
 
 export async function getPrimaryLink(id: number) {
   const res = await roomsClient.getRoomsPrimaryExternalLink(id);
-  return res;
+  return res as FileShareDto;
 }
 
 export function validatePublicRoomKey(key: string) {
   const res = sharingClient.getExternalShareData(key);
-  return res;
+  return res as ExternalShareDto;
 }
 
 export function validatePublicRoomPassword(
@@ -292,7 +300,7 @@ export function validatePublicRoomPassword(
   signal?: AbortSignal,
 ) {
   const res = sharingClient.applyExternalSharePassword(key, data, { signal });
-  return res;
+  return res as ExternalShareDto;
 }
 
 export function setCustomRoomQuota(roomIds, quota) {
@@ -324,47 +332,47 @@ export function resetRoomQuota(roomIds) {
 
 export async function getRoomCovers() {
   const res = await roomsClient.getRoomCovers();
-  return res;
+  return res as CoversResultDto[];
 }
 
 export async function exportRoomIndex(id: number) {
   const res = await roomsClient.startRoomIndexExport(id);
-  return res;
+  return res as DocumentBuilderTaskDto;
 }
 
 export async function getExportRoomIndexProgress() {
   const res = await roomsClient.getRoomIndexExport();
-  return res;
+  return res as DocumentBuilderTaskDto;
 }
 
 export async function setRoomCover(id: number, cover: CoverRequestDto) {
   const res = await roomsClient.changeRoomCover(id, cover);
-  return res;
+  return res as FolderDtoInteger;
 }
 
 export async function createTemplate(data: RoomTemplateDto) {
   const res = await roomsClient.createRoomTemplate(data);
-  return res;
+  return res as RoomTemplateStatusDto;
 }
 
 export async function getCreateTemplateProgress() {
   const res = await roomsClient.getRoomTemplateCreatingStatus();
-  return res;
+  return res as RoomTemplateStatusDto;
 }
 
 export async function createRoomFromTemplate(data: CreateRoomFromTemplateDto) {
   const res = await roomsClient.createRoomFromTemplate(data);
-  return res;
+  return res as CreateRoomFromTemplateDto;
 }
 
 export async function getCreateRoomFromTemplateProgress() {
   const res = await roomsClient.getRoomCreatingStatus();
-  return res;
+  return res as RoomFromTemplateStatusDto;
 }
 
 export async function getTemplateAvailable(id: number) {
   const res = await roomsClient.getPublicSettings(id);
-  return res;
+  return res as boolean;
 }
 
 export async function setTemplateAvailable(
@@ -375,10 +383,10 @@ export async function setTemplateAvailable(
     id,
     isPublic,
   });
-  return res;
+  return res as void;
 }
 
 export function hideConfirmRoomLifetime(data: SettingsRequestDto) {
   const res = filesSettingsClient.hideConfirmRoomLifetime(data);
-  return res;
+  return res as boolean;
 }

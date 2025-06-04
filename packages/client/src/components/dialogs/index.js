@@ -74,6 +74,8 @@ import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
 import SocialAuthWelcomeDialog from "./SocialAuthWelcomeDialog";
+import ConnectAccountDialog from "./ConnectAccountDialog";
+import DisconnectAccountDialog from "./DisconnectAccountDialog";
 
 export {
   EmptyTrashDialog,
@@ -126,4 +128,6 @@ export {
   FormFillingTipsDialog,
   ReducedRightsDialog,
   SocialAuthWelcomeDialog,
+  ConnectAccountDialog,
+  DisconnectAccountDialog,
 };

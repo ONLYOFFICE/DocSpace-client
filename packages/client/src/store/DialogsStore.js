@@ -304,6 +304,10 @@ class DialogsStore {
 
   socialAuthWelcomeDialogVisible = false;
 
+  connectAccountDialogVisible = false;
+
+  disconnectAccountDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -1042,6 +1046,14 @@ class DialogsStore {
 
   setSocialAuthWelcomeDialogVisible = (visible) => {
     this.socialAuthWelcomeDialogVisible = visible;
+  };
+
+  setConnectAccountDialogVisible = (visible) => {
+    this.connectAccountDialogVisible = visible;
+  };
+
+  setDisconnectAccountDialogVisible = (visible) => {
+    this.disconnectAccountDialogVisible = visible;
   };
 }
 

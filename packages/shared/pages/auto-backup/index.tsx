@@ -61,11 +61,11 @@ import { globalColors } from "@docspace/shared/themes";
 import { useStateCallback } from "@docspace/shared/hooks/useStateCallback";
 import type { Nullable, Option } from "@docspace/shared/types";
 
+import { SaveCancelButtons } from "../../components/save-cancel-buttons";
+
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModule";
-
-import { ButtonContainer } from "./sub-components/ButtonContainer";
 
 import { useDefaultOptions } from "./hooks/index";
 import { StyledModules, StyledAutoBackup } from "./AutoBackup.styled";
@@ -394,6 +394,9 @@ const AutomaticBackup = ({
 
   const roomName = rootFoldersTitles[FolderType.USER]?.title;
 
+  const isSaveCancelDisabled =
+    isLoadingData || !(isChanged || isThirdStorageChanged);
+
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
 
   if (isInitialLoading) return <AutoBackupLoader />;
@@ -617,15 +620,17 @@ const AutomaticBackup = ({
         </div>
       ) : null}
 
-      <ButtonContainer
-        t={t}
-        isLoadingData={isLoadingData || isInitialError}
-        buttonSize={buttonSize}
-        onSaveModuleSettings={onSaveModuleSettings}
-        onCancelModuleSettings={onCancelModuleSettings}
-        isChanged={isChanged}
-        isThirdStorageChanged={isThirdStorageChanged}
-      />
+      {isChanged || isThirdStorageChanged ? (
+        <SaveCancelButtons
+          saveButtonLabel={t("Common:SaveButton")}
+          cancelButtonLabel={t("Common:CancelButton")}
+          onSaveClick={onSaveModuleSettings}
+          onCancelClick={onCancelModuleSettings}
+          saveButtonDisabled={isSaveCancelDisabled}
+          disableRestoreToDefault={isSaveCancelDisabled}
+          displaySettings
+        />
+      ) : null}
 
       {isBackupProgressVisible ? (
         <OperationsProgressButton

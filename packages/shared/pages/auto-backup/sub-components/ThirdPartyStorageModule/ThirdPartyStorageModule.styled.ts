@@ -145,9 +145,6 @@ export const StyledAutoBackup = styled.div<{ pageIsDisabled?: boolean }>`
     width: 100%;
     max-width: ${INPUT_LENGTH};
   }
-  .save-button {
-    margin-inline-end: 8px;
-  }
   .auto-backup_storages-module {
     margin-inline-start: 24px;
     .backup_schedule-component {

@@ -204,6 +204,7 @@ export const QuotaForm = ({
         [styles.isLabel]: !!label,
         [styles.isButtonsEnable]: isButtonsEnable,
       })}
+      data-testid="quota-form"
     >
       {label ? <Text fontWeight={600}>{label}</Text> : null}
       {description ? (
@@ -229,6 +230,7 @@ export const QuotaForm = ({
           scale
           withBorder
           tabIndex={tabIndex}
+          testId="quota-text-input"
         />
         <ComboBox
           className={classNames(styles.quotaValue, "quota_value")}

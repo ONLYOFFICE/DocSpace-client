@@ -90,18 +90,29 @@ const ToggleDropDownTemplate = (args: DropDownProps) => {
   return (
     <div
       ref={parentRef}
-      style={{ height: "100px", position: "relative", padding: "20px" }}
+      style={{
+        height: "200px",
+        position: "relative",
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+      }}
     >
       <Button
         label="Toggle Dropdown"
-        onClick={() => setIsOpen(true)}
+        onClick={toggleDropdown}
         style={{ marginBottom: "8px" }}
       />
       <DropDown
         {...args}
         open={isOpen}
         forwardedRef={parentRef}
-        enableOnClickOutside={toggleDropdown}
+        clickOutsideAction={(e, open) => setIsOpen(false)}
+        isDefaultMode={false}
+        fixedDirection
+        directionY="bottom"
+        manualY="60px"
       >
         <DropDownItem isHeader label="Menu" />
         <DropDownItem label="Option 1" onClick={() => {}} />

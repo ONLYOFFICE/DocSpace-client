@@ -2068,16 +2068,12 @@
   --download-dialog-bg: #{$gray-light};
   --download-dialog-text-color: #{$gray};
   --download-dialog-warning-color: #{$light-error-status};
-
-  --modal-dialog-border-color: #{$gray-light-mid};
 }
 
 .dark {
   --download-dialog-bg: #{$dark-gray-light};
   --download-dialog-text-color: #{$gray-dark};
   --download-dialog-warning-color: #{$dark-error-status};
-
-  --modal-dialog-border-color: #{$gray-dark-strong};
 }
 
 .light {
@@ -2104,7 +2100,7 @@
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};
-  --modal-dialog-border-color: #{$gray-light-mid};
+  --modal-dialog-border-color: #{$gray-dark-strong};
 }
 
 .light {

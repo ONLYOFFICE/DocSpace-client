@@ -59,6 +59,7 @@ import type {
   CreateRoomFromTemplateDto,
   SetPublicDto,
   SettingsRequestDto,
+  FolderIntegerWrapper,
 } from "@onlyoffice/docspace-api-typescript";
 
 export async function getRooms(filter?: RoomsFilter, signal?: AbortSignal) {
@@ -93,7 +94,7 @@ export async function getRoomInfo(id: number) {
 
   if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
 
-  return res;
+  return res as FolderIntegerWrapper;
 }
 
 export async function getRoomMembers(id: number, filterType: ShareFilterType) {
@@ -190,22 +191,22 @@ export async function unarchiveRoom(id: number) {
 }
 
 export async function createTag(name: string) {
-  const res = await roomsClient.createTag({ name });
+  const res = await roomsClient.createRoomTag({ name });
   return res;
 }
 
 export async function addTagsToRoom(id: number, tags: Array<string>) {
-  const res = await roomsClient.addTags(id, { names: tags });
+  const res = await roomsClient.addRoomTags(id, { names: tags });
   return res;
 }
 
 export async function removeTagsFromRoom(id: number, tags: Array<string>) {
-  const res = await roomsClient.deleteTags(id, { names: tags });
+  const res = await roomsClient.deleteRoomTags(id, { names: tags });
   return res;
 }
 
 export async function getTags() {
-  const res = await roomsClient.getTagsInfo();
+  const res = await roomsClient.getRoomTagsInfo();
   return res;
 }
 
@@ -232,7 +233,7 @@ export async function setInvitationLinks(
   access: RoomLinkRequest["access"],
   linkId: RoomLinkRequest["linkId"],
 ) {
-  const res = await roomsClient.setLink(roomId, {
+  const res = await roomsClient.setRoomLink(roomId, {
     linkId,
     title,
     access,
@@ -266,7 +267,7 @@ export async function setRoomSecurity(id: number, data: RoomInvitationRequest) {
 }
 
 export async function editExternalLink(id: number, data: RoomLinkRequest) {
-  const res = await roomsClient.setLink(roomId, data);
+  const res = await roomsClient.setRoomLink(roomId, data);
   return res;
 }
 
@@ -322,7 +323,7 @@ export function resetRoomQuota(roomIds) {
 }
 
 export async function getRoomCovers() {
-  const res = await roomsClient.getCovers();
+  const res = await roomsClient.getRoomCovers();
   return res;
 }
 
@@ -342,12 +343,12 @@ export async function setRoomCover(id: number, cover: CoverRequestDto) {
 }
 
 export async function createTemplate(data: RoomTemplateDto) {
-  const res = await roomsClient.createTemplate(data);
+  const res = await roomsClient.createRoomTemplate(data);
   return res;
 }
 
 export async function getCreateTemplateProgress() {
-  const res = await roomsClient.getTemplateCreatingStatus();
+  const res = await roomsClient.getRoomTemplateCreatingStatus();
   return res;
 }
 
@@ -362,7 +363,7 @@ export async function getCreateRoomFromTemplateProgress() {
 }
 
 export async function getTemplateAvailable(id: number) {
-  const res = await roomsClient.isPublic(id);
+  const res = await roomsClient.getPublicSettings(id);
   return res;
 }
 
@@ -370,7 +371,7 @@ export async function setTemplateAvailable(
   id: SetPublicDto["id"],
   isPublic: SetPublicDto["public"],
 ) {
-  const res = await roomsClient.setPublic({
+  const res = await roomsClient.setPublicSettings({
     id,
     isPublic,
   });

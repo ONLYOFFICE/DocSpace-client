@@ -24,7 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TDocServerLicense } from "api/portal/types";
+import { TUserStatistics } from "../../../dialogs/UserStatisticsDialog/UserStatisticsDialog.types";
+
 export function getTwoDotsReplacing(translation: string) {
   const newTranslation = translation;
   return newTranslation.replace(/\..$/, ".");
 }
+
+export const parseUserStatistics = (
+  userStatics: TDocServerLicense,
+): TUserStatistics => {
+  const {
+    users_count: usersCount,
+    users_expire: usersExpire,
+    connections: externalCount,
+  } = userStatics;
+
+  return {
+    userLimit: usersExpire,
+    editingCount: usersCount + externalCount,
+    externalCount,
+    usersCount,
+  };
+};

@@ -24,24 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Nullable } from "types";
+import { useState } from "react";
+import { createLicenseQuotaReport } from "../../../../../api/management";
+import { toastr } from "../../../../../components/toast";
 
-export type TUserStatisticsDialogProps = {
-  isVisible: boolean;
-  isLoading?: boolean;
-  onClose: VoidFunction;
-  statistics: Nullable<TUserStatistics>;
-  onDownloadAndReport: VoidFunction;
-  docspaceFaqUrl?: string;
-};
+export const useUserStatisticsDialog = () => {
+  const [visible, setVisible] = useState(false);
 
-export type TUserStatistics = {
-  userLimit: number;
-  editingCount: number;
-  externalCount: number;
-  usersCount: number;
-};
+  const open = () => setVisible(true);
+  const close = () => setVisible(false);
 
-export type TUserStatisticsInfoProps = {
-  statistics: TUserStatistics;
+  const downloadAndOpenReport = async () => {
+    try {
+      const url = await createLicenseQuotaReport();
+      window.open(url, "_blank");
+    } catch (error) {
+      toastr.error(error!);
+    }
+  };
+
+  return {
+    isUserStatisticsVisible: visible,
+    openUserStatistics: open,
+    closeUserStatistics: close,
+    downloadAndOpenReport,
+  };
 };

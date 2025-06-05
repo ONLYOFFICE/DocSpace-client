@@ -400,3 +400,5 @@ export async function getTenantExtra() {
     url: "/portal/tenantextra",
   })) as TTenantExtra;
 }
+
+

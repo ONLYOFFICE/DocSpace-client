@@ -24,14 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "../../../../components/text";
 
 import { StyledTitleComponent } from "../Payments.styled";
-import { getTwoDotsReplacing } from "../Payments.helpers";
+import { getTwoDotsReplacing, parseUserStatistics } from "../Payments.helpers";
 import { IPaymentsProps } from "../Payments.types";
+import { useUserStatisticsDialog } from "./hooks/useUserStatisticsDialog";
+import UserStatisticsDialog from "../../../../dialogs/UserStatisticsDialog";
+import { Link } from "@docspace/shared/components/link";
 
 export const TariffTitleContainer = ({
   isLicenseDateExpired,
@@ -40,8 +42,16 @@ export const TariffTitleContainer = ({
   paymentDate,
   isDeveloper,
   logoText,
+  docspaceFaqUrl,
+  license,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
+
+  const userStatistics = license ? parseUserStatistics(license) : null;
+
+  const { isUserStatisticsVisible, openUserStatistics, closeUserStatistics, downloadAndOpenReport } =
+    useUserStatisticsDialog();
+
   const alertComponent = () => {
     if (isTrial) {
       return isLicenseDateExpired ? (
@@ -95,23 +105,46 @@ export const TariffTitleContainer = ({
     >
       <div className="payments_subscription">
         <div className="title">
-          <Text fontWeight={600} fontSize="14px" as="span">
-            {t("ActivateTariffDescr", {
-              productName: t("Common:ProductName"),
-              organizationName: logoText,
-              license: isDeveloper
-                ? t("Common:DeveloperLicense")
-                : t("Common:EnterpriseLicense"),
-            })}
+          <Text fontWeight={600} fontSize="13px" lineHeight="20px" as="span">
+            <Trans
+              i18nKey="ActivateTariffDescrUsers"
+              values={{
+                productName: t("Common:ProductName"),
+                organizationName: logoText,
+                license: isDeveloper
+                  ? t("Common:DeveloperLicense")
+                  : t("Common:EnterpriseLicense"),
+                editingCount: userStatistics?.editingCount ?? 0,
+                limit: userStatistics?.userLimit ?? 0,
+              }}
+              t={t}
+              ns="Common"
+              components={{
+                1: (
+                  <Link
+                    color="accent"
+                    onClick={openUserStatistics}
+                    fontWeight="600"
+                  />
+                ),
+              }}
+            />
           </Text>{" "}
           {!isLicenseDateExpired ? (
-            <Text fontSize="14px" as="span">
+            <Text fontSize="13px" as="span">
               {expiresDate()}
             </Text>
           ) : null}
         </div>
         {alertComponent()}
       </div>
+      <UserStatisticsDialog
+        docspaceFaqUrl={docspaceFaqUrl}
+        isVisible={isUserStatisticsVisible}
+        statistics={userStatistics}
+        onClose={closeUserStatistics}
+        onDownloadAndReport={downloadAndOpenReport}
+      />
     </StyledTitleComponent>
   );
 };

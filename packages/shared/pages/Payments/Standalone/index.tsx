@@ -47,6 +47,8 @@ export const StandalonePage = ({
   paymentDate,
   isEnterprise,
   logoText,
+  docspaceFaqUrl,
+  license,
 }: IPaymentsProps) => {
   return (
     <StyledPageWrapper>
@@ -60,6 +62,8 @@ export const StandalonePage = ({
           paymentDate={paymentDate}
           isEnterprise={isEnterprise}
           logoText={logoText}
+          docspaceFaqUrl={docspaceFaqUrl}
+          license={license}
         />
       ) : (
         <EnterpriseContainer
@@ -72,6 +76,8 @@ export const StandalonePage = ({
           paymentDate={paymentDate}
           isEnterprise={isEnterprise}
           logoText={logoText}
+          docspaceFaqUrl={docspaceFaqUrl}
+          license={license}
         />
       )}
       <LicenseContainer

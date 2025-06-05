@@ -48,6 +48,8 @@ export const EnterpriseContainer = ({
   paymentDate,
   isEnterprise,
   logoText,
+  docspaceFaqUrl,
+  license,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
@@ -68,6 +70,8 @@ export const EnterpriseContainer = ({
         paymentDate={paymentDate}
         isDeveloper={isDeveloper}
         logoText={logoText}
+        docspaceFaqUrl={docspaceFaqUrl}
+        license={license}
       />
 
       {isLicenseDateExpired ? (

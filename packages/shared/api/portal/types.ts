@@ -180,6 +180,11 @@ export type TDocServerLicense = {
   docspace_dev: boolean;
 };
 
+export type TLicenseQuota = {
+  userQuota: Partial<TPaymentQuota["usersQuota"]>;
+  license: TDocServerLicense;
+};
+
 export type TTenantExtra = {
   customMode: boolean;
   opensource: boolean;

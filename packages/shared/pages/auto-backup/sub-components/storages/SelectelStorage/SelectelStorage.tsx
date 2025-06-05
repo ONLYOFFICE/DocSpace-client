@@ -35,7 +35,6 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 
-import { StyledStoragesModule } from "./SelectelStorage.styled";
 import type { SelectelStorageProps } from "./SelectelStorage.types";
 
 const SelectelStorage = ({
@@ -49,7 +48,6 @@ const SelectelStorage = ({
   setRequiredFormSettings,
   isLoading,
   selectedStorage,
-  // ScheduleComponent
   hoursArray,
   maxNumberCopiesArray,
   monthNumbersArray,
@@ -74,7 +72,7 @@ const SelectelStorage = ({
   });
 
   return (
-    <StyledStoragesModule>
+    <div data-testid="selectel-storage">
       <SelectelSettings
         t={t}
         isLoading={isLoading}
@@ -107,16 +105,8 @@ const SelectelStorage = ({
         hoursArray={hoursArray}
         maxNumberCopiesArray={maxNumberCopiesArray}
       />
-    </StyledStoragesModule>
+    </div>
   );
 };
 
 export default SelectelStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields } = backup;
-
-//   return {
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation(["Settings", "Common"])(SelectelStorage)));

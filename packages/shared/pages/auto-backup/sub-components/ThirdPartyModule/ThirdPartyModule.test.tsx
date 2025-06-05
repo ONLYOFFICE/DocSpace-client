@@ -25,79 +25,45 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 import { BackupStorageType } from "@docspace/shared/enums";
+import { ButtonSize } from "@docspace/shared/components/button";
+
 import { ThirdPartyModule } from "./index";
-import styles from "../../AutoBackup.module.scss";
 import {
-  hoursArray,
-  maxNumberCopiesArray,
-  monthNumbersArray,
   periodsObject,
   weekdaysLabelArray,
+  monthNumbersArray,
+  hoursArray,
+  maxNumberCopiesArray,
   mockThirdPartyAccounts,
   mockThirdPartyProviders,
 } from "../../mockData";
-import { ButtonSize } from "../../../../components/button";
 
-export default {
-  title: "Pages/AutoBackup/ThirdPartyModule",
-  component: ThirdPartyModule,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "Third-party storage selection and configuration module for Auto Backup",
-      },
-    },
-  },
-  argTypes: {
-    isError: {
-      control: "boolean",
-      description: "Whether an error occurred",
-    },
-    isLoadingData: {
-      control: "boolean",
-      description: "Whether data is currently loading",
-    },
-    defaultStorageType: {
-      control: "text",
-      description: "Default storage type",
-    },
-    defaultFolderId: {
-      control: "text",
-      description: "Default folder ID",
-    },
-  },
-  decorators: [
-    (Story) => (
-      <div className={styles.autoBackup}>
-        <Story />
-      </div>
-    ),
-  ],
-} as Meta<typeof ThirdPartyModule>;
+jest.mock("@docspace/shared/components/direct-third-party-connection", () => ({
+  DirectThirdPartyConnection: jest.fn(() => (
+    <div data-testid="direct-third-party-connection-mock" />
+  )),
+}));
 
-type Story = StoryObj<typeof ThirdPartyModule>;
-
-export const Default: Story = {
-  args: {
+describe("ThirdPartyModule", () => {
+  const defaultProps = {
     // Basic props
     isError: false,
     isLoadingData: false,
     defaultStorageType: BackupStorageType.ResourcesModuleType.toString(),
     defaultFolderId: "folder-123",
-    setSelectedFolder: action("setSelectedFolder"),
+    setSelectedFolder: jest.fn(),
 
     // DirectThirdPartyConnection props
     accounts: mockThirdPartyAccounts,
     basePath: "/",
-    clearLocalStorage: action("clearLocalStorage"),
+    clearLocalStorage: jest.fn(),
     connectDialogVisible: false,
     connectedThirdPartyAccount: null,
-    deleteThirdParty: action("deleteThirdParty"),
+    deleteThirdParty: jest.fn(),
     deleteThirdPartyDialogVisible: false,
     filesSelectorSettings: {
       getIcon: () => {},
@@ -105,21 +71,19 @@ export const Default: Story = {
     isErrorPath: false,
     isTheSameThirdPartyAccount: false,
     newPath: "/",
-    openConnectWindow: action("openConnectWindow"),
+    openConnectWindow: jest.fn(),
     providers: mockThirdPartyProviders,
-    removeItem: action("removeItem"),
+    removeItem: mockThirdPartyAccounts[0],
     selectedThirdPartyAccount: mockThirdPartyAccounts[0],
-    setBasePath: action("setBasePath"),
-    setConnectDialogVisible: action("setConnectDialogVisible"),
-    setConnectedThirdPartyAccount: action("setConnectedThirdPartyAccount"),
-    setDeleteThirdPartyDialogVisible: action(
-      "setDeleteThirdPartyDialogVisible",
-    ),
-    setNewPath: action("setNewPath"),
-    setSelectedThirdPartyAccount: action("setSelectedThirdPartyAccount"),
-    setThirdPartyAccountsInfo: action("setThirdPartyAccountsInfo"),
-    setThirdPartyProviders: action("setThirdPartyProviders"),
-    toDefault: action("toDefault"),
+    setBasePath: jest.fn(),
+    setConnectDialogVisible: jest.fn(),
+    setConnectedThirdPartyAccount: jest.fn(),
+    setDeleteThirdPartyDialogVisible: jest.fn(),
+    setNewPath: jest.fn(),
+    setSelectedThirdPartyAccount: jest.fn(),
+    setThirdPartyAccountsInfo: jest.fn(),
+    setThirdPartyProviders: jest.fn(),
+    toDefault: jest.fn(),
     buttonSize: ButtonSize.small,
 
     // ScheduleComponent props
@@ -134,17 +98,42 @@ export const Default: Story = {
     monthNumbersArray,
     hoursArray,
     maxNumberCopiesArray,
-    setMaxCopies: action("setMaxCopies"),
-    setPeriod: action("setPeriod"),
-    setWeekday: action("setWeekday"),
-    setMonthNumber: action("setMonthNumber"),
-    setTime: action("setTime"),
-  },
-};
+    setMaxCopies: jest.fn(),
+    setPeriod: jest.fn(),
+    setWeekday: jest.fn(),
+    setMonthNumber: jest.fn(),
+    setTime: jest.fn(),
+  };
 
-export const Loading: Story = {
-  args: {
-    ...Default.args,
-    isLoadingData: true,
-  },
-};
+  it("renders without error", () => {
+    render(<ThirdPartyModule {...defaultProps} />);
+    expect(screen.getByTestId("third-party-module")).toBeInTheDocument();
+  });
+
+  it("calls setSelectedFolder with empty string when not default folder", () => {
+    const setSelectedFolderMock = jest.fn();
+    render(
+      <ThirdPartyModule
+        {...defaultProps}
+        defaultStorageType={BackupStorageType.DocumentModuleType.toString()}
+        setSelectedFolder={setSelectedFolderMock}
+      />,
+    );
+
+    expect(setSelectedFolderMock).toHaveBeenCalledWith("");
+  });
+
+  it("calls setSelectedFolder with defaultFolderId when is resources default", () => {
+    const setSelectedFolderMock = jest.fn();
+    render(
+      <ThirdPartyModule
+        {...defaultProps}
+        defaultStorageType={BackupStorageType.ResourcesModuleType.toString()}
+        defaultFolderId="test-folder-id"
+        setSelectedFolder={setSelectedFolderMock}
+      />,
+    );
+
+    expect(setSelectedFolderMock).toHaveBeenCalledWith("test-folder-id");
+  });
+});

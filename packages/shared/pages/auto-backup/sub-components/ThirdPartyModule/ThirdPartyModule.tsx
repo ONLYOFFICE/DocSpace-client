@@ -129,7 +129,7 @@ const ThirdPartyModule = ({
   const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
 
   return (
-    <>
+    <div data-testid="third-party-module">
       <div
         className={classNames(
           styles.autoBackupThirdPartyModule,
@@ -189,7 +189,7 @@ const ThirdPartyModule = ({
         hoursArray={hoursArray}
         maxNumberCopiesArray={maxNumberCopiesArray}
       />
-    </>
+    </div>
   );
 };
 

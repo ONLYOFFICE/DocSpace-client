@@ -131,3 +131,47 @@ export const selectedStorages = {
     ],
   } as SelectedStorageType,
 };
+
+export const mockThirdPartyAccounts = [
+  {
+    name: "ownCloud",
+    label: "ownCloud",
+    title: "ownCloud",
+    provider_key: "ownCloud",
+    key: "WebDav",
+    storageIsConnected: false,
+    connected: true,
+    disabled: false,
+  },
+  {
+    name: "Nextcloud",
+    label: "Nextcloud",
+    title: "Nextcloud",
+    provider_key: "Nextcloud",
+    key: "WebDav",
+    storageIsConnected: false,
+    connected: true,
+    disabled: false,
+  },
+];
+
+export const mockThirdPartyProviders = [
+  {
+    corporate: false,
+    roomsStorage: false,
+    customerTitle: "Google Drive",
+    providerId: "google",
+    providerKey: "google",
+    provider_id: "google",
+    customer_title: "Google Drive",
+  },
+  {
+    corporate: false,
+    roomsStorage: false,
+    customerTitle: "Dropbox",
+    providerId: "dropbox",
+    providerKey: "dropbox",
+    provider_id: "dropbox",
+    customer_title: "Dropbox",
+  },
+];

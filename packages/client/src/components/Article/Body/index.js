@@ -71,6 +71,7 @@ const ArticleBodyContent = (props) => {
     userId,
     isFrame,
     setContactsTab,
+    abortAllFetch,
   } = props;
 
   const location = useLocation();
@@ -195,6 +196,7 @@ const ArticleBodyContent = (props) => {
         : !!selectedFolderId;
 
       if (isAccountsClick) {
+        abortAllFetch();
         clearFiles();
         setContactsTab("people");
       } else {
@@ -311,7 +313,7 @@ export default inject(
     campaignsStore,
     peopleStore,
   }) => {
-    const { clearFiles, setSelection, roomsFilter } = filesStore;
+    const { clearFiles, setSelection, roomsFilter, abortAllFetch } = filesStore;
     const {
       showArticleLoader,
 
@@ -376,6 +378,8 @@ export default inject(
       campaigns,
       isFrame,
       setContactsTab: peopleStore.usersStore.setContactsTab,
+
+      abortAllFetch,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

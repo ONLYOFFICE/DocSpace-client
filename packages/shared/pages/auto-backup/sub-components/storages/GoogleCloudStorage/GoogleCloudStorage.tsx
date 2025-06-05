@@ -73,7 +73,7 @@ const GoogleCloudStorage = ({
   });
 
   return (
-    <StyledStoragesModule>
+    <StyledStoragesModule data-testid="google-cloud-storage">
       <GoogleCloudSettings
         t={t}
         isLoading={isLoading}

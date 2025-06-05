@@ -72,7 +72,7 @@ const SelectUsersCountContainer = ({
       title={addedManagersCountTitle}
       subtitle={formattedSizeTitle}
       showPlusSign
-      isDisabled={isDisabled || isUpdatingTariff || isLoading}
+      isDisabled={isDisabled || isUpdatingTariff}
       onChange={onChangeNumber}
       showSlider
     />

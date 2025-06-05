@@ -35,7 +35,6 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 
-import { StyledStoragesModule } from "./GoogleCloudStorage.styled";
 import type { GoogleCloudStorageProps } from "./GoogleCloudStorage.types";
 
 const GoogleCloudStorage = ({
@@ -73,7 +72,7 @@ const GoogleCloudStorage = ({
   });
 
   return (
-    <StyledStoragesModule data-testid="google-cloud-storage">
+    <div data-testid="google-cloud-storage">
       <GoogleCloudSettings
         t={t}
         isLoading={isLoading}
@@ -106,7 +105,7 @@ const GoogleCloudStorage = ({
         hoursArray={hoursArray}
         maxNumberCopiesArray={maxNumberCopiesArray}
       />
-    </StyledStoragesModule>
+    </div>
   );
 };
 

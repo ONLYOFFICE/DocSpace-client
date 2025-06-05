@@ -84,7 +84,6 @@ const ArticleBodyContent = (props) => {
     (folderId, title, rootFolderType, canCreate) => {
       let params = null;
       let path = ``;
-      const questionMark = "?";
 
       const state = {
         title,
@@ -152,7 +151,6 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
-
         default: {
           const newRoomsFilter = RoomsFilter.getDefault(
             userId,
@@ -166,9 +164,7 @@ const ArticleBodyContent = (props) => {
         }
       }
 
-      path += params
-        ? `${questionMark}${params}&date=${hashDate}`
-        : `?date=${hashDate}`;
+      path += `?${params}&date=${hashDate}`;
 
       return { path, state };
     },

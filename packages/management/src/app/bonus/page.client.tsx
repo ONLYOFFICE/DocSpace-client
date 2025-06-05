@@ -58,4 +58,3 @@ const BonusPage = ({
 };
 
 export default BonusPage;
-

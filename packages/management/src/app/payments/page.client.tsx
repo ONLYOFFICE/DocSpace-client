@@ -34,6 +34,7 @@ import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
 import { toastr } from "@docspace/shared/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
+import { TDocServerLicense } from "@docspace/shared/api/portal/types";
 
 const PaymentsPage = ({
   isTrial,
@@ -43,6 +44,8 @@ const PaymentsPage = ({
   dueDate,
   isEnterprise,
   logoText,
+  docspaceFaqUrl,
+  license,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -51,6 +54,8 @@ const PaymentsPage = ({
   dueDate: Date | string;
   isEnterprise: boolean;
   logoText: string;
+  docspaceFaqUrl: string;
+  license: TDocServerLicense;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -113,9 +118,10 @@ const PaymentsPage = ({
       paymentDate={paymentDate}
       isEnterprise={isEnterprise}
       logoText={logoText}
+      docspaceFaqUrl={docspaceFaqUrl}
+      license={license}
     />
   );
 };
 
 export default PaymentsPage;
-

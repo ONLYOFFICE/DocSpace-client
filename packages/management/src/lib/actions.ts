@@ -42,6 +42,7 @@ import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import type {
   TBackupProgress,
   TBackupSchedule,
+  TLicenseQuota,
   TPaymentQuota,
   TPortalTariff,
   TStorageRegion,
@@ -517,3 +518,25 @@ export async function getEncryptionSettings() {
 
   return encryptionSettings.response as TEncryptionSettings;
 }
+
+export async function getLicenseQuota() {
+  logger.debug("Start GET /portal/licensequota");
+
+  const [getLicenseQuota] = await createRequest(
+    ["/portal/licensequota"],
+    [["", ""]],
+    "GET",
+    undefined,
+    true,
+  );
+
+  const licenseQuotaRes = await fetch(getLicenseQuota);
+
+  if (!licenseQuotaRes.ok) return;
+
+  const licenseQuota = await licenseQuotaRes.json();
+
+  return licenseQuota as TLicenseQuota;
+}
+
+

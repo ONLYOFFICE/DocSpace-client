@@ -32,26 +32,34 @@ import {
   getQuota,
   getPortalTariff,
   getPaymentSettings,
+  getLicenseQuota,
 } from "@/lib/actions";
 
 import PaymentsPage from "./page.client";
 
 async function Page() {
-  const [settings, quota, portalTariff, paymentSettings] = await Promise.all([
-    getSettings(),
-    getQuota(),
-    getPortalTariff(),
-    getPaymentSettings(),
-  ]);
+  const [settings, quota, portalTariff, paymentSettings, licenseQuota] =
+    await Promise.all([
+      getSettings(),
+      getQuota(),
+      getPortalTariff(),
+      getPaymentSettings(),
+      getLicenseQuota(),
+    ]);
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings || !quota || !portalTariff || !paymentSettings)
+  if (!settings || !quota || !portalTariff || !paymentSettings || !licenseQuota)
     redirect(`${getBaseUrl()}/login`);
 
-  const { logoText } = settings;
+  const { logoText, externalResources } = settings;
+  const { helpcenter } = externalResources;
+
+  const docspaceFaqUrl = helpcenter.domain + helpcenter.entries.docspacefaq;
+
   const { trial } = quota;
   const { enterprise, developer, dueDate, openSource } = portalTariff;
   const { salesEmail, buyUrl } = paymentSettings;
+  const { license } = licenseQuota;
 
   if (openSource) return redirect(`${getBaseUrl()}/error/403`);
 
@@ -64,9 +72,10 @@ async function Page() {
       dueDate={dueDate}
       isEnterprise={enterprise}
       logoText={logoText}
+      docspaceFaqUrl={docspaceFaqUrl}
+      license={license}
     />
   );
 }
 
 export default Page;
-

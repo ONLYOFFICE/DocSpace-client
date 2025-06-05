@@ -449,10 +449,10 @@ class PaymentStore {
     else if (this.walletCustomerEmail)
       await setPayerInfo(this.walletCustomerEmail);
 
-    if (this.isPayer) {
-      if (this.isAlreadyPaid || this.walletCustomerEmail)
-        requests.push(this.setPaymentAccount());
-      else requests.push(this.getBasicPaymentLink(addedManagersCount));
+    if (this.isAlreadyPaid || this.walletCustomerEmail) {
+      if (this.isPayer) requests.push(this.setPaymentAccount());
+    } else {
+      requests.push(this.getBasicPaymentLink(addedManagersCount));
     }
 
     try {

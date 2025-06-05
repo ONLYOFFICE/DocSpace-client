@@ -91,24 +91,3 @@ Default.args = {
   ],
   isRooms: false,
 };
-
-export const WithHeaderHeight = Template.bind({});
-WithHeaderHeight.args = {
-  ...Default.args,
-  folderHeaderHeight: 50,
-  defaultHeaderHeight: 30,
-};
-
-export const ListView = Template.bind({});
-ListView.args = {
-  ...Default.args,
-  viewAs: "row",
-  countTilesInRow: 1,
-  arrayTypes: [
-    {
-      type: "default",
-      itemHeight: 50,
-      rowGap: 8,
-    },
-  ],
-};

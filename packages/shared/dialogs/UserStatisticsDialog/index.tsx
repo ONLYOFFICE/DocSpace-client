@@ -51,7 +51,6 @@ const UserStatisticsDialog = ({
     return null;
   }
 
-
   return (
     <ModalDialog
       isLarge
@@ -75,7 +74,7 @@ const UserStatisticsDialog = ({
 
           <Text lineHeight="20px">{t("EditLimitReachedInfo")}</Text>
 
-          {docspaceFaqUrl && (
+          {docspaceFaqUrl ? (
             <Link
               className={styles.modalLink}
               isHovered
@@ -86,7 +85,7 @@ const UserStatisticsDialog = ({
             >
               {t("LearnHowItIsCounted")}
             </Link>
-          )}
+          ) : null}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 // @ts-nocheck
 import { test as base, Page } from "@playwright/test";
 import { MockRequest } from "@docspace/shared/__mocks__/e2e";
@@ -34,9 +35,6 @@ import { AddressInfo } from "net";
 import { setupServer, SetupServerApi } from "msw/node";
 import { allHandlers } from "@docspace/shared/__mocks__/e2e/handlers";
 import { HttpHandler } from "msw";
-
-// Mock prerender bypass value instead of importing JSON file
-const MOCK_PRERENDER_BYPASS_VALUE = "test-prerender-id";
 
 export const test = base.extend<{
   page: Page;

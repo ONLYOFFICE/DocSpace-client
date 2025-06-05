@@ -134,10 +134,16 @@ export const StyledAutoBackup = styled.div<{ pageIsDisabled?: boolean }>`
   .auto-backup_third-party-module {
     margin-top: 16px;
     margin-inline-start: 24px;
+
     button {
       margin-bottom: 16px;
     }
   }
+
+  .backup_schedule-component {
+    margin-inline-start: 24px;
+  }
+
   .automatic-backup_main {
     margin-bottom: 30px;
   }

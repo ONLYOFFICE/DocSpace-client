@@ -28,102 +28,71 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 
-import ScheduleComponent from "./ScheduleComponent";
+import AmazonStorage from "./AmazonStorage";
 import {
   periodsObject,
   weekdaysLabelArray,
   monthNumbersArray,
   hoursArray,
   maxNumberCopiesArray,
-} from "../../mockData";
+  storageRegions,
+  selectedStorages,
+} from "../../../mockData";
 
 const meta = {
-  title: "Pages/AutoBackup/ScheduleComponent",
-  component: ScheduleComponent,
+  title: "Pages/AutoBackup/Storages/AmazonStorage",
+  component: AmazonStorage,
   parameters: {
     docs: {
       description: {
-        component: "Schedule component for Auto Backup page",
+        component: "Amazon S3 storage configuration for Auto Backup",
       },
     },
   },
-  argTypes: {
-    selectedPeriodLabel: {
-      control: "text",
-      description: "Selected period label",
-    },
-    selectedWeekdayLabel: {
-      control: "text",
-      description: "Selected weekday label",
-    },
-    selectedHour: {
-      control: "text",
-      description: "Selected hour",
-    },
-    selectedMonthDay: {
-      control: "text",
-      description: "Selected day of month",
-    },
-    selectedMaxCopiesNumber: {
-      control: "text",
-      description: "Selected maximum number of copies",
-    },
-    selectedPeriodNumber: {
-      control: "select",
-      options: [
-        AutoBackupPeriod.EveryDayType.toString(),
-        AutoBackupPeriod.EveryWeekType.toString(),
-        AutoBackupPeriod.EveryMonthType.toString(),
-      ],
-      description: "Selected period number",
-    },
-    isLoadingData: {
-      control: "boolean",
-      description: "Loading state of the component",
-    },
-  },
   args: {
+    isLoading: false,
+    isLoadingData: false,
+    isNeedFilePath: false,
+    defaultRegion: "us-east-1",
+    formSettings: {
+      bucket: "my-backup-bucket",
+      accessKey: "AKIAIOSFODNN7EXAMPLE",
+      secretKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+      region: "us-east-1",
+      filePath: "backups/",
+    },
+    errorsFieldsBeforeSafe: {},
+    storageRegions,
+    selectedStorage: selectedStorages.amazon,
+
+    // Schedule component props
     selectedPeriodLabel: "Every day",
     selectedWeekdayLabel: "Monday",
     selectedHour: "12:00",
     selectedMonthDay: "1",
     selectedMaxCopiesNumber: "3",
     selectedPeriodNumber: AutoBackupPeriod.EveryDayType.toString(),
-    isLoadingData: false,
     periodsObject,
     weekdaysLabelArray,
     monthNumbersArray,
     hoursArray,
     maxNumberCopiesArray,
+
+    // Action handlers
+    setCompletedFormFields: action("setCompletedFormFields"),
+    addValueInFormSettings: action("addValueInFormSettings"),
+    deleteValueFormSetting: action("deleteValueFormSetting"),
+    setRequiredFormSettings: action("setRequiredFormSettings"),
+    setIsThirdStorageChanged: action("setIsThirdStorageChanged"),
     setMaxCopies: action("setMaxCopies"),
     setPeriod: action("setPeriod"),
     setWeekday: action("setWeekday"),
     setMonthNumber: action("setMonthNumber"),
     setTime: action("setTime"),
   },
-  decorators: [
-    (Story) => (
-      <div style={{ padding: "20px", maxWidth: "600px" }}>
-        <Story />
-      </div>
-    ),
-  ],
-} satisfies Meta<typeof ScheduleComponent>;
+} satisfies Meta<typeof AmazonStorage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
-
-export const Loading: Story = {
-  args: {
-    isLoadingData: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Schedule component in loading state with disabled inputs",
-      },
-    },
-  },
-};

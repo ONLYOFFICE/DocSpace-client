@@ -76,16 +76,16 @@ export const successCapabilities = {
   statusCode: 200,
 };
 
-export const capabilitiesResolver = (isEmpty: boolean = false): Response => {
-  if (isEmpty) {
-    return new Response(JSON.stringify(emptySuccessCapabilities));
+export const capabilitiesResolver = (isNotEmpty?: boolean): Response => {
+  if (isNotEmpty) {
+    return new Response(JSON.stringify(successCapabilities));
   }
 
-  return new Response(JSON.stringify(successCapabilities));
+  return new Response(JSON.stringify(emptySuccessCapabilities));
 };
 
-export const capabilitiesHandler = (port: string, isEmpty: boolean = false) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, ({}) => {
-    return capabilitiesResolver(isEmpty);
+export const capabilitiesHandler = (port: string, isNotEmpty?: boolean) => {
+  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+    return capabilitiesResolver(isNotEmpty);
   });
 };

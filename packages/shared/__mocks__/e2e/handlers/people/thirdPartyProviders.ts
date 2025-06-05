@@ -86,10 +86,8 @@ export const emptyThirdPartyProviders = {
   statusCode: 200,
 };
 
-export const thirdPartyProvidersResolver = (
-  isEmpty: boolean = true,
-): Response => {
-  if (!isEmpty) {
+export const thirdPartyProvidersResolver = (isNotEmpty: boolean): Response => {
+  if (isNotEmpty) {
     return new Response(JSON.stringify(successThirdpartyProviders));
   }
 
@@ -98,9 +96,9 @@ export const thirdPartyProvidersResolver = (
 
 export const thirdPartyProvidersHandler = (
   port: string,
-  isEmpty: boolean = true,
+  isNotEmpty: boolean,
 ) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
-    return thirdPartyProvidersResolver(isEmpty);
+    return thirdPartyProvidersResolver(isNotEmpty);
   });
 };

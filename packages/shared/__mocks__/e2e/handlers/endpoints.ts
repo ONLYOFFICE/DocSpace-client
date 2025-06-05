@@ -92,7 +92,7 @@ export const endpoints: TEndpoints = {
     dataHandler: ownerResolver,
   },
   createUser: {
-    url: `${BASE_URL}${SELF_PATH}`,
+    url: `${BASE_URL}people`,
     dataHandler: selfResolver,
   },
   updateUser: {

@@ -137,9 +137,7 @@ class ServicesStore {
       fetchAutoPayments,
       fetchCardLinked,
       setPaymentAccount,
-      walletCustomerEmail,
-      isPayerExist,
-      isPayer,
+      isAlreadyPaid,
       initWalletPayerAndBalance,
     } = this.paymentStore;
 
@@ -155,15 +153,9 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
-
-      if (isPayerExist && !payerInfo) await setPayerInfo(isPayerExist);
-
-      if (walletCustomerEmail) {
-        if (isPayer) {
+      if (isAlreadyPaid || this.paymentStore.walletCustomerEmail) {
+        if (this.paymentStore.isStripePortalAvailable)
           requests.push(setPaymentAccount());
-        }
-
         requests.push(fetchAutoPayments());
       } else {
         requests.push(fetchCardLinked());

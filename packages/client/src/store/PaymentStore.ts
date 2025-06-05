@@ -163,6 +163,94 @@ class PaymentStore {
     return customerId?.length !== 0 || !isFreeTariff;
   }
 
+  get isNeedRequest() {
+    return this.managersCount > this.maxAvailableManagersCount;
+  }
+
+  get isLessCountThanAcceptable() {
+    return this.managersCount < this.minAvailableManagersValue;
+  }
+
+  get isPayerExist() {
+    if (!this.currentTariffStatusStore) return;
+
+    const { customerId } = this.currentTariffStatusStore;
+
+    return customerId || this.walletCustomerEmail;
+  }
+
+  get isPayer() {
+    if (!this.userStore || !this.currentTariffStatusStore) return;
+
+    const { user } = this.userStore;
+
+    const { payerInfo: paymentPayer } = this.currentTariffStatusStore;
+
+    if (!user || !paymentPayer) return false;
+
+    return user.email === paymentPayer.email;
+  }
+
+  get isStripePortalAvailable() {
+    if (!this.userStore) return;
+
+    const { user } = this.userStore;
+
+    if (!user) return false;
+
+    return user.isOwner || this.isPayer;
+  }
+
+  get canUpdateTariff() {
+    if (!this.userStore || !this.currentQuotaStore) return;
+
+    const { user } = this.userStore;
+
+    if (!user) return false;
+
+    if (this.currentQuotaStore.isNonProfit) {
+      if (!this.walletCustomerEmail) return true;
+      return this.isPayer;
+    }
+
+    if (!this.cardLinkedOnFreeTariff) return true;
+
+    return this.isPayer;
+  }
+
+  get canPayTariff() {
+    if (!this.currentQuotaStore) return;
+    const { addedManagersCount } = this.currentQuotaStore;
+
+    if (this.managersCount >= addedManagersCount) return true;
+
+    return false;
+  }
+
+  get canDowngradeTariff() {
+    if (!this.currentQuotaStore) return;
+    const { addedManagersCount, usedTotalStorageSizeCount } =
+      this.currentQuotaStore;
+
+    if (addedManagersCount > this.managersCount) return false;
+    if (usedTotalStorageSizeCount > this.allowedStorageSizeByQuota)
+      return false;
+
+    return true;
+  }
+
+  get isCardLinkedToPortal() {
+    if (!this.currentQuotaStore) return false;
+
+    const { isNonProfit, isFreeTariff } = this.currentQuotaStore;
+
+    return (
+      this.cardLinkedOnNonProfit ||
+      this.cardLinkedOnFreeTariff ||
+      (!isNonProfit && !isFreeTariff)
+    );
+  }
+
   setIsInitPaymentPage = (value: boolean) => {
     this.isInitPaymentPage = value;
   };
@@ -201,9 +289,11 @@ class PaymentStore {
 
     const requests = [fetchPortalTariff()];
 
-    if ((this.isAlreadyPaid || this.walletCustomerEmail) && this.isPayer)
-      requests.push(this.setPaymentAccount());
-    else requests.push(this.getBasicPaymentLink(addedManagersCount));
+    if (this.isAlreadyPaid || this.walletCustomerEmail) {
+      if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());
+    } else {
+      requests.push(this.getBasicPaymentLink(addedManagersCount));
+    }
 
     try {
       await Promise.all(requests);
@@ -393,8 +483,8 @@ class PaymentStore {
       await this.initWalletPayerAndBalance(isRefresh);
       this.previousBalance = this.balance;
 
-      if (this.walletCustomerEmail) {
-        if (this.isPayer) {
+      if (this.isAlreadyPaid || this.walletCustomerEmail) {
+        if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
         }
 
@@ -450,7 +540,7 @@ class PaymentStore {
       await setPayerInfo(this.walletCustomerEmail);
 
     if (this.isAlreadyPaid || this.walletCustomerEmail) {
-      if (this.isPayer) requests.push(this.setPaymentAccount());
+      if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());
     } else {
       requests.push(this.getBasicPaymentLink(addedManagersCount));
     }
@@ -684,94 +774,6 @@ class PaymentStore {
       this.managersCount = this.maxAvailableManagersCount + 1;
     else this.managersCount = managers;
   };
-
-  get isNeedRequest() {
-    return this.managersCount > this.maxAvailableManagersCount;
-  }
-
-  get isLessCountThanAcceptable() {
-    return this.managersCount < this.minAvailableManagersValue;
-  }
-
-  get isPayerExist() {
-    if (!this.currentTariffStatusStore) return;
-
-    const { customerId } = this.currentTariffStatusStore;
-
-    return customerId || this.walletCustomerEmail;
-  }
-
-  get isPayer() {
-    if (!this.userStore || !this.currentTariffStatusStore) return;
-
-    const { user } = this.userStore;
-
-    const { payerInfo: paymentPayer } = this.currentTariffStatusStore;
-
-    if (!user || !paymentPayer) return false;
-
-    return user.email === paymentPayer.email;
-  }
-
-  get isStripePortalAvailable() {
-    if (!this.userStore) return;
-
-    const { user } = this.userStore;
-
-    if (!user) return false;
-
-    return user.isOwner || this.isPayer;
-  }
-
-  get canUpdateTariff() {
-    if (!this.userStore || !this.currentQuotaStore) return;
-
-    const { user } = this.userStore;
-
-    if (!user) return false;
-
-    if (this.currentQuotaStore.isNonProfit) {
-      if (!this.walletCustomerEmail) return true;
-      return this.isPayer;
-    }
-
-    if (!this.cardLinkedOnFreeTariff) return true;
-
-    return this.isPayer;
-  }
-
-  get canPayTariff() {
-    if (!this.currentQuotaStore) return;
-    const { addedManagersCount } = this.currentQuotaStore;
-
-    if (this.managersCount >= addedManagersCount) return true;
-
-    return false;
-  }
-
-  get canDowngradeTariff() {
-    if (!this.currentQuotaStore) return;
-    const { addedManagersCount, usedTotalStorageSizeCount } =
-      this.currentQuotaStore;
-
-    if (addedManagersCount > this.managersCount) return false;
-    if (usedTotalStorageSizeCount > this.allowedStorageSizeByQuota)
-      return false;
-
-    return true;
-  }
-
-  get isCardLinkedToPortal() {
-    if (!this.currentQuotaStore) return false;
-
-    const { isNonProfit, isFreeTariff } = this.currentQuotaStore;
-
-    return (
-      this.cardLinkedOnNonProfit ||
-      this.cardLinkedOnFreeTariff ||
-      (!isNonProfit && !isFreeTariff)
-    );
-  }
 
   setRangeStepByQuota = () => {
     if (!this.paymentQuotasStore) return;

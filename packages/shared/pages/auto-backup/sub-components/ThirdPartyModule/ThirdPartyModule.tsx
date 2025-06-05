@@ -28,40 +28,12 @@ import React from "react";
 import classNames from "classnames";
 
 import { BackupStorageType, ProvidersType } from "../../../../enums";
-import {
-  DirectThirdPartyConnection,
-  type DirectThirdPartyConnectionProps,
-} from "../../../../components/direct-third-party-connection";
+import { DirectThirdPartyConnection } from "../../../../components/direct-third-party-connection";
 import { useDidMount } from "../../../../hooks/useDidMount";
 
-import type { Nullable } from "../../../../types";
-
-import {
-  ScheduleComponent,
-  type ScheduleComponentProps,
-} from "../ScheduleComponent";
+import { ScheduleComponent } from "../ScheduleComponent";
 import styles from "../../AutoBackup.module.scss";
-
-interface ThirdPartyModuleProps
-  extends Omit<
-      DirectThirdPartyConnectionProps,
-      | "onSelectFolder"
-      | "isDisabled"
-      | "id"
-      | "withoutInitPath"
-      | "descriptionText"
-      | "filterParam"
-      | "isMobileScale"
-      | "isSelect"
-      | "isSelectFolder"
-      | "onSelectFile"
-    >,
-    ScheduleComponentProps {
-  isLoadingData: boolean;
-  setSelectedFolder: (id: string) => void;
-  defaultStorageType: Nullable<string>;
-  defaultFolderId: Nullable<string>;
-}
+import { ThirdPartyModuleProps } from "./ThirdPartyModule.types";
 
 const ThirdPartyModule = ({
   isError,

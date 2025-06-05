@@ -172,7 +172,7 @@ class FilesStore {
 
   selected = "close";
 
-  filter = FilesFilter.getDefault();
+  filter = FilesFilter.getDefault(100);
 
   roomsFilter = RoomsFilter.getDefault();
 

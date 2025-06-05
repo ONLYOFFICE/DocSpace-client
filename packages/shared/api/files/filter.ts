@@ -152,8 +152,8 @@ class FilesFilter {
 
   key: string | null = null;
 
-  static getDefault(total = DEFAULT_TOTAL) {
-    return new FilesFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
+  static getDefault(pageCount = DEFAULT_PAGE_COUNT, total = DEFAULT_TOTAL) {
+    return new FilesFilter(DEFAULT_PAGE, pageCount, total);
   }
 
   static getFilter(location: Location) {

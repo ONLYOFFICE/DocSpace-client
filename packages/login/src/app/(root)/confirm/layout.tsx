@@ -41,7 +41,8 @@ export default async function Layout({
   const hdrs = await headers();
   const searchParams = hdrs.get("x-confirm-query") ?? "";
   const type = hdrs.get("x-confirm-type") ?? "";
-  const hostName = hdrs.get("x-forwarded-host") ?? "";
+  const hostName =
+    hdrs.get("x-forwarded-host-test") ?? hdrs.get("x-forwarded-host") ?? "";
   const proto = hdrs.get("x-forwarded-proto");
 
   console.log("Render confirm layout");

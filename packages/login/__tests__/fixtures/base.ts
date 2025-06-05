@@ -33,6 +33,8 @@ import { parse } from "url";
 import { AddressInfo } from "net";
 import { setupServer, SetupServerApi } from "msw/node";
 import { allHandlers } from "@docspace/shared/__mocks__/e2e/handlers";
+import { HttpHandler } from "msw";
+
 // Mock prerender bypass value instead of importing JSON file
 const MOCK_PRERENDER_BYPASS_VALUE = "test-prerender-id";
 
@@ -41,6 +43,8 @@ export const test = base.extend<{
   mockRequest: MockRequest;
   port: string;
   requestInterceptor: SetupServerApi;
+  baseHandlers: HttpHandler[];
+  resetHandlers: void;
 }>({
   page: async ({ page }, use) => {
     await page.route("*/**/logo.ashx**", async (route) => {
@@ -91,6 +95,7 @@ export const test = base.extend<{
 
       const port = String((server.address() as AddressInfo).port);
       await use(port);
+      server.close();
     },
     {
       scope: "worker",
@@ -98,23 +103,34 @@ export const test = base.extend<{
     },
   ],
   requestInterceptor: [
-    async ({ port }, use) => {
-      await use(
-        (() => {
-          const requestInterceptor = setupServer();
+    async ({}, use) => {
+      const requestInterceptor = setupServer();
 
-          requestInterceptor.listen({
-            onUnhandledRequest: "error",
-          });
+      requestInterceptor.listen({
+        onUnhandledRequest: "error",
+      });
 
-          requestInterceptor.use(...allHandlers(port));
-
-          return requestInterceptor;
-        })(),
-      );
+      await use(requestInterceptor);
+      requestInterceptor.close();
     },
     {
       scope: "worker",
+      auto: true,
+    },
+  ],
+  baseHandlers: [
+    async ({ port }, use) => {
+      await use(allHandlers(port));
+    },
+    {},
+  ],
+  resetHandlers: [
+    async ({ requestInterceptor, baseHandlers }, use) => {
+      requestInterceptor.use(...baseHandlers);
+      await use();
+      requestInterceptor.resetHandlers();
+    },
+    {
       auto: true,
     },
   ],

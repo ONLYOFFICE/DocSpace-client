@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import { SearchProps } from "../Search";
+
 import { TSelection } from "./ContextButton";
 
 import RoomsItemHeader from "./RoomsItemTitle";
@@ -33,7 +36,16 @@ type ItemTitleProps = {
   isNoItem?: boolean;
   isGallery?: boolean;
   isContacts?: boolean;
-};
+} & (
+  | {
+      isRoomMembersPanel: true;
+      searchProps: SearchProps;
+    }
+  | {
+      isRoomMembersPanel?: undefined;
+      searchProps?: undefined;
+    }
+);
 
 const ItemTitle = ({
   infoPanelSelection,
@@ -42,8 +54,22 @@ const ItemTitle = ({
 
   isGallery,
   isContacts,
+
+  isRoomMembersPanel,
+  searchProps,
 }: ItemTitleProps) => {
-  if (isNoItem || isContacts || !infoPanelSelection || isGallery) return null;
+  if (!infoPanelSelection) return null;
+
+  if (isNoItem || isContacts || isGallery) return null;
+
+  if (isRoomMembersPanel)
+    return (
+      <RoomsItemHeader
+        roomsView={InfoPanelView.infoMembers}
+        searchProps={searchProps}
+        selection={infoPanelSelection}
+      />
+    );
 
   return <RoomsItemHeader selection={infoPanelSelection} />;
 };

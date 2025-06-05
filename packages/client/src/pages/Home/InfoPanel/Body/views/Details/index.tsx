@@ -31,7 +31,7 @@ import classNames from "classnames";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
-import { FileType, FolderType } from "@docspace/shared/enums";
+import { FileType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
@@ -164,7 +164,11 @@ const Details = ({
 
   const isLoadedRoomIcon =
     "logo" in selection && !!(selection.logo?.cover || selection.logo?.large);
-  const showDefaultRoomIcon = !isLoadedRoomIcon;
+
+  const showDefaultRoomIcon =
+    "isRoom" in selection && (selection.isRoom as boolean)
+      ? !isLoadedRoomIcon
+      : false;
 
   const hasImage = "logo" in selection && selection?.logo?.original;
   const model = getLogoCoverModel?.(t, hasImage);

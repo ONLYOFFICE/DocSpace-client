@@ -88,7 +88,7 @@ type TemplateAccessSettingsContainer =
       onSetAccessSettings?: undefined;
       inviteItems?: undefined;
       setInviteItems?: undefined;
-      updateInfoPanelMembers: (t: TTranslation) => void;
+      updateInfoPanelMembers: () => void;
       templateIsAvailable: undefined;
       setTemplateIsAvailable: undefined;
     };
@@ -246,8 +246,8 @@ const TemplateAccessSettingsPanel = ({
     setIsLoading(true);
 
     if (prevIsAvailable.current !== isAvailable) {
-      setTemplateAvailable(templateId, isAvailable)
-        .then(() => updateInfoPanelMembers(t))
+      setTemplateAvailable?.(templateId, isAvailable)
+        .then(() => updateInfoPanelMembers())
         .finally(() => {
           setIsLoading(false);
           onClose();
@@ -270,7 +270,7 @@ const TemplateAccessSettingsPanel = ({
       notify: false,
       sharingMessage: "",
     })
-      .then(() => updateInfoPanelMembers(t))
+      .then(() => updateInfoPanelMembers())
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsLoading(false);

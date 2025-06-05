@@ -27,7 +27,9 @@
 import styled from "styled-components";
 import { injectDefaultTheme, TextUserSelect } from "@docspace/shared/utils";
 
-const StyledUserTypeHeader = styled.div.attrs(injectDefaultTheme)`
+const StyledUserTypeHeader = styled.div.attrs(injectDefaultTheme)<{
+  isExpect?: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,7 +53,9 @@ const StyledUserList = styled.div`
   flex-direction: column;
 `;
 
-const StyledUser = styled.div`
+const StyledUser = styled.div<{
+  isExpect?: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: 8px;

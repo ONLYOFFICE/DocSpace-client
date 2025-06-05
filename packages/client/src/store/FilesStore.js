@@ -81,7 +81,6 @@ import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
-import clone from "lodash/clone";
 import Queue from "queue-promise";
 import { toJSON } from "@docspace/shared/api/rooms/filter";
 import {
@@ -89,6 +88,7 @@ import {
   removeOptions,
   removeSeparator,
 } from "SRC_DIR/helpers/filesUtils";
+import { setInfoPanelSelectedRoom } from "SRC_DIR/helpers/info-panel";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -102,13 +102,6 @@ const UnauthorizedHttpCode = 401;
 
 const THUMBNAILS_CACHE = 500;
 let timerId;
-
-const DEFAULT_MEMBERS_FILTER = {
-  page: 0,
-  pageCount: 100,
-  total: 0,
-  startIndex: 0,
-};
 
 class FilesStore {
   authStore;
@@ -173,8 +166,6 @@ class FilesStore {
   filter = FilesFilter.getDefault();
 
   roomsFilter = RoomsFilter.getDefault();
-
-  membersFilter = DEFAULT_MEMBERS_FILTER;
 
   categoryType = getCategoryType(window.location);
 
@@ -334,21 +325,6 @@ class FilesStore {
         }
 
       this.treeFoldersStore.updateTreeFoldersItem(opt);
-    });
-
-    SocketHelper.on(SocketEvents.UpdateHistory, ({ id, type }) => {
-      const { infoPanelSelection, fetchHistory, isVisible } =
-        this.infoPanelStore;
-
-      if (!isVisible) return;
-      let infoPanelSelectionType = "file";
-      if (infoPanelSelection?.isRoom || infoPanelSelection?.isFolder)
-        infoPanelSelectionType = "folder";
-
-      if (id === infoPanelSelection?.id && type === infoPanelSelectionType) {
-        console.log("[WS] s:update-history", id);
-        fetchHistory();
-      }
     });
 
     SocketHelper.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
@@ -1715,7 +1691,7 @@ class FilesStore {
                 external = room.external;
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
-                this.infoPanelStore.setInfoPanelRoom(room);
+                setInfoPanelSelectedRoom(room);
               }
 
               const { mute } = room;
@@ -2036,7 +2012,7 @@ class FilesStore {
             }
           }
 
-          this.infoPanelStore.setInfoPanelRoom(null);
+          setInfoPanelSelectedRoom(null);
 
           this.clientLoadingStore.setIsSectionHeaderLoading(false);
           this.clientLoadingStore.setIsSectionFilterLoading(false);
@@ -2911,41 +2887,6 @@ class FilesStore {
   createRoom = (roomParams) => {
     this.roomCreated = true;
     return api.rooms.createRoom(roomParams);
-  };
-
-  setRoomMembersFilter = (roomMembersFilter) => {
-    this.roomMembersFilter = roomMembersFilter;
-  };
-
-  getRoomMembers = (id, clearFilter = true, membersFilter = null) => {
-    let newFilter = membersFilter || clone(this.membersFilter);
-
-    if (clearFilter) {
-      newFilter = DEFAULT_MEMBERS_FILTER;
-    } else if (!membersFilter) {
-      newFilter.page += 1;
-      newFilter.pageCount = 100;
-      newFilter.startIndex = newFilter.page * newFilter.pageCount;
-      this.setRoomMembersFilter(newFilter);
-    }
-
-    const membersFilters = {
-      startIndex: newFilter.startIndex,
-      count: newFilter.pageCount,
-      filterType: 0, // 0 (Members)
-      filterValue: this.infoPanelStore.searchValue,
-    };
-
-    return api.rooms.getRoomMembers(id, membersFilters).then((res) => {
-      newFilter.total = res.total;
-      this.setMembersFilter(newFilter);
-
-      return res.items;
-    });
-  };
-
-  setMembersFilter = (filter) => {
-    this.membersFilter = filter;
   };
 
   updateRoomPin = (item) => {

@@ -23,20 +23,40 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
-import { TRoom } from "@docspace/shared/api/rooms/types";
+import { useHistory } from "./useHistory";
 
-export type HistoryFilter = {
-  page: number;
-  pageCount: number;
-  total: number;
-  startIndex: number;
+type UseSocketProps = {
+  selectionId: string | number;
+  infoPanelSelectionType: "file" | "folder";
+  fetchHistory: ReturnType<typeof useHistory>["fetchHistory"];
 };
 
-export type TSelection =
-  | TRoom
-  | TFile
-  | TFolder
-  | Array<TRoom | TFile | TFolder>;
+export const useSocket = ({
+  selectionId,
+  infoPanelSelectionType,
+  fetchHistory,
+}: UseSocketProps) => {
+  React.useEffect(() => {
+    const updateHistory = ({
+      id,
+      type,
+    }: {
+      id: string | number;
+      type: string;
+    }) => {
+      if (id === selectionId && type === infoPanelSelectionType) {
+        fetchHistory();
+      }
+    };
+
+    SocketHelper.on(SocketEvents.UpdateHistory, updateHistory);
+
+    return () => {
+      SocketHelper.off(SocketEvents.UpdateHistory, updateHistory);
+    };
+  }, []);
+};

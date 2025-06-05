@@ -27,13 +27,16 @@
 import React, { useState, useCallback, useEffect, use } from "react";
 import styled from "styled-components";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
-import { RowLoader } from "@docspace/shared/skeletons/selector";
 
+import { RowLoader } from "@docspace/shared/skeletons/selector";
 import { mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+
 import { StyledUserTypeHeader } from "../../../styles/members";
+
+import { MembersListProps, UserProps } from "../Members.types";
 
 const MainStyles = styled.div`
   #members-list-header {
@@ -82,7 +85,7 @@ const itemSize = 48;
 const shareLinkItemSize = 68;
 const GENERAL_LINK_HEADER_HEIGHT = 38;
 
-const MembersList = (props) => {
+const MembersList = (props: MembersListProps) => {
   const {
     hasNextPage,
     itemCount,
@@ -95,22 +98,33 @@ const MembersList = (props) => {
   const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
-  const list = [];
+  const list: React.ReactElement<UserProps & { isShareLink?: boolean }>[] = [];
 
   React.Children.map(children, (item) => {
-    list.push(item);
+    list.push(
+      item as React.ReactElement<UserProps & { isShareLink?: boolean }>,
+    );
   });
 
   const listOfTitles = list
-    .filter((x) => x.props.user?.isTitle)
+    .filter((x) => "isTitle" in x.props.user && x.props.user?.isTitle)
     .map((item) => {
       return {
-        displayName: item.props.user.displayName,
-        index: item.props.index,
+        displayName:
+          "displayName" in item.props.user ? item.props.user?.displayName : "",
+        index: item.props.index!,
       };
     });
 
-  const renderRow = ({ key, index, style }) => {
+  const renderRow = ({
+    key,
+    index,
+    style,
+  }: {
+    key: string;
+    index: number;
+    style: React.CSSProperties;
+  }) => {
     const item = list[index];
 
     if (!item) {
@@ -137,24 +151,21 @@ const MembersList = (props) => {
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
 
   const isItemLoaded = useCallback(
-    ({ index }) => {
+    ({ index }: { index: number }) => {
       return !hasNextPage || index < itemsCount;
     },
     [hasNextPage, itemsCount],
   );
 
-  const loadMoreItems = useCallback(
-    async ({ startIndex }) => {
-      setIsNextPageLoading(true);
-      if (!isNextPageLoading) {
-        await loadNextPage(startIndex - 1);
-      }
-      setIsNextPageLoading(false);
-    },
-    [isNextPageLoading, loadNextPage],
-  );
+  const loadMoreItems = useCallback(async () => {
+    setIsNextPageLoading(true);
+    if (!isNextPageLoading) {
+      await loadNextPage();
+    }
+    setIsNextPageLoading(false);
+  }, [isNextPageLoading, loadNextPage]);
 
-  const getItemSize = ({ index }) => {
+  const getItemSize = ({ index }: { index: number }) => {
     const elem = list[index];
 
     if (elem?.key === GENERAL_LINK_HEADER_KEY) {
@@ -168,15 +179,15 @@ const MembersList = (props) => {
     return itemSize;
   };
 
-  const onScroll = (e) => {
+  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const header = document.getElementById("members-list-header");
 
     if (!header) {
       return;
     }
 
-    const headerTitle = header.children[0];
-    const scrollOffset = e.target.scrollTop;
+    const headerTitle = header.children[0] as HTMLDivElement;
+    const scrollOffset = (e.target as HTMLDivElement).scrollTop;
 
     // First item is links header. Its size is different from link item size
     const linksBlockHeight = linksBlockLength
@@ -184,7 +195,7 @@ const MembersList = (props) => {
       : 0;
 
     Object.keys(listOfTitles).forEach((titleIndex) => {
-      const title = listOfTitles[titleIndex];
+      const title = listOfTitles[+titleIndex];
       const titleOffsetTop =
         linksBlockHeight + (title.index - linksBlockLength) * itemSize;
 

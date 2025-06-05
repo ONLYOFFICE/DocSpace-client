@@ -25,16 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { decode } from "he";
 
-import { LANGUAGE } from "@docspace/shared/constants";
-
-import { getCorrectDate, getCookie } from "@docspace/shared/utils";
-
+import { getCorrectDate } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Tag } from "@docspace/shared/components/tag";
-import { decode } from "he";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import { TCreatedBy, TTranslation } from "@docspace/shared/types";
+import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
@@ -42,15 +42,9 @@ import {
 } from "SRC_DIR/helpers/filesUtils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import CommentEditor from "../sub-components/CommentEditor";
-import { TCreatedBy, TTranslation } from "@docspace/shared/types";
-import { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-import { TUser } from "@docspace/shared/api/people/types";
-
-// Property Content Components
 
 const text = (value: React.ReactNode) => (
   <Text truncate className="property-content">
@@ -161,7 +155,7 @@ class DetailsHelper {
             "Date modified",
             "Last modified by",
             "Creation date",
-            this.item.tags.length && "Tags",
+            this.item.tags?.length && "Tags",
             "Storage",
           ]
         : this.item.isFolder

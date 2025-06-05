@@ -26,9 +26,6 @@
 
 import { inject, observer } from "mobx-react";
 
-import { RoomsType } from "@docspace/shared/enums";
-import { TRoom } from "@docspace/shared/api/rooms/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 
@@ -44,16 +41,12 @@ import ItemTitle from "./sub-components/ItemTitle";
 import SeveralItems from "./sub-components/SeveralItems";
 import NoItem from "./sub-components/NoItem";
 
-import { TSelection } from "../InfoPanel.types";
-
 import Users from "./views/Users";
 import Groups from "./views/Groups";
 import Gallery from "./views/Gallery";
 import Members from "./views/Members";
 import Details from "./views/Details";
 import History from "./views/History";
-import Share from "./views/Share";
-import Plugin from "./views/Plugin";
 
 type BodyProps = {
   selection: InfoPanelStore["infoPanelSelection"];
@@ -122,14 +115,14 @@ const InfoPanelBodyContent = ({
     isLockedSharedRoom ||
     (isRoot && !isGallery);
 
+  const currentView = isRooms ? roomsView : fileView;
+
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
 
     if (isGroups) return <Groups />;
 
     if (isGallery) return <Gallery />;
-
-    const currentView = isRooms ? roomsView : fileView;
 
     if (isSeveralItems || Array.isArray(selection))
       return <SeveralItems selectedItems={selection} />;
@@ -148,8 +141,8 @@ const InfoPanelBodyContent = ({
     }
 
     switch (currentView) {
-      // case "info_members":
-      //   return <Members />;
+      case "info_members":
+        return <Members />;
       case "info_history":
         return <History infoPanelSelection={selection} />;
       case "info_details":
@@ -165,7 +158,9 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
-      {!isNoItem && !Array.isArray(selection) ? (
+      {!isNoItem &&
+      !Array.isArray(selection) &&
+      currentView !== "info_members" ? (
         <ItemTitle
           infoPanelSelection={selection}
           isContacts={isUsers || isGuests || isGroups}

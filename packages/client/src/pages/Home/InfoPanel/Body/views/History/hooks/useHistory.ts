@@ -109,6 +109,11 @@ export const useHistory = ({
   const [isFirstLoading, setIsFirstLoading] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const [showLoading, setShowLoading] = React.useState(false);
+
+  const loaderRefTimeout = React.useRef<NodeJS.Timeout>(null);
+  const startShowLoader = React.useRef<Date | null>(new Date());
+
   const abortController = React.useRef<AbortController>(new AbortController());
 
   const fetchHistory = React.useCallback(async () => {
@@ -263,12 +268,45 @@ export const useHistory = ({
     fetchHistory();
   }, [fetchHistory]);
 
+  React.useEffect(() => {
+    if (isFirstLoading || isLoading) {
+      loaderRefTimeout.current = setTimeout(() => {
+        setShowLoading(true);
+        startShowLoader.current = new Date();
+        loaderRefTimeout.current = null;
+      }, 500);
+    } else {
+      const currentTimestamp = new Date().getTime();
+      const startTime =
+        startShowLoader.current?.getTime() || currentTimestamp - 500;
+
+      if (loaderRefTimeout.current) {
+        clearTimeout(loaderRefTimeout.current);
+        loaderRefTimeout.current = null;
+      }
+
+      if (currentTimestamp - startTime >= 500) {
+        setShowLoading(false);
+        startShowLoader.current = null;
+      } else {
+        setTimeout(
+          () => {
+            setShowLoading(false);
+            startShowLoader.current = null;
+          },
+          500 - (currentTimestamp - startTime),
+        );
+      }
+    }
+  }, [isFirstLoading, isLoading]);
+
   return {
     history,
     total,
     hasNextPage: total > history.length,
-    isFirstLoading,
+    showLoading,
     isLoading,
+    isFirstLoading,
     fetchHistory,
     fetchMoreHistory,
   };

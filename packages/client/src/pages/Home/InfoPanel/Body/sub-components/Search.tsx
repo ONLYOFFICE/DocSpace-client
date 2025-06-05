@@ -26,7 +26,6 @@
 
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import debounce from "lodash/debounce";
-import { inject } from "mobx-react";
 
 import XIconReactSvgUrl from "PUBLIC_DIR/images/x.react.svg?url";
 import {
@@ -36,13 +35,11 @@ import {
 } from "@docspace/shared/components/text-input";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
-
 import { StyledSearchContainer } from "../styles/common";
 
-type SearchProps = {
-  setSearchValue?: InfoPanelStore["setSearchValue"];
-  resetSearch?: InfoPanelStore["resetSearch"];
+export type SearchProps = {
+  setSearchValue: (value: string) => void;
+  resetSearch: VoidFunction;
 };
 
 const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
@@ -103,7 +100,4 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   );
 };
 
-export default inject(({ infoPanelStore }: TStore) => ({
-  resetSearch: infoPanelStore.resetSearch,
-  setSearchValue: infoPanelStore.setSearchValue,
-}))(Search);
+export default Search;

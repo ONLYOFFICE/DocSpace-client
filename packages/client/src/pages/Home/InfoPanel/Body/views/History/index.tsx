@@ -47,6 +47,7 @@ import NoHistory from "../../sub-components/NoItem/NoHistory";
 import HistoryBlock from "./HistoryBlock";
 import ThirdPartyComponent from "./HistoryBlockContent/ThirdParty";
 import { useHistory } from "./hooks/useHistory";
+import { useSocket } from "./hooks/useSocket";
 
 export const getRelativeDateDay = (t: TTranslation, date: string) => {
   moment.locale(getCookie(LANGUAGE));
@@ -88,11 +89,28 @@ const History = ({ infoPanelSelection, setExternalLinks }: HistoryProps) => {
 
   const loading = useRef(false);
 
-  const { history, total, isFirstLoading, isLoading, fetchMoreHistory } =
-    useHistory({
-      selection: infoPanelSelection,
-      setExternalLinks: setExternalLinks!,
-    });
+  const {
+    history,
+    total,
+    showLoading,
+    isLoading,
+    isFirstLoading,
+    fetchHistory,
+    fetchMoreHistory,
+  } = useHistory({
+    selection: infoPanelSelection,
+    setExternalLinks: setExternalLinks!,
+  });
+
+  useSocket({
+    selectionId: infoPanelSelection.id,
+    infoPanelSelectionType:
+      ("isRoom" in infoPanelSelection && infoPanelSelection.isRoom) ||
+      ("isFolder" in infoPanelSelection && infoPanelSelection.isFolder)
+        ? "folder"
+        : "file",
+    fetchHistory,
+  });
 
   const isThirdParty =
     "providerId" in infoPanelSelection && infoPanelSelection?.providerId;
@@ -142,9 +160,9 @@ const History = ({ infoPanelSelection, setExternalLinks }: HistoryProps) => {
 
   if (isThirdParty) return <ThirdPartyComponent />;
 
-  if (isFirstLoading) return <InfoPanelViewLoader view="history" />;
+  if (showLoading) return <InfoPanelViewLoader view="history" />;
 
-  if (!history.length) return <NoHistory />;
+  if (!history.length && !(isLoading || isFirstLoading)) return <NoHistory />;
 
   return (
     <>

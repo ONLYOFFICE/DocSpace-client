@@ -50,7 +50,11 @@ const LinksBlock = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledLinkRow = styled.div.attrs(injectDefaultTheme)`
+const StyledLinkRow = styled.div.attrs(injectDefaultTheme)<{
+  isArchiveFolder?: boolean;
+  isExpired?: boolean;
+  isShareLink?: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: space-between;

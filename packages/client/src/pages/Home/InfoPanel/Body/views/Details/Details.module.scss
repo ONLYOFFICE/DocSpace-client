@@ -72,7 +72,7 @@
     outline: 1px solid var(--info-panel-details-border-color);
   }
 
-  .room-title {
+  :global(.room-title) {
     font-size: 41px;
     font-weight: 700;
     line-height: 56px;

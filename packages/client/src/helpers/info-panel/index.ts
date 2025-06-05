@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TRoom } from "@docspace/shared/api/rooms/types";
+import { Nullable } from "@docspace/shared/types";
 
 import { InfoPanelEvents } from "./enums";
 
@@ -40,7 +41,7 @@ export const hideInfoPanel = () => {
   window.dispatchEvent(event);
 };
 
-export const setInfoPanelSelectedRoom = (room: TRoom) => {
+export const setInfoPanelSelectedRoom = (room: Nullable<TRoom>) => {
   const event = new CustomEvent(InfoPanelEvents.setInfoPanelSelectedRoom, {
     detail: { room },
   });

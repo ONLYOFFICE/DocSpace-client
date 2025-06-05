@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -42,21 +42,18 @@ import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import { StyledTitle } from "../../styles/common";
 
-import Search from "../Search";
+import Search, { SearchProps } from "../Search";
 
 import RoomsContextBtn, { type TSelection } from "./ContextButton";
 
 type RoomsItemHeaderProps = {
   selection: TSelection;
 
-  roomsView?: InfoPanelStore["roomsView"];
-  showSearchBlock?: boolean;
-  setShowSearchBlock?: InfoPanelStore["setShowSearchBlock"];
   setIsMobileHidden?: InfoPanelStore["setIsMobileHidden"];
 
   isGracePeriod?: CurrentTariffStatusStore["isGracePeriod"];
@@ -71,7 +68,16 @@ type RoomsItemHeaderProps = {
 
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
-};
+} & (
+  | {
+      roomsView: InfoPanelView.infoMembers;
+      searchProps: SearchProps;
+    }
+  | {
+      roomsView?: InfoPanelStore["roomsView"];
+      searchProps?: undefined;
+    }
+);
 
 const RoomsItemHeader = ({
   selection,
@@ -80,14 +86,13 @@ const RoomsItemHeader = ({
   setInvitePanelOptions,
   setQuotaWarningDialogVisible,
   roomsView,
-  showSearchBlock,
-  setShowSearchBlock,
   roomType,
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,
   setTemplateAccessSettingsVisible,
   getIcon,
+  searchProps,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -97,6 +102,8 @@ const RoomsItemHeader = ({
     "SharingPanel",
     "RoomLogoCover",
   ]);
+
+  const [showSearchBlock, setShowSearchBlock] = useState(false);
 
   const icon: string | undefined =
     "icon" in selection ? (selection.icon as string) : getIcon?.(32);
@@ -113,7 +120,7 @@ const RoomsItemHeader = ({
     ("isTemplate" in selection && selection.isTemplate) ||
     selection?.rootFolderType === FolderType.RoomTemplates;
 
-  const isRoomMembersPanel = roomsView === "info_members";
+  const isRoomMembersPanel = roomsView === InfoPanelView.infoMembers;
 
   const hasImage = "logo" in selection && !!selection.logo?.original;
   const model = getLogoCoverModel?.(t, hasImage);
@@ -162,9 +169,19 @@ const RoomsItemHeader = ({
 
   const onSearchClick = () => setShowSearchBlock?.(true);
 
+  const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
+
   return (
     <StyledTitle withBottomBorder={false}>
-      {isRoomMembersPanel && showSearchBlock ? <Search /> : null}
+      {isRoomMembersPanel && showSearchBlock && searchProps ? (
+        <Search
+          {...searchProps}
+          resetSearch={() => {
+            setShowSearchBlock(false);
+            searchProps.resetSearch();
+          }}
+        />
+      ) : null}
 
       <div className="item-icon">
         <RoomIcon
@@ -176,20 +193,13 @@ const RoomsItemHeader = ({
               ? selection.rootFolderType === FolderType.Archive
               : false
           }
-          showDefault={
-            isFile ||
-            (!("logo" in selection) &&
-              "isFolder" in selection &&
-              selection.isFolder)
-              ? false
-              : showDefaultRoomIcon
-          }
-          imgClassName={`icon ${"isRoom" in selection && selection.isRoom && "is-room"}`}
+          showDefault={isFile || !isRoom ? false : showDefaultRoomIcon}
+          imgClassName={`icon ${isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl || ""}
           tooltipContent={tooltipContent}
           hoverSrc={
-            "isRoom" in selection &&
+            isRoom &&
             "EditRoom" in selection.security &&
             selection.security?.EditRoom
               ? Camera10ReactSvgUrl
@@ -261,12 +271,7 @@ export default inject(
     publicRoomStore,
     avatarEditorDialogStore,
   }: TStore) => {
-    const {
-      roomsView,
-      setIsMobileHidden,
-      showSearchBlock,
-      setShowSearchBlock,
-    } = infoPanelStore;
+    const { roomsView, setIsMobileHidden } = infoPanelStore;
 
     const { displayFileExtension, getIcon } = filesSettingsStore;
     const { externalLinks } = publicRoomStore;
@@ -279,8 +284,6 @@ export default inject(
     return {
       roomsView,
       setIsMobileHidden,
-      showSearchBlock,
-      setShowSearchBlock,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 

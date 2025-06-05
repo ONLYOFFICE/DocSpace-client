@@ -92,7 +92,15 @@ export function getRoomInfo(id) {
   });
 }
 
-export async function getRoomMembers(id: string, filter) {
+export async function getRoomMembers(
+  id: string | number,
+  filter: {
+    filterType: number;
+    filterValue?: string;
+    count?: number;
+    startIndex?: number;
+  },
+) {
   let params = "";
 
   const str = toUrlParams(filter);
@@ -123,7 +131,7 @@ export function updateRoomMemberRole(id, data) {
   };
 
   return request(options).then((res) => {
-    return res;
+    return res as { error?: RoomSecurityError };
   });
 }
 

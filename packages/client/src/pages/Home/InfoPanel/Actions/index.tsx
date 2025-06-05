@@ -29,8 +29,6 @@ import { inject, observer } from "mobx-react";
 
 import { Nullable } from "@docspace/shared/types";
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { TGroup } from "@docspace/shared/api/groups/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { InfoPanelEvents } from "SRC_DIR/helpers/info-panel/enums";
@@ -38,9 +36,17 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 type TInfoPanelActionsProps = {
   setIsVisible?: InfoPanelStore["setIsVisible"];
+  setInfoPanelRoom?: InfoPanelStore["setInfoPanelRoom"];
+  openMembersTab?: InfoPanelStore["openMembersTab"];
+  openShareTab?: InfoPanelStore["openShareTab"];
 };
 
-const InfoPanelActions = ({ setIsVisible }: TInfoPanelActionsProps) => {
+const InfoPanelActions = ({
+  setIsVisible,
+  setInfoPanelRoom,
+  openMembersTab,
+  openShareTab,
+}: TInfoPanelActionsProps) => {
   // Show info panel
   useEffect(() => {
     const showInfoPanelHandler = () => {
@@ -79,136 +85,15 @@ const InfoPanelActions = ({ setIsVisible }: TInfoPanelActionsProps) => {
     };
   }, [setIsVisible]);
 
-  // Set info panel file
-  useEffect(() => {
-    const setInfoPanelFileHandler = (e: CustomEvent<{ file: TFile }>) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.setInfoPanelFile,
-      setInfoPanelFileHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.setInfoPanelFile,
-        setInfoPanelFileHandler as EventListener,
-      );
-    };
-  }, []);
-
-  // Set info panel folder
-  useEffect(() => {
-    const setInfoPanelFolderHandler = (
-      e: CustomEvent<{ folder: TFolder }>,
-    ) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.setInfoPanelFolder,
-      setInfoPanelFolderHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.setInfoPanelFolder,
-        setInfoPanelFolderHandler as EventListener,
-      );
-    };
-  }, []);
-
-  // Set info panel room
-  useEffect(() => {
-    const setInfoPanelRoomHandler = (e: CustomEvent<{ room: TRoom }>) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.setInfoPanelRoom,
-      setInfoPanelRoomHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.setInfoPanelRoom,
-        setInfoPanelRoomHandler as EventListener,
-      );
-    };
-  }, []);
-
-  // Update info panel group
-  useEffect(() => {
-    const updateInfoPanelGroupHandler = (
-      e: CustomEvent<{ group: TGroup }>,
-    ) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.updateInfoPanelGroup,
-      updateInfoPanelGroupHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.updateInfoPanelGroup,
-        updateInfoPanelGroupHandler as EventListener,
-      );
-    };
-  }, []);
-
-  // Update info panel file
-  useEffect(() => {
-    const updateInfoPanelFileHandler = (e: CustomEvent<{ file: TFile }>) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.updateInfoPanelFile,
-      updateInfoPanelFileHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.updateInfoPanelFile,
-        updateInfoPanelFileHandler as EventListener,
-      );
-    };
-  }, []);
-
-  // Update info panel folder
-  useEffect(() => {
-    const updateInfoPanelFolderHandler = (
-      e: CustomEvent<{ folder: TFolder }>,
-    ) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.updateInfoPanelFolder,
-      updateInfoPanelFolderHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.updateInfoPanelFolder,
-        updateInfoPanelFolderHandler as EventListener,
-      );
-    };
-  }, []);
-
-  // Update info panel room
-  useEffect(() => {
-    const updateInfoPanelRoomHandler = (e: CustomEvent<{ room: TRoom }>) => {};
-
-    window.addEventListener(
-      InfoPanelEvents.updateInfoPanelRoom,
-      updateInfoPanelRoomHandler as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        InfoPanelEvents.updateInfoPanelRoom,
-        updateInfoPanelRoomHandler as EventListener,
-      );
-    };
-  }, []);
-
   // Set selected room
   useEffect(() => {
     const setInfoPanelSelectedRoomHandler = (
-      e: CustomEvent<{ room: TRoom }>,
-    ) => {};
+      e: CustomEvent<{ room: Nullable<TRoom> }>,
+    ) => {
+      const { room } = e.detail;
+
+      setInfoPanelRoom!(room);
+    };
 
     window.addEventListener(
       InfoPanelEvents.setInfoPanelSelectedRoom,
@@ -221,11 +106,13 @@ const InfoPanelActions = ({ setIsVisible }: TInfoPanelActionsProps) => {
         setInfoPanelSelectedRoomHandler as EventListener,
       );
     };
-  }, []);
+  }, [setInfoPanelRoom]);
 
   // Open share tab
   useEffect(() => {
-    const openShareTabHandler = () => {};
+    const openShareTabHandler = () => {
+      openShareTab!();
+    };
 
     window.addEventListener(
       InfoPanelEvents.openShareTab,
@@ -242,7 +129,9 @@ const InfoPanelActions = ({ setIsVisible }: TInfoPanelActionsProps) => {
 
   // Open members tab
   useEffect(() => {
-    const openMembersTabHandler = () => {};
+    const openMembersTabHandler = () => {
+      openMembersTab!();
+    };
 
     window.addEventListener(
       InfoPanelEvents.openMembersTab,
@@ -295,7 +184,8 @@ const InfoPanelActions = ({ setIsVisible }: TInfoPanelActionsProps) => {
 
 export default inject(
   ({ infoPanelStore }: { infoPanelStore: InfoPanelStore }) => {
-    const { setIsVisible } = infoPanelStore;
-    return { setIsVisible };
+    const { setIsVisible, setInfoPanelRoom, openMembersTab, openShareTab } =
+      infoPanelStore;
+    return { setIsVisible, setInfoPanelRoom, openMembersTab, openShareTab };
   },
 )(observer(InfoPanelActions));

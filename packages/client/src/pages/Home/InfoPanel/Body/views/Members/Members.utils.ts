@@ -25,9 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
+import { TTranslation } from "@docspace/shared/types";
 
 class MembersHelper {
-  constructor(props) {
+  t: TTranslation;
+
+  constructor(props: { t: TTranslation }) {
     this.t = props.t;
   }
 
@@ -84,9 +87,7 @@ class MembersHelper {
     };
   };
 
-  getOptionsByRoomType = (roomType, canChangeUserRole = false) => {
-    if (!roomType) return;
-
+  getOptionsByRoomType = (roomType: RoomsType, canChangeUserRole = false) => {
     const options = this.getOptions();
 
     const deleteOption = canChangeUserRole
@@ -101,14 +102,6 @@ class MembersHelper {
       : [];
 
     switch (roomType) {
-      case RoomsType.FillingFormsRoom:
-        return [
-          options.roomAdmin,
-          options.collaborator,
-          options.formFiller,
-          options.viewer,
-          ...deleteOption,
-        ];
       case RoomsType.EditingRoom:
         return [
           options.roomAdmin,
@@ -117,22 +110,7 @@ class MembersHelper {
           options.viewer,
           ...deleteOption,
         ];
-      case RoomsType.ReviewRoom:
-        return [
-          options.roomAdmin,
-          options.collaborator,
-          options.reviewer,
-          options.commentator,
-          options.viewer,
-          ...deleteOption,
-        ];
-      case RoomsType.ReadOnlyRoom:
-        return [
-          options.roomAdmin,
-          options.collaborator,
-          options.viewer,
-          ...deleteOption,
-        ];
+
       case RoomsType.CustomRoom:
         return [
           options.roomAdmin,
@@ -167,7 +145,7 @@ class MembersHelper {
     }
   };
 
-  getOptionByUserAccess = (access) => {
+  getOptionByUserAccess = (access: ShareAccessRights) => {
     if (!access) return;
 
     const options = this.getOptions();

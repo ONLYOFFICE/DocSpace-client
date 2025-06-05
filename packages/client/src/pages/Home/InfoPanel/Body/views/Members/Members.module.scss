@@ -24,19 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-
-import { TRoom } from "@docspace/shared/api/rooms/types";
-
-export type HistoryFilter = {
-  page: number;
-  pageCount: number;
-  total: number;
-  startIndex: number;
-};
-
-export type TSelection =
-  | TRoom
-  | TFile
-  | TFolder
-  | Array<TRoom | TFile | TFolder>;
+.emptyScreen {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 45px 3px 0;
+}

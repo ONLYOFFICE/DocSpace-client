@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router";
 import { DeviceType } from "../../enums";
 import Article from ".";
 import { ArticleProps } from "./Article.types";
+import { ContextMenuModel } from "../context-menu";
 
 export default {
   title: "Layout Components/Article",
@@ -11,8 +12,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          "Article component with header, profile, and content sections",
+        component: "Article component with various display options",
       },
     },
   },
@@ -34,6 +34,12 @@ export default {
     onProfileClick: { action: "onProfileClick" },
   },
 } as Meta;
+
+const Template: Story<ArticleProps> = (args) => (
+  <div style={{ height: "600px", position: "relative" }}>
+    <Article {...args} />
+  </div>
+);
 
 const defaultProps: ArticleProps = {
   showText: true,
@@ -62,6 +68,11 @@ const defaultProps: ArticleProps = {
   isMobileArticle: false,
   zendeskKey: "your-zendesk-key",
   showProgress: false,
+  showBackButton: false,
+  downloaddesktopUrl: "https://example.com/desktop",
+  officeforandroidUrl: "https://example.com/android",
+  officeforiosUrl: "https://example.com/ios",
+  limitedAccessDevToolsForUsers: false,
   children: [
     <Article.Header key="header">
       <h2>Article Header</h2>
@@ -75,74 +86,40 @@ const defaultProps: ArticleProps = {
   ],
 };
 
-const Template: Story<ArticleProps> = (args) => (
-  <div style={{ height: "600px", position: "relative" }}>
-    <Article {...args} />
-  </div>
-);
-
 export const Default = Template.bind({});
 Default.args = {
   ...defaultProps,
-};
-
-export const WithoutText = Template.bind({});
-WithoutText.args = {
-  ...defaultProps,
-  showText: false,
-};
-
-export const Mobile = Template.bind({});
-Mobile.args = {
-  ...defaultProps,
-  currentDeviceType: DeviceType.mobile,
-  isMobileArticle: true,
-};
-
-export const Tablet = Template.bind({});
-Tablet.args = {
-  ...defaultProps,
-  currentDeviceType: DeviceType.tablet,
-};
-
-export const WithoutProfile = Template.bind({});
-WithoutProfile.args = {
-  ...defaultProps,
-  hideProfileBlock: true,
-};
-
-export const WithoutApps = Template.bind({});
-WithoutApps.args = {
-  ...defaultProps,
-  hideAppsBlock: true,
-};
-
-export const WithLiveChat = Template.bind({});
-WithLiveChat.args = {
-  ...defaultProps,
-  isLiveChatAvailable: true,
-  isShowLiveChat: true,
-};
-
-export const Loading = Template.bind({});
-Loading.args = {
-  ...defaultProps,
-  showArticleLoader: true,
-  isBurgerLoading: true,
-};
-
-export const WithCustomHeader = Template.bind({});
-WithCustomHeader.args = {
-  ...defaultProps,
-  withCustomArticleHeader: true,
+  user: {
+    id: "user-1",
+    displayName: "John Smith",
+    title: "Manager",
+    avatarSmall: "https://via.placeholder.com/32",
+    role: 1,
+  },
+  getActions: (t) =>
+    [
+      {
+        key: "profile",
+        label: "Profile",
+        onClick: () => console.log("Profile clicked"),
+      },
+      {
+        key: "help",
+        label: "Help",
+        onClick: () => console.log("Help clicked"),
+      },
+      {
+        key: "logout",
+        label: "Logout",
+        onClick: () => console.log("Logout clicked"),
+      },
+    ] as ContextMenuModel[],
   children: [
     <Article.Header key="header">
-      <div style={{ padding: "16px", backgroundColor: "#f5f5f5" }}>
-        Custom Header Content
-      </div>
+      <h2>Article with Context Menu</h2>
     </Article.Header>,
     <Article.Body key="body">
-      <div>Article Content</div>
+      <div>Content with available user context menu</div>
     </Article.Body>,
   ],
 };

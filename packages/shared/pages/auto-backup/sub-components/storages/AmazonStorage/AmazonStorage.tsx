@@ -35,7 +35,6 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 
-import { StyledStoragesModule } from "./AmazonStorage.styled";
 import type { AmazonStorageProps } from "./AmazonStorage.types";
 
 const AmazonStorage = ({
@@ -52,7 +51,6 @@ const AmazonStorage = ({
   deleteValueFormSetting,
   setRequiredFormSettings,
   setIsThirdStorageChanged,
-  // ScheduleComponent
   hoursArray,
   maxNumberCopiesArray,
   monthNumbersArray,
@@ -77,7 +75,7 @@ const AmazonStorage = ({
   });
 
   return (
-    <StyledStoragesModule>
+    <div>
       <AmazonSettings
         t={t}
         isLoading={isLoading}
@@ -112,17 +110,8 @@ const AmazonStorage = ({
         maxNumberCopiesArray={maxNumberCopiesArray}
         selectedMaxCopiesNumber={selectedMaxCopiesNumber}
       />
-    </StyledStoragesModule>
+    </div>
   );
 };
 
 export default AmazonStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields, storageRegions } = backup;
-
-//   return {
-//     storageRegions,
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation(["Settings", "Common"])(AmazonStorage)));

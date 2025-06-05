@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,20 +27,20 @@
 import React from "react";
 import classNames from "classnames";
 
-import { BackupStorageType, ProvidersType } from "@docspace/shared/enums";
+import { BackupStorageType, ProvidersType } from "../../../../enums";
 import {
   DirectThirdPartyConnection,
   type DirectThirdPartyConnectionProps,
-} from "@docspace/shared/components/direct-third-party-connection";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+} from "../../../../components/direct-third-party-connection";
+import { useDidMount } from "../../../../hooks/useDidMount";
 
-import type { Nullable } from "@docspace/shared/types";
+import type { Nullable } from "../../../../types";
 
 import {
   ScheduleComponent,
   type ScheduleComponentProps,
-} from "./ScheduleComponent";
-import styles from "../AutoBackup.module.scss";
+} from "../ScheduleComponent";
+import styles from "../../AutoBackup.module.scss";
 
 interface ThirdPartyModuleProps
   extends Omit<
@@ -70,8 +70,6 @@ const ThirdPartyModule = ({
   defaultFolderId,
   defaultStorageType,
   setSelectedFolder,
-
-  // DirectThirdPartyConnection
   accounts,
   basePath,
   clearLocalStorage,
@@ -96,8 +94,6 @@ const ThirdPartyModule = ({
   setThirdPartyAccountsInfo,
   setThirdPartyProviders,
   toDefault,
-
-  // ScheduleComponent
   hoursArray,
   maxNumberCopiesArray,
   monthNumbersArray,
@@ -198,24 +194,3 @@ const ThirdPartyModule = ({
 };
 
 export default ThirdPartyModule;
-
-// export default inject(({ backup }) => {
-//   const {
-//     setSelectedFolder,
-
-//     defaultStorageType,
-//     commonThirdPartyList,
-//     defaultFolderId,
-//   } = backup;
-
-//   const isResourcesDefault =
-//     defaultStorageType === `${BackupStorageType.ResourcesModuleType}`;
-//   const passedId = isResourcesDefault ? defaultFolderId : "";
-
-//   return {
-//     setSelectedFolder,
-//     passedId,
-//     commonThirdPartyList,
-//     isResourcesDefault,
-//   };
-// })(withTranslation(["Settings", "Common"])(observer(ThirdPartyModule)));

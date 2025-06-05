@@ -64,7 +64,7 @@ import type { Nullable, Option } from "@docspace/shared/types";
 
 import { SaveCancelButtons } from "../../components/save-cancel-buttons";
 
-import ThirdPartyModule from "./sub-components/ThirdPartyModule";
+import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";
 import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModule";
 

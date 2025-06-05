@@ -125,7 +125,7 @@ const RoomsModule = ({
   );
 
   return (
-    <>
+    <div data-testid="rooms-module">
       <div
         className={classNames(
           styles.autoBackupFolderInput,
@@ -181,7 +181,7 @@ const RoomsModule = ({
         setMaxCopies={setMaxCopies}
         setMonthNumber={setMonthNumber}
       />
-    </>
+    </div>
   );
 };
 

@@ -28,50 +28,23 @@ import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
-import { BackupStorageType, type DeviceType } from "@docspace/shared/enums";
-import {
-  FilesSelectorInput,
-  type FilesSelectorSettings,
-} from "@docspace/shared/components/files-selector-input";
+import { BackupStorageType } from "@docspace/shared/enums";
+import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
 import BackupToPublicRoom from "@docspace/shared/dialogs/backup-to-public-room-dialog";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-
 import type {
   BackupToPublicRoomOptionType,
   Nullable,
 } from "@docspace/shared/types";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 
+import { ScheduleComponent } from "../ScheduleComponent";
+import styles from "../../AutoBackup.module.scss";
 import {
-  ScheduleComponent,
-  type ScheduleComponentProps,
-} from "./ScheduleComponent";
-import styles from "../AutoBackup.module.scss";
+  RoomsModuleProps,
+  BackupToPublicRoomDialogState,
+} from "./RoomsModule.types";
 
-interface RoomsModuleProps extends ScheduleComponentProps {
-  isError: boolean;
-  isLoadingData: boolean;
-  settingsFileSelector: FilesSelectorSettings;
-  currentDeviceType?: DeviceType;
-  setIsError: (error: boolean) => void;
-
-  // filesSelectorInput
-  basePath: string;
-  newPath: string;
-  toDefault: VoidFunction;
-  isErrorPath: boolean;
-  setBasePath: (folders: TBreadCrumb[]) => void;
-  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
-  // end filesSelectorInput
-
-  // backup store
-  defaultStorageType: Nullable<string>;
-  setSelectedFolder: (id: string) => void;
-  defaultFolderId: Nullable<string>;
-  // end back store
-}
-
-const defaultState = {
+const defaultState: BackupToPublicRoomDialogState = {
   visible: false,
   data: null,
 };
@@ -213,23 +186,3 @@ const RoomsModule = ({
 };
 
 export default RoomsModule;
-
-// export default inject(({ backup }) => {
-//   const {
-//     setSelectedFolder,
-//     defaultStorageType,
-//     defaultFolderId,
-//   } = backup;
-
-//   const isDocumentsDefault =
-//     defaultStorageType === `${BackupStorageType.DocumentModuleType}`;
-
-//   const passedId = isDocumentsDefault ? defaultFolderId : "";
-
-//   return {
-//     defaultFolderId,
-//     setSelectedFolder,
-//     passedId,
-//     isDocumentsDefault,
-//   };
-// })(observer(RoomsModule));

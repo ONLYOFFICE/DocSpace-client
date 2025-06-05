@@ -43,6 +43,7 @@ interface ButtonContainerProps {
   isCurrentStoragePlan?: boolean;
   isUpgradeStoragePlan: boolean;
   currentStoragePlanSize?: boolean;
+  hasStorageSubscription?: boolean;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
@@ -57,15 +58,17 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     onBuy,
     onSendRequest,
     currentStoragePlanSize,
+    hasStorageSubscription,
   } = props;
 
   const { buttonTitle, isWalletBalanceInsufficient, t } = useServicesActions();
   const { futurePayment, isWaitingCalculation } = usePaymentContext();
 
-  const isPaymentAnavalable =
-    isUpgradeStoragePlan && currentStoragePlanSize
+  const isPaymentUnavalable = hasStorageSubscription
+    ? isUpgradeStoragePlan && currentStoragePlanSize
       ? isWalletBalanceInsufficient(futurePayment)
-      : insufficientFunds;
+      : insufficientFunds
+    : amount === 0;
 
   return (
     <>
@@ -79,7 +82,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         isLoading={isLoading || isWaitingCalculation}
         isDisabled={
           !isExceedingStorageLimit
-            ? isPaymentAnavalable || isCurrentStoragePlan
+            ? isPaymentUnavalable || isCurrentStoragePlan
             : false
         }
       />

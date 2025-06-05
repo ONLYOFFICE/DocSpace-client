@@ -26,6 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
+import classNames from "classnames";
 
 import { BackupStorageType, type DeviceType } from "@docspace/shared/enums";
 import {
@@ -45,6 +46,7 @@ import {
   ScheduleComponent,
   type ScheduleComponentProps,
 } from "./ScheduleComponent";
+import styles from "../AutoBackup.module.scss";
 
 interface RoomsModuleProps extends ScheduleComponentProps {
   isError: boolean;
@@ -151,7 +153,12 @@ const RoomsModule = ({
 
   return (
     <>
-      <div className="auto-backup_folder-input">
+      <div
+        className={classNames(
+          styles.autoBackupFolderInput,
+          "auto-backup_folder-input",
+        )}
+      >
         <FilesSelectorInput
           withCreate
           isRoomBackup

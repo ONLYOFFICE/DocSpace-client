@@ -37,10 +37,12 @@ import {
   maxNumberCopiesArray,
   selectedStorages,
 } from "../../mockData";
+import styles from "../../AutoBackup.module.scss";
 
 const meta = {
   title: "Pages/AutoBackup/ThirdPartyStorageModule",
   component: ThirdPartyStorageModule,
+  tags: ["!autodocs"],
   parameters: {
     docs: {
       description: {
@@ -125,7 +127,13 @@ const meta = {
     setTime: action("setTime"),
     deleteValueFormSetting: action("deleteValueFormSetting"),
   },
-  tags: ["!autodocs"],
+  decorators: [
+    (Story) => (
+      <div className={styles.autoBackup}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof ThirdPartyStorageModule>;
 
 export default meta;

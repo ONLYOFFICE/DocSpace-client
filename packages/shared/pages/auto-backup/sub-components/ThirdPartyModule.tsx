@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { BackupStorageType, ProvidersType } from "@docspace/shared/enums";
 import {
@@ -39,6 +40,7 @@ import {
   ScheduleComponent,
   type ScheduleComponentProps,
 } from "./ScheduleComponent";
+import styles from "../AutoBackup.module.scss";
 
 interface ThirdPartyModuleProps
   extends Omit<
@@ -132,7 +134,12 @@ const ThirdPartyModule = ({
 
   return (
     <>
-      <div className="auto-backup_third-party-module">
+      <div
+        className={classNames(
+          styles.autoBackupThirdPartyModule,
+          "auto-backup_third-party-module",
+        )}
+      >
         <DirectThirdPartyConnection
           id={passedId}
           isError={isError}

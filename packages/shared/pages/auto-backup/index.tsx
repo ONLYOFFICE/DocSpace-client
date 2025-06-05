@@ -29,6 +29,7 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { Text } from "@docspace/shared/components/text";
@@ -67,9 +68,9 @@ import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModule";
 
-import { useDefaultOptions } from "./hooks/index";
-import { StyledModules, StyledAutoBackup } from "./AutoBackup.styled";
+import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
+import styles from "./AutoBackup.module.scss";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -386,7 +387,7 @@ const AutomaticBackup = ({
     fontSize: "13px",
     fontWeight: 600,
     value: "value",
-    className: "backup_radio-button",
+    className: classNames(styles.backupRadioButton, "backup_radio-button"),
     onClick: onClickShowStorage,
   };
 
@@ -402,17 +403,28 @@ const AutomaticBackup = ({
   if (isInitialLoading) return <AutoBackupLoader />;
 
   return (
-    <StyledAutoBackup>
+    <div className={styles.autoBackup}>
       <StatusMessage message={errorInformation} />
-      <div className="backup_modules-header_wrapper">
-        <Text className="backup_modules-description settings_unavailable">
+      <div
+        className={classNames(
+          styles.backupModulesHeaderWrapper,
+          "backup_modules-header_wrapper",
+        )}
+      >
+        <Text
+          className={classNames(
+            styles.backupModulesDescription,
+            styles.settingsUnavailable,
+            "backup_modules-description settings_unavailable",
+          )}
+        >
           {t("Common:AutoBackupDescription", {
             productName: t("Common:ProductName"),
           })}
         </Text>
         {!isManagement ? (
           <Link
-            className="link-learn-more"
+            className={classNames(styles.linkLearnMore, "link-learn-more")}
             href={automaticBackupUrl}
             target={LinkTarget.blank}
             fontSize="13px"
@@ -424,21 +436,37 @@ const AutomaticBackup = ({
         ) : null}
       </div>
 
-      <div className="backup_toggle-wrapper">
+      <div
+        className={classNames(
+          styles.backupToggleWrapper,
+          "backup_toggle-wrapper",
+        )}
+      >
         <ToggleButton
-          className="enable-automatic-backup backup_toggle-btn"
+          className={classNames(
+            styles.backupToggleBtn,
+            "enable-automatic-backup backup_toggle-btn",
+          )}
           onChange={onClickPermissions}
           isChecked={selectedEnableSchedule}
           isDisabled={isLoadingData || !isEnableAuto || isInitialError}
         />
 
-        <div className="toggle-caption">
-          <div className="toggle-caption_title">
+        <div className={classNames(styles.toggleCaption, "toggle-caption")}>
+          <div
+            className={classNames(
+              styles.toggleCaptionTitle,
+              "toggle-caption_title",
+            )}
+          >
             <Text
               fontWeight={600}
               lineHeight="20px"
               noSelect
-              className="settings_unavailable"
+              className={classNames(
+                styles.settingsUnavailable,
+                "settings_unavailable",
+              )}
             >
               {t("Common:EnableAutomaticBackup")}
             </Text>
@@ -451,19 +479,27 @@ const AutomaticBackup = ({
                 }
                 label={t("Common:Paid")}
                 fontWeight="700"
-                className="auto-backup_badge"
+                className={classNames(
+                  styles.autoBackupBadge,
+                  "auto-backup_badge",
+                )}
                 isPaidBadge
               />
             ) : null}
           </div>
-          <Text className="backup_toggle-btn-description settings_unavailable">
+          <Text
+            className={classNames(
+              styles.settingsUnavailable,
+              "backup_toggle-btn-description settings_unavailable",
+            )}
+          >
             {t("Common:EnableAutomaticBackupDescription")}
           </Text>
         </div>
       </div>
       {!isInitialError && selectedEnableSchedule && isEnableAuto ? (
         <div className="backup_modules">
-          <StyledModules>
+          <div className={styles.modules}>
             <RadioButton
               key={0}
               {...commonRadioButtonProps}
@@ -473,7 +509,12 @@ const AutomaticBackup = ({
               isChecked={isCheckedDocuments}
               isDisabled={isLoadingData}
             />
-            <Text className="backup-description">
+            <Text
+              className={classNames(
+                styles.backupDescription,
+                "backup-description",
+              )}
+            >
               <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
                 {{ roomName }}
               </Trans>
@@ -506,23 +547,23 @@ const AutomaticBackup = ({
                 setIsError={setIsError}
               />
             ) : null}
-          </StyledModules>
+          </div>
 
-          <StyledModules
-          // isDisabled={isDisabledThirdPartyList}
-          >
+          <div className={styles.modules}>
             <RadioButton
               {...commonRadioButtonProps}
               id="third-party-resource"
               label={t("Common:ThirdPartyResource")}
               name={`${BackupStorageType.ResourcesModuleType}`}
               isChecked={isCheckedThirdParty}
-              isDisabled={
-                isLoadingData
-                // || isDisabledThirdPartyList
-              }
+              isDisabled={isLoadingData}
             />
-            <Text className="backup-description">
+            <Text
+              className={classNames(
+                styles.backupDescription,
+                "backup-description",
+              )}
+            >
               {t("Common:ThirdPartyResourceDescription")}
             </Text>
             {isCheckedThirdParty ? (
@@ -572,8 +613,8 @@ const AutomaticBackup = ({
                 buttonSize={buttonSize}
               />
             ) : null}
-          </StyledModules>
-          <StyledModules>
+          </div>
+          <div className={styles.modules}>
             <RadioButton
               {...commonRadioButtonProps}
               id="third-party-storage"
@@ -582,7 +623,12 @@ const AutomaticBackup = ({
               isChecked={isCheckedThirdPartyStorage}
               isDisabled={isLoadingData}
             />
-            <Text className="backup-description">
+            <Text
+              className={classNames(
+                styles.backupDescription,
+                "backup-description",
+              )}
+            >
               {t("Common:ThirdPartyStorageDescription")}
             </Text>
 
@@ -616,7 +662,7 @@ const AutomaticBackup = ({
                 {...commonProps}
               />
             ) : null}
-          </StyledModules>
+          </div>
         </div>
       ) : null}
 
@@ -654,127 +700,8 @@ const AutomaticBackup = ({
           clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
-    </StyledAutoBackup>
+    </div>
   );
 };
 
 export default AutomaticBackup;
-
-// export default inject(
-//   ({
-//     authStore,
-//     settingsStore,
-//     backup,
-//     treeFoldersStore,
-//     filesSelectorInput,
-//     currentQuotaStore,
-//   }) => {
-//     const { language } = authStore;
-//     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-//     const {
-//       theme,
-//       currentColorScheme,
-//       automaticBackupUrl,
-//       checkEnablePortalSettings,
-//     } = settingsStore;
-
-//     const {
-//       downloadingProgress,
-//       backupSchedule,
-//       //commonThirdPartyList,
-//       clearProgressInterval,
-//       deleteSchedule,
-//       getProgress,
-//       setThirdPartyStorage,
-//       setDefaultOptions,
-//       setBackupSchedule,
-//       selectedStorageType,
-//       seStorageType,
-//       //setCommonThirdPartyList,
-//       selectedPeriodLabel,
-//       selectedWeekdayLabel,
-//       selectedWeekday,
-//       selectedHour,
-//       selectedMonthDay,
-//       selectedMaxCopiesNumber,
-//       selectedPeriodNumber,
-//       selectedFolderId,
-//       selectedStorageId,
-//       toDefault,
-//       isFormReady,
-//       getStorageParams,
-//       setSelectedEnableSchedule,
-//       selectedEnableSchedule,
-//       setConnectedThirdPartyAccount,
-//       setStorageRegions,
-//       defaultFolderId,
-//       isBackupProgressVisible,
-//     } = backup;
-
-//     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
-
-//     const isCheckedDocuments =
-//       selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
-//     const isCheckedThirdParty =
-//       selectedStorageType === `${BackupStorageType.ResourcesModuleType}`;
-//     const isCheckedThirdPartyStorage =
-//       selectedStorageType === `${BackupStorageType.StorageModuleType}` ;
-
-//     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
-
-//     const isEnableAuto = checkEnablePortalSettings(
-//       isRestoreAndAutoBackupAvailable,
-//     );
-
-//     return {
-//       setConnectedThirdPartyAccount,
-//       defaultFolderId,
-//       isEnableAuto,
-//       fetchTreeFolders,
-//       rootFoldersTitles,
-//       downloadingProgress,
-//       theme,
-//       language,
-//       isFormReady,
-//       backupSchedule,
-//       //commonThirdPartyList,
-//       clearProgressInterval,
-//       deleteSchedule,
-//       getProgress,
-//       setThirdPartyStorage,
-//       setDefaultOptions,
-//       setBackupSchedule,
-//       selectedStorageType,
-//       seStorageType,
-//       //setCommonThirdPartyList,
-//       selectedPeriodLabel,
-//       selectedWeekdayLabel,
-//       selectedWeekday,
-//       selectedHour,
-//       selectedMonthDay,
-//       selectedMaxCopiesNumber,
-//       selectedPeriodNumber,
-//       selectedFolderId,
-//       selectedStorageId,
-
-//       toDefault,
-
-//       isCheckedThirdPartyStorage,
-//       isCheckedThirdParty,
-//       isCheckedDocuments,
-
-//       getStorageParams,
-
-//       setSelectedEnableSchedule,
-//       selectedEnableSchedule,
-
-//       resetNewFolderPath,
-//       setStorageRegions,
-//       updateBaseFolderPath,
-
-//       automaticBackupUrl,
-//       currentColorScheme,
-//       isBackupProgressVisible,
-//     };
-//   },
-// )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

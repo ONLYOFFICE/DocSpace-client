@@ -87,7 +87,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
           </Link>
         </div>
       ) : (
-        <div className={styles.addPaymentMethodContainer} onClick={goLinkCard}>
+        <div className={styles.addPaymentMethodContainer}>
           <SelectorAddButton onClick={goLinkCard} />
           <Text fontWeight={600}>{t("AddPaymentMethod")}</Text>
         </div>

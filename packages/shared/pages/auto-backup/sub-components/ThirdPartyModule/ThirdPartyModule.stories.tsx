@@ -27,6 +27,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import { fn } from "@storybook/test";
 
 import { BackupStorageType } from "@docspace/shared/enums";
 import { ThirdPartyModule } from "./index";
@@ -45,6 +46,7 @@ import { ButtonSize } from "../../../../components/button";
 export default {
   title: "Pages/AutoBackup/ThirdPartyModule",
   component: ThirdPartyModule,
+  tags: ["!autodocs"],
   parameters: {
     docs: {
       description: {
@@ -97,7 +99,7 @@ export const Default: Story = {
     clearLocalStorage: action("clearLocalStorage"),
     connectDialogVisible: false,
     connectedThirdPartyAccount: null,
-    deleteThirdParty: action("deleteThirdParty"),
+    deleteThirdParty: fn(),
     deleteThirdPartyDialogVisible: false,
     filesSelectorSettings: {
       getIcon: () => {},
@@ -105,9 +107,9 @@ export const Default: Story = {
     isErrorPath: false,
     isTheSameThirdPartyAccount: false,
     newPath: "/",
-    openConnectWindow: action("openConnectWindow"),
+    openConnectWindow: fn(),
     providers: mockThirdPartyProviders,
-    removeItem: action("removeItem"),
+    removeItem: mockThirdPartyAccounts[0],
     selectedThirdPartyAccount: mockThirdPartyAccounts[0],
     setBasePath: action("setBasePath"),
     setConnectDialogVisible: action("setConnectDialogVisible"),
@@ -117,7 +119,7 @@ export const Default: Story = {
     ),
     setNewPath: action("setNewPath"),
     setSelectedThirdPartyAccount: action("setSelectedThirdPartyAccount"),
-    setThirdPartyAccountsInfo: action("setThirdPartyAccountsInfo"),
+    setThirdPartyAccountsInfo: fn(),
     setThirdPartyProviders: action("setThirdPartyProviders"),
     toDefault: action("toDefault"),
     buttonSize: ButtonSize.small,

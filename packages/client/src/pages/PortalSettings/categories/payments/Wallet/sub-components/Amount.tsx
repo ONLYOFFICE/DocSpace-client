@@ -38,13 +38,14 @@ import styles from "../styles/Amount.module.scss";
 import { useAmountValue } from "../context";
 
 type AmountProps = {
+  isDisabled: boolean;
   language: string;
   currency: string;
   walletCustomerEmail?: boolean;
 };
 
 const Amount = (props: AmountProps) => {
-  const { language, currency, walletCustomerEmail } = props;
+  const { language, currency, walletCustomerEmail, isDisabled } = props;
 
   const { amount, setAmount } = useAmountValue();
   const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
@@ -57,7 +58,7 @@ const Amount = (props: AmountProps) => {
       id: item.toString(),
       value: item,
       content: null,
-      isDisabled: !walletCustomerEmail,
+      isDisabled: isDisabled || !walletCustomerEmail,
     }));
   };
 
@@ -114,7 +115,7 @@ const Amount = (props: AmountProps) => {
           withBorder
           type={InputType.text}
           placeholder={t("EnterAmount")}
-          isDisabled={!walletCustomerEmail}
+          isDisabled={isDisabled || !walletCustomerEmail}
         />
       </div>
       {!walletCustomerEmail ? (

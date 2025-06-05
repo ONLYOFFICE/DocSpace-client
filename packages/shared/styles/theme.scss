@@ -1494,6 +1494,10 @@
   --input-border-hover: #{$gray};
   --input-border-focus: #{$light-second-main};
 
+  // Selection
+  --input-selection-text-color: #{$black};
+  --input-selection-color: #{$light-blue-hover};
+
   // Disabled state
   --input-disabled-bg: #{$gray-light};
   --input-disabled-color: #{$gray-strong};
@@ -1558,6 +1562,9 @@
   --input-border-color: #{$gray-dark-strong};
   --input-border-hover: #{$gray-dark};
   --input-border-focus: #{$white};
+
+  --input-selection-text-color: #{$white};
+  --input-selection-color: #{$gray-dark-text};
 
   --input-disabled-bg: #{$gray-dark-strong};
   --input-disabled-color: #{$gray-dark-text};

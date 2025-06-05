@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -90,6 +90,8 @@ const TopUpModal = (props: TopUpModalProps) => {
     2,
   );
 
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <AmountProvider>
       <ModalDialog
@@ -106,15 +108,20 @@ const TopUpModal = (props: TopUpModalProps) => {
               walletCustomerEmail={walletCustomerEmail!}
               cardLinked={cardLinked!}
               accountLink={accountLink!}
+              isDisabled={isLoading}
             />
             <Amount
               language={language!}
               currency={currency}
               walletCustomerEmail={walletCustomerEmail}
+              isDisabled={isLoading}
             />
 
             {wasFirstTopUp && walletCustomerEmail ? (
-              <AutomaticPaymentsBlock isEditAutoPayment={isEditAutoPayment!} />
+              <AutomaticPaymentsBlock
+                isEditAutoPayment={isEditAutoPayment!}
+                isDisabled={isLoading}
+              />
             ) : null}
           </div>
         </ModalDialog.Body>
@@ -125,6 +132,8 @@ const TopUpModal = (props: TopUpModalProps) => {
             fetchTransactionHistory={fetchTransactionHistory}
             onClose={onClose}
             walletCustomerEmail={walletCustomerEmail}
+            setIsLoading={setIsLoading}
+            isLoading={isLoading}
           />
         </ModalDialog.Footer>
       </ModalDialog>

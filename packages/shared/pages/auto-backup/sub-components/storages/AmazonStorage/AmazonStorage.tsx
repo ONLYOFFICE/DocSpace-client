@@ -75,7 +75,7 @@ const AmazonStorage = ({
   });
 
   return (
-    <div>
+    <div data-testid="amazon-storage">
       <AmazonSettings
         t={t}
         isLoading={isLoading}

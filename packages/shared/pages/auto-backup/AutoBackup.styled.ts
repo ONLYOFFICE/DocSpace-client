@@ -199,3 +199,30 @@ export const StyledAutoBackup = styled.div<{ pageIsDisabled?: boolean }>`
 
   ${(props) => props.pageIsDisabled && UnavailableStyles}
 `;
+
+export const StyledComboBoxItem = styled.div<{ isDisabled?: boolean }>`
+  display: flex;
+
+  .drop-down-item_text {
+    color: ${({ theme, isDisabled }) =>
+      isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
+  }
+  .drop-down-item_icon {
+    display: flex;
+    align-items: center;
+
+    div {
+      display: flex;
+    }
+
+    margin-inline-start: auto;
+
+    svg {
+      min-height: 16px;
+      min-width: 16px;
+    }
+  }
+  .drop-down-item_icon {
+    align-self: center;
+  }
+`;

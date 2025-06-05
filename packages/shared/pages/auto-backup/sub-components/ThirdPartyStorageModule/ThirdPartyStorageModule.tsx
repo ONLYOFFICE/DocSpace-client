@@ -45,10 +45,7 @@ import { RackspaceStorage } from "../storages/RackspaceStorage";
 import { SelectelStorage } from "../storages/SelectelStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";
 
-import {
-  StyledAutoBackup,
-  StyledComboBoxItem,
-} from "./ThirdPartyStorageModule.styled";
+import { StyledAutoBackup, StyledComboBoxItem } from "../../AutoBackup.styled";
 import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.types";
 
 const ThirdPartyStorageModule = ({
@@ -178,69 +175,51 @@ const ThirdPartyStorageModule = ({
   );
 
   return (
-    <StyledAutoBackup>
-      <div className="auto-backup_storages-module">
-        <ComboBox
-          options={[]}
-          advancedOptions={advancedOptions}
-          selectedOption={{
-            key: 0,
-            label: storageTitle,
-          }}
-          isDisabled={isLoadingData}
-          size="content"
-          manualWidth="400px"
-          directionY="both"
-          displaySelectedOption
-          noBorder={false}
-          isDefaultMode
-          hideMobileView={false}
-          forceCloseClickOutside
-          scaledOptions
-          showDisabledItems
-          displayArrow
-          className="backup_combo"
+    <div className="auto-backup_storages-module">
+      <ComboBox
+        options={[]}
+        advancedOptions={advancedOptions}
+        selectedOption={{
+          key: 0,
+          label: storageTitle,
+        }}
+        isDisabled={isLoadingData}
+        size="content"
+        manualWidth="400px"
+        directionY="both"
+        displaySelectedOption
+        noBorder={false}
+        isDefaultMode
+        hideMobileView={false}
+        forceCloseClickOutside
+        scaledOptions
+        showDisabledItems
+        displayArrow
+        className="backup_combo"
+      />
+
+      {selectedStorageId === ThirdPartyStorages.GoogleId ? (
+        <GoogleCloudStorage {...commonProps} />
+      ) : null}
+
+      {selectedStorageId === ThirdPartyStorages.RackspaceId ? (
+        <RackspaceStorage {...commonProps} />
+      ) : null}
+
+      {selectedStorageId === ThirdPartyStorages.SelectelId ? (
+        <SelectelStorage {...commonProps} />
+      ) : null}
+
+      {selectedStorageId === ThirdPartyStorages.AmazonId ? (
+        <AmazonStorage
+          storageRegions={storageRegions}
+          defaultRegion={defaultRegion}
+          deleteValueFormSetting={deleteValueFormSetting}
+          {...commonProps}
         />
-
-        {selectedStorageId === ThirdPartyStorages.GoogleId ? (
-          <GoogleCloudStorage {...commonProps} />
-        ) : null}
-
-        {selectedStorageId === ThirdPartyStorages.RackspaceId ? (
-          <RackspaceStorage {...commonProps} />
-        ) : null}
-
-        {selectedStorageId === ThirdPartyStorages.SelectelId ? (
-          <SelectelStorage {...commonProps} />
-        ) : null}
-
-        {selectedStorageId === ThirdPartyStorages.AmazonId ? (
-          <AmazonStorage
-            storageRegions={storageRegions}
-            defaultRegion={defaultRegion}
-            deleteValueFormSetting={deleteValueFormSetting}
-            {...commonProps}
-          />
-        ) : null}
-      </div>
-    </StyledAutoBackup>
+      ) : null}
+    </div>
   );
 };
 
 export default ThirdPartyStorageModule;
-
-// export default inject(({ backup }) => {
-//   const {
-//     thirdPartyStorage,
-//     setStorageId,
-//     selectedStorageId,
-//     defaultStorageId,
-//   } = backup;
-
-//   return {
-//     thirdPartyStorage,
-//     setStorageId,
-//     selectedStorageId,
-//     defaultStorageId,
-//   };
-// })(withTranslation("Settings")(observer(ThirdPartyStorageModule)));

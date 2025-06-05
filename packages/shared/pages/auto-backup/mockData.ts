@@ -87,7 +87,7 @@ export const storageRegions = [
 
 export const selectedStorages = {
   amazon: {
-    id: "amazon",
+    id: "s3",
     isSet: true,
     title: "Amazon S3",
     properties: [

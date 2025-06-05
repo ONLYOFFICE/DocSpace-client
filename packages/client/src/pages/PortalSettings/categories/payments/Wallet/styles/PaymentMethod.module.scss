@@ -82,5 +82,12 @@
     a {
       color: var(--payment-text-color);
     }
+
+    &.cardLinkDisabled {
+      a {
+        pointer-events: none;
+        opacity: 0.6;
+      }
+    }
   }
 }

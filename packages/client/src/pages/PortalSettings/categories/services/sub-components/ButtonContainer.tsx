@@ -93,6 +93,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         size={ButtonSize.normal}
         scale
         onClick={onClose}
+        isDisabled={isLoading}
       />
     </>
   );

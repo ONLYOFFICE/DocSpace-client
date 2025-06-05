@@ -60,6 +60,7 @@ type AutoPaymentsProps = {
   minBalanceError?: boolean;
   setUpToBalanceError?: (value: boolean) => void;
   upToBalanceError?: boolean;
+  isDisabled?: boolean;
 };
 
 type CurrentPaymentSettingsProps = {
@@ -115,6 +116,7 @@ const AutoPayments = ({
   setUpToBalanceError,
   upToBalanceError,
   noMargin,
+  isDisabled,
 }: AutoPaymentsProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
@@ -262,6 +264,7 @@ const AutoPayments = ({
           hasError={minBalanceError}
           type={InputType.text}
           pattern="\d+"
+          isDisabled={isDisabled}
         />
         {description(5, 1000)}
       </div>
@@ -282,6 +285,7 @@ const AutoPayments = ({
           hasError={upToBalanceError}
           type={InputType.text}
           pattern="\d+"
+          isDisabled={isDisabled}
         />
         {description(minUpToBalance, 5000)}
       </div>
@@ -295,7 +299,11 @@ const AutoPayments = ({
             onClick={onSaveAutoPayment}
             isLoading={isLoading}
             isDisabled={
-              minBalanceError || upToBalanceError || !minBalance || !upToBalance
+              isDisabled ||
+              minBalanceError ||
+              upToBalanceError ||
+              !minBalance ||
+              !upToBalance
             }
           />
           <Button
@@ -303,7 +311,7 @@ const AutoPayments = ({
             label={t("Common:CancelButton")}
             size={ButtonSize.small}
             onClick={onClose}
-            isDisabled={isLoading}
+            isDisabled={isDisabled || isLoading}
           />
         </div>
       ) : null}
@@ -314,7 +322,7 @@ const AutoPayments = ({
     <div
       className={classNames(styles.settingsWrapper, {
         [styles.animated]: animateSettings,
-        [styles.showBlock]: isFirstRender.current,
+        [styles.showBlock]: isDisabled || isFirstRender.current,
       })}
     >
       <CurrentPaymentSettings
@@ -327,6 +335,7 @@ const AutoPayments = ({
         label={t("Common:EditButton")}
         size={ButtonSize.small}
         onClick={onEditClick}
+        isDisabled={isDisabled}
       />
     </div>
   );
@@ -345,7 +354,7 @@ const AutoPayments = ({
           isChecked={isAutomaticPaymentsEnabled}
           onChange={onToggleClick}
           className={styles.toggleButton}
-          isDisabled={!walletCustomerEmail}
+          isDisabled={isDisabled || !walletCustomerEmail}
         />
       </div>
 

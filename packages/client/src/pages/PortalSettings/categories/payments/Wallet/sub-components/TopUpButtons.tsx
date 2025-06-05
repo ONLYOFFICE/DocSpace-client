@@ -33,6 +33,8 @@ import { useAmountValue } from "../context";
 
 interface TopUpButtonsProps {
   currency: string;
+  setIsLoading: (value: boolean) => void;
+  isLoading: boolean;
   fetchBalance?: () => Promise<void>;
   fetchTransactionHistory?: () => Promise<void>;
   onClose: () => void;
@@ -45,9 +47,11 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
   fetchTransactionHistory,
   onClose,
   walletCustomerEmail,
+  setIsLoading,
+  isLoading,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
-  const [isLoading, setIsLoading] = useState(false);
+
   const { amount } = useAmountValue();
 
   const isButtonDisabled = !amount || !walletCustomerEmail;
@@ -64,9 +68,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
 
       onClose();
     } catch (e) {
-      console.error(e);
-
-      toastr.error(e instanceof Error ? e.message : String(e));
+      toastr.error(e);
     } finally {
       setIsLoading(false);
     }
@@ -90,6 +92,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
         size={ButtonSize.normal}
         scale
         onClick={onClose}
+        isDisabled={isLoading}
       />
     </>
   );

@@ -128,6 +128,22 @@ export const settingsTree = [
     isArticle: true,
   },
   {
+    id: "management-settings_catalog-portal-payments",
+    key: "2-1",
+    icon: "",
+    link: "portal-payments",
+    tKey: "Common:PaymentsTitle",
+    isHeader: true,
+  },
+  {
+    id: "management-settings_catalog-wallet",
+    key: "2-2",
+    icon: "",
+    link: "wallet",
+    tKey: "Common:PaymentsTitle",
+    isHeader: true,
+  },
+  {
     id: "management-settings_catalog-bonus",
     key: "3",
     icon: CatalogSettingsGiftReactSvgUrl,

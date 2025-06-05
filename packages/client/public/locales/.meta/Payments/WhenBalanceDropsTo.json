@@ -3,7 +3,7 @@
   "content": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "content_en_sha1_hash": "9bd7cb1f518775deb509f52ee99d50a8dcbcfb83",
   "created_at": "2025-05-28T09:33:06.852Z",
-  "updated_at": "2025-05-28T09:34:37.141Z",
+  "updated_at": "2025-06-05T23:06:25.309Z",
   "comment": {
     "text": "WhenBalanceDropsTo is used to display a message explaining when an auto-topup will be triggered for a wallet, typically appearing in settings or payment-related contexts. The message indicates the minimum balance required for the top-up and the maximum amount that will be automatically added. This translation key appears in UI components related to wallet management and auto-payment settings.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
-      "line_number": 89,
+      "line_number": 90,
       "context": "<Text fontSize=\"12px\" fontWeight={600}>\n {t(\"AutoTopUp\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" fontWeight={400} className={styles.infoDescription}>\n {t(\"WhenBalanceDropsTo\", {\n min: formatCurrencyValue(language, minBalance, currency),\n max: formatCurrencyValue(language, upToBalance, currency),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     }

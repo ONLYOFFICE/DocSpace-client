@@ -45,7 +45,7 @@ import { RackspaceStorage } from "../storages/RackspaceStorage";
 import { SelectelStorage } from "../storages/SelectelStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";
 
-import { StyledAutoBackup, StyledComboBoxItem } from "../../AutoBackup.styled";
+import { StyledComboBoxItem } from "../../AutoBackup.styled";
 import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.types";
 
 const ThirdPartyStorageModule = ({
@@ -146,31 +146,34 @@ const ThirdPartyStorageModule = ({
     storagesInfo[selectedStorageId ?? defaultSelectedStorageId]?.title;
 
   const advancedOptions = useMemo(
-    () =>
-      comboBoxOptions?.map((item) => {
-        return (
-          <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
-            <DropDownItem
-              onClick={() => onSelect(item.key)}
-              disabled={item.disabled}
-            >
-              <Text className="drop-down-item_text" fontWeight={600}>
-                {item.label}
-              </Text>
+    () => (
+      <div style={{ display: "contents" }}>
+        {comboBoxOptions?.map((item) => {
+          return (
+            <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+              <DropDownItem
+                onClick={() => onSelect(item.key)}
+                disabled={item.disabled}
+              >
+                <Text className="drop-down-item_text" fontWeight={600}>
+                  {item.label}
+                </Text>
 
-              {!item.disabled && !item.connected ? (
-                <IconButton
-                  className="drop-down-item_icon"
-                  size={16}
-                  onClick={() => onSelect(item.key)}
-                  iconName={ExternalLinkReactSvgUrl}
-                  isFill
-                />
-              ) : null}
-            </DropDownItem>
-          </StyledComboBoxItem>
-        );
-      }),
+                {!item.disabled && !item.connected ? (
+                  <IconButton
+                    className="drop-down-item_icon"
+                    size={16}
+                    onClick={() => onSelect(item.key)}
+                    iconName={ExternalLinkReactSvgUrl}
+                    isFill
+                  />
+                ) : null}
+              </DropDownItem>
+            </StyledComboBoxItem>
+          );
+        })}
+      </div>
+    ),
     [comboBoxOptions, onSelect],
   );
 

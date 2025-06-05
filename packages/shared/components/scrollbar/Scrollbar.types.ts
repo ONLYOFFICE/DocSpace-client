@@ -36,7 +36,7 @@ type PickedScrollbarLibraryProps = Pick<
 
 export type ScrollbarProps = PickedScrollbarLibraryProps & {
   /** Ref to access the DOM element or React component instance */
-  ref?: React.RefObject<CustomScrollbar | null>;
+  ref?: React.Ref<CustomScrollbar | null>;
   /** This class will be placed on scroller element */
   scrollClass?: string;
   /** Enable tracks auto hiding.  */

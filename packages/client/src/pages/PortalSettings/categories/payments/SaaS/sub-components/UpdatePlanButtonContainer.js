@@ -138,9 +138,7 @@ const UpdatePlanButtonContainer = ({
 
   const onUpdateTariff = async () => {
     try {
-      timerId = setTimeout(() => {
-        setIsLoading(true);
-      }, 500);
+      setIsLoading(true);
 
       if (isVisible) onClose();
 

@@ -115,8 +115,9 @@ export const selectedStorages = {
     isSet: true,
     title: "Rackspace",
     properties: [
-      { title: "Container", value: "my-rackspace-container" },
-      { title: "Username", value: "rackspace-user" },
+      { title: "Private Container", value: "my-private-container" },
+      { title: "Public Container", value: "my-public-container" },
+      { title: "Region", value: "US" },
     ],
   } as SelectedStorageType,
 

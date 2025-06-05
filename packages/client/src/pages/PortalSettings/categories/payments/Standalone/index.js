@@ -51,6 +51,8 @@ const StandalonePage = (props) => {
     buyUrl,
     salesEmail,
     isEnterprise,
+    docspaceFaqUrl,
+    license,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -85,12 +87,19 @@ const StandalonePage = (props) => {
       trialDaysLeft={trialDaysLeft}
       paymentDate={paymentDate}
       isEnterprise={isEnterprise}
+      docspaceFaqUrl={docspaceFaqUrl}
+      license={license}
     />
   );
 };
 
 export default inject(
-  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
+  ({
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    settingsStore,
+  }) => {
     const {
       standaloneInit,
       isInitPaymentPage,
@@ -100,6 +109,7 @@ export default inject(
       isLicenseCorrect,
       buyUrl,
       salesEmail,
+      docServerLicense: license,
     } = paymentStore;
     const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
     const {
@@ -110,6 +120,8 @@ export default inject(
       isDeveloper,
       isEnterprise,
     } = currentTariffStatusStore;
+
+    const { docspaceFaqUrl } = settingsStore;
 
     return {
       isTrial,
@@ -128,6 +140,8 @@ export default inject(
       buyUrl,
       salesEmail,
       isEnterprise,
+      docspaceFaqUrl,
+      license,
     };
   },
 )(observer(StandalonePage));

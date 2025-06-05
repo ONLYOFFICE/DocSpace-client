@@ -34,7 +34,7 @@ import {
   setLicense,
   acceptLicense,
 } from "@docspace/shared/api/settings";
-import { getPaymentLink } from "@docspace/shared/api/portal";
+import { getPaymentLink, getTenantExtra } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { authStore, settingsStore } from "@docspace/shared/store";
@@ -46,6 +46,7 @@ import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { TDocServerLicense } from "@docspace/shared/api/portal/types";
 
 class PaymentStore {
   userStore: UserStore | null = null;
@@ -57,6 +58,8 @@ class PaymentStore {
   settingsStore: SettingsStore | null = null;
 
   paymentQuotasStore: PaymentQuotasStore | null = null;
+
+  docServerLicense: TDocServerLicense | null = null;
 
   salesEmail = "";
 
@@ -257,7 +260,11 @@ class PaymentStore {
     }
 
     try {
-      await Promise.all([this.getSettingsPayment(), getPaymentInfo()]);
+      await Promise.all([
+        this.getSettingsPayment(),
+        this.getDocServerLicense(),
+        getPaymentInfo(),
+      ]);
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(error);
@@ -293,6 +300,20 @@ class PaymentStore {
         if (currentLicense.trial)
           this.currentLicense.trialMode = currentLicense.trial;
       }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  getDocServerLicense = async () => {
+    try {
+      const tenantExtra = await getTenantExtra();
+
+      if (!tenantExtra) return;
+
+      const { docServerLicense } = tenantExtra;
+
+      this.docServerLicense = docServerLicense;
     } catch (e) {
       console.error(e);
     }

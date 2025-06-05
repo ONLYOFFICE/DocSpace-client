@@ -49,7 +49,6 @@ const GoogleCloudStorage = ({
   setRequiredFormSettings,
   addValueInFormSettings,
   setCompletedFormFields,
-  // ScheduleComponent
   hoursArray,
   maxNumberCopiesArray,
   monthNumbersArray,
@@ -112,11 +111,3 @@ const GoogleCloudStorage = ({
 };
 
 export default GoogleCloudStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields } = backup;
-
-//   return {
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation()(GoogleCloudStorage)));

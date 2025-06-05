@@ -35,7 +35,6 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 
-import { StyledStoragesModule } from "./RackspaceStorage.styled";
 import type { RackspaceStorageProps } from "./RackspaceStorage.types";
 
 const RackspaceStorage = ({
@@ -49,7 +48,6 @@ const RackspaceStorage = ({
   setIsThirdStorageChanged,
   setRequiredFormSettings,
   setCompletedFormFields,
-  // ScheduleComponent
   hoursArray,
   maxNumberCopiesArray,
   monthNumbersArray,
@@ -74,7 +72,7 @@ const RackspaceStorage = ({
   });
 
   return (
-    <StyledStoragesModule>
+    <div data-testid="rackspace-storage">
       <RackspaceSettings
         t={t}
         isLoading={isLoading}
@@ -107,16 +105,8 @@ const RackspaceStorage = ({
         hoursArray={hoursArray}
         maxNumberCopiesArray={maxNumberCopiesArray}
       />
-    </StyledStoragesModule>
+    </div>
   );
 };
 
 export default RackspaceStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields } = backup;
-
-//   return {
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation(["Settings", "Common"])(RackspaceStorage)));

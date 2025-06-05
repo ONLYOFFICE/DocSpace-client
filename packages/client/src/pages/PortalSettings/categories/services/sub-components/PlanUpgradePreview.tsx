@@ -27,7 +27,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import classNames from "classNames";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";

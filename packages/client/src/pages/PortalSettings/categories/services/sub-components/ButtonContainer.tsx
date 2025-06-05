@@ -64,11 +64,10 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
   const { buttonTitle, isWalletBalanceInsufficient, t } = useServicesActions();
   const { futurePayment, isWaitingCalculation } = usePaymentContext();
 
-  const isPaymentUnavalable = hasStorageSubscription
-    ? isUpgradeStoragePlan && currentStoragePlanSize
+  const isPaymentUnavalable =
+    isUpgradeStoragePlan && currentStoragePlanSize
       ? isWalletBalanceInsufficient(futurePayment)
-      : insufficientFunds
-    : amount === 0;
+      : insufficientFunds;
 
   return (
     <>
@@ -82,7 +81,9 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         isLoading={isLoading || isWaitingCalculation}
         isDisabled={
           !isExceedingStorageLimit
-            ? isPaymentUnavalable || isCurrentStoragePlan
+            ? (!hasStorageSubscription && amount === 0) ||
+              isPaymentUnavalable ||
+              isCurrentStoragePlan
             : false
         }
       />

@@ -208,7 +208,6 @@ const ThirdPartyStorageModule = ({
           label: storageTitle,
         }}
         isDisabled={isLoadingData}
-        size="content"
         manualWidth="400px"
         directionY="both"
         displaySelectedOption

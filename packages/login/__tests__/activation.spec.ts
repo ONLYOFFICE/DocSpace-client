@@ -33,9 +33,9 @@ import {
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
+import { confirmHandler } from "@docspace/shared/__mocks__/e2e/handlers/authentication/confirm";
 
 const URL = "/login/confirm/Activation";
-const NEXT_REQUEST_URL = "*/**/login/confirm/Activation";
 
 const QUERY_PARAMS = [
   {
@@ -65,13 +65,9 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("activation render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("activation render", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -80,14 +76,14 @@ test("activation render", async ({ page }) => {
   ]);
 });
 
-test("activation success", async ({ page, mockRequest }) => {
+test("activation success", async ({ page, mockRequest, port }) => {
   await mockRequest.router([
     endpoints.changePassword,
     endpoints.activationStatus,
     endpoints.login,
     endpoints.updateUser,
   ]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page
     .getByTestId("input-block")
@@ -103,7 +99,7 @@ test("activation success", async ({ page, mockRequest }) => {
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -112,8 +108,8 @@ test("activation success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("activation error", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("activation error", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='name']", "");
   await page.fill("[name='surname']", "");
@@ -128,12 +124,14 @@ test("activation error", async ({ page }) => {
   ]);
 });
 
-test("activation error tariffic limit", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_TRAFF_LIMIT,
-  ]);
+test("activation error tariffic limit", async ({
+  page,
+  port,
+  requestInterceptor,
+}) => {
+  requestInterceptor.use(confirmHandler(port, "TariffLimit"));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -142,13 +140,14 @@ test("activation error tariffic limit", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("activation error user existed", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_USER_EXISTED,
-  ]);
+test("activation error user existed", async ({
+  page,
+  port,
+  requestInterceptor,
+}) => {
+  requestInterceptor.use(confirmHandler(port, "UserExisted"));
 
-  // Expected to go to the room page or default page
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -157,12 +156,14 @@ test("activation error user existed", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("activation error quota failed", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_QUOTA_FAILED,
-  ]);
+test("activation error quota failed", async ({
+  page,
+  port,
+  requestInterceptor,
+}) => {
+  requestInterceptor.use(confirmHandler(port, "QuotaFailed"));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

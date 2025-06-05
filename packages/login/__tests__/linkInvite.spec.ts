@@ -24,16 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  endpoints,
-  HEADER_NO_STANDALONE_SETTINGS,
-} from "@docspace/shared/__mocks__/e2e";
+import { endpoints, settingsHandler } from "@docspace/shared/__mocks__/e2e";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
 
 const URL = "/login/confirm/LinkInvite";
-const NEXT_REQUEST_URL = "*/**/login/confirm/LinkInvite";
 
 const QUERY_PARAMS = [
   {
@@ -56,14 +52,16 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
+test.beforeEach(async ({ page }) => {
+  await page.setExtraHTTPHeaders({
+    "x-forwarded-host-test": "localhost",
+  });
+});
 
-test("link invite email render", async ({ page, mockRequest }) => {
+test("link invite email render", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -72,14 +70,16 @@ test("link invite email render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite login render", async ({ page, mockRequest }) => {
+test("link invite login render", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
 
-  await page.waitForURL("/login?loginData**", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/login?loginData**`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -88,8 +88,8 @@ test("link invite login render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite registration render standalone", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("link invite registration render standalone", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
@@ -108,13 +108,12 @@ test("link invite registration render standalone", async ({ page }) => {
 
 test("link invite registration render no standalone", async ({
   page,
-  mockRequest,
+  port,
+  requestInterceptor,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
+  requestInterceptor.use(settingsHandler(port, "noStandalone"));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
@@ -131,9 +130,9 @@ test("link invite registration render no standalone", async ({
   ]);
 });
 
-test("link invite email error", async ({ page, mockRequest }) => {
+test("link invite email error", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail.com");
   await page.getByTestId("button").click();
@@ -145,19 +144,21 @@ test("link invite email error", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite login success", async ({ page, mockRequest }) => {
+test("link invite login success", async ({ page, mockRequest, port }) => {
   await mockRequest.router([
     endpoints.getUserByEmail,
     endpoints.checkConfirmLink,
     endpoints.login,
   ]);
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
 
-  await page.waitForURL("/login?loginData**", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/login?loginData**`, {
+    waitUntil: "load",
+  });
 
   await page.getByTestId("text-input").fill("qwerty123");
   await page.getByTestId("input-block").getByRole("img").click();
@@ -169,7 +170,7 @@ test("link invite login success", async ({ page, mockRequest }) => {
   ]);
 
   await page.getByTestId("button").click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -178,15 +179,17 @@ test("link invite login success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite login error", async ({ page, mockRequest }) => {
+test("link invite login error", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.getUserByEmail]);
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
 
-  await page.waitForURL("/login?loginData**", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/login?loginData**`, {
+    waitUntil: "load",
+  });
 
   await page.getByTestId("text-input").fill("123");
   await page.getByTestId("button").click();
@@ -201,9 +204,10 @@ test("link invite login error", async ({ page, mockRequest }) => {
 test("link invite registration success standalone", async ({
   page,
   mockRequest,
+  port,
 }) => {
   await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
@@ -223,7 +227,9 @@ test("link invite registration success standalone", async ({
   ]);
 
   await page.getByRole("button", { name: "Sign up" }).click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -235,13 +241,13 @@ test("link invite registration success standalone", async ({
 test("link invite registration success no standalone", async ({
   page,
   mockRequest,
+  port,
+  requestInterceptor,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
-
+  requestInterceptor.use(settingsHandler(port, "noStandalone"));
   await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
@@ -264,7 +270,7 @@ test("link invite registration success no standalone", async ({
   ]);
 
   await page.getByRole("button", { name: "Sign up" }).click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -273,8 +279,8 @@ test("link invite registration success no standalone", async ({
   ]);
 });
 
-test("link invite registration error standalone", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("link invite registration error standalone", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
@@ -292,13 +298,12 @@ test("link invite registration error standalone", async ({ page }) => {
 
 test("link invite registration error no standalone", async ({
   page,
-  mockRequest,
+  port,
+  requestInterceptor,
 }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
+  requestInterceptor.use(settingsHandler(port, "noStandalone"));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();

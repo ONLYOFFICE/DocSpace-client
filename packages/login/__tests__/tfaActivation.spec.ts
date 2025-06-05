@@ -24,10 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, endpoints } from "@docspace/shared/__mocks__/e2e";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { http, HttpResponse } from "msw";
 import { selfHandler } from "@docspace/shared/__mocks__/e2e/handlers/people/self";
 
 const URL = "/login/confirm/TfaActivation";

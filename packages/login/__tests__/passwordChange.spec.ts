@@ -33,6 +33,7 @@ import {
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
+import { confirmHandler } from "@docspace/shared/__mocks__/e2e/handlers/authentication/confirm";
 
 const URL = "/login/confirm/PasswordChange";
 const NEXT_REQUEST_URL = "*/**/login/confirm/PasswordChange";
@@ -62,8 +63,8 @@ const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
   QUERY_PARAMS,
 );
 
-test("password change render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("password change render", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -72,9 +73,9 @@ test("password change render", async ({ page }) => {
   ]);
 });
 
-test("password change success", async ({ page, mockRequest }) => {
+test("password change success", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.changePassword, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("qwerty123");
 
@@ -86,7 +87,9 @@ test("password change success", async ({ page, mockRequest }) => {
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL("/login?passwordChanged=true", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/login?passwordChanged=true`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -95,8 +98,8 @@ test("password change success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("password change error", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("password change error", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123");
   await page.getByTestId("button").click();
@@ -108,12 +111,14 @@ test("password change error", async ({ page }) => {
   ]);
 });
 
-test("password change error invalid", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_LINK_INVALID,
-  ]);
+test("password change error invalid", async ({
+  page,
+  requestInterceptor,
+  port,
+}) => {
+  requestInterceptor.use(confirmHandler(port, "Invalid"));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -122,12 +127,14 @@ test("password change error invalid", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("password change error expired", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_LINK_EXPIRED,
-  ]);
+test("password change error expired", async ({
+  page,
+  requestInterceptor,
+  port,
+}) => {
+  requestInterceptor.use(confirmHandler(port, "Expired"));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -136,13 +143,15 @@ test("password change error expired", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("password change error user excluded", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_USER_EXCLUDED,
-  ]);
+test("password change error user excluded", async ({
+  page,
+  requestInterceptor,
+  port,
+}) => {
+  requestInterceptor.use(confirmHandler(port, "UserExcluded"));
 
   // Expected to go to default page
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

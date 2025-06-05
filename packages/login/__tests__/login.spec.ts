@@ -24,17 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import {
+  capabilitiesHandler,
   HEADER_LIST_CAPABILITIES,
   HEADER_LIST_THIRD_PARTY_PROVIDERS,
 } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
+import { thirdPartyProvidersHandler } from "@docspace/shared/__mocks__/e2e/handlers/people/thirdPartyProviders";
 
-test("login render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders("/login", [
-    HEADER_LIST_CAPABILITIES,
-    HEADER_LIST_THIRD_PARTY_PROVIDERS,
-  ]);
-  await page.goto("/login");
+test("login render", async ({ page, requestInterceptor, port }) => {
+  requestInterceptor.use(
+    capabilitiesHandler(port, true),
+    thirdPartyProvidersHandler(port, true),
+  );
+  await page.goto(`http://localhost:${port}/login`);
 
   await expect(page).toHaveScreenshot(["desktop", "login", "login-render.png"]);
 });

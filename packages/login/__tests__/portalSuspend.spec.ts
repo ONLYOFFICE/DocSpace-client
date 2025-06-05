@@ -26,13 +26,9 @@
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import {
-  endpoints,
-  HEADER_PORTAL_DEACTIVATE_SETTINGS,
-} from "@docspace/shared/__mocks__/e2e";
+import { endpoints, settingsHandler } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/PortalSuspend";
-const NEXT_REQUEST_URL = "*/**/login/confirm/PortalSuspend";
 
 const QUERY_PARAMS = [
   {
@@ -50,13 +46,9 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("portal suspend render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal suspend render", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -65,9 +57,9 @@ test("portal suspend render", async ({ page }) => {
   ]);
 });
 
-test("portal suspend deactivate", async ({ page, mockRequest }) => {
+test("portal suspend deactivate", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.suspendPortal]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Deactivate" }).click();
 
@@ -94,12 +86,12 @@ test("portal suspend deactivate", async ({ page, mockRequest }) => {
   );
 });
 
-test("portal suspend cancel", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal suspend cancel", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Cancel" }).click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -108,13 +100,17 @@ test("portal suspend cancel", async ({ page }) => {
   ]);
 });
 
-test("render after deactivate portal", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_PORTAL_DEACTIVATE_SETTINGS,
-  ]);
-  await page.goto(URL_WITH_PARAMS);
+test("render after deactivate portal", async ({
+  page,
+  requestInterceptor,
+  port,
+}) => {
+  requestInterceptor.use(settingsHandler(port, "portalDeactivate"));
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL("/unavailable", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/unavailable`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",

@@ -47,8 +47,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("portal continue render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal continue render", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -57,9 +57,9 @@ test("portal continue render", async ({ page }) => {
   ]);
 });
 
-test("portal continue reactivate", async ({ page, mockRequest }) => {
+test("portal continue reactivate", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.continuePortal]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Reactivate" }).click();
 
@@ -75,7 +75,7 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
 
   await page.getByTestId("link").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -84,12 +84,12 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("portal continue cancel", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal continue cancel", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Cancel" }).click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

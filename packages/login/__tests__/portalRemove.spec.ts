@@ -29,7 +29,6 @@ import { expect, test } from "./fixtures/base";
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/PortalRemove";
-const NEXT_REQUEST_URL = "*/**/login/confirm/PortalRemove";
 
 const QUERY_PARAMS = [
   {
@@ -47,13 +46,9 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("portal remove render", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal remove render", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -62,9 +57,9 @@ test("portal remove render", async ({ page }) => {
   ]);
 });
 
-test("portal remove delete", async ({ page, mockRequest }) => {
+test("portal remove delete", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.deletePortal]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Delete" }).click();
 
@@ -91,12 +86,12 @@ test("portal remove delete", async ({ page, mockRequest }) => {
   );
 });
 
-test("portal remove cancel", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("portal remove cancel", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Cancel" }).click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

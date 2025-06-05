@@ -24,16 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  endpoints,
-  HEADER_NO_STANDALONE_SETTINGS,
-} from "@docspace/shared/__mocks__/e2e";
+import { endpoints, settingsHandler } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmpInvite";
-const NEXT_REQUEST_URL = "*/**/login/confirm/EmpInvite";
 
 const QUERY_PARAMS = [
   {
@@ -55,14 +51,10 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
-test("emp invite render standalone", async ({ page, mockRequest }) => {
+test("emp invite render standalone", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -71,13 +63,15 @@ test("emp invite render standalone", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("emp invite render no standalone", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
-
+test("emp invite render no standalone", async ({
+  page,
+  mockRequest,
+  port,
+  requestInterceptor,
+}) => {
+  requestInterceptor.use(settingsHandler(port, "noStandalone"));
   await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -86,9 +80,9 @@ test("emp invite render no standalone", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("emp invite success standalone", async ({ page, mockRequest }) => {
+test("emp invite success standalone", async ({ page, mockRequest, port }) => {
   await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
@@ -105,7 +99,7 @@ test("emp invite success standalone", async ({ page, mockRequest }) => {
   ]);
 
   await page.getByRole("button", { name: "Sign up" }).click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -114,13 +108,16 @@ test("emp invite success standalone", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("emp invite success no standalone", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
-
+test("emp invite success no standalone", async ({
+  page,
+  mockRequest,
+  port,
+  requestInterceptor,
+}) => {
+  requestInterceptor.use(settingsHandler(port, "noStandalone"));
   await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
@@ -140,7 +137,7 @@ test("emp invite success no standalone", async ({ page, mockRequest }) => {
   ]);
 
   await page.getByRole("button", { name: "Sign up" }).click();
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -149,8 +146,8 @@ test("emp invite success no standalone", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("emp invite error standalone", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
+test("emp invite error standalone", async ({ page, port }) => {
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("input-block").getByTestId("text-input").fill("123");
   await page.getByTestId("input-block").getByRole("img").click();
@@ -164,12 +161,14 @@ test("emp invite error standalone", async ({ page }) => {
   ]);
 });
 
-test("emp invite error no standalone", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_NO_STANDALONE_SETTINGS,
-  ]);
+test("emp invite error no standalone", async ({
+  page,
+  port,
+  requestInterceptor,
+}) => {
+  requestInterceptor.use(settingsHandler(port, "noStandalone"));
 
-  await page.goto(URL_WITH_PARAMS);
+  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("input-block").getByTestId("text-input").fill("123");
   await page.getByTestId("input-block").getByRole("img").click();

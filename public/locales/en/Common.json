@@ -880,5 +880,7 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "ServerErrorEmptyDescription": "Please reload the page or come back later.",
+  "ServerErrorEmptyTitle": "Something went wrong"
 }

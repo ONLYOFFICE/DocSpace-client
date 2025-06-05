@@ -24,60 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
-import { inject, observer } from "mobx-react";
-
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-import { Text } from "@docspace/shared/components/text";
-
 import { useTranslation } from "react-i18next";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { useTheme } from "styled-components";
 
-const InfoText = styled(Text).attrs(injectDefaultTheme)`
-  max-width: 660px;
-  white-space: break-spaces;
-  margin: 0 0 8px;
-  line-height: 20px;
-  color: ${(props) => props.theme.client.settings.common.descriptionColor};
-`;
+import { EmptyView } from "@docspace/shared/components/empty-view";
 
-const WebhookInfo = (props) => {
-  const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl, logoText } = props;
+import EmptyScreenServerErrorLightSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.light.svg";
+import EmptyScreenServerErrorDarkSvg from "PUBLIC_DIR/images/emptyview/empty.server.error.dark.svg";
+import ReloadArrowsSvg from "PUBLIC_DIR/images/icons/10/reload.arrows.svg";
+
+const EmptyServerErrorContainer = () => {
+  const { t } = useTranslation(["Common"]);
+  const theme = useTheme();
+
+  const icon = theme.isBase ? (
+    <EmptyScreenServerErrorLightSvg />
+  ) : (
+    <EmptyScreenServerErrorDarkSvg />
+  );
+
+  const options = [
+    {
+      to: "",
+      key: "reload",
+      title: t("Common:ReloadPage"),
+      description: t("Common:ReloadPage"),
+      icon: <ReloadArrowsSvg />,
+      onClick: () => window.location.reload(),
+    },
+  ];
 
   return (
-    <div>
-      <InfoText as="p">
-        {t("WebhooksInfo", {
-          productName: t("Common:ProductName"),
-          organizationName: logoText,
-        })}
-      </InfoText>
-      {webhooksGuideUrl ? (
-        <Link
-          id="webhooks-info-link"
-          tag="a"
-          fontWeight={600}
-          href={webhooksGuideUrl}
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          isHovered
-          color="accent"
-        >
-          {t("WebhooksGuide")}
-        </Link>
-      ) : null}
-    </div>
+    <EmptyView
+      icon={icon}
+      title={t("Common:ServerErrorEmptyTitle")}
+      description={t("Common:ServerErrorEmptyDescription")}
+      options={options}
+    />
   );
 };
 
-export default inject(({ settingsStore }) => {
-  const { webhooksGuideUrl, logoText } = settingsStore;
-
-  return {
-    webhooksGuideUrl,
-    logoText,
-  };
-})(observer(WebhookInfo));
+export { EmptyServerErrorContainer };

@@ -53,8 +53,11 @@ const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
     setIsOpenRoomList(false);
   };
 
-  const onSubmitRoom = () => {
-    console.log("onSubmitRoom");
+  const onSubmitRoom = (items) => {
+    console.log("onSubmitRoom", items);
+    const arrIdsRooms = [];
+    items.forEach((item) => arrIdsRooms.push(item.id));
+    console.log("arrIdsRooms", arrIdsRooms);
     setIsOpenGroupIcon(true);
   };
 
@@ -86,7 +89,6 @@ const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
           withoutHeader
         >
           <RoomSelector
-            className="template-body_selector"
             onSubmit={onSubmitRoom}
             withHeader
             headerProps={{

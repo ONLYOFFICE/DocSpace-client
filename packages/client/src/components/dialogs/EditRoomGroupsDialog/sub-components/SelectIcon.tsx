@@ -36,39 +36,6 @@ interface WithoutIconProps {
   isSelected?: boolean;
 }
 
-const StyledWithoutIcon = styled.div<WithoutIconProps>`
-  display: flex;
-  white-space: nowrap;
-  flex-direction: column;
-  margin: 8px 0;
-  gap: 4px;
-  width: max-content;
-  font-weight: 600;
-  line-height: 20px;
-  user-select: none;
-  padding: 3px 15px;
-  background-color: ${(props) => props.theme.logoCover.selectedBackgroundColor};
-  border: 1px solid ${(props) => props.theme.logoCover.selectedBorderColor};
-  border-radius: 16px;
-  box-sizing: border-box;
-
-  @media ${tablet} {
-    padding: 5px 21px;
-    margin: 12px auto;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  ${(props) =>
-    !props.isSelected &&
-    css`
-      background-color: ${({ theme }) => theme.logoCover.backgroundColor};
-      border: 1px solid ${({ theme }) => theme.logoCover.borderColor};
-    `}
-`;
-
 const StyledIconContainer = styled.div<{
   $currentColorScheme?: TColorScheme;
   isSelected: boolean;
@@ -79,13 +46,13 @@ const StyledIconContainer = styled.div<{
   justify-content: center;
   box-sizing: border-box;
   width: 30px;
-  height: 30px;
+  height: 32px;
 
-  @media ${tablet} {
-    width: 40px;
-    height: 40px;
-  }
   border-radius: 4px;
+
+  .color-name {
+    padding-bottom: 4px;
+  }
 
   svg {
     path {
@@ -142,9 +109,7 @@ export const SelectIcon = ({
 
   return (
     <div>
-      <div className="icon-container">
-        <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
-      </div>
+      <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
 
       <div className="cover-icon-container">
         {covers

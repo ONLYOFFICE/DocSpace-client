@@ -50,64 +50,7 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
-
-const StyledModalDialog = styled(ModalDialog)<{
-  heightProp?: string;
-  scrollBodyHeight?: null | number;
-}>`
-  #modal-dialog {
-    width: 422px;
-    height: ${(props) => props.heightProp};
-
-    @media ${tablet} {
-      width: 464px;
-    }
-
-    .modal-header {
-      height: 54px;
-      min-height: 54px;
-    }
-    .modal-body {
-      padding: 0;
-      padding-inline-start: 16px;
-
-      ${(props) =>
-        props.scrollBodyHeight &&
-        css`
-          height: ${`${props.scrollBodyHeight}px`};
-
-          .room-logo-container {
-            padding-left: 15px;
-          }
-
-          .icon-container {
-            padding-right: 1px;
-          }
-        `}
-    }
-
-    .modal-footer {
-      margin-top: 8px;
-    }
-
-    @media ${mobile} {
-      margin-bottom: 16px;
-      width: 100vw;
-
-      .modal-body {
-        padding: 0px 16px 8px;
-      }
-
-      .modal-footer {
-        margin-top: 0px;
-      }
-
-      .modal-header {
-        margin-bottom: 16px;
-      }
-    }
-  }
-`;
+import styles from "../EditRoomGroupsDialog.module.scss";
 
 const RoomLogoCoverContainer = styled.div`
   color: ${(props) => props.theme.logoCover.textColor};
@@ -127,6 +70,7 @@ const RoomLogoCoverContainer = styled.div`
     font-weight: 600;
     font-size: 13px;
     line-height: 20px;
+    padding-bottom: 8px;
   }
   .colors-container {
     flex-wrap: nowrap;
@@ -136,26 +80,12 @@ const RoomLogoCoverContainer = styled.div`
   .cover-icon-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 3px;
+    gap: 10px;
     box-sizing: border-box;
     width: 390px;
   }
 
-  @media ${tablet} {
-    .select-container {
-      text-align: center;
-    }
-    .select-color-container {
-      margin-bottom: 16px;
-    }
-
-    .cover-icon-container {
-      flex-wrap: wrap;
-      gap: 3px;
-      width: 432px;
-    }
-  }
-  @media ${mobile} {
+  /* @media ${mobile} {
     .cover-icon-container {
       width: 100%;
       align-items: center;
@@ -180,7 +110,7 @@ const RoomLogoCoverContainer = styled.div`
     .colors-container {
       width: 100%;
     }
-  }
+  } */
 
   .cover-icon-container,
   .color-name {
@@ -210,7 +140,8 @@ const GroupIconDialog = ({
   console.log("covers", covers);
 
   return (
-    <StyledModalDialog
+    <ModalDialog
+      className={styles.groupIconDialog}
       visible
       autoMaxHeight
       // autoMaxHeight
@@ -222,19 +153,22 @@ const GroupIconDialog = ({
       //   withBodyScrollForcibly={!!scrollBodyHeight}
       //   isScrollLocked={openColorPicker}
     >
-      <ModalDialog.Header>{"Group icon"}</ModalDialog.Header>
+      <ModalDialog.Header>{"Group icon "}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div>
+        <div className={styles.name}>
           <Text
             fontWeight={600}
             fontSize="13px"
             lineHeight="20px"
             noSelect
             truncate
+            className={styles.nameText}
           >
-            {"Group name"}
+            {"Group name "}
           </Text>
+          <span className={styles.symbol}>*</span>
           <TextInput
+            className={styles.nameInput}
             type={InputType.text}
             size={InputSize.base}
             value={"baseDomain"}
@@ -275,7 +209,7 @@ const GroupIconDialog = ({
           label={t("Common:CancelButton")}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

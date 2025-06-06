@@ -64,3 +64,54 @@
     padding: 16px 20px;
   }
 }
+
+.groupIconDialog {
+  :global {
+    #modal-dialog {
+      width: 422px;
+      height: 498px;
+    }
+
+    .modal-header {
+      line-height: 28px;
+    }
+
+    .modal-footer {
+      margin-top: 4px;
+    }
+  }
+
+  // @media ${mobile} {
+  //   margin-bottom: 16px;
+  //   width: 100vw;
+
+  //   .modal-body {
+  //     padding: 0px 16px 8px;
+  //   }
+
+  //   .modal-footer {
+  //     margin-top: 0px;
+  //   }
+
+  //   .modal-header {
+  //     margin-bottom: 16px;
+  //   }
+  // }
+
+  .name {
+    margin-top: 18px;
+    margin-bottom: 16px;
+  }
+
+  .nameText {
+    display: inline;
+  }
+
+  .symbol {
+    color: #f21c0e;
+  }
+
+  .nameInput {
+    margin-top: 3px;
+  }
+}

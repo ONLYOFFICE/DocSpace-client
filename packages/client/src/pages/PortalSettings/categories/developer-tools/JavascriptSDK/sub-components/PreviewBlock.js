@@ -28,6 +28,9 @@ import { useState, useEffect } from "react";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 
+import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
+
 import { CodeToInsert } from "./CodeToInsert";
 import { GetCodeBlock } from "./GetCodeBlock";
 
@@ -65,11 +68,13 @@ export const PreviewBlock = ({
       id: "preview",
       name: t("Common:Preview"),
       content: preview,
+      iconName: EyeReactSvgUrl,
     },
     {
       id: "code",
       name: t("Code"),
       content: code,
+      iconName: CodeReactSvgUrl,
     },
   ];
 
@@ -91,6 +96,7 @@ export const PreviewBlock = ({
   return showPreview ? (
     <Preview>
       <Tabs
+        layoutId="preview"
         type={TabsTypes.Secondary}
         onSelect={(e) => {
           setSelectedItemId(e.id);

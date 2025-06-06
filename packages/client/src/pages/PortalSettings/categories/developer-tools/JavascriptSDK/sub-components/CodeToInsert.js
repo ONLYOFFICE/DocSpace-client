@@ -146,6 +146,7 @@ export const CodeToInsert = ({ t, codeBlock, config, theme, scriptUrl }) => {
 
   return (
     <Tabs
+      layoutId="codeToInsert"
       type={TabsTypes.Secondary}
       items={tabs}
       selectedItemId={selectedItemId}

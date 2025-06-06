@@ -28,12 +28,12 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { AutoBackupPeriod } from "../../../../../../enums";
-import { selectedStorages } from "../../../mockData";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
 
+import { selectedStorages } from "../../../mockData";
 import SelectelStorage from "./SelectelStorage";
 
-jest.mock("../../../../../../components/selectel-settings", () => ({
+jest.mock("@docspace/shared/components/selectel-settings", () => ({
   SelectelSettings: () => <div>Selectel Settings Component</div>,
   formNames: () => ({
     container: "container",

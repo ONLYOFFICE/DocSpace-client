@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { AutoBackupPeriod } from "../../../enums";
-import type { TOption } from "../../../components/combobox";
-import type { SelectedStorageType } from "../../../types";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
+import type { TOption } from "@docspace/shared/components/combobox";
+import type { SelectedStorageType } from "@docspace/shared/types";
 
 export const periodsObject: TOption[] = [
   { key: AutoBackupPeriod.EveryDayType, label: "Every day" },

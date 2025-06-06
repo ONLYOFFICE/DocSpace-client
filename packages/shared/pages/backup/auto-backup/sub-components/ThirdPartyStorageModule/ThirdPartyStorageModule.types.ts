@@ -28,8 +28,8 @@ import type {
   Nullable,
   SelectedStorageType,
   StorageRegionsType,
-} from "../../../../../types";
-import type { TOption } from "../../../../../components/combobox";
+} from "@docspace/shared/types";
+import type { TOption } from "@docspace/shared/components/combobox";
 
 export interface ThirdPartyStorageModuleProps {
   thirdPartyStorage: SelectedStorageType[];

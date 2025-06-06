@@ -28,14 +28,14 @@ import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
-import { BackupStorageType } from "../../../../../enums";
-import { FilesSelectorInput } from "../../../../../components/files-selector-input";
-import BackupToPublicRoom from "../../../../../dialogs/backup-to-public-room-dialog";
-import { useDidMount } from "../../../../../hooks/useDidMount";
+import { BackupStorageType } from "@docspace/shared/enums";
+import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
+import BackupToPublicRoom from "@docspace/shared/dialogs/backup-to-public-room-dialog";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import type {
   BackupToPublicRoomOptionType,
   Nullable,
-} from "../../../../../types";
+} from "@docspace/shared/types";
 
 import { ScheduleComponent } from "../ScheduleComponent";
 import styles from "../../../Backup.module.scss";

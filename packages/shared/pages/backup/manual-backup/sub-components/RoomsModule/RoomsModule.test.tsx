@@ -2,12 +2,12 @@ import React, { act } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { DeviceType } from "../../../../../enums";
-import { ButtonSize } from "../../../../../components/button";
+import { DeviceType } from "@docspace/shared/enums";
+import { ButtonSize } from "@docspace/shared/components/button";
 
 import { RoomsModule } from "./index";
 
-jest.mock("../../../../../components/files-selector-input", () => ({
+jest.mock("@docspace/shared/components/files-selector-input", () => ({
   FilesSelectorInput: ({
     onSelectFolder,
     isDisabled,
@@ -31,7 +31,7 @@ jest.mock("../../../../../components/files-selector-input", () => ({
   ),
 }));
 
-jest.mock("../../../../../dialogs/backup-to-public-room-dialog", () => ({
+jest.mock("@docspace/shared/dialogs/backup-to-public-room-dialog", () => ({
   __esModule: true,
   default: ({ visible }: { visible: boolean }) => (
     <div data-testid="backup-to-public-room-dialog">
@@ -40,7 +40,7 @@ jest.mock("../../../../../dialogs/backup-to-public-room-dialog", () => ({
   ),
 }));
 
-jest.mock("../../../../../components/toast", () => ({
+jest.mock("@docspace/shared/components/toast", () => ({
   toastr: {
     error: jest.fn(),
   },

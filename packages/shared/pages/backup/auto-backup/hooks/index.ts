@@ -27,7 +27,7 @@
 import { Info } from "luxon";
 import { useMemo } from "react";
 
-import type { TTranslation } from "../../../../types";
+import type { TTranslation } from "@docspace/shared/types";
 
 export const useDefaultOptions = (t: TTranslation, language: string) => {
   const maxNumberCopiesArray = useMemo(() => {

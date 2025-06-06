@@ -26,9 +26,10 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { ThirdPartyStorages } from "../../../../../enums";
 
-import ThirdPartyStorageModule from "./ThirdPartyStorageModule";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
+
+import styles from "../../../Backup.module.scss";
 import {
   periodsObject,
   weekdaysLabelArray,
@@ -37,10 +38,10 @@ import {
   maxNumberCopiesArray,
   selectedStorages,
 } from "../../mockData";
-import styles from "../../../Backup.module.scss";
+import ThirdPartyStorageModule from "./ThirdPartyStorageModule";
 
 const meta = {
-  title: "Pages/AutoBackup/ThirdPartyStorageModule",
+  title: "Pages/Backup/AutoBackup/ThirdPartyStorageModule",
   component: ThirdPartyStorageModule,
   tags: ["!autodocs"],
   parameters: {

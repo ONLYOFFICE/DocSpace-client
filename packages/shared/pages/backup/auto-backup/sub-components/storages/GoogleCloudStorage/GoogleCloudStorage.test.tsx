@@ -28,12 +28,13 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { AutoBackupPeriod } from "../../../../../../enums";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
+
 import { selectedStorages } from "../../../mockData";
 
 import GoogleCloudStorage from "./GoogleCloudStorage";
 
-jest.mock("../../../../../../components/google-cloud-settings", () => ({
+jest.mock("@docspace/shared/components/google-cloud-settings", () => ({
   GoogleCloudSettings: () => <div>Google Cloud Settings Component</div>,
   formNames: () => ({
     bucket: "bucket",

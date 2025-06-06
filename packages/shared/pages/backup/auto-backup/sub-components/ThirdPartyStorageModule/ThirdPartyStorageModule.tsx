@@ -29,16 +29,15 @@
 import React, { useCallback, useMemo } from "react";
 import classNames from "classnames";
 
-import { ComboBox } from "../../../../../components/combobox";
-import { ThirdPartyStorages } from "../../../../../enums";
-import { getOptions } from "../../../../../utils/getThirdPartyStoragesOptions";
-import { useDidMount } from "../../../../../hooks/useDidMount";
-import { useUnmount } from "../../../../../hooks/useUnmount";
-
-import { DropDownItem } from "../../../../../components/drop-down-item";
-import { IconButton } from "../../../../../components/icon-button";
-import { Text } from "../../../../../components/text";
-import { THIRD_PARTY_SERVICES_URL } from "../../../../../constants";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
+import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
+import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
@@ -47,8 +46,8 @@ import { RackspaceStorage } from "../storages/RackspaceStorage";
 import { SelectelStorage } from "../storages/SelectelStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";
 
-import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.types";
 import styles from "../../../Backup.module.scss";
+import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.types";
 
 const ThirdPartyStorageModule = ({
   thirdPartyStorage,

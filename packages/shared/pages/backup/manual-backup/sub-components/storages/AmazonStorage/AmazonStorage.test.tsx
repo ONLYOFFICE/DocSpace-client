@@ -28,13 +28,13 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { ButtonSize } from "../../../../../../components/button";
-import { ThirdPartyStorages } from "../../../../../../enums";
+import { ButtonSize } from "@docspace/shared/components/button";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
+import type { TTranslation } from "@docspace/shared/types";
 
-import type { TTranslation } from "../../../../../../types";
 import AmazonStorage from "./AmazonStorage";
 
-jest.mock("../../../../../../components/amazon-settings", () => ({
+jest.mock("@docspace/shared/components/amazon-settings", () => ({
   AmazonSettings: ({
     t,
     isNeedFilePath,

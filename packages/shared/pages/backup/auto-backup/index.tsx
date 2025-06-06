@@ -31,43 +31,40 @@ import { useTheme } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { RadioButton } from "../../../components/radio-button";
-import { Text } from "../../../components/text";
+import { RadioButton } from "@docspace/shared/components/radio-button";
+import { Text } from "@docspace/shared/components/text";
 import {
   deleteBackupSchedule,
   getBackupSchedule,
   createBackupSchedule,
-} from "../../../api/portal";
-import { toastr } from "../../../components/toast";
+} from "@docspace/shared/api/portal";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   BackupStorageType,
   AutoBackupPeriod,
   FolderType,
-} from "../../../enums";
-import { OPERATIONS_NAME } from "../../../constants";
-import { ToggleButton } from "../../../components/toggle-button";
-import { getBackupStorage } from "../../../api/settings";
-import AutoBackupLoader from "../../../skeletons/backup/AutoBackup";
-import StatusMessage from "../../../components/status-message";
-import OperationsProgressButton from "../../../components/operations-progress-button";
+} from "@docspace/shared/enums";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { getBackupStorage } from "@docspace/shared/api/settings";
+import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
+import StatusMessage from "@docspace/shared/components/status-message";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import SocketHelper, {
   SocketEvents,
   type TSocketListener,
-} from "../../../utils/socket";
-import { Badge } from "../../../components/badge";
-import { Link, LinkTarget } from "../../../components/link";
-import { getBackupProgressInfo } from "../../../utils/common";
-
-import { globalColors } from "../../../themes";
-import { useStateCallback } from "../../../hooks/useStateCallback";
-import type { Nullable, Option } from "../../../types";
-
-import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
+} from "@docspace/shared/utils/socket";
+import { Badge } from "@docspace/shared/components/badge";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { getBackupProgressInfo } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
+import { useStateCallback } from "@docspace/shared/hooks/useStateCallback";
+import type { Nullable, Option } from "@docspace/shared/types";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";
 import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModule";
-
 import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
 import styles from "../Backup.module.scss";

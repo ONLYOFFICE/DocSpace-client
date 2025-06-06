@@ -28,12 +28,12 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { AutoBackupPeriod } from "../../../../../../enums";
-import { selectedStorages } from "../../../mockData";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
 
+import { selectedStorages } from "../../../mockData";
 import RackspaceStorage from "./RackspaceStorage";
 
-jest.mock("../../../../../../components/rackspace-settings", () => ({
+jest.mock("@docspace/shared/components/rackspace-settings", () => ({
   RackspaceSettings: () => <div>Rackspace Settings Component</div>,
   formNames: () => ({
     privateContainer: "privateContainer",

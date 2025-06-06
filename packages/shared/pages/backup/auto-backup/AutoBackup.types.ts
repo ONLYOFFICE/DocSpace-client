@@ -32,16 +32,16 @@ import type {
   TTranslation,
   Option,
   TWeekdaysLabel,
-} from "../../../types";
-import type { TOption } from "../../../components/combobox";
-import type { FolderType } from "../../../enums";
-import type { ButtonSize } from "../../../components/button";
-import type { TColorScheme } from "../../../themes";
-import type { FilesSelectorSettings } from "../../../components/files-selector-input";
-import type { TBreadCrumb } from "../../../components/selector/Selector.types";
-import type { TBackupSchedule } from "../../../api/portal/types";
-import type { TStorageBackup } from "../../../api/settings/types";
-import type { TThirdParties } from "../../../api/files/types";
+} from "@docspace/shared/types";
+import type { TOption } from "@docspace/shared/components/combobox";
+import type { FolderType } from "@docspace/shared/enums";
+import type { ButtonSize } from "@docspace/shared/components/button";
+import type { TColorScheme } from "@docspace/shared/themes";
+import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
+import type { TStorageBackup } from "@docspace/shared/api/settings/types";
+import type { TThirdParties } from "@docspace/shared/api/files/types";
 
 export interface AutomaticBackupProps {
   isManagement?: boolean;

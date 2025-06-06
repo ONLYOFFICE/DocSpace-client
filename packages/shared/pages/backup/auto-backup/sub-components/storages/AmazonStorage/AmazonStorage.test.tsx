@@ -28,12 +28,13 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { AutoBackupPeriod } from "../../../../../../enums";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
+
 import { storageRegions, selectedStorages } from "../../../mockData";
 
 import AmazonStorage from "./AmazonStorage";
 
-jest.mock("../../../../../../components/amazon-settings", () => ({
+jest.mock("@docspace/shared/components/amazon-settings", () => ({
   AmazonSettings: () => <div>Amazon Settings Component</div>,
   formNames: () => ({
     bucket: "bucket",

@@ -28,9 +28,9 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { BackupStorageType, DeviceType } from "../../../../../enums";
+import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 
-import { RoomsModule } from "./index";
+import { RoomsModule } from ".";
 import {
   periodsObject,
   weekdaysLabelArray,
@@ -39,7 +39,7 @@ import {
   maxNumberCopiesArray,
 } from "../../mockData";
 
-jest.mock("../../../../../components/files-selector-input", () => ({
+jest.mock("@docspace/shared/components/files-selector-input", () => ({
   FilesSelectorInput: jest.fn(() => (
     <div data-testid="files-selector-input-mock" />
   )),

@@ -26,9 +26,9 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { AutoBackupPeriod } from "../../../../../enums";
 
-import ScheduleComponent from "./ScheduleComponent";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
+
 import {
   periodsObject,
   weekdaysLabelArray,
@@ -36,6 +36,8 @@ import {
   hoursArray,
   maxNumberCopiesArray,
 } from "../../mockData";
+
+import ScheduleComponent from "./ScheduleComponent";
 
 const meta = {
   title: "Pages/AutoBackup/ScheduleComponent",

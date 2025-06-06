@@ -28,11 +28,26 @@ import React from "react";
 import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { ThirdPartyStorages } from "../../../../../enums";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
+import { renderWithTheme } from "@docspace/shared/utils/render-with-theme";
 
 import { selectedStorages } from "../../mockData";
 import ThirdPartyStorageModule from "./ThirdPartyStorageModule";
-import { renderWithTheme } from "../../../../../utils/render-with-theme";
+
+jest.mock("@docspace/shared/components/combobox", () => ({
+  ComboBox: ({
+    advancedOptions,
+    selectedOption,
+  }: {
+    advancedOptions: React.ReactNode;
+    selectedOption: { key: number; label: string };
+  }) => (
+    <div data-testid="combo-box">
+      <span>Selected: {selectedOption.label}</span>
+      <div data-testid="advanced-options">{advancedOptions}</div>
+    </div>
+  ),
+}));
 
 jest.mock("../storages/AmazonStorage", () => ({
   AmazonStorage: () => <div data-testid="amazon-storage">Amazon Storage</div>,
@@ -53,21 +68,6 @@ jest.mock("../storages/RackspaceStorage", () => ({
 jest.mock("../storages/SelectelStorage", () => ({
   SelectelStorage: () => (
     <div data-testid="selectel-storage">Selectel Storage</div>
-  ),
-}));
-
-jest.mock("../../../../../components/combobox", () => ({
-  ComboBox: ({
-    advancedOptions,
-    selectedOption,
-  }: {
-    advancedOptions: React.ReactNode;
-    selectedOption: { key: number; label: string };
-  }) => (
-    <div data-testid="combo-box">
-      <span>Selected: {selectedOption.label}</span>
-      <div data-testid="advanced-options">{advancedOptions}</div>
-    </div>
   ),
 }));
 

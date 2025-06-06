@@ -27,22 +27,20 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../../../components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ThirdPartyStorages,
   BackupStorageLocalKey,
-} from "../../../../../../enums";
-import { useDidMount } from "../../../../../../hooks/useDidMount";
-import { getFromLocalStorage } from "../../../../../../utils/getFromLocalStorage";
+} from "@docspace/shared/enums";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 
 import {
   RackspaceSettings,
   formNames,
-} from "../../../../../../components/rackspace-settings";
-import type {
-  SelectedStorageType,
-  TTranslation,
-} from "../../../../../../types";
+} from "@docspace/shared/components/rackspace-settings";
+import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
+
 import styles from "../../../../Backup.module.scss";
 
 interface RackspaceStorageProps {

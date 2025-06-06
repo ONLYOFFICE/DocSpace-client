@@ -29,8 +29,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { fn } from "@storybook/test";
 
-import { BackupStorageType } from "../../../../../enums";
-import { ThirdPartyModule } from "./index";
+import { BackupStorageType } from "@docspace/shared/enums";
+import { ButtonSize } from "@docspace/shared/components/button";
+
 import styles from "../../../Backup.module.scss";
 import {
   hoursArray,
@@ -41,10 +42,10 @@ import {
   mockThirdPartyAccounts,
   mockThirdPartyProviders,
 } from "../../mockData";
-import { ButtonSize } from "../../../../../components/button";
+import { ThirdPartyModule } from ".";
 
 export default {
-  title: "Pages/AutoBackup/ThirdPartyModule",
+  title: "Pages/Backup/AutoBackup/ThirdPartyModule",
   component: ThirdPartyModule,
   tags: ["!autodocs"],
   parameters: {

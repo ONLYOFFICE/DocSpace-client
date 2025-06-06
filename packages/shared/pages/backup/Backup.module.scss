@@ -26,8 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "../../styles/mixins";
-@use "../../styles/variables";
+@use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/variables";
 
 $input-length: 350px;
 $text-length: 700px;

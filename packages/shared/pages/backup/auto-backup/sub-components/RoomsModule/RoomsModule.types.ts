@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { type DeviceType } from "../../../../../enums";
-import { type FilesSelectorSettings } from "../../../../../components/files-selector-input";
+import { type DeviceType } from "@docspace/shared/enums";
+import { type FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
 import type {
   BackupToPublicRoomOptionType,
   Nullable,
-} from "../../../../../types";
-import type { TBreadCrumb } from "../../../../../components/selector/Selector.types";
+} from "@docspace/shared/types";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+
 import { type ScheduleComponentProps } from "../ScheduleComponent";
 
 export interface RoomsModuleProps extends ScheduleComponentProps {

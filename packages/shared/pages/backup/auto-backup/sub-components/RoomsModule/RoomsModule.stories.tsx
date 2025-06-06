@@ -28,9 +28,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { http, HttpResponse } from "msw";
 
-import { BackupStorageType, DeviceType } from "../../../../../enums";
+import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 
-import { RoomsModule } from "./index";
 import {
   periodsObject,
   weekdaysLabelArray,
@@ -39,9 +38,10 @@ import {
   maxNumberCopiesArray,
 } from "../../mockData";
 import styles from "../../../Backup.module.scss";
+import { RoomsModule } from ".";
 
 const meta = {
-  title: "Pages/AutoBackup/RoomsModule",
+  title: "Pages/Backup/AutoBackup/RoomsModule",
   component: RoomsModule,
   tags: ["!autodocs"],
   parameters: {

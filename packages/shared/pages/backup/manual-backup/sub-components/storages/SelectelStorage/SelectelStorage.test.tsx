@@ -2,12 +2,13 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { ButtonSize } from "../../../../../../components/button";
-import { ThirdPartyStorages } from "../../../../../../enums";
-import type { TTranslation } from "../../../../../../types";
-import { SelectelStorage } from "./index";
+import { ButtonSize } from "@docspace/shared/components/button";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
+import type { TTranslation } from "@docspace/shared/types";
 
-jest.mock("../../../../../../components/selectel-settings", () => ({
+import { SelectelStorage } from ".";
+
+jest.mock("@docspace/shared/components/selectel-settings", () => ({
   SelectelSettings: ({
     t,
     isNeedFilePath,

@@ -2354,3 +2354,15 @@
   --search-input-default-icon-fill: #{$gray-dark-strong};
   --search-input-filled-icon-fill: #{$gray-dark};
 }
+
+.light {
+  --tab-item-selected-background-color: var(--accent-main, #{$light-blue-main});
+  --tab-item-selected-item-color: #{$white};
+  --tab-item-tag-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --tab-item-selected-background-color: #{$white};
+  --tab-item-selected-item-color: #{$black};
+  --tab-item-tag-border: 1px solid #{$gray-dark-strong};
+}

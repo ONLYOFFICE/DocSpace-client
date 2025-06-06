@@ -67,8 +67,6 @@ type WalletProps = {
   walletBalance: number;
   language: string;
   walletCodeCurrency: string;
-  cardLinkedOnFreeTariff: boolean;
-  cardLinkedOnNonProfit: boolean;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;
   isCardLinkedToPortal?: boolean;
@@ -76,7 +74,6 @@ type WalletProps = {
   fetchTransactionHistory?: () => Promise<void>;
   canUpdateTariff: VoidFunction;
   setVisibleWalletSetting?: (value: boolean) => void;
-  isAlreadyPaid?: boolean;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -93,16 +90,13 @@ const Wallet = (props: WalletProps) => {
     walletBalance,
     language,
     walletCodeCurrency,
-    cardLinkedOnFreeTariff,
     isCardLinkedToPortal,
-    cardLinkedOnNonProfit,
     isVisibleWalletSettings,
     wasChangeBalance,
     fetchBalance,
     fetchTransactionHistory,
     canUpdateTariff,
     setVisibleWalletSetting,
-    isAlreadyPaid,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -184,7 +178,7 @@ const Wallet = (props: WalletProps) => {
             {t("BalanceText")}
           </Text>
 
-          {cardLinkedOnFreeTariff || cardLinkedOnNonProfit || isAlreadyPaid ? (
+          {isCardLinkedToPortal ? (
             <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
           ) : null}
         </div>
@@ -233,7 +227,6 @@ export default inject(
     const {
       walletBalance,
       cardLinked,
-      cardLinkedOnFreeTariff,
       walletCodeCurrency,
       isPayer,
       isVisibleWalletSettings,
@@ -242,9 +235,7 @@ export default inject(
       fetchTransactionHistory,
       canUpdateTariff,
       setVisibleWalletSetting,
-      cardLinkedOnNonProfit,
       isCardLinkedToPortal,
-      isAlreadyPaid,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
 
@@ -254,9 +245,7 @@ export default inject(
       language,
       cardLinked,
       isPayer,
-      cardLinkedOnFreeTariff,
       isFreeTariff,
-      cardLinkedOnNonProfit,
       isVisibleWalletSettings,
       wasChangeBalance,
       fetchBalance,
@@ -264,7 +253,6 @@ export default inject(
       canUpdateTariff,
       setVisibleWalletSetting,
       isCardLinkedToPortal,
-      isAlreadyPaid,
     };
   },
 )(observer(Wallet));

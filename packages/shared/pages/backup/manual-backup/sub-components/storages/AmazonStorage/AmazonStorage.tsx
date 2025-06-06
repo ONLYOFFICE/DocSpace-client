@@ -27,65 +27,73 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../../components/button";
+import { Button, ButtonSize } from "../../../../../../components/button";
 import {
   BackupStorageLocalKey,
   ThirdPartyStorages,
-} from "../../../../../enums";
-import { getFromLocalStorage } from "../../../../../utils/getFromLocalStorage";
-import { useDidMount } from "../../../../../hooks/useDidMount";
-
+} from "../../../../../../enums";
 import {
-  GoogleCloudSettings,
+  AmazonSettings,
   formNames,
-} from "../../../../../components/google-cloud-settings";
+} from "../../../../../../components/amazon-settings";
 
-import type { SelectedStorageType, TTranslation } from "../../../../../types";
-
+import { useDidMount } from "../../../../../../hooks/useDidMount";
+import { getFromLocalStorage } from "../../../../../../utils/getFromLocalStorage";
+import type {
+  SelectedStorageType,
+  StorageRegionsType,
+  TTranslation,
+} from "../../../../../../types";
 import styles from "../../../ManualBackup.module.scss";
 
-interface GoogleCloudStorageProps {
+interface AmazonStorageProps {
   t: TTranslation;
   isValidForm: boolean;
   buttonSize?: ButtonSize;
   isMaxProgress: boolean;
   isLoadingData: boolean;
-  selectedStorage?: SelectedStorageType;
   isNeedFilePath: boolean;
-  errorsFieldsBeforeSafe: Record<string, boolean>;
-  formSettings: Record<string, string>;
   isLoading?: boolean;
-  onMakeCopyIntoStorage: () => Promise<void>;
+  selectedStorage?: SelectedStorageType;
+  formSettings: Record<string, string>;
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  defaultRegion: string;
+  storageRegions: StorageRegionsType[];
+
+  deleteValueFormSetting: (key: string) => void;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+  setRequiredFormSettings: (arr: string[]) => void;
+
   setCompletedFormFields: (
     values: Record<string, string>,
     module?: string,
   ) => void;
-  addValueInFormSettings: (name: string, value: string) => void;
-  setRequiredFormSettings: (arr: string[]) => void;
-  setIsThirdStorageChanged: (changed: boolean) => void;
+  onMakeCopyIntoStorage: () => Promise<void>;
 }
 
-const GoogleCloudStorage = ({
-  selectedStorage,
-  setCompletedFormFields,
-  buttonSize,
-  isLoadingData,
-  isMaxProgress,
-  isValidForm,
-  onMakeCopyIntoStorage,
+const AmazonStorage = ({
   t,
-  isNeedFilePath,
-  errorsFieldsBeforeSafe,
-  formSettings,
   isLoading,
+  buttonSize,
+  isValidForm,
+  formSettings,
+  isMaxProgress,
+  defaultRegion,
+  isLoadingData,
+  storageRegions,
+  isNeedFilePath,
+  selectedStorage,
+  errorsFieldsBeforeSafe,
+  onMakeCopyIntoStorage,
+  setCompletedFormFields,
+  deleteValueFormSetting,
   addValueInFormSettings,
-  setRequiredFormSettings,
   setIsThirdStorageChanged,
-}: GoogleCloudStorageProps) => {
-  const isDisabled = selectedStorage && !selectedStorage.isSet;
-
+  setRequiredFormSettings,
+}: AmazonStorageProps) => {
   useDidMount(() => {
-    const basicValues = formNames();
+    const basicValues = formNames(storageRegions[0].systemName);
 
     const moduleValues = getFromLocalStorage<Record<string, string>>(
       BackupStorageLocalKey.ThirdPartyStorageValues,
@@ -93,28 +101,32 @@ const GoogleCloudStorage = ({
 
     const moduleType =
       getFromLocalStorage<ThirdPartyStorages>(BackupStorageLocalKey.Storage) ===
-      ThirdPartyStorages.GoogleId;
+      ThirdPartyStorages.AmazonId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
     );
   });
 
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
+
   return (
-    <div data-testid="google-cloud-storage">
-      <GoogleCloudSettings
+    <div data-testid="amazon-storage">
+      <AmazonSettings
         t={t}
         isLoading={isLoading}
         formSettings={formSettings}
         isLoadingData={isLoadingData}
+        defaultRegion={defaultRegion}
+        storageRegions={storageRegions}
         isNeedFilePath={isNeedFilePath}
         selectedStorage={selectedStorage}
         errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        deleteValueFormSetting={deleteValueFormSetting}
         addValueInFormSettings={addValueInFormSettings}
-        setRequiredFormSettings={setRequiredFormSettings}
         setIsThirdStorageChanged={setIsThirdStorageChanged}
+        setRequiredFormSettings={setRequiredFormSettings}
       />
-
       <div
         className={classNames(
           styles.manualBackupButtons,
@@ -134,4 +146,4 @@ const GoogleCloudStorage = ({
   );
 };
 
-export default GoogleCloudStorage;
+export default AmazonStorage;

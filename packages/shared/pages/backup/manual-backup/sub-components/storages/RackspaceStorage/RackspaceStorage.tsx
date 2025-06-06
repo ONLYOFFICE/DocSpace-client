@@ -27,73 +27,67 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../../components/button";
+import { Button, ButtonSize } from "../../../../../../components/button";
 import {
-  BackupStorageLocalKey,
   ThirdPartyStorages,
-} from "../../../../../enums";
-import {
-  AmazonSettings,
-  formNames,
-} from "../../../../../components/amazon-settings";
+  BackupStorageLocalKey,
+} from "../../../../../../enums";
+import { useDidMount } from "../../../../../../hooks/useDidMount";
+import { getFromLocalStorage } from "../../../../../../utils/getFromLocalStorage";
 
-import { useDidMount } from "../../../../../hooks/useDidMount";
-import { getFromLocalStorage } from "../../../../../utils/getFromLocalStorage";
+import {
+  RackspaceSettings,
+  formNames,
+} from "../../../../../../components/rackspace-settings";
 import type {
   SelectedStorageType,
-  StorageRegionsType,
   TTranslation,
-} from "../../../../../types";
+} from "../../../../../../types";
 import styles from "../../../ManualBackup.module.scss";
 
-interface AmazonStorageProps {
+interface RackspaceStorageProps {
   t: TTranslation;
-  isValidForm: boolean;
-  buttonSize?: ButtonSize;
-  isMaxProgress: boolean;
-  isLoadingData: boolean;
-  isNeedFilePath: boolean;
   isLoading?: boolean;
-  selectedStorage?: SelectedStorageType;
+  isValidForm: boolean;
+  isLoadingData: boolean;
+  isMaxProgress: boolean;
+  buttonSize?: ButtonSize;
+  isNeedFilePath: boolean;
   formSettings: Record<string, string>;
+  selectedStorage?: SelectedStorageType;
   errorsFieldsBeforeSafe: Record<string, boolean>;
-  defaultRegion: string;
-  storageRegions: StorageRegionsType[];
-
-  deleteValueFormSetting: (key: string) => void;
   addValueInFormSettings: (name: string, value: string) => void;
-  setIsThirdStorageChanged: (changed: boolean) => void;
   setRequiredFormSettings: (arr: string[]) => void;
-
+  onMakeCopyIntoStorage: () => Promise<void>;
+  setIsThirdStorageChanged: (changed: boolean) => void;
   setCompletedFormFields: (
     values: Record<string, string>,
     module?: string,
   ) => void;
-  onMakeCopyIntoStorage: () => Promise<void>;
 }
 
-const AmazonStorage = ({
-  t,
+const RackspaceStorage = ({
   isLoading,
   buttonSize,
   isValidForm,
   formSettings,
-  isMaxProgress,
-  defaultRegion,
   isLoadingData,
-  storageRegions,
+  isMaxProgress,
   isNeedFilePath,
   selectedStorage,
   errorsFieldsBeforeSafe,
-  onMakeCopyIntoStorage,
-  setCompletedFormFields,
-  deleteValueFormSetting,
+
   addValueInFormSettings,
   setIsThirdStorageChanged,
   setRequiredFormSettings,
-}: AmazonStorageProps) => {
+  setCompletedFormFields,
+  onMakeCopyIntoStorage,
+  t,
+}: RackspaceStorageProps) => {
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
+
   useDidMount(() => {
-    const basicValues = formNames(storageRegions[0].systemName);
+    const basicValues = formNames();
 
     const moduleValues = getFromLocalStorage<Record<string, string>>(
       BackupStorageLocalKey.ThirdPartyStorageValues,
@@ -101,31 +95,26 @@ const AmazonStorage = ({
 
     const moduleType =
       getFromLocalStorage<ThirdPartyStorages>(BackupStorageLocalKey.Storage) ===
-      ThirdPartyStorages.AmazonId;
+      ThirdPartyStorages.RackspaceId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
     );
   });
 
-  const isDisabled = selectedStorage && !selectedStorage.isSet;
-
   return (
-    <div data-testid="amazon-storage">
-      <AmazonSettings
+    <div data-testid="rackspace-storage">
+      <RackspaceSettings
         t={t}
         isLoading={isLoading}
         formSettings={formSettings}
         isLoadingData={isLoadingData}
-        defaultRegion={defaultRegion}
-        storageRegions={storageRegions}
         isNeedFilePath={isNeedFilePath}
         selectedStorage={selectedStorage}
         errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
-        deleteValueFormSetting={deleteValueFormSetting}
         addValueInFormSettings={addValueInFormSettings}
-        setIsThirdStorageChanged={setIsThirdStorageChanged}
         setRequiredFormSettings={setRequiredFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
       />
       <div
         className={classNames(
@@ -146,4 +135,4 @@ const AmazonStorage = ({
   );
 };
 
-export default AmazonStorage;
+export default RackspaceStorage;

@@ -2,12 +2,12 @@ import React, { act } from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { DeviceType } from "../../../../enums";
-import { ButtonSize } from "../../../../components/button";
+import { DeviceType } from "../../../../../enums";
+import { ButtonSize } from "../../../../../components/button";
 
 import { RoomsModule } from "./index";
 
-jest.mock("../../../../components/files-selector-input", () => ({
+jest.mock("../../../../../components/files-selector-input", () => ({
   FilesSelectorInput: ({
     onSelectFolder,
     isDisabled,
@@ -31,7 +31,7 @@ jest.mock("../../../../components/files-selector-input", () => ({
   ),
 }));
 
-jest.mock("../../../../dialogs/backup-to-public-room-dialog", () => ({
+jest.mock("../../../../../dialogs/backup-to-public-room-dialog", () => ({
   __esModule: true,
   default: ({ visible }: { visible: boolean }) => (
     <div data-testid="backup-to-public-room-dialog">
@@ -40,7 +40,7 @@ jest.mock("../../../../dialogs/backup-to-public-room-dialog", () => ({
   ),
 }));
 
-jest.mock("../../../../components/toast", () => ({
+jest.mock("../../../../../components/toast", () => ({
   toastr: {
     error: jest.fn(),
   },
@@ -144,8 +144,8 @@ describe("RoomsModule", () => {
   it("handles errors during copy process", async () => {
     const error = new Error("Test error");
     const mockOnMakeCopy = jest.fn().mockRejectedValue(error);
-    const toastrError = jest.requireMock("../../../../components/toast").toastr
-      .error;
+    const toastrError = jest.requireMock("../../../../../components/toast")
+      .toastr.error;
     const consoleErrorSpy = jest
       .spyOn(console, "error")
       .mockImplementation(() => {});

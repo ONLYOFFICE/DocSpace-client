@@ -2,8 +2,8 @@ import React, { act } from "react";
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
-import { BackupStorageType, ProvidersType } from "../../../../enums";
-import { ButtonSize } from "../../../../components/button";
+import { BackupStorageType, ProvidersType } from "../../../../../enums";
+import { ButtonSize } from "../../../../../components/button";
 import ThirdPartyModule from "./ThirdPartyModule";
 
 const mockThirdPartyAccount = {
@@ -62,7 +62,7 @@ const defaultProps = {
   setNewPath: jest.fn(),
 };
 
-jest.mock("../../../../components/direct-third-party-connection", () => ({
+jest.mock("../../../../../components/direct-third-party-connection", () => ({
   DirectThirdPartyConnection: ({
     onSelectFolder,
     isDisabled,

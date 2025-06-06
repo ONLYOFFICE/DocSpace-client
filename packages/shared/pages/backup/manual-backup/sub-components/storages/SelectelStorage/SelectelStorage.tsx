@@ -27,19 +27,22 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../../components/button";
+import { Button, ButtonSize } from "../../../../../../components/button";
 import {
   BackupStorageLocalKey,
   ThirdPartyStorages,
-} from "../../../../../enums";
+} from "../../../../../../enums";
 
 import {
   SelectelSettings,
   formNames,
-} from "../../../../../components/selectel-settings";
-import { useDidMount } from "../../../../../hooks/useDidMount";
-import { getFromLocalStorage } from "../../../../../utils/getFromLocalStorage";
-import type { SelectedStorageType, TTranslation } from "../../../../../types";
+} from "../../../../../../components/selectel-settings";
+import { useDidMount } from "../../../../../../hooks/useDidMount";
+import { getFromLocalStorage } from "../../../../../../utils/getFromLocalStorage";
+import type {
+  SelectedStorageType,
+  TTranslation,
+} from "../../../../../../types";
 import styles from "../../../ManualBackup.module.scss";
 
 interface SelectelStorageProps {

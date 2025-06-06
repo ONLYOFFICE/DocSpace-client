@@ -27,60 +27,64 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../../components/button";
+import { Button, ButtonSize } from "../../../../../../components/button";
 import {
-  ThirdPartyStorages,
   BackupStorageLocalKey,
-} from "../../../../../enums";
-import { useDidMount } from "../../../../../hooks/useDidMount";
-import { getFromLocalStorage } from "../../../../../utils/getFromLocalStorage";
+  ThirdPartyStorages,
+} from "../../../../../../enums";
+import { getFromLocalStorage } from "../../../../../../utils/getFromLocalStorage";
+import { useDidMount } from "../../../../../../hooks/useDidMount";
 
 import {
-  RackspaceSettings,
+  GoogleCloudSettings,
   formNames,
-} from "../../../../../components/rackspace-settings";
-import type { SelectedStorageType, TTranslation } from "../../../../../types";
+} from "../../../../../../components/google-cloud-settings";
+
+import type {
+  SelectedStorageType,
+  TTranslation,
+} from "../../../../../../types";
+
 import styles from "../../../ManualBackup.module.scss";
 
-interface RackspaceStorageProps {
+interface GoogleCloudStorageProps {
   t: TTranslation;
-  isLoading?: boolean;
   isValidForm: boolean;
-  isLoadingData: boolean;
-  isMaxProgress: boolean;
   buttonSize?: ButtonSize;
-  isNeedFilePath: boolean;
-  formSettings: Record<string, string>;
+  isMaxProgress: boolean;
+  isLoadingData: boolean;
   selectedStorage?: SelectedStorageType;
+  isNeedFilePath: boolean;
   errorsFieldsBeforeSafe: Record<string, boolean>;
-  addValueInFormSettings: (name: string, value: string) => void;
-  setRequiredFormSettings: (arr: string[]) => void;
+  formSettings: Record<string, string>;
+  isLoading?: boolean;
   onMakeCopyIntoStorage: () => Promise<void>;
-  setIsThirdStorageChanged: (changed: boolean) => void;
   setCompletedFormFields: (
     values: Record<string, string>,
     module?: string,
   ) => void;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setRequiredFormSettings: (arr: string[]) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
 }
 
-const RackspaceStorage = ({
-  isLoading,
+const GoogleCloudStorage = ({
+  selectedStorage,
+  setCompletedFormFields,
   buttonSize,
-  isValidForm,
-  formSettings,
   isLoadingData,
   isMaxProgress,
-  isNeedFilePath,
-  selectedStorage,
-  errorsFieldsBeforeSafe,
-
-  addValueInFormSettings,
-  setIsThirdStorageChanged,
-  setRequiredFormSettings,
-  setCompletedFormFields,
+  isValidForm,
   onMakeCopyIntoStorage,
   t,
-}: RackspaceStorageProps) => {
+  isNeedFilePath,
+  errorsFieldsBeforeSafe,
+  formSettings,
+  isLoading,
+  addValueInFormSettings,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+}: GoogleCloudStorageProps) => {
   const isDisabled = selectedStorage && !selectedStorage.isSet;
 
   useDidMount(() => {
@@ -92,7 +96,7 @@ const RackspaceStorage = ({
 
     const moduleType =
       getFromLocalStorage<ThirdPartyStorages>(BackupStorageLocalKey.Storage) ===
-      ThirdPartyStorages.RackspaceId;
+      ThirdPartyStorages.GoogleId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
@@ -100,8 +104,8 @@ const RackspaceStorage = ({
   });
 
   return (
-    <div data-testid="rackspace-storage">
-      <RackspaceSettings
+    <div data-testid="google-cloud-storage">
+      <GoogleCloudSettings
         t={t}
         isLoading={isLoading}
         formSettings={formSettings}
@@ -113,6 +117,7 @@ const RackspaceStorage = ({
         setRequiredFormSettings={setRequiredFormSettings}
         setIsThirdStorageChanged={setIsThirdStorageChanged}
       />
+
       <div
         className={classNames(
           styles.manualBackupButtons,
@@ -132,4 +137,4 @@ const RackspaceStorage = ({
   );
 };
 
-export default RackspaceStorage;
+export default GoogleCloudStorage;

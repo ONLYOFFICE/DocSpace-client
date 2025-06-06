@@ -28,17 +28,20 @@ import { useTranslation } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../components/button";
-import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
-import { BackupStorageType, DeviceType } from "../../../../enums";
-import { FilesSelectorInput } from "../../../../components/files-selector-input";
-import { isNullOrUndefined } from "../../../../utils/typeGuards";
-import BackupToPublicRoom from "../../../../dialogs/backup-to-public-room-dialog";
-import { toastr } from "../../../../components/toast";
+import { Button, ButtonSize } from "../../../../../components/button";
+import { getFromLocalStorage } from "../../../../../utils/getFromLocalStorage";
+import { BackupStorageType, DeviceType } from "../../../../../enums";
+import { FilesSelectorInput } from "../../../../../components/files-selector-input";
+import { isNullOrUndefined } from "../../../../../utils/typeGuards";
+import BackupToPublicRoom from "../../../../../dialogs/backup-to-public-room-dialog";
+import { toastr } from "../../../../../components/toast";
 
-import type { TBreadCrumb } from "../../../../components/selector/Selector.types";
-import type { FilesSelectorSettings } from "../../../../components/files-selector-input/FilesSelectorInput.types";
-import type { BackupToPublicRoomOptionType, Nullable } from "../../../../types";
+import type { TBreadCrumb } from "../../../../../components/selector/Selector.types";
+import type { FilesSelectorSettings } from "../../../../../components/files-selector-input/FilesSelectorInput.types";
+import type {
+  BackupToPublicRoomOptionType,
+  Nullable,
+} from "../../../../../types";
 import styles from "../../ManualBackup.module.scss";
 
 const Documents = "Documents";

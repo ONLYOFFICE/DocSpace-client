@@ -3,11 +3,11 @@ import React from "react";
 import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ThirdPartyStorageModule from "./ThirdPartyStorageModule";
-import { BackupStorageType, ThirdPartyStorages } from "../../../../enums";
-import { getOptions } from "../../../../utils/getThirdPartyStoragesOptions";
-import { toastr } from "../../../../components/toast";
-import { ButtonSize } from "../../../../components/button";
-import { renderWithTheme } from "../../../../utils/render-with-theme";
+import { BackupStorageType, ThirdPartyStorages } from "../../../../../enums";
+import { getOptions } from "../../../../../utils/getThirdPartyStoragesOptions";
+import { toastr } from "../../../../../components/toast";
+import { ButtonSize } from "../../../../../components/button";
+import { renderWithTheme } from "../../../../../utils/render-with-theme";
 
 jest.mock("../storages/GoogleCloudStorage", () => ({
   GoogleCloudStorage: jest
@@ -53,8 +53,8 @@ jest.mock("../storages/AmazonStorage", () => ({
   )),
 }));
 
-jest.mock("../../../../utils/getThirdPartyStoragesOptions");
-jest.mock("../../../../components/toast");
+jest.mock("../../../../../utils/getThirdPartyStoragesOptions");
+jest.mock("../../../../../components/toast");
 
 jest.mock(
   "PUBLIC_DIR/images/external.link.react.svg?url",

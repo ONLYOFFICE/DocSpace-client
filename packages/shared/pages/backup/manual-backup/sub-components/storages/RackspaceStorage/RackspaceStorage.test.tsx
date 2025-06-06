@@ -2,12 +2,12 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { ButtonSize } from "../../../../../components/button";
-import { ThirdPartyStorages } from "../../../../../enums";
-import type { TTranslation } from "../../../../../types";
+import { ButtonSize } from "../../../../../../components/button";
+import { ThirdPartyStorages } from "../../../../../../enums";
+import type { TTranslation } from "../../../../../../types";
 import { RackspaceStorage } from "./index";
 
-jest.mock("../../../../../components/rackspace-settings", () => ({
+jest.mock("../../../../../../components/rackspace-settings", () => ({
   RackspaceSettings: ({
     t,
     isNeedFilePath,

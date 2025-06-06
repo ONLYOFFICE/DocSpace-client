@@ -38,7 +38,7 @@ import {
   hoursArray,
   maxNumberCopiesArray,
 } from "../../mockData";
-import styles from "../../AutoBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 
 const meta = {
   title: "Pages/AutoBackup/RoomsModule",

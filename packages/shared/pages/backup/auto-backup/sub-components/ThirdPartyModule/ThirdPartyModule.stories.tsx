@@ -31,7 +31,7 @@ import { fn } from "@storybook/test";
 
 import { BackupStorageType } from "../../../../../enums";
 import { ThirdPartyModule } from "./index";
-import styles from "../../AutoBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 import {
   hoursArray,
   maxNumberCopiesArray,

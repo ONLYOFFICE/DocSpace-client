@@ -42,7 +42,7 @@ import type {
   BackupToPublicRoomOptionType,
   Nullable,
 } from "../../../../../types";
-import styles from "../../ManualBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 
 const Documents = "Documents";
 

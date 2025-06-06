@@ -48,7 +48,7 @@ import { SelectelStorage } from "../storages/SelectelStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";
 
 import type { ThirdPartyStorageModuleProps } from "./ThirdPartyStorageModule.types";
-import styles from "../../AutoBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 
 const ThirdPartyStorageModule = ({
   thirdPartyStorage,

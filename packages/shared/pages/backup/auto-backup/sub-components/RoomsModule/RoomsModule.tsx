@@ -38,7 +38,7 @@ import type {
 } from "../../../../../types";
 
 import { ScheduleComponent } from "../ScheduleComponent";
-import styles from "../../AutoBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 import {
   RoomsModuleProps,
   BackupToPublicRoomDialogState,

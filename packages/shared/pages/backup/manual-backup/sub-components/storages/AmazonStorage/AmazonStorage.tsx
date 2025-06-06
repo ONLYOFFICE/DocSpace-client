@@ -44,7 +44,7 @@ import type {
   StorageRegionsType,
   TTranslation,
 } from "../../../../../../types";
-import styles from "../../../ManualBackup.module.scss";
+import styles from "../../../../Backup.module.scss";
 
 interface AmazonStorageProps {
   t: TTranslation;

@@ -43,7 +43,7 @@ import type {
 import type { TBreadCrumb } from "../../../../../components/selector/Selector.types";
 import type { FilesSelectorSettings } from "../../../../../components/files-selector-input";
 import type { TThirdParties } from "../../../../../api/files/types";
-import styles from "../../ManualBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 
 interface ThirdPartyModuleProps {
   onMakeCopy: (

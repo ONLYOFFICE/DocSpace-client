@@ -45,7 +45,7 @@ import type {
   TTranslation,
 } from "../../../../../../types";
 
-import styles from "../../../ManualBackup.module.scss";
+import styles from "../../../../Backup.module.scss";
 
 interface GoogleCloudStorageProps {
   t: TTranslation;

@@ -70,7 +70,7 @@ import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModul
 
 import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
-import styles from "./AutoBackup.module.scss";
+import styles from "../Backup.module.scss";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -403,7 +403,7 @@ const AutomaticBackup = ({
   if (isInitialLoading) return <AutoBackupLoader />;
 
   return (
-    <div className={styles.autoBackup}>
+    <div className={classNames(styles.backupCommon, styles.autoBackup)}>
       <StatusMessage message={errorInformation} />
       <div
         className={classNames(

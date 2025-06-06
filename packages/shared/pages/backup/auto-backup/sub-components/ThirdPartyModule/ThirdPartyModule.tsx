@@ -32,7 +32,7 @@ import { DirectThirdPartyConnection } from "../../../../../components/direct-thi
 import { useDidMount } from "../../../../../hooks/useDidMount";
 
 import { ScheduleComponent } from "../ScheduleComponent";
-import styles from "../../AutoBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 import { ThirdPartyModuleProps } from "./ThirdPartyModule.types";
 
 const ThirdPartyModule = ({

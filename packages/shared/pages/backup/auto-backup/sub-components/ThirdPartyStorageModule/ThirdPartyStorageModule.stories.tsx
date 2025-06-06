@@ -37,7 +37,7 @@ import {
   maxNumberCopiesArray,
   selectedStorages,
 } from "../../mockData";
-import styles from "../../AutoBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 
 const meta = {
   title: "Pages/AutoBackup/ThirdPartyStorageModule",

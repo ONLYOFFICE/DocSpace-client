@@ -65,7 +65,7 @@ import {
   THIRD_PARTY_RESOURCE,
   THIRD_PARTY_STORAGE,
 } from "./ManualBackup.constants";
-import styles from "./ManualBackup.module.scss";
+import styles from "../Backup.module.scss";
 
 const ManualBackup = ({
   isInitialLoading,
@@ -276,7 +276,7 @@ const ManualBackup = ({
   if (isInitialLoading) return <DataBackupLoader />;
 
   return (
-    <div className={styles.manualBackup}>
+    <div className={classNames(styles.backupCommon, styles.manualBackup)}>
       <StatusMessage message={errorInformation} />
       <div
         className={classNames(

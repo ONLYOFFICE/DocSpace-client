@@ -51,7 +51,7 @@ import { RackspaceStorage } from "../storages/RackspaceStorage";
 import { SelectelStorage } from "../storages/SelectelStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";
 
-import styles from "../../ManualBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 
 const DefaultParameters = {
   comboBoxOptions: [],

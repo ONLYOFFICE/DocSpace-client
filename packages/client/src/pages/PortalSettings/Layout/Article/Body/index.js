@@ -258,14 +258,15 @@ const ArticleBodyContent = (props) => {
 
     if (standalone) {
       const deletionTKey = isCommunity
-        ? "Common:PaymentsTitle"
-        : "Common:Bonus";
+        ? ["Common:PaymentsTitle", "Services"]
+        : ["Common:Bonus", "Services"];
 
-      const index = resultTree.findIndex((el) => el.tKey === deletionTKey);
-
-      if (index !== -1) {
-        resultTree.splice(index, 1);
-      }
+      deletionTKey.forEach((key) => {
+        const index = resultTree.findIndex((el) => el.tKey === key);
+        if (index !== -1) {
+          resultTree.splice(index, 1);
+        }
+      });
     } else {
       const index = resultTree.findIndex((n) => n.tKey === "Common:Bonus");
       if (index !== -1) {

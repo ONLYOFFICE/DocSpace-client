@@ -49,7 +49,7 @@ const PaymentsPage = ({ currentDeviceType, standalone }) => {
     {
       id: "portal-payments",
       name: t("TariffPlan"),
-      content: standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />,
+      content: <PaymentsSaaS />,
     },
     {
       id: "wallet",
@@ -77,6 +77,8 @@ const PaymentsPage = ({ currentDeviceType, standalone }) => {
 
     setIsLoaded(true);
   }, [location.pathname]);
+
+  if (standalone) return <PaymentsEnterprise />;
 
   if (!isLoaded) return null;
 

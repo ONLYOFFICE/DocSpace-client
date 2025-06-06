@@ -313,7 +313,9 @@ export const useFeedTranslation = (
       case FeedActionKeys.RoomDenyDownloadDisabled:
         return t("InfoPanel:RoomDenyDownloadDisabled");
       case FeedActionKeys.RoomArchived:
-        return t("InfoPanel:RoomArchived");
+        return t("InfoPanel:RoomToArchiveMove", {
+          sectionName: t("Common:Archive"),
+        });
       case FeedActionKeys.RoomUnarchived:
         return t("InfoPanel:RoomFromArchiveRestore", {
           sectionName: t("Common:Archive"),

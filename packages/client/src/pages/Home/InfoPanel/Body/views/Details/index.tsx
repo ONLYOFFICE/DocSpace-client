@@ -181,6 +181,9 @@ const Details = ({
   const isTemplate =
     selection && "isTemplate" in selection && selection.isTemplate;
 
+  const color = "logo" in selection ? selection.logo?.color : undefined;
+  const title = "title" in selection ? selection.title : "";
+
   return (
     <>
       {isTemplate ? (
@@ -229,8 +232,8 @@ const Details = ({
       ) : (
         <div className={styles.noThumbnail}>
           <RoomIcon
-            color={"logo" in selection ? selection.logo?.color : undefined}
-            title={"title" in selection ? selection.title : ""}
+            color={color}
+            title={title}
             isArchive={isArchive}
             size="96px"
             radius="16px"

@@ -172,6 +172,8 @@ const RoomsItemHeader = ({
 
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
+  const color = "logo" in selection ? selection.logo?.color : undefined;
+
   return (
     <div
       className={classNames(commonStyles.title, {
@@ -191,7 +193,7 @@ const RoomsItemHeader = ({
       <div className="item-icon">
         <RoomIcon
           isTemplate={isTemplate}
-          color={"logo" in selection ? selection.logo?.color : undefined}
+          color={color}
           title={title}
           isArchive={
             "rootFolderType" in selection

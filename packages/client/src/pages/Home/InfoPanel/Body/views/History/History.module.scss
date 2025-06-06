@@ -101,7 +101,7 @@
 
     :global(.action-title) {
       text-wrap: nowrap;
-      &-text {
+      :global(.action-title-text) {
         font-size: 14px;
         font-weight: 600;
         text-wrap: wrap;

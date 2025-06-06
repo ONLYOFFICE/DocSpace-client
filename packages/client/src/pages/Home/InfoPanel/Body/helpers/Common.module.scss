@@ -128,7 +128,7 @@
   margin-inline-start: -20px;
   padding-inline-end: 20px;
 
-  @include mixins.text-user-select;
+  @include text-user-select;
 
   background: var(--info-panel-background-color);
 
@@ -243,7 +243,7 @@
   gap: 8px;
   padding-bottom: 20px;
 
-  @include mixins.text-user-select;
+  @include text-user-select;
 
   :global(.property) {
     width: 100%;
@@ -286,7 +286,7 @@
     }
 
     :global(.property-comment_editor) {
-      &-display {
+      :global(.property-comment_editor-display) {
         display: flex;
         flex-direction: column;
         gap: 4px;
@@ -296,7 +296,7 @@
           display: flex;
           flex-direction: row;
           gap: 6px;
-          &-icon {
+          :global(.edit_toggle-icon) {
             svg {
               width: 12px;
               height: 12px;
@@ -305,7 +305,7 @@
               }
             }
           }
-          &-text {
+          :global(.edit_toggle-text) {
             text-decoration: underline;
             text-decoration-style: dashed;
             text-underline-offset: 2px;
@@ -313,11 +313,11 @@
         }
       }
 
-      &-editor {
+      :global(.property-comment_editor-editor) {
         display: flex;
         flex-direction: column;
         gap: 8px;
-        &-buttons {
+        :global(.property-comment_editor-editor-buttons) {
           display: flex;
           flex-direction: row;
           gap: 4px;
@@ -325,7 +325,7 @@
       }
 
       :global(.property-content) {
-        @include mixins.text-overflow;
+        @include text-overflow;
       }
     }
   }
@@ -336,7 +336,7 @@
 
   :global(.info_details_lifetime) {
     :global(.property-content) {
-      @include mixins.text-overflow;
+      @include text-overflow;
     }
   }
 }

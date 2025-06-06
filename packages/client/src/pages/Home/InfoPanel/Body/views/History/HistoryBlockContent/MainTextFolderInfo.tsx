@@ -32,7 +32,7 @@ import { FolderType } from "@docspace/shared/enums";
 import { FeedAction } from "@docspace/shared/api/rooms/types";
 
 import { Feed } from "./HistoryBlockContent.types";
-import styles from "./History.module.scss";
+import styles from "../History.module.scss";
 
 type HistoryMainTextFolderInfoProps = {
   t: TTranslation;

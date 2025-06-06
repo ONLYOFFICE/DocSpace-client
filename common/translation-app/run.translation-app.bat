@@ -68,16 +68,28 @@ echo Backend will be available at http://localhost:3001
 echo Frontend will be available at http://localhost:3000
 echo.
 
-REM Wait for backend server to be ready by checking for the specific message in the log
+REM Wait for backend server to be ready by checking for any of the possible server ready messages in the log
 echo Waiting for backend server to initialize...
 :check_backend
 findstr /c:"Server listening on http://0.0.0.0:3001" backend.log > nul 2>&1
 if %errorlevel% equ 0 (
     echo Backend server is ready!
-) else (
-    timeout /t 1 /nobreak > nul
-    goto :check_backend
+    goto :server_ready
 )
+findstr /c:"Server listening at http://0.0.0.0:3001" backend.log > nul 2>&1
+if %errorlevel% equ 0 (
+    echo Backend server is ready!
+    goto :server_ready
+)
+findstr /c:"Translation metadata initialization completed" backend.log > nul 2>&1
+if %errorlevel% equ 0 (
+    echo Backend server is ready!
+    goto :server_ready
+)
+timeout /t 1 /nobreak > nul
+goto :check_backend
+
+:server_ready
 
 REM Wait a moment for frontend to initialize
 timeout /t 2 /nobreak > nul

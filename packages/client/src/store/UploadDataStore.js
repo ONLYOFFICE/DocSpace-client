@@ -1918,13 +1918,14 @@ class UploadDataStore {
     )
       .then((res) => {
         let data = null;
+        const operation = res[0];
 
-        if (res && res.length > 0) {
-          if (res[res.length - 1]?.error) {
-            return Promise.reject(res[res.length - 1]);
+        if (operation) {
+          if (operation?.error) {
+            return Promise.reject(operation);
           }
 
-          data = res[res.length - 1] ? res[res.length - 1] : null;
+          data = operation ?? null;
         }
 
         if (!data) {
@@ -1978,12 +1979,13 @@ class UploadDataStore {
       .then((res) => {
         let data = null;
 
-        if (res && res.length > 0) {
-          if (res[res.length - 1]?.error) {
-            return Promise.reject(res[res.length - 1]);
+        const operation = res[0];
+        if (operation) {
+          if (operation?.error) {
+            return Promise.reject(operation);
           }
 
-          data = res[res.length - 1] ? res[res.length - 1] : null;
+          data = operation ?? null;
         }
 
         if (!data) {
@@ -2111,6 +2113,7 @@ class UploadDataStore {
       const item = await getOperationProgress(
         data.id,
         getUnexpectedErrorText(),
+        true,
       );
       operationItem = item;
 

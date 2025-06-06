@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,30 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { AutomaticBackupProps } from "@docspace/shared/pages/backup/auto-backup/AutoBackup.types";
-import type { TTranslation } from "@docspace/shared/types";
+import type { AmazonSettingsProps } from "../../../../../../components/amazon-settings/AmazonSettings.types";
+import type { ScheduleComponentProps } from "../../ScheduleComponent";
 
-export type ExternalAutoBackupWrapperProps = Pick<
-  AutomaticBackupProps,
-  "buttonSize" | "isNeedFilePath"
->;
-
-export interface InjectedAutoBackupWrapperProps
-  extends Omit<
-    AutomaticBackupProps,
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isEmptyContentBeforeLoader"
-    | "isInitialLoading"
-    | "isInitialError"
-  > {
-  setStorageRegions: (regions: unknown) => void;
-  getProgress: (t: TTranslation) => Promise<void>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
-  resetDownloadingProgress: VoidFunction;
-  setterSelectedEnableSchedule: (enable: boolean) => void;
+export interface AmazonStorageProps
+  extends Omit<AmazonSettingsProps, "t">,
+    ScheduleComponentProps {
+  setCompletedFormFields: (
+    values: Record<string, string>,
+    module?: string,
+  ) => void;
 }
-
-export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &
-  ExternalAutoBackupWrapperProps;

@@ -24,30 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { AutomaticBackupProps } from "@docspace/shared/pages/backup/auto-backup/AutoBackup.types";
-import type { TTranslation } from "@docspace/shared/types";
+import type {
+  Nullable,
+  SelectedStorageType,
+  StorageRegionsType,
+} from "../../../../../types";
+import type { TOption } from "../../../../../components/combobox";
 
-export type ExternalAutoBackupWrapperProps = Pick<
-  AutomaticBackupProps,
-  "buttonSize" | "isNeedFilePath"
->;
+export interface ThirdPartyStorageModuleProps {
+  thirdPartyStorage: SelectedStorageType[];
+  setStorageId: (id: Nullable<string>) => void;
+  defaultStorageId: Nullable<string>;
 
-export interface InjectedAutoBackupWrapperProps
-  extends Omit<
-    AutomaticBackupProps,
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isEmptyContentBeforeLoader"
-    | "isInitialLoading"
-    | "isInitialError"
-  > {
-  setStorageRegions: (regions: unknown) => void;
-  getProgress: (t: TTranslation) => Promise<void>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
-  resetDownloadingProgress: VoidFunction;
-  setterSelectedEnableSchedule: (enable: boolean) => void;
+  isLoadingData: boolean;
+
+  setCompletedFormFields: (
+    values: Record<string, string>,
+    module?: string,
+  ) => void;
+  isNeedFilePath: boolean;
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  formSettings: Record<string, string>;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setRequiredFormSettings: (arr: string[]) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+
+  selectedPeriodLabel: string;
+  selectedWeekdayLabel: string;
+  selectedHour: string;
+  selectedMonthDay: string;
+  selectedMaxCopiesNumber: string;
+  selectedPeriodNumber: string;
+  setMaxCopies: (option: TOption) => void;
+  setPeriod: (option: TOption) => void;
+  setWeekday: (option: TOption) => void;
+  setMonthNumber: (option: TOption) => void;
+  setTime: (option: TOption) => void;
+
+  periodsObject: TOption[];
+  weekdaysLabelArray: TOption[];
+  monthNumbersArray: TOption[];
+  hoursArray: TOption[];
+  maxNumberCopiesArray: TOption[];
+
+  storageRegions: StorageRegionsType[];
+  defaultRegion: string;
+  deleteValueFormSetting: (key: string) => void;
+  selectedStorageId: string | null;
 }
-
-export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &
-  ExternalAutoBackupWrapperProps;

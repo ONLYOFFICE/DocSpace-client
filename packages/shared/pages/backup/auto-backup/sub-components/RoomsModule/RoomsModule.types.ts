@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,30 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { AutomaticBackupProps } from "@docspace/shared/pages/backup/auto-backup/AutoBackup.types";
-import type { TTranslation } from "@docspace/shared/types";
+import { type DeviceType } from "../../../../../enums";
+import { type FilesSelectorSettings } from "../../../../../components/files-selector-input";
+import type {
+  BackupToPublicRoomOptionType,
+  Nullable,
+} from "../../../../../types";
+import type { TBreadCrumb } from "../../../../../components/selector/Selector.types";
+import { type ScheduleComponentProps } from "../ScheduleComponent";
 
-export type ExternalAutoBackupWrapperProps = Pick<
-  AutomaticBackupProps,
-  "buttonSize" | "isNeedFilePath"
->;
+export interface RoomsModuleProps extends ScheduleComponentProps {
+  isError: boolean;
+  isLoadingData: boolean;
+  settingsFileSelector: FilesSelectorSettings;
+  currentDeviceType?: DeviceType;
+  setIsError: (error: boolean) => void;
 
-export interface InjectedAutoBackupWrapperProps
-  extends Omit<
-    AutomaticBackupProps,
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isEmptyContentBeforeLoader"
-    | "isInitialLoading"
-    | "isInitialError"
-  > {
-  setStorageRegions: (regions: unknown) => void;
-  getProgress: (t: TTranslation) => Promise<void>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
-  resetDownloadingProgress: VoidFunction;
-  setterSelectedEnableSchedule: (enable: boolean) => void;
+  // filesSelectorInput
+  basePath: string;
+  newPath: string;
+  toDefault: VoidFunction;
+  isErrorPath: boolean;
+  setBasePath: (folders: TBreadCrumb[]) => void;
+  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+  // end filesSelectorInput
+
+  // backup store
+  defaultStorageType: Nullable<string>;
+  setSelectedFolder: (id: string) => void;
+  defaultFolderId: Nullable<string>;
+  // end back store
 }
 
-export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &
-  ExternalAutoBackupWrapperProps;
+export interface BackupToPublicRoomDialogState {
+  visible: boolean;
+  data: Nullable<BackupToPublicRoomOptionType>;
+}

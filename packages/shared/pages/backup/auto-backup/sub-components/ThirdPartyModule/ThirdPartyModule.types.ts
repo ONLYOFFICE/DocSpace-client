@@ -24,30 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { AutomaticBackupProps } from "@docspace/shared/pages/backup/auto-backup/AutoBackup.types";
-import type { TTranslation } from "@docspace/shared/types";
+import type { DirectThirdPartyConnectionProps } from "../../../../../components/direct-third-party-connection";
+import type { Nullable } from "../../../../../types";
+import type { ScheduleComponentProps } from "../ScheduleComponent";
 
-export type ExternalAutoBackupWrapperProps = Pick<
-  AutomaticBackupProps,
-  "buttonSize" | "isNeedFilePath"
->;
-
-export interface InjectedAutoBackupWrapperProps
+export interface ThirdPartyModuleProps
   extends Omit<
-    AutomaticBackupProps,
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isEmptyContentBeforeLoader"
-    | "isInitialLoading"
-    | "isInitialError"
-  > {
-  setStorageRegions: (regions: unknown) => void;
-  getProgress: (t: TTranslation) => Promise<void>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
-  resetDownloadingProgress: VoidFunction;
-  setterSelectedEnableSchedule: (enable: boolean) => void;
+      DirectThirdPartyConnectionProps,
+      | "onSelectFolder"
+      | "isDisabled"
+      | "id"
+      | "withoutInitPath"
+      | "descriptionText"
+      | "filterParam"
+      | "isMobileScale"
+      | "isSelect"
+      | "isSelectFolder"
+      | "onSelectFile"
+    >,
+    ScheduleComponentProps {
+  isLoadingData: boolean;
+  setSelectedFolder: (id: string) => void;
+  defaultStorageType: Nullable<string>;
+  defaultFolderId: Nullable<string>;
 }
-
-export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &
-  ExternalAutoBackupWrapperProps;

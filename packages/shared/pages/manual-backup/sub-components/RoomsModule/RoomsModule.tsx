@@ -26,6 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import classNames from "classnames";
 
 import { Button, ButtonSize } from "../../../../components/button";
 import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
@@ -38,6 +39,7 @@ import { toastr } from "../../../../components/toast";
 import type { TBreadCrumb } from "../../../../components/selector/Selector.types";
 import type { FilesSelectorSettings } from "../../../../components/files-selector-input/FilesSelectorInput.types";
 import type { BackupToPublicRoomOptionType, Nullable } from "../../../../types";
+import styles from "../../ManualBackup.module.scss";
 
 const Documents = "Documents";
 
@@ -151,7 +153,12 @@ const RoomsModule = ({
 
   return (
     <div data-testid="rooms-module">
-      <div className="manual-backup_folder-input">
+      <div
+        className={classNames(
+          styles.manualBackupFolderInput,
+          "manual-backup_folder-input",
+        )}
+      >
         <FilesSelectorInput
           withCreate
           isRoomBackup
@@ -182,7 +189,12 @@ const RoomsModule = ({
           setIsVisible={setBackupToPublicRoomVisible}
         />
       ) : null}
-      <div className="manual-backup_buttons">
+      <div
+        className={classNames(
+          styles.manualBackupButtons,
+          "manual-backup_buttons",
+        )}
+      >
         <Button
           primary
           id="create-copy"

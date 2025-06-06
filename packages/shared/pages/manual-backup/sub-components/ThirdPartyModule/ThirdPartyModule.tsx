@@ -26,6 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 import React, { useRef, useEffect, useState } from "react";
+import classNames from "classnames";
 
 import { BackupStorageType, ProvidersType } from "../../../../enums";
 import { isNullOrUndefined } from "../../../../utils/typeGuards";
@@ -42,6 +43,7 @@ import type {
 import type { TBreadCrumb } from "../../../../components/selector/Selector.types";
 import type { FilesSelectorSettings } from "../../../../components/files-selector-input";
 import type { TThirdParties } from "../../../../api/files/types";
+import styles from "../../ManualBackup.module.scss";
 
 interface ThirdPartyModuleProps {
   onMakeCopy: (
@@ -176,7 +178,10 @@ const ThirdPartyModule = ({
   return (
     <div
       data-testid="third-party-module"
-      className="manual-backup_third-party-module"
+      className={classNames(
+        styles.manualBackupThirdPartyModule,
+        "manual-backup_third-party-module",
+      )}
     >
       <DirectThirdPartyConnection
         checkCreating={checkCreating}

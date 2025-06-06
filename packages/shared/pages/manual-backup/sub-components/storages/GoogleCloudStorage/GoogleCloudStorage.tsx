@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { Button, ButtonSize } from "../../../../../components/button";
 import {
@@ -40,6 +41,8 @@ import {
 } from "../../../../../components/google-cloud-settings";
 
 import type { SelectedStorageType, TTranslation } from "../../../../../types";
+
+import styles from "../../../ManualBackup.module.scss";
 
 interface GoogleCloudStorageProps {
   t: TTranslation;
@@ -112,7 +115,12 @@ const GoogleCloudStorage = ({
         setIsThirdStorageChanged={setIsThirdStorageChanged}
       />
 
-      <div className="manual-backup_buttons">
+      <div
+        className={classNames(
+          styles.manualBackupButtons,
+          "manual-backup_buttons",
+        )}
+      >
         <Button
           id="create-copy"
           label={t("Common:CreateCopy")}

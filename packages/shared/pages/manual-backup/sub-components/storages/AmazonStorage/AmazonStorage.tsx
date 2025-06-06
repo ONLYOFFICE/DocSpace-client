@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { Button, ButtonSize } from "../../../../../components/button";
 import {
@@ -43,6 +44,7 @@ import type {
   StorageRegionsType,
   TTranslation,
 } from "../../../../../types";
+import styles from "../../../ManualBackup.module.scss";
 
 interface AmazonStorageProps {
   t: TTranslation;
@@ -125,7 +127,12 @@ const AmazonStorage = ({
         setIsThirdStorageChanged={setIsThirdStorageChanged}
         setRequiredFormSettings={setRequiredFormSettings}
       />
-      <div className="manual-backup_buttons">
+      <div
+        className={classNames(
+          styles.manualBackupButtons,
+          "manual-backup_buttons",
+        )}
+      >
         <Button
           id="create-copy"
           label={t("Common:CreateCopy")}

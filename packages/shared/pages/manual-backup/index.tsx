@@ -28,6 +28,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -57,7 +58,6 @@ import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";
 import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModule";
 
-import { StyledModules, StyledManualBackup } from "./ManualBackup.styled";
 import type { ManualBackupProps, TStorageType } from "./ManualBackup.types";
 import {
   DOCUMENTS,
@@ -65,6 +65,7 @@ import {
   THIRD_PARTY_RESOURCE,
   THIRD_PARTY_STORAGE,
 } from "./ManualBackup.constants";
+import styles from "./ManualBackup.module.scss";
 
 const ManualBackup = ({
   isInitialLoading,
@@ -258,7 +259,7 @@ const ManualBackup = ({
     fontSize: "13px",
     fontWeight: 600,
     value: "value",
-    className: "backup_radio-button",
+    className: classNames(styles.backupRadioButton, "backup_radio-button"),
     onClick: onClickShowStorage,
   };
 
@@ -275,15 +276,25 @@ const ManualBackup = ({
   if (isInitialLoading) return <DataBackupLoader />;
 
   return (
-    <StyledManualBackup>
+    <div className={styles.manualBackup}>
       <StatusMessage message={errorInformation} />
-      <div className="backup_modules-header_wrapper">
-        <Text className="backup_modules-description">
+      <div
+        className={classNames(
+          styles.backupModulesHeaderWrapper,
+          "backup_modules-header_wrapper",
+        )}
+      >
+        <Text
+          className={classNames(
+            styles.backupModulesDescription,
+            "backup_modules-description",
+          )}
+        >
           {t("Common:ManualBackupDescription")}
         </Text>
         {!isManagement ? (
           <Link
-            className="link-learn-more"
+            className={classNames(styles.linkLearnMore, "link-learn-more")}
             href={dataBackupUrl}
             target={LinkTarget.blank}
             fontSize="13px"
@@ -295,7 +306,7 @@ const ManualBackup = ({
         ) : null}
       </div>
 
-      <StyledModules>
+      <div className={styles.modules}>
         <RadioButton
           key={0}
           id="temporary-storage"
@@ -305,11 +316,18 @@ const ManualBackup = ({
           isDisabled={!isMaxProgress || pageIsDisabled}
           {...commonRadioButtonProps}
         />
-        <Text className="backup-description">
+        <Text
+          className={classNames(styles.backupDescription, "backup-description")}
+        >
           {t("Common:TemporaryStorageDescription")}
         </Text>
         {isCheckedTemporaryStorage ? (
-          <div className="manual-backup_buttons">
+          <div
+            className={classNames(
+              styles.manualBackupButtons,
+              "manual-backup_buttons",
+            )}
+          >
             <Button
               id="create-button"
               label={t("Common:Create")}
@@ -338,8 +356,12 @@ const ManualBackup = ({
             ) : null}
           </div>
         ) : null}
-      </StyledModules>
-      <StyledModules isDisabled={isNotPaidPeriod}>
+      </div>
+      <div
+        className={classNames(styles.modules, {
+          [styles.isDisabled]: isNotPaidPeriod,
+        })}
+      >
         <RadioButton
           id="backup-room"
           label={t("Common:RoomsModule")}
@@ -349,7 +371,12 @@ const ManualBackup = ({
           isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
           {...commonRadioButtonProps}
         />
-        <Text className="backup-description module-documents">
+        <Text
+          className={classNames(
+            styles.backupDescription,
+            "backup-description module-documents",
+          )}
+        >
           <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
             {{ roomName }}
           </Trans>
@@ -364,17 +391,17 @@ const ManualBackup = ({
             setNewPath={setNewPath}
             settingsFileSelector={settingsFileSelector}
             {...commonModulesProps}
-            // isCheckedDocuments={isCheckedDocuments}
-            // isMaxProgress,
-            // onMakeCopy,
-            // buttonSize,
             currentDeviceType={currentDeviceType}
             maxWidth={maxWidth}
           />
         ) : null}
-      </StyledModules>
+      </div>
 
-      <StyledModules isDisabled={isNotPaidPeriod}>
+      <div
+        className={classNames(styles.modules, {
+          [styles.isDisabled]: isNotPaidPeriod,
+        })}
+      >
         <RadioButton
           id="third-party-resource"
           label={t("Common:ThirdPartyResource")}
@@ -384,7 +411,9 @@ const ManualBackup = ({
           isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
           {...commonRadioButtonProps}
         />
-        <Text className="backup-description">
+        <Text
+          className={classNames(styles.backupDescription, "backup-description")}
+        >
           {t("Common:ThirdPartyResourceDescription")}
         </Text>
         {isCheckedThirdParty ? (
@@ -416,8 +445,12 @@ const ManualBackup = ({
             {...commonModulesProps}
           />
         ) : null}
-      </StyledModules>
-      <StyledModules isDisabled={isNotPaidPeriod}>
+      </div>
+      <div
+        className={classNames(styles.modules, {
+          [styles.isDisabled]: isNotPaidPeriod,
+        })}
+      >
         <RadioButton
           id="third-party-storage"
           label={t("Common:ThirdPartyStorage")}
@@ -427,7 +460,9 @@ const ManualBackup = ({
           isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
           {...commonRadioButtonProps}
         />
-        <Text className="backup-description">
+        <Text
+          className={classNames(styles.backupDescription, "backup-description")}
+        >
           {t("Common:ThirdPartyStorageDescription")}
         </Text>
         {isCheckedThirdPartyStorage ? (
@@ -446,10 +481,11 @@ const ManualBackup = ({
             setRequiredFormSettings={setRequiredFormSettings}
             setIsThirdStorageChanged={setIsThirdStorageChanged}
             isMaxProgress={isMaxProgress}
-            onMakeCopy={onMakeCopy} // {...commonModulesProps}
+            onMakeCopy={onMakeCopy}
+            buttonSize={buttonSize}
           />
         ) : null}
-      </StyledModules>
+      </div>
 
       {isBackupProgressVisible ? (
         <OperationsProgressButton
@@ -474,61 +510,8 @@ const ManualBackup = ({
           clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
-    </StyledManualBackup>
+    </div>
   );
 };
 
 export default ManualBackup;
-
-// export default inject(
-//   ({ settingsStore, backup, treeFoldersStore, currentTariffStatusStore }) => {
-//     const {
-//       clearProgressInterval,
-//       clearLocalStorage,
-//       // commonThirdPartyList,
-//       downloadingProgress,
-//       getProgress,
-//       getIntervalProgress,
-//       setDownloadingProgress,
-//       setTemporaryLink,
-//       // setCommonThirdPartyList,
-//       temporaryLink,
-//       getStorageParams,
-//       setThirdPartyStorage,
-//       setStorageRegions,
-//       saveToLocalStorage,
-//       setConnectedThirdPartyAccount,
-//     } = backup;
-
-//     const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
-//     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
-//     const { isNotPaidPeriod } = currentTariffStatusStore;
-
-//     const pageIsDisabled = isManagement() && portals?.length === 1;
-
-//     return {
-//       isNotPaidPeriod,
-//       setThirdPartyStorage,
-//       clearProgressInterval,
-//       clearLocalStorage,
-//       // commonThirdPartyList,
-//       downloadingProgress,
-//       getProgress,
-//       getIntervalProgress,
-//       setDownloadingProgress,
-//       setTemporaryLink,
-//       setStorageRegions,
-//       // setCommonThirdPartyList,
-//       temporaryLink,
-//       getStorageParams,
-//       rootFoldersTitles,
-//       fetchTreeFolders,
-//       saveToLocalStorage,
-//       setConnectedThirdPartyAccount,
-
-//       dataBackupUrl,
-//       currentColorScheme,
-//       pageIsDisabled,
-//     };
-//   },
-// )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

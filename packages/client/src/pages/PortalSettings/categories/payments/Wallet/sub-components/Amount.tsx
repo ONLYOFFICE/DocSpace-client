@@ -116,6 +116,7 @@ const Amount = (props: AmountProps) => {
           type={InputType.text}
           placeholder={t("EnterAmount")}
           isDisabled={isDisabled || !walletCustomerEmail}
+          maxLength={6}
         />
       </div>
       {!walletCustomerEmail ? (

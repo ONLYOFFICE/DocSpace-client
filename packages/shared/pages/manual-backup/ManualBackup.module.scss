@@ -44,6 +44,7 @@ $text-length: 700px;
       margin-block: 5px 0;
       margin-inline: 4px 0;
     }
+
     .linkLearnMore {
       display: inline-block;
       margin-bottom: 20px;
@@ -64,7 +65,8 @@ $text-length: 700px;
     margin-bottom: 16px;
     width: 100%;
     max-width: $input-length;
-    .combo-button-label {
+
+    :global(.combo-button-label) {
       width: 100%;
       max-width: $input-length;
     }
@@ -113,6 +115,7 @@ $text-length: 700px;
       max-width: 124px;
       margin-inline-end: 8px;
     }
+
     button:last-child {
       max-width: 153px;
     }
@@ -121,6 +124,7 @@ $text-length: 700px;
       button:first-child {
         max-width: 129px;
       }
+
       button:last-child {
         max-width: 160px;
       }
@@ -130,6 +134,7 @@ $text-length: 700px;
       button:first-child {
         max-width: 155px;
       }
+
       button:last-child {
         max-width: 155px;
       }
@@ -138,6 +143,7 @@ $text-length: 700px;
 
   .manualBackupStoragesModule {
     margin-inline-start: 24px;
+
     .manualBackupButtons {
       margin-inline-start: 0;
     }

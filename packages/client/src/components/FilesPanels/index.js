@@ -176,6 +176,9 @@ const Panels = (props) => {
     assignRolesDialogVisible,
     socialAuthWelcomeDialogVisible,
     editRoomGroupsDialogVisible,
+    getCovers,
+    currentColorScheme,
+    covers,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -433,7 +436,12 @@ const Panels = (props) => {
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
     editRoomGroupsDialogVisible && (
-      <EditRoomGroupsDialog key="joining-space-dialog" />
+      <EditRoomGroupsDialog
+        key="edit-room-groups-dialog"
+        currentColorScheme={currentColorScheme}
+        getCovers={getCovers}
+        covers={covers}
+      />
     ),
   ];
 };
@@ -521,6 +529,8 @@ export default inject(
       assignRolesDialogData,
       socialAuthWelcomeDialogVisible,
       editRoomGroupsDialogVisible,
+      getCovers,
+      covers,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -533,7 +543,9 @@ export default inject(
       isVisible: versionHistoryPanelVisible,
       deleteVersionDialogVisible,
     } = versionHistoryStore;
-    const { hotkeyPanelVisible } = settingsStore;
+
+    const { hotkeyPanelVisible, currentColorScheme } = settingsStore;
+
     const { confirmDialogIsLoading } = createEditRoomStore;
     const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
       currentQuotaStore;
@@ -640,6 +652,9 @@ export default inject(
       assignRolesDialogVisible: assignRolesDialogData.visible,
       socialAuthWelcomeDialogVisible,
       editRoomGroupsDialogVisible,
+      currentColorScheme,
+      getCovers,
+      covers,
     };
   },
 )(observer(Panels));

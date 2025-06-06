@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { classNames } from "@docspace/shared/utils";
@@ -31,11 +32,79 @@ import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
-
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { Aside } from "@docspace/shared/components/aside";
 import styles from "./EditRoomGroupsDialog.module.scss";
+import RoomSelector from "@docspace/shared/selectors/Room";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import GroupIconDialog from "./sub-components/GroupIconDialog";
 
-const EditRoomGroupsDialog = ({}) => {
+const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
   const { t } = useTranslation(["Common"]);
+
+  const [isOpenRoomList, setIsOpenRoomList] = useState(false);
+  const [isOpenGroupIcon, setIsOpenGroupIcon] = useState(false);
+
+  const onClickCreateNewGroup = () => {
+    setIsOpenRoomList(true);
+  };
+
+  const onCloseRoomList = () => {
+    setIsOpenRoomList(false);
+  };
+
+  const onSubmitRoom = () => {
+    console.log("onSubmitRoom");
+    setIsOpenGroupIcon(true);
+  };
+
+  if (isOpenGroupIcon) {
+    return (
+      <GroupIconDialog
+        currentColorScheme={currentColorScheme}
+        getCovers={getCovers}
+        covers={covers}
+      />
+    );
+  }
+
+  if (isOpenRoomList) {
+    return (
+      <div>
+        <Backdrop
+          visible={isOpenRoomList}
+          isAside
+          withBackground
+          zIndex={309}
+          // onClick={onClose}
+        />
+        <Aside
+          visible={isOpenRoomList}
+          withoutBodyScroll
+          zIndex={310}
+          onClose={onCloseRoomList}
+          withoutHeader
+        >
+          <RoomSelector
+            className="template-body_selector"
+            onSubmit={onSubmitRoom}
+            withHeader
+            headerProps={{
+              onBackClick: onCloseRoomList,
+              onCloseClick: onCloseRoomList,
+              headerLabel: "Room list",
+              withoutBorder: false,
+              withoutBackButton: false,
+            }}
+            withSearch
+            isMultiSelect
+            withCancelButton
+          />
+        </Aside>
+      </div>
+    );
+  }
+
   return (
     <ModalDialog
       displayType="aside"
@@ -72,7 +141,11 @@ const EditRoomGroupsDialog = ({}) => {
             disabling grouping, you can re-enable it in the profile settings.
           </Text>
         </div>
-        <div className={styles.separator}></div>
+        <SelectorAddButton
+          onClick={onClickCreateNewGroup}
+          className={styles.selectorAddButton}
+          label={"Create a new group"}
+        />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -92,7 +165,7 @@ const EditRoomGroupsDialog = ({}) => {
           tabIndex={5}
           label={t("Common:CancelButton")}
           size="normal"
-          // scale
+          scale
           // isDisabled={isLoading}
           // onClick={onCloseAndDisconnectThirdparty}
         />

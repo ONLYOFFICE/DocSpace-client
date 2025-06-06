@@ -25,8 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 .editRoomGroupsDialog {
+  :global {
+    .modal-body {
+      margin-inline-end: 0px !important;
+      padding: 0px !important;
+    }
+  }
+
+  :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
+    padding-inline-end: 0px !important;
+  }
+
   .settingRoomGroups {
-    margin: 20px 16px;
+    padding: 20px 16px;
+    border-bottom: 1px solid #eceef1;
   }
 
   .roomGroups {
@@ -48,8 +60,7 @@
     color: #a3a9ae;
   }
 
-  .separator {
-    height: 1;
-    color: #eceef1;
+  .selectorAddButton {
+    padding: 16px 20px;
   }
 }

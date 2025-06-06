@@ -131,29 +131,19 @@ const StyledIconContainer = styled.div<{
 
 export const SelectIcon = ({
   t,
-  withoutIcon,
-  setWithoutIcon,
   setIcon,
   covers,
   $currentColorScheme,
   coverId,
 }: SelectIconProps) => {
-  const toggleWithoutIcon = () => setWithoutIcon(!withoutIcon);
-
   const onSelectIcon = (icon: ILogo | string | null) => {
     setIcon(icon);
   };
-
-  console.log("coverId", coverId);
-  console.log("covers", covers);
 
   return (
     <div>
       <div className="icon-container">
         <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
-        <StyledWithoutIcon onClick={toggleWithoutIcon} isSelected={withoutIcon}>
-          {t("WithoutIcon")}
-        </StyledWithoutIcon>
       </div>
 
       <div className="cover-icon-container">
@@ -164,13 +154,9 @@ export const SelectIcon = ({
               }
               return (
                 <StyledIconContainer
-                  isSelected={coverId === icon.id ? !withoutIcon : null}
+                  isSelected={coverId === icon.id}
                   $currentColorScheme={$currentColorScheme}
-                  onClick={
-                    coverId === icon.id
-                      ? toggleWithoutIcon
-                      : () => onSelectIcon(icon)
-                  }
+                  onClick={() => onSelectIcon(icon)}
                   key={icon.id}
                   dangerouslySetInnerHTML={createMarkup()}
                 />

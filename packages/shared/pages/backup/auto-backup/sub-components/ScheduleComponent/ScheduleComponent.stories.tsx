@@ -40,7 +40,7 @@ import {
 import ScheduleComponent from "./ScheduleComponent";
 
 const meta = {
-  title: "Pages/AutoBackup/ScheduleComponent",
+  title: "Pages/Backup/AutoBackup/ScheduleComponent",
   component: ScheduleComponent,
   parameters: {
     docs: {

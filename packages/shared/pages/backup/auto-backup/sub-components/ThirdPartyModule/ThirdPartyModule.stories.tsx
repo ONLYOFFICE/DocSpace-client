@@ -41,7 +41,7 @@ import {
   weekdaysLabelArray,
   mockThirdPartyAccounts,
   mockThirdPartyProviders,
-} from "../../mockData";
+} from "../../../mockData";
 import { ThirdPartyModule } from ".";
 
 export default {

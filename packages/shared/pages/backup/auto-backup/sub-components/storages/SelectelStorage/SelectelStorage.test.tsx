@@ -30,7 +30,7 @@ import "@testing-library/jest-dom";
 
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 
-import { selectedStorages } from "../../../mockData";
+import { selectedStorages } from "../../../../mockData";
 import SelectelStorage from "./SelectelStorage";
 
 jest.mock("@docspace/shared/components/selectel-settings", () => ({

@@ -35,7 +35,7 @@ import {
   monthNumbersArray,
   hoursArray,
   maxNumberCopiesArray,
-} from "../../mockData";
+} from "../../../mockData";
 
 import ScheduleComponent from "./ScheduleComponent";
 

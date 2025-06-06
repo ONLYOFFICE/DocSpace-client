@@ -30,7 +30,7 @@ import "@testing-library/jest-dom";
 
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 
-import { selectedStorages } from "../../../mockData";
+import { selectedStorages } from "../../../../mockData";
 import RackspaceStorage from "./RackspaceStorage";
 
 jest.mock("@docspace/shared/components/rackspace-settings", () => ({

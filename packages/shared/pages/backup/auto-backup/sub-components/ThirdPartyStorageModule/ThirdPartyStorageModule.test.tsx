@@ -31,7 +31,7 @@ import "@testing-library/jest-dom";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
 import { renderWithTheme } from "@docspace/shared/utils/render-with-theme";
 
-import { selectedStorages } from "../../mockData";
+import { selectedStorages } from "../../../mockData";
 import ThirdPartyStorageModule from "./ThirdPartyStorageModule";
 
 jest.mock("@docspace/shared/components/combobox", () => ({

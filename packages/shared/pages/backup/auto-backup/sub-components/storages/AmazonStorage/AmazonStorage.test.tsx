@@ -30,7 +30,7 @@ import "@testing-library/jest-dom";
 
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 
-import { storageRegions, selectedStorages } from "../../../mockData";
+import { storageRegions, selectedStorages } from "../../../../mockData";
 
 import AmazonStorage from "./AmazonStorage";
 

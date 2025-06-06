@@ -37,7 +37,7 @@ import {
   hoursArray,
   maxNumberCopiesArray,
   selectedStorages,
-} from "../../mockData";
+} from "../../../mockData";
 import ThirdPartyStorageModule from "./ThirdPartyStorageModule";
 
 const meta = {

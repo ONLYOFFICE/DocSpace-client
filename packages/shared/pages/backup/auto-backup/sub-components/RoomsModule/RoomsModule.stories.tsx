@@ -36,7 +36,7 @@ import {
   monthNumbersArray,
   hoursArray,
   maxNumberCopiesArray,
-} from "../../mockData";
+} from "../../../mockData";
 import styles from "../../../Backup.module.scss";
 import { RoomsModule } from ".";
 

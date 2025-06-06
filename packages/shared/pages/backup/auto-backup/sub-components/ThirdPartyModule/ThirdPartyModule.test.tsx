@@ -40,7 +40,7 @@ import {
   maxNumberCopiesArray,
   mockThirdPartyAccounts,
   mockThirdPartyProviders,
-} from "../../mockData";
+} from "../../../mockData";
 
 jest.mock("@docspace/shared/components/direct-third-party-connection", () => ({
   DirectThirdPartyConnection: jest.fn(() => (

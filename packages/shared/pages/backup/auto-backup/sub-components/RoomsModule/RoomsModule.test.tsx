@@ -37,7 +37,7 @@ import {
   monthNumbersArray,
   hoursArray,
   maxNumberCopiesArray,
-} from "../../mockData";
+} from "../../../mockData";
 
 jest.mock("@docspace/shared/components/files-selector-input", () => ({
   FilesSelectorInput: jest.fn(() => (

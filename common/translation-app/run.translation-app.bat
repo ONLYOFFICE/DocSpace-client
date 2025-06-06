@@ -1,4 +1,5 @@
 @echo OFF
+setlocal enabledelayedexpansion
 REM Translation App Runner for Windows
 REM This script runs both the backend and frontend of the translation app
 
@@ -68,24 +69,56 @@ echo Backend will be available at http://localhost:3001
 echo Frontend will be available at http://localhost:3000
 echo.
 
-REM Wait for backend server to be ready by checking for any of the possible server ready messages in the log
+REM Wait for backend server to be ready by checking for initialization indicators or using a timeout
 echo Waiting for backend server to initialize...
+
+REM Set a maximum wait time (30 seconds)
+set MAX_WAIT=30
+set WAIT_COUNT=0
+
 :check_backend
+REM Check for various server ready messages
 findstr /c:"Server listening on http://0.0.0.0:3001" backend.log > nul 2>&1
 if %errorlevel% equ 0 (
     echo Backend server is ready!
     goto :server_ready
 )
+
 findstr /c:"Server listening at http://0.0.0.0:3001" backend.log > nul 2>&1
 if %errorlevel% equ 0 (
     echo Backend server is ready!
     goto :server_ready
 )
-findstr /c:"Translation metadata initialization completed" backend.log > nul 2>&1
+
+REM Check for nodemon starting
+findstr /c:"[nodemon] starting `node src/index.js`" backend.log > nul 2>&1
 if %errorlevel% equ 0 (
-    echo Backend server is ready!
+    echo Backend server is starting...
+    set /a WAIT_COUNT+=1
+    if !WAIT_COUNT! geq 15 (
+        echo Backend initialization detected, continuing...
+        goto :server_ready
+    )
+)
+
+REM Check for metadata initialization
+findstr /c:"Initializing translation metadata" backend.log > nul 2>&1
+if %errorlevel% equ 0 (
+    echo Metadata initialization detected...
+    set /a WAIT_COUNT+=1
+    if !WAIT_COUNT! geq 20 (
+        echo Backend should be ready by now, continuing...
+        goto :server_ready
+    )
+)
+
+REM Implement a timeout mechanism
+set /a WAIT_COUNT+=1
+if %WAIT_COUNT% geq %MAX_WAIT% (
+    echo Maximum wait time reached, assuming server is ready...
     goto :server_ready
 )
+
 timeout /t 1 /nobreak > nul
 goto :check_backend
 

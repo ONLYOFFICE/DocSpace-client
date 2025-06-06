@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,20 +27,17 @@
 import { useTranslation } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
-import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
-import BackupToPublicRoom from "@docspace/shared/dialogs/backup-to-public-room-dialog";
-import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "../../../../components/button";
+import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
+import { BackupStorageType, DeviceType } from "../../../../enums";
+import { FilesSelectorInput } from "../../../../components/files-selector-input";
+import { isNullOrUndefined } from "../../../../utils/typeGuards";
+import BackupToPublicRoom from "../../../../dialogs/backup-to-public-room-dialog";
+import { toastr } from "../../../../components/toast";
 
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import type {
-  BackupToPublicRoomOptionType,
-  Nullable,
-} from "@docspace/shared/types";
+import type { TBreadCrumb } from "../../../../components/selector/Selector.types";
+import type { FilesSelectorSettings } from "../../../../components/files-selector-input/FilesSelectorInput.types";
+import type { BackupToPublicRoomOptionType, Nullable } from "../../../../types";
 
 const Documents = "Documents";
 
@@ -153,7 +150,7 @@ const RoomsModule = ({
   );
 
   return (
-    <>
+    <div data-testid="rooms-module">
       <div className="manual-backup_folder-input">
         <FilesSelectorInput
           withCreate
@@ -195,10 +192,8 @@ const RoomsModule = ({
           isDisabled={isModuleDisabled || !selectedFolder}
         />
       </div>
-    </>
+    </div>
   );
 };
 
 export default RoomsModule;
-
-// export default withTranslation(["Settings", "Common"])(RoomsModule);

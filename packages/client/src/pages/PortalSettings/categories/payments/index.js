@@ -31,6 +31,7 @@ import { useNavigate, useLocation } from "react-router";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
@@ -58,7 +59,9 @@ const PaymentsPage = ({ currentDeviceType, standalone }) => {
   ];
 
   const onSelect = (e) => {
-    const url = `/portal-settings/payments/${e.id}`;
+    const url = isManagement()
+      ? `/management/payments/${e.id}`
+      : `/portal-settings/payments/${e.id}`;
 
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
@@ -70,7 +73,7 @@ const PaymentsPage = ({ currentDeviceType, standalone }) => {
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
 
     setIsLoaded(true);
   }, [location.pathname]);

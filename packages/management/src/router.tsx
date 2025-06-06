@@ -111,6 +111,14 @@ const routes = [
         element: <Payments />,
       },
       {
+        path: "/management/payments/portal-payments",
+        element: <Payments />,
+      },
+      {
+        path: "/management/payments/wallet",
+        element: <Payments />,
+      },
+      {
         path: "/management/bonus",
         element: <Bonus />,
       },

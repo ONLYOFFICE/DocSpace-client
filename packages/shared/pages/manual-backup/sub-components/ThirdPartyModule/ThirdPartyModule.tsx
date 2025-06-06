@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,21 +27,21 @@
 import { useTranslation } from "react-i18next";
 import React, { useRef, useEffect, useState } from "react";
 
-import { BackupStorageType, ProvidersType } from "@docspace/shared/enums";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
-import { Button, type ButtonSize } from "@docspace/shared/components/button";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import { DirectThirdPartyConnection } from "@docspace/shared/components/direct-third-party-connection";
+import { BackupStorageType, ProvidersType } from "../../../../enums";
+import { isNullOrUndefined } from "../../../../utils/typeGuards";
+import { Button, type ButtonSize } from "../../../../components/button";
+import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
+import { DirectThirdPartyConnection } from "../../../../components/direct-third-party-connection";
 
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
   ThirdPartyAccountType,
   TTranslation,
-} from "@docspace/shared/types";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
-import type { TThirdParties } from "@docspace/shared/api/files/types";
+} from "../../../../types";
+import type { TBreadCrumb } from "../../../../components/selector/Selector.types";
+import type { FilesSelectorSettings } from "../../../../components/files-selector-input";
+import type { TThirdParties } from "../../../../api/files/types";
 
 interface ThirdPartyModuleProps {
   onMakeCopy: (
@@ -123,7 +123,6 @@ const ThirdPartyModule = ({
   const folderRef = useRef("");
 
   const [isError, setIsError] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
   const [isStartCopy, setIsStartCopy] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState<string | number>(() => {
     folderRef.current = getFromLocalStorage("LocalCopyFolder") ?? "";
@@ -175,7 +174,10 @@ const ThirdPartyModule = ({
   const checkCreating = selectedThirdPartyAccount?.key === ProvidersType.WebDav;
 
   return (
-    <div className="manual-backup_third-party-module">
+    <div
+      data-testid="third-party-module"
+      className="manual-backup_third-party-module"
+    >
       <DirectThirdPartyConnection
         checkCreating={checkCreating}
         openConnectWindow={openConnectWindow}
@@ -225,12 +227,3 @@ const ThirdPartyModule = ({
 };
 
 export default ThirdPartyModule;
-
-// export default inject(({ backup }) => {
-//   const { connectedThirdPartyAccount, isTheSameThirdPartyAccount } = backup;
-
-//   return {
-//     connectedThirdPartyAccount,
-//     isTheSameThirdPartyAccount,
-//   };
-// })(withTranslation(["Settings", "Common"])(observer(ThirdPartyModule)));

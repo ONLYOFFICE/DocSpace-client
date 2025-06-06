@@ -53,7 +53,7 @@ import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage"
 
 import { useDidMount } from "../../hooks/useDidMount";
 
-import ThirdPartyModule from "./sub-components/ThirdPartyModule";
+import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 

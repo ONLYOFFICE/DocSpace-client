@@ -26,7 +26,10 @@
 
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import type { TOption } from "@docspace/shared/components/combobox";
-import type { SelectedStorageType } from "@docspace/shared/types";
+import type {
+  SelectedStorageType,
+  ConnectedThirdPartyAccountType,
+} from "@docspace/shared/types";
 
 export const periodsObject: TOption[] = [
   { key: AutoBackupPeriod.EveryDayType, label: "Every day" },
@@ -154,6 +157,13 @@ export const mockThirdPartyAccounts = [
     disabled: false,
   },
 ];
+
+export const mockConnectedAccount: ConnectedThirdPartyAccountType = {
+  id: "dropbox-123",
+  title: "Dropbox",
+  providerId: "dropbox",
+  providerKey: "dropbox",
+};
 
 export const mockThirdPartyProviders = [
   {

@@ -42,7 +42,7 @@ import {
   mockThirdPartyProviders,
 } from "../../mockData";
 
-jest.mock("../../../../../components/direct-third-party-connection", () => ({
+jest.mock("@docspace/shared/components/direct-third-party-connection", () => ({
   DirectThirdPartyConnection: jest.fn(() => (
     <div data-testid="direct-third-party-connection-mock" />
   )),

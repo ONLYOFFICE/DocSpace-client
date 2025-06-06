@@ -33,7 +33,7 @@ import type { TOption } from "../../../../../components/combobox";
 
 import ScheduleComponent from "./ScheduleComponent";
 
-jest.mock("../../../../../components/help-button", () => ({
+jest.mock("@docspace/shared/components/help-button", () => ({
   HelpButton: ({ className }: { className: string }) => (
     <div className={className} data-testid="help-button">
       Help Button
@@ -41,7 +41,7 @@ jest.mock("../../../../../components/help-button", () => ({
   ),
 }));
 
-jest.mock("../../../../../components/combobox", () => ({
+jest.mock("@docspace/shared/components/combobox", () => ({
   ComboBox: ({
     options,
     selectedOption,

@@ -48,7 +48,7 @@ import type {
 import { StyledManualBackup, StyledComboBoxItem } from "../ManualBackup.styled";
 
 import { GoogleCloudStorage } from "./storages/GoogleCloudStorage";
-import RackspaceStorage from "./storages/RackspaceStorage";
+import { RackspaceStorage } from "./storages/RackspaceStorage";
 import SelectelStorage from "./storages/SelectelStorage";
 import { AmazonStorage } from "./storages/AmazonStorage";
 

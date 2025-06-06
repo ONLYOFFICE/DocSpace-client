@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,19 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "../../../../../components/button";
 import {
   ThirdPartyStorages,
   BackupStorageLocalKey,
-} from "@docspace/shared/enums";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+} from "../../../../../enums";
+import { useDidMount } from "../../../../../hooks/useDidMount";
+import { getFromLocalStorage } from "../../../../../utils/getFromLocalStorage";
 
 import {
   RackspaceSettings,
   formNames,
-} from "@docspace/shared/components/rackspace-settings";
-import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
+} from "../../../../../components/rackspace-settings";
+import type { SelectedStorageType, TTranslation } from "../../../../../types";
 
 interface RackspaceStorageProps {
   t: TTranslation;
@@ -97,7 +97,7 @@ const RackspaceStorage = ({
   });
 
   return (
-    <>
+    <div data-testid="rackspace-storage">
       <RackspaceSettings
         t={t}
         isLoading={isLoading}
@@ -120,17 +120,8 @@ const RackspaceStorage = ({
           size={buttonSize}
         />
       </div>
-    </>
+    </div>
   );
 };
 
 export default RackspaceStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields, isValidForm } = backup;
-
-//   return {
-//     isValidForm,
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation(["Settings", "Common"])(RackspaceStorage)));

@@ -257,7 +257,7 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder || isArchiveFolderRoot || isDocumentsFolder;
 
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =
+      const { getPrimaryFileLink, setShareChanged, infoPanelRoomSelection } =
         infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
@@ -279,7 +279,8 @@ export default function withQuickButtons(WrappedComponent) {
         getPrimaryFileLink,
         setShareChanged,
         isIndexEditingMode,
-        roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
+        roomLifetime:
+          infoPanelRoomSelection?.lifetime ?? selectedFolderStore?.lifetime,
         getManageLinkOptions,
         isTemplatesFolder,
         onCreateRoomFromTemplate,

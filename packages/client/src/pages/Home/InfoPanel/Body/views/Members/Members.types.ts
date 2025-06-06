@@ -70,7 +70,6 @@ export type MembersProps = {
   infoPanelSelection?: InfoPanelStore["infoPanelRoomSelection"];
   isMembersPanelUpdating?: InfoPanelStore["isMembersPanelUpdating"];
   setIsMembersPanelUpdating?: InfoPanelStore["setIsMembersPanelUpdating"];
-  withPublicRoomBlock?: InfoPanelStore["withPublicRoomBlock"];
   templateAvailable?: InfoPanelStore["templateAvailableToEveryone"];
 
   selfId?: string;

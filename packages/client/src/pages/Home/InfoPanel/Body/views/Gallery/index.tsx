@@ -37,11 +37,7 @@ import { getCorrectDate } from "@docspace/shared/utils";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import OformsStore from "SRC_DIR/store/OformsStore";
 
-import {
-  StyledLink,
-  StyledProperties,
-  StyledSubtitle,
-} from "../../styles/common";
+import commonStyles from "../../helpers/Common.module.scss";
 
 import NoItem from "../../sub-components/NoItem";
 
@@ -92,7 +88,7 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
         </div>
       )}
 
-      <StyledLink>
+      <div className={commonStyles.link}>
         <Link
           className="link"
           href={`mailto:marketing@onlyoffice.com?subject=Suggesting changes for ${formTitle}&body=Suggesting changes for ${formTitle}.`}
@@ -103,13 +99,13 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
         >
           {t("FormGallery:SuggestChanges")}
         </Link>
-      </StyledLink>
+      </div>
 
-      <StyledSubtitle>
+      <div className={commonStyles.subtitle}>
         <Text fontWeight="600" fontSize="14px">
           {t("Description")}
         </Text>
-      </StyledSubtitle>
+      </div>
 
       <Text
         className={styles.galleryFormDescription}
@@ -121,13 +117,13 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
           gallerySelected?.attributes?.description_card}
       </Text>
 
-      <StyledSubtitle>
+      <div className={commonStyles.subtitle}>
         <Text fontWeight="600" fontSize="14px">
           {t("Properties")}
         </Text>
-      </StyledSubtitle>
+      </div>
 
-      <StyledProperties>
+      <div className={commonStyles.properties}>
         <div className="property">
           <Text className="property-title">{t("InfoPanel:DateModified")}</Text>
           <Text className="property-content">
@@ -137,7 +133,7 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
             )}
           </Text>
         </div>
-      </StyledProperties>
+      </div>
     </>
   );
 };

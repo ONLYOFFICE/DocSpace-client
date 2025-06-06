@@ -120,8 +120,6 @@ class FilesStore {
 
   clientLoadingStore;
 
-  infoPanelStore;
-
   accessRightsStore;
 
   publicRoomStore;
@@ -253,7 +251,6 @@ class FilesStore {
     clientLoadingStore,
     pluginStore,
     publicRoomStore,
-    infoPanelStore,
     userStore,
     currentTariffStatusStore,
     settingsStore,
@@ -273,7 +270,6 @@ class FilesStore {
     this.clientLoadingStore = clientLoadingStore;
     this.pluginStore = pluginStore;
     this.publicRoomStore = publicRoomStore;
-    this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;

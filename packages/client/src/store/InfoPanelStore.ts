@@ -25,19 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import clone from "lodash/clone";
 import { getUserById } from "@docspace/shared/api/people";
-import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import {
-  EmployeeActivationStatus,
-  EmployeeType,
   FileType,
-  // Events,
-  // FileType,
   FolderType,
-  RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
@@ -51,31 +44,22 @@ import {
   getPrimaryLink,
   editExternalLink,
   addExternalLink,
-  // checkIsPDFForm,
   getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 
-import api from "@docspace/shared/api";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
-import { RoomMember, TLogo, TRoom } from "@docspace/shared/api/rooms/types";
-import { Nullable, TCreatedBy, TTranslation } from "@docspace/shared/types";
+import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
+import { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { ShareProps } from "@docspace/shared/components/share/Share.types";
-import { TError } from "@docspace/shared/utils/axiosClient";
-import FilesFilter from "@docspace/shared/api/files/filter";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { getUserStatus } from "../helpers/people-helpers";
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
 import FilesSettingsStore from "./FilesSettingsStore";
 import FilesStore from "./FilesStore";
 import PeopleStore from "./contacts/PeopleStore";
-import PublicRoomStore from "./PublicRoomStore";
 import TreeFoldersStore from "./TreeFoldersStore";
-import {
-  TInfoPanelMembers,
-  TSelection,
-} from "../pages/Home/InfoPanel/InfoPanel.types";
 
 export const enum InfoPanelView {
   infoMembers = "info_members",
@@ -83,6 +67,10 @@ export const enum InfoPanelView {
   infoDetails = "info_details",
   infoShare = "info_share",
 }
+
+type TSelection =
+  | Nullable<TRoom | TFolder | TFile>
+  | Array<TRoom | TFolder | TFile>;
 
 class InfoPanelStore {
   userStore = {} as UserStore;
@@ -106,8 +94,6 @@ class InfoPanelStore {
   selectedFolderStore = {} as SelectedFolderStore;
 
   treeFoldersStore = {} as TreeFoldersStore;
-
-  publicRoomStore = {} as PublicRoomStore;
 
   infoPanelRoom: Nullable<TRoom> = null;
 
@@ -255,7 +241,7 @@ class InfoPanelStore {
     return this.filesSettingsStore.getIcon(size, fileExst || ".file");
   };
 
-  get infoPanelSelection(): Nullable<TSelection> {
+  get infoPanelSelection(): TSelection {
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection.length === 1
         ? this.filesStore.selection[0]
@@ -316,10 +302,6 @@ class InfoPanelStore {
   setIsScrollLocked = (isScrollLocked: boolean) => {
     this.isScrollLocked = isScrollLocked;
   };
-
-  get withPublicRoomBlock() {
-    return this.infoPanelSelection?.security?.EditAccess;
-  }
 
   // Routing helpers //
 

@@ -63,7 +63,7 @@ import {
 } from "@docspace/shared/components/heading";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import { StyledNoItemContainer } from "../../styles/NoItem";
+import styles from "./NoItem.module.scss";
 
 const ExpiredItem = () => {
   const { isBase } = useTheme();
@@ -72,7 +72,7 @@ const ExpiredItem = () => {
   const imageSrc = isBase ? CanceledLightIconURL : CanceledDarkIconURL;
 
   return (
-    <StyledNoItemContainer>
+    <div className={styles.noItemContainer}>
       <div className="no-thumbnail-img-wrapper">
         <img src={imageSrc} alt="Locked icon" />
       </div>
@@ -88,7 +88,7 @@ const ExpiredItem = () => {
           {t("Common:RoomLinkExpired")}
         </Text>
       </div>
-    </StyledNoItemContainer>
+    </div>
   );
 };
 

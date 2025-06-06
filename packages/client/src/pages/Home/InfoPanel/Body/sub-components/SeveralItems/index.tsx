@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
@@ -53,13 +53,13 @@ const SeveralItems = ({
   selectedItems,
 }: SeveralItemsProps) => {
   const { t } = useTranslation(["InfoPanel"]);
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const emptyScreenAlt = theme.isBase
+  const emptyScreenAlt = isBase
     ? EmptyScreenAltSvgUrl
     : EmptyScreenAltSvgDarkUrl;
 
-  const emptyScreenPerson = theme.isBase
+  const emptyScreenPerson = isBase
     ? EmptyScreenPersonSvgUrl
     : EmptyScreenPersonSvgDarkUrl;
 

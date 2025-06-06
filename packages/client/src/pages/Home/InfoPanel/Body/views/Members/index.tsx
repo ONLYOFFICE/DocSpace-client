@@ -28,6 +28,7 @@ import React, { use, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import className from "classnames";
 
 import {
   FolderType,
@@ -53,19 +54,18 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 
+import ItemTitle from "../../sub-components/ItemTitle";
+import { useLoader } from "../../helpers/useLoader";
+
 import { useMembers } from "./hooks/useMembers";
 
 import User from "./sub-components/User";
 import MembersList from "./sub-components/MembersList";
 import EmptyContainer from "./sub-components/EmptyContainer";
 import LinkRow from "./sub-components/LinkRow";
-import {
-  LinksBlock,
-  StyledLinkRow,
-  StyledPublicRoomBarContainer,
-} from "./sub-components/Styled";
+
 import { MembersProps } from "./Members.types";
-import ItemTitle from "../../sub-components/ItemTitle";
+import styles from "./Members.module.scss";
 
 const TooltipContent = ({ content }: { content: React.ReactNode }) => (
   <Text fontSize="12px">{content}</Text>
@@ -88,7 +88,6 @@ const Members = ({
   getPrimaryLink,
   setExternalLink,
   setExternalLinks,
-  withPublicRoomBlock,
 
   isMembersPanelUpdating,
   setIsMembersPanelUpdating,
@@ -119,7 +118,8 @@ const Members = ({
     members,
     total,
     searchValue,
-    showLoading,
+    isLoading,
+    isFirstLoading,
 
     fetchMoreMembers,
     changeUserRole,
@@ -130,6 +130,11 @@ const Members = ({
     setIsMembersPanelUpdating: setIsMembersPanelUpdating!,
     setExternalLinks: setExternalLinks!,
     scrollToTop,
+  });
+
+  const { showLoading } = useLoader({
+    isLoading,
+    isFirstLoading,
   });
 
   useEffect(() => {
@@ -181,13 +186,13 @@ const Members = ({
 
     if (
       isPublicRoomType &&
-      withPublicRoomBlock &&
+      infoPanelSelection?.security.EditAccess &&
       !searchValue &&
       !isTemplate
     ) {
       if (!isArchiveFolder || primaryLink) {
         publicRoomItems.push(
-          <LinksBlock key={GENERAL_LINK_HEADER_KEY}>
+          <div className={styles.linksBlock} key={GENERAL_LINK_HEADER_KEY}>
             <Text fontSize="14px" fontWeight={600} lineHeight="16px">
               {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
             </Text>
@@ -205,8 +210,9 @@ const Members = ({
                   onClick={onAddNewLink}
                   size={16}
                   isDisabled={
-                    additionalLinks &&
-                    additionalLinks.length >= LINKS_LIMIT_COUNT
+                    additionalLinks
+                      ? additionalLinks.length >= LINKS_LIMIT_COUNT
+                      : false
                   }
                   title={t("Files:AddNewLink")}
                 />
@@ -222,7 +228,7 @@ const Members = ({
                 ) : null}
               </div>
             ) : null}
-          </LinksBlock>,
+          </div>,
         );
       }
 
@@ -257,11 +263,11 @@ const Members = ({
         });
       } else if (!isArchiveFolder && !primaryLink && !searchValue) {
         publicRoomItems.push(
-          <StyledLinkRow
+          <div
             key="create-additional-link"
-            className="additional-link"
+            className={className("additional-link", styles.linkRow)}
             onClick={onAddNewLink}
-            isShareLink
+            data-share
           >
             <div className="create-link-icon">
               <IconButton size={12} iconName={PlusIcon} isDisabled />
@@ -276,7 +282,7 @@ const Members = ({
             >
               {t("Files:CreateNewLink")}
             </Link>
-          </StyledLinkRow>,
+          </div>,
         );
       }
     }
@@ -321,7 +327,7 @@ const Members = ({
 
     const showPublicRoomBar =
       ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
-      withPublicRoomBlock &&
+      infoPanelSelection.security.EditAccess &&
       !searchValue &&
       !isTemplate;
 
@@ -367,7 +373,7 @@ const Members = ({
     return (
       <>
         {showPublicRoomBar ? (
-          <StyledPublicRoomBarContainer>
+          <div className={styles.publicRoomBarContainer}>
             <PublicRoomBar
               headerText={
                 isFormRoom
@@ -380,7 +386,7 @@ const Members = ({
                   : t("CreateEditRoomDialog:PublicRoomBarDescription")
               }
             />
-          </StyledPublicRoomBarContainer>
+          </div>
         ) : null}
 
         <MembersList
@@ -455,7 +461,6 @@ export default inject(
     const {
       infoPanelRoomSelection,
 
-      withPublicRoomBlock,
       templateAvailableToEveryone,
 
       isMembersPanelUpdating,
@@ -510,7 +515,6 @@ export default inject(
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       setExternalLinks,
-      withPublicRoomBlock,
 
       isMembersPanelUpdating,
       setIsMembersPanelUpdating,

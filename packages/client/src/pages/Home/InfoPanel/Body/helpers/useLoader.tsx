@@ -24,19 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import React from "react";
 
-import { TRoom } from "@docspace/shared/api/rooms/types";
+export const useLoader = ({
+  isLoading,
+  isFirstLoading,
+}: {
+  isLoading: boolean;
+  isFirstLoading: boolean;
+}) => {
+  const [showLoading, setShowLoading] = React.useState(false);
 
-export type HistoryFilter = {
-  page: number;
-  pageCount: number;
-  total: number;
-  startIndex: number;
+  const loaderRefTimeout = React.useRef<NodeJS.Timeout>(null);
+  const startShowLoader = React.useRef<Date | null>(new Date());
+
+  React.useEffect(() => {
+    if (isFirstLoading || isLoading) {
+      loaderRefTimeout.current = setTimeout(() => {
+        setShowLoading(true);
+        startShowLoader.current = new Date();
+        loaderRefTimeout.current = null;
+      }, 500);
+    } else {
+      const currentTimestamp = new Date().getTime();
+      const startTime =
+        startShowLoader.current?.getTime() || currentTimestamp - 500;
+
+      if (loaderRefTimeout.current) {
+        clearTimeout(loaderRefTimeout.current);
+        loaderRefTimeout.current = null;
+      }
+
+      if (currentTimestamp - startTime >= 500) {
+        setShowLoading(false);
+        startShowLoader.current = null;
+      } else {
+        setTimeout(
+          () => {
+            setShowLoading(false);
+            startShowLoader.current = null;
+          },
+          500 - (currentTimestamp - startTime),
+        );
+      }
+    }
+  }, [isFirstLoading, isLoading]);
+
+  return { showLoading };
 };
-
-export type TSelection =
-  | TRoom
-  | TFile
-  | TFolder
-  | Array<TRoom | TFile | TFolder>;

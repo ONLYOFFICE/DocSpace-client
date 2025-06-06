@@ -31,7 +31,7 @@ import { useTheme } from "@docspace/shared/hooks/useTheme";
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
 import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
 
-import { StyledNoItemContainer } from "../../styles/NoItem";
+import styles from "./NoItem.module.scss";
 
 const NoFileOrFolderItem = () => {
   const { t } = useTranslation(["InfoPanel"]);
@@ -41,13 +41,13 @@ const NoFileOrFolderItem = () => {
   const imgSrc = isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl;
 
   return (
-    <StyledNoItemContainer>
+    <div className={styles.noItemContainer}>
       <div className="no-thumbnail-img-wrapper">
         <img className="no-thumbnail-img" src={imgSrc} alt="No item" />
       </div>
 
       <div className="no-item-text">{t("FilesEmptyScreenText")}</div>
-    </StyledNoItemContainer>
+    </div>
   );
 };
 

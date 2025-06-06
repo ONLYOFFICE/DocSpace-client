@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { Text } from "@docspace/shared/components/text";
@@ -32,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
 import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
 
-import { StyledNoItemContainer } from "../../styles/NoItem";
+import styles from "./NoItem.module.scss";
 
 const NoHistory = () => {
   const { isBase } = useTheme();
@@ -41,14 +42,19 @@ const NoHistory = () => {
   const imageSrc = isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl;
 
   return (
-    <StyledNoItemContainer className="info-panel_gallery-empty-screen">
+    <div
+      className={classNames(
+        styles.noItemContainer,
+        "info-panel_gallery-empty-screen",
+      )}
+    >
       <div className="no-thumbnail-img-wrapper">
         <img src={imageSrc} alt="No History" />
       </div>
       <Text className="no-history-text" textAlign="center">
         {t("HistoryEmptyScreenText")}
       </Text>
-    </StyledNoItemContainer>
+    </div>
   );
 };
 

@@ -50,7 +50,7 @@ import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
 import DetailsHelper from "../../helpers/DetailsHelper";
 
-import { StyledProperties, StyledSubtitle } from "../../styles/common";
+import commonStyles from "../../helpers/Common.module.scss";
 
 import styles from "./Details.module.scss";
 
@@ -259,12 +259,12 @@ const Details = ({
           />
         </div>
       )}
-      <StyledSubtitle>
+      <div className={commonStyles.subtitle}>
         <Text fontWeight="600" fontSize="14px">
           {t("Properties")}
         </Text>
-      </StyledSubtitle>
-      <StyledProperties>
+      </div>
+      <div className={commonStyles.properties}>
         {itemProperties.map((property) => {
           return (
             <div
@@ -277,7 +277,7 @@ const Details = ({
             </div>
           );
         })}
-      </StyledProperties>
+      </div>
     </>
   );
 };
@@ -294,7 +294,8 @@ export default inject(
     avatarEditorDialogStore,
     selectedFolderStore,
   }: TStore) => {
-    const { getInfoPanelItemIcon, openUser, infoPanelRoom } = infoPanelStore;
+    const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
+      infoPanelStore;
 
     const { createThumbnail } = filesStore;
     const { culture } = settingsStore;
@@ -318,7 +319,8 @@ export default inject(
       isDefaultRoomsQuotaSet,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,
-      roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
+      roomLifetime:
+        infoPanelRoomSelection?.lifetime ?? selectedFolderStore?.lifetime,
       onCreateRoomFromTemplate,
     };
   },

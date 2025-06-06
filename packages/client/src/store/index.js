@@ -158,7 +158,6 @@ const filesStore = new FilesStore(
   clientLoadingStore,
   pluginStore,
   publicRoomStore,
-  infoPanelStore,
   userStore,
   currentTariffStatusStore,
   settingsStore,
@@ -301,10 +300,8 @@ const tableStore = new TableStore(
 infoPanelStore.selectedFolderStore = selectedFolderStore;
 infoPanelStore.filesStore = filesStore;
 infoPanelStore.filesSettingsStore = filesSettingsStore;
-
 infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
-infoPanelStore.publicRoomStore = publicRoomStore;
 
 const avatarEditorDialogStore = new AvatarEditorDialogStore(
   filesStore,

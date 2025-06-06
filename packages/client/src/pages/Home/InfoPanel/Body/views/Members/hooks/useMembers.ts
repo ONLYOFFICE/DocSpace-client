@@ -76,10 +76,6 @@ export const useMembers = ({
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFirstLoading, setIsFirstLoading] = React.useState(false);
-  const [showLoading, setShowLoading] = React.useState(false);
-
-  const loaderRefTimeout = React.useRef<NodeJS.Timeout>(null);
-  const startShowLoader = React.useRef<Date | null>(new Date());
 
   const addMembersTitle = React.useCallback(
     (
@@ -284,38 +280,6 @@ export const useMembers = ({
   };
 
   React.useEffect(() => {
-    if (isFirstLoading || isLoading) {
-      loaderRefTimeout.current = setTimeout(() => {
-        setShowLoading(true);
-        startShowLoader.current = new Date();
-        loaderRefTimeout.current = null;
-      }, 500);
-    } else {
-      const currentTimestamp = new Date().getTime();
-      const startTime =
-        startShowLoader.current?.getTime() || currentTimestamp - 500;
-
-      if (loaderRefTimeout.current) {
-        clearTimeout(loaderRefTimeout.current);
-        loaderRefTimeout.current = null;
-      }
-
-      if (currentTimestamp - startTime >= 500) {
-        setShowLoading(false);
-        startShowLoader.current = null;
-      } else {
-        setTimeout(
-          () => {
-            setShowLoading(false);
-            startShowLoader.current = null;
-          },
-          500 - (currentTimestamp - startTime),
-        );
-      }
-    }
-  }, [isFirstLoading, isLoading]);
-
-  React.useEffect(() => {
     fetchMembers();
     scrollToTop();
   }, [fetchMembers, scrollToTop]);
@@ -440,7 +404,6 @@ export const useMembers = ({
     setSearchValue,
     isLoading,
     isFirstLoading,
-    showLoading,
     members,
     fetchMembers,
     fetchMoreMembers,

@@ -32,7 +32,7 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_
 
 import { Text } from "@docspace/shared/components/text";
 
-import { StyledNoItemContainer } from "../../styles/NoItem";
+import styles from "./NoItem.module.scss";
 
 type NoContactsItemProps = {
   isGroups?: boolean;
@@ -49,7 +49,7 @@ const NoContactsItem = ({ isGroups, isGuests }: NoContactsItemProps) => {
     : EmptyScreenPersonSvgDarkUrl;
 
   return (
-    <StyledNoItemContainer>
+    <div className={styles.noItemContainer}>
       <div className="no-thumbnail-img-wrapper">
         <img src={imgSrc} alt="empty screen" />
       </div>
@@ -60,7 +60,7 @@ const NoContactsItem = ({ isGroups, isGuests }: NoContactsItemProps) => {
             ? t("InfoPanel:GroupsEmptyScreenText")
             : t("InfoPanel:MembersEmptyScreenText")}
       </Text>
-    </StyledNoItemContainer>
+    </div>
   );
 };
 

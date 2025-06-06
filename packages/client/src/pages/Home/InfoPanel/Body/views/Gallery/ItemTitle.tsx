@@ -45,7 +45,7 @@ import OformsStore from "SRC_DIR/store/OformsStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import ContextOptionsStore from "SRC_DIR/store/ContextOptionsStore";
 
-import { StyledTitle } from "../../styles/common";
+import commonStyles from "../../helpers/Common.module.scss";
 
 import styles from "./Gallery.module.scss";
 
@@ -83,7 +83,7 @@ const ItemTitle = ({
   };
 
   return (
-    <StyledTitle ref={itemTitleRef} withBottomBorder={false}>
+    <div className={commonStyles.title} ref={itemTitleRef}>
       <ReactSVG className="icon" src={getIcon?.(32, ".pdf") ?? ""} />
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
@@ -109,7 +109,7 @@ const ItemTitle = ({
           />
         </div>
       ) : null}
-    </StyledTitle>
+    </div>
   );
 };
 

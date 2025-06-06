@@ -26,6 +26,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
@@ -37,10 +38,7 @@ import LockIcon from "PUBLIC_DIR/images/icons/12/lock.react.svg";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
-import {
-  LockedSharedRoomButton,
-  StyledNoItemContainer,
-} from "../../styles/NoItem";
+import styles from "./NoItem.module.scss";
 
 type LockedItemProps = {
   item: TRoom;
@@ -61,18 +59,23 @@ const LockedItem = ({ item, setPasswordEntryDialog }: LockedItemProps) => {
   };
 
   return (
-    <StyledNoItemContainer className="info-panel_gallery-empty-screen">
+    <div
+      className={classNames(
+        styles.noItemContainer,
+        "info-panel_gallery-empty-screen",
+      )}
+    >
       <div className="no-thumbnail-img-wrapper">
         <img src={imageSrc} alt="Locked icon" />
       </div>
       <Text className="no-item-text" textAlign="center">
         {t("Common:NeedPassword")}
       </Text>
-      <LockedSharedRoomButton onClick={openModal}>
+      <div className={styles.lockedSharedRoomButton} onClick={openModal}>
         <LockIcon />
         <span>{t("Common:EnterPassword")}</span>
-      </LockedSharedRoomButton>
-    </StyledNoItemContainer>
+      </div>
+    </div>
   );
 };
 

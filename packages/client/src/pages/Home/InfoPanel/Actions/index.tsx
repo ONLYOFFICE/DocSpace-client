@@ -32,9 +32,10 @@ import { Nullable } from "@docspace/shared/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { InfoPanelEvents } from "SRC_DIR/helpers/info-panel/enums";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 
 type TInfoPanelActionsProps = {
+  setView?: InfoPanelStore["setView"];
   setIsVisible?: InfoPanelStore["setIsVisible"];
   setInfoPanelRoom?: InfoPanelStore["setInfoPanelRoom"];
   openMembersTab?: InfoPanelStore["openMembersTab"];
@@ -46,6 +47,7 @@ const InfoPanelActions = ({
   setInfoPanelRoom,
   openMembersTab,
   openShareTab,
+  setView,
 }: TInfoPanelActionsProps) => {
   // Show info panel
   useEffect(() => {
@@ -148,7 +150,9 @@ const InfoPanelActions = ({
 
   // Set file view
   useEffect(() => {
-    const setFileViewHandler = () => {};
+    const setFileViewHandler = (e: CustomEvent<{ view: InfoPanelView }>) => {
+      setView!(e.detail.view);
+    };
 
     window.addEventListener(
       InfoPanelEvents.setFileView,
@@ -165,7 +169,9 @@ const InfoPanelActions = ({
 
   // Set rooms view
   useEffect(() => {
-    const setRoomsViewHandler = () => {};
+    const setRoomsViewHandler = (e: CustomEvent<{ view: InfoPanelView }>) => {
+      setView!(e.detail.view);
+    };
     window.addEventListener(
       InfoPanelEvents.setRoomsView,
       setRoomsViewHandler as EventListener,
@@ -184,8 +190,19 @@ const InfoPanelActions = ({
 
 export default inject(
   ({ infoPanelStore }: { infoPanelStore: InfoPanelStore }) => {
-    const { setIsVisible, setInfoPanelRoom, openMembersTab, openShareTab } =
-      infoPanelStore;
-    return { setIsVisible, setInfoPanelRoom, openMembersTab, openShareTab };
+    const {
+      setIsVisible,
+      setInfoPanelRoom,
+      openMembersTab,
+      openShareTab,
+      setView,
+    } = infoPanelStore;
+    return {
+      setIsVisible,
+      setInfoPanelRoom,
+      openMembersTab,
+      openShareTab,
+      setView,
+    };
   },
 )(observer(InfoPanelActions));

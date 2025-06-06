@@ -1486,12 +1486,12 @@ class ContextOptionsStore {
       ? this.infoPanelStore.roomsView
       : this.infoPanelStore.fileView;
 
-    const { infoPanelSelection } = this.filesStore;
+    const { infoPanelRoomSelection } = this.infoPanelStore;
 
     return {
       canShowLink: canShowManageLink(
         item,
-        infoPanelSelection,
+        infoPanelRoomSelection,
         getInfoPanelOpen(),
         infoView,
         isRoom,

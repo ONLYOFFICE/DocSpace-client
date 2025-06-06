@@ -33,11 +33,13 @@ import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 
 import { RoomMember, TFeedAction } from "@docspace/shared/api/rooms/types";
+
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+
 import {
   StyledHistoryBlockExpandLink,
   StyledHistoryLink,
 } from "../../../styles/history";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 const EXPANSION_THRESHOLD = 8;
 

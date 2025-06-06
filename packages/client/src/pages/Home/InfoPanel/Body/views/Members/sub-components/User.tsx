@@ -30,6 +30,7 @@ import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
+import classNames from "classnames";
 
 import {
   Avatar,
@@ -56,10 +57,9 @@ import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
-import { StyledUserTypeHeader, StyledUser } from "../../../styles/members";
-
 import MembersHelper from "../Members.utils";
 import { UserProps } from "../Members.types";
+import styles from "../Members.module.scss";
 
 const User = ({
   room,
@@ -68,8 +68,6 @@ const User = ({
   currentUser,
 
   hasNextPage,
-
-  searchValue,
 
   changeUserRole,
 
@@ -107,7 +105,6 @@ const User = ({
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
-  const withoutTitles = !!searchValue;
   const hideUserRole = room.rootFolderType === FolderType.RoomTemplates;
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
@@ -190,8 +187,14 @@ const User = ({
   }. ${t("Common:HasFullAccess")}`;
 
   return "isTitle" in user && user.isTitle ? (
-    <StyledUserTypeHeader isExpect={isExpect}>
-      <Text className="title">{"displayName" in user && user.displayName}</Text>
+    <div
+      className={classNames(styles.userTypeHeader, {
+        [styles.isExpect]: isExpect,
+      })}
+    >
+      <Text className="title">
+        {"displayName" in user ? user.displayName : ""}
+      </Text>
 
       {showInviteIcon ? (
         <IconButton
@@ -203,9 +206,12 @@ const User = ({
           size={16}
         />
       ) : null}
-    </StyledUserTypeHeader>
+    </div>
   ) : (
-    <StyledUser isExpect={isExpect} key={user.id}>
+    <div
+      className={classNames(styles.user, { [styles.isExpect]: isExpect })}
+      key={user.id}
+    >
       <Avatar
         role={type as unknown as AvatarRole}
         className="avatar"
@@ -217,7 +223,7 @@ const User = ({
         withTooltip={withTooltip}
         tooltipContent={tooltipContent}
         hideRoleIcon={!withTooltip}
-        isGroup={"isGroup" in user && user.isGroup}
+        isGroup={"isGroup" in user ? user.isGroup : false}
       />
       <div className="user_body-wrapper">
         <div className="name-wrapper">
@@ -284,7 +290,7 @@ const User = ({
           )}
         </div>
       ) : null}
-    </StyledUser>
+    </div>
   );
 };
 

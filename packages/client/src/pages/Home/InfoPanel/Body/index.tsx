@@ -35,8 +35,6 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
-import { StyledInfoPanelBody } from "./styles/common";
-
 import ItemTitle from "./sub-components/ItemTitle";
 import SeveralItems from "./sub-components/SeveralItems";
 import NoItem from "./sub-components/NoItem";
@@ -47,6 +45,8 @@ import Gallery from "./views/Gallery";
 import Members from "./views/Members";
 import Details from "./views/Details";
 import History from "./views/History";
+
+import commonStyles from "./helpers/Common.module.scss";
 
 type BodyProps = {
   selection: InfoPanelStore["infoPanelSelection"];
@@ -157,7 +157,7 @@ const InfoPanelBodyContent = ({
   };
 
   return (
-    <StyledInfoPanelBody>
+    <div className={commonStyles.infoPanelBody}>
       {!isNoItem &&
       !Array.isArray(selection) &&
       currentView !== "info_members" ? (
@@ -189,7 +189,7 @@ const InfoPanelBodyContent = ({
           maxImageSize={maxImageUploadSize}
         />
       ) : null}
-    </StyledInfoPanelBody>
+    </div>
   );
 };
 

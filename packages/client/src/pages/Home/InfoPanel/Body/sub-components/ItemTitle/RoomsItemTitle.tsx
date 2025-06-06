@@ -26,6 +26,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
@@ -45,7 +46,7 @@ import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
-import { StyledTitle } from "../../styles/common";
+import commonStyles from "../../helpers/Common.module.scss";
 
 import Search, { SearchProps } from "../Search";
 
@@ -172,7 +173,11 @@ const RoomsItemHeader = ({
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
   return (
-    <StyledTitle withBottomBorder={false}>
+    <div
+      className={classNames(commonStyles.title, {
+        [commonStyles.withBottomBorder]: false,
+      })}
+    >
       {isRoomMembersPanel && showSearchBlock && searchProps ? (
         <Search
           {...searchProps}
@@ -257,7 +262,7 @@ const RoomsItemHeader = ({
 
         <RoomsContextBtn selection={selection} />
       </div>
-    </StyledTitle>
+    </div>
   );
 };
 

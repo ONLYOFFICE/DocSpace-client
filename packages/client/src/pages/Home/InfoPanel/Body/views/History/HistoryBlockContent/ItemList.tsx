@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 
 import {
+  FeedAction,
   TFeedAction,
   TFeedData,
   TRoom,
@@ -39,7 +40,6 @@ import { getFileExtension } from "@docspace/shared/utils/common";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { FeedAction } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.svg?url";

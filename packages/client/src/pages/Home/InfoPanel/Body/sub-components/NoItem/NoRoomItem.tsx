@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
@@ -32,7 +33,7 @@ import { useTheme } from "@docspace/shared/hooks/useTheme";
 import InfoPanelRoomEmptyScreenSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
 import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
 
-import { StyledNoItemContainer } from "../../styles/NoItem";
+import styles from "./NoItem.module.scss";
 
 const NoRoomItem = () => {
   const { isBase } = useTheme();
@@ -43,14 +44,19 @@ const NoRoomItem = () => {
     : InfoPanelRoomEmptyScreenDarkSvgUrl;
 
   return (
-    <StyledNoItemContainer className="info-panel_gallery-empty-screen">
+    <div
+      className={classNames(
+        styles.noItemContainer,
+        "info-panel_gallery-empty-screen",
+      )}
+    >
       <div className="no-thumbnail-img-wrapper">
         <img src={imageSrc} alt="No Room" />
       </div>
       <Text className="no-item-text" textAlign="center">
         {t("RoomsEmptyScreenTent")}
       </Text>
-    </StyledNoItemContainer>
+    </div>
   );
 };
 

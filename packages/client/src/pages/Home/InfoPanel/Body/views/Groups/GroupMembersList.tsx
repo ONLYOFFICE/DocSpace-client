@@ -33,7 +33,6 @@ import {
   List,
   WindowScroller,
 } from "react-virtualized";
-import styled from "styled-components";
 
 import { TUser } from "@docspace/shared/api/people/types";
 import { RowLoader } from "@docspace/shared/skeletons/selector";

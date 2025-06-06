@@ -38,3 +38,79 @@
     text-align: center;
   }
 }
+
+.noItemContainer {
+  margin-block: 80px 0;
+  margin-inline: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 32px;
+
+  :global(.no-item-text) {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+  }
+
+  :global(.no-history-text) {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+  }
+
+  :global(.no-thumbnail-img-wrapper) {
+    width: 75px;
+    height: 75px;
+    img {
+      width: 75px;
+      height: 75px;
+    }
+  }
+
+  :global(.expired-title) {
+    text-align: center;
+
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  :global(.expired-text) {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+
+    color: var(--info-panel-links-primary-color);
+  }
+}
+
+.lockedSharedRoomButton {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  background: none;
+  cursor: pointer;
+  border: none;
+
+  color: var(--empty-content-button-color-link);
+
+  svg {
+    path {
+      fill: var(--empty-content-button-color-link);
+    }
+  }
+
+  span {
+    color: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline dashed;
+    text-underline-offset: 2px;
+  }
+}

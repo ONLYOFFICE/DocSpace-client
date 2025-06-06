@@ -25,61 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useCallback, useEffect, use } from "react";
-import styled from "styled-components";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
+import classNames from "classnames";
 
 import { RowLoader } from "@docspace/shared/skeletons/selector";
-import { mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
 
-import { StyledUserTypeHeader } from "../../../styles/members";
-
 import { MembersListProps, UserProps } from "../Members.types";
-
-const MainStyles = styled.div`
-  #members-list-header {
-    display: none;
-    position: fixed;
-    height: 52px;
-    width: calc(100% - 32px);
-    padding: 0;
-    z-index: 1;
-    background: ${(props) => props.theme.infoPanel.backgroundColor};
-
-    @media ${mobile} {
-      padding-inline-end: 16px;
-    }
-  }
-`;
-
-const StyledMembersList = styled.div`
-  height: 100%;
-`;
-
-const StyledList = styled(List)`
-  width: calc(100% + 20px) !important;
-  margin-bottom: 24px;
-
-  overflow: visible !important;
-
-  .members-list-item {
-    // doesn't require mirroring for RTL
-    left: unset !important;
-    inset-inline-start: 0;
-    width: calc(100% - 20px) !important;
-  }
-
-  .members-list-loader-item {
-    margin: 0 -16px;
-  }
-
-  @media ${mobile} {
-    width: calc(100% + 16px) !important;
-    margin-bottom: 48px;
-  }
-`;
+import styles from "../Members.module.scss";
 
 const itemSize = 48;
 const shareLinkItemSize = 68;
@@ -98,16 +53,22 @@ const MembersList = (props: MembersListProps) => {
   const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
-  const list: React.ReactElement<UserProps & { isShareLink?: boolean }>[] = [];
+  const list: React.ReactElement<
+    UserProps & { isShareLink?: boolean; "data-share"?: boolean }
+  >[] = [];
 
   React.Children.map(children, (item) => {
     list.push(
-      item as React.ReactElement<UserProps & { isShareLink?: boolean }>,
+      item as React.ReactElement<
+        UserProps & { isShareLink?: boolean; "data-share"?: boolean }
+      >,
     );
   });
 
   const listOfTitles = list
-    .filter((x) => "isTitle" in x.props.user && x.props.user?.isTitle)
+    .filter(
+      (x) => x.props.user && "isTitle" in x.props.user && x.props.user?.isTitle,
+    )
     .map((item) => {
       return {
         displayName:
@@ -172,7 +133,7 @@ const MembersList = (props: MembersListProps) => {
       return GENERAL_LINK_HEADER_HEIGHT;
     }
 
-    if (elem?.props?.isShareLink) {
+    if (elem?.props?.isShareLink || elem.props["data-share"]) {
       return shareLinkItemSize;
     }
 
@@ -223,16 +184,16 @@ const MembersList = (props: MembersListProps) => {
   }
 
   return (
-    <MainStyles>
+    <div className={styles.mainStyles}>
       {!withoutTitlesAndLinks ? (
-        <StyledUserTypeHeader
+        <div
           id="members-list-header"
-          className="members-list-header"
+          className={classNames("members-list-header", styles.userTypeHeader)}
         >
           <Text className="members-list-header_title title" />
-        </StyledUserTypeHeader>
+        </div>
       ) : null}
-      <StyledMembersList>
+      <div className={styles.membersList}>
         <InfiniteLoader
           isRowLoaded={isItemLoaded}
           rowCount={itemCount}
@@ -249,7 +210,7 @@ const MembersList = (props: MembersListProps) => {
                   const width = scrollElement.getBoundingClientRect().width;
 
                   return (
-                    <StyledList
+                    <List
                       autoHeight
                       height={height}
                       onRowsRendered={onRowsRendered}
@@ -264,6 +225,7 @@ const MembersList = (props: MembersListProps) => {
                       // React virtualized sets "LTR" by default.
                       style={{ direction: "inherit" }}
                       tabIndex={null}
+                      className={styles.list}
                     />
                   );
                 }}
@@ -271,8 +233,8 @@ const MembersList = (props: MembersListProps) => {
             );
           }}
         </InfiniteLoader>
-      </StyledMembersList>
-    </MainStyles>
+      </div>
+    </div>
   );
 };
 

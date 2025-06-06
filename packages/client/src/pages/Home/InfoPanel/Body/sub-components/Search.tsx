@@ -35,7 +35,7 @@ import {
 } from "@docspace/shared/components/text-input";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
-import { StyledSearchContainer } from "../styles/common";
+import commonStyles from "../helpers/Common.module.scss";
 
 export type SearchProps = {
   setSearchValue: (value: string) => void;
@@ -79,7 +79,7 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   }, [debouncedSearch]);
 
   return (
-    <StyledSearchContainer>
+    <div className={commonStyles.searchContainer}>
       <TextInput
         id="info_panel_search_input"
         type={InputType.text}
@@ -96,7 +96,7 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
         onClick={onClose}
         isClickable
       />
-    </StyledSearchContainer>
+    </div>
   );
 };
 

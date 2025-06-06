@@ -32,10 +32,11 @@ import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { RoomsType } from "@docspace/shared/enums";
-import { TFeedAction, TFeedData } from "@docspace/shared/api/rooms/types";
+import { TFeedData } from "@docspace/shared/api/rooms/types";
+
+import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 import { StyledHistoryLink } from "../../../styles/history";
-import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 type HistoryRoomExternalLinkProps = {
   feedData: TFeedData;

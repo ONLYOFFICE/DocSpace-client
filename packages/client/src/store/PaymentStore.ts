@@ -213,7 +213,7 @@ class PaymentStore {
       return this.isPayer;
     }
 
-    if (!this.cardLinkedOnFreeTariff) return true;
+    if (!this.isAlreadyPaid && !this.cardLinkedOnFreeTariff) return true;
 
     return this.isPayer;
   }

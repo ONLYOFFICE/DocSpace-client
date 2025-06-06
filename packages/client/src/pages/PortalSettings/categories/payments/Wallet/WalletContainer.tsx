@@ -76,6 +76,7 @@ type WalletProps = {
   fetchTransactionHistory?: () => Promise<void>;
   canUpdateTariff: VoidFunction;
   setVisibleWalletSetting?: (value: boolean) => void;
+  isAlreadyPaid?: boolean;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -101,6 +102,7 @@ const Wallet = (props: WalletProps) => {
     fetchTransactionHistory,
     canUpdateTariff,
     setVisibleWalletSetting,
+    isAlreadyPaid,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -182,7 +184,7 @@ const Wallet = (props: WalletProps) => {
             {t("BalanceText")}
           </Text>
 
-          {cardLinkedOnFreeTariff || cardLinkedOnNonProfit ? (
+          {cardLinkedOnFreeTariff || cardLinkedOnNonProfit || isAlreadyPaid ? (
             <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
           ) : null}
         </div>
@@ -242,6 +244,7 @@ export default inject(
       setVisibleWalletSetting,
       cardLinkedOnNonProfit,
       isCardLinkedToPortal,
+      isAlreadyPaid,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
 
@@ -261,6 +264,7 @@ export default inject(
       canUpdateTariff,
       setVisibleWalletSetting,
       isCardLinkedToPortal,
+      isAlreadyPaid,
     };
   },
 )(observer(Wallet));

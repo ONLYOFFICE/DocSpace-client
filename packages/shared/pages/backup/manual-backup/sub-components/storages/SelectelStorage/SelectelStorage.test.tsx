@@ -3,10 +3,10 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { ButtonSize } from "@docspace/shared/components/button";
-import { ThirdPartyStorages } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { SelectelStorage } from ".";
+import { selectedStorages } from "../../../../mockData";
 
 jest.mock("@docspace/shared/components/selectel-settings", () => ({
   SelectelSettings: ({
@@ -36,21 +36,8 @@ const defaultProps = {
   isLoadingData: false,
   isNeedFilePath: true,
   isLoading: false,
-  selectedStorage: {
-    id: ThirdPartyStorages.SelectelId,
-    isSet: true,
-    title: "Selectel",
-    properties: [
-      { name: "username", title: "Username", value: "test-username" },
-      { name: "password", title: "Password", value: "test-password" },
-      { name: "container", title: "Container", value: "test-container" },
-    ],
-  },
-  formSettings: {
-    username: "test-username",
-    password: "test-password",
-    container: "test-container",
-  },
+  selectedStorage: selectedStorages.selectel,
+  formSettings: selectedStorages.selectel.formSettings,
   errorsFieldsBeforeSafe: {},
   addValueInFormSettings: jest.fn(),
   setRequiredFormSettings: jest.fn(),
@@ -91,16 +78,7 @@ describe("SelectelStorage", () => {
     render(
       <SelectelStorage
         {...defaultProps}
-        selectedStorage={{
-          id: ThirdPartyStorages.SelectelId,
-          isSet: false,
-          title: "Selectel",
-          properties: [
-            { name: "username", title: "Username", value: "" },
-            { name: "password", title: "Password", value: "" },
-            { name: "container", title: "Container", value: "" },
-          ],
-        }}
+        selectedStorage={selectedStorages.emptySelectel}
       />,
     );
     expect(

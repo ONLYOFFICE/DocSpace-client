@@ -24,12 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { AutoBackupPeriod } from "@docspace/shared/enums";
+import { AutoBackupPeriod, ThirdPartyStorages } from "@docspace/shared/enums";
 import type { TOption } from "@docspace/shared/components/combobox";
-import type {
-  SelectedStorageType,
-  ConnectedThirdPartyAccountType,
-} from "@docspace/shared/types";
+import type { ConnectedThirdPartyAccountType } from "@docspace/shared/types";
 
 export const periodsObject: TOption[] = [
   { key: AutoBackupPeriod.EveryDayType, label: "Every day" },
@@ -90,73 +87,134 @@ export const storageRegions = [
 
 export const selectedStorages = {
   amazon: {
-    id: "s3",
+    id: ThirdPartyStorages.AmazonId,
     isSet: true,
     title: "Amazon S3",
     properties: [
-      { title: "Bucket", value: "my-backup-bucket" },
-      { title: "Access Key", value: "AKIAIOSFODNN7EXAMPLE" },
-      { title: "Region", value: "US East (N. Virginia)" },
+      { name: "accessKey", title: "Access Key", value: "test-key" },
+      { name: "secretKey", title: "Secret Key", value: "test-secret" },
+      { name: "bucket", title: "Bucket", value: "test-bucket" },
     ],
-  } as SelectedStorageType,
+    formSettings: {
+      accessKey: "test-key",
+      secretKey: "test-secret",
+      bucket: "test-bucket",
+    },
+    defaultRegion: "us-east-1",
+  },
 
   googleCloud: {
-    id: "googlecloud",
+    id: ThirdPartyStorages.GoogleId,
     isSet: true,
     title: "Google Cloud",
     properties: [
-      { title: "Bucket", value: "my-gcloud-bucket" },
-      {
-        title: "Service Account",
-        value: "service-account@project-id.iam.gserviceaccount.com",
-      },
+      { name: "projectId", title: "Project ID", value: "test-project" },
+      { name: "bucket", title: "Bucket", value: "test-bucket" },
+      { name: "clientEmail", title: "Client Email", value: "test@example.com" },
     ],
-  } as SelectedStorageType,
+    formSettings: {
+      projectId: "test-project",
+      bucket: "test-bucket",
+      clientEmail: "test@example.com",
+    },
+  },
 
   rackspace: {
-    id: "rackspace",
+    id: ThirdPartyStorages.RackspaceId,
     isSet: true,
     title: "Rackspace",
     properties: [
-      { title: "Private Container", value: "my-private-container" },
-      { title: "Public Container", value: "my-public-container" },
-      { title: "Region", value: "US" },
+      { name: "username", title: "Username", value: "test-username" },
+      { name: "apiKey", title: "API Key", value: "test-api-key" },
+      { name: "container", title: "Container", value: "test-container" },
     ],
-  } as SelectedStorageType,
+    formSettings: {
+      username: "test-username",
+      apiKey: "test-api-key",
+      container: "test-container",
+    },
+  },
 
   selectel: {
-    id: "selectel",
+    id: ThirdPartyStorages.SelectelId,
     isSet: true,
     title: "Selectel",
     properties: [
-      { title: "Container", value: "my-selectel-container" },
-      { title: "Username", value: "selectel-user" },
+      { name: "username", title: "Username", value: "test-username" },
+      { name: "password", title: "Password", value: "test-password" },
+      { name: "container", title: "Container", value: "test-container" },
     ],
-  } as SelectedStorageType,
-};
+    formSettings: {
+      username: "test-username",
+      password: "test-password",
+      container: "test-container",
+    },
+  },
 
-export const mockThirdPartyAccounts = [
-  {
-    name: "ownCloud",
-    label: "ownCloud",
-    title: "ownCloud",
-    provider_key: "ownCloud",
-    key: "WebDav",
-    storageIsConnected: false,
-    connected: true,
-    disabled: false,
+  emptyAmazon: {
+    id: ThirdPartyStorages.AmazonId,
+    isSet: false,
+    title: "Amazon S3",
+    properties: [
+      { name: "accessKey", title: "Access Key", value: "test-key" },
+      { name: "secretKey", title: "Secret Key", value: "test-secret" },
+      { name: "bucket", title: "Bucket", value: "test-bucket" },
+    ],
+    formSettings: {
+      accessKey: "test-key",
+      secretKey: "test-secret",
+      bucket: "test-bucket",
+    },
   },
-  {
-    name: "Nextcloud",
-    label: "Nextcloud",
-    title: "Nextcloud",
-    provider_key: "Nextcloud",
-    key: "WebDav",
-    storageIsConnected: false,
-    connected: true,
-    disabled: false,
+
+  emptyGoogleCloud: {
+    id: ThirdPartyStorages.GoogleId,
+    isSet: false,
+    title: "Google Cloud",
+    properties: [
+      { name: "projectId", title: "Project ID", value: "test-project" },
+      { name: "bucket", title: "Bucket", value: "test-bucket" },
+      { name: "clientEmail", title: "Client Email", value: "test@example.com" },
+    ],
+    formSettings: {
+      projectId: "test-project",
+      bucket: "test-bucket",
+      clientEmail: "test@example.com",
+    },
   },
-];
+
+  emptyRackspace: {
+    id: ThirdPartyStorages.RackspaceId,
+    isSet: false,
+    title: "Rackspace",
+    properties: [
+      { name: "username", title: "Username", value: "test-username" },
+      { name: "apiKey", title: "API Key", value: "test-api-key" },
+      { name: "container", title: "Container", value: "test-container" },
+    ],
+    formSettings: {
+      username: "test-username",
+      apiKey: "test-api-key",
+      container: "test-container",
+    },
+  },
+
+  emptySelectel: {
+    id: ThirdPartyStorages.SelectelId,
+    isSet: false,
+    title: "Selectel",
+    properties: [
+      { name: "username", title: "Username", value: "test-username" },
+      { name: "password", title: "Password", value: "test-password" },
+      { name: "container", title: "Container", value: "test-container" },
+    ],
+    formSettings: {
+      username: "test-username",
+      password: "test-password",
+      container: "test-container",
+    },
+  },
+};
 
 export const mockConnectedAccount: ConnectedThirdPartyAccountType = {
   id: "dropbox-123",
@@ -183,5 +241,48 @@ export const mockThirdPartyProviders = [
     providerKey: "dropbox",
     provider_id: "dropbox",
     customer_title: "Dropbox",
+  },
+];
+
+export const mockThirdPartyAccounts = [
+  {
+    key: ThirdPartyStorages.AmazonId,
+    provider_key: ThirdPartyStorages.AmazonId,
+    name: ThirdPartyStorages.AmazonId,
+    label: "Amazon S3",
+    title: "Amazon S3",
+    storageIsConnected: false,
+    disabled: false,
+    connected: true,
+  },
+  {
+    key: ThirdPartyStorages.GoogleId,
+    provider_key: ThirdPartyStorages.GoogleId,
+    name: ThirdPartyStorages.GoogleId,
+    label: "Google Cloud Storage",
+    title: "Google Cloud Storage",
+    storageIsConnected: false,
+    disabled: false,
+    connected: true,
+  },
+  {
+    key: ThirdPartyStorages.RackspaceId,
+    provider_key: ThirdPartyStorages.RackspaceId,
+    name: ThirdPartyStorages.RackspaceId,
+    label: "Rackspace Cloud Files",
+    title: "Rackspace Cloud Files",
+    storageIsConnected: false,
+    disabled: false,
+    connected: false,
+  },
+  {
+    key: ThirdPartyStorages.SelectelId,
+    provider_key: ThirdPartyStorages.SelectelId,
+    name: ThirdPartyStorages.SelectelId,
+    label: "Selectel Storage",
+    title: "Selectel Storage",
+    storageIsConnected: false,
+    disabled: false,
+    connected: false,
   },
 ];

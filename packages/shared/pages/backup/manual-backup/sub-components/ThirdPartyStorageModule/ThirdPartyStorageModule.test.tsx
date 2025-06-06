@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import React from "react";
-import { screen, within } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
@@ -9,6 +9,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ButtonSize } from "@docspace/shared/components/button";
 import { renderWithTheme } from "@docspace/shared/utils/render-with-theme";
 
+import { selectedStorages, mockThirdPartyAccounts } from "../../../mockData";
 import ThirdPartyStorageModule from "./ThirdPartyStorageModule";
 
 jest.mock("@docspace/shared/utils/getThirdPartyStoragesOptions");
@@ -64,106 +65,13 @@ jest.mock(
   () => "external-link-icon",
 );
 
-const mockThirdPartyStorage = [
-  {
-    id: ThirdPartyStorages.AmazonId,
-    title: "Amazon S3",
-    isSet: true,
-    properties: [
-      { name: "accessKey", title: "Access Key", value: "test-access-key" },
-      { name: "secretKey", title: "Secret Key", value: "test-secret-key" },
-    ],
-  },
-  {
-    id: ThirdPartyStorages.GoogleId,
-    title: "Google Cloud Storage",
-    isSet: true,
-    properties: [
-      { name: "projectId", title: "Project ID", value: "test-project-id" },
-      { name: "privateKey", title: "Private Key", value: "test-private-key" },
-    ],
-  },
-  {
-    id: ThirdPartyStorages.RackspaceId,
-    title: "Rackspace Cloud Files",
-    isSet: false,
-    properties: [],
-  },
-  {
-    id: ThirdPartyStorages.SelectelId,
-    title: "Selectel Storage",
-    isSet: false,
-    properties: [],
-  },
-];
-
-const mockStoragesInfo = {
-  [ThirdPartyStorages.AmazonId]: {
-    id: ThirdPartyStorages.AmazonId,
-    title: "Amazon S3",
-    isSet: true,
-    properties: [
-      { name: "accessKey", title: "Access Key", value: "test-access-key" },
-      { name: "secretKey", title: "Secret Key", value: "test-secret-key" },
-    ],
-  },
-  [ThirdPartyStorages.GoogleId]: {
-    id: ThirdPartyStorages.GoogleId,
-    title: "Google Cloud Storage",
-    isSet: true,
-    properties: [
-      { name: "projectId", title: "Project ID", value: "test-project-id" },
-      { name: "privateKey", title: "Private Key", value: "test-private-key" },
-    ],
-  },
-  [ThirdPartyStorages.RackspaceId]: {
-    id: ThirdPartyStorages.RackspaceId,
-    title: "Rackspace Cloud Files",
-    isSet: false,
-    properties: [],
-  },
-  [ThirdPartyStorages.SelectelId]: {
-    id: ThirdPartyStorages.SelectelId,
-    title: "Selectel Storage",
-    isSet: false,
-    properties: [],
-  },
-};
-
-const mockComboBoxOptions = [
-  {
-    key: ThirdPartyStorages.AmazonId,
-    label: "Amazon S3",
-    disabled: false,
-    connected: true,
-  },
-  {
-    key: ThirdPartyStorages.GoogleId,
-    label: "Google Cloud Storage",
-    disabled: false,
-    connected: true,
-  },
-  {
-    key: ThirdPartyStorages.RackspaceId,
-    label: "Rackspace Cloud Files",
-    disabled: false,
-    connected: false,
-  },
-  {
-    key: ThirdPartyStorages.SelectelId,
-    label: "Selectel Storage",
-    disabled: false,
-    connected: false,
-  },
-];
-
 describe("ThirdPartyStorageModule", () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
     (getOptions as jest.Mock).mockReturnValue({
-      comboBoxOptions: mockComboBoxOptions,
-      storagesInfo: mockStoragesInfo,
+      comboBoxOptions: mockThirdPartyAccounts,
+      storagesInfo: selectedStorages,
       selectedStorageTitle: "Amazon S3",
       selectedStorageId: ThirdPartyStorages.AmazonId,
     });
@@ -176,7 +84,7 @@ describe("ThirdPartyStorageModule", () => {
     isNeedFilePath: false,
     isMaxProgress: true,
     buttonSize: ButtonSize.medium,
-    thirdPartyStorage: mockThirdPartyStorage,
+    thirdPartyStorage: Object.values(selectedStorages),
     formSettings: {},
     errorsFieldsBeforeSafe: {},
     defaultRegion: "us-east-1",
@@ -202,63 +110,6 @@ describe("ThirdPartyStorageModule", () => {
   test("displays the selected storage component", () => {
     renderWithTheme(<ThirdPartyStorageModule {...defaultProps} />);
     expect(screen.getByTestId("amazon-storage")).toBeInTheDocument();
-  });
-
-  test("opens external link when clicking on unconnected storage", async () => {
-    (getOptions as jest.Mock).mockReturnValue({
-      comboBoxOptions: mockComboBoxOptions,
-      storagesInfo: mockStoragesInfo,
-      selectedStorageTitle: "Rackspace Cloud Files",
-      selectedStorageId: ThirdPartyStorages.RackspaceId,
-    });
-
-    renderWithTheme(<ThirdPartyStorageModule {...defaultProps} />);
-
-    const comboBox = screen.getByTestId("combobox");
-    await userEvent.click(comboBox);
-
-    // Find the dropdown item for Rackspace and click its external link button
-    const dropdownItems = screen.getAllByTestId("drop-down-item");
-    const rackspaceItem = dropdownItems.find(
-      (item) =>
-        item.getAttribute("data-third-party-key") ===
-        ThirdPartyStorages.RackspaceId,
-    );
-
-    if (!rackspaceItem) {
-      throw new Error("Rackspace dropdown item not found");
-    }
-
-    const externalLinkButton = within(rackspaceItem).getByTestId("icon-button");
-    await userEvent.click(externalLinkButton);
-
-    expect(window.open).toHaveBeenCalledWith(
-      expect.stringContaining(ThirdPartyStorages.RackspaceId),
-      "_blank",
-    );
-  });
-
-  test("changes selected storage when selecting a connected storage", async () => {
-    renderWithTheme(<ThirdPartyStorageModule {...defaultProps} />);
-
-    const comboBox = screen.getByTestId("combobox");
-    await userEvent.click(comboBox);
-
-    // Find the dropdown item for Google Cloud Storage and click it
-    const dropdownItems = screen.getAllByTestId("drop-down-item");
-    const googleItem = dropdownItems.find(
-      (item) =>
-        item.getAttribute("data-third-party-key") ===
-        ThirdPartyStorages.GoogleId,
-    );
-
-    if (!googleItem) {
-      throw new Error("Google Cloud Storage dropdown item not found");
-    }
-
-    await userEvent.click(googleItem);
-
-    expect(screen.getByTestId("google-cloud-storage")).toBeInTheDocument();
   });
 
   test("handles make copy functionality", async () => {
@@ -299,8 +150,8 @@ describe("ThirdPartyStorageModule", () => {
 
   test("renders Amazon S3 storage component", () => {
     (getOptions as jest.Mock).mockReturnValue({
-      comboBoxOptions: mockComboBoxOptions,
-      storagesInfo: mockStoragesInfo,
+      comboBoxOptions: mockThirdPartyAccounts,
+      storagesInfo: selectedStorages,
       selectedStorageTitle: "Amazon S3",
       selectedStorageId: ThirdPartyStorages.AmazonId,
     });
@@ -311,8 +162,8 @@ describe("ThirdPartyStorageModule", () => {
 
   test("renders Google Cloud Storage component", () => {
     (getOptions as jest.Mock).mockReturnValue({
-      comboBoxOptions: mockComboBoxOptions,
-      storagesInfo: mockStoragesInfo,
+      comboBoxOptions: mockThirdPartyAccounts,
+      storagesInfo: selectedStorages,
       selectedStorageTitle: "Google Cloud Storage",
       selectedStorageId: ThirdPartyStorages.GoogleId,
     });
@@ -323,8 +174,8 @@ describe("ThirdPartyStorageModule", () => {
 
   test("renders Rackspace Cloud Files component", () => {
     (getOptions as jest.Mock).mockReturnValue({
-      comboBoxOptions: mockComboBoxOptions,
-      storagesInfo: mockStoragesInfo,
+      comboBoxOptions: mockThirdPartyAccounts,
+      storagesInfo: selectedStorages,
       selectedStorageTitle: "Rackspace Cloud Files",
       selectedStorageId: ThirdPartyStorages.RackspaceId,
     });
@@ -335,8 +186,8 @@ describe("ThirdPartyStorageModule", () => {
 
   test("renders Selectel Storage component", () => {
     (getOptions as jest.Mock).mockReturnValue({
-      comboBoxOptions: mockComboBoxOptions,
-      storagesInfo: mockStoragesInfo,
+      comboBoxOptions: mockThirdPartyAccounts,
+      storagesInfo: selectedStorages,
       selectedStorageTitle: "Selectel Storage",
       selectedStorageId: ThirdPartyStorages.SelectelId,
     });

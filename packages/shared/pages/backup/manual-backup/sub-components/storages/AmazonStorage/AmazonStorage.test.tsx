@@ -29,10 +29,10 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { ButtonSize } from "@docspace/shared/components/button";
-import { ThirdPartyStorages } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
 import AmazonStorage from "./AmazonStorage";
+import { selectedStorages } from "../../../../mockData";
 
 jest.mock("@docspace/shared/components/amazon-settings", () => ({
   AmazonSettings: ({
@@ -63,25 +63,10 @@ const defaultProps = {
   isLoadingData: false,
   isNeedFilePath: true,
   isLoading: false,
-  selectedStorage: {
-    id: ThirdPartyStorages.AmazonId,
-    isSet: true,
-    title: "Amazon S3",
-    properties: [
-      { name: "accessKey", title: "Access Key", value: "test-key" },
-      { name: "secretKey", title: "Secret Key", value: "test-secret" },
-      { name: "bucket", title: "Bucket", value: "test-bucket" },
-      { name: "region", title: "Region", value: "us-east-1" },
-    ],
-  },
-  formSettings: {
-    accessKey: "test-key",
-    secretKey: "test-secret",
-    bucket: "test-bucket",
-    region: "us-east-1",
-  },
+  selectedStorage: selectedStorages.amazon,
+  formSettings: selectedStorages.amazon.formSettings,
   errorsFieldsBeforeSafe: {},
-  defaultRegion: "us-east-1",
+  defaultRegion: selectedStorages.amazon.defaultRegion,
   storageRegions: [
     {
       displayName: "US East (N. Virginia)",
@@ -128,17 +113,7 @@ describe("AmazonStorage", () => {
     render(
       <AmazonStorage
         {...defaultProps}
-        selectedStorage={{
-          id: ThirdPartyStorages.AmazonId,
-          isSet: false,
-          title: "Amazon S3",
-          properties: [
-            { name: "accessKey", title: "Access Key", value: "" },
-            { name: "secretKey", title: "Secret Key", value: "" },
-            { name: "bucket", title: "Bucket", value: "" },
-            { name: "region", title: "Region", value: "" },
-          ],
-        }}
+        selectedStorage={selectedStorages.emptyAmazon}
       />,
     );
     expect(

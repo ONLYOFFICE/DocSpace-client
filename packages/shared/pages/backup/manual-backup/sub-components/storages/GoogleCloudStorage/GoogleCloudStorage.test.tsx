@@ -3,10 +3,10 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { ButtonSize } from "@docspace/shared/components/button";
-import { ThirdPartyStorages } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { GoogleCloudStorage } from ".";
+import { selectedStorages } from "../../../../mockData";
 
 jest.mock("@docspace/shared/components/google-cloud-settings", () => ({
   GoogleCloudSettings: ({
@@ -37,23 +37,8 @@ const defaultProps = {
   isLoadingData: false,
   isNeedFilePath: true,
   isLoading: false,
-  selectedStorage: {
-    id: ThirdPartyStorages.GoogleId,
-    isSet: true,
-    title: "Google Cloud",
-    properties: [
-      { name: "projectId", title: "Project ID", value: "test-project" },
-      { name: "privateKey", title: "Private Key", value: "test-private-key" },
-      { name: "clientEmail", title: "Client Email", value: "test@example.com" },
-      { name: "bucket", title: "Bucket", value: "test-bucket" },
-    ],
-  },
-  formSettings: {
-    projectId: "test-project",
-    privateKey: "test-private-key",
-    clientEmail: "test@example.com",
-    bucket: "test-bucket",
-  },
+  selectedStorage: selectedStorages.googleCloud,
+  formSettings: selectedStorages.googleCloud.formSettings,
   errorsFieldsBeforeSafe: {},
   addValueInFormSettings: jest.fn(),
   setRequiredFormSettings: jest.fn(),
@@ -93,17 +78,7 @@ describe("GoogleCloudStorage", () => {
     render(
       <GoogleCloudStorage
         {...defaultProps}
-        selectedStorage={{
-          id: ThirdPartyStorages.GoogleId,
-          isSet: false,
-          title: "Google Cloud",
-          properties: [
-            { name: "projectId", title: "Project ID", value: "" },
-            { name: "privateKey", title: "Private Key", value: "" },
-            { name: "clientEmail", title: "Client Email", value: "" },
-            { name: "bucket", title: "Bucket", value: "" },
-          ],
-        }}
+        selectedStorage={selectedStorages.emptyGoogleCloud}
       />,
     );
     expect(

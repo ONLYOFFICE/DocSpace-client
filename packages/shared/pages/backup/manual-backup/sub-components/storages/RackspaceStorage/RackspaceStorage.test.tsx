@@ -3,10 +3,10 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { ButtonSize } from "@docspace/shared/components/button";
-import { ThirdPartyStorages } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { RackspaceStorage } from ".";
+import { selectedStorages } from "../../../../mockData";
 
 jest.mock("@docspace/shared/components/rackspace-settings", () => ({
   RackspaceSettings: ({
@@ -37,23 +37,8 @@ const defaultProps = {
   isLoadingData: false,
   isNeedFilePath: true,
   isLoading: false,
-  selectedStorage: {
-    id: ThirdPartyStorages.RackspaceId,
-    isSet: true,
-    title: "Rackspace",
-    properties: [
-      { name: "username", title: "Username", value: "test-username" },
-      { name: "apiKey", title: "API Key", value: "test-api-key" },
-      { name: "region", title: "Region", value: "test-region" },
-      { name: "container", title: "Container", value: "test-container" },
-    ],
-  },
-  formSettings: {
-    username: "test-username",
-    apiKey: "test-api-key",
-    region: "test-region",
-    container: "test-container",
-  },
+  selectedStorage: selectedStorages.rackspace,
+  formSettings: selectedStorages.rackspace.formSettings,
   errorsFieldsBeforeSafe: {},
   addValueInFormSettings: jest.fn(),
   setRequiredFormSettings: jest.fn(),
@@ -94,17 +79,7 @@ describe("RackspaceStorage", () => {
     render(
       <RackspaceStorage
         {...defaultProps}
-        selectedStorage={{
-          id: ThirdPartyStorages.RackspaceId,
-          isSet: false,
-          title: "Rackspace",
-          properties: [
-            { name: "username", title: "Username", value: "" },
-            { name: "apiKey", title: "API Key", value: "" },
-            { name: "region", title: "Region", value: "" },
-            { name: "container", title: "Container", value: "" },
-          ],
-        }}
+        selectedStorage={selectedStorages.emptyRackspace}
       />,
     );
     expect(

@@ -40,6 +40,8 @@ export type TTabItem = {
   onClick?: () => void;
   /** Badge shown after tab. Only for primary tabs type */
   badge?: React.ReactNode;
+  /** Icon name. Only for secondary tabs type */
+  iconName?: string;
 };
 
 export type TabsProps = {
@@ -58,6 +60,8 @@ export type TabsProps = {
   className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */
   onSelect?: (element: TTabItem) => void;
-
+  /** Accepts css style  */
   style?: React.CSSProperties;
+  /** If set, this component will animate changes to its layout. Additionally, when a new element enters the DOM and an element already exists with a matching layoutId, it will animate out from the previous element's size/position. */
+  layoutId?: string;
 };

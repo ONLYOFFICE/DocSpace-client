@@ -1162,12 +1162,12 @@
   --tabs-background-color-primary: #{$white};
 
   /* Secondary tabs */
-  --tabs-text-color-secondary: #{$black};
-  --tabs-active-text-color-secondary: #{$white};
-  --tabs-background-color-secondary: #{$white};
-  --tabs-hover-background-color-secondary: #{$light-gray-hover};
+  --tabs-text-color-secondary: #{$light-gray-dark};
+  --tabs-active-text-color-secondary: #{$black};
+  --tabs-background-color-secondary: #{$light-gray-hover};
+  --tabs-hover-background-color-secondary: #{$gray-light-mid};
   --tabs-pressed-background-color-secondary: #{$gray-light-mid};
-  --tabs-active-background-color-secondary: #{$blue-light-mid};
+  --tabs-active-background-color-secondary: #{$white};
 }
 
 /* Dark theme variables */
@@ -1183,12 +1183,12 @@
   --tabs-background-color-primary: #{$black};
 
   /* Secondary tabs */
-  --tabs-text-color-secondary: #{$white};
-  --tabs-active-text-color-secondary: #{$black};
-  --tabs-background-color-secondary: #{$black};
-  --tabs-hover-background-color-secondary: #{$gray-dark-strong};
+  --tabs-text-color-secondary: #{$dark-gray-dark};
+  --tabs-active-text-color-secondary: #{$white};
+  --tabs-background-color-secondary: #{$dark-gray-light};
+  --tabs-hover-background-color-secondary: #{$gray-dark-mid};
   --tabs-pressed-background-color-secondary: #{$dark-gray-light};
-  --tabs-active-background-color-secondary: #{$white};
+  --tabs-active-background-color-secondary: #{$black};
 }
 
 .light {

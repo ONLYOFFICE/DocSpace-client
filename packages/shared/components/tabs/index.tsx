@@ -26,6 +26,8 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import classNames from "classnames";
+import { ReactSVG } from "react-svg";
+import { motion } from "framer-motion";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { TabsTypes } from "./Tabs.enums";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
@@ -45,6 +47,7 @@ const Tabs = (props: TabsProps) => {
     stickyTop,
     onSelect,
     multiple = false,
+    layoutId,
     ...rest
   } = props;
 
@@ -156,7 +159,11 @@ const Tabs = (props: TabsProps) => {
   });
 
   const renderContent = (
-    <div className={classNames(styles.tabList, classes)} ref={tabsRef}>
+    <div
+      style={{ "--tabs-count": items.length } as React.CSSProperties}
+      className={classNames(styles.tabList, classes)}
+      ref={tabsRef}
+    >
       {items.map((item, index) => {
         const isSelected = multiple
           ? multipleItems.indexOf(index) !== -1
@@ -179,6 +186,18 @@ const Tabs = (props: TabsProps) => {
               setSelectedItem(item, index);
             }}
           >
+            {item.iconName && type === TabsTypes.Secondary ? (
+              <ReactSVG className={styles.tabIcon} src={item.iconName} />
+            ) : null}
+
+            {type === TabsTypes.Secondary && isSelected ? (
+              <motion.span
+                layoutId={layoutId ?? "motionLayoutId"}
+                className={styles.motionBackground}
+                transition={{ type: "spring", bounce: 0.2, duration: 0.35 }}
+              />
+            ) : null}
+
             <span className={styles.tabText}>{item.name}</span>
             <div
               className={classNames(

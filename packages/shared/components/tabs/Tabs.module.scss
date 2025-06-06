@@ -61,6 +61,9 @@
   &.primary {
     border-bottom: 1px solid var(--tabs-line-color);
   }
+  &.secondary {
+    height: 36px;
+  }
 }
 
 .tabs {
@@ -126,7 +129,14 @@
   }
 
   &.secondary {
-    gap: 8px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(var(--tabs-count), 1fr);
+    background-color: var(--tabs-background-color-secondary);
+    gap: 4px;
+    padding: 4px;
+    border-radius: 5px;
+    height: 36px;
   }
 
   &.multiple {
@@ -171,34 +181,70 @@
   }
 
   &.secondary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
     padding: 4px 16px;
+    border-radius: 3px;
+    gap: 6px;
+    width: calc(100% - 32px);
 
     .tabText {
       color: var(--tabs-text-color-secondary);
+      z-index: 11;
     }
 
-    background-color: var(--tabs-background-color-secondary);
-    border: 1px solid var(--tabs-line-color);
-    border-radius: 16px;
-
     &.selected {
-      background-color: var(--tabs-active-background-color-secondary);
-      border: 1px solid var(--tabs-hover-background-color-secondary);
-
       .tabText {
         color: var(--tabs-active-text-color-secondary);
+      }
+
+      .tabIcon {
+        svg path {
+          fill: var(--tabs-active-text-color-secondary);
+        }
+        svg circle {
+          stroke: var(--tabs-active-text-color-secondary);
+        }
       }
     }
 
     &:hover:not(.selected) {
+      .tabText {
+        color: var(--tabs-active-text-color-secondary);
+      }
+
       background-color: var(--tabs-hover-background-color-secondary);
-      border: 1px solid var(--tabs-hover-background-color-secondary);
+
+      .tabIcon {
+        svg path {
+          fill: var(--tabs-active-text-color-secondary);
+        }
+        svg circle {
+          stroke: var(--tabs-active-text-color-secondary);
+        }
+      }
     }
   }
 
   &.disabled {
     pointer-events: none;
     opacity: 0.5;
+  }
+}
+
+.tabIcon {
+  z-index: 11;
+  max-width: 16px;
+  max-height: 16px;
+
+  svg path {
+    fill: var(--tabs-text-color-secondary);
+  }
+  svg circle {
+    stroke: var(--tabs-text-color-secondary);
   }
 }
 
@@ -235,4 +281,13 @@
   display: flex;
   align-items: center;
   user-select: none;
+}
+
+.motionBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background-color: var(--tabs-active-background-color-secondary);
+  height: 28px;
+  border-radius: 3px;
 }

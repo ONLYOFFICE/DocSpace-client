@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,19 +26,19 @@
 
 import React from "react";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "../../../../../components/button";
 import {
   BackupStorageLocalKey,
   ThirdPartyStorages,
-} from "@docspace/shared/enums";
+} from "../../../../../enums";
 
 import {
   SelectelSettings,
   formNames,
-} from "@docspace/shared/components/selectel-settings";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
+} from "../../../../../components/selectel-settings";
+import { useDidMount } from "../../../../../hooks/useDidMount";
+import { getFromLocalStorage } from "../../../../../utils/getFromLocalStorage";
+import type { SelectedStorageType, TTranslation } from "../../../../../types";
 
 interface SelectelStorageProps {
   t: TTranslation;
@@ -97,7 +97,7 @@ const SelectelStorage = ({
   });
 
   return (
-    <>
+    <div data-testid="selectel-storage">
       <SelectelSettings
         t={t}
         isLoading={isLoading}
@@ -121,17 +121,8 @@ const SelectelStorage = ({
           size={buttonSize}
         />
       </div>
-    </>
+    </div>
   );
 };
 
 export default SelectelStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields, isValidForm } = backup;
-
-//   return {
-//     isValidForm,
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation(["Settings", "Common"])(SelectelStorage)));

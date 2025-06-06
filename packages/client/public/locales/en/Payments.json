@@ -1,5 +1,6 @@
 {
   "AccessingProblem": "If you are an existing user and have problems accessing this space please contact the administrator.",
+  "ActionCannotBeUndone": "<1>Please note:</1> this action cannot be undone.",
   "AdditionalStorage": "Additional {{amount}}",
   "AddPaymentMethod": "Add payment method",
   "AdministratorDescription": "{{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights.",
@@ -77,7 +78,6 @@
   "Payer": "Payer",
   "PayerDescription": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
   "PaymentMethod": "Payment method",
-  "PaymentNonRefundable": "Payments for plan upgrades are <1>non-refundable</1>.",
   "PerStorage": "{{currency}} per {{amount}}/month",
   "PlanUpgrade": "Plan upgrade",
   "PriceCalculation": "Calculate your price",

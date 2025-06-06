@@ -27,6 +27,7 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { decode } from "he";
 
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
@@ -35,7 +36,6 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { decode } from "he";
 import { Badge } from "@docspace/shared/components/badge";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { globalColors } from "@docspace/shared/themes";

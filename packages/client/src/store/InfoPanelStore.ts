@@ -68,6 +68,8 @@ export const enum InfoPanelView {
   infoShare = "info_share",
 }
 
+export type InfoPanelViewType = InfoPanelView | `info_plugin-${string}`;
+
 type TSelection =
   | Nullable<TRoom | TFolder | TFile>
   | Array<TRoom | TFolder | TFile>;
@@ -79,9 +81,9 @@ class InfoPanelStore {
 
   isMobileHidden = false;
 
-  roomsView = InfoPanelView.infoMembers;
+  roomsView: InfoPanelViewType = InfoPanelView.infoMembers;
 
-  fileView = InfoPanelView.infoHistory;
+  fileView: InfoPanelViewType = InfoPanelView.infoHistory;
 
   isScrollLocked = false;
 
@@ -292,7 +294,7 @@ class InfoPanelStore {
     this.fileView = InfoPanelView.infoHistory;
   };
 
-  setView = (view: InfoPanelView) => {
+  setView = (view: InfoPanelViewType) => {
     this.roomsView = view;
     this.fileView =
       view === InfoPanelView.infoMembers ? InfoPanelView.infoDetails : view;

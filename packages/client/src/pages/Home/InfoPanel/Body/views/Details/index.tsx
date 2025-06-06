@@ -48,7 +48,7 @@ import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 
-import DetailsHelper from "../../helpers/DetailsHelper";
+import DetailsHelper from "./Details.utils";
 
 import commonStyles from "../../helpers/Common.module.scss";
 
@@ -244,13 +244,6 @@ const Details = ({
             }`}
             logo={currentIcon}
             model={model}
-            // withEditing={
-            //   ("isRoom" in selection &&
-            //     "EditRoom" in selection.security &&
-            //     selection.isRoom &&
-            //     selection.security?.EditRoom) ||
-            //   false
-            // }
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl ?? undefined}

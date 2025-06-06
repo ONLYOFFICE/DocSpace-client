@@ -32,7 +32,7 @@ import {
   TFeedData,
 } from "@docspace/shared/api/rooms/types";
 
-import { StyledHistoryBlockTagList } from "../../../styles/history";
+import styles from "../History.module.scss";
 
 type HistoryRoomTagListProps = {
   feed: TFeedAction<TFeedData>;
@@ -42,16 +42,16 @@ type HistoryRoomTagListProps = {
 const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
   if (actionType === "create")
     return (
-      <StyledHistoryBlockTagList>
+      <div className={styles.historyBlockTagList}>
         {feed.data?.tags?.map((tag: string) => (
           <Tag className="history-tag" key={tag} label={tag} tag={tag} />
         ))}
-      </StyledHistoryBlockTagList>
+      </div>
     );
 
   if (actionType === "delete") {
     return (
-      <StyledHistoryBlockTagList>
+      <div className={styles.historyBlockTagList}>
         {feed.data?.tags?.map((tag: string) => (
           <Tag
             className="history-tag deleted-tag"
@@ -61,7 +61,7 @@ const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
             isDeleted
           />
         ))}
-      </StyledHistoryBlockTagList>
+      </div>
     );
   }
 };

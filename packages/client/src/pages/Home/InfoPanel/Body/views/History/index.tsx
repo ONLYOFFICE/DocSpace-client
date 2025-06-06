@@ -40,11 +40,10 @@ import { getCookie } from "@docspace/shared/utils";
 
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
-import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
-
 import NoHistory from "../../sub-components/NoItem/NoHistory";
 
 import HistoryBlock from "./HistoryBlock";
+import styles from "./History.module.scss";
 import ThirdPartyComponent from "./HistoryBlockContent/ThirdParty";
 import { useHistory } from "./hooks/useHistory";
 import { useSocket } from "./hooks/useSocket";
@@ -166,11 +165,11 @@ const History = ({ infoPanelSelection, setExternalLinks }: HistoryProps) => {
 
   return (
     <>
-      <StyledHistoryList id="history-list-info-panel">
+      <div className={styles.historyList} id="history-list-info-panel">
         {history.map(({ day, feeds }) => [
-          <StyledHistorySubtitle key={day}>
+          <div className={styles.historySubtitle} key={day}>
             {getRelativeDateDay(t, feeds[0].date)}
-          </StyledHistorySubtitle>,
+          </div>,
           ...feeds.map((feed, i) => (
             <HistoryBlock
               key={`${feed.action.id}_${feed.date}`}
@@ -179,7 +178,7 @@ const History = ({ infoPanelSelection, setExternalLinks }: HistoryProps) => {
             />
           )),
         ])}
-      </StyledHistoryList>
+      </div>
       {isLoading ? <HistoryItemLoader /> : null}
     </>
   );

@@ -26,35 +26,20 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { FolderType } from "@docspace/shared/enums";
 import { AsideHeader } from "@docspace/shared/components/aside-header";
 import { Tabs } from "@docspace/shared/components/tabs";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom } from "@docspace/shared/utils";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-import PluginStore from "SRC_DIR/store/PluginStore";
-import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
+import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
-import { StyledInfoPanelHeader } from "./Header.styled";
-
-type InfoPanelHeaderContentProps = {
-  selection: InfoPanelStore["infoPanelSelection"];
-
-  roomsView: InfoPanelStore["roomsView"];
-  fileView: InfoPanelStore["fileView"];
-  setView: InfoPanelStore["setView"];
-
-  setIsVisible: InfoPanelStore["setIsVisible"];
-  getIsTrash: InfoPanelStore["getIsTrash"];
-
-  infoPanelItemsList: PluginStore["infoPanelItemsList"];
-
-  enablePlugins: SettingsStore["enablePlugins"];
-};
+import styles from "./Header.module.scss";
+import InfoPanelHeaderContentProps from "./Header.types";
 
 const InfoPanelHeaderContent = ({
   selection,
@@ -201,7 +186,11 @@ const InfoPanelHeaderContent = ({
   }
 
   return (
-    <StyledInfoPanelHeader withTabs={withTabs}>
+    <div
+      className={classNames(styles.infoPanelHeader, {
+        [styles.withTabs]: withTabs,
+      })}
+    >
       <AsideHeader
         header={t("Common:Info")}
         onCloseClick={closeInfoPanel}
@@ -219,7 +208,7 @@ const InfoPanelHeaderContent = ({
           />
         </div>
       ) : null}
-    </StyledInfoPanelHeader>
+    </div>
   );
 };
 

@@ -155,6 +155,18 @@ const Groups = ({ groupSelection }: GroupsProps) => {
     };
   }, []);
 
+  if (!groupSelection) return <NoItem isGroups />;
+
+  if (Array.isArray(groupSelection)) {
+    return (
+      <SeveralItems isGroups isUsers={false} selectedItems={groupSelection} />
+    );
+  }
+
+  const groupManager = groupSelection.manager;
+
+  const totalWithoutManager = groupManager ? total - 1 : total;
+
   const getContent = () => {
     if (showLoader) {
       return <InfoPanelViewLoader view="groups" />;
@@ -174,18 +186,6 @@ const Groups = ({ groupSelection }: GroupsProps) => {
       </>
     );
   };
-
-  if (!groupSelection) return <NoItem isGroups />;
-
-  if (Array.isArray(groupSelection)) {
-    return (
-      <SeveralItems isGroups isUsers={false} selectedItems={groupSelection} />
-    );
-  }
-
-  const groupManager = groupSelection.manager;
-
-  const totalWithoutManager = groupManager ? total - 1 : total;
 
   return (
     <>

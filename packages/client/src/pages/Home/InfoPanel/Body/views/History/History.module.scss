@@ -24,23 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const strikethroughStyles = css`
-  color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+@mixin strikethroughStyles {
+  color: var(--info-panel-me-label-color);
   text-decoration: line-through;
-`;
+}
 
-const StyledHistoryList = styled.div`
+.historyList {
   display: flex;
   flex-direction: column;
-`;
+}
 
-const StyledHistorySubtitle = styled.div.attrs(injectDefaultTheme)`
+.historySubtitle {
   position: sticky;
-  background: ${(props) => props.theme.infoPanel.backgroundColor};
+  background: var(--info-panel-background-color);
   top: 80px;
   z-index: 99;
 
@@ -48,30 +44,28 @@ const StyledHistorySubtitle = styled.div.attrs(injectDefaultTheme)`
   font-weight: 600;
   font-size: 13px;
   line-height: 20px;
-  color: ${(props) => props.theme.infoPanel.history.subtitleColor};
-`;
+  color: var(--info-panel-subtitle-color);
+}
 
-const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)<{
-  withBottomDivider: boolean;
-}>`
+.historyBlock {
   width: 100%;
   display: flex;
   gap: 8px;
   padding: 8px 0;
 
-  ${({ withBottomDivider, theme }) =>
-    withBottomDivider &&
-    ` border-bottom: solid 1px ${theme.infoPanel.borderColor}; `}
+  &.withBottomDivider {
+    border-bottom: solid 1px var(--info-panel-border-color);
+  }
 
-  .avatar {
+  :global(.avatar) {
     min-width: 32px;
   }
 
-  .info {
+  :global(.info) {
     width: 100%;
     overflow: hidden;
 
-    .title {
+    :global(.title) {
       font-size: 14px;
       font-weight: 600;
       display: flex;
@@ -79,32 +73,33 @@ const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)<{
       align-items: center;
       gap: 4px;
 
-      .name {
+      :global(.name) {
         font-weight: 600;
         font-size: 14px;
       }
 
-      .date {
+      :global(.date) {
         white-space: nowrap;
         display: inline-block;
         align-self: flex-start;
         margin-inline-start: auto;
         font-weight: 600;
         font-size: 12px;
-        color: ${(props) => props.theme.infoPanel.history.dateColor};
+        color: var(--info-panel-me-label-color);
       }
 
-      .users-counter {
+      :global(.users-counter) {
         margin-bottom: 1px;
         font-weight: 600;
         font-size: 14px;
       }
     }
-    .without-break {
+
+    :global(.without-break) {
       word-break: unset;
     }
 
-    .action-title {
+    :global(.action-title) {
       text-wrap: nowrap;
       &-text {
         font-size: 14px;
@@ -112,21 +107,21 @@ const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)<{
         text-wrap: wrap;
       }
 
-      .text-combined {
+      :global(.text-combined) {
         text-wrap: nowrap;
         padding-right: 4px;
       }
     }
   }
-`;
+}
 
-const StyledHistoryDisplaynameBlock = styled.div`
-  .name {
-    color: ${(props) => props.theme.infoPanel.history.subtitleColor};
+.historyDisplaynameBlock {
+  :global(.name) {
+    color: var(--info-panel-subtitle-color);
   }
-`;
+}
 
-const StyledHistoryBlockMessage = styled.span.attrs(injectDefaultTheme)`
+.historyBlockMessage {
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
@@ -134,7 +129,7 @@ const StyledHistoryBlockMessage = styled.span.attrs(injectDefaultTheme)`
   gap: 4px;
   max-width: 100%;
 
-  .main-message {
+  :global(.main-message) {
     max-width: 100%;
     padding-inline-end: 4px;
     display: flex;
@@ -152,25 +147,25 @@ const StyledHistoryBlockMessage = styled.span.attrs(injectDefaultTheme)`
     overflow: hidden;
   }
 
-  .folder-label,
-  .source-folder-label {
+  :global(.folder-label),
+  :global(.source-folder-label) {
     max-width: 100%;
-    color: ${(props) => props.theme.infoPanel.history.locationIconColor};
+    color: var(--info-panel-me-label-color);
     text-wrap: wrap;
   }
 
-  .source-folder-label {
-    color: ${(props) => props.theme.infoPanel.history.messageColor};
+  :global(.source-folder-label) {
+    color: var(--info-panel-comment-editor-icon-color);
   }
 
-  .old-role {
-    color: ${(props) => props.theme.infoPanel.history.oldRoleColor};
+  :global(.old-role) {
+    color: var(--info-panel-old-role-color);
     font-weight: 600;
     text-decoration: line-through;
   }
-`;
+}
 
-const StyledHistoryLink = styled.div`
+.historyLink {
   width: fit-content;
   max-width: 100%;
   display: inline-flex;
@@ -178,13 +173,13 @@ const StyledHistoryLink = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  .text {
+  :global(.text) {
     font-size: 14px;
     font-weight: 600;
     display: inline-block;
   }
 
-  .link {
+  :global(.link) {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -194,27 +189,27 @@ const StyledHistoryLink = styled.div`
     text-underline-offset: 2px;
   }
 
-  .space {
+  :global(.space) {
     display: inline-block;
     width: 4px;
     height: 15px;
   }
-`;
+}
 
-const StyledHistoryBlockTagList = styled.div`
+.historyBlockTagList {
   margin-top: 8px;
   display: flex;
   flex-wrap: wrap;
-`;
+}
 
-const StyledHistoryBlockFilesList = styled.div.attrs(injectDefaultTheme)`
+.historyBlockFilesList {
   display: flex;
   flex-direction: column;
   padding: 8px 0;
   border-radius: 3px;
-`;
+}
 
-const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
+.historyBlockFile {
   padding: 4px 0px;
   display: flex;
   gap: 8px;
@@ -222,7 +217,7 @@ const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
   align-items: center;
   justify-content: start;
 
-  .icon {
+  :global(.icon) {
     width: 24px;
     height: 24px;
     margin-inline-end: 5px;
@@ -232,27 +227,25 @@ const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
     }
   }
 
-  .item-wrapper,
-  .old-item-wrapper {
+  :global(.item-wrapper),
+  :global(.old-item-wrapper) {
     display: flex;
     align-items: center;
     justify-content: space-between;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    border: 1px solid
-      ${(props) => props.theme.infoPanel.history.itemBorderColor};
+    border: 1px solid var(--info-panel-item-border-color);
     border-radius: 6px;
     padding: 6px 8px;
 
     &:hover {
       cursor: pointer;
-      background-color: ${(props) =>
-        props.theme.infoPanel.history.fileBackgroundColor};
+      background-color: var(--info-panel-item-selected-color);
     }
   }
 
-  .old-item-wrapper {
+  :global(.old-item-wrapper) {
     border: none;
     &:hover {
       cursor: auto;
@@ -260,90 +253,90 @@ const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
     }
   }
 
-  .item-title {
+  :global(.item-title) {
     font-weight: 600;
     font-size: 13px;
     display: flex;
     min-width: 0;
     gap: 0;
 
-    .name {
+    :global(.name) {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
     }
 
-    .exst {
+    :global(.exst) {
       flex-shrink: 0;
-      color: ${(props) => props.theme.infoPanel.history.fileExstColor};
+      color: var(--info-panel-file-exst-color);
     }
 
-    &.old-item-value {
-      .name {
-        ${strikethroughStyles}
+    :global(.old-item-value) {
+      :global(.name) {
+        @include strikethroughStyles;
       }
-      .exst {
-        ${strikethroughStyles}
+      :global(.exst) {
+        @include strikethroughStyles;
       }
     }
   }
 
-  .old-item-title {
-    .name,
-    .exst {
-      ${strikethroughStyles}
+  :global(.old-item-title) {
+    :global(.name),
+    :global(.exst) {
+      @include strikethroughStyles;
     }
   }
 
-  .location-btn {
+  :global(.location-btn) {
     margin-inline-start: 8px;
     min-width: 16px;
     opacity: 0;
   }
 
   &:hover {
-    .location-btn {
+    :global(.location-btn) {
       opacity: 1;
     }
   }
 
-  .index {
+  :global(.index) {
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
   }
 
-  .change-index {
+  :global(.change-index) {
     display: flex;
     align-items: center;
     gap: 4px;
 
-    .arrow-index {
+    :global(.arrow-index) {
       transform: rotate(-90deg);
 
       path {
-        fill: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+        fill: var(--info-panel-me-label-color);
       }
     }
 
-    .old-index {
-      ${strikethroughStyles}
+    :global(.old-index) {
+      @include strikethroughStyles;
     }
   }
-`;
+}
 
-const StyledHistoryBlockExpandLink = styled.div`
+.historyBlockExpandLink {
   cursor: pointer;
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
 
-  &.files-list-expand-link {
+  &.filesListExpandLink {
     margin-top: 8px;
     margin-inline-start: 5px;
   }
 
-  &.user-list-expand-link {
+  &.userListExpandLink {
     display: inline-block;
     position: relative;
     top: 0;
@@ -355,17 +348,4 @@ const StyledHistoryBlockExpandLink = styled.div`
     text-decoration-style: dashed;
     text-underline-offset: 2px;
   }
-`;
-
-export {
-  StyledHistoryList,
-  StyledHistorySubtitle,
-  StyledHistoryLink,
-  StyledHistoryBlock,
-  StyledHistoryBlockMessage,
-  StyledHistoryBlockFilesList,
-  StyledHistoryBlockFile,
-  StyledHistoryBlockTagList,
-  StyledHistoryBlockExpandLink,
-  StyledHistoryDisplaynameBlock,
-};
+}

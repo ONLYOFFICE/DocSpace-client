@@ -28,6 +28,7 @@ import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { decode } from "he";
+import classNames from "classnames";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
@@ -36,10 +37,7 @@ import { RoomMember, TFeedAction } from "@docspace/shared/api/rooms/types";
 
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
-import {
-  StyledHistoryBlockExpandLink,
-  StyledHistoryLink,
-} from "../../../styles/history";
+import styles from "../History.module.scss";
 
 const EXPANSION_THRESHOLD = 8;
 
@@ -82,9 +80,9 @@ const HistoryUserList = ({
         const userName = decode(user.displayName);
 
         return (
-          <StyledHistoryLink
+          <div
             key={user.id}
-            className="StyledHistoryLink"
+            className={styles.historyLink}
             style={
               withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
             }
@@ -108,13 +106,16 @@ const HistoryUserList = ({
 
             {withComma ? "," : null}
             {feed.related.length > 0 ? <div className="space" /> : null}
-          </StyledHistoryLink>
+          </div>
         );
       })}
 
       {!isExpanded ? (
-        <StyledHistoryBlockExpandLink
-          className="user-list-expand-link"
+        <div
+          className={classNames(
+            styles.historyBlockExpandLink,
+            styles.userListExpandLink,
+          )}
           onClick={onExpand}
         >
           <Trans
@@ -124,7 +125,7 @@ const HistoryUserList = ({
             values={{ count: usersData.length - EXPANSION_THRESHOLD }}
             components={{ 1: <strong /> }}
           />
-        </StyledHistoryBlockExpandLink>
+        </div>
       ) : null}
     </>
   );

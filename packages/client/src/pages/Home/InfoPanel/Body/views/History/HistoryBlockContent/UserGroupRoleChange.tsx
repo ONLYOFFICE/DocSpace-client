@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { StyledHistoryBlockMessage } from "../../../styles/history";
-import {
-  TFeedAction,
-  TFeedData,
-  RoomMember,
-} from "@docspace/shared/api/rooms/types";
+import classNames from "classnames";
+
+import { TFeedAction, RoomMember } from "@docspace/shared/api/rooms/types";
+
+import styles from "../History.module.scss";
 
 interface HistoryUserRoleChangeProps {
   feed: TFeedAction<RoomMember>;
@@ -37,12 +36,12 @@ interface HistoryUserRoleChangeProps {
 
 const HistoryUserGroupRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {
   return (
-    <StyledHistoryBlockMessage className="message">
+    <span className={classNames("message", styles.historyDisplaynameBlock)}>
       <span className="main-message">
         <strong>«{feed.data.access}»</strong>
       </span>{" "}
       <span className="old-role">«{feed.data.oldAccess}»</span>
-    </StyledHistoryBlockMessage>
+    </span>
   );
 };
 

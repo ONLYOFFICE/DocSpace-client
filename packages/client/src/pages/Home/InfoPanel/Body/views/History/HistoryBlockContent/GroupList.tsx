@@ -29,23 +29,17 @@ import { useNavigate } from "react-router";
 import { decode } from "he";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import {
-  TFeedAction,
-  RoomMember,
-  TFeedData,
-} from "@docspace/shared/api/rooms/types";
+import { TFeedAction, TFeedData } from "@docspace/shared/api/rooms/types";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 
-import {
-  StyledHistoryBlockExpandLink,
-  StyledHistoryLink,
-} from "../../../styles/history";
+import styles from "../History.module.scss";
 
 const EXPANSION_THRESHOLD = 8;
 
@@ -109,7 +103,8 @@ const HistoryGroupList = ({
         if (!group) return null;
 
         return (
-          <StyledHistoryLink
+          <div
+            className={styles.historyLink}
             key={group.id}
             style={
               withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
@@ -133,13 +128,16 @@ const HistoryGroupList = ({
 
             {withComma ? "," : null}
             {feed.related.length > 0 ? <div className="space" /> : null}
-          </StyledHistoryLink>
+          </div>
         );
       })}
 
       {!isExpanded ? (
-        <StyledHistoryBlockExpandLink
-          className="user-list-expand-link"
+        <div
+          className={classNames(
+            styles.historyBlockExpandLink,
+            styles.userListExpandLink,
+          )}
           onClick={onExpand}
         >
           <Trans
@@ -149,7 +147,7 @@ const HistoryGroupList = ({
             values={{ count: groupsData.length - EXPANSION_THRESHOLD }}
             components={{ 1: <strong /> }}
           />
-        </StyledHistoryBlockExpandLink>
+        </div>
       ) : null}
     </>
   );

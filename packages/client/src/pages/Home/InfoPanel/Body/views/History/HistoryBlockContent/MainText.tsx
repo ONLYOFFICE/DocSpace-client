@@ -27,6 +27,7 @@
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import {
@@ -35,7 +36,7 @@ import {
   RoomMember,
 } from "@docspace/shared/api/rooms/types";
 
-import { StyledHistoryDisplaynameBlock } from "../../../styles/history";
+import styles from "../History.module.scss";
 
 type HistoryMainTextProps = {
   feed: TFeedAction<RoomMember | TFeedData>;
@@ -44,7 +45,7 @@ type HistoryMainTextProps = {
 const HistoryMainText = ({ feed }: HistoryMainTextProps) => {
   const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
   return (
-    <StyledHistoryDisplaynameBlock className="message">
+    <span className={classNames("message", styles.historyBlockMessage)}>
       <span className="main-message">
         <Text className="name">
           {feed.initiator?.isAnonim
@@ -52,7 +53,7 @@ const HistoryMainText = ({ feed }: HistoryMainTextProps) => {
             : decode(feed.initiator.displayName)}
         </Text>
       </span>
-    </StyledHistoryDisplaynameBlock>
+    </span>
   );
 };
 

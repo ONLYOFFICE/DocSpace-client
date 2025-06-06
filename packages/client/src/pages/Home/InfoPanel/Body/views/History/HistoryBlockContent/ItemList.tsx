@@ -28,6 +28,7 @@ import { useState, Fragment } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
+import classNames from "classnames";
 
 import {
   FeedAction,
@@ -50,11 +51,8 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import config from "PACKAGE_FILE";
-import {
-  StyledHistoryBlockExpandLink,
-  StyledHistoryBlockFile,
-  StyledHistoryBlockFilesList,
-} from "../../../styles/history";
+
+import styles from "../History.module.scss";
 
 const EXPANSION_THRESHOLD = 3;
 
@@ -166,12 +164,12 @@ const HistoryItemList = ({
   };
 
   return (
-    <StyledHistoryBlockFilesList>
+    <div className={styles.historyBlockFilesList}>
       {sortItems.map((item, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         return (
           <Fragment key={`${feed.action.id}_${item.id}`}>
-            <StyledHistoryBlockFile>
+            <div className={styles.historyBlockFile}>
               {actionType === "changeIndex" ? (
                 <div className="change-index">
                   <div className="index old-index"> {item.oldIndex}</div>
@@ -222,10 +220,10 @@ const HistoryItemList = ({
                   title={t("Files:OpenLocation")}
                 />
               ) : null}
-            </StyledHistoryBlockFile>
+            </div>
 
             {actionType === "rename" && oldItem ? (
-              <StyledHistoryBlockFile>
+              <div className={styles.historyBlockFile}>
                 <div className="old-item-wrapper">
                   <ReactSVG
                     className="icon"
@@ -253,14 +251,17 @@ const HistoryItemList = ({
                     )}
                   </div>
                 </div>
-              </StyledHistoryBlockFile>
+              </div>
             ) : null}
           </Fragment>
         );
       })}
       {isExpandable && !isExpanded ? (
-        <StyledHistoryBlockExpandLink
-          className="files-list-expand-link"
+        <div
+          className={classNames(
+            styles.historyBlockExpandLink,
+            styles.filesListExpandLink,
+          )}
           onClick={onExpand}
         >
           <Trans
@@ -270,9 +271,9 @@ const HistoryItemList = ({
             values={{ count: items.length - EXPANSION_THRESHOLD }}
             components={{ 1: <strong /> }}
           />
-        </StyledHistoryBlockExpandLink>
+        </div>
       ) : null}
-    </StyledHistoryBlockFilesList>
+    </div>
   );
 };
 

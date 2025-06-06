@@ -44,7 +44,7 @@ import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
-import CommentEditor from "../sub-components/CommentEditor";
+import CommentEditor from "../../sub-components/CommentEditor";
 
 const text = (value: React.ReactNode) => (
   <Text truncate className="property-content">

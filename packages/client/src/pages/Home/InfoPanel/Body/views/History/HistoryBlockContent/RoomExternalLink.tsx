@@ -36,7 +36,7 @@ import { TFeedData } from "@docspace/shared/api/rooms/types";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 
-import { StyledHistoryLink } from "../../../styles/history";
+import styles from "../History.module.scss";
 
 type HistoryRoomExternalLinkProps = {
   feedData: TFeedData;
@@ -77,7 +77,8 @@ const HistoryRoomExternalLink = ({
   };
 
   return (
-    <StyledHistoryLink
+    <div
+      className={styles.historyLink}
       style={withWrapping ? { display: "inline", wordBreak: "break-all" } : {}}
     >
       {canEditLink ? (
@@ -94,7 +95,7 @@ const HistoryRoomExternalLink = ({
           {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
         </Text>
       )}
-    </StyledHistoryLink>
+    </div>
   );
 };
 

@@ -31,6 +31,7 @@ import { Text } from "@docspace/shared/components/text";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
+import { TGroup } from "@docspace/shared/api/groups/types";
 
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
@@ -44,7 +45,7 @@ import styles from "./SeveralItems.module.scss";
 type SeveralItemsProps = {
   isGroups?: boolean;
   isUsers?: boolean;
-  selectedItems: TPeopleListItem[] | (TRoom | TFile | TFolder)[];
+  selectedItems: TPeopleListItem[] | TGroup[] | (TRoom | TFile | TFolder)[];
 };
 
 const SeveralItems = ({

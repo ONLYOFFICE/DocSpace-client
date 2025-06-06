@@ -24,37 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-export const StyledInfoPanelHeader = styled.div<{ withTabs: boolean }>`
-  width: 100%;
-  max-width: 100%;
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import PluginStore from "SRC_DIR/store/PluginStore";
 
-  display: flex;
-  flex-direction: column;
-  border-bottom: ${(props) =>
-    props.withTabs ? "none" : `1px solid ${props.theme.infoPanel.borderColor}`};
+type InfoPanelHeaderContentProps = {
+  selection: InfoPanelStore["infoPanelSelection"];
 
-  .header-text {
-    height: 68px;
+  roomsView: InfoPanelStore["roomsView"];
+  fileView: InfoPanelStore["fileView"];
+  setView: InfoPanelStore["setView"];
 
-    @media ${tablet} {
-      height: 52px;
-    }
-  }
+  setIsVisible: InfoPanelStore["setIsVisible"];
+  getIsTrash: InfoPanelStore["getIsTrash"];
 
-  .tabs {
-    display: flex;
-    width: 100%;
-    justify-content: center;
+  infoPanelItemsList: PluginStore["infoPanelItemsList"];
 
-    .sticky-indent {
-      height: 0;
-    }
+  enablePlugins: SettingsStore["enablePlugins"];
+};
 
-    .scroll-body > div {
-      justify-content: center;
-    }
-  }
-`;
+export default InfoPanelHeaderContentProps;

@@ -2370,6 +2370,9 @@
   --info-panel-box-shadow: 0px 5px 20px 0px #{$menu-shadow};
   --info-panel-file-exst-color: #{$gray};
   --info-panel-comment-editor-icon-color: #{$black};
+  --info-panel-role-color: #{$light-gray-dark};
+  --info-panel-item-border-color: #{$gray-light-mid};
+  --info-panel-item-selected-color: #{$light-gray-selected};
 }
 
 .dark {
@@ -2397,4 +2400,7 @@
   --info-panel-box-shadow: 0px 5px 20px 0px #{$popup-shadow};
   --info-panel-file-exst-color: #{$gray};
   --info-panel-comment-editor-icon-color: #{$white};
+  --info-panel-role-color: #{$gray};
+  --info-panel-item-border-color: #{$gray-dark-strong};
+  --info-panel-item-selected-color: #{$dark-gray-light};
 }

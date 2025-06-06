@@ -23,60 +23,39 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+@use "@docspace/shared/styles/mixins";
 
-import classNames from "classnames";
+.infoPanelHeader {
+  width: 100%;
+  max-width: 100%;
 
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
+  display: flex;
+  flex-direction: column;
+  border-bottom: var(--info-panel-border-color);
 
-import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+  &.withTabs {
+    border-bottom: none;
+  }
 
-import {
-  TFeedAction,
-  TFeedData,
-  RoomMember,
-} from "@docspace/shared/api/rooms/types";
+  :global(.header-text) {
+    height: 68px;
 
-import HistoryTitleBlock from "./HistoryBlockContent/HistoryTitleBlock";
-import HistoryBlockContent from "./HistoryBlockContent";
-import styles from "./History.module.scss";
+    @include mixins.tablet-and-below {
+      height: 52px;
+    }
+  }
 
-type HistoryBlockProps = {
-  feed: TFeedAction<TFeedData | RoomMember>;
-  isLastEntity: boolean;
-};
+  :global(.tabs) {
+    display: flex;
+    width: 100%;
+    justify-content: center;
 
-const HistoryBlock = ({ feed, isLastEntity }: HistoryBlockProps) => {
-  const { initiator, date } = feed;
+    :global(.sticky-indent) {
+      height: 0;
+    }
 
-  return (
-    <div
-      className={classNames(date, styles.historyBlock, {
-        [styles.withBottomDivider]: !isLastEntity,
-      })}
-    >
-      <Avatar
-        role={AvatarRole.user}
-        className="avatar"
-        size={AvatarSize.min}
-        userName={initiator.displayName}
-        source={
-          initiator.hasAvatar
-            ? initiator.avatar
-            : DefaultUserAvatarSmall ||
-              (initiator.displayName ? "" : initiator.email && AtReactSvgUrl)
-        }
-      />
-      <div className="info">
-        <HistoryTitleBlock feed={feed} />
-        <HistoryBlockContent feed={feed} />
-      </div>
-    </div>
-  );
-};
-
-export default HistoryBlock;
+    :global(.scroll-body) > div {
+      justify-content: center;
+    }
+  }
+}

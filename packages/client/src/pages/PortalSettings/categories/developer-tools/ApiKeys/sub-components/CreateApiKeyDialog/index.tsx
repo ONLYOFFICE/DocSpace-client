@@ -41,7 +41,7 @@ import {
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
+import { TabItem } from "@docspace/shared/components/tab-item";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
 import { globalColors } from "@docspace/shared/themes";
@@ -61,6 +61,13 @@ const StyledBodyContent = styled.div`
     flex-direction: column;
     gap: 4px;
     margin-top: 16px;
+  }
+
+  .api-key_tabs-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
   }
 
   .api-key_name-body-container {
@@ -107,7 +114,7 @@ const StyledBodyContent = styled.div`
   }
 
   .separator {
-    padding: 15px 0px 9px;
+    padding: 11px 0px 9px;
     margin-bottom: 6px;
     border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
   }
@@ -238,31 +245,6 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     {
       id: "restricted",
       name: t("Common:Restricted"),
-      content: (
-        <div className="api-key_permission-tab">
-          <div className="api-key_permission-container">
-            <Text fontSize="13px" fontWeight={600} className="separator">
-              {t("OAuth:ScopesHeader")}
-            </Text>
-            <Text
-              className="api-key_permission-container-text separator"
-              fontWeight={600}
-            >
-              {t("OAuth:Read")}
-            </Text>
-            <Text
-              className="api-key_permission-container-text separator"
-              fontWeight={600}
-            >
-              {t("OAuth:Write")}
-            </Text>
-
-            {permissionsList.map((item) => {
-              return item;
-            })}
-          </div>
-        </div>
-      ),
     },
     {
       id: "readonly",
@@ -338,8 +320,10 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     }
   };
 
-  const onSelectPermission = (data: TTabItem) => {
-    switch (data.id) {
+  const onSelectPermission = (e: React.MouseEvent<HTMLDivElement>) => {
+    const itemId = e.currentTarget.dataset.id;
+
+    switch (itemId) {
       case "all":
         setSelectedItemId("all");
         break;
@@ -434,12 +418,44 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         <Text fontSize="13px" fontWeight={600}>
           {t("Common:Permissions")}
         </Text>
-        <Tabs
-          type={TabsTypes.Secondary}
-          items={tabsItems}
-          onSelect={onSelectPermission}
-          selectedItemId={selectedItemId}
-        />
+
+        <div className="api-key_tabs-container">
+          {tabsItems.map((item) => (
+            <TabItem
+              isActive={selectedItemId === item.id}
+              key={item.id}
+              data-id={item.id}
+              label={item.name}
+              onSelect={onSelectPermission}
+            />
+          ))}
+        </div>
+
+        {selectedItemId === "restricted" ? (
+          <div className="api-key_permission-tab">
+            <div className="api-key_permission-container">
+              <Text fontSize="13px" fontWeight={600} className="separator">
+                {t("OAuth:ScopesHeader")}
+              </Text>
+              <Text
+                className="api-key_permission-container-text separator"
+                fontWeight={600}
+              >
+                {t("OAuth:Read")}
+              </Text>
+              <Text
+                className="api-key_permission-container-text separator"
+                fontWeight={600}
+              >
+                {t("OAuth:Write")}
+              </Text>
+
+              {permissionsList.map((item) => {
+                return item;
+              })}
+            </div>
+          </div>
+        ) : null}
       </div>
       {!isEdit ? (
         <div className="api-key_name">

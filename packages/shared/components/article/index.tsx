@@ -115,6 +115,7 @@ const Article = ({
   downloaddesktopUrl,
   officeforandroidUrl,
   officeforiosUrl,
+  showBackButton,
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
     React.useState<null | React.JSX.Element>(null);
@@ -233,8 +234,6 @@ const Article = ({
   const pathDevTools = user?.isAdmin
     ? "/portal-settings/developer-tools"
     : "/developer-tools";
-
-  const showBackButton = window.location.pathname.includes("portal-settings");
 
   const articleComponent = (
     <>

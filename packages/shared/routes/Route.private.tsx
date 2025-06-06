@@ -275,7 +275,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       (user?.isOwner || user?.isAdmin) &&
       !isPaymentsUrl &&
       !isBackupUrl &&
-      !isPortalDeletionUrl
+      !isPortalDeletionUrl &&
+      !location.pathname.includes("wallet")
     ) {
       return (
         <Navigate

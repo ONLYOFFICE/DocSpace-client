@@ -74,6 +74,7 @@ type WalletProps = {
   fetchTransactionHistory?: () => Promise<void>;
   canUpdateTariff: VoidFunction;
   setVisibleWalletSetting?: (value: boolean) => void;
+  isNotPaidPeriod?: boolean;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -97,6 +98,7 @@ const Wallet = (props: WalletProps) => {
     fetchTransactionHistory,
     canUpdateTariff,
     setVisibleWalletSetting,
+    isNotPaidPeriod,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -125,8 +127,6 @@ const Wallet = (props: WalletProps) => {
     setVisible(true);
     setIsEditAutoPayment(true);
   };
-
-  const isDisbled = !canUpdateTariff;
 
   const onClick = async () => {
     if (isRefreshing) return;
@@ -178,7 +178,7 @@ const Wallet = (props: WalletProps) => {
             {t("BalanceText")}
           </Text>
 
-          {isCardLinkedToPortal ? (
+          {!isNotPaidPeriod && isCardLinkedToPortal ? (
             <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
           ) : null}
         </div>
@@ -199,7 +199,7 @@ const Wallet = (props: WalletProps) => {
           primary
           label={t("TopUpBalance")}
           onClick={onOpen}
-          isDisabled={isDisbled}
+          isDisabled={!canUpdateTariff || isNotPaidPeriod}
         />
       </div>
 
@@ -222,7 +222,12 @@ const Wallet = (props: WalletProps) => {
 };
 
 export default inject(
-  ({ paymentStore, authStore, currentQuotaStore }: TStore) => {
+  ({
+    paymentStore,
+    authStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+  }: TStore) => {
     const { language } = authStore;
     const {
       walletBalance,
@@ -238,6 +243,7 @@ export default inject(
       isCardLinkedToPortal,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
 
     return {
       walletBalance,
@@ -253,6 +259,7 @@ export default inject(
       canUpdateTariff,
       setVisibleWalletSetting,
       isCardLinkedToPortal,
+      isNotPaidPeriod,
     };
   },
 )(observer(Wallet));

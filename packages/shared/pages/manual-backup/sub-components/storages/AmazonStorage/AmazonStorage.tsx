@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,23 +26,23 @@
 
 import React from "react";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "../../../../../components/button";
 import {
   BackupStorageLocalKey,
   ThirdPartyStorages,
-} from "@docspace/shared/enums";
+} from "../../../../../enums";
 import {
   AmazonSettings,
   formNames,
-} from "@docspace/shared/components/amazon-settings";
+} from "../../../../../components/amazon-settings";
 
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+import { useDidMount } from "../../../../../hooks/useDidMount";
+import { getFromLocalStorage } from "../../../../../utils/getFromLocalStorage";
 import type {
   SelectedStorageType,
   StorageRegionsType,
   TTranslation,
-} from "@docspace/shared/types";
+} from "../../../../../types";
 
 interface AmazonStorageProps {
   t: TTranslation;
@@ -109,7 +109,7 @@ const AmazonStorage = ({
   const isDisabled = selectedStorage && !selectedStorage.isSet;
 
   return (
-    <>
+    <div data-testid="amazon-storage">
       <AmazonSettings
         t={t}
         isLoading={isLoading}
@@ -135,18 +135,8 @@ const AmazonStorage = ({
           size={buttonSize}
         />
       </div>
-    </>
+    </div>
   );
 };
 
 export default AmazonStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields, storageRegions, isValidForm } = backup;
-
-//   return {
-//     setCompletedFormFields,
-//     storageRegions,
-//     isValidForm,
-//   };
-// })(observer(withTranslation(["Settings", "Common"])(AmazonStorage)));

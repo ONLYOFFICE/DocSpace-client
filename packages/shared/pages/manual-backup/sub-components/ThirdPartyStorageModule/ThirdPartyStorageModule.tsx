@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,28 +29,31 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
-import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { toastr } from "@docspace/shared/components/toast";
-import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
-import type { ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "../../../../components/text";
+import { ComboBox, ComboBoxSize } from "../../../../components/combobox";
+import { DropDownItem } from "../../../../components/drop-down-item";
+import { BackupStorageType, ThirdPartyStorages } from "../../../../enums";
+import { getOptions } from "../../../../utils/getThirdPartyStoragesOptions";
+import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
+import { IconButton } from "../../../../components/icon-button";
+import { toastr } from "../../../../components/toast";
+import { THIRD_PARTY_SERVICES_URL } from "../../../../constants";
+import type { ButtonSize } from "../../../../components/button";
 
 import type {
   SelectedStorageType,
   StorageRegionsType,
-} from "@docspace/shared/types";
+} from "../../../../types";
 
-import { StyledManualBackup, StyledComboBoxItem } from "../ManualBackup.styled";
+import {
+  StyledManualBackup,
+  StyledComboBoxItem,
+} from "../../ManualBackup.styled";
 
-import { GoogleCloudStorage } from "./storages/GoogleCloudStorage";
-import { RackspaceStorage } from "./storages/RackspaceStorage";
-import { SelectelStorage } from "./storages/SelectelStorage";
-import { AmazonStorage } from "./storages/AmazonStorage";
+import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";
+import { RackspaceStorage } from "../storages/RackspaceStorage";
+import { SelectelStorage } from "../storages/SelectelStorage";
+import { AmazonStorage } from "../storages/AmazonStorage";
 
 const DefaultParameters = {
   comboBoxOptions: [],
@@ -182,36 +185,39 @@ const ThirdPartyStorageModule = ({
     setIsThirdStorageChanged,
   };
 
-  const advancedOptions = comboBoxOptions?.map((item) => {
-    return (
-      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
-        <DropDownItem
-          onClick={() => onSelect(item.key)}
-          // className={item.className}
-          data-third-party-key={item.key}
-          disabled={item.disabled}
-          isActive={selectedId === item.key}
-        >
-          <Text className="drop-down-item_text" fontWeight={600}>
-            {item.label}
-          </Text>
-
-          {!item.disabled && !item.connected ? (
-            <IconButton
-              isFill
-              size={16}
-              className="drop-down-item_icon"
+  const advancedOptions = (
+    <div style={{ display: "contents" }}>
+      {comboBoxOptions?.map((item) => {
+        return (
+          <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+            <DropDownItem
               onClick={() => onSelect(item.key)}
-              iconName={ExternalLinkReactSvgUrl}
-            />
-          ) : null}
-        </DropDownItem>
-      </StyledComboBoxItem>
-    );
-  });
+              data-third-party-key={item.key}
+              disabled={item.disabled}
+              isActive={selectedId === item.key}
+            >
+              <Text className="drop-down-item_text" fontWeight={600}>
+                {item.label}
+              </Text>
+
+              {!item.disabled && !item.connected ? (
+                <IconButton
+                  isFill
+                  size={16}
+                  className="drop-down-item_icon"
+                  onClick={() => onSelect(item.key)}
+                  iconName={ExternalLinkReactSvgUrl}
+                />
+              ) : null}
+            </DropDownItem>
+          </StyledComboBoxItem>
+        );
+      })}
+    </div>
+  );
 
   return (
-    <StyledManualBackup>
+    <StyledManualBackup data-testid="third-party-storage-module">
       <div className="manual-backup_storages-module">
         <ComboBox
           options={[]}
@@ -258,12 +264,3 @@ const ThirdPartyStorageModule = ({
 };
 
 export default ThirdPartyStorageModule;
-
-// export default inject(({ backup }) => {
-//   const { thirdPartyStorage, isFormReady } = backup;
-
-//   return {
-//     thirdPartyStorage,
-//     isFormReady,
-//   };
-// })(observer(ThirdPartyStorageModule));

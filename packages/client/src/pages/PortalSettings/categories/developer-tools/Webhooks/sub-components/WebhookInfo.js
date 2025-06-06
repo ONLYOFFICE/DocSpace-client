@@ -35,10 +35,6 @@ import { Text } from "@docspace/shared/components/text";
 import { useTranslation } from "react-i18next";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
-const InfoWrapper = styled.div`
-  margin-bottom: 25px;
-`;
-
 const InfoText = styled(Text).attrs(injectDefaultTheme)`
   max-width: 660px;
   white-space: break-spaces;
@@ -52,7 +48,7 @@ const WebhookInfo = (props) => {
   const { webhooksGuideUrl, logoText } = props;
 
   return (
-    <InfoWrapper>
+    <div>
       <InfoText as="p">
         {t("WebhooksInfo", {
           productName: t("Common:ProductName"),
@@ -73,7 +69,7 @@ const WebhookInfo = (props) => {
           {t("WebhooksGuide")}
         </Link>
       ) : null}
-    </InfoWrapper>
+    </div>
   );
 };
 

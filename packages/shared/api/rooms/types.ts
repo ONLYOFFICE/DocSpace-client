@@ -309,7 +309,7 @@ export enum FeedTarget {
   Group = "group",
 }
 
-export enum FeedInfoKey {
+export enum FeedActionKeys {
   FileCreated = "FileCreated",
   FileUploaded = "FileUploaded",
   UserFileUpdated = "UserFileUpdated",
@@ -333,6 +333,8 @@ export enum FeedInfoKey {
   FileCustomFilterEnabled = "FileCustomFilterEnabled",
   FolderCreated = "FolderCreated",
   FolderRenamed = "FolderRenamed",
+  FolderLocked = "FolderLocked",
+  FolderUnlocked = "FolderUnlocked",
   FolderMoved = "FolderMoved",
   FolderMovedToTrash = "FolderMovedToTrash",
   FolderCopied = "FolderCopied",
@@ -377,7 +379,7 @@ export type CapitalizedFeedAction = Capitalize<FeedAction>;
 export type TFeedAction<T = TFeedData> = {
   action: {
     id: number;
-    key: FeedInfoKey;
+    key: FeedActionKeys;
   };
   data: T;
   date: string;

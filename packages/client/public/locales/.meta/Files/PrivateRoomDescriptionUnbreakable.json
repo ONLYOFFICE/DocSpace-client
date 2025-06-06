@@ -3,7 +3,7 @@
   "content": "Unbreakable AES-256 algorithm.",
   "content_en_sha1_hash": "1568d0980e87c187522b1560cb26e4baa6a5730e",
   "created_at": "2025-05-19T21:30:55.989Z",
-  "updated_at": "2025-05-24T11:41:37.362Z",
+  "updated_at": "2025-06-02T10:20:51.021Z",
   "comment": {
     "text": "This translation key is used to describe the security level of a private room, specifically emphasizing its unbreakable encryption using the AES-256 algorithm. It appears in the header of an empty root folder container and is intended for display to users, informing them about the robust security measures in place.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 133,
+      "line_number": 135,
       "context": "const privateRoomDescTranslations = [\n t(\"PrivateRoomDescriptionSafest\"),\n t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];\n \n const roomHeader = t(\"Common:EmptyRootRoomHeader\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     }

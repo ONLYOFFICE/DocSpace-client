@@ -787,7 +787,9 @@ class ContextOptionsStore {
       );
     } else {
       translations = {
-        deleteFromTrash: t("Translations:DeleteFromTrash"),
+        deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+          sectionName: t("Common:TrashSection"),
+        }),
       };
 
       deleteAction(translations, [selectedFolder], true).catch((err) =>
@@ -1366,7 +1368,6 @@ class ContextOptionsStore {
       isRecycleBinFolder,
       isArchiveFolder,
       isTemplatesFolder,
-      personalUserFolderTitle,
       isPersonalReadOnly,
     } = this.treeFoldersStore;
     const { roomsForDelete, roomsForRestore } = this.filesStore;
@@ -1408,7 +1409,9 @@ class ContextOptionsStore {
         {
           id: "header_option_empty-trash",
           key: "empty-trash",
-          label: t("Files:EmptyRecycleBin"),
+          label: t("Files:EmptySection", {
+            sectionName: t("Common:TrashSection"),
+          }),
           onClick: this.onEmptyTrashAction,
           icon: ClearTrashReactSvgUrl,
           disabled: false,
@@ -1463,7 +1466,7 @@ class ContextOptionsStore {
           id: "header_option_empty-section",
           key: "empty-section",
           label: t("Files:EmptySection", {
-            sectionName: personalUserFolderTitle,
+            sectionName: t("Common:MyFilesSection"),
           }),
           onClick: this.onEmptyPersonalAction,
           icon: ClearTrashReactSvgUrl,
@@ -2500,7 +2503,9 @@ class ContextOptionsStore {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
-                  deleteFromTrash: t("Translations:DeleteFromTrash"),
+                  deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+                    sectionName: t("Common:TrashSection"),
+                  }),
                 };
 
                 this.filesActionsStore

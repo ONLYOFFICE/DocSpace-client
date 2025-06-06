@@ -48,7 +48,6 @@ type ChangeUserTypeEventProps = {
   dialogData: TChangeUserTypeDialogData;
 
   onClose: VoidFunction;
-  personalUserFolderTitle?: string;
 };
 
 const ChangeUserTypeEvent = ({
@@ -60,7 +59,6 @@ const ChangeUserTypeEvent = ({
   getPeopleListItem,
 
   onClose,
-  personalUserFolderTitle,
 }: ChangeUserTypeEventProps) => {
   const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
 
@@ -176,38 +174,32 @@ const ChangeUserTypeEvent = ({
       onClose={onCloseAction}
       onChangeUserType={onChangeUserType}
       isRequestRunning={isRequestRunning}
-      personalUserFolderTitle={personalUserFolderTitle}
       isDowngradeType={isDowngradeType}
       isDowngradeToUser={isDowngradeToUser}
     />
   );
 };
 
-export default inject(
-  ({ peopleStore, treeFoldersStore, infoPanelStore }: TStore) => {
-    const { dialogStore, usersStore } = peopleStore;
+export default inject(({ peopleStore, infoPanelStore }: TStore) => {
+  const { dialogStore, usersStore } = peopleStore;
 
-    const { data: dialogData } = dialogStore!;
+  const { data: dialogData } = dialogStore!;
 
-    const { personalUserFolderTitle } = treeFoldersStore;
-    const {
-      updateUserType,
-      getPeopleListItem,
-      needResetUserSelection,
-      setSelected,
-    } = usersStore!;
+  const {
+    updateUserType,
+    getPeopleListItem,
+    needResetUserSelection,
+    setSelected,
+  } = usersStore!;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isVisible: infoPanelVisible } = infoPanelStore;
-    return {
-      needResetUserSelection: !infoPanelVisible || needResetUserSelection,
+  return {
+    needResetUserSelection: !infoPanelVisible || needResetUserSelection,
 
-      getPeopleListItem,
+    getPeopleListItem,
 
-      setSelected,
-
-      dialogData,
-      updateUserType,
-      personalUserFolderTitle,
-    };
-  },
-)(observer(ChangeUserTypeEvent));
+    dialogData,
+    updateUserType,
+    setSelected,
+  };
+})(observer(ChangeUserTypeEvent));

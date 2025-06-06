@@ -3,7 +3,7 @@
   "content": "Not available under this license",
   "content_en_sha1_hash": "fc7d2762ca5286b81d400f0c8ae1c6279cc8c56a",
   "created_at": "2025-05-26T07:15:45.537Z",
-  "updated_at": "2025-05-26T08:04:30.917Z",
+  "updated_at": "2025-06-02T10:20:51.605Z",
   "comment": {
     "text": "This translation key displays a message indicating that content is not available due to licensing restrictions, appearing on branding pages. It's used in two different contexts: one as part of a page component and another as part of a white label version of the same page. Translators should adapt this text to convey the same meaning while varying tone according to the context.",
     "is_auto": true,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Branding/BrandName/NotAvailable.tsx",
-      "line_number": 67,
-      "context": "const { t } = props;\n return (\n <StyledWrapper>\n <ReactSVG className=\"lock-icon\" src={LockedReactSvgUrl} />\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"NotAvailableUnderLicense\")}\n </Text>\n </StyledWrapper>\n );\n };",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/NotAvailable.tsx",
-      "line_number": 65,
-      "context": "return (\n <StyledWrapper>\n <ReactSVG className=\"lock-icon\" src={LockedReactSvgUrl} />\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"NotAvailableUnderLicense\")}\n </Text>\n </StyledWrapper>\n );\n };",
+      "line_number": 44,
+      "context": "return (\n <div className={styles.notAvailableWrapper}>\n <ReactSVG className={styles.lockIcon} src={LockedReactSvgUrl} />\n <Text fontSize=\"12px\" fontWeight=\"600\">\n {t(\"NotAvailableUnderLicense\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/shared"
     }
   ],

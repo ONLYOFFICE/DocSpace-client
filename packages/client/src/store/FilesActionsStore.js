@@ -2333,7 +2333,9 @@ class FilesActionStore {
               setDeleteDialogVisible(true);
             } else {
               const translations = {
-                deleteFromTrash: t("Translations:DeleteFromTrash"),
+                deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+                  sectionName: t("Common:TrashSection"),
+                }),
               };
 
               this.deleteAction(translations).catch((err) => toastr.error(err));

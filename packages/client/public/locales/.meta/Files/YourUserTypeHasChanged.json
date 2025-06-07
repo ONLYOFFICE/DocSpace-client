@@ -3,7 +3,7 @@
   "content": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
   "content_en_sha1_hash": "febfdedb85e18cb49938f3ce47eb46b6a5bf2a45",
   "created_at": "2025-05-19T21:30:56.364Z",
-  "updated_at": "2025-05-24T11:03:57.724Z",
+  "updated_at": "2025-06-02T10:20:51.160Z",
   "comment": {
     "text": "This translation key displays a message when a user's type changes, indicating the new user type and who made the change. It is used in a modal dialog to notify users of an administrative action taken by the admin.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 49,
+      "line_number": 48,
       "context": "<ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}",
       "module": "/packages/client"
     }

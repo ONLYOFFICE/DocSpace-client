@@ -13,7 +13,6 @@
   "DeleteTemplates": "هل أنتم متأكدون من رغبتكم في حذف قوالب الغرف المحددة؟ لا يمكن استعادتها بعد الحذف.",
   "FolderPermanentlyDeleted": "سيتم حذف المجلد بشكل دائم خلال 30 يوم.",
   "ItemsPermanentlyDeleted": "سيتم حذف العنصر بشكل دائم خلال 30 يوم.",
-  "MoveToTrashButton": "انقل الى سلة المهملات",
   "UnsubscribeButton": "إلغاء الاشتراك",
   "UnsubscribeNote": "هل أنت متأكد أنك تريد إلغاء الاشتراك من العناصر المحددة من القائمة؟",
   "UnsubscribeTitle": "تأكيد إلغاء الاشتراك"

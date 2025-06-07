@@ -26,6 +26,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import classNames from "classnames";
 
 import { ThirdPartyStorages } from "@docspace/shared/enums";
 
@@ -130,7 +131,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className={styles.autoBackup}>
+      <div className={classNames(styles.backupCommon, styles.autoBackup)}>
         <Story />
       </div>
     ),

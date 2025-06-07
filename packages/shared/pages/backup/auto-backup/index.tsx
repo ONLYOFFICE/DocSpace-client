@@ -400,7 +400,10 @@ const AutomaticBackup = ({
   if (isInitialLoading) return <AutoBackupLoader />;
 
   return (
-    <div className={classNames(styles.backupCommon, styles.autoBackup)}>
+    <div
+      data-testid="auto-backup"
+      className={classNames(styles.backupCommon, styles.autoBackup)}
+    >
       <StatusMessage message={errorInformation} />
       <div
         className={classNames(

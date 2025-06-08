@@ -88,6 +88,7 @@ const Navigation = ({
   guidAnimationVisible,
   setGuidAnimationVisible,
   isContextButtonVisible,
+
   ...rest
 }: TNavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -331,6 +332,7 @@ const Navigation = ({
               isContextButtonVisible={isContextButtonVisible}
             />
           </div>
+
           {isDesktop && !hideInfoPanel ? (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"

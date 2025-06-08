@@ -3,7 +3,7 @@
   "content": "Action required",
   "content_en_sha1_hash": "a5f995a22060510a354c12efb27296065c533247",
   "created_at": "2025-05-19T21:30:42.869Z",
-  "updated_at": "2025-05-26T07:57:32.246Z",
+  "updated_at": "2025-05-28T09:30:02.220Z",
   "comment": {
     "text": "The \"ActionRequired\" translation key is used to display a message indicating that an action needs to be taken in conflict resolution dialogues, such as a file conflict. This text typically appears on a button or header label, prompting users to take further action. Its purpose is to guide the user through resolving conflicts in a clear and concise manner.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
       "line_number": 55,
-      "context": "submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong key=\"component_key\" className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}",
+      "context": "submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}",
       "module": "/packages/doceditor"
     }
   ],
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Požadovaná opatření' is a possible translation, it's quite formal and literal. A more natural and commonly used translation of 'Action required' would be 'Nutná akce' or 'Je nutné jednat'. 'Požadovaná opatření' implies a more bureaucratic or official request.",
+          "suggestion": "Consider 'Nutná akce' or 'Je nutné jednat' for a more natural translation."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,13 +81,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Vaatii toimenpiteitä\" is technically correct, it's a very literal translation and sounds unnatural in Finnish. A more idiomatic and common translation of \"Action required\" would be \"Toimenpide tarvitaan\" or \"Tarvitaan toimenpide\".",
-          "suggestion": "Toimenpide tarvitaan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Պահանջվող գործողություն' is a literal translation, it's not the most natural or common way to express 'Action required' in Armenian. It sounds a bit formal and clunky.",
-          "suggestion": "Consider alternatives like 'Հարկավոր է գործել' (Harkavor e gorel - It's necessary to act) or 'Գործողություն անհրաժեշտ է' (Gorgut'yun anhrazheshd e - Action is necessary). A shorter, more direct translation like 'Գործելու կարիք' (Gorelu karik - Need to act) might also be suitable depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '필요한 작업' (pillyohan jageop) is a literal translation, it doesn't fully capture the urgency and directness of 'Action required'. A more appropriate translation would convey a sense of immediate need.",
-          "suggestion": "Consider translations like '요청된 조치' (yocheongdoen jochi) - 'Required action' or '필수 조치' (pilsu jochi) - 'Mandatory action' depending on the intended nuance."
+          "description": "The Korean translation '필요한 작업' while literally meaning 'required work' doesn't fully capture the urgency and directness of 'Action required'. It's a more formal and less immediate phrasing.",
+          "suggestion": "Consider alternatives like '조치 필요' (jochi pilyo - action needed) or '필요 조치' (pilyo jochi - necessary action) for a closer meaning."
         }
       ],
       "approved_at": null
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຕ້ອງດໍາລົງການ' is a literal translation of 'must perform an action' and doesn't convey the urgency or directness of 'Action required'. It's overly formal and doesn't fit typical usage for a call to action.",
-          "suggestion": "A more appropriate translation would be something like 'ຕ້ອງເຮັດ' (tong het - must do), 'ແກ້ໄຂດ່ວນ' (gae khai duan - urgent resolution), or 'ກະຕື້ກ້າຽວເຮັດ' (kateua het - proactively do), depending on the context."
+          "description": "The Lao translation 'ຕ້ອງດໍາລົງການ' (tong damlong kan) translates more literally to 'must perform' or 'must undertake'. While not entirely wrong, it's a more formal and less common way to express 'Action required'. A more natural and direct translation would be closer to 'ຕ້ອງເຮັດ' (tong het) meaning 'must do' or 'need to do'.",
+          "suggestion": "ຕ້ອງເຮັດ (tong het)"
         }
       ],
       "approved_at": null
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Veicamās darbības\" translates to \"Tasks to be performed\" or \"Actions to be done\", which is a more verbose and less direct translation of \"Action required\". It lacks the urgency implied by the English phrase.",
-          "suggestion": "A more direct and concise translation would be \"Nepieciešama rīcība\" or \"Rīcība nepieciešama\"."
+          "description": "The translation \"Veicamās darbības\" is not the most accurate or natural translation of \"Action required.\" While it literally means \"Tasks to be performed,\" it's not idiomatic for conveying the sense of urgency or necessity implied by \"Action required.\" A better translation would convey a sense of urgency or direct action needed.",
+          "suggestion": "Consider alternatives such as \"Nepieciešama rīcība\" (Action needed) or \"Jāveic darbības\" (Actions must be taken)."
         }
       ],
       "approved_at": null
@@ -195,7 +189,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Požadované opatrenia' is a literal translation of 'Action required', it lacks the urgency and directness of the original English phrase. 'Action required' often implies immediate attention and a specific task. 'Požadované opatrenia' sounds more formal and general.",
+          "suggestion": "Consider alternatives like 'Vyžaduje sa akcia', 'Je potrebné konať', or 'Dôležitá akcia' depending on the specific context. 'Vyžaduje sa akcia' is perhaps the closest in terms of conveying urgency."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Potrebna je aktivnost\" is technically correct but sounds somewhat formal and less natural than other possible options for 'Action required'. It implies 'An activity is needed' rather than a direct call to action. A more suitable translation might be something like 'Zahtevana akcija' or 'Potrebno je ukrepati'.",
-          "suggestion": "Consider 'Zahtevana akcija' or 'Potrebno je ukrepati' for a more natural and direct translation."
+          "description": "While \"Potrebna je aktivnost\" is technically correct, it's a slightly literal and less natural translation of \"Action required.\" A more idiomatic Slovenian phrase would be better.",
+          "suggestion": "Consider alternatives like \"Zahtevana akcija\" or \"Potrebno je ukrepati\"."
         }
       ],
       "approved_at": null
@@ -213,13 +213,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Акција је потребна\" is a literal translation of \"Action required\", it's not the most natural or common way to express this sentiment in Serbian. It sounds somewhat formal and slightly clunky.",
-          "suggestion": "Consider alternatives like: \"Потребна је акција\" (Potrebna je akcija) or \"Неопходна је акција\" (Neophodna je akcija) which are more idiomatic."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -234,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Form sahibi' translates to 'Form owner'. This is not an accurate translation of 'Action required', which implies a task or action that needs to be taken.",
-          "suggestion": "A more appropriate translation would be something like 'İşlem Gerekiyor' or 'Yapılması Gerekenler'."
+          "description": "The Turkish translation \"Form sahibi\" translates to \"Form owner\" which does not accurately convey the meaning of \"Action required\".",
+          "suggestion": "A more appropriate translation would be something like \"İşlem Gerekli\" or \"Yapılması Gereken\"."
         }
       ],
       "approved_at": null
@@ -255,13 +249,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"需要执行操作\" is a literal translation of 'Action required', it's not the most natural or commonly used phrase in Chinese. A more idiomatic translation would be \"需要操作\" or \"请操作\" depending on the context.",
-          "suggestion": "需要操作 or 请操作"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

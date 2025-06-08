@@ -3,7 +3,7 @@
   "content": "Manage storage quota",
   "content_en_sha1_hash": "0acf9963c183dbb1e5558ca61bdf05b365b77448",
   "created_at": "2025-05-19T21:30:46.354Z",
-  "updated_at": "2025-05-26T07:57:32.792Z",
+  "updated_at": "2025-05-28T09:30:02.205Z",
   "comment": {
     "text": "Manage storage quota is used as a button label and header title in a modal dialog to allow users to manage their storage space, typically when viewing usage statistics or setting up custom quotas. It appears on a portal settings page and in a change storage quota dialog.",
     "is_auto": true,
@@ -11,21 +11,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
-      "line_number": 139,
-      "context": "fontWeight={600}\n onClick={onChangeDialogClick}\n className=\"disk-space_link\"\n color=\"accent\"\n >\n {t(\"Common:ManageStorageQuota\")}\n </Link>\n ) : null}\n </div>\n {standalone && isTenantCustomQuotaSet ? (\n <div className=\"disk-space_icon\">",
+      "file_path": "/packages/client/src/components/dialogs/ChangeStorageQuotaDialog/index.js",
+      "line_number": 118,
+      "context": "return (\n <ModalDialog visible={isVisible} onClose={onCloseClick}>\n <ModalDialog.Header>\n {isDisableQuota\n ? t(\"Common:DisableStorageQuota\")\n : t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>\n {isDisableQuota",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 133,
-      "context": "onClose={onCloseClick}\n >\n <ModalDialog.Header>\n {isDisableQuota\n ? t(\"Common:DisableStorageQuota\")\n : t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {",
-      "module": "/packages/shared"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/StorageSpaceUsed.js",
+      "line_number": 138,
+      "context": "themeId={ThemeId.Link}\n fontWeight={600}\n onClick={onChangeDialogClick}\n className=\"disk-space_link\"\n >\n {t(\"Common:ManageStorageQuota\")}\n </ColorTheme>\n ) : null}\n </div>\n {standalone && isTenantCustomQuotaSet ? (\n <div className=\"disk-space_icon\">",
+      "module": "/packages/client"
     },
     {
-      "file_path": "/packages/management/src/app/spaces/multiple/spaces-row.tsx",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/RowView/SpacesRoomRow.tsx",
       "line_number": 127,
-      "context": "icon: CatalogSettingsReactSvgUrl,\n onClick: () =>\n window.open(`${protocol}//${item.domain}/portal-settings/`, \"_blank\"),\n },\n {\n label: t(\"Common:ManageStorageQuota\"),\n key: \"change_quota\",\n icon: ChangeQuotaReactSvgUrl,\n onClick: onChangeQuota,\n },\n {",
+      "context": "icon: CatalogSettingsReactSvgUrl,\n onClick: () =>\n window.open(`${protocol}//${item.domain}/portal-settings/`, \"_blank\"),\n },\n {\n label: t(\"Common:ManageStorageQuota\"),\n key: \"change_quota\",\n icon: ChangQuotaReactSvgUrl,\n onClick: () => {\n setIsVisibleDialog(true);\n isDisableQuota && setIsDisableQuota(false);",
       "module": "/packages/management"
     }
   ],
@@ -45,7 +45,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Yaddaş kvotasını idarə edin' is understandable, a more natural and accurate translation of 'Manage storage quota' in Azerbaijani would be 'Saxta həcm kvotasını idarə et'. 'Yaddaş' primarily means 'memory' and 'saxta həcm' is more aligned with 'storage'.",
+          "suggestion": "Saxta həcm kvotasını idarə et"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -72,7 +78,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'αποθ.' is an abbreviation and might be unclear to some users. While commonly understood, a full word would be more accessible.",
+          "description": "The word 'αποθ. χώρου' is an abbreviation and may not be ideal for all users. It's understandable but could be replaced with the full word for clarity.",
           "suggestion": "Διαχείριση ποσόστωσης αποθηκευτικού χώρου"
         }
       ],
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຄຸ້ມບານການຈັດສັນຄໍ້າສູງສຸດ\" is a literal translation but doesn't accurately convey the meaning of 'Manage storage quota'. 'ຄຸ້ມບານ' implies guardianship or caretaking, which isn't the primary function of managing a quota.  'ຈັດສັນຄໍ້າສູງສຸດ' translates to 'allocating the maximum quota,' which is more specific than 'manage'.",
-          "suggestion": "A more accurate translation could be something like 'ຈັດການຄໍ້າສູງສຸດ' (Jat gaan khao sung soot) which means 'Manage quota' or 'ບໍລິຫານຄໍ້າສູງສຸດ' (Borihan khao sung soot) which means 'Administer quota'."
+          "description": "The Lao translation \"ຄຸ້ມບານການຈັດສັນຄໍ້າສູງສຸດ\" does not accurately convey the meaning of \"Manage storage quota.\" \"ຄຸ້ມບານ\" (khum ban) generally means 'to manage' or 'to take care of', but the rest of the phrase lacks the nuance of 'quota'.",
+          "suggestion": "Consider alternatives like \"ຈັດການກໍານິສັດຄໍ້າສູງສຸດ\" (jat gaan kaanit ka’a soot) which translates to 'manage quota limit' or \"ການຈັດການຄໍ້າສູງສຸດ\" (kaan jat gaan ka’a soot) which translates to 'storage quota management'."
         }
       ],
       "approved_at": null
@@ -147,13 +153,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Zarządzaj limitem pamięci' is understandable, a more accurate and natural translation of 'Manage storage quota' would be 'Zarządzaj limitem miejsca na dysku' or 'Zarządzaj kwotą pamięci'. 'Miejsce na dysku' more accurately conveys 'storage' in this context, whereas 'pamięć' primarily refers to RAM.",
-          "suggestion": "Zarządzaj limitem miejsca na dysku"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ආචයන සලාකය කළමනාකරණය' doesn't accurately convey the meaning of \"Manage storage quota.\" 'ආචයන' (aachayana) doesn't directly relate to storage and 'සලාකය' (salaakaya) is not the best word choice for quota.  It appears to be a mix of words that don't fully represent the concept.",
-          "suggestion": "A more accurate translation would be something like 'ගබඩාවේ ප්‍රමාණය කළමනාකරණය' (Gabadawe pramaṇaya kalamaṇākaramaṇa), which translates to 'Manage storage volume/capacity'."
+          "description": "The Sinhala translation 'ආචයන සලාකය කළමනාකරණය' doesn't accurately convey the meaning of \"Manage storage quota\". 'ආචයන' is not directly related to storage or management. It appears to be a mistranslation or misinterpretation.",
+          "suggestion": "A more accurate translation would be something like 'ගබඩාවේ ඉඩ ප්‍රමාණය කළමනාකරණය' (Gabadawe ida pramaṇaya kalamanakaraṇaya) which translates to 'Manage storage space'."
         }
       ],
       "approved_at": null

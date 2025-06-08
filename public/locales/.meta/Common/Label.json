@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2025-05-26T07:57:32.251Z",
+  "updated_at": "2025-06-03T20:59:41.886Z",
   "comment": {
     "text": "The \"Label\" translation key is used to display a descriptive title for input fields, such as group names or room tags. It appears in a dialog box, specifically within the CreateEditGroupDialog and CreateEditRoomDialog components, where it provides context for users to enter a name. Translators should replace the English content with a translated version of \"Name\" while maintaining this descriptive purpose.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 411,
+      "line_number": 412,
       "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTags\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>\n {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (\n <RoomType",
       "module": "/packages/client"
     },
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1130,
+      "line_number": 1131,
       "context": "const commonOptions = [];\n \n const name = {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\"),\n default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
       "module": "/packages/client"
     },
@@ -144,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Bezeichnung' can mean 'name', it often implies a label, description, or designation. 'Name' is more directly equivalent to a person's or object's name.",
+          "description": "The German translation 'Bezeichnung' while technically meaning 'designation' or 'description', isn't the most natural or direct translation of 'Name'. It implies a more formal or technical identification.",
           "suggestion": "Consider 'Name' or 'Beiname' for a more direct translation of 'Name'."
         }
       ],
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Etichetă\" does not accurately convey the meaning of \"Name\". \"Etichetă\" translates to \"Label\". While related, \"Name\" requires a more direct equivalent.",
-          "suggestion": "Consider using \"Nume\" which directly translates to \"Name\" in Romanian."
+          "description": "The Romanian translation \"Etichetă\" does not accurately convey the meaning of \"Name.\" \"Etichetă\" translates to \"Label.\" A more appropriate translation for \"Name\" would be \"Nume.\" ",
+          "suggestion": "Nume"
         }
       ],
       "approved_at": null
@@ -276,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Ознака' translates to 'Feature' or 'Mark', not 'Name'. This is not an accurate translation of the English 'Name'.",
-          "suggestion": "Име"
+          "description": "The Serbian (Cyrillic) translation \"Ознака\" translates to 'mark', 'sign', or 'characteristic', which doesn't accurately convey the meaning of 'Name'. 'Name' generally refers to the identifying label of something.",
+          "suggestion": "Consider alternatives like \"Име\" (Ime) which is the standard translation for 'Name' in Serbian (Cyrillic)."
         }
       ],
       "approved_at": null

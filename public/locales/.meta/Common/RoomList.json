@@ -3,7 +3,7 @@
   "content": "Room list",
   "content_en_sha1_hash": "61e05608df86be266bae6e1183981c8d88c82435",
   "created_at": "2025-05-19T21:30:48.199Z",
-  "updated_at": "2025-05-26T07:57:32.843Z",
+  "updated_at": "2025-05-28T09:30:02.862Z",
   "comment": {
     "text": "The \"RoomList\" translation key is used to display a room list label on buttons and other UI elements. It appears in contexts where users can select or view rooms, such as in contact options and selector components. Translators should replace this term with local language equivalents to make the interface accessible to diverse user bases.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Room/index.tsx",
-      "line_number": 198,
+      "line_number": 220,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"Common:RoomList\"),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/packages/shared"
     }
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Lista de las salas' is technically correct, a more natural and common translation for 'Room list' in Spanish would be 'Lista de habitaciones'. 'Salas' often refers to rooms in a building with a specific purpose (e.g., a meeting room).",
+          "description": "While \"Lista de las salas\" is a literal translation, a more natural and common Spanish translation for \"Room list\" would be \"Lista de habitaciones\" or \"Listado de habitaciones\". \"Salas\" typically refers to rooms in a building with a specific purpose, not just any room.",
           "suggestion": "Lista de habitaciones"
         }
       ],
@@ -117,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ບັນຊີລາຍຊື່ຫ້ອງ' is understandable, a more accurate and common translation for 'Room list' would be 'ລາຍການຫ້ອງ' or 'ບັນຊີຫ້ອງ'. 'ບັນຊີລາຍຊື່ຫ້ອງ' is a bit verbose and literal.",
+          "suggestion": "ລາຍການຫ້ອງ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Листа собе' is not the most natural or accurate translation of 'Room list'. 'Листа соба' is the correct form, as 'соба' is the singular form of 'room'. 'Листа соба' would translate to 'List of rooms'.",
-          "suggestion": "Листа соба"
+          "description": "The translation \"Листа собе\" is not grammatically correct or idiomatic Serbian. \"Листа\" means \"list,\" but it's used incorrectly in this context. \"Собе\" is the genitive plural of \"soba\" (room). A more accurate translation would be \"Списак соба\" or \"Список соба\".",
+          "suggestion": "Списак соба"
         }
       ],
       "approved_at": null
@@ -198,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation \"Lista sobe\" is an incorrect translation of \"Room list\". \"Sobe\" means \"rooms,\" not \"list.\" The correct translation should include the word for 'list'.",
+          "description": "The Serbian translation 'Lista sobe' does not accurately translate 'Room list'. 'Sobe' means 'rooms', not 'list'.",
           "suggestion": "Lista prostorija"
         }
       ],
@@ -216,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Список кімнати\" literally translates to \"List of rooms.\" The English content is \"Room list,\" which implies a list specifically *for* rooms, or perhaps a list *of* a room's contents. \"Список кімнат\" (plural) is closer, but still not quite right. A more accurate translation would be \"Перелік кімнат\" or \"Список кімнати\" (if referring to a single room's list of features).",
+          "description": "The translation \"Список кімнати\" literally translates to \"List of room\". While understandable, it's not the most natural phrasing in Ukrainian for \"Room list\". A more idiomatic translation would be \"Перелік кімнат\" or \"Список приміщень\".",
           "suggestion": "Перелік кімнат"
         }
       ],

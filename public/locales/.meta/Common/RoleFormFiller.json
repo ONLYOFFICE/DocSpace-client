@@ -3,7 +3,7 @@
   "content": "Form filler",
   "content_en_sha1_hash": "36309bd9112093f7939d015f5678b7699adce63e",
   "created_at": "2025-05-19T21:30:48.030Z",
-  "updated_at": "2025-06-02T10:20:51.224Z",
+  "updated_at": "2025-05-28T09:30:02.414Z",
   "comment": {
     "text": "This translation key is used to display the role \"Form filler\" and its corresponding description in various parts of the UI, likely on access control settings or room information pages. It provides a clear label for users and reviewers in different contexts.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 284,
+      "line_number": 285,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Commentator\");\n case ShareAccessRights.ReadOnly:\n return t(\"JavascriptSdk:Viewer\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:RoleFormFiller\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     },
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Výplň formuláře\" is a literal translation of \"Form filler,\" it's not the idiomatic way to refer to someone who fills out forms. It's clunky and less natural.",
-          "suggestion": "Consider alternatives like \"Vyplňovač formulářů\" or simply \"Vyplňovač\" (depending on context - the shorter form implies a tool or person who fills forms)."
+          "description": "While \"Výplň formuláře\" is technically correct, it's quite literal and not the most natural-sounding translation for \"Form filler\". It emphasizes the action of filling rather than the role of a person who fills forms.",
+          "suggestion": "Consider \"Vyplňovač formulářů\" or \"Odborník na vyplňování formulářů\" for a more idiomatic translation.  The best option depends on the specific context."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Συμπλήρωση φόρμας' (Symplirosi formás) literally translates to 'Form Completion'. While related, 'Form filler' refers to a person or function that fills out forms, not the act of completing them. The translation doesn't capture the intended meaning.",
-          "suggestion": "Ειδικός συμπλήρωσης φορμών (Eidikós symplírosis formón) - 'Form filling specialist' or  Υπεύθυνος συμπλήρωσης φορμών (Ypeuthýnos symplírosis formón) - 'Form filling responsible person'."
+          "description": "The Greek translation \"Συμπλήρωση φόρμας\" translates to \"Form Completion\" which is not the same as \"Form filler\". \"Form filler\" implies a person or tool that fills out forms, whereas \"Form Completion\" describes the action of completing a form.",
+          "suggestion": "Consider translations like \"Εισαγωγή δεδομένων σε φόρμες\" (Data entry in forms), \"Υπεύθυνος συμπλήρωσης φόρμας\" (Form filler - responsible person), or simply \"Συμπλήρωτής φόρμας\" (Form filler)."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ձևի լցոնիչ\" is a literal translation, it's not the most natural or idiomatic way to express \"form filler\" in Armenian. It sounds overly technical and clunky.",
-          "suggestion": "Consider alternatives like \"մուտքագրող\" (mut'yagrog - data entry specialist), \"պարունակության լցոնող\" (parunakutyun lc'onogh - content filler), or a descriptive phrase like \"ձևեր լցոնող\" (dever lc'onogh - form filler). The best option would depend on the specific context."
+          "description": "While \"Ձևի լցոնիչ\" is a literal translation of \"form filler,\" it sounds awkward and isn't idiomatic Armenian. A more natural translation would convey the meaning of someone who fills out forms.",
+          "suggestion": "Consider alternatives like \"ձևեր լցնելու մարդ\" (person who fills out forms) or \"ձևաշարման մարդ\" (form processing person). The best choice will depend on the specific context."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"フォーム記入用\" (fo-mu ki-juu-you) literally translates to \"for form filling\" or \"form filling use.\" While understandable, it's not the most natural or concise way to convey \"form filler.\" A more direct and commonly used translation would be something like \"フォーム記入担当\" (fo-mu ki-juu tantou) - 'form filling responsible person' or simply \"フォーム記入者\" (fo-mu ki-juu-sha) - 'form filler person'.",
-          "suggestion": "Consider \"フォーム記入担当\" (fo-mu ki-juu tantou) or \"フォーム記入者\" (fo-mu ki-juu-sha)."
+          "description": "While \"フォーム記入用\" (fo-mu ki-jun-you) is understandable, it's a bit too literal and not the most natural way to express 'Form filler'. It translates to 'for form filling'. A more natural translation would depend on the context.  'フォームフィラー' (fo-mu firaa) - a loanword directly from English, or '自動フォーム記入' (jido fo-mu ki-jun) - 'automatic form filling' are possible alternatives.",
+          "suggestion": "Consider 'フォームフィラー' or '自動フォーム記入' for a more natural and contextually appropriate translation."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Preenchimento de formulário' is a literal translation, it's not the most natural or idiomatic way to express 'Form filler' in Portuguese. It describes the *action* of filling a form, not the person or tool that performs the action. A better translation would convey the role or function.",
-          "suggestion": "Consider alternatives like 'Preenchidor de formulários' (Form filler - person) or 'Ferramenta de preenchimento de formulários' (Form filling tool) depending on the context."
+          "description": "The translation \"Preenchimento de formulário\" is a literal translation of 'form filling' rather than a natural equivalent of 'Form filler'. While technically accurate, it doesn't capture the implied role or function described by the English term.",
+          "suggestion": "Consider alternatives like \"Preenchidor de formulários\" or \"Responsável por preencher formulários\" to better reflect the role being described. The best choice depends on the specific context."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආකෘතිපත්‍ර පිරවුම' while technically accurate, is a bit clunky and literal. A more natural translation would be something closer to 'ආකෘතිය පිරවන්නැන්' or 'ආකෘති පත්‍ර පිරවන ක්‍රියා' or simply 'පත්‍ර පිරවුම්'. The current translation sounds overly formal and less common in everyday usage.",
-          "suggestion": "Consider 'ආකෘතිය පිරවන්නැන්', 'ආකෘති පත්‍ර පිරවන ක්‍රියා', or 'පත්‍ර පිරවුම්'."
+          "description": "While \"ආකෘතිපත්‍ර පිරවුම\" is a literal translation, it's not the most natural or common way to refer to a 'form filler' in Sinhala. It sounds overly formal and technical. A more natural translation would be something like \"ආකෘති පත්‍ර පිරවනැන්\" or \"ආකෘතිය පිරවනැන්\".",
+          "suggestion": "Consider \"ආකෘති පත්‍ර පිරවනැන්\" or \"ආකෘතිය පිරවනැන්\"."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Vyplnenie formulára' translates to 'Form Filling' and not 'Form filler'. While related, it's not a direct equivalent. 'Form filler' refers to a person or tool that fills out forms, not the act of filling them out.",
-          "suggestion": "Consider 'Automatický vyplňovač formulárov' (Automatic Form Filler) or 'Vyplňovač formulárov' (Form Filler) if referring to a person or tool. If referring to the process, 'Vyplňovanie formulárov' might be more accurate."
+          "description": "The Slovak translation 'Vyplnenie formulára' translates to 'Form filling' rather than 'Form filler'. While related, it's not a direct equivalent. 'Form filler' implies a person or function, whereas 'Vyplnenie formulára' describes the action of filling a form.",
+          "suggestion": "Consider 'Vyplňovač formulárov' which more closely corresponds to 'Form filler', implying a person or tool that fills out forms."
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Polnjenje obrazca\" translates to \"Form Filling\" rather than \"Form filler\". It describes the action of filling a form, not the role of someone who fills forms.",
-          "suggestion": "Consider \"Pripravnik obrazcev\" or \"Izpolnjevalec obrazcev\" which more closely aligns with the English 'Form filler' (someone who fills forms)."
+          "description": "While \"Polnjenje obrazca\" literally translates to \"Form filling\", it doesn't accurately convey the meaning of \"Form filler\" which refers to a person or program that fills out forms. A more accurate translation would be something like \"pripravljalec obrazcev\" or \"izpolnjevalec obrazcev\".",
+          "suggestion": "Pripravljalec obrazcev"
         }
       ],
       "approved_at": null
@@ -237,19 +237,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Попуњивач образаца' is a literal translation of 'Form filler,' it's somewhat clunky and not the most natural phrasing in Serbian. A more common and natural equivalent would be 'Упутник образаца' or simply 'Образац попуњавач'.",
-          "suggestion": "Consider 'Упутник образаца' or 'Образац попуњавач' for a more natural Serbian translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Popunjivač obrazaca\" is a valid translation, \"Form filler\" often refers to a tool or software that automatically fills forms, not necessarily a person who fills them. A more accurate translation to reflect the potentially automated nature of the term could be \"Automatski popunjivač obrazaca\" or \"Alat za popunjavanje obrazaca\".",
+          "suggestion": "Consider \"Automatski popunjivač obrazaca\" or \"Alat za popunjavanje obrazaca\" if referring to a software tool."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Заповнювач форм\" is a literal translation, it sounds unnatural and overly formal in Ukrainian. A more natural and commonly used term would be 'заповнювач анкет' or 'заповнювач бланків'.",
-          "suggestion": "Consider using 'заповнювач анкет' or 'заповнювач бланків' instead."
+          "description": "While \"Заповнювач форм\" is a literal translation, it sounds awkward and unnatural in Ukrainian. A more common and natural way to express \"Form filler\" would be \"Оформлювач форм\" or \"Особа, що заповнює форми\".",
+          "suggestion": "Consider using \"Оформлювач форм\" or \"Особа, що заповнює форми\"."
         }
       ],
       "approved_at": null
@@ -276,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bộ lọc biểu mẫu\" (Form filter) does not accurately convey the meaning of \"Form filler.\" A form filler is someone who fills out forms, not a filter for forms.",
-          "suggestion": "Người điền biểu mẫu"
+          "description": "The translation \"Bộ lọc biểu mẫu\" (Form filter) does not accurately reflect the meaning of \"Form filler.\" A form filler is someone or something that completes forms, not filters them.",
+          "suggestion": "Consider alternatives like \"Người điền mẫu\" (Form completer), \"Công cụ điền mẫu\" (Form filling tool), or \"Trình điền mẫu\" (Form filler)."
         }
       ],
       "approved_at": null
@@ -288,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"可填写表单\" (ke tian xie bian dan) while technically correct, is overly formal and verbose for the simple term \"Form filler\". It translates to 'able to fill form'. A more natural and concise translation would be better.",
-          "suggestion": "Consider alternatives like \"表单填写员\" (biao dan tian xie yuan - form filling employee) or simply \"填写员\" (tian xie yuan - filler/completer) depending on the context."
+          "description": "The translation \"可填写表单\" while literally meaning 'can fill form', doesn't quite capture the nuance of 'Form filler'. It suggests a capability rather than a role or a person who fills forms.",
+          "suggestion": "Consider alternatives like \"表单填写员\" (biǎo dān tián xiě yuán - form filling employee) or \"表单填写者\" (biǎo dān tián xiě zhě - form filler)."
         }
       ],
       "approved_at": null

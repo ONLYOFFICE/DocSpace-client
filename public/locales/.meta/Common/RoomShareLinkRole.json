@@ -3,7 +3,7 @@
   "content": "The link for the <1>{{role}}</1> role is successfully copied to clipboard.",
   "content_en_sha1_hash": "32be1a65a48a46514045aa777443d8798926a841",
   "created_at": "2025-05-19T21:30:48.273Z",
-  "updated_at": "2025-06-02T10:20:51.583Z",
+  "updated_at": "2025-05-28T09:30:02.954Z",
   "comment": {
     "text": "This translation key is used to display a success message when copying a link to a specific role. It appears in a share dialog component and indicates that the role has been successfully copied to the clipboard.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 362,
-      "context": "const roleText = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"RoomShareLinkRole\"\n values={{ role }}\n components={{ 1: <strong key=\"strong-role\" /> }}\n />\n );",
+      "line_number": 363,
+      "context": "const roleText = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"RoomShareLinkRole\"\n values={{ role }}\n components={{ 1: <Strong /> }}\n />\n );",
       "module": "/packages/shared"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation includes a space before the opening angle bracket '<'. This should be removed to match the English format.",
-          "suggestion": "تم نسخ الرابط الخاص بدور<1>{{role}}</1>بنجاح إلى الحافظة."
+          "description": "The angle brackets `<1>` and `</1>` are present in the Arabic translation as well. These are not typically used in Arabic text and should be removed.",
+          "suggestion": "تم نسخ الرابط الخاص بدور {{role}} بنجاح إلى الحافظة."
         }
       ],
       "approved_at": null
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'nüxsələndi' is not the most accurate translation of 'copied' in this context. It carries a meaning closer to 'transferred' or 'written down'. A more suitable translation would be 'kopyalandı'.",
-          "suggestion": "Change 'nüxsələndi' to 'kopyalandı'."
+          "description": "The word 'nüxsələndi' doesn't accurately convey the meaning of 'copied' in this context. It's closer to 'etched' or 'carved'.",
+          "suggestion": "The translation should use a word that means 'copied' or 'duplicated', such as 'yenidən yaratıldı' or 'bərabər salındı'."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'keçidi' can sound slightly unnatural. 'Keçidinin' might flow better depending on the wider context.",
+          "suggestion": "Consider using 'keçidinin' instead of 'keçidi'."
         }
       ],
       "approved_at": null
@@ -54,7 +59,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'is' (е) doesn't agree with the noun 'link' (линкът). 'Link' is masculine singular, so the past participle 'копирана' should agree with it. The correct form would be 'копиран'.",
+          "description": "The verb 'is' (е) does not agree with the noun 'link' (линкът) in gender. 'Линкът' is masculine, so the verb should be in the masculine form.",
           "suggestion": "Линкът за ролята <1>{{role}}</1> е успешно копиран в системния буфер."
         }
       ],
@@ -75,7 +80,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1> and </1> are present in the Greek translation, mirroring the English. While technically correct, they are unusual in Greek UI text and might be best removed or handled differently depending on the UI framework.",
+          "suggestion": "Consider removing the angle brackets, e.g., 'Ο σύνδεσμος για τον ρόλο {{role}} έχει αντιγραφεί επιτυχώς στο πρόχειρο.'"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -90,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tags <1>{{role}}</1> are not correctly formatted. The closing tag should be </1>.",
-          "suggestion": "Replace </1> with </1>."
+          "description": "The tag <1> is not consistently applied. The English content uses it, but the Finnish translation's tag doesn't match in terms of capitalization and placement (e.g., it appears at the beginning).",
+          "suggestion": "Ensure the formatting tags are consistent with the source: Roolin <1>{{role}}</1>"
         }
       ],
       "approved_at": null
@@ -99,13 +110,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are not correctly translated. They should remain as-is to preserve the intended formatting.",
-          "suggestion": "Keep the HTML tags as <1> and </1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -114,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>{{role}}</1>` are inconsistent. The closing bracket should be `</1>` not `</1>`.",
-          "suggestion": "<1>{{role}}</1>"
+          "description": "The opening and closing tags <1> and </1> are present in both the English and Armenian content. This suggests they should be maintained. However, it's crucial to verify if these tags have a specific function within the application/context where this text is used. If they are purely for formatting, the Armenian translation might benefit from re-evaluating the use of similar tags or avoiding them altogether for a more natural feel.",
+          "suggestion": "Review the application's tag usage and adjust the Armenian translation accordingly. Consider removing the tags if they are purely for formatting and not semantically significant."
         }
       ],
       "approved_at": null
@@ -129,25 +134,31 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation retains the <1>{{role}}</1> tags from the English content. These tags should typically be removed in translation unless they are specifically required for the target language's formatting.",
-          "suggestion": "Remove the <1>{{role}}</1> tags. The translated text should be: {{role}}役割のリンクがクリップボードに正常にコピーされました。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation retains the HTML tags `<1>` and `</1>`, which should ideally be removed for a cleaner user experience.",
+          "suggestion": "Remove the HTML tags `<1>` and `</1>` from the translated string."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation retains the angle brackets `<1>` and `</1>` which are not necessary and should be removed.",
+          "suggestion": "ລິ້ງສໍາລັບບົດບາດ {{role}} ຖືກສໍາເນົາສູ່ຄລິບບອດຢ່າງສໍາເລັດແລ້ວ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -156,13 +167,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Lomas <1>{{role}}</1> saite\" is not the most natural way to express 'The link for the <1>{{role}}</1> role'.  'Lomas' (roles) is technically correct, but it's a bit clunky. A more natural phrasing would incorporate 'loma' (role) in a way that emphasizes possession or association.",
-          "suggestion": "Vienas lomas <1>{{role}}</1> saite ir veiksmīgi nokopēta starpliktuvē."
+          "description": "The Latvian translation \"Lomas <1>{{role}}</1> saite\" is a slightly awkward phrasing. \"Lomas\" (roles) feels a bit clunky here. A more natural phrasing would be something like \"<1>{{role}}</1> lomas saite\" or \"Attiecīgā <1>{{role}}</1> lomas saite\".",
+          "suggestion": "Attiecīgā <1>{{role}}</1> lomas saite"
         },
         {
-          "type": "formatting",
-          "description": "The `<1>{{role}}</1>` tags are inconsistent with the English. While they exist in both, they do not serve a clear function.",
-          "suggestion": "Consider whether these tags are necessary for the target system and what their purpose is. If they are for formatting/markup, ensure consistency in both languages."
+          "type": "spelling",
+          "description": "While technically correct, \"starpliktuvē\" could be perceived as slightly formal or technical for a user-facing message. Considering the context, a more approachable term might be better. However, without further context on the application's overall tone, it's hard to definitively say it's incorrect.",
+          "suggestion": "kopēšanas buferī"
         }
       ],
       "approved_at": null
@@ -170,30 +181,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Dutch translation correctly replicates the angle brackets (<1> and </1>) from the English content. No formatting issues.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'is gekopieerd' (is copied) sounds a bit awkward in Dutch. A more natural phrasing would be 'is overgenomen'.",
-          "suggestion": "De link voor de <1>{{role}}</1> rol is overgenomen naar het klembord."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Polish translation retains the HTML tags `<1>` and `</1>`. These tags are likely not intended for display and should be removed or replaced with appropriate formatting for Polish text (e.g., plain text, markdown).",
-          "suggestion": "Remove the tags: Link do roli {{role}} został pomyślnie skopiowany do schowka."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -201,9 +195,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation maintains the `<1>` and `</1>` tags, which is appropriate for preserving the original formatting. No changes needed here.",
-          "suggestion": null
+          "type": "incorrect_translation",
+          "description": "The English phrase 'successfully copied' is better translated as 'foi copiado' rather than 'é copiado' to reflect a completed action. 'É copiado' implies a continuous action, while 'foi copiado' indicates it happened in the past.",
+          "suggestion": "O link para a função <1>{{role}}</1> foi copiado com êxito para a área de transferência."
         }
       ],
       "approved_at": null
@@ -214,8 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are inconsistent between the English and Portuguese versions. The English version uses `<1>` and `</1>`, while the Portuguese version uses the same.",
-          "suggestion": "Ensure consistent use of angle brackets. Should it be `<1>{{role}}</1>` or `<1>{{role}}</1>` in Portuguese as well?"
+          "description": "The `<1>` tag is not properly closed in the Portuguese translation. It should be `</1>` to match the English content.",
+          "suggestion": "O link para a função <1>{{role}}</1> foi copiado com sucesso para a área de transferência."
         }
       ],
       "approved_at": null
@@ -226,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation retains the HTML tags <1>{{role}}</1>. This should ideally be removed or adapted for a more natural Romanian sentence structure. The tags are unnecessary in the translated context and may cause display issues.",
-          "suggestion": "Remove the tags: 'Link-ul către rolul {{role}} a fost copiat cu succes în clipboard.'"
+          "description": "The Romanian translation maintains the `<1>{{role}}</1>` tags from the English content. These tags should be removed from the translated text as they are likely intended for rendering and not meant to be displayed to the user.",
+          "suggestion": "Link-ul către rolul {{role}} a fost copiat cu succes în clipboard."
         }
       ],
       "approved_at": null
@@ -244,8 +238,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation retains the `<1>` and `</1>` tags from the English content. These tags are unnecessary and should be removed.",
-          "suggestion": "Remove the `<1>` and `</1>` tags. The translation should be: \"{{role}} භූමිකාව සඳහා වූ සම්බන්ධය සාර්ථකව ක්ලිප්බෝඩ් එකට පිටපත් කරන ලදී.\""
+          "description": "The Sinhala translation retains the HTML tags <1>{{role}}</1> which should be removed for a clean user experience. These tags are unnecessary in the translated text.",
+          "suggestion": "Remove the <1>{{role}}</1> tags from the Sinhala translation."
+        },
+        {
+          "type": "spelling",
+          "description": "The word ' පිටපත්' could be replaced with 'පිටපත්' to conform to standard Sinhala orthography. While understandable, the current spelling deviates slightly.",
+          "suggestion": "Replace ' පිටපත්' with 'පිටපත්'."
         }
       ],
       "approved_at": null
@@ -253,13 +252,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are inconsistent with typical Slovak translation practices. They seem to be remnants of the original English content's formatting and should be removed or replaced with a more appropriate format, if any is needed to convey emphasis or special context.  In this case, they are unnecessary and disrupt the flow.",
-          "suggestion": "Remove the angle brackets entirely.  The translation should be: 'Odkaz pre rolu {{role}} je úspešne skopírovaný do schránky.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -268,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovenian translation retains the HTML tags `<1>` and `</1>`. This is unnecessary and deviates from standard localization practices. These tags should be removed.",
-          "suggestion": "Remove the `<1>` and `</1>` tags. The translated text should be \"Povezava za vlogo {{role}} je uspešno kopirana v odložišče.\""
+          "description": "The Slovenian translation maintains the <1>{{role}}</1> tags which might not be necessary or desired in the target language. It's better to assess if these tags are needed in the UI and adjust accordingly.",
+          "suggestion": "Review if the <1>{{role}}</1> tags are necessary in the UI. If not, remove them and replace with the Slovenian equivalent of 'role' where appropriate."
         }
       ],
       "approved_at": null
@@ -279,14 +272,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation maintains the `<1>` and `</1>` tags which are likely not intended for display to the user and may cause rendering issues. These tags should ideally be removed or adapted for the target platform's markup language.",
-          "suggestion": "Remove the `<1>` and `</1>` tags from the translation. The final text should be \"Линк за улогу {{role}} је успешно копиран у међумеморију.\""
+          "type": "incorrect_translation",
+          "description": "The word 'међумеморију' (memory) doesn't quite capture the intended meaning of 'clipboard'. A more accurate term would be 'клипборд' or 'испостава'.",
+          "suggestion": "Линк за улогу <1>{{role}}</1> је успешно копиран у клипборд."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"међумеморија\" (intermemory) is not the most natural way to say \"clipboard\" in Serbian. A more common and user-friendly translation would be \"клипоборд\" (clipboard) or \"свеска\".",
-          "suggestion": "Replace \"међумеморија\" with \"клипоборд\" or \"свеска\".  For example: \"Линк за улогу {{role}} је успешно копиран у клипоборд.\""
+          "type": "formatting",
+          "description": "The Serbian translation maintains the `<1>` and `</1>` tags from the English content. While technically correct, these tags likely don't belong in the translated text.",
+          "suggestion": "Remove the `<1>` and `</1>` tags. The tag should be handled by the application processing the translation."
         }
       ],
       "approved_at": null
@@ -296,9 +289,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Link za ulogu <1>{{role}}</1> je uspešno kopiran u međumemoriju' translates literally to 'Link for the role <1>{{role}}</1> is successfully copied to clipboard.'. While technically correct, a more natural phrasing in Serbian would be 'Link za <1>{{role}}</1> je uspešno kopiran u međumemoriju.' or 'Link za ulogu <1>{{role}}</1> uspešno je kopiran u međumemoriju.'",
-          "suggestion": "Link za <1>{{role}}</1> je uspešno kopiran u međumemoriju."
+          "type": "formatting",
+          "description": "The Serbian translation does not include the angle brackets '<1>' and '</1>' around the role variable, which are present in the English content. This affects the variable substitution functionality.",
+          "suggestion": "Include the angle brackets around the `{{role}}` variable: \"Link za ulogu <1>{{role}}</1> je uspešno kopiran u međumemoriju.\""
+        },
+        {
+          "type": "spelling",
+          "description": "While 'međumemorija' is technically correct for clipboard, 'iskaznica' is a more commonly used and easily understood term in this context.",
+          "suggestion": "Consider using 'iskaznica' instead of 'međumemorija' for a more natural sound. Suggested: \"Link za ulogu <1>{{role}}</1> je uspešno kopiran u iskaznicu.\""
         }
       ],
       "approved_at": null
@@ -312,19 +310,19 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets <1> and </1> are not properly closed in the Ukrainian translation. While they are present, the closing tag is missing a closing bracket.",
-          "suggestion": "Посилання для ролі <1>{{role}}</1> успішно скопійовано до буфера обміну."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation maintains the `<1>{{role}}</1>` formatting from the English content. While technically correct, it's unconventional in Vietnamese and might be better handled without the tags.",
+          "suggestion": "Liên kết cho vai trò {{role}} đã được sao chép thành công vào bộ nhớ tạm."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -333,8 +331,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Chinese translation preserves the `<1>` and `</1>` tags. These tags are not standard in Chinese and should ideally be removed or handled appropriately based on the platform's requirements.",
-          "suggestion": "Remove the `<1>` and `</1>` tags from the Chinese translation.  The content within the tags is already correctly formatted within the sentence."
+          "description": "The angle brackets '<1>' and '</1>' are inconsistent with the English content. The English uses <1> and </1>, while the Chinese uses <1> and </1>. This can cause rendering issues if the tags are interpreted differently.",
+          "suggestion": "Change the tags in the Chinese translation to <1> and </1> to match the English content: \"<1>{{role}}</1>角色的链接已复制到剪贴板。\""
         }
       ],
       "approved_at": null

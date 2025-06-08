@@ -3,25 +3,13 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2025-06-02T10:20:51.007Z",
+  "updated_at": "2025-06-03T20:59:41.894Z",
   "comment": {
     "text": "This translation key is used for the label of a button that invites users to create a new room. The button appears in various UI elements, including main buttons and folder input dialogs. It displays the text \"New room\" to guide users through the process of creating a new room.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:35:21.884Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 755,
-      "context": "/>\n ) : isRoomsFolder ? (\n <StyledButton\n className=\"create-room-button\"\n id=\"rooms-shared_create-room-button\"\n label={t(\"Common:NewRoom\")}\n onClick={onCreateRoom}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
-      "line_number": 755,
-      "context": "/>\n ) : isRoomsFolder ? (\n <StyledButton\n className=\"create-room-button\"\n id=\"rooms-shared_create-room-button\"\n label={t(\"Common:NewRoom\")}\n onClick={onCreateRoom}\n $currentColorScheme={currentColorScheme}\n isDisabled={isDisabled}\n size=\"small\"\n primary",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/FolderInput.js",
       "line_number": 178,
@@ -36,14 +24,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 649,
+      "line_number": 647,
       "context": "toggleInfoPanel={onToggleInfoPanel}\n isInfoPanelVisible={isInfoPanelVisible}\n titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2849,
-      "context": "const showUploadFolder = !(isMobile || isTablet);\n const options = isRoomsFolder\n ? [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: this.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : [",
+      "line_number": 2852,
+      "context": "? isFlowsFolder\n ? []\n : [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: this.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : [",
       "module": "/packages/client"
     },
     {
@@ -57,17 +45,17 @@
       "line_number": 271,
       "context": "const currTags = newParams.tags.map((p) => p.name).sort();\n const isTagsChanged = !isEqual(prevTags, currTags);\n \n const editRoomParams = {\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/selectors/Files/hooks/useRoomsHelper.tsx",
+      "line_number": 170,
+      "context": "if (withCreate && security.Create) {\n setTotal(total + 1);\n const createItem: TSelectorItem = {\n isCreateNewItem: true,\n label: createDefineRoomLabel ?? t(\"NewRoom\"),\n id: \"create-room-item\",\n key: \"create-room-item\",\n hotkey: \"r\",\n isRoomsOnly,\n createDefineRoomType,",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorState.ts",
       "line_number": 87,
       "context": "return [\n ...((withCreate && [\n {\n isCreateNewItem: true,\n label: initSelectedItemType === \"files\" ? t(\"NewFolder\") : t(\"NewRoom\"),\n id: \"create-folder-item\",\n key: \"create-folder-item\",\n hotkey: \"f\",\n onBackClick: () => {},\n },",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/selectors/utils/hooks/useRoomsHelper.tsx",
-      "line_number": 189,
-      "context": "if (withCreate && security.Create) {\n setTotal(total + 1);\n const createItem: TSelectorItem = {\n isCreateNewItem: true,\n label: createDefineRoomLabel ?? t(\"NewRoom\"),\n id: \"create-room-item\",\n key: \"create-room-item\",\n hotkey: \"r\",\n isRoomsOnly,\n createDefineRoomType,",
       "module": "/packages/shared"
     }
   ],
@@ -258,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"新建房间\" (xīn jiàn fáng jiān) is understandable, it literally translates to \"newly built room.\" A more common and natural translation of \"New room\" would be something like \"新房间\" (xīn fáng jiān).",
+          "description": "While '新建房间' (xīn jiàn fáng jiān) is understandable, it literally translates to 'newly built room'. 'New room' often implies a room that is newly available, not necessarily newly constructed. A more common and accurate translation would be '新房间' (xīn fáng jiān).",
           "suggestion": "新房间 (xīn fáng jiān)"
         }
       ],

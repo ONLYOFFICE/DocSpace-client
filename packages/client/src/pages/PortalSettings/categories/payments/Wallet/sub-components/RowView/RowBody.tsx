@@ -103,7 +103,6 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         <Text fontWeight={600} fontSize="15px">
           {getServiceTitle(transaction.service || "")}
         </Text>
-        <></>
 
         <Text fontWeight={600} fontSize="11px">
           {formattedDate}

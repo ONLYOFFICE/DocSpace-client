@@ -53,6 +53,8 @@
 
       import ManagementslUrl from "ASSETS_DIR/locales/sl/Management.json";
 
+      import ManagementsqALUrl from "ASSETS_DIR/locales/sq-AL/Management.json";
+
       import ManagementsrCyrlRSUrl from "ASSETS_DIR/locales/sr-Cyrl-RS/Management.json";
 
       import ManagementsrLatnRSUrl from "ASSETS_DIR/locales/sr-Latn-RS/Management.json";
@@ -114,6 +116,8 @@
       import CommonskUrl from "PUBLIC_DIR/locales/sk/Common.json";
 
       import CommonslUrl from "PUBLIC_DIR/locales/sl/Common.json";
+
+      import CommonsqALUrl from "PUBLIC_DIR/locales/sq-AL/Common.json";
 
       import CommonsrCyrlRSUrl from "PUBLIC_DIR/locales/sr-Cyrl-RS/Common.json";
 
@@ -227,6 +231,10 @@
 ["Management", ManagementslUrl],
 ["Common", CommonslUrl]
 ]);
+ const sqAL = new Map([
+["Management", ManagementsqALUrl],
+["Common", CommonsqALUrl]
+]);
  const srCyrlRS = new Map([
 ["Management", ManagementsrCyrlRSUrl],
 ["Common", CommonsrCyrlRSUrl]
@@ -277,6 +285,7 @@
 ["si", si],
 ["sk", sk],
 ["sl", sl],
+["sq-AL", sqAL],
 ["sr-Cyrl-RS", srCyrlRS],
 ["sr-Latn-RS", srLatnRS],
 ["tr", tr],

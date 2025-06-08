@@ -3,7 +3,7 @@
   "content": "Permissions",
   "content_en_sha1_hash": "d06d55570938d12f87db3bf2b48caa9de22d9c67",
   "created_at": "2025-05-19T21:30:47.333Z",
-  "updated_at": "2025-05-26T07:57:32.557Z",
+  "updated_at": "2025-05-28T09:30:02.551Z",
   "comment": {
     "text": "This translation key is used to display the label \"Permissions\" in a UI context, specifically in a Create API Key Dialog. It is part of a larger dialog that allows users to manage API keys, and this translation key enables the user to select specific permissions for their API key.",
     "is_auto": true,
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Дозволе' is a plural form. 'Permissions' is a singular noun in English. A singular form is needed.",
-          "suggestion": "Дозвола"
+          "description": "The Serbian (Cyrillic) translation \"Дозволе\" is not the most accurate translation of \"Permissions\". While it technically means \"Permits\" or \"Allowances,\" it doesn't fully capture the meaning of 'Permissions' which implies rights or access controls.",
+          "suggestion": "Consider using \"Права\" (Prava) which directly translates to 'Rights' or \"Дозволе за приступ\" (Dozvole za pristup) which means 'Permissions for access'."
         }
       ],
       "approved_at": null

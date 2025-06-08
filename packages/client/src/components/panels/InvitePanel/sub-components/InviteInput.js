@@ -396,7 +396,7 @@ const InviteInput = ({
           <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
         ) : null}
         {isDisabled ? (
-          <SearchItemText disabled>{t("Common:Disabled")}</SearchItemText>
+          <SearchItemText info>{t("Common:Disabled")}</SearchItemText>
         ) : null}
       </DropDownItem>
     );
@@ -654,7 +654,6 @@ const InviteInput = ({
                   : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
-            isAutoFocussed
             onKeyDown={onKeyDown}
             type="search"
             withBorder={false}

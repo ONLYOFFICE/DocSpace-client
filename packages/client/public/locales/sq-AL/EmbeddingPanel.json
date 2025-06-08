@@ -1,0 +1,11 @@
+{
+  "CodeSuccessfullyCopied": "Kodi për të futur u kopjua me sukses në kujtesën e fragmenteve",
+  "ContentRestricted": "Kopjimi i përmbajtjes, shkarkimi dhe printimi i skedarëve janë të kufizuar.",
+  "DisplaySettings": "Cilësimet e ekranit",
+  "EmbeddingBarAllowList": "Shtoni URL-në e faqes së internetit për ngulitje në <1>lista lejimit</1>.",
+  "EmbeddingBarDescription": "Përfshirja do të funksionojë vetëm për URL-në r specifikuara nga administratori i {{productName}} në cilësimet e JavaScript SDK.",
+  "Height": "Lartësia",
+  "Link": "Lidhje",
+  "LinkProtectedWithPassword": "Lidhja është e mbrojtur me fjalëkalim",
+  "Width": "Gjerësia"
+}

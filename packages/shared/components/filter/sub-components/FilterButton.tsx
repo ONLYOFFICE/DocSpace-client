@@ -25,17 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import classNames from "classnames";
-
-import FilterReactSvg from "PUBLIC_DIR/images/filter.react.svg";
-
-import { IconButton } from "../../icon-button";
 
 import { FilterButtonProps } from "../Filter.types";
 
-import styles from "../Filter.module.scss";
-
 import FilterBlock from "./FilterBlock";
+import FilterIcon from "./FilterIcon";
 
 const FilterButton = ({
   onFilter,
@@ -62,21 +56,15 @@ const FilterButton = ({
 
   return (
     <>
-      <div
+      <FilterIcon
         id={id}
-        onClick={changeShowFilterBlock}
         title={title}
-        className={classNames({
-          [styles.button]: true,
-          [styles.isOpen]: showFilterBlock,
-        })}
-      >
-        <IconButton iconNode={<FilterReactSvg />} size={16} />
-        {selectedFilterValue && selectedFilterValue.size > 0 ? (
-          <div className={styles.indicator} />
-        ) : null}
-      </div>
-
+        onClick={changeShowFilterBlock}
+        isOpen={showFilterBlock}
+        isShowIndicator={
+          selectedFilterValue ? selectedFilterValue.size > 0 : false
+        }
+      />
       {showFilterBlock ? (
         <FilterBlock
           filterHeader={filterHeader}

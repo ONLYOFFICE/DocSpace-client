@@ -5,6 +5,7 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import TranslationStats from "@/components/TranslationStats";
 import SearchInput from "@/components/SearchInput";
+import ExportImportPanel from "@/components/ExportImportPanel";
 
 export default function Home() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -388,6 +389,9 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      {/* Export/Import Section */}
+      <ExportImportPanel projects={projects} />
 
       {/* Test Runner Section */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto mb-8">

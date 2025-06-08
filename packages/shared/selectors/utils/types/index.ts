@@ -75,6 +75,6 @@ export type UseSocketHelperProps = {
   setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
-  filterParam?: string;
+  filterParam?: string | number;
   withCreate?: boolean;
 };

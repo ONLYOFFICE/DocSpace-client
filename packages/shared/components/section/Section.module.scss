@@ -479,7 +479,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     z-index: 200;
     bottom: 16px;
 
@@ -506,7 +506,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 16px;
     inset-inline-end: 16px;
 
@@ -706,7 +706,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     position: absolute;
     border: none;
     inset-inline-end: 0;
@@ -715,7 +715,7 @@
     z-index: 1000;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 0;
     height: calc(100% - 48px);
     width: 100vw;
@@ -724,7 +724,7 @@
   }
 
   &.fullScreen {
-    @include desktop {
+    @include mixins.desktop {
       position: fixed;
 
       right: 0;
@@ -758,12 +758,12 @@
 
   box-sizing: border-box;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     height: 62px;
     padding: 0 16px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     height: 54px;
   }
 

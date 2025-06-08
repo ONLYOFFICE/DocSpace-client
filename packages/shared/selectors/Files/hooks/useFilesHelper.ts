@@ -212,7 +212,6 @@ const useFilesHelper = ({
           files,
           getIcon,
           filterParam,
-          includedItems,
         );
 
         const itemList = [...foldersList, ...filesList];

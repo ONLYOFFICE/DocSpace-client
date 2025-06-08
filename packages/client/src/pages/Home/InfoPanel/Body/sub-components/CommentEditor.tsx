@@ -39,6 +39,7 @@ import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 
 import VersionHistoryStore from "SRC_DIR/store/VersionHistoryStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
 
 type CommentEditorProps = {
   item: TFile;
@@ -47,6 +48,8 @@ type CommentEditorProps = {
   updateCommentVersion?: VersionHistoryStore["updateCommentVersion"];
   setVerHistoryFileId?: VersionHistoryStore["setVerHistoryFileId"];
   setVerHistoryFileSecurity?: VersionHistoryStore["setVerHistoryFileSecurity"];
+
+  setFile?: FilesStore["setFile"];
 };
 
 const CommentEditor = ({
@@ -57,6 +60,8 @@ const CommentEditor = ({
 
   setVerHistoryFileId,
   setVerHistoryFileSecurity,
+
+  setFile,
 }: CommentEditorProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -94,10 +99,17 @@ const CommentEditor = ({
       setIsLoading(false);
     });
 
-    updateCommentVersion?.(id, inputValue, version).catch((err) => {
-      toastr.error(err);
-      setIsLoading(false);
-    });
+    updateCommentVersion?.(id, inputValue, version)
+      .then(() => {
+        setFile?.({
+          ...item,
+          comment: inputValue,
+        });
+      })
+      .catch((err) => {
+        toastr.error(err);
+        setIsLoading(false);
+      });
 
     setIsEdit(false);
     setIsLoading(false);
@@ -157,7 +169,7 @@ const CommentEditor = ({
   );
 };
 
-export default inject(({ versionHistoryStore }: TStore) => {
+export default inject(({ versionHistoryStore, filesStore }: TStore) => {
   const {
     fetchFileVersions,
     updateCommentVersion,
@@ -166,6 +178,8 @@ export default inject(({ versionHistoryStore }: TStore) => {
     setVerHistoryFileId,
     setVerHistoryFileSecurity,
   } = versionHistoryStore;
+
+  const { setFile } = filesStore;
 
   const editing = isEditingVersion || isEditing;
 
@@ -176,5 +190,7 @@ export default inject(({ versionHistoryStore }: TStore) => {
     editing,
     setVerHistoryFileId,
     setVerHistoryFileSecurity,
+
+    setFile,
   };
 })(observer(CommentEditor));

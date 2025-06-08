@@ -100,7 +100,7 @@ const Share = (props: ShareProps) => {
     setFileLinks(res.items);
     setIsLoading(false);
     requestRunning.current = false;
-  }, [infoPanelSelection.id, hideSharePanel]);
+  }, [infoPanelSelection?.id, hideSharePanel]);
 
   useEffect(() => {
     if (hideSharePanel) {

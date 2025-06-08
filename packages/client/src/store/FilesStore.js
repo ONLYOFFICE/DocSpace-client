@@ -1201,6 +1201,7 @@ class FilesStore {
     if (index !== -1) {
       this.files[index] = file;
       this.createThumbnail(file);
+      this.updateSelection(file.id);
     }
   };
 

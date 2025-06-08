@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
@@ -63,8 +63,8 @@ type RoomsItemHeaderProps = {
   setQuotaWarningDialogVisible?: DialogsStore["setQuotaWarningDialogVisible"];
   getLogoCoverModel?: DialogsStore["getLogoCoverModel"];
   setTemplateAccessSettingsVisible?: DialogsStore["setTemplateAccessSettingsVisible"];
+  setCoverSelection?: DialogsStore["setCoverSelection"];
 
-  roomType?: RoomsType;
   displayFileExtension?: boolean;
 
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
@@ -85,9 +85,9 @@ const RoomsItemHeader = ({
   setIsMobileHidden,
   isGracePeriod,
   setInvitePanelOptions,
+  setCoverSelection,
   setQuotaWarningDialogVisible,
   roomsView,
-  roomType,
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,
@@ -122,6 +122,8 @@ const RoomsItemHeader = ({
     selection?.rootFolderType === FolderType.RoomTemplates;
 
   const isRoomMembersPanel = roomsView === InfoPanelView.infoMembers;
+  const roomType =
+    "roomType" in selection ? selection.roomType : RoomsType.CustomRoom;
 
   const hasImage = "logo" in selection && !!selection.logo?.original;
   const model = getLogoCoverModel?.(t, hasImage);
@@ -173,6 +175,10 @@ const RoomsItemHeader = ({
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
+
+  useEffect(() => {
+    setCoverSelection?.(selection);
+  }, [setCoverSelection, selection]);
 
   return (
     <div
@@ -272,7 +278,6 @@ export default inject(
   ({
     currentTariffStatusStore,
     dialogsStore,
-    selectedFolderStore,
     infoPanelStore,
     filesSettingsStore,
     publicRoomStore,
@@ -286,8 +291,6 @@ export default inject(
 
     const { onChangeFile } = avatarEditorDialogStore;
 
-    const roomType = selectedFolderStore.roomType;
-
     return {
       roomsView,
       setIsMobileHidden,
@@ -297,9 +300,9 @@ export default inject(
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
       setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
+      setCoverSelection: dialogsStore.setCoverSelection,
 
       hasLinks: externalLinks.length,
-      roomType,
 
       displayFileExtension,
       onChangeFile,

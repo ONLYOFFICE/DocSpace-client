@@ -137,7 +137,7 @@ export type ShareProps = {
     expirationDate?: moment.Moment | null,
   ) => Promise<TFileLink>;
 
-  selfId: string;
+  selfId?: string;
   onOpenPanel?: (options: {
     visible: boolean;
     updateAccessLink: () => Promise<void>;

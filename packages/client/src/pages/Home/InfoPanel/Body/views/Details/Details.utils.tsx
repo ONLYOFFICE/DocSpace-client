@@ -146,7 +146,7 @@ class DetailsHelper {
 
   getNeededProperties = () => {
     return (
-      "logo" in this.item && "roomType" in this.item
+      "isRoom" in this.item && this.item.isRoom
         ? [
             "Owner",
             this.item.providerKey && "Storage Type",
@@ -158,7 +158,7 @@ class DetailsHelper {
             this.item.tags?.length && "Tags",
             "Storage",
           ]
-        : this.item.isFolder
+        : "isFolder" in this.item && this.item.isFolder
           ? [
               "Owner",
               // "Location",
@@ -180,7 +180,7 @@ class DetailsHelper {
               "Creation date",
               "expired" in this.item && this.item.expired && "Lifetime ends",
               "Versions",
-              this.item.order && "Index",
+              "order" in this.item && this.item.order && "Index",
               "Comments",
             ]
     ).filter((nP) => nP) as string[];
@@ -307,12 +307,13 @@ class DetailsHelper {
   };
 
   getItemType = (t: TTranslation) => {
-    if (!("fileType" in this.item) || !("roomType" in this.item)) return null;
-    return text(
-      "logo" in this.item
-        ? getRoomTypeName(this.item.roomType, t)
-        : getFileTypeName(this.item.fileType, t),
-    );
+    if ("isRoom" in this.item && this.item.isRoom)
+      return text(getRoomTypeName(this.item.roomType, t));
+
+    if ("fileType" in this.item)
+      return text(getFileTypeName(this.item.fileType, t));
+
+    return text(getFileTypeName("", t));
   };
 
   getItemFileExtention = () => {

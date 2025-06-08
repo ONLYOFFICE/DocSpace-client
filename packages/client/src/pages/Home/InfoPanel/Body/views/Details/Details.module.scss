@@ -77,6 +77,10 @@
     font-weight: 700;
     line-height: 56px;
   }
+
+  :global(.is-room) {
+    border-radius: 16px;
+  }
 }
 
 .publicRoomBar {

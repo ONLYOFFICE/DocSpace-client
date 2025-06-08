@@ -26,20 +26,14 @@
 
 import React from "react";
 
-export const useLoader = ({
-  isLoading,
-  isFirstLoading,
-}: {
-  isLoading: boolean;
-  isFirstLoading: boolean;
-}) => {
+export const useLoader = ({ isFirstLoading }: { isFirstLoading: boolean }) => {
   const [showLoading, setShowLoading] = React.useState(false);
 
   const loaderRefTimeout = React.useRef<NodeJS.Timeout>(null);
   const startShowLoader = React.useRef<Date | null>(new Date());
 
   React.useEffect(() => {
-    if (isFirstLoading || isLoading) {
+    if (isFirstLoading) {
       loaderRefTimeout.current = setTimeout(() => {
         setShowLoading(true);
         startShowLoader.current = new Date();
@@ -68,7 +62,7 @@ export const useLoader = ({
         );
       }
     }
-  }, [isFirstLoading, isLoading]);
+  }, [isFirstLoading]);
 
   return { showLoading };
 };

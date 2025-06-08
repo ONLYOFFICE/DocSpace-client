@@ -124,7 +124,7 @@ export const useMembers = ({
 
         const titleMember: TTitleMember = {
           id: key,
-          displayName: t(label),
+          displayName: label,
           isTitle: true,
           ...(extra || {}),
         };
@@ -306,10 +306,8 @@ export const useMembers = ({
     if (option.key === "remove") {
       if (!members) return;
       const newMembers = {
-        users: members.users.filter((m) => m.id !== currentUserId),
-        administrators: members.administrators.filter(
-          (m) => m.id !== currentUserId,
-        ),
+        users: members.users.filter((m) => m.id !== userId),
+        administrators: members.administrators.filter((m) => m.id !== userId),
         expected: members.expected.filter((m) => m.id !== userId),
         groups: members.groups.filter((m) => m.id !== userId),
         guests: members.guests.filter((m) => m.id !== userId),
@@ -378,7 +376,7 @@ export const useMembers = ({
       setMembers((value) => {
         if (!value) return value;
 
-        return {
+        const newValue = {
           users: value.users?.map((m) =>
             m.id === userId ? { ...m, access: option.access as number } : m,
           ),
@@ -395,6 +393,8 @@ export const useMembers = ({
             m.id === userId ? { ...m, access: option.access as number } : m,
           ),
         };
+
+        return newValue;
       });
     }
   };

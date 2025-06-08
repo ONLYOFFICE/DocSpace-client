@@ -118,7 +118,6 @@ const Members = ({
     members,
     total,
     searchValue,
-    isLoading,
     isFirstLoading,
 
     fetchMoreMembers,
@@ -133,7 +132,6 @@ const Members = ({
   });
 
   const { showLoading } = useLoader({
-    isLoading,
     isFirstLoading,
   });
 
@@ -315,7 +313,7 @@ const Members = ({
     const groupsTitleCount = groups.length ? 1 : 0;
     const guestsTitleCount = guests.length ? 1 : 0;
 
-    const headersCount = !searchValue
+    const headersCount = searchValue
       ? 0
       : adminsTitleCount +
         usersTitleCount +
@@ -420,7 +418,7 @@ const Members = ({
                 searchValue={searchValue}
                 room={infoPanelSelection}
                 changeUserRole={changeUserRole}
-                index={index}
+                index={index + publicRoomItemsLength}
               />
             );
           })}

@@ -273,7 +273,7 @@ const LinkRow = ({
                 directionY="both"
                 options={accessOptions}
                 selectedOption={accessOption ?? ({} as TOption)}
-                onSelect={(item) => changeAccessOption(item, link)}
+                onSelect={(item) => changeAccessOption?.(item, link)}
                 scaled={false}
                 scaledOptions={false}
                 showDisabledItems

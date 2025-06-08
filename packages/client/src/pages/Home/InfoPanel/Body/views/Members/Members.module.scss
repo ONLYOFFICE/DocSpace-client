@@ -99,12 +99,12 @@
 
 .publicRoomBarContainer {
   position: sticky;
-  top: "80px";
+  top: 80px;
   background: var(--background-color);
   overflow: hidden;
   z-index: 1;
 
-  .public-room-bar {
+  :global(.public-room-bar) {
     margin-top: 0;
   }
 }
@@ -213,14 +213,14 @@
     padding-top: 20px;
   }
 
-  .title {
+  :global(.title) {
     font-weight: 600;
     font-size: 14px;
     line-height: 20px;
-    color: var(--info-panel-members-subtitle-color);
+    color: var(--info-panel-subtitle-color);
   }
 
-  .icon {
+  :global(.icon) {
     margin-inline-end: 8px;
   }
 }

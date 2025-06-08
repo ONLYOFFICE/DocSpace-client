@@ -252,6 +252,7 @@ const Details = ({
             badgeUrl={badgeUrl ?? undefined}
             tooltipContent={tooltipContent}
             tooltipId="info-panel-details_icon-tooltip"
+            withEditing={"isRoom" in selection ? selection.isRoom : false}
           />
         </div>
       )}

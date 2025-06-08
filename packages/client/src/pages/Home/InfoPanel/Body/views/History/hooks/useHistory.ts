@@ -265,7 +265,6 @@ export const useHistory = ({
   }, [fetchHistory]);
 
   const { showLoading } = useLoader({
-    isLoading,
     isFirstLoading,
   });
 

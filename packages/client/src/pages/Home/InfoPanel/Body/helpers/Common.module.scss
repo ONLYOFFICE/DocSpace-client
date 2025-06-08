@@ -157,19 +157,18 @@
     }
   }
 
-  img {
-    &:global(.icon) {
-      display: flex;
-      align-items: center;
-      svg {
-        height: 32px;
-        width: 32px;
-      }
-    }
-    &:global(.is-room) {
-      border-radius: 6px;
-      outline: var(--info-panel-border-color);
-    }
+  // :global(.icon) {
+  //   display: flex;
+  //   align-items: center;
+  //   svg {
+  //     height: 32px;
+  //     width: 32px;
+  //   }
+  // }
+
+  :global(.is-room) {
+    border-radius: 6px;
+    outline: var(--info-panel-border-color);
   }
 
   :global(.info-panel_header-text) {

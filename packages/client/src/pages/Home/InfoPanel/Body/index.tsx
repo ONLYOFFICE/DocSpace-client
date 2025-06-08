@@ -28,6 +28,7 @@ import { inject, observer } from "mobx-react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
+import { FolderType } from "@docspace/shared/enums";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
@@ -45,6 +46,7 @@ import Gallery from "./views/Gallery";
 import Members from "./views/Members";
 import Details from "./views/Details";
 import History from "./views/History";
+import Share from "./views/Share";
 
 import commonStyles from "./helpers/Common.module.scss";
 
@@ -146,9 +148,16 @@ const InfoPanelBodyContent = ({
       case "info_history":
         return <History infoPanelSelection={selection} />;
       case "info_details":
-        return <Details selection={selection} isArchive={false} />;
-      // case "info_share":
-      //   return <Share />;
+        return (
+          <Details
+            selection={selection}
+            isArchive={selection.rootFolderType === FolderType.Archive}
+          />
+        );
+      case "info_share":
+        if (!("fileExst" in selection)) return null;
+
+        return <Share infoPanelSelection={selection} />;
       default:
         break;
     }

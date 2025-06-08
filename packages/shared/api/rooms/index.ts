@@ -112,7 +112,6 @@ export async function getRoomMembers(
   };
 
   const res = (await request(options)) as TGetRoomMembers;
-  console.log("getRoomMembers", res);
 
   res.items.forEach((item) => {
     if (item.subjectType === MembersSubjectType.Group) {

@@ -133,7 +133,7 @@ const MembersList = (props: MembersListProps) => {
       return GENERAL_LINK_HEADER_HEIGHT;
     }
 
-    if (elem?.props?.isShareLink || elem.props["data-share"]) {
+    if (elem?.props?.isShareLink || elem?.props?.["data-share"]) {
       return shareLinkItemSize;
     }
 

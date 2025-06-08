@@ -31,17 +31,17 @@
 
   display: flex;
   flex-direction: column;
-  border-bottom: var(--info-panel-border-color);
+  border-bottom: 1px solid var(--info-panel-border-color);
 
   &.withTabs {
     border-bottom: none;
   }
 
   :global(.header-text) {
-    height: 68px;
+    height: 69px;
 
     @include mixins.tablet-and-below {
-      height: 52px;
+      height: 53px;
     }
   }
 

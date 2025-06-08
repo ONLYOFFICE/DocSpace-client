@@ -960,6 +960,7 @@ class DialogsStore {
   };
 
   deleteRoomLogo = async () => {
+    console.log(this.coverSelection);
     if (!this.coverSelection) return;
 
     await removeLogoFromRoom(this.coverSelection.id);

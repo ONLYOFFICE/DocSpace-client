@@ -96,7 +96,7 @@ Default.args = {
     avatarSmall: "https://via.placeholder.com/32",
     role: 1,
   },
-  getActions: (t) =>
+  getActions: () =>
     [
       {
         key: "profile",

@@ -99,6 +99,7 @@ const StorybookSocialButtonsGroup = (props: SocialButtonProps) => {
   const modifiedProps = { ...restProps, onClick: handleClick };
 
   if (ssoUrl) {
+    // eslint-disable-next-line no-script-url
     modifiedProps.ssoUrl = "javascript:void(0);";
   }
 

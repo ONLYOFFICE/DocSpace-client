@@ -108,7 +108,7 @@ const ToggleDropDownTemplate = (args: DropDownProps) => {
         {...args}
         open={isOpen}
         forwardedRef={parentRef}
-        clickOutsideAction={(e, open) => setIsOpen(false)}
+        clickOutsideAction={() => setIsOpen(false)}
         isDefaultMode={false}
         fixedDirection
         directionY="bottom"

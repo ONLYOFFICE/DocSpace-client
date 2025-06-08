@@ -235,9 +235,10 @@ const Template = (args) => {
 
   const containerRef = useRef<null | HTMLDivElement>(null);
 
+  const { model } = args;
   const combinedArgs = {
     ...args,
-    model: args.model || items,
+    model: model || items,
   };
 
   return (

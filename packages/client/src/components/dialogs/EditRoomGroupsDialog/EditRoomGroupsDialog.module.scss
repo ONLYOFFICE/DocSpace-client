@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/mixins";
+
 .editRoomGroupsDialog {
   :global {
     .modal-body {
@@ -81,22 +83,14 @@
     }
   }
 
-  // @media ${mobile} {
-  //   margin-bottom: 16px;
-  //   width: 100vw;
-
-  //   .modal-body {
-  //     padding: 0px 16px 8px;
-  //   }
-
-  //   .modal-footer {
-  //     margin-top: 0px;
-  //   }
-
-  //   .modal-header {
-  //     margin-bottom: 16px;
-  //   }
-  // }
+  @include mixins.mobile {
+    :global {
+      #modal-dialog {
+        width: auto;
+        height: calc(100% - 64px);
+      }
+    }
+  }
 
   .name {
     margin-top: 18px;

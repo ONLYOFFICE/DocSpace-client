@@ -85,18 +85,14 @@ const RoomLogoCoverContainer = styled.div`
     width: 390px;
   }
 
-  /* @media ${mobile} {
+  @media ${mobile} {
     .cover-icon-container {
       width: 100%;
       align-items: center;
-      justify-content: center;
       text-align: center;
     }
 
-    .color-select-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .color-name {
       text-align: center;
     }
 
@@ -110,7 +106,12 @@ const RoomLogoCoverContainer = styled.div`
     .colors-container {
       width: 100%;
     }
-  } */
+
+    .colors-container,
+    .cover-icon-container {
+      gap: 16px;
+    }
+  }
 
   .cover-icon-container,
   .color-name {
@@ -137,21 +138,15 @@ const GroupIconDialog = ({
 
   const coverId = roomCoverDialogProps.icon?.id;
 
-  console.log("covers", covers);
+  console.log("isMobile()", isMobile());
 
   return (
     <ModalDialog
       className={styles.groupIconDialog}
       visible
       autoMaxHeight
-      // autoMaxHeight
-      // heightProp={"498px"}
-      //   onClose={onCloseRoomLogo}
+      withBodyScroll
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
-      //   withBodyScroll
-      //   scrollBodyHeight={scrollBodyHeight}
-      //   withBodyScrollForcibly={!!scrollBodyHeight}
-      //   isScrollLocked={openColorPicker}
     >
       <ModalDialog.Header>{"Group icon "}</ModalDialog.Header>
       <ModalDialog.Body>

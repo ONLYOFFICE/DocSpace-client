@@ -27,7 +27,7 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+import { mobile } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
 import { ILogo, SelectIconProps } from "../RoomLogoCoverDialog.types";
@@ -94,6 +94,11 @@ const StyledIconContainer = styled.div<{
         }
       }
     `}
+
+  @media ${mobile} {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const SelectIcon = ({

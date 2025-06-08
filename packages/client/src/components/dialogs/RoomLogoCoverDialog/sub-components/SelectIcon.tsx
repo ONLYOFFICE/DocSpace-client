@@ -144,9 +144,6 @@ export const SelectIcon = ({
     setIcon(icon);
   };
 
-  console.log("coverId", coverId);
-  console.log("covers", covers);
-
   return (
     <div>
       <div className="icon-container">

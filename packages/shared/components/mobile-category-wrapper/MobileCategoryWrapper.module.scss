@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/common-icons-style.scss";
+@use "../../styles/mixins.scss";
+@use "../../styles/variables/devices.scss";
+@use "../../styles/variables/colors.scss";
+@use "../../styles/common-icons-style.scss";
 
 .mobileCategoryWrapper {
   margin-bottom: 20px;
@@ -70,7 +70,7 @@
 }
 
 .arrowIcon {
-  @include common-icons-style;
+  @include common-icons-style.common-icons-style;
 
   svg {
     path {

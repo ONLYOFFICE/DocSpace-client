@@ -115,7 +115,7 @@
 
   min-width: var(--row-min-width);
 
-  // @include tablet-and-below {
+  // @include mixins.tablet-and-below {
   //   white-space: nowrap;
   //   overflow: var(--row-overflow);
   //   text-overflow: var(--row-text-overflow);

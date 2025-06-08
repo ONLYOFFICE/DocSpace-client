@@ -26,24 +26,18 @@
 
 import { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-
-import { inject, observer } from "mobx-react";
-
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .text-body {
-    margin-bottom: 16px;
-  }
-`;
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 
 const SalesDepartmentRequestDialog = ({
   visible,
@@ -96,7 +90,8 @@ const SalesDepartmentRequestDialog = ({
       return;
     }
 
-    await sendPaymentRequest(email, name, description);
+    await sendPaymentRequest(email, name, description, t);
+
     onClose && onClose();
   };
 
@@ -105,8 +100,8 @@ const SalesDepartmentRequestDialog = ({
       visible={visible}
       onClose={onCloseModal}
       autoMaxHeight
-      isLarge
       isLoading={!ready}
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>
         <Text isBold fontSize="21px">
@@ -114,83 +109,82 @@ const SalesDepartmentRequestDialog = ({
         </Text>
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
-          <Text
-            key="text-body"
-            className="text-body"
-            isBold={false}
-            fontSize="13px"
-          >
-            {t("YouWillBeContacted")}
-          </Text>
+        <Text
+          key="text-body"
+          className="text-body"
+          isBold={false}
+          fontSize="13px"
+        >
+          {t("YouWillBeContacted")}
+        </Text>
 
-          <FieldContainer
-            className="name_field"
-            key="name"
-            isVertical
+        <FieldContainer
+          className="name_field"
+          key="name"
+          isVertical
+          hasError={!isValidName}
+          labelVisible={false}
+          errorMessage={t("Common:RequiredField")}
+        >
+          <TextInput
+            id="your-name"
             hasError={!isValidName}
-            labelVisible={false}
-            errorMessage={t("Common:RequiredField")}
-          >
-            <TextInput
-              id="your-name"
-              hasError={!isValidName}
-              name="name"
-              type="text"
-              size="base"
-              scale
-              tabIndex={1}
-              placeholder={t("YourName")}
-              isAutoFocussed
-              isDisabled={isLoading}
-              value={name}
-              onChange={onChangeName}
-            />
-          </FieldContainer>
+            name="name"
+            type="text"
+            size="base"
+            scale
+            tabIndex={1}
+            placeholder={t("YourName")}
+            isAutoFocussed
+            isDisabled={isLoading}
+            value={name}
+            onChange={onChangeName}
+          />
+        </FieldContainer>
 
-          <FieldContainer
-            className="e-mail_field"
-            key="e-mail"
-            isVertical
-            labelVisible={false}
+        <FieldContainer
+          className="e-mail_field"
+          key="e-mail"
+          isVertical
+          labelVisible={false}
+          hasError={!isValidEmail}
+          errorMessage={t("Common:RequiredField")}
+        >
+          <TextInput
             hasError={!isValidEmail}
-            errorMessage={t("Common:RequiredField")}
-          >
-            <TextInput
-              hasError={!isValidEmail}
-              id="registration-email"
-              name="e-mail"
-              type="text"
-              size="base"
-              scale
-              tabIndex={2}
-              placeholder={t("Common:RegistrationEmail")}
-              isDisabled={isLoading}
-              value={email}
-              onChange={onChangeEmail}
-            />
-          </FieldContainer>
+            id="registration-email"
+            name="e-mail"
+            type="text"
+            size="base"
+            scale
+            tabIndex={2}
+            placeholder={t("Common:RegistrationEmail")}
+            isDisabled={isLoading}
+            value={email}
+            onChange={onChangeEmail}
+          />
+        </FieldContainer>
 
-          <FieldContainer
-            className="description_field"
-            key="text-description"
-            isVertical
+        <FieldContainer
+          className="description_field"
+          key="text-description"
+          isVertical
+          hasError={!isValidDescription}
+          labelVisible={false}
+          errorMessage={t("Common:RequiredField")}
+        >
+          <Textarea
+            id="request-details"
+            heightScale={false}
             hasError={!isValidDescription}
-            labelVisible={false}
-            errorMessage={t("Common:RequiredField")}
-          >
-            <Textarea
-              id="request-details"
-              heightScale={false}
-              hasError={!isValidDescription}
-              placeholder={t("RequestDetails")}
-              tabIndex={3}
-              value={description}
-              onChange={onChangeDescription}
-              isDisabled={isLoading}
-            />
-          </FieldContainer>
-        </StyledBodyContent>
+            placeholder={t("RequestDetails")}
+            tabIndex={3}
+            value={description}
+            onChange={onChangeDescription}
+            isDisabled={isLoading}
+            heightTextArea={100}
+          />
+        </FieldContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

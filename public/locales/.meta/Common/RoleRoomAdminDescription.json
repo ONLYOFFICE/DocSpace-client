@@ -3,7 +3,7 @@
   "content": "Room admins can create and manage the assigned rooms, invite new users, and assign roles of room admin and lower. All admins have access to the {{sectionName}} section.",
   "content_en_sha1_hash": "9a3722d73aa3935ca6a26779438b5b1f420f67b4",
   "created_at": "2025-05-19T21:30:48.104Z",
-  "updated_at": "2025-05-26T07:57:32.990Z",
+  "updated_at": "2025-05-28T09:30:02.996Z",
   "comment": {
     "text": "This translation key is used to describe the role and responsibilities of a Room Admin in the product. It appears as part of an access options menu in the UI, informing users about their permissions and roles within the system.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1258,
+      "line_number": 1254,
       "context": "productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isCollaborator) return t(\"Common:RoleNewUserDescription\");",
       "module": "/packages/shared"
     },
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'assign roles of room admin and lower' is not accurately translated. The Arabic 'وما دونها' (wa ma donaha) literally means 'and those below it,' which, while not entirely wrong, could be more clearly translated as 'أقل منهم' (aqall minhum) to specifically refer to roles lower in hierarchy.",
-          "suggestion": "يمكن لمسؤولي الغرف إنشاء الغرف المخصصة وإدارتها، ودعوة مستخدمين جدد، وتعيين أدوار مسؤول الغرفة وأقل منهم. "
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure in Arabic could be slightly improved for better flow. While grammatically correct, splitting the complex sentence into two shorter sentences could enhance readability.",
-          "suggestion": "يمكن لمسؤولي الغرف إنشاء الغرف المخصصة وإدارتها، ودعوة مستخدمين جدد، وتعيين أدوار مسؤول الغرفة وما دونها. يمكن لجميع المسؤولين الوصول إلى قسم {{sectionName}}."
+          "description": "The phrase \"assign roles of room admin and lower\" is not perfectly translated. 'وما دونها' technically means 'and below', but in the context of roles and permissions, it doesn't fully convey the intended meaning of 'lower' roles. It might be misinterpreted.",
+          "suggestion": "يمكن لمسؤولي الغرف إنشاء الغرف المخصصة وإدارتها، ودعوة مستخدمين جدد، وتعيين أدوار مسؤول الغرفة والمستويات الأدنى. (or) يمكن لمسؤولي الغرف إنشاء الغرف المخصصة وإدارتها، ودعوة مستخدمين جدد، وتعيين أدوار مسؤول الغرفة ومستويات أقل."
         }
       ],
       "approved_at": null
@@ -52,19 +47,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrasing 'Otaq administratorlarına təyin olunmuş otaqlar yarada və idarə edə' is a bit awkward.  It literally translates to 'Room admins create and manage the assigned rooms to them'.  A more natural phrasing would be 'Otaq administratorları təyin etdikləri otaqları yarada və idarə edə' (Room admins can create and manage the rooms they are assigned).",
-          "suggestion": "Otaq administratorları təyin etdikləri otaqları yarada və idarə edə"
+          "type": "spelling",
+          "description": "The word 'idarəçilərin' is likely a typo. It should be 'idarəetməçilərinin'.",
+          "suggestion": "idarəetməçilərinin"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'otaq administratoruna və aşağı səviyyəli şəxslərə rollar təyin edə bilər' can be improved for clarity. It directly translates to 'can assign roles to room admins and lower-level individuals'. A more natural and accurate phrasing would emphasize assigning lower roles.",
-          "suggestion": "otaq administratoru və aşağı səviyyəli rolları təyin edə bilər"
-        },
-        {
-          "type": "formatting",
-          "description": "The variable {{sectionName}} is present in both the English and Azerbaijani content, which is good.  No change needed.",
-          "suggestion": null
+          "description": "The phrase 'otaq administratoruna və aşağı səviyyəli şəxslərə rollar təyin edə bilər' is grammatically awkward. A more natural phrasing would be 'otaq administratoru və aşağı səviyyəli rolverənlərə rollar təyin edə bilər' or 'otaq administratoru və daha aşağı səviyyəli istifadəçilərə rollar təyin edə bilər'.",
+          "suggestion": "otaq administratoru və daha aşağı səviyyəli istifadəçilərə rollar təyin edə bilər"
         }
       ],
       "approved_at": null
@@ -75,13 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin and lower\" is awkwardly translated as \"да присвояват роли на администратор (или по-нисши) на стая\". A more natural translation would be something like \"да предоставят роли на администратор на стаята или по-нисък ранг\".",
-          "suggestion": "да предоставят роли на администратор на стаята или по-нисък ранг"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of parentheses around \"(или по-нисши)\" is slightly jarring in the Bulgarian translation. It's more common to integrate this type of clarification into the sentence flow.",
-          "suggestion": "да присвояват роли на администратор и по-нисши на стая"
+          "description": "The phrase 'assign roles of room admin and lower' is not accurately translated. 'assign roles of room admin and lower' is translated as 'да присвояват роли на администратор (или по-нисши) на стая'. It should more directly translate to something like 'да назначават роли на администратори на стаята или по-нисък ранг'.",
+          "suggestion": "да назначават роли на администратори на стаята или по-нисък ранг"
         }
       ],
       "approved_at": null
@@ -98,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The German translation uses 'Bereich' instead of 'Abschnitt' for 'section'. While 'Bereich' is understandable, 'Abschnitt' aligns more closely with 'section' and might be more suitable depending on the context. 'Bereich' can imply a broader area.",
-          "suggestion": "Consider using 'Abschnitt' instead of 'Bereich'."
+          "description": "The German translation uses 'Bereich' for 'section'. While technically correct, 'Bereich' is often used for broader areas. 'Abschnitt' might be more accurate depending on the context of {{sectionName}}.",
+          "suggestion": "Consider using 'Abschnitt' instead of 'Bereich' for a more precise translation of 'section'."
         }
       ],
       "approved_at": null
@@ -122,13 +107,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Huoneiden järjestelmänvalvojat\" translates more literally to 'Room administrator's' rather than 'Room admins'. A better translation would be 'Huoneen järjestelmänvalvojat' to indicate plural.",
-          "suggestion": "Huoneen järjestelmänvalvojat"
+          "description": "The phrase 'Room admins' is translated as 'Huoneiden järjestelmänvalvojat'. While technically correct, it's a bit clunky. A more natural Finnish phrasing might be 'Huoneen ylläpitäjät' or 'Huonejärjestelmänvalvojat'.",
+          "suggestion": "Consider using 'Huoneen ylläpitäjät' or 'Huonejärjestelmänvalvojat' for a more fluent translation."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'alempi rooleja' is not the best way to translate 'lower roles'. It translates as 'lower roles' but sounds a little awkward in Finnish. Consider a more natural phrasing.",
-          "suggestion": "alempia käyttöoikeuksia tai alemmat roolit"
+          "description": "The phrase 'assign roles of room admin and lower' is translated as 'osoittaa huoneen järjestelmänvalvojia ja alempia rooleja'. 'Alemmat roolit' sounds somewhat formal and might be better rephrased to convey a sense of hierarchy in roles more naturally.",
+          "suggestion": "Consider rephrasing as 'osoittaa huoneen järjestelmänvalvojia ja alemman tason rooleja' or 'osoittaa huoneen järjestelmänvalvojia ja alempia käyttäjärooleja'."
         }
       ],
       "approved_at": null
@@ -139,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"d'inférieur\" is not the best translation for \"and lower\" in this context. It literally means 'of inferior' and can sound awkward. A better phrasing would convey a hierarchy of roles.",
-          "suggestion": "Consider alternatives like \"et des rôles inférieurs\", \"et des rôles de moindre niveau\", or \"et des rôles subordonnés\" to better convey the meaning of roles below room admin."
+          "description": "The phrase \"d'inférieur\" is an awkward and imprecise translation of \"lower\" in the context of roles. It literally means \"inferior\".",
+          "suggestion": "Consider using a more appropriate term like \"subordonnés\", \"de niveau inférieur\", or rephrase the sentence to avoid the comparison altogether (e.g., 'attribuer des rôles d'administrateur de salle et de rôles moins élevés')."
         }
       ],
       "approved_at": null
@@ -151,13 +136,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin and lower\" is not accurately translated. 'ավելի ցածր դերեր' can be interpreted as 'lower roles' in general, not specifically 'room admin and lower'.",
+          "description": "The phrase \"assign roles of room admin and lower\" is not accurately translated. \"ավելի ցածր դերեր\" can be interpreted as 'lower roles' in general, not specifically 'room admin and lower'.",
           "suggestion": "Սենյակի ադմինիստրատորի և ցածր կարգի դերեր:"
         },
         {
           "type": "formatting",
-          "description": "The use of a colon after 'բաժին' is unusual in Armenian and may be better suited to a period.",
-          "suggestion": "Բոլոր ադմինները մուտք ունեն {{sectionName}} բաժին:"
+          "description": "The Armenian translation lacks the same flow and sentence structure as the English. It feels slightly more literal and less natural.",
+          "suggestion": "Սենյակի ադմինիստրատորները կարող են ստեղծել և կառավարել հատկացված սենյակները, հրավիրել նոր օգտատերեր և շնորհել սենյակի ադմինիստրատորի և ցածր կարգի դերեր: Բոլոր ադմինները մուտք ունեն {{sectionName}} բաժին:"
         }
       ],
       "approved_at": null
@@ -173,14 +158,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'ルーム管理者およびそれ以下の役割を割り当てることができます' is slightly verbose. It can be simplified for better flow.",
-          "suggestion": "ルーム管理者およびそれ以下の役割を割り当てることができます。-> ルーム管理者は、ルーム管理者以下の役割を割り当てることができます。"
+          "type": "incorrect_translation",
+          "description": "The phrase 'assign roles of room admin and lower' is not perfectly conveyed. 'それ以下の役割' is a bit awkward. A more natural translation would be 'ルーム管理者以下の役割'.",
+          "suggestion": "ルーム管理者以下の役割を割り当てることができます。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English 'and lower' in 'assign roles of room admin and lower' is a bit awkward.  While the Japanese conveys the meaning, a more natural phrasing might be beneficial.",
-          "suggestion": "ルーム管理者およびそれ以下の役割を割り当てることができます。-> ルーム管理者は、ルーム管理者以下の役割を割り当てることができます。"
+          "type": "formatting",
+          "description": "The Japanese translation consistently uses 'ルーム管理者は' which is slightly repetitive. While acceptable, consider varying the phrasing for better flow.",
+          "suggestion": "ルーム管理者は割り当てられたルームを作成および管理し、新しいユーザーを招待し、ルーム管理者以下の役割を割り当てることができます。{{sectionName}}セクションにはルーム管理者もアクセスできます。"
         }
       ],
       "approved_at": null
@@ -197,13 +182,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation uses a comma (,) to separate clauses where a conjunction or slightly different punctuation might improve flow.  For example, 'ເຊີນຜູ້ໃຊ້ໃໝ່, ແລະ ມອບບົດບາດ...' could be improved.",
-          "suggestion": "Consider replacing the comma with 'ແລະ' or restructuring the sentence for better readability."
+          "description": "The Lao translation uses commas (,) instead of periods (.) to separate clauses. This is not standard Lao punctuation.",
+          "suggestion": "Replace commas with periods for better readability and adherence to Lao punctuation rules. For example, change ',ເຊີນຜູ້ໃຊ້ໃໝ່,' to '.ເຊີນຜູ້ໃຊ້ໃໝ່.'"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ຕ່ຳກວ່າ' (lower) is a literal translation and might not be the most natural way to express 'lower roles' in Lao. It's vague.",
-          "suggestion": "Consider a phrase like 'ທີ່ຕໍ່າກວ່າ' or 'ທີ່ຂັ້ນຕ່ຳກວ່າ' to be more specific about the hierarchy of roles."
+          "type": "spelling",
+          "description": "While 'ບັນດາ' is a valid Lao word, it's a bit formal for this context. Using it repeatedly ('ບັນດາຜູ້ປົກຄອງຫ້ອງ' and 'ບັນດາຜູ້ປົກຄອງທັງໝົດ') can sound overly stiff.",
+          "suggestion": "Consider replacing 'ບັນດາ' with a less formal term like 'ຜູ້ປົກຄອງ' or 'ເຈົ້າຂອງຫ້ອງ' in some instances to make the text more conversational. Evaluate the best option based on the specific tone desired."
         }
       ],
       "approved_at": null
@@ -214,8 +199,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin and lower\" is translated as \"piešķirt telpas administratora un zemāka līmeņa funkcijas\". While technically correct, it's a bit clunky. A more natural phrasing in Latvian would be \"piešķirt telpas administratora un zemāka amata pakāpes tiesības\" or something similar indicating permissions rather than functions.",
-          "suggestion": "Consider rephrasing 'assign roles of room admin and lower' to 'piešķirt telpas administratora un zemāka amata pakāpes tiesības' or a similar phrase conveying permissions."
+          "description": "The phrase 'assign roles of room admin and lower' is not accurately translated. 'Zemāka līmeņa funkcijas' implies functions, but the English refers to 'roles'.",
+          "suggestion": "Telpu administratori var izveidot un pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt telpas administratora un zemāka līmeņa **pielaiksnēšanas tiesības**."
         }
       ],
       "approved_at": null
@@ -249,9 +234,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'de nivel inferior' is slightly awkward. A more natural Romanian phrasing would be 'inferioare'.",
-          "suggestion": "Administratorii sălii pot crea şi gestiona sălile atribuite, invita noi utilizatori şi atribui roluri de administrator sală și inferioare."
+          "type": "formatting",
+          "description": "The Romanian translation uses 'și' multiple times, creating a slightly clunky feel. While grammatically correct, it can be improved for flow.",
+          "suggestion": "Consider restructuring the sentence to avoid repetitive 'și'. For example: 'Administratorii sălii pot crea și gestiona sălile atribuite, invita noi utilizatori și pot atribui roluri de administrator sală și de nivel inferior. Toți administratorii pot accesa secțiunea {{sectionName}}.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'lower' is translated a bit literally.  A more natural Romanian equivalent for 'lower' in the context of roles might be 'inferior' or 'mai puține privilegii'.",
+          "suggestion": "Replace 'de nivel inferior' with 'cu privilegii mai puține' or 'inferioare'."
         }
       ],
       "approved_at": null
@@ -261,14 +251,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "grammar",
+          "description": "The sentence 'Администраторы комнат могут создавать комнаты и управлять назначенными комнатами...' is slightly awkward. While grammatically correct, it repeats 'комнаты' unnecessarily.",
+          "suggestion": "Администраторы комнат могут создавать и управлять назначенными комнатами..."
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin and lower\" is awkwardly translated as \"назначать роли администратора комнаты и ниже своего уровня\". A more natural translation would be something like \"назначать роли администратора комнаты и роли более низкого уровня\" or “назначать роли администратора комнаты и нижестоящие роли”.",
-          "suggestion": "назначать роли администратора комнаты и роли более низкого уровня"
+          "description": "The phrase 'ниже своего уровня' (below their level) in relation to roles is a bit literal and less natural in Russian.  It implies the admins themselves have a level.",
+          "suggestion": "Администраторы комнат могут назначать роли администратора комнаты и нижестоящие роли."
         },
         {
           "type": "formatting",
-          "description": "The structure of the sentence feels slightly disjointed. It could benefit from a slightly different phrasing for better readability in Russian.",
-          "suggestion": "Администраторы комнат могут создавать и управлять назначенными комнатами, приглашать новых пользователей и назначать роли администратора комнаты и нижестоящие роли. Все администраторы имеют доступ к разделу {{sectionName}}."
+          "description": "The repeated use of '.' at the end of each sentence makes it feel disjointed.  Russian prefers a more flowing style.",
+          "suggestion": "Combine sentences with conjunctions where appropriate for a smoother read. For instance, 'Администраторы комнат могут создавать и управлять назначенными комнатами, приглашать новых пользователей и назначать роли администратора комнаты и нижестоящие роли. Доступ к разделу {{sectionName}} имеют все администраторы.' could be rewritten to flow better."
         }
       ],
       "approved_at": null
@@ -279,18 +274,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"කාමරයට පත් කිරීම\" (kamaratata patha kirimu) literally translates to 'assigning to the room'. It's an awkward phrasing and doesn't accurately convey 'create and manage the assigned rooms'. A better translation would focus on creation and management.",
-          "suggestion": "කාමරයන් නිර්මාණය කිරීම සහ කළමණාකරණය කිරීම (Kamarayan nirmanaya kirimu saha kalamanamakarana kirimu)"
+          "description": "The phrase \"කාමරයට පත් කිරීම\" (kamaratata patha kirima) translates to 'assigning to the room' which is not the intended meaning of 'create and manage'. It implies a pre-existing room.",
+          "suggestion": "කාමරයන් නිර්මාණය කිරීම හා පරිපාලනය කිරීම (kamaran nirmanaya kirima ha paripalanaya kirima) - 'Creating and managing rooms'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"වැඩ සිටුවීම\" (weda situwim) is not the best way to express 'invite'. It's more like 'employing' or 'settling'.",
-          "suggestion": "අමInvitation කිරීම (amInvitation kirimu) or දෙනි (deni)"
+          "description": "The phrase \"වැඩ සිටුවීම\" (veda situvima) doesn't accurately convey the meaning of 'invite'. It literally means 'to establish in work' or 'settling someone in a job'.",
+          "suggestion": "අමතන්නවුන් (amatannawan) - 'invitees' or  ප්‍රවේශපත් ලබා දීම (prave sapath laba dima) - 'granting access'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"පරිච්ඡේදයට\" (paricchchedaya) is a formal term for 'section' that might be too formal for this context. While technically correct, it sounds stiff.",
-          "suggestion": "කොටසට (kotasata)"
+          "description": "The phrase \"පරිච්ඡේදයට ප්‍රවේශය ඇත\" (paricchayadathya praveshaya atha) is a literal translation of 'access to the section'. It sounds unnatural in Sinhala. It needs to be a more idiomatic expression.",
+          "suggestion": "සියලු පරිපාලකයින්ට {{sectionName}} ක්ෂේත්‍රයට පිවිසිය හැකිය (siyallu paripalakayinta {{sectionName}} kshetriyata pivisiya hadiya) - 'All admins have access to the {{sectionName}} area.'"
         }
       ],
       "approved_at": null
@@ -313,18 +308,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'собама' (sobama) should be 'собама' (sobama). The word 'собама' has the genitive plural case.",
-          "suggestion": "собама"
+          "description": "The word 'собама' (sobama) is accusative plural, but it should be in the dative plural, 'собіма' (sobima) to correctly reflect 'assigned rooms'.",
+          "suggestion": "Администратори собе могу креирати и управљати додељеним собом."
         },
         {
           "type": "grammar",
-          "description": "The sentence 'Администратори собе могу креирати...' is slightly awkward. It's more natural to say 'Администратори могу креирати собе...' or 'Они који су администратори собе могу...'",
-          "suggestion": "Они који су администратори собе могу креирати..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'assign roles of room admin and lower' is translated literally as 'доделити улоге администратора собе и ниже'. While understandable, it could be improved for fluency. A more natural translation would be 'доделити улоге администратора собе и нижег ранга'.",
-          "suggestion": "доделити улоге администратора собе и нижег ранга"
+          "description": "The phrase 'доделити улоге администратора собе и ниже' is grammatically awkward. A more natural phrasing would be 'доделити улоге администратора собе и нижег ранга'.",
+          "suggestion": "Администратори собе могу креирати и управљати додељеним собама, позвати нове кориснике и доделити улоге администратора собе и нижег ранга."
         }
       ],
       "approved_at": null
@@ -335,18 +325,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Room admins' is translated as 'Administratori sobe'. While understandable, a more accurate and natural translation would be 'Administratori prostorija' or 'Administratori soba'. The latter aligns more closely with the original wording.",
-          "suggestion": "Administratori prostorija or Administratori soba"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'and lower' in the context of role assignment is not directly translated. It implies assigning roles *below* room admin.  The Serbian translation is lacking this nuance.",
-          "suggestion": "i dodeliti uloge administratora sobe i niže, ili uloge nižeg nivoa"
+          "description": "The phrase \"assign roles of room admin and lower\" is not accurately translated. \"Niže\" doesn't quite convey the meaning of 'lower' in terms of roles. It's a bit ambiguous.",
+          "suggestion": "Administratori sobe mogu kreirati i upravljati dodeljenim sobama, pozvati nove korisnike i dodeliti uloge administratora sobe i nižeg ranga."
         },
         {
           "type": "formatting",
-          "description": "The English uses '{{sectionName}}' for a placeholder. The Serbian translation mirrors this format.",
-          "suggestion": "No change needed, preserves the placeholder formatting."
+          "description": "The Serbian translation uses a full stop (.) after 'sobe' and 'odeljku'. While grammatically correct, the English original uses a comma (,) after 'rooms' and 'section'. Maintaining consistency is preferred.",
+          "suggestion": "Administratori sobe mogu kreirati i upravljati dodeljenim sobama, pozvati nove korisnike i dodeliti uloge administratora sobe i nižeg ranga. Svi administratori imaju pristup {{sectionName}}, odeljku."
         }
       ],
       "approved_at": null
@@ -369,8 +354,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"assign roles of room admin and lower\" is not perfectly translated. 'Cấp dưới' (lower) is a bit awkward. It's more natural to say 'các vai trò cấp thấp hơn' (roles of a lower level) or 'các vai trò thấp hơn' (lower roles).",
-          "suggestion": "Quản trị viên phòng có thể tạo và quản lý các phòng được chỉ định, mời người dùng mới và chỉ định vai trò quản trị viên phòng và các vai trò cấp thấp hơn."
+          "description": "The phrase 'assign roles of room admin and lower' is not accurately translated. 'Cấp dưới' translates to 'subordinates' or 'lower levels' but doesn't fully convey the nuance of roles *below* room admin.",
+          "suggestion": "Quản trị viên phòng có thể tạo và quản lý các phòng được chỉ định, mời người dùng mới và chỉ định vai trò quản trị viên phòng và các vai trò có quyền thấp hơn."
         }
       ],
       "approved_at": null
@@ -381,8 +366,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase '板块' (ban kuai) is used for 'section'. While understandable, '区域' (qu yu) or '部分' (bu fen) might be more natural and commonly used in this context, especially considering it refers to a feature within a system rather than a physical section.",
-          "suggestion": "Consider replacing '板块' with '区域' or '部分'."
+          "description": "The phrase '板块' (ban kuai) for 'section' might be too informal depending on the overall tone of the application. A more formal translation like '部分' (bu fen) or '区域' (qu yu) might be more appropriate.",
+          "suggestion": "Consider using '部分' or '区域' instead of '板块'."
         }
       ],
       "approved_at": null

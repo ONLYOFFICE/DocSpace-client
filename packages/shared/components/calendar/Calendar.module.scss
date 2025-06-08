@@ -252,10 +252,16 @@
   align-items: center;
   color: var(--text-color);
 
+  &.disabled {
+    background: transparent;
+    color: var(--calendar-disabled-color);
+  }
+
   &:hover {
     &.disabled {
       cursor: default;
       background: transparent;
+      color: var(--calendar-disabled-color);
     }
     cursor: pointer;
     background: var(--calendar-on-hover-background);

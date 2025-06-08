@@ -3,7 +3,7 @@
   "content": "Move to Trash?",
   "content_en_sha1_hash": "dc29312d5422dcdadecd1e976ccca05a262b0158",
   "created_at": "2025-05-19T21:30:46.668Z",
-  "updated_at": "2025-05-26T07:57:32.286Z",
+  "updated_at": "2025-05-28T09:30:02.253Z",
   "comment": {
     "text": "The \"MoveToTrashTitle\" translation key is used to display a confirmation title in a delete dialog, prompting the user to confirm moving selected items to the trash. This text appears in a modal dialog header and is translated as per the selection context.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'هل تريد نقله الى سلة المهملات؟' is overly formal and verbose for a simple 'Move to Trash?' prompt. It literally translates to 'Do you want to move it to the trash bin?'. A more natural and concise translation would be better.",
+          "suggestion": "انتقال الى سلة المهملات؟"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -42,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zibil qutusuna atılsın?' while literally meaning 'Should be thrown into the trash bin?', doesn't quite capture the interrogative nature of 'Move to Trash?'. It's more of a suggestion rather than a question. A better translation would directly ask if the item should be moved to trash.",
-          "suggestion": "Silinsin? (Delete?)"
+          "description": "The translation \"Zibil qutusuna atılsın?\" while literally meaning \"Should it be thrown into the trash can?\", doesn't quite capture the concise and direct nature of the English \"Move to Trash?\". A more accurate and natural translation would convey the action of moving to trash, not the question of whether to.",
+          "suggestion": "Silinsin?"
         }
       ],
       "approved_at": null
@@ -78,13 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ver a la papelera?\" is not accurate. 'Ver' means 'to see'.  The intended meaning of 'Move to Trash?' is to ask if the user wants to move something to the trash. A more accurate translation would involve 'mover' (to move).",
-          "suggestion": "Consider '¿Mover a la papelera?' or '¿Enviar a la papelera?'"
+          "description": "The translation 'ver a la papelera?' is not the most natural or accurate translation of 'Move to Trash?'. 'Ver' means 'to see' and doesn't convey the action of moving something to the trash.",
+          "suggestion": "Mover a la papelera?"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'ver a la papelera' is grammatically incorrect in Spanish.  The preposition 'a' isn't used naturally in this context.",
-          "suggestion": "Reconsider the sentence structure. Use a verb that conveys the action of moving."
+          "description": "The phrase 'a la papelera' needs an accent mark on 'a' to be grammatically correct in Spanish. It should be 'a la'.",
+          "suggestion": "Mover a la papelera?"
         }
       ],
       "approved_at": null
@@ -107,13 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Տեղափոխե՞լ աղբարկղ' while technically conveying the meaning of 'Move to Trash?', it's not the most natural or idiomatic way to phrase it in Armenian. The question particle is also placed awkwardly.",
-          "suggestion": "Consider alternatives like 'Ձևականացնելո՞ւ աղբարկղ' (Devecanacnelovu aghbarkgh) or 'Սուղարկղի տեղափոխելո՞ւ' (Sogharkghi tepoxelovu). A more literal but slightly more formal translation might be 'Տեղափոխելո՞ւ աղբարկղ' (Tepoxelovu aghbarkgh)."
-        },
-        {
-          "type": "grammar",
-          "description": "The placement of the question particle (՞) in 'Տեղափոխե՞լ աղբարկղ' is unusual and doesn't conform to standard Armenian grammar. It sounds abrupt and unnatural.",
-          "suggestion": "Integrate the question particle more naturally into the sentence structure, as shown in the suggestions above."
+          "description": "The translation \"Տեղափոխե՞լ աղբարկղ\" is not a natural or accurate translation of \"Move to Trash?\". It literally translates to \"Move? Trash\". It's missing the word 'to'.",
+          "suggestion": "A more accurate translation would be something like \"Ձևականո՞ւմ աղբարկղի մեջ\" (Dz'evakanum aghbarkghi mej - Would you like to move to the trash?) or \"Տեղափոխել աղբարկղի՞\" (Telaphoxel aghbarkghi - Move to the trash?). The best option depends on the specific UI context."
         }
       ],
       "approved_at": null
@@ -142,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ຍ້າຍໄປຖັງຂີ້ເຫຍື້ອບໍ?\" is a literal translation and sounds unnatural in Lao. A more natural phrasing would be something like \"ຖິ້ມກ໊າວ?\" or \"ຍ້າຍເຂົ້າຖັງກ໊າວ?\"",
-          "suggestion": "ຖິ້ມກ໊າວ?"
+          "description": "The Lao translation 'ຍ້າຍໄປຖັງຂີ້ເຫຍື້ອບໍ?' literally translates to 'Move to trash bin?' The question mark adds an unnecessary formality. A more natural phrasing would be 'ຍ້າຍໄປຖິ້ມບໍ?' or 'ຖິ້ມບໍ?'",
+          "suggestion": "ຖິ້ມບໍ?"
         }
       ],
       "approved_at": null
@@ -154,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Izdzēst?\" translates to \"Delete?\" rather than \"Move to Trash?\" which is the original English content.",
-          "suggestion": "Consider a more accurate translation such as \"Pārceļ uz papildu lietu nodalījumu?\" or \"Pārceļ uz atkritumu nodalījumu?\" depending on the specific functionality."
+          "description": "The Latvian translation \"Izdzēst?\" translates to \"Delete?\" rather than \"Move to Trash?\". While functionally similar, it doesn't accurately reflect the English content.",
+          "suggestion": "Consider \"Pārslēdzties uz atkritumu kaudzē?\" or a similar phrase that conveys the 'move to trash' action more precisely. A simpler option could be \"Pārslēdzties uz papildu atkritumu kaudzē?\" if the user might be unsure of the intended destination."
         }
       ],
       "approved_at": null
@@ -190,13 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Mutare la Coşul de gunoi?\" is not the most natural or accurate translation of \"Move to Trash?\". \"Mutare\" implies moving something, but 'coşul de gunoi' (trash bin) is already the destination. A more accurate and common phrasing would be something like \"Ştergere în coșul de gunoi?\" or \"Mutare în coșul de gunoi?\"",
-          "suggestion": "Ştergere în coșul de gunoi?"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'Coşul' should be 'Coşul de gunoi' for clarity. It's more common to specify the type of basket.",
-          "suggestion": "Coşul de gunoi"
+          "description": "The Romanian translation 'Mutare la Coşul de gunoi?' is not the most natural or accurate translation of 'Move to Trash?'. 'Mutare' implies a more formal action. A more natural phrasing would be 'Ștergere în coșul de gunoi?' or 'Mută la coșul de gunoi?'",
+          "suggestion": "Ștergere în coșul de gunoi?"
         }
       ],
       "approved_at": null
@@ -213,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කුණුකූඩයට ගෙනයන්නද?' literally translates to 'To the trash heap, take?', which isn't the most natural way to ask 'Move to Trash?' in Sinhala. A more natural phrasing would be closer to 'දුරකඩයට යවන්නද?' or 'හැරදමාද?'",
-          "suggestion": "දුරකඩයට යවන්නද?"
+          "description": "The translation 'කුණුකූඩයට ගෙනයන්නද?' while literally meaning 'To take to the garbage bin?', is not the most natural or common way to express 'Move to Trash?' in Sinhala. A more standard phrasing would be something along the lines of 'දුන්කටයුතුද?' (dun kathiyadhe?) or 'පොම්කූඩයට යවන්නද?' (pom koodaya yawunnada?).",
+          "suggestion": "Consider 'දුන්කටයුතුද?' (dun kathiyadhe?) or 'පොම්කූඩයට යවන්නද?' (pom koodaya yawunnada?)"
         }
       ],
       "approved_at": null
@@ -237,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Помери у Отпад?\" is not an accurate translation of \"Move to Trash?\".  \"Помери\" means \"move\", but \"у Отпад\" is not the standard phrasing for 'to Trash'.  A more accurate translation would use a term like 'Кошара' or 'Место за отпад'.",
-          "suggestion": "Помери у Кошару?"
+          "description": "The Serbian translation \"Помери у Отпад?\" is not a correct translation of \"Move to Trash?\". \"Помери\" means \"move\" but is in the incorrect form. \"Отпад\" means \"waste\" and doesn't convey the meaning of \"trash\".",
+          "suggestion": "Пребаци у Кошиницу?"
         }
       ],
       "approved_at": null
@@ -249,13 +245,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Pomeri u Otpad?' does not accurately reflect the meaning of 'Move to Trash?'. 'Pomeri' means 'Move' but 'u Otpad' literally translates to 'into Trash'. A more accurate translation would use terms associated with 'Trash' or 'Bin'.",
-          "suggestion": "Prebaciti u Koru za Smeće?"
+          "description": "The Serbian translation 'Pomeri u Otpad?' is not an accurate translation of 'Move to Trash?'. 'Pomeri' means 'Move', but 'u Otpad' is a less natural way to say 'to Trash'. A more accurate and natural translation would use 'Kantu za otpatke' or 'Među otpatke'.",
+          "suggestion": "Preporucujem: 'Prebaci u Kantu za otpatke?' or 'Prebaci Među otpatke?'"
         },
         {
           "type": "spelling",
-          "description": "While 'Otpad' is a valid word, it's slightly less common in the context of a trash bin. A more typical word would be 'Smeće'.",
-          "suggestion": "Consider using 'Smeće' instead of 'Otpad'."
+          "description": "While technically correct, 'Otpad' could be more accurately reflected with 'Otpadak'.",
+          "suggestion": "Consider using 'Otpadak' in context, but 'Otpad' is understandable."
         }
       ],
       "approved_at": null
@@ -266,13 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Çöp kutusuna taşı?' is a literal translation but doesn't sound natural in Turkish for a confirmation dialog. A more natural phrasing would be a question format.",
+          "description": "The Turkish translation 'Çöp kutusuna taşı?' directly translates to \"Move to trash?\" but is grammatically incorrect and sounds unnatural in Turkish. The verb 'taşır' (you move) should be in the imperative form, and the question mark is misplaced.",
           "suggestion": "Silmek istediğinizden emin misiniz?"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The question mark at the end indicates a question. In the context of a confirmation dialog, a declarative statement is more appropriate. While technically correct, it may be jarring to a Turkish speaker.",
-          "suggestion": "Çöp kutusuna taşı?"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "EB",
   "content_en_sha1_hash": "6f1133307673bd2fca81f068c0a87d849203cc59",
   "created_at": "2025-05-19T21:30:45.205Z",
-  "updated_at": "2025-05-26T07:57:32.985Z",
+  "updated_at": "2025-05-28T09:30:02.994Z",
   "comment": {
     "text": "This translation key is used for formatting units of digital storage in a user interface, displaying \"EB\" for Exabyte. It appears as part of a list of file size units in the UI.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 691,
+      "line_number": 687,
       "context": "t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];\n \n if (bytes <= 0) return `${`0 ${t(\"Common:Bytes\")}`}`;\n \n if (bytes >= 1024) {",
       "module": "/packages/shared"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"البايت\" (Al-Byte) translates to \"Byte\" in English, not \"Exabyte\". The correct translation for Exabyte should reflect the meaning of a unit of digital storage.",
-          "suggestion": "Consider using a translation that accurately reflects \"Exabyte\", such as \"إكسا بايت\" (Iksa Byte)."
+          "description": "The Arabic translation \"البايت\" (Al-Byte) translates to 'Byte' in English, not 'Exabyte'. The correct translation should reflect 'Exabyte'.",
+          "suggestion": "The translation should be something that accurately represents 'Exabyte'. Possible suggestions include: إكسا بايت (Eksah Byte) or جيجابايت (Gigabyte - if representing a similar scale)"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Eo' is incorrect for 'EB'. 'EB' is the standard abbreviation for Exabyte, and the French equivalent is 'Ei'.",
-          "suggestion": "Use 'Ei' as the translation for 'EB'."
+          "description": "The French translation 'Eo' is not a standard or recognized abbreviation for Exabyte. The correct abbreviation is 'Ei'.",
+          "suggestion": "Ei"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The standard abbreviation for Exabyte is 'EB', not 'EO'. 'EO' does not have a recognized meaning in this context.",
-          "suggestion": "EB"
+          "description": "The Romanian translation \"EO\" does not accurately represent the English abbreviation \"EB\" for Exabyte. \"EB\" is the internationally recognized standard abbreviation.",
+          "suggestion": "The correct Romanian translation should be \"EB\"."
         }
       ],
       "approved_at": null
@@ -165,7 +165,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The standard abbreviation for Exabyte in Russian is 'ЕБ'. The provided translation 'Эб' uses the Cyrillic letter 'Э' instead of 'Е'.",
+          "suggestion": "Change 'Эб' to 'ЕБ'."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'එ.බ.' is a transliteration of 'EB' rather than a translation of the concept of 'Exabyte'. It doesn't convey the meaning of the term.",
-          "suggestion": "A proper translation of 'Exabyte' would require conveying the meaning of a unit of digital information, which is difficult to directly translate. A transliteration, followed by an explanation, or a completely different approach, might be necessary, depending on the context."
+          "description": "The abbreviation \"EB\" (Exabyte) is commonly understood in Sinhala as well, and directly translating it as \"එ.බ.\" is not ideal. While technically accurate as an initialism, it lacks the familiarity and widespread recognition the English abbreviation has.  A more appropriate approach would be to use \"EB\" directly or provide a brief explanation alongside it the first time it's used.",
+          "suggestion": "Consider using \"EB\" directly or providing a short explanation like 'එක්සබයිට් (EB)'."
         }
       ],
       "approved_at": null

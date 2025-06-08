@@ -3,7 +3,7 @@
   "content": "To mark files as favorites or remove them from this list, use the context menu.",
   "content_en_sha1_hash": "cbc7164e5a45d5d86c789a29ca9c0b653e2852d1",
   "created_at": "2025-05-19T21:30:55.666Z",
-  "updated_at": "2025-05-24T12:09:07.785Z",
+  "updated_at": "2025-06-02T10:20:51.016Z",
   "comment": {
     "text": "This translation key describes a message used to inform users about how to interact with a list of files, such as marking them as favorites or removing them. The message appears in a context menu.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 104,
-      "context": "const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashEmptyDescription\");\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (\n <>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>",
+      "line_number": 106,
+      "context": "const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (\n <>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>",
       "module": "/packages/client"
     }
   ],

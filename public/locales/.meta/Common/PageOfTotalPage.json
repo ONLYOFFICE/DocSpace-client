@@ -3,7 +3,7 @@
   "content": "{{page}} of {{totalPage}}",
   "content_en_sha1_hash": "f8ec268e271534118f3f085bb25e67c3a21ba057",
   "created_at": "2025-05-19T21:30:47.214Z",
-  "updated_at": "2025-05-26T07:57:32.543Z",
+  "updated_at": "2025-05-28T09:30:02.526Z",
   "comment": {
     "text": "This translation key is used to display a pagination label indicating the current page number out of total pages. It appears on a data import component in the Portal Settings categories page. Translators should provide a phrase that accurately reflects this relationship, such as \"Page X of Y\".",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses curly braces {{ }} which are not standard in Arabic text. While they might be used for placeholders in some systems, they are not part of the natural language.",
+          "suggestion": "Consider removing the curly braces if they are purely for placeholder functionality and the system handles the variables separately. If the curly braces are essential for the system, a note to that effect should be included elsewhere in the documentation."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"{{page}} üzrə {{totalPage}}\" is not the most natural or accurate translation of \"{{page}} of {{totalPage}}\". 'üzrə' implies 'on' or 'regarding', not 'of'.",
+          "description": "The preposition 'üzrə' doesn't accurately convey the meaning of 'of' in this pagination context. It implies 'on' or 'regarding' rather than 'out of'.",
           "suggestion": "{{page}} / {{totalPage}}"
         }
       ],
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The English content uses 'of' to separate the page number and total page count. The Finnish translation uses a hyphen '-', which while acceptable, deviates from the original formatting and may affect the visual consistency of the pagination if other components use 'of'.",
-          "suggestion": "Consider using 'of' in the Finnish translation if maintaining strict visual consistency with other pagination elements is required.  Alternatively, ensure the hyphen is consistently used throughout the application."
+          "description": "The English content uses 'of' to separate the page number and total page count. The Finnish translation uses a hyphen '-'. While a hyphen is acceptable, the nuance of 'of' is lost. Consider if a different separator would be more appropriate in Finnish based on context.",
+          "suggestion": "Consider whether a different separator, such as a comma or space, would be more contextually appropriate in Finnish instead of a hyphen."
         }
       ],
       "approved_at": null
@@ -96,13 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"{{page}} {{totalPage}}-ի\" lacks proper conjunction and word order to accurately reflect \"{{page}} of {{totalPage}}\". The '-ի' suffix implies possession or belonging, which is not the intended meaning. A more accurate translation would use a preposition like 'միջ' (mij) which means 'of' or 'among'.",
-          "suggestion": "{{page}} {{mij}} {{totalPage}}"
+          "description": "The Armenian translation uses a possessive suffix '-ի' which doesn't quite convey the meaning of 'of' in this context. It literally means 'of' but implies ownership rather than a sequential relationship (page of total pages). A more appropriate phrasing would convey the idea of a range or sequence.",
+          "suggestion": "{{page}} - {{totalPage}}"
         },
         {
           "type": "formatting",
-          "description": "The Armenian translation uses spaces before and after the template variables which might not be the standard formatting.",
-          "suggestion": "{{page}} {{mij}} {{totalPage}}"
+          "description": "The Armenian translation lacks a space between '{{page}}' and '{{totalPage}}-ի'.",
+          "suggestion": "{{page}} {{totalPage}}-ի"
         }
       ],
       "approved_at": null
@@ -125,7 +131,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation uses '/' instead of 'of'. While '/' might be understood, 'of' is a more direct and natural translation in this context. It also deviates from the original English formatting.",
+          "description": "The Korean translation uses a slash (/) instead of 'of'. While functionally it conveys the page number relative to the total pages, it deviates from the English phrasing and might be perceived as less natural in a Korean context, especially in user interfaces.",
           "suggestion": "{{page}} / {{totalPage}}"
         }
       ],
@@ -185,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation uses a forward slash (/) instead of 'of' to indicate page number progression. While technically understandable, it deviates from the English phrasing and might be perceived as less natural in Sinhala.  A more idiomatic translation might consider a different preposition or construction.",
-          "suggestion": "{{page}} - {{totalPage}}"
+          "description": "The Sinhala translation uses '/' instead of 'of'. While technically conveying the concept of 'of', it's not the standard or most natural way to express this in Sinhala.",
+          "suggestion": "{{page}} සාහිස/{{totalPage}}"
         }
       ],
       "approved_at": null
@@ -221,13 +227,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{totalPage}} sayfanın {{page}} tanesi\" does not accurately reflect the meaning of \"{{page}} of {{totalPage}}\". It translates to '{{page}} is one of {{totalPage}} pages'. The original indicates a page number within a total number of pages, which the translation doesn't convey.",
-          "suggestion": "{{totalPage}} sayfada, {{page}}"
+          "description": "The Turkish translation \"{{totalPage}} sayfanın {{page}} tanesi\" doesn't accurately reflect the meaning of \"{{page}} of {{totalPage}}\".  It literally translates to '{{page}} is one of {{totalPage}} pages'. The intended meaning of 'page of total page' is the position of the current page within the total number of pages. A more accurate translation would be something like '{{page}} / {{totalPage}}'.",
+          "suggestion": "{{page}} / {{totalPage}}"
         },
         {
           "type": "formatting",
-          "description": "The translation doesn't maintain the same variable structure as the English. It should ideally have the total page number first, followed by the current page number, consistent with the English template.",
-          "suggestion": "{{totalPage}} sayfada, {{page}}"
+          "description": "While the double curly braces are consistent with the English, it's worth confirming this format is standard and expected in the Turkish UI.",
+          "suggestion": "Verify consistency with other UI elements."
         }
       ],
       "approved_at": null
@@ -250,7 +256,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Chinese translation lacks the space between the page number and the slash, and between the slash and the total page number, which is present in the English template. This makes it less readable.",
+          "description": "The Chinese translation lacks the word 'of' which is present in the English content. It's abrupt and might be confusing to some users.",
           "suggestion": "{{page}} / {{totalPage}}"
         }
       ],

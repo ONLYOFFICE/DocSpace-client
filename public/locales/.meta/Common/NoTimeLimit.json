@@ -3,7 +3,7 @@
   "content": "No time limit",
   "content_en_sha1_hash": "ba3ffdc5c084cea0b7c0c475d3801a30fcb258b6",
   "created_at": "2025-05-19T21:30:46.946Z",
-  "updated_at": "2025-05-26T07:57:32.930Z",
+  "updated_at": "2025-05-28T09:30:02.957Z",
   "comment": {
     "text": "\"NoTimeLimit\" is a translation key used to display the phrase \"No time limit\" in the Link Row component of a file's UI, likely appearing as part of a dropdown menu or button. This text provides context about a link's expiration status, indicating that there is no deadline for accessing its content.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Չկա ժամանակի սահմանափակում' is a literal translation of 'No time limit'. While technically correct, a more natural and idiomatic Armenian translation might be preferred, depending on the context. It sounds a bit formal.",
+          "suggestion": "Consider alternatives like 'Անժամանակ' (Anzhamanak) or 'Ժամանակի սահմանափակում չկա' (Zhamanaki sahmanapakum chka) for potentially more natural phrasing."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບໍ່ມີເວລາໝຸດ\" while literally meaning 'no time limit', might be a bit awkward or uncommon in everyday Lao. A more natural and common phrasing would be preferable.",
-          "suggestion": "Consider alternatives like \"ບໍ່ມີເວລາຈຳກັດ\" (bok mee vela jam kat) which translates to 'no time restriction' or \"ບໍ່ຈຳກັດເວລາ\" (bok jam kat vela) which translates to 'unlimited time'."
+          "description": "While \"ບໍ່ມີເວລາໝຸດ\" is understandable, a more natural and accurate translation of \"No time limit\" in Lao might be \"ບໍ່ມີເວລາຈຳກັດ\" or \"ບໍ່ຈຳກັດເວລາ\". \"ໝຸດ\" typically refers to a stuck or jammed state, not a limit.",
+          "suggestion": "ບໍ່ມີເວລາຈຳກັດ"
         }
       ],
       "approved_at": null
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'නොවරමිත කාලයක්' (nowaramita kayayak) is technically a valid translation, it's not the most natural or common way to express 'No time limit' in Sinhala. It sounds a bit formal and technical.",
-          "suggestion": "A more natural translation would be 'සීමාවಿಲ್ಲන්න' (seemavillanna) or 'කාල සීමාව නැත' (kaala seema wena netha)."
+          "description": "While 'නොවරමිත කාලයක්' is a literal translation, it's not the most natural way to express 'No time limit' in Sinhala. A more common and idiomatic translation would be 'සීමාවಿಲ್ಲන කාලයක්' or 'කාල සීමාව නැත'.",
+          "suggestion": "සීමාවಿಲ್ಲන කාලයක්"
         }
       ],
       "approved_at": null

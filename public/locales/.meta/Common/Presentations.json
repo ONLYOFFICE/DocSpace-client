@@ -3,7 +3,7 @@
   "content": "Presentations",
   "content_en_sha1_hash": "25c4116b66b152694c7300d8d3f73ff01eb60a35",
   "created_at": "2025-05-19T21:30:47.458Z",
-  "updated_at": "2025-05-26T07:57:32.458Z",
+  "updated_at": "2025-06-03T20:59:42.051Z",
   "comment": {
     "text": "This translation key is used to display a label for a filter option in a UI component, specifically in a file management system or media library. It indicates which type of files are being filtered (e.g., presentations), and its purpose is to provide context for users navigating the file selection process.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 598,
+      "line_number": 599,
       "context": "break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 598,
+      "line_number": 599,
       "context": "break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 347,
+      "line_number": 345,
       "context": "case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:",
       "module": "/packages/shared"
     }
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සමර්පණ\" is a reasonable attempt but not the most common or natural translation of \"Presentations.\" It's a somewhat formal or technical term. A more common and accessible translation would be \" ඉදිරිපත් කිරීම්\" (idiriipath kirim) or \"ප්‍රදර්ශන\" (pradarshana).",
-          "suggestion": "Consider using \"ඉදිරිපත් කිරීම්\" (idiriipath kirim) or \"ප්‍රදර්ශන\" (pradarshana) instead of \"සමර්පණ\"."
+          "description": "The Sinhala translation \"සමර්පණ\" is a plausible attempt but not the most common or accurate translation of \"Presentations\". It leans towards \"offerings\" or \"submissions\" rather than a formal presentation.",
+          "suggestion": "Consider \"ප්‍රස්ථාවතා\" (prasthāvatā) or \" ඉදිරිපත් කිරීම්\" (idiriipath kirim) for a more accurate translation of 'Presentations'."
         }
       ],
       "approved_at": null

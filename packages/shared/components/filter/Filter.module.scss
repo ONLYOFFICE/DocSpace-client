@@ -374,7 +374,7 @@
   :global {
     .combo-button {
       background: var(--filter-sort-button-background);
-      padding-inline: 4px;
+      padding-inline: 4px !important;
       width: 32px;
       height: 32px;
 

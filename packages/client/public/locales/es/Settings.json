@@ -223,7 +223,6 @@
   "SharedFiles": "Archivos compartidos",
   "SharedFilesImportLocation": "Los archivos compartidos por otros usuarios se importarán a {{sectionName}} > Recientemente accesibles mediante enlace. Por favor, tenga en cuenta: algunos permisos de acceso pueden perderse durante la importación.",
   "SharedFolders": "Carpetas compartidas",
-  "SharedFoldersDescription": "Las carpetas compartidas se importarán a la sección Salas como salas con usuarios a los que se les ha concedido acceso. Tenga en cuenta: algunos permisos de acceso pueden perderse durante la importación",
   "SingleSignOn": "Inicio de sesión único",
   "SMTPSettings": "Ajustes de SMTP",
   "SMTPSettingsDescription": "Se necesitan los ajustes SMTP para establecer una cuenta de correo electrónico que se usará para enviar las notificaciones desde el portal usando su propio servidor SMTP en vez de uno que utiliza {{organizationName}}. Por favor rellene todos los campos y pulse el botón 'Guardar'. Usted puede utilizar el botón 'Enviar mensaje de prueba' para comprobar si todos los parámetros introducidos están correctos y trabajan como debían.",

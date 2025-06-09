@@ -3,7 +3,7 @@
   "content": "Archiving data",
   "content_en_sha1_hash": "0b71d55f4a461ddcbdf534bd0d205365234b8127",
   "created_at": "2025-05-19T21:30:43.080Z",
-  "updated_at": "2025-05-26T07:57:32.814Z",
+  "updated_at": "2025-06-08T12:02:32.842Z",
   "comment": {
     "text": "This translation key is used as a label for a download action button in the context of archiving data. When clicked, this button initiates the archiving process.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2225,
+      "line_number": 2222,
       "context": "if (!this.isAvailableOption(\"download\")) return null;\n return {\n id: \"menu-download\",\n label: t(\"Common:Download\"),\n onClick: () =>\n this.downloadAction(t(\"Common:ArchivingData\")).catch((err) =>\n toastr.error(err),\n ),\n iconUrl: DownloadReactSvgUrl,\n };",
       "module": "/packages/client"
     },
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"데이터 아카이브 중\" translates to \"Archiving data (in progress)\" or \"Data archiving in progress\". While not entirely wrong, it implies an ongoing process. \"Archiving data\" is a general term that could refer to the concept of archiving, the location where archived data is stored, or a collection of archived data, not necessarily an ongoing action. A more accurate and general translation would be something like '데이터 보관' (Data storage) or '데이터 아카이브' (Data Archive).",
-          "suggestion": "Consider '데이터 보관' (Data storage) or '데이터 아카이브' (Data Archive) for a more accurate general translation."
+          "description": "The translation \"데이터 아카이브 중\" literally translates to \"Archiving data (in progress)\" or \"Data is being archived.\" While not entirely wrong, it's more specific than the English \"Archiving data\", which simply refers to the action itself. It implies an ongoing process.",
+          "suggestion": "Consider alternatives like \"데이터 보관\" (Data Storage), \"데이터 백업\" (Data Backup), or \"아카이브 데이터\" (Archive Data) depending on the precise meaning intended by 'Archiving data'."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"දත්ත සංරක්‍ෂණය වෙමින්\" (data sanrakshanaya vemining) literally translates to \"data is being archived.\" While not entirely incorrect, \"archiving data\" is a more direct and concise translation.  \"සංරක්‍ෂණය වෙමින්\" implies a process rather than the data itself.",
-          "suggestion": "දත්ත ගබඩා කිරීම (data gabada kirima) - Data storage/archiving; or, සංරක්‍ෂිත දත්ත (sanrakshitha data) - Archived data"
+          "description": "The Sinhala translation \"දත්ත සංරක්‍ෂණය වෙමින්\" translates to \"data is being archived\" or \"data is archiving\". While not strictly incorrect, it implies an ongoing process. \"Archiving data\" is a statement of fact, not an ongoing action. A more direct and accurate translation would be something like \"දත්ත காப்பீடு\" (dathā kāppīmu) or \"දත්ත காப்பீடு කෙරේ\" (dathā kāppīmu kerē).",
+          "suggestion": "Consider \"දත්ත காப்பீடு\" (dathā kāppīmu) for a more direct translation."
         }
       ],
       "approved_at": null
@@ -213,13 +213,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation \"Veriler arşivleniyor\" translates to \"Data is being archived.\" While not entirely wrong, it's a more active voice than the simple noun phrase \"Archiving data\". A more literal translation preserving the noun phrase structure would be \"Arşivlenmekte olan veriler\" or \"Arşiv verileri\".",
-          "suggestion": "Consider \"Arşiv verileri\" or \"Arşivlenmekte olan veriler\" for a closer equivalent."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

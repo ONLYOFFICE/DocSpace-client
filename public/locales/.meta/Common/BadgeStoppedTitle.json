@@ -3,7 +3,7 @@
   "content": "Filling out the form was forcibly stopped",
   "content_en_sha1_hash": "68653a48592c18289fe22fc2b2c53f991e86ce35",
   "created_at": "2025-05-19T21:30:43.225Z",
-  "updated_at": "2025-05-26T07:57:32.996Z",
+  "updated_at": "2025-06-08T12:02:32.932Z",
   "comment": {
     "text": "This translation key is used for the title of a \"BadgeStoppedTitle\" indicator, which indicates that the user's turn has been forcibly stopped while filling out a form. The translated version appears in a specific UI context where the form status transitions to \"Stopped\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 291,
+      "line_number": 293,
       "context": "case FileFillingFormStatus.YourTurn:\n return t(\"Common:BadgeYourTurnTitle\");\n case FileFillingFormStatus.InProgress:\n return t(\"Common:BadgeInProgressTitle\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:BadgeStoppedTitle\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:BadgeCompletedTitle\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Filling out the form was forcibly stopped\" implies an interruption of an action. The Arabic translation \"تم إيقاف تعبئة النموذج قسرًا\" literally translates to \"The filling of the form was forcibly stopped.\" While technically correct, it sounds less natural in Arabic. A more natural phrasing might convey the interruption more directly.",
+          "suggestion": "Consider \"تم إيقاف تعبئة النموذج بشكل مفاجئ\" or \"أُوقف تعبئة النموذج قسرًا\" to better reflect the original meaning."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Formanın doldurulması məcburi dayandırıldı' is a literal translation that doesn't quite capture the nuance of 'forcibly stopped'. 'Məcburi' implies something that was required or mandatory, which isn't the intended meaning here. A more natural translation would convey the interruption.",
-          "suggestion": "Formanın doldurulması dayandırıldı (sudddenly stopped) or Formanın doldurulması kəsildi (filling out the form was interrupted)."
+          "description": "The translation 'Formanın doldurulması məcburi dayandırıldı' implies that the stopping of the form fill was mandatory or required, rather than forceful. The English 'forcibly stopped' suggests an external, unwanted interruption.",
+          "suggestion": "Formanın doldurulması zorla dayandırıldı"
         }
       ],
       "approved_at": null
@@ -72,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'El rellenado del formulario se ha detenido de manera forzosa' is a bit too formal and verbose for a message indicating a form was forcibly stopped. It doesn't quite capture the immediacy and directness of the English.",
-          "suggestion": "Consider a more direct translation such as 'Se detuvo el llenado del formulario' or 'El formulario se detuvo' or 'El llenado del formulario fue interrumpido'."
+          "description": "The translation 'El rellenado del formulario se ha detenido de manera forzosa' is overly literal and sounds awkward in natural Spanish. 'Rellenado' is a bit formal and 'de manera forzosa' is also a bit stiff.",
+          "suggestion": "Se recomienda una traducción más natural como 'El formulario se detuvo abruptamente' o 'Se interrumpió el llenado del formulario'."
         }
       ],
       "approved_at": null
@@ -93,25 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Filling out the form was forcibly stopped\" implies an action taken *against* the user. The Armenian translation \"Ձևաթուղթը լրացնելը հարկադրաբար դադարեցվեց\" literally translates to \"The form filling was forcibly stopped\" which, while technically correct, doesn't fully capture the sense of being interrupted or prevented. A better translation would convey the interruption.",
-          "suggestion": "Consider alternatives like \"Ձևի լրացումը դադարեցվեց հարկադրաբար\" (Form completion was forcibly stopped) or a more conversational phrasing indicating the user was stopped from completing it."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'forzatamente' (forcibly) adds a nuance that isn't explicitly present in the English 'forcibly stopped'. It implies an external force. A more neutral and closer translation would be better.",
-          "suggestion": "La compilazione del modulo è stata interrotta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'forcibly stopped' implies an involuntary action. While the Lao translation 'ຖືກຢຸດເຊົາຢ່າງບໍ່ຖືກຕ້ອງ' literally means 'was stopped inappropriately,' it doesn't convey the sense of being forced. A better translation would emphasize the involuntary nature of the stop.",
-          "suggestion": "ການຕື່ມຂໍ້ມູນແບບຟອມຖືກຢຸດເຊົາໂດຍບໍ່ໄດ້ຮັບອະນຸຍາດ"
+          "description": "The translation \"ການຕື່ມຂໍ້ມູນແບບຟອມຖືກຢຸດເຊົາຢ່າງບໍ່ຖືກຕ້ອງ\" (kan tuem khomun baep form thuk yut sao yang bot thukthong) is too literal and doesn't convey the intended meaning of 'forcibly stopped' naturally in Lao. It translates to 'The filling out of the form was stopped inappropriately'.",
+          "suggestion": "Consider a more natural phrasing such as \"ການຕື່ມແບບຟອມຖືກຢຸດເຊົາ\" (kan tuem baep form thuk yut sao) which simply means 'The form filling was stopped', or \"ການຕື່ມແບບຟອມຖືກຢຸດເຊົາໂດຍບໍ່ໄດ້ຮັບອະນຸຍາດ\" (kan tuem baep form thuk yut sao doy bot dai rap anuyat) which translates to 'The form filling was stopped without permission'."
         }
       ],
       "approved_at": null
@@ -156,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wypełniania formularza zostało przymusowo zatrzymane' is a bit literal and awkward in Polish. While technically correct, it doesn't flow naturally. A more natural phrasing would convey the same meaning more smoothly.",
+          "description": "The translation 'Wypełniania formularza zostało przymusowo zatrzymane' is overly formal and a bit awkward. It translates literally to 'The filling out of the form was forcibly stopped'. A more natural and fluent Polish translation would be preferable.",
           "suggestion": "Formularz został przerwany przymusowo"
         }
       ],
@@ -177,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Completarea formularului a fost oprită cu forță' is a literal translation of 'Filling out the form was forcibly stopped' which, while accurate, sounds slightly awkward and formal in Romanian. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Completarea formularului a fost întreruptă forțat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -189,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පෝරමය පිරවීම බලහත්කාරයෙන් නතර කරන ලදී' while conveying the general meaning, is a bit formal and passive for a user-facing message. It might sound robotic. A more natural phrasing could be considered.",
+          "suggestion": "පෝරමය පිරවීමට අවසර නැතිව නතර කරන ලදී (Poramapirivatu avasata neti natara ladei) - 'The form was stopped without permission to be filled out.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Filling out the form was forcibly stopped' implies a forceful interruption of the form-filling process. While 'Попуњавање обрасца је насилно заустављено' (Popunjavanje obrasca je nasilno zaustavljeno) translates to 'Filling out the form was violently stopped,' 'насилно' (nasilno) implies a more aggressive or violent action than 'forcibly.' A more accurate translation conveying 'forcibly' would use a word like 'принудно' (prinudno).",
-          "suggestion": "Попуњавање обрасца је принудно заустављено"
+          "description": "The translation 'Попуњавање обрасца је насилно заустављено' (Popunjavanje obrasca je nasilno zaustavljeno) literally translates to 'Filling out the form was violently stopped.' While close, 'forcibly' carries a slightly different nuance. 'Насилно' (nasilno - violently) might be too strong depending on the context. A more accurate translation would consider terms that imply external intervention or interruption.",
+          "suggestion": "Consider alternatives like 'Исподнете је прекинуто' (Ispodnete je prekinuto - The submission was interrupted) or 'Принудно је прекинуто попуњавање обрасца' (Prinudo je prekinuto popunjavanje obrasca - Filling out the form was interrupted forcefully)."
         }
       ],
       "approved_at": null
@@ -219,13 +225,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Popunjavanje obrasca je nasilno zaustavljeno' is too literal and conveys a slightly awkward tone. 'Nasilno' (forcibly) implies violence or coercion which isn't necessarily the intended meaning.",
-          "suggestion": "Popunjavanje obrasca je prekinuto/obustavljeno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Formu doldurma işlemi zorla durduruldu' is a bit clunky and formal for the intended meaning of \"Filling out the form was forcibly stopped.\" It's overly literal.",
-          "suggestion": "Consider a more natural phrasing like 'Form doldurma işlemi kesildi' or 'Formu doldurmakla kesildiniz' to convey the same meaning in a more conversational Turkish."
+          "description": "The English phrase 'Filling out the form was forcibly stopped' implies an action was stopped against the user. The Turkish translation 'Formu doldurma işlemi zorla durduruldu' translates more literally to 'The form filling process was forcibly stopped', which is less user-centric. A better translation would convey the action was stopped on the user.",
+          "suggestion": "Formu doldururken işlem zorla durduruldu"
         }
       ],
       "approved_at": null
@@ -255,13 +255,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"中止\" (zhongzhi) carries a stronger connotation of 'suspension' or 'termination' than the English \"stopped.\" It implies a deliberate pause, whereas \"forcibly stopped\" suggests an interruption.",
-          "suggestion": "表单填写被强制停止 (Bengdan tiandian bei qiangzhu tingzhi)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

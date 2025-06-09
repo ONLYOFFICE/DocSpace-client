@@ -3,7 +3,7 @@
   "content": "Show link to Help Center",
   "content_en_sha1_hash": "f1caebab0b9dd55772001bc3d83522b321581b0b",
   "created_at": "2025-05-26T07:15:48.005Z",
-  "updated_at": "2025-05-26T08:03:37.336Z",
+  "updated_at": "2025-06-02T10:20:51.601Z",
   "comment": {
     "text": "The translation key \"ShowHelpCenter\" is used to display a label for a checkbox that toggles visibility of the Help Center link in the UI. It appears as a button option and is intended to provide users with easy access to support resources when the \"help enabled\" setting is turned on.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 102,
-      "context": "<Checkbox\n data-testid=\"show-help-center\"\n className=\"show-help-center checkbox\"\n isDisabled={!isSettingPaid}\n label={t(\"ShowHelpCenter\")}\n isChecked={helpEnabled}\n onChange={() => setHelpEnabled(!helpEnabled)}\n />\n </div>\n <SaveCancelButtons",
+      "line_number": 117,
+      "context": "<Checkbox\n data-testid=\"show-help-center\"\n className={classNames(styles.checkbox)}\n isDisabled={!isSettingPaid}\n label={t(\"ShowHelpCenter\")}\n isChecked={helpEnabled}\n onChange={() => setHelpEnabled(!helpEnabled)}\n />\n </div>\n <SaveCancelButtons",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Additional resources",
   "content_en_sha1_hash": "a15fa56393dfeea6e8ddbb0e0c2a6f3cc24b93de",
   "created_at": "2025-05-26T07:15:40.217Z",
-  "updated_at": "2025-05-26T08:08:17.974Z",
+  "updated_at": "2025-06-02T10:20:51.481Z",
   "comment": {
     "text": "This translation key is used to display the label \"Additional resources\" in various parts of the user interface, such as in settings pages and category lists. Its purpose is to provide a clear and concise title for users to access supplementary content related to portal settings.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 32,
-      "context": "import React, { useState, useEffect } from \"react\";\n import { useTranslation } from \"react-i18next\";\n import { Checkbox } from \"../../../components/checkbox\";\n import { SaveCancelButtons } from \"../../../components/save-cancel-buttons\";\n \n import { StyledAdditionalResources } from \"./AdditionalResources.styled\";\n import { IAdditionalResources } from \"./AdditionalResources.types\";\n \n export const AdditionalResources = ({\n isSettingPaid,\n feedbackAndSupportEnabled,",
+      "line_number": 34,
+      "context": "import classNames from \"classnames\";\n \n import { Checkbox } from \"../../../components/checkbox\";\n import { SaveCancelButtons } from \"../../../components/save-cancel-buttons\";\n \n import { IAdditionalResources } from \"./AdditionalResources.types\";\n import styles from \"./AdditionalResources.module.scss\";\n \n export const AdditionalResources = ({\n isSettingPaid,\n feedbackAndSupportEnabled,",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/Branding/mobile-view.tsx",
-      "line_number": 85,
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 81,
       "context": "onClickLink={onClickLink}\n />\n ) : null}\n {displayAdditional ? (\n <MobileCategoryWrapper\n title={t(\"AdditionalResources\")}\n subtitle={t(\"AdditionalResourcesSubtitle\")}\n url={`${baseUrl}/branding/additional-resources`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/shared"
     },

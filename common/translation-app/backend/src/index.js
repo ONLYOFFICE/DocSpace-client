@@ -48,6 +48,7 @@ async function registerRoutes() {
   });
   server.register(require("./routes/ollama"), { prefix: "/api/ollama" });
   server.register(require("./routes/search"), { prefix: "/api/search" });
+  server.register(require("./routes/export-import"), { prefix: "/api/export-import" });
 
   // Register key usage routes
   server.register(require("./routes/keyUsageRoutes"));

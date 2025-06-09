@@ -73,6 +73,7 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
     formId,
     action,
     toForm,
+    share,
   } = searchParams;
 
   if (!parentId || !fileTitle) redirect(baseURL);
@@ -170,8 +171,13 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
       searchParams.append("action", action);
     }
 
+    if (share) {
+      searchParams.append("share", share);
+    }
+
     logger.debug(
       `fileTitle: ${fileTitle}, parentId: ${parentId}, fileId: ${fileId}, searchParams: ${searchParams}, File created success`,
+      "File created success",
     );
 
     const redirectURL = `/?${searchParams.toString()}`;

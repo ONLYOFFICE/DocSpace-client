@@ -1,19 +1,19 @@
 {
   "key_path": "CSPHeader",
-  "content": "Enter the address of {{productName}} to embed",
-  "content_en_sha1_hash": "6f7f8426044504c62814be07cccb56ae31b0764d",
-  "created_at": "2025-05-19T21:30:54.413Z",
-  "updated_at": "2025-05-24T09:33:24.676Z",
+  "content": "Add the allowed domains for this {{productName}}",
+  "content_en_sha1_hash": "8cbe1b75222e16c6dccda5647c12182590561f7f",
+  "created_at": "2025-06-08T12:02:20.098Z",
+  "updated_at": "2025-06-08T12:02:56.921Z",
   "comment": {
-    "text": "This translation key is used to display a message when users are prompted to enter an address of their {productName} to embed. It appears in a UI component and is intended to provide instructions or guidance to users on how to complete this step.",
+    "text": "This translation key is used to display a message explaining that allowed domains are being added for a specific product. It appears in a category header on a settings page and is likely used as a tooltip or title for a dropdown or button related to content security policy configuration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:46.947Z"
+    "updated_at": "2025-06-08T12:02:56.921Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 221,
-      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", { productName: t(\"Common:ProductName\") })}\n <HelpButton\n className=\"csp-helpbutton\"",
+      "line_number": 222,
+      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,",
       "module": "/packages/client"
     }
   ],
@@ -24,115 +24,16 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
-    "ar-SA": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'تضمين {{productName}} كإطار iframe' translates to 'Embed {{productName}} as an iframe'. While technically correct, it's overly technical for the likely intended user. The original English implies a broader 'enter the address' which suggests a URL input. The iframe explanation isn't necessary or helpful.",
-          "suggestion": "أدخل عنوان {{productName}} لتضمينه"
-        }
-      ],
-      "approved_at": null
-    },
-    "az": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}-i iframe kimi yerləşdirin\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed\".  'iframe kimi yerləşdirin' translates to 'to embed as an iframe,' which isn't the same as entering an address.  The original English implies providing a URL.",
-          "suggestion": "{{productName}}-in ünvanını daxil edin, ki iframe kimi yerləşdirə biləsiniz"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is missing a crucial particle that would make it flow more naturally in Azerbaijani. While technically correct, it feels abrupt.",
-          "suggestion": "Consider adding a conjunction or other particle to smooth the sentence flow. The previous suggestion incorporates this."
-        }
-      ],
-      "approved_at": null
-    },
-    "bg": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Вградете {{productName}} като iframe\" translates to 'Embed {{productName}} as an iframe'. While technically correct, it's more specific than the English 'Enter the address of {{productName}} to embed'. The English implies providing a URL, while the Bulgarian implies using an iframe, which may not be the intended meaning.",
-          "suggestion": "Въведете адреса на {{productName}} за вграждане"
-        }
-      ],
-      "approved_at": null
-    },
-    "cs": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Vložit {{productName}} jako iframe\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed\". It translates to \"Insert {{productName}} as an iframe\", which implies a specific method of embedding rather than simply entering an address.",
-          "suggestion": "Zadejte adresu {{productName}} pro vložení"
-        }
-      ],
-      "approved_at": null
-    },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation \"{{productName}} als iFrame einbetten\" doesn't accurately convey the meaning of 'Enter the address of {{productName}} to embed'. It translates to 'Embed {{productName}} as an iframe'. While related, it lacks the instruction to *enter* the address.",
-          "suggestion": "Consider a translation like \"Geben Sie die Adresse für die Einbettung von {{productName}} ein\" which translates to \"Enter the address for embedding {{productName}}\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses 'als iFrame einbetten' which while understandable, 'iFrame' is an Anglicism. While commonly used, a more German phrasing might be preferred depending on the target audience.",
-          "suggestion": "Consider phrasing like \"als Einbettung\" or \"um die Einbettung zu ermöglichen\" (to enable embedding) for a more native feel.  This is a stylistic preference and not a critical error."
-        }
-      ],
-      "approved_at": null
-    },
-    "el-GR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation \"Ενσωμάτωση του {{productName}} ως iframe\" translates to \"Embedding {{productName}} as an iframe.\" It doesn't convey the original meaning of 'Enter the address of {{productName}} to embed'. The original phrase implies providing a URL or endpoint for embedding, whereas the translation focuses solely on the iframe method.",
-          "suggestion": "Εισάγετε τη διεύθυνση του {{productName}} για ενσωμάτωση"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Incrustar {{productName}} como iframe' doesn't accurately convey the meaning of 'Enter the address of {{productName}} to embed'. 'Incrustar como iframe' implies embedding as an iframe, while the original refers to entering an address.",
-          "suggestion": "Introduce la dirección de {{productName}} para incrustarlo."
-        }
-      ],
-      "approved_at": null
-    },
-    "fi": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation \"Upota {{productName}} iframeksi\" does not accurately convey the meaning of \"Enter the address of {{productName}} to embed\". \"Upota\" means \"embed\", which is already implied by the context. The phrase misses the element of providing an address or URL.",
-          "suggestion": "Anna {{productName}} osoite upotettavaksi"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing 'iframeksi' implies that the product must be an iframe. The English doesn't specify this.",
-          "suggestion": "Anna {{productName}} osoite upotettavaksi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -144,272 +45,55 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Տեղադրել {{productName}}-ը որպես iframe' doesn't accurately convey the meaning of 'Enter the address of {{productName}} to embed'. It directly translates to 'Install {{productName}} as an iframe'.  The English phrasing implies providing a URL or address to be used for embedding, not directly installing something as an iframe.",
-          "suggestion": "A more accurate translation could be something like 'Մուտքագրեք {{productName}}-ի հասցեն՝ դրա դրվելու համար' (Enter the address of {{productName}} for embedding) or 'Համերաշխման համար մուտքագրեք {{productName}}-ի URL-ը' (Enter the URL of {{productName}} for integration)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Incorpora {{productName}} come iframe\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed\". \"Incorpora come iframe\" implies embedding specifically as an iframe, whereas the English implies a more general address input for embedding.",
-          "suggestion": "Inserisci l'indirizzo di {{productName}} per incorporarlo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}をiframeとして埋め込む\" implies embedding as an iframe, which isn't explicitly stated in the English original. While embedding *can* be via iframe, the original is more general (embedding in any way).",
-          "suggestion": "{{productName}}を埋め込むためのアドレスを入力してください"
-        }
-      ],
-      "approved_at": null
-    },
-    "ko-KR": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"{{productName}}를 iframe으로 임베드\" does not fully capture the meaning of \"Enter the address of {{productName}} to embed\". While it mentions embedding with an iframe, it misses the \"enter the address\" part, which implies inputting a URL or address.",
-          "suggestion": "{{productName}}의 주소를 입력하여 임베드하세요."
-        },
-        {
-          "type": "formatting",
-          "description": "The Korean translation uses a double quote at the end. This is not standard Korean sentence structure and would be better to omit the double quote to make it flow more naturally.",
-          "suggestion": "{{productName}}의 주소를 입력하여 임베드하세요."
-        }
-      ],
-      "approved_at": null
-    },
-    "lo-LA": {
-      "ai_translated": false,
-      "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "lv": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Iegult {{productName}} kā iframe\" doesn't accurately convey the meaning of 'Enter the address of {{productName}} to embed'.  It translates to 'Embed {{productName}} as an iframe', which is a specific method of embedding, whereas the English phrase is more general.",
-          "suggestion": "Ievadiet {{productName}} adresi iekļaušanai"
-        }
-      ],
-      "approved_at": null
-    },
-    "nl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation \"{{productName}} insluiten als iframe\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed\". While 'insluiten' (embed) is present, it misses the crucial 'enter the address' component.  It assumes the user already knows to embed within an iframe, which isn't implied in the English.",
-          "suggestion": "Suggest something like \"Voer het adres in van {{productName}} om in te sluiten\" or \"Geef het adres van {{productName}} op om in te sluiten\"."
-        }
-      ],
-      "approved_at": null
-    },
-    "pl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Osadź {{productName}} jako iframe\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed.\" While it implies embedding, it misses the instruction to 'enter the address'.",
-          "suggestion": "Wprowadź adres {{productName}} aby osadzić"
-        }
-      ],
-      "approved_at": null
-    },
-    "pt": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Incorporar o {{productName}} como iframe\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed\". The English phrase implies providing an address for embedding, whereas the Portuguese translation implies embedding as an iframe.  The intent is to obtain a URL or endpoint for embedding.",
-          "suggestion": "Insira o endereço para incorporar o {{productName}}."
-        }
-      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Incorporar {{productName}} como iframe\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed\".  'Incorporar como iframe' means 'to embed as an iframe', whereas the English implies providing the address to be used for embedding, not just specifying the embedding method.",
-          "suggestion": "Digite o endereço de {{productName}} para incorporar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Încorporare {{productName}} bazat pe iframe' doesn't accurately reflect the meaning of 'Enter the address of {{productName}} to embed'. It translates to something like 'Embedding {{productName}} based on iframe' which isn't the intended meaning of inputting an address.",
-          "suggestion": "Introduce adresa {{productName}} pentru a-l încorpora"
-        },
-        {
-          "type": "formatting",
-          "description": "The translated sentence doesn't match the English sentence structure. It's more passive and less direct.",
-          "suggestion": "Introduce adresa {{productName}} pentru a-l încorpora"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Встроить {{productName}} в качестве iframe\" doesn't accurately convey the original meaning \"Enter the address of {{productName}} to embed\". The original implies entering an address, while the translation suggests embedding as an iframe. The meaning has shifted significantly.",
-          "suggestion": "Введите адрес для встраивания {{productName}}"
-        }
-      ],
-      "approved_at": null
-    },
-    "si": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"කාවැද්දීමට {{productName}} ලිපිනය යොදන්න\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed.\" 'කාවැද්දීමට' (kāvaḍḍimito) means 'to embed' but implies forceful insertion which isn't the intent of 'to embed' in this context.  'ලිපිනය යොදන්න' (lipinya yodanna) is okay for 'enter the address' but the overall phrasing is awkward.",
-          "suggestion": "A more accurate translation would be something like: \"{{productName}} හි ලිපිනය ඇතුළත් කරන්න\" ({{productName}} ha lipinya athulatha karanna) or \"{{productName}} ලිපිනය ඇතුළත් කරන්න\" ({{productName}} lipinya athulatha karanna)."
-        }
-      ],
-      "approved_at": null
-    },
-    "sk": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"Vložiť {{productName}} ako iframe\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed.\"  'Vložiť ako iframe' implies embedding via iframe, which might not be the intended method. The original sentence refers to providing an address for embedding, not necessarily through an iframe.",
-          "suggestion": "Zadať adresu {{productName}} na vloženie"
-        }
-      ],
-      "approved_at": null
-    },
-    "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vdelajte {{productName}} kot iframe' doesn't accurately convey the meaning of 'Enter the address of {{productName}} to embed'. While 'iframe' is technically correct, the original phrasing implies providing a URL or address, not just embedding as an iframe. A better translation would convey the idea of inputting a URL or address.",
-          "suggestion": "Vnesite naslov {{productName}} za vdelavo."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Унесите адресу {{productName}}-а за уградњу' doesn't accurately convey the meaning of 'Enter the address of {{productName}} to embed'.  'уградњу' (installation) isn't the correct term for 'embed' in this context. A more appropriate translation for 'embed' might be 'укључивање' or 'уграђивање'.  The '-а' ending on 'productName' is also potentially incorrect and needs to be reviewed based on grammatical context and the specific nature of 'productName'.",
-          "suggestion": "Унесите адресу {{productName}} за укључивање / Унесите адресу {{productName}} за уграђивање"
-        },
-        {
-          "type": "grammar",
-          "description": "The genitive ending '-а' on 'productName' needs to be verified for grammatical correctness. It's possible that it should be different depending on the case and number of 'productName'.",
-          "suggestion": "Review the grammatical case and number of 'productName' and adjust the ending accordingly."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'ugradnja' (embedding) isn't the most natural translation of 'embed' in this context. It implies a physical installation or integration. A more suitable term would be 'integraciju' or perhaps 'umožavanje korištenja' depending on the exact function.",
-          "suggestion": "Unesite adresu {{productName}}-a za integraciju"
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, adding a hyphen after 'adresa' might improve readability in Serbian. However, this is a stylistic preference and not strictly an error.",
-          "suggestion": "Unesite adresu {{productName}}-a za integraciju"
-        }
-      ],
-      "approved_at": null
-    },
-    "tr": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation '{{productName}}'i iframe olarak gömün' doesn't accurately convey the meaning of 'Enter the address of {{productName}} to embed'. 'Gömün' means 'embed', but the instruction is to enter the address, not directly embed. A better translation would focus on inputting the address.",
-          "suggestion": "Enter the {{productName}} address to embed."
-        },
-        {
-          "type": "formatting",
-          "description": "The Turkish translation maintains the double curly braces '{{productName}}' which might be unnecessary or confusing if the original English uses single curly braces or a different placeholder format. Consistency is key.",
-          "suggestion": "Consider whether the double curly braces are necessary and match the original English format."
-        }
-      ],
-      "approved_at": null
-    },
-    "uk-UA": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Впровадити {{productName}} як вбудований фрейм\" doesn't accurately convey the meaning of \"Enter the address of {{productName}} to embed\". It translates more to 'Implement {{productName}} as an embedded frame'. The original sentence asks for an address to be entered.",
-          "suggestion": "Введіть адресу {{productName}} для вбудовування"
-        }
-      ],
-      "approved_at": null
-    },
-    "vi": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Nhúng {{productName}} dưới dạng iframe\" implies embedding via iframe, while the English content implies entering an address. The meaning is significantly altered.",
-          "suggestion": "Nhập địa chỉ của {{productName}} để nhúng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"输入要嵌入的{{productName}}地址\" while generally understandable, is not the most natural or idiomatic way to express 'Enter the address of {{productName}} to embed' in Chinese. A more accurate and natural phrasing would emphasize the act of providing the address for embedding.",
-          "suggestion": "输入{{productName}}的嵌入地址 (Shuru {{productName}} de qianru dizhi)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

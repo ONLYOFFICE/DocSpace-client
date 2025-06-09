@@ -3,10 +3,8 @@
   "DocumentsFileType": "документи",
   "ErrorConnectionLost": "Връзката е изгубена",
   "FileLocation": "Mестоположението на файла",
-  "FileName": "Име на файла",
   "ImageFileType": "снимки",
   "MailMergeFileType": "Изберете файл във XLSX формат",
-  "OpenSavedDocument": "Отворете записания документ в нов раздел",
   "SelectFilesType": "Изберете файлове от тип: {{fileType}}",
   "UsersWithoutAccess": "Някои потребители, които искате да споменете, нямат достъп до стаята: {{users}}"
 }

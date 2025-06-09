@@ -97,6 +97,8 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   const allOperationsLength = panelOperationsLength + operationsLength;
   const isSeveralOperations = allOperationsLength > 1;
 
+  console.log(operations.length, panelOperations[0]);
+
   const clearTimers = () => {
     if (hideTimerRef.current) {
       clearTimeout(hideTimerRef.current);
@@ -213,6 +215,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   }, [isOpenDropdown, isSeveralOperations]);
 
   const getIcons = () => {
+    console.log("call");
     if (isSeveralOperations) {
       return isOpenDropdown
         ? FloatingButtonIcons.arrow

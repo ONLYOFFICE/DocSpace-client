@@ -1,0 +1,28 @@
+{
+  "key_path": "NewStorageImmidiatelyAvailable",
+  "content": "The new storage will be available immediately after payment.",
+  "content_en_sha1_hash": "25dd62a1090b423b3777643df6c7f4865d623f39",
+  "created_at": "2025-05-29T12:12:54.464Z",
+  "updated_at": "2025-06-03T21:00:39.575Z",
+  "comment": {
+    "text": "This translation key is used for a message that indicates when new storage becomes available after payment. It will be displayed as a label on a UI element, informing users of the status of their storage upgrade.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:39.575Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/StorageSummary.tsx",
+      "line_number": 83,
+      "context": "return t(\"Total\");\n };\n \n const getDescription = () => {\n if (!hasStorageSubscription) return t(\"NewStorageImmidiatelyAvailable\");\n \n if (isStorageCancellation()) {\n return t(\"SubscriptionAutoCancellation\", {\n finalDate: storageExpiryDate,\n });",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

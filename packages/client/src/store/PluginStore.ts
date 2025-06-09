@@ -705,7 +705,8 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items = plugin.getContextMenuItems && plugin.getContextMenuItems();
+    const items: Map<string, IContextMenuItem> =
+      plugin.getContextMenuItems && plugin.getContextMenuItems();
 
     if (!items) return;
 
@@ -751,7 +752,7 @@ class PluginStore {
   deactivateContextMenuItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items = plugin.getContextMenuItems?.();
+    const items: IContextMenuItem[] = plugin.getContextMenuItems?.();
 
     if (!items) return;
 
@@ -765,7 +766,8 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items = plugin.getInfoPanelItems && plugin.getInfoPanelItems();
+    const items: Map<string, IInfoPanelItem> =
+      plugin.getInfoPanelItems && plugin.getInfoPanelItems();
 
     if (!items) return;
 
@@ -826,7 +828,8 @@ class PluginStore {
   deactivateInfoPanelItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items = plugin.getInfoPanelItems && plugin.getInfoPanelItems();
+    const items: Map<string, IInfoPanelItem> =
+      plugin.getInfoPanelItems && plugin.getInfoPanelItems();
 
     if (!items) return;
 
@@ -840,7 +843,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items = plugin.getMainButtonItems?.();
+    const items: IMainButtonItem[] = plugin.getMainButtonItems?.();
 
     if (!items) return;
 
@@ -940,7 +943,8 @@ class PluginStore {
   deactivateMainButtonItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items = plugin.getMainButtonItems && plugin.getMainButtonItems();
+    const items: IMainButtonItem[] =
+      plugin.getMainButtonItems && plugin.getMainButtonItems();
 
     if (!items) return;
 
@@ -954,7 +958,8 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items = plugin.getProfileMenuItems && plugin.getProfileMenuItems();
+    const items: IProfileMenuItem[] =
+      plugin.getProfileMenuItems && plugin.getProfileMenuItems();
 
     if (!items) return;
 
@@ -1013,7 +1018,8 @@ class PluginStore {
   deactivateProfileMenuItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items = plugin.getProfileMenuItems && plugin.getProfileMenuItems();
+    const items: IProfileMenuItem[] =
+      plugin.getProfileMenuItems && plugin.getProfileMenuItems();
 
     if (!items) return;
 
@@ -1027,7 +1033,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items =
+    const items: IEventListenerItem[] =
       plugin.getEventListenerItems && plugin.getEventListenerItems();
 
     if (!items) return;
@@ -1084,7 +1090,7 @@ class PluginStore {
   deactivateEventListenerItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items =
+    const items: IEventListenerItem[] =
       plugin.getEventListenerItems && plugin.getEventListenerItems();
 
     if (!items) return;
@@ -1099,7 +1105,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items = plugin.getFileItems && plugin.getFileItems();
+    const items: IFileItem[] = plugin.getFileItems && plugin.getFileItems();
 
     if (!items) return;
 
@@ -1160,7 +1166,7 @@ class PluginStore {
   deactivateFileItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items = plugin.getFileItems && plugin.getFileItems();
+    const items: IFileItem[] = plugin.getFileItems && plugin.getFileItems();
 
     if (!items) return;
 

@@ -146,6 +146,8 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     primaryOperationsAlert?: boolean;
     needErrorChecking?: boolean;
     onCancelOperation?: (callback: () => void) => void;
+
+    mainBarVisible?: boolean;
   };
 
 export type SectionContextMenuProps = {

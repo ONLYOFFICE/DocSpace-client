@@ -30,7 +30,7 @@ import { API_PREFIX } from "../../utils";
 import type { TFile, TFolder, TGetFolder } from "../../../../api/files/types";
 import { http } from "msw";
 
-export const PATH_FOLDER = "files/*";
+export const PATH_FOLDER = "files/:id([0-9]+)*";
 
 export type TypeFolder = "isEmpty" | "isFiltered";
 
@@ -140,7 +140,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -247,7 +246,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -354,7 +352,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -460,7 +457,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -566,7 +562,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -672,7 +667,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -778,7 +772,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -884,7 +877,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -990,7 +982,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1096,7 +1087,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1202,7 +1192,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1308,7 +1297,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1414,7 +1402,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1520,7 +1507,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1626,7 +1612,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1732,7 +1717,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1838,7 +1822,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -1944,7 +1927,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2050,7 +2032,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2156,7 +2137,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2262,7 +2242,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2368,7 +2347,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2474,7 +2452,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2582,7 +2559,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2690,7 +2666,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2798,7 +2773,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -2906,7 +2880,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3014,7 +2987,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3122,7 +3094,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3230,7 +3201,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3336,7 +3306,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3442,7 +3411,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3548,7 +3516,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3654,7 +3621,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3760,7 +3726,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
   {
     folderId: 5,
@@ -3866,7 +3831,6 @@ const files: TFile[] = [
       hasAvatar: false,
       isAnonim: false,
     },
-    shortWebUrl: "",
   },
 ];
 

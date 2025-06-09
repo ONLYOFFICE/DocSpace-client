@@ -43,9 +43,9 @@ import { validatePublicRoomKeyHandler } from "./validatePublicRoomKey";
 import { roomListHandler } from "./roomList";
 
 export const filesHandlers = (port: string) => [
-  filesSettingsHandler(port),
   foldersTreeHandler(port),
-  folderHandler(port),
+  filesSettingsHandler(port),
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
+  folderHandler(port),
 ];

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,7 @@ import type {
   FileInfoType,
   FilesSelectorSettings,
 } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import type { TBreadCrumb } from "@docspace/shared/components//selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { Nullable } from "@docspace/shared/types";
 
 export interface RoomsModuleProps {

@@ -27,9 +27,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { classNames } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
@@ -39,11 +41,20 @@ import RoomSelector from "@docspace/shared/selectors/Room";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import GroupIconDialog from "./sub-components/GroupIconDialog";
 
-const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
+const EditRoomGroupsDialog = ({
+  currentColorScheme,
+  getCovers,
+  covers,
+  setArrRoomGroups,
+  setEditRoomGroupsDialogVisible,
+  arrRoomGroups,
+}) => {
   const { t } = useTranslation(["Common"]);
 
   const [isOpenRoomList, setIsOpenRoomList] = useState(false);
   const [isOpenGroupIcon, setIsOpenGroupIcon] = useState(false);
+
+  const [arrIdsRooms, setArrIdsRooms] = useState(null);
 
   const onClickCreateNewGroup = () => {
     setIsOpenRoomList(true);
@@ -53,11 +64,16 @@ const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
     setIsOpenRoomList(false);
   };
 
+  const onCloseEditRoomGroupsDialog = () => {
+    setEditRoomGroupsDialogVisible(false);
+  };
+
   const onSubmitRoom = (items) => {
     console.log("onSubmitRoom", items);
-    const arrIdsRooms = [];
-    items.forEach((item) => arrIdsRooms.push(item.id));
-    console.log("arrIdsRooms", arrIdsRooms);
+    const arrIds = [];
+    items.forEach((item) => arrIds.push(item.id));
+    console.log("arrIds", arrIds);
+    setArrIdsRooms(arrIds);
     setIsOpenGroupIcon(true);
   };
 
@@ -67,6 +83,10 @@ const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
         currentColorScheme={currentColorScheme}
         getCovers={getCovers}
         covers={covers}
+        arrIdsRooms={arrIdsRooms}
+        setArrRoomGroups={setArrRoomGroups}
+        setIsOpenGroupIcon={setIsOpenGroupIcon}
+        onCloseEditRoomGroupsDialog={onCloseEditRoomGroupsDialog}
       />
     );
   }
@@ -79,7 +99,7 @@ const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
           isAside
           withBackground
           zIndex={309}
-          // onClick={onClose}
+          onClick={onCloseRoomList}
         />
         <Aside
           visible={isOpenRoomList}
@@ -107,14 +127,19 @@ const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
     );
   }
 
+  const nodeAddedGroups = () => {
+    return arrRoomGroups.map((item) => (
+      <div key={item.id}>{item.groupName}</div>
+    ));
+  };
+
   return (
     <ModalDialog
-      displayType="aside"
+      displayType={ModalDialogType.aside}
       withBodyScroll
       visible={true}
       className={styles.editRoomGroupsDialog}
-
-      // onClose={onCloseAndDisconnectThirdparty}
+      onClose={onCloseEditRoomGroupsDialog}
       // isScrollLocked={isScrollLocked}
       // hideContent={isOauthWindowOpen}
       // isTemplate={isTemplate}
@@ -131,10 +156,10 @@ const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
           <div className={styles.roomGroups}>
             <div className={styles.title}>Room groups</div>
             <ToggleButton
-
-            // onChange={onClickPermissions}
-            // isChecked={selectedEnableSchedule}
-            // isDisabled={isLoadingData || !isEnableAuto || isInitialError}
+              className={styles.roomGroupsToggle}
+              // onChange={onClickPermissions}
+              // isChecked={selectedEnableSchedule}
+              // isDisabled={isLoadingData || !isEnableAuto || isInitialError}
             />
           </div>
 
@@ -148,6 +173,36 @@ const EditRoomGroupsDialog = ({ currentColorScheme, getCovers, covers }) => {
           className={styles.selectorAddButton}
           label={"Create a new group"}
         />
+        {/* <div className={styles.addedGroups}>{nodeAddedGroups()}</div> */}
+
+        <div className={styles.addedGroups}>
+          <div className={styles.group}>
+            <div className={styles.groupData}>
+              <div className={styles.iconGroup}>
+                <svg
+                  width="20"
+                  height="20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M3 3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-7a1 1 0 0 1-.832-.445L7.465 3H3zM.879 1.879A3 3 0 0 1 3 1h5a1 1 0 0 1 .832.445L10.535 4H17a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V4a3 3 0 0 1 .879-2.121z"
+                    fill="#657077"
+                  />
+                </svg>
+              </div>
+
+              <div className={styles.titleContainer}>
+                <div className={styles.nameGroup}>MY groups</div>
+                <div className={styles.countRooms}> 4 rooms </div>
+              </div>
+            </div>
+
+            <div className={styles.editGroup}>Edit</div>
+          </div>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

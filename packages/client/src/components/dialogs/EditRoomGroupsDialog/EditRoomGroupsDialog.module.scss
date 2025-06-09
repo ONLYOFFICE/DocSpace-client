@@ -65,6 +65,24 @@
   .selectorAddButton {
     padding: 16px 20px;
   }
+
+  .roomGroupsToggle {
+    :global {
+      label {
+        position: relative;
+      }
+    }
+  }
+
+  .group {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .groupData {
+    display: flex;
+    gap: 8px;
+  }
 }
 
 .groupIconDialog {

@@ -179,6 +179,9 @@ const Panels = (props) => {
     getCovers,
     currentColorScheme,
     covers,
+    setArrRoomGroups,
+    setEditRoomGroupsDialogVisible,
+    arrRoomGroups,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -441,6 +444,9 @@ const Panels = (props) => {
         currentColorScheme={currentColorScheme}
         getCovers={getCovers}
         covers={covers}
+        setArrRoomGroups={setArrRoomGroups}
+        setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
+        arrRoomGroups={arrRoomGroups}
       />
     ),
   ];
@@ -531,9 +537,10 @@ export default inject(
       editRoomGroupsDialogVisible,
       getCovers,
       covers,
+      setEditRoomGroupsDialogVisible,
     } = dialogsStore;
 
-    const { viewAs } = filesStore;
+    const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
     const { copyFromTemplateForm } = filesActionsStore;
@@ -655,6 +662,9 @@ export default inject(
       currentColorScheme,
       getCovers,
       covers,
+      setArrRoomGroups,
+      setEditRoomGroupsDialogVisible,
+      arrRoomGroups,
     };
   },
 )(observer(Panels));

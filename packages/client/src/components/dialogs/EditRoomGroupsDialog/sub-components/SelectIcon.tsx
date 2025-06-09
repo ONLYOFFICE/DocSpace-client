@@ -32,10 +32,6 @@ import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
 import { ILogo, SelectIconProps } from "../RoomLogoCoverDialog.types";
 
-interface WithoutIconProps {
-  isSelected?: boolean;
-}
-
 const StyledIconContainer = styled.div<{
   $currentColorScheme?: TColorScheme;
   isSelected: boolean;

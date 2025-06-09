@@ -254,6 +254,8 @@ class FilesStore {
 
   mainButtonVisible = false;
 
+  arrRoomGroups = [];
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -4417,6 +4419,13 @@ class FilesStore {
 
   setMainButtonVisible = (mainButtonVisible) => {
     this.mainButtonVisible = mainButtonVisible;
+  };
+
+  setArrRoomGroups = (newGroup) => {
+    console.log("setArrRoomGroups", newGroup);
+    this.arrRoomGroups.push(newGroup);
+
+    console.log("this.arrRoomGroups", this.arrRoomGroups);
   };
 }
 

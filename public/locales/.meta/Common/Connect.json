@@ -3,7 +3,7 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2025-05-26T07:57:32.267Z",
+  "updated_at": "2025-06-08T12:02:32.627Z",
   "comment": {
     "text": "This translation key is used for a \"Connect\" button that appears in various UI elements, such as buttons and dialog components. Its purpose is to provide a consistent label for this action across different applications and languages, allowing users to understand what happens when they click on the button.",
     "is_auto": true,
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Կապակցվել\" (Kapaktcel) literally translates to \"to connect\" in the imperfective aspect. While not strictly incorrect, it implies an ongoing or repeated action. \"Connect\" in English often implies a single action. A more appropriate translation might be \"Միացնել\" (Miatsnel) which is a more direct and common translation for a single action of connecting.",
-          "suggestion": "Միացնել"
+          "description": "While 'Կապակցվել' (Kapaktsvel) is a valid Armenian word meaning 'to connect', it is an imperfect translation of 'Connect' in this context. 'Connect' often implies a state of being connected, not necessarily the action of connecting. A more suitable translation would depend on the context, but 'Հետ կապված' (Het kapavad) or simply 'Կապ' (Kap) might be better options.",
+          "suggestion": "Consider 'Հետ կապված' (Het kapavad) or 'Կապ' (Kap) depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Adaugă cont\" translates to \"Add account,\" which doesn't accurately reflect the English word \"Connect\". \"Connect\" implies linking or establishing a connection, while \"Adaugă cont\" refers to adding an account.",
-          "suggestion": "Consider translations like \"Conectează\", \"Îmbină\", \"Leagă\", or a more context-specific term that accurately conveys the meaning of 'Connect'."
+          "description": "'Adaugă cont' translates to 'Add account', which doesn't accurately reflect the English word 'Connect'. 'Connect' implies a connection or link, not necessarily adding an account.",
+          "suggestion": "Consider alternatives like 'Conectează', 'Asociază', 'Leagă', or a more context-specific term."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Повежи\" while potentially meaning 'connect' in some contexts, is not the most accurate or common translation of 'Connect' in this context. It's more accurately a verb form indicating 'to connect' (imperative). A more suitable translation, depending on the intended nuance, could be 'Веза' (Vezа - link/connection) or 'Повезивање' (Povezivanje - connecting).",
-          "suggestion": "Consider 'Веза' (Vezа) or 'Повезивање' (Povezivanje) depending on the specific meaning of 'Connect'."
+          "description": "The Serbian (Cyrillic) translation \"Повежи\" is a command form (\"Connect!\") and doesn't accurately reflect the English word \"Connect,\" which can function as a noun or a verb in various tenses. A more neutral translation would be \"Веза\" (Veza) for the noun form, or \"Споји\" (Spoji) for the verb in the present tense.",
+          "suggestion": "Consider \"Веза\" (Veza) for a noun translation or \"Споји\" (Spoji) for the verb."
         }
       ],
       "approved_at": null

@@ -31,6 +31,9 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { isIconSizeType } from "../../utils";
+import { isDesktop } from "../../utils/device";
+
+import { Tooltip } from "../tooltip";
 
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";
@@ -80,6 +83,8 @@ const IconButton = ({
 
   // For test
   dataTestId,
+  tooltipContent,
+  tooltipId,
 
   ...rest
 }: IconButtonProps) => {
@@ -238,6 +243,8 @@ const IconButton = ({
       data-testid={dataTestId || "icon-button"}
       data-iconname={currentIcon.name}
       data-size={size}
+      data-tooltip-id={tooltipId}
+      data-tooltip-content={tooltipContent}
       {...rest}
     >
       {iconNode ? (
@@ -255,6 +262,7 @@ const IconButton = ({
           data-testid="icon-button-svg"
         />
       )}
+      <Tooltip float={isDesktop()} id={tooltipId} place="bottom" />
     </div>
   );
 };

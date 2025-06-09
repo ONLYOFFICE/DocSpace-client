@@ -3,7 +3,7 @@
   "content": "Custom format",
   "content_en_sha1_hash": "a46b312c4f1de482da10ac2adcad64ead5ef6d6b",
   "created_at": "2025-05-19T21:30:44.281Z",
-  "updated_at": "2025-05-26T07:57:32.938Z",
+  "updated_at": "2025-05-28T09:30:02.964Z",
   "comment": {
     "text": "The \"CustomFormat\" translation key is used to display a custom format option in the download dialog. It represents the original file format when changing to a custom format is allowed, typically displayed as a label or button.",
     "is_auto": true,
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ընտելական ձեւաչափ\" while technically meaning 'custom format', doesn't quite capture the nuance of 'Custom format' in English. It sounds overly formal and slightly awkward. A more natural translation might consider options that emphasize the user-defined aspect.",
-          "suggestion": "Consider alternatives like \"Անհատական ձեւաչափ\" (Individual format) or \"Սեփական ձեւաչափ\" (Owned/Personal format) depending on the intended emphasis."
+          "description": "The translation \"Ընտելական ձեւաչափ\" while technically accurate, isn't the most natural or common way to say \"Custom format\" in Armenian. It leans towards a more literal translation. A more idiomatic translation might be better depending on context.",
+          "suggestion": "Consider alternatives like \"Հատուկ ձեւաչափ\" (Hatuq dzevachaph - Special format) or \"Ձեւաչափի հատուկ տարբերակ\" (Dzevachaphi hatuk tarberak - Specific version of format) depending on the context."
         }
       ],
       "approved_at": null
@@ -183,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation \"Прилагођени формат\" uses the correct spelling for \"Custom Format\" in Serbian Cyrillic.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Özel tür\" is a possible translation, \"Özel biçim\" would be a more accurate translation of \"Custom format\" in this context. 'Biçim' implies a structured format, which aligns better with the meaning.",
-          "suggestion": "Özel biçim"
+          "description": "While 'Özel tür' is a possible translation, 'Özel format' would more accurately reflect the English term 'Custom format'. 'Format' directly translates the technical meaning of the English word.",
+          "suggestion": "Özel format"
         }
       ],
       "approved_at": null

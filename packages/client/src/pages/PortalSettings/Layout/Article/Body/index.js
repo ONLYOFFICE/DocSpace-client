@@ -155,8 +155,12 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["9-0"]);
       }
 
-      if (location.pathname.includes("bonus")) {
+      if (location.pathname.includes("services")) {
         setSelectedKeys(["10-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["11-0"]);
       }
     }
   }, [
@@ -230,6 +234,8 @@ const ArticleBodyContent = (props) => {
         return t("DataImport");
       case "StorageManagement":
         return t("StorageManagement");
+      case "Services":
+        return t("Services");
       default:
         throw new Error("Unexpected translation key");
     }
@@ -252,14 +258,15 @@ const ArticleBodyContent = (props) => {
 
     if (standalone) {
       const deletionTKey = isCommunity
-        ? "Common:PaymentsTitle"
-        : "Common:Bonus";
+        ? ["Common:PaymentsTitle", "Services"]
+        : ["Common:Bonus", "Services"];
 
-      const index = resultTree.findIndex((el) => el.tKey === deletionTKey);
-
-      if (index !== -1) {
-        resultTree.splice(index, 1);
-      }
+      deletionTKey.forEach((key) => {
+        const index = resultTree.findIndex((el) => el.tKey === key);
+        if (index !== -1) {
+          resultTree.splice(index, 1);
+        }
+      });
     } else {
       const index = resultTree.findIndex((n) => n.tKey === "Common:Bonus");
       if (index !== -1) {
@@ -276,15 +283,23 @@ const ArticleBodyContent = (props) => {
 
     if (selectedKeys.length === 0) return null;
 
-    resultTree.forEach((item) => {
+    const resultTreeLength = resultTree.length;
+
+    resultTree.forEach((item, index) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
+
+      const isLastIndex = resultTreeLength - 1 === index;
 
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
+
+      const style = isLastIndex
+        ? { margin: `${item.key.includes(9) ? "16px 0px" : "0"}` }
+        : { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
 
       items.push(
         <ArticleItem
@@ -299,9 +314,7 @@ const ArticleBodyContent = (props) => {
           onClick={(e) => onSelect(item.key, e)}
           linkData={linkData}
           folderId={item.id}
-          style={{
-            margin: `${item.key.includes(9) ? "16px 0px" : "0"}`,
-          }}
+          style={style}
           $currentColorScheme={currentColorScheme}
         />,
       );

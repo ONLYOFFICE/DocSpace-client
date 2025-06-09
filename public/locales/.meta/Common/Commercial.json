@@ -3,7 +3,7 @@
   "content": "Commercial",
   "content_en_sha1_hash": "b48513e4d112b083333d204170e504fdb1a362c0",
   "created_at": "2025-05-19T21:30:43.578Z",
-  "updated_at": "2025-05-26T07:57:32.887Z",
+  "updated_at": "2025-06-08T12:02:32.873Z",
   "comment": {
     "text": "This translation key is used for the text \"Commercial\" in a branding and licensing context, typically found on a license agreement or permissions page where users can select a commercial usage option.",
     "is_auto": true,
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Comerciais' is the plural form of 'Commercial'. While potentially correct depending on the context, it's likely the singular form 'Comercial' is required to match the English singular form.",
-          "suggestion": "Consider 'Comercial' if the intended meaning is the singular form."
+          "description": "The translation 'Comerciais' is the plural form of 'Commercial'. The English content is a singular noun. The correct translation should be 'Comercial'.",
+          "suggestion": "Comercial"
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Comerț\" is a general term for 'commerce' or 'trade' and does not directly translate the specific meaning of 'Commercial' in this context. 'Commercial' often refers to properties, services, or activities related to business or trade, and a more precise translation might be needed depending on the specific application.",
-          "suggestion": "Consider alternatives like 'Comercial' (more direct translation), or a more context-specific term like 'Afaceri' (business) or 'Imobiliar comercial' (commercial real estate) if the context is related to property."
+          "description": "The Romanian translation \"Comerț\" while technically meaning 'commerce' or 'trade,' isn't the most natural or precise translation of 'Commercial' in this context. 'Commercial' can also mean relating to business or intended for sale.",
+          "suggestion": "Consider using \"Afaceri\" (business), \"Comercial\" (direct translation, but potentially less common depending on the context), or \"Destinat comercial\" (intended for commercial use) as alternative translations, depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -183,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Комерцијално' is a valid Serbian word, it doesn't perfectly capture the nuance of 'Commercial' in all contexts. 'Commercial' can refer to a business activity, a commercial building, or an advertisement. 'Комерцијално' most closely relates to commercial activity or a commercial enterprise. Depending on the context, a more accurate translation might be needed.",
+          "suggestion": "Consider context. Possible alternatives: 'Трговачки' (for a commercial building or activity), 'Оглас' (for an advertisement)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '商业许可' (shangye xuke) translates to 'commercial license', which is more specific than the English 'Commercial'. 'Commercial' can refer to a broad range of commercial activities, not just licensing.",
-          "suggestion": "Consider '商业' (shangye) for a more general translation, or '商业活动' (shangye huodong) if emphasizing activities."
+          "description": "The translation '商业许可' (shangye xuqian) more accurately means 'commercial license' rather than simply 'commercial'. While related, it's not a direct equivalent.",
+          "suggestion": "Consider alternatives like '商业' (shangye) for a more direct translation of 'Commercial', or '商业用途' (shangye yongtu) for 'commercial use'."
         }
       ],
       "approved_at": null

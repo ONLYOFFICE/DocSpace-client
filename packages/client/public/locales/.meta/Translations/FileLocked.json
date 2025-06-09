@@ -3,7 +3,7 @@
   "content": "File locked",
   "content_en_sha1_hash": "d56ec25816d2caab4e55bb34552b52e102303854",
   "created_at": "2025-05-19T21:30:49.965Z",
-  "updated_at": "2025-06-02T10:20:50.990Z",
+  "updated_at": "2025-06-08T12:02:32.560Z",
   "comment": {
     "text": "FileLocked is a translation key used to display the message \"File locked\" when a file's locking status is unavailable or cannot be updated. It appears in various UI elements where file locking status is being attempted or shown.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 93,
-      "context": "return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case \"FileLocked\":\n return `${t(\"Translations:FileLocked\")}.`;\n case \"FileUnlocked\":\n return `${t(\"Translations:FileUnlocked\")}.`;\n case \"FileVersionRemoved\":\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {",
+      "context": "return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {",
       "module": "/packages/client"
     },
     {

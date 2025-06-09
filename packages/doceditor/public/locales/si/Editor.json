@@ -3,10 +3,8 @@
   "DocumentsFileType": "ලේඛන",
   "ErrorConnectionLost": "සම්බන්ධතාවය නැති වී ඇත",
   "FileLocation": "ගොනුවේ ස්ථානය අරින්න",
-  "FileName": "ගොනුවේ නම",
   "ImageFileType": "ඡායාරූප",
   "MailMergeFileType": ".XLSX ගොනුව තෝරන්න",
-  "OpenSavedDocument": "සුරැකි ගොනුව නව පටිත්තක අරින්න",
   "SelectFilesType": "ගොනු වර්ග තෝරන්න: {{fileType}}",
   "UsersWithoutAccess": "ඔබට සඳහන් කිරීමට වුවමනා ඇතැම් අයට කාමරය වෙත ප්‍රවේශය නැත: {{users}}"
 }

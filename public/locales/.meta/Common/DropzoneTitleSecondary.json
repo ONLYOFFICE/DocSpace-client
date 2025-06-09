@@ -3,7 +3,7 @@
   "content": "or drop file here",
   "content_en_sha1_hash": "a14bf554e59e9cd5cf0f303dcfd839a050b061d2",
   "created_at": "2025-05-19T21:30:44.718Z",
-  "updated_at": "2025-06-02T10:20:51.438Z",
+  "updated_at": "2025-06-08T12:02:32.797Z",
   "comment": {
     "text": "This translation key is used to display a secondary label on dropzone buttons, typically indicating that files can be dropped here instead of being selected. It appears in various UI elements where a file input or drag-and-drop functionality is present, such as portal settings categories and an image editor component. Translators should focus on providing a clear and descriptive phrase for this context.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'nebo sem vložte soubor' is not the most natural or idiomatic way to say 'or drop file here' in Czech. While technically correct, it's a bit clunky.",
-          "suggestion": "Consider 'nebo sem přetáhněte soubor' (or drag file here) or 'nebo sem vložte soubor' could be rephrased as 'nebo sem vložte soubor(y)' to be more general."
+          "description": "The translation 'nebo sem vložte soubor' is not the most natural or idiomatic way to say 'or drop file here' in Czech. While technically correct, it sounds a bit awkward.",
+          "suggestion": "A more natural translation would be 'nebo sem přetáhněte soubor' or 'nebo sem položte soubor'."
         }
       ],
       "approved_at": null
@@ -87,19 +87,19 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"կամ թողնել ֆայլը այստեղ\" is a literal translation of 'or drop file here'. While understandable, a more natural and idiomatic Armenian translation for a dropzone would be something along the lines of \"կամ ավելացրեք ֆայլը այստեղ\" (or add file here).",
-          "suggestion": "կամ ավելացրեք ֆայլը այստեղ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'o trascina il file qui' is a literal translation but doesn't quite capture the natural flow of the English phrase 'or drop file here'. A more natural Italian phrasing would be 'oppure trascina qui il file' or 'in alternativa trascina qui il file'.",
+          "suggestion": "oppure trascina qui il file"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation starts with a stray comma (、). This is likely an artifact of the translation process and should be removed.",
-          "suggestion": "またはファイルをドロップしてください"
+          "description": "The Japanese translation includes an unnecessary and misplaced comma at the beginning.",
+          "suggestion": "、またはファイルをドロップしてください"
         }
       ],
       "approved_at": null
@@ -147,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ficheiro' is a Portuguese spelling variation more common in Portugal. Brazilian Portuguese would use 'arquivo'. While technically correct, using 'arquivo' would improve consistency and broader appeal.",
+          "suggestion": "ou arraste o arquivo para aqui"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -162,12 +168,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"sau fixaţi aici fişierul\" is a literal translation but sounds unnatural in this context. 'Fixati' implies fixing something, not dropping a file. A more natural phrasing would convey the action of dropping.",
-          "suggestion": "sau trageți aici fișierul"
+          "description": "The translation 'sau fixaţi aici fişierul' is not the most natural or idiomatic way to say 'or drop file here' in Romanian. 'Fixați' implies a more forceful action than 'drop'.",
+          "suggestion": "sau trageți fișierul aici"
         },
         {
           "type": "formatting",
-          "description": "The translation includes a direct article ('aici'), which doesn't flow as naturally as omitting it in this UI context. While not strictly incorrect, it can appear somewhat clunky.",
+          "description": "The translation includes a slightly awkward phrasing. The direct translation feels stiff in Romanian conversational language.",
           "suggestion": "sau trageți fișierul aici"
         }
       ],
@@ -182,7 +188,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'හෝ මෙතැනට ගොනුව දමන්න' is a literal translation and sounds unnatural in Sinhala. A more natural phrasing would be closer to 'හෝ ගොනුව මෙහි තැබන්න'.",
+          "suggestion": "හෝ ගොනුව මෙහි තැබන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -191,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"alebo súbor presuňte sem\" is a literal translation but sounds slightly unnatural in this context. A more natural phrasing would convey the same meaning more smoothly.",
+          "description": "The translation 'alebo súbor presuňte sem' is a literal translation but sounds somewhat unnatural in Slovak. A more idiomatic and natural phrasing would be 'alebo sem vložte súbor'.",
           "suggestion": "alebo sem vložte súbor"
         }
       ],
@@ -202,14 +214,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'odloži' might be more accurately represented as 'pripravi' or 'vrzi' in this context, depending on the desired tone. 'Odloži' implies a more deliberate action of placing something down.",
-          "suggestion": "Consider 'pripravi datoteko tule' or 'vrzi datoteko tule'."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'ali odloži datoteko tule' is technically correct, it doesn't capture the nuance of the English 'or drop file here'. 'Drop' implies a more casual, less formal action. 'Odloži' is more formal.",
-          "suggestion": "Consider a translation that conveys the casualness of 'drop', such as 'ali datoteko sem vrzi' (more informal) or 'ali datoteko sem pusti' (slightly more formal but still casual)."
+          "description": "The translation 'ali odloži datoteko tule' is not the most natural or idiomatic translation of 'or drop file here'. While technically correct, it's a bit literal.",
+          "suggestion": "Consider 'ali vstrnj datoteko sem' or 'lahko vstrnj datoteko sem' which sound more natural in Slovenian in this context."
         }
       ],
       "approved_at": null
@@ -220,13 +227,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"или спусти датотеку овде\" does not accurately convey the meaning of \"or drop file here.\" The verb \"спусти\" (spusti) means 'to drop' in the sense of 'to lower' or 'to descend', not the action of dropping a file. It's an awkward and unnatural phrasing.",
-          "suggestion": "или превуци датотеку овде"
+          "description": "The Serbian translation 'или спусти датотеку овде' doesn't accurately convey the meaning of 'or drop file here'. The verb 'спусти' (spusti) means 'to drop' or 'to let fall', but in this context, it doesn't feel natural. It implies physically dropping a file, not using a drag-and-drop action.",
+          "suggestion": "или помери датотеку овде"
         },
         {
           "type": "spelling",
-          "description": "The word 'датотеку' is technically correct, but 'датотеку' is more commonly used in modern Serbian.",
-          "suggestion": "или превуци датотеку овде"
+          "description": "While technically correct, 'датотеку' might benefit from a slightly more modern spelling.",
+          "suggestion": "или помери датотеку овде"
         }
       ],
       "approved_at": null
@@ -237,8 +244,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ili spusti datoteku ovde' is not the most natural or accurate translation of 'or drop file here'. 'Spusti' (meaning 'launch' or 'start') isn't the best choice for 'drop'.",
-          "suggestion": "ili prevuci datoteku ovde"
+          "description": "The translation \"ili spusti datoteku ovde\" is not the most natural or accurate translation of \"or drop file here\". While understandable, it's a bit literal and clunky.",
+          "suggestion": "ili povuci datoteku ovde"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a conjunction ('ili') which can sometimes benefit from a space before it for better readability. Though not a critical error.",
+          "suggestion": "ili povuci datoteku ovde"
         }
       ],
       "approved_at": null

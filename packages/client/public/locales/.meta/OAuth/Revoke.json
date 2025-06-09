@@ -3,7 +3,7 @@
   "content": "Revoke",
   "content_en_sha1_hash": "0be720759ff04d13c5706881d5d227a2621f91a6",
   "created_at": "2025-05-19T21:30:54.004Z",
-  "updated_at": "2025-05-26T07:57:32.663Z",
+  "updated_at": "2025-06-08T12:02:32.772Z",
   "comment": {
     "text": "This translation key \"Revoke\" is used to describe the action of canceling or terminating an OAuth developer token. It appears in a modal dialog and a button, providing a clear and concise message to users in various UI contexts.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 768,
+      "line_number": 770,
       "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n };\n \n const contextOptions: ContextMenuModel[] = [",
       "module": "/packages/client"
     }

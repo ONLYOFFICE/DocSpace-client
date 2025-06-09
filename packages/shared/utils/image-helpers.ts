@@ -52,6 +52,7 @@ enum IconNames {
   PublicRoom = "room/public.svg",
   VirtualRoom = "room/virtual-data.svg",
   ArchiveRoom = "room/archive.svg",
+  AIRoom = "room/ai.svg",
 }
 
 const iconsMap: Record<IconNames, string[]> = {
@@ -126,6 +127,7 @@ const iconsMap: Record<IconNames, string[]> = {
   [IconNames.FolderComplete]: ["folderComplete"],
   [IconNames.FolderInProgress]: ["folderInProgress"],
   [IconNames.CustomRoom]: ["customRoom"],
+  [IconNames.AIRoom]: ["aiRoom"],
   [IconNames.EditingRoom]: ["editingRoom"],
   [IconNames.FormRoom]: ["formRoom"],
   [IconNames.PublicRoom]: ["publicRoom"],

@@ -172,7 +172,7 @@ class FilesStore {
 
   selected = "close";
 
-  filter = FilesFilter.getDefault();
+  filter = FilesFilter.getDefault(100);
 
   roomsFilter = RoomsFilter.getDefault();
 
@@ -1260,6 +1260,7 @@ class FilesStore {
 
   setFile = (file) => {
     const index = this.files.findIndex((x) => x.id === file.id);
+
     if (index !== -1) {
       this.files[index] = file;
       this.createThumbnail(file);
@@ -1351,6 +1352,7 @@ class FilesStore {
         return roomType === RoomsType.FillingFormsRoom;
       case `room-${RoomsType.CustomRoom}`:
         return roomType === RoomsType.CustomRoom;
+
       case `room-${RoomsType.EditingRoom}`:
         return roomType === RoomsType.EditingRoom;
       case `room-${RoomsType.ReviewRoom}`:
@@ -2298,6 +2300,7 @@ class FilesStore {
         "show-info",
         "block-unblock-version", // need split
         "separator1",
+
         "open-location",
         "mark-read",
         // "mark-as-favorite",
@@ -3068,9 +3071,9 @@ class FilesStore {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
         this.setFiles(files);
         this.setFolders(folders);
-        this.setTempActionFilesIds([]);
         this.setHotkeysClipboard(hotkeysClipboard);
-        this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds([]);
+        if (folderIds) this.setTempActionFoldersIds([]);
       });
 
       showToast && showToast();
@@ -3091,8 +3094,8 @@ class FilesStore {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
         this.setFiles(files);
         this.setFolders(folders);
-        this.setTempActionFilesIds([]);
-        this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds([]);
+        if (folderIds) this.setTempActionFoldersIds([]);
       });
 
       showToast && showToast();
@@ -3127,8 +3130,8 @@ class FilesStore {
           toastr.error(err);
         })
         .finally(() => {
-          this.setTempActionFilesIds([]);
-          this.setTempActionFoldersIds([]);
+          if (fileIds) this.setTempActionFilesIds([]);
+          if (folderIds) this.setTempActionFoldersIds([]);
         });
     }
     api.files
@@ -3159,8 +3162,8 @@ class FilesStore {
         toastr.error(err);
       })
       .finally(() => {
-        this.setTempActionFilesIds([]);
-        this.setTempActionFoldersIds([]);
+        if (fileIds) this.setTempActionFilesIds([]);
+        if (folderIds) this.setTempActionFoldersIds([]);
       });
   };
 
@@ -3936,6 +3939,7 @@ class FilesStore {
   getFileInfo = async (id, skipRedirect) => {
     const fileInfo = await api.files.getFileInfo(id, undefined, skipRedirect);
     this.setFile(fileInfo);
+
     return fileInfo;
   };
 

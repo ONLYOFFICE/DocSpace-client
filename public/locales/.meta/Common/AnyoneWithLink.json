@@ -3,7 +3,7 @@
   "content": "Anyone with the link",
   "content_en_sha1_hash": "8a78b4998feeb4f409891d0eb1716fe3eb7a2c9a",
   "created_at": "2025-05-19T21:30:43.022Z",
-  "updated_at": "2025-06-02T10:20:51.578Z",
+  "updated_at": "2025-06-08T12:02:32.891Z",
   "comment": {
     "text": "This translation key is used to display a descriptive label for a user interface component that allows access to content via a shared link. The translated text will appear on a UI element prompting users to share or invite others.",
     "is_auto": true,
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Kuka tahansa linkin kanssa\" is a literal translation and doesn't convey the intended meaning of 'Anyone with the link.' It translates to 'Anyone with a link' which is awkward and doesn't imply access or permission.",
-          "suggestion": "A more accurate translation would be something like 'Joka tahansa, jolla on linkki' (Anyone who has the link) or 'Henkilö, jolla on linkki' (A person who has the link)."
+          "description": "The translation 'Kuka tahansa linkin kanssa' doesn't accurately convey the meaning of 'Anyone with the link'. It literally translates to 'Anyone with the link (instrumental case)'. It sounds awkward and doesn't capture the intended meaning.",
+          "suggestion": "A more accurate translation would be 'Kuka tahansa, jolla on linkki' or 'Jokainen, jolla on linkki'."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Ցանկացած ոք, ով ունի հղումը\" is a very formal and somewhat stilted translation of \"Anyone with the link.\" It's not how someone would naturally express this in Armenian. A more natural translation would be something like \"Ար ով պատճենում է հղումը\" (Ar vo patchenum e hghum@) or \"Ով պատճենում է հղումը\" (Vo patchenum e hghum@).",
-          "suggestion": "Ով պատճենում է հղումը (Vo patchenum e hghum@) or Ար ով պատճենում է հղումը (Ar vo patchenum e hghum@)"
+          "description": "The translation \"Ցանկացած ոք, ով ունի հղումը\" is a literal translation and not the most natural way to express \"Anyone with the link\" in Armenian. It sounds formal and somewhat awkward.",
+          "suggestion": "A more natural translation would be something like \"Ամեն ով ունի այս հղումը\" or \"Ամեն ով ունի կապը\" (depending on the context and desired level of formality).  \"Ամեն ով ունի հղումը\" is better than the original, but still not ideal."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'リンクを持っている人' (rinku wo motteiru hito) is a literal translation of 'having the link'. While technically correct, it's not the most natural or concise way to express 'anyone with the link' in Japanese. A more natural phrasing would convey the idea of 'people who can access the link' or 'anyone who has access to the link'.",
-          "suggestion": "Consider alternatives like: リンクを知っている人 (rinku wo shitteiru hito - 'people who know the link'), リンクにアクセスできる人 (rinku ni akusesu dekiru hito - 'people who can access the link'), or リンクを持っているすべての人は (rinku wo motteiru subete no hito wa - 'anyone who has the link', although this is more formal)."
+          "description": "The translation \"リンクを持っている人\" is a literal translation of \"Anyone with the link.\" While understandable, it's not the most natural or idiomatic way to express this in Japanese. It emphasizes possession rather than access or permission.",
+          "suggestion": "Consider alternatives like \"リンクを知っている人\" (link o shitteiru hito - people who know the link) or \"リンクが使える人\" (rinku ga tsukaeru hito - people who can use the link) depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -141,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation \"Każdy, kto ma link\" is a bit clunky and not the most natural way to express \"Anyone with the link\" in Polish. A more idiomatic translation would be \"Wszyscy, którzy mają link\" or \"Każdy z linkiem\".",
+          "suggestion": "Consider \"Wszyscy, którzy mają link\" or \"Każdy z linkiem\" for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Tuturor la link-ul' is not the most natural or accurate translation of 'Anyone with the link'. While technically correct, it sounds awkward. A more common and idiomatic translation would be 'Oricine are link-ul'.",
-          "suggestion": "Oricine are link-ul"
+          "description": "The Romanian translation \"Tuturor la link-ul\" is not the most natural or accurate translation of \"Anyone with the link.\"  'Tuturor' means 'to everyone' and 'la' is a preposition that doesn't quite convey the intended meaning here.",
+          "suggestion": "A better translation would be something like \"Oricine are link-ul\" or \"Cine are link-ul\"."
         }
       ],
       "approved_at": null
@@ -177,13 +183,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"සබැඳිය සතු ඕනෑම අයෙක්ට\" while understandable, is a somewhat literal and less natural phrasing. A more natural translation would be something like \"ලිංගය ඇති කිසිවෙකුට\" or \"ප්‍රවේශය ඇති ඕනෑම පුද්ගලයෙකුට\".",
-          "suggestion": "ප්‍රවේශය ඇති ඕනෑම පුද්ගලයෙකුට"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

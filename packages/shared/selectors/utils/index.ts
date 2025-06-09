@@ -92,10 +92,12 @@ export const convertFilesToItems: (
   files: TFile[],
   getIcon: (fileExst: string) => string,
   filterParam?: string | number,
+  includedItems?: (number | string)[],
 ) => TSelectorItem[] = (
   files: TFile[],
   getIcon: (fileExst: string) => string,
   filterParam?: string | number,
+  includedItems?: (number | string)[],
 ) => {
   const items = files.map((file) => {
     const {
@@ -112,6 +114,10 @@ export const convertFilesToItems: (
     const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
     const label = getTitleWithoutExtension(file, false);
 
+    const isDisabled = includedItems?.length
+      ? !includedItems.includes(id)
+      : false;
+
     return {
       id,
       label,
@@ -120,7 +126,7 @@ export const convertFilesToItems: (
       security,
       parentId: folderId,
       rootFolderType,
-      isDisabled: !filterParam,
+      isDisabled: !filterParam || isDisabled,
       fileExst,
       fileType,
       viewUrl,

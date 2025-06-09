@@ -348,7 +348,7 @@
     {
       "label": "Frontend | install",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn install",
+      "command": "cd ${workspaceFolder} ; pnpm install",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -361,9 +361,9 @@
       }
     },
     {
-      "label": "Frontend | update yarn.lock",
+      "label": "Frontend | update pnpm-lock.yaml",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn wipe ; yarn install",
+      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install",
       "group": {
         "kind": "build",
         "isDefault": true

@@ -34,6 +34,11 @@
   flex-direction: column;
 
   overflow: hidden;
+
+  :global(.selector-item_label) {
+    line-height: 18px;
+    margin-inline-start: 8px;
+  }
 }
 
 .body {
@@ -99,8 +104,6 @@
     }
   }
 }
-
-
 
 .footer {
   width: calc(100% - 32px);
@@ -330,9 +333,9 @@
     }
   }
   .arrowRightSvg {
-      path {
-        fill: var(--selector-breadcrumbs-arrow-right-color);
-      }
+    path {
+      fill: var(--selector-breadcrumbs-arrow-right-color);
+    }
 
     &.rtl {
       transform: scaleX(-1);

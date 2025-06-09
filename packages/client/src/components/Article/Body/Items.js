@@ -274,7 +274,7 @@ const Items = ({
 
       if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
         return draggableItems.some(
-          (draggableItem) => draggableItem.security.Delete,
+          (draggableItem) => draggableItem?.security?.Delete,
         );
       }
 

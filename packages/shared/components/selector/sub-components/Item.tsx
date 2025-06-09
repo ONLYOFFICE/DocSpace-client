@@ -26,10 +26,10 @@
 
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import Planet12ReactSvg from "PUBLIC_DIR/images/icons/12/planet.react.svg";
 import LifetimeRoomIcon from "PUBLIC_DIR/images/lifetime-room.react.svg";
-import { classNames } from "@docspace/shared/utils";
 
 import { SettingsContext } from "../../../selectors/Files/contexts/Settings";
 import { getUserTypeTranslation } from "../../../utils/common";
@@ -310,7 +310,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         ) : (
           isMultiSelect && (
             <Checkbox
-              className={styles.checkbox}
+              className={classNames(styles.checkbox, "checkbox")}
               isChecked={isSelected}
               isDisabled={isDisabled}
               onChange={onChangeAction}

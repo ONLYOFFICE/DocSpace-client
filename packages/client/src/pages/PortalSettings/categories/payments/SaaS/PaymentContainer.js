@@ -39,7 +39,7 @@ import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";
 import BenefitsContainer from "./BenefitsContainer";
 import ContactContainer from "./ContactContainer";
-import PayerInformationContainer from "./PayerInformationContainer";
+import PayerInformation from "../PayerInformation";
 
 const StyledBody = styled.div`
   max-width: 660px;
@@ -112,7 +112,6 @@ const PaymentContainer = (props) => {
     isGracePeriod,
     theme,
     isNotPaidPeriod,
-    payerEmail,
     isPaidPeriod,
     currencySymbol,
     startValue,
@@ -128,6 +127,7 @@ const PaymentContainer = (props) => {
     isNonProfit,
     isPaymentDateValid,
     isYearTariff,
+    cardLinkedOnFreeTariff,
   } = props;
   const renderTooltip = () => {
     return (
@@ -295,8 +295,6 @@ const PaymentContainer = (props) => {
       );
   };
 
-  const isFreeAfterPaidPeriod = isFreeTariff && payerEmail?.length !== 0;
-
   return (
     <Consumer>
       {(context) => (
@@ -309,10 +307,8 @@ const PaymentContainer = (props) => {
             ? expiredTitleSubscriptionWarning()
             : currentPlanTitle()}
 
-          {!isNonProfit && isAlreadyPaid ? (
-            <PayerInformationContainer
-              isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
-            />
+          {!isNonProfit && (isAlreadyPaid || cardLinkedOnFreeTariff) ? (
+            <PayerInformation />
           ) : null}
 
           <CurrentTariffContainer />
@@ -320,10 +316,7 @@ const PaymentContainer = (props) => {
           {planSuggestion()}
           {planDescription()}
 
-          {!isNonProfit &&
-          !isGracePeriod &&
-          !isNotPaidPeriod &&
-          !isFreeAfterPaidPeriod ? (
+          {!isNonProfit && !isGracePeriod && !isNotPaidPeriod ? (
             <div className="payment-info_wrapper">
               <Text
                 noSelect
@@ -355,12 +348,7 @@ const PaymentContainer = (props) => {
           ) : null}
 
           <div className="payment-info">
-            {!isNonProfit ? (
-              <PriceCalculation
-                t={t}
-                isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
-              />
-            ) : null}
+            {!isNonProfit ? <PriceCalculation t={t} /> : null}
 
             <BenefitsContainer t={t} />
           </div>
@@ -399,7 +387,7 @@ export default inject(
     const { planCost, tariffPlanTitle, portalPaymentQuotas } =
       paymentQuotasStore;
 
-    const { isAlreadyPaid } = paymentStore;
+    const { isAlreadyPaid, cardLinkedOnFreeTariff } = paymentStore;
 
     return {
       paymentDate,
@@ -426,6 +414,7 @@ export default inject(
       isNonProfit,
       isPaymentDateValid,
       isYearTariff,
+      cardLinkedOnFreeTariff,
     };
   },
 )(observer(PaymentContainer));

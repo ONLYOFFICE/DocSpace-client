@@ -86,7 +86,7 @@ const PriceCalculation = ({
   priceManagerPerMonth,
   currencySymbol,
   isAlreadyPaid,
-  isFreeAfterPaidPeriod,
+
   managersCount,
   getPaymentLink,
   isYearTariff,
@@ -167,11 +167,11 @@ const PriceCalculation = ({
         noSelect
         className="payment_main-title"
       >
-        {isGracePeriod || isNotPaidPeriod || isFreeAfterPaidPeriod
+        {isGracePeriod || isNotPaidPeriod
           ? t("YourPrice")
           : t("PriceCalculation")}
       </Text>
-      {isGracePeriod || isNotPaidPeriod || isFreeAfterPaidPeriod ? (
+      {isGracePeriod || isNotPaidPeriod ? (
         <CurrentUsersCountContainer
           isNeedPlusSign={isNeedPlusSign}
           t={t}
@@ -187,11 +187,7 @@ const PriceCalculation = ({
       {priceInfoPerManager}
 
       <TotalTariffContainer t={t} isDisabled={isDisabled} />
-      <ButtonContainer
-        isDisabled={isDisabled}
-        t={t}
-        isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
-      />
+      <ButtonContainer isDisabled={isDisabled} t={t} />
     </StyledBody>
   );
 };

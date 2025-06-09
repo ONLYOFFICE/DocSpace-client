@@ -125,6 +125,14 @@ class CurrentQuotasStore {
     return result?.used?.value || 0;
   }
 
+  get usedTotalStorageSizeTitle() {
+    const result = this.currentPortalQuotaFeatures.get(
+      TOTAL_SIZE,
+    ) as TPaymentFeature;
+
+    return result?.used?.title;
+  }
+
   get maxFileSizeByQuota() {
     const result = this.currentPortalQuotaFeatures.get(
       FILE_SIZE,

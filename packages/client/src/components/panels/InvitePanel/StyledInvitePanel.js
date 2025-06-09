@@ -422,7 +422,7 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
     (props.$primary && !props.disabled) || props.$info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => (props.info || props.disabled) && `margin-inline-start: auto`}
+  ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
 const StyledEditButton = styled(Button)`

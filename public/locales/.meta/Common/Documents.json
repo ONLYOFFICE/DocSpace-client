@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:44.581Z",
-  "updated_at": "2025-05-26T07:57:32.280Z",
+  "updated_at": "2025-06-08T12:02:32.633Z",
   "comment": {
     "text": "This translation key \"Documents\" is used to display the label for a filter or progress section that focuses on documents in a UI application. It appears in contexts where users can select files or folders, such as filters and progress indicators in data management dialogs.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 586,
+      "line_number": 587,
       "context": "if (filter.filterType) {\n let label = \"\";\n \n switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 586,
+      "line_number": 587,
       "context": "if (filter.filterType) {\n let label = \"\";\n \n switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():",
       "module": "/packages/client"
     },
@@ -66,7 +66,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 345,
+      "line_number": 347,
       "context": "case \"all\":\n return t(\"Common:All\");\n case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:",
       "module": "/packages/shared"
     }
@@ -228,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Документа\" is the genitive plural form of \"документ\" (document). The singular nominative form \"Документ\" or the plural nominative \"Документи\" would be more appropriate for the English word 'Documents' depending on the context. Without further context, 'Документи' is the closest equivalent.",
+          "description": "The Serbian (Cyrillic) translation 'Документа' is the genitive plural form of 'document'. The English word 'Documents' is plural nominative. A more appropriate translation would be 'Документи' (Dokumenti).",
           "suggestion": "Документи"
         }
       ],

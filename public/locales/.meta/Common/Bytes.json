@@ -3,7 +3,7 @@
   "content": "bytes",
   "content_en_sha1_hash": "daf529a73101c2be626b99fc6938163e7a27620b",
   "created_at": "2025-05-19T21:30:43.348Z",
-  "updated_at": "2025-05-26T07:57:32.913Z",
+  "updated_at": "2025-06-08T12:02:32.888Z",
   "comment": {
     "text": "The \"Bytes\" translation key is used to display the unit \"byte\" in various parts of the application. It appears on a quota form, where users can select options such as kilobytes or gigabytes, indicating that this key is used for file size units in a UI context.",
     "is_auto": true,
@@ -84,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'bitit' translates to 'bits', not 'bytes'. 'Bytes' in Finnish is 'tavuja'.",
+          "description": "The Finnish translation 'bitit' translates to 'bits' in English, not 'bytes'. The correct translation for 'bytes' in Finnish is 'tavuja'.",
           "suggestion": "tavuja"
         }
       ],
@@ -165,7 +165,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The singular form \"байт\" (bajt) is provided for the English word \"bytes\" which is plural. The singular form of 'byte' is correct, but the provided translation doesn't account for the plural form.",
+          "suggestion": "байт(ы)"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'bajtov' is the genitive plural form of 'bajt'. While 'bytes' can sometimes imply a plural quantity, 'bajtov' strongly implies possession or relationship ('of bytes'). A more accurate and neutral translation would be 'bajtov' (nominative plural) or 'bajti' (plural direct).",
-          "suggestion": "Consider 'bajtov' (nominative plural) or 'bajti' (plural direct)."
+          "description": "The Slovenian translation \"bajtov\" is the genitive plural form of \"bajt.\"  The English word \"bytes\" is a plural noun, but the context is not provided to justify the genitive case. The nominative plural, \"baji\" or the singular \"bajt\" might be more appropriate depending on the intended meaning.",
+          "suggestion": "Consider \"baji\" (nominative plural) or \"bajt\" (singular) if the genitive case is not necessary. More context is needed to determine the correct translation."
         }
       ],
       "approved_at": null
@@ -204,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Bajtovi' is a plural form, but the English word 'bytes' is singular in this context. While 'Bajtovi' could be used if referring to multiple bytes, a singular form might be more appropriate.",
+          "description": "The Serbian translation \"Bajtovi\" is a plural form. The English content is a singular noun (\"bytes\"). While \"Bajtovi\" can be used in some contexts, a more accurate singular translation would be \"Bajt\".",
           "suggestion": "Bajt"
         }
       ],

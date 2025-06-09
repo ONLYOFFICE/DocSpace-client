@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:44.535Z",
-  "updated_at": "2025-05-26T07:57:32.375Z",
+  "updated_at": "2025-06-08T12:02:32.673Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disabled\" when a feature or setting is disabled in the UI. It appears as part of dropdown menus and options lists in various admin settings and configuration pages.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
       "line_number": 399,
-      "context": "</div>\n {shared ? (\n <SearchItemText $info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n {isDisabled ? (\n <SearchItemText disabled>{t(\"Common:Disabled\")}</SearchItemText>\n ) : null}\n </DropDownItem>\n );\n };",
+      "context": "</div>\n {shared ? (\n <SearchItemText $info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n {isDisabled ? (\n <SearchItemText info>{t(\"Common:Disabled\")}</SearchItemText>\n ) : null}\n </DropDownItem>\n );\n };",
       "module": "/packages/client"
     },
     {

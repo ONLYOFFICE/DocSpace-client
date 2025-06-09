@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-06-02T10:20:51.047Z",
+  "updated_at": "2025-06-08T12:02:32.589Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -306,7 +306,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 208,
+      "line_number": 202,
       "context": "isDisabled={isLoading}\n tabIndex={3}\n />\n <Button\n className=\"cancel-button\"\n label={t(\"Common:CancelButton\")}\n size=\"normal\"\n onClick={onCloseModal}\n isLoading={isLoading}\n isDisabled={isLoading}\n tabIndex={3}",
       "module": "/packages/client"
     },
@@ -551,6 +551,30 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
+      "line_number": 306,
+      "context": "scale\n onClick={onUpdateTariff}\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletRefilledModal.tsx",
+      "line_number": 158,
+      "context": "}\n isLoading={isLoading}\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onCloseDialog}\n />\n </ModalDialog.Footer>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
+      "line_number": 311,
+      "context": "!upToBalance\n }\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.small}\n onClick={onClose}\n isDisabled={isDisabled || isLoading}\n />\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TopUpButtons.tsx",
+      "line_number": 91,
+      "context": "onClick={onTopUp}\n isLoading={isLoading}\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
       "line_number": 216,
       "context": "onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"\n additionalClassCancelButton=\"admin-message-cancel\"\n />",
@@ -608,6 +632,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
       "line_number": 92,
       "context": "loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/ButtonContainer.tsx",
+      "line_number": 92,
+      "context": ": false\n }\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
       "module": "/packages/client"
     },
     {
@@ -804,7 +834,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 170,
+      "line_number": 172,
       "context": "};\n \n const cancelButtonProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"Common:CancelButton\"),\n cancelButtonId,\n onCancel,\n }\n : {};",
       "module": "/packages/shared"
     },

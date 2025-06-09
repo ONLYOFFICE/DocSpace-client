@@ -3,7 +3,7 @@
   "content": "Moving",
   "content_en_sha1_hash": "65cd4dd8114610f7bacc1f81bb9dd01a137f162f",
   "created_at": "2025-05-19T21:30:46.650Z",
-  "updated_at": "2025-05-26T07:57:32.394Z",
+  "updated_at": "2025-06-03T20:59:41.993Z",
   "comment": {
     "text": "The \"MoveToOperation\" translation key is used to display a label for an operation related to moving files in a user interface. It appears as part of a switch statement that determines which file action is being performed, such as moving or copying. Translators should replace this key with a localized string describing the specific file move action.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'جارٍ النقل' while understandable, is a bit literal and formal. A more natural and common translation for 'Moving' in this context (likely referring to an action or process) would be something like 'قيد النقل' (qayd an-naql) or 'يتم النقل' (yutamm an-naql). 'جارٍ' implies something is *currently* happening but isn't necessarily a continuous process. 'قيد' implies 'in the process of' and 'يتم' indicates that something is being done.",
-          "suggestion": "قيد النقل"
+          "description": "The translation 'جارٍ النقل' while literally meaning 'Moving' or 'Transferring', doesn't fully capture the nuance of 'Moving' in the context of an operation (like a software operation). It sounds more like an ongoing process rather than a single action. A more accurate translation would depend on the specific context of 'MoveToOperation'.",
+          "suggestion": "Consider alternatives like 'نقل' (Naql - Transfer) or 'تحريك' (Tahreek - Movement) if it describes a single action. If it's an ongoing process, 'جارٍ النقل' is acceptable, but clarification of the context is needed."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Yer dəyişdirmə\" translates to 'changing place' or 'relocation,' it doesn't perfectly capture the nuance of 'Moving' in the context of an operation. 'Moving' in this context likely refers to a relocation action or process, which 'Yer dəyişdirmə' is a somewhat literal rendering.",
-          "suggestion": "Consider 'köçürmə' (transfer) or 'dəyişmək' (to change, move) depending on the specific meaning of 'Moving' within the application."
+          "description": "While \"Yer dəyişdirmə\" is a literal translation of \"Moving\", it doesn't quite capture the nuance of \"MoveToOperation\" in a technical context. It's more akin to 'relocation' or 'shifting'.",
+          "suggestion": "Consider alternatives like \"Köçürülmə\" (Transfer), \"Yenidən yerləşdirilmə\" (Repositioning), or \"Hərəkətə gətirilmə\" (Bringing to motion), depending on the precise meaning intended within the application."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Wird verschoben\" translates to \"Is being moved\" or \"Is moved.\" While technically correct, it doesn't capture the brevity and immediacy of \"Moving\" in English. It implies an ongoing or completed action, whereas \"Moving\" suggests a present action or a command.",
-          "suggestion": "Consider alternatives like \"Bewegung\" (Movement), \"Verschieben\" (Move), or \"Fortbewegung\" (Propulsion) depending on the exact context. A more conversational option might be 'In Bewegung' (In motion)."
+          "description": "The translation \"Wird verschoben\" (is being moved) doesn't accurately reflect the simple present participle \"Moving\". A more accurate translation would be \"Bewegung\" or \"Verschieben\".",
+          "suggestion": "Consider \"Bewegung\" or \"Verschieben\"."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sta spostando\" while grammatically correct, doesn't perfectly capture the nuance of \"Moving\" in the context of a Key Name. \"Moving\" implies an action or a process, whereas \"Sta spostando\" focuses on the act of moving *something* by someone. A more appropriate translation might be something like \"Trasferimento\" (Transfer) or \"Spostamento\" (Movement) depending on the precise context.",
-          "suggestion": "Consider \"Trasferimento\" or \"Spostamento\" for a more accurate translation."
+          "description": "The translation \"Sta spostando\" implies an ongoing action, while \"Moving\" describes a state or action in progress, but not necessarily continuous. A more accurate translation might be \"Trasferimento\" or \"Spostamento\" depending on the context.",
+          "suggestion": "Consider \"Trasferimento\" or \"Spostamento\" for a more contextually appropriate translation."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"A mover\" does not accurately convey the meaning of \"Moving\". \"Moving\" implies an action or process of relocation. \"A mover\" refers to a person who moves things.",
-          "suggestion": "Consider alternatives like \"Movendo\", \"Em movimento\", or \"Transferindo\" depending on the specific context."
+          "description": "The translation 'A mover' doesn't accurately convey the meaning of 'Moving'. 'Moving' in this context likely refers to an action or process of movement, not someone who is moving.",
+          "suggestion": "Consider alternatives like 'Movendo' (gerund form) or 'Em movimento' (in movement) depending on the context. 'Movendo' would likely be the best fit as it directly translates the action."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Mutare\" does not accurately convey the meaning of \"Moving\" in the context of an operation. \"Mutare\" generally means \"move\" or \"transfer\" and lacks the sense of an action or process.",
-          "suggestion": "Consider translations like \"Deplasare\", \"Mutare la\", or \"Transferare\", depending on the specific operation being described."
+          "description": "The Romanian translation \"Mutare\" translates to \"Move\" or \"Removal\" and doesn't accurately convey the meaning of \"Moving\" (as in, the process of relocation).",
+          "suggestion": "Consider using \"Mutare\" (if specifically referring to the action of moving something) or a phrase like \"Procesul de mutare\" (The moving process), \"Relocare\" (Relocation), or \"Transfer\" depending on the precise context."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ගෙනයමින්\" (genayamin) translates to 'carrying' or 'taking' rather than 'moving'. 'Moving' implies a change in location, which is not directly conveyed by 'genayamin'.",
-          "suggestion": "A more accurate translation for 'Moving' might be something like \"පැමිණීම\" (paminium - arriving/coming) or \"කෙලවෙනවා\" (kelavenaawa - being moved/relocated), depending on the specific context."
+          "description": "The Sinhala translation \"ගෙනයමින්\" (genayamin) translates to 'carrying' or 'taking' rather than 'moving'. It doesn't accurately convey the meaning of 'Moving'.",
+          "suggestion": "A more appropriate translation for 'Moving' might be \"පැමිණීම\" (paminim) which means 'arriving' or \"ගමන් කිරීම\" (gaman kirima) which means 'traveling' or 'moving'."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Presúva sa\" translates to \"Moving itself\" or \"Is moving\". The context suggests a command or action, so a more appropriate translation would be something like \"Presunúť\" (Move) or \"Premiestniť\" (Relocate). \"Presúva sa\" implies a continuous action of moving, rather than a command to move.",
-          "suggestion": "Consider \"Presunúť\" or \"Premiestniť\"."
+          "description": "The Slovak translation \"Presúva sa\" is a present tense, third-person singular form meaning \"It/He/She is moving.\" The English \"Moving\" is likely intended to convey the action of moving, as in a command or a description of an action. A more appropriate translation might be \"Presun\" (move) or \"Premiestnenie\" (relocation) or \"Pohyb\" (movement) depending on the precise context.",
+          "suggestion": "Consider alternatives like \"Presun\", \"Premiestnenie\", or \"Pohyb\"."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Померање\" while technically meaning 'movement' or 'moving', is not the most natural or accurate translation for the English word 'Moving' in the context of an operation (likely referring to a command or action). It's too general.",
-          "suggestion": "Consider alternatives like \"Премештање\" (Premestanje - relocating, moving) or \"Покретање\" (Pokretanje - initiating, starting) depending on the exact meaning intended.  Without more context, 'Премештање' is likely the best fit."
+          "description": "The Serbian translation \"Померање\" while technically meaning \"Movement\" or \"Moving\", is not the most natural or accurate translation of \"Moving\" in the context of an operation. It's more formal and doesn't quite capture the sense of action implied by 'Moving' in a software operation.",
+          "suggestion": "Consider using \"Премештање\" (Premeštanje) or \"Покретање\" (Pokretanje) which better convey the action of moving or initiating a move operation.  The best choice would depend on the precise nuance desired."
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Taşınıyor' translates to 'Moving' in the sense of 'relocating' or 'transferring'.  While potentially suitable depending on context, 'Moving' in this context likely refers to an action or process (e.g., a visual move in an animation or game). A more appropriate translation might be 'Harekete geçiriliyor' (being moved) or 'Yatay hareket' (lateral movement), depending on the exact context.",
-          "suggestion": "Consider 'Harekete geçiriliyor' or 'Yatay hareket' or a similar translation that better reflects the action of 'Moving' depending on context."
+          "description": "The Turkish translation 'Taşınıyor' translates to 'Moving' or 'is moving', but lacks the nuance of 'Moving' in the context of an operation. It implies a continuous action rather than a specific operation. A more appropriate translation, depending on the context, might be 'Taşıma' (Moving - as a noun) or 'Taşıma İşlemi' (Moving Operation).",
+          "suggestion": "Consider 'Taşıma' or 'Taşıma İşlemi' depending on the precise meaning intended."
         }
       ],
       "approved_at": null
@@ -255,7 +255,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Đang di chuyển\" is a literal translation of \"Moving\", it doesn't fully capture the context of an operation. 'Moving' in this context likely implies a movement action within a system or process.",
+          "suggestion": "Consider alternatives like \"Di chuyển đến\" (Moving to) or \"Chuyển đến\" (Transfer to) for a more contextually accurate translation. If maintaining a more general term is preferred, \"Di chuyển\" could be acceptable, but assess its suitability within the larger context."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -264,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"移动中\" (Yí dòng zhōng) while technically meaning 'moving', doesn't quite capture the nuance of \"Moving\" as a state or action label. It implies the action is currently happening, whereas 'Moving' could simply indicate a status.",
-          "suggestion": "Consider a more general translation like \"移动\" (Yí dòng) or \"正在移动\" (Zhèng zài yí dòng) depending on the context, to better reflect the original meaning."
+          "description": "The translation \"移动中\" (Yí dòng zhōng) literally means \"Moving in\" or \"In the process of moving.\" While not strictly incorrect, it doesn't directly convey the simple state of 'Moving' as intended by the English key. A more direct translation might be '正在移动' (Zhèng zài yí dòng) or simply '移动' (Yí dòng).",
+          "suggestion": "移动 (Yí dòng) or 正在移动 (Zhèng zài yí dòng)"
         }
       ],
       "approved_at": null

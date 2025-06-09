@@ -64,35 +64,37 @@ const InfoBadge: FC<InfoBadgeProps> = ({
         backgroundColor={globalColors.mainPurple}
       />
 
-      <Tooltip
-        id={id}
-        ref={tooltipRef}
-        place={place}
-        offset={offset || 10}
-        clickable
-        openOnClick
-        className={styles.tooltip}
-        aria-labelledby={id}
-        data-testid="info-tooltip"
-      >
-        <div className={styles.content}>
-          <div className={styles.header}>
-            <h3 className={styles.title} data-testid="tooltip-title">
-              {tooltipTitle}
-            </h3>
-            <IconButton
-              isFill
-              size={16}
-              onClick={onClose}
-              iconName={CrossIcon}
-              className={styles.close}
-            />
+      {tooltipDescription && tooltipTitle ? (
+        <Tooltip
+          id={id}
+          ref={tooltipRef}
+          place={place}
+          offset={offset || 10}
+          clickable
+          openOnClick
+          className={styles.tooltip}
+          aria-labelledby={id}
+          data-testid="info-tooltip"
+        >
+          <div className={styles.content}>
+            <div className={styles.header}>
+              <h3 className={styles.title} data-testid="tooltip-title">
+                {tooltipTitle}
+              </h3>
+              <IconButton
+                isFill
+                size={16}
+                onClick={onClose}
+                iconName={CrossIcon}
+                className={styles.close}
+              />
+            </div>
+            <p className={styles.description} data-testid="tooltip-description">
+              {tooltipDescription}
+            </p>
           </div>
-          <p className={styles.description} data-testid="tooltip-description">
-            {tooltipDescription}
-          </p>
-        </div>
-      </Tooltip>
+        </Tooltip>
+      ) : null}
     </div>
   );
 };

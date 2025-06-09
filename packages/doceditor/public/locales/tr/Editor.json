@@ -3,10 +3,8 @@
   "DocumentsFileType": "dökümanlar",
   "ErrorConnectionLost": "Bağlantı kesildi",
   "FileLocation": "Dosya konumunu aç",
-  "FileName": "Dosya Adı",
   "ImageFileType": "görüntüler",
   "MailMergeFileType": "Dosyayı XLSX formatında seçin",
-  "OpenSavedDocument": "Kaydedilen belgeyi yeni sekmede aç",
   "SelectFilesType": "Şu türdeki dosyaları seçin: {{fileType}}",
   "UsersWithoutAccess": "Bahsetmek istediğiniz bazı kullanıcıların odaya erişimi yok: {{users}}"
 }

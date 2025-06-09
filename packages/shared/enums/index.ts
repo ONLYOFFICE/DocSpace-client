@@ -221,6 +221,7 @@ export const enum PageType {
   bonus = "bonus",
   dataImport = "dataImport",
   storageManagement = "storageManagement",
+  services = "services",
 }
 
 /**
@@ -510,6 +511,7 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  // AIRoom = 9, //TODO: Restore when certs will be done
   PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done

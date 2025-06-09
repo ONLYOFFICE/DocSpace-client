@@ -30,7 +30,7 @@ import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 import { Nullable } from "types";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "../../../themes";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "../../../components/text";

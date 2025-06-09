@@ -36,22 +36,22 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import { Reducer, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
-import { Button } from "@docspace/shared/components/button";
-import { getOAuthToken } from "@docspace/shared/utils/common";
-import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
-import { saveSettingsThirdParty } from "@docspace/shared/api/files";
-import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import { DeleteThirdPartyDialog } from "@docspace/shared/dialogs/delete-third-party";
-import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
-import type { ConnectedThirdPartyAccountType } from "@docspace/shared/types";
+import { Text } from "../text";
+import { toastr } from "../toast";
+import { Button } from "../button";
+import { getOAuthToken } from "../../utils/common";
+import { ComboBox, ComboBoxSize } from "../combobox";
+import { saveSettingsThirdParty } from "../../api/files";
+import { THIRD_PARTY_SERVICES_URL } from "../../constants";
+import { DropDownItem } from "../drop-down-item";
+import { ContextMenuButton } from "../context-menu-button";
+import { DeleteThirdPartyDialog } from "../../dialogs/delete-third-party";
+import { FilesSelectorInput } from "../files-selector-input";
+import { isNullOrUndefined } from "../../utils/typeGuards";
+import { IconButton } from "../icon-button";
+import { useDidMount } from "../../hooks/useDidMount";
+import { useUnmount } from "../../hooks/useUnmount";
+import type { ConnectedThirdPartyAccountType } from "../../types";
 
 import {
   StyledBackup,

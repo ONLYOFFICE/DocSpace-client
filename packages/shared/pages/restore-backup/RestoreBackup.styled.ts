@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import styled, { css } from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { mobile } from "../../utils";
+import { globalColors } from "../../themes";
 
 import type {
   StyledBackupListProps,

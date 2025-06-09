@@ -3,7 +3,7 @@
   "content": "Several folders will be merged into one, files will be overwritten with the version update",
   "content_en_sha1_hash": "88e528b007845f10a4a7ac9ea9e1b555e5f98ca1",
   "created_at": "2025-05-19T21:30:46.677Z",
-  "updated_at": "2025-05-26T07:57:32.243Z",
+  "updated_at": "2025-05-28T09:30:02.217Z",
   "comment": {
     "text": "This translation key is used for a dialog that informs users about merging folders and overwriting files due to an update. It will be displayed in a conflict resolution dialog.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'files will be overwritten' is not accurately conveyed by 'الملفات سيتم استبدالها'. 'استبدالها' implies a replacement with something different, while 'overwritten' suggests updating the existing file. A more accurate translation would convey the sense of updating an existing file.",
-          "suggestion": "سيتم تحديث الملفات بالإصدار المحدث (The files will be updated with the updated version)."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'الملفات سيتم استبدالها' is grammatically correct, but sounds a little awkward. The passive voice ('will be overwritten') is common in English, and a more natural-sounding Arabic could be achieved by restructuring.",
-          "suggestion": "سيتم استبدال الملفات بالإصدار المحدث (The files will be replaced with the updated version.) - This keeps the passive voice more closely aligned with the original, although the issue in 'incorrect_translation' still needs addressing."
+          "description": "The phrase \"files will be overwritten\" is somewhat awkwardly translated as \"الملفات سيتم استبدالها\". A more natural and accurate translation would be something like \"سيتم استبدال الملفات\" or \"سيتم تحديث الملفات\".",
+          "suggestion": "سيتم استبدال الملفات"
         }
       ],
       "approved_at": null
@@ -53,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with the version update\" is not the most natural or accurate translation of \"with the version update\". It implies the files are being overwritten *because* of a version update, rather than simply being overwritten.",
-          "suggestion": "Няколко папки ще бъдат слети в една, файловете ще бъдат презаписани."
+          "description": "The phrase \"with the version update\" is awkward and doesn't accurately reflect the meaning of \"version update\". A more natural translation would convey that the files will be overwritten with the newer version.",
+          "suggestion": "Няколко папки ще бъдат слети в една, файловете ще бъдат презаписани с новата версия."
         }
       ],
       "approved_at": null
@@ -65,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"aktualizací verze\" (version update) is awkward and doesn't quite capture the intended meaning of overwriting files due to a newer version. It implies the update itself is overwriting the files, rather than the newer file version.",
-          "suggestion": "Několik složek bude sloučeno do jedné, soubory budou přepsány novější verzí."
+          "description": "The phrase 'version update' in the English content implies a version control system, which isn't directly conveyed by 'aktualizací verze' in the Czech translation. A more accurate translation might emphasize that the latest version will overwrite the existing ones.",
+          "suggestion": "Několik složek bude sloučeno do jedné, soubory budou přepsány nejnovější verzí."
         }
       ],
       "approved_at": null
@@ -83,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with the version update\" is not the most natural way to express the concept. It's overly literal and clunky in Greek.",
-          "suggestion": "Consider rephrasing to something like \"με την νεότερη έκδοση\" (with the newest version) or \"με την τελευταία έκδοση\" (with the latest version)."
+          "description": "The phrase 'version update' is a bit awkward in this context. A more natural translation for 'version update' would be 'νέα έκδοση' (new version) or 'τελευταία έκδοση' (latest version). The current phrasing implies a process of updating the version itself rather than the files.",
+          "suggestion": "Πολλοί φάκελοι θα συγχωνευθούν σε έναν, τα αρχεία θα αντικατασταθούν με την νέα έκδοση."
         }
       ],
       "approved_at": null
@@ -101,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'with the version update' ('versiopäivityksen myötä') is not the most natural way to express 'overwritten with the version update' in Finnish. It's a bit clunky. A more direct translation focusing on the file update overwriting existing files would be more idiomatic.",
-          "suggestion": "Consider rephrasing to something like: 'tiedostot päivitetään päälle' (files are updated on top) or 'tiedostot korvataan uusimmalla versiolla' (files are overwritten with the latest version)."
+          "description": "The phrase \"versiopäivityksen myötä\" (with version update) is a bit awkward and doesn't directly convey the meaning of 'with the version update' in this context. It implies the update is causing the overwrite, rather than being a reason for it.  A more direct and natural translation would convey that the files are overwritten *because* they are updated.",
+          "suggestion": "Useat kansiot yhdistetään, tiedostot korvataan päivityksen myötä (Several folders are merged, files are overwritten with the update) or Useat kansiot yhdistetään, tiedostot korvataan, koska ne päivitetään (Several folders are merged, files are overwritten because they are updated)."
         }
       ],
       "approved_at": null
@@ -119,8 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"overwrite\" is not accurately translated. \"վերագրվեն\" (veragrvyen) means \"will be assigned\" not \"will be overwritten\". The correct term for overwrite would be something like \"վերաբերվելու են\" (verabervelu en) or \"գրվելու են\" (grvelu en).",
-          "suggestion": "Մի քանի թղթապանակ կմիավորվեն մեկի մեջ, ֆայլերը կվերաբերվեն տարբերակի թարմացման հետ, կամ ֆայլերը կգրվեն տարբերակի թարմացման հետ"
+          "description": "The phrase \"files will be overwritten\" is not accurately translated. \"վերագրվեն\" (veragrvven) means 'will be assigned' or 'will be attributed', not overwritten.",
+          "suggestion": "Մի քանի թղթապանակ կմիավորվեն մեկի մեջ, ֆայլերը կվերագրանվեն թարմացված տարբերակի հետ (Filever kveragranven tar'mat'vac tarberaki het) or ֆայլերը կվերաբագրվեն թարմացված տարբերակի հետ (Filever kverabagrvven tar'mat'vac tarberaki het) -  depending on desired nuance (overwrite/update). A simpler suggestion might be: ֆայլերը կփոխարինվեն (Filever kpoxarine) - files will be replaced."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically not incorrect, the phrasing sounds slightly awkward. The construction 'with the version update' feels a bit clunky.",
+          "suggestion": "Consider rewording to improve flow. For example, 'ֆայլերը կփոխարինվեն թարմացված տարբերակով' (Filever kpoxarine tar'mat'vac tarberakov) - files will be replaced with an updated version."
         }
       ],
       "approved_at": null
@@ -149,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'version update' is not accurately translated. 'ບູຊິ່ນທີ່ປັບປຸງ' literally translates to 'improved version' which doesn't convey the meaning of overwriting with the newer version. A more accurate translation would imply replacing with the newest file.",
-          "suggestion": "ໄຟລ໌ຈະຖືກຂຽນທັບດ້ວຍບູຊິ່ນລ້າສຸດ (files will be overwritten with the latest version)."
+          "description": "The phrase \"version update\" is not accurately reflected by \"ບູຊິ່ນທີ່ປັບປຸງ\". A more accurate translation would convey that the latest version will overwrite the older one.",
+          "suggestion": "ໄຟລ໌ຈະຖືກຂຽນທັບດ້ວຍບູຊິ່ນລ້າສຸດ (Files will be overwritten with the latest version)."
         }
       ],
       "approved_at": null
@@ -161,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with the version update\" is a literal translation and sounds awkward in Latvian. It doesn't convey the intended meaning of overwriting with the newest version.",
-          "suggestion": "Consider rephrasing to something like \"ar jaunāko versiju\" (with the latest version) or \"ar jaunāko faila versiju\" (with the newest file version)."
+          "description": "The phrase \"with the version update\" is not the best translation for \"with the version\". It implies a process rather than a simple replacement. A more direct translation would better convey the meaning.",
+          "suggestion": "Vairākas mapes tiks apvienotas vienā, faili tiks pārrakstīti ar jaunāko versiju"
         }
       ],
       "approved_at": null
@@ -173,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with the version update\" is awkward and doesn't accurately reflect the English meaning. The English implies overwriting with the newer version of the file.",
-          "suggestion": "Verschillende mappen worden samengevoegd tot één map, bestanden worden overschreven met de nieuwste versie"
+          "description": "The phrase \"de versie update\" is awkward and doesn't accurately convey \"with the version update.\" It implies an update *of* the version, rather than the files being overwritten *with* a newer version.",
+          "suggestion": "Verschillende mappen worden samengevoegd tot één map, bestanden worden overschreven met de meest recente versie"
         }
       ],
       "approved_at": null
@@ -191,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with the version update\" is awkward and doesn't accurately convey the meaning of overwriting with the latest version.  It implies the overwrite is *caused* by the version update, rather than being *part* of it.",
+          "description": "The phrase 'version update' is not the most natural way to describe overwriting files in this context. It implies a coordinated versioning system, which isn't necessarily the case.",
           "suggestion": "Várias pastas serão mescladas em uma, os arquivos serão substituídos pela versão mais recente."
         }
       ],
@@ -209,13 +209,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure 'fișiere vor fi suprascrise de versiunea actualizată' is a bit awkward in Romanian. While technically correct, it's not the most natural way to phrase it.",
-          "suggestion": "fișierele vor fi suprascrise cu cea mai recentă versiune"
+          "description": "The Romanian translation uses \"fișiere vor fi suprascrise\" which is grammatically awkward. It implies that the files themselves are doing the overwriting.",
+          "suggestion": "Fișierele vor fi suprascrise cu cea mai recentă versiune."
         },
         {
-          "type": "spelling",
-          "description": "The word 'folder' is used in both English and Romanian. Using 'dosare' would be more consistent with the Romanian vocabulary, although 'folder' is also commonly understood.",
-          "suggestion": "Consider replacing 'folder' with 'dosare' for greater consistency."
+          "type": "incorrect_translation",
+          "description": "While \"îmbinate\" can mean merged, in this context, a more precise translation for 'merged' would be 'combinate'.",
+          "suggestion": "Mai multe foldere vor fi combinate într-un singur folder, fișierele vor fi suprascrise cu cea mai recentă versiune."
+        },
+        {
+          "type": "missing_content",
+          "description": "The original English mentions 'version update'. The Romanian translation lacks the equivalent of 'with the version update'.",
+          "suggestion": "Mai multe foldere vor fi combinate într-un singur folder, fișierele vor fi suprascrise cu cea mai recentă versiune."
         }
       ],
       "approved_at": null
@@ -226,8 +231,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with the version update\" (с обновлением версии) is awkward and doesn't accurately convey the meaning of \"with the version update\" in the English context. It implies that the files are being overwritten *because* they are being updated, which is not the intended meaning. It should simply convey that newer versions overwrite older ones.",
-          "suggestion": "Несколько папок будут объединены в одну, файлы будут перезаписаны более новыми версиями"
+          "description": "The phrase \"with the version update\" is a bit awkward and doesn't quite capture the nuance of \"version update.\" It implies the overwrite is *caused* by a version update, rather than being a consequence of the merge.",
+          "suggestion": "Несколько папок будут объединены в одну, файлы будут перезаписаны более новой версией"
         }
       ],
       "approved_at": null
@@ -238,13 +243,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'version update' is not accurately translated. 'අනවකාලීන කිරීමත් සමඟ' (anawakalinakarna thamaatha) translates to 'with updating' which is not the intended meaning of 'version update'. It implies the files are overwritten *during* the updating process, not *as a result* of an updated version.",
-          "suggestion": "ෆෝල්ඩර කිහිපයක් එකකට ඒකාබද්ධ කෙරේ, ගොනු යාවත්කාලීන අනුවාදය සමඟ උඩින් ලියනු ලැබේ."
-        },
-        {
-          "type": "spelling",
-          "description": "Although not strictly incorrect, 'ගොනු' could be more precisely translated as 'ලේඛන' to fully convey 'files' in this context.",
-          "suggestion": "ෆෝල්ඩර කිහිපයක් එකකට ඒකාබද්ධ කෙරේ, ලේඛන යාවත්කාලීන අනුවාදය සමඟ උඩින් ලියනු ලැබේ."
+          "description": "The phrase \"version update\" is not accurately conveyed by \"අන්වආද යාවත්කාලීන කිරීමත් සමඟ\". A more precise translation might be something along the lines of \"අවකාශය යාවත්කාලීන කිරීමත් සමඟ\" or \"අවකාශය නවතාලන විට\".  The original implies a specific change in the file version, while the Sinhala phrasing is more general.",
+          "suggestion": "ෆෝල්ඩර කිහිපයක් එකකට ඒකාබද්ධ කෙරේ, අවකාශය නවතාලන විට ගොනු උඩින් ලියනු ලැබේ."
         }
       ],
       "approved_at": null
@@ -267,13 +267,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"version update\" is not accurately translated. \"Ажурирањем верзије\" literally means 'by updating the version,' which is awkward in this context. A more natural translation would convey that the newer version overwrites the older one.",
-          "suggestion": "Неколико фолдера ће бити спојено у један, датотеке ће бити преписане новом верзијом"
+          "description": "The word 'merged' is better translated as 'уједињено' instead of 'спојено'. 'Спојено' implies a simpler joining, while 'уједињено' conveys the concept of multiple folders becoming a single, unified entity.",
+          "suggestion": "Неколико фолдера ће бити уједињено у један..."
         },
         {
-          "type": "formatting",
-          "description": "While grammatically correct, the conjunction 'а' feels slightly abrupt and could be improved with a more connecting word.  It's technically correct but could be more fluid.",
-          "suggestion": "Неколико фолдера ће бити спојено у један, датотеке ће бити преписане новом верзијом, јер је она ажурирана."
+          "type": "incorrect_translation",
+          "description": "The phrase 'with the version update' is a bit awkward. A more natural Serbian phrasing would be 'новijom верзијом' or 'новијом верзијом'.",
+          "suggestion": "Неколико фолдера ће бити уједињено у један, датотеке ће бити преписане новијом верзијом."
         }
       ],
       "approved_at": null
@@ -284,7 +284,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'version update' doesn't accurately convey the meaning of overwriting files. It suggests a version control system, which isn't implied in the original English.",
+          "description": "The phrase \"ažuriranjem verzije\" (by version updating) is an awkward and not the best way to convey \"with the version update.\" It implies the files are being overwritten *because* of a version update, rather than simply being overwritten as part of the merge.",
           "suggestion": "Nekoliko foldera će biti spojeno u jedan, datoteke će biti prepisane novijom verzijom."
         }
       ],
@@ -295,9 +295,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'version update' is not the most natural way to express 'version update' in Turkish in this context. While technically correct, it can sound awkward.",
-          "suggestion": "Consider alternatives like 'en son sürümle' or 'güncel sürümle' to convey 'with the updated version'. A more natural phrasing might be: 'Birkaç klasör tek bir klasörde birleştirilecek, dosyalar en son sürümle üzerine yazılacaktır.'"
+          "type": "grammar",
+          "description": "The phrase \"sürüm güncellemesi ile dosyaların üzerine yazılacaktır\" is grammatically awkward. A more natural phrasing would place 'sürüm güncellemesi' closer to the verb.",
+          "suggestion": "Birkaç klasör tek bir klasörde birleştirilecek, dosyalar sürüm güncellemesi ile üzerine yazılacaktır."
         }
       ],
       "approved_at": null
@@ -305,7 +305,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"з оновленням версії\" (with version update) is not the most natural or clear way to convey the meaning of \"with the version update\" in this context. It implies the files are being overwritten *because* they have an updated version, which isn't necessarily the intended meaning.",
+          "suggestion": "Consider alternatives like \"оновленою версією\" (updated version) or simply omitting the phrase to indicate overwrite with the newer version."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -314,8 +320,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"version update\" is a bit awkward in the Vietnamese translation. While technically correct, it's not the most natural way to express the idea of overwriting files with newer versions. It implies an explicit version number is involved, which might not always be the case.",
-          "suggestion": "Một số thư mục sẽ được hợp nhất thành một, các tập tin sẽ được ghi đè (bằng phiên bản mới nhất)."
+          "description": "The phrase 'version update' is not the best translation for how this concept is typically understood in this context. While technically correct, it might be misinterpreted. It would be more natural to say something about the newer file replacing the older one.",
+          "suggestion": "Các tập tin sẽ được ghi đè bởi phiên bản mới hơn."
         }
       ],
       "approved_at": null
@@ -326,8 +332,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'version update' is not accurately translated. '新版本' (xin banben) literally means 'new version' but doesn't fully capture the implied meaning of overwriting with the latest version. A more precise translation would convey the action of replacing.",
-          "suggestion": "文件将被最新版本覆盖 (wenjian jiang bei zuixinchengběn fùgài) - 'Files will be overwritten by the latest version.'"
+          "description": "The phrase 'version update' is not accurately translated. '新版本' implies a new version of the software itself, not just an updated file. A more accurate translation for 'version update' in this context would be '更新的版本' or '更新后的版本'.",
+          "suggestion": "多个文件夹将合并为一个文件夹，文件将被更新的版本重写"
         }
       ],
       "approved_at": null

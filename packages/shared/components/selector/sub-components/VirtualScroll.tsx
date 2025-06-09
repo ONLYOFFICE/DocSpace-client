@@ -38,8 +38,9 @@ export const VirtualScroll = ({
   const scrollContentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const isSearchInputFocused =
-      document.activeElement?.classList.contains("search-input-block");
+    const isSearchInputFocused = document.activeElement?.closest(
+      ".search-input-block",
+    );
 
     if (!isSearchInputFocused) {
       scrollContentRef.current?.focus();

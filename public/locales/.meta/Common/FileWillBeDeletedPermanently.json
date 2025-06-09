@@ -3,7 +3,7 @@
   "content": "The file will be deleted permanently {{date}}",
   "content_en_sha1_hash": "430bd41ec3bbb225ab43c50741aef944921b95dd",
   "created_at": "2025-05-19T21:30:45.324Z",
-  "updated_at": "2025-05-26T07:57:32.913Z",
+  "updated_at": "2025-06-08T12:02:32.887Z",
   "comment": {
     "text": "This translation key is used for a permanent delete confirmation message that appears on a quick button when a file is about to be permanently deleted. It displays the expected date of deletion and is typically shown in a tooltip or dialog box. The message informs the user that the action will result in permanent data loss.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
       "line_number": 142,
-      "context": "!isTile;\n \n const getTooltipContent = () => (\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {roomLifetime?.deletePermanently\n ? t(\"Common:FileWillBeDeletedPermanently\", { date: expiredDate || \"\" })\n : t(\"Common:FileWillBeMovedToTrash\", { date: expiredDate || \"\" })}\n </Text>\n );\n \n return (",
+      "context": "!isTile;\n \n const getTooltipContent = () => (\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {roomLifetime?.deletePermanently\n ? t(\"Common:FileWillBeDeletedPermanently\", { date: expiredDate || \"\" })\n : t(\"Common:SectionMoveNotification\", {\n sectionName: t(\"Common:TrashSection\"),\n date: expiredDate || \"\",\n })}\n </Text>",
       "module": "/packages/shared"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"سيتم حذف الملف في {{date}} \" while understandable, isn't the most natural phrasing in Arabic. A more common and fluent translation would be \"سيتم حذف هذا الملف بشكل دائم في {{date}} \" or \"سيتم حذف هذا الملف نهائياً في {{date}} \".  The addition of \"هذا\" (this) and words like \"بشكل دائم\" or \"نهائياً\" enhance the clarity and flow.",
-          "suggestion": "سيتم حذف هذا الملف بشكل دائم في {{date}} "
+          "description": "The Arabic translation 'سيتم حذف الملف في {{date}} ' translates to 'The file will be deleted in {{date}}'. The original English states the file will be deleted *permanently*. The Arabic lacks this crucial detail.",
+          "suggestion": "سيتم حذف الملف بشكل دائم في {{date}} "
         }
       ],
       "approved_at": null
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The date placeholder {{date}} is present in both the English and Azerbaijani versions, indicating a placeholder that should be handled programmatically and not directly translated.",
+          "suggestion": "Ensure the placeholder is handled by the application and not included in the translated text."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -75,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'will be deleted permanently' is not fully conveyed. While 'poistetaan' indicates deletion, the 'permanently' aspect is lost. A more precise translation would include a word that emphasizes permanence.",
+          "suggestion": "Tiedosto poistetaan pysyvästi {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -102,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"完全に削除されます\" (kanzen ni sakujo saremasu) implies a forceful or absolute deletion. While \"permanently\" suggests this, it's quite formal and potentially strong for a user-facing message. A more natural phrasing might soften this.",
-          "suggestion": "ファイルは{{date}}に削除されます (Fairu wa {{date}} ni sakujo saremasu) - This removes the '完全に' (kanzen ni) which softens the tone while still conveying the meaning of permanent deletion."
+          "description": "The translation 'ファイルは{{date}}に完全に削除されます' uses '完全に削除されます' which implies a forceful deletion. A more natural phrasing for a user notification might be '削除されます' or '消去されます'.",
+          "suggestion": "ファイルは{{date}}に削除されます"
         }
       ],
       "approved_at": null
@@ -126,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Fails tiks izdzēsts {{date}}' doesn't accurately convey the meaning of 'The file will be deleted permanently {{date}}'. 'Fails' means 'cases' or 'instances', not 'file'.",
-          "suggestion": "Failes tiks izdzēsts pastāvīgi {{date}}"
+          "description": "The Latvian translation 'Fails tiks izdzēsts {{date}}' is not an accurate translation of 'The file will be deleted permanently {{date}}'. 'Fails' means 'file' but the structure of the sentence is awkward. It should be 'Datums tiks izdzēsts {{date}}' or 'Šis fails tiks izdzēsts {{date}}'.",
+          "suggestion": "Šis fails tiks izdzēsts {{date}}"
         }
       ],
       "approved_at": null
@@ -149,9 +161,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ficheiro' is a variant of 'arquivo' and might be less common or less preferred depending on the target audience and regional preference in Portuguese. While not strictly incorrect, 'arquivo' is generally more widely understood.",
-          "suggestion": "Consider using 'O arquivo será eliminado {{date}}'"
+          "type": "incorrect_translation",
+          "description": "The translation 'O ficheiro será eliminado {{date}}' is a literal translation but could be improved for naturalness in Portuguese. 'Eliminado' is acceptable, but 'removido' or 'apagado' are more common for file deletion.",
+          "suggestion": "O ficheiro será removido {{date}}"
         }
       ],
       "approved_at": null
@@ -168,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'șters' is misspelled. The correct spelling is 'șters'.",
-          "suggestion": "șters"
+          "description": "The word 'șters' should be 'șters'",
+          "suggestion": "Fișierul va fi șters definitiv la data de {{date}}"
         }
       ],
       "approved_at": null
@@ -192,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"deleted permanently\" is better translated as \"natrvalo odstránený\" or \"zmazaný nenávratne\" in Slovak to more accurately convey the sense of permanence. \"Vymazaný\" is generally understood, but lacks the full weight of the original meaning.",
-          "suggestion": "Súbor bude odstránený nenávratne {{date}}"
+          "description": "While \"vymazaný\" is a valid translation for \"deleted\", \"zmazaný\" is more common and natural in Slovak when referring to files being deleted. \"Vymazaný\" can imply a more thorough or official erasure.",
+          "suggestion": "Súbor bude zmazaný {{date}}"
         }
       ],
       "approved_at": null
@@ -222,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Dosya silinecek {{date}}' is a generally correct translation but could be more precise. 'The file will be deleted permanently' implies a non-recoverable deletion. A more accurate translation that conveys permanence would be 'Dosya kalıcı olarak silinecek {{date}}'.",
-          "suggestion": "Dosya kalıcı olarak silinecek {{date}}"
+          "description": "The Turkish translation \"Dosya silinecek {{date}}\" is a literal translation but loses some nuance. A more natural Turkish phrasing would be \"Dosya, {{date}} tarihinde kalıcı olarak silinecektir.\" or \"Dosya {{date}} tarihinde silinecektir.\" ",
+          "suggestion": "Dosya, {{date}} tarihinde kalıcı olarak silinecektir."
         }
       ],
       "approved_at": null
@@ -237,7 +249,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tập tin sẽ bị xóa {{date}}' is a literal translation but sounds slightly unnatural in Vietnamese. A more natural phrasing would be 'Tập tin sẽ bị xóa vĩnh viễn {{date}}' or 'Tập tin sẽ bị xóa khỏi hệ thống {{date}}'.",
+          "suggestion": "Tập tin sẽ bị xóa vĩnh viễn {{date}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

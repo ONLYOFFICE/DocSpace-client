@@ -3,7 +3,7 @@
   "content": "Rooms shared with you will appear here.",
   "content_en_sha1_hash": "2af30b0da9ba4acdb37ac4e3a52189aaa6147f87",
   "created_at": "2025-05-19T21:30:56.091Z",
-  "updated_at": "2025-05-24T11:31:55.506Z",
+  "updated_at": "2025-06-02T10:20:51.018Z",
   "comment": {
     "text": "This translation key is used to display a message that explains how shared rooms will be displayed on the user's device. It appears in the UI as part of an empty container when rooms are being shared between users and is intended for collaborative or visitor contexts. The goal is to provide clarity on what the user should expect when receiving shared content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 113,
+      "line_number": 115,
       "context": "<>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>\n </>\n ) : isVisitor || isCollaborator ? (\n t(\"RoomEmptyContainerDescriptionUser\")\n ) : (\n t(\"RoomEmptyContainerDescription\")\n );\n \n const archiveRoomsDescription =",
       "module": "/packages/client"
     }

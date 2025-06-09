@@ -36,4 +36,6 @@ export type BetaBadgeProps = {
   place: PlacesType;
   mobilePlace?: PlacesType;
   withOutFeedbackLink?: boolean;
+
+  withoutTooltip?: boolean;
 };

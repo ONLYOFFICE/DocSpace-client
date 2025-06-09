@@ -329,12 +329,13 @@ class RoomsFilter {
       subjectFilter,
       quotaFilter,
       storageFilter,
+      startIndex,
     } = this;
 
     const dtoFilter = {
       [PAGE]: page,
       [PAGE_COUNT]: pageCount,
-      [START_INDEX]: this.getStartIndex(),
+      [START_INDEX]: startIndex || this.getStartIndex(),
       [FILTER_VALUE]: (filterValue ?? "").trim(),
       [PROVIDER]: provider,
       [TYPE]: type,

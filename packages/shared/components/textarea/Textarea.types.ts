@@ -82,4 +82,6 @@ export type TextareaProps = {
 
   classNameCopyIcon?: string;
   paddingLeftProp?: string;
+
+  isChatMode?: boolean;
 };

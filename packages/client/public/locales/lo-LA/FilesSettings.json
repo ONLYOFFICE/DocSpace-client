@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "ຢ່າສະແດງການແຈ້ງເຕືອນການຍົກເລີກອີກ",
   "DisplayFileExtension": "ສະແດງນາມສະກຸນໄຟລ໌ຕໍ່ໄປກັບຊື່ໄຟລ໌",
-  "DisplayNotification": "ສະແດງແຈ້ງເຕືອນເມື່ອຍ້າຍລາຍການໄປຖັງຂີ້ເຫຍື້ອ",
   "OpenSameTab": "ເປີດຕົວບັນນາຈັກ {{organizationName}} ໃນແທັບດຽວກັນ",
   "OriginalCopy": "ບັນທຶກໄຟລ໌ສຳເນົາໄວ້ໃນຮູບແບບຕົ້ນສະບັບເຊັ່ນດຽວກັນ"
 }

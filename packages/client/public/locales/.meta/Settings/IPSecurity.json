@@ -3,7 +3,7 @@
   "content": "IP Security",
   "content_en_sha1_hash": "6384288df2a9807354de1df765c871288d7c2492",
   "created_at": "2025-05-19T21:30:51.718Z",
-  "updated_at": "2025-05-26T07:57:32.777Z",
+  "updated_at": "2025-06-08T12:02:32.824Z",
   "comment": {
     "text": "The \"IPSecurity\" translation key is used to display the title and subtitle of the security category in the portal settings. It appears as a heading on mobile views and as part of the desktop layout, indicating access to IP-related security features.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 108,
+      "line_number": 109,
       "context": "}\n url=\"/portal-settings/security/access-portal/invitation-settings\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"IPSecurity\")}\n subtitle={\n <Trans i18nKey=\"IPSecurityMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },

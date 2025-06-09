@@ -50,4 +50,5 @@ export type DatePickerProps = {
   /** Allows to set first shown date in calendar */
   openDate: moment.Moment;
   isMobile?: boolean;
+  hideCross?: boolean;
 };

@@ -229,9 +229,9 @@ const filesMock: TFile[] = [
       WebView: false,
     },
     viewUrl:
-      "https://helpcenter.onlyoffice.com/ru/images/Help/Guides/big/guide139/hyperlink_settings.png",
+      "https://api.onlyoffice.com/assets/images/docs-preview-0b9d9065d713625e222dcfeb451de62c.png",
     webUrl:
-      "https://helpcenter.onlyoffice.com/ru/images/Help/Guides/big/guide139/hyperlink_settings.png",
+      "https://api.onlyoffice.com/assets/images/docs-preview-0b9d9065d713625e222dcfeb451de62c.png",
   },
   {
     isFile: true,
@@ -309,9 +309,9 @@ const filesMock: TFile[] = [
       WebView: false,
     },
     viewUrl:
-      "https://helpcenter.onlyoffice.com/ru/images/Help/GettingStarted/DocSpace/Big/RoomTypes.png",
+      "https://api.onlyoffice.com/assets/images/samples-preview-19b97fee9e3b2fd9fe6abdaf481bebb4.png",
     webUrl:
-      "https://helpcenter.onlyoffice.com/ru/images/Help/GettingStarted/DocSpace/Big/RoomTypes.png",
+      "https://api.onlyoffice.com/assets/images/samples-preview-19b97fee9e3b2fd9fe6abdaf481bebb4.png",
   },
 ];
 

@@ -24,55 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import generateJwt from "@docspace/shared/utils/oauth/generate-jwt";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import {
   getConfig,
   getOAuthClient,
-  getPortal,
+  getOauthJWTToken,
   getScopeList,
   getSettings,
   getUser,
 } from "@/utils/actions";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { LoginContainer } from "@/components/LoginContainer";
 
 import Consent from "./page.client";
 
-async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}) {
+async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const clientId = searchParams.clientId ?? searchParams.client_id;
 
-  const [user, settings, config, portal] = await Promise.all([
+  const [user, settings, config] = await Promise.all([
     getUser(),
     getSettings(),
     getConfig(),
-    getPortal(),
   ]);
 
-  const jwtToken = generateJwt(
-    user!.id,
-    user!.displayName,
-    user!.email,
-    portal.tenantId,
-    portal.tenantAlias,
-    user?.isAdmin || user?.isOwner || false,
-    config?.oauth2?.secret ?? "empty",
-  );
+  const cookieStore = await cookies();
+
+  let token = cookieStore.get(`x-signature-${user!.id}`)?.value;
+  let new_token = "";
+
+  if (!token) {
+    new_token = await getOauthJWTToken();
+  }
 
   const [data, scopes] = await Promise.all([
     getOAuthClient(clientId),
-    getScopeList(jwtToken),
+    getScopeList(new_token, user!.id),
   ]);
-
-  const redirect_url = cookies().get("x-redirect-authorization-uri")!.value;
 
   const client = data?.client as IClientProps;
 
@@ -85,15 +81,12 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = cookieStore.get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>
       {settings && typeof settings !== "string" && (
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          isRegisterContainerVisible={isRegisterContainerVisible}
-        >
+        <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
           <>
             <GreetingLoginContainer
               greetingSettings={settings?.greetingSettings}
@@ -104,11 +97,9 @@ async function Page({
               scopes={scopes}
               user={user}
               baseUrl={config?.oauth2?.origin}
-              token={jwtToken}
-              redirect_url={redirect_url}
             />
           </>
-        </ColorTheme>
+        </LoginContainer>
       )}
     </>
   );

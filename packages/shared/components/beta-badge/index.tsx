@@ -36,12 +36,13 @@ import { MobileOffset, OtherOffset } from "./BetaBadge.constants";
 
 const BetaBadge = ({
   place,
-  forumLink,
+  forumLinkUrl,
   mobilePlace = "bottom-end",
   currentColorScheme,
   documentationEmail,
   currentDeviceType,
   withOutFeedbackLink = false,
+  withoutTooltip = false,
 }: BetaBadgeProps) => {
   const { t } = useTranslation(["Common", "Settings"]);
 
@@ -61,7 +62,7 @@ const BetaBadge = ({
           components={{
             1: (
               <Link
-                href={forumLink}
+                href={forumLinkUrl}
                 target={LinkTarget.blank}
                 color={currentColorScheme?.main?.accent}
               />
@@ -84,13 +85,19 @@ const BetaBadge = ({
 
   const offset = isMobile ? MobileOffset : OtherOffset;
 
+  const tooltipProps = withoutTooltip
+    ? {}
+    : {
+        tooltipTitle: t("Common:BetaBadgeTitle"),
+        tooltipDescription,
+      };
+
   return (
     <InfoBadge
       offset={offset}
       place={isMobile ? mobilePlace : place}
       label={t("Common:BetaLabel")}
-      tooltipDescription={tooltipDescription}
-      tooltipTitle={t("Common:BetaBadgeTitle")}
+      {...tooltipProps}
     />
   );
 };

@@ -145,6 +145,8 @@ const TableView = ({
     };
   }, [setSelection]);
 
+  if (!items.length) return null;
+
   return (
     <TableWrapper forwardedRef={tableRef} useReactWindow>
       <Header

@@ -1,7 +1,6 @@
 {
   "DeleteAllGroupDescription": "Valitut ryhmät poistetaan. Ryhmien käyttäjiä ei poisteta {{productName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteAllGroupsTitle": "Poista ryhmiä",
-  "DeleteFile": "Olet poistamassa tätä tiedostoa.",
   "DeleteFolder": "Olet poistamassa tätä kansiota. ",
   "DeleteGroupDescription": "Ryhmä {{groupName}} poistetaan. Ryhmän käyttäjiä ei poisteta {{productName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteGroupTitle": "Poista ryhmä",
@@ -10,11 +9,10 @@
   "DeleteRoom": "Olet poistamassa tätä huonetta. Et voi enää palauttaa sitä.",
   "DeleteRooms": "Olet poistamassa nämä huoneet. Et pysty palauttamaan niitä.",
   "DeleteSharedNote": "Ole hyvä ja huomioi, että jos olet jakanut tiedon jonkun kanssa, se ei ole enää saatavilla.",
-  "FilePermanentlyDeleted": "Tiedosto poistetaan pysyvästi 30 päivän päästä. ",
+  "DeleteTemplate": "Haluatko todella poistaa mallihuoneen <1>«{{templateName}}»</1>? Mallia ei voida palauttaa.",
+  "DeleteTemplates": "Haluatko todella poistaa valitun huoneen mallit? Niitä ei voi palauttaa. ",
   "FolderPermanentlyDeleted": "Kansio poistetaan pysyvästi 30 päivän päästä.",
   "ItemsPermanentlyDeleted": "Kohteet poistetaan pysyvästi 30 päivän päästä.",
-  "MoveToTrashButton": "Siirrä roskakoriin",
-  "MoveToTrashTitle": "Siirretäänkö roskiin?",
   "UnsubscribeButton": "Lopeta tilaus",
   "UnsubscribeNote": "Haluatko varmasti peruuttaa luettelosta valittujen kohteiden tilauksen?",
   "UnsubscribeTitle": "Tilauksen peruuttamisen vahvistus"

@@ -26,15 +26,9 @@
 
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
-import React, {
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useContext,
-} from "react";
+import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
@@ -43,6 +37,7 @@ import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
+import withContainer from "../../../../../HOCs/withContainer";
 
 const fileNameCss = css`
   margin-inline-start: -24px;
@@ -127,7 +122,7 @@ const elementResizeDetector = elementResizeDetectorMaker({
 });
 
 const Table = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   setFirsElemChecked,
@@ -147,11 +142,14 @@ const Table = ({
   currentDeviceType,
   onEditIndex,
   isIndexing,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
 
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   const ref = useRef(null);
   const tagRef = useRef(null);
@@ -202,7 +200,7 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -227,10 +225,13 @@ const Table = ({
             ? highlightFile.isExst === !item.fileExst
             : null
         }
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
-    filesList,
+    list,
     setFirsElemChecked,
     setHeaderBorder,
     theme,
@@ -242,6 +243,9 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   ]);
 
   return (
@@ -259,13 +263,13 @@ const Table = ({
         location={location}
         isRooms={isRooms}
         isIndexing={isIndexing}
-        filesList={filesList}
+        filesList={list}
       />
 
       <TableBody
         fetchMoreFiles={fetchMoreFiles}
         columnStorageName={columnStorageName}
-        filesLength={filesList.length}
+        filesLength={list.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
         useReactWindow
@@ -285,11 +289,10 @@ export default inject(
     filesStore,
     infoPanelStore,
     treeFoldersStore,
-
     tableStore,
     userStore,
     settingsStore,
-
+    guidanceStore,
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
@@ -298,12 +301,11 @@ export default inject(
 
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
       treeFoldersStore;
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
     const {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -319,9 +321,9 @@ export default inject(
     const { changeIndex } = filesActionsStore;
     const { isIndexedFolder } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     return {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -342,6 +344,8 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
+      setRefMap,
+      deleteRefMap,
     };
   },
-)(observer(Table));
+)(withContainer(observer(Table)));

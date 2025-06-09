@@ -31,11 +31,10 @@ import React, {
   useState,
   ChangeEvent,
 } from "react";
-import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
-import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
-import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
+import CrossIconReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg";
+import SearchIconReactSvg from "PUBLIC_DIR/images/search.react.svg";
 
 import { useDebounce } from "../../hooks/useDebounce";
 
@@ -63,13 +62,20 @@ const SearchInput = ({
   isDisabled = false,
   placeholder,
   onFocus,
+  resetOnBlur = false,
   children,
 }: SearchInputProps) => {
   const [inputValue, setInputValue] = useState(value);
+
+  const afterClear = useRef(false);
   const prevValueRef = useRef(value);
 
   const debouncedOnChange = useDebounce(
-    useCallback((v: string) => onChange?.(v), [onChange]),
+    useCallback(() => {
+      if (!afterClear.current) {
+        onChange?.(prevValueRef.current);
+      }
+    }, [onChange]),
     refreshTimeout,
   );
 
@@ -77,6 +83,8 @@ const SearchInput = ({
     (e: ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
       setInputValue(newValue);
+      prevValueRef.current = newValue;
+      afterClear.current = false;
       if (autoRefresh) {
         debouncedOnChange(newValue);
       }
@@ -86,8 +94,18 @@ const SearchInput = ({
 
   const handleClearSearch = useCallback(() => {
     setInputValue("");
+    prevValueRef.current = "";
+    afterClear.current = true;
     onClearSearch?.();
   }, [onClearSearch]);
+
+  const handleBlur = useCallback(() => {
+    // Reset to the external value when focus is lost if they don't match
+    if (resetOnBlur && inputValue !== value) {
+      setInputValue(value);
+      prevValueRef.current = value;
+    }
+  }, [inputValue, value, resetOnBlur]);
 
   useEffect(() => {
     if (prevValueRef.current !== value) {
@@ -122,11 +140,11 @@ const SearchInput = ({
 
   const getIconNode = () => {
     const showCrossIcon = !!inputValue || showClearButton;
+
     const iconNode = (
-      <ReactSVG
-        className="icon-button_svg not-selectable"
-        src={showCrossIcon ? CrossIconReactSvgUrl : SearchIconReactSvgUrl}
-      />
+      <div className="icon-button_svg not-selectable">
+        {showCrossIcon ? <CrossIconReactSvg /> : <SearchIconReactSvg />}
+      </div>
     );
 
     return iconNode;
@@ -138,7 +156,7 @@ const SearchInput = ({
     <div
       className={classNames(
         styles.searchInputBlock,
-        { [styles.scale]: scale },
+        { [styles.scale]: scale, [styles.isFilled]: !!inputValue },
         className,
       )}
       id={id}
@@ -157,6 +175,7 @@ const SearchInput = ({
         isDisabled={isDisabled}
         onChange={handleInputChange}
         onFocus={onFocus}
+        onBlur={handleBlur}
         type={InputType.text}
         iconNode={iconNode}
         iconButtonClassName={

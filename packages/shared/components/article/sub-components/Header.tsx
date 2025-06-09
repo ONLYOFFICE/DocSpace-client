@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router";
 import { useTheme } from "styled-components";
 
 import { getLogoUrl } from "../../../utils";
@@ -33,6 +33,7 @@ import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
 
 import { AsideHeader } from "../../aside-header";
+import BackButton from "./BackButton";
 
 import styles from "../Article.module.scss";
 
@@ -47,7 +48,7 @@ const ArticleHeader = ({
   withCustomArticleHeader,
   currentDeviceType,
   onIconClick,
-
+  showBackButton,
   ...rest
 }: ArticleHeaderProps) => {
   const navigate = useNavigate();
@@ -68,6 +69,14 @@ const ArticleHeader = ({
         isCloseable
         withoutBorder
         onCloseClick={onIconClick}
+        headerComponent={
+          showBackButton ? (
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+            />
+          ) : null
+        }
       />
     );
 

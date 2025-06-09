@@ -40,23 +40,16 @@ import { logger } from "@/../logger.mjs";
 
 import "@/styles/globals.scss";
 
-const log = logger.child({ module: "Root layout" });
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
-
-  const cookieStore = cookies();
-
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
-    | ThemeKeys
-    | undefined;
+  const hdrs = await headers();
+  const cookieStore = await cookies();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    log.info("get health check and return empty layout");
+    logger.info("get health check and return empty layout");
     return <></>;
   }
 
@@ -65,6 +58,27 @@ export default async function RootLayout({
     getSettings(),
     getColorTheme(),
   ]);
+
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
+    | ThemeKeys
+    | undefined;
+
+  const theme =
+    (hdrs.get("x-sdk-config-theme") as ThemeKeys | null) ||
+    user?.theme ||
+    systemTheme ||
+    ThemeKeys.BaseStr;
+
+  const themeClass =
+    (theme !== ThemeKeys.SystemStr ? theme : systemTheme) === ThemeKeys.DarkStr
+      ? "dark"
+      : "light";
+
+  const locale =
+    (hdrs.get("x-sdk-config-locale") as string | null) ||
+    user?.cultureName ||
+    (typeof settings === "object" && settings.culture) ||
+    "en";
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
@@ -81,11 +95,18 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body
-        className={`${systemTheme === ThemeKeys.DarkStr ? "dark" : "light"}`}
-      >
+      <body className={themeClass}>
         <StyledComponentsRegistry>
-          <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
+          <Providers
+            contextData={{
+              initialTheme: theme,
+              user,
+              settings,
+              systemTheme,
+              colorTheme,
+              locale,
+            }}
+          >
             {children}
           </Providers>
         </StyledComponentsRegistry>

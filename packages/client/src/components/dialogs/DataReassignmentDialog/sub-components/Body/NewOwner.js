@@ -36,18 +36,16 @@ import {
 
 const ChoiceNewOwner = ({
   t,
-  selectedUser,
+  targetUser,
   currentColorScheme,
   onTogglePeopleSelector,
 }) => {
-  if (selectedUser)
+  if (targetUser)
     return (
       <StyledSelectedOwnerContainer>
         <StyledSelectedOwner currentColorScheme={currentColorScheme}>
           <Text className="text">
-            {selectedUser.displayName
-              ? selectedUser.displayName
-              : selectedUser.label}
+            {targetUser.displayName ? targetUser.displayName : targetUser.label}
           </Text>
         </StyledSelectedOwner>
 
@@ -67,17 +65,17 @@ const ChoiceNewOwner = ({
       <SelectorAddButton
         className="selector-add-button"
         onClick={onTogglePeopleSelector}
+        label={t("Translations:ChooseFromList")}
+        titleText={t("Translations:ChooseFromList")}
+        noSelect
       />
-      <Text className="label" noSelect title={t("Translations:ChooseFromList")}>
-        {t("Translations:ChooseFromList")}
-      </Text>
     </StyledPeopleSelector>
   );
 };
 
 const NewOwner = ({
   t,
-  selectedUser,
+  targetUser,
   currentColorScheme,
   onTogglePeopleSelector,
 }) => {
@@ -94,7 +92,7 @@ const NewOwner = ({
 
       <ChoiceNewOwner
         t={t}
-        selectedUser={selectedUser}
+        targetUser={targetUser}
         currentColorScheme={currentColorScheme}
         onTogglePeopleSelector={onTogglePeopleSelector}
       />

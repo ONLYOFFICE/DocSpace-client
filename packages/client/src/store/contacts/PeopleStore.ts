@@ -41,6 +41,8 @@ import InfoPanelStore from "../InfoPanelStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 import ProfileActionsStore from "../ProfileActionsStore";
 import DialogsStore from "../DialogsStore";
+import TreeFoldersStore from "../TreeFoldersStore";
+import SettingsSetupStore from "../SettingsSetupStore";
 
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -50,6 +52,8 @@ import HeaderMenuStore from "./HeaderMenuStore";
 import InviteLinksStore from "./InviteLinksStore";
 import DialogStore from "./DialogStore";
 import ContactsConextOptionsStore from "./ContactsContextOptionsStore";
+import FilesStore from "../FilesStore";
+import SelectedFolderStore from "../SelectedFolderStore";
 
 class PeopleStore {
   viewAs: TContactsViewAs = isDesktop() ? "table" : "row";
@@ -82,6 +86,10 @@ class PeopleStore {
     public profileActionsStore: ProfileActionsStore,
     public dialogsStore: DialogsStore,
     public currentQuotaStore: CurrentQuotasStore,
+    public treeFoldersStore: TreeFoldersStore,
+    public setup: SettingsSetupStore,
+    public filesStore: FilesStore,
+    public selectedFolderStore: SelectedFolderStore,
   ) {
     this.infoPanelStore = infoPanelStore;
     this.accessRightsStore = accessRightsStore;
@@ -92,6 +100,10 @@ class PeopleStore {
     this.profileActionsStore = profileActionsStore;
     this.dialogsStore = dialogsStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.treeFoldersStore = treeFoldersStore;
+    this.setup = setup;
+    this.filesStore = filesStore;
+    this.selectedFolderStore = selectedFolderStore;
 
     this.dialogStore = new DialogStore();
     this.contactsHotkeysStore = new ContactsHotkeysStore(this);
@@ -117,6 +129,10 @@ class PeopleStore {
       accessRightsStore,
       this.dialogStore,
       clientLoadingStore,
+      treeFoldersStore,
+      this.filesStore,
+      this.dialogsStore,
+      this.selectedFolderStore,
     );
 
     this.contextOptionsStore = new ContactsConextOptionsStore(
@@ -128,8 +144,9 @@ class PeopleStore {
       this.usersStore,
       this.dialogStore,
       this.targetUserStore,
-      dialogsStore,
+      this.dialogsStore,
       currentQuotaStore,
+      this.setup,
     );
 
     this.headerMenuStore = new HeaderMenuStore(

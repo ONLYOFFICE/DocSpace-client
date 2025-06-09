@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 import { mobile } from "@docspace/shared/utils";
 
 import { MainButtonMobile } from "@docspace/shared/components/main-button-mobile";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
@@ -52,25 +53,29 @@ const MobileView = ({
   buttonOptions,
   withoutButton,
   withMenu,
-
-  setUploadPanelVisible,
   onMainButtonClick,
   isRoomsFolder,
   mainButtonMobileVisible,
+  setRefMap,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
+  const mainButtonRef = React.useRef(null);
 
   const openButtonToggler = React.useCallback(() => {
     setIsOpenButton((prevState) => !prevState);
   }, []);
 
-  const showUploadPanel = React.useCallback(() => {
-    setUploadPanelVisible && setUploadPanelVisible(true);
-  }, [setUploadPanelVisible]);
+  React.useEffect(() => {
+    const buttonElement = mainButtonRef.current?.getButtonElement();
+    if (buttonElement) {
+      setRefMap(GuidanceRefKey.Uploading, buttonElement);
+    }
+  }, [setRefMap]);
 
   return (
     mainButtonMobileVisible && (
       <StyledMainButtonMobile
+        ref={mainButtonRef}
         actionOptions={actionOptions}
         isOpenButton={isOpenButton}
         onUploadClick={openButtonToggler}
@@ -80,19 +85,22 @@ const MobileView = ({
         withoutButton={withoutButton}
         withMenu={withMenu}
         onClick={onMainButtonClick}
-        onAlertClick={showUploadPanel}
         withAlertClick={isRoomsFolder}
       />
     )
   );
 };
 
-export default inject(({ uploadDataStore, treeFoldersStore }) => {
-  const { isRoomsFolder } = treeFoldersStore;
-  const { setUploadPanelVisible } = uploadDataStore;
+export default inject(
+  ({ uploadDataStore, treeFoldersStore, guidanceStore }) => {
+    const { isRoomsFolder } = treeFoldersStore;
+    const { setUploadPanelVisible } = uploadDataStore;
 
-  return {
-    setUploadPanelVisible,
-    isRoomsFolder,
-  };
-})(observer(MobileView));
+    const { setRefMap } = guidanceStore;
+    return {
+      setUploadPanelVisible,
+      isRoomsFolder,
+      setRefMap,
+    };
+  },
+)(observer(MobileView));

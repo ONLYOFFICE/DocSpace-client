@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/colors";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .header {
   position: relative;
@@ -35,27 +35,7 @@
   height: var(--section-header-height);
   min-height: var(--section-header-height);
 
-  @include tablet-and-below {
-    height: var(--section-header-height-tablet);
-    min-height: var(--section-header-height-tablet);
-
-    :global {
-      .header-container {
-        margin-bottom: 1px;
-        -webkit-tap-highlight-color: #{$tap-highlight};
-      }
-    }
-  }
-
-  @include mobile {
-    height: var(--section-header-height-mobile);
-    min-height: var(--section-header-height-mobile);
-    margin-inline-end: 0;
-  }
-
   box-sizing: border-box;
-
-  @include no-user-select;
 
   display: grid;
   align-items: center;
@@ -63,54 +43,45 @@
   width: 100%;
   max-width: 100%;
 
-  :global {
-    .header-container {
-      display: flex;
-    }
-  }
+  @include mixins.no-user-select;
 
   &.form-gallery {
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       height: var(--section-header-height);
       min-height: var(--section-header-height);
     }
   }
-}
 
-.filter {
-  @include tablet-and-below {
-    margin-inline-end: 16px;
+  @include mixins.tablet-and-below {
+    height: var(--section-header-height-tablet);
+    min-height: var(--section-header-height-tablet);
+
+    :global {
+      .header-container {
+        margin-bottom: 1px;
+        -webkit-tap-highlight-color: #{colors.$tap-highlight};
+      }
+    }
+  }
+
+  @include mixins.mobile {
+    height: var(--section-header-height-mobile);
+    min-height: var(--section-header-height-mobile);
+    margin-inline-end: 0;
+  }
+
+  :global {
+    .header-container {
+      display: flex;
+    }
   }
 }
 
 .footer {
   margin-top: 40px;
 
-  @include mobile {
+  @include mixins.mobile {
     margin-top: 32px;
-  }
-}
-
-.styledDropDown {
-  margin-bottom: 8px;
-
-  background-color: #555f65;
-
-  :global {
-    .progress-list {
-      padding: 0px 8px;
-    }
-
-    .progress-list.withHover:hover {
-      background-color: #657077;
-    }
-  }
-
-  &:active {
-    background-color: #555f65;
-  }
-  @media (hover: hover) {
-    background-color: #555f65;
   }
 }
 
@@ -132,15 +103,16 @@
   }
 }
 
-.infoPanelWrapper {
+.infoPanelWrapper,
+.chatWrapper {
   height: auto;
   width: auto;
   background: var(--info-panel-blur-color);
   z-index: 300;
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     z-index: 309;
     position: fixed;
     inset: 0;
@@ -161,7 +133,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     position: absolute;
     border: none;
     inset-inline-end: 0;
@@ -169,7 +141,7 @@
     max-width: calc(100vw - 69px);
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 0;
     height: calc(100% - 64px);
     width: 100vw;
@@ -181,7 +153,7 @@
   display: none;
   min-height: 64px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     display: block;
   }
 }
@@ -191,7 +163,7 @@
   width: 100%;
   z-index: 1;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     width: calc(100% + 32px);
     position: sticky;
     top: var(--section-header-height-tablet);
@@ -201,7 +173,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     position: sticky;
     top: var(--section-header-height-mobile);
   }
@@ -218,12 +190,12 @@
 
   outline: none;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     padding-block: 0 16px;
     padding-inline: 24px 0;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     padding-inline: 24px 8px;
   }
 }
@@ -240,9 +212,9 @@
     }
 
     .section-wrapper-content {
-      @include paddingStyles;
       flex: 1 0 auto;
       outline: none;
+      @include paddingStyles;
 
       .section-wrapper {
         display: flex;
@@ -251,7 +223,7 @@
       }
 
       .files-tile-container {
-        @include desktop {
+        @include mixins.desktop {
           margin-top: 0px;
         }
       }
@@ -259,27 +231,6 @@
       .people-row-container,
       .files-row-container {
         margin-top: 0px;
-
-        @include desktop {
-          margin-top: -17px;
-        }
-
-        @include mobile {
-          margin-top: 0px;
-        }
-      }
-    }
-  }
-
-  &.isRowView {
-    :global {
-      .section-wrapper-content {
-        .people-row-container,
-        .files-row-container {
-          @include desktop {
-            margin-top: -15px;
-          }
-        }
       }
     }
   }
@@ -300,21 +251,13 @@
     }
   }
 
-  &.isTile {
-    :global {
-      .section-wrapper-content {
-        padding-inline-start: 20px;
-      }
-    }
-  }
-
   &.isSettingsView,
   &.isProfileView {
     :global {
       .section-wrapper-content {
         padding-top: 0;
 
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           padding-top: 0;
         }
       }
@@ -323,14 +266,14 @@
 
   &.isFormGallery {
     :global {
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         .section-wrapper-content {
           padding-block: 0 20px !important;
           padding-inline: 16px 0 !important;
         }
       }
 
-      @include mobile {
+      @include mixins.mobile {
         .section-wrapper-content {
           padding: 0px 16px 16px !important;
         }
@@ -367,14 +310,14 @@
     .drag-and-drop {
       width: 100%;
 
-      @include no-user-select;
+      @include mixins.no-user-select;
     }
   }
 
   &.withScroll {
     margin-inline-start: -20px;
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       margin-inline-start: -24px;
     }
   }
@@ -387,13 +330,13 @@
   &.withScroll {
     margin-inline-start: -20px;
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       margin-inline-start: -24px;
     }
   }
 
   &.isFormGallery {
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       margin-block: 0;
       margin-inline: -16px 0;
       padding: 0;
@@ -415,7 +358,7 @@
       padding-inline-end: 0;
       z-index: 201;
 
-      @include mobile {
+      @include mixins.mobile {
         min-width: 100vw;
         margin-inline-start: -16px;
         padding-inline-end: 16px;
@@ -426,6 +369,19 @@
       display: block;
       margin: 0;
     }
+  }
+}
+
+.isFixed {
+  position: sticky;
+  top: 61px;
+  background: var(--section-header-bg);
+  z-index: 201;
+  padding: 0 4px;
+  margin: 0 -4px !important;
+
+  @include mixins.mobile {
+    top: 53px;
   }
 }
 
@@ -440,7 +396,9 @@
   width: 100%;
   max-width: 100%;
 
-  @include tablet-and-below {
+  height: 100%;
+
+  @include mixins.tablet-and-below {
     width: 100%;
     max-width: 100vw !important;
     @include tabletView;
@@ -449,12 +407,12 @@
   &:not(.withBodyScroll) {
     padding-inline-start: 20px;
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       padding-inline-start: 16px;
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100vw !important;
     max-width: 100vw !important;
     padding-inline-start: 16px;
@@ -467,7 +425,7 @@
         flex-direction: column;
         padding-inline-start: 20px !important;
 
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           padding-inline-start: 16px !important;
         }
       }
@@ -485,16 +443,10 @@
       padding-inline: 20px;
       margin-inline: -20px -17px;
 
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         padding-inline: 16px;
         margin-inline: -16px;
       }
-    }
-  }
-
-  &.infoPanelVisible {
-    .progressBarContainer {
-      inset-inline-end: 424px;
     }
   }
 
@@ -527,7 +479,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     z-index: 200;
     bottom: 16px;
 
@@ -554,7 +506,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 16px;
     inset-inline-end: 16px;
 
@@ -733,5 +685,98 @@
         margin-inline-end: 8px;
       }
     }
+  }
+}
+
+.chatPanel {
+  height: 100%;
+
+  box-sizing: border-box;
+
+  width: 400px;
+  min-width: 400px;
+
+  background-color: var(--info-panel-bg);
+
+  border-inline-start: 1px solid var(--info-panel-border);
+
+  :global {
+    .scroll-body {
+      padding-bottom: 20px;
+    }
+  }
+
+  @include mixins.tablet-and-below {
+    position: absolute;
+    border: none;
+    inset-inline-end: 0;
+    width: 480px;
+    min-width: 480px;
+    z-index: 1000;
+  }
+
+  @include mixins.mobile {
+    bottom: 0;
+    height: calc(100% - 48px);
+    width: 100vw;
+    max-width: 100vw;
+    min-width: unset;
+  }
+
+  &.fullScreen {
+    @include mixins.desktop {
+      position: fixed;
+
+      right: 0;
+      bottom: 0;
+
+      // 250px is the width of the desktop article
+      width: calc(100% - 250px);
+
+      &.withSnackbar {
+        height: calc(100% - 64px);
+      }
+    }
+
+    width: 100%;
+
+    z-index: 1000;
+  }
+}
+
+.chatPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: 70px;
+
+  padding: 0 20px;
+
+  border-bottom: 1px solid var(--info-panel-border);
+
+  box-sizing: border-box;
+
+  @include mixins.tablet-and-below {
+    height: 62px;
+    padding: 0 16px;
+  }
+
+  @include mixins.mobile {
+    height: 54px;
+  }
+
+  .chatPanelHeaderTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .chatPanelHeaderButtons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-direction: row;
   }
 }

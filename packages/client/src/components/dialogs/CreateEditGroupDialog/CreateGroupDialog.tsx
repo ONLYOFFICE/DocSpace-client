@@ -26,8 +26,6 @@
 
 import { useState, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { observer, inject } from "mobx-react";
 
 import {
   ModalDialog,
@@ -37,8 +35,6 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
-import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
@@ -51,15 +47,9 @@ import { SelectMembersPanel } from "./sub-components/create-components/SelectMem
 interface CreateGroupDialogProps {
   visible: boolean;
   onClose: () => void;
-  getGroups: () => void;
 }
 
-const CreateGroupDialog = ({
-  visible,
-  onClose,
-  getGroups,
-}: CreateGroupDialogProps) => {
-  const navigate = useNavigate();
+const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
   const { t } = useTranslation([
     "Common",
     "PeopleTranslations",
@@ -142,14 +132,14 @@ const CreateGroupDialog = ({
     const groupManagerId = groupParams.groupManager?.id || undefined;
     const groupMembersIds = groupParams.groupMembers.map((gm) => gm.id);
 
-    createGroup(groupParams.groupName, groupManagerId, groupMembersIds)
-      .then(() => getGroups())
-      .then(() => navigate("/accounts/groups/filter"))
-      .catch((err) => toastr.error(err.message))
-      .finally(() => {
-        setIsLoading(false);
-        onClose();
-      });
+    try {
+      await createGroup(groupParams.groupName, groupManagerId, groupMembersIds);
+    } catch (err) {
+      toastr.error((err as Error).message);
+    } finally {
+      setIsLoading(false);
+      onClose();
+    }
   };
 
   return (
@@ -234,10 +224,4 @@ const CreateGroupDialog = ({
   );
 };
 
-export default inject<{ peopleStore: PeopleStore }>(({ peopleStore }) => {
-  const { getGroups } = peopleStore.groupsStore! as GroupsStore;
-
-  return {
-    getGroups,
-  };
-})(observer(CreateGroupDialog));
+export default CreateGroupDialog;

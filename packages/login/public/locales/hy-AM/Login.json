@@ -1,4 +1,5 @@
 {
+  "ChangePasswordSuccess": "Գաղտնաբառը հաջողությամբ փոխվել է",
   "CodeTitle": "Կոդն էլ․փոստով ուղարկվել է ձեզ",
   "ErrorInvalidText": "10 վայրկյանից Դուք կվերուղղորդվեք դեպի <1>{{productName}}</1>",
   "ForgotPassword": "Մոռացե՞լ եք Ձեր գաղտնաբառը․",

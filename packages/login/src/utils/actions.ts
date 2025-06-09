@@ -26,7 +26,7 @@
 
 "use server";
 
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 
 import {
   createRequest,
@@ -45,6 +45,7 @@ import {
   TThirdPartyProvider,
   TTimeZone,
   TVersionBuild,
+  TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import {
@@ -72,12 +73,17 @@ import {
   scopesHandler,
   companyInfoHandler,
   oauthSignInHelper,
+  invitationSettingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
+
+import { logger } from "@/../logger.mjs";
 
 const IS_TEST = process.env.E2E_TEST;
 
 export const checkIsAuthenticated = async () => {
-  const [request] = createRequest(["/authentication"], [["", ""]], "GET");
+  logger.debug(`Start GET /authentication`);
+
+  const [request] = await createRequest(["/authentication"], [["", ""]], "GET");
 
   const res = await fetch(request);
 
@@ -89,21 +95,29 @@ export const checkIsAuthenticated = async () => {
 };
 
 export async function getSettings() {
-  const [getSettings] = createRequest(
+  logger.debug(`Start GET /settings?withPassword=true`);
+
+  const [getSettings] = await createRequest(
     [`/settings?withPassword=true`],
     [["", ""]],
     "GET",
   );
 
   const settingsRes = IS_TEST
-    ? settingsHandler(headers())
+    ? settingsHandler(await headers())
     : await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
 
   if (settingsRes.status === 404) return "portal-not-found";
 
-  if (!settingsRes.ok) return;
+  if (!settingsRes.ok) {
+    logger.error(
+      `GET /settings?withPassword=true failed: ${settingsRes.statusText}`,
+    );
+
+    return;
+  }
 
   const settings = await settingsRes.json();
 
@@ -111,7 +125,9 @@ export async function getSettings() {
 }
 
 export async function getVersionBuild() {
-  const [getSettings] = createRequest(
+  logger.debug(`Start GET /settings/version/build`);
+
+  const [getSettings] = await createRequest(
     [`/settings/version/build`],
     [["", ""]],
     "GET",
@@ -127,7 +143,9 @@ export async function getVersionBuild() {
 }
 
 export async function getColorTheme() {
-  const [getColorTheme] = createRequest(
+  logger.debug(`Start GET /settings/colortheme`);
+
+  const [getColorTheme] = await createRequest(
     [`/settings/colortheme`],
     [["", ""]],
     "GET",
@@ -142,15 +160,19 @@ export async function getColorTheme() {
   return colorTheme.response as TGetColorTheme;
 }
 
-export async function getThirdPartyProviders() {
-  const [getThirdParty] = createRequest(
-    [`/people/thirdparty/providers`],
+export async function getThirdPartyProviders(inviteView: boolean = false) {
+  logger.debug(
+    `Start GET /people/thirdparty/providers?inviteView=${inviteView}`,
+  );
+
+  const [getThirdParty] = await createRequest(
+    [`/people/thirdparty/providers?inviteView=${inviteView}`],
     [["", ""]],
     "GET",
   );
 
   const res = IS_TEST
-    ? thirdPartyProviderHandler(headers())
+    ? thirdPartyProviderHandler(await headers())
     : await fetch(getThirdParty);
 
   if (!res.ok) return;
@@ -161,10 +183,16 @@ export async function getThirdPartyProviders() {
 }
 
 export async function getCapabilities() {
-  const [getCapabilities] = createRequest([`/capabilities`], [["", ""]], "GET");
+  logger.debug(`Start GET /capabilities`);
+
+  const [getCapabilities] = await createRequest(
+    [`/capabilities`],
+    [["", ""]],
+    "GET",
+  );
 
   const res = IS_TEST
-    ? capabilitiesHandler(headers())
+    ? capabilitiesHandler(await headers())
     : await fetch(getCapabilities);
 
   if (!res.ok) return;
@@ -175,7 +203,9 @@ export async function getCapabilities() {
 }
 
 export async function getSSO() {
-  const [getSSO] = createRequest([`/settings/ssov2`], [["", ""]], "GET");
+  logger.debug(`Start GET /settings/ssov2`);
+
+  const [getSSO] = await createRequest([`/settings/ssov2`], [["", ""]], "GET");
 
   const res = IS_TEST ? ssoHandler() : await fetch(getSSO);
 
@@ -187,10 +217,12 @@ export async function getSSO() {
 }
 
 export async function getUser() {
-  const hdrs = headers();
+  logger.debug(`Start GET /people/@self`);
+
+  const hdrs = await headers();
   const cookie = hdrs.get("cookie");
 
-  const [getUser] = createRequest([`/people/@self`], [["", ""]], "GET");
+  const [getUser] = await createRequest([`/people/@self`], [["", ""]], "GET");
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
   const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
@@ -204,12 +236,65 @@ export async function getUser() {
   return user.response as TUser;
 }
 
-export async function getScopeList(jwtToken: string) {
-  const [getScopeList] = createRequest(
-    [`/scopes`],
-    [["X-Signature", jwtToken]],
+export async function getUserByName() {
+  logger.debug(`Start GET /people/firstname.lastname`);
+
+  const hdrs = await headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getUser] = await createRequest(
+    [`/people/firstname.lastname`],
+    [["", ""]],
     "GET",
   );
+
+  if (!cookie?.includes("asc_auth_key")) return undefined;
+  const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
+
+  if (userRes.status === 401) return undefined;
+
+  if (!userRes.ok) return;
+
+  const user = await userRes.json();
+
+  return user.response as TUser;
+}
+
+export async function getUserByEmail(
+  userEmail: string,
+  confirmKey: string | null = null,
+) {
+  logger.debug(`Start GET /people/email?email=${userEmail}`);
+
+  const [getUserByEmai] = await createRequest(
+    [`/people/email?email=${userEmail}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? selfHandler(null, await headers())
+    : await fetch(getUserByEmai);
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+
+  if (user.response && user.response.displayName) {
+    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
+  }
+
+  return user.response as TUser;
+}
+
+export async function getScopeList(token?: string, userId?: string) {
+  logger.debug(`Start GET /scopes`);
+
+  const headers: [string, string][] = token
+    ? [["Cookie", `x-signature=${token}`]]
+    : [["", ""]];
+
+  const [getScopeList] = await createRequest([`/scopes`], headers, "GET");
 
   const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
 
@@ -221,12 +306,14 @@ export async function getScopeList(jwtToken: string) {
 }
 
 export async function getOAuthClient(clientId: string) {
+  logger.debug(`Start GET /clients/${clientId}/public/info`);
+
   try {
     const route = `/clients/${clientId}/public/info`;
 
-    const oauthClient = IS_TEST
-      ? getClientHandler()
-      : await fetch(createRequest([route], [["", ""]], "GET")[0]);
+    const request = await createRequest([route], [["", ""]], "GET");
+
+    const oauthClient = IS_TEST ? getClientHandler() : await fetch(request[0]);
 
     if (!oauthClient) return;
 
@@ -234,12 +321,15 @@ export async function getOAuthClient(clientId: string) {
 
     return { client: transformToClientProps(client) };
   } catch (e) {
+    logger.error(`error: ${e} getOAuthClient`);
     console.log(e);
   }
 }
 
 export async function getPortalCultures() {
-  const [getPortalCultures] = createRequest(
+  logger.debug(`Start GET /settings/cultures`);
+
+  const [getPortalCultures] = await createRequest(
     [`/settings/cultures`],
     [["", ""]],
     "GET",
@@ -258,6 +348,7 @@ export async function getPortalCultures() {
 
 export async function getConfig() {
   const baseUrl = getBaseUrl();
+  logger.debug(`Start GET ${baseUrl}/static/scripts/config.json`);
 
   const config = IS_TEST
     ? new Response(JSON.stringify({}))
@@ -267,7 +358,9 @@ export async function getConfig() {
 }
 
 export async function getCompanyInfoSettings() {
-  const [getCompanyInfoSettings] = createRequest(
+  logger.debug(`Start GET /settings/rebranding/company`);
+
+  const [getCompanyInfoSettings] = await createRequest(
     [`/settings/rebranding/company`],
     [["", ""]],
     "GET",
@@ -287,7 +380,9 @@ export async function getCompanyInfoSettings() {
 export async function getPortalPasswordSettings(
   confirmKey: string | null = null,
 ) {
-  const [getPortalPasswordSettings] = createRequest(
+  logger.debug(`Start GET /settings/security/password`);
+
+  const [getPortalPasswordSettings] = await createRequest(
     [`/settings/security/password`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
@@ -307,14 +402,16 @@ export async function getUserFromConfirm(
   userId: string,
   confirmKey: string | null = null,
 ) {
-  const [getUserFromConfirm] = createRequest(
+  logger.debug(`Start GET /people/${userId}`);
+
+  const [getUserFromConfirm] = await createRequest(
     [`/people/${userId}`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
   );
 
   const res = IS_TEST
-    ? selfHandler(null, headers())
+    ? selfHandler(null, await headers())
     : await fetch(getUserFromConfirm);
 
   if (!res.ok) return;
@@ -329,7 +426,9 @@ export async function getUserFromConfirm(
 }
 
 export async function getMachineName(confirmKey: string | null = null) {
-  const [getMachineName] = createRequest(
+  logger.debug(`Start GET /settings/machine`);
+
+  const [getMachineName] = await createRequest(
     [`/settings/machine`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
@@ -345,14 +444,16 @@ export async function getMachineName(confirmKey: string | null = null) {
 }
 
 export async function getIsLicenseRequired() {
-  const [getIsLicenseRequired] = createRequest(
+  logger.debug(`Start GET /settings/license/required`);
+
+  const [getIsLicenseRequired] = await createRequest(
     [`/settings/license/required`],
     [["", ""]],
     "GET",
   );
 
   const res = IS_TEST
-    ? licenseRequiredHandler(headers())
+    ? licenseRequiredHandler(await headers())
     : await fetch(getIsLicenseRequired);
 
   if (!res.ok) throw new Error(res.statusText);
@@ -363,7 +464,9 @@ export async function getIsLicenseRequired() {
 }
 
 export async function getPortalTimeZones(confirmKey: string | null = null) {
-  const [getPortalTimeZones] = createRequest(
+  logger.debug(`Start GET /settings/timezones`);
+
+  const [getPortalTimeZones] = await createRequest(
     [`/settings/timezones`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
@@ -381,7 +484,9 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
 }
 
 export async function getPortal() {
-  const [getPortal] = createRequest([`/portal`], [["", ""]], "GET");
+  logger.debug(`Start GET /portal`);
+
+  const [getPortal] = await createRequest([`/portal`], [["", ""]], "GET");
 
   const res = IS_TEST ? portalTimeZoneHandler() : await fetch(getPortal);
 
@@ -393,7 +498,9 @@ export async function getPortal() {
 }
 
 export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
-  const [getTfaSecretKeyAndQR] = createRequest(
+  logger.debug(`Start GET /settings/tfaapp/setup`);
+
+  const [getTfaSecretKeyAndQR] = await createRequest(
     [`/settings/tfaapp/setup`],
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
@@ -409,7 +516,9 @@ export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
 }
 
 export async function checkConfirmLink(data: TConfirmLinkParams) {
-  const [checkConfirmLink] = createRequest(
+  logger.debug(`Start POST /authentication/confirm`);
+
+  const [checkConfirmLink] = await createRequest(
     [`/authentication/confirm`],
     [["Content-Type", "application/json"]],
     "POST",
@@ -417,7 +526,7 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
   );
 
   const response = IS_TEST
-    ? confirmHandler(headers())
+    ? confirmHandler(await headers())
     : await fetch(checkConfirmLink);
 
   if (!response.ok) throw new Error(response.statusText);
@@ -433,72 +542,62 @@ export async function getAvailablePortals(data: {
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
 }) {
-  const config = await getConfig();
+  logger.debug(`Start POST /portal/signin`);
 
   const path = `/portal/signin`;
+  const request = await createRequest(
+    [path],
+    [["Content-Type", "application/json"]],
+    "POST",
+    JSON.stringify(data),
+    true,
+  );
 
-  if (config?.oauth2?.apiSystem.length) {
-    const urls: string[] = config.oauth2.apiSystem.map(
-      (url: string) => `https://${url}/apisystem${path}`,
-    );
-
-    const actions = await Promise.allSettled(
-      urls.map((url: string) =>
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-            ...new Headers(headers()),
-          },
-        }),
-      ),
-    );
-
-    const fullFiledActions = actions.filter(
-      (action) => action.status === "fulfilled",
-    );
-
-    if (fullFiledActions.length) {
-      const portalsRes = fullFiledActions
-        .filter((action) => {
-          return action.value.ok;
-        })
-        .map((action) => action.value);
-
-      if (!portalsRes.length) {
-        const portals = await fullFiledActions[0].value.json();
-
-        return { ...portals, status: fullFiledActions[0].status };
-      }
-
-      const portals = (await Promise.all(portalsRes.map((res) => res.json())))
-        .map(
-          (portals: {
-            tenants: { portalLink: string; portalName: string }[];
-          }) => portals.tenants,
-        )
-        .flat();
-
-      return portals;
-    }
-  }
-
-  const portalsRes = IS_TEST
-    ? oauthSignInHelper()
-    : await fetch(
-        createRequest(
-          [path],
-          [["Content-Type", "application/json"]],
-          "POST",
-          JSON.stringify(data),
-          true,
-        )[0],
-      );
+  const portalsRes = IS_TEST ? oauthSignInHelper() : await fetch(request[0]);
 
   const portals = await portalsRes.json();
 
   if (portals.error) return portals;
 
   return portals.tenants as { portalLink: string; portalName: string }[];
+}
+
+export async function getOauthJWTToken() {
+  logger.debug(`Start GET /security/oauth2/token`);
+
+  const [getJWTToken] = await createRequest(
+    [`/security/oauth2/token`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? new Response(JSON.stringify({ response: "123456" }))
+    : await fetch(getJWTToken);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const jwtToken = await res.json();
+
+  return jwtToken.response as string;
+}
+
+export async function getInvitationSettings() {
+  logger.debug(`Start GET /settings/invitationsettings`);
+
+  const [getInvitationSettings] = await createRequest(
+    [`/settings/invitationsettings`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? invitationSettingsHandler()
+    : await fetch(getInvitationSettings);
+
+  if (!res.ok) return;
+
+  const invitationSettings = await res.json();
+
+  return invitationSettings.response as TInvitationSettings;
 }

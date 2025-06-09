@@ -120,10 +120,12 @@ const RoomLogoCoverDialog = ({
   setRoomLogoCover,
   createRoomDialogVisible,
   editRoomDialogPropsVisible,
+  templateEventVisible,
   setCover,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
   roomLogoCoverDialogVisible,
+  setEnabledHotkeys,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover"]);
 
@@ -136,7 +138,7 @@ const RoomLogoCoverDialog = ({
     null,
   );
 
-  const contentRef = React.useRef();
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
   const recalculateHeight = React.useCallback(() => {
     const screenHeight = document.documentElement.clientHeight;
@@ -227,7 +229,11 @@ const RoomLogoCoverDialog = ({
 
     setCover(roomCoverDialogProps.color, icon);
 
-    if (createRoomDialogVisible || editRoomDialogPropsVisible) {
+    if (
+      createRoomDialogVisible ||
+      editRoomDialogPropsVisible ||
+      templateEventVisible
+    ) {
       onCloseRoomLogo(false);
       return;
     }
@@ -235,6 +241,32 @@ const RoomLogoCoverDialog = ({
     setRoomLogoCover();
     onCloseRoomLogo();
   };
+
+  React.useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Esc" || e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        onCloseRoomLogo();
+      }
+    };
+
+    document.addEventListener("keyup", onKeyDown, true);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyDown, true);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    setEnabledHotkeys(false);
+
+    return () => {
+      setEnabledHotkeys(true);
+    };
+  }, [roomLogoCoverDialogVisible]);
+
   return (
     <StyledModalDialog
       visible
@@ -281,7 +313,7 @@ const RoomLogoCoverDialog = ({
   );
 };
 
-export default inject<TStore>(({ dialogsStore }) => {
+export default inject<TStore>(({ dialogsStore, filesStore }) => {
   const {
     setCover,
     getCovers,
@@ -294,6 +326,7 @@ export default inject<TStore>(({ dialogsStore }) => {
     setRoomLogoCover,
     setRoomCoverDialogProps,
     roomCoverDialogProps,
+    templateEventVisible,
   } = dialogsStore;
   return {
     setRoomLogoCoverDialogVisible,
@@ -306,5 +339,7 @@ export default inject<TStore>(({ dialogsStore }) => {
     roomCoverDialogProps,
     createRoomDialogVisible: createRoomDialogProps.visible,
     editRoomDialogPropsVisible: editRoomDialogProps.visible,
+    templateEventVisible,
+    setEnabledHotkeys: filesStore.setEnabledHotkeys,
   };
 })(observer(RoomLogoCoverDialog));

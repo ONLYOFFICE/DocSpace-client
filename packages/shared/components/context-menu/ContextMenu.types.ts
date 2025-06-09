@@ -82,6 +82,8 @@ export type ContextMenuType = {
   withToggle?: boolean;
   checked?: boolean;
   badgeLabel?: string;
+  isPaidBadge?: boolean;
+  preventNewTab?: boolean;
 };
 
 export type SeparatorType = {
@@ -148,7 +150,7 @@ export interface ContextMenuProps {
       | React.ChangeEvent<HTMLInputElement>,
   ) => void;
   /** Displays a reference to another component */
-  containerRef?: React.MutableRefObject<HTMLDivElement | null>;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   /** Scales width by the container component */
   scaled?: boolean;
   /** Fills the icons with default colors */
@@ -160,7 +162,7 @@ export interface ContextMenuProps {
   rightOffset?: number;
   isRoom?: boolean;
   isArchive?: boolean;
-  ref?: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<ContextMenuRefType | null>;
   badgeUrl?: string;
   headerOnlyMobile?: boolean;
 }

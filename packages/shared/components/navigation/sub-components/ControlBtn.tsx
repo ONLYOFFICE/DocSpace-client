@@ -36,7 +36,7 @@ import { TControlButtonProps } from "../Navigation.types";
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
-import TrashWarning from "./TrashWarning";
+import WarningComponent from "./WarningComponent";
 
 const ControlButtons = ({
   isRootFolder,
@@ -66,13 +66,19 @@ const ControlButtons = ({
 
   // Visibility controls
   isDesktop,
-  isEmptyFilesList,
   showTitle,
-  isEmptyPage,
 
   // Tariff bar
   tariffBar,
   title,
+
+  // Guidance props
+  addButtonRef,
+  buttonRef,
+  contextButtonAnimation,
+  guidAnimationVisible,
+  setGuidAnimationVisible,
+  isContextButtonVisible,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -88,6 +94,7 @@ const ControlButtons = ({
 
     return (
       <Button
+        ref={buttonRef}
         className="navigation_button"
         label={navigationButtonLabel}
         size={ButtonSize.extraSmall}
@@ -98,18 +105,22 @@ const ControlButtons = ({
 
   const renderTariffBar = () => {
     if (!tariffBar || isFrame) return null;
+
+    const cloneProps = { title };
+
     return (
       <div className={styles.tariffWrapper}>
-        {React.cloneElement(tariffBar, { title })}
+        {React.cloneElement(tariffBar, cloneProps)}
       </div>
     );
   };
 
   const renderPlusButton = () => {
-    if (isMobile || !canCreate) return null;
+    if ((isMobile && !isFrame) || !canCreate) return null;
 
     return (
       <PlusButton
+        forwardedRef={addButtonRef}
         id="header_add-button"
         className="add-button"
         getData={getContextOptionsPlus}
@@ -123,7 +134,7 @@ const ControlButtons = ({
   };
 
   const renderContextButton = (visible: boolean) => {
-    if (!visible) return null;
+    if (!visible || isFrame) return null;
 
     return (
       <ContextButton
@@ -136,6 +147,9 @@ const ControlButtons = ({
         isMobile={isMobile || false}
         onCloseDropBox={onCloseDropBox}
         onContextOptionsClick={onContextOptionsClick}
+        contextButtonAnimation={contextButtonAnimation}
+        guidAnimationVisible={guidAnimationVisible}
+        setGuidAnimationVisible={setGuidAnimationVisible}
       />
     );
   };
@@ -153,25 +167,23 @@ const ControlButtons = ({
     );
   };
 
-  const renderTrashWarning = () => {
-    if (!isDesktop || !isTrashFolder || isEmptyPage) return null;
+  const renderWarning = () => {
+    if (!isDesktop || !titles?.warningText) return null;
 
-    return <TrashWarning title={titles?.trashWarning} />;
+    return <WarningComponent title={titles?.warningText} />;
   };
 
   return (
     <div
       className={styles.controlButtonContainer}
-      data-frame={isFrame}
+      data-is-frame={isFrame}
       data-show-title={showTitle}
     >
       {renderPlusButton()}
-      {renderContextButton(
-        (!isRootFolder || (isTrashFolder && !isEmptyFilesList)) ?? false,
-      )}
+      {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
-      {renderTrashWarning()}
+      {renderWarning()}
       {!isTabletView ? renderNavigationButton() : null}
       {renderTariffBar()}
       {isTabletView ? renderNavigationButton() : null}

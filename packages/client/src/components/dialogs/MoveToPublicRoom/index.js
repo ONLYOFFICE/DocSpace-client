@@ -128,13 +128,13 @@ const MoveToPublicRoomComponent = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>{t("Files:MoveToPublicRoom")}</Text>
+          <Text noSelect>{t("Common:MoveToPublicRoom")}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={t("Common:OKButton")}
           size="normal"
           primary

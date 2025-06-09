@@ -33,6 +33,7 @@ import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?u
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
+import FillFormsReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 // import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
@@ -52,7 +53,6 @@ import type {
   TFolder,
 } from "../../api/files/types";
 import type { TOption } from "../combobox";
-import { Strong } from "./Share.styled";
 
 export const getShareOptions = (
   t: TTranslation,
@@ -119,6 +119,12 @@ export const getAccessOptions = (
       label: t("Common:ReadOnly"),
       icon: EyeReactSvgUrl,
     },
+    available.FillForms && {
+      access: ShareAccessRights.FormFilling,
+      key: "filling",
+      label: "Filling",
+      icon: FillFormsReactSvgUrl,
+    },
     // available.Restrict && {
     //   access: ShareAccessRights.DenyAccess,
     //   key: "deny-access",
@@ -150,28 +156,28 @@ export const getRoomAccessOptions = (t: TTranslation) => {
   return [
     {
       access: ShareAccessRights.Editing,
-      description: t("Translations:RoleEditorDescription"),
+      description: t("Common:RoleEditorDescription"),
       key: "editing",
       label: t("Common:Editor"),
       icon: AccessEditReactSvgUrl,
     },
     {
       access: ShareAccessRights.Review,
-      description: t("Translations:RoleReviewerDescription"),
+      description: t("Common:RoleReviewerDescription"),
       key: "review",
-      label: t("Translations:RoleReviewer"),
+      label: t("Common:RoleReviewer"),
       icon: AccessReviewReactSvgUrl,
     },
     {
       access: ShareAccessRights.Comment,
-      description: t("Translations:RoleCommentatorDescription"),
+      description: t("Common:RoleCommentatorDescription"),
       key: "commenting",
       label: t("Commentator"),
       icon: AccessCommentReactSvgUrl,
     },
     {
       access: ShareAccessRights.ReadOnly,
-      description: t("Translations:RoleViewerDescription"),
+      description: t("Common:RoleViewerDescription"),
       key: "viewing",
       label: t("JavascriptSdk:Viewer"),
       icon: EyeReactSvgUrl,
@@ -269,13 +275,13 @@ export const getRoleNameByAccessRight = (
     case ShareAccessRights.Editing:
       return t("Common:Editor");
     case ShareAccessRights.Review:
-      return t("Translations:RoleReviewer");
+      return t("Common:RoleReviewer");
     case ShareAccessRights.Comment:
       return t("Common:Commentator");
     case ShareAccessRights.ReadOnly:
       return t("JavascriptSdk:Viewer");
     case ShareAccessRights.FormFilling:
-      return t("Translations:RoleFormFiller");
+      return t("Common:RoleFormFiller");
     default:
       return "";
   }
@@ -294,7 +300,7 @@ export const getTranslationDate = (
         i18nKey="LinkExpireAfter"
         ns="Common"
         values={{ date }}
-        components={{ 1: <strong /> }}
+        components={{ 1: <strong key="strong-expire-after" /> }}
       />
     );
   }
@@ -305,7 +311,7 @@ export const getTranslationDate = (
       i18nKey="LinkIsValid"
       ns="Common"
       values={{ date }}
-      components={{ 1: <strong /> }}
+      components={{ 1: <strong key="strong-link-valid" /> }}
     />
   );
 };
@@ -355,7 +361,7 @@ export const copyRoomShareLink = (
       ns="Common"
       i18nKey="RoomShareLinkRole"
       values={{ role }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-role" /> }}
     />
   );
 
@@ -370,14 +376,14 @@ export const copyRoomShareLink = (
       ns="Common"
       i18nKey="LinkIsValid"
       values={{ date: moment(expirationDate).format("lll") }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-date" /> }}
     />
   ) : null;
 
   toastr.success(
     <span>
       {roleText} {passwordText} {restrictionText} {date}
-      {date ? <Strong>.</Strong> : null}
+      {date ? <strong>.</strong> : null}
       {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <Link
           color={globalColors.lightBlueMain}
@@ -411,7 +417,7 @@ export const copyDocumentShareLink = (
       ns="Common"
       i18nKey="ShareLinkTitleInternal"
       values={{ productName: t("Common:ProductName"), access }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-internal" /> }}
     />
   ) : (
     <Trans
@@ -419,7 +425,7 @@ export const copyDocumentShareLink = (
       ns="Common"
       i18nKey="ShareLinkTitle"
       values={{ access }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-external" /> }}
     />
   );
   const date = getTranslationDate(expirationDate, t);
@@ -427,7 +433,7 @@ export const copyDocumentShareLink = (
   toastr.success(
     <span>
       {head} {date}
-      <Strong>.</Strong>
+      <strong>.</strong>
       {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <>
           &nbsp;
@@ -457,4 +463,14 @@ export const getExpirationDate = (
 
 export const getCreateShareLinkKey = (userId: string, fileType?: FileType) => {
   return `link-create-document-${fileType ?? ""}-${userId}`;
+};
+
+export const evenPrimaryLink = (fileLinks: TFileLink[]) => {
+  return fileLinks.map((link) => link?.sharedTo?.primary).includes(true);
+};
+
+export const DEFAULT_CREATE_LINK_SETTINGS = {
+  access: ShareAccessRights.ReadOnly,
+  internal: false,
+  diffExpirationDate: null,
 };

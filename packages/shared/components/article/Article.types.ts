@@ -40,12 +40,16 @@ export type ArticleHeaderProps = {
   isBurgerLoading: boolean;
   withCustomArticleHeader: boolean;
   currentDeviceType: DeviceType;
+  showBackButton: boolean;
 };
 
 export type ArticleAppsProps = {
   showText: boolean;
   withDevTools: boolean;
   logoText: string;
+  downloaddesktopUrl: string;
+  officeforandroidUrl: string;
+  officeforiosUrl: string;
 };
 
 export type ArticleHideMenuButtonProps = {
@@ -59,6 +63,7 @@ export type ArticleDevToolsBarProps = {
   articleOpen: boolean;
   currentDeviceType: DeviceType;
   toggleArticleOpen: TToggleArticleOpen;
+  path?: string;
 };
 
 export type ArticleZendeskProps = {
@@ -112,4 +117,6 @@ export type ArticleProps = ArticleProfileProps &
     standalone?: boolean;
     currentTariffPlanTitle?: string;
     trialDaysLeft?: number;
+
+    limitedAccessDevToolsForUsers: boolean;
   };

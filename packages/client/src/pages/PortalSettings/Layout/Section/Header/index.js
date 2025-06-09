@@ -30,7 +30,7 @@ import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touc
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { useTheme } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -182,7 +182,7 @@ const SectionHeaderContent = (props) => {
     switch (key) {
       case "DNSSettings":
         return isCustomizationAvailable;
-      case "RestoreBackup":
+      case "Common:RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "BrandName":
         return isCustomizationAvailable || standalone;
@@ -247,10 +247,7 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const onBackToParent = () => {
-    const newArrayOfParams = getArrayOfParams();
-    newArrayOfParams.splice(-1, 1);
-    const newPath = newArrayOfParams.join("/");
-    navigate(newPath);
+    navigate(-1);
   };
 
   const onToggleSelector = (isOpen = !selectorIsOpen) => {

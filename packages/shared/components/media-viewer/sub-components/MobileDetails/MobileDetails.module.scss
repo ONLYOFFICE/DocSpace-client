@@ -64,6 +64,16 @@
       fill: var(--mobile-details-icon-color);
     }
   }
+
+  .title {
+    font-weight: 600;
+    margin-top: 6px;
+    width: calc(100% - 100px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--mobile-details-text-color);
+  }
 }
 
 .mobileClose {
@@ -76,14 +86,4 @@
   position: fixed;
   inset-inline-end: 22px;
   top: 22px;
-}
-
-.title {
-  font-weight: 600;
-  margin-top: 6px;
-  width: calc(100% - 100px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--mobile-details-text-color);
 }

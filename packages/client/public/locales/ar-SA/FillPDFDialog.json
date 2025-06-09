@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "تعبئة",
   "FillOutDescription": "تعبئة الحقول في النموذج الأصلي في نافذة المحرر.",
   "FillOutTitle": "تعبئة النموذج بنفسك",
-  "FillPDFDialogTitle": "تعبئة حسب",
-  "ShareCollectButtonLabel": "نسخ للغرفة",
-  "ShareCollectDescription": "شارك نموذجك وإجمع الردود عبر غرفة تعبئة النموذج.",
-  "ShareCollectTitle": "مشاركة"
+  "FillPDFDialogTitle": "تعبئة حسب"
 }

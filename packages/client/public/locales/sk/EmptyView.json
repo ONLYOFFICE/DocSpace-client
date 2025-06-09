@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "V tejto časti sa zobrazia vaše naposledy zobrazené alebo upravené dokumenty.",
   "EmptyRootRoomUserDescription": "Tu sa zobrazí zdieľaná miestnosť.",
   "EmptyRootRoomUserTitle": "Zatiaľ tu nie sú žiadne miestnosti",
+  "EmptyTemplatesDescription": "Môžete vytvoriť šablónu z miestnosti v časti Miestnosť",
+  "EmptyTemplatesTitle": "Zatiaľ tu nie sú žiadne šablóny",
   "FormFolderDefaultDescription": "Vložte sem formuláre PDF alebo ich nahrajte z {{productName}} alebo zariadenia.",
   "FormFolderDefaultTitle": "Zatiaľ tu nie sú žiadne formuláre",
   "FormFolderDefaultUserDescription": "Formuláre, ktoré nahrali administrátori, sa budú zobrazovať tu.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importovať údaje do {{productName}} z {{organizationName}} Workspace, Google Workspace alebo Nextcloud.",
   "MigrationDataTitle": "Údaje o migrácii",
   "PublicRoomEmptyTitle": "Vitajte vo Verejnej miestnosti",
+  "SectionsUploadDescription": "Nahrať akékoľvek typy súborov z {{sectionNameFirst}} alebo {{sectionNameSecond}}",
   "SendInvitationLetter": "Odoslať pozvánku na pridanie nových členov do portálu",
   "ShareOptionDescription": "Skopírujte verejný odkaz na prístup alebo pozvite ďalších používateľov do miestnosti, aby mohli začať vypĺňať formuláre.",
   "ShareOptionTitle": "Zdieľať miestnosť",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Nahrať zo zariadenia",
   "UploadDevicePDFFormOptionDescription": "Nahrávajte pripravený formulár PDF do miestnosti zo svojho zariadenia.",
   "UploadDevicePDFFormOptionTitle": "Nahrať zo zariadenia",
-  "UploadFromPortalDescription": "Nahrávajte akékoľvek typy súborov z Dokumentov alebo Miestností",
   "UploadFromPortalTitle": "Nahrať z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte pripravený PDF formulár dostupný v {{productName}} a nahrajte ho do miestnosti.",
-  "UserEmptyDescription": "Súbory a priečinky nahrané administrátormi sa objavia tu.",
   "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti"
 }

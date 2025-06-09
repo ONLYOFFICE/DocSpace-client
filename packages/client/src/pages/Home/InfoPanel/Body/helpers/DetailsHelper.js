@@ -34,10 +34,10 @@ import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Tag } from "@docspace/shared/components/tag";
 import { decode } from "he";
+import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
-  getFileTypeName,
   getRoomTypeName,
 } from "SRC_DIR/helpers/filesUtils";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -223,7 +223,7 @@ class DetailsHelper {
         return this.getItemIndex();
 
       case "Type":
-        return this.getItemType();
+        return this.getItemType(this.t);
       case "Storage Type":
         return this.getItemStorageType();
       case "Storage account":
@@ -278,11 +278,11 @@ class DetailsHelper {
       : link(name, onClick);
   };
 
-  getItemType = () => {
+  getItemType = (t) => {
     return text(
       this.item.isRoom
-        ? getRoomTypeName(this.item.roomType, this.t)
-        : getFileTypeName(this.item.fileType),
+        ? getRoomTypeName(this.item.roomType, t)
+        : getFileTypeName(this.item.fileType, t),
     );
   };
 
@@ -298,8 +298,8 @@ class DetailsHelper {
 
   getItemContent = () => {
     return text(
-      `${this.t("Translations:Folders")}: ${this.item.foldersCount} | ${this.t(
-        "Translations:Files",
+      `${this.t("Common:Folders")}: ${this.item.foldersCount} | ${this.t(
+        "Common:Files",
       )}: ${this.item.filesCount}`,
     );
   };
@@ -328,8 +328,9 @@ class DetailsHelper {
           }),
         )
       : text(
-          this.t("Files:WillBeMovedToTrash", {
+          this.t("Files:ScheduledTrashMove", {
             date: parseAndFormatDate(this.item.expired, this.culture),
+            sectionName: this.t("Common:TrashSection"),
           }),
         );
   };

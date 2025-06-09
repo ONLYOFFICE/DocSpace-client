@@ -23,8 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { matchPath } from "react-router-dom";
-import type { Location } from "react-router-dom";
+import { matchPath } from "react-router";
+import type { Location } from "react-router";
 
 import Filter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
@@ -34,6 +34,7 @@ import { EmployeeStatus, Events } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TTranslation } from "@docspace/shared/types";
 import {
+  getLinkToShareGuest,
   resendInvitesAgain,
   resendUserInvites,
 } from "@docspace/shared/api/people";
@@ -42,7 +43,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import type UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import config from "PACKAGE_FILE";
 
-import { showEmailActivationToast } from "../people-helpers";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+import {
+  showEmailActivationToast,
+  showSuccessCopyContantLink,
+} from "../people-helpers";
 
 import {
   CONTACTS_ROUTE,
@@ -248,6 +253,16 @@ export const onInviteMultipleAgain = (t: TTranslation) => {
       toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
     )
     .catch((err) => toastr.error(err));
+};
+
+export const shareGuest = (
+  item: ReturnType<UsersStore["getPeopleListItem"]>,
+  t: TTranslation,
+) => {
+  getLinkToShareGuest(item.id).then((link) => {
+    copyShareLink(link);
+    showSuccessCopyContantLink(t);
+  });
 };
 
 export const getContactsView = (location?: Location): TContactsTab => {

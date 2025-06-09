@@ -51,6 +51,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
   },
+  serverExternalPackages: [
+    "nconf",
+    "date-and-time",
+    "winston",
+    "winston-cloudwatch",
+    "winston-daily-rotate-file",
+    "@aws-sdk/client-cloudwatch-logs",
+  ],
   compiler: {
     styledComponents: true,
   },
@@ -67,17 +75,6 @@ const nextConfig = {
     },
   },
   webpack: (config) => {
-    console.log("ENV", { env: process.env });
-
-    // Add resolve configuration for shared package
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve?.alias,
-        "@docspace/shared": path.resolve(__dirname, "../shared"),
-      },
-    };
-
     config.devtool = "source-map";
 
     if (config.mode === "production") {
@@ -149,7 +146,7 @@ const nextConfig = {
               {
                 name: "preset-default",
                 params: {
-                  overrides: { removeViewBox: false },
+                  overrides: { removeViewBox: false, cleanupIds: false },
                 },
               },
             ],
@@ -170,6 +167,7 @@ const nextConfig = {
 
     return config;
   },
+  devIndicators: false,
 };
 
 module.exports = nextConfig;

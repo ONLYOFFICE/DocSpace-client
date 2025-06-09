@@ -25,20 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import { ColorTheme, ThemeId } from "../color-theme";
-import StyledLoadingButton from "../color-theme/sub-components/StyledLoadingButton";
-import StyledCircle from "../color-theme/sub-components/StyledCircle";
+import classNames from "classnames";
+
 import type { LoadingButtonProps } from "./LoadingButton.types";
+import styles from "./LoadingButton.module.scss";
 
 const LoadingButton: React.FC<LoadingButtonProps> = ({
-  id,
-  className,
-  style,
   percent = 0,
   onClick,
   inConversion = false,
   loaderColor,
   backgroundColor,
+  isDefaultMode,
 }) => {
   const [isAnimation, setIsAnimation] = useState<boolean>(true);
 
@@ -55,34 +53,47 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
   }, [isAnimation]);
 
   return (
-    <ColorTheme
-      id={id}
-      className={className}
-      style={style}
+    <div
+      style={{ "--circle-fill-color": loaderColor } as React.CSSProperties}
+      className={classNames(styles.loadingButtonContainer, {
+        [styles.defaultMode]: isDefaultMode,
+      })}
       onClick={onClick}
-      themeId={ThemeId.LoadingButton}
-      loaderColor={loaderColor}
+      data-testid="loading-button-container"
     >
-      <StyledCircle
-        percent={percent}
-        inConversion={inConversion}
-        isAnimation={isAnimation}
+      <div
+        className={classNames(styles.circle, {
+          [styles.isProgressZero]: percent === 0,
+          [styles.isAnimation]: isAnimation,
+          [styles.inConversion]: inConversion,
+        })}
+        style={{ "--loading-button-percent": percent } as React.CSSProperties}
       >
-        <div className="circle__mask circle__full">
-          <div className="circle__fill" />
+        <div
+          className={classNames(
+            styles.circleMask,
+            styles.circleFull,
+            "circle__mask circle__full",
+          )}
+        >
+          <div className={classNames(styles.circleFill, "circle__fill")} />
         </div>
-        <div className="circle__mask">
-          <div className="circle__fill" />
+        <div className={classNames(styles.circleMask, "circle__mask")}>
+          <div className={classNames(styles.circleFill, "circle__fill")} />
         </div>
 
-        <StyledLoadingButton
-          className="loading-button"
-          backgroundColor={backgroundColor}
+        <div
+          style={
+            {
+              "--loading-button-custom-bg": backgroundColor,
+            } as React.CSSProperties
+          }
+          className={classNames(styles.loadingButton, "loading-button")}
         >
           {!inConversion ? <>&times;</> : null}
-        </StyledLoadingButton>
-      </StyledCircle>
-    </ColorTheme>
+        </div>
+      </div>
+    </div>
   );
 };
 

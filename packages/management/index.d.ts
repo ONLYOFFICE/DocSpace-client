@@ -24,5 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-declare module "@docspace/*";
-declare module "client/*";
+import type { TColorScheme, TTheme } from "@docspace/shared/themes";
+
+declare module "*.ico?url" {
+  const content: string;
+  export default content;
+}
+
+declare module "styled-components" {
+  export interface DefaultTheme extends TTheme {
+    currentColorScheme?: TColorScheme;
+  }
+}
+
+declare global {
+  declare module "*.svg?url" {
+    const content: string;
+    export default content;
+  }
+
+  type TDocSpaceConfig = {
+    management?: {
+      checkDomain?: boolean;
+    };
+  };
+
+  type TNewPortalData = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    portalName: string;
+  };
+
+  type TNewPortalResponse = {
+    tenant: TPortals;
+  };
+
+  interface Window {
+    DocSpaceConfig?: TDocSpaceConfig;
+  }
+}
+

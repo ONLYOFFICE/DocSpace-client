@@ -1,0 +1,113 @@
+name: Frontend common tests
+
+on:
+  push:
+    branches: [develop, release/v*, hotfix/v*]
+    paths: [packages/**, common/**]
+  pull_request:
+    branches: [develop, release/v*, hotfix/v*]
+    paths: [packages/**, common/**]
+jobs:
+  playwright-login:
+    name: "Login e2e tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/login/compose.yaml
+          up-flags: --build --force-recreate
+          services: tests-ci
+          test-container: tests-ci
+          test-command: npx playwright test
+  playwright-sdk:
+    name: "SDK e2e tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/sdk/compose.yaml
+          up-flags: --build --force-recreate
+          services: tests-ci
+          test-container: tests-ci
+          test-command: npx playwright test
+  eslint:
+    name: "Lint tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.3.0
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build translations
+        run: pnpm build:translations
+      - name: Lint clients
+        run: pnpm lint
+  # unit-tests:
+  #   name: "Unit tests"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: enable corepack
+  #       run: corepack enable
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: "22.x"
+  #         cache: "pnpm"
+  #     - name: Clear pnpm cache
+  #       run: pnpm cache clean
+  #     - name: Install dependencies
+  #       run: pnpm install
+  #     - name: Run unit tests
+  #       run: pnpm test
+  common:
+    name: "Common tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:images
+  colors:
+    name: "Colors tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:colors
+  translations-skip-base-languages:
+    name: "Translations tests (skip base languages)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test:skip-base-languages

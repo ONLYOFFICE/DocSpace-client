@@ -17,6 +17,10 @@
       "path": "packages/doceditor",
     },
     {
+      "name": "📚 @docspace/sdk",
+      "path": "packages/sdk",
+    },
+    {
       "name": "🗂 @docspace/management",
       "path": "packages/management",
     },
@@ -177,6 +181,21 @@
             "label": "Build",
             "task": "Frontend | build",
             "tooltip": "🛠️ Start the \"frontend build\" task",
+          },
+          {
+            "label": "Build:lite",
+            "task": "Frontend | build:lite",
+            "tooltip": "🛠️ Start the \"frontend build:lite (client, login, doceditor)\" task",
+          },
+          {
+            "label": "Build and start prod",
+            "task": "Frontend | build-and-start-prod",
+            "tooltip": "🛠️ Start the \"frontend build and start production\" task",
+          },
+          {
+            "label": "Build and start prod:lite",
+            "task": "Frontend | build-and-start-prod:lite",
+            "tooltip": "🛠️ Start the \"frontend build and start production lite (client, login, doceditor)\" task",
           },
           {
             "label": "Start",

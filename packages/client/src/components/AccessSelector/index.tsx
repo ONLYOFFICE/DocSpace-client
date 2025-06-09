@@ -31,14 +31,15 @@ import { isMobile } from "@docspace/shared/utils";
 import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
-import { getAccessOptions } from "../panels/InvitePanel/utils";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
+
 import StyledAccessSelector from "./AccessSelector.styled";
 
 interface AccessSelectorProps {
   t: TTranslation;
   roomType: RoomsType;
   onSelectAccess: (access: any) => void;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   defaultAccess: number;
   isOwner: boolean;
   isAdmin: boolean;
@@ -168,8 +169,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           isAside={isMobileView}
           setIsOpenItemAccess={setIsOpenItemAccess}
           manualY="0px"
-          withoutBackground={isMobileView}
-          withBackground={!isMobileView}
+          withBackground={isMobileView}
           withBlur={isMobileView}
           isDisabled={isDisabled}
           isSelectionDisabled={isSelectionDisabled}

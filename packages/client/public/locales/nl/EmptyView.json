@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Uw laatst bekeken of bewerkte documenten worden in deze sectie weergegeven.",
   "EmptyRootRoomUserDescription": "De gedeelde kamer wordt hier weergegeven.",
   "EmptyRootRoomUserTitle": "Er zijn hier nog geen kamers",
+  "EmptyTemplatesDescription": "U kunt een sjabloon maken van een kamer in de Kamer sectie",
+  "EmptyTemplatesTitle": "Hier zijn nog geen sjablonen",
   "FormFolderDefaultDescription": "Plaats hier PDF formulieren of upload ze vanaf {{productName}} of apparaat.",
   "FormFolderDefaultTitle": "Hier zijn nog geen formulieren ",
   "FormFolderDefaultUserDescription": "De formulieren die door de beheerders zijn geüpload, worden hier weergegeven.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Importeer gegevens naar uw {{productName}} vanuit {{organizationName}} Workspace, Google Workspace of Nextcloud.",
   "MigrationDataTitle": "Migratiegegevens",
   "PublicRoomEmptyTitle": "Welkom in de Openbare kamer",
+  "SectionsUploadDescription": "Upload bestanden van elk type uit {{sectionNameFirst}} of {{sectionNameSecond}}",
   "SendInvitationLetter": "Stuur een uitnodigingsbrief om nieuwe leden aan het portaal toe te voegen",
   "ShareOptionDescription": "Kopieer een openbare toegangslink of nodig andere gebruikers uit in de kamer om het formulier invulproces te starten.",
   "ShareOptionTitle": "Deel een kamer",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Uploaden vanaf uw Apparaat",
   "UploadDevicePDFFormOptionDescription": "Upload een gereed PDF formulier naar de kamer vanaf uw apparaat.",
   "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
-  "UploadFromPortalDescription": "Upload elk type bestand vanuit Documenten of Kamers",
   "UploadFromPortalTitle": "Uploaden van {{productName}}",
   "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
-  "UserEmptyDescription": "Bestanden en mappen die door admins zijn geüpload verschijnen hier.",
   "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
 }

@@ -44,7 +44,6 @@ const DEFAULT_SEARCH_TYPE: boolean | null = null; // withSubfolders
 const DEFAULT_SEARCH: string | null = null;
 const DEFAULT_AUTHOR_TYPE: string | null = null;
 const DEFAULT_ROOM_ID: number | null = null;
-const DEFAULT_SELECTED_ITEM = {};
 const DEFAULT_FOLDER = "@my";
 const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
 const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
@@ -71,10 +70,48 @@ const APPLY_FILTER_OPTION = "applyFilterOption";
 const EXTENSION = "extension";
 const SEARCH_AREA = "searchArea";
 const KEY = "key";
+const DATE = "date";
 
 // TODO: add next params
 // subjectGroup bool
 // subjectID
+
+const getOtherSearchParams = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  const filterSearchParams = [
+    SEARCH_TYPE,
+    AUTHOR_TYPE,
+    FILTER_TYPE,
+    ROOM_ID,
+    SEARCH,
+    SORT_BY,
+    SORT_ORDER,
+    VIEW_AS,
+    PAGE,
+    PAGE_COUNT,
+    FOLDER,
+    SEARCH_IN_CONTENT,
+    EXCLUDE_SUBJECT,
+    APPLY_FILTER_OPTION,
+    EXTENSION,
+    SEARCH_AREA,
+    KEY,
+    DATE,
+  ];
+
+  filterSearchParams.forEach((param) => {
+    const keys = Array.from(searchParams.keys());
+    const keyToDelete = keys.find(
+      (key) => key.toLowerCase() === param.toLowerCase(),
+    );
+    if (keyToDelete) {
+      searchParams.delete(keyToDelete);
+    }
+  });
+
+  return searchParams.toString();
+};
 
 class FilesFilter {
   page: number;
@@ -99,8 +136,6 @@ class FilesFilter {
 
   total: number;
 
-  selectedItem: { key?: string | number };
-
   folder: string;
 
   searchInContent: boolean | null;
@@ -117,8 +152,8 @@ class FilesFilter {
 
   key: string | null = null;
 
-  static getDefault(total = DEFAULT_TOTAL) {
-    return new FilesFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
+  static getDefault(pageCount = DEFAULT_PAGE_COUNT, total = DEFAULT_TOTAL) {
+    return new FilesFilter(DEFAULT_PAGE, pageCount, total);
   }
 
   static getFilter(location: Location) {
@@ -177,7 +212,6 @@ class FilesFilter {
       search,
       roomId,
       authorType,
-      defaultFilter.selectedItem,
       folder,
       searchInContent,
       excludeSubject,
@@ -202,7 +236,6 @@ class FilesFilter {
     search = DEFAULT_SEARCH,
     roomId = DEFAULT_ROOM_ID,
     authorType = DEFAULT_AUTHOR_TYPE,
-    selectedItem = DEFAULT_SELECTED_ITEM,
     folder = DEFAULT_FOLDER,
     searchInContent = DEFAULT_SEARCH_IN_CONTENT,
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
@@ -222,7 +255,6 @@ class FilesFilter {
     this.roomId = roomId;
     this.authorType = authorType;
     this.total = total;
-    this.selectedItem = selectedItem;
     this.folder = folder;
     this.searchInContent = searchInContent;
     this.excludeSubject = excludeSubject;
@@ -341,12 +373,28 @@ class FilesFilter {
     dtoFilter[SORT_BY] = sortBy;
     dtoFilter[SORT_ORDER] = sortOrder;
 
+    const otherSearchParams = getOtherSearchParams();
+
     const str = toUrlParams(dtoFilter, true);
-    return str;
+    return `${str}&${otherSearchParams}`;
   };
 
   getLastPage() {
     return Math.ceil(this.total / this.pageCount) - 1;
+  }
+
+  isFiltered() {
+    return Boolean(
+      this.filterType ||
+        this.withSubfolders ||
+        this.search ||
+        this.roomId ||
+        this.authorType ||
+        this.searchInContent ||
+        this.excludeSubject ||
+        this.applyFilterOption ||
+        this.extension,
+    );
   }
 
   clone() {
@@ -362,7 +410,6 @@ class FilesFilter {
       this.search,
       this.roomId,
       this.authorType,
-      this.selectedItem,
       this.folder,
       this.searchInContent,
       this.excludeSubject,
@@ -384,7 +431,6 @@ class FilesFilter {
       this.sortOrder === filter.sortOrder &&
       this.viewAs === filter.viewAs &&
       this.page === filter.page &&
-      this.selectedItem.key === filter.selectedItem.key &&
       this.folder === filter.folder &&
       this.pageCount === filter.pageCount &&
       this.searchInContent === filter.searchInContent &&

@@ -1,5 +1,5 @@
-@import "../../../styles/mixins.scss";
-@import "../../../styles/variables/index.scss";
+@use "../../../styles/mixins";
+@use "../../../styles/variables";
 
 .row {
   cursor: default;
@@ -46,7 +46,7 @@
       padding-inline: 8px 1px;
       margin-inline-start: -4px;
 
-      @include tablet {
+      @include mixins.tablet {
         margin-inline-start: -6px;
       }
     }
@@ -95,7 +95,7 @@
   }
 }
 
-.modern .checkboxElement:hover {
+.modern:not(.mobile) .checkboxElement:hover {
   &:not(.isIndexEditingMode) {
     .checkbox {
       display: flex;
@@ -115,12 +115,12 @@
 
   min-width: var(--row-min-width);
 
-  @include tablet {
-    white-space: nowrap;
-    overflow: var(--row-overflow);
-    text-overflow: var(--row-text-overflow);
-    height: var(--row-content-height);
-  }
+  // @include mixins.tablet-and-below {
+  //   white-space: nowrap;
+  //   overflow: var(--row-overflow);
+  //   text-overflow: var(--row-text-overflow);
+  //   height: var(--row-content-height);
+  // }
 }
 
 .contentElement {
@@ -141,23 +141,22 @@
   align-items: center;
   height: 100%;
   padding: var(--row-option-button-padding);
-  width: var(--manual-width);
 
   .expandButton > div:first-child {
     padding: var(--row-option-button-padding);
 
     margin-inline-end: 0px;
 
-    @include desktop {
+    @include mixins.desktop {
       margin-inline-end: -1px;
     }
 
-    @include mobile {
+    @include mixins.mobile {
       padding-inline-start: 10px;
     }
   }
 
-  @include tablet {
+  @include mixins.tablet {
     margin-top: unset;
   }
 }

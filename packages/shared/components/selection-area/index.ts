@@ -25,3 +25,4 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export { SelectionArea } from "./SelectionArea";
+export type { TOnMove, TArrayTypes } from "./SelectionArea.types";

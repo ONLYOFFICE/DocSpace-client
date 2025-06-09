@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import Section, { SectionProps } from "@docspace/shared/components/section";
 
@@ -53,6 +53,9 @@ export default inject(
     dialogsStore: any;
     infoPanelStore: any;
     indexingStore: any;
+    filesSettingsStore: any;
+    selectedFolderStore: any;
+    userStore: any;
   }) => {
     const {
       isDesktopClient: isDesktop,

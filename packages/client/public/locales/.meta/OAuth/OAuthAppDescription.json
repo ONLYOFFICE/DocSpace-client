@@ -1,0 +1,542 @@
+{
+  "key_path": "OAuthAppDescription",
+  "content": "Use OAuth 2.0 to access the {{organizationName}} {{productName}} API for authorization and further actions such as accessing files, etc. Here, you can register a new application, manage your created apps in the list, disable and enable them.",
+  "content_en_sha1_hash": "5b917a805367d09bce154eafce70cd6d2f77cc74",
+  "created_at": "2025-05-19T21:30:53.948Z",
+  "updated_at": "2025-06-08T12:02:32.770Z",
+  "comment": {
+    "text": "This translation key is used to display a brief description of OAuth 2.0 authorization and its usage in accessing files and managing applications for the {{organizationName}} {{productName}} API. It appears as part of the portal settings UI, possibly on a button or modal dialog related to application management.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:42:43.312Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
+      "line_number": 60,
+      "context": "const descText = (\n <Trans\n ns=\"OAuth\"\n t={t}\n i18nKey=\"OAuthAppDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
+      "line_number": 71,
+      "context": "const descText = (\n <Trans\n ns=\"OAuth\"\n t={t}\n i18nKey=\"OAuthAppDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}\n />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses commas (،) which are not typically used in this context. A more natural flow would be to use conjunctions or implied connections.",
+          "suggestion": "استخدم OAuth 2.0 للوصول إلى {{organizationName}} {{productName}} API للحصول على إذن وإجراءات أخرى مثل الوصول إلى الملفات وغيرها. هنا، يمكنك تسجيل تطبيق جديد وإدارة التطبيقات التي أنشأتها وتعطيلها وتفعيلها."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'إلخ' (etc.) is a direct transliteration from English and sounds slightly awkward in Arabic. A more natural Arabic equivalent would be 'وغيرها' or 'وما إلى ذلك'.",
+          "suggestion": "استخدم OAuth 2.0 للوصول إلى {{organizationName}} {{productName}} API للحصول على إذن وإجراءات أخرى مثل الوصول إلى الملفات و غيرها."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'تم إنشاؤها' is correct but somewhat formal. 'التي أنشأتها' flows better in this context.",
+          "suggestion": "استخدم OAuth 2.0 للوصول إلى {{organizationName}} {{productName}} API للحصول على إذن وإجراءات أخرى مثل الوصول إلى الملفات وغيرها. هنا، يمكنك تسجيل تطبيق جديد وإدارة التطبيقات التي أنشأتها في القائمة وتعطيلها وتمكينها."
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"daxil olmaq üçün\" (to enter) doesn't quite convey the meaning of 'access' in the context of an API. It implies physical entry rather than programmatic access.",
+          "suggestion": "Consider using a phrase like \"OAuth 2.0 vasitəsilə {{organizationName}} {{productName}} API-yə qoşulmaq üçün\" (to connect to the {{organizationName}} {{productName}} API using OAuth 2.0)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'proqramları' (programs) for 'apps' is technically correct but sounds less natural in this context. 'Tətbiqləri' is a more suitable and modern equivalent for 'apps' in Azerbaijani.",
+          "suggestion": "Replace 'proqramları' with 'tətbiqləri'."
+        },
+        {
+          "type": "formatting",
+          "description": "While the use of '{{organizationName}}' and '{{productName}}' is correct, ensuring consistency with other translated documentation is vital.",
+          "suggestion": "Verify the usage and placement of placeholders aligns with the overall translation style."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'activate and deactivate' can be improved for clarity and flow. 'Enable and disable' is more common in a technical context.",
+          "suggestion": "активирате и деактивирате"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation lacks a period at the end of the sentence \"Použijte OAuth 2.0 pro přístup k {{organizationName}} {{productName}} API pro autorizaci a další akce, jako je přístup k souborům atd.\" The English version has a period.",
+          "suggestion": "Použijte OAuth 2.0 pro přístup k {{organizationName}} {{productName}} API pro autorizaci a další akce, jako je přístup k souborům atd."
+        },
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses \"zakázat je a povolit\" which is grammatically correct but sounds a bit clunky.  A smoother phrasing might be better.",
+          "suggestion": "zakázat a povolit"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation uses \"atd.\" which is a common abbreviation for \"etcetera\" but can sound informal.  Considering the technical context, a more formal option might be preferred.",
+          "suggestion": "například"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'further actions such as accessing files, etc.' is translated somewhat literally. A more natural German phrasing might be preferred.",
+          "suggestion": "Verwenden Sie OAuth 2.0 für den Zugriff auf die {{organizationName}} {{productName}} API zur Autorisierung und weiteren Aktionen, wie beispielsweise den Zugriff auf Dateien."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'usw.' (und so weiter) is a bit informal. While acceptable, a more formal equivalent might be considered for a technical documentation context.",
+          "suggestion": "Consider replacing 'usw.' with 'z.B.' (z.B. - zum Beispiel) or 'wie z.B.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of 'κ.λπ.' (k.l.p.) is a less formal abbreviation for 'etc.' which might not be suitable for technical documentation. Consider a more formal equivalent.",
+          "suggestion": "Consider replacing 'κ.λπ.' with a more formal alternative like 'ακόμη και άλλα' or removing it and rephrasing the sentence to avoid the need for 'etc.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'αποκτήσετε πρόσβαση' (apoktisete prosbasa) is slightly awkward. While technically correct, a more natural phrasing might improve readability.",
+          "suggestion": "Consider using 'προσβάσετε' (prosvasete) instead of 'αποκτήσετε πρόσβαση' to create a smoother and more natural flow.  Example: 'Χρησιμοποιήστε το OAuth 2.0 για να προσβάσετε στο...' "
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'further actions such as accessing files, etc.' is too literal. A more natural Spanish phrasing would be more concise.",
+          "suggestion": "Utilice OAuth 2.0 para acceder a la API de {{organizationName}} {{productName}} para la autorización y otras acciones, como el acceso a archivos."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'manage your created apps' is awkward. It can be improved for better flow.",
+          "suggestion": "gestionar sus aplicaciones creadas en la lista"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'desactivarlas y activarlas' is a bit clunky. A more natural way to express this is using a single verb.",
+          "suggestion": "habilitarlas y deshabilitarlas"
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Finnish translation uses a colon (:) after 'OAuth 2.0' which isn't consistent with English usage. The English version doesn't have it.",
+          "suggestion": "Remove the colon after 'OAuth 2.0' to match the English style. Change 'OAuth 2.0:aa' to 'OAuth 2.0:a'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'application' as 'hakemus' is technically correct but 'sovellus' is a more common and natural term for an 'application' in a software context, especially regarding APIs.",
+          "suggestion": "Replace 'hakemuksen' with 'sovelluksen'."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"pour accéder à {{organizationName}} {{productName}}\" is grammatically awkward and doesn't accurately reflect the meaning of \"to access the {{organizationName}} {{productName}} API\". It should indicate access *of* the API, not just *to* the names.",
+          "suggestion": "Utilisez OAuth 2.0 pour accéder à l'API {{organizationName}} {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'les' is ambiguous. It's unclear whether it refers to 'applications créées' or simply 'apps'. It's better to be explicit.",
+          "suggestion": "Utilisez OAuth 2.0 pour accéder à l'API {{organizationName}} {{productName}} pour l'autorisation et d'autres actions telles que l'accès aux fichiers, etc. Ici, vous pouvez enregistrer une nouvelle application, gérer vos applications créées dans la liste, les désactiver et les activer."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \" հետագա գործողությունների համար\" (for further actions) is a bit clunky and literal. A more natural Armenian phrasing might be \"և այլ գործողություններ\" or \"և լրացուցիչ գործողություններ\".",
+          "suggestion": "Օգտագործեք OAuth 2.0՝ մուտք գործելու {{organizationName}} {{productName}} API՝ թույլտվության և այլ գործողությունների համար"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of 'և այլն' is quite generic.  It might be better to use more specific examples or simply omit it.",
+          "suggestion": "Օգտագործեք OAuth 2.0՝ մուտք գործելու {{organizationName}} {{productName}} API՝ թույլտվության և հետագա գործողությունների համար, ինչպես՝ ֆայլեր մուտք գործելու համար։"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'apice' (peak/vertex) is an incorrect translation of 'API'. API refers to Application Programming Interface, and should be translated as such.  While 'API' is often left untranslated, a more appropriate translation for the context might be 'interfaccia di programmazione delle applicazioni'.",
+          "suggestion": "Replace 'apice' with 'API' or 'interfaccia di programmazione delle applicazioni'."
+        },
+        {
+          "type": "formatting",
+          "description": "The double curly braces `{{...}}` used in the English content are also present in the Italian translation. While this preserves the templating, it's important to confirm with the client if this is desired, as it might be better to simply use single braces or no braces in the translated text depending on the final use case.",
+          "suggestion": "Verify with the client whether the double braces are required or if simpler braces/no braces are more appropriate."
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"APIを使用して\" is overly literal and clunky. It translates to \"using the API\" which isn't necessary. It should be rephrased for better flow.",
+          "suggestion": "APIを利用して (API o riyō shite)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence structure regarding actions after authorization is awkward.  \"認証やファイルへのアクセスなどのアクションを実行できます\" is verbose and doesn't flow naturally in Japanese. The meaning is correct but the phrasing can be improved.",
+          "suggestion": "認証を行い、ファイルへのアクセスなど、さまざまな操作を実行できます。(Shōnin o okonai, fairu e no accessu nado, samazamana sōsa o jikkō dekimasu.)"
+        },
+        {
+          "type": "formatting",
+          "description": "While `{{organizationName}}{{productName}}` is technically correct, combining the variables directly might not be ideal for readability. Depending on the branding guidelines, a space or a hyphen might be preferable.",
+          "suggestion": "Consider using {{organizationName}} {{productName}} or {{organizationName}}-{{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The sentence structure feels a bit long and complex for natural Korean. The phrase '인증 및 추가 작업(파일 액세스 등)을 위해' is a bit clunky. It's a bit of a direct translation that doesn’t flow naturally.",
+          "suggestion": "인증 및 파일 액세스와 같은 추가 작업을 위해 OAuth 2.0을 사용하여 {{organizationName}} {{productName}} API에 액세스하세요."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, '애플리케이션' (application) might feel slightly formal.  '앱' (app) is more commonly used in Korean for applications, especially in a technical context.",
+          "suggestion": "인증 및 파일 액세스와 같은 추가 작업을 위해 OAuth 2.0을 사용하여 {{organizationName}} {{productName}} API에 액세스하세요. 여기에서 새 앱을 등록하고 목록에서 만든 앱을 관리하고 비활성화하고 활성화할 수 있습니다."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ການກະດຳຕື່ມໆ\" is a bit awkward and doesn't clearly convey \"further actions\".  A more natural phrasing would be \"ການກະດຳຕື່ມອີ້ນີ້\" or similar.",
+          "suggestion": "ໃຊ້ OAuth 2.0 ເພື່ອເຂົ້າໃຊ້ API {{organizationName}} {{productName}} ເພື່ອການອະນຸມັດ ແລະການກະດຳຕື່ມອີ້ນີ້ ຢ່າງເຊັ່ນ ການເຂົ້າເຖິງເອກະສານ, ແລະອື່ນໆ."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ພວກມັນ' used to refer to the apps is a bit clunky. A more natural phrasing would use a pronoun that refers to the applications specifically.",
+          "suggestion": "ໃຊ້ OAuth 2.0 ເພື່ອເຂົ້າໃຊ້ API {{organizationName}} {{productName}} ເພື່ອການອະນຸມັດ ແລະການກະດຳຕື່ມອີ້ນີ້ ຢ່າງເຊັ່ນ ການເຂົ້າເຖິງເອກະສານ, ແລະອື່ນໆ. ນີ້, ທ່ານສາມາດລົງທະບຽນແອັບພລິເຄຊັນໃໝ່, ຈັດການແອັບຯທີ່ທ່ານສ້າງໄວ້ໃນບັນຊີລາຍຊື່, ປິດການນຳໃຊ້ ແລະເປີດການນຳໃຊ້ພວກເຂົາ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'access the ... API for authorization' is a bit awkward in Latvian. A more natural phrasing would be 'get authorization from the ... API' or 'authorize access to the ... API'.",
+          "suggestion": "Izmantojiet OAuth 2.0, lai iegūtu autorizāciju no {{organizationName}} {{productName}} API..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'lietotni' (application) is technically correct, but in the context of an OAuth app, a more specialized term like 'programmu' or even keeping it as 'OAuth lietotni' might be more precise.",
+          "suggestion": "Izmantojiet OAuth 2.0, lai piekļūtu {{organizationName}} {{productName}} API autorizācijai un turpmākām darbībām, piemēram, piekļūtu failiem utt. Šeit jūs varat reģistrēt jaunu programmu, pārvaldīt izveidotās OAuth lietotnes sarakstā, atspējot un iespējot tās."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The order of `organizationName` and `productName` is reversed in the Polish translation. It should be `{{organizationName}} {{productName}}` as in the English content.",
+          "suggestion": "Użyj OAuth 2.0, aby uzyskać dostęp do API {{organizationName}} {{productName}} w celu autoryzacji..."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'a także włączać je i wyłączać' is a bit clunky. It's grammatically correct but can be improved.",
+          "suggestion": "Użyj OAuth 2.0, aby uzyskać dostęp do API {{organizationName}} {{productName}} w celu autoryzacji i dalszych działań, takich jak dostęp do plików itp. Tutaj można zarejestrować nową aplikację, zarządzać utworzonymi aplikacjami na liście oraz włączać i wyłączać je."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"outras ações, como acessar arquivos, etc.\" is a bit clunky. A more natural phrasing would emphasize the purpose of the API access.",
+          "suggestion": "outras ações, como acesso a arquivos, etc."
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of 'ativá-los e desativá-los' can be slightly improved for flow.  Consider a more concise wording.",
+          "suggestion": "ativá-los ou desativá-los"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"outras ações, como acessar arquivos, etc.\" is a bit clunky and doesn't flow as naturally in Portuguese. It's a literal translation but could be improved.",
+          "suggestion": "outras ações, como acesso a arquivos, etc."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of commas after \"desabilitá-los\" and \"habilitá-los\" creates a slight pause that isn't necessary and disrupts the flow.  It's more common to omit them.",
+          "suggestion": "desabilitá-los e habilitá-los"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"și pentru a efectua alte acțiuni\" is a bit awkward. It implies actions beyond just accessing the API. A more accurate and fluent translation would be something like 'pentru autorizare și alte acțiuni'.",
+          "suggestion": "Folosiți autentificarea OAuth 2.0 pentru a accesa API-ul {{organizationName}} {{productName}} pentru autorizare și alte acțiuni..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'le activa și dezactiva' is grammatically correct but sounds slightly unnatural. It’s better to use a more formal phrasing.",
+          "suggestion": "Folosiți autentificarea OAuth 2.0 pentru a accesa API-ul {{organizationName}} {{productName}} pentru autorizare și alte acțiuni, cum ar fi accesarea fișierelor, etc. Aici puteți înregistra o nouă aplicație, gestiona aplicațiile existente din lista, să le activați și să le dezactivați."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'например, доступа к файлам' (e.g., accessing files) sounds slightly awkward. While not incorrect, it could be improved for flow.",
+          "suggestion": "например, для доступа к файлам"
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"අනවශ්‍ය බලය\" (anawashya balaya) translates to \"unnecessary power\" which doesn't accurately convey the meaning of \"authorization.\" Authorization implies permission, not unnecessary power.",
+          "suggestion": "Consider using a term like \"අවසරය\" (awasaraya) which translates to \"permission\" or \"authorization\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ලිපි වෙත පිවිසිය හැකිවීම\" (lipi wena pivisiya hakiyawima) is a very literal translation of \"accessing files\" and sounds awkward in Sinhala. It could be improved.",
+          "suggestion": "Consider using a more natural phrasing like \"ලේඛන ගොඩබවකට පිවිසිය හැකිවීම\" (lekahana godabawaka pivisiya hakiyawima) or simply \"ලේඛනගත ගොඩබවකට පිවිසිය හැකිවීම\" (lekhnagata godabawaka pivisiya hakiyawima)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure \"මෙහිදී, ඔබට නව යෙදුමක් ලියාපදිංචි කළ හැකි අතර, ඔබ නිර්මාණය කළ යෙදුම් ලැයිස්තුවෙන් කළමනාකරණය කර, ඒවා අක්‍රිය කිරීමට සහ නැවත සක්‍රිය කිරීමට හැකිය.\" is quite long and complex. It could be broken down into smaller, more readable sentences.",
+          "suggestion": "Consider splitting this into separate sentences: 'මෙහිදී, ඔබට නව යෙදුමක් ලියාපදිංචි කළ හැකිය. ඔබ නිර්මාණය කළ යෙදුම් ලැයිස්තුවෙන් කළමනාකරණය කළ හැකිය. ඒවා අක්‍රිය කිරීමට සහ නැවත සක්‍රිය කිරීමට හැකිය.' (Here, you can register a new application. You can manage the list of applications you created. You have the ability to deactivate and reactivate them.)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovak translation retains the 'atď.' abbreviation, which can sound informal. Consider replacing it with a more formal equivalent.",
+          "suggestion": "Consider replacing 'atď.' with 'napríklad' or rephrasing to avoid the abbreviation entirely. For example, 'ako napríklad prístup k súborom'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'dalšie úkony' is grammatically correct but could be more fluent. Using a more commonly used synonym would improve readability.",
+          "suggestion": "Consider replacing 'dalšie úkony' with 'ďalšie činnosti' or 'ďalšie operácie'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The placement of 'itd.' feels slightly awkward in Slovenian. While technically correct, it disrupts the flow.",
+          "suggestion": "Consider rephrasing the sentence to avoid 'itd.'. For example: 'Uporabite OAuth 2.0 za dostop do API-ja {{organizationName}} {{productName}} za avtorizacijo in nadaljnja dejanja, kot je dostop do datotek in druge funkcionalnosti.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation uses a hyphen after 'API-ју'. While not strictly incorrect, in modern Serbian, it's more common to omit the hyphen.",
+          "suggestion": "API-ју -> APIју"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'даље радње као што је приступ датотекама итд.' is slightly awkward. 'итд.' often implies more examples, but the only example given is accessing files.",
+          "suggestion": "даље радње као што је приступ датотекама или слично."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation lacks the use of quotation marks around 'OAuth 2.0'.",
+          "suggestion": "Koristite \"OAuth 2.0\" za pristup..."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"dalje radnje\" is slightly awkward. A more natural phrasing would be \"dalje akcije\" or simply omitting it.",
+          "suggestion": "Koristite OAuth 2.0 za pristup {{organizationName}} {{productName}} API-ju za autorizaciju i akcije kao što je pristup datotekama itd."
+        },
+        {
+          "type": "grammar",
+          "description": "The Serbian translation uses \"onemogućite ih\" which is grammatically correct, but a bit less formal. Depending on the tone, it could be improved.",
+          "suggestion": "Koristite OAuth 2.0 za pristup {{organizationName}} {{productName}} API-ju za autorizaciju i dalje radnje kao što je pristup datotekama itd. Ovde možete da registrujete novu aplikaciju, upravljate kreiranim aplikacijama na listi, onemogućite i omogućite aplikacije."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation lacks the double curly braces `{{...}}` used in the English content for placeholders like `organizationName` and `productName`.",
+          "suggestion": "Ensure the placeholders are consistently formatted as `{{organizationName}}` and `{{productName}}` in the Turkish translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation uses \"з метою авторизації\". A more natural and concise phrasing would be \"для авторизації\".",
+          "suggestion": "Використовуйте протокол OAuth 2.0 для доступу до API {{productName}} {{organizationName}} для авторизації й подальших дій..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'застосунок' is generally used for a more complete application. While technically correct, 'додаток' might be a better fit for describing an OAuth app in this context, making it sound less formal.",
+          "suggestion": "Використовуйте протокол OAuth 2.0 для доступу до API {{productName}} {{organizationName}} для авторизації й подальших дій, таких як отримання доступу до файлів тощо. Тут ви можете зареєструвати новий додаток, керувати створеними додатками зі списку, вмикати й вимикати їх."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"để ủy quyền\" (to authorize) is slightly awkward. A more natural phrasing would be \"để xác thực\" or \"để cấp quyền\".",
+          "suggestion": "Sử dụng OAuth 2.0 để truy cập API {{productName}} {{organizationName}} để xác thực và thực hiện các hành động khác như truy cập tập tin, v.v."
+        },
+        {
+          "type": "formatting",
+          "description": "The order of `{{organizationName}}` and `{{productName}}` seems reversed compared to the English content. While technically correct, it might be better to match the original order for consistency.",
+          "suggestion": "Sử dụng OAuth 2.0 để truy cập API {{organizationName}} {{productName}} để xác thực và thực hiện các hành động khác như truy cập tập tin, v.v."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'tập tin' is correctly spelled, but in this context, the more commonly used term 'tệp' might feel more natural.",
+          "suggestion": "Sử dụng OAuth 2.0 để truy cập API {{productName}} {{organizationName}} để xác thực và thực hiện các hành động khác như truy cập tệp, v.v."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

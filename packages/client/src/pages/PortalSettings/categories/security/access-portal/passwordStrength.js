@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
@@ -221,7 +221,7 @@ const PasswordStrength = (props) => {
       setShowReminder(false);
       saveToSessionStorage("currentPasswordSettings", data);
       saveToSessionStorage("defaultPasswordSettings", data);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -245,22 +245,24 @@ const PasswordStrength = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!passwordStrengthSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("SettingPasswordDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={passwordStrengthSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {passwordStrengthSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={passwordStrengthSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
       <Text fontSize="14px" fontWeight="600" className="length-subtitle">
         {t("PasswordMinLenght")}

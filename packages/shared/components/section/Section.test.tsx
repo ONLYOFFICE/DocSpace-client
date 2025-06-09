@@ -34,6 +34,10 @@ describe("<Section />", () => {
     maintenanceExist: false,
     snackbarExist: false,
     showText: true,
+    secondaryActiveOperations: [],
+    primaryOperationsArray: [],
+    clearSecondaryProgressData: () => {},
+    clearPrimaryProgressData: () => {},
   };
 
   it("renders all section components correctly", () => {

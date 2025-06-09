@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
@@ -40,13 +40,22 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
+import {
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
+} from "@docspace/shared/api/oauth";
+import {
+  getCookie,
+  deleteCookie,
+  setCookie,
+} from "@docspace/shared/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import OAuthClientInfo from "../../../components/ConsentInfo";
+import { getRedirectURL } from "@/utils";
 
 const StyledButtonContainer = styled.div`
   margin-top: 32px;
@@ -90,23 +99,52 @@ interface IConsentProps {
   scopes: TScope[];
   user: TUser;
   baseUrl?: string;
-  token: string;
-  redirect_url: string;
 }
 
-const Consent = ({
-  client,
-  scopes,
-  user,
-  baseUrl,
-  token,
-  redirect_url,
-}: IConsentProps) => {
+const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
   const { t } = useTranslation(["Consent", "Common"]);
   const router = useRouter();
 
   const [isAllowRunning, setIsAllowRunning] = React.useState(false);
   const [isDenyRunning, setIsDenyRunning] = React.useState(false);
+
+  React.useEffect(() => {
+    const redirect_url = getCookie("x-redirect-authorization-uri");
+    if (!redirect_url) return;
+
+    // Your cookie processing logic here
+    const decodedRedirectUrl = window.atob(
+      redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
+    );
+
+    deleteCookie("x-redirect-authorization-uri");
+    const splitedURL = decodedRedirectUrl.split("&scope=");
+    if (splitedURL[1])
+      setCookie("x-scopes", splitedURL[1].split("%20").join(";"));
+    setCookie("x-url", splitedURL[0]);
+  }, []);
+
+  React.useEffect(() => {
+    const validateToken = async () => {
+      if (!user.id) return;
+
+      const token = getOAuthJWTSignature(user.id);
+
+      if (token) return;
+
+      await setOAuthJWTSignature(user.id);
+
+      const redirect_url = getRedirectURL();
+
+      if (!redirect_url) {
+        return;
+      }
+
+      window.location.replace(redirect_url);
+    };
+
+    validateToken();
+  }, [user.id]);
 
   const onAllowClick = async () => {
     if (!("clientId" in client)) return;
@@ -128,16 +166,10 @@ const Consent = ({
         clientState = c.replace("client_state=", "").trim();
     });
 
-    await api.oauth.onOAuthSubmit(clientId, clientState, scope, token);
+    await api.oauth.onOAuthSubmit(clientId, clientState, scope, user.id);
 
     setIsAllowRunning(false);
   };
-
-  useEffect(() => {
-    fetch(redirect_url, {
-      headers: { "X-Signature": token, "X-Disable-Redirect": "true" },
-    });
-  }, [redirect_url, token]);
 
   const onDenyClick = async () => {
     if (!("clientId" in client)) return;
@@ -159,7 +191,7 @@ const Consent = ({
 
     deleteCookie("client_state");
 
-    await api.oauth.onOAuthCancel(clientId, clientState, token);
+    await api.oauth.onOAuthCancel(clientId, clientState, user.id);
 
     setIsDenyRunning(false);
   };

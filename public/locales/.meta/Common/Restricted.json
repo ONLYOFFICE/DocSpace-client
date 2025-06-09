@@ -1,0 +1,291 @@
+{
+  "key_path": "Restricted",
+  "content": "Restricted",
+  "content_en_sha1_hash": "aa2a08d2afa23e5f0a3fbe6e6ed494979fd09160",
+  "created_at": "2025-05-19T21:30:47.929Z",
+  "updated_at": "2025-05-26T07:57:32.555Z",
+  "comment": {
+    "text": "This translation key is used to display the label \"Restricted\" in the API Key settings. It appears as a tab title within the Create API Key Dialog and represents a permission level that restricts access to certain API scopes.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:41.055Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 240,
+      "context": "name: t(\"Common:All\"),\n content: null,\n },\n {\n id: \"restricted\",\n name: t(\"Common:Restricted\"),\n content: (\n <div className=\"api-key_permission-tab\">\n <div className=\"api-key_permission-container\">\n <Text fontSize=\"13px\" fontWeight={600} className=\"separator\">\n {t(\"OAuth:ScopesHeader\")}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/utils.ts",
+      "line_number": 129,
+      "context": "case \"all\":\n return t(\"Common:All\");\n case \"readonly\":\n return t(\"Common:ReadOnly\");\n case \"restricted\":\n return t(\"Common:Restricted\");\n \n default:\n return t(\"Common:All\");\n }\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Məhdudlaşdırıldı\" translates to \"restricted\" or \"limited\" in a more active/completed sense. \"Restricted\" can also mean 'subject to limitations' or 'having restrictions,' which might be better conveyed with a more passive or descriptive term.",
+          "suggestion": "Consider alternatives like \"Qısıtlanmış\" (Qısıtlanmış) or \"Mövcudiyyəti məhdud\" (Mövcudiyyəti məhdud) for a more accurate and nuanced translation depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Eingeschränkt' can mean 'restricted', it has a broader meaning encompassing 'limited' or 'curtailed'. 'Restricted' implies a more formal or legally imposed limitation. A more accurate translation depending on the context might be 'beschränkt' or 'eingeschränkte'.",
+          "suggestion": "Consider 'beschränkt' or 'eingeschränkte' for a closer match to the English 'restricted', depending on the specific nuance needed."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Սահմանափակված է\" (Sahmanapakvats e) literally translates to \"It is restricted\" or \"It is limited\". While related, it's not the most direct equivalent of 'Restricted'. A more accurate translation would be something like 'արգելված' (argelvad) which means 'prohibited' or 'restricted'.",
+          "suggestion": "արգելված"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"제한되었습니다\" (jehan-doewotseumnida) implies a state of being restricted, as in something *is* restricted.  'Restricted' as a label usually means 'restricted' as an adjective describing something. A more accurate translation would depend on the context, but \"제한된\" (jehan-doen) would be a more direct adjective translation.",
+          "suggestion": "Consider \"제한된\" (jehan-doen) or a more contextually appropriate adjective translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຫ້າມ\" (ham) translates to \"prohibited\" or \"forbidden\", which is a stricter meaning than \"restricted\". While \"restricted\" can imply prohibition, it can also mean limited or controlled. \"ຫ້າມ\" implies a complete ban.",
+          "suggestion": "Consider a more nuanced translation that captures the meaning of 'restricted,' such as \"ຈຳ ກັດ\" (jam kat - limited) or \"ກວດ ກາ\" (kuat ka - controlled/regulated), depending on the specific context."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Restricționare\" is a verb form (gerund/noun derived from the verb 'a restricționa') and doesn't directly translate the English adjective 'Restricted'. A more appropriate translation would be \"Restricționat\" which is the correct adjective form.",
+          "suggestion": "Restricționat"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'අවලංගු' (awalangu) primarily means 'invalid' or 'void'. While it can sometimes convey a sense of restriction, it's not the most accurate translation of 'Restricted'. A more suitable translation would depend on the specific context where 'Restricted' is used.",
+          "suggestion": "Consider alternative translations such as 'සීමිත' (seemitha - limited), 'අඩුපාඩු' (adupaadu - constrained), or 'නැවතී' (naaethei - restricted), depending on the context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Restrito Obmedzené' contains 'Restrito', which appears to be a Portuguese word and is not relevant to the English term 'Restricted'. 'Obmedzené' is a reasonable translation, but the inclusion of 'Restrito' makes the translation incorrect.",
+          "suggestion": "Obmedzené"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation contains two words separated by a space without proper capitalization or punctuation. This affects readability and potentially indicates a formatting error.",
+          "suggestion": "Obmedzené"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ограничено\" can be a valid translation for \"Restricted\", it carries a connotation of 'limited' or 'capped' rather than strictly 'restricted' in the sense of access or permissions. A more accurate translation might depend on the context, but \"Ограничено\" is not the best default choice.",
+          "suggestion": "Consider alternatives like \"Отворено само за обучен персонал\" (Open only to trained personnel) or \"Забрањено\" (Forbidden) depending on the intended meaning of 'Restricted'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ograničeno\" can sometimes translate to 'Restricted', it more commonly means 'Limited'. 'Restricted' implies a more strict or controlled restriction, whereas 'Ograničeno' suggests a limitation.",
+          "suggestion": "Consider \"Zabranjeno\" or \"Omeđeno\" for a more accurate translation of 'Restricted', depending on the specific context. 'Zabranjeno' implies a prohibition, while 'Omeđeno' suggests a boundary."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Đã hạn chế\" while technically accurate, doesn't quite capture the nuance of 'Restricted'. It implies something *was* restricted, whereas 'Restricted' can refer to a state of being.",
+          "suggestion": "Consider alternatives like \"Giới hạn\" or \"Bị hạn chế\" to better reflect the context depending on the surrounding text."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"受到限制\" (shòu dào xiàn zhì) while technically meaning 'subject to restriction' doesn't fully capture the nuance of 'Restricted'. It's more passive. 'Restricted' can imply limitations or prohibitions, which '受到限制' doesn't always convey.",
+          "suggestion": "Consider alternatives like \"限制\" (xiàn zhì - restriction) or \"受限\" (shòu xiàn - limited) depending on the specific context.  \"限制\" is often a good, concise option."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

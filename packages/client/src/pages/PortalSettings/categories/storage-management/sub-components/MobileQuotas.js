@@ -26,10 +26,11 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const MobileQuotasComponent = ({ isDisabled }) => {
   const { t } = useTranslation("Settings");
@@ -55,8 +56,9 @@ const MobileQuotasComponent = ({ isDisabled }) => {
         title={t("QuotaPerUser")}
         onClickLink={onClickLink}
         url="/portal-settings/management/disk-space/quota-per-user"
-        subtitle={t("SetDefaultUserQuota", {
+        subtitle={t("UserDefaultQuotaDescription", {
           productName: t("Common:ProductName"),
+          sectionName: t("Common:MyFilesSection"),
         })}
         isDisabled={isDisabled}
       />

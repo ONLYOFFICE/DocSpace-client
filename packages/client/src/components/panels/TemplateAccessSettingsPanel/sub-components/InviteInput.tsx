@@ -210,14 +210,14 @@ const InviteInput = ({
 
           <div className="list-item_content">
             <div className="list-item_content-box">
-              <SearchItemText primary disabled={shared}>
+              <SearchItemText $primary disabled={shared}>
                 {displayName || groupName}
               </SearchItemText>
             </div>
             <SearchItemText>{email}</SearchItemText>
           </div>
           {shared ? (
-            <SearchItemText info>{t("Common:Invited")}</SearchItemText>
+            <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
           ) : null}
         </DropDownItem>
       );
@@ -280,7 +280,6 @@ const InviteInput = ({
             onChange={onChange}
             placeholder={t("Files:AddAdminByNameOrEmail")}
             value={inputValue}
-            isAutoFocussed
             type={InputType.search}
             withBorder={false}
             isDisabled={isDisabled}

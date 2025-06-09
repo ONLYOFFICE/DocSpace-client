@@ -48,7 +48,7 @@ const StyledBody = styled.div`
     flex: 1;
     min-width: 0;
     .combo-button {
-      padding-inline: 8px 0;
+      padding-inline: ${(props) => (props.isLoading ? "16px 0" : "8px 0")};
       width: auto;
     }
   }
@@ -60,7 +60,7 @@ const StyledText = styled(Text)`
   max-width: max-content;
 
   padding-top: ${(props) =>
-    props.withoutLimitQuota || props.isReadOnly ? "0px" : "8px"};
+    props.$withoutLimitQuota || props.$isReadOnly ? "0px" : "8px"};
 
   white-space: nowrap;
   overflow: hidden;

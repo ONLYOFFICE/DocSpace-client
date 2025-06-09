@@ -37,6 +37,7 @@ import cloneDeep from "lodash/cloneDeep";
 import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
+import { Encoder } from "@docspace/shared/utils/encoder";
 import { StyledInviteUserBody } from "../StyledInvitePanel";
 
 type ItemProps = {
@@ -72,8 +73,8 @@ const Item = ({
 
     let newItems = cloneDeep(inviteItems);
 
-    if (newItems[itemIndex].access) {
-      newItems[itemIndex].access = ShareAccessRights.None;
+    if (newItems[itemIndex].templateAccess) {
+      newItems[itemIndex].templateAccess = ShareAccessRights.None;
     } else {
       newItems = newItems.filter((inviteItem) => inviteItem.id !== id);
     }
@@ -81,7 +82,7 @@ const Item = ({
     setInviteItems(newItems);
   };
 
-  const canDelete = !item.isOwner && !isDisabled;
+  const canDelete = !item.templateIsOwner && !isDisabled;
 
   return (
     <>
@@ -96,7 +97,7 @@ const Item = ({
       <StyledInviteUserBody>
         <div className="invite-input-item">
           <Text truncate noSelect className="invite-input-text">
-            {name}
+            {Encoder.htmlDecode(name ?? "")}
           </Text>
           <Text truncate noSelect className="invite-input-text_me">
             {item.isOwner ? `(${t("Common:MeLabel")})` : null}

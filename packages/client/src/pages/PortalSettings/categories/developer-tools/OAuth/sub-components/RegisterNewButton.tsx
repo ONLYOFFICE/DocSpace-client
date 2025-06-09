@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -33,9 +33,13 @@ import { DeviceType } from "@docspace/shared/enums";
 
 export interface RegisterNewButtonProps {
   currentDeviceType?: DeviceType;
+  isDisabled?: boolean;
 }
 
-const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
+const RegisterNewButton = ({
+  currentDeviceType,
+  isDisabled,
+}: RegisterNewButtonProps) => {
   const { t } = useTranslation(["OAuth"]);
 
   const navigate = useNavigate();
@@ -53,6 +57,7 @@ const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
       label={t("RegisterNewApp")}
       primary
       onClick={onClick}
+      isDisabled={isDisabled}
     />
   );
 };

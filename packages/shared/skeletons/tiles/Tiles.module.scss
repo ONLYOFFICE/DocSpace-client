@@ -1,19 +1,19 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/variables/colors.scss";
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
 
 .tile {
   position: relative;
   display: grid;
   width: 100%;
 
-  @include mobile {
+  @include mixins.mobile {
     &:nth-of-type(n + 3) {
       display: none;
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     &:nth-of-type(n + 8) {
       display: none;
     }
@@ -90,12 +90,24 @@
   grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
   grid-gap: 16px;
 
-  @include tablet-and-below {
-    grid-template-columns: repeat(auto-fill, 214px);
+  @include mixins.tablet-and-below {
+    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
   }
 
-  @include mobile {
-    grid-template-columns: repeat(auto-fill, minmax(214px, 1fr));
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  }
+
+  .tilesSkeletonRooms {
+    grid-template-columns: repeat(auto-fill, minmax(275mpx, 1fr));
+
+    @include mixins.tablet-and-below {
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    }
+
+    @include mixins.mobile {
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    }
   }
 }
 

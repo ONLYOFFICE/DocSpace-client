@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { type JSX } from "react";
 
 import {
   TEnhancedMigrationUser,
@@ -193,7 +193,7 @@ export interface UsersTableHeaderProps {
   sectionWidth?: number;
 
   userId?: string;
-  tableRef: React.RefObject<HTMLDivElement>;
+  tableRef: React.RefObject<HTMLDivElement | null>;
   columnStorageName: string;
   columnInfoPanelStorageName: string;
   isIndeterminate: boolean;
@@ -304,8 +304,8 @@ export interface AddEmailRowContentProps {
   sectionWidth: number | undefined;
   displayName: string;
   email: string;
-  emailInputRef: React.RefObject<HTMLDivElement>;
-  emailTextRef: React.RefObject<HTMLSpanElement>;
+  emailInputRef: React.RefObject<HTMLDivElement | null>;
+  emailTextRef: React.RefObject<HTMLSpanElement | null>;
   isChecked: boolean;
   isEmailOpen: boolean;
   setOpenedEmailKey: React.Dispatch<React.SetStateAction<string>>;
@@ -410,7 +410,7 @@ export interface TypeSelectRowContentProps {
   displayName: string;
   email: string;
   typeOptions: TOption[];
-  roleSelectorRef: React.RefObject<HTMLDivElement>;
+  roleSelectorRef: React.RefObject<HTMLDivElement | null>;
   type: string;
 }
 

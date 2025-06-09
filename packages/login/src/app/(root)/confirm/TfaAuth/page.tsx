@@ -27,17 +27,18 @@
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
-import { getStringFromSearchParams } from "@/utils";
+import { getStringFromSearchParams, encodeParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
 import TfaAuthForm from "./page.client";
 
 type TfaAuthProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: TfaAuthProps) {
-  const confirmKey = getStringFromSearchParams(searchParams);
+async function Page(props: TfaAuthProps) {
+  const searchParams = await props.searchParams;
+  const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;
 
   const [settings, user] = await Promise.all([

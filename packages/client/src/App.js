@@ -27,7 +27,7 @@
 // import "@docspace/shared/utils/wdyr";
 import React from "react";
 import { I18nextProvider } from "react-i18next";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
 
 import store from "SRC_DIR/store";

@@ -81,6 +81,7 @@ const InputBlock = React.memo(
     hoverColor,
     iconButtonClassName = "",
     isIconFill = false,
+    noIcon = false,
 
     // Event handlers
     onChange,
@@ -99,7 +100,7 @@ const InputBlock = React.memo(
     children,
     forwardedRef,
   }: InputBlockProps) => {
-    const [isFocus, setIsFocus] = useState(false);
+    const [isFocus, setIsFocus] = useState(isAutoFocussed);
     const iconButtonSize = useIconSize(size, iconSize);
 
     const handleChange = useCallback(
@@ -181,7 +182,7 @@ const InputBlock = React.memo(
 
         <TextInput {...inputProps} />
 
-        {!isDisabled ? (
+        {!noIcon && !isDisabled ? (
           <div className="append">
             <div
               className={`${styles.iconBlock} ${iconButtonClassName} input-block-icon`}

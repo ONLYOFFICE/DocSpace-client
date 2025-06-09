@@ -1,5 +1,4 @@
-@import "../../../styles/variables/devices.scss";
-@import "../../../styles/mixins.scss";
+@use "../../../styles/mixins";
 
 .container {
   margin: 0;
@@ -7,7 +6,7 @@
   padding-block: 0;
   padding-inline: 0 20px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     padding-block: 0;
     padding-inline: 16px;
     box-sizing: border-box;
@@ -20,7 +19,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
     padding: 0 16px;
     box-sizing: border-box;
@@ -35,19 +34,19 @@
   flex-direction: column;
   margin-bottom: 20px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-bottom: 24px;
   }
 
   :global(.article-folder-loader) {
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       width: 200px;
     }
   }
 
   &[data-show-text="false"] {
     :global(.article-folder-loader) {
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         width: 20px;
       }
     }
@@ -59,12 +58,12 @@
   width: 210px;
   padding: 0 0 16px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     height: 20px;
     padding: 0 0 24px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
     padding: 0 0 24px;
   }

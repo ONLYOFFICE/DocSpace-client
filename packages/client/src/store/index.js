@@ -35,12 +35,14 @@ import {
 } from "@docspace/shared/store";
 
 import PaymentStore from "./PaymentStore";
+import ServicesStore from "./ServicesStore";
 import StorageManagement from "./StorageManagement";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
+import GuidanceStore from "./GuidanceStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -102,6 +104,14 @@ const paymentStore = new PaymentStore(
   currentQuotaStore,
   paymentQuotasStore,
 );
+const servicesStore = new ServicesStore(
+  userStore,
+  currentTariffStatusStore,
+  currentQuotaStore,
+  paymentQuotasStore,
+  paymentStore,
+);
+
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore(authStore, thirdPartyStore);
@@ -164,6 +174,8 @@ const filesStore = new FilesStore(
   indexingStore,
 );
 
+const guidanceStore = new GuidanceStore();
+
 publicRoomStore.filesStore = filesStore;
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -199,6 +211,7 @@ const profileActionsStore = new ProfileActionsStore(
   userStore,
   settingsStore,
   currentTariffStatusStore,
+  infoPanelStore,
 );
 
 const peopleStore = new PeopleStore(
@@ -211,6 +224,10 @@ const peopleStore = new PeopleStore(
   profileActionsStore,
   dialogsStore,
   currentQuotaStore,
+  treeFoldersStore,
+  setupStore,
+  filesStore,
+  selectedFolderStore,
 );
 
 const uploadDataStore = new UploadDataStore(
@@ -248,6 +265,7 @@ const filesActionsStore = new FilesActionsStore(
 
 mediaViewerDataStore.filesActionsStore = filesActionsStore;
 secondaryProgressDataStore.filesActionsStore = filesActionsStore;
+versionHistoryStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
@@ -269,6 +287,7 @@ const contextOptionsStore = new ContextOptionsStore(
   userStore,
   indexingStore,
   clientLoadingStore,
+  guidanceStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -347,6 +366,7 @@ const store = {
   settingsStore,
 
   paymentStore,
+  servicesStore,
   wizardStore,
   setup: setupStore,
   confirm: confirmStore,
@@ -394,8 +414,11 @@ const store = {
   indexingStore,
   editGroupStore,
   avatarEditorDialogStore,
+  thirdPartyStore,
 
   brandingStore,
+
+  guidanceStore,
 };
 
 export default store;

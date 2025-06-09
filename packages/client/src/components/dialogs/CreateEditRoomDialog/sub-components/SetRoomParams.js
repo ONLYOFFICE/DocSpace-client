@@ -265,7 +265,6 @@ const SetRoomParams = ({
 
     if (newValue.match(folderFormValidation)) {
       setIsWrongTitle(true);
-      // toastr.warning(t("Files:ContainsSpecCharacter"));
     } else {
       setIsWrongTitle(false);
     }
@@ -409,7 +408,7 @@ const SetRoomParams = ({
   const inputTitle =
     isTemplateSelected || isTemplate
       ? `${t("Files:TemplateName")}:`
-      : `${t("Common:Name")}:`;
+      : `${t("Common:Label")}:`;
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
@@ -456,7 +455,7 @@ const SetRoomParams = ({
           onBlur={() => setForceHideRoomTypeDropdown(false)}
           errorMessage={
             isWrongTitle
-              ? t("Files:ContainsSpecCharacter")
+              ? t("Common:ContainsSpecCharacter")
               : t("Common:RequiredField")
           }
           onKeyUp={onKeyUp}
@@ -520,10 +519,11 @@ const SetRoomParams = ({
           roomParams={roomParams}
           isEdit={isEdit}
           isLoading={isDisabled}
+          isTemplate={isTemplate || fromTemplate}
         />
       ) : null}
 
-      {!isEdit && enableThirdParty && isPublicRoom ? (
+      {!isEdit && enableThirdParty && isPublicRoom && !fromTemplate ? (
         <ThirdPartyStorage
           t={t}
           roomTitle={roomParams.title}

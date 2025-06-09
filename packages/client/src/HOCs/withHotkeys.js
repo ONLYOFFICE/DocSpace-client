@@ -27,7 +27,7 @@
 import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
@@ -112,7 +112,8 @@ const withHotkeys = (Component) => {
 
     const onKeyDown = (e) => {
       const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
+      const isChatWidget = !!e.target.closest("langflow-chat-widget");
+      setIsEnabled(!someDialogIsOpen && !isChatWidget);
 
       if (isIndexEditingMode) return;
 
@@ -361,7 +362,9 @@ const withHotkeys = (Component) => {
             setDeleteDialogVisible(true);
           } else {
             const translations = {
-              deleteFromTrash: t("Translations:DeleteFromTrash"),
+              deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+                sectionName: t("Common:TrashSection"),
+              }),
             };
             deleteAction(translations).catch((err) => toastr.error(err));
           }

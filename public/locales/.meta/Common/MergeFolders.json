@@ -1,0 +1,237 @@
+{
+  "key_path": "MergeFolders",
+  "content": "Merge folders",
+  "content_en_sha1_hash": "439646bfda87b9202b75e3d4e4725a4a7226568f",
+  "created_at": "2025-05-19T21:30:46.467Z",
+  "updated_at": "2025-05-28T09:30:02.216Z",
+  "comment": {
+    "text": "Merge folders is used as a title in a folder merge dialog. It provides an alternative label when merging folders in conflict resolution. This key is typically displayed on a button or dialogue header.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:30.539Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
+      "line_number": 273,
+      "context": "const getOverwriteTitle = () => {\n return isFileDialog\n ? t(\"Common:OverwriteTitle\")\n : isFolderDialog\n ? t(\"Common:MergeFolders\")\n : t(\"Common:MergeAndOverwrite\");\n };\n \n const getOverwriteDescription = () => {\n return isFileDialog",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Îmbinare foldere\" is understandable, \"Îmbinare\" doesn't perfectly capture the meaning of 'Merge'. 'Merge' implies combining into a single folder, which 'Îmbinare' doesn't necessarily convey.",
+          "suggestion": "Consider using \"Combină foldere\" or \"Unifică foldere\" for a more accurate translation."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ෆෝල්ඩර' is a valid transliteration of 'folder' but might be improved for broader understanding. While technically correct, 'ගොනුවල' (gonuwal) might be more universally understood in Sinhala, referencing 'files'.",
+          "suggestion": "ගොනුවල ඒකාබද්ධ කරන්න"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ඒකාබද්ධ කරන්න' (ekābaddakannā) translates to 'merge', in the context of folders, 'එකතු කරන්න' (ekathu kanna) or 'එක කරන්න' (eka kanna) might be more natural and common expressions for merging folders.",
+          "suggestion": "ෆෝල්ඩර එකතු කරන්න"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Споји фолдере\" is understandable, a more precise and commonly used translation of \"Merge folders\" in Serbian would be \"Упореди и споји фолдере\" or simply \"Спојите фолдере\". The original translation lacks the imperative verb conjugation, which is standard for actions like this in software interfaces.",
+          "suggestion": "Спојите фолдере"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Spoji foldere\" is understandable, a more accurate and natural translation of \"Merge folders\" in Serbian (Latin) would be \"Ujedini foldere\" or \"Sakupi foldere\". \"Spoji\" generally means 'join' or 'connect,' which isn't quite the same as merging.",
+          "suggestion": "Ujedini foldere"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

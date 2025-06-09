@@ -1,0 +1,290 @@
+{
+  "key_path": "PrivacyButton",
+  "content": "Open {{organizationName}} Desktop Editors",
+  "content_en_sha1_hash": "dda3d5876529ea8bd3db3b35f56dd4b353fd26b2",
+  "created_at": "2025-05-19T21:30:53.411Z",
+  "updated_at": "2025-05-24T06:21:49.949Z",
+  "comment": {
+    "text": "This translation key contains a button label that opens desktop editors for an organization. The text includes a placeholder {{organizationName}} to be replaced with the actual organization name.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:43:47.754Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
+      "line_number": 191,
+      "context": "<Button\n onClick={onOpenEditorsPopup}\n size=\"medium\"\n primary\n isDisabled={isDisabled}\n label={t(\"PrivacyButton\", {\n organizationName: logoText,\n })}\n />\n \n <label className=\"privacy-rooms-text-separator\" />",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'tətbiqini açmaq' literally translates to 'to open application'. While understandable, a more natural and accurate translation for 'Open {{organizationName}} Desktop Editors' would be something like '{{organizationName}} Desktop Editors proqramlarını aç'.",
+          "suggestion": "{{organizationName}} Desktop Editors proqramlarını aç"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Отвори {{organizationName}} редактори на работен плот' is a literal translation that sounds awkward in Bulgarian. A more natural phrasing would be 'Отвори настолните редактори на {{organizationName}}' or 'Отвори редакторите на {{organizationName}} за десктоп'.",
+          "suggestion": "Отвори настолните редактори на {{organizationName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Desktop Editors\" is not accurately conveyed by \"աշխատասեղանի հավելվածի խմբագրիչները\". A more direct and natural translation would be something like \"աշխատասեղանի խմբագրիչներ\" (desktop editors) or \"աշխատասեղանի էդիտորներ\" (desktop editors, using the transliterated English term). The current translation includes \"հավելվածի\" (application's) which isn't necessary and adds unnecessary complexity.",
+          "suggestion": "Բացեք {{organizationName}} աշխատասեղանի խմբագրիչներ"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Italian translation 'Apri {{organizationName}} Desktop Editor' uses the singular form 'Editor' while the English uses the plural 'Editors'. This suggests an inconsistency.",
+          "suggestion": "Apri {{organizationName}} Desktop Editori"
+        }
+      ],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ເປີດແກ້ໄຂ {{organizationName}} Desktop' is not a natural or accurate translation of 'Open {{organizationName}} Desktop Editors'. The word 'Editors' is missing.  'ແກ້ໄຂ' means 'edit' and doesn't convey the meaning of 'Editors'.",
+          "suggestion": "ເປີດຕົວແກ້ໄຂຂອງ {{organizationName}} Desktop"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation doesn't accurately reflect the capitalization and structure of the English phrase. 'ເປີດ' (open) should likely be capitalized in the Lao translation to match the English capitalization of 'Open'.",
+          "suggestion": "ເປີດຕົວແກ້ໄຂຂອງ {{organizationName}} Desktop"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"pakiet\" (package) doesn't accurately convey the meaning of 'Open'. 'Open' implies launching or accessing, while 'package' suggests a collection of items. A more appropriate translation would focus on the action of opening, such as 'Uruchom' (launch) or 'Dostęp' (access).",
+          "suggestion": "Uruchom {{organizationName}} Desktop Editors"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses a Sinhala literal for 'Open'. While understandable, it might be more natural to use a more formal or common verb for 'Open' in this context. The literal translation feels a bit abrupt.",
+          "suggestion": "Consider alternatives like \"{{organizationName}} Desktop Editors වෙත පිවිසන්න\" (pivissanna - to access/enter) or \"{{organizationName}} Desktop Editors දැක්ඛන්න\" (dekkhanna - to view/see) depending on the intended nuance."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'namizne urejevalnike' is technically correct but could be improved for naturalness. A more idiomatic translation for 'Desktop Editors' might be 'Namizni urejevalci' or 'Urejevalci za namizje'.",
+          "suggestion": "Odpri {{organizationName}} namizni urejevalci"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Отвори {{organizationName}} Desktop Editors' is a literal transliteration and doesn't accurately reflect the intended meaning of 'Open'. A more natural Serbian translation would be 'Otvorite {{organizationName}} Desktop Editors'. The imperative form 'Otvorite' is more appropriate for a button label.",
+          "suggestion": "Otvorite {{organizationName}} Desktop Editors"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The translation uses the possessive suffix '-ı' after 'Editors'. It should be 'Editors'ı' for proper grammar in Turkish. While understandable, it's slightly awkward.  A more natural phrasing would be '{{organizationName}} Desktop Editors'ı aç'",
+          "suggestion": "{{organizationName}} Desktop Editors'ı aç"
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Відкрити настільні редактори {{organizationName}}' is a literal translation but might not be the most natural or idiomatic way to say \"Open {{organizationName}} Desktop Editors\" in Ukrainian. A more natural phrasing might be 'Відкрити редактори робочого столу {{organizationName}}' or 'Запустити настільні редактори {{organizationName}}'.",
+          "suggestion": "Відкрити редактори робочого столу {{organizationName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Desktop Editors' is not accurately translated. 'Desktop Editors' refers to software editors specifically designed for desktop computers. A more accurate translation would be 'Trình chỉnh sửa trên máy tính để bàn' or 'Phần mềm chỉnh sửa trên máy tính'.",
+          "suggestion": "Trình chỉnh sửa trên máy tính để bàn"
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of 'cho' in the translation feels slightly awkward. It could be more naturally integrated.",
+          "suggestion": "Mở Trình chỉnh sửa {{organizationName}} trên máy tính"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

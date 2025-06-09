@@ -73,7 +73,7 @@ const mockFile = {
   title: "test.jpg",
   fileExst: ".jpg",
   contentLength: "1024",
-  created: new Date(),
+  created: "2024-01-01T00:00:00.0000000Z",
   createdBy: {
     id: "1",
     displayName: "Test User",
@@ -81,7 +81,7 @@ const mockFile = {
     hasAvatar: false,
     profileUrl: "",
   },
-  updated: new Date(),
+  updated: "2024-01-01T00:00:00.0000000Z",
   updatedBy: {
     id: "1",
     displayName: "Test User",
@@ -94,6 +94,7 @@ const mockFile = {
   fileType: FileType.Image,
   folderId: 1,
   folderType: FolderType.USER,
+  fileEntryType: 2,
   modifiedBy: { id: "1", displayName: "Test User" },
   modified: new Date().toISOString(),
   pureContentLength: 1024,
@@ -118,6 +119,11 @@ const mockFile = {
     Review: false,
     SubmitToFormGallery: false,
     CustomFilter: false,
+    EditForm: false,
+    Comment: false,
+    CreateRoomFrom: false,
+    CopyLink: false,
+    Embed: false,
   },
   viewAccessibility: {
     WebEdit: true,

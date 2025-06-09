@@ -56,6 +56,8 @@ const PrivateRouteWrapper = ({
   roomId,
   isLoadedPublicRoom,
   isLoadingPublicRoom,
+  limitedAccessDevToolsForUsers,
+  standalone,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
@@ -77,13 +79,15 @@ const PrivateRouteWrapper = ({
       enablePortalRename={enablePortalRename!}
       identityServerEnabled={identityServerEnabled}
       limitedAccessSpace={limitedAccessSpace ?? null}
-      baseDomain={baseDomain}
-      displayAbout={displayAbout}
+      baseDomain={baseDomain!}
+      displayAbout={displayAbout!}
       validatePublicRoomKey={validatePublicRoomKey}
       publicRoomKey={publicRoomKey}
       roomId={roomId}
       isLoadedPublicRoom={isLoadedPublicRoom}
       isLoadingPublicRoom={isLoadingPublicRoom}
+      limitedAccessDevToolsForUsers={limitedAccessDevToolsForUsers!}
+      standalone={standalone}
     >
       {children}
     </PrivateRoute>
@@ -116,6 +120,8 @@ export default inject<TStore>(
       limitedAccessSpace,
       baseDomain,
       displayAbout,
+      limitedAccessDevToolsForUsers,
+      standalone,
     } = settingsStore;
 
     const {
@@ -149,6 +155,8 @@ export default inject<TStore>(
       roomId,
       isLoadedPublicRoom,
       isLoadingPublicRoom,
+      limitedAccessDevToolsForUsers,
+      standalone,
     };
   },
 )(observer(PrivateRouteWrapper));

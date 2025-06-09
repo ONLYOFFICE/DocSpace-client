@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, type JSX } from "react";
 
 import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
@@ -33,12 +33,14 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
+import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
 import { classNames, ObjectUtils, DomHelpers, isMobile } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 
 import { ToggleButton } from "../../toggle-button";
 import { Scrollbar } from "../../scrollbar";
+import { IconButton } from "../../icon-button";
 
 import {
   ContextMenuModel,
@@ -52,6 +54,7 @@ import styles from "../ContextMenu.module.scss";
 
 const SUBMENU_LIST_MARGIN = 4; // Indentation of the second level menu from the first level
 const SECTION_PADDING = 16; // Screen margin
+const MIN_SUBMENU_WIDTH = 240; // Minimum width for submenu on mobile devices
 
 type SubMenuProps = {
   model: ContextMenuModel[];
@@ -107,7 +110,8 @@ const SubMenu = (props: SubMenuProps) => {
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
     item: ContextMenuType,
   ) => {
-    const { disabled, url, onClick, items, action, label } = item;
+    const { disabled, url, onClick, items, action, label, preventNewTab } =
+      item;
 
     if (isMobile() && label && (items || item.onLoad)) {
       e.preventDefault();
@@ -123,7 +127,7 @@ const SubMenu = (props: SubMenuProps) => {
       return;
     }
 
-    if (!url) {
+    if (!url || (onClick && preventNewTab)) {
       e.preventDefault();
     }
 
@@ -167,6 +171,8 @@ const SubMenu = (props: SubMenuProps) => {
 
       if (root) subListWidth = subListWidth || widthMaxContent;
       else subListWidth = Math.max(subListWidth, widthMaxContent);
+    } else if (isMobile()) {
+      subListWidth = subListWidth || MIN_SUBMENU_WIDTH;
     }
 
     if (subMenuRef.current) {
@@ -175,6 +181,8 @@ const SubMenu = (props: SubMenuProps) => {
       if (!isMobile()) {
         if (root) subMenuRef.current.style.width = `${subListWidth}px`;
         else subMenuRef.current.style.width = `${subListWidth}px`;
+      } else {
+        setWidthSubMenu(subListWidth);
       }
 
       if (!isMobile() && !root) {
@@ -378,6 +386,14 @@ const SubMenu = (props: SubMenuProps) => {
       onClick(e);
     };
 
+    const checked =
+      item.checked && "isPortal" in item && item.isPortal ? (
+        <IconButton
+          className={classNames(iconClassName, "p-portal-icon")}
+          iconName={CheckIconURL}
+        />
+      ) : null;
+
     let content = (
       <a
         href={item.url || "#"}
@@ -388,19 +404,27 @@ const SubMenu = (props: SubMenuProps) => {
       >
         {icon}
         {label}
+        {checked}
         {subMenuIcon}
         {item.isOutsideLink ? (
           <OutsdideIcon className={subMenuIconClassName} />
         ) : null}
-        {item.badgeLabel ? (
+        {item.badgeLabel || item.isPaidBadge ? (
           <Badge
             label={item.badgeLabel}
             className={`${subMenuIconClassName} p-submenu-badge`}
-            backgroundColor={globalColors.lightBlueMain}
+            backgroundColor={
+              item.isPaidBadge
+                ? theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+                : globalColors.lightBlueMain
+            }
             fontSize="9px"
             fontWeight={700}
             borderRadius="50px"
             noHover
+            isPaidBadge={item.isPaidBadge}
             isHovered={false}
           />
         ) : null}
@@ -586,12 +610,17 @@ const SubMenu = (props: SubMenuProps) => {
             className,
             "not-selectable",
             styles.styledList,
-            { [styles.withSubMenu]: !!widthSubMenu },
+            { [styles.withSubMenu]: !!widthSubMenu || isMobile() },
           )}
           style={
             {
               "--list-height": `${height + paddingList}px`,
-              "--submenu-width": `${widthSubMenu}px`,
+              "--submenu-width": `${isMobile() ? widthSubMenu || MIN_SUBMENU_WIDTH : widthSubMenu}px`,
+              ...(isMobile() &&
+                !root && {
+                  width: `${widthSubMenu || MIN_SUBMENU_WIDTH}px`,
+                  minWidth: `${widthSubMenu || MIN_SUBMENU_WIDTH}px`,
+                }),
             } as React.CSSProperties
           }
         >

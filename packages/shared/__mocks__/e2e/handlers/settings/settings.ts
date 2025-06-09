@@ -5,6 +5,7 @@ import {
   HEADER_WIZARD_WITH_AMI_SETTINGS,
   HEADER_PORTAL_DEACTIVATE_SETTINGS,
   HEADER_NO_STANDALONE_SETTINGS,
+  HEADER_AUTHENTICATED_SETTINGS,
 } from "../../utils";
 
 const PATH = "settings";
@@ -38,14 +39,108 @@ export const settingsWizzard = {
     debugInfo: false,
     tenantStatus: 0,
     tenantAlias: "localhost",
-    forumLink: "https://forum.onlyoffice.com",
-    legalTerms:
-      "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
     isAmi: false,
+    externalResources: {
+      api: {
+        domain: "https://api.onlyoffice.com",
+        entries: {
+          docspace: "/docspace",
+          "javascript-sdk":
+            "/docspace/javascript-sdk/get-started/basic-concepts",
+          "plugins-sdk": "/docspace/plugins-sdk/get-started/basic-concepts",
+        },
+      },
+      common: {
+        entries: {
+          booktrainingemail: "",
+          documentationemail: "",
+          legalterms:
+            "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
+          license:
+            "https://help.onlyoffice.co/Products/Files/DocEditor.aspx?fileid=9318110&doc=S2RPck54RXJsd09QaTZiaFJvUWRwNjNaNE8rTE9LV3hnZmdoSm5Lcm94az0_IntcImVudHJ5XCI6XCI5MzE4MTEwXCIsXCJsaW5rXCI6XCJkOGVjZjdmMy1mY2E1LTQxZDYtYmM2Yi1kNDI4Mzk0YTNlMTdcIn0i0",
+          paymentemail: "sales@onlyoffice.com",
+          supportemail: "support@onlyoffice.com",
+        },
+      },
+      forum: {
+        domain: "https://forum.onlyoffice.com",
+      },
+      integrations: {
+        entries: {
+          drupal: "https://www.drupal.org/project/onlyoffice_docspace",
+          pipedrive:
+            "https://www.pipedrive.com/en/marketplace/app/onlyoffice-doc-space/4cb3b5d9d19a1918",
+          wordpress: "https://wordpress.org/plugins/onlyoffice-docspace/",
+          zapier: "https://zapier.com/apps/onlyoffice-docspace/integrations",
+          zoom: "https://marketplace.zoom.us/apps/OW6rOq-nRgCihG5eps_p-g",
+        },
+      },
+      site: {
+        domain: "https://www.onlyoffice.com/ru",
+        entries: {
+          allconnectors: "/all-connectors.aspx",
+          buydeveloper: "/post.ashx?type=buydocspacedeveloper",
+          buyenterprise: "/post.ashx?type=buydocspaceenterprise",
+          collaborationrooms: "/collaboration-rooms.aspx",
+          customrooms: "/custom-rooms.aspx",
+          demoorder: "/demo-order.aspx",
+          desktop: "/desktop.aspx",
+          docspace: "/docspace.aspx",
+          docspaceprices: "/docspace-prices.aspx",
+          downloaddesktop: "/download-desktop.aspx#desktop",
+          downloadmobile: "/download-desktop.aspx#mobile",
+          forenterprises: "/for-enterprises.aspx",
+          formfillingrooms: "/form-filling-rooms.aspx",
+          officeforandroid: "/office-for-android.aspx",
+          officefordrupal: "/office-for-drupal.aspx",
+          officeforios: "/office-for-ios.aspx",
+          officeforwordpress: "/office-for-wordpress.aspx",
+          officeforzapier: "/office-for-zapier.aspx",
+          officeforzoom: "/office-for-zoom.aspx",
+          openai: "/app-directory/openai",
+          privaterooms: "/private-rooms.aspx",
+          publicrooms: "/public-rooms.aspx",
+          registrationcanceled: "/registration-canceled.aspx",
+          seamlesscollaboration: "/seamless-collaboration.aspx",
+          subscribe: "/post.ashx",
+          wrongportalname: "/wrongportalname.aspx",
+        },
+      },
+      socialNetworks: {
+        entries: {
+          facebook: "https://www.facebook.com/pages/OnlyOffice/833032526736775",
+          instagram: "https://www.instagram.com/the_onlyoffice/",
+          tiktok: "https://vm.tiktok.com/ZMLXbFEyd/",
+          twitter: "https://twitter.com/ONLY_OFFICE",
+          youtube: "https://www.youtube.com/user/onlyofficeTV",
+        },
+      },
+      videoguides: {
+        domain: "https://helpcenter.onlyoffice.com/ru/video.aspx",
+        entries: {
+          activesessions: "https://youtu.be/QxrRtMDj2ZM",
+          archive: "https://youtu.be/WX-SN_nB4cI",
+          backup: "https://youtu.be/2ed2iSxLCwk",
+          createfiles: "https://youtu.be/1f9sl4u94v4",
+          fileversions: "https://youtu.be/_Br4aGP7f3c",
+          filterfiles: "https://youtu.be/zy5mPrf1DqY",
+          full: "https://youtu.be/rEurv8Mss0o",
+          hotkeys: "https://youtu.be/jclhTh5TXp0",
+          operationswithfiles: "https://youtu.be/E96rEIgDO8M",
+          playlist:
+            "https://www.youtube.com/playlist?list=PLCF48HEKMOYM8MBnwYs8q5J0ILMK9NzIx",
+          profile: "https://youtu.be/eJNHyjoc3lQ",
+          roles: "https://youtu.be/5tzRL9Kxj1Y",
+          rooms: "https://youtu.be/XBY2H9BaYDk",
+          security: "https://youtu.be/psxZ0fDXiUo",
+          whatis: "https://youtu.be/T8_hGjQR1Kk",
+        },
+      },
+    },
   },
   count: 1,
   links: [
@@ -63,8 +158,6 @@ export const settingsWizzardWithAmi = {
   ...settingsWizzard,
   response: { ...settingsWizzard.response, isAmi: true },
 };
-
-export const settingsAuth = {};
 
 export const settingsNoAuth = {
   response: {
@@ -91,14 +184,108 @@ export const settingsNoAuth = {
     debugInfo: false,
     tenantStatus: 0,
     tenantAlias: "localhost",
-    forumLink: "https://forum.onlyoffice.com",
-    legalTerms:
-      "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
-    licenseUrl: "https://www.gnu.org/licenses/agpl-3.0.en.html",
+
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
+    externalResources: {
+      api: {
+        domain: "https://api.onlyoffice.com",
+        entries: {
+          docspace: "/docspace",
+          "javascript-sdk":
+            "/docspace/javascript-sdk/get-started/basic-concepts",
+          "plugins-sdk": "/docspace/plugins-sdk/get-started/basic-concepts",
+        },
+      },
+      common: {
+        entries: {
+          booktrainingemail: "",
+          documentationemail: "",
+          legalterms:
+            "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
+          license:
+            "https://help.onlyoffice.co/Products/Files/DocEditor.aspx?fileid=9318110&doc=S2RPck54RXJsd09QaTZiaFJvUWRwNjNaNE8rTE9LV3hnZmdoSm5Lcm94az0_IntcImVudHJ5XCI6XCI5MzE4MTEwXCIsXCJsaW5rXCI6XCJkOGVjZjdmMy1mY2E1LTQxZDYtYmM2Yi1kNDI4Mzk0YTNlMTdcIn0i0",
+          paymentemail: "sales@onlyoffice.com",
+          supportemail: "support@onlyoffice.com",
+        },
+      },
+      forum: {
+        domain: "https://forum.onlyoffice.com",
+      },
+      integrations: {
+        entries: {
+          drupal: "https://www.drupal.org/project/onlyoffice_docspace",
+          pipedrive:
+            "https://www.pipedrive.com/en/marketplace/app/onlyoffice-doc-space/4cb3b5d9d19a1918",
+          wordpress: "https://wordpress.org/plugins/onlyoffice-docspace/",
+          zapier: "https://zapier.com/apps/onlyoffice-docspace/integrations",
+          zoom: "https://marketplace.zoom.us/apps/OW6rOq-nRgCihG5eps_p-g",
+        },
+      },
+      site: {
+        domain: "https://www.onlyoffice.com/ru",
+        entries: {
+          allconnectors: "/all-connectors.aspx",
+          buydeveloper: "/post.ashx?type=buydocspacedeveloper",
+          buyenterprise: "/post.ashx?type=buydocspaceenterprise",
+          collaborationrooms: "/collaboration-rooms.aspx",
+          customrooms: "/custom-rooms.aspx",
+          demoorder: "/demo-order.aspx",
+          desktop: "/desktop.aspx",
+          docspace: "/docspace.aspx",
+          docspaceprices: "/docspace-prices.aspx",
+          downloaddesktop: "/download-desktop.aspx#desktop",
+          downloadmobile: "/download-desktop.aspx#mobile",
+          forenterprises: "/for-enterprises.aspx",
+          formfillingrooms: "/form-filling-rooms.aspx",
+          officeforandroid: "/office-for-android.aspx",
+          officefordrupal: "/office-for-drupal.aspx",
+          officeforios: "/office-for-ios.aspx",
+          officeforwordpress: "/office-for-wordpress.aspx",
+          officeforzapier: "/office-for-zapier.aspx",
+          officeforzoom: "/office-for-zoom.aspx",
+          openai: "/app-directory/openai",
+          privaterooms: "/private-rooms.aspx",
+          publicrooms: "/public-rooms.aspx",
+          registrationcanceled: "/registration-canceled.aspx",
+          seamlesscollaboration: "/seamless-collaboration.aspx",
+          subscribe: "/post.ashx",
+          wrongportalname: "/wrongportalname.aspx",
+        },
+      },
+      socialNetworks: {
+        entries: {
+          facebook: "https://www.facebook.com/pages/OnlyOffice/833032526736775",
+          instagram: "https://www.instagram.com/the_onlyoffice/",
+          tiktok: "https://vm.tiktok.com/ZMLXbFEyd/",
+          twitter: "https://twitter.com/ONLY_OFFICE",
+          youtube: "https://www.youtube.com/user/onlyofficeTV",
+        },
+      },
+      videoguides: {
+        domain: "https://helpcenter.onlyoffice.com/ru/video.aspx",
+        entries: {
+          activesessions: "https://youtu.be/QxrRtMDj2ZM",
+          archive: "https://youtu.be/WX-SN_nB4cI",
+          backup: "https://youtu.be/2ed2iSxLCwk",
+          createfiles: "https://youtu.be/1f9sl4u94v4",
+          fileversions: "https://youtu.be/_Br4aGP7f3c",
+          filterfiles: "https://youtu.be/zy5mPrf1DqY",
+          full: "https://youtu.be/rEurv8Mss0o",
+          hotkeys: "https://youtu.be/jclhTh5TXp0",
+          operationswithfiles: "https://youtu.be/E96rEIgDO8M",
+          playlist:
+            "https://www.youtube.com/playlist?list=PLCF48HEKMOYM8MBnwYs8q5J0ILMK9NzIx",
+          profile: "https://youtu.be/eJNHyjoc3lQ",
+          roles: "https://youtu.be/5tzRL9Kxj1Y",
+          rooms: "https://youtu.be/XBY2H9BaYDk",
+          security: "https://youtu.be/psxZ0fDXiUo",
+          whatis: "https://youtu.be/T8_hGjQR1Kk",
+        },
+      },
+    },
   },
   count: 1,
   links: [
@@ -109,6 +296,11 @@ export const settingsNoAuth = {
   ],
   status: 0,
   statusCode: 200,
+};
+
+export const settingsAuth = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, socketUrl: "123" },
 };
 
 export const settingsNoAuthNoStandalone = {
@@ -136,14 +328,108 @@ export const settingsNoAuthNoStandalone = {
     debugInfo: false,
     tenantStatus: 0,
     tenantAlias: "localhost",
-    forumLink: "https://forum.onlyoffice.com",
-    legalTerms:
-      "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
-    licenseUrl: "https://www.gnu.org/licenses/agpl-3.0.en.html",
+
     cookieSettingsEnabled: false,
     limitedAccessSpace: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
+    externalResources: {
+      api: {
+        domain: "https://api.onlyoffice.com",
+        entries: {
+          docspace: "/docspace",
+          "javascript-sdk":
+            "/docspace/javascript-sdk/get-started/basic-concepts",
+          "plugins-sdk": "/docspace/plugins-sdk/get-started/basic-concepts",
+        },
+      },
+      common: {
+        entries: {
+          booktrainingemail: "",
+          documentationemail: "",
+          legalterms:
+            "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
+          license:
+            "https://help.onlyoffice.co/Products/Files/DocEditor.aspx?fileid=9318110&doc=S2RPck54RXJsd09QaTZiaFJvUWRwNjNaNE8rTE9LV3hnZmdoSm5Lcm94az0_IntcImVudHJ5XCI6XCI5MzE4MTEwXCIsXCJsaW5rXCI6XCJkOGVjZjdmMy1mY2E1LTQxZDYtYmM2Yi1kNDI4Mzk0YTNlMTdcIn0i0",
+          paymentemail: "sales@onlyoffice.com",
+          supportemail: "support@onlyoffice.com",
+        },
+      },
+      forum: {
+        domain: "https://forum.onlyoffice.com",
+      },
+      integrations: {
+        entries: {
+          drupal: "https://www.drupal.org/project/onlyoffice_docspace",
+          pipedrive:
+            "https://www.pipedrive.com/en/marketplace/app/onlyoffice-doc-space/4cb3b5d9d19a1918",
+          wordpress: "https://wordpress.org/plugins/onlyoffice-docspace/",
+          zapier: "https://zapier.com/apps/onlyoffice-docspace/integrations",
+          zoom: "https://marketplace.zoom.us/apps/OW6rOq-nRgCihG5eps_p-g",
+        },
+      },
+      site: {
+        domain: "https://www.onlyoffice.com/ru",
+        entries: {
+          allconnectors: "/all-connectors.aspx",
+          buydeveloper: "/post.ashx?type=buydocspacedeveloper",
+          buyenterprise: "/post.ashx?type=buydocspaceenterprise",
+          collaborationrooms: "/collaboration-rooms.aspx",
+          customrooms: "/custom-rooms.aspx",
+          demoorder: "/demo-order.aspx",
+          desktop: "/desktop.aspx",
+          docspace: "/docspace.aspx",
+          docspaceprices: "/docspace-prices.aspx",
+          downloaddesktop: "/download-desktop.aspx#desktop",
+          downloadmobile: "/download-desktop.aspx#mobile",
+          forenterprises: "/for-enterprises.aspx",
+          formfillingrooms: "/form-filling-rooms.aspx",
+          officeforandroid: "/office-for-android.aspx",
+          officefordrupal: "/office-for-drupal.aspx",
+          officeforios: "/office-for-ios.aspx",
+          officeforwordpress: "/office-for-wordpress.aspx",
+          officeforzapier: "/office-for-zapier.aspx",
+          officeforzoom: "/office-for-zoom.aspx",
+          openai: "/app-directory/openai",
+          privaterooms: "/private-rooms.aspx",
+          publicrooms: "/public-rooms.aspx",
+          registrationcanceled: "/registration-canceled.aspx",
+          seamlesscollaboration: "/seamless-collaboration.aspx",
+          subscribe: "/post.ashx",
+          wrongportalname: "/wrongportalname.aspx",
+        },
+      },
+      socialNetworks: {
+        entries: {
+          facebook: "https://www.facebook.com/pages/OnlyOffice/833032526736775",
+          instagram: "https://www.instagram.com/the_onlyoffice/",
+          tiktok: "https://vm.tiktok.com/ZMLXbFEyd/",
+          twitter: "https://twitter.com/ONLY_OFFICE",
+          youtube: "https://www.youtube.com/user/onlyofficeTV",
+        },
+      },
+      videoguides: {
+        domain: "https://helpcenter.onlyoffice.com/ru/video.aspx",
+        entries: {
+          activesessions: "https://youtu.be/QxrRtMDj2ZM",
+          archive: "https://youtu.be/WX-SN_nB4cI",
+          backup: "https://youtu.be/2ed2iSxLCwk",
+          createfiles: "https://youtu.be/1f9sl4u94v4",
+          fileversions: "https://youtu.be/_Br4aGP7f3c",
+          filterfiles: "https://youtu.be/zy5mPrf1DqY",
+          full: "https://youtu.be/rEurv8Mss0o",
+          hotkeys: "https://youtu.be/jclhTh5TXp0",
+          operationswithfiles: "https://youtu.be/E96rEIgDO8M",
+          playlist:
+            "https://www.youtube.com/playlist?list=PLCF48HEKMOYM8MBnwYs8q5J0ILMK9NzIx",
+          profile: "https://youtu.be/eJNHyjoc3lQ",
+          roles: "https://youtu.be/5tzRL9Kxj1Y",
+          rooms: "https://youtu.be/XBY2H9BaYDk",
+          security: "https://youtu.be/psxZ0fDXiUo",
+          whatis: "https://youtu.be/T8_hGjQR1Kk",
+        },
+      },
+    },
   },
   count: 1,
   links: [
@@ -166,6 +452,7 @@ export const settings = (headers?: Headers): Response => {
   let isWizardWithAmi = false;
   let isPortalDeactivate = false;
   let isNoStandalone = false;
+  let isAuthenticated = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
@@ -183,6 +470,10 @@ export const settings = (headers?: Headers): Response => {
     isNoStandalone = true;
   }
 
+  if (headers?.get(HEADER_AUTHENTICATED_SETTINGS)) {
+    isAuthenticated = true;
+  }
+
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
   if (isWizardWithAmi)
     return new Response(JSON.stringify(settingsWizzardWithAmi));
@@ -190,6 +481,7 @@ export const settings = (headers?: Headers): Response => {
     return new Response(JSON.stringify(settingsPortalDeactivate));
   if (isNoStandalone)
     return new Response(JSON.stringify(settingsNoAuthNoStandalone));
+  if (isAuthenticated) return new Response(JSON.stringify(settingsAuth));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

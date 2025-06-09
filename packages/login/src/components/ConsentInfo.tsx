@@ -84,6 +84,7 @@ const OAuthClientInfo = ({
             components={{
               1: (
                 <Link
+                  key="component_key"
                   className={"login-link"}
                   type={LinkType.page}
                   isHovered={false}

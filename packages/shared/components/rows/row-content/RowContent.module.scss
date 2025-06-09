@@ -1,6 +1,6 @@
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .common {
   margin: var(--row-content-margin);
@@ -12,10 +12,7 @@
 
 .rowContent {
   width: 100%;
-  display: inline-flex;
-
   display: block;
-  height: var(--row-content-height);
 }
 
 .mainContainerWrapper {
@@ -26,8 +23,6 @@
   margin-inline-end: auto;
   width: var(--main-container-width);
   min-width: 140px;
-
-  @include truncate;
 
   min-width: var(--row-content-main-wrapper-min-width);
   margin-top: var(--row-content-main-wrapper-margin-top);
@@ -40,11 +35,11 @@
   max-width: 100%;
   margin-inline-end: 8px;
 
-  @include truncate;
+  @include mixins.truncate;
   max-width: var(--row-content-max-width);
 
-  @include tablet {
-    @include truncate;
+  @include mixins.tablet {
+    @include mixins.truncate;
     max-width: var(--row-content-max-width);
   }
 }
@@ -57,29 +52,22 @@
 
 .sideContainerWrapper {
   @extend .common;
-  @include truncate;
-
-  @include tablet {
-    @include truncate;
-  }
+  @include mixins.truncate;
 
   align-self: center;
   align-items: center;
+  display: none;
+
+  @include mixins.tablet {
+    @include mixins.truncate;
+  }
 
   > a {
     vertical-align: middle;
   }
-
-  display: none;
 }
 
 .tabletSideInfo {
-  display: none;
   display: block;
-  min-width: var(--row-content-side-info-min-width);
-  @include truncate;
-
-  @include tablet {
-    display: block;
-  }
+  @include mixins.truncate;
 }

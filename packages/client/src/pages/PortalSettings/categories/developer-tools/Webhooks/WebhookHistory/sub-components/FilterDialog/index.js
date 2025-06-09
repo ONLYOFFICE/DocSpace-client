@@ -32,7 +32,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 import DeliveryDatePicker from "./DeliveryDatePicker";
@@ -119,16 +119,11 @@ const FilterDialog = (props) => {
           status: [],
         });
       }
-      isLoaded && navigate(`/portal-settings/developer-tools/webhooks/${id}`);
+      isLoaded && navigate(`/developer-tools/webhooks/${id}`);
     } else {
       setFilters(historyFilters);
       setIsApplied(true);
-      navigate(
-        constructUrl(
-          `/portal-settings/developer-tools/webhooks/${id}`,
-          historyFilters,
-        ),
-      );
+      navigate(constructUrl(`/developer-tools/webhooks/${id}`, historyFilters));
     }
     setIsLoaded(true);
   }, [historyFilters, visible]);

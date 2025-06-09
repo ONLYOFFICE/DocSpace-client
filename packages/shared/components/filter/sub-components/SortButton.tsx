@@ -27,7 +27,7 @@
 import React from "react";
 
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
-import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
+import SortReactSvg from "PUBLIC_DIR/images/sort.react.svg";
 
 import { Events } from "../../../enums";
 
@@ -83,8 +83,8 @@ const SortButton = ({
     setSortData(data);
 
     setSelectedSortData({
-      sortDirection: selectedValue.sortDirection,
-      sortId: selectedValue.sortId,
+      sortDirection: selectedValue.sortDirection ?? "",
+      sortId: selectedValue.sortId ?? "",
     });
   }, [getSortData, getSelectedSortData]);
 
@@ -212,8 +212,9 @@ const SortButton = ({
         withBlur={false}
         withBackdrop
         onBackdropClick={toggleCombobox}
+        type="onlyIcon"
       >
-        <IconButton iconName={SortReactSvgUrl} size={16} />
+        <IconButton iconNode={<SortReactSvg />} size={16} />
       </ComboBox>
     </div>
   );

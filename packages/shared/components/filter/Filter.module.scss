@@ -23,9 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 .filterInput {
   width: 100%;
@@ -44,7 +43,7 @@
 
       display: flex;
       align-items: center;
-      justify-content: start;
+      justify-content: flex-start;
 
       margin-bottom: 8px;
     }
@@ -123,7 +122,7 @@
     }
   }
 
-  --webkit-tap-highlight-color: #{$tap-highlight};
+  --webkit-tap-highlight-color: #{colors.$tap-highlight};
 }
 
 .indicator {
@@ -160,11 +159,11 @@
 
   background: var(--filter-block-background);
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     max-width: 100%;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 0;
     top: unset;
     height: 100%;
@@ -209,7 +208,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 
   margin: 16px 0 0;
 
@@ -273,7 +272,7 @@
 
   &.selected {
     font-weight: 600;
-    color: var(--accent-text);
+    color: var(--filter-block-selected-item-color);
   }
 }
 
@@ -359,23 +358,23 @@
   cursor: pointer;
 
   &[data-selected="true"] {
-    background: var(--accent-main);
-    border-color: var(--accent-main);
+    background: var(--filter-block-selected-backgroud-color);
+    border-color: var(--filter-block-selected-backgroud-color);
 
     &:hover {
-      background: var(--accent-main);
-      border-color: var(--accent-main);
+      background: var(--filter-block-selected-backgroud-color);
+      border-color: var(--filter-block-selected-backgroud-color);
     }
   }
 
-  --webkit-tap-highlight-color: #{$tap-highlight};
+  --webkit-tap-highlight-color: #{colors.$tap-highlight};
 }
 
 .sortButton {
   :global {
     .combo-button {
       background: var(--filter-sort-button-background);
-      padding-inline-end: 4px;
+      padding-inline: 4px;
       width: 32px;
       height: 32px;
 
@@ -383,9 +382,9 @@
         cursor: pointer;
       }
 
-      :hover {
+      &:hover {
         border-color: var(--icon-button-hover-color);
-        svg {
+        .optionalBlock .icon-button_svg svg {
           path {
             fill: var(--icon-button-hover-color);
           }
@@ -539,5 +538,11 @@
         transform: rotate(180deg);
       }
     }
+  }
+}
+
+.viewSelector {
+  @include mixins.tablet-and-below {
+    display: none;
   }
 }

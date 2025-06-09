@@ -26,13 +26,21 @@
 
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { getCookie } from "@docspace/shared/utils";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
+import {
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
+} from "@docspace/shared/api/oauth";
 import AppLoader from "@docspace/shared/components/app-loader";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -41,6 +49,7 @@ import OperationContainer from "@docspace/shared/components/operation-container"
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { getUser } from "@docspace/shared/api/people";
 
 const AuthHandler = () => {
   let searchParams = useSearchParams();
@@ -51,15 +60,23 @@ const AuthHandler = () => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { email = "", key = "" } = linkData;
 
-  const referenceUrl = searchParams.get("referenceUrl");
+  const referenceUrl = searchParams?.get("referenceUrl");
   const isFileHandler =
     referenceUrl && referenceUrl.indexOf("filehandler.ashx") !== -1;
   const isExternalDownloading =
     referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
-  useEffect(() => {
+  const replaced = useRef(false);
+
+  useLayoutEffect(() => {
+    if (!email || !key) return;
+
     async function loginWithKey() {
       try {
+        if (replaced.current) return;
+
+        replaced.current = true;
+
         const res = await loginWithConfirmKey({
           ConfirmData: {
             Email: email,
@@ -67,13 +84,32 @@ const AuthHandler = () => {
           },
         });
 
-        //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
+        const wizard = searchParams?.get("wizard");
+
+        if (wizard === "true") {
+          localStorage.setItem("showSocialAuthWelcomeDialog", "true");
+        }
+
         if (referenceUrl && referenceUrl.includes("oauth2")) {
+          const user = await getUser();
+
+          if (!user) {
+            replaced.current = false;
+            return;
+          }
+
           const newUrl = location.search.split("referenceUrl=")[1];
 
+          const token = getOAuthJWTSignature(user.id);
+
+          if (!token) {
+            await setOAuthJWTSignature(user.id);
+          }
+
           window.location.replace(newUrl);
+
           return;
         }
 
@@ -96,6 +132,7 @@ const AuthHandler = () => {
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/");
       } catch (error) {
+        console.log(error);
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -110,12 +147,20 @@ const AuthHandler = () => {
         }
 
         frameCallEvent({ event: "onAppError", data: error });
+        replaced.current = false;
         toastr.error(errorMessage);
       }
     }
 
     loginWithKey();
-  });
+  }, [
+    email,
+    key,
+    referenceUrl,
+    isFileHandler,
+    isExternalDownloading,
+    searchParams,
+  ]);
 
   return isFileHandler && isExternalDownloading ? (
     <OperationContainer

@@ -5,14 +5,12 @@
   "InvitationLanguage": "Język zaproszenia",
   "InviteMembersManuallyDescription": "Osobiście zaproś nowych członków do {{productName}} za pośrednictwem poczty e-mail.",
   "InviteMembersSearchPlaceholder": "Zaproś przez e-mail",
-  "InviteToRoomManuallyInfo": "Dodaj istniejące kontakty {{productName}}. Osobiście zaproś nowych gości za pośrednictwem poczty e-mail. Nowi goście zostaną dodani do Twojej listy gości.",
   "InviteToRoomSearchPlaceholder": "Wyszukaj i zaproś według nazwy użytkownika lub adresu e-mail",
   "InviteViaLink": "Zaproś poprzez link",
   "InviteViaLinkDescriptionAccounts": "Utwórz uniwersalny link do samodzielnej autoryzacji w {{productName}}",
-  "InviteViaLinkDescriptionRoom": "Stwórz uniwersalny link do samodzielnej autoryzacji w pokoju",
   "LinkCopySuccess": "Link został skopiowany",
-  "ResetChange": "Zresetuj zmianę",
   "SendInvitation": "Wyślij zaproszenie",
   "UserMaxAvailableRoleWarning": "Nie można przypisać roli menedżera pokoju gościom ani użytkownikom. Tylko administratorzy pokoi i  {{productName}} mogą przyjąć daną rolę.",
-  "UsersAlreadyAdded": "Niektórzy użytkownicy zostali już dodani"
+  "UsersAlreadyAdded": "Niektórzy użytkownicy zostali już dodani",
+  "UsersCannotBeAdded": "Wyłączone kontakty nie mogą być dodane do pokoju"
 }

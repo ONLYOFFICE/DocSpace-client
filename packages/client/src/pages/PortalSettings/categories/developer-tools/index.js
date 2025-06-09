@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-
-import { Tabs } from "@docspace/shared/components/tabs";
-
 import { inject, observer } from "mobx-react";
+
 import config from "PACKAGE_FILE";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
+
+import { Tabs } from "@docspace/shared/components/tabs";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -44,6 +44,7 @@ import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
+import ApiKeys from "./ApiKeys";
 
 const DeveloperToolsWrapper = (props) => {
   const { currentDeviceType, identityServerEnabled } = props;
@@ -75,6 +76,14 @@ const DeveloperToolsWrapper = (props) => {
     </div>
   );
 
+  const oauthData = identityServerEnabled
+    ? {
+        id: "oauth",
+        name: t("OAuth:OAuth"),
+        content: <OAuth />,
+      }
+    : {};
+
   const data = [
     {
       id: "api",
@@ -96,23 +105,23 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
+    { ...oauthData },
+    {
+      id: "api-keys",
+      name: t("Settings:ApiKeys"),
+      content: <ApiKeys />,
+    },
   ];
-
-  if (identityServerEnabled) {
-    data.push({
-      id: "oauth",
-      name: t("OAuth:OAuth"),
-      content: <OAuth />,
-    });
-  }
-
-  // const load = async () => {
-  //   // await loadBaseInfo();
-  // };
 
   useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
+
+    const currentTab = data.find(
+      (item) =>
+        path === `/portal-settings/developer-tools/${item.id}` ||
+        path === `/developer-tools/${item.id}`,
+    );
+
     if (currentTab !== -1 && data.length) {
       setCurrentTabId(currentTab.id);
     }
@@ -120,16 +129,15 @@ const DeveloperToolsWrapper = (props) => {
     setIsLoading(true);
   }, [location.pathname]);
 
-  // useEffect(() => {
-  //   ready && startTransition(load);
-  // }, [ready]);
-
   const onSelect = (e) => {
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
     navigate(
       combineUrl(
         window.ClientConfig?.proxy?.url,
         config.homepage,
-        `/portal-settings/developer-tools/${e.id}`,
+        `${path}/developer-tools/${e.id}`,
       ),
     );
     setCurrentTabId(e.id);
@@ -150,7 +158,7 @@ const DeveloperToolsWrapper = (props) => {
 export const Component = inject(({ setup, settingsStore, authStore }) => {
   const { initSettings } = setup;
 
-  const { identityServerEnabled } = authStore.capabilities;
+  const identityServerEnabled = authStore?.capabilities?.identityServerEnabled;
 
   return {
     currentDeviceType: settingsStore.currentDeviceType,

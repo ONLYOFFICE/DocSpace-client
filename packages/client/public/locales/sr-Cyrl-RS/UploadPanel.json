@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Отпремање је прекинуто. Неке датотеке нису отпремљене.",
-  "EnterPassword": "Унеси лозинку",
   "HideInput": "Сакриј",
   "Ready": "Готово",
-  "UploadAndConvert": "Отпреми и конвертуј датотеке",
-  "Uploads": "Отпремања"
+  "UploadingAndConversion": "Отпремање и конверзија",
+  "UploadingError": "Грешка приликом отпремања"
 }

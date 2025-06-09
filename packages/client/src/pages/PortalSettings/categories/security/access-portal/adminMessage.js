@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
@@ -144,7 +144,7 @@ const AdminMessage = (props) => {
   const onSaveClick = () => {
     const turnOn = type === "enable";
     setMessageSettings(turnOn);
-    toastr.success(t("SuccessfullySaveSettingsMessage"));
+    toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     saveToSessionStorage("currentAdminMessageSettings", type);
     saveToSessionStorage("defaultAdminMessageSettings", type);
     setShowReminder(false);
@@ -160,7 +160,7 @@ const AdminMessage = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>
         <Text>
           {t("AdminsMessageSettingDescription", {
             productName: t("Common:ProductName"),
@@ -170,15 +170,17 @@ const AdminMessage = (props) => {
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
 
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={administratorMessageSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {administratorMessageSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={administratorMessageSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup

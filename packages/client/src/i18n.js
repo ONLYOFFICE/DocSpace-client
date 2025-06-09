@@ -66,7 +66,6 @@ newInstance
       "InfoPanel",
       "InviteDialog",
       "FormGallery",
-      "DownloadDialog",
       "DeleteDialog",
       "EmptyTrashDialog",
       "ConvertDialog",
@@ -78,6 +77,7 @@ newInstance
       "Files",
       "Errors",
       "Translations",
+      "FormFillingTipsDialog",
     ],
 
     backend: {

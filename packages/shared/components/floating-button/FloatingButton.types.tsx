@@ -35,7 +35,7 @@ export type FloatingButtonProps = {
   /** Accepts CSS style */
   style?: React.CSSProperties;
   /** Sets the icon on the button */
-  icon?: FloatingButtonIcons;
+  icon?: keyof typeof FloatingButtonIcons;
   /** Displays the alert */
   alert?: boolean;
   /**  Sets a callback function that is triggered when the button is clicked */
@@ -47,6 +47,8 @@ export type FloatingButtonProps = {
   showCancelButton?: boolean;
   completed?: boolean;
   withoutStatus?: boolean;
+  /** Loading indicator */
+  percent?: number;
 };
 
 export type DefaultStylesProps = {

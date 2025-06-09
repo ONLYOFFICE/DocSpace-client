@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/devices.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/mixins";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.rtl) {
   :local(.wrapper) {
@@ -60,13 +59,13 @@
     margin-top: 0;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     &[data-show-text="true"] {
       margin-inline-start: 8px;
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     position: relative;
     bottom: 0px;
     margin-top: 32px;
@@ -95,10 +94,9 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  border: var(--files-article-body-dev-tools-border);
   border-radius: 6px;
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 0px;
     margin-top: 32px;
   }
@@ -123,6 +121,19 @@
   }
 }
 
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--files-article-body-dev-tools-background-color);
+  opacity: var(--files-article-body-dev-tools-background-opacity);
+  border-radius: 6px;
+  z-index: -1;
+}
+
 .hideArticleMenuButton {
   display: flex;
   align-items: center;
@@ -132,7 +143,7 @@
   background: var(--article-catalog-background);
   inset-inline-start: 0;
   cursor: pointer;
-  -webkit-tap-highlight-color: #{$tap-highlight};
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
   &[data-hide-profile-block="true"] {
     bottom: 16px;
@@ -152,11 +163,11 @@
     max-width: 60px;
   }
 
-  @include desktop {
+  @include mixins.desktop {
     display: none;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     display: none;
   }
 
@@ -164,7 +175,7 @@
     align-items: center;
     margin-inline-start: 16px;
 
-    @include tablet {
+    @include mixins.tablet {
       &[data-show-text="true"] {
         display: flex;
       }
@@ -184,7 +195,7 @@
     width: 100%;
   }
 
-  @include tablet {
+  @include mixins.tablet {
     &[data-show-text="true"] {
       :global(.article-hide-menu-container) {
         display: flex;
@@ -233,9 +244,9 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  -webkit-tap-highlight-color: #{$tap-highlight};
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
-  @include tablet {
+  @include mixins.tablet {
     padding: 20px 8px 17px;
     margin: 0;
     height: 61px;
@@ -252,7 +263,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     border-bottom: var(--article-catalog-header-border-bottom);
     padding: 12px 0;
   }
@@ -277,7 +288,7 @@
     }
   }
 
-  @include tablet {
+  @include mixins.tablet {
     margin-inline-start: 9px;
 
     &[data-show-text="true"] {
@@ -289,7 +300,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     margin-inline-start: 0;
   }
 }
@@ -304,7 +315,7 @@
     width: 28px;
   }
 
-  @include tablet {
+  @include mixins.tablet {
     &[data-show-text="true"] {
       display: none;
     }
@@ -314,7 +325,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     display: none;
   }
 }
@@ -328,7 +339,7 @@
   max-width: 251px;
   background-color: var(--article-catalog-profile-background);
 
-  @include tablet {
+  @include mixins.tablet {
     &[data-show-text="true"] {
       min-width: 243px;
       max-width: 243px;
@@ -351,7 +362,7 @@
   border-inline-end: var(--article-catalog-vertical-line);
   background-color: var(--article-catalog-profile-background);
 
-  @include tablet {
+  @include mixins.tablet {
     padding: 16px 14px;
   }
 
@@ -390,32 +401,32 @@
   position: relative;
   overflow: hidden;
   background: var(--article-catalog-background);
-  min-width: 251px;
-  max-width: 251px;
+  min-width: 252px;
+  max-width: 252px;
   box-sizing: border-box;
   user-select: none;
   border-inline-end: var(--article-catalog-vertical-line);
   z-index: 205;
 
-  @include tablet {
+  @include mixins.tablet {
     height: 100%;
   }
 
   &[data-show-text="false"] {
-    @include tablet {
+    @include mixins.tablet {
       min-width: 60px;
       max-width: 60px;
     }
   }
 
   &[data-show-text="true"] {
-    @include tablet {
+    @include mixins.tablet {
       min-width: 243px;
       max-width: 243px;
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     z-index: 230;
 
     &[data-open="true"] {
@@ -439,25 +450,34 @@
   &[data-with-main-button="true"] {
     :global(.article-body__scrollbar) {
       height: calc(100% - 190px) !important;
+
+      @include mixins.mobile {
+        height: 100% !important;
+      }
     }
   }
+
   &[data-with-main-button="false"] {
     :global(.article-body__scrollbar) {
       height: calc(100% - 150px) !important;
+
+      @include mixins.mobile {
+        height: 100% !important;
+      }
     }
   }
 
   :global(.article-body__scrollbar) {
-    @include tablet {
+    @include mixins.tablet {
       height: calc(100% - 184px) !important;
     }
 
-    @include mobile {
+    @include mixins.mobile {
       height: 100% !important;
     }
 
     :global(.article-scroller) {
-      @include tablet {
+      @include mixins.tablet {
         height: 100% !important;
       }
     }
@@ -469,13 +489,13 @@
       padding: 0 20px !important;
       margin-bottom: 0px !important;
 
-      @include tablet {
+      @include mixins.tablet {
         padding: 0 8px !important;
       }
 
-      @include mobile {
+      @include mixins.mobile {
         display: block;
-        padding-bottom: 20px;
+        padding: 0 8px 20px 8px !important;
       }
     }
   }
@@ -488,5 +508,59 @@
   &[data-mobile-article="true"] {
     padding: 0;
     margin: 0;
+  }
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @include mixins.desktop {
+    p {
+      font-size: 13px;
+    }
+    margin-inline-start: 12px;
+  }
+
+  @include mixins.tablet {
+    &[data-show-article="false"] {
+      justify-content: center;
+    }
+    &[data-show-article="true"] {
+      margin-inline-start: 8px;
+    }
+  }
+
+  @include mixins.mobile {
+    margin-bottom: 0;
+    margin-inline-start: 4px;
+  }
+
+  .arrowIcon {
+    width: 20px;
+    height: 20px;
+
+    @include mixins.desktop {
+      width: 16px !important;
+      height: 16px !important;
+
+      svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    }
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
   }
 }

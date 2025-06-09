@@ -3,6 +3,19 @@
   "problemMatcher": [],
   "tasks": [
     {
+      "label": "Build DocEditor Translations",
+      "type": "shell",
+      "command": "node ./scripts/buildTranslations.js",
+      "options": {
+        "cwd": "${workspaceFolder}/packages/doceditor"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
       "label": "Backend | build CE",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
       "type": "shell",
@@ -335,7 +348,7 @@
     {
       "label": "Frontend | install",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm install",
+      "command": "cd ${workspaceFolder} ; yarn install",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -348,9 +361,9 @@
       }
     },
     {
-      "label": "Frontend | update dependencies",
+      "label": "Frontend | update yarn.lock",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm wipe ; pnpm install",
+      "command": "cd ${workspaceFolder} ; yarn wipe ; yarn install",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -365,7 +378,22 @@
     {
       "label": "Frontend | build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t build  -p @docspace/client @docspace/login @docspace/doceditor @docspace/management --parallel=4",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t build  -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t build:lite  -p @docspace/client @docspace/login @docspace/doceditor --parallel=3",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -380,7 +408,7 @@
     {
       "label": "Frontend | start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor @docspace/management --parallel=4",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -395,7 +423,22 @@
     {
       "label": "Frontend | start-prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor @docspace/management --parallel=4",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -410,7 +453,7 @@
     {
       "label": "Frontend | deploy",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t deploy -p @docspace/client @docspace/login @docspace/doceditor @docspace/management --parallel=4",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t deploy -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -530,7 +573,7 @@
     {
       "label": "Test | Jest:unit",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test ; ",
+      "command": "cd ${workspaceFolder} ; yarn test ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -545,7 +588,7 @@
     {
       "label": "Frontend | ESLint",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm lint ; ",
+      "command": "cd ${workspaceFolder} ; yarn lint ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -560,7 +603,7 @@
     {
       "label": "Frontend | ESLint:fix",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm lint:fix ; ",
+      "command": "cd ${workspaceFolder} ; yarn lint:fix ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -575,7 +618,7 @@
     {
       "label": "Test | Test e2e docker build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:build ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:build ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -590,7 +633,7 @@
     {
       "label": "Test | Test e2e docker start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:start ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:start ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -605,7 +648,7 @@
     {
       "label": "Test | Test e2e docker clear",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:clear ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:clear ; ",
       "group": {
         "kind": "build",
         "isDefault": true

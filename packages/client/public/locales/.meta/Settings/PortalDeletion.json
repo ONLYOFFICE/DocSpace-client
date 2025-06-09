@@ -1,0 +1,303 @@
+{
+  "key_path": "PortalDeletion",
+  "content": "{{productName}} Deletion",
+  "content_en_sha1_hash": "693540a2e226ddffcbfa72d1c31476a39f461691",
+  "created_at": "2025-05-19T21:30:52.200Z",
+  "updated_at": "2025-06-08T12:02:32.729Z",
+  "comment": {
+    "text": "The translation key \"PortalDeletion\" is used to display a message indicating that an artifact will be deleted. In the UI, it appears in a portal settings page as part of a deletion confirmation dialog. The phrase should refer to the specific product or application being deleted, using the product name provided by the user.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:44:47.622Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
+      "line_number": 225,
+      "context": "return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 559,
+      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"8\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"8-0\",\n icon: \"\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 559,
+      "context": "{\n id: \"portal-settings_catalog-delete\",\n key: \"8\",\n type: PageType.portalDeletion,\n link: \"delete-data\",\n tKey: \"PortalDeletion\",\n isHeader: true,\n children: [\n {\n key: \"8-0\",\n icon: \"\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"حذف {{productName}}\" literally translates to \"Deletion {{productName}}\". While understandable, it's more natural and idiomatic in Arabic to phrase it as \"حذف {{productName}} من\" (Deletion of {{productName}}) or \"إزالة {{productName}}\" (Removal of {{productName}}). The original English implies an action being performed *on* the product name, which is lost in the direct translation.",
+          "suggestion": "حذف {{productName}} من"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"-Löschung\" doesn't fully capture the meaning of 'Deletion' in the context of a portal. It's a bit abrupt and doesn't convey the process or action of deletion. A more appropriate translation might include a verb or phrase that implies the deletion action.",
+          "suggestion": "\"Portal-Löschung\" or \"Löschung des Portals\" would be better. Alternatively, \"Portal wird gelöscht\" (Portal is being deleted) could be considered, but it changes the format."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Διαγραφή {{productName}}\" literally translates to \"Deletion {{productName}}\".  While understandable, a more natural and idiomatic translation of 'Settings:PortalDeletion' might include the word 'Portal' to clarify the context.  Simply stating 'Deletion' is ambiguous.",
+          "suggestion": "Πύλη: Διαγραφή {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ການລົບລ້າງ {{productName}}\" literally translates to 'Revocation of {{productName}}'. While 'deletion' and 'revocation' can sometimes overlap in meaning, 'deletion' implies a complete removal, whereas 'revocation' implies a cancellation or withdrawal.  This may not accurately convey the intended meaning of '{{productName}} Deletion'. A more accurate translation of 'Deletion' might be 'ການລົບຖິ້ມ' or 'ການເຊົາລົບ'.",
+          "suggestion": "Consider using 'ການລົບຖິ້ມ {{productName}}' or 'ການເຊົາລົບ {{productName}}' for a more accurate representation of 'Deletion'."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ștergere spațiu {{productName}}' doesn't accurately convey 'Deletion'. 'Spațiu' translates to 'space' and 'Ștergere' means 'Deletion'. While technically correct, it's more accurately translated as 'Ștergerea {{productName}}' or 'Eliminarea {{productName}}' to better reflect the English meaning.",
+          "suggestion": "Ștergerea {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{productName}} මැකීම' is too literal. 'මැකීම' directly translates to 'deletion'. A more natural Sinhala phrasing would be something like '{{productName}} ඉවත් කිරීම' ({{productName}} Iwavath Kirme) which means '{{productName}} Removal'.",
+          "suggestion": "{{productName}} ඉවත් කිරීම"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Vymazanie\" is a more literal translation of \"Deletion.\" A more natural Slovak phrasing for a settings label would be \"Zmazanie {{productName}}\" or \"Odstránenie {{productName}}\". \"Vymazanie\" can also sometimes imply erasing data, which might not be the intended meaning.",
+          "suggestion": "Zmazanie {{productName}} or Odstránenie {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Izbris {{productName}}\" is technically correct, but lacks clarity and nuance. \"Deletion\" implies a process, and \"Izbris\" is a noun meaning \"deletion.\" A more natural translation would be something like \"Odstranitev {{productName}}\" or \"Brisanje {{productName}}\".",
+          "suggestion": "Odstranitev {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Брисање {{productName}}-а' is not ideal. While technically correct, it sounds a bit clunky.  A more natural translation would reflect that it's about *the process* of deleting the product, not simply deleting something *belonging to* the product name.",
+          "suggestion": "Обрисавање {{productName}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The genitive suffix '-а' may not always be appropriate depending on the specific product name. It is grammatically correct when the product name is masculine, but a more general and robust translation is needed to handle different product names.",
+          "suggestion": "Обрисавање {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The translation uses the genitive case ('-a') which might be too literal and sounds slightly unnatural. While grammatically correct, a more natural phrasing might be preferable.",
+          "suggestion": "Brisanje {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Ukrainian translation includes a colon (:) at the end, which might be unnecessary and deviates from the English version's format.",
+          "suggestion": "Consider removing the colon: \"Видалення {{productName}}\""
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Xóa {{productName}}' lacks the word 'Portal' from the English '{{productName}} Deletion'. A more accurate translation might include the word for 'Portal' or a more descriptive phrase indicating the deletion pertains to a portal.",
+          "suggestion": "Xóa Portal {{productName}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"删除{{productName}}\" lacks the word 'Portal' which is present in the English content '{{productName}} Deletion'.  A more accurate translation would include the meaning of 'Portal'.",
+          "suggestion": "删除{{productName}}门户"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

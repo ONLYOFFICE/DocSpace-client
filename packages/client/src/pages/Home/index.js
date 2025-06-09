@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -90,7 +90,6 @@ const PureHome = (props) => {
     dragging,
     createFoldersTree,
     disableDrag,
-    setUploadPanelVisible,
     clearPrimaryProgressData,
     isPrimaryProgressVisbile,
 
@@ -145,7 +144,6 @@ const PureHome = (props) => {
     scrollToTop,
     isEmptyGroups,
     wsCreatedPDFForm,
-    disableUploadPanelOpen,
     setContactsTab,
     isUsersEmptyView,
     showGuestReleaseTip,
@@ -161,9 +159,16 @@ const PureHome = (props) => {
     clearUploadedFiles,
     mainButtonVisible,
     primaryOperationsAlert,
-    needErrorChecking,
+    clearConversionData,
+    isErrorChecking,
     setOperationCancelVisible,
     hideConfirmCancelOperation,
+    welcomeFormFillingTipsVisible,
+    formFillingTipsVisible,
+
+    allowInvitingGuests,
+    checkGuests,
+    hasGuests,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -174,7 +179,14 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
-  const contactsView = getContactsView(location);
+  const view = getContactsView(location);
+  if (allowInvitingGuests === false && view === "guests") checkGuests();
+  const contactsView = allowInvitingGuests
+    ? view
+    : typeof hasGuests === "boolean" && view === "guests" && !hasGuests
+      ? "people"
+      : view;
+
   const isContactsPage = !!contactsView;
   const isContactsEmptyView =
     contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
@@ -222,12 +234,11 @@ const PureHome = (props) => {
     wsCreatedPDFForm,
   });
 
-  const { showUploadPanel } = useOperations({
-    setUploadPanelVisible,
-    disableUploadPanelOpen,
+  useOperations({
     clearUploadData,
     clearUploadedFiles,
     primaryOperationsArray,
+    clearConversionData,
   });
 
   useContacts({
@@ -336,7 +347,8 @@ const PureHome = (props) => {
     }
   }
 
-  sectionProps.onOpenUploadPanel = showUploadPanel;
+  // sectionProps.onOpenUploadPanel = showUploadPanel;
+
   sectionProps.getContextModel = getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
@@ -349,8 +361,20 @@ const PureHome = (props) => {
   sectionProps.cancelUpload = onCancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
-  sectionProps.needErrorChecking = needErrorChecking;
+  sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
+
+  const hasVisibleContent =
+    !isEmptyPage ||
+    welcomeFormFillingTipsVisible ||
+    formFillingTipsVisible ||
+    showFilterLoader;
+
+  const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
+  const isValidContactsContent = !isContactsEmptyView && isContactsPage;
+
+  const shouldRenderSectionFilter =
+    (isValidMainContent || isValidContactsContent) && !isSettingsPage;
 
   return (
     <>
@@ -377,15 +401,11 @@ const PureHome = (props) => {
           <SectionSubmenuContent />
         </Section.SectionSubmenu>
 
-        {isRecycleBinFolder && !isEmptyPage ? (
-          <Section.SectionWarning>
-            <SectionWarningContent />
-          </Section.SectionWarning>
-        ) : null}
+        <Section.SectionWarning>
+          <SectionWarningContent />
+        </Section.SectionWarning>
 
-        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
-          (!isContactsEmptyView && isContactsPage)) &&
-        !isSettingsPage ? (
+        {shouldRenderSectionFilter ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />
@@ -439,6 +459,7 @@ export const Component = inject(
       cancelUpload,
       clearUploadData,
       clearUploadedFiles,
+      clearConversionData,
     } = uploadDataStore;
 
     const {
@@ -499,12 +520,11 @@ export const Component = inject(
     } = treeFoldersStore;
 
     const {
-      disableUploadPanelOpen,
       clearPrimaryProgressData,
       primaryOperationsArray,
       primaryOperationsCompleted,
       primaryOperationsAlert,
-      needErrorChecking,
+      isErrorChecking,
       isPrimaryProgressVisbile,
     } = primaryProgressDataStore;
 
@@ -516,7 +536,7 @@ export const Component = inject(
       secondaryOperationsAlert,
     } = secondaryProgressDataStore;
 
-    const { setUploadPanelVisible, startUpload } = uploadDataStore;
+    const { startUpload } = uploadDataStore;
 
     const { createFoldersTree, onClickBack } = filesActionsStore;
 
@@ -531,6 +551,9 @@ export const Component = inject(
       enablePlugins,
       getSettings,
       showGuestReleaseTip,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     } = settingsStore;
 
     const {
@@ -547,6 +570,12 @@ export const Component = inject(
 
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
+
+    const {
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      setGuestReleaseTipDialogVisible,
+    } = dialogsStore;
 
     // if (!firstLoad) {
     //   if (isLoading) {
@@ -568,7 +597,6 @@ export const Component = inject(
       folderSecurity,
 
       clearPrimaryProgressData,
-      disableUploadPanelOpen,
 
       isSecondaryProgressVisbile,
       isPrimaryProgressVisbile,
@@ -592,7 +620,6 @@ export const Component = inject(
       fetchFiles,
       fetchRooms,
 
-      setUploadPanelVisible,
       startUpload,
       createFoldersTree,
 
@@ -648,8 +675,9 @@ export const Component = inject(
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
       showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible:
-        dialogsStore.setGuestReleaseTipDialogVisible,
+      setGuestReleaseTipDialogVisible,
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
 
       secondaryActiveOperations,
       secondaryOperationsCompleted,
@@ -662,9 +690,14 @@ export const Component = inject(
       clearUploadedFiles,
       mainButtonVisible,
       primaryOperationsAlert,
-      needErrorChecking,
+      clearConversionData,
+      isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     };
   },
 )(observer(Home));

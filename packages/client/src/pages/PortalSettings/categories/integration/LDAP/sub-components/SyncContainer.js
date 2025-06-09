@@ -35,7 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobile, isDesktop } from "@docspace/shared/utils/device";
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
@@ -74,7 +74,7 @@ const SyncContainer = ({
 
   const onSaveClick = React.useCallback(() => {
     saveCronLdap()
-      .then(() => toastr.success(t("Settings:SuccessfullySaveSettingsMessage")))
+      .then(() => toastr.success(t("Common:SuccessfullySaveSettingsMessage")))
       .catch((e) => toastr.error(e));
   }, []);
 

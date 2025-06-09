@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Import data to your {{productName}} from {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "MigrationDataTitle": "Migration Data",
   "PublicRoomEmptyTitle": "Welcome to the Public room",
+  "SectionsUploadDescription": "Upload any type files from {{sectionNameFirst}} or {{sectionNameSecond}}",
   "SendInvitationLetter": "Send an invitation letter to add new members to the portal",
   "ShareOptionDescription": "Copy a public access link or invite other users to the room to start the form filling process.",
   "ShareOptionTitle": "Share a room",
@@ -44,9 +45,7 @@
   "UploadDeviceOptionTitle": "Upload from your Device",
   "UploadDevicePDFFormOptionDescription": "Upload a ready PDF form to the room from your device.",
   "UploadDevicePDFFormOptionTitle": "Upload from device",
-  "UploadFromPortalDescription": "Upload any type files from Documents or Rooms",
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
-  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
   "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room"
 }

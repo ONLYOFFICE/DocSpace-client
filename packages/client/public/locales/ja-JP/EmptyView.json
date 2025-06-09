@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "最後に閲覧または編集したドキュメントがこのセクションに表示されます。",
   "EmptyRootRoomUserDescription": "共有ルームはここに表示されます。",
   "EmptyRootRoomUserTitle": "ここにはまだルームがありません。",
+  "EmptyTemplatesDescription": "ルームセクションのルームからテンプレートを作成できます",
+  "EmptyTemplatesTitle": "ここにはまだテンプレートがありません",
   "FormFolderDefaultDescription": "PDF フォームをここにドロップするか、{{productName}} またはデバイスからアップロードしてください。",
   "FormFolderDefaultTitle": "フォームはまだありません",
   "FormFolderDefaultUserDescription": "管理者がアップロードしたフォームは、ここに表示されます。",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "{{organizationName}} のWorkspace、Google Workspace、または Nextcloud から、{{productName}} にデータをインポートできます。",
   "MigrationDataTitle": "移行データ",
   "PublicRoomEmptyTitle": "パブリックルームへようこそ",
+  "SectionsUploadDescription": "{{sectionNameFirst}} または {{sectionNameSecond}} から任意のタイプのファイルをアップロード",
   "SendInvitationLetter": "招待状を送信してポータルに新しいメンバーを追加してください",
   "ShareOptionDescription": "フォーム記入プロセスを開始するために、公開アクセスリンクをコピーするか、他のユーザーをルームに招待する。",
   "ShareOptionTitle": "ルームの共有",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "デバイスからのアップロード",
   "UploadDevicePDFFormOptionDescription": "お使いのデバイスからルームにPDFフォームをアップロードする。",
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
-  "UploadFromPortalDescription": "ドキュメントまたはルームから任意のファイルをアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "UserEmptyDescription": "管理者がアップロードしたファイルやフォルダはここに表示されます。",
   "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
 }

@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Kutsu uudelleen",
   "MessageEmailActivationInstuctionsSentOnEmail": "Sähköpostin aktivointiohjeet on lähetetty sähköpostiosoitteeseen <1>{{email}}</1>.",
+  "RemoveUser": "Poista käyttäj",
+  "RemoveUserConfirmationText": "Olet poistamassa käyttäjää huoneesta. Huomioithan, että tämä käyttäjä osallistuu aktiivisesti lomakkeiden täyttämiseen. Jos jatkat, kaikki lomakkeet, joihin hän on osallistunut, pysähtyvät hänen vaiheessaan.",
   "UserStatus": "Tila"
 }

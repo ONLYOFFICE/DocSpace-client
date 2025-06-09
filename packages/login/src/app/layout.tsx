@@ -29,6 +29,7 @@ import { cookies, headers } from "next/headers";
 import { Toast } from "@docspace/shared/components/toast";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 
 import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
@@ -42,20 +43,27 @@ import {
 import "../styles/globals.scss";
 import "../../../shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
+import { TConfirmLinkParams } from "@/types";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
+  const hdrs = await headers();
+  const type = hdrs.get("x-confirm-type") ?? "";
+  const searchParams = hdrs.get("x-confirm-query") ?? "";
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     console.log("is health check");
     return <></>;
   }
 
-  const cookieStore = cookies();
+  const queryParams = Object.fromEntries(
+    new URLSearchParams(searchParams.toString()),
+  ) as TConfirmLinkParams;
+
+  const cookieStore = await cookies();
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
   const cookieLng = cookieStore.get(LANGUAGE);
@@ -68,10 +76,17 @@ export default async function RootLayout({
     getUser(),
   ]);
 
+  if (
+    type === "GuestShareLink" &&
+    typeof settings !== "string" &&
+    !settings?.socketUrl
+  ) {
+    redirectUrl = "login";
+  }
+
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
   if (settings === "portal-not-found") {
-    const hdrs = headers();
     const config = await getConfig();
 
     const host = hdrs.get("host");
@@ -108,6 +123,27 @@ export default async function RootLayout({
     settings.culture = cookieLng.value;
   }
 
+  const locale =
+    queryParams?.culture ||
+    (settings && typeof settings !== "string" ? settings.culture : "en");
+
+  const dirClass = getDirectionByLanguage(locale || "en");
+  const themeClass =
+    systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light";
+
+  const currentColorScheme = colorTheme?.themes.find(
+    (theme) => theme.id === colorTheme.selected,
+  );
+
+  const styles = {
+    "--color-scheme-main-accent": currentColorScheme?.main.accent,
+    "--color-scheme-text-accent": currentColorScheme?.text.accent,
+    "--color-scheme-main-buttons": currentColorScheme?.main.buttons,
+    "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
+
+    "--interface-direction": dirClass,
+  } as React.CSSProperties;
+
   return (
     <html lang="en" translate="no">
       <head>
@@ -125,9 +161,7 @@ export default async function RootLayout({
         />
         <meta name="google" content="notranslate" />
       </head>
-      <body
-        className={`${systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light"}`}
-      >
+      <body style={styles} className={`${dirClass} ${themeClass}`}>
         <StyledComponentsRegistry>
           <Providers
             value={{
@@ -137,6 +171,7 @@ export default async function RootLayout({
             }}
             redirectURL={redirectUrl}
             user={user}
+            locale={locale}
           >
             <Toast isSSR />
             {children}

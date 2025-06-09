@@ -35,6 +35,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { TSelectorItem } from "@docspace/shared/components/selector";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { Encoder } from "@docspace/shared/utils/encoder";
 import * as Styled from "./TemplateAccess.styled";
 
 const MAX_AVATARS_COUNT = 3;
@@ -50,13 +52,18 @@ type TemplateAccessType = {
 const TemplateAccess = ({
   t,
   roomOwner,
-  inviteItems,
+  inviteItems: listItems,
   onOpenAccessSettings,
   isAvailable = false,
 }: TemplateAccessType) => {
-  const userName = roomOwner.displayName;
+  const inviteItems = [...listItems].filter(
+    (l) => l.templateAccess !== ShareAccessRights.None,
+  );
 
-  const usersList = inviteItems.filter((i) => !i.isGroup && !i.isOwner);
+  const userName = Encoder.htmlDecode(roomOwner.displayName ?? "");
+
+  const usersList = inviteItems.filter((i) => !i.isGroup && !i.templateIsOwner);
+
   const groupsList = inviteItems.filter((i) => i.isGroup);
 
   const avatarList = [];
@@ -76,7 +83,7 @@ const TemplateAccess = ({
         size={AvatarSize.min}
         role={AvatarRole.none}
         isDefaultSource={roomOwner.hasAvatar}
-        source={item?.avatarSmall}
+        source={item?.avatarSmall ?? item.avatar}
         isGroup={item?.isGroup}
         userName={item.userName ?? item.name}
         key={index}

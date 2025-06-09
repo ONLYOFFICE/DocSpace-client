@@ -45,19 +45,6 @@ const StyledRoomTypeList = styled.div`
   gap: 16px;
 `;
 
-const TooltipContent = ({ t }) => (
-  <Text fontSize="12px" noSelect>
-    {t("Files:WarningCreationFormRoom")}
-  </Text>
-);
-TooltipContent.displayName = "TooltipContent";
-
-const getTooltipContent = (t) => {
-  const TooltipRenderer = () => <TooltipContent t={t} />;
-  TooltipRenderer.displayName = "TooltipRenderer";
-  return TooltipRenderer;
-};
-
 const RoomTypeList = ({
   t,
   setRoomType,
@@ -74,13 +61,23 @@ const RoomTypeList = ({
     setRoomType(roomType);
   };
 
+  const getTooltipContent = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("Files:FormRoomCreationLimit", {
+          sectionName: t("Common:Rooms"),
+        })}
+      </Text>
+    );
+  };
+
   return (
     <StyledRoomTypeList>
       <Tooltip
         place="bottom"
         id="create-room-tooltip"
         openOnClick={false}
-        getContent={() => getTooltipContent(t)}
+        getContent={getTooltipContent}
       />
 
       {RoomsTypeValues.map((roomType) => (
@@ -106,6 +103,6 @@ const RoomTypeList = ({
   );
 };
 
-export default withTranslation(["CreateEditRoomDialog"])(
+export default withTranslation(["CreateEditRoomDialog", "Files", "Common"])(
   withLoader(RoomTypeList)(<RoomTypeListLoader />),
 );

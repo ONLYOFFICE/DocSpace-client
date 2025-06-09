@@ -34,7 +34,6 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { FolderType } from "@docspace/shared/enums";
 
 const StyledFooterContent = styled.div`
   display: flex;
@@ -61,7 +60,7 @@ const ConvertDialogComponent = (props) => {
     tReady,
     visible,
     folderId,
-    convertFile,
+    convertFileFromFiles,
     convertItem,
     setStoreOriginal,
     hideConfirmConvert,
@@ -98,7 +97,7 @@ const ConvertDialogComponent = (props) => {
 
   if (convertSingleFile && sortedFolder) {
     rootFolderTitle = isShareFolder
-      ? rootFoldersTitles[FolderType.USER]?.title
+      ? t("Common:MyFilesSection")
       : rootFoldersTitles[convertItem.rootFolderType]?.title;
   }
 
@@ -144,7 +143,7 @@ const ConvertDialogComponent = (props) => {
       }
 
       item.fileInfo = convertItem;
-      convertFile(item, t, convertItem.isOpen);
+      convertFileFromFiles(item, t, convertItem.isOpen, true);
     } else {
       hideMessage && hideConfirmConvert();
       convertUploadedFiles(t, createNewIfExist);
@@ -265,7 +264,7 @@ export default inject(
     } = treeFoldersStore;
     const {
       convertUploadedFiles,
-      convertFile,
+      convertFileFromFiles,
 
       cancelUploadAction,
     } = uploadDataStore;
@@ -285,7 +284,7 @@ export default inject(
     return {
       visible,
       folderId,
-      convertFile,
+      convertFileFromFiles,
       convertItem,
       setStoreOriginal,
       hideConfirmConvert,

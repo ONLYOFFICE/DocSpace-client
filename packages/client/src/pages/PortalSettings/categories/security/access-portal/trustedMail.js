@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
@@ -195,7 +195,7 @@ const TrustedMail = (props) => {
         domains,
       });
       setShowReminder(false);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -217,22 +217,24 @@ const TrustedMail = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TrustedMailSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={trustedMailDomainSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {trustedMailDomainSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={trustedMailDomainSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -272,6 +274,7 @@ const TrustedMail = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
+          isAutoFocussed
         />
       ) : null}
 
@@ -298,7 +301,6 @@ export const TrustedMailSection = inject(({ settingsStore }) => {
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
-    helpLink,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
@@ -308,7 +310,6 @@ export const TrustedMailSection = inject(({ settingsStore }) => {
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
-    helpLink,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,

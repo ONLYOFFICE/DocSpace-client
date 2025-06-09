@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "Konto {{productName}} zostanie utworzone dla adresu <1>{{email}}</1>. Zakończ rejestrację:",
-  "ChangePasswordSuccess": "Hasło zostało pomyślnie zmienione",
   "ConfirmOwnerPortalSuccessMessage": "Właściciel {{productName}} został pomyślnie zmieniony. Przekierowanie nastąpi za 10 sekund.",
   "ConfirmOwnerPortalTitle": "Potwierdź zmianę właściciela {{productName}} na {{newOwner}}.",
   "CurrentNumber": "Twój aktualny numer telefonu komórkowego",

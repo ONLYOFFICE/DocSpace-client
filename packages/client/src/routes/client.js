@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
 
@@ -552,7 +552,7 @@ const ClientRoutes = [
     ],
   },
   {
-    path: "/sdk/:mode",
+    path: "/old-sdk/:mode",
     lazy: () => import("SRC_DIR/pages/Sdk"),
   },
   {
@@ -628,6 +628,22 @@ const ClientRoutes = [
     },
   },
   {
+    path: "/encryption-portal",
+    async lazy() {
+      const { EncryptionPortal } = await componentLoader(
+        () => import("@docspace/shared/pages/EncryptionPortal"),
+      );
+
+      const Component = () => (
+        <ErrorBoundary>
+          <EncryptionPortal />
+        </ErrorBoundary>
+      );
+
+      return { Component };
+    },
+  },
+  {
     path: "/preparation-portal",
     async lazy() {
       const { PreparationPortal } = await componentLoader(
@@ -641,6 +657,26 @@ const ClientRoutes = [
           </ErrorBoundary>
         </PublicRoute>
       );
+
+      return { Component };
+    },
+  },
+  {
+    path: "/shared/invalid-link",
+    async lazy() {
+      const { ErrorInvalidLink } = await componentLoader(
+        () => import("@docspace/shared/components/errors/ErrorInvalidLink"),
+      );
+
+      const Component = () => {
+        return (
+          <PrivateRoute>
+            <ErrorBoundary>
+              <ErrorInvalidLink />
+            </ErrorBoundary>
+          </PrivateRoute>
+        );
+      };
 
       return { Component };
     },

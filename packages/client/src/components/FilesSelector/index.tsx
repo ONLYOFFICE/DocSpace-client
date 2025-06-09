@@ -193,7 +193,7 @@ const FilesSelectorWrapper = ({
   const formProps = useMemo(() => {
     let isRoomFormAccessible = true;
 
-    if (isSelect) return;
+    if (isSelect || isFormRoom) return;
 
     if (isCopy || isMove)
       isRoomFormAccessible = selection.every(
@@ -209,7 +209,7 @@ const FilesSelectorWrapper = ({
       const several = selection.length > 1;
 
       // for backup
-      if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
+      if (!selection.length) return t("Common:BackupNotAllowedInFormRoom");
 
       const option = { organizationName: logoText };
 
@@ -232,7 +232,7 @@ const FilesSelectorWrapper = ({
       message,
       isRoomFormAccessible,
     };
-  }, [selection, isCopy, isMove, t]);
+  }, [selection, isCopy, isMove, isFormRoom, t]);
 
   const onAccept = async (
     selectedItemId: string | number | undefined,

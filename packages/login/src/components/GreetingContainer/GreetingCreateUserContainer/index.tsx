@@ -44,8 +44,7 @@ import { GreetingContainer } from "./GreetingCreateUserContainer.styled";
 
 export const GreetingCreateUserContainer = ({
   type,
-  firstName,
-  lastName,
+  displayName,
   culture,
   hostName,
 }: GreetingCreateUserContainerProps) => {
@@ -73,14 +72,20 @@ export const GreetingCreateUserContainer = ({
                 ns="Common"
                 defaults={DEFAULT_ROOM_TEXT}
                 values={{
-                  firstName,
-                  lastName,
+                  displayName,
                   ...(roomData.title
                     ? { roomName: roomData.title }
                     : { spaceAddress: hostName }),
                 }}
                 components={{
-                  1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                  1: (
+                    <Text
+                      key="component_key"
+                      fontWeight={600}
+                      as="strong"
+                      fontSize="16px"
+                    />
+                  ),
                 }}
               />
             ) : (
@@ -90,15 +95,21 @@ export const GreetingCreateUserContainer = ({
                 ns="Common"
                 defaults={DEFAULT_PORTAL_TEXT}
                 values={{
-                  firstName,
-                  lastName,
+                  displayName,
                   productName: t("Common:ProductName"),
                   ...(roomData.title
                     ? { roomName: roomData.title }
                     : { spaceAddress: hostName }),
                 }}
                 components={{
-                  1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                  1: (
+                    <Text
+                      key="component_key"
+                      fontWeight={600}
+                      as="strong"
+                      fontSize="16px"
+                    />
+                  ),
                 }}
               />
             )}

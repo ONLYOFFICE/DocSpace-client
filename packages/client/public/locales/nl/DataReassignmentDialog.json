@@ -4,7 +4,6 @@
   "DataReassignment": "Gegevens opnieuw toewijzen",
   "DeleteProfileIsFinished": "Verwijder profiel wanneer herindeling voltooid is",
   "DescriptionDataReassignment": "Wij zullen kamers die door de gebruiker zijn aangemaakt en documenten die in de kamers van de gebruiker zijn opgeslagen, overbrengen.",
-  "InProgress": "In uitvoering",
   "Interrupted": "Onderbroken, een aantal gegevens kon niet worden overgedragen",
   "MoreAboutDataTransfer": "Meer over gegevensoverdracht",
   "NewDataOwner": "Nieuwe gegevenseigenaar",
@@ -14,6 +13,7 @@
   "ReassignData": "Gegevens opnieuw toewijzen",
   "ReassigningDataToAnother": "Het proces van gegevensoverdracht van gebruiker <0>{{fromUser}}</0> naar gebruiker <1>{{toUser}}</1> is gestart. Houd er rekening mee dat dit geruime tijd kan duren.",
   "ReassigningDataToItself": "Het proces van gegevensoverdracht van gebruiker <0>{{fromUser}}</0> naar gebruiker <1>{{toUser}}</1> <2>{{you}}</2> is gestart. Houd er rekening mee dat dit geruime tijd kan duren.",
+  "RoomsOnlyReassignment": "Wij zullen kamers overdragen die door contact zijn aangemaakt.",
   "StartTransferAgain": "Begin de overdracht opnieuw",
   "UserToWhomTheDataWillBeTransferred": "Gebruiker aan wie de gegevens worden overgedragen"
 }

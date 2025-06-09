@@ -37,3 +37,6 @@ common/tests/reports/tests-results.html
 
 .nx/cache
 .nx/workspace-data
+
+**/.next/
+common/translation-app/backend/db

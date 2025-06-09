@@ -55,6 +55,8 @@ class LdapFormStore {
 
   isSendWelcomeEmail = false;
 
+  disableEmailVerification = false;
+
   errors = {};
 
   groupMembership = false;
@@ -146,6 +148,7 @@ class LdapFormStore {
       login,
       password,
       acceptCertificateHash,
+      disableEmailVerification,
     } = data;
 
     const {
@@ -178,6 +181,7 @@ class LdapFormStore {
     this.acceptCertificate = acceptCertificate;
     this.acceptCertificateHash = acceptCertificateHash;
     this.isSendWelcomeEmail = sendWelcomeEmail;
+    this.disableEmailVerification = disableEmailVerification;
 
     this.groupMembership = groupMembership;
     this.groupDN = groupDN;
@@ -320,6 +324,10 @@ class LdapFormStore {
     this.isSendWelcomeEmail = sendWelcomeEmail;
   };
 
+  setDisableEmailVerification = (disableEmailVerification) => {
+    this.disableEmailVerification = disableEmailVerification;
+  };
+
   setIsGroupMembership = () => {
     this.groupMembership = !this.groupMembership;
   };
@@ -366,9 +374,12 @@ class LdapFormStore {
 
     const respose = await syncLdap();
 
-    // console.log(respose);
+    if (respose?.completed || !respose?.id) {
+      this.onGetStatus(t, respose);
+      return;
+    }
 
-    if (respose?.id) {
+    if (respose?.id && !respose?.completed) {
       this.inProgress = true;
       this.progressBarIntervalId = setInterval(
         () => this.checkStatus(t),
@@ -455,7 +466,12 @@ class LdapFormStore {
       this.password = "";
     }
 
-    if (respose?.id) {
+    if (respose?.completed || !respose?.id) {
+      this.onGetStatus(t, respose, toDefault);
+      return;
+    }
+
+    if (respose?.id && !respose?.completed) {
       this.inProgress = true;
       this.progressBarIntervalId = setInterval(
         () => this.checkStatus(t, toDefault),
@@ -672,6 +688,7 @@ class LdapFormStore {
       StartTls: this.isTlsEnabled,
       Ssl: this.isSslEnabled,
       SendWelcomeEmail: this.isSendWelcomeEmail,
+      DisableEmailVerification: this.disableEmailVerification,
       Server: clearServer,
       UserDN: this.requiredSettings.userDN,
       PortNumber: this.requiredSettings.portNumber,

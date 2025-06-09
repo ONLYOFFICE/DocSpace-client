@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext, useCallback } from "react";
-
+import React, { use, useCallback } from "react";
 import { SearchInput } from "../../search-input";
 import { InputSize } from "../../text-input";
 
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+import { SearchProps } from "../Selector.types";
 
-const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
+const Search = React.memo(({ isSearch }: SearchProps) => {
   const {
     searchPlaceholder,
     searchValue,
@@ -41,10 +41,10 @@ const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
     withSearch,
     onClearSearch,
     onSearch,
-  } = useContext(SearchContext);
-  const setIsSearch = useContext(SearchDispatchContext);
+  } = use(SearchContext);
+  const setIsSearch = use(SearchDispatchContext);
 
-  const { isBreadCrumbsLoading } = useContext(BreadCrumbsContext);
+  const { isBreadCrumbsLoading } = use(BreadCrumbsContext);
 
   const onClearSearchAction = useCallback(() => {
     onClearSearch?.(() => setIsSearch(false));
@@ -73,6 +73,7 @@ const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
       onChange={onSearchAction}
       onClearSearch={onClearSearchAction}
       size={InputSize.base}
+      resetOnBlur
     />
   );
 });

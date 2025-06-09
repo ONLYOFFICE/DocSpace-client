@@ -45,7 +45,6 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
-
 import type { TFile } from "../../api/files/types";
 
 import { ToolbarActionType } from "./MediaViewer.enums";
@@ -81,7 +80,7 @@ export const getPDFContextModel = (
     {
       id: "option_link-for-room-members",
       key: "link-for-room-members",
-      label: t("Files:CopyLink"),
+      label: t("Common:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => funcs.onCopyLink?.(item, t),
       disabled: false,
@@ -112,7 +111,7 @@ export const getPDFContextModel = (
     {
       id: "option_download-as",
       key: "download-as",
-      label: t("Translations:DownloadAs"),
+      label: t("Common:DownloadAs"),
       icon: DownloadAsReactSvgUrl,
       onClick: funcs.onClickDownloadAs,
       disabled: !item.security.Download,

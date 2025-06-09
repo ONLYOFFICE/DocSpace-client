@@ -26,7 +26,7 @@
 
 import { toastr } from "@docspace/shared/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link } from "@docspace/shared/components/link";
 
 import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
@@ -74,7 +74,8 @@ class SecondaryProgressDataStore {
 
     const { error, title, itemsCount, destFolderInfo, isFolder } =
       currentOperation;
-    const t = (key, options) => i18n.t(key, { ...options, ns: "Files" });
+    const t = (key, options) =>
+      i18n.t(key, { ...options, ns: ["Files", "Common"] });
 
     let toastTranslation = "";
 
@@ -82,11 +83,14 @@ class SecondaryProgressDataStore {
 
     const onClickLocation = () => {
       toastr.clear();
+
       const { visible, setMediaViewerData } = this.mediaViewerDataStore;
 
       if (visible) {
         setMediaViewerData({ visible: false, id: null });
       }
+
+      if (window.ClientConfig?.isFrame) return;
 
       window.DocSpace.navigate(url, { state });
     };
@@ -103,12 +107,12 @@ class SecondaryProgressDataStore {
 
     const commonComponents = {
       1: (
-        <ColorTheme
+        <Link
           tag="a"
-          themeId={ThemeId.Link}
           onClick={onClickLocation}
           target="_blank"
-          $isUnderline
+          textDecoration="underline"
+          color="accent"
         />
       ),
       2: <span style={{ fontWeight: "600" }} />,
@@ -162,6 +166,7 @@ class SecondaryProgressDataStore {
           ) : (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="CopyItem"
               components={commonComponents}
               values={commonProps}
@@ -309,6 +314,7 @@ class SecondaryProgressDataStore {
         alert: progressInfo.alert,
         items: updatedItems,
         completed: isCompleted,
+        percent: progressInfo.percent,
       };
     } else {
       const progress = {
@@ -317,6 +323,7 @@ class SecondaryProgressDataStore {
         items: [progressInfo],
         label: getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
+        percent: progressInfo.percent,
       };
 
       this.secondaryOperationsArray = [

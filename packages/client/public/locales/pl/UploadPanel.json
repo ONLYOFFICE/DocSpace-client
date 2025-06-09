@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Przesyłanie zostało przerwane. Nie udało się wgrać wszystkich plików.",
-  "EnterPassword": "Wprowadź hasło",
   "HideInput": "Ukryj",
   "Ready": "Gotowe",
-  "UploadAndConvert": "Prześlij i konwertuj pliki",
-  "Uploads": "Wgrane pliki"
+  "UploadingAndConversion": "Przesyłanie i konwersja",
+  "UploadingError": "Błąd przesyłania"
 }

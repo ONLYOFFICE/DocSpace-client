@@ -28,6 +28,8 @@ import React from "react";
 import { TextProps } from "../text/Text.types";
 
 export type BadgeProps = TextProps & {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<HTMLDivElement>;
   /** Content to be displayed inside the badge. Can be a number (e.g., notification count) or text */
   label?: string | number;
   /** Custom border radius to adjust badge corners. Accepts CSS size values */
@@ -36,8 +38,6 @@ export type BadgeProps = TextProps & {
   padding?: string;
   /** Maximum width of the badge. Useful for text truncation. Accepts CSS size values */
   maxWidth?: string;
-  /** Custom line height for the badge text. Accepts CSS line-height values */
-  lineHeight?: string;
   /** Mouse leave event handler */
   onMouseLeave?: (e: React.MouseEvent) => void;
   /** Mouse over event handler */

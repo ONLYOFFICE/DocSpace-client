@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { type JSX } from "react";
 import { P, match } from "ts-pattern";
 import { isMobile } from "react-device-detect";
 
@@ -48,7 +48,7 @@ import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
 import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
 
-import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
+import SharedIcon from "PUBLIC_DIR/images/emptyview/share-view.svg";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
@@ -92,11 +92,18 @@ export const getDescription = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
+  security: Nullable<TFolderSecurity>,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
   if (isRootEmptyPage)
-    return getRootDescription(t, access, rootFolderType, isPublicRoom);
+    return getRootDescription(
+      t,
+      access,
+      rootFolderType,
+      isPublicRoom,
+      security,
+    );
 
   if (isFolder)
     return getFolderDescription(
@@ -150,7 +157,6 @@ export const getIcon = (
   rootFolderType: Nullable<FolderType>,
 ): JSX.Element => {
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
-
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
     : getRoomIcon(type, isBaseTheme, access);
@@ -197,7 +203,10 @@ export const getOptions = (
     t("EmptyView:UploadFromPortalTitle", {
       productName: t("Common:ProductName"),
     }),
-    t("EmptyView:UploadFromPortalDescription"),
+    t("EmptyView:SectionsUploadDescription", {
+      sectionNameFirst: t("Common:MyFilesSection"),
+      sectionNameSecond: t("Common:Rooms"),
+    }),
     // TODO: need fix selector
     FilesSelectorFilterTypes.ALL,
   );
@@ -302,13 +311,13 @@ export const getOptions = (
         model: [
           {
             key: "upload-files",
-            label: t("Translations:Files"),
+            label: t("Common:Files"),
             icon: FormBlankIcon,
             onClick: () => actions.onUploadAction("file"),
           },
           {
             key: "upload-folder",
-            label: t("Files:Folder"),
+            label: t("Common:Folder"),
             icon: FolderReactSvgUrl,
             onClick: () => actions.onUploadAction("folder"),
           },
@@ -336,19 +345,19 @@ export const getOptions = (
     model: [
       {
         key: "create-Document",
-        label: t("Files:Document"),
+        label: t("Common:Document"),
         icon: DocumentsReactSvgUrl,
         onClick: () => actions.onCreate("docx"),
       },
       {
         key: "create-spreadsheet",
-        label: t("Files:Spreadsheet"),
+        label: t("Common:Spreadsheet"),
         icon: SpreadsheetReactSvgUrl,
         onClick: () => actions.onCreate("xlsx"),
       },
       {
         key: "create-presentation",
-        label: t("Files:Presentation"),
+        label: t("Common:Presentation"),
         icon: PresentationReactSvgUrl,
         onClick: () => actions.onCreate("pptx"),
       },
@@ -361,7 +370,7 @@ export const getOptions = (
       { isSeparator: true, key: "separator" },
       {
         key: "create-folder",
-        label: t("Files:Folder"),
+        label: t("Common:Folder"),
         icon: FolderReactSvgUrl,
         onClick: () => actions.onCreate(undefined),
       },
@@ -386,7 +395,9 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToPersonal"),
+          description: t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          }),
           key: "empty-view-goto-personal",
         },
       ])
@@ -402,7 +413,9 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToPersonal"),
+          description: t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          }),
           key: "empty-view-trash-goto-personal",
         },
       ])

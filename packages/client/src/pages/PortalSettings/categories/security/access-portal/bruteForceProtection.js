@@ -35,7 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/shared/components/text";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
@@ -231,7 +231,7 @@ const BruteForceProtection = (props) => {
         getBruteForceProtection();
         setShowReminder(false);
         setIsLoadingSave(false);
-        toastr.success(t("SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       })
       .catch((error) => {
         toastr.error(error);
@@ -248,22 +248,24 @@ const BruteForceProtection = (props) => {
     return <BruteForceProtectionLoader />;
 
   return (
-    <StyledBruteForceProtection>
+    <StyledBruteForceProtection withoutExternalLink={!bruteForceProtectionUrl}>
       <div className="description">
         <Text className="page-subtitle">
           {t("BruteForceProtectionDescription")}
         </Text>
 
-        <Link
-          className="link"
-          fontSize="13px"
-          target="_blank"
-          isHovered
-          href={bruteForceProtectionUrl}
-          color={currentColorScheme.main?.accent}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {bruteForceProtectionUrl ? (
+          <Link
+            className="link"
+            fontSize="13px"
+            target="_blank"
+            isHovered
+            href={bruteForceProtectionUrl}
+            color={currentColorScheme.main?.accent}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <FieldContainer

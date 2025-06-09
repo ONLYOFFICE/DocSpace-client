@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
@@ -147,7 +147,7 @@ const TwoFactorAuth = (props) => {
       setShowReminder(false);
       saveToSessionStorage("defaultTfaSettings", type);
       saveToSessionStorage("currentTfaSettings", type);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
 
       if (res) {
         setIsInit(false);
@@ -173,21 +173,23 @@ const TwoFactorAuth = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TwoFactorAuthEnableDescription", {
             productName: t("Common:ProductName"),
           })}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={tfaSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {tfaSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={tfaSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup

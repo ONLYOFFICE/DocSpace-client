@@ -38,15 +38,18 @@ import {
   getSettings,
   getThirdPartyProviders,
   getUserFromConfirm,
+  getInvitationSettings,
 } from "@/utils/actions";
 import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
-  searchParams: { [key: string]: string };
-  params: { Invite: string };
+  searchParams: Promise<{ [key: string]: string }>;
+  params: Promise<{ Invite: string }>;
 };
 
-async function Page({ searchParams, params }: LinkInviteProps) {
+async function Page(props: LinkInviteProps) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite")
     return notFound();
 
@@ -54,22 +57,29 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const headersList = headers();
+  const headersList = await headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
-  const [settings, user, thirdParty, capabilities, passwordSettings] =
-    await Promise.all([
-      getSettings(),
-      getUserFromConfirm(uid, confirmKey),
-      getThirdPartyProviders(),
-      getCapabilities(),
-      getPortalPasswordSettings(confirmKey),
-    ]);
+  const [
+    user,
+    settings,
+    thirdParty,
+    capabilities,
+    passwordSettings,
+    invitationSettings,
+  ] = await Promise.all([
+    getUserFromConfirm(uid, confirmKey),
+    getSettings(),
+    getThirdPartyProviders(true),
+    getCapabilities(),
+    getPortalPasswordSettings(confirmKey),
+    getInvitationSettings(),
+  ]);
 
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>
@@ -77,8 +87,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
         <>
           <GreetingCreateUserContainer
             type={type}
-            firstName={user?.firstName}
-            lastName={user?.lastName}
+            displayName={user?.displayName}
             culture={culture}
             hostName={hostName}
           />
@@ -86,15 +95,15 @@ async function Page({ searchParams, params }: LinkInviteProps) {
             <CreateUserForm
               userNameRegex={settings.userNameRegex}
               passwordHash={settings.passwordHash}
-              firstName={user?.firstName}
-              lastName={user?.lastName}
+              displayName={user?.displayName}
               passwordSettings={passwordSettings}
               capabilities={capabilities}
               thirdPartyProviders={thirdParty}
-              legalTerms={settings.legalTerms}
-              licenseUrl={settings.licenseUrl}
+              legalTerms={settings.externalResources.common?.entries.legalterms}
+              licenseUrl={settings.externalResources.common?.entries.license}
               isStandalone={settings.standalone}
               logoText={settings.logoText}
+              invitationSettings={invitationSettings}
             />
           </FormWrapper>
         </>

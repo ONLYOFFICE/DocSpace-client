@@ -211,14 +211,10 @@ const ChangePortalOwnerDialog = ({
             <SelectorAddButton
               className="selector-add-button"
               onClick={onTogglePeopleSelector}
-            />
-            <Text
-              className="label"
+              label={t("Translations:ChooseFromList")}
               noSelect
-              title={t("Translations:ChooseFromList")}
-            >
-              {t("Translations:ChooseFromList")}
-            </Text>
+              titleText={t("Translations:ChooseFromList")}
+            />
           </StyledPeopleSelector>
         )}
 

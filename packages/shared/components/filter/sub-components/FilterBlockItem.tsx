@@ -123,17 +123,23 @@ const FilterBlockItem = ({
         }
       >
         {item?.displaySelectorType === "button" ? (
-          <SelectorAddButton id="filter_add-author" />
-        ) : null}
-        <Text
-          fontSize="13px"
-          fontWeight={600}
-          lineHeight="15px"
-          noSelect
-          className={styles.filterBlockItemSelectorText}
-        >
-          {item.label}
-        </Text>
+          <SelectorAddButton
+            id="filter_add-author"
+            label={item.label}
+            lineHeight="15px"
+            noSelect
+          />
+        ) : (
+          <Text
+            fontSize="13px"
+            fontWeight={600}
+            lineHeight="15px"
+            noSelect
+            className={styles.filterBlockItemSelectorText}
+          >
+            {item.label}
+          </Text>
+        )}
       </div>
     ) : (
       <div
@@ -162,7 +168,7 @@ const FilterBlockItem = ({
           fontWeight={400}
           lineHeight="20px"
         >
-          {item?.selectedLabel?.toLowerCase()}
+          {item?.selectedLabel}
         </Text>
         {item.isSelected ? (
           <div className={styles.filterBlockItemTagIcon} ref={clearSelectorRef}>

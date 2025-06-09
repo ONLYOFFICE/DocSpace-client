@@ -38,6 +38,7 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 // import { DropDown } from "@docspace/shared/components/drop-down";
 // import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 // import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
@@ -53,11 +54,7 @@ import {
   StyledExternalLink,
 } from "../StyledInvitePanel";
 
-import {
-  getAccessOptions,
-  getFreeUsersRoleArray,
-  getFreeUsersTypeArray,
-} from "../utils";
+import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 
 const ExternalLinks = ({
   t,
@@ -76,6 +73,7 @@ const ExternalLinks = ({
   getPortalInviteLink,
   isUserTariffLimit,
   standalone,
+  allowInvitingGuests,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -238,7 +236,7 @@ const ExternalLinks = ({
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
-      <StyledSubHeader inline>
+      <StyledSubHeader $inline>
         {t("InviteViaLink")}
         {/* {false ? (
           <div style={{ position: "relative" }}>
@@ -279,7 +277,11 @@ const ExternalLinks = ({
           ? t("InviteViaLinkDescriptionAccounts", {
               productName: t("Common:ProductName"),
             })
-          : t("InviteViaLinkDescriptionRoom")}
+          : !allowInvitingGuests
+            ? t("InviteViaLinkDescriptionRoomMembers", {
+                productName: t("Common:ProductName"),
+              })
+            : t("InviteViaLinkDescriptionRoomGuest")}
       </StyledDescription>
       {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>
@@ -328,7 +330,7 @@ export default inject(
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
-    const { standalone } = settingsStore;
+    const { standalone, allowInvitingGuests } = settingsStore;
 
     return {
       roomId,
@@ -339,6 +341,7 @@ export default inject(
       getPortalInviteLink,
       isUserTariffLimit,
       standalone,
+      allowInvitingGuests,
     };
   },
 )(observer(ExternalLinks));

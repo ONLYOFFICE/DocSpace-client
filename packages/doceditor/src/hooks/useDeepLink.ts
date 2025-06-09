@@ -29,6 +29,7 @@ import { isMobile } from "react-device-detect";
 
 import { TFile } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
+import { DeepLinkType } from "@docspace/shared/enums";
 
 import { getDeepLink } from "../components/deep-link/DeepLink.helper";
 
@@ -36,9 +37,15 @@ export interface UseDeepLinkProps {
   settings?: TSettings;
   fileInfo?: TFile;
   email?: string;
+  deepLinkSettings?: number;
 }
 
-const useDeepLink = ({ settings, fileInfo, email }: UseDeepLinkProps) => {
+const useDeepLink = ({
+  settings,
+  fileInfo,
+  email,
+  deepLinkSettings,
+}: UseDeepLinkProps) => {
   const [isShowDeepLink, setIsShowDeepLink] = React.useState(false);
 
   React.useEffect(() => {
@@ -51,20 +58,27 @@ const useDeepLink = ({ settings, fileInfo, email }: UseDeepLinkProps) => {
     const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
     const params = new URLSearchParams(window.location.search);
     const withoutRedirect = params.get("without_redirect");
+    const isSDK = params.get("isSDK");
 
     if (
+      !isSDK &&
       isMobile &&
       !defaultOpenDocument &&
       androidID &&
       iOSId &&
       deepLinkUrl &&
       !withoutRedirect &&
-      !isAndroidWebView
+      !isAndroidWebView &&
+      deepLinkSettings !== DeepLinkType.Web
     ) {
       setIsShowDeepLink(true);
     }
 
-    if (isMobile && defaultOpenDocument === "app") {
+    if (
+      !isSDK &&
+      isMobile &&
+      (defaultOpenDocument === "app" || deepLinkSettings === DeepLinkType.App)
+    ) {
       getDeepLink(
         window.location.origin,
         email || "",
@@ -73,7 +87,7 @@ const useDeepLink = ({ settings, fileInfo, email }: UseDeepLinkProps) => {
         window.location.href,
       );
     }
-  }, [fileInfo, settings?.deepLink, email]);
+  }, [fileInfo, settings?.deepLink, email, deepLinkSettings]);
 
   return { isShowDeepLink, setIsShowDeepLink };
 };

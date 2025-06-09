@@ -31,11 +31,9 @@ import { ButtonProps } from "./Button.types";
 import { ButtonSize } from "./Button.enums";
 import styles from "./Button.module.scss";
 
-export const Button = React.forwardRef<
-  HTMLButtonElement,
-  React.PropsWithChildren<ButtonProps>
->((props, ref) => {
+export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
   const {
+    ref,
     label,
     primary,
     size = ButtonSize.normal,
@@ -49,6 +47,8 @@ export const Button = React.forwardRef<
     testId = "button",
     type,
     id,
+    minWidth,
+    style,
     ...rest
   } = props;
 
@@ -71,6 +71,8 @@ export const Button = React.forwardRef<
     "button-content": true,
   });
 
+  const buttonStyle = minWidth ? { ...style, minWidth } : style;
+
   return (
     <button
       {...rest}
@@ -84,6 +86,7 @@ export const Button = React.forwardRef<
       aria-label={label}
       aria-disabled={isDisabled ? "true" : undefined}
       aria-busy={isLoading ? "true" : undefined}
+      style={buttonStyle}
     >
       {isLoading ? (
         <Loader
@@ -106,6 +109,6 @@ export const Button = React.forwardRef<
       </div>
     </button>
   );
-});
+};
 
 Button.displayName = "Button";

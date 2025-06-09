@@ -59,8 +59,8 @@ import { getCookie } from "@docspace/shared/utils";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
-import { getAvailablePortals } from "@/utils/actions";
-import { getEmailFromInvitation } from "@/utils";
+import { getAvailablePortals } from "@/utils";
+import { getEmailFromInvitation, getRedirectURL } from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -85,7 +85,9 @@ const LoginForm = ({
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef<Id>();
+
+  const emailConfirmedToastShown = useRef<boolean>(false);
+  const passwordChangedToastShown = useRef<boolean>(false);
   const authToastId = useRef<Id>("");
 
   const searchParams = useSearchParams();
@@ -96,13 +98,14 @@ const LoginForm = ({
   const { t, ready, i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
 
-  const message = searchParams.get("message");
-  const confirmedEmail = searchParams.get("confirmedEmail");
-  const authError = searchParams.get("authError");
-  const referenceUrl = searchParams.get("referenceUrl");
-  const loginData = searchParams.get("loginData");
-  const linkData = searchParams.get("linkData");
-  const isPublicAuth = searchParams.get("publicAuth");
+  const message = searchParams?.get("message");
+  const confirmedEmail = searchParams?.get("confirmedEmail");
+  const authError = searchParams?.get("authError");
+  const referenceUrl = searchParams?.get("referenceUrl");
+  const loginData = searchParams?.get("loginData") ?? null;
+  const linkData = searchParams?.get("linkData");
+  const isPublicAuth = searchParams?.get("publicAuth");
+  const passwordChanged = searchParams?.get("passwordChanged");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -216,18 +219,22 @@ const LoginForm = ({
     message && setErrorText(message);
     confirmedEmail && setIdentifier(confirmedEmail);
 
-    const messageEmailConfirmed = t("MessageEmailConfirmed");
-    const messageAuthorize = t("MessageAuthorize");
+    if (confirmedEmail && ready && !emailConfirmedToastShown.current) {
+      const messageEmailConfirmed = t("MessageEmailConfirmed");
+      const messageAuthorize = t("MessageAuthorize");
+      const text = `${messageEmailConfirmed} ${messageAuthorize}`;
 
-    const text = `${messageEmailConfirmed} ${messageAuthorize}`;
-
-    if (
-      confirmedEmail &&
-      ready &&
-      !toastr.isActive(toastId.current || "confirm-email-toast")
-    )
-      toastId.current = toastr.success(text);
+      toastr.success(text);
+      emailConfirmedToastShown.current = true;
+    }
   }, [message, confirmedEmail, t, ready, authCallback]);
+
+  useEffect(() => {
+    if (passwordChanged && ready && !passwordChangedToastShown.current) {
+      toastr.success(t("ChangePasswordSuccess"));
+      passwordChangedToastShown.current = true;
+    }
+  }, [passwordChanged, t, ready]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log("onChangeLogin", e.target.value);
@@ -346,7 +353,7 @@ const LoginForm = ({
             ? portals[0].portalName
             : `${portals[0].portalName}.${baseDomain}`;
 
-        let redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getRedirectURL();
         let portalLink = portals[0].portalLink;
 
         const isLocalhost = name === "http://localhost";
@@ -380,8 +387,12 @@ const LoginForm = ({
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
-        const redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
+          redirectUrl = window.atob(
+            redirectUrl!.replace(/-/g, "+").replace(/_/g, "/"),
+          );
+
           window.location.replace(redirectUrl);
 
           return;
@@ -422,11 +433,19 @@ const LoginForm = ({
           return;
         }
 
-        if (typeof res === "string")
-          window.location.replace(
-            `${res}&linkData=${linkData}&publicAuth=${isPublicAuth}`,
-          );
-        else window.location.replace("/"); //TODO: save { user, hash } for tfa
+        if (typeof res === "string") {
+          let redirectUrl = `${res}`;
+
+          if (linkData) {
+            redirectUrl += `&linkData=${linkData}`;
+          }
+
+          if (isPublicAuth) {
+            redirectUrl += `&publicAuth=${isPublicAuth}`;
+          }
+
+          window.location.replace(redirectUrl);
+        } else window.location.replace("/"); //TODO: save { user, hash } for tfa
       })
       .catch((error) => {
         let errorMessage = "";

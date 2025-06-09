@@ -27,8 +27,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { MemoryRouter } from "react-router-dom";
-import { DeviceType } from "@docspace/shared/enums";
+import { MemoryRouter } from "react-router";
 import { ThemeProvider } from "../../../components/theme-provider";
 import Base from "../../../themes/base";
 import { BrandName } from "./index";
@@ -37,19 +36,16 @@ jest.mock("react-device-detect", () => ({
   isMobile: false,
 }));
 
-const t = jest.fn((key) => key);
 const onSave = jest.fn();
 
 const defaultProps = {
-  t,
   showNotAvailable: false,
   isSettingPaid: true,
   standalone: false,
   onSave,
-  isWhiteLabelLoaded: true,
+  isBrandNameLoaded: true,
   defaultBrandName: "Default Brand",
   brandName: "Current Brand",
-  deviceType: DeviceType.desktop,
   isEqualText: false,
 };
 

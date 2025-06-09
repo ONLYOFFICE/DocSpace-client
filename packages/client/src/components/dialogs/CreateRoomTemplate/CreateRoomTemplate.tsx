@@ -68,7 +68,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     ...fetchedRoomParams,
   });
   const [inviteItems, setInviteItems] = useState([
-    { ...item.createdBy, isOwner: true },
+    { ...item.createdBy, templateIsOwner: true },
   ]);
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
@@ -124,11 +124,11 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     onCloseAccessSettings();
 
     const invitations = inviteItems
-      .filter((i) => !i.isOwner)
+      .filter((i) => !i.templateIsOwner)
       .map((inviteItem) => {
         return {
           id: inviteItem.id,
-          access: inviteItem.access ?? ShareAccessRights.ReadOnly,
+          access: inviteItem.templateAccess ?? ShareAccessRights.ReadOnly,
         };
       });
 
@@ -174,7 +174,6 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
         ) : (
           <TemplateAccessSettingsPanel
             templateItem={item}
-            usersPanelIsVisible={addUsersPanelVisible}
             setUsersPanelIsVisible={setAddUsersPanelVisible}
             onCloseAccessSettings={onCloseAccessSettings}
             onClosePanels={onClose}

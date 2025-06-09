@@ -29,10 +29,22 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
+
+import { isIconSizeType } from "../../utils";
+import { isDesktop } from "../../utils/device";
+
+import { Tooltip } from "../tooltip";
+
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";
 
 const isTouchDevice = () => "ontouchstart" in document.documentElement;
+
+const getColor = (color: IconButtonProps["color"]): string => {
+  if (!color) return "";
+
+  return color === "accent" ? "var(--accent-main)" : color;
+};
 
 const IconButton = ({
   // Icon props
@@ -69,6 +81,11 @@ const IconButton = ({
   onMouseUp,
   onClick,
 
+  // For test
+  dataTestId,
+  tooltipContent,
+  tooltipId,
+
   ...rest
 }: IconButtonProps) => {
   const buttonRef = React.useRef<HTMLDivElement>(null);
@@ -85,26 +102,6 @@ const IconButton = ({
       color: color || "",
     });
   }, [iconName, color]);
-
-  // Update CSS variables when color or size changes
-  useEffect(() => {
-    if (!buttonRef.current) return;
-
-    buttonRef.current.style.setProperty(
-      "--icon-button-color",
-      currentIcon.color ?? "",
-    );
-    buttonRef.current.style.setProperty(
-      "--icon-button-hover-color",
-      currentIcon.color ?? "",
-    );
-
-    if (size)
-      buttonRef.current.style.setProperty(
-        "--icon-button-size",
-        typeof size === "number" ? `${size}px` : size,
-      );
-  }, [currentIcon.color, size]);
 
   // Helper function to update icon state
   const updateIconState = useCallback(
@@ -215,10 +212,18 @@ const IconButton = ({
       [styles.notClickable]: !onClick && !isClickable,
       [styles.fill]: isFill && !isStroke,
       [styles.stroke]: isStroke,
+      [styles.commonIconsStyle]: isIconSizeType(size),
     },
     className,
     "icon-button_svg",
   );
+
+  const buttonStyle = {
+    "--icon-button-size": typeof size === "number" ? `${size}px` : size,
+    "--icon-button-color": getColor(currentIcon.color),
+    "--icon-button-hover-color": getColor(currentIcon.color),
+    ...style,
+  } as React.CSSProperties;
 
   return (
     <div
@@ -234,18 +239,30 @@ const IconButton = ({
       data-event="click focus"
       data-for={id}
       id={id}
-      style={style}
-      data-testid="icon-button"
+      style={buttonStyle}
+      data-testid={dataTestId || "icon-button"}
       data-iconname={currentIcon.name}
+      data-size={size}
+      data-tooltip-id={tooltipId}
+      data-tooltip-content={tooltipContent}
       {...rest}
     >
-      {iconNode || (
+      {iconNode ? (
+        <div className={classNames(styles.notSelectable, "icon-button_svg")}>
+          {iconNode}
+        </div>
+      ) : (
         <ReactSVG
-          className={classNames(styles.notSelectable, "icon-button_svg")}
-          src={currentIcon.name || ""}
+          className={classNames(
+            styles.notSelectable,
+            "icon-button",
+            "icon-button_svg",
+          )}
+          src={iconName || ""}
           data-testid="icon-button-svg"
         />
       )}
+      <Tooltip float={isDesktop()} id={tooltipId} place="bottom" />
     </div>
   );
 };

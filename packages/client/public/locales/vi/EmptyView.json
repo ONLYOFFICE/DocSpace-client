@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Tài liệu đã xem hoặc chỉnh sửa cuối cùng của bạn sẽ được hiển thị trong phần này.",
   "EmptyRootRoomUserDescription": "Phòng chung sẽ xuất hiện ở đây.",
   "EmptyRootRoomUserTitle": "Chưa có phòng nào ở đây",
+  "EmptyTemplatesDescription": "Bạn có thể tạo mẫu từ một phòng trong phần Phòng",
+  "EmptyTemplatesTitle": "Chưa có mẫu nào ở đây",
   "FormFolderDefaultDescription": "Thả biểu mẫu PDF ở đây hoặc tải lên từ {{productName}} hoặc thiết bị.",
   "FormFolderDefaultTitle": "Chưa có biểu mẫu nào ở đây",
   "FormFolderDefaultUserDescription": "Các biểu mẫu do quản trị viên tải lên sẽ xuất hiện ở đây.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Nhập dữ liệu {{productName}} của bạn từ {{organizationName}} Workspace, Google Workspace hoặc Nextcloud.",
   "MigrationDataTitle": "Di chuyển Dữ liệu",
   "PublicRoomEmptyTitle": "Chào mừng bạn đến với Phòng Công Cộng",
+  "SectionsUploadDescription": "Tải lên bất kỳ loại tệp nào từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
   "SendInvitationLetter": "Gửi thư mời để thêm thành viên mới vào cổng thông tin",
   "ShareOptionDescription": "Sao chép liên kết truy cập công khai hoặc mời người dùng khác vào phòng để bắt đầu quá trình điền biểu mẫu.",
   "ShareOptionTitle": "Chia sẻ phòng",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Tải lên từ Thiết bị của bạn",
   "UploadDevicePDFFormOptionDescription": "Tải biểu mẫu PDF đã sẵn sàng lên phòng từ thiết bị của bạn.",
   "UploadDevicePDFFormOptionTitle": "Tải lên từ thiết bị",
-  "UploadFromPortalDescription": "Tải lên bất kỳ loại tập tin nào từ Tài liệu hoặc Phòng",
   "UploadFromPortalTitle": "Tải lên từ {{productName}}",
   "UploadPDFFormOptionDescription": "Chọn một biểu mẫu PDF sẵn có trong {{productName}} và tải nó lên phòng.",
-  "UserEmptyDescription": "Các tập tin và thư mục được quản trị viên tải lên sẽ xuất hiện ở đây.",
   "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo"
 }

@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Doldurun",
   "FillOutDescription": "Redaktor pəncərəsində orijinal formanın sahələrini doldurun.",
   "FillOutTitle": "Formanı özünüz doldurun",
-  "FillPDFDialogTitle": "Kimi doldurun",
-  "ShareCollectButtonLabel": "Otağa kopyalayın",
-  "ShareCollectDescription": "Formunuzu paylaşın və forma doldurma otağı vasitəsilə cavablar toplayın.",
-  "ShareCollectTitle": "Paylaşın"
+  "FillPDFDialogTitle": "Kimi doldurun"
 }

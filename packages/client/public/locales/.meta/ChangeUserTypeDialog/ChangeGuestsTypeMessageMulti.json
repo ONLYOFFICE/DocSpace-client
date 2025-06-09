@@ -1,0 +1,424 @@
+{
+  "key_path": "ChangeGuestsTypeMessageMulti",
+  "content": "The selected guests will be moved to the {{membersSection}} section and assigned the User type. Users have their own {{documentsSection}} section, are able to create and edit files, but aren't able to create rooms.",
+  "content_en_sha1_hash": "1dde646a293ab068dcf80ea51f4242d063d9863f",
+  "created_at": "2025-05-19T21:30:56.916Z",
+  "updated_at": "2025-05-24T14:11:26.418Z",
+  "comment": {
+    "text": "The translation key \"ChangeGuestsTypeMessageMulti\" is used to display a message explaining the implications of assigning a User type to selected guests. This message appears in a change user type dialog and informs users about their new permissions, including access to files but not room creation capabilities.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:37:52.618Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/getChangeTypeKey.ts",
+      "line_number": 34,
+      "context": "[EmployeeType.Owner]: \"\",\n },\n multiple: {\n [EmployeeType.RoomAdmin]: `${t(\"ChangeGuestsTypeToManagerMulti\", values)}`,\n [EmployeeType.Admin]: `${t(\"ChangeGuestsTypeToAdminMulti\", values)}`,\n [EmployeeType.User]: `${t(\"ChangeGuestsTypeMessageMulti\", values)}`,\n [EmployeeType.Guest]: \"\",\n [EmployeeType.Owner]: \"\",\n },\n };\n return translateKey[isSingle ? \"single\" : \"multiple\"][type];",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"تعيينهم كنوع مستخدم\" (ta'yeenhum ka naw' mustakhdim) literally translates to 'assigned as a user type' which isn't the most natural way to express 'assigned the User type' in Arabic. A better translation would be something like \"تغيير نوعهم إلى مستخدم\" (taghyir naw'hum ila mustakhdim) - 'changing their type to user'.",
+          "suggestion": "تغيير نوعهم إلى مستخدم"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"الوصول إلى قسم\" (al-wusool ila qism) which translates to 'access to section' is a bit clunky. It would read more naturally as \"لديهم قسم\" (ladayhim qism) which means 'they have a section'.",
+          "suggestion": "لديهم قسم"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the User type' is a bit awkward. A more natural Azerbaijani phrasing would be 'Onlara İstifadəçi statusu veriləcək' or 'Onlara İstifadəçi statusu təyin olunacaq'.",
+          "suggestion": "Onlara İstifadəçi statusu veriləcək"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'İstifadəçilərin faylları yarada və redaktə edə biləcəkləri öz {{documentsSection}} bölməsi mövcuddur' is grammatically a bit complex. A more straightforward phrasing would be clearer.",
+          "suggestion": "İstifadəçilərin öz {{documentsSection}} bölmələri var və onlar faylları yarada və redaktə edə bilərlər."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'потребителите' (users) is repeated unnecessarily. While grammatically correct, it's stylistically awkward.",
+          "suggestion": "Избраните гости ще бъдат преместени в раздел {{membersSection}} и ще им бъде назначен тип потребител. Те имат свой собствен раздел {{documentsSection}} и могат да създават и редактират файлове, но не могат да създават стаи."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'Vybraní hosté budou přesunuti do sekce {{membersSection}} a bude jim přiřazen typ Uživatel' sounds slightly awkward. A more natural phrasing would be to combine the two clauses into one.",
+          "suggestion": "Vybraní hosté budou přesunuti do sekce {{membersSection}} a budou mít přiřazen typ Uživatel."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Users have their own {{documentsSection}} section' translates to 'Uživatelé mají vlastní sekci {{documentsSection}}' which is literally correct but may not be the most fluent translation. 'Uživatelé mají sekci {{documentsSection}}' is slightly more natural.",
+          "suggestion": "Uživatelé mají sekci {{documentsSection}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses \"bereich\" after {{documentsSection}}. It should be consistent with the English and omit the extra word.",
+          "suggestion": "Benutzer haben ihren eigenen {{documentsSection}}."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Benutzertyp \"User\"' feels slightly awkward in German. While technically correct, it's not the most natural phrasing.",
+          "suggestion": "Benutzertyp zugewiesen."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the User type' is a bit awkward. A more natural Greek translation would be something along the lines of 'θα τους δοθεί η ιδιότητα Χρήστη' or 'θα χαρακτηριστούν ως Χρήστες'.",
+          "suggestion": "θα τους αποδοθεί η ιδιότητα Χρήστη"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Օգտատերերն' is a slightly awkward and potentially incorrect pluralization of 'Օգտատեր'. It should be 'Օգտատերերը'.",
+          "suggestion": "Օգտատերերը"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'կտեղափոխվեն {{membersSection}} բաժին' could be improved for smoother flow. While grammatically acceptable, it sounds a bit stiff.",
+          "suggestion": "կտեղափոխվեն {{membersSection}} բաժնում"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation maintains the English formatting of using placeholders like {{membersSection}} and {{documentsSection}}. While technically correct, it might be more natural to rephrase to avoid the placeholders in Lao if possible, depending on the context of the application. This depends on whether the UI will render these correctly in Lao.",
+          "suggestion": "Consider rephrasing to avoid the placeholders if feasible, or confirm the application properly handles these placeholders in the Lao UI."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ປະເພດຜູ້ໃຊ້ (User)' is understandable, it's a bit verbose. It literally translates to 'type of user'. A more natural and concise translation for 'User' could be used, perhaps just 'ຜູ້ໃຊ້' is sufficient.",
+          "suggestion": "Consider using just 'ຜູ້ໃຊ້' instead of 'ປະເພດຜູ້ໃຊ້ (User)' for brevity and flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'tims tiks piešķirts tips Lietotājs' is grammatically awkward. It should be 'viņiem tiks piešķirts Lietotāja tips' or 'viņiem tiks piešķirts Lietotāja tips'.",
+          "suggestion": "Atlasītie viesi tiks pārvietoti uz sadaļu {{membersSection}} un viņiem tiks piešķirts Lietotāja tips."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'tips Lietotājs' is technically correct, it's not the most natural way to express 'User type' in Latvian.  'Lietotāja tips' sounds more idiomatic.",
+          "suggestion": "Atlasītie viesi tiks pārvietoti uz sadaļu {{membersSection}} un viņiem tiks piešķirts Lietotāja tips."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'zostanie im przypisany Rodzaj użytkownika' is grammatically awkward. 'Rodzaj' (type) is masculine singular, but the correct grammatical agreement requires it to be feminine singular since it refers to 'User Type' which is being assigned *to* the guests.",
+          "suggestion": "Wybrani goście zostaną przeniesieni do sekcji {{membersSection}} i zostanie im przypisany Typ użytkownika."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Typ użytkownika' is less natural than simply 'Użytkownik' in this context.  'Rodzaj użytkownika' is too literal.",
+          "suggestion": "Wybrani goście zostaną przeniesieni do sekcji {{membersSection}} i zostanie im przypisany Użytkownik."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'User type' is translated as 'tipo de utilizador'. While technically correct, it's more natural in Portuguese to say 'tipo de usuário'.",
+          "suggestion": "tipo de usuário"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repetition of 'utilizadores' in the second sentence is slightly awkward.  It would read better with a different phrasing.",
+          "suggestion": "Utilizadores têm sua própria seção {{documentsSection}} e podem criar e editar arquivos, mas não podem criar salas."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'li se vor stabili tip de utilizator' is grammatically awkward. It's a passive construction that doesn't flow naturally in Romanian.",
+          "suggestion": "li se va atribui tipul de utilizator"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'propria lor secțiunea' is grammatically incorrect. It should be 'propria lor secțiune'.",
+          "suggestion": "propria lor secțiune"
+        },
+        {
+          "type": "formatting",
+          "description": "The capitalization of 'Secțiunea' should be consistent throughout the translation. While it is capitalized once, it's not consistently applied.  It's likely that it should consistently be lowercase.",
+          "suggestion": "secțiunea"
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පරිශීලක' (parishilaka) is an uncommon and potentially inaccurate translation for 'User' in this context. A more common and easily understood translation might be 'භාවිතරයා' (bhavitaraayo) or simply 'පරිශීලකයා' (parishilakayaa).",
+          "suggestion": "Consider using 'භාවිතරයා' (bhavitaraayo) or 'පරිශීලකයා' (parishilakayaa) for 'User'."
+        },
+        {
+          "type": "formatting",
+          "description": "The word order in \"තෝරාගත් අමුත්තන් {{membersSection}} කොටසට ගෙන යන අතර පරිශීලක වර්ගය පවරනු ලැබේ\" feels slightly awkward. A more natural flow might improve readability.",
+          "suggestion": "Consider restructuring the sentence to something like: \"තෝරාගත් අමුත්තන් {{membersSection}} කොටසට ගෙන ගොස් පරිශීලක වර්ගය පවරනු ලැබේ.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'membersSection' is translated implicitly as 'Ľudia' which is not necessarily the best equivalent. While 'Ľudia' means 'people', it lacks the specificity of a section within a system. A more appropriate translation might be 'sekcia Členovia' or something similar to preserve the reference to a specific section.",
+          "suggestion": "Consider translating 'membersSection' more directly, such as 'sekcia Členovia' or 'sekcia pre Členov'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'User' is translated as 'Používatelia'. Although technically correct, it's a very literal translation. Given the context, it might be more natural to use the more common term 'účtovateľ'.",
+          "suggestion": "Consider using 'účtovateľ' instead of 'Používatelia' for a more natural flow."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the User type' is somewhat clunky. A more natural translation of 'assigned the User type' might be 'opravljen uporabniški tip' or 'dodeljen uporabniški status'.",
+          "suggestion": "dodeljen uporabniški status"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sobe' (rooms) is technically correct, but in this context, 'prostore' might be a better fit, as it implies more general spaces that can be created.",
+          "suggestion": "prostore"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'фајлове' is a transcription of the English 'files' and while understandable, a more standard Serbian spelling would be 'фајлове'.",
+          "suggestion": "фајлове"
+        },
+        {
+          "type": "grammar",
+          "description": "While the current phrasing is understandable, the sentence \"Корисници имају сопствени одељак за {{documentsSection}}\" could be improved for flow.  'за' doesn't feel entirely natural here.",
+          "suggestion": "Корисници имају сопствени одељак {{documentsSection}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'assigned the User type' is not the most natural or accurate translation of 'assigned the User type'. While technically correct, it sounds awkward. A better translation would reflect a more natural flow.",
+          "suggestion": "Izabrani gosti će biti premešteni u odeljak {{membersSection}} i dobiće status Korisnika."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'fajlove' should be 'fajlove' (single 'j' is correct here).",
+          "suggestion": "fajlove"
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Kullanıcı türü atanacaktır\" is a bit formal and awkward. A more natural translation for \"assigned the User type\" would be something like \"Kullanıcı olarak tanımlanacaklar\" or \"Kullanıcı statüsüne geçecekler\".",
+          "suggestion": "Seçilen konuklar {{membersSection}} bölümüne taşınacak ve Kullanıcı statüsüne geçecekler."
+        }
+      ],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence \"Вибраних гостей буде переміщено до розділу {{membersSection}}, їм буде призначено тип «Користувач».\" is a bit clunky.  It could be improved for flow.",
+          "suggestion": "Вибраних гостей буде переміщено до розділу {{membersSection}} та їм буде призначено тип «Користувач»."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Користувач\" is a valid translation for User, it's quite literal. A more natural phrasing might be considered.",
+          "suggestion": "Вибраних гостей буде переміщено до розділу {{membersSection}} та їм буде призначено роль користувача."
+        }
+      ],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"assigned the User type\" is a bit awkward. A more natural translation for 'assigned the User type' would be 'được cấp quyền Người dùng' or 'được thay đổi thành Người dùng'.",
+          "suggestion": "Những khách được chọn sẽ được chuyển đến phần {{membersSection}} và được cấp quyền Người dùng. Người dùng có phần {{documentsSection}} riêng có thể tạo và chỉnh sửa tập tin, nhưng không thể tạo phòng."
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '所选访客' (suo xuan fangke) directly translates to 'selected guests'. While technically correct, a more natural and user-friendly translation might be '已选访客' (yi xuan fangke) or '您选择的访客' (nin xuanze de fangke).",
+          "suggestion": "您选择的访客将被移动到“{{membersSection}}”部分，并分配为用户类型。"
+        },
+        {
+          "type": "formatting",
+          "description": "The quote marks used for section names might not be consistent with the platform's style. Confirm the platform’s preferred style for quoting section names.",
+          "suggestion": "Confirm platform style for quote marks around section names."
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

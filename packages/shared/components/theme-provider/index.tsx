@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React, { useEffect } from "react";
 import { ThemeProvider as Provider } from "styled-components";
 
@@ -47,13 +49,14 @@ export const ThemeProvider = ({
     root.setAttribute("data-theme", themeStr);
     root.setAttribute("data-dir", dir);
     root.style.setProperty("--interface-direction", dir);
+    root.style.setProperty("--font-family", theme.fontFamily);
 
     const body = document.body;
     body.classList.remove("light", "dark");
     body.classList.remove("ltr", "rtl");
     body.classList.add(themeStr);
     body.classList.add(dir);
-  }, [theme.isBase, theme.interfaceDirection]);
+  }, [theme.isBase, theme.interfaceDirection, theme.fontFamily]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -98,7 +101,7 @@ export const ThemeProvider = ({
 
   return (
     <InterfaceDirectionProvider interfaceDirection={theme.interfaceDirection}>
-      <CustomThemeProvider theme={theme.isBase ? "base" : "dark"}>
+      <CustomThemeProvider theme={theme.isBase ? "Base" : "Dark"}>
         <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
       </CustomThemeProvider>
     </InterfaceDirectionProvider>

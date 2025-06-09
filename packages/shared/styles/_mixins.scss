@@ -1,3 +1,5 @@
+@use "variables/devices";
+
 @mixin no-user-select {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -12,37 +14,37 @@
 }
 
 @mixin mobile {
-  @media (max-width: #{$mobile}) {
+  @media (max-width: #{devices.$mobile}) {
     @content;
   }
 }
 
 @mixin not-mobile {
-  @media (min-width: #{$mobile + 1}) {
+  @media (min-width: #{devices.$mobile + 0.1}) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (min-width: #{$mobile + 1}) and (max-width: #{$tablet}) {
+  @media (min-width: #{devices.$mobile + 0.1}) and (max-width: #{devices.$desktop - 0.1}) {
     @content;
   }
 }
 
 @mixin tablet-and-below {
-  @media (max-width: #{$tablet}) {
+  @media (max-width: #{devices.$desktop - 0.1}) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: #{$desktop}) {
+  @media (min-width: #{devices.$desktop}) {
     @content;
   }
 }
 
 @mixin transitional-screen-size {
-  @media (max-width: #{$desktop + $info-panel-width}) {
+  @media (max-width: #{devices.$desktop + devices.$info-panel-width}) {
     @content;
   }
 }

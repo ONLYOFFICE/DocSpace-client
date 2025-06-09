@@ -24,7 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useImperativeHandle,
+} from "react";
 import { isIOS, isMobile } from "react-device-detect";
 
 import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
@@ -48,18 +54,16 @@ import {
 
 const MainButtonMobile = (props: MainButtonMobileProps) => {
   const {
+    ref,
     className,
     style,
     opened,
     actionOptions,
-
     buttonOptions,
-
     withoutButton,
     manualWidth,
     isOpenButton,
     onClose,
-
     alert,
     withMenu = true,
     onClick,
@@ -74,7 +78,6 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   const [openedSubmenuKey, setOpenedSubmenuKey] = useState("");
 
   const divRef = useRef<HTMLDivElement | null>(null);
-  const ref = useRef<HTMLDivElement | null>(null);
   const dropDownRef = useRef(null);
 
   const scrollElem = useRef<null | HTMLElement>(null);
@@ -82,28 +85,30 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   const prevPosition = useRef<null | number>(null);
   const buttonBackground = useRef<boolean>(false);
 
+  const mainButtonRef = useRef<HTMLDivElement | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    contains: (target: HTMLElement) => {
+      return mainButtonRef.current
+        ? mainButtonRef.current.contains(target)
+        : false;
+    },
+    getButtonElement: () => mainButtonRef,
+  }));
+
   useEffect(() => {
     setIsOpen(opened);
   }, [opened]);
 
-  const usePrevious = (value?: string) => {
-    const prevRef = useRef<string>();
-
-    useEffect(() => {
-      prevRef.current = value;
-    });
-
-    return prevRef.current;
-  };
-
-  const currentLocation = window.location.href;
-  const prevLocation = usePrevious(window.location.href);
-
   useEffect(() => {
-    if (prevLocation !== currentLocation) {
-      setIsOpen(false);
-    }
-  }, [prevLocation, currentLocation]);
+    const handlePopState = () => setIsOpen(false);
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   const setDialogBackground = (scrollHeight: number) => {
     if (!buttonBackground) {
@@ -200,7 +205,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
       onClose();
     }
 
-    return setIsOpen(value);
+    setIsOpen(value);
   };
 
   const onMainButtonClick = (e: React.MouseEvent) => {
@@ -214,7 +219,12 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
 
   const outsideClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (isOpen && ref.current && ref.current.contains(target)) return;
+    if (
+      isOpen &&
+      mainButtonRef?.current &&
+      mainButtonRef?.current?.contains(target)
+    )
+      return;
     toggle(false);
   };
 
@@ -324,7 +334,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     <>
       <Backdrop zIndex={210} visible={isOpen || false} onClick={outsideClick} />
       <div
-        ref={ref}
+        ref={mainButtonRef}
         className={className}
         style={{ zIndex: `${isOpen ? "211" : "201"}`, ...style }}
         data-testid="main-button-mobile"
@@ -373,5 +383,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     </>
   );
 };
+
+MainButtonMobile.displayName = "MainButtonMobile";
 
 export { MainButtonMobile };

@@ -28,13 +28,13 @@ import { TContextMenuValueTypeOnClick } from "../context-menu/ContextMenu.types"
 import { ShareAccessRights } from "../../enums";
 import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
-import { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
+import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
 
 export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
 export type TBaseOption = {
   key: string | number;
-  icon?: string;
+  icon?: string | React.ElementType | React.ReactElement;
   label?: string;
   color?: string;
   backgroundColor?: string;
@@ -52,6 +52,8 @@ export type TBaseOption = {
   title?: string;
   action?: unknown;
   onClick?: (opt: TContextMenuValueTypeOnClick) => void;
+  pageNumber?: number;
+  count?: number;
 };
 
 export type TRegularOption = TBaseOption & {
@@ -67,7 +69,7 @@ export type TOption = TRegularOption | TSeparatorOption;
 
 export type TComboboxProps = {
   /** Displays advanced options */
-  advancedOptions?: React.ReactNode;
+  advancedOptions?: React.ReactElement<{ children?: React.ReactNode }>;
   /** Number of advanced options */
   advancedOptionsCount?: number;
   /** Children elements */
@@ -151,7 +153,7 @@ export type TComboboxProps = {
   /** Set is open item access */
   setIsOpenItemAccess?: (isOpen: boolean) => void;
   /** Size */
-  size?: ComboBoxSize;
+  size?: `${ComboBoxSize}`;
 
   role?: string;
   /** Style */
@@ -190,6 +192,9 @@ export type TComboboxProps = {
   onSelect?: (option: TOption) => void;
   /** On toggle */
   onToggle?: (e: React.MouseEvent<HTMLDivElement>, isOpen: boolean) => void;
+
+  /** Indicates if the backdrop should be shown */
+  shouldShowBackdrop?: boolean;
 };
 
 export type TComboButtonProps = {

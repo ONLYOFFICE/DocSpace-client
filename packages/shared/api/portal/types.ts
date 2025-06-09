@@ -25,9 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TError } from "../../utils/axiosClient";
-import { TariffState } from "../../enums";
+import type { TariffState, BackupStorageType } from "../../enums";
 
-export type TQuotas = { id: number; quantity: number };
+export type TQuotas = {
+  id: number;
+  quantity: number;
+  wallet?: boolean;
+  dueDate?: string;
+  nextQuantity?: number;
+};
 
 export type TPortalTariff = {
   id: number;
@@ -54,6 +60,10 @@ export type TBasePaymentFeature = {
   };
 };
 
+export type TStringPaymentFeature = TBasePaymentFeature & {
+  title: string;
+};
+
 export type TNumericPaymentFeature = TBasePaymentFeature & {
   value: number;
 };
@@ -62,14 +72,18 @@ export type TBooleanPaymentFeature = TBasePaymentFeature & {
   value: boolean;
 };
 
-export type TPaymentFeature = TNumericPaymentFeature | TBooleanPaymentFeature;
+export type TPaymentFeature =
+  | TNumericPaymentFeature
+  | TBooleanPaymentFeature
+  | TStringPaymentFeature;
 
 export type TPaymentQuota = {
   id: number;
   title: string;
   price: {
-    value: string;
+    value: number;
     currencySymbol?: string;
+    isoCurrencySymbol?: string;
   };
   nonProfit: boolean;
   free: boolean;
@@ -99,6 +113,7 @@ export type TPortal = {
   lastModified: Date;
   name: string;
   ownerId: string;
+  region?: string | null;
   paymentId: string;
   spam: boolean;
   status: number;
@@ -123,4 +138,84 @@ export type TTariff = {
 export type TRestoreProgress = {
   progress: number;
   error?: TError;
+};
+
+export type TBackupHistory = {
+  id: string;
+  fileName: string;
+  storageType: BackupStorageType;
+  createdOn: string;
+  expiresOn: string;
+};
+
+export type TBackupSchedule = {
+  backupsStored: number;
+  cronParams: {
+    day: number;
+    hour: number;
+    period: number;
+  };
+  dump: boolean;
+  lastBackupTime: string;
+  storageParams: {
+    folderId: string;
+    module?: string;
+    tenantId?: string;
+  };
+  storageType: BackupStorageType;
+};
+
+export type TStorageRegion = {
+  displayName: string;
+  originalSystemName: string;
+  partitionDnsSuffix: string;
+  partitionName: string;
+  systemName: string;
+};
+
+export type TBackupProgress = {
+  progress: number;
+  error?: TError;
+  link?: string;
+  isCompleted: boolean;
+};
+
+export type TCustomerInfo = {
+  paymentMethodStatus: number;
+  email: string | null;
+  portalId: string | null;
+};
+
+export type TBalance =
+  | {
+      accountNumber?: number;
+      subAccounts: [{ currency: string; amount: number }];
+    }
+  | 0;
+
+export type TTransactionCollection = {
+  date: string;
+  service?: string;
+  serviceUnit?: string;
+  quantity: number;
+  amount: number;
+  credit: number;
+  withdrawal: number;
+  currency: string;
+};
+
+export type TTransactionHistory = {
+  collection: TTransactionCollection[];
+  offset: number;
+  limit: number;
+  totalQuantity: number;
+  totalPage: number;
+  currentPage: number;
+};
+
+export type TAutoTopUpSettings = {
+  enabled: boolean;
+  minBalance: number;
+  upToBalance: number;
+  currency: string | null;
 };

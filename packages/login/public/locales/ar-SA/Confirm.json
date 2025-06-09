@@ -1,6 +1,5 @@
 {
   "AccountWillBeCreated": "سيتم إنشاء حساب {{productName}} لـ <1>{{email}}</1> يرجى إكمال التسجيل:",
-  "ChangePasswordSuccess": "تم تغيير كلمة المرور بنجاح",
   "ConfirmOwnerPortalSuccessMessage": "تم تغيير مالك {{productName}} بنجاح. ستتم إعادة توجيهك في غضون 10 ثوانٍ.",
   "ConfirmOwnerPortalTitle": "الرجاء تأكيد أنك تريد تغيير مالك {{productName}} إلى {{newOwner}}.",
   "CurrentNumber": "رقم هاتفك المحمول الحالي",

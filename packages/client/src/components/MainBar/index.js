@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { mobile } from "@docspace/shared/utils";
 import { isPublicPreview } from "@docspace/shared/utils/common";

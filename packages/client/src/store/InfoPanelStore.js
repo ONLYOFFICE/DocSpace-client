@@ -31,8 +31,9 @@ import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
-  Events,
   FileType,
+  // Events,
+  // FileType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -40,7 +41,7 @@ import {
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
 import {
-  getCreateShareLinkKey,
+  DEFAULT_CREATE_LINK_SETTINGS,
   getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
 import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
@@ -49,7 +50,7 @@ import {
   getExternalLinks,
   editExternalLink,
   addExternalLink,
-  checkIsPDFForm,
+  // checkIsPDFForm,
   getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
@@ -951,34 +952,24 @@ class InfoPanelStore {
   getPrimaryFileLink = async (fileId) => {
     const file = this.filesStore.files.find((item) => item.id === fileId);
 
-    if (file && !file.shared && file.fileType === FileType.PDF) {
-      try {
-        this.filesStore.addActiveItems([file.id], null);
-        const result = await checkIsPDFForm(fileId);
-
-        if (result) {
-          const event = new CustomEvent(Events.Share_PDF_Form, {
-            detail: { file },
-          });
-
-          window.dispatchEvent(event);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.filesStore.removeActiveItem(file);
-      }
-    }
-
     /**
      *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
      */
-    const value = JSON.parse(
-      localStorage.getItem(
-        getCreateShareLinkKey(this.userStore.user?.id ?? "", file?.fileType),
-      ) ?? "null",
-    );
+    const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
+
+    if (value && file.isForm) {
+      value.access = ShareAccessRights.Editing;
+    }
+
+    if (
+      value &&
+      !file.isForm &&
+      file.fileType === FileType.PDF &&
+      (value.access === ShareAccessRights.Editing ||
+        value.access === ShareAccessRights.FormFilling)
+    ) {
+      value.access = ShareAccessRights.ReadOnly;
+    }
 
     const { getFileInfo } = this.filesStore;
 

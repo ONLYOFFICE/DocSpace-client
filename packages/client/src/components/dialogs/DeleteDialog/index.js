@@ -90,7 +90,9 @@ const DeleteDialogComponent = (props) => {
     onClose();
 
     const translations = {
-      deleteFromTrash: t("Translations:DeleteFromTrash"),
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
     };
 
     if (!selection.length) return;
@@ -161,7 +163,9 @@ const DeleteDialogComponent = (props) => {
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
-    return t("MoveToTrashTitle");
+    return t("Common:SectionMoveConfirmation", {
+      sectionName: t("Common:TrashSection"),
+    });
   };
 
   const moveToTrashNoteText = () => {
@@ -195,8 +199,8 @@ const DeleteDialogComponent = (props) => {
           t("DeleteFolder")
         ) : (
           <>
-            <>{t("DeleteFile")} </>
-            <>{t("FilePermanentlyDeleted")} </>
+            <>{t("Common:DeleteFile")} </>
+            <>{t("Common:FilePermanentlyDeleted")} </>
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -219,8 +223,8 @@ const DeleteDialogComponent = (props) => {
           </>
         ) : (
           <>
-            <>{t("DeleteFile")} </>
-            <>{t("FilePermanentlyDeleted")} </>
+            <>{t("Common:DeleteFile")} </>
+            <>{t("Common:FilePermanentlyDeleted")} </>
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -244,9 +248,9 @@ const DeleteDialogComponent = (props) => {
           </>
         ) : (
           <>
-            <>{t("DeleteFile")} </>
+            <>{t("Common:DeleteFile")} </>
             <>{t("DeleteSharedNote")} </>
-            {!isThirdParty ? <>{t("FilePermanentlyDeleted")} </> : null}
+            {!isThirdParty ? <>{t("Common:FilePermanentlyDeleted")} </> : null}
             <>{t("Common:WantToContinue")}</>
           </>
         )
@@ -279,7 +283,9 @@ const DeleteDialogComponent = (props) => {
         ? t("Common:OKButton")
         : unsubscribe
           ? t("UnsubscribeButton")
-          : t("MoveToTrashButton");
+          : t("Common:MoveToSection", {
+              sectionName: t("Common:TrashSection"),
+            });
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
@@ -290,7 +296,7 @@ const DeleteDialogComponent = (props) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
-          key="OkButton"
+          key="OKButton"
           label={accessButtonLabel}
           size="normal"
           primary

@@ -32,8 +32,5 @@ export interface FillPDFDialogProps {
 }
 
 export interface InjectFillPDFDialogProps
-  extends Pick<
-      TStore["dialogsStore"],
-      "setFillPDFDialogData" | "setShareCollectSelector"
-    >,
+  extends Pick<TStore["dialogsStore"], "setFillPDFDialogData">,
     Pick<TStore["contextOptionsStore"], "gotoDocEditor"> {}

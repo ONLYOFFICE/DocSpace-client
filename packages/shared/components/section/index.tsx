@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useMemo } from "react";
 
 import { Provider } from "../../utils";
 import { DeviceType } from "../../enums";
-
-import { FloatingButton } from "../floating-button";
 
 import SectionContainer from "./sub-components/SectionContainer";
 import SubSectionHeader from "./sub-components/SectionHeader";
@@ -56,7 +56,8 @@ import {
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
-import OperationsProgress from "./sub-components/OperationsProgress";
+
+import OperationsProgressButton from "../operations-progress-button";
 
 export type { SectionProps };
 
@@ -221,7 +222,7 @@ const Section = (props: SectionProps) => {
   const showCancelButton =
     primaryOperationsArray.length > 0 &&
     !primaryOperationsCompleted &&
-    !primaryOperationsArray[0].isSingleConversion;
+    primaryOperationsArray.some((op) => op.operation === "upload");
 
   return (
     isSectionAvailable && (
@@ -302,20 +303,21 @@ const Section = (props: SectionProps) => {
           ) : null}
 
           {isShowOperationButton ? (
-            <OperationsProgress
-              clearSecondaryProgressData={clearSecondaryProgressData}
-              secondaryActiveOperations={secondaryActiveOperations}
+            <OperationsProgressButton
+              clearOperationsData={clearSecondaryProgressData}
+              operations={secondaryActiveOperations}
               operationsCompleted={isCompletedOperations()}
-              clearPrimaryProgressData={clearPrimaryProgressData}
+              clearPanelOperationsData={clearPrimaryProgressData}
               operationsAlert={
                 primaryOperationsAlert || secondaryOperationsAlert
               }
               needErrorChecking={needErrorChecking}
-              primaryActiveOperations={primaryOperationsArray}
+              panelOperations={primaryOperationsArray}
               cancelUpload={cancelUpload}
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
+              isInfoPanelVisible={isInfoPanelVisible}
             />
           ) : null}
         </SectionContainer>

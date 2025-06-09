@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "ລືບອອກເລີຍ",
-  "DeleteForeverNote": "ທຸກໄອເທັມທີ່ຖືກລືບໃນຖັງຂີ້ເຫຍື້ອແລ້ວ, ຈະບໍ່ສາມາດເອົາກັບມາຄືນໄດ້.",
-  "DeleteForeverNoteArchive": "ລາຍການທັງໝົດຈາກແຟ້ມຈັດເກັບຈະຖືກລຶບອອກຖາວອນ. ທ່ານຈະບໍ່ສາມາດກູ້ພວກມັນຄືນມາໄດ້.",
+  "DeleteForeverNote": "ສິ່ງຂອງທັງໝົດຈາກພາກສ່ວນ {{sectionName}} ຈະຖືກລົບອອກຢ່າງຖາວອນ ແລະທ່ານຈະບໍ່ສາມາດຟື້ນຕົວພວກມັນໄດ້.",
   "DeleteForeverTitle": "ລືບອອກ？",
-  "SuccessEmptyArchived": "ເກັບໄວ້ຫວ່າງເປົ່າ",
-  "SuccessEmptyTrash": "ຖັງຂີ້ເຫຍື້ອ ວ່າງເປົ່າ."
+  "SuccessEmptyAction": "ພາກສ່ວນ {{sectionName}} ເຊື່ອມໂຍງອອກແລ້ວ"
 }

@@ -1,8 +1,6 @@
 {
   "DeleteForeverButton": "Poista pysyvästi",
-  "DeleteForeverNote": "Kaikki roskakorin kohteet poistetaan pysyvästi. Et voi palauttaa niitä.",
-  "DeleteForeverNoteArchive": "Kaikki Arkiston kohteet poistetaan lopullisesti. Et pysty palauttamaan niitä.",
+  "DeleteForeverNote": "Kaikki {{sectionName}} -osion kohteet poistetaan lopullisesti. Niitä ei voida palauttaa.",
   "DeleteForeverTitle": "Poistetaanko pysyvästi?",
-  "SuccessEmptyArchived": "Arkisto tyhjennetty",
-  "SuccessEmptyTrash": "Roskakori tyhjennetty"
+  "SuccessEmptyAction": "{{sectionName}} -osio tyhjennetty"
 }

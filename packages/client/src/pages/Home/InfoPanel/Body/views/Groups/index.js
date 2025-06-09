@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useState, useEffect, useRef } from "react";
 
 import withLoader from "SRC_DIR/HOCs/withLoader";
@@ -36,7 +36,7 @@ import AccountsFilter from "@docspace/shared/api/people/filter";
 import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
-} from "@docspace/shared/selectors/Files/FilesSelector.constants";
+} from "@docspace/shared/selectors/utils/constants";
 
 import GroupMember from "./GroupMember";
 import * as Styled from "../../styles/groups.styled";

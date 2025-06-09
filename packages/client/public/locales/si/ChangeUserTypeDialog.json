@@ -1,8 +1,17 @@
 {
+  "ChangeContactType": "ව්‍යාපාර සම්බන්ධතා ආකාරය වෙනස් කරන්න",
+  "ChangeGuestsTypeMessage": "මුරණ්ඩු <strong>{{userName}}</strong>  හောင်း {{membersSection}} කොටසට යවා, User වර්ගයට පත්කරනු ලැබේ. භාවිතකරුවන්ට {{documentsSection}} ඔවුන්ගේම කොටසක් ඇත, ෆයිල්ස් සාදා, සංස්කරණය කිරීමට හැකි නමුත්, ඔවුන්ට කාමර සාදාගත නොහැකිය.",
+  "ChangeGuestsTypeMessageMulti": "තෝරාගත් අමුත්තන් {{membersSection}} කොටසට ගෙන යන අතර පරිශීලක වර්ගය පවරනු ලැබේ. පරිශීලකයින්ට තමන්ගේම {{documentsSection}} කොටසක් ඇත, ගොනු නිර්මාණය කිරීමට සහ සංස්කරණය කිරීමට හැකියාව ඇත, නමුත් කාමර නිර්මාණය කිරීමට නොහැකි වේ.",
+  "ChangeGuestsTypeToAdmin": "ආගන්තුක <strong>{{userName}}</strong> {{membersSection}} කොටසට ගෙවා, <strong>'{{ secondType }}'</strong> වර්ගයට පත් කරනු ලැබේ. {{productName}} පරිපාලකයින් {{productName}} සැකසුම් වලට පිවිසිය හැක, කාමර කළමනාකරණය හා සංග්‍රහණය කළ හැකි අතර, නව පරිශීලකයින් ආරාධනය කර ඔවුන්ගේ පහළ මට්ටමේ භූමිකා පවරන්න හැක. {{productName}} පරිපාලකයින්ට {{documentsSection}} කොටසට පිවිසිය හැකිය.",
+  "ChangeGuestsTypeToAdminMulti": "තෝරාගත් ආරාධිතයින් {{membersSection}} කොටසට ගෙනයනු ලැබේ සහ <strong>'{{ secondType }}'</strong> වර්ගයට පත් කරනු ලැබේ. {{productName}} පරිපාලකයින් {{productName}} සැකසුම් වලට පිවිසිය හැක, කාමර කළමනාකරණය සහ සංග්‍රහණය කළ හැකිය, නව පරිශීලකයින් ආරාධිත කර ඔවුන්ගේ පහළ මට්ටමේ භූමිකා පවරන්න හැක. {{productName}} පරිපාලකයින්ට {{documentsSection}} කොටසට ප්‍රවේශය ඇත.",
+  "ChangeGuestsTypeToManager": "ආගන්තුක <strong>{{userName}}</strong> {{membersSection}} කොටසට ගෙවා, <strong>'{{ secondType }}'</strong> වර්ගයට පත් කරනු ලැබේ. කාමර පරිපාලකවරුන් පත් කරන කාමරයන් නිර්මාණය කර කළමනාකරණය කළ හැකි අතර, නව පරිශීලකයින් ආරාධනා කර කාමර පරිපාලක සහ පහත තනතුරැවරුන් පත් කළ හැකිය. කාමර පරිපාලකවරුන්ට {{documentsSection}} කොටසට ප්‍රවේශය ඇත.",
+  "ChangeGuestsTypeToManagerMulti": "තෝරාගත් සාමාජිකයින් {{membersSection}} කොටසට යවා <strong>'{{ secondType }}'</strong> වර්ගය පත්කරනු ලැබේ. කාමර පරිපාලකයින් පත්කරන ලද කාමර සාදාගෙන ඒවා කළමණාකරණය කරමින්, නව පරිශීලකයන් ආරාධනා කර, කාමර පරිපාලක සහ පහත තනතුරු පත්කරනු ලැබේ. කාමර පරිපාලකයින්ට {{documentsSection}} කොටසට ප්‍රවේශය ලැබේ.",
   "ChangeUserTypeButton": "වර්ගය සංශෝධනය",
-  "ChangeUserTypeHeader": "පරිශ්‍රීලක වර්ගය සංශෝධනය",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> වර්ගය වන පරිශ්‍රීලකයින් <strong>'{{ secondType }}'</strong> වර්ගයට ගෙන යනු ඇත.",
-  "ChangeUserTypeMessageMulti": "තෝරාගත් පරිශ්‍රීලකයින් <strong>'{{ secondType }}'</strong> වර්ගයට ගෙන යනු ඇත.",
-  "ChangeUserTypeMessageWarning": "ඔබට {{productName}} පරිපාලකයින් සඳහා සහ ඔබ වෙනුවෙන් වර්ගය වෙනස් කිරීමට නොහැකිය.",
+  "ChangeUserTypeNote": "<1>වැඩමුළු:</1> {{productName}} පරිපාලකයින්ට maupun ඔබට වර්ගය වෙනස් කිරීමට వీలు లేదు.",
+  "DataReassignmentInfo": "මෙම පරිශීලකයා විසින් සාදා ගන්නා ලද කාමරයන් ඔබට ස්වයංක්‍රියව පවරනු ලැබේ. කාමරයන් වෙනත් පුද්ගලයෙකුට නැවත පවරන්නට, පහත ඇති සම්බන්ධතාවය ක්ලික් කරන්න.",
+  "DataReassignmentWithFilesDeletion": "මෙම සම්බන්ධතා පුද්ගලයා විසින් සාදන ලද සියලුම පොදු ගොrün, <1>30 දිනක් තුළ ස්වයංක්‍රියව ඔබට පවරනු ලැබේ</1>. කාමර/පොදු ගොrün වෙනත් පුද්ගලයෙකුට නැවත පවරන්න, පහත ඇති සංවරණ ලිංකනය ක්ලික් කරන්න.",
+  "PersonalDataDeletion": "මෙම සම්බන්ධතාවයේ {{sectionName}} කොටසේ ඇති සියලුම ගොファイル සහ ෆෝල්ඩර්‌ها 30 දිනකින් <1>පermanentemente මකා දමනු ලැබේ</1>.",
+  "SuccessChangeGuestType": "මුළු මහත් ආගන්තුක වර්ගය සාර්ථකව වෙනස් කරන ලදි.",
   "SuccessChangeUserType": "පරිශ්‍රීලකයාගේ වර්ගය වෙනස් වී ඇත"
 }

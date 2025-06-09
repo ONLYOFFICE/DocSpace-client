@@ -105,7 +105,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
         isRequestRunning,
         setIsRequestRunning,
         setModalRequestRunning,
-      } = React.useContext(PropsContext);
+      } = React.use(PropsContext);
 
       React.useEffect(() => {
         if (
@@ -124,31 +124,34 @@ export const PluginComponent = inject(({ pluginStore }) => {
       const getElement = () => {
         const componentName = component.component;
 
-        const {
-          widthProp,
-          paddingProp,
-          displayProp,
-          borderProp,
-          backgroundProp,
-          flexProp,
-          heightProp,
-          marginProp,
-          overflowProp,
-          ...elementRest
-        } = elementProps;
+        let elementStyles = {};
+        if (elementProps) {
+          const {
+            widthProp,
+            paddingProp,
+            displayProp,
+            borderProp,
+            backgroundProp,
+            flexProp,
+            heightProp,
+            marginProp,
+            overflowProp,
+            ...elementRest
+          } = elementProps;
 
-        const elementStyles = {
-          width: widthProp,
-          height: heightProp,
-          padding: paddingProp,
-          margin: marginProp,
-          display: displayProp,
-          border: borderProp,
-          background: backgroundProp,
-          flex: flexProp,
-          overflow: overflowProp,
-          ...elementRest,
-        };
+          elementStyles = {
+            width: widthProp,
+            height: heightProp,
+            padding: paddingProp,
+            margin: marginProp,
+            display: displayProp,
+            border: borderProp,
+            background: backgroundProp,
+            flex: flexProp,
+            overflow: overflowProp,
+            ...elementRest,
+          };
+        }
 
         switch (componentName) {
           case PluginComponents.box: {
@@ -465,9 +468,9 @@ const WrappedComponent = ({
   );
 
   return (
-    <PropsContext.Provider value={contextValue}>
+    <PropsContext value={contextValue}>
       <PluginComponent component={component} pluginName={pluginName} />
-    </PropsContext.Provider>
+    </PropsContext>
   );
 };
 

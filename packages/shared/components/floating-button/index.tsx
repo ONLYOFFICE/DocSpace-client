@@ -44,6 +44,7 @@ import DuplicateIcon from "PUBLIC_DIR/images/icons/24/duplicate.react.svg";
 import MarkAsReadIcon from "PUBLIC_DIR/images/icons/24/mark-as-read.react.svg";
 import MoveIcon from "PUBLIC_DIR/images/icons/24/move.react.svg";
 import FileIcon from "PUBLIC_DIR/images/icons/24/file.react.svg";
+import BackupIcon from "PUBLIC_DIR/images/icons/24/backup.react.svg";
 
 import { classNames } from "../../utils";
 
@@ -67,6 +68,7 @@ const ICON_COMPONENTS = {
   [FloatingButtonIcons.copy]: <CopyIcon />,
   [FloatingButtonIcons.download]: <DownloadIcon />,
   [FloatingButtonIcons.markAsRead]: <MarkAsReadIcon />,
+  [FloatingButtonIcons.backup]: <BackupIcon />,
 } as const;
 
 const FloatingButton = ({
@@ -82,6 +84,7 @@ const FloatingButton = ({
   withoutProgress,
   showCancelButton,
   withoutStatus = false,
+  percent,
 }: FloatingButtonProps) => {
   const iconComponent = useMemo(() => {
     return ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.other];
@@ -94,6 +97,19 @@ const FloatingButton = ({
   const buttonClassName = useMemo(() => {
     return classNames([className, "not-selectable"]) || "not-selectable";
   }, [className]);
+
+  const accentIcons = [
+    FloatingButtonIcons.upload,
+    FloatingButtonIcons.trash,
+    FloatingButtonIcons.deletePermanently,
+    FloatingButtonIcons.other,
+  ] as const;
+
+  const isAccentIcon = accentIcons.includes(
+    icon as (typeof accentIcons)[number],
+  );
+
+  const isCompleted = completed || (completed && percent && percent >= 100);
 
   return (
     <div
@@ -109,8 +125,8 @@ const FloatingButton = ({
         data-role="button"
         aria-label={`${icon} button`}
         className={classNames(styles.circleWrap, buttonClassName, {
-          [styles.loading]: !completed,
-          [styles.completed]: completed,
+          [styles.loading]: !isCompleted,
+          [styles.completed]: isCompleted,
         })}
         style={
           color
@@ -123,30 +139,37 @@ const FloatingButton = ({
       >
         <div
           className={classNames(styles.circle, {
-            [styles.loading]: !completed,
-            [styles.completed]: completed,
+            [styles.loading]: !isCompleted,
+            [styles.completed]: isCompleted,
           })}
+          data-testid="floating-button-progress"
         >
-          {withoutProgress ? null : <div className={styles.loader} />}
+          {withoutProgress ? null : (
+            <div
+              className={classNames(styles.loader, {
+                [styles.withProgress]: !!percent,
+              })}
+              {...(percent && {
+                style: {
+                  "--percent-percentage": `${percent}%`,
+                } as React.CSSProperties,
+              })}
+            />
+          )}
           <div className={classNames(styles.floatingButton)}>
             <div
               className={classNames(styles.iconBox, "icon-box", {
-                [styles.accentIcon]: [
-                  FloatingButtonIcons.upload,
-                  FloatingButtonIcons.trash,
-                  FloatingButtonIcons.deletePermanently,
-                  FloatingButtonIcons.other,
-                ].includes(icon),
+                [styles.accentIcon]: isAccentIcon,
               })}
             >
               {iconComponent}
             </div>
-            {!withoutStatus && (alert || completed) ? (
+            {!withoutStatus && (alert || isCompleted) ? (
               <div
                 data-testid="floating-button-alert"
                 className={classNames(styles.alertIcon, {
                   [styles.alert]: alert,
-                  [styles.complete]: !alert && completed,
+                  [styles.complete]: !alert && isCompleted,
                 })}
               >
                 {alert ? (

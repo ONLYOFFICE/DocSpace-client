@@ -1,0 +1,278 @@
+{
+  "key_path": "RoleFormFillerDescription",
+  "content": "Operations with existing files: viewing, form filling, reviewing, commenting.",
+  "content_en_sha1_hash": "3474de7fd9cdc6860caeafd949a5852e84fd6ac8",
+  "created_at": "2025-05-19T21:30:48.039Z",
+  "updated_at": "2025-05-28T09:30:03.004Z",
+  "comment": {
+    "text": "This translation key provides a description of operations related to existing files, including viewing, form filling, reviewing, and commenting. It is used in UI elements where file management options are displayed, such as buttons or dialogs. Translators should focus on conveying a comprehensive overview of these file-related actions in different languages.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:34:36.990Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/utils/getAccessOptions.ts",
+      "line_number": 79,
+      "context": "const getFormFillerDescription = (roomType: RoomsType, t: TTranslation) => {\n switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleFormFillerFormRoomDescription\");\n default:\n return t(\"Common:RoleFormFillerDescription\");\n }\n };\n \n export const getAccessOptions = (\n t: TTranslation,",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'form filling' is translated as 'ملء النماذج' which literally means 'filling forms'. While understandable, a more natural translation for a user interface context might be 'إدخال البيانات في النماذج' (entering data into forms) or 'تعبئة النماذج' (completing forms).",
+          "suggestion": "تعبئة النماذج"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'form filling' is translated as 'formaları doldurmaq'. While technically correct, a more natural and idiomatic translation in Azerbaijani might be 'formu doldurma'. The plural 'formaları' implies multiple forms, while the English doesn't specify that.",
+          "suggestion": "formu doldurma"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ревю' is not a standard term for 'review' in Bulgarian. It's more commonly used in a fashion or film review context.",
+          "suggestion": "Преглед"
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'prohlížení' appears twice. The English content uses 'viewing' only once, but the Czech translation repeats it. This is likely a redundant translation.",
+          "suggestion": "Remove the second instance of 'prohlížení' to match the English content more accurately. A more concise option would be: 'Operace s existujícími soubory: prohlížení, vyplňování formulářů, revize, komentování.'"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"lomakkeen arkistointi\" is an awkward translation of \"form filling.\" \"Arkistointi\" means archiving, not filling out a form.",
+          "suggestion": "lomakkeen täyttö"
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a hyphen (-) to separate phrases within the list, which is not idiomatic Armenian for this context. A comma (,) or a more natural phrasing would be preferred.",
+          "suggestion": "Consider replacing the hyphens with commas or rephrasing the sentence for better flow. For example, 'Գործողություններ գոյություն ունեցող ֆայլերով. Դիտում, ձևի լրացում, վերանայում և մեկնաբանում:'"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'bekijken' is repeated. The English 'reviewing' translates to 'controleren' or 'nazien', not 'bekijken'.",
+          "suggestion": "Bewerkingen met bestaande bestanden: bekijken, formulieren invullen, controleren/nazien, opmerkingen plaatsen."
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'reviewing' is repeated in the Russian translation. It appears as 'просмотр' twice, which is redundant. It should reflect the intended meaning of 'reviewing' (examining, assessing) and not just 'viewing'.",
+          "suggestion": "Операции с существующими файлами: просмотр, заполнение форм, рецензирование, комментирование."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ආකෘතිපත්‍ර' (aakruthipathra) is a valid word but could be more clearly expressed as 'ගොනුව පිරවීම' (gonuwa pirivamu) to better convey 'form filling'.",
+          "suggestion": "පවතින ගොනුවල මෙහෙයුම්: බැලීම්, ගොනුව පිරවීම, සමාලෝචන, අදහස් දැක්වීම්."
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'පිරවීම්' (pirivamu) is in plural form, but 'form filling' is a single action. While not incorrect, using the singular 'පිරවීම' is more grammatically aligned with the English.",
+          "suggestion": "පවතින ගොනුවල මෙහෙයුම්: බැලීම්, ගොනුව පිරවීම, සමාලෝචන, අදහස් දැක්වීම්."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Операције' is transliterated from 'Operations' and is spelled correctly, but in this context, a more common and natural-sounding equivalent might be 'Рад' or 'Задаци'.",
+          "suggestion": "Рад са постојећим датотекама: прегледање, попуњавање образаца, рецензирање, коментарисање."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'рецензирање' is technically correct for 'reviewing,' it carries a more formal connotation of critical review. A more general and appropriate translation for the context of form filling might be 'провера'.",
+          "suggestion": "Операције са постојећим датотекама: прегледање, попуњавање образаца, провера, коментарисање."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -26,7 +26,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { inject, observer } from "mobx-react";
 
@@ -49,7 +49,7 @@ import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?u
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { Integration } from "./sub-components/Integration";
+import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
 import CSP from "./sub-components/csp";
 
@@ -111,13 +111,13 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToViewer,
     },
     {
-      title: t("RoomSelector"),
+      title: t("Common:RoomSelector"),
       description: t("RoomSelectorDescription"),
       image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
       handleOnClick: navigateToRoomSelector,
     },
     {
-      title: t("FileSelector"),
+      title: t("Common:FileSelector"),
       description: t("FileSelectorDescription"),
       image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
       handleOnClick: navigateToFileSelector,
@@ -188,11 +188,7 @@ const PortalIntegration = (props) => {
           />
         ))}
       </PresetsContainer>
-      <Integration
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration />
     </SDKContainer>
   );
 };

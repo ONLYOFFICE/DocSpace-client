@@ -26,24 +26,132 @@
 
 import React from "react";
 
+import { classNames } from "@docspace/shared/utils/classNames";
+
+import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
 import { ContextMenuModel } from "../../context-menu";
-
 import {
-  BreadCrumbsProps,
   TBreadCrumb,
   TDisplayedItem,
+  BreadCrumbsProps,
 } from "../Selector.types";
-import {
-  StyledBreadCrumbs,
-  StyledItemText,
-  StyledArrowRightSvg,
-} from "../Selector.styled";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";
+import styles from "../Selector.module.scss";
+import { Text } from "../../text";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+
+const calculateDisplayedItems = (
+  items: TBreadCrumb[],
+  onClickItem: ({ item }: { item: TBreadCrumb }) => void,
+) => {
+  const itemsLength = items.length;
+  const oldItems: TBreadCrumb[] = [];
+
+  items.forEach((item) =>
+    oldItems.push({
+      ...item,
+      id: item.id?.toString(),
+    }),
+  );
+  if (itemsLength > 0) {
+    const newItems: TDisplayedItem[] = [];
+
+    if (itemsLength <= 3) {
+      oldItems.forEach((item, index) => {
+        newItems.push({
+          ...item,
+          isArrow: false,
+          isList: false,
+          listItems: [],
+        });
+
+        if (index !== oldItems.length - 1) {
+          newItems.push({
+            id: `arrow-${index}`,
+            label: "",
+            isArrow: true,
+            isList: false,
+            listItems: [],
+          });
+        }
+      });
+    } else {
+      newItems.push({
+        ...oldItems[0],
+        isArrow: false,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        id: "arrow-1",
+        label: "",
+        isArrow: true,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        id: "drop-down-item",
+        label: "",
+        isArrow: false,
+        isList: true,
+        listItems: [],
+      });
+
+      newItems.push({
+        id: "arrow-2",
+        label: "",
+        isArrow: true,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        ...oldItems[itemsLength - 2],
+        isArrow: false,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        id: "arrow-3",
+        label: "",
+        isArrow: true,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        ...oldItems[itemsLength - 1],
+        isArrow: false,
+        isList: false,
+        listItems: [],
+      });
+
+      oldItems.splice(0, 1);
+      oldItems.splice(oldItems.length - 2, 2);
+
+      oldItems.forEach((item) => {
+        newItems[2].listItems?.push({
+          ...item,
+          minWidth: "150px",
+          onClick: onClickItem,
+        });
+      });
+    }
+
+    return newItems;
+  }
+
+  return [];
+};
 
 const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   const {
@@ -52,12 +160,10 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     breadCrumbsLoader,
     isBreadCrumbsLoading,
     onSelectBreadCrumb,
-  } = React.useContext(BreadCrumbsContext);
-  const setIsSearch = React.useContext(SearchDispatchContext);
+  } = React.use(BreadCrumbsContext);
+  const setIsSearch = React.use(SearchDispatchContext);
 
-  const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
-    [],
-  );
+  const { isRTL } = useInterfaceDirection();
 
   const onClickItem = React.useCallback(
     ({ item }: { item: TBreadCrumb }) => {
@@ -68,116 +174,16 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     [isBreadCrumbsLoading, onSelectBreadCrumb, setIsSearch],
   );
 
-  const calculateDisplayedItems = React.useCallback(
-    (items: TBreadCrumb[]) => {
-      const itemsLength = items.length;
-      const oldItems: TBreadCrumb[] = [];
-
-      items.forEach((item) =>
-        oldItems.push({
-          ...item,
-          id: item.id?.toString(),
-        }),
-      );
-      if (itemsLength > 0) {
-        const newItems: TDisplayedItem[] = [];
-
-        if (itemsLength <= 3) {
-          oldItems.forEach((item, index) => {
-            newItems.push({
-              ...item,
-              isArrow: false,
-              isList: false,
-              listItems: [],
-            });
-
-            if (index !== oldItems.length - 1) {
-              newItems.push({
-                id: `arrow-${index}`,
-                label: "",
-                isArrow: true,
-                isList: false,
-                listItems: [],
-              });
-            }
-          });
-        } else {
-          newItems.push({
-            ...oldItems[0],
-            isArrow: false,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            id: "arrow-1",
-            label: "",
-            isArrow: true,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            id: "drop-down-item",
-            label: "",
-            isArrow: false,
-            isList: true,
-            listItems: [],
-          });
-
-          newItems.push({
-            id: "arrow-2",
-            label: "",
-            isArrow: true,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            ...oldItems[itemsLength - 2],
-            isArrow: false,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            id: "arrow-3",
-            label: "",
-            isArrow: true,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            ...oldItems[itemsLength - 1],
-            isArrow: false,
-            isList: false,
-            listItems: [],
-          });
-
-          oldItems.splice(0, 1);
-          oldItems.splice(oldItems.length - 2, 2);
-
-          oldItems.forEach((item) => {
-            newItems[2].listItems?.push({
-              ...item,
-              minWidth: "150px",
-              onClick: onClickItem,
-            });
-          });
-        }
-
-        return setDisplayedItems(newItems);
-      }
-    },
-    [onClickItem],
+  const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
+    breadCrumbs ? calculateDisplayedItems(breadCrumbs, onClickItem) : [],
   );
 
   React.useEffect(() => {
     if (breadCrumbs && breadCrumbs.length > 0) {
-      calculateDisplayedItems(breadCrumbs);
+      const items = calculateDisplayedItems(breadCrumbs, onClickItem);
+      setDisplayedItems(items);
     }
-  }, [breadCrumbs, calculateDisplayedItems]);
+  }, [breadCrumbs, onClickItem]);
 
   let gridTemplateColumns = "minmax(1px, max-content)";
 
@@ -197,15 +203,20 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   if (isBreadCrumbsLoading) return breadCrumbsLoader;
 
   return (
-    <StyledBreadCrumbs
-      itemsCount={displayedItems.length}
-      gridTemplateColumns={gridTemplateColumns}
+    <div
+      className={styles.breadCrumbs}
+      style={
+        {
+          "--items-count": displayedItems.length,
+          "--grid-template-columns": gridTemplateColumns,
+        } as React.CSSProperties
+      }
     >
       {displayedItems.map((item, index) =>
         item.isList ? (
           <ContextMenuButton
             key={`bread-crumb-item-${item.id}`}
-            className="context-menu-button"
+            className={styles.contextMenuButton}
             displayType={ContextMenuButtonDisplayType.dropdown}
             getData={() => {
               const items = item.listItems
@@ -215,17 +226,24 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
             }}
           />
         ) : item.isArrow ? (
-          <StyledArrowRightSvg key={`bread-crumb-item-${item.id}`} />
+          <ArrowIcon
+            className={classNames(styles.arrowRightSvg, {
+              [styles.rtl]: isRTL,
+            })}
+            key={`bread-crumb-item-${item.id}`}
+          />
         ) : (
-          <StyledItemText
+          <Text
             key={`bread-crumb-item-${item.id}`}
             fontSize="16px"
             fontWeight={600}
             lineHeight="22px"
+            className={classNames(styles.itemText, {
+              [styles.isNotCurrent]: index !== displayedItems.length - 1,
+              [styles.isNotLoading]: !isBreadCrumbsLoading,
+            })}
             noSelect
             truncate
-            isCurrent={index === displayedItems.length - 1}
-            isLoading={isBreadCrumbsLoading}
             onClick={() => {
               if (index === displayedItems.length - 1 || isBreadCrumbsLoading)
                 return;
@@ -240,10 +258,10 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
             }}
           >
             {item.label}
-          </StyledItemText>
+          </Text>
         ),
       )}
-    </StyledBreadCrumbs>
+    </div>
   );
 };
 

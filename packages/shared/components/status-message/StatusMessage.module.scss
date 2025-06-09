@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../styles/common-icons-style";
+
 .body {
   box-sizing: border-box;
   width: 100%;
@@ -63,4 +65,8 @@
   100% {
     opacity: 1;
   }
+}
+
+.dangerToastIcon {
+  @include common-icons-style.common-icons-style;
 }

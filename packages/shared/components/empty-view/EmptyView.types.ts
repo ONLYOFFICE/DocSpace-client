@@ -1,4 +1,4 @@
-import type { To } from "react-router-dom";
+import type { To } from "react-router";
 
 import type { Nullable } from "../../types";
 import type { ContextMenuModel } from "../context-menu";
@@ -18,6 +18,7 @@ export type EmptyViewLinkType = {
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   /** Optional CSS class name for styling */
   className?: string;
+  isNext?: boolean;
 };
 
 export type EmptyViewItemType = {

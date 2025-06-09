@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<babeledit_project be_version="4.1.0" version="1.3">
+<babeledit_project be_version="5.4.1" version="1.3">
 	<!--
 
     BabelEdit project file
@@ -26,7 +26,6 @@
 								<name>ChangeDomainDescription</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -126,6 +125,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -158,7 +161,6 @@
 								<name>CompleteSetup</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -258,6 +260,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -290,7 +296,6 @@
 								<name>ConfigurationDescription</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -390,6 +395,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -422,7 +431,6 @@
 								<name>ConfigurationHeader</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -522,6 +530,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -554,7 +566,6 @@
 								<name>CreateSpaceDescription</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -654,6 +665,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -686,7 +701,6 @@
 								<name>CreatingPortal</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -786,6 +800,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -818,7 +836,6 @@
 								<name>CurrentSpace</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -918,6 +935,280 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>DecryptStorage</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>DecryptWarningDialogContent</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -950,7 +1241,6 @@
 								<name>DeleteEmptyPortalText</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1050,6 +1340,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1082,7 +1376,6 @@
 								<name>DeleteRequestSuccess</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1182,6 +1475,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1214,7 +1511,6 @@
 								<name>DeleteSetupPortalText</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1314,6 +1610,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1346,7 +1646,6 @@
 								<name>DeleteWarning</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1446,6 +1745,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1478,7 +1781,6 @@
 								<name>DomainName</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1578,6 +1880,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1610,7 +1916,6 @@
 								<name>DomainNotFound</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1710,6 +2015,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1742,7 +2051,6 @@
 								<name>DomainSettings</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1842,6 +2150,685 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>EncryptData</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>EncryptDataDescription</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>EncryptDataWarningDescription</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>EncryptStorage</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>EncryptWarningDialogContent</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -1874,7 +2861,6 @@
 								<name>EnterDomain</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -1974,6 +2960,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -2006,7 +2996,6 @@
 								<name>EnterName</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2106,6 +3095,145 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>MoreDetails</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -2138,7 +3266,6 @@
 								<name>NewSpace</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2238,6 +3365,145 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>NotifyUsers</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -2270,7 +3536,6 @@
 								<name>PortalDeleted</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2370,6 +3635,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -2402,7 +3671,6 @@
 								<name>PortalName</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2502,6 +3770,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -2534,7 +3806,6 @@
 								<name>PortalStats</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2634,6 +3905,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -2666,7 +3941,6 @@
 								<name>RestrictAccess</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2766,6 +4040,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -2798,7 +4076,6 @@
 								<name>SettingsDisabled</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -2898,6 +4175,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -2930,7 +4211,6 @@
 								<name>SettingsForAll</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3030,6 +4310,145 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Cyrl-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sr-Latn-RS</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>tr-TR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>uk-UA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>vi-VN</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>zh-CN</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>StorageEncrypted</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>az-Latn-AZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>bg-BG</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>cs-CZ</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>de-DE</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>el-GR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>es-ES</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fi-FI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>hy-AM</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>it-IT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ja-JP</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ko-KR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lo-LA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>lv-LV</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>nl-NL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pl-PL</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-BR</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>pt-PT</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ro-RO</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>ru-RU</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>si-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sk-SK</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -3062,7 +4481,6 @@
 								<name>Subheader</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3162,6 +4580,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -3194,7 +4616,6 @@
 								<name>SubmitDelete</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3294,6 +4715,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -3326,7 +4751,6 @@
 								<name>VisitSpace</name>
 								<description/>
 								<comment/>
-								<default_text/>
 								<translations>
 									<translation>
 										<language>ar-SA</language>
@@ -3426,6 +4850,10 @@
 									</translation>
 									<translation>
 										<language>sl-SI</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>sq-AL</language>
 										<approved>false</approved>
 									</translation>
 									<translation>
@@ -3460,6 +4888,7 @@
 			</package_node>
 		</children>
 	</folder_node>
+	<embedded_source_texts>false</embedded_source_texts>
 	<isTemplateProject>false</isTemplateProject>
 	<languages>
 		<language>
@@ -3536,6 +4965,9 @@
 		</language>
 		<language>
 			<code>sl-SI</code>
+		</language>
+		<language>
+			<code>sq-AL</code>
 		</language>
 		<language>
 			<code>sr-Cyrl-RS</code>
@@ -3661,6 +5093,10 @@
 					<language>sl-SI</language>
 				</translation_url>
 				<translation_url>
+					<path>../packages/management/public/locales/sq-AL</path>
+					<language>sq-AL</language>
+				</translation_url>
+				<translation_url>
 					<path>../packages/management/public/locales/sr-Cyrl-RS</path>
 					<language>sr-Cyrl-RS</language>
 				</translation_url>
@@ -3703,6 +5139,9 @@
 				<code_for_machine_translation/>
 			</custom_language>
 		</custom_languages>
+		<id_extractor_ignores/>
+		<machine_translation_formality>default</machine_translation_formality>
+		<machine_translation_context/>
 	</editor_configuration>
 	<primary_language>en-US</primary_language>
 	<configuration>

@@ -30,8 +30,9 @@ import { BadgeProps } from "./Badge.types";
 import styles from "./Badge.module.scss";
 import { Text } from "../text";
 
-const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
+const Badge = (props: BadgeProps) => {
   const {
+    ref,
     onClick,
     fontSize = "11px",
     color,
@@ -72,6 +73,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     height,
     border,
     borderRadius,
+    "--badge-background-color": backgroundColor,
   } as React.CSSProperties;
 
   const innerStyle = {
@@ -122,13 +124,14 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
           style={textStyle}
           textAlign="center"
           data-testid="badge-text"
+          data-color={!!color}
         >
           {label}
         </Text>
       </div>
     </div>
   );
-});
+};
 
 Badge.displayName = "Badge";
 

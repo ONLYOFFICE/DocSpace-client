@@ -34,7 +34,7 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.re
 import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -186,7 +186,7 @@ const Header = (props) => {
         {(isAdmin && !profile?.isOwner) ||
         (isMe && !profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
-            directionX="right"
+            directionX="left"
             title={t("Common:Actions")}
             iconName={VerticalDotsReactSvgUrl}
             size={17}

@@ -1,8 +1,6 @@
 {
-  "CancelUpload": "Качването беше прекъснато. Някои файлове не са качени.",
-  "EnterPassword": "Въведете паролата",
   "HideInput": "Скрий",
   "Ready": "Завършен",
-  "UploadAndConvert": "Качване и конвертиране на файлове",
-  "Uploads": "Качвания"
+  "UploadingAndConversion": "Качване и Преобразуване",
+  "UploadingError": "Грешка при качване"
 }

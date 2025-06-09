@@ -43,6 +43,7 @@ export interface PrivateRouteProps
       | "limitedAccessSpace"
       | "baseDomain"
       | "displayAbout"
+      | "limitedAccessDevToolsForUsers"
     >,
     Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
     Pick<UserStore, "user"> {
@@ -59,6 +60,7 @@ export interface PrivateRouteProps
   roomId: string | undefined;
   isLoadedPublicRoom: boolean | undefined;
   isLoadingPublicRoom: boolean | undefined;
+  standalone: boolean;
 }
 
 export interface PublicRouteProps

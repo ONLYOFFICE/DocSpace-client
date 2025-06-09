@@ -28,15 +28,16 @@ import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
+import { Link } from "@docspace/shared/components/link";
 
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
-import ChangeStorageQuotaDialog from "SRC_DIR/components/dialogs/ChangeStorageQuotaDialog";
+
 import Diagram from "./sub-components/Diagram";
 import RecalculateButton from "./sub-components/RecalculateButton";
 import {
@@ -117,26 +118,26 @@ const DiskSpaceUsedComponent = (props) => {
       <div className="disk-space_content">
         <div className="disk-space_size-info">
           {!standalone || (standalone && isTenantCustomQuotaSet) ? (
-            <Text fontWeight={700} fontSize="14px" className="disk-space_title">
+            <Text fontWeight={400} fontSize="14px" className="disk-space_title">
               {t("TotalStorage", {
                 size: totalSize,
               })}
             </Text>
           ) : null}
-          <Text fontWeight={700} fontSize="14px" className="disk-space_title">
+          <Text fontWeight={400} fontSize="14px" className="disk-space_title">
             {t("UsedStorage", {
               size: usedSize,
             })}
           </Text>
           {standalone && !isTenantCustomQuotaSet ? (
-            <ColorTheme
-              themeId={ThemeId.Link}
-              fontWeight={700}
+            <Link
+              fontWeight={600}
               onClick={onChangeDialogClick}
               className="disk-space_link"
+              color="accent"
             >
               {t("Common:ManageStorageQuota")}
-            </ColorTheme>
+            </Link>
           ) : null}
         </div>
         {standalone && isTenantCustomQuotaSet ? (

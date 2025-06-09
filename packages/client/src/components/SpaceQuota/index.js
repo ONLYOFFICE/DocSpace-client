@@ -171,7 +171,7 @@ const SpaceQuota = (props) => {
 
   if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (
-      <StyledText fontWeight={600} withoutLimitQuota>
+      <StyledText fontWeight={600} $withoutLimitQuota>
         {usedQuota}
       </StyledText>
     );
@@ -179,14 +179,18 @@ const SpaceQuota = (props) => {
 
   if (isReadOnly) {
     return (
-      <StyledText fontWeight={600} isReadOnly>
+      <StyledText fontWeight={600} $isReadOnly>
         {usedQuota} / {spaceLimited}
       </StyledText>
     );
   }
 
   return (
-    <StyledBody hideColumns={hideColumns} className={className}>
+    <StyledBody
+      hideColumns={hideColumns}
+      className={className}
+      isLoading={isLoading}
+    >
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox

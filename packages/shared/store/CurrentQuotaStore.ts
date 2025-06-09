@@ -125,6 +125,14 @@ class CurrentQuotasStore {
     return result?.used?.value || 0;
   }
 
+  get usedTotalStorageSizeTitle() {
+    const result = this.currentPortalQuotaFeatures.get(
+      TOTAL_SIZE,
+    ) as TPaymentFeature;
+
+    return result?.used?.title;
+  }
+
   get maxFileSizeByQuota() {
     const result = this.currentPortalQuotaFeatures.get(
       FILE_SIZE,
@@ -214,6 +222,13 @@ class CurrentQuotasStore {
   get isAuditAvailable() {
     const result = this.currentPortalQuotaFeatures.get(
       "audit",
+    ) as TBooleanPaymentFeature;
+    return result?.value;
+  }
+
+  get isBrandingAvailable() {
+    const result = this.currentPortalQuotaFeatures.get(
+      "branding",
     ) as TBooleanPaymentFeature;
     return result?.value;
   }

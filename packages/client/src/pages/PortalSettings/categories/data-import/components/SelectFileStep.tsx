@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { isMobile, isTablet, mobile } from "@docspace/shared/utils/device";
@@ -180,7 +180,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [chunkSize, setChunkSize] = useState(0);
 
   const [failTries, setFailTries] = useState(FAIL_TRIES);
-  const uploadInterval = useRef<number>();
+  const uploadInterval = useRef<number>(undefined);
   const navigate = useNavigate();
 
   useEffect(() => {

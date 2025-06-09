@@ -26,7 +26,7 @@
 
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 
 import { TableBody } from "@docspace/shared/components/table";
 import { Nullable } from "@docspace/shared/types";

@@ -34,35 +34,34 @@ import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 
-import { useParams } from "react-router-dom";
 import SectionHeaderContent from "./Section/Header";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
-import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
-import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
-import OAuthSectionHeader from "../categories/developer-tools/OAuth/OAuthSectionHeader";
 
-const ArticleSettings = React.memo(({ showArticleLoader, needPageReload }) => {
-  const onLogoClickAction = () => {
-    if (needPageReload) {
-      window.location.replace("/");
-    }
-  };
+const ArticleSettings = React.memo(
+  ({ showArticleLoader, needPageReload, isNotPaidPeriod }) => {
+    const onLogoClickAction = () => {
+      if (needPageReload) {
+        window.location.replace("/");
+      }
+    };
 
-  return (
-    <ArticleWrapper
-      showArticleLoader={showArticleLoader}
-      onLogoClickAction={onLogoClickAction}
-    >
-      <Article.Header>
-        <ArticleHeaderContent />
-      </Article.Header>
+    return (
+      <ArticleWrapper
+        showArticleLoader={showArticleLoader}
+        onLogoClickAction={onLogoClickAction}
+        showBackButton={!isNotPaidPeriod}
+      >
+        <Article.Header>
+          <ArticleHeaderContent />
+        </Article.Header>
 
-      <Article.Body>
-        <ArticleBodyContent />
-      </Article.Body>
-    </ArticleWrapper>
-  );
-});
+        <Article.Body>
+          <ArticleBodyContent />
+        </Article.Body>
+      </ArticleWrapper>
+    );
+  },
+);
 
 ArticleSettings.displayName = "ArticleSettings";
 
@@ -78,6 +77,7 @@ const Layout = ({
 
   isLoadedArticleBody,
   needPageReload,
+  isNotPaidPeriod,
 }) => {
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
@@ -87,33 +87,17 @@ const Layout = ({
     if (enablePlugins && !isInitPlugins) initPlugins();
   }, [enablePlugins, isInitPlugins, initPlugins]);
 
-  const { id, eventId } = useParams();
-
-  const webhookHistoryPath = `/portal-settings/developer-tools/webhooks/${id}`;
-  const webhookDetailsPath = `/portal-settings/developer-tools/webhooks/${id}/${eventId}`;
-  const oauthCreatePath = `/portal-settings/developer-tools/oauth/create`;
-  const oauthEditPath = `/portal-settings/developer-tools/oauth/${id}`;
-  const currentPath = window.location.pathname;
-
   return (
     <>
       <ArticleSettings
         showArticleLoader={!isLoadedArticleBody}
         needPageReload={needPageReload}
+        isNotPaidPeriod={isNotPaidPeriod}
       />
       {!isGeneralPage ? (
         <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
           <Section.SectionHeader>
-            {currentPath === webhookHistoryPath ? (
-              <HistoryHeader />
-            ) : currentPath === webhookDetailsPath ? (
-              <DetailsNavigationHeader />
-            ) : currentPath === oauthCreatePath ||
-              currentPath === oauthEditPath ? (
-              <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
-            ) : (
-              <SectionHeaderContent />
-            )}
+            <SectionHeaderContent />
           </Section.SectionHeader>
 
           <Section.SectionBody>{children}</Section.SectionBody>
@@ -123,29 +107,38 @@ const Layout = ({
   );
 };
 
-export default inject(({ authStore, settingsStore, setup, pluginStore }) => {
-  const { language } = authStore;
-  const { addUsers } = setup.headerAction;
+export default inject(
+  ({
+    authStore,
+    settingsStore,
+    setup,
+    pluginStore,
+    currentTariffStatusStore,
+  }) => {
+    const { language } = authStore;
+    const { addUsers } = setup.headerAction;
 
-  const {
-    setCurrentProductId,
-    enablePlugins,
+    const {
+      setCurrentProductId,
+      enablePlugins,
 
-    isLoadedArticleBody,
-  } = settingsStore;
+      isLoadedArticleBody,
+    } = settingsStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { isInit: isInitPlugins, initPlugins, needPageReload } = pluginStore;
 
-  const { isInit: isInitPlugins, initPlugins, needPageReload } = pluginStore;
+    return {
+      language,
+      setCurrentProductId,
+      addUsers,
 
-  return {
-    language,
-    setCurrentProductId,
-    addUsers,
+      enablePlugins,
+      isInitPlugins,
+      initPlugins,
 
-    enablePlugins,
-    isInitPlugins,
-    initPlugins,
-
-    isLoadedArticleBody,
-    needPageReload,
-  };
-})(withLoading(observer(Layout)));
+      isLoadedArticleBody,
+      needPageReload,
+      isNotPaidPeriod,
+    };
+  },
+)(withLoading(observer(Layout)));

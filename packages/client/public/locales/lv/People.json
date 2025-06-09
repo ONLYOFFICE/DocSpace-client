@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Uzaicināt vēlreiz",
   "MessageEmailActivationInstuctionsSentOnEmail": "Norādījumi par e-pasta aktivizēšanu ir nosūtīti uz <1>{{email}}</1> e-pasta adresi.",
+  "RemoveUser": "Noņemt lietotāju",
+  "RemoveUserConfirmationText": "Jūs gatavojaties izdzēst lietotāju no istabas. Lūdzu, ņemiet vērā, ka šis lietotājs aktīvi piedalās formulu aizpildīšanā. Ja turpināt, visas formulas, kurās viņš iesaistīts, tiks apturētas pie viņa soļa.",
   "UserStatus": "Statuss"
 }

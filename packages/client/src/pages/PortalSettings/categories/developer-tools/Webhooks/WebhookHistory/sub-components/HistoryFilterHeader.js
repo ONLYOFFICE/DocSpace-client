@@ -27,7 +27,7 @@
 import React, { useState, useEffect, useTransition, Suspense } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -78,8 +78,7 @@ const FilterButton = styled.div.attrs(injectDefaultTheme)`
 
   z-index: ${(props) => (props.isGroupMenuVisible ? 199 : 201)};
 
-  border: 1px solid;
-  border-color: ${(props) => props.theme.client.settings.webhooks.filterBorder};
+  border: ${(props) => props.theme.client.settings.webhooks.filterBorder};
   border-radius: 3px;
   cursor: pointer;
 

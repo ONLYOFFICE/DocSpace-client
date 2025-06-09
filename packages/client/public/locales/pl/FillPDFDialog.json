@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Wypełnij",
   "FillOutDescription": "Wypełnij pola oryginalnego formularza w oknie edytora.",
   "FillOutTitle": "Wypełnij formularz samodzielnie",
-  "FillPDFDialogTitle": "Wypełnij jako",
-  "ShareCollectButtonLabel": "Skopiuj do pokoju",
-  "ShareCollectDescription": "Udostępnij formularz i zbierz odpowiedzi za pośrednictwem Pokoju do wypełniania formularzy.",
-  "ShareCollectTitle": "Udostępnij"
+  "FillPDFDialogTitle": "Wypełnij jako"
 }

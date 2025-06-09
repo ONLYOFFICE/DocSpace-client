@@ -18,7 +18,7 @@ const Error = ({ settings, user, error }: ErrorProps) => {
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
 
-  const { theme } = useTheme({ user });
+  const { theme } = useTheme({ initialTheme: user?.theme });
 
   const firebaseHelper = useMemo(() => {
     return new FirebaseHelper(settings?.firebase ?? ({} as TFirebaseSettings));

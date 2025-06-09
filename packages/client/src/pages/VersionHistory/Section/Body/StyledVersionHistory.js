@@ -209,7 +209,6 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
 
   .version_edit-comment {
     display: block;
-    margin: 8px 0 2px 70px;
   }
 
   .textarea-wrapper {
@@ -364,6 +363,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
       display: flex;
       flex-direction: column;
       margin: -2px 0 0 0;
+      width: 100%;
     }
   }
 `;

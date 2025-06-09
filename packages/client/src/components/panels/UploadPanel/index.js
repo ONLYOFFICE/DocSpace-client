@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
-import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import React from "react";
@@ -37,6 +36,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
+import { LoadingButton } from "@docspace/shared/components/loading-button";
 
 import { StyledUploadBody } from "../StyledPanels";
 import FileList from "./FileList";
@@ -47,7 +47,7 @@ class UploadPanelComponent extends React.Component {
     const { setNeedErrorChecking } = this.props;
 
     document.addEventListener("keyup", this.onKeyPress);
-    setNeedErrorChecking(true);
+    setNeedErrorChecking(true, OPERATIONS_NAME.upload);
   }
 
   componentWillUnmount() {
@@ -59,7 +59,7 @@ class UploadPanelComponent extends React.Component {
       this.props;
 
     setUploadPanelVisible(!uploadPanelVisible);
-    setNeedErrorChecking(false);
+    setNeedErrorChecking(false, OPERATIONS_NAME.upload);
   };
 
   onKeyPress = (event) => {
@@ -80,45 +80,57 @@ class UploadPanelComponent extends React.Component {
     cancelUpload(t);
   };
 
+  getHeaderContent = () => {
+    const { hideHeaderButton, uploadPercent, uploaded, converted } = this.props;
+    const allProcessesFinished = uploaded && converted;
+
+    if (hideHeaderButton) return {};
+
+    if (allProcessesFinished) {
+      return {
+        headerIcons: [
+          {
+            key: "upload-panel",
+            url: ClearReactSvgUrl,
+            onClick: this.clearUploadPanel,
+          },
+        ],
+      };
+    }
+
+    if (!uploaded) {
+      return {
+        headerComponent: (
+          <LoadingButton
+            percent={uploadPercent}
+            onClick={this.onCancelUpload}
+            isDefaultMode
+          />
+        ),
+      };
+    }
+
+    return {};
+  };
+
   render() {
-    // console.log("UploadPanel render");
-    const {
-      t,
-      uploadPanelVisible,
-      uploaded,
-      converted,
-      cancelConversion,
-      isUploading,
-      isUploadingAndConversion,
-      hideHeaderButton,
-    } = this.props;
+    const { t, uploadPanelVisible, isUploadingAndConversion, isUploading } =
+      this.props;
 
     const visible = uploadPanelVisible;
 
     const title = isUploading
-      ? t("Uploads")
+      ? t("Files:Uploading")
       : isUploadingAndConversion
-        ? t("UploadAndConvert")
-        : t("Files:Convert");
-
-    const url =
-      uploaded && converted ? ClearReactSvgUrl : ButtonCancelReactSvgUrl;
-
-    const clickEvent =
-      uploaded && converted
-        ? this.clearUploadPanel
-        : uploaded
-          ? cancelConversion
-          : this.onCancelUpload;
+        ? t("UploadingAndConversion")
+        : t("Files:Conversion");
 
     return (
       <ModalDialog
         visible={visible}
         onClose={this.onClose}
         displayType={ModalDialogType.aside}
-        {...(!hideHeaderButton && {
-          headerIcons: [{ key: "upload-panel", url, onClick: clickEvent }],
-        })}
+        {...this.getHeaderContent()}
       >
         <ModalDialog.Header>{title}</ModalDialog.Header>
         <ModalDialog.Body>
@@ -151,8 +163,15 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     uploadedFilesHistory,
   } = uploadDataStore;
 
-  const { clearPrimaryProgressData, setNeedErrorChecking } =
-    primaryProgressDataStore;
+  const {
+    clearPrimaryProgressData,
+    setNeedErrorChecking,
+    primaryOperationsArray,
+  } = primaryProgressDataStore;
+
+  const uploadPercent = primaryOperationsArray.find(
+    (operation) => operation.operation === OPERATIONS_NAME.upload,
+  )?.percent;
 
   const filesWithConvert = uploadedFilesHistory.filter(
     (file) => file.action === "convert",
@@ -178,5 +197,6 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     theme: settingsStore.theme,
     setNeedErrorChecking,
     hideHeaderButton,
+    uploadPercent,
   };
 })(observer(UploadPanel));

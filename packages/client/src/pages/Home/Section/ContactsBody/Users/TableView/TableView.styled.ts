@@ -160,6 +160,10 @@ export const StyledPeopleRow = styled(TableRow)<{
       padding-block: 16px;
       padding-inline: 12px 0;
     }
+    .table-container_row-loader {
+      border-bottom: unset;
+      padding-inline-start: 7px;
+    }
   }
 
   .link-with-dropdown-group {

@@ -62,8 +62,8 @@ const ShareFolderDialog = ({
       <ModalDialog.Footer>
         <Button
           id="create-room"
-          key="OkButton"
-          label={t("Files:CreateRoom")}
+          key="OKButton"
+          label={t("Common:CreateRoom")}
           size="normal"
           primary
           onClick={onAction}

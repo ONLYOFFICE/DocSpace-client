@@ -31,12 +31,10 @@ import classNames from "classnames";
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
 
-import { Text } from "../text";
 import { Calendar } from "../calendar";
 import { SelectorAddButton } from "../selector-add-button";
 import { SelectedItem } from "../selected-item";
 import { DatePickerProps } from "./DatePicker.types";
-import { globalColors } from "../../themes";
 import styles from "./DatePicker.module.scss";
 
 const DatePicker = (props: DatePickerProps) => {
@@ -53,6 +51,7 @@ const DatePicker = (props: DatePickerProps) => {
     outerDate,
     openDate,
     isMobile,
+    hideCross,
   } = props;
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -147,10 +146,8 @@ const DatePicker = (props: DatePickerProps) => {
             title={selectDateText}
             className="add-delivery-date-button"
             iconName={CalendarIconUrl}
+            label={selectDateText}
           />
-          <Text isInline fontWeight={600} color={globalColors.gray}>
-            {selectDateText}
-          </Text>
         </div>
       ) : null}
 
@@ -159,6 +156,7 @@ const DatePicker = (props: DatePickerProps) => {
           className={styles.selectedItem}
           propKey=""
           onClose={deleteSelectedDate}
+          hideCross={hideCross}
           label={
             showCalendarIcon ? (
               <span

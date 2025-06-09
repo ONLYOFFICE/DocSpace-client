@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "У цьому розділі буде показано останні переглянуті або відредаговані вами документи.",
   "EmptyRootRoomUserDescription": "Тут буде спільна кімната.",
   "EmptyRootRoomUserTitle": "Тут ще немає кімнат",
+  "EmptyTemplatesDescription": "Ви можете створити шаблон із кімнати в розділі «Кімната»",
+  "EmptyTemplatesTitle": "Тут ще немає шаблонів",
   "FormFolderDefaultDescription": "Перетягніть PDF-форми сюди або передайте з {{productName}} чи пристрою.",
   "FormFolderDefaultTitle": "Тут ще немає форм",
   "FormFolderDefaultUserDescription": "Тут з'являться форми, передані адміністраторами.",
@@ -33,6 +35,7 @@
   "MigrationDataDescription": "Імпортуйте дані до {{productName}} з Workspace, Google Workspace або Nextcloud {{organizationName}}.",
   "MigrationDataTitle": "Дані перенесення",
   "PublicRoomEmptyTitle": "Ласкаво просимо до публічної кімнати",
+  "SectionsUploadDescription": "Завантажити файли будь-якого типу з {{sectionNameFirst}} або {{sectionNameSecond}}",
   "SendInvitationLetter": "Надішліть лист-запрошення, щоб додати нових учасників до порталу",
   "ShareOptionDescription": "Скопіюйте посилання публічного доступу або запросіть інших користувачів до кімнати, щоб почати процес заповнення форм",
   "ShareOptionTitle": "Поділитися кімнатою",
@@ -42,9 +45,7 @@
   "UploadDeviceOptionTitle": "Передати з пристрою",
   "UploadDevicePDFFormOptionDescription": "Передайте готову PDF-форму до кімнати зі свого пристрою",
   "UploadDevicePDFFormOptionTitle": "Передати з пристрою",
-  "UploadFromPortalDescription": "Передавайте файли будь-якого типу з розділів «Документи» та «Кімнати»",
   "UploadFromPortalTitle": "Передати з {{productName}}",
   "UploadPDFFormOptionDescription": "Виберіть готову PDF-форму, доступну в {{productName}}, і передайте її до кімнати.",
-  "UserEmptyDescription": "Тут з'являться файли та папки, передані адміністраторами.",
   "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних"
 }

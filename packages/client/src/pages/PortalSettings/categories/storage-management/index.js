@@ -36,6 +36,7 @@ import QuotasComponent from "./Quotas";
 import StatisticsComponent from "./Statistics";
 import DiskSpaceUsedComponent from "./StorageSpaceUsed";
 import MainInfoComponent from "./MainInfo";
+import RegionComponent from "./Region";
 import { StyledBody } from "./StyledComponent";
 import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
@@ -44,6 +45,7 @@ const StorageManagement = ({
   language,
   init,
   clearIntervalCheckRecalculate,
+  standalone,
 }) => {
   useEffect(() => {
     moment.locale(language);
@@ -65,6 +67,7 @@ const StorageManagement = ({
   return (
     <StyledBody>
       <MainInfoComponent />
+      {!standalone ? <RegionComponent /> : null}
       <StyledSettingsSeparator />
       <DiskSpaceUsedComponent />
       <StyledSettingsSeparator />
@@ -75,13 +78,17 @@ const StorageManagement = ({
   );
 };
 
-export const Component = inject(({ authStore, storageManagement }) => {
-  const { language } = authStore;
-  const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
-  return {
-    isInit,
-    language,
-    init,
-    clearIntervalCheckRecalculate,
-  };
-})(observer(StorageManagement));
+export const Component = inject(
+  ({ authStore, storageManagement, settingsStore }) => {
+    const { language } = authStore;
+    const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
+    const { standalone } = settingsStore;
+    return {
+      isInit,
+      language,
+      init,
+      clearIntervalCheckRecalculate,
+      standalone,
+    };
+  },
+)(observer(StorageManagement));

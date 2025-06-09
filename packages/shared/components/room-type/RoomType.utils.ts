@@ -15,6 +15,7 @@ export const getRoomTypeTitleTranslation = (
       return t("Common:VirtualDataRoom");
     case RoomsType.CustomRoom:
       return t("Common:CustomRoomTitle");
+
     case RoomsType.PublicRoom:
       return t("Common:PublicRoom");
     case RoomsType.FormRoom:
@@ -38,6 +39,7 @@ export const getRoomTypeDescriptionTranslation = (
       return t("Common:VirtualDataRoomDescription");
     case RoomsType.CustomRoom:
       return t("Common:CustomRoomDescription");
+
     case RoomsType.PublicRoom:
       return t("Common:PublicRoomInfo");
     case RoomsType.FormRoom:

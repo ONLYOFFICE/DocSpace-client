@@ -70,27 +70,49 @@ This mapping supports the enhanced folder structure with the public/locales dire
 
 ### Installation & Running
 
-#### Option 1: Using the build script (Recommended)
+#### Option 1: Using the convenience scripts (Recommended)
 
-The easiest way to set up and run the application is using the provided build script, which automatically handles dependency installation, environment configuration, and Docker setup:
+The easiest way to run the application locally is using the provided convenience scripts:
+
+**For Windows:**
+```bash
+# From the translation-app directory
+run.translation-app.bat
+```
+
+**For macOS/Linux:**
+```bash
+# From the translation-app directory
+./run.translation-app.sh
+```
+
+These scripts will:
+1. Check for Node.js installation
+2. Install all necessary dependencies for backend and frontend
+3. Start both the backend and frontend servers
+4. Wait for the backend to fully initialize
+5. Automatically open your browser to the application
+6. Properly shut down all processes when you exit (Ctrl+C)
+
+Once running, you can access:
+- Frontend interface: http://localhost:3000
+- Backend API: http://localhost:3001
+
+#### Option 2: Using the Docker build script
+
+For a containerized setup, you can use the provided build script:
 
 ```bash
 python build.docker.py
 ```
 
 This script will:
-
 1. Install all necessary dependencies for backend, frontend, and tests
 2. Configure environment variables automatically
 3. Build and start Docker containers for the application
 4. Set up the proper file structure for translations
 
-Once complete, you can access:
-
-- Frontend interface: http://localhost:3000
-- Backend API: http://localhost:3001
-
-#### Option 2: Manual Setup
+#### Option 3: Manual Setup
 
 If you prefer to set up manually:
 

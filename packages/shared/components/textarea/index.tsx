@@ -68,6 +68,7 @@ const Textarea = ({
   hasNumeration = false,
   isFullHeight = false,
   classNameCopyIcon,
+  isChatMode = false,
 }: TextareaProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -146,6 +147,7 @@ const Textarea = ({
         [styles.defaultHeight]: !heightScale && !isFullHeight,
         [styles.isJSONField]: isJSONField && enableCopy,
         [styles.copy]: enableCopy,
+        [styles.scrollbar]: isChatMode,
       })}
       style={
         {
@@ -165,12 +167,13 @@ const Textarea = ({
       ) : null}
 
       <Scrollbar
-        className={classNames(styles.scrollbar, className, {
+        className={classNames(className, {
           [styles.heightScale]: heightScale,
           [styles.isFullHeight]: isFullHeight,
           [styles.defaultHeight]: !heightScale && !isFullHeight,
           [styles.hasError]: isError || hasError,
           [styles.isDisabled]: isDisabled,
+          [styles.scrollbar]: !isChatMode,
         })}
         style={
           {

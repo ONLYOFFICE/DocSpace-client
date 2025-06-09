@@ -2,12 +2,12 @@
   "key_path": "Account",
   "content": "Account",
   "content_en_sha1_hash": "85dfa32c97d8618d1bea083609e2c8a29845abe5",
-  "created_at": "2025-05-26T07:15:39.960Z",
-  "updated_at": "2025-05-26T08:09:12.734Z",
+  "created_at": "2025-05-19T21:30:56.895Z",
+  "updated_at": "2025-06-08T12:02:32.711Z",
   "comment": {
-    "text": "This translation key is used for the text \"Account\" which appears as a label on a button in a reconnect dialogue, prompting users to reconnect their account. It also references an account's data within a UI component and lists it among other filter options.",
+    "text": "This translation key is used to display the account label in a connect dialog, indicating that the user's account information should be saved. It appears as a title and header in a file upload confirmation dialog. Translators can use this context to ensure the label accurately reflects the UI's purpose.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:12.734Z"
+    "updated_at": "2025-05-20T09:37:54.985Z"
   },
   "usage": [
     {

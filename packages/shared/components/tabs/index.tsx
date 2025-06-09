@@ -45,13 +45,17 @@ const Tabs = (props: TabsProps) => {
     stickyTop,
     onSelect,
     multiple = false,
+    allowNoSelection = false,
+    withoutStickyIntend = false,
     ...rest
   } = props;
 
   const { interfaceDirection } = useInterfaceDirection();
 
   const selectedItemIndex = !selectedItemId
-    ? 0
+    ? allowNoSelection
+      ? -1
+      : 0
     : items.findIndex((item) => item.id === selectedItemId);
 
   // const [currentItem, setCurrentItem] = useState(selectedItemIndex);
@@ -221,7 +225,9 @@ const Tabs = (props: TabsProps) => {
           {!isViewLastTab ? <div className={styles.blurBack} /> : null}
         </div>
       ) : null}
-      <div className={classNames(styles.stickyIndent, "sticky-indent")} />
+      {withoutStickyIntend ? null : (
+        <div className={classNames(styles.stickyIndent, "sticky-indent")} />
+      )}
       {!multiple && items[selectedItemIndex]?.content ? (
         <div className={`${styles.tabsBody} tabs-body`}>
           {items[selectedItemIndex].content}

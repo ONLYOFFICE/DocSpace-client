@@ -244,7 +244,11 @@ class AuthStore {
   getPaymentInfo = async () => {
     let refresh = false;
 
-    if (window.location.search === "?complete=true") {
+    if (
+      window.location.search === "?complete=true" &&
+      !window.location.href.includes("wallet") &&
+      !window.location.href.includes("services")
+    ) {
       window.history.replaceState({}, document.title, window.location.pathname);
       refresh = true;
     }

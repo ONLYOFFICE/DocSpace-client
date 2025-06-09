@@ -33,6 +33,7 @@ import { Consumer } from "@docspace/shared/utils/context";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 
 import RegisterNewButton from "../RegisterNewButton";
 
@@ -49,6 +50,7 @@ interface ListProps {
   apiOAuthLink: string;
   logoText: string;
   isLoading: boolean;
+  isError: boolean;
 }
 
 const List = ({
@@ -58,6 +60,7 @@ const List = ({
   apiOAuthLink,
   logoText,
   isLoading,
+  isError,
 }: ListProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
@@ -91,31 +94,41 @@ const List = ({
           isHovered
           href={apiOAuthLink}
           tag="a"
-          style={{ marginBottom: "20px" }}
+          style={isError ? undefined : { marginBottom: "20px" }}
           color="accent"
         >
           {t("OAuth:OAuth")} {t("Common:Guide")}
         </Link>
       ) : null}
-      <RegisterNewButton currentDeviceType={currentDeviceType} />
-      {isLoading ? (
-        <OAuthLoader viewAs={viewAs} />
+
+      {isError ? (
+        <EmptyServerErrorContainer />
       ) : (
-        <Consumer>
-          {(context) =>
-            viewAs === "table" ? (
-              <TableView
-                items={clients || []}
-                sectionWidth={context.sectionWidth || 0}
-              />
-            ) : (
-              <RowView
-                items={clients || []}
-                sectionWidth={context.sectionWidth || 0}
-              />
-            )
-          }
-        </Consumer>
+        <>
+          <RegisterNewButton
+            currentDeviceType={currentDeviceType}
+            isDisabled={isLoading}
+          />
+          {isLoading ? (
+            <OAuthLoader viewAs={viewAs} />
+          ) : (
+            <Consumer>
+              {(context) =>
+                viewAs === "table" ? (
+                  <TableView
+                    items={clients || []}
+                    sectionWidth={context.sectionWidth || 0}
+                  />
+                ) : (
+                  <RowView
+                    items={clients || []}
+                    sectionWidth={context.sectionWidth || 0}
+                  />
+                )
+              }
+            </Consumer>
+          )}
+        </>
       )}
     </StyledContainer>
   );

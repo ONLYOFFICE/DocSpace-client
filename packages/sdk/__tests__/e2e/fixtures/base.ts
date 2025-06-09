@@ -24,12 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// @ts-nocheck
 import { test as base, Page } from "@playwright/test";
 import { MockRequest } from "@docspace/shared/__mocks__/e2e";
+import next from "next";
+import path from "path";
+import { createServer, Server } from "http";
+import { parse } from "url";
+import { AddressInfo } from "net";
+import { setupServer, SetupServerApi } from "msw/node";
+import { allHandlers } from "@docspace/shared/__mocks__/e2e/handlers";
+import { HttpHandler } from "msw";
 
 export const test = base.extend<{
   page: Page;
   mockRequest: MockRequest;
+  port: string;
+  requestInterceptor: SetupServerApi;
+  baseHandlers: HttpHandler[];
+  resetHandlers: void;
 }>({
   page: async ({ page }, use) => {
     await page.route("*/**/logo.ashx**", async (route) => {
@@ -66,6 +79,69 @@ export const test = base.extend<{
     const mockRequest = new MockRequest(page);
     await use(mockRequest);
   },
+  port: [
+    async ({}, use) => {
+      const app = next({
+        dev: false,
+        dir: path.resolve(__dirname, "../../.."),
+      });
+      await app.prepare();
+
+      const handle = app.getRequestHandler();
+
+      const server: Server = await new Promise((resolve) => {
+        const server = createServer((req, res) => {
+          const parsedUrl = parse(req.url, true);
+          handle(req, res, parsedUrl);
+        });
+
+        server.listen((error) => {
+          if (error) throw error;
+          resolve(server);
+        });
+      });
+
+      const port = String((server.address() as AddressInfo).port);
+      await use(port);
+      server.close();
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  requestInterceptor: [
+    async ({}, use) => {
+      const requestInterceptor = setupServer();
+
+      requestInterceptor.listen({
+        onUnhandledRequest: "error",
+      });
+
+      await use(requestInterceptor);
+      requestInterceptor.close();
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  baseHandlers: [
+    async ({ port }, use) => {
+      await use(allHandlers(port));
+    },
+    {},
+  ],
+  resetHandlers: [
+    async ({ requestInterceptor, baseHandlers }, use) => {
+      requestInterceptor.use(...baseHandlers);
+      await use();
+      requestInterceptor.resetHandlers();
+    },
+    {
+      auto: true,
+    },
+  ],
 });
 
 export { expect } from "@playwright/test";

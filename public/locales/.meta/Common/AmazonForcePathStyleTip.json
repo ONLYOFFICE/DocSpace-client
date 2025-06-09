@@ -1,14 +1,13 @@
 {
-<<<<<<<< HEAD:public/locales/.meta/Common/AmazonForcePathStyleTip.json
   "key_path": "AmazonForcePathStyleTip",
   "content": "When true, requests will always use path style addressing.",
   "content_en_sha1_hash": "aa8a003db2e4e29f43424dc59bd485653b72906d",
-  "created_at": "2025-05-26T07:15:40.365Z",
-  "updated_at": "2025-05-26T08:08:01.862Z",
+  "created_at": "2025-06-08T12:02:00.501Z",
+  "updated_at": "2025-06-08T12:02:50.035Z",
   "comment": {
-    "text": "\"When using this setting, requests will always use path style addressing. This option appears as a tooltip in the Amazon settings component.\"",
+    "text": "This translation key is used for a tooltip that explains the meaning of \"force path style\" in Amazon settings. When checked, this option ensures requests always use path style addressing. It appears as a tooltip when users hover over or click a button related to backup storage options.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:01.862Z"
+    "updated_at": "2025-06-08T12:02:50.035Z"
   },
   "usage": [
     {
@@ -18,19 +17,6 @@
       "module": "/packages/shared"
     }
   ],
-========
-  "key_path": "Culture_sq-AL",
-  "content": "Shqip (Shqipëria)",
-  "content_en_sha1_hash": "5103a8f970c8fb9219cc0f1069d4faf672d20e64",
-  "created_at": "2025-05-29T12:12:45.330Z",
-  "updated_at": "2025-05-29T12:12:45.330Z",
-  "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
-  },
-  "usage": [],
->>>>>>>> release/v3.2.0:public/locales/.meta/Common/Culture_sq-AL.json
   "languages": {
     "en": {
       "ai_translated": false,
@@ -177,12 +163,6 @@
       "approved_at": null
     },
     "sl": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

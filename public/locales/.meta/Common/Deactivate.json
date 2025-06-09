@@ -3,7 +3,7 @@
   "content": "Deactivate",
   "content_en_sha1_hash": "d65ded94286c61f4f34527624be77ef1afce3b5a",
   "created_at": "2025-05-19T21:30:44.433Z",
-  "updated_at": "2025-05-26T07:57:32.549Z",
+  "updated_at": "2025-05-28T09:30:02.541Z",
   "comment": {
     "text": "The translation key \"Deactivate\" is used to display the text \"Deactivate\" on buttons and labels in UI elements that allow users to deactivate or disable certain features, typically related to account management or data removal. This text appears in button components, such as confirm deletion or suspension buttons, in portal settings pages and login interfaces.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Deaktiv edin' is a possible translation for 'Deactivate', it is an imperative form ('Deactivate it!'). The more neutral and common translation would be 'Dəaktiv etmə' or 'Dəaktivasiya et'. 'Deaktiv edin' implies an instruction or command.",
-          "suggestion": "Dəaktiv etmə or Dəaktivasiya et"
+          "description": "The translation \"Deaktiv edin\" is a command form (imperative) meaning \"Deactivate it/them.\" The English word \"Deactivate\" is a verb that can be used in various contexts. A more neutral and accurate translation might be \"Dəaktivasiya et\" or \"Xətlərin dəf etməsi\" depending on the specific context of the original English content. \"Deaktiv edin\" might not be appropriate if the English text isn't giving a direct command.",
+          "suggestion": "Consider \"Dəaktivasiya et\" or \"Xətlərin dəf etməsi\", or evaluate if the context requires the imperative form."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ապագործունացնել\" is overly complex and not the most natural way to express 'Deactivate'. It literally translates to something like 'to make inactive/non-working'. While technically correct, it's not idiomatic.",
-          "suggestion": "Consider a simpler and more common Armenian equivalent such as \"չմաշտնել\" (ch'mashtnel) - 'to disable', or \"դանդաղեցնել\" (dandlaghecel) - 'to switch off', or even a direct transliteration like \"դեակտիվացնել\" (deaktivatsnel) if appropriate for the context, though this might sound technical."
+          "description": "The Armenian translation \"Ապագործունացնել\" is a very uncommon and somewhat awkward way to translate \"Deactivate.\" It implies a forceful removal of activity or purpose, which might not be the intended meaning. A more common and clearer translation would be something like \"չմաշտել\" (ch'mashtel) or \"գործնազործել\" (gorznazordzel).",
+          "suggestion": "Consider using \"չմաշտել\" (ch'mashtel) or \"գործնազործել\" (gorznazordzel) as a more natural and accurate translation of \"Deactivate.\""
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'停止する' (Teishi suru) generally means 'to stop' or 'to halt'. While it can sometimes imply deactivation, it's not the most accurate translation for 'Deactivate'. 'Deactivate' often implies rendering something unusable or inactive, rather than simply stopping a process.",
-          "suggestion": "Consider alternatives like '無効にする' (Mueki ni suru - to invalidate), '機能を停止する' (Kinou wo teishi suru - to stop functionality), or '取り消す' (Torikesu - to cancel) depending on the context. '無効化する' (Mueki-ka suru) is another option."
+          "description": "The Japanese translation \"停止する\" (teishi suru) translates to 'stop' or 'cease' rather than 'deactivate'. While 'deactivate' can involve stopping something, it implies a process of removing activation. A more appropriate translation would depend on the context, but alternatives like \"無効にする\" (mueki ni suru - to invalidate/disable) or \"解除する\" (kaisetsu suru - to release/cancel) might be better depending on the specific meaning of 'deactivate'.",
+          "suggestion": "Consider alternatives like \"無効にする\" (mueki ni suru) or \"解除する\" (kaisetsu suru) depending on context."
         }
       ],
       "approved_at": null
@@ -144,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Deactiveer' is not the correct translation for 'Deactivate'. While it's close, the correct translation is 'Deactiveren'.",
+          "description": "The Dutch translation \"Deactiveer\" is a direct transliteration of \"Deactivate\" and doesn't reflect the proper Dutch verb form. The correct Dutch translation would be \"Deactiveren\".",
           "suggestion": "Deactiveren"
         }
       ],

@@ -665,6 +665,7 @@ function getLanguageName(code) {
     ro: "Romanian",
     si: "Sinhala",
     sl: "Slovenian",
+    "sq-AL": "Albanian",
     "sr-Cyrl-RS": "Serbian (Cyrillic)",
     "sr-Latn-RS": "Serbian (Latin)",
     "uk-UA": "Ukrainian",

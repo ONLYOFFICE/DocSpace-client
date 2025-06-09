@@ -3,7 +3,7 @@
   "content": "You can't use the same email address",
   "content_en_sha1_hash": "f85d5552131bdd2fc625627ca72a0cb482f3e288",
   "created_at": "2025-05-19T21:30:48.291Z",
-  "updated_at": "2025-05-26T07:57:32.215Z",
+  "updated_at": "2025-05-28T09:30:02.187Z",
   "comment": {
     "text": "This translation key displays an error message indicating that a user cannot use the same email address. It is used in a change email dialog to inform users of a validation rule when attempting to send a new email.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation \"Не може да използвате същия имейл\" is a bit formal and could be improved for user experience. A more natural phrasing might be preferred.",
-          "suggestion": "Не може да използвате един и същи имейл."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -60,18 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dasselbe E-Mail darf nicht benutzt werden' is not a natural or accurate translation of 'You can't use the same email address'. It's overly literal and awkward.",
-          "suggestion": "A more natural translation would be something like 'Die gleiche E-Mail-Adresse darf nicht verwendet werden' or 'Sie können dieselbe E-Mail-Adresse nicht verwenden'."
+          "description": "The translation 'Dasselbe E-Mail darf nicht benutzt werden' is a literal translation and sounds unnatural in German. It's overly formal and doesn't flow well.",
+          "suggestion": "Eine more natural translation would be 'Die gleiche E-Mail darf nicht verwendet werden' or 'Sie können dieselbe E-Mail nicht verwenden'."
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the word order is a bit stilted. 'Darf nicht benutzt werden' sounds less fluent than a more active construction.",
-          "suggestion": "Consider a more active voice. For example: 'Die gleiche E-Mail-Adresse darfst du nicht verwenden' (if addressing directly) or 'Die gleiche E-Mail-Adresse ist nicht erlaubt' (a more formal and common phrasing)."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically not an error, the translation doesn't include the hyphen in 'E-Mail'.",
-          "suggestion": "Include the hyphen: 'E-Mail'."
+          "description": "While technically grammatical, 'benutzt werden' is less common and less elegant than 'verwendet werden' in this context.",
+          "suggestion": "Replace 'benutzt werden' with 'verwendet werden'."
         }
       ],
       "approved_at": null
@@ -88,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'No se puede utilizar el mismo email' is a literal translation and sounds slightly awkward in Spanish. A more natural phrasing would be 'No puedes usar el mismo correo electrónico' or 'No es posible usar el mismo correo electrónico'.",
-          "suggestion": "No puedes usar el mismo correo electrónico"
+          "description": "The translation 'No se puede utilizar el mismo email' is technically correct but sounds slightly unnatural. A more idiomatic translation would be 'No se puede usar la misma dirección de correo electrónico' or 'No puedes usar la misma dirección de correo electrónico'. The use of 'utilizar' is less common than 'usar' in this context.",
+          "suggestion": "No se puede usar la misma dirección de correo electrónico"
         }
       ],
       "approved_at": null
@@ -115,13 +104,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Non puoi usare la stessa email' is a literal translation but lacks the word 'address'. A more natural and complete Italian translation would be 'Non puoi usare lo stesso indirizzo email'.",
-          "suggestion": "Non puoi usare lo stesso indirizzo email"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -142,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ທີ່ບໍ່ສາມາດໃຊ້ອີເມວຊໍ່າກັນ' is a literal translation but not the most natural or clear way to express 'You can't use the same email address' in Lao. It's understandable but could be improved for fluency.",
-          "suggestion": "ອ່ານີ້: ຫ້າມໃຊ້ອີເມວຊໍ້າກັນ (Hàm chai email cham kan) - This translates to 'It is prohibited to use the same email' and is more natural."
+          "description": "The Lao translation \"ທີ່ບໍ່ສາມາດໃຊ້ອີເມວຊໍ່າກັນ\" is a literal translation but doesn't flow naturally in Lao. It translates to 'that cannot use same email'. A more natural and accurate translation would convey the meaning of 'You cannot use the same email'.",
+          "suggestion": "ບໍ່ສາມາດໃຊ້ອີເມວຊໍ່າກັນໄດ້"
         }
       ],
       "approved_at": null
@@ -154,7 +137,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Jūs nevarat izmantot to pašu e-pastu' is a literal translation but sounds unnatural in Latvian. A more natural phrasing would be 'Jūs nevarat lietot to pašu e-pastu adresi' or 'Jūs nevarat izmantot to pašu e-pasta adresi'.",
+          "description": "The translation 'Jūs nevarat izmantot to pašu e-pastu' is a literal translation, but 'e-pasts' is more formal than the context suggests. 'E-pasts' can also be written as 'epasts'. A more natural phrasing would be 'Jūs nevarat lietot to pašu e-pastu adresi' or 'Jūs nevarat lietot to pašu epastu'.",
           "suggestion": "Jūs nevarat lietot to pašu e-pastu adresi"
         }
       ],
@@ -189,14 +172,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Nu puteți folosi una și aceeași adresă adresa e-mail ' is a literal and awkward translation. It repeats 'adresă' and doesn't flow naturally.",
+          "type": "grammar",
+          "description": "The Romanian translation is grammatically incorrect and redundant. 'adresa e-mail' is repeated and unnecessary.",
           "suggestion": "Nu puteți folosi aceeași adresă de e-mail."
         },
         {
           "type": "formatting",
-          "description": "The phrase 'adresă adresa' is redundant and creates a formatting issue. The second 'adresă' is unnecessary.",
-          "suggestion": "Remove the second 'adresă'."
+          "description": "There is an unnecessary space before 'adresa' in the translation.",
+          "suggestion": "Remove the space before 'adresa'."
         }
       ],
       "approved_at": null
@@ -207,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Email совпадает с текущим\" doesn't accurately convey the meaning of \"You can't use the same email address.\" It implies that the email matches the current one, not that it's prohibited from being reused.",
-          "suggestion": "A more accurate translation would be something like \"Нельзя использовать тот же email\" or \"Использовать этот email нельзя\"."
+          "description": "The translation \"Email совпадает с текущим\" does not accurately convey the meaning of \"You can't use the same email address.\" It implies the email matches the current one, rather than expressing a restriction on reuse.",
+          "suggestion": "Нельзя использовать этот адрес электронной почты."
         }
       ],
       "approved_at": null
@@ -219,13 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබට එකම වි-තැපැල් ලිපිනය භාවිතයට නොහැකිය' is a literal translation of 'You can't use the same email address' but sounds awkward in Sinhala. A more natural phrasing would convey the same meaning.",
-          "suggestion": "ඔබ එකම වි-තැපැල් ලිපිනය භාවිතා කළ නොහැක (Oba ekama vi-thapail lipinaya upayogakala nokahaka)"
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, the use of 'használිය නොහැකිය' (használිය නොහැකිය) in the original translation is less common. The 'හැකිය' is more common in this context.",
-          "suggestion": "Instead of 'használිය නොහැකිය' use 'කළ නොහැක' (kala nokahaka) - 'cannot do'."
+          "description": "The translation 'ඔබට එකම වි-තැපැල් ලිපිනය භාවිතයට නොහැකිය' is a literal translation and doesn't flow naturally in Sinhala. While technically correct, it sounds awkward.",
+          "suggestion": "A more natural translation would be something like 'ඔබ එකම වි-තැපැල් ලිපිනය භාවිතා කළ නොහැකිය' or 'ඔබට එක වි-තැපැල් ලිපිනයක් පමණක් භාවිතා කළ හැකියි'."
         }
       ],
       "approved_at": null
@@ -248,13 +226,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"исту\" is an archaic or overly formal word for \"the same\" in this context. \"исту\" implies a direct, identical copy, which isn't necessarily what's intended. A more natural and common phrasing would be \"исту\" replaced with \"исту“.",
-          "suggestion": "Не можете користити исту емаил адресу -> Не можете користити исту емаил адресу"
+          "description": "The translation 'Не можете користити исту емаил адресу' is not the most natural or accurate rendering of 'You can't use the same email address' in Serbian (Cyrillic). 'Исту' implies a very specific identical email, which isn't the intended meaning.",
+          "suggestion": "Не можете користити исту е-маил адресу (using 'е-маил' for 'email' is more common) or Не можете користити већ коришћену емаил адресу (You cannot use an already used email address)."
         },
         {
           "type": "spelling",
-          "description": "The word 'емаил' is a transliteration of 'email' and is generally considered less formal or sometimes incorrect. The accepted and more formal Serbian word is 'email'.",
-          "suggestion": "Не можете користити исту емаил адресу -> Не можете користити исту email адресу"
+          "description": "While 'емаил' is often used, 'е-маил' is the more formal and universally accepted spelling of 'email'.",
+          "suggestion": "е-маил"
         }
       ],
       "approved_at": null

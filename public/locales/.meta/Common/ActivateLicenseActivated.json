@@ -3,7 +3,7 @@
   "content": "License activated",
   "content_en_sha1_hash": "576ed3bc179267c56642a371e93bad575e13aa61",
   "created_at": "2025-05-26T07:15:40.031Z",
-  "updated_at": "2025-06-02T10:20:51.518Z",
+  "updated_at": "2025-06-08T12:02:32.852Z",
   "comment": {
     "text": "The translation key \"ActivateLicenseActivated\" is used to display a message indicating that a license has been successfully activated. This message typically appears as a success toast notification in the UI, notifying users of successful activation after triggering an action like getting payment information or refreshing the page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 328,
+      "line_number": 699,
       "context": "if (message) {\n toastr.error(message);\n return;\n }\n \n toastr.success(t(\"ActivateLicenseActivated\"));\n localStorage.removeItem(\"enterpriseAlertClose\");\n \n await getPaymentInfo();\n await this.settingsStore?.getSettings();\n } catch (e) {",
       "module": "/packages/client"
     },

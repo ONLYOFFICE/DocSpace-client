@@ -32,9 +32,9 @@ type InfoBadgeProps = {
   /** Global tooltip placement */
   place: PlacesType;
   /** tooltip header */
-  tooltipTitle: React.ReactNode;
+  tooltipTitle?: React.ReactNode;
   /** tooltip body */
-  tooltipDescription: React.ReactNode;
+  tooltipDescription?: React.ReactNode;
   /** Space between the tooltip element and anchor element (arrow not included in calculation) */
   offset: number;
 };

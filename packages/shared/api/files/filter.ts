@@ -70,6 +70,7 @@ const APPLY_FILTER_OPTION = "applyFilterOption";
 const EXTENSION = "extension";
 const SEARCH_AREA = "searchArea";
 const KEY = "key";
+const DATE = "date";
 
 // TODO: add next params
 // subjectGroup bool
@@ -96,15 +97,16 @@ const getOtherSearchParams = () => {
     EXTENSION,
     SEARCH_AREA,
     KEY,
+    DATE,
   ];
 
-  Array.from(searchParams.keys()).forEach((key) => {
-    if (
-      filterSearchParams.some(
-        (param) => param.toLowerCase() === key.toLowerCase(),
-      )
-    ) {
-      searchParams.delete(key);
+  filterSearchParams.forEach((param) => {
+    const keys = Array.from(searchParams.keys());
+    const keyToDelete = keys.find(
+      (key) => key.toLowerCase() === param.toLowerCase(),
+    );
+    if (keyToDelete) {
+      searchParams.delete(keyToDelete);
     }
   });
 
@@ -150,8 +152,8 @@ class FilesFilter {
 
   key: string | null = null;
 
-  static getDefault(total = DEFAULT_TOTAL) {
-    return new FilesFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
+  static getDefault(pageCount = DEFAULT_PAGE_COUNT, total = DEFAULT_TOTAL) {
+    return new FilesFilter(DEFAULT_PAGE, pageCount, total);
   }
 
   static getFilter(location: Location) {

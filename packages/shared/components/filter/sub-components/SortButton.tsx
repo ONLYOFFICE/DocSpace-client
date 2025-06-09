@@ -212,6 +212,7 @@ const SortButton = ({
         withBlur={false}
         withBackdrop
         onBackdropClick={toggleCombobox}
+        type="onlyIcon"
       >
         <IconButton iconNode={<SortReactSvg />} size={16} />
       </ComboBox>

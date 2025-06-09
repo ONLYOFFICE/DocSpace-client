@@ -115,6 +115,7 @@ const Article = ({
   downloaddesktopUrl,
   officeforandroidUrl,
   officeforiosUrl,
+  showBackButton,
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
     React.useState<null | React.JSX.Element>(null);
@@ -234,8 +235,6 @@ const Article = ({
     ? "/portal-settings/developer-tools"
     : "/developer-tools";
 
-  const showBackButton = window.location.pathname.includes("portal-settings");
-
   const articleComponent = (
     <>
       <div
@@ -274,7 +273,10 @@ const Article = ({
           scrollClass="article-scroller"
         >
           {showBackButton && currentDeviceType !== DeviceType.mobile ? (
-            <BackButton showText={showText} />
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+            />
           ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader ? (

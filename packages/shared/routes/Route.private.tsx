@@ -71,6 +71,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     isLoadingPublicRoom,
 
     limitedAccessDevToolsForUsers,
+    standalone,
   } = props;
 
   const location = useLocation();
@@ -168,6 +169,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname === "/portal-settings/delete-data/deactivation";
 
     const isBonusPage = location.pathname === "/portal-settings/bonus";
+    const isServicesPage = location.pathname === "/portal-settings/services";
 
     const isPortalRenameUrl =
       location.pathname ===
@@ -229,7 +231,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
           isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
-        (isEnterprise && isBonusPage))
+        (isEnterprise && isBonusPage) ||
+        (standalone && isServicesPage))
     ) {
       return <Navigate replace to="/" />;
     }
@@ -272,7 +275,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       (user?.isOwner || user?.isAdmin) &&
       !isPaymentsUrl &&
       !isBackupUrl &&
-      !isPortalDeletionUrl
+      !isPortalDeletionUrl &&
+      !location.pathname.includes("wallet")
     ) {
       return (
         <Navigate

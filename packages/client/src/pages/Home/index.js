@@ -165,6 +165,7 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+
     allowInvitingGuests,
     checkGuests,
     hasGuests,
@@ -693,6 +694,7 @@ export const Component = inject(
       isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+
       allowInvitingGuests,
       checkGuests,
       hasGuests,

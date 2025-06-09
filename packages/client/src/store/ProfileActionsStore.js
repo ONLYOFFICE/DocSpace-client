@@ -66,6 +66,8 @@ class ProfileActionsStore {
 
   userStore = null;
 
+  infoPanelStore = null;
+
   settingsStore = null;
 
   filesStore = null;
@@ -93,6 +95,7 @@ class ProfileActionsStore {
     userStore,
     settingsStore,
     currentTariffStatusStore,
+    infoPanelStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -102,6 +105,7 @@ class ProfileActionsStore {
     this.userStore = userStore;
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.infoPanelStore = infoPanelStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 

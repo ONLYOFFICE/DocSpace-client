@@ -3,7 +3,7 @@
   "content": "No rooms here yet",
   "content_en_sha1_hash": "3d183435304940e2b16ab0ff7611329c1d3160bd",
   "created_at": "2025-05-19T21:30:44.877Z",
-  "updated_at": "2025-05-26T07:57:32.974Z",
+  "updated_at": "2025-06-08T12:02:32.921Z",
   "comment": {
     "text": "This translation key is used to display a default message when there are no rooms available, indicating that no items can be selected. It is typically rendered in an empty room selection header or button, providing a clear visual cue for users and helping them understand the current state of the room selection process.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Noch keine Räume vorhanden\" is a bit clunky. A more natural and idiomatic translation would be \"Bisher keine Räume vorhanden\" or \"Es gibt hier noch keine Räume\".",
-          "suggestion": "Es gibt hier noch keine Räume"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -99,18 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ここにはまだルームがありません' is technically correct but sounds somewhat unnatural in this context. A more natural phrasing would better suit a user interface.",
-          "suggestion": "ここにはまだ部屋がありません"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ルーム' (roomu) is a loanword from English. While understandable, using the native Japanese word '部屋' (heya) is preferred for better flow and naturalness in a localized application.",
-          "suggestion": "Replace 'ルーム' with '部屋'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -161,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nicio sală deocamdată aici' is not the most natural or idiomatic way to say 'No rooms here yet' in Romanian. While technically correct, it sounds slightly awkward.",
-          "suggestion": "A more natural translation would be 'Încă nicio sală aici' or 'Nu sunt încă camere aici'."
+          "description": "While grammatically correct, 'Nicio sală deocamdată aici' translates more literally as 'No room for the time being here.' A more natural and idiomatic translation for 'No rooms here yet' would be something like 'Nu sunt încă camere aici' or 'Încă nu sunt camere aici'.",
+          "suggestion": "Încă nu sunt camere aici"
         }
       ],
       "approved_at": null
@@ -179,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙහි කාමර නැත' is technically correct but not the most natural or idiomatic way to express 'No rooms here yet' in Sinhala. It literally translates to 'There are no rooms here'. A more natural phrasing would convey a sense of future potential or availability.",
-          "suggestion": "Consider a translation like 'කාමරක් මෙහි නොමැත' (Kaamarak mehi n'aemata) which better conveys 'There are no rooms here yet' or 'A room is not here yet'."
+          "description": "The translation 'මෙහි කාමර නැත' is a literal translation and sounds unnatural in Sinhala for this context. A more natural phrasing would convey the sense of 'There are no rooms available' or 'This area is empty'.",
+          "suggestion": "කාමරක් නැත (Kamarak netha) - meaning 'No rooms' or  මේ հատසම්‍යක් කාමර නැත (Me hatsamayak kamar netha) - 'There are no rooms in this area'"
         }
       ],
       "approved_at": null
@@ -203,8 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Нема соба овде још' is not the most natural or accurate rendering of \"No rooms here yet.\" While it conveys the general meaning, it's a bit literal. A more natural phrasing would be something like 'Jo нема собе овде' or 'Овде још нема собе'.",
-          "suggestion": "Овде још нема собе"
+          "description": "The translation 'Нема соба овде још' is not the most natural or accurate translation of 'No rooms here yet.' While literally translatable, it sounds awkward in Serbian. A more natural phrasing would convey the meaning in a more idiomatic way.",
+          "suggestion": "Нема још соба овде"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'овде' (here) at the end sounds a bit abrupt. Placing it before 'још' creates a slightly better flow.",
+          "suggestion": "Нема још соба овде"
         }
       ],
       "approved_at": null
@@ -215,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nema soba ovde još' is not the most natural or idiomatic way to say 'No rooms here yet' in Serbian. While technically correct, it sounds a bit awkward.",
-          "suggestion": "A more natural translation would be 'Još nema soba ovde' or 'Ovde još nema soba'."
+          "description": "The translation \"Nema soba ovde još\" is a literal translation and sounds unnatural in Serbian. A more natural phrasing would be \"Nema soba još\" or \"Još nema soba ovde\".",
+          "suggestion": "Još nema soba ovde"
         }
       ],
       "approved_at": null

@@ -33,7 +33,6 @@ import {
   FolderType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
 import {
   DEFAULT_CREATE_LINK_SETTINGS,
@@ -53,6 +52,8 @@ import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { ShareProps } from "@docspace/shared/components/share/Share.types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
+
+import config from "PACKAGE_FILE";
 
 import { getContactsView } from "../helpers/contacts";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -266,6 +267,8 @@ class InfoPanelStore {
     ) {
       return this.infoPanelSelection;
     }
+
+    console.log(this.infoPanelRoom);
 
     return this.infoPanelRoom;
   }

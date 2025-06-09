@@ -237,7 +237,7 @@ export const useMembers = ({
     setMembers(convertedMembers);
 
     setIsFirstLoading(false);
-  }, [room.id, room.roomType, room.isTemplate, room.security, searchValue]);
+  }, [room?.id, room?.roomType, room?.isTemplate, room?.security, searchValue]);
 
   const fetchMoreMembers = async () => {
     setIsLoading(true);

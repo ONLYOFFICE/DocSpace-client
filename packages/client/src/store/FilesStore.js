@@ -1691,6 +1691,8 @@ class FilesStore {
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
                 setInfoPanelSelectedRoom(room);
+              } else {
+                setInfoPanelSelectedRoom({ ...data.current, isRoom: true });
               }
 
               const { mute } = room;

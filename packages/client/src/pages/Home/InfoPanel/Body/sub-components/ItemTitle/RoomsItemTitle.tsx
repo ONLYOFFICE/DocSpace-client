@@ -129,7 +129,7 @@ const RoomsItemHeader = ({
   const model = getLogoCoverModel?.(t, hasImage);
 
   const badgeUrl =
-    "roomType" in selection && "external" in selection
+    "isRoom" in selection && selection.isRoom
       ? getRoomBadgeUrl(selection)
       : null;
 
@@ -175,6 +175,8 @@ const RoomsItemHeader = ({
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
+
+  console.log(isRoom, badgeUrl);
 
   useEffect(() => {
     setCoverSelection?.(selection);

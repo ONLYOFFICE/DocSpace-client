@@ -437,6 +437,20 @@ const PortalSettingsRoutes = {
         ),
     },
     {
+      path: "payments/wallet",
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/payments"),
+        ),
+    },
+    {
+      path: "services",
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/services"),
+        ),
+    },
+    {
       path: "management/disk-space",
       lazy: () =>
         componentLoader(

@@ -3,7 +3,7 @@
   "content": "Set quota to define storage limit.",
   "content_en_sha1_hash": "76b938d40e18046c5b737223c4a69f182b330d1c",
   "created_at": "2025-05-19T21:30:48.578Z",
-  "updated_at": "2025-05-26T07:57:32.228Z",
+  "updated_at": "2025-05-28T09:30:02.204Z",
   "comment": {
     "text": "This translation key is used to display a label that informs the user about the storage limit they are setting. It appears in a change quota dialog where users can adjust the storage limits for files.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yaddaş limitini müəyyənləşdirmək üçün kvota təyin edin' is a literal translation and doesn't quite capture the nuance of 'Set quota to define storage limit.' A more natural phrasing would convey the purpose of setting a quota, not just the act of setting it.",
-          "suggestion": "Consider alternatives like 'Kvota yaradaraq saxlama həddini müəyyən edin' or 'Saxlama həddini müəyyən etmək üçün kvota qoyun.'"
+          "description": "The translation 'Yaddaş limitini müəyyənləşdirmək üçün kvota təyin edin' is a bit literal and doesn't fully capture the meaning of 'Set quota to define storage limit.' It focuses on setting a quota *for* defining the limit, rather than setting the limit itself.",
+          "suggestion": "Consider a more natural phrasing like 'Sağlama həddini müəyyən etmək üçün kvota təyin edin' or 'Kvota ilə saxlama həddini müəyyən edin.'"
         }
       ],
       "approved_at": null
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nastavení kvóty pro definování limitu úložiště' is a bit literal and could be more natural. 'Define storage limit' is often conveyed more simply.",
+          "description": "The translation 'Nastavení kvóty pro definování limitu úložiště' is overly literal and slightly awkward. A more natural phrasing would be better.",
           "suggestion": "Nastavte kvótu pro omezení úložiště."
         }
       ],
@@ -72,13 +72,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ορίστε ποσόστωση για να ορίσετε το όριο αποθ. χώρου.' is a literal translation that doesn't quite convey the meaning of 'Set quota to define storage limit' in a natural Greek way. While technically correct, it sounds awkward.",
-          "suggestion": "Consider a more natural phrasing like 'Καθορίστε ποσόστωση για να ορίσετε το όριο αποθήκευσης.' or 'Ρυθμίστε την ποσόστωση για να ορίσετε το όριο αποθήκευσης.'"
+          "description": "The translation \"Ορίστε ποσόστωση για να ορίσετε το όριο αποθ. χώρου.\" is not a direct or accurate translation of \"Set quota to define storage limit.\" While 'ποσόστωση' (posotostisi) means quota, the phrasing is slightly awkward. A more natural translation would emphasize the action of setting the limit rather than just stating a quota exists.",
+          "suggestion": "Καθορίστε όριο αποθήκευσης με ποσόστωση."
         },
         {
           "type": "formatting",
-          "description": "The abbreviation 'αποθ. χώρου' (abbreviated for 'αποθηκευτικού χώρου') is a bit abrupt. Using the full phrase improves readability.",
-          "suggestion": "Replace 'αποθ. χώρου' with 'αποθήκευσης'."
+          "description": "The abbreviation 'αποθ. χώρου' is less common and less readable in modern Greek. Full words are preferred for clarity.",
+          "suggestion": "αποθηκευτικού χώρου"
         }
       ],
       "approved_at": null
@@ -95,7 +95,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"muistin rajan\" (memory limit) isn't the most accurate translation of 'storage limit'. 'Tallennustilan rajan' would be more precise.",
+          "description": "While technically correct, \"muistin rajan\" (memory limit) isn't the most natural way to express \"storage limit\" in Finnish in this context. It implies RAM or volatile memory, rather than allocated disk space.",
           "suggestion": "Aseta kiintiö määrittääksesi tallennustilan rajan."
         }
       ],
@@ -113,8 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Սահմանեք քվոտա՝ պահեստավորման սահմանը սահմանելու համար:\" is overly verbose and repetitive. The phrase 'սահմանելու համար' (to define) is used twice. A more concise and natural translation is needed.",
-          "suggestion": "Սահմանեք քվոտա՝ պահեստավորման սահմանը սահմանելու համար։ Alternative: Պահեստավորման սահմանը սահմանեք քվոտայի միջոցով։ (Set the storage limit using a quota.)"
+          "description": "The Armenian translation is overly literal and a bit clunky. 'Սահմանեք քվոտա՝ պահեստավորման սահմանը սահմանելու համար:' translates to 'Set quota to define the storage limit.' which is repetitive.",
+          "suggestion": "Սահմանեք քվոտա պահեստավորման համար։ (Set quota for storage.)"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the phrase 'սահմանելու համար' is a bit awkward and could be simplified.",
+          "suggestion": "Consider using a more direct phrasing, as suggested above."
         }
       ],
       "approved_at": null
@@ -131,13 +136,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly formal and doesn't quite capture the simplicity of the English phrase. '定義するために' (to define) is somewhat cumbersome. The English is more of a directive than a definition.",
-          "suggestion": "ストレージの制限を設定してください。"
+          "description": "The translation \"ストレージ容量を定義するために、容量制限を設定してください\" is overly verbose and doesn't directly convey the meaning of \"Set quota to define storage limit.\" A more concise and natural translation would be preferable.",
+          "suggestion": "ストレージ制限の quota を設定します。"
         },
         {
-          "type": "formatting",
-          "description": "The translation includes a passive voice construction which isn't ideal. A more direct and active voice would be more aligned with the original's tone.",
-          "suggestion": "ストレージの制限を設定してください。"
+          "type": "incorrect_translation",
+          "description": "The phrase \"容量制限を設定してください\" (set a capacity limit) is less common than simply setting a quota in a technical context.  It's not entirely *wrong*, but not the most idiomatic translation.",
+          "suggestion": "Quota を設定します。"
         }
       ],
       "approved_at": null
@@ -148,13 +153,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '스토리지 제한을 정의하려면 할당량을 설정하세요' is a bit verbose and less direct than the English 'Set quota to define storage limit'. It literally translates to 'If you want to define storage limit, set a quota'.",
-          "suggestion": "스토리지 할당량을 설정하세요."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase is grammatically correct but could be more concise for better flow.",
-          "suggestion": "스토리지 할당량을 설정하세요."
+          "description": "The translation '스토리지 제한을 정의하려면 할당량을 설정하세요' is a bit verbose and less direct than the English 'Set quota to define storage limit.'  While technically correct, it doesn't convey the same conciseness. '정의하려면' (to define) is unnecessary. A more natural phrasing would be closer to '스토리지 제한을 위해 할당량을 설정하세요.'",
+          "suggestion": "스토리지 제한을 위해 할당량을 설정하세요."
         }
       ],
       "approved_at": null
@@ -165,8 +165,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ກຳນົດຄູ໋ຕ້າເພື່ອຄຸ້ມຄອງຂີດຈຳກັດການເກັບຮັກສາ\" is a literal translation of 'quota' and 'storage limit' but doesn't convey the intended meaning of 'set quota to define storage limit.' It's a bit clunky and could be improved for natural Lao phrasing.",
-          "suggestion": "Consider a more natural phrasing like: \"ຕັ້ງຄູ໋ຕ້າເພື່ອຈຳກັດຂະໜາດການເກັບຂໍ້ມູນ\" or \"ກຳນົດຂະໜາດຄູ໋ຕ້າສຳລັບການເກັບຂໍ້ມູນ\"."
+          "description": "The Lao translation 'ກຳນົດຄູ໋ຕ້າເພື່ອຄຸ້ມຄອງຂີດຈຳກັດການເກັບຮັກສາ' is a bit too literal and verbose for the concise English phrase 'Set quota to define storage limit.' The word 'ຄຸ້ມຄອງ' (kum khong - manage) is unnecessary.",
+          "suggestion": "ກຳນົດຄູ໋ຕ້າເພື່ອຈຳກັດການເກັບຮັກສາ"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'ຄູ໋ຕ້າ' is technically correct as a transliteration of 'quota', a more common and understandable term might be preferred by Lao users, depending on the context.",
+          "suggestion": "Consider using a more localized term if one exists and fits the context. It might be beneficial to research common usage within the target audience."
         }
       ],
       "approved_at": null
@@ -174,18 +179,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Iestatiet kvotu, lai definētu krātuves ierobežojumu' is a bit literal and could be more natural in Latvian. 'Definētu' isn't the most common or elegant way to express 'define' in this context.",
-          "suggestion": "Iestatiet kvotu, lai noteiktu krātuves limitu."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The use of 'ierobežojumu' (limitation) feels slightly formal and can be replaced by the more common 'limitu'.",
-          "suggestion": "Use 'limitu' instead of 'ierobežojumu'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -200,13 +194,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ustaw limit pamięci, aby zdefiniować maksymalną przestrzeń dyskową\" is a bit verbose and doesn't directly reflect the brevity of the English original. 'Limit pamięci' can be slightly misleading; 'przestrzeń dyskowa' is correct but 'limit' feels more direct.",
-          "suggestion": "Ustaw limit przestrzeni dyskowej."
+          "description": "The translation \"Ustaw limit pamięci, aby zdefiniować maksymalną przestrzeń dyskową\" is not a direct or optimal translation of \"Set quota to define storage limit.\" While technically accurate, \"limit pamięci\" (memory limit) is not the most natural or common way to describe a storage quota limit in Polish.  \"Limit przestrzeni dyskowej\" or something similar would be more precise.",
+          "suggestion": "Ustaw limit przestrzeni dyskowej, aby zdefiniować maksymalną pojemność."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'aby zdefiniować maksymalną przestrzeń dyskową' is more literal and complex than the English 'to define storage limit'. It adds unnecessary words.",
-          "suggestion": "Ustaw limit przestrzeni dyskowej, aby ograniczyć dostęp."
+          "type": "formatting",
+          "description": "The use of \"maksymalną pojemność\" is slightly more verbose than necessary. While not an error, it could be streamlined.",
+          "suggestion": "Ustaw limit przestrzeni dyskowej, aby zdefiniować pojemność."
         }
       ],
       "approved_at": null
@@ -217,8 +211,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and slightly awkward. While technically correct, it doesn't flow naturally in Portuguese. Repeating 'definir' is redundant.",
-          "suggestion": "Configure a cota para definir o limite de armazenamento."
+          "description": "The translation is overly literal. While technically correct, 'Defina a cota para definir o limite de armazenamento' is repetitive and unnatural in Portuguese. The second 'definir' is unnecessary.",
+          "suggestion": "Defina a cota para o limite de armazenamento."
         }
       ],
       "approved_at": null
@@ -229,8 +223,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is somewhat redundant. \"Defina a cota para definir o limite de armazenamento\" literally translates to 'Define the quota to define the storage limit.' The repetition of 'definir' (to define) makes it less natural in Portuguese.",
-          "suggestion": "Defina a cota para limitar o armazenamento."
+          "description": "The translation is too literal and somewhat redundant. \"Definir\" is used twice for 'define'. A more natural translation would avoid repetition.",
+          "suggestion": "Configure a quota to define the storage limit."
         }
       ],
       "approved_at": null
@@ -241,13 +235,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Serați cota' is not the most natural way to express 'Set quota'. A more common and accurate translation would be 'Stabiliți cota' or 'Configurați cota'. 'Serați' implies closing or securing, which doesn't align with setting a quota.",
-          "suggestion": "Stabiliți cota"
+          "description": "The Romanian translation 'Serați cota pentru a defini limita spațiului de stocare' is not the most natural or precise translation of 'Set quota to define storage limit.'  'Serați' implies setting something in an ongoing state.  A more accurate and common phrasing would focus on establishing the limit.",
+          "suggestion": "Stabiliți o cotă pentru a defini limita spațiului de stocare."
         },
         {
           "type": "grammar",
-          "description": "While not strictly incorrect, 'limita spațiului de stocare' is a bit verbose.  A more concise and common phrasing is 'limita de stocare'.",
-          "suggestion": "limita de stocare"
+          "description": "While technically correct, 'spațiului de stocare' is a bit verbose. A simpler phrasing would improve readability.",
+          "suggestion": "Stabiliți o cotă pentru a defini limita de stocare."
         }
       ],
       "approved_at": null
@@ -264,13 +258,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආචයන සීමාව දැක්වීමට සලාකය සකසන්න' doesn't accurately convey the meaning of 'Set quota to define storage limit.' 'ආචයන සීමාව' (aachayana seemawa) translates to 'restriction limit' or 'control limit,' which isn't quite what 'quota' implies. 'සලාකය' (salaakaya) meaning 'slurry' or 'mixture' is completely inappropriate.",
-          "suggestion": "A more accurate translation might be something like 'කොටා සීමාව සකසන්න' (Kota seemawa sakasanna) - 'Set quota limit' or 'ඉඩකඩ සීමාව සකසන්න' (Idakada seemawa sakasanna) - 'Set space limit'."
+          "description": "The translation 'ආචයන සීමාව දැක්වීමට සලාකය සකසන්න.' doesn't accurately convey the meaning of 'Set quota to define storage limit.' The word 'ආචයන' (aachayana) isn't commonly used in this context and 'සලාකය' (salaakaya) means 'salad'. It's likely a misunderstanding of the English term 'quota'.",
+          "suggestion": "A more accurate translation would be something along the lines of 'කොටා සීමාව සකසන්න' (Kota seimawa sakasanna) which directly translates to 'Set quota limit'."
         },
         {
           "type": "spelling",
-          "description": "The word 'සලාකය' (salaakaya) appears to be a misspelling or incorrect word choice. It is not relevant to the intended meaning.",
-          "suggestion": "Review the word choice and replace with a more appropriate term related to storage limits or quotas. Consider options like 'සීමාව' (seemawa - limit) or other terms more fitting the context."
+          "description": "While technically not incorrect, the use of 'ආචයන' ('aachayana') is unusual and indicates a possible misunderstanding, which could lead to confusion. It's not a standard Sinhala word in this scenario.",
+          "suggestion": "Replace 'ආචයන' with 'කොටා' (kota)."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure, while grammatically sound, might not be the most natural way to express this in Sinhala. While not strictly incorrect, it could be improved.",
+          "suggestion": "Consider phrasing it more directly, for example, 'කොටා සීමාව සකසන්න' (Kota seimawa sakasanna)."
         }
       ],
       "approved_at": null
@@ -284,7 +283,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'define storage limit' is better conveyed as 'določite največjo količino prostora za shranjevanje' or 'določite mejo prostora za shranjevanje'. The current translation 'določite omejitev prostora za shranjevanje' is technically correct, but less natural and precise.",
+          "suggestion": "Nastavite kvoto, da določite največjo količino prostora za shranjevanje."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -293,8 +298,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Поставите квоту да дефинишете лимит складишта' is a literal translation but doesn't flow naturally in Serbian.  'Поставите квоту' is grammatically correct, but a more natural phrasing would be 'Ограничите квоту...' or 'Дефинишите квоту...'",
-          "suggestion": "Ограничите квоту да дефинишете лимит складишта."
+          "description": "The translation 'Поставите квоту да дефинишете лимит складишта' is a literal translation that doesn't flow naturally in Serbian. A more natural phrasing would be 'Подесите квоту за ограничавање складишта' or 'Одредите квоту за лимит складишта'.",
+          "suggestion": "Подесите квоту за ограничавање складишта"
         }
       ],
       "approved_at": null
@@ -305,13 +310,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Postavite kvotu da definišete limit skladišta\" is a somewhat literal translation and doesn't flow naturally in Serbian. 'Set quota to define storage limit' implies a setting action. The phrase 'da definišete' is a bit clunky.",
+          "description": "The translation \"Postavite kvotu da definišete limit skladišta\" doesn't quite capture the meaning of \"Set quota to define storage limit.\" \"Postavite\" implies setting something new, while the English suggests configuring an existing quota.  A more accurate translation would imply configuration or assignment, not initial creation.",
           "suggestion": "Postavite kvotu za limit skladišta."
         },
         {
-          "type": "grammatical",
-          "description": "While not strictly incorrect, 'da definišete' creates an overly formal tone.  Using a more common phrasing would improve readability.",
-          "suggestion": "Consider a more colloquial and natural phrasing; see suggestions above."
+          "type": "grammar",
+          "description": "The use of 'da definišete' is a bit clunky. A more natural phrasing would be more direct.",
+          "suggestion": "za definisanje limita skladišta"
         }
       ],
       "approved_at": null
@@ -322,8 +327,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Depolama sınırını tanımlamak için kotayı ayarlayın' is a literal translation and not idiomatic Turkish. While understandable, a more natural phrasing would be preferred. The word order is slightly awkward.",
-          "suggestion": "Kota, depolama sınırını belirlemek için ayarlanır."
+          "description": "The translation 'Depolama sınırını tanımlamak için kotayı ayarlayın' is technically correct but sounds unnatural in Turkish. A more natural phrasing would be 'Kota ile depolama sınırını belirleyin.' or 'Kota ile depolama limitini tanımlayın.'",
+          "suggestion": "Kota ile depolama sınırını belirleyin."
         }
       ],
       "approved_at": null
@@ -334,8 +339,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Встановіть квоту, щоб визначити обмеження сховища' is a literal translation but could be improved for clarity and natural flow in Ukrainian. 'Сховища' isn't the most common term for storage in this context.",
-          "suggestion": "Встановіть квоту для обмеження обсягу пам’яті."
+          "description": "The translation \"Встановіть квоту, щоб визначити обмеження сховища\" is a literal translation, but 'sховища' (storage) is not the most natural or common way to express 'storage' in this context. A more natural phrasing would use 'обсягу пам'яті' (memory volume) or 'обсягу даних' (data volume).",
+          "suggestion": "Встановіть квоту, щоб визначити обмеження обсягу пам'яті."
         }
       ],
       "approved_at": null
@@ -343,7 +348,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Đặt hạn mức để xác định giới hạn lưu trữ' is a literal translation but doesn't convey the intended meaning as smoothly as it could. 'Quota' carries a specific meaning of a predefined allowance, which isn't fully captured.",
+          "suggestion": "Thiết lập hạn ngạch để giới hạn dung lượng lưu trữ."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

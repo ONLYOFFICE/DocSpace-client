@@ -16,7 +16,8 @@
     "test:start": "PORT=5112 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e:docker:build": "docker-compose build",
     "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",
-    "test:e2e:docker:clear": "docker rmi tests"
+    "test:e2e:docker:clear": "docker rmi tests",
+    "test:clean-failed-tests": "node scripts/cleanFailedTests.js"
   },
   "dependencies": {
     "date-and-time": "3.6.0",

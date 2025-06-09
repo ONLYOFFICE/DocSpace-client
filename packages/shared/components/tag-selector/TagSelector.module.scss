@@ -24,8 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @use "../../styles/variables/colors";
-
 @use "../../styles/mixins";
+
+:global(.light) {
+  :local {
+    .tagSelector {
+      --selector-background-color: #{colors.$white};
+    }
+    .text {
+      --text-color: #{colors.$gray};
+    }
+
+    .divider {
+      --divider-color: #{colors.$gray-light-mid};
+    }
+  }
+}
+
+:global(.dark) {
+  :local {
+    .tagSelector {
+      --selector-background-color: #{colors.$dark-gray-light};
+    }
+    .text {
+      --text-color: #{colors.$gray-dark};
+    }
+
+    .divider {
+      --divider-color: #{colors.$gray-dark-strong};
+    }
+  }
+}
 
 .tagSelector {
   position: fixed;
@@ -38,11 +67,11 @@
   height: auto;
   width: 254px;
 
-  background-color: #fff;
+  background-color: var(--selector-background-color);
 
   box-shadow:
-    0px 8px 16px 0px #040f1b14,
-    0px 0px 4px 0px #040f1b0a;
+    0px 8px 16px 0px colors.$box-shadow-color,
+    0px 0px 4px 0px colors.$box-shadow-second-color;
 
   box-sizing: border-box;
 
@@ -60,7 +89,7 @@
 
 .divider {
   margin-block: 3px;
-  background-color: #e5e7eb;
+  background-color: var(--divider-color);
   border: none;
   height: 1px;
   flex-shrink: 0;
@@ -109,7 +138,7 @@
 
 .text {
   padding-block: 4px 8px;
-  color: #a3a9ae;
+  color: var(--text-color);
 }
 
 .row {
@@ -155,8 +184,8 @@
   border-radius: 3px;
   border: 1px solid var(--icon-button-color);
 
-  &:hover {
-    @media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
       border-color: var(--icon-button-hover-color);
     }
   }

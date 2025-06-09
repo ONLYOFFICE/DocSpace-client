@@ -248,7 +248,6 @@ const ThirdPartyStorageModule = ({
           hideMobileView={false}
           forceCloseClickOutside
           className={classNames(styles.backupCombo, "backup_combo")}
-          size={ComboBoxSize.content}
           advancedOptions={advancedOptions}
           selectedOption={{ key: 0, label: selectedStorageTitle }}
           isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}

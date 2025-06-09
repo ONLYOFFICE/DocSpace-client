@@ -308,7 +308,6 @@ const DirectThirdPartyConnection = ({
           displaySelectedOption
           hideMobileView={false}
           forceCloseClickOutside
-          size={ComboBoxSize.content}
           className="thirdparty-combobox"
           advancedOptions={advancedOptions}
           isDisabled={isLoading}

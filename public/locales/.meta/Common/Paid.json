@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2025-05-26T07:57:32.447Z",
+  "updated_at": "2025-06-02T10:20:51.256Z",
   "comment": {
     "text": "This translation key is used to display a paid status label. It appears on a badge component in the contacts list, indicating that an account has made payments and should be considered paid. The text changes depending on whether a user is paying or not, using the \"Paid\" label for paid accounts.",
     "is_auto": true,
@@ -138,38 +138,38 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 102,
-      "context": "{!isSettingPaid && !standalone ? (\n <Badge\n className=\"paid-badge\"\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n isPaidBadge\n backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark",
+      "line_number": 106,
+      "context": "{!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n isPaidBadge\n backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 35,
+      "context": "import { MobileCategoryWrapper } from \"../../../components/mobile-category-wrapper\";\n \n import styles from \"./MobileView.module.scss\";\n \n export const MobileView = ({\n isSettingPaid,\n displayAbout,\n displayAdditional,\n baseUrl,\n onClickLink,\n }: {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 35,
+      "context": "import { MobileCategoryWrapper } from \"../../../components/mobile-category-wrapper\";\n \n import styles from \"./MobileView.module.scss\";\n \n export const MobileView = ({\n isSettingPaid,\n displayAbout,\n displayAdditional,\n baseUrl,\n onClickLink,\n }: {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 35,
+      "context": "import { MobileCategoryWrapper } from \"../../../components/mobile-category-wrapper\";\n \n import styles from \"./MobileView.module.scss\";\n \n export const MobileView = ({\n isSettingPaid,\n displayAbout,\n displayAdditional,\n baseUrl,\n onClickLink,\n }: {",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
+      "line_number": 35,
+      "context": "import { MobileCategoryWrapper } from \"../../../components/mobile-category-wrapper\";\n \n import styles from \"./MobileView.module.scss\";\n \n export const MobileView = ({\n isSettingPaid,\n displayAbout,\n displayAdditional,\n baseUrl,\n onClickLink,\n }: {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
-      "line_number": 77,
-      "context": "{!isSettingPaid && !standalone ? (\n <Badge\n className=\"paid-badge\"\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n isPaidBadge\n backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Branding/mobile-view.tsx",
-      "line_number": 60,
-      "context": "<MobileCategoryWrapper\n title={t(\"BrandName\")}\n subtitle={t(\"BrandNameSubtitleMobile\")}\n url={`${baseUrl}/branding/brand-name`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"WhiteLabel\")}\n subtitle={t(\"BrandingSubtitleMobile\")}",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Branding/mobile-view.tsx",
-      "line_number": 39,
-      "context": "display: flex;\n flex-direction: column;\n `;\n \n export const MobileView = ({\n isSettingPaid,\n displayAbout,\n displayAdditional,\n baseUrl,\n onClickLink,\n }: {",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Branding/mobile-view.tsx",
-      "line_number": 39,
-      "context": "display: flex;\n flex-direction: column;\n `;\n \n export const MobileView = ({\n isSettingPaid,\n displayAbout,\n displayAdditional,\n baseUrl,\n onClickLink,\n }: {",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Branding/mobile-view.tsx",
-      "line_number": 39,
-      "context": "display: flex;\n flex-direction: column;\n `;\n \n export const MobileView = ({\n isSettingPaid,\n displayAbout,\n displayAdditional,\n baseUrl,\n onClickLink,\n }: {",
+      "line_number": 76,
+      "context": "{!isSettingPaid && !standalone ? (\n <Badge\n className={classNames(styles.paidBadge, \"paid-badge\")}\n fontWeight=\"700\"\n label={t(\"Common:Paid\")}\n isPaidBadge\n backgroundColor={\n isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark",
       "module": "/packages/shared"
     },
     {

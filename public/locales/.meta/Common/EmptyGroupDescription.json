@@ -3,7 +3,7 @@
   "content": "This group is empty",
   "content_en_sha1_hash": "92cdac96181278d5430dfaee93246a757cea59d6",
   "created_at": "2025-05-19T21:30:44.850Z",
-  "updated_at": "2025-05-26T07:57:32.455Z",
+  "updated_at": "2025-05-28T09:30:02.460Z",
   "comment": {
     "text": "\"This translation key is used to display a message when a group on the Home page is empty. It appears as part of an 'Empty Screen' component.\"",
     "is_auto": true,
@@ -123,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Dana grupa jest pusta' is not the most natural or idiomatic way to express 'This group is empty' in Polish. 'Dana' implies ownership or belonging, which is not present in the original English.",
-          "suggestion": "The suggested translation is 'Ta grupa jest pusta' or 'Pusta grupa'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -150,8 +144,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Nici un membru în grupul' is not a natural or accurate translation of 'This group is empty'. It literally translates to 'No member in the group'.",
-          "suggestion": "A more accurate and natural translation would be 'Grupul este gol' or 'Acest grup este gol'."
+          "description": "The Romanian translation 'Nici un membru în grupul' doesn't accurately convey the meaning of 'This group is empty'. It translates to 'No member in the group'.",
+          "suggestion": "A more accurate translation would be 'Grupul este gol' or 'Acest grup este gol'."
+        },
+        {
+          "type": "grammar",
+          "description": "Even with a more accurate translation like 'Nici un membru în grupul', the Romanian grammar is slightly awkward. The preposition 'în' is used incorrectly.",
+          "suggestion": "If retaining a structure involving 'membru', a better phrasing would be 'Nu există membri în acest grup'."
         }
       ],
       "approved_at": null

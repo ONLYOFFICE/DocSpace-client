@@ -28,7 +28,9 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+import classNames from "classnames";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 import {
   changeApiKeyStatus,
   deleteApiKey,
@@ -56,6 +58,10 @@ const StyledApiKeys = styled.div`
     box-sizing: border-box;
     max-width: 700px;
     margin-bottom: 25px;
+
+    &.withEmptyScreen {
+      margin-bottom: 0px;
+    }
 
     .api-keys_text {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
@@ -101,6 +107,8 @@ const ApiKeys = (props: ApiKeysProps) => {
     useState(false);
   const [actionItem, setActionItem] = useState<TApiKey | null>(null);
   const [isRequestRunning, setIsRequestRunning] = useState(false);
+  const [error, setError] = useState<null | Error>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const onDeleteApiKey = (id: TApiKey["id"]) => {
     const itemIndex = listItems.findIndex((x) => x.id === id);
@@ -172,12 +180,21 @@ const ApiKeys = (props: ApiKeysProps) => {
   };
 
   const getKeys = async () => {
-    await Promise.all([getApiKeys(), getApiKeyPermissions()])
-      .then(([keys, permissionsData]) => {
-        setListItems(keys);
-        setPermissions(permissionsData);
-      })
-      .catch((err) => toastr.error(err));
+    setIsLoading(true);
+    try {
+      const [keys, permissionsData] = await Promise.all([
+        getApiKeys(),
+        getApiKeyPermissions(),
+      ]);
+
+      setListItems(keys);
+      setPermissions(permissionsData);
+    } catch (err) {
+      toastr.error(err as Error);
+      setError(err as Error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -192,7 +209,11 @@ const ApiKeys = (props: ApiKeysProps) => {
 
   return (
     <StyledApiKeys>
-      <div className="api-keys_description">
+      <div
+        className={classNames("api-keys_description", {
+          withEmptyScreen: !!error,
+        })}
+      >
         <Text lineHeight="20px" className="api-keys_text">
           {t("Settings:ApiKeysDescription", {
             productName: t("Common:ProductName"),
@@ -216,36 +237,44 @@ const ApiKeys = (props: ApiKeysProps) => {
         </Link>
       </div>
       <div>
-        {isMobile() ? (
-          <StyledMobileButton>
-            <Button
-              onClick={() => setCreateKeyDialogIsVisible(true)}
-              label={t("Settings:CreateNewSecretKey")}
-              primary
-              size={ButtonSize.normal}
-              scale
-            />
-          </StyledMobileButton>
+        {error ? (
+          <EmptyServerErrorContainer />
         ) : (
-          <Button
-            onClick={() => setCreateKeyDialogIsVisible(true)}
-            label={t("Settings:CreateNewSecretKey")}
-            primary
-            size={ButtonSize.small}
-          />
+          <>
+            {isMobile() ? (
+              <StyledMobileButton>
+                <Button
+                  onClick={() => setCreateKeyDialogIsVisible(true)}
+                  label={t("Settings:CreateNewSecretKey")}
+                  primary
+                  size={ButtonSize.normal}
+                  scale
+                  isDisabled={isLoading}
+                />
+              </StyledMobileButton>
+            ) : (
+              <Button
+                onClick={() => setCreateKeyDialogIsVisible(true)}
+                label={t("Settings:CreateNewSecretKey")}
+                primary
+                size={ButtonSize.small}
+                isDisabled={isLoading}
+              />
+            )}
+            <div>
+              {!isLoading && listItems.length ? (
+                <ApiKeysView
+                  items={listItems}
+                  viewAs={viewAs}
+                  onDeleteApiKey={onDeleteApiKey}
+                  onChangeApiKeyParams={onChangeApiKeyParams}
+                  onEditApiKey={onEditApiKey}
+                  permissions={permissions}
+                />
+              ) : null}
+            </div>
+          </>
         )}
-        <div>
-          {listItems.length ? (
-            <ApiKeysView
-              items={listItems}
-              viewAs={viewAs}
-              onDeleteApiKey={onDeleteApiKey}
-              onChangeApiKeyParams={onChangeApiKeyParams}
-              onEditApiKey={onEditApiKey}
-              permissions={permissions}
-            />
-          ) : null}
-        </div>
       </div>
       {createKeyDialogIsVisible ? (
         <CreateApiKeyDialog

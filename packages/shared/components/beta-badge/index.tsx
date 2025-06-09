@@ -42,6 +42,7 @@ const BetaBadge = ({
   documentationEmail,
   currentDeviceType,
   withOutFeedbackLink = false,
+  withoutTooltip = false,
 }: BetaBadgeProps) => {
   const { t } = useTranslation(["Common", "Settings"]);
 
@@ -84,13 +85,19 @@ const BetaBadge = ({
 
   const offset = isMobile ? MobileOffset : OtherOffset;
 
+  const tooltipProps = withoutTooltip
+    ? {}
+    : {
+        tooltipTitle: t("Common:BetaBadgeTitle"),
+        tooltipDescription,
+      };
+
   return (
     <InfoBadge
       offset={offset}
       place={isMobile ? mobilePlace : place}
       label={t("Common:BetaLabel")}
-      tooltipDescription={tooltipDescription}
-      tooltipTitle={t("Common:BetaBadgeTitle")}
+      {...tooltipProps}
     />
   );
 };

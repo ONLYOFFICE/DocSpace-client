@@ -95,6 +95,7 @@ import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
+import { getFromLocalStorage } from "./getFromLocalStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
@@ -156,6 +157,7 @@ export {
   getTextColor,
   getFromSessionStorage,
   saveToSessionStorage,
+  getFromLocalStorage,
   getFormFillingTipsStorageName,
   fakeFormFillingList,
   getCountTilesInRow,

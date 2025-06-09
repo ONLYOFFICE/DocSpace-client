@@ -70,7 +70,12 @@ const ArticleHeader = ({
         withoutBorder
         onCloseClick={onIconClick}
         headerComponent={
-          showBackButton ? <BackButton showText={showText} /> : null
+          showBackButton ? (
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+            />
+          ) : null
         }
       />
     );

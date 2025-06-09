@@ -3,7 +3,7 @@
   "content": "Hotkeys",
   "content_en_sha1_hash": "fcc6c31859e49237e63699f1d595746a553a6a39",
   "created_at": "2025-05-19T21:30:45.809Z",
-  "updated_at": "2025-05-26T07:57:32.369Z",
+  "updated_at": "2025-06-08T12:02:32.670Z",
   "comment": {
     "text": "This translation key is used to display the label \"Hotkeys\" in various UI elements, such as a modal dialog header, navigation menu items, or buttons, primarily related to accessibility and user interface configuration. The text will appear in the HotkeysPanel component when the \"Hotkeys\" action is invoked.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 336,
+      "line_number": 341,
       "context": "!isMobile\n ) {\n hotkeys = {\n key: \"user-menu-hotkeys\",\n icon: HotkeysReactSvgUrl,\n label: t(\"Common:Hotkeys\"),\n onClick: (e) => this.onHotkeysClick(e),\n url: `${window.location.pathname}?action=hotkeys`,\n preventNewTab: true,\n };\n }",
       "module": "/packages/client"
     }
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Տաք ստեղներ\" literally translates to \"Hot keys\". While understandable, a more accurate and idiomatic translation of \"Hotkeys\" would be something along the lines of \"Հարմար գործողություններ\" (Convenient Actions) or \"Մերձուկիմանվերներ\" (Shortcuts). The direct translation doesn't quite capture the meaning within a software/application context.",
-          "suggestion": "Consider using \"Հարմար գործողություններ\" or \"Մերձուկիմանվերներ\" for a more accurate translation of \"Hotkeys\"."
+          "description": "The translation \"Տաք ստեղներ\" literally translates to \"Hot keys\", which is acceptable but slightly less natural than a more idiomatic Armenian term for hotkeys. 'Hotkeys' generally implies keyboard shortcuts.",
+          "suggestion": "Consider alternatives like \"Թարմացրող ստեղներ\" (Refreshing keys) or \"Միջազորդային ստեղներ\" (Shortcut keys) for a more idiomatic and clear translation.  However, \"Տաք ստեղներ\" isn't necessarily *wrong*, just potentially less natural."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ປຸ່ມໃຊ້ປະຈຳ' while literally meaning 'designated buttons' doesn't fully convey the meaning of 'Hotkeys' which implies keyboard shortcuts for actions. It's a functional description, not just a physical description of buttons.",
-          "suggestion": "Consider 'ທາງລັດ' or 'ສັນຍາລັກທາງລັດ' which more accurately translates to 'shortcuts' or 'keyboard shortcuts'."
+          "description": "The Lao translation 'ປຸ່ມໃຊ້ປະຈຳ' is a literal translation of 'shortcut keys' rather than the general term 'hotkeys'. It's not entirely wrong, but it's less common and less accurate for the intended meaning.",
+          "suggestion": "Consider 'ທາງລັດ' or 'ຮີບທາງ' as alternatives which are more widely understood as 'hotkeys'."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"උණුසුම් යතුරු\" (unusuṁ yaturu) literally translates to \"hot keys.\" While understandable, it's a very literal translation and might not be the most natural or idiomatic way to express \"Hotkeys\" in Sinhala. A more appropriate translation might consider the concept of keyboard shortcuts.",
-          "suggestion": "Consider a more idiomatic translation such as \"වේගවත් සැකසීම්\" (vēgavata sākeśim) which means \"speed settings\" or \"shortcuts,\" or a more descriptive phrase relating to keyboard shortcuts."
+          "description": "The translation \"උණුසුම් යතුරු\" (unusuṁ yaturu) literally translates to \"hot keys\" which, while understandable, isn't the most natural or idiomatic way to express \"Hotkeys\" in Sinhala. A more accurate and common translation would be \"කුරි අංකේ\" (kuri ankē) meaning 'shortcut keys'.",
+          "suggestion": "කුරි අංකේ (kuri ankē)"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Пречице\" does not accurately convey the meaning of \"Hotkeys\". \"Пречице\" translates to something like \"shortcuts\" or \"conveniences\" and doesn't directly represent hotkeys which refer to keyboard shortcuts for actions.",
-          "suggestion": "Consider alternatives such as \"Тасктренумске скице\" (tashtrenumske skice - keyboard shortcuts) or a more descriptive phrase that accurately represents the functionality of hotkeys in the context."
+          "description": "The Serbian (Cyrillic) translation 'Пречице' does not accurately convey the meaning of 'Hotkeys'. 'Пречице' generally refers to shortcuts or abbreviations.",
+          "suggestion": "A more appropriate translation might be 'Тексeутске пречице' (Tekstualne prečice) or 'Пречице на тастатури' (Keyboard shortcuts)."
         }
       ],
       "approved_at": null

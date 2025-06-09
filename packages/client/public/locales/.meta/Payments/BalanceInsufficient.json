@@ -1,0 +1,28 @@
+{
+  "key_path": "BalanceInsufficient",
+  "content": "Balance: <1>{{balance}}</1> | Insufficient funds",
+  "content_en_sha1_hash": "5ea7eb6b827719b3f17f6d12c0100712b7fc4424",
+  "created_at": "2025-06-03T20:59:26.639Z",
+  "updated_at": "2025-06-03T21:01:00.615Z",
+  "comment": {
+    "text": "This translation key is used for a notification that displays when a user's wallet balance falls below a certain threshold. It appears in the Wallet Info component on a payments page and is displayed as a label to indicate insufficient funds.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:01:00.615Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/WalletInfo.tsx",
+      "line_number": 49,
+      "context": "const WalletInfo = (props: WalletInfoProps) => {\n const { balance, onTopUp } = props;\n const { t } = useTranslation([\"Payments\", \"Common\"]);\n \n const keyProp = onTopUp\n ? { tKey: \"BalanceInsufficient\" }\n : { tKey: \"Balance\" };\n \n return (\n <div className={styles.walletInfoContainer}>\n <div className={styles.walletInfoIcon}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

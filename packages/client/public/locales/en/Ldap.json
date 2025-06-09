@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "Group Name Attribute",
   "LdapGroupNameAttributeTooltip": "Please specify the object attribute that corresponds to the group name.",
   "LdapGroupUserAttributeTooltip": "Enter the user object attribute used to determine whether this user is a member of the groups.",
-  "LdapIntro": "Import users and groups via LDAP, and enable user authentication through logins/passwords stored on the LDAP server. Users will be imported immediately after the settings are saved. Users added later will be imported during their first authentication. If you want to provide access via LDAP only, disable the option to invite new {{productName}} members via Contacts: <1>{{link}}</1>",
+  "LdapIntegrationDescription": "Import users and groups via LDAP, and enable user authentication through logins/passwords stored on the LDAP server. Users will be imported immediately after the settings are saved. Users added later will be imported during their first authentication. If you want to provide access via LDAP only, disable the option to invite new {{productName}} members via {{sectionName}}: <1>{{link}}</1>",
   "LdapLoginAttribute": "Login Attribute",
   "LdapLoginAttributeTooltip": "Enter the object attribute corresponding to the user login.",
   "LdapLoginTooltip": "Please specify Login user who has LDAP server read access rights.",

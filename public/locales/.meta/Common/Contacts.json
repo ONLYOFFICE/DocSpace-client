@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-05-26T07:57:32.133Z",
+  "updated_at": "2025-06-08T12:02:32.563Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -20,6 +20,12 @@
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
       "line_number": 106,
       "context": "disableInvitedUsers={disableInvitedUsers}\n checkIfUserInvited={checkIfUserInvited}\n withHeader\n filter={filter}\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick,\n onCloseClick,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
+      "line_number": 136,
+      "context": "t={t}\n ns=\"Translations\"\n i18nKey=\"GuestConversionNote\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n }}\n />\n </Text>\n {accessRightsLink ? (\n <Link",
       "module": "/packages/client"
     },
     {
@@ -42,13 +48,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 508,
+      "line_number": 511,
       "context": "const currentTitle = isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : isLoading && stateTitle\n ? stateTitle\n : title;\n \n const currentCanCreate =",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 508,
+      "line_number": 511,
       "context": "const currentTitle = isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : isLoading && stateTitle\n ? stateTitle\n : title;\n \n const currentCanCreate =",
       "module": "/packages/client"
     },
@@ -83,10 +89,34 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
+      "line_number": 92,
+      "context": "t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (\n <Link",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
       "line_number": 213,
       "context": "isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n >\n <TextInput\n name={QUOTA}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
+      "line_number": 247,
+      "context": "lineHeight=\"20px\"\n onClick={onChangeContacts}\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
+      "line_number": 247,
+      "context": "lineHeight=\"20px\"\n onClick={onChangeContacts}\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/GuestShareLink/page.client.tsx",
+      "line_number": 139,
+      "context": "isDisabled={isLoading}\n onClick={onDenyInvite}\n />\n </ButtonsWrapper>\n <Text fontSize=\"12px\" fontWeight=\"400\" className=\"guest-info\">\n {t(\"Common:GuestApprovalNote\", { sectionName: t(\"Common:Contacts\") })}\n </Text>\n </FormWrapper>\n </>\n );\n };",
+      "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",

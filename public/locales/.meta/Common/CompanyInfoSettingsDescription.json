@@ -3,7 +3,7 @@
   "content": "This information will be displayed in the <1>{{link}}</1> window.",
   "content_en_sha1_hash": "feea1754462fa327a2109f784fab5e00ffad9082",
   "created_at": "2025-05-26T07:15:41.415Z",
-  "updated_at": "2025-05-26T08:06:25.893Z",
+  "updated_at": "2025-06-02T10:20:51.602Z",
   "comment": {
     "text": "This translation key is used for a description displayed in a dialog window. When users view certain settings, this text will be shown explaining where the information can be accessed further.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 126,
-      "context": "</div>\n <div className=\"description settings_unavailable\">\n {isSettingPaid ? (\n <Trans\n t={t}\n i18nKey=\"CompanyInfoSettingsDescription\"\n ns=\"Common\"\n values={{ link }}\n components={{\n 1: <Link className=\"link\" onClick={showExample} noHover />,\n }}",
+      "line_number": 160,
+      "context": ")}\n >\n {isSettingPaid ? (\n <Trans\n t={t}\n i18nKey=\"CompanyInfoSettingsDescription\"\n ns=\"Common\"\n values={{ link }}\n components={{\n 1: (\n <Link",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 126,
-      "context": "</div>\n <div className=\"description settings_unavailable\">\n {isSettingPaid ? (\n <Trans\n t={t}\n i18nKey=\"CompanyInfoSettingsDescription\"\n ns=\"Common\"\n values={{ link }}\n components={{\n 1: <Link className=\"link\" onClick={showExample} noHover />,\n }}",
+      "line_number": 160,
+      "context": ")}\n >\n {isSettingPaid ? (\n <Trans\n t={t}\n i18nKey=\"CompanyInfoSettingsDescription\"\n ns=\"Common\"\n values={{ link }}\n components={{\n 1: (\n <Link",
       "module": "/packages/shared"
     }
   ],

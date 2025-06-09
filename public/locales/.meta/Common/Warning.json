@@ -3,7 +3,7 @@
   "content": "Warning",
   "content_en_sha1_hash": "e9c45563358e813f157ba81b33143542165ba84e",
   "created_at": "2025-05-19T21:30:49.575Z",
-  "updated_at": "2025-05-26T07:57:32.129Z",
+  "updated_at": "2025-06-02T10:20:50.991Z",
   "comment": {
     "text": "This \"Warning\" translation key is used to display a caution message when sensitive information about file protection is detected in a file. It appears as a warning text in error messages or dialog boxes, providing context for users when accessing protected files.",
     "is_auto": true,
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 44,
+      "line_number": 43,
       "context": "onCloseDialog();\n };\n \n return (\n <ModalDialog visible={visible} onClose={onCloseDialog} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"",
       "module": "/packages/client"
     },

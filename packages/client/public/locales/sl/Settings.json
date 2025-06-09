@@ -223,7 +223,6 @@
   "SharedFiles": "Datoteke v skupni rabi",
   "SharedFilesImportLocation": "Datoteke, ki jih delijo drugi uporabniki, bodo uvožene v {{sectionName}} > Nedavno dostopno prek povezave. Opomba: med uvozom se lahko izgubijo nekatere pravice dostopa.",
   "SharedFolders": "Mape v skupni rabi",
-  "SharedFoldersDescription": "Mape v skupni rabi bodo uvožene v razdelek Sobe kot sobe z uporabniki, ki jim je bil odobren dostop. Upoštevajte: med uvozom se lahko nekatere pravice dostopa izgubijo",
   "SingleSignOn": "Enkratna prijava",
   "SMTPSettings": "SMTP nastavitve",
   "SMTPSettingsDescription": "SMTP nastavitve so potrebne za nastavitev email računa, ki bo uporabljen za pošiljanje obvestil s portala z uporabo SMTP strežnika namesto ene  {{organizationName}} uporabe. Prosim izpolnite vsa polja in pritisnite gumb \"Shrani\". Gumb 'Pošli testno sporočilo' lahko uporabite za preverjanje, če vse vnesene nastavitve delujejo pravilno.",

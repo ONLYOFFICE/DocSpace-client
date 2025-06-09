@@ -41,7 +41,11 @@ const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {
 
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
-      <ModalDialog.Header>{t("Common:MoveToTrashTitle")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Common:SectionMoveConfirmation", {
+          sectionName: t("Common:TrashSection"),
+        })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <span>
           <>{t("Common:DeleteFile")} </>
@@ -52,13 +56,17 @@ const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {
       <ModalDialog.Footer>
         <Button
           id="delete-file-button_submit"
-          key="OKButton"
-          label={t("Common:MoveToTrash")}
+          key="OkButton"
+          label={t("Common:MoveToSection", {
+            sectionName: t("Common:TrashSection"),
+          })}
           size={ButtonSize.normal}
           primary
           scale
           onClick={onSubmit}
-          aria-label={t("Common:MoveToTrash")}
+          aria-label={t("Common:MoveToSection", {
+            sectionName: t("Common:TrashSection"),
+          })}
         />
         <Button
           id="delete-file-button_cancel"

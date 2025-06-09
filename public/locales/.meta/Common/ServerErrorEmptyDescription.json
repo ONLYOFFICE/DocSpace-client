@@ -1,0 +1,28 @@
+{
+  "key_path": "ServerErrorEmptyDescription",
+  "content": "Please reload the page or come back later.",
+  "content_en_sha1_hash": "b3c4c7b15ce7206d054169fd7707a0b400d3dc16",
+  "created_at": "2025-06-08T12:02:14.353Z",
+  "updated_at": "2025-06-08T12:02:47.586Z",
+  "comment": {
+    "text": "This translation key is used to display a default error message when an empty server response is received. It is intended to provide a generic user-friendly message that can be displayed in a server error container on the client-side, prompting users to reload the page or try again later.",
+    "is_auto": true,
+    "updated_at": "2025-06-08T12:02:47.586Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyServerErrorContainer.tsx",
+      "line_number": 61,
+      "context": "return (\n <EmptyView\n icon={icon}\n title={t(\"Common:ServerErrorEmptyTitle\")}\n description={t(\"Common:ServerErrorEmptyDescription\")}\n options={options}\n />\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

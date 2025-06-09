@@ -30,11 +30,14 @@ import type { TOperation } from "../api/files/types";
 export const getOperationProgress = async (
   id: string,
   errorMessage: string,
+  isOneOperation: boolean = false,
 ) => {
+  const operationId = isOneOperation ? id : undefined;
+
   const promise = new Promise<TOperation | undefined>((resolve, reject) => {
     setTimeout(async () => {
       try {
-        await getProgress().then((res) => {
+        await getProgress(operationId).then((res) => {
           if (!res || res.length === 0) {
             reject(errorMessage);
           }
@@ -51,5 +54,6 @@ export const getOperationProgress = async (
       }
     }, 1000);
   });
+
   return promise;
 };

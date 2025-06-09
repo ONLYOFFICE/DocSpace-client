@@ -3,7 +3,7 @@
   "content": "<1>Anyone</1> with this link can <1>{{access}}</1>.",
   "content_en_sha1_hash": "6d6e1c091aeead5be151a4a71948e11f232ef935",
   "created_at": "2025-05-19T21:30:48.680Z",
-  "updated_at": "2025-06-02T10:20:51.585Z",
+  "updated_at": "2025-06-08T12:02:32.895Z",
   "comment": {
     "text": "This translation key defines a placeholder for a share link title that includes access information. It is used to display a dynamic title in a UI element, indicating what action can be taken when accessing the shared content.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Anyone\" is translated as \"أي شخص\" (Ayy Shakhs) which is generally accurate, but lacks the casual tone of 'Anyone' in this context. A more suitable translation might consider something like \"أَيّ وَاحِد\" (Ayy Waahid) for a more conversational feel.",
+          "suggestion": "Consider using \"أَيّ وَاحِد\" (Ayy Waahid) for a more conversational and accurate tone."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<1>` are present in both the English and Arabic versions. While this isn't inherently an error, consistency in translation and potentially removing them to align with the source format is advised.",
+          "suggestion": "Consider removing or standardizing the HTML tags `<1>`."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Anyone with this link can...\" is not perfectly conveyed by \"Bu linki olan hər kəs...\". A more accurate translation might be \"Hər kəs bu linkə malik olarsa...\" or \"Hər kəs bu linkə əldə edərsə...\"",
-          "suggestion": "Hər kəs bu linkə malik olarsa..."
+          "description": "The English phrase \"Anyone with this link\" is not accurately translated. \"Anyone\" translates to \"hər kəs\" (everyone), but the phrase is more naturally rendered as \"Hər kəs bu linkə malik olan...\" (Everyone who has this link...).",
+          "suggestion": "Hər kəs bu linkə malik olan..."
         },
         {
           "type": "formatting",
-          "description": "The tags <1> are not standard for this type of translation verification task. They should be removed.",
-          "suggestion": "Remove the <1> tags from both the English and Azerbaijani content."
+          "description": "The `<1>` tags are inconsistent between the English and Azerbaijani translations. The English uses `<1>` and the Azerbaijani uses `<1>`. While not inherently wrong, consistency is important.",
+          "suggestion": "Ensure consistent use of `<1>` tags in both languages. Consider removing them entirely for clean content."
         }
       ],
       "approved_at": null
@@ -80,7 +91,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English \"Anyone\" is translated as \"Kaikki\". While \"Kaikki\" can mean \"everyone\", in this context \"Anyone\" implies a more general accessibility. A more accurate translation might be something like 'Jokainen' or 'Kuka tahansa'.",
+          "suggestion": "Kuka tahansa"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -95,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation retains the `<1>` tags from the English content. These should be removed to ensure proper rendering.",
-          "suggestion": "Remove the `<1>` tags from the Armenian text: Յուրաքանչյուր ոք այս հղումով կարող է {{access}}:"
+          "description": "The Armenian translation maintains the <1> tags from the English content. This is unnecessary and impacts readability.",
+          "suggestion": "Remove the <1> tags from the Armenian translation: Յուրաքանչյուր ոք այս հղումով կարող է {{access}}:"
         }
       ],
       "approved_at": null
@@ -113,13 +130,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Anyone' is translated as '誰でも' (dare demo) which means 'anyone' or 'everyone'. While not strictly incorrect, it shifts the emphasis slightly. 'Anyone' is more specific than 'everyone'. A closer translation might be something like '誰か' (dareka) depending on the desired nuance. However, without further context, the current translation isn't necessarily wrong.",
-          "suggestion": "Consider using '誰か' (dareka) for a more precise translation of 'Anyone' if the meaning needs to be very specific."
+          "description": "The English content uses \"Anyone\" but the Japanese translation uses \"誰でも\" which, while conveying 'anyone', shifts the nuance. \"Anyone\" suggests a more passive role, whereas \"誰でも\" implies more active permission or ability. While not strictly wrong, it doesn't perfectly capture the original meaning. A closer translation for 'Anyone' might involve something like '持つ人は' or '誰か'.",
+          "suggestion": "Consider '持つ人は' or '誰か' instead of '誰でも' to more accurately reflect the original meaning of 'Anyone'."
         },
         {
           "type": "formatting",
-          "description": "The `<1>` tags are not consistent between the English and Japanese translations. The English uses `<1>Anyone</1>` and `<1>{{access}}</1>`, whereas the Japanese uses 'このリンクを持っている人なら<1>誰でも</1>、<1>{{access}}</1>'.",
-          "suggestion": "Ensure consistent use of the `<1>` tags in both translations to maintain formatting parity."
+          "description": "The `<1>` tags are not consistent. The English uses `<1>Anyone</1>` and `<1>{{access}}</1>`. The Japanese uses `<1>誰でも</1>` and `<1>{{access}}</1>`.  The English uses `</1>` while the Japanese also uses `</1>`.",
+          "suggestion": "Ensure that both languages use consistent tagging format.  The current format is consistent between English and Japanese, so no actual change is needed. The description merely notes observation."
         }
       ],
       "approved_at": null
@@ -130,8 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation maintains the `<1>` tags from the English content. These tags should ideally be removed or adapted for Korean formatting conventions.",
-          "suggestion": "Remove or adapt the `<1>` tags to fit Korean formatting standards (e.g., replacing with appropriate HTML or Markdown tags if needed, or removing them entirely)."
+          "description": "The English content uses <1> tags around 'Anyone' and the placeholder {{access}}. The Korean translation incorrectly places the <1> tags around '누구나'. It should match the English formatting.",
+          "suggestion": "이 링크를 가진 <1>누구나</1> <1>{{access}}</1>할 수 있습니다."
         }
       ],
       "approved_at": null
@@ -142,8 +159,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word 'Anyone' is translated as 'ໃຜ' (phai) in Lao, which generally means 'who' or 'anybody'. While technically not incorrect, it's a very literal translation and doesn't convey the idiomatic meaning of 'Anyone' in this context. A more natural translation might be something closer to 'ທຸກຄົນ' (thuk khon), meaning 'everyone'.",
-          "suggestion": "Consider translating 'Anyone' as 'ທຸກຄົນ' (thuk khon) for a more natural feel."
+          "description": "The English word 'Anyone' is translated as 'ໃຜ' which means 'who'. A more appropriate translation might be 'ໃຜກໍ່ຕາມ' (anyone at all) to better convey the inclusivity of the original.",
+          "suggestion": "ໃຜກໍ່ຕາມ"
         }
       ],
       "approved_at": null
@@ -163,13 +180,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Polish translation uses a comma (,) after 'Każdy,' which deviates from the English source that uses an angle bracket. While grammatically correct, maintaining consistency in formatting would be beneficial.",
-          "suggestion": "Consider removing the comma after 'Każdy' to match the <1> formatting of the English source: <1>Każdy</1> kto ma ten link, może uzyskać <1>{{access}}</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -196,7 +207,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English \"Anyone\" is translated as \"Любой пользователь\". While not strictly incorrect, \"Любой\" is a more direct and common translation of \"Anyone\" in this context. \"Любой пользователь\" implies a registered user, while \"Anyone\" in the English text is more general.",
+          "description": "The English phrase \"Anyone\" is translated as \"Любой пользователь\". While both convey a similar meaning, \"Любой\" is more general and appropriate. \"Любой пользователь\" specifically indicates a user, which is not necessarily implied in the English original.",
           "suggestion": "Любой"
         }
       ],
@@ -208,8 +219,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation uses <1> tags that don't match the English tags. The English uses '<1>Anyone</1>' while the Sinhala uses '<1>මෙම සම්බන්ධතාවය ඇති ඕනෑම අයෙකුට</1>'.",
-          "suggestion": "Ensure tag consistency: Use '<1>...</1>' consistently with the English source for formatting purposes. The tags should be adapted to the structure of the Sinhala implementation."
+          "description": "The Sinhala translation retains the <1> tags from the English content. These tags should be removed for proper display.",
+          "suggestion": "Remove the <1> tags from the Sinhala translation."
         }
       ],
       "approved_at": null
@@ -220,13 +231,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Anyone with this link\" is translated as \"Každý, kto má tento odkaz\". While technically correct, a more natural and idiomatic translation would be something closer to \"Kto má tento odkaz...\" or \"Ten, kto má tento odkaz...\". The current translation sounds slightly awkward.",
-          "suggestion": "Kto má tento odkaz..."
+          "description": "The English phrase \"Anyone with this link can {{access}}\" is not perfectly captured by \"Každý, kto má tento odkaz, má {{access}}\". A more accurate translation would focus on the capability conferred by the link, rather than simply stating that anyone who *has* the link possesses the access. It feels slightly awkward in Slovak.",
+          "suggestion": "Každý, kto má tento odkaz, <1>pristúpi</1> k <1>{{access}}</1>."
         },
         {
           "type": "formatting",
-          "description": "The `<1>` tags are present in both the English and Slovak translations, which is consistent. No issue here, but worth noting for potential future standardization.",
-          "suggestion": null
+          "description": "The `<1>` tags are present in both the English and Slovak texts. This might indicate a template formatting issue, but as a translator I cannot fix this. It's likely intended for some formatting system and should be consistent.",
+          "suggestion": "Verify that the `<1>` tags are handled consistently by the system using the translation."
         }
       ],
       "approved_at": null
@@ -234,7 +245,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovenian translation retains the <1> tags from the English content. These should be removed if they are not part of the intended output format.",
+          "suggestion": "Remove the <1> tags from the Slovenian translation."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -243,13 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"Anyone\" in the English content is translated as \"Сви\" which is a very broad translation. A more appropriate translation might be \"Svakog\" or \"Svako\", depending on the context.",
-          "suggestion": "Consider translating \"Anyone\" as \"Svako\" or \"Svakog\" for more accurate meaning."
+          "description": "The English word 'Anyone' is translated as 'Сви' which is a more general term meaning 'Everyone'. 'Anyone' implies a broader, less specific group than 'Everyone'.",
+          "suggestion": "Consider a translation like 'Ко' (Ko) which better conveys 'Anyone' meaning 'Anyone who'."
         },
         {
           "type": "formatting",
-          "description": "The tags `<1>` and `</1>` are inconsistent with English tag usage. In the English version, the tag is `<b>` or `<i>` etc. This suggests a formatting discrepancy.",
-          "suggestion": "Ensure the tags align with the intended formatting (e.g., bolding, italics) as used in the original English text.  If there's no specific formatting, the tags may need to be removed."
+          "description": "The formatting tags <1>...</1> are consistent between the English and Serbian versions.",
+          "suggestion": "No change needed."
         }
       ],
       "approved_at": null
@@ -257,7 +274,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The opening and closing tags <1> are present in both the English and Serbian translations, which is good for consistency but might be unnecessary depending on the rendering context. Consider if these tags are required.",
+          "suggestion": "Evaluate if the <1> tags are necessary for the intended rendering."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -265,9 +288,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Anyone with this link can {{access}}' is not perfectly conveyed by 'Bu bağlantıya sahip herkes {{access}} sağlayabilir.'. A more accurate translation might emphasize the ability granted by the link, rather than just stating they 'can provide' access.",
+          "suggestion": "Bu bağlantısı olan herkes {{access}} erişimi yapabilir."
+        },
+        {
           "type": "formatting",
-          "description": "The English content uses `<1>` tags to wrap parts of the sentence. The Turkish translation also uses `<1>` tags, but their placement doesn't perfectly align with the English. While the content is still understandable, it's best to maintain consistent formatting.",
-          "suggestion": "Consider aligning the `<1>` tags more closely with the English: `<1>Herkes</1> bu bağlantıya sahip <1>olabilir</1> ve <1>{{access}}</1>."
+          "description": "The tags <1> are inconsistent between the English and Turkish versions. The English uses a simple <1> while the Turkish implicitly indicates a title element.",
+          "suggestion": "Consider standardizing the formatting to match the English <1> for consistency or adjusting the rendering to reflect the title element in Turkish."
         }
       ],
       "approved_at": null
@@ -290,13 +318,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Anyone with this link can {{access}}\" is not perfectly captured by \"任何人使用此链接均可{{access}}\".  A more accurate translation would emphasize 'access to' or 'perform the action of' depending on the meaning of {{access}}.",
-          "suggestion": "Consider alternatives like: \"任何人通过此链接均可{{access}}“ or “使用此链接的任何人可以{{access}}”。 The best alternative depends on the specific meaning of {{access}}."
+          "description": "The English phrase \"Anyone\" is translated as \"任何人\", which is accurate but lacks the nuance of a shared link. A more suitable translation might be something like '拥有此链接的人' (people who have this link).",
+          "suggestion": "拥有此链接的人"
         },
         {
-          "type": "formatting",
-          "description": "The `<1>` tags are present in both the English and Chinese versions. While consistency is good, consider whether these tags are strictly necessary and if they could be removed without affecting the intended function.",
-          "suggestion": "Review the purpose of the `<1>` tags and consider removing them if they are purely formatting and don't carry semantic meaning."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"can access\" is translated as \"均可\". While technically correct, it lacks the dynamism of the English. A more natural phrasing would be something like '进行访问' (to access).",
+          "suggestion": "进行访问"
         }
       ],
       "approved_at": null

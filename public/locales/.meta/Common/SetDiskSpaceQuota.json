@@ -3,7 +3,7 @@
   "content": "Set storage quota to define the maximum disk space for this {{productName}}.",
   "content_en_sha1_hash": "499f7a97f93e9c092c5eca67c5fa8cfdfa381f2e",
   "created_at": "2025-05-19T21:30:48.569Z",
-  "updated_at": "2025-05-26T07:57:32.935Z",
+  "updated_at": "2025-06-08T12:02:32.899Z",
   "comment": {
     "text": "\"Defines the maximum disk space allowed for {{productName}}. This quota will be displayed as a storage limit option in the [Change Storage Quota Dialog] when setting or editing storage limits.\"",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'yaddaş' (memory) doesn't accurately convey 'storage'. It should be 'saxlama' or 'saxtalama'.",
-          "suggestion": "Bu {{productName}} üçün maksimum disk yerini müəyyən etmək üçün saxtalama/saxlama kvotasını təyin edin."
+          "description": "The term \"yaddaş kvotasını\" is a literal translation of 'storage quota' but might not be the most natural or clear phrasing in Azerbaijani. 'Disk kvotasını' would be more common and understandable in this context.",
+          "suggestion": "Bu {{productName}} üçün maksimum disk yerini müəyyən etmək üçün disk kvotasını təyin edin."
         }
       ],
       "approved_at": null
@@ -54,13 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'pro tento prostor {{productName}}' is awkward and doesn't accurately convey the meaning of 'for this {{productName}}'. It implies a 'space' or location, not the product itself.",
-          "suggestion": "Nastavte kvótu úložiště a určete maximální prostor na disku pro tento {{productName}}."
+          "description": "The translation of \"define\" is inaccurate. 'Určete' implies determination or specification, but 'define' in this context means to establish or set.",
+          "suggestion": "Nastavte kvótu úložiště a určete maximální velikost disku pro tento {{productName}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'prostor' (space) in the suggested correction still doesn't sound completely natural in this context. It's technically correct, but a more fluid option might improve clarity.",
-          "suggestion": "Nastavte kvótu úložiště a určete maximální prostor na disku pro {{productName}}."
+          "description": "“prostor” is not the correct translation of “productName”. It means “space”.",
+          "suggestion": "Nastavte kvótu úložiště a určete maximální velikost disku pro tento {{productName}}."
         }
       ],
       "approved_at": null
@@ -77,13 +77,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ορίστε ποσόστωση αποθ. χώρου\" is a bit literal and less natural than it could be. A more natural phrasing would be \"Καθορίστε ποσόστωση αποθηκευτικού χώρου\" or \"Ορίστε όριο αποθηκευτικού χώρου\".",
-          "suggestion": "Καθορίστε ποσόστωση αποθηκευτικού χώρου"
+          "description": "The translation \"Ορίστε ποσόστωση αποθ. χώρου\" is not the most natural way to express 'Set storage quota'. A more accurate and idiomatic translation would be something like \"Καθορίστε όριο αποθηκευτικού χώρου\".",
+          "suggestion": "Καθορίστε όριο αποθηκευτικού χώρου"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'αποθ. χώρου' is an abbreviation that may not be immediately clear to all users. While technically correct, using the full term 'αποθηκευτικού χώρου' would enhance clarity.",
-          "suggestion": "αποθηκευτικού χώρου"
+          "type": "spelling",
+          "description": "The abbreviation 'αποθ.' is not standard and is potentially confusing. It's best to use the full word 'αποθηκευτικού'.",
+          "suggestion": "αποθηκευτικού"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure \"για να ορίσετε τον μέγιστο χώρο στον δίσκο για αυτό το {{productName}}\" is a bit clunky. It could be improved for better flow.",
+          "suggestion": "για να καθορίσετε τον μέγιστο χώρο δίσκου για το {{productName}}"
         }
       ],
       "approved_at": null
@@ -97,18 +102,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Aseta muistikiintiö' is a literal translation of 'Set storage quota' but might not be the most natural phrasing in Finnish.  'Aseta' is correct but 'muistikiintiö' (memory quota) isn't as common as alternatives like 'levytilan rajoitus' or 'tallennustilan rajoitus' for 'storage quota'.",
-          "suggestion": "Consider 'Aseta tallennustilan rajoitus' or 'Aseta levytilan rajoitus'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, 'maksimilevytilan' is a somewhat clunky phrasing.  A more common and natural way to express 'maximum disk space' would be 'suurimman levytilan'.",
-          "suggestion": "Replace 'maksimilevytilan' with 'suurimman levytilan'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -117,8 +111,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"définir l'espace de stockage maximum\" is redundant. \"Définir le quota de stockage\" implies setting the maximum storage space.",
-          "suggestion": "Définissez le quota de stockage pour ce {{productName}}."
+          "description": "The translation is overly literal and repetitive. 'Définissez le quota de stockage pour définir l'espace de stockage maximum...' repeats the concept of setting a storage quota.",
+          "suggestion": "Définissez le quota de stockage maximal pour ce {{productName}}."
         }
       ],
       "approved_at": null
@@ -129,13 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation is overly literal and slightly awkward. The phrase \"սկավառակի առավելագույն տարածությունը սահմանելու համար\" (to define the maximum disk space) is redundant since 'set' already implies defining a limit.",
-          "suggestion": "Սահմանեք պահեստի չափը՝ այս {{productName}}-ի առավելագույն սկավառակային տարածությունը:"
+          "description": "The translation is overly literal and clunky. \"Սահմանեք պահեստի չափը՝ այս {{productName}}-ի համար սկավառակի առավելագույն տարածությունը սահմանելու համար:\" translates to 'Set the storage size to define the maximum disk space for this {{productName}} to define the maximum disk space'.  The repetition of 'սահմանելու համար' (to define) is redundant.",
+          "suggestion": "Consider a more concise and natural phrasing, such as: \"Սահմանեք պահեստի չափը՝ {{productName}}-ի համար առավելագույն սկավառակի տարածությունը սահմանելու համար:\" or \"Սահմանեք պահեստի չափը՝ որպեսզի {{productName}}-ի համար սահմանվի առավելագույն սկավառակի տարածությունը:\""
         },
         {
           "type": "formatting",
-          "description": "The Armenian translation includes a colon (:) at the end of the sentence which is less common in Armenian user interface text. It makes the sentence feel more formal and less conversational.",
-          "suggestion": "Remove the colon at the end of the sentence."
+          "description": "The placement of the variable '{{productName}}' feels slightly awkward due to the lengthy phrasing around it. While not technically incorrect, it could be improved for readability.",
+          "suggestion": "Evaluate whether moving '{{productName}}' closer to the beginning of the sentence would improve flow. For example, \"{{productName}}-ի համար սահմանեք պահեստի չափը...\""
         }
       ],
       "approved_at": null
@@ -152,13 +146,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ストレージ容量制限を設定してください\" (set storage capacity limit) is a bit too direct and formal for a user-facing message. It's better to convey the meaning of setting a quota more naturally.",
+          "description": "The phrase \"ストレージ容量制限を設定してください\" (set storage capacity limit) is a bit too literal and sounds unnatural in Japanese. A more natural phrasing would focus on setting the quota itself.",
           "suggestion": "この{{productName}}のディスク使用量の上限を設定してください。"
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, the Japanese translation uses a full stop (。) at the end. While not strictly wrong, the tone is slightly more formal than typical user interface text. Omitting it would create a more conversational and friendly tone.",
-          "suggestion": "この{{productName}}のディスク使用量の上限を設定してください"
+          "type": "incorrect_translation",
+          "description": "The word order could be improved for better flow. Placing the product name closer to 'disk space' makes it more natural.",
+          "suggestion": "この{{productName}}で使用可能なディスク容量の上限を設定してください。"
         }
       ],
       "approved_at": null
@@ -169,8 +163,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '스토리지 할당량을 설정하세요' (Set storage quota) is a bit too imperative. A more natural Korean phrasing would be more informative.",
-          "suggestion": "이 {{productName}}에 대한 최대 디스크 공간을 정의하려면, 스토리지 할당량을 설정하여 제한할 수 있습니다."
+          "description": "The phrase \"스토리지 할당량을 설정하세요\" (Set storage quota) is slightly awkward. A more natural Korean phrasing for 'Set storage quota' would be '저장 공간 할당량을 설정하세요' or '디스크 공간 할당량을 설정하세요'.",
+          "suggestion": "저장 공간 할당량을 설정하세요"
         }
       ],
       "approved_at": null
@@ -181,13 +175,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'ກຸ້ມຂັ້ນເງິນ' (gum khan ngoen) doesn't directly translate to 'quota'. It refers more to a fixed amount of money. A more accurate translation would be something like 'ຈຳນວນທີ່ກຳນົດ' (jamnuan thi kamnod) or 'ມິເຕີໂຕີ' (meter tor).",
-          "suggestion": "ກຳນົດຈຳນວນທີ່ກຳນົດສຳລັບການເກັບຮັກສາເພື່ອຕັ້ງຄ່າຂະໜາດສູງສຸດຂອງເນື້ອທີ່ໃນໂຕ້ຖາດສຳລັບ {{productName}} ນີ້."
+          "description": "The Lao translation uses \"ກຸ້ມຂັ້ນເງິນ\" which translates to 'money limit' or 'financial limit'. This is not an accurate translation of 'storage quota'. A better translation would focus on the concept of disk space allocation or limit.",
+          "suggestion": "ກຳນົດຂະໜານະຍາສູມສູງສຸດຂອງເນື້ອທີ່ໃນໂຕ້ຖາດ ຫຼື ກຳນົດຈຳນວນສູງສຸດຂອງເນື້ອທີ່ໃນໂຕ້ຖາດ"
         },
         {
           "type": "grammar",
-          "description": "The phrasing 'ໂຕ້ຖາດສຳລັບ' can be improved. While understandable, it's a bit clunky. A more natural wording would improve clarity.",
-          "suggestion": "ກຳນົດຈຳນວນທີ່ກຳນົດສຳລັບການເກັບຮັກສາເພື່ອຕັ້ງຄ່າຂະໜາດສູງສຸດຂອງເນື້ອທີ່ໃນ {{productName}} ນີ້."
+          "description": "The phrase \"ໃນໂຕ້ຖາດສຳລັບ {{productName}} ນີ້\" is slightly awkward. It could be more naturally expressed.",
+          "suggestion": "ໃນໂຕ້ຖາດຂອງ {{productName}} ນີ້"
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Iestatiet krātuves kvotu, lai definētu maksimālo vietu šajā {{productName}} diskā\" is not the most natural or accurate translation. \"Vietu diskā\" is a bit awkward. A more accurate phrasing would convey the quota applies to the product's storage, not the physical disk.",
-          "suggestion": "Iestatiet krātuves kvotu, lai definētu maksimālo šī {{productName}} uzglabāšanas vietu."
+          "description": "The Latvian translation \"Iestatiet krātuves kvotu, lai definētu maksimālo vietu šajā {{productName}} diskā\" is not a direct or optimal translation of \"Set storage quota to define the maximum disk space for this {{productName}}.\" The addition of 'diskā' (in the disk) is unnecessary and slightly awkward in Latvian. It's implied by 'krātuves kvotu'.",
+          "suggestion": "Iestatiet krātuves kvotu, lai definētu maksimālo vietu {{productName}}."
         }
       ],
       "approved_at": null
@@ -213,13 +207,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"storage quota\" is best translated as \"limit przestrzeni dyskowej\" or \"przydział dyskowy\" in Polish, not just \"limit pamięci\". While 'limit pamięci' isn't inherently wrong, it's not the most accurate or idiomatic translation for 'storage quota'.",
-          "suggestion": "Ustaw limit przestrzeni dyskowej, aby zdefiniować maksymalną przestrzeń dyskową dla tego {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -240,13 +228,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'spațiu {{productName}}' doesn't accurately convey 'this {{productName}}'. It implies a space for the product rather than referring to the product itself.",
+          "description": "The Romanian translation 'spațiu' (space) doesn't accurately reflect the English 'productName'. It should refer to the product itself, not the space it occupies.",
           "suggestion": "Setați cota de stocare pentru a defini spațiul maxim de stocare pentru acest {{productName}}."
         },
         {
           "type": "grammar",
-          "description": "While not strictly incorrect, the sentence structure 'Setați cota de stocare pentru a defini spațiul maxim de stocare' is a bit redundant. 'Spațiul de stocare' is implied by 'cota de stocare'.",
-          "suggestion": "Setați cota de stocare pentru a defini spațiul maxim pentru acest {{productName}}."
+          "description": "While technically correct, 'Setați' (Set) is a command form, which might sound abrupt depending on the overall tone of the UI. A more polite phrasing might be more appropriate.",
+          "suggestion": "Stabiliți cota de stocare pentru a defini spațiul maxim de stocare pentru acest {{productName}}."
         }
       ],
       "approved_at": null
@@ -263,13 +251,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ආචයන සලාකය' (aachayana salaakaya) doesn't accurately convey the meaning of 'storage quota'. It appears to be a mistranslation or a term not commonly used in this context.  'ආචයන' (aachayana) generally relates to religious rituals or ceremonies. The meaning is completely off.",
-          "suggestion": "Consider alternatives like 'ගබඩාවේ ඉඩ ප්‍රමාණය' (gabadavé ida pramaṇaya) - 'storage space amount', or 'භාරකිරීමේ සීමාව' (bhaarakarimē sīmavā) - 'limit of loading/storage'."
+          "description": "The translation \"ආචයන සලාකය\" is not an accurate translation of 'storage quota'. It seems to be a combination of terms that doesn't convey the intended meaning. 'ආචයන' is associated with ritual or ceremony, and 'සලාකය' is a mixture or blend. This is confusing and doesn't accurately represent the concept of a storage quota.",
+          "suggestion": "A more accurate translation for 'storage quota' would be something like 'ගබඩා ඉඩකට්ටිය' (gabada idakattiyam) or 'භද්‍රවාර ඉඩ' (bhadrāvara ida). Consider using a term that is commonly understood within the relevant technical context."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is awkward.  'මෙම {{productName}} සඳහා තැටියේ උපරිම ඉඩ පෙන්වීමට' is grammatically acceptable but not the most natural phrasing in Sinhala. ",
-          "suggestion": "Consider rephrasing the entire sentence for better flow and clarity, perhaps starting with '{{productName}} සඳහා උපරිම ඉඩ ප්‍රමාණය සකසන්න' ({{productName}} saḍa uparima ida pramaṇaya sakasanna) - 'Set the maximum space for {{productName}}'."
+          "description": "The phrase \"මෙම {{productName}} සඳහා තැටියේ උපරිම ඉඩ පෙන්වීමට\" is grammatically awkward. It implies showing the maximum space rather than setting it.",
+          "suggestion": "Rephrase to something like \"මෙම {{productName}} සඳහා උපරිම ගබඩා ඉඩ සකසන්න\" (darakara uparimak gabada ida sakasanna) - 'Set the maximum storage space for this {{productName}}'."
         }
       ],
       "approved_at": null
@@ -280,8 +268,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'priestor' is used instead of a more appropriate term for 'product'.  'produkt' would be a closer translation of 'product'. Using 'priestor' implies space, which doesn't quite fit the context.",
-          "suggestion": "Nastavte kvótu úložiska, aby ste vymedzili maximálny priestor na disku pre tento produkt {{productName}}."
+          "description": "The translation of 'define' is awkward. 'Vymedzili' can imply a boundary or limit, but doesn't fully capture the meaning of setting a quota.",
+          "suggestion": "Nastavte kvótu úložiska, aby ste určili maximálnu veľkosť disku pre tento {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'priestor' is used instead of 'disk' or 'úložisko'. While 'priestor' can mean space, in this context 'disk' or 'úložisko' is more precise and natural.",
+          "suggestion": "Nastavte kvótu úložiska, aby ste určili maximálnu veľkosť disku pre tento {{productName}}."
         }
       ],
       "approved_at": null
@@ -298,8 +291,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'складишну' (skladishnu) is not the most natural translation of 'storage' in this context. It literally means 'warehouse-related'. A more appropriate translation would be 'простор за чување' (prostor za cuvanje) or 'капацитет за чување' (kapacitet za cuvanje).",
-          "suggestion": "Поставите простор за чување квоту да бисте дефинисали максимални простор на диску за овај {{productName}}."
+          "description": "The word 'складишну' (skladishnu) is not the most natural or accurate translation for 'storage' in this context. 'Члану' (članu) or 'простора' (prostora) would be more appropriate.",
+          "suggestion": "Поставите члану квоту да бисте дефинисали максимални простор на диску за овај {{productName}}."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically not incorrect, 'диску' can also be 'диск'. Using 'диск' might sound slightly more formal and consistent.",
+          "suggestion": "Поставите члану квоту да бисте дефинисали максимални простор на диску за овај {{productName}}."
         }
       ],
       "approved_at": null
@@ -325,13 +323,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'this' is unnecessary and slightly awkward in the Vietnamese translation. It's redundant given the context of referring to the product.",
-          "suggestion": "Đặt hạn mức lưu trữ để xác định dung lượng ổ đĩa tối đa cho {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

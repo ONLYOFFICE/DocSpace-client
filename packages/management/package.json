@@ -5,9 +5,11 @@
   "scripts": {
     "build:translations": "node scripts/buildTranslations.js",
     "build": "next build",
-    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
+    "start": "NODE_ENV=development PORT=5015 node server.js",
     "start-prod": "NODE_ENV=production node server.js",
-    "lint": "next lint",
+    "start:internal": "NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
+    "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
+    "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/.next && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config && shx --silent mkdir -p ../../../publish/web/management/node_modules && shx --silent mkdir -p ../../../publish/web/management/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/management/node_modules && shx cp -r .next/static/* ../../../publish/web/management/.next/static    && shx cp -r .next/standalone/packages/management/.next/* ../../../publish/web/management/.next &&  shx cp -f server.prod.js ../../../publish/web/management/server.js &&  shx cp -f logger.mjs ../../../publish/web/management/logger.mjs && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config"
   },
@@ -85,12 +87,7 @@
       },
       "start": {
         "dependsOn": [
-          "build:translations"
-        ]
-      },
-      "start:internal": {
-        "dependsOn": [
-          "build:translations"
+          "build"
         ]
       },
       "start-prod": {
@@ -98,20 +95,14 @@
           "build"
         ]
       },
-      "start-prod:internal": {
+      "start:internal": {
         "dependsOn": [
-          "build:translations",
           "build"
         ]
       },
-      "lint": {
+      "start-prod:internal": {
         "dependsOn": [
-          "build:translations"
-        ]
-      },
-      "lint:fix": {
-        "dependsOn": [
-          "build:translations"
+          "build"
         ]
       },
       "deploy": {
@@ -120,10 +111,6 @@
         ]
       }
     }
-  },
-  "resolutions": {
-    "@types/react": "19.1.4",
-    "@types/react-dom": "19.1.5"
   }
 }
 

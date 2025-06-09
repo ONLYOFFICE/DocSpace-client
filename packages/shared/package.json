@@ -199,7 +199,8 @@
           "storybook-build"
         ]
       }
-    },
+    }
+  },
   "msw": {
     "workerDirectory": [
       "__mocks__/storybook/mockServiceWorker"

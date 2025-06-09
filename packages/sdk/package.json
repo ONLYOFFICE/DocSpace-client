@@ -3,16 +3,16 @@
   "version": "3.2.0",
   "private": true,
   "scripts": {
-    "build": "node ./scripts/buildTranslations.js && next build",
     "build:translations": "node ./scripts/buildTranslations.js",
-    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=development PORT=5099 node server.js",
     "start-prod": "NODE_ENV=production node server.js",
-    "start:internal": "node ./scripts/buildTranslations.js && NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
+    "start:internal": "NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
-    "deploy": "node ./scripts/deploy.js",
-    "test:build": "node ./scripts/buildTranslations.js && E2E_TEST=true next build",
+    "deploy": "shx --silent mkdir -p ../../../publish/web/sdk && shx --silent mkdir -p ../../../publish/web/sdk/.next && shx --silent mkdir -p ../../../publish/web/sdk/config && shx cp -r config/* ../../../publish/web/sdk/config && shx --silent mkdir -p ../../../publish/web/sdk/node_modules && shx --silent mkdir -p ../../../publish/web/sdk/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/sdk/node_modules && shx cp -r .next/static/* ../../../publish/web/sdk/.next/static    && shx cp -r .next/standalone/packages/sdk/.next/* ../../../publish/web/sdk/.next &&  shx cp -f server.prod.js ../../../publish/web/sdk/server.js && shx cp -f logger.mjs ../../../publish/web/sdk/logger.mjs && shx --silent mkdir -p ../../../publish/web/sdk/config && shx cp -r config/* ../../../publish/web/sdk/config",
+    "test:build": "E2E_TEST=true next build",
     "test:start": "PORT=5112 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e:docker:build": "docker-compose build",
     "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",
@@ -49,8 +49,38 @@
     "shx": "0.3.4",
     "typescript": "5.6.3"
   },
-  "resolutions": {
-    "@types/react": "19.1.4",
-    "@types/react-dom": "19.1.5"
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start-prod": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start:internal": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "start-prod:internal": {
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "deploy": {
+        "dependsOn": [
+          "build"
+        ]
+      }
+    }
   }
 }

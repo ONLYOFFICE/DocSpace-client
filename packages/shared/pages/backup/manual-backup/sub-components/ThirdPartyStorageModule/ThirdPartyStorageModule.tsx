@@ -31,7 +31,7 @@ import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
-import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
 import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";

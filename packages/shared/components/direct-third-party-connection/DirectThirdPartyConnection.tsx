@@ -40,7 +40,7 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 import { getOAuthToken } from "@docspace/shared/utils/common";
-import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { saveSettingsThirdParty } from "@docspace/shared/api/files";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";

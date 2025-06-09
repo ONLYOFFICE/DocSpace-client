@@ -27,7 +27,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { createGetRestoreProgressHandler } from "../../__mocks__/storybook/handlers/portal/getRestoreProgress";
+import { createGetRestoreProgressHandler } from "../../__mocks__/storybook/handlers/portal/restore";
 
 import { PreparationPortal } from ".";
 

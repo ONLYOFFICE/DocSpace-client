@@ -50,7 +50,6 @@ import { isManagement } from "@docspace/shared/utils/common";
 
 import { TenantStatus } from "@docspace/shared/enums";
 
-// import config from "PACKAGE_FILE";
 import { StyledBackupList } from "../../RestoreBackup.styled";
 
 import BackupListBody from "./BackupListBody";
@@ -309,20 +308,3 @@ const BackupListModalDialog = ({
 };
 
 export default BackupListModalDialog;
-
-// export default inject(({ settingsStore, backup }) => {
-//   const { downloadingProgress } = backup;
-//   const { theme, setTenantStatus, standalone } = settingsStore;
-//   const isCopyingToLocal = downloadingProgress !== 100;
-
-//   return {
-//     setTenantStatus,
-//     theme,
-//     isCopyingToLocal,
-//     standalone,
-//   };
-// })(
-//   withTranslation(["Settings", "Common", "Translations"])(
-//     observer(BackupListModalDialog),
-//   ),
-// );

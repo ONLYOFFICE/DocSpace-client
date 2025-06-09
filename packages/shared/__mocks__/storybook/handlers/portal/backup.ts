@@ -28,21 +28,9 @@ import { http, HttpResponse } from "msw";
 
 import { BASE_URL } from "../../utils";
 
-const url = `${BASE_URL}/portal/getrestoreprogress`;
+const deletePath = `${BASE_URL}/portal/deletebackup/:backupId`;
 
-export const createGetRestoreProgressHandler = ({
-  progress = 0,
-  error,
-}: {
-  progress?: number;
-  error?: string;
-}) =>
-  http.get(url, () => {
-    const response: { progress: number; error?: string } = { progress };
-
-    if (error) {
-      response.error = error;
-    }
-
-    return HttpResponse.json({ response });
+export const createDeleteBackupHandler = () =>
+  http.delete(deletePath, () => {
+    return HttpResponse.json();
   });

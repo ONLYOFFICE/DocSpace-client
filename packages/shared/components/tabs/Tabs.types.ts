@@ -54,10 +54,12 @@ export type TabsProps = {
   stickyTop?: string;
   /** Enables multiple select  */
   multiple?: boolean;
+  /** Allows no tab to be selected. */
+  allowNoSelection?: boolean;
   /** Sets a tab class name */
   className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */
   onSelect?: (element: TTabItem) => void;
-
+  withoutStickyIntend?: boolean;
   style?: React.CSSProperties;
 };

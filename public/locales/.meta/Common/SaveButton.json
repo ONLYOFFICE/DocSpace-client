@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-06-02T10:20:51.040Z",
+  "updated_at": "2025-06-08T12:02:32.586Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
@@ -179,6 +179,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
+      "line_number": 296,
+      "context": "</div>\n {!onAdditionalSave ? (\n <div className={styles.inputButtons}>\n <Button\n key=\"OkButton\"\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.small}\n primary\n onClick={onSaveAutoPayment}\n isLoading={isLoading}\n isDisabled={",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
       "line_number": 215,
       "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"\n additionalClassCancelButton=\"admin-message-cancel\"",
@@ -342,8 +348,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yadda saxlayın' is not the most natural or accurate translation of 'Save'. While 'Yadda saxlayın' literally translates to something like 'Save and keep', the preferred translation for a 'Save' button would be a simpler and more direct equivalent.",
-          "suggestion": "Save"
+          "description": "The translation 'Yadda saxlayın' is not the most natural or accurate translation of 'Save'. It combines a verb ('Yadda' - Remember) with a participle ('saxlayın' - keeping/saving').",
+          "suggestion": "The most accurate and natural translation would be 'Saxla' (Save) or 'Qoruyun' (Protect/Keep)."
         }
       ],
       "approved_at": null
@@ -468,8 +474,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සුරකින්න\" is a command (imperative) meaning \"Protect\" or \"Keep Safe.\" While it could be used in a context related to saving, it is not a direct translation of \"Save.\" A more accurate translation would be \"ගබඩා කරන්න\" (gabadā karanna) which means \"Store\" or \"Save\". Alternatively, \"သိမ်းන්න\" (simenna) is a more common and generally accepted translation for \"Save\".",
-          "suggestion": "Consider using \"ගබඩා කරන්න\" (gabadā karanna) or \"သိမ်းන්න\" (simenna)."
+          "description": "The translation 'සුරකින්න' (surakkinna) is a command form meaning 'Save it'. The button label should be a noun, indicating the action of saving, not instructing the user to save. A more appropriate noun form is needed.",
+          "suggestion": "Consider using a noun form like 'සුරක්ෂිතය' (surakshithaya) which means 'saved' or 'security'."
         }
       ],
       "approved_at": null

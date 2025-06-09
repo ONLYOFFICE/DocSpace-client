@@ -113,10 +113,6 @@ const DeveloperToolsWrapper = (props) => {
     },
   ];
 
-  // const load = async () => {
-  //   // await loadBaseInfo();
-  // };
-
   useEffect(() => {
     const path = location.pathname;
 
@@ -132,10 +128,6 @@ const DeveloperToolsWrapper = (props) => {
 
     setIsLoading(true);
   }, [location.pathname]);
-
-  // useEffect(() => {
-  //   ready && startTransition(load);
-  // }, [ready]);
 
   const onSelect = (e) => {
     const path = location.pathname.includes("/portal-settings")

@@ -1,0 +1,28 @@
+{
+  "key_path": "AddPaymentMethod",
+  "content": "Add payment method",
+  "content_en_sha1_hash": "0b2386ed404bc961486196ff481a3604415e357f",
+  "created_at": "2025-05-28T09:33:06.617Z",
+  "updated_at": "2025-06-05T23:06:25.310Z",
+  "comment": {
+    "text": "This translation key is used for the label \"Add payment method\" that appears on a button component in a portal settings category, prompting users to add a new payment method.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:38:33.364Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
+      "line_number": 98,
+      "context": "</Link>\n </div>\n ) : (\n <div className={styles.addPaymentMethodContainer}>\n <SelectorAddButton onClick={goLinkCard} />\n <Text fontWeight={600}>{t(\"AddPaymentMethod\")}</Text>\n </div>\n )}\n </div>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

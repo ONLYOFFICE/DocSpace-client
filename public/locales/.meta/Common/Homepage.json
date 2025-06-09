@@ -3,7 +3,7 @@
   "content": "Homepage",
   "content_en_sha1_hash": "ac066591edb7d47406e88eed7ba536040a82daf4",
   "created_at": "2025-05-19T21:30:45.800Z",
-  "updated_at": "2025-05-26T07:57:32.334Z",
+  "updated_at": "2025-05-28T09:30:02.298Z",
   "comment": {
     "text": "This translation key is used to display the text \"Homepage\" in a settings dialog component. It appears as the title of an info section and should be translated accordingly. The context suggests it is part of a plugin settings interface.",
     "is_auto": true,

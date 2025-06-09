@@ -164,11 +164,7 @@ const ArticleBodyContent = (props) => {
         }
       }
 
-      const searchParams = new URLSearchParams(params);
-      searchParams.delete("date");
-      const srcParams = searchParams.toString();
-
-      path += `?${srcParams}&date=${hashDate}`;
+      path += `?${params}&date=${hashDate}`;
 
       return { path, state };
     },

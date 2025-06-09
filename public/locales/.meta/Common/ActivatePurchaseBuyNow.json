@@ -2,12 +2,12 @@
   "key_path": "ActivatePurchaseBuyNow",
   "content": "Buy now",
   "content_en_sha1_hash": "c38860a3ba58e9263dba3ac926101f8b2358d4c9",
-  "created_at": "2025-05-26T07:15:40.066Z",
-  "updated_at": "2025-05-26T08:08:54.889Z",
+  "created_at": "2025-06-08T12:02:00.173Z",
+  "updated_at": "2025-06-08T12:02:52.485Z",
   "comment": {
-    "text": "The \"Buy now\" translation key is used to display a call-to-action button that encourages users to initiate a purchase. It is displayed on a standalone payment component and should convey a sense of urgency and promotion.",
+    "text": "This translation key is used to display the button label \"Buy now\" on a payment button component, located in the /packages/shared/pages/Payments/Standalone/sub-components/ButtonContainer.tsx file. It appears as a primary action button when clicked. Translators should provide a phrase that encourages immediate purchase.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:54.889Z"
+    "updated_at": "2025-06-08T12:02:52.485Z"
   },
   "usage": [
     {

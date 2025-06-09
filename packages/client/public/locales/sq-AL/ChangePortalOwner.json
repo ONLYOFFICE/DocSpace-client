@@ -1,0 +1,14 @@
+{
+  "AppointAdmin": "Emëroni administratorë",
+  "BackupPortal": "Portal rezervë {{productName}}",
+  "ChangeInstruction": "Për të ndryshuar pronarin e {{productName}}, ju lutem zgjidhni emrin e pronarit të ri më poshtë.",
+  "ChangeOwner": "Ndryshoni pronarin {{productName}}",
+  "ChangeUser": "Ndryshoni përdoruesin",
+  "DeactivateOrDeletePortal": "Çaktivizoni ose fshini {{productName}}",
+  "DoTheSame": "Bëni njëlloj si administratorët",
+  "ManagePortal": "Menaxhoni konfigurimin e {{productName}}",
+  "ManageUser": "Menaxhoni llogaritë e përdoruesve",
+  "NewPortalOwner": "Pronar i ri {{productName}}",
+  "PortalOwnerCan": "{{productName}} pronari mundet:",
+  "SetAccessRights": "Vendosni të drejtat e aksesit"
+}

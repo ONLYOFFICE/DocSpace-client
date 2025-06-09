@@ -82,7 +82,7 @@ export default meta;
 
 const Template = ({ ...args }: ColorInputProps) => {
   return (
-    <div style={{ height: "300px" }}>
+    <div style={{ height: "410px" }}>
       <ColorInput {...args} />
     </div>
   );
@@ -106,6 +106,7 @@ export const WithScale: Story = {
     ...Default.args,
     scale: true,
   },
+  render: (args) => <Template {...args} />,
 };
 
 export const Disabled: Story = {
@@ -113,6 +114,7 @@ export const Disabled: Story = {
     ...Default.args,
     isDisabled: true,
   },
+  render: (args) => <Template {...args} />,
 };
 
 export const WithError: Story = {
@@ -120,6 +122,7 @@ export const WithError: Story = {
     ...Default.args,
     hasError: true,
   },
+  render: (args) => <Template {...args} />,
 };
 
 export const WithWarning: Story = {
@@ -127,11 +130,19 @@ export const WithWarning: Story = {
     ...Default.args,
     hasWarning: true,
   },
+  render: (args) => <Template {...args} />,
 };
 
 export const DifferentSizes: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        height: "600px",
+      }}
+    >
       {Object.values(InputSize).map((size) => (
         <ColorInput
           key={size}

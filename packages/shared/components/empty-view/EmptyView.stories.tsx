@@ -44,7 +44,7 @@ export const Default: Story = {
       {
         key: "upload",
         icon: <ClearEmptyFilterSvg />,
-        to: "",
+        to: "#",
         description: "Clear Filter",
         onClick: () => console.log("Upload clicked"),
       },

@@ -162,6 +162,7 @@ export type TTransactionCollection = {
   credit: number;
   withdrawal: number;
   currency: string;
+  description: string;
 };
 
 export type TTransactionHistory = {

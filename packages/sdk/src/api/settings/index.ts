@@ -35,14 +35,6 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 
-import {
-  colorThemeHandler,
-  portalCulturesHandler,
-  settingsHandler,
-} from "@docspace/shared/__mocks__/e2e";
-
-const IS_TEST = process.env.E2E_TEST;
-
 export async function getSettings(
   withPassword = false,
 ): Promise<TSettings | string | undefined> {
@@ -52,9 +44,7 @@ export async function getSettings(
     "GET",
   );
 
-  const res = IS_TEST
-    ? settingsHandler()
-    : await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
   if (res.status === 403) return `access-restricted`;
 
@@ -74,9 +64,7 @@ export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
     "GET",
   );
 
-  const res = IS_TEST
-    ? colorThemeHandler()
-    : await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) return;
 
@@ -120,9 +108,7 @@ export async function getPortalCultures(): Promise<TPortalCultures> {
     "GET",
   );
 
-  const res = IS_TEST
-    ? portalCulturesHandler()
-    : await fetch(getPortalCultures, { next: { revalidate: 300 } });
+  const res = await fetch(getPortalCultures, { next: { revalidate: 300 } });
 
   if (!res.ok) {
     throw new Error("Failed to get portal cultures");

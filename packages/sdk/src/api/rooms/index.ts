@@ -34,12 +34,6 @@ import {
   TGetRooms,
   type TValidateShareRoom,
 } from "@docspace/shared/api/rooms/types";
-import {
-  roomListHandler,
-  validatePublicRoomKeyHandler,
-} from "@docspace/shared/__mocks__/e2e";
-
-const IS_TEST = process.env.E2E_TEST;
 
 export async function getRooms(
   filter: RoomsFilter,
@@ -60,9 +54,7 @@ export async function getRooms(
     [signal],
   );
 
-  const res = IS_TEST
-    ? roomListHandler(await headers())
-    : await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) return;
 
@@ -77,7 +69,7 @@ export async function validatePublicRoomKey(key: string): Promise<{
 }> {
   const [req] = await createRequest([`/files/share/${key}`], [["", ""]], "GET");
 
-  const res = IS_TEST ? validatePublicRoomKeyHandler() : await fetch(req);
+  const res = await fetch(req);
 
   if (!res.ok) {
     throw new Error("Failed to validate public room key");

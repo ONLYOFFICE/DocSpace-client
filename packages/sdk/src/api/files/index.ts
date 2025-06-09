@@ -44,19 +44,11 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
 import { FolderType } from "@docspace/shared/enums";
 import { SHARE_KEY_HEADER } from "@/utils/constants";
-import {
-  filesSettingsHandler,
-  folderHandler,
-  foldersTreeHandler,
-} from "@docspace/shared/__mocks__/e2e";
-
-const IS_TEST = process.env.E2E_TEST;
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   const [req] = await createRequest([`/files/settings`], [["", ""]], "GET");
 
-  const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
-
+  const res = await fetch(req);
   if (!res.ok) return;
 
   const filesSettings = await res.json();
@@ -71,9 +63,7 @@ export async function getFoldersTree(): Promise<TFolder[]> {
     "GET",
   );
 
-  const res = IS_TEST
-    ? foldersTreeHandler()
-    : await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) {
     throw new Error("Failed to get folders tree");
@@ -157,9 +147,7 @@ export async function getFolder(
     [signal],
   );
 
-  const res = IS_TEST
-    ? folderHandler(await headers())
-    : await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) {
     throw new Error("Failed to get folder");

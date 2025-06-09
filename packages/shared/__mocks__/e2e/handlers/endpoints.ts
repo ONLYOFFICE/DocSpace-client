@@ -61,6 +61,8 @@ import {
   suspendPortalResolver,
 } from "./portal";
 import {
+  filesSettingsResolver,
+  FILES_SETTINGS_PATH,
   folderResolver,
   PATH_FOLDER,
   PATH_ROOMS_LIST,
@@ -181,12 +183,16 @@ export const endpoints: TEndpoints = {
     dataHandler: roomListResolver,
   },
   folder: {
-    url: `${BASE_URL}${PATH_FOLDER}`,
+    url: `${BASE_URL}files/[0-9]*?*`,
     dataHandler: folderResolver,
+  },
+  fileSetting: {
+    url: `${BASE_URL}${FILES_SETTINGS_PATH}`,
+    dataHandler: filesSettingsResolver,
   },
 
   filteredFolder: {
-    url: `${BASE_URL}${PATH_FOLDER}`,
+    url: `${BASE_URL}files/[0-9]*?*`,
     dataHandler: () => folderResolver("isFiltered"),
   },
   emptyFolder: {

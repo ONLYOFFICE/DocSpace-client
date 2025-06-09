@@ -136,7 +136,7 @@ const GuestShareLinkForm = ({
           />
         </ButtonsWrapper>
         <Text fontSize="12px" fontWeight="400" className="guest-info">
-          {t("Common:GuestInvitationInfo")}
+          {t("Common:GuestApprovalNote", { sectionName: t("Common:Contacts") })}
         </Text>
       </FormWrapper>
     </>

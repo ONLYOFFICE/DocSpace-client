@@ -3,7 +3,7 @@
   "content": "Developer Tools section",
   "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
   "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2025-05-26T07:57:32.777Z",
+  "updated_at": "2025-06-08T12:02:32.824Z",
   "comment": {
     "text": "The \"DeveloperToolsAccess\" translation key is used to display the title and description of a section in the Portal Settings application. This text appears as a category title and brief description within a settings page, providing context about developer tools access.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 83,
+      "line_number": 84,
       "context": "}\n url=\"/portal-settings/security/access-portal/trusted-mail\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"DeveloperToolsAccess\")}\n subtitle={\n <Trans\n i18nKey=\"DeveloperToolsAccessMobileDescription\"\n ns=\"Settings\"\n t={t}",
       "module": "/packages/client"
     },

@@ -204,7 +204,11 @@ export const getRootDescription = (
     .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>
       t("Files:ArchiveEmptyScreenUser"),
     )
-    .with([FolderType.TRASH, P._], () => t("Files:TrashEmptyDescription"))
+    .with([FolderType.TRASH, P._], () =>
+      t("Files:TrashFunctionalityDescription", {
+        sectionName: t("Common:TrashSection"),
+      }),
+    )
     .otherwise(() => "");
 };
 

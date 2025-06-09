@@ -53,6 +53,9 @@ export default inject(
     dialogsStore: any;
     infoPanelStore: any;
     indexingStore: any;
+    filesSettingsStore: any;
+    selectedFolderStore: any;
+    userStore: any;
   }) => {
     const {
       isDesktopClient: isDesktop,

@@ -3,7 +3,7 @@
   "content": "Download {{organizationName}} Desktop Editors for Windows",
   "content_en_sha1_hash": "21500349b53348f21c32cf3672412c49c1c0f8fc",
   "created_at": "2025-05-19T21:30:46.594Z",
-  "updated_at": "2025-05-26T07:57:32.893Z",
+  "updated_at": "2025-05-28T09:30:02.911Z",
   "comment": {
     "text": "This translation key is used to display a button label that prompts users to download desktop editors for Windows. The text will appear on a button in an application, likely as part of a download link or \"Get Desktop Editors\" action.",
     "is_auto": true,
@@ -35,9 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'endirin' is a valid Azerbaijani verb meaning 'download', but the correct verb form depending on the context should be 'qurun'.",
-          "suggestion": "Windows üçün {{organizationName}} Masaüstü Redaktorlarını qurun"
+          "type": "incorrect_translation",
+          "description": "The translation 'endirin' is a literal translation of 'download' and while technically correct, 'qurun' or 'qoyun' might be more natural and common in Azerbaijani for installing/downloading software.",
+          "suggestion": "Consider using 'qurun' or 'qoyun' instead of 'endirin'."
         }
       ],
       "approved_at": null
@@ -84,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'applications de bureau' is a more literal translation of 'Desktop Editors'. It doesn't fully capture the nuance of 'Editors', which implies software tools for creating or modifying content. A better translation might be 'éditeurs de bureau' or 'logiciels de création de bureau'.",
+          "description": "The English phrase 'Desktop Editors' is not accurately translated by 'applications de bureau'. While 'applications de bureau' is technically correct, it's more generic. 'Éditeurs de bureau' would be a closer translation for 'Desktop Editors'.",
           "suggestion": "Télécharger les éditeurs de bureau {{organizationName}} pour Windows"
         }
       ],
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'Windows සඳහා බාගත කරන්න' directly translates to 'Download for Windows'. A more natural translation would be something like 'Windows සඳහා' (for Windows) but it is more common to use an alternative construction. While understandable, it is not the most idiomatic way to phrase it.",
-          "suggestion": "Consider rephrasing to something like 'Windows සඳහා ලබා ගන්න' (Windows saha laba gana) or 'Windows සඳහා පාවිච කරන්න' (Windows saha paviyacha karanna)."
+          "description": "The Sinhala translation 'Windows සඳහා බාගත කරන්න' doesn't directly translate to 'for Windows'. It's more like 'to download for Windows' or 'for Windows to download'.  While understandable, it's not the most natural phrasing. It could be improved to be more aligned with the English meaning.",
+          "suggestion": "{{organizationName}} Desktop Editors Windows බාගත කිරීම සඳහා"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'namizne' (desktop) is technically correct, but it might be more natural to use 'za pisalno mizo' which more closely means 'for desktop' or 'for use at a desk'. While 'namizne' is understandable, it can sound slightly awkward.",
-          "suggestion": "Consider 'Prenesi {{organizationName}} urejevalnike za pisalno mizo za Windows'"
+          "description": "The English phrase \"Desktop Editors\" is best translated as \"Namizne urejevalne programe\" rather than \"namizne urejevalnike\". While 'urejevalnike' isn't *wrong*, 'urejevalne programe' is more natural and accurate in this context.",
+          "suggestion": "Prenesi {{organizationName}} namizne urejevalne programe za Windows"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Уређиваче' is more accurately 'Редакторе' for 'Editors' in this context. 'Уређиваче' implies editing in a broader sense, whereas 'Редакторе' refers specifically to software editors.",
-          "suggestion": "Преузми {{organizationName}} Десктоп Редакторе за Windows"
+          "description": "The Serbian translation of \"Desktop Editors\" is \"Десктоп Уређиваче\". While technically correct, \"Desktop\" is often translated as \"Радни сто\" in Serbian, making \"Радни сто Уређивачи\" sound more natural. \"Уређивачи\" is a good translation of \"Editors\".",
+          "suggestion": "Преузми {{organizationName}} Радни сто Уређиваче за Windows"
         }
       ],
       "approved_at": null

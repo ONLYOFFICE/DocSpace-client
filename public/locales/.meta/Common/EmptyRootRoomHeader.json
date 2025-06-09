@@ -3,7 +3,7 @@
   "content": "Welcome to {{productName}}",
   "content_en_sha1_hash": "aca54bc00694fe8488fc161e8a78ca1ec1a29e4c",
   "created_at": "2025-05-19T21:30:44.886Z",
-  "updated_at": "2025-05-26T07:57:32.153Z",
+  "updated_at": "2025-06-08T12:02:32.577Z",
   "comment": {
     "text": "This translation key is used to display a greeting message that welcomes users to a secure room. It appears in various UI elements, such as modal dialogs and room headers, and is used to personalize the experience by referencing the product name.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 136,
+      "line_number": 138,
       "context": "t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];\n \n const roomHeader = t(\"Common:EmptyRootRoomHeader\", {\n productName: t(\"Common:ProductName\"),\n });\n \n const privateRoomDescription = (\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 297,
+      "line_number": 301,
       "context": "ShareAccessRights.Editing,\n ShareAccessRights.ReadOnly,\n ),\n ],\n () =>\n t(\"Common:EmptyRootRoomHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserTitle\"),",
       "module": "/packages/client"
     },
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '{{productName}} xoş gəlmisiniz' is a literal translation of 'Welcome to {{productName}}'. A more natural Azerbaijani phrasing would be '{{productName}}a xoş gəlmisiniz' or 'Sizləri {{productName}}ə xoş gəlmisiniz'.",
-          "suggestion": "{{productName}}ə xoş gəlmisiniz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -90,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tervetuloa {{productName}} ohjelmiston käyttäjäksi!' is a more literal translation that includes 'ohjelmiston käyttäjäksi!' which means 'as a software user'. The original English is a simple welcome.  This adds unnecessary context.",
+          "description": "The translation \"Tervetuloa {{productName}} ohjelmiston käyttäjäksi!\" is overly literal and doesn't convey the same meaning as \"Welcome to {{productName}}\". It literally translates to \"Welcome to {{productName}} software user!\". A more natural translation would simply be \"Tervetuloa {{productName}}!\"",
           "suggestion": "Tervetuloa {{productName}}!"
         }
       ],
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{productName}} වෙත පිළිගනිමු' while containing the product name, doesn't accurately convey the meaning of 'Welcome to'. 'පිළිගනිමු' translates to 'we welcome' or 'we greet', which isn't the same as 'Welcome to'.",
-          "suggestion": "{{productName}} සඳහා සාදරයෙන් සිටිමු"
+          "description": "The English phrase \"Welcome to\" is best translated as 'ඔබව පිළිගනිමු' (obage pili ganimu) or 'ආන්දWelcome' (aandwelcome). Using 'ඔබව' (obage) before 'පිළිගනිමු' (pili ganimu) creates a more natural and welcoming tone in Sinhala. The current translation '{{productName}} වෙත පිළිගනිමු' ({{productName}} vetha pili ganimu) literally means 'Welcome to {{productName}}' but lacks the direct welcoming feel of the English equivalent.  'vetha' is not incorrect, but less common in this context.",
+          "suggestion": "ඔබව {{productName}} පිළිගනිමු"
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Vietnamese translation includes an exclamation mark at the end, which may not be necessary or consistent with the English version. Consider removing it for consistency.",
-          "suggestion": "Chào mừng đến {{productName}}"
+          "description": "The Vietnamese translation includes an exclamation mark '!' at the end, which isn't present in the English original. This could change the tone of the message.",
+          "suggestion": "Consider removing the exclamation mark '!' from the Vietnamese translation: 'Chào mừng đến {{productName}}'"
         }
       ],
       "approved_at": null
@@ -240,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '欢迎使用{{productName}}' is too literal and doesn't convey the intended meaning of 'Welcome to'.  '欢迎使用' means 'Welcome to use' and 'Welcome to' implies a more general greeting.",
+          "description": "The translation '欢迎使用{{productName}}' literally translates to 'Welcome to use {{productName}}'.  While understandable, '欢迎来到{{productName}}' (Welcome to {{productName}) is a more natural and idiomatic way to express a welcome in Chinese.",
           "suggestion": "欢迎来到{{productName}}"
         }
       ],

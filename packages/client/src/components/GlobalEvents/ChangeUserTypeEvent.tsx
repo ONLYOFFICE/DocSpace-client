@@ -48,7 +48,6 @@ type ChangeUserTypeEventProps = {
   dialogData: TChangeUserTypeDialogData;
 
   onClose: VoidFunction;
-  personalUserFolderTitle?: string;
 };
 
 const ChangeUserTypeEvent = ({
@@ -60,7 +59,6 @@ const ChangeUserTypeEvent = ({
   getPeopleListItem,
 
   onClose,
-  personalUserFolderTitle,
 }: ChangeUserTypeEventProps) => {
   const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
 
@@ -176,19 +174,17 @@ const ChangeUserTypeEvent = ({
       onClose={onCloseAction}
       onChangeUserType={onChangeUserType}
       isRequestRunning={isRequestRunning}
-      personalUserFolderTitle={personalUserFolderTitle}
       isDowngradeType={isDowngradeType}
       isDowngradeToUser={isDowngradeToUser}
     />
   );
 };
 
-export default inject(({ peopleStore, treeFoldersStore }: TStore) => {
+export default inject(({ peopleStore }: TStore) => {
   const { dialogStore, usersStore } = peopleStore;
 
   const { data: dialogData } = dialogStore!;
 
-  const { personalUserFolderTitle } = treeFoldersStore;
   const {
     updateUserType,
     getPeopleListItem,
@@ -204,6 +200,5 @@ export default inject(({ peopleStore, treeFoldersStore }: TStore) => {
 
     dialogData,
     updateUserType,
-    personalUserFolderTitle,
   };
 })(observer(ChangeUserTypeEvent));

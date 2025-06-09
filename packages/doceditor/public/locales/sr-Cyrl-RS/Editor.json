@@ -3,10 +3,8 @@
   "DocumentsFileType": "документи",
   "ErrorConnectionLost": "Конекција је изгубљена",
   "FileLocation": "Отвори локацију датотеке",
-  "FileName": "Име датотеке",
   "ImageFileType": "слике",
   "MailMergeFileType": "Одабери .XLSX датотеку",
-  "OpenSavedDocument": "Отвори сачуван документ у новој картици",
   "SelectFilesType": "Одабери типове датотеке: {{fileType}}",
   "UsersWithoutAccess": "Неки корисници које желите поменути немају приступ соби: {{users}}"
 }

@@ -50,6 +50,14 @@ export type LinkProps = TextProps & {
   target?: LinkTarget;
   /** Label */
   label?: string;
+  /** Sets the text decoration style */
+  textDecoration?:
+    | "none"
+    | "underline"
+    | "line-through"
+    | "overline"
+    | "underline dotted"
+    | "underline dashed";
   /** Accessibility label for the link */
   ariaLabel?: string;
   /** Data attribute for testing */
@@ -62,8 +70,6 @@ export type LinkProps = TextProps & {
   tabIndex?: number;
   /** Used as HTML `title` property */
   title?: string;
-  /** CSS text-decoration */
-  textDecoration?: string;
   /** CSS color or accent theme color */
   color?: "accent" | (string & {});
 };

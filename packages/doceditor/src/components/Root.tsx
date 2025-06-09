@@ -61,6 +61,8 @@ import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { useShareFormDialog } from "@/hooks/useShareFormDialog";
 import useAssignRolesDialog from "@/hooks/useAssignRolesDialog";
 import useChangeLinkTypeDialog from "@/hooks/useChangeLinkTypeDialog";
+import { FolderType } from "@docspace/shared/enums";
+import { getFolder, getPersonalFolderTree } from "@docspace/shared/api/files";
 
 const DeepLink = dynamic(() => import("./deep-link"), {
   ssr: false,
@@ -122,6 +124,10 @@ const Root = ({
   const fileInfo = config?.file;
   const instanceId = config?.document?.referenceData.instanceId;
   const roomId = config?.document?.referenceData.roomId;
+
+  const [selectedFolderId, setSelectedFolderId] = React.useState<
+    string | number | undefined
+  >(fileInfo?.folderId);
 
   const isSkipError =
     error?.status === "not-found" ||
@@ -292,6 +298,19 @@ const Root = ({
 
   const organizationName = settings?.logoText || t("Common:OrganizationName");
 
+  React.useEffect(() => {
+    const getMy = async () => {
+      const res = await getPersonalFolderTree();
+
+      const folderId = res[0].id;
+
+      setSelectedFolderId(folderId);
+    };
+    if (fileInfo?.rootFolderType === FolderType.Recent) {
+      getMy();
+    }
+  }, [fileInfo?.rootFolderType]);
+
   return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
@@ -348,6 +367,7 @@ const Root = ({
           filesSettings={filesSettings}
           fileSaveAsExtension={extensionSelectorFolderDialog}
           organizationName={organizationName}
+          selectedFolderId={selectedFolderId}
         />
       )}
       {selectFileDialogVisible && fileInfo && (
@@ -360,6 +380,7 @@ const Root = ({
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
           shareKey={shareKey}
+          selectedFolderId={selectedFolderId}
         />
       )}
       {isSharingDialogVisible && fileInfo && (

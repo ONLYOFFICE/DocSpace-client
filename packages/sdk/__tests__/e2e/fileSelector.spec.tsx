@@ -2130,10 +2130,8 @@ describe("File selector single param RTL light empty", () => {
   test("should open empty rtl base theme with default parameters /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
   }) => {
     const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2587,9 +2585,9 @@ describe("File selector param combinations light empty", () => {
   });
   test("should open empty with cancelLabel, search and subtitle /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    port,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&search=true&subtitle=true`;
+    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",

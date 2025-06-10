@@ -27,8 +27,6 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin =
-  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
@@ -391,42 +389,6 @@ module.exports = (env, argv) => {
       },
     },
   };
-
-  config.plugins.push(
-    new ModuleFederationPlugin({
-      name: "client",
-      filename: "remoteEntry.js",
-      remotes: [],
-      exposes: {},
-      shared: {
-        react: {
-          singleton: true,
-          requiredVersion: "18.3.1",
-        },
-        "react-dom": {
-          singleton: true,
-          requiredVersion: "18.3.1",
-        },
-
-        "react-router-dom": {
-          singleton: true,
-          requiredVersion: "6.27.0",
-        },
-        "styled-components": {
-          singleton: true,
-          requiredVersion: "5.3.11",
-        },
-        mobx: {
-          singleton: true,
-          requiredVersion: "6.13.5",
-        },
-        "mobx-react": {
-          singleton: true,
-          requiredVersion: "7.6.0",
-        },
-      },
-    }),
-  );
 
   const htmlTemplate = {
     title: title,

@@ -52,7 +52,7 @@ import { DirectThirdPartyConnection } from "@docspace/shared/components/direct-t
 
 import BackupListModalDialog from "./sub-components/backup-list";
 import { ButtonContainer } from "./sub-components/button-component";
-import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
+import { ThirdPartyStoragesModule } from "./sub-components/ThirdPartyStoragesModule";
 
 import { StyledRestoreBackup } from "./RestoreBackup.styled";
 import {

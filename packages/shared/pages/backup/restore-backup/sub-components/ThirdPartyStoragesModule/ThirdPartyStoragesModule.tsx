@@ -39,17 +39,13 @@ import {
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
 
-import type {
-  SelectedStorageType,
-  StorageRegionsType,
-} from "@docspace/shared/types";
+import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";
+import { AmazonStorage } from "../storages/AmazonStorage";
+import { RackspaceStorage } from "../storages/RackspaceStorage";
+import { SelectelStorage } from "../storages/SelectelStorage";
 
-import { GoogleCloudStorage } from "./storages/GoogleCloudStorage";
-import { AmazonStorage } from "./storages/AmazonStorage";
-import { RackspaceStorage } from "./storages/RackspaceStorage";
-import { SelectelStorage } from "./storages/SelectelStorage";
-
-import { StyledComboBoxItem } from "../RestoreBackup.styled";
+import { StyledComboBoxItem } from "../../RestoreBackup.styled";
+import { ThirdPartyStoragesModuleProps } from "./ThirdPartyStoragesModule.types";
 
 const DefaultState = {
   comboBoxOptions: [],
@@ -57,26 +53,6 @@ const DefaultState = {
   selectedStorageTitle: "",
   selectedStorageId: "",
 };
-
-export interface ThirdPartyStoragesModuleProps {
-  defaultRegion: string;
-  isLoadingData?: boolean;
-  storageRegions: StorageRegionsType[];
-  thirdPartyStorage: SelectedStorageType[];
-  onSetStorageId: (id: string) => void;
-
-  setCompletedFormFields: (
-    values: Record<string, string>,
-    module?: string,
-  ) => void;
-  errorsFieldsBeforeSafe: Record<string, boolean>;
-  formSettings: Record<string, string>;
-
-  addValueInFormSettings: (name: string, value: string) => void;
-  setRequiredFormSettings: (arr: string[]) => void;
-  deleteValueFormSetting: (key: string) => void;
-  setIsThirdStorageChanged: (changed: boolean) => void;
-}
 
 const ThirdPartyStoragesModule = ({
   thirdPartyStorage,
@@ -131,31 +107,35 @@ const ThirdPartyStoragesModule = ({
     setIsThirdStorageChanged,
   };
 
-  const advancedOptions = thirdPartyOptions.comboBoxOptions?.map((item) => {
-    return (
-      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
-        <DropDownItem
-          onClick={() => onSelect(item.key)}
-          data-third-party-key={item.key}
-          disabled={item.disabled}
-        >
-          <Text className="drop-down-item_text" fontWeight={600}>
-            {item.label}
-          </Text>
-
-          {!item.disabled && !item.connected ? (
-            <IconButton
-              isFill
-              size={16}
-              className="drop-down-item_icon"
+  const advancedOptions = (
+    <div style={{ display: "contents" }}>
+      {thirdPartyOptions.comboBoxOptions?.map((item) => {
+        return (
+          <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+            <DropDownItem
               onClick={() => onSelect(item.key)}
-              iconName={ExternalLinkReactSvgUrl}
-            />
-          ) : null}
-        </DropDownItem>
-      </StyledComboBoxItem>
-    );
-  });
+              data-third-party-key={item.key}
+              disabled={item.disabled}
+            >
+              <Text className="drop-down-item_text" fontWeight={600}>
+                {item.label}
+              </Text>
+
+              {!item.disabled && !item.connected ? (
+                <IconButton
+                  isFill
+                  size={16}
+                  className="drop-down-item_icon"
+                  onClick={() => onSelect(item.key)}
+                  iconName={ExternalLinkReactSvgUrl}
+                />
+              ) : null}
+            </DropDownItem>
+          </StyledComboBoxItem>
+        );
+      })}
+    </div>
+  );
 
   return (
     <>
@@ -200,10 +180,3 @@ const ThirdPartyStoragesModule = ({
 };
 
 export default ThirdPartyStoragesModule;
-
-// export default inject(({ backup }) => {
-//   const { thirdPartyStorage } = backup;
-//   return {
-//     thirdPartyStorage,
-//   };
-// })(observer(ThirdPartyStoragesModule));

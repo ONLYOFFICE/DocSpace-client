@@ -24,33 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+import { setupServer } from "msw/node";
+import { SetupServerApi } from "msw/node";
+import { allHandlers } from "./handlers";
 
-import { TEndpoint } from "./handlers";
+/**
+ * Creates and configures a request interceptor server for testing
+ * @returns A configured MSW server instance
+ */
+export const createServerRequestInterceptor = async () => {
+  const requestInterceptor = setupServer();
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
+  requestInterceptor.listen({
+    onUnhandledRequest: "error",
+  });
 
-  async router(endpoints: TEndpoint[]) {
-    endpoints.forEach(async (endpoint) => {
-      await this.page.route(endpoint.url, async (route) => {
-        const json = await endpoint.dataHandler().json();
+  return requestInterceptor;
+};
 
-        await route.fulfill({ json, status: json.statusCode ?? 200 });
-      });
-    });
-  }
-
-  async setHeaders(url: string, headers: string[]) {
-    await this.page.route(url, async (route, request) => {
-      const objHeaders: { [key: string]: "true" } = {};
-      headers.forEach((item) => (objHeaders[item] = "true"));
-
-      const newHeaders = {
-        ...request.headers(),
-        ...objHeaders,
-      };
-      await route.fallback({ headers: newHeaders });
-    });
-  }
-}
+/**
+ * Sets up handlers for the request interceptor server and provides a function to reset them
+ * @param server - The MSW server instance
+ * @param port - The port number for the handlers
+ * @returns A function that can be used to reset the handlers
+ */
+export const setupAndResetHandlers = async (
+  server: SetupServerApi,
+  port: string,
+) => {
+  server.use(...allHandlers(port));
+  return () => server.resetHandlers();
+};

@@ -78,12 +78,3 @@ const AmazonStorage = ({
 };
 
 export default AmazonStorage;
-
-// export default inject(({ backup }) => {
-//   const { storageRegions, setCompletedFormFields } = backup;
-
-//   return {
-//     storageRegions,
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation("Settings")(AmazonStorage)));

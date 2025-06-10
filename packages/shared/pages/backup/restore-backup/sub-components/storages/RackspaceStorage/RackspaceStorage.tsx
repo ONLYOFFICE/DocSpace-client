@@ -70,11 +70,3 @@ const RackspaceStorage = ({
 };
 
 export default RackspaceStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields } = backup;
-
-//   return {
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation("Settings")(RackspaceStorage)));

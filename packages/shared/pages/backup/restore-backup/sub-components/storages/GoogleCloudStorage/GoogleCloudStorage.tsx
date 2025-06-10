@@ -72,11 +72,3 @@ const GoogleCloudStorage = ({
 };
 
 export default GoogleCloudStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields } = backup;
-
-//   return {
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation("Settings")(GoogleCloudStorage)));

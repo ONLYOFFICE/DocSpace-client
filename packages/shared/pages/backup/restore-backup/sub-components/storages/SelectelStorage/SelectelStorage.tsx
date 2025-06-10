@@ -71,11 +71,3 @@ const SelectelStorage = ({
 };
 
 export default SelectelStorage;
-
-// export default inject(({ backup }) => {
-//   const { setCompletedFormFields } = backup;
-
-//   return {
-//     setCompletedFormFields,
-//   };
-// })(observer(withTranslation("Settings")(SelectelStorage)));

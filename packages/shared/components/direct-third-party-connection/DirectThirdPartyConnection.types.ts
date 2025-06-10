@@ -55,6 +55,7 @@ export type DirectThirdPartyConnectionState = {
 };
 
 export interface DirectThirdPartyConnectionProps {
+  className?: string;
   openConnectWindow: (
     serviceName: string,
     modal: Window | null,

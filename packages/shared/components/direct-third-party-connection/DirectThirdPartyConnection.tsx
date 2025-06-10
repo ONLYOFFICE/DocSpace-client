@@ -64,6 +64,7 @@ import {
 } from "./DirectThirdPartyConnection.types";
 
 const DirectThirdPartyConnection = ({
+  className,
   openConnectWindow,
   onSelectFolder,
   isDisabled,
@@ -290,6 +291,7 @@ const DirectThirdPartyConnection = ({
 
   return (
     <StyledBackup
+      className={className}
       isConnectedAccount={isConnectedAccount}
       isMobileScale={isMobileScale}
     >

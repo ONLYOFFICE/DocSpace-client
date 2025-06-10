@@ -44,10 +44,15 @@ import {
 import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
+import { InputSize } from "@docspace/shared/components/text-input";
+import { FileInput } from "@docspace/shared/components/file-input";
+import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
+import type { FileInfoType } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
+import { DirectThirdPartyConnection } from "@docspace/shared/components/direct-third-party-connection";
+
 import BackupListModalDialog from "./sub-components/backup-list";
 import { ButtonContainer } from "./sub-components/button-component";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
-import ThirdPartyResourcesModule from "./sub-components/ThirdPartyResourcesModule";
 
 import { StyledRestoreBackup } from "./RestoreBackup.styled";
 import {
@@ -59,10 +64,6 @@ import {
   STORAGE_SPACE,
 } from "./RestoreBackup.constants";
 import type { RestoreBackupProps } from "./RestoreBackup.types";
-import { InputSize } from "../../../components/text-input";
-import { FileInput } from "../../../components/file-input";
-import { FilesSelectorInput } from "../../../components/files-selector-input";
-import type { FileInfoType } from "../../../components/files-selector-input/FilesSelectorInput.types";
 
 // import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -213,7 +214,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     setRestoreResource(file);
   };
 
-  const onBackupRoomFilesSelect = (file: FileInfoType) => {
+  const onSelectFile = (file: FileInfoType) => {
     setRestoreResource(file.id);
   };
 
@@ -268,7 +269,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           withoutInitPath
           className="restore-backup_input"
           isDisabled={!isEnableRestore}
-          onSelectFile={onBackupRoomFilesSelect}
+          onSelectFile={onSelectFile}
           filterParam={FilesSelectorFilterTypes.BackupOnly}
           descriptionText={t("Common:SelectFileInGZFormat")}
           newPath={newPath}
@@ -281,9 +282,15 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         />
       ) : null}
       {radioButtonState === DISK_SPACE ? (
-        <ThirdPartyResourcesModule
+        <DirectThirdPartyConnection
+          className="restore-backup_third-party-module"
+          isSelect
+          isMobileScale
+          withoutInitPath
           buttonSize={buttonSize}
-          setRestoreResource={setRestoreResource}
+          onSelectFile={onSelectFile}
+          descriptionText={t("Common:SelectFileInGZFormat")}
+          filterParam={FilesSelectorFilterTypes.BackupOnly}
           setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
           newPath={newPath}
           basePath={basePath}

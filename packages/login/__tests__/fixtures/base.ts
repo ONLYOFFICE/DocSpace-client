@@ -26,22 +26,24 @@
 
 // @ts-nocheck
 import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
-import next from "next";
+
+import { SetupServerApi } from "msw/node";
+
+import {
+  BASE_URL,
+  createNextTestServer,
+  createServerRequestInterceptor,
+  setupAndResetHandlers,
+} from "@docspace/shared/__mocks__/e2e";
+import { ClientRequestInterceptor } from "@docspace/shared/__mocks__/e2e";
 import path from "path";
-import { createServer, Server } from "http";
-import { parse } from "url";
-import { AddressInfo } from "net";
-import { setupServer, SetupServerApi } from "msw/node";
-import { allHandlers } from "@docspace/shared/__mocks__/e2e/handlers";
-import { HttpHandler } from "msw";
 
 export const test = base.extend<{
   page: Page;
-  mockRequest: MockRequest;
+  clientRequestInterceptor: ClientRequestInterceptor;
+  serverRequestInterceptor: SetupServerApi;
   port: string;
-  requestInterceptor: SetupServerApi;
-  baseHandlers: HttpHandler[];
+  baseUrl: string;
   resetHandlers: void;
 }>({
   page: async ({ page }, use) => {
@@ -65,33 +67,15 @@ export const test = base.extend<{
     );
     await use(page);
   },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
+  clientRequestInterceptor: async ({ page }, use) => {
+    const clientRequestInterceptor = new ClientRequestInterceptor(page);
+    await use(clientRequestInterceptor);
   },
   port: [
     async ({}, use) => {
-      const app = next({
-        dev: false,
-        dir: path.resolve(__dirname, "../.."),
-      });
-      await app.prepare();
-
-      const handle = app.getRequestHandler();
-
-      const server: Server = await new Promise((resolve) => {
-        const server = createServer((req, res) => {
-          const parsedUrl = parse(req.url, true);
-          handle(req, res, parsedUrl);
-        });
-
-        server.listen((error) => {
-          if (error) throw error;
-          resolve(server);
-        });
-      });
-
-      const port = String((server.address() as AddressInfo).port);
+      const { port, server } = await createNextTestServer(
+        path.resolve(__dirname, "../../"),
+      );
       await use(port);
       server.close();
     },
@@ -100,14 +84,18 @@ export const test = base.extend<{
       auto: true,
     },
   ],
-  requestInterceptor: [
+  baseUrl: [
+    async ({ port }, use) => {
+      await use(`${BASE_URL}:${port}`);
+    },
+    {
+      scope: "worker",
+      auto: true,
+    },
+  ],
+  serverRequestInterceptor: [
     async ({}, use) => {
-      const requestInterceptor = setupServer();
-
-      requestInterceptor.listen({
-        onUnhandledRequest: "error",
-      });
-
+      const requestInterceptor = await createServerRequestInterceptor();
       await use(requestInterceptor);
       requestInterceptor.close();
     },
@@ -116,17 +104,14 @@ export const test = base.extend<{
       auto: true,
     },
   ],
-  baseHandlers: [
-    async ({ port }, use) => {
-      await use(allHandlers(port));
-    },
-    {},
-  ],
   resetHandlers: [
-    async ({ requestInterceptor, baseHandlers }, use) => {
-      requestInterceptor.use(...baseHandlers);
+    async ({ serverRequestInterceptor, port }, use) => {
+      const resetHandlers = await setupAndResetHandlers(
+        serverRequestInterceptor,
+        port,
+      );
       await use();
-      requestInterceptor.resetHandlers();
+      resetHandlers();
     },
     {
       auto: true,

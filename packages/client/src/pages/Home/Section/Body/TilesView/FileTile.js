@@ -28,7 +28,7 @@ import { use, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { FolderType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";

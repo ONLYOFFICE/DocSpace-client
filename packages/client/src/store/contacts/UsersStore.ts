@@ -198,6 +198,8 @@ class UsersStore {
         this.users[idx] = user;
 
         if (isVisible) setInfoPanelSelection(this.getPeopleListItem(user));
+
+        this.updateSelection();
       });
     };
 
@@ -215,6 +217,8 @@ class UsersStore {
         this.filter.total -= 1;
 
         if (isVisible) setInfoPanelSelection(null);
+
+        this.updateSelection();
       });
     };
 

@@ -2794,7 +2794,6 @@ class FilesActionStore {
       setInsideGroupTempTitle(null);
 
       if (insideGroupBackUrl) {
-        console.log("set");
         setIsSectionBodyLoading(true, false);
 
         setContactsTab("groups");

@@ -253,6 +253,10 @@ class InfoPanelStore {
 
     if (!selection) return null;
 
+    if (Array.isArray(selection) && selection.length > 1) {
+      return selection;
+    }
+
     const icon = this.getInfoPanelItemIcon(selection, 32);
 
     return { ...selection, icon };
@@ -267,8 +271,6 @@ class InfoPanelStore {
     ) {
       return this.infoPanelSelection;
     }
-
-    console.log(this.infoPanelRoom);
 
     return this.infoPanelRoom;
   }
@@ -298,7 +300,8 @@ class InfoPanelStore {
   };
 
   setView = (view: InfoPanelViewType) => {
-    this.roomsView = view;
+    this.roomsView =
+      view === InfoPanelView.infoShare ? InfoPanelView.infoMembers : view;
     this.fileView =
       view === InfoPanelView.infoMembers ? InfoPanelView.infoDetails : view;
     this.isScrollLocked = false;

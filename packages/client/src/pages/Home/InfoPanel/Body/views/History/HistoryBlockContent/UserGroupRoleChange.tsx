@@ -36,7 +36,7 @@ interface HistoryUserRoleChangeProps {
 
 const HistoryUserGroupRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {
   return (
-    <span className={classNames("message", styles.historyDisplaynameBlock)}>
+    <span className={classNames("message", styles.historyBlockMessage)}>
       <span className="main-message">
         <strong>«{feed.data.access}»</strong>
       </span>{" "}

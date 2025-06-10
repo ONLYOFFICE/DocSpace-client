@@ -116,7 +116,7 @@ const RoomsItemHeader = ({
 
   const security = selection.security;
   const canInviteUserInRoomAbility =
-    "EditAccess" in security && security?.EditAccess;
+    security && "EditAccess" in security && security?.EditAccess;
   const isTemplate =
     ("isTemplate" in selection && selection.isTemplate) ||
     selection?.rootFolderType === FolderType.RoomTemplates;
@@ -175,8 +175,6 @@ const RoomsItemHeader = ({
   const isRoom = "isRoom" in selection && (selection.isRoom as boolean);
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
-
-  console.log(isRoom, badgeUrl);
 
   useEffect(() => {
     setCoverSelection?.(selection);

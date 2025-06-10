@@ -146,7 +146,7 @@ const User = ({
           });
         }
 
-        await changeUserRole(option, user.id, currentUser.id, hasNextPage);
+        await changeUserRole(option, user.id, currentUser?.id, hasNextPage);
       })
       .catch((err) => {
         toastr.error(err);

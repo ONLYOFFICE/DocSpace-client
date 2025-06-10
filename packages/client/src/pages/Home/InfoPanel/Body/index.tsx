@@ -31,10 +31,10 @@ import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/u
 import { FolderType } from "@docspace/shared/enums";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
 import ItemTitle from "./sub-components/ItemTitle";
 import SeveralItems from "./sub-components/SeveralItems";
@@ -46,6 +46,7 @@ import Gallery from "./views/Gallery";
 import Members from "./views/Members";
 import Details from "./views/Details";
 import History from "./views/History";
+import Plugin from "./views/Plugin";
 import Share from "./views/Share";
 
 import commonStyles from "./helpers/Common.module.scss";
@@ -70,10 +71,13 @@ type BodyProps = {
   onSaveRoomLogo: AvatarEditorDialogStore["onSaveRoomLogo"];
   onChangeFile: AvatarEditorDialogStore["onChangeFile"];
   setImage: AvatarEditorDialogStore["setImage"];
+
+  contactsTab: UsersStore["contactsTab"];
 };
 
 const InfoPanelBodyContent = ({
   selection,
+  contactsTab,
 
   roomsView,
   fileView,
@@ -94,14 +98,12 @@ const InfoPanelBodyContent = ({
   onChangeFile,
   setImage,
 }: BodyProps) => {
-  const contactsView = getContactsView();
-
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
   const isGallery = window.location.pathname.includes("form-gallery");
-  const isGroups = contactsView === "groups";
-  const isGuests = contactsView === "guests";
-  const isUsers = contactsView === "inside_group" || contactsView === "people";
+  const isGroups = contactsTab === "groups";
+  const isGuests = contactsTab === "guests";
+  const isUsers = contactsTab === "inside_group" || contactsTab === "people";
 
   const isRoom = selection && "expired" in selection && "external" in selection;
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
@@ -118,6 +120,8 @@ const InfoPanelBodyContent = ({
     (isRoot && !isGallery);
 
   const currentView = isRooms ? roomsView : fileView;
+
+  console.log(isRooms, roomsView, fileView);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
@@ -162,7 +166,8 @@ const InfoPanelBodyContent = ({
         break;
     }
 
-    // if (currentView.indexOf("info_plugin") > -1) return <Plugin />;
+    // @ts-expect-error fixed after rewrite plugin to ts
+    if (currentView.indexOf("info_plugin") > -1) return <Plugin />;
   };
 
   return (
@@ -208,7 +213,9 @@ export default inject(
     settingsStore,
     avatarEditorDialogStore,
     dialogsStore,
+    peopleStore,
   }: TStore) => {
+    const { contactsTab } = peopleStore.usersStore;
     const {
       roomsView,
       fileView,
@@ -233,6 +240,7 @@ export default inject(
     const selection = infoPanelStore.infoPanelSelection;
 
     return {
+      contactsTab,
       selection,
 
       roomsView,

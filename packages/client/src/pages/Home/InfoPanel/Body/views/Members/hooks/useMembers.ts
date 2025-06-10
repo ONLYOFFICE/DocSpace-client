@@ -232,6 +232,8 @@ export const useMembers = ({
     const [data, links] = await Promise.all(requests);
 
     if (links) setExternalLinks(links);
+    else setExternalLinks([]);
+
     const convertedMembers = convertMemebers(data, true);
 
     setMembers(convertedMembers);
@@ -313,7 +315,7 @@ export const useMembers = ({
         guests: members.guests.filter((m) => m.id !== userId),
       };
 
-      const minItemsCount = !searchValue ? 0 : 1;
+      const minItemsCount = searchValue ? 0 : 1;
       const newUsers =
         newMembers.users.length > minItemsCount ? newMembers?.users : [];
       const newAdministrators =

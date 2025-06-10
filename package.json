@@ -9,7 +9,7 @@
   },
   "engines": {
     "node": ">=20",
-    "pnpm": ">=10"
+    "pnpm": ">=9"
   },
   "scripts": {
     "before-build": "node ./common/scripts/before-build.js",

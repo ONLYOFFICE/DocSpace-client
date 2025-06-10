@@ -18,6 +18,7 @@
     "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-1.6.2.tgz",
     "@serdnam/pino-cloudwatch-transport": "1.0.4",
     "crypto-js": "4.2.0",
+    "classnames": "2.5.1",
     "i18next": "23.7.19",
     "moment": "2.30.1",
     "nconf": "0.12.1",
@@ -70,7 +71,7 @@
       },
       "start": {
         "dependsOn": [
-          "build"
+          "build:translations"
         ]
       },
       "start-prod": {

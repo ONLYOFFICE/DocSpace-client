@@ -24,6 +24,7 @@
     "csvjson-json_beautifier": "^5.0.4",
     "@hcaptcha/react-hcaptcha": "1.11.0",
     "crypto-js": "4.2.0",
+    "classnames": "2.5.1",
     "i18next": "23.7.19",
     "react-device-detect": "2.2.3",
     "react-i18next": "14.0.1",
@@ -37,6 +38,7 @@
     "react-google-recaptcha": "3.1.0",
     "react-hcaptcha": "0.1.1",
     "resize-image": "^0.1.0",
+    "react-router": "7.5.2",
     "sass": "1.79.5",
     "styled-components": "5.3.11",
     "winston": "3.17.0",
@@ -73,7 +75,7 @@
       },
       "start": {
         "dependsOn": [
-          "build"
+          "build:translations"
         ]
       },
       "start-prod": {

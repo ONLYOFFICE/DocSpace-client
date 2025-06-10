@@ -26,6 +26,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { toastr } from "@docspace/shared/components/toast";
 import StatusMessage from "@docspace/shared/components/status-message";
@@ -54,7 +55,6 @@ import BackupListModalDialog from "./sub-components/backup-list";
 import { ButtonContainer } from "./sub-components/button-component";
 import { ThirdPartyStoragesModule } from "./sub-components/ThirdPartyStoragesModule";
 
-import { StyledRestoreBackup } from "./RestoreBackup.styled";
 import {
   BACKUP_ROOM,
   CONFIRMATION,
@@ -64,6 +64,7 @@ import {
   STORAGE_SPACE,
 } from "./RestoreBackup.constants";
 import type { RestoreBackupProps } from "./RestoreBackup.types";
+import styles from "./RestoreBackup.module.scss";
 
 // import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -224,7 +225,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       orientation="vertical"
       fontSize="13px"
       fontWeight={400}
-      className="backup_radio-button"
+      className={classNames(styles.backupRadioButton, "backup_radio-button")}
       options={[
         { id: "local-file", value: LOCAL_FILE, label: t("Common:LocalFile") },
         {
@@ -251,14 +252,22 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
   );
 
   const backupModules = (
-    <div className="restore-backup_modules">
+    <div
+      className={classNames(
+        styles.restoreBackupModules,
+        "restore-backup_modules",
+      )}
+    >
       {radioButtonState === LOCAL_FILE ? (
         <FileInput
           scale
           size={InputSize.base}
           onInput={onLocalFileInputClick}
           accept={[".tar", ".gz"]}
-          className="restore-backup_input"
+          className={classNames(
+            styles.restoreBackupInput,
+            "restore-backup_input",
+          )}
           isDisabled={!isEnableRestore}
         />
       ) : null}
@@ -267,7 +276,10 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         <FilesSelectorInput
           isSelect
           withoutInitPath
-          className="restore-backup_input"
+          className={classNames(
+            styles.restoreBackupInput,
+            "restore-backup_input",
+          )}
           isDisabled={!isEnableRestore}
           onSelectFile={onSelectFile}
           filterParam={FilesSelectorFilterTypes.BackupOnly}
@@ -283,7 +295,10 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       ) : null}
       {radioButtonState === DISK_SPACE ? (
         <DirectThirdPartyConnection
-          className="restore-backup_third-party-module"
+          className={classNames(
+            styles.restoreBackupThirdPartyModule,
+            "restore-backup_third-party-module",
+          )}
           isSelect
           isMobileScale
           withoutInitPath
@@ -337,11 +352,22 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
   const warningContent = (
     <>
-      <Text className="restore-backup_warning settings_unavailable" noSelect>
+      <Text
+        className={classNames(
+          styles.restoreBackupWarning,
+          styles.settingsUnavailable,
+          "restore-backup_warning settings_unavailable",
+        )}
+        noSelect
+      >
         {t("Common:Warning")}!
       </Text>
       <Text
-        className="restore-backup_warning-description settings_unavailable"
+        className={classNames(
+          styles.restoreBackupWarningDescription,
+          styles.settingsUnavailable,
+          "restore-backup_warning-description settings_unavailable",
+        )}
         noSelect
       >
         {t("Common:RestoreBackupWarningText", {
@@ -350,7 +376,11 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       </Text>
       {!standalone ? (
         <Text
-          className="restore-backup_warning-link settings_unavailable"
+          className={classNames(
+            styles.restoreBackupWarningLink,
+            styles.settingsUnavailable,
+            "restore-backup_warning-link settings_unavailable",
+          )}
           noSelect
         >
           {t("Common:RestoreBackupResetInfoWarningText", {
@@ -368,11 +398,23 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
   if (isInitialLoading) return <RestoreBackupLoader />;
 
   return (
-    <StyledRestoreBackup isEnableRestore={isEnableRestore}>
+    <div
+      className={classNames(styles.restoreBackup, {
+        [styles.isEnableRestore]: isEnableRestore,
+      })}
+    >
       <StatusMessage message={errorInformation} />
 
-      <div className="restore-description">
-        <Text className="restore-description settings_unavailable">
+      <div
+        className={classNames(styles.restoreDescription, "restore-description")}
+      >
+        <Text
+          className={classNames(
+            styles.restoreDescription,
+            styles.settingsUnavailable,
+            "restore-description settings_unavailable",
+          )}
+        >
           {t("Common:RestoreBackupDescription")}
         </Text>
       </div>
@@ -380,7 +422,11 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       {backupModules}
 
       <Text
-        className="restore-backup_list settings_unavailable"
+        className={classNames(
+          styles.restoreBackupList,
+          styles.settingsUnavailable,
+          "restore-backup_list settings_unavailable",
+        )}
         {...onClickVersionListProp}
         noSelect
       >
@@ -401,7 +447,10 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       <Checkbox
         truncate
         name={NOTIFICATION}
-        className="restore-backup-checkbox_notification"
+        className={classNames(
+          styles.restoreBackupCheckboxNotification,
+          "restore-backup-checkbox_notification",
+        )}
         onChange={onChangeCheckbox}
         isChecked={checkboxState.notification}
         label={t("Common:SendNotificationAboutRestoring")}
@@ -411,7 +460,10 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       <Checkbox
         truncate
         name={CONFIRMATION}
-        className="restore-backup-checkbox"
+        className={classNames(
+          styles.restoreBackupDescription,
+          "restore-backup-checkbox",
+        )}
         onChange={onChangeCheckbox}
         isChecked={checkboxState.confirmation}
         label={t("Common:UserAgreement")}
@@ -439,7 +491,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         setIsBackupProgressVisible={setIsBackupProgressVisible}
         operationsAlert={Boolean(backupProgressError)}
       />
-    </StyledRestoreBackup>
+    </div>
   );
 };
 

@@ -27,6 +27,7 @@
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
 import React, { useMemo, useState } from "react";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
@@ -44,8 +45,8 @@ import { AmazonStorage } from "../storages/AmazonStorage";
 import { RackspaceStorage } from "../storages/RackspaceStorage";
 import { SelectelStorage } from "../storages/SelectelStorage";
 
-import { StyledComboBoxItem } from "../../RestoreBackup.styled";
 import { ThirdPartyStoragesModuleProps } from "./ThirdPartyStoragesModule.types";
+import styles from "../../RestoreBackup.module.scss";
 
 const DefaultState = {
   comboBoxOptions: [],
@@ -111,13 +112,24 @@ const ThirdPartyStoragesModule = ({
     <div style={{ display: "contents" }}>
       {thirdPartyOptions.comboBoxOptions?.map((item) => {
         return (
-          <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+          <div
+            className={classNames(styles.comboboxItem, {
+              [styles.isDisabled]: item.disabled,
+            })}
+            key={item.key}
+          >
             <DropDownItem
               onClick={() => onSelect(item.key)}
               data-third-party-key={item.key}
               disabled={item.disabled}
             >
-              <Text className="drop-down-item_text" fontWeight={600}>
+              <Text
+                className={classNames(
+                  styles.dropDownItemText,
+                  "drop-down-item_text",
+                )}
+                fontWeight={600}
+              >
                 {item.label}
               </Text>
 
@@ -125,13 +137,16 @@ const ThirdPartyStoragesModule = ({
                 <IconButton
                   isFill
                   size={16}
-                  className="drop-down-item_icon"
+                  className={classNames(
+                    styles.dropDownItemIcon,
+                    "drop-down-item_icon",
+                  )}
                   onClick={() => onSelect(item.key)}
                   iconName={ExternalLinkReactSvgUrl}
                 />
               ) : null}
             </DropDownItem>
-          </StyledComboBoxItem>
+          </div>
         );
       })}
     </div>
@@ -155,7 +170,7 @@ const ThirdPartyStoragesModule = ({
         scaledOptions
         showDisabledItems
         displayArrow
-        className="backup_combo"
+        className={classNames(styles.backupCombo, "backup_combo")}
       />
 
       {selectedStorageId === ThirdPartyStorages.GoogleId ? (

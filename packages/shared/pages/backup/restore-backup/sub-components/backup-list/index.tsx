@@ -26,6 +26,7 @@
 import React from "react";
 import isUndefined from "lodash/isUndefined";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
@@ -50,15 +51,13 @@ import { isManagement } from "@docspace/shared/utils/common";
 
 import { TenantStatus } from "@docspace/shared/enums";
 
-import { StyledBackupList } from "../../RestoreBackup.styled";
-
 import BackupListBody from "./BackupListBody";
-import { StyledFooterContent } from "./BackupList.styled";
 import type {
   BackupListModalDialogProps,
   TBackupListState,
 } from "./BackupList.types";
 import { initState } from "./BackupList.constants";
+import styles from "../../RestoreBackup.module.scss";
 
 const BackupListModalDialog = ({
   isNotify,
@@ -196,12 +195,23 @@ const BackupListModalDialog = ({
   const { filesList, isLoading, selectedFileIndex, isChecked } = state;
 
   const helpContent = () => (
-    <Text className="restore-backup_warning-description">
+    <Text
+      className={classNames(
+        styles.restoreBackupWarningDescription,
+        "restore-backup_warning-description",
+      )}
+    >
       {t("Common:RestoreBackupWarningText", {
         productName: t("Common:ProductName"),
       })}{" "}
       {!standalone ? (
-        <Text as="span" className="restore-backup_warning-link">
+        <Text
+          as="span"
+          className={classNames(
+            styles.restoreBackupWarningLink,
+            "restore-backup_warning-link",
+          )}
+        >
           {t("Common:RestoreBackupResetInfoWarningText", {
             productName: t("Common:ProductName"),
           })}
@@ -218,10 +228,20 @@ const BackupListModalDialog = ({
     >
       <ModalDialog.Header>{t("Common:BackupList")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBackupList>
-          <div className="backup-list_content">
+        <div className={styles.backupList}>
+          <div
+            className={classNames(
+              styles.backupListContent,
+              "backup-list_content",
+            )}
+          >
             {filesList.length > 0 ? (
-              <div className="backup-restore_dialog-header">
+              <div
+                className={classNames(
+                  styles.backupRestoreDialogHeader,
+                  "backup-restore_dialog-header",
+                )}
+              >
                 <Text fontSize="12px" style={{ marginBottom: "10px" }}>
                   {t("Common:BackupListWarningText")}
                 </Text>
@@ -236,7 +256,12 @@ const BackupListModalDialog = ({
               </div>
             ) : null}
 
-            <div className="backup-restore_dialog-scroll-body">
+            <div
+              className={classNames(
+                styles.backupRestoreDialogScrollBody,
+                "backup-restore_dialog-scroll-body",
+              )}
+            >
               {!isLoading ? (
                 filesList.length > 0 ? (
                   <BackupListBody
@@ -249,7 +274,10 @@ const BackupListModalDialog = ({
                   <Text
                     fontSize="12px"
                     textAlign="center"
-                    className="backup-restore_empty-list"
+                    className={classNames(
+                      styles.backupRestoreEmptyList,
+                      "backup-restore_empty-list",
+                    )}
                   >
                     {t("Common:EmptyBackupList")}
                   </Text>
@@ -261,11 +289,11 @@ const BackupListModalDialog = ({
               )}
             </div>
           </div>
-        </StyledBackupList>
+        </div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <StyledFooterContent className="restore_footer">
+        <div className={classNames(styles.footerContent, "restore_footer")}>
           <div id="backup-list_help">
             <Checkbox
               truncate
@@ -273,10 +301,19 @@ const BackupListModalDialog = ({
               onChange={onChangeCheckbox}
               isChecked={isChecked}
             />
-            <Text as="span" className="backup-list_agreement-text">
+            <Text
+              as="span"
+              className={classNames(
+                styles.backupListAgreementText,
+                "backup-list_agreement-text",
+              )}
+            >
               {t("Common:UserAgreement")}
               <HelpButton
-                className="backup-list_tooltip"
+                className={classNames(
+                  styles.backupListTooltip,
+                  "backup-list_tooltip",
+                )}
                 offsetLeft={100}
                 iconName={HelpReactSvgUrl}
                 getContent={helpContent}
@@ -285,7 +322,12 @@ const BackupListModalDialog = ({
             </Text>
           </div>
 
-          <div className="restore_dialog-button">
+          <div
+            className={classNames(
+              styles.restoreDialogButton,
+              "restore_dialog-button",
+            )}
+          >
             <Button
               className="restore"
               primary
@@ -301,7 +343,7 @@ const BackupListModalDialog = ({
               onClick={onModalClose}
             />
           </div>
-        </StyledFooterContent>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

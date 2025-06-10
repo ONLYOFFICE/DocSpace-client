@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
+import classNames from "classnames";
 
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
@@ -36,6 +37,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 
 import type { ButtonContainerProps } from "./ButtonContainer.types";
+import styles from "../../RestoreBackup.module.scss";
 
 const ButtonContainer = (props: ButtonContainerProps) => {
   const {
@@ -141,9 +143,17 @@ const ButtonContainer = (props: ButtonContainerProps) => {
   const isLoadingButton = isLoading;
 
   return (
-    <div className="restore-backup_button-container">
+    <div
+      className={classNames(
+        styles.restoreBackupButtonContainer,
+        "restore-backup_button-container",
+      )}
+    >
       <Button
-        className="restore-backup_button"
+        className={classNames(
+          styles.restoreBackupButton,
+          "restore-backup_button",
+        )}
         label={t("Common:Restore")}
         onClick={onRestoreClick}
         primary

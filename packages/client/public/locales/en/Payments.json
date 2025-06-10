@@ -91,6 +91,7 @@
   "StartingNextMonth": "Starting next month",
   "StartupSuggestion": "Do more with {{planName}} plan",
   "StartupTitle": "You are using free {{planName}} plan",
+  "StorageCapacityUpdated": "Storage capacity has been updated",
   "StorageUpgradeMessage": "{{fromSize}} → {{toSize}} in total",
   "StorageUponRequest": "Additional storage exceeding {{amount}} is available upon request.",
   "StorageUsed": "<1>Storage used:</1> {{amount}}",

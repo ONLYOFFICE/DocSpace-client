@@ -42,7 +42,6 @@ import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
 import RoomsModule from "./sub-components/RoomsModule";
-import LocalFileModule from "./sub-components/LocalFileModule";
 import BackupListModalDialog from "./sub-components/backup-list";
 import { ButtonContainer } from "./sub-components/button-component";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
@@ -58,6 +57,8 @@ import {
   STORAGE_SPACE,
 } from "./RestoreBackup.constants";
 import type { RestoreBackupProps } from "./RestoreBackup.types";
+import { InputSize } from "../../../components/text-input";
+import { FileInput } from "../../../components/file-input";
 
 // import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -203,6 +204,11 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     setRestoreResource(id);
   };
 
+  const onLocalFileInputClick = (result: File | File[]) => {
+    const file = Array.isArray(result) ? result[0] : result;
+    setRestoreResource(file);
+  };
+
   const radioButtonContent = (
     <RadioButtonGroup
       name="restore_backup"
@@ -238,9 +244,13 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
   const backupModules = (
     <div className="restore-backup_modules">
       {radioButtonState === LOCAL_FILE ? (
-        <LocalFileModule
-          isEnableRestore={isEnableRestore}
-          setRestoreResource={setRestoreResource}
+        <FileInput
+          scale
+          size={InputSize.base}
+          onInput={onLocalFileInputClick}
+          accept={[".tar", ".gz"]}
+          className="restore-backup_input"
+          isDisabled={!isEnableRestore}
         />
       ) : null}
 

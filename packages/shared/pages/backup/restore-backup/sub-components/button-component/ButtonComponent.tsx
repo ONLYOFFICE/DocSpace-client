@@ -25,13 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-// import config from "PACKAGE_FILE";
 
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
 import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-
 import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
@@ -182,29 +180,3 @@ const ButtonContainer = (props: ButtonContainerProps) => {
 };
 
 export default ButtonContainer;
-
-// export default inject(({ settingsStore, backup, currentQuotaStore }) => {
-//   const { setTenantStatus } = settingsStore;
-//   const {
-//     downloadingProgress,
-//     isFormReady,
-//     getStorageParams,
-//     restoreResource,
-//     uploadLocalFile,
-//     isBackupProgressVisible,
-//   } = backup;
-
-//   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-//   const isMaxProgress = downloadingProgress === 100;
-//   return {
-//     uploadLocalFile,
-//     isMaxProgress,
-//     setTenantStatus,
-//     isEnableRestore: isRestoreAndAutoBackupAvailable,
-//     downloadingProgress,
-//     isFormReady,
-//     getStorageParams,
-//     restoreResource,
-//     isBackupProgressVisible,
-//   };
-// })(observer(ButtonContainer));

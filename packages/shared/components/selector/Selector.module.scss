@@ -34,6 +34,11 @@
   flex-direction: column;
 
   overflow: hidden;
+
+  :global(.selector-item_label) {
+    line-height: 18px;
+    margin-inline-start: 8px;
+  }
 }
 
 .body {

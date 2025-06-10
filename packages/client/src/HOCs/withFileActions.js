@@ -144,7 +144,7 @@ export default function withFileActions(WrappedFileItem) {
       const mouseButton = e.which
         ? e.which !== 1
         : e.button
-          ? e.button !== 0
+          ? e.button !== 0 && e.button !== 2
           : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {

@@ -26,18 +26,13 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import {
-  endpoints,
-  HEADER_EMPTY_FOLDER,
-  HEADER_ROOMS_LIST,
-} from "@docspace/shared/__mocks__/e2e";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import { FilterType } from "@docspace/shared/enums";
 
 import { expect, test } from "./fixtures/base";
 import { describe } from "node:test";
 import { roomListHandler } from "@docspace/shared/__mocks__/e2e/handlers/files/roomList";
 import { folderHandler } from "@docspace/shared/__mocks__/e2e/handlers/files/folder";
-import { foldersTreeHandler } from "@docspace/shared/__mocks__/e2e/handlers/files/foldersTree";
 
 const path = "/sdk/file-selector";
 
@@ -45,10 +40,11 @@ describe("File selector single param light", () => {
   test("should open base theme with default parameters /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    baseUrl,
+    serverRequestInterceptor,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -60,10 +56,11 @@ describe("File selector single param light", () => {
   test("should open base theme with acceptLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -75,10 +72,11 @@ describe("File selector single param light", () => {
   test("should open base theme with breadcrumbs /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -90,10 +88,11 @@ describe("File selector single param light", () => {
   test("should open base theme with cancel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -105,10 +104,11 @@ describe("File selector single param light", () => {
   test("should open base theme with cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -120,10 +120,11 @@ describe("File selector single param light", () => {
   test("should open base theme with filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -135,12 +136,13 @@ describe("File selector single param light", () => {
   test("should open base theme with id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
-    await mockRequest.router([endpoints.folder]);
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    await clientRequestInterceptor.use([endpoints.folder]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -152,10 +154,11 @@ describe("File selector single param light", () => {
   test("should open base theme with search /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -167,10 +170,11 @@ describe("File selector single param light", () => {
   test("should open base theme with roomsOnly selector type /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -182,10 +186,11 @@ describe("File selector single param light", () => {
   test("should open base theme with userFolderOnly selector type /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -197,10 +202,11 @@ describe("File selector single param light", () => {
   test("should open base theme with subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -214,10 +220,11 @@ describe("File selector single param dark", () => {
   test("should open dark theme with default parameters /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -229,10 +236,11 @@ describe("File selector single param dark", () => {
   test("should open dark theme with acceptLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&acceptLabel=CustomAccept`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&acceptLabel=CustomAccept`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -244,10 +252,11 @@ describe("File selector single param dark", () => {
   test("should open dark theme with breadcrumbs /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&breadCrumbs=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&breadCrumbs=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -259,10 +268,11 @@ describe("File selector single param dark", () => {
   test("should open dark theme with cancel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&cancel=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -274,10 +284,11 @@ describe("File selector single param dark", () => {
   test("should open dark theme with cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -289,10 +300,11 @@ describe("File selector single param dark", () => {
   test("should open dark theme with filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -304,13 +316,14 @@ describe("File selector single param dark", () => {
   test("should open dark theme with id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -321,11 +334,12 @@ describe("File selector single param dark", () => {
   test("should open dark theme with search /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&search=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&search=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -337,11 +351,12 @@ describe("File selector single param dark", () => {
   test("should open dark theme with roomsOnly selector type /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -353,10 +368,11 @@ describe("File selector single param dark", () => {
   test("should open dark theme with userFolderOnly selector type /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -368,10 +384,11 @@ describe("File selector single param dark", () => {
   test("should open dark theme with subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -386,10 +403,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with default parameters /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -401,10 +419,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with acceptLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&acceptLabel=CustomAccept`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&acceptLabel=CustomAccept`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -416,10 +435,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with breadcrumbs /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&breadCrumbs=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&breadCrumbs=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -431,10 +451,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with cancel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&cancel=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&cancel=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -446,10 +467,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -461,10 +483,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -476,13 +499,14 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -493,10 +517,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with search /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&search=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&search=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -508,10 +533,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with roomsOnly selector type /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -523,10 +549,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with userFolderOnly selector type /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -538,11 +565,11 @@ describe("File selector single param RTL light", () => {
   test("should open rtl base theme with subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -556,10 +583,11 @@ describe("File selector param combinations light", () => {
   test("should open with search, breadcrumbs and cancel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&breadCrumbs=true&cancel=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&cancel=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -570,14 +598,15 @@ describe("File selector param combinations light", () => {
 
   test("should open with search, breadcrumbs and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&breadCrumbs=true&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -587,12 +616,12 @@ describe("File selector param combinations light", () => {
 
   test("should open with search, breadcrumbs and subtitle /sdk/file-selector route", async ({
     page,
-    mockRequest,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&breadCrumbs=true&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -604,10 +633,11 @@ describe("File selector param combinations light", () => {
   test("should open with search, cancel and acceptLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&cancel=true&acceptLabel=CustomAccept`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&cancel=true&acceptLabel=CustomAccept`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -619,10 +649,11 @@ describe("File selector param combinations light", () => {
   test("should open with search, cancel and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -634,10 +665,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, cancel and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancel=true&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -648,14 +680,15 @@ describe("File selector param combinations light", () => {
 
   test("should open with breadcrumbs, id and subtitle /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&id=5&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&id=5&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -666,10 +699,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, acceptLabel and cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -681,13 +715,14 @@ describe("File selector param combinations light", () => {
   test("should open with filter, id and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -698,10 +733,11 @@ describe("File selector param combinations light", () => {
   test("should open with subtitle, acceptLabel and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -712,12 +748,12 @@ describe("File selector param combinations light", () => {
 
   test("should open with search, selectorType and subtitle /sdk/file-selector route", async ({
     page,
-    mockRequest,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&selectorType=roomsOnly&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&selectorType=roomsOnly&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -729,10 +765,11 @@ describe("File selector param combinations light", () => {
   test("should open with search, filter and cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -744,10 +781,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, filter and acceptLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&acceptLabel=CustomAccept`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&acceptLabel=CustomAccept`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -759,10 +797,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, subtitle and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&subtitle=true&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&subtitle=true&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -774,13 +813,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, cancelLabel and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&cancelLabel=CustomCancel&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&cancelLabel=CustomCancel&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -791,10 +831,11 @@ describe("File selector param combinations light", () => {
   test("should open with filter, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -806,10 +847,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, acceptLabel and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&acceptLabel=CustomAccept&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&acceptLabel=CustomAccept&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -821,13 +863,14 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, id and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&id=5&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&id=5&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -838,10 +881,11 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, search and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&search=true&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&search=true&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -853,10 +897,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -868,13 +913,14 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, filter and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -885,10 +931,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, search and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&search=true&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -900,10 +947,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancelLabel, search and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -915,10 +963,11 @@ describe("File selector param combinations light", () => {
   test("should open with filter, search and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -930,13 +979,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, search and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&search=true&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&search=true&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -947,10 +997,11 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, breadcrumbs and cancel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&cancel=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&cancel=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -962,10 +1013,11 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, breadcrumbs and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -977,10 +1029,11 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, cancel and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -992,13 +1045,14 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, cancel and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1009,13 +1063,14 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, filter and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1026,10 +1081,11 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, filter and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1041,10 +1097,11 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1056,10 +1113,11 @@ describe("File selector param combinations light", () => {
   test("should open with acceptLabel, cancelLabel and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1071,10 +1129,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, cancel and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1086,13 +1145,14 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, cancel and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancel=true&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1103,13 +1163,14 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, filter and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1120,10 +1181,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, filter and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1135,10 +1197,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, filter and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1150,13 +1213,14 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, id and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&id=5&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&id=5&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1167,10 +1231,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, search and cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&search=true&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1182,10 +1247,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, search and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&search=true&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1197,10 +1263,11 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, search and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&search=true&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1212,10 +1279,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, filter and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1227,10 +1295,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, filter and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1242,13 +1311,14 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, id and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&id=5&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&id=5&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1259,10 +1329,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, search and cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&search=true&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1274,13 +1345,14 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, search and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&search=true&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1291,10 +1363,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, search and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&search=true&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1306,10 +1379,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, cancelLabel and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1321,13 +1395,14 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, cancelLabel and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1338,10 +1413,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, cancelLabel and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1353,10 +1429,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancel, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1368,13 +1445,14 @@ describe("File selector param combinations light", () => {
   test("should open with cancelLabel, filter and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1385,11 +1463,12 @@ describe("File selector param combinations light", () => {
   test("should open with cancelLabel, filter and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1401,13 +1480,14 @@ describe("File selector param combinations light", () => {
   test("should open with cancelLabel, id and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&id=5&selectorType=userFolderOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&id=5&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1418,10 +1498,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancelLabel, search and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1433,13 +1514,14 @@ describe("File selector param combinations light", () => {
   test("should open with cancelLabel, search and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1450,10 +1532,11 @@ describe("File selector param combinations light", () => {
   test("should open with cancelLabel, search and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1465,13 +1548,14 @@ describe("File selector param combinations light", () => {
   test("should open with filter, id and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1482,13 +1566,14 @@ describe("File selector param combinations light", () => {
   test("should open with filter, search and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1499,10 +1584,11 @@ describe("File selector param combinations light", () => {
   test("should open with filter, search and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1514,13 +1600,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, acceptLabel and cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1531,13 +1618,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, acceptLabel and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1548,13 +1636,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, acceptLabel and search /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&acceptLabel=CustomAccept&search=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&search=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1565,13 +1654,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, acceptLabel and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&acceptLabel=CustomAccept&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1582,13 +1672,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, breadcrumbs and cancel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&breadCrumbs=true&cancel=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&cancel=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1599,13 +1690,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, breadcrumbs and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1616,13 +1708,14 @@ describe("File selector param combinations light", () => {
   test("should open with id, breadcrumbs and search /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&breadCrumbs=true&search=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&search=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1633,10 +1726,11 @@ describe("File selector param combinations light", () => {
   test("should open with search, acceptLabel and cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1648,10 +1742,11 @@ describe("File selector param combinations light", () => {
   test("should open with search, acceptLabel and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1663,13 +1758,14 @@ describe("File selector param combinations light", () => {
   test("should open with search, acceptLabel and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1680,10 +1776,11 @@ describe("File selector param combinations light", () => {
   test("should open with search, acceptLabel and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&selectorType=roomsOnly`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1695,10 +1792,11 @@ describe("File selector param combinations light", () => {
   test("should open with search, acceptLabel and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1710,10 +1808,11 @@ describe("File selector param combinations light", () => {
   test("should open with selectorType, acceptLabel and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&acceptLabel=CustomAccept&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&acceptLabel=CustomAccept&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1725,10 +1824,11 @@ describe("File selector param combinations light", () => {
   test("should open with selectorType, breadcrumbs and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&breadCrumbs=true&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&breadCrumbs=true&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1740,10 +1840,11 @@ describe("File selector param combinations light", () => {
   test("should open with selectorType, cancel and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&cancel=true&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&cancel=true&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1755,10 +1856,11 @@ describe("File selector param combinations light", () => {
   test("should open with selectorType, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&cancelLabel=CustomCancel&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&cancelLabel=CustomCancel&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1770,10 +1872,11 @@ describe("File selector param combinations light", () => {
   test("should open with selectorType, filter and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&filter=${FilterType.DocumentsOnly}&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&filter=${FilterType.DocumentsOnly}&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1785,13 +1888,14 @@ describe("File selector param combinations light", () => {
   test("should open with selectorType, id and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&id=5&subtitle=true`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&id=5&subtitle=true`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1802,13 +1906,14 @@ describe("File selector param combinations light", () => {
   test("should open with breadcrumbs, cancel label and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&id=5`;
-    requestInterceptor.use(roomListHandler(port, "isDefault"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&id=5`;
+    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.folder]);
+    await clientRequestInterceptor.use([endpoints.folder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1820,9 +1925,9 @@ describe("File selector param combinations light", () => {
 describe("File selector single param light empty", () => {
   test("should open base theme empty with default parameters /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base`;
+    const pageRoute = `${baseUrl}${path}?theme=Base`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1834,9 +1939,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with acceptLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1847,9 +1952,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with breadcrumbs /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1860,9 +1965,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with cancel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1873,9 +1978,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with cancelLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1886,9 +1991,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1900,11 +2005,12 @@ describe("File selector single param light empty", () => {
   test("should open base theme empty with id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
 
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5`;
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1916,9 +2022,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with search /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1929,9 +2035,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with roomsOnly selector type /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1942,9 +2048,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with userFolderOnly selector type /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=userFolderOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=userFolderOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1955,9 +2061,9 @@ describe("File selector single param light empty", () => {
 
   test("should open base theme empty with subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1970,9 +2076,9 @@ describe("File selector single param light empty", () => {
 describe("File selector single param dark empty", () => {
   test("should open dark theme empty with default parameters /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1984,9 +2090,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with acceptLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&acceptLabel=CustomAccept`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&acceptLabel=CustomAccept`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1998,9 +2104,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with breadcrumbs /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&breadCrumbs=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&breadCrumbs=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2012,9 +2118,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with cancel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2026,9 +2132,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with cancelLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&cancelLabel=CustomCancel`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&cancelLabel=CustomCancel`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2040,9 +2146,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2055,10 +2161,11 @@ describe("File selector single param dark empty", () => {
   test("should open dark theme empty with id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Dark&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2070,9 +2177,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with search /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&search=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&search=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2084,9 +2191,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with roomsOnly selector type /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&selectorType=roomsOnly`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2098,9 +2205,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with userFolderOnly selector type /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&selectorType=userFolderOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&selectorType=userFolderOnly`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2112,9 +2219,9 @@ describe("File selector single param dark empty", () => {
 
   test("should open dark theme empty with subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Dark&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Dark&subtitle=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2129,9 +2236,9 @@ describe("File selector single param RTL light empty", () => {
   // Default test
   test("should open empty rtl base theme with default parameters /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2142,10 +2249,9 @@ describe("File selector single param RTL light empty", () => {
 
   test("should open empty rtl base theme with acceptLabel /sdk/file-selector route", async ({
     page,
-    port,
-    requestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&acceptLabel=CustomAccept`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&acceptLabel=CustomAccept`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2156,10 +2262,9 @@ describe("File selector single param RTL light empty", () => {
 
   test("should open empty rtl base theme with breadcrumbs /sdk/file-selector route", async ({
     page,
-    port,
-    requestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&breadCrumbs=true`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&breadCrumbs=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2170,9 +2275,9 @@ describe("File selector single param RTL light empty", () => {
 
   test("should open empty rtl base theme with cancel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&cancel=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2183,9 +2288,9 @@ describe("File selector single param RTL light empty", () => {
 
   test("should open empty rtl base theme with cancelLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&cancelLabel=CustomCancel`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&cancelLabel=CustomCancel`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2196,9 +2301,9 @@ describe("File selector single param RTL light empty", () => {
 
   test("should open empty rtl base theme with filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2209,14 +2314,15 @@ describe("File selector single param RTL light empty", () => {
 
   test("should open empty rtl base theme with id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2226,9 +2332,9 @@ describe("File selector single param RTL light empty", () => {
 
   test("should open empty rtl base theme with search /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&search=true`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&search=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2238,9 +2344,9 @@ describe("File selector single param RTL light empty", () => {
   });
   test("should open empty rtl base theme with roomsOnly selector type /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2250,9 +2356,9 @@ describe("File selector single param RTL light empty", () => {
   });
   test("should open empty rtl base theme with userFolderOnly selector type /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&selectorType=userFolderOnly`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&selectorType=userFolderOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2262,9 +2368,9 @@ describe("File selector single param RTL light empty", () => {
   });
   test("should open empty rtl base theme with subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?locale=ar-SA&theme=Base&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2277,9 +2383,9 @@ describe("File selector single param RTL light empty", () => {
 describe("File selector param combinations light empty", () => {
   test("should open empty with search, breadcrumbs and cancel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&breadCrumbs=true&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&cancel=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2291,13 +2397,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with search, breadcrumbs and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&breadCrumbs=true&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2307,9 +2414,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, breadcrumbs and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&breadCrumbs=true&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2320,9 +2427,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, cancel and acceptLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&cancel=true&acceptLabel=CustomAccept`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&cancel=true&acceptLabel=CustomAccept`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2333,9 +2440,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, cancel and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2346,9 +2453,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, cancel and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancel=true&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2360,13 +2467,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with breadcrumbs, id and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    mockRequest,
-    requestInterceptor,
+    clientRequestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&id=5&subtitle=true`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&id=5&subtitle=true`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2376,9 +2484,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, acceptLabel and cancelLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2389,14 +2497,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with filter, id and selectorType /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&selectorType=userFolderOnly`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2405,9 +2514,9 @@ describe("File selector param combinations light empty", () => {
   });
   test("should open empty with subtitle, acceptLabel and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2418,9 +2527,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, selectorType and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&selectorType=roomsOnly&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&selectorType=roomsOnly&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2431,9 +2540,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, filter and cancelLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2444,9 +2553,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, filter and acceptLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&acceptLabel=CustomAccept`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&acceptLabel=CustomAccept`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2457,9 +2566,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, subtitle and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&subtitle=true&selectorType=userFolderOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&subtitle=true&selectorType=userFolderOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2470,14 +2579,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with id, cancelLabel and selectorType /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&cancelLabel=CustomCancel&selectorType=roomsOnly`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&cancelLabel=CustomCancel&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2487,9 +2597,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with filter, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2500,9 +2610,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, acceptLabel and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&acceptLabel=CustomAccept&selectorType=userFolderOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&acceptLabel=CustomAccept&selectorType=userFolderOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2513,14 +2623,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, id and subtitle /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&id=5&subtitle=true`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&id=5&subtitle=true`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2530,9 +2641,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, search and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&search=true&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&search=true&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2543,9 +2654,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2556,14 +2667,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, filter and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2573,9 +2685,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, search and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&search=true&selectorType=userFolderOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&selectorType=userFolderOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2585,9 +2697,9 @@ describe("File selector param combinations light empty", () => {
   });
   test("should open empty with cancelLabel, search and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2598,9 +2710,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with filter, search and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2611,14 +2723,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with id, search and selectorType /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&search=true&selectorType=roomsOnly`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&search=true&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2628,9 +2741,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, breadcrumbs and cancel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&cancel=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&cancel=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2641,9 +2754,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, breadcrumbs and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2654,9 +2767,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, cancel and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2667,14 +2780,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, cancel and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2684,14 +2798,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, filter and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2701,9 +2816,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, filter and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2714,9 +2829,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2727,9 +2842,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with acceptLabel, cancelLabel and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2740,9 +2855,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, cancel and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2753,14 +2868,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, cancel and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancel=true&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2770,14 +2886,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, filter and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2787,9 +2904,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, filter and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2800,9 +2917,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, filter and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2813,14 +2930,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, id and selectorType /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&id=5&selectorType=userFolderOnly`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&id=5&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2830,9 +2948,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, search and cancelLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&search=true&cancelLabel=CustomCancel`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&cancelLabel=CustomCancel`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2843,9 +2961,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, search and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&search=true&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2856,9 +2974,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, search and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&search=true&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2869,9 +2987,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, filter and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2882,9 +3000,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, filter and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2895,14 +3013,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, id and subtitle /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&id=5&subtitle=true`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&id=5&subtitle=true`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2912,9 +3031,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, search and cancelLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&search=true&cancelLabel=CustomCancel`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&cancelLabel=CustomCancel`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2925,14 +3044,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, search and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&search=true&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2942,9 +3062,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, search and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&search=true&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2955,9 +3075,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, cancelLabel and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2968,14 +3088,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, cancelLabel and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2985,9 +3106,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, cancelLabel and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -2998,9 +3119,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancel, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3011,14 +3132,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancelLabel, filter and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3028,9 +3150,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancelLabel, filter and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3041,14 +3163,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancelLabel, id and selectorType /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&id=5&selectorType=userFolderOnly`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&id=5&selectorType=userFolderOnly`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3058,9 +3181,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancelLabel, search and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3072,13 +3195,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with cancelLabel, search and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3088,9 +3212,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with cancelLabel, search and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&cancelLabel=CustomCancel&search=true&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3102,13 +3226,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with filter, id and subtitle /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&subtitle=true`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&subtitle=true`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3119,13 +3244,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with filter, search and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3135,9 +3261,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with filter, search and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3149,13 +3275,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with id, acceptLabel and cancelLabel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3166,13 +3293,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with id, acceptLabel and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3183,13 +3311,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with id, acceptLabel and search /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&acceptLabel=CustomAccept&search=true`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&search=true`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3200,13 +3329,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with id, acceptLabel and selectorType /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&acceptLabel=CustomAccept&selectorType=roomsOnly`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&selectorType=roomsOnly`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3217,13 +3347,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with id, breadcrumbs and cancel /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&breadCrumbs=true&cancel=true`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&cancel=true`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3234,13 +3365,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with id, breadcrumbs and filter /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3251,13 +3383,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with id, breadcrumbs and search /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&id=5&breadCrumbs=true&search=true`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&search=true`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3267,9 +3400,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, acceptLabel and cancelLabel /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3280,9 +3413,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, acceptLabel and filter /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3294,13 +3427,14 @@ describe("File selector param combinations light empty", () => {
   test("should open empty with search, acceptLabel and id /sdk/file-selector route", async ({
     page,
     port,
-    requestInterceptor,
-    mockRequest,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3310,9 +3444,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, acceptLabel and selectorType /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&selectorType=roomsOnly`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&selectorType=roomsOnly`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3323,9 +3457,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with search, acceptLabel and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&search=true&acceptLabel=CustomAccept&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3336,9 +3470,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with selectorType, acceptLabel and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&acceptLabel=CustomAccept&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&acceptLabel=CustomAccept&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3349,9 +3483,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with selectorType, breadcrumbs and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&breadCrumbs=true&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&breadCrumbs=true&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3362,9 +3496,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with selectorType, cancel and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&cancel=true&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&cancel=true&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3375,9 +3509,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with selectorType, cancelLabel and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&cancelLabel=CustomCancel&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&cancelLabel=CustomCancel&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3388,9 +3522,9 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with selectorType, filter and subtitle /sdk/file-selector route", async ({
     page,
-    port,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&filter=${FilterType.DocumentsOnly}&subtitle=true`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&filter=${FilterType.DocumentsOnly}&subtitle=true`;
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -3401,14 +3535,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with selectorType, id and subtitle /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&selectorType=roomsOnly&id=5&subtitle=true`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&id=5&subtitle=true`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3418,14 +3553,15 @@ describe("File selector param combinations light empty", () => {
 
   test("should open empty with breadcrumbs, cancel label and id /sdk/file-selector route", async ({
     page,
-    mockRequest,
+    clientRequestInterceptor,
     port,
-    requestInterceptor,
+    serverRequestInterceptor,
+    baseUrl,
   }) => {
-    const pageRoute = `http://localhost:${port}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&id=5`;
-    requestInterceptor.use(folderHandler(port, "isEmpty"));
+    const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&id=5`;
+    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
     await page.goto(pageRoute);
-    await mockRequest.router([endpoints.emptyFolder]);
+    await clientRequestInterceptor.use([endpoints.emptyFolder]);
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",

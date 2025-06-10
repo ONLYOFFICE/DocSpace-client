@@ -397,6 +397,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
   return (
     <div
+      data-testid="restore-backup"
       className={classNames(styles.restoreBackup, styles.backupCommon, {
         [styles.isEnableRestore]: isEnableRestore,
       })}

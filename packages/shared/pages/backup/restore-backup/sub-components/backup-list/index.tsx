@@ -228,7 +228,7 @@ const BackupListModalDialog = ({
     >
       <ModalDialog.Header>{t("Common:BackupList")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.backupList}>
+        <div className={styles.backupList} data-testid="backup-list-modal">
           <div
             className={classNames(
               styles.backupListContent,

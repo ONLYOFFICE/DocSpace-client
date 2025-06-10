@@ -111,7 +111,7 @@ const AmazonSettings = ({
     key: string;
     label: string;
     systemName: string;
-  }>();
+  }>(null);
 
   const regions = useMemo(() => {
     return storageRegions.map((storageRegion, index) => {

@@ -29,10 +29,8 @@ import { capabilitiesHandler, endpoints } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 import { successClient } from "@docspace/shared/__mocks__/e2e/handlers/oauth/client";
 
-test("oauth2 login render", async ({ page, port }) => {
-  await page.goto(
-    `http://localhost:${port}/login?client_id=${successClient.client_id}`,
-  );
+test("oauth2 login render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -43,16 +41,15 @@ test("oauth2 login render", async ({ page, port }) => {
 
 test("oauth2 with list render", async ({
   page,
-  requestInterceptor,
-  mockRequest,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
   port,
+  baseUrl,
 }) => {
-  requestInterceptor.use(capabilitiesHandler(port, true));
-  await mockRequest.router([endpoints.oauthSignIn]);
+  serverRequestInterceptor.use(capabilitiesHandler(port, true));
+  await clientRequestInterceptor.use([endpoints.oauthSignIn]);
 
-  await page.goto(
-    `http://localhost:${port}/login?client_id=${successClient.client_id}`,
-  );
+  await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 
   await page.fill("[name='login']", "email@mail.ru");
   await page
@@ -61,7 +58,7 @@ test("oauth2 with list render", async ({
     .fill("qwerty123");
 
   await page.getByTestId("button").click();
-  await page.waitForURL(`http://localhost:${port}/login/tenant-list?**`, {
+  await page.waitForURL(`${baseUrl}/login/tenant-list?**`, {
     waitUntil: "load",
   });
 
@@ -74,16 +71,15 @@ test("oauth2 with list render", async ({
 
 test("oauth2 back button after list render", async ({
   page,
-  mockRequest,
-  requestInterceptor,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
   port,
+  baseUrl,
 }) => {
-  requestInterceptor.use(capabilitiesHandler(port, true));
-  await mockRequest.router([endpoints.oauthSignIn]);
+  serverRequestInterceptor.use(capabilitiesHandler(port, true));
+  await clientRequestInterceptor.use([endpoints.oauthSignIn]);
 
-  await page.goto(
-    `http://localhost:${port}/login?client_id=${successClient.client_id}`,
-  );
+  await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 
   await page.fill("[name='login']", "email@mail.ru");
   await page
@@ -92,13 +88,13 @@ test("oauth2 back button after list render", async ({
     .fill("qwerty123");
 
   await page.getByTestId("button").click();
-  await page.waitForURL(`http://localhost:${port}/login/tenant-list?**`, {
+  await page.waitForURL(`${baseUrl}/login/tenant-list?**`, {
     waitUntil: "load",
   });
 
   await page.getByTestId("button").click();
   await page.waitForURL(
-    `http://localhost:${port}/login?type=oauth2&client_id=0aac3e2a-f41f-4fde-89d5-7208a13fbbc5`,
+    `${baseUrl}/login?type=oauth2&client_id=0aac3e2a-f41f-4fde-89d5-7208a13fbbc5`,
     {
       waitUntil: "load",
     },
@@ -147,7 +143,7 @@ test("oauth2 back button after list render", async ({
 //   });
 
 //   await context.clearCookies({ name: "asc_auth_key" });
-//   await mockRequest.router([endpoints.logout]);
+//   await clientRequestInterceptor.use([endpoints.logout]);
 
 //   await page.getByText("Not you?").click();
 //   await page.waitForURL(

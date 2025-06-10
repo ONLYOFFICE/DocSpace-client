@@ -66,8 +66,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("activation render", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("activation render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -76,14 +76,18 @@ test("activation render", async ({ page, port }) => {
   ]);
 });
 
-test("activation success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([
+test("activation success", async ({
+  page,
+  baseUrl,
+  clientRequestInterceptor,
+}) => {
+  await clientRequestInterceptor.use([
     endpoints.changePassword,
     endpoints.activationStatus,
     endpoints.login,
     endpoints.updateUser,
   ]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page
     .getByTestId("input-block")
@@ -99,7 +103,7 @@ test("activation success", async ({ page, mockRequest, port }) => {
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -108,8 +112,8 @@ test("activation success", async ({ page, mockRequest, port }) => {
   ]);
 });
 
-test("activation error", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("activation error", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='name']", "");
   await page.fill("[name='surname']", "");
@@ -126,12 +130,13 @@ test("activation error", async ({ page, port }) => {
 
 test("activation error tariffic limit", async ({
   page,
+  baseUrl,
+  serverRequestInterceptor,
   port,
-  requestInterceptor,
 }) => {
-  requestInterceptor.use(confirmHandler(port, "TariffLimit"));
+  serverRequestInterceptor.use(confirmHandler(port, "TariffLimit"));
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -142,12 +147,13 @@ test("activation error tariffic limit", async ({
 
 test("activation error user existed", async ({
   page,
+  baseUrl,
+  serverRequestInterceptor,
   port,
-  requestInterceptor,
 }) => {
-  requestInterceptor.use(confirmHandler(port, "UserExisted"));
+  serverRequestInterceptor.use(confirmHandler(port, "UserExisted"));
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -158,12 +164,13 @@ test("activation error user existed", async ({
 
 test("activation error quota failed", async ({
   page,
+  baseUrl,
+  serverRequestInterceptor,
   port,
-  requestInterceptor,
 }) => {
-  requestInterceptor.use(confirmHandler(port, "QuotaFailed"));
+  serverRequestInterceptor.use(confirmHandler(port, "QuotaFailed"));
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

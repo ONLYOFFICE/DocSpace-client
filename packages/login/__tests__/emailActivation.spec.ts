@@ -52,11 +52,11 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("email activation success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.activationStatus]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("email activation success", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([endpoints.activationStatus]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL(`http://localhost:${port}/login?confirmedEmail=**`, {
+  await page.waitForURL(`${baseUrl}/login?confirmedEmail=**`, {
     waitUntil: "load",
   });
 
@@ -67,9 +67,9 @@ test("email activation success", async ({ page, mockRequest, port }) => {
   ]);
 });
 
-test("email activation error", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.activationStatusError]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("email activation error", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([endpoints.activationStatusError]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

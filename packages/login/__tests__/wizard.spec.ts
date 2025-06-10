@@ -27,10 +27,7 @@
 import path from "path";
 
 import {
-  HEADER_WIZARD_SETTINGS,
-  HEADER_LICENCE_REQUIRED,
   endpoints,
-  HEADER_WIZARD_WITH_AMI_SETTINGS,
   settingsHandler,
   licenseRequiredHandler,
 } from "@docspace/shared/__mocks__/e2e";
@@ -38,12 +35,16 @@ import {
 import { expect, test } from "./fixtures/base";
 
 const URL = "/login/wizard";
-const NEXT_REQUEST_URL = "*/**/login/wizard";
 
-test("wizard render", async ({ page, port, requestInterceptor }) => {
-  requestInterceptor.use(settingsHandler(port, "wizard"));
+test("wizard render", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
 
-  await page.goto(`http://localhost:${port}${URL}`);
+  await page.goto(`${baseUrl}${URL}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -54,14 +55,15 @@ test("wizard render", async ({ page, port, requestInterceptor }) => {
 
 test("wizard success", async ({
   page,
-  mockRequest,
   port,
-  requestInterceptor,
+  baseUrl,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "wizard"));
-  await mockRequest.router([endpoints.wizardComplete]);
+  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
+  await clientRequestInterceptor.use([endpoints.wizardComplete]);
 
-  await page.goto(`http://localhost:${port}${URL}`);
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@mail.ru");
   await page
@@ -77,7 +79,7 @@ test("wizard success", async ({
   ]);
 
   await page.getByTestId("button").click();
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -88,14 +90,15 @@ test("wizard success", async ({
 
 test("wizard error", async ({
   page,
-  mockRequest,
   port,
-  requestInterceptor,
+  baseUrl,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "wizard"));
-  await mockRequest.router([endpoints.wizardComplete]);
+  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
+  await clientRequestInterceptor.use([endpoints.wizardComplete]);
 
-  await page.goto(`http://localhost:${port}${URL}`);
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@123");
   await page
@@ -114,15 +117,20 @@ test("wizard error", async ({
 
 test("wizard with license success", async ({
   page,
-  mockRequest,
   port,
-  requestInterceptor,
+  baseUrl,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "wizard"));
-  requestInterceptor.use(licenseRequiredHandler(port, true));
-  await mockRequest.router([endpoints.wizardComplete, endpoints.license]);
+  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
+  serverRequestInterceptor.use(licenseRequiredHandler(port, true));
 
-  await page.goto(`http://localhost:${port}${URL}`);
+  await clientRequestInterceptor.use([
+    endpoints.wizardComplete,
+    endpoints.license,
+  ]);
+
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@mail.ru");
   await page
@@ -145,7 +153,7 @@ test("wizard with license success", async ({
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -157,12 +165,13 @@ test("wizard with license success", async ({
 test("wizard with license error", async ({
   page,
   port,
-  requestInterceptor,
+  baseUrl,
+  serverRequestInterceptor,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "wizard"));
-  requestInterceptor.use(licenseRequiredHandler(port, true));
+  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
+  serverRequestInterceptor.use(licenseRequiredHandler(port, true));
 
-  await page.goto(`http://localhost:${port}${URL}`);
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@123");
   await page
@@ -179,10 +188,15 @@ test("wizard with license error", async ({
   ]);
 });
 
-test("wizard with ami render", async ({ page, port, requestInterceptor }) => {
-  requestInterceptor.use(settingsHandler(port, "wizardWithAmi"));
+test("wizard with ami render", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, "wizardWithAmi"));
 
-  await page.goto(`http://localhost:${port}${URL}`);
+  await page.goto(`${baseUrl}${URL}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -191,10 +205,15 @@ test("wizard with ami render", async ({ page, port, requestInterceptor }) => {
   ]);
 });
 
-test("wizard with ami error", async ({ page, port, requestInterceptor }) => {
-  requestInterceptor.use(settingsHandler(port, "wizardWithAmi"));
+test("wizard with ami error", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, "wizardWithAmi"));
 
-  await page.goto(`http://localhost:${port}${URL}`);
+  await page.goto(`${baseUrl}${URL}`);
 
   await page.getByTestId("button").click();
 

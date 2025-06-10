@@ -45,18 +45,18 @@ const QUERY_PARAMS = [
   },
 ];
 
-const getQueryParamsWithReferenceUrl = (port: string) => {
+const getQueryParamsWithReferenceUrl = (baseUrl: string) => {
   return QUERY_PARAMS.concat({
     name: "referenceUrl",
-    value: `http://localhost:${port}/rooms`,
+    value: `${baseUrl}/rooms`,
   });
 };
 
-const getQueryParamsWithFileHandler = (port: string) => {
+const getQueryParamsWithFileHandler = (baseUrl: string) => {
   return QUERY_PARAMS.concat([
     {
       name: "referenceUrl",
-      value: `http://localhost:${port}/filehandler.ashx?action=download`,
+      value: `${baseUrl}/filehandler.ashx?action=download`,
     },
     {
       name: "fileid",
@@ -67,31 +67,35 @@ const getQueryParamsWithFileHandler = (port: string) => {
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-const getUrlWithReferenceUrl = (port: string) => {
-  return getUrlWithQueryParams(URL, getQueryParamsWithReferenceUrl(port));
+const getUrlWithReferenceUrl = (baseUrl: string) => {
+  return getUrlWithQueryParams(URL, getQueryParamsWithReferenceUrl(baseUrl));
 };
-const getUrlWithFileHandler = (port: string) => {
-  return getUrlWithQueryParams(URL, getQueryParamsWithFileHandler(port));
+const getUrlWithFileHandler = (baseUrl: string) => {
+  return getUrlWithQueryParams(URL, getQueryParamsWithFileHandler(baseUrl));
 };
 
-test("auth success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.login]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("auth success", async ({ page, clientRequestInterceptor, baseUrl }) => {
+  await clientRequestInterceptor.use([endpoints.login]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("loader").waitFor({ state: "detached" });
 
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot(["desktop", "auth", "auth-success.png"]);
 });
 
-test("auth with reference url success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.login]);
-  await page.goto(`http://localhost:${port}${getUrlWithReferenceUrl(port)}`);
+test("auth with reference url success", async ({
+  page,
+  clientRequestInterceptor,
+  baseUrl,
+}) => {
+  await clientRequestInterceptor.use([endpoints.login]);
+  await page.goto(`${baseUrl}${getUrlWithReferenceUrl(baseUrl)}`);
 
   await page.getByTestId("loader").waitFor({ state: "detached" });
 
-  await page.waitForURL(`http://localhost:${port}/rooms`, {
+  await page.waitForURL(`${baseUrl}/rooms`, {
     waitUntil: "load",
   });
 
@@ -102,9 +106,13 @@ test("auth with reference url success", async ({ page, mockRequest, port }) => {
   ]);
 });
 
-test("auth with file handler success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.login]);
-  await page.goto(`http://localhost:${port}${getUrlWithFileHandler(port)}`, {
+test("auth with file handler success", async ({
+  page,
+  clientRequestInterceptor,
+  baseUrl,
+}) => {
+  await clientRequestInterceptor.use([endpoints.login]);
+  await page.goto(`${baseUrl}${getUrlWithFileHandler(baseUrl)}`, {
     waitUntil: "domcontentloaded",
   });
 
@@ -112,12 +120,9 @@ test("auth with file handler success", async ({ page, mockRequest, port }) => {
     .getByText("File downloading in progress")
     .waitFor({ state: "detached" });
 
-  await page.waitForURL(
-    `http://localhost:${port}/filehandler.ashx?action=download`,
-    {
-      waitUntil: "load",
-    },
-  );
+  await page.waitForURL(`${baseUrl}/filehandler.ashx?action=download`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",

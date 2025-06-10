@@ -52,14 +52,13 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("email change success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.changeEmail]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("email change success", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([endpoints.changeEmail]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL(
-    `http://localhost:${port}/profile?email_change=success`,
-    { waitUntil: "load" },
-  );
+  await page.waitForURL(`${baseUrl}/profile?email_change=success`, {
+    waitUntil: "load",
+  });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -68,9 +67,9 @@ test("email change success", async ({ page, mockRequest, port }) => {
   ]);
 });
 
-test("email change error", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.changeEmailError]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("email change error", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([endpoints.changeEmailError]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

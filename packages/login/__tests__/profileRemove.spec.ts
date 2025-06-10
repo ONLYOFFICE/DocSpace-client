@@ -51,8 +51,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("profile remove render", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("profile remove render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -61,9 +61,9 @@ test("profile remove render", async ({ page, port }) => {
   ]);
 });
 
-test("profile remove success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.removeUser]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("profile remove success", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([endpoints.removeUser]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("button").click();
 

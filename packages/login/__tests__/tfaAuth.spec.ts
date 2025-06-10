@@ -60,8 +60,8 @@ const URL_WITH_LINK_DATA_PARAMS = getUrlWithQueryParams(
   QUERY_PARAMS_WITH_LINK_DATA,
 );
 
-test("tfa auth render", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("tfa auth render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -70,12 +70,16 @@ test("tfa auth render", async ({ page, port }) => {
   ]);
 });
 
-test("tfa auth success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([
+test("tfa auth success", async ({
+  page,
+  clientRequestInterceptor,
+  baseUrl,
+}) => {
+  await clientRequestInterceptor.use([
     endpoints.tfaAppValidate,
     endpoints.loginWithTfaCode,
   ]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
 
@@ -87,7 +91,7 @@ test("tfa auth success", async ({ page, mockRequest, port }) => {
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -98,13 +102,14 @@ test("tfa auth success", async ({ page, mockRequest, port }) => {
 
 test("tfa auth error not validated", async ({
   page,
-  mockRequest,
   port,
-  requestInterceptor,
+  baseUrl,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
 }) => {
-  requestInterceptor.use(selfHandler(port, 404));
-  await mockRequest.router([endpoints.tfaAppValidateError]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  serverRequestInterceptor.use(selfHandler(port, 404));
+  await clientRequestInterceptor.use([endpoints.tfaAppValidateError]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
 
@@ -119,16 +124,16 @@ test("tfa auth error not validated", async ({
 
 test("tfa auth redirects to room after successful submission", async ({
   page,
-  mockRequest,
-  port,
+  baseUrl,
+  clientRequestInterceptor,
 }) => {
-  await mockRequest.router([
+  await clientRequestInterceptor.use([
     endpoints.tfaAppValidate,
     endpoints.loginWithTfaCode,
     endpoints.checkConfirmLink,
   ]);
 
-  await page.goto(`http://localhost:${port}${URL_WITH_LINK_DATA_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_LINK_DATA_PARAMS}`);
 
   await page.evaluate(() => {
     sessionStorage.setItem("referenceUrl", "/rooms/shared/1");
@@ -137,7 +142,7 @@ test("tfa auth redirects to room after successful submission", async ({
   await page.getByTestId("text-input").fill("123456");
   await page.getByTestId("button").click();
 
-  await page.waitForURL(`http://localhost:${port}/rooms/shared/1`);
+  await page.waitForURL(`${baseUrl}/rooms/shared/1`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

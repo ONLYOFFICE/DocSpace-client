@@ -47,8 +47,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("portal remove render", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal remove render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -57,9 +57,9 @@ test("portal remove render", async ({ page, port }) => {
   ]);
 });
 
-test("portal remove delete", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.deletePortal]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal remove delete", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([endpoints.deletePortal]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Delete" }).click();
 
@@ -86,12 +86,12 @@ test("portal remove delete", async ({ page, mockRequest, port }) => {
   );
 });
 
-test("portal remove cancel", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal remove cancel", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Cancel" }).click();
 
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

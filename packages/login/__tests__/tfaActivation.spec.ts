@@ -60,8 +60,8 @@ const URL_WITH_LINK_DATA_PARAMS = getUrlWithQueryParams(
   QUERY_PARAMS_WITH_LINK_DATA,
 );
 
-test("tfa activation render", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("tfa activation render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -70,12 +70,16 @@ test("tfa activation render", async ({ page, port }) => {
   ]);
 });
 
-test("tfa activation success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([
+test("tfa activation success", async ({
+  page,
+  clientRequestInterceptor,
+  baseUrl,
+}) => {
+  await clientRequestInterceptor.use([
     endpoints.tfaAppValidate,
     endpoints.loginWithTfaCode,
   ]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
 
@@ -87,7 +91,7 @@ test("tfa activation success", async ({ page, mockRequest, port }) => {
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL(`http://localhost:${port}/profile`, {
+  await page.waitForURL(`${baseUrl}/profile`, {
     waitUntil: "load",
   });
 
@@ -100,21 +104,21 @@ test("tfa activation success", async ({ page, mockRequest, port }) => {
 
 test("tfa activation success with link data", async ({
   page,
-  mockRequest,
-  port,
+  clientRequestInterceptor,
+  baseUrl,
 }) => {
-  await mockRequest.router([
+  await clientRequestInterceptor.use([
     endpoints.tfaAppValidate,
     endpoints.loginWithTfaCode,
     endpoints.checkConfirmLink,
   ]);
-  await page.goto(`http://localhost:${port}${URL_WITH_LINK_DATA_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_LINK_DATA_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL(`http://localhost:${port}/profile`, {
+  await page.waitForURL(`${baseUrl}/profile`, {
     waitUntil: "load",
   });
 
@@ -127,13 +131,15 @@ test("tfa activation success with link data", async ({
 
 test("tfa activation error not validated", async ({
   page,
-  mockRequest,
+
   port,
-  requestInterceptor,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
+  baseUrl,
 }) => {
-  requestInterceptor.use(selfHandler(port, 404));
-  await mockRequest.router([endpoints.tfaAppValidateError]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  serverRequestInterceptor.use(selfHandler(port, 404));
+  await clientRequestInterceptor.use([endpoints.tfaAppValidateError]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
 

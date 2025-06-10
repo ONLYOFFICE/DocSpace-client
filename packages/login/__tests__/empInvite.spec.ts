@@ -52,9 +52,13 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("emp invite render standalone", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("emp invite render standalone", async ({
+  page,
+  baseUrl,
+  clientRequestInterceptor,
+}) => {
+  await clientRequestInterceptor.use([endpoints.getUserByEmail]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -65,13 +69,14 @@ test("emp invite render standalone", async ({ page, mockRequest, port }) => {
 
 test("emp invite render no standalone", async ({
   page,
-  mockRequest,
+  baseUrl,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
   port,
-  requestInterceptor,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "noStandalone"));
-  await mockRequest.router([endpoints.getUserByEmail]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
+  await clientRequestInterceptor.use([endpoints.getUserByEmail]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -80,9 +85,13 @@ test("emp invite render no standalone", async ({
   ]);
 });
 
-test("emp invite success standalone", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.createUser, endpoints.login]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("emp invite success standalone", async ({
+  page,
+  baseUrl,
+  clientRequestInterceptor,
+}) => {
+  await clientRequestInterceptor.use([endpoints.createUser, endpoints.login]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
@@ -99,7 +108,7 @@ test("emp invite success standalone", async ({ page, mockRequest, port }) => {
   ]);
 
   await page.getByRole("button", { name: "Sign up" }).click();
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -110,14 +119,15 @@ test("emp invite success standalone", async ({ page, mockRequest, port }) => {
 
 test("emp invite success no standalone", async ({
   page,
-  mockRequest,
+  baseUrl,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
   port,
-  requestInterceptor,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "noStandalone"));
-  await mockRequest.router([endpoints.createUser, endpoints.login]);
+  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
+  await clientRequestInterceptor.use([endpoints.createUser, endpoints.login]);
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
@@ -137,7 +147,7 @@ test("emp invite success no standalone", async ({
   ]);
 
   await page.getByRole("button", { name: "Sign up" }).click();
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -146,8 +156,8 @@ test("emp invite success no standalone", async ({
   ]);
 });
 
-test("emp invite error standalone", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("emp invite error standalone", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("input-block").getByTestId("text-input").fill("123");
   await page.getByTestId("input-block").getByRole("img").click();
@@ -163,12 +173,13 @@ test("emp invite error standalone", async ({ page, port }) => {
 
 test("emp invite error no standalone", async ({
   page,
+  baseUrl,
+  serverRequestInterceptor,
   port,
-  requestInterceptor,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "noStandalone"));
+  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("input-block").getByTestId("text-input").fill("123");
   await page.getByTestId("input-block").getByRole("img").click();

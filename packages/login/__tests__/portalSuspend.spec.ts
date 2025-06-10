@@ -47,8 +47,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("portal suspend render", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal suspend render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -57,9 +57,9 @@ test("portal suspend render", async ({ page, port }) => {
   ]);
 });
 
-test("portal suspend deactivate", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.suspendPortal]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal suspend deactivate", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([endpoints.suspendPortal]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Deactivate" }).click();
 
@@ -86,12 +86,12 @@ test("portal suspend deactivate", async ({ page, mockRequest, port }) => {
   );
 });
 
-test("portal suspend cancel", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal suspend cancel", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Cancel" }).click();
 
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -102,13 +102,14 @@ test("portal suspend cancel", async ({ page, port }) => {
 
 test("render after deactivate portal", async ({
   page,
-  requestInterceptor,
+  baseUrl,
+  serverRequestInterceptor,
   port,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "portalDeactivate"));
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  serverRequestInterceptor.use(settingsHandler(port, "portalDeactivate"));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
-  await page.waitForURL(`http://localhost:${port}/unavailable`, {
+  await page.waitForURL(`${baseUrl}/unavailable`, {
     waitUntil: "load",
   });
 

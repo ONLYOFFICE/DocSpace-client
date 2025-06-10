@@ -51,8 +51,8 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("portal owner change render", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal owner change render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -61,9 +61,9 @@ test("portal owner change render", async ({ page, port }) => {
   ]);
 });
 
-test("portal owner change save", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.changeOwner]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal owner change save", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([endpoints.changeOwner]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Save" }).click();
 
@@ -78,12 +78,12 @@ test("portal owner change save", async ({ page, mockRequest, port }) => {
   ]);
 });
 
-test("portal owner change cancel", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("portal owner change cancel", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Cancel" }).click();
 
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

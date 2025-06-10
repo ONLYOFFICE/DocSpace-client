@@ -51,10 +51,15 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("guest share link render", async ({ page, port, requestInterceptor }) => {
-  requestInterceptor.use(settingsHandler(port, "authenticated"));
+test("guest share link render", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, "authenticated"));
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -65,18 +70,19 @@ test("guest share link render", async ({ page, port, requestInterceptor }) => {
 
 test("guest share link approve", async ({
   page,
-  mockRequest,
   port,
-  requestInterceptor,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
+  baseUrl,
 }) => {
-  requestInterceptor.use(settingsHandler(port, "authenticated"));
-  await mockRequest.router([endpoints.addGuest]);
+  serverRequestInterceptor.use(settingsHandler(port, "authenticated"));
+  await clientRequestInterceptor.use([endpoints.addGuest]);
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Approve" }).click();
 
-  await page.waitForURL(`http://localhost:${port}/accounts/guests/filter?**`, {
+  await page.waitForURL(`${baseUrl}/accounts/guests/filter?**`, {
     waitUntil: "load",
   });
 
@@ -87,14 +93,19 @@ test("guest share link approve", async ({
   ]);
 });
 
-test("guest share link deny", async ({ page, port, requestInterceptor }) => {
-  requestInterceptor.use(settingsHandler(port, "authenticated"));
+test("guest share link deny", async ({
+  page,
+  port,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, "authenticated"));
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Deny" }).click();
 
-  await page.waitForURL(`http://localhost:${port}/`, { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

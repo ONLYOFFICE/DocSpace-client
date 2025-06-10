@@ -24,12 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  HEADER_LINK_EXPIRED,
-  HEADER_LINK_INVALID,
-  HEADER_USER_EXCLUDED,
-  endpoints,
-} from "@docspace/shared/__mocks__/e2e";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
@@ -63,8 +58,8 @@ const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
   QUERY_PARAMS,
 );
 
-test("password change render", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("password change render", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -73,9 +68,12 @@ test("password change render", async ({ page, port }) => {
   ]);
 });
 
-test("password change success", async ({ page, mockRequest, port }) => {
-  await mockRequest.router([endpoints.changePassword, endpoints.login]);
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("password change success", async ({ page, baseUrl, clientRequestInterceptor }) => {
+  await clientRequestInterceptor.use([
+    endpoints.changePassword,
+    endpoints.login,
+  ]);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("qwerty123");
 
@@ -87,7 +85,7 @@ test("password change success", async ({ page, mockRequest, port }) => {
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL(`http://localhost:${port}/login?passwordChanged=true`, {
+  await page.waitForURL(`${baseUrl}/login?passwordChanged=true`, {
     waitUntil: "load",
   });
 
@@ -98,8 +96,8 @@ test("password change success", async ({ page, mockRequest, port }) => {
   ]);
 });
 
-test("password change error", async ({ page, port }) => {
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+test("password change error", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123");
   await page.getByTestId("button").click();
@@ -113,12 +111,13 @@ test("password change error", async ({ page, port }) => {
 
 test("password change error invalid", async ({
   page,
-  requestInterceptor,
+  baseUrl,
+  serverRequestInterceptor,
   port,
 }) => {
-  requestInterceptor.use(confirmHandler(port, "Invalid"));
+  serverRequestInterceptor.use(confirmHandler(port, "Invalid"));
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -129,12 +128,13 @@ test("password change error invalid", async ({
 
 test("password change error expired", async ({
   page,
-  requestInterceptor,
+  baseUrl,
+  serverRequestInterceptor,
   port,
 }) => {
-  requestInterceptor.use(confirmHandler(port, "Expired"));
+  serverRequestInterceptor.use(confirmHandler(port, "Expired"));
 
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -145,13 +145,14 @@ test("password change error expired", async ({
 
 test("password change error user excluded", async ({
   page,
-  requestInterceptor,
+  baseUrl,
+  serverRequestInterceptor,
   port,
 }) => {
-  requestInterceptor.use(confirmHandler(port, "UserExcluded"));
+  serverRequestInterceptor.use(confirmHandler(port, "UserExcluded"));
 
   // Expected to go to default page
-  await page.goto(`http://localhost:${port}${URL_WITH_PARAMS}`);
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
     "desktop",

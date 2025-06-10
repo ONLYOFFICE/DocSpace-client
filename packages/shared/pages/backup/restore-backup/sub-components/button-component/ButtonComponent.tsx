@@ -37,7 +37,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 
 import type { ButtonContainerProps } from "./ButtonContainer.types";
-import styles from "../../RestoreBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 
 const ButtonContainer = (props: ButtonContainerProps) => {
   const {

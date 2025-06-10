@@ -64,9 +64,7 @@ import {
   STORAGE_SPACE,
 } from "./RestoreBackup.constants";
 import type { RestoreBackupProps } from "./RestoreBackup.types";
-import styles from "./RestoreBackup.module.scss";
-
-// import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import styles from "../Backup.module.scss";
 
 export const RestoreBackup = (props: RestoreBackupProps) => {
   const {
@@ -399,7 +397,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
   return (
     <div
-      className={classNames(styles.restoreBackup, {
+      className={classNames(styles.restoreBackup, styles.backupCommon, {
         [styles.isEnableRestore]: isEnableRestore,
       })}
     >
@@ -494,38 +492,3 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     </div>
   );
 };
-
-// export const Component = inject(
-//   ({ settingsStore, backup, currentQuotaStore }) => {
-//     const { currentDeviceType, standalone, checkEnablePortalSettings } =
-//       settingsStore;
-//     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-//     const {
-//       getProgress,
-//       clearProgressInterval,
-//       setStorageRegions,
-//       setThirdPartyStorage,
-//       setConnectedThirdPartyAccount,
-//       setRestoreResource,
-//     } = backup;
-
-//     const buttonSize =
-//       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
-
-//     const isEnableRestore = checkEnablePortalSettings(
-//       isRestoreAndAutoBackupAvailable,
-//     );
-
-//     return {
-//       standalone,
-//       isEnableRestore,
-//       setStorageRegions,
-//       setThirdPartyStorage,
-//       buttonSize,
-//       setConnectedThirdPartyAccount,
-//       clearProgressInterval,
-//       getProgress,
-//       setRestoreResource,
-//     };
-//   },
-// )(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

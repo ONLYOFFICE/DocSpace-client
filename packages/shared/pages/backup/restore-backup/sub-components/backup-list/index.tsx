@@ -57,7 +57,7 @@ import type {
   TBackupListState,
 } from "./BackupList.types";
 import { initState } from "./BackupList.constants";
-import styles from "../../RestoreBackup.module.scss";
+import styles from "../../../Backup.module.scss";
 
 const BackupListModalDialog = ({
   isNotify,

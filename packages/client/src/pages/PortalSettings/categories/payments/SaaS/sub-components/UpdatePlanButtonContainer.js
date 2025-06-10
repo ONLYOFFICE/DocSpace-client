@@ -48,8 +48,7 @@ const StyledBody = styled.div`
 `;
 const StyledModalBody = styled.div`
   .text-warning {
-    margin: 16px 0 8px 0;
-    color: ${(props) => props.theme.client.settings.backup.warningColor};
+    margin-top: 16px;
   }
 `;
 
@@ -138,9 +137,7 @@ const UpdatePlanButtonContainer = ({
 
   const onUpdateTariff = async () => {
     try {
-      timerId = setTimeout(() => {
-        setIsLoading(true);
-      }, 500);
+      setIsLoading(true);
 
       if (isVisible) onClose();
 
@@ -283,12 +280,9 @@ const UpdatePlanButtonContainer = ({
                   }}
                 />
               </Text>
-              <Text className="text-warning" isBold fontSize="16px">
-                {t("Common:Warning")}
-              </Text>
-              <Text>
+              <Text className="text-warning">
                 <Trans
-                  i18nKey="PaymentNonRefundable"
+                  i18nKey="ActionCannotBeUndone"
                   ns="Payments"
                   t={t}
                   components={{

@@ -1,0 +1,232 @@
+{
+  "key_path": "FolderTitleSkyDrive",
+  "content": "OneDrive directory",
+  "content_en_sha1_hash": "c8e40ba514d8b937d8933bdd306cb4c0cf6ceba0",
+  "created_at": "2025-05-19T21:30:49.981Z",
+  "updated_at": "2025-06-03T20:59:41.988Z",
+  "comment": {
+    "text": "This translation key is used to display the title of a cloud storage directory in various UI contexts, such as file managers or dialogs. It should be translated to match the expected name of the corresponding cloud storage service (e.g., \"OneDrive\" for OneDrive). This string appears in code and may be displayed on-screen in user interfaces managing files from these services.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:32.537Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 111,
+      "context": "case \"GoogleDrive\":\n return t(\"Translations:FolderTitleGoogle\");\n \n case \"OneDrive\":\n case \"SkyDrive\":\n return t(\"Translations:FolderTitleSkyDrive\");\n \n case \"SharePoint\":\n return t(\"Translations:FolderTitleSharePoint\");\n case \"WebDav\":\n return t(\"Translations:FolderTitleWebDav\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'OneDrive գրացուցակ' directly translates to 'OneDrive list'. While technically accurate, 'directory' implies a higher-level organizational structure than just a list. A more accurate translation might convey that.",
+          "suggestion": "OneDrive թղթապանակ (OneDrive folder)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ໄດເລກະທໍລີ OneDrive' directly transliterates 'directory' which isn't the most natural or clear way to express the concept of an 'OneDrive directory'.  A more accurate and natural translation would focus on the meaning - a location or folder within OneDrive.",
+          "suggestion": "ໄດເລກະທໍລີ ຂອງ OneDrive"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Director OneDrive' is not a natural or accurate translation of 'OneDrive directory'. It's a literal translation that doesn't convey the intended meaning.",
+          "suggestion": "A more accurate translation would be 'dosarul OneDrive' or 'folder OneDrive'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'වන්ඩ්‍රයිව්' is a transliteration of 'OneDrive'. While understandable, a more localized or adapted version might be preferred for better naturalness in Sinhala. However, it's technically not *incorrect* in a literal sense.",
+          "suggestion": "Consider exploring alternative translations that more accurately reflect the concept of 'OneDrive directory' in Sinhala. For example, something along the lines of 'වන්ඩ්‍රයිව් ගොනුවලzeichnis' (OneDrive file directory) or consulting with a Sinhala language expert."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

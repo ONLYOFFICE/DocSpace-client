@@ -1,0 +1,262 @@
+{
+  "key_path": "ChooseFromList",
+  "content": "Choose from list",
+  "content_en_sha1_hash": "e284f61fe00c23c301b217153f5427eb75cab3eb",
+  "created_at": "2025-05-19T21:30:49.956Z",
+  "updated_at": "2025-05-28T09:30:02.202Z",
+  "comment": {
+    "text": "This translation key is used to display a message that prompts the user to select from a list of options in various UI components, including buttons and dialogs. The purpose of this text is to provide clear instructions to the user in moments when they need to make a choice from a predefined set of values. It appears as a label on a button component, guiding users through interactive elements.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:36.717Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 214,
+      "context": ") : (\n <StyledPeopleSelector>\n <SelectorAddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Translations:ChooseFromList\")}\n noSelect\n titleText={t(\"Translations:ChooseFromList\")}\n />\n </StyledPeopleSelector>\n )}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
+      "line_number": 214,
+      "context": ") : (\n <StyledPeopleSelector>\n <SelectorAddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Translations:ChooseFromList\")}\n noSelect\n titleText={t(\"Translations:ChooseFromList\")}\n />\n </StyledPeopleSelector>\n )}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/NewOwner.js",
+      "line_number": 68,
+      "context": "return (\n <StyledPeopleSelector>\n <SelectorAddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Translations:ChooseFromList\")}\n titleText={t(\"Translations:ChooseFromList\")}\n noSelect\n />\n </StyledPeopleSelector>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/NewOwner.js",
+      "line_number": 68,
+      "context": "return (\n <StyledPeopleSelector>\n <SelectorAddButton\n className=\"selector-add-button\"\n onClick={onTogglePeopleSelector}\n label={t(\"Translations:ChooseFromList\")}\n titleText={t(\"Translations:ChooseFromList\")}\n noSelect\n />\n </StyledPeopleSelector>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 584,
+      "context": "fontWeight=\"600\"\n type=\"action\"\n isHovered\n onClick={openUsersPanel}\n >\n {t(\"Translations:ChooseFromList\")}\n </StyledLink>\n ) : null}\n </StyledSubHeader>\n <StyledDescription\n noSelect",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
+      "line_number": 268,
+      "context": "fontWeight=\"600\"\n type={LinkType.action}\n isHovered\n onClick={openUsersPanel}\n >\n {t(\"Translations:ChooseFromList\")}\n </StyledLink>\n </StyledSubHeader>\n <StyledDescription>\n {t(\"Files:AddUsersOrGroupsDescription\")}\n </StyledDescription>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Escolha a partir da lista\" is understandable, it's not the most natural or idiomatic Portuguese translation for \"Choose from list\". A more common and accurate translation would be \"Escolha na lista\" or \"Selecione da lista\".",
+          "suggestion": "Escolha na lista"
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Escolha da lista\" is not the most natural or accurate translation of \"Choose from list.\" While it's understandable, it's a bit literal. A more idiomatic translation would be something like \"Selecione da lista\" or \"Escolha na lista\".",
+          "suggestion": "Selecione da lista"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"පහතින් තෝරන්න\" (pahathin thoranna) is understandable, it's a somewhat literal and not the most natural way to say \"Choose from list\" in Sinhala. It translates closer to \"Select from below\". A more accurate and natural translation would be something like \"รายการයෙන් තෝරන්න\" (ratharayen thoranna) which means \"choose from the list\".",
+          "suggestion": "รายการයෙන් තෝරන්න (ratharayen thoranna)"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Изабери са листе' is not the most natural or idiomatic Serbian (Cyrillic) translation for 'Choose from list'. A better translation would be 'Изабери из листе' or 'Избери из листе'. The preposition 'са' implies choosing *with* the list, while 'из' indicates choosing *from* the list.",
+          "suggestion": "Избери из листе"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -134,6 +134,11 @@
       unicode-bidi: plaintext;
     }
   }
+
+  &::selection {
+    color: var(--input-selection-text-color);
+    background: var(--input-selection-color);
+  }
 }
 
 @mixin common-input-styles {

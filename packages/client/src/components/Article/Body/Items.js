@@ -46,7 +46,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import AccountsItem from "./AccountsItem";
 import BonusItem from "./BonusItem";
-// import FlowsItem from "./FlowsItem";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -275,7 +274,7 @@ const Items = ({
 
       if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
         return draggableItems.some(
-          (draggableItem) => draggableItem.security.Delete,
+          (draggableItem) => draggableItem?.security?.Delete,
         );
       }
 
@@ -370,20 +369,6 @@ const Items = ({
             isActive={activeItemId === "accounts"}
           />,
         );
-
-      // if (!isVisitor) {
-      //   items.splice(
-      //     4,
-      //     0,
-      //     <FlowsItem
-      //       key="flows-item"
-      //       onClick={onClick}
-      //       getLinkData={getLinkData}
-      //       isActive={activeItemId === "flows"}
-      //       item={{ rootFolderType: FolderType.Flows }}
-      //     />,
-      //   );
-      // }
 
       if (!isVisitor) items.splice(3, 0, <CatalogDivider key="other-header" />);
       else items.splice(2, 0, <CatalogDivider key="other-header" />);

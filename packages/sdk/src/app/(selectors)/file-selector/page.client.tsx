@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import FilesSelector from "@docspace/shared/selectors/Files";
@@ -41,6 +41,7 @@ import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { Nullable } from "@docspace/shared/types";
+import SocketHelper from "@docspace/shared/utils/socket";
 import type {
   TFile,
   TFilesSettings,
@@ -86,6 +87,7 @@ type FilesSelectorClientProps = {
   selectedItemType: "rooms" | "files";
   total: number;
   logoText: string;
+  socketUrl: string;
 };
 
 export default function FilesSelectorClient({
@@ -103,10 +105,13 @@ export default function FilesSelectorClient({
   selectedItemType,
   total,
   logoText,
+  socketUrl,
 }: FilesSelectorClientProps) {
   const { sdkConfig } = useSDKConfig();
 
   const { t } = useTranslation(["Common"]);
+
+  const isInit = useRef(false);
 
   useDocumentTitle("FileSelector");
 
@@ -209,6 +214,13 @@ export default function FilesSelectorClient({
       isSelectedParentFolder,
     [],
   );
+
+  useEffect(() => {
+    if (isInit.current) return;
+
+    isInit.current = true;
+    SocketHelper.connect(socketUrl, "");
+  }, [socketUrl]);
 
   const getFilesArchiveError = useCallback(() => "", []);
 

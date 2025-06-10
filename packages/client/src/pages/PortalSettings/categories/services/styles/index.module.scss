@@ -28,6 +28,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-bottom: 20px;
+  user-select: none;
 }
 
 .storageInfo {
@@ -44,7 +46,7 @@
 }
 .totalContainer {
   margin-top: auto;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .currentTariffCount {
@@ -58,4 +60,13 @@
 .currentPayment,
 .currentPaymentWrapper {
   margin-bottom: 8px;
+}
+
+.monthPayment {
+  color: var(--payment-dialog-text);
+}
+
+.cancelDialog {
+  margin-bottom: 16px;
+  user-select: none;
 }

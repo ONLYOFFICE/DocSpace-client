@@ -35,6 +35,7 @@ import {
 } from "@docspace/shared/store";
 
 import PaymentStore from "./PaymentStore";
+import ServicesStore from "./ServicesStore";
 import StorageManagement from "./StorageManagement";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
@@ -88,10 +89,8 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
-import FlowStore from "./FlowStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
-const flowStore = new FlowStore();
 
 const pluginStore = new PluginStore(
   settingsStore,
@@ -105,6 +104,14 @@ const paymentStore = new PaymentStore(
   currentQuotaStore,
   paymentQuotasStore,
 );
+const servicesStore = new ServicesStore(
+  userStore,
+  currentTariffStatusStore,
+  currentQuotaStore,
+  paymentQuotasStore,
+  paymentStore,
+);
+
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore(authStore, thirdPartyStore);
@@ -118,7 +125,7 @@ const tagsStore = new TagsStore();
 const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
-const infoPanelStore = new InfoPanelStore(userStore, flowStore);
+const infoPanelStore = new InfoPanelStore(userStore);
 const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(
@@ -165,7 +172,6 @@ const filesStore = new FilesStore(
   currentTariffStatusStore,
   settingsStore,
   indexingStore,
-  flowStore,
 );
 
 const guidanceStore = new GuidanceStore();
@@ -282,7 +288,6 @@ const contextOptionsStore = new ContextOptionsStore(
   indexingStore,
   clientLoadingStore,
   guidanceStore,
-  flowStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -361,6 +366,7 @@ const store = {
   settingsStore,
 
   paymentStore,
+  servicesStore,
   wizardStore,
   setup: setupStore,
   confirm: confirmStore,
@@ -410,7 +416,6 @@ const store = {
   avatarEditorDialogStore,
 
   brandingStore,
-  flowStore,
 
   guidanceStore,
 };

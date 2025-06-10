@@ -41,6 +41,7 @@ import ArticleLiveChat from "./sub-components/LiveChat";
 import ArticleApps from "./sub-components/Apps";
 import ArticleDevToolsBar from "./sub-components/DevToolsBar";
 import HideArticleMenuButton from "./sub-components/HideMenuButton";
+import BackButton from "./sub-components/BackButton";
 
 import styles from "./Article.module.scss";
 import { HEADER_NAME, MAIN_BUTTON_NAME, BODY_NAME } from "./Article.constants";
@@ -114,6 +115,7 @@ const Article = ({
   downloaddesktopUrl,
   officeforandroidUrl,
   officeforiosUrl,
+  showBackButton,
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
     React.useState<null | React.JSX.Element>(null);
@@ -250,6 +252,7 @@ const Article = ({
           withCustomArticleHeader={withCustomArticleHeader}
           isBurgerLoading={isBurgerLoading}
           onIconClick={toggleArticleOpen}
+          showBackButton={showBackButton}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
@@ -269,6 +272,12 @@ const Article = ({
           className="article-body__scrollbar"
           scrollClass="article-scroller"
         >
+          {showBackButton && currentDeviceType !== DeviceType.mobile ? (
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+            />
+          ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader ? (
             <>

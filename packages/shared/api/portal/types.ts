@@ -32,6 +32,7 @@ export type TQuotas = {
   quantity: number;
   wallet?: boolean;
   dueDate?: string;
+  nextQuantity?: number;
 };
 
 export type TPortalTariff = {
@@ -80,7 +81,7 @@ export type TPaymentQuota = {
   id: number;
   title: string;
   price: {
-    value: string;
+    value: number;
     currencySymbol?: string;
     isoCurrencySymbol?: string;
   };
@@ -161,6 +162,7 @@ export type TTransactionCollection = {
   credit: number;
   withdrawal: number;
   currency: string;
+  description: string;
 };
 
 export type TTransactionHistory = {

@@ -99,6 +99,7 @@ const Shell = ({ page = "home", ...rest }) => {
     setLogoText,
     standalone,
     isGuest,
+    setSocialAuthWelcomeDialogVisible,
   } = rest;
 
   const theme = useTheme();
@@ -436,6 +437,16 @@ const Shell = ({ page = "home", ...rest }) => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
+  useEffect(() => {
+    if (
+      isLoaded &&
+      localStorage.getItem("showSocialAuthWelcomeDialog") === "true"
+    ) {
+      localStorage.removeItem("showSocialAuthWelcomeDialog");
+      setSocialAuthWelcomeDialogVisible(true);
+    }
+  }, [isLoaded]);
+
   const pathname = window.location.pathname.toLowerCase();
   const isEditor = pathname.indexOf("doceditor") !== -1;
 
@@ -539,7 +550,6 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
-    flowStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -592,6 +602,7 @@ const ShellWrapper = inject(
       formFillingTipsVisible,
 
       setFormCreationInfo,
+      setSocialAuthWelcomeDialogVisible,
     } = dialogsStore;
     const { user } = userStore;
 
@@ -603,7 +614,7 @@ const ShellWrapper = inject(
 
     return {
       loadBaseInfo: async () => {
-        await Promise.all([init(false, i18n), flowStore.autoLogin()]);
+        await init(false, i18n);
 
         setModuleInfo(config.homepage, "home");
         setProductVersion(config.version);
@@ -648,6 +659,7 @@ const ShellWrapper = inject(
       logoText,
       setLogoText,
       standalone,
+      setSocialAuthWelcomeDialogVisible,
     };
   },
 )(observer(Shell));

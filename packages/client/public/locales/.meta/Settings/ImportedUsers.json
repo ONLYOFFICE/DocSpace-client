@@ -1,0 +1,283 @@
+{
+  "key_path": "ImportedUsers",
+  "content": "{{selectedUsers}}/{{importedUsers}} users were imported successfully.",
+  "content_en_sha1_hash": "04dc717736a56bbad5ee1b15ee74f64a7f797b7e",
+  "created_at": "2025-05-19T21:30:51.642Z",
+  "updated_at": "2025-05-28T09:30:02.513Z",
+  "comment": {
+    "text": "This translation key is used to display a success message when importing users in the Portal Settings. It shows the total number of imported users and indicates that some users were successfully imported. The translated text appears on an info text element within an import complete step component.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:06.545Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
+      "line_number": 139,
+      "context": "}, [getMigrationStatus, t]);\n \n return (\n <>\n <InfoText>\n {t(\"Settings:ImportedUsers\", {\n selectedUsers: importResult.succeedUsers,\n importedUsers: importResult.succeedUsers + importResult.failedUsers,\n })}\n </InfoText>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Azerbaijani translation uses the singular form 'istifadəçi' (user) when the English refers to multiple users ('users'). It should be the plural form.",
+          "suggestion": "Use the plural form: \"{{selectedUsers}}/{{importedUsers}} istifadəçilər uğurla idxal edildi.\" "
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically plausible with the correction above, consider aligning the verb agreement more closely with the English structure, especially if the intended meaning is a compound result. The direct translation emphasizes the action of importing.",
+          "suggestion": "Consider: \"{{selectedUsers}}/{{importedUsers}} istifadəçi idxal etmə uğurla tamamlandı.\" or \"{{selectedUsers}}/{{importedUsers}} istifadəçi uğurla idxal olundu.\""
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'imported' should be translated more accurately to reflect the meaning of bringing users *into* the system. 'Входирани' implies login or entry into a specific session, not importing.",
+          "suggestion": "Consider using a term like 'вносени' (vnoseni) which means 'imported' in the sense of bringing something into a system."
+        }
+      ],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb tense in the Spanish translation is incorrect. 'se ha importado' (has been imported) implies a completed action, but the context suggests a process. It should be in the present tense to indicate a continuing process or a recent action.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} usuarios se importan correctamente."
+        }
+      ],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'importées' should agree in gender with the noun 'utilisateurs'. Since 'utilisateurs' is masculine plural, the past participle should be masculine plural as well.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} utilisateurs ont été importés avec succès."
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'օգտվողները' (ogtvoghnerē) is technically correct, but could be improved for clarity and natural flow. While it translates to 'users', it might sound slightly formal in this context.",
+          "suggestion": "Consider using a more conversational phrasing like 'Օգտվողները ներմուծվեցին' (Ogtvoghnerē nermudvecin), meaning 'The users were imported'."
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the Armenian sentence is not a standard practice and might appear unnatural. While grammatically correct, it can make the translation sound more stilted.",
+          "suggestion": "Remove the colon at the end of the sentence. The sentence would end with a period."
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '가져오기했습니다' is a literal translation of 'imported' and doesn't convey the meaning of 'imported successfully'. It sounds awkward in Korean.",
+          "suggestion": "Consider a more natural phrasing like '성공적으로 가져왔습니다' or '가져오기를 완료했습니다'.  A more contextually appropriate option might be '가져왔습니다' if success is implied by the overall situation."
+        }
+      ],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses a space before the opening curly brace '{' in the variables, which may be inconsistent with other parts of the application.  While not incorrect, standard practice is often no space.",
+          "suggestion": "ນຳເຂົ້າຜູ້ໃຊ້{{selectedUsers}}/{{importedUsers}} ສຳເລັດແລ້ວ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'au fost importate' (were imported) should agree in number with 'utilizatori' (users), which is plural. The correct form should be 'au fost importați'.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} utilizatori au fost importați cu succes."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්' is a less common and potentially less natural word for 'users'. 'භාවිතකරන්නන්' or 'පරිශීලකයෝ' might be more appropriate depending on the specific context.",
+          "suggestion": "පරිශීලකයෝ or භාවිතකරන්නන්"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure feels a bit stiff. A more natural phrasing might improve readability. The current phrasing emphasizes the *number* of users.",
+          "suggestion": "සාර්ථකව {{selectedUsers}}/{{importedUsers}} පරිශීලකයින් ආයාත කෙරිණි."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation is slightly awkward. A more natural phrasing would be to state how many users were imported.",
+          "suggestion": "Úspešne importovaných bolo {{selectedUsers}}/{{importedUsers}} používateľov."
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

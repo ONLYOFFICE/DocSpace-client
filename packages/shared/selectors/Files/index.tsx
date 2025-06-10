@@ -55,6 +55,7 @@ import { getDefaultBreadCrumb } from "./FilesSelector.utils";
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
     disabledItems,
+    includedItems,
     filterParam,
 
     treeFolders,
@@ -223,6 +224,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     selectedItemId,
     searchValue,
     disabledItems,
+    includedItems,
     isThirdParty,
     filterParam,
     isRoomsOnly,

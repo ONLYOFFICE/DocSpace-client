@@ -332,8 +332,6 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  console.log("ENV", { env });
-
   config.devtool = "source-map";
 
   const isProduction = argv.mode === "production";
@@ -467,9 +465,7 @@ module.exports = (env, argv) => {
     htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
       runtime.checksums["browserDetector.js"] || dateHash
     }`;
-    htmlTemplate.chatWidget = `/static/scripts/chatWidget.js?hash=${
-      runtime.checksums["chatWidget.js"] || dateHash
-    }`;
+
     htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
       runtime.checksums["config.json"] || dateHash
     }`;

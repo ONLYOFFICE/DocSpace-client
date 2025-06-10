@@ -1,0 +1,238 @@
+{
+  "key_path": "CustomRoomTitle",
+  "content": "Custom room",
+  "content_en_sha1_hash": "0839c4e1eb680a458fad43d77aa71faffff6d7c4",
+  "created_at": "2025-05-19T21:30:44.386Z",
+  "updated_at": "2025-06-03T20:59:42.127Z",
+  "comment": {
+    "text": "This translation key \"CustomRoomTitle\" is used to display the label for custom rooms in various UI elements. It is likely used as a button title or a room type filter option, and its content should reflect the desired human-readable name for these custom rooms.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:36:47.291Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
+      "line_number": 97,
+      "context": "label: t(\"Common:PublicRoom\"),\n roomType: RoomsType.PublicRoom,\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),\n roomType: RoomsType.CustomRoom,\n },\n ];\n \n const [version, onSetVersion] = useState(sdkVersion[200]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
+      "line_number": 130,
+      "context": "label: t(\"Common:PublicRoom\"),\n roomType: RoomsType.PublicRoom,\n },\n {\n key: \"room-type-custom\",\n label: t(\"Common:CustomRoomTitle\"),\n roomType: RoomsType.CustomRoom,\n },\n ];\n \n const filterOptions = [",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 17,
+      "context": "case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomTitle\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomTitle\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoom\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomTitle\");",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Sala particularizată' is a literal translation, it's not the most natural or commonly used phrasing for \"Custom room\" in Romanian. It sounds a bit formal and clunky.",
+          "suggestion": "Consider alternatives like 'Cameră personalizată', 'Cameră proprie', or 'Cameră individuală' depending on the context. 'Cameră personalizată' is likely the best overall choice."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'අභිරුචි කාමරය' (abiruchi kamaraya) translates more closely to 'whimsical room' or 'arbitrary room' rather than 'custom room'. While 'අභිරුචි' (abiruchi) can relate to taste/preference, it doesn't directly convey the sense of customization.",
+          "suggestion": "Consider using a translation like 'පිටcustomize කළ කාමරය' (pītakam customize kala kamaraya) which literally means 'customized room', or 'අපේ කැමැත්තට අනුව කාමරය' (ape kametta anuva kamaraya) which means 'room according to our wish'."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Прилагођена соба\" is a literal translation of 'Custom room' but may not be the most natural or idiomatic way to express the concept. 'Custom' often implies a user-created or personalized experience.",
+          "suggestion": "Consider alternatives like \"Корисничка соба\" (User room), \"Соба по мери\" (Room tailored to your needs), or \"Моја соба\" (My room), depending on the exact context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

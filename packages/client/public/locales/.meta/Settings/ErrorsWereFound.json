@@ -1,0 +1,302 @@
+{
+  "key_path": "ErrorsWereFound",
+  "content": "{{errors}} errors were found",
+  "content_en_sha1_hash": "11d153f3db1683b3e3c58c3ddd299e7ff10894bf",
+  "created_at": "2025-05-19T21:30:51.557Z",
+  "updated_at": "2025-05-28T09:30:02.513Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that errors were found during data import, typically when importing failed users. It appears on screen in the case of an import failure, providing context to the user about what went wrong.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:45:09.975Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
+      "line_number": 147,
+      "context": "})}\n </InfoText>\n \n {importResult.failedUsers > 0 ? (\n <ErrorText>\n {t(\"Settings:ErrorsWereFound\", {\n errors: importResult.failedUsers,\n })}\n </ErrorText>\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a direct transliteration of 'were found' instead of a more natural Arabic phrasing. While understandable, it sounds less fluent.",
+          "suggestion": "تم العثور على {{errors}} خطأ"
+        }
+      ],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'were found' is better translated as 'nalezeno' to match the grammatical structure of Czech. While 'bylo nalezeno' is technically correct, it's less natural and flows less smoothly in Czech.  A more idiomatic phrasing would improve the clarity and feel.",
+          "suggestion": "nalezeno {{errors}} chyb"
+        }
+      ],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Greek word for 'errors' is 'λάθη' (lathi), not 'σφάλματα' (sfalmata). While 'σφάλματα' can sometimes be used to mean 'mistakes', 'λάθη' is the more accurate translation in this context.",
+          "suggestion": "Replace 'σφάλματα' with 'λάθη'"
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Finnish translation should use the plural form of 'error' ('virhettä') because the number of errors is variable (represented by {{errors}}). The current form 'virhettä' is correct for a singular or a small number of errors, but may need adjustment if the number of errors is large.",
+          "suggestion": "Consider using a more contextually appropriate plural form of 'virhe' if the number of errors could be very large. For example, using 'virheitä' might be better if the number of errors is known to be substantial."
+        }
+      ],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{errors}} Գտնվել են սխալներ' is a literal translation of 'errors were found'. A more natural and idiomatic Armenian phrasing would be 'գտնվել է {{errors}} սխալներ' (gotndvel e {{errors}} sxalner) meaning 'there were found {{errors}} errors' or 'կարելի է գտնվել {{errors}} սխալներ' (kareli e gndvel {{errors}} sxalner) meaning 'it is possible to find {{errors}} errors'.",
+          "suggestion": "գտնվել են {{errors}} սխալներ (gotndvel en {{errors}} sxalner)"
+        }
+      ],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'errors' is Laoized as 'ຂໍ້ຜິດພາດ' which, while understandable, is not the most common or natural translation for 'errors' in this context. A more direct translation would improve clarity.",
+          "suggestion": "ພົບ {{errors}} ຄວາມຜິດພາດ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Latvian translation uses the masculine form of 'error' (-s) regardless of the number of errors. It should be declined based on the value of {{errors}}.",
+          "suggestion": "Modify the translation to handle both masculine and feminine forms depending on the number of errors.  For example: 'tika atrasta (-s){{errors}} kļūda (-s)' needs to adapt for singular and plural.  A better approach would be to split the string and use conditional logic in the UI to render 'tika atrasta kļūda' when {{errors}} is 1, and 'tika atrasta kļūdas' when it's greater than 1."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation includes an optional ending '-ów' for 'błędy'. This is grammatically correct but may require context to determine the correct form. Without more context, it's difficult to definitively say if it's appropriate.  It should be reviewed for grammatical agreement with the number represented by {{errors}}.",
+          "suggestion": "Review the grammatical agreement of 'błędy(-ów)' with the number represented by {{errors}}. If {{errors}} is plural, '-ów' is likely correct. If it's singular, it should be 'błąd'."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'were found' is not the most natural translation for 'were found' in this context. It sounds a bit literal.",
+          "suggestion": "Consider 's-au găsit' or 'au fost detectate' instead of 'au fost găsite'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'දෝෂ {{errors}} ක් හමු විය' is not the most natural or accurate translation of '{{errors}} errors were found'. A more accurate and natural translation would be something like '{{errors}} වැරැදි හමු විය' or '{{errors}} දෝෂයන් හමු විය'.",
+          "suggestion": "{{errors}} වැරැදි හමු විය"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses 'ක්' after the number, which is not always necessary or natural. While grammatically valid, it can sound slightly awkward.",
+          "suggestion": "Remove 'ක්' after the variable {{errors}}"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation '{{errors}} chýb nájdených' doesn't accurately convey the meaning of '{{errors}} errors were found'. The phrasing is awkward and unnatural.",
+          "suggestion": "{{errors}} zistených chýb"
+        },
+        {
+          "type": "grammar",
+          "description": "The Slovak translation '{{errors}} chýb nájdených' uses the incorrect grammatical case for 'errors.' It should be in the genitive case.",
+          "suggestion": "{{errors}} zistených chýb"
+        }
+      ],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'грешке су пронађене' is not grammatically correct or idiomatic. 'Greške' means 'mistakes' (plural), but the sentence structure implies a singular subject. The plural form is also inconsistent with the English 'errors'.",
+          "suggestion": "Consider a translation like \"Пронађено је {{errors}} грешака\" (Pronađeno je {{errors}} grešaka) - \"{{errors}} errors were found\" or \"Нађено је {{errors}} грешака\" (Nađeno je {{errors}} grešaka) - \"{{errors}} errors were found\"."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'errors were found' is better translated as 'đã phát hiện {{errors}} lỗi' rather than 'đã tìm thấy {{errors}} lỗi'.  'Tìm thấy' implies a search, while 'phát hiện' implies discovery or detection, which is more appropriate for errors.",
+          "suggestion": "đã phát hiện {{errors}} lỗi"
+        }
+      ],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation uses '个' (ge) after the number, which is generally required for counting concrete nouns. While technically correct, in a settings message, a slightly more formal or streamlined phrasing might be preferred.",
+          "suggestion": "发现 {{errors}} 个错误"
+        }
+      ],
+      "approved_at": null
+    }
+  }
+}

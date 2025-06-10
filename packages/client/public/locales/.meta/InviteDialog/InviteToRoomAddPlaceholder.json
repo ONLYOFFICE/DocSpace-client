@@ -1,0 +1,28 @@
+{
+  "key_path": "InviteToRoomAddPlaceholder",
+  "content": "Add people by name or email",
+  "content_en_sha1_hash": "8293f0c6e55cfbc44981432a63a2fcdf69e93014",
+  "created_at": "2025-05-28T09:33:07.786Z",
+  "updated_at": "2025-06-03T20:59:41.976Z",
+  "comment": {
+    "text": "This translation key is used as a placeholder text when inviting people by name or email. It appears on an input field in the InvitePanel component, prompting users to add people to a room. Translators should provide a clear and concise message for this context.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:34:11.291Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 653,
+      "context": "onChange={onChange}\n placeholder={\n roomId === -1\n ? t(\"InviteMembersSearchPlaceholder\")\n : !allowInvitingGuests\n ? t(\"InviteToRoomAddPlaceholder\")\n : t(\"InviteToRoomSearchPlaceholder\")\n }\n value={inputValue}\n onKeyDown={onKeyDown}\n type=\"search\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

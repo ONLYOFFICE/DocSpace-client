@@ -28,10 +28,13 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
+import { TOTAL_SIZE } from "@docspace/shared/constants";
 
 import AdditionalStorage from "./AdditionalStorage";
-import StorageDialog from "./StorageDialog";
+import StoragePlanUpgrade from "./StoragePlanUpgrade";
 import ServicesLoader from "./ServicesLoader";
+
+import StoragePlanCancel from "./StoragePlanCancel";
 
 type ServicesProps = {
   servicesInit: () => void;
@@ -45,7 +48,8 @@ const Services: React.FC<ServicesProps> = ({
   isInitServicesPage,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isStorageVisible, setIsStorageVisible] = useState(false);
+  const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
@@ -73,11 +77,25 @@ const Services: React.FC<ServicesProps> = ({
   }, []);
 
   const onClick = () => {
-    setIsVisible(true);
+    setIsStorageVisible(true);
   };
 
   const onClose = () => {
-    setIsVisible(false);
+    setIsStorageVisible(false);
+  };
+
+  const onCloseStorageCancell = () => {
+    setIsStorageCancellation(false);
+  };
+
+  const onToggle = (id, enabled) => {
+    if (id === TOTAL_SIZE) {
+      if (enabled) {
+        setIsStorageCancellation(true);
+        return;
+      }
+      setIsStorageVisible(true);
+    }
   };
 
   return shouldShowLoader ? (
@@ -86,14 +104,22 @@ const Services: React.FC<ServicesProps> = ({
     ) : null
   ) : (
     <>
-      <AdditionalStorage onClick={onClick} />
-      <StorageDialog visible={isVisible} onClose={onClose} />
+      <AdditionalStorage onClick={onClick} onToggle={onToggle} />
+      {isStorageVisible ? (
+        <StoragePlanUpgrade visible={isStorageVisible} onClose={onClose} />
+      ) : null}
+      {isStorageCancelattion ? (
+        <StoragePlanCancel
+          visible={isStorageCancelattion}
+          onClose={onCloseStorageCancell}
+        />
+      ) : null}
     </>
   );
 };
 
-export const Component = inject(({ paymentStore }: TStore) => {
-  const { servicesInit, isInitServicesPage } = paymentStore;
+export const Component = inject(({ servicesStore }: TStore) => {
+  const { servicesInit, isInitServicesPage } = servicesStore;
 
   return {
     servicesInit,

@@ -1,0 +1,337 @@
+{
+  "key_path": "LinkCopySuccess",
+  "content": "Link has been copied to the clipboard",
+  "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
+  "created_at": "2025-05-19T21:30:46.142Z",
+  "updated_at": "2025-06-03T20:59:41.970Z",
+  "comment": {
+    "text": "This translation key is used to display a success message when a link is successfully copied to the clipboard, typically in a button or link copy action. It appears as an alert or notification in UI components such as ExternalLinks and MetadataUrlField, and is used to provide a positive feedback to users after they have copied a link.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:41.864Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
+      "line_number": 87,
+      "context": "const inputsRef = useRef();\n \n const copyLink = (link) => {\n if (link) {\n toastr.success(\n `${t(\"Common:LinkCopySuccess\")}. ${t(\"Translations:LinkValidTime\", {\n days_count: 7,\n })}`,\n );\n \n copyShareLink(link);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/MetadataUrlField.js",
+      "line_number": 72,
+      "context": "}) => {\n const { t } = useTranslation(\"Translations\");\n \n const onCopyClick = () => {\n copy(placeholder);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n return (\n <StyledWrapper>\n <Text className=\"label\" fontSize=\"13px\" as=\"div\" fontWeight={600}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 473,
+      "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 473,
+      "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 473,
+      "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 473,
+      "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 473,
+      "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 473,
+      "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 473,
+      "context": "? `${window.location.href}&preview=${id}`\n : webUrl\n : `${window.location.origin + config.homepage}/filter?folder=${id}`, // TODO: Change url by category\n );\n \n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n onCopyLink = async (item, t) => {\n const { shared, navigationPath } = this.selectedFolderStore;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
+      "line_number": 113,
+      "context": "const origin = window.location.origin;\n \n const url = `${origin}/doceditor?fileId=${completedForm.id}`;\n \n await copyShareLink(url);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleDownload = () => {\n window.open(completedForm.viewUrl, \"_self\");\n };",
+      "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
+      "line_number": 180,
+      "context": "window.location.assign(fileURL);\n };\n \n const copyLinkFile = async () => {\n await copyShareLink(fileURL);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleClickFile = () => {\n if (isYournTurn) handleFillForm();\n else handleViewForm();",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'buferə' is not the standard word for 'clipboard' in Azerbaijani. While it's understandable, 'keçirildi' (copied) is correctly translated, but the word 'buferə' can be misinterpreted.",
+          "suggestion": "Link məclisinə (Link meclisina) suruldu"
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Presse-papiers' is technically correct but may be less familiar to some French speakers. 'Clipboar' would be more common and understandable.",
+          "suggestion": "Le lien a été copié dans le presse-papiers (or Le lien a été copié dans le clipboar)"
+        }
+      ],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'clipboard' is transliterated but not fully integrated into Lao. The correct Lao word for clipboard should be used.",
+          "suggestion": "ລິ້ງໄດ້ຖືກສໍາເນົາໄປບ່ອນຕິດເຄື່ອງ"
+        },
+        {
+          "type": "grammar",
+          "description": "While understandable, the sentence structure could be improved for a more natural flow in Lao. Using 'ສຳເນົາ' directly alongside 'ລິ້ງ' might sound slightly awkward.",
+          "suggestion": "ລິ້ງຖືກສຳເນົາໃສ່ clipboard"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'klembord' is an older term for clipboard and less common than 'knipbord' in modern Dutch.  'Knipbord' is the standard term.",
+          "suggestion": "Link is gekopieerd naar het knipbord"
+        }
+      ],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Link foi copiado para a área de trabalho' is not the most accurate translation of 'Link has been copied to the clipboard'. 'Área de trabalho' translates to 'desktop' or 'work area', not 'clipboard'.",
+          "suggestion": "Link foi copiado para a área de transferência"
+        }
+      ],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Încărcarea fișierului media eșuată' translates to 'Media file upload failed'. This is not an accurate translation of 'Link has been copied to the clipboard'.",
+          "suggestion": "A correct translation could be 'Link-ul a fost copiat în clipboard' or 'Legătura a fost copiată în clipboard'."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සබැඳිය පසුරුපුවරුවට පිටපත් විය' while literally meaning 'Link copied to the clipboard,' sounds unnatural and overly formal in Sinhala. A more natural phrasing would be preferred.",
+          "suggestion": "Consider using a phrasing like 'සබැඳිය ක්ලිප්බෝඩ් වෙත පිටපත් කරන ලදි' or 'සබැඳිය ක්ලිප්බෝඩ් වලට එක් කරන ලදි'."
+        },
+        {
+          "type": "formatting",
+          "description": "The term ' පසුරුපුවරුව' (backpaper) is a less common and potentially confusing term for clipboard. Using a more common equivalent will improve clarity.",
+          "suggestion": "Replace ' පසුරුපුවරුව' with a more common term for clipboard. It may be best to omit it entirely as the context clearly indicates what happened."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Линк је копиран на привремену меморију\" is not the most natural or accurate translation of \"Link has been copied to the clipboard\". \"Привремену меморију\" literally translates to 'temporary memory', which is not how 'clipboard' is typically understood in Serbian. While technically correct, it is not user-friendly.",
+          "suggestion": "Линк је копиран у клипборд"
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'клипборд' is an English loanword and should ideally be transliterated or adapted to Serbian orthography for consistency.",
+          "suggestion": "Линк је копиран у лепборд"
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Link je kopiran na privremenu memoriju' is technically correct but 'privremena memorija' literally translates to 'temporary memory', which is not commonly used in this context. The preferred term would be 'sistemski isečak' (system clipboard) or simply 'isečak' (clipboard).",
+          "suggestion": "Link je kopiran u isečak."
+        }
+      ],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

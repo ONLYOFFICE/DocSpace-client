@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
@@ -39,10 +40,11 @@ type PaymentMethodProps = {
   walletCustomerEmail: boolean;
   cardLinked: string;
   accountLink: string;
+  isDisabled: boolean;
 };
 
 const PaymentMethod = (props: PaymentMethodProps) => {
-  const { walletCustomerEmail, cardLinked, accountLink } = props;
+  const { walletCustomerEmail, cardLinked, accountLink, isDisabled } = props;
 
   const { t } = useTranslation("Payments");
 
@@ -71,7 +73,11 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         ) : null}
       </div>
       {walletCustomerEmail ? (
-        <div className={styles.cardLinked}>
+        <div
+          className={classNames(styles.cardLinked, {
+            [styles.cardLinkDisabled]: isDisabled,
+          })}
+        >
           <div className={styles.tickedWrapper}>
             <CheckReactSvg />
             <Text fontWeight={600} fontSize="14px">
@@ -87,7 +93,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
           </Link>
         </div>
       ) : (
-        <div className={styles.addPaymentMethodContainer} onClick={goLinkCard}>
+        <div className={styles.addPaymentMethodContainer}>
           <SelectorAddButton onClick={goLinkCard} />
           <Text fontWeight={600}>{t("AddPaymentMethod")}</Text>
         </div>

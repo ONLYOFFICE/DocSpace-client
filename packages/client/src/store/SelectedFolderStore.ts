@@ -445,13 +445,6 @@ class SelectedFolderStore {
       this.setChangeDocumentsTabs(false);
     }
   };
-
-  get isAIRoom() {
-    return (
-      this.roomType === RoomsType.AIRoom ||
-      this.navigationPath.some((r) => r.roomType === RoomsType.AIRoom)
-    );
-  }
 }
 
 export default SelectedFolderStore;

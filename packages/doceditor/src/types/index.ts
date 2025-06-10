@@ -335,6 +335,7 @@ export interface SelectFolderDialogProps {
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
   organizationName: string;
+  selectedFolderId?: string | number;
 }
 
 export interface SelectFileDialogProps {
@@ -370,6 +371,7 @@ export interface SelectFileDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
+  selectedFolderId?: string | number;
 }
 
 export interface UseSocketHelperProps {

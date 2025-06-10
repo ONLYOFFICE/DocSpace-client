@@ -57,6 +57,7 @@ type TransactionHistoryProps = {
   openOnNewPage?: boolean;
   isTransactionHistoryExist?: boolean;
   currentDeviceType?: DeviceType;
+  isNotPaidPeriod?: boolean;
 };
 
 const formatDate = (date: moment.Moment) => date.format("YYYY-MM-DDTHH:mm:ss");
@@ -69,6 +70,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     openOnNewPage,
     isTransactionHistoryExist,
     currentDeviceType,
+    isNotPaidPeriod,
   } = props;
 
   const { t } = useTranslation(["Payments", "Settings"]);
@@ -216,7 +218,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             <DatePicker
               initialDate={startDate}
               onChange={onStartDateChange}
-              selectDateText={t("SelectStartDate")}
+              selectDateText={t("Common:SelectDate")}
               locale={moment.locale()}
               openDate={startDate}
               minDate={undefined}
@@ -229,7 +231,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             <DatePicker
               initialDate={endDate}
               onChange={onEndDateChange}
-              selectDateText={t("SelectEndDate")}
+              selectDateText={t("Common:SelectDate")}
               locale={moment.locale()}
               openDate={endDate}
               minDate={startDate}
@@ -305,6 +307,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             minWidth="auto"
             onClick={getReport}
             isLoading={isFormationHistory}
+            isDisabled={isNotPaidPeriod}
           />
           <Text as="span" className={styles.downloadReportDescription}>
             {t("Settings:ReportSaveLocation", {
@@ -362,11 +365,13 @@ export default inject(
       getEndTransactionDate,
       fetchTransactionHistory,
       isTransactionHistoryExist,
+      currentTariffStatusStore,
     } = paymentStore;
 
     const { openOnNewPage } = filesSettingsStore;
 
     const { currentDeviceType } = settingsStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
 
     const userId = userStore.user?.id;
 
@@ -378,6 +383,7 @@ export default inject(
       userId,
       currentDeviceType,
       isTransactionHistoryExist,
+      isNotPaidPeriod,
     };
   },
 )(observer(TransactionHistory));

@@ -27,7 +27,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
 import {
@@ -364,17 +363,43 @@ export function updatePayment(adminCount, isYearTariff) {
   });
 }
 
-export function buyStorage(amount, productQuantityType) {
+export function updateWalletPayment(
+  amount: number | null,
+  productQuantityType: number,
+) {
   return request({
     method: "put",
-    url: `/portal/payment/update`,
+    url: `/portal/payment/updatewallet`,
     data: {
       quantity: {
-        storage: +amount,
+        storage: amount,
       },
       productQuantityType,
     },
   });
+}
+
+export function calcalateWalletPayment(
+  amount: number,
+  productQuantityType: number,
+  signal?: AbortSignal,
+) {
+  return request({
+    method: "put",
+    url: `/portal/payment/calculatewallet`,
+    data: {
+      quantity: {
+        storage: amount,
+      },
+      productQuantityType,
+    },
+    signal,
+  }) as {
+    operationId: number;
+    amount: number;
+    currency: string;
+    quantity: number;
+  };
 }
 
 export function getCurrencies() {
@@ -523,7 +548,7 @@ export async function getTransactionHistoryReport(
 
 export async function getPortal() {
   const options = {
-    method: "post",
+    method: "get",
     url: "/portal",
   };
   const res = (await request(options)) as TPortal;

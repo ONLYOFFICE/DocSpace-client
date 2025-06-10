@@ -511,3 +511,57 @@
     margin: 0;
   }
 }
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  @include desktop {
+    p {
+      font-size: 13px;
+    }
+    margin-inline-start: 12px;
+  }
+
+  @include tablet {
+    &[data-show-article="false"] {
+      justify-content: center;
+    }
+    &[data-show-article="true"] {
+      margin-inline-start: 8px;
+    }
+  }
+
+  @include mobile {
+    margin-bottom: 0;
+    margin-inline-start: 4px;
+  }
+
+  .arrowIcon {
+    @include desktop {
+      width: 16px !important;
+      height: 16px !important;
+
+      svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    }
+
+    width: 20px;
+    height: 20px;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}

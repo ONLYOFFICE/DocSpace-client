@@ -1,0 +1,260 @@
+{
+  "key_path": "MaxLengthExceeded",
+  "content": "The maximum length of a user name or another local part is 64 characters.",
+  "content_en_sha1_hash": "ba7b9b65a0fda5b91b2999cd6da74cf668a5cc1d",
+  "created_at": "2025-05-19T21:30:46.386Z",
+  "updated_at": "2025-05-28T09:30:02.190Z",
+  "comment": {
+    "text": "\"This translation key is used to display an error message when a user name exceeds the maximum allowed length of 64 characters. It appears in dialogs where users are prompted to update their email address or local part.\"",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:35:33.120Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
+      "line_number": 148,
+      "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"Common:ManyEmails\");\n case ErrorKeys.EmptyEmail:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/common.ts",
+      "line_number": 175,
+      "context": "case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:\n return t(\"Common:IncorrectDomain\");\n }\n });",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses the term 'elektron poçtun' which translates to 'email'. The original English refers to usernames or any 'local part' of an address, not solely email. The term 'local part' is crucial to maintain the original meaning.",
+          "suggestion": "İstifadəçi adının və ya digər yerli hissənin maksimal uzunluğu 64 simvoldur."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'simvoldur' is a valid term, it's less common. A more prevalent alternative exists.",
+          "suggestion": "İstifadəçi adının və ya digər yerli hissənin maksimal uzunluğu 64 xarakterdir."
+        }
+      ],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'symbols' ('Symbole') isn't the best translation for 'characters' in this context. 'Zeichen' would be more accurate as it directly translates to characters.",
+          "suggestion": "Die maximale Länge für den Benutzernamen oder anderen lokalen Teil beträgt 64 Zeichen."
+        }
+      ],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ໂຕອັກສອນ' (to akson) which translates to 'characters' is correct, but 'ພາກສ່ວນພື້ນຖານ' (pak suan phuen than) translates to 'local part' and could be more accurately translated to something like 'ສ່ວນອີ້ນອີ້ນ' (suan ien ien) which more closely conveys the meaning of 'local part' or 'prefix'.",
+          "suggestion": "ຄວາມຍາວສູງສຸດຂອງຊື່ຜູ້ໃຊ້ຫລືສ່ວນອີ້ນອີ້ນອື່ນໆແມ່ນ 64 ໂຕອັກສອນ."
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Maksymalna długość identyfikatora użytkownika wynosi 64 znaki.' doesn't accurately reflect the English meaning. 'Identifier' is too specific. The English says 'user name or another local part'.",
+          "suggestion": "Maksymalna długość nazwy użytkownika lub innej części lokalnej wynosi 64 znaki."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses \"имя почтового ящика\" (mailbox name) instead of \"имя пользователя\" (user name) which aligns better with the English content. The original English mentions \"user name or another local part,\" which is more general than just a mailbox name.",
+          "suggestion": "Максимальная длина имени пользователя или другой локальной части - 64 символа."
+        }
+      ],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'local part' is not accurately translated. 'Local part' refers to the part of an email address before the @ symbol, or in this context, the user name. The translation implies a general 'location' or 'place' instead.",
+          "suggestion": "Consider translating 'local part' as 'විද්‍යුත් ලිපිනය කොටස' (widhyut lipinaya kotasa) which means 'email address part' or 'පරිශ්‍රීලක නාමයේ පළමු කොටස' (parishreelaka naamayey palamu kotasa) meaning 'the first part of the username'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'අකුරු' (akuru) is slightly awkward in this context. While it literally means 'letters/characters', a more natural phrasing might exist.",
+          "suggestion": "Consider replacing 'අකුරු' with 'අක්ෂර' (akshara) which is a more formal and potentially more appropriate term for 'characters' in this technical context."
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

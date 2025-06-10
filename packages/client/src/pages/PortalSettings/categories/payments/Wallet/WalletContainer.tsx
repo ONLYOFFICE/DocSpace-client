@@ -67,14 +67,14 @@ type WalletProps = {
   walletBalance: number;
   language: string;
   walletCodeCurrency: string;
-  isPayer: boolean;
-  cardLinkedOnFreeTariff: boolean;
-  isFreeTariff: boolean;
-  isNonProfit: boolean;
   isVisibleWalletSettings: boolean;
   wasChangeBalance?: boolean;
+  isCardLinkedToPortal?: boolean;
   fetchBalance?: () => Promise<void>;
   fetchTransactionHistory?: () => Promise<void>;
+  canUpdateTariff: VoidFunction;
+  setVisibleWalletSetting?: (value: boolean) => void;
+  isNotPaidPeriod?: boolean;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -91,14 +91,14 @@ const Wallet = (props: WalletProps) => {
     walletBalance,
     language,
     walletCodeCurrency,
-    isPayer,
-    cardLinkedOnFreeTariff,
-    isFreeTariff,
-    isNonProfit,
+    isCardLinkedToPortal,
     isVisibleWalletSettings,
     wasChangeBalance,
     fetchBalance,
     fetchTransactionHistory,
+    canUpdateTariff,
+    setVisibleWalletSetting,
+    isNotPaidPeriod,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -115,6 +115,7 @@ const Wallet = (props: WalletProps) => {
 
   const onClose = () => {
     setVisible(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting(false);
   };
 
   const onOpen = () => {
@@ -127,33 +128,40 @@ const Wallet = (props: WalletProps) => {
     setIsEditAutoPayment(true);
   };
 
-  const isDisbled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
-
   const onClick = async () => {
+    if (isRefreshing) return;
+
     setIsRefreshing(true);
 
     const startTime = Date.now();
 
     try {
       await Promise.all([fetchBalance!(), fetchTransactionHistory!()]);
-
-      const elapsedTime = Date.now() - startTime;
-      const minimumAnimationTime = 1000;
-
-      const waitForAnimation = async () => {
-        const delay = minimumAnimationTime - elapsedTime;
-        await new Promise((resolve) => {
-          setTimeout(resolve, delay);
-        });
-      };
-
-      if (elapsedTime < minimumAnimationTime) {
-        await waitForAnimation();
-      }
     } catch (e) {
       toastr.error(e as Error);
     } finally {
-      setIsRefreshing(false);
+      const elapsedTime = Date.now() - startTime;
+      const animationCycleTime = 1000;
+
+      if (elapsedTime < animationCycleTime) {
+        const delay = animationCycleTime - elapsedTime;
+
+        setTimeout(() => {
+          setIsRefreshing(false);
+        }, delay);
+      } else {
+        const totalNeededTime =
+          Math.ceil(elapsedTime / animationCycleTime) * animationCycleTime;
+        const remainingTime = totalNeededTime - elapsedTime;
+
+        if (remainingTime > 0) {
+          setTimeout(() => {
+            setIsRefreshing(false);
+          }, remainingTime);
+        } else {
+          setIsRefreshing(false);
+        }
+      }
     }
   };
 
@@ -162,9 +170,7 @@ const Wallet = (props: WalletProps) => {
       <Text className={styles.walletDescription}>
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {!isNonProfit && (cardLinkedOnFreeTariff || !isFreeTariff) ? (
-        <PayerInformation />
-      ) : null}
+      {isCardLinkedToPortal ? <PayerInformation /> : null}
 
       <div className={styles.balanceWrapper}>
         <div className={styles.headerContainer}>
@@ -172,7 +178,7 @@ const Wallet = (props: WalletProps) => {
             {t("BalanceText")}
           </Text>
 
-          {cardLinkedOnFreeTariff ? (
+          {!isNotPaidPeriod && isCardLinkedToPortal ? (
             <RefreshIconButton isRefreshing={isRefreshing} onClick={onClick} />
           ) : null}
         </div>
@@ -193,7 +199,7 @@ const Wallet = (props: WalletProps) => {
           primary
           label={t("TopUpBalance")}
           onClick={onOpen}
-          isDisabled={isDisbled}
+          isDisabled={!canUpdateTariff || isNotPaidPeriod}
         />
       </div>
 
@@ -216,20 +222,28 @@ const Wallet = (props: WalletProps) => {
 };
 
 export default inject(
-  ({ paymentStore, authStore, currentQuotaStore }: TStore) => {
+  ({
+    paymentStore,
+    authStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+  }: TStore) => {
     const { language } = authStore;
     const {
       walletBalance,
       cardLinked,
-      cardLinkedOnFreeTariff,
       walletCodeCurrency,
       isPayer,
       isVisibleWalletSettings,
       wasChangeBalance,
       fetchBalance,
       fetchTransactionHistory,
+      canUpdateTariff,
+      setVisibleWalletSetting,
+      isCardLinkedToPortal,
     } = paymentStore;
-    const { isFreeTariff, isNonProfit } = currentQuotaStore;
+    const { isFreeTariff } = currentQuotaStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
 
     return {
       walletBalance,
@@ -237,13 +251,15 @@ export default inject(
       language,
       cardLinked,
       isPayer,
-      cardLinkedOnFreeTariff,
       isFreeTariff,
-      isNonProfit,
       isVisibleWalletSettings,
       wasChangeBalance,
       fetchBalance,
       fetchTransactionHistory,
+      canUpdateTariff,
+      setVisibleWalletSetting,
+      isCardLinkedToPortal,
+      isNotPaidPeriod,
     };
   },
 )(observer(Wallet));

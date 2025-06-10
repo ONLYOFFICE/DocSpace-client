@@ -285,6 +285,7 @@
   "SendInviteLetter": "Send invite letter",
   "SendNotificationAboutRestoring": "Send notification about space restoring to users",
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
+  "Services": "Services",
   "ServiceUrl": "Service URL",
   "SessionLifetime": "Session Lifetime",
   "SessionLifetimeMobileDescription": "Session Lifetime allows to set time (in minutes) before the {{productName}} users will need to enter the space credentials again in order to access the space.",

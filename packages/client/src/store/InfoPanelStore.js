@@ -61,6 +61,8 @@ import {
 } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import api from "@docspace/shared/api";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 const observedKeys = [
   "id",
@@ -81,8 +83,6 @@ const infoShare = "info_share";
 
 class InfoPanelStore {
   userStore = null;
-
-  flowStore = null;
 
   isVisible = false;
 
@@ -141,9 +141,8 @@ class InfoPanelStore {
     startIndex: 0,
   };
 
-  constructor(userStore, flowStore) {
+  constructor(userStore) {
     this.userStore = userStore;
-    this.flowStore = flowStore;
 
     makeAutoObservable(this);
   }
@@ -155,8 +154,6 @@ class InfoPanelStore {
   };
 
   setIsVisible = (bool) => {
-    if (bool) this.flowStore.setAiChatIsVisible(false);
-
     const selectedFolderIsRoomOrFolderInRoom =
       this.selectedFolderStore &&
       !this.selectedFolderStore.isRootFolder &&
@@ -469,6 +466,10 @@ class InfoPanelStore {
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
     this.filesStore.resetSelections();
+
+    const locale = getCookie(LANGUAGE);
+
+    user.registrationDate = getCorrectDate(locale, user.registrationDate);
 
     navigate(combineUrl(...path), { state: { user } });
   };

@@ -242,14 +242,6 @@ const generalRoutes = [
               ),
           ),
       },
-      {
-        path: "onlyflow",
-        lazy: () =>
-          componentLoader(
-            () =>
-              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
-          ),
-      },
     ],
   },
 ];

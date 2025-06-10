@@ -85,7 +85,6 @@ export const getUserRoleOptionsByRoomType = (
         ...deleteOption,
       ];
     case RoomsType.CustomRoom:
-    case RoomsType.AIRoom:
       return [
         options.roomAdmin,
         options.collaborator,

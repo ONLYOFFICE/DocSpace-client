@@ -42,11 +42,9 @@ const Tabs = (props: TabsProps) => {
   const {
     items,
     selectedItemId,
-    selectedItems = [],
     type = TabsTypes.Primary,
     stickyTop,
     onSelect,
-    multiple = false,
     allowNoSelection = false,
     withoutStickyIntend = false,
     layoutId,
@@ -60,9 +58,6 @@ const Tabs = (props: TabsProps) => {
       ? -1
       : 0
     : items.findIndex((item) => item.id === selectedItemId);
-
-  // const [currentItem, setCurrentItem] = useState(selectedItemIndex);
-  const [multipleItems, setMultipleItems] = useState(selectedItems);
 
   const tabsRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<ScrollbarType>(null);
@@ -121,35 +116,10 @@ const Tabs = (props: TabsProps) => {
   );
 
   useEffect(() => {
-    // if (!multiple) setCurrentItem(selectedItemIndex);
-
     scrollToTab(selectedItemIndex);
-  }, [selectedItemIndex, items, scrollToTab, /* multiple, */ type]);
+  }, [selectedItemIndex, items, scrollToTab, type]);
 
   const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
-    if (multiple) {
-      const indexOperation = () => {
-        const newArray = [...multipleItems];
-
-        const deletionIndex = newArray.indexOf(index);
-
-        if (deletionIndex !== -1) {
-          newArray.splice(deletionIndex, 1);
-
-          return newArray;
-        }
-
-        newArray.push(index);
-        return newArray;
-      };
-
-      const updatedActiveTab = indexOperation();
-
-      setMultipleItems(updatedActiveTab);
-      onSelect?.(selectedTabItem);
-      return;
-    }
-
     // setCurrentItem(index);
     onSelect?.(selectedTabItem);
 
@@ -157,7 +127,6 @@ const Tabs = (props: TabsProps) => {
   };
 
   const classes = classNames({
-    [styles.multiple]: multiple,
     [styles.primary]: type === TabsTypes.Primary,
     [styles.secondary]: type === TabsTypes.Secondary,
   });
@@ -169,9 +138,7 @@ const Tabs = (props: TabsProps) => {
       ref={tabsRef}
     >
       {items.map((item, index) => {
-        const isSelected = multiple
-          ? multipleItems.indexOf(index) !== -1
-          : index === selectedItemIndex;
+        const isSelected = index === selectedItemIndex;
 
         return (
           <div
@@ -223,31 +190,28 @@ const Tabs = (props: TabsProps) => {
 
   return (
     <div className={classNames(styles.tabs, classes)} {...rest}>
-      {multiple ? renderContent : null}
-
-      {!multiple ? (
-        <div
-          data-sticky
-          className={classNames(styles.sticky, classes, "sticky")}
-          style={{ top: stickyTop }}
+      <div
+        data-sticky
+        className={classNames(styles.sticky, classes, "sticky")}
+        style={{ top: stickyTop }}
+      >
+        {!isViewFirstTab ? <div className={styles.blurAhead} /> : null}
+        <Scrollbar
+          ref={scrollRef}
+          autoHide={false}
+          noScrollY
+          paddingInlineEnd="0"
+          className={classNames(styles.scroll, classes)}
         >
-          {!isViewFirstTab ? <div className={styles.blurAhead} /> : null}
-          <Scrollbar
-            ref={scrollRef}
-            autoHide={false}
-            noScrollY
-            paddingInlineEnd="0"
-            className={classNames(styles.scroll, classes)}
-          >
-            {renderContent}
-          </Scrollbar>
-          {!isViewLastTab ? <div className={styles.blurBack} /> : null}
-        </div>
-      ) : null}
+          {renderContent}
+        </Scrollbar>
+        {!isViewLastTab ? <div className={styles.blurBack} /> : null}
+      </div>
+
       {withoutStickyIntend ? null : (
         <div className={classNames(styles.stickyIndent, "sticky-indent")} />
       )}
-      {!multiple && items[selectedItemIndex]?.content ? (
+      {items[selectedItemIndex]?.content ? (
         <div className={`${styles.tabsBody} tabs-body`}>
           {items[selectedItemIndex].content}
         </div>

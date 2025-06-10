@@ -68,11 +68,6 @@
 
 .tabs {
   font-family: var(--font-family);
-
-  &.multiple {
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 .scroll {
@@ -137,11 +132,6 @@
     padding: 4px;
     border-radius: 5px;
     height: 36px;
-  }
-
-  &.multiple {
-    flex-wrap: wrap;
-    height: fit-content;
   }
 }
 

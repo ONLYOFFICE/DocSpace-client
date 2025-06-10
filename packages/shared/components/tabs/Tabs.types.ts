@@ -49,7 +49,6 @@ export type TabsProps = {
   items: TTabItem[];
   /** Selected item of tabs. */
   selectedItemId: number | string;
-  selectedItems?: number[];
   /** Theme for displaying tabs. */
   type?: TabsTypes;
   /** Tab indentation for sticky positioning. */

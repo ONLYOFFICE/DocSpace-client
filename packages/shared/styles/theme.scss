@@ -2480,12 +2480,12 @@
   --settings-payment-warning-color: #{$light-error-status};
   --settings-payment-color: #{$light-status-warning};
   --settings-payment-border: 1px solid #{$gray-light};
-  --settings-payment-bg-benefits-color: 1px solid #{$gray-light};
+  --settings-payment-bg-benefits-color: #{$gray-light};
 }
 
 .dark {
   --settings-payment-warning-color: #{$dark-error-status};
   --settings-payment-color: #{$dark-status-warning};
   --settings-payment-border: 1px solid #{$gray-dark-strong};
-  --settings-payment-bg-benefits-color: 1px solid #{$black};
+  --settings-payment-bg-benefits-color: #{$black};
 }

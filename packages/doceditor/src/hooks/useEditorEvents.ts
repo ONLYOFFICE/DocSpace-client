@@ -26,7 +26,7 @@
 
 import React, { useCallback } from "react";
 import isUndefined from "lodash/isUndefined";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import { type IConfig } from "@onlyoffice/document-editor-react";
 
@@ -99,7 +99,6 @@ const useEditorEvents = ({
   onStartFillingVDRPanel,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
-  const pathname = usePathname();
 
   const [documentReady, setDocumentReady] = React.useState(false);
   const [createUrl, setCreateUrl] = React.useState<Nullable<string>>(null);
@@ -233,17 +232,9 @@ const useEditorEvents = ({
         }
       });
 
-      history.pushState({}, "", `${pathname}${search}`);
+      history.pushState({}, "", `/doceditor${search}`);
     }
-  }, [
-    config?.Error,
-    errorMessage,
-    isSkipError,
-    searchParams,
-    pathname,
-    t,
-    fixSize,
-  ]);
+  }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize]);
 
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });

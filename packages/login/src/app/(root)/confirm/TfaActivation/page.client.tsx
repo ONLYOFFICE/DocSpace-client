@@ -166,37 +166,31 @@ const TfaActivationForm = ({
           t={t}
           i18nKey="SetAppDescription"
           ns="Confirm"
-          productName={t("Common:ProductName")}
-        >
-          The two-factor authentication is enabled to provide additional portal
-          security. Configure your authenticator application to continue work on
-          the portal. For example you could use Google Authenticator for
-          <Link
-            color={theme.currentColorScheme?.main?.accent}
-            href={TFA_ANDROID_APP_URL}
-            target={LinkTarget.blank}
-          >
-            Android
-          </Link>
-          and{" "}
-          <Link
-            color={theme.currentColorScheme?.main?.accent}
-            href={TFA_IOS_APP_URL}
-            target={LinkTarget.blank}
-          >
-            iOS
-          </Link>{" "}
-          or Authenticator for{" "}
-          <Link
-            color={theme.currentColorScheme?.main?.accent}
-            href={TFA_WIN_APP_URL}
-            target={LinkTarget.blank}
-          >
-            Windows Phone
-          </Link>{" "}
-          .
-        </Trans>
-
+          values={{ productName: t("Common:ProductName") }}
+          components={{
+            1: (
+              <Link
+                color="accent"
+                href={TFA_ANDROID_APP_URL}
+                target={LinkTarget.blank}
+              />
+            ),
+            4: (
+              <Link
+                color="accent"
+                href={TFA_IOS_APP_URL}
+                target={LinkTarget.blank}
+              />
+            ),
+            8: (
+              <Link
+                color="accent"
+                href={TFA_WIN_APP_URL}
+                target={LinkTarget.blank}
+              />
+            ),
+          }}
+        />
         <Text className="set-app-text">
           <Trans
             t={t}

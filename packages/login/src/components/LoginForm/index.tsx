@@ -527,7 +527,7 @@ const LoginForm = ({
       return t("Common:RequiredField");
     }
     if (emailFromInvitation) {
-      return errorText ? t(`Common:${errorText}`) : t("Common:RequiredField");
+      return errorText ? errorText : t("Common:RequiredField");
     }
   };
 

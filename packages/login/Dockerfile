@@ -29,7 +29,11 @@ COPY public/ ./public/
 # Install dependencies with recursive installation
 RUN pnpm install --frozen-lockfile
 
-RUN npx playwright install chromium --with-deps
+# Clear any existing global Playwright installations to avoid conflicts
+RUN npm uninstall -g playwright playwright-core @playwright/test
+
+# Install Playwright browsers directly from the project's dependency
+RUN cd /app/packages/login && pnpm exec playwright install chromium --with-deps
 
 # Run before-build script (packages/runtime.json)
 RUN pnpm run before-build
@@ -40,4 +44,4 @@ RUN pnpm --filter @docspace/login run build:translations
 WORKDIR /app/packages/login
 
 # Run test:build
-RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/login run test:build
+RUN pnpm --filter @docspace/login run test:build

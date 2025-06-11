@@ -2125,6 +2125,9 @@
   --payment-icon-color: #{$light-gray-dark};
   --payment-dialog-text: #{$gray};
   --payment-devider-color: #{$gray-light-mid};
+  --payment-contact-container-text-color: #{$gray};
+  --payment-contact-container-link-color: #{$light-gray-dark};
+
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
@@ -2138,6 +2141,9 @@
   --payment-icon-color: #{$dark-gray-dark};
   --payment-dialog-text: #{$gray-dark};
   --payment-devider-color: #{$gray-dark-mid};
+  --payment-contact-container-text-color: #{$dark-gray-dark};
+  --payment-contact-container-link-color: #{$gray-dark};
+
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};

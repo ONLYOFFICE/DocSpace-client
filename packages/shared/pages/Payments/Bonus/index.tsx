@@ -34,8 +34,8 @@ import { BenefitsContainer } from "../Standalone/BenefitsContainer";
 import { ContactContainer } from "./ContactContainer";
 import { OfficialDocumentation } from "./OfficialDocumentation";
 
-import { StyledBonus } from "./Bonus.styled";
 import { IBonusProps } from "./Bonus.types";
+import styles from "./Bonus.module.scss";
 
 export const Bonus = ({
   isEnterprise,
@@ -56,7 +56,7 @@ export const Bonus = ({
   if (!ready) return <PaymentsStandaloneLoader />;
 
   return (
-    <StyledBonus>
+    <div className={styles.bonus}>
       <BenefitsContainer
         isTrial={isTrial}
         isEnterprise={isEnterprise}
@@ -83,6 +83,6 @@ export const Bonus = ({
         demoOrderUrl={demoOrderUrl}
         feedbackAndSupportUrl={feedbackAndSupportUrl}
       />
-    </StyledBonus>
+    </div>
   );
 };

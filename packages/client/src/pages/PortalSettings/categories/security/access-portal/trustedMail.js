@@ -66,6 +66,7 @@ const TrustedMail = (props) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const navigate = useNavigate();
@@ -112,6 +113,12 @@ const TrustedMail = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("TrustedMail");
+  }, [currentDeviceType, isLoading]);
 
   useEffect(() => {
     checkWidth();

@@ -36,6 +36,8 @@ import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?u
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
+import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
+
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -202,6 +204,12 @@ class ProfileActionsStore {
     const supportUrl = this.settingsStore.feedbackAndSupportUrl;
 
     window.open(supportUrl, "_blank");
+  };
+
+  onSuggestFeatureClick = () => {
+    const SuggestFeatureUrl = this.settingsStore.suggestFeatureUrl;
+
+    window.open(SuggestFeatureUrl, "_blank");
   };
 
   onBookTraining = () => {
@@ -443,6 +451,14 @@ class ProfileActionsStore {
         label: t("Common:FeedbackAndSupport"),
         onClick: this.onSupportClick,
         url: this.settingsStore.feedbackAndSupportUrl || "#",
+        preventNewTab: true,
+      },
+      feedbackAndSupportEnabled && {
+        key: "user-menu-suggest-feature",
+        icon: LampReactSvgUrl,
+        label: t("Common:SuggestFeature"),
+        onClick: this.onSuggestFeatureClick,
+        url: this.settingsStore.suggestFeatureUrl || "#",
         preventNewTab: true,
       },
       bookTraining,

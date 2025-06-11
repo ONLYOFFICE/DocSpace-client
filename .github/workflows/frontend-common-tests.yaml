@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Cleanup existing containers
-        run: docker ps -a --filter name=login-tests-ci -q | xargs -r docker rm -f
+        run: docker ps -a --filter name=sdk-tests-ci -q | xargs -r docker rm -f
       - uses: adambirds/docker-compose-action@v1.5.0
         with:
           compose-file: packages/sdk/compose.yaml

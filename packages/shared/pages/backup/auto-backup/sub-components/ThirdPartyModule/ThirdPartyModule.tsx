@@ -31,7 +31,7 @@ import { BackupStorageType, ProvidersType } from "@docspace/shared/enums";
 import { DirectThirdPartyConnection } from "@docspace/shared/components/direct-third-party-connection";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import styles from "../../../Backup.module.scss";
+import styles from "../../AutoBackup.module.scss";
 import { ScheduleComponent } from "../ScheduleComponent";
 import { ThirdPartyModuleProps } from "./ThirdPartyModule.types";
 

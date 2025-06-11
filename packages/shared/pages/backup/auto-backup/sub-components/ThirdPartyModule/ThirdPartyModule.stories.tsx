@@ -32,7 +32,7 @@ import { fn } from "@storybook/test";
 import { BackupStorageType } from "@docspace/shared/enums";
 import { ButtonSize } from "@docspace/shared/components/button";
 
-import styles from "../../../Backup.module.scss";
+import styles from "../../AutoBackup.module.scss";
 import {
   hoursArray,
   maxNumberCopiesArray,

@@ -26,11 +26,10 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import classNames from "classnames";
 
 import { ThirdPartyStorages } from "@docspace/shared/enums";
 
-import styles from "../../../Backup.module.scss";
+import styles from "../../AutoBackup.module.scss";
 import {
   periodsObject,
   weekdaysLabelArray,
@@ -131,7 +130,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className={classNames(styles.backupCommon, styles.autoBackup)}>
+      <div className={styles.autoBackup}>
         <Story />
       </div>
     ),

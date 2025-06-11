@@ -27,12 +27,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { http, HttpResponse } from "msw";
-import classNames from "classnames";
 import { action } from "@storybook/addon-actions";
 
 import { ButtonSize } from "@docspace/shared/components/button";
 
-import styles from "../../../Backup.module.scss";
+import styles from "../../ManualBackup.module.scss";
 import { selectedStorages, storageRegions } from "../../../mockData";
 import ThirdPartyStorageModule from "./ThirdPartyStorageModule";
 
@@ -63,7 +62,7 @@ const meta = {
   decorators: [
     (Story) => {
       return (
-        <div className={classNames(styles.manualBackup, styles.backupCommon)}>
+        <div className={styles.manualBackup}>
           <Story />
         </div>
       );

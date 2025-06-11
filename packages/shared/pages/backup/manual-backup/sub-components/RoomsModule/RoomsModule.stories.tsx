@@ -26,12 +26,11 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { http, HttpResponse } from "msw";
-import classNames from "classnames";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { ButtonSize } from "@docspace/shared/components/button";
 
-import styles from "../../../Backup.module.scss";
+import styles from "../../ManualBackup.module.scss";
 import RoomsModule from "./RoomsModule";
 
 const meta: Meta<typeof RoomsModule> = {
@@ -57,7 +56,7 @@ const meta: Meta<typeof RoomsModule> = {
   decorators: [
     (Story) => {
       return (
-        <div className={classNames(styles.backupCommon, styles.manualBackup)}>
+        <div className={styles.manualBackup}>
           <Story />
         </div>
       );

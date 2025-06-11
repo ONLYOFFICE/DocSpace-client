@@ -45,7 +45,7 @@ import { RadioButton } from "@docspace/shared/components/radio-button";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 import type { BackupListBodyProps } from "./BackupList.types";
-import styles from "../../../Backup.module.scss";
+import styles from "../../RestoreBackup.module.scss";
 
 const VirtualScroll = (props: CustomScrollbarsVirtualListProps) => (
   <CustomScrollbarsVirtualList

@@ -45,7 +45,7 @@ import type {
   TTranslation,
 } from "@docspace/shared/types";
 
-import styles from "../../../../Backup.module.scss";
+import styles from "../../../ManualBackup.module.scss";
 
 interface AmazonStorageProps {
   t: TTranslation;

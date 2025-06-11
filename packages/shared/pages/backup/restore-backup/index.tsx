@@ -64,7 +64,7 @@ import {
   STORAGE_SPACE,
 } from "./RestoreBackup.constants";
 import type { RestoreBackupProps } from "./RestoreBackup.types";
-import styles from "../Backup.module.scss";
+import styles from "./RestoreBackup.module.scss";
 
 export const RestoreBackup = (props: RestoreBackupProps) => {
   const {
@@ -398,7 +398,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
   return (
     <div
       data-testid="restore-backup"
-      className={classNames(styles.restoreBackup, styles.backupCommon, {
+      className={classNames(styles.restoreBackup, {
         [styles.isEnableRestore]: isEnableRestore,
       })}
     >

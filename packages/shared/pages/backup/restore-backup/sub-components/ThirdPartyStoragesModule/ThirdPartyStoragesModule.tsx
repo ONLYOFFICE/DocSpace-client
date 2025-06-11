@@ -46,7 +46,7 @@ import { RackspaceStorage } from "../storages/RackspaceStorage";
 import { SelectelStorage } from "../storages/SelectelStorage";
 
 import { ThirdPartyStoragesModuleProps } from "./ThirdPartyStoragesModule.types";
-import styles from "../../../Backup.module.scss";
+import styles from "../../RestoreBackup.module.scss";
 
 const DefaultState = {
   comboBoxOptions: [],

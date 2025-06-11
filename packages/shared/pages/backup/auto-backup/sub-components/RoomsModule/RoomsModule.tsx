@@ -38,7 +38,7 @@ import type {
 } from "@docspace/shared/types";
 
 import { ScheduleComponent } from "../ScheduleComponent";
-import styles from "../../../Backup.module.scss";
+import styles from "../../AutoBackup.module.scss";
 import {
   RoomsModuleProps,
   BackupToPublicRoomDialogState,

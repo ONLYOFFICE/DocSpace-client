@@ -164,7 +164,3 @@ export interface ManualBackupProps {
   ) => Promise<Window | null>;
   // end thirdPartyStore
 }
-
-export interface StyledModulesProps {
-  isDisabled?: boolean;
-}

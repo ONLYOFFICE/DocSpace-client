@@ -27,317 +27,13 @@
  */
 
 @use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables";
 
-$input-length: 350px;
-$text-length: 700px;
-
-.backupCommon {
-  .backupModulesDescription {
-    margin-bottom: 8px;
-    max-width: $text-length;
-    color: var(--settings-common-description-color);
-  }
-
-  .backupModulesHeaderWrapper {
-    svg {
-      margin-block: 5px 0;
-      margin-inline: 4px 0;
-    }
-    .linkLearnMore {
-      display: inline-block;
-      font-weight: 600;
-    }
-  }
-
-  :global(.radio-button_text) {
-    margin-inline-end: 7px;
-  }
-
-  .backupRadioButton {
-    margin-bottom: 4px;
-  }
-
-  .backupCombo {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    width: 100%;
-    max-width: $input-length;
-
-    :global(.combo-button-label) {
-      width: 100%;
-      max-width: $input-length;
-    }
-
-    @include mixins.mobile {
-      max-width: 100%;
-    }
-  }
-
-  :global(.backup_text-input) {
-    margin: 4px 0 10px 0;
-    width: 100%;
-    max-width: $input-length;
-    font-size: 13px;
-
-    @include mixins.mobile {
-      max-width: 100%;
-    }
-  }
-
-  :global(.backup_checkbox) {
-    margin-top: 8px;
-    margin-bottom: 16px;
-  }
-
-  :global(.backup_radio-button-settings) {
-    margin-top: 8px;
-    margin-bottom: 16px;
-  }
-
-  .backupRadioButton {
-    max-width: fit-content;
-    font-size: 12px;
-    line-height: 15px;
-    -webkit-tap-highlight-color: variables.$tap-highlight;
-  }
-
-  .modules {
-    margin-bottom: 24px;
-
-    .backupDescription {
-      margin-inline-start: 25px;
-      max-width: 700px;
-    }
-  }
-
-  .comboboxItem {
-    display: flex;
-
-    .dropDownItemText {
-      color: var(--text-color);
-    }
-
-    &.isDisabled {
-      .dropDownItemText {
-        color: variables.$gray;
-      }
-    }
-
-    .dropDownItemIcon {
-      display: flex;
-      align-self: center;
-
-      div {
-        display: flex;
-      }
-
-      margin-inline-start: auto;
-
-      svg {
-        min-height: 16px;
-        min-width: 16px;
-      }
-    }
-  }
-}
-
-/* ==================================== AUTO BACKUP ==================================== */
-
-.autoBackup {
-  .autoBackupThirdPartyModule {
-    margin-top: 16px;
-    margin-inline-start: 24px;
-
-    button {
-      margin-bottom: 16px;
-    }
-  }
-
-  :global(.backup_schedule-component) {
-    margin-inline-start: 24px;
-  }
-
-  :global(.automatic-backup_main) {
-    margin-bottom: 30px;
-  }
-
-  .backupToggleBtn {
-    position: static;
-    margin-top: 1px;
-  }
-
-  :global(.toggle-button-text) {
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  :global(.input-with-folder-path) {
-    margin-top: 16px;
-    margin-bottom: 8px;
-    width: 100%;
-    max-width: $input-length;
-  }
-
-  .autoBackupStoragesModule {
-    margin-inline-start: 24px;
-
-    :global(.backup_schedule-component) {
-      margin-inline-start: 0;
-    }
-  }
-
-  .autoBackupFolderInput {
-    margin-inline-start: 24px;
-  }
-
-  :global(.input-with-folder-path) {
-    margin-top: 16px;
-    margin-bottom: 8px;
-    width: 100%;
-    max-width: $input-length;
-  }
-
-  .autoBackupStoragesModule {
-    margin-inline-start: 24px;
-
-    :global(.backup_schedule-component) {
-      margin-inline-start: 0;
-    }
-  }
-
-  .autoBackupFolderInput {
-    margin-inline-start: 24px;
-  }
-
-  .backupToggleWrapper {
-    display: flex;
-    margin-top: 20px;
-    margin-bottom: 16px;
-    border-radius: 6px;
-    background-color: var(--settings-common-backup-rectangle-bg-color);
-    padding: 12px;
-    max-width: 724px;
-    box-sizing: border-box;
-  }
-
-  .toggleCaption {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    .toggleCaptionTitle {
-      display: flex;
-      .autoBackupBadge {
-        margin-inline-start: 4px;
-        cursor: auto;
-      }
-    }
-  }
-
-  &.pageIsDisabled {
-    .settingsUnavailable {
-      color: var(--text-disable-color);
-      pointer-events: none;
-      cursor: default;
-
-      label {
-        color: var(--text-disable-color);
-      }
-
-      path {
-        color: var(--text-disable-color);
-      }
-    }
-  }
-
-  .modules {
-    margin-top: 20px;
-  }
-}
-
-/* ==================================== MANUAL BACKUP ==================================== */
-
-.manualBackup {
-  .backupModulesHeaderWrapper {
-    .linkLearnMore {
-      margin-bottom: 20px;
-    }
-  }
-
-  .manualBackupButtons {
-    margin-top: 16px;
-    margin-inline-start: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    button:first-child {
-      max-width: 124px;
-      margin-inline-end: 8px;
-    }
-
-    button:last-child {
-      max-width: 153px;
-    }
-
-    @include mixins.tablet-and-below {
-      button:first-child {
-        max-width: 129px;
-      }
-
-      button:last-child {
-        max-width: 160px;
-      }
-    }
-
-    @include mixins.mobile {
-      button:first-child {
-        max-width: 155px;
-      }
-
-      button:last-child {
-        max-width: 155px;
-      }
-    }
-  }
-
-  .manualBackupStoragesModule {
-    margin-inline-start: 24px;
-
-    .manualBackupButtons {
-      margin-inline-start: 0;
-    }
-  }
-
-  .manualBackupThirdPartyModule {
-    margin-top: 16px;
-    margin-inline-start: 24px;
-  }
-
-  .manualBackupFolderInput {
-    margin-inline-start: 24px;
-    margin-top: 16px;
-  }
-
-  .modules {
-    &.isDisabled {
-      .backupDescription {
-        color: variables.$gray;
-      }
-    }
-  }
-
-  .comboboxItem {
-    .dropDownItemIcon {
-      align-items: center;
-    }
-  }
-}
-
-/* ==================================== RESTORE BACKUP ==================================== */
+@use "../backup";
 
 .restoreBackup {
-  max-width: $text-length;
+  @include backup.common-styles;
+
+  max-width: backup.$text-length;
 
   .restoreBackupThirdPartyModule {
     margin-top: 16px;
@@ -348,7 +44,7 @@ $text-length: 700px;
   }
 
   .restoreDescription {
-    max-width: $text-length;
+    max-width: backup.$text-length;
     font-size: 13px;
     color: var(--settings-common-description-color);
     line-height: 20px;
@@ -364,11 +60,11 @@ $text-length: 700px;
 
   .restoreBackupWarningLink {
     margin-top: 16px;
-    max-width: $text-length;
+    max-width: backup.$text-length;
   }
 
   .restoreBackupWarningDescription {
-    max-width: $text-length;
+    max-width: backup.$text-length;
   }
 
   .restoreBackupDescription {
@@ -399,7 +95,7 @@ $text-length: 700px;
 
   .restoreBackupInput {
     margin: 16px 0;
-    max-width: $input-length;
+    max-width: backup.$input-length;
 
     @include mixins.mobile {
       max-width: none;

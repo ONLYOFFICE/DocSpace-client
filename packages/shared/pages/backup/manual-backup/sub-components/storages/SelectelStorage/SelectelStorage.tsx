@@ -40,7 +40,7 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
 
-import styles from "../../../../Backup.module.scss";
+import styles from "../../../ManualBackup.module.scss";
 
 interface SelectelStorageProps {
   t: TTranslation;

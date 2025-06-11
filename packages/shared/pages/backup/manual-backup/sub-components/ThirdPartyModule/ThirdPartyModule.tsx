@@ -44,7 +44,7 @@ import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
 import type { TThirdParties } from "@docspace/shared/api/files/types";
 
-import styles from "../../../Backup.module.scss";
+import styles from "../../ManualBackup.module.scss";
 
 interface ThirdPartyModuleProps {
   onMakeCopy: (

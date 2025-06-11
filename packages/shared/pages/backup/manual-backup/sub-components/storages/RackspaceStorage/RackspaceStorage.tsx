@@ -41,7 +41,7 @@ import {
 } from "@docspace/shared/components/rackspace-settings";
 import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
 
-import styles from "../../../../Backup.module.scss";
+import styles from "../../../ManualBackup.module.scss";
 
 interface RackspaceStorageProps {
   t: TTranslation;

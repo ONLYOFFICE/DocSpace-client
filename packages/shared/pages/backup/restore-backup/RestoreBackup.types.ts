@@ -43,18 +43,6 @@ import type {
   TUploadBackup,
 } from "@docspace/shared/api/files/types";
 
-export type StyledBackupListProps = {
-  isChecked?: boolean;
-};
-
-export type StyledComboBoxItemProps = {
-  isDisabled?: boolean;
-};
-
-export type StyledRestoreBackupProps = {
-  isEnableRestore?: boolean;
-};
-
 export interface RestoreBackupProps {
   removeItem: ThirdPartyAccountType;
   buttonSize: ButtonSize;

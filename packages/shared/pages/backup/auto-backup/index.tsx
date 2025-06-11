@@ -67,7 +67,7 @@ import { RoomsModule } from "./sub-components/RoomsModule";
 import { ThirdPartyStorageModule } from "./sub-components/ThirdPartyStorageModule";
 import { useDefaultOptions } from "./hooks";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
-import styles from "../Backup.module.scss";
+import styles from "./AutoBackup.module.scss";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -400,10 +400,7 @@ const AutomaticBackup = ({
   if (isInitialLoading) return <AutoBackupLoader />;
 
   return (
-    <div
-      data-testid="auto-backup"
-      className={classNames(styles.backupCommon, styles.autoBackup)}
-    >
+    <div data-testid="auto-backup" className={styles.autoBackup}>
       <StatusMessage message={errorInformation} />
       <div
         className={classNames(

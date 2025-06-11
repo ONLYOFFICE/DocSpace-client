@@ -43,7 +43,7 @@ import type {
   Nullable,
 } from "@docspace/shared/types";
 
-import styles from "../../../Backup.module.scss";
+import styles from "../../ManualBackup.module.scss";
 
 const Documents = "Documents";
 

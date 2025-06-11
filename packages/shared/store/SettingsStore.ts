@@ -331,6 +331,8 @@ class SettingsStore {
 
   hasGuests: boolean | null = null;
 
+  scrollToSettings: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -377,6 +379,10 @@ class SettingsStore {
 
   get feedbackAndSupportUrl() {
     return this.externalResources?.support?.domain;
+  }
+
+  get suggestFeatureUrl() {
+    return this.externalResources?.common?.entries?.feedback;
   }
 
   get licenseAgreementsUrl() {
@@ -1544,6 +1550,10 @@ class SettingsStore {
     filterDefault.area = "guests";
     const res = await api.people.getUserList(filterDefault);
     this.hasGuests = !!res.total;
+  };
+
+  setScrollToSettings = (scrollToSettings: boolean) => {
+    this.scrollToSettings = scrollToSettings;
   };
 }
 

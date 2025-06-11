@@ -171,6 +171,7 @@ const SectionHeaderContent = (props) => {
     deleteRefMap,
     isPersonalReadOnly,
     showTemplateBadge,
+    allowInvitingMembers,
   } = props;
 
   const location = useLocation();
@@ -589,6 +590,15 @@ const SectionHeaderContent = (props) => {
     return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
   };
 
+  const isPlusButtonVisible = () => {
+    if (!isContactsPage || isContactsInsideGroupPage) return true;
+
+    const lengthList = getContextOptionsPlus()?.length;
+    if (lengthList === 0) return false;
+
+    return true;
+  };
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -684,6 +694,9 @@ const SectionHeaderContent = (props) => {
                 guidAnimationVisible={guidAnimationVisible}
                 setGuidAnimationVisible={setGuidAnimationVisible}
                 isContextButtonVisible={isContextButtonVisible()}
+                isPlusButtonVisible={
+                  !allowInvitingMembers ? isPlusButtonVisible() : true
+                }
               />
               {showSignInButton ? (
                 <Button
@@ -821,8 +834,14 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
-      settingsStore;
+    const {
+      theme,
+      frameConfig,
+      isFrame,
+      currentDeviceType,
+      displayAbout,
+      allowInvitingMembers,
+    } = settingsStore;
 
     const isRoom = !!roomType;
 
@@ -1004,6 +1023,7 @@ export default inject(
       setRefMap,
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
+      allowInvitingMembers,
     };
   },
 )(

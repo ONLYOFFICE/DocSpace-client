@@ -42,7 +42,7 @@ type FilesMediaViewerProps = {
 };
 
 function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common"]);
   const {
     visible,
     mediaId,

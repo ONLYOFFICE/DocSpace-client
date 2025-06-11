@@ -29,8 +29,14 @@ import { http, HttpResponse } from "msw";
 import { BASE_URL } from "../../utils";
 
 const deletePath = `${BASE_URL}/portal/deletebackup/:backupId`;
+const startPath = `${BASE_URL}/portal/startbackup`;
 
 export const createDeleteBackupHandler = () =>
   http.delete(deletePath, () => {
+    return HttpResponse.json();
+  });
+
+export const createStartBackupHandler = () =>
+  http.post(startPath, () => {
     return HttpResponse.json();
   });

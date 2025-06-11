@@ -852,6 +852,9 @@ importers:
       '@aws-sdk/client-cloudwatch-logs':
         specifier: 3.816.0
         version: 3.816.0
+      '@playwright/test':
+        specifier: 1.48.0
+        version: 1.48.0
       '@svgr/webpack':
         specifier: 8.1.0
         version: 8.1.0(typescript@5.6.3)

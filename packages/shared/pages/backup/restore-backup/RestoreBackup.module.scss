@@ -27,6 +27,7 @@
  */
 
 @use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/variables";
 
 @use "../backup";
 
@@ -168,6 +169,12 @@
   .backupListTrashIcon {
     width: 16px;
     height: 16px;
+    cursor: pointer;
+    margin-top: -3px;
+    grid-area: trash;
+    path {
+      fill: variables.$gray;
+    }
   }
 
   .backupRestoreDialogHeader {

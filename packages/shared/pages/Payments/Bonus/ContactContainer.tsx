@@ -57,6 +57,7 @@ export const ContactContainer = ({
                 components={{
                   1: (
                     <Link
+                      key="enterprise-license-link"
                       target={LinkTarget.blank}
                       tag="a"
                       fontWeight="600"
@@ -101,6 +102,7 @@ export const ContactContainer = ({
               components={{
                 1: (
                   <Link
+                    key="upgrade-to-pro-banner-purchase-link"
                     fontWeight="600"
                     target={LinkTarget.blank}
                     tag="a"
@@ -122,6 +124,7 @@ export const ContactContainer = ({
               components={{
                 1: (
                   <Link
+                    key="upgrade-to-pro-banner-support-link"
                     target={LinkTarget.blank}
                     tag="a"
                     fontWeight="600"

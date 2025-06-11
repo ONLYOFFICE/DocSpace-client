@@ -90,9 +90,7 @@ export const SectionWrapper = observer(
         isEmptyPage={isEmptyList}
         currentDeviceType={settingsStore.currentDeviceType}
       >
-        <Section.SectionHeader>
-          {showHeader ? sectionHeaderContent : null}
-        </Section.SectionHeader>
+        <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 
         <Section.SectionFilter>
           {showFilter

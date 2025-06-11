@@ -381,6 +381,10 @@ class SettingsStore {
     return this.externalResources?.support?.domain;
   }
 
+  get suggestFeatureUrl() {
+    return this.externalResources?.common?.entries?.feedback;
+  }
+
   get licenseAgreementsUrl() {
     return this.externalResources?.common?.entries.license;
   }

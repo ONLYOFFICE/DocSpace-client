@@ -36,14 +36,14 @@ import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url
 import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg?url";
 import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
 
-import { IPaymentsProps } from "../Payments.types";
-import styles from "../Standalone.module.scss";
+import styles from "./BenefitsContainer.module.scss";
+import type { TBenefitsContainerProps } from "./BenefitsContainer.types";
 
 export const BenefitsContainer = ({
   isTrial,
   isEnterprise,
   isDeveloper,
-}: Partial<IPaymentsProps>) => {
+}: TBenefitsContainerProps) => {
   const { t } = useTranslation("Common");
 
   const title = isEnterprise
@@ -121,7 +121,7 @@ export const BenefitsContainer = ({
   };
 
   return (
-    <div className={classNames(styles.benefitsBody, "benefits-container")}>
+    <div className={classNames(styles.benefitsContainer, "benefits-container")}>
       <Text
         fontSize="16px"
         fontWeight={600}

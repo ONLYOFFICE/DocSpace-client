@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { ButtonContainer } from "./ButtonContainer";
 import { TariffTitleContainer } from "./TariffTitleContainer";
 
-import { BenefitsContainer } from "./BenefitsContainer";
+import { BenefitsContainer } from "../../common/BenefitsContainer";
 
 import { IPaymentsProps } from "../Payments.types";
 import styles from "../Standalone.module.scss";

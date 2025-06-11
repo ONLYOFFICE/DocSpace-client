@@ -26,93 +26,37 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "@docspace/shared/styles/mixins";
+.benefitsContainer {
+  margin: 20px 0;
+  border-radius: 12px;
+  border: var(--settings-payment-border);
+  max-width: 660px;
+  padding: 23px;
+  background: var(--settings-payment-bg-benefits-color);
 
-.pageWrapper {
-  .paymentsFileInput {
-    max-width: 350px;
-    margin: 16px 0;
+  .benefitsTitle {
+    margin-bottom: 20px;
   }
 
-  .paymentsLicenseDescription {
-    margin-top: 12px;
-  }
-}
+  .paymentsBenefits {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 10px;
 
-.buttonComponent {
-  margin: 16px 0;
-
-  button {
-    @include mixins.tablet-and-below {
-      max-width: 100%;
-      height: 40px;
+    .benefitsSvg {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 4px;
     }
 
-    @include mixins.mobile {
-      width: 100%;
-    }
-  }
-}
-
-.enterpriseComponent {
-  margin-bottom: 35px;
-
-  .paymentsRenewSubscription {
-    max-width: 660px;
-    margin-top: 12px;
-  }
-
-  .paymentsSupport {
-    max-width: 503px;
-  }
-}
-
-.titleComponent {
-  .paymentsSubscription {
-    max-width: 660px;
-    margin-top: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: baseline;
-
-    .title {
-      line-height: 16px;
+    .benefitsDescription {
+      p:first-child {
+        margin-bottom: 3px;
+      }
     }
   }
 
-  .paymentsSubscriptionExpired {
-    max-width: fit-content;
-    border: 1px solid var(--settings-payment-color);
-    border-radius: 3px;
-    color: var(--settings-payment-color);
-    padding: 2px 8px;
-    height: fit-content;
-  }
-
-  &.limitedWidth {
-    .paymentsSubscription .title {
-      max-width: 376px;
-    }
-  }
-
-  &.isLicenseDateExpired {
-    .paymentsSubscription .title span:first-child {
-      margin-top: 5px;
-    }
-
-    .paymentsSubscriptionExpired {
-      border: 1px solid var(--settings-payment-warning-color);
-      color: var(--settings-payment-warning-color);
-    }
-  }
-}
-
-.contactContainer {
-  display: flex;
-  width: 100%;
-
-  a {
-    margin-inline-start: 4px;
+  .paymentsBenefits ~ .paymentsBenefits {
+    margin-top: 13px;
   }
 }

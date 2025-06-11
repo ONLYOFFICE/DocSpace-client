@@ -46,7 +46,10 @@ export const ContactContainer = ({
   return (
     <>
       {isCommunity ? (
-        <div className={styles.contactComponent}>
+        <div
+          data-testid="community-contact-container"
+          className={styles.contactComponent}
+        >
           <div className={styles.paymentsContact}>
             <Text className={styles.text} fontWeight={600}>
               <Trans

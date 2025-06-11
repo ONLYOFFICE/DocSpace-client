@@ -56,7 +56,7 @@ export const Bonus = ({
   if (!ready) return <PaymentsStandaloneLoader />;
 
   return (
-    <div className={styles.bonus}>
+    <div data-testid="bonus" className={styles.bonus}>
       <BenefitsContainer
         isTrial={isTrial}
         isEnterprise={isEnterprise}

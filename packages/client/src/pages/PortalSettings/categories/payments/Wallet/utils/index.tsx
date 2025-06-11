@@ -24,19 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+const truncateNumberToFraction = (
+  value: number,
+  digits: number = 2,
+): string => {
+  const [intPart, fracPart = ""] = value.toString().split(".");
+  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
+  return `${intPart}.${truncated}`;
+};
+
 export const formattedBalanceTokens = (
   language: string,
   amount: number,
   currency: string,
 ) => {
+  const truncatedStr = truncateNumberToFraction(amount);
+  const truncated = Number(truncatedStr);
+
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
   });
 
-  return formatter.formatToParts(amount);
+  return formatter.formatToParts(truncated);
 };
 
 export const formatCurrencyValue = (
@@ -46,14 +57,16 @@ export const formatCurrencyValue = (
   minimumFractionDigits: number = 0,
   maximumFractionDigits: number = 0,
 ) => {
+  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
+  const truncated = Number(truncatedStr);
+
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
     minimumFractionDigits,
-    maximumFractionDigits,
   });
 
-  return formatter.format(amount);
+  return formatter.format(truncated);
 };
 
 export const accountingLedgersFormat = (
@@ -62,10 +75,16 @@ export const accountingLedgersFormat = (
   isCredit: boolean,
   currency: string,
 ) => {
-  return `${isCredit ? "+" : "-"}${new Intl.NumberFormat(language, {
+  const maximumFractionDigits = 7;
+  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
+  const truncated = Number(truncatedStr);
+
+  const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 7,
-  }).format(amount)}`;
+    minimumFractionDigits: maximumFractionDigits,
+  });
+
+  const value = formatter.format(truncated);
+  return `${isCredit ? "+" : "-"}${value}`;
 };

@@ -331,6 +331,8 @@ class SettingsStore {
 
   hasGuests: boolean | null = null;
 
+  scrollToSettings: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -1544,6 +1546,10 @@ class SettingsStore {
     filterDefault.area = "guests";
     const res = await api.people.getUserList(filterDefault);
     this.hasGuests = !!res.total;
+  };
+
+  setScrollToSettings = (scrollToSettings: boolean) => {
+    this.scrollToSettings = scrollToSettings;
   };
 }
 

@@ -70,6 +70,7 @@ beforeAll(() => {
     "campaigns",
     "storybook-static",
     "node_modules",
+    ".meta",
   ];
 
   workspaces.forEach((wsPath) => {

@@ -53,6 +53,7 @@ beforeAll(() => {
       "campaigns",
       "storybook-static",
       "node_modules",
+      ".meta",
     ];
 
     return getAllFiles(clientDir, excludeDirs).filter(
@@ -93,7 +94,9 @@ describe("Color Tests", () => {
       "Found inline colors in the code. Please use global colors instead.\r\n\r\n";
     let i = 0;
     issues.forEach((issue) => {
-      message += `${++i}. File: ${issue}\r\nColors: ${hexColorIssues[issue]}\r\n\r\n`;
+      message += `${++i}. File: ${issue}\r\nColors: ${
+        hexColorIssues[issue]
+      }\r\n\r\n`;
     });
 
     expect(issues.length, message).toBe(0);

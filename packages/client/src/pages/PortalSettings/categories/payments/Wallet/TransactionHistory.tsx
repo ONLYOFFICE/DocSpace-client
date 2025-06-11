@@ -60,8 +60,6 @@ type TransactionHistoryProps = {
   isNotPaidPeriod?: boolean;
 };
 
-const formatDate = (date: moment.Moment) => date.format("YYYY-MM-DDTHH:mm:ss");
-
 const TransactionHistory = (props: TransactionHistoryProps) => {
   const {
     getStartTransactionDate,
@@ -71,6 +69,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     isTransactionHistoryExist,
     currentDeviceType,
     isNotPaidPeriod,
+    formatDate,
   } = props;
 
   const { t } = useTranslation(["Payments", "Settings"]);
@@ -113,18 +112,12 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     const isDebit = option.key !== "credit";
 
     try {
-      fetchTransactionHistory(
-        formatDate(startDate),
-        formatDate(endDate),
-        isCredit,
-        isDebit,
-      );
+      fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
+      setIsLoading(false);
+      clearTimeout(timerId);
     } catch (e) {
       toastr.error(e as Error);
     }
-
-    setIsLoading(false);
-    clearTimeout(timerId);
   };
 
   const onStartDateChange = async (
@@ -141,13 +134,12 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     const timerId = setTimeout(() => setIsLoading(true), 200);
 
     try {
-      await fetchTransactionHistory(formatDate(date), formatDate(endDate));
+      await fetchTransactionHistory(date, endDate);
+      setIsLoading(false);
+      clearTimeout(timerId);
     } catch (e) {
       toastr.error(e as Error);
     }
-
-    setIsLoading(false);
-    clearTimeout(timerId);
   };
 
   const onEndDateChange = async (date: moment.Moment | null): Promise<void> => {
@@ -162,13 +154,13 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     const timerId = setTimeout(() => setIsLoading(true), 200);
 
     try {
-      await fetchTransactionHistory(formatDate(startDate), formatDate(date));
+      await fetchTransactionHistory(startDate, date);
+
+      setIsLoading(false);
+      clearTimeout(timerId);
     } catch (e) {
       toastr.error(e as Error);
     }
-
-    setIsLoading(false);
-    clearTimeout(timerId);
   };
 
   const getReport = async () => {
@@ -366,6 +358,7 @@ export default inject(
       fetchTransactionHistory,
       isTransactionHistoryExist,
       currentTariffStatusStore,
+      formatDate,
     } = paymentStore;
 
     const { openOnNewPage } = filesSettingsStore;
@@ -384,6 +377,7 @@ export default inject(
       currentDeviceType,
       isTransactionHistoryExist,
       isNotPaidPeriod,
+      formatDate,
     };
   },
 )(observer(TransactionHistory));

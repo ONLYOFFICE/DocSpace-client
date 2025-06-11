@@ -55,13 +55,18 @@ type StorageDialogProps = {
   storagePriceIncrement?: number;
   hasStorageSubscription?: boolean;
   currentStoragePlanSize?: number;
-  fetchPortalTariff?: () => void;
-  fetchBalance?: () => void;
-  handleServicesQuotas?: () => void;
+  fetchPortalTariff?: (
+    force?: boolean,
+  ) => Promise<{ walletQuotas: { quantity: number }[] }>;
+  fetchBalance?: () => Promise<void>;
+  handleServicesQuotas?: () => Promise<void>;
   hasScheduledStorageChange?: boolean;
-  nextStoragePlanSize?: boolean;
+  nextStoragePlanSize?: number;
   storageSizeIncrement?: number;
 };
+
+let isWaitRequest = false;
+let intervalId: ReturnType<typeof setInterval> | null = null;
 
 const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   visible,
@@ -100,6 +105,63 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const insufficientFunds = isWalletBalanceInsufficient(totalPrice);
   const isUpgradeStoragePlan = isPlanUpgrade(amount);
 
+  const resetIntervalSuccess = (
+    value: number | null,
+    isCancellation: boolean,
+  ) => {
+    intervalId && toastr.success(t("StorageCapacityUpdated"));
+    if (value === 0) {
+      setAmount(currentStoragePlanSize);
+    }
+    if (isCancellation) {
+      setAmount(currentStoragePlanSize);
+
+      fetchBalance!();
+    }
+    clearInterval(intervalId);
+    intervalId = null;
+    setIsLoading(false);
+  };
+
+  const waitingForTariff = (value: number | null, isCancellation: boolean) => {
+    isWaitRequest = false;
+    let requestsCount = 0;
+    intervalId = setInterval(async () => {
+      try {
+        if (requestsCount === 30) {
+          setIsLoading(false);
+
+          intervalId && toastr.error(t("ErrorNotification"));
+          clearInterval(intervalId);
+          intervalId = null;
+
+          return;
+        }
+
+        requestsCount++;
+
+        if (isWaitRequest) {
+          return;
+        }
+
+        isWaitRequest = true;
+        const { walletQuotas } = await fetchPortalTariff(true);
+
+        if (walletQuotas[0].quantity === amount) {
+          resetIntervalSuccess(value, isCancellation);
+        }
+      } catch (e) {
+        setIsLoading(false);
+
+        intervalId && toastr.error(e instanceof Error ? e.message : String(e));
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+
+      isWaitRequest = false;
+    }, 2000);
+  };
+
   const handleStoragePlanChange = async (isCancellation = false) => {
     const timerId = setTimeout(() => {
       setIsLoading(true);
@@ -122,27 +184,18 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         return;
       }
 
-      const requests = [fetchPortalTariff!(), handleServicesQuotas()!];
+      const requests = [handleServicesQuotas()!];
 
       if (!isCancellation) requests.push(fetchBalance!());
 
       await Promise.all(requests);
-
-      if (value === 0) {
-        setAmount(currentStoragePlanSize);
-      }
-      if (isCancellation) {
-        setAmount(currentStoragePlanSize);
-
-        fetchBalance!();
-      }
+      waitingForTariff(value, isCancellation);
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : String(e);
       toastr.error(errorMessage);
     }
 
     clearTimeout(timerId);
-    setIsLoading(false);
   };
 
   const onBuy = () => handleStoragePlanChange();
@@ -188,7 +241,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     );
   }
 
-  const getDirectionalText = (from, to) => {
+  const getDirectionalText = (from: number, to: number) => {
     return isRTL ? `${from} ← ${to}` : `${from} → ${to}`;
   };
 

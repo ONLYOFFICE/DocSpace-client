@@ -232,6 +232,8 @@ class CurrentTariffStatusStore {
       });
 
       this.setIsLoaded(true);
+
+      return { res: this.portalTariffStatus, walletQuotas: this.walletQuotas };
     });
   };
 }

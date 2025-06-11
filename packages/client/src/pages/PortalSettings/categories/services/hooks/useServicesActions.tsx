@@ -106,7 +106,7 @@ export const useServicesActions = () => {
   };
 
   const buttonTitle = (quantity: number, type: string = "storage"): string => {
-    if (isExceedingPlanLimit(quantity)) return t("SendRequest");
+    if (isExceedingPlanLimit(quantity)) return t("Common:SendRequest");
 
     let hasSubscription;
 

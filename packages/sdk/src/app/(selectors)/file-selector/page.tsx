@@ -135,6 +135,10 @@ export default async function Page({
       portalSettings && typeof portalSettings !== "string"
         ? portalSettings.logoText
         : "",
+    socketUrl:
+      portalSettings && typeof portalSettings !== "string"
+        ? portalSettings.socketUrl
+        : "",
   };
 
   return <FilesSelectorClient {...clientProps} />;

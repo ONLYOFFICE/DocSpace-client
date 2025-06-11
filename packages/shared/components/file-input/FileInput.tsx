@@ -185,6 +185,7 @@ const FileInputPure = ({
           />
           {!fromStorage ? (
             <input
+              data-testid="upload-click-input"
               type="file"
               id={id}
               ref={inputRef}

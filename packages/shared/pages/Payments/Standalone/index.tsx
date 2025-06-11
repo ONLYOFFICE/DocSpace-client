@@ -49,7 +49,7 @@ export const StandalonePage = ({
   logoText,
 }: IPaymentsProps) => {
   return (
-    <div className={styles.pageWrapper}>
+    <div data-testid="standalone-page" className={styles.pageWrapper}>
       {isTrial ? (
         <TrialContainer
           isDeveloper={isDeveloper}

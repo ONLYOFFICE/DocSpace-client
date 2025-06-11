@@ -28,7 +28,7 @@
     "storybook-build": "pnpm --filter @docspace/shared run storybook-build",
     "storybook-serve": "pnpm --filter @docspace/shared run storybook-serve",
     "test": "pnpm --filter @docspace/shared test",
-    "wipe": "shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
+    "wipe": "pnpm nx reset && shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
     "licenses-audit": "pnpm licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",

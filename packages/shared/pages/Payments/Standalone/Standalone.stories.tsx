@@ -26,7 +26,7 @@
 
 import type { Meta, StoryObj } from "@storybook/react";
 import { StandalonePage } from "./index";
-import { IPaymentsProps } from "./Payments.types";
+import { IPaymentsProps } from "./Standalone.types";
 
 const meta: Meta<typeof StandalonePage> = {
   title: "Pages/Payments/StandalonePage",

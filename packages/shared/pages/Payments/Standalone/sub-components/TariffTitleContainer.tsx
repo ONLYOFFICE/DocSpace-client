@@ -30,8 +30,8 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 
-import { getTwoDotsReplacing } from "../Payments.helpers";
-import { IPaymentsProps } from "../Payments.types";
+import { getTwoDotsReplacing } from "../Standalone.helpers";
+import { IPaymentsProps } from "../Standalone.types";
 import styles from "../Standalone.module.scss";
 
 export const TariffTitleContainer = ({

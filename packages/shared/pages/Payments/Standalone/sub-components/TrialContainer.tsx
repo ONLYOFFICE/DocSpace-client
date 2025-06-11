@@ -34,7 +34,7 @@ import { TariffTitleContainer } from "./TariffTitleContainer";
 
 import { BenefitsContainer } from "../../common/BenefitsContainer";
 
-import { IPaymentsProps } from "../Payments.types";
+import { IPaymentsProps } from "../Standalone.types";
 import styles from "../Standalone.module.scss";
 
 export const TrialContainer = ({

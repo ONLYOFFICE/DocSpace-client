@@ -32,7 +32,7 @@ import { FileInput } from "@docspace/shared/components/file-input";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import { ILicenseProps } from "../Payments.types";
+import { ILicenseProps } from "../Standalone.types";
 import styles from "../Standalone.module.scss";
 
 let timerId: ReturnType<typeof setTimeout> | null = null;

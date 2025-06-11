@@ -31,7 +31,7 @@ import { ContactContainer } from "./sub-components/ContactContainer";
 import { EnterpriseContainer } from "./sub-components/EnterpriseContainer";
 import { TrialContainer } from "./sub-components/TrialContainer";
 
-import { IPaymentsProps } from "./Payments.types";
+import { IPaymentsProps } from "./Standalone.types";
 import styles from "./Standalone.module.scss";
 
 export const StandalonePage = ({

@@ -27,7 +27,7 @@
 import React from "react";
 
 import { LicenseContainer } from "./LicenseContainer";
-import { ContactContainer } from "./ContactConrainer";
+import { ContactContainer } from "./ContactContainer";
 import { EnterpriseContainer } from "./EnterpriseContainer";
 import { TrialContainer } from "./TrialContainer";
 

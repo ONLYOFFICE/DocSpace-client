@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,29 +27,56 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/shared/components/text";
 
-import { StyledContactContainer } from "./Payments.styled";
-import { Link } from "../../../components/link";
+import { ButtonContainer } from "./ButtonContainer";
+import { TariffTitleContainer } from "./TariffTitleContainer";
 
-export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
+import { BenefitsContainer } from "./BenefitsContainer";
+
+import { StyledEnterpriseComponent } from "../Payments.styled";
+import { IPaymentsProps } from "../Payments.types";
+
+export const TrialContainer = ({
+  isDeveloper,
+  buyUrl,
+  isLicenseDateExpired,
+  isTrial,
+  trialDaysLeft,
+  paymentDate,
+  isEnterprise,
+  logoText,
+}: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
+
   return (
-    <StyledContactContainer>
-      {salesEmail ? (
-        <Text as="span" noSelect fontWeight={600}>
-          {t("ContactUs")}
-          <Link
-            className="sales-email-link"
-            tag="a"
-            fontWeight="600"
-            href={`mailto:${salesEmail}`}
-            color="accent"
-          >
-            {salesEmail}
-          </Link>
-        </Text>
-      ) : null}
-    </StyledContactContainer>
+    <StyledEnterpriseComponent>
+      <Text fontWeight={700} fontSize="16px">
+        {t("ActivateSwithToProHeader", {
+          license: isDeveloper
+            ? t("Common:DeveloperLicense")
+            : t("Common:EnterpriseLicense"),
+        })}
+      </Text>
+
+      <TariffTitleContainer
+        isLicenseDateExpired={isLicenseDateExpired}
+        isTrial={isTrial}
+        trialDaysLeft={trialDaysLeft}
+        paymentDate={paymentDate}
+        isDeveloper={isDeveloper}
+        logoText={logoText}
+      />
+
+      <BenefitsContainer
+        isTrial={isTrial}
+        isEnterprise={isEnterprise}
+        isDeveloper={isDeveloper}
+      />
+      <Text fontSize="14px" className="payments_renew-subscription">
+        {t("ActivatePurchaseBuyLicense")}
+      </Text>
+      <ButtonContainer buyUrl={buyUrl} />
+    </StyledEnterpriseComponent>
   );
 };

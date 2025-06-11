@@ -28,15 +28,15 @@ import React from "react";
 
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
-import { Link, LinkTarget } from "../../../components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 
-import { ButtonContainer } from "./sub-components/ButtonContainer";
-import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
+import { ButtonContainer } from "./ButtonContainer";
+import { TariffTitleContainer } from "./TariffTitleContainer";
 
 import { BenefitsContainer } from "./BenefitsContainer";
-import { StyledEnterpriseComponent } from "./Payments.styled";
-import { IPaymentsProps } from "./Payments.types";
+import { StyledEnterpriseComponent } from "../Payments.styled";
+import { IPaymentsProps } from "../Payments.types";
 
 export const EnterpriseContainer = ({
   salesEmail,

@@ -26,10 +26,10 @@
 
 import React from "react";
 
-import { LicenseContainer } from "./LicenseContainer";
-import { ContactContainer } from "./ContactContainer";
-import { EnterpriseContainer } from "./EnterpriseContainer";
-import { TrialContainer } from "./TrialContainer";
+import { LicenseContainer } from "./sub-components/LicenseContainer";
+import { ContactContainer } from "./sub-components/ContactContainer";
+import { EnterpriseContainer } from "./sub-components/EnterpriseContainer";
+import { TrialContainer } from "./sub-components/TrialContainer";
 
 import { StyledPageWrapper } from "./Payments.styled";
 import { IPaymentsProps } from "./Payments.types";

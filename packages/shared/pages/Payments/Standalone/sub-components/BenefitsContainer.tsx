@@ -35,8 +35,8 @@ import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url
 import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg?url";
 import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
 
-import { StyledBenefitsBody } from "./Payments.styled";
-import { IPaymentsProps } from "./Payments.types";
+import { StyledBenefitsBody } from "../Payments.styled";
+import { IPaymentsProps } from "../Payments.types";
 
 export const BenefitsContainer = ({
   isTrial,

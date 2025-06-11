@@ -27,13 +27,13 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
-import { FileInput } from "../../../components/file-input";
-import { InputSize } from "../../../components/text-input";
-import { Button, ButtonSize } from "../../../components/button";
+import { Text } from "../../../../components/text";
+import { FileInput } from "../../../../components/file-input";
+import { InputSize } from "../../../../components/text-input";
+import { Button, ButtonSize } from "../../../../components/button";
 
-import { StyledButtonComponent } from "./Payments.styled";
-import { ILicenseProps } from "./Payments.types";
+import { StyledButtonComponent } from "../Payments.styled";
+import { ILicenseProps } from "../Payments.types";
 
 let timerId: ReturnType<typeof setTimeout> | null = null;
 

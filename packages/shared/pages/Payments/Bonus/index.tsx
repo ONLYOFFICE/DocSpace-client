@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
-import { BenefitsContainer } from "../Standalone/BenefitsContainer";
+import { BenefitsContainer } from "../Standalone/sub-components/BenefitsContainer";
 import { ContactContainer } from "./sub-components/ContactContainer";
 import { OfficialDocumentation } from "./sub-components/OfficialDocumentation";
 

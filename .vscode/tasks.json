@@ -438,7 +438,7 @@
     {
       "label": "Frontend | start-prod:lite",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod:lite -p @docspace/client @docspace/login @docspace/doceditor --parallel=3",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor --parallel=3",
       "group": {
         "kind": "build",
         "isDefault": true

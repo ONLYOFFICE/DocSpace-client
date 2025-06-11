@@ -26,14 +26,15 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
-import { Text } from "../../../../components/text";
-import { FileInput } from "../../../../components/file-input";
-import { InputSize } from "../../../../components/text-input";
-import { Button, ButtonSize } from "../../../../components/button";
+import { Text } from "@docspace/shared/components/text";
+import { FileInput } from "@docspace/shared/components/file-input";
+import { InputSize } from "@docspace/shared/components/text-input";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import { StyledButtonComponent } from "../Payments.styled";
 import { ILicenseProps } from "../Payments.types";
+import styles from "../Standalone.module.scss";
 
 let timerId: ReturnType<typeof setTimeout> | null = null;
 
@@ -100,12 +101,15 @@ export const LicenseContainer = ({
       <Text
         fontWeight={400}
         fontSize="14px"
-        className="payments_license-description"
+        className={classNames(
+          styles.paymentsLicenseDescription,
+          "payments_license-description",
+        )}
       >
         {!isTrial ? t("ActivateRenewalDescr") : t("ActivateUploadDescr")}
       </Text>
       <FileInput
-        className="payments_file-input"
+        className={classNames(styles.paymentsFileInput, "payments_file-input")}
         scale
         size={InputSize.base}
         accept={[".lic"]}
@@ -114,7 +118,7 @@ export const LicenseContainer = ({
         isDisabled={isLicenseUploading || isLoading}
         isLoading={isLicenseUploading}
       />
-      <StyledButtonComponent>
+      <div className={styles.buttonComponent}>
         <Button
           primary
           label={t("Common:Activate")}
@@ -123,7 +127,7 @@ export const LicenseContainer = ({
           isLoading={isLoading}
           isDisabled={!isLicenseCorrect}
         />
-      </StyledButtonComponent>
+      </div>
     </div>
   );
 };

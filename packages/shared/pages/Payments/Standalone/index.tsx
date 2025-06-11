@@ -31,8 +31,8 @@ import { ContactContainer } from "./sub-components/ContactContainer";
 import { EnterpriseContainer } from "./sub-components/EnterpriseContainer";
 import { TrialContainer } from "./sub-components/TrialContainer";
 
-import { StyledPageWrapper } from "./Payments.styled";
 import { IPaymentsProps } from "./Payments.types";
+import styles from "./Standalone.module.scss";
 
 export const StandalonePage = ({
   isTrial,
@@ -49,7 +49,7 @@ export const StandalonePage = ({
   logoText,
 }: IPaymentsProps) => {
   return (
-    <StyledPageWrapper>
+    <div className={styles.pageWrapper}>
       {isTrial ? (
         <TrialContainer
           isDeveloper={isDeveloper}
@@ -81,6 +81,6 @@ export const StandalonePage = ({
         isTrial={isTrial}
       />
       <ContactContainer salesEmail={salesEmail} />
-    </StyledPageWrapper>
+    </div>
   );
 };

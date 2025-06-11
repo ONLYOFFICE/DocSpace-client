@@ -26,6 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 
@@ -34,8 +35,8 @@ import { TariffTitleContainer } from "./TariffTitleContainer";
 
 import { BenefitsContainer } from "./BenefitsContainer";
 
-import { StyledEnterpriseComponent } from "../Payments.styled";
 import { IPaymentsProps } from "../Payments.types";
+import styles from "../Standalone.module.scss";
 
 export const TrialContainer = ({
   isDeveloper,
@@ -50,7 +51,7 @@ export const TrialContainer = ({
   const { t } = useTranslation("Common");
 
   return (
-    <StyledEnterpriseComponent>
+    <div className={styles.enterpriseComponent}>
       <Text fontWeight={700} fontSize="16px">
         {t("ActivateSwithToProHeader", {
           license: isDeveloper
@@ -73,10 +74,16 @@ export const TrialContainer = ({
         isEnterprise={isEnterprise}
         isDeveloper={isDeveloper}
       />
-      <Text fontSize="14px" className="payments_renew-subscription">
+      <Text
+        fontSize="14px"
+        className={classNames(
+          styles.paymentsRenewSubscription,
+          "payments_renew-subscription",
+        )}
+      >
         {t("ActivatePurchaseBuyLicense")}
       </Text>
       <ButtonContainer buyUrl={buyUrl} />
-    </StyledEnterpriseComponent>
+    </div>
   );
 };

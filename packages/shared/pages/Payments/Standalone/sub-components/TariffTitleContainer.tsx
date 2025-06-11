@@ -26,12 +26,13 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
-import { Text } from "../../../../components/text";
+import { Text } from "@docspace/shared/components/text";
 
-import { StyledTitleComponent } from "../Payments.styled";
 import { getTwoDotsReplacing } from "../Payments.helpers";
 import { IPaymentsProps } from "../Payments.types";
+import styles from "../Standalone.module.scss";
 
 export const TariffTitleContainer = ({
   isLicenseDateExpired,
@@ -46,7 +47,10 @@ export const TariffTitleContainer = ({
     if (isTrial) {
       return isLicenseDateExpired ? (
         <Text
-          className="payments_subscription-expired"
+          className={classNames(
+            styles.paymentsSubscriptionExpired,
+            "payments_subscription-expired",
+          )}
           fontWeight={600}
           fontSize="14px"
         >
@@ -54,7 +58,10 @@ export const TariffTitleContainer = ({
         </Text>
       ) : (
         <Text
-          className="payments_subscription-expired"
+          className={classNames(
+            styles.paymentsSubscriptionExpired,
+            "payments_subscription-expired",
+          )}
           fontWeight={600}
           fontSize="14px"
         >
@@ -65,7 +72,14 @@ export const TariffTitleContainer = ({
 
     return (
       isLicenseDateExpired && (
-        <Text className="payments_subscription-expired" isBold fontSize="14px">
+        <Text
+          className={classNames(
+            styles.paymentsSubscriptionExpired,
+            "payments_subscription-expired",
+          )}
+          isBold
+          fontSize="14px"
+        >
           {t("SubscriptionExpired")}
         </Text>
       )
@@ -89,12 +103,19 @@ export const TariffTitleContainer = ({
   };
 
   return (
-    <StyledTitleComponent
-      limitedWidth={isTrial ? true : isLicenseDateExpired}
-      isLicenseDateExpired={isLicenseDateExpired}
+    <div
+      className={classNames(styles.titleComponent, {
+        [styles.limitedWidth]: isTrial ? true : isLicenseDateExpired,
+        [styles.isLicenseDateExpired]: isLicenseDateExpired,
+      })}
     >
-      <div className="payments_subscription">
-        <div className="title">
+      <div
+        className={classNames(
+          styles.paymentsSubscription,
+          "payments_subscription",
+        )}
+      >
+        <div className={styles.title}>
           <Text fontWeight={600} fontSize="14px" as="span">
             {t("ActivateTariffDescr", {
               productName: t("Common:ProductName"),
@@ -112,6 +133,6 @@ export const TariffTitleContainer = ({
         </div>
         {alertComponent()}
       </div>
-    </StyledTitleComponent>
+    </div>
   );
 };

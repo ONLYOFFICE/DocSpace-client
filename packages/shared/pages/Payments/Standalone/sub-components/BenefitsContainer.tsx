@@ -27,6 +27,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 
@@ -35,8 +36,8 @@ import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url
 import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg?url";
 import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
 
-import { StyledBenefitsBody } from "../Payments.styled";
 import { IPaymentsProps } from "../Payments.types";
+import styles from "../Standalone.module.scss";
 
 export const BenefitsContainer = ({
   isTrial,
@@ -97,9 +98,20 @@ export const BenefitsContainer = ({
 
     return featuresArray.map((item) => {
       return (
-        <div className="payments-benefits" key={item.title}>
-          <ReactSVG src={item.imag} className="benefits-svg" />
-          <div className="benefits-description">
+        <div
+          className={classNames(styles.paymentsBenefits, "payments-benefits")}
+          key={item.title}
+        >
+          <ReactSVG
+            src={item.imag}
+            className={classNames(styles.benefitsSvg, "benefits-svg")}
+          />
+          <div
+            className={classNames(
+              styles.benefitsDescription,
+              "benefits-description",
+            )}
+          >
             <Text fontWeight={600}>{item.title}</Text>
             <Text fontSize="12px">{item.description}</Text>
           </div>
@@ -109,11 +121,15 @@ export const BenefitsContainer = ({
   };
 
   return (
-    <StyledBenefitsBody className="benefits-container">
-      <Text fontSize="16px" fontWeight={600} className="benefits-title">
+    <div className={classNames(styles.benefitsBody, "benefits-container")}>
+      <Text
+        fontSize="16px"
+        fontWeight={600}
+        className={classNames(styles.benefitsTitle, "benefits-title")}
+      >
         {title}
       </Text>
       {features()}
-    </StyledBenefitsBody>
+    </div>
   );
 };

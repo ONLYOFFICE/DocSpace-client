@@ -28,14 +28,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
-import { StyledContactContainer } from "../Payments.styled";
-import { Link } from "../../../../components/link";
+import styles from "../Standalone.module.scss";
 
 export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
   const { t } = useTranslation("Common");
   return (
-    <StyledContactContainer>
+    <div className={styles.contactContainer}>
       {salesEmail ? (
         <Text as="span" noSelect fontWeight={600}>
           {t("ContactUs")}
@@ -50,6 +50,6 @@ export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
           </Link>
         </Text>
       ) : null}
-    </StyledContactContainer>
+    </div>
   );
 };

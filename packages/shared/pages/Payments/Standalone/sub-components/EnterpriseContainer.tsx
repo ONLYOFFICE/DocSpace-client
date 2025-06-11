@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
@@ -35,8 +35,8 @@ import { ButtonContainer } from "./ButtonContainer";
 import { TariffTitleContainer } from "./TariffTitleContainer";
 
 import { BenefitsContainer } from "./BenefitsContainer";
-import { StyledEnterpriseComponent } from "../Payments.styled";
 import { IPaymentsProps } from "../Payments.types";
+import styles from "../Standalone.module.scss";
 
 export const EnterpriseContainer = ({
   salesEmail,
@@ -52,7 +52,7 @@ export const EnterpriseContainer = ({
   const { t } = useTranslation("Common");
 
   return (
-    <StyledEnterpriseComponent>
+    <div className={styles.enterpriseComponent}>
       <Text fontWeight={700} fontSize="16px">
         {t("ActivateRenewSubscriptionHeader", {
           license: isDeveloper
@@ -79,14 +79,20 @@ export const EnterpriseContainer = ({
       ) : null}
 
       {isLicenseDateExpired ? <BenefitsContainer /> : null}
-      <Text fontSize="14px" className="payments_renew-subscription">
+      <Text
+        fontSize="14px"
+        className={classNames(
+          styles.paymentsRenewSubscription,
+          "payments_renew-subscription",
+        )}
+      >
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")
           : t("ActivatePurchaseRenewLicense")}
       </Text>
       <ButtonContainer buyUrl={buyUrl} />
 
-      <div className="payments_support">
+      <div className={classNames(styles.paymentsSupport, "payments_support")}>
         <Text>
           <Trans
             t={t}
@@ -107,6 +113,6 @@ export const EnterpriseContainer = ({
           />
         </Text>
       </div>
-    </StyledEnterpriseComponent>
+    </div>
   );
 };

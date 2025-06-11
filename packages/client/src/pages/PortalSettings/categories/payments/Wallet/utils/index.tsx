@@ -82,7 +82,8 @@ export const accountingLedgersFormat = (
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: maximumFractionDigits,
+    minimumFractionDigits: 2,
+    maximumFractionDigits,
   });
 
   const value = formatter.format(truncated);

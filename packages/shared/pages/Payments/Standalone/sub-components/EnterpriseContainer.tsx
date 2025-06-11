@@ -102,6 +102,7 @@ export const EnterpriseContainer = ({
             components={{
               1: (
                 <Link
+                  key="activate-renew-descr-key"
                   fontWeight="600"
                   target={LinkTarget.blank}
                   tag="a"

@@ -31,8 +31,8 @@ import { Text } from "@docspace/shared/components/text";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
 import { BenefitsContainer } from "../Standalone/BenefitsContainer";
-import { ContactContainer } from "./ContactContainer";
-import { OfficialDocumentation } from "./OfficialDocumentation";
+import { ContactContainer } from "./sub-components/ContactContainer";
+import { OfficialDocumentation } from "./sub-components/OfficialDocumentation";
 
 import { IBonusProps } from "./Bonus.types";
 import styles from "./Bonus.module.scss";

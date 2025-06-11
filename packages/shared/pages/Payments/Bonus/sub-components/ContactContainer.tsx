@@ -28,11 +28,11 @@ import React from "react";
 
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "../../../../components/text";
+import { Link, LinkTarget } from "../../../../components/link";
 
-import { IBonusProps } from "./Bonus.types";
-import styles from "./Bonus.module.scss";
+import { IBonusProps } from "../Bonus.types";
+import styles from "../Bonus.module.scss";
 
 export const ContactContainer = ({
   salesEmail,

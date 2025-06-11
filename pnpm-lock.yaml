@@ -29,8 +29,8 @@ importers:
         specifier: 20.3.1
         version: 20.3.1(@swc/core@1.10.15(@swc/helpers@0.5.15))
       react:
-        specifier: 18.3.1
-        version: 18.3.1
+        specifier: 19.1.0
+        version: 19.1.0
       shx:
         specifier: 0.3.4
         version: 0.3.4
@@ -978,9 +978,6 @@ importers:
       re-resizable:
         specifier: 6.10.0
         version: 6.10.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      react:
-        specifier: 19.1.0
-        version: 19.1.0
       react-autosize-textarea:
         specifier: 7.1.0
         version: 7.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -999,9 +996,6 @@ importers:
       react-device-detect:
         specifier: 2.2.3
         version: 2.2.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      react-dom:
-        specifier: 19.1.0
-        version: 19.1.0(react@19.1.0)
       react-draggable:
         specifier: 4.4.6
         version: 4.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1345,9 +1339,15 @@ importers:
       prettier:
         specifier: 3.3.3
         version: 3.3.3
+      react:
+        specifier: 19.1.0
+        version: 19.1.0
       react-docgen-typescript-plugin:
         specifier: 1.0.8
         version: 1.0.8(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.10.15(@swc/helpers@0.5.15))(esbuild@0.18.20))
+      react-dom:
+        specifier: 19.1.0
+        version: 19.1.0(react@19.1.0)
       react-values:
         specifier: 0.3.3
         version: 0.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -9402,10 +9402,6 @@ packages:
     peerDependencies:
       react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-
-  react@18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
-    engines: {node: '>=0.10.0'}
 
   react@19.1.0:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
@@ -21629,10 +21625,6 @@ snapshots:
       memoize-one: 5.2.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-
-  react@18.3.1:
-    dependencies:
-      loose-envify: 1.4.0
 
   react@19.1.0: {}
 

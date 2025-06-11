@@ -222,7 +222,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   ) : null;
 
   const amountTabs = () => {
-    const amounts = [100, 200, 500, 800, 1024];
+    const amounts = [100, 200, 500, 1024];
     return amounts.map((item) => {
       const name =
         item > 800

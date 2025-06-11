@@ -295,7 +295,7 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomFromArchiveRestore", {
         sectionName: t("Common:Archive"),
       });
-    case FeedActionKeys.RoomIndexExportLocation:
+    case FeedActionKeys.RoomIndexExportSaved:
       return t("InfoPanel:RoomIndexExportLocation", {
         sectionName: t("Common:MyFilesSection"),
       });

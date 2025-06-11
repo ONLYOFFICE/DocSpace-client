@@ -26,7 +26,6 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 
@@ -74,13 +73,7 @@ export const TrialContainer = ({
         isEnterprise={isEnterprise}
         isDeveloper={isDeveloper}
       />
-      <Text
-        fontSize="14px"
-        className={classNames(
-          styles.paymentsRenewSubscription,
-          "payments_renew-subscription",
-        )}
-      >
+      <Text fontSize="14px" className={styles.paymentsRenewSubscription}>
         {t("ActivatePurchaseBuyLicense")}
       </Text>
       <ButtonContainer buyUrl={buyUrl} />

@@ -26,7 +26,6 @@
 
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
@@ -79,20 +78,14 @@ export const EnterpriseContainer = ({
       ) : null}
 
       {isLicenseDateExpired ? <BenefitsContainer /> : null}
-      <Text
-        fontSize="14px"
-        className={classNames(
-          styles.paymentsRenewSubscription,
-          "payments_renew-subscription",
-        )}
-      >
+      <Text fontSize="14px" className={styles.paymentsRenewSubscription}>
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")
           : t("ActivatePurchaseRenewLicense")}
       </Text>
       <ButtonContainer buyUrl={buyUrl} />
 
-      <div className={classNames(styles.paymentsSupport, "payments_support")}>
+      <div className={styles.paymentsSupport}>
         <Text>
           <Trans
             t={t}

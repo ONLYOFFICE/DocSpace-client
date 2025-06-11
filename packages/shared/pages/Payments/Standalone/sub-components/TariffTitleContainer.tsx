@@ -47,10 +47,7 @@ export const TariffTitleContainer = ({
     if (isTrial) {
       return isLicenseDateExpired ? (
         <Text
-          className={classNames(
-            styles.paymentsSubscriptionExpired,
-            "payments_subscription-expired",
-          )}
+          className={styles.paymentsSubscriptionExpired}
           fontWeight={600}
           fontSize="14px"
         >
@@ -58,10 +55,7 @@ export const TariffTitleContainer = ({
         </Text>
       ) : (
         <Text
-          className={classNames(
-            styles.paymentsSubscriptionExpired,
-            "payments_subscription-expired",
-          )}
+          className={styles.paymentsSubscriptionExpired}
           fontWeight={600}
           fontSize="14px"
         >
@@ -73,10 +67,7 @@ export const TariffTitleContainer = ({
     return (
       isLicenseDateExpired && (
         <Text
-          className={classNames(
-            styles.paymentsSubscriptionExpired,
-            "payments_subscription-expired",
-          )}
+          className={styles.paymentsSubscriptionExpired}
           isBold
           fontSize="14px"
         >
@@ -109,12 +100,7 @@ export const TariffTitleContainer = ({
         [styles.isLicenseDateExpired]: isLicenseDateExpired,
       })}
     >
-      <div
-        className={classNames(
-          styles.paymentsSubscription,
-          "payments_subscription",
-        )}
-      >
+      <div className={styles.paymentsSubscription}>
         <div className={styles.title}>
           <Text fontWeight={600} fontSize="14px" as="span">
             {t("ActivateTariffDescr", {

@@ -26,7 +26,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { FileInput } from "@docspace/shared/components/file-input";
@@ -101,15 +100,12 @@ export const LicenseContainer = ({
       <Text
         fontWeight={400}
         fontSize="14px"
-        className={classNames(
-          styles.paymentsLicenseDescription,
-          "payments_license-description",
-        )}
+        className={styles.paymentsLicenseDescription}
       >
         {!isTrial ? t("ActivateRenewalDescr") : t("ActivateUploadDescr")}
       </Text>
       <FileInput
-        className={classNames(styles.paymentsFileInput, "payments_file-input")}
+        className={styles.paymentsFileInput}
         scale
         size={InputSize.base}
         accept={[".lic"]}

@@ -36,7 +36,8 @@
     "styled-components": "5.3.11",
     "winston": "3.17.0",
     "winston-cloudwatch": "6.3.0",
-    "winston-daily-rotate-file": "5.0.0"
+    "winston-daily-rotate-file": "5.0.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.816.0"
   },
   "devDependencies": {
     "@types/lodash": "4.17.10",

@@ -54,6 +54,7 @@ beforeAll(() => {
     "campaigns",
     "storybook-static",
     "node_modules",
+    ".meta",
   ];
 
   const workspaces = getWorkSpaces();
@@ -178,7 +179,9 @@ describe("Image Tests", () => {
         message += `${++i}. ${key}:\r\n`;
         value.forEach(
           (v) =>
-            (message += `${v.path} ${LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path)}\r\n`)
+            (message += `${v.path} ${
+              LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path)
+            }\r\n`)
         );
         message += "\r\n";
       }

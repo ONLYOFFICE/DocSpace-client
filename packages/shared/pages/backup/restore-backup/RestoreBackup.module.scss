@@ -31,9 +31,9 @@
 @use "../backup";
 
 .restoreBackup {
-  @include backup.common-styles;
-
   max-width: backup.$text-length;
+
+  @include backup.common-styles;
 
   .restoreBackupThirdPartyModule {
     margin-top: 16px;

@@ -29,3 +29,12 @@ import type { TagType } from "./Tags.types";
 export const isTagType = (tag: TagType | string): tag is TagType => {
   return typeof tag === "object";
 };
+export const createMaxWidthTag = (
+  tag: TagType | string,
+  maxWidth: string,
+): TagType => {
+  if (isTagType(tag)) {
+    return { ...tag, maxWidth };
+  }
+  return { label: tag, maxWidth };
+};

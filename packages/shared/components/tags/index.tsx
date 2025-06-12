@@ -26,12 +26,15 @@
 
 import React, { FC } from "react";
 
+import { classNames } from "../../utils/classNames";
+
 import { Tag, TagProps } from "../tag";
 import { TagSelector } from "../tag-selector";
 
 import styles from "./Tags.module.scss";
-import { isTagType } from "./Tags.utils";
+import { createMaxWidthTag, isTagType } from "./Tags.utils";
 import type { TagType, TagsProps } from "./Tags.types";
+import { createTag, paddingSize, thirdPartyTagWidth } from "./tags.constants";
 
 const Tags: FC<TagsProps> = ({
   id,
@@ -43,10 +46,14 @@ const Tags: FC<TagsProps> = ({
   removeTagIcon,
   onMouseEnter,
   onMouseLeave,
+  showCreateTag,
 }) => {
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
+  const [isOpenDropdown, setIsOpenDropdown] = React.useState(false);
 
   const tagsRef = React.useRef<HTMLDivElement>(null);
+
+  const canShowCreate = isOpenDropdown || showCreateTag;
 
   const advancedPopup: TagProps["advancedPopup"] = (
     isOpen,
@@ -69,110 +76,79 @@ const Tags: FC<TagsProps> = ({
 
     const newTags: TagType[] = [];
     const containerWidth = tagsRef.current?.offsetWidth ?? 0;
+    const createTagCount = canShowCreate ? 1 : 0;
 
-    if (tags.length === 1) {
-      const firstTag = tags[0];
-
-      if (isTagType(firstTag) && firstTag?.isDefault) {
-        const tag = { ...firstTag, maxWidth: `100%` };
-        newTags.push(tag);
-      } else if (isTagType(firstTag) && firstTag?.isThirdParty) {
-        const tag = { ...firstTag, maxWidth: `44px` };
-        newTags.push(tag);
-      } else {
-        const label = isTagType(firstTag) ? firstTag.label : firstTag;
-
-        const tag = { label, maxWidth: `100%` };
-        newTags.push(tag);
-      }
-
-      return setRenderedTags(newTags);
-    }
-
-    if (
+    const isSpecialCase =
       columnCount >= tags.length ||
       (tags.length === 2 &&
         isTagType(tags[0]) &&
         tags[0]?.isThirdParty &&
         isTagType(tags[1]) &&
-        tags[1]?.isDefault)
-    ) {
-      const thirdPartyTagCount =
-        isTagType(tags[0]) && tags[0]?.isThirdParty ? 1 : 0;
+        tags[1]?.isDefault);
+
+    if (isSpecialCase) {
+      const thirdPartyTagCount = tags.filter(
+        (tag) => isTagType(tag) && tag?.isThirdParty,
+      ).length;
+
+      const simpleTagCount = tags.length - thirdPartyTagCount;
+
+      const totalPaddingWidth = (simpleTagCount + createTagCount) * paddingSize;
+
+      const totalWidthOfThirdPartyTags =
+        (thirdPartyTagCount + createTagCount) * thirdPartyTagWidth +
+        totalPaddingWidth;
 
       const currentTagMaxWidth =
-        (containerWidth -
-          thirdPartyTagCount * 40 -
-          (tags.length - thirdPartyTagCount) * 4) /
-        (tags.length - thirdPartyTagCount);
-
+        (containerWidth - totalWidthOfThirdPartyTags) / simpleTagCount;
       const maxWidthPercent = Math.floor(
         (currentTagMaxWidth / containerWidth) * 100,
       );
 
-      for (let i = 0; i < tags.length; i += 1) {
-        const tag = tags[i];
-        const isTag = isTagType(tag);
-
-        if (isTag && tag?.isThirdParty) {
-          const tagNew = { ...tag, maxWidth: `44px` };
-          newTags.push(tagNew);
-        } else if (isTag && tag?.isDefault) {
-          const tagNew = { ...tag, maxWidth: `${maxWidthPercent}%` };
-          newTags.push(tagNew);
+      tags.forEach((tag) => {
+        if (isTagType(tag) && tag?.isThirdParty) {
+          newTags.push(createMaxWidthTag(tag, "44px"));
         } else {
-          const tagNew = {
-            label: isTag ? tag.label : tag,
-            maxWidth: `${maxWidthPercent}%`,
-          };
-          newTags.push(tagNew);
+          newTags.push(createMaxWidthTag(tag, `${maxWidthPercent}%`));
         }
+      });
+
+      if (canShowCreate) {
+        newTags.push(createTag);
       }
     } else {
+      // Handle case where we need a dropdown
       const tagWithDropdown = {
-        label: `${tags.length - columnCount}`,
+        label: `+${tags.length - columnCount}`,
         key: "selector",
         advancedOptions: tags.slice(
           columnCount,
           tags.length,
         ) as React.ReactNode[],
+        maxWidth: "44px",
       };
 
       const currentTagMaxWidth =
-        (containerWidth - columnCount * 4 - 40) / columnCount;
-
+        (containerWidth - columnCount * paddingSize - thirdPartyTagWidth) /
+        columnCount;
       const maxWidthPercent = Math.floor(
         (currentTagMaxWidth / containerWidth) * 100,
       );
 
-      if (columnCount !== 0) {
-        for (let i = 0; i < columnCount; i += 1) {
-          const tag = tags[i];
-          const isTag = isTagType(tag);
-
-          if (isTag && tag?.isThirdParty) {
-            const tagNew = { ...tag, maxWidth: `44px` };
-            newTags.push(tagNew);
-          } else if (isTag && tag?.isDefault) {
-            const tagNew = { ...tag, maxWidth: `${maxWidthPercent}%` };
-            newTags.push(tagNew);
-          } else {
-            const tagNew = {
-              label: isTag ? tag.label : tag,
-              maxWidth: `${maxWidthPercent}%`,
-            };
-            newTags.push(tagNew);
-          }
+      for (let i = 0; i < columnCount; i += 1) {
+        const tag = tags[i];
+        if (isTagType(tag) && tag?.isThirdParty) {
+          newTags.push(createMaxWidthTag(tag, "44px"));
+        } else {
+          newTags.push(createMaxWidthTag(tag, `${maxWidthPercent}%`));
         }
       }
 
       newTags.push(tagWithDropdown);
-
-      newTags[newTags.length - 1].maxWidth = `35px`;
     }
 
     setRenderedTags(newTags);
-  }, [tags, tagsRef, columnCount]);
+  }, [tags, columnCount, canShowCreate]);
 
   React.useLayoutEffect(() => {
     updateRenderedTags();
@@ -180,37 +156,36 @@ const Tags: FC<TagsProps> = ({
 
   return (
     <div
-      data-testid="tags"
-      aria-label="Tags container"
       id={id}
-      className={`${styles.tags} ${className}`}
       style={style}
       ref={tagsRef}
+      data-testid="tags"
+      aria-label="Tags container"
+      className={classNames(styles.tags, className)}
     >
-      {renderedTags?.length > 0
-        ? renderedTags.map((tag, idx) => {
-            return (
-              <Tag
-                key={tag.label}
-                {...tags}
-                tag={tag.label}
-                providerType={tag.providerType}
-                icon={tag.icon}
-                advancedOptions={tag.advancedOptions}
-                tagMaxWidth={tag.maxWidth}
-                isNewTag={false}
-                label={tag.label}
-                onClick={onSelectTag}
-                isLast={idx === renderedTags.length - 1}
-                removeTagIcon={removeTagIcon}
-                roomType={tag.roomType}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-                advancedPopup={tag.advancedOptions ? advancedPopup : undefined}
-              />
-            );
-          })
-        : null}
+      {renderedTags.map((tag, idx) => {
+        return (
+          <Tag
+            key={tag.label}
+            {...tags}
+            tag={tag.label}
+            providerType={tag.providerType}
+            icon={tag.icon}
+            advancedOptions={tag.advancedOptions}
+            tagMaxWidth={tag.maxWidth}
+            isNewTag={false}
+            label={tag.label}
+            onClick={onSelectTag}
+            isLast={idx === renderedTags.length - 1}
+            removeTagIcon={removeTagIcon}
+            roomType={tag.roomType}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            advancedPopup={tag.advancedOptions ? advancedPopup : undefined}
+            setIsOpenDropdown={setIsOpenDropdown}
+          />
+        );
+      })}
     </div>
   );
 };

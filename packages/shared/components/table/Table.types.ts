@@ -132,6 +132,8 @@ export interface TableRowProps {
   onClick?: (e: React.MouseEvent) => void;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   hideColumns?: boolean;
+  onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export interface TableCellProps {

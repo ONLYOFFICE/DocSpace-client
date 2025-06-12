@@ -30,7 +30,15 @@ import { Tags } from "@docspace/shared/components/tags";
 
 import { Text } from "@docspace/shared/components/text";
 
-const TagsCell = ({ item, tagCount, onSelectTag, sideColor }) => {
+const TagsCell = ({
+  item,
+  tagCount,
+  onSelectTag,
+  sideColor,
+  isHovered,
+  isActive,
+  checkedProps,
+}) => {
   const styleTagsCell = {
     width: "100%",
     overflow: "hidden",
@@ -63,7 +71,12 @@ const TagsCell = ({ item, tagCount, onSelectTag, sideColor }) => {
       {tags.length === 0 ? (
         <Text color={sideColor} />
       ) : (
-        <Tags tags={tags} columnCount={tagCount} onSelectTag={onSelectTag} />
+        <Tags
+          tags={tags}
+          columnCount={tagCount}
+          onSelectTag={onSelectTag}
+          showCreateTag={isHovered || isActive || checkedProps}
+        />
       )}
 
       {/* {item.providerType && (

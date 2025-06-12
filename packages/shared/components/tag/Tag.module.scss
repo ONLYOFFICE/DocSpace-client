@@ -43,11 +43,6 @@
     }
   }
 
-  &:active {
-    border-color: transparent;
-    background: var(--tag-active-background);
-  }
-
   &.isNewTag {
     background: var(--tag-new-background);
     border-color: transparent;
@@ -85,6 +80,11 @@
       &.isNewTag {
         background: var(--tag-new-hover-background);
       }
+    }
+
+    &:active {
+      border-color: transparent;
+      background: var(--tag-active-background);
     }
   }
 }
@@ -137,5 +137,60 @@
     [dir="ltr"] & {
       margin-left: var(--tag-dropdown-text-margin) !important;
     }
+  }
+}
+
+.advancedTag {
+  color: var(--tag-advanced-text-color);
+  .createIcon {
+    svg path {
+      fill: var(--tag-advanced-text-color);
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--tag-advanced-text-color-hover);
+      .createIcon {
+        svg path {
+          fill: var(--tag-advanced-text-color-hover);
+        }
+      }
+    }
+  }
+
+  &:active {
+    color: var(--tag-advanced-text-color-active);
+    .createIcon {
+      svg path {
+        fill: var(--tag-advanced-text-color-active);
+      }
+    }
+  }
+
+  .tagText {
+    color: inherit;
+  }
+}
+
+.createIconWrapper {
+  padding: 6px 12px;
+  height: 24px;
+
+  align-items: center;
+  justify-content: center;
+
+  .createIcon {
+    > div {
+      width: 12px;
+      height: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
   }
 }

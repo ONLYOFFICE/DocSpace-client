@@ -1215,6 +1215,10 @@
   --tag-text-line-height: 20px;
   --tag-dropdown-text-line-height: 30px;
   --tag-font-size: 13px;
+
+  --tag-advanced-text-color: #{$gray};
+  --tag-advanced-text-color-hover: #{$black};
+  --tag-advanced-text-color-active: #{$gray};
 }
 
 .dark {
@@ -1230,6 +1234,10 @@
   --tag-disabled-color: #{$gray-dark};
   --tag-disabled-border: 1px dashed #{$gray-dark-strong};
   --tag-border: 1px solid #{$gray-dark-strong};
+
+  --tag-advanced-text-color: #{$gray-dark};
+  --tag-advanced-text-color-hover: #{$white};
+  --tag-advanced-text-color-active: #{$gray-dark};
 }
 
 .light {

@@ -71,4 +71,6 @@ export type TagProps = {
     reference: React.RefObject<HTMLElement | null>,
     onClose: (event: MouseEvent) => void,
   ) => React.ReactNode;
+
+  setIsOpenDropdown?: (isOpen: boolean) => void;
 };

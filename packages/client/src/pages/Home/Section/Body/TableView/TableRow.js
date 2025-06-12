@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { classNames } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
@@ -89,6 +89,7 @@ const FilesTableRow = (props) => {
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
+  const [isHovered, setIsHovered] = useState(false);
 
   const rowRef = React.useRef();
 
@@ -134,6 +135,9 @@ const FilesTableRow = (props) => {
   const onChangeIndex = (action) => {
     return onEditIndex(action, item, t);
   };
+
+  const onMouseEnter = useCallback(() => setIsHovered(true), []);
+  const onMouseLeave = useCallback(() => setIsHovered(false), []);
 
   const onDragOverEvent = (dragActive, e) => {
     onDragOver && onDragOver(e);
@@ -244,6 +248,8 @@ const FilesTableRow = (props) => {
         hideColumns={hideColumns}
         badgeUrl={badgeUrl}
         canDrag={canDrag}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         {...contextOptionProps}
       >
         {isTemplates ? (
@@ -257,6 +263,7 @@ const FilesTableRow = (props) => {
           <RoomsRowDataComponent
             element={element}
             dragStyles={dragStyles}
+            isHovered={isHovered}
             {...props}
           />
         ) : isTrashFolder ? (

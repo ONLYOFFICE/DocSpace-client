@@ -62,24 +62,29 @@ const TagPure = ({
   onMouseEnter,
   onMouseLeave,
   advancedPopup,
+  setIsOpenDropdown,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
   const tagRef = React.useRef<HTMLDivElement | null>(null);
   const isMountedRef = React.useRef(true);
 
-  const onClickOutside = React.useCallback((e: Event) => {
-    const target = e.target as HTMLElement;
-    if (
-      (!!target &&
-        typeof target.className !== "object" &&
-        target.className?.includes("advanced-tag")) ||
-      !isMountedRef.current
-    )
-      return;
+  const onClickOutside = React.useCallback(
+    (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (
+        (!!target &&
+          typeof target.className !== "object" &&
+          target.className?.includes("advanced-tag")) ||
+        !isMountedRef.current
+      )
+        return;
 
-    setOpenDropdown(false);
-  }, []);
+      setIsOpenDropdown?.(false);
+      setOpenDropdown(false);
+    },
+    [setIsOpenDropdown],
+  );
 
   React.useEffect(() => {
     if (advancedPopup) return;
@@ -105,7 +110,11 @@ const TagPure = ({
     if (target?.className?.includes("backdrop-active")) return;
     e.stopPropagation();
 
-    setOpenDropdown(true);
+    setOpenDropdown((prev) => {
+      const value = !prev;
+      setIsOpenDropdown?.(value);
+      return value;
+    });
   };
 
   const onClickAction = React.useCallback(
@@ -143,7 +152,14 @@ const TagPure = ({
       <>
         <div
           id={id}
-          className={classNames(commonClassName, "advanced-tag")}
+          className={classNames(
+            commonClassName,
+            styles.advancedTag,
+            "advanced-tag",
+            {
+              [styles.createIconWrapper]: icon,
+            },
+          )}
           style={commonStyle}
           ref={tagRef}
           onClick={openDropdownAction}
@@ -151,9 +167,12 @@ const TagPure = ({
           onMouseLeave={onMouseLeave}
           data-testid="tag"
         >
-          <Text className={styles.tagText} fontSize="13px" noSelect>
-            +{label}
-          </Text>
+          {icon ? <ReactSVG className={styles.createIcon} src={icon} /> : null}
+          {label ? (
+            <Text className={styles.tagText} fontSize="13px" noSelect>
+              {label}
+            </Text>
+          ) : null}
         </div>
 
         {advancedPopup ? (

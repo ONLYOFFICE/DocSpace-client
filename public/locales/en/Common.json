@@ -876,5 +876,8 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "OrSelectFromAvailableMatches": "Or select from available matches",
+  "SelectAnOptionOrCreateOne": "Select an option or create one",
+  "CreateTag": "Create tag"
 }

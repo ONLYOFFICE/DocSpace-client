@@ -34,6 +34,7 @@ import React, {
   useState,
   useOptimistic,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { computePosition, offset, flip, shift } from "@floating-ui/dom";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
@@ -85,6 +86,8 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
 
   const isMobile = useIsMobile();
   useClickOutside(isMobile ? modalRef : ref, onClose, [onClose]);
+
+  const { t } = useTranslation("Common");
 
   useLayoutEffect(() => {
     if (!reference.current || !ref.current || isMobile) return;
@@ -176,9 +179,6 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
         withBorder={false}
       />
       <hr className={styles.divider} />
-      <Text className={styles.text} fontSize="12px" lineHeight="16px" noSelect>
-        Select an option or create one
-      </Text>
       {showCreateTag ? (
         <Text
           as="div"
@@ -188,7 +188,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
           fontWeight={600}
           lineHeight="16px"
         >
-          <span>Create</span>
+          <span>{t("Common:CreateTag")}</span>
           <Tag
             withIcon
             icon={PlusIcon}
@@ -199,6 +199,11 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
           />
         </Text>
       ) : null}
+      <Text className={styles.text} fontSize="12px" lineHeight="16px" noSelect>
+        {showCreateTag
+          ? t("Common:OrSelectFromAvailableMatches")
+          : t("Common:SelectAnOptionOrCreateOne")}
+      </Text>
       <div
         className={styles.wrapperList}
         style={{

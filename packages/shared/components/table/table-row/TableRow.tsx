@@ -82,6 +82,7 @@ const TableRow = (props: TableRowProps) => {
       isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
       ref={forwardedRef}
+      style={style}
       {...rest}
     >
       {children}
@@ -89,7 +90,6 @@ const TableRow = (props: TableRowProps) => {
         <div className="context-menu-container">
           <TableCell
             {...selectionProp}
-            style={style}
             forwardedRef={row}
             className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
           >

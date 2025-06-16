@@ -51,7 +51,7 @@ const PlanUpgradePreview = (props) => {
   const { currentStoragePlanSize, amount, daysUtilPayment } = props;
   const { setFuturePayment, futurePayment, setIsWaitingCalculation } =
     usePaymentContext();
-  const { t } = useTranslation("Payments");
+  const { t } = useTranslation(["Payments", "Common"]);
   const [isLoading, setIsLoading] = useState(false);
 
   const { formatWalletCurrency, calculateDifferenceBetweenPlan } =
@@ -76,7 +76,10 @@ const PlanUpgradePreview = (props) => {
             controller.signal,
           );
 
-          if (!currentWriteOff) return;
+          if (!currentWriteOff) {
+            toastr.error(t("Common:UnexpectedError"));
+            return;
+          }
 
           const paymentAmount = currentWriteOff.amount;
           setFuturePayment(paymentAmount);

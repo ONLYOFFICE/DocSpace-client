@@ -151,7 +151,9 @@ const ConfigureDeepLinkComponent = (props: Props) => {
           {t("ConfigureDeepLink")}
         </Text>
       ) : null}
-      <Text>{t("ConfigureDeepLinkDescription")}</Text>
+      <Text className="category-item-description" fontSize="13px">
+        {t("ConfigureDeepLinkDescription")}
+      </Text>
       <RadioButtonGroup
         className="radio-button-group"
         fontSize="13px"
@@ -161,12 +163,14 @@ const ConfigureDeepLinkComponent = (props: Props) => {
         options={[
           {
             id: "provide-a-choice",
-            label: t("ProvideChoice"),
+            label: t("AlwaysAsk"),
             value: 0,
           },
           {
             id: "by-web",
-            label: t("OpenInWebOnly"),
+            label: t("OpenInWebOnly", {
+              productName: t("Common:ProductName"),
+            }),
             value: 1,
           },
           {

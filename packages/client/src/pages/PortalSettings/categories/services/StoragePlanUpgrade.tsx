@@ -288,6 +288,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         onClose={onClose}
         displayType={ModalDialogType.aside}
         containerVisible={isVisibleContainer}
+        withBodyScroll
       >
         <ModalDialog.Container>{container}</ModalDialog.Container>
         <ModalDialog.Header>{t("DiskStorage")}</ModalDialog.Header>

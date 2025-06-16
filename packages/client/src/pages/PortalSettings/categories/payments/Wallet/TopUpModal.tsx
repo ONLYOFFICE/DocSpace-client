@@ -99,6 +99,7 @@ const TopUpModal = (props: TopUpModalProps) => {
         onClose={onClose}
         displayType={ModalDialogType.aside}
         {...headerProps}
+        withBodyScroll
       >
         <ModalDialog.Header>{t("TopUpWallet")}</ModalDialog.Header>
         <ModalDialog.Body>

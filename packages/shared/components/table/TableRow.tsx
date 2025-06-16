@@ -35,7 +35,7 @@ import {
 import { StyledTableRow } from "./Table.styled";
 import { TableRowProps } from "./Table.types";
 
-import { TableCell } from "./sub-components/TableCell";
+import { TableCell } from "./sub-components/table-cell";
 import { hasOwnProperty } from "../../utils/object";
 
 const TableRow = (props: TableRowProps) => {

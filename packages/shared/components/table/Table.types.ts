@@ -125,13 +125,18 @@ export interface TableRowProps {
   selectionProp?: { className: string };
   className?: string;
   style?: React.CSSProperties;
+  contextMenuCellStyle?: React.CSSProperties;
   title?: string;
   getContextModel?: () => ContextMenuModel[];
   badgeUrl?: string;
   isIndexEditingMode?: boolean;
   onClick?: (e: React.MouseEvent) => void;
+  onDoubleClick?: (e: React.MouseEvent) => void;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   hideColumns?: boolean;
+  active?: boolean;
+  checked?: boolean;
+  dragging?: boolean;
 }
 
 export interface TableCellProps {

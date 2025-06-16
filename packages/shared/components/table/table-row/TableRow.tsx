@@ -25,18 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
+import classNames from "classnames";
 
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
-
-import { StyledTableRow } from "../Table.styled";
-import { TableRowProps } from "../Table.types";
+import { hasOwnProperty } from "../../../utils/object";
 
 import { TableCell } from "../sub-components/table-cell";
-import { hasOwnProperty } from "../../../utils/object";
+import { TableRowProps } from "../Table.types";
+import styles from "./TableRow.module.scss";
 
 const TableRow = (props: TableRowProps) => {
   const {
@@ -52,7 +52,13 @@ const TableRow = (props: TableRowProps) => {
     badgeUrl,
     isIndexEditingMode,
     forwardedRef,
-    ...rest
+    checked,
+    active,
+    dragging,
+    hideColumns,
+    onClick,
+    onDoubleClick,
+    contextMenuCellStyle,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -76,14 +82,27 @@ const TableRow = (props: TableRowProps) => {
     return contextOptions || [];
   };
 
+  const tableRowClasses = classNames(
+    styles.tableRow,
+    className,
+    "table-container_row",
+    {
+      [styles.isIndexEditingMode]: isIndexEditingMode,
+      [styles.active]: active,
+      [styles.checked]: checked,
+      [styles.dragging]: dragging,
+      [styles.hideColumns]: hideColumns,
+    },
+  );
+
   return (
-    <StyledTableRow
+    <div
       onContextMenu={onContextMenu}
-      isIndexEditingMode={isIndexEditingMode}
-      className={`${className} table-container_row`}
+      className={tableRowClasses}
       ref={forwardedRef}
       style={style}
-      {...rest}
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
     >
       {children}
       {isIndexEditingMode ? null : (
@@ -91,7 +110,11 @@ const TableRow = (props: TableRowProps) => {
           <TableCell
             {...selectionProp}
             forwardedRef={row}
-            className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
+            className={classNames(
+              selectionProp?.className,
+              "table-container_row-context-menu-wrapper",
+            )}
+            style={contextMenuCellStyle}
           >
             <>
               <ContextMenu
@@ -120,7 +143,7 @@ const TableRow = (props: TableRowProps) => {
           </TableCell>
         </div>
       )}
-    </StyledTableRow>
+    </div>
   );
 };
 

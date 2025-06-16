@@ -24,23 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
-import isEqual from "lodash/isEqual";
 
 import { Text } from "@docspace/shared/components/text";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { toastr } from "@docspace/shared/components/toast";
 
 import { DeviceType, DeepLinkType } from "@docspace/shared/enums";
-import { saveDeepLinkSettings } from "@docspace/shared/api/settings";
-
-import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
-import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { useDeepLinkSettings } from "@docspace/shared/hooks/useDeepLinkSettings";
 
 interface Props {
   isMobileView: boolean;
@@ -66,41 +61,25 @@ const StyledWrapper = styled.div`
 
 const ConfigureDeepLinkComponent = (props: Props) => {
   const { isMobileView, deepLinkSettings, initSettings } = props;
+  const {
+    type,
+    showReminder,
+    isSaving,
+    onSelect,
+    onSave,
+    onCancel,
+    getSettings,
+  } = useDeepLinkSettings({ deepLinkSettings });
 
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [type, setType] = useState(0);
-  const [showReminder, setShowReminder] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-
-  const getSettings = () => {
-    const currentSettings = getFromSessionStorage("currentConfigureDeepLink");
-    saveToSessionStorage("defaultConfigureDeepLink", deepLinkSettings);
-
-    if (currentSettings) {
-      setType(currentSettings);
-    } else {
-      setType(deepLinkSettings);
-    }
-  };
 
   const checkWidth = () => {
     if (!isMobileView && location.pathname.includes("configure-deep-link")) {
       navigate("/portal-settings/customization/general");
     }
   };
-
-  useEffect(() => {
-    const defaultSettings = getFromSessionStorage("defaultConfigureDeepLink");
-
-    if (isEqual(Number(defaultSettings), type)) {
-      setShowReminder(false);
-    } else {
-      setShowReminder(true);
-    }
-  }, [type]);
 
   useEffect(() => {
     initSettings(isMobileView ? "configure-deep-link" : "general");
@@ -113,36 +92,6 @@ const ConfigureDeepLinkComponent = (props: Props) => {
     if (!deepLinkSettings) return;
     getSettings();
   }, [deepLinkSettings]);
-
-  const onSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (type !== Number(e.target.value)) {
-      saveToSessionStorage("currentConfigureDeepLink", Number(e.target.value));
-      setType(Number(e.target.value));
-    }
-  };
-
-  const onSave = async () => {
-    try {
-      setIsSaving(true);
-      await saveDeepLinkSettings(type);
-      setShowReminder(false);
-      saveToSessionStorage("defaultConfigureDeepLink", type);
-      saveToSessionStorage("currentConfigureDeepLink", type);
-      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
-    } catch (e) {
-      toastr.error(e!);
-    } finally {
-      setIsSaving(false);
-    }
-  };
-
-  const onCancel = () => {
-    const defaultSettings = getFromSessionStorage("defaultConfigureDeepLink");
-    const defaultType = defaultSettings || DeepLinkType.Choice;
-    setType(Number(defaultType));
-    saveToSessionStorage("currentConfigureDeepLink", defaultType);
-    setShowReminder(false);
-  };
 
   return (
     <StyledWrapper>

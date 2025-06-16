@@ -39,7 +39,6 @@ interface ButtonContainerProps {
   title: string;
   isLoading: boolean;
   isExceedingStorageLimit: boolean;
-  amount: number;
   insufficientFunds: boolean;
   isCurrentStoragePlan?: boolean;
   isUpgradeStoragePlan: boolean;

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import classNames from "classnames";
 import { Text } from "../text";
 import styles from "./TabItem.module.scss";
@@ -35,18 +35,29 @@ const TabItem = ({
   onSelect,
   isActive: isActiveInit = false,
   className,
+  allowNoSelection,
   ...rest
 }: TTabItemProps) => {
   const [isActive, setIsActive] = useState(isActiveInit);
 
-  const onSelectItem = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsActive(!isActive);
+  const onSelectItem = useCallback(
+    (itemIsActive: boolean) => {
+      if (!allowNoSelection) {
+        setIsActive(itemIsActive);
+      }
+    },
+    [allowNoSelection],
+  );
+
+  const onItemClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    onSelectItem(!isActive);
+
     onSelect?.(e);
   };
 
   useEffect(() => {
-    setIsActive(isActiveInit);
-  }, [isActiveInit]);
+    onSelectItem(isActiveInit);
+  }, [isActiveInit, onSelectItem]);
 
   return (
     <div
@@ -58,7 +69,7 @@ const TabItem = ({
         className,
         "tab-item",
       )}
-      onClick={onSelectItem}
+      onClick={onItemClick}
       aria-selected={isActive}
       data-testid="tab-item"
       {...rest}

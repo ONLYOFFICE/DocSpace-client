@@ -45,7 +45,6 @@ const Tabs = (props: TabsProps) => {
     type = TabsTypes.Primary,
     stickyTop,
     onSelect,
-    allowNoSelection = false,
     withoutStickyIntend = false,
     layoutId,
     ...rest
@@ -54,9 +53,7 @@ const Tabs = (props: TabsProps) => {
   const { interfaceDirection } = useInterfaceDirection();
 
   const selectedItemIndex = !selectedItemId
-    ? allowNoSelection
-      ? -1
-      : 0
+    ? 0
     : items.findIndex((item) => item.id === selectedItemId);
 
   const tabsRef = useRef<HTMLDivElement>(null);

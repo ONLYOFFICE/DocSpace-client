@@ -27,12 +27,14 @@
 import React from "react";
 
 export type TTabItemProps = {
-  /** Tab text. */
+  /** Tab item text. */
   label: string | React.ReactNode;
   /** Callback function when tab is selected. */
   onSelect?: (event: React.MouseEvent<HTMLDivElement>) => void;
   /** Determines if the tab is currently active. */
-  isActive: boolean;
+  isActive?: boolean;
+  /** Allows the tab to be deselected, resulting in no active tab. */
+  allowNoSelection?: boolean;
   /** Sets a tab class name */
   className?: string;
 };

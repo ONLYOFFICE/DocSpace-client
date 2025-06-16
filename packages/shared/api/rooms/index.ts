@@ -300,9 +300,7 @@ export function getTags() {
     url: "/files/tags",
   };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  return request<string[]>(options);
 }
 
 export function uploadRoomLogo(data) {

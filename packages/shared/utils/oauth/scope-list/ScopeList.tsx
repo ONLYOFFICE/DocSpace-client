@@ -25,46 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
+import classNames from "classnames";
 
 import { ScopeType } from "../../../enums";
 import { TTranslation } from "../../../types";
 
 import { TFilteredScopes, TScope } from "../types";
 import { filterScopeByGroup } from "../index";
-import { injectDefaultTheme } from "../../injectDefaultTheme";
-
-const StyledScopeList = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 4px;
-`;
-
-const StyledScopeItem = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  gap: 8px;
-
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 20px;
-
-  .circle {
-    width: 4px;
-    height: 4px;
-
-    border-radius: 50%;
-
-    background: ${(props) => props.theme.color};
-  }
-`;
+import styles from "./ScopeList.module.scss";
 
 export interface TScopeListProps {
   selectedScopes: string[];
@@ -110,13 +78,13 @@ export const ScopeList = ({ selectedScopes, scopes, t }: TScopeListProps) => {
   }, [selectedScopes, scopes, t]);
 
   return (
-    <StyledScopeList className="scope-list">
+    <div className={classNames(styles.scopeList, "scope-list")}>
       {renderedScopes.map((scope) => (
-        <StyledScopeItem key={`${scope}`}>
-          <div className="circle" />
+        <div className={styles.scopeItem} key={`${scope}`}>
+          <div className={styles.circle} />
           {t(`Common:${scope}`)}
-        </StyledScopeItem>
+        </div>
       ))}
-    </StyledScopeList>
+    </div>
   );
 };

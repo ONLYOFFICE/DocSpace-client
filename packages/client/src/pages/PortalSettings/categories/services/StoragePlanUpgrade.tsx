@@ -63,6 +63,7 @@ type StorageDialogProps = {
   hasScheduledStorageChange?: boolean;
   nextStoragePlanSize?: number;
   storageSizeIncrement?: number;
+  isVisibleWalletSettings?: boolean;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -79,11 +80,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   nextStoragePlanSize,
   handleServicesQuotas,
   storageSizeIncrement,
+  isVisibleWalletSettings,
+  setVisibleWalletSetting,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
   const [isLoading, setIsLoading] = useState(false);
-  const [isVisibleContainer, setIsVisible] = useState(false);
+  const [isVisibleContainer, setIsVisibleContainer] = useState(
+    isVisibleWalletSettings,
+  );
   const [isRequestDialog, setIsRequestDialog] = useState(false);
 
   const {
@@ -236,14 +241,19 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     setAmount(value);
   };
 
+  const onCloseTopUpModal = () => {
+    setIsVisibleContainer(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting(false);
+  };
+
   const container = isVisibleContainer ? (
     <TopUpModal
       visible={isVisibleContainer}
-      onClose={() => setIsVisible(false)}
+      onClose={onCloseTopUpModal}
       headerProps={{
         isBackButton: true,
-        onBackClick: () => setIsVisible(false),
-        onCloseClick: () => setIsVisible(false),
+        onBackClick: onCloseTopUpModal,
+        onCloseClick: onCloseTopUpModal,
       }}
     />
   ) : null;
@@ -331,7 +341,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
             {amount || hasStorageSubscription ? (
               <WalletContainer
-                onTopUp={() => setIsVisible(true)}
+                onTopUp={() => setIsVisibleContainer(true)}
                 insufficientFunds={insufficientFunds}
                 isExceedingStorageLimit={isExceedingStorageLimit}
                 isUpgradeStoragePlan={isUpgradeStoragePlan}
@@ -366,11 +376,14 @@ export default inject(
       currentStoragePlanSize,
       nextStoragePlanSize,
     } = currentTariffStatusStore;
+
     const { fetchBalance, walletBalance } = paymentStore;
     const {
       storageSizeIncrement,
       storagePriceIncrement,
       handleServicesQuotas,
+      isVisibleWalletSettings,
+      setVisibleWalletSetting,
     } = servicesStore;
 
     return {
@@ -384,6 +397,8 @@ export default inject(
       storagePriceIncrement,
       nextStoragePlanSize,
       handleServicesQuotas,
+      setVisibleWalletSetting,
+      isVisibleWalletSettings,
     };
   },
 )(observer(StoragePlanUpgrade));

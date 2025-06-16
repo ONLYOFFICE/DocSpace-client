@@ -5,13 +5,13 @@
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
     "build": "next build",
-    "start": "NODE_ENV=development node server.js",
+    "start": "NODE_ENV=development next dev",
     "start-prod": "NODE_ENV=production node server.js",
-    "start:internal": "NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
+    "start:internal": "NODE_ENV=development API_HOST=http://127.0.0.1 next dev",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
-    "deploy": "node ./scripts/deploy.js"
+    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/standalone/* ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -r .next/static/* ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -f server.prod.js ../../../publish/web/editor/server.js"
   },
   "dependencies": {
     "@docspace/shared": "workspace:*",

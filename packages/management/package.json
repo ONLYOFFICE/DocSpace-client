@@ -5,13 +5,13 @@
   "scripts": {
     "build:translations": "node scripts/buildTranslations.js",
     "build": "next build",
-    "start": "NODE_ENV=development PORT=5015 node server.js",
+    "start": "NODE_ENV=development PORT=5015 next dev",
     "start-prod": "NODE_ENV=production node server.js",
-    "start:internal": "NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
+    "start:internal": "NODE_ENV=development API_HOST=http://127.0.0.1 next dev",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/.next && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config && shx --silent mkdir -p ../../../publish/web/management/node_modules && shx --silent mkdir -p ../../../publish/web/management/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/management/node_modules && shx cp -r .next/static/* ../../../publish/web/management/.next/static    && shx cp -r .next/standalone/packages/management/.next/* ../../../publish/web/management/.next &&  shx cp -f server.prod.js ../../../publish/web/management/server.js &&  shx cp -f logger.mjs ../../../publish/web/management/logger.mjs && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config"
+    "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx cp -r .next/standalone/* ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/packages/management/.next/static && shx cp -r .next/static/* ../../../publish/web/management/packages/management/.next/static && shx cp -f server.prod.js ../../../publish/web/management/server.js"
   },
   "dependencies": {
     "@babel/runtime": "7.25.7",
@@ -37,7 +37,7 @@
     "winston": "3.17.0",
     "winston-cloudwatch": "6.3.0",
     "winston-daily-rotate-file": "5.0.0",
-    "@aws-sdk/client-cloudwatch-logs": "3.816.0"
+    "@aws-management/client-cloudwatch-logs": "3.816.0"
   },
   "devDependencies": {
     "@types/lodash": "4.17.10",

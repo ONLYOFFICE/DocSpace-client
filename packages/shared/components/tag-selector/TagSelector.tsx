@@ -36,7 +36,13 @@ import React, {
   useEffect,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { computePosition, offset, flip, shift } from "@floating-ui/dom";
+import {
+  computePosition,
+  autoUpdate,
+  offset,
+  flip,
+  shift,
+} from "@floating-ui/dom";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
@@ -108,25 +114,39 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
         console.error("Error fetching tags:", error);
       });
   }, []);
+
   useLayoutEffect(() => {
     if (!reference.current || !ref.current || isMobile) return;
 
-    computePosition(reference.current, ref.current, {
-      placement: "bottom-start",
-      strategy: "fixed",
-      middleware: [
-        offset(4),
-        flip({
-          fallbackAxisSideDirection: "end",
-        }),
-        shift(),
-      ],
-    }).then(({ x, y }) => {
-      if (ref.current) {
-        ref.current.style.left = `${x}px`;
-        ref.current.style.top = `${y}px`;
-      }
-    });
+    const cleanup = autoUpdate(
+      reference.current,
+      ref.current,
+      () => {
+        if (!reference.current || !ref.current || isMobile) return;
+
+        computePosition(reference.current, ref.current, {
+          placement: "bottom-start",
+          strategy: "fixed",
+          middleware: [
+            offset(4),
+            flip({
+              fallbackAxisSideDirection: "end",
+            }),
+            shift(),
+          ],
+        }).then(({ x, y }) => {
+          if (ref.current) {
+            ref.current.style.left = `${x}px`;
+            ref.current.style.top = `${y}px`;
+          }
+        });
+      },
+      { animationFrame: true },
+    );
+
+    return () => {
+      cleanup();
+    };
   }, [reference, ref, isMobile]);
 
   const onChangeTitleTag = (event: React.ChangeEvent<HTMLInputElement>) => {

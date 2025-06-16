@@ -24,15 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import { Tags } from "@docspace/shared/components/tags";
-import classNames from "classnames";
 import { TagType } from "@docspace/shared/components/tags/Tags.types";
-import { RoomTileProps, RoomItem } from "./RoomTile.types";
+
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
 
+import { RoomTileProps, RoomItem } from "./RoomTile.types";
 import styles from "./RoomTile.module.scss";
 
 export const RoomTile = ({
@@ -140,6 +142,7 @@ export const RoomTile = ({
       onMouseLeave={onLeave}
       tags={tags}
       className="room-tags"
+      showCreateTag={isHovered || checked}
     />
   );
 

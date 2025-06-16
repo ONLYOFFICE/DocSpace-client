@@ -67,7 +67,12 @@ const Tags: FC<TagsProps> = ({
     );
 
     return (
-      <TagSelector tags={tempTags} reference={reference} onClose={onClose} />
+      <TagSelector
+        tags={tempTags}
+        onClose={onClose}
+        reference={reference}
+        onSelectTag={onSelectTag}
+      />
     );
   };
 

@@ -172,6 +172,8 @@ export const BaseTile = ({
       className={tileClassName}
       onClick={onRoomClick}
       onContextMenu={onContextMenu}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
     >
       <div className={styles.topContent}>
         {element && !isEdit ? (
@@ -204,11 +206,7 @@ export const BaseTile = ({
 
         <div className={contentClassNames}>{topContent}</div>
 
-        <div
-          className={styles.optionButton}
-          onMouseEnter={onHover}
-          onMouseLeave={onLeave}
-        >
+        <div className={styles.optionButton}>
           {renderContext ? (
             <ContextMenuButton
               isFill

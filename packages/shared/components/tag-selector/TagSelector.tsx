@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import unionBy from "lodash/unionBy";
 import { createPortal } from "react-dom";
 import classNames from "classnames";
 import React, {
@@ -32,28 +33,29 @@ import React, {
   useMemo,
   useRef,
   useState,
-  useOptimistic,
+  useEffect,
 } from "react";
 import { useTranslation } from "react-i18next";
 import { computePosition, offset, flip, shift } from "@floating-ui/dom";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/plus.svg?url";
-
-import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { useClickOutside } from "../../utils/useClickOutside";
 import { useIsMobile } from "../../hooks/useIsMobile";
-import { ModalDialog, ModalDialogType } from "../modal-dialog";
+
+import { getTags } from "../../api/rooms";
 
 import { Tag } from "../tag";
 import { Text } from "../text";
 import { Checkbox } from "../checkbox";
+import { Scrollbar } from "../scrollbar";
 import { IconButton } from "../icon-button";
 import { InputSize, InputType, TextInput } from "../text-input";
-import { Scrollbar } from "../scrollbar";
+import { ModalDialog, ModalDialogType } from "../modal-dialog";
 
 import styles from "./TagSelector.module.scss";
 import {
@@ -68,6 +70,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
   reference,
   onClose,
   tags: propsTags,
+  onSelectTag,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -89,6 +92,22 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
 
   const { t } = useTranslation("Common");
 
+  useEffect(() => {
+    getTags()
+      ?.then((res) => {
+        setTags((prev) => {
+          const newTags = unionBy(
+            prev,
+            res.map((tag) => ({ name: tag, checked: false })),
+            "name",
+          );
+          return newTags;
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching tags:", error);
+      });
+  }, []);
   useLayoutEffect(() => {
     if (!reference.current || !ref.current || isMobile) return;
 
@@ -158,8 +177,6 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       filteredTags.every((tag) => tag.name !== trimmedTagValue)
     );
   }, [deferredTagValue, filteredTags]);
-
-  const onClickTag = () => {};
 
   const element = (
     <div
@@ -256,7 +273,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
                       className={styles.tag}
                       label={tag.name}
                       tag={tag.name}
-                      onClick={onClickTag}
+                      onClick={onSelectTag}
                     />
                     <IconButton
                       size={ICON_SIZE}

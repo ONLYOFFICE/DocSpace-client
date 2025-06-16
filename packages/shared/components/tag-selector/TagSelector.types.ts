@@ -28,6 +28,7 @@ export interface TagSelectorProps {
   reference: React.RefObject<HTMLElement | null>;
   onClose: (event: MouseEvent) => void;
   tags: string[];
+  onSelectTag: (tag?: object) => void;
 }
 
 export type TTag = {

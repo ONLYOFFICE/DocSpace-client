@@ -28,13 +28,11 @@ import React from "react";
 
 import { Tags } from "@docspace/shared/components/tags";
 
-import { Text } from "@docspace/shared/components/text";
-
 const TagsCell = ({
   item,
   tagCount,
   onSelectTag,
-  sideColor,
+  // sideColor,
   isHovered,
   isActive,
   checkedProps,
@@ -68,48 +66,12 @@ const TagsCell = ({
 
   return (
     <div style={styleTagsCell}>
-      {tags.length === 0 ? (
-        <Text color={sideColor} />
-      ) : (
-        <Tags
-          tags={tags}
-          columnCount={tagCount}
-          onSelectTag={onSelectTag}
-          showCreateTag={isHovered || isActive || checkedProps}
-        />
-      )}
-
-      {/* {item.providerType && (
-        <Tag
-          icon={item.thirdPartyIcon}
-          label={item.providerKey}
-          onClick={() =>
-            onSelectOption({
-              option: "typeProvider",
-              value: item.providerType,
-            })
-          }
-        />
-      )}
-
-      {item.tags.length > 0 ? (
-        <Tags
-          tags={item.tags}
-          columnCount={tagCount}
-          onSelectTag={onSelectTag}
-        />
-      ) : (
-        <Tag
-          isDefault
-          label={getRoomTypeName(item.roomType, t)}
-          onClick={() =>
-            onSelectOption({
-              option: "defaultTypeRoom",
-              value: item.roomType,
-            })
-          }
-        />
-      )} */}
+      <Tags
+        tags={tags}
+        columnCount={tagCount}
+        onSelectTag={onSelectTag}
+        showCreateTag={isHovered || isActive || checkedProps}
+      />
     </div>
   );
 };

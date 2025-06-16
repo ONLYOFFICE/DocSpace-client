@@ -34,8 +34,10 @@ const TabItem = ({
   label,
   onSelect,
   isActive: isActiveInit = false,
+  isDisabled,
   className,
   allowNoSelection,
+  withMultiSelect = false,
   ...rest
 }: TTabItemProps) => {
   const [isActive, setIsActive] = useState(isActiveInit);
@@ -50,9 +52,11 @@ const TabItem = ({
   );
 
   const onItemClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    onSelectItem(!isActive);
-
-    onSelect?.(e);
+    if (isDisabled) return;
+    if (!(isActive && !withMultiSelect)) {
+      onSelectItem(!isActive);
+      onSelect?.(e);
+    }
   };
 
   useEffect(() => {
@@ -65,6 +69,7 @@ const TabItem = ({
         styles.tabItem,
         {
           [styles.active]: isActive,
+          [styles.disabled]: isDisabled,
         },
         className,
         "tab-item",

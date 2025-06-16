@@ -47,3 +47,10 @@
 .storagePerMonth {
   margin-top: 4px;
 }
+
+.amountTabItemsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  height: 32px;
+}

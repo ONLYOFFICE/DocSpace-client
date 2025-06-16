@@ -33,8 +33,12 @@ export type TTabItemProps = {
   onSelect?: (event: React.MouseEvent<HTMLDivElement>) => void;
   /** Determines if the tab is currently active. */
   isActive?: boolean;
+  /** Determines if the tab is disabled and cannot be interacted with. */
+  isDisabled?: boolean;
   /** Allows the tab to be deselected, resulting in no active tab. */
   allowNoSelection?: boolean;
+  /** Enables multi-select functionality */
+  withMultiSelect?: boolean;
   /** Sets a tab class name */
   className?: string;
 };

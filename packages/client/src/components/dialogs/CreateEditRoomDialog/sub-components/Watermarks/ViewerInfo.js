@@ -224,11 +224,13 @@ const ViewerInfoWatermark = ({
 
           return (
             <TabItem
-              data-key={item.id}
               key={item.id}
+              data-key={item.id}
               label={item.name}
               isActive={isActive}
+              isDisabled={isActive}
               onSelect={onSelect}
+              withMultiSelect
             />
           );
         })}

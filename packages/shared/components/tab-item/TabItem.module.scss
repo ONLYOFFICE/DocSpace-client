@@ -53,6 +53,11 @@
     }
   }
 
+  &.disabled:not(&.active) {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
   --webkit-tap-highlight-color: #{colors.$tap-highlight};
 }
 

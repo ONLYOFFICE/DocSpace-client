@@ -57,6 +57,7 @@
   "CommonFilesDescription": "For the files in the Common section, a separate room will be created (Common room). Only {{productName}} admins will have access to this room. By default, the owner of the room will be the user initiating the import: {{user}} (You).",
   "ConfigureDeepLink": "Configure file opening",
   "ConfigureDeepLinkDescription": "When handling office files in a mobile browser, users can choose (or be defaulted) how they prefer to open files.",
+  "ConfigureDeepLinkUserDescription": "Choose how you want to open office files when handling them in a mobile browser.",
   "ConfirmEmailSended": "Confirmation e-mail has been sent to {{ownerName}}",
   "ContactsInviteNote": "Enable this option to allow invitations to be sent to new {{productName}} members through the {{sectionName}} section. Disable this option in case you want to invite new members through LDAP only.  ",
   "CreateNewSecretKey": "Create new secret key",

@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
+import ConfigureFileOpening from "./sub-components/configure-file-opening";
 
 import StyledWrapper from "./styled-file-management";
 
@@ -160,6 +161,7 @@ const FileManagement = ({
           <Text>{t("CancellaionNotification")}</Text>
         </div>
       </div>
+      <ConfigureFileOpening />
     </StyledWrapper>
   );
 };

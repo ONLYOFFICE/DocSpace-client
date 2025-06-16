@@ -121,7 +121,7 @@ export const useServicesActions = () => {
 
     if (!hasSubscription) return t("Buy");
 
-    if (isPlanUpgrade(quantity)) return t("Upgrade");
+    if (isPlanUpgrade(quantity) || isCurrentPlan(quantity)) return t("Upgrade");
 
     return t("Downgrade");
   };

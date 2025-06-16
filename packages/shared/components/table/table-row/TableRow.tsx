@@ -26,17 +26,17 @@
 
 import React, { useRef } from "react";
 
-import { ContextMenu, ContextMenuRefType } from "../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "../context-menu-button";
+} from "../../context-menu-button";
 
-import { StyledTableRow } from "./Table.styled";
-import { TableRowProps } from "./Table.types";
+import { StyledTableRow } from "../Table.styled";
+import { TableRowProps } from "../Table.types";
 
-import { TableCell } from "./sub-components/table-cell";
-import { hasOwnProperty } from "../../utils/object";
+import { TableCell } from "../sub-components/table-cell";
+import { hasOwnProperty } from "../../../utils/object";
 
 const TableRow = (props: TableRowProps) => {
   const {

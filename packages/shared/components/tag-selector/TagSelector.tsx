@@ -171,12 +171,12 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
       <TextInput
         scale
         autoFocus
-        className={styles.input}
-        value={newTagValue}
-        placeholder="Add a tag"
-        type={InputType.text}
-        onChange={onChangeTitleTag}
         withBorder={false}
+        value={newTagValue}
+        type={InputType.text}
+        className={styles.input}
+        onChange={onChangeTitleTag}
+        placeholder={t("Common:AddTag")}
       />
       <hr className={styles.divider} />
       {showCreateTag ? (

@@ -29,6 +29,7 @@
   "ActivationRequired": "activation required",
   "Active": "Active",
   "AddButton": "Add",
+  "AddTag": "Add a tag",
   "AdditionalResources": "Additional resources",
   "AdditionalResourcesDescription": "Choose whether you want to display links to additional resources in {{productName}} menu.",
   "AdditionalResourcesSubtitle": "Configure the display of links to helpful resources for your users.",

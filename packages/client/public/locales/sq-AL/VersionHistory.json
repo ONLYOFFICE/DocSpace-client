@@ -1,4 +1,6 @@
 {
   "EditComment": "Redaktoni komentin",
-  "Version": "Ver."
+  "Version": "Ver.",
+  "DeleteVersion": "Fshij versionin",
+  "DeleteVersionDescription": "Jeni duke shuar një version skedarësh. Nuk do të jetë e mundur ta shihni ose ta rivendosni atë më. Jeni të sigurt që doni të vazgoni?"
 }

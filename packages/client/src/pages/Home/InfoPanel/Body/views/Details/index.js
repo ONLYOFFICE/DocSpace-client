@@ -172,7 +172,7 @@ const Details = ({
           }
         >
           <img
-            src={`${selection.thumbnailUrl}&size=1280x720`}
+            src={`${selection.thumbnailUrl}`}
             alt="thumbnail-image"
             // height={260}
             // width={360}

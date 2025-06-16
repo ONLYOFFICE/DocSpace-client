@@ -359,5 +359,13 @@
   "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
-  "YourLogo": "Seu logotipo"
+  "YourLogo": "Seu logotipo",
+  "InvitationSettings": "Configurações de Convite",
+  "InvitationSettingsContacts": "Convidar membros do {{productName}} via Contatos",
+  "InvitationSettingsContactsDescription": "Habilite esta opção para permitir o envio de convites para novos membros do {{productName}} pela seção Contatos. Desabilite esta opção caso queira convidar novos membros somente via LDAP.",
+  "InvitationSettingsDescription": "Habilite esta opção para permitir o envio de convites para novos membros do {{productName}} pela seção Contatos. Desabilite esta opção caso queira convidar novos membros somente via LDAP.",
+  "InvitationSettingsGuests": "Permitir convites",
+  "InvitationSettingsGuestsDescription": "Habilite esta opção para permitir que todos os membros do {{productName}} convidem convidados externos para as salas.",
+  "InvitationSettingsMobile": "Configure as opções de convite para membros internos e convidados externos do seu {{productName}}.",
+  "Services": "Serviços"
 }

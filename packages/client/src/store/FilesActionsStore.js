@@ -804,6 +804,9 @@ class FilesActionStore {
               ? data
               : await this.uploadDataStore.loopFilesOperations(data, pbData);
 
+          clearActiveOperations(fileIds, folderIds);
+          setDownloadItems([]);
+
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
           }
@@ -819,6 +822,8 @@ class FilesActionStore {
         },
       );
     } catch (err) {
+      clearActiveOperations(fileIds, folderIds);
+
       setSecondaryProgressBarData({
         operation: operationName,
         alert: true,
@@ -847,11 +852,9 @@ class FilesActionStore {
         setDownloadDialogVisible(true);
         return;
       }
+      setDownloadItems([]);
 
       return toastr.error(err, null, 0, true);
-    } finally {
-      clearActiveOperations(fileIds, folderIds);
-      setDownloadItems([]);
     }
   };
 

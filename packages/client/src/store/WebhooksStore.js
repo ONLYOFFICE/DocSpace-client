@@ -135,7 +135,7 @@ class WebhooksStore {
 
   toggleEnabled = async (desiredWebhook, t) => {
     try {
-      await toggleEnabledWebhook(desiredWebhook);
+      const res = await toggleEnabledWebhook(desiredWebhook);
       const index = this.webhooks.findIndex(
         (webhook) => webhook.id === desiredWebhook.id,
       );
@@ -145,6 +145,8 @@ class WebhooksStore {
           ? t("WebhookEnabled")
           : t("WebhookDisabled"),
       );
+
+      return res;
     } catch (error) {
       toastr.error(error);
     }

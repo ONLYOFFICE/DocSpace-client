@@ -32,6 +32,7 @@ import { TEditHistory } from "@docspace/shared/api/files/types";
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TFormRole } from "@/types";
+import { toastr } from "@docspace/shared/components/toast";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -101,7 +102,15 @@ export const getDataSaveAs = async (params: string) => {
 
     return data as string;
   } catch (e) {
-    console.error("error");
+    let errorMessage = "";
+
+    if (typeof e === "object") {
+      errorMessage = (
+        e as { response: { data: { error: { message: string } } } }
+      )?.response?.data?.error?.message;
+    }
+
+    toastr.error(errorMessage);
   }
 };
 

@@ -152,6 +152,8 @@ class UploadDataStore {
 
   totalErrorsCount = 0;
 
+  finishUploadFilesCalled = false;
+
   constructor(
     settingsStore,
     treeFoldersStore,
@@ -254,6 +256,8 @@ class UploadDataStore {
   };
 
   cancelUpload = (t) => {
+    this.finishUploadFilesCalled = false;
+
     const newUploadData = {
       filesSize: this.filesSize,
       uploadedFiles: this.uploadedFiles,
@@ -1570,6 +1574,8 @@ class UploadDataStore {
   };
 
   startUploadFiles = async (t, createNewIfExist = true) => {
+    this.finishUploadFilesCalled = false;
+
     const files = this.files;
 
     if (files.length === 0 || this.filesSize === 0) {
@@ -1592,8 +1598,6 @@ class UploadDataStore {
   };
 
   startSessionFunc = (indexOfFile, t, createNewIfExist = true) => {
-    // console.log("START UPLOAD SESSION FUNC");
-
     if (!this.uploaded && this.files.length === 0) {
       this.uploaded = true;
       this.asyncUploadObj = {};
@@ -1602,12 +1606,14 @@ class UploadDataStore {
     }
 
     const item = this.files[indexOfFile];
+
     this.files[indexOfFile].inAction = true;
 
     if (!item) {
       console.error("Empty files");
       return Promise.resolve();
     }
+
     if (
       item.action === "uploaded" ||
       item.action === "convert" ||
@@ -1640,7 +1646,6 @@ class UploadDataStore {
         const location = res.data.location;
         const path = res.data.path;
         const operationId = res.data.id;
-
         const requestsDataArray = [];
 
         let chunk = 0;
@@ -1762,7 +1767,9 @@ class UploadDataStore {
               !f.cancel,
           ) === -1;
 
-        if (allFilesIsUploaded) {
+        if (allFilesIsUploaded && !this.finishUploadFilesCalled) {
+          this.finishUploadFilesCalled = true;
+
           if (!this.filesToConversion.length) {
             this.finishUploadFiles(t, !!this.tempConversionFiles.length);
           } else {

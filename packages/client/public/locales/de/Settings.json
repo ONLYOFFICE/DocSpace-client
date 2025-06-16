@@ -359,5 +359,13 @@
   "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort.",
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
-  "YourLogo": "Ihr Logo"
+  "YourLogo": "Ihr Logo",
+  "InvitationSettings": "Einladungseinstellungen",
+  "InvitationSettingsContacts": "{{productName}}-Mitglieder über Kontakte einladen",
+  "InvitationSettingsContactsDescription": "Aktivieren Sie diese Option, um Einladungen an neue {{productName}}-Mitglieder über den Bereich Kontakte zu senden. Deaktivieren Sie diese Option, wenn Sie neue Mitglieder nur über LDAP einladen möchten.",
+  "InvitationSettingsDescription": "Konfigurieren Sie die Einladungsoptionen für interne Mitglieder und externe Gäste Ihres {{productName}}. Diese Einstellungen helfen Ihnen, die Sicherheitsrichtlinien Ihres Unternehmens einzuhalten, beispielsweise wenn Sie LDAP oder andere Benutzerverwaltungssysteme verwenden.",
+  "InvitationSettingsGuests": "Einladen von Gästen zulassen",
+  "InvitationSettingsGuestsDescription": "Aktivieren Sie diese Option, um allen {{productName}}-Mitgliedern zu erlauben, externe Gäste in Räume einzuladen.",
+  "InvitationSettingsMobile": "Konfigurieren Sie die Einladungsoptionen für interne Mitglieder und externe Gäste Ihres {{productName}}.",
+  "Services": "Dienste"
 }

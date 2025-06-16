@@ -12,5 +12,11 @@
   "SendInvitation": "Enviar convite",
   "UserMaxAvailableRoleWarning": "Convidados e usuários não podem ser designados como gerentes de sala. Somente administradores de salas e de {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados",
-  "UsersCannotBeAdded": "Contatos desativados não podem ser adicionados a uma sala."
+  "UsersCannotBeAdded": "Contatos desativados não podem ser adicionados a uma sala.",
+  "EmailErrorMessageUserNotFound": "Usuário não encontrado. Você pode editar o e-mail clicando duas vezes nele.",
+  "InviteToRoomAddPlaceholder": "Adicionar pessoas por nome ou e-mail",
+  "InviteToRoomManuallyInfoGuest": "Adicionar contatos existentes do {{productName}}. Ou convide novos usuários pessoalmente por e-mail. Novos usuários serão adicionados à sua lista de Convidados.",
+  "InviteToRoomManuallyInfoMembers": "Adicionar membros existentes do {{productName}} à sala.",
+  "InviteViaLinkDescriptionRoomGuest": "Criar um link universal para autoautorização na sala como convidado.",
+  "InviteViaLinkDescriptionRoomMembers": "Criar um link universal para membros do {{productName}} para autoautorização na sala."
 }

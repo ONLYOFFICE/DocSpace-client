@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "Të dhënat personale janë fshirë me sukses",
   "SuccessSentInvitation": "Ftesa u dërgua me sukses",
   "SuccessSentMultipleInvitatios": "Ftesat u dërguan me sukses",
-  "WithoutGroup": "Pa grup"
+  "WithoutGroup": "Pa grup",
+  "MembersCount": "anëtarët: {{count}}",
+  "ShareGuest": "Ndani mysafirin",
+  "SuccessCopyContantLink": "Lidhja e kontaktit u kopjua me sukses. Lidhja është <strong>e vlefshme për 7 ditë.</strong>"
 }

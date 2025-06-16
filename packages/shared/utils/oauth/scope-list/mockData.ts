@@ -24,48 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { useTranslation } from "react-i18next";
+import { ScopeGroup, ScopeType } from "../../../enums";
+import { TScope } from "../types";
 
-import { ScopeList, type TScopeListProps } from "./ScopeList";
-import { mockScopes } from "./mockData";
-
-const ScopeListWithTranslation = (props: Omit<TScopeListProps, "t">) => {
-  const { t } = useTranslation();
-  return <ScopeList {...props} t={t} />;
-};
-
-const meta = {
-  title: "Utils/ScopeList",
-  component: ScopeListWithTranslation,
-  parameters: {
-    docs: {
-      description: {
-        component: "Component for displaying a list of OAuth scopes",
-      },
-    },
+export const mockScopes: TScope[] = [
+  {
+    name: "accounts.self:read",
+    group: ScopeGroup.profiles,
+    type: ScopeType.read,
   },
-  tags: ["autodocs"],
-} satisfies Meta<typeof ScopeListWithTranslation>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  args: {
-    selectedScopes: [
-      "files:read",
-      "files:write",
-      "accounts:read",
-      "accounts:write",
-      "accounts.self:read",
-      "accounts.self:write",
-      "rooms:read",
-      "rooms:write",
-      "claudeai",
-      "openid",
-    ],
-    scopes: mockScopes,
+  {
+    name: "accounts.self:write",
+    group: ScopeGroup.profiles,
+    type: ScopeType.write,
   },
-};
+  {
+    name: "accounts:read",
+    group: ScopeGroup.accounts,
+    type: ScopeType.read,
+  },
+  {
+    name: "accounts:write",
+    group: ScopeGroup.accounts,
+    type: ScopeType.write,
+  },
+  {
+    name: "claudeai",
+    group: ScopeGroup.rooms,
+    type: ScopeType.write,
+  },
+  {
+    name: "files:read",
+    group: ScopeGroup.files,
+    type: ScopeType.read,
+  },
+  {
+    name: "files:write",
+    group: ScopeGroup.files,
+    type: ScopeType.write,
+  },
+  {
+    name: "rooms:read",
+    group: ScopeGroup.rooms,
+    type: ScopeType.read,
+  },
+  {
+    name: "rooms:write",
+    group: ScopeGroup.rooms,
+    type: ScopeType.write,
+  },
+  {
+    name: "openid",
+    group: ScopeGroup.openid,
+    type: ScopeType.openid,
+  },
+];

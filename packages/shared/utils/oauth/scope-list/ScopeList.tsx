@@ -78,7 +78,10 @@ export const ScopeList = ({ selectedScopes, scopes, t }: TScopeListProps) => {
   }, [selectedScopes, scopes, t]);
 
   return (
-    <div className={classNames(styles.scopeList, "scope-list")}>
+    <div
+      data-testid="scope-list"
+      className={classNames(styles.scopeList, "scope-list")}
+    >
       {renderedScopes.map((scope) => (
         <div className={styles.scopeItem} key={`${scope}`}>
           <div className={styles.circle} />

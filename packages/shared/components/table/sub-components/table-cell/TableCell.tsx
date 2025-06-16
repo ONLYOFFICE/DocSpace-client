@@ -25,17 +25,29 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
-import { StyledTableCell } from "../../Table.styled";
 import { TableCellProps } from "../../Table.types";
+import styles from "./TableCell.module.scss";
 
-const TableCell = ({ className, forwardedRef, ...rest }: TableCellProps) => {
+const TableCell = (props: TableCellProps) => {
+  const { className, forwardedRef, style, checked, hasAccess, children } =
+    props;
+
+  const classes = classNames(
+    styles.tableCell,
+    className,
+    "table-container_cell",
+    {
+      [styles.checked]: checked,
+      [styles.hasAccess]: hasAccess,
+    },
+  );
+
   return (
-    <StyledTableCell
-      className={`${className} table-container_cell`}
-      ref={forwardedRef}
-      {...rest}
-    />
+    <div className={classes} ref={forwardedRef} style={style}>
+      {children}
+    </div>
   );
 };
 

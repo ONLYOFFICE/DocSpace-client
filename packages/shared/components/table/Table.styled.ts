@@ -452,47 +452,6 @@ const StyledTableRow = styled.div.attrs(injectDefaultTheme)<{
   }
 `;
 
-const StyledTableCell = styled.div.attrs(injectDefaultTheme)<{
-  hasAccess?: boolean;
-  checked?: boolean;
-}>`
-  /* padding-right: 8px; */
-  height: 48px;
-  max-height: 48px;
-  border-bottom: ${(props) => props.theme.tableContainer.tableCell.border};
-  overflow: hidden;
-
-  display: flex;
-  align-items: center;
-
-  .react-svg-icon svg {
-    margin-top: 2px;
-  }
-
-  .table-container_element {
-    display: ${(props) => (props.checked ? "none" : "flex")};
-  }
-  .table-container_row-checkbox {
-    display: ${(props) => (props.checked ? "flex" : "none")};
-    padding: 16px;
-
-    margin-inline-start: -4px;
-  }
-
-  ${(props) =>
-    props.hasAccess &&
-    css`
-      :hover {
-        .table-container_element {
-          display: none;
-        }
-        .table-container_row-checkbox {
-          display: flex;
-        }
-      }
-    `}
-`;
-
 const StyledTableSettings = styled.div`
   margin-block: 14px 0px;
   margin-inline: 0 2px;
@@ -545,7 +504,6 @@ export {
   StyledTableBody,
   StyledTableHeader,
   StyledTableHeaderCell,
-  StyledTableCell,
   StyledTableSettings,
   StyledTableGroupMenu,
   StyledInfoPanelToggleColorThemeWrapper,

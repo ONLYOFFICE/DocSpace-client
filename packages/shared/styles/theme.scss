@@ -2469,3 +2469,11 @@
   --quantity-picker-track-number: #{$gray-dark};
   --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
 }
+
+.light {
+  --table-cell-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --table-cell-border: 1px solid #{$gray-dark-strong};
+}

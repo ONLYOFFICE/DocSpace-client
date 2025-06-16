@@ -122,6 +122,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     };
   }, []);
 
+  const onCloseDialog = useCallback(() => {
+    onClose();
+  }, []);
+
   const resetIntervalSuccess = async (isCancellation) => {
     await handleServicesQuotas()!;
 
@@ -169,6 +173,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
           if (updated) {
             resetIntervalSuccess(isCancellation);
+            if (isUpgradeStoragePlan) onCloseDialog();
           }
         } catch (e) {
           setIsLoading(false);
@@ -230,10 +235,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const onChangeNumber = (value: number) => {
     setAmount(value);
   };
-
-  const onCloseDialog = useCallback(() => {
-    onClose();
-  }, []);
 
   const container = isVisibleContainer ? (
     <TopUpModal

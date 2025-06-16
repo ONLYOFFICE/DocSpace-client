@@ -308,6 +308,9 @@ importers:
       copy-webpack-plugin:
         specifier: 9.1.0
         version: 9.1.0(webpack@5.95.0)
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       css-loader:
         specifier: 6.11.0
         version: 6.11.0(webpack@5.95.0)
@@ -513,6 +516,9 @@ importers:
       '@types/styled-components':
         specifier: 5.1.34
         version: 5.1.34
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -640,6 +646,9 @@ importers:
       babel-plugin-styled-components:
         specifier: 2.1.4
         version: 2.1.4(@babel/core@7.25.8)(styled-components@5.3.11(@babel/core@7.25.8)(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0))(supports-color@5.5.0)
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -779,6 +788,9 @@ importers:
       babel-loader:
         specifier: 8.4.1
         version: 8.4.1(@babel/core@7.25.8)(webpack@5.95.0(@swc/core@1.10.15(@swc/helpers@0.5.15)))
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       css-loader:
         specifier: 6.11.0
         version: 6.11.0(webpack@5.95.0(@swc/core@1.10.15(@swc/helpers@0.5.15)))
@@ -909,6 +921,9 @@ importers:
       '@types/styled-components':
         specifier: 5.1.34
         version: 5.1.34
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       eslint:
         specifier: 8.57.1
         version: 8.57.1

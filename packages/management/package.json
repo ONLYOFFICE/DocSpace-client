@@ -5,10 +5,10 @@
   "scripts": {
     "build:translations": "node scripts/buildTranslations.js",
     "build": "next build",
-    "start": "NODE_ENV=development PORT=5015 next dev",
-    "start-prod": "NODE_ENV=production node server.js",
-    "start:internal": "NODE_ENV=development API_HOST=http://127.0.0.1 next dev",
-    "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
+    "start": "cross-env NODE_ENV=development PORT=5015 next dev",
+    "start-prod": "cross-env NODE_ENV=production node server.js",
+    "start:internal": "cross-env NODE_ENV=development API_HOST=http://127.0.0.1 next dev",
+    "start-prod:internal": "cross-env NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx cp -r .next/standalone/* ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/packages/management/.next/static && shx cp -r .next/static/* ../../../publish/web/management/packages/management/.next/static && shx cp -f server.prod.js ../../../publish/web/management/server.js"
@@ -50,6 +50,7 @@
     "@babel/preset-typescript": "7.25.7",
     "@types/styled-components": "5.1.34",
     "babel-loader": "8.4.1",
+    "cross-env": "^7.0.3",
     "css-loader": "6.11.0",
     "local-web-server": "5.4.0",
     "sass-loader": "16.0.4",
@@ -104,4 +105,3 @@
     }
   }
 }
-

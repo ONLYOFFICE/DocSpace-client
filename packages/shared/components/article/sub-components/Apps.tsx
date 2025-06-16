@@ -63,7 +63,13 @@ const ArticleApps = React.memo(
           [styles.withDevTools]: withDevTools,
         })}
       >
-        <Text className="download-app-text" fontSize="14px" noSelect>
+        <Text
+          className="download-app-text"
+          fontSize="11px"
+          noSelect
+          lineHeight="12px"
+          fontWeight={600}
+        >
           {t("Common:DownloadApps")}
         </Text>
         <div className="download-app-list">

@@ -526,7 +526,11 @@
 
   box-sizing: border-box;
 
-  &:hover {
+  div {
+    height: 16px;
+  }
+
+  &:not(.loading):hover {
     div {
       cursor: pointer;
     }
@@ -537,6 +541,11 @@
     path {
       fill: var(--selector-item-input-button-border-hover);
     }
+  }
+
+  &.loading {
+    background-color: var(--input-disabled-bg);
+    border: none;
   }
 }
 

@@ -388,15 +388,19 @@ class PaymentStore {
     console.log("fetchMoreTransactionHistory");
   };
 
+  formatDate = (date: moment.Moment) => {
+    return date.clone().locale("en").format("YYYY-MM-DDTHH:mm:ss");
+  };
+
   fetchTransactionHistory = async (
-    startDate = this.getStartTransactionDate(),
-    endDate = this.getEndTransactionDate(),
+    startDate = moment().subtract(4, "weeks"),
+    endDate = moment(),
     credit = true,
     withdrawal = true,
   ) => {
     const res = await getTransactionHistory(
-      startDate,
-      endDate,
+      this.formatDate(startDate),
+      this.formatDate(endDate),
       credit,
       withdrawal,
     );

@@ -24,43 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { TabsTypes } from "./Tabs.enums";
+export interface FileItem {
+  isPlugin: boolean;
+  viewUrl: string;
+  title?: string;
+  [key: string]: unknown;
+}
 
-export type TTabItem = {
-  /** Element id. */
-  id: string;
-  /** Tab text. */
-  name: string | React.ReactNode;
-  /** Content that is shown when you click on the tab.  */
-  content: React.ReactNode;
-  /** State of tab inclusion. State only works for tabs with a secondary theme. */
-  isDisabled?: boolean;
-  /** Sets a callback function that is triggered when the tab is selected */
-  onClick?: () => void;
-  /** Badge shown after tab. Only for primary tabs type */
-  badge?: React.ReactNode;
-};
+export interface LinkProps {
+  onClick?: (e: React.MouseEvent) => void;
+  onMouseDown?: (e: React.MouseEvent) => void;
+  onContextMenu?: (e: React.MouseEvent) => void;
+  target?: string;
+  [key: string]: unknown;
+}
 
-export type TabsProps = {
-  /** Child elements. */
-  items: TTabItem[];
-  /** Selected item of tabs. */
-  selectedItemId: number | string;
-  selectedItems?: number[];
-  /** Theme for displaying tabs. */
-  type?: TabsTypes;
-  /** Tab indentation for sticky positioning. */
-  stickyTop?: string;
-  /** Enables multiple select  */
-  multiple?: boolean;
-  /** Allows no tab to be selected. */
-  allowNoSelection?: boolean;
-  /** Sets a tab class name */
-  className?: string;
-  /** Sets a callback function that is triggered when the tab is selected. */
-  onSelect?: (element: TTabItem) => void;
-  withoutStickyIntend?: boolean;
-  style?: React.CSSProperties;
-  isCentered?: boolean;
+/**
+ * Creates handlers for plugin files to ensure proper behavior
+ * when opening in a new tab through various methods
+ *
+ * @param item - File object
+ * @param linkProps - Link properties
+ * @returns Modified link properties
+ */
+export const createPluginFileHandlers = (
+  item: FileItem,
+  linkProps: LinkProps = {},
+): LinkProps => {
+  if (!item || !item.isPlugin) return linkProps;
+
+  const newLinkProps: LinkProps = { ...linkProps };
+  const title = item.title || "";
+
+  const originalOnClick = newLinkProps.onClick;
+
+  newLinkProps.onClick = (e: React.MouseEvent) => {
+    if (e.ctrlKey || e.metaKey || e.button === 1) {
+      e.preventDefault();
+      window.open(item.viewUrl, "_self");
+      return;
+    }
+    if (originalOnClick) {
+      originalOnClick(e);
+    }
+  };
+
+  newLinkProps.onContextMenu = (e: React.MouseEvent) => {
+    e.currentTarget.setAttribute("href", item.viewUrl);
+    e.currentTarget.setAttribute("download", title);
+  };
+
+  newLinkProps.target = "_blank";
+
+  return newLinkProps;
 };

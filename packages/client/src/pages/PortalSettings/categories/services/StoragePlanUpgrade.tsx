@@ -134,7 +134,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const resetIntervalSuccess = async (isCancellation) => {
     await handleServicesQuotas()!;
 
-    if (isCancellation) setAmount(currentStoragePlanSize);
+    if (isCancellation || !isUpgradeStoragePlan)
+      setAmount(currentStoragePlanSize);
 
     if (intervalRef.current) {
       toastr.success(t("StorageCapacityUpdated"));

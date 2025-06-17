@@ -33,19 +33,19 @@ import {
   StyledTableHeader,
   StyledTableRow,
   StyledEmptyTableContainer,
-} from "./Table.styled";
+} from "../Table.styled";
 
-import { TTableColumn, TableHeaderProps } from "./Table.types";
-import { TableSettings } from "./sub-components/TableSettings";
-import { TableHeaderCell } from "./sub-components/TableHeaderCell";
-import { checkingForUnfixedSize, getSubstring } from "./Table.utils";
+import { TTableColumn, TableHeaderProps } from "../Table.types";
+import { TableSettings } from "../sub-components/TableSettings";
+import { TableHeaderCell } from "../sub-components/TableHeaderCell";
+import { checkingForUnfixedSize, getSubstring } from "../Table.utils";
 import {
   DEFAULT_MIN_COLUMN_SIZE,
   SETTINGS_SIZE,
   MIN_SIZE_NAME_COLUMN,
   HANDLE_OFFSET,
-} from "./Table.constants";
-import { isDesktop } from "../../utils/device";
+} from "../Table.constants";
+import { isDesktop } from "../../../utils/device";
 
 class TableHeaderComponent extends React.Component<
   TableHeaderProps,

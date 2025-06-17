@@ -24,11 +24,4 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { TableContainer } from "./TableContainer";
-export { TableBody } from "./TableBody";
-export { TableRow } from "./table-row";
-export { TableHeader } from "./table-header";
-export { TableGroupMenu } from "./TableGroupMenu";
-export { TableCell } from "./sub-components/table-cell";
-
-export type { TTableColumn, TGroupMenuItem } from "./Table.types";
+export { TableHeader } from "./TableHeader";

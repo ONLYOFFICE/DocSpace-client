@@ -86,46 +86,7 @@ const TableHeaderCell = ({
     },
   );
 
-  return withTagRef ? (
-    <div
-      className={classes}
-      id={`column_${index}`}
-      data-default={isDefault}
-      data-enable={enable}
-      data-min-width={minWidth}
-      data-short-colum={isShort}
-      data-default-size={defaultSize}
-      ref={tagRef}
-    >
-      <div className={styles.tableHeaderItem}>
-        <div className={styles.textWrapper} onClick={onClick}>
-          <Text
-            fontWeight={600}
-            className={classNames(styles.text, "header-container-text")}
-          >
-            {enable ? title : ""}
-          </Text>
-
-          {sortingVisible ? (
-            <IconButton
-              onClick={column.onIconClick ? onIconClick : onClick}
-              iconName={SortDescReactSvgUrl}
-              className={styles.sortIcon}
-              size={12}
-              color={globalColors.gray}
-            />
-          ) : null}
-        </div>
-        {resizable ? (
-          <div
-            data-column={`${index}`}
-            className={classNames(styles.resizeHandle, "not-selectable")}
-            onMouseDown={onMouseDown}
-          />
-        ) : null}
-      </div>
-    </div>
-  ) : (
+  return (
     <div
       className={classes}
       id={`column_${index}`}
@@ -134,6 +95,7 @@ const TableHeaderCell = ({
       data-short-colum={isShort}
       data-min-width={minWidth}
       data-default-size={defaultSize}
+      ref={withTagRef ? tagRef : null}
     >
       <div className={styles.tableHeaderItem}>
         <div className={styles.textWrapper} onClick={onClick}>

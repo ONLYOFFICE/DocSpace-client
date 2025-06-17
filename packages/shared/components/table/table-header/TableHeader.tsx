@@ -36,7 +36,7 @@ import {
 } from "../Table.styled";
 
 import { TTableColumn, TableHeaderProps } from "../Table.types";
-import { TableSettings } from "../sub-components/TableSettings";
+import { TableSettings } from "../sub-components/table-settings";
 import { TableHeaderCell } from "../sub-components/table-header-cell";
 import { checkingForUnfixedSize, getSubstring } from "../Table.utils";
 import {

@@ -28,11 +28,11 @@ import React, { useRef, useState } from "react";
 
 import SettingsDeskReactSvgUrl from "PUBLIC_DIR/images/settings.desc.react.svg?url";
 
-import { DropDown } from "../../drop-down";
-import { Checkbox } from "../../checkbox";
+import { DropDown } from "../../../drop-down";
+import { Checkbox } from "../../../checkbox";
 
-import { StyledTableSettings, StyledSettingsIcon } from "../Table.styled";
-import { TTableColumn, TableSettingsProps } from "../Table.types";
+import { StyledTableSettings, StyledSettingsIcon } from "../../Table.styled";
+import { TTableColumn, TableSettingsProps } from "../../Table.types";
 
 const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -58,6 +58,14 @@ type TransactionHistoryProps = {
   isTransactionHistoryExist?: boolean;
   currentDeviceType?: DeviceType;
   isNotPaidPeriod?: boolean;
+  formatDate?: (date: moment.Moment) => string;
+};
+
+const getTransactionType = (key: string) => {
+  return {
+    isCredit: key !== "debit",
+    isDebit: key !== "credit",
+  };
 };
 
 const TransactionHistory = (props: TransactionHistoryProps) => {
@@ -101,18 +109,17 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const [isFormationHistory, setIsFormationHistory] = useState(false);
   const [isFilterDialogVisible, setIsFilterDialogVisible] = useState(false);
 
-  const onSelectType = (option: TOption) => {
+  const onSelectType = async (option: TOption) => {
     setSelectedType(option);
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
 
     const timerId = setTimeout(() => setIsLoading(true), 200);
 
-    const isCredit = option.key !== "debit";
-    const isDebit = option.key !== "credit";
+    const { isCredit, isDebit } = getTransactionType(option.key as string);
 
     try {
-      fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
+      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
       setIsLoading(false);
       clearTimeout(timerId);
     } catch (e) {
@@ -133,8 +140,12 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     const timerId = setTimeout(() => setIsLoading(true), 200);
 
+    const { isCredit, isDebit } = getTransactionType(
+      selectedType.key as string,
+    );
+
     try {
-      await fetchTransactionHistory(date, endDate);
+      await fetchTransactionHistory(date, endDate, isCredit, isDebit);
       setIsLoading(false);
       clearTimeout(timerId);
     } catch (e) {
@@ -153,8 +164,12 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     const timerId = setTimeout(() => setIsLoading(true), 200);
 
+    const { isCredit, isDebit } = getTransactionType(
+      selectedType.key as string,
+    );
+
     try {
-      await fetchTransactionHistory(startDate, date);
+      await fetchTransactionHistory(startDate, date, isCredit, isDebit);
 
       setIsLoading(false);
       clearTimeout(timerId);

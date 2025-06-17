@@ -24,53 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// @ts-nocheck
 import { test as base, Page } from "@playwright/test";
 
 import { SetupServerApi } from "msw/node";
+import { WorkerFixture } from "@msw/playwright";
 
 import {
+  allHandlers,
   BASE_URL,
   createNextTestServer,
   createServerRequestInterceptor,
-  setupAndResetHandlers,
+  setupAndResetHandlersServer,
 } from "@docspace/shared/__mocks__/e2e";
-import { ClientRequestInterceptor } from "@docspace/shared/__mocks__/e2e";
 import path from "path";
 
 export const test = base.extend<{
   page: Page;
-  clientRequestInterceptor: ClientRequestInterceptor;
+  clientRequestInterceptor: WorkerFixture;
   serverRequestInterceptor: SetupServerApi;
   port: string;
   baseUrl: string;
   resetHandlers: void;
 }>({
-  page: async ({ page }, use) => {
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: `../../public/images/logo/loginpage.svg`,
-      });
-    });
-    await page.route(
-      "*/**/login/_next/public/images/**/*",
-      async (route, request) => {
-        const imagePath = request
-          .url()
-          .split("/login/_next/public/images/")
-          .at(-1)!
-          .split("?")[0];
-        await route.fulfill({
-          path: `../../public/images/${imagePath}`,
-        });
-      },
-    );
-    await use(page);
-  },
-  clientRequestInterceptor: async ({ page }, use) => {
-    const clientRequestInterceptor = new ClientRequestInterceptor(page);
-    await use(clientRequestInterceptor);
-  },
   port: [
     async ({}, use) => {
       const { port, server } = await createNextTestServer(
@@ -104,14 +79,29 @@ export const test = base.extend<{
       auto: true,
     },
   ],
-  resetHandlers: [
+  resetHandlersServer: [
     async ({ serverRequestInterceptor, port }, use) => {
-      const resetHandlers = await setupAndResetHandlers(
+      const resetHandlers = await setupAndResetHandlersServer(
         serverRequestInterceptor,
         port,
       );
       await use();
       resetHandlers();
+    },
+    {
+      auto: true,
+    },
+  ],
+  clientRequestInterceptor: [
+    async ({ page, port }, use) => {
+      const worker = new WorkerFixture({
+        page,
+        initialHandlers: allHandlers(port),
+      });
+
+      await worker.start();
+      await use(worker);
+      await worker.stop();
     },
     {
       auto: true,

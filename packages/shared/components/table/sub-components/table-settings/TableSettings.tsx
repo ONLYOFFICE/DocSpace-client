@@ -25,14 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef, useState } from "react";
+import classNames from "classnames";
 
 import SettingsDeskReactSvgUrl from "PUBLIC_DIR/images/settings.desc.react.svg?url";
 
+import { IconButton } from "../../../icon-button";
 import { DropDown } from "../../../drop-down";
 import { Checkbox } from "../../../checkbox";
 
-import { StyledTableSettings, StyledSettingsIcon } from "../../Table.styled";
 import { TTableColumn, TableSettingsProps } from "../../Table.types";
+import styles from "./TableSettings.module.scss";
 
 const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,11 +56,11 @@ const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
   };
 
   return (
-    <StyledTableSettings
-      className="table-container_header-settings-icon"
-      ref={ref}
-    >
-      <StyledSettingsIcon
+    <div className={styles.tableSettings} ref={ref}>
+      <IconButton
+        className={classNames(styles.tableSettingsIcon, {
+          [styles.isDisabled]: disableSettings,
+        })}
         size={12}
         isFill
         iconName={SettingsDeskReactSvgUrl}
@@ -66,7 +68,6 @@ const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
         isDisabled={disableSettings}
       />
       <DropDown
-        className="table-container_settings"
         directionX="left"
         open={isOpen}
         clickOutsideAction={clickOutsideAction}
@@ -82,7 +83,10 @@ const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
           return (
             column.onChange && (
               <Checkbox
-                className="table-container_settings-checkbox not-selectable"
+                className={classNames(
+                  styles.tableSettingsCheckbox,
+                  "table-container_settings-checkbox not-selectable",
+                )}
                 isChecked={column.enable}
                 onChange={onChange}
                 key={column.key}
@@ -92,7 +96,7 @@ const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
           );
         })}
       </DropDown>
-    </StyledTableSettings>
+    </div>
   );
 };
 

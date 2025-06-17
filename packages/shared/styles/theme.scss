@@ -2478,6 +2478,8 @@
 
   --table-container-border-right: 2px solid #{$gray-strong};
   --table-container-border-hover-color: #{$light-gray-dark};
+
+  --table-settings-icon-disable-color: #{$gray-strong};
 }
 
 .dark {
@@ -2488,4 +2490,6 @@
 
   --table-container-border-right: 2px solid #{$gray-dark-strong};
   --table-container-border-hover-color: #{$gray-dark-strong};
+
+  --table-settings-icon-disable-color: #{$gray-dark-strong};
 }

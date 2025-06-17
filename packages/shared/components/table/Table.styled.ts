@@ -25,9 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { globalColors } from "../../themes";
 import { injectDefaultTheme, mobile, tablet } from "../../utils";
-import { IconButton } from "../icon-button";
 import { Scrollbar } from "../scrollbar";
 
 const reactWindowContainerStyles = css`
@@ -345,19 +343,6 @@ const StyledTableRow = styled.div.attrs(injectDefaultTheme)<{
   }
 `;
 
-const StyledTableSettings = styled.div`
-  margin-block: 14px 0px;
-  margin-inline: 0 2px;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-  .table-container_settings-checkbox {
-    padding: 8px 16px;
-  }
-`;
-
 const StyledEmptyTableContainer = styled.div`
   grid-column-start: 1;
   grid-column-end: -1;
@@ -378,28 +363,13 @@ const StyledScrollbar = styled(Scrollbar)`
   }
 `;
 
-const StyledSettingsIcon = styled(IconButton).attrs(injectDefaultTheme)`
-  ${(props) =>
-    props.isDisabled &&
-    css`
-      svg {
-        path {
-          fill: ${props.theme.tableContainer.header
-            .settingsIconDisableColor} !important;
-        }
-      }
-    `}
-`;
-
 export {
   StyledTableContainer,
   StyledTableRow,
   StyledTableBody,
   StyledTableHeader,
-  StyledTableSettings,
   StyledTableGroupMenu,
   StyledInfoPanelToggleColorThemeWrapper,
   StyledEmptyTableContainer,
   StyledScrollbar,
-  StyledSettingsIcon,
 };

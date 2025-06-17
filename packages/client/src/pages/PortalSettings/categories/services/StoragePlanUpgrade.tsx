@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -63,6 +63,7 @@ type StorageDialogProps = {
   hasScheduledStorageChange?: boolean;
   nextStoragePlanSize?: number;
   storageSizeIncrement?: number;
+  isVisibleWalletSettings?: boolean;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -79,11 +80,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   nextStoragePlanSize,
   handleServicesQuotas,
   storageSizeIncrement,
+  isVisibleWalletSettings,
+  setVisibleWalletSetting,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
   const [isLoading, setIsLoading] = useState(false);
-  const [isVisibleContainer, setIsVisible] = useState(false);
+  const [isVisibleContainer, setIsVisibleContainer] = useState(
+    isVisibleWalletSettings,
+  );
   const [isRequestDialog, setIsRequestDialog] = useState(false);
 
   const {
@@ -94,6 +99,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     isWalletBalanceInsufficient,
     isPlanUpgrade,
     formatWalletCurrency,
+    buttonTitle,
   } = useServicesActions();
 
   const { isRTL } = useInterfaceDirection();
@@ -103,9 +109,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const totalPrice = calculateTotalPrice(amount, storagePriceIncrement);
   const insufficientFunds = isWalletBalanceInsufficient(totalPrice);
   const isUpgradeStoragePlan = isPlanUpgrade(amount);
+  const buttonMainTitle = buttonTitle(amount);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isWaitingRef = useRef(false);
+
+  const amountRef = useRef(amount);
+  useEffect(() => {
+    amountRef.current = amount;
+  }, [amount]);
 
   useEffect(() => {
     return () => {
@@ -113,6 +125,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         clearInterval(intervalRef.current);
       }
     };
+  }, []);
+
+  const onCloseDialog = useCallback(() => {
+    onClose();
   }, []);
 
   const resetIntervalSuccess = async (isCancellation) => {
@@ -129,98 +145,115 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     setIsLoading(false);
   };
 
-  const waitingForTariff = (isCancellation) => {
-    isWaitingRef.current = false;
-    let requestsCount = 0;
+  const waitingForTariff = useCallback(
+    (isCancellation) => {
+      isWaitingRef.current = false;
+      let requestsCount = 0;
 
-    intervalRef.current = setInterval(async () => {
-      try {
-        if (requestsCount === MAX_ATTEMPTS) {
+      intervalRef.current = setInterval(async () => {
+        try {
+          if (requestsCount === MAX_ATTEMPTS) {
+            setIsLoading(false);
+            toastr.error(t("ErrorNotification"));
+            clearInterval(intervalRef.current!);
+            intervalRef.current = null;
+            return;
+          }
+
+          requestsCount++;
+
+          if (isWaitingRef.current) return;
+          isWaitingRef.current = true;
+
+          const { walletQuotas } = await fetchPortalTariff(true);
+
+          const walletQuantity =
+            isUpgradeStoragePlan || isCancellation
+              ? walletQuotas[0]?.quantity
+              : walletQuotas[0]?.nextQuantity;
+
+          const updated = isCancellation
+            ? !walletQuotas[0]?.nextQuantity
+            : walletQuantity === amountRef.current;
+
+          if (updated) {
+            resetIntervalSuccess(isCancellation);
+            if (isUpgradeStoragePlan) onCloseDialog();
+          }
+        } catch (e) {
           setIsLoading(false);
-          toastr.error(t("ErrorNotification"));
-          clearInterval(intervalRef.current!);
+          toastr.error(e);
+          clearInterval(intervalRef.current);
           intervalRef.current = null;
+        } finally {
+          isWaitingRef.current = false;
+        }
+      }, 2000);
+    },
+    [isUpgradeStoragePlan],
+  );
+
+  const handleStoragePlanChange = useCallback(
+    async (isCancellation = false) => {
+      if (isLoading) return;
+
+      setIsLoading(true);
+
+      const amountValue = amountRef.current;
+      const difference = calculateDifferenceBetweenPlan(amountValue);
+      const productType = isUpgradeStoragePlan && !isCancellation ? 1 : 0;
+      const quantity = isUpgradeStoragePlan ? difference : amountValue;
+      const value = isCancellation ? null : quantity;
+
+      try {
+        const res = await updateWalletPayment(value, productType);
+
+        if (res === false) {
+          toastr.error(t("Common:UnexpectedError"));
+
+          setIsLoading(false);
+
           return;
         }
 
-        requestsCount++;
-
-        if (isWaitingRef.current) return;
-        isWaitingRef.current = true;
-
-        const { walletQuotas } = await fetchPortalTariff(true);
-
-        const walletQuantity =
-          !isUpgradeStoragePlan && !isCancellation
-            ? walletQuotas[0].nextQuantity
-            : walletQuotas[0].quantity;
-
-        const updated = isCancellation
-          ? !walletQuotas[0].nextQuantity
-          : walletQuantity === amount;
-
-        if (updated) {
-          resetIntervalSuccess(isCancellation);
-        }
+        if (isUpgradeStoragePlan) fetchBalance!();
+        waitingForTariff(isCancellation);
       } catch (e) {
-        setIsLoading(false);
-        toastr.error(e);
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      } finally {
-        isWaitingRef.current = false;
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        toastr.error(errorMessage);
       }
-    }, 2000);
-  };
+    },
+    [isLoading, isUpgradeStoragePlan],
+  );
 
-  const handleStoragePlanChange = async (isCancellation = false) => {
-    if (isLoading) return;
+  const onBuy = useCallback(
+    () => handleStoragePlanChange(),
+    [handleStoragePlanChange],
+  );
 
-    setIsLoading(true);
-
-    const difference = calculateDifferenceBetweenPlan(amount);
-    const productType = isUpgradeStoragePlan && !isCancellation ? 1 : 0;
-    const quantity = isUpgradeStoragePlan ? difference : amount;
-    const value = isCancellation ? null : quantity;
-
-    try {
-      const res = await updateWalletPayment(value, productType);
-
-      if (res === false) {
-        toastr.error(t("Common:UnexpectedError"));
-
-        setIsLoading(false);
-
-        return;
-      }
-
-      if (isUpgradeStoragePlan) fetchBalance!();
-      waitingForTariff(isCancellation);
-    } catch (e) {
-      const errorMessage = e instanceof Error ? e.message : String(e);
-      toastr.error(errorMessage);
-    }
-  };
-
-  const onBuy = () => handleStoragePlanChange();
   const onCancelChange = () => handleStoragePlanChange(true);
 
-  const onSendRequest = () => {
+  const onSendRequest = useCallback(() => {
     setIsRequestDialog(true);
-  };
+  }, []);
 
   const onChangeNumber = (value: number) => {
     setAmount(value);
   };
 
+  const onCloseTopUpModal = () => {
+    setIsVisibleContainer(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting(false);
+  };
+
   const container = isVisibleContainer ? (
     <TopUpModal
       visible={isVisibleContainer}
-      onClose={() => setIsVisible(false)}
+      onClose={onCloseTopUpModal}
       headerProps={{
         isBackButton: true,
-        onBackClick: () => setIsVisible(false),
-        onCloseClick: () => setIsVisible(false),
+        onBackClick: onCloseTopUpModal,
+        onCloseClick: onCloseTopUpModal,
       }}
     />
   ) : null;
@@ -265,6 +298,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         onClose={onClose}
         displayType={ModalDialogType.aside}
         containerVisible={isVisibleContainer}
+        withBodyScroll
       >
         <ModalDialog.Container>{container}</ModalDialog.Container>
         <ModalDialog.Header>{t("DiskStorage")}</ModalDialog.Header>
@@ -307,7 +341,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
             {amount || hasStorageSubscription ? (
               <WalletContainer
-                onTopUp={() => setIsVisible(true)}
+                onTopUp={() => setIsVisibleContainer(true)}
                 insufficientFunds={insufficientFunds}
                 isExceedingStorageLimit={isExceedingStorageLimit}
                 isUpgradeStoragePlan={isUpgradeStoragePlan}
@@ -317,12 +351,12 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <ButtonContainer
-            amount={amount}
+            title={buttonMainTitle}
             isCurrentStoragePlan={isCurrentStoragePlan}
             isUpgradeStoragePlan={isUpgradeStoragePlan}
             insufficientFunds={insufficientFunds}
             isExceedingStorageLimit={isExceedingStorageLimit}
-            onClose={onClose}
+            onClose={onCloseDialog}
             isLoading={isLoading}
             onBuy={onBuy}
             onSendRequest={onSendRequest}
@@ -342,11 +376,14 @@ export default inject(
       currentStoragePlanSize,
       nextStoragePlanSize,
     } = currentTariffStatusStore;
+
     const { fetchBalance, walletBalance } = paymentStore;
     const {
       storageSizeIncrement,
       storagePriceIncrement,
       handleServicesQuotas,
+      isVisibleWalletSettings,
+      setVisibleWalletSetting,
     } = servicesStore;
 
     return {
@@ -360,6 +397,8 @@ export default inject(
       storagePriceIncrement,
       nextStoragePlanSize,
       handleServicesQuotas,
+      setVisibleWalletSetting,
+      isVisibleWalletSettings,
     };
   },
 )(observer(StoragePlanUpgrade));

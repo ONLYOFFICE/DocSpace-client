@@ -626,7 +626,7 @@ export const ViewerPlayer = ({
     };
   }, [onKeyDown]);
 
-  const posterUrl = thumbnailSrc ? `${thumbnailSrc}&size=1280x720` : undefined;
+  const posterUrl = thumbnailSrc ? `${thumbnailSrc}` : undefined;
 
   return (
     <>

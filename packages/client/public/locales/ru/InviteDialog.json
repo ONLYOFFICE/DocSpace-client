@@ -12,5 +12,11 @@
   "SendInvitation": "Выслать приглашение",
   "UserMaxAvailableRoleWarning": "Гости и Пользователи не могут быть назначены Менеджерами комнат. Указанную роль могут выполнять только администраторы комнат и {{productName}}.",
   "UsersAlreadyAdded": "Некоторые пользователи уже добавлены",
-  "UsersCannotBeAdded": "Отключенные контакты не могут быть добавлены в комнату"
+  "UsersCannotBeAdded": "Отключенные контакты не могут быть добавлены в комнату",
+  "EmailErrorMessageUserNotFound": "Пользователь не найден. Вы можете изменить email, дважды кликнув по нему.",
+  "InviteToRoomAddPlaceholder": "Добавьте людей по имени или email",
+  "InviteToRoomManuallyInfoGuest": "Добавьте существующие контакты {{productName}}. Или пригласите новых пользователей по email. Новые пользователи будут добавлены в ваш список гостей.",
+  "InviteToRoomManuallyInfoMembers": "Добавьте существующих участников {{productName}} в комнату.",
+  "InviteViaLinkDescriptionRoomGuest": "Создайте универсальную ссылку для самостоятельной авторизации в комнате в качестве гостя.",
+  "InviteViaLinkDescriptionRoomMembers": "Создайте универсальную ссылку для участников {{productName}} для самостоятельной авторизации в комнате."
 }

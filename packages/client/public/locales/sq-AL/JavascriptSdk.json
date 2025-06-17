@@ -104,5 +104,18 @@
   "SubtitleDescription": "Titra me komente ose përshkrime shtesë për drejtorinë aktuale.",
   "TabPlugins": "Shtojcat e skedës",
   "Viewer": "Shikuesi",
-  "ViewerDescription": "Vendosni një shikues për t'i lejuar përdoruesit të hapin një skedar për ta parë nga dhoma përkatëse."
+  "ViewerDescription": "Vendosni një shikues për t'i lejuar përdoruesit të hapin një skedar për ta parë nga dhoma përkatëse.",
+  "CSPDescription": "Futni adresën e shërbimit ku dëshironi të futni ose lidhni {{organizationName}} {{productName}}.",
+  "CSPHeader": "Shto domenet e lejuara për këtë {{productName}}",
+  "CSPInfoBarDescription": "Ju lutem aktivizoni protokolin HTTPS për {{productName}} tuaj për të siguruar konfigurimin e duhur.",
+  "FileContentCopy": "Kopje e kufizuar e përmbajtjes së fajllit",
+  "NPMCodeConfigStep": "Krijoni një objekt konfigurimi me parametrat e kërkuar:",
+  "NPMCodeCreateStep": "Krijoni elementin HTML me id nga konfigurimi dhe futeni brenda trupit të dokumentit për kornizën e SDK-së së vendit:",
+  "NPMCodeDescription": "Përshkrimi i paketës NPM",
+  "NPMCodeImportStep": "Importoni paketën në projektin tuaj:",
+  "NPMCodeInitStep": "Inicializoni SDK-në:",
+  "NPMCodeInstallStep": "Instaloni paketën nga npm dhe ruajeni në skedarin package.json me --save:",
+  "NPMCodeUsageStep": "Përdorni metodën fillestare të SDK për të krijuar kornizën SDK:",
+  "SdkPackageVersionInfo": "Për lidhjen si version i paketës gjithmonë më i fundit",
+  "SourceType": "Lloji i lidhjes"
 }

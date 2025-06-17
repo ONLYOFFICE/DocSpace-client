@@ -306,6 +306,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@storybook/addon-essentials",
       "@storybook/addon-links",
       "@storybook/addons",
+      "@storybook/addon-webpack5-compiler-babel",
       "@storybook/components",
       "@storybook/react-webpack5",
       "babel-eslint",

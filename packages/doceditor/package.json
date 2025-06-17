@@ -5,7 +5,7 @@
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
     "build": "next build",
-    "start": "cross-env NODE_ENV=development next dev",
+    "start": "cross-env NODE_ENV=development PORT=5013 next dev",
     "start-prod": "cross-env NODE_ENV=production node server.js",
     "start:internal": "cross-env NODE_ENV=development API_HOST=http://127.0.0.1 next dev",
     "start-prod:internal": "cross-env NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",

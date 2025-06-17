@@ -96,7 +96,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         <Text fontWeight={600} fontSize="15px">
           {transaction.description}
         </Text>
-        <></>
+        <div />
 
         <Text fontWeight={600} fontSize="11px">
           {formattedDate}

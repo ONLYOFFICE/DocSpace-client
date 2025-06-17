@@ -229,6 +229,7 @@ const SalesDepartmentRequestDialog = ({
             onChange={onChangeDescription}
             isDisabled={isLoading}
             heightTextArea={100}
+            maxLength={255}
           />
         </FieldContainer>
       </ModalDialog.Body>

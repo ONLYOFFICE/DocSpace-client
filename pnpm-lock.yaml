@@ -1354,9 +1354,6 @@ importers:
       remark-gfm:
         specifier: ^4.0.1
         version: 4.0.1
-      resolve-url-loader:
-        specifier: ^5.0.0
-        version: 5.0.0
       sass:
         specifier: 1.79.5
         version: 1.79.5

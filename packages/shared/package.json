@@ -157,7 +157,6 @@
     "remark-gfm": "^4.0.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "resolve-url-loader": "^5.0.0",
     "sass": "1.79.5",
     "sass-loader": "^16.0.5",
     "serve": "14.2.3",

@@ -336,6 +336,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "eslint-config-next",
       "eslint-import-resolver-webpack",
       "prettier",
+      "resolve-url-loader",
       "typescript",
       "local-web-server",
       "identity-obj-proxy",

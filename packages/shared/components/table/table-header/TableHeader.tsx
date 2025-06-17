@@ -37,7 +37,7 @@ import {
 
 import { TTableColumn, TableHeaderProps } from "../Table.types";
 import { TableSettings } from "../sub-components/TableSettings";
-import { TableHeaderCell } from "../sub-components/TableHeaderCell";
+import { TableHeaderCell } from "../sub-components/table-header-cell";
 import { checkingForUnfixedSize, getSubstring } from "../Table.utils";
 import {
   DEFAULT_MIN_COLUMN_SIZE,

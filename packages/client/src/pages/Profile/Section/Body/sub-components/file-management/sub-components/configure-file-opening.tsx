@@ -15,12 +15,13 @@ const StyledWrapper = styled.div`
   gap: 8px;
 
   .category-item-description {
+    margin-top: -6px;
+    margin-bottom: 6px;
     color: ${(props) => props.theme.client.settings.descriptionColor};
   }
 
   .radio-button-group {
     width: fit-content;
-    margin-top: 8px;
   }
 `;
 
@@ -68,10 +69,14 @@ const ConfigureFileOpening = ({ deepLinkSettings, getDeepLinkSettings }) => {
 
   return (
     <StyledWrapper>
-      <Text fontSize="16px" fontWeight={700}>
+      <Text fontSize="13px" fontWeight={600} lineHeight="20px">
         {t("ConfigureDeepLink")}
       </Text>
-      <Text className="category-item-description" fontSize="13px">
+      <Text
+        className="category-item-description"
+        fontSize="13px"
+        lineHeight="20px"
+      >
         {t("ConfigureDeepLinkUserDescription") ||
           t("ConfigureDeepLinkDescription")}
       </Text>
@@ -80,7 +85,7 @@ const ConfigureFileOpening = ({ deepLinkSettings, getDeepLinkSettings }) => {
         fontSize="13px"
         fontWeight={400}
         orientation="vertical"
-        spacing="8px"
+        spacing="10px"
         options={[
           {
             id: "provide-a-choice",

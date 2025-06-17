@@ -32,7 +32,7 @@ const StyledWrapper = styled.div`
   width: 100%;
 
   display: grid;
-  grid-gap: 32px;
+  grid-gap: 16px;
 
   .toggle-btn-wrapper {
     display: flex;

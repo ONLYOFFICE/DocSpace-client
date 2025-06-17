@@ -156,12 +156,14 @@
         ]
       },
       "start": {
+        "continuous": true,
         "dependsOn": [
           "before-build",
           "build:translations"
         ]
       },
       "start-prod": {
+        "continuous": true,
         "dependsOn": [
           "build"
         ]

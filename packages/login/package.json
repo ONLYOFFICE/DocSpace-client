@@ -74,21 +74,25 @@
         ]
       },
       "start": {
+        "continuous": true,
         "dependsOn": [
           "build:translations"
         ]
       },
       "start-prod": {
+        "continuous": true,
         "dependsOn": [
           "build"
         ]
       },
       "start:internal": {
+        "continuous": true,
         "dependsOn": [
           "build"
         ]
       },
       "start-prod:internal": {
+        "continuous": true,
         "dependsOn": [
           "build"
         ]

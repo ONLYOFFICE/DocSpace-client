@@ -122,12 +122,6 @@ export interface StaticImageData {
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
-    __ASC_INITIAL_EDITOR_STATE__?: {
-      user: unknown;
-      portalSettings: TSettings;
-      appearanceTheme: TGetColorTheme;
-      versionInfo: TVersionBuild;
-    };
     Asc: unknown;
     zESettings: unknown;
     zE: unknown;

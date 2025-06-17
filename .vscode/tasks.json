@@ -573,7 +573,7 @@
     {
       "label": "Test | Jest:unit",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -588,7 +588,7 @@
     {
       "label": "Frontend | ESLint",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn lint ; ",
+      "command": "cd ${workspaceFolder} ; pnpm lint ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -603,7 +603,7 @@
     {
       "label": "Frontend | ESLint:fix",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn lint:fix ; ",
+      "command": "cd ${workspaceFolder} ; pnpm lint:fix ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -618,7 +618,7 @@
     {
       "label": "Test | Test e2e docker build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:build ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:build ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -633,7 +633,7 @@
     {
       "label": "Test | Test e2e docker start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:start ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:start ; ",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -648,7 +648,7 @@
     {
       "label": "Test | Test e2e docker clear",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:clear ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:clear ; ",
       "group": {
         "kind": "build",
         "isDefault": true

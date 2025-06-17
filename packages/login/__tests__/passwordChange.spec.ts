@@ -86,7 +86,7 @@ test("password change success", async ({ page, mockRequest }) => {
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL("/login?passwordChanged=true", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

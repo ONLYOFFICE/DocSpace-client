@@ -114,5 +114,8 @@
   "SubtitleDescription": "Podnadpis s dalšími komentáři nebo popisy pro aktuální adresář.",
   "TabPlugins": "Zásuvné moduly karet",
   "Viewer": "Prohlížeč",
-  "ViewerDescription": "Vložení prohlížeče, který uživatelům umožní otevřít soubor pro prohlížení v příslušné místnosti."
+  "ViewerDescription": "Vložení prohlížeče, který uživatelům umožní otevřít soubor pro prohlížení v příslušné místnosti.",
+  "CSPDescription": "Zadejte adresu služby, kam chcete vložit nebo propojit svůj {{organizationName}} {{productName}}.",
+  "CSPHeader": "Přidejte povolené domény pro tento {{productName}}.",
+  "CSPUrlHelp": "Prosím poskytněte pouze doménové jméno, vyhněte se cestám URL nebo dalším znakům."
 }

@@ -13,5 +13,10 @@
   "UserMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور المحدد.",
   "UsersAlreadyAdded": "تمت إضافة بعض المستخدمين بالفعل",
   "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة",
-  "EmailErrorMessageUserNotFound": "لم يتم العثور على المستخدم. بإمكانك تعديل البريد الإلكتروني بالنقر المزدوج عليه."
+  "EmailErrorMessageUserNotFound": "لم يتم العثور على المستخدم. بإمكانك تعديل البريد الإلكتروني بالنقر المزدوج عليه.",
+  "InviteToRoomAddPlaceholder": "أضف الأشخاص حسب الاسم أو البريد الإلكتروني",
+  "InviteToRoomManuallyInfoGuest": "أضف جهات اتصال {{productName}} الموجودة. أو قم بدعوة مستخدمين جدد شخصيًا عبر البريد الإلكتروني. سيتم إضافة مستخدمين جدد إلى قائمة ضيوفك.",
+  "InviteToRoomManuallyInfoMembers": "أضف أعضاء {{productName}} الحاليين إلى الغرفة.",
+  "InviteViaLinkDescriptionRoomGuest": "قم بإنشاء رابط عالمي للتفويض الذاتي في الغرفة كضيف.",
+  "InviteViaLinkDescriptionRoomMembers": "أنشئ رابطًا عالميًا لأعضاء {{productName}} لتمكينهم من التفويض الذاتي في الغرفة."
 }

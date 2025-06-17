@@ -359,5 +359,13 @@
   "WithoutEmailHint": "的用户全部拥有电子邮件。请继续执行下一步。",
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
-  "YourLogo": "您的logo"
+  "YourLogo": "您的logo",
+  "InvitationSettings": "邀请设置",
+  "InvitationSettingsContacts": "通过联系人邀请{{productName}}成员",
+  "InvitationSettingsContactsDescription": "启用此选项后，可通过联系人板块向新{{productName}}成员发送邀请。如需仅通过LDAP邀请新成员，请禁用此选项。",
+  "InvitationSettingsDescription": "配置{{productName}}内部成员及外部访客的邀请选项。这些设置有助于您遵守公司安全规范（例如使用LDAP或其他用户管理系统时）。",
+  "InvitationSettingsGuests": "允许邀请访客",
+  "InvitationSettingsGuestsDescription": "启用此选项后，所有{{productName}}成员均可邀请外部访客加入房间。",
+  "InvitationSettingsMobile": "配置{{productName}}内部成员及外部访客的邀请选项",
+  "Services": "服务"
 }

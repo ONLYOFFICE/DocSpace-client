@@ -359,5 +359,13 @@
   "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo.",
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
-  "YourLogo": "Logo của bạn"
+  "YourLogo": "Logo của bạn",
+  "InvitationSettings": "Cài đặt Mời",
+  "InvitationSettingsContacts": "Mời các thành viên {{productName}} thông qua Danh bạ",
+  "InvitationSettingsContactsDescription": "Bật tùy chọn này để cho phép gửi lời mời đến các thành viên {{productName}} mới thông qua phần Contacts. Tắt tùy chọn này nếu bạn muốn mời các thành viên mới thông qua LDAP.",
+  "InvitationSettingsDescription": "Cấu hình các tùy chọn mời cho thành viên nội bộ và khách mời bên ngoài của {{productName}} của bạn. Các cài đặt này có thể giúp bạn tuân thủ các hướng dẫn bảo mật của công ty, ví dụ như khi bạn sử dụng LDAP hoặc các hệ thống quản lý người dùng khác.",
+  "InvitationSettingsGuests": "Cho phép mời khách",
+  "InvitationSettingsGuestsDescription": "Bật tùy chọn này để cho phép tất cả thành viên {{productName}} mời khách bên ngoài vào phòng.",
+  "InvitationSettingsMobile": "Cấu hình các tùy chọn mời cho thành viên nội bộ và khách mời bên ngoài của {{productName}} của bạn.",
+  "Services": "Dịch vụ"
 }

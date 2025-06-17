@@ -720,5 +720,7 @@
   "Yes": "是",
   "Yesterday": "昨天",
   "You": "您",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "Important": "重要提示",
+  "SuggestFeature": "建议一个功能"
 }

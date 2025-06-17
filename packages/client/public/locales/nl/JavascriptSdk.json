@@ -114,5 +114,8 @@
   "SubtitleDescription": "Ondertitel met extra opmerkingen of beschrijvingen voor de huidige map.",
   "TabPlugins": "Tabblad Plug-ins",
   "Viewer": "Kijker",
-  "ViewerDescription": "Sluit een viewer in zodat gebruikers een bestand kunnen openen om het vanuit de bijbehorende kamer te bekijken."
+  "ViewerDescription": "Sluit een viewer in zodat gebruikers een bestand kunnen openen om het vanuit de bijbehorende kamer te bekijken.",
+  "CSPDescription": "Voer het adres van de service in waar u uw {{organizationName}} {{productName}} wilt inbedden of verbinden.",
+  "CSPHeader": "Voeg de toegestane domeinen toe voor dit {{productName}}",
+  "CSPUrlHelp": "Geef alstublieft alleen de domeinnaam, zonder URL-paden of extra karakters."
 }

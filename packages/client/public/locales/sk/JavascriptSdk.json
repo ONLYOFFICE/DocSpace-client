@@ -114,5 +114,8 @@
   "SubtitleDescription": "Podtitul s dodatočnými komentármi alebo popismi pre daný priečinok.",
   "TabPlugins": "Tab Pluginy",
   "Viewer": "Prehliadač",
-  "ViewerDescription": "Vložte prehliadač, ktorý používateľom umožní otvoriť súbor na prehliadanie z príslušnej miestnosti."
+  "ViewerDescription": "Vložte prehliadač, ktorý používateľom umožní otvoriť súbor na prehliadanie z príslušnej miestnosti.",
+  "CSPDescription": "Zadajte adresu služby, do ktorej chcete vložiť alebo pripojiť svoju {{organizationName}} {{productName}}.",
+  "CSPHeader": "Pridajte povolené domény pre tento {{productName}}.",
+  "CSPUrlHelp": "Prosím, uveďte iba doménové meno, bez cestných trás alebo ďalších znakov."
 }

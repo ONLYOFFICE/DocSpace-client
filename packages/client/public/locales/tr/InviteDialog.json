@@ -12,5 +12,11 @@
   "SendInvitation": "Davetiye gönder",
   "UserMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar Oda yöneticisi olarak atanamaz. Belirtilen rol için yalnızca Oda ve {{productName}} yöneticileri uygundur.",
   "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş",
-  "UsersCannotBeAdded": "Devre dışı bırakılmış kişiler bir odaya eklenemez."
+  "UsersCannotBeAdded": "Devre dışı bırakılmış kişiler bir odaya eklenemez.",
+  "EmailErrorMessageUserNotFound": "Kullanıcı bulunamadı. E-postayı çift tıklayarak düzenleyebilirsiniz.",
+  "InviteToRoomAddPlaceholder": "İsim veya e-posta ile insanları ekleyin.",
+  "InviteToRoomManuallyInfoGuest": "Mevcut {{productName}} kişilerini ekleyin. Veya yeni kullanıcıları e-posta yoluyla bireysel olarak davet edin. Yeni kullanıcılar Misafirler listenize eklenecektir.",
+  "InviteToRoomManuallyInfoMembers": "Mevcut {{productName}} üyelerini odaya ekleyin.",
+  "InviteViaLinkDescriptionRoomGuest": "Oda içinde misafir olarak kendi yetkilendirmesi için evrensel bir bağlantı oluşturun.",
+  "InviteViaLinkDescriptionRoomMembers": "{{productName}} üyeleri için odada kendi yetkilendirmesi için evrensel bir bağlantı oluşturun."
 }

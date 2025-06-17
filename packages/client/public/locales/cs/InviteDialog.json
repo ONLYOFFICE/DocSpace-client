@@ -12,5 +12,11 @@
   "SendInvitation": "Odeslat pozvánku",
   "UserMaxAvailableRoleWarning": "Hosty a uživatele nelze přiřadit jako správce místnosti. Pro zadanou roli jsou vhodní pouze správci místností a {{productName}}.",
   "UsersAlreadyAdded": "Někteří uživatelé již byli přidáni",
-  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti."
+  "UsersCannotBeAdded": "Vypnuté kontakty nelze přidat do místnosti.",
+  "EmailErrorMessageUserNotFound": "Uživatel nenalezen. Můžete upravit e-mail tak, že na něj dvakrát kliknete.",
+  "InviteToRoomAddPlaceholder": "Přidejte lidi podle jména nebo e-mailu.",
+  "InviteToRoomManuallyInfoGuest": "Přidejte stávající kontakty {{productName}}. Nebo pozvěte nové uživatele osobně e-mailem. Noví uživatelé budou přidáni do vašeho seznamu Hosté.",
+  "InviteToRoomManuallyInfoMembers": "Přidejte stávající členy {{productName}} do místnosti.",
+  "InviteViaLinkDescriptionRoomGuest": "Vytvořte univerzní odkaz pro vlastní autorizaci v místnosti jako host.",
+  "InviteViaLinkDescriptionRoomMembers": "Vytvořte univerzní odkaz pro členy {{productName}} pro vlastní autorizaci v místnosti."
 }

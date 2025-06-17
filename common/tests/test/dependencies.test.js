@@ -299,6 +299,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
 
     // Filter out allowed unused dependencies
     const allowedUnusedDeps = [
+      "@aws-sdk/client-cloudwatch-logs",
       "@storybook/addon-controls",
       "@storybook/addon-designs",
       "@storybook/addon-docs",

@@ -309,8 +309,9 @@ const Item = ({
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
-  const hasNotFoundEmail =
-    !allowInvitingGuests && type === EmployeeType.Guest && !status;
+  const hasNotFoundEmail = isGroup
+    ? false
+    : !allowInvitingGuests && type === EmployeeType.Guest && !status;
 
   const displayBody = (
     <>

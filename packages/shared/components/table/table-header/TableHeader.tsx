@@ -305,7 +305,7 @@ class TableHeaderComponent extends React.Component<
   onMouseMove = (e: MouseEvent) => {
     const { columnIndex } = this.state;
     const { containerRef, theme, isIndexEditingMode } = this.props;
-    const isRtl = theme.interfaceDirection === "rtl";
+    const isRtl = theme?.interfaceDirection === "rtl";
 
     if (columnIndex === null) return;
     const column = document.getElementById(`column_${columnIndex}`);

@@ -78,7 +78,7 @@ export interface TableHeaderProps {
   tagRef?:
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
-  theme: TTheme;
+  theme?: TTheme;
   isIndexEditingMode?: boolean;
   withoutWideColumn?: boolean;
 }

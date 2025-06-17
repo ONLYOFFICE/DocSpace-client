@@ -2189,9 +2189,6 @@
   --selector-empty-screen-button-color: #{$light-gray-dark};
   --selector-empty-screen-hover-button-color: #{$black};
   --selector-empty-screen-description-color: #{$gray-text};
-
-  --selector-navigation-lifetime-fill: #{$gray};
-  --selector-navigation-lifetime-stroke: #{$gray};
 }
 
 .dark {
@@ -2213,9 +2210,6 @@
   --selector-empty-screen-button-color: #{$dark-gray-dark};
   --selector-empty-screen-hover-button-color: #{$white};
   --selector-empty-screen-description-color: #{$dark-gray-dark};
-
-  --selector-navigation-lifetime-fill: #{$dark-gray-dark};
-  --selector-navigation-lifetime-stroke: #{$gray};
 }
 
 .light {

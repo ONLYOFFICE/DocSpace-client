@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
@@ -61,8 +61,9 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
 
       const res = await saveDeposite(+amount, currency);
 
-      if (!res) return;
-      if (!res.includes("ok")) throw new Error(res);
+      if (!res) {
+        throw new Error(t("Common:UnexpectedError"));
+      }
 
       await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);
 

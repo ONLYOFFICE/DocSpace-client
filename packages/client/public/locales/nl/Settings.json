@@ -359,5 +359,13 @@
   "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
-  "YourLogo": "Uw logo"
+  "YourLogo": "Uw logo",
+  "InvitationSettings": "Uitnodigingsinstellingen",
+  "InvitationSettingsContacts": "Nodig {{productName}} leden uit via Contacten",
+  "InvitationSettingsContactsDescription": "Schakel deze optie in om toe te staan dat uitnodigingen naar nieuwe {{productName}} leden worden verzonden via de Contacten sectie. Schakel deze optie uit als u nieuwe leden uitsluitend via LDAP wilt uitnodigen.",
+  "InvitationSettingsDescription": "Configureer de uitnodigingsopties voor interne leden en externe gasten van uw {{productName}}. Deze instellingen kunnen u helpen om te voldoen aan de beveiligingsrichtlijnen van uw bedrijf, bijvoorbeeld als u LDAP of andere gebruikersbeheersystemen gebruikt.",
+  "InvitationSettingsGuests": "Sta gasten uit te nodigen",
+  "InvitationSettingsGuestsDescription": "Schakel deze optie in om alle {{productName}} leden de mogelijkheid te geven externe gasten uit te nodigen voor ruimtes.",
+  "InvitationSettingsMobile": "Configureer de uitnodigingsopties voor interne leden en externe gasten van uw {{productName}}.",
+  "Services": "Diensten"
 }

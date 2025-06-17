@@ -12,5 +12,11 @@
   "SendInvitation": "Poslať pozvánku",
   "UserMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť označení ako manažéri miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť pridelená táto rola.",
   "UsersAlreadyAdded": "Niektorí používatelia už boli pridaní",
-  "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti."
+  "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti.",
+  "EmailErrorMessageUserNotFound": "Používateľ nebol nájdený. Môžete upraviť e-mail dvojitým kliknutím naň.",
+  "InviteToRoomAddPlaceholder": "Pridajte ľudí podľa mena alebo e-mailu.",
+  "InviteToRoomManuallyInfoGuest": "Pridajte existujúce kontakty {{productName}}. Alebo pozvite nových používateľov osobne cez e-mail. Noví používatelia budú pridaní do zoznamu Vašich hostí.",
+  "InviteToRoomManuallyInfoMembers": "Pridajte existujúcich členov {{productName}} do miestnosti.",
+  "InviteViaLinkDescriptionRoomGuest": "Vytvorte univerzívny odkaz na sebaautorizáciu v miestnosti ako hosť.",
+  "InviteViaLinkDescriptionRoomMembers": "Vytvorte univerzity link pre členov {{productName}} na vlastnú autorizáciu v miestnosti."
 }

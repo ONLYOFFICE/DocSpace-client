@@ -720,5 +720,7 @@
   "Yes": "Да",
   "Yesterday": "Јуче",
   "You": "Ви",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "Important": "Важно",
+  "SuggestFeature": "Предложи функцију"
 }

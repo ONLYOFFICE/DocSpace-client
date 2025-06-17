@@ -12,5 +12,11 @@
   "SendInvitation": "ສົ່ງຄຳເຊີນ",
   "UserMaxAvailableRoleWarning": "แขກ ແລະຜູ້ໃຊ້ບໍ່ສາມາດຖືກມອບຫມາຍເປັນຜູ້ຈັດການຫ້ອງໄດ້ ພຽງແຕ່ຜູ້ບໍລິຫານຫ້ອງ ແລະ {{productName}} ເທົ່ານັ້ນທີ່ຈະຖືກຕ້ອງສໍາລັບບົດບາດທີ່ກໍາຫນົດໄວ້.",
   "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ",
-  "UsersCannotBeAdded": "ຜູ້ຕິດຕໍ່ທີ່ຖືກປິດການໃຊ້ງານ ບໍ່ສາມາດເພີ່ມເຂົ້າຫ້ອງໄດ້"
+  "UsersCannotBeAdded": "ຜູ້ຕິດຕໍ່ທີ່ຖືກປິດການໃຊ້ງານ ບໍ່ສາມາດເພີ່ມເຂົ້າຫ້ອງໄດ້",
+  "EmailErrorMessageUserNotFound": "ບໍ່ພົບຜູ້ໃຊ້។ ທ່ານສາມາດແກ້ໄຂອີເມນໄດ້ໂດຍການຄລິກສອງຄັ້ງໃສ່ມັນ។",
+  "InviteToRoomAddPlaceholder": "ເພີ່ມຄົນໂດຍຊື່ຫຼືອີເມລ໌",
+  "InviteToRoomManuallyInfoGuest": "ເພີ່ມຕິດຕໍ່ {{productName}} ທີ່ມີຢູ່ແລ້ວ ຫລືເຊີນຜູ້ໃຊ້​ໃໝ່​ໂດຍສ່ວນຕົວຜ່ານອີເມລ໌​ໄດ້​ເລີຍ​។ ຜູ້ໃຊ້​ໃໝ່​ຈະຖືກເພີ່ມເຂົ້າໃນລາຍການແຂກຂອງທ່ານ​។",
+  "InviteToRoomManuallyInfoMembers": "ເພີ່ມສະມາຊິກ {{productName}} ທີ່ມີຢູ່ແລ້ວເຂົ້າໃນຫ້ອງ។",
+  "InviteViaLinkDescriptionRoomGuest": "ສ້າງລິ້ງທົ່ວໄປສໍາລັບການອະນຸມັດດ້ວຍຕົນເອງໃນຫ້ອງເປັນແຂກ.",
+  "InviteViaLinkDescriptionRoomMembers": "ສ້າງລິ້ງທົ່ວໄປສໍາລັບສະມາຊິກ {{productName}} ເພື່ອການອະນຸມັດດ້ວຍຕົນເອງໃນຫ້ອງ."
 }

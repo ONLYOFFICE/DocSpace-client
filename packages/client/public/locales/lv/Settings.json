@@ -359,5 +359,13 @@
   "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību.",
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
-  "YourLogo": "Jūsu logotips"
+  "YourLogo": "Jūsu logotips",
+  "InvitationSettings": "Ielūgumu iestatījumi",
+  "InvitationSettingsContacts": "Uzaiciniet {{productName}} biedrus, izmantojot Kontaktus",
+  "InvitationSettingsContactsDescription": "Iespējojiet šo opciju, lai atļautu uzaicinājumus jaunajiem {{productName}} dalībniekiem nosūtīt, izmantojot Kontaktpersonu sadaļu. Atspējojiet šo opciju, ja vēlaties uzaicināt jaunus dalībniekus tikai, izmantojot LDAP.",
+  "InvitationSettingsDescription": "Konfigurējiet uzaicinājuma iestatījumus jūsu {{productName}} iekšējiem locekļiem un ārējiem viesiem. Šie iestatījumi var palīdzēt jums ievērot uzņēmuma drošības vadlīnijas, piemēram, ja jūs izmantojat LDAP vai citus lietotāju vadības sistēmas.",
+  "InvitationSettingsGuests": "Atļaut uzaicināt viesus",
+  "InvitationSettingsGuestsDescription": "Iespējojiet šo opciju, lai ļautu visiem {{productName}} dalībniekiem uzaicinātu ārējus viesus uz telpām.",
+  "InvitationSettingsMobile": "Konfigurējiet uzaicinājuma opcijas jūsu {{productName}} iekšējiem locekļiem un ārējiem viesiem.",
+  "Services": "Pakalpojumi"
 }

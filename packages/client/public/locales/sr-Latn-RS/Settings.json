@@ -359,5 +359,13 @@
   "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
   "YourCurrentDomain": "Vaš trenutni domen",
-  "YourLogo": "Vaš logo"
+  "YourLogo": "Vaš logo",
+  "InvitationSettings": "Podešavanja poziva",
+  "InvitationSettingsContacts": "Pozovite članove {{productName}} preko Kontakata",
+  "InvitationSettingsContactsDescription": "Omogućite ovu opciju da bi pozivi mogli da se šalju novim {{productName}} članovima preko sekcije Kontakti. Onemogućite ovu opciju ako želite da nove članove pozivate samo preko LDAP-a.",
+  "InvitationSettingsDescription": "Podesite opcije poziva za interne članove i spoljne goste vašeg {{productName}}. Ova podešavanja mogu vam pomoći da ispunite bezbednosne smernice vaše kompanije, na primer ako koristite LDAP ili druge sisteme za upravljanje korisnicima.",
+  "InvitationSettingsGuests": "Dozvoli pozivanje gostiju",
+  "InvitationSettingsGuestsDescription": "Omogućite ovu opciju da svi {{productName}} članovi mogu da pozivaju spoljne goste u sobe.",
+  "InvitationSettingsMobile": "Podesite opcije poziva za interne članove i spoljne goste vašeg {{productName}}.",
+  "Services": "Usluge"
 }

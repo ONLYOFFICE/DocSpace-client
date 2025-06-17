@@ -12,5 +12,11 @@
   "SendInvitation": "Pošlji povabilo",
   "UserMaxAvailableRoleWarning": "Gostov in uporabnikov ni mogoče določiti za upravitelje sob. Samo skrbniki sobe in {{productName}} so primerni za to vlogo.",
   "UsersAlreadyAdded": "Nekateri uporabniki so že dodani",
-  "UsersCannotBeAdded": "Onemogočeni kontakti se ne morejo dodati v sobo."
+  "UsersCannotBeAdded": "Onemogočeni kontakti se ne morejo dodati v sobo.",
+  "EmailErrorMessageUserNotFound": "Uporabnik ni najden. E-poštni naslov lahko uredite z dvojnim klikom nanj.",
+  "InviteToRoomAddPlaceholder": "Dodajanje ljudi po imenu ali e-pošti.",
+  "InviteToRoomManuallyInfoGuest": "Dodajte obstoječe kontakte {{productName}}. Ali povabite nove uporabnike osebno preko e-pošte. Novim uporabnikom bo dodan seznam Gostov.",
+  "InviteToRoomManuallyInfoMembers": "Dodajte obstoječe člane {{productName}} v sobo.",
+  "InviteViaLinkDescriptionRoomGuest": "Ustvarite splošno povezavo za samopoveriljenje v sobi kot gost.",
+  "InviteViaLinkDescriptionRoomMembers": "Ustvarite unikatno povezavo za člane {{productName}} za samopoveriljenje v sobi."
 }

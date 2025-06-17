@@ -359,5 +359,13 @@
   "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin.",
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
-  "YourLogo": "Logonuz"
+  "YourLogo": "Logonuz",
+  "InvitationSettings": "Davet Ayarları",
+  "InvitationSettingsContacts": "{{productName}} üyelerini İletişimler aracılığıyla davet edin",
+  "InvitationSettingsContactsDescription": "Bu seçeneği etkinleştirerek, yeni {{productName}} üyelerine İletişimler bölümü aracılığıyla davetiye gönderilmesine izin verebilirsiniz. Sadece LDAP aracılığıyla yeni üyeleri davet etmek isterseniz bu seçeneği devre dışı bırakın.",
+  "InvitationSettingsDescription": "{{productName}}’nizin iç üyeleri ve dış misafirler için davet seçeneklerini yapılandırın. Bu ayarlar, örneğin LDAP veya diğer kullanıcı yönetim sistemleri kullanıyorsanız, şirketinizin güvenlik yönergelerine uymanıza yardımcı olabilir.",
+  "InvitationSettingsGuests": "Misafir davet etmeye izin ver",
+  "InvitationSettingsGuestsDescription": "Bu seçeneği etkinleştirerek tüm {{productName}} üyelerinin odalara harici misafirler davet etmesine izin verin.",
+  "InvitationSettingsMobile": "{{productName}}'inizin iç üyeleri ve dış misafirler için davet seçeneklerini yapılandırın.",
+  "Services": "Hizmetler"
 }

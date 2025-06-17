@@ -359,5 +359,13 @@
   "WithoutEmailHint": "ليس لديك مستخدمون بدون بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية.",
   "YouHaveUnsavedChanges": "لقد قمت بعدم حفظ التغييرات",
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
-  "YourLogo": "شعاركم"
+  "YourLogo": "شعاركم",
+  "InvitationSettings": "إعدادات الدعوة",
+  "InvitationSettingsContacts": "دعوة أعضاء {{productName}} عبر جهات الاتصال",
+  "InvitationSettingsContactsDescription": "تفعيل هذا الخيار للسماح بإرسال الدعوات لأعضاء {{productName}} الجدد من خلال قسم جهات الاتصال. تعطيل هذا الخيار في حال أردت دعوة أعضاء جدد من خلال LDAP فقط.",
+  "InvitationSettingsDescription": "تكوين خيارات الدعوة للأعضاء الداخليين والضيوف الخارجيين لـ {{productName}} الخاص بك. يمكن أن تساعدك هذه الإعدادات في الامتثال لإرشادات الأمان الخاصة بشركتك، على سبيل المثال، إذا كنت تستخدم LDAP أو أنظمة إدارة مستخدمين أخرى.",
+  "InvitationSettingsGuests": "السماح بدعوة الضيوف",
+  "InvitationSettingsGuestsDescription": "مكّن هذا الخيار للسماح لجميع أعضاء {{productName}} بدعوة ضيوف خارجيين إلى الغرف.",
+  "InvitationSettingsMobile": "تكوين خيارات الدعوة للأعضاء الداخليين والضيوف الخارجيين لـ {{productName}} الخاص بك.",
+  "Services": "الخدمات"
 }

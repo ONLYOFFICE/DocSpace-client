@@ -114,5 +114,8 @@
   "SubtitleDescription": "Apakšvirsraksts ar papildu komentāriem vai aprakstiem pašreizējam direktorijam.",
   "TabPlugins": "Ciļņu spraudņi",
   "Viewer": "Skatītājs",
-  "ViewerDescription": "Iegult skatītāju, lai ļautu lietotājiem atvērt failu skatīšanai no attiecīgās telpas."
+  "ViewerDescription": "Iegult skatītāju, lai ļautu lietotājiem atvērt failu skatīšanai no attiecīgās telpas.",
+  "CSPDescription": "Ievadiem pakalpojuma adresi, kur vēlaties iegult vai savienot savu {{organizationName}} {{productName}}.",
+  "CSPHeader": "Pievienojiet atļautās domēnus šim {{productName}}.",
+  "CSPUrlHelp": "Lūdzu, norādiet tikai domēna nosaukumu, izvairoties no URL ceļiem vai papildu rakstzīmēm."
 }

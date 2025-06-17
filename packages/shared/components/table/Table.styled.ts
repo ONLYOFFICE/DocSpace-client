@@ -60,20 +60,6 @@ const StyledTableContainer = styled.div.attrs(injectDefaultTheme)<{
       props.theme.tableContainer.indexingSeparator};
   }
 
-  .resize-handle {
-    display: block;
-    cursor: ew-resize;
-    height: 10px;
-    margin-block: 14px 0;
-    margin-inline: auto 0;
-    z-index: 1;
-    border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
-
-    &:hover {
-      border-color: ${(props) => props.theme.tableContainer.hoverBorderColor};
-    }
-  }
-
   .table-container_group-menu,
   .table-container_header {
     z-index: 200;
@@ -384,6 +370,20 @@ const StyledTableHeaderCell = styled.div.attrs(injectDefaultTheme)<{
           color: ${props.theme.tableContainer.header.hoverTextColor} !important;
         }
       `}
+  }
+
+  .resize-handle {
+    display: block;
+    cursor: ew-resize;
+    height: 10px;
+    margin-block: 14px 0;
+    margin-inline: auto 0;
+    z-index: 1;
+    border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
+
+    &:hover {
+      border-color: ${(props) => props.theme.tableContainer.hoverBorderColor};
+    }
   }
 `;
 

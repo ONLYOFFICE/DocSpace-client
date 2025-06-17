@@ -307,21 +307,29 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       )}
 
       {isTransactionHistoryExist && !isLoading ? (
-        <div className={styles.downloadWrapper}>
-          <Button
-            label={t("Settings:DownloadReportBtnText")}
-            size={ButtonSize.small}
-            minWidth="auto"
-            onClick={getReport}
-            isLoading={isFormationHistory}
-            isDisabled={isNotPaidPeriod}
-          />
-          <Text as="span" className={styles.downloadReportDescription}>
-            {t("Settings:ReportSaveLocation", {
-              sectionName: t("Common:MyFilesSection"),
+        <>
+          <Text className={styles.transactionsLimit}>
+            {t("TransactionsLimit", {
+              buttonName: t("Settings:DownloadReportBtnText"),
             })}
           </Text>
-        </div>
+
+          <div className={styles.downloadWrapper}>
+            <Button
+              label={t("Settings:DownloadReportBtnText")}
+              size={ButtonSize.small}
+              minWidth="auto"
+              onClick={getReport}
+              isLoading={isFormationHistory}
+              isDisabled={isNotPaidPeriod}
+            />
+            <Text as="span" className={styles.downloadReportDescription}>
+              {t("Settings:ReportSaveLocation", {
+                sectionName: t("Common:MyFilesSection"),
+              })}
+            </Text>
+          </div>
+        </>
       ) : null}
 
       {isFilterDialogVisible ? (

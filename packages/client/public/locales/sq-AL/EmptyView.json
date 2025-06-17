@@ -43,5 +43,9 @@
   "UploadDevicePDFFormOptionTitle": "Ngarkoni nga pajisja",
   "UploadFromPortalTitle": "Ngarkoni nga {{productName}}",
   "UploadPDFFormOptionDescription": "Selektoni një formular të gatshëm PDF të disponueshëm në {{productName}} dhe ngarkojeni në dhomë.",
-  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale"
+  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale",
+  "EmptyTemplatesDescription": "Ju mund të krijoni një model nga një dhomë në seksionin Dhoma.",
+  "EmptyTemplatesTitle": "Nuk ka modele këtu ende",
+  "FormFolderDefaultUserTitle": "Nuk ka formularë në këtë dosje ende.",
+  "SectionsUploadDescription": "Ngarkoni çdo lloj skedari nga {{sectionNameFirst}} ose {{sectionNameSecond}}"
 }

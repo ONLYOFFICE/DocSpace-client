@@ -63,6 +63,8 @@ class ServicesStore {
 
   isInitServicesPage = false;
 
+  isVisibleWalletSettings = false;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -99,6 +101,10 @@ class ServicesStore {
   get storagePriceIncrement() {
     return this.servicesQuotas?.price.value ?? 0;
   }
+
+  setVisibleWalletSetting = (isVisibleWalletSettings) => {
+    this.isVisibleWalletSettings = isVisibleWalletSettings;
+  };
 
   setIsInitServicesPage = (isInitServicesPage: boolean) => {
     this.isInitServicesPage = isInitServicesPage;
@@ -162,6 +168,14 @@ class ServicesStore {
       }
 
       this.setIsInitServicesPage(true);
+      if (isRefresh) {
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname,
+        );
+        this.setVisibleWalletSetting(true);
+      }
     } catch (e) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(e);

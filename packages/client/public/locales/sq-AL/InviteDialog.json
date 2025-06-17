@@ -11,5 +11,12 @@
   "LinkCopySuccess": "Lidhja është kopjuar",
   "SendInvitation": "Dërgoni ftesë",
   "UserMaxAvailableRoleWarning": "Vizitorët dhe përdoruesit nuk mund të caktohen si menaxherë të dhomës. Vetëm administratorët e dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
-  "UsersAlreadyAdded": "Disa përdorues janë shtuar tashmë"
+  "UsersAlreadyAdded": "Disa përdorues janë shtuar tashmë",
+  "EmailErrorMessageUserNotFound": "Përdoruesi nuk u gjet. Ju mund ta modifikoni emailin duke klikuar dy herë mbi të.",
+  "InviteToRoomAddPlaceholder": "Shtoni njerëz me emër ose email",
+  "InviteToRoomManuallyInfoGuest": "Shtoni kontaktet ekzistuese të {{productName}}. Ose ftoni përdorues të rinj personalisht me email. Përdorues të rinj do të shtohen në listën tuaj të të ftuarve.",
+  "InviteToRoomManuallyInfoMembers": "Shtoni anëtarët ekzistues të {{productName}} në dhomë.",
+  "InviteViaLinkDescriptionRoomGuest": "Krijoni një lidhje universale për vetë-autorizimin në dhomë si mysafir.",
+  "InviteViaLinkDescriptionRoomMembers": "Krijoni një lidhje universale për anëtarët e {{productName}} për vetëautorizim në dhomë.",
+  "UsersCannotBeAdded": "Kontaktet e çaktivizuara nuk mund të shtohen në një dhomë"
 }

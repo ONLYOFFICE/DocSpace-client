@@ -36,9 +36,9 @@ interface ButtonContainerProps {
   onClose: () => void;
   onBuy: () => void;
   onSendRequest: () => void;
+  title: string;
   isLoading: boolean;
   isExceedingStorageLimit: boolean;
-  amount: number;
   insufficientFunds: boolean;
   isCurrentStoragePlan?: boolean;
   isUpgradeStoragePlan: boolean;
@@ -59,9 +59,10 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     onSendRequest,
     currentStoragePlanSize,
     hasStorageSubscription,
+    title,
   } = props;
 
-  const { buttonTitle, isWalletBalanceInsufficient, t } = useServicesActions();
+  const { isWalletBalanceInsufficient, t } = useServicesActions();
   const { futurePayment, isWaitingCalculation } = usePaymentContext();
 
   const isPaymentUnavalable =
@@ -73,7 +74,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     <>
       <Button
         key="OkButton"
-        label={buttonTitle(amount)}
+        label={title}
         size={ButtonSize.normal}
         primary
         scale

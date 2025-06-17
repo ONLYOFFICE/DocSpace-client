@@ -24,5 +24,15 @@
   "SettingsForAll": "Këto cilësime do të jenë efektive për të gjitha hapësirat tuaja.",
   "Subheader": "Përdoreni këtë seksion për të krijuar disa hapësira dhe për t'i bërë ato të aksesueshme për përdoruesit tuaj",
   "SubmitDelete": "Paraqisni një kërkesë për fshirje",
-  "VisitSpace": "Vizitoni këtë hapësirë ​​pas krijimit"
+  "VisitSpace": "Vizitoni këtë hapësirë ​​pas krijimit",
+  "DecryptStorage": "Dekriptoni hapësirën e ruajtjes",
+  "EncryptData": "Ekriptoni të dhënat në pushim",
+  "EncryptDataWarningDescription": "Enkriptimi i ruajtjes mund të zgjasë. Hapësirat do të jenë të disponueshme gjatë këtij procesi. Sigurohuni që keni hapësirë të mjaftueshme dhe që të dhënat tuaja janë të ruajtura. Mos harroni të çaktivizoni ruajtjen automatike dhe të ndaloni të gjitha që janë në zhvillim. Përndryshe, kjo do të bëhet automatikisht.",
+  "EncryptStorage": "Ekriptoni ruajtjen",
+  "EncryptWarningDialogContent": "Të gjitha hapësirat do të bëhen të padisponueshme gjatë procesit të enkriptimit. Jeni të sigurt që doni të vazhdoni?",
+  "MoreDetails": "Për më shumë detaje mbi ndalimin e shërbimeve, ju lutem referojuni  <1>{{link}}</1>.",
+  "NotifyUsers": "Njoftoni përdoruesit që hapësira do të jetë e padisponueshme",
+  "StorageEncrypted": "Ruajtja u ekriptua",
+  "EncryptDataDescription": "{{organizationName}} përdorni ekriptimin AES-256 për të mbrojtur të dhënat në pushim në ruajtje.",
+  "DecryptWarningDialogContent": "Të gjitha hapësirat do të bëhen të padisponueshme gjatë procesit të dekriptimit. Jeni i sigurt që dëshironi të vazhdoni?"
 }

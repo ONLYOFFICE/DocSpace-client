@@ -54,8 +54,6 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-      - name: Build translations
-        run: pnpm build:translations
       - name: Lint clients
         run: pnpm lint
   # unit-tests:

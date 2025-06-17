@@ -87,6 +87,16 @@
           "build"
         ]
       },
+      "lint": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "lint:fix": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
       "deploy": {
         "dependsOn": [
           "build"

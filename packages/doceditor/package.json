@@ -7,8 +7,6 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=development PORT=5013 next dev",
     "start-prod": "cross-env NODE_ENV=production node server.js",
-    "start:internal": "cross-env NODE_ENV=development API_HOST=http://127.0.0.1 next dev",
-    "start-prod:internal": "cross-env NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/standalone/* ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -r .next/static/* ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -f server.prod.js ../../../publish/web/editor/server.js"
@@ -73,18 +71,6 @@
         ]
       },
       "start-prod": {
-        "continuous": true,
-        "dependsOn": [
-          "build"
-        ]
-      },
-      "start:internal": {
-        "continuous": true,
-        "dependsOn": [
-          "build"
-        ]
-      },
-      "start-prod:internal": {
         "continuous": true,
         "dependsOn": [
           "build"

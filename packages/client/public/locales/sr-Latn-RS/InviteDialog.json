@@ -12,5 +12,11 @@
   "SendInvitation": "Pošalji pozivnicu",
   "UserMaxAvailableRoleWarning": "Gosti i Korisnici ne mogu biti postavljeni kao Menadžeri sobe. Samo administratori sobe i {{productName}} su pogodni za određenu ulogu.",
   "UsersAlreadyAdded": "Neki korisnici su već dodati",
-  "UsersCannotBeAdded": "Onemogućeni kontakti ne mogu biti dodati u sobu."
+  "UsersCannotBeAdded": "Onemogućeni kontakti ne mogu biti dodati u sobu.",
+  "EmailErrorMessageUserNotFound": "Korisnik nije pronađen. Možete izmeniti imejl tako što ćete na njega dvaput kliknuti.",
+  "InviteToRoomAddPlaceholder": "Dodajte ljude po imenu ili imejlu",
+  "InviteToRoomManuallyInfoGuest": "Dodajte postojeće {{productName}} kontakte. Ili lično pozovite nove korisnike putem imejla. Novi korisnici će biti dodati na vašu listu gostiju.",
+  "InviteToRoomManuallyInfoMembers": "Dodajte postojeće {{productName}} članove u sobu.",
+  "InviteViaLinkDescriptionRoomGuest": "Kreirajte univerzalni link za samostalnu autorizaciju u sobi kao gost.",
+  "InviteViaLinkDescriptionRoomMembers": "Kreirajte univerzalni link za članove {{productName}} za samostalnu autorizaciju u sobi."
 }

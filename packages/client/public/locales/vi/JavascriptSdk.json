@@ -114,5 +114,8 @@
   "SubtitleDescription": "Phụ đề với nhận xét hoặc mô tả bổ sung cho thư mục hiện tại.",
   "TabPlugins": "Tab Plugins",
   "Viewer": "Trình xem",
-  "ViewerDescription": "Nhúng trình xem để cho phép người dùng mở tập tin để xem từ phòng tương ứng."
+  "ViewerDescription": "Nhúng trình xem để cho phép người dùng mở tập tin để xem từ phòng tương ứng.",
+  "CSPDescription": "Nhập địa chỉ dịch vụ mà bạn muốn nhúng hoặc kết nối {{organizationName}} {{productName}} của bạn.",
+  "CSPHeader": "Thêm các miền được phép cho {{productName}} này.",
+  "CSPUrlHelp": "Vui lòng chỉ cung cấp tên miền, tránh các đường dẫn URL hoặc ký tự thừa."
 }

@@ -12,5 +12,11 @@
   "SendInvitation": "Изпращане на покана",
   "UserMaxAvailableRoleWarning": "Гостите и потребителите не могат да бъдат назначени като мениджъри на стаи. Само администратори на стая и {{productName}} са подходящи за посочената роля.",
   "UsersAlreadyAdded": "Някои потребители вече са добавени",
-  "UsersCannotBeAdded": "Деактивираните контакти не могат да се добавят към стая"
+  "UsersCannotBeAdded": "Деактивираните контакти не могат да се добавят към стая",
+  "EmailErrorMessageUserNotFound": "Потребител не е намерен. Можете да редактирате имейла, като го щракнете два пъти.",
+  "InviteToRoomAddPlaceholder": "Добавете хора по име или имейл.",
+  "InviteToRoomManuallyInfoGuest": "Добавете съществуващи контакти {{productName}}. Или поканете нови потребители лично чрез имейл. Новите потребители ще бъдат добавени към списъка ви с Гости.",
+  "InviteToRoomManuallyInfoMembers": "Добавете съществуващите членове на {{productName}} към стаята.",
+  "InviteViaLinkDescriptionRoomGuest": "Създайте универсален линк за самооторизация в стаята като гост.",
+  "InviteViaLinkDescriptionRoomMembers": "Създайте универсален линк за членовете на {{productName}} за самолегитимиране в стаята."
 }

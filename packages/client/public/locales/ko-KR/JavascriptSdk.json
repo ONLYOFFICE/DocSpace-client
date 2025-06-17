@@ -114,5 +114,8 @@
   "SubtitleDescription": "현재 디렉토리에 대한 추가 코멘트나 설명이 포함된 부제를 달으세요.",
   "TabPlugins": "탭 플러그인",
   "Viewer": "뷰어",
-  "ViewerDescription": "사용자가 해당 방에서 파일을 열어 볼 수 있도록 뷰어를 임베드하세요."
+  "ViewerDescription": "사용자가 해당 방에서 파일을 열어 볼 수 있도록 뷰어를 임베드하세요.",
+  "CSPDescription": "{{organizationName}} {{productName}}을 임베드하거나 연결하려는 서비스 주소를 입력해주세요.",
+  "CSPHeader": "이 {{productName}}에 허용된 도메인을 추가하세요.",
+  "CSPUrlHelp": "제공된 도메인 이름만 제공해주세요."
 }

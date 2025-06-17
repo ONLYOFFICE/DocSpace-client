@@ -359,5 +359,13 @@
   "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
-  "YourLogo": "Vaše logo"
+  "YourLogo": "Vaše logo",
+  "InvitationSettings": "Nastavenia pozvánok",
+  "InvitationSettingsContacts": "Pozývajte členov {{productName}} cez Kontakty",
+  "InvitationSettingsContactsDescription": "Zapnite túto možnosť, aby bolo možné posielať pozvánky novým členom {{productName}} cez sekciu Kontakty. Vypnite túto možnosť, ak chcete pozývať nových členov len cez LDAP.",
+  "InvitationSettingsDescription": "Konfigurujte možnosti pozvánok pre interných členov a externých hostí vášho {{productName}}. Tieto nastavenia vám môžu pomôcť dodržiavať bezpečnostné pokyny vašej spoločnosti, napríklad ak používate LDAP alebo iné systémy na správu používateľov.",
+  "InvitationSettingsGuests": "Povoliť pozývanie hostí",
+  "InvitationSettingsGuestsDescription": "Zapnite túto možnosť, aby všetci členovia {{productName}} mohli pozývať externých hostí do miestností.",
+  "InvitationSettingsMobile": "Konfigurujte možnosti pozvánok pre interných členov a externých hostí vášho {{productName}}.",
+  "Services": "Služby"
 }

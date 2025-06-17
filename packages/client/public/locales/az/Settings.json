@@ -359,5 +359,13 @@
   "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
-  "YourLogo": "Loqonuz"
+  "YourLogo": "Loqonuz",
+  "InvitationSettings": "Sərfətlər",
+  "InvitationSettingsContacts": "Əlaqələr vasitəsilə {{productName}} üzvlərini dəvət edin",
+  "InvitationSettingsContactsDescription": "Bu seçimi aktiv etməklə, yeni {{productName}} üzvlərinə Əlaqələr bölməsindən dəvət göndərməyə icazə verilir. LDAP vasitəsilə yeni üzvləri dəvət etmək istəyirsinizsə, bu seçimi deaktiv edin.",
+  "InvitationSettingsDescription": "{{productName}} üzrə daxili üzvlər və xarici qonaqlar üçün dəvət seçimlərini konfiqurasiya edin. Bu parametrlər, müəssisənizin təhlükəsizlik qaydalarına uyğunluğunu təmin etməyə kömək edə bilər, məsələn, LDAP və ya digər istifadəçi idarəetmə sistemləri istifadə etdiyiniz halda.",
+  "InvitationSettingsGuests": "Qonaqları dəvət etməyə icazə ver",
+  "InvitationSettingsGuestsDescription": "Bu seçimi aktiv etməklə, bütün {{productName}} üzvlərinin otaqlara xarici qonaqlar dəvət etməsinə icazə verilir.",
+  "InvitationSettingsMobile": "{{productName}} üzrə daxili üzvlər və xarici qonaqlar üçün dəvət seçimlərini konfiqurasiya edin.",
+  "Services": "Xidmətlər"
 }

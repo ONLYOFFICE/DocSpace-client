@@ -126,5 +126,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Deseja habilitar recargas automáticas para que seu saldo nunca acabe?",
   "YouHaveNotAddedAnyPayment": "Você não adicionou nenhum pagamento",
   "YourCurrentPayment": "Seu pagamento atual",
-  "YourCurrentPlan": "<1>Seu plano atual:</1> {{valor}} <2>({{preço}}/mês)</2>"
+  "YourCurrentPlan": "<1>Seu plano atual:</1> {{valor}} <2>({{preço}}/mês)</2>",
+  "StorageCapacityUpdated": "A capacidade de armazenamento foi atualizada."
 }

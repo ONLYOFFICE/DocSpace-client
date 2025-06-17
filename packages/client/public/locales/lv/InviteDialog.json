@@ -12,5 +12,11 @@
   "SendInvitation": "Sūtīt ielūgumu",
   "UserMaxAvailableRoleWarning": "Viesi un lietotāji nevar būt telpu pārvaldnieki. Norādītajai lomai ir piemērota tikai telpa un {{productName}} administratori.",
   "UsersAlreadyAdded": "Daži lietotāji jau ir pievienoti",
-  "UsersCannotBeAdded": "Invalid kontaktpersonas nevar pievienot telpai"
+  "UsersCannotBeAdded": "Invalid kontaktpersonas nevar pievienot telpai",
+  "EmailErrorMessageUserNotFound": "Lietotājs nav atrasts. Jūs varat rediģēt e-pastu, divreiz noklikšķinot uz tā.",
+  "InviteToRoomAddPlaceholder": "Pievienojiet cilvēkus pēc vārda vai e-pasta adreses.",
+  "InviteToRoomManuallyInfoGuest": "Pievienojiet esošos {{productName}} kontaktus. Vai aiciniet jaunus lietotājus personīgi pa e-pastu. Jaunie lietotāji tiks pievienoti jūsu Ielūgti lietotāji sarakstā.",
+  "InviteToRoomManuallyInfoMembers": "Pievienojiet esošos {{productName}} dalībniekus telpā.",
+  "InviteViaLinkDescriptionRoomGuest": "Izveidot universālu saiti pašapstiprināšanai telpā kā viesim.",
+  "InviteViaLinkDescriptionRoomMembers": "Izveido universālu saiti {{productName}} biedriem pašapstiprināšanai telpā."
 }

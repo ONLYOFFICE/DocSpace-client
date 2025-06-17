@@ -12,5 +12,11 @@
   "SendInvitation": "Enviar convite",
   "UserMaxAvailableRoleWarning": "Hóspedes e Utilizadors não podem ser atribuídos como gerentes de quarto. Apenas os administradores Room e {{productName}} são adequados para a função especificada.",
   "UsersAlreadyAdded": "Alguns usuários já foram adicionados",
-  "UsersCannotBeAdded": "Os contactos desativados não podem ser adicionados a uma sala"
+  "UsersCannotBeAdded": "Os contactos desativados não podem ser adicionados a uma sala",
+  "EmailErrorMessageUserNotFound": "Usuário não encontrado. Você pode editar o e-mail clicando duas vezes sobre ele.",
+  "InviteToRoomAddPlaceholder": "Adicione pessoas por nome ou e-mail.",
+  "InviteToRoomManuallyInfoGuest": "Adicione contatos {{productName}} existentes. Ou convide novos usuários pessoalmente via e-mail. Novos usuários serão adicionados à sua lista de Convidados.",
+  "InviteToRoomManuallyInfoMembers": "Adicione membros {{productName}} existentes à sala.",
+  "InviteViaLinkDescriptionRoomGuest": "Crie um link universal para autoautorização na sala como convidado.",
+  "InviteViaLinkDescriptionRoomMembers": "Crie um link universal para membros de {{productName}} para autoautorização na sala."
 }

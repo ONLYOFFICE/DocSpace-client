@@ -720,5 +720,7 @@
   "Yes": "Da",
   "Yesterday": "Juče",
   "You": "Vi",
-  "YourTurn": "Vaš red"
+  "YourTurn": "Vaš red",
+  "Important": "Važno",
+  "SuggestFeature": "Predloži funkciju"
 }

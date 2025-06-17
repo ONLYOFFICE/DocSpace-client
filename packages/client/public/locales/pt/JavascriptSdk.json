@@ -114,5 +114,8 @@
   "SubtitleDescription": "Legenda com comentários ou descrições adicionais para o diretório atual.",
   "TabPlugins": "Plug-ins de guias",
   "Viewer": "Visualizador",
-  "ViewerDescription": "Incorpore um visualizador para permitir que os usuários abram um arquivo para visualização na sala correspondente."
+  "ViewerDescription": "Incorpore um visualizador para permitir que os usuários abram um arquivo para visualização na sala correspondente.",
+  "CSPDescription": "Insira o endereço do serviço onde você gostaria de incorporar ou conectar sua {{organizationName}} {{productName}}.",
+  "CSPHeader": "Adicione os domínios permitidos para este {{productName}}.",
+  "CSPUrlHelp": "Por favor, forneça apenas o nome de domínio, evitando caminhos de URL ou caracteres extras."
 }

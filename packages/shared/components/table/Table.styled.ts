@@ -280,113 +280,6 @@ const StyledTableHeader = styled.div.attrs(injectDefaultTheme)<{
   }
 `;
 
-const StyledTableHeaderCell = styled.div.attrs(injectDefaultTheme)<{
-  showIcon?: boolean;
-  sortingVisible?: boolean;
-  isActive?: boolean;
-  isShort?: boolean;
-  sorted?: boolean;
-}>`
-  cursor: ${(props) =>
-    props.showIcon && props.sortingVisible ? "pointer" : "default"};
-
-  .header-container-text-icon {
-    padding-block: 13px 0;
-    padding-inline: 4px 0;
-
-    display: ${(props) =>
-      props.isActive && props.showIcon ? "block" : "none"};
-    ${(props) =>
-      !props.sorted &&
-      css`
-        transform: scale(1, -1);
-        padding-block: 14px;
-        padding-inline: 4px 0;
-      `}
-
-    svg {
-      width: 12px;
-      height: 12px;
-      path {
-        fill: ${(props) =>
-          props.theme.tableContainer.header.iconColor} !important;
-      }
-    }
-
-    &:hover {
-      path {
-        fill: ${(props) =>
-          props.theme.tableContainer.header.hoverIconColor} !important;
-      }
-    }
-  }
-
-  :hover {
-    .header-container-text-icon {
-      ${(props) =>
-        props.showIcon &&
-        css`
-          display: block;
-        `};
-    }
-  }
-
-  .table-container_header-item {
-    display: grid;
-    grid-template-columns: 1fr 22px;
-
-    ${(isShort) =>
-      isShort &&
-      css`
-        grid-template-columns: 1fr 12px;
-      `};
-
-    margin-inline-end: 8px;
-
-    user-select: none;
-  }
-
-  .header-container-text-wrapper {
-    display: flex;
-    overflow: hidden;
-  }
-
-  .header-container-text {
-    height: 38px;
-    display: block;
-    line-height: 38px;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    color: ${(props) => props.theme.tableContainer.header.textColor};
-
-    ${(props) =>
-      props.showIcon &&
-      props.sortingVisible &&
-      css`
-        &:hover {
-          color: ${props.theme.tableContainer.header.hoverTextColor} !important;
-        }
-      `}
-  }
-
-  .resize-handle {
-    display: block;
-    cursor: ew-resize;
-    height: 10px;
-    margin-block: 14px 0;
-    margin-inline: auto 0;
-    z-index: 1;
-    border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
-
-    &:hover {
-      border-color: ${(props) => props.theme.tableContainer.hoverBorderColor};
-    }
-  }
-`;
-
 const StyledTableBody = styled.div<{
   useReactWindow?: boolean;
   infoPanelVisible?: boolean;
@@ -503,7 +396,6 @@ export {
   StyledTableRow,
   StyledTableBody,
   StyledTableHeader,
-  StyledTableHeaderCell,
   StyledTableSettings,
   StyledTableGroupMenu,
   StyledInfoPanelToggleColorThemeWrapper,

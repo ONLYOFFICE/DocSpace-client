@@ -2472,8 +2472,20 @@
 
 .light {
   --table-cell-border: 1px solid #{$gray-light-mid};
+
+  --table-header-text-color: #{$gray};
+  --table-header-text-hover-color: #{$light-gray-dark};
+
+  --table-container-border-right: 2px solid #{$gray-strong};
+  --table-container-border-hover-color: #{$light-gray-dark};
 }
 
 .dark {
   --table-cell-border: 1px solid #{$gray-dark-strong};
+
+  --table-header-text-color: #{$gray-dark};
+  --table-header-text-hover-color: #{$white};
+
+  --table-container-border-right: 2px solid #{$gray-dark-strong};
+  --table-container-border-hover-color: #{$gray-dark-strong};
 }

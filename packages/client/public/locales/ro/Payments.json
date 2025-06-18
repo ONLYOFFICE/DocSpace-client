@@ -12,7 +12,7 @@
   "AutoTopUp": "Alimentare automată",
   "AutoTopUpEnabled": "Alimentarea automată este activată.",
   "Balance": "Sold: <1>{{balance}}</1>",
-  "BalanceInsufficient": "Sold",
+  "BalanceInsufficient": "Sold: <1>{{balance}}</1> | Fonduri insuficiente",
   "BalanceText": "Sold",
   "Benefits": "Avantaje",
   "BilledMonthly": "Facturarea lunară",
@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/an</3>",
   "TransactionHistory": "Istoricul operațiilor",
   "TransactionPeriod": "Perioada operațiilor",
+  "TransactionsLimit": "În această pagină sunt afișate cele mai recente 25 de operații pentru perioada selectată. Pentru un istoric complet al operațiunilor apăsați pe butonul \"{{buttonName}}\".",
   "Upgrade": "Face upgrade",
   "UpgradeNow": "Upgrade acum",
   "UpgradePlan": "Actualizare abonament",
@@ -117,7 +118,7 @@
   "UserNotFoundMatchingEmail": "Nu s-a găsit utilizatorul cu un e-mail Stripe potrivit.",
   "UsersQuotaAlmostExhausted": "Cota spațiului de stocare pentru utilizatorii cu plată aproape epuizată.",
   "Wallet": "Portofel",
-  "WalletDescription": "Portofelul {{productName}} vă permite să achiziţionaţi cu ușurință spațiu de stocare și instrumente IA. Pentru început, depuneți banii în portofelul dvs și selectați servicii de care aveți nevoie din secțiunea Servicii.",
+  "WalletDescription": "Portofelul {{productName}} vă permite să achiziţionaţi cu ușurință spațiu de stocare. Pentru început, depuneți banii în portofelul dvs și selectați servicii de care aveți nevoie din secțiunea Servicii.",
   "WalletRefilled": "Portofelul a fost alimentat",
   "WantToCancelStoragePlan": "Sigur doriţi să anulați abonamentul cu spațiul de stocare suplimentar?",
   "Warning": "Accesul la spațiul de {{amount}} va fi păstrat până la sfârșitul perioadei active de facturare. Dacă spaţiul de stocare depășește spațiul de stocare nou la începutul următoarei perioade, veți fi facturat pentru spațiul utilizat de facto rotunjit la cea mai apropiată valoare exprimată în {{storageUnit}}.",
@@ -126,6 +127,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Doriți să activați alimentări automate astfel încât soldul dvs să nu se epuizeze niciodată?",
   "YouHaveNotAddedAnyPayment": "Nu a fost adăugată nicio metodă de plată",
   "YourCurrentPayment": "Metoda dvs de plată actuală",
-  "YourCurrentPlan": "<1>Planul actual:</1> {{amount}} <2>({{price}}/lună)",
+  "YourCurrentPlan": "<1>Planul actual:</1> {{amount}} <2>({{price}}/lună)</2>",
   "YourPrice": "Preţul dvs."
 }

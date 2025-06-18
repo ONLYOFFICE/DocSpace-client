@@ -54,7 +54,7 @@
   "BackupFileUploading": "Skedari rezervë po ngarkohet në server. Ju lutem prisni.",
   "BackupList": "Lista rezervë",
   "BackupListWarningText": "Nëse fshini ndonjë artikull nga lista, skedarët e tyre përkatës do të fshihen gjithashtu. Ky veprim nuk mund të zhbëhet. Për të fshirë të gjithë skedarët, përdorni lidhjen:",
-  "BackupProgress": "Ruajtja: {{progres}}%",
+  "BackupProgress": "Ruajtja: {{progress}}%",
   "BlockingTime": "Koha e bllokimit (sek.)",
   "Branding": "Markimi",
   "BrandingSectionDescription": "Specifikoni informacionin e kompanisë suaj, shtoni lidhje me burimet e jashtme dhe adresat e emailit të shfaqura brenda ndërfaqes {{productName}}.",

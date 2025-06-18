@@ -41,6 +41,7 @@
   "StripeCustomerPortal": "Stripeカスタマーポータルにアクセスする",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/月</3>",
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/年</3>",
+  "TransactionsLimit": "このページには、選択した期間の直近25件の取引が表示されます。すべての取引履歴は、\"{{buttonName}}” ボタンから確認できます。",
   "UpgradeNow": "今すぐアップグレードする",
   "UpgradePlan": "プランのアップグレード",
   "UserNotFound": "<1>{{email}}</1>ユーザーが見つかりません。",

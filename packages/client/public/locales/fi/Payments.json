@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/vuosi</3>",
   "TransactionHistory": "Tapahtumahistoria",
   "TransactionPeriod": "Tapahtumajakso",
+  "TransactionsLimit": "Sivu näyttää viimeiset 25 tapahtumaa valitulle ajanjaksolle. Koko tapahtumahistoria on saatavilla \"{{buttonName}}\"-painikkeen kautta.",
   "Upgrade": "Päivitä",
   "UpgradeNow": "Päivitä nyt",
   "UpgradePlan": "Päivitä ohjelma",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPayment": "Nykyinen maksusi",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi",
-  "TransactionsLimit": "Sivu näyttää viimeiset 25 tapahtumaa valitulle ajanjaksolle. Koko tapahtumahistoria on saatavilla \"{{buttonName}}\"-painikkeen kautta."
+  "YourPrice": "Hintasi"
 }

@@ -80,7 +80,7 @@
   "PlanUpgrade": "Սակագնի արդիականացում",
   "PriceCalculation": "Հաշվարկեք ձեր արժեքը",
   "PriceForEach": "{{currency}} մեկ {{amount}}-ի համար",
-  "ProductNameWallet": "{{currency}} մեկ {{amount}}-ի համար",
+  "ProductNameWallet": "{{productName}} Wallet",
   "Quantity": "Քանակ",
   "RemainingDays": "Հաշվարկային ցիկլի մնացած օրերը՝ {{count}}",
   "RenewSubscription": "Թարմացրեք {{planName}} պլանի բաժանորդագրությունը",
@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/տարի</3>",
   "TransactionHistory": "Գործարքի պատմություն",
   "TransactionPeriod": "Գործարքի ժամանակահատվածը",
+  "TransactionsLimit": "Էջը ցուցադրում է ընտրված ժամանակահատվածի վերջին 25 գործարքները: Գործարքների ամբողջական պատմությունը հասանելի է «{{buttonName}}» կոճակի միջոցով:",
   "Upgrade": "Թարմացում",
   "UpgradeNow": "Թարմացնել հիմա",
   "UpgradePlan": "Թարմացման պլան",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Դուք որևէ վճարում չեք ավելացրել",
   "YourCurrentPayment": "Ձեր ընթացիկ վճարումը",
   "YourCurrentPlan": "<1>Ձեր ներկայիս սակագինը՝</1> {{amount}} <2>({{price}}/ամիս)</2>",
-  "YourPrice": "Ձեր գինը",
-  "TransactionsLimit": "Էջը ցուցադրում է ընտրված ժամանակահատվածի վերջին 25 գործարքները: Գործարքների ամբողջական պատմությունը հասանելի է «{{buttonName}}» կոճակի միջոցով:"
+  "YourPrice": "Ձեր գինը"
 }

@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/годишње</3>",
   "TransactionHistory": "Istorija transakcija",
   "TransactionPeriod": "Period transakcija",
+  "TransactionsLimit": "Stranica prikazuje poslednjih 25 transakcija za izabrani period. Kompletna istorija transakcija je dostupna putem dugmeta \"{{buttonName}}\".",
   "Upgrade": "Nadogradnja",
   "UpgradeNow": "Nadogradi sada",
   "UpgradePlan": "Plan nadogradnje",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Niste dodali nijedan način plaćanja",
   "YourCurrentPayment": "Vaš trenutni način plaćanja",
   "YourCurrentPlan": "<1>Vaš trenutni plan:</1> {{amount}} <2>({{price}}/mesečno)</2>",
-  "YourPrice": "Vaša cena",
-  "TransactionsLimit": "Stranica prikazuje poslednjih 25 transakcija za izabrani period. Kompletna istorija transakcija je dostupna putem dugmeta \"{{buttonName}}\"."
+  "YourPrice": "Vaša cena"
 }

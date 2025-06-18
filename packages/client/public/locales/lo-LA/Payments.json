@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ປີ</3>",
   "TransactionHistory": "ປະຫວັດການຊໍາລະ",
   "TransactionPeriod": "ໄລຍະເວລາລໍາລຽງ",
+  "TransactionsLimit": "ຫນ້າສະແດງ 25 ທຸລະກໍາສຸດທ້າຍສໍາລັບໄລຍະເວລາທີ່ເລືອກ. ປະຫວັດທຸລະກໍາເຕັມແມ່ນມີໃຫ້ນຳໃຊ້ຜ່ານປຸ່ມ \"{{buttonName}}\".",
   "Upgrade": "ຍົກລະດັບ",
   "UpgradeNow": "ອັບເກຣດດຽວນີ້",
   "UpgradePlan": "ແຜນການຍົກລະດັບ",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "ທ່ານຍັງບໍ່ໄດ້ເພີ່ມການຈ່າຍເງິນໃດໆ",
   "YourCurrentPayment": "ການຈ່າຍເງິນຂອງທ່ານໃນປັດຈຸບັນ",
   "YourCurrentPlan": "<1>ແຜນການປັດຈຸບັນຂອງທ່ານ:</1> {{amount}} <2>({{price}}/ເດືອນ)</2>",
-  "YourPrice": "ລາຄາຂອງເຈົ້າ",
-  "TransactionsLimit": "ຫນ້າສະແດງ 25 ທຸລະກໍາສຸດທ້າຍສໍາລັບໄລຍະເວລາທີ່ເລືອກ. ປະຫວັດທຸລະກໍາເຕັມແມ່ນມີໃຫ້ນຳໃຊ້ຜ່ານປຸ່ມ \"{{buttonName}}\"."
+  "YourPrice": "ລາຄາຂອງເຈົ້າ"
 }

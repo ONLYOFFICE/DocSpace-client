@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3> в год</3>",
   "TransactionHistory": "История транзакций",
   "TransactionPeriod": "Период транзакции",
+  "TransactionsLimit": "На странице отображаются последние 25 транзакций за выбранный период. Полная история транзакций доступна по кнопке \"{{buttonName}}\".",
   "Upgrade": "Обновить",
   "UpgradeNow": "Обновить прямо сейчас",
   "UpgradePlan": "Обновить план",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Вы не добавили ни одного платежа",
   "YourCurrentPayment": "Ваш текущий платеж",
   "YourCurrentPlan": "<1>Ваш текущий тарифный план:</1> {{amount}} <2>({{price}}/месяц)</2>",
-  "YourPrice": "Ваша стоимость",
-  "TransactionsLimit": "На странице отображаются последние 25 транзакций за выбранный период. Полная история транзакций доступна по кнопке \"{{buttonName}}\"."
+  "YourPrice": "Ваша стоимость"
 }

@@ -109,6 +109,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/vit</3>",
   "TransactionHistory": "Historia e transaksioneve",
   "TransactionPeriod": "Periudha e transaksionit",
+  "TransactionsLimit": "Faqja shfaq 25 transaksione të fundit për periudhen e zgjedhur. Historia e plotë e transaksioneve është e disponueshme përmes butonit \"{{buttonName}}\".",
   "Upgrade": "Përmirësoni",
   "UpgradeNow": "Përmirëso tani",
   "UpgradePlan": "Plani i përmirësimit",
@@ -126,6 +127,5 @@
   "YouHaveNotAddedAnyPayment": "Nuk keni shtuar asnjë pagesë",
   "YourCurrentPayment": "Pagesa juaj aktuale",
   "YourCurrentPlan": "<1>Plani juaj aktual:</1> {{amount}} <2>({{price}}/muaj)</2>",
-  "YourPrice": "Çmimi juaj",
-  "TransactionsLimit": "Faqja shfaq 25 transaksione të fundit për periudhen e zgjedhur. Historia e plotë e transaksioneve është e disponueshme përmes butonit \"{{buttonName}}\"."
+  "YourPrice": "Çmimi juaj"
 }

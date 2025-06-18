@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<2>{{price}}</2><1>{{currencySymbol}}</1><3>/yıl</3>",
   "TransactionHistory": "İşlem geçmişi",
   "TransactionPeriod": "İşlem dönemi",
+  "TransactionsLimit": "Sayfa, seçilen dönem için son 25 işlemi görüntüler. Tam işlem geçmişi, \"{{buttonName}}\" butonu aracılığıyla kullanılabilir.",
   "Upgrade": "Yükseltme",
   "UpgradeNow": "Şimdi Yükselt",
   "UpgradePlan": "Yükseltme planı",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Ödeme eklemeyi unuttunuz",
   "YourCurrentPayment": "Mevcut ödemeniz",
   "YourCurrentPlan": "<1>Mevcut planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Ücret",
-  "TransactionsLimit": "Sayfa, seçilen dönem için son 25 işlemi görüntüler. Tam işlem geçmişi, \"{{buttonName}}\" butonu aracılığıyla kullanılabilir."
+  "YourPrice": "Ücret"
 }

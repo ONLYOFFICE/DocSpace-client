@@ -42,11 +42,11 @@
   "StripeCustomerPortal": "vaya al portal de cliente de Stripe",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mes</3>",
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/año</3>",
+  "TransactionsLimit": "La página muestra las últimas 25 transacciones del periodo seleccionado. El historial completo de transacciones está disponible a través del botón \"{{buttonName}}\".",
   "UpgradeNow": "Actualizar ahora",
   "UpgradePlan": "Actualizar plan",
   "UserNotFound": "No se ha encontrado el usuario <1>{{email}}</1>.",
   "UserNotFoundMatchingEmail": "No hemos podido encontrar al usuario con el correo electrónico de Stripe correspondiente.",
   "UsersQuotaAlmostExhausted": "La cuota de usuarios de pago casi se ha agotado.",
-  "YourPrice": "Su precio",
-  "TransactionsLimit": "La página muestra las últimas 25 transacciones del periodo seleccionado. El historial completo de transacciones está disponible a través del botón \"{{buttonName}}\"."
+  "YourPrice": "Su precio"
 }

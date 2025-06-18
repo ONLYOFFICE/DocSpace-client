@@ -29,12 +29,12 @@ import { isChrome, browserVersion } from "react-device-detect";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-import { injectDefaultTheme, mobile, tablet } from "../../../utils";
+import { injectDefaultTheme, mobile, tablet } from "../../../../utils";
 
-import { Button, ButtonSize } from "../../button";
-import { DropDown } from "../../drop-down";
-import { DropDownItem } from "../../drop-down-item";
-import { TGroupMenuItem } from "../Table.types";
+import { Button, ButtonSize } from "../../../button";
+import { DropDown } from "../../../drop-down";
+import { DropDownItem } from "../../../drop-down-item";
+import { TGroupMenuItem } from "../../Table.types";
 
 const StyledButton = styled(Button).attrs(injectDefaultTheme)`
   && {

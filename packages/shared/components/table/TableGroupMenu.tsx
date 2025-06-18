@@ -43,7 +43,7 @@ import {
 
 import { TableGroupMenuProps } from "./Table.types";
 
-import { GroupMenuItem } from "./sub-components/GroupMenuItem";
+import { GroupMenuItem } from "./sub-components/group-menu-item";
 
 const TableGroupMenu = (props: TableGroupMenuProps) => {
   const {

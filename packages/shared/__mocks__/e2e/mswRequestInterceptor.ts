@@ -24,41 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-//@ts-nocheck
-import next from "next";
-import { createServer, Server } from "http";
-import { parse } from "url";
-import { AddressInfo } from "net";
+import { setupServer } from "msw/node";
+import type { SetupServer } from "msw/node";
+
+import { allHandlers } from "../handlers";
 
 /**
- * Creates a Next.js test server for e2e tests
- * @param dirPath - Relative path to the Next.js app directory
- * @returns A function that returns the server port and handles server cleanup
+ * Creates and configures a request interceptor server for testing
+ * @returns A configured MSW server instance
  */
-export const createNextTestServer = async (
-  dirPath: string,
-): Promise<{ port: string; server: Server }> => {
-  const app = next({
-    dev: false,
-    dir: dirPath,
-  });
-  await app.prepare();
+export const createServerRequestInterceptor = async () => {
+  const requestInterceptor = setupServer();
 
-  const handle = app.getRequestHandler();
-
-  const server: Server = await new Promise((resolve) => {
-    const server = createServer((req, res) => {
-      const parsedUrl = parse(req.url, true);
-      handle(req, res, parsedUrl);
-    });
-
-    server.listen((error) => {
-      if (error) throw error;
-      resolve(server);
-    });
+  requestInterceptor.listen({
+    onUnhandledRequest: "error",
   });
 
-  const port = String((server.address() as AddressInfo).port);
+  return requestInterceptor;
+};
 
-  return { port, server };
+/**
+ * Sets up handlers for the request interceptor server and provides a function to reset them
+ * @param server - The MSW server instance
+ * @param port - The port number for the handlers
+ * @returns A function that can be used to reset the handlers
+ */
+export const setupAndResetHandlersServer = async (
+  server: SetupServer,
+  port: string,
+) => {
+  server.use(...allHandlers(port));
+  return () => server.resetHandlers();
 };

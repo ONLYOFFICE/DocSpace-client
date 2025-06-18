@@ -53,11 +53,16 @@ const getDirectionalText = (isRTL) => {
 };
 
 const PlanUpgradePreview = (props) => {
-  const { currentStoragePlanSize, amount, daysUtilPayment } = props;
-  const { setFuturePayment, futurePayment, setIsWaitingCalculation } =
-    usePaymentContext();
+  const {
+    currentStoragePlanSize,
+    amount,
+    daysUtilPayment,
+    setPartialUpgradeFee,
+    partialUpgradeFee,
+  } = props;
   const { isRTL } = useInterfaceDirection();
 
+  const { setIsWaitingCalculation } = usePaymentContext();
   const { t } = useTranslation(["Payments", "Common"]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -89,7 +94,7 @@ const PlanUpgradePreview = (props) => {
           }
 
           const paymentAmount = currentWriteOff.amount;
-          setFuturePayment(paymentAmount);
+          setPartialUpgradeFee(paymentAmount);
           setIsLoading(false);
           setIsWaitingCalculation(false);
         } catch (e) {
@@ -141,7 +146,7 @@ const PlanUpgradePreview = (props) => {
           ) : (
             <>
               <Text fontWeight="600" fontSize="14px">
-                {formatWalletCurrency(futurePayment)}
+                {formatWalletCurrency(partialUpgradeFee)}
               </Text>
               <Text
                 fontWeight="600"
@@ -158,12 +163,14 @@ const PlanUpgradePreview = (props) => {
   );
 };
 
-export default inject(({ currentTariffStatusStore }: TStore) => {
+export default inject(({ currentTariffStatusStore, servicesStore }: TStore) => {
   const { currentStoragePlanSize, storageSubscriptionExpiryDate } =
     currentTariffStatusStore;
-
+  const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
   return {
     currentStoragePlanSize,
     daysUtilPayment: getDaysUntilPayment(storageSubscriptionExpiryDate),
+    setPartialUpgradeFee,
+    partialUpgradeFee,
   };
 })(observer(PlanUpgradePreview));

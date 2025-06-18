@@ -39,10 +39,9 @@ interface ButtonContainerProps {
   title: string;
   isLoading: boolean;
   isExceedingStorageLimit: boolean;
-  insufficientFunds: boolean;
+  isNullAmount: boolean;
+  isPaymentUnavalable: boolean;
   isCurrentStoragePlan?: boolean;
-  isUpgradeStoragePlan: boolean;
-  currentStoragePlanSize?: boolean;
   hasStorageSubscription?: boolean;
 }
 
@@ -51,24 +50,17 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     isExceedingStorageLimit,
     onClose,
     isLoading,
-    amount,
-    insufficientFunds,
-    isCurrentStoragePlan,
-    isUpgradeStoragePlan,
+    isNullAmount,
     onBuy,
     onSendRequest,
-    currentStoragePlanSize,
-    hasStorageSubscription,
     title,
+    isPaymentUnavalable,
+    isCurrentStoragePlan,
+    hasStorageSubscription,
   } = props;
 
-  const { isWalletBalanceInsufficient, t } = useServicesActions();
-  const { futurePayment, isWaitingCalculation } = usePaymentContext();
-
-  const isPaymentUnavalable =
-    isUpgradeStoragePlan && currentStoragePlanSize
-      ? isWalletBalanceInsufficient(futurePayment)
-      : insufficientFunds;
+  const { t } = useServicesActions();
+  const { isWaitingCalculation } = usePaymentContext();
 
   return (
     <>
@@ -82,7 +74,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         isLoading={isLoading || isWaitingCalculation}
         isDisabled={
           !isExceedingStorageLimit
-            ? (!hasStorageSubscription && amount === 0) ||
+            ? (!hasStorageSubscription && isNullAmount) ||
               isPaymentUnavalable ||
               isCurrentStoragePlan
             : false
@@ -101,11 +93,9 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
 };
 
 export default inject(({ currentTariffStatusStore }: TStore) => {
-  const { hasStorageSubscription, currentStoragePlanSize } =
-    currentTariffStatusStore;
+  const { hasStorageSubscription } = currentTariffStatusStore;
 
   return {
     hasStorageSubscription,
-    currentStoragePlanSize,
   };
 })(observer(ButtonContainer));

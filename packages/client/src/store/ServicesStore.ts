@@ -65,6 +65,8 @@ class ServicesStore {
 
   isVisibleWalletSettings = false;
 
+  partialUpgradeFee: number = 0;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -101,6 +103,11 @@ class ServicesStore {
   get storagePriceIncrement() {
     return this.servicesQuotas?.price.value ?? 0;
   }
+
+
+  setPartialUpgradeFee = (partialUpgradeFee: number) => {
+    this.partialUpgradeFee = partialUpgradeFee;
+  };
 
   setVisibleWalletSetting = (isVisibleWalletSettings) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;

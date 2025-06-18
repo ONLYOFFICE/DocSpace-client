@@ -64,6 +64,8 @@ type StorageDialogProps = {
   nextStoragePlanSize?: number;
   storageSizeIncrement?: number;
   isVisibleWalletSettings?: boolean;
+  setVisibleWalletSetting?: (value: boolean) => void;
+  partialUpgradeFee?: number;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -82,6 +84,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   storageSizeIncrement,
   isVisibleWalletSettings,
   setVisibleWalletSetting,
+  partialUpgradeFee,
+  handlePortalTariff,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
@@ -107,8 +111,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
   const totalPrice = calculateTotalPrice(amount, storagePriceIncrement);
-  const insufficientFunds = isWalletBalanceInsufficient(totalPrice);
+  const isInsufficientFunds = isWalletBalanceInsufficient(totalPrice);
   const isUpgradeStoragePlan = isPlanUpgrade(amount);
+  const newStorageSizeOnUpgrade =
+    isUpgradeStoragePlan && currentStoragePlanSize > 0;
+
+  const isPaymentUnavalable = newStorageSizeOnUpgrade
+    ? isWalletBalanceInsufficient(partialUpgradeFee)
+    : isInsufficientFunds;
+
   const buttonMainTitle = buttonTitle(amount);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -232,10 +243,17 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     [handleStoragePlanChange],
   );
 
-  const onCancelChange = () => handleStoragePlanChange(true);
+  const onCancelChange = useCallback(
+    () => handleStoragePlanChange(true),
+    [handleStoragePlanChange],
+  );
 
   const onSendRequest = useCallback(() => {
     setIsRequestDialog(true);
+  }, []);
+
+  const onTopUpClick = useCallback(() => {
+    setIsVisibleContainer(true);
   }, []);
 
   const onChangeNumber = (value: number) => {
@@ -342,10 +360,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
             {amount || hasStorageSubscription ? (
               <WalletContainer
-                onTopUp={() => setIsVisibleContainer(true)}
-                insufficientFunds={insufficientFunds}
+                onTopUp={onTopUpClick}
+                isPaymentUnavalable={isPaymentUnavalable}
                 isExceedingStorageLimit={isExceedingStorageLimit}
-                isUpgradeStoragePlan={isUpgradeStoragePlan}
                 isCurrentStoragePlan={isCurrentStoragePlan}
               />
             ) : null}
@@ -355,13 +372,13 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           <ButtonContainer
             title={buttonMainTitle}
             isCurrentStoragePlan={isCurrentStoragePlan}
-            isUpgradeStoragePlan={isUpgradeStoragePlan}
-            insufficientFunds={insufficientFunds}
             isExceedingStorageLimit={isExceedingStorageLimit}
             onClose={onCloseDialog}
             isLoading={isLoading}
             onBuy={onBuy}
             onSendRequest={onSendRequest}
+            isNullAmount={amount === 0}
+            isPaymentUnavalable={isPaymentUnavalable}
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -386,6 +403,8 @@ export default inject(
       handleServicesQuotas,
       isVisibleWalletSettings,
       setVisibleWalletSetting,
+      partialUpgradeFee,
+      handlePortalTariff,
     } = servicesStore;
 
     return {
@@ -401,6 +420,8 @@ export default inject(
       handleServicesQuotas,
       setVisibleWalletSetting,
       isVisibleWalletSettings,
+      partialUpgradeFee,
+      handlePortalTariff,
     };
   },
 )(observer(StoragePlanUpgrade));

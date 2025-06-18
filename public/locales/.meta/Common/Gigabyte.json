@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2025-06-08T12:02:32.820Z",
+  "updated_at": "2025-06-18T17:09:45.653Z",
   "comment": {
     "text": "This translation key is used to display the unit \"Gigabyte\" (GB) in a file quota form. It appears on a dropdown menu where users can select their preferred size unit for displaying and managing files. Translators should note that this term will be used as an option within a larger list of units, including Bytes, Kilobytes, Megabytes, Terabytes, Petabytes, Exabytes, and others.",
     "is_auto": true,
@@ -11,26 +11,38 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/QuotaForm/index.js",
+      "line_number": 73,
+      "context": "const getOptions = (t) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];\n \n const getConvertedSize = (value, power) => {\n if (value.trim() === \"\") return \"\";",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/RowView/RowBody.tsx",
-      "line_number": 78,
-      "context": "}\n };\n const getServiceQuantity = (quantity: number, service?: string) => {\n switch (service) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };",
+      "line_number": 77,
+      "context": "serviceName = \"disk-storage\";\n }\n \n switch (serviceName) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableBody.tsx",
-      "line_number": 73,
-      "context": "}\n };\n const getServiceQuantity = (quantity: number, service: string) => {\n switch (service) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };",
+      "line_number": 71,
+      "context": "serviceName = \"disk-storage\";\n }\n \n switch (serviceName) {\n case \"disk-storage\":\n return `${quantity} ${t(\"Common:Gigabyte\")}`;\n default:\n return \"—\";\n }\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 105,
+      "line_number": 109,
       "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 105,
+      "line_number": 109,
+      "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
+      "line_number": 109,
       "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0",
       "module": "/packages/client"
     },
@@ -42,14 +54,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanUpgrade.tsx",
-      "line_number": 177,
-      "context": "const amounts = [100, 200, 500, 800, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n if (isRequestDialog) {",
+      "line_number": 280,
+      "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const container = isVisibleContainer ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanUpgrade.tsx",
-      "line_number": 177,
-      "context": "const amounts = [100, 200, 500, 800, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n if (isRequestDialog) {",
+      "line_number": 280,
+      "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const container = isVisibleContainer ? (",
       "module": "/packages/client"
     },
     {
@@ -96,7 +108,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanUpgradePreview.tsx",
-      "line_number": 114,
+      "line_number": 132,
       "context": "<UpgradeWalletIcon />\n </div>\n <div className={styles.planInfoBody}>\n <Text fontWeight={600}>\n {t(\"AdditionalStorage\", {\n amount: `${calculateDifference(amount, currentStoragePlanSize)} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"11px\"",
       "module": "/packages/client"
     },
@@ -113,14 +125,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 81,
-      "context": "const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];\n \n const getConvertedSize = (value: string, power: number) => {\n if (value.trim() === \"\") return \"\";",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 688,
+      "line_number": 684,
       "context": "const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
       "module": "/packages/shared"
     }
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation \"Go\" is an incorrect translation of \"GB\". \"GB\" stands for Gigabyte, which is a unit of data storage. The correct French translation should reflect this.",
-          "suggestion": "The appropriate French translation is \"Go\" (pronounced 'gio'). While 'Go' is sometimes used colloquially, a more precise and common translation would be \"Go\". To maintain consistency and clarity, ensure a standardized translation is used for 'GB'."
+          "description": "The French translation 'Go' does not accurately represent the English content 'GB' (Gigabyte). 'Go' is unrelated to the meaning of 'GB'.",
+          "suggestion": "The correct translation should be 'Go' (pronounced 'go') or 'Go octets'."
         }
       ],
       "approved_at": null
@@ -258,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"GO\" is not the correct translation of \"GB\" (Gigabyte). The correct translation is \"GB\".",
-          "suggestion": "Correct the translation to \"GB\"."
+          "description": "The Romanian translation 'GO' is not the correct translation for 'GB' (Gigabyte). The correct translation is 'GB'.",
+          "suggestion": "Change 'GO' to 'GB'."
         }
       ],
       "approved_at": null
@@ -276,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ගි.බ.' is an abbreviation and doesn't fully convey the meaning of 'GB'. While understandable, it's not a complete or ideal translation. A more literal translation might be 'ගිගාබයිට්' (Gigabyte).",
-          "suggestion": "ගිගාබයිට්"
+          "description": "The Sinhala translation 'ගි.බ.' is an abbreviation, but doesn't directly translate 'GB'. It's a representation of Gigabyte but lacks the full meaning. A more descriptive translation might be beneficial depending on the context.  'ගිගාබයිට්' (Gigabyte) would be a full translation.",
+          "suggestion": "Consider 'ගිගාබයිට්' for a full translation, or retain 'ගි.බ.' if abbreviation is required and understood within the target audience."
         }
       ],
       "approved_at": null

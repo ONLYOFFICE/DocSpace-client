@@ -189,11 +189,12 @@ const SecondaryTabs = (props: TabsProps) => {
     onSelect?.(nextItem);
   };
 
-  const containerW = referenceTabSize
-    ? items.length * (referenceTabSize + TAB_PADDING) +
-      ARROWS_WIDTH +
-      items.length * TABS_GAP
-    : null;
+  const containerW =
+    withArrows && referenceTabSize
+      ? items.length * (referenceTabSize + TAB_PADDING) +
+        ARROWS_WIDTH +
+        items.length * TABS_GAP
+      : null;
 
   const renderContent = (
     <div
@@ -236,13 +237,12 @@ const SecondaryTabs = (props: TabsProps) => {
               setSelectedItem(item, index);
             }}
             style={
-              // scaled
-              // ? { overflow: "hidden" }
-              // : { width: referenceTabSize ?? "fit-content" }
-              {
-                width: referenceTabSize ?? "fit-content",
-                minWidth: referenceTabSize ?? "fit-content",
-              }
+              scaled
+                ? {} // overflow: "hidden"
+                : {
+                    width: referenceTabSize ?? "fit-content",
+                    minWidth: referenceTabSize ?? "unset",
+                  }
             }
           >
             {item.iconName ? (

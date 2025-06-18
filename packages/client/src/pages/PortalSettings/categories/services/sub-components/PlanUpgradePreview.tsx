@@ -94,6 +94,7 @@ const PlanUpgradePreview = (props) => {
           }
 
           const paymentAmount = currentWriteOff.amount;
+
           setPartialUpgradeFee(paymentAmount);
           setIsLoading(false);
           setIsWaitingCalculation(false);
@@ -108,7 +109,6 @@ const PlanUpgradePreview = (props) => {
 
   useEffect(() => {
     return () => {
-      setPartialUpgradeFee(0);
       if (timeout) clearTimeout(timeout);
       setIsWaitingCalculation(false);
       timeout = null;

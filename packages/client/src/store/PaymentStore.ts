@@ -433,8 +433,10 @@ class PaymentStore {
     this.walletPayer = res;
   };
 
-  fetchCardLinked = async () => {
-    const res = await getCardLinked(`${window.location.href}?complete=true`);
+  fetchCardLinked = async (url?: string) => {
+    const backUrl = url || `${window.location.href}?complete=true`;
+
+    const res = await getCardLinked(backUrl);
 
     if (!res) return;
 

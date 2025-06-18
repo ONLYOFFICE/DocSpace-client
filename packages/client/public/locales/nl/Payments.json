@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/jaar</3>",
   "TransactionHistory": "Transactiegeschiedenis",
   "TransactionPeriod": "Transactieperiode",
+  "TransactionsLimit": "De pagina toont de laatste 25 transacties voor de geselecteerde periode. De volledige transactiehistorie is beschikbaar via de \"{{buttonName}}\" knop.",
   "Upgrade": "Upgraden",
   "UpgradeNow": "Upgrade nu",
   "UpgradePlan": "Upgrade plan",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Je hebt nog geen betaling toegevoegd",
   "YourCurrentPayment": "Uw huidige betaling",
   "YourCurrentPlan": "<1>Uw huidige abonnement:</1> {{amount}} <2>({{price}}/maand)</2>",
-  "YourPrice": "Uw prijs",
-  "TransactionsLimit": "De pagina toont de laatste 25 transacties voor de geselecteerde periode. De volledige transactiehistorie is beschikbaar via de \"{{buttonName}}\" knop."
+  "YourPrice": "Uw prijs"
 }

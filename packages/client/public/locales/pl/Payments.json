@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<2>{{price}}</2><1>{{currencySymbol}}</1><3>/rok</3>",
   "TransactionHistory": "Historia transakcji",
   "TransactionPeriod": "Okres transakcji",
+  "TransactionsLimit": "Strona wyświetla 25 ostatnich transakcji dla wybranego okresu. Pełna historia transakcji jest dostępna za pomocą przycisku \"{{buttonName}}\".",
   "Upgrade": "Aktualizacja",
   "UpgradeNow": "Uaktualnij teraz",
   "UpgradePlan": "Uaktualnij plan",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Nie dodano jeszcze żadnej płatności.",
   "YourCurrentPayment": "Twoje aktualne płatności",
   "YourCurrentPlan": "<1>Twój aktualny plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
-  "YourPrice": "Twoja cena",
-  "TransactionsLimit": "Strona wyświetla 25 ostatnich transakcji dla wybranego okresu. Pełna historia transakcji jest dostępna za pomocą przycisku \"{{buttonName}}\"."
+  "YourPrice": "Twoja cena"
 }

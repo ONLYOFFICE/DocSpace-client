@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/rok</3>",
   "TransactionHistory": "Historie transakcí",
   "TransactionPeriod": "Období transakcí",
+  "TransactionsLimit": "Stránka zobrazuje posledních 25 transakcí pro vybrané období. Kompletní historie transakcí je dostupná přes tlačítko \"{{buttonName}}\".",
   "Upgrade": "Aktualizace",
   "UpgradeNow": "Aktualizovat nyní",
   "UpgradePlan": "Plán aktualizace",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Nevložili jste žádnou platbu.",
   "YourCurrentPayment": "Vaše aktuální platba",
   "YourCurrentPlan": "<1>Váš aktuální tarif:</1> {{amount}} <2>({{price}}/měsíc)</2>",
-  "YourPrice": "Vaše cena",
-  "TransactionsLimit": "Stránka zobrazuje posledních 25 transakcí pro vybrané období. Kompletní historie transakcí je dostupná přes tlačítko \"{{buttonName}}\"."
+  "YourPrice": "Vaše cena"
 }

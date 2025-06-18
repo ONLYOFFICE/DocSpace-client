@@ -92,14 +92,14 @@
   "StartupSuggestion": "{{planName}} 요금제로 더 많은 기능을 이용하세요",
   "StartupTitle": "무료 {{planName}} 요금제를 사용 중입니다",
   "StorageCapacityUpdated": "저장 용량이 업데이트되었습니다.",
-  "StorageUpgradeMessage": "{{fromSize}} → {{toSize}} 총 {{total}}",
+  "StorageUpgradeMessage": "총 {{fromSize}} → {{toSize}}",
   "StorageUponRequest": "요청 시 {{amount}}을 초과하는 추가 저장 공간을 제공받으실 수 있습니다.",
   "StorageUsed": "<1>사용된 저장 공간:</1> {{amount}}",
   "StripeCustomerPortal": "Stripe 고객 포털로 이동",
   "SubscriptionAutoCancellation": "구독은 {{finalDate}}에 자동으로 해지됩니다.",
   "SubscriptionAutoRenewed": "구독은 {{finalDate}}에 업데이트된 가격 및 사양으로 자동으로 갱신됩니다.",
   "SubscriptionCancellation": "구독 취소",
-  "SwitchPlan": "<1>이제 <1>{{planName}} 요금제로 전환됩니다.</1>",
+  "SwitchPlan": "이제 <1>{{planName}} 요금제로 전환됩니다.</1>",
   "TariffPlan": "요금제",
   "ToppedUpWallet": "{{variables}}지갑 충전이 완료되었습니다.",
   "TopUp": "충전하기",
@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/년</3>",
   "TransactionHistory": "거래 내역",
   "TransactionPeriod": "거래 기간",
+  "TransactionsLimit": "선택한 기간 동안의 최근 25건 거래 내역이 표시됩니다. 전체 거래 내역은 \"{{buttonName}}\" 버튼을 통해 이용할 수 있습니다.",
   "Upgrade": "업그레이드",
   "UpgradeNow": "지금 업그레이드",
   "UpgradePlan": "요금제 업그레이드",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "결제 정보를 추가하지 않으셨습니다.",
   "YourCurrentPayment": "현재 결제",
   "YourCurrentPlan": "<1>현재 요금제:</1> {{amount}} <2>({{price}}/월)</2>",
-  "YourPrice": "내 요금",
-  "TransactionsLimit": "선택한 기간 동안의 최근 25건 거래 내역이 표시됩니다. 전체 거래 내역은 \"{{buttonName}}\" 버튼을 통해 이용할 수 있습니다."
+  "YourPrice": "내 요금"
 }

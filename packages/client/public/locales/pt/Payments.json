@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ano</3>",
   "TransactionHistory": "Histórico de transações",
   "TransactionPeriod": "Período de transação",
+  "TransactionsLimit": "A página exibe as últimas 25 transações para o período selecionado. O histórico completo de transações está disponível através do botão \"{{buttonName}}\".",
   "Upgrade": "Atualização",
   "UpgradeNow": "Aumentar agora",
   "UpgradePlan": "Aumentar o plano",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Você não adicionou nenhum pagamento.",
   "YourCurrentPayment": "Seu pagamento atual",
   "YourCurrentPlan": "<1>Seu plano atual:</1> {{amount}} <2>({{price}}/mês)</2>",
-  "YourPrice": "O seu preço",
-  "TransactionsLimit": "A página exibe as últimas 25 transações para o período selecionado. O histórico completo de transações está disponível através do botão \"{{buttonName}}\"."
+  "YourPrice": "O seu preço"
 }

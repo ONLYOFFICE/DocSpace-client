@@ -132,7 +132,6 @@ class ServicesStore {
     return res;
   };
 
-
   setReccomendedAmount = (amount: number) => {
     this.reccomendedAmount = amount;
   };

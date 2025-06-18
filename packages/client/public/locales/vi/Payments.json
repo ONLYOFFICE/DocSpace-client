@@ -99,7 +99,7 @@
   "SubscriptionAutoCancellation": "Đăng ký sẽ tự động bị hủy vào {{finalDate}}",
   "SubscriptionAutoRenewed": "Đăng ký sẽ được gia hạn tự động vào {{finalDate}} với mức giá và thông số kỹ thuật đã được cập nhật.",
   "SubscriptionCancellation": "Hủy đăng ký",
-  "SwitchPlan": "Bạn sắp chuyển sang gói {{planName}}.",
+  "SwitchPlan": "Bạn sắp chuyển sang gói <1>{{planName}}</1>.",
   "TariffPlan": "Kế hoạch cước phí",
   "ToppedUpWallet": "Bạn đã nạp tiền thành công vào ví của mình.",
   "TopUp": "Nạp tiền",
@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/năm</3>",
   "TransactionHistory": "Lịch sử giao dịch",
   "TransactionPeriod": "Thời gian giao dịch",
+  "TransactionsLimit": "Trang hiển thị 25 giao dịch gần nhất cho khoảng thời gian đã chọn. Lịch sử giao dịch đầy đủ có sẵn thông qua nút \"{{buttonName}}\".",
   "Upgrade": "Nâng cấp",
   "UpgradeNow": "Nâng cấp ngay",
   "UpgradePlan": "Nâng cấp gói dịch vụ",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "Bạn chưa thêm bất kỳ phương thức thanh toán nào.",
   "YourCurrentPayment": "Thanh toán hiện tại của bạn",
   "YourCurrentPlan": "<1>Gói cước hiện tại của bạn:</1> {{amount}} <2>({{price}}/tháng)</2>",
-  "YourPrice": "Phí thanh toán của bạn",
-  "TransactionsLimit": "Trang hiển thị 25 giao dịch gần nhất cho khoảng thời gian đã chọn. Lịch sử giao dịch đầy đủ có sẵn thông qua nút \"{{buttonName}}\"."
+  "YourPrice": "Phí thanh toán của bạn"
 }

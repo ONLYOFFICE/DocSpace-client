@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/年</3>",
   "TransactionHistory": "交易记录",
   "TransactionPeriod": "交易周期",
+  "TransactionsLimit": "该页面显示选定期间内的最近25笔交易。完整的交易记录可通过“{{buttonName}}”按钮查看。",
   "Upgrade": "升级",
   "UpgradeNow": "立即升级",
   "UpgradePlan": "升级版本",
@@ -127,6 +128,5 @@
   "YouHaveNotAddedAnyPayment": "您尚未添加任何支付方式",
   "YourCurrentPayment": "您当前的支付方式",
   "YourCurrentPlan": "<1>您当前的套餐：</1>{{amount}} <2>({{price}}/月)</2>",
-  "YourPrice": "您的价格",
-  "TransactionsLimit": "该页面显示选定期间内的最近25笔交易。完整的交易记录可通过“{{buttonName}}”按钮查看。"
+  "YourPrice": "您的价格"
 }

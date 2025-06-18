@@ -317,6 +317,7 @@
   "Hour": "heure",
   "Image": "Image",
   "Images": "Images",
+  "Important": "Important",
   "IncorrectDomain": "Domaine incorrecte ",
   "IncorrectEmail": "Adresse email non valide",
   "IncorrectFirstName": "Prénom incorrect",
@@ -721,7 +722,5 @@
   "Yes": "Oui",
   "Yesterday": "Hier",
   "You": "Vous",
-  "YourTurn": "Votre tour",
-  "SuggestFeature": "Proposer une fonctionnalité",
-  "Important": "Important"
+  "YourTurn": "Votre tour"
 }

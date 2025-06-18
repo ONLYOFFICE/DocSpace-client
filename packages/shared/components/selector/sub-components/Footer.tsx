@@ -84,7 +84,7 @@ const Footer = React.memo(
     return (
       <div
         ref={ref}
-        className={classNames(styles.footer, {
+        className={classNames(styles.footer, "selector-footer", {
           [styles.withFooterCheckbox]: withFooterCheckbox && !withFooterInput,
           [styles.withFooterInput]: !withFooterCheckbox && withFooterInput,
           [styles.defaultHeight]: !withFooterCheckbox && !withFooterInput,
@@ -124,6 +124,7 @@ const Footer = React.memo(
             label={footerCheckboxLabel}
             isChecked={isChecked}
             onChange={onChangeCheckbox}
+            className="selector_footer-checkbox"
           />
         ) : null}
 

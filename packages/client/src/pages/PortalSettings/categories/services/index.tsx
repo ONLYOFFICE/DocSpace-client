@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { TOTAL_SIZE } from "@docspace/shared/constants";
+import { TTranslation } from "@docspace/shared/types";
 
 import AdditionalStorage from "./AdditionalStorage";
 import StoragePlanUpgrade from "./StoragePlanUpgrade";
@@ -37,8 +38,9 @@ import ServicesLoader from "./ServicesLoader";
 import StoragePlanCancel from "./StoragePlanCancel";
 
 type ServicesProps = {
-  servicesInit: () => void;
+  servicesInit: (t: TTranslation) => void;
   isInitServicesPage: boolean;
+  isVisibleWalletSettings: boolean;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -46,6 +48,7 @@ let timerId: NodeJS.Timeout | null = null;
 const Services: React.FC<ServicesProps> = ({
   servicesInit,
   isInitServicesPage,
+  isVisibleWalletSettings,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -57,14 +60,19 @@ const Services: React.FC<ServicesProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await servicesInit();
+        await servicesInit(t);
       } catch (error) {
+        console.error(error);
         toastr.error(t("Common:UnexpectedError"));
       }
     };
 
     fetchData();
   }, [servicesInit]);
+
+  useEffect(() => {
+    if (isVisibleWalletSettings) setIsStorageVisible(isVisibleWalletSettings);
+  }, [isVisibleWalletSettings]);
 
   useEffect(() => {
     timerId = setTimeout(() => {
@@ -119,11 +127,13 @@ const Services: React.FC<ServicesProps> = ({
 };
 
 export const Component = inject(({ servicesStore }: TStore) => {
-  const { servicesInit, isInitServicesPage } = servicesStore;
+  const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
+    servicesStore;
 
   return {
     servicesInit,
     isInitServicesPage,
+    isVisibleWalletSettings,
   };
 })(observer(Services));
 

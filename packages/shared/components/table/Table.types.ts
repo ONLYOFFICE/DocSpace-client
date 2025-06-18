@@ -159,12 +159,12 @@ export type TGroupMenuItem = {
   id: string;
 };
 
-interface TableGroupmenuBased {
+interface TableGroupMenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
   checkboxOptions: React.ReactElement<{ children?: React.ReactNode }>;
-  onClick: () => void;
+  onClick?: () => void;
   onChange: (isChecked: boolean) => void;
   checkboxMargin?: string;
   withoutInfoPanelToggler: boolean;
@@ -176,8 +176,8 @@ interface TableGroupmenuBased {
   headerLabel?: string;
 }
 export type TableGroupMenuProps =
-  | (TableGroupmenuBased & {
+  | (TableGroupMenuBased & {
       isCloseable?: undefined;
       onCloseClick?: undefined;
     })
-  | (TableGroupmenuBased & { isCloseable: boolean; onCloseClick: () => void });
+  | (TableGroupMenuBased & { isCloseable: boolean; onCloseClick: () => void });

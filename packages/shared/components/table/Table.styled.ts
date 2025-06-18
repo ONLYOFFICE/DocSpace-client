@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { injectDefaultTheme, mobile, tablet } from "../../utils";
-import { Scrollbar } from "../scrollbar";
+import { injectDefaultTheme } from "../../utils";
 
 const reactWindowContainerStyles = css`
   height: 100%;
@@ -113,142 +112,6 @@ const StyledTableContainer = styled.div.attrs(injectDefaultTheme)<{
   ${({ useReactWindow }) => useReactWindow && reactWindowContainerStyles}
 `;
 
-const StyledTableGroupMenu = styled.div.attrs(injectDefaultTheme)<{
-  checkboxMargin?: string;
-}>`
-  position: relative;
-
-  background: ${(props) => props.theme.tableContainer.groupMenu.background};
-  border-bottom: ${(props) =>
-    props.theme.tableContainer.groupMenu.borderBottom};
-  box-shadow: ${(props) => props.theme.tableContainer.groupMenu.boxShadow};
-  border-end-end-radius: 6px;
-  border-end-start-radius: 6px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 199;
-
-  margin: 0;
-
-  .table-header_icon {
-    display: flex;
-
-    align-items: center;
-    align-self: center;
-    justify-content: center;
-    margin-block: 0;
-    margin-inline: auto 20px;
-    height: 100%;
-    width: auto;
-
-    padding-inline-start: 20px;
-    padding-inline-end: 0;
-
-    .table-header_icon-button {
-      margin-inline-end: 8px;
-    }
-  }
-
-  .table-container_label-element,
-  .table-container_group-menu-checkbox {
-    margin-inline-start: ${({ checkboxMargin }) => checkboxMargin ?? "28px"};
-
-    @media ${tablet} {
-      margin-inline-start: 24px;
-    }
-  }
-
-  .table-container_label-element {
-    white-space: nowrap;
-  }
-
-  .table-container_group-menu-separator {
-    border-inline-end: ${({ theme }) =>
-      theme.tableContainer.groupMenu.borderRight};
-    width: 1px;
-    height: 21px;
-    margin-block: 0;
-    margin-inline: 20px 16px;
-
-    @media ${tablet} {
-      height: 36px;
-    }
-
-    @media ${mobile} {
-      height: 20px;
-    }
-  }
-
-  .table-container_group-menu_button {
-    margin-inline-end: 8px;
-  }
-
-  .table-container_group-menu-combobox {
-    height: 24px;
-    width: 16px;
-    margin-block: 7px 0;
-    margin-inline: 9px 2px;
-    background: transparent;
-
-    .combo-button {
-      .combo-buttons_arrow-icon {
-        margin-block: 1px 0;
-        margin-inline: 0 16px;
-      }
-    }
-  }
-
-  .scroll-body {
-    display: flex;
-  }
-`;
-
-const StyledInfoPanelToggleColorThemeWrapper = styled.div.attrs(
-  injectDefaultTheme,
-)<{
-  isInfoPanelVisible?: boolean;
-  className?: string;
-}>`
-  ${(props) =>
-    props.isInfoPanelVisible &&
-    css`
-      .info-panel-toggle-bg {
-        height: 30px;
-        width: 30px;
-        background: ${props.theme.backgroundAndSubstrateColor};
-        border: 1px solid ${props.theme.backgroundAndSubstrateColor};
-        border-radius: 50%;
-        .info-panel-toggle {
-          margin: auto;
-          margin-top: 25%;
-        }
-      }
-    `}
-
-  @media ${tablet} {
-    display: none;
-    margin-block: 0;
-    margin-inline: auto 16px;
-  }
-
-  margin-top: 1px;
-
-  .info-panel-toggle-bg {
-    margin-bottom: 1px;
-  }
-
-  .info-panel-toggle svg {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
-  }
-`;
-
 const StyledTableBody = styled.div<{
   useReactWindow?: boolean;
   infoPanelVisible?: boolean;
@@ -266,24 +129,4 @@ const StyledTableBody = styled.div<{
   }
 `;
 
-const StyledScrollbar = styled(Scrollbar)`
-  .scroller {
-    display: flex;
-  }
-  .nav-thumb-vertical {
-    display: none !important;
-  }
-  .nav-thumb-horizontal {
-    @media ${tablet} {
-      display: none !important;
-    }
-  }
-`;
-
-export {
-  StyledTableContainer,
-  StyledTableBody,
-  StyledTableGroupMenu,
-  StyledInfoPanelToggleColorThemeWrapper,
-  StyledScrollbar,
-};
+export { StyledTableContainer, StyledTableBody };

@@ -2486,6 +2486,11 @@
   --table-container-border-hover-color: #{$light-gray-dark};
 
   --table-settings-icon-disable-color: #{$gray-strong};
+
+  --table-group-menu-border-bottom: 1px solid transparent;
+  --table-group-menu-border-right: 1px solid #{$gray-strong};
+  --table-group-menu-box-shadow: 0px 8px 16px #{$popup-shadow},
+    0px 0px 4px #{$menu-shadow};
 }
 
 .dark {
@@ -2504,4 +2509,9 @@
   --table-container-border-hover-color: #{$gray-dark-strong};
 
   --table-settings-icon-disable-color: #{$gray-dark-strong};
+
+  --table-group-menu-border-bottom: 1px solid #{$gray-dark-strong};
+  --table-group-menu-border-right: 1px solid #{$gray-dark-strong};
+  --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
+    0px 0px 4px #{$menu-shadow-dark};
 }

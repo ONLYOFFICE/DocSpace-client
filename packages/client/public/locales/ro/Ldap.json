@@ -26,7 +26,6 @@
   "LdapGroupNameAttribute": "Atributul nume de grup",
   "LdapGroupNameAttributeTooltip": "Indicați atributul obiectului de grup care corespunde numelui de grup.",
   "LdapGroupUserAttributeTooltip": "Introduceți atributul obiectului de utilizator pentru a determina dacă utilizatorul este membru al acestui grup.",
-  "LdapIntro": "mportați utilizatori și grupuri din LDAP, și activați autentificarea utilizatorilorprin nume de utilizator și parolă care sunt stocate pe un server LDAP. Utilizatorii vor fi importați imediat la salvarea setărilor. Utilizatorii care sunt adăugați ulterior vor fi importați la prima lor autentificare. Dacă doriți să acordați accesul numai prin LDAP, această opțiune trebuie dezactivată pentru a invita membrii noi ai {{productName}} din secțiunea Contacte: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atributul de conectare",
   "LdapLoginAttributeTooltip": "Introduceți atributul de obiect care corespunde numelui de utilizator.",
   "LdapLoginTooltip": "Indicați nume de utilizator cu permisiuni de citire pentru serverul LDAP.",

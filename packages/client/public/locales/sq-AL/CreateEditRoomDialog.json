@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "kërkohet aktivizimi",
   "AddStaticText": "Shtoni tekst statik",
   "AddWatermarkElements": "Shtoni elementë filigranë",
   "AddWatermarksToDocuments": "Shtoni filigranë",
@@ -33,7 +32,6 @@
   "StorageDescription": "Kvotë ruajtja është vendosur për çdo dhomë. Mund të ndryshoni këtë vlerë ose të fikni kufirin e ruajtjes.",
   "TagsPlaceholder": "Shtoni një etiketë",
   "ThirdPartyStorageComboBoxPlaceholder": "Zgjidhni ruajtjen",
-  "ThirdPartyStorageDescription": "Përdorni shërbime të palëve të treta si ruajtje të dhënash për këtë dhomë. Mund të krijoni një folder të ri ose të zgjidhni një folder ekzistues në ruajtjen e lidhur.",
   "ThirdPartyStorageNoStorageAlert": "Përpara, ju duhet të lidheni me shërbimin përkatës në seksionin “Integrimi”. Ndryshe, lidhja nuk do të jetë e mundur.",
   "ThirdPartyStoragePermanentSettingDescription": "Skedarët ruhen në një ruajtje të palës së tretë {{thirdpartyTitle}} në folderin \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Për të lidhur një ruajtës të palës së tretë, ju duhet të shtoni shërbimin përkatës në seksionin e Integrimeve në cilësimet e {{productName}}. Kontaktoni pronarin ose administratorin e {{productName}} për të aktivizuar integrimin.",

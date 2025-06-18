@@ -5,12 +5,11 @@
   "DescriptionForAnonymous": "Formulari juaj PDF i dorëzuar iu caktua një numër unik i formularit. Për të kontrolluar statusin, ju lutemi kontaktoni zotëruesin e formularit.",
   "DescriptionForRegisteredUser": "Formulari juaj PDF i dorëzuar në dispozicion për ju në dosjen e plotë.",
   "FillItOutAgain": "Plotësojeni përsëri",
+  "FillOutForm": "Plotësoni formularin",
   "FormCompletedSuccessfully": "Formulari u përfundua me sukses",
+  "FormFinalized": "Plotësoni formularin",
   "FormNumber": "Numri i formularit",
   "FormOwner": "Pronari i formularit",
-  "Title": "Formulari është plotësuar",
-  "FillOutForm": "Plotësoni formularin",
-  "FormFinalized": "Plotësoni formularin",
   "FormSectionCompleted": "Seksioni i formularit u përfundua",
   "FormVDRCompletedDescription": "Formulari është përfunduar plotësisht nga të gjitha rolet dhe tani është në modalitet vetëm për lexim.",
   "FormVDRConfirmationOfStartDescription": "Një njoftim është dërguar tashmë te përdoruesi në rolin e parë, duke e ftuar të plotësojë formularin. Ju mund të navigoni te dhoma ose të ndani lidhjen për plotësim me pjesëmarrësit.",
@@ -19,5 +18,6 @@
   "FormVDRYourTurnDescription": "Ju jeni caktuar për të plotësuar formularin si roli i parë. Një njoftim është dërguar në emailin tuaj.  Mund të filloni ta plotësoni tani ose të kopjoni lidhjen për plotësim dhe të ktheheni më vonë.",
   "LinkToFillOutForm": "Lidhje për të plotësuar formularin:",
   "LinkToForm": "Lidhje për te formulari:",
-  "LinkToViewOnlyForm": "Lidhje për të parë vetëm formularin:"
+  "LinkToViewOnlyForm": "Lidhje për të parë vetëm formularin:",
+  "Title": "Formulari është plotësuar"
 }

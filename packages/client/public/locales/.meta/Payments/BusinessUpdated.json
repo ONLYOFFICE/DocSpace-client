@@ -3,7 +3,7 @@
   "content": "{{planName}} plan updated",
   "content_en_sha1_hash": "d072992aaddc06db95b3109b8a055ea6d40dc9e2",
   "created_at": "2025-05-19T21:30:53.665Z",
-  "updated_at": "2025-05-28T09:30:02.674Z",
+  "updated_at": "2025-06-18T07:34:15.172Z",
   "comment": {
     "text": "This translation key is used to display a success message when a SaaS plan update is completed. It will appear as a toast notification when the update process is successful in an UI component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 86,
+      "line_number": 85,
       "context": "const [isVisible, setIsVisible] = useState(false);\n \n const resetIntervalSuccess = () => {\n intervalId &&\n toastr.success(\n t(\"BusinessUpdated\", { planName: currentTariffPlanTitle }),\n );\n clearInterval(intervalId);\n intervalId = null;\n setIsLoading(false);\n };",
       "module": "/packages/client"
     }

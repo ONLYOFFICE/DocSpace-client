@@ -3,7 +3,7 @@
   "content": "By sms",
   "content_en_sha1_hash": "acc6f325b621aed5a550cdbfdbb67f90a0376976",
   "created_at": "2025-05-19T21:30:50.858Z",
-  "updated_at": "2025-05-21T04:52:01.845Z",
+  "updated_at": "2025-06-18T07:34:15.197Z",
   "comment": {
     "text": "\"This translation key is used for the label 'By sms' which is displayed on a Two-Factor Authentication (TFA) setting in the Portal Settings. It appears as a category title and is likely used in a security access portal.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 211,
+      "line_number": 218,
       "context": "value: \"none\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {\n id: \"by-sms\",\n label: t(\"BySms\"),\n value: \"sms\",\n disabled: !smsAvailable,\n }, */\n {\n id: \"by-app\",",
       "module": "/packages/client"
     }

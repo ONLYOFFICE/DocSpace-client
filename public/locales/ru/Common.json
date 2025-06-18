@@ -317,6 +317,7 @@
   "Hour": "час",
   "Image": "Изображение",
   "Images": "Изображения",
+  "Important": "Важно",
   "IncorrectDomain": "Некорректный домен",
   "IncorrectEmail": "Некорректный email",
   "IncorrectFirstName": "Некорректное имя",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Срок подписки истек",
   "SubscriptionIsExpiring": "Подписка истекает {{date}}",
   "SuccessfullyCompletedOperation": "Операция успешно выполнена.",
+  "SuggestFeature": "Предложить функцию",
   "Support": "Поддержка",
   "SwitchToThumbnails": "Переключиться на режим миниатюр",
   "SwitchViewToCompact": "Переключиться на компактный вид",
@@ -720,7 +722,5 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вы",
-  "YourTurn": "Ваша очередь",
-  "Important": "Важно",
-  "SuggestFeature": "Предложить функцию"
+  "YourTurn": "Ваша очередь"
 }

@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/year</3>",
   "TransactionHistory": "Transaction history",
   "TransactionPeriod": "Transaction period",
+  "TransactionsLimit": "The page displays the last 25 transactions for the selected period. The full transaction history is available via the  \"{{buttonName}}\" button.",
   "Upgrade": "Upgrade",
   "UpgradeNow": "Upgrade now",
   "UpgradePlan": "Upgrade plan",

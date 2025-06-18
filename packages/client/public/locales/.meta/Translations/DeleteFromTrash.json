@@ -3,7 +3,7 @@
   "content": "Selected elements were successfully deleted from Trash",
   "content_en_sha1_hash": "b6c08a9f5c3e7891c0f5473a6111ef1f9a96855a",
   "created_at": "2025-05-19T21:30:49.962Z",
-  "updated_at": "2025-06-03T20:59:41.771Z",
+  "updated_at": "2025-06-18T07:34:14.774Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears when a user attempts to delete items from the Trash. If confirmed, the selected elements are deleted successfully and this message is displayed. It is used in various contexts, including file removal dialogs and action buttons.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 365,
+      "line_number": 364,
       "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }\n },",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 93,
+      "line_number": 94,
       "context": "const onDelete = () => {\n setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n if (!selection.length) return;\n \n deleteAction(translations, selection);",
       "module": "/packages/client"
     },

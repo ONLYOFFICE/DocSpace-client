@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2025-06-03T20:59:41.811Z",
+  "updated_at": "2025-06-18T07:34:14.805Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
@@ -96,13 +96,13 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
-      "line_number": 52,
+      "line_number": 53,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
-      "line_number": 52,
+      "line_number": 53,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";",
       "module": "/packages/doceditor"
     },

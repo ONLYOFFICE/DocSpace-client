@@ -2550,6 +2550,7 @@ class FilesStore {
         "link-for-room-members",
         "room-info",
         "separator1",
+        "download",
         "delete",
       ];
 

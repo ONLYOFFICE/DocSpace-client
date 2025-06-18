@@ -46,6 +46,7 @@ const SelectFolderDialog = ({
 
   fileSaveAsExtension,
   organizationName,
+  selectedFolderId,
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation(["Common", "Editor"]);
   // const sessionPath = sessionStorage.getItem("filesSelectorPath");
@@ -93,7 +94,7 @@ const SelectFolderDialog = ({
       isPanelVisible={isVisible}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={fileInfo.folderId}
+      currentFolderId={selectedFolderId!}
       rootFolderType={fileInfo.rootFolderType}
       embedded={false}
       withFooterInput

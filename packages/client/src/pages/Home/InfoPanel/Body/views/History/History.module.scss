@@ -104,7 +104,7 @@
       :global(.action-title-text) {
         font-size: 14px;
         font-weight: 600;
-        text-wrap: wrap;
+        white-space: wrap;
       }
 
       :global(.text-combined) {

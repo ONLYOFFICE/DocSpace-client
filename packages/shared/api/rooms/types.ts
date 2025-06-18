@@ -354,7 +354,7 @@ export enum FeedActionKeys {
   RoomDenyDownloadDisabled = "RoomDenyDownloadDisabled",
   RoomArchived = "RoomArchived",
   RoomUnarchived = "RoomUnarchived",
-  RoomIndexExportLocation = "RoomIndexExportLocation",
+  RoomIndexExportSaved = "RoomIndexExportSaved",
   AddedRoomTags = "AddedRoomTags",
   DeletedRoomTags = "DeletedRoomTags",
   RoomLogoCreated = "RoomLogoCreated",

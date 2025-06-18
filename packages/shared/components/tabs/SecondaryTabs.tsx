@@ -40,6 +40,7 @@ import {
   MAX_TAB_WIDTH,
   TAB_PADDING,
   TABS_GAP,
+  ARROWS_WIDTH,
 } from "./Tabs.constants";
 import styles from "./Tabs.module.scss";
 
@@ -72,10 +73,6 @@ const SecondaryTabs = (props: TabsProps) => {
 
   const scrollToTab = useCallback(
     (index: number): void => {
-      // console.log("scrollToTab");
-      //   const a = true;
-      //   if (a) return;
-
       if (!scrollRef.current || !tabsRef.current) return;
 
       const containerElement = scrollRef.current.scrollerElement;
@@ -132,8 +129,6 @@ const SecondaryTabs = (props: TabsProps) => {
 
     const max = Math.max(...widths);
 
-    console.log("max", max);
-
     setReferenceTabSize(
       max > MAX_TAB_WIDTH ? MAX_TAB_WIDTH : max - TAB_PADDING,
     );
@@ -143,24 +138,20 @@ const SecondaryTabs = (props: TabsProps) => {
     if (withArrows) return;
     const tabsContainerWidth = tabsContainerRef.current?.offsetWidth ?? 0;
 
-    console.log("referenceTabSize", referenceTabSize);
-
     if (tabsContainerWidth && referenceTabSize) {
       let maxTabsCount = Math.floor(
         tabsContainerWidth / (referenceTabSize + TABS_GAP + TAB_PADDING),
       );
       if (maxTabsCount < items.length) {
-        const arrowsWidth = 64;
         maxTabsCount = Math.floor(
-          (tabsContainerWidth - arrowsWidth) /
+          (tabsContainerWidth - ARROWS_WIDTH) /
             (referenceTabSize + TABS_GAP + TAB_PADDING),
         );
 
-        console.log("maxTabsCount", maxTabsCount);
         const size =
-          Math.round(tabsContainerWidth - arrowsWidth) / maxTabsCount - 31 - 4;
-
-        console.log("size", size);
+          Math.round(tabsContainerWidth - ARROWS_WIDTH) / maxTabsCount -
+          TAB_PADDING -
+          TABS_GAP;
 
         setReferenceTabSize(size);
 
@@ -198,11 +189,18 @@ const SecondaryTabs = (props: TabsProps) => {
     onSelect?.(nextItem);
   };
 
+  const containerW = referenceTabSize
+    ? items.length * (referenceTabSize + TAB_PADDING) +
+      ARROWS_WIDTH +
+      items.length * TABS_GAP
+    : null;
+
   const renderContent = (
     <div
       style={
         {
           "--tabs-count": items.length,
+          "--tabs-width": `${containerW}px`,
         } as React.CSSProperties
       }
       className={classNames(

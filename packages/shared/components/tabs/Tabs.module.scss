@@ -132,6 +132,7 @@
     padding: 4px;
     border-radius: 5px;
     height: 36px;
+    width: var(--tabs-width, 100%);
   }
 
   &.withArrows {
@@ -145,7 +146,7 @@
       width: fit-content;
     }
     &:not(.referenceSize) {
-      // visibility: hidden;
+      visibility: hidden;
     }
   }
 }

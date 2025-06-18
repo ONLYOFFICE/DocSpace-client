@@ -64,4 +64,8 @@ export type TabsProps = {
   style?: React.CSSProperties;
   /** If set, this component will animate changes to its layout. Additionally, when a new element enters the DOM and an element already exists with a matching layoutId, it will animate out from the previous element's size/position. */
   layoutId?: string;
+  /** Is loading */
+  isLoading?: boolean;
+  /** Scales tabs to container width */
+  scaled?: boolean;
 };

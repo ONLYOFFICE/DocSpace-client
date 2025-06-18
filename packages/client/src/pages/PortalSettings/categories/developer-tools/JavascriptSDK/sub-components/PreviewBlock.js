@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 
@@ -38,7 +39,6 @@ import { Preview } from "../presets/StyledPresets";
 import { showPreviewThreshold } from "../constants";
 
 export const PreviewBlock = ({
-  t,
   loadCurrentFrame,
   preview,
   theme,
@@ -47,6 +47,16 @@ export const PreviewBlock = ({
   config,
   isDisabled = false,
 }) => {
+  const { t, ready } = useTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "Common",
+    "Translations",
+    "SharingPanel",
+    "CreateEditRoomDialog",
+  ]);
+
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,
   );
@@ -57,6 +67,7 @@ export const PreviewBlock = ({
   const code = (
     <CodeToInsert
       t={t}
+      tReady={ready}
       codeBlock={codeBlock}
       scriptUrl={scriptUrl}
       config={config}
@@ -103,6 +114,7 @@ export const PreviewBlock = ({
           loadCurrentFrame(e);
         }}
         items={dataTabs}
+        isLoading={!ready}
         selectedItemId={selectedItemId}
       />
     </Preview>

@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-06-18T07:34:14.811Z",
+  "updated_at": "2025-06-18T17:09:45.647Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -672,7 +672,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/ButtonContainer.tsx",
-      "line_number": 93,
+      "line_number": 87,
       "context": ": false\n }\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isLoading}\n />",
       "module": "/packages/client"
     },
@@ -798,13 +798,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 253,
+      "line_number": 273,
       "context": "alwaysShowFooter\n onSubmit={onSelectUser}\n onCancel={closeUsersPanel}\n onClose={closeUsersPanel}\n submitButtonLabel={t(\"Common:SelectAction\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n disableDisabledUsers={false}\n disableSubmitButton={false}\n checkIfUserInvited={checkIfUserInvited}\n injectedElement={\n <Header",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 253,
+      "line_number": 273,
       "context": "alwaysShowFooter\n onSubmit={onSelectUser}\n onCancel={closeUsersPanel}\n onClose={closeUsersPanel}\n submitButtonLabel={t(\"Common:SelectAction\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n disableDisabledUsers={false}\n disableSubmitButton={false}\n checkIfUserInvited={checkIfUserInvited}\n injectedElement={\n <Header",
       "module": "/packages/shared"
     },
@@ -840,7 +840,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 460,
+      "line_number": 480,
       "context": ": ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"Common:CancelButton\"),\n onCancel,\n }\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {",
       "module": "/packages/shared"
     },

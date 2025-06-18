@@ -3,7 +3,7 @@
   "content": "Are you sure you want to unsubscribe from the selected items from the list?",
   "content_en_sha1_hash": "c45ae30f5c920be405a419cd3267a0c2eaa0a74c",
   "created_at": "2025-05-19T21:30:56.721Z",
-  "updated_at": "2025-05-20T09:38:19.467Z",
+  "updated_at": "2025-06-18T07:34:14.880Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that prompts users to confirm their subscription removal from selected items. It appears in a delete dialog and is displayed when the user selects options to permanently remove data from a privacy folder or template.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 272,
+      "line_number": 273,
       "context": "? t(\"EmptyTrashDialog:DeleteForeverTitle\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:Confirmation\")\n : moveToTrashTitle();\n \n const noteText = unsubscribe ? t(\"UnsubscribeNote\") : moveToTrashNoteText();\n \n const accessButtonLabel = isTemplate\n ? t(\"Common:Delete\")\n : isRoomDelete || isRecycleBinFolder\n ? t(\"EmptyTrashDialog:DeleteForeverButton\")",
       "module": "/packages/client"
     }

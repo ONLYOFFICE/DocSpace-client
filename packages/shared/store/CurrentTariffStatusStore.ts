@@ -113,8 +113,8 @@ class CurrentTariffStatusStore {
   }
 
   get nextStoragePlanSize() {
-    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
-    return this.walletQuotas[0].nextQuantity ?? 0;
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return undefined;
+    return this.walletQuotas[0].nextQuantity;
   }
 
   get storageExpiryDate() {

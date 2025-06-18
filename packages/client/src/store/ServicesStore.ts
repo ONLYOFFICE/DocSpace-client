@@ -65,6 +65,10 @@ class ServicesStore {
 
   isVisibleWalletSettings = false;
 
+  partialUpgradeFee: number = 0;
+
+  reccomendedAmount: number = 0;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -102,6 +106,10 @@ class ServicesStore {
     return this.servicesQuotas?.price.value ?? 0;
   }
 
+  setPartialUpgradeFee = (partialUpgradeFee: number) => {
+    this.partialUpgradeFee = partialUpgradeFee;
+  };
+
   setVisibleWalletSetting = (isVisibleWalletSettings) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
@@ -115,25 +123,18 @@ class ServicesStore {
 
     if (!res) return;
 
-    const { hasStorageSubscription, hasScheduledStorageChange } =
-      this.currentTariffStatusStore;
-
     res[0].features.forEach((feature) => {
-      if (feature.id === TOTAL_SIZE) {
-        const enhancedFeature = feature as TPaymentFeature & {
-          enabled: boolean;
-          cancellation: boolean;
-        };
-        enhancedFeature.enabled = hasStorageSubscription;
-        enhancedFeature.cancellation = hasScheduledStorageChange;
-      }
-
       this.servicesQuotasFeatures.set(feature.id, feature);
     });
 
     this.servicesQuotas = res[0];
 
     return res;
+  };
+
+
+  setReccomendedAmount = (amount: number) => {
+    this.reccomendedAmount = amount;
   };
 
   servicesInit = async (t: TTranslation) => {

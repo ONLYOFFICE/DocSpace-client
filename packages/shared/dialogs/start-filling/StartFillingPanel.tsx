@@ -109,13 +109,13 @@ const StartFillingPanel = ({
   const closeUsersPanel = useCallback(() => {
     setIsRoleSelectorVisible(false);
   }, []);
-  const closeStartFillingPanel = () => {
+  const closeStartFillingPanel = useCallback(() => {
     setStartFillingPanelVisible(false);
-  };
+  }, [setStartFillingPanelVisible]);
 
-  const closeInvitePanel = () => {
+  const closeInvitePanel = useCallback(() => {
     setIsInvitePanelVisible(false);
-  };
+  }, []);
 
   const openInvitePanel = useCallback(() => {
     setIsInvitePanelVisible(true);
@@ -214,18 +214,38 @@ const StartFillingPanel = ({
 
   const disabledSubmit = roles.some((role) => !role.user);
 
-  const headerProps = useMemo(() => {
-    return {
-      headerLabel: t("Common:AssignToRole"),
-      withoutBackButton: false,
-      withoutBorder: false,
-      isCloseable: true,
-      onBackClick: closeUsersPanel,
-      onCloseClick: () => {
-        closeUsersPanel();
-      },
-    } satisfies HeaderProps;
-  }, [closeUsersPanel, t]);
+  const headerProps = useMemo(
+    () =>
+      ({
+        headerLabel: t("Common:AssignToRole"),
+        withoutBackButton: false,
+        withoutBorder: false,
+        isCloseable: true,
+        onBackClick: closeUsersPanel,
+        onCloseClick: () => {
+          closeUsersPanel();
+          closeStartFillingPanel();
+        },
+      }) satisfies HeaderProps,
+    [closeUsersPanel, closeStartFillingPanel, t],
+  );
+
+  const invitePanelSelectorHeader = useMemo(
+    () =>
+      ({
+        headerLabel: t("Common:ListAccounts"),
+        withoutBackButton: false,
+        withoutBorder: true,
+        isCloseable: true,
+        onBackClick: closeInvitePanel,
+        onCloseClick: () => {
+          closeInvitePanel();
+          closeUsersPanel();
+          closeStartFillingPanel();
+        },
+      }) satisfies HeaderProps,
+    [closeInvitePanel, closeUsersPanel, closeStartFillingPanel, t],
+  );
 
   return (
     <ModalDialog
@@ -283,16 +303,7 @@ const StartFillingPanel = ({
             submitButtonLabel={t("Common:AddToRoom")}
             disableDisabledUsers={false}
             disableSubmitButton={false}
-            headerProps={{
-              headerLabel: t("Common:ListAccounts"),
-              withoutBackButton: false,
-              withoutBorder: true,
-              isCloseable: true,
-              onBackClick: closeInvitePanel,
-              onCloseClick: () => {
-                closeInvitePanel();
-              },
-            }}
+            headerProps={invitePanelSelectorHeader}
           />
         ) : null}
       </ModalDialog.Container>

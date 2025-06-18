@@ -42,19 +42,28 @@ type AmountProps = {
   language: string;
   currency: string;
   walletCustomerEmail?: boolean;
+  reccomendedAmount?: string;
 };
 
+const MAX_LENGTH = 6;
+
 const Amount = (props: AmountProps) => {
-  const { language, currency, walletCustomerEmail, isDisabled } = props;
+  const {
+    language,
+    currency,
+    walletCustomerEmail,
+    isDisabled,
+    reccomendedAmount,
+  } = props;
 
   const { amount, setAmount } = useAmountValue();
-  const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
+
   const { t } = useTranslation("Payments");
 
   const amountTabs = () => {
     const amounts = [10, 20, 30, 50, 100];
     return amounts.map((item) => ({
-      name: formatCurrencyValue(language, item, currency),
+      name: `+${formatCurrencyValue(language, item, currency)}`,
       id: item.toString(),
       value: item,
       content: null,
@@ -63,8 +72,12 @@ const Amount = (props: AmountProps) => {
   };
 
   const onSelectAmount = (data: TTabItem) => {
-    setSelectedAmount(data.id);
-    setAmount(data.id);
+    const currentAmount = amount ? parseInt(amount, 10) : 0;
+    const selectedValue = parseInt(data.id, 10);
+    const newTotal = (currentAmount + selectedValue).toString();
+
+    const amountValue = newTotal.length <= MAX_LENGTH ? newTotal : amount;
+    setAmount(amountValue);
   };
 
   const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,7 +86,6 @@ const Amount = (props: AmountProps) => {
     if (!validity.valid) return;
 
     setAmount(value);
-    setSelectedAmount(value);
   };
 
   const textTooltip = () => {
@@ -97,7 +109,7 @@ const Amount = (props: AmountProps) => {
           </Text>
           <Tabs
             items={amountTabs()}
-            selectedItemId={selectedAmount}
+            selectedItemId=""
             onSelect={onSelectAmount}
             type={TabsTypes.Secondary}
             allowNoSelection
@@ -107,17 +119,23 @@ const Amount = (props: AmountProps) => {
         <Text fontWeight={600} className={styles.amountTitle}>
           {t("Amount")}
         </Text>
+
         <TextInput
           value={amount}
           onChange={onChangeTextInput}
-          pattern="\d+"
+          pattern="^[1-9]\d*$"
           scale
           withBorder
           type={InputType.text}
           placeholder={t("EnterAmount")}
           isDisabled={isDisabled || !walletCustomerEmail}
-          maxLength={6}
+          maxLength={MAX_LENGTH}
         />
+        {reccomendedAmount ? (
+          <Text className={styles.reccomendedAmount}>
+            {t("RecommendedTopUpAmount", { amount: reccomendedAmount })}
+          </Text>
+        ) : null}
       </div>
       {!walletCustomerEmail ? (
         <Tooltip

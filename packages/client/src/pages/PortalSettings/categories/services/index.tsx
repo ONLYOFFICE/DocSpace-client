@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { TOTAL_SIZE } from "@docspace/shared/constants";
+import { TTranslation } from "@docspace/shared/types";
 
 import AdditionalStorage from "./AdditionalStorage";
 import StoragePlanUpgrade from "./StoragePlanUpgrade";
@@ -37,7 +38,7 @@ import ServicesLoader from "./ServicesLoader";
 import StoragePlanCancel from "./StoragePlanCancel";
 
 type ServicesProps = {
-  servicesInit: () => void;
+  servicesInit: (t: TTranslation) => void;
   isInitServicesPage: boolean;
   isVisibleWalletSettings: boolean;
 };
@@ -59,8 +60,9 @@ const Services: React.FC<ServicesProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await servicesInit();
+        await servicesInit(t);
       } catch (error) {
+        console.error(error);
         toastr.error(t("Common:UnexpectedError"));
       }
     };

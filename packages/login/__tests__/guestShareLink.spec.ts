@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints, settingsHandler } from "@docspace/shared/__mocks__/e2e";
+import {
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
@@ -57,7 +60,9 @@ test("guest share link render", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "authenticated"));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -72,11 +77,11 @@ test("guest share link approve", async ({
   page,
   port,
   serverRequestInterceptor,
-  clientRequestInterceptor,
   baseUrl,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "authenticated"));
-  await clientRequestInterceptor.use([endpoints.addGuest]);
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -99,7 +104,9 @@ test("guest share link deny", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "authenticated"));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.Authenticated),
+  );
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 

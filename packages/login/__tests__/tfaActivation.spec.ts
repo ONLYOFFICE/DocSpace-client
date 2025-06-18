@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
+import {
+  tfaAppValidateHandler,
+  selfHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { selfHandler } from "@docspace/shared/__mocks__/e2e/handlers/people/self";
 
 const URL = "/login/confirm/TfaActivation";
 
@@ -70,15 +72,7 @@ test("tfa activation render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("tfa activation success", async ({
-  page,
-  clientRequestInterceptor,
-  baseUrl,
-}) => {
-  await clientRequestInterceptor.use([
-    endpoints.tfaAppValidate,
-    endpoints.loginWithTfaCode,
-  ]);
+test("tfa activation success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
@@ -104,14 +98,9 @@ test("tfa activation success", async ({
 
 test("tfa activation success with link data", async ({
   page,
-  clientRequestInterceptor,
+
   baseUrl,
 }) => {
-  await clientRequestInterceptor.use([
-    endpoints.tfaAppValidate,
-    endpoints.loginWithTfaCode,
-    endpoints.checkConfirmLink,
-  ]);
   await page.goto(`${baseUrl}${URL_WITH_LINK_DATA_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
@@ -131,14 +120,13 @@ test("tfa activation success with link data", async ({
 
 test("tfa activation error not validated", async ({
   page,
-
   port,
   serverRequestInterceptor,
   clientRequestInterceptor,
   baseUrl,
 }) => {
   serverRequestInterceptor.use(selfHandler(port, 404));
-  await clientRequestInterceptor.use([endpoints.tfaAppValidateError]);
+  clientRequestInterceptor.use(tfaAppValidateHandler(port, 400));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");

@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
+import {
+  tfaAppValidateHandler,
+  selfHandler,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { selfHandler } from "@docspace/shared/__mocks__/e2e/handlers/people/self";
 
 const URL = "/login/confirm/TfaAuth";
 
@@ -70,15 +72,7 @@ test("tfa auth render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("tfa auth success", async ({
-  page,
-  clientRequestInterceptor,
-  baseUrl,
-}) => {
-  await clientRequestInterceptor.use([
-    endpoints.tfaAppValidate,
-    endpoints.loginWithTfaCode,
-  ]);
+test("tfa auth success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
@@ -104,11 +98,11 @@ test("tfa auth error not validated", async ({
   page,
   port,
   baseUrl,
-  clientRequestInterceptor,
   serverRequestInterceptor,
+  clientRequestInterceptor,
 }) => {
   serverRequestInterceptor.use(selfHandler(port, 404));
-  await clientRequestInterceptor.use([endpoints.tfaAppValidateError]);
+  clientRequestInterceptor.use(tfaAppValidateHandler(port, 400));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("123456");
@@ -125,14 +119,7 @@ test("tfa auth error not validated", async ({
 test("tfa auth redirects to room after successful submission", async ({
   page,
   baseUrl,
-  clientRequestInterceptor,
 }) => {
-  await clientRequestInterceptor.use([
-    endpoints.tfaAppValidate,
-    endpoints.loginWithTfaCode,
-    endpoints.checkConfirmLink,
-  ]);
-
   await page.goto(`${baseUrl}${URL_WITH_LINK_DATA_PARAMS}`);
 
   await page.evaluate(() => {

@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import path from "path";
-
 import {
-  endpoints,
   settingsHandler,
   licenseRequiredHandler,
-} from "@docspace/shared/__mocks__/e2e";
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test } from "./fixtures/base";
 
@@ -42,7 +41,7 @@ test("wizard render", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
 
   await page.goto(`${baseUrl}${URL}`);
 
@@ -57,12 +56,9 @@ test("wizard success", async ({
   page,
   port,
   baseUrl,
-  clientRequestInterceptor,
   serverRequestInterceptor,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
-  await clientRequestInterceptor.use([endpoints.wizardComplete]);
-
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
   await page.goto(`${baseUrl}${URL}`);
 
   await page.fill("[name='wizard-email']", "email@mail.ru");
@@ -80,6 +76,7 @@ test("wizard success", async ({
 
   await page.getByTestId("button").click();
   await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
+  await page.waitForTimeout(1000);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -92,11 +89,9 @@ test("wizard error", async ({
   page,
   port,
   baseUrl,
-  clientRequestInterceptor,
   serverRequestInterceptor,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
-  await clientRequestInterceptor.use([endpoints.wizardComplete]);
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
 
   await page.goto(`${baseUrl}${URL}`);
 
@@ -119,16 +114,10 @@ test("wizard with license success", async ({
   page,
   port,
   baseUrl,
-  clientRequestInterceptor,
   serverRequestInterceptor,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
   serverRequestInterceptor.use(licenseRequiredHandler(port, true));
-
-  await clientRequestInterceptor.use([
-    endpoints.wizardComplete,
-    endpoints.license,
-  ]);
 
   await page.goto(`${baseUrl}${URL}`);
 
@@ -153,7 +142,8 @@ test("wizard with license success", async ({
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
+  await page.getByTestId("loader").waitFor({ state: "detached" });
+  //await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -168,7 +158,7 @@ test("wizard with license error", async ({
   baseUrl,
   serverRequestInterceptor,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "wizard"));
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.Wizard));
   serverRequestInterceptor.use(licenseRequiredHandler(port, true));
 
   await page.goto(`${baseUrl}${URL}`);
@@ -194,7 +184,9 @@ test("wizard with ami render", async ({
   baseUrl,
   serverRequestInterceptor,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "wizardWithAmi"));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.WizardWithAmi),
+  );
 
   await page.goto(`${baseUrl}${URL}`);
 
@@ -211,7 +203,9 @@ test("wizard with ami error", async ({
   baseUrl,
   serverRequestInterceptor,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "wizardWithAmi"));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.WizardWithAmi),
+  );
 
   await page.goto(`${baseUrl}${URL}`);
 

@@ -24,10 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints, settingsHandler } from "@docspace/shared/__mocks__/e2e";
+import {
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
+import { selfGetByEmailHandler } from "@docspace/shared/__mocks__/handlers/people/self";
+import { loginHandler } from "@docspace/shared/__mocks__/handlers/authentication/login";
 
 const URL = "/login/confirm/LinkInvite";
 
@@ -58,13 +63,7 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-test("link invite email render", async ({
-  page,
-  clientRequestInterceptor,
-  baseUrl,
-}) => {
-  await clientRequestInterceptor.use([endpoints.getUserByEmail]);
-
+test("link invite email render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
@@ -74,12 +73,7 @@ test("link invite email render", async ({
   ]);
 });
 
-test("link invite login render", async ({
-  page,
-  clientRequestInterceptor,
-  baseUrl,
-}) => {
-  await clientRequestInterceptor.use([endpoints.getUserByEmail]);
+test("link invite login render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -99,7 +93,10 @@ test("link invite login render", async ({
 test("link invite registration render standalone", async ({
   page,
   baseUrl,
+  port,
+  clientRequestInterceptor,
 }) => {
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -120,10 +117,14 @@ test("link invite registration render standalone", async ({
 test("link invite registration render no standalone", async ({
   page,
   port,
+  clientRequestInterceptor,
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -144,10 +145,11 @@ test("link invite registration render no standalone", async ({
 
 test("link invite email error", async ({
   page,
-  clientRequestInterceptor,
   baseUrl,
+  port,
+  clientRequestInterceptor,
 }) => {
-  await clientRequestInterceptor.use([endpoints.getUserByEmail]);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail.com");
@@ -160,17 +162,7 @@ test("link invite email error", async ({
   ]);
 });
 
-test("link invite login success", async ({
-  page,
-  clientRequestInterceptor,
-  baseUrl,
-}) => {
-  await clientRequestInterceptor.use([
-    endpoints.getUserByEmail,
-    endpoints.checkConfirmLink,
-    endpoints.login,
-  ]);
-
+test("link invite login success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -201,11 +193,14 @@ test("link invite login success", async ({
 
 test("link invite login error", async ({
   page,
-  clientRequestInterceptor,
   baseUrl,
+  port,
+  clientRequestInterceptor,
 }) => {
-  await clientRequestInterceptor.use([endpoints.getUserByEmail]);
-
+  clientRequestInterceptor.use(
+    selfGetByEmailHandler(port),
+    loginHandler(port, 404),
+  );
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -227,10 +222,11 @@ test("link invite login error", async ({
 
 test("link invite registration success standalone", async ({
   page,
-  clientRequestInterceptor,
   baseUrl,
+  port,
+  clientRequestInterceptor,
 }) => {
-  await clientRequestInterceptor.use([endpoints.createUser, endpoints.login]);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -269,8 +265,10 @@ test("link invite registration success no standalone", async ({
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
-  await clientRequestInterceptor.use([endpoints.createUser, endpoints.login]);
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -304,7 +302,13 @@ test("link invite registration success no standalone", async ({
   ]);
 });
 
-test("link invite registration error standalone", async ({ page, baseUrl }) => {
+test("link invite registration error standalone", async ({
+  page,
+  baseUrl,
+  port,
+  clientRequestInterceptor,
+}) => {
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -324,10 +328,14 @@ test("link invite registration error standalone", async ({ page, baseUrl }) => {
 test("link invite registration error no standalone", async ({
   page,
   port,
+  clientRequestInterceptor,
   serverRequestInterceptor,
   baseUrl,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
+  clientRequestInterceptor.use(selfGetByEmailHandler(port, 404));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 

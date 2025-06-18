@@ -26,7 +26,10 @@
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints, settingsHandler } from "@docspace/shared/__mocks__/e2e";
+import {
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 
 const URL = "/login/confirm/PortalSuspend";
 
@@ -57,8 +60,7 @@ test("portal suspend render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("portal suspend deactivate", async ({ page, baseUrl, clientRequestInterceptor }) => {
-  await clientRequestInterceptor.use([endpoints.suspendPortal]);
+test("portal suspend deactivate", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Deactivate" }).click();
@@ -106,7 +108,9 @@ test("render after deactivate portal", async ({
   serverRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "portalDeactivate"));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.PortalDeactivate),
+  );
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.waitForURL(`${baseUrl}/unavailable`, {

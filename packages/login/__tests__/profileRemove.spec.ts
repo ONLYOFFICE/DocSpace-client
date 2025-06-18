@@ -26,7 +26,6 @@
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/ProfileRemove";
 
@@ -61,8 +60,7 @@ test("profile remove render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("profile remove success", async ({ page, baseUrl, clientRequestInterceptor }) => {
-  await clientRequestInterceptor.use([endpoints.removeUser]);
+test("profile remove success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("button").click();

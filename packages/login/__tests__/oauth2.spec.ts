@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { capabilitiesHandler, endpoints } from "@docspace/shared/__mocks__/e2e";
+import { capabilitiesHandler } from "@docspace/shared/__mocks__/handlers";
 
 import { expect, test } from "./fixtures/base";
-import { successClient } from "@docspace/shared/__mocks__/e2e/handlers/oauth/client";
+import { successClient } from "@docspace/shared/__mocks__/handlers/oauth/client";
 
 test("oauth2 login render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
@@ -42,12 +42,10 @@ test("oauth2 login render", async ({ page, baseUrl }) => {
 test("oauth2 with list render", async ({
   page,
   serverRequestInterceptor,
-  clientRequestInterceptor,
   port,
   baseUrl,
 }) => {
   serverRequestInterceptor.use(capabilitiesHandler(port, true));
-  await clientRequestInterceptor.use([endpoints.oauthSignIn]);
 
   await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 
@@ -72,12 +70,10 @@ test("oauth2 with list render", async ({
 test("oauth2 back button after list render", async ({
   page,
   serverRequestInterceptor,
-  clientRequestInterceptor,
   port,
   baseUrl,
 }) => {
   serverRequestInterceptor.use(capabilitiesHandler(port, true));
-  await clientRequestInterceptor.use([endpoints.oauthSignIn]);
 
   await page.goto(`${baseUrl}/login?client_id=${successClient.client_id}`);
 

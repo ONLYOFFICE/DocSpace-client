@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints, settingsHandler } from "@docspace/shared/__mocks__/e2e";
-
+import {
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
@@ -52,12 +54,7 @@ const QUERY_PARAMS = [
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-test("emp invite render standalone", async ({
-  page,
-  baseUrl,
-  clientRequestInterceptor,
-}) => {
-  await clientRequestInterceptor.use([endpoints.getUserByEmail]);
+test("emp invite render standalone", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
@@ -71,11 +68,11 @@ test("emp invite render no standalone", async ({
   page,
   baseUrl,
   serverRequestInterceptor,
-  clientRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
-  await clientRequestInterceptor.use([endpoints.getUserByEmail]);
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await expect(page).toHaveScreenshot([
@@ -85,12 +82,7 @@ test("emp invite render no standalone", async ({
   ]);
 });
 
-test("emp invite success standalone", async ({
-  page,
-  baseUrl,
-  clientRequestInterceptor,
-}) => {
-  await clientRequestInterceptor.use([endpoints.createUser, endpoints.login]);
+test("emp invite success standalone", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.fill("[name='first-name']", "firstName");
@@ -121,11 +113,11 @@ test("emp invite success no standalone", async ({
   page,
   baseUrl,
   serverRequestInterceptor,
-  clientRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
-  await clientRequestInterceptor.use([endpoints.createUser, endpoints.login]);
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -177,7 +169,9 @@ test("emp invite error no standalone", async ({
   serverRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(settingsHandler(port, "noStandalone"));
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.NoStandalone),
+  );
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 

@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { confirmHandler } from "@docspace/shared/__mocks__/e2e/handlers/authentication/confirm";
+import {
+  confirmHandler,
+  ErrorConfirm,
+} from "@docspace/shared/__mocks__/handlers";
 
 const URL = "/login/confirm/PasswordChange";
-const NEXT_REQUEST_URL = "*/**/login/confirm/PasswordChange";
 
 const QUERY_PARAMS = [
   {
@@ -53,10 +53,6 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
 test("password change render", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
@@ -68,11 +64,7 @@ test("password change render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("password change success", async ({ page, baseUrl, clientRequestInterceptor }) => {
-  await clientRequestInterceptor.use([
-    endpoints.changePassword,
-    endpoints.login,
-  ]);
+test("password change success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("text-input").fill("qwerty123");
@@ -115,7 +107,7 @@ test("password change error invalid", async ({
   serverRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(confirmHandler(port, "Invalid"));
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.Invalid));
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -132,7 +124,7 @@ test("password change error expired", async ({
   serverRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(confirmHandler(port, "Expired"));
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.Expired));
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -149,7 +141,7 @@ test("password change error user excluded", async ({
   serverRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(confirmHandler(port, "UserExcluded"));
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.UserExcluded));
 
   // Expected to go to default page
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);

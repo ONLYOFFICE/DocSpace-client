@@ -26,7 +26,6 @@
 
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 const URL = "/login/confirm/PortalRemove";
 
@@ -57,8 +56,7 @@ test("portal remove render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("portal remove delete", async ({ page, baseUrl, clientRequestInterceptor }) => {
-  await clientRequestInterceptor.use([endpoints.deletePortal]);
+test("portal remove delete", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByRole("button", { name: "Delete" }).click();

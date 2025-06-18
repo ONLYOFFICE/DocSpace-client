@@ -24,16 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  HEADER_QUOTA_FAILED,
-  HEADER_TRAFF_LIMIT,
-  HEADER_USER_EXISTED,
-  endpoints,
-} from "@docspace/shared/__mocks__/e2e";
-
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { confirmHandler } from "@docspace/shared/__mocks__/e2e/handlers/authentication/confirm";
+import {
+  confirmHandler,
+  ErrorConfirm,
+} from "@docspace/shared/__mocks__/handlers";
 
 const URL = "/login/confirm/Activation";
 
@@ -76,17 +72,7 @@ test("activation render", async ({ page, baseUrl }) => {
   ]);
 });
 
-test("activation success", async ({
-  page,
-  baseUrl,
-  clientRequestInterceptor,
-}) => {
-  await clientRequestInterceptor.use([
-    endpoints.changePassword,
-    endpoints.activationStatus,
-    endpoints.login,
-    endpoints.updateUser,
-  ]);
+test("activation success", async ({ page, baseUrl }) => {
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page
@@ -134,7 +120,7 @@ test("activation error tariffic limit", async ({
   serverRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(confirmHandler(port, "TariffLimit"));
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.TariffLimit));
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -151,7 +137,7 @@ test("activation error user existed", async ({
   serverRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(confirmHandler(port, "UserExisted"));
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.UserExisted));
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
@@ -168,7 +154,7 @@ test("activation error quota failed", async ({
   serverRequestInterceptor,
   port,
 }) => {
-  serverRequestInterceptor.use(confirmHandler(port, "QuotaFailed"));
+  serverRequestInterceptor.use(confirmHandler(port, ErrorConfirm.QuotaFailed));
 
   await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 

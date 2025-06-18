@@ -317,6 +317,7 @@
   "Hour": "時間",
   "Image": "画像",
   "Images": "画像",
+  "Important": "重要",
   "IncorrectDomain": "不適切なドメイン",
   "IncorrectEmail": "メールが正しくない",
   "IncorrectFirstName": "名が正しくありません",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "サブスクリプションの有効期限が切れています",
   "SubscriptionIsExpiring": "サブスクリプションの有効期限は{{date}}日です。",
   "SuccessfullyCompletedOperation": "操作は正常に完了した。",
+  "SuggestFeature": "機能のリクエスト",
   "Support": "サポート",
   "SwitchToThumbnails": "サムネイル表示へ切り替え",
   "SwitchViewToCompact": "コンパクトビューに切り替え",
@@ -720,7 +722,5 @@
   "Yes": "はい",
   "Yesterday": "昨日",
   "You": "あなた",
-  "YourTurn": "あなたの番です",
-  "Important": "重要",
-  "SuggestFeature": "機能のリクエスト"
+  "YourTurn": "あなたの番です"
 }

@@ -28,6 +28,7 @@
 
 .tableHeaderCell {
   cursor: default;
+  overflow: hidden;
 
   &.showIcon.sortingVisible {
     cursor: pointer;

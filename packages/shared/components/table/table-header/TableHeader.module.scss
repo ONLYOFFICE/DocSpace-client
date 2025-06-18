@@ -26,36 +26,32 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "@docspace/shared/styles/mixins";
+.tableHeader {
+  position: fixed;
+  background: var(--background-color);
+  display: grid;
+  z-index: 1;
+  height: 39px;
+  border-bottom: var(--table-header-border-bottom);
+  margin: 0 -20px;
+  padding: 0 20px;
 
-.tableRow {
+  &:global(.lengthen-header) {
+    border-image-slice: 1;
+    border-image-source: var(--table-header-lengthen-border-image-source);
+  }
+}
+
+.tableHeaderSettings {
+  justify-self: flex-end;
+}
+
+.tableHeaderRow {
   display: contents;
+}
 
-  @media (hover: hover) {
-    :global(.create-share-link) {
-      display: none;
-    }
-
-    &:hover,
-    &.active,
-    &.checked {
-      :global(.create-share-link) {
-        display: block;
-      }
-    }
-  }
-
-  :global(.droppable-hover) {
-    background: none;
-  }
-
-  &.dragging:not(.isIndexEditingMode) {
-    :global(.droppable-hover) {
-      background: var(--drag-and-drop-accept-bg) !important;
-    }
-  }
-
-  :global(.table-container_row-loader) {
-    display: inline-flex;
-  }
+.emptyTableContainer {
+  grid-column-start: 1;
+  grid-column-end: -1;
+  height: 40px;
 }

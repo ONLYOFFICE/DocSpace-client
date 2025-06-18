@@ -84,12 +84,6 @@ const StyledTableContainer = styled.div.attrs(injectDefaultTheme)<{
     }
   }
 
-  .lengthen-header {
-    border-image-slice: 1;
-    border-image-source: ${(props) =>
-      props.theme.tableContainer.header.lengthenBorderImageSource};
-  }
-
   .hotkeys-lengthen-header {
     border-bottom: ${(props) =>
       props.theme.tableContainer.header.hotkeyBorderBottom};
@@ -255,29 +249,6 @@ const StyledInfoPanelToggleColorThemeWrapper = styled.div.attrs(
   }
 `;
 
-const StyledTableHeader = styled.div.attrs(injectDefaultTheme)<{
-  checkboxMargin?: string;
-  interfaceDirection?: string;
-}>`
-  position: fixed;
-  background: ${(props) => props.theme.tableContainer.header.background};
-  display: grid;
-  z-index: 1;
-  height: 39px;
-  border-bottom: ${(props) => props.theme.tableContainer.header.borderBottom};
-  margin: 0 -20px;
-  padding: 0 20px;
-
-  .table-container_header-checkbox {
-    ${(props) =>
-      props.checkboxMargin && `margin-inline-start: ${props.checkboxMargin};`}
-  }
-
-  .table-container_header-cell {
-    overflow: hidden;
-  }
-`;
-
 const StyledTableBody = styled.div<{
   useReactWindow?: boolean;
   infoPanelVisible?: boolean;
@@ -293,60 +264,6 @@ const StyledTableBody = styled.div<{
         padding: 0;
       `}
   }
-`;
-
-const StyledTableRow = styled.div.attrs(injectDefaultTheme)<{
-  dragging?: boolean;
-  isIndexEditingMode?: boolean;
-  isActive?: boolean;
-  checked?: boolean;
-}>`
-  display: contents;
-
-  @media (hover: hover) {
-    .create-share-link {
-      display: none;
-    }
-
-    &:hover .create-share-link {
-      display: block;
-    }
-
-    ${({ isActive, checked }) =>
-      (isActive || checked) &&
-      css`
-        .create-share-link {
-          display: block;
-        }
-      `}
-  }
-
-  .table-container_header-checkbox {
-    svg {
-      margin: 0;
-    }
-  }
-
-  .table-container_header-settings {
-    justify-self: flex-end;
-  }
-
-  .droppable-hover {
-    background: ${(props) =>
-      props.dragging && !props.isIndexEditingMode
-        ? `${props.theme.dragAndDrop.acceptBackground} !important`
-        : "none"};
-  }
-
-  .table-container_row-loader {
-    display: inline-flex;
-  }
-`;
-
-const StyledEmptyTableContainer = styled.div`
-  grid-column-start: 1;
-  grid-column-end: -1;
-  height: 40px;
 `;
 
 const StyledScrollbar = styled(Scrollbar)`
@@ -365,11 +282,8 @@ const StyledScrollbar = styled(Scrollbar)`
 
 export {
   StyledTableContainer,
-  StyledTableRow,
   StyledTableBody,
-  StyledTableHeader,
   StyledTableGroupMenu,
   StyledInfoPanelToggleColorThemeWrapper,
-  StyledEmptyTableContainer,
   StyledScrollbar,
 };

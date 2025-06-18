@@ -29,11 +29,9 @@ import React from "react";
 import { DebouncedFunc } from "lodash";
 import throttle from "lodash/throttle";
 import { withTheme } from "styled-components";
-import {
-  StyledTableHeader,
-  StyledTableRow,
-  StyledEmptyTableContainer,
-} from "../Table.styled";
+import classNames from "classnames";
+
+import { isDesktop } from "../../../utils";
 
 import { TTableColumn, TableHeaderProps } from "../Table.types";
 import { TableSettings } from "../sub-components/table-settings";
@@ -45,7 +43,8 @@ import {
   MIN_SIZE_NAME_COLUMN,
   HANDLE_OFFSET,
 } from "../Table.constants";
-import { isDesktop } from "../../../utils/device";
+
+import styles from "./TableHeader.module.scss";
 
 class TableHeaderComponent extends React.Component<
   TableHeaderProps,
@@ -1259,7 +1258,6 @@ class TableHeaderComponent extends React.Component<
       tagRef,
       settingsTitle,
       isIndexEditingMode,
-      ...rest
     } = this.props;
 
     const { hideColumns } = this.state;
@@ -1268,15 +1266,14 @@ class TableHeaderComponent extends React.Component<
 
     return (
       <>
-        <StyledTableHeader
+        <div
           id="table-container_caption-header"
-          className={`${
-            isLengthenHeader ? "lengthen-header" : ""
-          } table-container_header`}
+          className={classNames(styles.tableHeader, "table-container_header", {
+            "lengthen-header": isLengthenHeader,
+          })}
           ref={this.headerRef}
-          {...rest}
         >
-          <StyledTableRow>
+          <div className={styles.tableHeaderRow}>
             {columns.map((column, index) => {
               const nextColumn = this.getNextColumn(columns, index);
               const resizable = nextColumn ? nextColumn.resizable : false;
@@ -1298,10 +1295,7 @@ class TableHeaderComponent extends React.Component<
             })}
 
             {showSettings ? (
-              <div
-                className="table-container_header-settings"
-                title={settingsTitle}
-              >
+              <div className={styles.tableHeaderSettings} title={settingsTitle}>
                 <TableSettings
                   columns={columns}
                   disableSettings={
@@ -1311,10 +1305,10 @@ class TableHeaderComponent extends React.Component<
                 />
               </div>
             ) : null}
-          </StyledTableRow>
-        </StyledTableHeader>
+          </div>
+        </div>
 
-        <StyledEmptyTableContainer />
+        <div className={styles.emptyTableContainer} />
       </>
     );
   }

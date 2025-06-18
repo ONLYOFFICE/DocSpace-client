@@ -54,7 +54,7 @@ export const useServicesActions = () => {
   const formatWalletCurrency = (
     quantity?: number,
     minimumFractionDigits: number = 2,
-    maximumFractionDigits: number = 7,
+    maximumFractionDigits: number = 2,
   ) => {
     const amount = quantity ?? walletBalance;
 

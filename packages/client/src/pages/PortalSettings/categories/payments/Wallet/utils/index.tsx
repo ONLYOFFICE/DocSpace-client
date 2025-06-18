@@ -64,6 +64,7 @@ export const formatCurrencyValue = (
     style: "currency",
     currency,
     minimumFractionDigits,
+    maximumFractionDigits,
   });
 
   return formatter.format(truncated);
@@ -75,7 +76,7 @@ export const accountingLedgersFormat = (
   isCredit: boolean,
   currency: string,
 ) => {
-  const maximumFractionDigits = 7;
+  const maximumFractionDigits = 2;
   const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
   const truncated = Number(truncatedStr);
 

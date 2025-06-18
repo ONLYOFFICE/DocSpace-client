@@ -317,6 +317,7 @@
   "Hour": "පැය",
   "Image": "රූපය",
   "Images": "ඡායාරූප",
+  "Important": "ප්‍රධානమైన",
   "IncorrectDomain": "වැරදි වසමකි",
   "IncorrectEmail": "වැරදි වි-තැපෑලකි",
   "IncorrectFirstName": "මුල් නම වැරදිය",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "දායකත්වය ඉකුත් වී ඇත.",
   "SubscriptionIsExpiring": "{{date}} දී ඔබගේ දායකත්‍වය ඉකුත් වේ",
   "SuccessfullyCompletedOperation": "මෙහෙයුම සාර්ථකව නිමා විය",
+  "SuggestFeature": "ප්‍රතිරූපයක් යෝජනා කරන්න",
   "Support": "සහාය",
   "SwitchToThumbnails": "සිඟිති රූ දැක්මට මාරුව",
   "SwitchViewToCompact": "සංගත දැක්මට මාරුව",
@@ -720,7 +722,5 @@
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
   "You": "ඔබ",
-  "YourTurn": "ඔබේ වාරය.",
-  "Important": "ප්‍රධානమైన",
-  "SuggestFeature": "ප්‍රතිරූපයක් යෝජනා කරන්න"
+  "YourTurn": "ඔබේ වාරය."
 }

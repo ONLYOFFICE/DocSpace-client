@@ -317,6 +317,7 @@
   "Hour": "ساعة",
   "Image": "الصورة",
   "Images": "الصور",
+  "Important": "مهم",
   "IncorrectDomain": "النطاق غير صحيح",
   "IncorrectEmail": "البريد الالكتروني غير صحيح",
   "IncorrectFirstName": "الاسم الأول خاطئ",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "انتهت صلاحية الاشتراك",
   "SubscriptionIsExpiring": "اشتراكك سوف ينتهي في {{date}}",
   "SuccessfullyCompletedOperation": "تمت العملية بنجاح.",
+  "SuggestFeature": "اقترح ميزة",
   "Support": "الدعم",
   "SwitchToThumbnails": "التبديل إلى عرض الصور المُصغرة",
   "SwitchViewToCompact": "التبديل إلى العرض المُدمج",
@@ -720,7 +722,5 @@
   "Yes": "نعم",
   "Yesterday": "أمس",
   "You": "أنت",
-  "YourTurn": "دوركم الآن",
-  "Important": "مهم",
-  "SuggestFeature": "اقترح ميزة"
+  "YourTurn": "دوركم الآن"
 }

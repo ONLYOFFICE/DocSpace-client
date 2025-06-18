@@ -13,7 +13,7 @@
   "ReassignData": "Ricaktim të dhënash",
   "ReassigningDataToAnother": "Procesi i ricaktimit të të dhënave nga përdoruesi<0>{{fromUser}}</0> te përdoruesi <1>{{toUser}}</1> ka filluar. Ju lutem vini re se mund të marrë një kohë të konsiderueshme.",
   "ReassigningDataToItself": "Procesi i ricaktimit të të dhënave nga përdoruesi <0>{{fromUser}}</0> te përdoruesi <1>{{toUser}}</1> <2>{{you}}</2> ka filluar. Ju lutem vini re se mund të marrë një kohë të konsiderueshme.",
+  "RoomsOnlyReassignment": "We will transfer rooms created by contact.",
   "StartTransferAgain": "Filloni përsëri transferimin",
-  "UserToWhomTheDataWillBeTransferred": "Përdoruesi tek i cili do të transferohen të dhënat",
-  "RoomsOnlyReassignment": "We will transfer rooms created by contact."
+  "UserToWhomTheDataWillBeTransferred": "Përdoruesi tek i cili do të transferohen të dhënat"
 }

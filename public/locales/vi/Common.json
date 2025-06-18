@@ -317,6 +317,7 @@
   "Hour": "giờ",
   "Image": "Hình ảnh",
   "Images": "Hình ảnh",
+  "Important": "Quan trọng",
   "IncorrectDomain": "Tên miền không chính xác",
   "IncorrectEmail": "Email không chính xác",
   "IncorrectFirstName": "Tên không đúng",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Đăng ký đã hết hạn",
   "SubscriptionIsExpiring": "Gói dịch vụ đăng ký của bạn sẽ hết hạn vào {{date}}",
   "SuccessfullyCompletedOperation": "Thao tác đã được hoàn thành.",
+  "SuggestFeature": "Gợi ý một tính năng",
   "Support": "Hỗ trợ",
   "SwitchToThumbnails": "Chuyển sang chế độ xem hình thu nhỏ",
   "SwitchViewToCompact": "Chuyển sang xem đơn giản",
@@ -720,7 +722,5 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "YourTurn": "Phiên của bạn",
-  "Important": "Quan trọng",
-  "SuggestFeature": "Gợi ý một tính năng"
+  "YourTurn": "Phiên của bạn"
 }

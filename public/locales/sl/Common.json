@@ -317,6 +317,7 @@
   "Hour": "ura",
   "Image": "Slika",
   "Images": "Slike",
+  "Important": "Pomembno",
   "IncorrectDomain": "Napačna domena",
   "IncorrectEmail": "Napačen email",
   "IncorrectFirstName": "Nepravilno ime",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Naročnina je potekla",
   "SubscriptionIsExpiring": "Vaša naročnina poteče dne {{date}}",
   "SuccessfullyCompletedOperation": "Operacija je bila uspešno zaključena.",
+  "SuggestFeature": "Predlagajte funkcijo",
   "Support": "Pomoč",
   "SwitchToThumbnails": "Preklopi na pogled s sličicami",
   "SwitchViewToCompact": "Preklopi v kompaktni pogled",
@@ -720,7 +722,5 @@
   "Yes": "Da",
   "Yesterday": "Včeraj",
   "You": "Vi",
-  "YourTurn": "Vi ste na vrsti",
-  "Important": "Pomembno",
-  "SuggestFeature": "Predlagajte funkcijo"
+  "YourTurn": "Vi ste na vrsti"
 }

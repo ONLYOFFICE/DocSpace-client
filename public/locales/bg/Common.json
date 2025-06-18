@@ -317,6 +317,7 @@
   "Hour": "час",
   "Image": "Изображение",
   "Images": "Изображения",
+  "Important": "Важно",
   "IncorrectDomain": "Неправилен домейн",
   "IncorrectEmail": "Неправилен имейл",
   "IncorrectFirstName": "Грешно име",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Абонаментът е изтекъл",
   "SubscriptionIsExpiring": "Вашият абонамент изтича на {{date}}",
   "SuccessfullyCompletedOperation": "Операцията е завършена успешно.",
+  "SuggestFeature": "Предложете функция",
   "Support": "Поддръжка",
   "SwitchToThumbnails": "Превключване към изглед на миниатюри",
   "SwitchViewToCompact": "Превключете на компактен изглед",
@@ -720,7 +722,5 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вие",
-  "YourTurn": "Ваш ред",
-  "Important": "Важно",
-  "SuggestFeature": "Предложете функция"
+  "YourTurn": "Ваш ред"
 }

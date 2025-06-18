@@ -55,13 +55,13 @@ const Amount = (props: AmountProps) => {
   } = props;
 
   const { amount, setAmount } = useAmountValue();
-  const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
+
   const { t } = useTranslation("Payments");
 
   const amountTabs = () => {
     const amounts = [10, 20, 30, 50, 100];
     return amounts.map((item) => ({
-      name: formatCurrencyValue(language, item, currency),
+      name: `+${formatCurrencyValue(language, item, currency)}`,
       id: item.toString(),
       value: item,
       content: null,
@@ -70,8 +70,11 @@ const Amount = (props: AmountProps) => {
   };
 
   const onSelectAmount = (data: TTabItem) => {
-    setSelectedAmount(data.id);
-    setAmount(data.id);
+    const currentAmount = amount ? parseInt(amount, 10) : 0;
+    const selectedValue = parseInt(data.id, 10);
+    const newAmount = (currentAmount + selectedValue).toString();
+
+    setAmount(newAmount);
   };
 
   const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +83,6 @@ const Amount = (props: AmountProps) => {
     if (!validity.valid) return;
 
     setAmount(value);
-    setSelectedAmount(value);
   };
 
   const textTooltip = () => {
@@ -104,7 +106,7 @@ const Amount = (props: AmountProps) => {
           </Text>
           <Tabs
             items={amountTabs()}
-            selectedItemId={selectedAmount}
+            selectedItemId=""
             onSelect={onSelectAmount}
             type={TabsTypes.Secondary}
             allowNoSelection

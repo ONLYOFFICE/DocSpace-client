@@ -59,7 +59,6 @@ type StorageDialogProps = {
     force?: boolean,
   ) => Promise<{ walletQuotas: { quantity: number; nextQuantity?: number }[] }>;
   fetchBalance?: () => Promise<void>;
-  handleServicesQuotas?: () => Promise<void>;
   hasScheduledStorageChange?: boolean;
   nextStoragePlanSize?: number;
   storageSizeIncrement?: number;
@@ -80,12 +79,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   hasScheduledStorageChange,
   storagePriceIncrement,
   nextStoragePlanSize,
-  handleServicesQuotas,
   storageSizeIncrement,
   isVisibleWalletSettings,
   setVisibleWalletSetting,
   partialUpgradeFee,
-  handlePortalTariff,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(currentStoragePlanSize);
@@ -142,9 +139,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     onClose();
   }, []);
 
-  const resetIntervalSuccess = async (isCancellation) => {
-    await handleServicesQuotas()!;
-
+  const resetIntervalSuccess = async (isCancellation: boolean) => {
     if (isCancellation || !isUpgradeStoragePlan)
       setAmount(currentStoragePlanSize);
 
@@ -155,6 +150,22 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     }
 
     setIsLoading(false);
+  };
+
+  const isUpdatedTariff = (
+    walletQuotas: { quantity: number; nextQuantity?: number }[],
+    isCancellation: boolean,
+  ) => {
+    const walletQuantity =
+      isUpgradeStoragePlan || isCancellation
+        ? walletQuotas[0]?.quantity
+        : walletQuotas[0]?.nextQuantity;
+
+    const updated = isCancellation
+      ? !walletQuotas[0]?.nextQuantity
+      : walletQuantity === amountRef.current;
+
+    return updated;
   };
 
   const waitingForTariff = useCallback(
@@ -179,16 +190,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
           const { walletQuotas } = await fetchPortalTariff(true);
 
-          const walletQuantity =
-            isUpgradeStoragePlan || isCancellation
-              ? walletQuotas[0]?.quantity
-              : walletQuotas[0]?.nextQuantity;
-
-          const updated = isCancellation
-            ? !walletQuotas[0]?.nextQuantity
-            : walletQuantity === amountRef.current;
-
-          if (updated) {
+          if (isUpdatedTariff(walletQuotas, isCancellation)) {
             resetIntervalSuccess(isCancellation);
             if (isUpgradeStoragePlan) onCloseDialog();
           }
@@ -229,7 +231,13 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         }
 
         if (isUpgradeStoragePlan) fetchBalance!();
-        waitingForTariff(isCancellation);
+        const { walletQuotas } = await fetchPortalTariff(true);
+
+        if (isUpdatedTariff(walletQuotas, isCancellation)) {
+          resetIntervalSuccess(isCancellation);
+        } else {
+          waitingForTariff(isCancellation);
+        }
       } catch (e) {
         const errorMessage = e instanceof Error ? e.message : String(e);
         toastr.error(errorMessage);
@@ -400,11 +408,10 @@ export default inject(
     const {
       storageSizeIncrement,
       storagePriceIncrement,
-      handleServicesQuotas,
+
       isVisibleWalletSettings,
       setVisibleWalletSetting,
       partialUpgradeFee,
-      handlePortalTariff,
     } = servicesStore;
 
     return {
@@ -417,11 +424,10 @@ export default inject(
       hasScheduledStorageChange,
       storagePriceIncrement,
       nextStoragePlanSize,
-      handleServicesQuotas,
+
       setVisibleWalletSetting,
       isVisibleWalletSettings,
       partialUpgradeFee,
-      handlePortalTariff,
     };
   },
 )(observer(StoragePlanUpgrade));

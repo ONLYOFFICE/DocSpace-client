@@ -104,7 +104,6 @@ class ServicesStore {
     return this.servicesQuotas?.price.value ?? 0;
   }
 
-
   setPartialUpgradeFee = (partialUpgradeFee: number) => {
     this.partialUpgradeFee = partialUpgradeFee;
   };
@@ -122,19 +121,7 @@ class ServicesStore {
 
     if (!res) return;
 
-    const { hasStorageSubscription, hasScheduledStorageChange } =
-      this.currentTariffStatusStore;
-
     res[0].features.forEach((feature) => {
-      if (feature.id === TOTAL_SIZE) {
-        const enhancedFeature = feature as TPaymentFeature & {
-          enabled: boolean;
-          cancellation: boolean;
-        };
-        enhancedFeature.enabled = hasStorageSubscription;
-        enhancedFeature.cancellation = hasScheduledStorageChange;
-      }
-
       this.servicesQuotasFeatures.set(feature.id, feature);
     });
 

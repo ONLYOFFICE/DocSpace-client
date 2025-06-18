@@ -63,6 +63,7 @@ type AdditionalStorageProps = {
   nextStoragePlanSize?: number;
   storageExpiryDate?: string;
   isCardLinkedToPortal?: boolean;
+  hasStorageSubscription?: boolean;
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({

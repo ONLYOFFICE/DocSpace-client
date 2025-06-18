@@ -38,6 +38,7 @@ type WalletContainerProps = {
   isPaymentBlockedByBalance: boolean;
   isCurrentStoragePlan: boolean;
   isDowngradeStoragePlan: boolean;
+  isLoading: boolean;
 };
 
 const WalletContainer = (props: WalletContainerProps) => {
@@ -48,6 +49,7 @@ const WalletContainer = (props: WalletContainerProps) => {
     isPaymentBlockedByBalance,
     isCurrentStoragePlan,
     isDowngradeStoragePlan,
+    isLoading,
   } = props;
   const { formatWalletCurrency } = useServicesActions();
 
@@ -58,6 +60,7 @@ const WalletContainer = (props: WalletContainerProps) => {
       <WalletInfo
         balance={formatWalletCurrency(null, 2, 2)}
         {...(isPaymentBlockedByBalance &&
+          !isLoading &&
           !isCurrentStoragePlan &&
           !isDowngradeStoragePlan &&
           !isExceedingStorageLimit && { onTopUp })}

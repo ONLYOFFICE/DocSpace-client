@@ -720,5 +720,7 @@
   "Yes": "はい",
   "Yesterday": "昨日",
   "You": "あなた",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "Important": "重要",
+  "SuggestFeature": "機能のリクエスト"
 }

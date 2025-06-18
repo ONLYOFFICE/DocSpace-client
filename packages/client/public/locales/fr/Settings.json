@@ -359,5 +359,13 @@
   "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
-  "YourLogo": "Votre logo"
+  "YourLogo": "Votre logo",
+  "InvitationSettings": "Paramètres de l'invitation",
+  "InvitationSettingsContacts": "Invitez les membres de {{productName}} via Contacts",
+  "InvitationSettingsContactsDescription": "Activez cette option pour permettre l'envoi d'invitations aux nouveaux membres de {{productName}} via la section Contacts. Désactivez cette option si vous souhaitez inviter de nouveaux membres uniquement via LDAP.",
+  "InvitationSettingsDescription": "Configurez les options d'invitation pour les membres internes et les invités externes de votre {{productName}}. Ces paramètres peuvent vous aider à respecter les directives de sécurité de votre entreprise, par exemple si vous utilisez LDAP ou d'autres systèmes de gestion des utilisateurs.",
+  "InvitationSettingsGuests": "Autoriser les invitations d'invités",
+  "InvitationSettingsGuestsDescription": "Activez cette option pour permettre à tous les membres de {{productName}} d'inviter des personnes extérieures dans les salles.",
+  "InvitationSettingsMobile": "Configurez les options d'invitation pour les membres internes et les invités externes de votre {{productName}}.",
+  "Services": "Services"
 }

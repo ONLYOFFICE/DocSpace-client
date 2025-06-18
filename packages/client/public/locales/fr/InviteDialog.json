@@ -12,5 +12,11 @@
   "SendInvitation": "Envoyer une invitation",
   "UserMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} peuvent jouer le rôle spécifié.",
   "UsersAlreadyAdded": "Certains utilisateurs ont déjà été ajoutés",
-  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle."
+  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle.",
+  "EmailErrorMessageUserNotFound": "Utilisateur non trouvé. Vous pouvez modifier l'e-mail en double-cliquant dessus.",
+  "InviteToRoomAddPlaceholder": "Ajoutez des personnes par nom ou par e-mail",
+  "InviteToRoomManuallyInfoGuest": "Ajoutez des contacts de {{productName}} existants. Ou invitez personnellement de nouveaux utilisateurs par e-mail. Les nouveaux utilisateurs seront ajoutés à votre liste d'invités.",
+  "InviteToRoomManuallyInfoMembers": "Ajoutez les membres existants de {{productName}} à la salle.",
+  "InviteViaLinkDescriptionRoomGuest": "Créer un lien universel pour l'auto-autorisation dans la salle en tant qu'invité.",
+  "InviteViaLinkDescriptionRoomMembers": "Créer un lien universel pour les membres de {{productName}} pour l'auto-autorisation dans la salle."
 }

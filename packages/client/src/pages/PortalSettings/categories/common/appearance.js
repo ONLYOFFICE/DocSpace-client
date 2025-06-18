@@ -808,6 +808,8 @@ const Appearance = (props) => {
           type={TabsTypes.Secondary}
           onSelect={(e) => setSelectedItemId(e.id)}
           selectedItemId={selectedItemId}
+          isLoading={!tReady}
+          scaled
         />
 
         <div className="buttons-container">

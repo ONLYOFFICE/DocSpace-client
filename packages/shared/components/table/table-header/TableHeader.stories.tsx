@@ -28,15 +28,18 @@ import React, { useRef } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { TableHeader } from "./TableHeader";
 import { type TableHeaderProps, TTableColumn } from "../Table.types";
+import { SortByFieldName } from "../../../enums";
 
 const TableHeaderWrapper = (args: Omit<TableHeaderProps, "containerRef">) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div style={{ width: "100%", maxWidth: "1000px" }}>
-      <div ref={containerRef} style={{ display: "grid" }}>
-        <TableHeader {...args} containerRef={containerRef} />
-      </div>
+    <div
+      id="table-container"
+      ref={containerRef}
+      style={{ marginInline: "40px" }}
+    >
+      <TableHeader {...args} containerRef={containerRef} />
     </div>
   );
 };
@@ -58,7 +61,17 @@ const meta = {
     setHideColumns: { control: false, table: { disable: true } },
     tagRef: { control: false, table: { disable: true } },
     theme: { control: false, table: { disable: true } },
+    sortBy: {
+      control: "select",
+      options: [
+        SortByFieldName.Name,
+        SortByFieldName.Type,
+        SortByFieldName.Tags,
+        SortByFieldName.Author,
+      ],
+    },
   },
+  tags: ["!autodocs"],
 } satisfies Meta<typeof TableHeader>;
 
 export default meta;
@@ -75,35 +88,43 @@ export const Default: Story = {
         resizable: true,
         enable: true,
         default: true,
-        sortBy: "AZ",
+        sortBy: SortByFieldName.Name,
         minWidth: 210,
+        onChange: () => {},
+        onClick: () => {},
       },
       {
         key: "Type",
         title: "Type",
         enable: true,
         resizable: true,
-        sortBy: "roomType",
+        sortBy: SortByFieldName.Type,
+        onChange: () => {},
+        onClick: () => {},
       },
       {
         key: "Tags",
         title: "Tags",
         enable: true,
         resizable: true,
-        sortBy: "Tags",
+        sortBy: SortByFieldName.Tags,
         withTagRef: true,
+        onChange: () => {},
+        onClick: () => {},
       },
       {
         key: "Owner",
         title: "Owner",
         enable: true,
         resizable: true,
-        sortBy: "Author",
+        sortBy: SortByFieldName.Author,
+        onChange: () => {},
+        onClick: () => {},
       },
     ],
     columnStorageName: "table-header-story",
     sectionWidth: 1000,
-    sortBy: "name",
+    sortBy: SortByFieldName.Name,
     sorted: true,
     useReactWindow: false,
     showSettings: true,

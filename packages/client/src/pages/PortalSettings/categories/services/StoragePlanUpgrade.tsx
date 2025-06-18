@@ -346,6 +346,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
                 insufficientFunds={insufficientFunds}
                 isExceedingStorageLimit={isExceedingStorageLimit}
                 isUpgradeStoragePlan={isUpgradeStoragePlan}
+                isCurrentStoragePlan={isCurrentStoragePlan}
               />
             ) : null}
           </div>

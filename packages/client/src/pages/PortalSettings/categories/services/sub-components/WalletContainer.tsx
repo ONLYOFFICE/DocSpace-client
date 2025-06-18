@@ -38,6 +38,7 @@ type WalletContainerProps = {
   hasScheduledStorageChange?: boolean;
   isUpgradeStoragePlan?: boolean;
   currentStoragePlanSize?: boolean;
+  isCurrentStoragePlan: boolean;
 };
 
 const WalletContainer = (props: WalletContainerProps) => {
@@ -48,6 +49,7 @@ const WalletContainer = (props: WalletContainerProps) => {
     hasScheduledStorageChange,
     isUpgradeStoragePlan,
     currentStoragePlanSize,
+    isCurrentStoragePlan,
   } = props;
   const { formatWalletCurrency, isWalletBalanceInsufficient } =
     useServicesActions();
@@ -64,7 +66,9 @@ const WalletContainer = (props: WalletContainerProps) => {
     <div className={styles.walletContainer}>
       <WalletInfo
         balance={formatWalletCurrency(null, 2, 2)}
-        {...(isPaymentAnavalable && !isExceedingStorageLimit && { onTopUp })}
+        {...(isPaymentUnavalable &&
+          !isCurrentStoragePlan &&
+          !isExceedingStorageLimit && { onTopUp })}
       />
     </div>
   );

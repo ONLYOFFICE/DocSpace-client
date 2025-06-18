@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Jūs neesat pievienojis(-usi) nevienu maksājumu",
   "YourCurrentPayment": "Jūsu pašreizējais maksājums",
   "YourCurrentPlan": "<1>Jūsu pašreizējais plāns:</1> {{amount}} <2>({{price}}/mēnesī)</2>",
-  "YourPrice": "Jūsu cena"
+  "YourPrice": "Jūsu cena",
+  "TransactionsLimit": "Lapa parāda pēdējās 25 darījumu reģistrēšanas ziņas izvēlētajā periodā. Pilnais darījumu reģistrs ir pieejams, izmantojot \"{{buttonName}}\" pogu."
 }

@@ -130,5 +130,6 @@
   "YourCurrentPayment": "Votre paiement actuel",
   "YourCurrentPlan": "<1>Votre plan actuel :</1> {{amount}} <2>({{price}}/mois)</2>",
   "ActionCannotBeUndone": "<1>Veuillez noter :</1> cette action ne peut pas être annulée.",
-  "StorageCapacityUpdated": "La capacité de stockage a été mise à jour"
+  "StorageCapacityUpdated": "La capacité de stockage a été mise à jour",
+  "TransactionsLimit": "La page affiche les 25 dernières transactions pour la période sélectionnée. L'historique complet des transactions est disponible via le bouton \"{{buttonName}}\"."
 }

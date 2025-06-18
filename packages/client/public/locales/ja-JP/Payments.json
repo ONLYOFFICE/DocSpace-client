@@ -47,5 +47,6 @@
   "UserNotFound": "<1>{{email}}</1>ユーザーが見つかりません。",
   "UserNotFoundMatchingEmail": "我们无法找到与Stripe电子邮件匹配的用户。",
   "UsersQuotaAlmostExhausted": "有料ユーザーのストレージ容量が残りわずかです。",
-  "YourPrice": "価格"
+  "YourPrice": "価格",
+  "TransactionsLimit": "このページには、選択した期間の直近25件の取引が表示されます。すべての取引履歴は、\"{{buttonName}}” ボタンから確認できます。"
 }

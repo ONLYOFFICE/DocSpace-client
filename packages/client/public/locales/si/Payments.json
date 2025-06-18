@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "ඔබේ ගෙවීම් එකතු කර නැත.",
   "YourCurrentPayment": "ඔබේ දැනට පවතින ගෙවීම",
   "YourCurrentPlan": "<1>ඔබේ දැනට පවතින ගිවිසුම:</1> {{amount}} <2>({{price}}/මාසයක)</2>",
-  "YourPrice": "ඔබගේ මිල"
+  "YourPrice": "ඔබගේ මිල",
+  "TransactionsLimit": "තෝරාගත් කාල සීමාව සඳහා අවසන් ගනුදෙනු 25 පිටුවේ දැක්වේ. සම්පූර්ණ ගනුදෙනු ඉතිහාසය \"{{buttonName}}\" බොත්තම හරහා ලබා ගත හැකිය."
 }

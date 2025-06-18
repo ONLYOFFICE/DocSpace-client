@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Nie dodano jeszcze żadnej płatności.",
   "YourCurrentPayment": "Twoje aktualne płatności",
   "YourCurrentPlan": "<1>Twój aktualny plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
-  "YourPrice": "Twoja cena"
+  "YourPrice": "Twoja cena",
+  "TransactionsLimit": "Strona wyświetla 25 ostatnich transakcji dla wybranego okresu. Pełna historia transakcji jest dostępna za pomocą przycisku \"{{buttonName}}\"."
 }

@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPayment": "Nykyinen maksusi",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi"
+  "YourPrice": "Hintasi",
+  "TransactionsLimit": "Sivu näyttää viimeiset 25 tapahtumaa valitulle ajanjaksolle. Koko tapahtumahistoria on saatavilla \"{{buttonName}}\"-painikkeen kautta."
 }

@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "لم تقم بإضافة أي دفعة",
   "YourCurrentPayment": "دفعتك الحالية",
   "YourCurrentPlan": "<1>خطة الاشتراك الحالية:</1> {{amount}} <2>({{price}}/الشهر)</2>",
-  "YourPrice": "سعرك"
+  "YourPrice": "سعرك",
+  "TransactionsLimit": "تعرض الصفحة آخر 25 معاملة للفترة المحددة. يتوفر سجل المعاملات الكامل عبر الزر \"{{buttonName}}\"."
 }

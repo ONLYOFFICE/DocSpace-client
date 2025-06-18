@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Je hebt nog geen betaling toegevoegd",
   "YourCurrentPayment": "Uw huidige betaling",
   "YourCurrentPlan": "<1>Uw huidige abonnement:</1> {{amount}} <2>({{price}}/maand)</2>",
-  "YourPrice": "Uw prijs"
+  "YourPrice": "Uw prijs",
+  "TransactionsLimit": "De pagina toont de laatste 25 transacties voor de geselecteerde periode. De volledige transactiehistorie is beschikbaar via de \"{{buttonName}}\" knop."
 }

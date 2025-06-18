@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Você não adicionou nenhum pagamento",
   "YourCurrentPayment": "Seu pagamento atual",
   "YourCurrentPlan": "<1>Seu plano atual:</1> {{valor}} <2>({{preço}}/mês)</2>",
-  "YourPrice": "Seu preço"
+  "YourPrice": "Seu preço",
+  "TransactionsLimit": ""
 }

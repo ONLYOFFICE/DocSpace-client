@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Ödeme eklemeyi unuttunuz",
   "YourCurrentPayment": "Mevcut ödemeniz",
   "YourCurrentPlan": "<1>Mevcut planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Ücret"
+  "YourPrice": "Ücret",
+  "TransactionsLimit": "Sayfa, seçilen dönem için son 25 işlemi görüntüler. Tam işlem geçmişi, \"{{buttonName}}\" butonu aracılığıyla kullanılabilir."
 }

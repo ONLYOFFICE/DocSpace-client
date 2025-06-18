@@ -125,5 +125,8 @@
   "YouHaveNotAddedAnyPayment": "Sie haben keine Zahlung hinzugefügt",
   "YourCurrentPayment": "Ihre aktuelle Zahlung",
   "YourCurrentPlan": "<1>Ihr aktueller Plan:</1> {{amount}} <2>({{price}}/Monat)</2>",
-  "YourPrice": "Ihr Preis"
+  "YourPrice": "Ihr Preis",
+  "ActionCannotBeUndone": "<1>Bitte beachten:</1> Diese Aktion kann nicht rückgängig gemacht werden.",
+  "StorageCapacityUpdated": "Speicherplatz wurde aktualisiert",
+  "TransactionsLimit": "Die Seite zeigt die letzten 25 Transaktionen für den ausgewählten Zeitraum an. Der vollständige Transaktionsverlauf ist über die Schaltfläche \"{{buttonName}}\" verfügbar."
 }

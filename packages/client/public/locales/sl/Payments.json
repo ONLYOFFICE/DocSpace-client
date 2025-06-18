@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Ni bilo dodanega nobenega plačila.",
   "YourCurrentPayment": "Vaša trenutna plačila",
   "YourCurrentPlan": "<1>Vaš trenutni načrt:</1> {{amount}} <2>({{price}}/mesec)</2>",
-  "YourPrice": "Vaša cena"
+  "YourPrice": "Vaša cena",
+  "TransactionsLimit": "Na strani so prikazane zadnje 25 transakcij za izbrani časovni obseg. Celotna zgodovina transakcij je na voljo preko gumba \"{{buttonName}}\"."
 }

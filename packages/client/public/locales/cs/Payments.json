@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Nevložili jste žádnou platbu.",
   "YourCurrentPayment": "Vaše aktuální platba",
   "YourCurrentPlan": "<1>Váš aktuální tarif:</1> {{amount}} <2>({{price}}/měsíc)</2>",
-  "YourPrice": "Vaše cena"
+  "YourPrice": "Vaše cena",
+  "TransactionsLimit": "Stránka zobrazuje posledních 25 transakcí pro vybrané období. Kompletní historie transakcí je dostupná přes tlačítko \"{{buttonName}}\"."
 }

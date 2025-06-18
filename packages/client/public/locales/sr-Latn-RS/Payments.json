@@ -1,6 +1,6 @@
 {
   "AccessingProblem": "Ako ste postojeći korisnik i imate problema sa pristupom ovom prostoru, kontaktirajte administratora.",
-  "ActionCannotBeUndone": "<1>Molimo zapazite:</1> ova akcija se ne može poništiti.",
+  "ActionCannotBeUndone": "<1>Napomena:</1> ova radnja se ne može opozvati.",
   "AdditionalStorage": "Dodatnih {{amount}}",
   "AddPaymentMethod": "Dodajte način plaćanja",
   "AdministratorDescription": "Konfiguracija {{productName}}-a, kreiranje i administracija soba, mogućnost pozivanja i upravljanja korisnicima u {{productName}}-u i virtuelnim sobama, mogućnost upravljanja pravima pristupa.",
@@ -91,7 +91,7 @@
   "StartingNextMonth": "Počinje od sledećeg meseca",
   "StartupSuggestion": "Uradite više sa {{planName}} planom",
   "StartupTitle": "Koristite besplatni {{planName}} plan",
-  "StorageCapacityUpdated": "Izmenjena je kapacitet skladištenja.",
+  "StorageCapacityUpdated": "Kapacitet skladišta je ažuriran",
   "StorageUpgradeMessage": "{{fromSize}} → {{toSize}} ukupno",
   "StorageUponRequest": "Dodatni prostor veći od {{amount}} dostupan je na zahtev.",
   "StorageUsed": "<1>Korišćen prostor:</1> {{amount}}",
@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Niste dodali nijedan način plaćanja",
   "YourCurrentPayment": "Vaš trenutni način plaćanja",
   "YourCurrentPlan": "<1>Vaš trenutni plan:</1> {{amount}} <2>({{price}}/mesečno)</2>",
-  "YourPrice": "Vaša cena"
+  "YourPrice": "Vaša cena",
+  "TransactionsLimit": "Stranica prikazuje poslednjih 25 transakcija za izabrani period. Kompletna istorija transakcija je dostupna putem dugmeta \"{{buttonName}}\"."
 }

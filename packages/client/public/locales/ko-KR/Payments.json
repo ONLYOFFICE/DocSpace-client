@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "결제 정보를 추가하지 않으셨습니다.",
   "YourCurrentPayment": "현재 결제",
   "YourCurrentPlan": "<1>현재 요금제:</1> {{amount}} <2>({{price}}/월)</2>",
-  "YourPrice": "내 요금"
+  "YourPrice": "내 요금",
+  "TransactionsLimit": "선택한 기간 동안의 최근 25건 거래 내역이 표시됩니다. 전체 거래 내역은 \"{{buttonName}}\" 버튼을 통해 이용할 수 있습니다."
 }

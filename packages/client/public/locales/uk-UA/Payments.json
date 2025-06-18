@@ -127,5 +127,6 @@
   "YouHaveNotAddedAnyPayment": "Ви не додали жодного платежу",
   "YourCurrentPayment": "Ваш поточний платіж",
   "YourCurrentPlan": "<1>Ваш поточний план:</1> {{amount}} <2>({{price}}/місяць)</2>",
-  "YourPrice": "Ваша ціна"
+  "YourPrice": "Ваша ціна",
+  "TransactionsLimit": "Сторінка відображає останні 25 транзакцій за вибраний період. Повний перелік транзакцій доступний через кнопку \"{{buttonName}}\"."
 }

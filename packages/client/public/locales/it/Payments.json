@@ -47,5 +47,6 @@
   "UserNotFound": "L’utente <1>{{email}}</1> non è stato trovato.",
   "UserNotFoundMatchingEmail": "Non siamo riusciti a trovare l'utente con l'e-mail Stripe corrispondente.",
   "UsersQuotaAlmostExhausted": "La quota di utenti a pagamento è quasi esaurita.",
-  "YourPrice": "Il tuo prezzo"
+  "YourPrice": "Il tuo prezzo",
+  "TransactionsLimit": "La pagina mostra le ultime 25 transazioni per il periodo selezionato. L'intera cronologia delle transazioni è disponibile tramite il pulsante \"{{buttonName}}\"."
 }

@@ -171,7 +171,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   };
 
   const waitingForTariff = useCallback(
-    (isCancellation) => {
+    (isCancellation: boolean) => {
       isWaitingRef.current = false;
       let requestsCount = 0;
 
@@ -210,7 +210,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   );
 
   const handleStoragePlanChange = useCallback(
-    async (isCancellation = false) => {
+    async (isCancellation: boolean = false) => {
       if (isLoading) return;
 
       setIsLoading(true);

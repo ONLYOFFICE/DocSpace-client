@@ -33,11 +33,13 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 
+import CheckIcon from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 
 import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
 import PayerInformation from "../payments/PayerInformation";
+import { calculateTotalPrice } from "./hooks/resourceUtils";
 
 interface ServiceQuotaFeature {
   title: string;
@@ -94,7 +96,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     const isEnabled = dataset.enabled?.toLowerCase() === "true";
     const id = dataset.id;
 
-    onToggle(id, isEnabled);
+    onToggle(id, !isEnabled);
   };
 
   const textTooltip = () => {
@@ -131,7 +133,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
       ) : null}
       {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
         if (!item.title || !item.image) return null;
-        const eventDisabled = isDisabled || item.cancellation;
+        const eventDisabled = isDisabled || nextStoragePlanSize >= 0;
 
         return (
           <div
@@ -157,7 +159,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 data-disabled={eventDisabled}
               >
                 <ToggleButton
-                  isChecked={item.enabled}
+                  isChecked={currentStoragePlanSize > 0}
                   className={styles.serviceToggle}
                   isDisabled={eventDisabled}
                 />
@@ -174,9 +176,12 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
               <Text fontSize="12px" className={styles.priceDescription}>
                 {item.priceTitle}
               </Text>
-              {item.cancellation ? (
+
+              {nextStoragePlanSize >= 0 ? (
                 <div
-                  className={styles.changeShedule}
+                  className={classNames(styles.changeShedule, {
+                    [styles.warningColor]: true,
+                  })}
                   data-tooltip-id="serviceTooltip"
                 >
                   <InfoIcon />
@@ -193,6 +198,28 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                   />
                 </div>
               ) : null}
+              {typeof nextStoragePlanSize !== "number" &&
+              currentStoragePlanSize > 0 ? (
+                <div
+                  className={classNames(styles.changeShedule, {
+                    [styles.greenColor]: true,
+                  })}
+                >
+                  <CheckIcon />
+                  <Text>
+                    {t("CurrentPaymentMonth", {
+                      price: formatWalletCurrency(
+                        calculateTotalPrice(
+                          currentStoragePlanSize,
+                          storagePriceIncrement,
+                        ),
+                      ),
+                      size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+                    })}
+                  </Text>
+                </div>
+              ) : null}
+
               <div className={styles.priceContainer}>
                 <Text fontSize="12px" fontWeight={600}>
                   {t("PerStorage", {

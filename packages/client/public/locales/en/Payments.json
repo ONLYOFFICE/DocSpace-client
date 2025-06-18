@@ -26,6 +26,7 @@
   "BusinessUpdated": "{{planName}} plan updated",
   "Buy": "Buy",
   "CancelChange": "Cancel change",
+  "CurrentPaymentMonth": "Current payment: {{price}}/month ({{size}})",
   "CannotCreateNewRoom": "Room cannot be created",
   "CannotCreatePaidUsers": "Paid users cannot be added",
   "CannotRestoreRoom": "Room cannot be restored",

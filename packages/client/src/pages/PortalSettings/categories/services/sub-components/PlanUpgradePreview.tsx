@@ -108,6 +108,7 @@ const PlanUpgradePreview = (props) => {
 
   useEffect(() => {
     return () => {
+      setPartialUpgradeFee(0);
       if (timeout) clearTimeout(timeout);
       setIsWaitingCalculation(false);
       timeout = null;

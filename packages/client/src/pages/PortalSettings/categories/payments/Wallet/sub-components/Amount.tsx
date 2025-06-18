@@ -45,6 +45,8 @@ type AmountProps = {
   reccomendedAmount?: string;
 };
 
+const MAX_LENGTH = 6;
+
 const Amount = (props: AmountProps) => {
   const {
     language,
@@ -72,9 +74,10 @@ const Amount = (props: AmountProps) => {
   const onSelectAmount = (data: TTabItem) => {
     const currentAmount = amount ? parseInt(amount, 10) : 0;
     const selectedValue = parseInt(data.id, 10);
-    const newAmount = (currentAmount + selectedValue).toString();
+    const newTotal = (currentAmount + selectedValue).toString();
 
-    setAmount(newAmount);
+    const amountValue = newTotal.length <= MAX_LENGTH ? newTotal : amount;
+    setAmount(amountValue);
   };
 
   const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,7 +129,7 @@ const Amount = (props: AmountProps) => {
           type={InputType.text}
           placeholder={t("EnterAmount")}
           isDisabled={isDisabled || !walletCustomerEmail}
-          maxLength={6}
+          maxLength={MAX_LENGTH}
         />
         {reccomendedAmount ? (
           <Text className={styles.reccomendedAmount}>

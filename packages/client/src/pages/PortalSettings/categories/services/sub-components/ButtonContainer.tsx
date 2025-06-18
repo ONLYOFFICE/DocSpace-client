@@ -40,9 +40,10 @@ interface ButtonContainerProps {
   isLoading: boolean;
   isExceedingStorageLimit: boolean;
   isNullAmount: boolean;
-  isPaymentUnavalable: boolean;
+  isPaymentBlockedByBalance: boolean;
   isCurrentStoragePlan?: boolean;
   hasStorageSubscription?: boolean;
+  isDowngradeStoragePlan?: boolean;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
@@ -54,8 +55,9 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     onBuy,
     onSendRequest,
     title,
-    isPaymentUnavalable,
+    isPaymentBlockedByBalance,
     isCurrentStoragePlan,
+    isDowngradeStoragePlan,
     hasStorageSubscription,
   } = props;
 
@@ -73,9 +75,9 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
         isLoading={isLoading || isWaitingCalculation}
         isDisabled={
-          !isExceedingStorageLimit
+          !isExceedingStorageLimit && !isDowngradeStoragePlan
             ? (!hasStorageSubscription && isNullAmount) ||
-              isPaymentUnavalable ||
+              isPaymentBlockedByBalance ||
               isCurrentStoragePlan
             : false
         }

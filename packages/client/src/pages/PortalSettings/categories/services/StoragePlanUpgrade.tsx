@@ -101,6 +101,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     isPlanUpgrade,
     formatWalletCurrency,
     buttonTitle,
+    isPlanDowngrade,
   } = useServicesActions();
 
   const { isRTL } = useInterfaceDirection();
@@ -108,14 +109,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
   const totalPrice = calculateTotalPrice(amount, storagePriceIncrement);
-  const isInsufficientFunds = isWalletBalanceInsufficient(totalPrice);
+
   const isUpgradeStoragePlan = isPlanUpgrade(amount);
+  const isDowngradeStoragePlan = isPlanDowngrade(amount);
   const newStorageSizeOnUpgrade =
     isUpgradeStoragePlan && currentStoragePlanSize > 0;
 
-  const isPaymentUnavalable = newStorageSizeOnUpgrade
+  const isPaymentBlockedByBalance = newStorageSizeOnUpgrade
     ? isWalletBalanceInsufficient(partialUpgradeFee)
-    : isInsufficientFunds;
+    : isWalletBalanceInsufficient(totalPrice);
 
   const buttonMainTitle = buttonTitle(amount);
 
@@ -369,9 +371,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
             {amount || hasStorageSubscription ? (
               <WalletContainer
                 onTopUp={onTopUpClick}
-                isPaymentUnavalable={isPaymentUnavalable}
+                isPaymentBlockedByBalance={isPaymentBlockedByBalance}
                 isExceedingStorageLimit={isExceedingStorageLimit}
                 isCurrentStoragePlan={isCurrentStoragePlan}
+                isDowngradeStoragePlan={isDowngradeStoragePlan}
               />
             ) : null}
           </div>
@@ -386,7 +389,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
             onBuy={onBuy}
             onSendRequest={onSendRequest}
             isNullAmount={amount === 0}
-            isPaymentUnavalable={isPaymentUnavalable}
+            isPaymentBlockedByBalance={isPaymentBlockedByBalance}
+            isDowngradeStoragePlan={isDowngradeStoragePlan}
           />
         </ModalDialog.Footer>
       </ModalDialog>

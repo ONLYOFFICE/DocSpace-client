@@ -59,8 +59,9 @@ const Services: React.FC<ServicesProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await servicesInit();
+        await servicesInit(t);
       } catch (error) {
+        console.error(error);
         toastr.error(t("Common:UnexpectedError"));
       }
     };

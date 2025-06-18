@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3> на рік</3>",
   "TransactionHistory": "Історія транзакцій",
   "TransactionPeriod": "Період транзакцій",
+  "TransactionsLimit": "Сторінка відображає останні 25 транзакцій за вибраний період. Повний перелік транзакцій доступний через кнопку \"{{buttonName}}\".",
   "Upgrade": "Оновлення",
   "UpgradeNow": "Підвищити зараз",
   "UpgradePlan": "Підвищити план",

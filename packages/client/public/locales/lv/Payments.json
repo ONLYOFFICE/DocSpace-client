@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/gadā</3>",
   "TransactionHistory": "Transakciju vēsture",
   "TransactionPeriod": "Transakcijas periods",
+  "TransactionsLimit": "Lapa parāda pēdējās 25 darījumu reģistrēšanas ziņas izvēlētajā periodā. Pilnais darījumu reģistrs ir pieejams, izmantojot \"{{buttonName}}\" pogu.",
   "Upgrade": "Atjaunināt",
   "UpgradeNow": "Atjaunot tagad",
   "UpgradePlan": "Jaunināt plānu",

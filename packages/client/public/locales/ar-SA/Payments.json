@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/سنة</3>",
   "TransactionHistory": "سجل المعاملات",
   "TransactionPeriod": "فترة المعاملات",
+  "TransactionsLimit": "تعرض الصفحة آخر 25 معاملة للفترة المحددة. يتوفر سجل المعاملات الكامل عبر الزر \"{{buttonName}}\".",
   "Upgrade": "ترقية",
   "UpgradeNow": "قم بالترقية الآن",
   "UpgradePlan": "قم بالترقية إلى خطة جديدة",

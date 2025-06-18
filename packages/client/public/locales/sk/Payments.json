@@ -110,6 +110,7 @@
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/rok</3>",
   "TransactionHistory": "História transakcií",
   "TransactionPeriod": "Obdobie transakcie",
+  "TransactionsLimit": "Stránka zobrazuje posledných 25 transakcií za vybrané obdobie. Úplná história transakcií je dostupná cez tlačidlo \"{{buttonName}}\".",
   "Upgrade": "Aktualizácia",
   "UpgradeNow": "Aktualizovať teraz",
   "UpgradePlan": "Aktualizovať plán",

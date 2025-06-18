@@ -68,6 +68,7 @@ const TagsCell = ({
     <div style={styleTagsCell}>
       <Tags
         tags={tags}
+        id={item.id}
         columnCount={tagCount}
         onSelectTag={onSelectTag}
         showCreateTag={isHovered || isActive || checkedProps}

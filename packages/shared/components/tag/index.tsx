@@ -62,10 +62,9 @@ const TagPure = ({
   onMouseEnter,
   onMouseLeave,
   advancedPopup,
-  setIsOpenDropdown,
+  setOpenDropdown,
+  openDropdown,
 }: TagProps) => {
-  const [openDropdown, setOpenDropdown] = React.useState(false);
-
   const tagRef = React.useRef<HTMLDivElement | null>(null);
   const isMountedRef = React.useRef(true);
 
@@ -82,10 +81,9 @@ const TagPure = ({
       )
         return;
 
-      setIsOpenDropdown?.(false);
-      setOpenDropdown(false);
+      setOpenDropdown?.(false);
     },
-    [setIsOpenDropdown],
+    [setOpenDropdown],
   );
 
   React.useEffect(() => {
@@ -112,11 +110,9 @@ const TagPure = ({
     if (target?.className?.includes("backdrop-active")) return;
     e.stopPropagation();
 
-    setOpenDropdown((prev) => {
-      const value = !prev;
-      setIsOpenDropdown?.(value);
-      return value;
-    });
+    console.log("openDropdownAction", { e });
+
+    setOpenDropdown?.((prev) => !prev);
   };
 
   const onClickAction = React.useCallback(
@@ -178,7 +174,7 @@ const TagPure = ({
         </div>
 
         {advancedPopup ? (
-          advancedPopup(openDropdown, tagRef, onClickOutside)
+          advancedPopup(!!openDropdown, tagRef, onClickOutside)
         ) : (
           <DropDown
             open={openDropdown}

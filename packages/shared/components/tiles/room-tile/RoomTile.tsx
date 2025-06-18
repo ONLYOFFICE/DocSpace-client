@@ -118,9 +118,7 @@ export const RoomTile = ({
   const topContent = (
     <>
       {RoomsTileContent}
-      <div onMouseEnter={onHover} onMouseLeave={onLeave}>
-        {badges}
-      </div>
+      <div>{badges}</div>
     </>
   );
 
@@ -136,12 +134,12 @@ export const RoomTile = ({
 
   const bottomContent = (
     <Tags
-      columnCount={columnCount}
-      onSelectTag={handleTagSelect}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
       tags={tags}
       className="room-tags"
+      id={item.id.toString()}
+      columnCount={columnCount}
+      onSelectTag={handleTagSelect}
+      key={`tags-${item.id.toString()}`}
       showCreateTag={isHovered || checked}
     />
   );

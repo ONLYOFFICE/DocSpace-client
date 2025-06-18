@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export interface TagSelectorProps {
-  reference: React.RefObject<HTMLElement | null>;
-  onClose: (event: MouseEvent) => void;
   tags: string[];
+  roomId: string | number;
+  onClose: (event: MouseEvent) => void;
   onSelectTag: (tag?: object) => void;
+  reference: React.RefObject<HTMLElement | null>;
 }
 
 export type TTag = {

@@ -25,8 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { FC } from "react";
+import isNil from "lodash/isNil";
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { classNames } from "../../utils/classNames";
+import { useIsTable } from "../../hooks/useIsTable";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 import { Tag, TagProps } from "../tag";
 import { TagSelector } from "../tag-selector";
@@ -53,14 +57,22 @@ const Tags: FC<TagsProps> = ({
 
   const tagsRef = React.useRef<HTMLDivElement>(null);
 
-  const canShowCreate = isOpenDropdown || showCreateTag;
+  const isMobileView = useIsMobile();
+  const isTableView = useIsTable();
+
+  const canShowCreate =
+    isOpenDropdown ||
+    showCreateTag ||
+    isMobileDevice ||
+    isMobileView ||
+    isTableView;
 
   const advancedPopup: TagProps["advancedPopup"] = (
     isOpen,
     reference,
     onClose,
   ) => {
-    if (!isOpen) return;
+    if (!isOpen || isNil(id)) return;
 
     const tempTags = tags.map((tag) =>
       typeof tag === "string" ? tag : tag.label,
@@ -68,6 +80,7 @@ const Tags: FC<TagsProps> = ({
 
     return (
       <TagSelector
+        roomId={id}
         tags={tempTags}
         onClose={onClose}
         reference={reference}
@@ -187,7 +200,8 @@ const Tags: FC<TagsProps> = ({
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             advancedPopup={tag.advancedOptions ? advancedPopup : undefined}
-            setIsOpenDropdown={setIsOpenDropdown}
+            openDropdown={isOpenDropdown}
+            setOpenDropdown={setIsOpenDropdown}
           />
         );
       })}

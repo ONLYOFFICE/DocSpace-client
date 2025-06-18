@@ -53,7 +53,7 @@ import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url
 import { useClickOutside } from "../../utils/useClickOutside";
 import { useIsMobile } from "../../hooks/useIsMobile";
 
-import { getTags } from "../../api/rooms";
+import { getTags, editRoom } from "../../api/rooms";
 
 import { Tag } from "../tag";
 import { Text } from "../text";
@@ -73,10 +73,11 @@ import {
 import type { TagSelectorProps, TTag } from "./TagSelector.types";
 
 export const TagSelector: React.FC<TagSelectorProps> = ({
-  reference,
+  roomId,
   onClose,
-  tags: propsTags,
+  reference,
   onSelectTag,
+  tags: propsTags,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -94,7 +95,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
   const deferredTagValue = useDeferredValue(newTagValue);
 
   const isMobile = useIsMobile();
-  useClickOutside(isMobile ? modalRef : ref, onClose, [onClose]);
+  useClickOutside(isMobile ? modalRef : ref, onClose);
 
   const { t } = useTranslation("Common");
 
@@ -198,6 +199,43 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
     );
   }, [deferredTagValue, filteredTags]);
 
+  const handleCreateTag = async () => {
+    const trimmedTagValue = newTagValue.trim();
+    if (trimmedTagValue.length > 0) {
+      const newTags = [...propsTags, newTagValue];
+
+      await editRoom(roomId, { tags: newTags });
+
+      setNewTagValue("");
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (event.key) {
+      case "Enter":
+        handleCreateTag();
+        break;
+      case "Escape":
+        setNewTagValue("");
+        break;
+      default:
+        break;
+    }
+  };
+
+  const editTagHandleKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (event.key) {
+      case "Enter":
+        confirmEdit();
+        break;
+      case "Escape":
+        cancelEdit();
+        break;
+      default:
+        break;
+    }
+  };
+
   const element = (
     <div
       onClick={(event) => event.stopPropagation()}
@@ -214,6 +252,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
         className={styles.input}
         onChange={onChangeTitleTag}
         placeholder={t("Common:AddTag")}
+        onKeyDown={handleKeyDown}
       />
       <hr className={styles.divider} />
       {showCreateTag ? (
@@ -233,6 +272,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
             iconClassName={styles.createTagIcon}
             tag={deferredTagValue}
             label={deferredTagValue}
+            onClick={handleCreateTag}
           />
         </Text>
       ) : null}
@@ -269,6 +309,7 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
                       value={editValue}
                       size={InputSize.base}
                       type={InputType.text}
+                      onKeyDown={editTagHandleKey}
                       className={styles.editInput}
                       onChange={(e) => setEditValue(e.target.value)}
                     />

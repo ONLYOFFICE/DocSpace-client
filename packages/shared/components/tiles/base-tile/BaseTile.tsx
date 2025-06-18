@@ -178,12 +178,7 @@ export const BaseTile = ({
       <div className={styles.topContent}>
         {element && !isEdit ? (
           !inProgress ? (
-            <div
-              className={iconContainerClassNames}
-              ref={checkboxContainerRef}
-              onMouseEnter={onHover}
-              onMouseLeave={onLeave}
-            >
+            <div className={iconContainerClassNames} ref={checkboxContainerRef}>
               <div className={iconClassNames} onClick={onRoomIconClick}>
                 {element}
               </div>

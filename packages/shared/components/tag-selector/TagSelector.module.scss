@@ -56,6 +56,14 @@
   }
 }
 
+:global(#modal-dialog) {
+  :local {
+    .modalBody {
+      padding: 0px;
+    }
+  }
+}
+
 .tagSelector {
   position: fixed;
 
@@ -80,7 +88,6 @@
 
   @include mixins.mobile {
     width: 100%;
-    padding: 6px 0 0 0;
     position: static;
     box-shadow: none;
     height: 300px;
@@ -205,10 +212,6 @@
   padding: 1px 7px;
 
   box-sizing: border-box;
-}
-
-.modalBody {
-  padding-block-end: 10px !important;
 }
 
 .scrollbar {

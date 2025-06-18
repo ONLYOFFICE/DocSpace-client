@@ -72,5 +72,6 @@ export type TagProps = {
     onClose: (event: MouseEvent) => void,
   ) => React.ReactNode;
 
-  setIsOpenDropdown?: (isOpen: boolean) => void;
+  openDropdown?: boolean;
+  setOpenDropdown?: React.Dispatch<React.SetStateAction<boolean>>;
 };

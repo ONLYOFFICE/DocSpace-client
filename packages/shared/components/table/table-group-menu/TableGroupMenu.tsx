@@ -30,20 +30,20 @@ import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.naviga
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
 import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
-import { Text } from "../text";
-import { Checkbox } from "../checkbox";
-import { ComboBox, TOption } from "../combobox";
-import { IconButton } from "../icon-button";
+import { Text } from "../../text";
+import { Checkbox } from "../../checkbox";
+import { ComboBox, TOption } from "../../combobox";
+import { IconButton } from "../../icon-button";
 
 import {
   StyledTableGroupMenu,
   StyledScrollbar,
   StyledInfoPanelToggleColorThemeWrapper,
-} from "./Table.styled";
+} from "../Table.styled";
 
-import { TableGroupMenuProps } from "./Table.types";
+import { TableGroupMenuProps } from "../Table.types";
 
-import { GroupMenuItem } from "./sub-components/group-menu-item";
+import { GroupMenuItem } from "../sub-components/group-menu-item";
 
 const TableGroupMenu = (props: TableGroupMenuProps) => {
   const {

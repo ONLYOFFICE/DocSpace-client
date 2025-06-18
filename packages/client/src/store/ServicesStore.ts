@@ -67,6 +67,8 @@ class ServicesStore {
 
   partialUpgradeFee: number = 0;
 
+  reccomendedAmount: number = 0;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -128,6 +130,11 @@ class ServicesStore {
     this.servicesQuotas = res[0];
 
     return res;
+  };
+
+
+  setReccomendedAmount = (amount: number) => {
+    this.reccomendedAmount = amount;
   };
 
   servicesInit = async (t: TTranslation) => {

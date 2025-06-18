@@ -40,7 +40,6 @@ import { getConvertedSize } from "@docspace/shared/utils/common";
 
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
-import TopUpModal from "../payments/Wallet/TopUpModal";
 import { useServicesActions } from "./hooks/useServicesActions";
 import { PaymentProvider } from "./context/PaymentContext";
 import ButtonContainer from "./sub-components/ButtonContainer";
@@ -48,6 +47,7 @@ import { calculateTotalPrice } from "./hooks/resourceUtils";
 import StorageInformation from "./sub-components/StorageInformation";
 import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
+import TopUpContainer from "./sub-components/TopUpContainer";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -275,18 +275,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     if (isVisibleWalletSettings) setVisibleWalletSetting(false);
   };
 
-  const container = isVisibleContainer ? (
-    <TopUpModal
-      visible={isVisibleContainer}
-      onClose={onCloseTopUpModal}
-      headerProps={{
-        isBackButton: true,
-        onBackClick: onCloseTopUpModal,
-        onCloseClick: onCloseTopUpModal,
-      }}
-    />
-  ) : null;
-
   const amountTabs = () => {
     const amounts = [100, 200, 500, 1024];
     return amounts.map((item) => {
@@ -297,6 +285,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       return { value: item, name };
     });
   };
+
+  const container = isVisibleContainer ? (
+    <TopUpContainer
+      totalPrice={totalPrice}
+      isVisibleContainer={isVisibleContainer}
+      onCloseTopUpModal={onCloseTopUpModal}
+      newStorageSizeOnUpgrade={newStorageSizeOnUpgrade}
+    />
+  ) : null;
 
   if (isRequestDialog) {
     return (

@@ -42,10 +42,17 @@ type AmountProps = {
   language: string;
   currency: string;
   walletCustomerEmail?: boolean;
+  reccomendedAmount?: string;
 };
 
 const Amount = (props: AmountProps) => {
-  const { language, currency, walletCustomerEmail, isDisabled } = props;
+  const {
+    language,
+    currency,
+    walletCustomerEmail,
+    isDisabled,
+    reccomendedAmount,
+  } = props;
 
   const { amount, setAmount } = useAmountValue();
   const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
@@ -107,6 +114,7 @@ const Amount = (props: AmountProps) => {
         <Text fontWeight={600} className={styles.amountTitle}>
           {t("Amount")}
         </Text>
+
         <TextInput
           value={amount}
           onChange={onChangeTextInput}
@@ -118,6 +126,11 @@ const Amount = (props: AmountProps) => {
           isDisabled={isDisabled || !walletCustomerEmail}
           maxLength={6}
         />
+        {reccomendedAmount ? (
+          <Text className={styles.reccomendedAmount}>
+            {t("RecommendedTopUpAmount", { amount: reccomendedAmount })}
+          </Text>
+        ) : null}
       </div>
       {!walletCustomerEmail ? (
         <Tooltip

@@ -61,6 +61,7 @@ type TopUpModalProps = {
   };
   walletBalance?: number;
   wasFirstTopUp?: boolean;
+  reccomendedAmount?: string;
 };
 
 const TopUpModal = (props: TopUpModalProps) => {
@@ -78,6 +79,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     headerProps,
     walletBalance = 0,
     wasFirstTopUp,
+    reccomendedAmount,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -111,11 +113,13 @@ const TopUpModal = (props: TopUpModalProps) => {
               accountLink={accountLink!}
               isDisabled={isLoading}
             />
+
             <Amount
               language={language!}
               currency={currency}
               walletCustomerEmail={walletCustomerEmail}
               isDisabled={isLoading}
+              reccomendedAmount={reccomendedAmount}
             />
 
             {wasFirstTopUp && walletCustomerEmail ? (

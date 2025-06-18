@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 
 import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";
 
@@ -47,11 +48,17 @@ import { usePaymentContext } from "../context/PaymentContext";
 let timeout: NodeJS.Timeout;
 let controller: AbortController;
 
+const getDirectionalText = (isRTL) => {
+  return isRTL ? `>1` : `<1`;
+};
+
 const PlanUpgradePreview = (props) => {
   const { currentStoragePlanSize, amount, daysUtilPayment } = props;
   const { setFuturePayment, futurePayment, setIsWaitingCalculation } =
     usePaymentContext();
-  const { t } = useTranslation("Payments");
+  const { isRTL } = useInterfaceDirection();
+
+  const { t } = useTranslation(["Payments", "Common"]);
   const [isLoading, setIsLoading] = useState(false);
 
   const { formatWalletCurrency, calculateDifferenceBetweenPlan } =
@@ -76,7 +83,10 @@ const PlanUpgradePreview = (props) => {
             controller.signal,
           );
 
-          if (!currentWriteOff) return;
+          if (!currentWriteOff) {
+            toastr.error(t("Common:UnexpectedError"));
+            return;
+          }
 
           const paymentAmount = currentWriteOff.amount;
           setFuturePayment(paymentAmount);
@@ -99,6 +109,8 @@ const PlanUpgradePreview = (props) => {
     };
   }, []);
 
+  const days = daysUtilPayment || getDirectionalText(isRTL);
+
   return (
     <>
       <Text fontWeight={700} fontSize="16px">
@@ -119,7 +131,7 @@ const PlanUpgradePreview = (props) => {
             fontSize="11px"
             className={styles.priceForEach}
           >
-            {t("RemainingDays", { count: daysUtilPayment })}
+            {t("RemainingDays", { count: days })}
           </Text>
         </div>
 
@@ -136,7 +148,7 @@ const PlanUpgradePreview = (props) => {
                 fontSize="11px"
                 className={styles.priceForEach}
               >
-                {t("ForDays", { count: daysUtilPayment })}
+                {t("ForDays", { count: days })}
               </Text>
             </>
           )}

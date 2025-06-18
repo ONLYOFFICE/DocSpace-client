@@ -39,6 +39,7 @@ import StoragePlanCancel from "./StoragePlanCancel";
 type ServicesProps = {
   servicesInit: () => void;
   isInitServicesPage: boolean;
+  isVisibleWalletSettings: boolean;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -46,6 +47,7 @@ let timerId: NodeJS.Timeout | null = null;
 const Services: React.FC<ServicesProps> = ({
   servicesInit,
   isInitServicesPage,
+  isVisibleWalletSettings,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -65,6 +67,10 @@ const Services: React.FC<ServicesProps> = ({
 
     fetchData();
   }, [servicesInit]);
+
+  useEffect(() => {
+    if (isVisibleWalletSettings) setIsStorageVisible(isVisibleWalletSettings);
+  }, [isVisibleWalletSettings]);
 
   useEffect(() => {
     timerId = setTimeout(() => {
@@ -119,11 +125,13 @@ const Services: React.FC<ServicesProps> = ({
 };
 
 export const Component = inject(({ servicesStore }: TStore) => {
-  const { servicesInit, isInitServicesPage } = servicesStore;
+  const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
+    servicesStore;
 
   return {
     servicesInit,
     isInitServicesPage,
+    isVisibleWalletSettings,
   };
 })(observer(Services));
 

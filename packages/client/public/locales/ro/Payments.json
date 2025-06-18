@@ -117,7 +117,7 @@
   "UserNotFoundMatchingEmail": "Nu s-a găsit utilizatorul cu un e-mail Stripe potrivit.",
   "UsersQuotaAlmostExhausted": "Cota spațiului de stocare pentru utilizatorii cu plată aproape epuizată.",
   "Wallet": "Portofel",
-  "WalletDescription": "Portofelul {{productName}} vă permite să achiziţionaţi cu ușurință spațiu de stocare și instrumente IA. Pentru început, depuneți banii în portofelul dvs și selectați servicii de care aveți nevoie din secțiunea Servicii.",
+  "WalletDescription": "Portofelul {{productName}} vă permite să achiziţionaţi cu ușurință spațiu de stocare. Pentru început, depuneți banii în portofelul dvs și selectați servicii de care aveți nevoie din secțiunea Servicii.",
   "WalletRefilled": "Portofelul a fost alimentat",
   "WantToCancelStoragePlan": "Sigur doriţi să anulați abonamentul cu spațiul de stocare suplimentar?",
   "Warning": "Accesul la spațiul de {{amount}} va fi păstrat până la sfârșitul perioadei active de facturare. Dacă spaţiul de stocare depășește spațiul de stocare nou la începutul următoarei perioade, veți fi facturat pentru spațiul utilizat de facto rotunjit la cea mai apropiată valoare exprimată în {{storageUnit}}.",

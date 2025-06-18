@@ -117,7 +117,7 @@
   "UserNotFoundMatchingEmail": "Käyttäjää vastaavalla Stripe-sähköpostilla ei löytynyt.",
   "UsersQuotaAlmostExhausted": "Maksettujen käyttäjien määrän kiintiö on melkein täysi.",
   "Wallet": "Lompakko",
-  "WalletDescription": "{{productName}}-lompakolla voit helposti ostaa tallennustilaa ja tekoälytyökaluja. Lisää varoja lompakkoosi ja valitse tarvitsemasi palvelut Palvelut-osiossa päästäksesi alkuun.",
+  "WalletDescription": "{{productName}}-lompakolla voit helposti ostaa tallennustilaa. Lisää varoja lompakkoosi ja valitse tarvitsemasi palvelut Palvelut-osiossa päästäksesi alkuun.",
   "WalletRefilled": "Lompakko ladattu",
   "WantToCancelStoragePlan": "Oletko varma, että haluat peruuttaa lisäsäilytystilan tilauksesi?",
   "Warning": "Pidät täydet {{amount}} käyttöoikeutesi voimassa maksetun tilausjakson loppuun asti. Jos tallennustilasi ylittää uuden rajan seuraavan jakson alussa, sinulta veloitetaan todellisen käytön mukaisesti, pyöristettynä lähimpään {{storageUnit}}.",

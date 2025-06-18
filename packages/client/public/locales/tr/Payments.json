@@ -117,7 +117,7 @@
   "UserNotFoundMatchingEmail": "Eşleşen Stripe e-postasına sahip kullanıcıyı bulamadık.",
   "UsersQuotaAlmostExhausted": "Ücretli kullanıcı kotası neredeyse doldu.",
   "Wallet": "Cüzdan",
-  "WalletDescription": "{{productName}} Cüzdanı, depolama alanı ve yapay zeka araçlarını kolayca satın almanızı sağlar. Başlamak için cüzdanınıza para ekleyin ve ihtiyaç duyduğunuz hizmetleri Hizmetler bölümünde seçin.",
+  "WalletDescription": "{{productName}} Cüzdanı, depolama alanı kolayca satın almanızı sağlar. Başlamak için cüzdanınıza para ekleyin ve ihtiyaç duyduğunuz hizmetleri Hizmetler bölümünde seçin.",
   "WalletRefilled": "Cüzdan dolduruldu",
   "WantToCancelStoragePlan": "Ek depolama aboneliğinizi iptal etmekten emin misiniz?",
   "Warning": "Tamamen {{amount}} erişiminiz, ücretli faturalandırma sürenizin sonuna kadar devam edecektir. Bir sonraki dönemin başlangıcında depolama alanınız yeni limite aşarsa, en yakın {{storageUnit}} değerine yuvarlanmış gerçek kullanımınız için ücretlendirileceksiniz.",

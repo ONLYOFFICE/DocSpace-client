@@ -119,7 +119,7 @@
   "TransactionPeriod": "Période de transaction",
   "Upgrade": "Améliorer",
   "Wallet": "Wallet",
-  "WalletDescription": "Le {{productName}} Wallet vous permet d'acheter facilement de l'espace de stockage et des outils d'intelligence artificielle. Ajoutez des fonds à votre wallet et sélectionnez les services dont vous avez besoin dans la section Services pour commencer.",
+  "WalletDescription": "Le {{productName}} Wallet vous permet d'acheter facilement de l'espace de stockage. Ajoutez des fonds à votre wallet et sélectionnez les services dont vous avez besoin dans la section Services pour commencer.",
   "WalletRefilled": "Wallet rechargé",
   "WantToCancelStoragePlan": "Souhaitez-vous vraiment annuler votre abonnement à l'espace de stockage supplémentaire ?",
   "Warning": "Vous garderez l'accès à la totalité de votre {{amount}} jusqu'à la fin de votre période de facturation payée. Si votre stockage dépasse la nouvelle limite au début de la période suivante, vous serez facturé pour l'utilisation réelle, arrondie à {{storageUnit}} la plus proche.",

@@ -117,7 +117,7 @@
   "UserNotFoundMatchingEmail": "Uyğun Stripe e-poçtu olan istifadəçini tapa bilmədik.",
   "UsersQuotaAlmostExhausted": "Ödənişli istifadəçi kvotası dolmaq üzrədir.",
   "Wallet": "Pul kisəsi",
-  "WalletDescription": "{{productName}} Wallet sizə asanlıqla saxlama sahəsi və AI alətləri satın almağa imkan verir. Valüdana pul əlavə edin və işə başlamak üçün Xidmətlər bölməsində ehtiyacınız olan xidmətləri seçin.",
+  "WalletDescription": "{{productName}} Wallet sizə asanlıqla saxlama sahəsi satın almağa imkan verir. Əməliyyata başlamak üçün, dəstəxəclərinizə vəsait əlavə edin və Xidmətlər bölməsində ehtiyacınız olan xidmətləri seçin.",
   "WalletRefilled": "Pul kisəsi dolduruldu",
   "WantToCancelStoragePlan": "Əlavə saxlama abunəliyini ləğv etmək istədiyinizə əminsiz?",
   "Warning": "Tam {{amount}} girişiniz ödənişli hesablaşma dövrünüzün sonuna qədər saxlanılacaq. Növbəti dövrün əvvəlində saxlama həcməniz yeni limitə çatsa, faktiki istifadəyə görə ödəniş ediləcək, yaxın olan {{storageUnit}} vahidinə yuvarlaqlaşdırılmaqla.",

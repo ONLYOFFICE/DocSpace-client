@@ -117,7 +117,7 @@
   "UserNotFoundMatchingEmail": "Nevarēja atrast lietotāju ar atbilstošo Stripe e-pastu.",
   "UsersQuotaAlmostExhausted": "Maksas lietotāju kvota ir gandrīz izsmelta.",
   "Wallet": "Maka",
-  "WalletDescription": "{{productName}} maks ļauj ērti iegādāties krātuves vietu un mākslīgā intelekta rīkus. Papildiniet savu maku un sadaļā Pakalpojumi atlasiet nepieciešamos pakalpojumus, lai sāktu darbu.",
+  "WalletDescription": "{{productName}} maks ļauj ērti iegādāties krātuves vietu. Papildiniet savu maku un sadaļā Pakalpojumi atlasiet nepieciešamos pakalpojumus, lai sāktu darbu.",
   "WalletRefilled": "Maka papildināšana",
   "WantToCancelStoragePlan": "Vai Jūs patiešām vēlaties atcelt papildu krātuves abonementu?",
   "Warning": "Jūs saglabāsiet pilnu {{amount}} piekļuvi līdz jūsu apmaksātā rēķina perioda beigām. Ja jūsu krātuves apjoms pārsniegs jauno limitu nākamā perioda sākumā, jums tiks izrēķināta maksa par faktisko lietojumu, noapaļotu līdz tuvākajam {{storageUnit}}.",

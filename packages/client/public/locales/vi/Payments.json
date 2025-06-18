@@ -117,7 +117,7 @@
   "UserNotFoundMatchingEmail": "Chúng tôi không thể tìm thấy người dùng có e-mail Stripe phù hợp.",
   "UsersQuotaAlmostExhausted": "Gần như đã dùng hết hạn mức người dùng trả phí.",
   "Wallet": "Ví",
-  "WalletDescription": "Ví {{productName}} cho phép bạn dễ dàng mua không gian lưu trữ và các công cụ AI. Thêm tiền vào ví của bạn và chọn các dịch vụ bạn cần trong phần Dịch vụ để bắt đầu.",
+  "WalletDescription": "Ví {{productName}} cho phép bạn dễ dàng mua dung lượng lưu trữ. Thêm tiền vào ví của bạn và chọn các dịch vụ bạn cần trong phần Dịch vụ để bắt đầu.",
   "WalletRefilled": "Ví đã được nạp đầy",
   "WantToCancelStoragePlan": "Bạn có chắc chắn muốn hủy đăng ký dung lượng lưu trữ bổ sung của mình không?",
   "Warning": "Bạn sẽ giữ quyền truy cập đầy đủ {{amount}} cho đến khi kết thúc chu kỳ thanh toán đã trả. Nếu dung lượng lưu trữ của bạn vượt quá giới hạn mới khi bắt đầu chu kỳ tiếp theo, bạn sẽ bị tính phí cho lượng sử dụng thực tế, làm tròn đến đơn vị {{storageUnit}} gần nhất.",

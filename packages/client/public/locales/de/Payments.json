@@ -115,7 +115,7 @@
   "UserNotFoundMatchingEmail": "Wir konnten den Benutzer mit der passenden Stripe-E-Mail nicht finden.",
   "UsersQuotaAlmostExhausted": "Die Quote für bezahlte Benutzer ist fast erschöpft.",
   "Wallet": "Wallet",
-  "WalletDescription": "Mit dem {{productName}} Wallet können Sie ganz einfach Speicherplatz und KI-Tools erwerben. Laden Sie Ihr Wallet auf und wählen Sie die gewünschten Dienste aus, um loszulegen.",
+  "WalletDescription": "Mit dem {{productName}} Wallet können Sie ganz einfach Speicherplatz erwerben. Laden Sie Ihr Wallet auf und wählen Sie die gewünschten Dienste aus, um loszulegen.",
   "WalletRefilled": "Wallet aufgefüllt",
   "WantToCancelStoragePlan": "Möchten Sie Ihr Abonnement für zusätzlichen Speicherplatz wirklich kündigen?",
   "Warning": "Sie behalten Ihren vollen {{amount}}-Zugriff bis zum Ende Ihres bezahlten Abrechnungszeitraums. Überschreitet Ihr Speicherplatz zu Beginn des nächsten Zeitraums das neue Limit, wird Ihnen der tatsächliche Verbrauch, aufgerundet auf die nächste {{storageUnit}}, in Rechnung gestellt.",

@@ -117,7 +117,7 @@
   "UserNotFoundMatchingEmail": "Nie udało się znaleźć użytkownika z pasującym adresem e-mail Stripe.",
   "UsersQuotaAlmostExhausted": "Limit płatnych użytkowników jest prawie wyczerpany.",
   "Wallet": "Portfel",
-  "WalletDescription": "Portfel {{productName}} umożliwia łatwy zakup przestrzeni dyskowej i narzędzi AI. Dodaj środki na swój portfel i wybierz potrzebne usługi w sekcji Usługi, aby rozpocząć.",
+  "WalletDescription": "Portfel {{productName}} umożliwia łatwy zakup przestrzeni dyskowej. Dodaj środki na swój portfel i wybierz potrzebne usługi w sekcji Usługi, aby rozpocząć.",
   "WalletRefilled": "Portfel doładowany",
   "WantToCancelStoragePlan": "Czy na pewno chcesz anulować subskrypcję dodatkowej przestrzeni dyskowej?",
   "Warning": "Zachowasz pełny dostęp {{amount}} do końca okresu płatnego rozliczenia. Jeśli Twoje zużycie pamięci przekroczy nowy limit na początku kolejnego okresu, zostaniesz obciążony za rzeczywiste zużycie, zaokrąglone do najbliższej jednostki {{storageUnit}}.",

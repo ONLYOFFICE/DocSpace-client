@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
-import { API_PREFIX, BASE_URL } from "../../e2e/utils";
+import { BASE_URL } from "../../e2e/utils";
 
 export const OAUTH_SIGN_IN_PATH = "apisystem/portal/signin";
 

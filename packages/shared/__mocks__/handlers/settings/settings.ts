@@ -29,13 +29,14 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "settings";
 
-export type TSettings =
-  | "wizard"
-  | "wizardWithAmi"
-  | "portalDeactivate"
-  | "noStandalone"
-  | "authenticated"
-  | "noAuth";
+export enum TypeSettings {
+  Wizard = "wizard",
+  WizardWithAmi = "wizardWithAmi",
+  PortalDeactivate = "portalDeactivate",
+  NoStandalone = "noStandalone",
+  Authenticated = "authenticated",
+  NoAuth = "noAuth"
+}
 
 export const settingsWizzard = {
   response: {
@@ -472,21 +473,21 @@ export const settingsPortalDeactivate = {
   response: { ...settingsNoAuth.response, tenantStatus: 1 },
 };
 
-export const settingsResolver = (type: TSettings = "noAuth"): Response => {
-  if (type === "wizard") return new Response(JSON.stringify(settingsWizzard));
-  if (type === "wizardWithAmi")
+export const settingsResolver = (type: TypeSettings = TypeSettings.NoAuth): Response => {
+  if (type === TypeSettings.Wizard) return new Response(JSON.stringify(settingsWizzard));
+  if (type === TypeSettings.WizardWithAmi)
     return new Response(JSON.stringify(settingsWizzardWithAmi));
-  if (type === "portalDeactivate")
+  if (type === TypeSettings.PortalDeactivate)
     return new Response(JSON.stringify(settingsPortalDeactivate));
-  if (type === "noStandalone")
+  if (type === TypeSettings.NoStandalone)
     return new Response(JSON.stringify(settingsNoAuthNoStandalone));
-  if (type === "authenticated")
+  if (type === TypeSettings.Authenticated)
     return new Response(JSON.stringify(settingsAuth));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };
 
-export const settingsHandler = (port: string, type: TSettings = "noAuth") => {
+export const settingsHandler = (port: string, type: TypeSettings = TypeSettings.NoAuth) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
     return settingsResolver(type);
   });

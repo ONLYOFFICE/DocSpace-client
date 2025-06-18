@@ -30,7 +30,7 @@ import { API_PREFIX } from "../../e2e/utils";
 import { ValidationStatus } from "../../../enums";
 import { http, HttpResponse } from "msw";
 
-export const PATH_VALIDATE_PUBLIC_ROOM_PASSWORD = "files/share/:key";
+export const PATH_VALIDATE_PUBLIC_ROOM_PASSWORD = "files/share/*";
 
 const validateSuccess = {
   response: {

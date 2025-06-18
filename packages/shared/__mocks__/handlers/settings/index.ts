@@ -24,163 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  colorThemeHandler,
-  colorThemeResolver,
-  getSuccessColorTheme,
-  PATH as COLOR_THEME_PATH,
-} from "./colorTheme";
-import { ssoHandler, ssoResolver, emptySSO, PATH as SSO_PATH } from "./sso";
-import {
-  licenseRequiredHandler,
-  licenseRequiredResolver,
-  licenseNotRequiredSuccess,
-  licenseRequiredSuccess,
-  PATH as LICENSE_REQUIRED_PATH,
-} from "./licenseRequired";
-import {
-  machineNameHandler,
-  machineNameResolver,
-  machineNameSuccess,
-  PATH as MACHINE_NAME_PATH,
-} from "./machineName";
-import {
-  portalCulturesHandler,
-  portalCulturesResolver,
-  portalCulturesSuccess,
-  PATH as PORTAL_CULTURES_PATH,
-} from "./portalCultures";
-
-import {
-  portalPasswordSettingsHandler,
-  portalPasswordSettingsResolver,
-  portalPasswordSettingsSuccess,
-  PATH as PASSWORD_SETTINGS_PATH,
-} from "./portalPasswordSettings";
-import {
-  portalTimeZoneHandler,
-  portalTimeZoneResolver,
-  portalTimeZonesSuccess,
-  PATH as TIME_ZONES_PATH,
-} from "./portalTimeZones";
-import {
-  settingsHandler,
-  settingsResolver,
-  settingsWizzard,
-  settingsAuth,
-  settingsNoAuth,
-  PATH as SETTINGS_PATH,
-} from "./settings";
-
-import {
-  completeHandler,
-  completeResolver,
-  completeSuccess,
-  PATH as COMPLETE_PATH,
-} from "./complete";
-import {
-  licenseHandler,
-  licenseResolver,
-  licenseSuccess,
-  PATH as LICENCE_PATH,
-} from "./license";
-
-import {
-  tfaAppHandler,
-  tfaAppResolver,
-  tfaAppSuccess,
-  PATH as TFA_APP_PATH,
-} from "./tfaApp";
-import {
-  tfaAppValidateHandler,
-  tfaAppValidateResolver,
-  tfaAppValidateSuccess,
-  PATH as TFA_APP_VALIDATE_PATH,
-} from "./tfaAppValidate";
-
-import {
-  ownerHandler,
-  ownerResolver,
-  ownerSuccess,
-  PATH as OWNER_PATH,
-} from "./owner";
-
-import {
-  companyInfoResolver,
-  companyInfoHandler,
-  companyInfoSuccess,
-  PATH as COMPANY_INFO_PATH,
-} from "./companyInfo";
-
-import {
-  invitationSettingsHandler,
-  invitationSettingsResolver,
-  invitationSettingsSuccess,
-  PATH as INVITATION_SETTINGS_PATH,
-} from "./invitationSettings";
+import { colorThemeHandler } from "./colorTheme";
+import { ssoHandler } from "./sso";
+import { licenseRequiredHandler } from "./licenseRequired";
+import { machineNameHandler } from "./machineName";
+import { portalCulturesHandler } from "./portalCultures";
+import { portalPasswordSettingsHandler } from "./portalPasswordSettings";
+import { portalTimeZoneHandler } from "./portalTimeZones";
+import { settingsHandler, TypeSettings } from "./settings";
+import { completeHandler } from "./complete";
+import { licenseHandler } from "./license";
+import { tfaAppHandler } from "./tfaApp";
+import { tfaAppValidateHandler } from "./tfaAppValidate";
+import { ownerHandler } from "./owner";
+import { invitationSettingsHandler } from "./invitationSettings";
+import { companyInfoHandler } from "./companyInfo";
 
 export {
-  colorThemeHandler,
-  colorThemeResolver,
-  getSuccessColorTheme,
-  COLOR_THEME_PATH,
   ssoHandler,
-  ssoResolver,
-  emptySSO,
-  SSO_PATH,
   licenseRequiredHandler,
-  licenseRequiredResolver,
-  licenseNotRequiredSuccess,
-  licenseRequiredSuccess,
-  LICENSE_REQUIRED_PATH,
   machineNameHandler,
-  machineNameResolver,
-  machineNameSuccess,
-  MACHINE_NAME_PATH,
   portalCulturesHandler,
-  portalCulturesResolver,
-  portalCulturesSuccess,
-  PORTAL_CULTURES_PATH,
   portalPasswordSettingsHandler,
-  portalPasswordSettingsResolver,
-  portalPasswordSettingsSuccess,
-  PASSWORD_SETTINGS_PATH,
   portalTimeZoneHandler,
-  portalTimeZoneResolver,
-  portalTimeZonesSuccess,
-  TIME_ZONES_PATH,
   settingsHandler,
-  settingsResolver,
-  settingsWizzard,
-  settingsAuth,
-  settingsNoAuth,
-  SETTINGS_PATH,
   completeHandler,
-  completeSuccess,
-  COMPLETE_PATH,
-  licenseHandler,
-  licenseSuccess,
-  LICENCE_PATH,
-  tfaAppHandler,
-  tfaAppResolver,
-  tfaAppSuccess,
-  TFA_APP_PATH,
   tfaAppValidateHandler,
-  tfaAppValidateResolver,
-  tfaAppValidateSuccess,
-  TFA_APP_VALIDATE_PATH,
   ownerHandler,
-  ownerSuccess,
-  OWNER_PATH,
   companyInfoHandler,
-  companyInfoSuccess,
-  COMPANY_INFO_PATH,
   invitationSettingsHandler,
-  invitationSettingsSuccess,
-  INVITATION_SETTINGS_PATH,
-  completeResolver,
-  licenseResolver,
-  ownerResolver,
+  tfaAppHandler,
+  colorThemeHandler,
+  licenseHandler,
+  TypeSettings,
 };
 
 export const settingsHandlers = (port: string) => [

@@ -30,7 +30,10 @@ import { API_PREFIX } from "../../e2e/utils";
 
 export const PATH_ROOMS_LIST = "files/rooms*";
 
-export type TRoomList = "isFiltered" | "isDefault";
+export enum TypeRoomList {
+  IsFiltered = "isFiltered",
+  IsDefault = "isDefault",
+}
 
 const current = {
   parentId: 0,
@@ -1998,23 +2001,23 @@ const getEmptyRoomList = (): TGetRooms => {
   };
 };
 
-export const roomListResolver = (rooListType?: TRoomList) => {
-  if (rooListType === "isFiltered") {
+export const roomListResolver = (roomListType?: TypeRoomList) => {
+  if (roomListType === TypeRoomList.IsFiltered) {
     return new Response(JSON.stringify({ response: getRoomList(true) }));
   }
 
-  if (rooListType === "isDefault") {
+  if (roomListType === TypeRoomList.IsDefault) {
     return new Response(JSON.stringify({ response: getRoomList() }));
   }
 
   return new Response(JSON.stringify({ response: getEmptyRoomList() }));
 };
 
-export const roomListHandler = (port: string, rooListType?: TRoomList) => {
+export const roomListHandler = (port: string, roomListType?: TypeRoomList) => {
   return http.get(
     `http://localhost:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
     () => {
-      return roomListResolver(rooListType);
+      return roomListResolver(roomListType);
     },
   );
 };

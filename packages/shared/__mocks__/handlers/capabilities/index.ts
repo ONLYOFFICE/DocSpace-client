@@ -24,21 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  capabilitiesHandler,
-  capabilitiesResolver,
-  emptySuccessCapabilities,
-  successCapabilities,
-  PATH as CAPABILITIES_PATH,
-} from "./capabilities";
+import { capabilitiesHandler } from "./capabilities";
 
-export {
-  capabilitiesHandler,
-  capabilitiesResolver,
-  emptySuccessCapabilities,
-  successCapabilities,
-  CAPABILITIES_PATH,
-};
+export { capabilitiesHandler };
 
 export const capabilitiesHandlers = (port: string) => [
   capabilitiesHandler(port),

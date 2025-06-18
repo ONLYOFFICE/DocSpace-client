@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { confirmHandler } from "./confirm";
+import { confirmHandler, ErrorConfirm } from "./confirm";
 import { loginHandler } from "./login";
 import { loginWithTfaCodeHandler } from "./loginWithTfaCode";
 
-export { PATH as CONFIRM_PATH, confirmResolver } from "./confirm";
-
-export { PATH as LOGIN_PATH, loginResolver } from "./login";
+export { confirmHandler, loginHandler, loginWithTfaCodeHandler, ErrorConfirm };
 
 export const authenticationHandlers = (port: string) => [
   loginHandler(port),

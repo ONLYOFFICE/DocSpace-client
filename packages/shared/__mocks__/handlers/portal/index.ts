@@ -24,59 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  suspendPortalHandler,
-  suspendPortalResolver,
-  suspendSuccess,
-  PATH as SUSPEND_PATH,
-} from "./suspend";
-import {
-  continuePortalHandler,
-  continuePortalResolver,
-  continueSuccess,
-  PATH as CONTINUE_PATH,
-} from "./continue";
-import {
-  deletePortalHandler,
-  deletePortalResolver,
-  deleteSuccess,
-  PATH as DELETE_PATH,
-} from "./delete";
-import {
-  restoreProgressHandler,
-  restoreProgressResolver,
-  PATH_RESTORE_PROGRESS,
-} from "./restoreProgress";
+import { suspendPortalHandler } from "./suspend";
+import { continuePortalHandler } from "./continue";
+import { deletePortalHandler } from "./delete";
+import { restoreProgressHandler } from "./restoreProgress";
 
 export {
   suspendPortalHandler,
-  suspendPortalResolver,
-  suspendSuccess,
-  SUSPEND_PATH,
-};
-
-export {
   continuePortalHandler,
-  continuePortalResolver,
-  continueSuccess,
-  CONTINUE_PATH,
-};
-
-export {
   deletePortalHandler,
-  deletePortalResolver,
-  deleteSuccess,
-  DELETE_PATH,
-};
-
-export {
   restoreProgressHandler,
-  restoreProgressResolver,
-  PATH_RESTORE_PROGRESS,
 };
 
 export const portalHandlers = (port: string) => [
   suspendPortalHandler(port),
   continuePortalHandler(port),
   deletePortalHandler(port),
+  restoreProgressHandler(port),
 ];

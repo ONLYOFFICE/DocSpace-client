@@ -27,20 +27,21 @@
  */
 
 import path from "path";
-import { http } from "msw";
+import { http, HttpResponse } from "msw";
 import fs from "fs";
 
-// Read the SVG file as a string instead of importing it directly
-const base64Image = path.join(
+const LOGO_PATH = "/images/logo/loginpage.svg";
+const DARK_LOGO_PATH = "/images/logo/dark_loginpage.svg";
+
+const LoginImage = path.join(
   __dirname,
   "../../../../../public/images/logo/loginpage.svg",
 );
 
-export const logoHandler = () => {
-  return http.get("*/**/logo.ashx**", async ({ request }) => {
+const logoHandlerNode = () => {
+  return http.get("*/**/logo.ashx**", async () => {
     try {
-      // Read the SVG file
-      const svgContent = fs.readFileSync(base64Image);
+      const svgContent = fs.readFileSync(LoginImage);
 
       return new Response(svgContent, {
         headers: {
@@ -54,3 +55,20 @@ export const logoHandler = () => {
     }
   });
 };
+
+const logoHandlerBrowser = () => {
+  return http.get("*/**/logo.ashx**", async ({ request }) => {
+    const reqUrl = new URL(request.url);
+    const dark = reqUrl.searchParams.get("dark") === "true";
+
+    // Используем перенаправление на файл SVG
+    const logoPath = dark ? DARK_LOGO_PATH : LOGO_PATH;
+    const baseUrl = new URL(request.url).origin;
+    const logoUrl = `${baseUrl}${logoPath}`;
+
+    return HttpResponse.redirect(logoUrl, 302);
+  });
+};
+
+export const logoHandler =
+  typeof window === "undefined" ? logoHandlerNode : logoHandlerBrowser;

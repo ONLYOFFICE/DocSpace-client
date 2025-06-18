@@ -96,7 +96,7 @@ export const thirdPartyProvidersResolver = (isNotEmpty: boolean): Response => {
 
 export const thirdPartyProvidersHandler = (
   port: string,
-  isNotEmpty: boolean,
+  isNotEmpty: boolean = false,
 ) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
     return thirdPartyProvidersResolver(isNotEmpty);

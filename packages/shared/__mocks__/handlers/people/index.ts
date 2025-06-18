@@ -32,26 +32,21 @@ import {
   selfActivationStatusHandler,
   selfGetByEmailHandler,
   selfAddGuestHandler,
+  createUserHandler,
 } from "./self";
 import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
 
 export {
-  PATH as THIRD_PARTY_PROVIDERS_PATH,
-  thirdPartyProvidersResolver,
-  successThirdpartyProviders,
-} from "./thirdPartyProviders";
-
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-  PATH_ADD_GUEST,
-  selfResolver,
-  successSelf,
-} from "./self";
+  selfHandler,
+  selfUpdateHandler,
+  selfDeleteHandler,
+  selfChangeAuthDataHandler,
+  selfActivationStatusHandler,
+  selfGetByEmailHandler,
+  selfAddGuestHandler,
+  createUserHandler,
+  thirdPartyProvidersHandler,
+};
 
 export const peopleHandlers = (port: string) => [
   selfActivationStatusHandler(port),
@@ -62,4 +57,5 @@ export const peopleHandlers = (port: string) => [
   selfAddGuestHandler(port),
   selfUpdateHandler(port),
   thirdPartyProvidersHandler(port),
+  createUserHandler(port),
 ];

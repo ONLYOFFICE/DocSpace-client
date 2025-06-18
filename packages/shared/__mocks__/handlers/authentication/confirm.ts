@@ -24,20 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 import { http } from "msw";
+import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "authentication/confirm";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-export type TErrorConfirm =
-  | "Invalid"
-  | "Expired"
-  | "TariffLimit"
-  | "UserExisted"
-  | "UserExcluded"
-  | "QuotaFailed";
+export enum ErrorConfirm {
+  Invalid = "Invalid",
+  Expired = "Expired",
+  TariffLimit = "TariffLimit",
+  UserExisted = "UserExisted",
+  UserExcluded = "UserExcluded",
+  QuotaFailed = "QuotaFailed",
+}
 
 export const getConfirmSuccess = (result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0) => {
   return {
@@ -55,35 +56,26 @@ export const getConfirmSuccess = (result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0) => {
   };
 };
 
-export const confirmResolver = (errorType?: TErrorConfirm): Response => {
-  if (errorType === "Invalid") {
-    return new Response(JSON.stringify(getConfirmSuccess(1)));
+export const confirmResolver = (errorType?: ErrorConfirm): Response => {
+  switch (errorType) {
+    case ErrorConfirm.Invalid:
+      return new Response(JSON.stringify(getConfirmSuccess(1)));
+    case ErrorConfirm.Expired:
+      return new Response(JSON.stringify(getConfirmSuccess(2)));
+    case ErrorConfirm.TariffLimit:
+      return new Response(JSON.stringify(getConfirmSuccess(3)));
+    case ErrorConfirm.UserExisted:
+      return new Response(JSON.stringify(getConfirmSuccess(4)));
+    case ErrorConfirm.UserExcluded:
+      return new Response(JSON.stringify(getConfirmSuccess(5)));
+    case ErrorConfirm.QuotaFailed:
+      return new Response(JSON.stringify(getConfirmSuccess(6)));
+    default:
+      return new Response(JSON.stringify(getConfirmSuccess()));
   }
-
-  if (errorType === "Expired") {
-    return new Response(JSON.stringify(getConfirmSuccess(2)));
-  }
-
-  if (errorType === "TariffLimit") {
-    return new Response(JSON.stringify(getConfirmSuccess(3)));
-  }
-
-  if (errorType === "UserExisted") {
-    return new Response(JSON.stringify(getConfirmSuccess(4)));
-  }
-
-  if (errorType === "UserExcluded") {
-    return new Response(JSON.stringify(getConfirmSuccess(5)));
-  }
-
-  if (errorType === "QuotaFailed") {
-    return new Response(JSON.stringify(getConfirmSuccess(6)));
-  }
-
-  return new Response(JSON.stringify(getConfirmSuccess()));
 };
 
-export const confirmHandler = (port: string, errorType?: TErrorConfirm) => {
+export const confirmHandler = (port: string, errorType?: ErrorConfirm) => {
   return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
     return confirmResolver(errorType);
   });

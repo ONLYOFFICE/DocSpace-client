@@ -32,7 +32,7 @@ export const PATH_CHANGE_AUTH_DATA = "people/*/password";
 export const PATH_ACTIVATION_STATUS = "people/activationstatus*";
 export const PATH_UPDATE_USER = "people/*";
 export const PATH_DELETE_USER = "people/@self";
-export const PATH_USER_BY_EMAIL = "people/email**";
+export const PATH_USER_BY_EMAIL = "people/email*";
 export const PATH_ADD_GUEST = "people/guests/share/approve";
 
 export const successSelf = {
@@ -110,9 +110,11 @@ export const selfError400 = {
 export const selfResolver = (
   errorStatus: 400 | 404 | null = null,
 ): Response => {
-  if (errorStatus === 404) return new Response(JSON.stringify(selfError404));
+  if (errorStatus === 404)
+    return new Response(JSON.stringify(selfError404), { status: 404 });
 
-  if (errorStatus === 400) return new Response(JSON.stringify(selfError400));
+  if (errorStatus === 400)
+    return new Response(JSON.stringify(selfError400), { status: 400 });
 
   return new Response(JSON.stringify(successSelf));
 };
@@ -168,11 +170,14 @@ export const selfActivationStatusHandler = (
   );
 };
 
-export const selfGetByEmailHandler = (port: string) => {
+export const selfGetByEmailHandler = (
+  port: string,
+  errorStatus: 400 | 404 | null = null,
+) => {
   return http.get(
     `http://localhost:${port}/${API_PREFIX}/${PATH_USER_BY_EMAIL}`,
     () => {
-      return selfResolver();
+      return selfResolver(errorStatus);
     },
   );
 };
@@ -184,4 +189,10 @@ export const selfAddGuestHandler = (port: string) => {
       return selfResolver();
     },
   );
+};
+
+export const createUserHandler = (port: string) => {
+  return http.post(`http://localhost:${port}/${API_PREFIX}/people`, () => {
+    return selfResolver();
+  });
 };

@@ -29,9 +29,9 @@ import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "authentication";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+export const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-export const successLogin = {
+const successLogin = {
   count: 1,
   response: {
     token: "6jo5…zjm/tny6TtDUAvu3fuuNo3ZE/kxQQ==",
@@ -49,12 +49,25 @@ export const successLogin = {
   statusCode: 200,
 };
 
-export const loginResolver = () => {
+export const loginError404 = {
+  response: {
+    title: "Required failed with status code 404",
+    status: 404,
+  },
+  count: 1,
+  status: 0,
+  statusCode: 404,
+};
+
+export const loginResolver = (errorStatus: 404 | null = null) => {
+  if (errorStatus === 404)
+    return new Response(JSON.stringify(loginError404), { status: 404 });
+
   return new Response(JSON.stringify(successLogin));
 };
 
-export const loginHandler = (port: string) => {
+export const loginHandler = (port: string, errorStatus: 404 | null = null) => {
   return http.post(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
-    return loginResolver();
+    return loginResolver(errorStatus);
   });
 };

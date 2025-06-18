@@ -24,28 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  PATH as FILES_SETTINGS_PATH,
-  filesSettingsResolver,
-} from "./filesSettings";
-export { PATH as FOLDERS_TREE_PATH, foldersTreeResolver } from "./foldersTree";
-export { PATH_FOLDER, folderResolver } from "./folder";
-export {
-  PATH_VALIDATE_PUBLIC_ROOM_KEY,
-  validatePublicRoomKeyResolver,
-} from "./validatePublicRoomKey";
-export { PATH_ROOMS_LIST, roomListResolver } from "./roomList";
-export {
-  PATH_VALIDATE_PUBLIC_ROOM_PASSWORD,
-  validatePublicRoomPasswordResolver,
-  validatePublicRoomPasswordHandler,
-} from "./validatePublicRoomPassword";
-
 import { filesSettingsHandler } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
 import { folderHandler } from "./folder";
 import { validatePublicRoomKeyHandler } from "./validatePublicRoomKey";
+import { validatePublicRoomPasswordHandler } from "./validatePublicRoomPassword";
 import { roomListHandler } from "./roomList";
+
+export { TypeFolder } from "./folder";
+export { TypeRoomList } from "./roomList";
+
+export {
+  foldersTreeHandler,
+  filesSettingsHandler,
+  validatePublicRoomKeyHandler,
+  roomListHandler,
+  folderHandler,
+  validatePublicRoomPasswordHandler,
+};
 
 export const filesHandlers = (port: string) => [
   foldersTreeHandler(port),
@@ -53,4 +49,5 @@ export const filesHandlers = (port: string) => [
   validatePublicRoomKeyHandler(port),
   roomListHandler(port),
   folderHandler(port),
+  validatePublicRoomPasswordHandler(port),
 ];

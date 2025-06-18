@@ -133,6 +133,21 @@
     border-radius: 5px;
     height: 36px;
   }
+
+  &.withArrows {
+    padding: 4px 32px;
+  }
+
+  &.secondary:not(.scaled) {
+    &.referenceSize {
+      display: flex;
+      visibility: visible;
+      width: fit-content;
+    }
+    &:not(.referenceSize) {
+      // visibility: hidden;
+    }
+  }
 }
 
 .tab {
@@ -183,7 +198,7 @@
 
     .tabText {
       color: var(--tabs-text-color-secondary);
-      z-index: 11;
+      z-index: 102;
     }
 
     &.selected {
@@ -192,6 +207,7 @@
       }
 
       .tabIcon {
+        z-index: 102;
         svg path {
           fill: var(--tabs-active-text-color-secondary);
         }
@@ -226,7 +242,9 @@
 }
 
 .tabIcon {
-  z-index: 11;
+  z-index: 99;
+  min-width: 16px;
+  min-height: 16px;
   max-width: 16px;
   max-height: 16px;
 
@@ -276,8 +294,33 @@
 .motionBackground {
   position: absolute;
   inset: 0;
-  z-index: 10;
+  z-index: 101;
   background-color: var(--tabs-active-background-color-secondary);
   height: 28px;
   border-radius: 3px;
+}
+
+.arrowIcon {
+  position: absolute;
+  z-index: 103;
+  cursor: pointer;
+
+  div {
+    min-width: 24px;
+    width: 32px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.arrowLeft {
+  background-color: var(--tabs-background-color-secondary);
+  inset-inline-start: 0px;
+}
+.arrowRight {
+  background-color: var(--tabs-background-color-secondary);
+  inset-inline-end: 0px;
+  rotate: 180deg;
 }

@@ -118,7 +118,7 @@ const Amount = (props: AmountProps) => {
         <TextInput
           value={amount}
           onChange={onChangeTextInput}
-          pattern="\d+"
+          pattern="^[1-9]\d*$"
           scale
           withBorder
           type={InputType.text}

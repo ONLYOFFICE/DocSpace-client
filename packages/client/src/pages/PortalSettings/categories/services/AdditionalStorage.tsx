@@ -78,6 +78,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   nextStoragePlanSize,
   storageExpiryDate,
   isCardLinkedToPortal,
+  hasStorageSubscription,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { formatWalletCurrency, t } = useServicesActions();
@@ -133,8 +134,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
       ) : null}
       {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
         if (!item.title || !item.image) return null;
-        const eventDisabled = isDisabled || nextStoragePlanSize >= 0;
-
+        const eventDisabled =
+          isDisabled || !hasStorageSubscription || nextStoragePlanSize >= 0;
         return (
           <div
             key={item.id}
@@ -250,8 +251,12 @@ export default inject(
       storageSizeIncrement,
       storagePriceIncrement,
     } = servicesStore;
-    const { currentStoragePlanSize, nextStoragePlanSize, storageExpiryDate } =
-      currentTariffStatusStore;
+    const {
+      currentStoragePlanSize,
+      nextStoragePlanSize,
+      storageExpiryDate,
+      hasStorageSubscription,
+    } = currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
 
@@ -264,6 +269,7 @@ export default inject(
 
       storagePriceIncrement,
       currentStoragePlanSize,
+      hasStorageSubscription,
       nextStoragePlanSize,
       storageExpiryDate,
       isCardLinkedToPortal,

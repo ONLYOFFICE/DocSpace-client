@@ -673,6 +673,7 @@
   "SubscriptionExpiredTitle": "Abbonamento scaduto",
   "SubscriptionIsExpiring": "Il tuo abbonamento scadrà il {{date}}",
   "SuccessfullyCompletedOperation": "L'operazione è stata completata con successo.",
+  "SuggestFeature": "Suggerisci una funzione",
   "Support": "Supporto",
   "SwitchToThumbnails": "Passa alla visualizzazione anteprime",
   "SwitchViewToCompact": "Attiva visualizzazione compatta",
@@ -721,5 +722,6 @@
   "Yesterday": "Ieri",
   "You": "Tu",
   "YourTurn": "Il tuo turno",
-  "SuggestFeature": "Suggerisci una funzione"
+  "SuggestFeature": "Suggerisci una funzione",
+  "Important": "Importante"
 }

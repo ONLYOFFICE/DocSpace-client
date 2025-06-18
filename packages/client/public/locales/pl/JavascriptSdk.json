@@ -21,10 +21,13 @@
   "CreateSamplePublicRoom": "Utwórz próbne osadzenie Pokoju publicznego",
   "CreateSampleRoomSelector": "Utwórz próbne osadzenie Selektora pokojów",
   "CreateSampleViewer": "Utwórz próbne osadzenie Przeglądarki",
+  "CSPDescription": "Wprowadź adres usługi, w której chcesz osadzić lub połączyć swój {{organizationName}} {{productName}}.",
+  "CSPHeader": "Dodaj dozwolone domeny dla tego {{productName}}.",
   "CSPHelp": "Dane ustawienie to mechanizm zabezpieczający przed atakami polegającymi na wstrzykiwaniu zawartości. Zasady zabezpieczeń zawartości (CSP) opisują bezpieczne źródła pobierania zasobów. Pobieranie z zasobów, które nie znajdują się na Białej Liście, jest zablokowane. Określ domeny (wraz z protokołem), z którymi będzie to działać.",
   "CSPInfoBarDescription": "Włącz protokół HTTPS dla {{productName}}, aby zapewnić prawidłowe działanie konfiguracji.",
   "CSPInfoBarHeader": "HTTPS jest wymagany",
   "CSPInputPlaceholder": "Wpisz URL w następujący sposób: https://example.com",
+  "CSPUrlHelp": "Proszę podać tylko nazwę domeny, unikając ścieżek URL lub dodatkowych znaków.",
   "CustomDescription": "Ręcznie skonfiguruj parametry osadzania {{productName}}.",
   "CustomizingDisplay": "Personalizacja wyświetlania",
   "DataDisplay": "Ustawienia wyświetlania danych",
@@ -114,8 +117,5 @@
   "SubtitleDescription": "Podtytuł z dodatkowymi komentarzami lub opisami do bieżącego katalogu.",
   "TabPlugins": "Karta z wtyczkami",
   "Viewer": "Przeglądarka",
-  "ViewerDescription": "Osadź przeglądarkę, aby umożliwić użytkownikom otwarcie pliku do przeglądania z odpowiedniego pokoju.",
-  "CSPDescription": "Wprowadź adres usługi, w której chcesz osadzić lub połączyć swój {{organizationName}} {{productName}}.",
-  "CSPHeader": "Dodaj dozwolone domeny dla tego {{productName}}.",
-  "CSPUrlHelp": "Proszę podać tylko nazwę domeny, unikając ścieżek URL lub dodatkowych znaków."
+  "ViewerDescription": "Osadź przeglądarkę, aby umożliwić użytkownikom otwarcie pliku do przeglądania z odpowiedniego pokoju."
 }

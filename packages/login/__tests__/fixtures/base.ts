@@ -30,13 +30,13 @@ import { SetupServerApi } from "msw/node";
 import { WorkerFixture } from "@msw/playwright";
 
 import {
-  allHandlers,
   BASE_URL,
   createNextTestServer,
   createServerRequestInterceptor,
   setupAndResetHandlersServer,
 } from "@docspace/shared/__mocks__/e2e";
 import path from "path";
+import { allHandlers } from "@docspace/shared/__mocks__/handlers";
 
 export const test = base.extend<{
   page: Page;

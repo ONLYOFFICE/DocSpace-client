@@ -225,11 +225,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         const res = await updateWalletPayment(value, productType);
 
         if (res === false) {
-          toastr.error(t("Common:UnexpectedError"));
-
-          setIsLoading(false);
-
-          return;
+          throw new Error(t("Common:UnexpectedError"));
         }
 
         if (isUpgradeStoragePlan) fetchBalance!();
@@ -241,8 +237,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           waitingForTariff(isCancellation);
         }
       } catch (e) {
-        const errorMessage = e instanceof Error ? e.message : String(e);
-        toastr.error(errorMessage);
+        toastr.error(e);
+        setIsLoading(false);
       }
     },
     [isLoading, isUpgradeStoragePlan],

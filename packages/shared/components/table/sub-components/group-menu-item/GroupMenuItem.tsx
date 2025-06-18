@@ -77,6 +77,7 @@ const GroupMenuItem = ({
         id={id}
         className={classNames(styles.button, styles.overrideNativeStyles, {
           [styles.oldChrome]: isChrome && +browserVersion <= 85,
+          [styles.isBlocked]: isBlocked,
         })}
         label={label}
         title={title || label}

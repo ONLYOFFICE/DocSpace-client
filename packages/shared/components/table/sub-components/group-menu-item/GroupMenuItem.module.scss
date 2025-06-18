@@ -51,6 +51,18 @@
     }
   }
 
+  &.isBlocked {
+    svg {
+      path[fill] {
+        fill: var(--button-color-base-disabled);
+      }
+
+      path[stroke] {
+        stroke: var(--button-color-base-disabled);
+      }
+    }
+  }
+
   &:hover,
   &:active {
     border: none !important;

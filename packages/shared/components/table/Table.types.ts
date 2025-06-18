@@ -154,8 +154,8 @@ export type TGroupMenuItem = {
   onClick: (e: React.MouseEvent) => void;
   iconUrl: string;
   title: string;
-  withDropDown: boolean;
-  options: ContextMenuModel[];
+  withDropDown?: boolean;
+  options?: ContextMenuModel[];
   id: string;
 };
 

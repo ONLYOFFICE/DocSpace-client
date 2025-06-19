@@ -34,7 +34,7 @@
     "lint:fix": "yarn workspaces foreach -vptiR -j 5 --from '{@docspace/login,@docspace/doceditor,@docspace/client,@docspace/shared,@docspace/sdk}' run lint:fix",
     "test:build": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:build",
     "test:e2e:docker:build": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:build",
-    "test:e2e:docker:start": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:start",
+    "test:e2e:docker:start": "yarn workspaces foreach -vtiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:start",
     "test:e2e:docker:clear": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:clear"
   },
   "old-scripts": {

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-//@ts-nocheck
 import next from "next";
 import { createServer, Server } from "http";
 import { parse } from "url";
@@ -48,12 +47,11 @@ export const createNextTestServer = async (
 
   const server: Server = await new Promise((resolve) => {
     const server = createServer((req, res) => {
-      const parsedUrl = parse(req.url, true);
+      const parsedUrl = parse(req.url || '/', true);
       handle(req, res, parsedUrl);
     });
 
-    server.listen((error) => {
-      if (error) throw error;
+    server.listen(0, () => {
       resolve(server);
     });
   });

@@ -34,6 +34,10 @@ import { TableCell } from "../sub-components/table-cell";
 import { Scrollbar } from "../../scrollbar";
 import { TableContainer } from "../table-container";
 
+const COLUMN_STORAGE_NAME = "storybook-table-body-column-storage";
+const COLUMN_INFO_PANEL_STORAGE_NAME =
+  "storybook-table-body-info-panel-storage";
+
 const meta = {
   title: "Components/Table/TableBody",
   component: TableBody,
@@ -127,8 +131,8 @@ const createMockRows = (count: number) => {
 
 export const Default: Story = {
   args: {
-    columnStorageName: "table-column-storage",
-    columnInfoPanelStorageName: "info-panel-storage",
+    columnStorageName: COLUMN_STORAGE_NAME,
+    columnInfoPanelStorageName: COLUMN_INFO_PANEL_STORAGE_NAME,
     fetchMoreFiles: async () => {},
     filesLength: 20,
     hasMoreFiles: false,

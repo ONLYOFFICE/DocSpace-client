@@ -30,6 +30,10 @@ import { TableHeader } from "./TableHeader";
 import { type TableHeaderProps, TTableColumn } from "../Table.types";
 import { SortByFieldName } from "../../../enums";
 
+const COLUMN_STORAGE_NAME = "storybook-table-header-column-storage";
+const COLUMN_INFO_PANEL_STORAGE_NAME =
+  "storybook-table-header-info-panel-storage";
+
 const TableHeaderWrapper = (args: Omit<TableHeaderProps, "containerRef">) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -122,7 +126,8 @@ export const Default: Story = {
         onClick: () => {},
       },
     ],
-    columnStorageName: "table-header-story",
+    columnStorageName: COLUMN_STORAGE_NAME,
+    columnInfoPanelStorageName: COLUMN_INFO_PANEL_STORAGE_NAME,
     sectionWidth: 1000,
     sortBy: SortByFieldName.Name,
     sorted: true,
@@ -132,7 +137,6 @@ export const Default: Story = {
     isLengthenHeader: false,
     resetColumnsSize: false,
     infoPanelVisible: false,
-    columnInfoPanelStorageName: "table-header-info-panel-story",
     settingsTitle: "Column Settings",
     isIndexEditingMode: false,
     withoutWideColumn: false,

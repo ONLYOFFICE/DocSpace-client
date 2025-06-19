@@ -25,11 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { InfiniteLoaderComponent } from "../../infinite-loader";
 
-import { StyledTableBody } from "../Table.styled";
 import { TableBodyProps } from "../Table.types";
+import styles from "./TableBody.module.scss";
 
 const TableBodyPure = (props: TableBodyProps) => {
   const {
@@ -48,12 +49,13 @@ const TableBodyPure = (props: TableBodyProps) => {
 
   if (!columnStorageName || !columnInfoPanelStorageName) return <div />;
 
+  const classes = classNames(styles.tableBody, "table-container_body", {
+    [styles.useReactWindow]: useReactWindow,
+    [styles.infoPanelVisible]: infoPanelVisible,
+  });
+
   return useReactWindow ? (
-    <StyledTableBody
-      useReactWindow={useReactWindow}
-      className="table-container_body"
-      infoPanelVisible={infoPanelVisible}
-    >
+    <div className={classes}>
       <InfiniteLoaderComponent
         className="TableList"
         viewAs="table"
@@ -69,9 +71,9 @@ const TableBodyPure = (props: TableBodyProps) => {
       >
         {children}
       </InfiniteLoaderComponent>
-    </StyledTableBody>
+    </div>
   ) : (
-    <StyledTableBody className="table-container_body" {...props} />
+    <div className={classes}>{children}</div>
   );
 };
 

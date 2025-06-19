@@ -80,7 +80,11 @@ const meta = {
 
       return (
         <div>
-          <Scrollbar id="sectionScroll" style={{ height: "400px" }}>
+          <Scrollbar
+            id="sectionScroll"
+            style={{ height: "400px" }}
+            autoHide={false}
+          >
             <div style={{ paddingTop: "20px", width: "98%" }}>
               <TableContainer
                 forwardedRef={ref}
@@ -92,8 +96,10 @@ const meta = {
           </Scrollbar>
 
           <div style={{ marginTop: "20px", fontSize: "16px" }}>
-            <div>All rows: {context.args.itemCount}</div>
-            <div>Rendered rows: {renderedCount}</div>
+            <div>useReactWindow: {context.args.useReactWindow.toString()}</div>
+            <div>
+              Rendered rows: {renderedCount}/{context.args.itemCount}
+            </div>
           </div>
         </div>
       );

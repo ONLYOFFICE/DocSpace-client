@@ -112,21 +112,4 @@ const StyledTableContainer = styled.div.attrs(injectDefaultTheme)<{
   ${({ useReactWindow }) => useReactWindow && reactWindowContainerStyles}
 `;
 
-const StyledTableBody = styled.div<{
-  useReactWindow?: boolean;
-  infoPanelVisible?: boolean;
-}>`
-  display: contents;
-
-  ${({ useReactWindow }) => useReactWindow && reactWindowBodyStyles}
-
-  .table-container_cell {
-    ${({ infoPanelVisible }) =>
-      infoPanelVisible &&
-      css`
-        padding: 0;
-      `}
-  }
-`;
-
-export { StyledTableContainer, StyledTableBody };
+export { StyledTableContainer };

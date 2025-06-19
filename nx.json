@@ -21,6 +21,10 @@
     "storybook-build": {
       "cache": true,
       "outputs": ["{projectRoot}/storybook-static"]
+    },
+    "test:build": {
+      "cache": true,
+      "outputs": ["{projectRoot}/.next"]
     }
   },
   "defaultBase": "develop"

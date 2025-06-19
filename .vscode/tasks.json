@@ -378,7 +378,7 @@
     {
       "label": "Frontend | build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t build  -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
+      "command": "cd ${workspaceFolder} ; pnpm run build",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -393,7 +393,7 @@
     {
       "label": "Frontend | build:lite",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t build:lite  -p @docspace/client @docspace/login @docspace/doceditor --parallel=3",
+      "command": "cd ${workspaceFolder} ; pnpm run build:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -408,7 +408,7 @@
     {
       "label": "Frontend | start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
+      "command": "cd ${workspaceFolder} ; pnpm run start",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -423,7 +423,7 @@
     {
       "label": "Frontend | start-prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
+      "command": "cd ${workspaceFolder} ; pnpm run start-prod",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -438,7 +438,7 @@
     {
       "label": "Frontend | start-prod:lite",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor --parallel=3",
+      "command": "cd ${workspaceFolder} ; pnpm run start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -453,7 +453,7 @@
     {
       "label": "Frontend | deploy",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t deploy -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
+      "command": "cd ${workspaceFolder} ; pnpm run deploy",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -468,7 +468,7 @@
     {
       "label": "Frontend | storybook",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx storybook @docspace/shared",
+      "command": "cd ${workspaceFolder} ; pnpm run storybook",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -483,7 +483,7 @@
     {
       "label": "Frontend | storybook prod",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm nx storybook-serve @docspace/shared",
+      "command": "cd ${workspaceFolder} ; pnpm run storybook-serve",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -498,7 +498,7 @@
     {
       "label": "Test | Jest:common",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -513,7 +513,7 @@
     {
       "label": "Test | Jest:translations",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -543,7 +543,7 @@
     {
       "label": "Test | Jest:colors",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -558,7 +558,7 @@
     {
       "label": "Test | Jest:dependencies",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -573,7 +573,7 @@
     {
       "label": "Test | Jest:unit",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -588,7 +588,7 @@
     {
       "label": "Frontend | ESLint",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm lint ; ",
+      "command": "cd ${workspaceFolder} ; pnpm lint",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -603,7 +603,7 @@
     {
       "label": "Frontend | ESLint:fix",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm lint:fix ; ",
+      "command": "cd ${workspaceFolder} ; pnpm lint:fix",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -618,7 +618,7 @@
     {
       "label": "Test | Test e2e docker build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:build ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:build",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -633,7 +633,7 @@
     {
       "label": "Test | Test e2e docker start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:start ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:start",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -648,7 +648,7 @@
     {
       "label": "Test | Test e2e docker clear",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:clear ; ",
+      "command": "cd ${workspaceFolder} ; pnpm test:e2e:docker:clear",
       "group": {
         "kind": "build",
         "isDefault": true

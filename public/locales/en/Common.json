@@ -785,6 +785,7 @@
   "SuccessfullyCompletedOperation": "Operation has been successfully completed.",
   "SuccessfullySaveSettingsMessage": "Settings have been successfully updated",
   "SuccessOperation": "{{operationName}}: Done",
+  "SuggestFeature": "Suggest a feature",
   "Support": "Support",
   "SwitchToThumbnails": "Switch to thumbnails view",
   "SwitchViewToCompact": "Switch to compact view",

@@ -88,9 +88,9 @@ const NewItem = ({
       key="create-new-item"
       style={style}
       className={classNames(styles.selectorItem, styles.hoverable)}
+      onClick={onCreateClickAction}
     >
       <SelectorAddButton
-        onClick={onCreateClickAction}
         isAction
         label={label}
         titleText={label}

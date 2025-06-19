@@ -35,6 +35,7 @@ const moduleWorkspaces = [
   "packages/login",
   "packages/shared",
   "packages/management",
+  "public/locales", // common
 ];
 
 const getWorkSpaces = () => {

@@ -309,6 +309,10 @@ const Root = ({
     if (fileInfo?.rootFolderType === FolderType.Recent) {
       getMy();
     }
+
+    if (fileInfo?.rootFolderType === FolderType.RoomTemplates) {
+      setSelectedFolderId(undefined);
+    }
   }, [fileInfo?.rootFolderType]);
 
   return isShowDeepLink ? (

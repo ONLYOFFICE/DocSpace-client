@@ -2,11 +2,6 @@
   "name": "docspace",
   "version": "3.2.0",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"

@@ -37,7 +37,6 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
-import { getBackUrl, isFormRole } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -192,7 +191,7 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
+        goBack.url = newConfig.editorConfig?.customization?.goback?.url;
       }
     }
   }

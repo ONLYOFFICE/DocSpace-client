@@ -111,6 +111,7 @@ const Wallet = (props: WalletProps) => {
     language,
     walletBalance,
     walletCodeCurrency || "",
+    3,
   );
 
   const onClose = () => {

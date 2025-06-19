@@ -147,7 +147,7 @@ const PlanUpgradePreview = (props) => {
           ) : (
             <>
               <Text fontWeight="600" fontSize="14px">
-                {formatWalletCurrency(partialUpgradeFee)}
+                {formatWalletCurrency(partialUpgradeFee, 3)}
               </Text>
               <Text
                 fontWeight="600"

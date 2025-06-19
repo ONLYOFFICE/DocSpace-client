@@ -37,14 +37,16 @@ export const formattedBalanceTokens = (
   language: string,
   amount: number,
   currency: string,
+  maximumFractionDigits: number = 3,
 ) => {
-  const truncatedStr = truncateNumberToFraction(amount);
+  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
   const truncated = Number(truncatedStr);
 
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: 2,
+    minimumFractionDigits: maximumFractionDigits,
+    maximumFractionDigits,
   });
 
   return formatter.formatToParts(truncated);
@@ -83,7 +85,7 @@ export const accountingLedgersFormat = (
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: 2,
+    minimumFractionDigits: maximumFractionDigits,
     maximumFractionDigits,
   });
 

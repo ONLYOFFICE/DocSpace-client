@@ -58,7 +58,7 @@ const WalletContainer = (props: WalletContainerProps) => {
   return (
     <div className={styles.walletContainer}>
       <WalletInfo
-        balance={formatWalletCurrency(null, 2, 2)}
+        balance={formatWalletCurrency(null, 3)}
         {...(isPaymentBlockedByBalance &&
           !isLoading &&
           !isCurrentStoragePlan &&

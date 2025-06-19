@@ -53,7 +53,6 @@ export const useServicesActions = () => {
 
   const formatWalletCurrency = (
     quantity?: number,
-    minimumFractionDigits: number = 2,
     maximumFractionDigits: number = 2,
   ) => {
     const amount = quantity ?? walletBalance;
@@ -62,7 +61,7 @@ export const useServicesActions = () => {
       language,
       amount,
       walletCodeCurrency || "",
-      minimumFractionDigits,
+      maximumFractionDigits,
       maximumFractionDigits,
     );
   };

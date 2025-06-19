@@ -328,8 +328,9 @@ class DetailsHelper {
           }),
         )
       : text(
-          this.t("Files:WillBeMovedToTrash", {
+          this.t("Files:ScheduledTrashMove", {
             date: parseAndFormatDate(this.item.expired, this.culture),
+            sectionName: this.t("Common:TrashSection"),
           }),
         );
   };

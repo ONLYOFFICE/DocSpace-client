@@ -61,7 +61,7 @@ describe("Render room selector light", () => {
     port,
     clientRequestInterceptor,
   }) => {
-    const pageRoute = `${baseUrl}${path}?theme=Base`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
     clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
@@ -357,7 +357,7 @@ describe("Room selector light empty", () => {
     baseUrl,
     port,
   }) => {
-    const pageRoute = `${baseUrl}${path}?theme=Base`;
+    const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
 
     await page.goto(pageRoute);
 

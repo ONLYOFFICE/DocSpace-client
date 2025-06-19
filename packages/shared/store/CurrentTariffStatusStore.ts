@@ -31,13 +31,16 @@ import moment from "moment-timezone";
 import { TariffState } from "../enums";
 import api from "../api";
 import { getUserByEmail } from "../api/people";
-import { TPortalTariff } from "../api/portal/types";
+import { TPortalTariff, TQuotas } from "../api/portal/types";
 import { TUser } from "../api/people/types";
 import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
 import { Nullable } from "../types";
+import { UserStore } from "./UserStore";
 
 class CurrentTariffStatusStore {
+  userStore: UserStore;
+
   portalTariffStatus: Nullable<TPortalTariff> = null;
 
   isLoaded = false;
@@ -46,8 +49,12 @@ class CurrentTariffStatusStore {
 
   language: string = "en";
 
-  constructor() {
+  walletQuotas: TQuotas[] = [];
+
+  constructor(userStore: UserStore) {
     makeAutoObservable(this);
+
+    this.userStore = userStore;
   }
 
   setLanguage = (language: string) => {
@@ -86,6 +93,38 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus ? this.portalTariffStatus.dueDate : null;
   }
 
+  get storageSubscriptionExpiryDate() {
+    return this.walletQuotas[0]?.dueDate;
+  }
+
+  get hasStorageSubscription() {
+    return this.walletQuotas?.length > 0;
+  }
+
+  get currentStoragePlanSize() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
+    return this.walletQuotas[0].quantity || 0;
+  }
+
+  get hasScheduledStorageChange() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return false;
+
+    return (this.walletQuotas[0].nextQuantity ?? -1) >= 0;
+  }
+
+  get nextStoragePlanSize() {
+    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return undefined;
+    return this.walletQuotas[0].nextQuantity;
+  }
+
+  get storageExpiryDate() {
+    if (!this.storageSubscriptionExpiryDate) return "";
+
+    return moment(this.storageSubscriptionExpiryDate)
+      .tz(window.timezone)
+      .format("LL");
+  }
+
   get delayDueDate() {
     return this.portalTariffStatus
       ? this.portalTariffStatus.delayDueDate
@@ -104,14 +143,16 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus?.licenseDate;
   }
 
-  setPayerInfo = async () => {
+  setPayerInfo = async (payer?: string) => {
+    const payerInfo = payer ?? this.customerId;
+
     try {
-      if (!this.customerId || !this.customerId?.length) {
+      if (!payerInfo || !payerInfo?.length) {
         this.payerInfo = null;
         return;
       }
 
-      const result = await getUserByEmail(this.customerId);
+      const result = await getUserByEmail(payerInfo);
       if (!result) {
         this.payerInfo = null;
         return;
@@ -179,11 +220,20 @@ class CurrentTariffStatusStore {
     return api.portal.getPortalTariff(refresh).then((res) => {
       if (!res) return;
 
+      const { user } = this.userStore;
+
       runInAction(() => {
         this.portalTariffStatus = res;
+
+        if (user?.isAdmin)
+          this.walletQuotas = res.quotas.filter(
+            (quota) => quota.wallet === true,
+          ) as TQuotas[];
       });
 
       this.setIsLoaded(true);
+
+      return { res: this.portalTariffStatus, walletQuotas: this.walletQuotas };
     });
   };
 }

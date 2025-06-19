@@ -185,7 +185,11 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        badgeTitle={
+          labelBadge
+            ? ""
+            : t("EmptySection", { sectionName: t("Common:TrashSection") })
+        }
         badgeComponent={
           <NewFilesBadge
             newFilesCount={labelBadge}
@@ -274,7 +278,7 @@ const Items = ({
 
       if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
         return draggableItems.some(
-          (draggableItem) => draggableItem.security.Delete,
+          (draggableItem) => draggableItem?.security?.Delete,
         );
       }
 
@@ -300,7 +304,9 @@ const Items = ({
 
   const onRemove = React.useCallback(() => {
     const translations = {
-      deleteFromTrash: t("Translations:DeleteFromTrash"),
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
     };
 
     deleteAction(translations);

@@ -1,6 +1,5 @@
 {
   "ChooseFromList": "Scegli dall’elenco",
-  "DeleteFromTrash": "Gli elementi selezionati sono stati eliminati dal Cestino con successo",
   "FileLocked": "File bloccato",
   "FileProtected": "Il file è protetto con password",
   "FileUnlocked": "File sbloccato",
@@ -13,7 +12,6 @@
   "FolderTitleSkyDrive": "Cartella di OneDrive",
   "FolderTitleWebDav": "Cartella di WebDAV",
   "FolderTitleYandex": "Cartella di Yandex",
-  "GuestReleaseTipDescripton": "Tutti gli utenti aggiunti in precedenza sono diventati Ospiti e ora sono disponibili solo nell'elenco Contatti degli amministratori di {{productName}}. Gli ospiti non fanno più parte di alcun gruppo. Puoi sempre modificare il loro tipo e aggiungerli a un gruppo, se necessario.",
   "GuestReleaseTipLink": "Scopri di più sui tipi di utente",
   "LinkHasExpiredAndHasBeenDisabled": "Il link è scaduto ed è stato disattivato",
   "LinkValidTime": "Questo link è valido solo per {{days_count}} giorni.",
@@ -22,7 +20,7 @@
   "RoleGuestDescriprion": "Gli ospiti possono accedere alle stanze a cui sono stati invitati, nonché creare e modificare documenti se sono stati assegnati loro i ruoli appropriati nella stanza.",
   "SearchByHeadOfGroup": "Ricerca per capogruppo",
   "SearchByOwner": "Ricerca per Proprietario",
-  "SubNewForm": "En blanco",
+  "SubNewForm": "Da zero",
   "SubNewFormFile": "Da file di testo",
   "ThirdPartyInfo": "Cambiare le informazioni di terze parti",
   "ThirdPartyTitle": "Servizi di terze parti",

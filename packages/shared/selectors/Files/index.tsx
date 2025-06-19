@@ -59,6 +59,7 @@ import { getDefaultBreadCrumb } from "../utils";
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
     disabledItems,
+    includedItems,
     filterParam,
 
     treeFolders,
@@ -102,6 +103,9 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     initSearchValue,
     initTotal,
     initHasNextPage,
+
+    applyFilterOption,
+    onSelectItem,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } = use(LoadersContext);
@@ -225,6 +229,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     selectedItemId,
     searchValue,
     disabledItems,
+    includedItems,
     isThirdParty,
     filterParam,
     isRoomsOnly,
@@ -236,6 +241,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     shareKey,
 
     withInit,
+    applyFilterOption,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -316,6 +322,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       isDoubleClick: boolean,
       doubleClickCallback: () => Promise<void>,
     ) => {
+      onSelectItem?.(item);
       if (item.isFolder) {
         if (isDoubleClick) return;
 
@@ -393,6 +400,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       setSelectedItemType,
       t,
       setIsDisabledFolder,
+      onSelectItem,
     ],
   );
 

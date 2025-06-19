@@ -3,7 +3,7 @@
   "content": "Operation has been successfully completed.",
   "content_en_sha1_hash": "849e11257114c8c8bbc65cf054d9b6da983bcb6d",
   "created_at": "2025-05-19T21:30:49.214Z",
-  "updated_at": "2025-05-26T07:57:32.709Z",
+  "updated_at": "2025-06-18T17:11:42.478Z",
   "comment": {
     "text": "This translation key is used to display a success message when an operation is completed successfully. It appears as a toast notification after an operation is finished, typically in response to user actions such as saving settings or completing a process.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3314,
+      "line_number": 3316,
       "context": "const { setIsIndexEditingMode } = this.indexingStore;\n \n try {\n const operationId = uniqueid(\"operation_\");\n await reorderIndex(id);\n toastr.success(t(\"Common:SuccessfullyCompletedOperation\"));\n setIsIndexEditingMode(false);\n this.updateCurrentFolder(true, operationId);\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }",
       "module": "/packages/client"
     },
@@ -72,13 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The German translation \"Operation erfolgreich abgeschlossen wurde.\" is grammatically incorrect. The verb 'abgeschlossen wurde' is in the passive voice and requires a more natural phrasing.",
-          "suggestion": "Operation wurde erfolgreich abgeschlossen."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"abgeschlossen wurde\" conveys the idea of completion, it's not the most natural or idiomatic way to express it in German for this context.",
-          "suggestion": "Operation wurde erfolgreich beendet."
+          "description": "The German translation 'Operation erfolgreich abgeschlossen wurde' is grammatically incorrect. The verb 'wurde' (was/were) is in the passive voice but doesn't fit the sentence structure. It implies something *did* the completing.",
+          "suggestion": "Operation erfolgreich abgeschlossen."
         }
       ],
       "approved_at": null
@@ -101,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Toiminto on valmis' can be understood, it's a more literal translation of 'Operation is ready' rather than 'Operation has been successfully completed.' It lacks the emphasis on successful completion.",
-          "suggestion": "Toiminto on suoritettu onnistuneesti."
+          "description": "The Finnish translation \"Toiminto on valmis.\" translates to \"The action is ready.\" which is not a direct equivalent of \"Operation has been successfully completed.\" It lacks the sense of completion.",
+          "suggestion": "Consider a translation like \"Toiminto on suoritettu.\" (The operation has been performed) or \"Toiminto on onnistuneesti suoritettu.\" (The operation has been successfully performed)."
         }
       ],
       "approved_at": null
@@ -179,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Operațiune terminată cu succes' is understandable, a more natural and accurate translation would be 'Operațiunea a fost finalizată cu succes' or 'Operațiunea s-a încheiat cu succes'. 'Terminată' implies an abrupt ending, whereas 'finalizată' or 'încheiată' better convey 'completed'.",
+          "description": "While \"Operațiune terminată cu succes\" is understandable, a more natural Romanian translation for \"Operation has been successfully completed\" would be \"Operațiunea a fost finalizată cu succes\" or \"Operațiunea s-a încheiat cu succes\".  \"Terminată\" implies a more abrupt or definitive ending.",
           "suggestion": "Operațiunea a fost finalizată cu succes"
         }
       ],

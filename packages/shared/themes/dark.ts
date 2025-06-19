@@ -1432,25 +1432,7 @@ const Dark: TTheme = {
     marginRight: "2px",
     borderRadius: "50%",
   },
-  rombsLoader: {
-    blue: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-    red: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-    },
-    green: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-  },
+
   dialogLoader: {
     borderBottom: `1px solid ${black}`,
   },
@@ -1480,9 +1462,9 @@ const Dark: TTheme = {
       heightWithBorder: "30px",
       heightModernView: "28px",
 
-      paddingLeft: "16px",
+      paddingLeft: "8px",
       paddingRightNoArrow: "16px",
-      paddingRight: "8px",
+      paddingRight: "4px",
 
       selectPaddingLeft: "8px",
       selectPaddingRightNoArrow: "14px",
@@ -2863,7 +2845,7 @@ const Dark: TTheme = {
         priceColor: darkGrayDark,
         storageSizeTitle: gray,
 
-        backgroundColor: darkGrayLight,
+        backgroundColor: lightDarkGrayHover,
         linkColor: link,
         tariffText: grayDark,
         border: `1px solid ${grayDarkStrong}`,

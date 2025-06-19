@@ -493,7 +493,7 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         await removeFiles(folderIds, fileIds, deleteAfter, immediately)
           .then(async (res) => {
-            const result = res[res.length - 1];
+            const result = res[0];
 
             if (result?.error) return Promise.reject(result.error);
 
@@ -588,7 +588,7 @@ class FilesActionStore {
 
     try {
       await emptyTrash().then(async (res) => {
-        const result = res[res.length - 1];
+        const result = res[0];
 
         if (result?.error) return Promise.reject(result.error);
         const data = result ?? null;
@@ -727,7 +727,7 @@ class FilesActionStore {
 
     try {
       await removeFiles(folderIds, [], true, true).then(async (res) => {
-        const result = res[res.length - 1];
+        const result = res[0];
 
         if (result?.error) return Promise.reject(result.error);
         const data = result ?? null;
@@ -785,7 +785,7 @@ class FilesActionStore {
     try {
       await downloadFiles(fileConvertIds, folderIds, shareKey).then(
         async (res) => {
-          const result = res[res.length - 1];
+          const result = res[0];
 
           if (result?.error) return Promise.reject(result.error);
           const data = result ?? null;
@@ -804,6 +804,9 @@ class FilesActionStore {
               ? data
               : await this.uploadDataStore.loopFilesOperations(data, pbData);
 
+          clearActiveOperations(fileIds, folderIds);
+          setDownloadItems([]);
+
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
           }
@@ -819,6 +822,8 @@ class FilesActionStore {
         },
       );
     } catch (err) {
+      clearActiveOperations(fileIds, folderIds);
+
       setSecondaryProgressBarData({
         operation: operationName,
         alert: true,
@@ -847,11 +852,9 @@ class FilesActionStore {
         setDownloadDialogVisible(true);
         return;
       }
+      setDownloadItems([]);
 
       return toastr.error(err, null, 0, true);
-    } finally {
-      clearActiveOperations(fileIds, folderIds);
-      setDownloadItems([]);
     }
   };
 
@@ -1048,7 +1051,7 @@ class FilesActionStore {
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
       return deleteFile(itemId).then(async (res) => {
-        const result = res[res.length - 1];
+        const result = res[0];
 
         if (result?.error) return Promise.reject(result.error);
         const data = result ?? null;
@@ -1069,7 +1072,7 @@ class FilesActionStore {
       this.setGroupMenuBlocked(true);
       return removeFiles(items, [], false, true)
         .then(async (res) => {
-          const result = res[res.length - 1];
+          const result = res[0];
 
           if (result?.error) return Promise.reject(result.error);
           const data = result ?? null;
@@ -1095,7 +1098,7 @@ class FilesActionStore {
 
     addActiveItems(null, [itemId], destFolderId);
     return deleteFolder(itemId).then(async (res) => {
-      const result = res[res.length - 1];
+      const result = res[0];
 
       if (result?.error) return Promise.reject(result.error);
       const data = result ?? null;
@@ -1117,7 +1120,7 @@ class FilesActionStore {
       const res = await lockFile(id, locked);
       setFile(res);
     } catch (err) {
-      toastr.error(err);
+      throw new Error(err?.response?.data?.error?.message ?? err);
     }
   };
 
@@ -1187,12 +1190,12 @@ class FilesActionStore {
 
     return duplicate(folderIds, fileIds)
       .then(async (res) => {
-        const lastResult = res[res.length - 1];
+        const result = res[0];
 
-        if (lastResult?.error) return Promise.reject(lastResult.error);
+        if (result?.error) return Promise.reject(result.error);
 
         const pbData = { operation: operationName, operationId };
-        const data = lastResult ?? null;
+        const data = result ?? null;
 
         if (!data) {
           return Promise.reject();
@@ -1413,11 +1416,11 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         return moveToFolder(archiveRoomsId, items)
           .then(async (res) => {
-            const lastResult = res[res.length - 1];
+            const result = res[0];
 
-            if (lastResult?.error) return Promise.reject(lastResult.error);
+            if (result?.error) return Promise.reject(result.error);
 
-            const data = lastResult ?? null;
+            const data = result ?? null;
 
             const operationData =
               await this.uploadDataStore.loopFilesOperations(data, pbData);
@@ -1486,11 +1489,11 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         return moveToFolder(myRoomsId, items)
           .then(async (res) => {
-            const lastResult = res[res.length - 1];
+            const result = res[0];
 
-            if (lastResult?.error) return Promise.reject(lastResult.error);
+            if (result?.error) return Promise.reject(result.error);
 
-            const data = lastResult ?? null;
+            const data = result ?? null;
 
             console.log(pbData.label, { data, res });
 
@@ -1793,9 +1796,7 @@ class FilesActionStore {
 
     return markAsRead(folderIds, fileIds)
       .then(async (res) => {
-        const result = res[res.length - 1];
-
-        const data = result ?? null;
+        const data = res[0] ?? null;
 
         await this.uploadDataStore.loopFilesOperations(data, pbData);
       })
@@ -1803,7 +1804,6 @@ class FilesActionStore {
         if (!item) return;
 
         // this.setNewBadgeCount(item);
-
         const { getFileIndex, updateFileStatus } = this.filesStore;
 
         const index = getFileIndex(item.id);
@@ -2333,7 +2333,9 @@ class FilesActionStore {
               setDeleteDialogVisible(true);
             } else {
               const translations = {
-                deleteFromTrash: t("Translations:DeleteFromTrash"),
+                deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+                  sectionName: t("Common:TrashSection"),
+                }),
               };
 
               this.deleteAction(translations).catch((err) => toastr.error(err));
@@ -3495,7 +3497,7 @@ class FilesActionStore {
     try {
       await deleteVersionFile(fileId, versions)
         .then(async (res) => {
-          const result = res[res.length - 1];
+          const result = res[0];
 
           if (result?.error) return Promise.reject(result.error);
           const data = result ?? null;

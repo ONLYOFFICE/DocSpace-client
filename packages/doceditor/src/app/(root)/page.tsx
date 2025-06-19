@@ -27,9 +27,6 @@
 import { cookies, headers } from "next/headers";
 import Script from "next/script";
 
-import "pino-roll";
-import "pino-pretty";
-
 import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
@@ -45,8 +42,6 @@ import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
 import FilePassword from "@/components/file-password";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
-
-const log = logger.child({ module: "Doceditor page" });
 
 const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
   fileId: undefined,
@@ -96,18 +91,8 @@ async function Page(props: RootPageProps) {
 
   const hostname = hdrs.get("x-forwarded-host");
 
-  log.info(
-    {
-      fileId: fileId ?? fileid,
-      action: action ?? "not set",
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-      version: version ?? "not set",
-      editorType: editorType ?? "not set",
-      doc: doc ?? "not set",
-      url: hostname,
-    },
-    "Start open file at edit",
+  logger.info(
+    `fileId: ${fileId ?? fileid}, action: ${action ?? "not set"}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, version: ${version ?? "not set"}, editorType: ${editorType ?? "not set"}, doc: ${doc ?? "not set"}, url: ${hostname} Start open file at edit`,
   );
 
   let type = editorType;
@@ -119,24 +104,14 @@ async function Page(props: RootPageProps) {
     if (isMobile) {
       type = "mobile";
 
-      log.debug(
-        {
-          file: fileId ?? fileid,
-          isShare: !!share,
-          isAuth: !!cookieStore.get("asc_auth_key")?.value,
-        },
-        "Open mobile view",
+      logger.debug(
+        `file: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open mobile view`,
       );
     }
   }
 
-  log.debug(
-    {
-      fileId: fileId ?? fileid,
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-    },
-    "Start get data for open file",
+  logger.debug(
+    `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Start get data for open file`,
   );
 
   const data = await getData(
@@ -151,26 +126,16 @@ async function Page(props: RootPageProps) {
   if (data.error?.status === "access-denied" && share) {
     const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
     if (!roomData) {
-      log.error(
-        {
-          fileId: fileId ?? fileid,
-          isShare: !!share,
-          isAuth: !!cookieStore.get("asc_auth_key")?.value,
-        },
-        "Wrong share key",
+      logger.error(
+        `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Wrong share key`,
       );
       return;
     }
     const { status } = roomData.response;
 
     if (status === ValidationStatus.Password) {
-      log.debug(
-        {
-          fileId: fileId ?? fileid,
-          isShare: !!share,
-          isAuth: !!cookieStore.get("asc_auth_key")?.value,
-        },
-        "Open file password component",
+      logger.debug(
+        `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, Open file password component`,
       );
       return <FilePassword {...roomData.response} shareKey={share} />;
     }
@@ -205,15 +170,8 @@ async function Page(props: RootPageProps) {
     }
   }
 
-  log.debug(
-    {
-      fileId: fileId ?? fileid,
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-      docApiUrl,
-      url: hostname,
-    },
-    "Open file",
+  logger.debug(
+    `fileId: ${fileId ?? fileid}, isShare: ${!!share}, isAuth: ${!!cookieStore.get("asc_auth_key")?.value}, docApiUrl: ${docApiUrl}, url: ${hostname} Open file`,
   );
 
   return (

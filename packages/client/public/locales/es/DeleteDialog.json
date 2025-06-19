@@ -13,7 +13,6 @@
   "DeleteTemplates": "¿Realmente desea eliminar pas plantillas de sala seleccionadas? No se podrán resaturar.",
   "FolderPermanentlyDeleted": "La carpeta se eliminará definitivamente dentro de 30 días.",
   "ItemsPermanentlyDeleted": "Los elementos se eliminarán definitivamente dentro de 30 días.",
-  "MoveToTrashButton": "Mover a la papelera",
   "UnsubscribeButton": "Cancelar suscripción",
   "UnsubscribeNote": "¿Está seguro de que quiere cancelar la suscripción a los elementos seleccionados de la lista?",
   "UnsubscribeTitle": "Confirmación de anulación de suscripción"

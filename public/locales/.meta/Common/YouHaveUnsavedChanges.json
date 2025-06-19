@@ -3,7 +3,7 @@
   "content": "You have unsaved changes",
   "content_en_sha1_hash": "5ea3902f149163da1cf57472568ec3a89d52e790",
   "created_at": "2025-05-26T07:15:49.708Z",
-  "updated_at": "2025-05-26T08:01:45.355Z",
+  "updated_at": "2025-06-18T17:11:42.384Z",
   "comment": {
     "text": "This translation key is used to display a reminder message when changes are unsaved. It will appear as a pop-up or notification in various UI elements, such as save and cancel buttons on portal settings pages. The key is used to provide context for users who attempt to leave the page without saving their changes.",
     "is_auto": true,
@@ -60,7 +60,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 298,
+      "line_number": 300,
       "context": "<SaveCancelButtons\n className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 314,
+      "line_number": 321,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
@@ -84,13 +84,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 231,
+      "line_number": 238,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 286,
+      "line_number": 292,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
@@ -114,25 +114,25 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 113,
+      "line_number": 128,
       "context": "onSaveClick={onSaveAction}\n onCancelClick={onRestore}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n reminderText={t(\"YouHaveUnsavedChanges\")}\n showReminder={(isSettingPaid && hasChanges) || isLoading}\n disableRestoreToDefault={additionalResourcesIsDefault || isLoading}\n additionalClassSaveButton=\"additional-resources-save\"\n additionalClassCancelButton=\"additional-resources-cancel\"\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 143,
-      "context": "className=\"brand-name-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onCancelAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isEqualText}\n disableRestoreToDefault={isEqualText}\n showReminder={showReminder}\n />",
+      "line_number": 156,
+      "context": ")}\n onSaveClick={onSaveAction}\n onCancelClick={onCancelAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isEqualText}\n disableRestoreToDefault={isEqualText}\n showReminder={showReminder}\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 241,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestore}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll\n hideBorder\n showReminder={(isSettingPaid && hasChanges) || isLoading}",
+      "line_number": 307,
+      "context": ")}\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll\n hideBorder\n showReminder={(isSettingPaid && hasChanges) || isLoading}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 404,
+      "line_number": 437,
       "context": "cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonDisabled={isEqualLogo}\n disableRestoreToDefault={!enableRestoreButton}\n isSaving={isSaving}\n additionalClassSaveButton=\"white-label-save\"\n additionalClassCancelButton=\"white-label-cancel\"",
       "module": "/packages/shared"
     }

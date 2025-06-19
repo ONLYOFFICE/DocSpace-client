@@ -170,6 +170,8 @@ const SectionHeaderContent = (props) => {
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
+    showTemplateBadge,
+    allowInvitingMembers,
   } = props;
 
   const location = useLocation();
@@ -389,7 +391,7 @@ const SectionHeaderContent = (props) => {
   const stateIsShared = location?.state?.isShared;
   const stateIsExternal = location?.state?.isExternal;
   const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-  const showTemplateBadge =
+  const stateShowTemplateBadge =
     location?.state?.rootFolderType === FolderType.RoomTemplates &&
     !stateIsRoot;
 
@@ -436,7 +438,9 @@ const SectionHeaderContent = (props) => {
       })}. ${
         lifetime.deletePermanently
           ? t("Files:AfterFilesWillBeDeletedPermanently")
-          : t("Files:AfterFilesWillBeMovedToTrash")
+          : t("Files:FilesMovedToTrashNotice", {
+              sectionName: t("Common:TrashSection"),
+            })
       }`;
 
     return null;
@@ -567,10 +571,13 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
-  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
+  const badgeLabel =
+    stateShowTemplateBadge || showTemplateBadge ? t("Files:Template") : "";
 
   const warningText = isRecycleBinFolder
-    ? t("TrashErasureWarning")
+    ? t("TrashAutoDeleteWarning", {
+        sectionName: t("Common:TrashSection"),
+      })
     : isPersonalReadOnly
       ? t("PersonalFolderErasureWarning")
       : "";
@@ -585,6 +592,15 @@ const SectionHeaderContent = (props) => {
     }
 
     return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
+  };
+
+  const isPlusButtonVisible = () => {
+    if (!isContactsPage || isContactsInsideGroupPage) return true;
+
+    const lengthList = getContextOptionsPlus()?.length;
+    if (lengthList === 0) return false;
+
+    return true;
   };
 
   return (
@@ -682,6 +698,9 @@ const SectionHeaderContent = (props) => {
                 guidAnimationVisible={guidAnimationVisible}
                 setGuidAnimationVisible={setGuidAnimationVisible}
                 isContextButtonVisible={isContextButtonVisible()}
+                isPlusButtonVisible={
+                  !allowInvitingMembers ? isPlusButtonVisible() : true
+                }
               />
               {showSignInButton ? (
                 <Button
@@ -819,8 +838,14 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
-      settingsStore;
+    const {
+      theme,
+      frameConfig,
+      isFrame,
+      currentDeviceType,
+      displayAbout,
+      allowInvitingMembers,
+    } = settingsStore;
 
     const isRoom = !!roomType;
 
@@ -886,6 +911,7 @@ export default inject(
         : pathParts?.length === 1;
 
     const isArchive = rootFolderType === FolderType.Archive;
+    const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
@@ -1000,6 +1026,8 @@ export default inject(
       setGuidAnimationVisible,
       setRefMap,
       deleteRefMap,
+      showTemplateBadge: isTemplate && !isRoot,
+      allowInvitingMembers,
     };
   },
 )(

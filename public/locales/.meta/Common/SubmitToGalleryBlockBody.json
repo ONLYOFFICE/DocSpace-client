@@ -3,7 +3,7 @@
   "content": "Submit your templates to share them with the {{organizationName}} community.",
   "content_en_sha1_hash": "f402c1826e5738eb55c2ef6d097ef02787db7f76",
   "created_at": "2025-05-19T21:30:49.165Z",
-  "updated_at": "2025-05-26T07:57:32.402Z",
+  "updated_at": "2025-05-28T09:30:02.408Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to submit their templates to share them within the organization's community. It appears in the body of a form gallery tile.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'تسليم' (tasleem) in this context translates more closely to 'delivery' or 'handover' rather than 'submit'. While understandable, 'تقديم' (taqdeem) or 'إرسال' (irsāl) would be more accurate translations of 'submit'.",
-          "suggestion": "تقديم القوالب الخاصة بك لمشاركتهم مع مجتمع {{organizationName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -54,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pošlete své šablony a podělte se o ně s komunitou {{organizationName}}' is a literal translation but doesn't fully capture the nuance of 'Submit your templates to share them with the {{organizationName}} community.' A more natural Czech phrasing would be 'Odesílejte své šablony, abyste je mohli sdílet s komunitou {{organizationName}}.' or 'Sdílejte své šablony s komunitou {{organizationName}} odesláním.'.",
-          "suggestion": "Odesílejte své šablony, abyste je mohli sdílet s komunitou {{organizationName}}."
+          "description": "The English phrase \"Submit your templates\" is better translated as \"Odeslat své šablony\" rather than \"Pošlete své šablony\". \"Pošlete\" implies sending something physically, while \"odeslat\" is more appropriate for digital submission.",
+          "suggestion": "Odeslat své šablony a podělte se o ně s komunitou {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses \"-\" to connect \"community\" with \"հետ:\" which is not the standard way to form possessive or connecting phrases in Armenian. It's more common to use either a hyphen or other phrasing.",
-          "suggestion": "Consider rephrasing the connection between \"community\" and \"հետ\" using a hyphen (community-ի հետ) or a more natural phrasing for possessive connection in Armenian.  For example, \"community-ի հետ կիսելու համար\"."
+          "description": "The Armenian translation includes a hyphenated 'community-ի'. While understandable, in Armenian it's more common to use a genitive case marker directly attached to the noun, like 'community-ի հետ' (with community).",
+          "suggestion": "Consider rephrasing to 'Ներկայացրեք ձեր ձևանմուշները՝ դրանք կիսելու {{organizationName}} community-ի հետ' or restructure to be more natural."
         }
       ],
       "approved_at": null
@@ -126,13 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"to share them\" is not accurately translated. While \"ໃຫ້ແບ່ງປັນ\" (hai baeng pan) is present, it doesn't fully convey the intention of submitting *for the purpose* of sharing. A more accurate translation would emphasize the sharing aspect following the submission.",
-          "suggestion": "ສົ່ງແບບຢ່າງຂອງທ່ານ ໃຫ້ແບ່ງປັນກັບສະບ້ານຊຸມຊົນ {{organizationName}} ຂອງພວກເຮົາ"
-        },
-        {
-          "type": "formatting",
-          "description": "The original English includes a variable organizationName. The Lao translation doesn't clearly convey it's meant to be dynamically replaced.",
-          "suggestion": "ສົ່ງແບບຢ່າງຂອງທ່ານ ໃຫ້ແບ່ງປັນກັບສະບ້ານຊຸມຊົນ {{organizationName}}."
+          "description": "The Lao translation 'ໃຫ້ແບ່ງປັນກັບສະບ້ານຊຸມຊົນ' doesn't quite capture the nuance of 'to share them with the community'. A more accurate translation would convey the idea of contributing to the community.",
+          "suggestion": "ສົ່ງແບບຢ່າງຂອງທ່ານ ໃຫ້ປະກອບສ່ວນເຂົ້າໃນຊຸມຊົນ {{organizationName}}."
         }
       ],
       "approved_at": null
@@ -176,13 +165,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Присылайте' (Prisylaite) implies sending something, which can be overly informal or even slightly demanding for a submission context. 'Предлагайте' (Predlagayte) or 'Размещайте' (Razmeschayte) would be more appropriate and convey 'submit' or 'share' in a more professional tone.",
-          "suggestion": "Предлагайте свои шаблоны, чтобы поделиться ими с сообществом {{organizationName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -191,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ඔබේ සැකිලි {{organizationName}} ප්‍රජාව සමඟ බෙදා ගැනීමට ඉදිරිපත් කරන්න.\" is a literal translation but doesn't flow naturally in Sinhala. A more natural phrasing would convey the action of submitting rather than just presenting.",
-          "suggestion": "ඔබේ සැකිලි {{organizationName}} ප්‍රජාවට යවන්න."
+          "description": "The translation \"ඔබේ සැකිලි {{organizationName}} ප්‍රජාව සමඟ බෙදා ගැනීමට ඉදිරිපත් කරන්න.\" is a literal translation that doesn't flow naturally in Sinhala. A more natural phrasing would be something like \"ඔබේ සැකිලි බෙදා ගැනීම සඳහා {{organizationName}} ප්‍රජާއ වෙත යවන්න\" or \"ඔබේ සැකිලි {{organizationName}} ප්‍රජාව සමඟ බෙදා ගන්න\".",
+          "suggestion": "ඔබේ සැකිලි බෙදා ගැනීම සඳහා {{organizationName}} ප්‍රජާއ වෙත යවන්න"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrasing 'ඉදිරිපත් කරන්න' (idiriipath karannaa) suggests a formal submission, whereas 'යවන්න' (yavannaa) is more commonly used for sharing content within a community, which aligns better with the intent of the original English.",
-          "suggestion": "ඔබේ සැකිලි {{organizationName}} ප්‍රජාවට යවන්න."
+          "type": "formatting",
+          "description": "The use of \"{{organizationName}}\" is maintained in the translation, which might be acceptable depending on the platform and desired user experience. Consider localizing this placeholder if possible.",
+          "suggestion": "Explore options to localize the placeholder {{organizationName}} if feasible."
         }
       ],
       "approved_at": null
@@ -220,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Поднесите' (Podnesite) implies 'submit' in a formal or legal context, like submitting a document to an authority. In this context, 'share' is more appropriate. A more natural translation for 'submit' would be something like 'пошаљите' (poshaljite) or 'ставите' (stavite).",
+          "description": "The Serbian translation \"Поднесите своје шаблоне да их делите са {{organizationName}} заједницом\" doesn't accurately convey the meaning of \"Submit your templates\". \"Поднесите\" implies a formal submission, potentially to an authority, which isn't the intended meaning. A more appropriate translation would convey sharing or uploading.",
           "suggestion": "Пошаљите своје шаблоне да их делите са {{organizationName}} заједницом."
         }
       ],
@@ -232,7 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Podnesite' is archaic and not commonly used in modern Serbian. A more natural and understandable translation would be 'Predajte'.",
+          "description": "The word 'Podnesite' (Podnesite) is archaic and not commonly used in modern Serbian. A more natural translation for 'Submit' would be 'Predajte'.",
           "suggestion": "Predajte svoje šablone da ih delite sa {{organizationName}} zajednicom."
         }
       ],

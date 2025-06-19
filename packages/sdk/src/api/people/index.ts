@@ -30,8 +30,11 @@ import { cookies } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import type { TUser } from "@docspace/shared/api/people/types";
+import { logger } from "@/../logger.mjs";
 
 export async function getSelf(): Promise<TUser | undefined> {
+  logger.debug("Start GET /people/@self");
+
   const cookieStore = await cookies();
   const authToken = cookieStore.get("asc_auth_key");
 

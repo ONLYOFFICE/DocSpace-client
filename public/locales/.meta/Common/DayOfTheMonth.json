@@ -3,7 +3,7 @@
   "content": "Day of the month",
   "content_en_sha1_hash": "067497ecd979a531adeb039b5c57048e6702a8f2",
   "created_at": "2025-05-19T21:30:44.405Z",
-  "updated_at": "2025-05-26T07:57:32.900Z",
+  "updated_at": "2025-05-28T09:30:02.934Z",
   "comment": {
     "text": "The translation key \"DayOfTheMonth\" is used to display a placeholder text for a calendar component that represents a specific day of the month. When there are no days in the selection (i.e., every day), it shows \"Every Day Of The Month\". This text appears in a dropdown select component, indicating available days of the month.",
     "is_auto": true,
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"何日\" while literally meaning 'what day', is a shorthand for 'day of the month'. A more accurate and complete translation would be something like \"月の何日\" (tsuki no nannichi) or simply \"日付\" (hizuke) depending on the desired level of formality and context.",
-          "suggestion": "月の何日 (tsuki no nannichi) or 日付 (hizuke)"
+          "description": "The translation '何日' while literally meaning 'what day', is a truncated version of \"日付\" (date) and doesn't fully convey \"Day of the month\". It's understandable in context, but technically an incomplete translation.",
+          "suggestion": "月の日"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"날짜\" (naljja) translates to \"date\" in general, not specifically \"day of the month\". While 'date' can encompass 'day of the month,' it's not a precise translation.",
-          "suggestion": "Consider a more specific translation like \"월일\" (wol-il), which directly means \"day of the month\", or \"음력 날짜\" (eumnyeok naljja) if the context implies a lunar calendar."
+          "description": "The Korean translation \"날짜\" generally means \"date\" and doesn't specifically convey \"day of the month.\" While it's a related concept, it's not a precise translation.",
+          "suggestion": "Consider a more specific translation like \"각 월의 날짜\" (each month's date) or simply \"날짜\" if the context allows for a broader interpretation of \"date.\""
         }
       ],
       "approved_at": null
@@ -167,8 +167,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"මාසයේ දවස\" literally translates to \"day of the month\" but the possessive particle '්' is misplaced. It should be 'මාසයේ දවස'.",
+          "type": "spelling",
+          "description": "The Sinhala translation 'මාසයේ දවස' contains a spelling error. The apostrophe should be a vowel sandhi.",
           "suggestion": "මාසයේ දවස"
         }
       ],
@@ -192,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Дан у месецу\" literally translates to \"Day in the month.\" While understandable, it's not the most natural or accurate translation of \"Day of the month.\" A more idiomatic translation would be something like \"Дан месеца\".",
+          "description": "The translation \"Дан у месецу\" is a literal translation of 'Day in the month' rather than 'Day of the month'. It's not the standard or most natural way to express this concept in Serbian.",
           "suggestion": "Дан месеца"
         }
       ],
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"День місяця\" literally translates to \"Day of the Moon\" instead of \"Day of the month\".",
-          "suggestion": "The correct translation should be \"Число місяця\" or \"День місяця\" can be used in certain contexts, but \"Число місяця\" is more accurate for the general meaning of 'Day of the month'."
+          "description": "The Ukrainian translation 'День місяця' literally translates to 'Day of the Moon', not 'Day of the month'. This is an inaccurate translation.",
+          "suggestion": "The correct translation should be 'Число місяця' or 'День календаря'."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"月份日期\" is not the most natural or accurate translation of \"Day of the month.\" \"月份\" refers to 'month,' and \"日期\" refers to 'date.' Combining them creates a literal but awkward translation. A more common and accurate translation would focus on the day within a month.",
-          "suggestion": "月中的日期"
+          "description": "The translation \"月份日期\" is not the most accurate or natural rendering of \"Day of the month\". It literally translates to \"Month Date\".",
+          "suggestion": "Consider \"日期\" (Rìqí) or \"几号\" (Jǐ hào) for a more appropriate translation. \"日期\" refers to a date, while \"几号\" specifies 'which day of the month'."
         }
       ],
       "approved_at": null

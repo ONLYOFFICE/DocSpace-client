@@ -52,6 +52,7 @@ const DeleteDialogComponent = (props) => {
     deleteRoomsAction,
     isPersonalRoom,
     isRoom,
+    isTemplatesFolder,
     selection: selectionProps,
   } = props;
 
@@ -90,7 +91,9 @@ const DeleteDialogComponent = (props) => {
     onClose();
 
     const translations = {
-      deleteFromTrash: t("Translations:DeleteFromTrash"),
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
     };
 
     if (!selection.length) return;
@@ -161,7 +164,9 @@ const DeleteDialogComponent = (props) => {
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
-    return t("Common:MoveToTrashTitle");
+    return t("Common:SectionMoveConfirmation", {
+      sectionName: t("Common:TrashSection"),
+    });
   };
 
   const moveToTrashNoteText = () => {
@@ -233,7 +238,7 @@ const DeleteDialogComponent = (props) => {
       );
     }
 
-    if (isRoom) {
+    if (isRoom || isTemplatesFolder) {
       return isSingle ? (
         isFolder ? (
           <>
@@ -279,7 +284,9 @@ const DeleteDialogComponent = (props) => {
         ? t("Common:OKButton")
         : unsubscribe
           ? t("UnsubscribeButton")
-          : t("MoveToTrashButton");
+          : t("Common:MoveToSection", {
+              sectionName: t("Common:TrashSection"),
+            });
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
@@ -331,8 +338,13 @@ export default inject(
       setSelected,
     } = filesStore;
     const { deleteAction, deleteRoomsAction } = filesActionsStore;
-    const { isPrivacyFolder, isRecycleBinFolder, isPersonalRoom, isRoom } =
-      treeFoldersStore;
+    const {
+      isPrivacyFolder,
+      isRecycleBinFolder,
+      isPersonalRoom,
+      isRoom,
+      isTemplatesFolderRoot,
+    } = treeFoldersStore;
 
     const {
       deleteDialogVisible: visible,
@@ -368,6 +380,7 @@ export default inject(
       deleteRoomsAction,
       isPersonalRoom,
       isRoom,
+      isTemplatesFolder: isTemplatesFolderRoot,
     };
   },
 )(observer(DeleteDialog));

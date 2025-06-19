@@ -13,7 +13,6 @@
   "DeleteTemplates": "Voulez-vous vraiment supprimer les modèles de salle sélectionnés ? Ils ne peuvent pas être restaurés.",
   "FolderPermanentlyDeleted": "Le dossier sera définitivement supprimé dans les 30 jours.",
   "ItemsPermanentlyDeleted": "Les éléments seront définitivement supprimés dans les 30 jours.",
-  "MoveToTrashButton": "Mettre dans la corbeille",
   "UnsubscribeButton": "Se désabonner",
   "UnsubscribeNote": "Êtes-vous sûr de vouloir vous désabonner des éléments sélectionnés dans la liste ?",
   "UnsubscribeTitle": "Confirmation de désabonnement"

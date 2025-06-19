@@ -151,6 +151,8 @@ class UploadDataStore {
 
   totalErrorsCount = 0;
 
+  finishUploadFilesCalled = false;
+
   constructor(
     settingsStore,
     treeFoldersStore,
@@ -253,6 +255,8 @@ class UploadDataStore {
   };
 
   cancelUpload = (t) => {
+    this.finishUploadFilesCalled = false;
+
     const newUploadData = {
       filesSize: this.filesSize,
       uploadedFiles: this.uploadedFiles,
@@ -1569,6 +1573,8 @@ class UploadDataStore {
   };
 
   startUploadFiles = async (t, createNewIfExist = true) => {
+    this.finishUploadFilesCalled = false;
+
     const files = this.files;
 
     if (files.length === 0 || this.filesSize === 0) {
@@ -1591,8 +1597,6 @@ class UploadDataStore {
   };
 
   startSessionFunc = (indexOfFile, t, createNewIfExist = true) => {
-    // console.log("START UPLOAD SESSION FUNC");
-
     if (!this.uploaded && this.files.length === 0) {
       this.uploaded = true;
       this.asyncUploadObj = {};
@@ -1601,12 +1605,14 @@ class UploadDataStore {
     }
 
     const item = this.files[indexOfFile];
+
     this.files[indexOfFile].inAction = true;
 
     if (!item) {
       console.error("Empty files");
       return Promise.resolve();
     }
+
     if (
       item.action === "uploaded" ||
       item.action === "convert" ||
@@ -1639,7 +1645,6 @@ class UploadDataStore {
         const location = res.data.location;
         const path = res.data.path;
         const operationId = res.data.id;
-
         const requestsDataArray = [];
 
         let chunk = 0;
@@ -1761,7 +1766,9 @@ class UploadDataStore {
               !f.cancel,
           ) === -1;
 
-        if (allFilesIsUploaded) {
+        if (allFilesIsUploaded && !this.finishUploadFilesCalled) {
+          this.finishUploadFilesCalled = true;
+
           if (!this.filesToConversion.length) {
             this.finishUploadFiles(t, !!this.tempConversionFiles.length);
           } else {
@@ -1916,13 +1923,14 @@ class UploadDataStore {
     )
       .then((res) => {
         let data = null;
+        const operation = res[0];
 
-        if (res && res.length > 0) {
-          if (res[res.length - 1]?.error) {
-            return Promise.reject(res[res.length - 1]);
+        if (operation) {
+          if (operation?.error) {
+            return Promise.reject(operation);
           }
 
-          data = res[res.length - 1] ? res[res.length - 1] : null;
+          data = operation ?? null;
         }
 
         if (!data) {
@@ -1976,12 +1984,13 @@ class UploadDataStore {
       .then((res) => {
         let data = null;
 
-        if (res && res.length > 0) {
-          if (res[res.length - 1]?.error) {
-            return Promise.reject(res[res.length - 1]);
+        const operation = res[0];
+        if (operation) {
+          if (operation?.error) {
+            return Promise.reject(operation);
           }
 
-          data = res[res.length - 1] ? res[res.length - 1] : null;
+          data = operation ?? null;
         }
 
         if (!data) {
@@ -2109,6 +2118,7 @@ class UploadDataStore {
       const item = await getOperationProgress(
         data.id,
         getUnexpectedErrorText(),
+        true,
       );
       operationItem = item;
 

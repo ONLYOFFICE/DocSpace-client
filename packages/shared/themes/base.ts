@@ -1441,26 +1441,6 @@ export const getBaseTheme = () => {
       borderRadius: "50%",
     },
 
-    rombsLoader: {
-      blue: {
-        colorStep_1: "#F2CBBF",
-        colorStep_2: white,
-        colorStep_3: "#E6E4E4",
-        colorStep_4: "#D2D2D2",
-      },
-      red: {
-        colorStep_1: "#BFE8F8",
-        colorStep_2: white,
-        colorStep_3: "#EFEFEF",
-      },
-      green: {
-        colorStep_1: "#CBE0AC",
-        colorStep_2: white,
-        colorStep_3: "#EFEFEF",
-        colorStep_4: "#E6E4E4",
-      },
-    },
-
     dialogLoader: {
       borderBottom: `1px solid ${loaderLight}`,
     },
@@ -1490,9 +1470,9 @@ export const getBaseTheme = () => {
         heightWithBorder: "30px",
         heightModernView: "28px",
 
-        paddingLeft: "16px",
+        paddingLeft: "8px",
         paddingRightNoArrow: "16px",
-        paddingRight: "8px",
+        paddingRight: "4px",
 
         selectPaddingLeft: "8px",
         selectPaddingRightNoArrow: "14px",

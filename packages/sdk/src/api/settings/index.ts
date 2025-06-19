@@ -34,10 +34,13 @@ import {
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
+import { logger } from "@/../logger.mjs";
 
 export async function getSettings(
   withPassword = false,
 ): Promise<TSettings | string | undefined> {
+  logger.debug(`Start GET /settings?withPassword=${withPassword}`);
+
   const [req] = await createRequest(
     [`/settings?withPassword=${withPassword}`],
     [["", ""]],
@@ -58,6 +61,8 @@ export async function getSettings(
 }
 
 export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
+  logger.debug("Start GET /settings/colortheme");
+
   const [req] = await createRequest(
     [`/settings/colortheme`],
     [["", ""]],
@@ -74,6 +79,8 @@ export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
 }
 
 export async function getBuildInfo() {
+  logger.debug("Start GET /settings/version/build");
+
   const [req] = await createRequest(
     [`/settings/version/build`],
     [["", ""]],
@@ -90,6 +97,8 @@ export async function getBuildInfo() {
 }
 
 export async function getCapabilities() {
+  logger.debug("Start GET /capabilities");
+
   const [req] = await createRequest([`/capabilities`], [["", ""]], "GET");
 
   const res = await fetch(req, { next: { revalidate: 300 } });
@@ -102,6 +111,8 @@ export async function getCapabilities() {
 }
 
 export async function getPortalCultures(): Promise<TPortalCultures> {
+  logger.debug("Start GET /settings/cultures");
+
   const [getPortalCultures] = await createRequest(
     [`/settings/cultures`],
     [["", ""]],

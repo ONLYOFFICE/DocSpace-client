@@ -437,6 +437,7 @@ module.exports = (env, argv) => {
     htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
       runtime.checksums["browserDetector.js"] || dateHash
     }`;
+
     htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
       runtime.checksums["config.json"] || dateHash
     }`;

@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2025-05-26T07:57:32.139Z",
+  "updated_at": "2025-06-02T10:20:51.003Z",
   "comment": {
     "text": "This translation key is used for the label \"Spreadsheet\" which appears on a button in the \"Actions\" dropdown menu, allowing users to create a new spreadsheet. It is also used as part of a dialog and links within the application, consistently displaying the term \"Spreadsheet\". The text should be translated to appear cohesively across these different contexts.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 88,
+      "line_number": 87,
       "context": "{\n label: t(\"Document\"),\n value: \".docx\",\n },\n {\n label: t(\"Spreadsheet\"),\n value: \".xlsx\",\n },\n ];\n \n const isXML = convertItem?.fileExst?.includes(\".xml\");",
       "module": "/packages/client"
     },

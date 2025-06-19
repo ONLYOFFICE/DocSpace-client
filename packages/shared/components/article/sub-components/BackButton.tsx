@@ -25,19 +25,34 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg?url";
+import ArrowTabletIcon from "PUBLIC_DIR/images/arrow-left.long.react.svg?url";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
+import { DeviceType } from "../../../enums";
+
 import styles from "../Article.module.scss";
 
-const BackButton = ({ showText }: { showText: boolean }) => {
+const BackButton = ({
+  showText,
+  currentDeviceType,
+  onLogoClickAction,
+}: {
+  showText: boolean;
+  currentDeviceType: DeviceType;
+  onLogoClickAction?: () => void;
+}) => {
   const { t } = useTranslation("Common");
   const navigate = useNavigate();
 
   const onClickBack = () => {
+    onLogoClickAction?.();
     navigate("/");
   };
+
+  const icon =
+    currentDeviceType === DeviceType.desktop ? ArrowIcon : ArrowTabletIcon;
 
   return (
     <div
@@ -45,11 +60,7 @@ const BackButton = ({ showText }: { showText: boolean }) => {
       data-show-article={showText ? "true" : "false"}
       onClick={onClickBack}
     >
-      <IconButton
-        className={styles.arrowIcon}
-        iconName={ArrowIcon}
-        isClickable
-      />
+      <IconButton className={styles.arrowIcon} iconName={icon} isClickable />
       {showText ? <Text truncate>{t("Common:Back")}</Text> : null}
     </div>
   );

@@ -24,93 +24,93 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import pino from "pino";
+import { createLogger, format, transports } from "winston";
+import WinstonCloudWatch from "winston-cloudwatch";
+import "winston-daily-rotate-file";
 import os from "os";
 import { randomUUID } from "crypto";
-
+import date from "date-and-time";
 import config from "./config/index.mjs";
 
-const INTERVAL = 5000;
-const MAX_FILE_COUNT = 30;
-
-const formatters = {
-  level(label) {
-    return { level: label };
-  },
-};
-
-const timestamp = () => `,"date":"${new Date(Date.now()).toISOString()}"`;
-
 const getLogger = () => {
-  if (process.env["NODE_ENV"] !== "development") {
-    const aws = config.get("aws");
+  const isDevMode = process.env.NODE_ENV === "development";
+  const logLevel = isDevMode ? "debug" : "info";
+  const logPath = config.get("logPath");
 
-    if (aws?.cloudWatch.accessKeyId) {
-      const {
-        accessKeyId,
-        secretAccessKey,
-        region,
-        logGroupName,
-        logStreamName,
-      } = aws?.cloudWatch;
+  const winstonTransports = [
+    new transports.DailyRotateFile({
+      filename: `${logPath}/web.doceditor.%DATE%.log`,
+      level: logLevel,
+      datePattern: "MM-DD",
+      handleExceptions: true,
+      humanReadableUnhandledException: true,
+      zippedArchive: true,
+      maxSize: "50m",
+      maxFiles: "30d",
+      json: true,
+    }),
+    new transports.Console({
+      level: logLevel,
+      handleExceptions: true,
+      json: false,
+      colorize: true,
+    }),
+  ];
 
-      const streamName = logStreamName
-        .replace("${hostname}", os.hostname())
-        .replace("${applicationContext}", "Doceditor")
-        .replace("${guid}", randomUUID())
-        .replace("${date}", new Date().toLocaleString());
+  const aws = config.get("aws");
 
-      return pino({
-        level: "info",
-        formatters,
-        timestamp,
-        transport: {
-          target: "@serdnam/pino-cloudwatch-transport",
-          options: {
-            logGroupName,
-            logStreamName: streamName,
-            awsRegion: region,
-            awsAccessKeyId: accessKeyId,
-            awsSecretAccessKey: secretAccessKey,
-            interval: INTERVAL, // this is the default
-          },
-        },
-      });
-    }
+  if (aws?.cloudWatch.accessKeyId) {
+    const {
+      accessKeyId,
+      secretAccessKey,
+      region,
+      logGroupName,
+      logStreamName,
+    } = aws?.cloudWatch;
 
-    const logPath = config.get("logPath");
+    const streamName = logStreamName
+      .replace("${hostname}", os.hostname())
+      .replace("${applicationContext}", "Doceditor")
+      .replace("${guid}", randomUUID())
+      .replace("${date}", new Date().toLocaleString());
 
-    return pino({
-      level: "info",
-      formatters,
-      base: undefined,
-      timestamp,
-      transport: {
-        target: "pino-roll",
-        options: {
-          file: `${logPath}/web.doceditor`,
-          frequency: "daily",
-          limit: { count: MAX_FILE_COUNT },
-          dateFormat: "yyyy-MM-dd",
-          extension: ".log",
-          mkdir: true,
-        },
+    const cloudWatchOptions = {
+      name: "aws",
+      level: logLevel,
+      logStreamName: streamName,
+      logGroupName,
+      awsRegion: region,
+      jsonMessage: true,
+      awsOptions: {
+        credentials: { accessKeyId, secretAccessKey },
       },
-    });
+    };
+
+    transports.push(new WinstonCloudWatch(cloudWatchOptions));
   }
 
-  return pino({
-    transport: {
-      target: "pino-pretty",
-      options: {
-        colorize: true,
-        translateTime: "UTC:yyyy-mm-dd HH:MM:ss",
-        singleLine: true,
-        messageKey: "message",
-      },
-    },
-    level: "debug",
+  const customFormat = format((info) => {
+    const now = new Date();
+
+    info.date = date.format(now, "YYYY-MM-DD HH:mm:ss");
+    info.applicationContext = "DocEditor";
+    info.level = info.level.toUpperCase();
+
+    const hostname = os.hostname();
+
+    info["instance-id"] = hostname;
+
+    return info;
+  })();
+
+  const logger = createLogger({
+    level: logLevel,
+    format: format.combine(customFormat, format.json()),
+    transports: winstonTransports,
+    exitOnError: false,
   });
+
+  return logger;
 };
 
 export const logger = getLogger();

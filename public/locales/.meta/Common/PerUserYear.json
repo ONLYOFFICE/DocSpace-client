@@ -3,7 +3,7 @@
   "content": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/year",
   "content_en_sha1_hash": "67fcddb76f5e3b0864ae431f9cc3b3bd17c40431",
   "created_at": "2025-05-19T21:30:47.352Z",
-  "updated_at": "2025-05-26T07:57:32.769Z",
+  "updated_at": "2025-06-08T12:02:32.814Z",
   "comment": {
     "text": "This translation key is used to display the price per admin/user per year in a user interface. It typically appears as part of a payment or pricing information section, and its value will be determined by either `startValue` or `priceManagerPerMonth`, depending on the context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 337,
+      "line_number": 330,
       "context": "className=\"payment-info_managers-price\"\n >\n {isYearTariff ? (\n <Trans\n t={t}\n i18nKey=\"PerUserYear\"\n ns=\"Common\"\n values={{ currencySymbol, price: startValue }}\n components={{ 1: <span /> }}\n />\n ) : (",
       "module": "/packages/client"
     },

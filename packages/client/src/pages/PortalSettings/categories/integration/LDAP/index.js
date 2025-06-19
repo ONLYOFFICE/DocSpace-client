@@ -32,6 +32,7 @@ import { useNavigate } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { isMobile } from "@docspace/shared/utils/device";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -51,6 +52,7 @@ const LDAP = ({
   isMobileView,
   isLdapEnabled,
   isLoaded,
+  setScrollToSettings,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -64,8 +66,10 @@ const LDAP = ({
     }
   };
 
-  const onGoToInvitationSettings = () =>
+  const onGoToInvitationSettings = () => {
+    if (!isMobile()) setScrollToSettings(true);
     navigate(`/portal-settings/security/access-portal/invitation-settings`);
+  };
 
   useEffect(() => {
     isLdapAvailable && load(t);
@@ -85,9 +89,13 @@ const LDAP = ({
       <Text className="intro-text settings_unavailable">
         <Trans
           t={t}
-          i18nKey="LdapIntro"
+          i18nKey="LdapIntegrationDescription"
           ns="Ldap"
-          values={{ productName: t("Common:ProductName"), link }}
+          values={{
+            productName: t("Common:ProductName"),
+            sectionName: t("Common:Contacts"),
+            link,
+          }}
           components={{
             1: (
               <Link
@@ -137,8 +145,12 @@ const LDAP = ({
 
 export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
-  const { ldapSettingsUrl, currentColorScheme, currentDeviceType } =
-    settingsStore;
+  const {
+    ldapSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
+    setScrollToSettings,
+  } = settingsStore;
   const { load, isLdapEnabled, isLoaded } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -151,5 +163,6 @@ export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
     isMobileView,
     isLdapEnabled,
     isLoaded,
+    setScrollToSettings,
   };
 })(observer(LDAP));

@@ -170,6 +170,7 @@ export type TCommonEntries = {
   license: string;
   paymentemail: string;
   supportemail: string;
+  feedback: string;
 };
 
 export type THelpCenterEntries = {
@@ -346,6 +347,7 @@ export type TCompanyInfo = {
   email: string;
   address: string;
   phone: string;
+  hideAbout: boolean;
   isLicensor: boolean;
   isDefault: boolean;
 };

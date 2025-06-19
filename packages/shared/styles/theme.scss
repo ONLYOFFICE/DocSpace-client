@@ -27,6 +27,7 @@
   --article-catalog-profile-border-top: 1px solid #{$gray-light-mid};
   --article-catalog-vertical-line: 1px solid #{$gray-light-mid};
   --article-catalog-profile-background: #{$light-gray-hover};
+  --back-button-text-color: #{$gray-text};
 
   --article-item-header-color: #{$gray};
   --article-item-header-bg-color: #{$gray-strong};
@@ -372,6 +373,7 @@
   --article-catalog-profile-border-top: 1px solid #{$gray-dark-strong};
   --article-catalog-vertical-line: 1px solid #{$gray-dark-strong};
   --article-catalog-profile-background: #{$light-dark-gray-hover};
+  --back-button-text-color: #{$white};
 
   --article-item-header-color: #{$gray-dark};
   --article-item-header-bg-color: #{$gray-dark-strong};
@@ -1078,6 +1080,11 @@
   --info-panel-blur-color: #{$blur-light};
   --info-panel-bg: #{$white};
   --info-panel-border: #{$gray-light-mid};
+  --info-panel-avatar-color: #{$gray-text};
+  --info-panel-link-expired: #{$gray};
+  --info-panel-links-color: #{$light-blue-main};
+  --info-panel-links-primary-color: #{$gray-text};
+  --info-panel-members-create-link: #{$black};
 }
 
 .dark {
@@ -1085,6 +1092,11 @@
   --info-panel-blur-color: #{$blur-dark};
   --info-panel-bg: #{$black};
   --info-panel-border: #{$gray-dark-strong};
+  --info-panel-avatar-color: #{$gray};
+  --info-panel-link-expired: #{$gray};
+  --info-panel-links-color: #{$light-blue-main};
+  --info-panel-links-primary-color: #{$dark-gray-dark};
+  --info-panel-members-create-link: #{$gray-dark};
 }
 
 .light {
@@ -1095,8 +1107,8 @@
 
 .dark {
   --disabled-selected-item-color: #{$gray-dark-text};
-  --filter-input-selected-items-background: #{$gray-dark-mid};
-  --filter-input-selected-items-hover-background: #{$light-dark-gray-hover};
+  --filter-input-selected-items-background: #{$gray-dark-strong};
+  --filter-input-selected-items-hover-background: #{$dark-gray-light};
 }
 
 .light {
@@ -1494,6 +1506,10 @@
   --input-border-hover: #{$gray};
   --input-border-focus: #{$light-second-main};
 
+  // Selection
+  --input-selection-text-color: #{$black};
+  --input-selection-color: #{$light-blue-hover};
+
   // Disabled state
   --input-disabled-bg: #{$gray-light};
   --input-disabled-color: #{$gray-strong};
@@ -1556,8 +1572,11 @@
   --input-bg: #{$dark-gray-light};
   --input-color: #{$white};
   --input-border-color: #{$gray-dark-strong};
-  --input-border-hover: #{$gray-dark};
+  --input-border-hover: #{$gray-dark-text};
   --input-border-focus: #{$white};
+
+  --input-selection-text-color: #{$white};
+  --input-selection-color: #{$gray-dark-text};
 
   --input-disabled-bg: #{$gray-dark-strong};
   --input-disabled-color: #{$gray-dark-text};
@@ -1572,7 +1591,7 @@
   --input-warning-border-hover: #{$dark-status-warning};
   --input-warning-border-focus: #{$dark-status-warning};
 
-  --text-input-placeholder-color: #{$gray-dark};
+  --text-input-placeholder-color: #{$gray-dark-text};
   --text-input-placeholder-disabled-color: #{$gray-dark-text};
 
   // Dimensions
@@ -1653,6 +1672,7 @@
   --date-picker-border: 1px solid #{$gray-strong};
   --date-picker-cell-background: #{$gray-light-mid};
   --date-picker-icon-color: #{$light-gray-dark};
+  --data-picker-calendar-icon: #{$light-gray-dark};
 }
 
 .dark {
@@ -1660,6 +1680,7 @@
   --date-picker-border: 1px solid #{$gray-dark-strong};
   --date-picker-cell-background: #{$gray-dark-mid};
   --date-picker-icon-color: #{$dark-gray-dark};
+  --data-picker-calendar-icon: #{$dark-gray-dark};
 }
 
 .light {
@@ -1972,6 +1993,13 @@
   --preview-tile-background: #{$white};
   --preview-tile-border: 1px solid #{$gray-strong};
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
+
+  --button-delete-bg: #{$gray-light};
+  --button-delete-bg-hover: #{$light-gray-hover};
+  --button-delete-border: #{$gray-light};
+  --button-delete-border-hover: #{$light-gray-hover};
+  --button-delete-text: #{$gray-text};
+  --button-delete-icon-color: #{$light-gray-dark};
 }
 
 .dark {
@@ -1986,6 +2014,13 @@
   --preview-tile-background: #{$black};
   --preview-tile-border: 1px solid #{$gray-dark-strong};
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
+
+  --button-delete-bg: #{$gray-dark-mid};
+  --button-delete-bg-hover: #{$gray-dark-strong};
+  --button-delete-border: #{$gray};
+  --button-delete-border-hover: #{$light-dark-gray-hover};
+  --button-delete-text: #{$white};
+  --button-delete-icon-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2085,11 +2120,89 @@
 }
 
 .light {
-  --modal-dialog-border-color: #{$gray-light-mid};
+  --payment-background-color: #{$gray-light};
+  --payment-text-color: #{$light-gray-dark};
+  --payment-credit-color: #{$light-status-positive};
+  --payment-icon-background: #{$gray-light-mid};
+  --payment-icon-color: #{$light-gray-dark};
+  --payment-dialog-text: #{$gray};
+  --payment-devider-color: #{$gray-light-mid};
+  --warning-color: #{$light-error-status};
+  --background-service-color: #{$light-gray-hover};
+  --border-service-color: #{$gray-light-mid};
 }
 
 .dark {
+  --payment-background-color: #{$light-dark-gray-hover};
+  --payment-text-color: #{$dark-gray-dark};
+  --payment-credit-color: #{$dark-status-positive};
+  --payment-icon-background: #{$gray-dark-mid};
+  --payment-icon-color: #{$dark-gray-dark};
+  --payment-dialog-text: #{$gray-dark};
+  --payment-devider-color: #{$gray-dark-mid};
+  --warning-color: #{$dark-error-status};
+  --background-service-color: #{$light-dark-gray-hover};
+  --border-service-color: #{$gray-dark-strong};
   --modal-dialog-border-color: #{$gray-dark-strong};
+}
+
+.light {
+  --modal-dialog-border-color: #{$gray-light-mid};
+}
+
+.light {
+  --chat-button-open-background-color: #{$light-gray-hover};
+
+  --chat-header-button-background-color: #{$gray-light};
+  --chat-header-button-svg-color: #{$light-gray-dark};
+
+  --chat-header-select-session-date-color: #{$gray};
+  --chat-header-select-session-border-color: #{$gray-light-mid};
+
+  --chat-file-item-border-color: #{$gray-light-mid};
+  --chat-file-item-background-color: #{$white};
+  --chat-file-item-exst-color: #{$gray};
+
+  --chat-input-background-color: #{$gray-light};
+  --chat-input-button-file-border-color: #{$gray-strong};
+  --chat-input-button-file-background-color: unset;
+  --chat-input-button-file-color: #{$light-gray-dark};
+  --chat-input-button-send-color: #{$white};
+
+  --chat-message-color: #{$gray-text};
+  --chat-message-user-background-color: #{$light-gray-hover};
+  --chat-message-ai-background-color: #{$light-gray-hover};
+  --chat-message-error-background-color: #{$light-error-status};
+  --chat-message-code-block-background-color: #{$white};
+  --chat-message-code-block-separator-color: #{$gray-light-mid};
+}
+
+.dark {
+  --chat-button-open-background-color: #{$dark-gray-light};
+
+  --chat-header-button-background-color: #{$light-dark-gray-hover};
+  --chat-header-button-svg-color: #{$dark-gray-dark};
+
+  --chat-header-select-session-date-color: #{$gray-dark};
+  --chat-header-select-session-border-color: #{$gray-dark-strong};
+
+  --chat-file-item-border-color: #{$gray-dark-strong};
+  --chat-file-item-background-color: unset;
+  --chat-file-item-exst-color: #{$gray-dark};
+
+  --chat-input-background-color: #{$dark-gray-light};
+  --chat-input-button-file-border-color: #{$black};
+  --chat-input-button-file-background-color: #{$black};
+  --chat-input-button-file-color: #{$gray};
+  --chat-input-button-send-color: #{$white};
+
+  --chat-message-color: #{$dark-gray-dark};
+  --chat-message-user-background-color: #{$light-dark-gray-hover};
+  --chat-message-ai-background-color: #{$light-dark-gray-hover};
+  --chat-message-error-background-color: #{$dark-error-status};
+
+  --chat-message-code-block-background-color: #{$dark-gray-light};
+  --chat-message-code-block-separator-color: #{$gray-dark-strong};
 }
 
 .light {
@@ -2110,9 +2223,6 @@
   --selector-empty-screen-button-color: #{$light-gray-dark};
   --selector-empty-screen-hover-button-color: #{$black};
   --selector-empty-screen-description-color: #{$gray-text};
-
-  --selector-navigation-lifetime-fill: #{$gray};
-  --selector-navigation-lifetime-stroke: #{$gray};
 }
 
 .dark {
@@ -2134,9 +2244,6 @@
   --selector-empty-screen-button-color: #{$dark-gray-dark};
   --selector-empty-screen-hover-button-color: #{$white};
   --selector-empty-screen-description-color: #{$dark-gray-dark};
-
-  --selector-navigation-lifetime-fill: #{$dark-gray-dark};
-  --selector-navigation-lifetime-stroke: #{$gray};
 }
 
 .light {
@@ -2268,4 +2375,93 @@
   --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
   --settings-common-white-label-not-available-background: #{$gray-dark};
   --settings-common-white-label-text-color: #{$white};
+}
+
+.light {
+  --rombs-bg: #{$rombs-loader-red-bg};
+
+  --rombs-loader-blue: #{$blue-romb};
+  --rombs-loader-green: #{$green-romb};
+  --rombs-loader-red: #{$red-romb};
+
+  --rombs-loader-blue-colorStep_1: #{$rombs-loader-apricot-colorStep};
+  --rombs-loader-blue-colorStep_2: #{$white};
+  --rombs-loader-blue-colorStep_3: #{$rombs-loader-gray-colorStep};
+  --rombs-loader-blue-colorStep_4: #{$rombs-loader-dark-gray-colorStep};
+
+  --rombs-loader-red-colorStep_1: #{$rombs-loader-blue-colorStep};
+  --rombs-loader-red-colorStep_2: #{$white};
+  --rombs-loader-red-colorStep_3: #{$rombs-loader-light-gray-colorStep};
+
+  --rombs-loader-green-colorStep_1: #{$rombs-loader-green-colorStep};
+  --rombs-loader-green-colorStep_2: #{$white};
+  --rombs-loader-green-colorStep_3: #{$rombs-loader-light-gray-colorStep};
+  --rombs-loader-green-colorStep_4: #{$rombs-loader-gray-colorStep};
+}
+
+.dark {
+  --rombs-bg: #{$rombs-loader-red-bg};
+
+  --rombs-loader-blue: #{$blue-romb};
+  --rombs-loader-green: #{$green-romb};
+  --rombs-loader-red: #{$red-romb};
+
+  --rombs-loader-blue-colorStep_1: #{$black};
+  --rombs-loader-blue-colorStep_2: #{$black};
+  --rombs-loader-blue-colorStep_3: #{$dark-romb};
+  --rombs-loader-blue-colorStep_4: #{$dark-romb};
+
+  --rombs-loader-red-colorStep_1: #{$black};
+  --rombs-loader-red-colorStep_2: #{$black};
+  --rombs-loader-red-colorStep_3: #{$dark-romb};
+
+  --rombs-loader-green-colorStep_1: #{$black};
+  --rombs-loader-green-colorStep_2: #{$black};
+  --rombs-loader-green-colorStep_3: #{$dark-romb};
+}
+
+.light {
+  --modal-dialog-resolve-color: #{$gray};
+}
+
+.dark {
+  --modal-dialog-resolve-color: #{$gray};
+}
+
+.light {
+  --search-input-default-icon-fill: #{$gray-strong};
+  --search-input-filled-icon-fill: #{$gray};
+}
+
+.dark {
+  --search-input-default-icon-fill: #{$gray-dark-strong};
+  --search-input-filled-icon-fill: #{$gray-dark};
+  // --quantity-picker-disable-color: #{$light-gray-hover};
+  --payment-rectangle-color: #{$light-gray-hover};
+
+  --payment-price-container-disable-background: #{$gray-light};
+
+  --payment-warning-color: #{$light-status-warning};
+  --payment-accent-color: var(--color-scheme-main-buttons);
+}
+.dark {
+  // --quantity-picker-disable-color: #{$light-dark-gray-hover};
+  --payment-rectangle-color: #{$light-dark-gray-hover};
+
+  --payment-price-container-disable-background: #{$dark-gray-light};
+  --payment-warning-color: #{$dark-status-warning};
+  --payment-accent-color: var(--color-scheme-main-buttons);
+}
+
+.light {
+  --quantity-picker-disable-color: #{$gray};
+  --quantity-picker-additional-title: #{$gray};
+  --quantity-picker-track-number: #{$gray};
+  --quantity-picker-rectangle-color: #{$light-gray-hover};
+}
+.dark {
+  --quantity-picker-disable-color: #{$gray-dark};
+  --quantity-picker-additional-title: #{$gray-dark};
+  --quantity-picker-track-number: #{$gray-dark};
+  --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
 }

@@ -36,6 +36,8 @@ import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?u
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
+import LampReactSvgUrl from "PUBLIC_DIR/images/lamp.react.svg?url";
+
 import { makeAutoObservable } from "mobx";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -66,6 +68,8 @@ class ProfileActionsStore {
 
   userStore = null;
 
+  infoPanelStore = null;
+
   settingsStore = null;
 
   filesStore = null;
@@ -93,6 +97,7 @@ class ProfileActionsStore {
     userStore,
     settingsStore,
     currentTariffStatusStore,
+    infoPanelStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -102,6 +107,7 @@ class ProfileActionsStore {
     this.userStore = userStore;
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.infoPanelStore = infoPanelStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -200,6 +206,12 @@ class ProfileActionsStore {
     window.open(supportUrl, "_blank");
   };
 
+  onSuggestFeatureClick = () => {
+    const SuggestFeatureUrl = this.settingsStore.suggestFeatureUrl;
+
+    window.open(SuggestFeatureUrl, "_blank");
+  };
+
   onBookTraining = () => {
     const trainingEmail = this.settingsStore?.bookTrainingEmail;
 
@@ -257,6 +269,7 @@ class ProfileActionsStore {
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
+
     // const { isOwner } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
@@ -441,6 +454,14 @@ class ProfileActionsStore {
         label: t("Common:FeedbackAndSupport"),
         onClick: this.onSupportClick,
         url: this.settingsStore.feedbackAndSupportUrl || "#",
+        preventNewTab: true,
+      },
+      feedbackAndSupportEnabled && {
+        key: "user-menu-suggest-feature",
+        icon: LampReactSvgUrl,
+        label: t("Common:SuggestFeature"),
+        onClick: this.onSuggestFeatureClick,
+        url: this.settingsStore.suggestFeatureUrl || "#",
         preventNewTab: true,
       },
       bookTraining,

@@ -31,7 +31,7 @@ import { oauthHandlers } from "./oauth";
 import { authenticationHandlers } from "./authentication";
 import { portalHandlers } from "./portal";
 import { filesHandlers } from "./files";
-import { imagesHandlers } from "./images";
+import { staticsHandlers } from "./statics";
 
 export * from "./settings";
 export * from "./capabilities";
@@ -40,7 +40,7 @@ export * from "./oauth";
 export * from "./authentication";
 export * from "./portal";
 export * from "./files";
-export * from "./images";
+export * from "./statics";
 
 export const allHandlers = (port: string) => [
   ...settingsHandlers(port),
@@ -50,5 +50,5 @@ export const allHandlers = (port: string) => [
   ...authenticationHandlers(port),
   ...portalHandlers(port),
   ...filesHandlers(port),
-  ...imagesHandlers(),
+  ...staticsHandlers(),
 ];

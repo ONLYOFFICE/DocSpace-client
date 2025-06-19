@@ -31,12 +31,12 @@ import { http } from "msw";
 import fs from "fs";
 
 export const imagesHandler = () => {
-  return http.get("*/**/login/_next/public/images/*", async ({ request }) => {
+  return http.get("*/**/**/_next/public/images/*", async ({ request }) => {
     try {
       // Parse the URL manually instead of using the URL constructor
       const requestUrl = request.url;
       const imagePath = requestUrl
-        .split("/login/_next/public/images/")
+        .split("/_next/public/images/")
         .at(-1)!
         .split("?")[0];
 

@@ -31,4 +31,4 @@ import { imagesHandler } from "./images";
 
 export { logoHandler, imagesHandler };
 
-export const imagesHandlers = () => [logoHandler(), imagesHandler()];
+export const staticsHandlers = () => [logoHandler(), imagesHandler()];

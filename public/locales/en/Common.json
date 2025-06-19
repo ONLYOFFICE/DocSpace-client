@@ -502,7 +502,7 @@
   "ProviderSsoSetting": "Single sign-on",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "This room is opened in the <1>{{roomMode}}</1> mode. To be able to work on documents, please authorize.",
+  "PublicAuthorizeToast": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this {{productName}}, please authorize.",
   "PublicLink": "Public link",
   "PublicRoom": "Public room",
   "PublicRoomInfo": "Share documents for viewing, editing, commenting, or reviewing without registration. You can also embed this room into any web interface.",

@@ -109,6 +109,8 @@
     "@types/lodash": "4.17.10",
     "@types/react": "19.1.4",
     "@types/react-virtualized": "9.21.30",
+    "@types/react-window": "1.8.8",
+    "@types/react-window-infinite-loader": "1.0.9",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "@typescript-eslint/parser": "7.1.0",
     "babel-loader": "8.4.1",

@@ -110,7 +110,7 @@ class ServicesStore {
     if (!res) return;
 
     const { hasStorageSubscription, hasScheduledStorageChange } =
-      this.currentTariffStatusStore;
+      this.currentTariffStatusStore!;
 
     res[0].features.forEach((feature) => {
       if (feature.id === TOTAL_SIZE) {
@@ -139,7 +139,7 @@ class ServicesStore {
       setPaymentAccount,
       isAlreadyPaid,
       initWalletPayerAndBalance,
-    } = this.paymentStore;
+    } = this.paymentStore!;
 
     const requests = [
       this.handleServicesQuotas(),
@@ -153,8 +153,8 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid || this.paymentStore.walletCustomerEmail) {
-        if (this.paymentStore.isStripePortalAvailable)
+      if (isAlreadyPaid || this.paymentStore!.walletCustomerEmail) {
+        if (this.paymentStore!.isStripePortalAvailable)
           requests.push(setPaymentAccount());
         requests.push(fetchAutoPayments());
       } else {

@@ -59,7 +59,7 @@ type StorageDialogProps = {
   fetchBalance?: () => void;
   handleServicesQuotas?: () => void;
   hasScheduledStorageChange?: boolean;
-  nextStoragePlanSize?: boolean;
+  nextStoragePlanSize?: number;
   storageSizeIncrement?: number;
 };
 
@@ -77,7 +77,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   storageSizeIncrement,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
-  const [amount, setAmount] = useState<number>(currentStoragePlanSize);
+  const [amount, setAmount] = useState<number>(currentStoragePlanSize!);
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisible] = useState(false);
   const [isRequestDialog, setIsRequestDialog] = useState(false);
@@ -96,7 +96,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
-  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement);
+  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement!);
   const insufficientFunds = isWalletBalanceInsufficient(totalPrice);
   const isUpgradeStoragePlan = isPlanUpgrade(amount);
 
@@ -122,17 +122,17 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         return;
       }
 
-      const requests = [fetchPortalTariff!(), handleServicesQuotas()!];
+      const requests = [fetchPortalTariff!(), handleServicesQuotas!()];
 
       if (!isCancellation) requests.push(fetchBalance!());
 
       await Promise.all(requests);
 
       if (value === 0) {
-        setAmount(currentStoragePlanSize);
+        setAmount(currentStoragePlanSize!);
       }
       if (isCancellation) {
-        setAmount(currentStoragePlanSize);
+        setAmount(currentStoragePlanSize!);
 
         fetchBalance!();
       }
@@ -184,19 +184,20 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       <SalesDepartmentRequestDialog
         visible={isRequestDialog}
         onClose={() => setIsRequestDialog(false)}
+        sendPaymentRequest={undefined}
       />
     );
   }
 
-  const getDirectionalText = (from, to) => {
+  const getDirectionalText = (from: number, to: number) => {
     return isRTL ? `${from} ← ${to}` : `${from} → ${to}`;
   };
 
   const disableValueProps = hasScheduledStorageChange
     ? {
         disableValue: getDirectionalText(
-          currentStoragePlanSize,
-          nextStoragePlanSize,
+          currentStoragePlanSize!,
+          nextStoragePlanSize!,
         ),
       }
     : {};

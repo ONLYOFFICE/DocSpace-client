@@ -34,7 +34,7 @@ import { Text } from "../text";
 import { Slider } from "../slider";
 import { TextInput } from "../text-input";
 import { InputType } from "../text-input/TextInput.enums";
-import { Tabs, TabsTypes } from "../tabs";
+import { Tabs, TabsTypes, TTabItem } from "../tabs";
 
 import styles from "./quantity-picker.module.scss";
 
@@ -179,8 +179,8 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     });
   };
 
-  const onSelectTab = (data) => {
-    onChange(value + data.value);
+  const onSelectTab = (data: TTabItem) => {
+    onChange(value + (data.value ?? 0));
   };
 
   return (

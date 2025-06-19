@@ -28,7 +28,7 @@
 
 import React, { useCallback, useMemo } from "react";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
-import { ComboBox } from "../../../../components/combobox";
+import { ComboBox, TComboboxProps } from "../../../../components/combobox";
 import { ThirdPartyStorages } from "../../../../enums";
 import { getOptions } from "../../../../utils/getThirdPartyStoragesOptions";
 import { useDidMount } from "../../../../hooks/useDidMount";
@@ -181,7 +181,9 @@ const ThirdPartyStorageModule = ({
       <div className="auto-backup_storages-module">
         <ComboBox
           options={[]}
-          advancedOptions={advancedOptions}
+          advancedOptions={
+            advancedOptions as unknown as TComboboxProps["advancedOptions"]
+          }
           selectedOption={{
             key: 0,
             label: storageTitle,

@@ -26,15 +26,18 @@
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
     "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
+    "tsc": "pnpm --filter @docspace/login --filter @docspace/sdk --filter @docspace/doceditor --filter @docspace/shared tsc",
     "test:build": "pnpm --filter @docspace/login --filter @docspace/sdk test:build",
     "test:e2e:docker:build": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:build",
     "test:e2e:docker:start": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:start",
-    "test:e2e:docker:clear": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:clear"
+    "test:e2e:docker:clear": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:clear",
+    "pre-commit": "pnpm run lint"
   },
   "devDependencies": {
     "@types/node": "22.9.3",
     "@types/react-text-mask": "5.4.14",
     "he": "1.2.0",
+    "husky": "^9.1.7",
     "madge": "6.1.0",
     "nx": "21.2.0",
     "react": "19.1.0",

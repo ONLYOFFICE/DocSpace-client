@@ -30,7 +30,11 @@ import React, { useMemo, useState } from "react";
 
 import { Text } from "../../../components/text";
 import { ThirdPartyStorages } from "../../../enums";
-import { ComboBox, ComboBoxSize } from "../../../components/combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TComboboxProps,
+} from "../../../components/combobox";
 import { DropDownItem } from "../../../components/drop-down-item";
 import {
   getOptions,
@@ -158,7 +162,9 @@ const ThirdPartyStoragesModule = ({
     <>
       <ComboBox
         options={[]}
-        advancedOptions={advancedOptions}
+        advancedOptions={
+          advancedOptions as unknown as TComboboxProps["advancedOptions"]
+        }
         selectedOption={{ key: 0, label: selectedStorageTitle }}
         isDisabled={!thirdPartyStorage}
         size={ComboBoxSize.content}

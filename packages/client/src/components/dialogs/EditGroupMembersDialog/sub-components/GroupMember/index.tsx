@@ -42,7 +42,7 @@ import { Text } from "@docspace/shared/components/text";
 import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { EmployeeStatus } from "@docspace/shared/enums";
+import { EmployeeStatus, ShareAccessRights } from "@docspace/shared/enums";
 import {
   getUserAvatarRoleByType,
   getUserType,
@@ -89,12 +89,20 @@ const GroupMember = ({
   const userRoleOptions =
     user.isAdmin || user.isOwner || user.isRoomAdmin
       ? fullRoomRoleOptions
-      : filterPaidRoleOptions(fullRoomRoleOptions);
+      : filterPaidRoleOptions(
+          fullRoomRoleOptions as {
+            access: ShareAccessRights;
+            key: string;
+            label: string;
+          }[],
+        );
 
   const userRole = member.owner
     ? getUserRoleOptions(t).portalAdmin
     : fullRoomRoleOptions.find(
-        (option) => option.access === (member.userAccess || member.groupAccess),
+        (option) =>
+          "access" in option &&
+          option.access === (member.userAccess || member.groupAccess),
       );
 
   const hasIndividualRightsInRoom =
@@ -178,8 +186,8 @@ const GroupMember = ({
           {member.canEditAccess ? (
             <ComboBox
               className="role-combobox"
-              selectedOption={userRole}
-              options={userRoleOptions}
+              selectedOption={userRole as TOption}
+              options={userRoleOptions as TOption[]}
               scaled={false}
               withBackdrop={isMobile}
               size={ComboBoxSize.content}
@@ -199,7 +207,7 @@ const GroupMember = ({
               fontWeight={600}
               noSelect
             >
-              {userRole.label}
+              {"label" in userRole ? userRole.label : false}
             </Text>
           )}
         </div>

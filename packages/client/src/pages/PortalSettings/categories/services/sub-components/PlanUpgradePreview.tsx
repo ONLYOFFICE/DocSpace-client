@@ -44,10 +44,16 @@ import {
 } from "../hooks/resourceUtils";
 import { usePaymentContext } from "../context/PaymentContext";
 
-let timeout: NodeJS.Timeout;
+let timeout: NodeJS.Timeout | null;
 let controller: AbortController;
 
-const PlanUpgradePreview = (props) => {
+type PlanUpgradePreviewProps = {
+  currentStoragePlanSize?: number;
+  amount: number;
+  daysUtilPayment?: number;
+};
+
+const PlanUpgradePreview = (props: PlanUpgradePreviewProps) => {
   const { currentStoragePlanSize, amount, daysUtilPayment } = props;
   const { setFuturePayment, futurePayment, setIsWaitingCalculation } =
     usePaymentContext();
@@ -83,7 +89,7 @@ const PlanUpgradePreview = (props) => {
           setIsLoading(false);
           setIsWaitingCalculation(false);
         } catch (e) {
-          toastr.error(e);
+          toastr.error(e as unknown as string);
         }
       }, 1000);
     };
@@ -111,7 +117,7 @@ const PlanUpgradePreview = (props) => {
         <div className={styles.planInfoBody}>
           <Text fontWeight={600}>
             {t("AdditionalStorage", {
-              amount: `${calculateDifference(amount, currentStoragePlanSize)} ${t("Common:Gigabyte")}`,
+              amount: `${calculateDifference(amount, currentStoragePlanSize!)} ${t("Common:Gigabyte")}`,
             })}
           </Text>
           <Text
@@ -152,6 +158,6 @@ export default inject(({ currentTariffStatusStore }: TStore) => {
 
   return {
     currentStoragePlanSize,
-    daysUtilPayment: getDaysUntilPayment(storageSubscriptionExpiryDate),
+    daysUtilPayment: getDaysUntilPayment(storageSubscriptionExpiryDate!),
   };
 })(observer(PlanUpgradePreview));

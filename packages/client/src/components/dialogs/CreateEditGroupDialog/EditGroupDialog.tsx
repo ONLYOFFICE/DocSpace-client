@@ -38,7 +38,9 @@ import {
   MIN_LOADER_TIMER,
   SHOW_LOADER_TIMER,
 } from "@docspace/shared/selectors/utils/constants";
-import EditGroupStore from "SRC_DIR/store/EditGroupStore";
+import { TUser } from "@docspace/shared/api/people/types";
+
+import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import GroupNameParam from "./sub-components/GroupNameParam";
@@ -217,7 +219,9 @@ const EditGroupDialog = ({
                     withInfiniteLoader
                     total={currentTotal}
                     loadNextPage={loadMembers}
-                    hasNextPage={members ? members.length < currentTotal : null}
+                    hasNextPage={
+                      members ? members.length < currentTotal : false
+                    }
                   />
                 </>
               )
@@ -265,7 +269,7 @@ const EditGroupDialog = ({
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
           addMembers={(users) => {
-            addMembers(users);
+            addMembers(users as unknown as TUser[]);
             setSelectMembersPanelIsVisible(false);
           }}
         />

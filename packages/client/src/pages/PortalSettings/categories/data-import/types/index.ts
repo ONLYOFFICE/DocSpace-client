@@ -37,6 +37,7 @@ import { SaveCancelButtonProps } from "@docspace/shared/components/save-cancel-b
 import { TTranslation } from "@docspace/shared/types";
 
 import type { TFunction } from "i18next";
+import { TUser } from "@docspace/shared/api/people/types";
 
 export interface ProvidersProps {}
 
@@ -198,7 +199,7 @@ export interface UsersTableHeaderProps {
   columnInfoPanelStorageName: string;
   isIndeterminate: boolean;
   isChecked: boolean;
-  toggleAll?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggleAll?: (e?: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface UsersTableRowProps {
@@ -207,7 +208,9 @@ export interface UsersTableRowProps {
   email: string;
   isDuplicate: boolean;
   isChecked: boolean;
-  toggleAccount: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggleAccount: (
+    e: React.MouseEvent<Element> | React.ChangeEvent<HTMLInputElement>,
+  ) => void;
 }
 
 export interface RowViewProps {
@@ -345,7 +348,7 @@ export interface InjectedTypeSelectTableProps extends AccountsTableProps {
   changeGroupType: TStore["importAccountsStore"]["changeGroupType"];
   UserTypes: TStore["importAccountsStore"]["UserTypes"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
-  isOwner: TStore["userStore"]["user"]["isOwner"];
+  isOwner: TUser["isOwner"];
 }
 
 export interface TypeSelectTableViewProps {
@@ -449,10 +452,10 @@ export interface NoEmailUsersProps {
 }
 
 export interface UsersInfoBlockProps {
-  quota: { max: number };
-  totalUsedUsers: number;
-  numberOfSelectedUsers: number;
-  totalUsers: number;
+  quota?: { max: number };
+  totalUsedUsers?: number;
+  numberOfSelectedUsers?: number;
+  totalUsers?: number;
 }
 
 type TExportDetails = { name: string; icon?: string };

@@ -80,7 +80,7 @@ const NextcloudWorkspace = (props: WorkspaceProps) => {
       step={step}
       totalSteps={StepsData.length}
       title={StepsData[step - 1].title}
-      description={StepsData[step - 1].description}
+      description={StepsData[step - 1].description as string}
       component={StepsData[step - 1].component}
       logoText={logoText}
     />

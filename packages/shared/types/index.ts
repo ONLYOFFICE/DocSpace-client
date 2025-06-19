@@ -30,7 +30,7 @@ import {
   TSettings,
   TVersionBuild,
 } from "../api/settings/types";
-import { RoomsType } from "../enums";
+import { RoomsType, ShareAccessRights } from "../enums";
 import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
 
@@ -142,6 +142,7 @@ export type TCreatedBy = {
   id: string;
   profileUrl: string;
   isAnonim?: boolean;
+  templateAccess?: ShareAccessRights;
 };
 export type ConnectingStoragesType = {
   id: string;
@@ -199,7 +200,9 @@ declare global {
     };
     Asc: unknown;
     zESettings: unknown;
-    zE: unknown;
+    zE: {
+      apply: Function;
+    };
     i18n: {
       loaded: {
         [key: string]: { data: { [key: string]: string }; namespaces: string };

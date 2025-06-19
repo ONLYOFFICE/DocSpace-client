@@ -52,7 +52,7 @@ export const useServicesActions = () => {
   const maxStorageLimit = 9999;
 
   const formatWalletCurrency = (
-    quantity?: number,
+    quantity?: number | null,
     minimumFractionDigits: number = 2,
     maximumFractionDigits: number = 7,
   ) => {

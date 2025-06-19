@@ -68,7 +68,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
 
       onClose();
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as unknown as string);
     } finally {
       setIsLoading(false);
     }

@@ -97,7 +97,7 @@ const Amount = (props: AmountProps) => {
           </Text>
           <Tabs
             items={amountTabs()}
-            selectedItemId={selectedAmount}
+            selectedItemId={selectedAmount!}
             onSelect={onSelectAmount}
             type={TabsTypes.Secondary}
             allowNoSelection

@@ -69,6 +69,7 @@ export type SimpleUserRowProps = {
   item: TItem;
 
   isActive?: boolean;
+  inProgress?: boolean;
 
   getContextModel?: () => ContextMenuModel[];
 

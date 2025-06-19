@@ -27,7 +27,7 @@
 import React from "react";
 
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
-import { TData } from "@docspace/shared/components/row/Row.types";
+import { TData } from "@docspace/shared/components/rows/row/Row.types";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 

@@ -94,7 +94,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     const isEnabled = dataset.enabled?.toLowerCase() === "true";
     const id = dataset.id;
 
-    onToggle(id, isEnabled);
+    onToggle?.(id!, isEnabled);
   };
 
   const textTooltip = () => {
@@ -126,7 +126,16 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
       </Text>
       {isCardLinkedToPortal ? (
         <div className={styles.payerContainer}>
-          <PayerInformation />
+          <PayerInformation
+            style={undefined}
+            theme={undefined}
+            user={undefined}
+            accountLink={undefined}
+            payerInfo={undefined}
+            email={undefined}
+            isNotPaidPeriod={undefined}
+            isStripePortalAvailable={undefined}
+          />
         </div>
       ) : null}
       {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {

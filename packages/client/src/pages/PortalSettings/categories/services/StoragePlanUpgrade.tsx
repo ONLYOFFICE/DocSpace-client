@@ -134,6 +134,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   }, []);
 
   const resetIntervalSuccess = async (isCancellation: boolean) => {
+    if (isUpgradeStoragePlan) onCloseDialog();
+
     if (isCancellation || !isUpgradeStoragePlan)
       setAmount(currentStoragePlanSize);
 
@@ -186,7 +188,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
           if (isUpdatedTariff(walletQuotas, isCancellation)) {
             resetIntervalSuccess(isCancellation);
-            if (isUpgradeStoragePlan) onCloseDialog();
           }
         } catch (e) {
           setIsLoading(false);

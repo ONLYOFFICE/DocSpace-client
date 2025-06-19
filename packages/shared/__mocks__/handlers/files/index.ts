@@ -29,7 +29,7 @@ import { foldersTreeHandler } from "./foldersTree";
 import { folderHandler } from "./folder";
 import { validatePublicRoomKeyHandler } from "./validatePublicRoomKey";
 import { validatePublicRoomPasswordHandler } from "./validatePublicRoomPassword";
-import { roomListHandler } from "./roomList";
+import { roomListHandler, roomListResolver } from "./roomList";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -41,6 +41,7 @@ export {
   roomListHandler,
   folderHandler,
   validatePublicRoomPasswordHandler,
+  roomListResolver,
 };
 
 export const filesHandlers = (port: string) => [

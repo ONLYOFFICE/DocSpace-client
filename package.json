@@ -25,11 +25,7 @@
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
-    "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
-    "test:build": "pnpm nx run-many -t test:build -p @docspace/login @docspace/sdk",
-    "test:e2e:docker:build": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:build",
-    "test:e2e:docker:start": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:start",
-    "test:e2e:docker:clear": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:clear"
+    "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5"
   },
   "devDependencies": {
     "@types/node": "22.9.3",

@@ -26,8 +26,8 @@
 
 import React from "react";
 
-import { StyledTableContainer } from "./Table.styled";
-import { TableContainerProps } from "./Table.types";
+import { StyledTableContainer } from "../Table.styled";
+import { TableContainerProps } from "../Table.types";
 
 const TableContainer = (props: TableContainerProps) => {
   const { forwardedRef, useReactWindow, ...rest } = props;

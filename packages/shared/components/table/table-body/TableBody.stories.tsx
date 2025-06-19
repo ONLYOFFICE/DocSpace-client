@@ -32,7 +32,7 @@ import { TableBody } from "./TableBody";
 import { TableRow } from "../table-row";
 import { TableCell } from "../sub-components/table-cell";
 import { Scrollbar } from "../../scrollbar";
-import { TableContainer } from "../TableContainer";
+import { TableContainer } from "../table-container";
 
 const meta = {
   title: "Components/Table/TableBody",

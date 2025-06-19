@@ -33,6 +33,7 @@ export interface TableContainerProps {
   forwardedRef: React.Ref<HTMLDivElement>;
   useReactWindow: boolean;
   children?: React.ReactNode;
+  className?: string;
 }
 
 export type TTableColumn = {

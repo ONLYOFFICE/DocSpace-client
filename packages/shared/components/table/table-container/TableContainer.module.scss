@@ -26,32 +26,71 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-.tableHeader {
-  position: fixed;
-  background: var(--background-color);
+@use "@docspace/shared/styles/variables";
+
+.tableContainer {
+  user-select: none;
   display: grid;
-  z-index: 1;
-  height: 39px;
-  border-bottom: var(--table-header-border-bottom);
-  margin: 0 -20px;
-  padding: 0 20px;
+  width: 100%;
+  max-width: 100%;
+  margin-top: -25px;
 
-  &:global(.lengthen-header):not(:global(.hotkeys-lengthen-header)) {
-    border-image-slice: 1;
-    border-image-source: var(--table-header-lengthen-border-image-source);
+  &.useReactWindow {
+    display: block;
+    height: 100%;
   }
-}
 
-.tableHeaderSettings {
-  justify-self: flex-end;
-}
+  // =============================== GLOBAL SELECTORS ===============================
 
-.tableHeaderRow {
-  display: contents;
-}
+  :global {
+    .table-column {
+      user-select: none;
+      position: relative;
+      min-width: 10%;
+    }
 
-.emptyTableContainer {
-  grid-column-start: 1;
-  grid-column-end: -1;
-  height: 40px;
+    .indexing-separator {
+      background-color: var(--table-container-indexing-separator);
+    }
+
+    .table-container_group-menu,
+    .table-container_header {
+      z-index: 200;
+      padding: 0 20px;
+
+      border-bottom: 1px solid;
+      border-image-slice: 1;
+      border-image-source: var(--table-header-border-image-source);
+      border-top: 0;
+
+      border-inline-start: 0;
+    }
+
+    .hotkeys-lengthen-header {
+      border-bottom: 1px solid variables.$light-second-main;
+      border-image-source: none;
+    }
+
+    .table-container_group-menu {
+      .table-container_group-menu-checkbox {
+        width: 22px;
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    &:has(
+        :global(#table-container_caption-header):not(
+            :global(.hotkeys-lengthen-header)
+          )
+      ):has(
+        :global(.table-list-item:first-child)
+          :global(.table-container_row):hover
+      ) {
+      :global(.table-container_header),
+      :global(.table-container_group-menu) {
+        border-image-source: var(--table-header-border-hover-image-source);
+      }
+    }
+  }
 }

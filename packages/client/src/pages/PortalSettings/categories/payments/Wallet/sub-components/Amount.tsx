@@ -42,19 +42,12 @@ type AmountProps = {
   language: string;
   currency: string;
   walletCustomerEmail?: boolean;
-  reccomendedAmount?: string;
 };
 
 const MAX_LENGTH = 6;
 
 const Amount = (props: AmountProps) => {
-  const {
-    language,
-    currency,
-    walletCustomerEmail,
-    isDisabled,
-    reccomendedAmount,
-  } = props;
+  const { language, currency, walletCustomerEmail, isDisabled } = props;
 
   const { amount, setAmount } = useAmountValue();
 

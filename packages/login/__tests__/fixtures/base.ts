@@ -38,14 +38,18 @@ import {
 import path from "path";
 import { allHandlers } from "@docspace/shared/__mocks__/handlers";
 
-export const test = base.extend<{
-  page: Page;
-  clientRequestInterceptor: WorkerFixture;
-  serverRequestInterceptor: SetupServerApi;
-  port: string;
-  baseUrl: string;
-  resetHandlers: void;
-}>({
+export const test = base.extend<
+  {
+    page: Page;
+    clientRequestInterceptor: WorkerFixture;
+    resetHandlersServer: void;
+  },
+  {
+    serverRequestInterceptor: SetupServerApi;
+    port: string;
+    baseUrl: string;
+  }
+>({
   port: [
     async ({}, use) => {
       const { port, server } = await createNextTestServer(

@@ -83,7 +83,6 @@
   "PriceForEach": "{{currency}} per {{amount}}",
   "ProductNameWallet": "{{productName}} Wallet",
   "Quantity": "Quantity",
-  "RecommendedTopUpAmount": "Recommended top-up amount: {{amount}}",
   "RemainingDays": "The remaining days of the billing cycle: {{count}}",
   "RenewSubscription": "Renew subscription to {{planName}} plan",
   "RoomManagerDescription": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",

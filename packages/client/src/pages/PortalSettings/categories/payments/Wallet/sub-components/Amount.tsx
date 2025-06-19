@@ -131,11 +131,6 @@ const Amount = (props: AmountProps) => {
           isDisabled={isDisabled || !walletCustomerEmail}
           maxLength={MAX_LENGTH}
         />
-        {reccomendedAmount ? (
-          <Text className={styles.reccomendedAmount}>
-            {t("RecommendedTopUpAmount", { amount: reccomendedAmount })}
-          </Text>
-        ) : null}
       </div>
       {!walletCustomerEmail ? (
         <Tooltip

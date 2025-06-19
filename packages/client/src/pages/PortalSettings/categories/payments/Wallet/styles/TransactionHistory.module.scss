@@ -36,8 +36,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 2px;
-  column-gap: 12px;
-  row-gap: 8px;
+  gap: 12px;
 }
 
 .transactionHistoryBody {
@@ -247,6 +246,9 @@
   }
 }
 
+.filterIconWrapper {
+  margin-inline-start: auto;
+}
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);

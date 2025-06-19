@@ -56,7 +56,8 @@ type TransactionHistoryProps = {
   fetchTransactionHistory?: any;
   openOnNewPage?: boolean;
   isTransactionHistoryExist?: boolean;
-  currentDeviceType?: DeviceType;
+  isMobile?: boolean;
+  isTablet?: boolean;
   isNotPaidPeriod?: boolean;
   formatDate?: (date: moment.Moment) => string;
 };
@@ -75,7 +76,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     fetchTransactionHistory,
     openOnNewPage,
     isTransactionHistoryExist,
-    currentDeviceType,
+    isMobile,
+    isTablet,
     isNotPaidPeriod,
     formatDate,
   } = props;
@@ -271,16 +273,15 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   );
 
   const mobileFilter = (
-    <FilterIcon
-      id="filter-button"
-      onClick={openFilterDialog}
-      isOpen={isFilterDialogVisible}
-      isShowIndicator={hasAppliedDateFilter}
-    />
+    <div className={styles.filterIconWrapper}>
+      <FilterIcon
+        id="filter-button"
+        onClick={openFilterDialog}
+        isOpen={isFilterDialogVisible}
+        isShowIndicator={hasAppliedDateFilter}
+      />
+    </div>
   );
-
-  const isMobile = currentDeviceType === DeviceType.mobile;
-  const isTablet = currentDeviceType === DeviceType.tablet;
 
   return (
     <>
@@ -302,7 +303,6 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         <TransactionBody
           hasAppliedDateFilter={hasAppliedDateFilter}
           isTransactionHistoryExist={isTransactionHistoryExist!}
-          currentDeviceType={currentDeviceType!}
         />
       )}
 
@@ -391,13 +391,17 @@ export default inject(
 
     const userId = userStore.user?.id;
 
+    const isMobile = currentDeviceType === DeviceType.mobile;
+    const isTablet = currentDeviceType === DeviceType.tablet;
+
     return {
       getStartTransactionDate,
       getEndTransactionDate,
       fetchTransactionHistory,
       openOnNewPage,
       userId,
-      currentDeviceType,
+      isMobile,
+      isTablet,
       isTransactionHistoryExist,
       isNotPaidPeriod,
       formatDate,

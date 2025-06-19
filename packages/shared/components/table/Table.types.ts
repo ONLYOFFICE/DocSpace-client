@@ -135,7 +135,7 @@ export interface TableRowProps {
   onDoubleClick?: (e: React.MouseEvent) => void;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   hideColumns?: boolean;
-  active?: boolean;
+  isActive?: boolean;
   checked?: boolean;
   dragging?: boolean;
 }
@@ -147,6 +147,7 @@ export interface TableCellProps {
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   style?: React.CSSProperties;
   children?: React.ReactNode;
+  value?: string;
 }
 
 export type TGroupMenuItem = {

@@ -53,7 +53,7 @@ const TableRow = (props: TableRowProps) => {
     isIndexEditingMode,
     forwardedRef,
     checked,
-    active,
+    isActive,
     dragging,
     hideColumns,
     onClick,
@@ -88,7 +88,7 @@ const TableRow = (props: TableRowProps) => {
     "table-container_row",
     {
       [styles.isIndexEditingMode]: isIndexEditingMode,
-      [styles.active]: active,
+      [styles.isActive]: isActive,
       [styles.checked]: checked,
       [styles.dragging]: dragging,
       [styles.hideColumns]: hideColumns,

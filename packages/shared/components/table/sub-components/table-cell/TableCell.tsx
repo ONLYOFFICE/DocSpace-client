@@ -31,8 +31,15 @@ import { TableCellProps } from "../../Table.types";
 import styles from "./TableCell.module.scss";
 
 const TableCell = (props: TableCellProps) => {
-  const { className, forwardedRef, style, checked, hasAccess, children } =
-    props;
+  const {
+    className,
+    forwardedRef,
+    style,
+    checked,
+    hasAccess,
+    children,
+    value,
+  } = props;
 
   const classes = classNames(
     styles.tableCell,
@@ -45,7 +52,14 @@ const TableCell = (props: TableCellProps) => {
   );
 
   return (
-    <div className={classes} ref={forwardedRef} style={style}>
+    <div
+      className={classes}
+      ref={forwardedRef}
+      style={style}
+      // @ts-expect-error: value used by DnD and maybe somewhere else;
+      // TODO: Refactor logic to use data-value
+      value={value}
+    >
       {children}
     </div>
   );

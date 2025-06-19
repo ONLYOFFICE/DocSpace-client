@@ -143,10 +143,8 @@ test("wizard with license success", async ({
   await page.getByTestId("button").click();
 
   await page.getByTestId("loader").waitFor({ state: "detached" });
-  await page.waitForURL(`${baseUrl}/`, {
-    waitUntil: "networkidle",
-    timeout: 30000,
-  });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
+  await page.waitForTimeout(1000);
 
   await expect(page).toHaveScreenshot([
     "desktop",

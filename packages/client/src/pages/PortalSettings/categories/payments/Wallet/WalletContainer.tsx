@@ -174,7 +174,7 @@ const Wallet = (props: WalletProps) => {
 
       <div className={styles.balanceWrapper}>
         <div className={styles.headerContainer}>
-          <Text isBold fontSize="16px">
+          <Text isBold fontSize="18px" className={styles.balanceTitle}>
             {t("BalanceText")}
           </Text>
 

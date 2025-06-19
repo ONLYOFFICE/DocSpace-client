@@ -32,6 +32,7 @@ import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirect
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
 import { useServicesActions } from "../hooks/useServicesActions";
+import styles from "../styles/index.module.scss";
 
 type SelectionAmountProps = {
   amount: number;
@@ -135,25 +136,26 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     : {};
 
   return (
-    <QuantityPicker
-      className="select-users-count-container"
-      value={amount}
-      minValue={0}
-      maxValue={maxStorageLimit}
-      step={1}
-      title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
-      showPlusSign
-      onChange={onChangeNumber}
-      isDisabled={hasScheduledStorageChange || isLoading}
-      items={amountTabs()}
-      withoutContorls={hasScheduledStorageChange}
-      underContorlsTitle={t("PerStorage", {
-        currency: formatWalletCurrency(storagePriceIncrement),
-        amount: getConvertedSize(t, storageSizeIncrement || 0),
-      })}
-      {...disableValueProps}
-      isLarge
-    />
+    <div className={styles.selectionAmount}>
+      <QuantityPicker
+        value={amount}
+        minValue={0}
+        maxValue={maxStorageLimit}
+        step={1}
+        title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
+        showPlusSign
+        onChange={onChangeNumber}
+        isDisabled={hasScheduledStorageChange || isLoading}
+        items={amountTabs()}
+        withoutContorls={hasScheduledStorageChange}
+        underContorlsTitle={t("PerStorage", {
+          currency: formatWalletCurrency(storagePriceIncrement),
+          amount: getConvertedSize(t, storageSizeIncrement || 0),
+        })}
+        {...disableValueProps}
+        isLarge
+      />
+    </div>
   );
 };
 

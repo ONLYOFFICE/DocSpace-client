@@ -26,10 +26,10 @@
 
 import React from "react";
 
-import { InfiniteLoaderComponent } from "../infinite-loader";
+import { InfiniteLoaderComponent } from "../../infinite-loader";
 
-import { StyledTableBody } from "./Table.styled";
-import { TableBodyProps } from "./Table.types";
+import { StyledTableBody } from "../Table.styled";
+import { TableBodyProps } from "../Table.types";
 
 const TableBodyPure = (props: TableBodyProps) => {
   const {

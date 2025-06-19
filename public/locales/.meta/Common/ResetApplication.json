@@ -3,7 +3,7 @@
   "content": "Reset application",
   "content_en_sha1_hash": "93e3b88bc025a8b58df20fb4ea9f533c792cfd53",
   "created_at": "2025-05-19T21:30:47.892Z",
-  "updated_at": "2025-05-28T09:30:02.290Z",
+  "updated_at": "2025-05-26T07:57:32.324Z",
   "comment": {
     "text": "This translation key is used to display a reset application button label in various parts of the user interface, including a modal dialog and a login settings section. It prompts users to \"Reset Application\" and is typically displayed as a prominent action button or link.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'إعادة  تشغيل التطبيق' literally translates to 'Restart Application'. While 'Reset' and 'Restart' can be synonymous in some contexts, 'Reset' typically implies returning to a default state, which is not necessarily what 'Restart' conveys. A more accurate translation might consider the intended functionality of 'Reset'.",
-          "suggestion": "Consider a translation like 'إعادة ضبط التطبيق' (I'aadat Dabt al-Tatbeeq) which translates to 'Reset Application' or 'إعادة تهيئة التطبيق' (I'aadat Tahyi'at al-Tatbeeq) which translates to 'Reinitialize Application', depending on the precise intended meaning."
+          "description": "The translation \"إعادة  تشغيل التطبيق\" while understandable, isn't the most accurate translation of \"Reset application\". \"Reset\" can also imply restoring to a default state, which \"إعادة  تشغيل التطبيق\" primarily means 'restart'.",
+          "suggestion": "Consider using \"استعادة التطبيق\" (Istia'adat at-Tatbeeq) for 'restore application' or \"إعادة ضبط التطبيق\" (I'adat Dabt at-Tatbeeq) for 'reset application' to more closely reflect the English meaning. The best choice depends on the specific context of 'reset'."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"애플리케이션 리셋\" is understandable, a more natural and accurate translation of \"Reset application\" would be \"애플리케이션 초기화\" or \"앱 초기화\". \"리셋\" is used, but \"초기화\" is more commonly used for application resets.",
-          "suggestion": "애플리케이션 초기화 or 앱 초기화"
+          "description": "While \"애플리케이션 리셋\" is understandable, it's a direct transliteration of 'application reset'. A more natural Korean phrasing for 'Reset application' would be '애플리케이션 초기화' (Application initialization).",
+          "suggestion": "애플리케이션 초기화"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຕັ້ງຄ່າແອບຄືນ\" translates more literally to \"set up app again\" or \"re-setup application.\" It doesn't accurately convey the meaning of \"reset application,\" which implies returning the application to a default state or a previous configuration.",
-          "suggestion": "Consider \"ຣີເຊັດແອບພຶcation\" (which transliterates \"reset application\") or \"ສືບສືບແອບພຶcation\" (meaning restore/return to original state). The best option depends on the specific context and common usage in Lao."
+          "description": "The Lao translation \"ຕັ້ງຄ່າແອບຄືນ\" literally translates to \"set up app again.\" While it conveys a similar idea, a more accurate translation of \"Reset application\" would be something along the lines of \"ຣີເຊັດແອັບພິເຄຊັນ\" (using the English loanword 'reset') or a phrase that better conveys the meaning of returning the application to a default state.",
+          "suggestion": "Consider using \"ຣີເຊັດແອັບພິເຄຊັນ\" or a more contextually appropriate phrase that clearly signifies a reset to default settings."
         }
       ],
       "approved_at": null
@@ -177,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'යෙදුම යළි සකසන්න' is understandable, a more natural and accurate translation of 'Reset application' would be 'අප්ලිකේෂන් යළි සැකසීම' or 'අප්ලිකේෂන් නැවත සැකසීම'.  'සකසන්න' can imply fixing or repairing, not necessarily a full reset.",
-          "suggestion": "අප්ලිකේෂන් යළි සැකසීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ресетуј апликацију' is understandable, a more accurate and natural-sounding translation of 'Reset application' in Serbian (Cyrillic) would be 'Постављање апликације на почетак' or 'Враћање апликације на почетак'.  'Ресетуј' is a transliteration and might not be the most appropriate terminology for all users.",
-          "suggestion": "Постављање апликације на почетак"
+          "description": "The translation \"Ресетуј апликацију\" while understandable, is a transliteration rather than a true translation. A more appropriate translation would be something like \"Поврати апликацију\" or \"Иницијализирај апликацију\". \"Ресетуј\" is borrowing the English term.",
+          "suggestion": "Поврати апликацију"
         }
       ],
       "approved_at": null
@@ -225,7 +219,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Скинути налаштування програми' is a bit too literal and verbose. A more natural and common way to say 'Reset application' in Ukrainian would be 'Перезавантажити програму' or 'Відновити програму'.",
+          "suggestion": "Перезавантажити програму"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "This setting is a security mechanism that can be used to protect against content injection attacks. The CSP describes secure resource download sources. Downloading from resources not included in the `white list` is blocked. Specify the domains (together with the protocol) with which it will work.",
   "content_en_sha1_hash": "88b51f948c6f31697453782d4630cb402a6a8aaf",
   "created_at": "2025-05-19T21:30:54.416Z",
-  "updated_at": "2025-05-28T09:30:02.586Z",
+  "updated_at": "2025-06-08T12:02:32.765Z",
   "comment": {
     "text": "\"This translation key is used for 'CSP Help' button tooltips, which provide information on Content Security Policy and how to specify secure resource download sources. It appears as a popup or tooltip when clicked on the 'CSP Help' button in certain settings pages.\"",
     "is_auto": true,
@@ -30,23 +30,28 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"This setting is a security mechanism\" is not accurately reflected in the Arabic translation. \"هذا الإعداد عبارة عن وسيلة أمان\" is a literal translation but doesn't convey the full meaning of a 'security mechanism'.",
+          "description": "The phrase \"This setting is a security mechanism\" is not accurately translated. While \"هذا الإعداد عبارة عن وسيلة أمان\" is literal, it's not the most natural phrasing. A better translation would convey the function of the setting.",
           "suggestion": "هذا الإعداد هو آلية أمان"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'protect against content injection attacks' is not perfectly translated. While \"الحماية من هجمات المحتوى\" is understandable, it lacks nuance. A more accurate translation would consider the specific type of attack.",
-          "suggestion": "الحماية من هجمات حقن المحتوى"
+          "description": "The phrase \"The CSP describes secure resource download sources\" is awkward in Arabic. 'CSP' is left untranslated, which may confuse the audience.",
+          "suggestion": "يصف CSP مصادر الموارد الآمنة"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"white list\" is literally translated as \"القائمة البيضاء\". While understandable, a more common and clearer term in a technical context might be \"قائمة السماح\" (list of permissions).",
-          "suggestion": "قائمة السماح"
+          "description": "The term 'white list' is rendered literally as \"القائمة البيضاء\". While understandable, it's more common to use a direct equivalent in this technical context.",
+          "suggestion": "القائمة المسموح بها"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Specify the domains (together with the protocol) with which it will work\" is awkward.  \"حدد النطاق (مع البروتوكول) التي سيعمل به\" sounds unnatural. The possessive pronoun 'به' is incorrect; it should be referencing 'domains' not 'it'.",
-          "suggestion": "حدد النطاقات (مع البروتوكول) التي ستعمل معها."
+          "description": "The sentence \"حدد النطاق (مع البروتوكول) التي سيعمل به\" is grammatically incorrect and awkwardly phrased.  The verb agreement is incorrect (that/those).",
+          "suggestion": "حدد النطاقات (مع البروتوكول) التي سيعمل معها."
+        },
+        {
+          "type": "formatting",
+          "description": "The parentheses around \"مع البروتوكول\" appear somewhat isolated and can be more elegantly integrated into the sentence.",
+          "suggestion": "حدد النطاقات التي سيعمل معها مع ذكر البروتوكول."
         }
       ],
       "approved_at": null
@@ -57,8 +62,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"white list\" is translated as \"Ağ siyahıya salınmayan\". While technically correct, a more natural and common phrasing in Azerbaijani for a whitelist would be \"beyaz siyahıya daxil olmayan\" or \"beyaz siyahıya daxil olmayanlar\".",
-          "suggestion": "Beyaz siyahıya daxil olmayan"
+          "description": "The phrase \"white list\" is translated as \"Ağ siyahıya salınmayan\". While technically correct, a more natural and common translation in Azerbaijani would be something like \"Ağ siyahıdan olmayan\" or \"Ağ siyahıda olmayan\".",
+          "suggestion": "Replace \"Ağ siyahıya salınmayan\" with \"Ağ siyahıda olmayan\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'protokollu' (protocol-related) is awkwardly placed.  It should be integrated more naturally into the sentence.",
+          "suggestion": "Consider restructuring the sentence: 'İstifadə olunacaq domenləri protokol ilə göstərin' or 'Protokol ilə birlikdə istifadə olunacaq domenləri göstərin.'"
         }
       ],
       "approved_at": null
@@ -69,13 +79,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"attacks on injected content\" is not the most natural or accurate translation of \"content injection attacks.\" A more accurate translation would be \"атаки за вкарване на съдържание\" or something similar reflecting the action of inserting malicious content.",
-          "suggestion": "Consider using a more descriptive phrase like \"атаки за вкарване на съдържание\" or \"атаки, при които се вмъква съдържание\"."
+          "description": "The phrase \"атаки на инжектирано съдържание\" is a literal translation of \"content injection attacks\" but might not be the most natural phrasing in Bulgarian. A more common and understandable term could be used.",
+          "suggestion": "Consider using a phrase like \"атаки с инжектиране на код\" or \"инжекционни атаки\" which are more widely recognized in the Bulgarian cybersecurity context."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The translation of 'white list' as \"белия списък\" is technically correct but may not be the most understandable term for a general user.  The concept of a whitelist might be clearer if explained a bit further.",
-          "suggestion": "Consider adding a brief explanation of the 'white list' concept or use a more approachable term depending on the audience. For example, something like 'разрешените източници' (allowed sources)."
+          "type": "formatting",
+          "description": "The English content uses quotes around \"white list\". The Bulgarian translation does not. This creates an inconsistency.",
+          "suggestion": "Add quotes around „белия списък“ to match the English original."
         }
       ],
       "approved_at": null
@@ -85,9 +95,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"content injection\" is directly translated. While understandable, a more natural Czech equivalent for this term might be \"vkládání škodlivého obsahu\" or \"vstřikování obsahu\".",
-          "suggestion": "Consider using \"vkládání škodlivého obsahu\" or \"vstřikování obsahu\" instead of \"útoky typu \"content injection\"."
+          "type": "formatting",
+          "description": "The term `white list` is in English within the Czech translation. It should ideally be translated or localized.",
+          "suggestion": "Replace `white list` with the Czech equivalent, e.g., 'bílý seznam' (which is already used elsewhere in the translation, so consistency is good) or a descriptive phrase like 'seznam povolených zdrojů'."
         }
       ],
       "approved_at": null
@@ -95,7 +105,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The code snippet `white list` in the English content is not consistently rendered as code in the German translation. It should be rendered as `Whitelist` or be properly formatted with backticks.",
+          "suggestion": "Change `white list` to ``Whitelist`` or `white list`"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -104,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase \"white list\" is in English within the Greek text. It should ideally be translated to Greek as well.",
-          "suggestion": "Replace \"white list\" with \"λευκή λίστα\""
+          "description": "The phrase \"white list\" is in English within the Greek text. It should ideally be translated or replaced with a more natural Greek equivalent.",
+          "suggestion": "Replace \"white list\" with \"λευκή λίστα\" or a more appropriate Greek term like \"επιτρεπόμενοι πόροι\" or \"εγκεκριμένες πηγές\"."
         }
       ],
       "approved_at": null
@@ -121,9 +137,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"white list\" is literally translated to \"valkoiseen listaan\". While understandable, a more natural and common Finnish translation would be \"valkoiselle listalle\".",
-          "suggestion": "valkoiselle listalle"
+          "type": "formatting",
+          "description": "The phrase \"white list\" is in English within the Finnish text. While understandable, it would be more natural to use the Finnish equivalent.",
+          "suggestion": "Replace \"white list\" with \"valkoiselle listalle\" or \"valkoiselle listalle\". Consider context to choose the best option."
         }
       ],
       "approved_at": null
@@ -140,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"white list\" is translated as \"սպիտակ ցուցակ\" which literally means \"white list\". While understandable, a more natural phrasing in Armenian might be \"տրված ցուցակ\" (given list) or \"կարգավորված ցուցակ\" (regulated list).",
-          "suggestion": "Replace \"սպիտակ ցուցակում\" with \"տրված ցուցակում\" or \"կարգավորված ցուցակում\"."
+          "description": "The English phrase 'white list' is translated as 'սպիտակ ցուցակ' which literally means 'white list'. While understandable, a more natural Armenian phrasing for this context might be 'կանոնավորված ցուցակ' (approved list) or 'ներբեռնման թույլատրված ցուցակ' (download allowed list).",
+          "suggestion": "Replace 'սպիտակ ցուցակ' with 'կանոնավորված ցուցակ' or 'ներբեռնման թույլատրված ցուցակ'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"will work\" is translated as \"կաշխատի\", which is grammatically correct but sounds a bit stiff. A more natural phrasing would indicate the domains being allowed.",
-          "suggestion": "Replace \"որոնցով այն կաշխատի\" with \"որոնցով թույլատրված է\" or \"որոնցով կարելի է օգտագործել\"."
+          "description": "The phrase 'will work' is translated as 'կաշխատի'. A more precise translation in this context would be 'կգործի' which means 'will operate' or 'will function'.",
+          "suggestion": "Replace 'կաշխատի' with 'կգործի'."
         }
       ],
       "approved_at": null
@@ -157,13 +173,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'content injection attacks' is not perfectly translated. 'Attacchi basati su iniezione di contenuto' is accurate but slightly verbose. A more natural translation might be 'attacchi di iniezione di contenuti'.",
+          "description": "The English phrase 'content injection attacks' is translated as 'attacchi basati su iniezione di contenuto'. While understandable, a more accurate and common Italian translation would be 'attacchi di iniezione di contenuti'.",
           "suggestion": "attacchi di iniezione di contenuti"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'white list' is in English within an Italian sentence. It's better to use the Italian equivalent.",
-          "suggestion": "lista bianca"
+          "description": "The English phrase 'white list' is directly translated to 'lista bianca'. While correct, in technical contexts 'lista consentita' is a more common and technically accurate translation.",
+          "suggestion": "lista consentita"
         }
       ],
       "approved_at": null
@@ -180,13 +196,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'content injection attacks' is translated as '콘텐츠 주입 공격'. While technically correct, a more natural and common translation would be '콘텐츠 삽입 공격' or '스크립트 삽입 공격' depending on the specific context.  '주입' implies a more forceful or overwhelming action, whereas '삽입' is a more neutral description of the insertion of content.",
-          "suggestion": "콘텐츠 삽입 공격"
+          "description": "The phrase 'This setting is a security mechanism that can be used to protect against content injection attacks' is a bit verbose and could be simplified in Korean. While technically correct, it doesn't flow as naturally.",
+          "suggestion": "이 설정은 콘텐츠 주입 공격 방지를 위한 보안 기능입니다."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English term 'white list' is directly translated as '화이트리스트'. While understandable, a more natural Korean phrasing might include a clarifying explanation or use a slightly different wording. Using the loanword '화이트리스트' without context can be confusing for some readers.",
-          "suggestion": "허용 목록"
+          "description": "The phrase 'The CSP describes secure resource download sources' is a bit literal and awkward.  It doesn't fully convey the meaning of CSP in context.",
+          "suggestion": "CSP는 안전한 리소스 다운로드 경로를 정의합니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of single quotes around 'white list' feels unnatural in Korean. While it's understandable, it's not idiomatic.",
+          "suggestion": "화이트리스트에 포함되지 않은 리소스로부터의 다운로드는 차단됩니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The final sentence \"(프로토콜과 함께) 작동할 도메인을 지정하세요\" is a bit abrupt. It would be better to integrate it more smoothly.",
+          "suggestion": "작동할 도메인을 (프로토콜과 함께) 지정하십시오."
         }
       ],
       "approved_at": null
@@ -196,14 +222,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'ບັນຊີຂາວ' is a literal translation of 'white list' and might not be readily understood by Lao speakers. A more natural phrasing would be preferred.",
-          "suggestion": "ບັນຊີລາຍນາມທີ່ຮັບອະນຸຍາດ (allowed list) or ບັນຊີລາຍນາມທີ່ຖືກຮັບອະນຸຍາດ"
+          "type": "incorrect_translation",
+          "description": "The phrase 'content injection attacks' is not accurately translated. 'ການໂຈມຕີການສີດເນື້ອໃນ' literally translates to 'content coloring attacks,' which doesn't convey the meaning of content injection.",
+          "suggestion": "ການໂຈມຕີການໃສ່ເນື້ອຫາ (kan chom ti kan sai neu ha)"
         },
         {
-          "type": "formatting",
-          "description": "The use of single quotes for 'ບັນຊີຂາວ' is inconsistent with the rest of the text. Double quotes or no quotes should be used.",
-          "suggestion": "ບັນຊີລາຍນາມທີ່ຮັບອະນຸຍາດ or ບັນຊີລາຍນາມທີ່ຖືກຮັບອະນຸຍາດ"
+          "type": "incorrect_translation",
+          "description": "The phrase 'white list' is not accurately translated. While 'ບັນຊີຂາວ' is a literal translation, it's not commonly used in the Lao context for this specific technical meaning. It might be misinterpreted.",
+          "suggestion": "ລາຍການອະນຸຍາດ (lai kan anu yat)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'protocol' is not accurately translated. The Lao translation is missing. It is more clear to include it.",
+          "suggestion": "ໂປໂຕຄໍ (proto ko)"
         }
       ],
       "approved_at": null
@@ -211,7 +242,18 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"content injection attacks\" is translated as \"satura ievadīšanas uzbrukumiem\". While technically correct, a more natural and commonly used translation in Latvian might be \"satura ievilkšanas uzbrukumiem\" or \"satura ievietošanas uzbrukumiem\".",
+          "suggestion": "Consider using 'satura ievilkšanas uzbrukumiem' or 'satura ievietošanas uzbrukumiem'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English term \"white list\" is translated literally as “baltajā sarakstā”. A more common and idiomatic translation in Latvian technical documentation would be “atļautajā sarakstā” or “pieļaujamo sarakstā”.",
+          "suggestion": "Replace “baltajā sarakstā” with “atļautajā sarakstā” or “pieļaujamo sarakstā”."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -220,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The term 'white list' is in English in the Dutch translation. It should be translated to 'witlijst'.",
-          "suggestion": "Replace 'white list' with 'witlijst'."
+          "description": "The use of \"waar het mee gaat werken\" is slightly awkward and could be more fluent. It directly translates to \"where it will work with\", which isn't the most natural phrasing in Dutch in this context.",
+          "suggestion": "Consider alternatives like \"waarmee het werkt\" or \"met welke domeinen het compatibel is\"."
         }
       ],
       "approved_at": null
@@ -232,18 +274,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'CSP' is not translated. While acronyms are sometimes left untranslated, providing a brief explanation or transliteration would improve clarity for Polish speakers unfamiliar with the term. A possible translation could be 'Polityka Bezpieczeństwa Treści' (Content Security Policy).",
-          "suggestion": "Consider adding a brief explanation or transliteration of 'CSP', such as 'Zasady zabezpieczeń zawartości (CSP)' or 'Polityka Bezpieczeństwa Treści (CSP)'."
+          "description": "The phrase \"Dane ustawienie\" is grammatically incorrect. It should be \"To ustawienie\". The translation has misused the case and article.",
+          "suggestion": "To ustawienie"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Biała Lista' (White List) is a literal translation and while understandable, 'lista dozwolonych źródeł' (list of allowed sources) might be more natural and clearer in this context.",
-          "suggestion": "Replace 'Biała Lista' with 'lista dozwolonych źródeł'."
+          "description": "The translation of \"white list\" as \"Białej Liście\" is technically correct but slightly awkward in this context. A more natural phrasing would be 'białej liście'.",
+          "suggestion": "białej liście"
         },
         {
-          "type": "grammatical",
-          "description": "The sentence 'Określ domeny (wraz z protokołem), z którymi będzie to działać' is grammatically awkward. The reflexive pronoun 'to' doesn't flow well.",
-          "suggestion": "Rewrite the sentence to something like 'Określ domeny (wraz z protokołem), z którymi będzie to współpracować.' or 'Określ domeny (wraz z protokołem), z którymi to będzie działać.'"
+          "type": "incorrect_translation",
+          "description": "The phrase \"z którymi będzie to działać\" is grammatically awkward and doesn't quite capture the nuance of the English. A better translation would reflect that the setting *will work with* those domains.",
+          "suggestion": "z którymi będzie współpracować"
         }
       ],
       "approved_at": null
@@ -253,9 +295,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"irá trabalhar\" is not the most natural or idiomatic way to express \"work with\" in this context. It sounds a bit awkward in Portuguese.",
-          "suggestion": "Consider using a more natural phrasing like \"com os quais ele irá funcionar\" or \"com os quais será compatível\" or simply \"com os quais funcionará\"."
+          "type": "formatting",
+          "description": "The phrase \"white list\" is in English within a Portuguese text. It should be translated.",
+          "suggestion": "lista branca"
         }
       ],
       "approved_at": null
@@ -263,7 +305,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'white list' is literally translated as 'lista branca'. While understandable, the standard Portuguese term for 'whitelist' in a security context is 'lista de permissões' or simply 'lista permitida'.",
+          "suggestion": "Replace 'lista branca' with 'lista de permissões' or 'lista permitida'."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -272,17 +320,17 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'împotriva' should be 'împotriva'.",
+          "description": "The word 'împotriva' is misspelled. The correct spelling is 'împotriva'.",
           "suggestion": "împotriva"
         },
         {
-          "type": "incorrect_translation",
-          "description": "“white list” should be translated more accurately. While \"lista albă\" is a direct translation, it's not idiomatic in this context. A better translation would convey the meaning of a permitted list.",
-          "suggestion": "lista permise"
+          "type": "grammar",
+          "description": "The phrase 'Descărcare de la adresa care nu este inclusă în lista albă este blocată' is grammatically awkward. It should be rephrased to be more fluent.",
+          "suggestion": "Descărcarea de la surse care nu sunt incluse în lista albă este blocată."
         },
         {
           "type": "incorrect_translation",
-          "description": "“will interact” doesn’t accurately convey the meaning of compatibility.  It implies active interaction.",
+          "description": "The word 'interacționa' doesn't accurately convey the meaning of 'work with' in this context. It suggests interaction rather than compatibility.",
           "suggestion": "cu care va funcționa"
         }
       ],
@@ -294,8 +342,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'белый список' (white list) is in italics, which isn't consistent with any other formatting in the original English text. It is likely meant to be regular text.",
-          "suggestion": "Remove the italics from 'белый список'."
+          "description": "The phrase \"белый список\" (white list) is in quotes. While acceptable, it's more common in technical documentation to use the term without quotes or use a transliteration (whitelist).",
+          "suggestion": "Remove the quotes around \"белый список\" or consider using the transliterated form: \"белый список\" or \"белыйлист\"."
         }
       ],
       "approved_at": null
@@ -306,13 +354,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'white list' is directly translated as 'සුදු ලැයිස්තුවේ'. While understandable, a more natural Sinhala equivalent for 'whitelist' in this context might be 'දුරස්ථ සුදු ලැයිස්තුව' or 'අනුමැත ලද සම්පත් ලැයිස්තුව'. The direct translation sounds slightly awkward.",
-          "suggestion": "Replace 'සුදු ලැයිස්තුවේ' with 'දුරස්ථ සුදු ලැයිස්තුව' or 'අනුමැත ලද සම්පත් ලැයිස්තුව'."
+          "description": "The phrase 'white list' is translated as 'සුදු ලැයිස්තුවේ'. While technically correct, a more natural and commonly used term in Sinhala for 'whitelist' in a technical context might be 'සුදු ලක්ෂණ ලේඛනය' or 'සුදු ලක්ෂණ'.",
+          "suggestion": "Consider using 'සුදු ලක්ෂණ ලේඛනය' or 'සුදු ලක්ෂණ' instead of 'සුදු ලැයිස්තුවේ'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ඉඩ දිය යුතු වසම් (කෙටුම්පත සමඟ)' is not the best translation for 'Specify the domains (together with the protocol)'. It's a bit roundabout. A more direct and clearer translation would be something like 'ප්‍රවණිමත් සමඟින්, වලංගු කරන ලද ප්‍රදේශයන් සඳහන් කරන්න' or 'ප්‍රවණිමත් සමඟින්, වලංගු කරන ලද ක්ෂේත්‍රයන්specify කරන්න'.",
-          "suggestion": "Replace 'ඉඩ දිය යුතු වසම් (කෙටුම්පත සමඟ)' with 'ප්‍රවණිමත් සමඟින්, වලංගු කරන ලද ප්‍රදේශයන් සඳහන් කරන්න' or 'ප්‍රවණිමත් සමඟින්, වලංගු කරන ලද ක්ෂේත්‍රයන්specify කරන්න'."
+          "description": "The English phrase 'domains (together with the protocol)' is translated as 'වසම් (කෙටුම්පත සමඟ)'. While understandable, a more precise translation that emphasizes the protocol part would be better. The use of 'වසම්' feels slightly off. ",
+          "suggestion": "Consider using 'අඩෝනිමිත්ත (protocoll) සමග'."
         }
       ],
       "approved_at": null
@@ -323,8 +371,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'white list' is translated as 'zoznam povolených'. While technically correct, 'whitelist' is commonly used and understood in technical contexts, even in Slovak, and maintaining the original term would improve clarity and consistency.",
-          "suggestion": "Consider using 'whitelist' instead of 'zoznam povolených' for better clarity and technical consistency."
+          "description": "The English phrase 'content injection attacks' is translated as 'útokmi formou vstrekovania obsahu'. While technically correct, a more natural Slovak phrasing would be 'útokmi vkladania obsahu' or 'útokmi vstrekovania dát'.",
+          "suggestion": "útokmi vkladania obsahu"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'white list' is directly translated as 'zoznam povolených'. While understandable, 'biela zoznam' is a more common and recognized term in Slovak for 'whitelist'.",
+          "suggestion": "biela zoznam"
         }
       ],
       "approved_at": null
@@ -335,8 +388,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"prenos prenos\" is redundant. \"Prenos\" means 'download', and repeating it makes the sentence awkward.",
+          "description": "The term \"prenos prenos\" is redundant and grammatically incorrect. It seems like a duplication of \"prenos\".",
           "suggestion": "Ta nastavitev je varnostni mehanizem, ki se lahko uporablja za zaščito pred napadi z vnašanjem vsebine. CSP opisuje varne vire za prenos. Prenos iz virov, ki niso na `belem seznamu`, je blokiran. Določite domene (skupaj s protokolom), s katerimi bo delovalo."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"delovalo\" is technically correct, it's a bit vague. A more precise term reflecting the intended function would be better.",
+          "suggestion": "Ta nastavitev je varnostni mehanizem, ki se lahko uporablja za zaščito pred napadi z vnašanjem vsebine. CSP opisuje varne vire za prenos. Prenos iz virov, ki niso na `belem seznamu`, je blokiran. Določite domene (skupaj s protokolom), s katerimi bo to delovalo."
         }
       ],
       "approved_at": null
@@ -346,14 +404,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"бела листа\" is a direct transliteration of \"white list\" and while understandable, a more natural Serbian equivalent would be \"бела листа\" or \"дозвољена листа\".",
-          "suggestion": "Consider using \"бела листа\" or \"дозвољена листа\" instead of \"бела листа\"."
-        },
-        {
           "type": "formatting",
-          "description": "The sentence \"Преузимање са извора који није укључен у\"бела листа\" је блокирано\" is abruptly cut off. It should complete the thought.",
-          "suggestion": "Complete the sentence: \"Преузимање са извора који није укључен у белу листу је блокирано. Наведите домене (заједно са протоколом) с којима ће радити.\""
+          "description": "The sentence \"Преузимање са извора који није укључен у\"белу листу\" је блокирано.\" is abruptly cut off. It's missing the concluding part of the sentence.",
+          "suggestion": "Преузимање са извора који није укључен у \"белу листу\" је блокирано. Наведите домене (заједно са протоколом) с којима ће радити."
         }
       ],
       "approved_at": null
@@ -363,9 +416,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The English text uses quotation marks around 'white list'. The Serbian translation does not. Consistent formatting is preferred.",
-          "suggestion": "Add quotation marks around 'belu listu'."
+          "type": "incorrect_translation",
+          "description": "The phrase \"napada ubacivanjem sadržaja\" is a literal translation of \"content injection attacks\". A more natural Serbian translation would be \"napada injekcijom sadržaja\" or \"napada ubrizgavanjem sadržaja\".",
+          "suggestion": "napada injekcijom sadržaja"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"s kojima će raditi\" is awkward. A more natural phrasing would be \"sa kojima će funkcionisati\" or \"koje će biti kompatibilne\".",
+          "suggestion": "sa kojima će funkcionisati"
         }
       ],
       "approved_at": null
@@ -376,13 +434,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'niteler' is not the most natural way to describe what CSP does. It's overly formal and technical for a user-facing setting description. A more accessible translation is needed.",
-          "suggestion": "CSP, güvenli kaynakların nereden indirilebileceğini tanımlar."
+          "description": "The phrase \"niteler\" (defines) doesn't quite capture the meaning of \"describes\" in this context. It sounds overly formal and technical.",
+          "suggestion": "CSP, güvenli kaynak indirme kaynaklarını belirtir."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Beyaz listede' feels a bit awkward in Turkish. A more natural phrasing would be more common.",
+          "suggestion": "Beyaz listede belirtilen kaynaklardan indirme engellenmiştir."
         },
         {
           "type": "formatting",
-          "description": "The single quotes around 'Beyaz listede' are unnecessary and disrupt the flow of the sentence.",
-          "suggestion": "Beyaz listede yer almayan kaynaklardan indirme engellenmiştir."
+          "description": "The phrasing 'Çalışacağı etki alanlarını (protokol ile) belirtin' could be improved for clarity and flow.  The parenthesis feels a bit abrupt.",
+          "suggestion": "Hangi etki alanlarıyla (protokolleriyle birlikte) çalışacağını belirtin."
         }
       ],
       "approved_at": null
@@ -392,14 +455,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ін’єкційних атак\" is a literal translation of \"injection attacks\". While understandable, a more natural Ukrainian phrasing would be \"атаки з впровадженням коду\" or something similar, conveying the idea of malicious code insertion.",
-          "suggestion": "атаки з впровадженням коду"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"разом із протоколом\" is grammatically correct but sounds slightly formal and less idiomatic. A more natural phrasing might convey the meaning of 'including the protocol'.",
-          "suggestion": "включаючи протокол"
+          "type": "formatting",
+          "description": "The phrase \"white list\" is in English within an otherwise Ukrainian sentence. It should be translated to Ukrainian.",
+          "suggestion": "«білий список»"
         }
       ],
       "approved_at": null
@@ -410,18 +468,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'content injection attacks' is not accurately conveyed by 'các cuộc tấn công injection'. While 'injection' is understandable, it lacks the specific meaning of content injection.",
-          "suggestion": "các cuộc tấn công chèn nội dung"
+          "description": "The term \"injection\" is not commonly used in Vietnamese security contexts. A more accurate translation would be \"tấn công chèn\" or \"tấn công tiêm nhiễm\".",
+          "suggestion": "Thay \"injection\" bằng \"chèn\" hoặc \"tiêm nhiễm\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "“white list” should be translated more accurately. While understandable, it's not the standard terminology.",
-          "suggestion": "danh sách cho phép"
+          "description": "While \"danh sách trắng\" is understandable, \"whitelist\" is often used directly in Vietnamese technical discussions.  Using it maintains clarity and familiarity for developers.",
+          "suggestion": "Consider using \"whitelist\" directly instead of \"danh sách trắng\"."
         },
         {
-          "type": "grammatical",
-          "description": "The phrase \"Chỉ định các miền (cùng với giao thức) mà nó sẽ hoạt động.\" could be more natural. 'mà nó sẽ hoạt động' sounds slightly awkward.",
-          "suggestion": "Chỉ định các miền (cùng với giao thức) mà hệ thống sẽ hỗ trợ."
+          "type": "formatting",
+          "description": "The quote marks around \"danh sách trắng\" feel slightly awkward. A more natural format would be to italicize or use quotation marks consistently.",
+          "suggestion": "Use italics or consistent quotation marks for 'danh sách trắng'."
         }
       ],
       "approved_at": null
@@ -432,13 +490,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"白名单\" is a direct transliteration of \"white list\" and while understood, it's stylistically better to use a more natural Chinese equivalent.  \"白名单\" implies it's borrowed directly from English, which isn't always the best approach for clarity and flow.",
-          "suggestion": "指定允许的资源来源"
+          "description": "The phrase \"white list\" is directly translated as \"白名单\". While technically correct, it's more common and natural in Chinese technical documentation to use the English term 'whitelist' (白名单) or use a more descriptive phrase like “允许列表”.",
+          "suggestion": "Consider using \"允许列表\" or retaining \"白名单\" (whitelist) for better flow and common usage in technical contexts."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"与之配合的协议\" is a bit awkward.  It doesn't perfectly capture the meaning of \"work with\" in this context, which implies compatibility and accepted protocols.",
-          "suggestion": "以及使用的协议"
+          "description": "The English phrase 'work with' is translated as “与之配合”. This is grammatically correct but a less natural phrasing in this context. A more natural translation would emphasize functionality or compatibility.",
+          "suggestion": "Consider replacing “与之配合” with something like “可以使用的” or “支持的” depending on the desired nuance."
         }
       ],
       "approved_at": null

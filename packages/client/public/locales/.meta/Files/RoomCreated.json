@@ -3,7 +3,7 @@
   "content": "Room created",
   "content_en_sha1_hash": "e6343cefd4d7c4911de4502175b5289b119c5532",
   "created_at": "2025-05-19T21:30:56.082Z",
-  "updated_at": "2025-05-28T09:30:02.088Z",
+  "updated_at": "2025-05-26T07:57:32.145Z",
   "comment": {
     "text": "This translation key is used to display the message \"Room created\" in various parts of the application. It appears as a notification or confirmation message when a new room is created, typically on a button or dialog triggered by user action.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'La sala se ha creado' is technically correct but could be more natural and concise. While 'se ha creado' is a valid passive construction, 'La sala creada' would be a more common and fluent way to express 'Room created' in this context.",
-          "suggestion": "La sala creada"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ստեղծվել է սենյակ' literally translates to 'A room was created.' While understandable, a more natural and concise translation for 'Room created' would be something like 'Սենյակ ստեղծվեց' (Senyak stegvets')",
-          "suggestion": "Սենյակ ստեղծվեց"
+          "description": "The translation 'Ստեղծվել է սենյակ' while literally meaning 'A room was created', doesn't convey the same meaning as 'Room created'. It's passive voice and less concise.",
+          "suggestion": "Consider 'Սենյակ ստեղծվեց' or 'Սենյակը ստեղծվեց' (depending on whether 'the' is appropriate in the context) which are more active and closer to the original meaning."
         }
       ],
       "approved_at": null
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба креирана\" translates to \"Room created\" literally, but it's likely intended to mean \"A room has been created\" or \"Room has been created\". The current phrasing sounds slightly awkward in Serbian.",
-          "suggestion": "Соба је креирана"
+          "description": "The Serbian (Cyrillic) translation \"Соба креирана\" is not the correct translation of \"Room created.\" \"Соба\" means \"room\", but it should be \"Упориште\" or \"Просторија\". \"Креирана\" is the correct form of 'created'.",
+          "suggestion": "Упориште креирано"
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Soba kreirana' doesn't accurately convey the meaning of 'Room created'. 'Kreirana' implies 'created' in the sense of 'designed' or 'fabricated', not just that a room was brought into existence. A more accurate translation would convey the idea of a room being created as a new entity.",
-          "suggestion": "So je kreirana"
+          "description": "The translation 'Soba kreirana' doesn't quite capture the meaning of 'Room created'. 'Kreirana' implies that the room was *created* in a specific, possibly artistic or designed, sense. 'Created' in this context likely refers to a room being added to a system or database.",
+          "suggestion": "Soba je kreirana"
         }
       ],
       "approved_at": null

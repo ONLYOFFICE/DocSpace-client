@@ -3,7 +3,7 @@
   "content": "Do you want to cancel the upload?",
   "content_en_sha1_hash": "fd3dfd7e28734e77e08a38eff338408b506d9de2",
   "created_at": "2025-05-19T21:30:53.200Z",
-  "updated_at": "2025-05-28T09:30:02.186Z",
+  "updated_at": "2025-05-26T07:57:32.214Z",
   "comment": {
     "text": "This translation key is used to display a prompt asking the user if they want to cancel an upload process. It appears in a dialog box when a user initiates cancellation, and its purpose is to confirm whether the user wants to proceed with the cancellation.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ອັບໂຫລດ' (upload) appears to be a transliteration and might benefit from a more localized equivalent if one exists and is appropriate for the context. While understandable, it reads as a direct copy of the English word.",
+          "suggestion": "Consider if a more Lao equivalent term for 'upload' exists and is suitable for the setting. If not, keeping 'ອັບໂຫລດ' is acceptable as it's commonly understood."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Да ли желите да откажете отпремање?\" doesn't accurately reflect the meaning of \"Do you want to cancel the upload?\" The word 'отпремање' translates to 'dispatch' or 'shipping,' not 'upload.'",
-          "suggestion": "Да ли желите да откажете упутство/дисконтинуирате уплоад?"
+          "description": "The translation 'Да ли желите да откажете отпремање?' doesn't accurately convey the meaning of 'Do you want to cancel the upload?'. 'Отпремање' refers to 'uploading' in a more general sense (transferring data). A more accurate translation for 'cancel the upload' would be 'Да ли желите да прекинете отпремање?' or 'Да ли желите да откажете упутство?'",
+          "suggestion": "Да ли желите да прекинете отпремање?"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Empty field",
   "content_en_sha1_hash": "9ea77181ac6a721f1181cacbc3707cd24c6a1b38",
   "created_at": "2025-05-19T21:30:44.813Z",
-  "updated_at": "2025-05-28T09:30:02.633Z",
+  "updated_at": "2025-05-26T07:57:32.693Z",
   "comment": {
     "text": "This translation key is used to display an error message when a field is empty. It appears on the \"Attribute Mapping\" page as part of a form, specifically under fields marked as required (e.g., FirstName).",
     "is_auto": true,
@@ -123,13 +123,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Boş sahə\" is a literal translation of \"Empty field,\" it might sound a bit formal or technical in a user interface context. A more natural and user-friendly translation could be considered.",
-          "suggestion": "Consider alternatives like \"Boş qutu\" (empty box) or \"Boş yer\" (empty space) depending on the specific field type."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"항목이 비어있습니다\" is a bit too formal and literal for a simple 'Empty field' message. While grammatically correct, it might sound awkward depending on the context of the UI.",
-          "suggestion": "Consider a more conversational alternative like \"필수 항목을 입력해주세요\" (Please enter the required field) or just \"필수 입력\" (Required input), depending on the overall tone of the application."
+          "description": "The Korean translation '항목이 비어있습니다' literally translates to 'The item is empty'. While conveying the general idea of an empty field, it's a more formal and less direct phrasing than 'Empty field'. A more natural and concise translation would be '필수 항목을 입력해주세요' or '필수 입력 값 없음' depending on the context.",
+          "suggestion": "Consider '필수 항목을 입력해주세요' or '필수 입력 값 없음'."
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ຊ່ອງວ່າງ\" literally translates to \"empty space\" or \"gap,\" it doesn't quite capture the meaning of \"Empty field\" in the context of form validation. It lacks the connotation of a required input being left blank.",
-          "suggestion": "Consider \"ບໍ່ເຕີມຂໍ້ມູນ\" (bok teum khom-mun), which means \"no data entered\" or \"field not filled,\" or \"ປ່ອຍຫວ່າງ\" (ploi wang) which translates to 'left blank'."
+          "description": "While \"ຊ່ອງວ່າງ\" literally translates to \"empty space\" or \"gap,\" it's not the most natural or commonly used translation for \"Empty field\" in a form/UI context.  It's too literal.",
+          "suggestion": "Consider using \"ບໍ່ເຕັມ\" (bòh têm) which means 'not full' or 'incomplete', or \"ບໍ່ມີຂໍ້ມູນ\" (bòh mii khôm moon) which means 'no information'."
         }
       ],
       "approved_at": null
@@ -264,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"හිස් ක්‍ෂේත්‍රයකි\" (his kshethrâyaki) is a literal translation, it's not the most natural or concise way to express \"Empty field\" in Sinhala. It sounds overly formal and technical.",
-          "suggestion": "A more natural and common translation would be \"දහඩුවම හිස්\" (dahaduwa his) or simply \"හිස් දහඩුව\" (his dahaduwa)."
+          "description": "The translation 'හිස් ක්‍ෂේත්‍රයකි' while literally meaning 'an empty field' doesn't quite convey the meaning of 'Empty field' in the context of a form or input field error. It sounds too formal and technical.",
+          "suggestion": "A more natural and appropriate translation would be 'පොඩි දෙනුයි' (Podii Denui) which roughly translates to 'Please fill this in' or 'Required field' or ' හිස්සක් ගෙනත් පුරින්' (Hissak Genna Purin) which means 'Please fill in the empty space'."
         }
       ],
       "approved_at": null
@@ -276,7 +270,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prázdne ' is incomplete. It's missing the noun it describes. 'Prázdne' means 'empty' but needs to be followed by what is empty (e.g., 'Prázdne pole' - Empty field).",
+          "description": "The Slovak translation \"Prázdne \" is incomplete. It's missing the noun that \"prázdne\" (empty) is describing.  It should be something like \"Prázdne pole\" (Empty field).",
           "suggestion": "Prázdne pole"
         }
       ],

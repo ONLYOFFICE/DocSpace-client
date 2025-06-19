@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2025-06-18T17:09:45.725Z",
+  "updated_at": "2025-06-18T17:11:42.399Z",
   "comment": {
     "text": "This translation key is used to display an error message when an unexpected issue occurs while performing a specific action, such as opening a link or sending a test email. It appears in a notification dialog, typically triggered by user interaction, and informs the user that they should try again later or contact support for assistance.",
     "is_auto": true,
@@ -20,12 +20,6 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
       "line_number": 136,
       "context": "isWaitRequest = true;\n \n const result = await getSendingTestMailStatus();\n \n if (!result) {\n intervalId && toastr.error(t(\"Common:UnexpectedError\"));\n clearInterval(intervalId);\n intervalId = null;\n isWaitRequest = false;\n \n setSMTPSettingsLoading(false);",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/sub-components/ButtonContainer.js",
-      "line_number": 39,
-      "context": "const ButtonContainer = ({ t, buyUrl, siteDomain }) => {\n const onClickBuy = () => {\n const url = buyUrl || siteDomain;\n url\n ? window.open(url, \"_blank\")\n : toastr.error(t(\"Common:UnexpectedError\"));\n };\n return (\n <StyledButtonComponent>\n <Button\n label={t(\"ActivatePurchaseBuyNow\")}",
       "module": "/packages/client"
     },
     {
@@ -60,13 +54,13 @@
     },
     {
       "file_path": "/packages/client/src/store/BackupStore.js",
-      "line_number": 548,
+      "line_number": 575,
       "context": "message =\n (\"response\" in err && err.response?.data?.error?.message) ||\n (\"message\" in err && err.message) ||\n \"\";\n \n if (err?.response?.status === 502) message = t(\"Common:UnexpectedError\");\n \n this.errorInformation = message ?? t(\"Common:UnexpectedError\");\n };\n \n getProgress = async (t) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/BackupStore.js",
-      "line_number": 548,
+      "line_number": 575,
       "context": "message =\n (\"response\" in err && err.response?.data?.error?.message) ||\n (\"message\" in err && err.message) ||\n \"\";\n \n if (err?.response?.status === 502) message = t(\"Common:UnexpectedError\");\n \n this.errorInformation = message ?? t(\"Common:UnexpectedError\");\n };\n \n getProgress = async (t) => {",
       "module": "/packages/client"
     },
@@ -78,31 +72,31 @@
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 302,
+      "line_number": 306,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 302,
+      "line_number": 306,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 302,
+      "line_number": 306,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 302,
+      "line_number": 306,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/PaymentStore.ts",
-      "line_number": 302,
+      "line_number": 306,
       "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
       "module": "/packages/client"
     },
@@ -123,6 +117,24 @@
       "line_number": 49,
       "context": "[Symbol.asyncIterator]() {\n return {\n async next() {\n const item = await getOperationProgressApi(\n id,\n t(\"Common:UnexpectedError\"),\n );\n return {\n done: item?.finished ?? true,\n value: item,\n };",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/management/src/hooks/useBackup.ts",
+      "line_number": 142,
+      "context": "const setErrorInformation = useCallback((err: unknown, t: TTranslation) => {\n if (typeof err === \"string\") return setErrorInformationState(err);\n \n if (axios.isAxiosError(err)) {\n if (err.response?.status === 502)\n return setErrorInformationState(t(\"Common:UnexpectedError\"));\n \n const message =\n (err as AxiosError<ErrorResponse>).response?.data?.error?.message ||\n err.message ||\n \"\";",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/hooks/useBackup.ts",
+      "line_number": 142,
+      "context": "const setErrorInformation = useCallback((err: unknown, t: TTranslation) => {\n if (typeof err === \"string\") return setErrorInformationState(err);\n \n if (axios.isAxiosError(err)) {\n if (err.response?.status === 502)\n return setErrorInformationState(t(\"Common:UnexpectedError\"));\n \n const message =\n (err as AxiosError<ErrorResponse>).response?.data?.error?.message ||\n err.message ||\n \"\";",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/hooks/useBackup.ts",
+      "line_number": 142,
+      "context": "const setErrorInformation = useCallback((err: unknown, t: TTranslation) => {\n if (typeof err === \"string\") return setErrorInformationState(err);\n \n if (axios.isAxiosError(err)) {\n if (err.response?.status === 502)\n return setErrorInformationState(t(\"Common:UnexpectedError\"));\n \n const message =\n (err as AxiosError<ErrorResponse>).response?.data?.error?.message ||\n err.message ||\n \"\";",
+      "module": "/packages/management"
     }
   ],
   "languages": {

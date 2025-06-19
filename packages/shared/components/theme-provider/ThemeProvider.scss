@@ -1,5 +1,5 @@
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/theme.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/theme.scss";
 
 $font-size: 13px;
 

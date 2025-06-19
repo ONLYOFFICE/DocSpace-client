@@ -3,7 +3,7 @@
   "content": "Create a new folder in the storage",
   "content_en_sha1_hash": "7011cceaf0eed8fc1ce55b0bd0e99d1eab814a10",
   "created_at": "2025-05-19T21:30:55.376Z",
-  "updated_at": "2025-05-28T09:30:02.242Z",
+  "updated_at": "2025-05-26T07:57:32.268Z",
   "comment": {
     "text": "Create a new folder in the storage. This key is used to display the text for creating a new folder in the Third Party Storage component within the Create Edit Room Dialog.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yaddaşda yeni qovluq yaradın' is too literal and implies 'you created' rather than a command to create. It should reflect an instruction, not a statement of fact.",
+          "suggestion": "Yaddaşda yeni qovluq yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +63,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The abbreviation 'αποθ. χώρο' is not standard Greek for 'storage'. It's a shortened form and might not be universally understood or suitable for a technical context.",
+          "suggestion": "Δημιουργήστε έναν νέο φάκελο στον αποθηκευτικό χώρο"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Δημιουργήστε' is correct for 'Create', the translation could be more natural. A more common phrasing would be 'Δημιουργία νέου φακέλου'.",
+          "suggestion": "Δημιουργία νέου φακέλου στον αποθηκευτικό χώρο"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +86,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Luo muistiin uusi kansio' is not the most natural or accurate translation of 'Create a new folder in the storage'. 'Muistiin' implies 'into memory' which is incorrect in this context. The storage is a location, not memory.",
+          "suggestion": "Luo uusi kansio tallennustilaan"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +104,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Create a new folder in the storage' is more accurately translated as 'Ստեղծել նոր տեղեկատու պահեստում' (Stelqcel nor tegeqatoq pahiseum). 'Թղթապանակ' (tghtpapanak) translates to 'folder' as in paper folder, not a digital folder.",
+          "suggestion": "Ստեղծել նոր տեղեկատու պահեստում"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +170,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Crearea unui folder nou în stocarea' is not idiomatic Romanian. It translates literally as 'The creation of a new folder in the storage'. A more natural phrasing would use a verb.",
+          "suggestion": "Creează un folder nou în stocare"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'în' before 'stocarea' feels slightly awkward. It's grammatically correct but less common.",
+          "suggestion": "Creează un folder nou în stocare."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +193,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ආචයනයේ නව බහාලුමක් සාදන්න' translates to 'Create a new package in the archive/repository'. The English phrase 'storage' has a more specific meaning than 'archive/repository' in this context.  'Storage' refers to a location for storing files, whereas 'ආචයනයේ' implies a more curated or archived collection.",
+          "suggestion": "A more accurate translation might be something like 'නව ෆෝල්ඩරයක් ගබඩාවෙහි සාදන්න' (nava folderak gabadawhi sadanna) - 'Create a new folder in the storage'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,13 +211,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'pomnilnik' can mean both memory and storage. While it can be used for storage, 'skladišče' is a more precise translation of 'storage' in this context, referring to data storage specifically.",
+          "suggestion": "Ustvari novo mapo v skladišču"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'folder' is typically transliterated as 'folder' in Serbian (Cyrillic). While 'фолдер' is understandable, 'фолдер' is more commonly used and accepted.",
+          "suggestion": "Измените 'фолдер' у 'фолдер'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

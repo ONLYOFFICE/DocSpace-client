@@ -3,7 +3,7 @@
   "content": "Personal files",
   "content_en_sha1_hash": "e79d8267d987d7b931ea816e2a68ba4f1a20029a",
   "created_at": "2025-05-19T21:30:52.154Z",
-  "updated_at": "2025-05-28T09:30:02.518Z",
+  "updated_at": "2025-05-26T07:57:32.527Z",
   "comment": {
     "text": "The translation key \"PersonalFiles\" is used to display the phrase \"Personal files\" in a settings section. It appears as the label of a toggle button within an import settings dialog, allowing users to select or deselect importing personal files during data import.",
     "is_auto": true,
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'File personali' is a literal translation and not the most natural or idiomatic way to say 'Personal files'.",
-          "suggestion": "Consider 'Documenti personali' or 'Archivi personali' for a more natural-sounding translation, depending on the specific context of 'Personal files'."
+          "description": "The Italian translation 'File personali' is a literal translation and doesn't quite capture the meaning of 'Personal files' in the context of settings. It's grammatically correct, but could be improved for naturalness. 'File personali' implies files *belonging* to someone, whereas 'Personal files' might refer to a designated area or folder.",
+          "suggestion": "Consider 'Archivi personali' or 'Documenti personali' for a more idiomatic translation depending on the specific context of 'Settings'."
         }
       ],
       "approved_at": null

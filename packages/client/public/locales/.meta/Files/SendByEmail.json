@@ -3,7 +3,7 @@
   "content": "Send by email",
   "content_en_sha1_hash": "6ec82549f3e3a32eba90bc618cdb8d0b58d0dbf3",
   "created_at": "2025-05-19T21:30:56.176Z",
-  "updated_at": "2025-06-03T20:59:42.295Z",
+  "updated_at": "2025-06-08T12:02:32.846Z",
   "comment": {
     "text": "Send by email is a label used on settings options in the client application. It appears as part of an option's label and indicates that this setting controls sending emails.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1995,
+      "line_number": 1998,
       "context": "disabled: false,\n },\n // {\n //   id: \"option_send-by-email\",\n //   key: \"send-by-email\",\n //   label: t(\"SendByEmail\"),\n //   icon: MailReactSvgUrl,\n //   disabled: emailSendIsDisabled,\n // },\n {\n id: \"option_embedding-setting\",",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Elektron poçt vasitəsi ilə göndər\" is a bit formal and lengthy for a simple \"Send by email.\"  A more natural and common phrasing would be better.",
-          "suggestion": "Consider alternatives like \"E-poçt vasitəsi ilə göndər\" or simply \"E-poçtla göndər\"."
+          "description": "While technically correct, 'Elektron poçt vasitəsi ilə göndər' is a bit verbose and formal for a simple 'Send by email'. A more natural and commonly used translation would be 'E-poçt vasitəsi ilə göndər' or 'E-mail ilə göndər'.",
+          "suggestion": "E-poçt vasitəsi ilə göndər"
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Изпратен по имейл' implies something has already been sent. The English 'Send by email' describes the action of sending. A more accurate translation would be 'Изпрати по имейл'.",
-          "suggestion": "Изпрати по имейл"
+          "description": "The translation 'Изпратен по имейл' is not the best equivalent of 'Send by email'. It implies something *was* sent, while the English phrase refers to the action of sending. A better translation would be something like 'Изпращане по имейл' (Sending by email) or 'Чрез имейл' (Via email).",
+          "suggestion": "Изпращане по имейл"
         }
       ],
       "approved_at": null
@@ -168,8 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'වි' in 'වි-තැපෑලෙන්' appears to be unnecessary and potentially a typographical error. It interrupts the natural flow of the Sinhala phrase.",
+          "description": "The word 'වි' in 'වි-තැපෑලෙන්' is unnecessary and creates an awkward phrasing. It's likely a misunderstanding of how to construct the phrase.",
           "suggestion": "තැපෑලෙන් යවන්න"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'තැපෑලෙන් යවන්න' is a possible translation, a more natural and common phrasing would be better. 'වි' makes the construction slightly less idiomatic.",
+          "suggestion": "ඊමේල් ඔස්සේ යවන්න"
         }
       ],
       "approved_at": null
@@ -186,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Pošlji po email' is not the most natural or idiomatic Slovenian translation for 'Send by email'. The phrasing 'Po email' is understandable but 'preko elektronske pošte' or 's pomočjo e-pošte' would be more commonly used and sound more professional.",
-          "suggestion": "Pošlji preko elektronske pošte"
+          "description": "The translation 'Pošlji po email' is a literal translation but doesn't sound natural in Slovenian. While technically correct, a more idiomatic translation would be better.",
+          "suggestion": "Pošlji elektronično"
         }
       ],
       "approved_at": null
@@ -198,13 +203,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Пошаљи путем емаил-а' while understandable, is not the most natural or accurate translation of 'Send by email' in Serbian. The word 'емаил-а' is a transliteration and doesn't quite convey the meaning of 'email'.",
-          "suggestion": "Пошаљи имејлом"
+          "description": "The translation 'Пошаљи путем емаил-а' is not the most natural or accurate translation of 'Send by email'. While understandable, 'емаил-а' is a direct transliteration and feels awkward.  A more natural phrasing would be 'слати путем е-маила'.",
+          "suggestion": "слати путем е-маила"
         },
         {
           "type": "formatting",
-          "description": "The transliteration 'емаил-а' includes a hyphen, which is not standard Serbian orthography for the word 'email'.",
-          "suggestion": "емаил"
+          "description": "The use of 'емаил-а' creates an unusual hyphenated word.  A dedicated Serbian term for email (e-mail) or a more integrated phrase is preferable.",
+          "suggestion": "слати путем е-маила"
         }
       ],
       "approved_at": null
@@ -214,8 +219,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'putem email-a' is slightly awkward. While technically correct, it's more natural to use a different phrasing.",
+          "type": "incorrect_translation",
+          "description": "While 'Pošalji putem email-a' is understandable, a more natural and common Serbian (Latin) translation of 'Send by email' would be 'Pošalji mejlom' or 'Pošalji putem mejla'. 'Email-a' is technically correct, but less idiomatic in modern usage.",
           "suggestion": "Pošalji mejlom"
         }
       ],

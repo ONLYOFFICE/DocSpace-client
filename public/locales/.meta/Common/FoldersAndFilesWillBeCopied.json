@@ -3,7 +3,7 @@
   "content": "Folders and files will be copied in the destination",
   "content_en_sha1_hash": "ed4d4023708822fb6b8b2fba6bbc8907ef33e46a",
   "created_at": "2025-05-19T21:30:45.452Z",
-  "updated_at": "2025-05-28T09:30:02.219Z",
+  "updated_at": "2025-05-26T07:57:32.245Z",
   "comment": {
     "text": "\"This translation key is used in a conflict resolution dialog, specifically when resolving file conflicts, and provides a message to the user indicating that folders and files will be copied in the destination.\"",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"дестинацията\" is a literal translation of \"destination\" and sounds awkward in Bulgarian in this context. A more natural phrasing would be 'в папката за дестинация' or 'към дестинацията'.",
-          "suggestion": "Consider 'в папката за дестинация' or 'към дестинацията'."
+          "description": "The word \"дестинацията\" is a literal translation of \"destination\" and sounds unnatural in Bulgarian in this context. It's overly formal and doesn't flow well.",
+          "suggestion": "A more natural translation would be something like \"в крайната папка\" (in the final folder) or \"към дестинацията\" (to the destination), depending on the desired level of formality."
         }
       ],
       "approved_at": null
@@ -51,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'V cíli budou zkopírovány složky a soubory' is a literal translation that doesn't flow naturally in Czech. It implies that the destination itself is being copied. A more natural and accurate translation would emphasize the action being performed *to* the folders and files.",
-          "suggestion": "Složky a soubory budou zkopírovány do cíle."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ordner und Dateien werden in Zielbereich kopiert' is not ideal. 'Zielbereich' is a general term for destination area and lacks the specific nuance of a destination folder or location. It's a bit too literal and sounds less natural.",
-          "suggestion": "Ordner und Dateien werden in den Zielordner kopiert."
+          "description": "The translation 'Ordner und Dateien werden in Zielbereich kopiert' is technically correct, but 'Zielbereich' is a more formal and less common way to say 'destination' in this context. A more natural and user-friendly phrasing would be 'Zielordner' or 'am Zielort'.",
+          "suggestion": "Ordner und Dateien werden am Zielort kopiert."
         }
       ],
       "approved_at": null
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Les dossiers et les fichiers seront copiés dans le dossier de destination' is too literal. While technically correct, it's not the most natural phrasing in French.  'Destination' is redundant as 'dossier de destination' specifies it.",
-          "suggestion": "Les dossiers et les fichiers seront copiés à la destination."
+          "description": "The translation is overly literal and not as natural-sounding in French. \"Le dossier de destination\" is redundant, as 'destination' implies a folder. It's more common to simply say 'dans la destination'.",
+          "suggestion": "Les dossiers et les fichiers seront copiés dans la destination."
         }
       ],
       "approved_at": null
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Թղթապանակները և ֆայլերը կպատճենվեն նպատակակետում' while literally meaning 'Folders and files will be copied in the destination', is not the most natural or idiomatic way to express this in Armenian. The term 'նպատակակետում' (destination) can sound slightly formal and rigid in this context.",
-          "suggestion": "Consider a more natural phrasing like: «Ծանրաբեռնվածությունը տեղափոխվելու է» (Tsanrabernvadut’yun teghaphovelu e) - 'The load will be transferred' or «ֆայլերը և ծիրանները փոխադրվելու են» (fayler yev tsiranner phokhadrvelu en) - 'The files and folders will be transferred'."
+          "description": "The translation \"Թղթապանակները և ֆայլերը կպատճենվեն նպատակակետում\" is a literal translation and might sound unnatural in Armenian. A more natural phrasing would be something like \"ֆայլերը և թղթապանակները կբացվելու են նոր վայրում\" or \"ֆայլերը և թղթապանակները կվերադասվեն նոր վայրում\".",
+          "suggestion": "Consider alternative phrasings like \"ֆայլերը և թղթապանակները կվերադասվեն նոր վայրում\" or \"ֆայլերը և թղթապանակները կբացվելու են նոր վայրում\" for a more natural sounding translation."
         }
       ],
       "approved_at": null
@@ -123,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'フォルダとファイルはコピー先にコピーされます。' literally translates to 'Folders and files will be copied to the destination.' While understandable, it's slightly redundant to say 'copied to the destination' since 'destination' already implies copying. A more natural phrasing would avoid repetition.",
+          "suggestion": "フォルダとファイルはコピー先へコピーされます。 or フォルダとファイルはコピーされます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '폴더와 파일이 목표에 복사됩니다' literally translates to 'Folders and files will be copied to the target'. While understandable, 'destination' (implied in the English) is better conveyed with a word like '대상(daesang)' or '장소(jangso)' depending on the specific context. '목표(mokpyo)' often refers to goals or objectives rather than a location.",
-          "suggestion": "Consider using '폴더와 파일이 대상에 복사됩니다' or '폴더와 파일이 장소에 복사됩니다' for a more accurate translation of 'destination'."
+          "description": "The translation '폴더와 파일이 목표에 복사됩니다' is not the most natural or precise translation of 'Folders and files will be copied in the destination.' '목표' (mokpyo) implies a target or goal, which isn't necessarily the intent of 'destination'.",
+          "suggestion": "폴더와 파일이 대상 위치에 복사됩니다"
         }
       ],
       "approved_at": null
@@ -141,7 +141,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ໄຟລ໌' (file) is spelled correctly, but it's generally preferred to use a more formal/technical term for 'file' in Lao, especially in technical documentation. While not strictly incorrect, it might sound slightly informal.",
+          "suggestion": "Consider using 'ເອກະສານ' (ek-ga-san) which means 'document' as a more formal alternative for 'file'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -162,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Pliki i katalogi nie zostaną skopiowane do lokalizacji docelowej\" translates to \"Files and folders will not be copied to the destination.\" The original English states that they *will* be copied. The negation is incorrect.",
+          "description": "The Polish translation 'Pliki i katalogi nie zostaną skopiowane do lokalizacji docelowej' translates to 'Files and folders will not be copied to the destination.' This contradicts the original English content 'Folders and files will be copied in the destination'.",
           "suggestion": "Pliki i katalogi zostaną skopiowane do lokalizacji docelowej"
         }
       ],
@@ -198,13 +204,28 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර' (folders) is spelled correctly, but may benefit from a more colloquial Sinhala word for 'folder' if the context allows for it.",
-          "suggestion": "Consider using a more common term for 'folder' if appropriate for the audience, e.g., investigate whether a more familiar term exists."
+          "description": "The word 'ෆෝල්ඩර' is a transliteration and could be improved. A more natural Sinhala equivalent for 'folder' exists.",
+          "suggestion": "පිංතූර (Pintuura)"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ගොනු' is a correct spelling for 'files'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ගමනාන්තය' is a correct spelling for 'destination'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'පිටපත්' is a correct spelling for 'copied'.",
+          "suggestion": null
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the passive voice ('will be copied') might sound a bit formal. Depending on the overall tone, a more active voice construction could improve readability.",
-          "suggestion": "Consider rephrasing to an active voice if it suits the desired tone, e.g., 'ෆෝල්ඩර සහ ගොනු ගමනාන්තය තුළට පිටපත් කෙරේ' (Folders and files are copied to the destination)."
+          "description": "The sentence structure, while understandable, could be improved for better flow in Sinhala. The passive voice 'will be copied' might not be the most natural way to express this in Sinhala. Consider an active voice construction.",
+          "suggestion": "ෆෝල්ඩර සහ ගොනු ගමනාන්තයට පිටපත් කරනු ලැබේ. (Folders and files will be copied to the destination.)"
         }
       ],
       "approved_at": null
@@ -226,9 +247,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'дестинацију' is a direct transliteration of 'destination' and isn't the most natural or common Serbian (Cyrillic) equivalent in this context. While understandable, it sounds awkward.",
-          "suggestion": "A more natural phrasing would be 'на одредиште' (na odredište) meaning 'to the destination'."
+          "type": "incorrect_translation",
+          "description": "The word 'дестинацију' is a literal translation of 'destination' and sounds unnatural in Serbian in this context. A more natural phrasing would be something like 'на одредиште'.",
+          "suggestion": "Фолдери и датотеке ће бити копирани на одредиште"
         }
       ],
       "approved_at": null
@@ -238,14 +259,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Serbian translation uses the future tense ('će biti kopirani'), which might sound slightly formal for this context. A more natural phrasing might use a more general statement.",
-          "suggestion": "Folderi i datoteke se kopiraju u destinaciju"
-        },
-        {
           "type": "formatting",
-          "description": "While technically correct, using 'destinaciju' (the accusative case) can be slightly less common than using the locative case. The choice impacts the tone.",
-          "suggestion": "Folderi i datoteke se kopiraju u destinaciji"
+          "description": "The translation uses lowercase for the first word of the sentence, which might be better as uppercase to match standard sentence capitalization.",
+          "suggestion": "Folderi i datoteke će biti kopirani u destinaciju"
         }
       ],
       "approved_at": null
@@ -259,31 +275,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'до місця призначення' is a somewhat formal and verbose way to say 'to the destination'. A more natural and common phrasing would be better.",
-          "suggestion": "Папки й файли будуть скопійовані у цільову папку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'tập tin' (file) is commonly written as 'tệp'. While 'tập tin' is understandable, 'tệp' is more standard.",
-          "suggestion": "Thư mục và tệp sẽ được sao chép vào đích đến"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'destination' is better translated as '目的地' (mùdì dì) or '目标位置' (mùbiāo wèizhi) to more accurately reflect the meaning of a destination in this context, rather than just '位置' (wèizhi). While '目标位置' is acceptable, it's more verbose than necessary.",
+          "suggestion": "文件夹和文件将被复制到目的地/目标位置"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Do not share your API key with others or expose it in the browser or other client-side code.",
   "content_en_sha1_hash": "0f6d896cc685ae0a76c5eb9007fc9fc99f03c8da",
   "created_at": "2025-05-19T21:30:50.552Z",
-  "updated_at": "2025-05-28T09:30:02.546Z",
+  "updated_at": "2025-06-08T12:02:32.749Z",
   "comment": {
     "text": "This translation key is used to display a warning message reminding users not to share their API keys. It appears in the PortalSettings page, specifically on an API Keys-related setting or button.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 202,
+      "line_number": 223,
       "context": "{t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>\n \n <Text className=\"api-keys_text api-keys_usage-text\">\n {t(\"Settings:ApiKeyViewUsage\")}\n </Text>",
       "module": "/packages/client"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation uses quotation marks around \"API\" which isn't necessary and breaks the flow. It's more standard to simply mention API as is, or transliterate it.",
-          "suggestion": "لا تُشاركوا مفتاح API الخاص بكم مع الآخرين أو تعرضوه في المتصفح أو أي كود من جهة العميل."
+          "description": "The Arabic translation uses a mixture of formal and informal language. 'لا تُشاركوا' is a plural imperative, which might be too informal for a settings description. Consider using a more formal phrasing.",
+          "suggestion": "لا تشاركوا مفتاح API الخاص بكم مع الآخرين أو تعرضوه في المتصفح أو أي كود من جهة العميل."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'مفتاح API' is understandable, it might be more accurate and clearer to use 'مفتاح واجهة برمجة التطبيقات' for the first mention of the API key, and then 'مفتاح API' for subsequent references. This clarifies the technical term.",
+          "suggestion": "لا تشاركوا مفتاح واجهة برمجة التطبيقات (API) الخاص بكم مع الآخرين أو تعرضوه في المتصفح أو أي كود من جهة العميل."
         }
       ],
       "approved_at": null
@@ -42,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"expose\" is not accurate. \"Açıqlamayın\" literally means 'do not reveal/explain', which is not the same as exposing a key in code.",
-          "suggestion": "API açarınızı başqaları ilə paylaşmayın və ya onu brauzerlə və ya digər müştəri tərəfi kodunda göstərməyin."
+          "description": "The word 'expose' is not accurately translated. 'Açıqlamayın' implies revealing or making visible, but 'expose' carries a stronger connotation of vulnerability and risk in this context.",
+          "suggestion": "API açarınızı başqaları ilə paylaşmayın və ya onu brauzerdə və ya digər müştəri kodunda riskə qoymayın."
         },
         {
           "type": "formatting",
-          "description": "The word \"brauzerdə\" should be \"brauzerlə\" to match the preposition 'with' in the English sentence.",
-          "suggestion": "API açarınızı başqaları ilə paylaşmayın və ya onu brauzerlə və ya digər müştəri tərəfi kodunda göstərməyin."
+          "description": "While not strictly incorrect, the sentence structure could be slightly improved for smoother reading in Azerbaijani. The current phrasing is understandable, but could be more natural.",
+          "suggestion": "API açarınızı başqaları ilə paylaşmayın, habeli onu brauzerdə və ya digər müştəri kodunda göstərməyin."
         }
       ],
       "approved_at": null
@@ -56,13 +61,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'браузъра' should be 'браузър'.",
-          "suggestion": "браузър"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -82,9 +81,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'από την πλευρά του πελάτη' is a bit clunky and not the most natural way to say 'client-side'.",
-          "suggestion": "Consider rephrasing to something like 'σε κώδικα που εκτελείται στον περιηγητή' or 'σε κώδικα από τον υπολογιστή σας'."
+          "type": "spelling",
+          "description": "The word 'πρόγραμμα περιήγησης' is technically correct but can be more naturally translated as 'περιηγητής'.",
+          "suggestion": "περιηγητής"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'σε άλλον κώδικα από την πλευρά του πελάτη' is a bit verbose and can be simplified.",
+          "suggestion": "σε κώδικα από τον πελάτη"
         }
       ],
       "approved_at": null
@@ -94,9 +98,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Do not share your API key with others' is accurately translated as 'No comparta su clave de la API con otros'. However, the phrasing 'or expose it in the browser or other client-side code' could be improved for clarity and naturalness in Spanish.  'Exponer' is a bit formal for this context.",
+          "suggestion": "No comparta su clave de la API con otros ni la muestre en el navegador ni en código del lado del cliente."
+        },
+        {
           "type": "formatting",
-          "description": "The phrase 'en ningún otro código del lado del cliente' is slightly verbose and could be more concise. It reads a bit awkwardly.",
-          "suggestion": "en ningún otro código cliente."
+          "description": "While not technically incorrect, the repetition of 'ni' could be slightly improved for readability. Consider restructuring the sentence.",
+          "suggestion": "No comparta su clave de la API con otros, ni la muestre en el navegador ni en código del lado del cliente."
         }
       ],
       "approved_at": null
@@ -107,13 +116,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"vie sitä selaimeen tai muuten asiakaspuolelle\" is not a natural or accurate translation of \"or expose it in the browser or other client-side code.\" 'Vie' means 'take' or 'carry', which doesn't convey the meaning of 'expose'. It's awkward and potentially misleading.",
-          "suggestion": "Älä paljasta API-avaintasi selaimeen tai asiakaspuolen koodiin."
+          "description": "The phrase 'or expose it' is not accurately translated. 'Vie sitä' can be interpreted as 'carry it' or 'take it,' which doesn't convey the meaning of 'expose.' A better translation would convey the sense of revealing or making visible.",
+          "suggestion": "Älä jaa API-avaintasi muille tai paljasta sitä selaimeen tai muuhun asiakaspuolelle."
         },
         {
           "type": "formatting",
-          "description": "The phrase \"asiakaspuolelle\" could be improved for better flow. Although technically correct, it's slightly clunky.",
-          "suggestion": "asiakaspuolen koodiin"
+          "description": "The sentence is a bit long and could be broken down for better readability in Finnish. Consider splitting it into two sentences.",
+          "suggestion": "Älä jaa API-avaintasi muille. Älä myöskään paljasta sitä selaimeen tai muuhun asiakaspuolelle."
         }
       ],
       "approved_at": null
@@ -130,7 +139,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a slash (/) to separate 'browser' and 'client-side code'. While understandable, it's less common and slightly awkward compared to a more fluid phrasing.  A more natural way to convey this would be to use 'կամ զննարկիչում կամ կլիենտային կոդում' or similar.",
+          "description": "The slash '/' in 'զննարկիչում/կլիենտային կոդում' is a bit awkward. It's translating 'or' as a slash. A more natural Armenian phrasing might use 'կամ' consistently.",
           "suggestion": "Մի կիսվեք ձեր API բանալիով ուրիշների հետ կամ ցուցադրեք այն զննարկիչում կամ կլիենտային կոդում:"
         }
       ],
@@ -145,13 +154,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses particles (と, に) which can be a bit verbose and less natural in this context. A more concise phrasing might improve readability.",
-          "suggestion": "APIキーを他の人と共有したり、ブラウザやクライアントサイドのコードに公開しないでください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -166,13 +169,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຕົວທ່ອງເວັບ' is spelled incorrectly. The correct spelling is 'ຕົວທ່ອງເວັບ'.",
-          "suggestion": "ຕົວທ່ອງເວັບ"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ຫຼື ໃຫ້ມັນຖືກເຜີຍແຜ່' can be improved for better flow.  'ຫຼື ໃຫ້ມັນຖືກເຜີຍແຜ່' is a bit awkward.",
-          "suggestion": "ຫຼື ຖືກເຜີຍແຜ່"
+          "description": "The word 'ຕົວທ່ອງເວັບ' (browser) is spelled correctly, but the Lao spelling may benefit from using the more common term 'ເວັບໄຊ້ທ່ອງເວັບ' which is more directly translated to 'web browser'.",
+          "suggestion": "ເວັບໄຊ້ທ່ອງເວັບ"
         }
       ],
       "approved_at": null
@@ -182,9 +180,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'Nedalieties ar citiem ar savu API atslēgu' is slightly awkward. While grammatically correct, it's more natural to omit the second 'ar'.",
-          "suggestion": "Nedalieties ar savu API atslēgu ar citiem"
+          "type": "incorrect_translation",
+          "description": "The translation 'Nedalieties ar citiem ar savu API atslēgu' sounds slightly awkward. A more natural phrasing would be 'Nedodiet savu API atslēgu citiem'.",
+          "suggestion": "Nedodiet savu API atslēgu citiem."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'neizpaudiet to pārlūkprogrammā vai citā klienta puses kodā' is a bit stiff. A more natural equivalent would be 'neizlaidiet to pārlūkprogrammā vai citā klienta puses kodā'.",
+          "suggestion": "neizlaidiet to pārlūkprogrammā vai citā klienta puses kodā."
         }
       ],
       "approved_at": null
@@ -218,14 +221,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'Nu împărtășiți cheile dvs API nimănui' is grammatically awkward. The correct way to express 'Do not share your API keys with anyone' is 'Nu împărtășiți cheile API cu nimeni.'",
-          "suggestion": "Nu împărtășiți cheile API cu nimeni."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Do not share your API key with others' is not fully conveyed. 'Nimănui' translates to 'anyone' but lacks the implication of *sharing*.",
+          "suggestion": "Nu împărtășiți cheile dvs. API cu alții."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'codul pe partea client' is a literal translation and sounds unnatural in Romanian.  'Client-side code' is better translated as 'codul de pe partea clientului' or simply 'codul client'.",
-          "suggestion": "codul client"
+          "description": "The Romanian phrase 'codul pe partea client' is a bit clunky and not the most natural way to say 'client-side code'.",
+          "suggestion": "cod client"
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of 'cheile' feels awkward. Consider rewording to avoid repetition.",
+          "suggestion": "Nu împărtășiți cheile dvs. API cu alții și nu le expuneți în browser sau în cod client."
         }
       ],
       "approved_at": null
@@ -233,13 +241,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Russian translation uses the informal 'Не делитесь' (Do not share) which might be too casual for a settings description. A more formal phrasing like 'Не передавайте' or 'Не раздавайте' would be more appropriate.",
-          "suggestion": "Не передавайте свой ключ API с другими пользователями и не публикуйте его в браузере или другом клиентском коде."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -248,8 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'browser or other client-side code' is not accurately conveyed. 'සේවාදායක පාර්ශ්ව කේතයේ' is a literal translation of 'server-side code,' not client-side code.",
-          "suggestion": "Consider revising to something like: 'ඔබගේ API යතුර අන් අය සමඟ බෙදා නොගන්න හෝ බ්‍රවුසරයේ හෝ වෙනත් ක්ලයන්තුවල පැති කේතයේ එය නිරාවරණය නොකරන්න.' (Replacing 'සේවාදායක පාර්ශ්ව කේතයේ' with ' ක්ලයන්තුවල පැති කේතයේ'.)"
+          "description": "The phrase \"browser or other client-side code\" is not accurately reflected in the Sinhala translation.  \"client-side code\" is translated as \"සේවාදායක පාර්ශ්ව කේතයේ\" which is overly literal and might not be readily understood.  A more understandable translation would consider the concept of 'code running in the user's browser'.",
+          "suggestion": "ඔබගේ API යතුර අන් අය සමඟ බෙදා නොගන්න හෝ බ්‍රවුසරයේදී හෝ වෙනත් පරිශීලක පැත්තේ ක්‍රියාත්මක වන කේතයේ එය නිරාවරණය නොකරන්න."
         }
       ],
       "approved_at": null
@@ -266,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"kodi na strani odjemalca\" is a bit clunky and not the most natural translation of 'client-side code'. A more fluent option would be 'kod na strani stranke' or 'koda na strani odjemalnika'.",
-          "suggestion": "Ne delite svojega ključa API z drugimi in ga ne razkrijte v brskalniku ali drugi kodi na strani stranke."
+          "description": "The translation 'kodi na strani odjemalca' is a bit awkward. A more natural phrasing would be 'kod na strani odjemalnika' or 'odjemalski kodi'.",
+          "suggestion": "Ne delite svojega ključa API z drugimi in ga ne razkrijte v brskalniku ali drugi kod na strani odjemalnika."
         }
       ],
       "approved_at": null
@@ -283,9 +285,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'pretraživaču' (in browser) might benefit from a more specific term depending on the intended meaning. It could be more precise to use 'veb pregledaču' (web browser).",
-          "suggestion": "Nemojte deliti svoj API ključ sa drugima niti ga izlagati u veb pregledaču ili drugom klijentskom kodu."
+          "type": "incorrect_translation",
+          "description": "The word 'izlagati' (to expose) isn't the most natural way to express the intention of the English 'expose' in this context.  A better phrasing would convey the idea of revealing or making visible.",
+          "suggestion": "Nemojte deliti svoj API ključ sa drugima niti ga otkrivati u pretraživaču ili drugom klijentskom kodu."
         }
       ],
       "approved_at": null
@@ -293,24 +295,24 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'expose it' is not directly translated. 'Açık hale getirmeyin' is a functional equivalent but lacks the directness and impact of 'expose'.",
+          "suggestion": "API anahtarınızı başkalarıyla paylaşmayın veya tarayıcı veya istemci tarafı kodunda görünür kılmayın."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'ya da' instead of 'veya' is a minor stylistic preference, as both are acceptable. 'Veya' is more common in formal Turkish.",
+          "suggestion": "API anahtarınızı başkalarıyla paylaşmayın veya tarayıcı ve istemci tarafı kodda açık hale getirmeyin."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'expose it' is not accurately reflected in the Ukrainian translation. 'Показуйте його' (pokazuite yoho) implies showing something visually, whereas 'expose' in this context means to reveal or make available to unauthorized parties. A more accurate translation would convey the concept of 'reveal' or 'disclose'.",
-          "suggestion": "Не розкривайте свій ключ API нікому та не надавайте його в браузері чи іншому клієнтському коді."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the Ukrainian translation could benefit from using a more formal tone consistent with a technical setting. The use of 'нікому та' (nikomu ta) is slightly less formal than necessary.",
-          "suggestion": "Не передавайте свій ключ API нікому та не розміщуйте його в браузері чи іншому клієнтському коді."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -319,8 +321,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'mã phía máy khách (client-side)' is a literal translation of 'client-side code'. While understandable, it's not the most natural way to express this in Vietnamese. A more common phrasing would be 'mã phía máy khách' or 'mã chạy trên trình duyệt'.",
-          "suggestion": "Không chia sẻ khóa API của bạn với người khác hoặc để lộ nó trong trình duyệt hoặc mã phía máy khách."
+          "description": "The phrase 'mã phía máy khách (client-side)' is a literal translation of 'client-side code.' While understandable, it's less natural in Vietnamese. A more common and fluent translation would be 'mã phía máy khách' or 'code phía máy khách'.",
+          "suggestion": "mã phía máy khách or code phía máy khách"
         }
       ],
       "approved_at": null
@@ -328,7 +330,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop (句号) at the end of the sentence. While grammatically correct, in many modern Chinese UI contexts, omitting it would be more consistent with the style.",
+          "suggestion": "请勿将 API 密钥共享给他人，或公开在浏览器及其他客户端代码中"
+        }
+      ],
       "approved_at": null
     }
   }

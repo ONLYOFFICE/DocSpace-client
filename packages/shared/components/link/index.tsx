@@ -75,7 +75,7 @@ const Link: React.FC<LinkProps> = ({
       tabIndex={tabIndex}
       isBold={isBold}
       style={{
-        color,
+        color: color === "accent" ? "var(--accent-main)" : color,
         lineHeight,
         textDecoration,
       }}

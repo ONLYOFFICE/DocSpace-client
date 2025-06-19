@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, type JSX } from "react";
 
 import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
@@ -33,12 +33,14 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import OutsdideIcon from "PUBLIC_DIR/images/arrow.outside.react.svg";
+import CheckIconURL from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
 import { classNames, ObjectUtils, DomHelpers, isMobile } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 
 import { ToggleButton } from "../../toggle-button";
 import { Scrollbar } from "../../scrollbar";
+import { IconButton } from "../../icon-button";
 
 import {
   ContextMenuModel,
@@ -384,6 +386,14 @@ const SubMenu = (props: SubMenuProps) => {
       onClick(e);
     };
 
+    const checked =
+      item.checked && "isPortal" in item && item.isPortal ? (
+        <IconButton
+          className={classNames(iconClassName, "p-portal-icon")}
+          iconName={CheckIconURL}
+        />
+      ) : null;
+
     let content = (
       <a
         href={item.url || "#"}
@@ -394,6 +404,7 @@ const SubMenu = (props: SubMenuProps) => {
       >
         {icon}
         {label}
+        {checked}
         {subMenuIcon}
         {item.isOutsideLink ? (
           <OutsdideIcon className={subMenuIconClassName} />

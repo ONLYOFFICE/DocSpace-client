@@ -3,7 +3,7 @@
   "content": "Copying several files to the Form Filling room is not supported. Copy one {{ organizationName }} PDF form at a time.",
   "content_en_sha1_hash": "c41a7dc0f7c8436d7ace7999b3a1273bbaa2c047",
   "created_at": "2025-05-19T21:30:56.331Z",
-  "updated_at": "2025-05-28T09:30:02.128Z",
+  "updated_at": "2025-05-26T07:57:32.170Z",
   "comment": {
     "text": "This translation key is used to display a warning message when copying multiple files to a Form Filling room in an application. It informs users that this action is not supported and suggests copying one PDF form at a time instead. This message appears on a UI component for the FilesSelector, likely as a warning or alert when users attempt to copy multiple files simultaneously.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'bir-bir' is redundant and stylistically awkward. It translates to 'one by one' but is not necessary.",
-          "suggestion": "Forma Doldurma otağına çoxsaylı faylların nüsxələnməsi dəstəklənmir. {{ organizationName }} PDF formalarını bir-birinə nüsxələyin."
+          "description": "The phrase 'bir-bir' is a redundant way of saying 'one by one'. While understandable, it's not the most natural phrasing in Azerbaijani. It can be simplified.",
+          "suggestion": "Nüsxələyin bir PDF formanı."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation uses a lower case 'k' at the beginning of 'kopírování', which is not ideal for a warning message. It should be capitalized.",
-          "suggestion": "Kopírování více souborů do místnosti pro vyplňování formulářů není podporováno. Kopírujte PDF formuláře {{ organizationName }} po jednom."
+          "description": "The Czech translation maintains the use of the variable '{{ organizationName }}', which is consistent with the English. This is good, but it's important to ensure the application correctly handles this variable during rendering.",
+          "suggestion": "Verify correct variable rendering for '{{ organizationName }}'."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"sala para rellenar formularios\" is not the most natural translation of 'Form Filling room'. A more accurate and common translation would be 'habitación de llenado de formularios' or simply 'habitación de formularios'.",
-          "suggestion": "Consider using 'habitación de llenado de formularios' or 'habitación de formularios' instead of 'sala para rellenar formularios'."
+          "description": "The phrase 'sala para rellenar formularios' is not the most natural or precise translation of 'Form Filling room'. A more appropriate translation would be 'habitación para completar formularios' or 'sala de cumplimentación de formularios'.",
+          "suggestion": "Change 'sala para rellenar formularios' to 'habitación para completar formularios' or 'sala de cumplimentación de formularios'."
         }
       ],
       "approved_at": null
@@ -101,14 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Մի քանի ֆայլերի պատճենումը\" (Copying several files) is grammatically correct, but 'ձևը' (the form) doesn't quite capture the intent of 'PDF form'. It's technically correct but lacks nuance. A more precise translation might consider the specific PDF context.",
-          "suggestion": "Մի քանի ֆայլերի պատճենումը Ձևաթղթերի լրացման սենյակում չի աջակցվում: Պատճենեք մեկ {{ organizationName }} PDF ֆայլը միաժամանակ:"
-        },
-        {
           "type": "formatting",
-          "description": "The colon (:) after the first sentence feels slightly abrupt. It could benefit from a smoother transition.",
-          "suggestion": "Մի քանի ֆայլերի պատճենումը Ձևաթղթերի լրացման սենյակում չի աջակցվում։ Խնդրում ենք պատճենեք մեկ {{ organizationName }} PDF ֆայլը միաժամանակ:"
+          "description": "The colon after 'սենյակում' seems unnecessary and disrupts the flow. It should likely be removed.",
+          "suggestion": "Մի քանի ֆայլերի պատճենումը Ձևաթղթերի լրացման սենյակում չի աջակցվում: Պատճենեք մեկ {{ organizationName }} PDF ձևը միաժամանակ:"
         }
       ],
       "approved_at": null
@@ -119,8 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"stanza di compilazione dei moduli\" is a literal translation of \"Form Filling room\" and sounds unnatural in Italian. A more natural phrasing would be \"stanza di compilazione moduli\" or \"area di compilazione moduli\".",
-          "suggestion": "Consider using \"stanza di compilazione moduli\" or \"area di compilazione moduli\" instead of \"stanza di compilazione dei moduli\"."
+          "description": "The phrase 'Form Filling room' is translated as 'stanza di compilazione dei moduli'. While technically correct, a more natural and common translation would be 'stanza di compilazione moduli' or 'area di compilazione moduli'.",
+          "suggestion": "Consider translating 'Form Filling room' as 'stanza di compilazione moduli' or 'area di compilazione moduli'."
+        },
+        {
+          "type": "formatting",
+          "description": "The Italian translation lacks a space before the variable `{{ organizationName }}`.",
+          "suggestion": "Add a space before the variable: 'Copia un modulo PDF {{ organizationName }} alla volta' should become 'Copia un modulo PDF {{ organizationName }} alla volta'."
         }
       ],
       "approved_at": null
@@ -128,7 +128,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Copying several files' is translated as '複数のファイルをコピーすること'. While technically correct, a more natural and slightly more emphatic translation would be something like '複数のファイルをコピーする'. The nuance lost here is important, as the original English text emphasizes the *action* of copying multiple files.",
+          "suggestion": "フォーム記入ルームに複数のファイルをコピーするサポートされていません。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -143,13 +149,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ເອກະສານ' (documents) is repeated unnecessarily. While technically correct, it's stylistically awkward.",
+          "description": "The word 'ເອກະສານ' (documents) is repeated unnecessarily. While grammatically correct, it can be simplified for better flow.",
           "suggestion": "ການສໍາເນົາເອກະສານຫລາຍໆເຂົ້າໄປໃນຫ້ອງຕື່ມຂໍ້ມູນແບບຟອມແມ່ນບໍ່ຮັບຮອງ. ກວດເບິ່ງແບບຟອມ PDF ຂອງ {{ organizationName }} ຫນຶ່ງແບບຟອມໃນຄັ້ງຫນຶ່ງເທົ່ານັ້ນ."
         },
         {
-          "type": "grammar",
-          "description": "The use of 'ກວດເບິ່ງ' (check) might be better replaced with a more suitable word, as it implies an active review rather than the intended action of copying.",
-          "suggestion": "ການສໍາເນົາເອກະສານຫລາຍໆເຂົ້າໄປໃນຫ້ອງຕື່ມຂໍ້ມູນແບບຟອມແມ່ນບໍ່ຮັບຮອງ. ຕື່ມແບບຟອມ PDF ຂອງ {{ organizationName }} ຫນຶ່ງແບບຟອມໃນຄັ້ງຫນຶ່ງເທົ່ານັ້ນ."
+          "type": "formatting",
+          "description": "While not strictly incorrect, using a more common Lao phrasing like 'ຫລາຍໆ' (many) instead of 'ຫລາຍ' (many) can improve readability and sound more natural.",
+          "suggestion": "ການສໍາເນົາເອກະສານຫລາຍໆເຂົ້າໄປໃນຫ້ອງຕື່ມຂໍ້ມູນແບບຟອມແມ່ນບໍ່ຮັບຮອງ. ກວດເບິ່ງແບບຟອມ PDF ຂອງ {{ organizationName }} ຫນຶ່ງແບບຟອມໃນຄັ້ງຫນຶ່ງເທົ່ານັ້ນ."
         }
       ],
       "approved_at": null
@@ -157,13 +163,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"veidlapu aizpildīšanas telpu\" translates to 'form filling room' but sounds unnatural in Latvian. A more natural phrasing would be \"veidlapu aizpildīšanas istabu\" or simply \"veidlapu istabu\".",
-          "suggestion": "Vairāku failu kopēšana uz veidlapu istabu netiek atbalstīta. Vienlaikus kopējiet vienu {{ organizationName }} PDF veidlapu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -181,18 +181,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Copying several files' is translated as 'Não há suporte para copiar vários arquivos'. While technically correct, a more natural and user-friendly translation would be 'Não é possível copiar vários arquivos' or 'A cópia de vários arquivos...'",
-          "suggestion": "Não é possível copiar vários arquivos"
-        },
-        {
-          "type": "formatting",
-          "description": "The variable 'organizationName' is correctly placed, but ensuring consistent use of curly braces and spaces around the variable in all translated strings is recommended for future consistency.",
-          "suggestion": "No change needed, but maintain consistency in variable formatting across translations."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -201,13 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is awkward and doesn't accurately convey the original meaning. Specifically, the repetition of 'formulário PDF' is redundant.",
-          "suggestion": "Não é possível copiar vários arquivos para a sala de preenchimento de formulários. Copie um formulário PDF {{ organizationName }} por vez."
+          "description": "The phrase \"formulário PDF de cada vez\" is redundant and doesn't accurately convey the meaning of \"at a time.\" It literally translates to 'PDF form of each time'.",
+          "suggestion": "Copie um formulário PDF {{ organizationName }} por vez."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Não há suporte para a cópia' is a bit formal for this context. A more natural phrasing could improve readability.",
-          "suggestion": "Não é possível copiar"
+          "description": "While not strictly incorrect, using 'por vez' is more natural and preferred over 'de cada vez' in this context.",
+          "suggestion": "Copie um formulário PDF {{ organizationName }} por vez."
         }
       ],
       "approved_at": null
@@ -217,14 +206,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Sala de completare a formularelor\" is a literal translation of 'Form Filling room'. A more natural Romanian equivalent might be 'Camera de completare a formularelor' or 'Spațiul de completare a formularelor'.",
-          "suggestion": "Consider 'Camera de completare a formularelor' or 'Spațiul de completare a formularelor'."
+          "type": "formatting",
+          "description": "The Romanian translation uses a period (.) after \"formularelor\" instead of a comma (,). This disrupts the natural flow of the sentence.",
+          "suggestion": "Replace '.' with ',' after 'formularelor'."
         },
         {
           "type": "incorrect_translation",
-          "description": "While \"Copiați câte un formular PDF {{ organizationName }}.\" is technically correct, it's a bit clunky. It could be improved for better flow.",
-          "suggestion": "Consider 'Copiați câte un PDF {{ organizationName}}' or 'Copiați un PDF {{ organizationName}} pe rând'."
+          "description": "The phrase 'câte un formular PDF' is a bit awkward. A more natural Romanian phrasing would be 'câte un PDF'.",
+          "suggestion": "Replace 'câte un formular PDF' with 'câte un PDF'."
         }
       ],
       "approved_at": null
@@ -241,8 +230,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ආකෘතියක්' (aakruthayak) should ideally be 'ආකෘතිය' (aakruthya) for better flow and conciseness. While 'ආකෘතියක්' isn't strictly wrong, 'ආකෘතිය' is more common and natural in this context.",
-          "suggestion": "පෝරම් පිරවුම් කාමරයට බොහෝ ගොනු පිටපත් කිරීම සහය නොදක්වයි. එක {{ organizationName }} PDF ආකෘතිය පමණක් එකවර පිටපත් කරන්න."
+          "description": "The word 'ආකෘතියක්' (aakruthayak) is technically correct but sounds slightly awkward in this context. A more natural phrasing might be better.",
+          "suggestion": "Consider using 'පත්‍රයක්' (pathrayak) instead of 'ආකෘතියක්' (aakruthayak) for 'form'."
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of '{{ organizationName }}' is identical to the English. While not strictly incorrect, in Sinhala, placing it before 'PDF' might flow slightly better.",
+          "suggestion": "Reorder to: '{{ organizationName }} PDF පත්‍රයක්'"
         }
       ],
       "approved_at": null
@@ -268,7 +262,18 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fajlova' is spelled incorrectly. The correct spelling is 'fajlova'.",
+          "suggestion": "fajlova"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'obrazac' is spelled correctly, although 'obrazac' is also acceptable. However, since it appears multiple times, consistency is desirable. Consider using a single term for 'form'.",
+          "suggestion": "obrazac (consistent usage)"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -289,13 +294,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"một số tập tin\" (several files) is awkward and less natural in Vietnamese. It's better to use a more fluent phrasing.",
-          "suggestion": "Hãy sao chép từng biểu mẫu PDF {{ organizationName }} một lần."
+          "description": "The phrase \"Một số tập tin\" (several files) is a literal translation and slightly awkward in Vietnamese. A more natural phrasing would be \"nhiều tập tin\" or \"vài tập tin\".",
+          "suggestion": "Hãy sao chép vài tập tin vào phòng Điền Biểu mẫu. Hãy sao chép từng biểu mẫu PDF {{ organizationName }} mỗi lần."
         },
         {
           "type": "formatting",
-          "description": "The phrase \"mỗi lần\" is somewhat redundant. It can be removed without losing meaning.",
-          "suggestion": "Hãy sao chép từng biểu mẫu PDF {{ organizationName }} một."
+          "description": "There's a potential minor inconsistency in the level of formality. While the Vietnamese is generally fine, starting the first sentence with \"Không hỗ trợ...\" (not supported) is quite direct.  A more user-friendly tone might soften it.",
+          "suggestion": "Để có thể sao chép các tập tin vào phòng Điền Biểu mẫu, bạn vui lòng sao chép từng biểu mẫu PDF {{ organizationName }} mỗi lần."
         }
       ],
       "approved_at": null
@@ -305,9 +310,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"将多个文件复制到表单填写房间\" is a bit literal and sounds unnatural in Chinese. A more natural phrasing would be something like \"批量复制文件到表单填写房间\" or \"一次复制多个文件到表单填写房间\" to emphasize the limitation.",
+          "suggestion": "不支持批量复制文件到表单填写房间。请每次复制一份{{ organizationName }}的 PDF 表单。"
+        },
+        {
           "type": "formatting",
-          "description": "The Chinese translation uses 'PDF 表单' which is technically correct but could be more natural. Consider using 'PDF 文档' or simply 'PDF 文件' for a slightly more fluent feel.",
-          "suggestion": "PDF 文档 or PDF 文件"
+          "description": "While technically correct, the use of a full stop at the end of the sentence is a bit formal for this type of message and makes the tone slightly rigid. Removing it would improve the readability for many users.",
+          "suggestion": "不支持批量复制文件到表单填写房间。请每次复制一份{{ organizationName }}的 PDF 表单"
         }
       ],
       "approved_at": null

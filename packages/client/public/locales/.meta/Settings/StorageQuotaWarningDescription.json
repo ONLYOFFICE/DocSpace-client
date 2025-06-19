@@ -3,7 +3,7 @@
   "content": "Storage quota is enabled for this {{productName}}: {{quotaLimits}}. Limitations can occur during data import.",
   "content_en_sha1_hash": "ce0c51ee29b44d088bd4f16916128d64a83f815c",
   "created_at": "2025-05-19T21:30:52.803Z",
-  "updated_at": "2025-05-28T09:30:02.306Z",
+  "updated_at": "2025-05-26T07:57:32.341Z",
   "comment": {
     "text": "This translation key is used to display a warning message about storage quota limitations when importing data. It appears in a dialog that prompts users to review their product's storage quota usage. Translators should replace \"storage quota\" and \"product name\" with relevant terminology to ensure accurate communication.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The placeholder {{productName}} and {{quotaLimits}} are present in both the English and Arabic text. Ensure this formatting is consistent and that the application correctly handles these placeholders.",
-          "suggestion": "Verify the application properly substitutes {{productName}} and {{quotaLimits}} during rendering."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'قد تحدث قيود' (may occur limitations) is a slightly awkward phrasing. A more natural and common phrasing would be 'قد تطرأ قيود' (limitations may arise).",
-          "suggestion": "Consider revising to: 'تم تفعيل حصة التخزين لهذا {{productName}}: {{quotaLimits}}. قد تطرأ قيود أثناء استيراد البيانات.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -46,14 +35,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Yaddaş' (Memory) is used. While technically correct, 'Saxtələşmə' (Storage) might be more precise in this context referring to data storage limits.",
-          "suggestion": "Saxtələşmə kvotası bu {{productName}} üçün aktiv edilib:"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Yaddaş kvotası\" (Memory quota) is not the most natural or accurate translation of 'Storage quota'. 'Yaddaş' refers to memory, while 'Storage' refers to storage space. A better translation would be 'Saxtəçilik kvotası' or 'Saxlama kvotası'.",
+          "suggestion": "Replace 'Yaddaş kvotası' with 'Saxtəçilik kvotası' or 'Saxlama kvotası'."
         },
         {
-          "type": "grammar",
-          "description": "The use of colon (:) after 'aktiv edilib' feels slightly awkward in Azerbaijani. A different phrasing might flow better.",
-          "suggestion": "Saxtələşmə kvotası bu {{productName}} üçün aktivləşdirilib. Məlumatların idxalı zamanı məhdudiyyətlər yarana bilər."
+          "type": "incorrect_translation",
+          "description": "The word 'məhdudiyyətlər' (limitations) sounds slightly formal. While technically correct, a more conversational and user-friendly option could be explored.",
+          "suggestion": "Consider replacing 'məhdudiyyətlər' with a phrase like 'çətinliklər' (difficulties) or 'problеmlər' (problems) for a softer tone."
         }
       ],
       "approved_at": null
@@ -70,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation retains the double curly braces `{{...}}` which should be removed in the localized string if they are meant to be placeholders for dynamic content.  This is a formatting issue, as the placeholder syntax isn't standard Czech.",
-          "suggestion": "Remove the double curly braces around productName and quotaLimits.  The surrounding text should be adjusted to integrate the values seamlessly. For example, 'Pro tento [productName] je povolena kvóta úložiště: [quotaLimits]. Omezení může nastat během importu dat.'"
+          "description": "The Czech translation uses a colon (:) after 'kvóta úložiště' which might be stylistically awkward. Consider replacing it with a dash or restructuring the sentence.",
+          "suggestion": "Pro tento {{productName}} je povolena kvóta úložiště – {{quotaLimits}}. Omezení může nastat během importu dat."
         }
       ],
       "approved_at": null
@@ -85,13 +74,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The double curly braces `{{...}}` in the English content are consistently used for placeholders. The Greek translation maintains these, which is appropriate for consistency.",
-          "suggestion": "Maintain the double curly braces: `{{productName}}` and `{{quotaLimits}}`"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -118,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a hyphen (-) between 'productName' and the subsequent text. While technically not incorrect, it's more common to use a space in Armenian for such constructions. It disrupts the flow and consistency with the English template.",
-          "suggestion": "Քվոտաի սահմանաչափը միացված է այս {{productName}} համար՝{{quotaLimits}}."
+          "description": "The Armenian translation uses a hyphen (-) instead of a colon (:) after '{{productName}}'. The English source uses a colon.",
+          "suggestion": "Change hyphen to colon: `Քվոտաի սահմանաչափը միացված է այս {{productName}}:`"
         }
       ],
       "approved_at": null
@@ -136,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation includes a period after {{quotaLimits}}, which disrupts the flow and doesn't match the English format. The period should be removed.",
-          "suggestion": "この{{productName}}にはストレージ容量制限が有効になっています。{{quotaLimits}}"
+          "description": "The Japanese translation includes an unnecessary period after '{{quotaLimits}}'. This disrupts the flow and doesn't align with typical Japanese sentence structure.",
+          "suggestion": "Remove the period after '{{quotaLimits}}'."
         }
       ],
       "approved_at": null
@@ -148,8 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"데이터를 가져오기하는 동안\" is awkward and grammatically incorrect. The verb '가져오다' (to import) is being unnecessarily modified.",
-          "suggestion": "데이터를 가져오는 동안 (Data import process)"
+          "description": "The phrase \"데이터를 가져오기하는 동안\" is grammatically awkward and doesn't flow naturally in Korean. It should be rephrased to convey 'during data import' more clearly and elegantly.",
+          "suggestion": "데이터 가져오기 시"
+        },
+        {
+          "type": "formatting",
+          "description": "The spacing around the colon after \"활성화되었습니다:\" could be improved for better readability.",
+          "suggestion": "활성화되었습니다: "
         }
       ],
       "approved_at": null
@@ -160,13 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ກຳນົດຈຳນວນທີ່ໃຊ້ສຳລັບເກັບຂໍ້ມູນ\" is a bit verbose and doesn't directly translate 'Storage quota'. A more concise and accurate translation would be something like 'ກຳນົດຂະໜານທີ່ໃຊ້ສຳລັບຂໍ້ມູນ' (quota for data).",
-          "suggestion": "ກຳນົດຂະໜານທີ່ໃຊ້ສຳລັບຂໍ້ມູນ"
+          "description": "The term \"ກຳນົດຈຳນວນທີ່ໃຊ້ສຳລັບເກັບຂໍ້ມູນ\" (gam-not jam-nuan thi sai sam-lab kheb da-mun) is a literal and somewhat awkward translation of 'storage quota'. A more natural translation would be something like 'ກຳນົດຂັ້ນຕ່ຳສຸດທີ່ສາມາດເກັບຂໍ້ມູນໄດ້' (gam-not khan tam-sut thi samat kheb da-mun dai) or 'ຂັ້ນຕ່ຳສຸດຂອງການເກັບຂໍ້ມູນ' (khan tam-sut khong kan kheb da-mun).",
+          "suggestion": "Consider using 'ກຳນົດຂັ້ນຕ່ຳສຸດທີ່ສາມາດເກັບຂໍ້ມູນໄດ້' (gam-not khan tam-sut thi samat kheb da-mun dai) or 'ຂັ້ນຕ່ຳສຸດຂອງການເກັບຂໍ້ມູນ' (khan tam-sut khong kan kheb da-mun)."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ອາດຈະມີຂໍ້ຈຳກັດເກີດຂື້ນ' is somewhat awkward. A more natural Lao phrasing would be 'ອາດຈະມີການຈຳກັດ' or 'ອາດຈະມີບັນຫາ' (may be an issue).",
-          "suggestion": "ອາດຈະມີການຈຳກັດ"
+          "type": "formatting",
+          "description": "The term 'productName' and 'quotaLimits' are placeholders. While the Lao translation preserves them, it's essential to ensure consistency with how placeholders are handled in the application's user interface. Check if the application uses brackets, curly braces, or another system to identify placeholders.",
+          "suggestion": "Verify the application's placeholder conventions and ensure consistency in the Lao translation (e.g., using the same bracket type)."
         }
       ],
       "approved_at": null
@@ -189,8 +177,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'pamięci' is translated as 'memory' which is not the intended meaning of 'storage'. It should be 'dysk' or 'magazyn'.",
-          "suggestion": "Limit przestrzeni dyskowej jest włączony dla {{productName}}: {{quotaLimits}}."
+          "description": "The English term 'Storage quota' is translated as 'Limit pamięci'. While understandable, 'Limit przestrzeni dyskowej' or 'Przestrzeń dyskowa' might be more accurate and commonly used for 'Storage quota' in this context.",
+          "suggestion": "Limit przestrzeni dyskowej"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Limitations can occur' is translated as 'mogą wystąpić ograniczenia'. While grammatically correct, a more natural-sounding translation could be 'mogą wystąpić problemy' or 'mogą zajść problemy'.",
+          "suggestion": "mogą zajść problemy"
         }
       ],
       "approved_at": null
@@ -210,7 +203,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of double quotes around `{{productName}}` and `{{quotaLimits}` is not consistent with the English source, which uses single quotes. This could affect rendering in the application.",
+          "suggestion": "Change the Romanian translation to use single quotes: \"Cotă de stocare este activată pentru {{productName}}: {{quotaLimits}}. Restricții pot apărea în timpul importului.\""
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -225,8 +224,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation uses a colon (:) after '{{quotaLimits}}', which might be unconventional in Sinhala. Consider removing it or replacing it with a more suitable punctuation mark (e.g., a period).",
-          "suggestion": "මෙම {{productName}} සඳහා ගබඩා කෝටාව සක්‍රීය කර ඇත: {{quotaLimits}}. --> මෙම {{productName}} සඳහා ගබඩා කෝටාව සක්‍රීය කර ඇත {{quotaLimits}}."
+          "description": "The Sinhala translation lacks the same formatting as the English. In English, there's a colon after 'productName' and 'quotaLimits' placeholders. This should be mirrored in the Sinhala.",
+          "suggestion": "Change the translation to: \"මෙම {{productName}}: {{quotaLimits}} සඳහා ගබඩා කෝටාව සක්‍රීය කර ඇත . දත්ත ආනයනය කිරීමේදී සීමාවන් ඇති විය හැක.\""
         }
       ],
       "approved_at": null
@@ -234,7 +233,18 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Limitations can occur during data import' is not the most natural or precise translation of the English. A better phrasing would convey the potential impact more effectively.",
+          "suggestion": "Obmedzenia sa môžu vyskytnúť pri importe dát."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the use of 'pri' instead of 'počas' is slightly more concise and reads more naturally in this context.",
+          "suggestion": "Obmedzenia sa môžu vyskytnúť pri importe údajov."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -242,9 +252,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Slovenian translation uses a comma (,) where a space might be more natural after 'Kvota za shranjevanje'.",
-          "suggestion": "Kvota za shranjevanje je omogočena za ta {{productName}}: {{quotaLimits}}"
+          "type": "spelling",
+          "description": "The word 'shranjevanje' is spelled correctly, but consider if 'skladiščno' might be more appropriate depending on the context.",
+          "suggestion": "Consider 'skladiščno' instead of 'shranjevanje' if referring specifically to storage space."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Kvota za shranjevanje, ki je omogočena za ta {{productName}}: {{quotaLimits}}' could benefit from a slightly more fluid sentence structure. A comma before 'je' isn't mandatory, but can improve readability.  Alternatively, using 'omejena' instead of 'omogočena' might be more natural.",
+          "suggestion": "Kvota za shranjevanje, omejena za ta {{productName}}: {{quotaLimits}}."
         }
       ],
       "approved_at": null
@@ -258,13 +273,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ograničenja se mogu pojaviti tokom uvoza podataka\" is a literal translation but sounds awkward in Serbian. A more natural phrasing would be something like \"Moguće su ograničenja prilikom uvoza podataka\" or \"Problemi mogu nastati prilikom uvoza podataka\".",
+          "suggestion": "Problemi mogu nastati prilikom uvoza podataka."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation maintains the same formatting (using curly braces for variable placeholders) as the English content, which is appropriate for consistent rendering.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -272,9 +299,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Ukrainian translation uses a colon (:) where the English uses a colon. It's a subtle difference, but consistency is preferred. Consider a dash (-) for better readability in Ukrainian.",
-          "suggestion": "Квоту сховища ввімкнено для цього {{productName}} - {{quotaLimits}}. Під час імпорту даних можуть застосовуватися обмеження."
+          "type": "incorrect_translation",
+          "description": "The term 'may apply' (можуть застосовуватися) is too passive. A more direct translation of 'can occur' would be more appropriate. Consider alternatives.",
+          "suggestion": "Consider alternatives like 'можуть виникати' (may arise) or 'можуть бути' (may be) for a more natural Ukrainian phrasing."
         }
       ],
       "approved_at": null
@@ -282,13 +309,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Limitations can occur' is not the most natural way to express this in Vietnamese. A more common and clearer phrasing would be 'Có thể có hạn chế'.",
-          "suggestion": "Có thể có hạn chế"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -296,14 +317,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"数据导入过程中可能会出现存储限制\" is a bit awkward and doesn't fully capture the meaning of \"Limitations can occur during data import.\" A more natural translation would convey that limitations *due to* the quota might affect data import.",
-          "suggestion": "数据导入过程中可能受存储配额限制。"
-        },
-        {
           "type": "formatting",
-          "description": "While the template variables are correctly included, it might be beneficial to ensure consistency with other translations, potentially adding a space before/after the template placeholders ({{ }}) based on the broader project style.",
-          "suggestion": "此{{productName}}已启用存储配额：{{quotaLimits}}。 数据导入过程中可能受存储配额限制。"
+          "description": "The Chinese translation uses a colon (:) after \"存储配额\" which is grammatically correct but may not align with the English's use of a colon to introduce the quota limits. Consider if a slightly different phrasing is preferable for flow.",
+          "suggestion": "Consider rephrasing to avoid the colon, potentially using a phrasing like \"此{{productName}}已启用存储配额，配额限制为{{quotaLimits}}。\" (This {{productName}} has storage quota enabled, the limit is {{quotaLimits}}.)"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Secure sharing with trusted teammates.",
   "content_en_sha1_hash": "9ba9be313cd631e2af8e9d427283182aa557cd86",
   "created_at": "2025-05-19T21:30:55.984Z",
-  "updated_at": "2025-05-21T11:32:51.968Z",
+  "updated_at": "2025-06-02T10:20:51.020Z",
   "comment": {
     "text": "This translation key is used to display a descriptive phrase about secure sharing in collaboration contexts. It appears on a button or other UI element in the client application, providing users with information about how private data is being handled when sharing files with trusted teammates. Translators should adapt this phrase to convey the intended meaning and tone for their respective languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 131,
+      "line_number": 133,
       "context": "const privacyIcon = <img alt=\"\" src={PrivacySvgUrl} />;\n \n const privateRoomDescTranslations = [\n t(\"PrivateRoomDescriptionSafest\"),\n t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];\n \n const roomHeader = t(\"Common:EmptyRootRoomHeader\", {",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Güvənilən üzvlər üçün təhlükəsiz paylaşım' doesn't fully capture the nuance of 'Secure sharing with trusted teammates'. It translates to 'Secure sharing for trusted members'. While close, 'teammates' implies a collaborative effort which is less explicit in the translation.  'Teammates' suggests a working relationship, which is implied but not explicitly stated.",
-          "suggestion": "Güvənilən həmvəkillər ilə təhlükəsiz paylaşım"
+          "description": "The translation \"Güvənilən üzvlər üçün təhlükəsiz paylaşım\" doesn't fully capture the nuance of 'Secure sharing with trusted teammates'. 'Güvənilən üzvlər' translates to 'trusted members', which is correct, but 'təhlükəsiz paylaşım' is a more literal translation of 'secure sharing' and doesn't convey the same emphasis on security. A more suitable translation would convey a sense of safety and protection.",
+          "suggestion": "Consider \"Etibarlı komanda yoldaşları ilə təhlükəsiz paylaşım\" or \"Güvənli komanda yoldaşları ilə paylaşım\" (depending on desired emphasis)"
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sichere Freigabe für Teammitglieder' doesn't fully capture the nuance of 'Secure sharing with trusted teammates'. 'Freigabe' implies simply releasing something. The original emphasizes security and trust.",
-          "suggestion": "Sichere gemeinsame Nutzung mit vertrauenswürdigen Teammitgliedern."
+          "description": "While 'Sichere Freigabe' is technically correct, it lacks the nuance of 'secure sharing.' 'Vertrauliche Freigabe' or 'Gesicherte Freigabe' might be more appropriate depending on the context.",
+          "suggestion": "Consider 'Vertrauliche Freigabe' or 'Gesicherte Freigabe' for a more precise translation of 'secure sharing'."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ασφαλής κοινή χρήση με έμπιστους συναδέλφους' is a literal translation and doesn't fully capture the nuance of 'Secure sharing with trusted teammates'. While technically correct, it sounds a bit formal and doesn't flow as naturally in Greek for this context. 'Trusted teammates' implies a closer relationship than just 'colleagues'.",
-          "suggestion": "Ασφαλής κοινή χρήση με συνεργάτες που εμπιστεύεστε."
+          "description": "The translation 'Ασφαλής κοινή χρήση με έμπιστους συναδέλφους' while generally conveying the meaning, isn't the most natural or idiomatic translation for 'Secure sharing with trusted teammates.' 'Συναδέλφους' (colleagues) is a bit too formal and broad for 'teammates.'",
+          "suggestion": "Ασφαλής κοινή χρήση με έμπιστους συνεργάτες."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Անվտանգ համօգտագործում վստահելի թիմակիցների հետ\" doesn't fully capture the nuance of \"Secure sharing.\" \"Համօգտագործում\" (co-use/joint usage) is not the best equivalent for 'sharing'. It focuses on use, not the sharing itself. \"Secure sharing\" implies a process of providing access.",
-          "suggestion": "Consider alternatives like \"վստահելի թիմակիցների հետ անվտանգ տեղափոխում\" (secure transfer with trusted teammates) or \"վստահելի թիմակիցների հետ անվտանգ բաժանում\" (secure sharing with trusted teammates) or \"վստահելի թիմակիցների հետ անվտանգ հասանելիություն\" (secure access for trusted teammates)."
+          "description": "The translation 'Անվտանգ համօգտագործում վստահելի թիմակիցների հետ' while conveying a similar concept, is not a direct or idiomatic translation of 'Secure sharing with trusted teammates.' It focuses more on 'safe usage' rather than 'secure sharing'.",
+          "suggestion": "Consider a translation like: «Վստահելի թիմակիցների հետ անվտանգ բաժանողություն» (Vostah’eli timakits’neri het anvtang bajanogutyun) or «Անվտանգ մասնագիտություն վստահելի թիմակիցների հետ» (Anvtang masnagitsut’yun vostah’eli timakits’neri het)."
         }
       ],
       "approved_at": null
@@ -114,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Condivisione sicura con gli utenti del gruppo fidato\" is a literal translation but lacks the brevity and impact of the English \"Secure sharing with trusted teammates.\" It's a bit wordy.",
+          "description": "The translation 'Condivisione sicura con gli utenti del gruppo fidato' is a bit literal and doesn't fully capture the concise meaning of \"Secure sharing with trusted teammates.\" 'Utenti del gruppo fidato' is more formal than the original English implies.",
           "suggestion": "Condivisione sicura con colleghi fidati."
         }
       ],
@@ -201,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"поузданим члановима тима\" (trusted members of the team) is a bit clunky. A more natural Serbian translation would convey the sense of 'trusted colleagues' or 'trusted peers'.",
+          "suggestion": "Безбедно дељење са поузданим колегама/сарадницима."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Безпечне надання спільного доступу довіреним членам команди' is a bit literal and could be more natural. 'Надання спільного доступу' sounds formal. It doesn't perfectly capture the brevity and casualness of 'Secure sharing'.",
-          "suggestion": "Consider a more concise and natural phrasing like 'Безпечний обмін з довіреними колегами' or 'Безпечний спільний доступ з довіреними членами команди'."
+          "description": "The translation 'Безпечне надання спільного доступу довіреним членам команди' is a bit literal and verbose for the English phrase 'Secure sharing with trusted teammates'. It emphasizes 'providing access' which isn't the core meaning of the English.",
+          "suggestion": "Consider a more concise and natural Ukrainian translation like 'Безпечний обмін файлами з надійними колегами' or 'Безпечний доступ до файлів для довірених колег'."
         }
       ],
       "approved_at": null
@@ -240,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '与有权限的团队成员安全共享' is a bit literal and doesn't fully capture the nuance of 'Secure sharing with trusted teammates.' '有权限的' (with permission) is more restrictive than 'trusted'.",
-          "suggestion": "考虑使用更自然的表达，例如 '与信任的团队成员安全共享' 或者 '与可信赖的团队成员安全共享'。"
+          "description": "The translation '与有权限的团队成员安全共享' emphasizes 'having permission' which isn't the core meaning of 'trusted teammates.' 'Trusted' implies a level of relationship and confidence beyond simply having permission.",
+          "suggestion": "与信任的团队成员安全共享。"
         }
       ],
       "approved_at": null

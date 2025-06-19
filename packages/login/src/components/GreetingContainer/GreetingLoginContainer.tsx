@@ -52,7 +52,7 @@ export const GreetingLoginContainer = ({
 
   const logoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
+    !theme?.isBase,
     false,
     culture,
   );
@@ -117,7 +117,14 @@ export const GreetingLoginContainer = ({
                 ...(roomName ? { roomName } : { spaceAddress }),
               }}
               components={{
-                1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                1: (
+                  <Text
+                    key="component_key"
+                    fontWeight={600}
+                    as="strong"
+                    fontSize="16px"
+                  />
+                ),
               }}
             />
           </Text>

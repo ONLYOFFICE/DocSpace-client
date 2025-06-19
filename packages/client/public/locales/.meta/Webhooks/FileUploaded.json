@@ -3,7 +3,7 @@
   "content": "File uploaded",
   "content_en_sha1_hash": "71be2f4e3893377ae37b18258e9eddee61125537",
   "created_at": "2025-05-19T21:30:49.742Z",
-  "updated_at": "2025-05-21T01:10:36.895Z",
+  "updated_at": "2025-05-24T02:24:43.255Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,7 +20,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"تم تحديث الملف\" translates to \"The file has been updated\" and doesn't directly mean \"File uploaded\". While it conveys a related concept, it's not a literal or functionally equivalent translation.",
+          "suggestion": "Consider a more direct translation like \"تم رفع الملف\" (File has been raised/uploaded) or \"تم تحميل الملف\" (File has been downloaded/uploaded)."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -107,7 +113,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fails augšupielādēts\" is a literal translation and sounds unnatural in Latvian. A more natural phrasing would be \"Fails ielādēts\" or \"Faili augšupielādēts\".",
+          "description": "While \"Fails augšupielādēts\" is understandable, a more natural and accurate translation of \"File uploaded\" in Latvian would be \"Faili augšupielādēts\" or simply \"Augšupielādēts fails\". The original translation uses the singular 'fails' instead of the plural 'faili' to match the English word 'File'.",
           "suggestion": "Faili augšupielādēts"
         }
       ],
@@ -197,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Đã tải tập tin lên ' is technically correct but slightly verbose for a simple notification like 'File uploaded'. A more concise and natural translation would be better.",
-          "suggestion": "Đã tải lên"
+          "description": "The translation 'Đã tải tập tin lên' is a literal translation but can be improved for naturalness in Vietnamese. A more common and natural phrasing would be 'Tải file thành công' or 'File đã được tải lên'.",
+          "suggestion": "Tải file thành công"
         }
       ],
       "approved_at": null

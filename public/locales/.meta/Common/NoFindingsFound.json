@@ -3,7 +3,7 @@
   "content": "No findings",
   "content_en_sha1_hash": "ab5062b935491263fcc3318d6d8d558b82d2b044",
   "created_at": "2025-05-19T21:30:46.827Z",
-  "updated_at": "2025-05-28T09:30:02.090Z",
+  "updated_at": "2025-05-26T07:57:32.148Z",
   "comment": {
     "text": "This translation key is used to display the text \"No findings\" in a component that represents an empty state, likely appearing as part of a filter or search result. It provides a clear message when there are no relevant results found.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Heç bir tapıntı tapılmadı' literally translates to 'No findings were found'. While understandable, it's a bit verbose and formal for the English phrase 'No findings'. A more natural and concise Azerbaijani equivalent would be better.",
-          "suggestion": "Consider a more concise translation like 'Tapıntı yoxdur' or 'Heç bir tapıntı yoxdur'."
+          "description": "The translation 'Heç bir tapıntı tapılmadı' is a literal translation and doesn't quite convey the simple meaning of 'No findings'. 'Tapıntı' means 'discovery' or 'find' and the construction 'tapılmadı' means 'wasn't found.'  While technically correct, it's unnecessarily complex.",
+          "suggestion": "A more natural and accurate translation would be 'Nəticə tapılmadı' or simply 'Nəticə yoxdur'."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Keine Ergebnisse gefunden\" is technically correct, it's a bit literal and less natural than alternative translations for 'No findings' in this context. 'Keine Ergebnisse' or 'Nichts gefunden' would be more commonly used and sound more fluent.",
-          "suggestion": "Consider using 'Keine Ergebnisse' or 'Nichts gefunden' instead."
+          "description": "While 'Keine Ergebnisse gefunden' is a literal translation, it might sound overly formal and technical for a message indicating 'No findings'. A more natural and user-friendly translation would be preferable.",
+          "suggestion": "Keine Ergebnisse / Nichts gefunden / Es wurden keine Ergebnisse gefunden"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Havaintoja ei löytynyt\" is a slightly less natural phrasing. A more common and slightly more concise translation would be \"Ei havaintoja\".",
-          "suggestion": "Ei havaintoja"
+          "description": "The translation \"Havaintoja ei löytynyt\" is technically correct but sounds somewhat formal and stiff for a simple message like \"No findings.\" A more natural and conversational translation would be preferred.",
+          "suggestion": "Ei löydetty"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aucun résultat trouvé' literally means 'No results found'. While conveying a similar meaning to 'No findings', 'findings' in this context (likely referring to a security or audit report) implies a more investigative discovery. 'Aucun résultat trouvé' feels more generic.",
-          "suggestion": "Consider 'Aucune anomalie détectée' or 'Aucun problème trouvé' to more accurately reflect 'No findings' in the context of a report."
+          "description": "While \"Aucun résultat trouvé\" is grammatically correct, it's a less direct and potentially less natural translation of \"No findings.\" \"Aucune anomalie détectée\" or \"Aucun problème détecté\" would be more accurate and idiomatic in many contexts where 'findings' is used.",
+          "suggestion": "Consider 'Aucune anomalie détectée' or 'Aucun problème détecté' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ոչ մի արդյունք չի գտնվել\" literally translates to \"No result was found.\" While close in meaning to \"No findings,\" it's more formal and less concise than \"No findings.\" \"No findings\" implies an investigation or review found nothing.",
-          "suggestion": "Consider a more direct and concise translation like \"ոչ գտնվել է արդյունքներ\" (no results were found) or \"ոչինչ չգտնվեց\" (nothing was found)."
+          "description": "The translation 'Ոչ մի արդյունք չի գտնվել' (Not a result was found) is a bit too literal and formal for the English 'No findings'. A more natural translation would be something like 'ոչինչ չկայացավ' (nothing was found) or 'չկան արդյունքներ' (there are no results).",
+          "suggestion": "ոչինչ չկայացավ"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nessun risultato trovato\" is a literal translation of 'No results found'. While understandable, it's not the most natural way to express \"No findings\" in Italian. \"Nessun riscontro\" or \"Nessuna rilevanza\" would be closer to the intended meaning of 'findings'.",
-          "suggestion": "Consider \"Nessun riscontro\" or \"Nessuna rilevanza\" for a more accurate and natural translation of 'No findings'."
+          "description": "While \"Nessun risultato trovato\" is technically correct, it's a more literal translation of 'No findings'.  A more natural and concise Italian equivalent for 'No findings' in a technical context would be 'Nessun riscontro' or 'Nessun problema riscontrato'.",
+          "suggestion": "Consider 'Nessun riscontro' or 'Nessun problema riscontrato'."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"검색 결과가 없습니다\" translates to \"No search results found.\" While it conveys a similar meaning to \"No findings,\" it's not a direct or equivalent translation. \"No findings\" is a more concise and specific term often used in audit or security contexts.",
-          "suggestion": "Consider a more direct translation like \"결과 없음\" (Result: None) or \"문제 없음\" (Problem: None) depending on the specific context of 'findings'."
+          "description": "The Korean translation \"검색 결과가 없습니다\" translates to \"No search results found.\" while the English content is simply \"No findings.\" The translation is too literal and doesn't convey the same meaning in context. It implies a search was performed, which may not be the case.",
+          "suggestion": "A more accurate translation could be \"결과 없음\" or \"특이사항 없음\" which more closely aligns with the meaning of 'No findings'."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ບໍ່ເຫັນຜົນການຄົ້ນຫາໃດໆ\" is too literal and verbose for the simple meaning of \"No findings\". It translates to \"Did not see any search results\".",
-          "suggestion": "A more accurate and concise translation would be something like \"ບໍ່ພົບຜົນ\" (bok pob phon) which means 'no results found' or simply \"ບໍ່ມີຜົນ\" (bok mee phon) which means 'no results'."
+          "description": "The Lao translation 'ບໍ່ເຫັນຜົນການຄົ້ນຫາໃດໆ' translates to 'No search results found'. While conveying a similar concept, it's more literal than the English 'No findings'. 'Findings' implies results from an investigation or audit, not necessarily a search. A more accurate translation would depend on the specific context of 'findings'.",
+          "suggestion": "Consider a more context-dependent translation, such as 'ບໍ່ພົບຜົນການກວດກາ' (No audit results) or 'ບໍ່ພົບຂໍ້ຊ້ຽນ' (No discrepancies found), depending on the context."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Nenhum resultado encontrado' is grammatically correct, it's a more literal translation of 'No results found'. 'No findings' typically implies a lack of issues or problems. A more accurate translation would reflect that meaning.",
-          "suggestion": "Sem achados"
+          "description": "While \"Nenhum resultado encontrado\" is understandable, it's a more literal translation of \"No results found.\" \"No findings\" implies a search or investigation yielded no issues, not necessarily results. A better translation would capture the nuance of 'no issues' or 'no problems'.",
+          "suggestion": "Sem achados/problemas encontrados"
         }
       ],
       "approved_at": null
@@ -195,19 +195,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nu s-au găsit rezultate' is a grammatically correct Romanian phrase, it's a more literal and formal translation of 'No findings'. A more natural and commonly used translation for a UI context would be 'Niciun rezultat' or 'Fără rezultate'.",
+          "suggestion": "Niciun rezultat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Нет результатов\" is a possible translation, \"No findings\" typically implies an absence of problems or issues. \"Нет результатов\" translates more literally to \"No results.\" A more accurate translation would be something like \"Не найдено проблем\" or \"Проблем не обнаружено\".",
-          "suggestion": "Не найдено проблем"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"සොයාගැනීම් නැත\" is a literal translation of \"No findings,\" it might sound slightly awkward in Sinhala. A more natural and commonly used phrase would convey the same meaning.",
-          "suggestion": "Possible alternatives: \"තොරතුරු නොවීය\" (thorathuru noviya), \"කිසිදු සොයාගැනීමක් නොවීය\" (kisidu soyaganekimak noviya), or simply \"නැත\" (netha) depending on the context."
+          "description": "While \"සොයාගැනීම් නැත\" is understandable, a more accurate and natural translation of \"No findings\" would be \"සිංහල:තොරතුරු නොවීය\" or \"නැහැ\" (Naha). \"සොයාගැනීම්\" implies a search was conducted, which isn't necessarily implied by 'No findings'.",
+          "suggestion": "සිංහල:තොරතුරු නොවීය / නැහැ"
         }
       ],
       "approved_at": null
@@ -225,13 +225,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Nenašli sa žiadne výsledky\" is understandable, it's a slightly literal and formal translation of \"No findings.\" A more natural and common Slovak equivalent would be \"Neboli nájdené žiadne zistenia\" or \"Nenašiel sa žiaden nález\".",
-          "suggestion": "Consider using \"Neboli nájdené žiadne zistenia\" or \"Nenašiel sa žiaden nález\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Нема резултата претраге\" literally translates to \"No search results.\" While close in meaning, the English phrase \"No findings\" implies a general lack of issues or problems discovered, not necessarily related to a search. A more accurate translation would reflect this broader meaning.",
-          "suggestion": "Нема пронађеног"
+          "description": "The translation 'Нема резултата претраге' is not an accurate translation of 'No findings'. While it translates to something like 'No search results', 'findings' in this context refers to a report or assessment, not a search.",
+          "suggestion": "A more accurate translation would be 'Нема пронађеног' or 'Нема налаза'."
         }
       ],
       "approved_at": null
@@ -258,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nema rezultata pretrage\" while understandable, is not the most natural or direct translation of \"No findings.\" \"Nema saznaka\" would be a closer equivalent, particularly in a context where findings are being searched for. \"Nema rezultata\" is more suited for a search engine result, not necessarily 'findings'.",
-          "suggestion": "Nema saznaka"
+          "description": "The translation 'Nema rezultata pretrage' translates to 'No search results' rather than 'No findings'. While close in meaning, 'findings' implies a specific investigation or audit, which 'rezultata pretrage' doesn't necessarily convey.",
+          "suggestion": "Consider 'Nalazi nisu pronadjeni' or 'Nisu pronadjeni nalazi' to more accurately represent 'No findings'."
         }
       ],
       "approved_at": null
@@ -270,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Herhangi bir bulguya rastlanmadı' is overly formal and verbose for the simple English phrase 'No findings'. While technically correct, it doesn't convey the same brevity.",
-          "suggestion": "Consider a more concise translation like 'Bulgu yok' or 'Hiçbir bulgu bulunamadı'."
+          "description": "While \"Herhangi bir bulguya rastlanmadı\" is grammatically correct, it's a rather formal and lengthy translation of \"No findings.\" A more natural and concise translation would be better for many contexts.",
+          "suggestion": "Bulgu yok."
         }
       ],
       "approved_at": null
@@ -294,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"未找到任何结果\" is technically correct, it's a bit formal and verbose for the simple meaning of \"No findings.\" A more natural and concise translation would be better.",
-          "suggestion": "没有发现 (Méiyǒu fāxiàn)"
+          "description": "While \"未找到任何结果\" is understandable, it's a bit verbose for \"No findings.\" A more concise and natural translation would be preferable.",
+          "suggestion": "未发现任何结果"
         }
       ],
       "approved_at": null

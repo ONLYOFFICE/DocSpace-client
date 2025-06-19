@@ -3,7 +3,7 @@
   "content": "Remove",
   "content_en_sha1_hash": "e963907dac5cd5c017869b4c96c18021c9bd058b",
   "created_at": "2025-05-19T21:30:47.809Z",
-  "updated_at": "2025-06-03T20:59:41.930Z",
+  "updated_at": "2025-06-02T10:20:51.162Z",
   "comment": {
     "text": "This translation key is used for the text \"Remove\" in buttons and dialogs to provide a clear and consistent label for removing or deleting content. It appears on buttons such as \"Change User Type Modal Submit\", \"Delete File Modal Submit\", and labels for a list of options in a dialog, helping users understand the action being performed.",
     "is_auto": true,
@@ -48,13 +48,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 83,
+      "line_number": 82,
       "context": "},\n available?.None && {\n key: \"remove\",\n internal: true,\n access: ShareAccessRights.None,\n label: t(\"Common:Remove\"),\n },\n ];\n };\n \n export const getAccessOptions = (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 83,
+      "line_number": 82,
       "context": "},\n available?.None && {\n key: \"remove\",\n internal: true,\n access: ShareAccessRights.None,\n label: t(\"Common:Remove\"),\n },\n ];\n };\n \n export const getAccessOptions = (",
       "module": "/packages/shared"
     },
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Tiedostot poistettu\" translates to \"Files removed\" which is a passive construction. The English \"Remove\" is an imperative and should be an imperative in Finnish as well. \"Poista\" would be a more accurate translation.",
-          "suggestion": "Poista"
+          "description": "The Finnish translation \"Tiedostot poistettu\" translates to \"Files removed\" which doesn't directly correspond to the English word \"Remove\". \"Remove\" is a verb indicating the action of removing something. \"Tiedostot poistettu\" is a passive phrase indicating files *were* removed.",
+          "suggestion": "A more accurate translation would be something like \"Poista\" (Remove - imperative form) or \"Poistaminen\" (Removal - noun)."
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Уклони' translates to 'evade' or 'dodge', not 'remove'. It doesn't accurately convey the meaning of 'remove'.",
-          "suggestion": "Consider using 'Удаљи', 'Скини', or 'Оклони' which more closely aligns with the meaning of 'remove'."
+          "description": "The Serbian (Cyrillic) translation \"Уклони\" translates to \"Avoid\" or \"Dodge\" rather than \"Remove.\" This doesn't accurately convey the meaning of the English word \"Remove.\"",
+          "suggestion": "Consider using \"Уклањање\" (Uklanjanje) which directly translates to \"Removal\" or \"Elimination\"."
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Ukloni' translates to 'bows' or 'obeisances' in Serbian, not 'remove'.",
-          "suggestion": "Consider 'Ukloni' if the context is about bowing or showing respect.  A more appropriate translation for 'remove' would likely be 'Uklonite', 'Skinite', or 'Izbriši', depending on the specific context."
+          "description": "The Serbian translation \"Ukloni\" does not accurately convey the meaning of \"Remove\". \"Ukloni\" translates to \"Remove\" as in to take away, or to eliminate something. \"Remove\" is more general and can imply setting something aside, or deleting. A better translation would depend on the context.",
+          "suggestion": "Consider translations like 'Skini' (to take off/down), 'Izbriši' (to delete), or 'Odvoji' (to separate) depending on the context."
         }
       ],
       "approved_at": null

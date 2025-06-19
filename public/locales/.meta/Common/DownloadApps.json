@@ -3,7 +3,7 @@
   "content": "Download applications",
   "content_en_sha1_hash": "0d743c2d5f83f1161e2d1c296b8b2d29e8c3d12b",
   "created_at": "2025-05-19T21:30:44.653Z",
-  "updated_at": "2025-06-18T07:34:15.330Z",
+  "updated_at": "2025-06-18T17:11:42.563Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Download applications\" on a download button in the application's UI. The button likely provides access to download links or repositories of various apps, and the translated text will be displayed next to or on top of this button.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aplikace ke staženi' is not the most natural or accurate translation of 'Download applications'. While technically correct, it's a bit clunky. A more natural translation would be 'Stahování aplikací' or 'Aplikace pro stažení'.",
-          "suggestion": "Stahování aplikací"
+          "description": "The Czech translation 'Aplikace ke staženi' is not the most accurate or natural translation of 'Download applications'. A better translation would convey the action of downloading, not just the availability of applications for download.",
+          "suggestion": "Stahovani aplikaci"
         }
       ],
       "approved_at": null
@@ -105,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"애플리케이션 다운로드\" is understandable, a more natural and idiomatic translation of \"Download applications\" would be \"앱 다운로드\" or \"애플리케이션 설치\". \"애플리케이션 다운로드\" feels overly literal and technical.",
+          "suggestion": "앱 다운로드"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ດາວໂຫລດແບບຟອມ\" translates to \"Download forms\", which is not the intended meaning of \"Download applications\".",
-          "suggestion": "ດາວໂຫລດແອັບພິເຄຊັນ (Download applications)"
+          "description": "The Lao translation \"ດາວໂຫລດແບບຟອມ\" translates to \"download forms\", not \"download applications\". The correct translation should reflect the English meaning of \"applications\".",
+          "suggestion": "ດາວໂຫລດແອັບພລິເຄຊັນ (Download application)"
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Lejupielādēt\" is an infinitive verb (\"to download\") rather than a noun phrase \"Download applications\". It does not accurately convey the meaning of the English content.",
-          "suggestion": "Lejupielādējamas lietotnes"
+          "description": "The Latvian translation \"Lejupielādēt\" is an infinitive verb (to download) and not a full translation of \"Download applications.\" It's missing the word 'applications'.",
+          "suggestion": "Lejupielādēt lietojumprogrammas"
         }
       ],
       "approved_at": null
@@ -150,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Transferir aplicações\" is a valid translation, \"Baixar aplicações\" would be a more accurate and commonly used translation for 'Download applications' in Portuguese.",
+          "description": "While 'Transferir aplicações' is technically correct, 'Baixar aplicações' would be a more natural and common translation of 'Download applications' in Portuguese. 'Transferir' implies transferring from one location to another, while 'baixar' specifically means to download.",
           "suggestion": "Baixar aplicações"
         }
       ],
@@ -180,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'යෙදුම් බාගන්න' while understandable, isn't the most accurate or natural translation of 'Download applications'. A more precise translation would consider the context of applications, potentially including 'ඇප්' (app) or phrasing it as 'අප්ලිකේෂන් බාගන්න'.",
+          "description": "The translation \"යෙදුම් බාගන්න\" while understandable, isn't the most natural or precise translation of \"Download applications\". A more accurate and common translation would be \"අප්ලිකේෂන් බාගන්න\" or \"යෙදුම් බාධන්න\".",
           "suggestion": "අප්ලිකේෂන් බාගන්න"
         }
       ],

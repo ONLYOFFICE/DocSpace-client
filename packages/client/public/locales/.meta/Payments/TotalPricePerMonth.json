@@ -3,7 +3,7 @@
   "content": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/month</3>",
   "content_en_sha1_hash": "cd8ed69da29703ec2b41ce8082d8f8086ac948dc",
   "created_at": "2025-05-19T21:30:53.737Z",
-  "updated_at": "2025-05-28T09:30:02.674Z",
+  "updated_at": "2025-06-08T12:02:32.816Z",
   "comment": {
     "text": "This translation key displays a formatted price string with currency symbol, used in the \"Total Tariff Container\" component on the PortalSettings page.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation preserves the HTML tags exactly as in the English source. While not inherently wrong, it's unconventional for localized content.  It's better to remove the tags if they are not essential for rendering in the target platform.",
-          "suggestion": "Consider removing the HTML tags if they are not required for display. If they are required, ensure they are appropriate for Sinhala text direction (LTR)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word for 'month' in Serbian (Cyrillic) should be 'месечно' instead of 'месец'. 'Месец' means 'month' as a noun, while 'месечно' is the adverbial form appropriate for describing a recurring payment.",
-          "suggestion": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/месечно</3>"
+          "description": "The word \"month\" (English) is translated as \"месец\" in Serbian (Cyrillic). This is a correct translation.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'month' is translated as 'mesec' in Serbian (Latin). While 'mesec' is generally correct, 'month' in this context refers to a recurring billing period. A more precise translation might consider 'mesečno' to indicate a monthly recurring charge.",
-          "suggestion": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mesečno</3>"
+          "description": "The English word 'month' is translated as 'mesec' in Serbian (Latin). While 'mesec' is correct for 'month', it's crucial to ensure consistency in the broader context. It is possible 'mjesec' is more common in certain regions or dialects, but 'mesec' appears more standard.",
+          "suggestion": "Verify if 'mjesec' or 'mesec' is the preferred term in the target audience's context."
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The order of the tags is incorrect. The English version places the currency symbol first, while the Ukrainian translation places the price first. This can affect the visual presentation and user experience.",
-          "suggestion": "Reorder the tags to match the original English order: \"<1>{{currencySymbol}}</1><2>{{price}}</2><3> на місяць</3>\""
+          "description": "The order of elements is incorrect. The English version places the currency symbol first, while the Ukrainian version places the price first. This change could impact the user experience and may not accurately represent the intended meaning.",
+          "suggestion": "Consider maintaining the original order (currency symbol, price) for consistency with the English version, or thoroughly assess the impact of the change on the Ukrainian user experience. If the change is intentional, document the reasoning."
         }
       ],
       "approved_at": null

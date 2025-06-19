@@ -3,7 +3,7 @@
   "content": "Change user permissions to the invited people or <1>upgrade your tariff plan</1>.",
   "content_en_sha1_hash": "705615763dac8d26542430d6b695dfd3240f2b32",
   "created_at": "2025-05-19T21:30:43.428Z",
-  "updated_at": "2025-06-18T07:34:14.937Z",
+  "updated_at": "2025-06-18T17:11:42.393Z",
   "comment": {
     "text": "This translation key is used to display a message that allows users to change their permissions or upgrade their tariff plan when invited to join an account. The text appears as a button label in the Invite Panel component. Translators should provide a clear and concise version of this phrase for internationalization purposes.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
       "line_number": 290,
-      "context": "const getError = (error) => {\n const paymentLink = (\n <Trans\n t={t}\n i18nKey=\"ChangeUserPermissions\"\n ns=\"Common\"\n components={{\n 1: (\n <ColorTheme\n tag=\"a\"",
+      "context": "const getError = (error) => {\n const paymentLink = (\n <Trans\n t={t}\n i18nKey=\"ChangeUserPermissions\"\n ns=\"Common\"\n components={{\n 1: (\n <Link\n tag=\"a\"",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"upgrade your tariff plan\" is not the most natural or common way to express this in Arabic. While technically correct, it's somewhat literal and stiff. A more natural phrasing would be something like \"ترقية باقتك\" (tarqiyat baqatak) which translates to \"upgrade your package/plan\".",
-          "suggestion": "غيّر أذونات المستخدم للأشخاص المدعوين أو <1>قم بترقية باقتك</1>."
+          "description": "The phrase '<1>upgrade your tariff plan</1>' is a bit awkward. 'Tariff plan' is not the most common way to refer to subscription levels in Saudi Arabia. A more natural phrasing would be related to 'subscription level' or 'plan level'.",
+          "suggestion": "غيّر أذونات المستخدم للأشخاص المدعوين أو <1>قم بترقية مستوى الاشتراك الخاص بك</1>."
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Change user permissions to the invited people\" is a bit awkward and could be interpreted as changing permissions *for* the invited people. The Azerbaijani translation, 'Dəvət olunan şəxslərin istifadəçi icazələrini dəyişdirin,' directly translates it as 'change the user permissions *of* the invited people'. While understandable, it might not be the intended meaning. A more accurate translation would depend on the precise meaning intended in the source.",
-          "suggestion": "Consider revising the English to be clearer: 'Grant user permissions to the invited people' or 'Adjust user permissions for the invited people'. If the English stays as is, the Azerbaijani could be adjusted to: 'Dəvət olunan şəxslərə istifadəçi icazələrini verin' or 'Dəvət olunan şəxslər üçün istifadəçi icazələrini dəyişdirin'."
+          "description": "The English phrase \"Change user permissions to the invited people\" is not accurately reflected in the Azerbaijani translation. It sounds awkward and could be misinterpreted. A more natural translation would be something like 'Paylaşdığınız şəxslərə istifadəçi icazələrini verin' (Give user permissions to the shared people).",
+          "suggestion": "Dəvət olunan şəxslərin istifadəçi icazələrini dəyişdirin -> Paylaşdığınız şəxslərə istifadəçi icazələrini verin"
         },
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>...</1>` are present in both the source and translated text, indicating a formatting tag. Verify that the tag's meaning and function are preserved in the translated context.",
-          "suggestion": "Confirm that the purpose of the `<1>...</1>` tag is retained in the Azerbaijani version. This could be a formatting tag that needs to be adjusted or removed depending on the implementation."
+          "description": "The angle brackets <1> and </1> are inconsistent with typical formatting practices in Azerbaijani. It's unusual to see numbered tags like that in a user interface or text.",
+          "suggestion": "Consider removing the <1> and </1> tags, or replacing them with a more suitable markup if needed, such as `<b>` and `</b>` for bolding, or a similar convention."
         }
       ],
       "approved_at": null
@@ -86,13 +86,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"upgrade your tariff plan\" is translated as \"päivitä tilauksesi\". While \"tilaus\" can mean subscription/plan, \"upgrade\" implies a specific type of improvement, which isn't fully conveyed. A more accurate translation might be \"päivitä maksusuunnitelmasi\" (upgrade your payment plan) or \"päivitä palvelusi\" (upgrade your service).",
-          "suggestion": "Consider \"päivitä maksusuunnitelmasi\" or \"päivitä palvelusi\" for a more accurate translation of 'upgrade your tariff plan'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -101,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'upgrade your tariff plan' is better translated as 'passez à un plan tarifaire supérieur' or 'optez pour un plan tarifaire supérieur' in French. 'Modifiez votre plan tarifaire' implies a modification of the current plan, not an upgrade.",
-          "suggestion": "Passez à un plan tarifaire supérieur ou optez pour un plan tarifaire supérieur."
+          "description": "The phrase \"upgrade your tariff plan\" is translated as \"modifiez votre plan tarifaire\". While technically correct, a more natural and commonly used translation in French would be something like \"mettez à niveau votre forfait\" or \"changez votre forfait\". \"Modifiez votre plan tarifaire\" feels a bit literal and clunky.",
+          "suggestion": "mettez à niveau votre forfait"
         }
       ],
       "approved_at": null
@@ -113,8 +107,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation of \"upgrade your tariff plan\" is too literal. A more natural Armenian phrasing would be something like \"փոխարինեք ձեր սակագնային պլանը\" or \"ամրացրեք ձեր սակագնային պլանը\".",
-          "suggestion": "Փոխարինեք ձեր սակագնային պլանը or Ամրացրեք ձեր սակագնային պլանը"
+          "description": "The phrase \"Փոխեք օգտատիրոջ թույլտվությունները\" could be more naturally translated as \"փոխել օգտատիրոջ ունակությունները\" or \"փոխել օգտատիրոջ իրավունքները\". While \"թույլտվությունները\" is technically correct, it's not the most common phrasing.",
+          "suggestion": "փոխել օգտատիրոջ ունակությունները or փոխել օգտատիրոջ իրավունքները"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1> and </1> are inconsistent with the English. The English uses <1> and </1> to demarcate the upgrade option.  The Armenian translation seems to have simply copied the tag without understanding its purpose.",
+          "suggestion": "Ensure the tags match the English structure and are meaningful within the context.  Consider if they are even necessary."
         }
       ],
       "approved_at": null
@@ -125,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"to the invited people\" is awkward and not the most natural translation of \"to the invited people\". A more accurate and fluent translation would be \"agli invitati\" or \"per gli utenti invitati\".",
-          "suggestion": "Cambia le autorizzazioni per gli utenti invitati o <1>fai l’upgrade del tuo piano tariffario</1>."
+          "description": "The phrase \"for the invited people\" is awkward and not the most natural way to express the intended meaning in Italian. A more natural phrasing would be 'alle persone invitate' or 'agli invitati'.",
+          "suggestion": "Cambia le autorizzazioni per gli utenti agli invitati o <1>fai l’upgrade del tuo piano tariffario</1>."
         }
       ],
       "approved_at": null
@@ -136,9 +135,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are inconsistent between the English and Japanese versions. The English uses `<1>` and `</1>`, while the Japanese uses `<1>` and `</1>`.",
-          "suggestion": "Ensure consistent tag usage. Either change the English to `<1>` and `</1>` or the Japanese to `<1>` and `</1>`."
+          "type": "incorrect_translation",
+          "description": "The phrase \"upgrade your tariff plan\" is translated as \"料金プランをアップグレード\". While technically correct, a more natural and common phrasing in Japanese for this context would be something like \"プランをアップグレードする\" or \"プランを上位プランに変更する\". The current translation sounds a bit stiff.",
+          "suggestion": "料金プランを上位プランに変更する"
         }
       ],
       "approved_at": null
@@ -149,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"upgrade your tariff plan\" is translated as \"요금제를 업그레이드\". While technically correct, a more natural and common Korean phrasing would be \"요금제 업그레이드\". The '를' after 요금제를 is unnecessary and makes the sentence slightly awkward.",
-          "suggestion": "요금제 업그레이드"
+          "description": "The phrase \"upgrade your tariff plan\" is translated as \"요금제를 업그레이드\". While technically correct, a more natural and idiomatic Korean translation would be \"요금제를 더 높은 단계로 변경하세요\" or \"더 높은 요금제로 변경하세요\".  The current translation is understandable but slightly awkward.",
+          "suggestion": "요금제를 더 높은 단계로 변경하세요"
         }
       ],
       "approved_at": null
@@ -158,13 +157,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The <1> and </1> tags are not properly handled in the Lao translation. They appear as part of the translated text.",
-          "suggestion": "Ensure the tags are properly escaped or removed during the translation process to avoid displaying them literally. The intended formatting might be lost."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -173,13 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"invited people\" is better translated as \"aicinātām personām\", which is correctly used here. However, the sentence structure could be improved for better flow in Latvian. A more natural phrasing would be \"Mainiet lietotāju atļaujas aicinātajiem vai jauniniet savu tarifu plānu.\"",
-          "suggestion": "Mainiet lietotāju atļaujas aicinātajiem vai jauniniet savu tarifu plānu."
+          "description": "The phrase 'invited people' is not accurately translated. 'Uzaicinātajām personām' directly translates to 'invited people' but in context, it's not quite natural. A more fitting translation would convey the sense of granting permissions *to* the invited people.",
+          "suggestion": "Mainiet lietotāju atļaujas, lai dotu tās uzaicinātajiem cilvēkiem vai jauniniet savu tarifu plānu."
         },
         {
           "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are retained in the translation, which is consistent with the original. While not technically incorrect, it's unusual to keep these in a translated text unless explicitly requested. This should be verified if it's intentional.",
-          "suggestion": "Consider removing the `<1>` and `</1>` tags if they are intended for processing and not meant to be displayed in the final text."
+          "description": "The XML-like tags `<1>...</1>` are preserved in the Latvian translation. These should be removed or replaced with standard formatting if applicable.",
+          "suggestion": "Remove the tags: Mainiet lietotāju atļaujas uzaicinātajām personām vai jauniniet savu tarifu plānu."
         }
       ],
       "approved_at": null
@@ -190,13 +183,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'invited people' is not accurately translated. 'Uitgenodigde personen' is a literal translation but sounds unnatural in Dutch. A more natural translation would be 'genodigden' or 'degenen die je hebt uitgenodigd'.",
-          "suggestion": "Wijzig de gebruikersrechten voor genodigden of <1>upgrade uw tariefplan</1>."
-        },
-        {
-          "type": "formatting",
-          "description": "The angle brackets <1> and </1> appear to be used for marking content. Verify that this formatting is intentional and accurately reflects the original English content's markup.",
-          "suggestion": "Confirm the purpose and correctness of the <1> and </1> tags. If they are intended to mark a specific segment, ensure the content inside them is accurately translated."
+          "description": "The phrase 'invited people' is not ideally translated. 'Uitgenodigde personen' implies people who have already been invited, whereas the original English allows for inviting them now. A better translation would convey the potential for future invitations.",
+          "suggestion": "Wijzig de gebruikersrechten voor personen die je wilt uitnodigen of <1>upgrade uw tariefplan</1>."
         }
       ],
       "approved_at": null
@@ -225,13 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'upgrade your tariff plan' is translated as 'selectaţi un alt plan tarifar'. While not entirely wrong, 'upgrade' implies an improvement. 'Selectaţi un alt plan tarifar' simply means 'select another tariff plan', lacking the nuance of upgrade.",
-          "suggestion": "Schimbaţi permisiuni de acces acordate invitaților sau <1>faceţi upgrade la planul dumneavoastră tarifar</1>."
-        },
-        {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are not consistent with the original English formatting. It might be preferable to use the same tags in the Romanian translation for consistency.",
-          "suggestion": "Ensure the tags `<1>` and `</1>` are consistently used to represent the same semantic meaning or apply different consistent tags."
+          "description": "'Upgrade' has been translated as 'selectaţi un alt plan tarifar', which is more accurately 'choose another tariff plan'. While not incorrect, it doesn't fully capture the nuance of 'upgrade'.",
+          "suggestion": "Schimbaţi permisiuni de acces acordate invitaților sau <1>actualizați planul tarifar</1>."
         }
       ],
       "approved_at": null
@@ -245,7 +228,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'tariff plan' is not directly equivalent to 'ඔබේ ගාස්තු සැලැස්ම'. A more accurate translation might be 'ඔබේ ලියාńskich සැලසුම' (oba liyancha selesuma) or a more colloquial phrasing depending on the intended audience.",
+          "suggestion": "Consider 'ඔබේ ලියාńskich සැලසුම' (oba liyancha selesuma) or a more culturally appropriate phrasing for 'tariff plan'."
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <1> and </1> are inconsistent with standard HTML/XML formatting. They should be consistent, likely with a more descriptive tag name. Also, the tags are not closed correctly in Sinhala.",
+          "suggestion": "Review and standardize the tag formatting for consistency. For example, use a more descriptive tag or ensure proper closing. Consider <upgrade> and </upgrade>."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -266,8 +260,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are present in both the English and Serbian translations. While the intent might be to preserve the formatting, this should be reviewed for relevance and whether the tag is meant to be displayed to the user.",
-          "suggestion": "Review the purpose of the `<1>` and `</1>` tags and determine if they should be removed, modified, or rendered appropriately for the Serbian locale."
+          "description": "The angle brackets `<1>` and `</1>` are present in the Serbian translation, mirroring the English, but they seem to serve no purpose and are likely unnecessary. They should be removed.",
+          "suggestion": "Remove the angle brackets around 'надоградите свој тарифни план'."
         }
       ],
       "approved_at": null
@@ -278,8 +272,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Change user permissions' doesn't translate perfectly to 'Promenite dozvole'. A more accurate translation would be 'Izmenite dozvole' or 'Promenite dozvole korisnika'. While 'Promenite' is acceptable, it slightly shifts the meaning towards initiating a change rather than just modifying existing permissions. 'Izmenite' implies modification.",
-          "suggestion": "Izmenite dozvole korisnika"
+          "description": "The English phrase \"Change user permissions\" is not accurately translated. \"Promenite dozvole\" implies changing the permissions themselves, whereas the intent is to grant permissions. A better translation would be 'Dodeljujte dozvole'.",
+          "suggestion": "Dodeljujte dozvole korisnicima koje ste pozvali ili <1>nadogradite svoj tarifni plan</1>."
         }
       ],
       "approved_at": null
@@ -287,13 +281,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Change user permissions to the invited people\" is awkwardly translated. A more natural Turkish phrasing would be \"Davetlilerin kullanıcı izinlerini değiştirin\" or \"Davet ettiğiniz kişilerin kullanıcı izinlerini değiştirin\".",
-          "suggestion": "Davetlilerin kullanıcı izinlerini değiştirin veya Davet ettiğiniz kişilerin kullanıcı izinlerini değiştirin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -308,8 +296,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are preserved in the Vietnamese translation, which is unnecessary and potentially confusing for the user. They should be removed.",
-          "suggestion": "Remove the HTML tags: `nâng cấp gói dịch vụ của bạn`"
+          "description": "The `<1>` and `</1>` tags are not properly translated and remain in the Vietnamese version.",
+          "suggestion": "Ensure the tags are handled consistently in both English and Vietnamese translations.  The suggestion depends on the purpose of the tags – if they represent HTML, they should be translated accordingly or removed if not meaningful in Vietnamese."
         }
       ],
       "approved_at": null
@@ -320,13 +308,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'upgrade your tariff plan' is incorrectly translated as '升级费用版本'. '费用版本' (feiyong banben) implies a version of a fee, not a tariff plan upgrade.",
-          "suggestion": "将用户权限修改为受邀人员或<1>升级套餐</1>。"
+          "description": "'tariff plan' is incorrectly translated as '费用版本'. '费用版本' implies a version of a fee, whereas 'tariff plan' refers to a subscription plan or package.",
+          "suggestion": "将用户权限修改为受邀人员或<1>升级套餐</1>."
         },
         {
           "type": "formatting",
-          "description": "The tag <1>...</1> appears to be inconsistent between the English and Chinese content. The English uses 'tariff plan' while the Chinese uses '费用版本'. The suggestion corrects the Chinese tag to match the English tag.",
-          "suggestion": "Ensure consistent tag usage: If <1> denotes a link or special formatting, the tag should encompass the correct translated content."
+          "description": "The <1> and </1> tags are inconsistent with the English content. While present in both, the English uses 'upgrade your tariff plan', whereas the Chinese uses a general term, so keeping the tags is less relevant.",
+          "suggestion": "Consider removing the tags or ensuring consistency with the overall structure of the translated text."
         }
       ],
       "approved_at": null

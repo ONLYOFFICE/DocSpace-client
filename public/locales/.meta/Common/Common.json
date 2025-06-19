@@ -3,7 +3,7 @@
   "content": "Common",
   "content_en_sha1_hash": "7de90a65241a6cdbd9ade485d777715d99285a1e",
   "created_at": "2025-05-19T21:30:43.587Z",
-  "updated_at": "2025-05-28T09:30:02.520Z",
+  "updated_at": "2025-06-02T10:20:51.352Z",
   "comment": {
     "text": "This translation key is used to display the text \"Common\" as a section label on a data import form. It appears in a dialog box where users can choose which type of files to import and is used to identify the common files category.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 195,
+      "line_number": 197,
       "context": "isDisabled={false}\n />\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: t(\"Common:ProductName\"),\n })}\n exportSection={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 195,
+      "line_number": 197,
       "context": "isDisabled={false}\n />\n <ImportSection\n isChecked={importOptions.importCommonFiles}\n onChange={(e) => onChange(e, \"importCommonFiles\")}\n sectionName={t(\"Common:CommonFiles\")}\n description={t(\"Settings:CommonFilesDescription\", {\n user: user?.displayName,\n productName: t(\"Common:ProductName\"),\n })}\n exportSection={{",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"الأكثر شيوعاً\" (al-akthar shuyu'an) translates to 'the most common' rather than simply 'common'. This is a more elaborate translation than necessary for a key labeled 'Common'.",
-          "suggestion": "أكثر"
+          "description": "The translation \"الأكثر شيوعاً\" (al-akthar shuyūʿan) means \"the most common.\" While related to \"Common,\" it doesn't directly translate the English word. A more literal, though potentially less natural, translation might be \"عام\" (ʿāmm).",
+          "suggestion": "Consider using \"عام\" (ʿāmm) for a more direct translation, or evaluate the context to determine the most appropriate synonym."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Често срещани' (Cesto sreshchani) means 'frequently encountered' or 'widespread', not simply 'Common'. While it can sometimes be a suitable translation depending on the context, it's not a direct or generally appropriate translation for 'Common'.",
-          "suggestion": "Consider alternatives like 'Обикновен' (Obiknoven) for 'ordinary/common', or 'Общ' (Obsht) for 'general/common' depending on the intended meaning."
+          "description": "The translation \"Често срещани\" (Chesto sreshchani) means \"frequently encountered\" or \"widespread\" which is not a direct equivalent of \"Common\". While it conveys a similar concept in some contexts, it doesn't capture the literal meaning of \"Common\".",
+          "suggestion": "Consider alternatives like \"Общ\" (Obsch) or \"Обикновен\" (Obiknoven), depending on the intended nuance of 'Common'."
         }
       ],
       "approved_at": null
@@ -69,7 +69,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation \"Allgemeine\" while technically correct, doesn't perfectly capture the nuance of \"Common.\" It leans towards \"General\" rather than the idea of something shared or frequently occurring. Depending on the context, a better translation might be \"Gemeinsame\" or a context-specific alternative.",
+          "suggestion": "Consider \"Gemeinsame\" or a context-specific alternative like \"übliche\" (usual) or \"gängige\" (current/widespread)."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word \"Common\" likely refers to something shared or general. \"Documentos comunes\" translates to \"common documents,\" which is too specific. It doesn't capture the general meaning of \"Common\" in this context.",
-          "suggestion": "Consider alternatives like \"General\", \"Común\", or \"Generales\" depending on the specific meaning intended within the application."
+          "description": "The translation \"Documentos comunes\" does not accurately reflect the meaning of \"Common\". \"Common\" typically refers to something shared or occurring frequently. \"Documentos comunes\" translates to \"Common Documents\", which implies a specific type of document rather than the general concept of \"Common\".",
+          "suggestion": "Consider a translation like \"Común\", \"General\", or \"Compartido\" depending on the specific context where \"Common\" is used."
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ທຳມະດາ' and 'ສາທາລະນະ' can both translate to 'common,' the best choice depends on the specific context. 'ສາທາລະນະ' is generally a better and more common translation of 'common' in Lao, especially when referring to something widely available or public. 'ທຳມະດາ' has a more nuanced meaning related to morality or tradition, and may not always be appropriate.",
-          "suggestion": "Consider using 'ສາທາລະນະ' as the primary translation unless the context specifically calls for 'ທຳມະດາ'."
+          "description": "While \"ທຳມະດາ\" and \"ສາທາລະນະ\" both have aspects of 'common,' they aren't direct equivalents and might not fully capture the intended meaning. 'ທຳມະດາ' leans towards 'normal' or 'usual,' while 'ສາທາລະນະ' means 'public' or 'available to all.' Depending on the context of 'Common,' a more precise translation might be needed.",
+          "suggestion": "Consider the context of 'Common' to determine a more accurate Lao translation. Potential alternatives might include 'ປົກກະຕິ' (pokkati - normal/usual) or a more contextual phrasing if 'Common' refers to a shared characteristic or resource."
         }
       ],
       "approved_at": null
@@ -144,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Kopēji\" translates to \"Copiers\" or \"Commoners\" in English, which does not accurately reflect the meaning of the English word \"Common\". \"Common\" in this context likely refers to something shared or general, not a group of people copying something or a class of people.",
-          "suggestion": "Consider alternatives such as \"Parasts\", \"Vispārējs\", \"Kopīgs\", or \"Bieži sastopams\" depending on the specific context."
+          "description": "The Latvian translation 'Kopēji' translates to 'Copiers' or 'Shared', not 'Common'. This doesn't accurately reflect the English meaning.",
+          "suggestion": "Consider translations like 'Bieži' (Frequently), 'Parasts' (Ordinary), 'Vispārīgs' (General), or 'Kopīgs' (Shared) depending on the context."
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Skupaj\" translates to \"Together\", not \"Common\". The English word \"Common\" has a few possible translations depending on context (npr. splošni, navaden, skupni).",
-          "suggestion": "Consider alternatives like \"Španski\", \"Navaden\", or \"Splošni\" depending on the intended meaning of 'Common'."
+          "description": "The translation \"Skupaj\" for \"Common\" is not accurate. \"Skupaj\" means \"together\". \"Common\" typically refers to something shared or general, and could be better translated as \"splošno\", \"običajno\", or \"skladno\" depending on the context.",
+          "suggestion": "Consider alternatives like \"splošno\", \"običajno\", or \"skladno\" depending on the intended meaning."
         }
       ],
       "approved_at": null

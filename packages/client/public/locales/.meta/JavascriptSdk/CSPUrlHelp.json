@@ -2,12 +2,12 @@
   "key_path": "CSPUrlHelp",
   "content": "Please provide only the domain name, avoiding URL paths or extra characters.",
   "content_en_sha1_hash": "8518f3b5c2600c34e8bf485ef87d1b3b4d31f203",
-  "created_at": "2025-05-28T09:33:07.518Z",
-  "updated_at": "2025-05-28T09:34:16.398Z",
+  "created_at": "2025-06-08T12:02:20.112Z",
+  "updated_at": "2025-06-08T12:02:54.670Z",
   "comment": {
-    "text": "The \"CSPUrlHelp\" translation key is used to display a message instructing users to provide only their domain name when entering a Content Security Policy (CSP) URL. This message appears in a UI component where users can input or select CSP URLs, aiming to guide them towards accurate and complete input.",
+    "text": "Provide a domain name only, without URL paths or extra characters. This text is used to inform users about the expected format for the Custom Security Policy (CSP) URL in the Portal Settings.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:34:16.398Z"
+    "updated_at": "2025-06-08T12:02:54.670Z"
   },
   "usage": [
     {
@@ -19,6 +19,84 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -46,8 +46,8 @@ import {
   convertFoldersToItems,
   convertRoomsToItems,
   convertFilesToItems,
-} from "../FilesSelector.utils";
-import { SettingsContext } from "../contexts/Settings";
+} from "../../utils";
+import { SettingsContext } from "../../utils/contexts/Settings";
 
 type UseSelectorStateProps = Pick<
   FilesSelectorProps,
@@ -114,7 +114,7 @@ const useSelectorState = ({
   initTotal,
 }: UseSelectorStateProps & TFilesSelectorInit) => {
   const { t } = useTranslation(["Common"]);
-  const { getIcon } = useContext(SettingsContext);
+  const { getIcon } = use(SettingsContext);
 
   const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>(
     withInit ? initBreadCrumbs : [],

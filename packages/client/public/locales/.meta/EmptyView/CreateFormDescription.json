@@ -3,7 +3,7 @@
   "content": "Collect votes, get opinions and store data using PDF forms",
   "content_en_sha1_hash": "6b9d925a21ceae3c16ac57afb0c52b3d41a2b17c",
   "created_at": "2025-05-19T21:30:56.451Z",
-  "updated_at": "2025-05-28T09:30:02.119Z",
+  "updated_at": "2025-05-26T07:57:32.160Z",
   "comment": {
     "text": "This translation key is used to describe a PDF form that collects votes, opinions, and data. It will appear as the button label in an empty view container, inviting users to create and store data using the form.",
     "is_auto": true,
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'get opinions' is translated as 'saa arvosteluja'. 'Arvosteluja' means 'reviews' which is not the intended meaning of 'opinions'.",
+          "suggestion": "Kerää ääniä, hanki mielipiteitä ja varastoi tietoa käyttäen PDF-lomakkeita"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -147,13 +153,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Collect votes, get opinions and store data' is not fully captured in the Russian translation. The Russian translation omits 'store data'.",
+          "suggestion": "Собирайте голоса и мнения, и храните данные с помощью PDF-форм"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඡන්ද' (chanda) could be a bit ambiguous. While it generally means 'votes,' it could also be interpreted as a specific voting process. Depending on the context, 'ඡන්දීම්' (chandeem) might be more accurate to denote the act of voting or collecting votes.",
+          "suggestion": "Replace 'ඡන්ද' with 'ඡන්දීම්' for better clarity. Consider the exact nuance required."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

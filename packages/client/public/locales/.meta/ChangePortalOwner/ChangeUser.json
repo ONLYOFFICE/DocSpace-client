@@ -3,7 +3,7 @@
   "content": "Change user",
   "content_en_sha1_hash": "239e56865c3d507f9d67b0eb25f3c327b150a6fc",
   "created_at": "2025-05-19T21:30:56.987Z",
-  "updated_at": "2025-05-28T09:30:02.201Z",
+  "updated_at": "2025-05-26T07:57:32.225Z",
   "comment": {
     "text": "The translation key \"ChangeUser\" is used to display a button label that changes the current user in a portal owner change dialog. It appears as a highlighted and clickable text within the dialog. Translators should replace this text with a localized equivalent for their language.",
     "is_auto": true,
@@ -147,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Schimbare utilizator\" is understandable, it's not the most natural or idiomatic translation of \"Change user.\" It's a literal translation. A more appropriate translation would convey the action of changing the user, not just the 'change' of a 'user'.",
+          "suggestion": "Modificare utilizator"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"පරිශ්‍රීලක සංශෝධනය\" (parishreelaka sanshodhana) translates to 'user modification' or 'user amendment,' not 'change user'. While related, it doesn't accurately convey the intended meaning of changing a user.",
+          "suggestion": "A more accurate translation could be \"පරිශ්‍රීලක වෙනස් කිරීම\" (parishreelaka venas kiriima) which means 'user change' or \"පරිශ්‍රීලකයෙකු ಬದಲಾಯ කිරීම\" (parishreelayakku badalaye kiriima)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Промени корисника\" literally translates to \"Change user,\" but a more natural and idiomatic translation for a user interface element in Serbian might be \"Измени корисника\" or \"Мењај корисника\". \"Промени\" implies a more forceful or irreversible change.",
+          "suggestion": "Измени корисника"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Promeni korisnika' is understandable, a more accurate and natural translation of \"Change user\" would be 'Izmeni korisnika'. 'Promeni' implies a more fundamental change.",
+          "suggestion": "Izmeni korisnika"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

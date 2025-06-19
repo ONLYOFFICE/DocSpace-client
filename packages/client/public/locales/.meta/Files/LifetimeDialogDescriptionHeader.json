@@ -3,7 +3,7 @@
   "content": "Older files with exceeded lifetime will be deleted",
   "content_en_sha1_hash": "f6dd3b8bbf5675ac35ffd8fe14c330c05c721a05",
   "created_at": "2025-05-19T21:30:55.751Z",
-  "updated_at": "2025-05-28T09:30:02.280Z",
+  "updated_at": "2025-05-26T07:57:32.315Z",
   "comment": {
     "text": "This translation key is used for a warning message that explains what will happen to files past their lifetime limit when they are deleted. It appears in a modal dialog and serves as a notification before deleting such files.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"سيتم حذف الملفات القديمة التي تجاوزت عمرها\" is a literal translation but doesn't convey the intended meaning as smoothly as it could. It emphasizes 'age' rather than 'lifetime'. A more natural translation would incorporate the concept of 'lifetime' or 'expiry date'.",
+          "suggestion": "سيتم حذف الملفات التي انتهى أجلها."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İstifadə müddətini keçmiş köhnə fayllar silinəcək' is a bit literal and could be more natural. While technically correct, it doesn't flow as well as a more idiomatic rendering.",
-          "suggestion": "Köhnə faylların istifadə müddəti bitmişdirsə, silinəcək"
+          "description": "The translation \"İstifadə müddətini keçmiş köhnə fayllar silinəcək\" is a literal translation and sounds slightly awkward in Azerbaijani. A more natural phrasing would be something like \"Muddəti bitmiş köhnə fayllar silinəcək\" or \"Təqdir edilmiş müddəti keçmiş köhnə fayllar silinəcək\".",
+          "suggestion": "Muddəti bitmiş köhnə fayllar silinəcək"
         }
       ],
       "approved_at": null
@@ -69,13 +75,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Los archivos antiguos cuya vida útil se haya superado se eliminarán' is a bit too literal and clunky. While technically correct, it doesn't flow naturally in Spanish. A more natural phrasing would emphasize that files past their lifetime will be deleted.",
-          "suggestion": "Archivos con una vida útil vencida serán eliminados."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -135,7 +135,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Starsze pliki' is a reasonable translation of 'Older files,' but 'które przekroczyły swój okres ważności' is a more literal and slightly awkward translation of 'with exceeded lifetime.' A more natural and concise Polish phrasing would be better.",
+          "suggestion": "Starsze pliki z wygasającym okresem ważności zostaną usunięte"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'okres ważności' accurately translates 'lifetime' in some contexts, it doesn't perfectly convey the nuance of a file's lifetime, specifically the context of a system's deletion policy.  It’s a bit formal.",
+          "suggestion": "Starsze pliki, po upływie ustawionego czasu, zostaną usunięte"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -165,13 +176,30 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඉකුත් කාල සීමාව ඉක්මවා ගිය පැරණි ලිපි ඉවත් කරනු ලැබේ.' is a literal translation but sounds unnatural in Sinhala. A more natural phrasing would convey the same meaning with better flow.",
+          "suggestion": "පසු දිවියේදී කාලසීමාව ඉක්මති වූ ගොමුන් ඉවත්කරනු ලැබේ."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'files' is translated as 'ලිපි' (lipi). While 'lipi' can mean 'files' in certain contexts, 'ගොමුන්' (gomun) is more commonly used in the context of digital files and better reflects the intended meaning.",
+          "suggestion": "Replace 'ලිපි' with 'ගොමුන්'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'lifetime' is translated as 'dobou používania'. While technically correct, it's a bit clunky. A more natural translation for 'lifetime' in this context would be 'trvanlivosťou'.",
+          "suggestion": "Staršie súbory s prekročenou trvanlivosťou budú vymazané"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -204,13 +232,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Старіші файли, період існування яких закінчився, будуть видалені\" is a literal translation and sounds awkward in Ukrainian. A more natural phrasing would convey the same meaning.",
-          "suggestion": "Старі файли, термін існування яких минув, будуть видалені"
+          "description": "The translation 'Старіші файли, період існування яких закінчився, будуть видалені' is a literal translation and sounds unnatural in Ukrainian. The phrase 'період існування яких закінчився' (the period of their existence has ended) is overly formal and complex for this context.",
+          "suggestion": "Старіші файли з вичерпаним терміном життя будуть видалені"
         },
         {
-          "type": "spelling",
-          "description": "The word 'термін' is more commonly used than 'період' in this context.",
-          "suggestion": "Replace 'період' with 'термін'"
+          "type": "incorrect_translation",
+          "description": "The term 'термін життя' (term of life) is a more common and understandable way to refer to a file's lifetime in Ukrainian compared to the literal 'період існування'.",
+          "suggestion": "N/A - Incorporated in the previous suggestion."
         }
       ],
       "approved_at": null

@@ -28,13 +28,13 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { sendInstructionsToDelete } from "@docspace/shared/api/people";
+import { Link } from "@docspace/shared/components/link";
 
 class DeleteSelfProfileDialogComponent extends React.Component {
   constructor(props) {
@@ -76,16 +76,16 @@ class DeleteSelfProfileDialogComponent extends React.Component {
         <ModalDialog.Body>
           <Text fontSize="13px">
             {t("DeleteProfileInfo")}{" "}
-            <ColorTheme
+            <Link
               type="page"
               href={`mailto:${email}`}
               noHover
-              themeId={ThemeId.Link}
               title={email}
               tag="a"
+              color="accent"
             >
               {email}
-            </ColorTheme>
+            </Link>
           </Text>
         </ModalDialog.Body>
         <ModalDialog.Footer>

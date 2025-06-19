@@ -1,4 +1,4 @@
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/variables/colors";
 
 .container {
   display: flex;
@@ -66,7 +66,7 @@
     }
   }
 
-  -webkit-tap-highlight-color: #{$tap-highlight};
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
   &.isDisabled {
     cursor: default;

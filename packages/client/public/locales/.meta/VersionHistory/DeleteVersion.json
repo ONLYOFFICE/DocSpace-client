@@ -3,7 +3,7 @@
   "content": "Delete version",
   "content_en_sha1_hash": "9398dcc860e4a9b586e651d154b9eb533e57b091",
   "created_at": "2025-05-19T21:30:49.927Z",
-  "updated_at": "2025-05-28T09:30:02.267Z",
+  "updated_at": "2025-05-26T07:57:32.304Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete version\" in a modal dialog. It appears as the header of a confirmation dialog that allows users to delete a version from a version history.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ລົບລ້າງບູຊັບ\" is not the most natural or accurate translation of \"Delete version.\" While 'ລົບ' means 'delete' and 'ບູຊັບ' can refer to a record or archive, the combination doesn't convey the precise meaning of 'version' in a software or document context. It sounds overly formal and potentially misleading.",
-          "suggestion": "A better translation would be something like \"ລົບຂໍ້ມູນເວີຊັນ\" (lop khom version) which translates to 'delete version data', or \"ລົບເວີຊັນ\" (lop version) which directly uses the English word 'version' transliterated into Lao script. Alternatively, \"ເຊົາການໃຊ້ເວີຊັນ\" (sao kan chai version) meaning 'stop using version' could also be appropriate depending on the specific use case."
+          "description": "While \"ລົບລ້າງ\" (lop lang) means 'to abolish' or 'to remove,' and \"ບູຊັບ\" (boosap) means 'version' or 'backup,' the combination doesn't perfectly capture the meaning of 'delete version.' It implies more of a complete removal or cancellation of a backup rather than simply deleting a version.",
+          "suggestion": "Consider using a more direct translation like \"ລົບຂໍ້ມູນບູຊັບ\" (lop khomun boosap) which translates to 'delete version data' or \"ລົບບູຊັບ\" (lop boosap) which translates to 'delete version.'"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වෙළුම මකන්න' while understandable, is not the most natural or precise translation of 'Delete version'. 'වෙළුම' translates to 'version' which is correct, but 'මකන්න' (makanna) is a more forceful term (erase, obliterate) than 'delete'.",
-          "suggestion": "A more suitable translation would be 'වෙළුම ඉවත් කරන්න' (veluma ival karna) which means 'remove version', or 'වෙළුම පසක් කරන්න' (veluma pasak karna) which means 'discard version'."
+          "description": "The translation 'වෙළුම මකන්න' is a literal translation of 'Delete version'. While understandable, it might not be the most natural phrasing in Sinhala. A more idiomatic translation could be considered.",
+          "suggestion": "Consider alternatives like 'වෙර්සන්​ ඉවත් කරන්න' (version iwath karanawa) or 'වෙර්සන්​ මකා දමන්න' (version makada damanawa)."
         }
       ],
       "approved_at": null

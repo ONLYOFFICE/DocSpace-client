@@ -3,7 +3,7 @@
   "content": "Upload date",
   "content_en_sha1_hash": "176ef9cf9d99c91f93d8c6ccfedafea96c16e2ca",
   "created_at": "2025-05-19T21:30:49.425Z",
-  "updated_at": "2025-05-28T09:30:02.297Z",
+  "updated_at": "2025-05-26T07:57:32.334Z",
   "comment": {
     "text": "The \"UploadDate\" translation key is used to display the upload date of a file. It appears in a settings plugin dialog and is displayed next to an uploaded file's timestamp. The translation should be provided as a plain text representation, likely in a format like \"YYYY-MM-DD\".",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Качи дата' is not an accurate translation of 'Upload date'. 'Качи' means 'upload' or 'put up', which is redundant. 'Дата' simply means 'date'. A more accurate translation would be something like 'Дата на качване' or 'Дата за качване'.",
+          "description": "The Bulgarian translation 'Качи дата' is a literal translation of 'Upload date' but doesn't convey the intended meaning. 'Качи' means 'upload' and 'дата' means 'date,' but it's not idiomatic Bulgarian. The correct translation should indicate a date when something was uploaded.",
           "suggestion": "Дата на качване"
         }
       ],
@@ -150,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Încărcare data' is not a correct translation of 'Upload date'. 'Încărcare' means 'uploading', while 'data' means 'data'. The correct translation should be something like 'Data încărcării' or 'Data de încărcare'.",
+          "description": "The Romanian translation \"Încărcare data\" is not an accurate translation of \"Upload date.\" \"Încărcare\" means \"uploading\" or \"loading.\"  It doesn't convey the meaning of a date associated with uploading.",
           "suggestion": "Data încărcării"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Naloži datum' does not accurately translate 'Upload date'. 'Naloži' means 'upload' or 'load', which is redundant and doesn't convey the meaning of 'date of upload'.",
-          "suggestion": "Datum obremenitve"
+          "description": "The Slovenian translation \"Naloži datum\" does not accurately convey the meaning of \"Upload date.\" \"Naloži\" means \"upload\" or \"load,\" which is redundant. The intended meaning is the date when something was uploaded.",
+          "suggestion": "Datumi nalaganja"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Датум отпреме\" is not the most accurate translation of \"Upload date\". \"Отпреме\" means 'sent' or 'shipped,' which doesn't directly convey the meaning of 'upload'.",
-          "suggestion": "A more accurate translation would be \"Датум учитавања\" (Datum učitavanja) or \"Датум постављања\" (Datum postavljanja)."
+          "description": "The Serbian (Cyrillic) translation \"Датум отпреме\" doesn't accurately convey the meaning of \"Upload date.\" \"Отпреме\" means \"shipped\" or \"sent,\" not \"uploaded.\" A more accurate translation would involve words related to uploading, such as 'носилац' (uploader) or a more descriptive phrase.",
+          "suggestion": "Consider \"Датум уноса\" (Date of entry/input) or \"Датум закачивања\" (Date of attachment) or \"Датум отпреме на сервер\" (Date of upload to server)."
         }
       ],
       "approved_at": null
@@ -204,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Datum otpreme\" translates to 'Shipping date' or 'Dispatch date', not 'Upload date'.",
+          "description": "The Serbian translation \"Datum otpreme\" translates to \"Shipping date\" or \"Dispatch date\", not \"Upload date\". It misses the nuance of uploading a file or data.",
           "suggestion": "Datum učitavanja"
         }
       ],

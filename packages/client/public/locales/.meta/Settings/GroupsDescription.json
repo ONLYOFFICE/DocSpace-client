@@ -3,7 +3,7 @@
   "content": "Users which you selected in the previous step will be imported into groups created in {{serviceName}}. Groups will appear in the {{contactsName}} section.",
   "content_en_sha1_hash": "f3a3fd660493cb8d94711a3820e02cbdb83aa44e",
   "created_at": "2025-05-19T21:30:51.596Z",
-  "updated_at": "2025-05-28T09:30:02.517Z",
+  "updated_at": "2025-05-26T07:57:32.525Z",
   "comment": {
     "text": "The translation key \"GroupsDescription\" is used to describe the action of importing selected users into groups created in a service. This text appears in a data import component and helps users understand how their selections will be used.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'imported' is translated as 'входирани', which is not the most accurate or natural translation in this context. A better translation would be something along the lines of 'вносени' (imported) or 'добавени' (added).",
-          "suggestion": "Потребителите, които сте избрали в предишната стъпка, ще бъдат вносени/добавени в групи, създадени в {{serviceName}}."
+          "description": "The word 'imported' (from the English content) is translated as 'входирани' (vhodini) in Bulgarian. While technically correct, a more natural and common translation for 'imported' in this context would be 'вносени' (vnoseni). 'Входирани' implies something being entered into a system, whereas 'вносени' directly relates to importing.",
+          "suggestion": "Потребителите, които сте избрали в предишната стъпка, ще бъдат вносени в групи, създадени в {{serviceName}}."
         }
       ],
       "approved_at": null
@@ -78,7 +78,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"huoneisiin\" (rooms) is used instead of \"ryhmiin\" (groups). The English text clearly refers to groups, not rooms.",
+          "description": "The word 'huoneisiin' (rooms) is used instead of 'ryhmiin' (groups). The English text specifically refers to 'groups', so the translation should reflect that.",
           "suggestion": "Käyttäjät, jotka valitsit edellisessä vaiheessa tuodaan ryhmiin, jotka on luotu {{serviceName}}ssa. Ryhmät ilmestyvät {{contactsName}}-osioon."
         }
       ],
@@ -90,13 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"qu'on a créé\" is awkward and less formal than a more suitable phrasing. It translates literally to 'that we created' but doesn't flow naturally in this context.",
-          "suggestion": "Les groupes qui ont été créés dans {{serviceName}}."
+          "description": "The phrase \"qu'on a créé\" is not the most natural or precise translation of \"created in {{serviceName}}\". It uses an impersonal construction that could be improved.",
+          "suggestion": "Les groupes qui ont été créés dans {{serviceName}}"
         },
         {
           "type": "incorrect_translation",
-          "description": "While grammatically correct, the phrasing \"Les utilisateurs... seront importés vers\" could be improved for a more natural flow. 'Vers' implies direction, which isn't quite accurate here. The users are being imported *into* the groups.",
-          "suggestion": "Les utilisateurs... seront importés dans les groupes..."
+          "description": "While not strictly incorrect, \"vers\" can be replaced with a more appropriate preposition.",
+          "suggestion": "Les utilisateurs que vous avez sélectionnés à l'étape précédente seront importés dans les groupes créés dans {{serviceName}}"
         }
       ],
       "approved_at": null
@@ -106,19 +106,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Նախորդ քայլում ձեր ընտրած օգտատերերը\" could be improved for clarity and flow. A more natural phrasing might be \"Ձեր նախորդ քայլում ընտրած օգտատերերը\" or similar.",
-          "suggestion": "Ձեր նախորդ քայլում ընտրած օգտատերերը կներմուծվեն..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"կներմուծվեն\" (will be imported) might sound slightly formal or less natural in this context. A more conversational alternative might be considered.",
-          "suggestion": "կներմուծվեն կամ կավելացվեն"
-        },
-        {
           "type": "formatting",
-          "description": "Consistency in the use of quotes is important. Ensure that quotes used within the translated text match the style used elsewhere in the application or guidelines.",
-          "suggestion": "Review and standardize the quotation mark style throughout the application."
+          "description": "The Armenian translation includes colons after each sentence, which is not typical for this type of instruction. It makes the tone a bit formal and stilted.",
+          "suggestion": "Consider removing the colons after each sentence for a more natural flow. For example, change «Խմբերը կհայտնվեն «{{contactsName}}» բաժնում:» to «Խմբերը կհայտնվեն «{{contactsName}}» բաժնում»."
         }
       ],
       "approved_at": null
@@ -195,18 +185,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පෙරvious' appears to be a misspelling. It should likely be 'පෙරහුදු' or 'පෙර'.",
-          "suggestion": "පෙරහුදු"
+          "description": "The word 'පෙරvious' seems to be a typo and doesn's correspond to any proper Sinhala word. It likely intends to convey 'previous'.",
+          "suggestion": "පෙරවූ"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'පෙරහුදු පියවරේදී ඔබ තෝරාගත් පරිශීලකයින්' is slightly awkward. A more natural phrasing might be 'ඔබ පෙරහුදු පියවරේදී තෝරාගත් පරිශීලකයින්'.",
-          "suggestion": "ඔබ පෙරහුදු පියවරේදී තෝරාගත් පරිශීලකයින්"
+          "description": "The phrase 'සාදන ලද' is slightly awkward. A more natural phrasing would be better. It implies 'created' which is understood but could be more elegant.",
+          "suggestion": "ස້າງන ලද"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'සාදන ලද' (saadana lac) is a bit literal and clunky in this context. A more natural equivalent for 'created' might be 'ඇති'.",
-          "suggestion": "ඇති"
+          "description": "The English phrase 'Users which you selected' is translated literally. A more natural Sinhala phrasing would be 'ඔබ තෝරාගත් අය'.",
+          "suggestion": "ඔබ තෝරාගත් අය"
         }
       ],
       "approved_at": null
@@ -232,13 +222,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'odabrali' might be better as 'izabrali'. While 'odabrali' is grammatically correct, 'izabrali' is more commonly used in this context.",
-          "suggestion": "izabrali"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -250,13 +234,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Ukrainian translation uses double quotes (») instead of single quotes (') for the section name. The English uses single quotes, and consistency is generally preferred.",
-          "suggestion": "Replace «{{contactsName}}» with '{{contactsName}}'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -271,13 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'will be imported into' is overly literal. A more natural Chinese phrasing would be '会加入' (hui jia ru) or '会被添加到' (hui bei tian jia dao) which means 'will be added to'.",
-          "suggestion": "您在前一步选择的用户会被添加到在{{serviceName}}中创建的群组。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'will appear' is a literal translation of 'will appear' and '显示' (xian shi) is correct, but a more natural phrasing would be '会出现在' (hui chuo xian) or '可以在' (ke yi zai) which means 'can be found in' or 'will be visible in'.",
-          "suggestion": "这些群组可以在{{contactsName}}部分。"
+          "description": "The English phrase 'Users which you selected' is better translated as '您选择的用户' rather than '您在前一步选择的用户'. The 'in the previous step' is redundant and makes the Chinese less natural.",
+          "suggestion": "您选择的用户将被导入到在{{serviceName}}中创建的群组。这些群组将显示在{{contactsName}}部分。"
         }
       ],
       "approved_at": null

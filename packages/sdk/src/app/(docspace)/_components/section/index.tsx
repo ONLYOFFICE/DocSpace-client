@@ -35,6 +35,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import Section from "@docspace/shared/components/section";
 
 import { useSettingsStore } from "../../_store/SettingsStore";
+import useDeviceType from "@/hooks/useDeviceType";
 
 type SectionProps = {
   sectionHeaderContent: React.ReactNode;
@@ -79,6 +80,7 @@ export const SectionWrapper = observer(
     }, [searchParams]);
 
     const settingsStore = useSettingsStore();
+    const { currentDeviceType } = useDeviceType();
 
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
 
@@ -88,7 +90,7 @@ export const SectionWrapper = observer(
         settingsStudio={false}
         viewAs="row"
         isEmptyPage={isEmptyList}
-        currentDeviceType={settingsStore.currentDeviceType}
+        currentDeviceType={currentDeviceType}
       >
         <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 

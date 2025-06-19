@@ -42,7 +42,6 @@ const Row = memo(({ data, index, style }: RowProps) => {
   return (
     <DropDownItem
       {...option?.props}
-      // noHover
       style={newStyle}
       onMouseMove={() => {
         handleMouseMove?.(index);

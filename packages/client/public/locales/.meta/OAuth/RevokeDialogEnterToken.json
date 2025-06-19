@@ -3,7 +3,7 @@
   "content": "Enter the token to confirm revocation:",
   "content_en_sha1_hash": "2c9df59ddb226d93f22c592d4e8d4b66e0d7e828",
   "created_at": "2025-05-19T21:30:54.024Z",
-  "updated_at": "2025-05-28T09:30:02.606Z",
+  "updated_at": "2025-05-26T07:57:32.667Z",
   "comment": {
     "text": "This translation key is used for the \"Enter token to confirm revocation\" message in a dialog box, specifically in a Revoke Developer Token dialog. The purpose is to prompt the user to input a token to proceed with token revocation.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ləğv etməyi təsdiqləmək üçün tokeni daxil edin:' is a bit literal and could be more natural. 'Ləğv etmək üçün tokeni daxil edin:' would be a more common phrasing.",
-          "suggestion": "Ləğv etmək üçün tokeni daxil edin:"
+          "description": "The translation 'Ləğv etməyi təsdiqləmək üçün tokeni daxil edin:' is overly literal and slightly awkward. A more natural phrasing would improve readability.",
+          "suggestion": "Təsdiqləməyə görə tokeni daxil edin:"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon after 'daxil edin:' feels slightly unnatural in this context.",
+          "suggestion": "Təsdiqləməyə görə tokeni daxil edin"
         }
       ],
       "approved_at": null
@@ -54,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zadejte token a potvrďte odvolání:' is not a direct or natural translation of 'Enter the token to confirm revocation:'. The word order is awkward, and 'potvrďte odvolání' is a more complex phrasing than the English counterpart. A more accurate translation would be something along the lines of 'Zadejte token pro potvrzení zrušení' or 'Vložte token k potvrzení zrušení'.",
-          "suggestion": "Zadejte token pro potvrzení zrušení"
+          "description": "The translation 'Zadejte token a potvrďte odvolání:' is not the most natural or precise translation of 'Enter the token to confirm revocation:'. 'Potvrďte odvolání' is more literally 'confirm the revocation' which isn't as direct as confirming the action.",
+          "suggestion": "Zadejte token pro potvrzení zrušení:"
         }
       ],
       "approved_at": null
@@ -81,7 +86,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Syötä tunnus vahvistaaksesi peruutuksen: \" is a rather literal translation and doesn't flow as naturally in Finnish. 'Tunnus' translates to 'token' but in this context, a more natural phrasing would convey the purpose of entering the token.",
+          "suggestion": "Syötä peruutettava tunnus: "
+        },
+        {
+          "type": "formatting",
+          "description": "The colon (:) should be followed by a space in Finnish, as per standard conventions.",
+          "suggestion": "Syötä peruutettava tunnus: "
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -96,13 +112,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Մուտքագրեք token-ը չեղյալ հայտարարելու համար\" is a literal translation but doesn't flow naturally in Armenian.  It uses 'չեղյալ հայտարարելու համար' which is verbose for 'to revoke'.",
-          "suggestion": "Մուտքագրեք token-ը հավաստելու համար չեղարկելու գործընթացը: (Enter the token to confirm the revocation process:)"
+          "description": "The translation 'Մուտքագրեք token-ը չեղյալ հայտարարելու համար՝' is a literal translation and sounds unnatural in Armenian. 'չեղյալ հայտարարելու համար' is quite verbose and could be simplified.",
+          "suggestion": "Մուտքագրեք token-ը հրամանմանելու համար։ (Enter the token to invalidate/cancel)."
         },
         {
           "type": "formatting",
-          "description": "The word 'token' appears in English within the Armenian sentence.  It's preferable to use the Armenian transliteration or a more natural phrasing.",
-          "suggestion": "Մուտքագրեք թոքենը հավաստելու համար չեղարկելու գործընթացը: (Enter the token (transliterated) to confirm the revocation process:)"
+          "description": "The colon (:) at the end of the Armenian translation isn't standard for this kind of prompt and might look awkward. The suggested translation removes the colon.",
+          "suggestion": "Remove the colon at the end of the translation."
         }
       ],
       "approved_at": null
@@ -131,13 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ໂຕ໊ກຽນ' (token) might be spelled incorrectly. While understandable, 'ໂຕ໊ກຽນ' is not the standard Lao transliteration for 'token'.",
-          "suggestion": "Consider using a more standard transliteration like 'ໂຕ໊ກັນ' or 'ໂຕ໊ກឹន' depending on the context and desired pronunciation."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ໃສ່ໂຕ໊ກຽນເພື່ອຢັ້ງຢືນການຍົກເລີກ:' could be slightly improved for flow. The current phrasing is understandable but a more natural phrasing might enhance readability.",
-          "suggestion": "Consider a phrasing like 'ໃສ່ໂຕ໊ກຽນເພື່ອຢັ້ງຢືນການຍົກເລີກນີ້:' (Enter the token to confirm *this* revocation:)"
+          "description": "The term 'ໂຕ໊ກຽນ' is a transliteration of 'token' and might not be the most natural or easily understood word for Lao speakers. While understandable, a more idiomatic Lao equivalent would be preferable.",
+          "suggestion": "Consider using a more natural Lao term for 'token', potentially researching common usage in similar contexts."
         }
       ],
       "approved_at": null
@@ -178,8 +189,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Introduceți token-ul pentru a confirma revocare:' is technically correct but could be improved for naturalness. 'Revocare' is a noun, and a more natural phrasing would use a verb to describe the confirmation action.",
-          "suggestion": "Introduceți token-ul pentru a confirma revocarea:"
+          "description": "The translation 'Introduceți token-ul pentru a confirma revocare:' is a literal translation but could be improved for naturalness in Romanian. 'Revocare' isn't as commonly used in this context as 'anulare'.",
+          "suggestion": "Introduceți token-ul pentru a confirma anularea:"
         }
       ],
       "approved_at": null
@@ -196,13 +207,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'පරි revoke කිරීම' is not a standard or easily understandable way to express 'revoke' in Sinhala in this context. It seems like a direct transliteration and adaptation of the English word 'revoke' which doesn't flow naturally.",
-          "suggestion": "ප්‍රතික්ෂේපනය කිරීමට ටෝකනය ඇතුළත් කරන්න: (Pratikshapayanaya thamuthal karanava:)"
+          "description": "The translation \"පරි revoke කිරීම තහවුරු කිරීමට ටෝකනය ඇතුළත් කරන්න:\" while containing relevant keywords, doesn't accurately convey the meaning of \"Enter the token to confirm revocation:\". The phrasing is a bit awkward and unnatural in Sinhala. It directly translates 'revoke' which is not common in conversational Sinhala.",
+          "suggestion": "A better translation would be something like \"පරිrevoke කිරීමට අවසර දීමට ටෝකනය ඇතුළත් කරන්න\" (Par revoke karamuna avasam damma ekak thokanaya athulath karanna) or \"පරි revoke කිරීමට අවශ්‍ය ටෝකනය ඇතුළත් කරන්න\" (Par revoke karamuna awashyatha thokanaya athulath karanna)."
         },
         {
           "type": "formatting",
-          "description": "The colon after 'ඇතුළත් කරන්න' should be present at the end of the sentence to maintain consistency with English.",
-          "suggestion": "පරි revoke කිරීම තහවුරු කිරීමට ටෝකනය ඇතුළත් කරන්න:"
+          "description": "The colon (:) at the end of the Sinhala translation, while grammatically valid, might be stylistically different from the English version. Consistency should be checked across all translations.",
+          "suggestion": "Evaluate if the colon is consistently used in similar UI elements in Sinhala."
         }
       ],
       "approved_at": null
@@ -225,8 +236,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"потврду опозива\" is not the most natural or accurate translation of \"confirm revocation.\" \"Потврду отказе\" or \"за потврду отказе\" would be more idiomatic in Serbian (Cyrillic).",
-          "suggestion": "Унесите токен за потврду отказе:"
+          "description": "The translation 'Унесите токен за потврду опозива:' is a literal translation and sounds awkward in Serbian. 'Potvrda' is more formal than necessary. A more natural phrasing would use a synonym for 'confirm' that fits the context of revocation.",
+          "suggestion": "Унесите токен за потврђење опозива:"
         }
       ],
       "approved_at": null
@@ -234,7 +245,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Unesite token za potvrdu opoziva:' while understandable, is not the most natural or precise translation of 'Enter the token to confirm revocation:'. A more accurate and idiomatic translation would be 'Unesite token za potvrdjivanje opoziva:' or 'Unesite token kako biste potvrdili opoziv:'",
+          "suggestion": "Unesite token kako biste potvrdili opoziv:"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -246,13 +263,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'маркер' (marker) is technically correct, but 'токен' (token) would be more consistent with the English term 'token'.",
-          "suggestion": "Введіть токен, щоб підтвердити відкликання:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "This group is loaded from LDAP. If you need to rename it, add or remove users, refer to the LDAP directory.",
   "content_en_sha1_hash": "3b6c0923db13975d55ef58409dfb21985e8ea826",
   "created_at": "2025-05-19T21:30:53.480Z",
-  "updated_at": "2025-05-28T09:30:02.417Z",
+  "updated_at": "2025-05-26T07:57:32.410Z",
   "comment": {
     "text": "This translation key is used for a tooltip that provides information about groups loaded from LDAP directories. It appears in a UI component to inform users about the group's origin and provide instructions on how to manage it if necessary.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'refer to the LDAP directory' is better translated as 'LDAP kataloqu ilə məsləhət edin' or 'LDAP kataloğuna baxın'. The current translation 'LDAP kataloqunu yoxlayın' which translates to 'check the LDAP directory' is acceptable, but less precise.",
-          "suggestion": "LDAP kataloqu ilə məsləhət edin"
+          "description": "The English phrase \"If you need to rename it\" is not accurately reflected in the Azerbaijani translation. \"İstifadəçilərin adını dəyişmək\" translates to \"To change the names of users,\" which is not the same as changing the group's name itself.",
+          "suggestion": "Bu qrup LDAP-dan yüklənib. Qrupun adını dəyişmək, istifadəçiləri əlavə etmək və ya silmək lazımdırsa, LDAP kataloqunu yoxlayın."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'add or remove users' is not completely accurately translated. 'Add or remove users' translates to something like 'istifadəçiləri əlavə etmək və ya silmək'. Current translation ' İstifadəçilərin adını dəyişmək, əlavə etmək və ya silmək' implies changing the user's names.",
-          "suggestion": "istifadəçiləri əlavə etmək və ya silmək"
+          "description": "The English \"refer to the LDAP directory\" is translated as \"LDAP kataloqunu yoxlayın\" which translates to \"check the LDAP directory\". While not entirely wrong, 'refer to' implies a reference guide or documentation, while 'check' is more basic. A more nuanced translation could improve clarity.",
+          "suggestion": "Bu qrup LDAP-dan yüklənib. İstifadəçilərin adını dəyişmək, əlavə etmək və ya silmək lazımdırsa, LDAP kataloqundakı təlimatları oxuyun."
         }
       ],
       "approved_at": null
@@ -53,8 +53,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The pronoun 'го' (go) is ambiguous. It doesn't clearly refer to 'групата' (the group). The sentence should be clearer about what is being renamed.",
-          "suggestion": "Тази група се зарежда от LDAP. Ако трябва да преименувате *групата*, да добавите или премахнете потребители, вижте LDAP директорията."
+          "description": "The pronoun 'го' (go) in 'да го преименувате' is ambiguous and doesn't clearly refer to 'групата' (the group). It should be changed to 'я' to correctly refer to a feminine noun.",
+          "suggestion": "Да я преименувате"
         }
       ],
       "approved_at": null
@@ -71,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"sehen Sie im LDAP-Verzeichnis nach\" is a bit clunky and indirect. A more natural phrasing would imply directing the user to consult the LDAP directory.",
-          "suggestion": "Wenn Sie sie umbenennen, Benutzer hinzufügen oder entfernen müssen, konsultieren Sie das LDAP-Verzeichnis."
+          "description": "The phrase 'sehen Sie im LDAP-Verzeichnis nach' is a bit awkward. A more natural translation for 'refer to' in this context would be 'wenden Sie sich an' or 'prüfen Sie'.",
+          "suggestion": "Diese Gruppe wird aus LDAP geladen. Wenn Sie sie umbenennen, Benutzer hinzufügen oder entfernen müssen, wenden Sie sich an das LDAP-Verzeichnis."
         }
       ],
       "approved_at": null
@@ -107,13 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"գրացուցակին\" (gratsutsakin) is a less common and somewhat outdated way to refer to a directory. A more modern and widely understood term would be better.",
-          "suggestion": "Consider using a more common term for \"directory\" like \"թղթապանակին\" (tghtap'anakin) or \"ցուցակիչին\" (tsutsakichin)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'դիմեք LDAP գրացուցակին' (refer to the LDAP directory) is a bit literal and could be more naturally phrased in Armenian. It doesn't convey the nuance of consulting the LDAP directory for changes.",
-          "suggestion": "Consider a phrasing like 'դիմեք LDAP-ի վրա կախված գրադիրքին' (dimek LDAP-i vra kakhvadz gradirk'in) - 'refer to the LDAP directory that contains this group information'."
+          "description": "The word 'գրացուցակին' (gratsutsakin) is a less common and slightly awkward way to refer to a directory. While not strictly incorrect, 'ցուցակ' (tsutsak) or 'թղթակազմ ցուցակ' (paper directory) would be more natural.",
+          "suggestion": "Replace 'գրացուցակին' with 'ցուցակին' or 'թղթակազմ ցուցակին'."
         }
       ],
       "approved_at": null
@@ -121,13 +116,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'fai riferimento' is slightly informal for a tooltip. A more formal and standard phrasing would improve the overall tone.",
-          "suggestion": "Consulta la directory LDAP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -148,8 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ໄດເລກະທໍລີ' (directory) is potentially misspelled. It might be a transcription error.",
-          "suggestion": "ໄດເລກະທໍරි (directory) or ອ້າງອີງໃສ່ບຸລິຫານຂອງ LDAP."
+          "description": "The word 'ເອົາ' in 'ເພີ່ມຫຼືເອົາຜູ້ໃຊ້ອອກ' is slightly awkward. It literally means 'take out' and while understandable, it's not the most natural phrasing for removing users.",
+          "suggestion": "ເພີ່ມຫຼືລົບຜູ້ໃຊ້ອອກ"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure 'ຖ້າທ່ານຕ້ອງການປ່ຽນຊື່ມັນ' is a bit clunky. It could be more elegantly phrased.",
+          "suggestion": "ຖ້າທ່ານຕ້ອງການປ່ຽນຊື່ກຸ່ມນີ້"
         }
       ],
       "approved_at": null
@@ -172,13 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'refer' in the English content implies consultation or direction. The Polish translation 'odwołać się' translates more closely to 'appeal' or 'refer to a legal document'. This shifts the meaning and could confuse the user.",
-          "suggestion": "Consider using 'sprawdzić' (check) or 'skonsultować się' (consult) to better convey the intended meaning of referring to the LDAP directory."
-        },
-        {
-          "type": "grammar",
-          "description": "While not strictly incorrect, the phrasing 'Aby zmienić jej nazwę, dodać lub usunąć użytkowników' could be improved for better flow and naturalness in Polish.",
-          "suggestion": "Consider restructuring to 'Aby zmienić jej nazwę lub dodać/usunąć użytkowników, należy sprawdzić katalog LDAP.'"
+          "description": "The term \"odwołać się\" is awkward and not the most natural way to express \"refer to.\"  A more direct translation of 'refer to' would be 'sprawdzić' or 'odnieść się do'.",
+          "suggestion": "Dana grupa jest ładowana z LDAP. Aby zmienić jej nazwę, dodać lub usunąć użytkowników, należy sprawdzić katalog LDAP."
         }
       ],
       "approved_at": null
@@ -198,13 +187,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'refer to the LDAP directory' is not the most natural Romanian translation for 'refer to the LDAP directory'. While 'repertoarul LDAP' is technically correct, a more user-friendly translation would be 'directorul LDAP' or 'căutați în directorul LDAP'.",
-          "suggestion": "Accesați directorul LDAP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -213,7 +196,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The pronoun 'его' (its) doesn't agree with 'группа' (group). 'Группа' is feminine, so the pronoun should be 'её'.",
+          "description": "The pronoun 'его' (its) refers to 'группа' (group), but should agree in gender. 'Группа' is feminine, so the pronoun should be 'её'.",
           "suggestion": "Эта группа загружается из LDAP. Если вам нужно переименовать её, добавить или удалить пользователей, обратитесь к каталогу LDAP."
         }
       ],
@@ -225,18 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"පරිශීලකයින් එක කිරීමට\" is not the most natural way to say \"add users.\" A more natural phrasing would be \"පරිශීලකයින් එක් කිරීමට\" or \"පරිශීලකයින් ඇතුළත් කිරීමට\".",
-          "suggestion": "පරිශීලකයින් එක් කිරීමට"
+          "description": "The phrase \"පරිශීලකයින් එක කිරීමට\" is not the most natural way to say 'add users'. A more natural phrasing would be \"පරිශීලකයින් යෙදවීමට\" or \"පරිශීලකයින් ඇතුළත් කිරීමට\".",
+          "suggestion": "පරිශීලකයින් යෙදවීමට or පරිශීලකයින් ඇතුළත් කිරීමට"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"විතාර්ක කිරීමට\" (witarkamita karanawa) is used in a way that is incorrect. It implies deliberate delay or hesitation rather than the process of adding/removing users. This is a semantic issue.",
-          "suggestion": "ඉවත් කිරීමට"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically not an error, the translation could benefit from a more consistent sentence structure. The two actions (rename, add, remove) feel slightly disconnected.",
-          "suggestion": "මෙම කණ්ඩායම LDAP වෙතින් පැටවිනි. ඔබට එය නැවත නම් කිරීමට, පරිශීලකයින් එක් කිරීමට හෝ ඉවත් කිරීමට අවශ්‍ය නම්, LDAP නාමාවලිය වෙත යොමු වන්න."
+          "description": "The word 'නාමාවලිය' translates more accurately to 'directory' or 'list' rather than 'directory list'. It's a bit redundant.",
+          "suggestion": "LDAPdirectory or LDAP ලේඛනය"
         }
       ],
       "approved_at": null
@@ -247,8 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"refer to\" is too literal. \"Obráťte sa na\" can sound overly formal or suggest contacting someone instead of referencing a directory. A more natural translation would be 'pozrite sa do' or 'odkazujte na'.",
-          "suggestion": "Táto skupina je nahraná z LDAP. Ak ju potrebujete premenovať, pridať alebo odstrániť používateľov, pozrite sa do priečinka LDAP."
+          "description": "The term 'priečinok' (folder) is not the best translation for 'directory' in this context. 'Adresár' or 'zoznam' would be more appropriate for an LDAP directory.",
+          "suggestion": "Táto skupina je nahraná z LDAP. Ak ju potrebujete premenovať, pridať alebo odstrániť používateľov, obráťte sa na adresár LDAP."
         }
       ],
       "approved_at": null
@@ -259,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'refer to the LDAP directory' is translated as 'odpri imenik LDAP'. While technically correct, 'odpri' (open) doesn't fully convey the intended meaning. It suggests an action rather than a reference. A better translation would be something along the lines of 'poglej v imenik LDAP' (look in the LDAP directory) or 'upoštevajte imenik LDAP' (consult the LDAP directory).",
-          "suggestion": "upoštevajte imenik LDAP"
+          "description": "The phrase \"odpri imenik LDAP\" (open LDAP directory) is too literal and doesn't convey the intended meaning of 'refer to the LDAP directory'. A more natural phrasing would be something like 'poskrbite do LDAP imenika' or 'glejte v LDAP imenik'.",
+          "suggestion": "Ta skupina je naložena iz LDAP. Za preimenovanje, dodajanje ali odstranitev uporabnikov glejte v LDAP imenik."
         }
       ],
       "approved_at": null

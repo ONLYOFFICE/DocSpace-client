@@ -27,9 +27,10 @@
 import { headers, cookies } from "next/headers";
 
 const API_PREFIX = "api/2.0";
+const APISYSTEM_PREFIX = "apisystem";
 
-export const getBaseUrl = () => {
-  const hdrs = headers();
+export const getBaseUrl = async () => {
+  const hdrs = await headers();
 
   const host = hdrs.get("x-forwarded-host");
   const proto = hdrs.get("x-forwarded-proto");
@@ -39,15 +40,15 @@ export const getBaseUrl = () => {
   return baseURL;
 };
 
-export const getAPIUrl = (apiSystem?: boolean) => {
-  const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
+export const getAPIUrl = async (apiSystem?: boolean) => {
+  const baseUrl = process.env.API_HOST?.trim() ?? (await getBaseUrl());
 
-  const baseAPIUrl = `${baseUrl}/${!apiSystem ? API_PREFIX : "apisystem"}`;
+  const baseAPIUrl = `${baseUrl}/${!apiSystem ? API_PREFIX : APISYSTEM_PREFIX}`;
 
   return baseAPIUrl;
 };
 
-export const createRequest = (
+export const createRequest = async (
   paths: string[],
   newHeaders: [string, string][],
   method: string,
@@ -55,17 +56,17 @@ export const createRequest = (
   apiSystem?: boolean,
   signals: (AbortSignal | null | undefined)[] = [],
 ) => {
-  const hdrs = new Headers(headers());
+  const hdrs = new Headers(await headers());
   hdrs.delete("content-length");
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
-  const apiURL = getAPIUrl(apiSystem);
+  const apiURL = await getAPIUrl(apiSystem);
 
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
   });
 
-  const baseURL = getBaseUrl();
+  const baseURL = await getBaseUrl();
 
   if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 

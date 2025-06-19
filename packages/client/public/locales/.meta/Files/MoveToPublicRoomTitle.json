@@ -3,7 +3,7 @@
   "content": "Move to Public room",
   "content_en_sha1_hash": "c8155200ac9c020a87b44239324908d4208b6394",
   "created_at": "2025-05-19T21:30:55.875Z",
-  "updated_at": "2025-05-28T09:30:02.283Z",
+  "updated_at": "2025-05-26T07:57:32.318Z",
   "comment": {
     "text": "The translation key \"MoveToPublicRoomTitle\" is used to display the title of a modal dialog that prompts users to move a file to a public room. The translated text appears in the header of the dialog and provides context for the user's action. Translators should provide a clear and descriptive title that reflects the purpose of this dialog.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/MoveToPublicRoom/index.js",
       "line_number": 127,
-      "context": "});\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"Files:MoveToPublicRoomTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>{t(\"Files:MoveToPublicRoom\")}</Text>\n </div>",
+      "context": "});\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"Files:MoveToPublicRoomTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>{t(\"Common:MoveToPublicRoom\")}</Text>\n </div>",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ümumi otağa keçin\" while conveying the general meaning of 'Move to Public room', doesn't quite capture the nuance of *moving* something. 'Keçin' implies a transition or going, but 'Move' suggests action on an object. A more appropriate translation could incorporate an action verb indicating movement.",
-          "suggestion": "Consider \"Ümumi otağa köçürün\" (Move to Public room) or \"Ümumi otağa daşıdırın\" (Move to Public room)"
+          "description": "While \"Ümumi otağa keçin\" is understandable, a more natural and idiomatic translation of \"Move to Public room\" would be something like \"Hərkəsə açıq otağa köçün\" or \"Hərkəs üçün olan otağa keçin\". \"Keçin\" implies a transition, but the original phrase suggests a relocation.",
+          "suggestion": "Hərkəsə açıq otağa köçün"
         }
       ],
       "approved_at": null
@@ -57,7 +57,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, \"In den öffentlichen Raum verschieben\" is a bit formal and lengthy for a UI element like a move action. A more natural and concise translation would be better suited.",
+          "suggestion": "Verschieben in öffentlichen Raum"
+        },
+        {
+          "type": "formatting",
+          "description": "The German translation uses lowercase for the first word. It's common practice in UI elements to capitalize the first word in German.",
+          "suggestion": "Verschieben in öffentlichen Raum"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -90,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Տեղափոխեք հանրային սենյակ' is a literal translation of 'Move to Public room' but might not be the most natural or idiomatic way to express this in Armenian. A more natural phrasing might be something like 'Ցուցադրել հանրային սենյակում' (Show in Public Room) or 'Տեղադրել հանրային սենյակ' (Place in Public Room), depending on the specific context of 'Move'.",
-          "suggestion": "Consider alternatives like 'Ցուցադրել հանրային սենյակում' or 'Տեղադրել հանրային սենյակ' based on context."
+          "description": "The Armenian translation \"Տեղափոխեք հանրային սենյակ\" is a literal translation. A more natural phrasing for 'Move to Public room' in Armenian would be something like \"Բավարարել հանրային սենյակ\" or \"Տեղադրել հանրային սենյակ\". \"Տեղափոխեք\" implies physically moving something, which isn't the intended meaning in this context.",
+          "suggestion": "Consider using \"Բավարարել հանրային սենյակ\" or \"Տեղադրել հանրային սենյակ\"."
         }
       ],
       "approved_at": null
@@ -105,13 +116,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"パブリックルームへ移動\" can sound a bit formal or stiff in a user interface context. A more natural phrasing might be preferred.",
-          "suggestion": "パブリックルームへ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -162,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Deplasare în Sală publică\" sounds slightly awkward. \"Mutare în Sală publică\" would be a more natural phrasing in Romanian.",
-          "suggestion": "Mutare în Sală publică"
+          "description": "While technically correct, \"Deplasare în Sală publică\" sounds slightly formal and less natural than a more conversational alternative. The term \"Sală\" (room) is accurate but 'Publică' might be better expressed as a more descriptive term.",
+          "suggestion": "Mutare în cameră publică"
         }
       ],
       "approved_at": null
@@ -171,7 +176,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Перейти в Публичную комнату\" is a bit clunky and not the most natural way to express \"Move to Public room\" in Russian. A more idiomatic translation would be something like \"Переместить в публичную комнату\" or \"Перенести в публичную комнату\". \"Перейти\" implies more of a transition or visit rather than a move.",
+          "suggestion": "Consider \"Переместить в публичную комнату\" or \"Перенести в публичную комнату\""
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -180,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ප්‍රසිද්ධ කාමරයකට ගෙනයන්න\" while literally meaning 'take to a public room' doesn't quite capture the meaning of 'Move to Public room'. It implies a physical movement, whereas 'Move to' often refers to a change in status or location within a system.",
-          "suggestion": "ප්‍රසිද්ධ කාමරයට මාරුවන්න (Prasiddha kamaraya maruwanna) - Meaning: 'Move to Public room' or  ප්‍රසිද්ධ කාමරයට යවන්න (Prasiddha kamaraya yavana) - Meaning: 'Send to Public room'."
+          "description": "The translation \"ප්‍රසිද්ධ කාමරයකට ගෙනයන්න\" while literally meaning 'take to a public room', doesn't quite capture the meaning of 'Move to Public room'. It sounds like a command to *take* something, rather than moving something or oneself. A more accurate translation would imply a relocation or transfer.",
+          "suggestion": "ප්‍රසිද්ධ කාමරයට යවන්න (Prasiddha kamaraya yavana)"
         }
       ],
       "approved_at": null
@@ -204,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Помери у Јавну собу' is a literal translation but doesn't quite capture the intended meaning of 'Move to Public room'. 'Помери' implies moving something physical, whereas 'Move to' suggests joining or relocating to a room. A more natural translation would convey the action of joining or relocating to the public room.",
-          "suggestion": "Пребаци у Јавну собу"
+          "description": "The Serbian translation \"Помери у Јавну собу\" literally translates to \"Move into Public room\".  The intended meaning is \"Move to Public room\". While understandable, \"у\" implies entering rather than relocating to.",
+          "suggestion": "Премести у Јавну собу"
         }
       ],
       "approved_at": null
@@ -216,13 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Pomeri u Javnu sobu\" doesn't accurately convey the meaning of 'Move to Public room.' 'Pomeri' implies movement by itself, making the phrase redundant. It's more appropriate to use a term that indicates relocation or transferring.",
+          "description": "The translation 'Pomeri u Javnu sobu' doesn't accurately convey the meaning of 'Move to Public room.' The word 'Pomeri' is unusual in this context and doesn't align with the intended action of moving something. It seems to imply a movement *towards* something, rather than a movement *to* a specific location.",
           "suggestion": "Premesti u Javnu sobu"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase may benefit from a more natural flow depending on the user interface context. Consider how 'Move' would be best translated.",
-          "suggestion": "Prebaci u Javnu sobu"
         }
       ],
       "approved_at": null
@@ -233,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Herkese açık odaya taşı\" is not the most natural or precise translation of \"Move to Public room\". While literally correct, it sounds a bit abrupt and might not convey the intended action clearly. A more idiomatic translation would be something like \"Herkese açık odaya aktar\" or \"Herkese açık odaya kaydır\".",
-          "suggestion": "Herkese açık odaya aktar"
+          "description": "The Turkish translation \"Herkese açık odaya taşı\" is a literal translation but doesn't quite convey the intended meaning of \"Move to Public room\". It sounds slightly abrupt and less user-friendly. A more natural and idiomatic translation would be preferable.",
+          "suggestion": "Consider \"Herkese açık odaya aktar\" or \"Herkese açık odaya taşıyın\" for a more natural and user-friendly translation. The choice between 'aktar' and 'taşırın' depends on the overall tone desired, with 'aktar' being slightly more formal."
         }
       ],
       "approved_at": null

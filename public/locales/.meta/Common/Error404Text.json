@@ -3,7 +3,7 @@
   "content": "Sorry, the resource cannot be found.",
   "content_en_sha1_hash": "d4e3df2d7bea3293966c553952c59e1ed35b47f7",
   "created_at": "2025-05-19T21:30:45.054Z",
-  "updated_at": "2025-05-28T09:30:02.936Z",
+  "updated_at": "2025-05-26T07:57:32.904Z",
   "comment": {
     "text": "The \"Error404Text\" translation key is used to display a generic error message when a resource cannot be found. It appears in an ErrorContainer component, likely on a 404 Not Found page or similar UI element, and should be translated to provide a consistent user experience across different languages and regions.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Δυστυχώς, ο πόρος δεν μπορεί να βρεθεί.' uses 'πόρος' which translates to 'port' or 'resource' in a technical sense. While it could be interpreted as 'resource,' 'Δεν βρέθηκε' or 'Δεν υπάρχει' would be more common and natural phrasing for a standard 'resource not found' error message in Greek.",
-          "suggestion": "Δυστυχώς, το περιεχόμενο δεν βρέθηκε."
+          "description": "The translation 'Δυστυχώς, ο πόρος δεν μπορεί να βρεθεί.' is a literal translation that doesn't quite convey the same tone as 'Sorry, the resource cannot be found.'  'Πόρος' is not the best word for 'resource' in this context. It is often used for a harbor or an outlet.",
+          "suggestion": "Consider a more natural and user-friendly translation such as 'Λυπούμαστε, το περιεχόμενο δεν βρέθηκε.' or 'Δεν βρέθηκε το ζητούμενο περιεχόμενο.'"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Désolé, la ressource n'a pu être trouvée.' is a literal translation but sounds unnatural in French. 'N'a pu être trouvée' implies a past possibility that didn't happen, which isn't the intended meaning. A more natural translation would convey that the resource simply isn't found.",
-          "suggestion": "Désolé, la ressource est introuvable."
+          "description": "The translation 'Désolé, la ressource n'a pu être trouvée.' is not the most natural or accurate translation of 'Sorry, the resource cannot be found.' The use of 'n'a pu être trouvée' (past perfect) implies the resource *should* have been found at some point. A more accurate and common translation would be 'Désolé, la ressource n'est pas trouvée' or 'Désolé, la ressource est introuvable'.",
+          "suggestion": "Désolé, la ressource n'est pas trouvée."
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຂໍອະໄພ, ບໍ່ສາມາດເຂົ້າເຖິງຊັບພະຍາກອນໄດ້' translates to 'Sorry, cannot access the resource.' While conveying a similar meaning, it's less direct and natural than 'the resource cannot be found.' A more accurate translation would better reflect the original English.",
+          "suggestion": "ຂໍອະໄພ, ບໍ່ພົບຊັບພະຍາກອນ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,13 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'Ne pare rău, sursa nu s-a găsit' is a bit literal and sounds slightly unnatural in Romanian. A more common and natural phrasing would be 'Îmi pare rău, resursa nu a fost găsită.' or 'Ne pare rău, resursa nu a fost găsită.'",
-          "suggestion": "Îmi pare rău, resursa nu a fost găsită."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izvinjavamo se, resurs ne može biti pronađen' is a literal translation that sounds unnatural in Serbian. A more idiomatic translation would be 'Žao nam je, resurs nije pronađen' or 'Nismo pronašli resurs.'.",
-          "suggestion": "Žao nam je, resurs nije pronađen."
+          "description": "The translation 'Izvinjavamo se, resurs ne može biti pronađen.' is a literal translation and sounds somewhat formal and stiff in Serbian. A more natural and user-friendly translation would be preferable.",
+          "suggestion": "Žao nam je, resursa ne postoji."
         }
       ],
       "approved_at": null

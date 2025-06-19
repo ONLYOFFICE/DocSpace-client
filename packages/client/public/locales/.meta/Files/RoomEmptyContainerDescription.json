@@ -3,7 +3,7 @@
   "content": "Please create the first room.",
   "content_en_sha1_hash": "d81ffd8917231e32c17f72ee8658dc82cb505c46",
   "created_at": "2025-05-19T21:30:56.086Z",
-  "updated_at": "2025-06-03T20:59:41.795Z",
+  "updated_at": "2025-06-02T10:20:51.018Z",
   "comment": {
     "text": "The translation key \"RoomEmptyContainerDescription\" is used to display a message indicating that a room is empty, suggesting the user create their first room. This message appears in UI components related to room management and is intended for visitors or collaborators who are presented with an empty room view. The text should convey a welcoming and instructive tone.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 113,
+      "line_number": 115,
       "context": "<>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>\n </>\n ) : isVisitor || isCollaborator ? (\n t(\"RoomEmptyContainerDescriptionUser\")\n ) : (\n t(\"RoomEmptyContainerDescription\")\n );\n \n const archiveRoomsDescription =",
       "module": "/packages/client"
     },
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Please create the first room\" is better translated as an imperative or suggestion rather than a request for someone to 'create' it. The current translation implies the user is being asked to perform the action, which might not be the intended meaning. A more appropriate translation would convey the meaning of 'initiate' or 'generate' the room.",
-          "suggestion": "Consider alternatives like 'İlk otağı başlatın' (Start the first room) or 'İlk otağı formalaşdırın' (Form/Generate the first room)."
+          "description": "The translation 'Lütfən, ilk otağı yaradın.' translates to 'Please, create the first room.' but uses the imperative form 'yaradın' which sounds like a command. A more natural and polite translation would be something like 'Xahiş edirəm, ilk otağı yaradın' (Please create the first room) or 'İlk otağı yaradın, xahiş edirəm' (Create the first room, please).",
+          "suggestion": "Xahiş edirəm, ilk otağı yaradın."
         }
       ],
       "approved_at": null
@@ -93,13 +93,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Please create the first room.\" translates more accurately as a direct instruction to create the room, rather than a polite request. The Armenian translation uses \"Խնդրում եմ\" which introduces a level of politeness that isn't present in the original.",
+          "suggestion": "Ստեղծեք առաջին սենյակը։"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ti preghiamo di creare la prima stanza.' while grammatically correct, isn't the most natural or idiomatic translation of 'Please create the first room.' A more natural phrasing would use a more direct imperative.",
+          "suggestion": "Crea la prima stanza."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -108,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '最初のルームを作成しましょう' while grammatically correct, is slightly formal and less natural for a prompt instructing a user to create a room. It implies a suggestion or invitation rather than a direct instruction.",
-          "suggestion": "最初の部屋を作成してください"
+          "description": "The English \"Please create the first room\" is more of a command or instruction. The Japanese translation \"最初のルームを作成しましょう\" (Hajimete no ruumu o sakusei shimashou) translates to \"Let's create the first room.\"  While not technically *wrong*, it softens the instruction. Depending on the context, a more direct translation like \"最初のルームを作成してください\" (Hajimete no ruumu o sakusei shite kudasai - Please create the first room) might be more appropriate.",
+          "suggestion": "最初のルームを作成してください"
         }
       ],
       "approved_at": null
@@ -120,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '서 첫 번째 방을 만드세요' is not a natural or accurate translation of 'Please create the first room.' The word '서' (seo) doesn't fit the context and seems misplaced. It translates to 'on' or 'in' and doesn't make sense here.",
-          "suggestion": "첫 번째 방을 만들어 주세요. (Cheot beon-eui bang-eul mandeul-eo juseyo.) - Please create the first room."
+          "description": "The translation \"서 첫 번째 방을 만드세요\" doesn't accurately convey the meaning of \"Please create the first room.\"  '서' (seo) has multiple meanings and its usage here is unclear and doesn't fit the context of instructing someone to create a room. It's likely an incorrect particle.",
+          "suggestion": "만드세요 첫 번째 방을."
         }
       ],
       "approved_at": null
@@ -168,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Creați prima sală' uses the formal 'Creați' (you create, plural/formal) while the English is a general instruction. A more appropriate translation would use the informal 'Creează prima sală' or 'Faceți prima sală' depending on the desired tone.",
-          "suggestion": "Creează prima sală."
+          "description": "The translation 'Creați prima sală.' is technically correct but sounds overly formal and instructional for a user prompt. A more natural and user-friendly translation would be more conversational.",
+          "suggestion": "Creați prima cameră."
         }
       ],
       "approved_at": null
@@ -203,9 +215,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'креирајте' is a less common and slightly awkward form. While not strictly incorrect, 'направите' or 'изградете' might sound more natural.",
-          "suggestion": "Молимо вас направите прву собу."
+          "type": "incorrect_translation",
+          "description": "The translation \"Молимо вас креирајте прву собу.\" while grammatically correct, doesn't quite capture the tone of 'Please create the first room.'  'Молимо вас' is quite formal. A more natural and less formal phrasing would be more appropriate for a game or application instruction.",
+          "suggestion": "Create the translation using a less formal imperative, for example: 'Направи прву собу.' or 'Изнајте прву собу.'"
         }
       ],
       "approved_at": null

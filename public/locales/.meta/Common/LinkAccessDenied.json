@@ -3,7 +3,7 @@
   "content": "Access to the link has been denied",
   "content_en_sha1_hash": "0a25b1aaa92449e4e0a262c000657f5c44ffb0e1",
   "created_at": "2025-05-19T21:30:46.120Z",
-  "updated_at": "2025-05-28T09:30:02.956Z",
+  "updated_at": "2025-05-26T07:57:32.928Z",
   "comment": {
     "text": "This translation key is used to display a message when access to a link is denied due to a share access right of \"Deny Access\". It appears in the UI as part of an update and success notification process. Translators should focus on conveying a sense of error or restricted access.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Հղման մուտքը մերժվել է' while technically correct, is somewhat literal and not the most natural way to express 'Access to the link has been denied' in Armenian. It sounds formal and slightly awkward.",
+          "suggestion": "Consider alternatives like 'Հղումը մերժվել է' (The link was denied) or 'Ձեզ չի կարողացել մուտք գործել հղումը' (You were unable to access the link) for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -155,14 +161,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'සබැඳියට' is technically correct but could be slightly improved for natural flow. It's a bit literal.",
-          "suggestion": "Consider 'සබැඳිය වෙත' or 'සබැඳියට' (depending on the desired nuance, both are acceptable)"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'ප්‍රතික්ෂේපිතයි' sounds very formal and bureaucratic for a user-facing message like this. It directly translates to 'rejected' or 'denied'.",
-          "suggestion": "A more user-friendly alternative might be 'අවලංගු වී ඇත' (invalidated) or 'ලබා නොවේ' (not available)."
+          "description": "The translation 'සබැඳියට ප්‍රවේශය ප්‍රතික්ෂේපිතයි' while understandable, is overly formal for a standard 'Access denied' message. A more natural and user-friendly translation would be preferred.",
+          "suggestion": "Consider alternatives like 'සබැඳියට ඇක්‍ເຊස් ප්‍රතික්ෂේපිතයි' or 'ඔබට සබැඳියට ඇක්‍ເຊස් ලබාගත නොහැකියි'."
         }
       ],
       "approved_at": null
@@ -185,8 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Приступ линку је одбијен\" is not the most natural or accurate translation of \"Access to the link has been denied.\" While understandable, a more common and fluent phrasing would be better.",
-          "suggestion": "Одбијен је приступ линку"
+          "description": "The translation 'Приступ линку је одбијен' is not the most natural or accurate translation of 'Access to the link has been denied'. 'Приступ' (pristup) directly translates to 'access', but in this context, a more natural wording would be 'Немате права приступа линку' or 'Употреба линка је забрањена'.",
+          "suggestion": "Употреба линка је забрањена"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, 'линку' is a less formal way to say 'link' in Serbian. A more formal and perhaps more appropriate option for a technical message would be 'линку'.",
+          "suggestion": "линку"
         }
       ],
       "approved_at": null

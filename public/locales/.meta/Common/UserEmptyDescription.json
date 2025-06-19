@@ -3,7 +3,7 @@
   "content": "Files and folders uploaded by admins will appeared here.",
   "content_en_sha1_hash": "eccdca0f20c32ad17dffa7f5520072fef3017029",
   "created_at": "2025-05-19T21:30:49.465Z",
-  "updated_at": "2025-06-03T20:59:41.803Z",
+  "updated_at": "2025-05-26T07:57:32.164Z",
   "comment": {
     "text": "Files and folders uploaded by admins will appear here. This translation key is used to display a message in an admin interface, indicating the location where files and folders from administrators are displayed.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'appeared' should be in the past tense, agreeing with 'will'.  The correct past participle form is 'تظهر' (tazhar).",
-          "suggestion": "ستظهر هنا الملفات والمجلدات التي تم تحميلها بواسطة المسؤولين."
+          "description": "The verb 'ستظهر' (satadhhar) should agree in number with the subject. Since 'الملفات والمجلدات' (al-milaffat wal-mujalladat - files and folders) is plural, the verb should be in the plural form.",
+          "suggestion": "ستظهر هنا الملفات والمجلدات التي قام المسؤولون بتحميلها."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'will appeared' is grammatically incorrect. The intended meaning is 'will appear'. While the Arabic 'ستظهر' (satadhhar) attempts to capture the future tense, the overall phrasing needs refinement to accurately reflect the English meaning and to improve the flow.",
+          "suggestion": "ستظهر هنا الملفات والمجلدات التي قام المسؤولون بتحميلها."
         }
       ],
       "approved_at": null
@@ -48,13 +53,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb tense is incorrect. It should be future tense to match the English 'will appear'.",
-          "suggestion": "Administratorlar tərəfindən yüklənmiş fayl və qovluqlar burada görünəcəkdir."
+          "description": "The verb 'appeared' in the English content should be translated to reflect a future tense. 'Görünəcək' already indicates future tense, but a more natural phrasing might be considered.",
+          "suggestion": "Administratorlar tərəfindən yüklənmiş fayl və qovluqlar burada görünə biləcək."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English sentence implies a future appearance, so the verb should indicate that. The current translation doesn't fully convey the intended meaning. 'Görünəcək' is present/future but lacks a proper emphasis on the future aspect.",
-          "suggestion": "Administratorlar tərəfindən yüklənmiş fayl və qovluqlar burada əks olunacaq."
+          "description": "While 'görünəcək' (will appear) is technically correct, the original phrasing 'will appeared' is grammatically incorrect.  A more accurate reflection of the intended meaning would be to use 'görünəcək'.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -65,7 +70,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Bulgarian translation uses the future tense ('ще се показват'). A more natural phrasing would be to use the present tense to indicate a habitual or ongoing action.  While grammatically correct, it sounds slightly awkward.",
+          "description": "The Bulgarian translation uses the future tense (\"ще се показват\") which implies a future action. The English suggests a present state. A more accurate translation would use a present tense to match the meaning.",
           "suggestion": "Файлове и папки, качени от администраторите, се показват тук."
         }
       ],
@@ -77,8 +82,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'appeared' should be in the future tense to match the context of something that will happen. 'Will appear' is more appropriate.",
-          "suggestion": "Zde se objeví soubory a složky nahrané správci."
+          "description": "The sentence \"Zde se objeví soubory a složky nahrané správci\" lacks the verb 'budou' (will be). The correct form should indicate future tense.",
+          "suggestion": "Zde se budou objevovat soubory a složky nahrané správci."
         }
       ],
       "approved_at": null
@@ -89,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The German translation uses the future tense 'werden' which, while grammatically correct, sounds slightly awkward in this context. A more natural phrasing would be in the present tense, implying a general state.",
-          "suggestion": "Von Administratoren hochgeladene Dateien und Ordner erscheinen hier."
+          "description": "The sentence 'Von Administratoren hochgeladene Dateien und Ordner werden hier angezeigt.' is grammatically awkward. It should be more natural to say 'Dateien und Ordner, die von Administratoren hochgeladen wurden, werden hier angezeigt.' or 'Dateien und Ordner, die Administratoren hochgeladen haben, werden hier angezeigt.'",
+          "suggestion": "Dateien und Ordner, die von Administratoren hochgeladen wurden, werden hier angezeigt."
         }
       ],
       "approved_at": null
@@ -101,13 +106,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb tense in the Greek translation is awkward. \"θα εμφανίζονται\" (will appear) sounds slightly unnatural in this context. It implies a continuous, habitual appearance, whereas the English suggests a single appearance after admin uploads.",
+          "description": "The sentence structure is slightly awkward. The use of 'θα εμφανίζονται' (will appear) isn't the most natural phrasing for this context. A more fluent option would indicate something that *is* appearing.",
           "suggestion": "Τα αρχεία και οι φάκελοι που έχουν μεταφορτωθεί από τους διαχειριστές εμφανίζονται εδώ."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'will appeared' is incorrect. It should be 'will appear'. The Greek translation directly mirrors this error. While the overall meaning is conveyed, the phrasing is flawed.",
-          "suggestion": "The English content should be corrected to 'Files and folders uploaded by admins will appear here.' The Greek translation should reflect the corrected English."
+          "description": "The English 'appeared' implies a past action with present relevance. The Greek translation 'θα εμφανίζονται' (future tense) doesn't quite capture this nuance. It's a bit too future-oriented. A more appropriate tense would indicate present existence.",
+          "suggestion": "Consider using the present tense, such as 'εμφανίζονται' which means 'appear'. Alternatively, if past uploads are meant, something like 'έχουν εμφανιστεί' (have appeared) could be used but that significantly changes the meaning."
         }
       ],
       "approved_at": null
@@ -118,8 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The original English sentence has a grammatical error (\"will appeared\" should be \"will appear\"). The Spanish translation correctly reflects this corrected English. However, the original English content should be corrected before translation for best results.",
-          "suggestion": "Correct the original English to: \"Files and folders uploaded by admins will appear here.\""
+          "description": "The English sentence \"Files and folders uploaded by admins will appeared here\" has a grammatical error - the auxiliary verb 'will' is followed by the base form of the verb 'appear' instead of the past participle 'appeared'.",
+          "suggestion": "Files and folders uploaded by admins will appear here."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Los archivos y carpetas cargados por los administradores aparecerán aquí.' translates to 'The files and folders uploaded by the administrators will appear here.' While technically correct, the original English uses 'admins' as a shortened form. A more natural translation maintaining the informal tone might use a similar shortening.",
+          "suggestion": "Los archivos y carpetas cargados por los admins aparecerán aquí."
         }
       ],
       "approved_at": null
@@ -130,8 +140,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English sentence 'Files and folders uploaded by admins will appeared here' is grammatically incorrect and should be 'Files and folders uploaded by admins will appear here'. The Finnish translation 'Pääkäyttäjien lataamat tiedostot ja kansiot ilmestyvät tänne' doesn't accurately reflect this corrected English. 'Ilmestyy' implies 'appear' in a sudden or unexpected manner, which doesn't fit the context. A more appropriate translation would use a verb that indicates simple presence or location.",
-          "suggestion": "Consider 'Pääkäyttäjien lataamat tiedostot ja kansiot ovat täällä' or 'Pääkäyttäjien lataamat tiedostot ja kansiot löytyvät täältä'."
+          "description": "The English phrase 'will appeared' is grammatically incorrect. The correct phrasing is 'will appear'.  The Finnish translation reflects this error.",
+          "suggestion": "Pääkäyttäjien lataamat tiedostot ja kansiot ilmestyvät tänne."
         }
       ],
       "approved_at": null
@@ -142,8 +152,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The English sentence \"Files and folders uploaded by admins will appeared here\" has a grammatical error: \"will appeared\" should be \"will appear\".",
-          "suggestion": "Les fichiers et dossiers téléchargés par les administrateurs apparaissent ici."
+          "description": "The English sentence 'Files and folders uploaded by admins will appeared here' contains a grammatical error: 'will appeared' should be 'will appear'. The French translation accurately reflects the intended meaning of a corrected English sentence, so no change is needed.",
+          "suggestion": "Correct the English sentence to: 'Files and folders uploaded by admins will appear here.'"
         }
       ],
       "approved_at": null
@@ -154,13 +164,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure is slightly awkward. 'will appeared' should be 'will appear'.",
-          "suggestion": "Ադմինիստրատորների կողմից վերբեռնված ֆայլերը և թղթապանակները կգտնվեն այստեղ:"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'appeared' implies a passive voice. The Armenian translation, while understandable, could be improved to be more natural. Using 'գտնվեն' (gdnev) which means 'will be located' or 'will be found' is a more direct and natural translation of the passive meaning in the English sentence.",
-          "suggestion": "Ադմինիստրատորների կողմից վերբեռնված ֆայլերը և թղթապանակները կգտնվեն այստեղ:"
+          "description": "The Armenian translation uses the future tense 'կհայտնվեն' (will appear) but the English implies a present state. A more appropriate tense could be present or imperfect.",
+          "suggestion": "Consider using a present tense form like 'հայտնվում են' (appear) or an imperfect tense 'հայտնվեին' (would appear) to better reflect the original meaning."
         }
       ],
       "approved_at": null
@@ -171,8 +176,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'verranno' (will come) should agree with the plural subject 'Files and folders'. While grammatically correct, it reads slightly awkward in Italian. A more natural phrasing would use a more passive voice.",
-          "suggestion": "I file e le cartelle caricati dagli amministratori saranno visibili qui."
+          "description": "The verb tense is slightly awkward. 'will appeared' should be 'will appear'.",
+          "suggestion": "I file e le cartelle caricati dagli amministratori **will appear** qui."
         }
       ],
       "approved_at": null
@@ -183,8 +188,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The English sentence 'Files and folders uploaded by admins will appeared here' has a grammatical error. It should be 'Files and folders uploaded by admins will appear here'. The Japanese translation accurately reflects the corrected English sentence, but it's important to note the original English was flawed.",
-          "suggestion": "Correct the English to 'Files and folders uploaded by admins will appear here'."
+          "description": "The English sentence \"Files and folders uploaded by admins will appeared here\" contains a grammatical error. The verb 'will appeared' should be 'will appear'. The Japanese translation accurately reflects the intended meaning, assuming the English sentence is corrected to 'Files and folders uploaded by admins will appear here.'",
+          "suggestion": "Correct the English sentence to 'Files and folders uploaded by admins will appear here.'"
         }
       ],
       "approved_at": null
@@ -195,13 +200,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The English sentence \"Files and folders uploaded by admins will appeared here\" is grammatically incorrect. The correct phrasing should be \"Files and folders uploaded by admins will appear here.\" The Korean translation directly reflects this grammatical error. '표시됩니다' (pyosidoem-nida) implies 'will be displayed' which is aligned, but the underlying English error needs correction.",
-          "suggestion": "Correct the English to \"Files and folders uploaded by admins will appear here.\""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While '관리자가 업로드한 파일 및 폴더가 여기에 표시됩니다' (gwanrijaga eoploaduhan fail mit peoldeoga yeogiese pyosidoem-nida) is a literal translation, it's a bit clunky in Korean. A more natural phrasing would emphasize the presentation of the files.",
-          "suggestion": "Consider '관리자가 업로드한 파일과 폴더가 여기에서 확인하실 수 있습니다.' (gwanrijaga eoploaduhan failgwa peoldeoga yeogiese hwaginhasil su isseumnida) - 'Files and folders uploaded by admins can be viewed here.'"
+          "description": "The English phrase \"will appeared\" is grammatically incorrect. It should be \"will appear\". The Korean translation doesn't reflect this error, but the source needs correction first.",
+          "suggestion": "Correct the English source to: \"Files and folders uploaded by admins will appear here.\""
         }
       ],
       "approved_at": null
@@ -212,13 +212,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Lao translation uses the future tense 'ຈະປາກົດຂື້ນ' which implies the files will appear in the future. The English suggests they *do* appear here. A present tense would be more accurate.",
-          "suggestion": "ເອກະສານ ແລະ ໂຟນເດີ ທີ່ຜູ້ບໍໍລິຫານອັບໂຫຼດ ປະກົດຂື້ນຢູ່ທີ່ນີ້."
+          "description": "The phrase 'ຈະປາກົດຂື້ນຢູ່ທີ່ນີ້' is grammatically awkward. A more natural phrasing would express the appearance of the files and folders.",
+          "suggestion": "ເອກະສານ ແລະ ໂຟນເດີ ທີ່ຜູ້ບໍໍລິຫານອັບໂຫຼດ ຈະສະແດງຢູ່ທີ່ນີ້."
         },
         {
-          "type": "spelling",
-          "description": "The word 'ບໍໍລິຫານ' has an incorrect vowel mark. It should be 'ບໍໍລິຫານ'.",
-          "suggestion": "ບໍໍລິຫານ"
+          "type": "incorrect_translation",
+          "description": "The English 'will appeared' is incorrect. It should be 'will appear'. The Lao translation attempts to reflect this error.",
+          "suggestion": "The translation should be adjusted to reflect the correct English phrasing. A suitable alternative in Lao would depend on the desired tone (e.g., 'ຈະປະກົດຢູ່ທີ່ນີ້' or 'ຈະສະແດງຢູ່ທີ່ນີ້')."
         }
       ],
       "approved_at": null
@@ -229,8 +229,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'will appeared' is grammatically incorrect. It should be 'will appear'.",
-          "suggestion": "will appear"
+          "description": "The verb tense in the Latvian translation is future tense ('tiks parādīti'). The English implies a present/ongoing state. While not strictly incorrect, it could be softened to reflect the original intent.",
+          "suggestion": "Šeit parādīti administratoru augšupielādētie faili un mapes."
         }
       ],
       "approved_at": null
@@ -241,8 +241,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb tense is slightly awkward. 'will appeared' should be 'will appear'.",
-          "suggestion": "Bestanden en mappen die door admins zijn geüpload, zullen hier verschijnen."
+          "description": "The verb tense 'zijn geüpload' (have been uploaded) is grammatically awkward in this context. It implies a completed action at a past time with continuing relevance. A simpler past tense would be more natural.",
+          "suggestion": "Bestanden en mappen die door admins zijn geüpload, verschijnen hier."
+        },
+        {
+          "type": "grammar",
+          "description": "Using 'geüpload' is technically correct, but in modern Dutch, it's often replaced with a simpler alternative. It's slightly less natural-sounding.",
+          "suggestion": "Bestanden en mappen die door admins uploaden, verschijnen hier."
         }
       ],
       "approved_at": null
@@ -253,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Polish translation uses the future tense 'pojawią się' which sounds a bit formal and less natural in this context. A simpler past tense would be more appropriate as the content will already be present.",
-          "suggestion": "Tutaj są pliki i katalogi przesłane przez administratorów."
+          "description": "The English sentence 'Files and folders uploaded by admins will appeared here' has a grammatical error: 'will appeared' should be 'will appear'. The Polish translation reflects this error.",
+          "suggestion": "Correct the English sentence to 'Files and folders uploaded by admins will appear here'. The corresponding Polish translation should also be adjusted if necessary (though 'Tutaj pojawią się pliki i katalogi przesłane przez administratorów' is grammatically correct in Polish)."
         }
       ],
       "approved_at": null
@@ -265,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The English sentence uses the future tense ('will appeared'). The Portuguese translation doesn't reflect the same future tense. A more accurate translation would use a future tense auxiliary verb.",
-          "suggestion": "Arquivos e pastas enviados por administradores aparecerão aqui."
+          "description": "The English sentence 'Files and folders uploaded by admins will appeared here' has a grammatical error. The verb 'will appeared' should be 'will appear'. The Portuguese translation reflects the error.",
+          "suggestion": "Correct the English sentence to 'Files and folders uploaded by admins will appear here.'  The Portuguese translation would then be: 'Arquivos e pastas enviados por administradores aparecerão aqui.' is correct."
         }
       ],
       "approved_at": null
@@ -277,13 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The English sentence \"Files and folders uploaded by admins will appeared here\" has a grammatical error: 'will appeared' should be 'will appear'.",
-          "suggestion": "Files and folders uploaded by admins will appear here."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the Portuguese translation conveys the general meaning, a more accurate and natural-sounding translation would use 'serão' instead of 'aparecerão'. 'Aparecerão' sounds somewhat literal and less fluid in this context.",
-          "suggestion": "Arquivos e pastas enviados por administradores serão exibidos aqui."
+          "description": "The verb 'aparecerão' should agree with the plural subject 'arquivos e pastas'. The original English implies a future tense, and 'aparecerão' is correct, but the sentence could be improved for clarity and flow.",
+          "suggestion": "Arquivos e pastas enviados por administradores aparecerão aqui."
         }
       ],
       "approved_at": null
@@ -294,8 +294,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian sentence uses the imperfect tense (\"vor apărea\") which suggests a continuous or repeated action in the future. The English suggests a one-time occurrence or general statement. A more appropriate tense would be the simple future (\"vor apărea\") or conditional (\"vor apărea\") depending on the precise intent.",
-          "suggestion": "Fişierele şi folderele care au fost încărcate de administratori vor apărea aici."
+          "description": "The Romanian translation uses the past tense ('au fost încărcate') which implies a completed action. The English phrasing suggests a more ongoing or potential appearance. A more accurate translation would use a present tense or future tense.",
+          "suggestion": "Fişierele şi folderele încărcate de administratori vor apărea aici."
+        },
+        {
+          "type": "grammar",
+          "description": "The Romanian sentence uses 'vor apărea', which is correct, but a more natural phrasing might be 'vor fi afişate' (will be displayed).",
+          "suggestion": "Fişierele şi folderele încărcate de administratori vor fi afişate aici."
         }
       ],
       "approved_at": null
@@ -306,8 +311,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'will appeared' is grammatically incorrect. It should be 'will appear'.",
-          "suggestion": "Здесь будут находиться файлы и папки, загруженные администраторами."
+          "description": "The verb conjugation in the Russian translation is slightly awkward. 'Будут находиться' is grammatically correct but sounds less natural than a more direct equivalent. A better phrasing would convey the idea of 'will be located'.",
+          "suggestion": "Здесь будут файлы и папки, загруженные администраторами."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English sentence uses 'appeared' which implies an action. The translation uses a more static verb ('будут находиться' - will be located). While not incorrect, it slightly alters the intended meaning.  Consider whether 'появятся' (will appear) might be more appropriate to preserve the original meaning’s emphasis on the action of appearing.",
+          "suggestion": "Здесь появятся файлы и папки, загруженные администраторами."
         }
       ],
       "approved_at": null
@@ -318,13 +328,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure could be improved for better flow. The passive voice ('will appeared') is awkward in Sinhala.",
-          "suggestion": "පරිපාලකවරු විසින් උඩුගත කරන ලද ෆයිල් සහ ෆෝල්ඩර් මෙහි දිස්වේ."
+          "description": "The sentence structure is slightly awkward. A more natural Sinhala phrasing would improve readability.",
+          "suggestion": "පරිපාලකවරු විසින් උඩුගත කරන ලද ෆයිල් සහ ෆෝල්ඩර් මෙහි දිස්නු ඇත."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'will appeared' requires the correct auxiliary verb conjugation.  'will appear' becomes 'දිස්වේ' in Sinhala when conjugated correctly.",
-          "suggestion": "පරිපාලකවරු විසින් උඩුගත කරන ලද ෆයිල් සහ ෆෝල්ඩර් මෙහි දිස්වේ."
+          "description": "The English phrase 'will appeared' is incorrect. It should be 'will appear'. The Sinhala translation 'දිස්නෙනු ඇත' is the correct future tense conjugation of 'to appear'.",
+          "suggestion": "The corrected English phrase is 'will appear'. The existing Sinhala translation is accurate regarding future tense."
         }
       ],
       "approved_at": null
@@ -335,13 +345,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovak sentence uses the singular form 'objavia' instead of the plural form, implying that only one file/folder will appear. It should agree with 'súbory a priečinky' (files and folders).",
-          "suggestion": "Súbory a priečinky nahrané administrátormi sa objavia tu."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English sentence uses 'will appeared' which is grammatically incorrect.  The correct phrasing should be 'will appear'.",
-          "suggestion": "The correct English should be 'Files and folders uploaded by admins will appear here.'"
+          "description": "The Slovak translation uses the imperfective aspect ('sa objavia') which implies a repeated or habitual action. The English implies a one-time appearance. A more appropriate form would use the perfective aspect.",
+          "suggestion": "Súbory a priečinky nahrané administrátormi sa objavia tu -> Súbory a priečinky nahrané administrátormi sa zobrazia tu."
         }
       ],
       "approved_at": null
@@ -352,8 +357,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'appeared' should be in the future tense. 'will appear' is more appropriate in this context.",
-          "suggestion": "Tukaj bodo prikazane datoteke in mape, ki so jih naložili skrbniki, **ko bodo**."
+          "description": "The verb tense 'bodo prikazane' (will be displayed) is slightly awkward in this context. A simpler past tense might be more natural, suggesting something already exists or is routinely the case.",
+          "suggestion": "Tukaj so prikazane datoteke in mape, ki so jih naložili skrbniki."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English states that files and folders 'will appear'. The current translation suggests that they are already displayed. While the correction above attempts to address this, a more literal translation may better reflect the original meaning.",
+          "suggestion": "Tukaj bodo prikazane datoteke in mape, ki jih naložijo skrbniki."
         }
       ],
       "approved_at": null
@@ -364,13 +374,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb conjugation 'ће се појавити' is awkward and less natural. A more common and fluent phrasing would be 'појавиће се'.",
-          "suggestion": "појавиће се"
+          "description": "The Serbian translation uses the future tense ('će se pojaviti') when the original English implies a current state or consistent presence. A more appropriate tense would better reflect that.",
+          "suggestion": "Датотеке и фолдери отпремљени од стране администратора налазе се овде."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Датотеке и фолдери' is grammatically correct, but using singular 'фајл' and 'фолдер' might be more appropriate for technical documentation or interface labels, as it implies that the user will be dealing with individual items.",
-          "suggestion": "Фaјлови и фолдери"
+          "description": "The word 'nalaze' (are located) would better align with the original sentence meaning.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -381,13 +391,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure is awkward. The verb 'će se pojaviti' (will appear) is passive and less natural in this context. A more active and direct phrasing would improve clarity.",
+          "description": "The sentence structure is awkward. 'će se pojaviti' is grammatically correct but sounds less natural. A more idiomatic phrasing would be better.",
           "suggestion": "Datoteke i folderi otpremljeni od strane administratora biće prikazani ovde."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'will appeared' is grammatically incorrect. It should be 'will appear'. While the Serbian translation attempts to reflect this, the overall phrasing could be improved for a more natural flow.",
-          "suggestion": "Datoteke i folderi koje administratori otpreme će biti prikazani ovde."
+          "description": "The English sentence uses the future tense 'will appear'. The Serbian translation uses a more definite future tense 'će se pojaviti'. While not strictly incorrect, 'biće prikazani' (will be displayed) better reflects the original meaning.",
+          "suggestion": "Datoteke i folderi otpremljeni od strane administratora biće prikazani ovde."
         }
       ],
       "approved_at": null
@@ -398,8 +408,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure is slightly awkward. 'appeared' should be 'görünecek'.",
-          "suggestion": "Yöneticiler tarafından yüklenen dosya ve klasörler burada görünecek."
+          "description": "The sentence structure in Turkish could be improved for better flow. The verb 'görünecektir' is grammatically correct, but the sentence reads a bit stiff. A more natural phrasing would be more fluent.",
+          "suggestion": "Yöneticiler tarafından yüklenen dosya ve klasörler burada görülecektir."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English sentence uses 'will appeared'. It should be 'will appear'. The Turkish translation accurately reflects the corrected English, but it's worth noting the original error.",
+          "suggestion": "While the translation is accurate given the original English error, it's good to be aware of the source issue.  No direct Turkish correction needed beyond the grammar improvement above."
         }
       ],
       "approved_at": null
@@ -410,12 +425,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb conjugation is incorrect. 'will appeared' should be 'will appear'.",
-          "suggestion": "will appear"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'uploaded by admins' is better translated as 'завантажені адміністраторами' in Ukrainian, rather than 'передані адміністраторами' which implies 'passed on by'.",
+          "description": "The sentence structure is awkward. 'appeared' should be in the past tense to match the future tense verb 'will appear'.",
           "suggestion": "Тут з'являться файли та папки, завантажені адміністраторами."
         }
       ],
@@ -427,7 +437,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure is slightly awkward. 'will appeared' should be 'will appear'.",
+          "description": "The Vietnamese translation uses the future tense 'sẽ xuất hiện' which implies a future action. However, the English phrasing 'will appeared' is grammatically incorrect and likely intended to mean 'will appear'.  The Vietnamese should reflect this meaning.",
           "suggestion": "Các tập tin và thư mục được quản trị viên tải lên sẽ xuất hiện ở đây."
         }
       ],
@@ -439,8 +449,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The English sentence 'Files and folders uploaded by admins will appeared here' has a grammatical error. It should be 'Files and folders uploaded by admins will appear here'. The Chinese translation reflects this error by using a passive verb form.  '将显示' (jiāng xiǎnshì) implies a future action or a process that will be completed, which doesn't fully capture the intended meaning of simple presence.",
-          "suggestion": "管理员上传的文件和文件夹会显示在此处。"
+          "description": "The original English sentence 'Files and folders uploaded by admins will appeared here' has a grammatical error. The correct form is 'will appear'. The Chinese translation accurately reflects this corrected English.",
+          "suggestion": "The English should be corrected to 'Files and folders uploaded by admins will appear here.'"
         }
       ],
       "approved_at": null

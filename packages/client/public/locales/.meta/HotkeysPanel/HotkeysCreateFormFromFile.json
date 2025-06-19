@@ -3,7 +3,7 @@
   "content": "Create form template from file",
   "content_en_sha1_hash": "70f54a7f5feedcf15d4f7789a07e062bd260a28d",
   "created_at": "2025-05-19T21:30:55.040Z",
-  "updated_at": "2025-05-21T10:34:31.645Z",
+  "updated_at": "2025-05-24T10:44:18.831Z",
   "comment": {
     "text": "This translation key is used to display the label for a button or action that allows users to create a form template from a file. The text appears in the UI as \"HotkeysCreateFormFromFile\" and provides context for translators on where it's used (e.g., hotkey shortcut information).",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'أنشيء نموذج قالب من ملف' translates literally to 'Create form template from file' which is acceptable. However, a more natural and idiomatic Arabic phrasing would improve the user experience. The word 'أنشيء' (anshie') implies creation of something new, while the intention is more likely to import/generate a template from an existing file. Using 'استيراد' (istiraad - import) might be more suitable.",
-          "suggestion": "استيراد نموذج قالب من ملف"
+          "description": "The translation 'أنشيء نموذج قالب من ملف' is a literal translation but doesn't convey the intended meaning of 'Create form template from file' in a natural and idiomatic way in Arabic. It can be improved to be more fluent.",
+          "suggestion": "إنشاء نموذج من ملف"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Fayldan forma şablonu yaradın' is too literal and suggests an action in progress. It translates to 'Create form template from file' in the active voice. A more natural and appropriate phrasing would be 'Şablonu fayldan yaradın' or 'Fayldan şablon yaradın'.",
-          "suggestion": "Şablonu fayldan yaradın"
+          "description": "The translation \"Fayldan forma şablonu yaradın\" uses the verb \"yaradın\" (you created). The English \"Create form template from file\" implies a command or option, suggesting a more generic 'create' or 'generate' should be used.",
+          "suggestion": "Fayldan forma şablonu yarada bilərsiniz"
         }
       ],
       "approved_at": null
@@ -131,9 +131,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation \"Formuliersjabloon maken van bestand\" doesn't accurately convey the meaning of 'Create form template from file'. \"Formulier\" should be \"Formulier\". The word order could also be improved.",
+          "suggestion": "Formuliermallen maken van bestand"
+        },
+        {
           "type": "spelling",
-          "description": "The word 'Formuliersjabloon' appears to be misspelled. It should likely be 'Formulierensjabloon' or 'Formuliersjabloon'.",
-          "suggestion": "Formulierensjabloon"
+          "description": "The word 'Formuliersjabloon' is misspelled. It should be 'Formuliermallen'.",
+          "suggestion": "Formuliermallen"
         }
       ],
       "approved_at": null
@@ -156,7 +161,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Criar formulário mestre a partir do arquivo\" doesn't accurately convey the meaning of \"Create form template from file\". \"Mestre\" (master) isn't the appropriate term for 'template' in this context. It implies a primary or controlling form, which isn't what's intended.",
+          "description": "The English phrase 'Create form template' implies a template for creating forms, not a 'master form' (formulário mestre).  'Template' better conveys the intended meaning.",
           "suggestion": "Criar modelo de formulário a partir do arquivo"
         }
       ],
@@ -180,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනුවකින් ආකෘතිපත්‍ර අච්චුවක් සාදන්න' while conveying a general meaning, doesn't directly translate to 'Create form template from file.' 'ආකෘතිපත්‍ර අච්චුවක්' is a more literal translation of 'form template' as a 'mold' or 'pattern,' which isn't the intended nuance. A more appropriate translation would focus on creation or importing.",
-          "suggestion": "ගොනුවකින් ආකෘතිපත්‍රය සාදන්න (Gonuwakin akruthipathraya sadanna) or ආකෘතිපත්‍රය ගොනුවකින් ගන්න (Akruthipathraya gonuwakin ganne)."
+          "description": "The translation \"ගොනුවකින් ආකෘතිපත්‍ර අච්චුවක් සාදන්න\" while understandable, isn't the most natural or precise translation of \"Create form template from file.\"  'ආකෘතිපත්‍ර අච්චුවක්' (aakruthipathra achchuk) refers to a mold or die and doesn't directly convey the concept of creating a form template. A more accurate term for 'template' would be 'ආකාරය' (akaaraya) or 'පත්‍රපත්‍රය' (pathrapathraya).",
+          "suggestion": "ගොනුවකින් ආකෘතියක් සාදන්න (Gonuwakin aakruthiyak saadanna) or ගොනුවකින් පත්‍රපත්‍රයක් සාදන්න (Gonuwakin pathrapathrayak saadanna)"
         }
       ],
       "approved_at": null
@@ -234,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '将文件创建为表单模板' is not the most natural or accurate rendering of 'Create form template from file'. It implies the file itself is being created *as* a form template, rather than being used to create one.",
-          "suggestion": "Consider '从文件创建表单模板' (Cong wénjiàn chuàngjiàn biàodān móban) which translates to 'Create form template from file' more directly."
+          "description": "The translation '将文件创建为表单模板' implies 'create a form template *from* a file', which isn't the intended meaning. It seems the intended meaning is 'create a form template *using* a file as a basis or pattern.'",
+          "suggestion": "从文件创建表单模板 (Cong wenjian chuangjian biaodan moxing)"
         }
       ],
       "approved_at": null

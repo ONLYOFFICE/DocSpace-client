@@ -3,7 +3,7 @@
   "content": "File content copy, file downloading and printing restriction activated.",
   "content_en_sha1_hash": "ebb37aa6cdb89eeddede98c5708c63779c37e554",
   "created_at": "2025-05-19T21:30:48.264Z",
-  "updated_at": "2025-05-28T09:30:02.955Z",
+  "updated_at": "2025-06-02T10:20:51.584Z",
   "comment": {
     "text": "This translation key is used for the text that appears when a user attempts to download or print a file, indicating that sharing and downloading have been restricted. The text is typically displayed in a dialog or alert box, prompting users to use an external link to access the content. Translators should focus on conveying this restrictive message in a clear and concise manner.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 371,
+      "line_number": 370,
       "context": "/>\n );\n \n const passwordText = hasPassword ? t(\"Common:RoomShareLinkPassword\") : \"\";\n const restrictionText = denyDownload\n ? t(\"Common:RoomShareLinkRestrictionActivated\")\n : \"\";\n \n const date = expirationDate ? (\n <Trans\n t={t}",
       "module": "/packages/shared"
     }
@@ -30,18 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is not accurately reflected in the Arabic translation. 'نسخ محتوى الملف' literally translates to 'copying file content'. A more natural and accurate translation might be 'مشاركة الملفات أو نسخها' (sharing or copying files).",
-          "suggestion": "مشاركة الملفات أو نسخها"
+          "description": "The English phrase \"File content copy\" is somewhat ambiguous. A more accurate translation for 'copy' in this context would be 'نسخ' (naskh). The current translation uses 'تم تنشيط قيود' which implies activation of restrictions *on* copying, which is technically correct, but doesn't directly translate 'copy' as an action. The current phrasing is slightly clunky.",
+          "suggestion": "تم تنشيط قيود نسخ محتوى الملف وتنزيل الملفات والطباعة."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'file downloading' is translated as 'تنزيل الملفات'. While technically correct, it could be improved for fluency. 'تحميل الملفات' is a more common and natural way to express 'downloading files'.",
-          "suggestion": "تحميل الملفات"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'الطباعة' (al-tiba'a) accurately translates to 'printing', the overall flow and emphasis of the Arabic sentence could be improved. Rephrasing could enhance readability.",
-          "suggestion": "طباعة الملفات"
+          "description": "While 'تنزيل' (tanzil) is generally correct for 'downloading', the term 'تحميل' (tahmil) is also commonly used in Saudi Arabia and might flow better in this particular phrase. Both are acceptable, but 'تحميل' is perhaps slightly more prevalent in everyday usage.",
+          "suggestion": "تم تنشيط قيود نسخ محتوى الملف وتحميل الملفات والطباعة."
         }
       ],
       "approved_at": null
@@ -52,18 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"File content copy\" is translated as \"Fayl məzmununun surətinin çıxarılması\". While technically correct, it's a bit verbose and not the most natural phrasing. A more concise and common translation would be 'Faylın surətinin çıxarılması' or 'Faylın çıxarılması'.",
-          "suggestion": "Faylın surətinin çıxarılması"
+          "description": "The English phrase 'File content copy' is too literal. A more natural translation would be 'File content' or 'File content reproduction'.",
+          "suggestion": "Faylın məzmununun reproduksiyası"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'file downloading' is translated as 'faylın endirilməsi'. While accurate, a more frequently used and natural alternative in Azerbaijani is 'faylın yüklənməsi'.",
-          "suggestion": "faylın yüklənməsi"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'printing restriction' is translated as 'çapının məhdudlaşdırılması'. This is grammatically correct but could be more concisely expressed as 'çapına məhdudiyyət'.",
-          "suggestion": "çapına məhdudiyyət"
+          "description": "The phrase 'file downloading' can be more naturally expressed as 'faylın yüklənməsi'.",
+          "suggestion": "Faylın yüklənməsi"
         }
       ],
       "approved_at": null
@@ -73,19 +63,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is too literal. A more natural Bulgarian phrasing would be 'Копиране на файла'.",
-          "suggestion": "Копиране на файла"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Активирано е ограничение за...' is slightly awkward. A more concise and natural phrasing would be 'Ограничено е...'",
-          "suggestion": "Ограничено е..."
-        },
-        {
           "type": "formatting",
-          "description": "The sentence structure is a bit long and could be improved for readability. Separating the activities into distinct phrases would enhance clarity.",
-          "suggestion": "Ограничено е копирането, изтеглянето и отпечатването на файла."
+          "description": "The Bulgarian translation uses a long sentence with multiple clauses. While grammatically correct, it could be improved for readability and clarity. A more natural flow could be achieved by splitting it into two sentences.",
+          "suggestion": "Активирано е ограничение за копиране на съдържанието на файла. Ограничено е и изтеглянето и отпечатването на файла."
         }
       ],
       "approved_at": null
@@ -95,14 +75,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is somewhat vague. A more accurate translation would be 'Kopírování obsahu souborů' or 'Kopírování souborového obsahu'. The current translation ('Kopírování obsahu souborů') is technically correct, but not as idiomatic.",
-          "suggestion": "Kopírování souborového obsahu"
+          "type": "formatting",
+          "description": "The Czech translation uses a somewhat lengthy sentence structure. While grammatically correct, it could be improved for clarity and flow. Consider splitting it into two sentences.",
+          "suggestion": "Aktivováno omezení kopírování obsahu souborů. Omezeno je také stahování a tisk."
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a comma (',') to separate the different restrictions. While grammatically acceptable, using 'a' or 'i' might read more naturally in Czech. For example, 'Aktivováno omezení kopírování obsahu souborů, stahování souborů a tisku.' becomes 'Aktivováno omezení kopírování obsahu souborů, stahování souborů, a tisku.' or 'Aktivováno omezení kopírování obsahu souborů, stahování souborů, a tisku'.",
-          "suggestion": "Aktivováno omezení kopírování obsahu souborů, stahování souborů, a tisku."
+          "type": "incorrect_translation",
+          "description": "While 'omezení' (restriction) is accurate, 'aktivováno omezení' can sound a bit awkward. It's more common to say something is enabled or active.",
+          "suggestion": "Povoleno omezení kopírování obsahu souborů, stahování souborů a tisku."
         }
       ],
       "approved_at": null
@@ -118,14 +98,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'File content copy' is somewhat ambiguous and could be more accurately translated. 'Αντιγραφής περιεχομένου αρχείων' is a literal translation but might be improved for clarity in Greek. Consider 'Αντιγραφής περιεχομένου αρχείου' or 'Αντιγραφής αρχείων'.",
-          "suggestion": "Consider 'Αντιγραφής περιεχομένου αρχείου' or 'Αντιγραφής αρχείων'."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the phrasing 'Έγινε ενεργοποίηση περιορισμού...' is slightly clunky. A more natural way to express it might be 'Ενεργοποιήθηκε περιορισμός...'.",
-          "suggestion": "Ενεργοποιήθηκε περιορισμός..."
+          "type": "formatting",
+          "description": "The translation uses a passive voice (\"Έγινε ενεργοποίηση...\" - \"An activation was made...\"). While grammatically correct, it sounds less direct and might be better suited for a more active phrasing.",
+          "suggestion": "Ενεργοποιήθηκε ο περιορισμός αντιγραφής περιεχομένου αρχείων, λήψης αρχείων και εκτύπωσης."
         }
       ],
       "approved_at": null
@@ -139,13 +114,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is not perfectly translated. 'File content' implies the content *within* the file. 'Tiedoston sisällön' translates to 'the file's content,' which is accurate, but could be slightly more concise. It's a minor point, but for UI text, brevity is often preferred.",
-          "suggestion": "Consider a slightly more concise alternative such as 'Tiedoston kopiointi' (File copying) to match the rest of the sentence structure."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -154,13 +123,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The French translation uses the plural 'sont activés' (are activated) which doesn't align with the singular 'activated' in the English source. While not strictly incorrect, it's less precise.",
-          "suggestion": "La copie du contenu des fichiers, le téléchargement des fichiers et la restriction de l'impression est activée."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation conveys the meaning, 'restriction de l'impression' could be more naturally phrased.",
-          "suggestion": "La copie du contenu des fichiers, le téléchargement des fichiers et l'interdiction d'impression sont activés."
+          "description": "The French translation uses the plural 'sont activés' which implies multiple restrictions are activated. The English says 'restriction', indicating a single restriction is activated.",
+          "suggestion": "La copie du contenu des fichiers, le téléchargement des fichiers et la restriction d'impression sont activés."
         }
       ],
       "approved_at": null
@@ -170,14 +134,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is not accurately reflected in the Armenian translation. 'Բովանդակության պատճենումը' literally translates to 'content copying'. While not wrong, a more precise translation reflecting the restriction on copying file *content* might be better, although the existing translation isn't drastically wrong.",
-          "suggestion": "Consider revising to something like: 'Ֆայլի պարունակության պատճենելու սահմանափակումն ակտիվացված է:' (File content copying restriction activated)."
+          "type": "formatting",
+          "description": "The Armenian translation uses a long sentence structure which can be difficult to parse. Consider breaking it into shorter sentences for better readability.",
+          "suggestion": "Consider splitting into two sentences: 'Ֆայլի բովանդակության պատճենումը սահմանափակված է։ Ֆայլերի ներբեռնման և տպագրության սահմանափակումն ակտիվացված է:'"
         },
         {
-          "type": "formatting",
-          "description": "The Armenian translation is a single long sentence. Breaking it into two sentences might improve readability.",
-          "suggestion": "Consider breaking the sentence into two: 'Ֆայլի բովանդակության պատճենումը սահմանափակված է։ Ֆայլերի ներբեռնման և տպագրության սահմանափակումն ակտիվացված է:' (File content copying is restricted. File downloading and printing restriction activated.)"
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation of 'restriction activated' as 'սահմանափակումն ակտիվացված է' is a bit literal. A more natural phrasing might improve the flow.",
+          "suggestion": "Consider a phrasing like 'սահմանափակումները գործող են' (restrictions are in effect) for a more natural feel."
         }
       ],
       "approved_at": null
@@ -188,13 +152,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English 'File content copy' is better translated as 'Copia del contenuto del file'. While the current translation isn't *wrong*, it's slightly less idiomatic Italian.",
-          "suggestion": "Consider rephrasing 'Copia del contenuto del file' for a more natural flow. Could use 'Copia dei contenuti del file' perhaps."
+          "description": "The English phrase 'File content copy' is too literal and doesn't flow naturally in Italian. 'Content' is redundant as 'copy' already implies content. 'File downloading' is also a bit clunky.",
+          "suggestion": "Restrizione alla copia, al download e alla stampa dei file attivati."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'download del file' could be improved. A more common phrasing would be 'scaricamento del file'.",
-          "suggestion": "Change 'download del file' to 'scaricamento del file'."
+          "type": "grammar",
+          "description": "The use of 'attivati' at the end is grammatically correct but could be improved for flow.  While 'attivati' agrees with the implicit subject, specifying it makes the sentence clearer and more natural.",
+          "suggestion": "Restrizione alla copia, al download e alla stampa dei file è stata attivata."
+        },
+        {
+          "type": "formatting",
+          "description": "The lack of article ('il' or 'la') before 'download' is missing.",
+          "suggestion": "Restrizione alla copia, al download e alla stampa dei file attivati."
         }
       ],
       "approved_at": null
@@ -205,18 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is somewhat ambiguous. A more natural Japanese translation might emphasize the act of copying the content itself, rather than just referring to the file. While technically correct, it could be improved for clarity.",
-          "suggestion": "ファイルの内容のコピー (Fairu no naiyou no kopii) - This specifically refers to copying the *content* of the file."
+          "description": "The phrase \"ファイル内容のコピー、ファイルのダウンロード、印刷制限が有効になりました\" is a bit too literal and formal. A more natural Japanese phrasing would convey the same meaning with slightly different wording.",
+          "suggestion": "ファイル内容のコピー、ダウンロード、印刷の制限が有効になりました。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'file downloading' could be more accurately represented to ensure Japanese readers understand it implies 'downloading *from* a source'.",
-          "suggestion": "ファイルのダウンロード (Fairu no daunroodo) - While acceptable, adding context would be better."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'printing restriction' is understandable, a more natural phrasing might use '印刷禁止' (insatsu kinshi) to indicate a clear prohibition.",
-          "suggestion": "印刷禁止 (Insatsu kinshi) - Directly translates to 'printing prohibited'."
+          "type": "formatting",
+          "description": "The use of commas between each restriction feels a little abrupt. Connecting them with particles like \"と\" (and) would improve flow.",
+          "suggestion": "ファイル内容のコピーとファイルのダウンロードと印刷制限が有効になりました。"
         }
       ],
       "approved_at": null
@@ -233,18 +197,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'File content copy' is not accurately translated. 'ເນື້ອໃນເອກະສານກ່າຍຄັດສຳເນົາ' literally translates to 'document content copy'. It's a bit awkward and less direct than the original English. A better translation would focus on the restriction *of* copying content.",
+          "description": "The phrase 'File content copy' is not accurately translated. 'ເນື້ອໃນເອກະສານກ່າຍຄັດສຳເນົາ' translates more literally as 'document content copied'. A better translation would reflect the meaning of 'copy' as in restriction *of* copying.",
           "suggestion": "ເນື້ອໃນເອກະສານຫ້າມກ່າຍຄັດສຳເນົາ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'file downloading and printing restriction' could be more directly translated. 'ກວດກາການດາວໂຫຼດ ແລະພິມເອກະສານ' implies checking downloads and prints, not a restriction. ",
+          "description": "The phrase 'File downloading and printing restriction' is not idiomatic Lao. While technically correct, it lacks fluency. The phrasing 'ກວດກາການດາວໂຫຼດ ແລະພິມເອກະສານ' translates as 'checking downloads and printing documents', which isn't the intended meaning.",
           "suggestion": "ການດາວໂຫຼດ ແລະພິມເອກະສານຖືກຫ້າມ"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'restriction activated' is translated as 'ຖືກເປີດໃຊ້ງານແລ້ວ', which is more passive than necessary. A more active translation would be more impactful.",
-          "suggestion": "ຖືກຫ້າມໃຊ້ງານ"
+          "type": "formatting",
+          "description": "The Lao sentence is a bit long and could be broken down for better readability.",
+          "suggestion": "ເນື້ອໃນເອກະສານຫ້າມກ່າຍຄັດສຳເນົາ, ການດາວໂຫຼດ ແລະພິມເອກະສານຖືກຫ້າມ."
         }
       ],
       "approved_at": null
@@ -255,18 +219,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is too literal. A more natural translation in Latvian would be something like 'faila satura kopija' or 'faila satura dublēšana'.  'faila satura kopēšanas' implies copying *of* the content, which is accurate but sounds less fluent.",
-          "suggestion": "faila satura dublēšana"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'file downloading' translates to 'failu lejupielādes' which is accurate, however, a smoother phrasing might be 'failu nosūtīšana'. While 'lejupielādes' isn't wrong, 'nosūtīšana' is often used in similar contexts.",
-          "suggestion": "failu nosūtīšana"
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the repetition of 'failu' can be improved for readability. Consider rephrasing the sentence for flow.",
-          "suggestion": "Aktivizēts failu satura kopēšanas, lejupielādes un drukāšanas ierobežojums.  (Or, rephrase the entire sentence to avoid repetition)"
+          "description": "The term 'restriction activated' is slightly awkward in Latvian. A more natural phrasing would be 'ierobežojumi ir spēkā' or 'ir noteikti ierobežojumi'.",
+          "suggestion": "Aktivizēti failu satura kopēšanas, failu lejupielādes un drukāšanas ierobežojumi."
         }
       ],
       "approved_at": null
@@ -277,18 +231,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"File content copy\" is not accurately translated. \"Kopiëren van materiaal\" is a broader term. A more direct translation would be \"Inhoud kopiëren\" or \"Bestandskopiëren\".",
-          "suggestion": "Inhoud kopiëren"
+          "description": "The English phrase 'File content copy' is not accurately reflected in the Dutch translation 'kopiëren van materiaal'. 'Materiaal' is too broad. 'Inhoud' would be a better translation for 'content'.",
+          "suggestion": "Beperking voor het kopiëren van de inhoud, downloaden en afdrukken van bestanden geactiveerd."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"File downloading\" is accurately translated to \"downloaden van bestanden\" but the phrasing can be improved for natural Dutch.",
-          "suggestion": "Bestanden downloaden"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation conveys the meaning, the overall phrasing is a little clunky. Combining the verbs 'kopiëren', 'downloaden', and 'afdrukken' in a single sentence can be streamlined.",
-          "suggestion": "Beperking voor het kopiëren, downloaden en afdrukken van bestanden geactiveerd."
+          "type": "spelling",
+          "description": "While 'kopiëren' is understood, the more formal/correct spelling is 'kopieëren'.",
+          "suggestion": "Beperking voor het kopieëren van de inhoud, downloaden en afdrukken van bestanden geactiveerd."
         }
       ],
       "approved_at": null
@@ -299,13 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is too literal. A more natural Polish translation would be 'kopiowania zawartości'. While 'kopiowania' is correct, the direct translation of 'file content' feels clunky.",
-          "suggestion": "kopiowania zawartości plików"
+          "description": "The English phrase 'File content copy' is quite broad. The Polish translation 'Ograniczenia kopiowania zawartości plików' is accurate but could be slightly more precise. A more specific rendering might be 'Ograniczenia kopiowania zawartości plików' or 'Zakaz kopiowania zawartości plików' depending on the intended level of restriction.",
+          "suggestion": "Consider 'Zakaz kopiowania zawartości plików' or 'Ograniczenia kopiowania zawartości plików' depending on the nuance required."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the sentence could be improved for flow. The repetition of 'plików' makes it slightly awkward.",
-          "suggestion": "Ograniczenia kopiowania zawartości plików, pobierania i drukowania są włączone."
+          "description": "While grammatically correct, the Polish translation could benefit from a slightly improved flow. Joining the three restrictions with coordinating conjunctions might enhance readability.",
+          "suggestion": "Consider rewording to 'Ograniczenia kopiowania, pobierania i drukowania plików są włączone.'"
         }
       ],
       "approved_at": null
@@ -316,13 +265,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is a bit vague. A more accurate translation might be 'Cópia do conteúdo do arquivo'.",
+          "description": "The English phrase 'File content copy' is better translated as 'Cópia do conteúdo do arquivo' rather than 'Cópia de conteúdo de arquivo'. The preposition 'do' is more appropriate in this context.",
           "suggestion": "Cópia do conteúdo do arquivo"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'restrição' is correct, but 'habilitada' can be improved. A more natural phrasing would be 'ativa'.",
-          "suggestion": "ativa"
+          "description": "While 'restrição de impressão habilitada' is understandable, a more natural and concise translation for 'printing restriction activated' would be 'impressão restrita' or 'impressão bloqueada'.",
+          "suggestion": "impressão restrita"
         }
       ],
       "approved_at": null
@@ -339,13 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"restriction activated\" is not accurately conveyed by \"sunt activate.\" \"Restriction activated\" implies a setting or a rule being enforced, whereas \"sunt activate\" suggests the actions themselves are active. A more accurate translation would involve expressing the enforcement of restrictions.",
-          "suggestion": "Restricțiile privind copierea, descărcarea și imprimarea fișierelor sunt activate."
-        },
-        {
-          "type": "formatting",
-          "description": "The Romanian translation uses a comma instead of a semicolon. Romanian typically uses semicolons to separate clauses in a longer sentence, especially in a formal context like this.",
-          "suggestion": "Copierea conținutului, descărcarea fișierelor și imprimarea sunt activate."
+          "description": "The English phrase 'File content copy, file downloading and printing restriction activated' implies a setting or feature being turned on. The Romanian translation 'Copierea conținutului, încărcarea fișierelor și imprimarea sunt activate' translates to 'Content copying, file uploading and printing are activated,' which is a statement of actions, not a restriction being turned on. It's not a precise translation.",
+          "suggestion": "A more accurate translation would be something like 'Restricționarea copierii conținutului, descărcării fișierelor și imprimării este activată.' or 'Copierea, descărcarea și imprimarea fișierelor sunt restricționate/interzise.'"
         }
       ],
       "approved_at": null
@@ -356,13 +300,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English 'File content copy' is slightly better translated as 'Копирование содержимого файла' instead of just 'Копирование'. While understandable, the current phrasing is less precise.",
-          "suggestion": "Активировано ограничение на копирование содержимого файла, загрузку и печать файлов."
+          "description": "The English phrase \"File content copy\" is not accurately represented by the Russian \"копирование содержимого файла\". While technically correct, a more natural and concise translation would be \"копирование файлов\" or \"копирование контента\".",
+          "suggestion": "копирование файлов"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'загрузку и печать файлов' is grammatically correct, it could be slightly more fluent to use a slightly different construction.  Consider combining the actions with a conjunction.",
-          "suggestion": "Активировано ограничение на копирование содержимого файла, загрузку и печать."
+          "type": "formatting",
+          "description": "While technically grammatically correct, the sentence structure could be improved for better flow. The list of restricted actions feels slightly disjointed.",
+          "suggestion": "Активировано ограничение на копирование файлов, загрузку и печать."
         }
       ],
       "approved_at": null
@@ -373,18 +317,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is not accurately translated. 'ප්‍රතිලේඛන අන්තර්ගත' is a bit convoluted and might not be the best way to convey 'File content copy'. A simpler and more understandable translation would be preferable.",
-          "suggestion": "Consider translating 'File content copy' as 'ගොනුවේ ඇති දත්ත පිටපත් කිරීම' or a similar phrasing that is more direct and easier to understand."
+          "description": "The English phrase \"File content copy\" is not accurately reflected in the Sinhala translation \"ප්‍රතිලේඛන අන්තර්ගත පිටපත් කිරීම\". A more accurate translation might be \"ගොනුවේ අන්තර්ගත පිටපත් කිරීම\" or \"ලේඛන අන්තර්ගත පිටපත් කිරීම\".",
+          "suggestion": "ගොනුවේ අන්තර්ගත පිටපත් කිරීම"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'file downloading' is translated as 'ගොනු බාගත කිරීම'. While technically correct, it could be improved for better flow. A more natural phrasing might be 'ගොනු බාගැනීම'.",
-          "suggestion": "Consider translating 'file downloading' as 'ගොනු බාගැනීම'."
+          "description": "The phrase \"file downloading\" is translated as \"ගොනු බාගත කිරීම\". While correct, a more precise and natural wording might be something like \"ලේඛන බාගත කිරීම\" for consistency and clarity since \"file\" is referred to as \"ලේඛන\" earlier.",
+          "suggestion": "ලේඛන බාගත කිරීම"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'මුද්‍රණ සීමාව' is correct for 'printing restriction', the overall sentence structure feels slightly awkward.  The entire sentence should flow better.",
-          "suggestion": "Consider restructuring the sentence to read more naturally in Sinhala, possibly integrating the individual restriction components into a more cohesive statement."
+          "description": "While \"මුද්‍රණ සීමාව සක්‍රිය කර ඇත\" is grammatically correct for \"printing restriction activated\", a more natural phrasing might be \"මුද්‍රණ සීමාව ක්‍රියාත්මක කර ඇත\" or \"මුද්‍රණ සීමාව ක්‍රියාත්මකව පවතී\".",
+          "suggestion": "මුද්‍රණ සීමාව ක්‍රියාත්මක කර ඇත"
         }
       ],
       "approved_at": null
@@ -392,7 +336,18 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"File content copy\" is somewhat ambiguous. While \"kopírovania obsahu súborov\" is a literal translation, it might be better to use a more common Slovak equivalent for 'copying files'.",
+          "suggestion": "Bolo aktivované obmedzenie kopírovania, sťahovania a tlače súborov."
+        },
+        {
+          "type": "formatting",
+          "description": "The Slovak translation uses a somewhat lengthy sentence. Consider breaking it down for better readability, especially within a user interface.",
+          "suggestion": "Aktivované sú obmedzenia: kopírovanie, sťahovanie a tlač súborov."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -401,13 +356,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'File content copy' is translated as 'omejitev kopiranja vsebine datoteke'. While technically correct, it's a bit verbose. A more natural and concise translation might be 'omejitev kopiranja datoteke'.",
-          "suggestion": "omejitev kopiranja datoteke"
+          "description": "The translation 'Aktivirana je omejitev kopiranja vsebine datoteke, prenosa datoteke in tiskanja' is a bit literal and could be more natural. 'File content copy' is directly translated, but a more idiomatic Slovenian phrasing would improve readability.",
+          "suggestion": "Aktivirana je omejitev kopiranja, prenosa in tiskanja datotek."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'file downloading' is translated as 'prenosa datoteke'. While accurate, a slightly more natural phrasing could be 'prenašanja datoteke'.",
-          "suggestion": "prenašanja datoteke"
+          "type": "formatting",
+          "description": "The translation uses a slightly awkward list structure. The phrase 'kopiranja vsebine datoteke, prenosa datoteke in tiskanja' could be improved by using parallel structures.",
+          "suggestion": "Aktivirana je omejitev za kopiranje, prenos in tiskanje datotek."
         }
       ],
       "approved_at": null
@@ -417,9 +372,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "formatting",
+          "description": "The translation uses a long sentence structure which might be difficult to read. Consider breaking it into two sentences.",
+          "suggestion": "Рестрикција копирања садржаја фајла је активирана. Преузимање и штампање су такође ограничена."
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The word 'рестрикција' (restrikcija) is a direct transliteration of 'restriction' and while understandable, it's not the most natural phrasing in Serbian. A more fluent translation would use a Serbian equivalent for 'restriction' such as 'ограничење' (ogranicenje).",
-          "suggestion": "Рестрикција → Ограничење"
+          "description": "While 'Рестрикција' is a valid translation for 'Restriction', it can sound overly formal in this context. A more natural and common term might be preferred.",
+          "suggestion": "Ограничења копирања садржаја фајла, преузимања и штампања је активирана."
         }
       ],
       "approved_at": null
@@ -430,8 +390,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation uses a comma (,) to separate the activities. While grammatically correct, in some contexts, a conjunction like 'i' (and) might flow better and is more common in similar UI contexts. Consider adjusting for consistency with other similar UI elements.",
-          "suggestion": "Restrikcija kopiranja sadržaja fajla, preuzimanja i štampanja je aktivirana. -> Restrikcija kopiranja sadržaja fajla, preuzimanja i štampanja je aktivirana."
+          "description": "The translation uses a passive voice ('is activated'). While grammatically correct, the English original uses a more direct phrasing. Consider a more active voice for consistency.",
+          "suggestion": "Restrikcije kopiranja sadržaja fajla, preuzimanja i štampanja su aktivirane."
         }
       ],
       "approved_at": null
@@ -448,18 +408,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'File content copy' is somewhat awkward. A more natural Ukrainian equivalent would be 'копіювання файлів' or 'копіювання вмісту файлів'. While 'копіювання вмісту файлів' is more precise, 'копіювання файлів' is more common in similar contexts.",
-          "suggestion": "Активовано обмеження на копіювання файлів, завантаження файлів і друк."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'file downloading' could be more accurately translated as 'завантаження файлів' instead of simply 'завантаження'. The addition of 'файлів' improves clarity.",
-          "suggestion": "Активовано обмеження на копіювання файлів, завантаження файлів і друк."
+          "description": "The English phrase \"File content copy\" is somewhat vague. A more precise translation of 'content copy' would be 'вмісту файлів' (content of files), which is present, but the overall flow could be improved.",
+          "suggestion": "Активовано обмеження на копіювання, завантаження та друк файлів."
         },
         {
           "type": "formatting",
-          "description": "While grammatically correct, the sentence is a bit long and potentially confusing.  Breaking it down could improve readability.",
-          "suggestion": "Активовано обмеження на копіювання вмісту файлів. Заборонено завантаження та друк файлів."
+          "description": "The list elements 'copy', 'download', and 'print' are separated by 'та' instead of a comma and 'та'. While grammatically correct, using a comma and 'та' for the last item would improve readability and consistency with typical Ukrainian sentence structure. It makes the sentence sound a little clunky.",
+          "suggestion": "Активовано обмеження на копіювання вмісту файлів, завантаження файлів, та друк."
         }
       ],
       "approved_at": null
@@ -470,23 +425,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"File content copy\" is not accurately translated. \"Sao chép nội dung tập tin\" is too literal and could be improved for natural flow in Vietnamese. A more natural phrasing would be something like \"Sao chép nội dung file\" or \"Sao chép nội dung\".",
-          "suggestion": "Sao chép nội dung file"
+          "description": "The phrase 'File content copy' is not accurately translated. 'Sao chép nội dung tập tin' is overly literal. A more natural translation would be 'Sao chép nội dung tệp' or simply 'Sao chép nội dung'.",
+          "suggestion": "Sao chép nội dung tệp"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"file downloading\" could be more concisely translated. \"Tải tập tin xuống\" is a bit verbose.",
-          "suggestion": "Tải file"
+          "description": "The phrase 'file downloading' is not accurately translated.  'Tải tập tin xuống' is a bit verbose.  A simpler and more common translation would be 'Tải tệp'.",
+          "suggestion": "Tải tệp"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"file printing\" could be more concisely translated. \"In tập tin\" is a bit verbose.",
-          "suggestion": "In file"
+          "description": "The term 'printing' is not accurately translated. 'In tập tin' is too literal. A more natural phrasing would be 'in'.",
+          "suggestion": "in"
         },
         {
           "type": "formatting",
-          "description": "The sentence structure and punctuation could be improved for better readability. The current translation sounds slightly disjointed.",
-          "suggestion": "Đã kích hoạt hạn chế sao chép nội dung file, tải file và in file."
+          "description": "The translation is a run-on sentence. It should be split for better readability.",
+          "suggestion": "Đã kích hoạt hạn chế sao chép nội dung tệp, tải tệp và in."
         }
       ],
       "approved_at": null

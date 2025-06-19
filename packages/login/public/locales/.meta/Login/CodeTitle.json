@@ -3,7 +3,7 @@
   "content": "The code was emailed to you",
   "content_en_sha1_hash": "188f994bd4348660806230ada1056d015f5263bf",
   "created_at": "2025-05-19T21:30:57.235Z",
-  "updated_at": "2025-05-19T21:30:57.235Z",
+  "updated_at": "2025-05-24T15:07:13.279Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -26,7 +26,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kod e-poçt vasitəsilə göndərilmişdir' is a literal translation that sounds unnatural in Azerbaijani. A more natural phrasing would be 'Sizə kod e-poçt vasitəsilə göndərilib' or 'Kod sizə e-poçt vasitəsilə göndərildi'.",
+          "suggestion": "Sizə kod e-poçt vasitəsilə göndərilib"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -50,7 +56,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ο κωδικός σας εστάλη με email' is a literal translation that doesn't quite capture the natural flow of the English phrase 'The code was emailed to you'. A more natural Greek equivalent would be 'Σας εστάλη κωδικός με email' or 'Ο κωδικός σας αποστάλη με email'.",
+          "suggestion": "Σας εστάλη κωδικός με email"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -74,7 +86,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Կոդն էլ․փոստով ուղարկվել է ձեզ\" is not the most natural or idiomatic translation of \"The code was emailed to you.\" While technically correct, it sounds slightly stilted. A more natural phrasing would be something along the lines of \"Ձեզ էլ․փոստով ուղարկվել է ծրագիրը\" or \"Ծրագիրը ուղարկվել է ձեզ էլ․փոստով\".",
+          "suggestion": "Ձեզ էլ․փոստով ուղարկվել է ծրագիրը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -86,7 +104,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation 'コードを送りました' literally translates to 'I sent the code'. While understandable, it doesn't directly convey the passive voice of the English 'The code was emailed to you.' A more accurate and natural-sounding translation would be something like 'コードはメールで送られました' (kodo wa meeru de okuraremashita) which means 'The code was sent by email'.",
+          "suggestion": "コードはメールで送られました"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -116,13 +140,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kod został wysłany' is a literal translation of 'The code was sent.' While understandable, a more natural and contextually accurate translation of 'The code was emailed to you' would be something like 'Kod został wysłany na Twoją skrzynkę e-mail' or 'Kod został wysłany na adres e-mail.'",
+          "suggestion": "Kod został wysłany na Twoją skrzynkę e-mail"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Enviamos um email com o código para si' is a literal translation but doesn't quite convey the natural phrasing in Portuguese. While technically correct, it sounds slightly formal and less conversational.",
+          "suggestion": "Consider a more natural phrasing like 'O código foi enviado para o seu email' or 'Receba o código no seu email'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -146,13 +182,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'වි-තැපෑලෙන් කේතය එවා ඇත' is a literal translation but sounds awkward and unnatural. A more natural phrasing would be needed.",
+          "suggestion": "Consider a more natural phrasing like 'ඔබේ විද්‍යුත් තැපෑලට කේතය යවා ඇත' (Obei vidyut thapealaata keyataya yava athetha) or 'කේතය ඔබගේ විද්‍යුත් තැපෑලට යවා ඇත' (Keyata obage vidyut thapealaata yava athetha)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the Slovak translation is understandable, it's a bit literal. A more natural phrasing would convey the same meaning with better flow.",
+          "suggestion": "Kód ste dostali na e-mail."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -164,13 +212,35 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Код вам је послат емаил-ом\" is not an accurate translation of \"The code was emailed to you.\"  The use of \"емаил-ом\" is awkward and doesn't accurately convey the meaning. It literally translates to 'email-by'.",
+          "suggestion": "Код вам је послат путем е-поште"
+        },
+        {
+          "type": "grammar",
+          "description": "While understandable, 'Код вам је послат путем е-поште' is more formal. A slightly more natural phrasing could be considered.",
+          "suggestion": "Код је послат на вашу е-маил адресу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Kod vam je poslat email-om\" is not an accurate translation of \"The code was emailed to you.\" It literally translates to 'The code was sent via email.' A more accurate translation would convey that the code was sent *in* an email.",
+          "suggestion": "Kod je poslat na vaš email."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"poslat email-om\" is somewhat awkward in Serbian. While understandable, it's not the most natural way to express sending something via email.",
+          "suggestion": "poslat na vaš email"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -194,7 +264,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"代码已通过电子邮件发送给您的\" is a literal translation and sounds unnatural in Chinese. It doesn't convey the intended meaning as naturally as other options.",
+          "suggestion": "A more natural translation would be something like \"我们已将验证码发送至您的邮箱\" or \"验证码已发送到您的邮箱\"."
+        }
+      ],
       "approved_at": null
     }
   }

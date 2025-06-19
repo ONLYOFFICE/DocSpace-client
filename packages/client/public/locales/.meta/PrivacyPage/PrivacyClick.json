@@ -3,7 +3,7 @@
   "content": "Click Open <1>{{organizationName}} Desktop</1> in the browser dialog to work with the encrypted documents.",
   "content_en_sha1_hash": "298ae4c705879cda5990adf8297f7850d3bb68c8",
   "created_at": "2025-05-19T21:30:53.424Z",
-  "updated_at": "2025-05-21T05:52:03.733Z",
+  "updated_at": "2025-05-24T06:21:20.647Z",
   "comment": {
     "text": "This translation key is used for a button label that displays instructions on how to open an encrypted document from the browser dialog. It appears in the Private Rooms Page and should be translated to facilitate understanding of this feature.",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The opening and closing tags for `organizationName` are not correctly matched with the English content. The English uses `<1>{{organizationName}}</1>`, while the Arabic uses `<1>{{organizationName}}</1>`. The closing tag should be corrected to `</1>`.",
-          "suggestion": "انقر فوق فتح <1>{{organizationName}}</1> في مربع الحوار المتصفح للعمل مع المستندات المشفرة."
+          "description": "The `<1>{{organizationName}}</1>` tags are not properly closed in the Arabic translation. They should be `<1>{{organizationName}}</1>.",
+          "suggestion": "Correct the closing tag to `<1>{{organizationName}}</1>."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Click Open' is literally translated as 'انقر فوق فتح'. A more natural and accurate translation would be 'افتح' (Iftah) or 'انقر لفتح' (Unqur Lifath).",
+          "suggestion": "Consider translating 'Click Open' as 'افتح' or 'انقر لفتح'."
         }
       ],
       "approved_at": null
@@ -42,13 +47,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Click Open\" is not accurately translated. \"Click Open\" implies an action to initiate something, which is not conveyed in the Azerbaijani translation of just \"düyməsini klikləyin\". A better translation would include an action word like 'Açmaq' (to open).",
-          "suggestion": "Şifrələnmiş sənədlərlə işləmək üçün brauzer dialoqunda <1> {{organizationName}} Desktop </1> -ı açın düyməsini klikləyin."
+          "description": "The translation of 'Click Open' is not accurate. 'Click Open' should be translated more naturally into Azerbaijani. A direct translation isn't ideal here.",
+          "suggestion": "Try something like 'Açmaq üçün' or 'Открыть для'."
         },
         {
           "type": "formatting",
-          "description": "The Azerbaijani translation doesn't maintain the formatting of the English content.  The opening and closing `<1>` tags should remain consistent.",
-          "suggestion": "Ensure the tags `<1>` and `</1>` enclose the entire '{{organizationName}} Desktop' phrase identically to the English version."
+          "description": "The angle brackets `<1>` and `</1>` are present in the Azerbaijani translation, mirroring the English. While technically correct, it's stylistically awkward in Azerbaijani.  They are best omitted.",
+          "suggestion": "Remove the angle brackets. The text should read: 'Şifrələnmiş sənədlərlə işləmək üçün brauzer dialoqunda {{organizationName}} Desktop düyməsini klikləyin'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'düyməsini' is technically correct, but could be smoother. While 'button' is what is implied, the phrase could be more natural.",
+          "suggestion": "Consider using a slightly more conversational phrasing that implies clicking a selection/option rather than directly translating 'button'."
         }
       ],
       "approved_at": null
@@ -56,25 +66,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'работиш' (rabotish - you work) implies direct action by the user. A more appropriate verb would be 'можеш да работиш' (mozes da rabotish - you can work) or 'за да използваш' (za da izpolzvash - in order to use), as the action is enabled by opening the Desktop application.",
-          "suggestion": "Натисни Отвори <1>{{organizationName}} Desktop</1> в диалога на браузъра, за да можеш да работиш с криптирани документи."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The tags <1>{{organizationName}}</1> are not correctly closed in the Czech translation. It should be </1>.",
-          "suggestion": "Klikněte na Otevřít <1>{{organizationName}}</1> v dialogovém okně prohlížeče a pracujte se zašifrovanými dokumenty."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -83,18 +81,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Click Open <1>{{organizationName}} Desktop</1>\" is translated as \"Klicken Sie auf <1>{{organizationName}} Desktop Editoren</1>\". 'Editoren' (Editors) doesn't accurately convey the meaning of 'Desktop' in this context. It implies a team of editors, not the desktop application itself.",
-          "suggestion": "Klicken Sie auf <1>{{organizationName}} Desktop</1> öffnen in der Dialogbox..."
+          "description": "The phrase \"Click Open\" is not accurately translated. \"Klicken Sie auf\" implies clicking *on* something, but the original implies opening something *via* a click. The verb choice is inaccurate.",
+          "suggestion": "Consider a phrase like \"Öffnen Sie\" or \"Klicken Sie zum Öffnen\" to better convey the original meaning."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure \"Klicken Sie auf <1>{{organizationName}} Desktop Editoren</1> öffnen in der Dialogbox...\" is grammatically awkward. The verb 'öffnen' is awkwardly positioned.",
-          "suggestion": "Klicken Sie in der Dialogbox auf <1>{{organizationName}} Desktop</1> zum Öffnen..."
+          "type": "incorrect_translation",
+          "description": "The term \"Desktop Editoren\" doesn't quite align with \"Desktop\". It suggests editors rather than the desktop application itself.",
+          "suggestion": "Use \"Desktop\" or a more accurate term for the desktop application, like \"Desktop-Anwendung\"."
         },
         {
           "type": "formatting",
-          "description": "While the XML tags are preserved, the flow of the sentence could be improved by reordering elements to better suit German sentence structure.",
-          "suggestion": "Consider restructuring the sentence to improve readability. For example: 'Klicken Sie in der Dialogbox auf <1>{{organizationName}} Desktop</1>, um mit verschlüsselten Dokumenten zu arbeiten.'"
+          "description": "The formatting with the <1> tags is inconsistent with the English. The German translation puts 'Editoren' inside the tag, whereas the original has 'organizationName' inside.",
+          "suggestion": "Ensure the tags contain the correct placeholders to maintain consistency with the original."
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure is awkward. \"Klicken Sie auf... Editoren öffnen in der Dialogbox\" reads unnaturally.",
+          "suggestion": "Rephrase the sentence for better flow and readability, e.g., \"Klicken Sie in der Dialogbox auf, um die {{organizationName}} Desktop-Anwendung zu öffnen, um mit verschlüsselten Dokumenten zu arbeiten.\" "
         }
       ],
       "approved_at": null
@@ -105,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The `<1>{{organizationName}}</1>` tags are not properly closed in the Greek translation. They are closed with `</1>` instead of `</1>`. This should match the English formatting.",
-          "suggestion": "Κάντε κλικ στην επιλογή Άνοιγμα <1>{{organizationName}}</1> στο παράθυρο διαλόγου του προγράμματος περιήγησης για να εργαστείτε με τα κρυπτογραφημένα έγγραφα."
+          "description": "The Greek translation retains the `<1>{{organizationName}}</1>` tags, which should be handled consistently with the English version. While not technically incorrect, it's best practice to remove or adapt these tags to match the target language's conventions for presentation.",
+          "suggestion": "Remove or adapt the `<1>{{organizationName}}</1>` tags according to Greek localization conventions.  Consider if the tags are necessary for proper rendering or if the variable should be directly incorporated."
         }
       ],
       "approved_at": null
@@ -117,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Click Open' is not accurately translated. 'Haga clic en Abrir' is a literal translation but sounds awkward in Spanish. A more natural phrasing would be 'Pulse Abrir' or 'Seleccione Abrir'.",
-          "suggestion": "Pulse Abrir"
+          "description": "The phrase \"Click Open\" is not accurately translated. A more natural Spanish translation would be \"Haga clic en Abrir\" or \"Pulse Abrir\". While \"Haga clic en Abrir\" isn't *wrong*, it's a bit clunky.",
+          "suggestion": "Haga clic en Abrir"
         }
       ],
       "approved_at": null
@@ -128,9 +131,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Click Open' is not accurately translated. 'Napsauta' is correct for 'Click', but 'Avaa' simply means 'Open'. A more natural Finnish translation for 'Open' in this context would be something like 'Käynnistä' (Launch) or 'Avaa...'.",
-          "suggestion": "Napsauta Käynnistä <1>{{organizationName}} Desktop</1>..."
+          "type": "formatting",
+          "description": "The tag <1>{{organizationName}} Desktop</1> is not consistently formatted in both the English and Finnish versions. In English, it's 'Click Open <1>{{organizationName}} Desktop</1>'. In Finnish, it's 'Avaa <1>{{organizationName}} Desktop</1>'. The 'Click Open' part is missing in the Finnish version.",
+          "suggestion": "Napsauta selainikkunassa Avaa <1>{{organizationName}} Desktop</1>, jotta voit käsitellä salattuja asiakirjoja."
         }
       ],
       "approved_at": null
@@ -141,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Click Open' is translated as 'Cliquez sur Ouvrir'. While technically correct, it's slightly awkward in French. A more natural translation would be 'Cliquez sur l'ouverture de...'",
-          "suggestion": "Cliquez sur l'ouverture de <1>{{organizationName}} Desktop</1>"
+          "description": "The phrase \"Click Open\" is not accurately translated. While \"Cliquez sur Ouvrir\" is literal, it sounds awkward in French. A more natural phrasing would be 'Cliquez sur le lancement de...'",
+          "suggestion": "Cliquez sur le lancement de <1>{{organizationName}} Desktop</1>"
         }
       ],
       "approved_at": null
@@ -153,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Desktop\" as \"Սեղան\" is too literal. \"Desktop\" in this context refers to a web-based desktop environment, not a physical table. A more accurate translation would be something along the lines of \"աշխատասեղանի միջավայր\" or \"աշխատանքային տարածք\".",
-          "suggestion": "Սեղմել՝բացել <1>{{organizationName}} աշխատասեղանի միջավայր</1> Զննիչի երկխոսության մեջ՝ գաղտնագրված փաստաթղթերի հետ աշխատելու համար:"
+          "description": "The translation of \"Desktop\" as \"Սեղան\" is too literal. \"Desktop\" in this context refers to a web application or online workspace, not a physical table. A more accurate translation would convey this meaning, such as \"աշխատանքային սենյակ\" (workplace) or a similar term appropriate for the application’s context.",
+          "suggestion": "Consider a translation like \"աշխատանքային սենյակ\" or a term more specific to the application’s function."
         },
         {
           "type": "formatting",
-          "description": "The Armenian text uses a space before the `<1>` tag, which might be a formatting issue depending on the rendering environment. It's best to have consistent spacing.",
-          "suggestion": "Remove the space before the `<1>` tag for consistency."
+          "description": "The `<1>{{organizationName}}</1>` tags are not rendered correctly in the Armenian translation.  The opening tag `<1>` is present, but the closing tag `</1>` appears to be incomplete or incorrectly formatted within the translated text.  This could cause rendering issues in the application.",
+          "suggestion": "Ensure the closing tag `</1>` is correctly formatted and complete, consistent with the English content."
         }
       ],
       "approved_at": null
@@ -167,7 +170,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Click Open\" is too literal. A more natural Italian translation would be \"Fai clic su Apri\" or \"Clicca su Apri\".",
+          "suggestion": "Clicca su Apri <1>{{organizationName}} Desktop</1> nel browser per lavorare con i documenti crittografati."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -176,8 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Click Open\" is awkwardly translated as \"開くをクリックします\". A more natural translation would be \"を開く\" or simply \"開く\".",
-          "suggestion": "暗号化されたドキュメントを操作するために、ブラウザのダイアログで<1>{{organizationName}} デスクトップ</1> を開くをクリックします。"
+          "description": "The phrase 'Click Open' is not accurately translated. '開くをクリックします' is too literal and awkward. A more natural translation would be something like 'デスクトップを開きます' or 'デスクトップを開く操作を行います'.",
+          "suggestion": "デスクトップを開きます"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses `<1>{{organizationName}} Desktop</1>`. The Japanese translation preserves the same structure, which is grammatically correct but might feel slightly unnatural in Japanese. Consider if simpler tagging is preferred.",
+          "suggestion": "While the current formatting preserves the structure, consider if simpler tagging or omitting the tags entirely would improve readability."
         }
       ],
       "approved_at": null
@@ -188,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets around '{{organizationName}} Desktop' are not consistently applied. The English content uses '<1>{{organizationName}} Desktop</1>', while the Korean translation uses a different format.",
-          "suggestion": "Maintain consistency in the angle bracket formatting. Use '<1>{{organizationName}} Desktop</1>' in the Korean translation."
+          "description": "The opening and closing tags for `{{organizationName}} Desktop` are inconsistent with the English version. The English version uses `<1>{{organizationName}} Desktop</1>` while the Korean uses `{{organizationName}} Desktop`.  This could cause display issues depending on how the tags are rendered.",
+          "suggestion": "Change the Korean translation to use `<1>{{organizationName}} Desktop</1>` to match the English version."
         }
       ],
       "approved_at": null
@@ -200,13 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation maintains the `<1>` and `</1>` tags from the English content. These tags should be removed or adapted to the Lao formatting conventions for similar markup if applicable, but are likely unnecessary in the final rendered text.",
-          "suggestion": "Remove the `<1>` and `</1>` tags from the Lao translation."
+          "description": "The opening tag <1> and closing tag </1> are not consistently applied in the Lao translation. The opening tag is present before \"ກົດເປີດ\", but the closing tag is missing.",
+          "suggestion": "Ensure consistent application of tags: ກົດເປີດ <1>{{organizationName}} Desktop</1> ໃນ ກ່ອງ ຂອງ browser ເພື່ອເຮັດວຽກກັບເອກະສານທີ່ຖືກເຂົ້າລະຫັດ."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'ກົດເປີດ' is a valid translation for 'Click Open', it might be more natural to use a phrase like 'ເລືອກເປີດ' or 'ບິດເປີດ' depending on the context and desired tone. 'ກົດເປີດ' feels slightly more literal and less idiomatic.",
-          "suggestion": "Consider using 'ເລືອກເປີດ' or 'ບິດເປີດ' instead of 'ກົດເປີດ'."
+          "description": "The phrase 'browser dialog' is translated as 'ກ່ອງ ຂອງ browser'. While understandable, a more accurate and natural translation would be something like 'ປ່ອງຢ້ຽงຂອງເວັບໄຊ້'.",
+          "suggestion": "Replace 'ກ່ອງ ຂອງ browser' with 'ປ່ອງຢ້ຽงຂອງເວັບໄຊ້' or 'ປ່ອງຢ້ຽงເວັບໄຊ້'."
         }
       ],
       "approved_at": null
@@ -214,7 +228,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>{{organizationName}}</1>` tag is not closed correctly in the Latvian translation. It should be `<1>{{organizationName}}</1>.",
+          "suggestion": "Change `Noklikšķiniet uz Atvērt <1>{{organizationName}}</1> pārlūkprogrammas lodziņā` to `Noklikšķiniet uz Atvērt <1>{{organizationName}}</1> pārlūkprogrammas lodziņā`"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -223,7 +243,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"browser dialog\" is translated as \"browservenster\". While technically correct, \"dialoogvenster\" would be a more natural and commonly used translation for \"dialog\" in this context.",
+          "description": "The word 'browser dialog' should be translated more accurately. 'Venster' implies a window, but 'dialog' specifically refers to a modal window. A more suitable translation would be 'dialoogvenster'.",
           "suggestion": "Klik Open <1>{{organizationName}} Desktop</1> in het dialoogvenster om met de versleutelde documenten te werken."
         }
       ],
@@ -241,8 +261,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Click Open' is not accurately translated. 'Click Open' implies a direct action. A more natural Portuguese translation would be 'Clique para abrir' or 'Abrir'.",
-          "suggestion": "Clique para abrir"
+          "description": "The English phrase 'Click Open' is awkwardly translated as 'Clique em Abrir'. It would be more natural to use a single verb expressing the action of opening.",
+          "suggestion": "Clique em Abrir o"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'browser dialog' translates better as 'janela do navegador' rather than 'caixa de diálogo do navegador'. 'Caixa de diálogo' is too literal and not the standard terminology.",
+          "suggestion": "janela do navegador"
         }
       ],
       "approved_at": null
@@ -250,7 +275,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags are preserved in the translation, which is generally undesirable. They should be removed unless they are specifically required for technical reasons.",
+          "suggestion": "Remove the `<1>` and `</1>` tags."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -258,14 +289,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ca să puteți lucra\" is overly verbose and sounds unnatural in Romanian. A more direct and natural translation of 'to work with' would be 'pentru a lucra cu'.",
-          "suggestion": "Faceți clic pe Deschidere <1>{{organizationName}} Desktop</1> din fereastra de dialog a browserului pentru a lucra cu documentele criptate."
+          "type": "formatting",
+          "description": "The `<1>{{organizationName}}</1>` tags are not correctly replicated in the Romanian translation. It should be `<1>{{organizationName}}</1>`.",
+          "suggestion": "Faceți clic pe Deschidere <1>{{organizationName}}</1> din fereastra de dialog a browserului ca să puteți lucra cu documentele criptate."
         },
         {
           "type": "incorrect_translation",
-          "description": "While \"Faceți clic\" is grammatically correct, a more natural and common phrase for 'Click' in this context would be 'Dați clic'.",
-          "suggestion": "Dați clic pe Deschidere <1>{{organizationName}} Desktop</1> din fereastra de dialog a browserului pentru a lucra cu documentele criptate."
+          "description": "“Ca să puteți” is a bit verbose and less natural. A more direct translation of 'to' would be better.",
+          "suggestion": "Faceți clic pe Deschidere <1>{{organizationName}}</1> din fereastra de dialog a browserului pentru a lucra cu documentele criptate."
         }
       ],
       "approved_at": null
@@ -276,13 +307,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"Editors\" in the Russian translation (\"Editors\") doesn't perfectly align with \"Desktop\" in the English version. While \"Editors\" is understandable, it implies a focus on editing rather than the application itself. A more accurate translation might be something like \"Рабочий стол\" (Rabochiy stol) or \"Приложение\" (Prilozhenie) depending on the context.",
-          "suggestion": "Consider replacing \"Editors\" with \"Рабочий стол\" or \"Приложение\" for a more accurate representation of \"Desktop\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses \"<1>{{organizationName}} Desktop</1>\". The Russian translation follows the same formatting, but its appropriateness might be questionable. The Russian language often uses different formatting conventions.  The use of <1> tags isn’t standard in Russian technical documentation and can hinder readability.",
-          "suggestion": "Consider removing the `<1>` tags in the Russian translation and integrating the organization name more naturally into the sentence. For example:  \"Нажмите Открыть {{organizationName}} Рабочий стол в диалоговом окне браузера...\" or \"Нажмите Открыть приложение {{organizationName}} в диалоговом окне браузера...\""
+          "description": "The term 'Desktop' is translated as 'Editors'. While not entirely wrong, 'Desktop' refers to the application itself, not the tools within it. A more accurate translation would reflect this.",
+          "suggestion": "Нажмите Открыть <1>{{organizationName}} Desktop</1> в диалоговом окне браузера для работы с зашифрованными документами."
         }
       ],
       "approved_at": null
@@ -293,13 +319,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation retains the HTML tags `<1>{{organizationName}} Desktop</1>` which is unnecessary in the target language and disrupts readability. These tags should be removed and the text should be incorporated naturally into the sentence.",
-          "suggestion": "බ්‍රවුසර සංවාදයේ {{organizationName}} Desktop ක්ලික් කරන්න, එන්ක්‍රිප්ට් කරන ලද ලේඛන සමඟ වැඩ කිරීම සඳහා."
+          "description": "The Sinhala translation retains the `<1>{{organizationName}} Desktop</1>` tags, which are not standard in Sinhala text and should be removed or adapted for clarity. The tags are visually disruptive.",
+          "suggestion": "Remove the HTML tags and consider rephrasing to incorporate the organization name naturally within the sentence. For example: “බ්‍රවුසර සංවාදයේ {{organizationName}} Desktop”"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'Desktop' is not explicitly translated in the Sinhala version. While not always necessary, depending on the context, translating it might improve clarity for Sinhala speakers. A possible translation would be 'ලේඛන තිරය' (lekahana thiraya - document screen).",
-          "suggestion": "බ්‍රවුසර සංවාදයේ {{organizationName}} Desktop (ලේඛන තිරය) ක්ලික් කරන්න, එන්ක්‍රිප්ට් කරන ලද ලේඛන සමඟ වැඩ කිරීම සඳහා."
+          "description": "The phrase ' ක්ලික් කරන්න' (click) is repetitive and slightly unnatural in this context.  The imperative 'click' is unnecessary, especially after 'විවෘත කරන්න' (open).",
+          "suggestion": "Remove ' ක්ලික් කරන්න' and let 'විවෘත කරන්න' stand alone. The sentence would become: “බ්‍රවුසර සංවාදයේ <1>{{organizationName}} Desktop</1> විවෘත කරන්න, එන්ක්‍රිප්ට් කරන ලද ලේඛන සමඟ වැඩ කිරීම සඳහා.”"
         }
       ],
       "approved_at": null
@@ -309,9 +335,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Click Open' is translated as 'Ak chcete pracovať'. While not strictly incorrect, it loses the imperative nature of the original. A more direct translation of 'Click Open' would be 'Kliknite na Otvoriť'.",
+          "suggestion": "Kliknite na Otvoriť"
+        },
+        {
           "type": "formatting",
-          "description": "The original English content uses angle brackets around `{{organizationName}} Desktop`. The Slovak translation maintains the angle brackets around only 'položku', not around the entire phrase '{{organizationName}} Desktop'.",
-          "suggestion": "Ak chcete pracovať so šifrovanými dokumentmi, kliknite v dialógovom okne prehliadača na položku Otvoriť <1>{{organizationName}} Desktop</1>."
+          "description": "The original text uses `<1>{{organizationName}} Desktop</1>`. The Slovak translation uses `<1>{{organizationName}} Desktop</1>`. The tag format is consistent. No change needed.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -322,8 +353,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'namizja' (desktop) is a genitive case. It should be in nominative case, 'namizje', to agree with 'odprtje'.",
-          "suggestion": "Klikni za odprtje <1>{{organizationName}} namizje</1> v pogovornem oknu brskalnika za delo s šifriranimi dokumenti."
+          "description": "The word 'namizja' (desktop) seems a bit awkward in this context. 'Delovno okolje' or 'Pisalniški prostor' might be more natural alternatives depending on the desired nuance.",
+          "suggestion": "Klikni za odprtje <1>{{organizationName}} delovnega okolja</1> v pogovornem oknu brskalnika za delo s šifriranimi dokumenti."
         }
       ],
       "approved_at": null
@@ -334,18 +365,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Click Open\" is not accurately translated to \"Кликните на Отвори\". \"Open\" implies a command, and a more accurate translation would be \"Отвори\" which translates to \"Open\" or \"Launch\".",
-          "suggestion": "Кликните на 'Отвори' or Кликните за да отворите"
+          "description": "The translation of \"Click Open\" is awkward. \"Click Open\" should be translated more naturally as 'Kliknite na Otvorite' or 'Otvorite'.",
+          "suggestion": "Klikните на Отворите"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English \"Desktop Editors\" is not the correct translation. \"Desktop\" typically refers to the entire desktop environment. It seems \"Desktop\" is being used to refer to an application.",
-          "suggestion": "Кликните на <1>{{organizationName}} Desktop</1>"
+          "description": "The translation of \"Desktop Editors\" is not quite right. \"Desktop\" should be translated as \"радну површину\". While \"Editors\" is accurate given the context, \"Desktop\" is the key element here.",
+          "suggestion": "Кликните на Отворите <1>{{organizationName}} Радну површину</1> у дијалогу прегледача да бисте радили са шифрованим документима."
         },
         {
           "type": "formatting",
-          "description": "The tags `<1>{{organizationName}} Desktop</1>` are not correctly rendered in the Serbian translation.",
-          "suggestion": "Ensure the tags are correctly implemented in the translation system, mirroring the English version precisely."
+          "description": "The `<1>` and `</1>` tags should be consistent and properly reflect the intended formatting. The Cyrillic translation appears to have maintained the tag structure, which is correct.",
+          "suggestion": "Ensure consistent use of tags if this is a placeholder for formatting that needs to be applied later."
         }
       ],
       "approved_at": null
@@ -356,13 +387,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Otvori' translates to 'Open', but should ideally be 'Pokreni' for 'Launch' or 'Start' when referring to a desktop application. 'Otvori' implies opening a file or document, not launching an application.",
-          "suggestion": "Pokrenite <1>{{organizationName}} Desktop</1> u dijalogu pregledača da biste radili sa šifrovanim dokumentima."
+          "description": "The Serbian translation of \"Click Open\" is not idiomatic. \"Kliknite na Otvori\" is grammatically correct but sounds a bit abrupt and doesn't convey the intended meaning as naturally.",
+          "suggestion": "Kliknite na 'Otvori <1>{{organizationName}} Desktop</1>"
         },
         {
           "type": "formatting",
-          "description": "The tags <1> and </1> are replicated in both the English and Serbian translations. It's crucial to ensure consistency. While not a severe error, maintaining this consistency is important for localization workflows.",
-          "suggestion": "Review and confirm that the tags <1> and </1> are intentionally mirrored and serve a specific purpose in the localization process. If not, they should be removed or adjusted in both versions."
+          "description": "The formatting tags <1> and </1> are preserved in the Serbian translation, which may not be desired. Consider whether these tags should be maintained or if the surrounding text should be adapted.",
+          "suggestion": "Assess whether the tags are necessary and adjust the translation accordingly. For example, if they are just delimiters, they may be unnecessary."
         }
       ],
       "approved_at": null
@@ -373,13 +404,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The opening tag `<1>{{organizationName}} Desktop</1>` in the English content is not consistently translated in the Turkish translation. While the closing tag `</1>` is present, the opening tag should also be consistent. The English uses 'Click Open', the Turkish uses 'Aç'.",
-          "suggestion": "Şifrelenmiş belgelerle çalışmak için tarayıcı iletişim kutusunda 'Click Open' <1>{{organizationName}} Desktop</1> tıklayın."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Click' is not explicitly translated. It is implied by the imperative verb, but directly translating it improves clarity.",
-          "suggestion": "Şifrelenmiş belgelerle çalışmak için tarayıcı iletişim kutusunda 'Tıklayın' <1>{{organizationName}} Desktop</1> açın."
+          "description": "The opening tag `<1>{{organizationName}} Desktop</1>` in the English source is mirrored in the Turkish translation but the closing tag's case is incorrect. It should be </1> to match the opening tag <1>.",
+          "suggestion": "Change </1> to </1>."
         }
       ],
       "approved_at": null
@@ -390,13 +416,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Click Open\" is awkward. \"Клацніть\" is correct for 'Click', but \"Відкрити\" doesn't quite capture the nuance of 'Open' in this context. It's technically correct but could be improved for a more natural flow.",
-          "suggestion": "Клацніть \"Відкрити <1>Робочий стіл {{organizationName}}</1>..."
+          "description": "The translation of \"Click Open\" is awkward. \"Клацніть Відкрити\" isn't natural Ukrainian. It should be more like \"Натисніть Відкрити\" or \"Відкрийте\".",
+          "suggestion": "Натисніть Відкрити <1>настільні редактори {{organizationName}}</1>"
         },
         {
           "type": "formatting",
-          "description": "The space after the opening quote mark in the Ukrainian translation is incorrect. It should be without a space.",
-          "suggestion": "Клацніть \"Відкрити<1>..."
+          "description": "The Ukrainian translation is missing the closing quotation mark for the 'Настільні редактори'.",
+          "suggestion": "Клацніть \"Відкрити <1>настільні редактори {{organizationName}}</1>\" у діалоговому вікні браузера для роботи з зашифрованими документами."
         }
       ],
       "approved_at": null
@@ -407,8 +433,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"cho Máy tính\" literally translates to \"for Computer\" which is not idiomatic in this context. It should convey the meaning of 'Desktop'.",
-          "suggestion": "Nhấp mở <1>{{organizationName}} Desktop</1> trong hộp thoại trình duyệt để làm việc với các tài liệu được mã hóa."
+          "description": "The translation of \"Desktop\" as \"Máy tính\" is too literal and doesn't convey the intended meaning of the desktop application. It implies a general computer rather than the specific application.",
+          "suggestion": "Nhấp mở Ứng dụng <1>{{organizationName}}</1> trong hộp thoại trình duyệt để làm việc với các tài liệu được mã hóa."
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets (<1> and </1>) are retained in the Vietnamese translation. While they might be necessary for some systems, they are unusual and disrupt the natural flow of the Vietnamese text.",
+          "suggestion": "Nhấp mở Ứng dụng <1>{{organizationName}}</1> trong hộp thoại trình duyệt để làm việc với các tài liệu được mã hóa."
         }
       ],
       "approved_at": null
@@ -419,13 +450,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The bracketed tags <1> and </1> are not properly rendered in the Chinese translation. They should mirror the English format.",
-          "suggestion": "在浏览器中点击打开<1>{{organizationName}}桌面版</1>以处理加密文档"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“Desktop版” while technically correct, might be too literal. A more natural phrasing for a desktop application could be used.  The implied meaning of 'work with' might be lost in translation.",
-          "suggestion": "在浏览器中点击打开<1>{{organizationName}}桌面应用</1>以处理加密文档"
+          "description": "The bracketed segment `<1>{{organizationName}}桌面版</1>` in the Chinese translation doesn't perfectly match the English `<1>{{organizationName}} Desktop</1>`. While \"桌面版\" conveys \"Desktop\", the literal bracketed structure is slightly different.",
+          "suggestion": "Consider aligning the bracket style more closely with the English original, perhaps using `<1>{{organizationName}}桌面</1>` or `<1>{{organizationName}} 桌面版</1>` to better mirror the source formatting."
         }
       ],
       "approved_at": null

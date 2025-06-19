@@ -3,7 +3,7 @@
   "content": "Add members",
   "content_en_sha1_hash": "b51503271b7dc41f3719bf2d1720a6d07f6d8ca6",
   "created_at": "2025-05-19T21:30:53.459Z",
-  "updated_at": "2025-05-28T09:30:02.227Z",
+  "updated_at": "2025-05-26T07:57:32.252Z",
   "comment": {
     "text": "Add \"Add members\" button is used to initiate adding new group members in a group edit or creation dialog. It appears as a clickable button next to an icon and is translated from \"PeopleTranslations:AddMembers\".",
     "is_auto": true,
@@ -150,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Adăugare membru\" translates to \"Adding member\" in English, which is singular. The English content 'Add members' refers to adding multiple members. A more accurate translation would be 'Adăugare membri'.",
+          "description": "The English phrase \"Add members\" refers to adding multiple members. The Romanian translation \"Adăugare membru\" translates to \"Adding a member,\" which is singular. It doesn't accurately reflect the plural nature of the original phrase.",
           "suggestion": "Adăugare membri"
         }
       ],

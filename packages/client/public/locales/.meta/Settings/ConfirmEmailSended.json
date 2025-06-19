@@ -3,7 +3,7 @@
   "content": "Confirmation e-mail has been sent to {{ownerName}}",
   "content_en_sha1_hash": "c8567fd0bac3cc5bbb926b90bc69044d2c9b723d",
   "created_at": "2025-05-19T21:30:50.965Z",
-  "updated_at": "2025-05-28T09:30:02.195Z",
+  "updated_at": "2025-05-26T07:57:32.223Z",
   "comment": {
     "text": "The translation key \"ConfirmEmailSended\" is used to display a success message after sending a confirmation email to an owner. It appears in a success notification dialogue, informing the user that a confirmation email has been sent to the selected owner. The message includes the owner's name for personalization.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Təsdiqləmə e-məktubu {{ownerName}} göndərilmişdir' is not the most natural way to express 'Confirmation e-mail has been sent to {{ownerName}}'. It literally translates to 'Confirmation e-mail {{ownerName}} has been sent'.",
+          "description": "The translation 'Təsdiqləmə e-məktubu {{ownerName}} göndərilmişdir' is not the most natural way to express 'Confirmation e-mail has been sent to {{ownerName}}'. It literally translates to 'Confirmation e-mail {{ownerName}} has been sent.' A more natural phrasing would be something like '{{ownerName}} ünvanına təsdiqləmə e-məktubu göndərilmişdir'.",
           "suggestion": "Təsdiqləmə e-məktubu {{ownerName}} ünvanına göndərilmişdir"
         },
         {
           "type": "formatting",
-          "description": "The placement of the variable {{ownerName}} is slightly awkward. It sounds more natural to incorporate it within the sentence flow.",
-          "suggestion": "Təsdiqləmə e-məktubu {{ownerName}}-ə göndərilmişdir"
+          "description": "The Azerbaijani translation uses a direct translation of 'to' (ünvanına) which is more formal. Depending on the context and tone of the application, a simpler preposition could be more appropriate, although 'ünvanına' is grammatically correct.",
+          "suggestion": "Consider a less formal preposition if appropriate for the tone. For example, '{{ownerName}} adlı hesabınıza təsdiqləmə e-məktubu göndərilmişdir'."
         }
       ],
       "approved_at": null
@@ -59,13 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Missing space after 'odeslán'. The Czech language typically requires a space after verbs like 'odeslán'.",
+          "description": "Missing space after \"odeslán\" before the variable {{ownerName}.",
           "suggestion": "Potvrzující e-mail byl odeslán {{ownerName}}"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Potvrzující e-mail' sounds slightly unnatural. A more common and natural phrasing would be 'Email pro potvrzení'.",
-          "suggestion": "Email pro potvrzení byl odeslán {{ownerName}}"
         }
       ],
       "approved_at": null
@@ -76,7 +71,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Bestätiguns' is misspelled. It should be 'Bestätigungs'.",
+          "description": "The word \"Bestätiguns\" is misspelled. It should be \"Bestätigungs\".",
           "suggestion": "Bestätigungs"
         }
       ],
@@ -88,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Το e-mail επιβεβαίωσης έχει σταλεί στον χρήστη {{ownerName}}' literally translates to 'The confirmation email has been sent to the user {{ownerName}}'. While technically correct, it's not the most natural or idiomatic way to express this in Greek. A more natural phrasing would be something like 'Έχει σταλεί email επιβεβαίωσης στον {{ownerName}}' or 'Το email επιβεβαίωσης έχει αποσταλεί στον {{ownerName}}'.",
-          "suggestion": "Έχει σταλεί email επιβεβαίωσης στον {{ownerName}}"
+          "description": "The phrase 'has been sent to {{ownerName}}' is translated as 'έχει σταλεί στον χρήστη {{ownerName}}'. While technically correct, it's overly literal.  'στον χρήστη' means 'to the user', which isn't necessary. A more natural Greek phrasing would imply the email was sent *for* the owner.",
+          "suggestion": "Το e-mail επιβεβαίωσης έχει σταλεί στον {{ownerName}}"
         }
       ],
       "approved_at": null
@@ -106,13 +101,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Confirmation e-mail' is not accurately translated. 'Vahvistusviesti' is closer to 'confirmation message' rather than 'confirmation email'.",
-          "suggestion": "Vahvistus sähköposti on lähetetty osoitteen {{ownerName}}"
+          "description": "The translation 'Vahvistusviesti on lähetetty osoitteen {{ownerName}}' is not a natural or accurate translation of 'Confirmation e-mail has been sent to {{ownerName}}'. The phrase 'osoitteen' (at/to address) doesn't fit the context.",
+          "suggestion": "Vahvistusviesti on lähetetty {{ownerName}}-osoitteeseen"
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow in Finnish. Using 'osoitteeseen' instead of 'osoitteen' would be more grammatically correct.",
-          "suggestion": "Vahvistusviesti on lähetetty osoitteeseen {{ownerName}}"
+          "type": "formatting",
+          "description": "The translation uses a slightly different placement of the variable {{ownerName}} compared to the English source.",
+          "suggestion": "While not strictly incorrect, maintaining the placement as 'Vahvistusviesti on lähetetty {{ownerName}}-osoitteeseen' is preferable for consistency."
         }
       ],
       "approved_at": null
@@ -135,8 +130,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Un messaggio e-mail di conferma è stato spedito a {{ownerName}}' is a bit too literal and formal. A more natural Italian phrasing would be 'È stata inviata un'e-mail di conferma a {{ownerName}}' or 'Abbiamo inviato un'e-mail di conferma a {{ownerName}}'.",
-          "suggestion": "Abbiamo inviato un'e-mail di conferma a {{ownerName}}"
+          "description": "The translation 'Un messaggio e-mail di conferma è stato spedito a {{ownerName}}' is a bit verbose and not the most natural way to say 'Confirmation e-mail has been sent to {{ownerName}}'. A more direct translation would be better.",
+          "suggestion": "Un'email di conferma è stata inviata a {{ownerName}}"
         }
       ],
       "approved_at": null
@@ -171,13 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Bevestiging e-mail is gestuurd naar {{ownerName}}' is a literal translation and sounds unnatural. 'Bevestiging' (confirmation) is not typically used in this context. A more natural phrasing would be 'Er is een bevestigingse-mail verstuurd naar...' or 'Een bevestigingsmail is verstuurd naar...'",
-          "suggestion": "Een bevestigingsmail is verstuurd naar {{ownerName}}"
+          "description": "The translation 'Bevestiging e-mail is gestuurd naar {{ownerName}}' is not the most natural Dutch phrasing. A more natural translation would be 'Een bevestigingsmail is verzonden naar {{ownerName}}' or 'Er is een bevestigingsmail verstuurd naar {{ownerName}}'.",
+          "suggestion": "Een bevestigingsmail is verzonden naar {{ownerName}}"
         },
         {
           "type": "grammar",
-          "description": "While understandable, the use of 'is gestuurd' can be improved. It's more common to use a verb tense that emphasizes the action of sending.",
-          "suggestion": "Een bevestigingsmail is verstuurd naar {{ownerName}}"
+          "description": "While technically correct, 'Bevestiging e-mail' sounds slightly awkward in Dutch. Using 'Een bevestigingsmail' (a confirmation email) flows better.",
+          "suggestion": "Een bevestigingsmail"
         }
       ],
       "approved_at": null
@@ -185,7 +180,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Wiadomość e-mail z potwierdzeniem została wysłana do {{ownerName}}' is a bit literal and could be more natural.  A more common phrasing would be something like 'Powiadomienie e-mail zostało wysłane do {{ownerName}}' or 'E-mail z potwierdzeniem został wysłany do {{ownerName}}'.",
+          "suggestion": "E-mail z potwierdzeniem został wysłany do {{ownerName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -206,8 +207,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Un mesaj pentru confirmarea adresei de email a fost trimis către {{ownerName}}\" is not an accurate translation of \"Confirmation e-mail has been sent to {{ownerName}}\". It's too verbose and uses awkward phrasing. A more natural translation would be something like \"Email de confirmare a fost trimis către {{ownerName}}\" or \"A fost trimis un email de confirmare către {{ownerName}}\".",
-          "suggestion": "Email de confirmare a fost trimis către {{ownerName}}"
+          "description": "The Romanian translation 'Un mesaj pentru confirmarea adresei de email a fost trimis către {{ownerName}}' is a literal translation and doesn't convey the intended meaning of 'Confirmation e-mail has been sent to {{ownerName}}'. It's too verbose and doesn't sound natural.",
+          "suggestion": "A more natural and accurate translation would be 'Email de confirmare a fost trimis către {{ownerName}}' or 'S-a trimis un email de confirmare către {{ownerName}}'."
         }
       ],
       "approved_at": null
@@ -224,13 +225,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"තහවුරු කිරීමේ වි-තැපෑල {{ownerName}} වෙත යවා ඇත\" is a literal translation that doesn't flow naturally in Sinhala. A more natural phrasing would be '{{ownerName}} වෙත තහවුරු කිරීමේ ලිපිය යවා ඇත' or 'තහවුරු කිරීමේ ලිපිය {{ownerName}} වෙත යවා ඇත'. The use of 'වි-තැපෑල' is not commonly used.",
-          "suggestion": "තහවුරු කිරීමේ ලිපිය {{ownerName}} වෙත යවා ඇත"
+          "description": "The translation 'තහවුරු කිරීමේ වි-තැපෑල {{ownerName}} වෙත යවා ඇත' is not the most natural or accurate translation of 'Confirmation e-mail has been sent to {{ownerName}}'. 'තහවුරු කිරීමේ වි-තැපෑල' (tahanuuru kirimē vi-tapaēla) translates to 'confirmation email,' but it sounds slightly awkward in Sinhala. A more natural phrasing would use a more common word for email.",
+          "suggestion": "තහවුරු කිරීමේ ලිපිය {{ownerName}} වෙත යවා ඇත (tahanuuru kirimē lipiya {{ownerName}} vēta yava athā) - This translates to 'Confirmation letter has been sent to {{ownerName}}' and is more idiomatic in Sinhala."
         },
         {
-          "type": "formatting",
-          "description": "While the variable `{{ownerName}}` is present, the formatting consistency with English should be considered. Ensure this variable is handled consistently across all translations.",
-          "suggestion": "Maintain the same variable format as the English version."
+          "type": "spelling",
+          "description": "While technically correct, 'වි-තැපෑල' (vi-tapaēla) might be better rendered as just 'තැපෑල' (tapaēla) to avoid an unnecessary prefix. This is stylistic and depends on desired formality.",
+          "suggestion": "තැපෑල (tapaēla) instead of වි-තැපෑල (vi-tapaēla)"
         }
       ],
       "approved_at": null
@@ -241,8 +242,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Potvrdzujúci mail bol odoslaný {{ownerName}}' is a literal translation that isn't the most natural or idiomatic way to express 'Confirmation e-mail has been sent to {{ownerName}}' in Slovak. A better translation would convey the meaning more clearly and sound more natural.",
-          "suggestion": "A more natural translation would be: 'Bol vám odoslaný potvrdenie na e-mail {{ownerName}}' or 'Potvrdenie bolo zaslané na e-mail {{ownerName}}'"
+          "description": "The translation 'Potvrdzujúci mail bol odoslaný' is not the most natural or accurate translation of 'Confirmation e-mail has been sent'. A more appropriate translation would be 'Potvrdenie bolo odoslané na tvoju e-mailovú adresu' or 'Potvrdenie bolo zaslané na tvoju e-mailovú adresu'.",
+          "suggestion": "Potvrdenie bolo odoslané na tvoju e-mailovú adresu"
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, 'Potvrdzujúci mail' is slightly awkward. 'Potvrdenie' is a more suitable noun in this context.",
+          "suggestion": "Potvrdenie"
         }
       ],
       "approved_at": null
@@ -259,13 +265,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Емаил конфирмације је послат {{ownerName}}' is a literal and awkward translation. A more natural and accurate translation would be 'Е-маил за потврду је послат {{ownerName}}' or 'Послата је е-маил за потврду на адресу {{ownerName}}'.",
-          "suggestion": "Е-маил за потврду је послат {{ownerName}}"
+          "description": "The translation 'Емаил конфирмације је послат {{ownerName}}' is not a natural or accurate translation of 'Confirmation e-mail has been sent to {{ownerName}}'. The phrasing is awkward and doesn't convey the intended meaning clearly.",
+          "suggestion": "A better translation would be something like 'Емаил за потврду је послат {{ownerName}}' or 'Потврда је послата на имејл {{ownerName}}'."
         },
         {
           "type": "spelling",
-          "description": "While 'Емаил' is sometimes used, the preferred and more common spelling in Serbian is 'Е-маил'.",
-          "suggestion": "Е-маил"
+          "description": "The word 'Емаил' is a transliteration and not a standard Serbian word. It should ideally be replaced with a more localized term.",
+          "suggestion": "Use 'Имејл' instead of 'Емаил'."
         }
       ],
       "approved_at": null
@@ -276,13 +282,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Email konfirmacije je poslat {{ownerName}}' is not the most natural or accurate translation of \"Confirmation e-mail has been sent to {{ownerName}}\".  'Konfirmacije' implies an email *of* confirmation, rather than a confirmation email.",
-          "suggestion": "Email za potvrdu je poslat {{ownerName}}"
+          "description": "The translation 'Email konfirmacije je poslat {{ownerName}}' is not a natural or accurate translation of 'Confirmation e-mail has been sent to {{ownerName}}'. A more natural translation would be something like 'Email za potvrdu je poslat {{ownerName}}' or 'Poslana je email potvrda za {{ownerName}}'.",
+          "suggestion": "Poslana je email potvrda za {{ownerName}}"
         },
         {
           "type": "grammar",
-          "description": "The verb 'poslat' is generally used in a more informal context. A more formal and widely accepted form would be 'poslat'.",
-          "suggestion": "Email za potvrdu je poslat {{ownerName}}"
+          "description": "The phrase 'Email konfirmacije je poslat' uses the dative case ('konfirmacije') when the genitive might be more appropriate depending on the intended meaning. Using 'potvrde' is arguably better, indicating that the email is *for* confirmation.",
+          "suggestion": "Email potvrde je poslat {{ownerName}}"
         }
       ],
       "approved_at": null
@@ -293,8 +299,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Onay e-postası şu kişiye gönderildi {{ownerName}}' is not a natural or accurate translation of 'Confirmation e-mail has been sent to {{ownerName}}'. A more natural translation would be something like 'Onay e-postası {{ownerName}} adresine gönderildi' or '{{ownerName}} adresine onay e-postası gönderildi'.",
-          "suggestion": "{{ownerName}} adresine onay e-postası gönderildi"
+          "description": "The translation 'Onay e-postası şu kişiye gönderildi {{ownerName}}' is not a natural or accurate translation of 'Confirmation e-mail has been sent to {{ownerName}}'. A better translation would reflect the passive voice and be more concise.",
+          "suggestion": "Onay e-postası {{ownerName}} adresine gönderildi."
         }
       ],
       "approved_at": null
@@ -305,8 +311,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Електронний лист-підтвердження надіслано {{ownerName}}' is a literal translation but sounds awkward in Ukrainian. A more natural phrasing would be 'Підтвердження надіслано на електронну пошту {{ownerName}}' or 'На {{ownerName}} надіслано лист-підтвердження'.",
-          "suggestion": "На {{ownerName}} надіслано лист-підтвердження"
+          "description": "The translation 'Електронний лист-підтвердження надіслано {{ownerName}}' is a bit literal and could be improved for natural flow in Ukrainian. A more common and natural phrasing would be something like 'Підтвердження надіслано на електронну пошту {{ownerName}}' or 'На {{ownerName}} надіслано електронний лист з підтвердженням'.",
+          "suggestion": "На {{ownerName}} надіслано електронний лист з підтвердженням."
         }
       ],
       "approved_at": null

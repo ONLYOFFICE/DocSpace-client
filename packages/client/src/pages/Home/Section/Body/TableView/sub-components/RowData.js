@@ -27,9 +27,8 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { IndexIconButtons } from "@docspace/shared/components/index-icon-buttons";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
@@ -97,29 +96,17 @@ const RowDataComponent = (props) => {
   );
 
   const indexComponentNode = (
-    <div
-      className="index-arrows-container"
+    <IndexIconButtons
+      containerClassName="index-arrows-container"
       style={
         lastColumn === "Name"
-          ? { display: "flex", justifyContent: "flex-end", flexGrow: "1" }
-          : { display: "flex" }
+          ? { justifyContent: "flex-end", flexGrow: "1" }
+          : {}
       }
-    >
-      <ColorTheme
-        themeId={ThemeId.IndexIconButton}
-        iconName={ArrowReactSvgUrl}
-        className="index-up-icon change-index_icon"
-        size="small"
-        onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
-      />
-      <ColorTheme
-        themeId={ThemeId.IndexIconButton}
-        iconName={ArrowReactSvgUrl}
-        className="index-down-icon change-index_icon"
-        size="small"
-        onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
-      />
-    </div>
+      commonIconClassName="change-index_icon"
+      onUpIndexClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
+      onDownIndexClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
+    />
   );
 
   const lastColumnContent = isIndexEditingMode

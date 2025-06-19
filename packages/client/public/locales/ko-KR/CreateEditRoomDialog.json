@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "활성화가 필요합니다",
   "AddStaticText": "정적 텍스트 추가",
   "AddWatermarkElements": "워터마크 요소 추가",
   "AddWatermarksToDocuments": "문서에 워터마크 추가",
@@ -33,7 +32,6 @@
   "StorageDescription": "방당 스토리지 할당량이 설정되었습니다. 이 값을 변경하거나 스토리지 제한을 비활성화할 수 있습니다.",
   "TagsPlaceholder": "태그 추가",
   "ThirdPartyStorageComboBoxPlaceholder": "스토리지 선택",
-  "ThirdPartyStorageDescription": "이 방의 데이터 스토리지로 제3자 서비스를 사용합니다. 연결된 스토리지에 이 방의 데이터를 저장할 새 폴더가 생성됩니다.",
   "ThirdPartyStorageNoStorageAlert": "그 전에 \"통합\" 섹션에서 해당 서비스를 연결해야 합니다. 그렇지 않으면 연결이 불가능합니다.",
   "ThirdPartyStoragePermanentSettingDescription": "파일은 \"{{thirdpartyFolderName}}\" 폴더의 제3자 {{thirdpartyTitle}} 스토리지에 저장됩니다.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "제3자 스토리지를 연결하려면 {{productName}} 설정의 통합 섹션에서 해당 서비스를 추가해야 합니다. 통합을 활성화하려면 {{productName}} 소유자 또는 관리자에게 문의하세요.",

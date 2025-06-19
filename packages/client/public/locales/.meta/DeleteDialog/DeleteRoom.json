@@ -3,7 +3,7 @@
   "content": "You are about to delete this room. You won’t be able to restore it.",
   "content_en_sha1_hash": "fb6b2c204a51ddbae7a442c879a15e19ca601321",
   "created_at": "2025-05-19T21:30:56.706Z",
-  "updated_at": "2025-06-18T07:34:14.877Z",
+  "updated_at": "2025-06-18T17:11:42.366Z",
   "comment": {
     "text": "This translation key is used to display a message before deleting a room, informing the user that they will not be able to restore the deletion. The message appears in a confirmation dialog when the user initiates the deletion process. Translators should provide a clear and concise equivalent for this message to ensure a smooth user experience in various languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 116,
+      "line_number": 118,
       "context": "selection.forEach((item) => {\n item.fileExst ? filesId.push(item.id) : foldersId.push(item.id);\n });\n };\n \n const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };",
       "module": "/packages/client"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'أنت على وشك حذف هذه الغرفة. لن تكون قادرًا على استعادته.' is a literal translation and doesn't convey the intended meaning as naturally in Arabic. The pronoun 'استعادته' refers back to 'الغرفة' (the room), but the sentence structure is a bit awkward.",
+          "suggestion": "أنت على وشك حذف هذه الغرفة ولن تتمكن من استعادتها."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Няма да можете да възстановите тези данни' translates to 'You won't be able to restore this data'. While related to the English meaning, it's not the direct equivalent of 'You won’t be able to restore it.' The original English refers to restoring the room itself, while the Bulgarian implies restoring data, which is a subtle but important difference.",
+          "suggestion": "Няма да можете да я възстановите."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +63,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sie löschen diesen Raum. Dies kann nicht rückgängig gemacht.' is not a natural or entirely accurate translation of 'You are about to delete this room. You won’t be able to restore it.' The first sentence is correct but the second is clunky. A better translation would emphasize the irreversibility.",
+          "suggestion": "Sie werden diesen Raum löschen. Dieser Vorgang ist nicht rückgängig zu machen."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Dies kann nicht rückgängig gemacht' is grammatically correct, but sounds less natural than a passive construction.",
+          "suggestion": "Dieser Vorgang kann nicht rückgängig gemacht werden."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -135,7 +158,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The pronoun 'o' in 'restaurá-lo' doesn't agree with 'sala' (feminine). It should be 'a'.",
+          "suggestion": "Você não será capaz de restaurá-la."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -147,13 +176,30 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and doesn't flow naturally in Russian. The phrasing 'Вы собираетесь удалить эту комнату?' sounds a bit formal and clunky in this context. A more natural phrasing would imply certainty of the action.",
+          "suggestion": "Вы собираетесь удалить эту комнату. Восстановить ее будет невозможно."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඔබ මෙම කාමරය මැකීමට සැරසෙමින් සිටියි. මෙය අප්‍රතිවර්ත්‍ය ක්‍රියාමාර්ගයකි\" doesn't accurately convey the meaning of \"You are about to delete this room. You won’t be able to restore it.\" Specifically, \"මෙය අප්‍රතිවර්ත්‍ය ක්‍රියාමාර්ගයකි\" (This is an irreversible action) isn't the direct translation of 'You won’t be able to restore it.'",
+          "suggestion": "ඔබ මෙම කාමරය මැකුවහ, එය නැවත ලබාගත නොහැකිය."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, using 'මැකුවහ' (if you delete) is slightly less natural than a more direct phrasing. It implies a hypothetical situation.",
+          "suggestion": "ඔබ මෙම කාමරය මැකමින් සිටියහ, එය නැවත ලබාගත නොහැකිය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +217,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"restore it\" is better translated as \"вратити је\" (vratiti je) instead of \"повратите\" (povratite). While 'povratite' isn't entirely wrong, 'vratiti je' is more natural and commonly used in this context. 'Povratiti' implies a formal, almost bureaucratic recovery process.",
+          "suggestion": "Спремате се да обришете ову собу. Нећете моћи да је вратите."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Spremate se da obrišete ovu sobu' is overly formal and indirect. A more natural translation would be closer to 'You are deleting this room...'",
+          "suggestion": "Obrišete ovu sobu."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian phrase 'Nećete moći da je povratite' literally translates to 'You won’t be able to restore it'.  While understandable, a more common and natural phrasing for a confirmation message would be 'You cannot undo this' or similar.",
+          "suggestion": "Nećete moći da je vratite / Nećete moći ovo da poništite."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +264,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"您将无法使其恢复\" is a bit literal and sounds unnatural in Chinese. While technically correct, it doesn't convey the urgency and finality of the English phrase 'You won’t be able to restore it'.",
+          "suggestion": "您将无法恢复此房间。"
+        }
+      ],
       "approved_at": null
     }
   }

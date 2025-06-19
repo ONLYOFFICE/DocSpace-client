@@ -269,6 +269,7 @@ class ProfileActionsStore {
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
+
     // const { isOwner } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
@@ -293,15 +294,17 @@ class ProfileActionsStore {
 
     const protocol = window?.location?.protocol;
 
-    const managementItems = portals.map((portal) => {
-      return {
-        key: portal.tenantId,
-        label: portal.domain,
-        onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
-        disabled: false,
-        checked: tenantAlias === portal.portalName,
-      };
-    });
+    const managementItems =
+      portals?.map((portal) => {
+        return {
+          key: portal.tenantId,
+          label: portal.domain,
+          isPortal: true,
+          onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
+          disabled: false,
+          checked: tenantAlias === portal.portalName,
+        };
+      }) ?? [];
 
     const management =
       isAdmin && standalone && !limitedAccessSpace

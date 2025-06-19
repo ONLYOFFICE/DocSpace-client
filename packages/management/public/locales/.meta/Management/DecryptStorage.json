@@ -3,7 +3,7 @@
   "content": "Decrypt storage",
   "content_en_sha1_hash": "2ae114849bb95cfb13d5eb2d05d02b8708d00d3e",
   "created_at": "2025-05-19T21:30:57.424Z",
-  "updated_at": "2025-05-20T09:48:00.679Z",
+  "updated_at": "2025-05-26T07:57:33.002Z",
   "comment": {
     "text": "DecryptStorage button label: Used to toggle between \"Encrypt\" and \"Decrypt\" buttons on the File Management screen.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/encrypt-data/index.tsx",
-      "line_number": 147,
+      "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
+      "line_number": 130,
       "context": "/>\n <Button\n primary\n label={\n status === EncryptionStatus.Encrypted\n ? t(\"DecryptStorage\")\n : t(\"EncryptStorage\")\n }\n size={ButtonSize.normal}\n onClick={() => setEncryptWarningDialogVisible(true)}\n isDisabled={isDisabled}",
       "module": "/packages/management"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Yaddaşın şifrəsini açın\" is a literal translation of \"Decrypt storage\" as \"Unlock the password of the memory.\" While understandable, it's not the most natural or idiomatic translation in Azerbaijani. \"Decrypt\" implies a more technical process.",
+          "suggestion": "Consider a more idiomatic translation such as \"Saxlanan məlumatı deşifrə edin\" (Decrypt the stored data) or \"Saxlanılan məlumatı açın\" (Open/Unlock the stored data). The best option depends on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ապակոդավորել պահեստը\" is a literal translation of 'Decrypt storage'. While technically correct, a more natural and idiomatic translation for 'Decrypt storage' in Armenian might be \"բացել պահեստարանը\" (bacel pahostarany) which means 'to open the storage'.",
+          "suggestion": "բացել պահեստարանը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ストレージの暗号を解除する\" is too literal. While technically correct, it's not the most natural way to express \"Decrypt storage\" in Japanese.  A more idiomatic translation would be more suitable depending on the context (e.g., 'ストレージ復号' or 'ストレージの復号').",
+          "suggestion": "Consider alternatives like 'ストレージ復号' or 'ストレージの復号' for a more natural-sounding translation."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,7 +159,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Decriptare stocare' is a literal translation and doesn't quite convey the intended meaning of 'Decrypt storage' in a natural Romanian way. 'Decriptare' is correct, but 'stocare' is a more general term. A more accurate translation would consider the context.",
+          "suggestion": "Consider alternatives like 'De-criptarea stocării' or 'De-criptarea datelor stocate' depending on the specific context."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Decriptare' is understandable, 'Decriptare' (with an 'e' at the end) is technically incorrect as it's a verb in the infinitive form.  'Decriptare' should be 'Decriptare'.",
+          "suggestion": "Correct 'Decriptare' to 'Decriptare'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +182,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ගබඩා කිරීම විකේතනය කරන්න' is a literal translation, a more natural phrasing in Sinhala would be something like 'ගබඩා කළ දත්ත විකේතනය කරන්න' or 'ගබඩා වූ දත්ත විකේතනය කරන්න'. 'ගබඩා කිරීම' is not incorrect, but 'ගබඩා කළ' or 'ගබඩා වූ' is more commonly used to describe data that has been stored.",
+          "suggestion": "ගබඩා කළ දත්ත විකේතනය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,7 +200,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Pomnilnik' translates to 'memory' rather than 'storage'. While related, 'storage' is the more accurate translation in this context (referring to encrypted data storage).",
+          "suggestion": "Shranjen prostor"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,13 +218,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Dekriptovanje' is a misspelling of 'Dekriptovanje'.",
+          "suggestion": "Dekriptovanje"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Depolama alanını şifrele' translates to 'Encrypt storage' instead of 'Decrypt storage'. The original English phrase refers to the reverse action.",
+          "suggestion": "Depolama alanını çöz"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

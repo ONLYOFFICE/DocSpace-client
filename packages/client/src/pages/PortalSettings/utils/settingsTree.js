@@ -290,14 +290,14 @@ export const settingsTree = [
     key: "3",
     type: PageType.restore,
     link: "restore",
-    tKey: "RestoreBackup",
+    tKey: "Common:RestoreBackup",
     isHeader: true,
     children: [
       {
         key: "3-0",
         icon: "",
         link: "restore-backup",
-        tKey: "RestoreBackup",
+        tKey: "Common:RestoreBackup",
         isCategory: true,
       },
     ],

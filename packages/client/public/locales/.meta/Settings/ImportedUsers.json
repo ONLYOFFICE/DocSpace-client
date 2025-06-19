@@ -3,7 +3,7 @@
   "content": "{{selectedUsers}}/{{importedUsers}} users were imported successfully.",
   "content_en_sha1_hash": "04dc717736a56bbad5ee1b15ee74f64a7f797b7e",
   "created_at": "2025-05-19T21:30:51.642Z",
-  "updated_at": "2025-05-28T09:30:02.513Z",
+  "updated_at": "2025-05-26T07:57:32.521Z",
   "comment": {
     "text": "This translation key is used to display a success message when importing users in the Portal Settings. It shows the total number of imported users and indicates that some users were successfully imported. The translated text appears on an info text element within an import complete step component.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a full stop at the end of the sentence, which is grammatically correct but might be more suitable to replace with a more subtle mark, like an ellipsis or no punctuation at all, depending on the UI context. A full stop could indicate a more definitive statement.",
+          "suggestion": "Consider removing the full stop or replacing it with an ellipsis (…).  This depends on the UI style guide."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -35,14 +41,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Azerbaijani translation uses the singular form 'istifadəçi' (user) when the English refers to multiple users ('users'). It should be the plural form.",
-          "suggestion": "Use the plural form: \"{{selectedUsers}}/{{importedUsers}} istifadəçilər uğurla idxal edildi.\" "
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'istifadəçi uğurla idxal edildi' uses the singular form 'istifadəçi' (user) while the English content uses a plural 'users'. This implies the translation is incorrect for the intended meaning, which is to indicate multiple users were imported.",
+          "suggestion": "Use the plural form 'istifadəçilər' to match the English plural. A possible correction is: \"{{selectedUsers}}/{{importedUsers}} istifadəçilər uğurla idxal edildi.\""
         },
         {
-          "type": "formatting",
-          "description": "While grammatically plausible with the correction above, consider aligning the verb agreement more closely with the English structure, especially if the intended meaning is a compound result. The direct translation emphasizes the action of importing.",
-          "suggestion": "Consider: \"{{selectedUsers}}/{{importedUsers}} istifadəçi idxal etmə uğurla tamamlandı.\" or \"{{selectedUsers}}/{{importedUsers}} istifadəçi uğurla idxal olundu.\""
+          "type": "grammar",
+          "description": "While grammatically understandable, the translated sentence can be improved for natural flow. It would be better to rephrase the verb conjugation for more idiomatic Azerbaijani.",
+          "suggestion": "Consider rephrasing to something like \"{{selectedUsers}}/{{importedUsers}} istifadəçi qrupu uğurla idxal edildi\" ({{selectedUsers}}/{{importedUsers}} group of users were successfully imported) or \"{{selectedUsers}}/{{importedUsers}} istifadəçi uğurla idxal olundu.\" ({{selectedUsers}}/{{importedUsers}} users were successfully imported - using a more common verb form). "
         }
       ],
       "approved_at": null
@@ -53,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'imported' should be translated more accurately to reflect the meaning of bringing users *into* the system. 'Входирани' implies login or entry into a specific session, not importing.",
-          "suggestion": "Consider using a term like 'вносени' (vnoseni) which means 'imported' in the sense of bringing something into a system."
+          "description": "The word \"imported\" is best translated as 'вносени' (vnoseni) rather than 'входирани' (vhodirani). While 'входирани' can mean 'entered', 'вносени' more accurately reflects the meaning of 'imported' in this context.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} потребители бяха вносени успешно."
         }
       ],
       "approved_at": null
@@ -83,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb tense in the Spanish translation is incorrect. 'se ha importado' (has been imported) implies a completed action, but the context suggests a process. It should be in the present tense to indicate a continuing process or a recent action.",
-          "suggestion": "{{selectedUsers}}/{{importedUsers}} usuarios se importan correctamente."
+          "description": "The verb conjugation 'se ha importado' is incorrect. It should agree with the subject and tense.",
+          "suggestion": "Usuarios fueron importados correctamente."
         }
       ],
       "approved_at": null
@@ -101,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'importées' should agree in gender with the noun 'utilisateurs'. Since 'utilisateurs' is masculine plural, the past participle should be masculine plural as well.",
-          "suggestion": "{{selectedUsers}}/{{importedUsers}} utilisateurs ont été importés avec succès."
+          "description": "The verb 'importées' should agree in gender with 'utilisateurs' which is masculine plural. It should be 'importés'.",
+          "suggestion": "utilisateurs ont été importés avec succès."
         }
       ],
       "approved_at": null
@@ -112,14 +118,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'օգտվողները' (ogtvoghnerē) is technically correct, but could be improved for clarity and natural flow. While it translates to 'users', it might sound slightly formal in this context.",
-          "suggestion": "Consider using a more conversational phrasing like 'Օգտվողները ներմուծվեցին' (Ogtvoghnerē nermudvecin), meaning 'The users were imported'."
-        },
-        {
           "type": "formatting",
-          "description": "The colon at the end of the Armenian sentence is not a standard practice and might appear unnatural. While grammatically correct, it can make the translation sound more stilted.",
-          "suggestion": "Remove the colon at the end of the sentence. The sentence would end with a period."
+          "description": "The Armenian translation uses a colon (:) at the end of the sentence. While not strictly incorrect, it's unusual in this context and might be better without it to match the English style.",
+          "suggestion": "{{selectedUsers}}/{{importedUsers}} օգտվողները հաջողությամբ ներմուծվեցին"
         }
       ],
       "approved_at": null
@@ -142,8 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '가져오기했습니다' is a literal translation of 'imported' and doesn't convey the meaning of 'imported successfully'. It sounds awkward in Korean.",
-          "suggestion": "Consider a more natural phrasing like '성공적으로 가져왔습니다' or '가져오기를 완료했습니다'.  A more contextually appropriate option might be '가져왔습니다' if success is implied by the overall situation."
+          "description": "The translation '가져오기했습니다' doesn't accurately convey the meaning of 'imported'. It literally means 'brought in'. A more appropriate term would convey successful import, like '불러왔습니다' or '가져왔습니다' depending on the nuance desired.",
+          "suggestion": "Consider using '불러왔습니다' or '가져왔습니다' instead of '가져오기했습니다' to better reflect the successful import action."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the sentence structure '{{selectedUsers}}/{{importedUsers}} 사용자를 가져오기했습니다' sounds a little unnatural in Korean. It could be improved for better flow.",
+          "suggestion": "Consider rephrasing the sentence to something like '{{selectedUsers}}명의 사용자가 {{importedUsers}}명 중 가져왔습니다' or '{{importedUsers}}명 중 {{selectedUsers}}명의 사용자를 가져왔습니다' (depending on the intended emphasis)."
         }
       ],
       "approved_at": null
@@ -154,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation uses a space before the opening curly brace '{' in the variables, which may be inconsistent with other parts of the application.  While not incorrect, standard practice is often no space.",
-          "suggestion": "ນຳເຂົ້າຜູ້ໃຊ້{{selectedUsers}}/{{importedUsers}} ສຳເລັດແລ້ວ."
+          "description": "The Lao translation uses a full stop (.) at the end of the sentence. While grammatically correct, it's more common in UI text to omit the punctuation to maintain a cleaner look.  It's a stylistic choice and not strictly an error.",
+          "suggestion": "Consider removing the full stop at the end: \"ນຳເຂົ້າຜູ້ໃຊ້ {{selectedUsers}}/{{importedUsers}} ສຳເລັດແລ້ວ\""
         }
       ],
       "approved_at": null
@@ -196,7 +202,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'au fost importate' (were imported) should agree in number with 'utilizatori' (users), which is plural. The correct form should be 'au fost importați'.",
+          "description": "The verb agreement is incorrect. 'utilizatori' (users) is plural, so the verb should be 'au fost importați' not 'au fost importate'.",
           "suggestion": "{{selectedUsers}}/{{importedUsers}} utilizatori au fost importați cu succes."
         }
       ],
@@ -214,13 +220,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' is a less common and potentially less natural word for 'users'. 'භාවිතකරන්නන්' or 'පරිශීලකයෝ' might be more appropriate depending on the specific context.",
-          "suggestion": "පරිශීලකයෝ or භාවිතකරන්නන්"
+          "description": "The word 'පරිශ්‍රීලකයින්' (parashreelakayin) seems like a potential misspelling or uncommon phrasing for 'users'. A more common and understandable term might be 'භාවිතකරුවන්' (bhavitakaruwan).",
+          "suggestion": "භාවිතකරුවන් {{selectedUsers}}/{{importedUsers}} ක්  සාර්ථකව ආයාත කෙරිණි."
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the sentence structure feels a bit stiff. A more natural phrasing might improve readability. The current phrasing emphasizes the *number* of users.",
-          "suggestion": "සාර්ථකව {{selectedUsers}}/{{importedUsers}} පරිශීලකයින් ආයාත කෙරිණි."
+          "description": "While not strictly incorrect, the phrasing '{{selectedUsers}}/{{importedUsers}} ක්' could be more natural in Sinhala. The 'ක්' suffix might be redundant depending on context.",
+          "suggestion": "{{selectedUsers}} / {{importedUsers}}  භාවිතකරුවන්  සාර්ථකව ආයාත කෙරිණි."
         }
       ],
       "approved_at": null
@@ -230,9 +236,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation is slightly awkward. A more natural phrasing would be to state how many users were imported.",
-          "suggestion": "Úspešne importovaných bolo {{selectedUsers}}/{{importedUsers}} používateľov."
+          "type": "grammar",
+          "description": "The Slovak sentence structure could be improved for better flow and clarity. While grammatically correct, it sounds slightly awkward.",
+          "suggestion": "Úspešne sme importovali {{selectedUsers}}/{{importedUsers}} používateľov."
         }
       ],
       "approved_at": null

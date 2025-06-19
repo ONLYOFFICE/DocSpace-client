@@ -3,7 +3,7 @@
   "content": "No groups here",
   "content_en_sha1_hash": "791d7de61cae4792089d8aaef6c71b9af1483ff3",
   "created_at": "2025-05-19T21:30:46.836Z",
-  "updated_at": "2025-05-28T09:30:02.462Z",
+  "updated_at": "2025-05-26T07:57:32.456Z",
   "comment": {
     "text": "This translation key is used for an empty state message displayed when there are no groups to show. It appears on an empty screen and is typically shown after filtering or searching for groups. The translation can be adjusted to fit the tone and style of the application.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Finnish translation lacks a period at the end of the sentence.",
-          "suggestion": "Täällä ei ole ryhmiä."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vēl nav nevienas grupas' translates more accurately as 'There are no groups yet' or 'Not yet any groups'. 'No groups here' is more of a statement of fact, whereas the translation implies that groups might be added later.",
-          "suggestion": "Consider 'Šeit nav grupu' which directly translates to 'No groups here'."
+          "description": "The Latvian translation \"Vēl nav nevienas grupas\" translates to \"There are no groups yet\". While conveying a similar meaning, it introduces a temporal aspect ('yet') that isn't present in the original English phrase \"No groups here\". The original simply states the absence of groups, while the translation implies they might appear later.  A more accurate translation would focus on simply stating the absence of groups.",
+          "suggestion": "Nav grupu šeit"
         }
       ],
       "approved_at": null
@@ -129,13 +123,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Hier nog geen groepen' while understandable, isn't the most natural or accurate translation of 'No groups here'. It implies groups haven't been created *yet*. A more direct and common translation would be 'Geen groepen hier'.",
-          "suggestion": "Geen groepen hier"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -174,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙන්න කණ්ඩායම් නැත' while containing the words for 'groups' and 'not', doesn't accurately convey the meaning of 'No groups here'. A more accurate translation would emphasize the absence or lack of groups.",
-          "suggestion": "කණ්ඩායම් කිසිවිටもなく."
+          "description": "The translation 'මෙන්න කණ්ඩායම් නැත' is not the most natural or accurate rendering of 'No groups here'. 'මෙන්න' implies 'here is' or 'look here', which doesn't fit the meaning. A more suitable translation would convey the absence of groups.",
+          "suggestion": "කණ්ඩායම් කීවත් නැත."
         }
       ],
       "approved_at": null
@@ -225,7 +213,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"暂无群组\" while technically correct, doesn't fully capture the brevity and directness of \"No groups here.\" It's a bit more formal and verbose.",
+          "suggestion": "考虑使用更简洁的翻译，例如“无群组”或“这里没有群组”。"
+        }
+      ],
       "approved_at": null
     }
   }

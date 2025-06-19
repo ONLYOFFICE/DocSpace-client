@@ -3,7 +3,7 @@
   "content": "Get {{organizationName}} Documents on Google Play",
   "content_en_sha1_hash": "83f79085a2fb2d5efa055d36fc04645c91a6887d",
   "created_at": "2025-05-19T21:30:46.548Z",
-  "updated_at": "2025-06-18T07:34:15.331Z",
+  "updated_at": "2025-06-18T17:11:42.564Z",
   "comment": {
     "text": "This translation key is used for the title of a download app button on an Android device, prompting users to access organization documents on Google Play. The key appears in a mobile app and will be displayed on screen as part of a UI element.",
     "is_auto": true,
@@ -35,9 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation lacks a leading article 'of' before 'Google Play'. It should read 'Google Play-dən...'.",
-          "suggestion": "Google Play-dən {{organizationName}} Sənədlərini əldə edin"
+          "type": "incorrect_translation",
+          "description": "The phrase 'Get ... Documents' is best translated as 'Yüklə...' instead of 'Əldə edin...'. 'Əldə edin' is a more formal phrase, while 'Yüklə' is more common and natural for downloading apps or documents.",
+          "suggestion": "Yüklə {{organizationName}} Sənədlərini"
         }
       ],
       "approved_at": null
@@ -51,19 +51,19 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Získat dokumenty {{organizationName}} na Google Play' is a literal translation that doesn't sound natural in Czech. It's missing a preposition or connector to make it flow better. A more natural phrasing would imply retrieving documents *from* a specific source.",
+          "suggestion": "Dokumenty {{organizationName}} pro Google Play"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Get' is translated as 'Laden Sie herunter'. While 'Laden Sie herunter' can mean 'download', 'Get' implies availability and retrieval. A more direct and natural translation would be 'Erhält {{organizationName}} Documents im Google Play Store'.",
-          "suggestion": "Erhält {{organizationName}} Documents im Google Play Store"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'en el Google Play' is not the most natural way to express 'on Google Play' in Spanish. It's technically correct, but 'en Google Play' is more idiomatic and commonly used.",
-          "suggestion": "Obtener {{organizationName}} Documents en Google Play"
+          "description": "The phrase \"en el Google Play\" is not the most natural way to say \"on Google Play\" in Spanish. It implies being inside Google Play.",
+          "suggestion": "Obtener {{organizationName}} Documents en Google Play Store"
         }
       ],
       "approved_at": null
@@ -102,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The English content uses \"on Google Play\". The Armenian translation also includes \"on Google Play-ում\". While not strictly incorrect, the inclusion of the suffix '-ում' is redundant and makes the sentence slightly awkward. It's more natural to omit it.",
+          "description": "The Armenian translation includes 'on Google Play-ում'. It is more natural to say 'Google Play-ում' without the 'on'.",
           "suggestion": "Ստացեք {{organizationName}} փաստաթղթեր Google Play-ում"
         }
       ],
@@ -117,13 +117,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation lacks a space before the 'Documents' word.  It is directly attached to the previous Japanese word.",
-          "suggestion": "GooglePlayで{{organizationName}} Documentsを入手する → GooglePlayで{{organizationName}} Documents を入手する"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,7 +129,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ຮັບເອົາເອກະສານ {{organizationName}} ຢູ່ Google Play\" is a literal translation but doesn't convey the meaning of 'Get' in the context of downloading or accessing documents. A more natural Lao phrasing would be something like 'ດາວໂຫຼດເອກະສານ {{organizationName}} ຈາກ Google Play' or 'ເອກະສານ {{organizationName}} ມີຢູ່ Google Play'.",
+          "suggestion": "ດາວໂຫຼດເອກະສານ {{organizationName}} ຈາກ Google Play"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +159,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Obtenha o {{organizationName}} Documents na Google Play' is not ideal. 'na' should be 'na Google Play' or 'em Google Play'.",
-          "suggestion": "Obtenha o {{organizationName}} Documents na Google Play Store"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,7 +177,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses \"Скачать\" which means \"Download\". While functionally similar to \"Get\", \"Get\" often implies retrieval or access rather than solely the act of downloading. \"Get\" might be more appropriate depending on the intended user action.",
+          "suggestion": "Consider using a verb that better reflects the action of accessing documents, such as \"Получить\" (Poluchit' - Receive) if it fits the context."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -192,8 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \" ලබා ගන්න\" (laban ganne) literally translates to 'obtain' or 'get' but in this context, 'download' would be more appropriate and natural for a mobile app context. 'Get' is acceptable, but 'download' conveys the intended action more clearly.",
-          "suggestion": "Google Play හි {{organizationName}} ලේඛන බාගත කරන්න"
+          "description": "The translation 'Google Play හි {{organizationName}} ලේඛන ලබා ගන්න' while understandable, could be improved to more accurately reflect 'Get {{organizationName}} Documents on Google Play'. 'හි' indicates possession, but in this context, it's more about availability *on* Google Play. A more accurate phrasing would incorporate this.",
+          "suggestion": "Google Play යටතේ {{organizationName}} ලේඛන ලබා ගන්න"
+        },
+        {
+          "type": "formatting",
+          "description": "The spacing around the variable {{organizationName}} could be improved for readability. While technically correct, it might benefit from a slight adjustment.",
+          "suggestion": "Google Play යටතේ {{organizationName}} ලේඛන ලබා ගන්න"
         }
       ],
       "approved_at": null
@@ -215,9 +220,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Набави {{organizationName}} Документа на Google Play-у\" is a less natural phrasing. \"Набави\" implies 'obtain' or 'acquire', which isn't the most fitting verb in this context. A more appropriate verb would convey 'Get' as in 'Download' or 'Find'.",
+          "suggestion": "Добиј {{organizationName}} Документе на Google Play"
+        },
+        {
           "type": "formatting",
-          "description": "The Serbian translation uses a genitive case ending ('-у') after 'Google Play'. While grammatically acceptable, it's more common and stylistically better to use the dative case ('Google Play-у') in this context when referring to obtaining something *on* a platform. It's a minor stylistic preference.",
-          "suggestion": "Набави {{organizationName}} Документа на Google Play"
+          "description": "The preposition \"на\" (on) is followed by the dative case ending \"-у\" when referring to Google Play. While grammatically correct, it can sound slightly less fluent. Using the locative case would be more common in this context.",
+          "suggestion": "Добиј {{organizationName}} Документе у Google Play"
         }
       ],
       "approved_at": null
@@ -228,13 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Nabavi {{organizationName}} Dokumenta na Google Play-u' doesn't accurately convey the meaning of 'Get {{organizationName}} Documents on Google Play'. 'Nabavi' implies 'to acquire' or 'to procure,' which is a stronger action than 'get'.  'Get' is more common and user-friendly in this context.",
+          "description": "The word 'Nabavi' translates to 'Obtain' or 'Get'. While understandable, 'Get' is a more natural and common translation in this context. 'Nabavi' sounds slightly formal or archaic.",
           "suggestion": "Preuzmi {{organizationName}} Dokumenta na Google Play-u"
-        },
-        {
-          "type": "formatting",
-          "description": "The preposition 'na' is used with a locative case, which might be perceived as slightly awkward. While grammatically correct, it's worth considering a more natural phrasing.",
-          "suggestion": "Preuzmi {{organizationName}} Dokumenta za Google Play"
         }
       ],
       "approved_at": null
@@ -263,7 +268,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Get' is better translated as '获取' or '获取到' rather than simply '下载' (download). While 'download' isn't wrong, it's a more literal translation and doesn't fully capture the nuance of 'Get'.",
+          "description": "The English phrase 'Get' is better translated as '获取' (huòqǔ) or '下载' (xiàzài) to convey the meaning of obtaining or downloading. '在Google Play上下载' is acceptable, but '获取' would be more formal and potentially preferable depending on the context.",
           "suggestion": "在Google Play上获取{{organizationName}} Documents"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "The destination already contains files and folders with the same name.",
   "content_en_sha1_hash": "c342c02419e200d1d798c694ecfc21ddc3b9d5a4",
   "created_at": "2025-05-19T21:30:45.288Z",
-  "updated_at": "2025-05-28T09:30:02.215Z",
+  "updated_at": "2025-05-26T07:57:32.240Z",
   "comment": {
     "text": "This translation key is used to display a message when a user attempts to add files or folders to a destination that already contains items with the same name. It appears in a conflict resolution dialog box, indicating that an overwrite option may be available.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'qovluqlar' is spelled incorrectly. The correct spelling is 'qovluclar'.",
-          "suggestion": "qovluclar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -99,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'コピー先に同じ名前のファイルとフォルダが既に存在します。' is a literal translation, but could be more natural in Japanese. A more common and user-friendly phrasing would be 'コピー先に同じ名前のファイルやフォルダがあります。'",
+          "suggestion": "コピー先に同じ名前のファイルやフォルダがあります。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '목표에 이미 같은 이름의 파일과 폴더가 있습니다' while generally accurate, doesn't perfectly convey the nuance of 'destination'. '목표' (target/goal) is a functional equivalent, but '대상' (dangsang) might be more appropriate to represent 'destination' in this context, referring to the place where files are being moved or copied.",
-          "suggestion": "Consider '대상에 이미 같은 이름의 파일과 폴더가 있습니다.' (Dangsange imi gateun ireumui failgwa folderga itseumnida.)"
+          "description": "The translation '목표에 이미 같은 이름의 파일과 폴더가 있습니다.' while understandable, is not the most natural phrasing. '목표' (goal/target) isn't the best choice for 'destination' in this context. It implies a final goal, rather than a location.",
+          "suggestion": "대상 위치에 이미 같은 이름의 파일과 폴더가 있습니다."
         }
       ],
       "approved_at": null
@@ -119,14 +119,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ບັນຈຸ' is not the most natural or common way to express 'contains' in this context. It sounds formal and a bit archaic.",
-          "suggestion": "Consider using 'ມີ' instead of 'ບັນຈຸ'.  A more natural phrasing might be: 'ຈຸດຫມາຍປັດຈຸບັນມີເອກະສານແລະໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວ.'"
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຈຸດຫມາຍປັດຈຸບັນມີແລ້ວບັນຈຸເອກະສານແລະໂຟນເດີທີ່ມີຊື່ດຽວກັນ' is a literal translation but sounds awkward. A more natural phrasing might be 'ຈຸດໝາຍປ້າຍນີ້ມີເອກະສານ ແລະ ໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວ' or 'ມີເອກະສານ ແລະ ໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວໃນຈຸດໝາຍປ້າຍນີ້'.",
+          "suggestion": "ຈຸດຫມາຍປ້າຍນີ້ມີເອກະສານ ແລະ ໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວ"
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, the phrase 'ຈຸດຫມາຍປັດຈຸບັນມີແລ້ວ' can be slightly improved for flow. The 'ແລ້ວ' (already) feels a bit redundant after 'ມີ' (has).",
-          "suggestion": "Consider removing 'ແລ້ວ' or rephrasing. For example: 'ຈຸດຫມາຍປັດຈຸບັນມີເອກະສານແລະໂຟນເດີທີ່ມີຊື່ດຽວກັນ.'"
+          "type": "formatting",
+          "description": "The use of 'ແລະ' twice is a bit clunky. Combining 'ເອກະສານແລະໂຟນເດີ' into a single term might be preferable in a more formal context.",
+          "suggestion": "ຈຸດຫມາຍປ້າຍນີ້ມີເອກະສານແລະໂຟນເດີທີ່ມີຊື່ດຽວກັນຢູ່ແລ້ວ"
         }
       ],
       "approved_at": null
@@ -179,13 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර' is a transliteration of 'folder' and while understandable, a more Sinhala equivalent might improve readability. 'ඡෙරිණයා' (cherinya) or a direct equivalent if one exists would be preferable.",
-          "suggestion": "ගමනාන්තයේ දැනටමත් එකම නමින් ගොනු සහ ඡෙරිණයා අඩංගු වේ."
-        },
-        {
-          "type": "grammar",
-          "description": "While understandable, the sentence structure 'ගමනාන්තයේ දැනටමත් එකම නමින් ගොනු සහ ෆෝල්ඩර අඩංගු වේ' could be slightly more natural in Sinhala. It implies 'files and folders contain'.",
-          "suggestion": "ගමනාන්තයේ දැනටමත් එකම නමින් ගොනු සහ ෆෝල්ඩර ඇති."
+          "description": "The word 'ෆෝල්ඩර' (folder) is misspelled. The correct spelling is 'ෆෝල්ඩර්'.",
+          "suggestion": "ෆෝල්ඩර්"
         }
       ],
       "approved_at": null
@@ -208,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'фолдере' is a slightly less common and less formal way to say 'folders'. While not strictly incorrect, 'фасцикле' would be a more professional and standard term in this context.",
-          "suggestion": "Одредиште већ садржи датотеке и фасцикле са истим именом."
+          "description": "The word 'фолдере' is a slightly awkward wording. While technically correct, 'фасцикле' or 'чаршије' might be more natural in this context, depending on the intended tone. 'Фолдре' is acceptable, but potentially not ideal for a more formal tone.",
+          "suggestion": "Consider using 'фасцикле' or 'чаршије' instead of 'фолдере'."
         }
       ],
       "approved_at": null
@@ -223,13 +218,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Hedef zaten aynı ada sahip dosyalar ve klasörler içeriyor' is a literal translation but could be more natural in Turkish. It implies the files and folders *currently* exist there. A better phrasing would emphasize they would cause a conflict.",
-          "suggestion": "Hedefte aynı isimde dosyalar veya klasörler zaten mevcut."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

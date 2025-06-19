@@ -3,7 +3,7 @@
   "content": "Welcome to {{organizationName}} private room where every symbol you type is encrypted",
   "content_en_sha1_hash": "36df06668f4bf43e280d1c9bf15c6f66134e0b84",
   "created_at": "2025-05-19T21:30:55.995Z",
-  "updated_at": "2025-05-21T11:32:05.688Z",
+  "updated_at": "2025-06-02T10:20:51.020Z",
   "comment": {
     "text": "This translation key is used for a header that welcomes users to a private room in an organization, explaining that all input is encrypted. It appears on a container component in the client application's root folder. The translation should include placeholders for an organization name ({{organizationName}}).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 123,
+      "line_number": 125,
       "context": "const archiveRoomsDescription =\n isVisitor || isCollaborator\n ? t(\"ArchiveEmptyScreenUser\")\n : t(\"ArchiveEmptyScreen\", { productName: t(\"Common:ProductName\") });\n \n const privateRoomHeader = t(\"PrivateRoomHeader\", {\n organizationName: logoText,\n });\n \n const privacyIcon = <img alt=\"\" src={PrivacySvgUrl} />;",
       "module": "/packages/client"
     }
@@ -35,14 +35,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The variable {{organizationName}} is not consistently formatted. It should be enclosed in double curly braces.",
-          "suggestion": "Ensure consistent use of double curly braces: {{organizationName}}"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Welcome to...' is better translated as 'Xoş gəldiniz' which is a more common and natural greeting in Azerbaijani.",
+          "suggestion": "Xoş gəldiniz {{organizationName}} şəxsi otağına, harada yazdığınız hər bir simvol şifrələnir."
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, the Azerbaijani sentence could be slightly more natural-sounding. The placement of 'xoş gəldiniz' at the end feels a little less idiomatic.",
-          "suggestion": "Consider rephrasing to something like: '{{organizationName}} şəxsi otağına, yazdığınız hər bir simvolun şifrələndiyi xoş gəldiniz.'"
+          "type": "incorrect_translation",
+          "description": "While 'şifrələndiyi' is technically correct, a more natural phrasing for 'is encrypted' would be 'şifrələnir'.",
+          "suggestion": "Yazdığınız hər bir simvolun şifrələnir"
+        },
+        {
+          "type": "formatting",
+          "description": "The order of information in the translation sounds less natural. The purpose of the private room should be stated first.",
+          "suggestion": "Yazdığınız hər bir simvolun şifrələnir, {{organizationName}} şəxsi otağına xoş gəldiniz."
         }
       ],
       "approved_at": null
@@ -52,9 +57,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Bulgarian translation uses the formal 'Ваш' which might feel overly formal for a welcome message. A less formal alternative would be more appropriate.",
-          "suggestion": "Добре дошли в частната стая на {{organizationName}}, където всеки символ, който напишете, е криптиран"
+          "type": "incorrect_translation",
+          "description": "The phrase \"every symbol you type\" is translated as \"всеки написан от Вас символ\". While technically correct, it's a bit overly formal and verbose for the context. A more natural translation would be something like \"всеки символ, който напишете\" or \"всеки символ, който въведете\".",
+          "suggestion": "всеки символ, който напишете"
         }
       ],
       "approved_at": null
@@ -65,8 +70,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Missing comma after {{organizationName}}.",
-          "suggestion": "Vítejte v soukromé místnosti {{organizationName}}, kde je každý symbol, který zadáte, zašifrován"
+          "description": "The Czech translation includes a comma after '{{organizationName}}' which doesn't exist in the English version. This creates an unnatural pause.",
+          "suggestion": "Remove the comma after '{{organizationName}}'."
         }
       ],
       "approved_at": null
@@ -77,7 +82,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"every symbol you type\" is not accurately translated. \"Jedes von Ihnen eingegebene Zeichen\" is a literal translation that sounds awkward in German. A more natural phrasing would convey the meaning of 'each character you enter'.",
+          "description": "The translation of 'every symbol you type' is not ideal. 'Jedes von Ihnen eingegebene Zeichen' is grammatically correct but sounds somewhat formal and less natural than other options. A more fluent translation would convey the same meaning with more common phrasing.",
           "suggestion": "Willkommen im Privatraum von {{organizationName}}, wo jedes Zeichen, das Sie eingeben, verschlüsselt wird."
         }
       ],
@@ -94,9 +99,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The use of \"usted\" can sound overly formal or distant in some contexts. While grammatically correct, it might not be the most natural choice for a welcoming message. Consider using a more informal 'tú' or a more neutral phrasing.",
-          "suggestion": "Consider replacing 'usted escribe' with 'tú escribes' or rephrasing to something like 'cada símbolo que se escribe' to avoid direct address."
+          "type": "formatting",
+          "description": "The translation uses \"usted\" which implies a formal tone. While not inherently incorrect, it might be more appropriate to use \"tú\" depending on the organization's preferred level of formality. This needs to be confirmed with the client.",
+          "suggestion": "Consider using \"Bienvenido/a a la sala privada de {{organizationName}}, donde cada símbolo que escribes está cifrado.\" if a less formal tone is preferred."
         }
       ],
       "approved_at": null
@@ -106,8 +111,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'kirjoittamasi' is technically correct but might sound overly formal in this context. A more natural-sounding alternative exists.",
+          "type": "incorrect_translation",
+          "description": "The phrase 'every symbol you type' is not perfectly translated. 'Kirjoittamasi symboli' translates to 'the symbol you write', implying a specific symbol rather than every symbol.",
           "suggestion": "Tervetuloa {{organizationName}}-n yksityiseen huoneeseen, jossa jokainen kirjoittamasi merkki on salattu"
         }
       ],
@@ -125,7 +130,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation lacks a comma after 'մասնավոր սենյակ'.",
+          "description": "The Armenian translation lacks a comma after \"մասնավոր սենյակ\" (private room). It would improve readability.",
           "suggestion": "Բարի գալուստ {{organizationName}} մասնավոր սենյակ, որտեղ ձեր մուտքագրած յուրաքանչյուր նշանը գաղտնագրված է"
         }
       ],
@@ -143,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Japanese sentence structure is slightly awkward. The verb '暗号化します' (angyōka shimasu - encrypts) is placed at the end, which is grammatically correct but sounds less natural in this context. It would be more idiomatic to place it closer to the object being encrypted.",
-          "suggestion": "{{organizationName}}プライベートルームへようこそ！入力されるすべての記号は暗号化されます。"
+          "description": "The sentence \"入力されるすべての記号が暗号化します\" uses the plain form of the verb, which implies that it always encrypts. A more appropriate form to convey that *every* symbol *is* encrypted would be a passive voice with a different verb form.",
+          "suggestion": "{{organizationName}}プライベートルームへようこそ！入力されるすべての記号が暗号化されます。"
         }
       ],
       "approved_at": null
@@ -158,7 +163,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'every symbol you type' is not accurately reflected in the Lao translation. 'ທຸກໆສັນຍາລັກທີ່ທ່ານພິມ' literally translates to 'every symbol that you type' which is overly literal and less natural. A more natural phrasing would better convey the intended meaning.",
+          "suggestion": "Consider revising to something like: 'ທຸກຕົວອັກສອນທີ່ທ່ານພິມ' (every letter you type) or 'ຂໍ້ມູນທັງໝົດທີ່ທ່ານພິມ' (all data you type)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -173,7 +184,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'private room' is better translated as 'privéruimte' in Dutch, as 'kamer' implies a literal room, whereas 'ruimte' conveys a more general, digital space.",
+          "description": "The English phrase 'private room' is best translated to 'privéruimte' rather than 'privé kamer' in Dutch. 'Kamer' implies a room with walls, while 'ruimte' is more general and appropriate for a virtual or online space.",
           "suggestion": "Welkom in {{organizationName}} privéruimte waar elk symbool dat u typt versleuteld is"
         }
       ],
@@ -182,7 +193,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation includes a comma after '{{organizationName}}' which creates an unnatural pause. In Polish, it's more common to use a period or no punctuation in this context.",
+          "suggestion": "Witaj w prywatnym pokoju {{organizationName}}. gdzie każdy wpisany przez Ciebie znak jest szyfrowany."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -191,8 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'encriptado' should be 'encriptado'.",
-          "suggestion": "encriptado"
+          "description": "The word 'encriptado' is a less common and less preferred spelling of 'encriptado'.",
+          "suggestion": "Bem-vindo à sala privada do {{organizationName}} onde cada símbolo que escreve é encriptado"
         }
       ],
       "approved_at": null
@@ -209,8 +226,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'every symbol you type' is translated as 'fiecare simbol introdus'. While technically correct, 'fiecare simbol pe care îl tastezi' would be a more natural and accurate translation, capturing the action of typing.",
-          "suggestion": "fiecare simbol pe care îl tastezi"
+          "description": "The phrase 'every symbol you type' is not accurately translated. 'Introduse' implies input rather than typing. A more accurate translation would convey the action of typing.",
+          "suggestion": "Bune ați venit la Sala Privată {{organizationName}} unde fiecare simbol tastat este criptat."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'tastat' is not capitalized.",
+          "suggestion": "Bune ați venit la Sala Privată {{organizationName}} unde fiecare simbol Tastat este criptat."
         }
       ],
       "approved_at": null
@@ -218,7 +240,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a comma (,) instead of a space after \"{{organizationName}}\". While grammatically correct, using a space is more common and natural in Russian.",
+          "suggestion": "Добро пожаловать в Приватную комнату {{organizationName}} где каждый символ, который вы вводите, шифруется"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -227,13 +255,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආදරයෙන් සාදරයෙන් පිළිගන්නෙමු\" (Adarayan sadarayan piligannemu) translates to 'warmly welcome' and while polite, it's a bit overly formal and verbose for the context of a private, encrypted room. A more straightforward 'පිළිගන්නෙමු' (piligannemu - welcome) would suffice and maintain a more direct tone.",
-          "suggestion": "ආදරයෙන් සාදරයෙන් පිළිගන්නෙමු → පිළිගන්නෙමු"
+          "description": "The phrase 'Welcome to' is not accurately translated. 'ආදරයෙන් පිළිගන්නෙමු' (Aadarayan piligannemu) is more like 'We warmly welcome'.  A more direct translation of 'Welcome to' would be something like 'ඔබට සාදරයෙන් පිළිගන්නෙමු' (Obata saadarayan piligannemu).",
+          "suggestion": "Replace 'ආදරයෙන් පිළිගන්නෙමු' with 'ඔබට සාදරයෙන් පිළිගන්නෙමු'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'අක්ෂරයක්ම' (aksharayakma) which translates to 'every character' is a bit too literal. While accurate, it's not the most natural phrasing in Sinhala. Using 'අපි ටයිප් කරන දේ' (api taip karanne de) meaning 'what we type' would be more conversational.",
-          "suggestion": "ඔබ ටයිප් කරන සෑම අක්ෂරයක්ම → අපි ටයිප් කරන දේ"
+          "description": "The translation of 'every symbol you type' is slightly awkward. 'ඔබ ටයිප් කරන සෑම අක්ෂරයක්ම' (Obata taip karana samam aksarayakma) literally translates to 'every character you type'. While 'symbol' and 'character' are often interchangeable, 'symbol' might have a more specific meaning in this context.",
+          "suggestion": "Consider whether 'symbol' is meant to be more specific than 'character'. If so, finding an equivalent Sinhala term that specifically means 'symbol' might improve the translation. Otherwise, the current translation is acceptable, though not perfectly literal."
         }
       ],
       "approved_at": null
@@ -243,9 +271,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Slovak translation lacks a comma after '{{organizationName}}'. While not strictly incorrect, a comma improves readability and aligns better with the English template.",
-          "suggestion": "Vitajte v súkromnej miestnosti {{organizationName}}, kde je každý vami zadaný symbol šifrovaný"
+          "type": "incorrect_translation",
+          "description": "The English phrase \"every symbol you type\" is not perfectly captured by \"každý vami zadaný symbol.\" A more natural Slovak phrasing would be 'každý znak, ktorý zadáte' or 'každý znak, ktorý napíšete'.",
+          "suggestion": "Vitajte v súkromnej miestnosti {{organizationName}}, kde je každý znak, ktorý zadáte/napíšete šifrovaný"
         }
       ],
       "approved_at": null
@@ -256,8 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'natipkan' is not the most natural or common way to describe typing. While technically correct, it's a bit clunky.",
-          "suggestion": "Use a more natural phrase like 'vsak znak, ki ga napišete' or 'vsak znak, ki ga vtipkate'."
+          "description": "The word 'natipkan' might not be the most natural word choice in this context. While technically correct, it sounds somewhat formal and less fluent.",
+          "suggestion": "Dobrodošli v {{organizationName}} zasebni sobi, kjer je vsak znak, ki ga tipkate, šifriran"
         }
       ],
       "approved_at": null
@@ -267,9 +295,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'где је сваки симбол који куцате шифрован' could be improved for better flow and a more natural feel in Serbian. The use of 'где је' feels a bit clunky.",
-          "suggestion": "Добро дошли у {{organizationName}} приватну собу где се сваки симбол који куцате шифрује."
+          "type": "spelling",
+          "description": "The word 'куцате' (you type) could be more accurately translated as 'уносите' to better convey the meaning of inputting or entering data.",
+          "suggestion": "Добро дошли у {{organizationName}} приватну собу где је сваки симбол који уносите шифрован"
         }
       ],
       "approved_at": null
@@ -277,19 +305,19 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Serbian sentence structure could be improved for better flow. 'gde je svaki simbol koji kucate šifrovan' is grammatically correct but slightly clunky. A more natural phrasing might be used.",
-          "suggestion": "Dobro došli u {{organizationName}} privatnu sobu gde se svaki simbol koji kucate šifruje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation correctly uses \"{{organizationName}}\" but lacks any surrounding punctuation to match the English version's comma after the variable.",
+          "suggestion": "Yazdığınız her sembolün şifrelendiği {{organizationName}}, özel odasına hoş geldiniz"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -298,13 +326,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Welcome\" as \"Ласкаво просимо\" is correct, but the phrase 'where every symbol you type is encrypted' is somewhat literal and could be improved for flow in Ukrainian. A more natural phrasing might emphasize the security aspect.",
-          "suggestion": "Ласкаво просимо до приватної кімнати {{organizationName}}, де кожен ваш символ захищений шифруванням"
-        },
-        {
-          "type": "formatting",
-          "description": "The Ukrainian translation retains the double curly braces {{organizationName}}. It's important to verify if this format is consistent with the system using the translation and if it needs adjustment (e.g., single braces or different syntax).",
-          "suggestion": "Ensure consistent usage of braces with the intended system."
+          "description": "The translation of 'every symbol you type' is not the most natural or accurate. A more idiomatic translation would better convey the meaning.",
+          "suggestion": "Ласкаво просимо до приватної кімнати {{organizationName}}, де кожен ваш символ шифрується."
         }
       ],
       "approved_at": null
@@ -312,7 +335,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation maintains the {{organizationName}} placeholder, which is correct. However, ensuring consistent formatting (e.g., capitalization, spacing) across all localized versions is generally good practice.",
+          "suggestion": "Review formatting consistency with other localized strings."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

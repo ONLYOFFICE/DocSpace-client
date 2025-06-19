@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "ක්‍රියාකාරී කිරීම අවශ්‍යයි",
   "AddStaticText": "ස්ථිර පෙළක් එක් කරන්න",
   "AddWatermarkElements": "ජල සලකුණු අංග එක් කරන්න",
   "AddWatermarksToDocuments": "ලේඛනවලට ජල සලකුණු එක් කරන්න",
@@ -33,7 +32,6 @@
   "StorageDescription": "කාමරයකට ලැබෙන ආචයන සලාකය. ඔබට මෙම අගය සංශෝධනයට හෝ ආචයන සීමාව අක්‍රිය කිරීමට හැකිය.",
   "TagsPlaceholder": "අනන්‍යනයක් යොදන්න",
   "ThirdPartyStorageComboBoxPlaceholder": "ආචයනය තෝරන්න",
-  "ThirdPartyStorageDescription": "මෙම කාමරයේ දත්ත ආචයනය සඳහා තෙවන පාර්ශ්ව සේවා භාවිතා කරන්න. මෙම කාමරයේ දත්ත ගබඩා කිරීමට නව බහාලුමක් සම්බන්ධිත ආචයනයේ සාදනු ඇත.",
   "ThirdPartyStorageNoStorageAlert": "පළමුව, ඔබ \"අනුකලනය\" කොටසට අදාළ සේවාව සම්බන්ධ කළ යුතුය. නොඑසේ නම්, සම්බන්ධ වීමට නොහැකි වනු ඇත.",
   "ThirdPartyStoragePermanentSettingDescription": "තෙවන පාර්ශ්ව {{thirdpartyTitle}} ආචයනයේ \"{{thirdpartyFolderName}}\" බහාලුම තුළ ගොනු රඳවා ඇත.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "තෙවන පාර්ශ්ව ආචයනයක් සම්බන්ධ කිරීමට, ඔබ {{productName}} සැකසුම්වල අනුකලනය කොටසට අදාළ සේවාව එක් කළ යුතුය. අනුකලනය සබල කිරීමට {{productName}} හිමිකරු හෝ පරිපාලක අමතන්න.",

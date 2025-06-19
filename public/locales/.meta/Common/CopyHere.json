@@ -3,7 +3,7 @@
   "content": "Copy here",
   "content_en_sha1_hash": "92816e8a2d8cd79faa7d9b23fa0080284e21fef3",
   "created_at": "2025-05-19T21:30:43.763Z",
-  "updated_at": "2025-05-28T09:30:02.135Z",
+  "updated_at": "2025-05-26T07:57:32.181Z",
   "comment": {
     "text": "This translation key is used as a default label for a \"Copy\" button in various UI components, including files selectors and share collectors. The text is meant to encourage users to select or copy content from an interface. It appears on buttons and labels where users interact with shared documents or folders.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ここにコピー\" is understandable, it's a very literal and potentially awkward translation of \"Copy here.\"  A more natural translation would depend on the context. It could be \"ここにコピーします\" (Koko ni copy shimasu - Copy here/to here) or just \"コピー\" (Copy) if it's clear where to copy to.",
-          "suggestion": "Consider \"コピー\" or \"ここにコピーします\" depending on the surrounding context.  Without more context, it's hard to definitively choose the better option."
+          "description": "The translation 'ここにコピー' while literally translating to 'copy here', doesn't fully convey the intended meaning of the English phrase 'Copy here', which often implies a place where something should be copied *to*.  'ここにコピー' sounds more like an instruction to copy *something* to this location. A more accurate translation might depend on the surrounding context.",
+          "suggestion": "Consider alternatives like 'ここに貼り付け' (paste here) or 'ここにコピーを' (copy *something* here) depending on the context. Without further context, 'ここにコピーをしてください' (Please copy here) is also a possibility."
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ສຳເນົາ ນີ້\" translates more literally to \"Copy this.\" While conveying a similar meaning to \"Copy here,\" it's not the most natural or precise translation of the English phrase. A better translation would emphasize the location for copying.",
-          "suggestion": "Consider alternatives like \"ຕັດຕໍ່ບ່ອນນີ້\" (Cut/Paste here) or \"ນໍາໃຊ້ບ່ອນນີ້\" (Use here), depending on the specific context.  If 'here' emphasizes a designated area, something like 'ບ່ອນສໍາເນົາ' (Copy location) might also work."
+          "description": "The Lao translation 'ສຳເນົາ ນີ້' translates literally to 'Copy this'. While understandable, 'Copy here' implies a location to copy to, which is better conveyed with a slightly different phrasing.  'ສຳເນົາ ບ່ອນນີ້' would be a more accurate translation, meaning 'Copy at/to this place'.",
+          "suggestion": "ສຳເນົາ ບ່ອນນີ້"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Copiere în acest loc' is too literal and doesn't flow naturally in Romanian for a button or label indicating a place to copy something. A more natural translation would be 'Copiază aici' or 'Lipește aici' depending on the intended action (copy or paste).",
-          "suggestion": "Copiază aici"
+          "description": "While \"Copiere în acest loc\" is understandable, it's not the most natural or concise translation of \"Copy here.\" It's quite literal.",
+          "suggestion": "A more natural translation would be \"Copiază aici\" or \"Lipește aici\" (Paste here), depending on the context. If the UI implies copying, \"Copiază aici\" is better. If the UI offers pasting, \"Lipește aici\" is more appropriate."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මෙතනට අලවන්න\" (methanata alavanna) literally translates to 'paste here' or 'stick here', not 'copy here'. While it might be used informally to mean 'copy here', it's not the most accurate translation.",
-          "suggestion": "A more accurate translation would be \"පිටපත් කරන්න මෙතනට\" (pitapata kanna methanata), or simply \"පිටපත් කරන්න\" (pitapata kanna) if context allows."
+          "description": "The translation 'මෙතනට අලවන්න' doesn't accurately convey the meaning of 'Copy here'. 'අලවන්න' means 'paste' or 'apply', whereas 'copy' implies duplicating content. A more accurate translation would convey the action of duplicating or making a copy.",
+          "suggestion": "Consider alternatives like 'ප්‍රින්ට් කරන්න' (print), 'ඡායා පිටපත් කරන්න' (make a copy/duplicate), or 'ප්‍රකාශනය කරන්න' (reproduce)."
         }
       ],
       "approved_at": null
@@ -207,7 +207,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Копирај овде' is understandable, a more natural and commonly used translation of 'Copy here' in Serbian (Cyrillic) would be 'Лепи овде' or 'Унеси овде'. 'Копирај' implies copying from somewhere else, while 'лепи' or 'унеси' is more general for pasting or entering information.",
+          "suggestion": "Лепи овде"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

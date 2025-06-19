@@ -13,7 +13,6 @@
   "DeleteTemplates": "Haluatko todella poistaa valitun huoneen mallit? Niitä ei voi palauttaa. ",
   "FolderPermanentlyDeleted": "Kansio poistetaan pysyvästi 30 päivän päästä.",
   "ItemsPermanentlyDeleted": "Kohteet poistetaan pysyvästi 30 päivän päästä.",
-  "MoveToTrashButton": "Siirrä roskakoriin",
   "UnsubscribeButton": "Lopeta tilaus",
   "UnsubscribeNote": "Haluatko varmasti peruuttaa luettelosta valittujen kohteiden tilauksen?",
   "UnsubscribeTitle": "Tilauksen peruuttamisen vahvistus"

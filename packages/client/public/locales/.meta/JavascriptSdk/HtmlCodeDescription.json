@@ -3,7 +3,7 @@
   "content": "Embedding {{productName}} or its part using the <script> tag. Copy the HTML code below and insert it into your HTML file.",
   "content_en_sha1_hash": "4efa1322ac1505133007a6a20916ec7d8c6e9c89",
   "created_at": "2025-05-19T21:30:54.522Z",
-  "updated_at": "2025-05-28T09:30:02.574Z",
+  "updated_at": "2025-05-26T07:57:32.591Z",
   "comment": {
     "text": "\"This translation key provides a description for embedding or using {{productName}} code via <script> tags in HTML files. It's used to provide instructions on how to insert the code into an HTML file. This text appears in a category subheader for developer tools.\"",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"istifadə edərək\" (using) is somewhat awkward in this context. A more natural phrasing would be something like \"HTML kodunu əlavə etmək üçün\" (to add HTML code).",
-          "suggestion": "<script> teqindən {{productName}}-in və ya onun bir hissəsinin yerləşdirilməsi üçün. Aşağıdakı HTML kodunu kopyalayın və HTML faylınıza əlavə edin."
+          "description": "The phrase \"Embedding {{productName}} or its part\" is not accurately conveyed. \"Yerləşdirilməsi\" implies placement, but 'embedding' suggests a deeper integration.",
+          "suggestion": "Daha dərin inteqrasiya etmək üçün {{productName}}-i və ya onun bir hissəsini yerləşdirin."
         },
         {
-          "type": "formatting",
-          "description": "The sentence flow can be improved by making it more conversational. Splitting the sentence helps with readability.",
-          "suggestion": "<script> teqindən istifadə edərək {{productName}}-in və ya onun bir hissəsinin yerləşdirilməsi üçün. Aşağıdakı HTML kodunu kopyalayın və HTML faylınıza əlavə edin."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Copy the HTML code below' could be improved for clarity and natural flow in Azerbaijani.",
+          "suggestion": "Aşağıdakı HTML kodunu surətləyin və ya kopyalayın."
         }
       ],
       "approved_at": null
@@ -82,9 +82,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Finnish translation includes an unnecessary comma after the first sentence.  It interrupts the flow and is not standard Finnish punctuation.",
-          "suggestion": "{{productName}}-n tai sen osan upotus käyttäen <script> tagia. Kopioi alla oleva HTML-koodi ja syötä se HTML-tiedostoosi."
+          "type": "grammar",
+          "description": "The phrase 'upotus käyttäen <script> tagia' is slightly awkward. A more natural phrasing would be 'käyttämällä <script> tagia'.",
+          "suggestion": "{{productName}}-n tai sen osan upotus käyttämällä <script> tagia."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'syötä se HTML-tiedostoosi' is grammatically correct but sounds a bit abrupt. It can be improved to be more polite and clear.",
+          "suggestion": "{{productName}}-n tai sen osan upotus käyttämällä <script> tagia. Kopioi alla oleva HTML-koodi ja lisää se HTML-tiedostoosi."
         }
       ],
       "approved_at": null
@@ -100,9 +105,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"դրա մասի\" (its part) is slightly awkward. While technically correct, it could be improved for smoother reading. It's implying a part *of* the product.",
+          "suggestion": "Consider rephrasing to something like \"{{productName}}-ի կամ դրա բաղադրիչների մասամբ\" (with components of {{productName}}) or \"{{productName}}-ի կամ դրա միջնորդման մասամբ\" (using an intermediary of {{productName}}), depending on the specific context and intended meaning. A more literal, but less elegant option could be \"{{productName}}-ի միջնորդի մասամբ\"."
+        },
+        {
           "type": "formatting",
-          "description": "The Armenian translation lacks the same bolding or emphasis applied to 'productName' as in the English original. While the variable is present, it doesn't stand out.",
-          "suggestion": "Consider adding a specific formatting style (e.g., bolding) to the {{productName}} variable within the Armenian translation to mirror the English version and highlight it as a placeholder."
+          "description": "While not strictly incorrect, the colon after the first sentence creates a slightly disjointed feel. It's common in Armenian to flow the second sentence directly after the first. Consider removing it or modifying the sentence structure.",
+          "suggestion": "Remove the colon and combine the two sentences: \"{{productName}}-ի կամ դրա մասի ներկառուցում <script> պիտակի միջոցով: Պատճենեք ստորև բերված HTML կոդը և տեղադրեք այն ձեր HTML ֆայլում:\" -> \"{{productName}}-ի կամ դրա մասի ներկառուցում <script> պիտակի միջոցով, պատճենեք ստորև բերված HTML կոդը և տեղադրեք այն ձեր HTML ֆայլում:\" or simply: \"{{productName}}-ի կամ դրա մասի ներկառուցում <script> պիտակի միջոցով. Պատճենեք ստորև բերված HTML կոդը և տեղադրեք այն ձեր HTML ֆայլում.\""
         }
       ],
       "approved_at": null
@@ -130,9 +140,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ເອກະສານ' should be 'ເອກະສານ HTML'.",
-          "suggestion": "ການຝັງ {{productName}} ຫຼືສ່ວນໜຶ່ງຂອງມັນໂດຍໃຊ້ແທັກ <script> ໃຫ້ສຳເນົາໂຄ້ດ HTML ດ້ານລຸ່ມນີ້ ແລະໃສ່ມັນເຂົ້າໄປໃນເອກະສານ HTML ຂອງທ່ານ।"
+          "type": "formatting",
+          "description": "The Lao translation includes a period at the end of the sentence \"ການຝັງ {{productName}} ຫຼືສ່ວນໜຶ່ງຂອງມັນໂດຍໃຊ້ແທັກ <script>\", which is not present in the English original. While not strictly incorrect, it's inconsistent with the tone of the English prompt.",
+          "suggestion": "Remove the period after 'ແທັກ <script>'.  The full instruction should read: 'ການຝັງ {{productName}} ຫຼືສ່ວນໜຶ່ງຂອງມັນໂດຍໃຊ້ແທັກ <script>'"
         }
       ],
       "approved_at": null
@@ -140,19 +150,19 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Latvian translation maintains the English use of angle brackets (<script>). While technically correct, it might be more natural to avoid the angle brackets in this context for Latvian readers. Consider removing the brackets.",
-          "suggestion": "”{{productName}} vai tās daļas iegulšana, izmantojot skripta tagu. Nokopējiet zemāk esošo HTML kodu un ievietojiet to savā HTML failā.”"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'or its part' is translated as 'of een deel ervan'. While understandable, 'of een deel ervan' is a bit clunky. A more natural Dutch translation would be 'of een deel'.",
+          "suggestion": "{{productName}} of een deel insluiten met de <script> tag. Kopieer de onderstaande HTML code en voeg deze toe aan uw HTML bestand."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -179,8 +189,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'spațiului' (of the space) is awkward and doesn't quite capture the meaning of 'Embedding {{productName}}'. A more accurate translation would be 'Integrarea'.",
-          "suggestion": "Integrarea {{productName}} sau a unei părți a acestuia"
+          "description": "The word 'spațiului' (space) doesn't accurately convey the meaning of 'Embedding {{productName}} or its part'. It should be something more like 'integrării' (integration) or 'includerea'.",
+          "suggestion": "Incorporarea integrării {{productName}} sau a unei părți a acestuia..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'cu ajutorul etichetei <script>' is a bit clunky. A more natural Romanian phrasing would be 'folosind eticheta <script>' or simply 'prin eticheta <script>'.",
+          "suggestion": "Incorporarea integrării {{productName}} sau a unei părți a acestuia folosind eticheta <script>."
         }
       ],
       "approved_at": null
@@ -197,13 +212,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation uses a mix of Sinhala and English (specifically, 'HTML code'). Maintaining consistency would improve readability. While 'HTML code' is commonly understood, a fully Sinhala alternative would be preferable.",
-          "suggestion": "Replace 'HTML code' with a fully Sinhala equivalent like 'HTML ඍජුකෝດය' (HTML rujukanoda) or 'HTML කේතය' (HTML kethaya)."
+          "description": "The Sinhala translation uses 'HTML code එක පිටපත් කර' which translates to 'copy the HTML code'. While understandable, it's slightly less formal than the English 'Copy the HTML code below'.",
+          "suggestion": "පහත HTML code පිටපත් කර"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'පහත HTML code එක පිටපත් කර ඔබේ HTML ගොඩුවට ඇතුළු කරන්න' is slightly awkward.  The word order could be improved for smoother reading.",
-          "suggestion": "Replace with: 'පහත HTML ඍජුකෝදය පිටපත් කර ඔබේ HTML ගොඩුවට ඇතුළු කරන්න.' or 'HTML ඍජුකෝදය පිටපත් කර ඔබේ HTML ගොඩුවට ඇතුළු කරන්න.'"
+          "description": "The phrase 'ඔබේ HTML ගොඩුවට ඇතුළු කරන්න' is grammatically correct, but slightly less smooth. It translates to 'insert into your HTML file'.",
+          "suggestion": "ඔබේ HTML ගොඩුවට ඊළඟ කොටස ඇතුළු කරන්න."
         }
       ],
       "approved_at": null
@@ -225,14 +240,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"или његовог дела\" could be improved for clarity and flow. It's grammatically correct but sounds slightly awkward.",
-          "suggestion": "или његовог дела или једног његовог дела"
-        },
-        {
           "type": "formatting",
-          "description": "The phrase \"HTML код испод\" could benefit from a more natural flow. Consider adding a connector like 'и' to link it more smoothly with the preceding clause.",
-          "suggestion": "HTML код испод и"
+          "description": "The Serbian translation uses a Cyrillic 'ј' which isn't standard in modern Serbian (Latin script). While understood, it's generally avoided.",
+          "suggestion": "Replace 'Уграђивање' with 'Ugrađivanje' and 'помоц́у' with 'pomoću'."
         }
       ],
       "approved_at": null
@@ -243,13 +253,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'pomoću <script> taga' is a bit awkward. 'Pomoću' means 'with' or 'by means of.' While technically correct, it's not the most natural way to express this in Serbian. A more natural phrasing would use 'u' or 'kroz.'",
-          "suggestion": "Ugrađivanje {{productName}}-a ili njegovog dela kroz <script> tag.  (Embedding {{productName}}-a or its part through the <script> tag.)"
-        },
-        {
-          "type": "grammar",
-          "description": "While 'umetnite ga' is grammatically correct, a more common and slightly more formal phrasing would be 'unesite ga'.",
-          "suggestion": "Kopirajte HTML kod ispod i unesite ga u svoju HTML datoteku."
+          "description": "The use of the genitive case '-a' after '{{productName}}' might sound awkward. While grammatically correct, it's often more natural to use the nominative case in this context.",
+          "suggestion": "Ugrađivanje {{productName}} ili njegovog dela pomoću <script> taga. Kopirajte HTML kod ispod i umetnite ga u svoju HTML datoteku."
         }
       ],
       "approved_at": null
@@ -266,8 +271,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'простору' (prostoru) in 'Вбудовування простору {{productName}}' is not the best fit for 'Embedding {{productName}}'.  'Вбудовування' is correct for embedding, but 'простору' implies a space or area, not the product itself. A more accurate translation would be something like 'Вбудовування {{productName}}' or 'Вбудовування продукту {{productName}}'.",
-          "suggestion": "Вбудовування {{productName}}"
+          "description": "The word 'простору' (prostoru) doesn't quite convey the intended meaning of 'Embedding'. It implies 'space' rather than the act of embedding. A more suitable term would be something along the lines of 'Вбудовування коду' or 'Вбудовування'.",
+          "suggestion": "Вбудовування коду {{productName}} або його частини за допомогою тегу <script>."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'представлений нижче' (predstavlenyj nizche) sounds a bit formal and clunky in this context. A more natural phrasing would be better.",
+          "suggestion": "Скопіюйте код нижче..."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Form gallery is temporarily unavailable",
   "content_en_sha1_hash": "f74a0fc29bec2f997516c9a903dda0a3ed1fe9b7",
   "created_at": "2025-05-19T21:30:55.116Z",
-  "updated_at": "2025-05-28T09:30:02.405Z",
+  "updated_at": "2025-05-26T07:57:32.399Z",
   "comment": {
     "text": "This translation key is used for a temporary error message displayed when the form gallery is unavailable. It will be shown on-screen and can be found in a button's label as part of a UI element to provide feedback to users about the current state of the application.",
     "is_auto": true,
@@ -153,7 +153,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ආකෘතිපත්‍ර' (Aakruthipathra) is a somewhat formal or technical term. While technically correct, a more common and easily understandable word for 'form' might be preferred in this context.",
+          "suggestion": "Consider using a more colloquial term for 'form,' such as 'ආකාරය' (akaaraya) or 'පත්‍රය' (pathraya), depending on the desired tone and clarity. For example, 'ආකාරය එකතුව' or 'පත්‍ර එකතුව'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is technically correct, but could be slightly improved for natural flow in Sinhala. Adding a connecting particle can improve readability.",
+          "suggestion": "Consider adding 'වේ' (ve) after 'තාවකාලිකව' (taawakalaikava) for a slightly smoother flow. Example: 'ආකෘතිපත්‍ර එකතුව තාවකාලිකව නොතිබේ වේ'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

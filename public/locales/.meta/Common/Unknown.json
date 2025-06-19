@@ -3,7 +3,7 @@
   "content": "Unknown",
   "content_en_sha1_hash": "bc7819b34ff87570745fbe461e36a16f80e562ce",
   "created_at": "2025-05-19T21:30:49.397Z",
-  "updated_at": "2025-05-28T09:30:02.458Z",
+  "updated_at": "2025-05-26T07:57:32.452Z",
   "comment": {
     "text": "The translation key \"Common:Unknown\" is used to display a placeholder for unknown file types in the client's table view. It appears in the 'TypeCell' component, typically on buttons or dialogues related to file management, and should be translated to reflect an accurate description of the unknown file type.",
     "is_auto": true,

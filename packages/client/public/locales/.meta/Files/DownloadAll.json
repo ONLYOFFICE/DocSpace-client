@@ -3,7 +3,7 @@
   "content": "Download all",
   "content_en_sha1_hash": "d69edf7c454524ac387fdee404dcf0ca1812a1b5",
   "created_at": "2025-05-19T21:30:55.475Z",
-  "updated_at": "2025-06-03T20:59:42.290Z",
+  "updated_at": "2025-06-02T10:20:51.503Z",
   "comment": {
     "text": "This translation key is used to display the text \"Download all\" as a label on a button, likely in a file management interface. It appears when downloading multiple files simultaneously and should be translated accordingly.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1455,
+      "line_number": 1458,
       "context": "if (isPersonalReadOnly) {\n return [\n {\n id: \"header_option_download-all\",\n key: \"download-all\",\n label: t(\"Files:DownloadAll\"),\n onClick: this.onDownloadAllAction,\n icon: MoveReactSvgUrl,\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ներբեռնել բոլորը\" is a literal translation of \"Download all\", it might sound a bit clunky or less natural in Armenian. A more idiomatic translation might be preferable depending on the context.",
+          "suggestion": "Consider alternatives like \"Բոլորը ներբեռնել\" or a more context-specific phrasing that accurately conveys the meaning of downloading everything."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'すべてダウンロード' is understandable, a more natural and idiomatic translation of 'Download all' might be 'すべてダウンロードする' or '全部ダウンロード'. The addition of 'する' (suru - to do) or '全部' (zenbu - all, everything) improves the fluency.",
+          "suggestion": "すべてダウンロードする"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'සියල්ල බාගත කරන්න' is understandable, a more natural and commonly used translation for \"Download all\" in Sinhala would be 'ទាំងអស់ම බාගන්න'. 'සියල්ල' implies 'everything', which is broader than just the items to be downloaded.",
+          "suggestion": "ទាំងអស់ම බාගන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

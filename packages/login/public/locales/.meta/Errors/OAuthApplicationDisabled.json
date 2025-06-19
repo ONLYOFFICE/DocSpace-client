@@ -3,7 +3,7 @@
   "content": "This application is disabled",
   "content_en_sha1_hash": "2baea61d97409b30dda4f0940f58b32cc68259f5",
   "created_at": "2025-05-19T21:30:57.294Z",
-  "updated_at": "2025-05-28T09:30:02.910Z",
+  "updated_at": "2025-05-26T07:57:32.886Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an OAuth application has been disabled. It typically appears as an error message in UI elements such as error dialogs or notifications, guiding users on what action to take next. The message aims to provide clarity and context for users encountering this error, specifically related to authentication.",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dana aplikacja jest wyłączona' is technically correct, but 'Dana' is an archaic form of 'Ta'. 'Ta aplikacja jest wyłączona' sounds more natural and contemporary Polish.",
+          "suggestion": "Ta aplikacja jest wyłączona"
+        }
+      ],
       "approved_at": null
     },
     "pt": {

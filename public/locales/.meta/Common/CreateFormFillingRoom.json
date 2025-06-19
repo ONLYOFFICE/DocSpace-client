@@ -3,7 +3,7 @@
   "content": "Create Form filling room",
   "content_en_sha1_hash": "2c00eeebf71b5e09d7795d3137d22acce6f3542a",
   "created_at": "2025-05-19T21:30:43.893Z",
-  "updated_at": "2025-05-28T09:30:02.162Z",
+  "updated_at": "2025-05-26T07:57:32.198Z",
   "comment": {
     "text": "The translation key \"CreateFormFillingRoom\" is used to display the label for a button that allows users to create a new form filling room. It appears in a dialog and has been translated from English as \"Create Form filling room\". This translation key is part of a set of labels for different types of rooms, with this one specifically referring to a space for filling out forms.",
     "is_auto": true,
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Forma doldurma otağı yaradın' literally translates to 'You created form filling room'. The English phrase 'Create Form filling room' is an instruction or a command, not a statement about someone creating something. A more accurate translation would imply the action of creation.",
+          "description": "The translation \"Forma doldurma otağı yaradın\" literally translates to \"You created form filling room.\" It should reflect the action of creating a form filling room, not that the user created it.  A more accurate translation would convey the 'create' action itself.",
           "suggestion": "Forma doldurma otağı yarat"
         }
       ],
@@ -57,13 +57,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Създайте стая за Попълване на формуляри\" is a literal translation that is slightly awkward in Bulgarian. While technically correct, it's not the most natural phrasing.",
-          "suggestion": "Consider alternatives like \"Създайте помещение за попълване на формуляри\" or \"Създайте стая за обработка на формуляри\", which sound more idiomatic."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -81,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation lacks a space after the colon.",
+          "suggestion": "Δημιουργία: δωματίου συμπλήρωσης φορμών "
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -111,7 +111,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Stanza' should be 'Sala' for a more accurate translation of 'room' in this context.",
+          "suggestion": "Crea una Sala di compilazione dei moduli"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -126,8 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"양식 작성 룸 생성 \" is a literal translation but doesn't flow naturally in Korean. While technically correct, it sounds awkward.",
-          "suggestion": "Consider a more natural phrasing like \"양식 작성 공간 생성\" or \"양식 작성실 생성\"."
+          "description": "The translation \"양식 작성 룸 생성 \" is a literal translation but doesn't flow naturally in Korean. \"룸\" (room) feels out of place. A more natural phrasing would use a Korean equivalent for 'room' in this context, or omit it entirely if the context makes it obvious.",
+          "suggestion": "Consider alternatives like \"양식 작성 공간 생성\" (Form filling space creation) or \"양식 작성실 생성\" (Form filling room creation, using '실' for a dedicated space)."
+        },
+        {
+          "type": "formatting",
+          "description": "Spacing between words could be adjusted for better readability. Korean often benefits from more deliberate spacing.",
+          "suggestion": "Consider adding a space after 각 word: \"양식 작성 공간 생성\" or \"양식 작성실 생성\""
         }
       ],
       "approved_at": null
@@ -174,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Creare Sală Completare formular' is not idiomatic Romanian. 'Completare formular' is overly literal and clunky. A more natural translation would be 'Sală de completare formulare' or 'Sală pentru completarea formularelor'.",
-          "suggestion": "Sală de completare formulare"
+          "description": "The translation 'Creare Sală Completare formular' is not idiomatic Romanian. 'Completare formular' is a literal translation of 'Form filling'.",
+          "suggestion": "Creare sală de completare formulare"
         },
         {
           "type": "formatting",
-          "description": "The capitalization is inconsistent. 'Sală' should be lowercase unless it's the beginning of a sentence.",
-          "suggestion": "Sală de completare formulare"
+          "description": "There is a space missing between 'Creare' and 'sală' in the suggested correction.",
+          "suggestion": "Creare sală de completare formulare"
         }
       ],
       "approved_at": null
@@ -215,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Креирај Просторију за попуњавање формулара' is a literal translation and doesn't quite capture the natural flow of the English phrase 'Create Form filling room'. A more natural Serbian translation would emphasize the function or purpose of the room.  'Креирај Соби за попуњавање образаца' is a more common and idiomatic expression.",
-          "suggestion": "Креирај Соби за попуњавање образаца"
+          "description": "The translation 'Креирај Просторију за попуњавање формулара' is a literal translation but sounds unnatural in Serbian. 'Form filling room' implies a designated space, not an action of creating a room *for* filling forms.",
+          "suggestion": "Consider a translation like 'Направи просторију за попуњавање образаца' or 'Просторија за попуњавање образаца' depending on the intended nuance (create/room)."
         }
       ],
       "approved_at": null
@@ -227,8 +238,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Prostorija' is a somewhat formal or archaic term for 'room'. A more natural and commonly used term would be 'soba'.",
-          "suggestion": "Kreiraj Soba za popunjavanje formulara"
+          "description": "The translation 'Kreiraj Prostoriju za popunjavanje formulara' is overly formal. 'Prostorija' implies a dedicated room, which might not always be the case. A more natural translation would reflect this flexibility.",
+          "suggestion": "Kreiraj sobu za popunjavanje formulara"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Kreiraj' is correct for 'Create', the entire phrase sounds less natural than a more colloquial option.",
+          "suggestion": "Napravi prostor za popunjavanje formulara"
         }
       ],
       "approved_at": null
@@ -251,8 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Điền biểu mẫu\" is a somewhat literal translation. A more natural phrasing in Vietnamese would be \"phòng nhập liệu biểu mẫu\" or \"phòng điền thông tin biểu mẫu\". \"Điền biểu mẫu\" sounds a little awkward.",
-          "suggestion": "phòng nhập liệu biểu mẫu"
+          "description": "The translation \"Tạo phòng Điền biểu mẫu\" is not the most natural way to say \"Create Form filling room\" in Vietnamese. While technically correct, it's a bit literal.",
+          "suggestion": "Tạo phòng làm biểu mẫu"
         }
       ],
       "approved_at": null

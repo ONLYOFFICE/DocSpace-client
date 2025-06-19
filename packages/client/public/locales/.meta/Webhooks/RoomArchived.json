@@ -3,13 +3,20 @@
   "content": "Room archived",
   "content_en_sha1_hash": "b0fe8680eef92430227094a89413563c2fe2f5ac",
   "created_at": "2025-05-19T21:30:49.816Z",
-  "updated_at": "2025-05-21T01:00:02.434Z",
+  "updated_at": "2025-06-02T10:22:25.622Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This translation key is used to display the text \"Room archived\" when a room is archived through a webhook. It is likely used in a UI element that notifies users of changes to rooms, such as an update or confirmation message on a page for portal settings.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:22:25.622Z"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 80,
+      "context": "return t(\"FolderMoved\");\n case WebhookTriggers.RoomCreated:\n return t(\"Files:RoomCreated\");\n case WebhookTriggers.RoomUpdated:\n return t(\"RoomUpdated\");\n case WebhookTriggers.RoomArchived:\n return t(\"RoomArchived\");\n case WebhookTriggers.RoomDeleted:\n return t(\"RoomDeleted\");\n case WebhookTriggers.RoomRestored:\n return t(\"RoomRestored\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -92,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"룸이 아카이브되었습니다\" is understandable, it's a direct transliteration of 'archived.' A more natural Korean expression would be to use a Korean equivalent of 'archived,' such as '보관되었습니다' (bogwan-doeotseumnida) or '삭제되었습니다' (sagae-doeotseumnida) depending on the intended meaning (stored/removed). '아카이브' feels forced in this context.",
-          "suggestion": "룸이 보관되었습니다"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -107,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຫ້ອງຖືກໂຄສະນາແລ້ວ\" translates to 'The room has been advertised'. This is not an accurate translation of 'Room archived'. 'Archived' implies a storage or preservation action, not advertising.",
-          "suggestion": "A more accurate translation would depend on the intended nuance of 'archived'. Possible suggestions include: ຫ້ອງຖືກລຶບອອກແລ້ວ (room has been deleted), ຫ້ອງຖືກເກັບໄວ້ແລ້ວ (room has been stored), or ຫ້ອງຖືກຖິ້ມອອກແລ້ວ (room has been discarded). Further context would be needed to determine the best option."
+          "description": "The Lao translation 'ຫ້ອງຖືກໂຄສະນາແລ້ວ' translates to 'The room has been advertised'. It doesn't accurately convey the meaning of 'Room archived'. 'Archived' implies removal or storage, not advertisement.",
+          "suggestion": "A more accurate translation could be something like 'ຫ້ອງຖືກລຶບແລ້ວ' (hong thuk lup laeo) which means 'The room has been deleted' or 'ຫ້ອງຖືກເກັບໄວ້ແລ້ວ' (hong thuk kep vai laeo) which means 'The room has been stored'."
         }
       ],
       "approved_at": null
@@ -146,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Grupul a fost arhivat\" is a valid translation, 'Room' typically refers to a space or channel, not a 'group' in many contexts.  'Camera' might be a more accurate translation depending on the specific system.",
-          "suggestion": "Camera a fost arhivată"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -185,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба архивирана\" incorrectly translates \"Room archived.\" The word \"Соба\" means \"room\" in the sense of a space, not a chat room or online space.  It should be a term that reflects the digital room being archived.",
-          "suggestion": "Possible suggestions include: \"Архивирана просторија за чат\" (Archived chat room), \"Архивирана соба за дискусије\" (Archived discussion room), or a more localized term depending on the specific application. Without further context, it's impossible to provide a definitive correct translation."
+          "description": "The Serbian (Cyrillic) translation \"Соба архивирана\" is a mistranslation. \"Соба\" means \"room\" in a generic sense, not a digital room or space. The intended meaning is 'room archived'.",
+          "suggestion": "Simply changing to \"Архивирана соба\" would be closer to the English. A more accurate option, depending on the specific context, would be something like \"Архивирана просторија\" (archived space) or a more localized term reflecting the specific type of room."
         }
       ],
       "approved_at": null
@@ -215,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Phòng đã được sao lưu\" translates to \"Room has been backed up,\" not \"Room archived.\" The correct meaning of 'archived' in this context would imply it's been moved to an archive, not backed up.",
-          "suggestion": "Phòng đã được lưu trữ"
+          "description": "The Vietnamese translation \"Phòng đã được sao lưu\" translates to \"Room has been backed up\", not \"Room archived\". The intended meaning of 'archived' is not accurately conveyed.",
+          "suggestion": "Phòng đã bị lưu trữ"
         }
       ],
       "approved_at": null

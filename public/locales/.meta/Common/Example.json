@@ -3,7 +3,7 @@
   "content": "Example: {{example}}",
   "content_en_sha1_hash": "293ca42e3dda6b344ea17733c7b72ab1a0dc1b5e",
   "created_at": "2025-05-19T21:30:45.215Z",
-  "updated_at": "2025-05-28T09:30:02.626Z",
+  "updated_at": "2025-05-26T07:57:32.687Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text that will be replaced with the actual editor URL when editing document services. It appears in the UI as a subtitle and is accessed through an integration category page in the Portal Settings application.",
     "is_auto": true,
@@ -183,19 +183,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Пример:' is a direct transliteration and while understandable, a more natural and idiomatic translation would be 'Primer:' (using the Latin alphabet).",
-          "suggestion": "Primer: {{example}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Primer' is a valid translation for 'Example,' it doesn't fully capture the nuance. 'Example' often refers to a representative instance or a model, which 'Primer' doesn't always convey. A better translation might be 'Pristavka' or 'Tipičan primer'.",
+          "suggestion": "Consider 'Pristavka' or 'Tipičan primer' for a more accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

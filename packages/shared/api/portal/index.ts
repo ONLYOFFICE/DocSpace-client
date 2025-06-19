@@ -30,6 +30,7 @@
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
 import {
+  TBackupSchedule,
   TAutoTopUpSettings,
   TBalance,
   TCustomerInfo,
@@ -132,7 +133,7 @@ export function getBackupSchedule(dump: boolean = false) {
       dump,
     },
   };
-  return request(options);
+  return request<TBackupSchedule>(options);
 }
 
 export function createBackupSchedule(
@@ -141,7 +142,7 @@ export function createBackupSchedule(
   backupsStored,
   Period,
   Hour,
-  Day = null,
+  Day: string | null = null,
   backupMail = false,
   dump = false,
 ) {
@@ -176,11 +177,13 @@ export function deleteBackupHistory(dump: boolean = false) {
   });
 }
 
-export function deleteBackup(id) {
+export function deleteBackup(id: string) {
   return request({ method: "delete", url: `/portal/deletebackup/${id}` });
 }
 
-export function getBackupHistory(dump: boolean = false) {
+export function getBackupHistory(
+  dump: boolean = false,
+): Promise<TBackupHistory[]> {
   return request({
     method: "get",
     url: "/portal/getbackuphistory",
@@ -191,10 +194,10 @@ export function getBackupHistory(dump: boolean = false) {
 }
 
 export function startRestore(
-  backupId,
-  storageType,
+  backupId: string,
+  storageType: string,
   storageParams,
-  notify,
+  notify: boolean,
   dump = false,
 ) {
   return request({

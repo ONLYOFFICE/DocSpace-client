@@ -29,7 +29,7 @@ import classNames from "classnames";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link } from "@docspace/shared/components/link";
 
 import styles from "../styles/StorageSummary.module.scss";
 import PlanInfo from "./PlanInfo";
@@ -128,15 +128,13 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
         />
 
         {hasScheduledStorageChange ? (
-          <ColorTheme
+          <Link
             textDecoration="underline dashed"
             onClick={onCancelChange}
-            themeId={ThemeId.Link}
-            $isUnderline
             fontWeight={600}
           >
             {t("CancelChange")}
-          </ColorTheme>
+          </Link>
         ) : null}
       </div>
     </div>

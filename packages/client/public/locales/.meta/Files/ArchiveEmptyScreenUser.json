@@ -3,7 +3,7 @@
   "content": "Rooms that have been archived will appear here.",
   "content_en_sha1_hash": "05ac670d31c702deb65adabc6bd0d48ebe2ed0bc",
   "created_at": "2025-05-19T21:30:55.286Z",
-  "updated_at": "2025-06-03T20:59:41.795Z",
+  "updated_at": "2025-06-02T10:20:51.019Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that archived rooms are visible on an empty screen. It appears in a UI component related to folder management or organization views, and is intended to provide clarity to users on what they will see when viewing an empty archive.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 120,
+      "line_number": 122,
       "context": "t(\"RoomEmptyContainerDescription\")\n );\n \n const archiveRoomsDescription =\n isVisitor || isCollaborator\n ? t(\"ArchiveEmptyScreenUser\")\n : t(\"ArchiveEmptyScreen\", { productName: t(\"Common:ProductName\") });\n \n const privateRoomHeader = t(\"PrivateRoomHeader\", {\n organizationName: logoText,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 205,
-      "context": "t(\"Files:ArchiveEmptyScreen\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () => t(\"Files:TrashEmptyDescription\"))\n .otherwise(() => \"\");\n };",
+      "context": "t(\"Files:ArchiveEmptyScreen\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>\n t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>\n t(\"Files:TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n }),",
       "module": "/packages/client"
     }
   ],
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Սենյակները, որոնք արխիվացված են, կհայտնվեն այստեղ:' is a literal translation and sounds slightly unnatural in Armenian. A more natural phrasing would convey the same meaning in a more idiomatic way.",
+          "suggestion": "Արխիվացված սենյակները կգտնվեն այստեղ։ (Arkhivatsvad senyaknerə kgtnvə en aystegh:)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,13 +117,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຫ້ອງທີ່ຖືກເກັບໄວ້ຈະປາກົດຢູ່ທີ່ນີ້' while generally understandable, doesn't perfectly capture the nuance of 'archived'.  'ເກັບໄວ້' implies 'stored' or 'kept', which is close but not precisely 'archived' in the context of files/rooms being moved out of view or storage.",
+          "suggestion": "ຫ້ອງທີ່ຖືກເອກະສານໄວ້ຈະປາກົດຢູ່ທີ່ນີ້."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Šeit tiks parādītas arhivētās telpas' is a bit literal and could be improved for natural flow in Latvian. 'Will be shown' ('tiks parādītas') isn't the most elegant phrasing in this context.",
+          "suggestion": "Šeit būs redzamas arhivētās telpas."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -135,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb tense in the Portuguese translation is incorrect. 'Arquivados' (past participle) needs to agree with 'salas' (feminine plural). Also, the use of the future tense 'aparecerão' is a bit awkward in this context.",
+          "suggestion": "As salas que foram arquivadas aparecem aqui."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සංරක්‍ෂිත' (Sanrakshitha) is a more formal way of saying 'archived'. While not technically incorrect, a more natural and common word for 'archived' in this context would be 'ලේඛනය කරන ලද' (Lekhanaya karana lecad).",
+          "suggestion": "ලේඛනය කරන ලද කාමර මෙහි දිස් වනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +207,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Собе које су архивиране ће се појавити овде.' is not the most natural or precise rendering of \"Rooms that have been archived will appear here.\" While technically correct, it sounds somewhat clunky in Serbian. A more fluent translation would focus on the present tense or use a slightly different phrasing.",
+          "suggestion": "Архивиране собе ће се појавити овде."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'will appear here' is not accurately translated. 'Sobe koje su arhivirane će se pojaviti ovde' translates literally to 'Rooms that have been archived will appear here.' While not incorrect, it's a bit clunky. A more natural-sounding translation would be something like 'Sobe koje su arhivirane biće prikazane ovde' or 'Ovo je spisak soba koje su arhivirane'.",
+          "suggestion": "Sobe koje su arhivirane biće prikazane ovde. or Ovo je spisak soba koje su arhivirane."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,13 +237,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Тут з’являться кімнати, які було архівовано.' is a literal translation but sounds slightly unnatural in Ukrainian. A more natural phrasing would emphasize the display of the archived rooms.",
+          "suggestion": "Тут відображатимуться кімнати, які було архівовано."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"sao lưu\" (backup) doesn't accurately convey the meaning of \"archived.\" \"Archived\" implies the rooms have been moved out of view, not necessarily copied.",
+          "suggestion": "Các phòng đã được lưu trữ sẽ xuất hiện ở đây."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

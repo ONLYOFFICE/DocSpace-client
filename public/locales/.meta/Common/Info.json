@@ -3,7 +3,7 @@
   "content": "Info",
   "content_en_sha1_hash": "4b631f69842530d659306c8f06dbad594a6b1807",
   "created_at": "2025-05-19T21:30:45.900Z",
-  "updated_at": "2025-06-18T07:34:15.013Z",
+  "updated_at": "2025-06-18T17:11:42.423Z",
   "comment": {
     "text": "This translation key is used for the text \"Info\", which is displayed as a header or label in various UI components, including an info panel and an OAuth information dialog. The purpose of this text is to provide basic information or context, often accompanied by icons. It appears in places such as headers, dialogs, and context options.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1950,
+      "line_number": 1953,
       "context": "// onLoad: () => this.onLoadLinks(t, item),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.expired),\n },\n ...pinOptions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1950,
+      "line_number": 1953,
       "context": "// onLoad: () => this.onLoadLinks(t, item),\n },\n {\n id: \"option_room-info\",\n key: \"room-info\",\n label: t(\"Common:Info\"),\n icon: InfoOutlineReactSvgUrl,\n onClick: () => this.onShowInfoPanel(item),\n disabled: isPublicRoom || Boolean(item.external && item.expired),\n },\n ...pinOptions,",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 698,
+      "line_number": 700,
       "context": "};\n \n const infoOption = {\n key: \"info\",\n icon: SettingsIconUrl,\n label: t(\"Common:Info\"),\n onClick: onShowInfo,\n disabled: isInfo,\n };\n \n if (!isSettings) {",
       "module": "/packages/client"
     },
@@ -96,7 +96,7 @@
     },
     {
       "file_path": "/packages/shared/components/toast/sub-components/Toastr.tsx",
-      "line_number": 74,
+      "line_number": 60,
       "context": "const TOAST_CONFIGS: Record<ToastType, NotifyConfig> = {\n [ToastType.success]: { type: ToastType.success, defaultTitleKey: \"Done\" }, // t(\"Common:Done\")\n [ToastType.error]: { type: ToastType.error, defaultTitleKey: \"Warning\" }, // t(\"Common:Warning\")\n [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: \"Alert\" }, // t(\"Common:Alert\")\n [ToastType.info]: { type: ToastType.info, defaultTitleKey: \"Info\" }, // t(\"Common:Info\")\n };\n \n const getTitle = (type: \"Done\" | \"Warning\" | \"Alert\" | \"Info\") => {\n const cookieLang = getCookie(\"asc_language\");\n const lang =",
       "module": "/packages/shared"
     }
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Informationen' is a valid translation of 'Info' but lacks the brevity and generality of the English term. 'Info' often serves as a shorthand or placeholder, and 'Informationen' is a more specific and formal term.",
-          "suggestion": "Consider alternatives like 'Info' (borrowed from English and commonly used in German) or a more context-dependent translation, depending on the intended meaning and the overall tone of the content."
+          "description": "The German translation \"Informationen\" is a more expansive translation of \"Info\". While technically correct, it might be overly verbose depending on the context. A more direct and potentially more appropriate translation, especially if 'Info' is used as a short form, could be 'Infos'.",
+          "suggestion": "Consider 'Infos' as a potentially more accurate and concise translation, depending on context."
         }
       ],
       "approved_at": null
@@ -201,13 +201,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Informācija' translates to 'Information' rather than 'Info'. While related, they aren't direct equivalents.",
-          "suggestion": "Consider 'Info' or a more contextually appropriate term if 'Info' is intended to retain its original meaning (e.g., a shortened label)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -255,7 +249,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Informácie\" is a plural form. The English key 'Info' is a singular noun or a short form of 'information'. A more appropriate singular translation would be 'Informácia'.",
+          "suggestion": "Informácia"
+        }
+      ],
       "approved_at": null
     },
     "sl": {

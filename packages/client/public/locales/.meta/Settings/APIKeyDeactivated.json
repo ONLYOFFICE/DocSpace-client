@@ -3,7 +3,7 @@
   "content": "The key will be deactivated after: {{date}}",
   "content_en_sha1_hash": "b465399fcec21b53de8879de01ae3f16030e7fc9",
   "created_at": "2025-05-19T21:30:50.507Z",
-  "updated_at": "2025-05-28T09:30:02.548Z",
+  "updated_at": "2025-05-26T07:57:32.554Z",
   "comment": {
     "text": "The APIKeyDeactivated translation key is used to display a message indicating when an API key will be deactivated, typically on a settings or configuration page. This text appears as a tooltip when the \"API Key Deactivated\" status is displayed in a UI component.",
     "is_auto": true,
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Spanish translation includes \"después después de:\" which is redundant. It should be just \"después de:\" for a more natural and accurate translation.",
+          "description": "The Spanish translation contains a repeated word 'después'. It's redundant.",
           "suggestion": "La clave se desactivará después de: {{date}}"
         }
       ],
@@ -75,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Avain poistuu käytöstä: {{date}} jälkeen\" is not the most natural or accurate rendering of \"The key will be deactivated after: {{date}}\". A better phrasing would convey the idea that the deactivation *occurs* after the specified date, rather than the key 'leaving' use.",
+          "suggestion": "Avain deaktivoidaan: {{date}} jälkeen"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -90,13 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'The key will be deactivated after:' is better translated as 'The key will be disabled after:' or 'The key's validity will expire after:' to better convey the intended meaning. 'Կանջատվի' (kanjativ) often implies a sudden disconnection rather than a scheduled deactivation or expiration.",
-          "suggestion": "Բանալին կչեղարկվի {{date}} հետո"
-        },
-        {
-          "type": "grammar",
-          "description": "While 'ետո' (heto) is grammatically correct, it might sound slightly less natural in this context. A more fluent phrasing would benefit from a more sophisticated wording.",
-          "suggestion": "Բանալին կչեղարկվի {{date}}-ի ավարտին"
+          "description": "The English phrase 'The key will be deactivated after' is not perfectly captured by 'Բանալին կանջատվի հետո'. A more accurate translation might be 'Բանալին անործի գալու է {{date}} հետո' or 'Բանալին կանջատվի {{date}} թիվը' to be more precise. The current translation feels slightly awkward and lacks clarity regarding the timeframe.",
+          "suggestion": "Բանալին անործի գալու է {{date}} հետո"
         }
       ],
       "approved_at": null
@@ -146,13 +147,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'desactivada' is a variant of 'desativada' which is more commonly used in Portuguese.",
-          "suggestion": "A chave será desativada depois: {{date}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -176,18 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"යතුර {{date}} පසු නිෂ්ක්‍රීය කරනු ලැබේ.\" is a literal translation that doesn't flow naturally in Sinhala. ' පසු' (passu) implies 'after' but sounds slightly awkward in this context. A more natural phrasing would emphasize the future action.",
-          "suggestion": "යතුර {{date}} දිනදී නිෂ්ක්‍රීය කරනු ලැබේ."
-        },
-        {
-          "type": "formatting",
-          "description": "While the variable {{date}} is correctly included, consistent formatting should be ensured across all translations in the application.",
-          "suggestion": "Ensure the variable is consistently formatted as {{date}} in all Sinhala translations."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -232,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'deactivated' is not ideal. 'Vô hiệu hóa' implies rendering something ineffective, but 'deactivated' in this context means the key will stop working. A better translation would convey the cessation of functionality.",
-          "suggestion": "Khóa sẽ ngừng hoạt động sau: {{date}}"
+          "description": "While \"vô hiệu hóa\" technically translates to 'deactivated,' it carries a stronger connotation of being rendered useless or nullified. 'Deactivated' implies a temporary or reversible state, which might be more appropriate in this context. A more accurate translation might be 'bị vô hiệu hóa' or 'sẽ ngừng hoạt động'.",
+          "suggestion": "Consider using 'sẽ ngừng hoạt động' or 'bị vô hiệu hóa' for a more precise translation of 'deactivated'."
         }
       ],
       "approved_at": null
@@ -244,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '该密钥将于该时间后无效：{{date}}' is not the most natural or accurate rendering of 'The key will be deactivated after: {{date}}'.  '该时间' (this time) is redundant and doesn't accurately convey the meaning of a specific future date.",
-          "suggestion": "该密钥将在{{date}}失效 (Gai keyi zai {{date}} xiaoshi)"
+          "description": "The translation '该密钥将于该时间后无效：{{date}}' is not the most natural or accurate rendering of 'The key will be deactivated after: {{date}}'. '将于该时间后' is a bit clunky. A more natural phrasing would be '将于...失效' or '将于...过期'.",
+          "suggestion": "该密钥将于{{date}}失效"
         }
       ],
       "approved_at": null

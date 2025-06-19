@@ -3,7 +3,7 @@
   "content": "Start working in the room by creating files or folders",
   "content_en_sha1_hash": "b56bfa9dcd9738c6041f0bf7c598799e68e184c6",
   "created_at": "2025-05-19T21:30:56.453Z",
-  "updated_at": "2025-05-28T09:30:02.121Z",
+  "updated_at": "2025-05-26T07:57:32.163Z",
   "comment": {
     "text": "This translation key is used to display a message that prompts users to create new files or folders in a room. It appears on an empty view component where users can start working, likely on a file creation or management interface.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fayl və ya qovluq yaratmaqla otaqda işə başlayın' is a bit literal and awkward. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Otaqda işə başlamak üçün fayl və ya qovluq yaradın"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -93,7 +99,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ファイルやフォルダを作成して、ルームで作業を開始する' is a literal translation but sounds unnatural in Japanese. The phrase 'ルームで作業を開始する' (room de sagyou wo kaishin suru) is too formal for a user interface instruction.",
+          "suggestion": "ファイルやフォルダを作成して作業を始めましょう"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'ルーム' (room) feels out of place. It directly transliterates 'room' instead of using a more natural Japanese equivalent for 'space' or 'area'.",
+          "suggestion": "ファイルやフォルダを作成して作業を始めましょう"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +122,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເລີ່ມຕົ້ນເຮັດວຽກຢູ່ໃນຫ້ອງໂດຍການສ້າງເອກະສານຫຼືໂຟນເດີ\" is a literal translation but may not flow naturally. \"ເອກະສານ\" is a general term for documents. It could be more specific or idiomatic.",
+          "suggestion": "Consider a more natural phrasing like \"ເລີ່ມຕົ້ນເຮັດວຽກໃນຫ້ອງໂດຍການສ້າງເອກະສານໃໝ່ຫຼືໂຟນເດີ\" (Start working in the room by creating new documents or folders)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +164,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Creaţi fişiere şi foldere pentru a începe lucrul în sala' is not a natural or idiomatic way to convey 'Start working in the room by creating files or folders'. The phrase 'în sala' (in the room) is awkward and unnecessary. The intended meaning should be more like 'To start working, create files and folders'.",
+          "suggestion": "Creaţi fişiere şi foldere pentru a începe lucrul."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of the formal 'Creaţi' is slightly stiff for a user interface. While not incorrect, a less formal 'Creează' might be more appropriate depending on the overall tone of the application.",
+          "suggestion": "Creează fişiere şi foldere pentru a începe lucrul."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +187,35 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ෆයිල්' is a transliteration of 'file'. While understandable, the more standard Sinhala equivalent, 'ගොන Kimberly' might be more appropriate depending on the context and target audience.",
+          "suggestion": "ගොන Kimberly"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ෆෝල්ඩර්' is a transliteration of 'folder'. While understandable, the more standard Sinhala equivalent, 'මත Kelly' might be more appropriate depending on the context and target audience.",
+          "suggestion": "මත Kelly"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure 'කාමරයේ වැඩ ආරම්භ කිරීමට, ෆයිල් හෝ ෆෝල්ඩර් සාදන්න.' could be more natural in Sinhala. A slightly more common phrasing would place the action first.",
+          "suggestion": "කාමරයේ වැඩ ආරම්භ කිරීම සඳහා, ෆයිල් හෝ ෆෝල්ඩර් සාදන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Začnite pracovať v miestnosti a vytvorte súbory alebo priečinky' is a literal translation that doesn't quite convey the intended meaning of 'Start working in the room'. The room likely refers to a workspace or a digital environment. A better translation would reflect this.",
+          "suggestion": "Začnite pracovať na súboroch a priečinkoch"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +227,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Започни рад у просторији креирањем датотека или фолдера' is a literal translation but sounds unnatural in Serbian. 'Рад' (work) and 'просторији' (in the room) are clunky. A more natural phrasing would be to focus on starting a new project or starting to use the space.",
+          "suggestion": "Почни да радиш креирањем датотека или фолдера"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'датотека' and 'фолдер' are acceptable, 'фолдери' is the plural and likely inaccurate given the original English uses the plural 'folders'.",
+          "suggestion": "Почни да радиш креирањем датотека или фолдера"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +268,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '通过创建文件或文件夹开始在房间中工作' is overly literal and sounds unnatural in Chinese. '房间' (room) isn't the most natural way to describe a workspace in this context. It lacks nuance and a sense of activity.",
+          "suggestion": "开始工作，创建文件或文件夹"
+        }
+      ],
       "approved_at": null
     }
   }

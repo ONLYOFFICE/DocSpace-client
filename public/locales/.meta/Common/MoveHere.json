@@ -3,7 +3,7 @@
   "content": "Move here",
   "content_en_sha1_hash": "d6f5b75c92e201012666c9d9865972c786decb4e",
   "created_at": "2025-05-19T21:30:46.622Z",
-  "updated_at": "2025-05-28T09:30:02.135Z",
+  "updated_at": "2025-05-26T07:57:32.180Z",
   "comment": {
     "text": "This translation key is used for a button label that encourages users to move files or content to a new location. In the UI, it likely appears in a file management system or dialog where restoration or movement options are available.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bura köçürün' is a literal translation and doesn't convey the intended meaning of 'Move here' in many contexts. 'Köçürün' implies transferring or copying, not necessarily moving something physically.",
-          "suggestion": "Consider alternatives such as 'Buraya gətirin' (Bring here) or 'Buraya daşının' (Move here - more formal, implies relocation)."
+          "description": "The translation 'Bura köçürün' while literally meaning \"Move here\", doesn't quite convey the intended meaning of 'Move here' in the context of user interface elements or instructions. It sounds more like physically moving something to this location.",
+          "suggestion": "Consider alternatives like 'Yerinə köçür' (Move to its place) or 'Buraya gətirin' (Bring here) depending on the specific usage.  'Buraya köçür' might be acceptable, but requires careful consideration of the UI context."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Přesunout zde' while technically accurate, doesn't fully capture the nuance of 'Move here'. It implies a more deliberate action of moving something. 'Move here' can also be used as a simple direction.",
-          "suggestion": "Consider alternatives like 'Tady' (Here) or 'Sem' (To here) depending on context. 'Přesuň se sem' (Move yourself here) might be more suitable in some scenarios."
+          "description": "While \"Přesunout zde\" is a literal translation of \"Move here,\" it's not the most natural phrasing in Czech. \"Zde\" implies a specific location, whereas \"Move here\" is more general and could mean 'move to this area'.",
+          "suggestion": "Consider alternatives like \"Přesuň se sem\" (more informal, implies movement of a person/object) or \"Přesuňte se sem\" (formal, implies movement of a person/object) or \"Přemístěte se sem\" (more formal and implies a more significant movement). The best choice depends on the context."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Verschieben\" translates to \"move\" or \"shift\" but doesn't convey the imperative \"Move here\". It's a noun, not a verb in the imperative form.",
-          "suggestion": "The correct translation should be something like \"Hierhin bewegen\" or \"Beweg dich hierher\"."
+          "description": "The German translation \"Verschieben\" translates to \"move\" or \"shift\", but doesn't fully capture the nuance of \"Move here\", which implies a destination. \"Verschieben\" is a general action, not a direction.",
+          "suggestion": "A more accurate translation would be something like \"Hierhin verschieben\" (move here) or \"Hier bewegen\" (move here)."
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຍ້າຍ ນີ້' translates to 'move this' rather than 'move here'. The intended meaning 'move here' requires a different phrasing.",
-          "suggestion": "Consider 'ມາ ຢູ່ນີ້' (ma yuu nii) which translates to 'come here' or 'move here' depending on context, or 'ຍ້າຍ ມາ ທີ່ນີ້' (yaai ma thi nii) which translates to 'move to this place'."
+          "description": "The Lao translation \"ຍ້າຍ ນີ້\" literally translates to \"move this\". While it conveys a similar meaning to \"Move here\", it's not the most accurate or natural way to express \"Move here\" in Lao. A better translation would convey the destination more explicitly.",
+          "suggestion": "Consider translations like \"ມາທີ່ນີ້\" (come to here), \"ຍ້າຍມາທີ່ນີ້\" (move to here), or \"ໄປທີ່ນີ້\" (go to here) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Mutare în acest loc' is technically correct, it's not the most natural or idiomatic translation of 'Move here'. It's quite literal.",
-          "suggestion": "A more natural translation would be 'Aici' or 'Mută-te aici'."
+          "description": "While \"Mutare în acest loc\" is understandable, it's a very literal and slightly awkward translation of 'Move here'. A more natural Romanian phrase would be 'Mută-te aici' or 'Adu-te aici'.",
+          "suggestion": "Mută-te aici"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'මෙතනට ගෙනයන්න' (methanata geneyanna) literally translates to 'bring here'. The English 'Move here' implies a relocation or shifting of something to this location, not necessarily bringing it. A more accurate translation would convey movement or relocation.",
-          "suggestion": "තවත් නිවැරදි පරිවර්තනය විය හැකිය: මෙහිకి යන්න (mehikiyanna) - 'go here' or වෙනත් තැනට යන්න (venatha thanaata yanna) - 'move to another place'."
+          "description": "The Sinhala translation 'මෙතනට ගෙනයන්න' (methanata gena yanna) literally translates to 'bring here'. The English 'Move here' implies a relocation of an object or person, not an action of bringing something.",
+          "suggestion": "A more accurate translation would be something like 'මතෙහි ළඟට' (mathae lagata) which means 'move closer' or 'come here'."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Posunúť sem' is technically correct, 'Move here' often implies a relocation or bringing something to a specific location. 'Posunúť sem' can mean 'shift' or 'move over' which may not accurately convey the intended meaning. A more suitable translation might be 'Presunúť sem' which more closely aligns with relocation.",
-          "suggestion": "Presunúť sem"
+          "description": "While 'Posunúť sem' is technically correct, 'Move here' often implies a more direct placement. 'Posunúť sem' suggests a shift or move *to* this location. A more accurate translation might be 'Presunúť sem' or 'Umiestniť sem', depending on the specific context.",
+          "suggestion": "Consider 'Presunúť sem' or 'Umiestniť sem' for a more precise translation."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Помери овде\" translates to \"Move it here\" or \"Move this here,\" not simply \"Move here.\" The verb \"померити\" (pomеriti) implies movement of an object or item, whereas \"Move here\" is a more general instruction. A more accurate translation would depend on the context, but a simple, direct translation would be \"Ево\" (Evo) or a slightly longer phrase.",
-          "suggestion": "Consider \"Ево\" (Evo) or rephrase the instruction to accurately reflect the English meaning. A more contextual translation may be necessary."
+          "description": "The Serbian (Cyrillic) translation \"Помери овде\" translates to \"Move it here\" or \"Shift it here\", not \"Move here\". The verb 'померити' implies movement of an object, not the act of moving oneself.",
+          "suggestion": "Премести се овде"
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Pomeri ovde\" does not accurately convey the meaning of \"Move here.\" \"Pomeri\" is a command directed at a singular, masculine entity. \"Move here\" is a general instruction or a place to move to.",
-          "suggestion": "Consider \"Ovde\" (Here) or \"Premesti se ovde\" (Move yourself here) for a more accurate translation depending on the context."
+          "description": "The Serbian translation 'Pomeri ovde' translates to 'Move it here' or 'Move something here', not 'Move here'. The phrase 'Pomeri' implies movement *of* something, not a general instruction to move to a location.",
+          "suggestion": "Selidite ovde"
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Buraya taşı' translates to 'Move it here' or 'Carry it here', not 'Move here'. It implies moving an object rather than a person or general movement.",
-          "suggestion": "Buraya git"
+          "description": "The Turkish translation \"Buraya taşı\" is a command form (imperative) of 'carry' or 'move' and while understandable, it's not the most natural or common way to say \"Move here\". It implies carrying something. A more accurate and natural translation would be something like \"Buraya git\" (Go here) or \"Buraya taşın\" (Move here - more formal/general).",
+          "suggestion": "Consider \"Buraya git\" or \"Buraya taşın\" instead."
         }
       ],
       "approved_at": null

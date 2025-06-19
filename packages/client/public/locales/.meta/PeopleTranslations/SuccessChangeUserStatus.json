@@ -3,7 +3,7 @@
   "content": "The user status was successfully changed",
   "content_en_sha1_hash": "5a045d1563039d47bcc45200906a8f30b72d2afc",
   "created_at": "2025-05-19T21:30:53.521Z",
-  "updated_at": "2025-05-28T09:30:02.207Z",
+  "updated_at": "2025-05-26T07:57:32.229Z",
   "comment": {
     "text": "This translation key is used to display a success message when a user's status is successfully changed. It appears in a notification toast when the \"Change User Status\" dialog is closed, and its content may vary depending on whether the action affects a guest or an actual user.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පරිශ්‍රීලකයාගේ තත්‍වය වෙනස් කෙරිණි' doesn't accurately convey the meaning of \"The user status was successfully changed\".  'තත්‍වය' (thathvaya) means 'nature' or 'essence', not 'status'.",
-          "suggestion": "පරිශ්‍රීලකයාගේ තත්වය වෙනස් කෙරිණි (Parishreelakayaage thaddhaya venas keerini)"
+          "description": "The translation 'පරිශ්‍රීලකයාගේ තත්‍වය වෙනස් කෙරිණි' doesn't accurately convey the meaning of 'The user status was successfully changed.' 'තත්‍වය' is incorrect here. 'තත්වය' or 'స్థితి' would be more appropriate.",
+          "suggestion": "පරිශ්‍රීලකයාගේ ಸ್ಥිතිය වෙනස් කෙරිණි"
         }
       ],
       "approved_at": null

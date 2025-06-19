@@ -3,7 +3,7 @@
   "content": "The theme will be deleted permanently. You will not be able to undo this action.",
   "content_en_sha1_hash": "89de4916763e50db57e9c3297007140e4b618d60",
   "created_at": "2025-05-19T21:30:51.158Z",
-  "updated_at": "2025-05-28T09:30:02.500Z",
+  "updated_at": "2025-05-26T07:57:32.488Z",
   "comment": {
     "text": "This translation key is used to display a warning message when deleting a theme permanently. It appears as part of a modal dialog in the Portal Settings page, prompting the user not to undo the action once confirmed.",
     "is_auto": true,
@@ -102,7 +102,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '테마가 영구적으로 삭제됩니다. 그리고 이 작업은 취소할 수 없습니다.' is a literal translation that sounds a bit awkward in Korean. A more natural phrasing would convey the same meaning.",
+          "description": "The translation '테마가 영구적으로 삭제됩니다. 그리고 이 작업은 취소할 수 없습니다.' while conveying the general meaning, is slightly clunky and literal. A more natural Korean phrasing would improve the flow.",
+          "suggestion": "테마가 영구 삭제되며, 복구할 수 없습니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '그리고' (and) to connect the two sentences feels a bit abrupt. A smoother transition would improve readability.",
           "suggestion": "테마가 영구 삭제되며, 복구할 수 없습니다."
         }
       ],
@@ -114,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation uses Greek characters. It should be in Lao script.",
-          "suggestion": "This needs to be translated into Lao script. A possible translation is: ຫົວຂໍ້ຈະຖືກລົບຖິ້ມຢ່າງຖາວອນ ທ່ານບໍ່ສາມາດຍົກເລີກການກະ ທຳ ນີ້ໄດ້"
+          "description": "The provided Lao translation is actually Greek. It does not represent a translation of the English content into Lao.",
+          "suggestion": "A correct Lao translation is needed. An example would be: ຫົວຂໍ້ຈະຖືກລົບຖອນຢ່າງຖາວອນ ທ່ານຈະບໍ່ສາມາດຍົກເລີກການກະ ທຳ ນີ້ໄດ້"
         }
       ],
       "approved_at": null
@@ -156,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'şterasă' should be 'ștersă' to match the masculine gender of 'tema'.",
-          "suggestion": "Tema va fi ștersă definitiv. Această acțiune nu poate fi anulată."
+          "description": "The word 'şterasă' (deleted) is feminine singular, but 'tema' (theme) is masculine. It should be 'şters' instead.",
+          "suggestion": "Tema va fi şters definitiv. Această acţiune nu poate fi anulată."
         }
       ],
       "approved_at": null
@@ -174,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"තේමාව සදහටම මැකෙනු ඇත. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.\" doesn't accurately convey the meaning of \"The theme will be deleted permanently. You will not be able to undo this action.\" Specifically, 'මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි' translates to 'This action is irreversible,' which is a bit formal and doesn't directly reflect the inability to undo the deletion. It suggests more of a policy limitation rather than the core message.",
-          "suggestion": "තේමාව සදහටම මැකෙනු ඇත. එය ආපසු ගන්න බැරි වේ."
+          "description": "The translation 'තේමාව සදහටම මැකෙනු ඇත. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.' does not accurately convey the meaning of 'The theme will be deleted permanently. You will not be able to undo this action.'. Specifically, 'මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි' translates to 'this action is irreversible', which isn't the most natural or clear way to express the idea of not being able to undo the action. It implies a more technical or formal irreversibility.",
+          "suggestion": "තේමාව සදහටම මැකෙනු ඇත. එය නැවත ලබා ගැනීමට බැරිවනු ඇත."
         }
       ],
       "approved_at": null
@@ -183,13 +188,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"vrátiť späť\" is a bit clunky in this context. A more natural phrasing would be \"zrušiť\" or \"otočiť\".",
-          "suggestion": "Téma bude natrvalo vymazaná. Túto akciu nebudete môcť zrušiť."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -204,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'permanently' is best translated to 'трајно' rather than 'заувек' in this context. 'Заувек' implies a more eternal or infinite timeframe, which isn't quite accurate for a theme deletion.",
+          "description": "The English phrase 'permanently' is better translated as 'трајно' (trajno) in Serbian (Cyrillic) instead of 'заувек' (zauvek). While 'заувек' is technically correct, 'трајно' conveys the sense of irreversible deletion more accurately in this context.",
           "suggestion": "Тема ће бити обрисана трајно. Нећете моћи да поништите ову радњу."
         }
       ],
@@ -215,8 +214,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'obrisana' uses feminine gender. 'Tema' (theme) is feminine, but the action 'to delete' is being applied to it. However, the verb form should agree with the *subject* which is 'the theme'. While technically not incorrect, a more natural and accurate translation would use a masculine verb form.",
+          "type": "grammar",
+          "description": "The Serbian translation uses the feminine form 'obrisana' (deleted - feminine) when referring to 'Tema' (Theme), which is a masculine noun.  This creates a grammatical mismatch.",
           "suggestion": "Tema će biti obrisan zauvek. Nećete moći da poništite ovu radnju."
         }
       ],

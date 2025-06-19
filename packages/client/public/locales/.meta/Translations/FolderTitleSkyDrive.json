@@ -3,7 +3,7 @@
   "content": "OneDrive directory",
   "content_en_sha1_hash": "c8e40ba514d8b937d8933bdd306cb4c0cf6ceba0",
   "created_at": "2025-05-19T21:30:49.981Z",
-  "updated_at": "2025-06-03T20:59:41.988Z",
+  "updated_at": "2025-05-26T07:57:32.388Z",
   "comment": {
     "text": "This translation key is used to display the title of a cloud storage directory in various UI contexts, such as file managers or dialogs. It should be translated to match the expected name of the corresponding cloud storage service (e.g., \"OneDrive\" for OneDrive). This string appears in code and may be displayed on-screen in user interfaces managing files from these services.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'OneDrive գրացուցակ' directly translates to 'OneDrive list'. While technically accurate, 'directory' implies a higher-level organizational structure than just a list. A more accurate translation might convey that.",
-          "suggestion": "OneDrive թղթապանակ (OneDrive folder)"
+          "description": "The Armenian translation 'OneDrive գրացուցակ' is a literal translation of 'directory' (գրացուցակ means 'directory' or 'list'). While technically correct, it doesn't fully convey the meaning of 'OneDrive directory,' which implies a specific folder within OneDrive. A more accurate translation might consider incorporating 'ֆայլերի' (files) or a similar term to specify it’s a folder *within* OneDrive.",
+          "suggestion": "OneDrive ֆայլերի պանակ"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ໄດເລກະທໍລີ OneDrive' directly transliterates 'directory' which isn't the most natural or clear way to express the concept of an 'OneDrive directory'.  A more accurate and natural translation would focus on the meaning - a location or folder within OneDrive.",
-          "suggestion": "ໄດເລກະທໍລີ ຂອງ OneDrive"
+          "description": "The Lao translation \"ໄດເລກະທໍລີ OneDrive\" is a transliteration of 'directory' and 'OneDrive' rather than a proper translation of 'OneDrive directory'. A more accurate translation would convey the meaning of a folder or location associated with OneDrive.",
+          "suggestion": "ໄດເລກະທໍລີ ໄດເວີ໌ ຫຼື ບ່ອນເກັບຂໍ້ມູນໄດເວີ໌"
         }
       ],
       "approved_at": null
@@ -156,8 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Director OneDrive' is not a natural or accurate translation of 'OneDrive directory'. It's a literal translation that doesn't convey the intended meaning.",
-          "suggestion": "A more accurate translation would be 'dosarul OneDrive' or 'folder OneDrive'."
+          "description": "The translation 'Director OneDrive' does not accurately convey the meaning of 'OneDrive directory'. 'Director' implies a person or leadership role, whereas 'directory' refers to a folder or location.",
+          "suggestion": "Dosar OneDrive"
+        },
+        {
+          "type": "grammar",
+          "description": "While 'Dosar OneDrive' is more accurate, it could be improved for a more natural Romanian phrasing. The word order could be refined.",
+          "suggestion": "OneDrive - Dosar"
         }
       ],
       "approved_at": null
@@ -174,8 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala word 'වන්ඩ්‍රයිව්' is a transliteration of 'OneDrive'. While understandable, a more localized or adapted version might be preferred for better naturalness in Sinhala. However, it's technically not *incorrect* in a literal sense.",
-          "suggestion": "Consider exploring alternative translations that more accurately reflect the concept of 'OneDrive directory' in Sinhala. For example, something along the lines of 'වන්ඩ්‍රයිව් ගොනුවලzeichnis' (OneDrive file directory) or consulting with a Sinhala language expert."
+          "description": "The word 'වන්ඩ්‍රයිව්' is a transliteration of 'OneDrive' and while understandable, it's not the most natural or widely accepted rendering in Sinhala. A more consistent transliteration might be preferable.",
+          "suggestion": "Consider using a more standardized transliteration, potentially researching common usage or consulting with a Sinhala language expert. Options might include 'වන්‍ඩ්‍රයිව්' or 'ඔන්‍ඩ්‍රයිව්'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'වන්ඩ්‍රයිව් නාමාවලිය' is literally 'OneDrive list', 'directory' carries a slightly different nuance of a collection of files and folders. 'නාමාවලිය' implies a simple list, not necessarily a hierarchical structure.",
+          "suggestion": "Consider alternatives to 'නාමාවලිය' that better capture the meaning of 'directory', such as 'සොයාසුනුවහ' (soya sunuva ha - collection) or a more descriptive phrase."
         }
       ],
       "approved_at": null

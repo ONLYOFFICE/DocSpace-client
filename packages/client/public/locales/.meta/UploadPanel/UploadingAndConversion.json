@@ -3,7 +3,7 @@
   "content": "Uploading & Conversion",
   "content_en_sha1_hash": "62063df26c306ea5a37b06a791b0446140db5797",
   "created_at": "2025-05-19T21:30:49.952Z",
-  "updated_at": "2025-05-21T01:20:05.311Z",
+  "updated_at": "2025-05-24T02:33:20.579Z",
   "comment": {
     "text": "This translation key is used to display the text \"Uploading & Conversion\" on a file upload component. It likely appears as a title or label in an upload panel dialog.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"Dönüşüm\" is a Turkish word, not Azerbaijani. The Azerbaijani equivalent for \"Conversion\" is \"Çevrilmə\" or \"Dövrüm\" depending on the context. \"Dönüşüm\" is misleading and may confuse users.",
-          "suggestion": "Replace \"Dönüşüm\" with \"Çevrilmə\" or \"Dövrüm\"."
+          "description": "The term \"Dönüşüm\" is generally used for transformation, not conversion in this context. A more appropriate term for 'Conversion' in this context (likely referring to file conversion) would be 'Çevrilmə'.",
+          "suggestion": "Yükləmə və Çevrilmə"
         }
       ],
       "approved_at": null
@@ -111,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The ampersand (&) is not consistently handled. While present in the English, the Lao uses a space instead of an ampersand.",
-          "suggestion": "Replace the space with an ampersand ( & ) or restructure the phrasing to avoid the conjunction."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'යොමු කිරීම සහ පරිවර්තනය' while technically accurate, doesn't fully capture the nuance of 'Uploading & Conversion'.  'Uploading' implies an action of transferring files, while 'යොමු කිරීම' is more general.  'Conversion' implies changing a file format.  A more contextually accurate translation would consider the specific type of conversion.",
-          "suggestion": "Consider alternatives like 'ගොනු යැවීම සහ ආකෘතිය වෙනස් කිරීම' (Gonu Yavimata saha Akruthya Venas Karaminata) which means 'File Uploading and Format Changing', or a more general term based on the user's intent. A more accurate translation requires further context."
+          "description": "The English phrase 'Uploading & Conversion' implies a process of both uploading files and converting them to another format. 'යොමු කිරීම සහ පරිවර්තනය' while containing ' පරිවර්තනය' (conversion) has 'යොමු කිරීම' which translates to 'referring' or 'pointing' rather than 'uploading'. A more accurate translation for 'Uploading' would be 'බා උප්තං කිරීම' (ba upthang kirima) or similar.",
+          "suggestion": "Consider 'බා උප්තං කිරීම සහ පරිවර්තනය' (ba upthang kirima saha parivarthanaya) or a similar phrase accurately conveying 'Uploading and Conversion'."
         }
       ],
       "approved_at": null
@@ -207,13 +201,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Передавання та перетворення\" is technically correct, it's a bit formal and long for a panel title like \"Uploading & Conversion\".  \"Завантаження та конвертація\" would be a more natural and commonly used translation in this context.",
-          "suggestion": "Завантаження та конвертація"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

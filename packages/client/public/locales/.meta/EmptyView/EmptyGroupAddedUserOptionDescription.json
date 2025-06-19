@@ -3,7 +3,7 @@
   "content": "Add group members and assign the head",
   "content_en_sha1_hash": "9a4a1f9a41fc7dac52783546c78743d3ecfbbb4b",
   "created_at": "2025-05-19T21:30:56.478Z",
-  "updated_at": "2025-05-28T09:30:02.461Z",
+  "updated_at": "2025-05-26T07:57:32.455Z",
   "comment": {
     "text": "The \"EmptyGroupAddedUserOptionDescription\" translation key is used to display a message when a new group is created and users can be added. It appears on an empty screen where users can add members and assign a head. The translator should provide a descriptive title for this option to indicate its purpose in the UI.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'assign the head' is better translated as 'rəhbəri seçin' or 'rəhbəri təyin edin'.  'Təyin edin' can be used, but 'seçin' (choose) is often more natural in this context.",
+          "suggestion": "Qrup üzvlərini əlavə edin və rəhbəri seçin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -99,13 +105,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Add group members and assign the head\" is more accurately translated as \"Add group members and designate a leader\" or \"Add group members and appoint a leader.\" The Korean translation implies a responsibility or role that might not be intended.",
+          "suggestion": "그룹 구성원을 추가하고 리더를 지정하세요"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ແຊ່ງຕັ້ງ' doesn't accurately convey the meaning of 'assign'. It translates more closely to 'curse' or 'blame'. A more appropriate translation for 'assign' in this context would be something along the lines of 'ມອບຫມາຍ' or 'ເລືອກຕັ້ງ'.",
+          "suggestion": "ເພີ່ມສະມາຊິກກຸ່ມ ແລະ ມອບຫມາຍຫົວໜ້າ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,13 +141,30 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dodaj do grupy członków i przypisz jej lidera' is a bit literal and slightly awkward in Polish. While technically correct, it can be improved for natural flow.",
+          "suggestion": "Dodaj członków do grupy i wyznacz lidera."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'przypisz jej lidera' is grammatically correct, but 'wyznacz lidera' is more idiomatic and commonly used in this context. The use of 'jej' is a little clunky.",
+          "suggestion": "Use 'wyznacz lidera' instead of 'przypisz jej lidera'."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Cabeçalho' translates to 'header' and doesn't accurately convey the meaning of 'head' in the context of group leadership. It should be a term for a leader or coordinator.",
+          "suggestion": "Adicionar membros do grupo e designar o líder/coordenador"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +188,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Add group members\" is not accurately reflected. 'ප්‍රජාභවයන්' (prajabhavayan) translates more to 'communities' or 'populations' rather than 'group members'.",
+          "suggestion": "Consider using 'සසුන් දායකයන්' (sasun dayakayan) which translates to 'group members' or 'participants'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'assign the head' is not adequately captured. 'ප්‍රධානියා පත් කරන්න' (pradhania path kanna) is a bit literal and can be improved for naturalness in Sinhala.",
+          "suggestion": "Consider a more natural phrasing like 'ලිඩරවරයා තනවා' (lidaravaru thanawa) - meaning 'appoint a leader'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +217,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"assign the head\" is not the most natural translation of 'assign the head' in this context. It implies a formal appointment rather than simply designating a leader within the group. A more appropriate term would convey the role of a leader or coordinator.",
+          "suggestion": "Додајте чланове групе и изаберите вођу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

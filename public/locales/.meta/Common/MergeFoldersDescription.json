@@ -3,7 +3,7 @@
   "content": "Two folders will be merged into one with all the contents",
   "content_en_sha1_hash": "23b101a98cfcb2fffba856e711fa6a255d13db5d",
   "created_at": "2025-05-19T21:30:46.538Z",
-  "updated_at": "2025-05-28T09:30:02.217Z",
+  "updated_at": "2025-05-26T07:57:32.242Z",
   "comment": {
     "text": "When merging two folders into one, this description indicates that all contents will be combined, appearing on a merge options screen in a conflict resolve dialog.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İki qovluq bütün məzmunu ilə bir qovluğa birləşdiriləcək' is a bit literal and doesn't flow naturally in Azerbaijani. A more natural phrasing would better convey the meaning.",
-          "suggestion": "İki qovluq birləşdirilərək, bütün məzmunu ilə bir qovluq əldə ediləcək"
+          "description": "The translation 'İki qovluq bütün məzmunu ilə bir qovluğa birləşdiriləcək' is a bit literal and could be improved for natural flow. While technically correct, it sounds slightly awkward in Azerbaijani.",
+          "suggestion": "İki qovluq birgə birləşdirilərək, bütün məzmunu ilə bir qovluqda toplanacaq."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Δύο φάκελοι θα συγχωνευθούν σε έναν με όλα τα περιεχόμενα' is a literal translation but could be improved for clarity and naturalness in Greek. 'περιεχόμενα' while technically correct, feels slightly formal and less common in this context.",
-          "suggestion": "Δύο φάκελοι θα συγχωνευθούν σε έναν, συμπεριλαμβάνοντας όλα τα αρχεία και τους φακέλους."
+          "description": "The translation 'Δύο φάκελοι θα συγχωνευθούν σε έναν με όλα τα περιεχόμενα' is a literal translation and sounds awkward in Greek. A more natural phrasing would be needed.",
+          "suggestion": "Δύο φάκελοι θα ενωθούν σε έναν, συμπεριλαμβάνοντας όλο το περιεχόμενό τους."
         }
       ],
       "approved_at": null
@@ -96,13 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Երկու թղթապանակ կմիավորվեն մեկի մեջ, ամբողջ բովանդակությամբ' doesn't quite capture the meaning of 'Two folders will be merged into one with all the contents'. 'ամբողջ բովանդակությամբ' is a literal translation of 'with all the contents' and sounds unnatural in Armenian.  A better phrasing would convey the inclusion of all the contents more elegantly.",
-          "suggestion": "Երկու թղթապանակները կմիավորվեն մեկի մեջ, բոլորովին բոլոր բովանդակություններով։ (Two folders will be merged into one, including all of their contents.)"
+          "description": "The Armenian translation \"Երկու թղթապանակ կմիավորվեն մեկի մեջ, ամբողջ բովանդակությամբ\" is not an ideal translation of 'Two folders will be merged into one with all the contents'. It's a bit literal and clunky. 'ամբողջ բովանդակությամբ' could be improved. A more natural phrasing would better convey the intended meaning.",
+          "suggestion": "Երկու թղթապանակները կմիավորվեն մեկի մեջ, բոլորովին բոլոր բովանդակությամբ։ (Two folders will merge into one, with all contents.) Alternatively, Երկու թղթապանակները կմիավորվեն մեկի մեջ, բոլոր բովանդակությունների հետ։ (Two folders will merge into one, with all contents)."
         },
         {
           "type": "grammar",
-          "description": "The verb conjugation 'կմիավորվեն' is grammatically correct, but the sentence structure could be improved for better flow. Using a more active voice or a different sentence structure would read more naturally in Armenian.",
-          "suggestion": "Մեկ թղթապանակի մեջ կմիավորվեն երկու թղթապանակ, բոլորովին բոլոր բովանդակություններով։ (Two folders will be merged into one, including all of their contents.)"
+          "description": "The verb conjugation 'կմիավորվեն' might be unnecessarily formal depending on the context.  A less formal alternative might be preferable.",
+          "suggestion": "Consider a less formal verb conjugation if appropriate for the overall tone of the application."
         }
       ],
       "approved_at": null
@@ -110,7 +110,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Due cartelle saranno unite in una con tutti i contenuti' is a literal translation, but it's not the most natural phrasing in Italian. It lacks fluency and clarity.",
+          "suggestion": "A more natural translation would be 'Due cartelle verranno unite in una sola, includendo tutti i contenuti' or 'Due cartelle saranno unite in un'unica cartella, con tutti i contenuti al suo interno'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -119,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Two folders will be merged into one with all the contents' is slightly verbose. The Japanese translation, while technically correct, loses some of the efficiency and natural flow. A more natural translation might emphasize the merging *of* the folders, rather than the result.",
-          "suggestion": "2 つのフォルダが結合され、すべての内容を含む 1 つのフォルダになります (2 tsuno foruda ga ketsugou sare, subete no naiyou o fukumu 1 tsuno foruda ni narimasu)."
+          "description": "The English phrase \"Two folders will be merged into one with all the contents\" is not perfectly captured by the Japanese translation. The phrasing 'すべての内容を含む 1 つのフォルダにマージされます' (all the contents included in one folder will be merged) is a bit literal and slightly awkward in natural Japanese. A more natural phrasing would emphasize the combined folder containing all content.",
+          "suggestion": "2 つのフォルダを結合し、すべての内容を含む 1 つのフォルダを作成します (Futatsu no fōldaa o ketsugō shi, subete no naiyō o fukumu 1 tsuno fōldaa o sakusei shimasu)."
         }
       ],
       "approved_at": null
@@ -131,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"두 폴더가 모든 내용을 포함하는 하나의 폴더로 병합됩니다\" while technically correct, is a bit wordy and could be more concise. '포함하는' (including) is somewhat redundant given the context of merging folders.",
-          "suggestion": "두 폴더가 하나의 폴더로 병합됩니다 (Two folders will be merged into one)."
+          "description": "The translation \"두 폴더가 모든 내용을 포함하는 하나의 폴더로 병합됩니다\" while technically accurate, is a bit wordy and formal for a user-facing description. '모든 내용을 포함하는' (including all contents) is redundant since '병합' (merge) inherently implies this.",
+          "suggestion": "두 폴더가 하나의 폴더로 병합됩니다."
         }
       ],
       "approved_at": null
@@ -143,7 +149,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ສອງໂຟນເດີຈະຖືກລວບລ່ຽງເຂົ້າກັນເປັນສູງສຸດດ້ວຍເນື້ອໃນທັງໝົດ' is not a perfect translation of 'Two folders will be merged into one with all the contents'. 'ເປັນສູງສຸດ' (pen sung sut) translates to 'to the highest' or 'to the utmost', which doesn't fit the context of folder merging.  It implies merging into the 'most' of something, which is nonsensical.",
+          "description": "The Lao translation \"ສອງໂຟນເດີຈະຖືກລວບລ່ຽງເຂົ້າກັນເປັນສູງສຸດດ້ວຍເນື້ອໃນທັງໝົດ\" is not a direct or accurate translation of \"Two folders will be merged into one with all the contents.\" The phrase \"ເປັນສູງສຸດ\" (pen sung soot) means \"to the highest degree\" or \"to the maximum,\" which is not relevant to the meaning of the original English sentence. It implies a level of merging that isn't conveyed.",
           "suggestion": "ສອງໂຟນເດີຈະຖືກລວບລ່ຽງເຂົ້າກັນດ້ວຍເນື້ອໃນທັງໝົດ"
         }
       ],
@@ -155,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Divas mapes tiks apvienotas vienā ar visu saturu' is a literal translation but sounds unnatural in Latvian. A more idiomatic translation would be better.",
-          "suggestion": "Divas mapes tiks apvienotas vienā, iekļaujot visu saturu"
+          "description": "The translation 'Divas mapes tiks apvienotas vienā ar visu saturu' is a literal translation and slightly awkward. A more natural and idiomatic translation would be preferred.",
+          "suggestion": "Divas mapes apvienos vienā, iekļaujot visu saturu."
         }
       ],
       "approved_at": null
@@ -173,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"z całą zawartością\" (with all the contents) is a literal translation and sounds unnatural in Polish. It's better to convey the meaning of 'all contents being included' without being so verbose.",
-          "suggestion": "Dwa katalogi zostaną połączone w jeden, z uwzględnieniem całej zawartości."
+          "description": "The Polish translation 'z całą zawartością' (with all the contents) is a literal translation that sounds awkward in Polish. It's more natural to imply that all contents are included, rather than explicitly stating it.",
+          "suggestion": "Dwa katalogi zostaną połączone w jeden, a wszystkie pliki zostaną zachowane."
         }
       ],
       "approved_at": null
@@ -197,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'merged' is better translated as 'unite' or 'combinate' rather than 'îmbinate'. 'Îmbinate' implies joining two things, often irregularly or with some difficulty, which isn't the intended meaning here.",
+          "description": "The word \"îmbinate\" (combined) doesn't quite capture the meaning of 'merged'. 'Merged' implies a single, unified folder, while 'îmbinate' suggests two folders are joined together but may still retain some distinction.",
           "suggestion": "Două foldere vor fi unite într-un singur folder cu tot conținutul"
         }
       ],
@@ -206,7 +212,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Две папки будут объединены в одну со всем содержимым' is a literal translation and doesn't flow naturally in Russian. While technically correct, it sounds awkward.",
+          "suggestion": "Две папки будут объединены в одну, включая все их содержимое."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -215,13 +227,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"තවදුරටත්, ෆෝල්ඩර් දෙකක් එකකට ඒකාග්‍ර කරනු ලැබේ, එහි සියලුම අන්තර්ගතයන් ඇතුළත් වේ.\" is overly verbose and not a natural way to express the concept of merging folders. 'තවදුරටත්' (Thavaduratath) which translates to 'furthermore' or 'in addition' is unnecessary and creates an awkward phrasing. The inclusion of 'ඇතුළත් වේ' (Athulatha We) which translates to 'included' is also redundant.",
-          "suggestion": "ෆෝල්ඩර් දෙකක් එකකට ඒකාග්‍ර කරනු ලැබේ."
+          "description": "The translation \"තවදුරටත්, ෆෝල්ඩර් දෙකක් එකකට ඒකාග්‍ර කරනු ලැබේ, එහි සියලුම අන්තර්ගතයන් ඇතුළත් වේ.\" is a bit verbose and not the most natural way to express 'Two folders will be merged into one with all the contents' in Sinhala.  'එකාග්‍ර කරනු ලැබේ' is a formal way to express merging and 'ඇතුළත් වේ' for 'includes' is also a bit stiff.",
+          "suggestion": "A more natural translation might be: 'ෆෝල්ඩර් දෙකක් එකතුවන්නේ සියලුම දෑ සමඟ'."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is slightly convoluted and could be simplified for better readability.",
-          "suggestion": "ෆෝල්ඩර් දෙකක් එකකට ඒකාග්‍ර කරනු ලැබේ, සියලුම අන්තර්ගතයන්හි."
+          "description": "The Sinhala translation uses a somewhat formal tone. Depending on the context of the application, a more casual tone might be preferred. This isn't necessarily an error, but something to consider.",
+          "suggestion": "Consider a more conversational tone if appropriate for the context. For instance: 'ෆෝල්ඩර් දෙකක් එකතුවෙනවා, හැම දේම තියා'."
         }
       ],
       "approved_at": null
@@ -244,7 +256,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'фолдера' is a colloquial/informal spelling of 'фолдери'. While understandable, 'фолдери' is the more standard and preferred form in most contexts.",
+          "description": "The word 'folder' is transliterated as 'фолдера'. While understandable, the more common and accepted transliteration is 'фолдери'.",
           "suggestion": "фолдери"
         }
       ],
@@ -256,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'with all the contents' is not perfectly captured by 'sa svim sadržajem'. A more accurate translation would emphasize the merging of all items within the folders.",
-          "suggestion": "Dva foldera će biti spojena u jedan, uz preuzimanje svih datoteka i sadržaja."
+          "description": "The translation 'Dva foldera će biti spojena u jedan sa svim sadržajem' is a literal translation but doesn't quite convey the meaning of 'merged into one with all the contents' naturally in Serbian. A more natural phrasing would imply a consolidation of the folders.",
+          "suggestion": "Dva foldera će biti objedinjena u jedan, uključujući sav sadržaj."
         }
       ],
       "approved_at": null
@@ -265,13 +277,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'İki klasör tüm içerikleriyle bir klasörde birleştirilecek' is not a perfect equivalent of 'Two folders will be merged into one with all the contents'. A more natural translation would be something like 'İki klasör, tüm içerikleriyle tek bir klasörde birleştirilecektir.' or 'İki klasörün tüm içerikleri tek bir klasörde birleştirilecek'.",
-          "suggestion": "İki klasörün tüm içerikleri tek bir klasörde birleştirilecek"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -280,8 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Ukrainian sentence \"Дві папки буде об'єднано в одну з усім вмістом\" uses the passive voice and sounds awkward in Ukrainian.  A more natural phrasing would use an active voice construction.",
-          "suggestion": "Дві папки буде об'єднано в одну з усім вмістом.  Better: Об'єднаються дві папки в одну з усім вмістом (Two folders will be merged into one with all the contents)."
+          "description": "The verb tense 'буде об'єднано' (future tense) doesn't quite fit the context of a merging action. It implies a future event, but the description is likely referring to an action that will occur during the merging process.",
+          "suggestion": "Об'єднано дві папки в одну з усім вмістом"
         }
       ],
       "approved_at": null
@@ -298,8 +304,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '涵盖全部内容' (han gai quanbu neirong) is too literal and doesn't convey the intended meaning as naturally as it could. '涵盖' implies covering or including, which isn't the best fit for 'with all the contents'.",
-          "suggestion": "两个文件夹将合并为一个文件夹，包含所有内容 (Liangge fu文件夹 jiang hebing wei yigge fu文件夹，baohao suoyou neirong)"
+          "description": "The translation \"涵盖全部内容\" (han gai quanbu neirong) literally translates to 'covers all content'. While not entirely wrong, it's not the most natural or precise way to convey 'with all the contents' in this context. A more accurate and natural phrasing would emphasize that all files and subfolders are included.",
+          "suggestion": "两个文件夹将合并为一个文件夹，包含所有内容和子文件夹 (Liǎng gè文件夹jiāng hébìng wéi yī gè文件夹, bāohán suǒyǒu nèiróng hé zǐfēngjiē)."
         }
       ],
       "approved_at": null

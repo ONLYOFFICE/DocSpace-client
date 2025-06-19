@@ -3,7 +3,7 @@
   "content": "Use this option to provide on-brand experience to your users. These settings will be effective for all of your portals.",
   "content_en_sha1_hash": "5bb80585de3f60ce03d372fe3a4ac6a008e50003",
   "created_at": "2025-05-19T21:30:54.241Z",
-  "updated_at": "2025-05-28T09:30:02.645Z",
+  "updated_at": "2025-05-26T07:57:32.704Z",
   "comment": {
     "text": "Use this option to customize your portal's on-brand mobile settings experience. This text is used as a subtitle in a category section, providing context for users navigating to LDAP settings on their mobile devices.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'on-brand experience' is not accurately translated. 'Brendə xas təcrübə' is a literal translation but doesn't fully convey the meaning. A more appropriate translation would emphasize consistency or a unified brand image.",
-          "suggestion": "Consider alternatives like 'brendinizin vahid imicini saxlamaq üçün' (to maintain your brand's unified image) or 'brendinizlə müvafiq təcrübə' (brand-consistent experience)."
+          "description": "The English phrase 'on-brand experience' is not accurately conveyed by 'brendə xas təcrübə'. A more accurate translation might be something like 'brendlə uyğun təcrübə' or 'brendin özünəməxsus təcrübəsi'.",
+          "suggestion": "brendlə uyğun təcrübə"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English term 'settings' is translated as 'parametrler'. While not entirely wrong, 'parametrler' is more technical. 'Parametrlər' can imply configuration items rather than general settings.",
-          "suggestion": "Consider using 'parametr' which is broader, or 'quruluşlar' (configurations)."
+          "description": "'These settings will be effective for all of your portals' is a bit literal. A more natural phrasing in Azerbaijani might be 'Bu parametrlər bütün portallarınızda tətbiq olunacaq' or 'Bütün portallarınız bu parametrlərə əsasən işləyəcək'.",
+          "suggestion": "Bütün portallarınızda tətbiq olunacaq"
         }
       ],
       "approved_at": null
@@ -68,13 +68,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'on-brand experience' is not accurately conveyed by 'χαρακτηριστική εμπειρία'. While 'χαρακτηριστική' can mean distinctive, it doesn't capture the 'brand' aspect. A more accurate translation might involve terms related to brand identity or consistency.",
-          "suggestion": "Consider translating 'on-brand experience' as 'εμπειρία σύμφωνη με την εταιρική σας ταυτότητα' or 'εμπειρία που αντικατοπτρίζει την εταιρική σας εικόνα'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -125,13 +119,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຕາມທິດທາງຂອງຍີ່ຫໍ້\" (tam thit thang khong yi ho) literally translates to 'according to the direction of your brand'. A more natural and accurate translation for 'on-brand' would be something like 'ສອດຄ່ອງກັບຍີ່ຫໍ້' (sot khong kap yi ho) or 'ເອກະລັກຂອງຍີ່ຫໍ້' (ekalak khong yi ho).",
-          "suggestion": "ໃຊ້ຕົວເລືອກນີ້ເພື່ອໃຫ້ບໍລິການສອດຄ່ອງກັບຍີ່ຫໍ້ຂອງເຈົ້າ ໃຫ້ຜູ້ໃຊ້ຂອງເຈົ້າ."
+          "description": "The phrase \"ຕາມທິດທາງຂອງຍີ່ຫໍ້\" (tam thit thang khong yi ho) translates to \"according to the direction of your brand\" which isn't the most natural or accurate translation of \"on-brand experience\". A more suitable translation would be something like \"ຕາມຮູບແບບຂອງຍີ່ຫໍ້\" (tam roop map khong yi ho) which means \"according to the brand's style/format\".",
+          "suggestion": "ໃຊ້ຕົວເລືອກນີ້ເພື່ອໃຫ້ບໍລິການຕາມຮູບແບບຂອງຍີ່ຫໍ້ຂອງເຈົ້າ ໃຫ້ຜູ້ໃຊ້ຂອງເຈົ້າ."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ບັນດາເວທີ\" (bana wethii) translates to 'all platforms' but 'portals' is slightly different. 'ເວທີ' is a fine general term, but a more precise translation, depending on the context, could be considered.",
-          "suggestion": "ການຕັ້ງຄ່າເຫຼົ່ານີ້ຈະມີຜົນສັກສິດຕໍ່ເວທີຂອງເຈົ້າທັງໝົດ."
+          "type": "grammatical",
+          "description": "While not strictly incorrect, the sentence structure \"ໃຊ້ຕົວເລືອກນີ້ເພື່ອໃຫ້ບໍລິການ...ໃຫ້ຜູ້ໃຊ້ຂອງເຈົ້າ\" feels a bit clunky in Lao. It could be smoother.",
+          "suggestion": "ໃຊ້ຕົວເລືອກນີ້ເພື່ອໃຫ້ຜູ້ໃຊ້ຂອງເຈົ້າໄດ້ຮັບປະສົບການຕາມຮູບແບບຂອງຍີ່ຫໍ້ຂອງເຈົ້າ."
         }
       ],
       "approved_at": null
@@ -139,13 +133,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"zīmola lietošanas pieredzi\" is a bit literal and could be improved for fluency. A more natural translation for 'on-brand experience' might be 'atbilstošu zīmola pieredzi' or 'atbilstošu zīmola veidu pieredzi'.",
-          "suggestion": "Izmantojiet šo opciju, lai jūsu lietotājiem nodrošinātu atbilstošu zīmola pieredzi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -154,7 +142,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'portalen' is a Dutch variant of 'portals' and is incorrect. The correct spelling is 'portalen'.",
+          "description": "The word 'portalen' is a misspelling of 'portalen'.",
           "suggestion": "portalen"
         }
       ],
@@ -166,13 +154,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'on-brand experience' is not accurately translated. 'Pokazywać użytkownikom branding marki' is a literal translation that doesn't convey the intended meaning of providing a consistent brand look and feel. It sounds awkward.",
+          "description": "The phrase \"pokazywać użytkownikom branding marki\" is an awkward and not idiomatic translation of \"provide on-brand experience to your users.\"  'Branding marki' is too literal and doesn't convey the meaning of consistent branding.",
           "suggestion": "Użyj tej opcji, aby zapewnić użytkownikom spójny wizerunek marki. "
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'Twoich portalach' is slightly informal. While acceptable, it could be more formal for a technical setting.",
-          "suggestion": "Użyj tej opcji, aby zapewnić użytkownikom spójny wizerunek marki. Ustawienia te zostaną zastosowane na wszystkich portalach."
+          "type": "incorrect_translation",
+          "description": "While \"zostaną zastosowane\" is grammatically correct, a more natural phrasing for this context would be something like 'będą obowiązywać'.",
+          "suggestion": "Użyj tej opcji, aby zapewnić użytkownikom spójny wizerunek marki. Ustawienia te będą obowiązywać na wszystkich Twoich portalach."
         }
       ],
       "approved_at": null
@@ -195,13 +183,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"creştere a implicării\" (growth of engagement) doesn't accurately convey the meaning of \"on-brand experience\". \"On-brand\" refers to consistency with a company's brand identity, not necessarily engagement.",
-          "suggestion": "Utilizaţi această opţiune pentru a oferi utilizatorilor dvs. o experienţă în concordanţă cu identitatea mărcii dvs. (or: o experienţă conformă cu identitatea mărcii dvs.)"
+          "description": "The phrase \"creştere a implicării\" is not a direct or accurate translation of \"on-brand experience.\" \"On-brand experience\" implies consistency and adherence to a brand's visual and messaging guidelines, which 'creştere a implicării' (growth of engagement) doesn't fully convey.",
+          "suggestion": "Utilizați această opțiune pentru a oferi utilizatorilor dvs. o experiență în concordanță cu imaginea mărcii. (Use this option to provide your users with an experience consistent with your brand's image.) Or, Utilizați această opțiune pentru a oferi utilizatorilor dvs. o experiență conformă cu identitatea mărcii voastre."
         },
         {
           "type": "formatting",
-          "description": "Missing period after 'utilizatorilor dvs' in the first sentence.",
-          "suggestion": "Utilizaţi această opţiune pentru a oferi utilizatorilor dvs. o experienţă în concordanţă cu identitatea mărcii dvs."
+          "description": "There's a missing space after the colon in 'Ldap:LdapMobileSettingsDescription'. While not a critical error, consistency is important.",
+          "suggestion": "Ldap : LdapMobileSettingsDescription"
         }
       ],
       "approved_at": null
@@ -212,8 +200,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"on-brand experience\" is not accurately translated. \"Продемонстрировать пользователям ваш бренд\" translates more to 'show your brand to users' which doesn't fully capture the nuance of 'on-brand experience'.",
-          "suggestion": "Рассмотрите вариант перевода как \"Обеспечьте пользователям фирменный опыт\" or \"Предоставьте пользователям опыт, соответствующий вашему бренду\"."
+          "description": "The translation 'продемонстрировать пользователям ваш бренд' (demonstrate your brand to users) is not as natural or idiomatic as a more user-focused phrasing. 'Provide on-brand experience' implies a benefit to the user, which is not conveyed by 'demonstrate your brand'.",
+          "suggestion": "Используйте эту опцию, чтобы предоставить вашим пользователям опыт, соответствующий вашему бренду."
         }
       ],
       "approved_at": null
@@ -224,13 +212,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'ආභරණීය' (aabharanaya) translates to 'ornate' or 'jeweled', which doesn't accurately convey the meaning of 'on-brand'. A better translation would focus on aligning with the brand's identity and consistency.",
-          "suggestion": "ඔබේ බ්‍රන්දයට ගැළපෙන අත්දැකීමක් ලබා දීමට මෙම විකල්පය භාවිතා කරන්න."
+          "description": "The word 'ආභරණීය' (aabharanaya) translates to 'ornate' or 'jeweled' which doesn't accurately convey 'on-brand experience'. It's too literal and doesn't fit the context of user experience.",
+          "suggestion": "Consider using a phrase like 'සමරු කළ' (samaru kala) which means 'branded' or 'consistent with the brand'.  A better translation might be: 'ඔබේ පරිශීලකයින් සඳහා ඔබේ බ්‍රෑන්ඩ් සමරු කළ අත්දැකීමක් ලබා දීමට මෙම විකල්පය භාවිතා කරන්න.'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'ද්වාර' (dwaara) which means 'doors' is used to translate 'portals'.  Portals often relate to online access points or web pages. This is not an accurate depiction.",
-          "suggestion": "ඔබේ සියලුම වෙබ් අඩවි සඳහා මෙම සැකසුම් වලංගු වනු ඇත."
+          "description": "The phrase 'අ සියලුම ද්වාර' (ama siuma dwaara) translates to 'all your gates/doors' which is a poor translation of 'all your portals'.  'Portals' should be translated more accurately.",
+          "suggestion": "Use a phrase like 'සියළුම වෙබ් පිටි' (siyalum web piti) or 'ඔබේ සියලුම වේබ් අඩවි' (obey siyum waeb adavi), which better convey the meaning of 'portals'."
         }
       ],
       "approved_at": null
@@ -241,8 +229,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'on-brand experience' is translated as 'on-brandového zážitku'. While understandable, a more natural Slovak equivalent would be 'značkový zážitok' or 'zázitok v súlade s vašou značkou'.",
-          "suggestion": "značkový zážitok"
+          "description": "The term 'on-brand' is directly translated to 'on-brandového'. While understandable, it's not the most natural Slovak phrasing.  A better alternative would convey the meaning of 'consistent with the brand'.",
+          "suggestion": "Použite túto možnosť na poskytnutie zážitku v súlade s vašou značkou pre vašich používateľov."
         }
       ],
       "approved_at": null
@@ -258,9 +246,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ц́е' is not correctly rendered in Cyrillic. It should be 'ће'.",
-          "suggestion": "ће"
+          "type": "grammar",
+          "description": "The phrase 'ц́е бити примењена' sounds slightly awkward in this context. A more natural phrasing would improve readability.",
+          "suggestion": "ће бити важећи за све ваше портале"
         }
       ],
       "approved_at": null
@@ -271,13 +259,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'in skladu sa brendom' (in accordance with the brand) is a literal translation that might not resonate naturally with Serbian users. A more natural phrasing would convey the idea of maintaining brand consistency.",
-          "suggestion": "Koristite ovu opciju da svojim korisnicima pružite usklađen doživaj (or 'doživej') brenda. (Use this option to provide a consistent brand experience to your users.)"
+          "description": "The English phrase \"on-brand experience\" is not directly equivalent to \"u skladu sa brendom.\" While understandable, a more accurate translation could convey the intention of aligning with brand guidelines or maintaining a consistent brand identity.",
+          "suggestion": "Koristite ovu opciju da svojim korisnicima pružite iskustvo u skladu sa smernicama brenda / da obezbedite doslednost sa Vašim brendom."
         },
         {
           "type": "formatting",
-          "description": "The Serbian translation uses a semicolon after 'portale' which is unusual in this context. Removing it improves readability.",
-          "suggestion": "Koristite ovu opciju da svojim korisnicima pružite usklađen doživaj brenda. Ova podešavanja će biti primenjena na sve vaše portale."
+          "description": "The word 'ć' (ć) uses a diacritical mark. While technically correct, its consistency with other Serbian translations might require review. It could be a simple 'c' in other contexts.",
+          "suggestion": "Consider reviewing the use of 'ć' across all translations to maintain consistency. Possibly use 'c' if that aligns with the overall style."
         }
       ],
       "approved_at": null
@@ -291,13 +279,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'demonstrate your brand' ('продемонструвати користувачам ваш бренд') is not the most natural or accurate translation of 'on-brand experience'. A better translation would emphasize aligning with a brand's identity or appearance.",
-          "suggestion": "Використовуйте цей варіант, щоб забезпечити відповідність вашого бренду для користувачів. (Use this option to ensure your brand aligns with your users.)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -306,13 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"với thương hiệu\" (with brand) isn't the most natural way to express 'on-brand'. A better phrasing would convey the concept of adhering to or reflecting the brand.",
-          "suggestion": "Sử dụng tùy chọn này để cung cấp trải nghiệm phù hợp với thương hiệu cho người dùng của bạn."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the translation reads a bit clunky. The sentence structure could be improved for better flow.",
-          "suggestion": "Sử dụng tùy chọn này để mang đến trải nghiệm nhất quán với thương hiệu cho người dùng của bạn. Các cài đặt này sẽ có hiệu lực cho tất cả các cổng thông tin của bạn."
+          "description": "The phrase \"trải nghiệm với thương hiệu\" is not the most natural or accurate translation of \"on-brand experience.\" It literally translates to 'experience with brand' which is clunky.",
+          "suggestion": "Sử dụng tùy chọn này để cung cấp trải nghiệm mang thương hiệu hoặc trải nghiệm phù hợp với thương hiệu cho người dùng của bạn."
         }
       ],
       "approved_at": null
@@ -323,13 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"为您的用户提供品牌体验\" (provide brand experience to your users) is a literal translation and doesn't fully capture the nuance of 'on-brand experience'. It's less impactful and natural in Chinese.",
-          "suggestion": "Consider a more idiomatic translation like “为您的用户呈现统一品牌形象” (present a unified brand image to your users) or “打造符合品牌形象的用户体验” (create a user experience that aligns with the brand image)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"这些设置将对您的所有门户有效\" (These settings will be effective for all of your portals) is a little stiff. It could be phrased more naturally in Chinese.",
-          "suggestion": "A more natural translation would be something like “这些设置将应用于您的所有门户” (These settings will apply to all of your portals) or “这些设置适用于您的所有门户” (These settings are applicable to all of your portals)."
+          "description": "The translation '为您的用户提供品牌体验' (provide brand experience to your users) doesn't fully capture the nuance of 'on-brand experience'. It's a more literal translation rather than conveying the intended meaning of aligning the user experience with the brand's identity and style.",
+          "suggestion": "考虑使用更准确地表达品牌体验的说法，例如“为您用户打造符合品牌形象的体验” 或 “为您用户提供与品牌一致的体验”。"
         }
       ],
       "approved_at": null

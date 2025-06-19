@@ -2,6 +2,7 @@
 const path = require("path");
 const ReactDocgenTypescriptPlugin =
   require("react-docgen-typescript-plugin").default;
+const webpack = require("webpack");
 // const pathToAssets = path.resolve(__dirname, "../../../public/images");
 
 module.exports = ({ config }) => {
@@ -15,6 +16,12 @@ module.exports = ({ config }) => {
   fileLoaderRule.exclude = /\.svg$/;
 
   config.plugins.push(new ReactDocgenTypescriptPlugin());
+
+  config.plugins.push(
+    new webpack.ProvidePlugin({
+      React: "react",
+    }),
+  );
 
   config.output.assetModuleFilename = (pathData) => {
     //console.log({ pathData });

@@ -3,7 +3,7 @@
   "content": "Display page (number)",
   "content_en_sha1_hash": "e4af37b628f69398388a2c71a6e41b92567591b9",
   "created_at": "2025-05-19T21:30:54.613Z",
-  "updated_at": "2025-05-21T08:50:50.033Z",
+  "updated_at": "2025-05-24T09:03:45.822Z",
   "comment": {
     "text": "This translation key represents the display name of a page number field used to enter and select a specific page in a portal settings interface. It is likely to appear in a dialog or input field, allowing users to navigate to a particular page within the application.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"اعرض الصفحة (رقم)\" while literally translating to 'Display page (number)', doesn't fully capture the nuance of 'Display page (number)' in a UI context. A more natural and user-friendly translation might emphasize showing or presenting the page.",
-          "suggestion": "اعرض الصفحة (الرقم)"
-        },
-        {
-          "type": "formatting",
-          "description": "The parenthesis around 'رقم' are a bit stiff. A slightly more natural flow might be achieved by integrating it more closely with the rest of the phrase.",
-          "suggestion": "اعرض الصفحة (الرقم)"
+          "description": "The translation 'اعرض الصفحة (رقم)' is a literal translation of 'Display page (number)' but might not be the most natural way to express this in Arabic. A more idiomatic translation might be 'عرض الصفحة (رقم)' or 'إظهار الصفحة (رقم)'.",
+          "suggestion": "عرض الصفحة (رقم) or إظهار الصفحة (رقم)"
         }
       ],
       "approved_at": null
@@ -47,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Göstərilən səhifə (nömrə)' is a bit awkward. 'Göstərilən' implies 'shown' or 'displayed' which is redundant given the English 'Display'. A more natural translation would be something like 'Səhifə nömrəsi' or 'Səhifə nömrası'.",
+          "description": "The translation 'Göstərilən səhifə (nömrə)' is a literal translation but doesn't fully capture the meaning of 'Display page (number)'. A more natural translation might be 'Səhifə nömrəsi' or 'Səhifə göstərişi'.",
           "suggestion": "Səhifə nömrəsi"
         }
       ],
@@ -65,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zobrazení stránky (počet)' is not the most natural or accurate translation of 'Display page (number)'. 'Zobrazení' implies showing or displaying, but it might be better to use a term closer to 'Page number' or 'Číslo stránky'.",
-          "suggestion": "Číslo stránky (number)"
+          "description": "While technically correct, 'Zobrazení stránky (počet)' is a somewhat literal translation and not the most natural phrasing in Czech. It implies a display of a page, and then mentions the number. It's better to convey 'Page number'.",
+          "suggestion": "Číslo stránky"
         }
       ],
       "approved_at": null
@@ -74,13 +69,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Seite anzeigen (Nummer)' is not ideal. While technically correct, 'anzeigen' implies showing something that already exists. A better translation would convey the idea of *displaying* the page number.",
-          "suggestion": "Seite (Nummer) anzeigen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -113,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ցուցադրել էջ (համար)\" is a literal translation of \"Display page (number)\". While understandable, a more natural Armenian phrasing might be \"Էջը ցուցադրել (համար)\" or \"Ցուցադրել էջը (համար)\". The current phrasing sounds slightly awkward.",
-          "suggestion": "Consider using \"Էջը ցուցադրել (համար)\" or \"Ցուցադրել էջը (համար)\"."
+          "description": "The translation \"Ցուցադրել էջ (համար)\" while technically correct, lacks the nuance of 'number' in this context. 'Համար' implies 'number' as in a sequence or reference number, but in UI elements, it's more likely referring to a page number.",
+          "suggestion": "Ցուցադրել էջ (թիվ)"
         }
       ],
       "approved_at": null
@@ -122,7 +111,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Visualizza\" is a valid translation for 'Display', it can sometimes imply showing something already existing. A more direct and common translation for 'Display page (number)' in a UI context would be 'Mostra la pagina (numero)' or 'Pagina (numero)'.",
+          "suggestion": "Mostra la pagina (numero)"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -131,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '表示ページ（数）' is not the most natural or precise translation of 'Display page (number)'. '数' (number) feels redundant as 'ページ' inherently implies a number.",
-          "suggestion": "表示ページ"
+          "description": "The translation \"表示ページ（数）\" directly translates to \"Display page (number)\" but could be more natural in Japanese. \"ページ表示\" or \"ページ番号表示\" would be more idiomatic depending on the exact context.",
+          "suggestion": "ページ表示 or ページ番号表示"
         }
       ],
       "approved_at": null
@@ -143,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"페이지 (숫자) 표시\" is overly literal and not idiomatic Korean. 'Display page (number)' can be more naturally translated as '페이지 (숫자) 보기' or '페이지 (숫자) 보여주기'. The addition of '(숫자)' is also somewhat redundant as '페이지' already implies a number.",
-          "suggestion": "페이지 (숫자) 보기"
+          "description": "The translation '페이지 (숫자) 표시' literally translates to 'Page (number) display'. While understandable, it's not the most natural or idiomatic way to express 'Display page (number)' in Korean. A more natural phrasing would be '페이지 (숫자)를 보여주다' or '페이지 (숫자)를 나타내다'.",
+          "suggestion": "페이지 (숫자)를 보여주다"
         }
       ],
       "approved_at": null
@@ -154,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ຕົວເລກ' (number) is technically correct, but in this context, 'ບານ' or 'ໃບ' (page) might be more natural and idiomatic. It sounds slightly awkward to explicitly say 'number' when it's implied.",
-          "suggestion": "ສະແດງໜ້າ (ໃບ/ບານ)"
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ສະແດງໜ້າ (ຕົວເລກ)' translates to 'Display page (number)' but could be more naturally expressed as 'ສະແດງໜ້າທີ່ (ຕົວເລກ)' or 'ໜ້າທີ່ (ຕົວເລກ)' to convey the concept of a page number more accurately.",
+          "suggestion": "ສະແດງໜ້າທີ່ (ຕົວເລກ)"
         }
       ],
       "approved_at": null
@@ -167,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Displeja lapa (numurs)' is a literal translation and doesn't flow naturally in Latvian. 'Lapa' can be used for page, but 'Displeja' is a direct translation of 'Display' which isn't always necessary and can sound awkward. A more natural translation would incorporate the meaning rather than a direct word-for-word transfer.",
-          "suggestion": "Sagatavota lapa (numurs)"
+          "description": "The translation \"Displeja lapa (numurs)\" is a literal translation but doesn't sound natural in Latvian. 'Lapa' usually refers to a page in a book or document. For a UI page number, a more idiomatic translation would be something like 'Lapas numurs' or 'Lapas Nr.'.",
+          "suggestion": "Lapas numurs"
         }
       ],
       "approved_at": null
@@ -176,7 +171,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Pagina weergeven (nummer)' is understandable, 'Display page (number)' suggests showing the page number. A more accurate translation would be 'Pagina tonen (nummer)' or 'Pagina laten zien (nummer)' as 'weergeven' is more commonly used for displaying data, not a page itself.",
+          "suggestion": "Pagina tonen (nummer)"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -197,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Página de exibição (número)' doesn't accurately convey the meaning of 'Display page (number)'. 'Exibição' implies showing or displaying, which is redundant. A more accurate translation would focus on the 'page' aspect, indicating it's a numbered page.",
-          "suggestion": "Página (número)"
+          "description": "The translation 'Página de exibição (número)' doesn't accurately convey the meaning of 'Display page (number)'. 'Exibição' implies a showing or display, but 'Display page' is more accurately 'Página de visualização' or 'Página de exibição' depending on the specific context.",
+          "suggestion": "Página de visualização (número)"
         }
       ],
       "approved_at": null
@@ -209,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Afișare pagină (numărul)' is not the most natural or accurate translation of 'Display page (number)'. 'Afișare' is technically correct but sounds slightly formal. A more common and fluid translation would be 'Vizualizare pagină (numărul)' or 'Pagina (numărul)'.",
-          "suggestion": "Vizualizare pagină (numărul)"
+          "description": "The translation 'Afișare pagină (numărul)' isn't the most natural Romanian. 'Afișare' is correct for 'Display', but 'numărul' directly translates to 'the number'. A more natural rendering would be something like 'Pagina (număr)' or 'Numărul paginii'.",
+          "suggestion": "Pagina (număr)"
         }
       ],
       "approved_at": null
@@ -227,8 +228,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සංදර්ශන පිටුව (අංකය)\" doesn't fully capture the meaning of \"Display page (number)\".  While 'සංදර්ශන' implies display, it's a bit formal. A more natural translation would be something like 'පිටුව දැක්වීම (අංකය)' or 'පිටු දැක්ම (අංකය)'",
-          "suggestion": "පිටුව දැක්වීම (අංකය) or පිටු දැක්ම (අංකය)"
+          "description": "The translation \"සංදර්ශන පිටුව (අංකය)\" doesn't perfectly capture the nuance of \"Display page (number)\".  \"සංදර්ශන\" implies 'shown' or 'displayed', which is close, but \"Display\" often refers to the action of presenting the page, not just that it is shown. A more accurate translation might prioritize conveying the 'Display' action.",
+          "suggestion": "පෙන්වන පිටුව (අංකය)"
+        },
+        {
+          "type": "formatting",
+          "description": "While the parentheses around '(number)' are technically correct, it might feel slightly awkward in Sinhala. It's common to integrate the clarifying phrase more naturally.",
+          "suggestion": "පෙන්වන පිටුව (අංකය)"
         }
       ],
       "approved_at": null
@@ -242,13 +248,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Prikaz strani (številka)' is not the most natural or accurate translation of 'Display page (number)'. While technically correct, it's a bit clunky. A more idiomatic translation would emphasize showing or viewing.",
-          "suggestion": "Prikaz strani (številka) or  Številka strani"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -257,8 +257,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Приказ странице (број)\" does not accurately reflect the meaning of \"Display page (number)\". \"Приказ\" implies a display or presentation, but \"Display\" in this context likely refers to selecting or navigating to a specific page.  \"Број\" (number) is appended, which isn't naturally part of the English phrase.  A more accurate translation would focus on the action of selecting or showing a page.",
-          "suggestion": "Избери страницу (број)"
+          "description": "The translation 'Приказ странице (број)' doesn't accurately convey the meaning of 'Display page (number)'. 'Приказ' translates to 'display' or 'presentation', but in this context, it would be more natural to use a word like 'Показ' or a more direct term for 'show'. Including '(број)' is also somewhat awkward; it's better to integrate the concept of a number into the phrasing.",
+          "suggestion": "Показ странице (број)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '(број)' sounds unnatural when attached to 'странице'. A more idiomatic phrasing might be to include the number within the verb.",
+          "suggestion": "странице (број)"
         }
       ],
       "approved_at": null
@@ -269,8 +274,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prikaz stranice (broj)' is not an accurate representation of 'Display page (number)'. 'Display' implies showing or presenting something. 'Prikaz' is more akin to 'presentation' or 'display' as a noun, not the act of displaying. A better translation would convey the action.",
-          "suggestion": "Prikazivanje stranice (broj)"
+          "description": "The translation \"Prikaz stranice (broj)\" doesn't perfectly capture the nuance of 'Display page (number)'. 'Display' implies showing or presenting. 'Prikaz' is a reasonable translation, but it can sometimes have a more formal connotation.  A more colloquial and natural-sounding translation might be better.",
+          "suggestion": "Prikaži stranicu (broj)"
         }
       ],
       "approved_at": null
@@ -281,8 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ekran sayfası (sayı)\" isn't the most natural or accurate rendering of \"Display page (number)\". \"Ekran\" (screen) is a literal translation of 'display' which isn't the best fit. It would be more appropriate to convey the idea of showing or presenting the page.",
-          "suggestion": "Sayfa numarası göster"
+          "description": "The translation 'Ekran sayfası (sayı)' is not the most natural or accurate translation of 'Display page (number)'. 'Ekran' typically refers to a screen.  A more appropriate translation would convey the concept of displaying a page number. Options include 'Sayfa göster (sayı)' or 'Sayfa numarası göster'.",
+          "suggestion": "Sayfa göster (sayı)"
         }
       ],
       "approved_at": null
@@ -296,13 +301,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Hiển thị trang (số)' is technically correct but a more natural and idiomatic translation would be 'Hiện trang (số)' or 'Xem trang (số)'. 'Hiển thị' implies a more detailed display.",
-          "suggestion": "Hiện trang (số) or Xem trang (số)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

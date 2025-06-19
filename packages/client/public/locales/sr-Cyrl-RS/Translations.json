@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Изабери са листе",
-  "ConnectingAccount": "Повезивање налога",
-  "DeleteFromTrash": "Одабрани елементи су успешно обрисани из Отпада",
   "FileLocked": "Датотека закључана",
   "FileProtected": "Датотека је заштићена лозинком",
   "FileUnlocked": "Датотека откључана",
@@ -14,7 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive директоријум",
   "FolderTitleWebDav": "WebDAV директоријум",
   "FolderTitleYandex": "Yandex директоријум",
-  "GuestReleaseTipDescripton": "Сви претходно додани корисници постали су гости и сада су доступни само у контакт листи администратора {{productName}}. Гости више нису део ниједне групе. Увек можете променити њихов тип и додати их у групу, ако је потребно.",
   "GuestReleaseTipLink": "Сазнајте више о типовима корисника",
   "LinkHasExpiredAndHasBeenDisabled": "Линк је истекао и онемогућен је",
   "LinkValidTime": "Овај линк је валидан само за {{days_count}} дана",
@@ -28,14 +25,5 @@
   "ThirdPartyInfo": "Промени инфо треће стране",
   "ThirdPartyTitle": "Услуге трећих страна",
   "TitleShowActions": "Прикажи акције датотека",
-  "TitleShowFolderActions": "Прикажи акциије фолдера",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Прикажи акциије фолдера"
 }

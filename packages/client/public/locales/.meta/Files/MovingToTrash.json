@@ -3,7 +3,7 @@
   "content": "Moving to trash",
   "content_en_sha1_hash": "44ff31b78a30f9fb9bf3894698f1963fbdaef5f8",
   "created_at": "2025-05-19T21:30:55.880Z",
-  "updated_at": "2025-06-03T20:59:41.992Z",
+  "updated_at": "2025-05-26T07:57:32.394Z",
   "comment": {
     "text": "This translation key \"MovingToTrash\" is used to display a localized message indicating that a file has been moved to the trash. It appears in UI elements related to file operations and management, such as buttons or dialog boxes. Translators should replace the English content with a corresponding message to reflect the file's new location in a way that makes sense for their language and region.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'جارٍ النقل إلى سلة المحذوفات' is understandable, a more natural and common translation for \"Moving to trash\" would be something like 'يتم نقل إلى سلة المهملات' or 'إلى سلة المهملات'. The current translation is a bit literal and sounds slightly awkward.",
-          "suggestion": "يتم نقل إلى سلة المهملات"
+          "description": "While the translation 'جارٍ النقل إلى سلة المحذوفات' is understandable, a more natural and common phrasing for 'Moving to trash' in Saudi Arabic would be 'تنتقل إلى سلة المهملات'. 'سلة المحذوفات' is technically correct but less frequently used.",
+          "suggestion": "تنتقل إلى سلة المهملات"
         }
       ],
       "approved_at": null
@@ -45,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Преместване в Кошче' is understandable, a more natural and accurate translation of 'Moving to trash' would be 'Изхвърляне в кошчето'. 'Преместване' implies movement rather than disposal.",
-          "suggestion": "Изхвърляне в кошчето"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -72,13 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Γίνεται μετακίνηση στα σκουπίδια\" is a literal translation but doesn't quite capture the nuance of 'Moving to trash'. It sounds a bit clunky and formal in Greek.  A more natural translation would convey the action of 'moving' something *into* the trash.",
+          "description": "The translation 'Γίνεται μετακίνηση στα σκουπίδια' is a literal translation but sounds awkward and not idiomatic in Greek. 'Moving to trash' generally implies an action being performed.",
           "suggestion": "Μετακίνηση στον κάδο ανακύκλωσης"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'σκουπίδια' refers to general garbage, not necessarily the trash bin/recycle bin in a digital context. Using 'κάδος ανακύκλωσης' is more specific.",
-          "suggestion": "Use κάδος ανακύκλωσης instead of σκουπίδια."
+          "description": "While technically correct, 'στα σκουπίδια' (to the trash) doesn't fully capture the nuance of 'trash' in the context of a digital action. 'Κάδος ανακύκλωσης' (recycling bin) is often used to convey the same meaning in a digital environment.",
+          "suggestion": "Ανακύκλωση"
         }
       ],
       "approved_at": null
@@ -91,11 +85,6 @@
           "type": "spelling",
           "description": "The word 'Movimiendo' is misspelled. It should be 'Moviendo'.",
           "suggestion": "Moviendo"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Moviendo a la papelera' is understandable, a more accurate and idiomatic translation of 'Moving to trash' would be 'Moviendo a la basura' or 'Enviando a la papelera'. 'Papelera' is a container for paper, 'basura' is general trash.",
-          "suggestion": "Moviendo a la basura"
         }
       ],
       "approved_at": null
@@ -112,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Déplacement dans la poubelle\" is a literal translation and not the most natural way to express 'Moving to trash' in French. A more common and idiomatic phrasing would be \"Mise à la corbeille\" or \"Déplacement vers la corbeille\".",
-          "suggestion": "Mise à la corbeille"
+          "description": "The translation 'Déplacement dans la poubelle' is a literal translation but doesn't quite convey the same meaning as 'Moving to trash'. A more idiomatic translation would be 'Mettre à la corbeille' or 'Déplacer vers la corbeille'.",
+          "suggestion": "Mettre à la corbeille"
         }
       ],
       "approved_at": null
@@ -124,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Տեղափոխել աղբաման' while literally meaning 'Move to trash', doesn't fully capture the nuance of 'Moving to trash' which implies an ongoing action or a state. A more natural translation might be 'ներել աղբաման' (nerel aghbaman) or 'ավտոմատաբար տեղափոխել աղբաման' (avtomabat teghapoxel aghbaman) depending on the context.",
-          "suggestion": "ներել աղբաման"
+          "description": "The translation 'Տեղափոխել աղբաման' is a literal translation of 'Moving to trash'. While understandable, a more natural Armenian phrasing would be preferred. The verb 'տեղափոխել' (teghaphokhel) emphasizes the act of moving, which isn't the primary focus. A more accurate translation would convey the action of sending something to the trash.",
+          "suggestion": "Consider a translation like 'Ջնջել' (Gnjel - Delete) or 'Տեղափոխել ջնջելու համար' (Teghaphokhel gnjvelu hamar - Move to deletion)."
         }
       ],
       "approved_at": null
@@ -153,9 +142,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Lao word 'ກະບະສ້ຳ' is commonly spelled 'ກະບະສ້ຳ'.",
-          "suggestion": "ຍ້າຍສູ່ກະບະສ້ຳ"
+          "type": "incorrect_translation",
+          "description": "The translation 'ຍ້າຍສູ່ກະບະສ້ຳ' while conveying the general idea of moving to trash, isn't the most natural or precise translation. 'ກະບະສ້ຳ' is quite literal and might sound slightly awkward. A more idiomatic translation might be preferred.",
+          "suggestion": "Consider alternatives like 'ລຶບສູ່ກະບະສ້ຳ' (delete to trash) or 'ຍ້າຍໄປໄວ້ໃນກະບະສ້ຳ' (move to trash) depending on the desired level of formality and common usage in Lao."
         }
       ],
       "approved_at": null
@@ -163,13 +152,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Pārvieto uz atkritni\" is understandable, a more precise and natural translation of \"Moving to trash\" would be \"Pārvieto atkritumu kastē\" or \"Pārvieto papildu izmētē\". \"Atritni\" is technically 'waste' not 'trash'.",
-          "suggestion": "Pārvieto atkritumu kastē"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -190,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mudança para o lixo\" while technically correct, isn't the most natural or common way to say \"Moving to trash\" in Portuguese. It's a bit literal.",
-          "suggestion": "Consider \"Movendo para a lixeira\" or \"Indo para a lixeira\"."
+          "description": "The translation 'Mudança para o lixo' is literal but not the most natural phrasing in Portuguese for 'Moving to trash'. A better translation would convey the action of sending something to the trash.",
+          "suggestion": "Enviar para a lixeira"
         }
       ],
       "approved_at": null
@@ -208,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mutare în coșul de gunoi' is literal but not the most natural Romanian phrasing. A more idiomatic translation would be 'Ștergere în coșul de gunoi' or 'Mutarea la coșul de gunoi'. 'Mutare' implies a relocation, whereas 'Ștergere' more accurately conveys the action of moving something to trash.",
-          "suggestion": "Ștergere în coșul de gunoi"
+          "description": "While technically correct, 'Mutare în coșul de gunoi' sounds slightly formal and less natural for a UI element like 'Moving to trash'. A more common and user-friendly phrasing would be 'Mutare la gunoi' or 'Ștergere în coșul de gunoi'.",
+          "suggestion": "Consider 'Mutare la gunoi' or 'Ștergere în coșul de gunoi'."
         }
       ],
       "approved_at": null
@@ -226,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"කුණු බඳුනට යවනවා\" (kunu budunata yavanawa) literally translates to \"sending to the dirty bin.\" While it conveys the general idea of moving to trash, \"trash\" is typically understood as 'ගබඩා කරන ලද ද්‍රව්‍ය' (gabada karan lak dravya) or simply 'ගබඩා' (gabada) in Sinhala, representing a storage space for discarded items. 'කුණු බඳුන' (kunu budun) specifically means 'dirty bin' which isn't the usual conceptualization of a trash can.",
-          "suggestion": "A more accurate translation would be something along the lines of \"ගබඩා කරන ලද ද්‍රව්‍යයට යවනවා\" (gabada karan lak dravyata yavanawa) or \"ගබඩාට යවනවා\" (gabadata yavanawa)."
+          "description": "The translation 'කුණු බඳුනට යවනවා' is a literal translation of 'Moving to trash' and while understandable, it's not the most natural way to express the concept in Sinhala. A more common and natural translation would be something like 'දුර්වලයට යවනවා' (durawalaya yavanawa) or 'පැහැදීමකට යවනවා' (pahe dimakata yavanawa).",
+          "suggestion": "දුර්වලයට යවනවා (durawalaya yavanawa) or පැහැදීමකට යවනවා (pahe dimakata yavanawa)"
         }
       ],
       "approved_at": null
@@ -250,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Премештање у отпад\" is a literal translation and doesn't convey the intended meaning of \"Moving to trash\" in a user interface context. \"Отпад\" primarily means 'waste' or 'rubbish', not a trash bin or recycle bin. It sounds unnatural and could be confusing to a Serbian user.",
-          "suggestion": "Премештање у корпу за отпатке"
+          "description": "The translation 'Премештање у отпад' is a literal translation of 'Moving to trash' but doesn't quite convey the standard meaning in Serbian. 'Trash' is more commonly referred to as 'ѓубре' (djubre) or 'фељка' (feljka). 'Отпад' implies waste material in a broader sense, not specifically the 'trash' bin.",
+          "suggestion": "Премештање у кош за смеће (Premeštanje u koš za smeće)"
         }
       ],
       "approved_at": null
@@ -262,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Premeštanje u otpad' is not the most natural or accurate translation of 'Moving to trash'. 'Otpad' primarily means 'waste' and while it can be associated with trash, 'Premeštanje u kantu za smeće' or 'Prelazak u koš za smeće' would be more common and precise.",
-          "suggestion": "Prelazak u koš za smeće"
+          "description": "The translation 'Premeštanje u otpad' while technically correct, is a bit literal and not the most natural phrasing in Serbian. 'Moving to trash' is often expressed with more conversational terms.",
+          "suggestion": "Consider 'Prelazak u koš za smeće' or 'Prelazak u korpu za smeće' for a more natural Serbian translation."
         }
       ],
       "approved_at": null
@@ -274,8 +257,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Çöp kutusuna taşınıyor' literally translates to 'Moving to the trash can'. While understandable, 'Moving to trash' implies a process or action being performed *on* items being moved. 'Çöp kutusuna taşınıyor' focuses on the destination. A more accurate translation would reflect the action, not just the destination. For example, 'Çöp kutusuna atılıyor' (being thrown to the trash) would be closer.",
-          "suggestion": "Consider 'Çöp kutusuna atılıyor' or 'Çöp kutusuna gönderiliyor' to better convey the 'Moving to trash' action."
+          "description": "The Turkish translation \"Çöp kutusuna taşınıyor\" literally translates to 'Moving to the trash can'. While understandable, it doesn't quite capture the intended meaning of 'Moving to trash' in the context of a system action. A more appropriate translation would convey the action of being moved *into* the trash.",
+          "suggestion": "Silindi"
         }
       ],
       "approved_at": null
@@ -295,13 +278,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"正在移至回收站\" is understandable, a more natural and commonly used translation for \"Moving to trash\" would be \"移至垃圾箱\" or \"移动到垃圾箱\".  \"回收站\" (huishou zhan) generally refers to a recycling station, not a trash can.",
-          "suggestion": "移至垃圾箱"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

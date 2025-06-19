@@ -3,7 +3,7 @@
   "content": "Backup file is being uploaded to the server. Please wait.",
   "content_en_sha1_hash": "bf96cd48a3238c89c4cac8b7174e01265e5b8b52",
   "created_at": "2025-05-19T21:30:50.677Z",
-  "updated_at": "2025-05-28T09:30:02.523Z",
+  "updated_at": "2025-05-26T07:57:32.539Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a backup file is being uploaded to the server. It is displayed as a label on a progress bar in the data import process, and its purpose is to inform users of the current status of the upload process.",
     "is_auto": true,
@@ -75,19 +75,19 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Backup file is being uploaded' translates more accurately to 'Le fichier de sauvegarde est en cours de transfert' rather than 'Le fichier de sauvegarde est en cours de téléchargement'. 'Téléchargement' implies the file is being downloaded *from* the server, while the original English indicates uploading *to* the server.",
-          "suggestion": "Le fichier de sauvegarde est en cours de transfert sur le serveur."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Պահուստային ֆայլը վերբեռնվում է սերվեր: Խնդրում ենք սպասել.\" is a literal translation and could be improved for naturalness in Armenian. While technically correct, it sounds slightly formal and less user-friendly.",
+          "suggestion": "Consider a more natural phrasing like: \"Պահուստային ֆայլը վերբեռնվում է։ Խնդրում ենք համտեսել.\" (Backup file is being uploaded. Please wait a moment.) or \"Վերբեռնվում է պահուստային ֆայլ։ Խնդրում ենք սպասել.\" (Backup file is being uploaded. Please wait.)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -159,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'සේවාදායකයට' (sevaadaayakath) can be improved for clarity. It's technically correct but sounds slightly awkward in this context. A more natural phrasing might be 'අන්තඃසිරසයට' (anthaasirasaaya) or a simplified construction.",
-          "suggestion": "සේවාදායකයට -> අන්තඃසිරසයට"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Датотеке' should be 'Фaјл'. While 'Датотеке' is technically correct, 'Фaјл' is more commonly used in technical contexts in Serbian when referring to a file.",
-          "suggestion": "Фaјл резервних копија се отпремају на сервер. Молимо сачекајте."
+          "description": "The word \"Датотеке\" should be \"Datoteka\". It's singular, referring to one backup file, not multiple.",
+          "suggestion": "Datoteka"
         }
       ],
       "approved_at": null

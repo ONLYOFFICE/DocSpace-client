@@ -3,7 +3,7 @@
   "content": "If you have problems accessing this {{productName}}, please contact the administrator.",
   "content_en_sha1_hash": "af425c7d33708c349709ce72580df5e20f7523a0",
   "created_at": "2025-05-19T21:30:53.444Z",
-  "updated_at": "2025-05-28T09:30:02.811Z",
+  "updated_at": "2025-05-26T07:57:32.796Z",
   "comment": {
     "text": "This translation key is used to display a message when users encounter difficulties accessing the product. It will be shown in a dialog box with the option to recover access, prompting users to contact the administrator for assistance. The message includes placeholders for the product name and registration email.",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'هذا' (hatha - this) is unnecessary and adds awkwardness. The Arabic translation should be more direct.",
+          "description": "The phrase \"هذا\" (this) is unnecessary and slightly awkward in this context. It doesn't add meaning and disrupts the flow. Removing it makes the Arabic more natural.",
           "suggestion": "إذا كنت تواجه مشكلات في الوصول إلى {{productName}}، فيرجى الاتصال بالمسؤول."
         }
       ],
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Portal Unavailable:AccessingProblem' implies a system outage or inability to access the portal. The Czech translation 'Pokud máte problémy s přístupem do tohoto prostoru {{productName}}, obraťte se na správce' translates to 'If you have problems accessing this space {{productName}}, contact the administrator.' 'Prostor' (space) doesn't accurately convey the meaning of 'portal' in this context. A more accurate translation would use a word related to online access or platform.",
-          "suggestion": "Consider alternatives like 'Pokud máte problémy s přístupem k této platformě/online prostředí {{productName}}, obraťte se na správce.'"
+          "description": "The word 'prostor' (space) doesn't accurately convey the meaning of 'portal' in this context. 'Portal' typically refers to a gateway or online platform, not a physical space.",
+          "suggestion": "Pokud máte problémy s přístupem k tomuto portálu {{productName}}, obraťte se na správce."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'χώρο' (choro) translates to 'space' or 'area', which isn't the best fit for 'Portal'. A better translation for 'Portal' would be something like 'πύλη' (pili) or 'πλατφόρμα' (platforma).",
-          "suggestion": "Εάν έχετε προβλήματα πρόσβασης σε αυτήν την πύλη/πλατφόρμα {{productName}}, επικοινωνήστε με τον διαχειριστή."
+          "description": "The word 'χώρο' (choro) which translates to 'space' or 'area' is not the best fit for 'portal'. A more accurate translation would use a word that conveys the idea of an online entry point or gateway.",
+          "suggestion": "Εάν έχετε προβλήματα πρόσβασης σε αυτήν την πύλη {{productName}}, επικοινωνήστε με τον διαχειριστή."
         }
       ],
       "approved_at": null
@@ -96,13 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'accessing problem' is not accurately translated. 'Pääsyssä' is a valid word, but the entire expression 'ongelmiin tähän {{productName}}:een pääsyssä' is a bit clunky and doesn't perfectly convey 'accessing problems'.",
-          "suggestion": "Jos sinulla on ongelmia pääsystä tähän {{productName}}:een, ole hyvä ja ota yhteyttä pääkäyttäjään."
+          "description": "The phrase \"pääsyssä\" (in accessing) is slightly awkward in this context. It's grammatically correct, but a more natural phrasing would be \"tähän {{productName}} liittyen\" (regarding this {{productName}}).",
+          "suggestion": "Jos sinulla on ongelmia tähän {{productName}} liittyen, ole hyvä ja ota yhteyttä pääkäyttäjään."
         },
         {
           "type": "formatting",
-          "description": "There's an unnecessary colon after '{{productName}}' in the Finnish translation.",
-          "suggestion": "Remove the colon after '{{productName}}'."
+          "description": "While not strictly incorrect, 'ole hyvä ja' is a bit formal. In a more user-friendly context, a simpler 'ota yhteyttä' would be preferable.",
+          "suggestion": "Jos sinulla on ongelmia tähän {{productName}} liittyen, ota yhteyttä pääkäyttäjään."
         }
       ],
       "approved_at": null
@@ -143,13 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ເບິ່ງແຍງ' (beng yaeng) in 'ຜູ້ເບິ່ງແຍງລະບົບ' (phu beng yaeng rabop) is slightly awkward in this context. While technically meaning 'administrator' or 'supervisor,' it feels a bit too literal and formal. A more natural and common term for 'administrator' in a technical support context might be preferred.",
-          "suggestion": "Consider using 'ຜູ້ຕັດສິນ' (phu tat sin) which means 'decision maker' or 'manager' and is more commonly understood in a support context, or 'ຜູ້ປົກຄອງ' (phu pok khong) which means 'manager'."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly an issue, using a more consistent punctuation style (e.g., space after the comma) might improve readability in Lao.",
-          "suggestion": "Change ', ກະລຸນາຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບ' to ', ກະລຸນາຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບ'."
+          "description": "The word 'ເບິ່ງແຍງ' (beung yaeng) in 'ຜູ້ເບິ່ງແຍງລະບົບ' (phu beung yaeng rabop) could be misinterpreted. While technically meaning 'administrator' or 'manager,' a more common and easily understood term in modern Lao might be preferred.",
+          "suggestion": "Consider using 'ຜູ້ປົກຄອງລະບົບ' (phu pok khong rabop) which translates to 'system administrator' or 'system manager' for clarity."
         }
       ],
       "approved_at": null
@@ -157,7 +152,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'Ja, piekļūstot šai {{productName}}, rodas problēmas...' is slightly awkward in Latvian. While technically correct, it could be improved for better flow.",
+          "suggestion": "Ja rodas problēmas, piekļūstot šai {{productName}}, lūdzu, sazinieties ar administratoru."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -175,7 +176,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'Se está com problemas no acesso a este {{productName}}' is slightly informal for a professional context. A more formal alternative would improve the tone.",
+          "suggestion": "Se você está com problemas no acesso a este {{productName}}, por favor contacte o administrador."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -208,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'priestoru' (space) doesn't accurately convey the meaning of 'product' or 'service' in this context. It implies a physical space rather than a digital product.",
-          "suggestion": "Ak máte problémy s prístupom k tomuto produktu {{productName}}, kontaktujte svojho administrátora."
+          "description": "The English term 'Portal' isn't directly translated. 'Priestoru' (space) is used instead. While not necessarily wrong, it might lose some of the original meaning of 'portal'. Consider if a more direct translation like 'bránu' (gate) or a more descriptive phrase would be better depending on the context.",
+          "suggestion": "Consider alternatives like 'bránu' (gate) or a more descriptive phrase depending on the context."
         }
       ],
       "approved_at": null
@@ -220,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'prostor' (space) does not accurately translate 'portal' in this context. A more appropriate term would convey the intended meaning of an online platform or gateway.",
-          "suggestion": "Če imate težave z dostopom do tega portala {{productName}}, se obrnite na skrbnika."
+          "description": "The word 'prostor' (space) doesn't accurately convey the meaning of 'product' or 'portal' in this context. It implies a physical space rather than a digital portal or product.",
+          "suggestion": "Če imate težave z dostopom do tega izdelka/portala {{productName}}, se obrnite na skrbnika."
         }
       ],
       "approved_at": null
@@ -231,14 +238,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'приступом' is slightly awkward. While technically correct, it's less common and can sound unnatural in this context. It's a possessive form derived from 'приступ' (access).",
-          "suggestion": "Consider using 'у приступу' or rephrasing to avoid the possessive altogether. For example, 'Ако имате проблема са приступом овом {{productName}}, молимо контактирајте администратора.'"
+          "type": "grammar",
+          "description": "The Serbian sentence structure could be improved for better flow and naturalness. 'Ако имате проблема са приступом овом {{productName}}-у' sounds a bit clunky.",
+          "suggestion": "Ако имате проблема са приступом до овог {{productName}}-а, молимо контактирајте администратора."
         },
         {
           "type": "formatting",
-          "description": "The possessive ending '-у' on '{{productName}}-у' is technically correct but might appear slightly abrupt without proper spacing or punctuation. It's important to maintain consistent style.",
-          "suggestion": "Ensure consistent formatting for possessives, potentially adding a space before the possessive ending. 'Ако имате проблема са приступом овом {{productName}} у, молимо контактирајте администратора.'"
+          "description": "The use of the hyphen with the product name feels slightly unnatural in this context. While technically correct, it's less common in conversational Serbian.",
+          "suggestion": "Ако имате проблема са приступом до {{productName}}, молимо контактирајте администратора."
         }
       ],
       "approved_at": null
@@ -249,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The hyphen in 'productName'-u looks slightly off. It should be a regular hyphen, not an en dash or em dash.",
-          "suggestion": "Replace the hyphen with a standard hyphen: 'productName'-u -> 'productName'-u"
+          "description": "The hyphen in \"{{productName}}-u\" looks slightly awkward. While technically correct, a more natural flow might be preferred.",
+          "suggestion": "Ako imate problema sa pristupom ovom {{productName}}, molimo kontaktirajte administratora."
         }
       ],
       "approved_at": null

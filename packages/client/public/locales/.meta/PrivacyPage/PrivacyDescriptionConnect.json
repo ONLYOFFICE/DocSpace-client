@@ -3,7 +3,7 @@
   "content": "You can open this file from the desktop app's interface once your cloud is connected",
   "content_en_sha1_hash": "a56cf9923ee70342d9e2669ee3ab4de8d039979a",
   "created_at": "2025-05-19T21:30:53.425Z",
-  "updated_at": "2025-05-21T05:50:47.826Z",
+  "updated_at": "2025-05-24T06:20:02.714Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that users can access files from the desktop app's interface once their cloud connection is established. The text appears in a UI element related to private rooms or file sharing, providing context for users.",
     "is_auto": true,
@@ -59,14 +59,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"το νέφος σας\" (your cloud) is overly literal and sounds unnatural in Greek. A more natural phrasing would be something like \"το cloud\" or \"τον λογαριασμό σας στο cloud\" depending on the context and desired level of formality.  The original English is relatively straightforward, so a similarly direct translation would be preferable.",
-          "suggestion": "Μπορείτε να ανοίξετε αυτό το αρχείο από τη διεπαφή της εφαρμογής Desktop μόλις συνδεθεί το cloud."
+          "type": "formatting",
+          "description": "The term 'Desktop' should be consistently formatted (e.g., 'Desktop' or 'desktop'). Currently, it's capitalized.",
+          "suggestion": "Μπορείτε να ανοίξετε αυτό το αρχείο από τη διεπαφή της εφαρμογής desktop μόλις συνδεθεί το νέφος σας"
         },
         {
-          "type": "formatting",
-          "description": "While grammatically correct, using \"Desktop\" instead of a translated term might be inconsistent with other UI elements. Consider if there's a standard Greek term for 'desktop app' that would be more suitable.",
-          "suggestion": "Consider using a localized term for 'Desktop' if one exists and is consistently used elsewhere in the UI."
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'το νέφος σας' (your cloud) is slightly awkward. It implies a personal cloud.  A more natural phrasing might be used.",
+          "suggestion": "Μπορείτε να ανοίξετε αυτό το αρχείο από τη διεπαφή της εφαρμογής desktop μόλις συνδεθεί το νέφος."
         }
       ],
       "approved_at": null
@@ -77,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses 'Usted,' which is the formal 'you.'  A more common and generally preferred phrasing for this type of instruction would be the informal 'tú.'",
-          "suggestion": "Puede abrir este archivo desde la interfaz de la aplicación de escritorio cuando su nube está conectada."
+          "description": "The English phrase \"You can open this file\" is overly formal in Spanish. \"Usted\" should be replaced with \"Puedes\" to match the tone of the original.",
+          "suggestion": "Puedes abrir este archivo desde la interfaz de la aplicación de escritorio cuando su nube está conectada"
         }
       ],
       "approved_at": null
@@ -94,9 +94,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation is overly literal and sounds unnatural in French. 'à partir de' is correct but the phrasing is clunky. A more natural phrasing would be 'depuis' or simply rephrasing the sentence.",
-          "suggestion": "Vous pouvez ouvrir ce fichier depuis l'interface de l'application de bureau une fois que votre cloud est connecté."
+          "type": "formatting",
+          "description": "The French translation lacks a comma after 'interface'.",
+          "suggestion": "Vous pouvez ouvrir ce fichier à partir de l'interface, de l'application de bureau une fois que votre cloud est connecté"
         }
       ],
       "approved_at": null
@@ -107,13 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Ձեր ամպը միանա\" is a literal translation of 'your cloud connects'. A more natural and accurate translation would be something like \"երբ ձեր ամպային ծառայությունը միանված լինի\" or \"երբ ձեր ամպային հաշտարվեսակը միանված լինի\".",
-          "suggestion": "երբ ձեր ամպային ծառայությունը միանված լինի"
-        },
-        {
-          "type": "formatting",
-          "description": "The pronoun 'Ձեր' is used, which is the formal 'your'. While not incorrect, using the informal 'դուք' and 'դուք' respectively throughout would create a more consistent tone, especially if the app generally uses informal language.",
-          "suggestion": "Դուք կարող եք բացել այս ֆայլը աշխատասեղանի հավելվածի միջերեսից, երբ դուք ձեր ամպային ծառայությունը միանված լինի։"
+          "description": "The phrase \"Ձեր ամպը միանա\" is not the most natural or accurate translation of \"your cloud is connected.\" A more accurate translation would convey the state of being connected.",
+          "suggestion": "Consider using something like \"երբ Ձեր ամպը միացված է\" (when your cloud is connected) or \"երբ Ձեր ամպը կապված է\" (when your cloud is linked)."
         }
       ],
       "approved_at": null
@@ -127,18 +122,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"You can open this file\" is too direct. A more natural Japanese phrasing would soften the statement.",
-          "suggestion": "このファイルは、クラウドが接続されていれば、デスクトップアプリのインターフェースから開くことができます。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation isn't *wrong*, \"開けます\" sounds a bit formal in this context.  A more conversational tone might be preferable.",
-          "suggestion": "このファイルは、クラウドが接続されていれば、デスクトップアプリのインターフェースから開くことができます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,13 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຊື່ອມຕໍ່ກັບ cloud ຂອງທ່ານ\" literally translates to 'connect to your cloud'. While understandable, a more natural phrasing in Lao would be something like 'ເມື່ອເຊື່ອມຕໍ່ຄລາວຸດຂອງທ່ານ' (when you connect your cloud) or 'ເມື່ອເຊື່ອມຕໍ່ກັບຄລາວຸດຂອງທ່ານ' (when connecting to your cloud).",
-          "suggestion": "ທ່ານສາມາດເປີດໄຟລ໌ນີ້ໄດ້ຈາກໂປຣແກຣມ desktop ເມື່ອເຊື່ອມຕໍ່ຄລາວຸດຂອງທ່ານ"
+          "description": "The translation of \"You can open this file from the desktop app's interface\" is not entirely accurate. 'ໂປຣແກຣມ desktop' is a literal translation and sounds unnatural in Lao. The phrase 'desktop app' refers to the application on your computer.  It's missing the element of the *interface*.  The sentence implies accessing it *through* the app's interface.",
+          "suggestion": "ທ່ານສາມາດເປີດໄຟລ໌ນີ້ໄດ້ຈາກໜ້າຈໍໂປຣແກຣມ desktop ຂອງທ່ານເມື່ອເຊື່ອມຕໍ່ກັບ cloud ຂອງທ່ານ"
         },
         {
           "type": "formatting",
-          "description": "The use of 'desktop' in the Lao translation is in English. It's more appropriate to transliterate or use an equivalent term if one exists in Lao, if direct translation is needed.",
-          "suggestion": "ທ່ານສາມາດເປີດໄຟລ໌ນີ້ໄດ້ຈາກໂປຣແກຣມ ເດັສທ໋ອບ ເພື່ອເຊື່ອມຕໍ່ກັບ cloud ຂອງທ່ານ"
+          "description": "The sentence structure is somewhat awkward. While understandable, it could be improved for better flow in Lao.",
+          "suggestion": "ເມື່ອເຊື່ອມຕໍ່ກັບ cloud ຂອງທ່ານແລ້ວ, ທ່ານສາມາດເປີດໄຟລ໌ນີ້ໄດ້ຈາກໂປຣແກຣມ desktop ຂອງເຈົ້າ"
         }
       ],
       "approved_at": null
@@ -182,8 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"po podłączeniu swojej chmury\" (after connecting your cloud) is slightly awkward. A more natural Polish phrasing for indicating a cloud connection would be 'po zalogowaniu do chmury' or 'po połączeniu z chmurą'. The current wording implies the user is directly plugging in a cloud device.",
-          "suggestion": "Po zalogowaniu do chmury"
+          "description": "The phrase 'your cloud' is translated as 'swojej chmury'. While technically correct, a more natural and user-friendly translation would be 'chmury' (cloud) or 'Twojej chmury' (your cloud) depending on the desired level of formality.",
+          "suggestion": "Dany plik będzie można otworzyć z poziomu interfejsu aplikacji komputerowej po podłączeniu chmury / po podłączeniu Twojej chmury"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, 'z poziomu interfejsu' is a bit verbose. A more concise phrasing would improve readability.",
+          "suggestion": "z interfejsu aplikacji komputerowej"
         }
       ],
       "approved_at": null
@@ -194,13 +183,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'a partir de aplicações de desktop' is slightly awkward. A more natural phrasing would be 'através da interface do aplicativo desktop' or 'na interface do aplicativo desktop'.",
-          "suggestion": "Pode abrir este ficheiro através da interface do aplicativo desktop, uma vez que a sua nuvem está ligada"
+          "description": "The translation \"Pode abrir este ficheiro a partir da interface de aplicações de desktop, uma vez que a sua nuvem está ligada\" is a bit literal and could be more natural. 'Desktop app' is better translated as 'aplicativo desktop' or 'programa desktop'. 'A partir de' can be simplified to 'de'.",
+          "suggestion": "Pode abrir este ficheiro de aplicativo desktop, uma vez que a sua nuvem esteja conectada."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using 'aplicações' instead of 'aplicativo' feels slightly less natural. 'Aplicativo' is often preferred for referring to a single desktop app.",
-          "suggestion": "Pode abrir este ficheiro através da interface do aplicativo desktop, uma vez que a sua nuvem está ligada"
+          "type": "grammar",
+          "description": "The phrase 'uma vez que a sua nuvem está ligada' is grammatically correct, but 'esteja conectada' would be slightly more fluent and common usage.",
+          "suggestion": "uma vez que a sua nuvem esteja conectada"
         }
       ],
       "approved_at": null
@@ -211,13 +200,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'a partir da interface de aplicativos de desktop' is a bit awkward. A more natural phrasing would be 'através da interface do aplicativo desktop' or 'pela interface do aplicativo desktop'.",
-          "suggestion": "Você pode abrir este arquivo através da interface do aplicativo desktop, uma vez que sua nuvem está conectada"
+          "description": "The translation 'aplicativos de desktop' is a bit awkward. A more natural phrasing would be 'aplicativo desktop' or 'desktop'.",
+          "suggestion": "Você pode abrir este arquivo a partir da interface do aplicativo desktop, uma vez que sua nuvem está conectada"
         },
         {
           "type": "formatting",
-          "description": "The phrase 'uma vez que sua nuvem está conectada' could be simplified to 'assim que sua nuvem estiver conectada' for better flow.",
-          "suggestion": "Você pode abrir este arquivo através da interface do aplicativo desktop, assim que sua nuvem estiver conectada"
+          "description": "The phrase 'uma vez que' can be replaced with 'assim que' for better flow.",
+          "suggestion": "Você pode abrir este arquivo a partir da interface do aplicativo desktop, assim que sua nuvem está conectada"
         }
       ],
       "approved_at": null
@@ -228,13 +217,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'cloud' is better translated as 'serviciu cloud' or simply 'cloud' (as the English term is commonly used). 'contul dvs cloud' is slightly awkward. The phrase refers to connecting to a cloud service, not a cloud account.",
-          "suggestion": "Puteți deschide acest fișier din aplicația pentru desktop odată ce vă conectați la serviciul cloud."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, adding a comma after 'desktop' improves readability.",
-          "suggestion": "Puteți deschide acest fișier din aplicația pentru desktop, odată ce vă conectați la serviciul cloud."
+          "description": "The phrase \"v-ați conectat la contul dvs cloud\" is overly literal and sounds unnatural in Romanian. It translates to \"you have connected to your cloud account\". A more natural phrasing would be 'odată ce vă conectați la cloud' or 'odată ce cloud-ul este conectat'.",
+          "suggestion": "Puteți deschide acest fișier din aplicația pentru desktop odată ce vă conectați la cloud."
         }
       ],
       "approved_at": null
@@ -251,13 +235,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is not fully accurate. 'Cloud' is translated as 'මේඝය' (megaya), which literally means 'cloud' in the meteorological sense. A more appropriate translation for 'cloud' in the context of cloud storage/services would be something like 'cloud සේවා' (cloud sevaya) or 'ඔබේ ගිගිරි ලිපිය' (obae giriy lipiya - your cloud storage).",
-          "suggestion": "Consider replacing 'මේඝය' with 'cloud සේවා' or 'ඔබේ ගිගිරි ලිපිය' to better reflect the intended meaning."
+          "description": "The phrase \"cloud is connected\" is translated as \"මේඝය සම්බන්ධිත විට\" (meghaya sambhanditha vitha). While technically correct, it's not the most natural or clear way to express it in Sinhala. A more natural phrasing would be something like \"ඔබගේ මේඝය සම්බන්ධ වන විට\" (obage meghaya sambhandhi vana vitha).",
+          "suggestion": "ඔබගේ මේඝය සම්බන්ධ වන විට (obage meghaya sambhandhi vana vitha)"
         },
         {
           "type": "formatting",
-          "description": "The word order in 'ඔබගේ මේඝය සම්බන්ධිත විට' sounds slightly unnatural. While grammatically correct, it might be improved for better flow in Sinhala.",
-          "suggestion": "Try reordering the phrase to something like 'ඔබේ ගිගිරි ලිපිය සම්බන්ධිත විට' or 'ඔබේ cloud සේවා සම්බන්ධිත විට'."
+          "description": "The sentence structure is slightly awkward. While understandable, it could be improved for better flow. Specifically, the order of 'ඔබගේ' (obage - your) and 'මේඝය' (meghaya - cloud) can be shifted.",
+          "suggestion": "මේඝය සම්බන්ධ වන විට ඔබට වැඩතල යෙදුමේ අතුරු මුහුණතෙන් මෙම ගොනුව ඇරීමට හැකිය (meghaya sambhandhi vana vitha obage arata muthuwa gehala gamata, denna goonuwa arimata hakiyata)"
         }
       ],
       "approved_at": null
@@ -268,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"once your cloud is connected\" is awkwardly translated as \"vtedy, keď je váš cloud pripojený\".  A more natural Slovak phrasing would improve readability.",
-          "suggestion": "Tento súbor môžete otvoriť z rozhrania aplikácie pre počítače, keď je váš cloud pripojený."
+          "description": "The phrase 'desktop app' is not directly translated. While 'aplikácia pre počítače' conveys the general meaning, 'desktop app' often refers to a specific type of application. A more precise translation might be 'aplikácia pre plochu' or 'počítačová aplikácia' depending on the desired level of formality and context.",
+          "suggestion": "Consider 'aplikácia pre plochu' or 'počítačová aplikácia' for a more precise translation of 'desktop app'."
         }
       ],
       "approved_at": null
@@ -280,13 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ko ste povezani v oblaku' is a literal translation of 'once your cloud is connected' but sounds unnatural in Slovenian. A more natural phrasing would emphasize the connection being established.",
-          "suggestion": "ko je povezana vaša spletna shirišče"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure could be improved for better flow in Slovenian. The current phrasing is slightly awkward.",
-          "suggestion": "Datoteko lahko odprete z vmesnikom namizne aplikacije, ko je povezana vaša spletna shirišče."
+          "description": "The translation \"ko ste povezani v oblaku\" is a literal translation of 'when you are connected to the cloud'. A more natural and accurate translation would be 'ko je vaš oblak povezan' or 'ko je cloud povezan'.",
+          "suggestion": "ko je vaš oblak povezan"
         }
       ],
       "approved_at": null
@@ -296,14 +275,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'десктоп' is anglicized. A more appropriate Serbian term would be preferred.",
-          "suggestion": "You can open this file from the desktop app's interface once your cloud is connected -> Можете отворити ову датотеку са интерфејса рачунарске апликације када се ваш облак повеже"
+          "type": "formatting",
+          "description": "The word 'десктоп' is transliterated. It's common to use the English word directly in Serbian, or a localized equivalent, depending on the context.  'Рачунарска апликација' or simply 'апликација' might be more natural.",
+          "suggestion": "Можете отворити ову датотеку са интерфејса апликације или рачунарске апликације када се ваш облак повеже"
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, the translated sentence feels a bit clunky. It could be improved for smoother reading.",
-          "suggestion": "Можете отворити ову датотеку са интерфејса рачунарске апликације када се повежете са облаком."
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'када се ваш облак повеже' is somewhat awkward.  A more natural phrasing would imply 'when your cloud is connected' is linking the cloud to a specific account or service.",
+          "suggestion": "Можете отворити ову датотеку са интерфејса десктоп апликације када се повежете са облаком"
         }
       ],
       "approved_at": null
@@ -314,8 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'oblak' is a literal translation of 'cloud' and might not be the most natural way to express 'cloud' in the context of a connected cloud service in Serbian. 'Vaš cloud' or 'Vaš servis u oblaku' might be more appropriate.",
-          "suggestion": "Consider using 'Vaš cloud' or 'Vaš servis u oblaku' instead of 'Vaš oblak'."
+          "description": "The word 'oblak' (cloud) is generally understood, but 'vaš oblak' sounds slightly unnatural. A more natural phrasing would be 'vaš nalog u oblaku' or 'vaš cloud nalog'.",
+          "suggestion": "Možete otvoriti ovu datoteku sa interfejsa desktop aplikacije kada se vaš nalog u oblaku poveže"
         }
       ],
       "approved_at": null

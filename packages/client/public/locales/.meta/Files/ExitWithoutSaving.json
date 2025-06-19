@@ -3,7 +3,7 @@
   "content": "Exit without saving?",
   "content_en_sha1_hash": "73ba4e3217e4b6c986b82b340dfcc5db9cec0519",
   "created_at": "2025-05-19T21:30:55.642Z",
-  "updated_at": "2025-05-28T09:30:02.211Z",
+  "updated_at": "2025-05-26T07:57:32.238Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears when exiting an edit mode without saving changes. It is part of a warning message in a file editing dialog, prompting users to consider the potential consequences of leaving unsaved work.",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yadda saxlamadan çıxırsınız?' doesn't accurately convey the meaning of 'Exit without saving?'. The word 'Yadda' implies 'where' or 'in what way,' which is irrelevant to the question of exiting without saving. A more accurate translation would focus on the action of exiting and the lack of saving.",
+          "suggestion": "Çıxmaq və saxlamamaq?"
+        },
+        {
+          "type": "grammar",
+          "description": "The suggested translation 'Çıxmaq və saxlamamaq?' while better, could be improved for natural flow in Azerbaijani. The structure 'action and negation' can be awkward. A more natural phrasing would use a question structure.",
+          "suggestion": "Saxlamadan çıxarırsınız?"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +80,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Poistutaanko tallentamatta?' is a bit awkward and not the most natural way to ask 'Exit without saving?'. It implies a question of whether someone *will* exit without saving, rather than a direct question about exiting.",
+          "suggestion": "A more natural and accurate translation would be 'Haluatko poistua tallentamatta?' or 'Poistu tallentamatta?'. The former is a direct question ('Do you want to exit without saving?'), and the latter is a more direct imperative ('Exit without saving?')"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +98,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Դո՞ւրս գալ առանց պահելու։' is a literal translation and sounds unnatural in Armenian. A more natural and idiomatic phrasing would be closer to 'Երեւույն ելնել առանց պահպանության։' or 'Պահպանել չէ՞ք։'",
+          "suggestion": "Պահպանել չէ՞ք։"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,7 +152,18 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Saiu sem guardar?' while conveying a similar meaning, is not the most natural or precise translation of 'Exit without saving?'. 'Exit' implies a deliberate action. A more accurate translation would focus on the action of exiting and the option to save.",
+          "suggestion": "Sair sem salvar?"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'Saiu' (past tense) implies the action has already occurred. The English question is more of a conditional ('Would you like to exit without saving?').",
+          "suggestion": "Sair sem salvar?"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +187,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'බාගත නොකර පිටත්වන්නද?' literally translates to 'Exit without downloading?'. The English phrase 'Exit without saving?' refers to abandoning changes, not necessarily downloading something. The translation doesn't accurately convey the intended meaning.",
+          "suggestion": "බාගත යුතු නැතිව පිටත්වන්නද? or වෙන කිසිවක් සුරක්ෂිත නොකොට පිටත්වන්නද?"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,7 +205,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izhod brez shranjevanja?' is a literal translation and sounds awkward in Slovenian. A more natural phrasing would be 'Zapreti brez shranjevanja?' or 'Odhod brez shranjevanja?'",
+          "suggestion": "Zapreti brez shranjevanja?"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,13 +223,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izađite bez čuvanja?' while understandable, is slightly formal and less common for a confirmation dialog. A more natural translation for 'Exit without saving?' would be 'Želite li izaći bez čuvanja?' or simply 'Izaći bez čuvanja?'",
+          "suggestion": "Želite li izaći bez čuvanja?"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Kaydetmeden çıkmak istiyor musunuz?' translates more literally to 'Do you want to exit without saving?' While understandable, a more natural and idiomatic phrasing for a confirmation dialog would be closer to 'Exit without saving?' or 'Save changes?'",
+          "suggestion": "Consider 'Kaydetmeden çıkışı yapmak ister misiniz?' or 'Kaydetmek ister misiniz?' depending on the desired tone and context."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,13 +253,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a question mark at the end, which is correct. However, it's best to maintain consistency with the English version which also includes a question mark.",
+          "suggestion": "No change needed. Question mark is present."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '未保存，确认退出？' is a bit literal and doesn't flow as naturally in Chinese as it could. While technically correct, it's not the most common or user-friendly phrasing for this context.",
+          "suggestion": "考虑使用更自然的说法，例如：'有未保存的内容，确定退出？' 或者 '有未保存的数据，确定退出？'"
+        }
+      ],
       "approved_at": null
     }
   }

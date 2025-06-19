@@ -3,7 +3,7 @@
   "content": "New form template",
   "content_en_sha1_hash": "dd33fb07a6cc6e1d3265f06284317a86321d5d53",
   "created_at": "2025-05-19T21:30:46.754Z",
-  "updated_at": "2025-06-18T07:34:15.314Z",
+  "updated_at": "2025-06-18T17:11:42.549Z",
   "comment": {
     "text": "NewMasterForm is used as a label for creating a new master form in certain file types. It appears on an editor interface likely used to create or edit documents.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'قالب نموذج جديد' while technically correct, is a bit redundant. 'نموذج' inherently means 'template' or 'form'. Using both 'قالب' (template/mold) and 'نموذج' is repetitive.",
-          "suggestion": "قالب جديد"
+          "description": "The Arabic translation \"قالب نموذج جديد\" is a literal translation but not the most natural or idiomatic way to express \"New form template\" in Arabic (Saudi Arabia). While understandable, it sounds slightly awkward.",
+          "suggestion": "Consider a more natural phrasing such as \"نموذج طلب جديد\" (Namouthaj Talab Jadeed) which translates to 'New application form' or \"تصميم نموذج جديد\" (Tasmeem Namouthaj Jadeed) which means 'New form design'."
         }
       ],
       "approved_at": null
@@ -126,13 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nieuw Formulier sjabloon' is too literal and not idiomatic. 'Formulier' is a bit formal and 'sjabloon' is the Dutch transliteration of 'template' and can sound awkward.  A more natural translation would use a more common Dutch term for template.",
-          "suggestion": "Nieuw formatiemodel"
+          "description": "The term 'template' is better translated as 'model' or 'voorbeeld' in this context. 'Sjabloon' is more technical and might not resonate with all users.",
+          "suggestion": "Nieuw Formulier model"
         },
         {
           "type": "formatting",
-          "description": "The use of a space before 'sjabloon' in 'Formulier sjabloon' is not standard Dutch capitalization. Compound words in titles often don't follow capitalization rules.",
-          "suggestion": "Formulier sjabloon"
+          "description": "The space before 'sjabloon' is unnecessary.",
+          "suggestion": "Nieuw Formulier sjabloon"
         }
       ],
       "approved_at": null
@@ -161,13 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Șablon formă nou' is not the most natural or accurate translation of 'New form template'. 'Formă' refers to a form itself, not a template. While understandable, it lacks precision.",
-          "suggestion": "Șablon formular nou"
-        },
-        {
-          "type": "grammar",
-          "description": "While 'Șablon formă nou' is understandable, the word order is slightly awkward in Romanian. The adjective should ideally precede the noun.",
-          "suggestion": "Șablon nou pentru formulare"
+          "description": "The Romanian translation \"Șablon formă nou\" is a literal translation but doesn't sound natural in Romanian. \"Șablon formă nouă\" would be a more accurate and natural-sounding translation.",
+          "suggestion": "Șablon formă nouă"
         }
       ],
       "approved_at": null
@@ -184,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නව ආකෘතිපත්‍ර අච්චුවක්' while technically meaning 'new form template mold/pattern', is not the idiomatic or accurate translation of 'New form template'. 'ආකෘතිපත්‍ර' is correct for 'template', but 'අච්චුවක්' (mold/pattern) is not needed and makes the translation sound awkward and overly literal. It's not natural language.",
-          "suggestion": "නව ආකෘතිපත්‍රය (Nava akruthipatraya) - This translates directly to 'New form template'."
+          "description": "The Sinhala translation 'නව ආකෘතිපත්‍ර අච්චුවක්' translates to 'new form template mold' which is not the intended meaning of 'New form template'. 'ආකෘතිපත්‍ර' is correct for 'form' but 'අච්චුවක්' (mold) is not appropriate here.",
+          "suggestion": "නව ආකෘතිපත්‍රය (nava akruthipathraya) - This translates to 'New form' or 'New template'."
         }
       ],
       "approved_at": null
@@ -208,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Нови образац шаблон\" is not a natural or accurate translation of \"New form template\". \"Шаблон\" is redundant, as \"образац\" already implies a template or form. Also, the word order is somewhat awkward.",
+          "description": "The Serbian translation 'Нови образац шаблон' is a literal translation and doesn't flow naturally. 'Шаблон' (template) is redundant since 'образац' already implies a template.",
           "suggestion": "Нови образац"
         }
       ],
@@ -220,7 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Novi obrazac šablon' is a literal translation and doesn't quite convey the meaning of 'New form template' naturally in Serbian. 'Šablon' is redundant since 'obrazac' already implies a template.",
+          "description": "The translation \"Novi obrazac šablon\" is a literal translation of \"New form template\" but doesn't sound natural in Serbian. \"Šablon\" is often unnecessary as \"obrazac\" already implies a template.",
           "suggestion": "Novi obrazac"
         }
       ],

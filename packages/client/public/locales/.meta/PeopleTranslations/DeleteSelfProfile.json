@@ -3,7 +3,7 @@
   "content": "Disable account",
   "content_en_sha1_hash": "198562d776cf89feb842e248f463dff4797e7cd5",
   "created_at": "2025-05-19T21:30:53.463Z",
-  "updated_at": "2025-05-28T09:30:02.827Z",
+  "updated_at": "2025-05-26T07:57:32.810Z",
   "comment": {
     "text": "The translation key \"DeleteSelfProfile\" is used to translate the text \"Disable account\" which will be displayed on a button that allows users to delete their own profile. This text appears in a dialog when users attempt to delete their account.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'حذف الملف الشخصي' translates to 'Delete profile', not 'Disable account'. While deleting a profile effectively disables it, the provided translation isn't a direct equivalent.",
-          "suggestion": "تعطيل الحساب"
+          "description": "The Arabic translation 'حذف الملف الشخصي' literally translates to 'Delete Profile,' while the English text 'Disable account' implies deactivating or suspending an account, not permanently deleting it. This is a significant difference in meaning.",
+          "suggestion": "تَعطيل الحساب"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Profilin silinməsi\" literally translates to 'Profile deletion'. While technically related, \"Disable account\" implies a less permanent action than deletion. A more accurate translation would convey the disabling functionality.",
-          "suggestion": "Hesabımı deaktiv et"
+          "description": "The translation \"Profilin silinməsi\" literally translates to \"Profile deletion\". The English phrase \"Disable account\" implies a temporary or reversible action, whereas \"deletion\" suggests a permanent removal. A more accurate translation would convey the 'disable' aspect.",
+          "suggestion": "Hesabımı deaktiv etmək"
         }
       ],
       "approved_at": null
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Изтрий профил\" (Delete profile) doesn't accurately reflect the meaning of \"Disable account\". Disabling an account is not the same as deleting it.",
+          "description": "The translation \"Изтрий профил\" (Delete profile) does not accurately reflect the meaning of \"Disable account\". \"Disable account\" implies a temporary suspension, while \"Delete profile\" implies permanent removal.",
           "suggestion": "Премахни акаунт"
         }
       ],
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Disable account' implies deactivating or suspending an account, not permanently deleting it. 'Smazat profil' translates to 'Delete profile' which is a stronger action than 'Disable account'.",
-          "suggestion": "Consider a translation like 'Znefunkčnit účet' (Disable account) or 'Dočasně zablokovat účet' (Temporarily block account)."
+          "description": "The translation 'Smazat profil' (Delete profile) doesn't accurately reflect the meaning of 'Disable account'. 'Disable account' implies temporarily suspending access, while 'Smazat profil' implies permanent deletion.",
+          "suggestion": "Znefunkcnít úcet"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Διαγραφή προφίλ' (Diagrafi profil) translates to 'Profile Deletion' not 'Disable account'. While deletion might imply disabling, it's not the direct equivalent.",
-          "suggestion": "Απενεργοποίηση λογαριασμού"
+          "description": "The translation \"Διαγραφή προφίλ\" (Diagraphi profil) translates to \"Profile deletion\" which is not equivalent to \"Disable account\". While deletion is a possible outcome of disabling, it doesn't convey the action directly.",
+          "suggestion": "Απενεργοποίηση λογαριασμού (Apenergopoiisi logariasmou)"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Eliminar mi cuenta' translates to 'Delete my account', but 'Disable account' implies deactivation rather than full deletion. A more accurate translation would reflect this difference.",
-          "suggestion": "Desactivar mi cuenta"
+          "description": "'Eliminar mi cuenta' translates to 'Delete my account', which is not the same as 'Disable account'. While deletion implies disabling, it's a more permanent action. The original phrase implies a temporary disabling or suspension.",
+          "suggestion": "Consider using 'Desactivar mi cuenta' or 'Suspender mi cuenta' for a closer translation of 'Disable account'."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Disable account' implies deactivating or suspending an account, not deleting it entirely. 'Poista profiili' translates to 'Delete profile,' which is a more drastic action.",
-          "suggestion": "Consider a translation like 'Poista tili' (Deactivate account) or 'Sulje tili' (Close account) for better accuracy."
+          "description": "The Finnish translation 'Poista profiili' translates to 'Delete profile'. 'Disable account' implies a more temporary action than a complete deletion. A more accurate translation would be something like 'Poista tili' (Delete account) or 'Poista käytöstä' (Disable).",
+          "suggestion": "Poista tili"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ջնջել կայքէջը\" translates to \"Delete the website\". The English \"Disable account\" implies a deactivation or suspension of an account, not a website deletion. It's a semantic mismatch.",
-          "suggestion": "Մոռացության գրացուցք (Moratsutyan gratciq)"
+          "description": "The Armenian translation \"Ջնջել կայքէջը\" translates to \"Delete website\", which is not equivalent to \"Disable account\". It implies deleting an entire website, not just disabling a user's profile.",
+          "suggestion": "Մոռացության շեմին բերել հաշվեկշռը"
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'프로필 삭제' translates to 'Profile Delete' or 'Delete Profile', not 'Disable Account'. While deleting a profile effectively disables the account, the translation doesn't directly convey that meaning.",
-          "suggestion": "계정 비활성화 (Gyejeong bihwaseong) - Account Deactivation, or 삭제 (Sagae) followed by clarifying text like '계정 삭제' (Account Delete)"
+          "description": "The Korean translation '프로필 삭제' (profile deletion) does not accurately reflect the English meaning 'Disable account'. While deletion can be a consequence of disabling an account, it's not the direct meaning. 'Disable account' implies temporarily or permanently suspending the account's functionality, not just removing the profile.",
+          "suggestion": "계정 비활성화 (gyeong jeong bihwaseong) - Account deactivation"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ລຶບ profile\" literally translates to 'delete profile'. 'Disable account' implies a suspension or deactivation, not a complete deletion. 'ລຶບ' (lup) means to delete.",
-          "suggestion": "ປິດບັນຊີ (pit ban-see) - This translates to 'close account' or 'disable account', which is more aligned with the English meaning."
+          "description": "The Lao translation \"ລຶບ profile\" literally translates to \"delete profile.\" The English content \"Disable account\" implies a more user-friendly action of deactivating or suspending the account, rather than a complete deletion. \"ລຶບ\" suggests irreversible data loss, which might not be the intended meaning.",
+          "suggestion": "Consider a more accurate translation like \"ປິດບັນຊີ\" (pit ban-chee) which means 'close account' or 'deactivate account', or \"ຢຸດບັນຊີ\" (yut ban-chee) which means 'suspend account'."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Dzēst profilu\" translates to \"Delete profile\", which is not equivalent to \"Disable account\". \"Disable account\" implies a temporary suspension, while \"Delete profile\" implies permanent removal.",
-          "suggestion": "Apjoms kontu"
+          "description": "'Dzēst profilu' translates to 'Delete profile,' not 'Disable account.' While deleting a profile effectively disables it, the wording is not a direct translation.",
+          "suggestion": "Atbloķēt kontu"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Verwijder profiel\" (Delete profile) does not accurately convey the meaning of \"Disable account\". Disabling an account is less permanent than deleting it.",
-          "suggestion": "Deactiveer account"
+          "description": "The Dutch translation \"Verwijder profiel\" (Remove profile) doesn't accurately convey the meaning of \"Disable account\". \"Disable account\" implies temporarily deactivating the account, while \"Verwijder profiel\" implies permanent deletion.",
+          "suggestion": "Een betere vertaling zou zijn: \"Account uitschakelen\" (Disable account) of \"Profiel deactiveren\" (Deactivate profile)."
         }
       ],
       "approved_at": null
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Usuń profil\" (Delete profile) doesn't accurately reflect the meaning of \"Disable account\". \"Disable\" implies a temporary suspension, while \"Usuń\" implies permanent deletion. A better translation would convey the temporary nature of disabling.",
+          "description": "The translation 'Usuń profil' (Delete profile) doesn't accurately convey the meaning of 'Disable account'. It implies a complete deletion, while 'Disable account' suggests a temporary or reversible action.",
           "suggestion": "Wyłącz konto"
         }
       ],
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Eliminar perfil' translates to 'Delete profile,' not 'Disable account.' While deletion can disable an account, it's not the same action.",
-          "suggestion": "Consider 'Desativar conta' or 'Desabilitar conta' for a closer translation of 'Disable account'."
+          "description": "'Eliminar perfil' translates to 'Delete profile' or 'Remove profile', not 'Disable account'. 'Disable account' implies temporary suspension, while 'Eliminar perfil' suggests permanent deletion.",
+          "suggestion": "Desativar conta"
         }
       ],
       "approved_at": null
@@ -225,7 +225,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Dezactivare cont' is understandable, a more accurate and common translation for 'Disable account' would be 'Dezactivare cont' or 'Ștergere cont'. 'Dezactivare' implies temporarily disabling, while 'Ștergere' implies a more permanent action, depending on the specific functionality.",
+          "suggestion": "Consider 'Ștergere cont' if the account deletion is permanent, otherwise 'Dezactivare cont' is acceptable."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -240,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පැතිකඩ මකන්න' literally translates to 'erase profile' or 'delete profile,' which isn't exactly the same as 'Disable account'. While it conveys a similar meaning, it's not a direct and accurate translation.",
-          "suggestion": "Consider a more direct translation such as 'ගණනයාත්මක ගිණුම අයින් කරන්න' (gananyatmak ginuma ain karna) which translates to 'deactivate account' or 'remove account', or 'ගිණුම නිශ්ශ්‍රීය කරන්න' (ginuma nishriy karna) which means 'deactivate account'."
+          "description": "The translation \"පැතිකඩ මකන්න\" literally translates to \"erase profile\" or \"delete profile,\" which isn't quite the same as \"Disable account.\" While deletion implies disabling, it’s a more permanent action. \"Disable account\" suggests a temporary state.",
+          "suggestion": "Consider alternatives like \"ගණනය ක්‍රියා විරහිත කරන්න\" (gananā kriyā virahitā karan'nu) which translates to 'disable account' or \"ගණනය අවහිර කරන්න\" (gananā avahirā karan'nu) which means to block or deactivate."
         }
       ],
       "approved_at": null
@@ -252,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Odstrániť profil' translates to 'Delete profile'. While related to disabling an account, it doesn't convey the meaning of 'Disable account' accurately. 'Disable account' implies a temporary state, whereas 'Delete profile' suggests permanent removal. A better translation would be something along the lines of 'Deaktivovať účet' or 'Zrušiť účet'.",
-          "suggestion": "Deaktivovať účet"
+          "description": "The Slovak translation \"Odstrániť profil\" (Remove profile) does not accurately convey the meaning of \"Disable account\". It implies a complete deletion, whereas \"Disable account\" suggests a temporary suspension or deactivation.",
+          "suggestion": "Zablokovať účet"
         }
       ],
       "approved_at": null
@@ -264,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Disable account' translates to a broader meaning than 'Izbriši profil' (Delete profile). 'Disable account' implies temporarily suspending the account, while 'Izbriši profil' suggests permanent deletion. The translation doesn't accurately convey the original meaning.",
-          "suggestion": "Consider a translation that reflects temporary suspension, such as 'Onemogoči račun' or 'Začasno onemogoči račun'."
+          "description": "The English phrase \"Disable account\" implies temporarily deactivating, not permanently deleting. \"Izbriši profil\" translates to \"Delete profile,\" which is a more permanent action.",
+          "suggestion": "Consider a translation like \"Onemogoči račun\" which more accurately reflects the meaning of 'Disable account'."
         }
       ],
       "approved_at": null
@@ -276,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Обриши профил\" translates to \"Delete profile\", which is not the intended meaning of \"Disable account\". While deleting a profile can achieve a similar outcome, it is not the same as disabling it.",
-          "suggestion": "A more accurate translation would be something like \"Деактивирај налог\" or \"Инеактивирај налог\" (Deaktiviraj nalog/Inaktiviraj nalog), which directly convey the meaning of 'disable account'."
+          "description": "The Serbian translation 'Обриши профил' translates to 'Delete profile'. While it conveys a similar idea to 'Disable account', it's not the most accurate representation. 'Disable account' implies a temporary or reversible action, whereas 'delete' suggests permanent removal.  A more accurate translation might be 'Деактивирај налог' or 'Инеактивирај налог'.",
+          "suggestion": "Деактивирај налог"
         }
       ],
       "approved_at": null
@@ -288,7 +294,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Obriši profil\" translates to \"Delete profile\", not \"Disable account\". While deletion implies disabling, it's not the direct equivalent.",
+          "description": "The translation \"Obriši profil\" translates to \"Delete profile\" and doesn't accurately convey the meaning of \"Disable account\". While deleting a profile is *a* way to disable an account, it's not the direct meaning of the English phrase.",
           "suggestion": "Izbriši nalog"
         }
       ],
@@ -300,7 +306,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Profili sil' (Delete Profile) doesn't accurately convey the meaning of 'Disable account'. 'Disable account' implies temporarily suspending the account, whereas 'Delete Profile' means permanently removing it.",
+          "description": "The Turkish translation \"Profili sil\" (Delete profile) doesn't accurately convey the meaning of \"Disable account\". \"Disable account\" implies temporarily suspending the account, while \"Delete profile\" suggests permanent removal. A more accurate translation would be something like \"Hesabı devre dışı bırak\" or \"Hesabı kapat\".",
           "suggestion": "Hesabı devre dışı bırak"
         }
       ],
@@ -312,8 +318,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Видалити профіль' (Delete profile) does not accurately reflect the English meaning 'Disable account'. 'Disable account' implies a temporary suspension, while 'Delete profile' suggests permanent removal.",
-          "suggestion": "Призупинити обліковий запис"
+          "description": "The translation \"Видалити профіль\" (Delete profile) does not accurately convey the meaning of \"Disable account\".  \"Disable account\" implies temporarily suspending the account, whereas \"Delete profile\" implies permanent removal.",
+          "suggestion": "Відключити обліковий запис"
         }
       ],
       "approved_at": null
@@ -324,7 +330,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Xóa hồ sơ' translates to 'Delete profile' rather than 'Disable account'. The original English phrase implies deactivation, not complete deletion.",
+          "description": "'Xóa hồ sơ' translates to 'Delete profile'. While it conveys a related action, it's not as accurate as 'Disable account' which directly reflects the intended function of deactivating an account. 'Xóa' (delete) is a more permanent action than 'Disable'.",
           "suggestion": "Vô hiệu hóa tài khoản"
         }
       ],

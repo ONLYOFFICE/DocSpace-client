@@ -3,7 +3,7 @@
   "content": "Assign roles?",
   "content_en_sha1_hash": "126d42f659b8a763c51805806dd0b34eee0bc13b",
   "created_at": "2025-05-19T21:30:43.100Z",
-  "updated_at": "2025-05-28T09:30:02.961Z",
+  "updated_at": "2025-05-26T07:57:32.933Z",
   "comment": {
     "text": "AssignRoles translation key: Used to display a confirmation question about assigning roles within a room. It is part of an assign roles dialog that pops up when a button with this title is clicked, and appears alongside a brief description of its purpose.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Rolları təyin et?' is a literal translation of 'Assign roles?' but it doesn't perfectly convey the nuance. 'Təyin etmək' often implies a formal or official assignment. A more natural translation might be 'Rol ver?' or 'Kimlərə rol verəsən?' depending on the context.",
-          "suggestion": "Consider 'Rol ver?' or 'Kimlərə rol verəsən?' for a more natural and contextually appropriate translation."
+          "description": "The translation 'Rolları təyin et?' is a literal translation and not the most natural way to ask 'Assign roles?' in Azerbaijani. A more natural phrasing would emphasize the act of assigning.",
+          "suggestion": "Consider 'Rollar verilsin?' or 'Rollar paylanılsın?' depending on the specific nuance desired."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Նշանակե՞լ դերեր։\" while containing the correct words, doesn't fully capture the interrogative nature of \"Assign roles?\" The question mark is represented by the ending '՞', but a more natural phrasing in Armenian might be more direct, depending on the context. It's technically correct but potentially awkward.",
-          "suggestion": "Consider a phrasing like \"Ձեռք բերե՞լ դերեր։\" (Ձեռք բերե՞լ is closer to 'acquire/obtain' which is often implied in 'assign'). The best alternative depends heavily on the surrounding text."
+          "description": "The Armenian translation \"Նշանակե՞լ դերեր։\" while technically conveying 'assign roles?' might not be the most natural or idiomatic translation in Armenian. It uses the interrogative particle '՞' which can sound slightly formal or questioning the possibility rather than a direct question. A more natural phrasing might be \"Ի՞նչ դերեր շնորհել։\" or \"Ո՞վ դերերը շնորհել։\" depending on the context.",
+          "suggestion": "Consider alternatives like \"Ի՞նչ դերեր շնորհել։\" or \"Ո՞վ դերերը շնորհել։\" for a more natural and contextually appropriate translation."
         }
       ],
       "approved_at": null
@@ -99,7 +99,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Italian translation includes a leading space.",
+          "suggestion": "Assegnare ruoli?"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"역할 할당하시겠습니까?\" is technically correct but sounds overly formal and stiff for the simple English question \"Assign roles?\". A more natural and common phrasing would be preferable.",
-          "suggestion": "역할을 할당하시겠어요? (Yeokhal-eul hallang-hasi-gess-eoyo?)"
+          "description": "The translation '역할 할당하시겠습니까?' is a bit formal for a simple \"Assign roles?\" question. It translates more accurately to \"Would you like to assign roles?\" or \"Do you want to assign roles?\" A more direct and common translation would be better depending on the context.",
+          "suggestion": "역할 할당하시나요? (Yokhal haldanghasinayo?)"
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Piedāvāt lomas?\" translates to \"Offer roles?\" which doesn't fully capture the meaning of 'Assign roles?'. 'Piedāvāt' implies offering, while 'Assign' implies a more formal and definitive action. The translation lacks the sense of assigning or allocating roles.",
-          "suggestion": "Consider alternatives like \"Piesaistīt lomas?\" (Assign roles?) or \"Piešķirt lomas?\" (Allocate roles?). The best option will depend on the specific context."
+          "description": "The Latvian translation \"Piedāvāt lomas?\" translates to \"Offer roles?\" rather than \"Assign roles?\". While related, 'assign' implies a definitive allocation, whereas 'offer' is more suggestive.",
+          "suggestion": "Norādīt lomas?"
         }
       ],
       "approved_at": null
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Przypisać role?' is not quite accurate. 'Role' is the English plural form and should be translated to the Polish plural form of the word for 'role' which is 'role'. 'Przypisać role' is grammatically correct, but implies assigning multiple roles. The singular form 'przypisać rolę' would be more accurate to directly mirror the English question 'Assign role?'",
-          "suggestion": "Przypisać rolę?"
+          "description": "The translation \"Przypisać role?\" is not the most natural or accurate translation of \"Assign roles?\". While \"przypisać\" means \"to assign,\" the use of \"role\" (in the English plural form) in the Polish translation is awkward. The Polish word for 'roles' is 'role'.",
+          "suggestion": "Przypisać role?"
         }
       ],
       "approved_at": null
@@ -171,13 +177,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Doriți să atribuiți roluri?' translates literally to 'Do you want to assign roles?'. While understandable, it's a bit formal for a simple question like 'Assign roles?'. A more natural translation might be 'Atribuiești roluri?' (Informal) or 'Se vor atribui roluri?' (Passive form, more suitable depending on context).",
-          "suggestion": "Consider 'Atribuiești roluri?' or 'Se vor atribui roluri?' depending on the desired tone and context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'භූමිකා පත් කරන්නේ?' is a literal translation and might not be the most natural or idiomatic way to ask 'Assign roles?' in Sinhala. It's more of a declarative question structure instead of a direct request for permission or confirmation.",
-          "suggestion": "Consider alternative translations like 'භූමිකා පවරන්න?' (pawahanna - to allocate/assign), or 'භූමිකා ලබා දෙන්නද?' (labadevunnada? - should roles be given?).  The best option depends on the specific context and desired level of formality."
+          "description": "The translation 'භූමිකා පත් කරන්නේ?' is a literal translation but doesn't quite convey the nuance of 'Assign roles?' in a natural Sinhala way. It's closer to 'Are you assigning roles?' rather than a simple question of 'Assign roles?'.",
+          "suggestion": "භූමිකා පිරිනැමුවද? or Roles පිරිනැමුවද?"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Додели улоге?' is a literal translation that doesn't quite capture the natural way to ask 'Assign roles?' in Serbian. While grammatically correct, it sounds somewhat awkward.",
-          "suggestion": "A more natural translation would be something like 'Придружи улоге?' or 'Доделите улоге?' (formal) or 'Дај улоге?' (informal), depending on the context and desired tone. 'Придружи улоге?' is generally the most appropriate option."
+          "description": "The translation \"Додели улоге?\" doesn't fully convey the meaning of \"Assign roles?\". A more accurate translation would be something along the lines of \"Доделити улоге?\" or \"Приделити улоге?\". \"Додели\" suggests a distribution, whereas \"Assign\" implies a direct allocation.",
+          "suggestion": "Доделити улоге?"
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Dodeli uloge?' is understandable, it's a somewhat literal and not the most natural translation of 'Assign roles?'. A more idiomatic Serbian (Latin) translation would be 'Dodeljivanje uloga?' or 'Pričajemo o dodeli uloga?'",
-          "suggestion": "Dodeljivanje uloga?"
+          "description": "The translation 'Dodeli uloge?' is a literal translation of 'Assign roles?' and while understandable, it's not the most natural way to phrase this in Serbian. 'Dodeliti' implies an action being performed *to* something or someone, rather than simply assigning roles.",
+          "suggestion": "Consider 'Prikaži uloge?' (Show roles?) or 'Dodeljivanje uloga?' (Role assignment? - more formal) or 'Da li dodeliti uloge?' (To assign roles? - adding a clarifying question marker)"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Mark as version",
   "content_en_sha1_hash": "9f8223cc47438831ca1519c318fd28060ec91cbc",
   "created_at": "2025-05-19T21:30:55.814Z",
-  "updated_at": "2025-05-28T09:30:02.830Z",
+  "updated_at": "2025-05-26T07:57:32.813Z",
   "comment": {
     "text": "This translation key is used to mark a file as a version. It appears as a button label on a version row in a version history page, allowing users to select a version to update or revert to. The exact text may vary depending on the selected context (revision or version).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 283,
+      "line_number": 285,
       "context": "t={t}\n title={\n index > 0\n ? isVersion\n ? t(\"Files:MarkAsRevision\")\n : t(\"Files:MarkAsVersion\")\n : \"\"\n }\n />\n <div className=\"version-link-box\">\n <Link",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"وضع علامة كإصدار\" (Wada' 'Alaama Ka Isdar) literally translates to \"Place mark as version\". While understandable, it's not the most natural phrasing in Arabic for the meaning of 'Mark as version'. A more accurate and natural translation would be something like \"تمييز كإصدار\" (Tamyez Ka Isdar) or \"وضع كإصدار\" (Wada' Ka Isdar).",
-          "suggestion": "تمييز كإصدار (Tamyez Ka Isdar) or وضع كإصدار (Wada' Ka Isdar)"
+          "description": "The translation 'وضع علامة كإصدار' while literally meaning 'Place a mark as version', doesn't fully capture the nuance of 'Mark as version'. A more natural and idiomatic translation would be something like 'تحديد كإصدار' (Tahdeed ka isdar) or 'تمييز كإصدار' (Tamyeez ka isdar).",
+          "suggestion": "تحديد كإصدار"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Versiya kimi qeyd edin\" literally translates to \"Mark as version\". While understandable, a more natural and idiomatic Azerbaijani phrasing would be preferable. \"Versiyalaşdır\" or \"Versiya olaraq işlənilmiş\" might be better alternatives, depending on the intended nuance.",
-          "suggestion": "Consider \"Versiyalaşdır\" or \"Versiya olaraq işlənilmiş\" for a more natural-sounding translation."
+          "description": "While \"Versiya kimi qeyd edin\" is a literal translation, it doesn't quite capture the nuance of 'Mark as version' in this context. It sounds a bit awkward. A more natural phrasing would convey the action of assigning a version.",
+          "suggestion": "Consider alternatives like \"Versiyanın olaraq seçin\" or \"Versiya olaraq işarə edin\" which better conveys the intended meaning of assigning a version."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"버전으로 표시\" is not the most natural or precise translation of \"Mark as version\". While technically correct, it lacks nuance. A more idiomatic translation would convey the action of assigning a version.",
-          "suggestion": "Consider \"버전으로 지정하다\" (version-eojin-hada) or \"버전으로 설정하다\" (version-eoseo-seonghapda)."
+          "description": "The Korean translation \"버전으로 표시\" is a literal translation but might not be the most natural or accurate representation of \"Mark as version\" in a software context. It could be interpreted as 'display as a version' rather than 'assign a version number'.",
+          "suggestion": "Consider alternatives like \"버전으로 설정\" (set as version), \"버전 지정\" (assign version), or \"버전 관리\" (version control) depending on the specific functionality."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අනුවාදයක් ලෙස සලකුණු කරන්න' literally translates to 'Mark as translation'. The English phrase 'Mark as version' implies marking a file as a specific version, not as a translation. The Sinhala translation does not convey this meaning.",
-          "suggestion": "The translation needs to reflect the concept of marking something as a version. Possible alternatives: 'වර්ෂනය ලෙස සලකුණු කරන්න' (Mark as version), 'අවසම් ලෙස සලකුණු කරන්න' (Mark as revision/update)."
+          "description": "The translation \"අනුවාදයක් ලෙස සලකුණු කරන්න\" literally translates to \"Mark as a translation\". This doesn't accurately convey the meaning of 'Mark as version', which implies assigning a version number or a particular version status to a file. It's translating the word 'translation' instead of 'version'.",
+          "suggestion": "A more accurate translation would depend on the specific context of 'Mark as version'. Possible suggestions include: \"අවස්ථාවක් ලෙස සලකුණු කරන්න\" (Mark as status), \"වර්ෂනයක් ලෙස සලකුණු කරන්න\" (Mark as version - literal, but potentially confusing), or \"අවසම් යථාර්ථයක් ලෙස සලකුණු කරන්න\" (Mark as final version - if appropriate)."
         }
       ],
       "approved_at": null

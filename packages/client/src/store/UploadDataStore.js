@@ -31,7 +31,6 @@ import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
 import { ConflictResolveType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
   getFileInfo,
   getFolderInfo,
@@ -52,9 +51,9 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { globalColors } from "@docspace/shared/themes";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { Link } from "@docspace/shared/components/link";
 
 const removeDuplicate = (items) => {
   const obj = {};
@@ -293,7 +292,7 @@ class UploadDataStore {
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
 
-    toastr.info(t("CancelUpload"));
+    toastr.info(t("Common:CancelUpload"));
   };
 
   cancelConversion = () => {
@@ -1811,12 +1810,11 @@ class UploadDataStore {
               i18nKey="Common:PasswordProtectedFiles"
               t={t}
               components={[
-                <ColorTheme
+                <Link
                   key="a"
                   tag="a"
-                  themeId={ThemeId.Link}
                   isHovered
-                  color={globalColors.link}
+                  color="accent"
                   onClick={() => {
                     toastr.clear();
                     this.setUploadPanelVisible(true);

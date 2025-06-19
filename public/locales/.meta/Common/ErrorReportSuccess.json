@@ -3,7 +3,7 @@
   "content": "Error report was successfully sent",
   "content_en_sha1_hash": "18f1a1caa3e6cd16cb0d42023d3cac9d9165ec52",
   "created_at": "2025-05-19T21:30:45.120Z",
-  "updated_at": "2025-05-28T09:30:02.946Z",
+  "updated_at": "2025-05-26T07:57:32.916Z",
   "comment": {
     "text": "The \"ErrorReportSuccess\" translation key is used to display a success message when an error report is successfully sent in a crash report dialog. It appears as a toast notification when the report is submitted and receives feedback from users.",
     "is_auto": true,
@@ -180,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'poslat' is a colloquial form. A more formal and universally accepted alternative is 'poslat'.",
+          "description": "The word 'poslat' is spelled incorrectly. The correct spelling is 'poslat'.",
           "suggestion": "poslat"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure could be slightly improved for a more natural flow in Serbian. Consider rephrasing.",
-          "suggestion": "Uspešno je poslat izveštaj o grešci."
         }
       ],
       "approved_at": null

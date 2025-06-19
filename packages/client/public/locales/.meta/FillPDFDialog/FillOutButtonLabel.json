@@ -3,7 +3,7 @@
   "content": "Fill in",
   "content_en_sha1_hash": "d20fc7ca1f2cd76352a54a4eafef3df897d87c84",
   "created_at": "2025-05-19T21:30:55.156Z",
-  "updated_at": "2025-05-28T09:30:02.271Z",
+  "updated_at": "2025-05-26T07:57:32.307Z",
   "comment": {
     "text": "The translation key \"FillOutButtonLabel\" is used to display the label on a button that prompts users to fill in information. In this case, it appears as part of a dialog titled \"FillPDFDialog\", where the user is prompted to fill in data.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Συμπλήρωση' while literally meaning 'completion' or 'filling', doesn't quite capture the nuance of 'Fill in' in the context of a button label for filling out a PDF form. It sounds more formal and less action-oriented than the original English.",
-          "suggestion": "Εισαγωγή Δεδομένων"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"작성: \" is too literal and lacks context. \"작성\" means \"write\" or \"write down\". The English \"Fill in\" implies filling a form, not simply writing something. A better translation would convey the action of filling out a form.",
-          "suggestion": "채우기 (Chaeugi) - meaning 'to fill' or 'fill out'. Or, 더 채우기 (Deo chaeugi) – 'Fill more'."
+          "description": "The translation \"작성: \" does not accurately convey the meaning of \"Fill in\". \"작성: \" translates to \"Writing:\" or \"Compose:\". \"Fill in\" implies completing a form, not necessarily writing something from scratch.",
+          "suggestion": "Consider alternatives like \"채우기\" (chaeugi - to fill) or \"작성하기\" (jaksyeonghagi - to write/compose\") depending on the specific context, or \"입력:\" (ipnyeok - input) to align better with form filling."
         }
       ],
       "approved_at": null
@@ -153,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Completare' is a valid Romanian word, it doesn't perfectly capture the nuance of 'Fill in' in this context (specifically referring to filling out a form). It's more literal and less idiomatic.",
+          "suggestion": "Consider 'Completează' or 'Introdu datele' which are more commonly used for filling out forms."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Попуни\" while meaning 'fill' or 'top up', is not the most natural or common translation for a button labeled 'Fill in' in this context. It sounds a bit informal and might be misinterpreted. A more appropriate translation would convey the action of completing a form or document.",
+          "description": "The translation 'Попуни' doesn't accurately convey the meaning of \"Fill in\". While it literally means 'fill up', in the context of a form, 'Fill in' implies completing the fields. A more appropriate translation would be 'Испуни' (Ispuni) or 'Унеси' (Unesi).",
           "suggestion": "Испуни"
         }
       ],
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Popuni' is a valid Serbian word, it's not the most natural or idiomatic translation of 'Fill in' in the context of a button label for filling out a PDF form. 'Ispuni' would be a more accurate and commonly used translation.",
+          "description": "While 'Popuni' can mean 'fill in', it's not the most natural or common translation of 'Fill in' in the context of a button label for a PDF form. A more accurate and user-friendly translation would be 'Ispuni'.",
           "suggestion": "Ispuni"
         }
       ],

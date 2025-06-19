@@ -50,73 +50,39 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ReactSVG } from "react-svg";
-import styled from "styled-components";
 
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import classNames from "classnames";
 import { TTranslation } from "../../../types";
 
-const StyledButton = styled.div`
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 6px 0;
-  background: ${(props) =>
-    props.theme.createEditRoomDialog.iconCropper.deleteButton.background};
-  border: 1px solid
-    ${(props) =>
-      props.theme.createEditRoomDialog.iconCropper.deleteButton.borderColor};
-  border-radius: 3px;
-  margin-bottom: 12px;
-
-  transition: all 0.2s ease;
-  &:hover {
-    background: ${(props) =>
-      props.theme.createEditRoomDialog.iconCropper.deleteButton
-        .hoverBackground};
-    border: 1px solid
-      ${(props) =>
-        props.theme.createEditRoomDialog.iconCropper.deleteButton
-          .hoverBorderColor};
-  }
-
-  &-text {
-    user-select: none;
-    font-weight: 600;
-    line-height: 20px;
-    color: ${(props) =>
-      props.theme.createEditRoomDialog.iconCropper.deleteButton.color};
-  }
-
-  svg {
-    path {
-      fill: ${(props) =>
-        props.theme.createEditRoomDialog.iconCropper.deleteButton.iconColor};
-    }
-  }
-`;
+import styles from "./ButtonDelete.module.scss";
 
 const ButtonDelete = ({
   onClick,
   t,
+  className,
 }: {
   onClick: (e: React.MouseEvent) => void;
   t: TTranslation;
+  className?: string;
 }) => {
   return (
-    <StyledButton
-      className="icon_cropper-delete_button"
+    <div
+      className={classNames(
+        "icon_cropper-delete_button",
+        styles.buttonDelete,
+        className,
+      )}
       onClick={onClick}
       title={t("Common:Delete")}
     >
       <ReactSVG src={TrashReactSvgUrl} />
-      <div className="icon_cropper-delete_button-text">
+      <div
+        className={classNames("icon_cropper-delete_button-text", styles.text)}
+      >
         {t("Common:Delete")}
       </div>
-    </StyledButton>
+    </div>
   );
 };
 

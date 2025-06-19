@@ -3,7 +3,7 @@
   "content": "All the data you entered will be lost. Are you sure you want to continue?",
   "content_en_sha1_hash": "e99a68715daa80c6d8b8fffc16f35951fc75370e",
   "created_at": "2025-05-19T21:30:43.634Z",
-  "updated_at": "2025-05-28T09:30:02.290Z",
+  "updated_at": "2025-05-26T07:57:32.325Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a user wants to reset data, warning them that all entered data will be lost. It appears in a modal dialog footer and is translated from the English content \"All the data you entered will be lost. Are you sure you want to continue?\".",
     "is_auto": true,
@@ -129,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Todos os dados que introduziu serão perdidos. Tem a certeza que quer proceder?' is a literal translation that doesn't quite capture the natural flow of the English original. While understandable, it sounds slightly formal and less conversational in Portuguese.",
-          "suggestion": "Todos os seus dados serão perdidos. Tem certeza que deseja continuar?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -162,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"All the data you entered\" is not accurately conveyed by \"ඔබ ඇතුල් කළ සියළුම දත්ත\".  A more accurate translation would emphasize the data being *lost*. \"ඔබ ඇතුල් කළ සියළුම දත්ත අතුරුදහන් වනු ඇත\" would be closer.",
-          "suggestion": "ඔබ ඇතුල් කළ සියළුම දත්ත අතුරුදහන් වනු ඇත"
+          "description": "The translation \"ඔබ ඇතුල් කළ සියළුම දත්ත නැති වී යනු ඇත. ඔබට ඉදිරියට යාමට වුවමනා ද?\" doesn't fully capture the tone and directness of the English 'Are you sure you want to continue?'. It's a bit verbose and indirect.",
+          "suggestion": "ඔබ ඇතුල් කළ සියළු දත්ත නැතිවීしまうවා. ඉදිරියට යා යුතුද?"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Are you sure you want to continue?\" is not perfectly conveyed. \"ඔබ ඉදිරියට යාමට වුවමනා ද?\" sounds somewhat awkward. A more natural phrasing would use a more direct question about proceeding.",
-          "suggestion": "ඔබ ඉදිරියට යාමට කැමතිද?"
+          "type": "formatting",
+          "description": "The use of 'යාමට' is a little clunky. While grammatically correct, it doesn't flow as naturally as a more direct phrasing.",
+          "suggestion": "ඔබ ඇතුල් කළ සියළුම දත්ත නැති වී යනු ඇත. ඉදිරියට යා යුතුද?"
         }
       ],
       "approved_at": null
@@ -191,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian word 'Сви' should be 'Сави'. 'Сви' is plural and doesn't fit the context referring to data.",
-          "suggestion": "Сави подаци које сте унели ће бити изгубљени."
+          "description": "The word 'Сви' (Svi) is used instead of 'Сави' (Savi). 'Сви' means 'all' in the general sense, while 'Сави' is more appropriate when referring to a specific set of data.",
+          "suggestion": "Сви подаци које сте унели сави ће бити изгубљени."
         }
       ],
       "approved_at": null

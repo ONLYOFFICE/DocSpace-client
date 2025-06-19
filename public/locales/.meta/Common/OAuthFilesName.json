@@ -3,7 +3,7 @@
   "content": "Files & Folders",
   "content_en_sha1_hash": "96caf6283cd48a7add2d2a99add1e7e2e180be29",
   "created_at": "2025-05-19T21:30:46.992Z",
-  "updated_at": "2025-05-28T09:30:02.557Z",
+  "updated_at": "2025-05-26T07:57:32.562Z",
   "comment": {
     "text": "This translation key is used to display the label \"Files & Folders\" in various contexts within the application. It appears on file-related menus and settings pages, guiding users through navigation options.",
     "is_auto": true,
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Թղթապանակներ' (Tght'apanakner) literally translates to 'paper folders.'  'Folders' in a digital context usually implies a container for files, not necessarily physical paper folders. A more accurate and commonly used term for digital folders would be 'Ծալքեր' (Ts'alger).",
-          "suggestion": "Consider using 'Ծալքեր' (Ts'alger) instead of 'Թղթապանակներ' (Tght'apanakner) to more accurately reflect the intended meaning of 'Folders'."
+          "description": "While 'Ֆայլեր' accurately translates 'Files', 'Թղթապանակներ' translates more literally to 'folders' or 'notebooks'. A more common and natural translation for 'Folders' in the context of file storage and sharing would be something like 'Ցուցակներ' (Lists) or 'Դիրեկցորիաներ' (Directories).",
+          "suggestion": "Consider using 'Ցուցակներ' or 'Դիրեկցորիաներ' instead of 'Թղթապանակներ' for a more natural and contextually accurate translation of 'Folders'."
         }
       ],
       "approved_at": null
@@ -107,9 +107,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The ampersand (&) should ideally be replaced with the Japanese equivalent of 'and', which is 'と' (to). While the ampersand is understandable, it's less natural in Japanese.",
+          "type": "incorrect_translation",
+          "description": "The translation \"ファイル＆フォルダ\" uses a direct transliteration of \"&\" instead of a more natural Japanese equivalent. While understandable, it's not idiomatic.",
           "suggestion": "ファイルとフォルダ"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"&\" is a formatting choice and should ideally be consistent with other similar instances within the application/platform. It's worth checking if other occurrences use \"と\" or maintain the \"&\" symbol.",
+          "suggestion": "Consider standardizing the format of similar terms."
         }
       ],
       "approved_at": null
@@ -126,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ເອກະສານ\" is a valid translation for \"Files\", \"ໂຟນເດີ\" is not a standard or easily understood translation for \"Folders\".  A more common and natural translation for \"Folders\" would be something like \"ໄຟລ໌ ແລະ ໂຟນເດີ\" or \"ໄຟລ໌ ແລະ ຊອງໄຟລ໌\".",
-          "suggestion": "Consider using \"ໄຟລ໌ ແລະ ໂຟນເດີ\" or \"ໄຟລ໌ ແລະ ຊອງໄຟລ໌\" for a more accurate and understandable translation of \"Folders\"."
+          "description": "The Lao translation \"ເອກະສານ & ໂຟນເດີ\" is a literal translation of 'Documents & Folders'. While understandable, it doesn't capture the nuance of 'Files & Folders' which implies files *within* folders, or a combined view of both. A more accurate translation might consider conveying this relationship.",
+          "suggestion": "ເອກະສານ ແລະ ໄຟລ໌"
         }
       ],
       "approved_at": null
@@ -198,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'фасцикле' is often used for binders or folders, but in the context of 'Files & Folders' where 'Files' refers to digital files, a more accurate term would be 'чајанци'.",
-          "suggestion": "Фајлови и чајанци"
+          "description": "The Serbian word 'фасцикле' (faskikle) is technically correct but may not be the most natural or commonly used term for 'folders'. While it means 'folders' or 'files', it can also refer to a collection of documents or a project dossier.",
+          "suggestion": "Consider using 'чаршије' (čarsije) or 'папке' (papke) as alternatives for 'folders'. 'Чаршије' implies a collection of files/documents, and 'папке' is a more straightforward translation."
         }
       ],
       "approved_at": null
@@ -210,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Fajlovi' is a good translation for 'Files', 'fascikle' is not the best equivalent for 'Folders'.  'Mape' would be a more accurate and commonly used translation of 'Folders' in this context.",
-          "suggestion": "Fajlovi i mape"
+          "description": "While 'Fajlovi' is a correct translation for 'Files', 'fascikle' is a less common and potentially less accurate translation for 'Folders'. A more natural and widely understood Serbian (Latin) translation for 'Folders' would be 'maper' or 'foldere'.",
+          "suggestion": "Fajlovi i maper"
         }
       ],
       "approved_at": null

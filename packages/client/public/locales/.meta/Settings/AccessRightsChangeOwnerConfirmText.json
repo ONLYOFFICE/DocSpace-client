@@ -3,7 +3,7 @@
   "content": "Changes will be applied after the confirmation via email.",
   "content_en_sha1_hash": "059370ea0ddcef692f1b1ed25c98607d7d0b27d0",
   "created_at": "2025-05-19T21:30:50.287Z",
-  "updated_at": "2025-05-28T09:30:02.202Z",
+  "updated_at": "2025-05-26T07:57:32.226Z",
   "comment": {
     "text": "This translation key is used for the confirmation text displayed when a user confirms changing the owner of access rights via email. It will appear in a modal dialog footer to inform the user about the process after confirming.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is not a natural-sounding way to express the original meaning. 'Təsdiqlənmə məktubundan sonra' is overly literal and clunky.",
+          "description": "The translation 'Dəyişikliklər e-poçt vasitəsilə təsdiqlənmə məktubundan sonra tətbiq olunacaq.' is not the most natural or accurate translation of 'Changes will be applied after the confirmation via email.' The phrasing is a bit convoluted.",
           "suggestion": "Dəyişikliklər e-poçt təsdiqi aldıqdan sonra tətbiq olunacaq."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'məktubundan' which translates to 'from the letter' is unnecessary and makes the sentence sound awkward.",
-          "suggestion": "Dəyişikliklər e-poçt təsdiqi aldıqdan sonra tətbiq olunacaq."
+          "type": "formatting",
+          "description": "The phrase 'e-poçt vasitəsilə təsdiqlənmə məktubundan' is slightly verbose. It could be simplified.",
+          "suggestion": "e-poçt təsdiqi"
         }
       ],
       "approved_at": null
@@ -92,13 +92,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation is a literal translation and sounds slightly unnatural. A more fluent phrasing would improve the user experience.",
-          "suggestion": "Փոփոխությունները կկիրառվեն էլփոստային հաստատումից հետո:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -143,8 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zmiany zostaną zastosowane po zatwierdzeniu ich drogą mailową' is a bit literal and less natural. 'zatwierdzeniu ich drogą mailową' sounds awkward. A more natural phrasing would convey the same meaning in a more fluent way.",
+          "description": "The translation \"Zmiany zostaną zastosowane po zatwierdzeniu ich drogą mailową\" is a bit literal and awkward. A more natural Polish phrasing would be better.",
           "suggestion": "Zmiany zostaną zastosowane po potwierdzeniu przez e-mail."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'drogą mailową' is a bit verbose and not the most common way to express 'by email' in this context.",
+          "suggestion": "Removing 'drogą' and using 'e-mail' simplifies the sentence."
         }
       ],
       "approved_at": null
@@ -167,8 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Modificările vor fi aplicate după confirmarea e-mailului' is a literal translation and sounds unnatural. A more natural phrasing would emphasize that the user needs to confirm the change.",
-          "suggestion": "Modificările vor fi aplicate după confirmarea ta prin e-mail."
+          "description": "The translation 'Modificările vor fi aplicate după confirmarea e-mailului' is not the most natural or accurate rendering of \"Changes will be applied after the confirmation via email.\" A more accurate and natural translation would convey the confirmation is *by* email, not just *of* email.",
+          "suggestion": "Modificările vor fi aplicate după confirmarea prin e-mail."
         }
       ],
       "approved_at": null
@@ -182,7 +181,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වි-තැපෑලෙන් සත්‍යාපනය කිරීමෙන් පසු වෙනස්කම් යොදනු ලැබේ' doesn't perfectly convey the meaning of 'Changes will be applied after the confirmation via email.' The word 'වි' (vi) at the beginning of the sentence is unnecessary and makes the translation sound awkward.  'සත්‍යාපනය කිරීමෙන් පසු' (sathyaapanaayaa karamalen pasu) literally translates to 'after verification' which while close, misses the nuance of 'confirmation'.",
+          "suggestion": "විටැපෑලෙන් තහවුරු කිරීමෙන් පසු වෙනස්කම් යොදාගත ලැබේ."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -191,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zmeny sa vykonajú po potvrdení e-mailu' is a literal translation and doesn't accurately convey the meaning of 'Changes will be applied after confirmation via email.' It implies confirming the email itself rather than confirming the changes.",
-          "suggestion": "Zmeny sa prevezmú po potvrdení e-mailom."
+          "description": "The Slovak translation 'Zmeny sa vykonajú po potvrdení e-mailu' is a literal translation but doesn't convey the intended meaning as clearly as it could. 'Potvrdení e-mailu' suggests that confirming the email itself triggers the change, rather than confirming a request to make the change.",
+          "suggestion": "Zmeny sa aplikujú po potvrdení cez e-mail."
         }
       ],
       "approved_at": null
@@ -203,13 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Spremembe bodo uporabljene po potrditvi po e-mailu' is technically correct but sounds unnatural. A more natural phrasing would be 'Spremembe se bodo začele veljati po potrditvi po e-pošti.'",
-          "suggestion": "Spremembe se bodo začele veljati po potrditvi po e-pošti."
+          "description": "The translation 'Spremembe bodo uporabljene po potrditvi po e-mailu' is not the most natural or precise rendering of 'Changes will be applied after the confirmation via email.'  'Uporabljene' implies that the changes are *used* which isn't quite accurate in this context. A more accurate phrasing would convey that the changes will be *implemented* or *carried out* after confirmation.",
+          "suggestion": "Spremembe bodo izvedene po potrditvi po e-pošti."
         },
         {
           "type": "formatting",
-          "description": "The translation uses 'e-mailu' which is a slightly older form. Modern Slovenian prefers 'e-pošti'.",
-          "suggestion": "e-pošti"
+          "description": "The term 'e-mail' should be translated to 'e-pošti' to match Slovenian terminology and consistency.",
+          "suggestion": "Use 'e-pošti' instead of 'e-mail'."
         }
       ],
       "approved_at": null
@@ -220,13 +225,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Промене ће бити аплициране након конфирмације путем емаил-а' is not the most natural or accurate translation of 'Changes will be applied after the confirmation via email.' The word 'аплициране' (applied) is technically correct, but sounds formal and somewhat awkward in this context. 'емаил-а' is also a transliteration and not a standard Serbian term.",
+          "description": "The translation 'Промене ће бити аплициране након конфирмације путем емаил-а' is not the most natural or accurate rendering of 'Changes will be applied after the confirmation via email.' The word 'аплициране' (applied) feels awkward in this context.",
           "suggestion": "Промене ће бити примењене након потврде путем е-маила."
         },
         {
           "type": "formatting",
-          "description": "The term 'емаил-а' is a transliteration and not a standard Serbian term. It should be 'е-маила'.",
+          "description": "The word 'емаил' is transliterated, but 'е-маила' is the more common and accepted term in Serbian for 'email'.",
           "suggestion": "е-маила"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'конфирмације' is technically correct, 'потврде' is more commonly used and flows better in this context when referring to confirmation.",
+          "suggestion": "потврде"
         }
       ],
       "approved_at": null
@@ -237,8 +247,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Promene će biti aplicirane nakon konfirmacije putem email-a.\" is a literal translation and sounds unnatural in Serbian.  'Aplicirane' is awkward in this context. A more natural phrasing would be 'Promene će biti izvršene nakon potvrde putem email-a.' or 'Promene će se primeniti nakon potvrde putem email-a.'",
+          "description": "The translation \"Promene će biti aplicirane nakon konfirmacije putem email-a\" is a literal translation and sounds unnatural in Serbian. \"Aplicirane\" is technically correct but uncommon and formal. A more natural phrasing would use a verb that conveys application or implementation.",
           "suggestion": "Promene će biti izvršene nakon potvrde putem email-a."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'email-a' uses the genitive case, which is grammatically correct, but sounds slightly stiff. While not incorrect, using the nominative would make it more conversational.",
+          "suggestion": "Promene će biti izvršene nakon potvrde putem email."
         }
       ],
       "approved_at": null
@@ -249,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation implies the changes *have already* been confirmed via email. The English text states the confirmation *will* occur via email.",
-          "suggestion": "Değişiklikler, e-posta yoluyla onaylandıktan sonra uygulanacaktır."
+          "description": "The Turkish translation 'Değişiklikler e-posta yolu ile onaylandıktan sonra uygulanacaktır' implies that the changes *have already* been approved by email. The English implies they *will be* approved.",
+          "suggestion": "Değişiklikler e-posta ile onay alındıktan sonra uygulanacaktır."
         }
       ],
       "approved_at": null
@@ -273,13 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"通过邮件确认后将应用变更\" is a literal translation but sounds somewhat unnatural in Chinese. A more natural phrasing would convey the meaning more clearly.",
-          "suggestion": "可以通过邮件确认后变更生效 (Kěyǐ tōngguò yóujiàn quèrèn hòu biàngēng shēngxiào)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The original English conveys that changes will be applied *after* confirmation. While the Chinese translation isn't wrong, it doesn't emphasize the sequential order as clearly. A better phrasing might explicitly state 'after confirmation'.",
-          "suggestion": "可以通过邮件确认后变更生效 (Kěyǐ tōngguò yóujiàn quèrèn hòu biàngēng shēngxiào)."
+          "description": "The translation \"通过邮件确认后将应用变更\" is a literal translation that sounds slightly awkward in Chinese. A more natural phrasing would emphasize the effect of the confirmation.",
+          "suggestion": "确认邮件发送后，变更将生效。"
         }
       ],
       "approved_at": null

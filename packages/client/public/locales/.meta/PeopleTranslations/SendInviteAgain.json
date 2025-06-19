@@ -3,7 +3,7 @@
   "content": "Send invitation once again",
   "content_en_sha1_hash": "cd053eb31b3f6c6a7b0b220abd4009c2b352e163",
   "created_at": "2025-05-19T21:30:53.512Z",
-  "updated_at": "2025-05-28T09:30:02.295Z",
+  "updated_at": "2025-05-26T07:57:32.331Z",
   "comment": {
     "text": "The translation key \"SendInviteAgain\" is used to display a message that allows users to resend an invitation. It appears in a modal dialog box when sending another invite button is clicked. Translators should provide a text that conveys this functionality for internationalization purposes.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'Ուղարկեք հրավեր ևս մեկ անգամ' is a bit literal and could be more natural. A more idiomatic translation would be 'Ուղարկեք հրավերն առ այնպես' or 'Ելքրկյակ Ուղարկեք հրավեր' (Send the invite again).",
-          "suggestion": "Consider 'Ուղարկեք հրավերն առ այնպես' or 'Ելքրկյակ Ուղարկեք հրավեր'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -177,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Пошаљи још једном позивницу\" is understandable, a more accurate and natural translation of \"Send invitation once again\" would be \"Пошаљи позивницу поново\" or \"Измени позивницу\" if referring to resending.",
-          "suggestion": "Пошаљи позивницу поново"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

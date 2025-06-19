@@ -3,7 +3,7 @@
   "content": "Group {{groupName}} will be deleted. Users in the group will not be removed from {{productName}}. Are you sure you want to continue?",
   "content_en_sha1_hash": "1def40bc5db30b6384216cdbb18e26567e154700",
   "created_at": "2025-05-19T21:30:56.699Z",
-  "updated_at": "2025-05-28T09:30:02.257Z",
+  "updated_at": "2025-05-26T07:57:32.293Z",
   "comment": {
     "text": "This translation key is used to display a message when deleting a group, informing users that the group will be deleted but not their data. The text appears in a delete dialog when confirming deletion of a group.",
     "is_auto": true,
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Finnish translation lacks a space after the hyphen in '{{productName}}-sta'. It should be '{{productName}}-sta '. This is standard Finnish punctuation.",
+          "suggestion": "Ryhmä {{groupName}} poistetaan. Ryhmän käyttäjiä ei poisteta {{productName}}-sta . Haluatko varmasti jatkaa?"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a colon (:) after 'ջնջվի' which doesn't match the English punctuation. The English uses a period (.)",
+          "suggestion": "{{groupName}} խումբը կջնջվի։ Խմբի օգտատերերը չեն հեռացվի {{productName}}-ից։ Վստա՞հ եք, որ ցանկանում եք շարունակել: should be {{groupName}} խումբը կջնջվի. Խմբի օգտատերերը չեն հեռացվի {{productName}}-ից։ Վստա՞հ եք, որ ցանկանում եք շարունակել:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,19 +105,47 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses full-width characters, which is standard for Japanese. However, within a software UI, mixing full-width and half-width characters (especially for variable names like {{groupName}} and {{productName}}) can cause layout issues and visual inconsistencies. It's recommended to ensure all variable placeholders are also full-width.",
+          "suggestion": "Ensure all variable placeholders ({{groupName}} and {{productName}}) are also full-width characters (全角)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is generally accurate, the phrase \"続けてよろしいですか？\" (tsuzukete yoroshii desu ka?) literally translates to 'Is it alright to continue?'. A more natural and common phrasing for a confirmation dialog would be something along the lines of \"よろしいですか？\" (yoroshii desu ka?) or \"実行しますか？\" (jikkou shimasu ka?).",
+          "suggestion": "Replace \"続けてよろしいですか？\" with \"よろしいですか？\" or \"実行しますか？\"."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses a direct transliteration of \"Are you sure you want to continue?\" which is somewhat unnatural in Korean. A more natural phrasing would be preferred.",
+          "suggestion": "진행하시겠습니까? or 정말로 삭제하시겠습니까?"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຄຸ້ມກຸ່ມ\" (khum gum) doesn't directly translate to \"Group\". It could be interpreted as 'covering group' or something similar, which is not accurate in this context. A more appropriate translation for 'Group' would be something like 'ກຸ່ມ' (gum) alone.",
+          "suggestion": "Replace 'ຄຸ້ມກຸ່ມ' with 'ກຸ່ມ'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຖືກຖອນອອກຈາກ\" (thuk thon ok jak) translates to 'will be withdrawn from' which isn't the ideal phrasing for removing users from a product. A better translation would convey that the users remain associated with the product.",
+          "suggestion": "Replace 'ຖືກຖອນອອກຈາກ' with 'ຍັງຢູ່ໃນ' or 'ບໍ່ຖືກລົບອອກຈາກ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +157,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses \"Weet u zeker\" instead of a more natural equivalent to \"Are you sure\". A more common and fluent option would be \"Bent u zeker\" or \"Zeker?\".",
+          "suggestion": "Bent u zeker dat u door wilt gaan?"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,19 +187,42 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The question mark at the end of the sentence is missing a space in the Romanian translation.",
+          "suggestion": "Grupul {{groupName}} va fi șters. Utilizatorii care fac parte din acest grup nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați? "
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The question mark at the end of the Russian translation is missing a space. It should be 'Продолжить? '",
+          "suggestion": "Продолжить? "
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"කණ්ඩායමේ සිටින පරිශීලකයින් ඉවත් කරනු නොලැබේ\" is a literal translation of 'Users in the group will not be removed'. A more natural and fluent Sinhala phrasing would be something like 'කණ්ඩායමේ සිටින පරිශීලකයින් වෙනස් නොවනු ඇත' (Users in the group will not be changed/altered).",
+          "suggestion": "කණ්ඩායමේ සිටින පරිශීලකයින් වෙනස් නොවනු ඇත"
+        },
+        {
+          "type": "formatting",
+          "description": "While the use of \"{{groupName}}\" and \"{{productName}}\" is consistent with the English source, ensure this formatting is correctly handled within the Sinhala user interface to properly render the dynamic values.",
+          "suggestion": "Verify the proper rendering of \"{{groupName}}\" and \"{{productName}}\" in the Sinhala UI."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +240,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The possessive suffix '-а' is attached to {{productName}} in the Serbian translation. While grammatically possible, it might sound unnatural depending on the context and product name. Consider if it's intended and if a simpler phrasing would be more appropriate.",
+          "suggestion": "Consider removing the '-а' or rephrasing the sentence to avoid it (e.g., 'Корисници у групи неће бити уклоњени са {{productName}}')."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +264,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"простору {{productName}}\" (space {{productName}}) is not the most accurate translation of \"{{productName}}\". It implies a container or area, which might be misleading.  A more appropriate translation might be something like \"{{productName}}\" itself or \"{{productName}} сервісу\" (service {{productName}}).",
+          "suggestion": "Групу {{groupName}} буде видалено. Користувачів у групі не буде видалено з {{productName}}. Ви впевнені, що бажаєте продовжити?"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

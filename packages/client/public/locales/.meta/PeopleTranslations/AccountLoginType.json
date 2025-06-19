@@ -3,7 +3,7 @@
   "content": "Account login type",
   "content_en_sha1_hash": "861989cfa261ace5361fae74f1927e459e118d69",
   "created_at": "2025-05-19T21:30:53.451Z",
-  "updated_at": "2025-05-28T09:30:02.469Z",
+  "updated_at": "2025-05-26T07:57:32.463Z",
   "comment": {
     "text": "This translation key is used to display the account login type label in a filtering section, typically found on a contact list page. It will be displayed next to a button or dropdown option, allowing users to select their preferred login method. Translators should focus on adapting this text to fit various cultural contexts and user interfaces.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Тип вход в акаунта\" is a rather literal and slightly awkward translation. A more natural Bulgarian phrasing would be \"Вид на влизане в акаунт\" or \"Тип влизане в акаунт\".",
-          "suggestion": "Вид на влизане в акаунт"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -69,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Tipo de inicio de sesión de la cuenta\" is a bit verbose and not the most natural phrasing in Spanish. A more common and concise translation would be \"Tipo de inicio de sesión\" or \"Tipo de acceso a la cuenta\".",
+          "suggestion": "Tipo de inicio de sesión"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -113,9 +113,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'ປະເພດການເຂົ້າສູ່ລະບົບບັນຊີ' is a bit literal and verbose. A more natural Lao translation of 'Account login type' might be 'ປະເພດການເຂົ້າບັນຊີ' or 'ວິທີເຂົ້າບັນຊີ'.",
-          "suggestion": "ວິທີເຂົ້າບັນຊີ or ປະເພດການເຂົ້າບັນຊີ"
+          "type": "spelling",
+          "description": "The word 'ປະເພດ' is spelled correctly, but might benefit from a slightly more common or natural phrasing depending on the context. While technically correct, 'ຊະນິດ' could be a more widely understood alternative.",
+          "suggestion": "ປະເພດການເຂົ້າສູ່ລະບົບບັນຊີ can be considered, but 'ຊະນິດການເຂົ້າສູ່ລະບົບບັນຊີ' might be slightly better."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ການເຂົ້າສູ່ລະບົບບັນຊີ' is grammatically correct but could be slightly more concise depending on the target audience. 'ເຂົ້າລະບົບບັນຊີ' is a shorter, acceptable alternative, although it loses a bit of formality.",
+          "suggestion": "Consider 'ປະເພດການເຂົ້າລະບົບບັນຊີ' or 'ປະເພດເຂົ້າລະບົບບັນຊີ' for brevity."
         }
       ],
       "approved_at": null
@@ -135,13 +140,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Rodzaj logowania na konto\" is a bit clunky and not the most natural Polish phrasing. It translates literally as \"Type of logging onto account.\" A more idiomatic translation would be better.",
-          "suggestion": "Logowanie do konta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -159,13 +158,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Tip de conectare la cont' is understandable, a more natural and common translation of 'Account login type' would be 'Tipul de autentificare a contului' or 'Modalitate de autentificare a contului'. The current translation is a bit literal.",
-          "suggestion": "Tipul de autentificare a contului"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -180,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පිවිසෙන ගිණුමේ වර්ගය' (pivīsena gīnumē varga-ya) translates more literally to 'entering account type'. 'Account login type' implies the *method* of login (e.g., password, biometric). A more accurate translation would convey that meaning.",
-          "suggestion": "පිවිසීමේ ගිණුම් වර්ගය"
+          "description": "While 'පිවිසෙන ගිණුමේ වර්ගය' is understandable, it's a slightly literal translation. A more natural and accurate translation of 'Account login type' would be something along the lines of 'ගිණුම ඇතුළත් කිරීමේ පදය වර්ගය' or 'ගිණුම ල໊ගින් කිරීමේ පදය'.",
+          "suggestion": "ගිණුම ඇතුළත් කිරීමේ පදය වර්ගය"
         }
       ],
       "approved_at": null
@@ -192,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Typ prihlásenia na účet' is slightly literal and not the most natural phrasing in Slovak. While technically correct, it could be improved for better readability.",
-          "suggestion": "Consider 'Typ prihlásenia účtu' or 'Zpôsob prihlásenia účtu'."
+          "description": "While technically correct, 'Typ prihlásenia na účet' is a bit literal and slightly awkward. A more natural Slovak phrasing would be 'Typ prihlásenia' or 'Prihlásenie na účet'.",
+          "suggestion": "Typ prihlásenia"
         }
       ],
       "approved_at": null
@@ -201,13 +194,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, 'Vrsta prijave v račun' is a very literal translation and sounds a bit awkward in Slovenian. A more natural phrasing would be something along the lines of 'Način prijave na račun' or 'Tip prijave na račun'.",
-          "suggestion": "Način prijave na račun"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -216,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Тип пријаве на налог' is not the most natural or precise translation of 'Account login type'. While understandable, 'Пријава на налог' is more common for 'account login'.",
-          "suggestion": "Избор типа налога за пријаву"
+          "description": "The translation 'Тип пријаве на налог' while understandable, isn't the most natural or precise translation of 'Account login type'. 'Prijava' is generally used for logging *in* to something, not the *type* of login. A better translation would focus on the 'type' aspect.  A more accurate translation might be 'Врста пријаве на рачун' or 'Тип уласка у налог'.",
+          "suggestion": "Врста пријаве на рачун"
         }
       ],
       "approved_at": null
@@ -228,7 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tip prijave na nalog' while understandable, isn't the most natural or precise translation of 'Account login type'. 'Tip' implies a general type, whereas 'Account login type' is more specific.",
+          "description": "The translation \"Tip prijave na nalog\" is not the most natural or accurate translation of \"Account login type.\" While technically correct, it's a bit clunky. A more natural phrasing would be \"Vrsta prijave na nalog\" or \"Način prijave na nalog\".",
           "suggestion": "Vrsta prijave na nalog"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Yandex Directory",
   "content_en_sha1_hash": "2e1c5a40acb7713738807a3c81a7c13849dd96b5",
   "created_at": "2025-05-19T21:30:49.985Z",
-  "updated_at": "2025-06-03T20:59:41.989Z",
+  "updated_at": "2025-05-26T07:57:32.389Z",
   "comment": {
     "text": "The \"Yandex Directory\" translation key is used to display the title of a Yandex folder. It appears in UI elements that interact with Yandex folders, such as buttons or dialog titles. Translators should ensure this text accurately reflects the meaning of \"Yandex Directory\".",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'مجلد Yandex' literally translates to 'Yandex Folder'. While understandable, 'Yandex Directory' implies a broader concept than just a folder. A more accurate translation would convey the idea of a listing or collection.",
-          "suggestion": "دليل ياندكس (Daleel Yandex)"
+          "description": "The Arabic translation \"مجلد Yandex\" is a literal transliteration of \"Yandex Directory.\" A more natural translation would be something like \"دليل ياندكس\" (Daleel Yandex) or \"دليل ياندكس\" (Directory Yandex), which directly conveys the meaning of 'directory'.",
+          "suggestion": "دليل ياندكس"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Adresář Yandex' is a literal translation, but 'Adresář' can sound overly formal or technical in this context. A more natural translation for 'Yandex Directory' might be 'Yandex Seznam' or 'Yandex Katalog'.",
-          "suggestion": "Consider 'Yandex Seznam' or 'Yandex Katalog' for a more user-friendly and natural Czech translation."
+          "description": "While \"Adresář\" is a valid Czech word for 'directory', it's a more formal and technical term. For a folder title, a more user-friendly and common translation like \"Yandex Složka\" (Yandex Folder) might be more appropriate.",
+          "suggestion": "Yandex Složka"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Yandex գրացուցակ' while literally meaning 'Yandex list', doesn't accurately convey the meaning of 'Yandex Directory'.  'Directory' implies a more structured and organized collection than just a 'list'.",
-          "suggestion": "Consider a more accurate translation such as 'Yandex թղթապանակ' (Yandex Folder) or 'Yandex ուղեցույց' (Yandex Guide) depending on the intended nuance."
+          "description": "The Armenian translation \"Yandex գրացուցակ\" is a literal translation of 'directory' but doesn't fully convey the meaning of 'Yandex Directory'. It lacks the implication of being a listing or collection specifically associated with Yandex. A more accurate translation would capture the essence of a Yandex-provided listing.",
+          "suggestion": "Yandex-ի ցուցակ (Yandex-i tsutsak) - 'Yandex's list' or Yandex ցուցակը (Yandex tsutsakə) - 'The Yandex listing'."
         }
       ],
       "approved_at": null
@@ -108,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Cartella di Yandex\" is too literal. \"Cartella\" translates to \"folder,\" while \"Directory\" implies a list or catalog. A more accurate translation would convey the idea of a Yandex directory or listing.",
+          "description": "The translation 'Cartella di Yandex' is a literal translation of 'Folder of Yandex'. While technically correct, it's not the most natural or idiomatic way to refer to a directory in Italian. 'Yandex Directory' typically refers to a listing or index of resources.",
           "suggestion": "Elenco di Yandex"
         }
       ],
@@ -131,9 +131,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ໄດເລກະທໍລີ Yandex' is a literal transliteration of 'Directory' instead of conveying the meaning of 'Yandex Directory'. A more accurate translation would incorporate the concept of a directory or listing.",
-          "suggestion": "ໄດເລກະທໍລີຂອງ Yandex (Directory of Yandex) or ບັນຊີລາຍຊື່ຂອງ Yandex (Listing of Yandex)"
+          "type": "spelling",
+          "description": "The Lao word for 'directory' is likely 'ສາ directorie' or a transliteration of 'directory'. 'ໄດເລກະທໍລີ' is not a standard Lao term and appears to be a transliteration that is not quite accurate.",
+          "suggestion": "ສາ directorie or a more accurate transliteration of 'directory'"
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Director Yandex' is not an accurate translation of 'Yandex Directory'. 'Director' implies a person, while 'Directory' refers to a listing or catalog. A more accurate translation would convey the concept of a listing or guide.",
-          "suggestion": "A more appropriate translation could be 'Directorul Yandex' (The Yandex Directory), 'Catalog Yandex', or 'Dosarul Yandex'."
+          "description": "The Romanian translation 'Director Yandex' does not accurately convey the meaning of 'Yandex Directory'. 'Director' implies a person, not a directory listing.",
+          "suggestion": "A more accurate translation would be 'Directorul Yandex' (The Yandex Directory) or 'Dosarul Yandex' (Yandex Folder)."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala translation 'යාන්ඩෙක්ස් නාමාවලිය' contains a spelling variation of 'Yandex'. While understandable, it's not the standard transliteration. The 'ඩෙක්ස්' part could be improved for better consistency with established transliteration practices.",
-          "suggestion": "යාන්ඩෙක්ස් දිනපොත"
+          "description": "The Sinhala translation includes a transliteration of 'Yandex' rather than a proper Sinhala equivalent if one exists. While understandable, it's less ideal for consistency and professionalism.",
+          "suggestion": "Research if a suitable Sinhala equivalent for 'Yandex' exists. If not, consider keeping the transliteration, but ensure consistency in all translations of 'Yandex'."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Priečinok Yandex\" is too literal. While technically correct, \"Priečinok\" (Folder) is redundant. A more natural translation would be simply \"Yandex\".",
-          "suggestion": "Yandex"
+          "description": "The Slovak translation \"Priečinok Yandex\" is too literal. 'Priečinok' means 'folder' and while technically correct, it doesn't convey the meaning of a directory listing. A more accurate translation would be something like 'Zoznam Yandex' or 'Yandex katalóg'.",
+          "suggestion": "Zoznam Yandex"
         }
       ],
       "approved_at": null
@@ -219,13 +219,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"директоријум\" is a valid Serbian word meaning 'directory', it's not the most natural or common translation for 'Yandex Directory'. It feels slightly formal and less user-friendly.",
-          "suggestion": "Consider alternatives like \"Yandex Именик\" (Yandex imenik - 'Yandex List/Book') or \"Yandex Каталог\" (Yandex katalog - 'Yandex Catalog'). The best choice would depend on the overall tone and style guide."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -249,7 +243,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Thư mục Yandex' while understandable, is a literal translation of 'Directory'. A more natural and accurate translation would be 'Danh mục Yandex' or 'Dịch vụ Yandex'. 'Thư mục' implies a physical folder, which doesn't align with the context of a directory service.",
+          "suggestion": "Danh mục Yandex"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

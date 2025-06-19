@@ -28,6 +28,8 @@ import { TColorScheme } from "../../themes";
 import { ButtonSize } from "./Button.enums";
 
 type BaseButtonProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<HTMLButtonElement>;
   /** Button text */
   label: string;
   /** Optional title attribute */
@@ -51,8 +53,6 @@ type BaseButtonProps = {
   style?: React.CSSProperties;
   /** Sets the button to show a hovered state */
   isHovered?: boolean;
-  /** Disable hover effect */
-  disableHover?: boolean;
   /** Sets the button to show a clicked state */
   isClicked?: boolean;
   /** Sets the button to show a disabled state */
@@ -81,6 +81,6 @@ export type ButtonProps = BaseButtonProps & {
 
 /** Props for the styled ButtonTheme component */
 export type ButtonThemeProps = ButtonProps & {
-  ref: React.LegacyRef<HTMLButtonElement>;
+  ref?: React.RefObject<HTMLButtonElement | null>;
   $currentColorScheme?: TColorScheme;
 };

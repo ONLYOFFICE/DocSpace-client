@@ -3,7 +3,7 @@
   "content": "The destination already contains a folder named «<1>{{folderName}}</1>».",
   "content_en_sha1_hash": "84e03768c28e7d8864816ce977c8c2b9f91a4f66",
   "created_at": "2025-05-19T21:30:45.425Z",
-  "updated_at": "2025-05-28T09:30:02.212Z",
+  "updated_at": "2025-05-26T07:57:32.239Z",
   "comment": {
     "text": "This translation key is used to display a message when a user attempts to add a new folder that already exists in the destination. The message informs the user that a folder with the same name already exists and cannot be created. It appears in the ConflictResolveDialog component where the user encounters conflicting actions for resolving folder additions.",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The opening and closing angle brackets are not properly mirrored in Arabic. The English uses «<1> and </1>, while the Arabic uses «</1> and </1>.",
-          "suggestion": "Ensure consistent formatting by using «<1> and </1>."
+          "description": "The opening and closing angle brackets « and » are not consistently mirrored with the opening and closing tags <1> and </1>.",
+          "suggestion": "Ensure consistent use of angle brackets or tags. Consider using «</1>{{folderName}}<1>» or <1>{{folderName}}</1>»."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, the phrase 'الوجهة تحتوي بالفعل على مجلد اسمه' is slightly awkward and could be improved for natural flow in Arabic. A more natural phrasing would focus on the existence of the folder.",
+          "suggestion": "Consider 'الوجهة تحتوي بالفعل على مجلد باسم' or 'يوجد بالفعل مجلد باسم' (There is already a folder named)."
         }
       ],
       "approved_at": null
@@ -42,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Azerbaijani translation maintains the XML tag formatting like the English source. This might be unnecessary and could be simplified for better readability in the target language.",
-          "suggestion": "Consider removing the XML tags and directly presenting the folder name: \"Hədəfdə artıq {{folderName}} adlı qovluq var.\""
+          "description": "The Azerbaijani translation maintains the formatting tags «<1>» and «</1>» which should be consistent with the original English. While not an error, it's important to confirm if this is intended.",
+          "suggestion": "Verify if the formatting tags are intentionally preserved in the Azerbaijani translation."
         }
       ],
       "approved_at": null
@@ -51,13 +56,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets and placeholder are correctly reproduced in Bulgarian.",
-          "suggestion": "No change needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -93,13 +92,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'The destination already contains a folder named' translates more naturally to French as 'La destination contient déjà un dossier nommé'. While the provided translation isn't *wrong*, it is slightly less idiomatic. A better translation would consider a more active voice or slightly different phrasing to improve flow.",
-          "suggestion": "La destination contient déjà un dossier du même nom : «<1>{{folderName}}</1>»."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -108,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses «» for the folder name enclosure. The English uses <1> and </1>. This inconsistency should be addressed to maintain consistent formatting.",
-          "suggestion": "Consider using <1> and </1> in the Armenian translation to match the English."
+          "description": "The Armenian translation includes a colon (:) at the end of the sentence which isn't present in the English source. This might be unnecessary and may not align with the intended style.",
+          "suggestion": "Remove the colon at the end of the sentence: Նպատակակետն արդեն պարունակում է «<1>{{folderName}}</1>» անունով թղթապանակ"
         }
       ],
       "approved_at": null
@@ -126,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation retains the XML-like tags «<1>{{folderName}}</1>» from the English content. These tags are likely meant to be placeholders and should be removed from the translated output or replaced with a more appropriate placeholder format.",
-          "suggestion": "Replace «<1>{{folderName}}</1>» with a more standard placeholder, such as {{folderName}} or something that aligns with the application's localization conventions."
+          "description": "The angle brackets \"<1>\" and \"</1>\" are correctly replicated in the Japanese translation.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -138,8 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation accurately reflects the English content, including the placement of the tags «<1>{{folderName}}</1>». However, it's crucial to verify if the tags are correctly rendered in the target application or system. Assuming the tag functionality is the same, no change is needed.",
+          "description": "The Korean translation correctly uses the same formatting tags («<1>{{folderName}}</1>») as the English content. No formatting issues detected.",
           "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, a more natural and precise rendering of 'The destination already contains' would be '목표 위치에 이미' (mokpyo wi-che-e imi) instead of '목표에 이미' (mokpyo-e imi). The latter is grammatically correct but less idiomatic.",
+          "suggestion": "목표 위치에 이미 «<1>{{folderName}}</1>» 이름의 폴더가 있습니다."
         }
       ],
       "approved_at": null
@@ -147,13 +145,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Lao translation includes «» brackets around the variable {{folderName}}, mirroring the English. While not inherently incorrect, it's often preferable to omit these in Lao to maintain a more natural flow, unless there's a specific reason for them.",
-          "suggestion": "Consider removing the «» brackets around the variable: \"ຈຸດຫມາຍປັດຈຸບັນມີໂຟນເດີທີ່ມີຊື່ວ່າ {{folderName}} ແລ້ວ.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -192,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The formatting tags «<1> and </1> are inconsistent with English. They should be {{ and }} for consistency and adherence to common conventions.",
-          "suggestion": "Folderul {{folderName}} există deja la destinație."
+          "description": "The XML tags «<1>...</1>» are inconsistent between the English and Romanian versions. The English version uses «<1>{{folderName}}</1>», while the Romanian uses «<1>{{folderName}}</1>».",
+          "suggestion": "Ensure consistency in the XML tag formatting. Use «<1>{{folderName}}</1>» in the Romanian translation to match the English."
         }
       ],
       "approved_at": null
@@ -210,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation retains the English angle brackets «<1>{{folderName}}</1>».  These should be removed or translated to a culturally appropriate equivalent if they have meaning in the Sinhala context. If they are purely structural markers, they should be omitted.",
-          "suggestion": "Consider removing the angle brackets entirely, or replacing them with a Sinhala equivalent if applicable. The intention is to represent the folder name, not the markup."
+          "description": "The Sinhala translation includes «<1>{{folderName}}</1>» which matches the English. However, confirm that this format is consistently used in all Sinhala translations and is appropriate for the target platform/audience. It's possible this needs adjustment.",
+          "suggestion": "Confirm the correct formatting of the placeholder for Sinhala and ensure consistency with other translated content."
         }
       ],
       "approved_at": null
@@ -228,13 +220,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The quotation marks are incorrect. The English uses « and », while the Slovenian uses standard quotes.",
-          "suggestion": "Replace « and » with standard double quotes: \"."
+          "description": "The quotation marks are incorrect and incomplete. The English content uses « and » while the Slovenian translation uses standard quotes.",
+          "suggestion": "Replace « with « and » with » to match the English formatting."
         },
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation lacks punctuation. It should include a period at the end of the sentence.",
-          "suggestion": "Add a period at the end of the sentence: \"Destinacija že vsebuje mapo z imenom.«<1>{{folderName}}</1>».\""
+          "description": "The Slovenian translation 'z imenom' is too literal. A more natural translation would be 'po imenu'.",
+          "suggestion": "Change 'z imenom' to 'po imenu'."
         }
       ],
       "approved_at": null
@@ -251,8 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation retains the English angle brackets « and » which may not be standard or expected in Serbian text.  Consider using standard Serbian quotation marks or other appropriate delimiters.",
-          "suggestion": "Consider replacing « and » with standard Serbian quotation marks (e.g., \" and \") or other appropriate delimiters."
+          "description": "The Serbian translation accurately reproduces the XML-like formatting from the English content. The use of « and » is correct.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Odredište' is a valid translation for 'destination', 'folder sa nazivom' is a bit verbose. A more natural phrasing would be 'folder imenom'.",
+          "suggestion": "Odredište već sadrži folder imenom «<1>{{folderName}}</1>»."
         }
       ],
       "approved_at": null
@@ -263,8 +260,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Turkish translation maintains the angle brackets and placeholders from the English source. While technically correct, it's best practice to remove them in the translated text unless explicitly required for the target system's processing.",
-          "suggestion": "Hedef zaten {{folderName}} adlı bir klasör içeriyor."
+          "description": "The angle brackets « and » are used incorrectly in the Turkish translation. They are inconsistent with the English original.",
+          "suggestion": "Maintain the English formatting of angle brackets: «<1>{{folderName}}</1>»"
         }
       ],
       "approved_at": null
@@ -272,13 +269,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets and placeholder formatting are identical in English and Ukrainian. While technically correct, it's worth checking if the placeholder syntax is standard for the Ukrainian environment where this translation will be used. It's possible a different syntax (e.g., `{{folderName}}` without the `<1>...</1>`) would be more appropriate.",
-          "suggestion": "Verify the placeholder syntax is correct for Ukrainian environments. Consider simplifying to `{{folderName}}` if appropriate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -287,7 +278,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Vietnamese translation includes a space after the closing angle bracket '<1>' within the folder name placeholder. The English original does not have this space.",
+          "description": "The Vietnamese translation includes a space after the closing angle bracket in «<1>{{folderName}} </1>» which is not present in the English source. This creates a minor visual inconsistency.",
           "suggestion": "Remove the space after the closing angle bracket: «<1>{{folderName}}</1>»"
         }
       ],
@@ -299,7 +290,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets « and » are not consistently applied. The English has «<1>{{folderName}}</1>» while the Chinese has «<1>{{folderName}} </1>». The closing angle bracket should match.",
+          "description": "The Chinese translation preserves the angle brackets «<1>{{folderName}} </1>» exactly as in the English source. While technically correct, it's stylistically unusual in Chinese UI text and might be better adjusted for natural flow. Consider removing the space before the closing angle bracket.",
           "suggestion": "目标位置中已存在名为«<1>{{folderName}}</1>»的文件夹。"
         }
       ],

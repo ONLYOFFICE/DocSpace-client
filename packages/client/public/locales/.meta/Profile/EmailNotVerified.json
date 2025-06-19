@@ -3,7 +3,7 @@
   "content": "Email is not verified",
   "content_en_sha1_hash": "7aa3f602be968a5b4cba5393057ed4f0013e45a4",
   "created_at": "2025-05-19T21:30:53.354Z",
-  "updated_at": "2025-05-28T09:30:02.823Z",
+  "updated_at": "2025-05-26T07:57:32.806Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an email address has not been verified. It appears in a UI component for editing or managing user emails. The translator should provide a localized version of this phrase to be displayed to users when their email verification status is unknown or invalid.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Էլփոստը հաստատված չէ\" is a literal translation of 'Email is not verified'. While understandable, a more natural and common Armenian phrasing would be 'Հասցեն էլփոստը չի հաստատվել' or 'Էլփոստի հաստատումը չկայացած է'.",
+          "suggestion": "Հասցեն էլփոստը չի հաստատվել"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -132,7 +138,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Adres e-mail nie został jeszcze zweryfikowany' is overly literal and verbose. A more natural and concise Polish translation would be 'E-mail nie jest zweryfikowany' or 'Niezweryfikowany adres e-mail'.",
+          "description": "The translation 'Adres e-mail nie został jeszcze zweryfikowany' is a bit verbose and formal for a simple 'Email is not verified'. While technically correct, it's not ideal for user-facing text.",
+          "suggestion": "E-mail nie został zweryfikowany"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes a hyphenated word ('nie został'). Consider if breaking it could improve readability, although this is a minor point and depends on the overall design.",
           "suggestion": "E-mail nie jest zweryfikowany"
         }
       ],
@@ -168,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වි-තැපෑල සත්‍යාපනය කර නැත' is a literal translation of 'Email verification not done'. While understandable, a more natural and common Sinhala phrasing for 'Email is not verified' would be something like 'තැපෑල සත්‍යාපනය නොවීය' or 'තැපෑල තහවුරුව නොමැත'.",
-          "suggestion": "තැපෑල සත්‍යාපනය නොවීය"
+          "description": "The translation 'වි-තැපෑල සත්‍යාපනය කර නැත' while understandable, is not the most natural or common way to express 'Email is not verified' in Sinhala. A more idiomatic translation would be closer to 'විද්යුත් ලිපිනය සත්‍යාපනය කර නැත' or 'වි-තැපැල් ලිපිනය සත්‍යාපනය කර නැත'.",
+          "suggestion": "විද්යුත් ලිපිනය සත්‍යාපනය කර නැත"
         }
       ],
       "approved_at": null
@@ -189,13 +200,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Емаил' is a transliteration of 'Email' and should be spelled 'E-mail' to be more consistent with international standards and avoid confusion. While the Cyrillic transliteration is understandable, it's not the most common or recommended practice.",
-          "suggestion": "Е-mail"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

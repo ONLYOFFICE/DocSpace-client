@@ -3,7 +3,7 @@
   "content": "No files here yet",
   "content_en_sha1_hash": "d2b916fc9d3a81b2b8b8ca1e921dd7499f6424e9",
   "created_at": "2025-05-19T21:30:55.913Z",
-  "updated_at": "2025-06-03T20:59:41.792Z",
+  "updated_at": "2025-06-02T10:20:51.016Z",
   "comment": {
     "text": "The translation key \"NoFilesHereYet\" is used to display a message indicating that there are no files available in the current view. It appears on an empty screen or folder, informing the user that no files can be accessed.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
       "line_number": 102,
-      "context": "const location = useLocation();\n \n const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashEmptyDescription\");\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (",
+      "context": "const location = useLocation();\n \n const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 310,
+      "line_number": 314,
       "context": "t(\"EmptyView:EmptyTemplatesTitle\"),\n )\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.Recent, P._], () => t(\"Files:NoFilesHereYet\"))\n .with([FolderType.Archive, P._], () => t(\"Files:ArchiveEmptyScreenHeader\"))\n .with([FolderType.TRASH, P._], () => t(\"Common:EmptyScreenFolder\"))\n .otherwise(() => \"\");\n };",
       "module": "/packages/client"
     }
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Այստեղ դեռ ֆայլեր չկան\" is a literal translation of 'No files here yet'. While technically correct, it sounds a bit formal and unnatural in Armenian. A more idiomatic and natural translation would be \"Այստեղ դեռ չկա ֆայլ\" or \"Այստեղ դեռ ոչինչ չկա\" (meaning 'nothing here yet').",
-          "suggestion": "Consider \"Այստեղ դեռ չկա ֆայլ\" or \"Այստեղ դեռ ոչինչ չկա\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -135,13 +129,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Brak plików' is a technically correct translation, but it lacks the nuance and naturalness of 'No files here yet.' A more idiomatic translation might be 'Nie ma tu żadnych plików' or 'Tutaj jeszcze brak plików'.",
-          "suggestion": "Nie ma tu żadnych plików"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -162,8 +150,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Niciun fișier deocamdată aici' is a bit too literal and formal for a user-facing message. 'Deocamdată' implies a temporary state, which might be confusing if files are genuinely absent.",
-          "suggestion": "Consider a more concise and user-friendly translation, such as 'Nu sunt fișiere încă' or 'Nu există fișiere acum'."
+          "description": "The translation \"Niciun fișier deocamdată aici\" is a bit verbose and not the most natural way to say \"No files here yet\" in Romanian. \"Deocamdată\" (for the time being) isn't strictly necessary.",
+          "suggestion": "Fișiere inexistente"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, \"Niciun fișier deocamdată aici\" feels slightly awkward. A more fluent alternative would be more appropriate for a user interface.",
+          "suggestion": "Niciun fișier încă"
         }
       ],
       "approved_at": null
@@ -177,13 +170,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'තවමත් ගොනු නැත' while understandable, doesn't perfectly capture the nuance of 'No files here yet'. A more accurate translation would convey the sense of expectation or future possibility. 'තවමත් ගොනු නැත' literally translates to 'No files yet'.",
-          "suggestion": "කිසිම ගොනු මෙහි නැත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -204,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Још нема датотека овде' is a literal translation, but a more natural Serbian (Cyrillic) phrasing would be 'Нeма датотека овде' or 'Овде још нема датотека'.",
-          "suggestion": "Нeма датотека овде"
+          "description": "The translation 'Још нема датотека овде' is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be something like 'Нeма фајлова овде' or 'Овде још нема фајлова'.",
+          "suggestion": "Нeма фајлова овде"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Preparing file for encryption",
   "content_en_sha1_hash": "28bc222d1b790617c5f1127bf10b40ca43da20ef",
   "created_at": "2025-05-19T21:30:44.952Z",
-  "updated_at": "2025-05-28T09:30:03.000Z",
+  "updated_at": "2025-05-26T07:57:32.991Z",
   "comment": {
     "text": "Preparing a file for encryption is displayed when an operation type (0: encrypting) is selected. This text is typically used in a message or alert within a UI element, such as a button or dialog, to inform users of the upcoming action.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ֆայլի պատրաստում գաղտնագրման համար\" (Fayli patrastum gagtnagrman hamar) is a literal translation but not the most natural phrasing in Armenian. While technically correct, it sounds a bit stiff. A more idiomatic translation would be something like \"Պատրաստվում է ֆայլ գաղտնագրման համար\" or \"Ֆայլը պատրաստվում է գաղտնագրման համար\".",
-          "suggestion": "Պատրաստվում է ֆայլ գաղտնագրման համար"
+          "description": "The Armenian translation 'Ֆայլի պատրաստում գաղտնագրման համար' is a literal translation that isn't the most natural phrasing. While technically correct, it's a bit clunky.",
+          "suggestion": "Consider a more idiomatic translation like 'Պատրաստվում է ֆայլ գաղտնագրման համար' or 'Ֆայլը պատրաստվում է գաղտնագրման համար'."
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"暗号化するファイルの準備\" is a literal translation and could be more natural-sounding. While technically correct, it lacks nuance. A more common phrasing would imply the process of preparing a file *in order to* encrypt it.",
-          "suggestion": "暗号化ファイル作成中"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'encryption' is transliterated as 'ການເຂົ້າລະຫັດ' which is technically correct but could be improved for more natural flow. While not strictly incorrect, it can sound a bit technical in this context.",
-          "suggestion": "Consider a slightly more colloquial phrasing like 'ການປິດລຶບຂໍ້ມູນ' or 'ການປ້ອງກັນຂໍ້ມູນ' depending on the specific context and desired level of formality."
+          "description": "The word 'ລະຫັດ' (lahat) is the standard Lao word for 'encryption'.",
+          "suggestion": "No change needed. The translation is correct."
         }
       ],
       "approved_at": null
@@ -150,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'A preparar o ficheiro para encriptação' is a more literal translation. A more natural and common phrasing would be 'Preparando o arquivo para criptografia'.",
+          "description": "While grammatically correct, \"A preparar o ficheiro para encriptação\" is a somewhat literal translation. A more natural and idiomatic Portuguese translation would be \"Preparando o arquivo para criptografia\" or \"Preparando o arquivo para criptografia\". The original English phrase implies an ongoing process, and 'preparando' conveys that better than 'a preparar'.",
           "suggestion": "Preparando o arquivo para criptografia"
         }
       ],
@@ -180,13 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ගොනුව සංකේතනයට සූදානම් වෙමින්\" while understandable, isn't the most natural or accurate rendering of \"Preparing file for encryption.\"  \"ගොනුව\" (ganuwa) is a less common term for 'file' in modern usage.  The phrase 'සූදානම් වෙමින්' (sudanamu vemin) indicates a process happening, but 'preparing' is more of a state.",
-          "suggestion": "Consider \"ගොනුව සංකේතනය සඳහා සූදානම් කිරීම\" (gonuwa sankethanaya saha gamata sudanamu kirimu) or \"ගොනුව සංකේතනයට අවශ්‍ය සූදානම් කිරීම\" (gonuwa sankethanaya saha udariya sudanamu kirimu).  A simpler option is \"ගොනුව සංකේතනයට සූදානම්\" (gonuwa sankethanaya saha sudanam)."
-        },
-        {
-          "type": "spelling",
-          "description": "There's a potential typo in the first syllable of 'ගොනුව'.",
-          "suggestion": "It should be 'ගොනුව' (gonuwa)."
+          "description": "The translation \"ගොනුව සංකේතනයට සූදානම් වෙමින්\" while understandable, isn't the most natural or direct translation of \"Preparing file for encryption\". It's a bit literal and verbose.",
+          "suggestion": "A more natural and concise translation could be \"ගොනුව සංකේතනය සඳහා සූදානම් කිරීම\" or \"ගොනුව සංකේතනයට සූදානම් කිරීම\"."
         }
       ],
       "approved_at": null
@@ -209,17 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation uses 'шифровање' (shifrovanje) which is the correct term for 'encryption'. No spelling issues found.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The Serbian translation \"Припремање датотеке за шифровање\" uses the verbal adjective form, which is grammatically correct. No grammatical errors found.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is accurate, 'Preparing file for encryption' could also be translated as 'Припрема датотеке за шифровање', which is a more concise phrasing, while keeping the meaning intact.",
+          "description": "The Serbian (Cyrillic) translation uses 'Припремање' which is a valid spelling, but 'Припрема' (Preparation) might be more concise and natural in this context. While 'Припремање' is grammatically correct, it can sound slightly more formal than necessary for a user interface label.",
           "suggestion": "Припрема датотеке за шифровање"
         }
       ],

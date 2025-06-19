@@ -3,7 +3,7 @@
   "content": "Sorry, you don't have access to this room.",
   "content_en_sha1_hash": "231a1798cb7e11ce36fa013454ceb04d6deeb54d",
   "created_at": "2025-05-19T21:30:55.903Z",
-  "updated_at": "2025-05-21T11:39:24.462Z",
+  "updated_at": "2025-06-02T10:20:51.015Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a user does not have access to a specific room. It appears in a container element on a page and is likely displayed as a notification or alert when a user attempts to enter a restricted area.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
-      "line_number": 47,
-      "context": "const RoomNoAccessContainer = (props) => {\n const { t, setIsLoading, theme, isFrame, userId } = props;\n \n const descriptionRoomNoAccess = t(\"NoAccessRoomDescription\");\n const titleRoomNoAccess = t(\"NoAccessRoomTitle\");\n \n const navigate = useNavigate();\n \n /**\n * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined} event",
+      "line_number": 49,
+      "context": "const { t, setIsLoading, theme, isFrame, userId } = props;\n \n const descriptionRoomNoAccess = t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n });\n const titleRoomNoAccess = t(\"NoAccessRoomTitle\");\n \n const navigate = useNavigate();\n \n /**\n * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined} event",
       "module": "/packages/client"
     }
   ],
@@ -84,13 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"սենյակ\" (senyak) is likely misspelled. The proper word for 'room' in this context should be 'դահլիճ' (dahlij).",
-          "suggestion": "Replace \"սենյակ\" with \"դահլիճ\"."
+          "description": "The word 'սենյակ' (senyak) is technically correct for 'room', but in this context, a more formal term like 'դահլիճ' (dahlij) or 'սրտոհանդակ' (srt’ohandak) might be more appropriate for a restricted access area. While not strictly incorrect, 'սենյակ' feels too informal.",
+          "suggestion": "Consider using 'դահլիճ' or 'սրտոհանդակ' instead of 'սենյակ'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While the sentence is grammatically correct, the word choice 'դահլիճ' (dahlij) which means 'hall' is less appropriate than other words for 'room' in this context. A more suitable word might be 'քառակցի' (k'yarakci) or a more general 'պատճառ' (patchar).",
-          "suggestion": "Consider using 'քառակցի' (k'yarakci) or a more general 'պատճառ' (patchar) instead of 'դահլիճ'."
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure could be slightly improved for better flow and formality in Armenian. Placing the 'Ներեցեք' at the end feels a bit abrupt.",
+          "suggestion": "Consider restructuring to 'Դուք մուտք չունեք այս դահլիճ, Ներեցեք։' or 'Այս դահլիճ մուտք չունեք, Ներեցեք։'"
         }
       ],
       "approved_at": null
@@ -143,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Portuguese translation uses the informal 'tem' (you have). Considering this is an error message, a more formal 'possui' would be more appropriate for better user experience.",
-          "suggestion": "Lamentamos, mas não possui acesso a esta sala."
+          "description": "The Portuguese translation uses the informal 'tem' (you have). Considering this is a system message likely presented to various users, a more formal 'você tem' or 'o senhor/a senhora tem' would be more appropriate.",
+          "suggestion": "Lamentamos, mas você não tem acesso a esta sala."
         }
       ],
       "approved_at": null
@@ -170,18 +170,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'කණගාටුයි' (kanagatui) is spelled correctly, but the full phrase could be more natural. While technically correct, 'අbede kanagatui' would be more commonly used for 'sorry'.",
-          "suggestion": "අbede kanagatui"
-        },
-        {
-          "type": "grammar",
-          "description": "While technically grammatical, the phrasing 'ඔබට මෙම කාමරයට ප්‍රවේශය නැත' (obata hime kamaratata pravesaya natata) is somewhat stiff. A more natural phrasing could be used.",
-          "suggestion": "ඔබට මෙම කාමරයට ඇතුළුවීමට අවසර නැත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

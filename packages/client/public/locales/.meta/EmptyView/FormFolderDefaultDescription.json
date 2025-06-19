@@ -3,7 +3,7 @@
   "content": "Drop PDF forms here or upload from {{productName}} or device.",
   "content_en_sha1_hash": "97750a613b8c03b3f21e2f52d0fddbd5e0284429",
   "created_at": "2025-05-19T21:30:56.506Z",
-  "updated_at": "2025-06-03T20:59:41.802Z",
+  "updated_at": "2025-05-26T07:57:32.163Z",
   "comment": {
     "text": "This translation key is used for a default description displayed when users drop PDF forms or upload them from their device in an empty folder. It is likely to appear as a tooltip or hover text next to a button or icon that allows users to add PDF files to a folder. The description refers to the product name, which should be translated separately.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"أسقط نماذج PDF هنا\" (Asqut namathij PDF huna) translates to 'Drop PDF forms here' but implies a forceful dropping, which isn't ideal for a user interface. A more user-friendly translation would be 'ضع نماذج PDF هنا' (Da' namathij PDF huna) which means 'Place PDF forms here'.",
+          "suggestion": "ضع نماذج PDF هنا"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'yükləyin' is spelled correctly, but might be a more natural or preferred alternative like 'qalxayın'.",
+          "suggestion": "Consider using 'qalxayın' instead of 'yükləyin'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Drop PDF forms here' is better translated as 'Sem můžete vložit formuláře PDF' or 'Zde vložte formuláře PDF' to sound more natural in Czech. The current translation 'Vložte sem formuláře PDF' is technically correct but a bit less idiomatic.",
+          "suggestion": "Sem můžete vložit formuláře PDF"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'device' is translated as 'τη συσκευή'. While technically correct, it's more natural to use a more generic term like 'συσκευή' (syskeví) without the definite article, especially in this context.",
+          "suggestion": "Αποθέστε φόρμες PDF εδώ ή μεταφορτώστε από {{productName}} ή συσκευή."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,7 +105,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Drop PDF forms here' is a more conversational and user-friendly instruction. A more direct translation might not convey the same intent. Consider a phrase that encourages dropping or adding forms.",
+          "suggestion": "Կցանկալ եք ավելացնել PDF ձևեր այստեղ:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"վերբեռնեք {{productName}}-ից\" can be slightly ambiguous. It's not explicitly clear that the upload comes *from* the product.",
+          "suggestion": "վերբեռնեք ձևերը {{productName}}-ից կամ սարքից:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +134,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Drop PDF forms here\" is not accurately translated. A more natural Korean phrasing would be \"PDF 양식을 여기에 끌어다 놓으세요\" or \"PDF 양식을 여기에 드래그 앤 드롭하세요\".",
+          "suggestion": "PDF 양식을 여기에 끌어다 놓으세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -117,43 +158,95 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'apparaat' (device) feels a bit clunky in this context. 'Apparaat' is technically correct, but 'bestand' or 'apparaat/bestand' would be more natural when referring to uploading from a device.",
+          "suggestion": "Plaats hier PDF formulieren of upload ze vanaf {{productName}} of bestand/apparaat."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"bądź urządzenia\" is grammatically awkward and less natural in Polish. 'Bądź' is less common and less clear in this context compared to alternatives.",
+          "suggestion": "Upuść formularze PDF tutaj lub prześlij je z {{productName}} lub z urządzenia."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Drop PDF forms here' is best translated as 'Arraste e solte os formulários em PDF aqui' for a more natural flow in Portuguese. 'Solte' is grammatically correct but less common in this context.",
+          "suggestion": "Arraste e solte os formulários em PDF aqui ou faça upload do {{productName}} ou do dispositivo."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Drop PDF forms here' is best translated as 'Arraste os formulários em PDF aqui' instead of 'Solte os formulários em PDF aqui'. 'Solte' implies releasing something already in motion, while 'Arraste' conveys the action of dragging and dropping.",
+          "suggestion": "Arraste os formulários em PDF aqui ou faça upload do {{productName}} ou do dispositivo."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence structure is awkward and lacks clarity. 'Glisați și fixați' (Drag and drop) is not the most natural way to express the action. The word 'de pe' is repeated unnecessarily.",
+          "suggestion": "Trageți și plasați formulare PDF aici sau încărcați de pe {{productName}} sau de pe dispozitiv."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'de pe' is repetitive and makes the sentence sound clunky.",
+          "suggestion": "Consider using a different phrasing to avoid repetition, such as 'încărcați de pe {{productName}} sau direct de pe dispozitiv.'"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Drop PDF forms here' is somewhat awkwardly translated. A more natural Russian phrasing might be 'Загрузите PDF-формы сюда' (Load PDF forms here) or 'Добавьте PDF-формы сюда' (Add PDF forms here). 'Перетащите PDF-формы сюда' implies dragging and dropping, which might not be the only supported method.",
+          "suggestion": "Загрузите PDF-формы сюда or Добавьте PDF-формы сюда"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Drop PDF forms here' is not accurately translated. 'පහත දැමූවන්' (pahata damuwan) literally translates to 'place below' or 'drop below,' but 'Drop' implies an action of releasing something. A more accurate translation would capture the action of dropping.",
+          "suggestion": "Consider revising to something like 'PDF ආකෘති මෙහි ඇද වැන්න' (PDF akruti mehi adawa wennawa) which means 'Drag PDF forms here'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'උඩුගත කරන්න' (udugata karanna) is a formal way of saying 'upload.' While not strictly incorrect, it might sound a bit stiff. For a user-friendly experience, a slightly more casual term could be considered.",
+          "suggestion": "Consider revising 'උඩුගත කරන්න' to 'යටත්LOADING කරන්න' (yaththa loading karanna) - a more common and understandable phrase."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,19 +258,42 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Slovenian translation uses 'ali' twice, which can sound repetitive. While grammatically correct, it might be improved for fluency.",
+          "suggestion": "Consider rephrasing to avoid consecutive 'ali'. For example: 'Obrazce PDF spusti sem ali pa jih naloži iz {{productName}} ali naprave.' or 'Obrazce PDF spusti sem ali naloži iz {{productName}} ali naprave.'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'убаците' (ubacite) implies forcefully inserting. A more appropriate term would be 'Повуците' (povucite) or 'Превуците' (prevucite), which suggest dropping or dragging.",
+          "suggestion": "Повуците PDF формуларе овде или отпремите са {{productName}} или уређаја."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'уређаја' is technically correct, 'уређај' is more commonly used and sounds more natural in this context. The plural doesn't really apply to the concept of 'device' in this scenario.",
+          "suggestion": "Повуците PDF формуларе овде или отпремите са {{productName}} или уређаја."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'formulare' is a less common and potentially incorrect spelling of 'formulara'.",
+          "suggestion": "formulara"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +305,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation retains the \"{{productName}}\" placeholder, which needs to be handled appropriately for the Ukrainian context. It's unclear if this placeholder is meant to be replaced with a localized string or if it should remain as is.",
+          "suggestion": "Confirm whether \"{{productName}}\" should be localized or left as is. If localization is needed, replace it with the appropriate Ukrainian translation of the product name."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

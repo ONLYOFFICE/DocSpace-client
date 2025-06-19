@@ -3,7 +3,7 @@
   "content": "View and manage all rooms",
   "content_en_sha1_hash": "23410e53db5831fa0df990ac3c4dc8b59656b9fa",
   "created_at": "2025-05-19T21:30:47.083Z",
-  "updated_at": "2025-05-28T09:30:03.012Z",
+  "updated_at": "2025-05-26T07:57:32.999Z",
   "comment": {
     "text": "This translation key is used for a button label that grants access to view and manage all rooms. It appears in an OAuth authorization process related to room management. The translator should focus on conveying a sense of control over room permissions.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bütün otaqlara baxın və idarə edin\" is a literal translation, but \"manage\" can be better conveyed with a more natural Azerbaijani phrasing. 'Manage' in this context refers to controlling and editing, not just operating.",
-          "suggestion": "Bütün otaqları görə və redaktə edin"
+          "description": "The translation \"Bütün otaqlara baxın və idarə edin\" is a literal translation but doesn't fully capture the meaning of \"View and manage all rooms\". A more natural and accurate translation would convey the ability to see and control/administer all rooms.",
+          "suggestion": "Bütün otaqları görə və idarə edə bilərsiniz"
         }
       ],
       "approved_at": null
@@ -135,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ver e gerir todos os quartos' is a literal translation that doesn't fully capture the meaning of 'View and manage all rooms' in the context of OAuth rooms. 'Manage' implies more than just 'gerir'.",
+          "suggestion": "Consider a translation that better conveys the 'manage' aspect, such as 'Ver e administrar todos os quartos' or 'Visualizar e gerenciar todos os quartos'. Alternatively, 'Ver e controlar todos os quartos' could also be appropriate, depending on the specific functionality."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -150,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vizualizarea și gestionarea sălilor' is a literal translation but doesn't fully capture the meaning of 'View and manage all rooms'. It's missing the 'all' aspect.",
+          "description": "The translation \"Vizualizarea și gestionarea sălilor\" is a literal translation but doesn't fully capture the meaning of \"View and manage all rooms.\" It lacks the 'all' aspect. A more accurate translation would be something like 'Vizualizarea și gestionarea tuturor sălilor'.",
           "suggestion": "Vizualizarea și gestionarea tuturor sălilor"
         }
       ],
@@ -159,7 +165,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Просмотреть все комнаты и управлять ими' is a bit literal and could be more natural. While technically correct, it sounds slightly awkward in Russian. A more idiomatic translation would be more preferable for user experience.",
+          "suggestion": "Просмотр и управление всеми комнатами"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -168,13 +180,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පෙනුම් සහ පරිඝණනය සියලුම గదులను\" does not accurately convey the meaning of \"View and manage all rooms.\"  'පෙනුම්' means 'views', 'පරිඝණනය' means 'calculate' or 'compute', and 'గదులను' (from Telugu) means 'rooms'. This is a nonsensical combination of words.",
-          "suggestion": "A more accurate translation would be something like \"සියලුම గదులను දැකීමට හා ನಿರ್ವಹಿಸಲು\" (Siya lluma gadulanu dakkimita ha nirvahitamita) which roughly translates to 'to view and manage all rooms'."
+          "description": "The Sinhala translation \"පෙනුම් සහ පරිඝණනය සියලුම గదులను\" does not accurately translate \"View and manage all rooms\". \"පෙනුම්\" (penum) means 'appearances' or 'views' (in the sense of perspectives), \"සමඟ පරිඝණනය\" (samaaga parigaNanaya) is awkward and doesn’t convey 'manage', and \"සියලුම గదులను\" (siyalluma gadulanuma) uses a Telugu word ('gadulanuma' meaning 'rooms') instead of a standard Sinhala equivalent.",
+          "suggestion": "A more accurate translation would be something like \"සියලුම గదులను දැකීම හා කළමණාකරණය කිරීම\" (siyalluma gadulanuma dekima ha kalamaanagaraayanayee kerima) or \"සියලුම గదులను පරීක්ෂණය කිරීම හා සංස්කරණය කිරීම\" (siyalluma gadulanuma parikshanaya kerima ha sanskarayanaya kerima)."
         },
         {
           "type": "spelling",
-          "description": "The presence of 'గదులను' which is a Telugu word indicates a potential spelling/transliteration error.",
-          "suggestion": "Verify the Sinhala spelling and correct any errors.  It's likely that the intended word was not from Telugu."
+          "description": "\"ගదులను\" uses a Telugu word for rooms. It should be a Sinhala equivalent.",
+          "suggestion": "Use a standard Sinhala equivalent for 'rooms', for example, \"గదుන්\" (gadun) or  “මෝටි” (moti)"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"පෙනුම් සහ පරිඝණනය සියලුම గదులను\" is grammatically awkward and doesn't flow naturally in Sinhala.",
+          "suggestion": "Reconstruct the sentence for better grammatical flow. For instance, use separate clauses connected by conjunctions or prepositions."
         }
       ],
       "approved_at": null
@@ -197,13 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Прикажи и управљај свим собама' doesn't fully capture the meaning of 'View and manage all rooms'. 'Прикажи' (Prikazi) translates to 'Show' or 'Display', which is less comprehensive than 'View'. 'Управљај' (Upravljaj) is correct for 'manage'.",
-          "suggestion": "Прегледај и управљај свим собама"
+          "description": "The translation \"Прикажи и управљај свим собама\" is a literal translation of \"View and manage all rooms\". While understandable, it's not the most natural way to express this in Serbian. 'Rooms' in this context likely refers to rooms within an online platform or system, not physical rooms. A more appropriate translation would focus on that meaning.",
+          "suggestion": "Прегледај и управљај свим собама (Pregledaj i upravljaj svim sobama) or Управљај и прегледај све собе (Upravljaj i pregledaj sve sobe)"
         },
         {
           "type": "spelling",
-          "description": "The Cyrillic text uses correct spelling overall. No spelling errors were identified.",
-          "suggestion": null
+          "description": "The Cyrillic text contains a potential misspelling.  'Прикажи' is acceptable, but 'Прегледај' (Pregledaj) or 'Управљај' (Upravljaj) would be more common in this context and might be preferable depending on the desired tone.",
+          "suggestion": "Consider using 'Прегледај' instead of 'Прикажи'."
         }
       ],
       "approved_at": null
@@ -226,8 +243,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Переглянути всі кімнати та керувати ними' is too literal and doesn't flow naturally in Ukrainian. While technically correct, it's not the most idiomatic way to express 'View and manage all rooms'.",
-          "suggestion": "Розглянути та адмініструвати всі кімнати"
+          "description": "The English phrase 'View and manage all rooms' implies a broader scope than just viewing and managing. 'Manage' can encompass creation, deletion, and modification, not just control. The Ukrainian translation 'Переглянути всі кімнати та керувати ними' translates to 'View all rooms and manage them', which lacks the full meaning of 'manage'.",
+          "suggestion": "Consider a more comprehensive translation that reflects the full scope of 'manage', such as 'Переглянути та керувати всіма кімнатами' (View and manage all rooms) or 'Переглянути та адмініструвати всі кімнати' (View and administer all rooms)."
         }
       ],
       "approved_at": null

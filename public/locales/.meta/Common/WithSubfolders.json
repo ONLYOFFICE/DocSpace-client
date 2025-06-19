@@ -3,7 +3,7 @@
   "content": "With subfolders",
   "content_en_sha1_hash": "bbacf97a73d40195b05d23b1680d86eb7a229fab",
   "created_at": "2025-05-19T21:30:49.612Z",
-  "updated_at": "2025-05-28T09:30:02.583Z",
+  "updated_at": "2025-05-26T07:57:32.645Z",
   "comment": {
     "text": "WithSubfolders is a term used to describe an option that allows users to search within subfolders. It appears as a checkbox label in a UI component, enabling or disabling this feature based on user configuration.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ենթաթղթապանակներով' (Ynþaþġġapanaknerov) is a literal translation of \"with subfolders\" but might sound awkward or overly formal in most contexts. A more natural-sounding translation might be 'Ենթաֆոլդերներով' (Ynþafoldernerov), using the English loanword for 'subfolders'.",
-          "suggestion": "Consider using 'Ենթաֆոլդերներով' (Ynþafoldernerov) instead of 'Ենթաթղթապանակներով' for a more natural-sounding translation."
+          "description": "The Armenian translation \"Ենթաթղթապանակներով\" (Yntha-tghtthpanaknrov) is a literal translation of 'with subfolders' but may not be the most natural or common way to express this concept in Armenian. It sounds somewhat formal and cumbersome.",
+          "suggestion": "Consider a more idiomatic translation such as \"Ենթաֆոլդերներով\" (Yntha-foldernrov) using the English loanword 'folders' adapted to Armenian grammar, or rephrasing the sentence to avoid direct translation, depending on the context."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අනු බහාලුම් සමඟ\" doesn't accurately convey the meaning of \"With subfolders\". \"අනු බහාලුම්\" primarily means 'seeds' or 'grains' and doesn't relate to folder structures. A more accurate translation would focus on the concept of containing folders within folders.",
-          "suggestion": "Possible suggestions include: \"උප-මැකීනි සමඟ\" (Upa-makīni samāga) - With sub-directories, \"මැකීනි උපවිභාග සමඟ\" (Makīni upavibhāga samāga) - With sub-sections within directories, or a more descriptive phrase explaining the presence of folders within folders."
+          "description": "The Sinhala translation \"අනු බහාලුම් සමඟ\" doesn't accurately convey the meaning of \"With subfolders\". \"අනු බහාලුම්\" translates to 'sub-packages' or 'sub-distributions', which isn't the intended meaning. The English phrase implies the presence of folders within folders.",
+          "suggestion": "Consider alternatives like \"අනු ෆෝල්ඩර්లతో\" (using the English word 'folder' transliterated) or \"උප ෆෝල්ඩර්లతో\" (using the Sinhala word for 'sub' and transliterating 'folder'). A more literal, though potentially less natural, translation could be \"අනුවැකියන් සහිත\" (anuvakiyan sahita - with sub-sections)."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Са подфолдерима' does not accurately convey the meaning of 'With subfolders'. The preposition 'са' implies 'with' in the sense of 'together with' or 'accompanied by', which isn't the intended meaning here. It should indicate possession or inclusion.",
-          "suggestion": "У подфолдерама"
+          "description": "The Serbian (Cyrillic) translation \"Са подфолдерима\" is not a correct translation of \"With subfolders\". It literally translates to 'With the subfolders' which implies possession and isn't the intended meaning. The correct translation would be something like 'уз подфолдере' or 'са подфолдерама'.",
+          "suggestion": "уз подфолдере"
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Alt klasörler ile\" while technically correct, isn't the most natural or common way to express \"With subfolders\" in Turkish. It's a very literal translation. A more idiomatic translation would be \"Alt klasörler içeren\" or \"Alt klasörlerle\".",
-          "suggestion": "Alt klasörler içeren"
+          "description": "The translation \"Alt klasörler ile\" while technically correct, isn't the most natural or idiomatic way to express \"With subfolders\" in Turkish. It implies 'with' something, which isn't the intended meaning. It's more descriptive than possessive.",
+          "suggestion": "A better translation would be \"Alt klasörler\" or \"Alt dizinler\" which are more concise and directly translate to 'Subfolders'."
         }
       ],
       "approved_at": null

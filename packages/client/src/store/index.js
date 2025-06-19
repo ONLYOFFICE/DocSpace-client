@@ -414,6 +414,7 @@ const store = {
   indexingStore,
   editGroupStore,
   avatarEditorDialogStore,
+  thirdPartyStore,
 
   brandingStore,
 

@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2025-05-28T09:30:02.302Z",
+  "updated_at": "2025-06-02T10:20:51.173Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -78,8 +78,8 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 141,
-      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n testId=\"email-input\"\n id=\"textInputContainerEmail\"",
+      "line_number": 224,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n testId=\"email-input\"",
       "module": "/packages/shared"
     }
   ],
@@ -111,7 +111,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'E-mail' is a common Czech equivalent for 'Email', it's a transliteration and not a true translation. A more accurate translation would be 'E-pošta'.",
+          "suggestion": "E-pošta"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -144,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'E-mail' is a common French adaptation of 'Email', it's not the most accurate or preferred translation. 'Courriel' is the officially recommended and more accurate translation.",
-          "suggestion": "Courriel"
+          "description": "While \"E-mail\" is a common and accepted translation of \"Email\" in French, it's an Anglicism. A more native French translation would be 'courriel'.",
+          "suggestion": "courriel"
         }
       ],
       "approved_at": null
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'էլ. հասցե' is a common way to represent 'email' in Armenian, it's more literally 'electronic address'. A more direct and arguably more appropriate translation would be 'էլեկտրոնային փոստ' (elektronayen post).",
-          "suggestion": "էլեկտրոնային փոստ"
+          "description": "The Armenian translation 'էլ. հասցե' while understandable, is a more literal and less natural rendering of 'Email'. A more common and fluent translation would be something along the lines of 'անձնական հասցե' (anznakane hasce) or 'էլեկտրոնային փոստ' (elektronayin post).",
+          "suggestion": "Consider 'անձնական հասցե' (anznakane hasce) or 'էլեկտրոնային փոստ' (elektronayin post)"
         }
       ],
       "approved_at": null
@@ -201,7 +207,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'E-mail' is a common and acceptable Polish equivalent of 'Email', it's a loanword and 'Poczta e-mail' or simply 'Poczta' could be more appropriate depending on the context. 'E-mail' is understood, but it lacks full integration into the Polish language.",
+          "suggestion": "Consider 'Poczta e-mail' or 'Poczta' as alternatives, depending on the specific context and desired level of Polish language adoption."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -234,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'වි-තැපෑල' (vi-tæpæla) while understandable, is not the most common or natural translation of 'Email'. The most common and widely accepted translation is 'ඊමේල්' (īmēla), which is a transliteration of the English word.",
-          "suggestion": "ඊමේල් (īmēla)"
+          "description": "The translation 'වි-තැපෑල' (vi-thapeela) is a transliteration and doesn't accurately convey the meaning of 'Email' in Sinhala.  'Email' is commonly understood and used as is in Sinhala, or a more accurate translation would be 'විද්යුත් තැපැල්' (vidyut thapeem) which means 'electronic mail'.",
+          "suggestion": "විද්යුත් තැපැල් (vidyut thapeem) or using 'Email' as is."
         }
       ],
       "approved_at": null

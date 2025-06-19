@@ -3,7 +3,7 @@
   "content": "In original format",
   "content_en_sha1_hash": "c1f57f1f2715adde11610fa15e5aa5c53fa3c6e1",
   "created_at": "2025-05-19T21:30:44.690Z",
-  "updated_at": "2025-05-28T09:30:02.969Z",
+  "updated_at": "2025-05-26T07:57:32.941Z",
   "comment": {
     "text": "This translation key is used for the text \"In original format\" which is displayed to indicate that the downloaded file has not been modified. It appears in a download dialog component when an original file is being downloaded.",
     "is_auto": true,

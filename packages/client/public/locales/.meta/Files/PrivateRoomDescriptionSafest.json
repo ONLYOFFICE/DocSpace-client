@@ -3,7 +3,7 @@
   "content": "The safest storage for docx, xlsx and pptx.",
   "content_en_sha1_hash": "6222ee42df0183296c6c97c0bc9da69661e9f48c",
   "created_at": "2025-05-19T21:30:55.979Z",
-  "updated_at": "2025-05-21T11:33:09.924Z",
+  "updated_at": "2025-06-02T10:20:51.020Z",
   "comment": {
     "text": "\"This translation key is used for a safety message describing secure storage options. It will appear as a tooltip or button label in a file management interface, guiding users to the safest storage solution.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 130,
+      "line_number": 132,
       "context": "});\n \n const privacyIcon = <img alt=\"\" src={PrivacySvgUrl} />;\n \n const privateRoomDescTranslations = [\n t(\"PrivateRoomDescriptionSafest\"),\n t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'təhlükəsiz' means 'dangerous', not 'safe'. The English content describes a safe storage, so the translation should reflect that.",
-          "suggestion": "Docx, xlsx və pptx üçün ən təhlükəli deyil, ən etibarlı saxlama."
+          "description": "The word 'təhlükəsiz' means 'dangerous' or 'unsafe', not 'safe'. The English text says 'safest', meaning the most secure or protected.",
+          "suggestion": "Docx, xlsx və pptx üçün ən təhlükəsiz saxlama should be changed to Docx, xlsx və pptx üçün ən etibarlı saxlama."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ամենաանվտանգ պահեստը` docx, xlsx and pptx-ի համար.\" translates to 'The safest storage *for* docx, xlsx and pptx'. While technically correct, it's slightly less natural sounding in Armenian. A more fluent translation would omit the 'for'.",
-          "suggestion": "Ամենաանվտանգ պահեստը docx, xlsx եւ pptx-ի."
+          "description": "The Armenian translation 'Ամենաանվտանգ պահեստը` docx, xlsx and pptx-ի համար.' literally translates to 'The safest storage *for* docx, xlsx and pptx'. While understandable, a more natural Armenian phrasing would be something like 'The safest storage *for* docx, xlsx, and pptx files' or 'The safest storage *of* docx, xlsx, and pptx'.  The inclusion of 'համար' makes it feel slightly awkward.",
+          "suggestion": "Ամենաանվտանգ պահեստը docx, xlsx, և pptx ֆայլերի համար."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'docx、xlsx、pptxの最も安全な保存方法' literally translates to 'The safest storage method for docx, xlsx, and pptx'. The English conveys the idea of a 'storage' or 'location', while the Japanese translation emphasizes the 'method' of saving. The meaning is slightly shifted.",
-          "suggestion": "docx、xlsx、pptxの最も安全な保管場所。"
+          "description": "The translation 'docx、xlsx、pptxの最も安全な保存方法' literally translates to 'The safest way to save docx, xlsx, pptx'. The English content implies a *location* for safe storage, not a method of saving. While not entirely wrong, it misses the nuance.",
+          "suggestion": "docx、xlsx、pptxの最も安全な保管場所"
         }
       ],
       "approved_at": null
@@ -117,19 +117,19 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '가장 안전한 docx, xlsx, pptx 스토리지' is a literal translation and doesn't quite convey the natural flow of the English phrase. '스토리지' (storage) feels a bit technical and awkward in this context. A more natural Korean expression might be '가장 안전한 docx, xlsx, pptx 보관 장소' or '가장 안전하게 docx, xlsx, pptx를 보관할 수 있는 곳'.",
-          "suggestion": "가장 안전하게 docx, xlsx, pptx를 보관할 수 있는 곳."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ສຳລັບ' is spelled correctly, but it's likely the best translation of 'for' is 'ສໍາລັບ' depending on context.",
+          "suggestion": "ສໍາລັບ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -180,13 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආචයනය' (aachayanaya) doesn't accurately convey the meaning of 'storage'. A more appropriate term would be something like 'භාරගැන්ීම' (bhaaragænima) or 'ගබඩාව' (gabadaawa).",
-          "suggestion": "docx, xlsx සහ pptx සඳහා ආරක්ෂිතම භාරගැන්ීම."
+          "description": "The translation 'ආචයනය' (achchanaya) doesn't accurately convey the meaning of 'storage' in this context. It translates to 'deposit' or 'lodging,' which is not appropriate for files.",
+          "suggestion": "A more appropriate translation for 'storage' would be 'භාරගැන්ීම' (bharagænima) or 'ගබඩාව' (gabadaawa), meaning 'storage' or 'repository'."
         },
         {
           "type": "formatting",
-          "description": "The use of 'සහ' (and) seems acceptable, but consider if a more nuanced connective might improve readability in Sinhala.",
-          "suggestion": "docx, xlsx, pptx සඳහා ආරක්ෂිතම භාරගැන්ීම."
+          "description": "The Sinhala translation maintains the English list format. While not strictly incorrect, it might be improved for natural flow in Sinhala. Consider rephrasing to avoid a direct translation of the English list structure.",
+          "suggestion": "Consider rephrasing to 'docx, xlsx හා pptx ගොනstellungen සඳහා වඩාත් සුරක්ෂිත ගබඩාව.' (docx, xlsx and pptx files for the safest repository)."
         }
       ],
       "approved_at": null
@@ -236,13 +236,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The comma between 'xlsx' and '与' is unnecessary and slightly disrupts the flow in Chinese.  '与' functions as 'and'.",
-          "suggestion": "最安全的docx、xlsx与pptx存储方式。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

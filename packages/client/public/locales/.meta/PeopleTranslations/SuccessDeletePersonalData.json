@@ -3,7 +3,7 @@
   "content": "Personal data has been successfully deleted",
   "content_en_sha1_hash": "e256cc198af35fcc4ab33a823b0b291ec5372e4b",
   "created_at": "2025-05-19T21:30:53.528Z",
-  "updated_at": "2025-05-28T09:30:02.381Z",
+  "updated_at": "2025-05-26T07:57:32.382Z",
   "comment": {
     "text": "Personal data deletion confirmation message used to notify users when their personal data has been successfully deleted. This translation key is likely used in a button or dialog prompt within the application, where it will be displayed to confirm that personal data removal was successful.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'මැකිණි' (makini) is a less common or slightly archaic way of saying 'deleted'. While not strictly incorrect, 'හිފައި' (hai) would be a more contemporary and preferred equivalent.",
-          "suggestion": "පෞද්ගලික දත්ත සාර්ථකව හිފައި"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

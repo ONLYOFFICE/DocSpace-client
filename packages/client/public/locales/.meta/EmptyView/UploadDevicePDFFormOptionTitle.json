@@ -3,7 +3,7 @@
   "content": "Upload from device",
   "content_en_sha1_hash": "37ea5a59d00e13d5967bc95d080fc94a3db0eb2a",
   "created_at": "2025-05-19T21:30:56.550Z",
-  "updated_at": "2025-05-28T09:30:02.114Z",
+  "updated_at": "2025-05-26T07:57:32.156Z",
   "comment": {
     "text": "This translation key is used for the title of an option that allows users to upload PDF files from their device. It appears in a UI component where users can select file types to upload, likely on a form or dialog. The translator should ensure the text accurately conveys the action of uploading a PDF file.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Încărcare de pe dispozitivul' is not a natural or accurate translation of 'Upload from device'. It's too literal and sounds awkward. The word 'dispozitivul' implies possession.",
+          "suggestion": "Încarcă de pe dispozitiv"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'උපාංගයෙන් උඩුගත කරන්න' is a literal translation but sounds somewhat unnatural in Sinhala. A more natural phrasing would be something like 'උපාංගයෙන් ඔප්ලෝඩ් කරන්න' or 'උපාංගයෙන් ඇප්ලෝඩ් කරන්න'.",
+          "suggestion": "උපාංගයෙන් ඔප්ලෝඩ් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +183,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Отпреми са уређаја\" is not the most natural or accurate translation of \"Upload from device.\" While understandable, it's somewhat clunky. A more common and idiomatic translation would be \"Уплоад са уређаја\" or \"Отпреми са уређаја\".",
+          "suggestion": "Уплоад са уређаја"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Otpremi sa uređaja' is understandable, a more natural and accurate translation of \"Upload from device\" would be \"Uploaduj sa uređaja\" or \"Učitaj sa uređaja\". \"Otpremi\" typically refers to sending something, which isn't exactly the same as uploading.",
+          "suggestion": "Uploaduj sa uređaja"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

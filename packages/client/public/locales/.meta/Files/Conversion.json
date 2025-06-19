@@ -3,7 +3,7 @@
   "content": "Conversion",
   "content_en_sha1_hash": "9151f8433f795cb0f0b5b6743aeb7de77ec49f00",
   "created_at": "2025-05-19T21:30:55.343Z",
-  "updated_at": "2025-05-28T09:30:02.307Z",
+  "updated_at": "2025-05-26T07:57:32.342Z",
   "comment": {
     "text": "This translation key is used for the title of a conversion-related modal dialog. It appears as the header in a modal that can be displayed during file conversion or upload processes. The content should reflect whether the file is being uploaded, converted, or neither.",
     "is_auto": true,

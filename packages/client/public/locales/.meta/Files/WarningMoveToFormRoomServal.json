@@ -3,7 +3,7 @@
   "content": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "content_en_sha1_hash": "5d1a343d603e24511ebf4ad531954a1b50dacf6d",
   "created_at": "2025-05-19T21:30:56.345Z",
-  "updated_at": "2025-05-28T09:30:02.129Z",
+  "updated_at": "2025-05-26T07:57:32.170Z",
   "comment": {
     "text": "This translation key is used to display a warning message when moving multiple files to a specific room. The message informs users that this action is not supported and suggests moving one PDF form at a time instead. This message appears in the FilesSelector component when the user attempts to move several files.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Moving several files' is translated as 'لا يُسمح بنقل أكثر من ملف واحد'. While technically correct, it's a bit passive. A more direct translation, reflecting the prohibition, would be better. The original emphasizes the action being unsupported.",
-          "suggestion": "يُمنع نقل أكثر من ملف واحد"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of '{{ organizationName }}' should be consistent with the application’s implementation. Verify it’s correctly handled during rendering.",
-          "suggestion": "No change needed, verify application rendering"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -47,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Moving several files' is translated as 'Birdən çox faylın...köçürülməsi'. While technically correct, a more natural translation would be 'Bir neçə faylın...köçürülməsi' or 'Çox sayda faylın...köçürülməsi'.",
+          "description": "The phrase \"Birdən çox faylın\" could be more accurately translated as \"Bir neçə faylın\" or \"Çox sayda faylın\".  While \"Birdən çox\" is understandable, it's not the most natural phrasing in this context.",
           "suggestion": "Bir neçə faylın Forma Doldurma otağına köçürülməsi dəstəklənmir."
         }
       ],
@@ -62,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Czech translation uses a lowercase 'p' in 'přesunujte'. It should be capitalized to match the first instance 'Přesunutí' which is a noun and should align with the subject of the sentence. The imperative form should be capitalized.",
-          "suggestion": "Přesunujte"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -101,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses 'à la fois' which is grammatically correct but sounds slightly less natural in this context than 'un par un'.",
+          "description": "The phrase 'à la fois' is slightly awkward in this context. While technically correct, it sounds less natural than alternatives.",
           "suggestion": "Déplacez un formulaire PDF {{ organizationName }} un par un."
         }
       ],
@@ -113,13 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after 'սենյակ' in the Armenian translation seems misplaced. It disrupts the flow of the sentence.",
-          "suggestion": "Remove the colon after 'սենյակ'. The sentence should read: 'Մի քանի ֆայլ տեղափոխելը Ձևաթղթերի լրացման սենյակ չի աջակցվում: Միանգամից տեղափոխեք մեկ {{ organizationName }} PDF ձև' or restructure the sentence."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Մի քանի ֆայլ տեղափոխելը\" could be more accurately translated to reflect the negative connotation. It's a bit literal.",
-          "suggestion": "Consider a more natural phrasing like: 'Մի քանի ֆայլերի տեղափոխումը' or 'Բազմաֆայլ տեղափոխումը'."
+          "description": "The colon (:) after 'սենյակ' should be a period (.) to match the English punctuation.",
+          "suggestion": "Մի քանի ֆայլ տեղափոխելը Ձևաթղթերի լրացման սենյակ չի աջակցվում: Միանգամից տեղափոխեք մեկ {{ organizationName }} PDF ձև."
         }
       ],
       "approved_at": null
@@ -130,8 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"stanza di compilazione dei moduli\" is a literal translation of \"Form Filling room\" and sounds unnatural in Italian. A more natural phrasing would be \"area di compilazione moduli\" or \"stanza per la compilazione dei moduli\".",
-          "suggestion": "Consider replacing \"stanza di compilazione dei moduli\" with \"area di compilazione moduli\" or \"stanza per la compilazione dei moduli\"."
+          "description": "The phrase \"stanza di compilazione dei moduli\" is a literal translation of 'Form Filling room' and might sound unnatural in Italian. A more natural phrasing would be 'area di compilazione moduli' or 'sezione compilazione moduli'.",
+          "suggestion": "Consider using 'area di compilazione moduli' or 'sezione compilazione moduli' instead of 'stanza di compilazione dei moduli'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Sposta un modulo PDF {{ organizationName }} alla volta' could be improved for flow. The inclusion of 'PDF' feels a little clunky after 'modulo'.",
+          "suggestion": "Consider 'Sposta un modulo PDF {{ organizationName}} uno alla volta' or 'Sposta un modulo {{ organizationName}} PDF alla volta'."
         }
       ],
       "approved_at": null
@@ -154,13 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ລູກ' (luk) is used with 'ໄຟລ໌' (files). While 'ລູກ' means 'child' or 'piece', it's not the appropriate term to describe files. It implies individual pieces of the file.",
-          "suggestion": "Consider using 'ເອກະບຸคคล' (ek-ka-buk-kon) which means 'individual' or removing it entirely as the context is already clear."
+          "description": "The word 'ລູກ' (luk) is used for 'files'. While technically meaning 'child' or 'piece', its use in this context is unusual and can be confusing. It implies individual files are 'children' of something.",
+          "suggestion": "Replace 'ລູກ' with a more suitable term for 'files,' such as 'ເອກະສານ' (ekanasan) or 'ໄຟລ໌' (fai)."
         },
         {
-          "type": "formatting",
-          "description": "The variable {{ organizationName }} is correctly placed but the Lao translation reads a little awkwardly because of its placement. A slight rephrasing could improve readability.",
-          "suggestion": "ການເຄື່ອນແບບຟອມ PDF ຂອງ {{ organizationName }} ຫນຶ່ງຢ່າງຄັ້ງລະຫນຶ່ງ."
+          "type": "grammar",
+          "description": "The phrase 'ໃຫ້ເຄື່ອນແບບຟອມ PDF {{ organizationName }} ຫນຶ່ງຢ່າງຄັ້ງລະຫນຶ່ງ' could be phrased more naturally. 'ຫນຶ່ງຢ່າງ' is somewhat redundant after 'ແບບຟອມ.'",
+          "suggestion": "Change 'ຫນຶ່ງຢ່າງ' to just 'ຫນຶ່ງ' or rephrase entirely to 'ເຄື່ອນແບບຟອມ PDF {{ organizationName }} ຫນຶ່ງຄັ້ງຕໍ່ຄັ້ງ' or 'ເຄື່ອນແບບຟອມ PDF {{ organizationName }} ຫນຶ່ງຄັ້ງເທົ່ານັ້ນ' "
         }
       ],
       "approved_at": null
@@ -168,7 +151,18 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Vairāku failu pārvietošana\" is accurate for 'Moving several files', but 'vienlaikus' (simultaneously) is unnecessary and slightly awkward in this context. A more natural translation would be simply 'Pārvietojiet'.",
+          "suggestion": "Pārvietojiet vairākus failus..."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the sentence structure in the Latvian translation is a bit stilted. A smoother flow would improve readability.",
+          "suggestion": "Vairāku failu pārvietošana uz veidlapu aizpildīšanas telpu netiek atbalstīta. Lūdzu, pārvietojiet vienu {{ organizationName }} PDF veidlapu."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -183,12 +177,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Polish translation retains the English phrasing 'Pokoju do wypełniania formularzy' which is a bit clunky. A more natural phrasing would be 'Pokoju wypełniania formularzy' or 'Pokoju formularzy'.",
-          "suggestion": "Przenoszenie kilku plików do Pokoju wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz."
-        },
-        {
-          "type": "grammar",
-          "description": "While not incorrect, using 'Przenieś' instead of 'Przenoś' would make the sentence flow more naturally and is more common in instructions.",
+          "description": "The Polish translation uses \"Przenoś\" (imperative form) instead of \"Przenoszenie\" (gerund/noun form) which doesn't match the structure of the English sentence. It's awkward.",
           "suggestion": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenieś po jednym formularzu PDF {{ organizationName }} na raz."
         }
       ],
@@ -206,12 +195,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'formularío PDF' is redundant and doesn't accurately convey the English 'PDF form'.",
+          "description": "The phrase 'formulário PDF' is repeated unnecessarily. It should be translated more concisely.",
           "suggestion": "Não há suporte para a movimentação de vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} de cada vez."
         },
         {
           "type": "grammar",
-          "description": "The repetition of 'PDF' creates an awkward phrasing. A better flow is needed.",
+          "description": "The repetition of 'formulário PDF' makes the sentence awkward. It's better to just say 'formulário' after the first instance.",
           "suggestion": "Não há suporte para a movimentação de vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} de cada vez."
         }
       ],
@@ -223,8 +212,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation uses 'Deplasați câte un formular PDF {{ organizationName }}.' which could be improved for readability. It's a little abrupt. It should be more natural.",
-          "suggestion": "Deplasați câte un PDF {{ organizationName}}."
+          "description": "The Romanian translation uses \"Deplasați\" (Move) which is in the formal/command form. The English uses a gentler phrasing. Consider using a less direct form.",
+          "suggestion": "Consider replacing 'Deplasați' with 'Vă rugăm să deplasați' (Please move) for a more polite tone."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'câte un formular PDF' translates literally to 'each PDF form'. A more natural Romanian phrasing would be 'un formular PDF' (a PDF form).",
+          "suggestion": "Replace 'câte un formular PDF' with 'un formular PDF'."
         }
       ],
       "approved_at": null
@@ -240,14 +234,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ආකෘතියක්' (aakrutiyak) is a bit awkward. While technically correct, it can be improved for natural flow.",
-          "suggestion": "ආකෘතියක් වෙනුවට 'පෝරමයක්' භාවිතා කරන්න."
+          "type": "formatting",
+          "description": "The Sinhala translation uses a mixture of upper and lower case. Generally, Sinhala text is written in lowercase unless it's a proper noun or the beginning of a sentence.",
+          "suggestion": "පෝරම් පිරවුම් කාමරයට බොහෝ ගොනු යැවීම සහය නොදක්වයි. එක {{ organizationName }} PDF ආකෘතියක් පමණක් එකවරක් යවන්න."
         },
         {
           "type": "grammar",
-          "description": "The phrasing 'එකවරක් යවන්න' (ekavarak yavanna) is grammatically correct but sounds slightly formal and unnatural in this context. It's a bit clunky.",
-          "suggestion": "එකවරක් යවන්න වෙනුවට 'එකවරම යවන්න' භාවිතා කරන්න."
+          "description": "The word 'එකවරක්' (ekawarak) feels a bit redundant after saying 'එක' (eka). It's grammatically correct but stylistically can be improved.",
+          "suggestion": "පෝරම් පිරවුම් කාමරයට බොහෝ ගොනු යැවීම සහය නොදක්වයි. එක {{ organizationName }} PDF ආකෘතියක් පමණක් යවන්න."
         }
       ],
       "approved_at": null
@@ -258,13 +252,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The use of 'Premiestňujte' (imperative form) is slightly awkward. It's better to use a more neutral phrasing.",
+          "description": "The use of 'Premiestňujte' (imperative form) is slightly awkward. A more natural phrasing would be 'Premiestňujte jeden... formulár' or 'Presúvajte jeden... formulár'.  The imperative feels less user-friendly.",
           "suggestion": "Presúvajte jeden {{ organizationName }} PDF formulár naraz."
         },
         {
           "type": "formatting",
-          "description": "Consistency in the word 'formulár' (singular) is slightly off. The English uses 'form' but the Slovak uses 'formulár'.",
-          "suggestion": "Presúvajte jeden {{ organizationName }} PDF formulár naraz."
+          "description": "The repetition of 'formular' might be improved for readability. While grammatically correct, it could be slightly more elegant.",
+          "suggestion": "Presúvajte jeden {{ organizationName }} PDF formulár alebo dokument naraz."
         }
       ],
       "approved_at": null
@@ -275,8 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The term 'PDF' is repeated unnecessarily. It's not needed after 'obrazec'.",
-          "suggestion": "Premikanje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Premaknite po en obrazec {{ organizationName }} naenkrat."
+          "description": "The phrase 'obrazec PDF' is slightly awkward. It should be more natural to say 'PDF obrazec'.",
+          "suggestion": "PDF obrazec"
         }
       ],
       "approved_at": null
@@ -287,8 +281,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'преместите' is used twice. While technically correct, using a more consistent verb form would improve readability. 'Премештајте' is more standard for addressing someone.",
-          "suggestion": "Премештајте"
+          "description": "The word 'фајлова' is a valid word but can be improved to 'датотека' for a more formal and accurate translation of 'files' in this context.",
+          "suggestion": "Премјештање више датотека у собу за попуњавање образаца није подржано."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'образац' is a valid word, but 'форма' might be more commonly understood and used in this context, particularly relating to PDF documents.",
+          "suggestion": "Преместите један {{ organizationName }} PDF форма у исто време."
         }
       ],
       "approved_at": null
@@ -299,8 +298,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'fajlova' is a less common and somewhat archaic form. 'Datoteka' or 'fajl' are more modern and preferred.",
+          "description": "The word 'fajlova' is a less common and slightly less formal way of saying 'datoteka' or 'datotečni'. While understandable, 'datoteka' would be more appropriate for a formal document.",
           "suggestion": "Premještanje više datoteka u sobu za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrase 'u sobu za popunjavanje obrazaca' could be slightly improved for flow and conciseness. Using 'u prostoriju za popunjavanje obrazaca' is a little more natural in this context.",
+          "suggestion": "Premještanje više datoteka u prostoriju za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme."
         }
       ],
       "approved_at": null
@@ -314,13 +318,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Ukrainian translation uses a hyphenated 'PDF-форму'. While technically correct, a more common and natural phrasing would be 'PDF форму'.",
-          "suggestion": "PDF форму"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -329,13 +327,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"several files\" as \"một số tập tin\" is accurate, but the overall phrasing is a bit awkward. A more natural Vietnamese phrasing for the entire first part of the sentence would improve readability. The current translation sounds somewhat literal.",
-          "suggestion": "Consider rephrasing the first part of the sentence to something like \"Không hỗ trợ việc di chuyển nhiều tập tin...\" or \"Không được phép di chuyển nhiều tập tin...\""
+          "description": "The phrase 'Moving several files' is translated as 'di chuyển một số tập tin,' which is technically correct but sounds slightly awkward in Vietnamese. A more natural phrasing might be 'di chuyển nhiều tập tin' or 'di chuyển nhiều file'.",
+          "suggestion": "Di chuyển nhiều tập tin vào phòng Điền Biểu mẫu."
         },
         {
-          "type": "formatting",
-          "description": "The placement of the variable '{{ organizationName }}' feels slightly unnatural in the Vietnamese translation. While technically correct, it disrupts the flow.",
-          "suggestion": "Consider restructuring the sentence to integrate '{{ organizationName }}' more smoothly, perhaps by saying: '...từng biểu mẫu PDF của {{ organizationName }} mỗi lần.' or '...từng biểu mẫu PDF {{ organizationName }} một lần.'"
+          "type": "incorrect_translation",
+          "description": "The term 'Form Filling room' is translated as 'phòng Điền Biểu mẫu'. While understandable, it might be more natural to use a more common term for 'Form Filling' like 'Nhập liệu biểu mẫu' or simply 'Phòng Biểu mẫu'.",
+          "suggestion": "Hãy di chuyển từng biểu mẫu PDF {{ organizationName }} mỗi lần vào Phòng Biểu mẫu."
         }
       ],
       "approved_at": null
@@ -343,18 +341,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '表单填写房间' (Form Filling Room) is a literal translation and might not be the most natural or idiomatic way to refer to the room in Chinese. A more common and clearer term might be used depending on the specific context of the application.",
-          "suggestion": "Consider alternatives like '表单处理房间' (Form Processing Room), '表单上传房间' (Form Upload Room), or a room name specific to the application if available."
-        },
-        {
-          "type": "formatting",
-          "description": "The variable {{ organizationName }} is correctly placed in the Chinese translation, maintaining the same functionality as in the English source.",
-          "suggestion": "No change needed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

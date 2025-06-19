@@ -3,7 +3,7 @@
   "content": "Room Name",
   "content_en_sha1_hash": "28f6f4be97a6c62741e786864902ca01f64e35dc",
   "created_at": "2025-05-19T21:30:48.218Z",
-  "updated_at": "2025-05-28T09:30:02.246Z",
+  "updated_at": "2025-05-26T07:57:32.272Z",
   "comment": {
     "text": "RoomName is used as a label for a room name field in a UI component, likely appearing in a dialogue or form. It provides a clear and descriptive title for users to enter a room name.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Սենյակի անվանումը' translates more literally to 'The name of the room'.  'Room Name' is more commonly and naturally translated as simply 'Անվանում' (Name) in this context, or potentially 'Ժողովածուի անուն' (Meeting Name) if 'Room' refers to a meeting room.",
+          "suggestion": "Consider translating as 'Անվանում' (Name) or 'Ժողովածուի անուն' (Meeting Name) depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically a direct translation, 'Kamer Naam' is not the most natural or idiomatic way to say 'Room Name' in Dutch. A more common and natural phrasing would be 'Naam van de kamer'.",
-          "suggestion": "Naam van de kamer"
+          "description": "The translation \"Kamer Naam\" is a literal translation of \"Room Name\" but doesn't flow naturally in Dutch. A more idiomatic translation would be \"Naam van de Kamer\".",
+          "suggestion": "Naam van de Kamer"
         }
       ],
       "approved_at": null
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"කාමරයේ නම\" is a literal translation but might not be the most natural phrasing for 'Room Name' in Sinhala. It translates to 'of the room name'.",
-          "suggestion": "Consider using \"මාලක නම\" (Malaka Nama) which is a more common and natural way to say 'Room Name' in Sinhala."
+          "description": "The translation 'කාමරයේ නම' while literally meaning 'of room name', doesn't quite capture the intended meaning of 'Room Name' as a label or title. A more natural translation would be 'මමර නම'.",
+          "suggestion": "මමර නම"
         }
       ],
       "approved_at": null
@@ -186,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Назив собе\" is understandable, a more natural and common Serbian (Cyrillic) translation for \"Room Name\" would be \"Име собе\". \"Назив\" implies a formal or official title, while \"Име\" is more generic and fitting for a room name.",
+          "description": "The Serbian (Cyrillic) translation 'Назив собе' is a literal translation of 'Name of Room,' but 'Room Name' is more commonly translated as 'Име собе' in Serbian. 'Назив' generally refers to a formal or official name.",
           "suggestion": "Име собе"
         }
       ],
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Naziv sobe' directly translates to 'Name of room', but a more natural and idiomatic translation of 'Room Name' would be 'Ime sobe'. 'Naziv' is often used for official names or titles, whereas 'Ime' is more appropriate for a general 'Room Name'.",
-          "suggestion": "Ime sobe"
+          "description": "The Serbian translation 'Naziv sobe' translates more accurately to 'Name of room' rather than simply 'Room Name'. While understandable, it's not the most natural phrasing in Serbian.",
+          "suggestion": "Naziv prostorije"
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"房间名称\" (Fángjiān míngchēng) is a technically correct translation of \"Room Name,\" it is overly formal and not the most natural way to say it. A more common and preferred translation would be \"房间名\" (Fángjiān míng) or simply \"房间\" (Fángjiān) in certain contexts.",
-          "suggestion": "房间名 (Fángjiān míng) or 房间 (Fángjiān)"
+          "description": "While '房间名称' is a literal translation of 'Room Name', it's a bit formal for typical usage. A more natural translation would be '房间名' or '房间名称'.",
+          "suggestion": "房间名"
         }
       ],
       "approved_at": null

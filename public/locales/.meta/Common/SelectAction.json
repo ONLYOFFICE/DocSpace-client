@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2025-06-18T17:09:45.644Z",
+  "updated_at": "2025-06-18T17:11:42.307Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
@@ -20,12 +20,6 @@
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 55,
       "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: t(\"Common:ProductName\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/FilesSelectorInput/index.js",
-      "line_number": 162,
-      "context": "isLoading={isLoading}\n isDisabled={isDisabled || isLoading}\n hasError={isError || isErrorPath}\n scale\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"SelectAction\")}\n />\n \n <Portal element={<div>{selectorComponent}</div>} />\n </StyledBodyWrapper>\n );",
       "module": "/packages/client"
     },
     {
@@ -90,7 +84,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1715,
+      "line_number": 1718,
       "context": "const optionsModel = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => this.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },
@@ -105,6 +99,24 @@
       "line_number": 53,
       "context": "// const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
+      "line_number": 37,
+      "context": "filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
+      "line_number": 37,
+      "context": "filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/files-selector-input/FilesSelectorInput.tsx",
+      "line_number": 254,
+      "context": "isLoading={isLoading}\n path={newPath || basePath}\n isDisabled={isDisabled || isLoading}\n hasError={isError || isErrorPath}\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"Common:SelectAction\")}\n />\n <Portal element={<div>{selectorComponent}</div>} />\n </StyledBodyWrapper>\n );\n };",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
@@ -132,7 +144,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Room/index.tsx",
-      "line_number": 257,
+      "line_number": 234,
       "context": "{...cancelButtonSelectorProps}\n {...searchSelectorProps}\n withPadding={withPadding}\n onSelect={onSelect}\n items={items}\n submitButtonLabel={submitButtonLabel || t(\"Common:SelectAction\")}\n onSubmit={onSubmit}\n isMultiSelect={isMultiSelect}\n emptyScreenImage={EmptyScreenCorporateSvgUrl}\n emptyScreenHeader={emptyScreenHeader ?? t(\"Common:EmptyRoomsHeader\")}\n emptyScreenDescription={",
       "module": "/packages/shared"
     }

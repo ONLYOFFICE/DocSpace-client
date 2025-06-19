@@ -3,7 +3,7 @@
   "content": "Customize cover",
   "content_en_sha1_hash": "b5b9c63cc83c3598cc9ddb9857ac47fb18bca819",
   "created_at": "2025-05-19T21:30:53.313Z",
-  "updated_at": "2025-05-28T09:30:02.847Z",
+  "updated_at": "2025-05-26T07:57:32.829Z",
   "comment": {
     "text": "The translation key \"CustomizeCover\" is used to display a button label in a dialog that allows users to customize their room logo cover. The text appears as part of a UI element and should be translated accordingly.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 986,
+      "line_number": 994,
       "context": "icon: TrashIconSvgUrl,\n key: \"delete\",\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {\n label: t(\"RoomLogoCover:CustomizeCover\"),\n icon: PenSvgUrl,\n key: \"cover\",\n onClick: () => this.setRoomLogoCoverDialogVisible(true),\n },\n ];",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Örtüyü fərdiləşdirin' is technically a translation, it's a bit clunky and doesn't fully capture the natural feel of 'Customize cover'.  'Fərdiləşdirin' implies a more complex level of customization.",
-          "suggestion": "Consider a more concise and natural-sounding alternative, such as 'Xüsusi örtük' (Special cover) or 'Örtüyü dəyiş' (Change cover) depending on the intended functionality."
+          "description": "While 'Örtüyü fərdiləşdirin' is a literal translation, it's not the most natural way to express 'Customize cover' in Azerbaijani. It sounds slightly awkward.",
+          "suggestion": "Consider alternatives like 'Xüsusi örtük seçin' (Choose a custom cover) or 'Örtükü dəyişdirin' (Change the cover)."
         }
       ],
       "approved_at": null
@@ -54,8 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Přizpůsobení krytu' is not the most natural or accurate translation of 'Customize cover.' 'Přizpůsobení' implies a more complex customization process than 'customize.'",
-          "suggestion": "Consider alternatives like 'Vlastní kryt' (Custom cover), 'Úprava krytu' (Cover modification), or 'Osobní kryt' (Personalized cover)."
+          "description": "While \"Přizpůsobení krytu\" is grammatically correct, it's not the most natural or common translation for \"Customize cover\" in this context (likely referring to a cover image or design). A better translation would convey the action of customization, not just the adaptation.",
+          "suggestion": "Úprava krytu"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Přizpůsobení krytu' focuses on the result (the adapted cover), rather than the action of customizing.  The user likely intends to *customize* the cover, not just have a customized cover.",
+          "suggestion": "Vlastní kryt"
         }
       ],
       "approved_at": null
@@ -84,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Mukauta\" correctly translates to \"Customize,\" \"etusivu\" translates to \"homepage\" or \"front page.\" \"Cover\" implies a more visually prominent image or design element, not necessarily the entire homepage. A better translation would more accurately reflect the meaning of 'cover' in this context.",
-          "suggestion": "Mukautettu kansi"
+          "description": "The translation \"Mukauta etusivu\" doesn't accurately convey the meaning of \"Customize cover.\" 'Etsisivu' means 'homepage'. The original English refers specifically to customizing a cover image or design, not the entire homepage.",
+          "suggestion": "Mukauta kansikuva"
         }
       ],
       "approved_at": null
@@ -99,19 +104,19 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Անհատականացնել կազմը' while technically meaning 'personalize the cover', doesn't quite capture the nuance of 'Customize cover'. 'Customize' implies a broader range of modifications, not just personalization. A more accurate translation might be something like 'Պատվերով կազմել' (Patervor k’azmel - Create a custom cover) or 'Կազմել պատվերով' (Kazmel patervor - Design a cover to order).",
+          "suggestion": "Պատվերով կազմել"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Personalizza cover' is understandable, 'Personalizza la cover' would be more grammatically correct and natural-sounding in Italian. The article 'la' is missing.",
-          "suggestion": "Personalizza la cover"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -126,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"커버 사용자 지정\" is understandable, a more natural and idiomatic translation for 'Customize cover' would be '커버 맞춤 설정' or '커버 커스터마이징'. \"사용자 지정\" can imply a more complex personalization than a simple cover customization.",
-          "suggestion": "커버 맞춤 설정"
+          "description": "While '커버 사용자 지정' is a literal translation of 'Customize cover,' it's not the most natural or common phrasing in Korean. It sounds slightly awkward.",
+          "suggestion": "A more natural translation would be '커버 맞춤 설정' or '커버 디자인 변경' depending on the specific nuance intended."
         }
       ],
       "approved_at": null
@@ -138,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ປັບແກ້ຮູບໜ້າປົກ' is a literal translation of 'adjust cover image'. While understandable, a more natural translation of 'Customize cover' would be something like 'ອອກແບບໜ້າປົກ' or 'ເຮັດແບບປົກຂອງທ່ານ'.",
-          "suggestion": "ອອກແບບໜ້າປົກ"
+          "description": "The Lao translation 'ປັບແກ້ຮູບໜ້າປົກ' (pập-gǽe rûup nâa-bpòk) literally translates to 'adjust/edit cover image'. While understandable, it's not the most natural or concise way to express 'Customize cover' in Lao. A more accurate and natural translation might be 'ອອກແບບຮູບໜ້າປົກ' (ɔ̀k daep rûup nâa-bpòk) which means 'design cover' or 'create cover'.",
+          "suggestion": "ອອກແບບຮູບໜ້າປົກ (ɔ̀k daep rûup nâa-bpòk) or ສ້າງຮູບໜ້າປົກ (sâang rûup nâa-bpòk)"
         }
       ],
       "approved_at": null
@@ -150,8 +155,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pielāgot galveno vāka foto' is not an accurate translation of 'Customize cover'. While 'pielāgot' correctly translates to 'customize', 'galveno vāka foto' translates to 'main cover photo' and is too specific. 'Customize cover' refers to the ability to change the cover image in general, not necessarily replacing a main one.",
-          "suggestion": "Pielāgojumus vākam"
+          "description": "The translation \"Pielāgot galveno vāka foto\" is not a direct or accurate translation of \"Customize cover\".  'Galveno vāka foto' translates to 'main cover photo', but 'Customize cover' is more general and implies options beyond just a photo.",
+          "suggestion": "Pielāgojumies vākam"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'foto' is potentially redundant. 'Vākam' alone might be sufficient.",
+          "suggestion": "Pielāgo vākam"
         }
       ],
       "approved_at": null
@@ -186,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Particularizare copertă' doesn't accurately convey the meaning of 'Customize cover'. 'Particularizare' implies making something specific or detailing it, which isn't the core concept of customization. It’s more about creating a personalized cover.",
-          "suggestion": "A better translation would be something like 'Personalizează coperta' or 'Creează copertă personalizată'."
+          "description": "The Romanian translation \"Particularizare copertă\" doesn't accurately convey the meaning of \"Customize cover.\" \"Particularizare\" implies a detailed specification or individualization, which isn't necessarily the intended meaning. \"Customize\" typically refers to the ability to personalize or modify something.",
+          "suggestion": "A more accurate translation would be something like \"Personalizează coperta\" or \"Modifică coperta\"."
         }
       ],
       "approved_at": null
@@ -204,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'මුද්‍රණීය පිටුව සකසන්න' (mudraniyapituwa sakasanna) translates to 'Print page customize' or 'Printable page customize', which doesn't accurately convey the meaning of 'Customize cover'. It implies customizing a printable page, not a cover image.",
-          "suggestion": "A more accurate translation would be something like 'වන්දනීය කළඹ සැකසීම' (wandaniy kalamba sakesima) - 'Customize cover image' or 'කවරය සකසන්න' (kavaraya sakasanna) - 'Customize cover'."
+          "description": "The translation 'මුද්‍රණීය පිටුව සකසන්න' (mudraniyā pitū saksananna) translates to 'Print page customize' or 'Design a printable page'. It doesn't accurately convey the meaning of 'Customize cover'. A more appropriate translation would focus on personalization or customization of the cover.",
+          "suggestion": "තැවරැත්තුවක් සැකසීම (tawarattuwak sākesim) - Customize cover / වෙනස් කිරීම (venaskrim) - Modification/Changing the cover."
         }
       ],
       "approved_at": null
@@ -216,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Prispôsobiť' means 'to customize', 'kryt' directly translates to 'cover' as in a protective cover. 'Prispôsobiť kryt' is a literal translation but doesn't convey the meaning of customizing a cover image in a user interface. A more natural Slovak translation would focus on personalization or design.",
-          "suggestion": "Personalizovať obal"
+          "description": "While \"Prispôsobiť\" means 'to customize', \"kryt\" translates to 'cover' or 'case'. A more natural Slovak translation for 'Customize cover' in this context (likely referring to a cover image) would be something like 'Vlastná obálka' or 'Upraviť obálku'.",
+          "suggestion": "Vlastná obálka"
         }
       ],
       "approved_at": null
@@ -234,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Прилагоди насловницу\" is a technically correct translation but lacks the nuance of 'Customize'. 'Прилагоди' implies 'adjust' or 'modify', while 'Customize' suggests a broader range of personalization options. A more accurate translation would convey the sense of full customization.",
-          "suggestion": "Модификуј насловницу"
+          "description": "The Serbian translation \"Прилагоди насловницу\" while technically correct, doesn't quite capture the nuance of 'Customize cover'. A more natural and accurate translation would be something like \"Прилагоди поклопце\" or \"Персонализуј поклопце\". 'Насловница' generally refers to the front page of a book or magazine, not a general cover image.",
+          "suggestion": "Прилагоди поклопце"
         }
       ],
       "approved_at": null
@@ -246,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Prilagodi naslovnicu' is understandable, a more natural and accurate translation of 'Customize cover' would be 'Kreiraj sopstvenu naslovnicu' or 'Personalizuj naslovnicu'. 'Prilagodi' implies adjusting something that already exists, whereas 'customize' often means creating something new or making significant changes.",
-          "suggestion": "Kreiraj sopstvenu naslovnicu"
+          "description": "The translation 'Prilagodi naslovnicu' while conveying a similar concept, doesn't perfectly capture the nuance of 'Customize cover'. 'Customize' implies a higher degree of personalization and control than 'prilagoditi' suggests.  A more accurate translation might be 'Personalizuj naslovnicu' or 'Dizajniraj naslovnicu'.",
+          "suggestion": "Personalizuj naslovnicu"
         }
       ],
       "approved_at": null
@@ -270,8 +280,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tùy chỉnh mặt ngoài' doesn't accurately convey the meaning of 'Customize cover'. 'Mặt ngoài' translates to 'outside' or 'exterior', which isn't the intended meaning of 'cover' in this context. It refers to a cover image or template.",
-          "suggestion": "Tùy chỉnh ảnh bìa"
+          "description": "The translation \"Tùy chỉnh mặt ngoài\" doesn't fully capture the meaning of \"Customize cover\". 'Mặt ngoài' (outer surface) is too literal and may not be the intended meaning. A better translation would convey the idea of personalization or unique cover design.",
+          "suggestion": "Tùy chỉnh giao diện / Tùy chỉnh hình nền / Thiết kế riêng"
         }
       ],
       "approved_at": null

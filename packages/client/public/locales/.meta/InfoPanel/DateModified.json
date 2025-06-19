@@ -3,7 +3,7 @@
   "content": "Date modified",
   "content_en_sha1_hash": "dcef8297cd84445acb4ad6b84e674163d3d9765e",
   "created_at": "2025-05-19T21:30:54.770Z",
-  "updated_at": "2025-05-28T09:30:02.410Z",
+  "updated_at": "2025-05-26T07:57:32.404Z",
   "comment": {
     "text": "This translation key is used to display the label \"Date modified\" in a file's properties section. It appears on the /packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.js page and should be translated to provide consistency across different languages.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Կերպափոխման ամսաթիվ\" is a literal translation of \"Date modified\" but it might sound awkward or unnatural in Armenian. A more natural translation might be something like \"Փոփոխության ամսաթիվ\" or \"Վերջին փոփոխության ամսաթիվ\".",
+          "suggestion": "Consider using \"Փոփոխության ամսաթիվ\" or \"Վերջին փոփոխության ամսաթիվ\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"データが変更されました\" (Data ga henkashimareta) literally translates to \"Data has been changed.\" While conveying a similar meaning to \"Date modified,\" it's not a direct or natural translation. A more accurate and commonly used translation would be something like \"最終更新日\" (Saishuu koushin bi) - \"Last updated date\" or \"更新日\" (Koushin bi) - \"Update date\".",
-          "suggestion": "更新日 (Koushin bi) or 最終更新日 (Saishuu koushin bi)"
+          "description": "The translation \"データが変更されました\" (Data ga henkou saremashita) literally translates to \"Data has been changed.\" While conveying a similar meaning to \"Date modified,\" it's not a direct or ideal translation for a UI element like 'Date modified'. It lacks the specific reference to the 'date'.",
+          "suggestion": "データ更新日 (Data update date)"
         }
       ],
       "approved_at": null
@@ -156,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Dată modificare' is not an accurate translation of 'Date modified'. It's a literal combination of 'Date' and 'modification'. A more accurate and natural translation would be 'Data ultimei modificări' or 'Ultima modificare'.",
+          "description": "The Romanian translation \"Dată modificare\" is not the correct translation of \"Date modified\". It's a literal translation that doesn't convey the intended meaning. The correct translation should be something like \"Data ultimei modificări\" or \"Ultima modificare\".",
           "suggestion": "Data ultimei modificări"
         }
       ],
@@ -183,7 +189,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Datum spremenjen' while literally meaning 'Date changed', doesn't accurately convey the meaning of 'Date modified' in the context of a user interface element.  A more appropriate translation would reflect the date of last modification.",
+          "suggestion": "Datum zadnje spremembe"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -192,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Датум измене\" is not an accurate translation of \"Date modified\". It translates more closely to 'Date change' or 'Date alteration'.",
-          "suggestion": "Прави датум измене"
+          "description": "The Serbian (Cyrillic) translation 'Датум измене' is not an accurate translation of 'Date modified'. It translates more literally to 'Date change', which doesn't convey the meaning of when a document or file was last changed.",
+          "suggestion": "The correct translation should be 'Последњи пут измењено' (Poslednji put izmenjeno) or 'Датум последње измене' (Datum poslednje izmene)."
         }
       ],
       "approved_at": null
@@ -216,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Дата змінення' is not the most natural or accurate translation of 'Date modified'. 'Змінення' refers to the act of changing, not the date of the change. A more accurate translation would be 'Дата зміни'.",
+          "description": "The Ukrainian translation 'Дата змінення' is not the most natural or accurate translation of 'Date modified'. While technically correct, it sounds somewhat awkward. A more common and idiomatic translation would be 'Дата зміни'.",
           "suggestion": "Дата зміни"
         }
       ],

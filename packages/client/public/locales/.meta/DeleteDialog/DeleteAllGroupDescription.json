@@ -3,7 +3,7 @@
   "content": "The selected groups will be deleted. Users in the groups will not be removed from {{productName}}. Are you sure you want to continue?",
   "content_en_sha1_hash": "43a6c854bb42f03891dff31046f1958d09345f95",
   "created_at": "2025-05-19T21:30:56.686Z",
-  "updated_at": "2025-05-28T09:30:02.257Z",
+  "updated_at": "2025-05-26T07:57:32.293Z",
   "comment": {
     "text": "This translation key is used to display a message when deleting groups, informing users that their groups will be deleted but not themselves. The message appears in a dialog box. Translators should focus on conveying a clear warning of the consequences of deletion.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Վստա՞հ' is potentially misspelled. It seems like an attempt to create a question, but the correct form would be 'վստահ եք'.",
+          "suggestion": "վստահ եք"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"続けてよろしいですか？\" (Tsudzuke yo roshi desu ka?) is a very formal and somewhat unnatural way to ask \"Are you sure you want to continue?\" in this context. It can sound overly polite or even slightly awkward. A more natural and conversational equivalent would be something like \"よろしいですか？\" (Yoroshii desu ka?) or \"それでよろしいですか？\" (Sore de yoroshii desu ka?).",
+          "suggestion": "よろしいですか？"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +117,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຖືກ' appears multiple times and might be redundant. While grammatically correct, it can sound awkward in Lao.",
+          "suggestion": "Consider rephrasing to reduce redundancy. For example, replacing one or more instances of 'ຖືກ' with a more concise phrasing."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'ດໍາເນີນຕໍ່' is somewhat formal and could be improved for a more conversational tone in this context. It translates literally as 'continue to proceed'.",
+          "suggestion": "Consider a more natural phrasing like 'ຕ້ອງການດົນື່ງບໍ?' (Do you want to do this?) or 'ຕ້ອງການຈະເຮັດຕໍ່ບໍ?' (Do you want to continue doing this?)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +140,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Are you sure you want to continue?' is translated as 'Weet u zeker dat u door wilt gaan?'. While understandable, a more natural and common phrasing in Dutch would be 'Bent u zeker dat u verder wilt gaan?' or 'Bent u zeker dat u hiermee door wilt gaan?'.",
+          "suggestion": "Bent u zeker dat u verder wilt gaan?"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +170,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Utilizatorii care fac parte din grupurile' is grammatically awkward. It could be more concisely phrased.",
+          "suggestion": "Utilizatorii din grupurile selectate"
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'Sigur doriţi' is slightly formal for a confirmation dialog.  A more common and conversational phrasing would be better.",
+          "suggestion": "Doriți să continuați?"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +193,30 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඉවත්' is repeated excessively. While grammatically correct, it can be improved for readability.",
+          "suggestion": "තෝරාගත් සමූහ ඉවත් කරනු ලැබේ. එම සමූහවල සිටින පරිශීලකයින් {{productName}} වෙතින් නොමැකෙනු ලැබේ. ඔබට ඉදිරියට යාමට අවශ්‍යද?"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'removed from' is best translated with a more accurate equivalent in Sinhala. 'ඉවත් කරනු නොලැබේ' is technically correct, but 'මැකෙනු ලැබේ' (mekenuweva) or 'දහස්වන' (dahasvane) conveys the idea of not being deleted more precisely.",
+          "suggestion": "තෝරාගත් සමූහ ඉවත් කරනු ලැබේ. එම සමූහවල සිටින පරිශීලකයින් {{productName}} වෙතින් නොමැකෙනු ලැබේ. ඔබට ඉදිරියට යාමට අවශ්‍යද?"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'removed from' is not ideal. 'Odstránení' implies a more forceful or complete removal than 'not removed'. A better translation might focus on the continued existence of users in the system.",
+          "suggestion": "Vybrané skupiny budú vymazané. Používatelia v skupinách zostanú v {{productName}}. Ste si istí, že chcete pokračovať?"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,7 +228,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Одабране групе' should be 'Одабране групе'. The adjective 'одабране' needs to agree in number with the noun 'групе'.",
+          "suggestion": "Одабране групе ће бити обрисане."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'са {{productName}}-а' is grammatically awkward. The preposition 'са' isn't quite right in this context. It should be 'из {{productName}}'.",
+          "suggestion": "из {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +257,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'простору {{productName}}' translates to 'space {{productName}}' which is not accurate in this context. It implies a physical space rather than the platform or system where {{productName}} exists. It should convey that users will not be removed *from* the platform.",
+          "suggestion": "Вибрані групи буде видалено. Користувачів у цих групах не буде видалено з {{productName}}. Ви впевнені, що бажаєте продовжити?"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

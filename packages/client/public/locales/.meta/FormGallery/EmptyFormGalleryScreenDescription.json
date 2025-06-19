@@ -3,7 +3,7 @@
   "content": "No results matching your query could be found",
   "content_en_sha1_hash": "f27a9198370e140fb0316570951bd21c251e8d8d",
   "created_at": "2025-05-19T21:30:55.113Z",
-  "updated_at": "2025-05-28T09:30:02.405Z",
+  "updated_at": "2025-05-26T07:57:32.399Z",
   "comment": {
     "text": "This translation key is used for the \"EmptyFormGalleryScreenDescription\" text, which appears on an empty form gallery screen as a message when no results match the user's query. It is likely displayed in a dialog or card component, indicating that no data was found. Translators should provide a concise and descriptive phrase to convey this message in other languages.",
     "is_auto": true,
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aucun résultat correspondant à votre requête n'a pu être trouvé' is overly formal and complex for this context. A more natural and user-friendly translation would be preferred.",
-          "suggestion": "Aucun résultat trouvé correspondant à votre recherche"
+          "description": "The translation is overly formal and doesn't quite capture the naturalness of the English phrase 'No results matching your query could be found'. While technically correct, it's less user-friendly.",
+          "suggestion": "Aucun résultat ne correspond à votre recherche."
         }
       ],
       "approved_at": null
@@ -113,9 +113,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບໍ່ພົບຜົນການຊອກຫາທີ່ກົງກັບຄຳຊອກຫາຂອງເຈົ້າ' is a literal translation and sounds somewhat unnatural in Lao. A more natural phrasing would be closer to 'ບໍ່ພົບຜົນການຄົ້ນຫາຕາມຂໍ້ຄວາມທີ່ເຈົ້າຊອກຫາ' or 'ບໍ່ພົບຜົນຕາມການຄົ້ນຫາຂອງທ່ານ'.",
-          "suggestion": "ບໍ່ພົບຜົນຕາມການຄົ້ນຫາຂອງທ່ານ"
+          "type": "spelling",
+          "description": "The word 'ເຈົ້າ' (jâo) should be 'ທ່ານ' (thān) for more formal and appropriate tone in this context. 'ເຈົ້າ' is more casual and might not be suitable for a formal application interface.",
+          "suggestion": "ບໍ່ພົບຜົນການຊອກຫາທີ່ກົງກັບຄຳຊອກຫາຂອງທ່ານ"
         }
       ],
       "approved_at": null
@@ -156,8 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nu a putut fi găsit niciun rezultat care să corespundă interogării dvs' is a literal translation and sounds overly formal and awkward in Romanian. A more natural and user-friendly translation would be preferred.",
-          "suggestion": "Niciun rezultat nu a fost găsit pentru căutarea ta."
+          "description": "The translation is overly formal and doesn't quite capture the natural tone of the English phrase. 'Interogării dvs' is quite formal for a user-facing message.",
+          "suggestion": "Nu am găsit niciun rezultat care să corespundă căutării tale."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'a putut fi găsit' is a bit awkward. A more natural phrasing would be better.",
+          "suggestion": "Nu am găsit niciun rezultat..."
         }
       ],
       "approved_at": null
@@ -174,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබගේ විමසුමට කිසිවක් නොගැළපේ' is a literal translation and while understandable, it lacks the natural flow of a user-facing message. A more appropriate translation would convey the same meaning in a more user-friendly way.",
-          "suggestion": "තවදුරටත් සොයා බලන්න."
+          "description": "The translation 'ඔබගේ විමසුමට කිසිවක් නොගැළපේ' while understandable, is a somewhat literal translation and doesn't flow as naturally as it could in Sinhala for this context. It translates directly to 'Nothing matches your query'.",
+          "suggestion": "A more natural translation could be 'අවශ්‍යතම ප්‍රතිඵලයක් නොදනී' (Avashyathama pratiphalam nanidee) which means 'No results were found' or 'No matching results were found'."
         }
       ],
       "approved_at": null
@@ -195,13 +200,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'одговарају' is spelled correctly but could be improved for natural flow. While technically correct, it's a bit formal in this context.",
-          "suggestion": "Нема резултата који одговара вашем упиту."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -231,7 +230,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"没有找到匹配查询的结果\" is technically correct but sounds slightly formal and unnatural in common usage. A more natural phrasing would be more conversational.",
+          "suggestion": "没有找到符合您搜索的结果"
+        }
+      ],
       "approved_at": null
     }
   }

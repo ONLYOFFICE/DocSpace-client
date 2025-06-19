@@ -3,7 +3,7 @@
   "content": "Custom filter",
   "content_en_sha1_hash": "389c48e9de9a170c1fc6fcbbcade4710c271dddb",
   "created_at": "2025-05-19T21:30:44.271Z",
-  "updated_at": "2025-05-28T09:30:02.950Z",
+  "updated_at": "2025-06-02T10:20:51.579Z",
   "comment": {
     "text": "This translation key is used to display the label \"Custom filter\" on a custom filter icon, likely in a settings or configuration area of the application. It appears in a UI component that allows users to customize file permissions, specifically when selecting a share access right. The translated text will replace \"Common:CustomFilter\".",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 102,
+      "line_number": 101,
       "context": "icon: AccessEditReactSvgUrl,\n },\n available.CustomFilter && {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n available.Review && {\n access: ShareAccessRights.Review,\n key: \"review\",",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 102,
+      "line_number": 101,
       "context": "icon: AccessEditReactSvgUrl,\n },\n available.CustomFilter && {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",\n label: t(\"Common:CustomFilter\"),\n icon: CustomFilterReactSvgUrl,\n },\n available.Review && {\n access: ShareAccessRights.Review,\n key: \"review\",",
       "module": "/packages/shared"
     }
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Հարմարեցրած զտիչ\" is a possible translation, \"Custom filter\" often implies a filter that is specifically configured or created by the user. \"Հարմարեցրած\" leans more towards \"adapted\" or \"modified\". A more accurate translation might be \"Ցանկացած զտիչ\" (Tsankats’ Ztitich) or \"Սեփական զտիչ\" (Sepakan Ztitich) depending on the specific nuance desired.",
-          "suggestion": "Consider \"Ցանկացած զտիչ\" (Tsankats’ Ztitich) or \"Սեփական զտիչ\" (Sepakan Ztitich)."
+          "description": "While \"Հարմարեցրած զտիչ\" is a literal translation, \"Custom filter\" often implies a filter that is user-defined or specifically tailored. A more accurate translation might emphasize this aspect. \"Ցանկացած զտիչ\" or \"Սեփական զտիչ\" could be considered.",
+          "suggestion": "Consider \"Ցանկացած զտիչ\" or \"Սեփական զտիչ\" to better convey the meaning of 'Custom filter'."
         }
       ],
       "approved_at": null
@@ -117,7 +117,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ຕົວກຣອງ' (tuak rong) is a transliteration of 'filter' but might sound awkward. A more natural Lao equivalent could be considered depending on the context.",
+          "suggestion": "Consider alternatives like 'ຕົວປັ່ນອງ' (tua panong) or 'ການກັ່ນຕອງທີ່ກຳນົດ' (gaan kan tong thee kamnot) depending on the desired nuance."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure 'ຕົວກຣອງທີ່ກຳນົດເອງ' is a literal translation. It's worth considering if a more idiomatic Lao expression would sound more natural.",
+          "suggestion": "Re-evaluate the sentence structure for a more fluid Lao phrasing. Perhaps combining the meaning into a single phrase if possible."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -167,14 +178,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Sinhala word 'අභිරුචි' (abiruchi) while generally meaning 'custom' or 'personalized', can sometimes imply a negative connotation like 'unpleasant taste' or 'disagreeable'. In the context of a filter, 'අභිරුචි' might be misinterpreted. A more direct translation for 'custom' in this context would be 'ප්‍රවේණි' (praveṇi).",
-          "suggestion": "Consider using 'ප්‍රවේණි' (praveṇi) instead of 'අභිරුචි' (abiruchi) for a more accurate and neutral translation."
-        },
-        {
-          "type": "translation",
-          "description": "While 'පෙරහන' (perahana) correctly translates to 'filter', combining it with 'අභිරුචි' (abiruchi) might create a slightly unnatural phrasing. Considering the overall context of what the custom filter *does* could influence better word choice. ",
-          "suggestion": "Evaluate if 'ප්‍රවේණි පෙරහන' (praveṇi perahana) might be a better option to more accurately convey 'custom filter'."
+          "type": "incorrect_translation",
+          "description": "While 'අභිරුචි පෙරහන' is a possible translation of 'Custom filter,' it's not the most natural or commonly used phrasing in Sinhala. 'අභිරුචි' means 'customary' or 'favorite,' which while related, doesn't perfectly capture the meaning of a filter that is personalized or tailored.",
+          "suggestion": "Consider alternatives like 'පෙරහන් කිරීම' (perahan karam - filtering) or 'අපේක්ෂිත පෙරහන' (apekshitha perahana - desired filter), or a more descriptive phrase depending on the specific context."
         }
       ],
       "approved_at": null
@@ -197,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'филтер' is a transliteration and not a fully Serbian word. The correct Serbian word for 'filter' is 'филтар'.",
-          "suggestion": "Прилагођени филтар"
+          "description": "The Serbian (Cyrillic) translation 'Прилагођени филтер' contains a spelling error. The correct spelling of 'filter' is 'филтер'.",
+          "suggestion": "Прилагођени филтер -> Прилагођени филтер"
         }
       ],
       "approved_at": null

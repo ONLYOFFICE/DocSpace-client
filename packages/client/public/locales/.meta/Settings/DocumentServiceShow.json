@@ -3,7 +3,7 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2025-05-19T21:30:51.426Z",
-  "updated_at": "2025-05-28T09:30:02.628Z",
+  "updated_at": "2025-05-26T07:57:32.689Z",
   "comment": {
     "text": "This translation key is used to display a label for a toggle button that controls whether advanced document service settings are shown or hidden. It appears as part of a UI element and changes its text based on the current state of the setting. The translator should focus on creating a clear, concise label that accurately reflects the purpose of this setting in the PortalSettings page.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Göstərin' is the imperative form (command) of 'show'. The English 'Show' in this context (Settings:DocumentServiceShow) likely refers to a toggle or checkbox, indicating whether to display something. The appropriate translation should reflect this meaning.",
-          "suggestion": "Consider translations like 'Aç' (Open), 'Qoş' (Enable), or 'Kəs' (Disable) depending on the exact functionality being described."
+          "description": "The translation 'Göstərin' is the imperative form (command form) of 'show'. 'Show' in this context, likely refers to a display setting or option. A more appropriate translation would be something like 'Göster' (show) or 'Rəylə' (display) or 'Aç' (open).",
+          "suggestion": "Göster"
         }
       ],
       "approved_at": null
@@ -63,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Εμφάνιση\" is a valid Greek word, it translates more closely to \"Display\" or \"Appearance\" rather than the English \"Show\". \"Εμφάνιση\" implies something being visible or presented, while \"Show\" is more about actively presenting or displaying something. A more appropriate translation might depend on the specific context of 'Settings:DocumentServiceShow'.",
-          "suggestion": "Consider alternatives like 'Εμφάνιση' (Display), 'Παρουσίαση' (Presentation), or 'Επίδειξη' (Demonstration) depending on the intended meaning within the application's settings."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -114,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '표시' is a valid Korean word, 'Show' in this context (likely referring to a setting to display something) is better translated as '보기' (bogi) or '표현' (pyeoryeon). '표시' leans more towards indicating or marking.",
+          "description": "While '표시' (pyo-si) can mean 'show' or 'display', in the context of a setting label ('Settings:DocumentServiceShow'), a more natural and commonly used translation would be '보기' (bo-gi) or '활성화' (hwa-seong-hwa). '표시' is more suitable for showing a specific element on a screen, not activating a service.",
           "suggestion": "보기"
         }
       ],
@@ -159,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Afișare\" is a valid Romanian word, it might not be the most natural or user-friendly translation for \"Show\" in the context of a setting. It can sound a bit technical. A more common and easily understood translation might be \"Vizualizare\" or \"Vizibilitate\".",
-          "suggestion": "Consider using \"Vizualizare\" or \"Vizibilitate\" as alternatives."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -198,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Прикажи\" can mean \"Show\", it's more accurately translated as \"Command\" or \"Order\". \"Show\" in this context likely refers to displaying something, and a more appropriate Serbian (Cyrillic) translation would be \"Покажи\".",
+          "description": "The Serbian (Cyrillic) translation \"Прикажи\" while meaning 'Show', doesn't perfectly align with the context of a setting, which often implies a toggle or visibility setting. A more suitable translation might be \"Покажи\" or \"Види\" depending on the desired nuance.",
           "suggestion": "Покажи"
         }
       ],

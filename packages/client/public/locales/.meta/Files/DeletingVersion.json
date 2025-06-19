@@ -3,7 +3,7 @@
   "content": "Deleting version",
   "content_en_sha1_hash": "aa0427f60fdd32d4031d491119092209bdd1002c",
   "created_at": "2025-05-19T21:30:55.451Z",
-  "updated_at": "2025-06-03T20:59:41.996Z",
+  "updated_at": "2025-05-26T07:57:32.396Z",
   "comment": {
     "text": "This translation key is used for the label \"Deleting version\" which appears in a file system management interface, likely on a delete or remove button. Its purpose is to provide a clear indication of the action being performed when deleting a file version.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation 'Версия на изтриване' literally translates to 'Version of deleting'. It doesn't convey the meaning of 'Deleting version' accurately. A more appropriate translation would reflect the action of deleting a version, implying it's in the process or being deleted.",
+          "suggestion": "Версия за изтриване"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Γίνεται διαγραφή έκδοσης\" (Ginetai diagrafh ekdosis) translates to \"Version is being deleted\". While technically correct, it's more literal than the English \"Deleting version\". A more natural translation would convey the action directly.",
+          "suggestion": "Consider a more direct translation such as \"Διαγραφή έκδοσης\" (Diagrafi ekdosis) - \"Version deletion\" or \"Διαγράφοντας έκδοση\" (Diagrafontas ekdosis) - \"Deleting version\"."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -93,13 +105,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"バージョンの削除中\" literally translates to \"Deleting version in progress\". While understandable, it's more natural to use a more concise and common phrasing for a UI label.",
+          "suggestion": "バージョンの削除"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '버전 삭제 중' literally translates to 'Deleting version in progress'. While not entirely wrong, it implies an ongoing process. 'Deleting version' is a more direct and accurate translation, suitable for a label or a state.",
+          "suggestion": "버전 삭제"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"වෙළුම මකවන ලද්දකි\" (veluma makavana laddaki) is a passive construction that implies the version *was* deleted.  The English \"Deleting version\" describes the action of deleting. A more accurate translation reflecting the active sense would be something like \"වෙළුමක් මකමින්\" (velumak makamin) or \"වෙළුම මකන\" (veluma makana).",
+          "suggestion": "වෙළුම මකන (veluma makana) or වෙළුමක් මකමින් (velumak makamin)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

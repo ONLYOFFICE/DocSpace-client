@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useContext } from "react";
+import { use } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -50,7 +50,7 @@ import {
 } from "../../../skeletons/selector";
 
 import { FilesSelectorProps } from "../FilesSelector.types";
-import { LoadersContext } from "../contexts/Loaders";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
 type PickedSearchProps = Pick<
   TSelectorSearch,
@@ -134,7 +134,7 @@ const useSelectorBody = ({
   const { t } = useTranslation(["Common"]);
 
   const { showBreadCrumbsLoader, isNextPageLoading, showLoader } =
-    useContext(LoadersContext);
+    use(LoadersContext);
 
   const headerSelectorProps: TSelectorHeader = withHeader
     ? {

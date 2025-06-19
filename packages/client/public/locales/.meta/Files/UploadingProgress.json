@@ -3,7 +3,7 @@
   "content": "Uploading: {{progress}}%",
   "content_en_sha1_hash": "62a096b1f2d9276190d5ee373a3fd25a88fc4180",
   "created_at": "2025-05-19T21:30:56.294Z",
-  "updated_at": "2025-06-03T20:59:41.995Z",
+  "updated_at": "2025-05-26T07:57:32.396Z",
   "comment": {
     "text": "UploadingProgress is used to display a progress update when uploading a file. It appears on the client's upload interface and shows the current percentage of the upload process. Translators should focus on phrases that convey the idea of progress or completion during an upload action.",
     "is_auto": true,
@@ -51,25 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The German translation uses a colon (:) instead of a space after 'Hochladen'. While acceptable, a space is more common and visually clearer in this context.",
-          "suggestion": "Hochladen: {{progress}} %"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Γίνεται μεταφόρτωση: {{progress}}%' is a literal translation but not the most natural way to express 'Uploading' in Greek. A more idiomatic translation would be 'Ανέβασμα: {{progress}}%' or 'Μεταφόρτωση: {{progress}}%'.",
-          "suggestion": "Ανέβασμα: {{progress}}%"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -183,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Отпремање' is a valid word for 'Uploading', but it might be perceived as slightly more formal or less common in all contexts. 'Упоређивање' or 'Качи' could be considered alternatives depending on the application's tone.",
-          "suggestion": "Consider 'Упоређивање : {{progress}}%' or 'Качи : {{progress}}%.' for a potentially more colloquial or adaptable translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -204,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The placement of the percentage sign (%) is incorrect. In Turkish, the percentage sign usually follows the value. The original English uses {{progress}} in the middle, which is replicated in the Turkish translation.",
-          "suggestion": "Yükleniyor: %{{progress}}"
+          "description": "The placement of the percentage sign (%) is incorrect. In Turkish, it should precede the value within the string. The original English has the percentage sign after the variable, while the Turkish translation puts it before.",
+          "suggestion": "Yükleniyor: {{progress}}%"
         }
       ],
       "approved_at": null

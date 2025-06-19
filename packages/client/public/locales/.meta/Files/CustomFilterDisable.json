@@ -3,7 +3,7 @@
   "content": "Disable Custom filter",
   "content_en_sha1_hash": "598157d6d4873c7b214960264722b2388f27f0ee",
   "created_at": "2025-05-19T21:30:55.390Z",
-  "updated_at": "2025-06-03T20:59:42.295Z",
+  "updated_at": "2025-06-08T12:02:32.846Z",
   "comment": {
     "text": "The translation key \"CustomFilterDisable\" is used to display the label for a button or option that disables custom filtering. This text appears in UI components where the user can toggle custom filtering on/off, and its purpose is to provide a clear indication of what action the button will perform when clicked.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2019,
+      "line_number": 2022,
       "context": "},\n {\n id: \"option_custom-filter\",\n key: \"custom-filter\",\n label: item.customFilterEnabled\n ? t(\"Files:CustomFilterDisable\")\n : t(\"Files:CustomFilterEnable\"),\n icon: CustomFilterReactSvgUrl,\n onClick: () => this.onSetUpCustomFilter(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     }
@@ -33,19 +33,37 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Şablonu silin' translates to 'Delete Template,' which does not accurately reflect the English content 'Disable Custom filter'. The intended meaning of disabling a custom filter is not conveyed.",
+          "suggestion": "A more accurate translation might be something like 'Xüsusi filtri deaktiv et' (Disable Custom filter) or 'Xüsusi filtrin söndür' (Turn off Custom filter)."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation \"Изтрий шаблон\" translates to \"Delete template\", which is not equivalent to \"Disable Custom filter\". The translation does not accurately convey the original meaning.",
+          "suggestion": "A more accurate translation would be something like \"Деактивирай потребителски филтър\" or \"Изключи потребителски филтър\"."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation \"Odstranění šablony\" translates to \"Template Removal\" which doesn't accurately convey the meaning of \"Disable Custom filter\". It implies deleting the filter, not just disabling it.",
+          "suggestion": "Zrušení vlastního filtru"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Διαγραφή προτύπου' translates to 'Delete template', which doesn't accurately convey the meaning of 'Disable Custom filter'. It implies deletion rather than disabling.",
+          "suggestion": "Απενεργοποίηση προσαρμοσμένου φίλτρου"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +93,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Poista malli' does not accurately convey the meaning of 'Disable Custom filter'. 'Poista malli' translates to 'Remove template' or 'Delete template', which is not the same as disabling a filter.",
+          "suggestion": "A more accurate translation would be something like 'Poista mukautettu suodatin' (Disable custom filter) or 'Kytke mukautettu suodatin pois päältä' (Turn off custom filter)."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Անջատել Հատուկ ֆիլտրը\" is a literal translation of \"Disable Custom filter\". While grammatically correct, a more natural and idiomatic Armenian phrasing might be preferable depending on the context. \"Անջատել հատուկ ֆիլտրի գործարկումը\" (Disable the launch of the custom filter) could be more appropriate in some cases.",
+          "suggestion": "Consider a more idiomatic translation like \"Անջատել հատուկ ֆիլտրի գործարկումը\" or explore other phrasing options that align better with the user interface's tone."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,31 +141,61 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ປິດການນໍາໃຊ້ຕົວປ່ຽນແກ້ແບບປັບແກ້ຕາມຄວາມຕ້ອງການ' is overly literal and verbose for \"Disable Custom filter\". It could be simplified for better readability in a user interface.  'ປິດຕົວປ່ຽນແກ້ແບບกำหนดเอง' would be more concise and natural.",
+          "suggestion": "ປິດຕົວປ່ຽນແກ້ແບບกำหนดเอง"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Dzēst veidni\" translates to \"Delete template\" which doesn't accurately reflect the English \"Disable Custom filter\". The English phrase indicates preventing a filter from being used, not deleting it.",
+          "suggestion": "At least one possibility would be \"Izslēgt pielāgotu filtru\" (Disable custom filter)."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation \"Verwijder sjabloon\" translates to \"Remove template\", which doesn't accurately reflect the English \"Disable Custom filter\". \"Disable\" implies preventing a function from operating, while \"Remove\" suggests deletion.",
+          "suggestion": "A more accurate translation would be something like \"Schakel aanpassingsfilter uit\" or \"Pasfilter uitschakelen\"."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation \"Usuń szablon\" translates to \"Remove template\" which is not an accurate representation of \"Disable Custom filter\". \"Disable\" implies stopping a function, while \"Remove\" implies deletion. A more accurate translation would reflect the disabling action.",
+          "suggestion": "Wyłącz filtr niestandardowy"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Elimine o template\" does not accurately convey the meaning of \"Disable Custom filter\". 'Elimine' means 'delete' or 'eliminate', while 'Disable' means to turn off or deactivate. The Portuguese should convey deactivation rather than deletion.",
+          "suggestion": "Desative o filtro personalizado"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +207,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dezactivare Filtru particularizat' is a literal translation but sounds unnatural in Romanian. 'Dezactivare' is correct, but 'Filtru particularizat' can be improved.",
+          "suggestion": "Disable Custom filter -> 'Dezactivarea filtrelor personalizate' or 'Oprirea filtrelor personalizate'"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +225,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'අක්‍රීය' is often written as 'අක්රිය'. While both are technically correct, 'අක්‍රිය' is more commonly used in this context and provides a slightly more natural flow.",
+          "suggestion": "අක්‍රිය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation \"Odstrániť šablónu\" translates to \"Remove template\" which doesn't accurately convey the meaning of \"Disable Custom filter\". \"Disable\" implies stopping a feature, while \"remove\" implies deleting it.",
+          "suggestion": "Vypnúť vlastný filter"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,7 +261,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Onemogućite prilagođeni filter\" is understandable, a more natural and accurate translation of \"Disable Custom filter\" would be \"Isključite prilagođeni filter\". 'Onemogućite' carries a connotation of preventing something from functioning, whereas 'Isključite' is more commonly used for disabling a feature or filter.",
+          "suggestion": "Isključite prilagođeni filter"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

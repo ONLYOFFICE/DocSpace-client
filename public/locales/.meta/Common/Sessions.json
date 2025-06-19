@@ -3,7 +3,7 @@
   "content": "Sessions",
   "content_en_sha1_hash": "e11e37a9253b34ff1c7224447e143fabca1be9fd",
   "created_at": "2025-05-19T21:30:48.560Z",
-  "updated_at": "2025-05-28T09:30:02.815Z",
+  "updated_at": "2025-05-26T07:57:32.800Z",
   "comment": {
     "text": "This translation key is used for the title of a table header in a user profile page, displaying \"Sessions\" to the user. It should be translated as \"Sessions\" to match the English content, and will appear on a component within the \"/packages/client/src/pages/Profile\" section of the UI.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Relace\" doesn't accurately convey the meaning of \"Sessions\". \"Relace\" generally translates to 'relationships' or 'connections', which is different from the context of user sessions (e.g., login sessions).",
-          "suggestion": "Consider translations like \"Sezení\" (more literal translation, referring to instances or meetings) or \"Zasedání\" (similar to meetings, but potentially more formal) or possibly re-contextualize if \"Relace\" is genuinely appropriate within the wider application."
+          "description": "The Czech translation \"Relace\" while technically meaning 'relations' or 'relationships', isn't the most accurate translation for \"Sessions\" in this context. \"Sezení\" would be a more appropriate translation for 'Sessions,' particularly if referring to meetings, appointments, or periods of time.",
+          "suggestion": "Sezení"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'වාර' is a valid Sinhala word, but it doesn't accurately translate 'Sessions' in the context of computer or system sessions. It generally means 'turns', 'shifts', or 'rounds'. A more appropriate translation would depend on the specific meaning of 'Sessions'.",
-          "suggestion": "Consider alternatives like 'එළිසiciones' (elisa-chana), 'සමුළු' (samulu), or 'කාලසීකරණය' (kaalaseekarana) depending on the intended meaning of 'Sessions'."
+          "description": "The Sinhala translation \"වාර\" (vaar) does not accurately convey the meaning of \"Sessions.\" \"Sessions\" typically refers to periods of time or meetings, whereas \"වාර\" generally means 'times,' 'days,' or 'periods,' but lacks the specific connotation of scheduled meetings or events.",
+          "suggestion": "Consider alternatives like \"සමුළු\" (samul) for meetings, \"සිදුරු\" (siduuru) for periods, or a more descriptive phrase depending on the context."
         }
       ],
       "approved_at": null

@@ -187,7 +187,7 @@ const InvitationSettings = ({
       });
       setShowReminder(false);
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error as TData);
     }
@@ -242,8 +242,9 @@ const InvitationSettings = ({
               lineHeight="20px"
               onClick={onChangeContacts}
             >
-              {t("InvitationSettingsContacts", {
+              {t("InviteViaContacts", {
                 productName: t("Common:ProductName"),
+                sectionName: t("Common:Contacts"),
               })}
             </Text>
           </div>
@@ -254,8 +255,9 @@ const InvitationSettings = ({
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            {t("InvitationSettingsContactsDescription", {
+            {t("ContactsInviteNote", {
               productName: t("Common:ProductName"),
+              sectionName: t("Common:Contacts"),
             })}
           </Text>
         </div>

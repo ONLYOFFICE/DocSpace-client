@@ -3,7 +3,7 @@
   "content": "This subsection allows you to provide users with secure and convenient ways to access the portal.",
   "content_en_sha1_hash": "0f3b230f6983fda1db2a358a7aa46ce3c5840a0f",
   "created_at": "2025-05-19T21:30:52.300Z",
-  "updated_at": "2025-06-18T07:34:15.186Z",
+  "updated_at": "2025-06-18T17:11:42.490Z",
   "comment": {
     "text": "This translation key is used for the subtitle displayed next to a button or similar element that allows users to access the secure portal. It provides a brief description of the functionality offered by this section, helping users understand its purpose in the portal settings page.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'secure and convenient ways' isn't perfectly captured. While 'آمنة ومريحة' (aminah wa murihah) translates to 'secure and comfortable/convenient,' it doesn't fully convey the intended nuance of 'convenient access.' A more accurate phrasing would emphasize ease of access.",
-          "suggestion": "هذا القسم الفرعي يسمح لك بتزويد المستخدمين بطرق آمنة وسهلة للوصول إلى البوابة."
-        },
-        {
-          "type": "formatting",
-          "description": "The Arabic translation uses a full stop (period) at the end of the sentence, which is grammatically correct but could be omitted depending on the overall style guide for the portal. Consider the consistency with other titles/descriptions.",
-          "suggestion": "هذا القسم الفرعي يسمح لك بتزويد المستخدمين بطرق آمنة ومريحة للوصول إلى البوابة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -80,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tässä aliosiossa voit tarjota käyttäjille turvallisia ja käteviä tapoja portaaliin pääsyyn' is a bit literal and less natural. While technically correct, it doesn't flow as smoothly in Finnish. A more idiomatic translation would be better.",
+          "suggestion": "Tässä osiossa voit tarjota käyttäjille turvallisia ja helppoja tapoja päästä portaaliin."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -95,13 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"provide users with\" is not accurately translated. \"Տրամադրել\" (tramadel) can imply a more formal or less direct provision than intended. A more natural phrasing would convey the idea of *offering* or *enabling* users.",
-          "suggestion": "Consider replacing \"տրամադրել\" with a more appropriate verb like \"ապահովել\" (apahovel - to ensure/provide) or rewording the sentence to better reflect 'offering' access."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure feels slightly rigid. It might benefit from a slight rephrasing to read more naturally in Armenian.",
-          "suggestion": "Consider restructuring the sentence for better flow. For example, something like: \"Այս ենթաբաժինը ապահովում է օգտվողների համար պորտալ մուտք գործելու անվտանգ և հարմար եղանակներ:\" (This subsection provides safe and convenient ways for users to access the portal.)"
+          "description": "The translation 'տրամադրել' (t Ramadrel) which means 'to provide' is not the most natural or precise way to convey 'allow' in this context. It implies an action being provided to the users, rather than granting them permission. A better translation would convey the idea of 'enabling' or 'providing access'.",
+          "suggestion": "Consider replacing 'տրամադրել' with a word like 'ձեռք բերել' (dzerk' bernel - to obtain/acquire) or rephrasing the sentence to better convey the meaning of 'allow'."
         }
       ],
       "approved_at": null
@@ -130,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ພາກສ່ວນຍ່ອຍນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດໃຫ້ຜູ້ໃຊ້ມີວິທີທີ່ປອດໄພແລະສະດວກໃນການເຂົ້າເຖິງປະຕູ\" doesn't fully capture the meaning of 'portal'. 'ປະຕູ' translates to 'door', which is not the intended meaning. It's referring to a digital portal.",
-          "suggestion": "ພາກສ່ວນຍ່ອຍນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດໃຫ້ຜູ້ໃຊ້ມີວິທີທີ່ປອດໄພແລະສະດວກໃນການເຂົ້າເຖິງເວັບໄຊທ໌ ຫຼື ປະຕູຂໍ້ມູນ."
+          "description": "The Lao translation 'ປະຕູ' (door) doesn't accurately convey 'portal'. 'Portal' refers to a digital entry point or gateway. A more suitable term would be something like 'ເວັບໄຊ້' (website) or 'ລະບົບ' (system), depending on the context.",
+          "suggestion": "Consider using 'ເວັບໄຊ້' (website) or 'ລະບົບ' (system) instead of 'ປະຕູ' (door)."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow and naturalness in Lao. The repeated use of 'ມີ' (to have) makes it sound clunky.",
-          "suggestion": "ພາກສ່ວນຍ່ອຍນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດສ້າງວິທີການເຂົ້າເຖິງປະຕູຂໍ້ມູນທີ່ປອດໄພແລະສະດວກສຳລັບຜູ້ໃຊ້."
+          "type": "incorrect_translation",
+          "description": "The phrase 'ວິທີທີ່ປອດໄພແລະສະດວກ' is a literal translation but might sound awkward. It might be improved for better flow in Lao.",
+          "suggestion": "Consider phrasing it as 'ວິທີການທີ່ປອດໄພແລະໃຊ້ງ່າຍ' or 'ທາງເຂົ້າທີ່ປອດໄພແລະສະດວກ' to improve the natural flow."
         }
       ],
       "approved_at": null
@@ -147,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"nodrošināt drošus un ērtus veidus\" (to ensure safe and convenient ways) doesn't accurately convey the meaning of \"provide users with secure and convenient ways\". It implies the users are doing the providing, which is incorrect.",
-          "suggestion": "Šī apakšsadaļa ļauj nodrošināt lietotājiem drošus un ērtus veidus, kā piekļūt portālam."
+          "description": "The translation 'nodrošināt drošus un ērtus veidus' (to provide secure and convenient ways) doesn't accurately reflect the intended meaning of 'allows users with secure and convenient ways'. It implies the users are providing the ways, not being provided them. A better phrasing would focus on enabling or offering the ways.",
+          "suggestion": "Šī apakšsadaļa ļauj lietotājiem piekļūt portālam drošos un ērtos veidos."
         }
       ],
       "approved_at": null
@@ -171,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Esta subseção permite fornecer aos usuários maneiras seguras e convenientes de acessar o portal' is grammatically correct but not the most natural way to express the English meaning. A more idiomatic translation would convey the idea of *allowing* users to *have* secure and convenient access.",
-          "suggestion": "Esta subseção permite que os usuários tenham maneiras seguras e convenientes de acessar o portal."
+          "description": "The translation 'Esta subseção permite fornecer aos usuários maneiras seguras e convenientes de acessar o portal' is grammatically correct, but the verb 'fornecer' (to provide) doesn't quite capture the nuance of 'allows'. A better phrasing would convey that the section *enables* users to access the portal securely.",
+          "suggestion": "Esta subseção permite que os usuários acessem o portal de forma segura e conveniente."
         }
       ],
       "approved_at": null
@@ -183,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'permite fornecer' is somewhat awkward. 'Permite' can mean 'allows,' but 'fornecer' (to provide) is redundant since 'allows' already implies providing. A more natural phrasing would be 'permite que os usuários'.",
-          "suggestion": "Esta subseção permite que os usuários maneiras seguras e convenientes de acessar o portal."
+          "description": "The translation 'Esta subseção permite fornecer aos usuários maneiras seguras e convenientes de acessar o portal' is grammatically correct but not the most natural way to express the English meaning in Portuguese.  'Permite fornecer' is a bit awkward. A more natural phrasing would be 'Esta subseção permite que você ofereça aos usuários...'",
+          "suggestion": "Esta subseção permite que você ofereça aos usuários maneiras seguras e convenientes de acessar o portal."
         }
       ],
       "approved_at": null
@@ -195,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Această subsecțiune vă permite să le oferă utilizatorilor accesul sigur și convenabil la portal' is not the most natural or accurate translation of 'This subsection allows you to provide users with secure and convenient ways to access the portal.' The reflexive pronoun 'le' is unnecessary and makes the sentence sound awkward. 'Oferă' can be replaced with a more appropriate verb.",
+          "description": "The translation 'Această subsecțiune vă permite să le oferă utilizatorilor accesul sigur și convenabil la portal' is not a precise translation of 'This subsection allows you to provide users with secure and convenient ways to access the portal.' The pronoun 'le' is awkward and doesn't fit the sentence structure. It should convey 'to provide *them*'.",
           "suggestion": "Această subsecțiune vă permite să oferiți utilizatorilor modalități sigure și convenabile de a accesa portalul."
         },
         {
           "type": "formatting",
-          "description": "The translation lacks the plural form of 'ways', which is important to convey the intended meaning.",
-          "suggestion": "Această subsecțiune vă permite să oferiți utilizatorilor modalități sigure și convenabile de a accesa portalul."
+          "description": "The Romanian translation uses 'accesul sigur și convenabil' which is a bit clunky. 'Modalități sigure și convenabile' sounds more natural in this context.",
+          "suggestion": "Replace 'accesul sigur și convenabil' with 'modalități sigure și convenabile'."
         }
       ],
       "approved_at": null
@@ -218,13 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආරක්‍ෂිත සහ පහසු ක්‍රම\" (arakshitha saha pahasu krama) translates to 'secure and convenient methods' which is a literal translation but doesn't flow as naturally in Sinhala. A more natural phrasing might emphasize 'safe and easy' ways.",
-          "suggestion": "මෙම අනුකොටස පරිශ්‍රීලකයින්ට ද්වාරය වෙත ප්‍රවේශ වීමට ආරක්ෂිත හා පහසුවන ක්‍රම ලබා දීමට ඉඩ සලසයි."
+          "description": "The translation \"මෙම අනුකොටස පරිශ්‍රීලකයින්ට ද්වාරය වෙත ප්‍රවේශ වීමට ආරක්‍ෂිත සහ පහසු ක්‍රම ලබා දීමට ඉඩ සලසයි\" is a bit too literal and verbose. It translates to 'This subsection allows users to provide ways to access the portal securely and conveniently'.  The verb 'provide' is awkward. A better translation would focus on enabling access rather than providing methods.",
+          "suggestion": "මෙම අනුකොටස පරිශ්‍රීලකයින්ට ද්වාරයට ආරක්ෂිත හා පහසු ප්‍රවේශයක් ලබා ගැනීමට හැකි කරයි."
         },
         {
-          "type": "formatting",
-          "description": "The use of 'හා' (ha) instead of 'සහ' (saha) after 'ආරක්‍ෂිත' sounds more natural and is generally preferred in modern Sinhala usage for conjunctions.",
-          "suggestion": "No change necessary, but consider 'හා' for a slightly more modern feel."
+          "type": "grammar",
+          "description": "The passive voice used in the suggestion is common in Sinhala but could be slightly rephrased for improved flow. While grammatically correct, a more direct phrasing may be preferable.",
+          "suggestion": "මෙම අනුකොටස පරිශ්‍රීලකයින්ට ද්වාරයට ආරක්ෂිත හා පහසු ප්‍රවේශයක් ලබා ගැනීමට ඉඩකඩ සලසයි."
         }
       ],
       "approved_at": null
@@ -268,18 +258,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"This subsection\" as \"Tiểu mục này\" is technically correct but a little stiff and formal. It might be more natural to use something like \"Phần này\" or \"Mục này\".",
-          "suggestion": "Mục này cho phép bạn cung cấp cho người dùng những cách an toàn và thuận tiện để truy cập cổng thông tin."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While \"cổng thông tin\" is a valid translation of \"portal\", in this context, \"khu vực\" or “nền tảng” might be more appropriate depending on the specific portal being described.",
-          "suggestion": "Mục này cho phép bạn cung cấp cho người dùng những cách an toàn và thuận tiện để truy cập khu vực/nền tảng."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

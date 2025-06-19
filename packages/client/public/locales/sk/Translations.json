@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Vyberte si zo zoznamu",
-  "ConnectingAccount": "Pripojenie účtu",
-  "DeleteFromTrash": "Vybraté prvky boli úspešne odstránené z koša",
   "FileLocked": "Súbor zamknutý",
   "FileProtected": "Súbor je chránený heslom",
   "FileUnlocked": "Súbor odomknutý",
@@ -14,7 +12,6 @@
   "FolderTitleSkyDrive": "Priečinok OneDrive",
   "FolderTitleWebDav": "Priečinok WebDAV",
   "FolderTitleYandex": "Priečinok Yandex",
-  "GuestReleaseTipDescripton": "Všetci doteraz pridaní Používatelia sa stali Hosťami a teraz sú evidovaní iba v zozname Kontaktov administrátorov {{productName}}. Hostia už nepatria do žiadnej skupiny. Vždy môžete zmeniť ich typ a v prípade potreby ich pridať do skupiny.",
   "GuestReleaseTipLink": "Ďalšie informácie o typoch používateľov",
   "LinkHasExpiredAndHasBeenDisabled": "Platnosť odkazu vypršala a bol deaktivovaný",
   "LinkValidTime": "Tento odkaz je platný iba {{days_count}} dní.",
@@ -28,14 +25,5 @@
   "ThirdPartyInfo": "Zmeniť informácie o tretej strane",
   "ThirdPartyTitle": "Služby tretích strán",
   "TitleShowActions": "Zobraziť akcie pre súbor",
-  "TitleShowFolderActions": "Zobraziť akcie pre priečinky",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Zobraziť akcie pre priečinky"
 }

@@ -3,7 +3,7 @@
   "content": "Profile photo",
   "content_en_sha1_hash": "33f385bb3b7f437c44f197aa3da5da8480eef36f",
   "created_at": "2025-05-19T21:30:54.178Z",
-  "updated_at": "2025-05-28T09:30:02.180Z",
+  "updated_at": "2025-05-26T07:57:32.209Z",
   "comment": {
     "text": "This translation key is used for a label that displays \"Profile photo\" and appears in an Avatar Editor Dialog. It is likely displayed as a title or legend for the profile photo section within this dialog, allowing users to understand its purpose.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"පැතිකඩ ඡායාරූපය\" (paticada cayarūpay) is a literal translation of 'profile photo,' a more natural and common translation in Sinhala would be something like \"පුද්ගල චිත්‍රපත\" (pugadala chitrapata) or \"පුද්ගල පැතිකඩ ඡායාරූපය\" (pugadala patikada cayarūpay). \"පැතිකඩ ඡායාරූපය\" sounds slightly formal and less conversational.",
+          "suggestion": "Consider \"පුද්ගල චිත්‍රපත\" (pugadala chitrapata) or \"පුද්ගල පැතිකඩ ඡායාරූපය\" (pugadala patikada cayarūpay)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -210,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"个人资料照片\" is understandable, it's a bit verbose for \"Profile photo\". A more concise and common translation would be \"头像\" (tou xiang).",
+          "description": "While \"个人资料照片\" is understandable, it's a bit literal and verbose. A more natural and concise translation for \"Profile photo\" would be something like \"头像\" (tou xiang).",
           "suggestion": "头像"
         }
       ],

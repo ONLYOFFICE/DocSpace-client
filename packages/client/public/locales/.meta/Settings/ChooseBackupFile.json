@@ -3,7 +3,7 @@
   "content": "Choose the backup file",
   "content_en_sha1_hash": "813a6a6a5479025ab20127d56506502802337776",
   "created_at": "2025-05-19T21:30:50.904Z",
-  "updated_at": "2025-05-28T09:30:02.522Z",
+  "updated_at": "2025-05-26T07:57:32.539Z",
   "comment": {
     "text": "\"Choose a backup file to upload. This text is used as a label on a file input field in a data import component, guiding users to select a backup file.\"",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"バックアップファイルの選択\" (bakkuappu fairu no sentaku) is a very literal translation and sounds slightly unnatural in Japanese for a user interface element. It translates to 'selection of backup file'. A more natural phrasing would be something like \"バックアップファイルを選択\" (bakkuappu fairu o sentaku).",
-          "suggestion": "バックアップファイルを選択"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ສໍາຮອງຂໍ້ມູນ' (sam-hong-kho-moon) is a generally accepted translation for 'backup file', but it could be more concisely rendered as 'ໄຟລ໌สำรอง' (file sam-hong).",
+          "suggestion": "ໄຟລ໌สำรอง"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'උපස්ථ' is potentially a misspelling. It should be 'ආපසු'.",
-          "suggestion": "ආපසු"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Изабери резервну датотеку' is understandable, a more natural and accurate translation of 'Choose the backup file' would be 'Одаберите резервну датотеку'. 'Изабери' is more common in Croatian and can sound slightly out of place in Serbian.",
-          "suggestion": "Одаберите резервну датотеку"
+          "description": "The translation \"Изабери резервну датотеку\" is technically correct but could be improved for naturalness in this context. \"Изабери датотеку за резервну копију\" would be more idiomatic Serbian (Cyrillic).",
+          "suggestion": "Изабери датотеку за резервну копију"
         }
       ],
       "approved_at": null

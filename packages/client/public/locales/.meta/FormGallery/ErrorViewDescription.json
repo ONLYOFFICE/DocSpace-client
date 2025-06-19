@@ -3,7 +3,7 @@
   "content": "Please try again later",
   "content_en_sha1_hash": "390ef05b923177694865bed8c67a2651f7f261aa",
   "created_at": "2025-05-19T21:30:55.114Z",
-  "updated_at": "2025-05-28T09:30:02.406Z",
+  "updated_at": "2025-05-26T07:57:32.399Z",
   "comment": {
     "text": "This translation key is used for an error message that appears on a form gallery screen, prompting users to try again later. The text \"Please try again later\" is displayed in a specific error view component and is translated using this key.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'المحاولة مرة أخرى لاحقاً' is a literal translation of 'Try again later'. While understandable, a more natural and common phrasing in Arabic (Saudi Arabia) would be 'حاول مرة أخرى لاحقاً' or 'يرجى المحاولة مرة أخرى لاحقاً'.",
+          "suggestion": "يرجى المحاولة مرة أخرى لاحقاً"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -153,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'නැවත උත්සාහ කරන්න' while technically meaning 'Try again', is a very literal and slightly awkward translation for 'Please try again later' in Sinhala. A more natural and common phrasing would convey the politeness implied by 'Please'.",
-          "suggestion": "Please try again later is best translated as 'දැන්වීම් නැවත කරන්න' (Dánavimáva naĕta kāranné) or 'ඔබ නැවත උත්සාහ කරන්න' (Oba naĕta utsaaha kāranne)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Encrypted editing and real-time collaboration.",
   "content_en_sha1_hash": "2e9d3bdef6b517fed2283930e222a9adb9734ef1",
   "created_at": "2025-05-19T21:30:55.974Z",
-  "updated_at": "2025-05-21T11:33:30.977Z",
+  "updated_at": "2025-06-02T10:20:51.021Z",
   "comment": {
     "text": "The translation key \"PrivateRoomDescriptionEncrypted\" is used to display a description of private room encryption. This text is likely used in a UI element, such as a button or header, to provide users with information about the security features of a private room. The translator should focus on conveying the idea that the room's contents are fully encrypted and secure.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 132,
+      "line_number": 134,
       "context": "const privacyIcon = <img alt=\"\" src={PrivacySvgUrl} />;\n \n const privateRoomDescTranslations = [\n t(\"PrivateRoomDescriptionSafest\"),\n t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];\n \n const roomHeader = t(\"Common:EmptyRootRoomHeader\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'in real time' is redundant in Arabic. 'الفوري' already implies immediacy.",
-          "suggestion": "التحرير المشفر والتعاون الفوري"
+          "description": "The phrase 'real-time collaboration' is overly literal. A more natural Arabic equivalent would capture the essence of immediate cooperation, rather than a direct translation of 'real-time'.",
+          "suggestion": "التعاون الفوري والمباشر (al-ta'āwun al-fawrī wal-mubāshir)"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the phrase 'في الوقت الحقيقي' (fi al-waqt al-haqīqī) is somewhat redundant since 'فوري' (fawrī) already implies immediacy. Consider simplifying for conciseness.",
+          "suggestion": "التحرير المشفر والتعاون الفوري (al-tahrīr al-mushaffar wal-ta'āwun al-fawrī)"
         }
       ],
       "approved_at": null
@@ -87,7 +92,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Գաղտնագրված խմբագրում և իրական ժամանակի համագործակցություն\" is a very literal translation. A more natural and idiomatic Armenian translation for \"Encrypted editing and real-time collaboration\" might be something like \"Ամրացված խմբագրում և գործունեության ապահովում իրական ժամանակում\" or a similar phrasing that emphasizes secure and collaborative workflow.",
+          "suggestion": "Consider alternatives like \"Ամրացված խմբագրում և գործունեության ապահովում իրական ժամանակում\" or other phrasing that emphasizes a secure collaborative workflow."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -96,7 +107,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is generally accurate, 'Encrypted editing' is best conveyed as 'Modifica crittografata' rather than just 'Modifica collaborativa con crittografia' to directly translate the 'encrypted editing' component. The current translation puts the emphasis on collaborative editing, which isn't the primary focus of the English phrase.",
+          "description": "The translation 'Modifica collaborativa in tempo reale con crittografia' doesn't fully capture the nuance of 'Encrypted editing'. While it mentions encryption, it doesn't explicitly state that the editing *itself* is encrypted. A more accurate translation would emphasize the encryption of the editing process.",
           "suggestion": "Modifica crittografata e collaborazione in tempo reale."
         }
       ],
@@ -114,7 +125,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The ampersand (&) is used instead of a more natural Korean conjunction. While understandable, it feels somewhat abrupt in Korean.",
+          "description": "The ampersand (&) is used instead of a more natural Korean conjunction. While understandable, it's not ideal for flowing Korean.",
           "suggestion": "암호화 편집 및 실시간 콜라보레이션."
         }
       ],
@@ -126,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ການແກ້ໄຂເຂົ້າລະຫັດ ແລະ ການຮ່ວມມືໃນເວລາຈິງ' while generally accurate, could be slightly improved to better reflect the English's flow. 'ການແກ້ໄຂເຂົ້າລະຫັດ' is fine, but 'ການຮ່ວມມືໃນເວລາຈິງ' (real-time collaboration) could be more naturally rendered.",
-          "suggestion": "ການຮ່ວມມືແບບຕາມເວລາຈິງ"
+          "description": "The Lao translation \"ການແກ້ໄຂເຂົ້າລະຫັດ ແລະ ການຮ່ວມມືໃນເວລາຈິງ\" is a literal translation but doesn't fully capture the nuance of 'real-time collaboration'. It's technically correct, but could be improved for better flow and understanding.",
+          "suggestion": "ການແກ້ໄຂແບບລັບ ແລະ ຮ່ວມມືແບບຕາມເວລາຈິງ"
         }
       ],
       "approved_at": null
@@ -167,9 +178,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation 'Editare criptă și colaborare în timp real' is not the most natural or accurate translation of 'Encrypted editing and real-time collaboration.' 'Criptă' is a less common way to express 'encrypted'.",
+          "suggestion": "Editare criptată și colaborare în timp real."
+        },
+        {
           "type": "formatting",
-          "description": "The Romanian translation has an extra space after the period at the end of the sentence.",
-          "suggestion": "Editare criptă și colaborare în timp real."
+          "description": "There's a space missing after the ampersand (&).",
+          "suggestion": "Editare criptată și colaborare în timp real."
         }
       ],
       "approved_at": null
@@ -186,13 +202,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සංකේතිතව සංස්කරණය හා තථ්‍ය කාලීන සහයෝගිත්‍වය' is a literal translation that doesn't quite convey the meaning of 'Encrypted editing and real-time collaboration' in a natural Sinhala way. 'සංකේතිතව' (sankethithawa) means 'encrypted', but using it as an adverb here is less common. The meaning of 'real-time collaboration' is also a bit awkward.",
-          "suggestion": "Consider a more natural phrasing such as: 'සංකේතවත් කරන ලද පරිශ්‍රමණය හා ක්ෂණික සහයෝගිතවය' or 'සංකේතවත් පරිශ්‍රමණය හා ක්ෂණිකව වැඩ කිරීම'."
+          "description": "The Sinhala translation \"සංකේතිතව සංස්කරණය හා තථ්‍ය කාලීන සහයෝගිත්‍වය\" doesn't fully capture the meaning of \"Encrypted editing and real-time collaboration.\" \"සංකේතිතව\" (sankēthitava) implies 'having been encrypted' rather than 'encrypted'.  ' හා ' (ha) is a general connector and a more specific connection may be more appropriate. 'තථ්‍ය කාලීන' (thathya kālīna) is a literal translation of 'real-time' and might sound overly formal or awkward in this context.",
+          "suggestion": "Consider revising to something like: \"සංකේතිතව සංස්කරණය හා ක්රිත්‍රිම කාලීන සහයෝගිත්‍වය\" (sankēthitava sanskarana ha kritrim kālīna sahayogiyathwaya) - which attempts to convey 'encrypted editing and real-time collaboration' more naturally.  Alternatively, \"සංකේතිතව සංස්කරණය හා ක්රිත්‍රිමව කරන සහයෝගිත්‍වය\" (sankēthitava sanskarana ha kritrimava karan sahayogiyathwaya) could be explored, meaning 'encrypted editing and collaboration done in real-time'."
         },
         {
           "type": "spelling",
-          "description": "While generally correct, the use of 'සංකේතිතව' can be considered slightly less preferred in modern Sinhala compared to 'සංකේතවත් කරන ලද'.",
-          "suggestion": "Replace 'සංකේතිතව' with 'සංකේතවත් කරන ලද'."
+          "description": "While technically correct, the usage of 'කාලීන' (kālīna) might not be the most common or natural way to express 'real-time' in Sinhala for this context.",
+          "suggestion": "Investigate alternative phrasing for 'real-time' – potentially more colloquial or industry-specific terms."
         }
       ],
       "approved_at": null
@@ -214,9 +230,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"сарадња у реалном времену\" is a bit clunky. A more natural Serbian translation for \"real-time collaboration\" would be \"сарадња уживо“ or \"колаборација у реалном времену\".",
-          "suggestion": "сарадња уживо"
+          "type": "spelling",
+          "description": "The word 'сарадња' could be improved to 'заједничка сарадња' or 'узајамна сарадња' for better clarity and flow. While technically correct, 'сарадња' can be slightly ambiguous in this context.",
+          "suggestion": "заједничка сарадња"
         }
       ],
       "approved_at": null
@@ -245,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Chỉnh sửa được mã hóa và cùng làm việc trong thời gian thực' is a literal translation but lacks nuance. 'Encrypted editing' could be better conveyed as 'Biên tập được mã hóa' or 'Chỉnh sửa mật mã'. The phrasing 'cùng làm việc trong thời gian thực' is slightly awkward; 'hợp tác trực tuyến' would be more natural.",
-          "suggestion": "Biên tập được mã hóa và hợp tác trực tuyến."
+          "description": "The translation 'Chỉnh sửa được mã hóa và cùng làm việc trong thời gian thực' while conveying the general meaning, isn't the most natural or precise translation of 'Encrypted editing and real-time collaboration'. 'Chỉnh sửa được mã hóa' sounds a bit awkward. A more natural phrasing would focus on the encryption aspect.",
+          "suggestion": "Cộng tác chỉnh sửa được mã hóa theo thời gian thực."
         }
       ],
       "approved_at": null

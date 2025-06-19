@@ -3,7 +3,7 @@
   "content": "Don't show this message again",
   "content_en_sha1_hash": "61d80c301f09e316dc6777db9a4608b7fca1153a",
   "created_at": "2025-05-19T21:30:44.635Z",
-  "updated_at": "2025-05-28T09:30:02.185Z",
+  "updated_at": "2025-05-26T07:57:32.213Z",
   "comment": {
     "text": "This translation key is used to display a message asking users not to show a confirmation message again. It appears in a cancel operation dialog as a checkbox label and can be translated to provide an alternative way of communicating this request to users.",
     "is_auto": true,
@@ -27,19 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation \"عدم عرض هذه الرسالة مرة أخرى\" is a bit formal and clunky for a user interface message like \"Don't show this message again.\" A more natural and user-friendly translation would be preferred.",
+          "suggestion": "لا تظهر هذه الرسالة مرة أخرى"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bu mesajı bir daha göstərməyin' is not the most natural or idiomatic way to express 'Don't show this message again' in Azerbaijani. While technically correct, it sounds slightly formal and awkward.",
-          "suggestion": "Consider alternatives like: 'Bu mesajı yenidən göstərmə' or 'Bu mesajı daha sonra göstərmə'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -66,13 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Να μην εμφανιστεί ξανά αυτό το μήνυμα' is a bit too formal and wordy for a user interface element like a 'Don't show this message again' option. It translates literally to 'So that this message doesn't appear again'.",
+          "description": "The translation \"Να μην εμφανιστεί ξανά αυτό το μήνυμα\" is a bit literal and slightly awkward. While technically correct, it doesn't flow naturally in Greek. A more idiomatic translation would be preferable.",
           "suggestion": "Μην εμφανίζεται ξανά αυτό το μήνυμα"
-        },
-        {
-          "type": "formatting",
-          "description": "The suggested correction, 'Μην εμφανίζεται ξανά αυτό το μήνυμα' is a more concise and natural-sounding option for a UI element. While the original is grammatically correct, it's not as user-friendly.",
-          "suggestion": "Consider using 'Μην εμφανίζεται ξανά αυτό το μήνυμα' for better user experience."
         }
       ],
       "approved_at": null
@@ -98,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Մի ցուցադրել այս հաղորդագրությունը կրկին\" is a literal translation and sounds somewhat formal and less natural for a UI element. A more natural phrasing would be closer to 'Մի ցուցադրիր այս հաղորդագրությունը նորից' or 'Մի ցուցադրել այս հաղորդագրությունը ևս մեկ անգամ'.",
-          "suggestion": "Consider 'Մի ցուցադրիր այս հաղորդագրությունը նորից' or 'Մի ցուցադրել այս հաղորդագրությունը ևս մեկ անգամ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -116,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'このメッセージを再表示しない' (Kono messēji o saihyōji shinai) is a literal translation of 'Don't show this message again' but could be improved for naturalness. While technically correct, it sounds slightly formal and robotic in common usage.",
-          "suggestion": "Consider a more natural phrasing such as: \"このメッセージはもう表示しない\" (Kono messēji wa mō hyōji shinai) which means 'Don't display this message anymore' or \"このメッセージは不要です\" (Kono messēji wa fuyō desu) meaning 'This message is unnecessary'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -131,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '이 메시지를 다시 표시하지 않음' is a literal translation and sounds awkward in Korean. It lacks the natural flow and conciseness expected in UI text.",
-          "suggestion": "Consider a more natural phrasing like '다시 표시 안 함' or '다시 알림 안 받기'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a passive voice construction which is not always ideal for short UI labels. It can feel less direct.",
-          "suggestion": "Explore active voice options if possible (e.g., '표시 안 함')."
+          "description": "The translation \"이 메시지를 다시 표시하지 않음\" is a literal translation and sounds awkward in Korean. A more natural phrasing would be '이 메시지를 다시 보이지 않게 함' or '이 메시지를 다시 띄우지 않음'.",
+          "suggestion": "이 메시지를 다시 보이지 않게 함"
         }
       ],
       "approved_at": null
@@ -145,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the Lao translation is understandable, a more natural phrasing for 'Don't show this message again' would be 'ຢ່າສະແດງຂໍ້ຄວາມນີ້ອີກ' (Ya sa-daeng kho khwam ni ik). The addition of 'ຄັ້ງ' (khang - time) feels slightly redundant and makes the phrasing less idiomatic.",
+          "suggestion": "ຢ່າສະແດງຂໍ້ຄວາມນີ້ອີກ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -169,13 +153,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Não volte a mostrar esta mensagem' is a literal translation and sounds somewhat formal and unnatural in Portuguese. A more common and natural phrasing would be 'Não mostrar esta mensagem novamente' or 'Não exibir esta mensagem novamente'.",
-          "suggestion": "Não mostrar esta mensagem novamente"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -208,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nezobrazovať túto správu viac\" is a literal translation that sounds unnatural in Slovak. A more natural phrasing would be \"Nezobrazovať túto správu opäť\" or \"Nezobrazovať túto správu znova\".",
+          "description": "The translation 'Nezobrazovať túto správu viac' is a literal translation that sounds awkward in Slovak. A more natural and idiomatic phrasing would be preferable.",
           "suggestion": "Nezobrazovať túto správu opäť"
         }
       ],
@@ -226,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Немој више приказивати ову поруку\" is overly literal and a bit clunky. While technically correct, it's not the most natural-sounding Serbian phrase for this context.",
+          "description": "The translation 'Немој више приказивати ову поруку' while understandable, is a bit literal and clunky. A more natural and commonly used Serbian translation would be 'Не приказуј ову поруку поново'.",
           "suggestion": "Не приказуј ову поруку поново"
         }
       ],
@@ -238,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nemoj više prikazivati ovu poruku' is a literal translation that doesn't quite capture the nuance of \"Don't show this message again.\" It sounds a bit formal and less user-friendly.",
-          "suggestion": "Consider a more natural-sounding alternative like 'Ne prikazuj ovu poruku više' or 'Izbegavati prikaz ove poruke' (Avoid displaying this message)."
+          "description": "The translation \"Nemoj više prikazivati ovu poruku\" is a literal translation but sounds unnatural in Serbian. A more natural phrasing would convey the meaning of 'Don't show this message again' more clearly.",
+          "suggestion": "Ne prikazuj više ovu poruku"
         }
       ],
       "approved_at": null
@@ -247,18 +225,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bu mesajı bir daha gösterme' is grammatically correct but doesn't fully capture the nuance of 'Don't show this message again'. A more natural Turkish phrasing would convey a sense of permanently disabling the message.",
-          "suggestion": "Bu mesajı tekrar gösterme seçeneğini devre dışı bırak"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is a command/imperative sentence. Depending on the UI context, it may be more user-friendly to rephrase it as a statement or option label.",
-          "suggestion": "Bu mesajı tekrar gösterme seçeneği"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

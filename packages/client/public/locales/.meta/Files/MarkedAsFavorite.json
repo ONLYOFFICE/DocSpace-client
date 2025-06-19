@@ -3,7 +3,7 @@
   "content": "Added to favorites",
   "content_en_sha1_hash": "2f1e3bed43fab05cf7aa088a31554bc16e6d5e5c",
   "created_at": "2025-05-19T21:30:55.819Z",
-  "updated_at": "2025-06-03T20:59:41.772Z",
+  "updated_at": "2025-05-24T11:56:39.652Z",
   "comment": {
     "text": "This translation key \"MarkedAsFavorite\" is used to display a success message when an item has been marked as a favorite in a UI component, likely a button or action within a details page. The context suggests that this phrase appears in response to user interaction with the application's favoriting functionality.",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Çox istifadə olunan siyahısına əlavə olundu\" doesn't accurately convey the meaning of \"Added to favorites\". \"Çox istifadə olunan siyahısına əlavə olundu\" translates to \"Added to the frequently used list\". It lacks the nuance of a 'favorites' list.",
+          "description": "The translation \"Çox istifadə olunan siyahısına əlavə olundu\" does not accurately convey the meaning of \"Added to favorites.\" \"Çox istifadə olunan siyahısına əlavə olundu\" translates to \"Added to frequently used list.\"  A more accurate translation would be closer to \"Sevimli siyahısına əlavə olundu\" or \"Xüsusi siyahıya əlavə olundu\".",
           "suggestion": "Sevimli siyahısına əlavə olundu"
         }
       ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ավելացվեց ընտրյալների մեջ' literally translates to 'Added to the chosen ones' which isn't the standard way to say 'Added to favorites'. A more natural and accurate translation would be something like 'Ավելացվել է նախընտրյալների ցանկին' or 'Ավելացվել է սիրվածների ցանկին'.",
-          "suggestion": "Ավելացվել է սիրվածների ցանկին"
+          "description": "The Armenian translation 'Ավելացվեց ընտրյալների մեջ' is a literal translation that doesn't fully capture the meaning of 'Added to favorites.' It translates to 'Added to the chosen ones' which is less natural and idiomatic in Armenian.",
+          "suggestion": "A more natural and accurate translation would be something like 'Ավելացվել է հավելվածների մեջ' (Avelacvel e havelvadneri mej) which translates to 'Added to favorites' or 'Saved to favorites'."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Aggiungi ai favoriti' translates to 'Add to favorites', not 'Added to favorites'. It describes the action of adding, not the state of being added.",
-          "suggestion": "Preferirei \"In preferiti\" or \"Salvato tra i preferiti\" per tradurre \"Added to favorites\" con maggiore accuratezza."
+          "description": "The translation 'Aggiungi ai favoriti' means 'Add to favorites,' not 'Added to favorites.' The English content indicates an action that has already been completed.",
+          "suggestion": "Preferirei \"In preferiti\" o \"Salvato tra i preferiti\" per indicare che l'azione è già stata eseguita."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເພີ່ມໃນລາຍການໂປດ\" is a literal translation, but \"Added to favorites\" implies a list or collection of preferred items. A more natural translation might be something like \"ເພີ່ມເຂົ້າໃນບັນຊີທີ່ມັກ\" (added to the favorites list) or \"ບັນຈຸໃນລາຍການທີ່ມັກ\" (included in the favorites list).",
-          "suggestion": "ເພີ່ມເຂົ້າໃນບັນຊີທີ່ມັກ"
+          "description": "While 'ເພີ່ມໃນລາຍການໂປດ' is understandable, a more accurate and natural translation for 'Added to favorites' would be something like 'ເພີ່ມເຂົ້າໃນສາຍໂປດ' or 'ເພີ່ມເຂົ້າໃນບັນຊີໂປດ'.  'ລາຍການ' is more suitable for a list, whereas 'ສາຍ' or 'ບັນຊີ' implies a collection of favorites.",
+          "suggestion": "ເພີ່ມເຂົ້າໃນສາຍໂປດ"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Adicionar ao favoritos' literally translates to 'Add to favorites'. A more natural and common Portuguese translation for 'Added to favorites' would be 'Adicionado aos favoritos' or 'Favoritado'.",
-          "suggestion": "Adicionado aos favoritos"
+          "description": "The translation 'Adicionar ao favoritos' literally translates to 'Add to favorites'. A more natural and common translation for 'Added to favorites' would be 'Favoritado(a)' or 'Adicionado(a) aos favoritos'.",
+          "suggestion": "Favoritado(a)"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රියතමයන්ට දමන්න' (Priayathamantha damanna) literally translates to 'Add to favorites' or 'Place among favorites'. While conveying a similar meaning, it's a more literal and less natural phrasing than common Sinhala usage for 'Added to favorites'. A more idiomatic translation would be something closer to 'ආवडපු දේ' (Avadup de) or 'ප්‍රියතම' (Priayathama).",
-          "suggestion": "Consider 'ආवडපු දේ' (Avadup de) or 'ප්‍රියතම' (Priayathama) for a more natural and idiomatic translation."
+          "description": "The Sinhala translation \"ප්‍රියතමයන්ට දමන්න\" literally translates to \"Add to favorites\" or \"Put into favorites\". While conveying a similar meaning, it's a bit more literal and less idiomatic than the English \"Added to favorites\".  A more natural translation would be something like \"සරලවශයෙන් ප්‍රියතමයන්ට එක් කරන්න\" (saralavasayan priyathaman ek karanna) which means 'Simply add to favorites' or something similar that emphasizes the action of adding.",
+          "suggestion": "Consider a more idiomatic translation such as \"ප්‍රියතමයන් අතරට එක් කරන්න\" (Priyathaman athara ek karanna) which means 'Add among favorites'."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Додато у омиљено' is a literal translation but doesn't sound natural in Serbian. A more common and idiomatic way to say 'Added to favorites' would be 'Сачувано у омиљене'.",
-          "suggestion": "Сачувано у омиљене"
+          "description": "The translation 'Додато у омиљено' while understandable, is not the most natural or common way to say 'Added to favorites' in Serbian. A more idiomatic translation would be 'Додато у зафаворисане ствари' or 'Сачувано у омиљене ствари'.",
+          "suggestion": "Додато у зафаворисане ствари"
         }
       ],
       "approved_at": null

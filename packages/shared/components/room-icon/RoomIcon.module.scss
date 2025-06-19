@@ -1,4 +1,4 @@
-@import "../../styles/variables/colors";
+@use "../../styles/variables/colors";
 
 .roomIcon {
   display: flex;
@@ -331,5 +331,5 @@
   opacity: 1;
   transform: translateY(0);
   position: relative;
-  color: var(--room-icon-text-color, #{$black});
+  color: var(--room-icon-text-color, #{colors.$black});
 }

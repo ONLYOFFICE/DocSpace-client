@@ -3,7 +3,7 @@
   "content": "Save here",
   "content_en_sha1_hash": "2f59885d38dc68521d61e5eb75fd8f19891f7b1e",
   "created_at": "2025-05-19T21:30:48.310Z",
-  "updated_at": "2025-06-18T07:34:14.807Z",
+  "updated_at": "2025-06-18T17:11:42.309Z",
   "comment": {
     "text": "This translation key is used for a button that instructs users to save their selection (\"Save here\") in a file management system, typically appearing as a submit or save button in a dialog or UI element. It's part of a broader set of translations related to file editing and saving, specifically in the context of a select folder dialog.",
     "is_auto": true,
@@ -21,6 +21,12 @@
       "line_number": 89,
       "context": "withSearch\n withoutBackButton\n withCancelButton\n disabledItems={[]}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n isPanelVisible={isVisible}",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
+      "line_number": 58,
+      "context": "if (isSelect || isSelectFolder) return t(\"Common:SelectAction\");\n \n if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n if (filterParam) return t(\"Common:SaveButton\");\n \n return t(\"Common:SaveHereButton\");\n };\n \n export const getIsDisabled = (\n isFirstLoad: boolean,\n isSelectedParentFolder: boolean,",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -42,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Burada yadda saxlayın' is a literal translation but doesn't quite capture the natural flow of the English phrase 'Save here' in Azerbaijani. It sounds slightly awkward.",
-          "suggestion": "Consider alternatives like 'Buraya qeyd et' or 'Burada saxla'."
+          "description": "The translation \"Burada yadda saxlayın\" is a literal translation of \"Save here\" but doesn't flow naturally in Azerbaijani. A more natural translation would be \"Burada qeyd et\" or \"Burada saxlayın\".",
+          "suggestion": "Burada qeyd et"
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບັນທຶກ ນີ້\" literally translates to \"Record this\". It doesn't convey the meaning of \"Save here\" accurately. A more appropriate translation would be something like \"ເກັບຮັກສາໄວ້ທີ່ນີ້\" or \"ບັນທຶກໄວ້ທີ່ນີ້\".",
-          "suggestion": "ເກັບຮັກສາໄວ້ທີ່ນີ້"
+          "description": "The Lao translation \"ບັນທຶກ ນີ້\" literally translates to \"Record this\". While understandable, it doesn't convey the nuance of \"Save here\". A more accurate translation would imply a destination for saving.",
+          "suggestion": "ບັນທຶກໄວ້ທີ່ນີ້ (Banthik vai thi ni) - This means 'Save at/to here'."
         }
       ],
       "approved_at": null
@@ -171,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙතැන සුරකින්න' while understandable, is a more literal translation of 'Save here' implying 'Save at this place.' A more natural and commonly used translation for a button like this would be something conveying 'Save' or 'Keep'.",
+          "suggestion": "කාමතීව (Kamaatheewa) or සුරකින්න (Surakkinna) are acceptable, but consider context. 'කාමතීව' is more direct, while 'සුරකින්න' is more general."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -222,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '在此保存' (Zài zhèlǐ bǎocún) is understandable, a more natural and common translation of 'Save here' would be '另存为' (Lìng cún wéi) or '保存到此' (Bǎocún dào cǐ). '在此保存' implies saving *in* this location, while 'Save here' typically means saving the file *to* this location.",
-          "suggestion": "另存为 (Lìng cún wéi) or 保存到此 (Bǎocún dào cǐ)"
+          "description": "While \"在此保存\" (Zài zhèlǐ bǎocún) is a technically correct translation, it sounds a bit formal and less natural for a button label like \"Save here.\" A more user-friendly translation might be better.",
+          "suggestion": "考虑使用更口语化的表达，例如 \"保存到这里\" (Bǎocún dào zhèlǐ) or \"保存至此\" (Bǎocún zhì cǐ)."
         }
       ],
       "approved_at": null

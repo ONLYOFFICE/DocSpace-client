@@ -3,7 +3,7 @@
   "content": "Share the room with all users",
   "content_en_sha1_hash": "0ef48ae2f59b6da256c1ab7d07975adf9def2c76",
   "created_at": "2025-05-19T21:30:56.541Z",
-  "updated_at": "2025-05-28T09:30:02.117Z",
+  "updated_at": "2025-05-26T07:57:32.158Z",
   "comment": {
     "text": "This translation key is used to display the title of a share public room option in an empty view container. It appears when users click on the \"Share Public Room\" action and needs to be translated to convey the idea of sharing access with all users.",
     "is_auto": true,
@@ -93,13 +93,30 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation \"他のユーザーへの外部リンクへのアクセスを許可します。\" (Hoka no yūzā e no furinkuro ni e no akusesu o kyoka shimasu.) does not accurately convey the meaning of \"Share the room with all users.\" It translates to 'Allow access to a link to other users'. It implies providing a link rather than sharing the room itself.",
+          "suggestion": "他のユーザーとルームを共有します。(Hoka no yūzā to rūmu o kyōyū shimasu.) - 'Share the room with other users.'"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '모든 사용자와 룸 공유' doesn't fully capture the nuance of 'Share the room with all users'. It's a literal translation but lacks the natural flow of Korean.",
+          "suggestion": "공개 룸으로 공유하기"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '룸' feels a bit abrupt and informal.  While acceptable, it might be improved.",
+          "suggestion": "공개 공간으로 공유하기"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +158,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Partajați sala cu toți utilizatori' is not the most natural or precise translation of 'Share the room with all users.' 'Partajați' implies sharing something, but 'Share the room' often means making it public or accessible to all.",
+          "suggestion": "Permiteți accesul tuturor utilizatorilor în sală"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the word order 'cu toți utilizatori' sounds slightly awkward in Romanian. It's more common to see 'toți utilizatorii'.",
+          "suggestion": "cu toți utilizatorii"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +181,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සියලු පරිශීලකයින් සමඟ කාමරය බෙදාගන්න.' is a literal translation and while understandable, it's not the most natural phrasing in Sinhala for this context. A more idiomatic translation would be something like 'සියලු දෙනාට කාමරය බෙදා හැරීමට'.",
+          "suggestion": "සියලු දෙනාට කාමරය බෙදා හැරීමට"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +205,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Поделите собу са свим корисницима' is too literal. A more natural and idiomatic translation for 'Share the room with all users' would be something like 'Омогућите приступ свима' or 'Поделите просторију са свима'.",
+          "suggestion": "Омогућите приступ свима"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'собу' (sobu) is less common and slightly awkward in this context. 'Просторију' (prostoriju) is more appropriate for 'room'.",
+          "suggestion": "Поделите просторију са свим корисницима"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

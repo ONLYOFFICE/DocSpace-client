@@ -228,7 +228,7 @@ const PasswordStrength = (props) => {
       setShowReminder(false);
       saveToSessionStorage("currentPasswordSettings", data);
       saveToSessionStorage("defaultPasswordSettings", data);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }

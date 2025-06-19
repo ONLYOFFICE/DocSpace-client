@@ -3,7 +3,7 @@
   "content": "To protect the portal against brute-force attacks, you can set up the limits of unsuccessful login attempts by the user.",
   "content_en_sha1_hash": "df581d5d7ed874eec5e55be026d206a447996258",
   "created_at": "2025-05-19T21:30:50.835Z",
-  "updated_at": "2025-05-28T09:30:02.784Z",
+  "updated_at": "2025-06-08T12:02:32.827Z",
   "comment": {
     "text": "This translation key is used to describe the protection mechanism against brute-force attacks on mobile devices. It helps users understand how to set limits on unsuccessful login attempts made by a user.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 117,
+      "line_number": 118,
       "context": "url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"BruteForceProtection\")}\n subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"AdminsMessage\")}",
       "module": "/packages/client"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"protect the portal against brute-force attacks\" is not accurately translated. 'الاختراق' (al-ikhtiraq) generally refers to hacking or a breach, not brute-force attacks. A more accurate term reflecting brute-force would be something like 'محاولات القوة الغاشمة' (muhawalat al-quwwa al-ghashima) which means 'forceful attempts'.",
-          "suggestion": "لحماية البوابة من محاولات القوة الغاشمة يمكنك تحديد عدد محاولات تسجيل الدخول غير الناجحة من قبل المستخدم."
+          "description": "The translation 'الاختراق' (al-ikhtiraq) primarily means 'hacking' or 'breach,' not 'brute-force attack'. The English phrase 'brute-force attacks' refers to repeated attempts to guess a password or gain unauthorized access through repeated trials.",
+          "suggestion": "لحماية البوابة من هجمات القوة الغاشمة (li-himāyat al-bawwātu min hajamāt al-quwwa al-ghāshima) or لحماية البوابة من محاولات تخريب (li-himāyat al-bawwātu min muḥāwalāt takhrīb)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translation could benefit from a slightly more natural flow. The phrasing is a bit literal.",
+          "suggestion": "لحماية البوابة، يمكنك تحديد عدد محاولات تسجيل الدخول الفاشلة للمستخدم."
         }
       ],
       "approved_at": null
@@ -42,13 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'brute-force attacks' is best translated as 'kaba güc hücumları' rather than 'kobud güc hücumlarından'. 'Kobud' implies roughness or crudeness, while 'kaba' specifically refers to brute-force in a technical context.",
-          "suggestion": "Portalı kaba güc hücumlarından qorumaq üçün…"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'istifadəçinin uğursuz giriş cəhdlərinə məhdudiyyətlər qoya bilərsiniz' is grammatically correct but could be more fluent. It's a bit literal.",
-          "suggestion": "Portalı kaba güc hücumlarından qorumaq üçün istifadəçi girişləri üçün məhdudiyyət qura bilərsiniz."
+          "description": "The phrase \"kobud güc hücumlarından\" (rough force attacks) is a less precise translation of \"brute-force attacks\". A more accurate translation would be something along the lines of \"kütləvi güc hücumlarından\" (mass force attacks) or \"təkrar güc hücumlarından\" (repeated force attacks).",
+          "suggestion": "Portalı təkrar güc hücumlarından/kütləvi güc hücumlarından qorumaq üçün..."
         }
       ],
       "approved_at": null
@@ -56,25 +56,31 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'brute-force attacks' is a technical term and the translation 'атаки с груба сила' is a literal and somewhat awkward translation. A more natural phrasing might be 'опити за пробиване на системата чрез груба сила' or 'атаки с подбор на пароли'.",
-          "suggestion": "опити за пробиване на системата чрез груба сила"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ze strany uživatele\" (by the user) is somewhat awkward and verbose in this context. It's more natural to simply say 'uživatele'.",
+          "suggestion": "Chcete-li portál chránit před útoky hrubou silou, můžete nastavit limity neúspěšných pokusů o přihlášení uživatele."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'unsuccessful login attempts' is translated as 'Anzahl der erfolglosen Anmeldeversuche' which literally translates to 'number of unsuccessful login attempts'. While technically correct, a more natural phrasing in German would be 'maximal erlaubte Anzahl erfolgloser Anmeldeversuche' or similar, to emphasize a limit.",
+          "suggestion": "maximal erlaubte Anzahl erfolgloser Anmeldeversuche"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -104,18 +110,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"կոպիտ ուժի հարձակումներից\" (kopit uzhi hardzakumnerits) literally translates to 'from brute force attacks'. While technically correct, a more natural and user-friendly phrasing would be something like 'անհամաչափ ուժի փորձակետերի դեմ' (anhachaph uzhi porzaketeri dem) – 'against forceful attempts'.",
-          "suggestion": "Պորտալը անհամաչափ ուժի փորձակետերի դեմ պաշտպանելու համար կարող եք սահմանել օգտատիրոջ կողմից մուտքի անհաջող փորձերի սահմանները:"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English \"brute-force attacks\" is often interpreted as automated or repeated attempts, not simply any forceful attempt. The Armenian translation, as is, doesn't fully capture that nuance.",
-          "suggestion": "Պորտալը կրկնվող հարձակումներից պաշտպանելու համար կարող եք սահմանել օգտատիրոջ կողմից մուտքի անհաջող փորձերի սահմանները:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -130,13 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'To protect the portal against brute-force attacks' is a bit clunky in the Japanese translation. While technically correct, a more natural phrasing might be 'ポータルをブルートフォース攻撃から守るために' (Portal o burūtofōsu kōgeki kara mamoru tame ni).",
-          "suggestion": "ポータルをブルートフォース攻撃から守るために"
+          "description": "The translation 'ブルートフォース攻撃からポータルを保護するために' is a bit literal and could be improved for naturalness. A more idiomatic translation would focus on protecting the portal *from* brute-force attacks.",
+          "suggestion": "ポータルをブルートフォース攻撃から保護するために"
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a more formal/polite tone ('～ことができます' instead of just '～る') would be more appropriate for a settings description.",
-          "suggestion": "ユーザが失敗したログイン試行の制限を設定することができます。"
+          "type": "incorrect_translation",
+          "description": "The phrase '失敗したログイン試行の制限を設定することができます' is grammatically correct but reads a bit formal. It could be more conversational.",
+          "suggestion": "ユーザのログイン試行回数制限を設定できます。"
         }
       ],
       "approved_at": null
@@ -153,18 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'brute-force attacks' is not accurately translated. 'ບັງເອີນ' (bang-een) means 'accidental' or 'by chance,' which doesn't convey the meaning of a deliberate, forceful attack. A better translation would focus on the intent of the attack.",
-          "suggestion": "ເພື່ອປົກປ້ອງປະຕູຈາກການໂຈມຕີແບບຄັ້ງຄ້າງ (or ການໂຈມຕີແບບບັງຄັບ),"
+          "description": "The Lao translation 'ການໂຈມຕີໂດຍບັງເອີນ' (kaan joom tii dooi bang-een) translates to 'accidental attacks' or 'random attacks'. The English 'brute-force attacks' implies a systematic and repeated attempt, which isn't conveyed accurately. A more accurate translation would focus on repeated or forceful attempts.",
+          "suggestion": "ພະຍາຍາມບັງຄັບເຂົ້າສູ່ລະບົບ (pa-yaam bang-khap khao suu ra-bop)"
         },
         {
           "type": "incorrect_translation",
-          "description": "While the structure is understandable, 'ການໂຈມຕີແບບຄັ້ງຄ້າງ' is somewhat clunky. A more natural phrasing might be preferable.",
-          "suggestion": "ເພື່ອປົກປ້ອງປະຕູຈາກການໂຈມຕີຢ່າງຕໍ່ເນື່ອງ,"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrasing 'ຄວາມພະຍາຍາມເຂົ້າສູ່ລະບົບທີ່ບໍ່ປະສົບຜົນສໍາເລັດ' is a bit verbose and could be simplified. While technically correct, it's not the most natural way to say it in Lao.",
-          "suggestion": "ການລ໋ອກອິນທີ່ບໍ່ສໍາເລັດ"
+          "description": "The phrase 'ຄວາມພະຍາຍາມເຂົ້າສູ່ລະບົບທີ່ບໍ່ປະສົບຜົນສໍາເລັດ' (khwaam pa-yaam khao suu ra-bop thii bo prii sop phon sam-ret) is a bit clunky. While grammatically correct, it can be more concise.",
+          "suggestion": "ການເຂົ້າສູ່ລະບົບທີ່ບໍ່ຖືກຕ້ອງ (kaan khao suu ra-bop thii bo thiik thong)"
         }
       ],
       "approved_at": null
@@ -217,18 +207,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"BruteForceProtectionDescriptionMobile\" is not accurately conveyed. While \"බෲට් ෆෝර්ස් ප්‍රහාර වලින්\" translates to \"from brute force attacks,\" the essence of 'protection' is lost. A more accurate translation would highlight the protective action.",
-          "suggestion": "බෲට් ෆෝර්ස් ප්‍රහාර වලින් ආරක්ෂා කිරීමට (to protect from brute force attacks)"
+          "description": "The phrase \"දොරව රැක ගැනීමට\" (dorawa rakagetuwva getu) literally translates to 'to protect the door,' but in context, it should refer to protecting the 'portal' or 'system'.",
+          "suggestion": "බෲට් ෆෝර්ස් ප්‍රහාර වලින් පද්ධතිය රැක ගැනීමට"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'වාර' (vaar) which translates to 'times' or 'attempts' is a bit awkward in this context. A better word that better communicates the limit on login attempts might be more suitable.",
-          "suggestion": "උත්සාහ කිරීම් (uthsaaha kiriim) - attempts, or ප්‍රතිපත්තර (prathipaththara) - limitations"
+          "description": "The term 'වාර ගණන' (vaara ganaa) translates to 'number of times'. While technically correct, it could be phrased more naturally in Sinhala to convey 'attempts'.",
+          "suggestion": "පරිශ්‍රීලකයාට උත්සාහ කළ හැකි වාර ගණන සීමා කිරීමට හැකිය"
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow.  Specifically, the placement of 'හැකිය' (hakiya - ability) feels a little out of place.",
-          "suggestion": "පරිශ්‍රීලකයාට බෲට් ෆෝර්ස් ප්‍රහාර වලින් ආරක්ෂා කිරීමට උත්සාහ කිරීම් වල සංඛ්‍යාව සීමා කිරීමට හැකියි (Parishreelakayaa brut force praharavakin aarakshakara uthsaaha kiriimvala sankhyawaa seemaa kirimaathi hakiyai)"
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure could be slightly improved for better flow. Combining the first and second parts of the translation might improve readability.",
+          "suggestion": "බෲට් ෆෝර්ස් ප්‍රහාර වලින් පද්ධතිය රැක ගැනීම සඳහා, පරිශ්‍රීලකයාට උත්සාහ කළ හැකි වාර ගණන සීමා කිරීමට හැකිය."
         }
       ],
       "approved_at": null
@@ -245,8 +235,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"napadi z vdorom\" is not the most natural or precise translation for \"brute-force attacks.\" A more accurate and commonly used term would be \"silovitni napadi\" or \"poskusi vdora\".",
-          "suggestion": "Za zaščito portala pred silovitnimi napadi lahko nastavite omejitve uporabnikovih neuspešnih poskusov prijave."
+          "description": "The term 'brute-force attacks' is translated as 'napadi z vdorom'. While technically correct, a more common and understandable translation for this context would be 'silovit napad' or 'brutalne napade'.",
+          "suggestion": "Za zaščito portala pred silovitimi napadi lahko nastavite omejitve uporabnikovih neuspešnih poskusov prijave."
         }
       ],
       "approved_at": null
@@ -254,19 +244,24 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'brute-force' is commonly used as is in Serbian IT contexts. Translating it as 'напада brute-force' doesn't flow naturally and might confuse users.",
+          "suggestion": "Да бисте заштитили портал од brute-force напада, можете поставити ограничења неуспешних покушаја пријављивања од стране корисника."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the translation uses a comma after 'напада' which can improve readability in this specific context. Serbian often prefers a full stop in such sentences.",
+          "suggestion": "Да бисте заштитили портал од brute-force напада. Можете поставити ограничења неуспешних покушаја пријављивања од стране корисника."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'prijavljivanja' which refers to the act of logging in, rather than failed login attempts. The English 'login attempts' implies a process or number of attempts.",
-          "suggestion": "Da biste zaštitili portal od napada brute-force, možete postaviti ograničenja neuspešnih pokušaja prijavljivanja korisnika."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -275,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'unsuccessful login attempts' is translated as 'başarısız oturum açma girişimlerinin'. While technically correct, a more natural and idiomatic translation in Turkish would be 'yanlış oturum açma denemelerinin' or 'hatalı oturum açma girişimlerinin'. The original phrasing is a bit too literal.",
-          "suggestion": "Portalı brute force saldırılarına karşı korumak için kullanıcının yanlış oturum açma denemelerinin veya hatalı oturum açma girişimlerinin sayısını sınırlayabilirsiniz."
+          "description": "The phrase 'unsuccessful login attempts' is translated as 'başarısız oturum açma girişimlerinin'. While technically correct, a more natural and common phrasing in Turkish would be 'yanlış oturum açma denemelerinin' or 'hatalı oturum açma girişimlerinin'.",
+          "suggestion": "Portalı brute force saldırılarına karşı korumak için kullanıcının yanlış oturum açma denemelerinin sayısını sınırlayabilirsiniz."
         }
       ],
       "approved_at": null

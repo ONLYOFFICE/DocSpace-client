@@ -3,7 +3,7 @@
   "content": "Sign in with Facebook",
   "content_en_sha1_hash": "fbd1e9ae71740f8ee4b988eca5c601f8a0636814",
   "created_at": "2025-05-19T21:30:48.753Z",
-  "updated_at": "2025-05-28T09:30:02.988Z",
+  "updated_at": "2025-05-26T07:57:32.979Z",
   "comment": {
     "text": "Signs in a social media authentication process, typically appearing on buttons or dialogs to confirm selection of Facebook as an account provider.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 390,
+      "line_number": 394,
       "context": "? t(\"Common:SignUpWithGoogle\")\n : t(\"Common:SignInWithGoogle\");\n case \"facebook\":\n return signUp\n ? t(\"Common:SignUpWithFacebook\")\n : t(\"Common:SignInWithFacebook\");\n case \"twitter\":\n return signUp\n ? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");\n case \"linkedin\":",
       "module": "/packages/shared"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'تسجيل الدخول Facebook' is a literal translation but doesn't flow naturally in Arabic. It's missing the preposition 'باستخدام' (using) to properly convey 'Sign in with'.",
-          "suggestion": "تسجيل الدخول باستخدام Facebook"
+          "description": "The translation 'تسجيل الدخول Facebook' is a literal transliteration of \"Sign in with Facebook\" rather than a proper translation. It doesn't convey the meaning clearly for a Saudi Arabian audience.  'Facebook' shouldn't be transliterated; it should be integrated more naturally.",
+          "suggestion": "تسجيل الدخول باستخدام فيسبوك"
+        },
+        {
+          "type": "formatting",
+          "description": "The inclusion of \"Facebook\" in the Arabic translation without proper spacing or integration looks awkward.",
+          "suggestion": "The integration of 'Facebook' into the Arabic phrase should be more fluid."
         }
       ],
       "approved_at": null
@@ -60,8 +65,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Login über Facebook' is understandable, 'Sign in with Facebook' is more accurately translated as 'Mit Facebook anmelden' or 'Anmelden über Facebook'. 'Login' is a loanword and less common in everyday German usage in this context.",
-          "suggestion": "Mit Facebook anmelden"
+          "description": "The translation 'Login über Facebook' is a functional equivalent but not the most natural or idiomatic German for 'Sign in with Facebook.' 'Anmelden mit Facebook' is a more common and preferred translation.",
+          "suggestion": "Anmelden mit Facebook"
         }
       ],
       "approved_at": null
@@ -105,7 +110,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Facebookでサインイン' is a very literal translation and doesn't sound natural in Japanese. A more natural phrasing would be 'Facebookを利用してサインイン' or 'Facebookでログイン'.",
+          "suggestion": "Facebookを利用してサインイン"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -150,7 +161,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Entrar com Facebook' is a literal translation but doesn't quite capture the natural flow of the English phrase 'Sign in with Facebook.' A more idiomatic translation would be 'Acessar com Facebook' or 'Fazer login com Facebook'.",
+          "description": "The translation 'Entrar com Facebook' is a literal translation but doesn't fully convey the intended meaning. The more natural phrasing in Portuguese (Brazil) would be 'Acessar com Facebook' or 'Entrar pelo Facebook'. 'Acessar' is commonly used for accessing services online.",
           "suggestion": "Acessar com Facebook"
         }
       ],
@@ -192,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Пријави се путем Facebook-а' is a literal translation of 'Sign in with Facebook' and isn't the most natural way to say it in Serbian. A more idiomatic translation would be 'Улазак путем Facebook-а' or 'Повежи се са Facebook-ом'.",
+          "description": "The translation \"Пријави се путем Facebook-а\" is a literal translation and sounds unnatural in Serbian. A more idiomatic and common phrasing would be \"Улазак путем Facebook-а\" or \"Пријава преко Facebook-а\".",
           "suggestion": "Улазак путем Facebook-а"
         }
       ],
@@ -204,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Prijavi se putem Facebook-a\" is understandable, a more natural and accurate translation of \"Sign in with Facebook\" would be \"Prijava sa Facebookom\" or \"Uloguj se preko Facebook-a\". \"Prijavi se putem\" implies a more complex process than a simple sign-in.",
-          "suggestion": "Prijava sa Facebookom"
+          "description": "While technically correct, 'Prijavi se putem Facebook-a' is a bit clunky. A more natural and common translation would be 'Prijava putem Facebook-a' or 'Uloguj se preko Facebook-a'.",
+          "suggestion": "Prijava putem Facebook-a"
         }
       ],
       "approved_at": null

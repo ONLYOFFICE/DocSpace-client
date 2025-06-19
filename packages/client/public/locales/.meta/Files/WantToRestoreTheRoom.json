@@ -3,7 +3,7 @@
   "content": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "content_en_sha1_hash": "d505122744ee895e379ece275ae67593885f7761",
   "created_at": "2025-05-19T21:30:56.322Z",
-  "updated_at": "2025-05-28T09:30:02.291Z",
+  "updated_at": "2025-05-26T07:57:32.326Z",
   "comment": {
     "text": "This translation key is used for a confirmation message when restoring all shared links in a room. It asks if the user wants to restore the room, appearing as a dialog prompt. The purpose of this text is to confirm the action with the user before making changes.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'restore the room' is not accurately translated. 'حفظ الغرفة' (hifz al-ghurfa) translates to 'save the room', not 'restore'.  'Restore' implies reverting to a previous state, which isn't the intended meaning.",
+          "suggestion": "Consider using a more accurate translation for 'restore' that conveys the meaning of activating and making accessible again.  Perhaps something like 'تفعيل الغرفة' (taf'il al-ghurfa) meaning 'activate the room' or 'إعادة تفعيل الغرفة' (i'adat taf'il al-ghurfa) meaning 'reactivate the room'."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'All shared links' is not clearly reflected in the Arabic translation. While 'كل الروابط الخارجية' (kull al-ruwatib al-kharijiyya) implies shared links, it's not as direct.",
+          "suggestion": "Consider restructuring the sentence to more directly address 'All shared links' e.g., 'سيتم تفعيل جميع الروابط المشتركة في هذه الغرفة...' (Sayatam taf'il jamie' al-ruwatib al-mushtaraka fi hathihi al-ghurfa...)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"shared links\" is translated as \"xarici keçidlər\". While 'xarici' can mean external, in this context 'shared links' implies links distributed to others, not necessarily links from outside the room. A more accurate translation might be something like 'paylaşılan keçidlər' (shared links).",
-          "suggestion": "Consider using 'paylaşılan keçidlər' instead of 'xarici keçidlər' to more accurately reflect the meaning of 'shared links'."
+          "description": "The English phrase \"shared links\" is translated as \"xarici keçidlər\". While \"xarici\" can mean external, in this context, \"shared links\" refers to links shared within the room, not external links. A more accurate translation would be \"paylaşılan keçidlər\" or \"ortaq keçidlər\".",
+          "suggestion": "Replace \"xarici keçidlər\" with \"paylaşılan keçidlər\" or \"ortaq keçidlər\"."
         }
       ],
       "approved_at": null
@@ -48,8 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term \"shared links\" is translated as \"външни линкове\". While \"външни\" can mean 'external', in this context, 'shared links' refers to links shared within a room, not links from outside the room.  'Споделени линкове' would be a more accurate translation.",
-          "suggestion": "Всички споделени линкове в тази стая ще станат активни..."
+          "description": "The English phrase 'shared links' is translated as 'външни линкове' (external links). While not entirely wrong, 'shared links' implies links meant for a group, which isn't necessarily 'external'. A more accurate translation might be 'споделени линкове'.",
+          "suggestion": "споделени линкове"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'available to everyone' is translated as 'достъпно за всеки с линк'. While technically correct, it's slightly verbose. A more natural phrasing might be 'достъпно за всички с линк' or 'достъпно за всеки, който има линк'.",
+          "suggestion": "достъпно за всички с линк"
         }
       ],
       "approved_at": null
@@ -60,8 +76,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'everyone with the link' is translated as 'všem, kteří na ni odkazují'. While technically correct, it's a bit awkward. A more natural translation would convey that anyone *possessing* the link gains access, not just those who 'link to it'.",
-          "suggestion": "Všechny externí odkazy v této místnosti se stanou aktivními a její obsah bude dostupný všem, kteří mají odkaz. Chcete místnost obnovit?"
+          "description": "The English phrase 'shared links' is translated as 'externí odkazy'. While 'externí odkazy' can mean external links, in this context, 'shared links' refers to links shared among users within the room, not necessarily links originating from outside.  'Sdílené odkazy' would be a more accurate translation.",
+          "suggestion": "Všechny sdílené odkazy v této místnosti se stanou aktivními..."
         }
       ],
       "approved_at": null
@@ -72,8 +88,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'shared links' is translated as 'externen Links'. While 'externen' can imply external, 'shared' suggests links distributed among users within a system, which 'externen' doesn't fully convey. A better translation might be 'gemeinsamen Links' or 'geteilteten Links'.",
-          "suggestion": "Consider 'gemeinsamen Links' or 'geteilteten Links' for a more accurate translation of 'shared links'."
+          "description": "The English phrase 'shared links' is translated as 'externen Links'. While 'externen' implies external, 'shared' has a more specific meaning in this context (links distributed among users). A more accurate translation might be 'geteilten Links' or 'gemeinsamen Links'.",
+          "suggestion": "Consider 'geteilten Links' or 'gemeinsamen Links' instead of 'externen Links'."
         }
       ],
       "approved_at": null
@@ -84,13 +100,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'shared links' is translated as 'εξωτερικοί σύνδεσμοι'. While technically correct, 'κοινόι σύνδεσμοι' would be a more natural and accurate translation in this context, as it emphasizes that the links are shared within the room.",
-          "suggestion": "Όλοι οι κοινόι σύνδεσμοι σε αυτό το δωμάτιο θα γίνουν ενεργοί..."
+          "description": "The phrase \"Όλοι οι εξωτερικοί σύνδεσμοι\" (All external links) is a slightly inaccurate translation of \"All shared links.\" While technically correct, \"shared links\" implies a room-specific sharing mechanism, which \"external links\" doesn's fully capture.  A more accurate translation might focus on the act of sharing, not simply the external nature of the link.",
+          "suggestion": "Consider a phrasing like \"Όλοι οι κοινόχρηστοι σύνδεσμοι\" (All shared links) or \"Όλοι οι σύνδεσμοι που έχουν κοινοποιηθεί\" (All links that have been shared)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'restore the room' is translated as 'γίνει επαναφορά δωματίου'. While understandable, a more idiomatic translation would be 'να επαναφέρεις το δωμάτιο'.",
-          "suggestion": "Θέλετε να επαναφέρεις το δωμάτιο;"
+          "description": "The phrase \"Θέλετε να γίνει επαναφορά δωματίου;\" (Do you want the room to be restored?) is a bit literal. While grammatically correct, it sounds less natural in Greek. The verb 'γίνει' (to become) is a bit awkward in this context.",
+          "suggestion": "Consider a more direct and natural phrasing like \"Θέλετε να επαναφέρετε το δωμάτιο;\" (Do you want to restore the room?)"
         }
       ],
       "approved_at": null
@@ -101,7 +117,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'shared links' is translated as 'enlaces externos'. While 'externos' can mean external, in this context 'compartidos' (shared) would be more accurate to convey the intended meaning of links shared within the room’s collaborative environment.",
+          "description": "The English term 'shared links' is translated as 'enlaces externos'. While 'externos' isn't inherently wrong, 'compartidos' would be a more accurate translation reflecting the meaning of 'shared'.",
           "suggestion": "Todos los enlaces compartidos de esta sala se activarán..."
         }
       ],
@@ -113,18 +129,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'All shared links' is translated as 'Kaikki ulkoiset linkit'. While 'ulkoiset' (external) isn't inherently wrong, it might be too specific. The original implies shared links among users within the system, not necessarily external links.",
-          "suggestion": "Consider a more general translation like 'Kaikki jaetut linkit' or 'Kaikki linkit'."
+          "description": "The phrase 'shared links' is translated as 'ulkoiset linkit'. While 'ulkoiset' can mean external, in this context, 'shared links' refers to links shared within the room, not necessarily external to it. A more accurate translation would convey the idea of links distributed or made accessible to others.",
+          "suggestion": "Consider a translation like 'jaetut linkit' or 'linkit, joita on jaettu'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'its contents' is translated as 'sen sisältö'. While grammatically correct, it's a bit clunky. 'Sen sisältö' literally means 'its content.' A more natural phrasing could be considered.",
-          "suggestion": "Consider 'huoneen sisältö' or 'huoneeseen kuuluva sisältö' for a more fluent phrasing."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'ja' (and) connects two clauses that could potentially be separated for better readability.  The flow isn't as smooth as it could be.",
-          "suggestion": "Consider rephrasing to avoid consecutive 'ja' connections. For example, 'Kaikki jaetut linkit tulevat aktiivisiksi. Huoneen sisältö on saatavilla kaikille linkin kautta.'"
+          "description": "The phrase 'its contents' is translated as 'kaikki sen sisältö'. This is grammatically correct, but a more concise and natural phrasing would be better. The repetition of 'kaikki' is a bit clunky.",
+          "suggestion": "Replace 'kaikki sen sisältö' with 'sen sisältöä' or simply 'sisältö'."
         }
       ],
       "approved_at": null
@@ -135,7 +146,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'shared links' is translated as 'liens externes'. While 'externes' can be accurate in some contexts, in this case, 'partagés' would be a more precise and natural translation to convey the meaning of links shared within the room's functionality.",
+          "description": "The English phrase \"shared links\" is translated as \"liens externes\". While \"externes\" isn't *wrong*, \"partagés\" would be a more accurate and common translation in this context, as it directly conveys the meaning of links shared amongst users.",
           "suggestion": "Tous les liens partagés de cette salle deviendront actifs..."
         }
       ],
@@ -147,13 +158,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \" արտաքին հղումները\" (artakin hghumner) translates to \"external links\". While technically correct, \"shared links\" implies a different meaning. A more accurate translation would convey the idea of links shared within a collaborative space.",
-          "suggestion": "Consider using a phrase like “մատուցված հղումները” (matuts'vad hghumner) which translates to 'distributed links' or 'provided links', or a more descriptive phrase to clearly indicate shared links."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase “ովքեր ունեն հղումը” (ovqer unenn hghum) literally translates to “who have the link.” A more natural phrasing would imply those with access to the link.",
-          "suggestion": "Replace “ովքեր ունեն հղումը” with “այնքանով մոտենալու հնարավորությունը ունեցողների” (aynqanov motenalu hnaravorut'yun uni cogner) which translates to 'those who have the possibility of approaching' or a similar construct to improve readability and natural flow."
+          "description": "The phrase 'shared links' is translated as 'արտաքին հղումները' which literally means 'external links'. While technically not incorrect, 'shared links' implies links distributed among users, which 'external links' doesn't fully convey. A more accurate translation might consider using a phrase that emphasizes the sharing aspect.",
+          "suggestion": "Consider translating 'shared links' as something like 'բաժանված հղումները' (distributed links) or 'ընդհանուր հղումները' (common links) to better reflect the meaning."
         }
       ],
       "approved_at": null
@@ -164,7 +170,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"shared links\" is translated as \"link esterni\". While \"esterni\" (external) isn't inherently wrong, \"shared links\" implies links distributed among users, not necessarily originating from outside the room. A more accurate translation would better convey the original meaning, perhaps using \"link condivisi\".",
+          "description": "The phrase \"shared links\" is translated as \"link esterni\". While 'esterni' (external) isn't inherently wrong, \"shared links\" implies links meant for sharing *within* a group, not just links coming from outside. A more accurate translation might be \"link condivisi\".",
           "suggestion": "Consider translating \"shared links\" as \"link condivisi\"."
         }
       ],
@@ -176,13 +182,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"shared links\" is translated as \"外部リンク\" (external links). While technically correct, it doesn't fully convey the intended meaning of links shared within the room, accessible to those with the link. A more accurate translation might be something that implies links shared within the room’s context.",
-          "suggestion": "Consider a translation like \"このルーム内で共有されているリンク\" (Links shared within this room) to better reflect the original meaning."
+          "description": "The phrase \"All shared links\" is not accurately translated. \"外部リンク\" (external links) implies links originating from outside the room, whereas the English indicates links shared within the room but accessible externally.",
+          "suggestion": "このルームで共有されたすべてのリンク (Kono rūmu de kyōyū sareta subete no linku) - This more accurately conveys the meaning of links shared within the room."
         },
         {
-          "type": "formatting",
-          "description": "The question mark at the end of the question 'このルームを復元しますか？' is slightly less natural than other options. While acceptable, it is slightly more direct and less conversational than might be preferred in UI text.",
-          "suggestion": "Consider a slightly softened phrasing like 'このルームを復元しますか？' or even 'このルームを復元してもよろしいですか？' (Would you like to restore this room?)"
+          "type": "incorrect_translation",
+          "description": "The phrase \"リンクを持つ全ての人が利用できるようになります\" is slightly awkward and could be more natural. It translates literally to 'everyone who has the link will be able to use it.'",
+          "suggestion": "リンクを知っている人は誰でも利用できるようになります (Rinku o shitteiru hito wa dare demo riyō dekiru) - 'Anyone who knows the link will be able to use it.' or リンクを持つ人は誰でも利用できます (Rinku o motsu hito wa dare demo riyō dekimasu) - 'Anyone who has the link can use it' (slightly more concise)"
         }
       ],
       "approved_at": null
@@ -193,8 +199,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"외부 링크\" (external links) isn't the most natural way to describe \"shared links\" in this context. While technically correct, it sounds slightly formal and less user-friendly.  \"공유 링크\" (shared links) would be more common and easily understood.",
-          "suggestion": "이 방의 모든 공유 링크가 활성화되고 링크를 가진 모든 사람이 해당 콘텐츠를 사용할 수 있게 됩니다."
+          "description": "The phrase \"All shared links\" is better translated as \"모든 공유 링크 (modeun gongyu linku)\" to be more precise and natural in Korean. The current translation, while understandable, lacks the formality expected in a confirmation dialog.",
+          "suggestion": "이 방의 모든 공유 링크가 활성화되고..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'available to everyone with the link' can be improved for clarity and natural flow.  '해당 콘텐츠를 사용할 수 있게 됩니다' is grammatically correct but slightly clunky. A more natural phrasing would emphasize accessibility.",
+          "suggestion": "링크를 가진 모든 사람이 해당 콘텐츠에 접근할 수 있게 됩니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The question \"Do you want to restore the room?\" is a direct translation. While accurate, the common Korean polite phrasing would benefit from a slightly more deferential tone.",
+          "suggestion": "방을 복원하시겠습니까?"
         }
       ],
       "approved_at": null
@@ -205,18 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"become active\" is not accurately translated. \"ລິ້ງທີ່ແບ່ງປັນທັງໝົດຢູ່ໃນຫ້ອງນີ້ຈະກາຍເປັນການເຄື່ອນໄຫວ\" literally translates to 'All shared links in this room will become movement'. It should convey the meaning of the links becoming functional or working.",
-          "suggestion": "ລິ້ງທີ່ແບ່ງປັນທັງໝົດຢູ່ໃນຫ້ອງນີ້ຈະສາມາດນໍາໃຊ້ໄດ້"
+          "description": "The phrase \"become active\" is not accurately translated. \"ກາຍເປັນການເຄື່ອນໄຫວ\" literally translates to \"become movement\" which doesn't convey the intended meaning of the links becoming functional.",
+          "suggestion": "ລິ້ງທີ່ແບ່ງປັນທັງໝົດຢູ່ໃນຫ້ອງນີ້ຈະສາມາດນຳໃຊ້ໄດ້, or ລິ້ງທີ່ແບ່ງປັນທັງໝົດຢູ່ໃນຫ້ອງນີ້ຈະເຮັດງານໄດ້"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"available to everyone\" could be improved for clarity and flow. The current translation 'ມີໃຫ້ທຸກຄົນທີ່ມີລິ້ງ' is slightly awkward.",
-          "suggestion": "ສາມາດເຂົ້າເບິ່ງໄດ້ສໍາລັບຜູ້ທີ່ມີລິ້ງທັງຫມົດ"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the Lao translation lacks the formality expected in a confirmation prompt. The English uses a question mark; the Lao translation should consistently use one as well.",
-          "suggestion": "ລິ້ງທີ່ແບ່ງປັນທັງໝົດຢູ່ໃນຫ້ອງນີ້ຈະສາມາດນໍາໃຊ້ໄດ້, ແລະເນື້ອຫາຂອງມັນຈະສາມາດເຂົ້າເບິ່ງໄດ້ສໍາລັບຜູ້ທີ່ມີລິ້ງທັງຫມົດ? ທ່ານຕ້ອງການຟື້ນຟູຫ້ອງບໍ?"
+          "description": "The phrasing 'ເນື້ອຫາຂອງມັນຈະມີໃຫ້ທຸກຄົນທີ່ມີລິ້ງ' is a bit awkward. While technically correct, it's not the most natural Lao way to phrase it.",
+          "suggestion": "ເນື້ອຫາຂອງມັນຈະສາມາດເບິ່ງໄດ້ໂດຍທຸກຄົນທີ່ມີລິ້ງ"
         }
       ],
       "approved_at": null
@@ -227,8 +238,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'shared links' is translated as 'ārējās saites' which means 'external links'. While technically correct, 'shared links' implies links meant for sharing with others, which is a more precise meaning in this context. 'Kopīgās saites' would be a more accurate translation.",
-          "suggestion": "Replace 'ārējās saites' with 'kopīgās saites'."
+          "description": "The term 'shared links' is translated as 'ārējās saites'. While technically correct, 'ārējās saites' implies links that go *outside* the system. 'Shared links' in this context means links that are shared *within* the system, potentially to different rooms or users. A more accurate translation would be something like 'kopīgās saites'.",
+          "suggestion": "Consider using 'kopīgās saites' instead of 'ārējās saites'."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses a question mark at the end of the prompt. The Latvian translation also includes a question mark, which is appropriate.",
+          "suggestion": "No change needed."
         }
       ],
       "approved_at": null
@@ -239,18 +255,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'shared links' is translated as 'externe links'. While 'externe' (external) isn't inherently wrong, 'shared links' implies links distributed amongst a group, not just links from outside the system. The nuance is lost.",
-          "suggestion": "Consider 'gedeelde links' for a more accurate translation of 'shared links'. Alternatively, rephrase the Dutch to be more descriptive of the meaning if 'gedeelde' isn't suitable."
+          "description": "The term 'shared links' is translated as 'externe links'. While 'externe' (external) isn't inherently wrong, 'shared links' implies links distributed among participants, not just links from outside the room.  'Gedeelde links' would be a more accurate translation.",
+          "suggestion": "Alle gedeelde links in deze ruimte worden actief..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'contents' is translated as 'materiaal'. While 'materiaal' can refer to content, it's a more general term. 'Inhoud' would be a more direct and accurate translation of 'contents' in this context, emphasizing the specific data within the room.",
-          "suggestion": "Replace 'materiaal' with 'inhoud' for a more accurate representation of 'contents'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'restore the room' is translated as 'de kamer herstellen'. While grammatically correct, 'herstellen' implies a return to a previous state, whereas the English phrasing sounds more like reactivation or making accessible.  'Reactiveren de kamer' or 'de kamer beschikbaar maken' might be more appropriate.",
-          "suggestion": "Consider 'Reactiveren de kamer' or 'de kamer beschikbaar maken' for a more nuanced translation of 'restore the room'."
+          "description": "The phrase 'its contents' is translated as 'het materiaal'. While 'materiaal' can mean contents, it’s less specific than the original. 'De inhoud' or 'de bestanden' would be more appropriate depending on the nature of the room's content.",
+          "suggestion": "Alle gedeelde links in deze ruimte worden actief en de inhoud is beschikbaar voor iedereen die de link gebruikt. Wilt u de kamer herstellen?"
         }
       ],
       "approved_at": null
@@ -261,13 +272,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'shared links' is translated as 'linki zewnętrzne'. While 'zewnętrzne' (external) isn't inherently wrong, 'shared links' implies links shared *within* a group, not necessarily external to the platform.  A more accurate translation might be 'wspólne linki'.",
-          "suggestion": "Wspólne linki"
+          "description": "The term 'shared links' is translated as 'linki zewnętrzne'. While 'zewnętrzne' (external) isn't necessarily wrong, 'shared links' implies links distributed within the platform, not necessarily originating from outside. A more accurate translation might consider something like 'wspólne linki' or 'linki udostępnione'.",
+          "suggestion": "Consider 'wspólne linki' or 'linki udostępnione' instead of 'linki zewnętrzne'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'available to everyone with the link' is translated as 'dostępna dla wszystkich użytkowników posiadających link'. While understandable, it's slightly verbose. A more concise and natural translation would be 'dostępna dla wszystkich z linkiem'.",
-          "suggestion": "dostępna dla wszystkich z linkiem"
+          "type": "formatting",
+          "description": "The phrase 'posiadających link' is grammatically correct but sounds a bit formal. A more natural phrasing would be 'mających link'.",
+          "suggestion": "Change 'posiadających link' to 'mających link'."
         }
       ],
       "approved_at": null
@@ -278,7 +289,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'shared links' is translated as 'links externos'. While 'externos' can mean external, in this context, 'compartilhados' (shared) would be more accurate to convey the original meaning, as the links are being shared within the room's context.",
+          "description": "The phrase 'shared links' is translated as 'links externos'. While 'externos' can mean external, in this context, 'compartilhados' would be more accurate, as it emphasizes that the links are shared among users within the platform, not simply external to it.",
           "suggestion": "Todos os links compartilhados desta sala ficarão ativos..."
         }
       ],
@@ -290,8 +301,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'shared links' is translated as 'links externos'. While 'externos' isn't *wrong*, 'compartilhados' would be a more accurate translation of 'shared' in this context, emphasizing the collaborative aspect of the room.",
-          "suggestion": "Todos os links compartilhados desta sala ficarão ativos..."
+          "description": "The phrase \"shared links\" is translated as \"links externos\" (external links). While technically correct, 'shared links' implies links that were previously shared and are now being reactivated, which isn't necessarily 'external.' A better translation would be something closer to 'links compartilhados'.",
+          "suggestion": "links compartilhados"
         }
       ],
       "approved_at": null
@@ -302,18 +313,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'shared links' is translated as 'link-urile externe'. While 'externe' (external) can sometimes be appropriate, 'shared' implies that the links are distributed amongst users, not necessarily originating from an external source. A more accurate translation would be something like 'link-urile impartasite'.",
-          "suggestion": "link-urile impartasite"
+          "description": "The phrase 'shared links' is translated as 'link-urile externe'. While 'externe' (external) isn't necessarily wrong, 'shared links' implies links shared *within* the room, not just from an external source. A more accurate translation might be 'link-urile partajate'.",
+          "suggestion": "Consider translating 'shared links' as 'link-urile partajate'."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'tot conținutul vor fi disponibil' contains a subject-verb agreement error. 'Conținutul' is singular, so the verb should be 'va fi', not 'vor fi'.",
-          "suggestion": "tot conținutul va fi disponibil"
+          "description": "The phrase 'tot conținutul vor fi' is grammatically incorrect. 'Conținutul' is a masculine singular noun, so the verb should agree: 'tot conținutul va fi'.",
+          "suggestion": "Change 'tot conținutul vor fi' to 'tot conținutul va fi'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'to everyone with the link' is awkwardly translated as 'tuturor pe link-ul'.  A more natural Romanian phrasing would be 'tuturor celor care au link-ul' or 'tuturor cu link-ul'.",
-          "suggestion": "tuturor celor care au link-ul"
+          "description": "The phrase 'to everyone with the link' is translated awkwardly as 'tuturor pe link-ul'. A more natural Romanian phrasing would be 'tuturor celor care au link-ul' or a shorter, more concise alternative.",
+          "suggestion": "Consider translating 'to everyone with the link' as 'tuturor celor care au link-ul' or 'tuturor cu link-ul'."
         }
       ],
       "approved_at": null
@@ -330,18 +341,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'restore the room' is not accurately translated. 'ප්‍රත්‍යර්පණයට' (pratyarpanayaṭa) implies a more formal or complete recovery than a simple restoration. A better translation would focus on re-enabling or reactivating the room.",
-          "suggestion": "මෙම කාමරය නැවත සක්‍රීය කිරීමට අවශ්යද?"
+          "description": "The phrase \"සබැඳිය සතු සැමට\" is not a natural or accurate translation of \"everyone with the link.\" It literally translates to \"to those who own the link,\" which is not the intended meaning. It implies ownership rather than access.",
+          "suggestion": "Consider using a phrase like \"සබැඳිය ඇති සියල්ලන්ට\" (sabaṇḍiya aṭhi siyallanta) which translates to \"to everyone who has the link\" or \"to all who possess the link,\" to better convey the intended meaning of 'everyone with the link'."
         },
         {
-          "type": "grammar",
-          "description": "The sentence 'සබැඳිය සතු සැමට අන්තර්ගත වෙත ප්‍රවේශ වීමට හැකිය' is grammatically awkward. The phrase 'අන්තර්ගත වෙත ප්‍රවේශ වීමට' is not the most natural way to express 'access to the contents'.",
-          "suggestion": "සබැඳිය ඇති සියල්ලන්ටම අන්තර්ගතයට ප්‍රවේශ විය හැකිය."
+          "type": "incorrect_translation",
+          "description": "The word 'ප්‍රත්‍යර්පණයට' (pratyarpaṇayaṭa) for \"restore\" is not the most common or natural word in this context. While technically correct, it sounds formal and less conversational.",
+          "suggestion": "Consider using a more natural word for 'restore' like 'නැවත ගොඩනැඟීමට' (naewaṭa goda naeṅimatu) or simply 'පුනරුත්ථාන කිරීමට' (punarutthāna karamatu)."
         },
         {
           "type": "formatting",
-          "description": "While not a major issue, the punctuation could be improved for readability. A full stop (.) at the end of the entire translation would improve clarity.",
-          "suggestion": "මෙම කාමරය සඳහා වන සියලුම බෙදාගත් සබැඳි සක්‍රිය වනු ඇත. සබැඳිය ඇති සියල්ලන්ටම අන්තර්ගතයට ප්‍රවේශ විය හැකිය. ඔබට කාමරය නැවත සක්‍රීය කිරීමට අවශ්යද?"
+          "description": "The sentence structure feels slightly disjointed. Combining the last two clauses would improve readability.",
+          "suggestion": "Combine \"සබැඳිය සතු සැමට අන්තර්ගත වෙත ප්‍රවේශ වීමට හැකිය.\" and \"ඔබට කාමරය ප්‍රත්‍යර්පණයට වුවමනා ද?\" into something like \"සබැඳිය සතු සැමට අන්තර්ගත වෙත ප්‍රවේශ වීමට හැකිය, ඔබට කාමරය ප්‍රත්‍යර්පණයට වුවමනා ද?\""
         }
       ],
       "approved_at": null
@@ -352,8 +363,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'shared links' is translated as 'externé odkazy'. While 'externé odkazy' (external links) isn't *wrong*, 'shared links' implies links distributed amongst users within a system, not necessarily links originating from outside the system. A more accurate translation might be 'spoločné odkazy' or 'sdíľané odkazy'.",
-          "suggestion": "Consider 'spoločné odkazy' or 'sdíľané odkazy' instead of 'externé odkazy'."
+          "description": "The English phrase 'shared links' is translated as 'externé odkazy'. While 'externé odkazy' technically means 'external links', 'shared links' implies links distributed among users within the application, not just links originating from outside the platform. A more accurate translation might be 'zdieľané odkazy'.",
+          "suggestion": "Consider using 'zdieľané odkazy' instead of 'externé odkazy'."
         }
       ],
       "approved_at": null
@@ -364,8 +375,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"shared links\" is translated as \"zunanje povezave\". While technically correct, \"zunanje povezave\" (external links) isn't the best fit. \"Shared links\" implies links intended for sharing, and a more accurate translation would be something along the lines of \"deljene povezave\" or \"povezave za deljenje\".",
-          "suggestion": "Consider translating \"shared links\" as \"deljene povezave\" or \"povezave za deljenje\"."
+          "description": "The English phrase 'shared links' is translated as 'zunanje povezave'. While technically correct, 'zunanje povezave' emphasizes external links, whereas 'shared links' implies links that are meant to be distributed. A more accurate translation might be 'deljene povezave'.",
+          "suggestion": "Deljene povezave"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'will become active' is translated as 'bodo postale aktivne'.  While understandable, a more natural and precise translation might be 'se bodo aktivirale'.",
+          "suggestion": "se bodo aktivirale"
         }
       ],
       "approved_at": null
@@ -376,8 +392,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ц́е' appears multiple times. It seems like a typo. It should likely be 'ће'.",
-          "suggestion": "ће"
+          "description": "The word 'ц́е' is used multiple times. It appears to be a typo. It should likely be 'ће'.",
+          "suggestion": "Replace 'ц́е' with 'ће'."
         }
       ],
       "approved_at": null
@@ -385,13 +401,25 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'restore the room' doesn't quite capture the nuance of 'activate shared links and make content accessible.' A more accurate translation might convey the activation and accessibility aspect more directly.",
+          "suggestion": "Svi deljeni linkovi u ovoj sobi će postati aktivni, a njen sadržaj će biti dostupan svima sa linkom. Želite li da soba bude ponovo dostupna?"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'shared links' is translated as 'harici bağlantılar'. While 'harici' (external) isn't *wrong*, it's not the most accurate translation of 'shared links' in this context. 'Paylaşılan bağlantılar' would be a more direct and precise translation, emphasizing the collaborative nature of the links.",
+          "suggestion": "Bu odadaki tüm paylaşılan bağlantılar etkin hale gelecek..."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -406,18 +434,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'shared links' is translated as 'liên kết bên ngoài'. While 'bên ngoài' (external) isn't *wrong*, it's not the most accurate. 'shared links' implies links meant for sharing with others, not necessarily external to a specific platform. A more accurate translation would capture this sharing aspect.",
-          "suggestion": "Consider 'liên kết chia sẻ' or 'liên kết chung' instead of 'liên kết bên ngoài'."
+          "description": "The phrase 'shared links' is translated as 'liên kết bên ngoài'. While 'bên ngoài' (external) is not inherently wrong, 'shared links' implies links intended for sharing, not necessarily external to the platform. A more accurate translation might be 'liên kết chia sẻ'.",
+          "suggestion": "Change 'liên kết bên ngoài' to 'liên kết chia sẻ'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'available to everyone' is translated as 'khả dụng cho tất cả mọi người'. While grammatically correct, it sounds slightly formal and less natural.  A more conversational equivalent is often preferred in UI/UX translations.",
-          "suggestion": "Consider 'ai có liên kết' or 'bất kỳ ai có liên kết' instead of 'khả dụng cho tất cả mọi người'."
-        },
-        {
-          "type": "formatting",
-          "description": "The question mark at the end of the Vietnamese sentence 'Bạn có muốn khôi phục phòng không?' is slightly less common in UI copy. While not incorrect, removing it can result in a cleaner, more modern feel, common in localized UIs.",
-          "suggestion": "Remove the question mark at the end: 'Bạn có muốn khôi phục phòng?'"
+          "description": "The phrase 'available to everyone' is translated as 'khả dụng cho tất cả mọi người'. While technically correct, it's a bit verbose. A more natural phrasing would be 'mọi người có liên kết'.",
+          "suggestion": "Change 'khả dụng cho tất cả mọi người' to 'mọi người có liên kết'."
         }
       ],
       "approved_at": null
@@ -428,13 +451,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'shared links' is translated as '外部链接' (external links). While technically correct, 'shared links' implies links distributed among users, not just links pointing outward. A more accurate translation might be '共享链接' to emphasize the sharing aspect.",
-          "suggestion": "共享链接"
+          "description": "The phrase \"All shared links in this room\" is not accurately translated. \"外部链接\" (external links) implies links originating from outside the platform, while the English implies links *within* the room's content.",
+          "suggestion": "此房间的共享链接 (Ci fangjian de gongxiang lianjie) - This more accurately reflects the English meaning of shared links *within* the room."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'become active' is translated as '变为活动状态'. While understandable, '激活' (jihuó) would be a more common and natural way to express the same meaning in Chinese within a technical context.",
-          "suggestion": "激活"
+          "description": "The phrase \"become active\" is rendered as \"变为活动状态\" which is a bit literal and sounds unnatural in Chinese. There's a more idiomatic way to express this.",
+          "suggestion": "会生效 (hui shengxiao) - This translates to 'will be effective' and sounds more natural."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'available to everyone with the link' could be more precise. '拥有此链接的人' (people who have this link) isn't wrong, but could be improved for clarity.",
+          "suggestion": "只要拥有此链接的人 (zhiyao yongyou ci lianjie de ren) - 'Anyone who has this link' - a slight improvement in flow and clarity."
         }
       ],
       "approved_at": null

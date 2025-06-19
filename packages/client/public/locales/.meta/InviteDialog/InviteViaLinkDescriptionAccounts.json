@@ -3,7 +3,7 @@
   "content": "Create a universal link for self-authorization in {{productName}}",
   "content_en_sha1_hash": "533c585d8d2f76cf27cc52d2d1d5266fd4da6892",
   "created_at": "2025-05-19T21:30:54.732Z",
-  "updated_at": "2025-05-28T09:30:02.374Z",
+  "updated_at": "2025-05-26T07:57:32.374Z",
   "comment": {
     "text": "Create a universal link for self-authorization in {{productName}}. This text is used to display an invite message when creating a universal link for user authorization in the application, appearing in the Invite Panel component.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"قم بإنشاء ارتباط عالمي للمصادقة الذاتية في {{productName}}\" is a literal translation and doesn't convey the intended meaning as naturally in Arabic. 'المصادقة الذاتية' (self-authorization) is a less common and slightly awkward phrasing.",
-          "suggestion": "قم بإنشاء رابط عالمي لتمكين الوصول الذاتي في {{productName}}"
+          "description": "The translation 'قم بإنشاء ارتباط عالمي للمصادقة الذاتية في {{productName}}' could be improved to better convey the intended meaning of 'Create a universal link for self-authorization in {{productName}}'. The term 'المصادقة الذاتية' (self-authorization) is a bit formal and less common in everyday Arabic. A more natural phrasing might be 'لإتمام عملية التحقق الذاتي'.",
+          "suggestion": "قم بإنشاء ارتباط عالمي لإتمام عملية التحقق الذاتي في {{productName}}"
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Create a universal link for self-authorization\" is not perfectly conveyed. \"Self-authorization\" is a technical term, and the Azerbaijani translation doesn't quite capture that nuance. A more direct translation emphasizing user access or confirmation might be preferable.",
-          "suggestion": "{{productName}}-də istifadəçi özü avtorizəsi üçün universal keçid yaradın"
+          "description": "The translation \"{{productName}}-də avtorizasiya üçün universal keçid yaradın\" doesn't fully capture the nuance of \"Create a universal link for self-authorization in {{productName}}\". While 'keçid' (link) is correct, 'avtorizasiya' (authorization) feels a bit formal and less natural than implied by 'self-authorization'.  A more natural phrasing might emphasize the ease or convenience of the link.",
+          "suggestion": "{{productName}}-də özünüzü təsdiqləmək üçün universal keçid yaradın"
         },
         {
           "type": "formatting",
-          "description": "The placement of the variable \"productName\" is correct, but it's important to ensure consistency in variable usage across all localized strings.",
-          "suggestion": "No change needed, but confirm consistent variable placement elsewhere."
+          "description": "The placement of 'də' after {{productName}} might sound slightly awkward.  Consider reordering for improved flow.",
+          "suggestion": "{{productName}} ilə özünüzü təsdiqləmək üçün universal keçid yaradın"
         }
       ],
       "approved_at": null
@@ -77,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"αυτοεξουσιοδότηση\" (autoexousiodótisi) while technically meaning 'self-authorization,' sounds overly formal and technical for this context. A more natural and user-friendly translation would be something like \"αυτόματη εξουσιοδότηση\" (avtomatí exousiodótisi) or \"εύκολη εξουσιοδότηση\" (eúkola exousiodótisi).",
-          "suggestion": "Δημιουργήστε μια καθολική σύνδεση για εύκολη εξουσιοδότηση στο {{productName}}"
+          "description": "The phrase 'self-authorization' is not directly equivalent to 'αυτοεξουσιοδότηση' in Greek. While technically correct, it's a rather formal and uncommon term. A more natural and understandable translation might be 'αυτόματη εξουσιοδότηση' or 'απλή εξουσιοδότηση'.",
+          "suggestion": "Consider revising to 'Δημιουργήστε μια καθολική σύνδεση για αυτόματη εξουσιοδότηση στο {{productName}}' or 'Δημιουργήστε μια καθολική σύνδεση για απλή εξουσιοδότηση στο {{productName}}'"
         }
       ],
       "approved_at": null
@@ -95,8 +95,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Luo universaali linkki itsevaltuutukselle {{productName}}:lla.' is not the most natural or accurate way to express 'Create a universal link for self-authorization in {{productName}}'.  The ':lla' at the end doesn't quite fit the context. It implies possession or belonging which is not the intended meaning.",
-          "suggestion": "Luo universaali linkki itsevaltuutukseen {{productName}}."
+          "description": "The translation \"Luo universaali linkki itsevaltuutukselle {{productName}}:lla.\" is slightly awkward and not the most natural Finnish. The ':lla' implies possession but doesn't quite fit the context. A more natural phrasing would indicate the link is *for* the product, not possessed by it.",
+          "suggestion": "Luo universaali linkki {{productName}}:n käyttöön itsevaltuutukselle."
+        },
+        {
+          "type": "formatting",
+          "description": "The colon placement after '{{productName}}' is unusual in Finnish. Typically, a preposition or possessive marker would precede the variable.",
+          "suggestion": "Luo universaali linkki {{productName}}:n käyttöön itsevaltuutukselle."
         }
       ],
       "approved_at": null
@@ -113,8 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Ստեղծեք ունիվերսալ հղում {{productName}}-ում ինքնալիազորման համար\" could be interpreted as 'Create a universal link in {{productName} for self-authorization.' A more natural phrasing would convey the link is *for* self-authorization within the product.  The preposition 'in' isn't ideal here.",
-          "suggestion": "Ստեղծեք ունիվերսալ հղում ինքնալիազորման համար {{productName}}-ում"
+          "description": "The phrase \"ինքնալիազորման համար\" (for self-authorization) is a bit clunky and literal. A more natural phrasing might be something closer to 'առաջարկել ինքնավավերացման հղում' (offer a self-verification link) or 'ապահովել ինքնավավերացման հղում' (provide a self-verification link).",
+          "suggestion": "Ստեղծեք ունիվերսալ հղում {{productName}}-ում առաջարկելու ինքնավավերացման համար"
         }
       ],
       "approved_at": null
@@ -140,13 +145,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'self-authorization' is not accurately conveyed by the Lao translation. 'ການອະນຸຍາດຕົນເອງ' is a literal translation but doesn't fully capture the meaning of self-authorization in this context. It could be interpreted as 'allowing oneself'. A better phrasing would convey the idea of a user being able to easily register/verify themselves.",
-          "suggestion": "Consider a phrasing like 'ການລົງທະບຽນດ້ວຍຕົນເອງແບບງ່າຍດາຍ' or 'ການຢັ້ງຢືນຕົວຕົນດ້ວຍຕົນເອງ' which more accurately describes the intended functionality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -173,8 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'permitir a auto autorização' is a less natural and slightly awkward phrasing in Portuguese. A more common and clearer way to express 'self-authorization' is 'autorização própria' or 'autorização pelo utilizador'.",
-          "suggestion": "Crie uma hiperligação universal para autorização própria no {{productName}}"
+          "description": "The term \"permitir a auto autorização\" is a bit verbose and doesn't accurately convey the meaning of \"self-authorization\". A more natural and concise translation would be better.",
+          "suggestion": "Crie uma hiperligação universal para autorização direta no {{productName}}"
         }
       ],
       "approved_at": null
@@ -191,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'auto-autentificare' is redundant and sounds unnatural in Romanian. 'auto-autorizare' would be a more appropriate and concise translation of 'self-authorization'.",
-          "suggestion": "Creați un link universal de auto-autorizare în {{productName}}"
+          "description": "The term 'auto-autentificare' is redundant. 'Auto-autorizare' would be a more accurate and natural translation of 'self-authorization'.",
+          "suggestion": "Creaţi un link universal de auto-autorizare în {{productName}}"
         }
       ],
       "approved_at": null
@@ -209,13 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{productName}} වෙත ඉබේම පිවිසීමට විශ්ව සබැඳියක් සාදන්න' doesn't fully capture the meaning of 'Create a universal link for self-authorization in {{productName}}'. 'ඉබේම පිවිසීමට' (ibēma pivisēma) implies automatic access, whereas 'self-authorization' suggests a more controlled process where the user is verifying their identity. A more accurate translation would involve conveying the concept of 'self-authorization'.",
-          "suggestion": "{{productName}} තුළ ස්වයං-අනුමැතිය සඳහා විශ්ව සබැඳියක් සාදන්න"
+          "description": "The phrase \"self-authorization\" is not accurately reflected in the Sinhala translation. \"විශ්ව සබැඳියක් සාදන්න\" (create a universal link) doesn't fully convey the concept of self-authorization. A better translation would incorporate the idea of granting permission or access.",
+          "suggestion": "Consider a translation like \"{{productName}} වෙත ස්වයං අවසර ලබා ගැනීමට විශ්ව සබැඳියක් සාදන්න\" (Create a universal link to obtain self-authorization for {{productName}}).  Alternatively, \"{{productName}} වෙත තනි ලිංකයෙන් අවසර ලබා ගන්න\" (Get permission from a single link for {{productName}})."
         },
         {
-          "type": "spelling",
-          "description": "While not strictly incorrect, 'සබැඳියක්' (sabændiyak) could be potentially improved to a more natural-sounding term in certain contexts, depending on the target audience. While acceptable, 'සංදේශනය' or 'අවස්ථාව' could be considered alternatives.",
-          "suggestion": "{{productName}} තුළ ස්වයං-අනුමැතිය සඳහා විශ්ව සංදේශනයක් සාදන්න"
+          "type": "formatting",
+          "description": "While technically correct, the usage of double curly braces `{{productName}}` might not be standard in Sinhala translations. It might be better to adapt the placeholder to a more localized format.",
+          "suggestion": "Consider replacing `{{productName}}` with a localized placeholder, if appropriate for the Sinhala translation workflow, or leaving it as is if the target system understands double curly braces."
         }
       ],
       "approved_at": null
@@ -229,7 +228,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'samodejno avtorizacijo' implies 'automatic authorization', whereas the English 'self-authorization' implies a user initiating the authorization process themselves. 'Samopoveriljenje' might be a more accurate translation for 'self-authorization'.",
+          "suggestion": "Ustvari univerzalno povezavo za samopoveriljenje v {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -238,13 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'самопризнање' (samopriznanje) doesn't accurately convey the meaning of 'self-authorization' in this context. It translates more literally to 'self-recognition' or 'self-acknowledgement'.  'Самоповеривање' (samopoverivanje) or a more descriptive phrase about creating a link for easy access/authorization might be more appropriate.",
-          "suggestion": "Consider alternative translations like 'Омогућите лаку ауторизацију путем линка' (Omogućite laku autorizaciju putem linka - 'Enable easy authorization via link') or 'Креирајте линк за једноставну ауторизацију' (Kreirajte link za jednostavnu autorizaciju - 'Create a link for simple authorization'). The best option depends on the overall tone and style."
+          "description": "The word \"Створите\" (Stvorite) is a formal imperative form. A more natural and common imperative form for \"Create\" would be \"Направи\" (Napravi).",
+          "suggestion": "Направи универзални линк за самопризнање у {{productName}}-у."
         },
         {
-          "type": "formatting",
-          "description": "The Serbian translation includes an extra 'у' before the variable {{productName}}. This is grammatically incorrect and should be removed.",
-          "suggestion": "Remove the extra 'у' after the variable {{productName}}. The phrase should be 'Створите универзални линк за самопризнање у {{productName}}.'"
+          "type": "grammar",
+          "description": "The use of the preposition \"у\" (u) before {{productName}} is grammatically correct but could be improved for a more fluid sentence. It's somewhat stiff.",
+          "suggestion": "Направи универзални линк за самопризнање {{productName}}."
         }
       ],
       "approved_at": null
@@ -255,13 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'samopriznanje' (self-recognition/acknowledgement) doesn't quite capture the intended meaning of 'self-authorization' in this context. It's not incorrect, but it's not the best fit. It implies more of a recognition of identity rather than granting permission or access.",
-          "suggestion": "Stvorite univerzalni link za samostalnu autorizaciju u {{productName}}-u."
+          "description": "The term 'samopriznanje' doesn't accurately convey the meaning of 'self-authorization'. It translates to 'self-acknowledgement' or 'self-recognition', which isn't the intended function of a universal link. It's suggesting the user is recognizing something about themselves, not authorizing their access.",
+          "suggestion": "Stvorite univerzalni link za autorizaciju u {{productName}}-u."
         },
         {
           "type": "formatting",
-          "description": "The hyphen placement before 'u' could be improved for readability. While technically correct, it's slightly less natural in this context.",
-          "suggestion": "Stvorite univerzalni link za samostalnu autorizaciju u {{productName}}."
+          "description": "The inclusion of the hyphen in 'productName-u' is grammatically correct but might feel unnatural in this context.  It's better to avoid it unless 'productName' is demonstrably a noun requiring the locative case with the 'u' particle.",
+          "suggestion": "Stvorite univerzalni link za autorizaciju u {{productName}}."
         }
       ],
       "approved_at": null
@@ -284,13 +289,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'universal link' is directly translated as 'universal link'. While understandable, it's better to use a more natural Vietnamese equivalent. 'Universal link' is a technical term that might be confusing for some users.",
+          "description": "The term 'universal link' is directly translated as 'universal link' which isn't standard Vietnamese terminology. It's better to explain the function or use a common alternative.",
           "suggestion": "Tạo một liên kết để tự ủy quyền trong {{productName}}"
         },
         {
-          "type": "formatting",
-          "description": "The word 'link' is repeated. This can make the sentence sound awkward. While the original English also includes the term twice, streamlining it is beneficial for Vietnamese.",
-          "suggestion": "Tạo một liên kết để tự ủy quyền trong {{productName}}"
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'tự ủy quyền' (self-authorization) might sound awkward in Vietnamese. A more natural phrasing might be better.",
+          "suggestion": "Tạo một liên kết để tự đăng nhập trong {{productName}}"
         }
       ],
       "approved_at": null

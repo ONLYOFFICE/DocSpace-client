@@ -3,7 +3,7 @@
   "content": "View basic information about your profile",
   "content_en_sha1_hash": "88d333b1826774dd3af1c211ba7693458c814b5f",
   "created_at": "2025-05-19T21:30:47.046Z",
-  "updated_at": "2025-05-28T09:30:03.011Z",
+  "updated_at": "2025-05-26T07:57:32.998Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that the user's profile information can be viewed. It appears in UI elements related to OAuth profiles and is likely used on buttons or screens where users can view their account details.",
     "is_auto": true,
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'プロフィールに関する基本情報を確認する' is technically correct but could be improved for naturalness and clarity in this context. '確認する' (kakunin suru - to confirm) implies a verification process, which might be more than just 'viewing'.",
-          "suggestion": "プロフィールに関する基本情報を閲覧する"
+          "description": "The translation 'プロフィールに関する基本情報を確認する' is a bit literal and not the most natural way to express 'View basic information about your profile' in Japanese. It sounds formal and somewhat clunky.",
+          "suggestion": "Consider a more natural phrasing like: 'プロフィール概要を見る' (Profile summary view) or 'プロフィール基本情報を確認できます' (You can view basic profile information)."
         }
       ],
       "approved_at": null
@@ -149,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Romanian translation uses a possessive pronoun ('dvs.') which might be overly formal for a user interface. Consider a more informal alternative.",
-          "suggestion": "Vizualizarea informațiilor de bază despre profilul tău."
+          "type": "incorrect_translation",
+          "description": "The translation \"Vizualizarea informațiilor de bază despre profilul dvs.\" is a bit formal and could be improved for a more user-friendly tone. 'Vizualizarea' is a less common word for users. A more natural phrasing would be preferable.",
+          "suggestion": "Afișarea informațiilor de bază despre profilul tău"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Прикажи основне информације о свом профилу\" is a literal translation that doesn't quite capture the intended meaning of 'View basic information about your profile'. It's grammatically correct but sounds a bit formal and less natural in Serbian. 'View' can also imply access and not just displaying information.",
-          "suggestion": "Погледај основне информације о свом профилу"
+          "description": "The translation \"Прикажи основне информације о свом профилу\" while understandable, isn't the most natural or precise translation of 'View basic information about your profile'. 'Прикажи' implies showing something, which is a bit too literal. A more accurate and natural translation would be something along the lines of 'Прегледај основне информације о свом профилу' or 'Покажи основне информације о свом профилу'.",
+          "suggestion": "Прегледај основне информације о свом профилу"
         }
       ],
       "approved_at": null
@@ -219,13 +219,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '查看您个人资料的基础信息' is too literal and not idiomatic. While technically correct, it sounds awkward in Chinese. '个人资料' directly translates to 'personal profile'.",
-          "suggestion": "查看您的个人资料基本信息"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

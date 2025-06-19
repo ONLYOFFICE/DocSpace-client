@@ -3,7 +3,7 @@
   "content": "Copy and keep all",
   "content_en_sha1_hash": "971cae02621d8baa4bdf72eccc28d0438d12ba3d",
   "created_at": "2025-05-19T21:30:43.738Z",
-  "updated_at": "2025-05-28T09:30:02.218Z",
+  "updated_at": "2025-05-26T07:57:32.244Z",
   "comment": {
     "text": "This translation key is used as a default message for a button that allows users to copy and keep all files in a conflict resolution dialog. The exact wording may vary depending on the specific context where it appears, but its purpose remains consistent: to provide an alternative action when multiple files are involved.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Zkopírovat a uchovat všechny' is a rather literal and stiff translation of 'Copy and keep all'. It doesn't flow naturally in Czech. A more natural and concise translation would be preferred.",
-          "suggestion": "Zkopírovat a ponechat všechny"
+          "description": "While technically correct, \"Zkopírovat a uchovat všechny\" is a bit literal and less natural in Czech. A more idiomatic translation would convey the same meaning more effectively.",
+          "suggestion": "Consider alternatives like \"Kopírovat a ponechat všechny\" or \"Zkopírovat a uložit všechny\"."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Copier et garder tous' is not the most natural or accurate translation of 'Copy and keep all'. It translates literally but doesn't convey the intended meaning well. 'Conserver et copier tous' or 'Copier et conserver tous' would be more idiomatic.",
-          "suggestion": "Consider 'Conserver et copier tous' or 'Copier et conserver tous'."
+          "description": "The translation 'Copier et garder tous' is a literal translation and doesn't quite convey the intended meaning of 'Copy and keep all' in a natural French way. While grammatically correct, it sounds awkward.",
+          "suggestion": "A more natural translation would be 'Conserver et copier tout' or 'Copier et conserver tout' depending on the desired emphasis.  'Sauvegarder et copier tout' is also a possibility if the intention is to preserve the copies."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Պատճենել և պահել բոլորը\" literally translates to 'Copy and keep all'. While technically correct, it sounds unnatural and awkward in Armenian. A more idiomatic translation would depend on the context. Without context, a simpler and more natural phrasing would be better.",
-          "suggestion": "Consider alternative phrasing like \"Պատճենել ամեն ինչ\" (Copy everything) or \"Պահել բոլորը\" (Keep all), depending on the intended emphasis."
+          "description": "The translation \"Պատճենել և պահել բոլորը\" is a literal translation that might not be the most natural or idiomatic way to express \"Copy and keep all\" in Armenian. While technically correct, it could sound awkward.",
+          "suggestion": "Consider alternatives like \"Պատճենել և պահպանել ամեն ինչ\" (Copy and preserve everything) or \"Պատճենել բոլորը և պահպանել\" (Copy all and preserve)."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"모두 복사하여 보관\" is technically correct, it's a bit formal and clunky for a phrase like \"Copy and keep all\". A more natural and idiomatic translation would be better.",
-          "suggestion": "Consider alternatives like \"전부 복사해서 보관\" or \"모두 복사하고 보관\" for a more natural flow."
+          "description": "The translation \"모두 복사하여 보관\" (modu boksa haneun bogwan) while technically correct, doesn't fully capture the nuance of \"Copy and keep all\". \"모두 복사하여 보관\" translates to 'Copy all and store/keep'. It lacks the immediacy or emphasis of the original phrase. It sounds more formal and passive.",
+          "suggestion": "Consider alternatives like \"전부 복사해서 보관\" (jeonbu boksa haeseo bogwan - copy everything and keep) or \"모두 복사 후 보관\" (modu boksa hu bogwan - copy all then keep). Alternatively, \"전부 복사\" (jeonbu boksa - copy all) could be more concise, depending on the context."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"පිටපත් කර සියල්ල තබා ගන්න\" is a somewhat literal translation and might not be the most natural or idiomatic way to express 'Copy and keep all' in Sinhala. It sounds slightly awkward.",
-          "suggestion": "Consider alternatives like \"සියල්ල පිටපත් කර ගන්න\" (Siyaalla pitakatha gara gannaa) which is a more common phrasing, or \"සියල්ල සෙට් කර ගන්න\" (Siyaalla set kara gannaa) if the context implies saving or archiving."
+          "description": "While technically correct, \"පිටපත් කර සියල්ල තබා ගන්න\" is a literal translation that sounds slightly unnatural in Sinhala. A more natural phrasing would be \"සියල්ල පිටපත් කර ගන්න\" or \"සියල්ල නමින් පිටපත් කරන්න\".",
+          "suggestion": "සියල්ල පිටපත් කර ගන්න"
         }
       ],
       "approved_at": null
@@ -201,13 +201,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Копирај и сачувај све\" is understandable, a more natural and idiomatic translation of 'Copy and keep all' in Serbian (Cyrillic) would be 'Копирај и чувај све'. 'Сачувај' implies preserving or saving for the future, while 'чувај' is a more general term for keeping something safe.",
-          "suggestion": "Копирај и чувај све"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -225,13 +219,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Скопіювати й залишити все\" is technically correct, it doesn't perfectly capture the nuance of \"Copy and keep all.\" The English phrase implies a directive to copy and retain everything, suggesting preservation. The Ukrainian translation feels more like a statement of intention to copy and leave everything as is.",
-          "suggestion": "Consider alternatives like \"Зробити копію та зберегти все\" (Make a copy and save everything) or \"Скопіювати та зберегти все\" (Copy and save everything). The best choice depends on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

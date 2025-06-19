@@ -3,7 +3,7 @@
   "content": "No internet connection",
   "content_en_sha1_hash": "836f41ede479860e44d418cf75284a89bfc38c4a",
   "created_at": "2025-05-19T21:30:45.091Z",
-  "updated_at": "2025-05-28T09:30:02.937Z",
+  "updated_at": "2025-05-26T07:57:32.905Z",
   "comment": {
     "text": "This translation key is used for displaying a message when there is no internet connection. It appears as the header text in an error container component and provides feedback to users about their network status.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İnternet bağlantısı tapılmadı' is a literal translation of 'Internet connection not found'. A more natural and commonly used Azerbaijani phrase for 'No internet connection' would be 'İnternet yoxdur'.",
-          "suggestion": "İnternet yoxdur"
+          "description": "The translation \"İnternet bağlantısı tapılmadı\" literally translates to \"Internet connection was found\". The intended meaning is 'No internet connection'.",
+          "suggestion": "İnternet bağlantısı yoxdur"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nebylo nalezeno připojení k internetu' is a bit too literal and verbose for a short error message. A more natural and concise translation would be preferable.",
-          "suggestion": "Žádné připojení k internetu"
+          "description": "The translation 'Nebylo nalezeno připojení k internetu' is overly literal and verbose for a simple error message like 'No internet connection'. It translates to 'No connection to the internet was found'.",
+          "suggestion": "A more natural and concise translation would be 'Žádné připojení k internetu' or 'Není připojení k internetu'."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'No se ha encontrado ninguna conexión a Internet' is overly verbose and not the most natural way to express 'No internet connection' in Spanish. A more common and concise translation would be 'No hay conexión a internet' or 'Sin conexión a internet'.",
-          "suggestion": "No hay conexión a internet"
+          "description": "The translation 'No se ha encontrado ninguna conexión a Internet' is overly literal and slightly awkward. A more natural and common way to express 'No internet connection' in Spanish is 'No hay conexión a Internet' or 'No tienes conexión a Internet'.",
+          "suggestion": "No hay conexión a Internet"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Internet-yhteyttä ei löydy' is not the most natural or accurate translation of 'No internet connection'. It literally translates to 'Internet connection is not found'. A more common and accurate translation would be 'Ei internet-yhteyttä'.",
-          "suggestion": "Ei internet-yhteyttä"
+          "description": "The translation \"Internet-yhteyttä ei löydy\" (Internet connection is not found) is not the most natural or accurate translation of \"No internet connection\". While technically correct, it implies searching for a connection rather than the absence of one.",
+          "suggestion": "A more natural translation would be \"Ei internet-yhteyttä\" or \"Internet-yhteyttä ei ole\"."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aucune connexion Internet trouvée' is not the most natural or concise way to say \"No internet connection\" in French. While technically correct, it's a bit wordy.",
-          "suggestion": "Connexion Internet indisponible"
+          "description": "While technically correct, \"Aucune connexion Internet trouvée\" is a bit wordy and less natural than other options for conveying 'No internet connection'. A more concise and common translation would be \"Pas de connexion Internet\" or \"Pas de connexion\".",
+          "suggestion": "Pas de connexion Internet"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ինտերնետ կապ չի գտնվել' literally translates to 'Internet connection was not found'. While understandable, it doesn't convey the simple meaning of 'No internet connection' as clearly and naturally. A more direct and common translation would be 'Չկա ինտերնետ կապ' or 'Համարձվել ինտերնետ կապ' ",
-          "suggestion": "Consider 'Չկա ինտերնետ կապ' or 'Համարձվել ինտերնետ կապ'"
+          "description": "The translation 'Ինտերնետ կապ չի գտնվել' literally translates to 'Internet connection was not found'. A more natural and accurate translation of 'No internet connection' would be 'Չկա ինտերնետ կապ' or 'Ինտերնետի կապ չկա'.",
+          "suggestion": "Consider using 'Չկա ինտերնետ կապ' or 'Ինտերնետի կապ չկա'."
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nessuna connessione a internet trovata' is overly literal and less natural than a more idiomatic equivalent. While technically correct, it sounds slightly awkward in Italian.",
-          "suggestion": "Consider a more natural phrasing like 'Nessuna connessione internet' or 'Niente connessione internet'."
+          "description": "The Italian translation 'Nessuna connessione a internet trovata' is a bit too literal and verbose for a simple error message. While technically correct, it's not the most natural way to express 'No internet connection' in Italian. It implies a search or finding process which isn't present in the original.",
+          "suggestion": "Consider a more concise and natural translation like 'Nessuna connessione internet' or 'Senza connessione internet'."
         }
       ],
       "approved_at": null
@@ -141,13 +141,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '인터넷 연결을 찾을 수 없습니다.' literally translates to 'Cannot find internet connection.' While understandable, a more natural and common phrasing for an offline error message would be '인터넷 연결이 없습니다.' (Internet connection is not available).",
-          "suggestion": "인터넷 연결이 없습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Interneta savienojums nav atrasts' is a literal translation of 'No internet connection' but doesn't convey the same meaning. It translates to 'Internet connection was not found,' which implies a search rather than a lack of connection. A more natural and accurate translation would be something like 'Nav interneta pieslēguma' or 'Nav pieejams internets'.",
-          "suggestion": "Nav interneta pieslēguma"
+          "description": "The Latvian translation 'Interneta savienojums nav atrasts' is a literal translation that doesn't convey the intended meaning of 'No internet connection' as naturally. It translates to 'Internet connection was not found', which sounds more like a debugging message than an error message to the user.",
+          "suggestion": "A more natural and user-friendly translation would be 'Nav pieejams internets' or 'Interneta pieslēgums nav pieejams'."
         }
       ],
       "approved_at": null
@@ -186,13 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Não foi encontrada qualquer conexão à internet\" is a bit too formal and verbose for a simple error message like 'No internet connection'. A more natural and concise translation would be better.",
-          "suggestion": "Sem conexão com a internet"
+          "description": "The translation 'Não foi encontrada qualquer conexão à internet' is overly formal and verbose for a simple error message like 'No internet connection'. It doesn't convey the same immediacy and clarity.",
+          "suggestion": "A more natural and concise translation would be 'Sem conexão com a internet' or 'Nenhuma conexão com a internet'."
         },
         {
           "type": "grammar",
-          "description": "While technically correct, \"Não foi encontrada qualquer conexão à internet\" uses 'qualquer' which isn't necessary. It implies there wasn't *any* connection, when it simply means no connection is present.",
-          "suggestion": "Não foi encontrada conexão à internet"
+          "description": "While grammatically correct, the use of 'qualquer' in 'qualquer conexão' is slightly awkward in this context. It's not incorrect, but less idiomatic.",
+          "suggestion": "Consider removing 'qualquer' - 'Não foi encontrada conexão à internet' is slightly better, but 'Sem conexão com a internet' is preferred."
         }
       ],
       "approved_at": null
@@ -203,7 +197,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nenhuma conexão com a Internet foi encontrada' is overly formal and verbose for a simple error message like 'No internet connection'. It translates more literally as 'No internet connection was found.'",
+          "description": "The translation 'Nenhuma conexão com a Internet foi encontrada' is overly formal and verbose for a simple 'No internet connection'. It implies a search or discovery process that doesn't align with the original meaning.",
+          "suggestion": "Sem conexão com a internet"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'a Internet' is grammatically incorrect. It should be 'a internet'.",
           "suggestion": "Sem conexão com a internet"
         }
       ],
@@ -212,7 +211,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the Romanian translation 'Nu există nicio conexiune la Internet' is somewhat formal and verbose for a user-facing error message. A more natural and concise option would improve user experience.",
+          "suggestion": "Nu ai conexiune la Internet"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -227,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අන්තර්ජාලය නැත' is a literal translation of 'internet is not'. A more natural and commonly used translation for 'No internet connection' in Sinhala would be something like 'අන්තර්ජාල සම්බන්ධතාවයක් లేదు' or 'අන්තර්ජාල සම්බන්ධතාවය లేదు'.",
-          "suggestion": "Consider 'අන්තර්ජාල සම්බන්ධතාවයක් లేదు' or 'අන්තර්ජාල සම්බන්ධතාවය లేదు'."
+          "description": "The Sinhala translation 'අන්තර්ජාලය නැත' is a literal translation of 'internet is not'. A more natural and common way to express 'No internet connection' in Sinhala would be 'ඉන්ටර්නෙට් සම්බන්ධතාවයක් නැත' or 'අන්තර්ජාල සම්බන්ධතාවයක් නැත'.",
+          "suggestion": "ඉන්ටර්නෙට් සම්බන්ධතාවයක් නැත"
         }
       ],
       "approved_at": null
@@ -239,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nenašlo sa žiadne internetové pripojenie' is a literal translation and a bit clunky. It translates to 'No internet connection was found'. A more natural Slovak phrasing would be more concise and user-friendly.",
-          "suggestion": "Nenájdeme internetové pripojenie"
+          "description": "The translation 'Nenašlo sa žiadne internetové pripojenie' is a literal translation but sounds overly formal and clunky. A more natural Slovak equivalent would be 'Žiadne internetové pripojenie' or 'Nie je pripojenie na internet'.",
+          "suggestion": "Žiadne internetové pripojenie"
         }
       ],
       "approved_at": null
@@ -251,12 +256,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Internetne povezave ni bilo mogoče najti\" is a literal translation that doesn't quite capture the meaning of \"No internet connection.\" It implies a searching process and failure. A more accurate and natural translation would convey the lack of connection directly.",
+          "description": "The translation 'Internetne povezave ni bilo mogoče najti' is a literal translation and doesn't convey the user-friendly meaning of 'No internet connection.' It's overly technical and implies a search or attempt failed, rather than simply stating the lack of connection.",
           "suggestion": "Brez internetne povezave"
         },
         {
           "type": "cultural",
-          "description": "While technically correct, \"Brez internetne povezave\" is more commonly used and conveys the meaning more clearly in Slovenian in this context.",
+          "description": "The translated phrase is too formal and technical for a typical user error message. A simpler, more direct message would be more appropriate.",
           "suggestion": "Brez internetne povezave"
         }
       ],
@@ -268,8 +273,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Без интернет конекције\" is not the most natural or accurate translation of \"No internet connection\" in Serbian (Cyrillic). While understandable, it's a literal rendering. A more common and natural phrasing would be \"Нема интернет везе\" or \"Без интернета\".",
-          "suggestion": "Нема интернет везе"
+          "description": "The Serbian translation 'Без интернет конекције' is a literal translation and not idiomatic. A more natural Serbian translation would be 'Нема интернет конекција' or 'Нема повезаности са интернетом'.",
+          "suggestion": "Нема интернет конекција"
         }
       ],
       "approved_at": null
@@ -283,7 +288,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'İnternet bağlantısı bulunamadı' while generally understandable, is a more formal and potentially less user-friendly translation of \"No internet connection.\" A more natural and common phrasing might be 'İnternet bağlantısı yok' or 'İnternet bağlantısı yok'.",
+          "suggestion": "Consider 'İnternet bağlantısı yok'"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

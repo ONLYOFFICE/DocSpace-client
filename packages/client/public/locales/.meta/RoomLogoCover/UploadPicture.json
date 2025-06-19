@@ -3,7 +3,7 @@
   "content": "Upload picture",
   "content_en_sha1_hash": "0a024e54cb81f9e05f0faa90496774cb8e76dcae",
   "created_at": "2025-05-19T21:30:53.320Z",
-  "updated_at": "2025-05-28T09:30:02.846Z",
+  "updated_at": "2025-05-26T07:57:32.828Z",
   "comment": {
     "text": "Upload picture is a button label used to trigger uploading an image. It appears as a label on a UI element that allows users to select or upload images.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/DialogsStore.js",
-      "line_number": 972,
+      "line_number": 980,
       "context": "};\n \n getLogoCoverModel = (t, hasImage, onDelete) => {\n return [\n {\n label: t(\"RoomLogoCover:UploadPicture\"),\n icon: UploadSvgUrl,\n key: \"upload\",\n onClick: (ref) => ref.current.click(),\n },",
       "module": "/packages/client"
     },
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"画像のアップロード\" is a very literal translation. A more natural and user-friendly translation for a button or link labeled \"Upload picture\" would be something like \"写真のアップロード\" (Shashin no upload) or simply \"アップロード\" (upload).",
-          "suggestion": "写真のアップロード"
+          "description": "While \"画像のアップロード\" (Gazou no Appurodo) is technically correct, it's a very literal and slightly unnatural translation. A more natural phrasing would be something like \"写真のアップロード\" (Shashin no Appurodo) or simply \"アップロード\" (Appurodo).",
+          "suggestion": "写真のアップロード (Shashin no Appurodo) or アップロード (Appurodo)"
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Încărcare imagine\" is technically correct but not the most natural phrasing for a button label or instruction. 'Încărcare imagine' translates literally to 'Image Upload'. A more idiomatic translation for 'Upload picture' would be 'Încarcă imagine'.",
+          "description": "While 'Încărcare imagine' is understandable, it's not the most natural Romanian translation for 'Upload picture'. 'Încărcare imagine' literally translates to 'Image loading'. A more common and idiomatic translation would be 'Încarcă imagine' or 'Încărcați o imagine'.",
           "suggestion": "Încarcă imagine"
         }
       ],
@@ -192,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Учитај слику' is not the most natural or accurate translation of 'Upload picture'. A more common and accurate translation would be 'Отпреми слику'. 'Учитај' implies loading data into a system, while 'Отпреми' is the standard term for uploading a file.",
+          "description": "The Serbian (Cyrillic) translation \"Учитај слику\" is a literal translation of \"Upload picture\" but is not the typical or most natural way to express this action in Serbian. A more natural translation would be \"Отпреми слику\" or \"Убаци слику\". \"Учитај\" implies loading into memory, not uploading.",
           "suggestion": "Отпреми слику"
         }
       ],
@@ -216,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Передати зображення\" doesn't accurately convey the meaning of \"Upload picture\". 'Передати' implies transferring or handing over, not uploading. A more appropriate translation would convey the action of uploading a file.",
+          "description": "The translation 'Передати зображення' is a literal translation of 'transmit image' and doesn't accurately convey the meaning of 'Upload picture'. It implies sending an image, not uploading it.",
           "suggestion": "Завантажити зображення"
         }
       ],

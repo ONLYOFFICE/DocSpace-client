@@ -3,7 +3,7 @@
   "content": "Coming soon",
   "content_en_sha1_hash": "e4115be258dbdd1661c5f1ff14670c19ef1048da",
   "created_at": "2025-05-19T21:30:43.531Z",
-  "updated_at": "2025-06-03T20:59:42.060Z",
+  "updated_at": "2025-06-08T12:02:32.724Z",
   "comment": {
     "text": "The \"ComingSoon\" translation key is used to display a placeholder text that indicates something is coming soon. It appears in various UI elements on the Home page of the application, likely as a loading indicator or before a new feature becomes available.",
     "is_auto": true,
@@ -147,13 +147,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Скоро появится\" while conveying 'coming soon', is more literally 'will soon appear'. A more common and natural translation for 'Coming soon' in a marketing or announcement context would be \"Вскоре\" or \"Скоро\".",
-          "suggestion": "Consider using \"Вскоре\" or \"Скоро\" instead."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Pride kmalu\" is not an accurate translation of \"Coming soon\". \"Pride\" translates to \"ponos\" and is unrelated to the intended meaning.",
-          "suggestion": "The correct translation would be something like \"Prihodnje kmalu\" or \"Kmalu\"."
+          "description": "The Slovenian translation \"Pride kmalu\" does not accurately convey the meaning of \"Coming soon.\" \"Pride\" translates to 'Pride' in English, which is unrelated to the intended meaning.",
+          "suggestion": "A more accurate translation would be \"Prihodnje kmalu\" or \"Kmalu\"."
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Ускоро долази\" literally translates to \"Coming arrives soon\". While understandable, it's not the most natural or idiomatic way to express \"Coming soon\" in Serbian. A better translation would be something like \"Предстоји\" or \"Скоро\".",
-          "suggestion": "Предстоји"
+          "description": "The Serbian translation \"Ускоро долази\" literally translates to \"Coming arrives soon.\" While understandable, it's not the most natural or idiomatic way to say 'Coming soon' in Serbian. A more accurate and common translation would be \"Скоро\" or \"Ускоро\".",
+          "suggestion": "Скоро"
         }
       ],
       "approved_at": null
@@ -198,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Uskoro dolazi\" is understandable, it's a more literal translation of \"Coming soon.\" A more natural and idiomatic Serbian (Latin) translation would be \"Predstojeće\" or \"Dolazi uskoro\". \"Uskoro dolazi\" is a bit clunky in this context.",
+          "description": "The Serbian translation 'Uskoro dolazi' translates more literally to 'Coming soon arrives'. While understandable, it's not the most natural or idiomatic way to express 'Coming soon' in Serbian. A more common and natural translation would be 'Predstojeće' or 'Dolazi uskoro'.",
           "suggestion": "Predstojeće"
         }
       ],

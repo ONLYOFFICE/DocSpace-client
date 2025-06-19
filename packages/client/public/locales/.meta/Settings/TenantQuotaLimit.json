@@ -3,7 +3,7 @@
   "content": "{{tenantQuotaLimit}} for {{productName}}",
   "content_en_sha1_hash": "09355ae23ccbff3fb98fc3c1e3efa0079105eed8",
   "created_at": "2025-05-19T21:30:52.865Z",
-  "updated_at": "2025-05-28T09:30:02.306Z",
+  "updated_at": "2025-05-26T07:57:32.340Z",
   "comment": {
     "text": "This translation key displays a warning message indicating the quota limit for a specific product. It is used in a dialog that informs users about approaching or exceeded usage limits. The quota limit value is displayed as \"{tenantQuotaLimit} for {productName}\".",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'لـ' is a preposition meaning 'for' but doesn't convey the intended meaning of 'limit' in the context of a tenant quota. It's a literal translation of 'for' but not a good representation of the English phrase within this context.",
-          "suggestion": "Consider a more contextually appropriate translation like 'حد لـ' (Hadd li-) which means 'limit for', or 'محدودية لـ' (Mahdoodiya li-) which means 'quota for'."
+          "description": "The preposition 'لـ' (li-) is a direct transliteration and doesn't fully convey the meaning of 'for' in this context. It could imply possession or belonging rather than a limit applied to something. A more suitable translation would consider the relationship between the quota limit and the product name.",
+          "suggestion": "Consider alternatives like 'محدودية' (mahdoodiyya) which means 'limit' and requires a more contextually appropriate preposition like 'يخص' (yakhuss) which means 'belongs to' or 'is for', creating something like '{{tenantQuotaLimit}}  يخص {{productName}}"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'for {{productName}}' doesn't accurately translate to 'üzünə {{productName}}'.  A more appropriate translation would be '{{productName}} ilə' or '{{productName}} üçün'. The current translation implies something being 'on top of' the product name, rather than a limitation applying to it.",
-          "suggestion": "{{tenantQuotaLimit}} ilə {{productName}}"
+          "description": "The English phrase '{{tenantQuotaLimit}} for {{productName}}' implies that the tenant quota limit applies *to* the product name. The Azerbaijani translation, as it is, reads as '{{productName}} for {{tenantQuotaLimit}', which reverses the relationship. It needs rephrasing to accurately convey the original meaning.",
+          "suggestion": "Consider a rephrasing such as '{{productName}} üçün müştəri hesabının məhdudiyyəti {{tenantQuotaLimit}}' ({{productName}} for the tenant account limit {{tenantQuotaLimit}})"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"{{tenantQuotaLimit}} {{productName}}:lle\" incorrectly translates 'for'.  The preposition 'for' in this context likely indicates possession or assignment, which is better translated as 'of' or 'on' in Finnish, depending on the specific nuance. Using ':lle' implies 'to' or 'for' in the dative case, which might not be the intended meaning. The best translation depends on the context of 'productName' in relation to 'tenantQuotaLimit'.",
-          "suggestion": "The suggestion depends on context. Possible alternatives include: '{{tenantQuotaLimit}} {{productName}}':n' (genitive, indicating possession or belonging) or '{{tenantQuotaLimit}} {{productName}}':lle' (dative, implying assignment, but verify if it’s correct)."
+          "description": "The Finnish translation '{{tenantQuotaLimit}} {{productName}}:lle' is not a natural or accurate translation of '{{tenantQuotaLimit}} for {{productName}}'. The ':lle' implies possession or direction towards, which doesn't convey the intended meaning of a quota limit applied to a product. A more appropriate translation would depend on the context of the quota limit (e.g., '{{tenantQuotaLimit}} {{productName}} -rajalla' for a limit, or '{{tenantQuotaLimit}} {{productName}} -tuotteelle' to indicate for a product).",
+          "suggestion": "Consider alternatives like '{{tenantQuotaLimit}} {{productName}} -rajalla' or '{{tenantQuotaLimit}} {{productName}} -tuotteelle', or a more context-aware phrasing."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The preposition 'for' needs to be translated more accurately to convey the intended meaning. 'Համար' simply indicates 'for' in a general sense and might not fully capture the relation between the quota limit and the product. A more nuanced translation might be needed depending on the context, possibly using a phrase indicating 'dedicated to' or 'assigned to'.",
-          "suggestion": "Consider alternatives like '{{productName}}-ին հատկացված' or '{{productName}}-ի համար նախատեսված' based on context. More context would be needed for a perfect suggestion."
+          "description": "The Armenian translation \"{{tenantQuotaLimit}} {{productName}}-ի համար\" lacks the preposition 'for' that connects the quota limit and the product name. A more accurate translation would include 'մասնագործության' or similar.",
+          "suggestion": "{{tenantQuotaLimit}} {{productName}}-ի մասնագործության համար"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}ごとに{{tenantQuotaLimit}}\" implies \"{{tenantQuotaLimit}} per {{productName}}\". The original English content implies a limit *for* each product. The Japanese translation doesn't fully convey this nuance. A more accurate translation would place emphasis on the limit being associated with each product.",
-          "suggestion": "Consider a translation like \"{{productName}} ごとのテナント制限: {{tenantQuotaLimit}}\" or \"{{productName}} ごとのテナント割り当て: {{tenantQuotaLimit}}\" depending on the intended meaning of 'quota'."
+          "description": "The translation '{{productName}}ごとに{{tenantQuotaLimit}}' doesn't accurately convey the meaning of '{{tenantQuotaLimit}} for {{productName}}'.  'ごとに' implies 'per' or 'for each', which is not the intended meaning. It suggests a quota limit is applied *for each* product, rather than a limit associated *with* a product.",
+          "suggestion": "{{productName}}ごとの{{tenantQuotaLimit}}"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation doesn't fully capture the meaning of \"for\". It implies a relationship but not a limit *for* the product. A better translation would incorporate the idea of a limit applied *to* the product's usage.",
-          "suggestion": "{{tenantQuotaLimit}}은 {{productName}}에 적용되는 제한입니다."
+          "description": "The Korean translation lacks the preposition 'for' to properly convey the original meaning of 'for'. The current translation directly places '{{productName}}' and '{{tenantQuotaLimit}}' next to each other without indicating the relationship.",
+          "suggestion": "{{productName}}에 {{tenantQuotaLimit}}"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ກຳນົດຈຳນວນສູງສຸດ\" (kam not jam nuan sung sut) translates to \"maximum quantity\" or \"maximum number.\" While not entirely wrong, it's a bit too literal and could be improved to better convey \"quota limit\". A more natural phrasing would depend on the specific context of \"tenantQuotaLimit\".",
-          "suggestion": "Consider a phrasing like \"ຂີດຈຳກັດເຕັນແອນນັ້ນແມ່ນ\" (kheet jam gat tenant nan maen) which translates to \"the tenant limit is\" or a more contextually accurate term for 'limit' in Lao."
+          "description": "The Lao translation \"ກຳນົດຈຳນວນສູງສຸດຂອງ\" (kam-not jam-nuan sung-sut khong) translates to \"set the maximum number of\". A more direct and natural translation for 'limit' might be something like 'ຂອບເຂດສູງສຸດ' (khop-khet sung-sut) or 'ຈຳນວນສູງສຸດທີ່ອະນຸຍາດ' (jam-nuan sung-sut thi anu-yat).",
+          "suggestion": "Consider using 'ຂອບເຂດສູງສຸດຂອງ {{tenantQuotaLimit}} ສຳລັບ {{productName}}' or 'ຈຳນວນສູງສຸດທີ່ອະນຸຍາດຂອງ {{tenantQuotaLimit}} ສຳລັບ {{productName}}'"
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"priekš šī\" doesn't accurately convey \"for {{productName}}\". \"Priekš šī\" means \"for this\". A more accurate translation would convey the sense of belonging or association. Considering the context, '{{productName}}' is likely a product name. A better translation might be '{{productName}}', '{{productName}} lietošanai' (for using {{productName}}), or '{{productName}} lietojumam' (for the use of {{productName}}).",
-          "suggestion": "{{tenantQuotaLimit}} lietošanai: {{productName}}"
+          "description": "The translation \"priekš šī\" is not the most accurate translation of \"for {{productName}}\". It implies 'for this', but 'for' in this context refers to a limit applied *to* the product. A better translation would be 'konkrēti {{productName}}' or 'attiecas uz {{productName}}'.",
+          "suggestion": "attiecas uz {{productName}}"
         }
       ],
       "approved_at": null
@@ -234,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation '{{tenantQuotaLimit}} {{productName}} için' literally translates to '{{tenantQuotaLimit}} for {{productName}}'.  While understandable, it's not the most natural phrasing in Turkish. A more idiomatic translation would imply the quota limit *applies to* the product.",
-          "suggestion": "{{tenantQuotaLimit}} {{productName}}'e"
+          "description": "The translation '{{tenantQuotaLimit}} {{productName}} için' doesn't accurately convey the English meaning '{{tenantQuotaLimit}} for {{productName}}'. 'için' means 'for' but the phrasing is less natural in Turkish. A more appropriate translation would consider a restructuring to emphasize the quota limit relating to the product.",
+          "suggestion": "{{productName}} için {{tenantQuotaLimit}}"
         }
       ],
       "approved_at": null
@@ -258,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{productName}}的{{tenantQuotaLimit}}限制\" directly translates to '{{productName}}'s {{tenantQuotaLimit}} limit'. A more natural and idiomatic translation for 'Settings:TenantQuotaLimit' would be something like '{{productName}}租户配额限制' or '{{productName}}租户限额'. The current translation lacks nuance and sounds somewhat literal.",
-          "suggestion": "{{productName}}租户配额限制"
+          "description": "The translation '{{productName}}的{{tenantQuotaLimit}}限制' directly translates to '{{productName}}'s {{tenantQuotaLimit}} limit'. While understandable, it doesn't convey the full meaning of '{{tenantQuotaLimit}} for {{productName}}'.  The original implies a limit *applied to* or *associated with* the product. A more accurate translation would emphasize this relationship. '{{productName}}的{{tenantQuotaLimit}}' is too literal and sounds less natural in Chinese.",
+          "suggestion": "{{productName}}的{{tenantQuotaLimit}}额度"
         }
       ],
       "approved_at": null

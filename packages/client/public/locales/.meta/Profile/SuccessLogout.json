@@ -3,7 +3,7 @@
   "content": "The active connection was logged out: {{platform}}, {{browser}}",
   "content_en_sha1_hash": "c2bc7dfa3f021091fb7c6a6188474f39cbee9fee",
   "created_at": "2025-05-19T21:30:53.384Z",
-  "updated_at": "2025-05-28T09:30:02.815Z",
+  "updated_at": "2025-05-26T07:57:32.800Z",
   "comment": {
     "text": "The SuccessLogout translation key is used to display a success message when an active connection is logged out. This message informs the user that their session has been successfully ended. It appears in the application after the logout action is completed.",
     "is_auto": true,
@@ -27,19 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The active connection was logged out' is not perfectly conveyed. A more natural Arabic phrasing would improve readability and user understanding. A literal translation exists, but a more idiomatic one is preferred.",
+          "suggestion": "تم إنهاء الاتصال النشط: {{platform}}, {{browser}}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Aktiv bağlantıdan çıxış edildi\" is a literal translation that sounds awkward in Azerbaijani. A more natural phrasing would be something like \"Fəal seansdan çıxış edildi\" or \"Fəal istifadəçi seansından çıxış edildi\".",
-          "suggestion": "Fəal seansdan çıxış edildi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"отписана\" (otpisana) doesn't quite convey the meaning of \"logged out\" in this context. It translates more to 'written off' or 'canceled'. A better translation for 'logged out' would be something like 'изключена' (izkluchena) or 'затворена' (zatvorena).",
-          "suggestion": "Активната връзка беше изключена: {{platform}}, {{browser}}"
+          "description": "The word 'отписана' (otpisana) doesn't quite convey the meaning of 'logged out' in this context. It implies a disconnection or cancellation rather than a formal logout process. A more accurate translation would be 'разкачена' (razkachena) or 'изключена' (izkluchena).",
+          "suggestion": "Активната връзка беше разкачена: {{platform}}, {{browser}}"
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"logged out\" has a more nuanced meaning than the Greek \"σταμάτησε\". \"Σταμάτησε\" translates to 'stopped' and doesn't accurately convey the action of a user being logged out of a system.",
-          "suggestion": "Consider using a more precise term for 'logged out' in Greek, such as \"αποσυνδέθηκε\" (aposindethike) which translates to 'disconnected' or 'signed out'."
+          "description": "The word 'stopped' ('σταμάτησε') doesn't quite capture the meaning of 'logged out'. 'Logged out' implies a deliberate action by a system, while 'stopped' is more general. A more accurate translation would reflect the action of logging out.",
+          "suggestion": "Η ενεργή σύνδεση αποσυνδέθηκε: {{platform}}, {{browser}}"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Spanish translation includes the same formatting placeholders ({{platform}}, {{browser}}) as the English version. While technically not incorrect, it's best practice to ensure consistent formatting conventions across languages. The Spanish version could benefit from re-evaluating whether these placeholders are truly necessary and how they best integrate with the Spanish language flow.",
-          "suggestion": "Consider if the placeholders are required in Spanish. If so, ensure the formatting aligns with Spanish conventions (e.g., using different characters or spacing)."
+          "description": "The Spanish translation retains the '{{platform}}, {{browser}}' placeholders, which should ideally be handled consistently with the English original. While not incorrect, it's a formatting consideration.",
+          "suggestion": "Consider whether the platform and browser should be replaced with actual values or translated within the string itself for improved user experience. Alternatively, ensure these placeholders are consistently handled across all translations."
         }
       ],
       "approved_at": null
@@ -95,9 +95,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Finnish translation retains the double curly braces {{ }} as in the English original. This might be unnecessary and could be simplified for a more natural Finnish feel.",
-          "suggestion": "Consider removing the double curly braces if they aren't essential for the platform's rendering logic. For example: 'Aktiivisesta yhteydestä kirjauduttiin ulos: platform, browser'"
+          "type": "incorrect_translation",
+          "description": "The passive voice \"kirjauduttiin ulos\" (was logged out) sounds slightly awkward in Finnish in this context. A more natural phrasing would be something like \"uloskirjautuminen\" or \"kirjautuminen ulos\".",
+          "suggestion": "Consider using a more active phrasing, such as \"Uloskirjautuminen:{{platform}}, {{browser}}\" or \"Kirjautuminen ulos:{{platform}}, {{browser}}\""
         }
       ],
       "approved_at": null
@@ -111,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Ակտիվ կապը դուրս է եկել՝ {{platform}}, {{browser}}' doesn't perfectly convey the meaning of 'The active connection was logged out'. 'Դուրս է եկել' implies an exit or departure, which isn't quite the same as being logged out. A more accurate translation would better reflect a forced disconnection.",
+          "suggestion": "Consider 'Ակտիվ կապը ավարտվեց՝ {{platform}}, {{browser}}' or 'Ակտիվ կապը ցրվեց՝ {{platform}}, {{browser}}'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +129,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'logged out' is overly literal. A more natural Japanese phrasing would be preferable. 'ログアウトされました' while technically correct, sounds stiff.",
+          "suggestion": "アクティブな接続は、ログアウトしました：{{platform}}, {{browser}}"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -144,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tika izrakstīts no aktīvā savienojuma' is a literal translation that doesn't convey the natural meaning of 'logged out'. A more idiomatic translation would be better.",
-          "suggestion": "Likvidēts no aktīvā sesijas/kontrola"
+          "description": "The translation 'Tika izrakstīts no aktīvā savienojuma' doesn't perfectly convey the meaning of 'logged out of the active connection'. 'Izrakstīts' implies being signed out or registered out, not necessarily disconnected.  A more accurate translation might focus on the disconnection aspect.",
+          "suggestion": "A possible suggestion is: 'Aktīvais savienojums tika atvienots: {{platform}}, {{browser}}' (The active connection was disconnected: {{platform}}, {{browser}})"
         }
       ],
       "approved_at": null
@@ -168,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'logged out' is better translated as 'finalizou' or 'encerrada' rather than 'terminou' in this context. 'Terminou' can imply something simply ended, while 'finalizou' or 'encerrada' better conveys the action of logging out.",
-          "suggestion": "A sessão da conexão ativa foi finalizada: {{platform}}, {{browser}}"
+          "description": "The term 'logged out' is best translated as 'encerrada' or 'finalizada' rather than 'terminou' in this context. 'Terminou' can imply a natural end, while 'encerrada' or 'finalizada' more accurately convey a forced disconnection.",
+          "suggestion": "A sessão da conexão ativa foi encerrada: {{platform}}, {{browser}}"
         }
       ],
       "approved_at": null
@@ -180,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'desconectada' implies a forceful disconnection, whereas 'logged out' generally refers to a user-initiated or system-managed disconnect. 'Desconectada' isn't the most accurate reflection of the English term in this context.",
-          "suggestion": "Consider using a translation closer to 'deslogada' or 'finalizada', which better conveys the action of logging out."
+          "description": "The word 'desconectada' (disconnected) doesn't quite capture the nuance of 'logged out.' While technically correct, 'logged out' has a more specific technical meaning in this context.",
+          "suggestion": "A conexão ativa foi finalizada: {{platform}}, {{browser}}"
         }
       ],
       "approved_at": null
@@ -201,7 +213,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'නික්ම' might be a colloquial or less formal way to say 'logged out'. A more formal and widely understood term might be preferable depending on the context.",
+          "suggestion": "නික්ම යනුවෙනෙහි වෙනුවට 'ඉවත්' හෝ 'නැවතenregistrement' භාවිතා කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -221,9 +239,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Serbian word 'одјављена' (odjavljena) is spelled correctly, but it's likely the intended word was 'најављена' (najavljena) if the context implies logging *out* of a session. However, without more context, 'одјављена' is technically correct for a logout.",
-          "suggestion": "Consider 'најављена' (najavljena) for more accurate meaning depending on the exact context."
+          "type": "incorrect_translation",
+          "description": "The word 'logged out' is better translated as 'isključena' instead of 'одјављена' in this context, which is more commonly used for devices disconnecting.",
+          "suggestion": "Активна конекција је искључена: {{platform}}, {{browser}}"
         }
       ],
       "approved_at": null
@@ -237,13 +255,25 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'oturumu' translates to 'session' rather than 'logout'. A more accurate translation would convey the action of logging out.",
+          "suggestion": "Etkin bağlantı kapatıldı: {{platform}}, {{browser}}"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Виконано вихід із активного з’єднання\" is too literal and doesn't convey the natural flow of 'logged out' in Ukrainian. A more natural phrasing would be something like \"Завершено вихід з активного з'єднання\" or \"Вихід з активного з’єднання завершено\".",
+          "suggestion": "Завершено вихід з активного з’єднання"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

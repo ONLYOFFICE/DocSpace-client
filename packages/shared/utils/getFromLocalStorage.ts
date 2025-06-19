@@ -24,14 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const getFromLocalStorage = (key: string) => {
-  if (typeof window === "undefined") return null;
+"use client";
 
-  try {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
-  } catch (error) {
-    console.error(`Error getting item '${key}' from localStorage:`, error);
+export const getFromLocalStorage = <T>(key: string) => {
+  if (typeof window === "undefined") {
     return null;
   }
+
+  return JSON.parse(window.localStorage.getItem(key) ?? "null") as T;
 };

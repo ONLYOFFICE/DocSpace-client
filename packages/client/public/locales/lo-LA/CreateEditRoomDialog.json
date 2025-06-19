@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "ການເອກະກໍານົດຕ້ອງການ",
   "AddStaticText": "ເພີ່ມຂໍ້ຄວາມ​ທີ່​ຕິດ​ຄ້າງ",
   "AddWatermarkElements": "ເພີ່ມຄຳ້ຳນຶກລົງໄປ",
   "AddWatermarksToDocuments": "ເພີ່ມເຄື່ອງໝາຍນ້ຳໃສ່ເອກະສານ",
@@ -33,7 +32,6 @@
   "StorageDescription": "ຕັ້ງໂຄຕ້າການເກັບຮັກສາຕໍ່ຫ້ອງ. ທ່ານສາມາດປ່ຽນຄ່ານີ້ ຫຼືປິດການຈຳກັດພື້ນທີ່ຈັດເກັບຂໍ້ມູນໄດ້.",
   "TagsPlaceholder": "ເພີ່ມແທັກ",
   "ThirdPartyStorageComboBoxPlaceholder": "ເລືອກບ່ອນເກັບຂໍ້ມູນ",
-  "ThirdPartyStorageDescription": "ໃຊ້ການບໍລິການພາກສ່ວນທີສາມເປັນບ່ອນເກັບຂໍ້ມູນສໍາລັບຫ້ອງນີ້. ໂຟນເດີໃໝ່ສຳລັບການຈັດເກັບຂໍ້ມູນຂອງຫ້ອງນີ້ຈະຖືກສ້າງຢູ່ໃນບ່ອນເກັບຂໍ້ມູນທີ່ເຊື່ອມຕໍ່.",
   "ThirdPartyStorageNoStorageAlert": "ເມື່ອກ່ອນ, ທ່ານຈໍາເປັນຕ້ອງເຊື່ອມຕໍ່ການບໍລິການທີ່ສອດຄ້ອງກັນໃນສ່ວນ \"ການເຊື່ອມໂຍງ\".",
   "ThirdPartyStoragePermanentSettingDescription": "ໄຟລ໌ຖືກເກັບໄວ້ໃນ ບ່ອນເກັບຂໍ້ມູນຂອງພາກສ່ວນ ທີສາມ {{thirdpartyTitle}} ໃນໂຟນເດີ \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "ເພື່ອເຊື່ອມຕໍ່ ບ່ອນເກັບຂໍ້ມູນພາກສ່ວນ ທີສາມ , ທ່ານຈໍາເປັນຕ້ອງເພີ່ມການບໍລິການທີ່ສອດຄ້ອງກັນໃນສ່ວນການເຊື່ອມໂຍງຂອງ ການຕັ້ງຄ່າ {{productName}} . ຕິດຕໍ່ ເຈົ້າຂອງ {{productName}} ຫຼືຜູ້ເບິ່ງແຍງລະບົບເພື່ອເປີດໃຊ້ການເຊື່ອມໂຍງ.",

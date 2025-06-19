@@ -3,7 +3,7 @@
   "content": "Upload from your Device",
   "content_en_sha1_hash": "c766735fe84df9f06fa3ff2fbe6daa4d88c8afe4",
   "created_at": "2025-05-19T21:30:56.546Z",
-  "updated_at": "2025-05-28T09:30:02.120Z",
+  "updated_at": "2025-05-26T07:57:32.161Z",
   "comment": {
     "text": "This translation key is used for the title of an option to upload a file from a device. It is typically displayed as a button or label in a user interface, allowing users to select their device for uploading a file. The text appears in contexts such as a file selection dialog or upload interface.",
     "is_auto": true,
@@ -147,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Încărcare de pe dispozitivul dvs\" is a literal translation but sounds slightly awkward in Romanian. A more natural phrasing would be preferable.",
+          "suggestion": "Incarca de pe dispozitivul tau"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +183,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Отпреми са свог Уређаја' is a functional translation but not the most natural or idiomatic way to say 'Upload from your Device' in Serbian. A more common and natural phrasing would be something along the lines of 'Учитај са уређаја' or 'Отпреми са уређаја'.",
+          "suggestion": "Учитај са уређаја"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Otpremi sa svog Uređaja\" doesn't perfectly capture the meaning of \"Upload from your Device\". While 'Otpremi' can mean 'upload', it's more commonly used for shipping or dispatching. A more accurate translation focusing on data upload would be preferable.",
+          "suggestion": "Postavke sa svog Uređaja"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

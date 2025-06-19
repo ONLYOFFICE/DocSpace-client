@@ -3,7 +3,7 @@
   "content": "Welcome to your {{productName}}!",
   "content_en_sha1_hash": "c74d8cc2c65b04f8376d5323554dafecaca907e3",
   "created_at": "2025-05-19T21:30:57.224Z",
-  "updated_at": "2025-05-28T09:30:02.894Z",
+  "updated_at": "2025-05-26T07:57:32.879Z",
   "comment": {
     "text": "The WelcomeTitle translation key is used to display a personalized greeting message when a user accesses their account. The {{productName}} placeholder is replaced with the product name from the current culture. This message appears on the login page's welcome container.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'مرحبًا بك في {{productName}} الخاص بك!' literally translates to 'Welcome to your {{productName}} of you!'. While understandable, a more natural and common phrasing in Arabic would be 'مرحبًا بك في {{productName}}!' or 'أهلاً بك في {{productName}}!'",
+          "suggestion": "أهلاً بك في {{productName}}!"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -69,7 +75,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Tervetuloa {{productName}}:n!' is not the most natural or accurate translation of 'Welcome to your {{productName}}!'. The ':n' ending is grammatically correct but stylistically awkward in this context.",
+          "suggestion": "Tervetuloa {{productName}}!"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The possessive form 'Welcome to *your* {{productName}}!' is better conveyed using a more direct welcoming to the product instead of a possessive. While the colon isn't *incorrect*, it implies an awkward relationship.",
+          "suggestion": "Tervetuloa {{productName}}!"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +98,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation retains the double curly braces `{{productName}}` like the English.  It's best to adapt the formatting to be consistent with Armenian conventions, which might use a different placeholder syntax.",
+          "suggestion": "Consider using a more idiomatic Armenian placeholder format, e.g., `[productName]` or `«productName»` or adapt to the specific product documentation's style."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the use of 'Ձեր' (Dzer) is formal. Depending on the target audience and product tone, a less formal 'դիր' (dir) or simply omitting the possessive pronoun might be more appropriate.",
+          "suggestion": "Consider using 'դիր {{productName}}!' or simply 'Բարի գալուստ {{productName}}!'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +169,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Bine ați venit în spațiul dvs {{productName}}!\" doesn't accurately convey the meaning of \"Welcome to your {{productName}}!\" \"Spațiul dvs\" translates to 'your space' which is not a direct equivalent of 'Welcome to your'. A more appropriate translation would convey a sense of welcome and belonging.",
+          "suggestion": "Bine ați venit la {{productName}}!"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses double curly braces for the variable `{{productName}}`. The Romanian translation also maintains this formatting. While technically acceptable, it's common for Romanian localization to use single curly braces `{productName}`. Consistency across the application should be considered.",
+          "suggestion": "Bine ați venit la {{productName}}!"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +192,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation '{{productName}} වෙත පිළිගනිමු!' while understandable, doesn't directly translate to 'Welcome to your {{productName}}!'. A more accurate translation would convey a sense of invitation or arrival.",
+          "suggestion": "{{productName}} සඳහා සාදරයෙන් පිළිගැනීම!"
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation uses a different word order compared to the English. This might affect readability and the overall feel of the welcome message.",
+          "suggestion": "Consider reordering the Sinhala sentence to better align with the English structure while maintaining naturalness. This is context-dependent, so ensure readability is prioritized."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,7 +251,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Welcome to your' is better conveyed as '欢迎使用' (Welcome to use) rather than a direct translation of 'Welcome to'. The current translation is technically correct but could be more idiomatic.",
+          "suggestion": "欢迎使用你的{{productName}}"
+        }
+      ],
       "approved_at": null
     }
   }

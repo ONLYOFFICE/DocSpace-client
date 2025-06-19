@@ -3,7 +3,7 @@
   "content": "Empty file",
   "content_en_sha1_hash": "06b230452d24c5e771108b0f7e2f027c9f34c403",
   "created_at": "2025-05-19T21:30:55.537Z",
-  "updated_at": "2025-06-18T07:34:15.292Z",
+  "updated_at": "2025-06-18T17:11:42.539Z",
   "comment": {
     "text": "The translation key \"EmptyFile\" is used to display a message indicating that an uploaded file is empty. This text typically appears in a file upload interface, such as a dialog or button label, when a user attempts to upload a file and it has a size of zero.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 1094,
+      "line_number": 1093,
       "context": "uniqueId: uniqueid(\"download_row-key_\"),\n fileId: null,\n // toFolderId,\n toFolderId: file.parentFolderId,\n action: \"upload\",\n error: file.size ? null : t(\"Files:EmptyFile\"),\n fileInfo: null,\n cancel: false,\n needConvert,\n encrypted: file.encrypted,\n percent: 0,",
       "module": "/packages/client"
     }
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Изпразни файл\" is not the correct translation of \"Empty file\". \"Изпразни\" means \"emptied\" or \"emptying\", not \"empty\".",
+          "suggestion": "Празен файл"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -93,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation '空きファイル' is technically correct but not the most natural or commonly used term for 'Empty file' in a technical context. '空ファイル' (kuu fairu) is a more standard and preferred translation.",
+          "suggestion": "空ファイル"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {

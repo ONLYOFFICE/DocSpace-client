@@ -3,7 +3,7 @@
   "content": "File viewing",
   "content_en_sha1_hash": "959903daecf1599e5d6cf7634ea77484419513db",
   "created_at": "2025-05-19T21:30:48.151Z",
-  "updated_at": "2025-05-28T09:30:02.953Z",
+  "updated_at": "2025-06-02T10:20:51.582Z",
   "comment": {
     "text": "This translation key is used to describe a read-only access option for viewing files, appearing on share settings pages. The text helps provide clarity and context for users, allowing them to understand their role when accessing shared content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 181,
+      "line_number": 180,
       "context": "label: t(\"Commentator\"),\n icon: AccessCommentReactSvgUrl,\n },\n {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"JavascriptSdk:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n ];",
       "module": "/packages/shared"
     },
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"عرض الملفات\" (ʿarḍ al-malaffāt) literally means \"displaying files\" or \"showing files.\" While functionally close to \"File viewing\", it doesn't perfectly capture the nuance of viewing as in accessing and inspecting. A more direct translation emphasizing the 'viewing' aspect might be preferable.",
-          "suggestion": "مشاهدة الملفات (mushāhadat al-malaffāt) - 'File viewing'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -48,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fayla baxış\" is a literal translation of \"File viewing\" but doesn't fully capture the meaning. \"Baxış\" implies a quick look or inspection, while \"File viewing\" could mean more comprehensive viewing or access.",
-          "suggestion": "Consider a more accurate translation like \"Faylın izlənməsi\" (File viewing/observation) or \"Faylın əks etdirilməsi\" (File display)."
+          "description": "The translation 'Fayla baxış' is a literal translation of 'File view' and doesn't fully convey the meaning of 'File viewing'. 'Viewing' implies the action of looking at the file.",
+          "suggestion": "Consider 'Fayla baxma' or 'Fayla göstərmə' which better reflect the action of viewing."
         }
       ],
       "approved_at": null
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ֆայլը դիտվում է' translates to 'The file is being viewed'. It doesn't directly convey the meaning of 'File viewing' which implies the ability to view files. A more accurate translation would express the ability to view files.",
-          "suggestion": "Ֆայլերի դիտում"
+          "description": "The Armenian translation \"Ֆայլը դիտվում է\" (Haylu ditvum e) translates to \"The file is being viewed.\" It's a passive construction and doesn't directly mean \"File viewing\".  A more accurate translation would convey the action of viewing the file.",
+          "suggestion": "Consider \"Ֆայլի դիտում\" (Hayli ditum) or \"ֆայլ դիտելու հնարավորություն\" (Hayl ditelu hnaravorut'yun) - 'File viewing' or 'Ability to view the file'."
         }
       ],
       "approved_at": null
@@ -150,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Odczyt plików' while technically correct, is a somewhat formal and less common way to say 'File viewing'. A more natural and common translation would be 'Przeglądanie plików'. 'Odczyt' implies reading, which isn't always the case for 'viewing'.",
+          "description": "The Polish translation \"Odczyt plików\" is a functional translation, but it's not the most natural or user-friendly for describing 'File viewing'.  'Odczyt plików' literally means 'reading files'. A more appropriate translation would convey the idea of viewing or accessing files, not just reading them.",
           "suggestion": "Przeglądanie plików"
         }
       ],
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A ver o ficheiro' is a literal translation of 'to see the file' and doesn't convey the meaning of 'File viewing' which implies the ability to view files. A more appropriate translation would be something along the lines of 'Visualização de ficheiros' or 'Ver ficheiros'.",
-          "suggestion": "Visualização de ficheiros"
+          "description": "The translation 'A ver o ficheiro' is a literal translation of 'to see the file' and doesn't accurately convey the meaning of 'File viewing.' It's too informal and lacks precision.",
+          "suggestion": "Consider a more accurate translation like 'Visualização de ficheiros' or 'Ver ficheiros' (depending on the desired level of formality)."
         }
       ],
       "approved_at": null

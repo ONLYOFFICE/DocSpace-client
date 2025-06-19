@@ -107,9 +107,12 @@ const ControlButtons = ({
 
   const renderTariffBar = () => {
     if (!tariffBar || isFrame) return null;
+
+    const cloneProps = { title };
+
     return (
       <div className={styles.tariffWrapper}>
-        {React.cloneElement(tariffBar, { title })}
+        {React.cloneElement(tariffBar, cloneProps)}
       </div>
     );
   };

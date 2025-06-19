@@ -3,7 +3,7 @@
   "content": "Manage",
   "content_en_sha1_hash": "bf58d17e561b1b858e35f9202f811297dac2e9db",
   "created_at": "2025-05-19T21:30:54.083Z",
-  "updated_at": "2025-06-03T20:59:42.287Z",
+  "updated_at": "2025-06-02T10:20:51.500Z",
   "comment": {
     "text": "This translation key is used to display the English phrase \"Manage\" as part of a notification management interface. It appears in various UI elements, including buttons and links, allowing users to access notification settings or options.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 972,
+      "line_number": 974,
       "context": "//           },\n //           {\n //             icon: SettingsReactSvgUrl,\n //             id: \"manage-option\",\n //             key: \"manage-links\",\n //             label: t(\"Notifications:ManageNotifications\"),\n //             onClick: () => this.onShowInfoPanel(item, \"info_members\"),\n //           },\n //         ];\n //       }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 394,
+      "line_number": 393,
       "context": "<Link\n color={globalColors.lightBlueMain}\n isHovered\n onClick={linkOptions.onClickLink}\n >\n {t(\"Notifications:ManageNotifications\")}\n </Link>\n ) : null}\n </span>,\n );\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 394,
+      "line_number": 393,
       "context": "<Link\n color={globalColors.lightBlueMain}\n isHovered\n onClick={linkOptions.onClickLink}\n >\n {t(\"Notifications:ManageNotifications\")}\n </Link>\n ) : null}\n </span>,\n );\n };",
       "module": "/packages/shared"
     }
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'කළමනාකරණය' (kalamaanakaaranya) is a transliteration of 'management' rather than a direct translation of 'Manage'. While related, it doesn't convey the same meaning of controlling or handling notifications.",
-          "suggestion": "සුරැකීම (surakima) - Meaning 'to manage', 'to handle', or 'to control'.  Alternatively,  අ mengaturණය කළ (athuraakaaraa karaa) – 'to manage' could be considered, although 'සුරැකීම' is more common in this context."
+          "description": "The translation 'කළමනාකරණය' while containing elements of 'management' (මනාකරණය), doesn't quite capture the nuance of 'Manage' in this context. It's a more formal and potentially verbose translation. A simpler and more common equivalent would be 'จัดการ' (Jadaagara) or 'යwalten' (Yavalathan).",
+          "suggestion": "Consider using 'จัดการ' (Jadaagara) or 'යwalten' (Yavalathan) for a more accurate and natural translation."
         }
       ],
       "approved_at": null

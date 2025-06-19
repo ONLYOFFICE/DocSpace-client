@@ -3,7 +3,7 @@
   "content": "Enable external link access to other users.",
   "content_en_sha1_hash": "55fbc631105e51f47c0051057b6a4a0e4b6d66df",
   "created_at": "2025-05-19T21:30:56.538Z",
-  "updated_at": "2025-05-28T09:30:02.117Z",
+  "updated_at": "2025-05-26T07:57:32.158Z",
   "comment": {
     "text": "\"Allow external users to access your public room link.\"",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تمكين الوصول إلى الرابط الخارجي للمستخدمين الآخرين\" is a literal translation and doesn't convey the intended meaning of 'Enable external link access to other users' as naturally in Arabic. It sounds clunky.",
+          "suggestion": "السماح للمستخدمين الآخرين بالوصول عبر رابط خارجي."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Digər istifadəçilər üçün xarici keçid linkini aktivləşdirin' is a literal translation and sounds awkward. A more natural and accurate rendering would be something like 'Digər istifadəçilərə publik otaq bağlantısı yaratmaq üçün imkan verin' or 'Digər istifadəçilərə otaq bağlantısını paylamağa imkan verin'.",
+          "suggestion": "Digər istifadəçilərə publik otaq bağlantısı yaratmaq üçün imkan verin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Povolení přístupu k externím odkazům ostatním uživatelům' is a literal translation but not the most natural phrasing in Czech. It's a bit clunky.",
+          "suggestion": "Umožnit sdílení s ostatními uživateli externím odkazem."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Salli ulkoisen linkin käyttö muille jäsenille\" is a functional translation, but it could be more natural. \"Jäsenille\" (members) implies a restricted group. The original English 'other users' is broader.",
+          "suggestion": "Salli ulkoisen linkin käyttö muille käyttäjille."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +105,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Միացնել արտաքին կապի հասանելիությունը այլ օգտատերերի համար:\" is a bit too literal and doesn't quite capture the nuance of 'Enable external link access to other users.' It emphasizes 'availability of external connection' instead of the action of allowing access through a link.",
+          "suggestion": "Միացրեք այլ օգտատերերի համար հանրային ցուցադրության հղումը: (Miatsreq ayl ogutatereri hamar hanrayin tsoghadrout'yan hghum: - Enable public room link access for other users)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +123,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"他のユーザーへの外部リンクへのアクセスを許可します\" is a bit literal and clunky. It doesn't quite convey the intended meaning of enabling external link access.",
+          "suggestion": "「他のユーザーが外部リンクを利用できるようにする。」 or 「外部ユーザーが利用できるリンクを有効にする。」 would be more natural and accurately convey the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +141,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ອະນຸຍາດໃຫ້ຜູ້ໃຊ້ອື່ນເຂົ້າເຖິງລິ້ງຕ່າງປະເທດໄດ້' translates to 'Allow other users to access foreign links'. The English content 'Enable external link access to other users' implies access to links outside of a specific platform or room, not necessarily foreign links. The Lao should convey 'external' or 'public' access.",
+          "suggestion": "ອະນຸຍາດໃຫ້ຜູ້ໃຊ້ອື່ນເຂົ້າເຖິງລິ້ງສາທາລະນະໄດ້"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -129,7 +171,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'utilizadors' is misspelled. The correct Portuguese word for 'users' is 'utilizadores'.",
+          "suggestion": "utilizadores"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'බාහිර සම්බන්ධතා වෙත අනෙකුත් පරිශීලකයින්ට ප්‍රවේශය සක්‍රීය කරන්න.' is too literal and doesn't convey the meaning of 'Enable external link access' naturally in Sinhala. It translates to something like 'Enable access to other users to external connections.'",
+          "suggestion": "A more natural translation would be something like 'අනෙකුත් පරිශීලකයින්ට මහජන ක්‍රිඩාගාරයට සබැඳිය ලබා දීම සක්‍රීය කරන්න.' (Sakriya kara ganna athsani pilibiliyage mahajan kridaagarayak sabaandiya athsani). This translates to 'Enable giving link access to the public room for other users.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,13 +219,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Omogočite dostop do zunanje povezave drugim uporabnikom' is a literal translation but doesn't quite capture the nuance of 'Enable external link access'. It focuses on 'external link' instead of the access aspect. A better translation would convey that the user is allowing others to access a public room through a link.",
+          "suggestion": "Omogočite drugim uporabnikom dostop do javne sobe preko povezave."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Омогућите приступ спољним корисницима путем линка.\" is a bit literal and doesn't quite capture the nuance of 'Enable external link access.' It implies access *through* a link, rather than simply enabling external link access.",
+          "suggestion": "Омогућите приступ спољашњим корисницима путем спољашње везе."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,13 +261,30 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bật quyền truy cập liên kết bên ngoài cho người dùng khác' is somewhat literal and could be improved for natural flow. While technically correct, it's not the most common or elegant way to express the meaning in Vietnamese.",
+          "suggestion": "Cho phép người dùng khác truy cập liên kết công khai."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"启用外部链接访问权限给其他用户\" is a literal translation and sounds unnatural in Chinese. While technically correct, it's not how a native speaker would phrase this.",
+          "suggestion": "启用其他用户通过外部链接访问。"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase '给其他用户' is slightly awkward and could be simplified for better flow.",
+          "suggestion": "Remove '给' and rephrase as suggested above."
+        }
+      ],
       "approved_at": null
     }
   }

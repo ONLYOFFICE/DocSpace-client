@@ -3,7 +3,7 @@
   "content": "Late payment",
   "content_en_sha1_hash": "ef1384780c1411151760b570692633b5fef8f413",
   "created_at": "2025-05-19T21:30:46.083Z",
-  "updated_at": "2025-05-28T09:30:02.173Z",
+  "updated_at": "2025-05-26T07:57:32.203Z",
   "comment": {
     "text": "This translation key is used to display the text \"Late payment\" in a specific UI element, likely as part of an alert or notification on a tariff page when a late payment grace period has expired. The label appears on a red background, indicating its urgent nature. It is intended for use by enterprise users.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Վերջին վճարումը\" translates to 'Last payment', which doesn't accurately convey the meaning of 'Late payment'.  'Late payment' implies a payment made after the due date, while 'Last payment' simply refers to the most recent payment.",
-          "suggestion": "A more accurate translation would be something like 'Հետաժամանակվա վճարում' (Hetažamankva včarum) which means 'Late payment', or 'Ուշացած վճարում' (Ušacac včarum) which also means 'Late payment'."
+          "description": "'Վերջին վճարումը' translates to 'Last payment', not 'Late payment'. It doesn't convey the meaning of a payment being late.",
+          "suggestion": "A more accurate translation of 'Late payment' in Armenian would be something like 'անվճարունդ', 'շուշտ վճարումը', or 'մասնակի վճարումը', depending on the nuance desired. For example, 'անվճարունդ' is a direct translation of 'default payment'."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '延滞料' (Enkai ryou) literally translates to 'late payment fee' or 'delay fee', it doesn't precisely convey the meaning of just 'Late payment'. It implies a fee associated with the late payment.",
-          "suggestion": "Consider '遅延の支払い' (Chien no shiharai) for 'Late payment' if a general term is needed, or adjust the English context to reflect the fee associated with late payment."
+          "description": "'延滞料' translates to 'late payment fee' or 'overdue charge', not simply 'late payment'. While related, it's a more specific term.",
+          "suggestion": "Consider '遅延支払い' (chien-en shiharai) for 'late payment' if a more direct translation is desired. Alternatively, if the context implies a fee, '遅延料金' (chien-en ryoukin) could be more accurate."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'마지막 지불' is a literal translation of 'last payment' and doesn't accurately convey the meaning of 'late payment'. 'Late payment' implies a payment received after the due date.",
-          "suggestion": "연체료 (yeoncheryo) or 지연된 지불 (jiyeon doen jibul) would be more accurate translations for 'late payment'."
+          "description": "The Korean translation \"마지막 지불\" literally translates to \"last payment.\" While it conveys a sense of payment happening later, it doesn't precisely capture the meaning of \"late payment,\" which implies a payment made *after* a due date.",
+          "suggestion": "Consider using a translation like \"연체 지불\" (yeonche jibul) which directly means 'delayed payment' or 'overdue payment'. Alternatively, \"늦은 지불\" (neut-eun jibul) could work, meaning 'late payment'."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ප්‍රමාද ගෙවීම\" (pramaada gevima) literally translates to 'delayed payment,' it isn't the most natural or commonly used term for 'late payment' in Sinhala. A more suitable translation would be 'වරදායක ගෙවීම' (waradaayaka gevima) or 'දිර්ඝ කාලීන ගෙවීම' (dirgha kaaleena gevima).",
-          "suggestion": "වරදායක ගෙවීම (waradaayaka gevima) or දිර්ඝ කාලීන ගෙවීම (dirgha kaaleena gevima)"
+          "description": "The translation \"ප්‍රමාද ගෙවීම\" (pramaada gevima) while literally meaning 'delayed payment', doesn't quite capture the nuance of 'Late Payment' in a financial context. It's too literal and could be misinterpreted.",
+          "suggestion": "A more appropriate translation might be \"දිර්ඝ කාලීන ගෙවීම\" (dirgha kaalīna gevima) which implies a payment overdue or a late payment, or simply \"ගෙවුම් ප්‍රමාදය\" (gevuma pramaadaya) which directly translates to 'payment delay'."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Касна уплата\" is not an accurate translation of \"Late payment\". \"Касна\" translates to \"late\" or \"penalty\", but \"уплата\" means \"payment\" or \"deposit.\" A more accurate translation would be something like \"Закашњела уплата\" or \"Прикасно уплате\".",
-          "suggestion": "Закашњела уплата"
+          "description": "The Serbian (Cyrillic) translation 'Касна уплата' is not the most accurate or idiomatic translation of 'Late payment'. While 'уплата' correctly means 'payment', 'касна' typically refers to something being 'late' in a more general sense (e.g., a late arrival). A more accurate translation would convey the idea of a payment being overdue.",
+          "suggestion": "Consider using 'Закашњела уплата' (Zakašnjela uplata) which directly translates to 'delayed payment', or 'Протекли рокови уплате' (Protekli rokovi uplate) which means 'payment due date has passed'."
         }
       ],
       "approved_at": null

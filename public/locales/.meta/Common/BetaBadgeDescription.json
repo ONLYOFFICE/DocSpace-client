@@ -3,7 +3,7 @@
   "content": "Please note: you can enable RTL languages for the {{productName}} interface in the beta mode. RTL support for the editors will be available soon.",
   "content_en_sha1_hash": "fb20ee1d78cc2f8f9667ecd70cb1b191fa803c61",
   "created_at": "2025-05-19T21:30:43.263Z",
-  "updated_at": "2025-05-28T09:30:02.929Z",
+  "updated_at": "2025-06-08T12:02:32.879Z",
   "comment": {
     "text": "This translation key is used to provide a tooltip message that explains how to enable Right-to-Left (RTL) languages in the {{productName}} interface. The message appears when hovering over the Beta Badge component and is intended to inform users about upcoming RTL support for the editors.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English uses double curly braces `{{productName}}` while the Azerbaijani translation uses single curly braces `{{productName}}`. This could cause issues with variable substitution.",
+          "suggestion": "Change `{{productName}}` to `{{productName}}` in the Azerbaijani translation."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Ojo' is a colloquial way of saying 'Please note' or 'Attention'. While understandable, it's not the most professional or consistent choice for a product interface. It can be perceived as too informal.",
+          "suggestion": "Por favor, tenga en cuenta:"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -72,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'toimittajille' (for editors) is a bit awkward. While technically correct, 'editorit' would be a more natural and direct translation of 'editors' in this context. It sounds more professional and user-friendly.",
-          "suggestion": "Huomaa: voit ottaa RTL-kielet käyttöön {{productName}}-käyttöliittymässä beta-tilassa. RTL-tuki editorille on saatavilla pian."
+          "description": "The term 'toimittajille' (for editors) is not the most accurate translation of 'editors' in this context. It implies 'suppliers' or 'providers' rather than the software editors themselves.",
+          "suggestion": "Consider using a more accurate translation of 'editors', such as 'muokkaajille' or 'sisällöntuottajille'. The best choice depends on the specific context of the software."
         }
       ],
       "approved_at": null
@@ -90,13 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) after 'Խնդրում ենք նկատի ունենալ'. It might be better to use an em dash (—) or no punctuation for a more natural flow in Armenian.",
-          "suggestion": "Խնդրում ենք նկատի ունենալ—դուք կարող եք..."
+          "description": "The Armenian translation includes a colon after \"Խնդրում ենք նկատի ունենալ\". While not strictly incorrect, it’s unusual in this context and may disrupt the flow. Removing it would align better with the English structure.",
+          "suggestion": "Remove the colon after \"Խնդրում ենք նկատի ունենալ\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'beta mode' is translated directly. While understandable, a more nuanced translation reflecting 'experimental feature' or 'early access' might resonate better with Armenian users depending on the product's context.",
-          "suggestion": "Խնդրում ենք նկատի ունենալ՝ դուք կարող եք միացնել RTL լեզուները {{productName}} ինտերֆեյսի համար փորձային ռեժիմում:"
+          "description": "The English phrase 'Please note' is translated as 'Խնդրում ենք նկատի ունենալ'. While a literal translation exists, a more natural and concise Armenian equivalent might be 'Հարկ է նկատել' or simply 'Նկատել' depending on the tone desired. 'Խնդրում ենք նկատի ունենալ' is a bit wordy.",
+          "suggestion": "Consider alternatives such as 'Հարկ է նկատել' or 'Նկատել' for 'Please note'."
         }
       ],
       "approved_at": null
@@ -112,9 +124,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"右横書き (RTL)\" is a literal translation of \"RTL\" and might not be the clearest way to explain RTL languages to a Japanese audience. While technically correct, it's jargonistic.  A more natural phrasing would explain what RTL languages are (right-to-left languages).",
+          "suggestion": "ご注意：ベータ版では、{{productName}}インターフェースで右から左に記述する言語（RTL言語）を有効にすることができます。エディタの右から左に記述する言語サポートは間もなく利用可能になります。"
+        },
+        {
           "type": "formatting",
-          "description": "The Japanese translation uses katakana for \"RTL\" which is acceptable but could be improved for clarity for a wider audience. While technically correct, it doesn't directly convey the meaning of 'Right-to-Left'.",
-          "suggestion": "Consider adding a brief explanation or alternative phrasing after the katakana to clarify RTL. For example, “右横書き（RTL：右から左への文字配置）言語”"
+          "description": "While not a major issue, the use of parentheses around 'RTL言語' might be more appropriate for clarity. They help to separate the explanation.",
+          "suggestion": "ご注意：ベータ版では、{{productName}}インターフェースで右から左に記述する言語（RTL言語）を有効にすることができます。エディタの右から左に記述する言語サポートは間もなく利用可能になります。"
         }
       ],
       "approved_at": null
@@ -131,13 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ສໍາລັບການປະຕິບັດການ\" is an awkward translation of \"for the {{productName}} interface.\" A more natural phrasing would be \"ສໍາລັບໜ້າວິດທະຍຸຂອງ\" or \"ສໍາລັບສ່ວນຕິດຕໍ່ຂອງ\".",
-          "suggestion": "ກະລຸນາສັງເກດ: ທ່ານສາມາດເປີດໃຊ້ພາສາ RTL ສໍາລັບໜ້າວິດທະຍຸຂອງ {{productName}} ໃນໂຫມດເບຕ້າ. ຄວາມສາມາດ RTL ສໍາລັບບັນນາທິການຈະສາມາດໃຊ້ໄດ້ໃນໄວໆນີ້."
+          "description": "The phrase 'ປະຕິບັດການ' (patibat kan) for 'interface' is not the most accurate translation. 'ສ່ວນຕິດຕໍ່' (suan tiaw) is a better and more common translation of 'interface' in this context.",
+          "suggestion": "ກະລຸນາສັງເກດ: ທ່ານສາມາດເປີດໃຊ້ພາສາ RTL ສໍາລັບສ່ວນຕິດຕໍ່ {{productName}} ໃນໂຫມດເບຕ້າ. ຄວາມສາມາດ RTL ສໍາລັບບັນນາທິການຈະສາມາດໃຊ້ໄດ້ໃນໄວໆນີ້."
         },
         {
           "type": "formatting",
-          "description": "The use of \"ໂຫມດເບຕ້າ\" (beta mode) can be improved for clarity. Using a direct translation 'ຮູບແບບທົດລອງ' could enhance understanding, although maintaining 'ໂຫມດເບຕ້າ' is also acceptable if it's commonly understood.",
-          "suggestion": "ກະລຸນາສັງເກດ: ທ່ານສາມາດເປີດໃຊ້ພາສາ RTL ສໍາລັບໜ້າວິດທະຍຸຂອງ {{productName}} ໃນຮູບແບບທົດລອງ. ຄວາມສາມາດ RTL ສໍາລັບບັນນາທິການຈະສາມາດໃຊ້ໄດ້ໃນໄວໆນີ້."
+          "description": "While not strictly incorrect, using a more formal conjunction like 'ແລະ' (lae) instead of omitting it can improve the flow.  The sentence connecting the two parts of the clause could benefit from a conjunction.",
+          "suggestion": "ກະລຸນາສັງເກດ: ທ່ານສາມາດເປີດໃຊ້ພາສາ RTL ສໍາລັບສ່ວນຕິດຕໍ່ {{productName}} ໃນໂຫມດເບຕ້າ ແລະ ຄວາມສາມາດ RTL ສໍາລັບບັນນາທິການຈະສາມາດໃຊ້ໄດ້ໃນໄວໆນີ້."
         }
       ],
       "approved_at": null
@@ -178,13 +195,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Acceptarea ordnei de la dreapta la stânga\" is an awkward translation of \"RTL support.\" A more natural Romanian phrasing would be \"Suport pentru limbi cu scriere de la dreapta la stânga\" or \"Suport RTL\".",
-          "suggestion": "Suport pentru limbi cu scriere de la dreapta la stânga"
-        },
-        {
-          "type": "formatting",
-          "description": "Consistency in terminology - 'RTL' is used in the English, it would be clearer to maintain it in Romanian, at least the first time it's mentioned.",
-          "suggestion": "Suport RTL pentru editori va fi disponibil în curând."
+          "description": "The phrase \"Acceptarea ordnei de la dreapta la stânga\" is an awkward and inaccurate translation of \"RTL support\". A more natural and accurate translation would be \"Suport RTL\" or \"Compatibilitate RTL\".",
+          "suggestion": "Suport RTL"
         }
       ],
       "approved_at": null
@@ -201,8 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation uses a period (.) at the end of the first sentence instead of a comma (,). This makes the flow less natural. The English uses a comma.",
-          "suggestion": "Replace the period with a comma:  සටහන: ඔබට බීටා ප්‍රකාරයේ {{productName}} අතුරුමුහුණත සඳහා RTL භාෂා සබල කිරීමට හැකිය, සංස්කාරක සඳහා RTL සහාය ළඟදීම ලැබෙනු ඇත."
+          "description": "The Sinhala translation maintains the English format of using double curly braces `{{productName}}`. While technically correct, it might be more natural in Sinhala to rephrase to avoid the direct English construct, though this depends on the intended audience and their familiarity with English-style variable insertion.",
+          "suggestion": "Consider rephrasing to a more natural Sinhala equivalent for inserting the product name. For example: \"{{productName}} ක්‍රියාවලිය සඳහා RTL භාෂා සබල කිරීමට ඔබට හැකිය\" (You can enable RTL languages for the {{productName}} process)."
         }
       ],
       "approved_at": null
@@ -218,9 +230,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Please note' is translated as 'Upoštevajte'. While technically correct, a more natural and common translation for this context might be 'Opomba:' or 'Prosim, upoštevajte:'. 'Upoštevajte' carries a slightly more formal and sometimes demanding tone.",
-          "suggestion": "Opomba:"
+          "type": "formatting",
+          "description": "The English content uses double curly braces `{{productName}}` for a variable. The Slovenian translation also uses double curly braces, which should be maintained for consistency.",
+          "suggestion": "Ensure the Slovenian translation maintains the double curly braces `{{productName}}`."
         }
       ],
       "approved_at": null
@@ -231,13 +243,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The possessive suffix '-а' is attached to 'productName' which might be incorrect depending on the capitalization rules and intended meaning. It suggests that the product owns the interface.  It's crucial to verify if this is accurate for the Serbian language conventions.",
-          "suggestion": "Review and potentially remove the possessive suffix '-а' from 'productName-а'. Consider if 'productName' should be capitalized or not."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'уређиваче' (uređivače) is a generic term for editors. While technically correct, it might be better to specify what kind of editors are being referred to (e.g., text editors, content editors).",
-          "suggestion": "Consider replacing 'уређиваче' with a more specific term, like 'текст уређиваче' (text editors) or 'садржинске уређиваче' (content editors), if appropriate."
+          "description": "The possessive suffix '-а' is attached to the {{productName}} in a way that might sound awkward. In Serbian, using the genitive case with a direct possessive can sound less natural. It is highly dependent on the context and how 'productName' is used. Without knowing the exact product name and context, this is a suggestion, not a definite error.",
+          "suggestion": "Consider alternatives depending on the context and what 'productName' represents. For example, restructuring the sentence or using a different prepositional construction might be more fluent."
         }
       ],
       "approved_at": null
@@ -247,9 +254,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "grammar",
+          "description": "The phrase 'interfejs {{productName}}-a' is grammatically awkward. The possessive suffix '-a' is not the most natural way to express this in Serbian. It sounds overly formal and slightly incorrect.",
+          "suggestion": "interfejs {{productName}} ili interfejsa {{productName}}"
+        },
+        {
           "type": "formatting",
-          "description": "The Serbian translation uses a possessive suffix '-a' attached to 'productName'.  While grammatically correct in Serbian, it's best to preserve the variable name as it appears in the English source for consistency and to avoid issues when the translation is used in code. It might be preferable to leave it as '{{productName}}' as in the original.",
-          "suggestion": "Consider leaving '{{productName}}' untranslated."
+          "description": "The hyphen in 'beta-režimu' is optional and less common in modern Serbian. Removing it improves readability.",
+          "suggestion": "beta režimu"
         }
       ],
       "approved_at": null
@@ -269,30 +281,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Hỗ trợ RTL dành cho người chỉnh sửa\" is a literal translation that might not be clear to Vietnamese speakers. \"Hỗ trợ RTL cho trình chỉnh sửa\" or \"Hỗ trợ RTL cho các trình chỉnh sửa\" would be more natural.",
-          "suggestion": "Hỗ trợ RTL cho trình chỉnh sửa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '测试模式' (test mode) might be too literal and doesn't accurately convey the meaning of 'beta mode' in this context. 'Beta mode' implies a pre-release or experimental version.",
-          "suggestion": "请注意：您可以在 beta 版本中为 {{productName}} 界面启用 RTL 语言。编辑器的 RTL 支持即将推出。"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the translation lacks the consistent formatting of the English. The English uses bolding or specific terminology for 'beta mode', which isn't reflected.",
-          "suggestion": "请注意：您可以在 beta 版中为 {{productName}} 界面启用 RTL 语言。编辑器的 RTL 支持即将推出。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

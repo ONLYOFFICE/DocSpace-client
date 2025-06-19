@@ -3,7 +3,7 @@
   "content": "Webhook removed",
   "content_en_sha1_hash": "80509c5a189f693eee965d8eb57cef6201a59d6e",
   "created_at": "2025-05-19T21:30:49.885Z",
-  "updated_at": "2025-05-21T00:49:25.848Z",
+  "updated_at": "2025-06-08T12:02:32.783Z",
   "comment": {
     "text": "The \"WebhookRemoved\" translation key is used to display a success message when a webhook is removed in the Portal Settings. This message is typically shown after a button or action that deletes a webhook, and it indicates that the removal process has been completed successfully.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 108,
+      "line_number": 115,
       "context": "};\n \n const handleWebhookDelete = async () => {\n try {\n await deleteWebhook(currentWebhook);\n toastr.success(t(\"WebhookRemoved\"));\n } catch (error) {\n toastr.error(error);\n }\n };",
       "module": "/packages/client"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'Webhook تمت إزالة' is not the most natural or accurate translation of 'Webhook removed'. While it conveys the general meaning, a more idiomatic translation would be more appropriate.",
+          "description": "The translation 'Webhook تمت إزالة' is a literal translation and doesn't convey the meaning effectively in a natural Arabic sentence. It sounds awkward. A more natural translation would focus on the action of removal, not just the state of being removed.",
           "suggestion": "Webhook تم حذفه"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, 'تمت إزالة' (tamat izalat) is a passive construction. In many contexts, an active voice would be preferred for clarity and directness. The translation loses some immediacy.",
+          "suggestion": "Webhook حذف"
         }
       ],
       "approved_at": null
@@ -48,7 +53,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Премахната уеб кука\" is not the most natural or accurate translation of \"Webhook removed.\" While technically correct, \"уеб кука\" is a literal translation of \"webhook\" and can sound awkward. A more natural translation would be something like \"Премахнат уебхук\" or \"Премахната връзка за уебхук\".",
+          "description": "The translation 'Премахната уеб кука' is a literal translation of 'removed webhook' but 'уеб кука' isn't the most natural or commonly used term for 'webhook' in Bulgarian. A more accurate and natural translation would be 'Премахнат уебхук' or 'Премахнат уеб кука.'.",
           "suggestion": "Премахнат уебхук"
         }
       ],
@@ -93,13 +98,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Webhook-ը հեռացվել է\" is grammatically correct, but a more natural and common way to express 'Webhook removed' in Armenian would be \"Հեռացվել է webhook\". The current phrasing places the hyphenated 'Webhook' awkwardly.",
-          "suggestion": "Հեռացվել է webhook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +110,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ウェブフック削除\" is a literal translation of \"Webhook removed\", it sounds a bit stiff and unnatural in Japanese. A more natural phrasing would be something like \"ウェブフックが削除されました\" or \"ウェブフックを削除しました\".",
-          "suggestion": "ウェブフックが削除されました"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -132,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ເອົາອອກ\" literally means 'taken out' or 'removed', a more natural and commonly used translation for 'removed' in the context of webhooks would be something more akin to 'ຖືກລົບອອກ' (thuk lop ok) which means 'deleted' or 'removed'.",
-          "suggestion": "Webhook ຖືກລົບອອກ"
+          "description": "The Lao translation \"Webhook ເອົາອອກ\" while understandable, is a more literal 'Webhook taken out' rather than a direct equivalent of 'Webhook removed'. A more natural translation might consider using a verb conveying removal or deletion.",
+          "suggestion": "Webhook ນຳ ອອກ"
         }
       ],
       "approved_at": null
@@ -144,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Tīmekļa aizķere ir noņemta\" translates to \"The web traffic is removed.\" This is not an accurate translation of \"Webhook removed.\" A webhook is not web traffic.",
-          "suggestion": "A more accurate translation would be something like \"Atcelts tīmekļa atspēkošanas rīks\" or \"Webhook atcelts\" or simply \"Webhook noņemts\"."
+          "description": "The Latvian translation 'Tīmekļa aizķere ir noņemta' translates to 'The web congestion has been removed'. The English phrase 'Webhook removed' refers to a webhook being deleted or deactivated, not a web congestion issue. The term 'Webhook' needs to be accurately translated.",
+          "suggestion": "Consider 'Webhook ir noņemts' or 'Webhook dzēsts' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -180,7 +173,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Eliminare Webhook' is a literal translation of 'Remove Webhook' but doesn't convey the same meaning as 'Webhook removed'. A more natural Romanian translation for 'Webhook removed' would be 'Webhook șters' or 'Webhook eliminat'.",
+          "description": "While \"Eliminare\" translates to \"Delete\" or \"Removal\", \"Webhook removed\" implies a passive action. \"Eliminare Webhook\" sounds more like a command rather than a statement of fact.",
           "suggestion": "Webhook șters"
         }
       ],
@@ -198,13 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Webhook ඉවත් කෙරිණි\" while technically conveying the meaning of 'Webhook removed,' is overly formal and archaic. The verb form 'කෙරිණි' is rarely used in modern Sinhala in this context.",
-          "suggestion": "Webhook එක ඉවත් වුණා"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using the informal 'Webhook එක' (Webhook ek) is more common and natural in casual communication.",
-          "suggestion": "Consider using 'Webhook එක' instead of 'Webhook'."
+          "description": "The translation \"Webhook ඉවත් කෙරිණි\" while understandable, is overly formal for a simple notification like 'Webhook removed'. The verb tense 'kerini' (became) is a bit stiff.",
+          "suggestion": "webhook එක ඉවත් කරන ලදී (webhook ekā ivalat karan ladī) - which is a more standard phrasing, or simply webhook එක ඉවත් කළා (webhook ekā ivalat kalā) - which means 'Webhook was removed'."
         }
       ],
       "approved_at": null
@@ -227,7 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Webhook уклоњен' doesn't accurately convey the meaning of 'Webhook removed.' 'Уклоњен' implies something was evaded or steered away, not removed. A more accurate translation would reflect the removal process.",
+          "description": "The Serbian translation \"Webhook уклоњен\" doesn't accurately convey the meaning of 'Webhook removed'. 'Уклоњен' typically implies something being displaced or moved out of the way, not removed from a system.",
           "suggestion": "Webhook је уклоњен"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Applications disabled successfully",
   "content_en_sha1_hash": "3973762d1a46d2cdb20ace836d486fbc344b3913",
   "created_at": "2025-05-19T21:30:53.807Z",
-  "updated_at": "2025-05-28T09:30:02.597Z",
+  "updated_at": "2025-05-26T07:57:32.658Z",
   "comment": {
     "text": "This translation key is used for a success message when an OAuth application is disabled successfully. It is displayed in a dialog window and also shown in a toast notification to confirm that the operation was completed without errors.",
     "is_auto": true,
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '애플리케이션이 비활성화되었습니다' is too literal and lacks the nuance of 'successfully'. It simply states 'Applications have been deactivated'.",
-          "suggestion": "애플리케이션이 성공적으로 비활성화되었습니다"
+          "description": "The translation '애플리케이션이 비활성화되었습니다' translates to 'Applications have been deactivated'. While similar to 'disabled', 'deactivated' carries a slightly different connotation. 'Disabled' implies a temporary or reversible state, while 'deactivated' can imply a more permanent action.  Given the context of 'successfully', '비활성화되었습니다' might not perfectly capture the intended meaning.",
+          "suggestion": "애플리케이션이 비활성 상태로 전환되었습니다"
         }
       ],
       "approved_at": null
@@ -135,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Candidaturas' is a less common and slightly less accurate translation for 'Applications' in this context. 'Aplicações' is a more direct and standard translation.",
+          "suggestion": "Aplicações desativadas com sucesso"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,7 +201,18 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Застосунки успішно деактивовано' uses the diminutive form 'Застосунки' which might not be appropriate for an official notification. It implies a casual or friendly tone. A more formal and precise translation is needed.",
+          "suggestion": "Застосунки успішно вимкнено"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'деактивовано' (deactivated) is accurate but 'вимкнено' (turned off/disabled) is a more common and natural phrasing in this context.",
+          "suggestion": "Застосунки успішно вимкнено"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -210,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"多个应用已禁用\" (Duō ge yìngyòng yǐ zhìbì) translates to 'Multiple applications have been disabled'. While not entirely wrong, it's less precise than the original 'Applications disabled successfully'. The original implies a single action resulting in success. The translation suggests multiple applications were disabled, which might not be the intended meaning.",
-          "suggestion": "应用已禁用成功 (Yìngyòng yǐ zhìbì chénggōng) - 'Applications disabled successfully' or 应用禁用成功 (Yìngyòng zhìbì chénggōng) - 'Applications disabled successfully'."
+          "description": "The translation \"多个应用已禁用\" (Duō ge yìngyòng yǐ jíbīn) translates to 'Multiple applications have been disabled'. While conveying a similar meaning, it doesn't directly translate 'Applications disabled successfully'. The original emphasizes the success of the action, which isn't fully captured.",
+          "suggestion": "Consider a translation that more accurately reflects the 'successfully' aspect, such as '应用禁用成功' (Yìngyòng jíbīn chénggōng) - 'Applications disabled successfully'."
         }
       ],
       "approved_at": null

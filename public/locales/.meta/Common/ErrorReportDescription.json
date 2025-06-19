@@ -3,7 +3,7 @@
   "content": "Open the report below to see what data is included. Error reports do not contain any personal data of the users. To help our team better understand the problem, describe it in the free form using the comment field.",
   "content_en_sha1_hash": "2abb51e98a74ae9cad4d84745a6fedd126698925",
   "created_at": "2025-05-19T21:30:45.110Z",
-  "updated_at": "2025-05-28T09:30:02.946Z",
+  "updated_at": "2025-05-26T07:57:32.917Z",
   "comment": {
     "text": "This translation key is used for an error report description, guiding users to view a report that contains no personal data and providing an opportunity to describe the issue in free form. It appears on a modal dialog header, prompting users to explore the report further.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"to see what data is included\" is not accurately translated. \"Hansı məlumatın daxil olduğunu görmək üçün\" literally translates to \"To see what information is included.\" It's acceptable but could be more natural. A better phrasing might convey the purpose of opening the report.",
-          "suggestion": "Açılan hesabatdakı məlumatları görmək üçün (To see the information in the opened report)"
+          "description": "The phrase \"to see what data is included\" is translated as \"Hansı məlumatın daxil olduğunu görmək\". A more natural and accurate translation would be something like \"hansı məlumatın olduğunu görmək üçün\" (to see what information is).",
+          "suggestion": "Hansı məlumatın olduğunu görmək üçün aşağıdakı hesabatı açın."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"describe it in the free form using the comment field\" is somewhat awkwardly translated. The current translation, \"şərh sahəsindən istifadə edərək məsələni aydın şəkildə təsvir edin,\" is accurate but slightly verbose and a bit formal for a user-facing message. ",
-          "suggestion": "Məsələni şərh sahəsində izah edin (Explain the issue in the comment field)."
+          "description": "The phrase \"describe it in the free form using the comment field\" is translated as \"şərh sahəsindən istifadə edərək məsələni aydın şəkildə təsvir edin\". While technically correct, it's a bit verbose. A more concise and natural rendering would be \"şərh hissəsində məsələni təsvir edin.\" ",
+          "suggestion": "şərh hissəsində məsələni təsvir edin."
         }
       ],
       "approved_at": null
@@ -68,13 +68,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'free form' is not accurately translated. 'Στη φόρμα' (sti forma) literally translates to 'in the form' and doesn't convey the intended meaning of 'free form'.",
-          "suggestion": "Αναγράψτε το ελεύθερα"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -89,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence 'Avaan alla oleva raportti nähdäksesi sisällön' is grammatically awkward. The verb 'Avaan' (I open) is incorrect in this context. A more appropriate phrasing would be 'Voit avata alla oleva raportti...' (You can open the report below...) or 'Avaa alla oleva raportti...' (Open the report below...).",
-          "suggestion": "Avaa alla oleva raportti nähdäksesi sisällön."
+          "description": "The phrase 'Avaan alla oleva raportti' is grammatically awkward. It literally translates to 'I open the report below'. A more natural phrasing would be 'Avaa alla oleva raportti' (Open the report below).",
+          "suggestion": "Avaa alla oleva raportti"
         }
       ],
       "approved_at": null
@@ -104,18 +98,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"to see what data is included\" is somewhat literal. A more natural translation might be \"to see what information is included\" or \"to view the included information\".",
-          "suggestion": "Բացեք ստորև ներկայացված հաշվետվությունը՝ տեսնելու, թե ինչ տեղեկություններ են ներառված:"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"help our team better understand the problem\" can be improved for flow.  A more natural translation would incorporate a more direct causal relationship.",
-          "suggestion": "Որպեսզի մեր թիմը հասկանի խնդիրը ավելի լավ, նկարագրեք այն անվճար ձևով՝ օգտագործելով մեկնաբանությունների դաշտը:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -130,18 +113,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"To help our team better understand the problem\" is translated as \"私たちのチームが問題をよりよく理解するために\". While grammatically correct, it sounds overly formal and somewhat stiff in Japanese. A more natural phrasing would be something like \"チームが問題を把握しやすくするために\" (to make it easier for the team to grasp the problem).",
-          "suggestion": "チームが問題を把握しやすくするために"
+          "description": "The phrase \"To help our team better understand the problem\" is translated as \"私たちのチームが問題をよりよく理解するために\". While technically correct, it sounds overly formal and verbose for this context. A more natural and concise translation might be \"問題を把握するために\".",
+          "suggestion": "問題を把握するために"
         },
         {
           "type": "incorrect_translation",
-          "description": "The sentence \"describe it in the free form using the comment field\" is translated as \"コメント欄を使ってフリーフォームで問題を記述して頂ければ幸いです\".  'フリーフォーム' (free form) is a direct transliteration and might not be readily understood by all Japanese users. A more natural and clear phrasing would be \"コメント欄に自由に記述してください\" (please describe freely in the comment field).  The \"頂ければ幸いです\" (it would be appreciated) is also quite formal and can be softened.",
+          "description": "The phrase \"describe it in the free form using the comment field\" is translated as \"コメント欄を使ってフリーフォームで問題を記述して頂ければ幸いです\".  \"フリーフォーム\" is a direct transliteration and feels awkward.  The use of “頂ければ幸いです” (if you would be kind to) is also overly formal. A more natural translation would be \"コメント欄に自由に記述してください\".",
           "suggestion": "コメント欄に自由に記述してください"
         },
         {
           "type": "formatting",
-          "description": "The use of '頂ければ幸いです' makes the sentence feel very long and verbose. Breaking up the sentence into two shorter sentences would improve readability.",
-          "suggestion": "コメント欄を使って問題を記述してください。記述していただけると、チームが問題をよりよく理解するのに役立ちます。"
+          "description": "The sentence structure is a little long and can be broken up for better readability. The current translation feels slightly clumsy.",
+          "suggestion": "以下のレポートを開き、データをご確認ください。エラーレポートには、ユーザーの個人情報は一切含まれていません。問題を把握するために、コメント欄に自由に記述してください。"
         }
       ],
       "approved_at": null
@@ -149,7 +132,18 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"해당 문제에 대해 설명해 주세요\" (hae-dang mun-je-e dae-hae seol-myeong-hae ju-se-yo) is a bit formal for this context. A more natural phrasing would be closer to \"문제에 대해 설명해 주세요\" (mun-je-e dae-hae seol-myeong-hae ju-se-yo) or even just \"설명해 주세요\" (seol-myeong-hae ju-se-yo).",
+          "suggestion": "설명해 주세요"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the repetition of \"해당\" (hae-dang) makes the sentence slightly awkward. Removing one instance would improve flow.",
+          "suggestion": "오류 보고서에는 사용자의 개인 데이터가 포함되지 않습니다. 저희가 해당 문제를 더 잘 이해할 수 있도록 설명란에 자유롭게 문제에 대해 설명해 주세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -157,14 +151,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ເປີດບົດລາຍງານຂ້າງລຸ່ມນີ້ເພື່ອເບິ່ງວ່າມີຂໍ້ມູນຫຍັງແດ່\" (Open the report below to see what data is included) is a bit clunky. While technically correct, a more natural phrasing might improve readability.",
-          "suggestion": "ເປີດບົດລາຍງານດ້ານລຸ່ມນີ້ເພື່ອສັງເກດຂໍ້ມູນທີ່ມີຢູ່"
+          "type": "spelling",
+          "description": "The word 'ເປີດ' (open) in 'ເປີດບົດລາຍງານ' could be more naturally phrased. While technically correct, it sounds slightly formal in this context.",
+          "suggestion": "Consider using 'ເບິ່ງບົດລາຍງານ' (view the report) instead."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ອະທິບາຍໄດ້ຕາມໃຈ\" (describe it as you wish) is a bit too informal for the context of a formal error report. It could be misinterpreted.",
-          "suggestion": "ອະທິບາຍບັນຫານີ້ຢ່າງລະອຽດດ້ວຍການໃຊ້ຄໍາເຫັນ"
+          "type": "grammar",
+          "description": "The phrase 'ອະທິບາຍໄດ້ຕາມໃຈ' is a bit awkward. While it conveys 'describe freely', a more fluent phrasing is possible.",
+          "suggestion": "Replace 'ອະທິບາຍໄດ້ຕາມໃຈ' with 'ອະທິບາຍຢ່າງເສລີ' (describe freely)."
         }
       ],
       "approved_at": null
@@ -204,14 +198,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'utilizatorilor' is used incorrectly. It should be 'utilizator'. While 'utilizatorilor' means 'of users', the correct phrasing here refers to the users themselves.",
-          "suggestion": "utilizator"
+          "type": "grammar",
+          "description": "The sentence \"Deschideţi raportul de mai jos pentru a verifica datele incluse\" could be improved. While grammatically correct, 'verifica' (verify) isn't the best choice. 'A vedea' (to see) or 'a consulta' (to consult) would flow better in this context.",
+          "suggestion": "Deschideţi raportul de mai jos pentru a vedea datele incluse."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'în forma liberă' is not the most natural way to express 'free form' in this context. It sounds a bit stiff and formal.",
-          "suggestion": "în câmpul de comentarii"
+          "type": "formatting",
+          "description": "The imperative verb 'Deschideți' uses the polite/formal 'voi' form. Depending on the target audience and platform, a less formal 'Deschide' might be more appropriate.",
+          "suggestion": "Deschide raportul de mai jos pentru a vedea datele incluse."
         }
       ],
       "approved_at": null
@@ -228,18 +222,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"To help our team better understand the problem\" is awkwardly translated as \"ඔන්ලිඔෆිස් කණ්ඩායමට ගැටලුව වඩාත් හොඳින් අවබෝධ කර ගැනීම සඳහා\". 'OnlyOffice' seems to have been inserted incorrectly. It should refer to 'our team'.",
-          "suggestion": "ඔවුන්ගේ කණ්ඩායමට ගැටලුව වඩාත් හොඳින් අවබෝධ කර ගැනීම සඳහා"
+          "description": "The phrase \"Open the report below\" is translated as \"අඩංගු දත්ත බැලීමට පහත වාර්තාව විවෘත කරන්න\". While technically correct, it's a bit wordy. A more natural translation might be \"පහත වාර්තාව తెరిచి බැලීමෙන් ඇතුළත් දත්ත බැලිය හැකිය\" or simply \"පහත වාර්තාව తెరిచి බැලන්න\".",
+          "suggestion": "පහත වාර්තාව తెరిచి බැලන්න"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"describe it in the free form\" is translated as \"ආකෘතිපත්‍රයේ විස්තර කරන්න\". The word 'ආකෘතිපත්‍රයේ' (in the form) isn't appropriate here; it implies a specific form.",
-          "suggestion": "නිදහස් ආකාරයෙන් විස්තර කරන්න"
+          "description": "The phrase \"Error reports do not contain any personal data of the users\" is translated as \"අපගේ දෝෂ වාර්තා වලට පරිශ්‍රීලකයින්ගේ පෞද්ගලික දත්ත කිසිවක් ඇතුළත් නොකරයි\". This is somewhat literal. A more fluent translation would be something like, \"අපගේ දෝෂ වාර්තා පරිශ්‍රීලකයින්ගේ පුද්ගලික දත්ත නොතිබිණි\" or \"දෝෂ වාර්තා වල පරිශ්‍රීලකයින්ගේ පුද්ගලික දත්ත ఉండదు\".",
+          "suggestion": "දෝෂ වාර්තා වල පරිශ්‍රීලකයින්ගේ පුද්ගලික දත්ත ఉండదు"
         },
         {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්ගේ' has a minor typo. It should be 'පරිශ්‍රමිකයන්ගේ'.",
-          "suggestion": "පරිශ්‍රමිකයන්ගේ"
+          "type": "incorrect_translation",
+          "description": "The term \"comment field\" is translated as \"අදහස් ක්‍ෂේත්‍රය\".  While understandable, it's a technical term. A simpler and more natural phrasing would be \"අදහස් දිනපොත්\" (comments section) or simply \"අදහස් පළ කිරීමේ ස්ථානය\" (place to provide comments).",
+          "suggestion": "අදහස් පළ කිරීමේ ස්ථානය"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ඔන්ලිඔෆිස්' appears out of nowhere.  It doesn't seem to be a proper translation of anything and disrupts the flow. It should be removed or replaced with a more accurate equivalent.",
+          "suggestion": "Remove 'ඔන්ලිඔෆිස්' or replace it with the correct company/team name if applicable."
         }
       ],
       "approved_at": null
@@ -250,13 +249,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The term 'poličke Komentár' (comment box) is awkward. 'Poličke' is genitive case and doesn't fit the context of a field label.",
-          "suggestion": "Otvorte hlásenie nižšie, aby ste zistili, aké údaje obsahuje. Hlásenie chyby neobsahuje žiadne osobné údaje používateľov. Ak chcete pomôcť nášmu tímu lepšie pochopiť problém, popíšte ho vo voľnej forme v poli 'Komentár'."
+          "description": "The term 'poličke Komentár' is awkward and doesn't clearly represent 'comment field'. It appears to be a literal translation but lacks natural flow in Slovak.",
+          "suggestion": "Consider rephrasing to something like 'v poli Komentár' or 'v komentárnom poli' to better convey the meaning of 'comment field'."
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'voli forme' is a more literal translation. A more natural Slovak phrasing would be more conversational.",
-          "suggestion": "Ak chcete pomôcť nášmu tímu lepšie pochopiť problém, popíšte ho slobodnou formou v poli 'Komentár'."
+          "description": "While 'hlásenie' can mean 'report', in the context of error reporting, 'chybová správa' or 'správa o chybe' might be more accurate and idiomatic.",
+          "suggestion": "Replace 'hlásenie' with 'chybová správa' or 'správa o chybe'."
         }
       ],
       "approved_at": null
@@ -270,13 +269,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'report below' is awkwardly translated as 'извештај испод'. A more natural phrasing would be 'нижи извештај' or 'приложен извештај'.",
-          "suggestion": "Отворите приложени извештај да бисте видели које податке укључује."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -284,14 +277,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'izveštaj' is spelled correctly, but it could be improved for clarity. While technically accurate, 'prijavi greške' (error report) might be more idiomatic in this context.",
-          "suggestion": "Consider using 'prijavi greške' instead of 'izveštaj' for a more natural flow."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Otvorite izveštaj ispod\" is slightly awkward. A more natural phrasing would be \"Otvorite izveštaj koji sledi\" or \"Otvorite izveštaj dole\".",
+          "suggestion": "Otvorite izveštaj koji sledi"
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'Kako biste našem timu pomogli da bolje razume problem' is grammatically correct but slightly verbose.  A more concise and common phrasing would improve readability.",
-          "suggestion": "Consider 'Kako biste naš tim bolje razumeo problem...' or 'Da bi naš tim bolje razumeo problem...'"
+          "type": "incorrect_translation",
+          "description": "The word 'sadrže' could be improved. While technically correct, 'ne sadrže' can sound a bit stiff. A better translation might be 'ne sadrže nikakve'.",
+          "suggestion": "ne sadrže nikakve"
         }
       ],
       "approved_at": null
@@ -302,8 +295,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"free form\" is not accurately translated. 'Düz yazı' is a reasonable attempt but could be more precise. A better translation might emphasize unstructured input.",
-          "suggestion": "Use a phrase like 'serbest metin' or 'yapılandırılmamış bir şekilde' to better convey the meaning of 'free form'."
+          "description": "The phrase \"free form\" is not accurately translated. \"Düz yazı olarak\" is a literal translation but doesn't convey the intended meaning of 'free form' in the context of a comment field.",
+          "suggestion": "Consider a more natural phrasing like \"serbest metin olarak\" or \"kendi cümlelerinizle\" to better convey the meaning of 'free form'."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure feels slightly awkward in Turkish.  The transition between sentences could be smoother.",
+          "suggestion": "Rephrase the sentences for better flow: \"Hangi verilerin dahil edildiğini görmek için aşağıdaki raporu açın. Hata raporları kullanıcıların kişisel verilerini içermez. Sorunu daha iyi anlamamıza yardımcı olmak için, yorum alanında kendi cümlelerinizle açıklayın.\""
         }
       ],
       "approved_at": null
@@ -320,13 +318,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"xin hãy\" (please) sounds overly formal in this context. It can be omitted or replaced with a more casual alternative.",
-          "suggestion": "Hãy mô tả nó trong biểu mẫu tự do bằng cách sử dụng trường nhận xét."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'free form' as 'biểu mẫu tự do' is technically correct but can be more naturally expressed as 'tự do nhập'.",
-          "suggestion": "Hãy mô tả nó trong biểu mẫu bằng cách sử dụng trường nhận xét."
+          "description": "The phrase \"xin hãy mô tả nó\" is overly formal for this context. A more natural phrasing would be 'hãy mô tả'.",
+          "suggestion": "hãy mô tả nó"
         }
       ],
       "approved_at": null

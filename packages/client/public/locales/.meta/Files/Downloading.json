@@ -3,7 +3,7 @@
   "content": "Downloading",
   "content_en_sha1_hash": "9b4592f9ae45a647155e857c8bbbe5e38c83f01e",
   "created_at": "2025-05-19T21:30:55.480Z",
-  "updated_at": "2025-06-03T20:59:41.993Z",
+  "updated_at": "2025-05-26T07:57:32.394Z",
   "comment": {
     "text": "This translation key is used to display the status \"Downloading\" in various UI elements, such as buttons or dialogs, related to file operations. It appears in the context of file management and transfer processes.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Γίνεται λήψη' is a literal translation of 'Downloading', it's not the most natural or idiomatic way to express the concept in Greek. It's a bit clunky.",
+          "suggestion": "Consider using a more natural phrasing like 'Κατέβασμα' (Katevasma) which is a more common and concise term for 'downloading' or 'Λήψη σε εξέλιξη' (Leepsi se exeliksi) which translates to 'Downloading in progress'."
+        }
+      ],
       "approved_at": null
     },
     "es": {

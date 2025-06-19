@@ -3,7 +3,7 @@
   "content": "Fill in the fields of the original form in the editor window.",
   "content_en_sha1_hash": "62ecf42af4c851186d46a841be80225f630176fa",
   "created_at": "2025-05-19T21:30:55.164Z",
-  "updated_at": "2025-05-28T09:30:02.271Z",
+  "updated_at": "2025-05-26T07:57:32.307Z",
   "comment": {
     "text": "Fill in the fields of the original form in the editor window. This translation key is used to describe a button or label that prompts users to complete the fields of an original form within an editor window, likely a PDF dialog.",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تعبئة الحقول في النموذج الأصلي في نافذة المحرر' is a literal translation and could be improved for naturalness in Arabic. A more idiomatic translation might convey the meaning more effectively.",
-          "suggestion": "املأ الحقول الموجودة في النموذج الأصلي داخل نافذة التحرير. (Imla' al-hukool al-mawjouda fi al-namodhaj al-asli dakhil nafidzat al-tahreer.)"
+          "description": "The Arabic translation 'تعبئة الحقول في النموذج الأصلي في نافذة المحرر' is a literal translation, but the phrasing could be more natural. 'تعبئة' implies filling something in, which is correct, but the overall flow isn't ideal for a user interface.",
+          "suggestion": "املأ الحقول الموجودة في النموذج الأصلي في نافذة المحرر."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks a smooth flow. Using 'في' repeatedly can make the sentence sound clunky.",
+          "suggestion": "املأ الحقول الموجودة في النموذج الأصلي في نافذة المحرر."
         }
       ],
       "approved_at": null
@@ -41,8 +46,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'sahələrini' is a valid word but could be more naturally phrased. It's technically correct, meaning 'fields', but might not flow as smoothly in context.",
+          "type": "incorrect_translation",
+          "description": "The translation 'sahələrini doldurun' is a literal translation of 'fill in the fields'. A more natural and idiomatic phrasing in Azerbaijani might be 'boşluqlarını doldurun' (fill in the blanks).",
           "suggestion": "Redaktor pəncərəsində orijinal formanın boşluqlarını doldurun."
         }
       ],
@@ -72,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'editor window' is a bit clunky in Greek. While technically correct, a more natural phrasing could be used.",
-          "suggestion": "Συμπληρώστε τα πεδία της αρχικής φόρμας στο παράθυρο επεξεργασίας."
+          "description": "The translation 'Συμπληρώστε τα πεδία της αρχικής φόρμας στο παράθυρο του εργαλείου επεξεργασίας' is a bit verbose and not as concise as the English original. 'Εργαλείο επεξεργασίας' (editing tool) is less common than simply 'επεξεργαστή'.",
+          "suggestion": "Συμπληρώστε τα πεδία της αρχικής φόρμας στον επεξεργαστή."
         }
       ],
       "approved_at": null
@@ -114,8 +119,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'エディターウィンドウで元のフォームのフィールドに入力できます' implies 'you can enter' rather than 'fill in'. The original English phrase directs the user to perform an action, not simply states a capability.",
-          "suggestion": "エディターウィンドウで元のフォームのフィールドに記入してください。"
+          "description": "The translation 'エディターウィンドウで元のフォームのフィールドに入力できます' implies the user *can* input, but the original English states they *should* fill in the fields. The nuance is slightly different.",
+          "suggestion": "エディターウィンドウで元のフォームのフィールドに必要事項を入力してください。"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the translation uses a very polite/formal phrasing. Depending on the target audience and tone of the application, a slightly less formal phrasing might be preferable.",
+          "suggestion": "エディターウィンドウで、元のフォームのフィールドを埋めてください。"
         }
       ],
       "approved_at": null
@@ -126,8 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '작성합니다' (jaksseupnida) implies 'writing' or 'creating', which isn't the intended meaning of 'fill in'. The action is more about populating existing fields.",
-          "suggestion": "편집기 창에서 원래 양식의 필드를 채워 넣습니다."
+          "description": "The translation '작성합니다' (jaksyeonhapnida) implies writing *new* content, whereas the English 'Fill in' suggests populating existing fields. A more accurate translation would reflect filling in pre-existing fields.",
+          "suggestion": "편집기 창에서 원래 양식의 필드를 채웁니다."
         }
       ],
       "approved_at": null
@@ -138,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ຕື່ມຂໍ້ມູນເຂົ້າສູ່ຟອກແບບຟອມຕົ້ນສະບັບໃນຊ້ອນຂໍ້ມູນ' is not a perfect equivalent. 'ຊ້ອນຂໍ້ມູນ' literally means 'data container' or 'data box'. While it conveys the idea of an editor window, a more accurate and natural translation would be something like 'ໃນພື້ນທີ່ບັນນາທິການ' (in the editing area) or 'ໃນແອັບພລິເຄຊັນບັນນາທິການ' (in the editing application).",
-          "suggestion": "ຕື່ມຂໍ້ມູນເຂົ້າສູ່ຟອກແບບຟອມຕົ້ນສະບັບໃນພື້ນທີ່ບັນນາທິການ"
+          "description": "The phrase 'editor window' is not accurately translated. 'ຊ້ອນຂໍ້ມູນ' literally means 'data box' and doesn't convey the concept of an editor window.",
+          "suggestion": "Consider a phrase like 'ພື້ນທີ່ບັນນາທິການ' (pheun thi banthikan) which translates to 'editor area' or 'editing space', or a more descriptive phrase depending on the intended meaning. Alternatively, describing the functionality of the area might be better than a literal translation."
         }
       ],
       "approved_at": null
@@ -180,7 +190,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The word 'formularul' is unnecessarily space-separated from 'original'.",
+          "description": "The word 'formularul' is separated from 'original' by a space. It should be attached.",
           "suggestion": "Completați câmpurile din formularul original în fereastra editorului."
         }
       ],
@@ -198,13 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පරිශීලකයාගේ මුල් ආකෘතියේ ක්ෂේත්‍ර සංස්කාරක ජනේලය තුළ පුරවන්න' is too literal and doesn't flow naturally in Sinhala. It translates to something like 'Fill the fields of the user's original form in the editor window.' It is overly verbose.",
-          "suggestion": "පුරාවත්සහගත පත්‍රයේ ක්ෂේත්‍ර සංස්කාරක ජනෙලේ පුරවන්න."
+          "description": "The translation 'පරිශීලකයාගේ මුල් ආකෘතියේ ක්ෂේත්‍ර සංස්කාරක ජනේලය තුළ පුරවන්න' is overly literal and not idiomatic Sinhala. 'පරිශීලකයාගේ' (parishilakayage) which means 'the user's' is unnecessary and adds complexity. The entire phrase sounds awkward.",
+          "suggestion": "පරණ ආකෘතියේ ක්ෂේත්‍ර සංස්කාරක ජනේලය තුළ පුරවන්න."
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'සංස්කාරක' might be better expressed as 'ဖြတ်သ menyelamatkan' for 'editor'.",
-          "suggestion": "පුරාවත්සහගත පත්‍රයේ ක්ෂේත්‍ර ဖြတ်သ menyelamatkan ජනෙලේ පුරවන්න."
+          "type": "incorrect_translation",
+          "description": "The word 'මුල්' (mul) meaning 'original' is redundant because the context implies the original form is being referenced. Removing it simplifies the sentence.",
+          "suggestion": "Removal of 'මුල්' as suggested in the previous point."
         }
       ],
       "approved_at": null
@@ -214,9 +224,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vyplniť polia pôvodného formulára v okne redaktora' uses the infinitive form 'Vyplniť' which is grammatically awkward in this context. A more natural phrasing would use a verb in the imperative mood.",
-          "suggestion": "Vyplňte polia pôvodného formulára v okne redaktora."
+          "type": "spelling",
+          "description": "The word 'Vyplniť' should be ' vyplňte' to correctly match the instruction's imperative form. 'Vyplniť' is the infinitive form.",
+          "suggestion": "vyplňte"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'v okne redaktora' sounds slightly awkward. A more natural phrasing might be 'v editore' or 'v úpravárenskom okne'.",
+          "suggestion": "v editore"
         }
       ],
       "approved_at": null
@@ -230,13 +245,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'уређивање' (uredivanje) is a valid word, but might be more appropriately 'измењивање' (izmenjivanje) to better reflect 'editing'. Both are acceptable, but 'измењивање' feels more natural in this context.",
-          "suggestion": "Попуните поља оригиналног формулара у прозору за измењивање."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

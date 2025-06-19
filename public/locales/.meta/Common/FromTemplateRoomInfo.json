@@ -1,13 +1,13 @@
 {
   "key_path": "FromTemplateRoomInfo",
-  "content": "Create a room based on a template. All settings, folders and files will be taken from the selected room template.",
-  "content_en_sha1_hash": "b89a841711cd249943ab4f6618eec95188f6198c",
-  "created_at": "2025-05-19T21:30:45.605Z",
-  "updated_at": "2025-06-03T20:59:42.344Z",
+  "content": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template.",
+  "content_en_sha1_hash": "7f6e9f2e8f37792cc17775b4bd5cca6a6740ca48",
+  "created_at": "2025-05-26T07:15:43.923Z",
+  "updated_at": "2025-06-08T12:02:32.889Z",
   "comment": {
-    "text": "This translation key is used for a UI element that describes creating a room based on a template. It will appear in a settings or options section, likely as part of a button or dialog title. Translators should replace \"Create a room\" with a phrase that accurately reflects the specific context where this text appears.",
+    "text": "This translation key is used to display a message that explains the source room template being applied when creating a new room. It is typically displayed in a UI element such as a button or dialog that initiates the creation process, and its purpose is to inform users about the nature of the room's settings and configuration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:02.777Z"
+    "updated_at": "2025-05-26T08:05:23.007Z"
   },
   "usage": [
     {
@@ -27,30 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'All settings, folders and files' is not accurately reflected in the Arabic translation. 'سيتم نقل جميع الإعدادات والمجلدات والملفات' implies a transfer *to* the new room, not that they are *taken* from the template, as the English indicates.",
-          "suggestion": "أنشئوا غرفة استنادًا إلى قالب. سيتم أخذ جميع الإعدادات والمجلدات والملفات من القالب المختار."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Create a room based on a template' is translated as 'Şablon əsasında otaq yaradın'. While technically correct, a more natural and fluent phrasing might be 'Şablon istifadə edərək otaq yaradın' or 'Şablon üzrə otaq yaradın'.",
-          "suggestion": "Şablon istifadə edərək otaq yaradın"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'will be taken from' is translated as 'idxal ediləcək'. While 'idxal etmək' means 'to import', 'alınacaq' (to be taken/obtained) would be a more direct and potentially clearer translation in this context.",
-          "suggestion": "seçilmiş otaq şablonundan alınacaq."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -116,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"가져오기됩니다\" (gajeo-gi-doem-ni-da) translates to 'imported' or 'brought in'. A more natural phrasing for this context would be \"복사됩니다\" (boks-a-doem-ni-da) which means 'copied'.",
-          "suggestion": "템플릿을 기반으로 룸을 생성하세요. 모든 설정, 폴더 및 파일은 선택된 룸 템플릿에서 복사됩니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -152,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'taken from' is not accurately reflected in the Portuguese 'retirados do'. 'Retirados do' implies removal, while 'taken from' implies inheritance or usage. A better translation would convey the concept of inheriting or using the template's content.",
-          "suggestion": "Crie uma sala com base num template. Todas as definições, pastas e ficheiros serão herdados/utilizados do modelo de sala selecionado."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -170,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Create a room\" is translated as \"Creați o sală\". While technically correct, a more natural translation would be something like \"Creați o cameră\" or \"Configurați o cameră\". \"Sală\" often refers to a hall or large room, while \"cameră\" is a more general term for a room.",
-          "suggestion": "Creați o cameră"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -188,35 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'settings' is not accurately translated. 'සැකසුම්' generally means 'arrangements' or 'adjustments', not 'settings' in the software context.",
-          "suggestion": "Consider using a more specific term for 'settings' like 'මාපාංකම්' (mapaankam) or rephrase to 'සියලුම වැඩසක්රම...' (siyalluma weradasakrama... - all the functionalities...)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ෆෝල්ඩර' (folder) is a reasonable transliteration, it might be improved for clarity, especially for users less familiar with English loanwords. Consider providing a more readily understood term in Sinhala.",
-          "suggestion": "Consider using 'ලේඛන ගබඩාව' (lekahana gabadawa) for 'folder'.  While not a direct translation, it conveys the meaning of a container for files."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'ගොනු' translates to 'files', which is accurate. However, consider if a more descriptive phrase is needed to clarify the scope.",
-          "suggestion": "Consider adding context: 'ලේඛන ගොනු' (lekahana gonu) for 'document files' if appropriate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'room template' is translated as 'šablóny miestnosti' which literally means 'room templates'. It should be translated as 'šablóna miestnosti' which means 'room template'.",
-          "suggestion": "Vytvorenie miestnosti na základe šablóny. Všetky nastavenia, priečinky a súbory budú prevzaté z vybranej šablóny miestnosti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -228,25 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'фолдери' is spelled incorrectly. It should be 'фолдери'",
-          "suggestion": "фолдери"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'folderi' should be 'foldere'.",
-          "suggestion": "Kreirajte sobu na osnovu šablona. Svi podešavanja, foldere i fajlovi biće preuzeti iz odabranog šablona sobe"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -270,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"使用模板创建房间，将套用房间模板中的所有设置、文件夹和文件\" is a bit literal and doesn't flow naturally in Chinese. The phrase '将套用' (jiāng tàoyòng) sounds awkward. A more natural way to express 'will be taken from' would be something like '会复制' (huì fùzhì) or '将会使用' (jiāng huì shǐyòng).",
-          "suggestion": "使用模板创建房间，房间模板中的所有设置、文件夹和文件将会使用。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

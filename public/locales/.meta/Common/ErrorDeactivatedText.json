@@ -3,7 +3,7 @@
   "content": "This {{productName}} is deactivated",
   "content_en_sha1_hash": "192b71af1a142211b0f1573c4d3e056a55e4111b",
   "created_at": "2025-05-19T21:30:45.063Z",
-  "updated_at": "2025-05-28T09:30:02.937Z",
+  "updated_at": "2025-05-26T07:57:32.906Z",
   "comment": {
     "text": "This translation key is used to display a generic message indicating that a product is deactivated, typically found on an error page or unavailable component. It appears when there's an issue with accessing a specific product and is meant to provide a clear explanation without revealing detailed information about the issue.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'is deactivated' is not accurately translated. 'معطل' (mu'attal) typically means 'disabled' or 'out of order,' but 'deactivated' implies a specific process. A more precise translation might consider terms related to product licensing or activation states.",
-          "suggestion": "Consider alternatives like 'تم إلغاء تفعيله' (tam ilgha' taf'eeluhu) - 'its activation has been cancelled' or 'غير مفعل' (ghair mufa'al) - 'not activated', depending on the precise meaning of 'deactivated' in the context of the product."
+          "description": "The translation \"{{productName}} هذا معطل\" doesn't accurately convey the meaning of \"This {{productName}} is deactivated\". A more accurate translation would be something along the lines of \"{{productName}} هذا غير مفعل\" or \"{{productName}} تم إلغاء تفعيله\".  \"معطل\" implies disabled or broken, whereas deactivated implies a deliberate process.",
+          "suggestion": "{{productName}} هذا غير مفعل"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'prostor' (space) doesn't accurately convey the meaning of 'product' in this context. It implies a physical space rather than a product or service.",
-          "suggestion": "Tento produkt {{productName}} je deaktivován"
+          "description": "The word 'prostor' (space) doesn't accurately convey the meaning of 'product'. The English 'product' refers to a tangible item or service, while 'prostor' means space or area. This suggests a mistranslation of 'product'.",
+          "suggestion": "Consider using a word that more closely represents 'product,' such as 'výrobek' (product), 'položka' (item), or 'záznam' (record), depending on the context."
         }
       ],
       "approved_at": null
@@ -138,13 +138,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dane konto {{productName}} zostało dezaktywowane' is not a direct or accurate translation of 'This {{productName}} is deactivated'. 'Dane konto' is awkward. 'This' doesn't have a direct equivalent that requires a noun phrase.",
-          "suggestion": "This could be rephrased to something like 'Twoje {{productName}} zostało dezaktywowane' (Your {{productName}} is deactivated) or '{{productName}} zostało dezaktywowane' ({{productName}} is deactivated)."
+          "description": "The translation \"Dane konto {{productName}} zostało dezaktywowane\" is not a direct or accurate translation of 'This {{productName}} is deactivated'. 'Dane konto' is awkward. It should be closer to 'Twoje konto' or 'Konto'.",
+          "suggestion": "Konto {{productName}} zostało dezaktywowane"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Dane konto' is grammatically incorrect. 'Dane' means data and doesn't fit in this context.",
-          "suggestion": "Remove 'Dane' or rephrase the sentence to avoid it."
+          "description": "While 'zostało dezaktywowane' is grammatically correct, a more natural phrasing might improve readability. Consider using a more active voice.",
+          "suggestion": "Konto {{productName}} jest nieaktywne"
         }
       ],
       "approved_at": null
@@ -167,7 +167,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'spațiu' (space) doesn't accurately translate 'product' in this context. It implies a physical space rather than a product.",
+          "description": "The word 'spațiu' (space) doesn't accurately translate 'product'. The intended meaning is a product or license, not a physical space.",
           "suggestion": "Acest produs {{productName}} este dezactivat"
         }
       ],

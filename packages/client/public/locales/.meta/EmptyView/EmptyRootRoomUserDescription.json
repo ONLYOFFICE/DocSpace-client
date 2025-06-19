@@ -3,7 +3,7 @@
   "content": "The shared room will appear here.",
   "content_en_sha1_hash": "ec24ff68dc23489ef8e9a00fbca2dd55df242e5f",
   "created_at": "2025-05-19T21:30:56.494Z",
-  "updated_at": "2025-06-03T20:59:41.803Z",
+  "updated_at": "2025-05-26T07:57:32.165Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a shared room is empty. It appears as an \"EmptyView\" component in a UI where users can view or interact with shared rooms, and it is translated for different access rights and folder types.",
     "is_auto": true,
@@ -147,13 +147,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Здесь появится комната, к которой предоставлен доступ.\" is too literal and doesn't convey the meaning of 'The shared room will appear here' accurately. It implies the room has been given access, rather than simply appearing.",
+          "suggestion": "Consider a more natural translation like \"Здесь появится общая комната\" or \"Здесь появится доступная комната\"."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සාමාන්‍ය කාමරය මෙහි දිස්වනු ඇත' translates to 'The normal room will appear here.' However, the English content 'The shared room will appear here' implies a room accessible to multiple users, not just a 'normal' room. The nuance of 'shared' is lost.",
+          "suggestion": "සාදරණීය කාමරය මෙහි දිස්වනු ඇත. (Sadaraniya kamara mehi disvanu atha.) - This translates to 'The welcoming/shared room will appear here.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -47,8 +47,8 @@ export default async function DocspaceLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
-  const cookieStore = cookies();
+  const hdrs = await headers();
+  const cookieStore = await cookies();
 
   const filter = hdrs.get(FILTER_HEADER);
   const shareKey = hdrs.get(SHARE_KEY_HEADER);

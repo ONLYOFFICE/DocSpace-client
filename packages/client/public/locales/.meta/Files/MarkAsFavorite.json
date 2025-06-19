@@ -3,7 +3,7 @@
   "content": "Mark as favorite",
   "content_en_sha1_hash": "a8e7d773cec432feb41d1356e6bfdd0f356ffc17",
   "created_at": "2025-05-19T21:30:55.804Z",
-  "updated_at": "2025-06-03T20:59:42.297Z",
+  "updated_at": "2025-06-08T12:02:32.847Z",
   "comment": {
     "text": "This translation key is used to display the label \"Mark as favorite\" in the UI, likely as a button or option. It should be translated in the context of a user interface where users can mark items as their favorites.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2056,
+      "line_number": 2059,
       "context": "disabled: false,\n },\n {\n id: \"option_mark-as-favorite\",\n key: \"mark-as-favorite\",\n label: t(\"MarkAsFavorite\"),\n icon: FavoritesReactSvgUrl,\n onClick: (e) => this.onClickFavorite(e, item.id, t),\n disabled: false,\n \"data-action\": \"mark\",\n action: \"mark\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2056,
+      "line_number": 2059,
       "context": "disabled: false,\n },\n {\n id: \"option_mark-as-favorite\",\n key: \"mark-as-favorite\",\n label: t(\"MarkAsFavorite\"),\n icon: FavoritesReactSvgUrl,\n onClick: (e) => this.onClickFavorite(e, item.id, t),\n disabled: false,\n \"data-action\": \"mark\",\n action: \"mark\",",
       "module": "/packages/client"
     }
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Favorit kimi işarələ' is not the most natural or accurate rendering of 'Mark as favorite' in Azerbaijani. While it's understandable, it's a somewhat literal and clunky translation.",
-          "suggestion": "Sevimli kimi etiqna / Sevimlilər siyahısına əlavə et"
-        },
-        {
-          "type": "grammar",
-          "description": "The verb form 'işarələ' appears to be an attempt at a verbal noun or participle but isn't grammatically correct in standard Azerbaijani. It needs to be conjugated appropriately to fit the sentence's intended meaning.",
-          "suggestion": "Requires more careful consideration of the intended verb form."
+          "description": "The translation \"Favorit kimi işarələ\" is not the most natural or accurate translation of \"Mark as favorite.\" It literally translates to \"Mark as favorite-like\".",
+          "suggestion": "Sevimli kimi etklə (or) Sevdiyimə əlavə et"
         }
       ],
       "approved_at": null
@@ -95,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Marquer en tant que favori\" is a bit formal and not the most natural way to say \"Mark as favorite.\" A more common and idiomatic translation would be something like \"Ajouter aux favoris\" or \"Enregistrer comme favori\".",
+          "description": "The translation 'Marquer en tant que favori' is technically correct but a more natural and common phrasing would be 'Ajouter aux favoris' or 'Favoris'. 'Marquer en tant que favori' sounds a bit formal and less user-friendly.",
           "suggestion": "Ajouter aux favoris"
         }
       ],
@@ -107,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Նշել որպես ընտրյալ\" is understandable, a more natural and idiomatic translation of \"Mark as favorite\" in Armenian would be something along the lines of \"Ավելացնել շնորհակներին\" or \"Հավանել\"",
-          "suggestion": "Consider \"Ավելացնել շնորհակներին\" or \"Հավանել\" as alternative translations."
+          "description": "While technically correct, \"Նշել որպես ընտրյալ\" is a somewhat literal and less natural translation of \"Mark as favorite.\" A more idiomatic translation would be something like \"Ավելացնելնուշումներին\" (Avelacnel nuwmnerin) or \"Ավելացնելնվերապահեստին\" (Avelacnel nverapahestine).",
+          "suggestion": "Consider \"Ավելացնելնուշումներին\" (Avelacnel nuwmnerin) or \"Ավելացնելնվերապահեստին\" (Avelacnel nverapahestine)"
         }
       ],
       "approved_at": null
@@ -125,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'お気に入りに登録' is a common way to express 'Mark as favorite', a more direct and perhaps more natural translation in this context would be 'お気に入りに追加' (Okinari ni teisuu).  '登録' implies a registration process, which isn't necessarily what's intended when marking something as a favorite in a UI element.",
+          "description": "While \"お気に入りに登録\" is a common way to say 'mark as favorite', it's a bit formal for a UI element. A more natural and concise translation would be better suited.",
           "suggestion": "お気に入りに追加"
         }
       ],
@@ -143,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຫມາຍດາວເອກະສານ\" literally translates to 'Mark star document.' While conveying a similar meaning, it's not a natural or idiomatic translation of 'Mark as favorite.'",
-          "suggestion": "ຫມາຍເປັນສຸດທະຍາຄິດ (May pen sutthayakhit) - This translates to 'Mark as preferred' or 'Mark as top choice' and is a more natural way to express 'Mark as favorite' in Lao. Alternatively, ຫມາຍເປັນສຸດທະຍາ (May pen sutthaya) could also work."
+          "description": "The Lao translation \"ຫມາຍດາວເອກະສານ\" literally translates to \"mark star document\". While it conveys the general idea, it's not the most natural or idiomatic way to say \"Mark as favorite\" in Lao. A more accurate and fluent translation might be something like \"ເພີ່ມເຕີມເປັນສຸດທິະຍົນ\" or \"ບັນຈຸລາຍການໄວ້ໃນທີ່ພົ້ນເດັ່ນ\".",
+          "suggestion": "Consider \"ເພີ່ມເຕີມເປັນສຸດທິະຍົນ\" or \"ບັນຈຸລາຍການໄວ້ໃນທີ່ພົ້ນເດັ່ນ\"."
         }
       ],
       "approved_at": null
@@ -191,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Добавить в избранное\" while conveying a similar meaning, doesn't directly translate to \"Mark as favorite\". A more literal translation might be \"Отметить как избранное\" or \"Добавить в любимые\". \"Добавить в избранное\" implies adding to a pre-existing favorites list, whereas \"Mark as favorite\" might simply indicate setting a favorite.",
-          "suggestion": "Consider \"Отметить как избранное\" or \"Добавить в любимые\" for a more direct translation."
+          "description": "While 'Добавить в избранное' is a common and generally acceptable translation for 'Mark as favorite', a more direct and potentially more accurate translation would be 'Отметить как избранное'. 'Добавить в избранное' implies adding something *to* a favorites list, whereas 'Mark as favorite' indicates a marking action.",
+          "suggestion": "Отметить как избранное"
         }
       ],
       "approved_at": null
@@ -203,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රියතම ලෙස යොදන්න' while attempting to convey 'Mark as favorite', is a bit too literal and not the most natural phrasing in Sinhala. A more idiomatic translation would be something like 'ප්‍රියතමයා ලෙස සලකන්න' or 'ප්‍රියතම ලකුණක් ලෙසින්'.",
-          "suggestion": "ප්‍රියතමයා ලෙස සලකන්න"
+          "description": "The translation 'ප්‍රියතම ලෙස යොදන්න' while attempting to convey 'Mark as favorite,' doesn't quite capture the intended meaning. 'යොදන්න' implies 'to add' or 'to apply', which isn't the best fit for 'Mark as favorite'.",
+          "suggestion": "Consider a translation like 'ප්‍රියතම ලකුණ තැබුවා' (Priyathama lakuna thabuva) which more accurately means 'Marked as favorite' or 'Add to favorites'."
         }
       ],
       "approved_at": null
@@ -227,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Означи као омиљено' is understandable, a more natural and common translation for 'Mark as favorite' in Serbian (Cyrillic) would be 'Забележи као омиљено' or 'Додај у омиљене'.  'Означи' implies a more general marking, not specifically a favorite.",
-          "suggestion": "Забележи као омиљено"
+          "description": "While \"Означи као омиљено\" is understandable, \"Mark as favorite\" typically translates better as \"Додај у омиљене\" or \"Сачувај у омиљене\" in Serbian (Cyrillic). \"Означи као омиљено\" sounds slightly awkward.",
+          "suggestion": "Додај у омиљене"
         }
       ],
       "approved_at": null

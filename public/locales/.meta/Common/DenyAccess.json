@@ -3,7 +3,7 @@
   "content": "Deny access",
   "content_en_sha1_hash": "4e81d65fb037d65bf6f3fdeeaf9116c90f9967ff",
   "created_at": "2025-05-19T21:30:44.489Z",
-  "updated_at": "2025-05-28T09:30:02.951Z",
+  "updated_at": "2025-06-02T10:20:51.580Z",
   "comment": {
     "text": "This translation key is used to display the text \"Deny access\" in the user interface. It appears on buttons or controls that allow users to restrict access to a share or file, and its purpose is to provide a clear indication of the action being performed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 132,
+      "line_number": 131,
       "context": "icon: FillFormsReactSvgUrl,\n },\n // available.Restrict && {\n //   access: ShareAccessRights.DenyAccess,\n //   key: \"deny-access\",\n //   label: t(\"Common:DenyAccess\"),\n //   icon: EyeOffReactSvgUrl,\n // },\n // {\n //   key: \"separator\",\n //   isSeparator: true,",
       "module": "/packages/shared"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Girişə icazə vermə' while literally meaning 'Do not allow access', isn't the most natural or idiomatic way to translate 'Deny access' in Azerbaijani. A more common and direct translation would be something like 'Keçməyə icazə vermə' or 'İnzadə etmə'.",
-          "suggestion": "Keçməyə icazə vermə"
+          "description": "The translation 'Girişə icazə vermə' while conveying the general idea of denying access, isn't the most natural or precise rendering of 'Deny access' in Azerbaijani. It literally translates to 'Don't allow access'.",
+          "suggestion": "Consider using 'Keçməyə icazə vermə' or 'Keçidi qadağan et' for a more accurate and idiomatic translation. Alternatively, 'Giriş qadağan olundu' (Access is prohibited) could also work depending on the specific context."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Մերժել մատչումը\" (Merjel matchumə) translates to \"Reject the match\" or \"Reject the pairing.\" While conveying a sense of denial, it doesn't directly translate \"Deny access.\" A more accurate translation would be something like \"արգելել մուտքը\" (argelel mutqə) which means 'to prohibit entry' or 'to deny access'.",
-          "suggestion": "արգելել մուտքը (argelel mutqə)"
+          "description": "The Armenian translation \"Մերժել մատչումը\" is not an accurate translation of \"Deny access\". \"Մերժել\" means 'to reject' and \"մատչումը\" refers to 'match' or 'matching', implying denying a match or connection. 'Deny access' is more accurately conveyed with a phrase indicating denial of entry or permission.",
+          "suggestion": "Consider using a more appropriate Armenian translation like \"արգելել մուտքը\" (argelel mutq'e) which means 'prohibit entry' or \"արգելել մուտք գործելու հնարավորությունը\" (argelel mutq gorrelu hnaravorut'yun) - 'to prohibit the possibility of entry'."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රවේශය ඉවතලන්න' while literally meaning 'discard access' or 'cancel access', is not the most natural or common way to express 'Deny access' in Sinhala. It implies a removal of access rather than a denial.",
-          "suggestion": "A more accurate translation would be 'ප්‍රවේශය ප්‍රතික්ෂේප කරන්න' (Praveśaya pratikṣēpa karanna) or 'ප්‍රවේශය නැවතන්න' (Praveśaya nāvaṭanna)."
+          "description": "The translation \"ප්‍රවේශය ඉවතලන්න\" while containing the core meaning of 'deny access', is a more literal translation of 'reject access' or 'cancel access'. A more natural and common translation of 'Deny access' in Sinhala would be \"ප්‍රවේශය ප්‍රතික්ෂේප කරන්න\" or \"ප්‍රවේශය අවහිර කරන්න\".",
+          "suggestion": "ප්‍රවේශය ප්‍රතික්ෂේප කරන්න"
         }
       ],
       "approved_at": null
@@ -189,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Одбиј приступ\" is understandable, a more natural and accurate translation of \"Deny access\" would be \"Забрани приступ\" or \"Укини приступ\". \"Одбиј приступ\" implies a rejection, which isn't always the intended meaning of 'deny access'.",
+          "suggestion": "Забрани приступ"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -204,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Erişimi reddet\" is a literal translation, a more natural and idiomatic Turkish translation for \"Deny access\" would be \"Erişimi engelleyin\" or \"Erişimi yasaklayın\". \"Erişimi reddet\" sounds somewhat formal and less common in everyday usage.",
+          "description": "While \"Erişimi reddet\" is a literal translation of \"Deny access\", it sounds somewhat formal and less natural in Turkish. A more common and natural phrasing would be \"Erişimi engelleyin\" or \"Erişimi yasaklayın\".",
           "suggestion": "Erişimi engelleyin"
         }
       ],

@@ -14,7 +14,6 @@
   "CannotRestoreRoom": "No se puede restaurar la sala",
   "ChooseNewPayer": "Elija un nuevo pagador",
   "ChooseNewPlan": "¿Desea elegir un nuevo plan de precios?",
-  "ContactUs": "Si tiene preguntas sobre ventas, póngase en contacto con nosotros a través de",
   "DelayedPayment": "Retraso en el pago para el plan {{planName}} con fecha {{date}}",
   "DowngradeNow": "Cambiar al plan anterior ahora",
   "ErrorNotification": "Error al actualizar el plan de tarifas. Inténtelo de nuevo más tarde o póngase en contacto con el departamento de ventas.",

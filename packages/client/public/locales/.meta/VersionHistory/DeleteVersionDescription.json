@@ -3,7 +3,7 @@
   "content": "You are about to delete a file version. It will be no possible to see or restore it anymore. Are you sure you want to continue?",
   "content_en_sha1_hash": "dc5e1b687bf6879d5fbaab0918c52db128223479",
   "created_at": "2025-05-19T21:30:49.935Z",
-  "updated_at": "2025-05-28T09:30:02.267Z",
+  "updated_at": "2025-05-26T07:57:32.304Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message before deleting a file version, warning users that they will lose access to the deleted version. It appears in a dialog box, specifically in a modal dialog header and body. Translators should provide a message that conveys this important information in a clear and concise manner.",
     "is_auto": true,
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"أنتم على وشك حذف\" could be improved to convey the sense of 'You are about to delete'. While technically correct, it sounds slightly awkward. A more natural phrasing would be something like \"ستقوم بحذف\".",
-          "suggestion": "ستقوم بحذف نسخة من الملف."
+          "type": "spelling",
+          "description": "The word 'المتابعة' (al-mutaba'a) is used for 'continue'. While not incorrect, 'تستمر' (tastamirr) might be a more natural and common phrasing in this context, emphasizing continuation of the action.",
+          "suggestion": "أنتم متأكدون من الاستمرار؟"
         }
       ],
       "approved_at": null
@@ -72,13 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Está a punto de eliminar una versión de archivo' could be improved to better reflect the original 'You are about to delete a file version'. A more natural phrasing might be 'Va a eliminar una versión de archivo'.",
+          "description": "The phrase \"Está a punto de eliminar\" sounds slightly unnatural in Spanish. A more common and natural phrasing would be \"Va a eliminar\" or \"Está eliminando\".",
           "suggestion": "Va a eliminar una versión de archivo."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Ya no será posible verla ni restaurarla' is grammatically correct, it's a bit stiff. A more natural phrasing would be 'No será posible verla ni restaurarla'.",
-          "suggestion": "No será posible verla ni restaurarla."
         }
       ],
       "approved_at": null
@@ -101,13 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"It will be no possible\" is grammatically incorrect. The Armenian translation 'Այն այլևս հնարավոր չի լինի' reflects this incorrect phrasing instead of conveying the meaning of 'it will not be possible'.",
-          "suggestion": "Այն այլևս հնարավոր չի լինի դիտել կամ վերականգնելուց։"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'Are you sure you want to continue?' is translated as 'Հավատո՞ւմ եք, որ ցանկանում եք շարունակել։' which literally translates to 'Do you believe that you want to continue?'. While understandable, it's less direct and natural than a simple confirmation.",
-          "suggestion": "Դուք համոզված եք, որ շարունակելու եք։"
+          "description": "The phrase \"Հավատո՞ւմ եք, որ ցանկանում եք շարունակել\" is a literal translation of 'Do you believe that you want to continue?' It's awkward and not idiomatic Armenian. A more natural way to express confirmation would be something like 'Դո՞ւք համոզվեցիք, որ շարունակելու եք։' or 'Դո՞ւք համոզված եք, որ ցանկանում եք շարունակել։'",
+          "suggestion": "Դո՞ւք համոզվեցիք, որ շարունակելու եք։"
         }
       ],
       "approved_at": null
@@ -123,9 +113,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"これ以上見ることや復元することはできません\" is a bit clunky and overly formal. A more natural Japanese phrasing for 'It will be no possible to see or restore it anymore' would be something like \"これからは見ることも復元することもできません\" or \"これからは見ることも復元することもできなくなります\".",
-          "suggestion": "ファイルのバージョンを削除しようとしています。これからは見ることも復元することもできなくなります。本当に続行してもよろしいですか？"
+          "type": "formatting",
+          "description": "The Japanese translation uses a direct question ending ('-masu ka?'). While grammatically correct, it might sound slightly formal in this context. A more conversational phrasing might improve user experience.",
+          "suggestion": "ファイルのバージョンを削除しようとしています。これ以上見たり復元したりできなくなります。よろしいですか？"
         }
       ],
       "approved_at": null
@@ -135,9 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'no possible' in the English text is not accurately translated. 'no possible' is grammatically incorrect in English, and the Korean translation of the intended meaning ('cannot be seen or restored') is slightly awkward.",
-          "suggestion": "파일 버전을 삭제하려고 합니다. 삭제하면 더 이상 볼 수 없거나 복원할 수 없습니다. 그래도 계속하시겠습니까?"
+          "type": "formatting",
+          "description": "The Korean translation uses a question mark at the end of the final sentence. While grammatically correct, it might be more appropriate to use an exclamation point to match the urgency of the action (deletion) in the English version. This is a stylistic consideration.",
+          "suggestion": "Replace '?' with '!'"
         }
       ],
       "approved_at": null
@@ -148,13 +138,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ມັນຈະບໍ່ສາມາດເບິ່ງຫຼືກູ້ຄືນໄດ້ອີກຕໍ່ໄປ\" is a bit wordy and could be simplified. While technically correct, it's not the most natural Lao phrasing for this context.",
-          "suggestion": "ມັນຈະບໍ່ສາມາດເບິ່ງຫຼືກູ້ຄືນໄດ້ແລ້ວ."
+          "description": "The phrase \"ມັນຈະບໍ່ສາມາດເບິ່ງຫຼືກູ້ຄືນໄດ້ອີກຕໍ່ໄປ\" is a bit awkward. 'ກູ້ຄືນ' specifically means 'to recover' or 'to retrieve,' and while understood, 'restore' is a better fit in this context. The overall flow could be improved.",
+          "suggestion": "ມັນຈະບໍ່ສາມາດເບິ່ງຫຼືກວດຄືນໄດ້ອີກຕໍ່ໄປ"
         },
         {
-          "type": "formatting",
-          "description": "The question mark at the end of the sentence feels a little abrupt in Lao. While grammatically not incorrect, a slightly softer ending might be more appropriate.",
-          "suggestion": "ແນ່ໃຈບໍທ່ານຕ້ອງການດໍາເນີນການຕໍ່ບໍ?"
+          "type": "incorrect_translation",
+          "description": "The phrase \"ດໍາເນີນການຕໍ່ບໍ\" is not a natural way to ask \"Are you sure you want to continue?\".",
+          "suggestion": "ທ່ານຕ້ອງການດໍາເນີນການຕໍ່ບໍ?"
         }
       ],
       "approved_at": null
@@ -171,8 +161,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Weet u zeker dat u door wilt gaan?\" is a somewhat formal and slightly less natural way to say \"Are you sure you want to continue?\" in this context. A more conversational and natural phrasing would be better.",
-          "suggestion": "Bent u zeker dat u verder wilt?"
+          "description": "The phrase 'It will be no possible' is grammatically incorrect and doesn't accurately reflect the meaning of 'It will be impossible'.",
+          "suggestion": "It will be impossible"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation uses 'Weet u zeker dat u door wilt gaan?', which translates to 'Do you know for sure you want to continue?'. While understandable, a more natural and common phrasing would be 'Bent u zeker dat u verder wilt gaan?'",
+          "suggestion": "Bent u zeker dat u verder wilt gaan?"
         }
       ],
       "approved_at": null
@@ -192,30 +187,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"It will be no possible\" is grammatically incorrect and doesn't accurately reflect the English meaning. It should be 'It will not be possible'.",
-          "suggestion": "It will not be possible"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'vê-lo' is grammatically awkward in this context. While technically correct, it sounds less natural than 'visualizá-lo' or simply 'acessá-lo'.",
-          "suggestion": "visualizá-lo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'fișierului' should be 'fișier'. It's using the genitive case incorrectly here.",
-          "suggestion": "Sunteţi pe cale să ştergeţi o versiune a fișier. Va fi imposibil să o vizualizați sau recuperați. Sigur doriţi să continuați?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -230,18 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ඔබ පැරණි ගොනුවක් මකා දැමීමට සුදානමින් සිටී\" is a bit verbose and doesn't perfectly capture the directness of \"You are about to delete a file version.\" A more direct translation would be better.",
-          "suggestion": "ඔබ දැන් ගොනුවක අනුවාදය මකා දමන්නන්නු."
+          "description": "The phrase \"ඔබ පැරණි ගොනුවක් මකා දැමීමට සුදානමින් සිටී\" translates more literally to 'You are ready to delete an old file'. While understandable, a more accurate translation would be something like 'You are about to delete a file version' to directly reflect the English content.  The current phrasing doesn't accurately convey 'version'.",
+          "suggestion": "ඔබ පැරණි ගොනුවක අනුවාදයකි මකා දැමීමට සුදානමින් සිටී."
         },
         {
           "type": "incorrect_translation",
-          "description": "While understandable, \"ප්‍රතිෂ්ඨාපනය කිරීමට හැකියාවක් නොවනු ඇත\" is a slightly awkward way to express \"It will be no possible to see or restore it anymore.\" It's a bit too literal and formal.",
-          "suggestion": "ඒවා නැවත ලබා ගැනීමට බැරිවනු ඇත."
-        },
-        {
-          "type": "formatting",
-          "description": "The punctuation feels a little abrupt. A more conversational tone could be achieved with a slightly different sentence structure.",
-          "suggestion": "ඔබ දැන් ගොනුවක අනුවාදය මකා දමන්නන්නු. ඒවා නැවත ලබා ගැනීමට බැරිවනු ඇත. ඔබට ඉදිරියට යාමට අවශ්‍යද?"
+          "description": "The word 'ප්‍රතිෂ්ඨාපනය' (prathisthapana) translates to 'restoration' or 'reinstatement', which is a more formal term.  For a user-facing message, a simpler word would be more appropriate.",
+          "suggestion": "ඔබට එය නැවත ලබා ගැනීමට හැකියාවක් නොවනු ඇත."
         }
       ],
       "approved_at": null
@@ -264,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'обришете' could be improved. While technically correct, 'избришете' is more commonly used and sounds more natural in this context.",
-          "suggestion": "Избрисати верзију фајла."
+          "description": "The word 'обришете' (obrišete) is slightly awkward in this context. While grammatically correct, 'избришете' (izbrišete) is more commonly used for 'delete' in this type of notification.",
+          "suggestion": "Спремате се да избришете верзију фајла."
         }
       ],
       "approved_at": null
@@ -276,8 +249,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'spremlate' is a misspelling of 'spreman'.",
-          "suggestion": "Spreman ste da obrišete verziju fajla."
+          "description": "The word 'spremazete' is likely a typo. It should be 'spreman/spremana' (depending on the gender of the user being addressed).",
+          "suggestion": "Spreman/Spremana ste da obrišete verziju fajla."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Da li ste sigurni da želite da nastavite?' is grammatically correct, but sounds slightly formal for a user prompt. A more conversational option could be used.",
+          "suggestion": "Da li ste sigurni da želite da nastavite?"
         }
       ],
       "approved_at": null
@@ -297,13 +275,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"khôi phục nó lại\" is redundant. \"Khôi phục nó\" is sufficient and more natural in Vietnamese.",
-          "suggestion": "Bạn sắp xóa một phiên bản tập tin. Sẽ không thể xem hoặc khôi phục nó. Bạn có chắc chắn muốn tiếp tục không?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

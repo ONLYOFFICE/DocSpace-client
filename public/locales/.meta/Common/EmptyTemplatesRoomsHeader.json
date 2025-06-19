@@ -3,7 +3,7 @@
   "content": "No templates found",
   "content_en_sha1_hash": "f11224d0c5d283fb61cb849c74ff0e760a29e1b4",
   "created_at": "2025-05-19T21:30:44.914Z",
-  "updated_at": "2025-05-28T09:30:02.228Z",
+  "updated_at": "2025-05-26T07:57:32.253Z",
   "comment": {
     "text": "The \"EmptyTemplatesRoomsHeader\" translation key is used to display a message when no templates are found in a room's template selection. It appears as a header label in a modal dialog that allows users to create or edit rooms.",
     "is_auto": true,
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'No se ha encontrado plantillas' is not the most natural or accurate translation of 'No templates found'. The correct phrasing would be 'No se encontraron plantillas'.",
+          "description": "The translation 'No se ha encontrado plantillas' is not the most natural or accurate translation of 'No templates found'. While technically correct, it sounds slightly awkward.",
           "suggestion": "No se encontraron plantillas"
         }
       ],
@@ -161,14 +161,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'සැකිලි' is generally acceptable, but in this context, 'ආකාරයන්' or 'ප්‍රවර්ගයන්' might be more appropriate to convey the idea of 'templates'. 'සැකිලි' often refers to physical templates or molds.",
-          "suggestion": "ආකාරයන් හමු නොවීය"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'හමු නොවීය' is a valid way to say 'not found', it might sound slightly formal or impersonal for a user-facing message. A more friendly phrasing could be considered.",
-          "suggestion": "නැතුවා"
+          "description": "The translation 'සැකිලි හමු නොවීය' literally translates to 'Templates not found'. While understandable, a more natural and common phrasing in Sinhala for 'No templates found' would be 'සැකිලි නොවීය' or 'සැකිලි කිසිවもなく'.",
+          "suggestion": "සැකිලි නොවීය"
         }
       ],
       "approved_at": null
@@ -185,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ni najdenih predlog' is not the most natural or accurate translation of 'No templates found'. While technically correct, it's a bit stiff. A more idiomatic translation would be 'Nobene predloge ni najdeno' or 'Predlogov ni najdeno'.",
-          "suggestion": "Nobene predloge ni najdeno"
+          "description": "The translation 'Ni najdenih predlog' is technically correct but lacks the plural form to match the English 'No templates found'. It translates to 'No template found'.",
+          "suggestion": "Ni najdenih predlogov"
         }
       ],
       "approved_at": null
@@ -197,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Нема шаблона' is a literal translation of 'No templates' but sounds slightly unnatural in Serbian. A more idiomatic translation would be 'Nema pronađenih predložaka' or 'Nisu pronađeni predlošci'.",
-          "suggestion": "Nema pronađenih predložaka"
+          "description": "The translation 'Нема шаблона' while understandable, is a literal translation and could be improved for naturalness in Serbian. A more idiomatic translation would be 'Nema pronađenih šablona'.",
+          "suggestion": "Nema pronađenih šablona"
         }
       ],
       "approved_at": null

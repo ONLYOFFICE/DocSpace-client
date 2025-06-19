@@ -3,7 +3,7 @@
   "content": "images",
   "content_en_sha1_hash": "19f49d852660fe0a079cbf95c3efb34ba88de911",
   "created_at": "2025-05-19T21:30:57.130Z",
-  "updated_at": "2025-06-18T07:34:15.302Z",
+  "updated_at": "2025-06-18T17:11:42.545Z",
   "comment": {
     "text": "The \"ImageFileType\" translation key is used to display the text \"images\" in a file selector dialog, likely as part of a file type label or button in the Editor component. This text appears in a specific UI element when selecting files with an IMG filter parameter. Translators should provide a corresponding text for the English content \"images\".",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The singular Italian word \"immagine\" translates to \"image\" in English. The English content is plural, \"images\", so the Italian translation should be the plural form.",
+          "suggestion": "immagini"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -171,7 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"слике\" is the plural form of \"slika\" (image). The English \"images\" is the plural, but 'slika' would be more accurate if the English key refers to a single image type.",
+          "suggestion": "слика"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

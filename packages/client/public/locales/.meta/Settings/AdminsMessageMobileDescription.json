@@ -3,7 +3,7 @@
   "content": "Administrator Message Settings is a way to contact the portal administrator.",
   "content_en_sha1_hash": "df02187a45136831faba4c5289c9e7fd61cd9fe2",
   "created_at": "2025-05-19T21:30:50.396Z",
-  "updated_at": "2025-05-28T09:30:02.785Z",
+  "updated_at": "2025-06-08T12:02:32.828Z",
   "comment": {
     "text": "The AdminsMessageMobileDescription translation key provides a short description of the \"Admin Message Settings\" category in a mobile view, used to display a brief explanation when accessing this setting through a mobile device.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 124,
+      "line_number": 125,
       "context": "onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"AdminsMessage\")}\n subtitle={\n <Trans i18nKey=\"AdminsMessageMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'إعدادات رسالة المسئول هي طريقة للتواصل مع مسئول البوابة' is not a perfect translation of 'Administrator Message Settings is a way to contact the portal administrator.'. 'مسئول' (mas'ool) translates to 'responsible person' or 'official', not necessarily 'administrator'.",
-          "suggestion": "إعدادات رسائل المسؤول هي طريقة للتواصل مع مدير البوابة. (I'daadaat rasaa'il al-mas'ool hiya tareeqah lil-tawaasul ma'a mudeer al-bawaa'h)"
+          "description": "The term 'مسئول' (mas'ool) translates more accurately to 'responsible person' or 'person in charge', rather than administrator. While understandable, 'مسؤول' (mas'ool) is a more common and precise term for administrator in this context.",
+          "suggestion": "إعدادات رسالة المسؤول هي طريقة للتواصل مع مسؤول البوابة."
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Admin Mesaj Parametrləri' is a somewhat literal and not entirely natural way to say 'Administrator Message Settings'. A more fluent translation would be something like 'İdarəetmə mesajları parametrləri' or 'Administrator mesajları ayarları'.",
-          "suggestion": "İdarəetmə mesajları parametrləri or Administrator mesajları ayarları"
+          "description": "The translation \"Admin Mesaj Parametrləri\" is a literal translation of \"Administrator Message Settings\" and doesn't quite capture the intended meaning. 'Parametrləri' suggests a configuration, not the ability to send a message.",
+          "suggestion": "Bəzi alternativlər: 'Administrator mesajları' və ya 'Administratorla əlaqə ayarları'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'əlaqə qurmağın bir yoludur' is a bit wordy. A more direct and natural translation of 'a way to contact' would be 'əlaqə saxlamaq' or 'əlaqə yaratmaq'.",
-          "suggestion": "əlaqə saxlamaq or əlaqə yaratmaq"
+          "description": "The phrase 'əlaqə qurmağın bir yoludur' is a bit awkward. It translates to 'is a way to establish contact'. A more natural phrasing is needed.",
+          "suggestion": "Administratorla ünsiyyət qurmağa imkan verir."
         }
       ],
       "approved_at": null
@@ -71,8 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Über die Einstellungen für Administratormeldungen können Sie den Portaladministrator kontaktieren' is a bit clunky and not a direct equivalent of 'Administrator Message Settings is a way to contact the portal administrator.' It's accurate but could be more natural.",
-          "suggestion": "A more natural translation might be: 'Mit den Administratormeldungseinstellungen können Sie den Portaladministrator erreichen.' or 'Über die Administratormeldungen können Sie den Portaladministrator kontaktieren.'"
+          "description": "The translation \"Über die Einstellungen für Administratormeldungen können Sie den Portaladministrator kontaktieren\" is a bit literal and not the most natural phrasing in German. \"Einstellungen für Administratormeldungen\" is a mouthful and could be simplified.",
+          "suggestion": "Eine Möglichkeit, den Portaladministrator zu kontaktieren, ist über die Administratormeldungseinstellungen."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English uses \"Administrator Message Settings\". The German translation uses a construction (\"Einstellungen für Administratormeldungen\") that isn't as clean or commonly used in German for this concept.  It lacks the succinctness of the original.",
+          "suggestion": "Administratormeldungseinstellungen bieten die Möglichkeit, den Portaladministrator zu kontaktieren."
         }
       ],
       "approved_at": null
@@ -83,18 +88,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Οι Ρυθμίσεις μηνυμάτων διαχειριστή' is too literal. A more natural translation would be 'Settings for administrator messages' or 'Administrator message settings'.",
-          "suggestion": "Ρυθμίσεις για μηνύματα διαχειριστή"
+          "description": "The translation 'Οι Ρυθμίσεις μηνυμάτων διαχειριστή' is a literal translation of 'Administrator Message Settings' which is somewhat awkward in Greek. A more natural phrasing would be 'Ρυθμίσεις για μηνύματα προς τον διαχειριστή' or 'Ειδοποιήσεις διαχειριστή'.",
+          "suggestion": "Consider revising to 'Ρυθμίσεις για μηνύματα προς τον διαχειριστή' or 'Ειδοποιήσεις διαχειριστή'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'πύλης' (portal) is acceptable but slightly formal. Considering the context, a more conversational term might be better.",
-          "suggestion": "Εφαρμογής"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'is a way to contact' is somewhat clumsy. A more direct and fluent translation could improve readability.",
-          "suggestion": "είναι ένας τρόπος για να επικοινωνήσετε με"
+          "description": "The phrase 'πύλης' (gate/portal) isn't ideal. While technically correct, a more common and understandable word in this context might be 'ιστοσελίδας' (website) or 'πλατφόρμας' (platform).",
+          "suggestion": "Replace 'πύλης' with 'ιστοσελίδας' or 'πλατφόρμας'"
         }
       ],
       "approved_at": null
@@ -105,8 +105,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'La configuración del mensaje del administrador es una forma de ponerse en contacto con el administrador del portal' is overly literal and slightly awkward. 'Configuración del mensaje del administrador' is quite long and not the most natural phrasing. A more fluent translation would convey the same meaning more concisely.",
-          "suggestion": "Las opciones de mensaje del administrador permiten contactar con el administrador del portal."
+          "description": "The translation 'La configuración del mensaje del administrador es una forma de ponerse en contacto con el administrador del portal' is a literal translation but sounds awkward in Spanish. A more natural phrasing would emphasize the purpose of the settings.",
+          "suggestion": "Las configuraciones de mensajes del administrador permiten contactar al administrador del portal."
         }
       ],
       "approved_at": null
@@ -117,8 +117,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Järjestelmänvalvojan Viestiasetukset on helppo tapa ottaa yhteyttä järjestelmänvalvojaan\" is a bit verbose and includes \"on helppo tapa\" (is an easy way). The English is more direct: 'Administrator Message Settings is a way to contact the portal administrator.' A more accurate translation would be closer to simply stating it's a way to contact the administrator.",
-          "suggestion": "Järjestelmänvalvojan viestiasetukset on tapa ottaa yhteyttä järjestelmänvalvojaan."
+          "description": "The phrase \"Administrator Message Settings\" is translated as \"Järjestelmänvalvojan Viestiasetukset\". While technically correct, \"Järjestelmänvalvojan Viestiasetukset\" is a bit clunky. A more natural Finnish equivalent might be something like \"Ylläpitäjän viestiasetukset\" or \"Hallinnoijan viestiasetukset\".",
+          "suggestion": "Consider using \"Ylläpitäjän viestiasetukset\" or \"Hallinnoijan viestiasetukset\" instead of \"Järjestelmänvalvojan Viestiasetukset\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'a way to contact' is translated as 'helppo tapa ottaa yhteyttä'. While not wrong, a more direct and concise translation could be preferable. 'Olla yhteydessä' is sufficient.",
+          "suggestion": "Consider \"tapa ottaa yhteyttä\" being simplified to just \"tapa olla yhteydessä\"."
         }
       ],
       "approved_at": null
@@ -135,13 +140,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ադմինիստրատորի հաղորդագրությունների կարգավորումները պորտալի ադմինիստրատորի հետ կապ հաստատելու միջոց է:' is a bit literal and awkward. It translates to 'Administrator's message settings is a way to establish contact with the portal administrator.' A more natural phrasing would be something like 'This setting allows you to contact the portal administrator' or 'This allows you to send messages to the portal administrator'.",
-          "suggestion": "Consider rephrasing to something like 'Սա թույլատրում է կապվել պորտալի ադմինիստրատորին' (This allows you to contact the portal administrator) or 'Պորտալի ադմինիստրատորին հաղորդագրություն հասցնելու համար օգտագործեք այս գործունեությունը' (Use this function to send a message to the portal administrator)."
+          "description": "The translation is overly literal and doesn't flow naturally in Armenian. \"Administrator Message Settings\" is translated as \"Ադմինիստրատորի հաղորդագրությունների կարգավորումները\", which is clunky. A more natural phrasing would be something like \"Պորտալի վարչակազմի հաղորդագրությունների կարգավորումները\" or \"Վարչակազմի հաղորդագրությունների գործառույթը\".",
+          "suggestion": "Consider a more idiomatic translation, such as \"Պորտալի վարչակազմի հաղորդագրությունների կարգավորումները\" or \"Վարչակազմի հաղորդագրությունների գործառույթը\"."
         },
         {
-          "type": "spelling",
-          "description": "The term 'ադմինիստրատոր' is repeated several times, which can sound repetitive in Armenian. While technically correct, it might be more fluid to vary the phrasing slightly.",
-          "suggestion": "Consider using variations or pronouns to avoid repetition. For example, 'Ադմինիստրատորի հետ կապ հաստատելու համար...' (To contact the administrator...)"
+          "type": "incorrect_translation",
+          "description": "The phrase \"միջոց է\" (is a means) is a bit awkward and not the best way to convey the purpose. A more natural Armenian phrasing would focus on the function or option provided.",
+          "suggestion": "Replace \"միջոց է\" with something like \"հնարավորություն է\" (is an option) or a phrase that describes the benefit of the setting."
         }
       ],
       "approved_at": null
@@ -152,8 +157,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Le impostazioni dei messaggi dell'amministratore rappresentano un modo per contattare l'amministratore del portale\" is a bit literal and slightly awkward in Italian. 'Rappresentano un modo' is not the most natural phrasing.",
-          "suggestion": "Le impostazioni dei messaggi dell'amministratore consentono di contattare l'amministratore del portale."
+          "description": "The translation 'Le impostazioni dei messaggi dell'amministratore rappresentano un modo per contattare l'amministratore del portale' is a bit literal and slightly awkward in Italian. 'Rappresentano un modo' is not the most natural phrasing.",
+          "suggestion": "Consider a more natural phrasing like 'Le impostazioni dei messaggi dell'amministratore sono un modo per contattare l'amministratore del portale' or 'Le impostazioni dei messaggi dell'amministratore permettono di contattare l'amministratore del portale'."
         }
       ],
       "approved_at": null
@@ -176,13 +181,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Administrator Message Settings' is not accurate. 'ຜູ້ເບິ່ງແຍງລະບົບ' translates to 'system administrator', but it doesn't convey the 'Message Settings' part. It misses the nuance of settings related to messages.",
-          "suggestion": "Consider a more descriptive translation like: 'ການຕັ້ງຄ່າຂໍ້ຄວາມຈາກຜູ້ເບິ່ງແຍງລະບົບ' (Message settings from the system administrator) or 'ການຕັ້ງຄ່າການສົ່ງຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບ' (Message sending settings from the system administrator)."
+          "description": "The translation of \"portal administrator\" is not accurate. \"ປະຕູ\" (door) is not the correct term for \"portal.\" It implies a physical entrance instead of an online platform.",
+          "suggestion": "Consider using a term like \"ຜູ້ເບິ່ງແຍງເວັບໄຊ້\" (web administrator) or \"ຜູ້ດຸ່ນເບິ່ງລະບົບອອນໄລ໌\" (online system administrator)."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ປະຕູ' (door) is added at the end of the translation, which is not present in the English content and doesn't make sense in this context. It's likely a translation error or misunderstanding.",
-          "suggestion": "Remove 'ປະຕູ' from the translation."
+          "type": "grammar",
+          "description": "The phrasing \"ຜູ້ເບິ່ງແຍງລະບົບປະຕູ\" is somewhat awkward in Lao. It could be smoother.",
+          "suggestion": "Consider rephrasing to something like \"ຜູ້ເບິ່ງແຍງເວັບໄຊ້ຂອງລະບົບ\" or \"ຜູ້ດຸ່ນເບິ່ງລະບົບ\"."
         }
       ],
       "approved_at": null
@@ -199,13 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Beheerder Bericht Instellingen' is not a natural or idiomatic way to say 'Administrator Message Settings'.  'Bericht' translates to 'message', which is redundant as 'Administrator Message' already implies a message. It's also a bit clunky.",
-          "suggestion": "Beheerder Berichtinstellingen (combining 'bericht' and 'instellingen') or Beheerder Berichtconfiguratie (Administrator Message Configuration) would be more accurate and natural. A simpler option, depending on context, would be Beheerder Bericht (Administrator Message)."
+          "description": "The translation 'Beheerder Bericht Instellingen' for 'Administrator Message Settings' is not ideal. 'Bericht' translates to 'message' but it's redundant given 'Administrator Message'. A better phrasing would be 'Instellingen voor Beheerder Berichten' or 'Beheerder Berichten Instellingen'.",
+          "suggestion": "Instellingen voor Beheerder Berichten"
         },
         {
           "type": "grammar",
-          "description": "While not strictly incorrect, the sentence structure 'Beheerder Berichtinstellingen is een manier...' is somewhat less elegant than other options.",
-          "suggestion": "Consider rephrasing to something like 'Beheerder Berichtinstellingen bieden een manier...' (Administrator Message Settings provide a way...)."
+          "description": "While grammatically correct, the phrase 'een manier om contact op te nemen met de portaal beheerder' is slightly awkward in Dutch. A more natural phrasing would be 'om contact op te nemen met de beheerder van het portaal'.",
+          "suggestion": "om contact op te nemen met de beheerder van het portaal"
         }
       ],
       "approved_at": null
@@ -222,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Configurações de mensagem do administrador é uma forma de entrar em contato com o administrador do portal' is slightly awkward. A more natural phrasing would be 'As configurações de mensagens do administrador permitem entrar em contato com o administrador do portal.'",
-          "suggestion": "As configurações de mensagens do administrador permitem entrar em contato com o administrador do portal."
+          "description": "The translation 'Configurações de mensagem do administrador' is a literal translation and could be improved for clarity and naturalness. A more natural phrasing would be 'Configurações de Mensagens do Administrador' or 'Configurações para Mensagens do Administrador'.",
+          "suggestion": "Configurações de Mensagens do Administrador"
         }
       ],
       "approved_at": null
@@ -234,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Configurações de mensagem do administrador é uma forma de entrar em contato com o administrador do portal' is a literal translation but doesn't flow naturally in Portuguese.  'Settings' doesn't directly translate to 'Configurações de mensagem'.",
-          "suggestion": "A more natural translation would be something like 'Configurações de Mensagem do Administrador permite entrar em contato com o administrador do portal' or 'Mensagem para o Administrador permite entrar em contato com o administrador do portal'."
+          "description": "The translation \"Configurações de mensagem do administrador é uma forma de entrar em contato com o administrador do portal\" is a literal translation but not the most natural phrasing in Portuguese.  'Configurações de mensagem do administrador' is a bit clunky.",
+          "suggestion": "Sugestão: 'As configurações de Mensagem do Administrador permitem entrar em contato com o administrador do portal.' or 'Mensagem do Administrador: Permite contatar o administrador do portal.'"
         }
       ],
       "approved_at": null
@@ -246,8 +251,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Setări mesagerie de administrator' is slightly awkward. While technically correct, a more natural Romanian phrasing would be preferred. 'Setări pentru mesajele administratorului' or 'Setări de contactare a administratorului' would be better alternatives.",
-          "suggestion": "Setări pentru mesajele administratorului"
+          "description": "The translation 'Setări mesagerie de administrator' is a bit literal and could be improved to be more natural Romanian. 'Mesagerie' implies a messaging system, which isn't directly implied in the English description. It could be misinterpreted.",
+          "suggestion": "Setările pentru mesajele administratorului"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'administratorul de portal' could be shortened to 'administratorul' as the context clearly indicates it refers to the portal administrator.",
+          "suggestion": "Setările pentru mesajele administratorului este o modalitate de a contacta administratorul."
         }
       ],
       "approved_at": null
@@ -264,18 +274,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිපාලක' is spelled incorrectly. The correct spelling is 'පරිශාලක'.",
-          "suggestion": "පරිශාලක"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'පරිපාලක පණිවුඩ සැකසුම්' is a slightly awkward translation of 'Administrator Message Settings'. A more natural phrasing would convey the purpose better.",
-          "suggestion": "පරිශාලක පණිවිඩම් සැකසුම්"
+          "description": "The word 'පරිපාලක' (paripaalaka) is a reasonable translation for 'Administrator', but a more common and natural translation would be 'நிர்வாகி' (nirvaagi) or 'प्रशासक' (prashaasaka).",
+          "suggestion": "පරිපාලක වෙනුවට நிர்வாகி/प्रशासक භාවිතා කරන්න"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'ආසන්න අන්දමට' (approximate manner) can be removed for clarity. It's implied by the context.",
-          "suggestion": "පරිශාලක පණිවිඩම් සැකසුම් යනු portal පරිපාලකයෙකු සම්බන්ධ කර ගැනීමට ඇති ක්‍රමයක් වේ."
+          "description": "The phrase 'අත්වීම' (athvwim) in 'අත්වීමට ඇති ක්‍රමයක් වේ' is a bit awkward. A more natural phrasing would be 'සම්බන්ධ කර ගැනීමට හැකි ක්‍රමයක් වේ'.",
+          "suggestion": "‘අත්වීම’ වෙනුවට ‘සම්බන්ධ කර ගැනීමට හැකි’ භාවිතා කරන්න."
         }
       ],
       "approved_at": null
@@ -286,13 +291,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Nastavenia sprav administrátorovi je spôsob ako kontaktovať administrátora portálu' is not a natural or accurate translation of 'Administrator Message Settings is a way to contact the portal administrator.' The phrasing 'Nastavenia sprav administrátorovi' is awkward.",
-          "suggestion": "A better translation would be something like 'Nastavenie správ pre administrátora je spôsob, ako kontaktovať administrátora portálu.' or 'Možnosť poslať správu administrátorovi je spôsob, ako sa s ním kontaktovať.'"
+          "description": "The Slovak translation 'Nastavenia sprav administrátorovi je spôsob ako kontaktovať administrátora portálu' is not a natural or accurate translation of \"Administrator Message Settings is a way to contact the portal administrator.\" It's a literal translation that doesn't flow well in Slovak.",
+          "suggestion": "Consider a more idiomatic translation such as 'Nastavenia pre odosielanie správ administrátorovi umožňujú kontaktovať administrátora portálu' or 'Pomocou nastavení správ administrátorovi môžete kontaktovať administrátora portálu.'"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Nastavenia sprav administrátorovi' contains a grammatical error. It's unclear what 'sprav' refers to.",
-          "suggestion": "Replace 'sprav' with a more appropriate word to clarify the meaning. Perhaps 'správ' (messages) or 'oznámení' (notifications)."
+          "description": "The phrase 'Nastavenia sprav administrátorovi' is grammatically awkward in Slovak. The case ('sprav') is incorrect.",
+          "suggestion": "Replace 'sprav' with 'pre administrátora' or 'pre odosielanie správ administrátorovi' depending on the desired emphasis."
         }
       ],
       "approved_at": null
@@ -309,13 +314,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Подешавања порука администратора' is a literal translation of 'Administrator Message Settings' but doesn't fully convey the meaning in natural Serbian. A more natural phrasing would be 'Поставке порука администратора' or 'Напомене администратора'.",
-          "suggestion": "Поставке порука администратора"
+          "description": "The translation 'Подешавања порука администратора' is too literal and doesn't flow naturally in Serbian. 'Administrator Message Settings' is better conveyed as something like 'Напомене администратора'.",
+          "suggestion": "Напомене администратора"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'је начин да контактирате администратора портала' could be more concise. While not strictly incorrect, it is a bit verbose.",
-          "suggestion": "за контакт са администратором портала."
+          "description": "The phrasing 'је начин да контактирате администратора портала' is a bit clunky. It can be simplified.",
+          "suggestion": "је начин да контактирате администратора."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'портала' isn't wrong, it's often unnecessary and makes the sentence more formal. In this context, simply 'администратора' would suffice.",
+          "suggestion": "администратора"
         }
       ],
       "approved_at": null
@@ -326,7 +336,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podešavanja poruka administratora je način da kontaktirate administratora portala' is a literal translation but sounds unnatural in Serbian. A more natural phrasing would convey the purpose more clearly.",
+          "description": "The translation 'Podešavanja poruka administratora je način da kontaktirate administratora portala' is a literal translation that doesn't flow naturally in Serbian. The phrase 'administratora portala' is somewhat redundant.",
+          "suggestion": "Podešavanja poruka administratora omogućavaju kontakt sa administratorom portala."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure could be improved for better readability and flow in Serbian.  The passive voice 'je način da...' is less common and less elegant in many contexts.",
           "suggestion": "Podešavanja poruka administratora omogućavaju kontakt sa administratorom portala."
         }
       ],
@@ -341,7 +356,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Параметри повідомлень адміністратору' is a bit clunky. While technically correct, it's not the most natural way to phrase it in Ukrainian. 'Параметри повідомлень для адміністратора' or 'Налаштування повідомлень адміністратору' would be more idiomatic.",
+          "suggestion": "Налаштування повідомлень адміністратору"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -356,8 +377,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"您可通过“管理员留言设置”联系门户管理员\" is technically correct but slightly awkward and not as natural as it could be. 'Administrator Message Settings' isn't directly translated to the most common phrasing in Chinese for this function.",
-          "suggestion": "您可以通过“管理员留言设置”功能联系门户管理员"
+          "description": "The translation \"您可通过“管理员留言设置”联系门户管理员\" is slightly awkward. While technically correct, it doesn't flow as naturally as it could. The phrase '您可通过' is a bit formal and not commonly used in this context.",
+          "suggestion": "您可以通过“管理员留言设置”联系门户管理员"
         }
       ],
       "approved_at": null

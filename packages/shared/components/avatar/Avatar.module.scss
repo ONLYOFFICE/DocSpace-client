@@ -1,9 +1,9 @@
-@import "../../styles/variables/colors.scss";
-@import "../../styles/common-icons-style.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables/colors";
+@use "../../styles/common-icons-style";
+@use "../../styles/mixins";
 
 .emptyIcon {
-  @include common-icons-style;
+  @include common-icons-style.common-icons-style;
   border-radius: var(--avatar-image-border-radius);
 }
 
@@ -102,7 +102,7 @@
   height: 100%;
   border-radius: 50%;
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 
   &[data-is-default="true"] {
     content: var(--avatar-default-image);
@@ -169,7 +169,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   font-weight: 600;
-  @include no-user-select;
+  @include mixins.no-user-select;
 
   &.isGroup {
     color: var(--avatar-initials-group-color);
@@ -212,7 +212,7 @@
 .avatar {
   position: relative;
 
-  -webkit-tap-highlight-color: #{$tap-highlight};
+  -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
   &[data-no-click="false"] {
     &:hover {
@@ -293,4 +293,9 @@
       }
     }
   }
+}
+
+.adminIcon,
+.ownerIcon {
+  @include common-icons-style.common-icons-style;
 }

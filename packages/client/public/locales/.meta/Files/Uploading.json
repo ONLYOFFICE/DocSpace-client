@@ -3,7 +3,7 @@
   "content": "Uploading",
   "content_en_sha1_hash": "de27240983ef2f1432e07df25dd609712f69a107",
   "created_at": "2025-05-19T21:30:56.289Z",
-  "updated_at": "2025-06-03T20:59:41.979Z",
+  "updated_at": "2025-05-26T07:57:32.380Z",
   "comment": {
     "text": "This translation key is used to display the state of file upload progress. It appears on an upload panel and changes depending on whether an upload is in progress, completed successfully, or failed. The phrase is translated from \"Uploading\" and should reflect the progress or status of the upload operation.",
     "is_auto": true,
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Γίνεται μεταφόρτωση\" is a literal translation meaning \"It is being uploaded.\" While understandable, it's less concise and natural than other options for a simple label like \"Uploading\".",
-          "suggestion": "Consider a more direct and common translation like \"Ανέβασμα\" or \"Μεταφόρτωση\" (without the 'Γίνεται')."
+          "description": "The Greek translation \"Γίνεται μεταφόρτωση\" (Ginetai metaforosi) translates to \"It is being uploaded\" or \"Uploading is happening.\" While not technically incorrect, it's a more verbose translation than the single word \"Uploading.\" A more direct and concise translation would be better suited.",
+          "suggestion": "Μεταφόρτωση"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'ඉහල් කිරීම' is a valid Sinhala word, but it doesn't accurately convey the meaning of 'Uploading' in the context of file transfer. It generally means 'elevating' or 'raising'. A more appropriate translation would be something like 'ගොඩගැන්වීම' (godagamvim) or 'sendFile' (using English term as it is common practice).",
-          "suggestion": "Consider 'ගොඩගැන්වීම' (godagamvim) or use the English term 'sendFile'."
+          "description": "The Sinhala translation \"ඉහල් කිරීම\" (ihal kirima) translates to 'elevation' or 'raising' rather than 'uploading'. It doesn't accurately convey the meaning of 'uploading' in a digital context.",
+          "suggestion": "Consider alternatives like \"ගොඩ ඒවා ගැනීම\" (goda ewa gatama) which means 'uploading', or \"බාගතත්තු කිරීම\" (bagathaththu kirima) which means 'uploading data'."
         }
       ],
       "approved_at": null
@@ -207,13 +207,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Передавання' is a valid Ukrainian word, it doesn't perfectly capture the nuance of 'Uploading' in the context of file transfer. It implies a broader concept of 'transferring' rather than specifically 'uploading' to a server or platform.",
-          "suggestion": "Consider 'Завантаження' which more directly translates to 'uploading' in the context of files."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

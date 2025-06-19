@@ -3,7 +3,7 @@
   "content": "Access granted",
   "content_en_sha1_hash": "2c5e9cb9ebce16b0d8e756cdb2fb8e5bdfd8a78e",
   "created_at": "2025-05-19T21:30:53.778Z",
-  "updated_at": "2025-05-28T09:30:02.602Z",
+  "updated_at": "2025-05-26T07:57:32.664Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Access granted\" in various parts of the application, including an info dialog and a table header. The key appears in contexts where access has been successfully authorized or confirmed, providing feedback to users.",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Giriş icazəsi verildi' is understandable, a more natural and common translation of 'Access granted' in Azerbaijani would be 'Rəsmi icazə verildi' or 'İcazə verildi'. 'Giriş' implies entry, which isn't the primary meaning of 'Access'.",
+          "description": "While \"Giriş icazəsi verildi\" is understandable, it's a more literal translation of 'Access granted'. A more natural and idiomatic Azerbaijani translation would be something like \"Rəsmi icazə verildi\" or \"İcazə verildi\". \"Giriş\" specifically means 'entry' or 'access' in the sense of physically entering a place, which isn't the intended meaning here.",
           "suggestion": "Rəsmi icazə verildi"
         }
       ],
@@ -57,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Udělený přístup' is technically correct, it's a rather literal and slightly awkward translation of 'Access granted'. A more natural and commonly used translation would be something like 'Přístup povolen' or 'Přístup umožněn'.",
+          "suggestion": "Přístup povolen"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Մուտքը տրամադրված է' is a literal translation of 'Access granted' but doesn't quite convey the same nuance. 'Access granted' implies permission, while the translation is more like 'The entry has been provided'.",
-          "suggestion": "A more natural and accurate translation would be something like 'Համաձայնություն տրվեց' (Hamadzaynuth t'rvec) which means 'Agreement/Permission granted' or 'Ավանդատուի մուտքը թույլատրվեց' (Avandat'ui mut'q'e tuylat'rvec) meaning 'User access granted'."
+          "description": "The Armenian translation \"Մուտքը տրամադրված է\" literally translates to \"The access is provided.\" While conveying a similar meaning, it's not as concise or natural as \"Access granted.\" A more direct and idiomatic translation would be preferable.",
+          "suggestion": "Համաձայնվել է մուտքի"
         }
       ],
       "approved_at": null
@@ -108,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Accesso permesso' is understandable, a more natural and accurate Italian translation of 'Access granted' would be 'Accesso consentito' or 'Autorizzazione concessa'. 'Permesso' implies permission given by oneself, whereas 'concesso' or 'consentito' indicate permission granted by an authority.",
+          "description": "While 'Accesso permesso' is understandable, a more natural and accurate Italian translation of 'Access granted' would be 'Accesso consentito' or 'Autorizzazione concessa'. 'Permesso' implies permission given to someone in a general sense, whereas 'concesso' or 'autorizzazione' better reflects the context of granting access.",
           "suggestion": "Accesso consentito"
         }
       ],
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເປີດເຣືອນຍ້ອນໄດ້ແລ້ວ\" (pəə̀t rʉʉan yɔ̂ɔn dâai lɛ́ɛw) translates to something like 'The house is open because it has been received/granted'. It doesn't accurately convey the meaning of 'Access granted'.",
-          "suggestion": "A more appropriate translation would be something like \"ອະນຸຍາດເຂົ້າໃຊ້ໄດ້ແລ້ວ\" (a-nù-yâat kâo-sái dâai lɛ́ɛw), which means 'Access permitted/granted'."
+          "description": "The Lao translation \"ເປີດເຣືອນຍ້ອນໄດ້ແລ້ວ\" (pəə̀ʔ dɯən yɔːn dâai lɛ́ɛw) literally translates to 'opened because got already' and doesn't accurately convey the meaning of 'Access granted'. It's a very awkward phrasing.",
+          "suggestion": "A more appropriate translation for 'Access granted' in Lao would be something like 'ອະນຸຍາດເຂົ້າໃຊ້ໄດ້' (a-nú-yàat kâo-sài dâai) which means 'permission to use obtained', or 'ຮັບອະນຸຍາດ' (ráp a-nú-yàat) meaning 'permission accepted'."
         }
       ],
       "approved_at": null
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'S-au acordat permisiuni de acces' is overly literal and verbose compared to the concise English 'Access granted'. It doesn't convey the same level of brevity and directness. A more natural Romanian translation would be 'Acces acordat'.",
-          "suggestion": "Acces acordat"
+          "description": "The Romanian translation 'S-au acordat permisiuni de acces' is overly literal and verbose for 'Access granted'. It translates to 'Access permissions were granted'. While technically correct, it's not the most natural or concise way to express this in Romanian.",
+          "suggestion": "Consider a more concise and natural translation such as 'Acces acordat' or 'Permisiune acordată'."
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අවසර හිමි විය.' while literally meaning 'permission was granted', is not the most natural or idiomatic way to express 'Access granted' in Sinhala. It sounds slightly formal and passive.",
-          "suggestion": "Consider alternatives like 'අවසර ලැබුණි' (avasar labeuni) which translates to 'permission received' or 'අවසර ලැබිණි' (avasar labeeni) which is a slightly more formal version. The best option would depend on the overall tone of the application/website."
+          "description": "The translation 'අවසර හිමි විය.' literally translates to 'permission was obtained' or 'permission became'. While not strictly incorrect, it doesn't convey the direct meaning of 'Access granted'. A more accurate translation would imply access has been given.",
+          "suggestion": "අවසර ලැබේ."
         }
       ],
       "approved_at": null
@@ -204,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Prístup bol udelený' is a grammatically correct Slovak sentence, it's a more formal and less idiomatic translation of 'Access granted'. A more natural and commonly used translation would be 'Prístup povolený' or 'Autorizácia povolená'.",
+          "description": "While \"Prístup bol udelený\" is grammatically correct, it's a more formal and verbose translation of \"Access granted.\" A more concise and common translation would be \"Prístup povolený\" or simply \"Povolené\".",
           "suggestion": "Prístup povolený"
         }
       ],
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Приступ одобрен\" is a literal translation of 'Access granted' but is not the natural or idiomatic way to express this in Serbian. It sounds awkward. A more appropriate translation would convey the idea of permission or authorization.",
-          "suggestion": "Дозвољено"
+          "description": "The Serbian translation \"Приступ одобрен\" is a literal translation of 'Access granted' but doesn't sound natural in Serbian. A more idiomatic translation would be 'Дозвожен приступ' or 'Приступ дозвољен'.",
+          "suggestion": "Дозвожен приступ"
         }
       ],
       "approved_at": null
@@ -252,7 +258,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Chấp thuận quyền truy cập\" is a technically correct translation, it's a bit formal for a simple \"Access granted.\" A more natural and common translation would be something like \"Đã cấp quyền truy cập\" or \"Quyền truy cập đã được cấp\".",
+          "description": "While \"Chấp thuận quyền truy cập\" is understandable, it's a bit formal and literal for a simple \"Access granted\". A more natural and concise translation might be better.",
           "suggestion": "Đã cấp quyền truy cập"
         }
       ],
@@ -264,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"访问已授权\" is a possible translation, it's a bit literal and formal. \"Access granted\" usually implies a more casual or affirmative tone. A better translation would convey that feeling.",
-          "suggestion": "授权访问"
+          "description": "While \"访问已授权\" is understandable, a more natural and standard translation for \"Access granted\" in Chinese would be something like \"授权成功\" or \"已授权\". \"访问已授权\" implies access *has* been authorized to visit something, which is not the intended meaning.",
+          "suggestion": "授权成功"
         }
       ],
       "approved_at": null

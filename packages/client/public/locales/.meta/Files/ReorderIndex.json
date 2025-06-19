@@ -3,7 +3,7 @@
   "content": "The Reorder action will remove spaces in the indexes. The files will be re-indexed in order with offset to fill in missing indexes.",
   "content_en_sha1_hash": "800c0868d6aaaec652ceb4900c08f350dad51e25",
   "created_at": "2025-05-19T21:30:56.044Z",
-  "updated_at": "2025-05-28T09:30:02.289Z",
+  "updated_at": "2025-05-26T07:57:32.323Z",
   "comment": {
     "text": "\"This translation key is used for a warning message that indicates the Reorder action will remove spaces from file indexes and re-index files in order to fill missing indexes.\"",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"offsetlə\" is not the best translation of \"with offset\". A more accurate translation would convey the purpose of the offset.",
-          "suggestion": "Yenidən Sırala əməliyyatı indekslərdən boşluqları siləcək. Fayllar çatışmayan indeksləri doldurmaq üçün növbələşmələ ofsetlə yenidən indeksləşdiriləcək. (or a rephrased version that better conveys the offset's purpose)"
+          "description": "The phrase 'offset' is not accurately translated. While 'offsetlə' is present, it doesn't convey the same meaning of 'with an offset' in this context. It's a technical term referring to a numerical adjustment.",
+          "suggestion": "Consider rephrasing the section containing 'offsetlə' to better explain the concept. For example: 'Fayllar çatışmayan indeksləri doldurmaq üçün, indekslərin sıralı qaydada düzəldilmiş dəyərlərinə görə yenidən indeksləşdiriləcək.' (Files will be re-indexed according to the adjusted values of the indexes to fill in missing indexes.)"
         }
       ],
       "approved_at": null
@@ -48,8 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"with offset\" is not accurately translated. \"Отместване\" implies a shift or displacement, but in this context, it's about renumbering to fill gaps. A more accurate translation would convey the renumbering aspect.",
-          "suggestion": "Файловете ще бъдат индексирани повторно, за да се попълнят липсващите индекси, пренареждайки ги."
+          "description": "The phrase \"will remove spaces in the indexes\" is translated as \"ще премахне интервалите в индексите\". While technically correct, it's a bit clunky and less natural in Bulgarian. A better translation would convey the removal of spaces as a consequence of the reordering, not just a standalone action.",
+          "suggestion": "Действието Пренареждане ще коригира индексите, като премахне интервалите."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'to fill in missing indexes with offset' is translated as 'да се попълни липсващите индекси с отместване'. 'Отместване' (offset) isn't the best word choice here. It implies a numerical shift rather than filling the gaps created by the removed spaces.",
+          "suggestion": "да се попълнят празни места в индексите."
         }
       ],
       "approved_at": null
@@ -71,14 +76,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"The Reorder action will remove spaces in the indexes\" is translated as \"Η ενέργεια Αναδιάταξη θα αφαιρέσει τα κενά στα ευρετήρια.\" While technically correct, a more natural phrasing in Greek might be \"Η ενέργεια Αναδιάταξη θα αφαιρέσει τα κενά από τους δείκτες\" or \"Η ενέργεια Αναδιάταξη θα αφαιρέσει τα κενά στους δείκτες.\"",
-          "suggestion": "Η ενέργεια Αναδιάταξη θα αφαιρέσει τα κενά από τους δείκτες"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"indexes\" is translated as \"ευρετήρια\". While acceptable, “δείκτες” may be more precise and common when referring to index values in a technical context.",
-          "suggestion": "Μετατρέψτε το \"ευρετήρια\" σε \"δείκτες\" σε όλο το κείμενο."
+          "type": "spelling",
+          "description": "The word 'ευρετήρια' is used multiple times. While technically correct, 'δείκτες' (deiktes) might be a more common and clearer term for 'indexes' in this context, especially for a technical audience. It depends on the intended technical level of the user.",
+          "suggestion": "Consider replacing 'ευρετήρια' with 'δείκτες'."
         }
       ],
       "approved_at": null
@@ -92,7 +92,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to fill in missing indexes\" is not the most natural Finnish rendering of the English meaning. While technically correct, it lacks nuance.",
+          "suggestion": "Consider a phrasing like \"jotta indeksit saadaan täytettyä\" or \"jotta puuttuvat indeksit täyttyvät\" which more accurately conveys the action of filling or completing the indexes."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -107,13 +113,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'offset' is not accurately translated in the Armenian sentence. 'Offset' implies a numerical adjustment or displacement. The current translation doesn't convey this technical meaning. A more accurate translation might involve describing how the files will be re-indexed with a numerical shift.",
-          "suggestion": "Consider a translation that explains 'offset' more clearly, e.g., 'Ֆայլերը կվերինդեքսավորվեն թվային շեղումով, որպեսզի լրացվեն բաց թողնված ինդեքսները:' (The files will be re-indexed with a numerical shift to fill in the missing indexes)."
+          "description": "The phrase \"Վերադասավորել գործողությունը\" (Veradasavorel goroghutyunə) is a literal translation of \"Reorder action\" but sounds awkward in Armenian. A more natural phrasing would be something like \"Վերադասավորման գործողությունը\" (Veradasavormani goroghutyunə) or simply \"Վերադասավորումը\" (Veradasavormə).",
+          "suggestion": "Վերադասավորումը կհեռացնի ինդեքսների բացատները:"
         },
         {
-          "type": "formatting",
-          "description": "The use of colons might benefit from review for consistency with Armenian style guides. While not strictly incorrect, it's worth verifying with native speakers.",
-          "suggestion": "Review colon usage against established Armenian writing conventions."
+          "type": "incorrect_translation",
+          "description": "The use of \"բացատները\" (bacatnerə) for spaces is not the most accurate translation. It literally means 'gaps' or 'holes', while spaces are more accurately represented as \"դաշտերը\" (dashtəre).",
+          "suggestion": "Վերադասավորումը կհեռացնի ինդեքսների դաշտերը:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"որպեսզի offset-ով լրացվեն բաց թողնված ինդեքսները\" (orpəzzī offset-ov lracvən bac t'oqnvad indeksnere) is a bit clunky. While technically correct, it could be improved for better flow. It translates to 'so that missing indexes are filled with offset'.",
+          "suggestion": "որպեսզի լրացվեն ինդեքսները offset-ի միջոցով:"
         }
       ],
       "approved_at": null
@@ -127,13 +138,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"offset順に\" (offset-jun ni) while technically correct, could be improved for clarity. 'Offset' in this context refers to adjusting the index positions to compensate for the removed spaces. A more natural Japanese phrasing might better convey this nuance.",
-          "suggestion": "「オフセット値を用いて」 or 「オフセットを適用して」 (offset o tekiyou shite)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -142,8 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"오프셋을 사용하여\" (using an offset) could be misinterpreted. While technically correct, it might be clearer to say something like \"오프셋을 적용하여\" (applying an offset) or simply rephrase to emphasize the re-indexing process.",
-          "suggestion": "재정리 작업은 인덱스에서 공간을 제거합니다. 파일은 오프셋을 적용하여 누락된 인덱스를 채우는 순서대로 다시 인덱싱됩니다."
+          "description": "The phrase \"offset을 사용하여\" could be more accurately translated as \"오프셋을 적용하여\" or \"오프셋을 통해\" to better convey the meaning of applying an offset.",
+          "suggestion": "재정리 작업은 인덱스에서 공간을 제거합니다. 파일은 오프셋을 적용하여/통해 누락된 인덱스를 채우는 순서대로 다시 인덱싱됩니다."
         }
       ],
       "approved_at": null
@@ -153,14 +158,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ຄຳສັ່ງ Reorder\" (command Reorder) is slightly awkward. While understandable, it would be more natural to rephrase it, perhaps using something like \"ການກະທຳ Reorder\" (action Reorder) or describing its function.",
-          "suggestion": "ການກະທຳ Reorder ຈະລຶບຊ່ອງຫວ່າງໃນດັດຊະນີ"
+          "type": "spelling",
+          "description": "The term 'ດັດຊະນີ' is used multiple times. While technically correct, 'index' might be more readily understood by users. Consider if a more common or simplified term would improve clarity.",
+          "suggestion": "Consider using a more common or simplified term for 'index' depending on the target audience."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ຕາມລໍາດັບທີ່ມີການຊົດເຊີຍ' could be rephrased for better flow and clarity. It's a bit awkward.",
+          "suggestion": "Consider rephrasing to something like 'ຕາມລໍາດັບໂດຍມີການปรับໄສສຽງ' or 'ຕາມລໍາດັບດ້ວຍການປິ່ງປ່ຽນເລັກນ້ອຍ'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ການຊົດເຊີຍເພື່ອຕື່ມຂໍ້ມູນໃສ່ໃນດັດຊະນີທີ່ຂາດຫາຍໄປ\" (compensation to fill data into missing indexes) is complex and potentially unclear. A simpler explanation would be better. The nuance of 'offset' in the English is lost.",
-          "suggestion": "ໄຟລ໌ຈະຖືກດັດສະນີຄືນໃຫມ່ຕາມລໍາດັບໂດຍເຕີມຂໍ້ມູນໃສ່ໃນດັດຊະນີທີ່ຂາດຫາຍໄປ"
+          "description": "The English phrase 'with offset' isn't directly translated in the Lao version. 'Offset' implies an adjustment or shift in numbering, which is not clearly conveyed.",
+          "suggestion": "Consider adding a phrase that better conveys the meaning of 'offset', such as 'ການເລື່ອນໂຕ້' or 'ການປິ່ງປ່ຽນໂຕ້'."
         }
       ],
       "approved_at": null
@@ -180,18 +190,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"zgodnie z offsetem\" is not the best translation for \"with offset\". It's a literal translation and doesn't convey the meaning accurately in this context. 'Offset' in this case refers to adjusting the indexes to compensate for the removed spaces.",
-          "suggestion": "Consider a more descriptive phrase like \"z przesunięciem\" or \"w celu skompensowania brakujących indeksów\" or something that better explains the adjustment of the indexes."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure 'Pliki zostaną ponownie zindeksowane zgodnie z offsetem, aby uzupełnić brakujące indeksy' could be improved for readability. The two clauses are a bit clunky together.",
-          "suggestion": "Pliki zostaną ponownie zindeksowane z przesunięciem, aby uzupełnić brakujące indeksy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -212,7 +211,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'Fișiere vor fi reindexate' is grammatically awkward. It should be 'Fișierele vor fi reindexate' to agree with 'Files'.",
+          "description": "The sentence \"Fișiere vor fi reindexate\" is grammatically incorrect. It should be \"Fișierele vor fi reindexate\" because \"fișiere\" is plural and requires the definite article 'le'.",
           "suggestion": "Fișierele vor fi reindexate"
         }
       ],
@@ -230,18 +229,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"පුනඃക്രമ කිරීමේ ක්‍රියාවේ\" (Punaakrama kirimē krīyavē) is a somewhat formal and less common way to say \"Reorder action.\" A more natural phrasing might be \"ගොනුවල නැවත ക്രമീകരണം\" (Gonuwala naewath kramakaran) or similar.",
-          "suggestion": "ගොනුවල නැවත ക്രමീകരണം (Gonuwala naewath kramakaran) or a more colloquial equivalent."
+          "description": "The phrase \"පුනඃക്രമ කිරීමේ ක්‍රියාවේ\" (punakrama kirimē kriyavē) is a bit clunky and doesn't perfectly capture the meaning of 'Reorder action'. A more natural phrasing might be something like \"පුනඃക്രമීකරණය කිරීමේදී\" (punakramīkaraṇaya kirimēdī) or simply \"පුනඃക്രമීකරණය කරන විට\" (punakramīkaraṇaya karan vat).",
+          "suggestion": "Consider rephrasing to \"පුනඃക്രമීකරණය කරන විට\" (punakramīkaraṇaya karan vat) or \"පුනඃക്രമීකරණය කිරීමේදී\" (punakramīkaraṇaya kirimēdī)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"නැති වූ ඉංඩෙක්ස් හිස් කිරීමට සැලැස්ම සහිතව\" (Nathi vuu īnḍēks his kimē sēlaṃ samithava) is overly complex. It doesn't directly convey the meaning of filling in missing indexes with an offset. A clearer translation would focus on the offset.",
-          "suggestion": "නැති වූ ඉංඩෙක්ස්වලට අනුබද්ධ ඉවත් කිරීමෙන් නැවත ඉංඩෙක්ස් කරනු ලැබේ (Nathi vuu īnḍēkswala anubaddhawa ivat karamēn naewatha īnḍēks karanū labē) - This focuses on offsetting to fill missing indexes."
+          "description": "The phrase \"නැති වූ ඉංඩෙක්ස් හිස් කිරීමට\" (nēthi vū ḍēkś hisimēkata) implies filling the missing indexes with empty values. The English text suggests filling with an offset value to maintain order. This is a significant difference in meaning.",
+          "suggestion": "Reconsider the translation of 'fill in missing indexes'. A more accurate translation might be something like \"නැති වූ ඉංඩෙක්ස්වලට අනුද්‍රව්‍ය අගයන් පිරවනු ලැබේ\" (nēthi vū ḍēkswalaṭa anudravya agayan pirvanu labē) or a similar phrasing that conveys the concept of an offset value."
         },
         {
           "type": "spelling",
-          "description": "While 'ඉංඩෙක්ස්' (īnḍēks) is commonly used, it's a transliteration. If attempting a more Sinhala rendering, 'ආනයනය' or 'සංඛ්‍යාංකනය' might be options, but require careful consideration of context and potential confusion.",
-          "suggestion": "Consider whether the transliteration 'ඉංඩෙක්ස්' is appropriate or if a Sinhala alternative is needed. The current usage is acceptable, but worth evaluating for technical accuracy and audience understanding."
+          "description": "While 'ඉංඩෙක්ස්' (ḍēkś) is a reasonable transliteration of 'index', consistency in transliteration would be good. If other technical terms use a different transliteration, this should align.",
+          "suggestion": "Ensure consistency in transliteration of 'index'. Consider using a standard transliteration system."
         }
       ],
       "approved_at": null
@@ -252,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"poradie sa zmení\" (the order will change) doesn't accurately reflect the English \"re-indexed in order\". The English implies re-indexing sequentially, not just a change in order.",
-          "suggestion": "Funkcia Znovu zoradiť odstráni medzery v indexoch. Súbory budú znovu indexované v poradí, s posunom, aby sa doplnili chýbajúce indexy."
+          "description": "The phrase 'The files will be re-indexed in order with offset' is not accurately reflected in the Slovak translation. 'poradie sa zmení, aby sa doplnili chýbajúce indexy' implies a general change in order rather than a re-indexing with an offset to fill gaps.",
+          "suggestion": "Consider a more accurate translation such as: 'Súbory budú znovu indexované, pričom sa použije posun pre doplnenie chýbajúcich indexov.' or 'Súbory budú znovu indexované s posunom, aby sa doplnili chýbajúce indexy.'"
         }
       ],
       "approved_at": null
@@ -269,9 +268,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'фајлови' is a transliteration from 'files' and while understandable, 'датотеке' is the more standard Serbian translation for 'files' in this context (technical).",
-          "suggestion": "датотеке"
+          "type": "formatting",
+          "description": "Inconsistent use of English loanword 'оффсетом'. It would be more natural to use a Serbian equivalent or transliterate it consistently.",
+          "suggestion": "Replace 'оффсетом' with 'транслацијом' or 'са померањем' or transliterate to 'offsetom'."
         }
       ],
       "approved_at": null
@@ -279,7 +278,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fajlovi' is a transliteration and not a native Serbian word for 'files'. While understood, the more common and preferred term is 'datoteke'.",
+          "suggestion": "datoteke"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -288,13 +293,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"kaydırma ile sıralı olarak yeniden dizilecektir\" doesn't accurately convey the meaning of \"in order with offset.\"  'Kaydırma' (offset) is present, but the re-indexing aspect isn't clearly expressed in a way that mimics the English sentence structure. It suggests the files will be shifted rather than re-indexed sequentially with gaps filled.",
-          "suggestion": "Yeniden sıralama eylemi, eksik indeksleri doldurmak için sıfırdan başlayarak sıralı bir şekilde yeniden dizilecektir."
+          "description": "The phrase 'with offset' is not accurately translated. 'Kaydırma ile' can imply a physical shift rather than an index offset.",
+          "suggestion": "Dosyalar, eksik indeksleri doldurmak için sıralı olarak yeniden dizine alınacaktır."
         },
         {
           "type": "formatting",
-          "description": "The translation uses a passive voice ('...dizilecektir') which is acceptable but could be slightly more direct. Consider active voice for better readability.",
-          "suggestion": "Yeniden sıralama eylemi, eksik indeksleri doldurmak için sıfırdan başlayarak sıralı bir şekilde dizinleri yeniden oluşturacaktır."
+          "description": "While not strictly incorrect, the phrasing 'sıralı olarak yeniden dizilecektir' can be improved for flow and conciseness.",
+          "suggestion": "Dosyalar sıralı olarak yeniden dizine alınacaktır."
         }
       ],
       "approved_at": null
@@ -302,13 +307,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Змінити порядок\" (Change order) doesn't perfectly convey the meaning of \"Reorder\" in this context. \"Reorder\" implies a specific rearrangement, not just a change.",
-          "suggestion": "Consider \"Пересортувати\" (Resort) or \"Переупорядкувати\" (Reorganize) for a more precise translation of \"Reorder\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -317,13 +316,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'offset to fill in missing indexes' is not accurately translated. 'Offset' doesn't have a direct equivalent that conveys the intended meaning of compensating for removed spaces in the indexes.",
-          "suggestion": "Thao tác Sắp xếp lại sẽ xóa khoảng trắng trong các chỉ mục. Các tập tin sẽ được lập chỉ mục lại theo thứ tự, điều chỉnh để điền vào các chỉ mục bị thiếu."
+          "description": "The phrase \"will remove spaces in the indexes\" is not the most accurate translation of \"will remove spaces in the indexes\".  'Remove spaces' implies a literal removal of spaces, while the English suggests clearing/resetting the index numbering. A better translation would convey that the existing index numbers are being reset.",
+          "suggestion": "Thao tác Sắp xếp lại sẽ xóa bỏ các chỉ mục hiện tại."
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a comma to separate the two sentences. While grammatically acceptable, a period might be more appropriate for a more formal tone.",
-          "suggestion": "Thao tác Sắp xếp lại sẽ xóa khoảng trắng trong các chỉ mục. Các tập tin sẽ được lập chỉ mục lại theo thứ tự, điều chỉnh để điền vào các chỉ mục bị thiếu."
+          "type": "incorrect_translation",
+          "description": "The phrase \"theo thứ tự với khoảng trống\" doesn't quite capture the nuance of 'with offset'. 'Offset' means that the files will be re-indexed and the gaps left by the removed spaces will be filled with new, consecutive index numbers.",
+          "suggestion": "Theo thứ tự với các chỉ mục được điều chỉnh để lấp đầy các vị trí còn thiếu."
         }
       ],
       "approved_at": null
@@ -331,7 +330,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'fill in missing indexes' is not the most natural translation of 'fill in missing indexes'. It sounds a bit awkward in Chinese. A better translation would convey the idea of correcting or adjusting the indexes.",
+          "suggestion": "文件将按顺序重新编制索引，并使用偏移量调整缺失的索引。"
+        }
+      ],
       "approved_at": null
     }
   }

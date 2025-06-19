@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Choose from list",
-  "ConnectingAccount": "Connecting account",
-  "DeleteFromTrash": "Selected elements were successfully deleted from Trash",
   "FileLocked": "File locked",
   "FileProtected": "The file is password protected",
   "FileUnlocked": "File unlocked",
@@ -14,7 +12,7 @@
   "FolderTitleSkyDrive": "OneDrive directory",
   "FolderTitleWebDav": "WebDAV Directory",
   "FolderTitleYandex": "Yandex Directory",
-  "GuestReleaseTipDescripton": "All previously added Users became Guests and now available in the Contacts list of the {{productName}} administrators only. Guests are no longer part of any groups. You can always change their type and add them to a group, if necessary.",
+  "GuestConversionNote": "All previously added Users became Guests and now available in the {{sectionName}} list of the {{productName}} administrators only. Guests are no longer part of any groups. You can always change their type and add them to a group, if necessary.",
   "GuestReleaseTipLink": "Learn more about user types",
   "LinkHasExpiredAndHasBeenDisabled": "The link has expired and has been disabled",
   "LinkValidTime": "This link is valid for {{days_count}} days only.",
@@ -29,13 +27,5 @@
   "ThirdPartyTitle": "Third-party services",
   "TitleShowActions": "Show File Actions",
   "TitleShowFolderActions": "Show Folder Actions",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TrashItemsDeleteSuccess": "Selected elements were successfully deleted from {{sectionName}}"
 }

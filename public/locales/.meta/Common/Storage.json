@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2025-05-28T09:30:02.412Z",
+  "updated_at": "2025-06-08T12:02:32.688Z",
   "comment": {
     "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
     "is_auto": true,
@@ -59,15 +59,9 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/management/src/categories/settings/index.tsx",
-      "line_number": 71,
-      "context": "name: t(\"Settings:RestoreBackup\"),\n content: <Restore logoText={logoText} />,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: <EncryptDataPage logoText={logoText} />,\n },\n ];\n \n if (!isCommunity) {",
-      "module": "/packages/management"
-    },
-    {
-      "file_path": "/packages/management/src/utils/settingsTree.ts",
-      "line_number": 118,
-      "context": "{\n id: \"management-settings_catalog-encrypt\",\n key: \"1-5\",\n icon: \"\",\n link: \"encrypt-data\",\n tKey: \"Common:Storage\",\n isHeader: true,\n },\n {\n id: \"management-settings_catalog-payments\",\n key: \"2\",",
+      "file_path": "/packages/management/src/app/settings/layout.tsx",
+      "line_number": 51,
+      "context": "name: t(\"Common:RestoreBackup\"),\n content: children,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: children,\n },\n ];\n \n useEffect(() => {",
       "module": "/packages/management"
     }
   ],

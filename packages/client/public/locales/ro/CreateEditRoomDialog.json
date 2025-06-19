@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "este necesară activarea",
   "AddStaticText": "Adăugare text static",
   "AddWatermarkElements": "Adăugare elemente de incripționare",
   "AddWatermarksToDocuments": "Adăugare incripționare la documente",
@@ -33,7 +32,6 @@
   "StorageDescription": "Cota de stocare este stabilită pentru fiecare sală. Puteți modifica limita stabilită sau puteți dezactiva limita de stocare.",
   "TagsPlaceholder": "Adăugare etichetă",
   "ThirdPartyStorageComboBoxPlaceholder": "Selectaţi stocarea",
-  "ThirdPartyStorageDescription": "Trebuie să utilizaţi servicii terțe de stocare a datelor pentru această sală. Un nou dosar pentru stocarea datelor din această sală va fi creat în spaţiul de stocare conectat.",
   "ThirdPartyStorageNoStorageAlert": "Mai întâi, trebuie să vă conectați cu acest cont de stocare în secţiunea Integrare. Altfel, nu se va stabili o conexiune.",
   "ThirdPartyStoragePermanentSettingDescription": "Fişiere sunt stocate în spaţiul de stocare de la terțe{{thirdpartyTitle}} în folderul \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Pentru a conecta un serviciu terț de stocare, trebuie să adăugaţi serviciul corespunzător în secţiunea Integrare din setările {{productName}}. Contactaţi proprietarul sau administratorul {{productName}} pentru a activa această integrare.",

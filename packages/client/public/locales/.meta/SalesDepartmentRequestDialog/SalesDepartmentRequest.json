@@ -3,7 +3,7 @@
   "content": "Sales department request",
   "content_en_sha1_hash": "0e3ac6e1bce337108997dca6f6f3b9a728a8e578",
   "created_at": "2025-05-19T21:30:53.281Z",
-  "updated_at": "2025-06-18T07:34:14.908Z",
+  "updated_at": "2025-06-18T17:11:42.381Z",
   "comment": {
     "text": "This translation key is used for the \"Sales department request\" text that appears in a dialogue box, specifically in the SalesDepartmentRequestDialog component where users can submit requests. The text is intended to provide clear context for the user's action.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Satış şöbəsinə müraciət\" is understandable, a more direct and common translation of \"Sales department request\" would be \"Satış departamentinin sorğusu\" or \"Satış şöbəsindən istəy\". \"Müraciət\" implies a more formal appeal or application.",
-          "suggestion": "Satış departamentinin sorğusu"
+          "description": "While \"Satış şöbəsinə müraciət\" is understandable, it's a slightly literal translation. A more natural and idiomatic translation of 'Sales department request' would be something like 'Satış departamenti üçün xidmət sorğusu' or 'Satış şöbəsindən xidmət sifarişi'.",
+          "suggestion": "Satış departamenti üçün xidmət sorğusu"
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Anfrage zur Verkaufsabteilung' is not the most natural or accurate translation of 'Sales department request'. 'zur' can sound awkward. A more common and clearer translation would use 'An die Verkaufsabteilung' or 'für die Verkaufsabteilung'.",
-          "suggestion": "Anfrage an die Verkaufsabteilung"
+          "description": "The translation 'Anfrage zur Verkaufsabteilung' is not the most natural or accurate translation of 'Sales department request'. 'zur' implies movement towards the sales department, which isn't the intended meaning. A more appropriate translation would reflect a request *from* or *concerning* the sales department.",
+          "suggestion": "Anfrage der Verkaufsabteilung"
         }
       ],
       "approved_at": null
@@ -81,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pyyntö myyntiosastolle' literally translates to 'Request to the sales department'. While understandable, it's slightly less natural than a direct translation of 'Sales department request'. A more natural phrasing would be 'Myyntiosaston pyyntö'.",
+          "suggestion": "Myyntiosaston pyyntö"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '営業部への依頼' while literally meaning 'request to sales department' doesn't fully capture the nuance of 'Sales department request'. It implies an action being directed *to* the department, whereas the English phrase often refers to a request *from* the sales department or a request *for* the sales department's involvement. A more accurate translation would depend on the specific context.",
-          "suggestion": "Consider alternatives like '営業部からの依頼' (request from the sales department) or '営業部への要請' (request of the sales department) depending on the intended meaning."
+          "description": "The translation '営業部への依頼' (Eigyō-bu e no irai) while literally meaning 'request to the sales department,' doesn't fully capture the nuance of 'Sales department request'. It sounds more like a specific request *made* to the sales department, rather than the request *itself* being a request *from* the sales department.",
+          "suggestion": "Consider alternatives like '営業部からの依頼' (Eigyō-bu kara no irai) which translates to 'request *from* the sales department' or '営業部の要望' (Eigyō-bu no yōbō) which translates to 'sales department's request/need'."
         }
       ],
       "approved_at": null
@@ -141,13 +147,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Prośba do działu sprzedaży\" is understandable, a more natural and precise translation of \"Sales department request\" would be \"Wniosek do działu sprzedaży\" or \"Żądanie do działu sprzedaży\". \"Prośba\" implies a more polite request, while \"wniosek\" or \"żądanie\" more accurately convey a formal request or application.",
-          "suggestion": "Wniosek do działu sprzedaży"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -180,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අලෙවි ක්‍රියාංශයට ඉල්ලීමකි\" while containing the correct words, doesn't perfectly convey the meaning of 'Sales Department Request'. 'ක්‍රියාංශයට' (kriyashangath) implies a division or section, which isn't always the intended nuance. A more direct and common phrasing would be preferable.",
-          "suggestion": "Consider 'අලෙවි දෙපාර්තුවෙන් කරන ඉල්ලීම' (Alewi Departhuwen karan illim) which translates to 'Request made by the Sales Department' or 'වෙළඳ දෙපාර්තුවෙන් කරන ඉල්ලීම' (Welada Departhuwen karan illim) which translates to 'Request made by the Sales Department'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is a full sentence ending with 'කි'. While grammatically correct, it might be more appropriate to simply have the phrase 'අලෙවි දෙපාර්තුවෙන් කරන ඉල්ලීම' or 'වෙළඳ දෙපාර්තුවෙන් කරන ඉල්ලීම' without the full sentence structure, depending on the context of its usage. This can be adjusted based on how it's used in the UI.",
-          "suggestion": "Consider removing the 'කි' to make it a phrase rather than a full sentence: 'අලෙවි දෙපාර්තුවෙන් කරන ඉල්ලීම' or 'වෙළඳ දෙපාර්තුවෙන් කරන ඉල්ලීම'."
+          "description": "While \"අලෙවි ක්‍රියාංශයට ඉල්ලීමකි\" is a possible translation, it sounds somewhat formal and not idiomatic for a simple 'sales department request'. A more natural and common translation might be closer to 'මුදාගත් අලෙවි දෙපාර්තමේන්තුව ඉල්ලීම' or 'අලෙවි දෙපාර්තමේන්තුවෙන් ඉල්ලීම'.",
+          "suggestion": "Consider 'මුදාගත් අලෙවි දෙපාර්තමේන්තුව ඉල්ලීම' or 'අලෙවි දෙපාර්තමේන්තුවෙන් ඉල්ලීම'."
         }
       ],
       "approved_at": null
@@ -209,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Захтев одељења продаје\" is a literal translation of \"Sales Department Request\" but sounds unnatural in Serbian. \"Захтев Одељења Продаје\" would be more common and natural.  'Zahtev' is the correct word for 'request'.",
-          "suggestion": "Захтев одељења продаје"
+          "description": "The Serbian translation \"Захтев одељења продаје\" is a literal translation but not idiomatic. A more natural phrasing would be \"Зајавке одељења продаје\" or \"Зајавница одељења продаје\".  \"Захтев\" is used for a demand or request *from* someone, not a request *by* a department.",
+          "suggestion": "Зајавке одељења продаје"
         }
       ],
       "approved_at": null

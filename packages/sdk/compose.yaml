@@ -10,5 +10,6 @@ services:
       - "5112:5112"
     volumes:
       - ./__tests__:/app/packages/sdk/__tests__
+      - ../shared/__mocks__:/app/packages/shared/__mocks__
       - ./playwright.config.ts:/app/packages/sdk/playwright.config.ts
       - ../../playwright-report/sdk:/app/playwright-report/sdk

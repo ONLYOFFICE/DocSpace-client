@@ -26,13 +26,16 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import { FilterType } from "@docspace/shared/enums";
 
 import { expect, test } from "./fixtures/base";
 import { describe } from "node:test";
-import { roomListHandler } from "@docspace/shared/__mocks__/e2e/handlers/files/roomList";
-import { folderHandler } from "@docspace/shared/__mocks__/e2e/handlers/files/folder";
+import {
+  roomListHandler,
+  folderHandler,
+  TypeRoomList,
+  TypeFolder,
+} from "@docspace/shared/__mocks__/handlers";
 
 const path = "/sdk/file-selector";
 
@@ -42,9 +45,11 @@ describe("File selector single param light", () => {
     port,
     baseUrl,
     serverRequestInterceptor,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -57,10 +62,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -73,10 +80,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -89,10 +98,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -105,10 +116,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -121,10 +134,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -141,8 +156,9 @@ describe("File selector single param light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
-    await clientRequestInterceptor.use([endpoints.folder]);
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -155,10 +171,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -171,10 +189,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -187,10 +207,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -203,10 +225,12 @@ describe("File selector single param light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -221,10 +245,12 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -237,10 +263,12 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&acceptLabel=CustomAccept`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -253,10 +281,12 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&breadCrumbs=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -269,10 +299,12 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -285,10 +317,12 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -301,10 +335,12 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -321,9 +357,10 @@ describe("File selector single param dark", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -335,11 +372,13 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
 
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -352,11 +391,13 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
 
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -369,10 +410,12 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -385,10 +428,12 @@ describe("File selector single param dark", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -404,10 +449,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -420,10 +467,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&acceptLabel=CustomAccept`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -436,10 +485,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&breadCrumbs=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -452,10 +503,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&cancel=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -468,10 +521,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -484,10 +539,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -504,9 +561,10 @@ describe("File selector single param RTL light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -518,10 +576,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -534,10 +594,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -550,10 +612,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -566,10 +630,12 @@ describe("File selector single param RTL light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -584,10 +650,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&cancel=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -604,9 +672,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -618,10 +687,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -634,10 +705,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&cancel=true&acceptLabel=CustomAccept`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -650,10 +723,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -666,10 +741,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -686,9 +763,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&id=5&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -700,10 +778,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -720,9 +800,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -734,10 +815,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -750,10 +833,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&selectorType=roomsOnly&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -766,10 +851,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -782,10 +869,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&acceptLabel=CustomAccept`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -798,10 +887,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&subtitle=true&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -818,9 +909,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&cancelLabel=CustomCancel&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -832,10 +924,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -848,10 +942,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&acceptLabel=CustomAccept&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -868,9 +964,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&id=5&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -882,10 +979,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&search=true&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -898,10 +997,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -918,9 +1019,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -932,10 +1034,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -948,10 +1052,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -964,10 +1070,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -984,9 +1092,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&search=true&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -998,10 +1107,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&cancel=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1014,10 +1125,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1030,10 +1143,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1050,9 +1165,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1068,9 +1184,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1082,10 +1199,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1098,10 +1217,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1114,10 +1235,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1130,10 +1253,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1150,9 +1275,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1168,9 +1294,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1182,10 +1309,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1198,10 +1327,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1218,9 +1349,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&id=5&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1232,10 +1364,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1248,10 +1382,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1264,10 +1400,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&search=true&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1280,10 +1418,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1296,10 +1436,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1316,9 +1458,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&id=5&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1330,10 +1473,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1350,9 +1495,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1364,10 +1510,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1380,10 +1528,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1400,9 +1550,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1414,10 +1565,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1430,10 +1583,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1450,9 +1605,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1468,7 +1624,8 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1485,9 +1642,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&id=5&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1499,10 +1657,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1519,9 +1679,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1533,10 +1694,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1553,9 +1716,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1571,9 +1735,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1585,10 +1750,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1605,9 +1772,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1623,9 +1791,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1641,9 +1810,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1659,9 +1829,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1677,9 +1848,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&cancel=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1695,9 +1867,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1713,9 +1886,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1727,10 +1901,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1743,10 +1919,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1763,9 +1941,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1777,10 +1956,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1793,10 +1974,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1809,10 +1992,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&acceptLabel=CustomAccept&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1825,10 +2010,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&breadCrumbs=true&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1841,10 +2028,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&cancel=true&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1857,10 +2046,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&cancelLabel=CustomCancel&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1873,10 +2064,12 @@ describe("File selector param combinations light", () => {
     page,
     port,
     serverRequestInterceptor,
+    clientRequestInterceptor,
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&filter=${FilterType.DocumentsOnly}&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
       "desktop",
@@ -1893,9 +2086,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&id=5&subtitle=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -1911,9 +2105,10 @@ describe("File selector param combinations light", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&id=5`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.folder]);
+
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2008,7 +2203,7 @@ describe("File selector single param light empty", () => {
     serverRequestInterceptor,
     baseUrl,
   }) => {
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
 
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5`;
     await page.goto(pageRoute);
@@ -2165,7 +2360,7 @@ describe("File selector single param dark empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2320,9 +2515,9 @@ describe("File selector single param RTL light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?locale=ar-SA&theme=Base&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2402,9 +2597,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&breadCrumbs=true&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2472,9 +2667,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&id=5&subtitle=true`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2503,9 +2698,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2585,9 +2780,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&cancelLabel=CustomCancel&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2629,9 +2824,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&id=5&subtitle=true`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2673,9 +2868,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2729,9 +2924,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&search=true&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2786,9 +2981,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2804,9 +2999,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2874,9 +3069,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancel=true&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2892,9 +3087,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -2936,9 +3131,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&id=5&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3019,9 +3214,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&id=5&subtitle=true`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3050,9 +3245,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3094,9 +3289,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3138,9 +3333,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3169,9 +3364,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&id=5&selectorType=userFolderOnly`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3200,9 +3395,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=CustomCancel&search=true&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3231,9 +3426,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&subtitle=true`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3249,9 +3444,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3280,9 +3475,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3298,9 +3493,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3316,9 +3511,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&search=true`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3334,9 +3529,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&acceptLabel=CustomAccept&selectorType=roomsOnly`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3352,9 +3547,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&cancel=true`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3370,9 +3565,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3388,9 +3583,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&id=5&breadCrumbs=true&search=true`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3432,9 +3627,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&acceptLabel=CustomAccept&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3541,9 +3736,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&selectorType=roomsOnly&id=5&subtitle=true`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",
@@ -3559,9 +3754,9 @@ describe("File selector param combinations light empty", () => {
     baseUrl,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&id=5`;
-    serverRequestInterceptor.use(folderHandler(port, "isEmpty"));
+    serverRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await page.goto(pageRoute);
-    await clientRequestInterceptor.use([endpoints.emptyFolder]);
+    clientRequestInterceptor.use(folderHandler(port, TypeFolder.IsEmpty));
     await expect(page).toHaveScreenshot([
       "desktop",
       "file-selector",

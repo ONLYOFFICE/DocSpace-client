@@ -24,14 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints } from "@docspace/shared/__mocks__/e2e";
-
 import { expect, test } from "./fixtures/base";
 import { describe } from "node:test";
 import {
   roomListHandler,
   roomListResolver,
-} from "@docspace/shared/__mocks__/e2e/handlers/files/roomList";
+  TypeRoomList,
+} from "@docspace/shared/__mocks__/handlers";
 
 const path = "/sdk/room-selector";
 
@@ -40,12 +39,12 @@ describe("Render room selector light", () => {
     page,
     baseUrl,
     clientRequestInterceptor,
-    port,
     serverRequestInterceptor,
+    port,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base`;
-
-    await serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -58,12 +57,13 @@ describe("Render room selector light", () => {
   test("should open light with search /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base`;
-
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -76,12 +76,14 @@ describe("Render room selector light", () => {
   test("should open light with ru locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -94,12 +96,14 @@ describe("Render room selector light", () => {
   test("should open light with header /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -113,12 +117,14 @@ describe("Render room selector light", () => {
   test("should open light with cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -132,12 +138,14 @@ describe("Render room selector light", () => {
   test("should open light with header and search /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -150,12 +158,14 @@ describe("Render room selector light", () => {
   test("should open light with header and ru locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -168,12 +178,14 @@ describe("Render room selector light", () => {
   test("should open light with header and cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -186,12 +198,14 @@ describe("Render room selector light", () => {
   test("should open light with search and ru locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -204,12 +218,14 @@ describe("Render room selector light", () => {
   test("should open light with search and cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -222,12 +238,14 @@ describe("Render room selector light", () => {
   test("should open light with ru locale and cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -240,12 +258,14 @@ describe("Render room selector light", () => {
   test("should open light with header, search and ru locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -258,12 +278,14 @@ describe("Render room selector light", () => {
   test("should open light with header, search and cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -276,12 +298,14 @@ describe("Render room selector light", () => {
   test("should open light with search, ru locale and cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ru&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -294,12 +318,14 @@ describe("Render room selector light", () => {
   test("should open light with all features enabled /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -314,7 +340,6 @@ describe("Room selector light empty", () => {
   test("should open light empty /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base`;
 
@@ -394,7 +419,6 @@ describe("Room selector light empty", () => {
   test("should open light empty with header and search /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&search=true`;
 
@@ -410,7 +434,6 @@ describe("Room selector light empty", () => {
   test("should open light empty with header and ru locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ru`;
 
@@ -426,7 +449,6 @@ describe("Room selector light empty", () => {
   test("should open light empty with header and cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&cancel=true`;
 
@@ -556,11 +578,13 @@ describe("Render room rtl selector light", () => {
   test("should open light with ar-SA locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -574,11 +598,13 @@ describe("Render room rtl selector light", () => {
   test("should open light with header and ar-SA  locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -592,11 +618,13 @@ describe("Render room rtl selector light", () => {
   test("should open light with search and ar-SA locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -610,11 +638,13 @@ describe("Render room rtl selector light", () => {
   test("should open light with ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -628,11 +658,13 @@ describe("Render room rtl selector light", () => {
   test("should open light with header, search and ar-SA locale /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -646,11 +678,13 @@ describe("Render room rtl selector light", () => {
   test("should open light with search, ar-SA locale and cancel button /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -664,11 +698,13 @@ describe("Render room rtl selector light", () => {
   test("should open light with all features ar-SA enabled /sdk/room-selector route", async ({
     page,
     baseUrl,
-    port,
     serverRequestInterceptor,
+    port,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&header=true&locale=ar-SA&cancel=true&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -765,11 +801,11 @@ describe("Room selector rtl light empty", () => {
     page,
     baseUrl,
     port,
-    serverRequestInterceptor,
+    clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&locale=ar-SA&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -801,11 +837,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -819,11 +857,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -837,11 +877,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -856,11 +898,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -875,11 +919,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -894,11 +940,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -912,11 +960,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -930,11 +980,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -948,11 +1000,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -966,11 +1020,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -984,11 +1040,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1002,11 +1060,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1020,11 +1080,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1038,11 +1100,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ru&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1056,11 +1120,13 @@ describe("Render room selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1318,11 +1384,13 @@ describe("Render room rtl selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
@@ -1337,11 +1405,13 @@ describe("Render room rtl selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ar-SA`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1355,11 +1425,13 @@ describe("Render room rtl selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1373,11 +1445,13 @@ describe("Render room rtl selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1391,11 +1465,13 @@ describe("Render room rtl selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ru&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1409,11 +1485,13 @@ describe("Render room rtl selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&locale=ar-SA&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1427,11 +1505,13 @@ describe("Render room rtl selector dark", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&header=true&locale=ar-SA&cancel=true&search=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1561,11 +1641,13 @@ describe("Room selector custom labels", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=Custom`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1579,11 +1661,13 @@ describe("Room selector custom labels", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancelLabel=Custom&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1597,11 +1681,13 @@ describe("Room selector custom labels", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&acceptLabel=CustomSub&cancelLabel=CustomCan&cancel=true`;
 
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     await expect(page).toHaveScreenshot([
@@ -1617,10 +1703,12 @@ describe("Room selector actions", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     // Add console log listener
@@ -1640,7 +1728,7 @@ describe("Room selector actions", () => {
 
     await button.click();
 
-    const roomList = await roomListResolver("isDefault").json();
+    const roomList = await roomListResolver(TypeRoomList.IsDefault).json();
     const selectedItem = roomList.response.folders[1];
 
     expect(selectedItem).toBeDefined();
@@ -1659,10 +1747,12 @@ describe("Room selector actions", () => {
     page,
     baseUrl,
     port,
+    clientRequestInterceptor,
     serverRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&cancel=true&cancelLabel=Cancel`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
     // Add console log listener
@@ -1689,10 +1779,12 @@ describe("Room selector search actions", () => {
     clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await clientRequestInterceptor.use([endpoints.filteredRoomList]);
+    clientRequestInterceptor.use(
+      roomListHandler(port, TypeRoomList.IsFiltered),
+    );
 
     await page.waitForTimeout(1000);
 
@@ -1707,7 +1799,7 @@ describe("Room selector search actions", () => {
       "action-search-room-selector.png",
     ]);
 
-    await clientRequestInterceptor.use([endpoints.emptyRoomList]);
+    clientRequestInterceptor.use(roomListHandler(port));
 
     await searchInput.fill("Empty filter");
 
@@ -1728,10 +1820,12 @@ describe("Room selector search actions", () => {
     clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Base&search=true&locale=ar-SA`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await clientRequestInterceptor.use([endpoints.filteredRoomList]);
+    clientRequestInterceptor.use(
+      roomListHandler(port, TypeRoomList.IsFiltered),
+    );
 
     await page.waitForTimeout(1000);
 
@@ -1746,8 +1840,7 @@ describe("Room selector search actions", () => {
       "action-ar-SA-search-room-selector.png",
     ]);
 
-    await clientRequestInterceptor.use([endpoints.emptyRoomList]);
-
+    clientRequestInterceptor.use(roomListHandler(port));
     await searchInput.fill("Empty filter");
 
     await page.waitForTimeout(1000);
@@ -1767,10 +1860,12 @@ describe("Room selector search actions", () => {
     clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&search=true`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
     await page.goto(pageRoute);
 
-    await clientRequestInterceptor.use([endpoints.filteredRoomList]);
+    clientRequestInterceptor.use(
+      roomListHandler(port, TypeRoomList.IsFiltered),
+    );
 
     await page.waitForTimeout(1000);
 
@@ -1785,8 +1880,7 @@ describe("Room selector search actions", () => {
       "action-search-dark-room-selector.png",
     ]);
 
-    await clientRequestInterceptor.use([endpoints.emptyRoomList]);
-
+    clientRequestInterceptor.use(roomListHandler(port));
     await searchInput.fill("Empty filter");
 
     await page.waitForTimeout(1000);
@@ -1806,11 +1900,14 @@ describe("Room selector search actions", () => {
     clientRequestInterceptor,
   }) => {
     const pageRoute = `${baseUrl}${path}?theme=Dark&search=true&locale=ar-SA`;
-    serverRequestInterceptor.use(roomListHandler(port, "isDefault"));
+    serverRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
+    clientRequestInterceptor.use(roomListHandler(port, TypeRoomList.IsDefault));
 
     await page.goto(pageRoute);
 
-    await clientRequestInterceptor.use([endpoints.filteredRoomList]);
+    clientRequestInterceptor.use(
+      roomListHandler(port, TypeRoomList.IsFiltered),
+    );
 
     await page.waitForTimeout(1000);
 
@@ -1825,8 +1922,7 @@ describe("Room selector search actions", () => {
       "action-ar-SA-dark-search-room-selector.png",
     ]);
 
-    await clientRequestInterceptor.use([endpoints.emptyRoomList]);
-
+    clientRequestInterceptor.use(roomListHandler(port));
     await searchInput.fill("Empty filter");
 
     await page.waitForTimeout(1000);

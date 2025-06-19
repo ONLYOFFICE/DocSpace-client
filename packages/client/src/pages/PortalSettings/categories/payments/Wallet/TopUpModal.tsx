@@ -88,8 +88,8 @@ const TopUpModal = (props: TopUpModalProps) => {
     language!,
     walletBalance,
     currency,
-    2,
-    2,
+    3,
+    3,
   );
 
   const [isLoading, setIsLoading] = useState(false);

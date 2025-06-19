@@ -126,7 +126,9 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   return (
     <div>
       <Text className={styles.storageDescription}>
-        {isPayer ? t("SelectAndPayServices") : t("ServiceConfigurationNotice")}
+        {isPayer || !isCardLinkedToPortal
+          ? t("SelectAndPayServices")
+          : t("ServiceConfigurationNotice")}
       </Text>
       {isCardLinkedToPortal ? (
         <div className={styles.payerContainer}>

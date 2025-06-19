@@ -69,6 +69,8 @@ class ServicesStore {
 
   reccomendedAmount: number = 0;
 
+  featureCountData: number = 0;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -136,6 +138,10 @@ class ServicesStore {
     this.reccomendedAmount = amount;
   };
 
+  setFeatureCountData = (featureCountData: number) => {
+    this.featureCountData = featureCountData;
+  };
+
   servicesInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
@@ -169,11 +175,26 @@ class ServicesStore {
 
       this.setIsInitServicesPage(true);
       if (isRefresh) {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+
+        const amountParam = params.get("amount");
+        const recommendedAmountParam = params.get("recommendedAmount");
+
+        if (amountParam && recommendedAmountParam) {
+          const amount = Number(amountParam);
+          const recommendedAmount = Number(recommendedAmountParam);
+
+          this.setReccomendedAmount(Math.ceil(recommendedAmount));
+          this.setFeatureCountData(amount);
+        }
+
         window.history.replaceState(
           {},
           document.title,
           window.location.pathname,
         );
+
         this.setVisibleWalletSetting(true);
       }
     } catch (e) {

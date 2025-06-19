@@ -59,12 +59,12 @@ RUN pnpm run build:translations
 
 # Run build webpack apps (using local webpack from node_modules)
 RUN pnpm --filter @docspace/client run build --env lint=false
-RUN pnpm --filter @docspace/management run build --env lint=false
 
 # Run build next apps
 RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/login run build
 RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/doceditor run build
 RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/sdk run build
+RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/management run build
 
 EXPOSE 5001 5011 5013 5015 5099
 

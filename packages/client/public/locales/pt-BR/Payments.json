@@ -117,7 +117,7 @@
   "UserNotFoundMatchingEmail": "Não foi possível encontrar o usuário com o e-mail Stripe correspondente.",
   "UsersQuotaAlmostExhausted": "A cota de usuários pagos está quase esgotada.",
   "Wallet": "Carteira",
-  "WalletDescription": "A Carteira {{productName}} permite que você compre facilmente espaço de armazenamento e ferramentas de IA. Adicione fundos à sua carteira e selecione os serviços necessários na seção Serviços para começar.",
+  "WalletDescription": "A Carteira {{productName}} permite que você compre facilmente espaço de armazenamento. Adicione fundos à sua carteira e selecione os serviços necessários na seção Serviços para começar.",
   "WalletRefilled": "Carteira recarregada",
   "WantToCancelStoragePlan": "Tem certeza de que deseja cancelar sua assinatura de armazenamento adicional?",
   "Warning": "Você manterá seu acesso total de {{amount}} até o final do seu período de cobrança pago. Se o seu armazenamento exceder o novo limite no início do próximo período, você será cobrado pelo uso real, arredondado para o {{storageUnit}} mais próximo.",
@@ -126,6 +126,6 @@
   "WouldYouLikeToEnableAutoTopUps": "Deseja habilitar recargas automáticas para que seu saldo nunca acabe?",
   "YouHaveNotAddedAnyPayment": "Você não adicionou nenhum pagamento",
   "YourCurrentPayment": "Seu pagamento atual",
-  "YourCurrentPlan": "<1>Seu plano atual:</1> {{valor}} <2>({{preço}}/mês)</2>",
+  "YourCurrentPlan": "<1>Seu plano atual:</1> {{amount}} <2>({{price}}/mês)</2>",
   "YourPrice": "Seu preço"
 }

@@ -65,6 +65,12 @@ class ServicesStore {
 
   isVisibleWalletSettings = false;
 
+  partialUpgradeFee: number = 0;
+
+  reccomendedAmount: number = 0;
+
+  featureCountData: number = 0;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -102,6 +108,10 @@ class ServicesStore {
     return this.servicesQuotas?.price.value ?? 0;
   }
 
+  setPartialUpgradeFee = (partialUpgradeFee: number) => {
+    this.partialUpgradeFee = partialUpgradeFee;
+  };
+
   setVisibleWalletSetting = (isVisibleWalletSettings) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
@@ -115,25 +125,21 @@ class ServicesStore {
 
     if (!res) return;
 
-    const { hasStorageSubscription, hasScheduledStorageChange } =
-      this.currentTariffStatusStore;
-
     res[0].features.forEach((feature) => {
-      if (feature.id === TOTAL_SIZE) {
-        const enhancedFeature = feature as TPaymentFeature & {
-          enabled: boolean;
-          cancellation: boolean;
-        };
-        enhancedFeature.enabled = hasStorageSubscription;
-        enhancedFeature.cancellation = hasScheduledStorageChange;
-      }
-
       this.servicesQuotasFeatures.set(feature.id, feature);
     });
 
     this.servicesQuotas = res[0];
 
     return res;
+  };
+
+  setReccomendedAmount = (amount: number) => {
+    this.reccomendedAmount = amount;
+  };
+
+  setFeatureCountData = (featureCountData: number) => {
+    this.featureCountData = featureCountData;
   };
 
   servicesInit = async (t: TTranslation) => {
@@ -169,11 +175,26 @@ class ServicesStore {
 
       this.setIsInitServicesPage(true);
       if (isRefresh) {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+
+        const amountParam = params.get("amount");
+        const recommendedAmountParam = params.get("recommendedAmount");
+
+        if (amountParam && recommendedAmountParam) {
+          const amount = Number(amountParam);
+          const recommendedAmount = Number(recommendedAmountParam);
+
+          this.setReccomendedAmount(Math.ceil(recommendedAmount));
+          this.setFeatureCountData(amount);
+        }
+
         window.history.replaceState(
           {},
           document.title,
           window.location.pathname,
         );
+
         this.setVisibleWalletSetting(true);
       }
     } catch (e) {

@@ -30,7 +30,7 @@ import { ContextMenuModel } from "../context-menu";
 import { TTheme } from "../../themes";
 
 export interface TableContainerProps {
-  forwardedRef: React.RefObject<HTMLDivElement>;
+  forwardedRef: React.Ref<HTMLDivElement>;
   useReactWindow: boolean;
   children?: React.ReactNode;
 }

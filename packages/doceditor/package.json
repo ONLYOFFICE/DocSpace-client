@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=development PORT=5013 next dev",
     "start-prod": "cross-env NODE_ENV=production node server.js",
-    "lint": "npm run build:translations && eslint ./src",
+    "lint": "eslint ./src --max-warnings=0",
+    "lint:fix": "eslint ./src --fix",
     "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/standalone/* ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -r .next/static/* ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -f server.prod.js ../../../publish/web/editor/server.js"
@@ -83,6 +84,11 @@
         ]
       },
       "lint:fix": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "tsc": {
         "dependsOn": [
           "build:translations"
         ]

@@ -25,45 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import classNames from "classnames";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import { TableCellProps } from "../../Table.types";
-import styles from "./TableCell.module.scss";
+import { TableCell } from "./TableCell";
 
-const TableCell = (props: TableCellProps) => {
-  const {
-    className,
-    forwardedRef,
-    style,
-    checked,
-    hasAccess,
-    children,
-    value,
-  } = props;
+describe("<TableCell />", () => {
+  it("renders without errors", () => {
+    render(<TableCell>Cell</TableCell>);
 
-  const classes = classNames(
-    styles.tableCell,
-    className,
-    "table-container_cell",
-    {
-      [styles.checked]: checked,
-      [styles.hasAccess]: hasAccess,
-    },
-  );
+    expect(screen.getByTestId("table-cell")).toBeInTheDocument();
+  });
 
-  return (
-    <div
-      data-testid="table-cell"
-      className={classes}
-      ref={forwardedRef}
-      style={style}
-      // @ts-expect-error: value used by DnD and maybe somewhere else;
-      // TODO: Refactor logic to use data-value
-      value={value}
-    >
-      {children}
-    </div>
-  );
-};
+  it("pass value for DnD", () => {
+    const value = "DnD_Value";
+    render(<TableCell value={value}>Cell</TableCell>);
 
-export { TableCell };
+    expect(screen.getByTestId("table-cell")).toHaveAttribute("value", value);
+  });
+});

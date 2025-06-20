@@ -121,7 +121,7 @@ export interface TableRowProps {
   children: React.ReactNode;
   contextOptions?: ContextMenuModel[];
   onHideContextMenu?: () => void;
-  selectionProp?: { className: string };
+  selectionProp?: { className?: string; value?: string };
   className?: string;
   style?: React.CSSProperties;
   contextMenuCellStyle?: React.CSSProperties;

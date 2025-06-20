@@ -12,5 +12,11 @@
   "SendInvitation": "Enviar invitación",
   "UserMaxAvailableRoleWarning": "Los invitados y los usuarios no pueden ser asignados como gestores de sala. Solo los administradores de sala y administradores de {{productName}} son adecuados para el rol especificado.",
   "UsersAlreadyAdded": "Algunos usuarios ya se han añadido",
-  "UsersCannotBeAdded": "Los contactos deshabilitados no se pueden agregar a una sala."
+  "UsersCannotBeAdded": "Los contactos deshabilitados no se pueden agregar a una sala.",
+  "EmailErrorMessageUserNotFound": "Usuario no encontrado. Puede editar el correo electrónico haciendo doble clic sobre él.",
+  "InviteToRoomAddPlaceholder": "Añadir personas por nombre o correo electrónico",
+  "InviteToRoomManuallyInfoGuest": "Añada los contactos existentes de {{productName}}. O invite a nuevos usuarios personalmente por correo electrónico. Los nuevos usuarios se añadirán a su lista de invitados.",
+  "InviteToRoomManuallyInfoMembers": "Añada los miembros existentes de {{productName}} a la sala.",
+  "InviteViaLinkDescriptionRoomGuest": "Crear un enlace universal para la autoautorización en la sala como invitado.",
+  "InviteViaLinkDescriptionRoomMembers": "Cree un enlace universal para los miembros de {{productName}} para su autoautorización en la sala."
 }

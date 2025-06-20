@@ -120,6 +120,7 @@ const Section = (props: SectionProps) => {
 
     primaryOperationsAlert,
     needErrorChecking,
+    withTabs,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -291,7 +292,10 @@ const Section = (props: SectionProps) => {
               ) : null}
               {isSectionFilterAvailable &&
               currentDeviceType !== DeviceType.desktop ? (
-                <SubSectionFilter className="section-body_filter">
+                <SubSectionFilter
+                  withTabs={withTabs}
+                  className="section-body_filter"
+                >
                   {sectionFilterContent}
                 </SubSectionFilter>
               ) : null}

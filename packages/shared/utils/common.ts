@@ -1020,11 +1020,7 @@ export const getSystemTheme = () => {
   if (typeof window !== "undefined") {
     const isDesktopClient = window?.AscDesktopEditor !== undefined;
     const desktopClientTheme = window?.RendererProcessVariable?.theme;
-    const isDark =
-      desktopClientTheme?.id === "theme-dark" ||
-      desktopClientTheme?.id === "theme-contrast-dark" ||
-      (desktopClientTheme?.id === "theme-system" &&
-        desktopClientTheme?.system === "dark");
+    const isDark = desktopClientTheme?.type === "dark";
 
     return isDesktopClient
       ? isDark

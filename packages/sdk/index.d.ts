@@ -36,6 +36,11 @@ declare module "*.svg" {
   export default SVG;
 }
 
+declare module "*.png" {
+  const content: string;
+  export default content;
+}
+
 declare module "*.ico" {
   const content: string;
   export default content;

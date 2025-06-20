@@ -33,10 +33,4 @@
     display: block;
     height: 100%;
   }
-
-  &.infoPanelVisible {
-    :global(.table-container_cell) {
-      padding: 0;
-    }
-  }
 }

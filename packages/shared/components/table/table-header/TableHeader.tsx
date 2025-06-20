@@ -27,7 +27,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import throttle from "lodash/throttle";
-import type { DebouncedFunc } from "lodash";
 
 import { TableHeaderProps, TTableColumn } from "../Table.types";
 import styles from "./TableHeader.module.scss";
@@ -69,12 +68,10 @@ export const TableHeader = (props: TableHeaderProps) => {
     withoutWideColumn = false,
   } = props;
 
+  const isMountedRef = useRef(false);
   const prevHeaderDataRef = useRef<TPrevHeaderData>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const lastContainerWidthRef = useRef<Nullable<number>>(null);
-  const throttledResizeRef = useRef<Nullable<DebouncedFunc<() => void>>>(
-    throttle(onResize, 300),
-  );
   const columnIndexRef = useRef<Nullable<number>>(null);
 
   const [hideColumns, setHideColumns] = useState(false);
@@ -1153,26 +1150,20 @@ export const TableHeader = (props: TableHeaderProps) => {
     }
   }
 
-  // ComponentDidMount
   useEffect(() => {
-    const throttledResize = throttledResizeRef.current;
-
-    onResize();
-
-    if (throttledResize) {
-      window.addEventListener("resize", throttledResize);
+    if (!isMountedRef.current) {
+      onResize();
     }
 
+    const throttledResize = throttle(() => onResize(true), 300);
+
+    window.addEventListener("resize", throttledResize);
+
     return () => {
-      if (throttledResize) {
-        window.removeEventListener("resize", throttledResize);
-      }
+      window.removeEventListener("resize", throttledResize);
     };
+  });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // ComponentDidUpdate
   useEffect(() => {
     const prevHeaderData = prevHeaderDataRef.current;
     const updatePrevHeaderData = () => {
@@ -1237,6 +1228,10 @@ export const TableHeader = (props: TableHeaderProps) => {
       onResize();
     }
   });
+
+  useEffect(() => {
+    isMountedRef.current = true;
+  }, []);
 
   return (
     <>

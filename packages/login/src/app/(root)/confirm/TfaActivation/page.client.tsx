@@ -24,13 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -75,7 +72,6 @@ const TfaActivationForm = ({
 }: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
-  const theme = useTheme();
 
   const searchParams = useSearchParams();
 
@@ -120,8 +116,8 @@ const TfaActivationForm = ({
 
       sessionStorage.setItem(OPEN_BACKUP_CODES_DIALOG, "true");
       window.location.href = proxyBaseUrl.current;
-    } catch (error) {
-      const knownError = error as TError;
+    } catch (e) {
+      const knownError = e as TError;
       let errorMessage: string;
 
       if (typeof knownError === "object") {
@@ -213,7 +209,7 @@ const TfaActivationForm = ({
           <div className="app-code-input">
             <FieldContainer
               labelVisible={false}
-              hasError={error ? true : false}
+              hasError={!!error}
               errorMessage={error}
             >
               <TextInput
@@ -229,7 +225,7 @@ const TfaActivationForm = ({
                 maxLength={6}
                 onChange={onChangeInput}
                 value={code}
-                hasError={error ? true : false}
+                hasError={!!error}
                 onKeyDown={onKeyPress}
               />
             </FieldContainer>

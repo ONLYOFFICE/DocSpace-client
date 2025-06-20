@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=development PORT=5015 next dev",
     "start-prod": "cross-env NODE_ENV=production node server.js",
-    "lint": "next lint --max-warnings=0",
+    "lint": "npm run build:translations && next lint --max-warnings=0",
     "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx cp -r .next/standalone/* ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/packages/management/.next/static && shx cp -r .next/static/* ../../../publish/web/management/packages/management/.next/static && shx cp -f server.prod.js ../../../publish/web/management/server.js"

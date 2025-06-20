@@ -30,6 +30,7 @@ import { useServicesActions } from "../hooks/useServicesActions";
 import WalletInfo from "../../payments/Wallet/sub-components/WalletInfo";
 
 import styles from "../styles/StorageSummary.module.scss";
+import { usePaymentContext } from "../context/PaymentContext";
 
 type WalletContainerProps = {
   onTopUp: () => void;
@@ -52,18 +53,23 @@ const WalletContainer = (props: WalletContainerProps) => {
     isLoading,
   } = props;
   const { formatWalletCurrency } = useServicesActions();
+  const { isWaitingCalculation } = usePaymentContext();
 
   if (hasScheduledStorageChange) return null;
+
+  const isBalanceInsufficient =
+    isPaymentBlockedByBalance &&
+    !isLoading &&
+    !isCurrentStoragePlan &&
+    !isDowngradeStoragePlan &&
+    !isExceedingStorageLimit;
 
   return (
     <div className={styles.walletContainer}>
       <WalletInfo
         balance={formatWalletCurrency(null, 3)}
-        {...(isPaymentBlockedByBalance &&
-          !isLoading &&
-          !isCurrentStoragePlan &&
-          !isDowngradeStoragePlan &&
-          !isExceedingStorageLimit && { onTopUp })}
+        isBalanceInsufficient={isBalanceInsufficient}
+        {...(!isWaitingCalculation && { onTopUp })}
       />
     </div>
   );

@@ -46,7 +46,9 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
         onBackClick: onCloseTopUpModal,
         onCloseClick: onCloseTopUpModal,
       }}
-      reccomendedAmount={reccomendedAmount.toString()}
+      {...(reccomendedAmount > 0 && {
+        reccomendedAmount: reccomendedAmount.toString(),
+      })}
     />
   ) : null;
 };

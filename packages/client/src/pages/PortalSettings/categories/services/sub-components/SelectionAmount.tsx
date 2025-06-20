@@ -82,7 +82,10 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
   const { isRTL } = useInterfaceDirection();
 
   useEffect(() => {
-    if (!isPaymentBlockedByBalance) return;
+    if (!isPaymentBlockedByBalance) {
+      setReccomendedAmount(0);
+      return;
+    }
 
     const amountValue = newStorageSizeOnUpgrade
       ? partialUpgradeFee
@@ -109,7 +112,13 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       }, 1000);
     };
     if (!isCardLinkedToPortal) getCardLink();
-  }, [amount, isCardLinkedToPortal, isPaymentBlockedByBalance]);
+  }, [
+    amount,
+    isCardLinkedToPortal,
+    isPaymentBlockedByBalance,
+    totalPrice,
+    partialUpgradeFee,
+  ]);
 
   const amountTabs = () => {
     const amounts = [100, 200, 500, 1024];

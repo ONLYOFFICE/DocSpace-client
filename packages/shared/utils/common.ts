@@ -1041,13 +1041,13 @@ export const getSystemTheme = () => {
 
 export const getEditorTheme = (theme?: ThemeKeys) => {
   const systemTheme =
-    getSystemTheme() === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+    getSystemTheme() === ThemeKeys.DarkStr ? "theme-night" : "theme-white";
 
   switch (theme) {
     case ThemeKeys.BaseStr:
-      return "default-light";
+      return "theme-white";
     case ThemeKeys.DarkStr:
-      return "default-dark";
+      return "theme-night";
     case ThemeKeys.SystemStr:
       return systemTheme;
     default:

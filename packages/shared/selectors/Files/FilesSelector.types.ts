@@ -43,6 +43,7 @@ import {
   FolderType,
   RoomsType,
   FileType,
+  RoomSearchArea,
 } from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
 import { Nullable } from "../../types";
@@ -105,6 +106,7 @@ export type UseRoomsHelperProps = {
   >;
   subscribe: (id: number) => void;
   withInit?: boolean;
+  searchArea?: RoomSearchArea;
 };
 
 export type UseFilesHelpersProps = {

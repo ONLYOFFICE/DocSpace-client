@@ -29,7 +29,7 @@ import hexRgb from "hex-rgb";
 import { Text } from "@docspace/shared/components/text";
 import { getTextColor } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
-import { CustomLogoProps, ILogo } from "../RoomLogoCoverDialog.types";
+import { CustomLogoProps, ICover } from "../RoomLogoCoverDialog.types";
 
 interface StyledLogoProps {
   isBase: boolean;
@@ -114,8 +114,8 @@ export const CustomLogo = ({
         </div>
       ) : (
         <div
-          {...((icon as ILogo)?.cover && {
-            dangerouslySetInnerHTML: { __html: (icon as ILogo).cover },
+          {...((icon as ICover) && {
+            dangerouslySetInnerHTML: { __html: (icon as ICover).data },
           })}
           className="custom-logo-cover"
         />

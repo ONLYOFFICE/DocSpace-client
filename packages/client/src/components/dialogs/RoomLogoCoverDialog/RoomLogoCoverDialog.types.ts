@@ -79,7 +79,7 @@ export type CoverDialogProps = RoomLogoCoverProps & {
 
 export interface CustomLogoProps {
   color: string | null;
-  icon: string | ILogo | null;
+  icon: string | ILogo | ICover | null;
   withoutIcon: boolean;
   isBaseTheme: boolean;
   roomTitle: string;

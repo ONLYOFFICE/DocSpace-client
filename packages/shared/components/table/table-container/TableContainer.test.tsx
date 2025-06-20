@@ -25,33 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import classNames from "classnames";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-import { TableContainerProps } from "../Table.types";
-import styles from "./TableContainer.module.scss";
+import { TableContainer } from "./TableContainer";
 
-const TableContainer = (props: TableContainerProps) => {
-  const { className, forwardedRef, useReactWindow, children } = props;
+describe("<TableContainer />", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-  const classes = classNames(
-    styles.tableContainer,
-    className,
-    "table-container",
-    {
-      [styles.useReactWindow]: useReactWindow,
-    },
-  );
+  it("renders without errors", () => {
+    render(<TableContainer useReactWindow forwardedRef={{ current: null }} />);
+    expect(screen.getByTestId("table-container")).toBeInTheDocument();
+  });
 
-  return (
-    <div
-      id="table-container"
-      className={classes}
-      ref={forwardedRef}
-      data-testid="table-container"
-    >
-      {children}
-    </div>
-  );
-};
-
-export { TableContainer };
+  it("pass className", () => {
+    const className = "custom-class";
+    render(
+      <TableContainer
+        useReactWindow
+        forwardedRef={{ current: null }}
+        className={className}
+      />,
+    );
+    expect(screen.getByTestId("table-container")).toHaveClass(className);
+  });
+});

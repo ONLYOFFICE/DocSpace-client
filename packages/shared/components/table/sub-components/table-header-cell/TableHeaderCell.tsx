@@ -96,6 +96,7 @@ const TableHeaderCell = ({
       data-min-width={minWidth}
       data-default-size={defaultSize}
       ref={withTagRef ? tagRef : null}
+      data-testid="table-header-cell"
     >
       <div className={styles.tableHeaderItem}>
         <div className={styles.textWrapper} onClick={onClick}>
@@ -121,6 +122,7 @@ const TableHeaderCell = ({
               className={styles.sortIcon}
               size={12}
               color={globalColors.gray}
+              dataTestId="sort-icon"
             />
           ) : null}
         </div>
@@ -129,6 +131,7 @@ const TableHeaderCell = ({
             data-column={`${index}`}
             className={classNames(styles.resizeHandle, "not-selectable")}
             onMouseDown={onMouseDown}
+            data-testid="resize-handle"
           />
         ) : null}
       </div>

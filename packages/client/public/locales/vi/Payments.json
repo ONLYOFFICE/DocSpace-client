@@ -86,7 +86,6 @@
   "RenewSubscription": "Gia hạn gói dịch vụ {{planName}}",
   "RoomManagerDescription": "Quản trị và lưu trữ phòng, mời và quản lý người dùng. Một số quản trị viên có thể được chỉ định vào phòng.",
   "RoomsQuotaAlmostExhausted": "Gần như đã dùng hết hạn mức phòng.",
-  "SelectAndPayServices": "Chọn và thanh toán cho các dịch vụ bạn cần.",
   "ServiceConfigurationNotice": "Đoạn này được sử dụng để kết nối và cấu hình các dịch vụ. Xin lưu ý, chỉ người trả tiền mới có thể thực hiện thay đổi. Hãy liên hệ với họ để được cập nhật.",
   "StartingNextMonth": "Bắt đầu từ tháng sau",
   "StartupSuggestion": "Làm nhiều hơn với gói dịch vụ {{planName}}",

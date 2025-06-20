@@ -86,7 +86,6 @@
   "RenewSubscription": "Uusi tilaus {{planName}} ohjelmaan",
   "RoomManagerDescription": "Huoneen hallinto ja arkistointi, käyttäjien kutsuminen ja hallinta. Useita järjestelmänvalvojia voi olla määrättynä huoneeseen.",
   "RoomsQuotaAlmostExhausted": "Huoneiden määrän kiintiö on melkein täysi.",
-  "SelectAndPayServices": "Valitse ja maksa tarvitsemasi palvelut.",
   "ServiceConfigurationNotice": "Tämä osio on tarkoitettu palveluiden yhdistämiseen ja konfigurointiin. Huomioithan, että vain maksaja voi tehdä muutoksia. Ota heihin yhteyttä päivityksiä varten.",
   "StartingNextMonth": "Aloitetaan ensi kuukautena",
   "StartupSuggestion": "Tee enemmän {{planName}} ohjelmalla",

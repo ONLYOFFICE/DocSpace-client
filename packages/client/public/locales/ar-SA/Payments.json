@@ -86,7 +86,6 @@
   "RenewSubscription": "تجديد الاشتراك في خطة {{planName}}",
   "RoomManagerDescription": "إدارة الغرف والأرشفة ودعوة المستخدم وإدارتها. يمكن تعيين عدة مدراء للغرفة.",
   "RoomsQuotaAlmostExhausted": "تم استنفاد حصة الغرف تقريبًا.",
-  "SelectAndPayServices": "اختر وادفع مقابل الخدمات التي تحتاجها.",
   "ServiceConfigurationNotice": "يُستخدم هذا القسم للاتصال والتهيئة للخدمات. يرجى ملاحظة، فقط الدفع يمكنه إجراء تغييرات. تواصل معهم للحصول على أي تحديثات.",
   "StartingNextMonth": "بدءًا من الشهر المقبل",
   "StartupSuggestion": "احصل على المزيد مع خطة {{planName}}",

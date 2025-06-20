@@ -86,7 +86,6 @@
   "RenewSubscription": "Verleng abonnement op {{planName}} plan",
   "RoomManagerDescription": "Ruimtebeheer en archivering, uitnodiging en beheer van gebruikers. Er kunnen meerdere beheerders aan de kamer worden toegewezen.",
   "RoomsQuotaAlmostExhausted": "Het aantal kamers is bijna opgebruikt.",
-  "SelectAndPayServices": "Selecteer en betaal voor de diensten die u nodig heeft.",
   "ServiceConfigurationNotice": "Deze sectie wordt gebruikt om de services te verbinden en te configureren. Let op, alleen de betaler kan wijzigingen aanbrengen. Neem contact met hen op voor eventuele updates.",
   "StartingNextMonth": "Vanaf volgende maand",
   "StartupSuggestion": "Doe meer met {{planName}} plan",

@@ -86,7 +86,6 @@
   "RenewSubscription": "Rinovoni abonimin në planin {{planName}}",
   "RoomManagerDescription": "Administrimi dhe arkivimi i dhomës, ftesa dhe menaxhimi i përdoruesit. Mund të caktohen disa administratorë në dhomë.",
   "RoomsQuotaAlmostExhausted": "Kuota e dhomave është pothuajse e shteruar.",
-  "SelectAndPayServices": "Zgjidhni dhe paguani për shërbimet që ju nevojiten.",
   "ServiceConfigurationNotice": "Ky seksion përdoret për të lidhur dhe konfiguruar shërbimet. Ju lutemi vini re se vetëm paguesi mund të bëjë ndryshime. Kontaktoni ata për çdo përditësim.",
   "StartingNextMonth": "Duke filluar nga muaji i ardhshëm",
   "StartupSuggestion": "Bëni më shumë me planin {{planName}}",

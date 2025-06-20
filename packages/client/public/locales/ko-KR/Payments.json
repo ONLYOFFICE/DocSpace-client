@@ -86,7 +86,6 @@
   "RenewSubscription": "{{planName}} 요금제 구독 갱신",
   "RoomManagerDescription": "방 관리 및 아카이브, 사용자 초대 및 관리. 여러 관리자를 방에 할당할 수 있습니다.",
   "RoomsQuotaAlmostExhausted": "룸 할당량이 거의 소진되었습니다.",
-  "SelectAndPayServices": "필요한 서비스 선택 및 결제하세요.",
   "ServiceConfigurationNotice": "이 섹션은 서비스 연결 및 구성을 위해 사용됩니다. 참고로, 지불자만 변경할 수 있습니다. 업데이트 사항은 해당 담당자에게 문의하세요.",
   "StartingNextMonth": "다음 달부터",
   "StartupSuggestion": "{{planName}} 요금제로 더 많은 기능을 이용하세요",

@@ -86,7 +86,6 @@
   "RenewSubscription": "Obnovi naročnino na {{planName}} paket",
   "RoomManagerDescription": "Administracija in arhiviranje sobe, vabljenje in vodenje uporabnikov. Sobi je mogoče dodeliti več skrbnikov.",
   "RoomsQuotaAlmostExhausted": "Kvota sob je skoraj dosežena.",
-  "SelectAndPayServices": "Izberite in plačajte storitve, ki jih potrebujete.",
   "ServiceConfigurationNotice": "Ta razdelek se uporablja za povezavo in konfiguracijo storitev. Upoštevajte, samo plačnik lahko spreminja nastavitve. Za kakršne koli posodobitve se obrnite nanje.",
   "StartingNextMonth": "Prihodnji mesec",
   "StartupSuggestion": "Naredite več z paketom {{planName}}",

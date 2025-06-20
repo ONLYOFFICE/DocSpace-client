@@ -86,7 +86,6 @@
   "RenewSubscription": "Atjaunot {{planName}} plāna abonementu",
   "RoomManagerDescription": "Telpu administrēšana un arhivēšana, lietotāju uzaicināšana un pārvaldība. Telpai var piešķirt vairākus administratorus.",
   "RoomsQuotaAlmostExhausted": "Telpu kvota ir gandrīz izsmelta.",
-  "SelectAndPayServices": "Izvēlieties un apmaksājiet nepieciešamos pakalpojumus.",
   "ServiceConfigurationNotice": "Šis attāls ir paredzēts pakalpojumu savienošanai un konfigurēšanai. Lūdzu, ņemiet vērā, ka izmaiņas var veikt tikai maksātājs. Sazinieties ar viņiem, lai saņemtu jaunumus.",
   "StartingNextMonth": "Sākot nākamajā mēnesī",
   "StartupSuggestion": "Paveiciet vairāk ar {{planName}} plānu",

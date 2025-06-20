@@ -86,7 +86,6 @@
   "RenewSubscription": "Odnów subskrypcję planu {{planName}}",
   "RoomManagerDescription": "Administracja i archiwizowanie pokoi, zapraszanie i zarządzanie użytkownikami. Do pokoju można przypisać kilku administratorów.",
   "RoomsQuotaAlmostExhausted": "Limit pokoi jest prawie wyczerpany.",
-  "SelectAndPayServices": "Wybierz i opłać potrzebne usługi.",
   "ServiceConfigurationNotice": "Ten fragment służy do łączenia i konfigurowania usług. Należy pamiętać, że tylko płatnik może dokonywać zmian. Skontaktuj się z nim w celu uzyskania wszelkich aktualizacji.",
   "StartingNextMonth": "Zaczynając od przyszłego miesiąca",
   "StartupSuggestion": "Osiągnij więcej z planem {{planName}}",

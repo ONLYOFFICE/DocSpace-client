@@ -277,6 +277,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             type={TabsTypes.Secondary}
             allowNoSelection
             withoutStickyIntend
+            isCentered
           />
         </div>
       ) : null}

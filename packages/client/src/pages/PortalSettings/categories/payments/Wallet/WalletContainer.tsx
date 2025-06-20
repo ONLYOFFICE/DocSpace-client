@@ -206,7 +206,7 @@ const Wallet = (props: WalletProps) => {
         </div>
 
         <Button
-          size={ButtonSize.normal}
+          size={ButtonSize.small}
           primary
           label={t("TopUpBalance")}
           onClick={onOpen}

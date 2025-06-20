@@ -54,7 +54,11 @@
   display: flex;
   gap: 12px;
   align-items: center;
-  margin-top: 20px;
+}
+
+.transactionsLimit {
+  margin: 20px 0 10px 0;
+  max-width: 660px;
 }
 
 .tableContainerCaptionHeader {

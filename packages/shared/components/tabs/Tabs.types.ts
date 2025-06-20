@@ -64,4 +64,5 @@ export type TabsProps = {
   onSelect?: (element: TTabItem) => void;
   withoutStickyIntend?: boolean;
   style?: React.CSSProperties;
+  isCentered?: boolean;
 };

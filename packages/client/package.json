@@ -5,11 +5,11 @@
   "homepage": "",
   "scripts": {
     "before-build": "node ../../common/scripts/before-build.js",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --env lint=false",
     "build:translations": "node scripts/buildTranslations.js",
     "clean": "shx rm -rf dist",
     "deploy": "shx --silent mkdir -p ../../../publish/web/client && shx cp -r dist/* ../../../publish/web/client",
-    "start": "webpack-cli serve",
+    "start": "webpack-cli serve --env lint=false",
     "start-prod": "serve dist -s -p 5001",
     "analyze": "webpack --profile --json  --env mode=analyze  && webpack-bundle-analyzer bundle/output/path/stats.json",
     "test:build": "cross-env PORT=5110 E2E_TEST=true pnpm run build:translations && pnpm run build",

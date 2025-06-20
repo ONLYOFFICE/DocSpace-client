@@ -25,11 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TBreadCrumb } from "../components/selector/Selector.types";
-import {
-  TGetColorTheme,
-  TSettings,
-  TVersionBuild,
-} from "../api/settings/types";
 import { RoomsType, ShareAccessRights } from "../enums";
 import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
@@ -192,12 +187,6 @@ export interface StaticImageData {
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
-    __ASC_INITIAL_EDITOR_STATE__?: {
-      user: unknown;
-      portalSettings: TSettings;
-      appearanceTheme: TGetColorTheme;
-      versionInfo: TVersionBuild;
-    };
     Asc: unknown;
     zESettings: unknown;
     zE: {

@@ -12,9 +12,11 @@
   "DeleteUser": "Fshini përdoruesin",
   "DeleteUserMessage": "{{userCaption}} <1>{{user}}</1> do të fshihet. Ky veprim nuk mund të zhbëhet.",
   "DeletingUsers": "Përdoruesit duke u fshirë",
+  "PersonalDataDeletionInfo": "Të dhënat personale, të gjithë skedarët dhe dosjet personale në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}}* të përdoruesve të zgjedhur do të fshihen përgjithmonë. Skedarët dhe dosjet e përdoruesve të zgjedhur të mbajtur në seksione të zakonshme* si dhomat do të mbeten në {{productName}}.",
   "PleaseNote": "Ju lutem shënoni:",
   "ReassignDataToAnotherUser": "Ricaktoni të dhënat tek një përdorues tjetër",
   "SuccessfullyDeleteGuestInfoMessage": "Mysafiri është fshirë me sukses",
   "SuccessfullyDeleteUserInfoMessage": "Përdoruesi është fshirë me sukses",
-  "ToBeAbleToReassignData": "Për të qenë në gjendje të ricaktoni të dhëna, fshini një përdorues në të njëjtën kohë."
+  "ToBeAbleToReassignData": "Për të qenë në gjendje të ricaktoni të dhëna, fshini një përdorues në të njëjtën kohë.",
+  "UserFilesRemovalScope": "Të dhënat personale, të gjithë skedarët dhe dosjet në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}} të këtij përdoruesi do të fshihen përgjithmonë."
 }

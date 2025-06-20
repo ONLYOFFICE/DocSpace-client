@@ -92,6 +92,11 @@
         "dependsOn": [
           "build"
         ]
+      },
+      "test:build": {
+        "dependsOn": [
+          "build:translations"
+        ]
       }
     }
   }

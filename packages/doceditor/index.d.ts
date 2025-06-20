@@ -43,15 +43,15 @@ declare module "resize-image" {
 
   interface ResizeImage extends ImageTypes {
     resize2Canvas: (
-      img: HTMLImageElement,
-      width: number,
-      heigh: number,
-    ) => HTMLCanvasElement;
-    resize: (
-      img: HTMLImageElement,
+      img: HTMLImageElement | ImageBitmap,
       width: number,
       height: number,
-      type: ImageFormat,
+    ) => HTMLCanvasElement;
+    resize: (
+      img: HTMLImageElement | HTMLCanvasElement,
+      width: number,
+      height: number,
+      type?: ImageFormat,
     ) => string;
   }
 

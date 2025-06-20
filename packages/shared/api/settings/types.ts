@@ -130,6 +130,7 @@ export type TSettings = {
   logoText: string;
   displayAbout: boolean;
   externalResources: TExternalResources;
+  licenseAgreementsUrl?: string;
 };
 
 export type TCustomSchema = {

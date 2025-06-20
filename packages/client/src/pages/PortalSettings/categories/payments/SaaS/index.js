@@ -33,6 +33,7 @@ import { useTranslation } from "react-i18next";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 import PaymentsLoader from "@docspace/shared/skeletons/payments";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
 import PaymentContainer from "./PaymentContainer";
 
@@ -54,12 +55,16 @@ const SaaSPage = ({
   isDesktopClientInit,
   setIsDesktopClientInit,
   setIsUpdatingBasicSettings,
+  isShowStorageTariffDeactivated,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
   const shouldShowLoader =
     !isInitPaymentPage || !ready || isUpdatingTariff || isUpdatingBasicSettings;
 
   const [showLoader, setShowLoader] = useState(false);
+  const [openWarningDialog, setOpenWarningDialog] = useState(
+    isShowStorageTariffDeactivated,
+  );
 
   useEffect(() => {
     moment.locale(language);
@@ -108,12 +113,24 @@ const SaaSPage = ({
     };
   }, []);
 
+  const onCloseWarningDialog = () => {
+    setOpenWarningDialog(false);
+  };
+
   return shouldShowLoader ? (
     showLoader ? (
       <PaymentsLoader />
     ) : null
   ) : (
-    <PaymentContainer t={t} />
+    <>
+      <PaymentContainer t={t} />
+      {openWarningDialog ? (
+        <StorageTariffDeactiveted
+          visible={openWarningDialog}
+          onClose={onCloseWarningDialog}
+        />
+      ) : null}
+    </>
   );
 };
 
@@ -133,7 +150,8 @@ export default inject(
     } = authStore;
     const { user } = userStore;
     const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
-    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
+    const { isLoaded: isLoadedTariffStatus, isShowStorageTariffDeactivated } =
+      currentTariffStatusStore;
     const {
       isInitPaymentPage,
       init,
@@ -166,6 +184,7 @@ export default inject(
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
       setIsUpdatingBasicSettings,
+      isShowStorageTariffDeactivated,
     };
   },
 )(observer(SaaSPage));

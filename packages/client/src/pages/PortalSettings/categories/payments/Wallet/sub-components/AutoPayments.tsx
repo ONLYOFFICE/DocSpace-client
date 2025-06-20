@@ -35,10 +35,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TextInput, InputType } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TAutoTopUpSettings } from "@docspace/shared/api/portal/types";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
+
 import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 
 import styles from "../styles/AutoPayments.module.scss";
-import { formatCurrencyValue } from "../utils";
 
 type AutoPaymentsProps = {
   onAdditionalSave?: () => void;

@@ -183,7 +183,14 @@ const RoomsRowDataComponent = (props) => {
       )}
       {showStorageInfo ? (
         roomQuotaColumnIsEnable ? (
-          <TableCell className="table-cell_Storage/Quota">
+          <TableCell
+            className="table-cell_Storage/Quota"
+            style={
+              !roomQuotaColumnIsEnable
+                ? { background: "none" }
+                : dragStyles.style
+            }
+          >
             <SpaceQuota
               item={item}
               type="room"

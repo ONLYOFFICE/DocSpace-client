@@ -317,6 +317,7 @@
   "Hour": "ώρα",
   "Image": "Εικόνα",
   "Images": "Εικόνες",
+  "Important": "Σημαντικό",
   "IncorrectDomain": "Εσφαλμένος τομέας",
   "IncorrectEmail": "Άκυρα email",
   "IncorrectFirstName": "Λανθασμένο όνομα",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Η συνδρομή έληξε",
   "SubscriptionIsExpiring": "Η συνδρομή σας λήγει στις {{date}}",
   "SuccessfullyCompletedOperation": "Η λειτουργία ολοκληρώθηκε με επιτυχία.",
+  "SuggestFeature": "Πρότεινε μια λειτουργία",
   "Support": "Υποστήριξη",
   "SwitchToThumbnails": "Εναλλαγή σε προβολή μικρογραφιών",
   "SwitchViewToCompact": "Εναλλαγή σε συμπαγή προβολή",
@@ -720,6 +722,5 @@
   "Yes": "Ναι",
   "Yesterday": "Χθες",
   "You": "Εσείς",
-  "YourTurn": "Η σειρά σας",
-  "Important": "Σημαντικό"
+  "YourTurn": "Η σειρά σας"
 }

@@ -24,38 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const truncateNumberToFraction = (
-  value: number,
-  digits: number = 2,
-): string => {
-  const [intPart, fracPart = ""] = value.toString().split(".");
-  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
-  return `${intPart}.${truncated}`;
-};
+import { truncateNumberToFraction } from "@docspace/shared/utils/common";
 
 export const formattedBalanceTokens = (
   language: string,
   amount: number,
   currency: string,
-) => {
-  const truncatedStr = truncateNumberToFraction(amount);
-  const truncated = Number(truncatedStr);
-
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: 2,
-  });
-
-  return formatter.formatToParts(truncated);
-};
-
-export const formatCurrencyValue = (
-  language: string,
-  amount: number,
-  currency: string,
-  minimumFractionDigits: number = 0,
-  maximumFractionDigits: number = 0,
+  maximumFractionDigits: number = 3,
 ) => {
   const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
   const truncated = Number(truncatedStr);
@@ -63,10 +38,11 @@ export const formatCurrencyValue = (
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits,
+    minimumFractionDigits: maximumFractionDigits,
+    maximumFractionDigits,
   });
 
-  return formatter.format(truncated);
+  return formatter.formatToParts(truncated);
 };
 
 export const accountingLedgersFormat = (
@@ -75,14 +51,14 @@ export const accountingLedgersFormat = (
   isCredit: boolean,
   currency: string,
 ) => {
-  const maximumFractionDigits = 7;
+  const maximumFractionDigits = 2;
   const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
   const truncated = Number(truncatedStr);
 
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits: 2,
+    minimumFractionDigits: maximumFractionDigits,
     maximumFractionDigits,
   });
 

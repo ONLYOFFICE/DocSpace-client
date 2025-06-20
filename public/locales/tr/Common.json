@@ -317,6 +317,7 @@
   "Hour": "saat",
   "Image": "Görsel",
   "Images": "Görüntüler",
+  "Important": "Önemli",
   "IncorrectDomain": "Yanlış domain",
   "IncorrectEmail": "Yanlış e-posta",
   "IncorrectFirstName": "Yanlış ad",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Abonelik süresi doldu",
   "SubscriptionIsExpiring": "Aboneliğiniz {{date}} tarihinde sona eriyor",
   "SuccessfullyCompletedOperation": "İşlem başarıyla tamamlandı.",
+  "SuggestFeature": "Bir özellik önerin",
   "Support": "Destek",
   "SwitchToThumbnails": "Küçük resimler görünümüne geç",
   "SwitchViewToCompact": "Kompakt görünüme geçin",
@@ -720,6 +722,5 @@
   "Yes": "Evet",
   "Yesterday": "Dün",
   "You": "Siz",
-  "YourTurn": "Sıra sizde",
-  "Important": "Önemli"
+  "YourTurn": "Sıra sizde"
 }

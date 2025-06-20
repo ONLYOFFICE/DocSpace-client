@@ -28,36 +28,20 @@
 /* eslint-disable no-console */
 import { makeAutoObservable } from "mobx";
 
-import { getServicesQuotas } from "@docspace/shared/api/portal";
-
 import { toastr } from "@docspace/shared/components/toast";
 
-import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
-import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
-import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
-import { TTranslation } from "@docspace/shared/types";
-import { TOTAL_SIZE } from "@docspace/shared/constants";
 
-import {
-  TPaymentFeature,
-  TNumericPaymentFeature,
-  TPaymentQuota,
-} from "@docspace/shared/api/portal/types";
+import { TTranslation } from "@docspace/shared/types";
+
 import PaymentStore from "./PaymentStore";
 
 class ServicesStore {
-  userStore: UserStore | null = null;
-
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
-  currentQuotaStore: CurrentQuotasStore | null = null;
+  // servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
 
-  paymentQuotasStore: PaymentQuotasStore | null = null;
-
-  servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
-
-  servicesQuotas: TPaymentQuota | null = null;
+  // servicesQuotas: TPaymentQuota | null = null;
 
   paymentStore: PaymentStore | null = null;
 
@@ -65,42 +49,46 @@ class ServicesStore {
 
   isVisibleWalletSettings = false;
 
+  partialUpgradeFee: number = 0;
+
+  reccomendedAmount: number = 0;
+
+  featureCountData: number = 0;
+
   constructor(
-    userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
-    currentQuotaStore: CurrentQuotasStore,
-    paymentQuotasStore: PaymentQuotasStore,
     paymentStore: PaymentStore,
   ) {
-    this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
-    this.currentQuotaStore = currentQuotaStore;
-    this.paymentQuotasStore = paymentQuotasStore;
     this.paymentStore = paymentStore;
 
     makeAutoObservable(this);
   }
 
-  get storageSizeIncrement() {
-    return (
-      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
-        ?.value || 0
-    );
-  }
+  // get storageSizeIncrement() { // temp in payment store because of storage tariff deeactivation
+  //   return (
+  //     (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
+  //       ?.value || 0
+  //   );
+  // }
 
-  get storageQuotaIncrementPrice() {
-    return (
-      this.servicesQuotas?.price ?? {
-        value: 0,
-        currencySymbol: "",
-        isoCurrencySymbol: "USD",
-      }
-    );
-  }
+  // get storagePriceIncrement() {
+  //   return this.servicesQuotas?.price.value ?? 0;
+  // }
 
-  get storagePriceIncrement() {
-    return this.servicesQuotas?.price.value ?? 0;
-  }
+  // get storageQuotaIncrementPrice() {
+  //   return (
+  //     this.servicesQuotas?.price ?? {
+  //       value: 0,
+  //       currencySymbol: "",
+  //       isoCurrencySymbol: "USD",
+  //     }
+  //   );
+  // }
+
+  setPartialUpgradeFee = (partialUpgradeFee: number) => {
+    this.partialUpgradeFee = partialUpgradeFee;
+  };
 
   setVisibleWalletSetting = (isVisibleWalletSettings) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
@@ -110,30 +98,26 @@ class ServicesStore {
     this.isInitServicesPage = isInitServicesPage;
   };
 
-  handleServicesQuotas = async () => {
-    const res = await getServicesQuotas();
+  // handleServicesQuotas = async () => { // temp in payment store because of storage tariff deeactivation
+  //   const res = await getServicesQuotas();
 
-    if (!res) return;
+  //   if (!res) return;
 
-    const { hasStorageSubscription, hasScheduledStorageChange } =
-      this.currentTariffStatusStore;
+  //   res[0].features.forEach((feature) => {
+  //     this.servicesQuotasFeatures.set(feature.id, feature);
+  //   });
 
-    res[0].features.forEach((feature) => {
-      if (feature.id === TOTAL_SIZE) {
-        const enhancedFeature = feature as TPaymentFeature & {
-          enabled: boolean;
-          cancellation: boolean;
-        };
-        enhancedFeature.enabled = hasStorageSubscription;
-        enhancedFeature.cancellation = hasScheduledStorageChange;
-      }
+  //   this.servicesQuotas = res[0];
 
-      this.servicesQuotasFeatures.set(feature.id, feature);
-    });
+  //   return res;
+  // };
 
-    this.servicesQuotas = res[0];
+  setReccomendedAmount = (amount: number) => {
+    this.reccomendedAmount = amount;
+  };
 
-    return res;
+  setFeatureCountData = (featureCountData: number) => {
+    this.featureCountData = featureCountData;
   };
 
   servicesInit = async (t: TTranslation) => {
@@ -145,14 +129,16 @@ class ServicesStore {
       setPaymentAccount,
       isAlreadyPaid,
       initWalletPayerAndBalance,
+      handleServicesQuotas,
     } = this.paymentStore;
 
-    const requests = [
-      this.handleServicesQuotas(),
-      initWalletPayerAndBalance(isRefresh),
-    ];
+    const { fetchPortalTariff } = this.currentTariffStatusStore;
 
-    if (!this.currentTariffStatusStore) return;
+    const requests = [
+      handleServicesQuotas(),
+      initWalletPayerAndBalance(isRefresh),
+      fetchPortalTariff(),
+    ];
 
     try {
       const [quotas] = await Promise.all(requests);
@@ -169,11 +155,26 @@ class ServicesStore {
 
       this.setIsInitServicesPage(true);
       if (isRefresh) {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+
+        const amountParam = params.get("amount");
+        const recommendedAmountParam = params.get("recommendedAmount");
+
+        if (amountParam && recommendedAmountParam) {
+          const amount = Number(amountParam);
+          const recommendedAmount = Number(recommendedAmountParam);
+
+          this.setReccomendedAmount(Math.ceil(recommendedAmount));
+          this.setFeatureCountData(amount);
+        }
+
         window.history.replaceState(
           {},
           document.title,
           window.location.pathname,
         );
+
         this.setVisibleWalletSetting(true);
       }
     } catch (e) {

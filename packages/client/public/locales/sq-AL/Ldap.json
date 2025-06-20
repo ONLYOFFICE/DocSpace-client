@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Atributi i emrit të grupit",
   "LdapGroupNameAttributeTooltip": "Ju lutem specifikoni atributin e objektit që korrespondon me emrin e grupit.",
   "LdapGroupUserAttributeTooltip": "Futni atributin e objektit të përdoruesit që përdoret për të përcaktuar nëse ky përdorues është anëtar i grupeve.\"",
+  "LdapIntro": "Importoni përdorues dhe grupe nëpërmjet LDAP dhe aktivizoni vërtetimin e përdoruesit përmes hyrjeve/fjalëkalimeve të ruajtura në serverin LDAP. Përdoruesit do të importohen menjëherë pasi të ruhen cilësimet. Përdoruesit e shtuar më vonë do të importohen gjatë vërtetimit të tyre të parë. Nëse dëshironi të siguroni akses vetëm nëpërmjet LDAP, çaktivizoni opsionin për të ftuar anëtarë të rinj të {{productName}} nëpërmjet Kontakteve: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atributi i hyrjes",
   "LdapLoginAttributeTooltip": "Futni atributin e objektit që korrespondon me hyrjen e përdoruesit.",
   "LdapLoginTooltip": "Ju lutemi specifikoni përdoruesin e hyrjes që ka të drejta aksesi për leximin e serverit LDAP.",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "Përdorni filtrin e kërkimit LDAP për të zgjedhur përdoruesit që duhet të importohen.",
   "LdapUserQuotaTooltip": "Për të vendosur një kuotë ruajtjeje për përdoruesin, shtoni një atribut në drejtorinë LDAP (për shembull, UsersQuotaLimit) dhe vendosni një vlerë të plotë për këtë atribut. Do të shfaqë vlerën e kuotës në bajt. Këtu, specifikoni vetëm emrin e atributit. Ky atribut do të zbatohet vetëm gjatë konfigurimit të parë dhe më vonë mund të ndryshohet manualisht në seksionin {{contactsName}}.",
   "LdapUsersType": "Lloji i përdoruesve",
-  "LdapUserTypeTooltip": "Të gjithë përdoruesit do të shtohen në {{productName}} me llojin e zgjedhur.",
-  "LdapIntro": "Importoni përdorues dhe grupe nëpërmjet LDAP dhe aktivizoni vërtetimin e përdoruesit përmes hyrjeve/fjalëkalimeve të ruajtura në serverin LDAP. Përdoruesit do të importohen menjëherë pasi të ruhen cilësimet. Përdoruesit e shtuar më vonë do të importohen gjatë vërtetimit të tyre të parë. Nëse dëshironi të siguroni akses vetëm nëpërmjet LDAP, çaktivizoni opsionin për të ftuar anëtarë të rinj të {{productName}} nëpërmjet Kontakteve: <1>{{link}}</1>"
+  "LdapUserTypeTooltip": "Të gjithë përdoruesit do të shtohen në {{productName}} me llojin e zgjedhur."
 }

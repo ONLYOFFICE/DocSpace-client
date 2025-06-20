@@ -29,10 +29,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { Link } from "@docspace/shared/components/link";
 
-import { formatCurrencyValue } from "../utils";
 import styles from "../styles/AutoPayments.module.scss";
 
 type AutoPaymentInfoProps = {

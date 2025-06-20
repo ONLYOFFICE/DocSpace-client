@@ -35,9 +35,9 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
-import { formatCurrencyValue } from "./utils";
 
 import styles from "./styles/Wallet.module.scss";
 

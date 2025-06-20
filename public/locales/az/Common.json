@@ -317,6 +317,7 @@
   "Hour": "saat",
   "Image": "Şəkil",
   "Images": "Şəkillər",
+  "Important": "Mühüm",
   "IncorrectDomain": "Yanlış domen",
   "IncorrectEmail": "Etibarsız elektron poçt",
   "IncorrectFirstName": "Yanlış ad",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Abunəlik müddəti bitib",
   "SubscriptionIsExpiring": "Abunəliyiniz {{date}} tarixində bitir",
   "SuccessfullyCompletedOperation": "Əməliyyat uğurla başa çatıb.",
+  "SuggestFeature": "Xüsusiyyət təklif edin",
   "Support": "Dəstək",
   "SwitchToThumbnails": "Eskiz rejiminə keçin",
   "SwitchViewToCompact": "Yığcam görüntüyə keç",
@@ -720,6 +722,5 @@
   "Yes": "Bəli",
   "Yesterday": "Dünən",
   "You": "Siz",
-  "YourTurn": "Sizin növbəniz",
-  "Important": "Mühüm"
+  "YourTurn": "Sizin növbəniz"
 }

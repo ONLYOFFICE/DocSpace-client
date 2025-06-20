@@ -317,6 +317,7 @@
   "Hour": "ຊົ່ວໂມງ",
   "Image": "ຮູບ",
   "Images": "ຮູບພາບ",
+  "Important": "ສຳຄັນ",
   "IncorrectDomain": "Domain ບໍ່ຖືກຕ້ອງ",
   "IncorrectEmail": "ອີເມວບໍ່ຖືກຕ້ອງ",
   "IncorrectFirstName": "ຊື່ບໍ່ຖືກຕ້ອງ",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "ການສັນຈອງສູບສະຄຣິບລາຍໝົດອາຍຸ",
   "SubscriptionIsExpiring": "ການສະໝັກສິດນຳໃຊ້ຂອງທ່ານໝົດອາຍຸໃນວັນທີ {{date}}",
   "SuccessfullyCompletedOperation": "ການດໍາເນີນງານໄດ້ສໍາເລັດສົບຜົນສໍາເລັດ.",
+  "SuggestFeature": "ສະບັດແນະນໍາຄຸນນະພາບ",
   "Support": "ສະ ໜັບ ສະ ໜູນ",
   "SwitchToThumbnails": "ປ່ຽນໄປເບິ່ງຮູບຕົວຢ່າງ",
   "SwitchViewToCompact": "ປ່ຽນເປັນມຸມເບິ່ງທີ່ຫນາແຫນ້ນ",
@@ -720,6 +722,5 @@
   "Yes": "ຍາ",
   "Yesterday": "ມື້ວານນີ້",
   "You": "ເຈົ້າ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "Important": "ສຳຄັນ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
 }

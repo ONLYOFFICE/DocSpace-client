@@ -317,6 +317,7 @@
   "Hour": "Stunde",
   "Image": "Bild",
   "Images": "Bilder",
+  "Important": "Wichtig",
   "IncorrectDomain": "Falsche Domäne",
   "IncorrectEmail": "Ungültige E-Mail-Adresse",
   "IncorrectFirstName": "Ungültiger Vorname",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Das Abonnement ist abgelaufen",
   "SubscriptionIsExpiring": "Ihr Abonnement läuft am {{date}} ab",
   "SuccessfullyCompletedOperation": "Operation erfolgreich abgeschlossen wurde.",
+  "SuggestFeature": "Eine Funktion vorschlagen",
   "Support": "Support",
   "SwitchToThumbnails": "Thumbnails aktivieren",
   "SwitchViewToCompact": "Auf Kompaktansicht umschalten",
@@ -720,6 +722,5 @@
   "Yes": "Ja",
   "Yesterday": "Gestern",
   "You": "Sie",
-  "YourTurn": "Jetzt sind Sie dran",
-  "Important": "Wichtig"
+  "YourTurn": "Jetzt sind Sie dran"
 }

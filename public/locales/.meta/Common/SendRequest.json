@@ -3,7 +3,7 @@
   "content": "Send request",
   "content_en_sha1_hash": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
   "created_at": "2025-05-19T21:30:48.550Z",
-  "updated_at": "2025-06-03T20:59:42.069Z",
+  "updated_at": "2025-06-18T07:34:15.036Z",
   "comment": {
     "text": "This translation key is used for the label of a button that sends a request. It appears on various screens, such as in payment settings and registration modals, and should be translated to indicate sending a request or a similar action in different languages.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/hooks/useServicesActions.tsx",
       "line_number": 109,
-      "context": "const isStorageCancellation = () => {\n return hasScheduledStorageChange && nextStoragePlanSize === 0;\n };\n \n const buttonTitle = (quantity: number, type: string = \"storage\"): string => {\n if (isExceedingPlanLimit(quantity)) return t(\"SendRequest\");\n \n let hasSubscription;\n \n switch (type) {\n case \"storage\":",
+      "context": "const isStorageCancellation = () => {\n return hasScheduledStorageChange && nextStoragePlanSize === 0;\n };\n \n const buttonTitle = (quantity: number, type: string = \"storage\"): string => {\n if (isExceedingPlanLimit(quantity)) return t(\"Common:SendRequest\");\n \n let hasSubscription;\n \n switch (type) {\n case \"storage\":",
       "module": "/packages/client"
     },
     {

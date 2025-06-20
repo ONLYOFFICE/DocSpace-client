@@ -317,6 +317,7 @@
   "Hour": "година",
   "Image": "Зображення",
   "Images": "Зображення",
+  "Important": "Важливо",
   "IncorrectDomain": "Неправильний домен",
   "IncorrectEmail": "Неправильна електронна пошта",
   "IncorrectFirstName": "Невірне ім'я",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Термін дії підписки закінчився",
   "SubscriptionIsExpiring": "Термін дії вашої підписки закінчується {{date}}",
   "SuccessfullyCompletedOperation": "Операцію успішно виконано.",
+  "SuggestFeature": "Запропонуйте нову функцію",
   "Support": "Підтримка",
   "SwitchToThumbnails": "Переключитися на подання ескізів",
   "SwitchViewToCompact": "Переключитися на компактний вигляд",
@@ -720,6 +722,5 @@
   "Yes": "Так",
   "Yesterday": "Вчора",
   "You": "Ви",
-  "YourTurn": "Ваша черга",
-  "Important": "Важливо"
+  "YourTurn": "Ваша черга"
 }

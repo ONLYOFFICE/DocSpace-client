@@ -317,6 +317,7 @@
   "Hour": "stunda",
   "Image": "Attēls",
   "Images": "Attēli",
+  "Important": "Svarīgs",
   "IncorrectDomain": "Nepareizs domēns",
   "IncorrectEmail": "Nepareiza e-pasta adrese",
   "IncorrectFirstName": "Nepareizs vārds",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Abonementa derīguma termiņš ir beidzies",
   "SubscriptionIsExpiring": "Jūsu abonementa derīguma termiņš beidzas šajā datumā: {{date}}",
   "SuccessfullyCompletedOperation": "Darbība veiksmīgi pabeigta.",
+  "SuggestFeature": "Ieteiciet funkciju",
   "Support": "Support",
   "SwitchToThumbnails": "Pārslēgties uz sīktēlu skatu",
   "SwitchViewToCompact": "Pārslēgties uz kompakto skatu",
@@ -720,6 +722,5 @@
   "Yes": "Jā",
   "Yesterday": "어제",
   "You": "Jūs",
-  "YourTurn": "Jūsu kārta",
-  "Important": "Svarīgs"
+  "YourTurn": "Jūsu kārta"
 }

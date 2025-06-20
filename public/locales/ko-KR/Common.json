@@ -317,6 +317,7 @@
   "Hour": "시간",
   "Image": "이미지",
   "Images": "이미지",
+  "Important": "중요",
   "IncorrectDomain": "유효하지 않은 도메인입니다",
   "IncorrectEmail": "유효하지 않은 이메일입니다",
   "IncorrectFirstName": "유효하지 않은 이름입니다",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "구독이 만료되었습니다",
   "SubscriptionIsExpiring": "구독이 {{date}}에 만료됩니다",
   "SuccessfullyCompletedOperation": "작업이 성공적으로 완료되었습니다.",
+  "SuggestFeature": "기능 제안하기",
   "Support": "지원하다",
   "SwitchToThumbnails": "썸네일 보기로 전환",
   "SwitchViewToCompact": "축소 보기로 전환",
@@ -720,6 +722,5 @@
   "Yes": "네",
   "Yesterday": "어제",
   "You": "나",
-  "YourTurn": "고객님의 차례입니다",
-  "Important": "중요"
+  "YourTurn": "고객님의 차례입니다"
 }

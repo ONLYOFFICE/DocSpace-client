@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { DeviceType } from "@docspace/shared/enums";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
@@ -75,6 +76,7 @@ type WalletProps = {
   canUpdateTariff: VoidFunction;
   setVisibleWalletSetting?: (value: boolean) => void;
   isNotPaidPeriod?: boolean;
+  isMobile?: boolean;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -99,6 +101,7 @@ const Wallet = (props: WalletProps) => {
     canUpdateTariff,
     setVisibleWalletSetting,
     isNotPaidPeriod,
+    isMobile,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -111,6 +114,7 @@ const Wallet = (props: WalletProps) => {
     language,
     walletBalance,
     walletCodeCurrency || "",
+    3,
   );
 
   const onClose = () => {
@@ -174,7 +178,7 @@ const Wallet = (props: WalletProps) => {
 
       <div className={styles.balanceWrapper}>
         <div className={styles.headerContainer}>
-          <Text isBold fontSize="16px">
+          <Text isBold fontSize="18px" className={styles.balanceTitle}>
             {t("BalanceText")}
           </Text>
 
@@ -195,11 +199,15 @@ const Wallet = (props: WalletProps) => {
         </div>
 
         <Button
-          size={ButtonSize.small}
+          size={isMobile ? ButtonSize.normal : ButtonSize.small}
           primary
           label={t("TopUpBalance")}
           onClick={onOpen}
           isDisabled={!canUpdateTariff || isNotPaidPeriod}
+          scale={isMobile}
+          className={classNames(styles.topUpButton, {
+            [styles.isMobileButton]: isMobile,
+          })}
         />
       </div>
 
@@ -227,6 +235,7 @@ export default inject(
     authStore,
     currentQuotaStore,
     currentTariffStatusStore,
+    settingsStore,
   }: TStore) => {
     const { language } = authStore;
     const {
@@ -244,7 +253,9 @@ export default inject(
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { currentDeviceType } = settingsStore;
 
+    const isMobile = currentDeviceType === DeviceType.mobile;
     return {
       walletBalance,
       walletCodeCurrency,
@@ -260,6 +271,7 @@ export default inject(
       setVisibleWalletSetting,
       isCardLinkedToPortal,
       isNotPaidPeriod,
+      isMobile,
     };
   },
 )(observer(Wallet));

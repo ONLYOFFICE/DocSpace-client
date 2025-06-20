@@ -32,13 +32,13 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 
 import WalletInfo from "./sub-components/WalletInfo";
 import PaymentMethod from "./sub-components/PaymentMethod";
 import Amount from "./sub-components/Amount";
 import TopUpButtons from "./sub-components/TopUpButtons";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
-import { formatCurrencyValue } from "./utils";
 import { AmountProvider } from "./context";
 import styles from "./styles/TopUpModal.module.scss";
 
@@ -61,6 +61,7 @@ type TopUpModalProps = {
   };
   walletBalance?: number;
   wasFirstTopUp?: boolean;
+  reccomendedAmount?: string;
 };
 
 const TopUpModal = (props: TopUpModalProps) => {
@@ -78,6 +79,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     headerProps,
     walletBalance = 0,
     wasFirstTopUp,
+    reccomendedAmount,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -86,14 +88,14 @@ const TopUpModal = (props: TopUpModalProps) => {
     language!,
     walletBalance,
     currency,
-    2,
-    2,
+    3,
+    3,
   );
 
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <AmountProvider>
+    <AmountProvider initialAmount={reccomendedAmount}>
       <ModalDialog
         visible={visible}
         onClose={onClose}
@@ -111,6 +113,7 @@ const TopUpModal = (props: TopUpModalProps) => {
               accountLink={accountLink!}
               isDisabled={isLoading}
             />
+
             <Amount
               language={language!}
               currency={currency}

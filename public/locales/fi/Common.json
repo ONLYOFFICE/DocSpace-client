@@ -317,6 +317,7 @@
   "Hour": "tunti",
   "Image": "Kuva",
   "Images": "Kuvat",
+  "Important": "Tärkeä",
   "IncorrectDomain": "Virheellinen verkkotunnus",
   "IncorrectEmail": "Virheellinen sähköposti",
   "IncorrectFirstName": "Virheellinen etunimi",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Tilaus vanhentunut.",
   "SubscriptionIsExpiring": "Tilauksesi vanhenee {{date}}",
   "SuccessfullyCompletedOperation": "Toiminto on valmis.",
+  "SuggestFeature": "Ehdottaa ominaisuus",
   "Support": "Tuki",
   "SwitchToThumbnails": "Vaihda pikkukuvanäkymään",
   "SwitchViewToCompact": "Suppeat tiedot",
@@ -720,6 +722,5 @@
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
   "You": "Sinä",
-  "YourTurn": "Sinun vuorosi",
-  "Important": "Tärkeä"
+  "YourTurn": "Sinun vuorosi"
 }

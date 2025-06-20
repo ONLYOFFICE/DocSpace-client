@@ -317,6 +317,7 @@
   "Hour": "oră",
   "Image": "Imagine",
   "Images": "Imagini",
+  "Important": "Important",
   "IncorrectDomain": "Domeniul nu este valabil",
   "IncorrectEmail": "Adresa de e-mail nu este valabilă",
   "IncorrectFirstName": "Prenumele incorect",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Abonament expirat",
   "SubscriptionIsExpiring": "Abonamentul dvs expiră pe {{date}}",
   "SuccessfullyCompletedOperation": "Operațiune terminată cu succes",
+  "SuggestFeature": "Sugerează o funcție",
   "Support": "Asistența",
   "SwitchToThumbnails": "Trecere la vizualizarea în miniaturi",
   "SwitchViewToCompact": "Trecere la vizualizarea compactă",
@@ -720,6 +722,5 @@
   "Yes": "Da",
   "Yesterday": "Ieri",
   "You": "Dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "Important": "Important"
+  "YourTurn": "Acum e rândul dvs."
 }

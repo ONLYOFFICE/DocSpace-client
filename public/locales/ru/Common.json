@@ -317,6 +317,7 @@
   "Hour": "час",
   "Image": "Изображение",
   "Images": "Изображения",
+  "Important": "Важно",
   "IncorrectDomain": "Некорректный домен",
   "IncorrectEmail": "Некорректный email",
   "IncorrectFirstName": "Некорректное имя",
@@ -501,7 +502,7 @@
   "ProviderSsoSetting": "Единый вход",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Эта комната открыта в режиме <1>{{roomMode}}</1>. Чтобы работать с документами, пожалуйста, авторизуйтесь.",
+  "PublicAuthorizeToast": "Эта комната открыта в режиме <1>{{roomMode}}</1>. Если у вас есть учетная запись в этом {{productName}}, пожалуйста, авторизуйтесь.",
   "PublicLink": "Общая ссылка",
   "PublicRoom": "Публичная комната",
   "PublicRoomInfo": "Делитесь документами для просмотра, редактирования, комментирования или рецензирования без регистрации. Вы также можете встроить эту комнату в любой веб-интерфейс.",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Срок подписки истек",
   "SubscriptionIsExpiring": "Подписка истекает {{date}}",
   "SuccessfullyCompletedOperation": "Операция успешно выполнена.",
+  "SuggestFeature": "Предложить функцию",
   "Support": "Поддержка",
   "SwitchToThumbnails": "Переключиться на режим миниатюр",
   "SwitchViewToCompact": "Переключиться на компактный вид",
@@ -720,6 +722,5 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вы",
-  "YourTurn": "Ваша очередь",
-  "Important": "Важно"
+  "YourTurn": "Ваша очередь"
 }

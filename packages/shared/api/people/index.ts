@@ -614,6 +614,7 @@ export async function getMembersList(
   searchArea: AccountsSearchArea,
   roomId: string | number,
   filter = Filter.getDefault(),
+  signal?: AbortSignal,
 ) {
   let params = "";
 
@@ -647,6 +648,7 @@ export async function getMembersList(
   const res = (await request({
     method: "get",
     url,
+    signal,
   })) as { items: (TUser | TGroup)[]; total: number };
 
   res.items = res.items.map((member) => {

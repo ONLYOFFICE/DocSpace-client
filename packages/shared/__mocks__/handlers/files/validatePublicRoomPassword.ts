@@ -64,7 +64,7 @@ export const validatePublicRoomPasswordHandler = (
   if (port) {
     baseUrl = `http://localhost:${port}`;
   } else {
-    baseUrl = window.location.origin;
+    baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
   }
 
   return http.post(

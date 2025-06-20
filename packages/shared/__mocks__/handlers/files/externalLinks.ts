@@ -29,7 +29,7 @@ import { v4 as uuidv4 } from "uuid";
 import moment from "moment/moment";
 
 import { TFileLink } from "../../../api/files/types";
-import { API_PREFIX } from "__mocks__/e2e";
+import { API_PREFIX } from "../../e2e/utils";
 
 export const PATH_LINK = "files/file/:fileId/link";
 export const PATH_LINKS = "files/file/:fileId/links";
@@ -87,7 +87,7 @@ export const externalLinksHandler = (port?: string) => {
   if (port) {
     baseUrl = `http://localhost:${port}`;
   } else {
-    baseUrl = window.location.origin;
+    baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINKS}`, () => {
@@ -102,7 +102,7 @@ export const primaryLinkHandler = (port?: string) => {
   if (port) {
     baseUrl = `http://localhost:${port}`;
   } else {
-    baseUrl = window.location.origin;
+    baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
   }
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINK}`, () => {
     const response = generateFileLink({

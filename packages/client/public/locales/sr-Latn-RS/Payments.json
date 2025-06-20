@@ -86,7 +86,6 @@
   "RenewSubscription": "Obnovite pretplatu na plan {{planName}}",
   "RoomManagerDescription": "Administracija i arhiviranje prostorija, pozivanje korisnika i upravljanje. Nekoliko administratora može biti dodeljeno sobi.",
   "RoomsQuotaAlmostExhausted": "Kvota prostorija je skoro iscrpljena.",
-  "SelectAndPayServices": "Izaberite i platite usluge koje su vam potrebne.",
   "ServiceConfigurationNotice": "Ovaj odeljak služi za povezivanje i konfiguraciju usluga. Imajte na umu da samo platiša može da pravi izmene. Obratite se njima za bilo kakve promene.",
   "StartingNextMonth": "Počinje od sledećeg meseca",
   "StartupSuggestion": "Uradite više sa {{planName}} planom",

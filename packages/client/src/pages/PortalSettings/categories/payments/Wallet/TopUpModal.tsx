@@ -88,14 +88,14 @@ const TopUpModal = (props: TopUpModalProps) => {
     language!,
     walletBalance,
     currency,
-    2,
-    2,
+    3,
+    3,
   );
 
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <AmountProvider>
+    <AmountProvider initialAmount={reccomendedAmount}>
       <ModalDialog
         visible={visible}
         onClose={onClose}
@@ -119,7 +119,6 @@ const TopUpModal = (props: TopUpModalProps) => {
               currency={currency}
               walletCustomerEmail={walletCustomerEmail}
               isDisabled={isLoading}
-              reccomendedAmount={reccomendedAmount}
             />
 
             {wasFirstTopUp && walletCustomerEmail ? (

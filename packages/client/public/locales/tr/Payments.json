@@ -86,7 +86,6 @@
   "RenewSubscription": "{{planName}} planı aboneliğini yenile",
   "RoomManagerDescription": "Oda yönetimi ve arşivleme, kullanıcı daveti ve yönetimi. Odaya birkaç yönetici atanabilir.",
   "RoomsQuotaAlmostExhausted": "Oda kotası neredeyse doldu.",
-  "SelectAndPayServices": "İhtiyacınız olan hizmetleri seçin ve ödeme yapın.",
   "ServiceConfigurationNotice": "Bu bölüm, hizmetleri bağlamak ve yapılandırmak için kullanılır. Lütfen yalnızca ödeyen değişiklik yapabilir. Herhangi bir güncelleme için onlarla iletişime geçin.",
   "StartingNextMonth": "Gelecek ay itibarıyla",
   "StartupSuggestion": "{{planName}} planıyla daha fazlasını yapın",

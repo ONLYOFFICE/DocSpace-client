@@ -61,6 +61,7 @@ type StorageDialogProps = {
   setVisibleWalletSetting?: (value: boolean) => void;
   partialUpgradeFee?: number;
   featureCountData?: number;
+  setPartialUpgradeFee?: (value: number) => void;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -77,6 +78,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   setVisibleWalletSetting,
   partialUpgradeFee,
   featureCountData,
+  setPartialUpgradeFee,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(
@@ -126,6 +128,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
+      setPartialUpgradeFee(0);
     };
   }, []);
 
@@ -134,6 +137,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   }, []);
 
   const resetIntervalSuccess = async (isCancellation: boolean) => {
+    if (isUpgradeStoragePlan) onCloseDialog();
+
     if (isCancellation || !isUpgradeStoragePlan)
       setAmount(currentStoragePlanSize);
 
@@ -186,7 +191,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
           if (isUpdatedTariff(walletQuotas, isCancellation)) {
             resetIntervalSuccess(isCancellation);
-            if (isUpgradeStoragePlan) onCloseDialog();
           }
         } catch (e) {
           setIsLoading(false);
@@ -363,6 +367,7 @@ export default inject(
       setVisibleWalletSetting,
       partialUpgradeFee,
       featureCountData,
+      setPartialUpgradeFee,
     } = servicesStore;
 
     return {
@@ -375,6 +380,7 @@ export default inject(
       isVisibleWalletSettings,
       partialUpgradeFee,
       featureCountData,
+      setPartialUpgradeFee,
     };
   },
 )(observer(StoragePlanUpgrade));

@@ -86,7 +86,6 @@
   "RenewSubscription": "Abonnement des {{planName}}-Plans erneuern",
   "RoomManagerDescription": "Raumverwaltung und Archivierung, Benutzereinladung und -verwaltung. Dem Raum können mehrere Administratoren zugewiesen werden.",
   "RoomsQuotaAlmostExhausted": "Die Raumquote ist fast erschöpft.",
-  "SelectAndPayServices": "Wählen und bezahlen Sie die Dienste, die Sie benötigen.",
   "ServiceConfigurationNotice": "Dieser Abschnitt dient zum Verbinden und Konfigurieren der Dienste. Bitte beachten Sie, dass nur der Zahler Änderungen vornehmen kann. Wenden Sie sich für Aktualisierungen an den Zahler.",
   "StartingNextMonth": "Ab nächsten Monat",
   "StartupSuggestion": "Mehr Möglichkeiten mit {{planName}}Plan",

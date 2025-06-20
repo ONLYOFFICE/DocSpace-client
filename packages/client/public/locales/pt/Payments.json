@@ -86,7 +86,6 @@
   "RenewSubscription": "Renovar subscrição para o plano {{planName}}",
   "RoomManagerDescription": "Administração e arquivação de salas, convite e gestão de utilizadores. Vários administradores podem ser designados para a sala.",
   "RoomsQuotaAlmostExhausted": "A quota de quartos está quase esgotada.",
-  "SelectAndPayServices": "Selecione e pague pelos serviços que você precisa.",
   "ServiceConfigurationNotice": "Esta seção é usada para conectar e configurar os serviços. Observe que apenas o pagador pode fazer alterações. Entre em contato com ele para quaisquer atualizações.",
   "StartingNextMonth": "Começando no mês que vem",
   "StartupSuggestion": "Faça mais com o plano {{planName}}",

@@ -26,8 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX } from "../../e2e/utils";
 import { http, HttpResponse } from "msw";
+import { API_PREFIX } from "../../e2e/utils";
 
 export const PATH_RESTORE_PROGRESS = "portal/getrestoreprogress";
 

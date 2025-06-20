@@ -35,7 +35,7 @@ export enum TypeSettings {
   PortalDeactivate = "portalDeactivate",
   NoStandalone = "noStandalone",
   Authenticated = "authenticated",
-  NoAuth = "noAuth"
+  NoAuth = "noAuth",
 }
 
 export const settingsWizzard = {
@@ -473,8 +473,11 @@ export const settingsPortalDeactivate = {
   response: { ...settingsNoAuth.response, tenantStatus: 1 },
 };
 
-export const settingsResolver = (type: TypeSettings = TypeSettings.NoAuth): Response => {
-  if (type === TypeSettings.Wizard) return new Response(JSON.stringify(settingsWizzard));
+export const settingsResolver = (
+  type: TypeSettings = TypeSettings.NoAuth,
+): Response => {
+  if (type === TypeSettings.Wizard)
+    return new Response(JSON.stringify(settingsWizzard));
   if (type === TypeSettings.WizardWithAmi)
     return new Response(JSON.stringify(settingsWizzardWithAmi));
   if (type === TypeSettings.PortalDeactivate)
@@ -487,7 +490,10 @@ export const settingsResolver = (type: TypeSettings = TypeSettings.NoAuth): Resp
   return new Response(JSON.stringify(settingsNoAuth));
 };
 
-export const settingsHandler = (port: string, type: TypeSettings = TypeSettings.NoAuth) => {
+export const settingsHandler = (
+  port: string,
+  type: TypeSettings = TypeSettings.NoAuth,
+) => {
   return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
     return settingsResolver(type);
   });

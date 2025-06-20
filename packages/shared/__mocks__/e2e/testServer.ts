@@ -46,12 +46,12 @@ export const createNextTestServer = async (
   const handle = app.getRequestHandler();
 
   const server: Server = await new Promise((resolve) => {
-    const server = createServer((req, res) => {
-      const parsedUrl = parse(req.url || '/', true);
+    const newServer = createServer((req, res) => {
+      const parsedUrl = parse(req.url || "/", true);
       handle(req, res, parsedUrl);
     });
 
-    server.listen(0, () => {
+    newServer.listen(0, () => {
       resolve(server);
     });
   });

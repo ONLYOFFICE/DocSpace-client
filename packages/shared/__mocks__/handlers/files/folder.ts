@@ -26,15 +26,15 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { http } from "msw";
 import { API_PREFIX } from "../../e2e/utils";
 import type { TFile, TFolder, TGetFolder } from "../../../api/files/types";
-import { http } from "msw";
 
 export const PATH_FOLDER = "files/:id([0-9]+)*";
 
 export enum TypeFolder {
   IsEmpty = "isEmpty",
-  IsFiltered = "isFiltered"
+  IsFiltered = "isFiltered",
 }
 
 const files: TFile[] = [

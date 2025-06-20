@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX } from "../../e2e/utils";
 import { http } from "msw";
+import { API_PREFIX } from "../../e2e/utils";
 
 export const PATH = "clients/:clientId/public/info";
 

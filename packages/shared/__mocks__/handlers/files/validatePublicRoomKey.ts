@@ -26,8 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { API_PREFIX } from "../../e2e/utils";
 import { http } from "msw";
+import { API_PREFIX } from "../../e2e/utils";
 
 export const PATH_VALIDATE_PUBLIC_ROOM_KEY = "files/share/:key";
 

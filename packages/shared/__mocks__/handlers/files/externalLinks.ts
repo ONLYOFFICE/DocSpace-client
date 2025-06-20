@@ -87,7 +87,10 @@ export const externalLinksHandler = (port?: string) => {
   if (port) {
     baseUrl = `http://localhost:${port}`;
   } else {
-    baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
+    baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost";
   }
 
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINKS}`, () => {
@@ -102,7 +105,10 @@ export const primaryLinkHandler = (port?: string) => {
   if (port) {
     baseUrl = `http://localhost:${port}`;
   } else {
-    baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
+    baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost";
   }
   return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINK}`, () => {
     const response = generateFileLink({

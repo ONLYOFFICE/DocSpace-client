@@ -26,9 +26,9 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { http, HttpResponse } from "msw";
 import { API_PREFIX } from "../../e2e/utils";
 import { ValidationStatus } from "../../../enums";
-import { http, HttpResponse } from "msw";
 
 export const PATH_VALIDATE_PUBLIC_ROOM_PASSWORD = "files/share/*";
 
@@ -64,7 +64,10 @@ export const validatePublicRoomPasswordHandler = (
   if (port) {
     baseUrl = `http://localhost:${port}`;
   } else {
-    baseUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
+    baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost";
   }
 
   return http.post(

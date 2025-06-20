@@ -53,6 +53,9 @@
   display: flex;
   gap: 12px;
   align-items: center;
+  &.isMobileButton {
+    flex-direction: column;
+  }
 }
 
 .transactionsLimit {

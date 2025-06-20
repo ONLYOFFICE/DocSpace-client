@@ -36,7 +36,6 @@
   }
 
   .balanceWrapper {
-    max-width: 152px;
     margin-top: 20px;
     margin-bottom: 12px;
     .balanceTitle {
@@ -44,6 +43,15 @@
     }
   }
 
+  .topUpButton {
+    max-width: 152px;
+    width: 152px;
+
+    &.isMobileButton {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
   .autoPaymentInformation {
     margin-bottom: 24px;
     color: var(--payment-text-color);

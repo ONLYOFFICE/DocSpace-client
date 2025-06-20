@@ -28,6 +28,7 @@ import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
+import classNames from "classnames";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -314,14 +315,19 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             })}
           </Text>
 
-          <div className={styles.downloadWrapper}>
+          <div
+            className={classNames(styles.downloadWrapper, {
+              [styles.isMobileButton]: isMobile,
+            })}
+          >
             <Button
               label={t("Settings:DownloadReportBtnText")}
-              size={ButtonSize.small}
+              size={isMobile ? ButtonSize.normal : ButtonSize.small}
               minWidth="auto"
               onClick={getReport}
               isLoading={isFormationHistory}
               isDisabled={isNotPaidPeriod}
+              scale={isMobile}
             />
             <Text as="span" className={styles.downloadReportDescription}>
               {t("Settings:ReportSaveLocation", {

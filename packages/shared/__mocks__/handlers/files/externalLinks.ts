@@ -28,11 +28,11 @@ import { http, HttpResponse } from "msw";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment/moment";
 
-import { TFileLink } from "../../../../api/files/types";
-import { BASE_URL } from "../../utils";
+import { TFileLink } from "../../../api/files/types";
+import { API_PREFIX } from "__mocks__/e2e";
 
-const linkUrl = `${BASE_URL}/files/file/:fileId/link`;
-const linksUrl = `${BASE_URL}/files/file/:fileId/links`;
+export const PATH_LINK = "files/file/:fileId/link";
+export const PATH_LINKS = "files/file/:fileId/links";
 
 const generateFileLink = ({
   id = uuidv4(),
@@ -82,15 +82,29 @@ function generateFileLinks(count = 3): TFileLink[] {
   );
 }
 
-export const createGetExternalLinksHandler = () =>
-  http.get(linksUrl, () => {
+export const externalLinksHandler = (port?: string) => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `http://localhost:${port}`;
+  } else {
+    baseUrl = window.location.origin;
+  }
+
+  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINKS}`, () => {
     const response = { items: generateFileLinks(3), total: 3 };
 
     return HttpResponse.json({ response });
   });
+};
 
-export const createGetPrimaryLinkHandler = () =>
-  http.get(linkUrl, () => {
+export const primaryLinkHandler = (port?: string) => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `http://localhost:${port}`;
+  } else {
+    baseUrl = window.location.origin;
+  }
+  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_LINK}`, () => {
     const response = generateFileLink({
       title: "Primary link",
       primary: true,
@@ -98,27 +112,39 @@ export const createGetPrimaryLinkHandler = () =>
 
     return HttpResponse.json({ response });
   });
+};
 
-export const createEditExternalLinkHandler = () =>
-  http.put(linksUrl, async ({ request }) => {
-    const body = await request.json();
+export const editExternalLinkHandler = (port?: string) => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `http://localhost:${port}`;
+  } else {
+    baseUrl = window.location.origin;
+  }
 
-    const { linkId, access, primary, internal, expirationDate } = body as {
-      linkId: string;
-      access: number;
-      primary: boolean;
-      internal: boolean;
-      expirationDate?: moment.Moment;
-    };
+  return http.put(
+    `${baseUrl}/${API_PREFIX}/${PATH_LINKS}`,
+    async ({ request }) => {
+      const body = await request.json();
 
-    const response = generateFileLink({
-      id: linkId,
-      title: `Edited Link ${linkId}`,
-      access,
-      primary,
-      internal,
-      expirationDate,
-    });
+      const { linkId, access, primary, internal, expirationDate } = body as {
+        linkId: string;
+        access: number;
+        primary: boolean;
+        internal: boolean;
+        expirationDate?: moment.Moment;
+      };
 
-    return HttpResponse.json({ response });
-  });
+      const response = generateFileLink({
+        id: linkId,
+        title: `Edited Link ${linkId}`,
+        access,
+        primary,
+        internal,
+        expirationDate,
+      });
+
+      return HttpResponse.json({ response });
+    },
+  );
+};

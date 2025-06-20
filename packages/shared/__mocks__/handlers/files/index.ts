@@ -30,6 +30,11 @@ import { folderHandler } from "./folder";
 import { validatePublicRoomKeyHandler } from "./validatePublicRoomKey";
 import { validatePublicRoomPasswordHandler } from "./validatePublicRoomPassword";
 import { roomListHandler, roomListResolver } from "./roomList";
+import {
+  externalLinksHandler,
+  primaryLinkHandler,
+  editExternalLinkHandler,
+} from "./externalLinks";
 
 export { TypeFolder } from "./folder";
 export { TypeRoomList } from "./roomList";
@@ -42,6 +47,9 @@ export {
   folderHandler,
   validatePublicRoomPasswordHandler,
   roomListResolver,
+  externalLinksHandler,
+  primaryLinkHandler,
+  editExternalLinkHandler,
 };
 
 export const filesHandlers = (port: string) => [

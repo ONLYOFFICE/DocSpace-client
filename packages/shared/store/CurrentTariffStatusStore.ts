@@ -28,7 +28,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment-timezone";
 
-import { TariffState } from "../enums";
+import { QuotaState, TariffState } from "../enums";
 import api from "../api";
 import { getUserByEmail } from "../api/people";
 import { TPortalTariff, TQuotas } from "../api/portal/types";
@@ -37,6 +37,7 @@ import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
+import { STORAGE_TARIFF_DEACTIVATED } from "../constants";
 
 class CurrentTariffStatusStore {
   userStore: UserStore;
@@ -50,6 +51,8 @@ class CurrentTariffStatusStore {
   language: string = "en";
 
   walletQuotas: TQuotas[] = [];
+
+  previousWalletQuota: TQuotas[] = [];
 
   constructor(userStore: UserStore) {
     makeAutoObservable(this);
@@ -101,9 +104,25 @@ class CurrentTariffStatusStore {
     return this.walletQuotas?.length > 0;
   }
 
+  get hasPreviousStorageSubscription() {
+    return this.previousWalletQuota?.length > 0;
+  }
+
   get currentStoragePlanSize() {
     if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
     return this.walletQuotas[0].quantity || 0;
+  }
+
+  get previousStoragePlanSize() {
+    if (!this.hasPreviousStorageSubscription || !this.previousWalletQuota[0])
+      return 0;
+    return this.previousWalletQuota[0].quantity || 0;
+  }
+
+  get isShowStorageTariffDeactivated() {
+    if (!this.previousStoragePlanSize) return false;
+
+    return localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== "true";
   }
 
   get hasScheduledStorageChange() {
@@ -225,10 +244,22 @@ class CurrentTariffStatusStore {
       runInAction(() => {
         this.portalTariffStatus = res;
 
-        if (user?.isAdmin)
-          this.walletQuotas = res.quotas.filter(
-            (quota) => quota.wallet === true,
-          ) as TQuotas[];
+        if (user?.isAdmin) {
+          const quota = res.quotas.find((q) => q.wallet === true);
+
+          if (quota) {
+            if (quota.state === QuotaState.Overdue) {
+              this.previousWalletQuota = [quota];
+              this.walletQuotas = [];
+            } else {
+              this.walletQuotas = [quota];
+              this.previousWalletQuota = [];
+            }
+          } else {
+            this.walletQuotas = [];
+            this.previousWalletQuota = [];
+          }
+        }
       });
 
       this.setIsLoaded(true);

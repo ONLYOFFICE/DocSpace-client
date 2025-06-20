@@ -156,26 +156,23 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
   );
 };
 
-export default inject(
-  ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
-    const { walletBalance } = paymentStore;
-    const {
-      nextStoragePlanSize,
-      hasStorageSubscription,
-      currentStoragePlanSize,
-      hasScheduledStorageChange,
-    } = currentTariffStatusStore;
+export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
+  const { walletBalance, storageSizeIncrement, storagePriceIncrement } =
+    paymentStore;
+  const {
+    nextStoragePlanSize,
+    hasStorageSubscription,
+    currentStoragePlanSize,
+    hasScheduledStorageChange,
+  } = currentTariffStatusStore;
 
-    const { storageSizeIncrement, storagePriceIncrement } = servicesStore;
-
-    return {
-      walletBalance,
-      nextStoragePlanSize,
-      hasStorageSubscription,
-      currentStoragePlanSize,
-      hasScheduledStorageChange,
-      storageSizeIncrement,
-      storagePriceIncrement,
-    };
-  },
-)(observer(PlanInfo));
+  return {
+    walletBalance,
+    nextStoragePlanSize,
+    hasStorageSubscription,
+    currentStoragePlanSize,
+    hasScheduledStorageChange,
+    storageSizeIncrement,
+    storagePriceIncrement,
+  };
+})(observer(PlanInfo));

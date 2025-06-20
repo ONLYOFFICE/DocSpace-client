@@ -24,44 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { truncateNumberToFraction } from "@docspace/shared/utils/common";
-
-export const formattedBalanceTokens = (
-  language: string,
-  amount: number,
-  currency: string,
-  maximumFractionDigits: number = 3,
-) => {
-  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
-  const truncated = Number(truncatedStr);
-
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: maximumFractionDigits,
-    maximumFractionDigits,
-  });
-
-  return formatter.formatToParts(truncated);
-};
-
-export const accountingLedgersFormat = (
-  language: string,
-  amount: number,
-  isCredit: boolean,
-  currency: string,
-) => {
-  const maximumFractionDigits = 2;
-  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
-  const truncated = Number(truncatedStr);
-
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: maximumFractionDigits,
-    maximumFractionDigits,
-  });
-
-  const value = formatter.format(truncated);
-  return `${isCredit ? "+" : "-"}${value}`;
-};
+.monthPayment {
+  color: var(--payment-dialog-text);
+}

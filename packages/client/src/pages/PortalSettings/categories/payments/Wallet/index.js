@@ -28,17 +28,24 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
+
 import TransactionHistoryLoader from "./sub-components/TransactionHistoryLoader";
 import WalletContainer from "./WalletContainer";
 
 let timerId = null;
 
 const Wallet = (props) => {
-  const { walletInit, isInitWalletPage } = props;
+  const { walletInit, isInitWalletPage, isShowStorageTariffDeactivated } =
+    props;
 
   const { t, ready } = useTranslation(["Payments", "Common"]);
 
   const [showLoader, setShowLoader] = useState(false);
+
+  const [openWarningDialog, setOpenWarningDialog] = useState(
+    isShowStorageTariffDeactivated,
+  );
   const shouldShowLoader = !isInitWalletPage || !ready;
 
   useEffect(() => {
@@ -55,20 +62,33 @@ const Wallet = (props) => {
     };
   }, []);
 
+  const onCloseWarningDialog = () => {
+    setOpenWarningDialog(false);
+  };
+
   return shouldShowLoader ? (
     showLoader ? (
       <TransactionHistoryLoader />
     ) : null
   ) : (
-    <WalletContainer t={t} />
+    <>
+      <WalletContainer t={t} />
+      {openWarningDialog ? (
+        <StorageTariffDeactiveted
+          visible={openWarningDialog}
+          onClose={onCloseWarningDialog}
+        />
+      ) : null}
+    </>
   );
 };
 
-export default inject(({ paymentStore }) => {
+export default inject(({ paymentStore, currentTariffStatusStore }) => {
   const { walletInit, isInitWalletPage } = paymentStore;
-
+  const { isShowStorageTariffDeactivated } = currentTariffStatusStore;
   return {
     walletInit,
     isInitWalletPage,
+    isShowStorageTariffDeactivated,
   };
 })(observer(Wallet));

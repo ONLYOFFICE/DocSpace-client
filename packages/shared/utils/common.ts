@@ -1407,3 +1407,39 @@ export const getSdkScriptUrl = (version: string) => {
     ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
     : "";
 };
+
+export const calculateTotalPrice = (
+  quantity: number,
+  unitPrice: number,
+): number => {
+  return Number((quantity * unitPrice).toFixed(2));
+};
+
+export const truncateNumberToFraction = (
+  value: number,
+  digits: number = 2,
+): string => {
+  const [intPart, fracPart = ""] = value.toString().split(".");
+  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
+  return `${intPart}.${truncated}`;
+};
+
+export const formatCurrencyValue = (
+  language: string,
+  amount: number,
+  currency: string,
+  minimumFractionDigits: number = 0,
+  maximumFractionDigits: number = 0,
+) => {
+  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
+  const truncated = Number(truncatedStr);
+
+  const formatter = new Intl.NumberFormat(language, {
+    style: "currency",
+    currency,
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
+
+  return formatter.format(truncated);
+};

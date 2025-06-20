@@ -40,12 +40,13 @@ import StorageSummary from "./sub-components/StorageSummary";
 import { useServicesActions } from "./hooks/useServicesActions";
 import { PaymentProvider } from "./context/PaymentContext";
 import ButtonContainer from "./sub-components/ButtonContainer";
-import { calculateTotalPrice } from "./hooks/resourceUtils";
+
 import StorageInformation from "./sub-components/StorageInformation";
 import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
 import TopUpContainer from "./sub-components/TopUpContainer";
 import SelectionAmount from "./sub-components/SelectionAmount";
+import { calculateTotalPrice } from "@docspace/shared/utils/common";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -62,6 +63,8 @@ type StorageDialogProps = {
   partialUpgradeFee?: number;
   featureCountData?: number;
   setPartialUpgradeFee?: (value: number) => void;
+  hasPreviousStorageSubscription?: boolean;
+  previousStoragePlanSize?: number;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -79,10 +82,16 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   partialUpgradeFee,
   featureCountData,
   setPartialUpgradeFee,
+  hasPreviousStorageSubscription,
+  previousStoragePlanSize,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(
-    isVisibleWalletSettings ? featureCountData : currentStoragePlanSize,
+    isVisibleWalletSettings
+      ? featureCountData
+      : hasPreviousStorageSubscription
+        ? previousStoragePlanSize
+        : currentStoragePlanSize,
   );
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisibleContainer] = useState(
@@ -355,14 +364,14 @@ export default inject(
   ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
     const {
       fetchPortalTariff,
-
       hasStorageSubscription,
       currentStoragePlanSize,
+      hasPreviousStorageSubscription,
+      previousStoragePlanSize,
     } = currentTariffStatusStore;
 
-    const { fetchBalance } = paymentStore;
+    const { fetchBalance, storagePriceIncrement } = paymentStore;
     const {
-      storagePriceIncrement,
       isVisibleWalletSettings,
       setVisibleWalletSetting,
       partialUpgradeFee,
@@ -381,6 +390,8 @@ export default inject(
       partialUpgradeFee,
       featureCountData,
       setPartialUpgradeFee,
+      hasPreviousStorageSubscription,
+      previousStoragePlanSize,
     };
   },
 )(observer(StoragePlanUpgrade));

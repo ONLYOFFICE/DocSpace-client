@@ -32,8 +32,8 @@ import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 
-import { formatCurrencyValue } from "../utils";
 import styles from "../styles/Amount.module.scss";
 import { useAmountValue } from "../context";
 

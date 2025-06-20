@@ -178,14 +178,14 @@ export default inject(
       nextStoragePlanSize,
     } = currentTariffStatusStore;
 
-    const { walletBalance, fetchCardLinked, isCardLinkedToPortal } =
-      paymentStore;
     const {
+      walletBalance,
+      fetchCardLinked,
+      isCardLinkedToPortal,
       storageSizeIncrement,
       storagePriceIncrement,
-      partialUpgradeFee,
-      setReccomendedAmount,
-    } = servicesStore;
+    } = paymentStore;
+    const { partialUpgradeFee, setReccomendedAmount } = servicesStore;
 
     return {
       storageSizeIncrement,

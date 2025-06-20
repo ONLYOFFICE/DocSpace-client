@@ -115,30 +115,53 @@
   }
 }
 
+.loaderRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 12px 0;
+
+  &.headerRow {
+    gap: 12px;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  &.dataRow {
+    max-width: 920px;
+    padding: 12px 0;
+    justify-content: space-between;
+  }
+}
+
+.bodyRow {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-right: 30px;
+  width: calc(100% - 30px);
+}
+
+.balanceRow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  margin-top: 20px;
+
+  .rectangleSkeleton:first-child {
+    margin-bottom: 4px;
+  }
+
+  .rectangleSkeleton:last-child {
+    margin-top: 8px;
+  }
+}
+
 .transactionHistoryLoader {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 920px;
-
-  .loaderRow {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 8px 0;
-
-    &.headerRow {
-      gap: 12px;
-      margin-bottom: 8px;
-      margin-top: 16px;
-    }
-
-    &.dataRow {
-      max-width: 920px;
-      padding: 12px 0;
-      justify-content: space-between;
-    }
-  }
 
   .flexibleLoader {
     max-width: 151px;
@@ -150,29 +173,6 @@
 
   .lastChild {
     padding-right: 30px;
-  }
-
-  .bodyRow {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    padding-right: 30px;
-    width: calc(100% - 30px);
-  }
-
-  .balanceRow {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 24px;
-    margin-top: 20px;
-
-    .rectangleSkeleton:first-child {
-      margin-bottom: 4px;
-    }
-
-    .rectangleSkeleton:last-child {
-      margin-top: 8px;
-    }
   }
 
   .paymentLoader,
@@ -192,7 +192,7 @@
   display: flex;
   margin-bottom: 16px;
   align-items: center;
-
+  margin-top: 12px;
   .mobileBodyLeft {
     display: flex;
     flex-direction: column;

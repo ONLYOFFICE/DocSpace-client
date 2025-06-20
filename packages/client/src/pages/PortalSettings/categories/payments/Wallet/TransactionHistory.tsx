@@ -116,7 +116,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
 
-    const timerId = setTimeout(() => setIsLoading(true), 200);
+    const timerId = setTimeout(() => setIsLoading(true), 500);
 
     const { isCredit, isDebit } = getTransactionType(option.key as string);
 
@@ -140,7 +140,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
 
-    const timerId = setTimeout(() => setIsLoading(true), 200);
+    const timerId = setTimeout(() => setIsLoading(true), 500);
 
     const { isCredit, isDebit } = getTransactionType(
       selectedType.key as string,
@@ -164,7 +164,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
 
-    const timerId = setTimeout(() => setIsLoading(true), 200);
+    const timerId = setTimeout(() => setIsLoading(true), 500);
 
     const { isCredit, isDebit } = getTransactionType(
       selectedType.key as string,

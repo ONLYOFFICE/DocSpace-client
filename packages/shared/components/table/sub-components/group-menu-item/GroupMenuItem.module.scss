@@ -28,6 +28,10 @@
 
 @use "@docspace/shared/styles/mixins";
 
+.groupMenuItem {
+  display: contents;
+}
+
 .button.overrideNativeStyles {
   border: none !important;
   padding: 0 12px;

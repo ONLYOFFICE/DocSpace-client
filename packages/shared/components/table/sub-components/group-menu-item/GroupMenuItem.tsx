@@ -72,7 +72,7 @@ const GroupMenuItem = ({
   };
 
   return disabled ? null : (
-    <>
+    <div data-testid="group-menu-item" className={styles.groupMenuItem}>
       <Button
         id={id}
         className={classNames(styles.button, styles.overrideNativeStyles, {
@@ -86,6 +86,7 @@ const GroupMenuItem = ({
         icon={<ReactSVG src={iconUrl} className="combo-button_selected-icon" />}
         ref={buttonRef as React.RefObject<HTMLButtonElement>}
         size={ButtonSize.extraSmall}
+        testId="group-menu-item-button"
       />
       {withDropDown ? (
         <DropDown
@@ -103,7 +104,7 @@ const GroupMenuItem = ({
           })}
         </DropDown>
       ) : null}
-    </>
+    </div>
   );
 };
 

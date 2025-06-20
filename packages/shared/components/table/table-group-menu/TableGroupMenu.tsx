@@ -81,6 +81,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
         } as React.CSSProperties
       }
       onClick={onClick}
+      data-testid="table-group-menu"
     >
       {headerLabel ? (
         <Text
@@ -144,6 +145,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
             onClick={onCloseClick}
             iconName={CrossIconSvgUrl}
             isFill
+            dataTestId="close-button"
           />
         </div>
       ) : null}
@@ -176,6 +178,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
               onClick={toggleInfoPanel}
               color={toggleIconColor}
               hoverColor={toggleIconColor}
+              dataTestId="info-panel-toggle-button"
             />
           </div>
         </div>

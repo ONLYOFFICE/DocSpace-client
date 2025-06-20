@@ -24,12 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-declare module "*.ico?url" {
+declare module "*.svg?url" {
   const content: string;
   export default content;
 }
 
-declare module "*.svg?url" {
+declare module "*.svg" {
+  import React from "react";
+
+  const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
+  export default SVG;
+}
+
+declare module "*.ico" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.ico?url" {
   const content: string;
   export default content;
 }

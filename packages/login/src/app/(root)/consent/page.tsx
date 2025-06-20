@@ -66,7 +66,7 @@ async function Page(props: {
 
   const [data, scopes] = await Promise.all([
     getOAuthClient(clientId),
-    getScopeList(new_token, user!.id),
+    getScopeList(new_token),
   ]);
 
   const client = data?.client as IClientProps;

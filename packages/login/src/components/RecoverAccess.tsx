@@ -42,7 +42,7 @@ const RecoverAccess = () => {
     recoverDialogTextBody,
     openRecoverDialog,
     closeRecoverDialog,
-  } = useRecoverDialog({});
+  } = useRecoverDialog();
 
   return (
     <>

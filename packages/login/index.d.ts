@@ -40,6 +40,12 @@ declare module "*.svg" {
   const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
   export default SVG;
 }
+
+declare module "*.ico" {
+  const content: string;
+  export default content;
+}
+
 declare module "resize-image" {
   type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";
 

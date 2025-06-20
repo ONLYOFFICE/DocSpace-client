@@ -93,7 +93,6 @@ export const Providers = ({
     user,
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
-    i18n,
     lang: locale,
   });
 

@@ -26,7 +26,7 @@
 
 import React, { useRef } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { TableHeader } from "./TableHeader";
+import { TableHeader } from ".";
 import { type TableHeaderProps, TTableColumn } from "../Table.types";
 import { SortByFieldName } from "../../../enums";
 

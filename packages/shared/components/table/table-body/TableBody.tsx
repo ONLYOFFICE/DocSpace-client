@@ -55,7 +55,7 @@ const TableBodyPure = (props: TableBodyProps) => {
   });
 
   return useReactWindow ? (
-    <div className={classes}>
+    <div className={classes} data-testid="table-body">
       <InfiniteLoaderComponent
         className="TableList"
         viewAs="table"
@@ -73,7 +73,9 @@ const TableBodyPure = (props: TableBodyProps) => {
       </InfiniteLoaderComponent>
     </div>
   ) : (
-    <div className={classes}>{children}</div>
+    <div data-testid="table-body" className={classes}>
+      {children}
+    </div>
   );
 };
 

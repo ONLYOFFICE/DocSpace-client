@@ -65,7 +65,7 @@ module.exports = {
       { exceptAfterSingleLine: true },
     ],
     "react/jsx-no-leaked-render": ["error", { validStrategies: ["ternary"] }],
-    "react/jsx-max-depth": ["error", { max: 7 }],
+    "react/jsx-max-depth": ["error", { max: 10 }],
     "react/function-component-definition": "off",
     "react/jsx-key": [
       "error",

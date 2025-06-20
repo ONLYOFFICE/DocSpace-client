@@ -27,10 +27,10 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import {
-  createGetExternalLinksHandler,
-  createGetPrimaryLinkHandler,
-  createEditExternalLinkHandler,
-} from "../../__mocks__/storybook/handlers/files/externalLinks";
+  externalLinksHandler,
+  primaryLinkHandler,
+  editExternalLinkHandler,
+} from "../../__mocks__/handlers";
 
 import type { ShareProps } from "./Share.types";
 import Share from ".";
@@ -168,9 +168,9 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: [
-        createGetExternalLinksHandler(),
-        createGetPrimaryLinkHandler(),
-        createEditExternalLinkHandler(),
+        externalLinksHandler(),
+        primaryLinkHandler(),
+        editExternalLinkHandler(),
       ],
     },
   },

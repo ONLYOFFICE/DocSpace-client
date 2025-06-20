@@ -26,6 +26,8 @@
 
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
+import { ReactSVG } from "react-svg";
+import CloseIcon from "PUBLIC_DIR/images/loading.button.react.svg?url";
 import { ColorTheme, ThemeId } from "../color-theme";
 import StyledLoadingButton from "../color-theme/sub-components/StyledLoadingButton";
 import StyledCircle from "../color-theme/sub-components/StyledCircle";
@@ -41,13 +43,15 @@ const StyledBody = styled(ColorTheme)<LoadingButtonProps>`
       }
       .loading-button {
         cursor: pointer;
-        color: ${props.theme.filesPanels.upload.loadingButton
-          .defaultBackground};
+        svg path {
+          fill: ${props.theme.filesPanels.upload.loadingButton
+            .defaultBackground};
+        }
       }
 
       &:hover {
-        .loading-button {
-          color: ${props.theme.filesPanels.upload.loadingButton.hoverColor};
+        svg path {
+          fill: ${props.theme.filesPanels.upload.loadingButton.hoverColor};
         }
       }
     `}
@@ -98,7 +102,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
           className="loading-button"
           backgroundColor={backgroundColor}
         >
-          {!inConversion ? <>&times;</> : null}
+          {!inConversion ? <ReactSVG src={CloseIcon} /> : null}
         </StyledLoadingButton>
       </StyledCircle>
     </StyledBody>

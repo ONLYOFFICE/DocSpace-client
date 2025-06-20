@@ -619,7 +619,7 @@ importers:
         specifier: 10.0.6
         version: 10.0.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       resize-image:
-        specifier: ^0.1.0
+        specifier: 0.1.0
         version: 0.1.0
       sass:
         specifier: 1.79.5
@@ -758,7 +758,7 @@ importers:
         specifier: 16.1.34
         version: 16.1.34(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       resize-image:
-        specifier: ^0.1.0
+        specifier: 0.1.0
         version: 0.1.0
       sass:
         specifier: 1.79.5

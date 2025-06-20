@@ -41,6 +41,7 @@ import {
 } from "../Table.constants";
 import { checkingForUnfixedSize, getSubstring } from "../Table.utils";
 import { isDesktop } from "../../../utils";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 type TPrevHeaderData = Nullable<
   Pick<TableHeaderProps, "columnStorageName" | "sortBy" | "sorted" | "columns">
@@ -61,7 +62,6 @@ export const TableHeader = (props: TableHeaderProps) => {
     columnStorageName,
     columnInfoPanelStorageName,
     containerRef,
-    theme,
     useReactWindow = false,
     resetColumnsSize,
     setHideColumns: setHideColumnsProp,
@@ -76,6 +76,8 @@ export const TableHeader = (props: TableHeaderProps) => {
 
   const [hideColumns, setHideColumns] = useState(false);
   const [minWidthsIndex, setMinWidthsIndex] = useState<number[]>([]);
+
+  const { isRTL } = useInterfaceDirection();
 
   const getNextColumn = (array: TTableColumn[], index: number) => {
     let i = 1;
@@ -202,7 +204,6 @@ export const TableHeader = (props: TableHeaderProps) => {
   };
 
   const onMouseMove = (e: MouseEvent) => {
-    const isRtl = theme?.interfaceDirection === "rtl";
     const columnIndex = columnIndexRef.current;
 
     if (columnIndex === null) return;
@@ -211,7 +212,7 @@ export const TableHeader = (props: TableHeaderProps) => {
     if (!column) return;
 
     const columnSize = column.getBoundingClientRect();
-    let newWidth = isRtl
+    let newWidth = isRTL
       ? columnSize.right - e.clientX
       : e.clientX - columnSize.left;
 

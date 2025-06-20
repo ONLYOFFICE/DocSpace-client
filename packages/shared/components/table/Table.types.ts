@@ -27,7 +27,6 @@
 import { IndexRange } from "react-virtualized";
 
 import { ContextMenuModel } from "../context-menu";
-import { TTheme } from "../../themes";
 
 export interface TableContainerProps {
   forwardedRef: React.Ref<HTMLDivElement>;
@@ -79,7 +78,6 @@ export interface TableHeaderProps {
   tagRef?:
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
-  theme?: TTheme;
   isIndexEditingMode?: boolean;
   withoutWideColumn?: boolean;
 }

@@ -27,6 +27,7 @@ import moment from "moment";
 import { Trans } from "react-i18next";
 import isUndefined from "lodash/isUndefined";
 import isNull from "lodash/isNull";
+import type { TFunction } from "i18next";
 
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
@@ -44,7 +45,6 @@ import { FileType, ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
 import { isFolder } from "../../utils/typeGuards";
 
-import type { TFunction } from "i18next";
 import type { TTranslation } from "../../types";
 import type {
   TAvailableExternalRights,

@@ -98,7 +98,7 @@ export interface TableHeaderCellProps {
 
 export interface TableSettingsProps {
   columns: TTableColumn[];
-  disableSettings: boolean;
+  disableSettings?: boolean;
 }
 
 export interface TableBodyProps {

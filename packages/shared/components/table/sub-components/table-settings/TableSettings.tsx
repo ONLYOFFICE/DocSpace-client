@@ -56,7 +56,11 @@ const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
   };
 
   return (
-    <div className={styles.tableSettings} ref={ref}>
+    <div
+      className={styles.tableSettings}
+      ref={ref}
+      data-testid="table-settings"
+    >
       <IconButton
         className={classNames(styles.tableSettingsIcon, {
           [styles.isDisabled]: disableSettings,
@@ -66,6 +70,7 @@ const TableSettings = ({ columns, disableSettings }: TableSettingsProps) => {
         iconName={SettingsDeskReactSvgUrl}
         onClick={onClick}
         isDisabled={disableSettings}
+        dataTestId="table-settings-button"
       />
       <DropDown
         directionX="left"

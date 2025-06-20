@@ -70,5 +70,6 @@
   "LdapUserFilterTooltip": "Utilice el filtro LDAP de búsqueda para seleccionar los usuarios que deben importarse.",
   "LdapUserQuotaTooltip": "Para establecer una cuota de almacenamiento para el usuario, añada un atributo en el directorio LDAP (por ejemplo, UsersQuotaLimit) e introduzca un valor entero para este atributo. Se mostrará el valor de la cuota en bytes. Aquí especifique solo el nombre del atributo. Este atributo se aplicará únicamente durante la primera configuración y podrá modificarse posteriormente de forma manual en la sección {{contactsName}}.",
   "LdapUsersType": "Tipo de usuario",
-  "LdapUserTypeTooltip": "Todos los usuarios se añadirán a {{productName}} con el tipo seleccionado."
+  "LdapUserTypeTooltip": "Todos los usuarios se añadirán a {{productName}} con el tipo seleccionado.",
+  "LdapIntro": "Importe usuarios y grupos a través de LDAP, y habilite la autenticación de usuarios mediante inicios de sesión/contraseñas almacenadas en el servidor LDAP. Los usuarios se importarán inmediatamente después de guardar la configuración. Los usuarios añadidos posteriormente se importarán durante su primera autenticación. Si desea proporcionar acceso solo a través de LDAP, desactive la opción para invitar a nuevos miembros de {{productName}} a través de Contactos: <1>{{link}}</1>"
 }

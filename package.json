@@ -27,7 +27,8 @@
     "lint": "cd packages/login && npm run lint && cd ../sdk && npm run lint && cd ../doceditor && npm run lint && cd ../shared && npm run lint && cd ../client && npm run lint",
     "lint:fix": "cd packages/login && npm run lint:fix && cd ../sdk && npm run lint:fix && cd ../doceditor && npm run lint:fix && cd ../shared && npm run lint:fix && cd ../client && npm run lint:fix",
     "tsc": "cd packages/login && npm run tsc && cd ../sdk && npm run tsc && cd ../doceditor && npm run tsc && cd ../shared && npm run tsc && cd ../client && npm run tsc",
-    "pre-push": "npm run lint && npm run tsc && cd ./common/tests && npm install && npm run test:images && npm run test:colors && npm run test:dependencies",
+    "test:common": "cd common/tests && npm install && npm run test:images && npm run test:colors && npm run test:dependencies",
+    "pre-push": "npm run lint && npm run tsc",
     "prepare": "husky"
   },
   "devDependencies": {

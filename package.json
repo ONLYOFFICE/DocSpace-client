@@ -31,8 +31,7 @@
     "test:e2e:docker:build": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:build",
     "test:e2e:docker:start": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:start",
     "test:e2e:docker:clear": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:clear",
-    "pre-commit": "pnpm run lint && pnpm run tsc && cd ./common/tests && npm install && npm run test:images && npm run test:colors && npm run test:dependencies",
-    "prepare": "husky"
+    "pre-push": "pnpm run lint && pnpm run tsc && cd ./common/tests && npm install && npm run test:images && npm run test:colors && npm run test:dependencies"
   },
   "devDependencies": {
     "@types/node": "22.9.3",

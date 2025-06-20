@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import "@docspace/shared/utils/wdyr";
-import React, { use } from "react";
+import React from "react";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";

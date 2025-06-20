@@ -70,47 +70,43 @@ const ContinuePortalForm = () => {
   };
 
   const onCancelClick = () => {
-    location.href = "/";
+    window.location.href = "/";
   };
 
-  return (
+  return isReactivate ? (
+    <Text>
+      <Trans t={t} i18nKey="SuccessReactivate" ns="Confirm">
+        Your account has been successfully reactivated. In 10 seconds you will
+        be redirected to the
+        <Link isHovered href="/">
+          portal
+        </Link>
+      </Trans>
+    </Text>
+  ) : (
     <>
-      {isReactivate ? (
-        <Text>
-          <Trans t={t} i18nKey="SuccessReactivate" ns="Confirm">
-            Your account has been successfully reactivated. In 10 seconds you
-            will be redirected to the
-            <Link isHovered href="/">
-              portal
-            </Link>
-          </Trans>
-        </Text>
-      ) : (
-        <>
-          <Text className="subtitle">
-            {t("PortalContinueTitle", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          <ButtonsWrapper>
-            <Button
-              primary
-              scale
-              size={ButtonSize.medium}
-              label={t("Reactivate")}
-              tabIndex={1}
-              onClick={onRestoreClick}
-            />
-            <Button
-              scale
-              size={ButtonSize.medium}
-              label={t("Common:CancelButton")}
-              tabIndex={1}
-              onClick={onCancelClick}
-            />
-          </ButtonsWrapper>
-        </>
-      )}
+      <Text className="subtitle">
+        {t("PortalContinueTitle", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+      <ButtonsWrapper>
+        <Button
+          primary
+          scale
+          size={ButtonSize.medium}
+          label={t("Reactivate")}
+          tabIndex={1}
+          onClick={onRestoreClick}
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:CancelButton")}
+          tabIndex={1}
+          onClick={onCancelClick}
+        />
+      </ButtonsWrapper>
     </>
   );
 };

@@ -56,7 +56,7 @@ const RecoverAccess = () => {
       >
         {t("RecoverAccess")}
       </Link>
-      {recoverDialogVisible && (
+      {recoverDialogVisible ? (
         <RecoverAccessModalDialog
           visible={recoverDialogVisible}
           onClose={closeRecoverDialog}
@@ -64,7 +64,7 @@ const RecoverAccess = () => {
           emailPlaceholderText={recoverDialogEmailPlaceholder}
           id="recover-access-modal"
         />
-      )}
+      ) : null}
     </>
   );
 };

@@ -25,13 +25,14 @@
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
-    "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
+    "lint:fix": "pnpm--filter @docspace/login --filter @docspace/sdk --filter @docspace/doceditor --filter @docspace/shared --filter @docspace/client lint --parallel=5",
     "tsc": "pnpm --filter @docspace/login --filter @docspace/sdk --filter @docspace/doceditor --filter @docspace/shared --filter @docspace/client tsc",
     "test:build": "pnpm --filter @docspace/login --filter @docspace/sdk test:build",
     "test:e2e:docker:build": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:build",
     "test:e2e:docker:start": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:start",
     "test:e2e:docker:clear": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:clear",
-    "pre-commit": "pnpm run lint && pnpm run tsc && cd ./common/tests && npm install && npm run test:images && npm run test:colors && npm run test:dependencies"
+    "pre-commit": "pnpm run lint && pnpm run tsc && cd ./common/tests && npm install && npm run test:images && npm run test:colors && npm run test:dependencies",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/node": "22.9.3",

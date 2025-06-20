@@ -291,7 +291,7 @@ class PaymentStore {
 
     this.setIsUpdatingBasicSettings(true);
 
-    const requests = [fetchPortalTariff()];
+    const requests: unknown[] = [fetchPortalTariff()];
 
     if (this.isAlreadyPaid || this.walletCustomerEmail) {
       if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());

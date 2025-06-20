@@ -110,7 +110,7 @@ class ServicesStore {
     this.partialUpgradeFee = partialUpgradeFee;
   };
 
-  setVisibleWalletSetting = (isVisibleWalletSettings) => {
+  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 

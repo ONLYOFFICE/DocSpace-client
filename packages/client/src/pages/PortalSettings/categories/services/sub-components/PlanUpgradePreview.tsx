@@ -48,11 +48,19 @@ import { usePaymentContext } from "../context/PaymentContext";
 let timeout: NodeJS.Timeout | null;
 let controller: AbortController;
 
-const getDirectionalText = (isRTL) => {
+const getDirectionalText = (isRTL: boolean) => {
   return isRTL ? `>1` : `<1`;
 };
 
-const PlanUpgradePreview = (props) => {
+type PlanUpgradePreviewProps = {
+  currentStoragePlanSize?: number;
+  amount: number;
+  daysUtilPayment?: number;
+  setPartialUpgradeFee?: (fee: number) => void;
+  partialUpgradeFee?: number;
+};
+
+const PlanUpgradePreview = (props: PlanUpgradePreviewProps) => {
   const {
     currentStoragePlanSize,
     amount,
@@ -94,7 +102,7 @@ const PlanUpgradePreview = (props) => {
           }
 
           const paymentAmount = currentWriteOff.amount;
-          setPartialUpgradeFee(paymentAmount);
+          setPartialUpgradeFee!(paymentAmount);
           setIsLoading(false);
           setIsWaitingCalculation(false);
         } catch (e) {
@@ -108,7 +116,7 @@ const PlanUpgradePreview = (props) => {
 
   useEffect(() => {
     return () => {
-      setPartialUpgradeFee(0);
+      setPartialUpgradeFee!(0);
       if (timeout) clearTimeout(timeout);
       setIsWaitingCalculation(false);
       timeout = null;
@@ -137,7 +145,7 @@ const PlanUpgradePreview = (props) => {
             fontSize="11px"
             className={styles.priceForEach}
           >
-            {t("RemainingDays", { count: days })}
+            {t("RemainingDays", { count: Number(days) })}
           </Text>
         </div>
 
@@ -154,7 +162,7 @@ const PlanUpgradePreview = (props) => {
                 fontSize="11px"
                 className={styles.priceForEach}
               >
-                {t("ForDays", { count: days })}
+                {t("ForDays", { count: Number(days) })}
               </Text>
             </>
           )}
@@ -170,7 +178,7 @@ export default inject(({ currentTariffStatusStore, servicesStore }: TStore) => {
   const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
   return {
     currentStoragePlanSize,
-    daysUtilPayment: getDaysUntilPayment(storageSubscriptionExpiryDate),
+    daysUtilPayment: getDaysUntilPayment(storageSubscriptionExpiryDate!),
     setPartialUpgradeFee,
     partialUpgradeFee,
   };

@@ -181,7 +181,7 @@ const AutoPayments = ({
     if (!validity.valid) return;
 
     setUpToBalance!(value);
-    validateMaxUpToBalance(value, minBalance);
+    validateMaxUpToBalance(value, minBalance!);
   };
 
   const onSave = async (isEnable: boolean = true) => {

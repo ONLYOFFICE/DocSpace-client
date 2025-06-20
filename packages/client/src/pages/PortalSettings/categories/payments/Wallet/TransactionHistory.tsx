@@ -186,8 +186,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     try {
       const editorLink = await getTransactionHistoryReport(
-        formatDate(startDate),
-        formatDate(endDate),
+        formatDate!(startDate),
+        formatDate!(endDate),
         isCredit,
         isDebit,
       );

@@ -52,7 +52,7 @@ export default async function Page({
     Object.entries(await searchParams).map(([k, v]) => {
       if (v === "true") return [k, true];
       if (v === "false") return [k, false];
-      if (k === "filter") return [k, isNaN(+v) ? v : +v];
+      if (k === "filter") return [k, Number.isNaN(+v) ? v : +v];
 
       return [k, v];
     }),

@@ -13,7 +13,7 @@ import {
   FilterType,
   SortByFieldName,
 } from "@docspace/shared/enums";
-import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
+import { TSortBy, type TViewAs } from "@docspace/shared/types";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
@@ -307,7 +307,7 @@ export default function useFilesFilter({
   }, [setFilesViewAs, filesViewAs]);
 
   const removeSelectedItem = React.useCallback(
-    ({ key, group }: { key: string | number; group?: FilterGroups }) => {
+    ({ group }: { key: string | number; group?: FilterGroups }) => {
       const newFilter = filter.clone();
 
       if (group === FilterGroups.filterType) {

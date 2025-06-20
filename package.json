@@ -24,14 +24,11 @@
     "licenses-audit": "pnpm licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "pnpm madge --circular ./packages",
     "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
-    "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk --parallel=5",
-    "lint:fix": "pnpm--filter @docspace/login --filter @docspace/sdk --filter @docspace/doceditor --filter @docspace/shared --filter @docspace/client lint",
-    "tsc": "pnpm --filter @docspace/login --filter @docspace/sdk --filter @docspace/doceditor --filter @docspace/shared --filter @docspace/client tsc",
-    "test:build": "pnpm --filter @docspace/login --filter @docspace/sdk test:build",
-    "test:e2e:docker:build": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:build",
-    "test:e2e:docker:start": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:start",
-    "test:e2e:docker:clear": "pnpm --filter @docspace/login --filter @docspace/sdk test:e2e:docker:clear",
-    "pre-push": "pnpm run lint && pnpm run tsc && cd ./common/tests && npm install && npm run test:images && npm run test:colors && npm run test:dependencies"
+    "lint": "cd packages/login && npm run lint && cd ../sdk && npm run lint && cd ../doceditor && npm run lint && cd ../shared && npm run lint && cd ../client && npm run lint",
+    "lint:fix": "cd packages/login && npm run lint:fix && cd ../sdk && npm run lint:fix && cd ../doceditor && npm run lint:fix && cd ../shared && npm run lint:fix && cd ../client && npm run lint:fix",
+    "tsc": "cd packages/login && npm run tsc && cd ../sdk && npm run tsc && cd ../doceditor && npm run tsc && cd ../shared && npm run tsc && cd ../client && npm run tsc",
+    "pre-push": "npm run lint && npm run tsc && cd ./common/tests && npm install && npm run test:images && npm run test:colors && npm run test:dependencies",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/node": "22.9.3",

@@ -1,1 +1,1 @@
-pnpm run pre-push
+npm run pre-push

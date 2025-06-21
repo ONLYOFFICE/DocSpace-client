@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback, useState, useLayoutEffect, useMemo, use } from "react";
+import { useCallback, useState, useLayoutEffect, useMemo } from "react";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";

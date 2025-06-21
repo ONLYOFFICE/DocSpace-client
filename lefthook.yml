@@ -10,7 +10,7 @@ pre-push:
       follow: true
       skip_on_fail: false
     lint:
-      run: CI=true FORCE_COLOR=0 pnpm run lint --exclude='@docspace/client'
+      run: CI=true FORCE_COLOR=0 pnpm run lint
       skip_empty: true
       follow: true
       skip_on_fail: false

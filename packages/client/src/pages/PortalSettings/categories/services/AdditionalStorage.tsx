@@ -30,7 +30,10 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { getConvertedSize } from "@docspace/shared/utils/common";
+import {
+  calculateTotalPrice,
+  getConvertedSize,
+} from "@docspace/shared/utils/common";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import CheckIcon from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
@@ -39,7 +42,6 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
 import PayerInformation from "../payments/PayerInformation";
-import { calculateTotalPrice } from "./hooks/resourceUtils";
 
 interface ServiceQuotaFeature {
   title: string;
@@ -241,19 +243,16 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
 };
 
 export default inject(
-  ({
-    paymentStore,
-    currentTariffStatusStore,
-    currentQuotaStore,
-    servicesStore,
-  }: TStore) => {
-    const { cardLinkedOnFreeTariff, isPayer, isCardLinkedToPortal } =
-      paymentStore;
+  ({ paymentStore, currentTariffStatusStore, currentQuotaStore }: TStore) => {
     const {
+      cardLinkedOnFreeTariff,
+      isPayer,
+      isCardLinkedToPortal,
       servicesQuotasFeatures,
       storageSizeIncrement,
       storagePriceIncrement,
-    } = servicesStore;
+    } = paymentStore;
+
     const {
       currentStoragePlanSize,
       nextStoragePlanSize,

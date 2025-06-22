@@ -27,9 +27,13 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router";
+
 import { toastr } from "@docspace/shared/components/toast";
 import { TOTAL_SIZE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
+
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
 import AdditionalStorage from "./AdditionalStorage";
 import StoragePlanUpgrade from "./StoragePlanUpgrade";
@@ -41,6 +45,7 @@ type ServicesProps = {
   servicesInit: (t: TTranslation) => void;
   isInitServicesPage: boolean;
   isVisibleWalletSettings: boolean;
+  isShowStorageTariffDeactivated: boolean;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -49,6 +54,7 @@ const Services: React.FC<ServicesProps> = ({
   servicesInit,
   isInitServicesPage,
   isVisibleWalletSettings,
+  isShowStorageTariffDeactivated,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -56,6 +62,13 @@ const Services: React.FC<ServicesProps> = ({
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { openDialog } = location.state || {};
+
+  const [openWarningDialog, setOpenWarningDialog] = useState(
+    isShowStorageTariffDeactivated && !openDialog,
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,6 +88,13 @@ const Services: React.FC<ServicesProps> = ({
   }, [isVisibleWalletSettings]);
 
   useEffect(() => {
+    if (openDialog) {
+      setIsStorageVisible(openDialog);
+      navigate(location.pathname, { replace: true });
+    }
+  }, [openDialog]);
+
+  useEffect(() => {
     timerId = setTimeout(() => {
       setShowLoader(true);
     }, 200);
@@ -90,6 +110,10 @@ const Services: React.FC<ServicesProps> = ({
 
   const onClose = () => {
     setIsStorageVisible(false);
+  };
+
+  const onCloseWarningDialog = () => {
+    setOpenWarningDialog(false);
   };
 
   const onCloseStorageCancell = () => {
@@ -113,6 +137,12 @@ const Services: React.FC<ServicesProps> = ({
   ) : (
     <>
       <AdditionalStorage onClick={onClick} onToggle={onToggle} />
+      {openWarningDialog ? (
+        <StorageTariffDeactiveted
+          visible={openWarningDialog}
+          onClose={onCloseWarningDialog}
+        />
+      ) : null}
       {isStorageVisible ? (
         <StoragePlanUpgrade visible={isStorageVisible} onClose={onClose} />
       ) : null}
@@ -126,15 +156,18 @@ const Services: React.FC<ServicesProps> = ({
   );
 };
 
-export const Component = inject(({ servicesStore }: TStore) => {
-  const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
-    servicesStore;
-
-  return {
-    servicesInit,
-    isInitServicesPage,
-    isVisibleWalletSettings,
-  };
-})(observer(Services));
+export const Component = inject(
+  ({ servicesStore, currentTariffStatusStore }: TStore) => {
+    const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
+      servicesStore;
+    const { isShowStorageTariffDeactivated } = currentTariffStatusStore;
+    return {
+      servicesInit,
+      isInitServicesPage,
+      isVisibleWalletSettings,
+      isShowStorageTariffDeactivated,
+    };
+  },
+)(observer(Services));
 
 export default Component;

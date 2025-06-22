@@ -26,7 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { formatCurrencyValue } from "../../payments/Wallet/utils";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import store from "../../../../../store";
 import {
   calculateDifference,

@@ -418,6 +418,15 @@ export const enum PortalFeaturesLimitations {
 }
 
 /**
+ * Enum for quota state.
+ * @readonly
+ */
+export const enum QuotaState {
+  Active = 0,
+  Overdue = 1,
+}
+
+/**
  * Enum for notifications.
  * @readonly
  */

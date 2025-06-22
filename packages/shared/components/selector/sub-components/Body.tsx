@@ -288,7 +288,7 @@ const Body = ({
       <InfoBar
         className={styles.selectorInfoBar}
         ref={infoBarRef}
-        visible={itemsCount !== 0}
+        visible={!isShareFormEmpty}
       />
       <BreadCrumbs visible={!isShareFormEmpty} />
 

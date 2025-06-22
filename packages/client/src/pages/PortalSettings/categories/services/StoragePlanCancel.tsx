@@ -35,12 +35,15 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { getConvertedSize } from "@docspace/shared/utils/common";
+import {
+  calculateTotalPrice,
+  getConvertedSize,
+} from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 
 import { useServicesActions } from "./hooks/useServicesActions";
 import { PaymentProvider } from "./context/PaymentContext";
-import { calculateTotalPrice } from "./hooks/resourceUtils";
+
 import styles from "./styles/index.module.scss";
 import StorageWarning from "./sub-components/StorageWarning";
 
@@ -166,20 +169,16 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
 };
 
 export default inject(
-  ({
-    paymentStore,
-    currentTariffStatusStore,
-    servicesStore,
-    currentQuotaStore,
-  }: TStore) => {
+  ({ paymentStore, currentTariffStatusStore, currentQuotaStore }: TStore) => {
     const { fetchPortalTariff, currentStoragePlanSize } =
       currentTariffStatusStore;
-    const { fetchBalance } = paymentStore;
     const {
+      fetchBalance,
       storageSizeIncrement,
       storagePriceIncrement,
       handleServicesQuotas,
-    } = servicesStore;
+    } = paymentStore;
+
     const { usedTotalStorageSizeCount } = currentQuotaStore;
 
     const totalPrice = calculateTotalPrice(

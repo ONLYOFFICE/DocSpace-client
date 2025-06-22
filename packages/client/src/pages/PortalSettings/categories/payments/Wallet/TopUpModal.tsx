@@ -32,13 +32,13 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 
 import WalletInfo from "./sub-components/WalletInfo";
 import PaymentMethod from "./sub-components/PaymentMethod";
 import Amount from "./sub-components/Amount";
 import TopUpButtons from "./sub-components/TopUpButtons";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
-import { formatCurrencyValue } from "./utils";
 import { AmountProvider } from "./context";
 import styles from "./styles/TopUpModal.module.scss";
 

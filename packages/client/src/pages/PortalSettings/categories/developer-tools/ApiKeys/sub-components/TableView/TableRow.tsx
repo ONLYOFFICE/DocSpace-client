@@ -101,12 +101,11 @@ const TableRow = (props: TableRowProps) => {
     onChangeApiKeyParams,
     onDeleteApiKey,
     onEditApiKey,
-    permissions,
   } = props;
 
   const { t } = useTranslation(["Common"]);
 
-  const selectedOption = getItemPermissions(permissions, item.permissions);
+  const selectedOption = getItemPermissions(item.permissions);
 
   const permissionTranslation = getPermissionsOptionTranslation(
     selectedOption,

@@ -34,6 +34,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
+import { calculateTotalPrice } from "@docspace/shared/utils/common";
 
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
@@ -46,7 +47,6 @@ import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
 import TopUpContainer from "./sub-components/TopUpContainer";
 import SelectionAmount from "./sub-components/SelectionAmount";
-import { calculateTotalPrice } from "@docspace/shared/utils/common";
 
 type StorageDialogProps = {
   visible: boolean;

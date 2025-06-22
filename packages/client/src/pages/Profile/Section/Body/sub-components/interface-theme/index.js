@@ -103,7 +103,7 @@ const InterfaceTheme = (props) => {
     try {
       setCurrentTheme(newTheme);
 
-      if (isDesktopClient) {
+      if (isDesktopClient && newTheme !== ThemeKeys.SystemStr) {
         const editorTheme = getEditorTheme(newTheme);
         window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
       }

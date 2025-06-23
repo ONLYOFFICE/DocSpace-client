@@ -128,5 +128,8 @@
   "YouHaveNotAddedAnyPayment": "Δεν έχετε προσθέσει καμία πληρωμή",
   "YourCurrentPayment": "Η τρέχουσα πληρωμή σας",
   "YourCurrentPlan": "<1>Το τρέχον πρόγραμμα σας:</1> {{amount}} <2>({{price}}/μήνα)</2>",
-  "YourPrice": "Η τιμή σας"
+  "YourPrice": "Η τιμή σας",
+  "AvailableLimit": "<1>Διαθέσιμο όριο σύμφωνα με το τρέχον πρόγραμμα:</1> {{amount}}",
+  "CurrentPaymentMonth": "Τρέχουσα πληρωμή: {{price}}/μήνα ({{size}})",
+  "GoToService": "Πήγαινε στην υπηρεσία"
 }

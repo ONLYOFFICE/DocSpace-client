@@ -12,5 +12,11 @@
   "SendInvitation": "招待を送信する",
   "UserMaxAvailableRoleWarning": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割に適しています。",
   "UsersAlreadyAdded": "一部のユーザーはすでに追加されています",
-  "UsersCannotBeAdded": "無効な連絡先はルームに追加できません。"
+  "UsersCannotBeAdded": "無効な連絡先はルームに追加できません。",
+  "EmailErrorMessageUserNotFound": "ユーザーが見つかりません。メールをダブルクリックして編集できます。",
+  "InviteToRoomAddPlaceholder": "名前またはメールアドレスで招待する",
+  "InviteToRoomManuallyInfoGuest": "既存の {{productName}} の連絡先を追加してください。または、新しいユーザーをメールアドレスで招待することも可能です。新しいユーザーは、「ゲスト」リストに追加されます。",
+  "InviteToRoomManuallyInfoMembers": "既存の {{productName}} メンバーをルームに追加する",
+  "InviteViaLinkDescriptionRoomGuest": "ゲストとしてルームで自己認証を行うためのユニバーサルリンクを作成する",
+  "InviteViaLinkDescriptionRoomMembers": "{{productName}} メンバー用のユニバーサルリンクを作成し、ルームで自己認証を行えるようにする"
 }

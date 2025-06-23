@@ -128,5 +128,8 @@
   "YouHaveNotAddedAnyPayment": "Nie dodano jeszcze żadnej płatności.",
   "YourCurrentPayment": "Twoje aktualne płatności",
   "YourCurrentPlan": "<1>Twój aktualny plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
-  "YourPrice": "Twoja cena"
+  "YourPrice": "Twoja cena",
+  "AvailableLimit": "<1>Dostępny limit w ramach aktualnego planu:</1> {{amount}}",
+  "CurrentPaymentMonth": "Aktualna płatność: {{price}}/miesiąc ({{size}})",
+  "GoToService": "Przejdź do serwisu"
 }

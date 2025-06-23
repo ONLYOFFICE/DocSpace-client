@@ -160,6 +160,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     breadCrumbsLoader,
     isBreadCrumbsLoading,
     onSelectBreadCrumb,
+    bodyIsLoading,
   } = React.useContext(BreadCrumbsContext);
   const setIsSearch = React.useContext(SearchDispatchContext);
 
@@ -198,12 +199,17 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
       "minmax(1px, max-content) 12px minmax(1px, max-content)";
   }
 
-  if (!withBreadCrumbs || !visible) return null;
+  if (!withBreadCrumbs || !visible) {
+    if (withBreadCrumbs && !visible && bodyIsLoading) return breadCrumbsLoader;
+
+    return null;
+  }
 
   if (isBreadCrumbsLoading) return breadCrumbsLoader;
 
   return (
     <div
+      id="selector_bread_crumbs"
       className={styles.breadCrumbs}
       style={
         {

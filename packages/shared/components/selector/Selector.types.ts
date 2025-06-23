@@ -131,6 +131,7 @@ export type TSelectorBreadCrumbs = WithFlag<
     breadCrumbs: TBreadCrumb[];
     breadCrumbsLoader: React.ReactNode;
     onSelectBreadCrumb: (item: TBreadCrumb) => void;
+    bodyIsLoading: boolean;
   }
 >;
 

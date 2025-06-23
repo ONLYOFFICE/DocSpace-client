@@ -359,5 +359,13 @@
   "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
-  "YourLogo": "あなたのロゴ"
+  "YourLogo": "あなたのロゴ",
+  "InvitationSettings": "招待設定",
+  "InvitationSettingsContacts": "連絡先から {{productName}} メンバーを招待する",
+  "InvitationSettingsContactsDescription": "このオプションを有効にすると、連絡先セクションから新しい {{productName}} メンバーに招待状を送信できるようになります。LDAPからのみ新しいメンバーを招待する場合は、このオプションを無効にしてください。",
+  "InvitationSettingsDescription": "{{productName}} の内部メンバーおよび外部ゲストの招待オプションを設定します。これらの設定は、LDAPまたはその他のユーザー管理システムを使用している場合など、会社のセキュリティガイドラインに準拠するのに役立ちます。",
+  "InvitationSettingsGuests": "ゲストの招待を有効にする",
+  "InvitationSettingsGuestsDescription": "このオプションを有効にすると、{{productName}} のすべてのメンバーが外部ゲストをルームに招待できるようになります。",
+  "InvitationSettingsMobile": "{{productName}} の内部メンバーおよび外部ゲストの招待オプションを設定してください。",
+  "Services": "サービス"
 }

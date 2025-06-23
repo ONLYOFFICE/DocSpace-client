@@ -128,5 +128,8 @@
   "YouHaveNotAddedAnyPayment": "Ni bilo dodanega nobenega plačila.",
   "YourCurrentPayment": "Vaša trenutna plačila",
   "YourCurrentPlan": "<1>Vaš trenutni načrt:</1> {{amount}} <2>({{price}}/mesec)</2>",
-  "YourPrice": "Vaša cena"
+  "YourPrice": "Vaša cena",
+  "AvailableLimit": "<1>Razpoložljiva meja v skladu z trenutnim načrtom:</1> {{amount}}",
+  "CurrentPaymentMonth": "Trenutno plačilo: {{price}}/mesec ({{size}})",
+  "GoToService": "Pojdite v storitev"
 }

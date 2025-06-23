@@ -128,5 +128,8 @@
   "YouHaveNotAddedAnyPayment": "Вы не добавили ни одного платежа",
   "YourCurrentPayment": "Ваш текущий платеж",
   "YourCurrentPlan": "<1>Ваш текущий тарифный план:</1> {{amount}} <2>({{price}}/месяц)</2>",
-  "YourPrice": "Ваша стоимость"
+  "YourPrice": "Ваша стоимость",
+  "AvailableLimit": "<1>Доступный лимит по текущему тарифу:</1> {{amount}}",
+  "CurrentPaymentMonth": "Текущий платёж: {{price}}/месяц ({{size}})",
+  "GoToService": "Перейти в сервис"
 }

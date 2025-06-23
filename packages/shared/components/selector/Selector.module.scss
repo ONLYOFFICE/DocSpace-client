@@ -299,6 +299,21 @@
 
       padding: 12px 0;
       margin-top: 16px;
+
+      .empty-button > div {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        box-sizing: border-box;
+
+        .icon-button_svg {
+          aspect-ratio: 1;
+          width: 16px;
+          height: 16px;
+        }
+      }
     }
 
     .empty-button p {

@@ -52,10 +52,14 @@ type SelectionAmountProps = {
   fetchCardLinked?: (url: string) => Promise<any>;
   isPaymentBlockedByBalance?: boolean;
   isCardLinkedToPortal?: boolean;
+  hasStorageSubscription?: boolean;
+  isDowngradeStoragePlan?: boolean;
 };
 
 let timeout: NodeJS.Timeout;
 let controller: AbortController;
+
+const MIN_VALUE = 100;
 
 const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
   const {
@@ -75,6 +79,8 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     fetchCardLinked,
     isCardLinkedToPortal,
     isPaymentBlockedByBalance,
+    hasStorageSubscription,
+    isDowngradeStoragePlan,
   } = props;
 
   const { maxStorageLimit, formatWalletCurrency, t } = useServicesActions();
@@ -144,11 +150,24 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       }
     : {};
 
+  const underContorlsTitle =
+    !isDowngradeStoragePlan && hasStorageSubscription
+      ? t("PerStorage", {
+          currency: formatWalletCurrency(storagePriceIncrement),
+          amount: getConvertedSize(t, storageSizeIncrement || 0),
+        })
+      : t("PerStorageWitnMinValue", {
+          currency: formatWalletCurrency(storagePriceIncrement),
+          amount: getConvertedSize(t, storageSizeIncrement || 0),
+          storageUnit: t("Common:Gigabyte"),
+          minValue: MIN_VALUE,
+        });
+
   return (
     <div className={styles.selectionAmount}>
       <QuantityPicker
         value={amount}
-        minValue={0}
+        minValue={MIN_VALUE}
         maxValue={maxStorageLimit}
         step={1}
         title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
@@ -157,12 +176,10 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
         isDisabled={hasScheduledStorageChange || isLoading}
         items={amountTabs()}
         withoutContorls={hasScheduledStorageChange}
-        underContorlsTitle={t("PerStorage", {
-          currency: formatWalletCurrency(storagePriceIncrement),
-          amount: getConvertedSize(t, storageSizeIncrement || 0),
-        })}
+        underContorlsTitle={underContorlsTitle}
         {...disableValueProps}
         isLarge
+        isZeroAllowed
       />
     </div>
   );

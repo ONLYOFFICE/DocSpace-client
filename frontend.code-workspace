@@ -188,18 +188,13 @@
             "tooltip": "🛠️ Start the \"frontend build:lite (client, login, doceditor)\" task"
           },
           {
-            "label": "Build and start prod",
-            "task": "Frontend | start-prod",
-            "tooltip": "🛠️ Start the \"frontend build and start production\" task"
-          },
-          {
-            "label": "Build and start prod:lite",
-            "task": "Frontend | start-prod:lite",
-            "tooltip": "🛠️ Start the \"frontend build and start production lite (client, login, doceditor)\" task"
-          },
-          {
             "label": "Start",
             "task": "Frontend | start",
+            "tooltip": "🛠️ Start the \"frontend start\" task"
+          },
+          {
+            "label": "Start:lite",
+            "task": "Frontend | start:lite",
             "tooltip": "🛠️ Start the \"frontend start\" task"
           },
           {
@@ -207,6 +202,12 @@
             "task": "Frontend | start-prod",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
           },
+          {
+            "label": "Start prod:lite",
+            "task": "Frontend | start-prod:lite",
+            "tooltip": "🛠️ Start the \"frontend start production\" task"
+          },
+          ,
           {
             "label": "Deploy",
             "task": "Frontend | deploy",
@@ -221,16 +222,6 @@
             "label": "Start storybook prod",
             "task": "Frontend | storybook prod",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
-          },
-          {
-            "label": "Lint",
-            "task": "Frontend | ESLint",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
-          },
-          {
-            "label": "Lint:fix",
-            "task": "Frontend | ESLint:fix",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
           }
         ],
         "tooltip": "🛠️ Client tasks"
@@ -239,49 +230,64 @@
         "label": "Tests",
         "tasks": [
           {
-            "label": "common",
+            "label": "Test all common tests",
             "task": "Test | Jest:common",
             "tooltip": "🛠️ Start the \"Test | Jest:common\" task"
           },
           {
-            "label": "translations",
+            "label": "Test translations",
             "task": "Test | Jest:translations",
             "tooltip": "🛠️ Start the \"Test | Jest:translations\" task"
           },
           {
-            "label": "images",
+            "label": "Test images",
             "task": "Test | Jest:images",
             "tooltip": "🛠️ Start the \"Test | Jest:images\" task"
           },
           {
-            "label": "colors",
+            "label": "Test colors",
             "task": "Test | Jest:colors",
             "tooltip": "🛠️ Start the \"Test | Jest:colors\" task"
           },
           {
-            "label": "dependencies",
+            "label": "Test dependencies",
             "task": "Test | Jest:dependencies",
             "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"
           },
           {
-            "label": "unit",
+            "label": "Test unit",
             "task": "Test | Jest:unit",
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
           },
           {
-            "label": "e2e docker build",
+            "label": "Docker E2E build",
             "task": "Test | Test e2e docker build",
             "tooltip": "🛠️ Start the \"test build in docker\" task"
           },
           {
-            "label": "e2e docker start",
+            "label": "Docker E2E start",
             "task": "Test | Test e2e docker start",
             "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task"
           },
           {
-            "label": "e2e docker clear",
+            "label": "Docker E2E clear",
             "task": "Test | Test e2e docker clear",
             "tooltip": "🛠️ Start the \"remove image for running e2e tests\" task"
+          },
+          {
+            "label": "Lint",
+            "task": "Test | ESLint",
+            "tooltip": "🛠️ Start the \"eslint\" task"
+          },
+          {
+            "label": "Lint:fix",
+            "task": "Test | ESLint:fix",
+            "tooltip": "🛠️ Start the \"eslint (autofix)\" task"
+          },
+          {
+            "label": "Typescript issues (tsc)",
+            "task": "Test | Tsc",
+            "tooltip": "🛠️ Start the \"tsc\" task"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"

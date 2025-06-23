@@ -125,7 +125,7 @@ class UsersStore {
 
   roomParts: string = "";
 
-  activeUsers: TUser[] = [];
+  activeUsers: UsersStore["getUsersToMakeEmployees"] = [];
 
   constructor(
     public settingsStore: SettingsStore,
@@ -1393,7 +1393,7 @@ class UsersStore {
     setChangeUserStatusDialogVisible(true);
   };
 
-  setActiveUsers = (users: TUser[]) => {
+  setActiveUsers = (users: UsersStore["getUsersToMakeEmployees"]) => {
     this.activeUsers = users;
   };
 }

@@ -57,11 +57,11 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
   } = props;
   const { formatWalletCurrency } = useServicesActions();
   const amountValue = newStorageSizeOnUpgrade ? partialUpgradeFee : totalPrice;
-  const difference = Math.abs(walletBalance - amountValue);
+  const difference = Math.abs(walletBalance! - amountValue!);
 
   useEffect(() => {
     if (isVisibleContainer && !isVisibleWalletSettings) {
-      setReccomendedAmount(Math.ceil(difference));
+      setReccomendedAmount!(Math.ceil(difference));
     }
   }, [isVisibleContainer, difference, setReccomendedAmount]);
 

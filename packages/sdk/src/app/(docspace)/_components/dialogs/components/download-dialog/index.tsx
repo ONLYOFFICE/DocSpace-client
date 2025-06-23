@@ -36,7 +36,7 @@ import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import { useDownloadDialogData } from "@/app/(docspace)/_components/dialogs/components/download-dialog/hooks/useDownloadDialogData";
 
 const DownloadDialog = () => {
-  const { isDialogOpen, closeDialog, openDialog } = useDialogsStore();
+  const { closeDialog, openDialog } = useDialogsStore();
   const {
     sortedFiles,
     sortedPasswordFiles,

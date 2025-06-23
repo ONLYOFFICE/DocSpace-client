@@ -33,14 +33,14 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
-import { Reducer, useReducer } from "react";
+import { useReducer } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "../text";
 import { toastr } from "../toast";
 import { Button } from "../button";
 import { getOAuthToken } from "../../utils/common";
-import { ComboBox, ComboBoxSize } from "../combobox";
+import { ComboBox, ComboBoxSize, TComboboxProps } from "../combobox";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";
@@ -58,10 +58,7 @@ import {
   StyledComboBoxItem,
 } from "./DirectThirdPartyConnection.styled";
 import { initialState } from "./DirectThirdPartyConnection.constants";
-import {
-  DirectThirdPartyConnectionProps,
-  DirectThirdPartyConnectionState,
-} from "./DirectThirdPartyConnection.types";
+import { DirectThirdPartyConnectionProps } from "./DirectThirdPartyConnection.types";
 
 const DirectThirdPartyConnection = ({
   openConnectWindow,
@@ -106,12 +103,10 @@ const DirectThirdPartyConnection = ({
   toDefault,
   checkCreating = false,
 }: DirectThirdPartyConnectionProps) => {
-  const [state, setState] = useReducer<
-    Reducer<
-      DirectThirdPartyConnectionState,
-      Partial<DirectThirdPartyConnectionState>
-    >
-  >((prevState, newState) => ({ ...prevState, ...newState }), initialState);
+  const [state, setState] = useReducer(
+    (prevState, newState) => ({ ...prevState, ...newState }),
+    initialState,
+  );
 
   const { t } = useTranslation(["Common"]);
 
@@ -310,7 +305,9 @@ const DirectThirdPartyConnection = ({
           forceCloseClickOutside
           size={ComboBoxSize.content}
           className="thirdparty-combobox"
-          advancedOptions={advancedOptions}
+          advancedOptions={
+            advancedOptions as unknown as TComboboxProps["advancedOptions"]
+          }
           isDisabled={isLoading}
           selectedOption={{
             key: 0,

@@ -1,0 +1,16 @@
+pre-push:
+  parallel: true
+  skip_on_merge_commit: true
+  env:
+    LEFTHOOK: "1"
+  commands:
+    tsc:
+      run: CI=true FORCE_COLOR=0 pnpm run tsc
+      skip_empty: true
+      follow: true
+      skip_on_fail: false
+    lint:
+      run: CI=true FORCE_COLOR=0 pnpm run lint
+      skip_empty: true
+      follow: true
+      skip_on_fail: false

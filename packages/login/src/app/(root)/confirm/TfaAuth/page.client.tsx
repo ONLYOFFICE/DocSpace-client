@@ -41,10 +41,7 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import {
-  TGetColorTheme,
-  TPasswordHash,
-} from "@docspace/shared/api/settings/types";
+import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
@@ -56,7 +53,6 @@ type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
   userName?: string;
   defaultPage?: string;
-  colorTheme?: TGetColorTheme;
 };
 
 const TfaAuthForm = ({
@@ -113,8 +109,8 @@ const TfaAuthForm = ({
       }
 
       window.location.replace(referenceUrl || defaultPage);
-    } catch (error) {
-      const knownError = error as TError;
+    } catch (e) {
+      const knownError = e as TError;
       let errorMessage: string;
 
       if (typeof knownError === "object") {
@@ -158,7 +154,7 @@ const TfaAuthForm = ({
         <div className="app-code-input">
           <FieldContainer
             labelVisible={false}
-            hasError={error ? true : false}
+            hasError={!!error}
             errorMessage={error}
           >
             <TextInput
@@ -174,7 +170,7 @@ const TfaAuthForm = ({
               maxLength={6}
               onChange={onChangeInput}
               value={code}
-              hasError={error ? true : false}
+              hasError={!!error}
               onKeyDown={onKeyPress}
             />
           </FieldContainer>

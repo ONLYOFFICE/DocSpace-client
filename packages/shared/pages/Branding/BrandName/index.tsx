@@ -28,7 +28,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 import classNames from "classnames";
-import { Nullable } from "types";
+import { Nullable } from "../../../types";
 
 import { globalColors } from "../../../themes";
 

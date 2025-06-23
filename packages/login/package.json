@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=development PORT=5011 next dev",
     "start-prod": "cross-env NODE_ENV=production node server.js",
-    "lint": "next lint --max-warnings=0",
+    "lint": "eslint ./src --max-warnings=0",
+    "lint:fix": "eslint ./src --fix",
+    "tsc": "tsc",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx cp -r .next/standalone/* ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/packages/login/.next/static && shx cp -r .next/static/* ../../../publish/web/login/packages/login/.next/static && shx cp -f server.prod.js ../../../publish/web/login/server.js",
     "test:build": "cross-env E2E_TEST=true next build",
@@ -23,7 +25,7 @@
     "@hcaptcha/react-hcaptcha": "1.11.0",
     "classnames": "2.5.1",
     "crypto-js": "4.2.0",
-    "csvjson-json_beautifier": "^5.0.4",
+    "csvjson-json_beautifier": "5.0.4",
     "date-and-time": "3.6.0",
     "i18next": "23.7.19",
     "nconf": "0.12.1",
@@ -35,7 +37,7 @@
     "react-i18next": "14.0.1",
     "react-router": "7.5.2",
     "react-toastify": "10.0.6",
-    "resize-image": "^0.1.0",
+    "resize-image": "0.1.0",
     "sass": "1.79.5",
     "styled-components": "5.3.11",
     "ts-pattern": "5.5.0",
@@ -89,6 +91,11 @@
         ]
       },
       "lint:fix": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "tsc": {
         "dependsOn": [
           "build:translations"
         ]

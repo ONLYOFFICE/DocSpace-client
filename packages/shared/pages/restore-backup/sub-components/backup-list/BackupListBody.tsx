@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef, RefObject, useCallback } from "react";
 import {
   FixedSizeList as List,
   type ListChildComponentProps,
@@ -49,7 +49,7 @@ import type { BackupListBodyProps } from "./BackupList.types";
 const VirtualScroll = forwardRef(
   (props: CustomScrollbarsVirtualListProps, ref) => (
     <CustomScrollbarsVirtualList
-      ref={ref}
+      ref={ref as RefObject<unknown>}
       {...props}
       paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
     />

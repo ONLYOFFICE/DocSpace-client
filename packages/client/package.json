@@ -12,8 +12,14 @@
     "start": "webpack-cli serve --env lint=false",
     "start-prod": "serve dist -s -p 5001",
     "analyze": "webpack --profile --json  --env mode=analyze  && webpack-bundle-analyzer bundle/output/path/stats.json",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint-interactive ./src"
+    "test:build": "cross-env PORT=5110 E2E_TEST=true pnpm run build:translations && pnpm run build",
+    "test:start": "cross-env PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
+    "test:e2e:docker:build": "docker-compose build",
+    "test:e2e:docker:start": "docker-compose run --rm tests-local npx playwright test",
+    "test:e2e:docker:clear": "docker rmi tests",
+    "lint": "eslint ./src --max-warnings=0",
+    "lint:fix": "eslint-interactive ./src --fix",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@babel/runtime": "7.25.7",
@@ -102,10 +108,12 @@
     "@types/eslint": "8.56.12",
     "@types/he": "1.2.3",
     "@types/lodash": "4.17.10",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/react": "19.1.4",
     "@types/react-virtualized": "9.21.30",
     "@types/react-window": "1.8.8",
     "@types/react-window-infinite-loader": "1.0.9",
+    "@types/styled-components": "5.1.34",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "@typescript-eslint/parser": "7.1.0",
     "babel-loader": "8.4.1",
@@ -171,11 +179,19 @@
       },
       "lint": {
         "dependsOn": [
+          "before-build",
           "build:translations"
         ]
       },
       "lint:fix": {
         "dependsOn": [
+          "before-build",
+          "build:translations"
+        ]
+      },
+      "tsc": {
+        "dependsOn": [
+          "before-build",
           "build:translations"
         ]
       },

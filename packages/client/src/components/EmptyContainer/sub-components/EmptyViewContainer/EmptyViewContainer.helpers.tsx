@@ -159,7 +159,7 @@ export const getIcon = (
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
-    : getRoomIcon(type, isBaseTheme, access);
+    : getRoomIcon(type, isBaseTheme, access)!;
 };
 
 export const getOptions = (

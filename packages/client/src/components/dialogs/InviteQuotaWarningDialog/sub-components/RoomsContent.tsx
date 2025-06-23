@@ -91,19 +91,21 @@ const RoomsContent = ({
   );
 };
 
-export default inject(({ currentQuotaStore, authStore, treeFoldersStore }) => {
-  const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
-    currentQuotaStore;
+export default inject(
+  ({ currentQuotaStore, authStore, treeFoldersStore }: TStore) => {
+    const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
+      currentQuotaStore;
 
-  const { isPaymentPageAvailable } = authStore;
+    const { isPaymentPageAvailable } = authStore;
 
-  const { isArchiveFolderRoot } = treeFoldersStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
 
-  return {
-    isRoomsTariffLimit,
-    maxCountRoomsByQuota,
-    usedRoomsCount,
-    isPaymentPageAvailable,
-    isArchiveFolderRoot,
-  };
-})(observer(RoomsContent));
+    return {
+      isRoomsTariffLimit,
+      maxCountRoomsByQuota,
+      usedRoomsCount,
+      isPaymentPageAvailable,
+      isArchiveFolderRoot,
+    };
+  },
+)(observer(RoomsContent));

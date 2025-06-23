@@ -30,7 +30,11 @@ import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 
 import { Text } from "../../../components/text";
-import { ComboBox, ComboBoxSize } from "../../../components/combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TComboboxProps,
+} from "../../../components/combobox";
 import { DropDownItem } from "../../../components/drop-down-item";
 import { BackupStorageType, ThirdPartyStorages } from "../../../enums";
 import { getOptions } from "../../../utils/getThirdPartyStoragesOptions";
@@ -224,7 +228,9 @@ const ThirdPartyStorageModule = ({
           forceCloseClickOutside
           className="backup_combo"
           size={ComboBoxSize.content}
-          advancedOptions={advancedOptions}
+          advancedOptions={
+            advancedOptions as unknown as TComboboxProps["advancedOptions"]
+          }
           selectedOption={{ key: 0, label: selectedStorageTitle }}
           isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
         />

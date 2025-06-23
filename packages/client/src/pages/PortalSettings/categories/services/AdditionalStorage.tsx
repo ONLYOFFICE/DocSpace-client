@@ -35,6 +35,7 @@ import {
   getConvertedSize,
 } from "@docspace/shared/utils/common";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { DeviceType } from "@docspace/shared/enums";
 
 import CheckIcon from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
@@ -68,6 +69,8 @@ type AdditionalStorageProps = {
   hasStorageSubscription?: boolean;
   isGracePeriod?: boolean;
   hasScheduledStorageChange?: boolean;
+  isTablet?: boolean;
+  isMobile?: boolean;
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
@@ -86,6 +89,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   hasStorageSubscription,
   isGracePeriod,
   hasScheduledStorageChange,
+  isTablet,
+  isMobile,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { formatWalletCurrency, t } = useServicesActions();
@@ -141,115 +146,129 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
           <PayerInformation />
         </div>
       ) : null}
-      {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
-        if (!item.title || !item.image) return null;
-        const eventDisabled =
-          isGracePeriod ||
-          isDisabled ||
-          !hasStorageSubscription ||
-          hasScheduledStorageChange;
-        return (
-          <div
-            key={item.id}
-            className={classNames(styles.serviceContainer, {
-              [styles.disabled]: isDisabled,
-            })}
-            {...(!isDisabled ? { onClick } : {})}
-          >
-            <div className={styles.headerContainer}>
-              <div className={styles.iconWrapper}>
-                <div
-                  dangerouslySetInnerHTML={{ __html: item.image }}
-                  className={styles.iconsContainer}
-                />
-              </div>
-
-              <div
-                onClick={handleToggle}
-                className={styles.toggleWrapper}
-                data-id={item.id}
-                data-enabled={item.enabled}
-                data-disabled={eventDisabled}
-              >
-                <ToggleButton
-                  isChecked={currentStoragePlanSize > 0}
-                  className={styles.serviceToggle}
-                  isDisabled={eventDisabled}
-                />
-              </div>
-            </div>
-            <div className={styles.contentContainer}>
-              <Text
-                fontWeight={600}
-                fontSize="14px"
-                className={styles.containerTitle}
-              >
-                {item.title}
-              </Text>
-              <Text fontSize="12px" className={styles.priceDescription}>
-                {item.priceTitle}
-              </Text>
-
-              {hasScheduledStorageChange ? (
-                <div
-                  className={classNames(styles.changeShedule, {
-                    [styles.warningColor]: true,
-                  })}
-                  data-tooltip-id="serviceTooltip"
-                >
-                  <InfoIcon />
-                  <Text fontWeight={600} fontSize="12px">
-                    {t("ChangeShedule")}
-                  </Text>
-
-                  <Tooltip
-                    id="serviceTooltip"
-                    place="bottom"
-                    maxWidth="300px"
-                    float
-                    getContent={textTooltip}
+      <div
+        className={classNames(styles.servicesWrapper, {
+          [styles.servicesWrapperMobile]: isMobile,
+          [styles.servicesWrapperTablet]: isTablet,
+        })}
+      >
+        {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
+          if (!item.title || !item.image) return null;
+          const eventDisabled =
+            isGracePeriod ||
+            isDisabled ||
+            !hasStorageSubscription ||
+            hasScheduledStorageChange;
+          return (
+            <div
+              key={item.id}
+              className={classNames(styles.serviceContainer, {
+                [styles.disabled]: isDisabled,
+              })}
+              {...(!isDisabled ? { onClick } : {})}
+            >
+              <div className={styles.headerContainer}>
+                <div className={styles.iconWrapper}>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: item.image }}
+                    className={styles.iconsContainer}
                   />
                 </div>
-              ) : null}
-              {!hasScheduledStorageChange && currentStoragePlanSize > 0 ? (
-                <div
-                  className={classNames(styles.changeShedule, {
-                    [styles.greenColor]: true,
-                  })}
-                >
-                  <CheckIcon />
-                  <Text>
-                    {t("CurrentPaymentMonth", {
-                      price: formatWalletCurrency(
-                        calculateTotalPrice(
-                          currentStoragePlanSize,
-                          storagePriceIncrement,
-                        ),
-                      ),
-                      size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-                    })}
-                  </Text>
-                </div>
-              ) : null}
 
-              <div className={styles.priceContainer}>
-                <Text fontSize="12px" fontWeight={600}>
-                  {t("PerStorage", {
-                    currency: formatWalletCurrency(storagePriceIncrement),
-                    amount: getConvertedSize(t, storageSizeIncrement || 0),
-                  })}
+                <div
+                  onClick={handleToggle}
+                  className={styles.toggleWrapper}
+                  data-id={item.id}
+                  data-enabled={item.enabled}
+                  data-disabled={eventDisabled}
+                >
+                  <ToggleButton
+                    isChecked={currentStoragePlanSize > 0}
+                    className={styles.serviceToggle}
+                    isDisabled={eventDisabled}
+                  />
+                </div>
+              </div>
+              <div className={styles.contentContainer}>
+                <Text
+                  fontWeight={600}
+                  fontSize="14px"
+                  className={styles.containerTitle}
+                >
+                  {item.title}
                 </Text>
+                <div className={styles.middleBlock}>
+                  <Text fontSize="12px" className={styles.priceDescription}>
+                    {item.priceTitle}
+                  </Text>
+
+                  {hasScheduledStorageChange ? (
+                    <div
+                      className={classNames(styles.changeShedule, {
+                        [styles.warningColor]: true,
+                      })}
+                      data-tooltip-id="serviceTooltip"
+                    >
+                      <InfoIcon />
+                      <Text fontWeight={600} fontSize="12px">
+                        {t("ChangeShedule")}
+                      </Text>
+
+                      <Tooltip
+                        id="serviceTooltip"
+                        place="bottom"
+                        maxWidth="300px"
+                        float
+                        getContent={textTooltip}
+                      />
+                    </div>
+                  ) : null}
+                  {!hasScheduledStorageChange && currentStoragePlanSize > 0 ? (
+                    <div
+                      className={classNames(styles.changeShedule, {
+                        [styles.greenColor]: true,
+                      })}
+                    >
+                      <CheckIcon />
+                      <Text>
+                        {t("CurrentPaymentMonth", {
+                          price: formatWalletCurrency(
+                            calculateTotalPrice(
+                              currentStoragePlanSize,
+                              storagePriceIncrement,
+                            ),
+                          ),
+                          size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+                        })}
+                      </Text>
+                    </div>
+                  ) : null}
+
+                  <div className={styles.priceContainer}>
+                    <Text fontSize="12px" fontWeight={600}>
+                      {t("PerStorage", {
+                        currency: formatWalletCurrency(storagePriceIncrement),
+                        amount: getConvertedSize(t, storageSizeIncrement || 0),
+                      })}
+                    </Text>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
 
 export default inject(
-  ({ paymentStore, currentTariffStatusStore, currentQuotaStore }: TStore) => {
+  ({
+    paymentStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    settingsStore,
+  }: TStore) => {
     const {
       cardLinkedOnFreeTariff,
       isPayer,
@@ -269,6 +288,9 @@ export default inject(
     } = currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
+    const { currentDeviceType } = settingsStore;
+    const isMobile = currentDeviceType === DeviceType.mobile;
+    const isTablet = currentDeviceType === DeviceType.tablet;
 
     return {
       servicesQuotasFeatures,
@@ -285,6 +307,8 @@ export default inject(
       isCardLinkedToPortal,
       isGracePeriod,
       hasScheduledStorageChange,
+      isTablet,
+      isMobile,
     };
   },
 )(observer(AdditionalStorage));

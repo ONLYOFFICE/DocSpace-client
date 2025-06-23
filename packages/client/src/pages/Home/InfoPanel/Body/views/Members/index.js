@@ -92,8 +92,6 @@ const Members = ({
   membersIsLoading,
   searchValue,
   isMembersPanelUpdating,
-  setRoomShared,
-  currentId,
   setPublicRoomKey,
   setAccessSettingsIsVisible,
   templateAvailable,
@@ -161,7 +159,6 @@ const Members = ({
         const filterObj = FilesFilter.getFilter(window.location);
 
         if (isPublicRoomType && !filterObj.key) {
-          setRoomShared(currentId, true);
           setPublicRoomKey(link.sharedTo.requestToken);
           setSearchParams((prev) => {
             prev.set("key", link.sharedTo.requestToken);
@@ -395,7 +392,7 @@ export default inject(
       isMembersPanelUpdating,
       templateAvailableToEveryone,
     } = infoPanelStore;
-    const { membersFilter, setRoomShared } = filesStore;
+    const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
 
     const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
@@ -407,8 +404,6 @@ export default inject(
       setEditLinkPanelIsVisible,
       setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
     } = dialogsStore;
-
-    const { id } = selectedFolderStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
@@ -446,8 +441,6 @@ export default inject(
       membersIsLoading,
       searchValue,
       isMembersPanelUpdating,
-      setRoomShared,
-      currentId: id,
       setPublicRoomKey,
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,

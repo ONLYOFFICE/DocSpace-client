@@ -217,7 +217,7 @@ const Body = ({
         setInfoBarHeight(height + CONTAINER_PADDING);
       }
     }
-  }, [withInfoBar, itemsCount]);
+  }, [withInfoBar, itemsCount, visibleInfoBar]);
   useLayoutEffect(() => {
     if (injectedElement) {
       const element = injectedElementRef.current;

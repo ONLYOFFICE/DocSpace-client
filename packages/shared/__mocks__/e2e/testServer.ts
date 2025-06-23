@@ -52,7 +52,7 @@ export const createNextTestServer = async (
     });
 
     newServer.listen(0, () => {
-      resolve(server);
+      resolve(newServer);
     });
   });
 

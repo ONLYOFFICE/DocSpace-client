@@ -65,9 +65,11 @@ type StorageDialogProps = {
   setPartialUpgradeFee?: (value: number) => void;
   hasPreviousStorageSubscription?: boolean;
   previousStoragePlanSize?: number;
+  hasScheduledStorageChange?: number;
 };
 
 const MAX_ATTEMPTS = 30;
+const MIN_VALUE = 100;
 
 const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   visible,
@@ -84,6 +86,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   setPartialUpgradeFee,
   hasPreviousStorageSubscription,
   previousStoragePlanSize,
+  hasScheduledStorageChange,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(
@@ -123,6 +126,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     : isWalletBalanceInsufficient(totalPrice);
 
   const buttonMainTitle = buttonTitle(amount);
+  const isPaymentBlocked =
+    !hasScheduledStorageChange && amount < MIN_VALUE && amount !== 0;
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isWaitingRef = useRef(false);
@@ -316,7 +321,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               newStorageSizeOnUpgrade={newStorageSizeOnUpgrade}
             />
 
-            {amount || hasStorageSubscription ? (
+            {!isPaymentBlocked && (amount || hasStorageSubscription) ? (
               <div className={styles.totalContainer}>
                 <StorageSummary
                   amount={amount}
@@ -329,7 +334,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               </div>
             ) : null}
 
-            {amount || hasStorageSubscription ? (
+            {!isPaymentBlocked && (amount || hasStorageSubscription) ? (
               <WalletContainer
                 onTopUp={onTopUpClick}
                 isPaymentBlockedByBalance={isPaymentBlockedByBalance}
@@ -353,6 +358,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
             isNullAmount={amount === 0}
             isPaymentBlockedByBalance={isPaymentBlockedByBalance}
             isDowngradeStoragePlan={isDowngradeStoragePlan}
+            isPaymentBlocked={isPaymentBlocked}
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -368,6 +374,7 @@ export default inject(
       currentStoragePlanSize,
       hasPreviousStorageSubscription,
       previousStoragePlanSize,
+      hasScheduledStorageChange,
     } = currentTariffStatusStore;
 
     const { fetchBalance, storagePriceIncrement } = paymentStore;
@@ -392,6 +399,7 @@ export default inject(
       setPartialUpgradeFee,
       hasPreviousStorageSubscription,
       previousStoragePlanSize,
+      hasScheduledStorageChange,
     };
   },
 )(observer(StoragePlanUpgrade));

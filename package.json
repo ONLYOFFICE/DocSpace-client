@@ -28,7 +28,7 @@
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
     "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
     "tsc": "pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management",
-    "prepare": "sh -c 'if [ \"$CI\" != \"true\" ] && command -v git >/dev/null 2>&1; then lefthook install || true; fi'"
+    "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\""
   },
   "devDependencies": {
     "@types/node": "22.9.3",

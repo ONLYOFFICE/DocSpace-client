@@ -128,5 +128,8 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPayment": "Nykyinen maksusi",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi"
+  "YourPrice": "Hintasi",
+  "AvailableLimit": "<1>Nykyisen suunnitelman käyttöraja:</1> {{amount}}",
+  "CurrentPaymentMonth": "Nykyinen maksu: {{price}}/kk ({{size}})",
+  "GoToService": "Siirry palveluun"
 }

@@ -129,5 +129,8 @@
   "WouldYouLikeToEnableAutoTopUps": "¿Desea activar las recargas automáticas para que su saldo no se agote nunca?",
   "YouHaveNotAddedAnyPayment": "No ha añadido ningún pago",
   "YourCurrentPayment": "Su pago actual",
-  "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>"
+  "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>",
+  "ActionCannotBeUndone": "<1>Por favor, tenga en cuenta:</1> esta acción no se puede deshacer.",
+  "ConnectAndConfigureServices": "Esta sección se utiliza para conectar y configurar los servicios.",
+  "StorageCapacityUpdated": "La capacidad de almacenamiento se ha actualizado."
 }

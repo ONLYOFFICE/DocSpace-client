@@ -40,12 +40,14 @@ import StoragePlanUpgrade from "./StoragePlanUpgrade";
 import ServicesLoader from "./ServicesLoader";
 
 import StoragePlanCancel from "./StoragePlanCancel";
+import GracePeriodModal from "./GracePeriodModal";
 
 type ServicesProps = {
   servicesInit: (t: TTranslation) => void;
   isInitServicesPage: boolean;
   isVisibleWalletSettings: boolean;
   isShowStorageTariffDeactivated: boolean;
+  isGracePeriod: boolean;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -55,10 +57,13 @@ const Services: React.FC<ServicesProps> = ({
   isInitServicesPage,
   isVisibleWalletSettings,
   isShowStorageTariffDeactivated,
+  isGracePeriod,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
+  const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
+    useState(false);
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
@@ -105,6 +110,11 @@ const Services: React.FC<ServicesProps> = ({
   }, []);
 
   const onClick = () => {
+    if (isGracePeriod) {
+      setIsGracePeriodModalVisible(true);
+      return;
+    }
+
     setIsStorageVisible(true);
   };
 
@@ -130,6 +140,10 @@ const Services: React.FC<ServicesProps> = ({
     }
   };
 
+  const onCloseGracePeriodModal = () => {
+    setIsGracePeriodModalVisible(false);
+  };
+
   return shouldShowLoader ? (
     showLoader ? (
       <ServicesLoader />
@@ -152,6 +166,12 @@ const Services: React.FC<ServicesProps> = ({
           onClose={onCloseStorageCancell}
         />
       ) : null}
+      {isGracePeriodModalVisible ? (
+        <GracePeriodModal
+          visible={isGracePeriodModalVisible}
+          onClose={onCloseGracePeriodModal}
+        />
+      ) : null}
     </>
   );
 };
@@ -160,12 +180,15 @@ export const Component = inject(
   ({ servicesStore, currentTariffStatusStore }: TStore) => {
     const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
       servicesStore;
-    const { isShowStorageTariffDeactivated } = currentTariffStatusStore;
+    const { isShowStorageTariffDeactivated, isGracePeriod } =
+      currentTariffStatusStore;
+
     return {
       servicesInit,
       isInitServicesPage,
       isVisibleWalletSettings,
       isShowStorageTariffDeactivated,
+      isGracePeriod,
     };
   },
 )(observer(Services));

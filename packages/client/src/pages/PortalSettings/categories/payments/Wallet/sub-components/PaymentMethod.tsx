@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
+import CrossReactSvg from "PUBLIC_DIR/images/icons/16/cross.react.svg";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 
 import styles from "../styles/PaymentMethod.module.scss";

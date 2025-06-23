@@ -128,5 +128,8 @@
   "YouHaveNotAddedAnyPayment": "ທ່ານຍັງບໍ່ໄດ້ເພີ່ມການຈ່າຍເງິນໃດໆ",
   "YourCurrentPayment": "ການຈ່າຍເງິນຂອງທ່ານໃນປັດຈຸບັນ",
   "YourCurrentPlan": "<1>ແຜນການປັດຈຸບັນຂອງທ່ານ:</1> {{amount}} <2>({{price}}/ເດືອນ)</2>",
-  "YourPrice": "ລາຄາຂອງເຈົ້າ"
+  "YourPrice": "ລາຄາຂອງເຈົ້າ",
+  "AvailableLimit": "<1>ຂີດຈຳກັດທີ່ສາມາດໃຊ້ໄດ້ພາຍໃຕ້ແຜນປັດຈຸບັນ:</1> {{amount}}",
+  "CurrentPaymentMonth": "ການຈ່າຍເງິນປັດຈຸບັນ: {{price}}/ເດືອນ ({{size}})",
+  "GoToService": "ໄປ​ບໍ​ລິ​ການ"
 }

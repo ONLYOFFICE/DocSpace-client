@@ -128,5 +128,8 @@
   "YouHaveNotAddedAnyPayment": "Neboli pridané žiadne platby.",
   "YourCurrentPayment": "Vaša aktuálna platba",
   "YourCurrentPlan": "<1>Váš aktuálny plán:</1> {{amount}} <2>({{price}}/mesiac)</2>",
-  "YourPrice": "Vaša cena"
+  "YourPrice": "Vaša cena",
+  "AvailableLimit": "<1>Dostupný limit v rámci aktuálneho plánu:</1> {{amount}}",
+  "CurrentPaymentMonth": "Aktuálna platba: {{price}}/mesiac ({{size}})",
+  "GoToService": "Prejdite do služby"
 }

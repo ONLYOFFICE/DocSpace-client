@@ -34,6 +34,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
+import { Link } from "@docspace/shared/components/link";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
@@ -77,6 +78,8 @@ type WalletProps = {
   setVisibleWalletSetting?: (value: boolean) => void;
   isNotPaidPeriod?: boolean;
   isMobile?: boolean;
+  walletCustomerStatusNotActive?: boolean;
+  cardLinked?: string;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -102,6 +105,8 @@ const Wallet = (props: WalletProps) => {
     setVisibleWalletSetting,
     isNotPaidPeriod,
     isMobile,
+    walletCustomerStatusNotActive,
+    cardLinked,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -169,6 +174,12 @@ const Wallet = (props: WalletProps) => {
     }
   };
 
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_self")
+      : toastr.error(t("ErrorNotification"));
+  };
+
   return (
     <div className={styles.walletContainer}>
       <Text className={styles.walletDescription}>
@@ -211,6 +222,25 @@ const Wallet = (props: WalletProps) => {
         />
       </div>
 
+      {walletCustomerStatusNotActive ? (
+        <div className={styles.walletCustomerStatusNotActive}>
+          <Text fontWeight={600} className={styles.warningColor}>
+            {t("CardUnlinked")}
+          </Text>
+          <Text as="span" className={styles.warningColor}>
+            {t("LinkNewCard")}
+          </Text>{" "}
+          <Link
+            as="span"
+            onClick={goLinkCard}
+            fontWeight={600}
+            textDecoration="underline"
+          >
+            {t("AddPaymentMethod")}
+          </Link>
+        </div>
+      ) : null}
+
       <AutoPaymentInfo onOpen={onOpenLink} />
 
       {visible ? (
@@ -250,6 +280,7 @@ export default inject(
       canUpdateTariff,
       setVisibleWalletSetting,
       isCardLinkedToPortal,
+      walletCustomerStatusNotActive,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
@@ -272,6 +303,7 @@ export default inject(
       isCardLinkedToPortal,
       isNotPaidPeriod,
       isMobile,
+      walletCustomerStatusNotActive,
     };
   },
 )(observer(Wallet));

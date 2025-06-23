@@ -64,6 +64,7 @@ import {
   TPaymentQuota,
   TNumericPaymentFeature,
 } from "@docspace/shared/api/portal/types";
+import { PaymentMethodStatus } from "@docspace/shared/enums";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -324,6 +325,20 @@ class PaymentStore {
     return this.walletPayer.email;
   }
 
+  get walletCustomerUnlinkedStatus() {
+    return this.walletPayer.paymentMethodStatus === PaymentMethodStatus.None;
+  }
+
+  get walletCustomerExpiredStatus() {
+    return this.walletPayer.paymentMethodStatus === PaymentMethodStatus.Expired;
+  }
+
+  get walletCustomerStatusNotActive() {
+    return (
+      this.walletCustomerUnlinkedStatus || this.walletCustomerExpiredStatus
+    );
+  }
+
   get isAutoPaymentExist() {
     return this.autoPayments?.enabled;
   }
@@ -530,6 +545,10 @@ class PaymentStore {
       if (this.isAlreadyPaid || this.walletCustomerEmail) {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
+        }
+
+        if (this.walletCustomerStatusNotActive) {
+          requests.push(this.fetchCardLinked());
         }
 
         requests.push(this.fetchAutoPayments(), this.fetchTransactionHistory());

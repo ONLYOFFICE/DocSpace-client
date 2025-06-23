@@ -28,7 +28,7 @@
     "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
     "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
     "tsc": "pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management",
-    "prepare": "node -e \"process.env.CI || process.env.DOCKER || process.exit(1)\" || lefthook install"
+    "prepare": "sh -c 'if [ \"$CI\" != \"true\" ]; then lefthook install; fi'"
   },
   "devDependencies": {
     "@types/node": "22.9.3",

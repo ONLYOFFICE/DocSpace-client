@@ -255,6 +255,7 @@ const StartFillingPanel = ({
       onClose={closeStartFillingPanel}
       displayType={ModalDialogType.aside}
       containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
+      withoutPadding
     >
       <ModalDialog.Container>
         {isRoleSelectorVisible && !isInvitePanelVisible ? (
@@ -309,30 +310,32 @@ const StartFillingPanel = ({
       </ModalDialog.Container>
       <ModalDialog.Header>{t("Common:StartFilling")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {infoBarVisible ? (
-          <>
-            <PublicRoomBar
-              headerText={t("Common:FillingStatusBarTitle")}
-              bodyText={t("Common:FillingStatusBarDescription")}
-              iconName={InfoSvgUrl}
-              onClose={() => setInfoBarVisible(false)}
-            />
-            <hr className={styles.divider} />
-          </>
-        ) : null}
-        <p
-          className={classNames(styles.title, {
-            [styles.titleMargin]: !infoBarVisible,
-          })}
-        >
-          {t("Common:RolesFromTheForm")}
-        </p>
-        <FillingRoleSelector
-          roles={roles}
-          onSelect={onSelect}
-          removeUserFromRole={removeUserFromRole}
-          currentUserId={user.id}
-        />
+        <section className={styles.container}>
+          {infoBarVisible ? (
+            <>
+              <PublicRoomBar
+                headerText={t("Common:FillingStatusBarTitle")}
+                bodyText={t("Common:FillingStatusBarDescription")}
+                iconName={InfoSvgUrl}
+                onClose={() => setInfoBarVisible(false)}
+              />
+              <hr className={styles.divider} />
+            </>
+          ) : null}
+          <p
+            className={classNames(styles.title, {
+              [styles.titleMargin]: !infoBarVisible,
+            })}
+          >
+            {t("Common:RolesFromTheForm")}
+          </p>
+          <FillingRoleSelector
+            roles={roles}
+            onSelect={onSelect}
+            removeUserFromRole={removeUserFromRole}
+            currentUserId={user.id}
+          />
+        </section>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

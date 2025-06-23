@@ -66,6 +66,8 @@ type AdditionalStorageProps = {
   storageExpiryDate?: string;
   isCardLinkedToPortal?: boolean;
   hasStorageSubscription?: boolean;
+  isGracePeriod?: boolean;
+  hasScheduledStorageChange?: boolean;
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
@@ -82,6 +84,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   storageExpiryDate,
   isCardLinkedToPortal,
   hasStorageSubscription,
+  isGracePeriod,
+  hasScheduledStorageChange,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
   const { formatWalletCurrency, t } = useServicesActions();
@@ -140,7 +144,10 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
       {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
         if (!item.title || !item.image) return null;
         const eventDisabled =
-          isDisabled || !hasStorageSubscription || nextStoragePlanSize >= 0;
+          isGracePeriod ||
+          isDisabled ||
+          !hasStorageSubscription ||
+          hasScheduledStorageChange;
         return (
           <div
             key={item.id}
@@ -183,7 +190,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 {item.priceTitle}
               </Text>
 
-              {nextStoragePlanSize >= 0 ? (
+              {hasScheduledStorageChange ? (
                 <div
                   className={classNames(styles.changeShedule, {
                     [styles.warningColor]: true,
@@ -204,8 +211,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                   />
                 </div>
               ) : null}
-              {typeof nextStoragePlanSize !== "number" &&
-              currentStoragePlanSize > 0 ? (
+              {!hasScheduledStorageChange && currentStoragePlanSize > 0 ? (
                 <div
                   className={classNames(styles.changeShedule, {
                     [styles.greenColor]: true,
@@ -258,6 +264,8 @@ export default inject(
       nextStoragePlanSize,
       storageExpiryDate,
       hasStorageSubscription,
+      isGracePeriod,
+      hasScheduledStorageChange,
     } = currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
@@ -275,6 +283,8 @@ export default inject(
       nextStoragePlanSize,
       storageExpiryDate,
       isCardLinkedToPortal,
+      isGracePeriod,
+      hasScheduledStorageChange,
     };
   },
 )(observer(AdditionalStorage));

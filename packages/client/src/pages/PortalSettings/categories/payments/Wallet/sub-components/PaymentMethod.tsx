@@ -26,14 +26,13 @@
 
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { inject, observer } from "mobx-react";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
+import CrossReactSvg from "PUBLIC_DIR/images/icons/16/cross.react.svg";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 
 import styles from "../styles/PaymentMethod.module.scss";
@@ -43,7 +42,7 @@ type PaymentMethodProps = {
   cardLinked: string;
   accountLink: string;
   isDisabled: boolean;
-  walletCustomerStatusNotActive?: boolean;
+  walletCustomerStatusNotActive: boolean;
 };
 
 const PaymentMethod = (props: PaymentMethodProps) => {
@@ -122,10 +121,4 @@ const PaymentMethod = (props: PaymentMethodProps) => {
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
-  const { walletCustomerStatusNotActive } = paymentStore;
-
-  return {
-    walletCustomerStatusNotActive,
-  };
-})(observer(PaymentMethod));
+export default PaymentMethod;

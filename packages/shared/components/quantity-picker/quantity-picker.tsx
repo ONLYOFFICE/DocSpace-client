@@ -65,6 +65,18 @@ type QuantityPickerProps = {
   initialIncrementFromZero?: number;
 };
 
+const shouldSetIncrementError = (
+  newValue: number,
+  enableIncrementFromZero: boolean,
+  initialIncrementFromZero: number,
+): boolean => {
+  if (!enableIncrementFromZero) return false;
+  if (enableIncrementFromZero && newValue < initialIncrementFromZero)
+    return newValue !== 0;
+
+  return false;
+};
+
 const QuantityPicker: React.FC<QuantityPickerProps> = ({
   value,
   minValue,
@@ -82,7 +94,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   withoutContorls,
   disableValue,
   underContorlsTitle,
-  enableIncrementFromZero,
+  enableIncrementFromZero = false,
   initialIncrementFromZero = 100,
 }) => {
   const displayValue = showPlusSign
@@ -130,11 +142,13 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
           setError(false);
         } else {
           newValue += step;
-          if (enableIncrementFromZero && newValue < initialIncrementFromZero) {
-            setError(newValue !== 0);
-          } else {
-            setError(false);
-          }
+          setError(
+            shouldSetIncrementError(
+              newValue,
+              enableIncrementFromZero,
+              initialIncrementFromZero,
+            ),
+          );
         }
       }
     }
@@ -144,11 +158,13 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
         newValue = maxValue;
       } else if (value > minValue) {
         newValue -= step;
-        if (enableIncrementFromZero && newValue < initialIncrementFromZero) {
-          setError(newValue !== 0);
-        } else {
-          setError(false);
-        }
+        setError(
+          shouldSetIncrementError(
+            newValue,
+            enableIncrementFromZero,
+            initialIncrementFromZero,
+          ),
+        );
       }
     }
 
@@ -177,11 +193,13 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     onChange(numberValue);
 
-    if (enableIncrementFromZero && numberValue < initialIncrementFromZero) {
-      setError(numberValue !== 0);
-    } else {
-      setError(false);
-    }
+    setError(
+      shouldSetIncrementError(
+        numberValue,
+        enableIncrementFromZero,
+        initialIncrementFromZero,
+      ),
+    );
   };
 
   const buttonProps = isDisabled ? {} : { onClick: handleButtonClick };

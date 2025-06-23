@@ -28,6 +28,7 @@ import React, { useRef, useEffect, useCallback, useState } from "react";
 import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 import { motion } from "framer-motion";
+import { isMobile } from "react-device-detect";
 import ArrowReactUrl from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
@@ -64,7 +65,7 @@ const SecondaryTabs = (props: TabsProps) => {
     : items.findIndex((item) => item.id === selectedItemId);
 
   const [referenceTabSize, setReferenceTabSize] = useState<number | null>(null);
-  const [withArrows, setWithArrows] = useState(false);
+  const [tabsIsOverflowing, setTabsIsOverflowing] = useState(false);
 
   const tabsRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<ScrollbarType>(null);
@@ -135,7 +136,8 @@ const SecondaryTabs = (props: TabsProps) => {
   }, [setReferenceTabSize, isLoading]);
 
   useEffect(() => {
-    if (withArrows) return;
+    if (tabsIsOverflowing) return;
+
     const tabsContainerWidth = tabsContainerRef.current?.offsetWidth ?? 0;
 
     if (tabsContainerWidth && referenceTabSize) {
@@ -143,6 +145,10 @@ const SecondaryTabs = (props: TabsProps) => {
         tabsContainerWidth / (referenceTabSize + TABS_GAP + TAB_PADDING),
       );
       if (maxTabsCount < items.length) {
+        setTabsIsOverflowing(true);
+
+        if (isMobile) return;
+
         maxTabsCount = Math.floor(
           (tabsContainerWidth - ARROWS_WIDTH) /
             (referenceTabSize + TABS_GAP + TAB_PADDING),
@@ -154,11 +160,9 @@ const SecondaryTabs = (props: TabsProps) => {
           TABS_GAP;
 
         setReferenceTabSize(size);
-
-        setWithArrows(true);
       }
     }
-  }, [referenceTabSize, items.length, withArrows]);
+  }, [referenceTabSize, items.length, tabsIsOverflowing]);
 
   useEffect(() => {
     scrollToTab(selectedItemIndex);
@@ -190,11 +194,13 @@ const SecondaryTabs = (props: TabsProps) => {
   };
 
   const containerW =
-    withArrows && referenceTabSize
+    tabsIsOverflowing && referenceTabSize
       ? items.length * (referenceTabSize + TAB_PADDING) +
         ARROWS_WIDTH +
         items.length * TABS_GAP
       : null;
+
+  const withArrows = tabsIsOverflowing && !isMobile;
 
   const renderContent = (
     <div

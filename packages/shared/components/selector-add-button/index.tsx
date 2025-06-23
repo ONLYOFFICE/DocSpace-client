@@ -68,8 +68,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
   const buttonClassName = classNames(styles.selectorButton, {
     [styles.isAction]: isAction,
     [styles.isDisabled]: isDisabled,
-    [styles.isSize]: !!size,
-    "---selector-add-button-size": size,
+    // [styles.isSize]: !!size,
   });
 
   const containerClassName = classNames(
@@ -85,6 +84,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     ? ({
         ...style,
         "--main-accent-button": `${mainAccentColor}1A`,
+        "--selector-add-button-size": size,
       } as React.CSSProperties)
     : style;
 

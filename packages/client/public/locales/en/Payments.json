@@ -136,6 +136,7 @@
   "Wallet": "Wallet",
   "WalletDescription": "The {{productName}} Wallet lets you easily purchase storage space. Add funds to your wallet and select the services you need in the Services section to get started.",
   "WalletRefilled": "Wallet refilled",
+  "WalletToppedUp": "Wallet has been successfully topped up",
   "WantToCancelStoragePlan": "Are you sure you want to cancel your additional storage subscription?",
   "Warning": "You will keep your full {{amount}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}.",
   "WhenBalanceDropsTo": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",

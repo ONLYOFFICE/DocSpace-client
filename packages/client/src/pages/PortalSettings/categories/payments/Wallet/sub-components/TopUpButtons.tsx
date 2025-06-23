@@ -67,6 +67,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
 
       await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);
 
+      toastr.success(t("WalletToppedUp"));
       onClose();
     } catch (e) {
       toastr.error(e);

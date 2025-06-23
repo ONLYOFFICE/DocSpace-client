@@ -313,6 +313,8 @@ class UsersStore {
 
       if (!data || !id) return;
 
+      if (this.groupsStore.currentGroup.id !== id) return;
+
       const group = await api.groups.getGroupById(id, true);
 
       runInAction(() => {

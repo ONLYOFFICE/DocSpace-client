@@ -59,6 +59,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
     isCurrentStoragePlan,
     isDowngradeStoragePlan,
     hasStorageSubscription,
+    isPaymentBlocked,
   } = props;
 
   const { t } = useServicesActions();
@@ -75,11 +76,13 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
         isLoading={isLoading || isWaitingCalculation}
         isDisabled={
-          !isExceedingStorageLimit && !isDowngradeStoragePlan
-            ? (!hasStorageSubscription && isNullAmount) ||
-              isPaymentBlockedByBalance ||
-              isCurrentStoragePlan
-            : false
+          isPaymentBlocked
+            ? true
+            : !isExceedingStorageLimit && !isDowngradeStoragePlan
+              ? (!hasStorageSubscription && isNullAmount) ||
+                isPaymentBlockedByBalance ||
+                isCurrentStoragePlan
+              : false
         }
       />
       <Button

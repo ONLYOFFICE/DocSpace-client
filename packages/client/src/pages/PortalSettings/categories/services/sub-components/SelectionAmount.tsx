@@ -87,8 +87,8 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       ? partialUpgradeFee
       : totalPrice;
 
-      const difference = Math.abs(walletBalance! - amountValue!);
-      
+    const difference = Math.abs(walletBalance! - amountValue!);
+
     setReccomendedAmount?.(Math.ceil(difference));
 
     const getCardLink = () => {

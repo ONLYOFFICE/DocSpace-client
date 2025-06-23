@@ -317,6 +317,7 @@
   "Hour": "sat",
   "Image": "Slika",
   "Images": "Slike",
+  "Important": "Važno",
   "IncorrectDomain": "Netačan domen",
   "IncorrectEmail": "Netačan email",
   "IncorrectFirstName": "Netačno ime",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Pretplata istekla",
   "SubscriptionIsExpiring": "Vaša pretplata ističe {{date}}",
   "SuccessfullyCompletedOperation": "Operacija je uspešno završena.",
+  "SuggestFeature": "Predloži funkciju",
   "Support": "Podrška",
   "SwitchToThumbnails": "Prebaci se na prikaz sličica",
   "SwitchViewToCompact": "Prebaci se na kompaktni prikaz",
@@ -720,7 +722,5 @@
   "Yes": "Da",
   "Yesterday": "Juče",
   "You": "Vi",
-  "YourTurn": "Vaš red",
-  "Important": "Važno",
-  "SuggestFeature": "Predloži funkciju"
+  "YourTurn": "Vaš red"
 }

@@ -75,12 +75,18 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     "--badge-background-color": backgroundColor,
   } as React.CSSProperties;
 
-  const innerStyle = {
-    maxWidth,
-    padding,
-    borderRadius,
-    "--badge-background-color": backgroundColor,
-  } as React.CSSProperties;
+  const innerStyle = isPaidBadge
+    ? ({
+        padding,
+        borderRadius,
+        "--badge-background-color": backgroundColor,
+      } as React.CSSProperties)
+    : ({
+        maxWidth,
+        padding,
+        borderRadius,
+        "--badge-background-color": backgroundColor,
+      } as React.CSSProperties);
 
   const textStyle = {
     fontSize,

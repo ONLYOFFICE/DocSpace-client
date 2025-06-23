@@ -1020,11 +1020,7 @@ export const getSystemTheme = () => {
   if (typeof window !== "undefined") {
     const isDesktopClient = window?.AscDesktopEditor !== undefined;
     const desktopClientTheme = window?.RendererProcessVariable?.theme;
-    const isDark =
-      desktopClientTheme?.id === "theme-dark" ||
-      desktopClientTheme?.id === "theme-contrast-dark" ||
-      (desktopClientTheme?.id === "theme-system" &&
-        desktopClientTheme?.system === "dark");
+    const isDark = desktopClientTheme?.type === "dark";
 
     return isDesktopClient
       ? isDark
@@ -1041,13 +1037,13 @@ export const getSystemTheme = () => {
 
 export const getEditorTheme = (theme?: ThemeKeys) => {
   const systemTheme =
-    getSystemTheme() === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+    getSystemTheme() === ThemeKeys.DarkStr ? "theme-night" : "theme-white";
 
   switch (theme) {
     case ThemeKeys.BaseStr:
-      return "default-light";
+      return "theme-white";
     case ThemeKeys.DarkStr:
-      return "default-dark";
+      return "theme-night";
     case ThemeKeys.SystemStr:
       return systemTheme;
     default:
@@ -1406,4 +1402,40 @@ export const getSdkScriptUrl = (version: string) => {
   return typeof window !== "undefined"
     ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
     : "";
+};
+
+export const calculateTotalPrice = (
+  quantity: number,
+  unitPrice: number,
+): number => {
+  return Number((quantity * unitPrice).toFixed(2));
+};
+
+export const truncateNumberToFraction = (
+  value: number,
+  digits: number = 2,
+): string => {
+  const [intPart, fracPart = ""] = value.toString().split(".");
+  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
+  return `${intPart}.${truncated}`;
+};
+
+export const formatCurrencyValue = (
+  language: string,
+  amount: number,
+  currency: string,
+  minimumFractionDigits: number = 0,
+  maximumFractionDigits: number = 0,
+) => {
+  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
+  const truncated = Number(truncatedStr);
+
+  const formatter = new Intl.NumberFormat(language, {
+    style: "currency",
+    currency,
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
+
+  return formatter.format(truncated);
 };

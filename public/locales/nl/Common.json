@@ -317,6 +317,7 @@
   "Hour": "uur",
   "Image": "Afbeelding",
   "Images": "Afbeeldingen",
+  "Important": "Belangrijk",
   "IncorrectDomain": "Verkeerd domein",
   "IncorrectEmail": "Verkeerde e-mail",
   "IncorrectFirstName": "Onjuiste voornaam",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Abonnement verlopen",
   "SubscriptionIsExpiring": "Uw abonnement loopt af op {{date}}",
   "SuccessfullyCompletedOperation": "De bewerking is succesvol afgerond.",
+  "SuggestFeature": "Stel een functie voor",
   "Support": "Support",
   "SwitchToThumbnails": "Overschakelen naar thumbnails weergave",
   "SwitchViewToCompact": "Schakel naar compacte weergave",
@@ -720,7 +722,5 @@
   "Yes": "Ja",
   "Yesterday": "Gisteren",
   "You": "U",
-  "YourTurn": "Uw beurt",
-  "Important": "Belangrijk",
-  "SuggestFeature": "Stel een functie voor"
+  "YourTurn": "Uw beurt"
 }

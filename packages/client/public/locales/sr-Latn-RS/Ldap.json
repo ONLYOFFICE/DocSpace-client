@@ -26,6 +26,7 @@
   "LdapGroupNameAttribute": "Atribut Imena Grupe",
   "LdapGroupNameAttributeTooltip": "Molimo navedite atribut objekta koji odgovara imenu grupe.",
   "LdapGroupUserAttributeTooltip": "Unesite korisnički atribut objekta korišćen da odredi da li je ovaj korisnik član grupa.",
+  "LdapIntro": "Uvezite korisnike i grupe putem LDAP-a i omogućite autentifikaciju korisnika pomoću korisničkih imena/šifri sa LDAP servera. Korisnici će biti uvezeni odmah nakon čuvanja podešavanja. Kasnije dodati korisnici biće uvezeni prilikom prve autentifikacije. Ako želite da pristup obezbedite samo preko LDAP-a, onemogućite opciju za pozivanje novih {{productName}} članova preko Kontakata: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atribut Prijave",
   "LdapLoginAttributeTooltip": "Unesite atribut objekta koji odgovara korisničkoj prijavi.",
   "LdapLoginTooltip": "Molimo navedite korisnika za Prijavu koji ima prava pristupa za čitanje LDAP servera",
@@ -70,6 +71,5 @@
   "LdapUserFilterTooltip": "Koristite LDAP filter za pretragu da biste izabrali korisnike koji moraju biti uvezeni.",
   "LdapUserQuotaTooltip": "Da biste postavili skladišnu kvotu za korisnika, dodajte atribut u LDAP direktorijum (na primer, UsersQuotaLimit) i unesite celobrojnu vrednost za ovaj atribut. Kvota će se prikazivati u bajtovima. Ovde navedite samo naziv atributa. Ovaj atribut će biti primenjen samo tokom prvog podešavanja i kasnije se može promeniti ručno u odeljku {{contactsName}}.",
   "LdapUsersType": "Tip korisnika",
-  "LdapUserTypeTooltip": "Svi korisnici će biti dodati na {{productName}} sa odabranim tipom.",
-  "LdapIntro": "Uvezite korisnike i grupe putem LDAP-a i omogućite autentifikaciju korisnika pomoću korisničkih imena/šifri sa LDAP servera. Korisnici će biti uvezeni odmah nakon čuvanja podešavanja. Kasnije dodati korisnici biće uvezeni prilikom prve autentifikacije. Ako želite da pristup obezbedite samo preko LDAP-a, onemogućite opciju za pozivanje novih {{productName}} članova preko Kontakata: <1>{{link}}</1>"
+  "LdapUserTypeTooltip": "Svi korisnici će biti dodati na {{productName}} sa odabranim tipom."
 }

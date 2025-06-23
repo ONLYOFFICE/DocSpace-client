@@ -317,6 +317,7 @@
   "Hour": "Ժամ",
   "Image": "Պատկեր",
   "Images": "Պատկերներ",
+  "Important": "Կարևոր",
   "IncorrectDomain": "Սխալ տիրույթ",
   "IncorrectEmail": "Սխալ էլ․ հասցե",
   "IncorrectFirstName": "Սխալ անուն",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Բաժանորդագրության ժամկետը սպառվել է",
   "SubscriptionIsExpiring": "Ձեր բաժանորդագրության ժամկետը լրանում է {{date}}-ին",
   "SuccessfullyCompletedOperation": "Գործողությունը հաջողությամբ ավարտվել է։",
+  "SuggestFeature": "Առաջարկել ֆունկցիաներ",
   "Support": "Աջակցություն",
   "SwitchToThumbnails": "Անցնել մանրապատկերների տեսքին",
   "SwitchViewToCompact": "Անցնել կոմպակտ տեսքի",
@@ -720,6 +722,5 @@
   "Yes": "Այո",
   "Yesterday": "Երեկ",
   "You": "Դու",
-  "YourTurn": "Ձեր հերթն է",
-  "Important": "Կարևոր"
+  "YourTurn": "Ձեր հերթն է"
 }

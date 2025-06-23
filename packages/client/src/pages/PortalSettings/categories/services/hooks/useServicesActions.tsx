@@ -26,7 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 
-import { formatCurrencyValue } from "../../payments/Wallet/utils";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import store from "../../../../../store";
 import {
   calculateDifference,
@@ -53,8 +53,7 @@ export const useServicesActions = () => {
 
   const formatWalletCurrency = (
     quantity?: number,
-    minimumFractionDigits: number = 2,
-    maximumFractionDigits: number = 7,
+    maximumFractionDigits: number = 2,
   ) => {
     const amount = quantity ?? walletBalance;
 
@@ -62,7 +61,7 @@ export const useServicesActions = () => {
       language,
       amount,
       walletCodeCurrency || "",
-      minimumFractionDigits,
+      maximumFractionDigits,
       maximumFractionDigits,
     );
   };

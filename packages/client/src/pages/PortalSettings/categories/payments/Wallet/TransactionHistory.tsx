@@ -28,6 +28,7 @@ import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
+import classNames from "classnames";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -56,7 +57,8 @@ type TransactionHistoryProps = {
   fetchTransactionHistory?: any;
   openOnNewPage?: boolean;
   isTransactionHistoryExist?: boolean;
-  currentDeviceType?: DeviceType;
+  isMobile?: boolean;
+  isTablet?: boolean;
   isNotPaidPeriod?: boolean;
   formatDate?: (date: moment.Moment) => string;
 };
@@ -75,7 +77,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     fetchTransactionHistory,
     openOnNewPage,
     isTransactionHistoryExist,
-    currentDeviceType,
+    isMobile,
+    isTablet,
     isNotPaidPeriod,
     formatDate,
   } = props;
@@ -114,7 +117,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
 
-    const timerId = setTimeout(() => setIsLoading(true), 200);
+    const timerId = setTimeout(() => setIsLoading(true), 500);
 
     const { isCredit, isDebit } = getTransactionType(option.key as string);
 
@@ -138,7 +141,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
 
-    const timerId = setTimeout(() => setIsLoading(true), 200);
+    const timerId = setTimeout(() => setIsLoading(true), 500);
 
     const { isCredit, isDebit } = getTransactionType(
       selectedType.key as string,
@@ -162,7 +165,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
 
-    const timerId = setTimeout(() => setIsLoading(true), 200);
+    const timerId = setTimeout(() => setIsLoading(true), 500);
 
     const { isCredit, isDebit } = getTransactionType(
       selectedType.key as string,
@@ -271,16 +274,15 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   );
 
   const mobileFilter = (
-    <FilterIcon
-      id="filter-button"
-      onClick={openFilterDialog}
-      isOpen={isFilterDialogVisible}
-      isShowIndicator={hasAppliedDateFilter}
-    />
+    <div className={styles.filterIconWrapper}>
+      <FilterIcon
+        id="filter-button"
+        onClick={openFilterDialog}
+        isOpen={isFilterDialogVisible}
+        isShowIndicator={hasAppliedDateFilter}
+      />
+    </div>
   );
-
-  const isMobile = currentDeviceType === DeviceType.mobile;
-  const isTablet = currentDeviceType === DeviceType.tablet;
 
   return (
     <>
@@ -302,26 +304,38 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         <TransactionBody
           hasAppliedDateFilter={hasAppliedDateFilter}
           isTransactionHistoryExist={isTransactionHistoryExist!}
-          currentDeviceType={currentDeviceType!}
         />
       )}
 
       {isTransactionHistoryExist && !isLoading ? (
-        <div className={styles.downloadWrapper}>
-          <Button
-            label={t("Settings:DownloadReportBtnText")}
-            size={ButtonSize.small}
-            minWidth="auto"
-            onClick={getReport}
-            isLoading={isFormationHistory}
-            isDisabled={isNotPaidPeriod}
-          />
-          <Text as="span" className={styles.downloadReportDescription}>
-            {t("Settings:ReportSaveLocation", {
-              sectionName: t("Common:MyFilesSection"),
+        <>
+          <Text className={styles.transactionsLimit}>
+            {t("TransactionsLimit", {
+              buttonName: t("Settings:DownloadReportBtnText"),
             })}
           </Text>
-        </div>
+
+          <div
+            className={classNames(styles.downloadWrapper, {
+              [styles.isMobileButton]: isMobile,
+            })}
+          >
+            <Button
+              label={t("Settings:DownloadReportBtnText")}
+              size={isMobile ? ButtonSize.normal : ButtonSize.small}
+              minWidth="auto"
+              onClick={getReport}
+              isLoading={isFormationHistory}
+              isDisabled={isNotPaidPeriod}
+              scale={isMobile}
+            />
+            <Text as="span" className={styles.downloadReportDescription}>
+              {t("Settings:ReportSaveLocation", {
+                sectionName: t("Common:MyFilesSection"),
+              })}
+            </Text>
+          </div>
+        </>
       ) : null}
 
       {isFilterDialogVisible ? (
@@ -383,13 +397,17 @@ export default inject(
 
     const userId = userStore.user?.id;
 
+    const isMobile = currentDeviceType === DeviceType.mobile;
+    const isTablet = currentDeviceType === DeviceType.tablet;
+
     return {
       getStartTransactionDate,
       getEndTransactionDate,
       fetchTransactionHistory,
       openOnNewPage,
       userId,
-      currentDeviceType,
+      isMobile,
+      isTablet,
       isTransactionHistoryExist,
       isNotPaidPeriod,
       formatDate,

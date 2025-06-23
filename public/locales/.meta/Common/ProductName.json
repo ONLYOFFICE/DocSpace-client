@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-06-03T20:59:41.776Z",
+  "updated_at": "2025-06-18T17:09:45.633Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -510,13 +510,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 256,
+      "line_number": 356,
       "context": "const uniqueTooltipId = `userTooltip_${Math.random()}`;\n \n const tooltipContent = `${\n user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n return user.isTitle ? (\n <StyledUserTypeHeader isExpect={isExpect}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 256,
+      "line_number": 356,
       "context": "const uniqueTooltipId = `userTooltip_${Math.random()}`;\n \n const tooltipContent = `${\n user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n return user.isTitle ? (\n <StyledUserTypeHeader isExpect={isExpect}>",
       "module": "/packages/client"
     },
@@ -1008,7 +1008,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 90,
+      "line_number": 94,
       "context": "<Text className=\"intro-text settings_unavailable\">\n <Trans\n t={t}\n i18nKey=\"LdapIntro\"\n ns=\"Ldap\"\n values={{ productName: t(\"Common:ProductName\"), link }}\n components={{\n 1: (\n <Link\n fontSize=\"13px\"\n fontWeight=\"600\"",
       "module": "/packages/client"
     },
@@ -1128,7 +1128,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 175,
+      "line_number": 171,
       "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {isCardLinkedToPortal ? <PayerInformation /> : null}\n \n <div className={styles.balanceWrapper}>\n <div className={styles.headerContainer}>",
       "module": "/packages/client"
     },
@@ -1152,32 +1152,32 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
@@ -1224,7 +1224,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 179,
+      "line_number": 186,
       "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
@@ -1477,7 +1477,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
       "line_number": 169,
-      "context": "<Trans\n t={t}\n i18nKey=\"SetAppDescription\"\n ns=\"Confirm\"\n productName={t(\"Common:ProductName\")}\n >\n The two-factor authentication is enabled to provide additional portal\n security. Configure your authenticator application to continue work on\n the portal. For example you could use Google Authenticator for\n <Link",
+      "context": "<Trans\n t={t}\n i18nKey=\"SetAppDescription\"\n ns=\"Confirm\"\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Link\n color={theme.currentColorScheme?.main?.accent}\n href={TFA_ANDROID_APP_URL}",
       "module": "/packages/login"
     },
     {
@@ -1602,7 +1602,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 638,
+      "line_number": 658,
       "context": "emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={",
       "module": "/packages/shared"
     },

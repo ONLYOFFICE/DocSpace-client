@@ -43,6 +43,7 @@ import {
   getPaymentLink,
   getAutoTopUpSettings,
   updateAutoTopUpSettings,
+  getServicesQuotas,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -59,6 +60,9 @@ import {
   TCustomerInfo,
   TAutoTopUpSettings,
   TTransactionCollection,
+  TPaymentFeature,
+  TPaymentQuota,
+  TNumericPaymentFeature,
 } from "@docspace/shared/api/portal/types";
 
 // Constants for feature identifiers
@@ -141,6 +145,10 @@ class PaymentStore {
   upToBalanceError = false;
 
   minBalanceError = false;
+
+  servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map(); // temporary solution, should be in the service store
+
+  servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
 
   constructor(
     userStore: UserStore,
@@ -364,6 +372,17 @@ class PaymentStore {
     return true;
   }
 
+  get storageSizeIncrement() {
+    return (
+      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
+        ?.value || 0
+    );
+  }
+
+  get storagePriceIncrement() {
+    return this.servicesQuotas?.price.value ?? 0;
+  }
+
   updatePreviousBalance = () => {
     this.previousBalance = this.balance;
   };
@@ -433,8 +452,10 @@ class PaymentStore {
     this.walletPayer = res;
   };
 
-  fetchCardLinked = async () => {
-    const res = await getCardLinked(`${window.location.href}?complete=true`);
+  fetchCardLinked = async (url?: string) => {
+    const backUrl = url || `${window.location.href}?complete=true`;
+
+    const res = await getCardLinked(backUrl);
 
     if (!res) return;
 
@@ -464,6 +485,22 @@ class PaymentStore {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
+  handleServicesQuotas = async () => {
+    // temporary solution, should be in the service store
+
+    const res = await getServicesQuotas();
+
+    if (!res) return;
+
+    res[0].features.forEach((feature) => {
+      this.servicesQuotasFeatures.set(feature.id, feature);
+    });
+
+    this.servicesQuotas = res[0];
+
+    return res;
+  };
+
   initWalletPayerAndBalance = async (isRefresh) => {
     const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
 
@@ -476,12 +513,15 @@ class PaymentStore {
   };
 
   walletInit = async (t: TTranslation) => {
-    const requests = [];
-
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
 
     this.setVisibleWalletSetting(false);
+
+    const { isShowStorageTariffDeactivated, fetchPortalTariff } =
+      this.currentTariffStatusStore;
+
+    const requests = [fetchPortalTariff()];
 
     try {
       await this.initWalletPayerAndBalance(isRefresh);
@@ -498,6 +538,10 @@ class PaymentStore {
       }
 
       await Promise.all(requests);
+
+      if (isShowStorageTariffDeactivated) {
+        await this.handleServicesQuotas();
+      }
 
       this.setIsInitWalletPage(true);
 
@@ -529,11 +573,17 @@ class PaymentStore {
     )
       return;
 
-    const { setPayerInfo } = this.currentTariffStatusStore;
+    const { setPayerInfo, isShowStorageTariffDeactivated } =
+      this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
     const { setPortalPaymentQuotas } = this.paymentQuotasStore;
+    const { fetchPortalTariff } = this.currentTariffStatusStore;
 
-    const requests = [this.getSettingsPayment(), setPortalPaymentQuotas()];
+    const requests = [
+      this.getSettingsPayment(),
+      setPortalPaymentQuotas(),
+      fetchPortalTariff(),
+    ];
 
     if (!this.isAlreadyPaid || !this.walletCustomerEmail) {
       await this.fetchWalletPayer();
@@ -551,6 +601,9 @@ class PaymentStore {
 
     try {
       await Promise.all(requests);
+
+      if (isShowStorageTariffDeactivated) await this.handleServicesQuotas();
+
       this.setRangeStepByQuota();
       this.setBasicTariffContainer();
     } catch (error) {

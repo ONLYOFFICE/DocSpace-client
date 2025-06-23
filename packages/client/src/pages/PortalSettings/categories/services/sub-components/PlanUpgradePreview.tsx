@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { calcalateWalletPayment } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 
 import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";
 
@@ -47,10 +48,21 @@ import { usePaymentContext } from "../context/PaymentContext";
 let timeout: NodeJS.Timeout;
 let controller: AbortController;
 
+const getDirectionalText = (isRTL) => {
+  return isRTL ? `>1` : `<1`;
+};
+
 const PlanUpgradePreview = (props) => {
-  const { currentStoragePlanSize, amount, daysUtilPayment } = props;
-  const { setFuturePayment, futurePayment, setIsWaitingCalculation } =
-    usePaymentContext();
+  const {
+    currentStoragePlanSize,
+    amount,
+    daysUtilPayment,
+    setPartialUpgradeFee,
+    partialUpgradeFee,
+  } = props;
+  const { isRTL } = useInterfaceDirection();
+
+  const { setIsWaitingCalculation } = usePaymentContext();
   const { t } = useTranslation(["Payments", "Common"]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -82,7 +94,8 @@ const PlanUpgradePreview = (props) => {
           }
 
           const paymentAmount = currentWriteOff.amount;
-          setFuturePayment(paymentAmount);
+
+          setPartialUpgradeFee(paymentAmount);
           setIsLoading(false);
           setIsWaitingCalculation(false);
         } catch (e) {
@@ -101,6 +114,8 @@ const PlanUpgradePreview = (props) => {
       timeout = null;
     };
   }, []);
+
+  const days = daysUtilPayment || getDirectionalText(isRTL);
 
   return (
     <>
@@ -122,7 +137,7 @@ const PlanUpgradePreview = (props) => {
             fontSize="11px"
             className={styles.priceForEach}
           >
-            {t("RemainingDays", { count: daysUtilPayment })}
+            {t("RemainingDays", { count: days })}
           </Text>
         </div>
 
@@ -132,14 +147,14 @@ const PlanUpgradePreview = (props) => {
           ) : (
             <>
               <Text fontWeight="600" fontSize="14px">
-                {formatWalletCurrency(futurePayment)}
+                {formatWalletCurrency(partialUpgradeFee, 3)}
               </Text>
               <Text
                 fontWeight="600"
                 fontSize="11px"
                 className={styles.priceForEach}
               >
-                {t("ForDays", { count: daysUtilPayment })}
+                {t("ForDays", { count: days })}
               </Text>
             </>
           )}
@@ -149,12 +164,14 @@ const PlanUpgradePreview = (props) => {
   );
 };
 
-export default inject(({ currentTariffStatusStore }: TStore) => {
+export default inject(({ currentTariffStatusStore, servicesStore }: TStore) => {
   const { currentStoragePlanSize, storageSubscriptionExpiryDate } =
     currentTariffStatusStore;
-
+  const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
   return {
     currentStoragePlanSize,
     daysUtilPayment: getDaysUntilPayment(storageSubscriptionExpiryDate),
+    setPartialUpgradeFee,
+    partialUpgradeFee,
   };
 })(observer(PlanUpgradePreview));

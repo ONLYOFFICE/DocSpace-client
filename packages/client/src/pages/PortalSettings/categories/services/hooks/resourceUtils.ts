@@ -40,13 +40,6 @@ export const getDaysUntilPayment = (date) => {
   return dueDate.diff(today, "days");
 };
 
-export const calculateTotalPrice = (
-  quantity: number,
-  unitPrice: number,
-): number => {
-  return Number((quantity * unitPrice).toFixed(2));
-};
-
 export const isUpgrade = (quantity: number, current: number) =>
   quantity > current;
 

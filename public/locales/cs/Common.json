@@ -317,6 +317,7 @@
   "Hour": "hodina",
   "Image": "Obrázek",
   "Images": "Obrázky",
+  "Important": "Důležité",
   "IncorrectDomain": "Nesprávná doména",
   "IncorrectEmail": "Nesprávná emailová adresa",
   "IncorrectFirstName": "Nesprávné křestní jméno",
@@ -673,6 +674,7 @@
   "SubscriptionExpiredTitle": "Předplatné vypršelo",
   "SubscriptionIsExpiring": "Platnost vašeho předplatného vyprší dne {{date}}",
   "SuccessfullyCompletedOperation": "Operace byla úspěšně dokončena.",
+  "SuggestFeature": "Navrhněte funkci",
   "Support": "Podpora",
   "SwitchToThumbnails": "Přepnout na zobrazení miniatur",
   "SwitchViewToCompact": "Přepnout na kompaktní zobrazení",
@@ -720,7 +722,5 @@
   "Yes": "Ano",
   "Yesterday": "Včera",
   "You": "Vy",
-  "YourTurn": "Jste na řadě",
-  "Important": "Důležité",
-  "SuggestFeature": "Navrhněte funkci"
+  "YourTurn": "Jste na řadě"
 }

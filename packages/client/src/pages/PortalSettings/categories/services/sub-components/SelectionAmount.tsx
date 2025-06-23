@@ -26,10 +26,12 @@
 
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { Trans } from "react-i18next";
 
 import QuantityPicker from "@docspace/shared/components/quantity-picker";
 import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { Text } from "@docspace/shared/components/text";
 
 import { useServicesActions } from "../hooks/useServicesActions";
 import styles from "../styles/index.module.scss";
@@ -56,6 +58,8 @@ type SelectionAmountProps = {
 
 let timeout: NodeJS.Timeout;
 let controller: AbortController;
+
+const MIN_VALUE = 100;
 
 const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
   const {
@@ -144,6 +148,23 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       }
     : {};
 
+  const underContorlsTitle = (
+    <Trans
+      t={t}
+      ns="Payments"
+      i18nKey="PerStorageWitnMinValue"
+      values={{
+        currency: formatWalletCurrency(storagePriceIncrement),
+        amount: getConvertedSize(t, storageSizeIncrement || 0),
+        storageUnit: t("Common:Gigabyte"),
+        minValue: MIN_VALUE,
+      }}
+      components={{
+        1: <Text fontWeight={600} as="span" />,
+      }}
+    />
+  );
+
   return (
     <div className={styles.selectionAmount}>
       <QuantityPicker
@@ -157,12 +178,11 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
         isDisabled={hasScheduledStorageChange || isLoading}
         items={amountTabs()}
         withoutContorls={hasScheduledStorageChange}
-        underContorlsTitle={t("PerStorage", {
-          currency: formatWalletCurrency(storagePriceIncrement),
-          amount: getConvertedSize(t, storageSizeIncrement || 0),
-        })}
+        underContorlsTitle={underContorlsTitle}
         {...disableValueProps}
         isLarge
+        enableIncrementFromZero
+        initialIncrementFromZero={MIN_VALUE}
       />
     </div>
   );

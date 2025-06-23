@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { ChangeEvent, MouseEvent } from "react";
+import React, { ChangeEvent, MouseEvent, useState } from "react";
 import classNames from "classnames";
 
 import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
@@ -59,7 +59,10 @@ type QuantityPickerProps = {
   isLarge?: boolean;
   withoutContorls?: boolean;
   disableValue?: string;
-  underContorlsTitle?: string;
+  underContorlsTitle?: string | React.ReactNode;
+  isZeroAllowed?: boolean;
+  enableIncrementFromZero?: boolean;
+  initialIncrementFromZero?: number;
 };
 
 const QuantityPicker: React.FC<QuantityPickerProps> = ({
@@ -79,6 +82,8 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   withoutContorls,
   disableValue,
   underContorlsTitle,
+  enableIncrementFromZero,
+  initialIncrementFromZero = 100,
 }) => {
   const displayValue = showPlusSign
     ? value > maxValue
@@ -86,9 +91,15 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
       : `${value}`
     : `${value}`;
 
+  const [error, setError] = useState(false);
+
   const containerClass = classNames(styles.container, className);
   const titleClass = classNames(styles.countTitle, {
     [styles.disabled]: isDisabled,
+  });
+
+  const titleUnderControlsClass = classNames(styles.underContorlsText, {
+    [styles.warningIncrementFromZero]: enableIncrementFromZero ? error : false,
   });
 
   const inputClass = classNames(styles.countInput, {
@@ -114,7 +125,17 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     if (operation === "plus") {
       if (value <= maxValue) {
-        newValue += step;
+        if (enableIncrementFromZero && newValue === 0) {
+          newValue = initialIncrementFromZero;
+          setError(false);
+        } else {
+          newValue += step;
+          if (enableIncrementFromZero && newValue < initialIncrementFromZero) {
+            setError(newValue !== 0);
+          } else {
+            setError(false);
+          }
+        }
       }
     }
 
@@ -123,6 +144,11 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
         newValue = maxValue;
       } else if (value > minValue) {
         newValue -= step;
+        if (enableIncrementFromZero && newValue < initialIncrementFromZero) {
+          setError(newValue !== 0);
+        } else {
+          setError(false);
+        }
       }
     }
 
@@ -145,10 +171,17 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     if (numberValue <= minValue) {
       onChange(minValue);
+      setError(false);
       return;
     }
 
     onChange(numberValue);
+
+    if (enableIncrementFromZero && numberValue < initialIncrementFromZero) {
+      setError(numberValue !== 0);
+    } else {
+      setError(false);
+    }
   };
 
   const buttonProps = isDisabled ? {} : { onClick: handleButtonClick };
@@ -181,6 +214,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
   const onSelectTab = (data) => {
     onChange(value + data.value);
+    setError(false);
   };
 
   return (
@@ -240,7 +274,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
         )}
       </div>
 
-      <Text className={styles.underContorlsText}>{underContorlsTitle}</Text>
+      <Text className={titleUnderControlsClass}>{underContorlsTitle}</Text>
       {showSlider ? (
         <div className={styles.sliderWrapper}>
           <Slider

@@ -50,7 +50,6 @@ const DeleteLinkDialogComponent = (props) => {
     isPublicRoomType,
     isFormRoom,
     isCustomRoom,
-    setRoomShared,
     setPublicRoomKey,
   } = props;
 
@@ -69,7 +68,6 @@ const DeleteLinkDialogComponent = (props) => {
 
     editExternalLink(roomId, newLink)
       .then((res) => {
-        setRoomShared(roomId, !!res);
         deleteExternalLink(res, newLink.sharedTo.id);
 
         if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
@@ -187,7 +185,7 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
   DeleteLinkDialogComponent,
 );
 
-export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
+export default inject(({ dialogsStore, publicRoomStore }) => {
   const {
     deleteLinkDialogVisible: visible,
     setDeleteLinkDialogVisible: setIsVisible,
@@ -208,7 +206,6 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     isFormRoom,
     isCustomRoom,
     isPublicRoomType: linkParams.isPublic,
-    setRoomShared: filesStore.setRoomShared,
     setPublicRoomKey,
   };
 })(observer(DeleteLinkDialog));

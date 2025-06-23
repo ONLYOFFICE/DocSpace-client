@@ -26,12 +26,14 @@
 
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { inject, observer } from "mobx-react";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
+import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 
 import styles from "../styles/PaymentMethod.module.scss";
@@ -41,10 +43,17 @@ type PaymentMethodProps = {
   cardLinked: string;
   accountLink: string;
   isDisabled: boolean;
+  walletCustomerStatusNotActive?: boolean;
 };
 
 const PaymentMethod = (props: PaymentMethodProps) => {
-  const { walletCustomerEmail, cardLinked, accountLink, isDisabled } = props;
+  const {
+    walletCustomerEmail,
+    cardLinked,
+    accountLink,
+    isDisabled,
+    walletCustomerStatusNotActive,
+  } = props;
 
   const { t } = useTranslation("Payments");
 
@@ -76,20 +85,31 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         <div
           className={classNames(styles.cardLinked, {
             [styles.cardLinkDisabled]: isDisabled,
+            [styles.warningColor]: walletCustomerStatusNotActive,
           })}
         >
           <div className={styles.tickedWrapper}>
-            <CheckReactSvg />
+            {walletCustomerStatusNotActive ? (
+              <CrossReactSvg />
+            ) : (
+              <CheckReactSvg />
+            )}
             <Text fontWeight={600} fontSize="14px">
-              {t("CardLinked")}
+              {walletCustomerStatusNotActive
+                ? t("CardUnlinked")
+                : t("CardLinked")}
             </Text>
           </div>
           <Link
             fontWeight={600}
-            onClick={goStripeAccount}
+            onClick={
+              walletCustomerStatusNotActive ? goLinkCard : goStripeAccount
+            }
             textDecoration="underline dashed"
           >
-            {t("GoToStripe")}
+            {walletCustomerStatusNotActive
+              ? t("AddPaymentMethod")
+              : t("GoToStripe")}
           </Link>
         </div>
       ) : (
@@ -102,4 +122,10 @@ const PaymentMethod = (props: PaymentMethodProps) => {
   );
 };
 
-export default PaymentMethod;
+export default inject(({ paymentStore }: TStore) => {
+  const { walletCustomerStatusNotActive } = paymentStore;
+
+  return {
+    walletCustomerStatusNotActive,
+  };
+})(observer(PaymentMethod));

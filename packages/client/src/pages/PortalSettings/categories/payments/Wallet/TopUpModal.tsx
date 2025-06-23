@@ -62,6 +62,7 @@ type TopUpModalProps = {
   walletBalance?: number;
   wasFirstTopUp?: boolean;
   reccomendedAmount?: string;
+  walletCustomerStatusNotActive?: boolean;
 };
 
 const TopUpModal = (props: TopUpModalProps) => {
@@ -80,6 +81,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     walletBalance = 0,
     wasFirstTopUp,
     reccomendedAmount,
+    walletCustomerStatusNotActive,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -112,19 +114,21 @@ const TopUpModal = (props: TopUpModalProps) => {
               cardLinked={cardLinked!}
               accountLink={accountLink!}
               isDisabled={isLoading}
+              walletCustomerStatusNotActive={walletCustomerStatusNotActive!}
             />
 
             <Amount
               language={language!}
               currency={currency}
               walletCustomerEmail={walletCustomerEmail}
-              isDisabled={isLoading}
+              isDisabled={isLoading || walletCustomerStatusNotActive}
+              walletCustomerStatusNotActive={walletCustomerStatusNotActive}
             />
 
             {wasFirstTopUp && walletCustomerEmail ? (
               <AutomaticPaymentsBlock
                 isEditAutoPayment={isEditAutoPayment!}
-                isDisabled={isLoading}
+                isDisabled={isLoading || walletCustomerStatusNotActive}
               />
             ) : null}
           </div>
@@ -156,6 +160,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     walletBalance,
     walletCodeCurrency,
     wasFirstTopUp,
+    walletCustomerStatusNotActive,
   } = paymentStore;
 
   return {
@@ -168,5 +173,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     accountLink,
     walletBalance,
     wasFirstTopUp,
+    walletCustomerStatusNotActive,
   };
 })(observer(TopUpModal));

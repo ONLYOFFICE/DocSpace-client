@@ -42,12 +42,19 @@ type AmountProps = {
   language: string;
   currency: string;
   walletCustomerEmail?: boolean;
+  walletCustomerStatusNotActive?: boolean;
 };
 
 const MAX_LENGTH = 6;
 
 const Amount = (props: AmountProps) => {
-  const { language, currency, walletCustomerEmail, isDisabled } = props;
+  const {
+    language,
+    currency,
+    walletCustomerEmail,
+    isDisabled,
+    walletCustomerStatusNotActive,
+  } = props;
 
   const { amount, setAmount } = useAmountValue();
 
@@ -125,7 +132,7 @@ const Amount = (props: AmountProps) => {
           maxLength={MAX_LENGTH}
         />
       </div>
-      {!walletCustomerEmail ? (
+      {!walletCustomerEmail || walletCustomerStatusNotActive ? (
         <Tooltip
           id="iconTooltip"
           place="bottom"

@@ -26,7 +26,6 @@
 
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { inject, observer } from "mobx-react";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
@@ -43,7 +42,7 @@ type PaymentMethodProps = {
   cardLinked: string;
   accountLink: string;
   isDisabled: boolean;
-  walletCustomerStatusNotActive?: boolean;
+  walletCustomerStatusNotActive: boolean;
 };
 
 const PaymentMethod = (props: PaymentMethodProps) => {
@@ -122,10 +121,4 @@ const PaymentMethod = (props: PaymentMethodProps) => {
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
-  const { walletCustomerStatusNotActive } = paymentStore;
-
-  return {
-    walletCustomerStatusNotActive,
-  };
-})(observer(PaymentMethod));
+export default PaymentMethod;

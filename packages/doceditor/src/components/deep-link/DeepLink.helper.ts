@@ -80,7 +80,7 @@ const openDeepLink = (
   }
 };
 
-const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
+export const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
   const nav = navigator.userAgent;
   const isIOS = nav.includes("iPhone;") || nav.includes("iPad;");
 
@@ -97,6 +97,7 @@ export const getDeepLink = (
   file?: TFile,
   deepLinkConfig?: TDeepLinkConfig,
   originalUrl?: string,
+  isOpenOnlyApp?: boolean,
 ) => {
   const jsonData = {
     portal: location,
@@ -121,6 +122,6 @@ export const getDeepLink = (
   openDeepLink(`${deepLinkConfig?.url}?data=${deepLinkData}`, {
     onOpen: () =>
       (window.location.href = `${deepLinkConfig?.url}?data=${deepLinkData}`),
-    onFail: () => redirectToStore(deepLinkConfig),
+    onFail: isOpenOnlyApp ? undefined : () => redirectToStore(deepLinkConfig),
   });
 };

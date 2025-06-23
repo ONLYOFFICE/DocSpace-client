@@ -34,9 +34,6 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
-import QuantityPicker from "@docspace/shared/components/quantity-picker";
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
-import { getConvertedSize } from "@docspace/shared/utils/common";
 
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
@@ -48,6 +45,7 @@ import StorageInformation from "./sub-components/StorageInformation";
 import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
 import TopUpContainer from "./sub-components/TopUpContainer";
+import SelectionAmount from "./sub-components/SelectionAmount";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -59,12 +57,10 @@ type StorageDialogProps = {
     force?: boolean,
   ) => Promise<{ walletQuotas: { quantity: number; nextQuantity?: number }[] }>;
   fetchBalance?: () => Promise<void>;
-  hasScheduledStorageChange?: boolean;
-  nextStoragePlanSize?: number;
-  storageSizeIncrement?: number;
   isVisibleWalletSettings?: boolean;
   setVisibleWalletSetting?: (value: boolean) => void;
   partialUpgradeFee?: number;
+  featureCountData?: number;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -76,16 +72,18 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   currentStoragePlanSize,
   fetchPortalTariff,
   fetchBalance,
-  hasScheduledStorageChange,
   storagePriceIncrement,
-  nextStoragePlanSize,
-  storageSizeIncrement,
   isVisibleWalletSettings,
   setVisibleWalletSetting,
   partialUpgradeFee,
+  featureCountData,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
-  const [amount, setAmount] = useState<number>(currentStoragePlanSize!);
+  const [amount, setAmount] = useState<number>(
+    isVisibleWalletSettings
+      ? (featureCountData ?? 0)
+      : (currentStoragePlanSize ?? 0),
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisibleContainer] = useState(
     isVisibleWalletSettings,
@@ -93,18 +91,14 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   const [isRequestDialog, setIsRequestDialog] = useState(false);
 
   const {
-    maxStorageLimit,
     isExceedingPlanLimit,
     isCurrentPlan,
     calculateDifferenceBetweenPlan,
     isWalletBalanceInsufficient,
     isPlanUpgrade,
-    formatWalletCurrency,
     buttonTitle,
     isPlanDowngrade,
   } = useServicesActions();
-
-  const { isRTL } = useInterfaceDirection();
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
@@ -271,23 +265,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     if (isVisibleWalletSettings) setVisibleWalletSetting!(false);
   };
 
-  const amountTabs = () => {
-    const amounts = [100, 200, 500, 1024];
-    return amounts.map((item) => {
-      const name =
-        item > 800
-          ? `1 ${t("Common:Terabyte")}`
-          : `${item} ${t("Common:Gigabyte")}`;
-      return { value: item, name };
-    });
-  };
-
   const container = isVisibleContainer ? (
     <TopUpContainer
-      totalPrice={totalPrice}
       isVisibleContainer={isVisibleContainer}
       onCloseTopUpModal={onCloseTopUpModal}
-      newStorageSizeOnUpgrade={newStorageSizeOnUpgrade}
     />
   ) : null;
 
@@ -300,19 +281,6 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       />
     );
   }
-
-  const getDirectionalText = (from: number, to: number) => {
-    return isRTL ? `${from} ← ${to}` : `${from} → ${to}`;
-  };
-
-  const disableValueProps = hasScheduledStorageChange
-    ? {
-        disableValue: getDirectionalText(
-          currentStoragePlanSize!,
-          nextStoragePlanSize!,
-        ),
-      }
-    : {};
 
   return (
     <PaymentProvider>
@@ -329,24 +297,13 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           <div className={styles.dialogBody}>
             <StorageInformation />
 
-            <QuantityPicker
-              className="select-users-count-container"
-              value={amount}
-              minValue={0}
-              maxValue={maxStorageLimit}
-              step={1}
-              title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
-              showPlusSign
-              onChange={onChangeNumber}
-              isDisabled={hasScheduledStorageChange || isLoading}
-              items={amountTabs()}
-              withoutContorls={hasScheduledStorageChange}
-              underContorlsTitle={t("PerStorage", {
-                currency: formatWalletCurrency(storagePriceIncrement),
-                amount: getConvertedSize(t, storageSizeIncrement || 0),
-              })}
-              {...disableValueProps}
-              isLarge
+            <SelectionAmount
+              amount={amount}
+              onChangeNumber={onChangeNumber}
+              isLoading={isLoading}
+              isPaymentBlockedByBalance={isPaymentBlockedByBalance}
+              totalPrice={totalPrice}
+              newStorageSizeOnUpgrade={newStorageSizeOnUpgrade}
             />
 
             {amount || hasStorageSubscription ? (
@@ -397,36 +354,30 @@ export default inject(
   ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
     const {
       fetchPortalTariff,
-      hasScheduledStorageChange,
+
       hasStorageSubscription,
       currentStoragePlanSize,
-      nextStoragePlanSize,
     } = currentTariffStatusStore;
 
-    const { fetchBalance, walletBalance } = paymentStore;
+    const { fetchBalance } = paymentStore;
     const {
-      storageSizeIncrement,
       storagePriceIncrement,
-
       isVisibleWalletSettings,
       setVisibleWalletSetting,
       partialUpgradeFee,
+      featureCountData,
     } = servicesStore;
 
     return {
-      storageSizeIncrement,
       hasStorageSubscription,
       currentStoragePlanSize,
       fetchPortalTariff,
       fetchBalance,
-      walletBalance,
-      hasScheduledStorageChange,
       storagePriceIncrement,
-      nextStoragePlanSize,
-
       setVisibleWalletSetting,
       isVisibleWalletSettings,
       partialUpgradeFee,
+      featureCountData,
     };
   },
 )(observer(StoragePlanUpgrade));

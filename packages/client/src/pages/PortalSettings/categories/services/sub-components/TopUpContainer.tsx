@@ -26,44 +26,18 @@
 
 import { inject, observer } from "mobx-react";
 
-import { useEffect } from "react";
-
 import TopUpModal from "../../payments/Wallet/TopUpModal";
 import { useServicesActions } from "../hooks/useServicesActions";
 
 type TopUpContainerTypes = {
-  totalPrice: number;
   isVisibleContainer: boolean;
   onCloseTopUpModal: () => void;
-  newStorageSizeOnUpgrade: boolean;
-  partialUpgradeFee?: number;
-  walletBalance?: number;
-  setReccomendedAmount?: (amount: number) => void;
   reccomendedAmount?: number;
-  isVisibleWalletSettings?: boolean;
 };
 
 const TopUpContainer = (props: TopUpContainerTypes) => {
-  const {
-    isVisibleContainer,
-    onCloseTopUpModal,
-    newStorageSizeOnUpgrade,
-    partialUpgradeFee,
-    totalPrice,
-    walletBalance,
-    setReccomendedAmount,
-    reccomendedAmount,
-    isVisibleWalletSettings,
-  } = props;
+  const { isVisibleContainer, onCloseTopUpModal, reccomendedAmount } = props;
   const { formatWalletCurrency } = useServicesActions();
-  const amountValue = newStorageSizeOnUpgrade ? partialUpgradeFee : totalPrice;
-  const difference = Math.abs(walletBalance! - amountValue!);
-
-  useEffect(() => {
-    if (isVisibleContainer && !isVisibleWalletSettings) {
-      setReccomendedAmount!(Math.ceil(difference));
-    }
-  }, [isVisibleContainer, difference, setReccomendedAmount]);
 
   return isVisibleContainer ? (
     <TopUpModal
@@ -79,23 +53,11 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
   ) : null;
 };
 
-export default inject(
-  ({ servicesStore, currentTariffStatusStore, paymentStore }: TStore) => {
-    const {
-      partialUpgradeFee,
-      setReccomendedAmount,
-      reccomendedAmount,
-      isVisibleWalletSettings,
-    } = servicesStore;
-    const { currentStoragePlanSize } = currentTariffStatusStore;
-    const { walletBalance } = paymentStore;
-    return {
-      partialUpgradeFee,
-      currentStoragePlanSize,
-      walletBalance,
-      setReccomendedAmount,
-      reccomendedAmount,
-      isVisibleWalletSettings,
-    };
-  },
-)(observer(TopUpContainer));
+export default inject(({ servicesStore, currentTariffStatusStore }: TStore) => {
+  const { reccomendedAmount } = servicesStore;
+  const { currentStoragePlanSize } = currentTariffStatusStore;
+  return {
+    currentStoragePlanSize,
+    reccomendedAmount,
+  };
+})(observer(TopUpContainer));

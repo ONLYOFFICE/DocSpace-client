@@ -104,7 +104,8 @@ const Body = ({
   const isSearch = React.useContext(SearchValueContext);
   const { withInfoBar } = React.useContext(InfoBarContext);
 
-  const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
+  const { withBreadCrumbs, isBreadCrumbsLoading } =
+    React.useContext(BreadCrumbsContext);
 
   const { withTabs, tabsData, activeTabId } = React.useContext(TabsContext);
 
@@ -130,6 +131,15 @@ const Body = ({
       : isEmptyInput
         ? 1
         : items.length;
+
+  const isShareFormEmpty =
+    itemsCount === 0 &&
+    !isSearch &&
+    Boolean(items?.[0]?.isRoomsOnly) &&
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
+
+  const visibleInfoBar = !isShareFormEmpty && !isBreadCrumbsLoading;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -246,13 +256,6 @@ const Body = ({
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
-  const isShareFormEmpty =
-    itemsCount === 0 &&
-    !isSearch &&
-    Boolean(items?.[0]?.isRoomsOnly) &&
-    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
-      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
-
   const getFooterHeight = () => {
     if (withFooterCheckbox) return FOOTER_WITH_CHECKBOX_HEIGHT;
     if (withFooterInput) return FOOTER_WITH_NEW_NAME_HEIGHT;
@@ -286,9 +289,9 @@ const Body = ({
       }
     >
       <InfoBar
-        className={styles.selectorInfoBar}
         ref={infoBarRef}
-        visible={!isShareFormEmpty}
+        visible={visibleInfoBar}
+        className={styles.selectorInfoBar}
       />
       <BreadCrumbs visible={!isShareFormEmpty} />
 

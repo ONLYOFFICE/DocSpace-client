@@ -53,6 +53,7 @@ type SelectionAmountProps = {
   isPaymentBlockedByBalance?: boolean;
   isCardLinkedToPortal?: boolean;
   hasStorageSubscription?: boolean;
+  isDowngradeStoragePlan?: boolean;
 };
 
 let timeout: NodeJS.Timeout;
@@ -79,6 +80,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     isCardLinkedToPortal,
     isPaymentBlockedByBalance,
     hasStorageSubscription,
+    isDowngradeStoragePlan,
   } = props;
 
   const { maxStorageLimit, formatWalletCurrency, t } = useServicesActions();
@@ -148,23 +150,24 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       }
     : {};
 
-  const underContorlsTitle = hasStorageSubscription
-    ? t("PerStorage", {
-        currency: formatWalletCurrency(storagePriceIncrement),
-        amount: getConvertedSize(t, storageSizeIncrement || 0),
-      })
-    : t("PerStorageWitnMinValue", {
-        currency: formatWalletCurrency(storagePriceIncrement),
-        amount: getConvertedSize(t, storageSizeIncrement || 0),
-        storageUnit: t("Common:Gigabyte"),
-        minValue: MIN_VALUE,
-      });
+  const underContorlsTitle =
+    !isDowngradeStoragePlan && hasStorageSubscription
+      ? t("PerStorage", {
+          currency: formatWalletCurrency(storagePriceIncrement),
+          amount: getConvertedSize(t, storageSizeIncrement || 0),
+        })
+      : t("PerStorageWitnMinValue", {
+          currency: formatWalletCurrency(storagePriceIncrement),
+          amount: getConvertedSize(t, storageSizeIncrement || 0),
+          storageUnit: t("Common:Gigabyte"),
+          minValue: MIN_VALUE,
+        });
 
   return (
     <div className={styles.selectionAmount}>
       <QuantityPicker
         value={amount}
-        minValue={hasStorageSubscription ? 1 : MIN_VALUE}
+        minValue={MIN_VALUE}
         maxValue={maxStorageLimit}
         step={1}
         title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}

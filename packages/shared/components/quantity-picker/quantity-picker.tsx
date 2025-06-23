@@ -95,7 +95,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
       ? `${maxValue}+`
       : `${inputValue}`
     : `${inputValue}`;
-
+  console.log("value", value);
   useEffect(() => {
     setInputValue(value);
   }, [value]);
@@ -137,7 +137,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     if (operation === "minus") {
       if (value > maxValue) {
         newValue = maxValue;
-      } else if (value === minValue) {
+      } else if (value <= minValue) {
         newValue = isZeroAllowed ? 0 : minValue;
       } else if (value > minValue) {
         newValue -= step;
@@ -152,6 +152,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
     let rawValue = target.value;
+
     if (!displayValue.includes("+") && value > maxValue) {
       rawValue = rawValue.slice(0, -1);
     }
@@ -172,6 +173,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     inputTimeoutRef.current = setTimeout(() => {
       if (numberValue < minValue) {
+        setInputValue(isZeroAllowed ? 0 : minValue);
         onChange(isZeroAllowed ? 0 : minValue);
         return;
       }

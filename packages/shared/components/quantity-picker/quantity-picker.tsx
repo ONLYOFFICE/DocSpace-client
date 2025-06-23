@@ -24,7 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { ChangeEvent, MouseEvent } from "react";
+import React, {
+  ChangeEvent,
+  MouseEvent,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
 import classNames from "classnames";
 
 import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
@@ -60,6 +66,7 @@ type QuantityPickerProps = {
   withoutContorls?: boolean;
   disableValue?: string;
   underContorlsTitle?: string;
+  isZeroAllowed?: boolean;
 };
 
 const QuantityPicker: React.FC<QuantityPickerProps> = ({
@@ -79,12 +86,19 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   withoutContorls,
   disableValue,
   underContorlsTitle,
+  isZeroAllowed,
 }) => {
+  const [inputValue, setInputValue] = useState(value);
+
   const displayValue = showPlusSign
-    ? value > maxValue
+    ? inputValue > maxValue
       ? `${maxValue}+`
-      : `${value}`
-    : `${value}`;
+      : `${inputValue}`
+    : `${inputValue}`;
+
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   const containerClass = classNames(styles.container, className);
   const titleClass = classNames(styles.countTitle, {
@@ -113,7 +127,9 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     let newValue = +value;
 
     if (operation === "plus") {
-      if (value <= maxValue) {
+      if (value < minValue) {
+        newValue = minValue;
+      } else if (value <= maxValue) {
         newValue += step;
       }
     }
@@ -121,6 +137,8 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     if (operation === "minus") {
       if (value > maxValue) {
         newValue = maxValue;
+      } else if (value === minValue) {
+        newValue = isZeroAllowed ? 0 : minValue;
       } else if (value > minValue) {
         newValue -= step;
       }
@@ -130,25 +148,36 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
       onChange(newValue);
     }
   };
-
+  const inputTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
-    let inputValue = target.value;
-
+    let rawValue = target.value;
     if (!displayValue.includes("+") && value > maxValue) {
-      inputValue = inputValue.slice(0, -1);
+      rawValue = rawValue.slice(0, -1);
     }
 
-    const numberValue = +inputValue;
+    if (inputTimeoutRef.current) {
+      clearTimeout(inputTimeoutRef.current);
+    }
+
+    const numberValue = +rawValue;
 
     if (Number.isNaN(numberValue)) return;
 
-    if (numberValue <= minValue) {
-      onChange(minValue);
+    if (numberValue === 0 && !isZeroAllowed) {
       return;
     }
 
-    onChange(numberValue);
+    setInputValue(numberValue);
+
+    inputTimeoutRef.current = setTimeout(() => {
+      if (numberValue < minValue) {
+        onChange(isZeroAllowed ? 0 : minValue);
+        return;
+      }
+
+      onChange(numberValue);
+    }, 500);
   };
 
   const buttonProps = isDisabled ? {} : { onClick: handleButtonClick };
@@ -253,7 +282,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             max={maxValue + 1}
             step={step}
             withPouring
-            value={value}
+            value={inputValue}
             {...sliderProps}
             className={styles.slider}
           />

@@ -39,7 +39,7 @@ WORKDIR /app
 RUN pnpm config set store-dir /root/.local/share/pnpm/store
 
 # Copy package files first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Copy the source code with correct directory structure
 COPY ../common/ ./common/
@@ -48,23 +48,11 @@ COPY ../public/ ./public/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 
-# Install dependencies with recursive installation
+# Install dependencies with recursive installation and ignore scripts (prevents running scripts that may not be needed in production)
 RUN pnpm install --frozen-lockfile
 
-# Run before-build script (packages/runtime.json)
-RUN pnpm run before-build
-
-# Run build:translations
-RUN pnpm run build:translations
-
-# Run build webpack apps (using local webpack from node_modules)
-RUN pnpm --filter @docspace/client run build --env lint=false
-
-# Run build next apps
-RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/login run build
-RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/doceditor run build
-RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/sdk run build
-RUN TS_ERRORS_IGNORE=true pnpm --filter @docspace/management run build
+# Run build apps
+RUN pnpm run build
 
 EXPOSE 5001 5011 5013 5015 5099
 

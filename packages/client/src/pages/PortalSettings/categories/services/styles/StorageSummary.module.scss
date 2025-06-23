@@ -150,3 +150,9 @@
 .walletContainer {
   padding-bottom: 20px;
 }
+.planInfoHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}

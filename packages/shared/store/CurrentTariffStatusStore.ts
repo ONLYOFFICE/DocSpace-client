@@ -144,6 +144,14 @@ class CurrentTariffStatusStore {
       .format("LL");
   }
 
+  get daysUntilStorageExpiry() {
+    if (!this.storageSubscriptionExpiryDate) return 0;
+
+    const today = moment();
+    const dueDate = moment(this.storageSubscriptionExpiryDate);
+    return dueDate.diff(today, "days");
+  }
+
   get delayDueDate() {
     return this.portalTariffStatus
       ? this.portalTariffStatus.delayDueDate

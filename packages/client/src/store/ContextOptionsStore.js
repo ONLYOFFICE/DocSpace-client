@@ -1806,6 +1806,8 @@ class ContextOptionsStore {
         onClick: () => this.onClickMakeForm(item, t),
         disabled: false,
       },
+      ...pinOptions,
+      ...muteOptions,
       separator0,
       {
         id: "option_submit-to-gallery",
@@ -1948,6 +1950,21 @@ class ContextOptionsStore {
         // onLoad: () => this.onLoadLinks(t, item),
       },
       {
+        id: "option_download",
+        key: "download",
+        label: t("Common:Download"),
+        icon: DownloadReactSvgUrl,
+        onClick: () => {
+          if (isLockedSharedRoom(item))
+            return this.dialogsStore.setPasswordEntryDialog(true, item, true);
+
+          this.onClickDownload(item, t);
+        },
+        disabled:
+          (!item.security?.Download && !isLockedSharedRoom(item)) ||
+          Boolean(item.external && item.expired),
+      },
+      {
         id: "option_room-info",
         key: "room-info",
         label: t("Common:Info"),
@@ -1955,8 +1972,6 @@ class ContextOptionsStore {
         onClick: () => this.onShowInfoPanel(item),
         disabled: isPublicRoom || Boolean(item.external && item.expired),
       },
-      ...pinOptions,
-      ...muteOptions,
       {
         id: "option_export-room-index",
         key: "export-room-index",
@@ -2088,21 +2103,6 @@ class ContextOptionsStore {
         icon: DuplicateReactSvgUrl,
         onClick: () => this.onDuplicate(item, t),
         disabled: !item.security?.Duplicate,
-      },
-      {
-        id: "option_download",
-        key: "download",
-        label: t("Common:Download"),
-        icon: DownloadReactSvgUrl,
-        onClick: () => {
-          if (isLockedSharedRoom(item))
-            return this.dialogsStore.setPasswordEntryDialog(true, item, true);
-
-          this.onClickDownload(item, t);
-        },
-        disabled:
-          (!item.security?.Download && !isLockedSharedRoom(item)) ||
-          Boolean(item.external && item.expired),
       },
       {
         id: "option_remove-shared-room",
@@ -2280,7 +2280,122 @@ class ContextOptionsStore {
         !(isCollaborator && option.key === "create-room"),
     );
 
-    return trimSeparator(newOptions);
+    const manageGroups = [
+      [{ key: "edit-room" }, { key: "save-as-template" }],
+      [{ key: "download" }, { key: "duplicate-room" }],
+      [{ key: "change-room-owner" }, { key: "archive-room" }],
+    ];
+
+    const manageItems = [];
+    let lastNonEmptyGroupIndex = -1;
+
+    manageGroups.forEach((group, groupIndex) => {
+      const groupItems = group
+        .map((groupItem) =>
+          newOptions.find((option) => option.key === groupItem.key),
+        )
+        .filter((menuItem) => menuItem && menuItem.disabled !== true);
+
+      if (groupItems.length > 0) {
+        if (lastNonEmptyGroupIndex !== -1) {
+          manageItems.push({
+            key: `separator-after-group-${lastNonEmptyGroupIndex}`,
+            isSeparator: true,
+          });
+        }
+
+        groupItems.forEach((menuItem) => manageItems.push(menuItem));
+
+        lastNonEmptyGroupIndex = groupIndex;
+      }
+    });
+
+    const shareGroupItems = [
+      { key: "invite-users-to-room" },
+      { key: "copy-general-link" },
+      { key: "link-for-room-members" },
+      { key: "external-link" },
+      { key: "embedding-settings" },
+    ];
+
+    const shareItems = shareGroupItems
+      .map((shareItem) =>
+        newOptions.find((option) => option.key === shareItem.key),
+      )
+      .filter((shareOption) => shareOption && shareOption.disabled !== true);
+
+    const manageItemsCount = manageItems.filter(
+      (menuItem) => !menuItem.isSeparator && menuItem.disabled !== true,
+    ).length;
+    const shareItemsCount = shareItems.filter(
+      (menuItem) => !menuItem.isSeparator && menuItem.disabled !== true,
+    ).length;
+
+    const addManageGroup = manageItemsCount > 1;
+    const addShareGroup = shareItemsCount > 1;
+
+    const manageGroup = addManageGroup
+      ? {
+          id: "option_manage",
+          key: "manage",
+          label: t("Common:Manage"),
+          icon: SettingsReactSvgUrl,
+          items: manageItems,
+        }
+      : null;
+
+    const shareGroup = addShareGroup
+      ? {
+          id: "option_share",
+          key: "share",
+          label: t("Common:Share"),
+          icon: ShareReactSvgUrl,
+          items: shareItems,
+        }
+      : null;
+
+    let keysToRemove = [];
+
+    if (addManageGroup) {
+      keysToRemove = keysToRemove.concat([
+        "edit-room",
+        "save-as-template",
+        "download",
+        "duplicate-room",
+        "archive-room",
+        "change-room-owner",
+      ]);
+    }
+
+    if (addShareGroup) {
+      keysToRemove = keysToRemove.concat([
+        "invite-users-to-room",
+        "copy-general-link",
+        "link-for-room-members",
+        "embedding-settings",
+        "external-link",
+      ]);
+    }
+
+    const filteredOptions = newOptions.filter(
+      (option) => !keysToRemove.includes(option.key),
+    );
+
+    const separatorIndex = filteredOptions.findIndex(
+      (option) => option.key === "separator0",
+    );
+
+    const insertIndex = separatorIndex !== -1 ? separatorIndex + 1 : 1;
+
+    const resultOptions = [...filteredOptions];
+
+    const groupsToAdd = [manageGroup, shareGroup].filter(Boolean);
+
+    if (groupsToAdd.length > 0) {
+      resultOptions.splice(insertIndex, 0, ...groupsToAdd);
+    }
+
+    return trimSeparator(resultOptions);
   };
 
   getGroupContextOptions = (t) => {

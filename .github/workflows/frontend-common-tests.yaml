@@ -23,6 +23,11 @@ jobs:
           services: tests-ci
           test-container: tests-ci
           test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
   playwright-sdk:
     name: "SDK e2e tests"
     runs-on: ubuntu-latest
@@ -38,6 +43,11 @@ jobs:
           services: tests-ci
           test-container: tests-ci
           test-command: pnpm exec playwright test
+          environment: |
+            CI=true
+            GITHUB_WORKFLOW=${{ github.workflow }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
   eslint:
     name: "Lint tests"
     runs-on: ubuntu-latest

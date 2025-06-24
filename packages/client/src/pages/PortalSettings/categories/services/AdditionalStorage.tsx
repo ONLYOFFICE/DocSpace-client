@@ -101,7 +101,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     const dataset = (e.currentTarget as HTMLElement).dataset;
     const handleDisabled = dataset.disabled?.toLowerCase() === "true";
 
-    if (handleDisabled) return;
+    if (handleDisabled || !hasStorageSubscription) return;
 
     e.preventDefault();
     e.stopPropagation();
@@ -155,10 +155,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
         {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
           if (!item.title || !item.image) return null;
           const eventDisabled =
-            isGracePeriod ||
-            isDisabled ||
-            !hasStorageSubscription ||
-            hasScheduledStorageChange;
+            isGracePeriod || isDisabled || hasScheduledStorageChange;
+
           return (
             <div
               key={item.id}
@@ -183,7 +181,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                   data-disabled={eventDisabled}
                 >
                   <ToggleButton
-                    isChecked={currentStoragePlanSize > 0}
+                    isChecked={hasStorageSubscription}
                     className={styles.serviceToggle}
                     isDisabled={eventDisabled}
                   />

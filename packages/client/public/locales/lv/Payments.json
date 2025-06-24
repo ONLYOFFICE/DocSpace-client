@@ -11,6 +11,7 @@
   "AutomaticPayments": "Automātiskās maksājumu pieprasības",
   "AutoTopUp": "Auto papildinājums",
   "AutoTopUpEnabled": "Automātiskā papildināšana ir aktivizēta.",
+  "AvailableLimit": "<1>Pieejamais limits saskaņā ar pašreizējo plānu:</1> {{amount}}",
   "Balance": "Atlikums: <1>{{balance}}</1>",
   "BalanceInsufficient": "Atlikums: <1>{{balance}}</1> | Pārskaitīšanas fondos nav pietiekami līdzekļu",
   "BalanceText": "Balans",
@@ -41,6 +42,7 @@
   "Credit": "Kredīts",
   "CurrencyPerMonth": "{{currency}}/mēnesī",
   "CurrentBalance": "Pašreizējais atlikums: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Pašreizējā maksājuma summa: {{price}}/mēnesī ({{size}})",
   "Debit": "Debets",
   "DelayedPayment": "Novēlots {{planName}} plāna maksājums datēts {{date}}",
   "DiskStorage": "Diska krātuve",
@@ -55,6 +57,7 @@
   "FirstAddPaymentMethod": "Pirmkārt, jums nepieciešams pievienot maksājuma veidu.",
   "ForDays": "dienām: {{count}}",
   "FromTo": "No <1>{{fromDate}}</1> līdz <2>{{toDate}}</2>",
+  "GoToService": "Doties uz pakalpojumu",
   "GoToStripe": "Перейти в Stripe",
   "GracePeriodActivatedDescription": "Pagarinājuma periodā administratori nevar izveidot jaunas telpas un pievienot jaunus lietotājus. Pēc pagarinājuma perioda beigu datuma {{productName}} nebūs pieejams, kamēr nebūs veikts maksājums.",
   "GracePeriodActivatedInfo": "Pagarinājuma periods ir spēkā no <1> {{fromDate}} līdz {{byDate}}</1> (atlikušas dienas: {{delayDaysCount}}).",
@@ -128,8 +131,5 @@
   "YouHaveNotAddedAnyPayment": "Jūs neesat pievienojis(-usi) nevienu maksājumu",
   "YourCurrentPayment": "Jūsu pašreizējais maksājums",
   "YourCurrentPlan": "<1>Jūsu pašreizējais plāns:</1> {{amount}} <2>({{price}}/mēnesī)</2>",
-  "YourPrice": "Jūsu cena",
-  "AvailableLimit": "<1>Pieejamais limits saskaņā ar pašreizējo plānu:</1> {{amount}}",
-  "CurrentPaymentMonth": "Pašreizējā maksājuma summa: {{price}}/mēnesī ({{size}})",
-  "GoToService": "Doties uz pakalpojumu"
+  "YourPrice": "Jūsu cena"
 }

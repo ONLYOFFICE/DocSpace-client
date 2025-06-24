@@ -11,6 +11,7 @@
   "AutomaticPayments": "Samodejni plačila",
   "AutoTopUp": "Samodejno dopolnitev",
   "AutoTopUpEnabled": "Samodejno dopolnitev je omogočena.",
+  "AvailableLimit": "<1>Razpoložljiva meja v skladu z trenutnim načrtom:</1> {{amount}}",
   "Balance": "Stanje: <1>{{balance}}</1>",
   "BalanceInsufficient": "Stanje: <1>{{balance}}</1> | Nedovolj sredstev",
   "BalanceText": "ravnovesje",
@@ -41,6 +42,7 @@
   "Credit": "Kredit",
   "CurrencyPerMonth": "{{currency}}/mesečno",
   "CurrentBalance": "Trenutno stanje: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Trenutno plačilo: {{price}}/mesec ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "Zamuda pri plačilu paketa {{planName}} z datumom {{date}}",
   "DiskStorage": "Shranjevanje na disk",
@@ -55,6 +57,7 @@
   "FirstAddPaymentMethod": "Najprej morate dodati način plačila.",
   "ForDays": "za dneve: {{count}}",
   "FromTo": "Od <1>{{fromDate}}</1> do <2>{{toDate}}</2>",
+  "GoToService": "Pojdite v storitev",
   "GoToStripe": "Pojdite na Stripe",
   "GracePeriodActivatedDescription": "V prehodnem obdobju skrbniki ne morejo ustvarjati novih sob in dodajati novih uporabnikov. Po datumu zapadlosti bo {{productName}} postal nedosegljiv, dokler plačilo ni izvedeno.",
   "GracePeriodActivatedInfo": "Odložno obdobje velja <1>od {{fromDate}} do {{byDate}}</1> (preostalo je še: {{delayDaysCount}}).",
@@ -128,8 +131,5 @@
   "YouHaveNotAddedAnyPayment": "Ni bilo dodanega nobenega plačila.",
   "YourCurrentPayment": "Vaša trenutna plačila",
   "YourCurrentPlan": "<1>Vaš trenutni načrt:</1> {{amount}} <2>({{price}}/mesec)</2>",
-  "YourPrice": "Vaša cena",
-  "AvailableLimit": "<1>Razpoložljiva meja v skladu z trenutnim načrtom:</1> {{amount}}",
-  "CurrentPaymentMonth": "Trenutno plačilo: {{price}}/mesec ({{size}})",
-  "GoToService": "Pojdite v storitev"
+  "YourPrice": "Vaša cena"
 }

@@ -11,6 +11,7 @@
   "AutomaticPayments": "Avtomatik ödənişlər",
   "AutoTopUp": "Avto doldurma",
   "AutoTopUpEnabled": "Avtomatik doldurma aktivləşdirilib.",
+  "AvailableLimit": "<1>Mövcud plan üzrə məhdudiyyət:</1> {{amount}}",
   "Balance": "Баланс: <1>{{balance}}</1>",
   "BalanceInsufficient": "Balans: <1>{{balance}}</1> | Vəsait kifayət etmir",
   "BalanceText": "Balans",
@@ -41,6 +42,7 @@
   "Credit": "Kredit",
   "CurrencyPerMonth": "{{currency}}/ay",
   "CurrentBalance": "Mövcud balans: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Mövcud ödəniş: {{price}}/ay ({{size}})",
   "Debit": "Debet",
   "DelayedPayment": "{{date}} tarixli {{planName}} planının vaxtı keçmiş ödənişi",
   "DiskStorage": "Disk saxlama",
@@ -55,6 +57,7 @@
   "FirstAddPaymentMethod": "Əvvəl siz ödəniş vasitəsi əlavə etməlisiniz.",
   "ForDays": "günlər: {{count}}",
   "FromTo": "<1>{{fromDate}}</1> ilə <2>{{toDate}}</2> arasında",
+  "GoToService": "Servisə keçid edin",
   "GoToStripe": "Stripe-ə keçin",
   "GracePeriodActivatedDescription": "Güzəşt müddətində adminlər yeni otaqlar yarada və yeni istifadəçilər əlavə edə bilməzlər. Güzəşt müddəti bitdikdən sonra ödəniş edilənə qədər {{productName}} əlçatan olmayacaq.",
   "GracePeriodActivatedInfo": "Güzəşt müddəti <1>{{fromDate}} tarixindən {{byDate}}</1> tarixinədək tətbiq olunur (qalan günlər: {{delayDaysCount}}).",
@@ -128,8 +131,5 @@
   "YouHaveNotAddedAnyPayment": "Ödəniş əlavə etməmisiniz.",
   "YourCurrentPayment": "Hazırda olan ödənişiniz",
   "YourCurrentPlan": "<1>Hazırda olan planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Qiymətiniz",
-  "AvailableLimit": "<1>Mövcud plan üzrə məhdudiyyət:</1> {{amount}}",
-  "CurrentPaymentMonth": "Mövcud ödəniş: {{price}}/ay ({{size}})",
-  "GoToService": "Servisə keçid edin"
+  "YourPrice": "Qiymətiniz"
 }

@@ -11,6 +11,7 @@
   "AutomaticPayments": "Pagamentos automáticos",
   "AutoTopUp": "Auto recarga",
   "AutoTopUpEnabled": "O recarregamento automático está habilitado.",
+  "AvailableLimit": "<1>Limite disponível no plano atual:</1> {{amount}}",
   "Balance": "Saldo: <1>{{balance}}</1>",
   "BalanceInsufficient": "Saldo: <1>{{balance}}</1> | Saldo insuficiente",
   "BalanceText": "Equilíbrio",
@@ -41,6 +42,7 @@
   "Credit": "Crédito",
   "CurrencyPerMonth": "{{currency}}/mês",
   "CurrentBalance": "Saldo atual: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Pagamento atual: {{price}}/mês ({{size}})",
   "Debit": "Débito",
   "DelayedPayment": "Pagamento em atraso no plano {{planName}} data do plano {{date}}",
   "DiskStorage": "Armazenamento em disco",
@@ -128,7 +130,5 @@
   "YouHaveNotAddedAnyPayment": "Você não adicionou nenhum pagamento.",
   "YourCurrentPayment": "Seu pagamento atual",
   "YourCurrentPlan": "<1>Seu plano atual:</1> {{amount}} <2>({{price}}/mês)</2>",
-  "YourPrice": "O seu preço",
-  "AvailableLimit": "<1>Limite disponível no plano atual:</1> {{amount}}",
-  "CurrentPaymentMonth": "Pagamento atual: {{price}}/mês ({{size}})"
+  "YourPrice": "O seu preço"
 }

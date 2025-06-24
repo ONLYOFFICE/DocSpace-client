@@ -11,6 +11,7 @@
   "AutomaticPayments": "Automaattiset maksut",
   "AutoTopUp": "Automaattinen lataus",
   "AutoTopUpEnabled": "Automaattinen lataus on käytössä.",
+  "AvailableLimit": "<1>Nykyisen suunnitelman käyttöraja:</1> {{amount}}",
   "Balance": "Saldo: <1>{{balance}}</1>",
   "BalanceInsufficient": "Saldo: <1>{{balance}}</1> | Riittämättömät varat",
   "BalanceText": "Tasapaino",
@@ -41,6 +42,7 @@
   "Credit": "Luotto",
   "CurrencyPerMonth": "{{currency}}/kuukausi",
   "CurrentBalance": "Nykyinen saldo: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Nykyinen maksu: {{price}}/kk ({{size}})",
   "Debit": "Veloittaa",
   "DelayedPayment": "{{planName}} maksu myöhässä ohjelman päiväys {{date}}",
   "DiskStorage": "Levyvarasto",
@@ -55,6 +57,7 @@
   "FirstAddPaymentMethod": "Ensin sinun täytyy lisätä maksutapa",
   "ForDays": "päivää: {{count}}",
   "FromTo": "Alkaen <1>{{fromDate}}</1> loppuun <2>{{toDate}}</2>",
+  "GoToService": "Siirry palveluun",
   "GoToStripe": "Siirry Stripeen",
   "GracePeriodActivatedDescription": "Lisäajan aikana, järjestelmänvalvojat eivät voi luoda uusia huoneita tai lisätä uusia käyttäjiä. Lisäajan eräpäivän jälkeen {{productName}}-a ei voi enää käyttää ennen kuin maksu on suoritettu.",
   "GracePeriodActivatedInfo": "Lisäaika on voimassa <1> {{fromDate}}  {{byDate}}</1> (päivää jäljellä: {{delayDaysCount}}).",
@@ -128,8 +131,5 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPayment": "Nykyinen maksusi",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi",
-  "AvailableLimit": "<1>Nykyisen suunnitelman käyttöraja:</1> {{amount}}",
-  "CurrentPaymentMonth": "Nykyinen maksu: {{price}}/kk ({{size}})",
-  "GoToService": "Siirry palveluun"
+  "YourPrice": "Hintasi"
 }

@@ -11,6 +11,7 @@
   "AutomaticPayments": "Thanh toán tự động",
   "AutoTopUp": "Nạp tự động",
   "AutoTopUpEnabled": "Bật tính năng nạp tự động.",
+  "AvailableLimit": "<1>Giới hạn còn lại theo gói hiện tại:</1> {{amount}}",
   "Balance": "Số dư: <1>{{balance}}</1>",
   "BalanceInsufficient": "Số dư: <1>{{balance}}</1> | Không đủ tiền",
   "BalanceText": "Cân bằng",
@@ -41,6 +42,7 @@
   "Credit": "Tín dụng",
   "CurrencyPerMonth": "{{currency}}/tháng",
   "CurrentBalance": "Số dư hiện tại: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Thanh toán hiện tại: {{price}}/tháng ({{size}})",
   "Debit": "Nợ",
   "DelayedPayment": "Chậm thanh toán gói kế hoạch {{planName}} {{date}} ngày",
   "DiskStorage": "Lưu trữ trên đĩa",
@@ -128,7 +130,5 @@
   "YouHaveNotAddedAnyPayment": "Bạn chưa thêm bất kỳ phương thức thanh toán nào.",
   "YourCurrentPayment": "Thanh toán hiện tại của bạn",
   "YourCurrentPlan": "<1>Gói cước hiện tại của bạn:</1> {{amount}} <2>({{price}}/tháng)</2>",
-  "YourPrice": "Phí thanh toán của bạn",
-  "AvailableLimit": "<1>Giới hạn còn lại theo gói hiện tại:</1> {{amount}}",
-  "CurrentPaymentMonth": "Thanh toán hiện tại: {{price}}/tháng ({{size}})"
+  "YourPrice": "Phí thanh toán của bạn"
 }

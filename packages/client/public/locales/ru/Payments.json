@@ -11,6 +11,7 @@
   "AutomaticPayments": "Автоматические платежи",
   "AutoTopUp": "Автопополнение",
   "AutoTopUpEnabled": "Автопополнение включено.",
+  "AvailableLimit": "<1>Доступный лимит по текущему тарифу:</1> {{amount}}",
   "Balance": "Баланс: <1>{{balance}}</1>",
   "BalanceInsufficient": "Баланс: <1>{{balance}}</1> | Недостаточно средств",
   "BalanceText": "Баланс",
@@ -41,6 +42,7 @@
   "Credit": "Кредит",
   "CurrencyPerMonth": "{{currency}}/месяц",
   "CurrentBalance": "Текущий баланс: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Текущий платёж: {{price}}/месяц ({{size}})",
   "Debit": "Дебет",
   "DelayedPayment": "Просроченная оплата {{planName}} плана от {{date}}",
   "DiskStorage": "Дисковое хранилище",
@@ -55,6 +57,7 @@
   "FirstAddPaymentMethod": "Сначала вам нужно добавить способ оплаты",
   "ForDays": "на дней: {{count}}",
   "FromTo": "С <1>{{fromDate}}</1> По <2>{{toDate}}</2>",
+  "GoToService": "Перейти в сервис",
   "GoToStripe": "Перейти в Stripe",
   "GracePeriodActivatedDescription": "В течение льготного периода администраторы не могут создавать новые комнаты и добавлять новых пользователей. По истечении льготного периода {{productName}} станет недоступным до тех пор, пока не будет произведен платеж.",
   "GracePeriodActivatedInfo": "Льготный период действует <1>с {{fromDate}} по {{byDate}}</1> (дней осталось: {{delayDaysCount}}).",
@@ -128,8 +131,5 @@
   "YouHaveNotAddedAnyPayment": "Вы не добавили ни одного платежа",
   "YourCurrentPayment": "Ваш текущий платеж",
   "YourCurrentPlan": "<1>Ваш текущий тарифный план:</1> {{amount}} <2>({{price}}/месяц)</2>",
-  "YourPrice": "Ваша стоимость",
-  "AvailableLimit": "<1>Доступный лимит по текущему тарифу:</1> {{amount}}",
-  "CurrentPaymentMonth": "Текущий платёж: {{price}}/месяц ({{size}})",
-  "GoToService": "Перейти в сервис"
+  "YourPrice": "Ваша стоимость"
 }

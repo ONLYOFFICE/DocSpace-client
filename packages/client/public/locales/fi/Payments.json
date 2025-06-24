@@ -131,5 +131,19 @@
   "YourPrice": "Hintasi",
   "AvailableLimit": "<1>Nykyisen suunnitelman käyttöraja:</1> {{amount}}",
   "CurrentPaymentMonth": "Nykyinen maksu: {{price}}/kk ({{size}})",
-  "GoToService": "Siirry palveluun"
+  "GoToService": "Siirry palveluun",
+  "WalletToppedUp": "Lompakko on täytetty onnistuneesti",
+  "LinkNewCard": "Uuden kortin linkittämiseksi, seuraa tätä linkkiä.",
+  "TopUpToReactivateStorage": "Jotta voit aktivoida tilauksesi uudelleen, lisää saldoasi Palvelut-osiossa. Kun maksu on valmis, lisäsäilytystilasi on jälleen käytettävissä.",
+  "StorageTariffDeactivated": "Lisätallennustilauksen tilauksesi on deaktivioitu maksamattomuuden vuoksi.",
+  "StorageRestrictions": "Ilman toimenpiteitä tiedostojen ja kansioiden lataaminen, luominen ja muokkaaminen on rajoitettua, kunnes vapautat tilaa.",
+  "ServiceManagementUnavailable": "Palvelunhallinta ei ole käytettävissä armonisajan aikana, eikä palveluista veloiteta maksuja tänä aikana. Saadaksesi täyden toiminnallisuuden, päivitä {{planName}}-palvelusuunnitelmaan.",
+  "Reminder": "Muistutus:",
+  "PreviousPlan": "<1>Edellinen suunnitelma:</1> {{amount}} <2>({{price}}/kk)</2>",
+  "PerStorageWitnMinValue": "{{currency}} per {{amount}}/kuukausi <1>(min {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Maksuihin",
+  "CardUnlinked": "Card poistettu käytöstä",
+  "PartialPaymentDescription": "Tulevaisuudessa koko summa veloitetaan kerran laskutusjaksoissa tavanomaisena laskituspäivänä.",
+  "PartialPaymentNoDate": "Tänään maksat vain valitsemasi määrän {{storageUnit}} -tilaa jäljellä olevilta päiviltä laskutuspäivään asti.",
+  "PartialPaymentWithDate": "Tänään maksat vain valitsemasi määrän {{storageUnit}}-tilaa jäljellä olevilta päiviltä laskutuspäivään asti ({{startDate}} - {{endDate}})."
 }

@@ -131,5 +131,19 @@
   "YourPrice": "Vaša cena",
   "AvailableLimit": "<1>Razpoložljiva meja v skladu z trenutnim načrtom:</1> {{amount}}",
   "CurrentPaymentMonth": "Trenutno plačilo: {{price}}/mesec ({{size}})",
-  "GoToService": "Pojdite v storitev"
+  "GoToService": "Pojdite v storitev",
+  "WalletToppedUp": "Denarnica je bila uspešno napolnjena",
+  "LinkNewCard": "Za povezavo nove kartice, sledite tej povezavi.",
+  "TopUpToReactivateStorage": "Za ponovno aktivacijo naročnine, prosim, napolnite denarnico preko Zvez. Ko bo plačila končana, bo dodatna shramba spet na voljo.",
+  "StorageTariffDeactivated": "Vaša dodatna naročnina za shranjevanje je bila deaktivirana zaradi neporavnanega plačila.",
+  "StorageRestrictions": "Brez ukrepanja bodo nalaganje, ustvarjanje in urejanje datotek in map omejeni, dokler ne sprostite prostora.",
+  "ServiceManagementUnavailable": "Usluga upravljanja ni na voljo med poskusne dobe, in v tem času ne veljajo stroški za storitve. Za ponovno pridobitev polne funkcionalnosti prosim nadgradite na načrt {{planName}}.",
+  "Reminder": "Opomnik:",
+  "PreviousPlan": "<1>Prejšnji načrt:</1> {{amount}} <2>({{price}}/mesec)</2>",
+  "PerStorageWitnMinValue": "{{currency}} na {{amount}}/mesec <1>(min {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Plačila",
+  "CardUnlinked": "Odklopljena kartica",
+  "PartialPaymentDescription": "Naprej, bo celotni znesek zaračunan enkrat na obračunsko obdobje na vašem rednem datumu zaračunavanja.",
+  "PartialPaymentNoDate": "Danes plačujete samo za izbrano količino {{storageUnit}} za preostale dni do datuma zaračunavanja.",
+  "PartialPaymentWithDate": "Danes plačujete samo za izbrano količino {{storageUnit}} za preostale dni do datuma zaračunavanja ({{startDate}} do {{endDate}})."
 }

@@ -131,5 +131,19 @@
   "YourPrice": "Vaša cena",
   "AvailableLimit": "<1>Dostupný limit v rámci aktuálneho plánu:</1> {{amount}}",
   "CurrentPaymentMonth": "Aktuálna platba: {{price}}/mesiac ({{size}})",
-  "GoToService": "Prejdite do služby"
+  "GoToService": "Prejdite do služby",
+  "WalletToppedUp": "Peniaze boli úspešne doplnené na účet.",
+  "LinkNewCard": "Na pripojenie novej karty, prosím, postupujte podľa tohto odkaz.",
+  "TopUpToReactivateStorage": "Na obnovenie predplatného, doplňte prosím peňaženku cez Služby. Po dokončení platby bude vaše dodatočné úložisko opäť dostupné.",
+  "StorageTariffDeactivated": "Vaša dodatočná predplatná na úložisko bola deaktivovaná z dôvodu nezaplatenia.",
+  "StorageRestrictions": "Bez akcie bude nahrávanie, vytváranie a upravovanie súborov a priečinkov obmedzené, kým nezvoľníte miesto.",
+  "ServiceManagementUnavailable": "Správa služieb je nedostupná počas grace period a počas tejto doby nebudú účtované žiadne poplatky za služby. Ak chcete obnoviť plnú funkčnosť, prosím, prejdite na plán {{planName}}.",
+  "Reminder": "Pripomienka:",
+  "PreviousPlan": "<1>Predošlý plán:</1> {{amount}} <2>({{price}}/mesiac)</2>",
+  "PerStorageWitnMinValue": "{{currency}} za {{amount}}/mesiac <1>(min {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Prejsť na platby",
+  "CardUnlinked": "Odpojená karta",
+  "PartialPaymentDescription": "V budúcnosti bude celá suma účtovaná raz za každý platobný cyklus vo vašom obvyklom dátume fakturácie.",
+  "PartialPaymentNoDate": "Dnes platíte len za vybranú {{storageUnit}} na zostávajúce dni do dátumu fakturácie.",
+  "PartialPaymentWithDate": "Dnes platíte len za vybranú {{storageUnit}}, a to na zostávajúce dni do dátumu fakturácie ({{startDate}} až {{endDate}})."
 }

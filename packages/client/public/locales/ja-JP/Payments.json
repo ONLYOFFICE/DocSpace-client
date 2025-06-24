@@ -136,5 +136,14 @@
   "WouldYouLikeToEnableAutoTopUps": "残高がゼロにならないように、自動チャージを有効にしますか？",
   "YouHaveNotAddedAnyPayment": "お支払いは完了されていません",
   "YourCurrentPayment": "現在のお支払い",
-  "YourCurrentPlan": "<1>現在のプラン：</1> {{amount}} <2>({{price}}/月)</2>"
+  "YourCurrentPlan": "<1>現在のプラン：</1> {{amount}} <2>({{price}}/月)</2>",
+  "WalletToppedUp": "ウォレットのチャージが完了しました",
+  "LinkNewCard": "新しいカードを紐付けるには、このリンクをご利用ください。",
+  "ServiceManagementUnavailable": "猶予期間中はサービス管理をご利用いただけず、この期間中はサービスに対する料金は発生しません。全機能を回復するには、{{planName}}プランにアップグレードしてください。",
+  "Reminder": "リマインダー：",
+  "GoToPayments": "お支払いへ移動",
+  "CardUnlinked": "カードの紐付けが解除されました",
+  "PartialPaymentDescription": "今後は、通常の請求日に請求サイクルごとに一度、全額が請求されます。",
+  "PartialPaymentNoDate": "本日は、請求日までの残り日数に対して、選択された{{storageUnit}}の量のみをお支払いいただきます。",
+  "PartialPaymentWithDate": "本日は、請求日（{{startDate}}～{{endDate}}）までの残り日数に対して、選択された{{storageUnit}}の量のみをお支払いいただきます。"
 }

@@ -128,5 +128,22 @@
   "YouHaveNotAddedAnyPayment": "Sie haben keine Zahlung hinzugefügt",
   "YourCurrentPayment": "Ihre aktuelle Zahlung",
   "YourCurrentPlan": "<1>Ihr aktueller Plan:</1> {{amount}} <2>({{price}}/Monat)</2>",
-  "YourPrice": "Ihr Preis"
+  "YourPrice": "Ihr Preis",
+  "AvailableLimit": "<1>Verfügbares Limit im aktuellen Tarif:</1> {{amount}}",
+  "CurrentPaymentMonth": "Aktueller Betrag: {{price}}/Monat ({{size}})",
+  "PerStorageWitnMinValue": "{{currency}} pro {{amount}}/Monat (min. {{min Value}} {{storage Unit}})",
+  "PreviousPlan": "<1>Vorheriger Plan:</1> {{amount}} <2>({{price}}/Monat)</2>",
+  "Reminder": "Erinnerung:",
+  "StorageRestrictions": "Wenn Sie nichts unternehmen, wird das Hochladen, Erstellen und Bearbeiten von Dateien und Ordnern eingeschränkt, bis Sie Speicherplatz freigeben.",
+  "StorageTariffDeactivated": "Ihr Abonnement für zusätzlichen Speicherplatz wurde aufgrund von Zahlungsverzug deaktiviert",
+  "TopUpToReactivateStorage": "Um Ihr Abonnement zu reaktivieren, laden Sie bitte Ihr Guthaben über die Dienste auf. Sobald die Zahlung abgeschlossen ist, steht Ihnen Ihr zusätzlicher Speicherplatz wieder zur Verfügung.",
+  "GoToService": "Zu den Diensten",
+  "WalletToppedUp": "Wallet wurde erfolgreich aufgeladen",
+  "LinkNewCard": "Um eine neue Karte zu verknüpfen, folgen Sie bitte diesem Link.",
+  "ServiceManagementUnavailable": "Die Serviceverwaltung ist während der Übergangsfrist nicht verfügbar. Für die Dienste fallen in dieser Zeit keine Gebühren an. Um die volle Funktionalität wiederherzustellen, führen Sie bitte ein Upgrade auf einen {{planName}}-Plan durch.",
+  "GoToPayments": "Zu Zahlungen",
+  "CardUnlinked": "Karte nicht verknüpft",
+  "PartialPaymentDescription": "Ab sofort wird der volle Betrag einmal pro Abrechnungszeitraum an Ihrem regulären Abrechnungsdatum abgebucht.",
+  "PartialPaymentNoDate": "Heute zahlen Sie nur für die ausgewählte Menge von {{storageUnit}} für die verbleibenden Tage bis zu Ihrem Rechnungsdatum.",
+  "PartialPaymentWithDate": "Heute zahlen Sie nur für die ausgewählte Menge von {{storageUnit}} für die verbleibenden Tage bis zu Ihrem Rechnungsdatum ({{startDate}} bis {{endDate}})."
 }

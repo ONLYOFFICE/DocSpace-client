@@ -132,5 +132,14 @@
   "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>",
   "ActionCannotBeUndone": "<1>Por favor, tenga en cuenta:</1> esta acción no se puede deshacer.",
   "ConnectAndConfigureServices": "Esta sección se utiliza para conectar y configurar los servicios.",
-  "StorageCapacityUpdated": "La capacidad de almacenamiento se ha actualizado."
+  "StorageCapacityUpdated": "La capacidad de almacenamiento se ha actualizado.",
+  "AvailableLimit": "<1>Límite disponible en el plan actual:</1> {{amount}}",
+  "CurrentPaymentMonth": "Pago actual: {{price}}/mes ({{size}})",
+  "PerStorageWitnMinValue": "{{currency}} por {{amount}}/mes (min. {{minValue}} {{storageUnit}})",
+  "PreviousPlan": "<1>Plan anterior:</1> {{amount}} <2>({{precio}}/mes)</2>",
+  "Reminder": "Recordatorio:",
+  "StorageRestrictions": "Sin acción, la subida, creación y edición de archivos y carpetas estará restringida hasta que libere espacio.",
+  "StorageTariffDeactivated": "Su suscripción al almacenamiento adicional se ha desactivado por falta de pago",
+  "TopUpToReactivateStorage": "Para reactivar su suscripción, por favor recargue su monedero a través de la sección Servicios. Una vez realizado el pago, su almacenamiento adicional volverá a estar disponible.",
+  "GoToService": "Ir al servicio"
 }

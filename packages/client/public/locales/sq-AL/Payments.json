@@ -131,5 +131,19 @@
   "StorageCapacityUpdated": "Kapaciteti i ruajtjes është përditësuar.",
   "AvailableLimit": "<1>Limiti i disponueshëm nën planin aktual:</1> {{amount}}",
   "CurrentPaymentMonth": "Pagesa aktuale: {{price}}/muaj ({{size}})",
-  "GoToService": "Shko te shërbimi"
+  "GoToService": "Shko te shërbimi",
+  "WalletToppedUp": "Portofoli iu shtua me sukses.",
+  "LinkNewCard": "Për të lidhur një kartë të re, ju lutem ndiqni këtë lidhje.",
+  "TopUpToReactivateStorage": "Për të riaktivuar abonimin tuaj, ju lutem rimbushni portofolin tuaj përmes Shërbimeve. Kur pagesa të kryhet, ruajtja shtesë do të bëhet përsëri e disponueshme.",
+  "StorageTariffDeactivated": "Përkundergjegjësimi juaj i ruajtjes shtesë është çaktivizuar për shkak të mos pagesës.",
+  "StorageRestrictions": "Pa veprim, ngarkimi, krijimi dhe redaktimi i skedarëve dhe folderëve do të kufizohet derisa të çlironi hapësirë.",
+  "ServiceManagementUnavailable": "Shërbimi i menaxhimit është i papërfundueshëm gjatë periudhës së mërzitjes, dhe asnjë pagesë nuk do të zbatohet për shërbimet gjatë kësaj kohe. Për të rikthyer funksionalitetin e plotë, ju lutem kaloni në një plan {{planName}}.",
+  "Reminder": "Kujtesë:",
+  "PreviousPlan": "<1>Plan para:</1> {{amount}} <2>({{price}}/muaj)</2>",
+  "PerStorageWitnMinValue": "{{currency}} për {{amount}}/muaj <1>(min {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Shko në Pagesa",
+  "CardUnlinked": "Kartë e çkyçur",
+  "PartialPaymentDescription": "Duke u zhvilluar përpara, shuma e plotë do të debitohet një herë për cikël faturimi në datën tuaj të rregullt të faturimit.",
+  "PartialPaymentNoDate": "Sot, po paguan vetëm për sasinë e zgjedhur të {{storageUnit}} për ditët që mbeten deri në datën e faturimit.",
+  "PartialPaymentWithDate": "Sot, po paguan vetëm për sasinë e zgjedhur të {{storageUnit}} për ditët që mbeten deri në datën e faturimit ({{startDate}} deri në {{endDate}})."
 }

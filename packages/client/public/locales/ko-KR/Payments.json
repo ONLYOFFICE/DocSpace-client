@@ -131,5 +131,19 @@
   "YourPrice": "내 요금",
   "AvailableLimit": "<1>현재 요금제에서 사용 가능한 한도:</1> {{amount}}",
   "CurrentPaymentMonth": "현재 결제: {{price}}/월 ({{size}})",
-  "GoToService": "서비스로 이동"
+  "GoToService": "서비스로 이동",
+  "WalletToppedUp": "지갑 충전이 성공적으로 완료되었습니다.",
+  "LinkNewCard": "새로운 카드를 연결하려면 다음 링크를 따르세요.",
+  "TopUpToReactivateStorage": "구독을 다시 활성화하려면 Services를 통해 지갑에 충전해주세요. 결제가 완료되면 추가 저장 공간이 다시 사용 가능하게 됩니다.",
+  "StorageTariffDeactivated": "추가 저장 공간 구독이 결제 미납으로 인해 비활성화되었습니다.",
+  "StorageRestrictions": "조치를 취하지 않으면 공간을 확보할 때까지 파일 및 폴더 업로드, 생성 및 편집이 제한됩니다.",
+  "ServiceManagementUnavailable": "서비스 관리 기능은 유예 기간 동안 사용할 수 없으며, 이 기간 동안에는 서비스 요금이 부과되지 않습니다. 모든 기능을 다시 사용하려면 {{planName}} 요금제로 업그레이드해 주세요.",
+  "Reminder": "알림:",
+  "PreviousPlan": "<1>이전 계획:</1> {{amount}} <2>({{price}}/월)</2>",
+  "PerStorageWitnMinValue": "{{currency}} 1개월당 {{amount}} <1>(최소 {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "결제하기",
+  "CardUnlinked": "카드 연결 해제",
+  "PartialPaymentDescription": "앞으로, 전액은 정기 청구일에 청구 주기에 한 번씩 부과됩니다.",
+  "PartialPaymentNoDate": "오늘, {{storageUnit}} 선택하신 용량에 대해서만 청구일이 될 때까지 남은 일수에 대해 지불하게 됩니다.",
+  "PartialPaymentWithDate": "오늘, {{startDate}}부터 {{endDate}}까지 청구일까지 선택하신 {{storageUnit}} 용량에 대해서만 요금을 지불하시면 됩니다."
 }

@@ -131,5 +131,19 @@
   "YourPrice": "Twoja cena",
   "AvailableLimit": "<1>Dostępny limit w ramach aktualnego planu:</1> {{amount}}",
   "CurrentPaymentMonth": "Aktualna płatność: {{price}}/miesiąc ({{size}})",
-  "GoToService": "Przejdź do serwisu"
+  "GoToService": "Przejdź do serwisu",
+  "WalletToppedUp": "Portfel został pomyślnie doładowany",
+  "LinkNewCard": "Aby połączyć nową kartę, przejdź do tego linku.",
+  "TopUpToReactivateStorage": "Aby ponownie aktywować subskrypcję, doładuj swój portfel za pomocą Usług. Po dokonaniu płatności, dodatkowe miejsce na dane stanie się ponownie dostępne.",
+  "StorageTariffDeactivated": "Twój abonament dodatkowej przestrzeni dyskowej został dezaktywowany z powodu braku płatności.",
+  "StorageRestrictions": "Bez podjęcia działania, przesyłanie, tworzenie i edycja plików i folderów będzie ograniczone do momentu zwolnienia miejsca.",
+  "ServiceManagementUnavailable": "Zarządzanie usługami jest niedostępne w okresie karencji, a w tym czasie nie będą naliczane żadne opłaty za usługi. Aby odzyskać pełną funkcjonalność, prosimy o przejście na plan {{planName}}.",
+  "Reminder": "Przypomnienie:",
+  "PreviousPlan": "<1>Poprzedni plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
+  "PerStorageWitnMinValue": "{{currency}} za {{amount}}/miesiąc <1>(min {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Przejdź do płatności",
+  "CardUnlinked": "Karta odłączona",
+  "PartialPaymentDescription": "W przyszłości pełna kwota zostanie obciążona raz na cykl rozliczeniowy w regularnej dacie płatności.",
+  "PartialPaymentNoDate": "Dzisiaj płacisz tylko za wybraną ilość {{storageUnit}} na pozostałe dni do daty rozliczenia.",
+  "PartialPaymentWithDate": "Dzisiaj płacisz tylko za wybraną ilość {{storageUnit}} na pozostałe dni do daty rozliczenia ({{startDate}} do {{endDate}})."
 }

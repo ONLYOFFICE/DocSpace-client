@@ -130,5 +130,20 @@
   "YourCurrentPlan": "<1>Gói cước hiện tại của bạn:</1> {{amount}} <2>({{price}}/tháng)</2>",
   "YourPrice": "Phí thanh toán của bạn",
   "AvailableLimit": "<1>Giới hạn còn lại theo gói hiện tại:</1> {{amount}}",
-  "CurrentPaymentMonth": "Thanh toán hiện tại: {{price}}/tháng ({{size}})"
+  "CurrentPaymentMonth": "Thanh toán hiện tại: {{price}}/tháng ({{size}})",
+  "WalletToppedUp": "Ví đã được nạp tiền thành công.",
+  "LinkNewCard": "Để liên kết một thẻ mới, vui lòng làm theo liên kết này.",
+  "TopUpToReactivateStorage": "Để kích hoạt lại đăng ký của bạn, vui lòng nạp tiền vào ví của bạn thông qua Services. Sau khi thanh toán hoàn tất, không gian lưu trữ bổ sung của bạn sẽ khả dụng trở lại.",
+  "StorageTariffDeactivated": "Đăng ký lưu trữ bổ sung của bạn đã bị hủy kích hoạt do thanh toán không thành công.",
+  "StorageRestrictions": "Nếu không có hành động, việc tải lên, tạo và chỉnh sửa tệp và thư mục sẽ bị hạn chế cho đến khi bạn giải phóng dung lượng.",
+  "ServiceManagementUnavailable": "Việc quản lý dịch vụ không khả dụng trong thời gian ân hạn, và bạn sẽ không phải chịu bất kỳ khoản phí nào cho các dịch vụ trong thời gian này. Để khôi phục đầy đủ chức năng, vui lòng nâng cấp lên gói {{planName}}.",
+  "Reminder": "Nhắc nhở:",
+  "PreviousPlan": "<1>Kế hoạch trước:</1> {{amount}} <2>({{price}}/tháng)</2>",
+  "PerStorageWitnMinValue": "{{currency}} mỗi {{amount}}/tháng <1>(tối thiểu {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Thanh toán",
+  "CardUnlinked": "Thẻ đã hủy liên kết",
+  "PartialPaymentDescription": "Trong tương lai, số tiền đầy đủ sẽ được tính phí một lần mỗi chu kỳ thanh toán vào ngày thanh toán thông thường của bạn.",
+  "PartialPaymentNoDate": "Hôm nay, bạn chỉ thanh toán cho {{storageUnit}} đã chọn cho số ngày còn lại cho đến ngày thanh toán của bạn.",
+  "PartialPaymentWithDate": "Hôm nay, bạn chỉ thanh toán cho {{storageUnit}} đã chọn cho số ngày còn lại cho đến ngày thanh toán của bạn ({{startDate}} đến {{endDate}}).",
+  "GoToService": "Đến dịch vụ"
 }

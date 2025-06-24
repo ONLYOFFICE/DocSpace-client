@@ -131,5 +131,19 @@
   "YourPrice": "Ücret",
   "AvailableLimit": "<1>Mevcut plan kapsamındaki kullanılabilir limit:</1> {{amount}}",
   "CurrentPaymentMonth": "Mevcut ödeme: {{price}}/ay ({{size}})",
-  "GoToService": "Servise git"
+  "GoToService": "Servise git",
+  "WalletToppedUp": "Cüzdanınız başarıyla yüklendi",
+  "LinkNewCard": "Yeni bir kartı bağlamak için lütfen bu bağlantıyı takip edin.",
+  "TopUpToReactivateStorage": "Aboneliğinizi yeniden etkinleştirmek için, lütfen Hizmetler aracılığıyla cüzdanınıza para yatırın. Ödeme tamamlandıktan sonra, ek depolama alanınız tekrar kullanılabilir hale gelecektir.",
+  "StorageTariffDeactivated": "Ek depolama aboneliğiniz, ödeme yapılmaması nedeniyle devre dışı bırakılmıştır.",
+  "StorageRestrictions": "Hareket edilmezse, dosya ve klasörleri yükleme, oluşturma ve düzenleme kısıtlanacaktır, ta ki alan açılana kadar.",
+  "ServiceManagementUnavailable": "Hizmet yönetimi, ücretsiz deneme süresi boyunca kullanılamayacaktır ve bu süre zarfında hizmetler için herhangi bir ücret uygulanmayacaktır. Tam işlevselliği geri kazanmak için lütfen {{planName}} planına yükseltin.",
+  "Reminder": "Hatırlatma:",
+  "PreviousPlan": "<1>Önceki plan:</1> {{amount}} <2>({{price}}/ay)</2>",
+  "PerStorageWitnMinValue": "{{currency}} birim {{amount}}/ay <1>(min {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Ödemelere Git",
+  "CardUnlinked": "Kart bağlantısı kesildi",
+  "PartialPaymentDescription": "Bundan sonra, tam tutar normal faturalandırma tarihinizde her faturalandırma döngüsünde bir kez tahsil edilecektir.",
+  "PartialPaymentNoDate": "Bugün, yalnızca seçtiğiniz {{storageUnit}} miktarı için, faturalandırma tarihine kadar olan kalan günler için ödeme yapıyorsunuz.",
+  "PartialPaymentWithDate": "Bugün, yalnızca seçtiğiniz {{storageUnit}} miktarı için, faturalandırma tarihiniz olan {{startDate}} ile {{endDate}} arasındaki kalan günler için ödeme yapıyorsunuz."
 }

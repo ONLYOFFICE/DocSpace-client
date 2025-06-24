@@ -128,5 +128,22 @@
   "YourCurrentPayment": "Seu pagamento atual",
   "YourCurrentPlan": "<1>Seu plano atual:</1> {{amount}} <2>({{price}}/mês)</2>",
   "YourPrice": "Seu preço",
-  "TransactionsLimit": "A página exibe as últimas 25 transações para o período selecionado. O histórico completo de transações está disponível através do botão \"{{buttonName}}\"."
+  "TransactionsLimit": "A página exibe as últimas 25 transações para o período selecionado. O histórico completo de transações está disponível através do botão \"{{buttonName}}\".",
+  "WalletToppedUp": "A Carteira foi recarregada com sucesso",
+  "LinkNewCard": "Para vincular um novo cartão, siga este link.",
+  "TopUpToReactivateStorage": "Para reativar sua assinatura, carregue sua carteira por meio dos Serviços. Assim que o pagamento for concluído, seu armazenamento adicional ficará disponível novamente.",
+  "StorageTariffDeactivated": "Sua assinatura de armazenamento adicional foi desativada devido à falta de pagamento.",
+  "StorageRestrictions": "Sem nenhuma ação, o upload, a criação e a edição de arquivos e pastas serão restritos até que você libere espaço.",
+  "ServiceManagementUnavailable": "O gerenciamento de serviços não estará disponível durante o período de carência e nenhuma cobrança será aplicada aos serviços durante esse período. Para recuperar a funcionalidade completa, atualize para um plano {{planName}}.",
+  "Reminder": "Lembrete:",
+  "PreviousPlan": "<1>Plano anterior:</1> {{amount}} <2>({{price}}/month)</2>",
+  "PerStorageWitnMinValue": "{{currency}} por {{amount}}/mês (mín. {{minValue}} {{storageUnit}})",
+  "GoToPayments": "Acesse Pagamentos",
+  "GoToService": "Ir para o serviço",
+  "CurrentPaymentMonth": "Pagamento atual: {{price}}/mês ({{size}})",
+  "CardUnlinked": "Cartão desvinculado",
+  "AvailableLimit": "<1>Limite disponível no plano atual:</1> {{amount}}",
+  "PartialPaymentDescription": "A partir de agora, o valor total será cobrado uma vez por ciclo de faturamento na sua data de faturamento regular.",
+  "PartialPaymentNoDate": "Hoje, você paga apenas o valor selecionado de {{storageUnit}} referente aos dias restantes até a data de faturamento.",
+  "PartialPaymentWithDate": "Hoje, você paga apenas o valor selecionado de {{storageUnit}} referente aos dias restantes até a data de faturamento ({{startDate}} a {{endDate}})."
 }

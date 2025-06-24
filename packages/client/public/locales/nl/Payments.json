@@ -131,5 +131,19 @@
   "YourPrice": "Uw prijs",
   "AvailableLimit": "<1>Beschikbaar limiet onder huidig plan:</1> {{amount}}",
   "CurrentPaymentMonth": "Huidige betaling: {{price}}/maand ({{size}})",
-  "GoToService": "Ga naar service"
+  "GoToService": "Ga naar service",
+  "WalletToppedUp": "Portemonnee succesvol bijgewerkt",
+  "LinkNewCard": "Om een nieuwe kaart te koppelen, volg dan deze link.",
+  "TopUpToReactivateStorage": "Om uw abonnement te reactiveren, kunt u uw portemonnee opladen via Services. Zodra de betaling is voltooid, wordt uw extra opslagruimte weer beschikbaar.",
+  "StorageTariffDeactivated": "Uw aanvullende opslagabonnement is gedeactiveerd vanwege niet-betaling.",
+  "StorageRestrictions": "Zonder actie zullen het uploaden, aanmaken en bewerken van bestanden en mappen worden beperkt totdat u ruimte vrijmaakt.",
+  "ServiceManagementUnavailable": "Service management is niet beschikbaar tijdens de proefperiode, en er worden geen kosten in rekening gebracht voor de services gedurende deze periode. Om de volledige functionaliteit terug te krijgen, upgrade alstublieft naar een {{planName}} plan.",
+  "Reminder": "Herinnering:",
+  "PreviousPlan": "<1>Vorig plan:</1> {{amount}} <2>({{price}}/maand)</2>",
+  "PerStorageWitnMinValue": "{{currency}} per {{amount}}/maand <1>(min {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Ga naar Betalingen",
+  "CardUnlinked": "Kaart losgekoppeld",
+  "PartialPaymentDescription": "Vanaf heden wordt het volledige bedrag eenmaal per factuurcyclus op uw reguliere factuurdatum in rekening gebracht.",
+  "PartialPaymentNoDate": "Vandaag betaalt u slechts voor het geselecteerde aantal {{storageUnit}} voor de resterende dagen tot uw factuurdatum.",
+  "PartialPaymentWithDate": "Vandaag betaalt u slechts voor het geselecteerde aantal {{storageUnit}} voor de resterende dagen tot uw factuurdatum ({{startDate}} tot {{endDate}})."
 }

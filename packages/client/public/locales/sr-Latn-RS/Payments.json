@@ -128,5 +128,22 @@
   "YouHaveNotAddedAnyPayment": "Niste dodali nijedan način plaćanja",
   "YourCurrentPayment": "Vaš trenutni način plaćanja",
   "YourCurrentPlan": "<1>Vaš trenutni plan:</1> {{amount}} <2>({{price}}/mesečno)</2>",
-  "YourPrice": "Vaša cena"
+  "YourPrice": "Vaša cena",
+  "WalletToppedUp": "Novčanik je uspešno dopunjen.",
+  "LinkNewCard": "Da biste povezali novu karticu, pratite ovaj link.",
+  "TopUpToReactivateStorage": "Da biste ponovo aktivirali pretplatu, dopunite svoj novčanik putem odeljka Usluge. Nakon što uplata bude izvršena, dodatni prostor će ponovo biti dostupan.",
+  "StorageTariffDeactivated": "Vaša pretplata na dodatni prostor za skladištenje je deaktivirana zbog neizvršene uplate.",
+  "StorageRestrictions": "Bez preduzimanja akcije, biće ograničeno otpremanje, kreiranje i uređivanje fajlova i fascikli.",
+  "ServiceManagementUnavailable": "Upravljanje uslugama nije dostupno tokom grejs perioda i u tom periodu se ne vrše naplate za usluge. Da biste ponovo imali punu funkcionalnost, nadogradite se na plan {{planName}}.\nDa biste povezali novu karticu, pratite ovaj link.",
+  "Reminder": "Podsetnik:",
+  "PreviousPlan": "<1>Prethodni plan:</1> {{amount}} <2>({{price}}/mesečno)</2>",
+  "PerStorageWitnMinValue": "Trenutno plaćanje: {{price}}/mesečno ({{size}})",
+  "GoToPayments": "Idi na Plaćanja",
+  "GoToService": "Idi na uslugu",
+  "CurrentPaymentMonth": "Trenutno plaćanje: {{price}}/mesečno ({{size}})",
+  "CardUnlinked": "Kartica je uklonjena",
+  "AvailableLimit": "<1>Dostupan limit u okviru trenutnog plana:</1> {{amount}}",
+  "PartialPaymentDescription": "U budućnosti, puna cena će se naplaćivati jednom po ciklusu naplate, na vaš redovni datum naplate.",
+  "PartialPaymentNoDate": "Danas plaćate samo za odabranu količinu {{storageUnit}} za preostale dane do datuma naplate.",
+  "PartialPaymentWithDate": "Danas plaćate samo za odabranu količinu {{storageUnit}} za preostale dane do datuma naplate ({{startDate}} do {{endDate}})."
 }

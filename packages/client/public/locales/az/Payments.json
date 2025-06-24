@@ -131,5 +131,19 @@
   "YourPrice": "Qiymətiniz",
   "AvailableLimit": "<1>Mövcud plan üzrə məhdudiyyət:</1> {{amount}}",
   "CurrentPaymentMonth": "Mövcud ödəniş: {{price}}/ay ({{size}})",
-  "GoToService": "Servisə keçid edin"
+  "GoToService": "Servisə keçid edin",
+  "WalletToppedUp": "Walletinizlə uğurla yükləmə tamamlandı",
+  "LinkNewCard": "Yeni kartı əlaqələndirmək üçün bu linki izləyin.",
+  "TopUpToReactivateStorage": "Abunəçiliyinizi yenidən aktivləşdirmək üçün, xidmətlər vasitəsilə ərzənizi doldurun. Ödəniş tamamlandıqdan sonra, əlavə saxlama yeriniz yenidən əlçatmaz olacaq.",
+  "StorageTariffDeactivated": "Sizə məxsus əlavə saxlama abunəyi ödənilməmişlik səbəbindən deaktivləşdirilib.",
+  "StorageRestrictions": "Hərəkət etmədən, fayl və qovluqların yüklənməsi, yaradılması və redaktəsi yerə çəkiləcək, çünki yer azdır.",
+  "ServiceManagementUnavailable": "Xidmət idarəçiliyi güzəşt dövründə mövcud deyil və bu müddət ərzində xidmətlərə görə heç bir ödəniş tutulmayacaq. Tam funksionaliyyəti bərpa etmək üçün, {{planName}} planına keçid etməlisiniz.",
+  "Reminder": "Xatırlatma:",
+  "PreviousPlan": "<1>Əvvəlki plan:</1> {{amount}} <2>({{price}}/ay)</2>",
+  "PerStorageWitnMinValue": "{{currency}} hər {{amount}}/ay <1>(min {{minValue}}{{storageUnit}})</1>",
+  "GoToPayments": "Ödənişlərə keçid",
+  "CardUnlinked": "Kart ayrılıb",
+  "PartialPaymentDescription": "Bundan sonra, tam məbləğ mühasibat dövrünün hər birində, müntəzəm hesablaşma tarixində bir dəfə hesablanacaq.",
+  "PartialPaymentNoDate": "Bu gün, siz seçilmiş {{storageUnit}} miqdarının qalan günlərə qədərki müddətə ödənişini edirsiniz.",
+  "PartialPaymentWithDate": "Bu gün, siz seçilmiş {{storageUnit}} miqdarının qalan günlərə ({{startDate}} tarixindən {{endDate}} tarixinə qədər) hesablanması üçün ödəniş edirsiniz."
 }

@@ -128,5 +128,22 @@
   "YouHaveNotAddedAnyPayment": "Vous n'avez ajouté aucun paiement",
   "YourCurrentPayment": "Votre paiement actuel",
   "YourCurrentPlan": "<1>Votre plan actuel :</1> {{amount}} <2>({{price}}/mois)</2>",
-  "YourPrice": "Votre prix"
+  "YourPrice": "Votre prix",
+  "AvailableLimit": "<1>La limite disponible dans le cadre du plan actuel :</1> {{amount}}",
+  "CurrentPaymentMonth": "Paiement actuel : {{price}}/mois ({{size}})",
+  "PerStorageWitnMinValue": "{{currency}} par {{amount}}/mois (min {{minValue}} {{storageUnit}})",
+  "GoToService": "Aller au service",
+  "WalletToppedUp": "Wallet a été rechargé avec succès",
+  "LinkNewCard": "Pour lier une nouvelle carte, suivez ce lien.",
+  "TopUpToReactivateStorage": "Pour réactiver votre abonnement, veuillez recharger votre Wallet via les Services. Une fois le paiement effectué, votre espace de stockage supplémentaire sera à nouveau disponible.",
+  "StorageTariffDeactivated": "Votre abonnement au stockage supplémentaire a été désactivé pour cause de non-paiement.",
+  "StorageRestrictions": "Sans action, le téléchargement, la création et la modification de fichiers et de dossiers seront limités jusqu'à ce que vous libériez de l'espace.",
+  "ServiceManagementUnavailable": "La gestion des services n'est pas disponible pendant la période de grâce, et aucun frais ne sera appliqué aux services pendant cette période. Pour retrouver toutes les fonctionnalités, veuillez passer à un plan {{planName}}.",
+  "Reminder": "Rappel :",
+  "PreviousPlan": "<1>Plan précédent :</1> {{amount}} <2>({{price}}/mois)</2>",
+  "GoToPayments": "Aller aux Paiements",
+  "CardUnlinked": "Carte déconnectée",
+  "PartialPaymentDescription": "Par la suite, le montant total sera facturé une fois par cycle de facturation à la date de facturation habituelle.",
+  "PartialPaymentNoDate": "Aujourd'hui, vous ne payez que la quantité sélectionnée de {{storageUnit}} pour les jours restants jusqu'à votre date de facturation.",
+  "PartialPaymentWithDate": "Aujourd'hui, vous ne payez que la quantité sélectionnée de {{storageUnit}} pour les jours restants jusqu'à votre date de facturation ({{startDate}} à {{endDate}})."
 }

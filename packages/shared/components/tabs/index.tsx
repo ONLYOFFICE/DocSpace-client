@@ -184,6 +184,7 @@ const Tabs = (props: TabsProps) => {
               item.onClick?.();
               setSelectedItem(item, index);
             }}
+            data-testid={item.name}
           >
             <span className={styles.tabText}>{item.name}</span>
             <div

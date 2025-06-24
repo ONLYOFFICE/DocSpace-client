@@ -139,7 +139,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
       <ModalDialog.Footer>
         <Button
           key="EnableButton"
-          label={t("EnableAutoTopUp")}
+          label={t("Common:SaveButton")}
           size={ButtonSize.normal}
           primary
           scale

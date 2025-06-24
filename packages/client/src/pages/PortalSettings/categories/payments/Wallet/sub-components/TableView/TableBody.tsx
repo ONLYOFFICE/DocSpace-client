@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -36,6 +35,7 @@ import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
 import styles from "../../styles/TransactionHistory.module.scss";
 import { accountingLedgersFormat } from "../../utils";
+import { getCorrectDate } from "@docspace/shared/utils";
 
 interface TransactionRowProps {
   transaction: TTransactionCollection;
@@ -57,8 +57,6 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
     currency,
   );
 
-  const dateFormat = `L ${moment.localeData().longDateFormat("LT")}`;
-
   const getServiceQuantity = (quantity: number, service: string) => {
     let serviceName = service;
 
@@ -73,12 +71,12 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
         return "—";
     }
   };
-
+  const correctDate = getCorrectDate(language, transaction.date);
   return (
     <TableRow>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {moment(transaction.date).format(dateFormat)}
+          {correctDate}
         </Text>
       </TableCell>
       <TableCell>

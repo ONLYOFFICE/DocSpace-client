@@ -376,8 +376,8 @@
   top: 61px;
   background: var(--section-header-bg);
   z-index: 200;
-  padding: 0 4px;
-  margin: 0 -4px !important;
+  padding: 0 16px;
+  margin: 0 -16px !important;
 
   @include mobile {
     top: 53px;

@@ -95,6 +95,7 @@ const Members = ({
   setPublicRoomKey,
   setAccessSettingsIsVisible,
   templateAvailable,
+  isRootFolder,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
@@ -158,7 +159,7 @@ const Members = ({
 
         const filterObj = FilesFilter.getFilter(window.location);
 
-        if (isPublicRoomType && !filterObj.key) {
+        if (isPublicRoomType && !filterObj.key && !isRootFolder) {
           setPublicRoomKey(link.sharedTo.requestToken);
           setSearchParams((prev) => {
             prev.set("key", link.sharedTo.requestToken);
@@ -394,6 +395,7 @@ export default inject(
     } = infoPanelStore;
     const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
+    const { isRootFolder } = selectedFolderStore;
 
     const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
       publicRoomStore;
@@ -444,6 +446,7 @@ export default inject(
       setPublicRoomKey,
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
+      isRootFolder,
     };
   },
 )(

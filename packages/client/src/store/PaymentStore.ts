@@ -334,6 +334,8 @@ class PaymentStore {
   }
 
   get walletCustomerStatusNotActive() {
+    if (!this.walletCustomerEmail) return false;
+
     return (
       this.walletCustomerUnlinkedStatus || this.walletCustomerExpiredStatus
     );

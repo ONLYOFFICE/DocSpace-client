@@ -82,7 +82,9 @@ const FillingRoleSelector = ({
               </div>
               <CrossIcon
                 className={styles.remove}
-                onClick={(e) => onRemoveUserFromRole(e, idx)}
+                onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
+                  onRemoveUserFromRole(e, idx)
+                }
               />
             </>
           ) : (

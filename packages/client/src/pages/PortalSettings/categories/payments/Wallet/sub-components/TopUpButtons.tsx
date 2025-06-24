@@ -26,10 +26,14 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { saveDeposite } from "@docspace/shared/api/portal";
+import { Text } from "@docspace/shared/components/text";
+
 import { useAmountValue } from "../context";
+import styles from "../styles/TopUpModal.module.scss";
 
 interface TopUpButtonsProps {
   currency: string;
@@ -77,26 +81,29 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
   };
 
   return (
-    <>
-      <Button
-        key="OkButton"
-        label={t("TopUp")}
-        size={ButtonSize.normal}
-        primary
-        scale
-        isDisabled={isButtonDisabled}
-        onClick={onTopUp}
-        isLoading={isLoading}
-      />
-      <Button
-        key="CancelButton"
-        label={t("Common:CancelButton")}
-        size={ButtonSize.normal}
-        scale
-        onClick={onClose}
-        isDisabled={isLoading}
-      />
-    </>
+    <div className={styles.buttonContainerWrapper}>
+      {isLoading ? <Text>{t("TopUpTakeSomeTimeToComplete")}</Text> : null}
+      <div className={styles.buttonContainer}>
+        <Button
+          key="OkButton"
+          label={t("TopUp")}
+          size={ButtonSize.normal}
+          primary
+          scale
+          isDisabled={isButtonDisabled}
+          onClick={onTopUp}
+          isLoading={isLoading}
+        />
+        <Button
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          scale
+          onClick={onClose}
+          isDisabled={isLoading}
+        />
+      </div>
+    </div>
   );
 };
 

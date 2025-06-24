@@ -47,7 +47,6 @@
   "Downgrade": "Alaspäin päivittäminen",
   "DowngradeNow": "Alenna ohjelman tasoa nyt",
   "DueToday": "Erääntynyt tänään",
-  "EnableAutoTopUp": "Ota automaattinen lisäämaksu käyttöön",
   "EnterAmount": "Syötä kokonaislukumäärä...",
   "EnterAnIntegerAmountBetween": "Anna kokonaislukumäärä {{min}} ja {{max}} väliltä.",
   "ErrorNotification": "Tariffisuunnitelman päivittäminen epäonnistui. Yritä myöhemmin uudelleen tai ota yhteyttä myyntiosastoon.",

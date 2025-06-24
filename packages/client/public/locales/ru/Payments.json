@@ -47,7 +47,6 @@
   "Downgrade": "Понизить",
   "DowngradeNow": "Понизить прямо сейчас",
   "DueToday": "Оплатить сегодня",
-  "EnableAutoTopUp": "Включить автопополнение",
   "EnterAmount": "Введите целую сумму...",
   "EnterAnIntegerAmountBetween": "Введите целую сумму от {{min}} до {{max}}",
   "ErrorNotification": "Не удалось обновить тариф. Попробуйте позже или свяжитесь с отделом продаж.",

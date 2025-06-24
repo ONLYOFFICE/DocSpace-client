@@ -47,7 +47,6 @@
   "Downgrade": "Downgrade",
   "DowngradeNow": "Diminuir agora",
   "DueToday": "Prazo hoje",
-  "EnableAutoTopUp": "Ativar recarga automática",
   "EnterAmount": "Insira um valor inteiro...",
   "EnterAnIntegerAmountBetween": "Insira um valor inteiro entre {{min}} e {{max}}",
   "ErrorNotification": "Não foi possível atualizar o plano de tarifário. Tente de novo mais tarde ou contacte o departamento de vendas.",

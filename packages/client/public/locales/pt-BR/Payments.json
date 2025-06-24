@@ -47,7 +47,6 @@
   "Downgrade": "Rebaixamento",
   "DowngradeNow": "Fazer downgrade agora",
   "DueToday": "Vencido hoje",
-  "EnableAutoTopUp": "Habilitar Recarga Automática",
   "EnterAmount": "Digite um valor inteiro...",
   "EnterAnIntegerAmountBetween": "Digite um valor inteiro entre {{min}} e {{max}}",
   "ErrorNotification": "Falha ao atualizar plano tarifário. Tente novamente mais tarde ou entre em contato.",

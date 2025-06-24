@@ -47,7 +47,6 @@
   "Downgrade": "تخفيض الإصدار",
   "DowngradeNow": "الرجوع إلى إصدار سابق الآن",
   "DueToday": "مستحق اليوم",
-  "EnableAutoTopUp": "تفعيل إعادة الشحن التلقائي",
   "EnterAmount": "أدخل مبلغًا صحيحًا...",
   "EnterAnIntegerAmountBetween": "أدخل مبلغًا صحيحًا بين {{min}} و {{max}}",
   "ErrorNotification": "فشل تحديث خطة التعرفة. حاول مرة أخرى في وقت لاحق أو اتصل بقسم المبيعات.",

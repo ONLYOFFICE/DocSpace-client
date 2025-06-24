@@ -79,7 +79,6 @@
   "DiskStorage": "Archiviazione su disco",
   "Downgrade": "Downgrade",
   "DueToday": "Scade oggi",
-  "EnableAutoTopUp": "Attiva ricarica automatica",
   "EnterAmount": "Inserisci un importo intero...",
   "EnterAnIntegerAmountBetween": "Inserisci un importo intero compreso tra {{min}} e {{max}}",
   "ExtraStorage": "Spazio di archiviazione aggiuntivo ({{storageUnit}})",

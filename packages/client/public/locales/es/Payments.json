@@ -79,7 +79,6 @@
   "DiskStorage": "Almacenamiento en disco",
   "Downgrade": "Bajar de categoría",
   "DueToday": "Para hoy",
-  "EnableAutoTopUp": "Activar recarga automática",
   "EnterAmount": "Introduzca una cantidad entera...",
   "EnterAnIntegerAmountBetween": "Introduzca una cantidad entera entre {{min}} y {{max}}",
   "ExtraStorage": "Almacenamiento adicional ({{storageUnit}})",

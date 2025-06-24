@@ -81,7 +81,6 @@
   "DiskStorage": "ディスクストレージ",
   "Downgrade": "ダウングレード",
   "DueToday": "お支払い期限が本日です",
-  "EnableAutoTopUp": "自動チャージを有効にする",
   "EnterAmount": "整数の金額を入力してください...",
   "EnterAnIntegerAmountBetween": "{{min}} から {{max}} までの整数を入力してください。",
   "ExtraStorage": "追加のストレージ（{{storageUnit}}）",

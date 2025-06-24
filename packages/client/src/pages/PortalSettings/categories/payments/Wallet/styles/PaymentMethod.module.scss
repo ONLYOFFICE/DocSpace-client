@@ -98,6 +98,7 @@
         opacity: 0.2;
         z-index: 0;
         pointer-events: none;
+        border-radius: 6px;
       }
 
       svg {
@@ -109,6 +110,7 @@
 
     a {
       color: var(--payment-text-color);
+      z-index: 1;
     }
 
     &.cardLinkDisabled {

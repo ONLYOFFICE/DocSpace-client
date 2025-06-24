@@ -44,6 +44,7 @@ import {
   ARROWS_WIDTH,
 } from "./Tabs.constants";
 import styles from "./Tabs.module.scss";
+import useTabsHotkeys from "./hooks/useTabsHotkeys";
 
 const SecondaryTabs = (props: TabsProps) => {
   const {
@@ -58,11 +59,23 @@ const SecondaryTabs = (props: TabsProps) => {
     ...rest
   } = props;
 
-  const { interfaceDirection } = useInterfaceDirection();
-
   const selectedItemIndex = !selectedItemId
     ? 0
     : items.findIndex((item) => item.id === selectedItemId);
+
+  const [focusedTabIndex, setFocusedTabIndex] = useState(selectedItemIndex);
+  const [hotkeysIsActive, setHotkeysIsActive] = useState(false);
+
+  useTabsHotkeys({
+    enabledHotkeys: hotkeysIsActive,
+    setHotkeysIsActive,
+    items,
+    focusedTabIndex,
+    setFocusedTabIndex,
+    onSelect,
+  });
+
+  const { interfaceDirection } = useInterfaceDirection();
 
   const [referenceTabSize, setReferenceTabSize] = useState<number | null>(null);
   const [tabsIsOverflowing, setTabsIsOverflowing] = useState(false);
@@ -221,6 +234,7 @@ const SecondaryTabs = (props: TabsProps) => {
     >
       {items.map((item, index) => {
         const isSelected = index === selectedItemIndex;
+        const isFocused = hotkeysIsActive ? index === focusedTabIndex : false;
 
         return (
           <div
@@ -232,6 +246,7 @@ const SecondaryTabs = (props: TabsProps) => {
               styles.tab,
               {
                 [styles.selected]: isSelected,
+                [styles.focused]: isFocused,
                 [styles.disabled]: item.isDisabled,
                 // [styles.referenceSize]: !!referenceTabSize,
               },

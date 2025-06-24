@@ -218,6 +218,7 @@
       }
     }
 
+    &.focused,
     &:hover:not(.selected) {
       .tabText {
         color: var(--tabs-active-text-color-secondary);

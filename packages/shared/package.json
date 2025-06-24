@@ -55,6 +55,7 @@
     "react-draggable": "4.4.6",
     "react-dropzone": "11.7.1",
     "react-hammerjs": "1.0.1",
+    "react-hotkeys-hook": "3.4.7",
     "react-i18next": "13.5.0",
     "react-lifecycles-compat": "3.0.4",
     "react-onclickoutside": "6.13.1",

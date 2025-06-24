@@ -3312,6 +3312,7 @@ __metadata:
     react-draggable: "npm:4.4.6"
     react-dropzone: "npm:11.7.1"
     react-hammerjs: "npm:1.0.1"
+    react-hotkeys-hook: "npm:3.4.7"
     react-i18next: "npm:13.5.0"
     react-json-pretty: "npm:2.2.0"
     react-lifecycles-compat: "npm:3.0.4"

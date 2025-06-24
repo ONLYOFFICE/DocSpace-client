@@ -53,8 +53,6 @@ export type TabsProps = {
   type?: TabsTypes;
   /** Tab indentation for sticky positioning. */
   stickyTop?: string;
-  /** Enables multiple select  */
-  multiple?: boolean;
   /** Sets a tab class name */
   className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */
@@ -68,4 +66,15 @@ export type TabsProps = {
   isLoading?: boolean;
   /** Scales tabs to container width */
   scaled?: boolean;
+};
+
+export type TTabsHotkey = {
+  enabledHotkeys: boolean;
+  setHotkeysIsActive: (focusedTabIndex: boolean) => void;
+  /** Child elements. */
+  items: TTabItem[];
+  focusedTabIndex: number;
+  setFocusedTabIndex: (focusedTabIndex: number) => void;
+  /** Sets a callback function that is triggered when the tab is selected. */
+  onSelect?: (element: TTabItem) => void;
 };

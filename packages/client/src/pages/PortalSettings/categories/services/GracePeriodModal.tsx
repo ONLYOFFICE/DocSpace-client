@@ -107,7 +107,7 @@ const GracePeriodModal: React.FC<GracePeriodModalProps> = ({
         />
         <Button
           key="CancelButton"
-          label={t("Common:Cancel")}
+          label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
         />

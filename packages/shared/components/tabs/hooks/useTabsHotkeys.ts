@@ -26,6 +26,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
+import { isMobile } from "react-device-detect";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { TTabsHotkey } from "../Tabs.types";
 
@@ -43,7 +44,7 @@ const useTabsHotkeys = ({
     (e: KeyboardEvent) => {
       e.preventDefault();
 
-      if (e.key === "Tab") {
+      if (e.key === "Tab" && !isMobile) {
         setHotkeysIsActive(!enabledHotkeys);
       }
     },

@@ -69,12 +69,16 @@ export type TabsProps = {
 };
 
 export type TTabsHotkey = {
+  /** Determines whether keyboard hotkeys are enabled for tab navigation */
   enabledHotkeys: boolean;
+  /** Sets the active state of hotkeys */
   setHotkeysIsActive: (focusedTabIndex: boolean) => void;
-  /** Child elements. */
+  /** Tab items to be rendered */
   items: TTabItem[];
+  /** Index of the currently focused tab */
   focusedTabIndex: number;
+  /** Sets the index of the focused tab */
   setFocusedTabIndex: (focusedTabIndex: number) => void;
-  /** Sets a callback function that is triggered when the tab is selected. */
+  /** Sets a callback function that is triggered when the tab is selected */
   onSelect?: (element: TTabItem) => void;
 };

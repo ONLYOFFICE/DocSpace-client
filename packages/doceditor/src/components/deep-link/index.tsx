@@ -39,7 +39,7 @@ import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { DeepLinkType } from "@docspace/shared/enums";
 
-import { getDeepLink } from "./DeepLink.helper";
+import { getDeepLink, redirectToStore } from "./DeepLink.helper";
 import {
   StyledDeepLink,
   StyledBodyWrapper,
@@ -64,6 +64,9 @@ const DeepLink = ({
   const theme = useTheme();
 
   const [isRemember, setIsRemember] = useState(false);
+
+  const isOpenInAppOnly = deepLinkSettings === DeepLinkType.App;
+
   const onChangeCheckbox = () => {
     setIsRemember(!isRemember);
   };
@@ -76,6 +79,7 @@ const DeepLink = ({
       fileInfo,
       deepLinkConfig,
       window.location.href,
+      isOpenInAppOnly,
     );
   };
 
@@ -83,6 +87,10 @@ const DeepLink = ({
     if (isRemember) localStorage.setItem("defaultOpenDocument", "web");
     window.location.replace(window.location.search + "&without_redirect=true");
     setIsShowDeepLink(false);
+  };
+
+  const onDownloadAppClick = () => {
+    redirectToStore(deepLinkConfig);
   };
 
   const getFileIcon = () => {
@@ -100,8 +108,6 @@ const DeepLink = ({
   };
 
   const bgPattern = getBgPattern(theme.currentColorScheme?.id);
-
-  if (deepLinkSettings === DeepLinkType.App) return null;
 
   return (
     <StyledWrapper>
@@ -121,14 +127,20 @@ const DeepLink = ({
                     {getFileTitle()}
                   </Text>
                 </StyledFileTile>
-                <Text>{t("DeepLink:DeepLinkText")}</Text>
+                <Text>
+                  {isOpenInAppOnly
+                    ? t("DeepLink:DeepLinkOnlyAppText")
+                    : t("DeepLink:DeepLinkText")}
+                </Text>
               </StyledBodyWrapper>
               <StyledActionsWrapper>
-                <Checkbox
-                  label={t("DeepLink:RememberChoice")}
-                  isChecked={isRemember}
-                  onChange={onChangeCheckbox}
-                />
+                {!isOpenInAppOnly ? (
+                  <Checkbox
+                    label={t("DeepLink:RememberChoice")}
+                    isChecked={isRemember}
+                    onChange={onChangeCheckbox}
+                  />
+                ) : null}
                 <Button
                   size={ButtonSize.medium}
                   primary
@@ -142,9 +154,13 @@ const DeepLink = ({
                   fontWeight="600"
                   isHovered
                   color={theme.currentColorScheme?.main?.accent}
-                  onClick={onStayBrowserClick}
+                  onClick={
+                    isOpenInAppOnly ? onDownloadAppClick : onStayBrowserClick
+                  }
                 >
-                  {t("DeepLink:StayInBrowser")}
+                  {isOpenInAppOnly
+                    ? t("DeepLink:DownloadApp")
+                    : t("DeepLink:StayInBrowser")}
                 </Link>
               </StyledActionsWrapper>
             </StyledDeepLink>

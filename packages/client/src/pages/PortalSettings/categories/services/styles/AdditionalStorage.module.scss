@@ -112,13 +112,23 @@
 
 .changeShedule {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
   margin-top: 12px;
-  color: var(--payment-warning-color);
-  svg {
-    path {
-      fill: var(--payment-warning-color);
+  &.warningColor {
+    color: var(--payment-warning-color);
+    svg {
+      path {
+        fill: var(--payment-warning-color);
+      }
+    }
+  }
+  &.greenColor {
+    color: var(--payment-credit-color);
+    svg {
+      path {
+        fill: var(--payment-credit-color);
+      }
     }
   }
 }

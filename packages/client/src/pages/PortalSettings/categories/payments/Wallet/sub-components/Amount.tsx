@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
@@ -42,19 +42,28 @@ type AmountProps = {
   language: string;
   currency: string;
   walletCustomerEmail?: boolean;
+  reccomendedAmount?: string;
 };
 
+const MAX_LENGTH = 6;
+
 const Amount = (props: AmountProps) => {
-  const { language, currency, walletCustomerEmail, isDisabled } = props;
+  const {
+    language,
+    currency,
+    walletCustomerEmail,
+    isDisabled,
+    reccomendedAmount,
+  } = props;
 
   const { amount, setAmount } = useAmountValue();
-  const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
+
   const { t } = useTranslation("Payments");
 
   const getAmountTabs = () => {
     const amounts = [10, 20, 30, 50, 100];
     return amounts.map((item) => ({
-      name: formatCurrencyValue(language, item, currency),
+      name: `+${formatCurrencyValue(language, item, currency)}`,
       id: item.toString(),
       value: item,
       content: null,
@@ -64,8 +73,12 @@ const Amount = (props: AmountProps) => {
 
   const onSelectAmount = (e: React.MouseEvent<HTMLDivElement>) => {
     const itemId = e.currentTarget.dataset.id;
-    setSelectedAmount(itemId);
-    setAmount(itemId);
+    const currentAmount = amount ? parseInt(amount, 10) : 0;
+    const selectedValue = parseInt(itemId, 10);
+    const newTotal = (currentAmount + selectedValue).toString();
+
+    const amountValue = newTotal.length <= MAX_LENGTH ? newTotal : amount;
+    setAmount(amountValue);
   };
 
   const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +87,6 @@ const Amount = (props: AmountProps) => {
     if (!validity.valid) return;
 
     setAmount(value);
-    setSelectedAmount(value);
   };
 
   const textTooltip = () => {
@@ -114,17 +126,23 @@ const Amount = (props: AmountProps) => {
         <Text fontWeight={600} className={styles.amountTitle}>
           {t("Amount")}
         </Text>
+
         <TextInput
           value={amount}
           onChange={onChangeTextInput}
-          pattern="\d+"
+          pattern="^[1-9]\d*$"
           scale
           withBorder
           type={InputType.text}
           placeholder={t("EnterAmount")}
           isDisabled={isDisabled || !walletCustomerEmail}
-          maxLength={6}
+          maxLength={MAX_LENGTH}
         />
+        {reccomendedAmount ? (
+          <Text className={styles.reccomendedAmount}>
+            {t("RecommendedTopUpAmount", { amount: reccomendedAmount })}
+          </Text>
+        ) : null}
       </div>
       {!walletCustomerEmail ? (
         <Tooltip

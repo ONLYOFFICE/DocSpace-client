@@ -29,3 +29,16 @@
   padding: 0 0 24px;
   user-select: none;
 }
+
+.buttonContainerWrapper {
+  display: flex;
+  gap: inherit;
+  flex-direction: column;
+  width: 100%;
+}
+
+.buttonContainer {
+  gap: inherit;
+  display: flex;
+  width: 100%;
+}

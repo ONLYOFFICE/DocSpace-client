@@ -11,6 +11,7 @@
   "AutomaticPayments": "Αυτόματες πληρωμές",
   "AutoTopUp": "Αυτόματη ανανέωση",
   "AutoTopUpEnabled": "Η αυτόματη ανανέωση είναι ενεργοποιημένη.",
+  "AvailableLimit": "<1>Διαθέσιμο όριο σύμφωνα με το τρέχον πρόγραμμα:</1> {{amount}}",
   "Balance": "Υπόλοιπο: <1>{{balance}}</1>",
   "BalanceInsufficient": "Υπόλοιπο: <1>{{balance}}</1> | Μη επαρκή κεφάλαια",
   "BalanceText": "Ισορροπία",
@@ -41,6 +42,7 @@
   "Credit": "Πίστωση",
   "CurrencyPerMonth": "{{currency}}/μήνα",
   "CurrentBalance": "τρέχουσα υπόλοιπο: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Τρέχουσα πληρωμή: {{price}}/μήνα ({{size}})",
   "Debit": "Χρέωση",
   "DelayedPayment": "Καθυστερημένη πληρωμή του προγράμματος {{planName}} με ημερομηνία {{date}}",
   "DiskStorage": "Αποθήκευση σε δίσκο",
@@ -55,6 +57,7 @@
   "FirstAddPaymentMethod": "Πρώτα πρέπει να προσθέσετε έναν τρόπο πληρωμής",
   "ForDays": "για ημέρες: {{count}}",
   "FromTo": "Από <1>{{fromDate}}</1> έως <2>{{toDate}}</2>",
+  "GoToService": "Πήγαινε στην υπηρεσία",
   "GoToStripe": "Πήγαινε στο Stripe",
   "GracePeriodActivatedDescription": "Κατά τη διάρκεια της περιόδου χάριτος, οι διαχειριστές δεν μπορούν να δημιουργήσουν νέα δωμάτια και να προσθέσουν νέους χρήστες. Μετά την ημερομηνία λήξης της περιόδου χάριτος, το {{productName}} δεν θα είναι διαθέσιμο μέχρι να γίνει η πληρωμή.",
   "GracePeriodActivatedInfo": "Η περίοδος χάριτος ισχύει <1>από {{fromDate}} έως {{byDate}}</1> (ημέρες που απομένουν: {{delayDaysCount}}).",
@@ -128,8 +131,5 @@
   "YouHaveNotAddedAnyPayment": "Δεν έχετε προσθέσει καμία πληρωμή",
   "YourCurrentPayment": "Η τρέχουσα πληρωμή σας",
   "YourCurrentPlan": "<1>Το τρέχον πρόγραμμα σας:</1> {{amount}} <2>({{price}}/μήνα)</2>",
-  "YourPrice": "Η τιμή σας",
-  "AvailableLimit": "<1>Διαθέσιμο όριο σύμφωνα με το τρέχον πρόγραμμα:</1> {{amount}}",
-  "CurrentPaymentMonth": "Τρέχουσα πληρωμή: {{price}}/μήνα ({{size}})",
-  "GoToService": "Πήγαινε στην υπηρεσία"
+  "YourPrice": "Η τιμή σας"
 }

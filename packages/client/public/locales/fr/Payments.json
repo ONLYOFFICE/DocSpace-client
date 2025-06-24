@@ -47,7 +47,6 @@
   "Downgrade": "Déclasser",
   "DowngradeNow": "Passer à une version antérieure maintenant",
   "DueToday": "À remettre aujourd'hui",
-  "EnableAutoTopUp": "Activer le rechargement automatique",
   "EnterAmount": "Saisissez le montant entier...",
   "EnterAnIntegerAmountBetween": "Saisissez le montant entier entre {{min}} et {{max}}",
   "ErrorNotification": "Échec de la mise à jour du plan tarifaire. Réessayez plus tard ou contactez le service commercial.",

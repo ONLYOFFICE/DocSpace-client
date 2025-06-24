@@ -14,3 +14,18 @@ pre-push:
       skip_empty: true
       follow: true
       skip_on_fail: false
+    images:
+      run: cd ./common/tests && npm ci && npm run test:images
+      skip_empty: true
+      follow: true
+      skip_on_fail: false
+    colors:
+      run: cd ./common/tests && npm ci && npm run test:colors
+      skip_empty: true
+      follow: true
+      skip_on_fail: false
+    dependencies:
+      run: cd ./common/tests && npm ci && npm run test:dependencies
+      skip_empty: true
+      follow: true
+      skip_on_fail: false

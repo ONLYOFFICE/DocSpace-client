@@ -31,7 +31,6 @@ const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
-const ESLintPlugin = require("eslint-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
@@ -453,23 +452,6 @@ module.exports = (env, argv) => {
 */`,
     }),
   );
-
-  if (!env.lint || env.lint == "true") {
-    console.log("Enable eslint");
-    config.plugins.push(
-      new ESLintPlugin({
-        configType: "eslintrc",
-        cacheLocation: path.resolve(
-          __dirname,
-          "../../node_modules/.cache/.eslintcache",
-        ),
-        quiet: true,
-        formatter: "json",
-      }),
-    );
-  } else {
-    console.log("Skip eslint");
-  }
 
   return config;
 };

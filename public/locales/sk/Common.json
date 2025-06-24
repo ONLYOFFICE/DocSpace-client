@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Single sign-on",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Táto miestnosť je otvorená v režime <1>{{roomMode}}</1>. Aby ste mohli pracovať s dokumentmi, autorizujte sa.",
   "PublicLink": "Verejný odkaz",
   "PublicRoom": "Verejná miestnosť",
   "PublicRoomInfo": "Zdieľajte dokumenty na prezeranie, úpravu, komentovanie alebo recenzovanie bez registrácie. Túto miestnosť môžete tiež vložiť do ľubovoľného webového rozhrania.",

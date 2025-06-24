@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "싱글 사인온",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "이 룸은 <1>{{roomMode}}</1> 모드로 열려 있습니다. 문서 작업을 하려면 인증해 주세요. ",
   "PublicLink": "공개 링크",
   "PublicRoom": "퍼블릭 룸",
   "PublicRoomInfo": "등록하지 않고도 문서를 확인하고 편집하고 주석을 달거나 검토할 수 있도록 공유하세요. 또한 웹 인터페이스에 이 룸을 인베드할 수도 있습니다.",

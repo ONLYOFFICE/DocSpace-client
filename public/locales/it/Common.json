@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Single sign-on",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Questa stanza verrà aperta in modalità <1>{{roomMode}}</1>. Per poter lavorare con i documenti, dai l’autorizzazione.",
   "PublicLink": "Link pubblico",
   "PublicRoom": "Stanza pubblica",
   "PublicRoomInfo": "Condividi i documenti per visualizzarli, modificarli, commentarli o rivederli senza registrazione. Puoi anche incorporare questa stanza in qualsiasi interfaccia web.",

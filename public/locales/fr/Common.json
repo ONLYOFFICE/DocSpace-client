@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Authentification unique",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Cette salle est ouverte en mode <1>{{roomMode}}</1>. Pour pouvoir travailler sur des documents, veuillez vous connecter.",
   "PublicLink": "Lien public",
   "PublicRoom": "Salle publique",
   "PublicRoomInfo": "Partagez des documents pour les consulter, les éditer, les commenter ou les réviser sans inscription. Vous pouvez également intégrer cette salle dans n'importe quelle interface web.",

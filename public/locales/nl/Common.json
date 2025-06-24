@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Single Sign-On",
   "ProviderTwitter": "X (Twitter)",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Deze kamer is geopend in de <1>{{roomMode}}</1> modus. Om aan documenten te kunnen werken, moet u autoriseren.",
   "PublicLink": "Openbare link",
   "PublicRoom": "Openbare kamer",
   "PublicRoomInfo": "Deel documenten om ze te bekijken, bewerken, opmerkingen te plaatsen of te beoordelen zonder te registeren. U kunt deze kamer ook in elke webinterface integreren.",

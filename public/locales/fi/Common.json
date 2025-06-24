@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Kertakirjautuminen",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Tämä huone on avattu <1>{{roomMode}}</1> -tilassa. Anna valtuutus pystyäksesi muokkaamaan asiakirjoja.",
   "PublicLink": "Julkinen linkki",
   "PublicRoom": "Julkinen huone",
   "PublicRoomInfo": "Jaa asiakirjoja katseltavaksi, muokattavaksi, kommentoitavaksi tai katseltavaksi ilman rekisteröintiä. Voit myös upottaa tämän huoneen mihin tahansa verkkokäyttöliittymään.",

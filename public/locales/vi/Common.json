@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Đăng nhập một lần",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Phòng này được mở ở chế độ <1>{{roomMode}}</1>. Để có thể làm việc trên các tài liệu, xin hãy cấp phép.",
   "PublicLink": "Liên kết công khai",
   "PublicRoom": "Phòng công cộng",
   "PublicRoomInfo": "Chia sẻ tài liệu để xem, chỉnh sửa, nhận xét hoặc xem lại mà không cần đăng ký. Bạn cũng có thể nhúng phòng này vào bất kỳ giao diện web nào.",

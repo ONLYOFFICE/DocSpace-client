@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Einmaliges Anmelden",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Dieser Raum wird im <1>{{roomMode}}</1>-Modus geöffnet. Um an Dokumenten arbeiten zu können, bitte autorisieren.",
   "PublicLink": "Öffentlicher Link",
   "PublicRoom": "Öffentlicher Raum",
   "PublicRoomInfo": "Geben Sie Dokumente zum Anzeigen, Bearbeiten, Kommentieren oder Überprüfen frei, ohne sich registrieren zu müssen. Sie können diesen Raum auch in jede beliebige Weboberfläche einbetten.",

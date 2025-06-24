@@ -11,6 +11,7 @@
   "AutomaticPayments": "Pagesat automatike",
   "AutoTopUp": "Mbushje automatike",
   "AutoTopUpEnabled": "Rimbushja automatike është aktivizuar.",
+  "AvailableLimit": "<1>Limiti i disponueshëm nën planin aktual:</1> {{amount}}",
   "Balance": "Bilanci: <1>{{balance}}</1>",
   "BalanceInsufficient": "Bilanci: <1>{{balance}}</1> | Fonde të pamjaftueshme",
   "BalanceText": "Bilanci",
@@ -41,6 +42,7 @@
   "Credit": "Kredit",
   "CurrencyPerMonth": "{{currency}}/muaj",
   "CurrentBalance": "Bilanci aktual: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Pagesa aktuale: {{price}}/muaj ({{size}})",
   "Debit": "Debit",
   "DelayedPayment": "Pagesa e vonuar e planit të {{planName}} datë {{date}}",
   "DiskStorage": "Hapësira në disk",
@@ -54,6 +56,7 @@
   "FirstAddPaymentMethod": "Së pari ju duhet të shtoni një mënyrë pagese",
   "ForDays": "për ditë: {{count}}",
   "FromTo": "Nga <1>{{fromDate}}</1> në <2>{{toDate}}</2>",
+  "GoToService": "Shko te shërbimi",
   "GoToStripe": "Shkoni në Stripe",
   "GracePeriodActivatedDescription": "Gjatë periudhës së faljes, administratorët nuk mund të krijojnë dhoma të reja dhe të shtojnë përdorues të rinj. Pas datës së afatit të periudhës së hirit, {{productName}} do të bëhet i padisponueshëm derisa të kryhet pagesa.",
   "GracePeriodActivatedInfo": "Periudha e faljes është efektive <1>nga {{fromDate}} deri në {{byDate}}</1> (ditët e mbetura: {{delayDaysCount}}).",
@@ -90,6 +93,7 @@
   "StartingNextMonth": "Duke filluar nga muaji i ardhshëm",
   "StartupSuggestion": "Bëni më shumë me planin {{planName}}",
   "StartupTitle": "Po përdorni planin falas të {{planName}}",
+  "StorageCapacityUpdated": "Kapaciteti i ruajtjes është përditësuar.",
   "StorageUpgradeMessage": "{{fromSize}} → {{toSize}} në total",
   "StorageUponRequest": "Hapësira ruajtëse shtesë që tejkalon {{amount}} ofrohet sipas kërkesës.",
   "StorageUsed": "<1>Hapësira ruajtëse e përdorur:</1> {{amount}}",
@@ -126,9 +130,5 @@
   "YouHaveNotAddedAnyPayment": "Nuk keni shtuar asnjë pagesë",
   "YourCurrentPayment": "Pagesa juaj aktuale",
   "YourCurrentPlan": "<1>Plani juaj aktual:</1> {{amount}} <2>({{price}}/muaj)</2>",
-  "YourPrice": "Çmimi juaj",
-  "StorageCapacityUpdated": "Kapaciteti i ruajtjes është përditësuar.",
-  "AvailableLimit": "<1>Limiti i disponueshëm nën planin aktual:</1> {{amount}}",
-  "CurrentPaymentMonth": "Pagesa aktuale: {{price}}/muaj ({{size}})",
-  "GoToService": "Shko te shërbimi"
+  "YourPrice": "Çmimi juaj"
 }

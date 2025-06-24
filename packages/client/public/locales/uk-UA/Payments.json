@@ -11,6 +11,7 @@
   "AutomaticPayments": "Автоматичні платежі",
   "AutoTopUp": "Автоматичне поповнення",
   "AutoTopUpEnabled": "Автоматичне поповнення активовано.",
+  "AvailableLimit": "<1>Доступний ліміт за поточним планом:</1> {{amount}}",
   "Balance": "Баланс: <1>{{balance}}</1>",
   "BalanceInsufficient": "Баланс: <1>{{balance}}</1> | Недостатньо коштів",
   "BalanceText": "Баланс",
@@ -41,6 +42,7 @@
   "Credit": "Кредит",
   "CurrencyPerMonth": "{{currency}}/місяць",
   "CurrentBalance": "Поточний баланс: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Поточний платіж: {{price}}/місяць ({{size}})",
   "Debit": "Дебет",
   "DelayedPayment": "Затримка платежу за планом {{planName}} від {{date}}",
   "DiskStorage": "Дисковий накопичувач",
@@ -54,6 +56,7 @@
   "FirstAddPaymentMethod": "Спочатку вам потрібно додати спосіб оплати.",
   "ForDays": "for days: {{count}}",
   "FromTo": "З <1>{{fromDate}}</1> до <2>{{toDate}}</2>",
+  "GoToService": "Перейти до сервісу",
   "GoToStripe": "Перейдіть до Stripe",
   "GracePeriodActivatedDescription": "Протягом пільгового періоду адміністратори не можуть створювати нові кімнати та додавати нових користувачів. Після закінчення пільгового періоду {{productName}} стане недоступним до моменту здійснення платежу.",
   "GracePeriodActivatedInfo": "Пільговий період діє <1>з {{fromDate}} до {{byDate}}</1> (залишилося днів: {{delayDaysCount}}).",
@@ -127,8 +130,5 @@
   "YouHaveNotAddedAnyPayment": "Ви не додали жодного платежу",
   "YourCurrentPayment": "Ваш поточний платіж",
   "YourCurrentPlan": "<1>Ваш поточний план:</1> {{amount}} <2>({{price}}/місяць)</2>",
-  "YourPrice": "Ваша ціна",
-  "AvailableLimit": "<1>Доступний ліміт за поточним планом:</1> {{amount}}",
-  "CurrentPaymentMonth": "Поточний платіж: {{price}}/місяць ({{size}})",
-  "GoToService": "Перейти до сервісу"
+  "YourPrice": "Ваша ціна"
 }

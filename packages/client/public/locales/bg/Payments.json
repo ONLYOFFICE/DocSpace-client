@@ -11,6 +11,7 @@
   "AutomaticPayments": "Автоматични плащания",
   "AutoTopUp": "Автоматично зареждане",
   "AutoTopUpEnabled": "Автоматичното презареждане е активирано.",
+  "AvailableLimit": "<1>Наличен лимит по текущия план:</1> {{amount}}",
   "Balance": "Баланс: <1>{{balance}}</1>",
   "BalanceInsufficient": "Баланс: <1>{{balance}}</1> | Недостатъчно средства",
   "BalanceText": "Баланс",
@@ -41,6 +42,7 @@
   "Credit": "Кредит",
   "CurrencyPerMonth": "{{currency}}/месец",
   "CurrentBalance": "Текущ баланс: <1>{{balance}}</1>",
+  "CurrentPaymentMonth": "Текущо плащане: {{price}}/месец ({{size}})",
   "Debit": "Дебит",
   "DelayedPayment": "Забавено плащане на {{planName}} плана с дата {{date}}",
   "DiskStorage": "Дисково хранилище",
@@ -54,6 +56,7 @@
   "FirstAddPaymentMethod": "Първо трябва да добавите метод на плащане.",
   "ForDays": "за дни: {{count}}",
   "FromTo": "От <1>{{fromDate}}</1> до <2>{{toDate}}</2>",
+  "GoToService": "Отидете към услугата",
   "GoToStripe": "Отидете в Stripe",
   "GracePeriodActivatedDescription": "По време на гратисния период администраторите не могат да създават нови стаи и да добавят нови потребители. След падежа на гратисния период {{productName}} ще стане недостъпен до извършване на плащането.",
   "GracePeriodActivatedInfo": "Гратисният период е в сила <1>от {{fromDate}} до {{byDate}}</1> (оставащи дни: {{delayDaysCount}}).",
@@ -127,8 +130,5 @@
   "YouHaveNotAddedAnyPayment": "Нямате добавени плащания.",
   "YourCurrentPayment": "Вашият настоящ платеж",
   "YourCurrentPlan": "<1>Вашият текущ план:</1> {{amount}} <2>({{price}}/месец)</2>",
-  "YourPrice": "Вашата цена",
-  "AvailableLimit": "<1>Наличен лимит по текущия план:</1> {{amount}}",
-  "CurrentPaymentMonth": "Текущо плащане: {{price}}/месец ({{size}})",
-  "GoToService": "Отидете към услугата"
+  "YourPrice": "Вашата цена"
 }

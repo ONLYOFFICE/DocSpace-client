@@ -31,7 +31,7 @@ const pkg = require("./package.json");
 
 const nextConfig = {
   basePath: "/sdk",
-  output: "standalone",
+  // output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
   },

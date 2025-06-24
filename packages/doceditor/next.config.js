@@ -35,7 +35,7 @@ const version = pkg.version;
 
 const nextConfig = {
   basePath: "/doceditor",
-  output: "standalone",
+  // output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
   },

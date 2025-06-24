@@ -47,7 +47,7 @@ const getBuildYear = () => {
 
 const nextConfig = {
   basePath: "/login",
-  output: "standalone",
+  // output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
   },

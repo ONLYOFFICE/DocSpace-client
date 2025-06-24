@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:46.695Z",
-  "updated_at": "2025-06-18T07:34:14.794Z",
+  "updated_at": "2025-06-24T16:31:24.323Z",
   "comment": {
     "text": "This translation key is used to display the text \"Documents\" in a button within a file management component. It appears as part of a link that navigates to a personal section of documents, and its purpose is to provide a clear label for users.",
     "is_auto": true,
@@ -90,8 +90,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 328,
-      "context": "isLoading={isFormationHistory}\n isDisabled={isNotPaidPeriod}\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
+      "line_number": 334,
+      "context": "isDisabled={isNotPaidPeriod}\n scale={isMobile}\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
       "module": "/packages/client"
     },
     {
@@ -126,13 +126,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1250,
+      "line_number": 1246,
       "context": "t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1250,
+      "line_number": 1246,
       "context": "t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),",
       "module": "/packages/shared"
     },

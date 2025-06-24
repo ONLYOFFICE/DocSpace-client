@@ -3,7 +3,7 @@
   "content": "Logo for the editors header",
   "content_en_sha1_hash": "139b31fd58237986c24a80fd96c63f2f78bb1fbf",
   "created_at": "2025-05-19T21:30:51.865Z",
-  "updated_at": "2025-05-21T03:53:07.166Z",
+  "updated_at": "2025-06-24T16:31:24.505Z",
   "comment": {
     "text": "This translation key is used for the \"LogoDocsEditor\" text that appears next to an editor header in a branding page, indicating which type of logo belongs to the editor.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
       "line_number": 365,
-      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoDocsEditor\")} ({logoUrls[3].size.width}x\n {logoUrls[3].size.height})\n </Text>\n <Logo\n name={logoUrls[3].name}\n isEditor",
+      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoDocsEditor\")} ({logoUrls[3].size.width}x\n {logoUrls[3].size.height})\n </Text>\n <div className=\"logos-wrapper\">\n <Logo\n name={logoUrls[4].name}",
       "module": "/packages/shared"
     }
   ],

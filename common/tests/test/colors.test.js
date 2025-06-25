@@ -56,17 +56,21 @@ beforeAll(() => {
       ".meta",
     ];
 
+    const excludePatterns = [
+      "themes",
+      ".test.",
+      ".stories.",
+      path.normalize("packages/shared/utils/encoder.ts"),
+      path.normalize(
+        "packages/shared/components/error-container/ErrorContainer.tsx"
+      ),
+    ];
+
     return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         searchPattern.test(filePath) &&
-        !filePath.includes("themes") &&
-        !filePath.includes(".test.") &&
-        !filePath.includes(".stories.") &&
-        !filePath.includes("packages/shared/utils/encoder.ts") &&
-        !filePath.includes(
-          "packages/shared/components/error-container/ErrorContainer.tsx"
-        )
+        !excludePatterns.some((pattern) => filePath.includes(pattern))
     );
   });
 

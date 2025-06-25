@@ -66,9 +66,7 @@ const getAllFiles = (dir, excludeDirs = []) => {
 };
 
 const convertPathToOS = (filePath) => {
-  return path.sep == "/"
-    ? filePath.replaceAll("\\", "/")
-    : filePath.replaceAll("/", "\\");
+  return path.normalize(filePath);
 };
 
 module.exports = {

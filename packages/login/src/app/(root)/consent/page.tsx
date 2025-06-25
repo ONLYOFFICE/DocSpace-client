@@ -48,7 +48,8 @@ async function Page(props: {
 }) {
   logger.info("Consent page");
 
-  const searchParams = await props.searchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const clientId = searchParams.clientId ?? searchParams.client_id;
 
   const [user, settings, config] = await Promise.all([
@@ -59,7 +60,7 @@ async function Page(props: {
 
   const cookieStore = await cookies();
 
-  let token = cookieStore.get(`x-signature-${user!.id}`)?.value;
+  const token = cookieStore.get(`x-signature-${user!.id}`)?.value;
   let new_token = "";
 
   if (!token) {
@@ -69,7 +70,7 @@ async function Page(props: {
 
   const [data, scopes] = await Promise.all([
     getOAuthClient(clientId),
-    getScopeList(new_token, user!.id),
+    getScopeList(new_token),
   ]);
 
   const client = data?.client as IClientProps;
@@ -85,26 +86,22 @@ async function Page(props: {
 
   const culture = cookieStore.get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
-          <>
-            <GreetingLoginContainer
-              greetingSettings={settings?.greetingSettings}
-              culture={culture}
-            />
-            <Consent
-              client={client}
-              scopes={scopes}
-              user={user}
-              baseUrl={config?.oauth2?.origin}
-            />
-          </>
-        </LoginContainer>
-      )}
-    </>
-  );
+  return settings && typeof settings !== "string" ? (
+    <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
+      <>
+        <GreetingLoginContainer
+          greetingSettings={settings?.greetingSettings}
+          culture={culture}
+        />
+        <Consent
+          client={client}
+          scopes={scopes}
+          user={user}
+          baseUrl={config?.oauth2?.origin}
+        />
+      </>
+    </LoginContainer>
+  ) : null;
 }
 
 export default Page;

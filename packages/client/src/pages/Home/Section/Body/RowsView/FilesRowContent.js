@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { SimpleFilesRowContent } from "@docspace/shared/styles/FilesRow.styled";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
+import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 import { SortByFieldName } from "@docspace/shared/enums";
 import withContent from "../../../../../HOCs/withContent";
@@ -125,6 +126,12 @@ const FilesRowContent = ({
 
   const mainInfo = contentComponent();
 
+  let linkProps = { ...linkStyles };
+
+  if (item?.isPlugin) {
+    linkProps = createPluginFileHandlers(item, linkProps);
+  }
+
   return (
     <SimpleFilesRowContent
       sectionWidth={sectionWidth}
@@ -140,7 +147,7 @@ const FilesRowContent = ({
         fontWeight="600"
         fontSize="15px"
         target="_blank"
-        {...linkStyles}
+        {...linkProps}
         isTextOverflow
         dir="auto"
         truncate

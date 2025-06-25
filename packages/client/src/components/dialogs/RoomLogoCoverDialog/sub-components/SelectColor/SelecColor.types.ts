@@ -27,4 +27,5 @@
 export interface ColorItemProps {
   isEmptyColor?: boolean;
   isSelected?: boolean;
+  color?: string;
 }

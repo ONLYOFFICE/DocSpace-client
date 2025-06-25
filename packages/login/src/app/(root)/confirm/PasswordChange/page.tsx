@@ -40,7 +40,8 @@ type PasswordChangeProps = {
 async function Page(props: PasswordChangeProps) {
   logger.info("PasswordChange page");
 
-  const searchParams = await props.searchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const [settings, passwordSettings] = await Promise.all([
@@ -48,21 +49,17 @@ async function Page(props: PasswordChangeProps) {
     getPortalPasswordSettings(confirmKey),
   ]);
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer greetingText={settings?.greetingSettings} />
-          <FormWrapper id="password-change-form">
-            <PasswordChangeForm
-              passwordHash={settings.passwordHash}
-              passwordSettings={passwordSettings}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer greetingText={settings?.greetingSettings} />
+      <FormWrapper id="password-change-form">
+        <PasswordChangeForm
+          passwordHash={settings.passwordHash}
+          passwordSettings={passwordSettings}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

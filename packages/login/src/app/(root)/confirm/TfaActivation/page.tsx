@@ -42,7 +42,8 @@ type TfaActivationProps = {
 async function Page(props: TfaActivationProps) {
   logger.info("TfaActivation page");
 
-  const searchParams = await props.searchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;
 
@@ -52,20 +53,16 @@ async function Page(props: TfaActivationProps) {
     getUserFromConfirm(uid, confirmKey),
   ]);
 
-  return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <StyledForm className="set-app-container">
-          <TfaActivationForm
-            secretKey={res.manualEntryKey}
-            qrCode={res.qrCodeSetupImageUrl}
-            passwordHash={settings?.passwordHash}
-            userName={user?.userName}
-          />
-        </StyledForm>
-      )}
-    </>
-  );
+  return settings && typeof settings !== "string" ? (
+    <StyledForm className="set-app-container">
+      <TfaActivationForm
+        secretKey={res.manualEntryKey}
+        qrCode={res.qrCodeSetupImageUrl}
+        passwordHash={settings?.passwordHash}
+        userName={user?.userName}
+      />
+    </StyledForm>
+  ) : null;
 }
 
 export default Page;

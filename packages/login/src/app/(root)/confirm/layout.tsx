@@ -51,10 +51,10 @@ export default async function Layout({
     new URLSearchParams(searchParams.toString()),
   ) as TConfirmLinkParams;
 
-  const confirmLinkParams: TConfirmLinkParams = Object.assign(
-    { type },
-    queryParams,
-  );
+  const confirmLinkParams: TConfirmLinkParams = {
+    type,
+    ...queryParams,
+  };
 
   const [settings, confirmLinkResult] = await Promise.all([
     getSettings(),

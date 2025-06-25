@@ -77,7 +77,7 @@ async function Page() {
       displayAbout={displayAbout}
       companyInfoSettingsData={companyInfo}
       standalone={standalone}
-      licenseAgreementsUrl={licenseAgreementsUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl!}
       buildInfo={buildInfo!}
       isEnterprise={enterprise}
       logoText={logoText}

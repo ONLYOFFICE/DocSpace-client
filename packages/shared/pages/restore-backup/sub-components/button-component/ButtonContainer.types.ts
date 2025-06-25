@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { AxiosResponse } from "axios";
-import type { Nullable, Option, TTranslation } from "@docspace/shared/types";
-import type { BackupStorageType, TenantStatus } from "@docspace/shared/enums";
-import type { ButtonSize } from "@docspace/shared/components/button";
-import type { TUploadBackup } from "@docspace/shared/api/files/types";
+import type { Nullable, Option, TTranslation } from "../../../../types";
+import type { BackupStorageType, TenantStatus } from "../../../../enums";
+import type { ButtonSize } from "../../../../components/button";
+import type { TUploadBackup } from "../../../../api/files/types";
 
 export interface ButtonContainerProps {
   t: TTranslation;

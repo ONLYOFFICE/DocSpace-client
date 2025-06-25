@@ -29,8 +29,6 @@ import {
   getBackupProgress,
   getBackupSchedule,
   getBackupStorage,
-  getFoldersTree,
-  getPortalTariff,
   getQuota,
   getSettingsFiles,
   getSettingsThirdParty,

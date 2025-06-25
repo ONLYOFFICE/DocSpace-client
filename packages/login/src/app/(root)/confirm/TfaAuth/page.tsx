@@ -39,8 +39,8 @@ type TfaAuthProps = {
 
 async function Page(props: TfaAuthProps) {
   logger.info("TfaAuth page");
-
-  const searchParams = await props.searchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;
 
@@ -49,21 +49,17 @@ async function Page(props: TfaAuthProps) {
     getUserFromConfirm(uid, confirmKey),
   ]);
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer />
-          <FormWrapper id="tfa-auth-form">
-            <TfaAuthForm
-              passwordHash={settings.passwordHash}
-              userName={user?.userName}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer />
+      <FormWrapper id="tfa-auth-form">
+        <TfaAuthForm
+          passwordHash={settings.passwordHash}
+          userName={user?.userName}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

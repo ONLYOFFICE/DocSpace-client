@@ -27,13 +27,10 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin =
-  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
-const ESLintPlugin = require("eslint-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
@@ -41,13 +38,10 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
-const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
-
 const path = require("path");
 
 const pkg = require("./package.json");
 const runtime = require("../runtime.json");
-const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
@@ -115,6 +109,7 @@ const config = {
       SRC_DIR: path.resolve(__dirname, "./src"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
+      "@docspace/shared": path.resolve(__dirname, "../shared"),
     },
   },
 
@@ -217,7 +212,7 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
       {
         test: /\.module\.s[ac]ss$/i,
@@ -250,7 +245,7 @@ const config = {
       {
         test: /(?<!\.module)\.s[ac]ss$/i,
         use: [
-          "style-loader",
+          { loader: "style-loader" },
           {
             loader: "css-loader",
             options: {
@@ -286,12 +281,12 @@ const config = {
               ],
               plugins: [
                 "@babel/plugin-transform-runtime",
-                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-transform-class-properties",
                 "@babel/plugin-proposal-export-default-from",
               ],
             },
           },
-          "source-map-loader",
+          { loader: "source-map-loader" },
         ],
       },
     ],
@@ -394,19 +389,6 @@ module.exports = (env, argv) => {
     },
   };
 
-  config.plugins.push(
-    new ModuleFederationPlugin({
-      name: "client",
-      filename: "remoteEntry.js",
-      remotes: [],
-      exposes: {},
-      shared: {
-        ...deps,
-        ...sharedDeps,
-      },
-    }),
-  );
-
   const htmlTemplate = {
     title: title,
     template: "./public/index.html",
@@ -437,9 +419,7 @@ module.exports = (env, argv) => {
     htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
       runtime.checksums["browserDetector.js"] || dateHash
     }`;
-    htmlTemplate.chatWidget = `/static/scripts/chatWidget.js?hash=${
-      runtime.checksums["chatWidget.js"] || dateHash
-    }`;
+
     htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
       runtime.checksums["config.json"] || dateHash
     }`;
@@ -472,23 +452,6 @@ module.exports = (env, argv) => {
 */`,
     }),
   );
-
-  if (!env.lint || env.lint == "true") {
-    console.log("Enable eslint");
-    config.plugins.push(
-      new ESLintPlugin({
-        configType: "eslintrc",
-        cacheLocation: path.resolve(
-          __dirname,
-          "../../node_modules/.cache/.eslintcache",
-        ),
-        quiet: true,
-        formatter: "json",
-      }),
-    );
-  } else {
-    console.log("Skip eslint");
-  }
 
   return config;
 };

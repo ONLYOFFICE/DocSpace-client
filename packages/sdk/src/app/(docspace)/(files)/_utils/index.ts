@@ -28,7 +28,7 @@
 
 import { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 
-/** Value needs for selection area and DND work*/
+/** Value needs for selection area and DND work */
 export const generateFilesItemValue = (
   item: TFolderItem | TFileItem,
   draggable: boolean,

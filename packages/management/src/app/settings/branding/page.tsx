@@ -105,7 +105,7 @@ async function Page() {
       additionalResources={additionalResources}
       companyInfo={companyInfo}
       buildInfo={buildInfo!}
-      licenseAgreementsUrl={licenseAgreementsUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl!}
       isEnterprise={enterprise}
       logoText={logoText}
     />

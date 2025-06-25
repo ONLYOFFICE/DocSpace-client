@@ -50,9 +50,9 @@ type LinkInviteProps = {
 
 async function Page(props: LinkInviteProps) {
   logger.info("Invite page");
-
-  const params = await props.params;
-  const searchParams = await props.searchParams;
+  const { searchParams: sp, params: p } = props;
+  const searchParams = await sp;
+  const params = await p;
   if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite") {
     logger.info(`Invite page notFound params.Invite: ${params.Invite}`);
     return notFound();
@@ -86,35 +86,31 @@ async function Page(props: LinkInviteProps) {
 
   const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingCreateUserContainer
-            type={type}
-            displayName={user?.displayName}
-            culture={culture}
-            hostName={hostName}
-          />
-          <FormWrapper id="invite-form">
-            <CreateUserForm
-              userNameRegex={settings.userNameRegex}
-              passwordHash={settings.passwordHash}
-              displayName={user?.displayName}
-              passwordSettings={passwordSettings}
-              capabilities={capabilities}
-              thirdPartyProviders={thirdParty}
-              legalTerms={settings.externalResources.common?.entries.legalterms}
-              licenseUrl={settings.externalResources.common?.entries.license}
-              isStandalone={settings.standalone}
-              logoText={settings.logoText}
-              invitationSettings={invitationSettings}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingCreateUserContainer
+        type={type}
+        displayName={user?.displayName}
+        culture={culture}
+        hostName={hostName}
+      />
+      <FormWrapper id="invite-form">
+        <CreateUserForm
+          userNameRegex={settings.userNameRegex}
+          passwordHash={settings.passwordHash}
+          displayName={user?.displayName}
+          passwordSettings={passwordSettings}
+          capabilities={capabilities}
+          thirdPartyProviders={thirdParty}
+          legalTerms={settings.externalResources.common?.entries.legalterms}
+          licenseUrl={settings.externalResources.common?.entries.license}
+          isStandalone={settings.standalone}
+          logoText={settings.logoText}
+          invitationSettings={invitationSettings}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

@@ -61,7 +61,7 @@ const RowView = ({
     >
       {items.map((item, index) => (
         <Row
-          key={`${item.id}_${index}`}
+          key={`${item.id}`}
           index={index}
           item={item}
           filterSortBy={filterSortBy}

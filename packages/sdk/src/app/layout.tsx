@@ -56,7 +56,7 @@ export default async function RootLayout({
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     logger.info("get health check and return empty layout");
-    return <></>;
+    return null;
   }
 
   const cookieStore = await cookies();
@@ -83,7 +83,7 @@ export default async function RootLayout({
     | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
-    (theme) => theme.id === colorTheme.selected,
+    (t) => t.id === colorTheme.selected,
   );
 
   const dirClass = getDirectionByLanguage(locale || "en");

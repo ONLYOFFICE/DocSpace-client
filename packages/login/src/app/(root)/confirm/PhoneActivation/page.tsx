@@ -36,18 +36,14 @@ async function Page() {
   logger.info("PhoneActivation page");
   const settings = await getSettings();
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer greetingText={settings?.greetingSettings} />
-          <FormWrapper id="phone-activation-form">
-            <ChangePhoneForm />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer greetingText={settings?.greetingSettings} />
+      <FormWrapper id="phone-activation-form">
+        <ChangePhoneForm />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

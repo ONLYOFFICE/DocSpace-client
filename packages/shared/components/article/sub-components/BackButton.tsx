@@ -32,16 +32,20 @@ import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
 import { DeviceType } from "../../../enums";
 
+import { ArticleHeaderLoader } from "../../../skeletons/article";
+
 import styles from "../Article.module.scss";
 
 const BackButton = ({
   showText,
   currentDeviceType,
   onLogoClickAction,
+  isLoading,
 }: {
   showText: boolean;
   currentDeviceType: DeviceType;
   onLogoClickAction?: () => void;
+  isLoading?: boolean;
 }) => {
   const { t } = useTranslation("Common");
   const navigate = useNavigate();
@@ -54,6 +58,15 @@ const BackButton = ({
   const icon =
     currentDeviceType === DeviceType.desktop ? ArrowIcon : ArrowTabletIcon;
 
+  if (isLoading)
+    return (
+      <ArticleHeaderLoader
+        height="18px"
+        width="211px"
+        showText={showText}
+        className={styles.backButton}
+      />
+    );
   return (
     <div
       className={styles.backButton}

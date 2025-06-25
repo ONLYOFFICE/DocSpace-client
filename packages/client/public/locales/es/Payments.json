@@ -33,7 +33,7 @@
   "CardLinked": "Tarjeta vinculada",
   "CardUnlinked": "Tarjeta desvinculada",
   "ChangeShedule": "Cambio programado",
-  "ChargeAmount": "Se cargará un importe de <1>{price}}</1> a su método de pago guardado.",
+  "ChargeAmount": "Se cargará un importe de <1>{{price}}</1> a su método de pago guardado.",
   "ChooseNewPayer": "Elija un nuevo pagador",
   "ChooseNewPlan": "¿Desea elegir un nuevo plan de precios?",
   "ConfirmPayment": "Confirmar pago",

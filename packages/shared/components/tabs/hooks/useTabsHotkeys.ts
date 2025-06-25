@@ -27,7 +27,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
 import { isMobile } from "react-device-detect";
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { checkDialogsOpen } from "../../../utils/checkDialogsOpen";
 import { TTabsHotkey } from "../Tabs.types";
 
 const useTabsHotkeys = ({

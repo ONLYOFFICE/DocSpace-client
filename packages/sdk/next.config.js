@@ -31,7 +31,6 @@ const pkg = require("./package.json");
 
 const nextConfig = {
   basePath: "/sdk",
-  // output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -135,5 +134,9 @@ const nextConfig = {
   },
   devIndicators: false,
 };
+
+if (process.env.DEPLOY) {
+  nextConfig.output = "standalone";
+}
 
 module.exports = nextConfig;

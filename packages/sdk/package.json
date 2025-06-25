@@ -5,6 +5,7 @@
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
     "build": "next build",
+    "build:deploy": "cross-env DEPLOY=true next build",
     "start": "cross-env NODE_ENV=development PORT=5099 next dev",
     "start-prod": "cross-env NODE_ENV=production node server.js",
     "lint": "eslint ./src --max-warnings=0",
@@ -67,6 +68,11 @@
           "build:translations"
         ]
       },
+      "build:deploy": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
       "start": {
         "continuous": true,
         "dependsOn": [
@@ -96,7 +102,7 @@
       },
       "deploy": {
         "dependsOn": [
-          "build"
+          "build:deploy"
         ]
       },
       "test:build": {

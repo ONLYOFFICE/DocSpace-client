@@ -226,11 +226,11 @@
 
     &.focused,
     &:hover:not(.selected) {
+      background-color: var(--tabs-hover-background-color-secondary);
+
       .tabText {
         color: var(--tabs-active-text-color-secondary);
       }
-
-      background-color: var(--tabs-hover-background-color-secondary);
 
       .tabIcon {
         svg path {

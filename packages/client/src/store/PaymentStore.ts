@@ -413,6 +413,20 @@ class PaymentStore {
     );
   };
 
+  formatPaymentCurrency = (item: number = 0, fractionDigits: number = 0) => {
+    const { language } = authStore;
+    const amount = item || this.walletBalance;
+    const { planCost } = this.paymentQuotasStore;
+    const { isoCurrencySymbol } = planCost;
+
+    return formatCurrencyValue(
+      language,
+      amount,
+      isoCurrencySymbol,
+      fractionDigits,
+    );
+  };
+
   updatePreviousBalance = () => {
     this.previousBalance = this.balance;
   };

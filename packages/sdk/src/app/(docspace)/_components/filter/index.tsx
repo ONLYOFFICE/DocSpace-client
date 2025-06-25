@@ -101,7 +101,7 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
       filterHeader={t("Common:AdvancedFilter")}
       placeholder={t("Common:Search")}
       view={t("Common:View")}
-      filterTitle={t("Common:Filter")}
+      filterTitle={t("Files:Filter")}
       sortByTitle={t("Common:SortBy")}
       selectorLabel=""
       isIndexing={false}

@@ -286,13 +286,13 @@ export default function useFilesFilter({
       {
         id: "view-switch_rows",
         value: "row",
-        label: t("Common:ViewList"),
+        label: t("Files:ViewList"),
         icon: <ViewRowsReactSvg />,
       },
       {
         id: "view-switch_tiles",
         value: "tile",
-        label: t("Common:ViewTiles"),
+        label: t("Files:ViewTiles"),
         icon: <ViewTilesReactSvg />,
       },
     ];

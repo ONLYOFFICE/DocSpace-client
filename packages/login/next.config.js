@@ -47,7 +47,6 @@ const getBuildYear = () => {
 
 const nextConfig = {
   basePath: "/login",
-  output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -181,5 +180,9 @@ const nextConfig = {
   },
   devIndicators: false,
 };
+
+if (process.env.DEPLOY) {
+  nextConfig.output = "standalone";
+}
 
 module.exports = nextConfig;

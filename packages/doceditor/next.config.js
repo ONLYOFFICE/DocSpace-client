@@ -35,7 +35,6 @@ const version = pkg.version;
 
 const nextConfig = {
   basePath: "/doceditor",
-  output: "standalone",
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -80,6 +79,10 @@ const getBuildYear = () => {
   const today = new Date(timeElapsed);
   return today.getFullYear();
 };
+
+if (process.env.DEPLOY) {
+  nextConfig.output = "standalone";
+}
 
 module.exports = {
   webpack(config) {

@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "单点登录",
   "ProviderTwitter": "Twitter推特",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "此房间以<1>{{roomMode}}</1>模式打开。请授权以编辑文档。",
   "PublicLink": "公共链接",
   "PublicRoom": "公共房间",
   "PublicRoomInfo": "无需注册即可共享文档以供查看、编辑、评论或审阅。还可以将此房间嵌入到任何网页界面中。",

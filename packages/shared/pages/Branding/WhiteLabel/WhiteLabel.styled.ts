@@ -33,6 +33,7 @@ import {
   injectDefaultTheme,
   commonInputStyles,
 } from "../../../utils";
+import { globalColors } from "../../../themes/globalColors";
 
 const iconStyles = css`
   ${commonIconsStyles}
@@ -177,35 +178,6 @@ export const WhiteLabelWrapper = styled.div`
     gap: 20px;
   }
 
-  .logos-editor-wrapper {
-    display: grid;
-    grid-gap: 16px;
-    margin-bottom: 8px;
-
-    @media ${mobile} {
-      display: flex;
-      gap: 8px;
-      flex-direction: column;
-    }
-  }
-
-  .logos-editor-container,
-  .editor-header-container {
-    display: flex;
-    flex-direction: column;
-    width: 310px;
-  }
-
-  .editor-logo-header {
-    border: none !important;
-    background-color: transparent !important;
-    position: absolute;
-  }
-
-  .editor-header-container {
-    position: relative;
-  }
-
   .logo-item {
     display: flex;
     flex-direction: column;
@@ -255,38 +227,9 @@ export const WhiteLabelWrapper = styled.div`
   }
 
   .logo-docs-editor {
-    width: 86px;
-    height: 20px;
+    width: 172px;
+    height: 40px;
     padding: 0;
-    padding-right: 224px;
-  }
-
-  .logo-embedded-editor {
-    width: 86px;
-    height: 20px;
-    left: 0px;
-    padding: 0;
-    margin-bottom: 8px;
-  }
-
-  .background-green {
-    background-color: ${(props) =>
-      props.theme.client.settings.common.whiteLabel.greenBackgroundColor};
-  }
-
-  .background-blue {
-    background-color: ${(props) =>
-      props.theme.client.settings.common.whiteLabel.blueBackgroundColor};
-  }
-
-  .background-orange {
-    background-color: ${(props) =>
-      props.theme.client.settings.common.whiteLabel.orangeBackgroundColor};
-  }
-
-  .background-red {
-    background-color: ${(props) =>
-      props.theme.client.settings.common.whiteLabel.redBackgroundColor};
   }
 
   .background-light {
@@ -304,6 +247,13 @@ export const WhiteLabelWrapper = styled.div`
       props.theme.client.settings.common.whiteLabel.backgroundColorWhite};
   }
 
+  .background-light-editor {
+    background-color: ${globalColors.lightEditorBackground};
+  }
+
+  .background-dark-editor {
+    background-color: ${globalColors.darkEditorBackground};
+  }
   .hidden {
     display: none;
   }

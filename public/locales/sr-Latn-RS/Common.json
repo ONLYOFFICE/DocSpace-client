@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Jedinstvena prijava",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Ova soba je otvorena u <1>{{roomMode}}</1> režimu. Da biste mogli da radite na dokumentima, molimo vas da se prijavite.",
   "PublicLink": "Javni link",
   "PublicRoom": "Javna soba",
   "PublicRoomInfo": "Delite dokumente za pregled, uređivanje, komentarisanje ili pregledanje bez registracije. Takođe možete ugraditi ovu sobu u bilo koji veb interfejs.",

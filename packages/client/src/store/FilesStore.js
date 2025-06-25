@@ -596,7 +596,7 @@ class FilesStore {
     }
   };
 
-  wsModifyFolderUpdate = (opt) => {
+  wsModifyFolderUpdate = async (opt) => {
     const { infoPanelSelection, updateInfoPanelSelection } =
       this.infoPanelStore;
 
@@ -604,7 +604,7 @@ class FilesStore {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;
 
-      this.getFileInfo(file.id); // this.setFile(file);
+      const fileInfo = await this.getFileInfo(file.id); // this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
 
       if (
@@ -612,7 +612,7 @@ class FilesStore {
         !infoPanelSelection?.isFolder &&
         !infoPanelSelection?.isRoom
       ) {
-        const newInfoPanelSelection = this.getFilesListItems([file]);
+        const newInfoPanelSelection = this.getFilesListItems([fileInfo]);
         updateInfoPanelSelection(newInfoPanelSelection[0]);
       }
 

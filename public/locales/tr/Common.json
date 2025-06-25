@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Tek oturum açma",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Bu oda <1>{{roomMode}}</1> modunda açılmıştır. Belgeler üzerinde çalışabilmek için lütfen yetkilendirin.",
   "PublicLink": "Genel bağlantı",
   "PublicRoom": "Herkese açık oda",
   "PublicRoomInfo": "Kaydolmadan görüntüleme, düzenleme, yorumlama veya inceleme için belgeleri paylaşın. Ayrıca bu odayı herhangi bir web arayüzüne gömebilirsiniz.",

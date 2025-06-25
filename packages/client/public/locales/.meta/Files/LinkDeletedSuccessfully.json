@@ -3,7 +3,7 @@
   "content": "Link deleted successfully",
   "content_en_sha1_hash": "1d0682ce997a2ffc32592cbebffe9839b47dab71",
   "created_at": "2025-05-19T21:30:55.776Z",
-  "updated_at": "2025-05-28T09:30:02.257Z",
+  "updated_at": "2025-06-24T16:31:24.356Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is deleted successfully. It appears as an alert in a delete confirmation dialog and info panel, providing feedback to users that their link has been removed.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
       "line_number": 77,
-      "context": "setRoomShared(roomId, !!res);\n deleteExternalLink(res, newLink.sharedTo.id);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n toastr.success(t(\"Files:GeneralLinkDeletedSuccessfully\"));\n } else toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n if (filterObj.key !== res.sharedTo.requestToken) {",
+      "context": ".then((res) => {\n deleteExternalLink(res, newLink.sharedTo.id);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n toastr.success(t(\"Files:GeneralLinkDeletedSuccessfully\"));\n } else toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n return api.rooms\n .getRoomMembers(roomId, { filterType: 2 })",
       "module": "/packages/client"
     },
     {

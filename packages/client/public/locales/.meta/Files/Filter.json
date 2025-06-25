@@ -3,7 +3,7 @@
   "content": "Filter",
   "content_en_sha1_hash": "d7decf1aa22b02ae8abf9a96849ee423eee838e4",
   "created_at": "2025-05-19T21:30:55.685Z",
-  "updated_at": "2025-05-28T09:30:02.468Z",
+  "updated_at": "2025-06-24T16:31:24.397Z",
   "comment": {
     "text": "The translation key \"Filter\" is used to display a button or label in various UI components, typically related to filtering options. In the context of the provided files, it appears as a header title (\"Files:Filter\") in a modal dialog, prompting users to select filter criteria. Translators should provide a clear and concise text that reflects this purpose.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 47,
+      "line_number": 48,
       "context": "import { DeviceType } from \"@docspace/shared/enums\";\n import {\n ModalDialog,\n ModalDialogType,\n } from \"@docspace/shared/components/modal-dialog\";\n import FilterIcon from \"@docspace/shared/components/filter/sub-components/FilterIcon\";\n \n import TransactionBody from \"./sub-components/TransactionBody\";\n import styles from \"./styles/TransactionHistory.module.scss\";\n import TableLoader from \"./sub-components/TableLoader\";",
       "module": "/packages/client"
     }

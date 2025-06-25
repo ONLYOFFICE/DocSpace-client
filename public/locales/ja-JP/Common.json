@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "シングルサインオン ",
   "ProviderTwitter": "X（旧Twitter）",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "このルームは、<1>{{roomMode}}</1>モードで開かれます。ドキュメントで作業できるようにするには、認証してください。",
   "PublicLink": "公開リンク",
   "PublicRoom": "パブリックルーム",
   "PublicRoomInfo": "登録なしでドキュメントの閲覧、編集、コメント、レビューの共有が可能。このルームを任意のウェブインターフェースに埋め込むこともできます。",

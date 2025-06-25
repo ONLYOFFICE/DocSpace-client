@@ -502,7 +502,6 @@
   "ProviderSsoSetting": "Logowanie jednokrotne",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Dany pokój jest otwarty w trybie <1>{{roomMode}}</1>. Aby móc pracować nad dokumentami, należy udzielić autoryzacji.",
   "PublicLink": "Link publiczny",
   "PublicRoom": "Pokój publiczny",
   "PublicRoomInfo": "Udostępniaj dokumenty do przeglądania, edytowania, komentowania i recenzowania bez rejestracji. Możesz również osadzić ten pokój w dowolnym interfejsie internetowym.",

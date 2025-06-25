@@ -3,7 +3,7 @@
   "content": "Change quota",
   "content_en_sha1_hash": "02de777a63ceae10d68258c04b8924d83239debc",
   "created_at": "2025-05-19T21:30:43.407Z",
-  "updated_at": "2025-05-28T09:30:02.164Z",
+  "updated_at": "2025-06-24T16:31:24.335Z",
   "comment": {
     "text": "\"Change quota\" is used as a button label and header title in a modal dialog to prompt user action of changing storage limits. It appears in two contexts: a warning quota dialog and a space quota settings dialog. The translation key should be used for situations where users need to edit or adjust their storage quotas.",
     "is_auto": true,
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/HeaderMenuStore.ts",
-      "line_number": 230,
+      "line_number": 231,
       "context": "iconUrl: DisableReactSvgUrl,\n },\n {\n id: \"menu-change-quota\",\n key: \"change-quota\",\n label: t(\"Common:ChangeQuota\"),\n disabled: !hasUsersToChangeQuota || isGuests,\n iconUrl: ChangQuotaReactSvgUrl,\n onClick: () => changeUserQuota(selection as unknown as TUser[]),\n },\n {",
       "module": "/packages/client"
     }

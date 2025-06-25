@@ -239,7 +239,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
   const unusedDependencies = [];
 
   const sharedDeps = workspaceDeps.find(
-    (d) => d.workspace === "packages/shared"
+    (d) => d.workspace === path.join("packages", "shared")
   );
 
   const usedSomeWhere = new Set();
@@ -273,7 +273,9 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       return !success;
     });
 
-    if (currentWorkspaceCodeImports.workspace !== "packages/shared") {
+    if (
+      currentWorkspaceCodeImports.workspace !== path.join("packages", "shared")
+    ) {
       missing = missing.filter((m) => {
         const success = sharedDeps.deps.find((d) => d.name === m.name);
 

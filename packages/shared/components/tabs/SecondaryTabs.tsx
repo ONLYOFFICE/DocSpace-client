@@ -30,18 +30,15 @@ import { ReactSVG } from "react-svg";
 import { motion } from "framer-motion";
 import { isMobile } from "react-device-detect";
 import ArrowReactUrl from "PUBLIC_DIR/images/arrow.left.react.svg?url";
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
 import { Scrollbar } from "../scrollbar";
 import { Text } from "../text";
 import {
-  OFFSET_RIGHT,
-  OFFSET_LEFT,
   MAX_TAB_WIDTH,
   TAB_PADDING,
   TABS_GAP,
-  ARROWS_WIDTH,
+  ARROW_WIDTH,
 } from "./Tabs.constants";
 import styles from "./Tabs.module.scss";
 import useTabsHotkeys from "./hooks/useTabsHotkeys";
@@ -75,8 +72,6 @@ const SecondaryTabs = (props: TabsProps) => {
     onSelect,
   });
 
-  const { interfaceDirection } = useInterfaceDirection();
-
   const [referenceTabSize, setReferenceTabSize] = useState<number | null>(null);
   const [tabsIsOverflowing, setTabsIsOverflowing] = useState(false);
 
@@ -85,55 +80,30 @@ const SecondaryTabs = (props: TabsProps) => {
   const tabItemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
 
-  const scrollToTab = useCallback(
-    (index: number): void => {
-      if (!scrollRef.current || !tabsRef.current) return;
+  const scrollToTab = useCallback((index: number): void => {
+    if (!scrollRef.current || !tabsRef.current) return;
 
-      const containerElement = scrollRef.current.scrollerElement;
-      const tabElement = tabsRef.current.children[index] as HTMLDivElement;
+    const containerElement = scrollRef.current.scrollerElement;
+    const tabElement = tabsRef.current.children[index] as HTMLDivElement;
 
-      if (!containerElement || !tabElement) return;
+    if (!containerElement || !tabElement) return;
 
-      const containerWidth = containerElement.offsetWidth;
-      const tabWidth = tabElement?.offsetWidth;
-      const tabOffsetLeft = tabElement?.offsetLeft;
+    const containerWidth = containerElement.offsetWidth;
+    const tabWidth = tabElement?.offsetWidth;
+    const tabOffsetLeft = tabElement?.offsetLeft;
+    const arrowsWidth = isMobile ? 0 : ARROW_WIDTH;
 
-      if (interfaceDirection === "ltr") {
-        if (tabOffsetLeft - OFFSET_LEFT < containerElement.scrollLeft) {
-          scrollRef.current.scrollTo(tabOffsetLeft - OFFSET_LEFT);
-        } else if (
-          tabOffsetLeft + tabWidth >
-          containerElement.scrollLeft + containerWidth
-        ) {
-          scrollRef.current.scrollTo(
-            tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT,
-          );
-        }
-
-        return;
-      }
-
-      const rect = tabElement?.getBoundingClientRect();
-
-      if (rect.left - OFFSET_LEFT < 0) {
-        scrollRef.current.scrollTo(
-          -(
-            Math.abs(rect.left) +
-            OFFSET_LEFT +
-            Math.abs(containerElement.scrollLeft)
-          ),
-        );
-      } else if (rect.right > containerWidth && !!containerElement.scrollLeft) {
-        scrollRef.current.scrollTo(
-          rect.right -
-            containerWidth +
-            containerElement.scrollLeft +
-            OFFSET_RIGHT,
-        );
-      }
-    },
-    [interfaceDirection],
-  );
+    if (tabOffsetLeft - TABS_GAP < containerElement.scrollLeft) {
+      scrollRef.current.scrollTo(
+        tabOffsetLeft - containerWidth + tabWidth + TABS_GAP + arrowsWidth,
+      );
+    } else if (
+      tabOffsetLeft + tabWidth >
+      containerElement.scrollLeft + containerWidth
+    ) {
+      scrollRef.current.scrollTo(tabOffsetLeft - TABS_GAP - arrowsWidth);
+    }
+  }, []);
 
   useEffect(() => {
     if (isLoading) return;
@@ -162,13 +132,15 @@ const SecondaryTabs = (props: TabsProps) => {
 
         if (isMobile) return;
 
+        const arrowsWidth = ARROW_WIDTH * 2;
+
         maxTabsCount = Math.floor(
-          (tabsContainerWidth - ARROWS_WIDTH) /
+          (tabsContainerWidth - arrowsWidth) /
             (referenceTabSize + TABS_GAP + TAB_PADDING),
         );
 
         const size =
-          Math.round(tabsContainerWidth - ARROWS_WIDTH) / maxTabsCount -
+          Math.round(tabsContainerWidth - arrowsWidth) / maxTabsCount -
           TAB_PADDING -
           TABS_GAP;
 
@@ -209,7 +181,8 @@ const SecondaryTabs = (props: TabsProps) => {
   const containerW =
     tabsIsOverflowing && referenceTabSize
       ? items.length * (referenceTabSize + TAB_PADDING) +
-        ARROWS_WIDTH +
+        ARROW_WIDTH +
+        ARROW_WIDTH +
         items.length * TABS_GAP
       : null;
 

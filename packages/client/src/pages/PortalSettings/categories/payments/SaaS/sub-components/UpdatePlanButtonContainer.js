@@ -75,7 +75,7 @@ const UpdatePlanButtonContainer = ({
   cardLinkedOnFreeTariff,
   tariffPlanTitle,
   totalPrice,
-  currencySymbol,
+  formatPaymentCurrency,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -154,7 +154,17 @@ const UpdatePlanButtonContainer = ({
       }
 
       previousManagersCount = maxCountManagersByQuota;
-      waitingForQuota();
+      const quotaRes = await api.portal.getPortalQuota(true);
+      const managersObject = quotaRes.features.find(
+        (obj) => obj.id === MANAGER,
+      );
+
+      if (managersObject?.value !== previousManagersCount) {
+        setPortalQuotaValue(quotaRes);
+        resetIntervalSuccess();
+      } else {
+        waitingForQuota();
+      }
     } catch (e) {
       toastr.error(t("ErrorNotification"));
       setIsLoading(false);
@@ -274,7 +284,7 @@ const UpdatePlanButtonContainer = ({
                   i18nKey="ChargeAmount"
                   ns="Payments"
                   t={t}
-                  values={{ currencySymbol, price: totalPrice }}
+                  values={{ price: formatPaymentCurrency(totalPrice) }}
                   components={{
                     1: <span style={{ fontWeight: 600 }} />,
                   }}
@@ -328,7 +338,7 @@ export default inject(
       currentTariffPlanTitle,
       isYearTariff,
     } = currentQuotaStore;
-    const { tariffPlanTitle, planCost } = paymentQuotasStore;
+    const { tariffPlanTitle } = paymentQuotasStore;
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
     const {
@@ -343,6 +353,7 @@ export default inject(
       canPayTariff,
       cardLinkedOnFreeTariff,
       totalPrice,
+      formatPaymentCurrency,
     } = paymentStore;
 
     return {
@@ -363,7 +374,7 @@ export default inject(
       isYearTariff,
       cardLinkedOnFreeTariff,
       tariffPlanTitle,
-      currencySymbol: planCost.currencySymbol,
+      formatPaymentCurrency,
       totalPrice,
     };
   },

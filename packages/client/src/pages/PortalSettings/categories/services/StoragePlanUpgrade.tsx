@@ -63,9 +63,8 @@ type StorageDialogProps = {
   partialUpgradeFee?: number;
   featureCountData?: number;
   setPartialUpgradeFee?: (value: number) => void;
-  hasPreviousStorageSubscription?: boolean;
-  previousStoragePlanSize?: number;
   hasScheduledStorageChange?: number;
+  previousValue?: number;
 };
 
 const MAX_ATTEMPTS = 30;
@@ -84,17 +83,14 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   partialUpgradeFee,
   featureCountData,
   setPartialUpgradeFee,
-  hasPreviousStorageSubscription,
-  previousStoragePlanSize,
   hasScheduledStorageChange,
+  previousValue,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(
     isVisibleWalletSettings
       ? featureCountData
-      : hasPreviousStorageSubscription
-        ? previousStoragePlanSize
-        : currentStoragePlanSize,
+      : previousValue || currentStoragePlanSize,
   );
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisibleContainer] = useState(
@@ -372,8 +368,6 @@ export default inject(
       fetchPortalTariff,
       hasStorageSubscription,
       currentStoragePlanSize,
-      hasPreviousStorageSubscription,
-      previousStoragePlanSize,
       hasScheduledStorageChange,
     } = currentTariffStatusStore;
 
@@ -397,8 +391,6 @@ export default inject(
       partialUpgradeFee,
       featureCountData,
       setPartialUpgradeFee,
-      hasPreviousStorageSubscription,
-      previousStoragePlanSize,
       hasScheduledStorageChange,
     };
   },

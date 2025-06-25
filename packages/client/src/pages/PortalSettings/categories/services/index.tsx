@@ -48,6 +48,7 @@ type ServicesProps = {
   isVisibleWalletSettings: boolean;
   isShowStorageTariffDeactivated: boolean;
   isGracePeriod: boolean;
+  previousStoragePlanSize: number;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -58,12 +59,14 @@ const Services: React.FC<ServicesProps> = ({
   isVisibleWalletSettings,
   isShowStorageTariffDeactivated,
   isGracePeriod,
+  previousStoragePlanSize,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
+  const [previousValue, setPreviousValue] = useState(0);
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
@@ -95,6 +98,7 @@ const Services: React.FC<ServicesProps> = ({
   useEffect(() => {
     if (openDialog) {
       setIsStorageVisible(openDialog);
+      setPreviousValue(previousStoragePlanSize);
       navigate(location.pathname, { replace: true });
     }
   }, [openDialog]);
@@ -158,7 +162,11 @@ const Services: React.FC<ServicesProps> = ({
         />
       ) : null}
       {isStorageVisible ? (
-        <StoragePlanUpgrade visible={isStorageVisible} onClose={onClose} />
+        <StoragePlanUpgrade
+          visible={isStorageVisible}
+          onClose={onClose}
+          previousValue={previousValue}
+        />
       ) : null}
       {isStorageCancelattion ? (
         <StoragePlanCancel
@@ -180,8 +188,11 @@ export const Component = inject(
   ({ servicesStore, currentTariffStatusStore }: TStore) => {
     const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
       servicesStore;
-    const { isShowStorageTariffDeactivated, isGracePeriod } =
-      currentTariffStatusStore;
+    const {
+      isShowStorageTariffDeactivated,
+      isGracePeriod,
+      previousStoragePlanSize,
+    } = currentTariffStatusStore;
 
     return {
       servicesInit,
@@ -189,6 +200,7 @@ export const Component = inject(
       isVisibleWalletSettings,
       isShowStorageTariffDeactivated,
       isGracePeriod,
+      previousStoragePlanSize,
     };
   },
 )(observer(Services));

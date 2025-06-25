@@ -126,7 +126,7 @@ const RegistrationForm = ({
 
   const termsConditionsComponent = (
     <div className="terms-conditions">
-      <Text fontSize={"13px"} textAlign="center" lineHeight="20px">
+      <Text fontSize="13px" textAlign="center" lineHeight="20px">
         <Trans
           t={t}
           ns="Confirm"
@@ -138,7 +138,7 @@ const RegistrationForm = ({
                 tag="a"
                 href={licenseUrl}
                 target={LinkTarget.blank}
-                fontSize={"13px"}
+                fontSize="13px"
                 color="accent"
               />
             ),
@@ -148,7 +148,7 @@ const RegistrationForm = ({
                 tag="a"
                 href={legalTerms}
                 target={LinkTarget.blank}
-                fontSize={"13px"}
+                fontSize="13px"
                 color="accent"
               />
             ),
@@ -168,15 +168,14 @@ const RegistrationForm = ({
       />
       <FieldContainer
         className="form-field"
-        isVertical={true}
+        isVertical
         labelVisible={false}
         hasError={!fnameValid}
         errorMessage={
-          errorText
-            ? errorText
-            : fname.trim().length === 0
-              ? t("Common:RequiredField")
-              : t("Common:IncorrectFirstName")
+          errorText ||
+          (fname.trim().length === 0
+            ? t("Common:RequiredField")
+            : t("Common:IncorrectFirstName"))
         }
       >
         <TextInput
@@ -187,7 +186,7 @@ const RegistrationForm = ({
           hasError={!fnameValid}
           value={fname}
           placeholder={t("Common:FirstName")}
-          scale={true}
+          scale
           tabIndex={1}
           isDisabled={isLoading}
           onChange={onChangeFname}
@@ -197,15 +196,14 @@ const RegistrationForm = ({
       </FieldContainer>
       <FieldContainer
         className="form-field"
-        isVertical={true}
+        isVertical
         labelVisible={false}
         hasError={!snameValid}
         errorMessage={
-          errorText
-            ? errorText
-            : sname.trim().length === 0
-              ? t("Common:RequiredField")
-              : t("Common:IncorrectLastName")
+          errorText ||
+          (sname.trim().length === 0
+            ? t("Common:RequiredField")
+            : t("Common:IncorrectLastName"))
         }
       >
         <TextInput
@@ -216,7 +214,7 @@ const RegistrationForm = ({
           hasError={!snameValid}
           value={sname}
           placeholder={t("Common:LastName")}
-          scale={true}
+          scale
           tabIndex={1}
           isDisabled={isLoading}
           onChange={onChangeSname}
@@ -225,9 +223,9 @@ const RegistrationForm = ({
       </FieldContainer>
       <FieldContainer
         className="form-field password-field"
-        isVertical={true}
+        isVertical
         labelVisible={false}
-        hasError={isPasswordErrorShow && !passwordValid}
+        hasError={isPasswordErrorShow ? !passwordValid : undefined}
         errorMessage={
           password ? t("Common:IncorrectPassword") : t("Common:RequiredField")
         }
@@ -240,9 +238,9 @@ const RegistrationForm = ({
           placeholder={t("Common:Password")}
           inputType={InputType.password}
           size={InputSize.large}
-          hasError={isPasswordErrorShow && !passwordValid}
+          hasError={isPasswordErrorShow ? !passwordValid : undefined}
           inputValue={password}
-          scale={true}
+          scale
           tabIndex={1}
           isDisabled={isLoading}
           autoComplete="current-password"
@@ -262,7 +260,7 @@ const RegistrationForm = ({
         />
       </FieldContainer>
 
-      {!isStandalone && (
+      {!isStandalone ? (
         <div className="news-subscription">
           <Checkbox
             className="checkbox-news"
@@ -273,7 +271,7 @@ const RegistrationForm = ({
             truncate={false}
           />
         </div>
-      )}
+      ) : null}
 
       {termsConditionsComponent}
 
@@ -282,7 +280,7 @@ const RegistrationForm = ({
         className="login-button"
         primary
         size={ButtonSize.medium}
-        scale={true}
+        scale
         label={isLoading ? t("Common:LoadingProcessing") : t("SignUp")}
         tabIndex={1}
         isDisabled={isLoading}

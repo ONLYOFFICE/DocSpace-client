@@ -28,8 +28,6 @@ import React, { useCallback } from "react";
 import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
-import { type IConfig } from "@onlyoffice/document-editor-react";
-
 import {
   createFile,
   getEditDiff,
@@ -40,7 +38,6 @@ import {
   openEdit,
   restoreDocumentsVersion,
   sendEditorNotify,
-  startFilling,
 } from "@docspace/shared/api/files";
 import {
   TEditHistory,
@@ -77,12 +74,9 @@ import {
   UseEventsProps,
 } from "@/types";
 
-type IConfigEvents = Pick<IConfig, "events">;
-
 let docEditor: TDocEditor | null = null;
 
 const useEditorEvents = ({
-  user,
   successAuth,
   fileInfo,
   config,
@@ -153,10 +147,10 @@ const useEditorEvents = ({
 
         if (result.error) throw new Error(result.error);
 
-        var link = result.link;
+        const link = result.link;
         window.open(link, windowName);
       } catch (e) {
-        var winEditor = window.open("", windowName);
+        const winEditor = window.open("", windowName);
 
         winEditor?.close();
         docEditor?.showMessage?.(
@@ -175,9 +169,9 @@ const useEditorEvents = ({
       if (config?.type === "mobile") {
         const wrapEl = document.getElementsByTagName("iframe");
         if (wrapEl.length) {
-          wrapEl[0].style.height = screen.availHeight + "px";
+          wrapEl[0].style.height = `${window.screen.availHeight}px`;
           window.scrollTo(0, -1);
-          wrapEl[0].style.height = window.innerHeight + "px";
+          wrapEl[0].style.height = `${window.innerHeight}px`;
         }
       }
     } catch (e) {
@@ -212,10 +206,8 @@ const useEditorEvents = ({
         const message = decodeURIComponent(splitUrl[1]).replace(/\+/g, " ");
 
         docEditor?.showMessage?.(message);
-        history.pushState({}, "", url.substring(0, index));
-      } else {
-        if (config?.Error) docEditor?.showMessage?.(config.Error);
-      }
+        window.history.pushState({}, "", url.substring(0, index));
+      } else if (config?.Error) docEditor?.showMessage?.(config.Error);
     }
 
     const message = searchParams.get("message");
@@ -232,7 +224,7 @@ const useEditorEvents = ({
         }
       });
 
-      history.pushState({}, "", `/doceditor${search}`);
+      window.history.pushState({}, "", `/doceditor${search}`);
     }
   }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize]);
 
@@ -259,7 +251,7 @@ const useEditorEvents = ({
         window as unknown as { [key: string]: {} },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
-      ); //Do not remove: it's for Back button on Mobile App
+      ); // Do not remove: it's for Back button on Mobile App
     }
   }, [config?.errorMessage, sdkConfig?.frameId]);
 
@@ -281,12 +273,10 @@ const useEditorEvents = ({
       } else {
         backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
       }
+    } else if (fileInfo.rootFolderType === FolderType.SHARE) {
+      backUrl = `/rooms/personal/filter?folder=recent`;
     } else {
-      if (fileInfo.rootFolderType === FolderType.SHARE) {
-        backUrl = `/rooms/personal/filter?folder=recent`;
-      } else {
-        backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
-      }
+      backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
     }
 
     const url = window.location.href;
@@ -364,7 +354,7 @@ const useEditorEvents = ({
 
   const getDocumentHistory = React.useCallback(
     (fileHistory: TEditHistory[], historyLength: number) => {
-      let result = [];
+      const result = [];
 
       for (let i = 0; i < historyLength; i++) {
         const changes = fileHistory[i].changes;
@@ -380,7 +370,7 @@ const useEditorEvents = ({
           )}`;
         });
 
-        let obj = {
+        const obj = {
           ...(changes.length !== 0 && { changes: changesModified }),
           created: `${new Date(fileHistory[i].created).toLocaleString(
             config?.editorConfig.lang,
@@ -422,22 +412,22 @@ const useEditorEvents = ({
           history: getDocumentHistory(updateVersions, historyLength),
         });
       } catch (error) {
-        let errorMessage = "";
+        let newErrorMessage = "";
 
         const typedError = error as TCatchError;
         if (typeof typedError === "object") {
-          errorMessage =
+          newErrorMessage =
             ("response" in typedError &&
               typedError?.response?.data?.error?.message) ||
             ("statusText" in typedError && typedError?.statusText) ||
             ("message" in typedError && typedError?.message) ||
             "";
         } else {
-          errorMessage = error as string;
+          newErrorMessage = error as string;
         }
 
         docEditor?.refreshHistory?.({
-          error: `${errorMessage}`, //TODO: maybe need to display something else.
+          error: `${newErrorMessage}`, // TODO: maybe need to display something else.
         });
       }
     },
@@ -462,20 +452,20 @@ const useEditorEvents = ({
         history: getDocumentHistory(fileHistory, historyLength),
       });
     } catch (error) {
-      let errorMessage = "";
+      let newErrorMessage = "";
       const typedError = error as TCatchError;
       if (typeof typedError === "object") {
-        errorMessage =
+        newErrorMessage =
           ("response" in typedError &&
             typedError?.response?.data?.error?.message) ||
           ("statusText" in typedError && typedError?.statusText) ||
           ("message" in typedError && typedError?.message) ||
           "";
       } else {
-        errorMessage = error as string;
+        newErrorMessage = error as string;
       }
       docEditor?.refreshHistory?.({
-        error: `${errorMessage}`, //TODO: maybe need to display something else.
+        error: `${newErrorMessage}`, // TODO: maybe need to display something else.
       });
     }
   }, [doc, fileInfo?.id, getDocumentHistory]);
@@ -587,21 +577,21 @@ const useEditorEvents = ({
 
         docEditor?.setHistoryData?.(obj);
       } catch (error) {
-        let errorMessage = "";
+        let newErrorMessage = "";
         const typedError = error as TCatchError;
         if (typeof typedError === "object") {
-          errorMessage =
+          newErrorMessage =
             ("response" in typedError &&
               typedError?.response?.data?.error?.message) ||
             ("statusText" in typedError && typedError?.statusText) ||
             ("message" in typedError && typedError?.message) ||
             "";
         } else {
-          errorMessage = error as string;
+          newErrorMessage = error as string;
         }
 
         docEditor?.setHistoryData?.({
-          error: `${errorMessage}`, //TODO: maybe need to display something else.
+          error: `${newErrorMessage}`, // TODO: maybe need to display something else.
           version,
         });
       }
@@ -651,7 +641,7 @@ const useEditorEvents = ({
   const onMetaChange = React.useCallback(
     (event: object) => {
       const newTitle = (event as { data: { title: string } }).data.title;
-      //const favorite = event.data.favorite;
+      // const favorite = event.data.favorite;
 
       if (newTitle && newTitle !== docTitle) {
         setDocumentTitle(
@@ -675,6 +665,10 @@ const useEditorEvents = ({
       organizationName,
     ],
   );
+
+  const generateLink = (actionData: {}) => {
+    return encodeURIComponent(JSON.stringify(actionData));
+  };
 
   const onMakeActionLink = React.useCallback((event: object) => {
     const url = window.location.href;
@@ -702,16 +696,12 @@ const useEditorEvents = ({
   //   [fileInfo?.id],
   // );
 
-  const generateLink = (actionData: {}) => {
-    return encodeURIComponent(JSON.stringify(actionData));
-  };
-
   React.useEffect(() => {
     // console.log("render docspace config", { ...window.ClientConfig });
     if (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       return;
 
-    //FireFox security issue fix (onRequestCreateNew will be blocked)
+    // FireFox security issue fix (onRequestCreateNew will be blocked)
     const documentType = config?.documentType || "word";
     const defaultFileName = getDefaultFileName();
     const url = new URL(

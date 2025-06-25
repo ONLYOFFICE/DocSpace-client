@@ -34,8 +34,8 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 
 import Section from "@docspace/shared/components/section";
 
-import { useSettingsStore } from "../../_store/SettingsStore";
 import useDeviceType from "@/hooks/useDeviceType";
+import { useSettingsStore } from "../../_store/SettingsStore";
 
 type SectionProps = {
   sectionHeaderContent: React.ReactNode;
@@ -57,7 +57,6 @@ export const SectionWrapper = observer(
     isEmptyPage,
     filesFilter,
     showFilter = true,
-    showHeader = true,
   }: SectionProps) => {
     const searchParams = useSearchParams();
 
@@ -67,7 +66,6 @@ export const SectionWrapper = observer(
     };
 
     showFilter = getValue("showFilter") as boolean;
-    showHeader = getValue("showHeader") as boolean;
 
     const [isFiltered, setIsFiltered] = React.useState(() =>
       FilesFilter.getFilter({

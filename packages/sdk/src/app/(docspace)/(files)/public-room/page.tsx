@@ -68,11 +68,11 @@ export default async function PublicRoom({
       portalSettings={portalSettings! as TSettings}
       filesFilter={filterStr}
       shareKey={baseConfig.key as string}
-      baseConfig={{
-        showFilter: baseConfig.showFilter as boolean,
-        showHeader: baseConfig.showHeader as boolean,
-        folder: baseConfig.id as string,
-      }}
+      // baseConfig={{
+      //   showFilter: baseConfig.showFilter as boolean,
+      //   showHeader: baseConfig.showHeader as boolean,
+      //   folder: baseConfig.id as string,
+      // }}
     />
   );
 }

@@ -27,21 +27,17 @@
 import React, { useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "../../checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-import classNames from "classnames";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { isMobile } from "@docspace/shared/utils";
+} from "../../context-menu-button";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { HeaderType } from "../../context-menu/ContextMenu.types";
+import { Link, LinkType } from "../../link";
+import { Loader, LoaderTypes } from "../../loader";
+import { hasOwnProperty } from "../../../utils/object";
+import { isMobile, classNames } from "../../../utils";
 
 import { FileChildProps, FileTileProps } from "./FileTile.types";
 

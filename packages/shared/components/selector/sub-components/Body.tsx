@@ -27,7 +27,7 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 import styles from "../Selector.module.scss";

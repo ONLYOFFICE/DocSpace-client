@@ -80,7 +80,9 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(
-    isVisibleWalletSettings ? featureCountData : currentStoragePlanSize,
+    isVisibleWalletSettings
+      ? (featureCountData ?? 0)
+      : (currentStoragePlanSize ?? 0),
   );
   const [isLoading, setIsLoading] = useState(false);
   const [isVisibleContainer, setIsVisibleContainer] = useState(
@@ -100,15 +102,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
-  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement);
+  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement!);
 
   const isUpgradeStoragePlan = isPlanUpgrade(amount);
   const isDowngradeStoragePlan = isPlanDowngrade(amount);
   const newStorageSizeOnUpgrade =
-    isUpgradeStoragePlan && currentStoragePlanSize > 0;
+    isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
   const isPaymentBlockedByBalance = newStorageSizeOnUpgrade
-    ? isWalletBalanceInsufficient(partialUpgradeFee)
+    ? isWalletBalanceInsufficient(partialUpgradeFee!)
     : isWalletBalanceInsufficient(totalPrice);
 
   const buttonMainTitle = buttonTitle(amount);
@@ -135,7 +137,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const resetIntervalSuccess = async (isCancellation: boolean) => {
     if (isCancellation || !isUpgradeStoragePlan)
-      setAmount(currentStoragePlanSize);
+      setAmount(currentStoragePlanSize!);
 
     if (intervalRef.current) {
       toastr.success(t("StorageCapacityUpdated"));
@@ -182,7 +184,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           if (isWaitingRef.current) return;
           isWaitingRef.current = true;
 
-          const { walletQuotas } = await fetchPortalTariff(true);
+          const { walletQuotas } = await fetchPortalTariff!(true);
 
           if (isUpdatedTariff(walletQuotas, isCancellation)) {
             resetIntervalSuccess(isCancellation);
@@ -190,8 +192,8 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           }
         } catch (e) {
           setIsLoading(false);
-          toastr.error(e);
-          clearInterval(intervalRef.current);
+          toastr.error(e as unknown as string);
+          clearInterval(intervalRef.current!);
           intervalRef.current = null;
         } finally {
           isWaitingRef.current = false;
@@ -221,7 +223,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         }
 
         if (isUpgradeStoragePlan) fetchBalance!();
-        const { walletQuotas } = await fetchPortalTariff(true);
+        const { walletQuotas } = await fetchPortalTariff!(true);
 
         if (isUpdatedTariff(walletQuotas, isCancellation)) {
           resetIntervalSuccess(isCancellation);
@@ -229,7 +231,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           waitingForTariff(isCancellation);
         }
       } catch (e) {
-        toastr.error(e);
+        toastr.error(e as Error);
         setIsLoading(false);
       }
     },
@@ -260,7 +262,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const onCloseTopUpModal = () => {
     setIsVisibleContainer(false);
-    if (isVisibleWalletSettings) setVisibleWalletSetting(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting!(false);
   };
 
   const container = isVisibleContainer ? (
@@ -275,6 +277,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       <SalesDepartmentRequestDialog
         visible={isRequestDialog}
         onClose={() => setIsRequestDialog(false)}
+        sendPaymentRequest={undefined}
       />
     );
   }

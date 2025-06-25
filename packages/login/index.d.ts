@@ -34,6 +34,18 @@ declare module "*.svg?url" {
   export default content;
 }
 
+declare module "*.svg" {
+  import React from "react";
+
+  const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
+  export default SVG;
+}
+
+declare module "*.ico" {
+  const content: string;
+  export default content;
+}
+
 declare module "resize-image" {
   type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";
 
@@ -43,15 +55,15 @@ declare module "resize-image" {
 
   interface ResizeImage extends ImageTypes {
     resize2Canvas: (
-      img: HTMLImageElement,
-      width: number,
-      heigh: number,
-    ) => HTMLCanvasElement;
-    resize: (
-      img: HTMLImageElement,
+      img: HTMLImageElement | ImageBitmap,
       width: number,
       height: number,
-      type: ImageFormat,
+    ) => HTMLCanvasElement;
+    resize: (
+      img: HTMLImageElement | HTMLCanvasElement,
+      width: number,
+      height: number,
+      type?: ImageFormat,
     ) => string;
   }
 

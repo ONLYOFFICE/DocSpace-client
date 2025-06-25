@@ -291,7 +291,7 @@ class PaymentStore {
 
     this.setIsUpdatingBasicSettings(true);
 
-    const requests = [fetchPortalTariff()];
+    const requests: unknown[] = [fetchPortalTariff()];
 
     if (this.isAlreadyPaid || this.walletCustomerEmail) {
       if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());
@@ -361,7 +361,7 @@ class PaymentStore {
   }
 
   get cardLinkedOnNonProfit() {
-    if (!this.currentQuotaStore.isNonProfit) return false;
+    if (!this.currentQuotaStore?.isNonProfit) return false;
 
     if (!this.walletCustomerEmail) return false;
 
@@ -466,12 +466,12 @@ class PaymentStore {
     }
   };
 
-  setVisibleWalletSetting = (isVisibleWalletSettings) => {
+  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
-  initWalletPayerAndBalance = async (isRefresh) => {
-    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
+  initWalletPayerAndBalance = async (isRefresh: boolean) => {
+    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore!;
 
     await Promise.all([
       this.fetchWalletPayer(isRefresh),
@@ -792,11 +792,14 @@ class PaymentStore {
     const { stepAddingQuotaManagers, stepAddingQuotaTotalSize } =
       this.paymentQuotasStore;
 
-    if (stepAddingQuotaManagers)
+    if (stepAddingQuotaManagers && typeof stepAddingQuotaManagers === "number")
       this.stepByQuotaForManager = stepAddingQuotaManagers;
     this.minAvailableManagersValue = this.stepByQuotaForManager;
 
-    if (stepAddingQuotaTotalSize)
+    if (
+      stepAddingQuotaTotalSize &&
+      typeof stepAddingQuotaTotalSize === "number"
+    )
       this.stepByQuotaForTotalSize = stepAddingQuotaTotalSize;
     this.minAvailableTotalSizeValue = this.stepByQuotaForManager;
   };
@@ -805,7 +808,7 @@ class PaymentStore {
     email: string,
     userName: string,
     message: string,
-    t,
+    t: TTranslation,
   ) => {
     try {
       await api.portal.sendPaymentRequest(email, userName, message);

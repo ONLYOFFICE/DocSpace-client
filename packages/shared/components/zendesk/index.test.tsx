@@ -20,6 +20,7 @@ describe("Zendesk", () => {
     jest.clearAllMocks();
 
     // Reset window.zE and zESettings
+    // @ts-expect-error Fix types
     delete window.zE;
     delete window.zESettings;
 

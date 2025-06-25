@@ -44,4 +44,3 @@ export const ArticleHeader = observer(() => {
 
   return <StyledArticleHeader showText={showText}>{title}</StyledArticleHeader>;
 });
-

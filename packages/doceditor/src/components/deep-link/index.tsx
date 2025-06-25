@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -39,7 +38,9 @@ import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { DeepLinkType } from "@docspace/shared/enums";
 
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import { getDeepLink, redirectToStore } from "./DeepLink.helper";
+
 import {
   StyledDeepLink,
   StyledBodyWrapper,
@@ -51,7 +52,6 @@ import {
   StyledBody,
 } from "./DeepLink.styled";
 import { DeepLinkProps } from "./DeepLink.types";
-import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 const DeepLink = ({
   fileInfo,
@@ -85,7 +85,7 @@ const DeepLink = ({
 
   const onStayBrowserClick = () => {
     if (isRemember) localStorage.setItem("defaultOpenDocument", "web");
-    window.location.replace(window.location.search + "&without_redirect=true");
+    window.location.replace(`${window.location.search}&without_redirect=true`);
     setIsShowDeepLink(false);
   };
 

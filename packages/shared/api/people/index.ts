@@ -672,7 +672,10 @@ export async function getMembersList(
   return res;
 }
 
-export async function setCustomUserQuota(userIds: string[], quota: string) {
+export async function setCustomUserQuota(
+  userIds: string[],
+  quota: string | number,
+) {
   const data = {
     userIds,
     quota: +quota,

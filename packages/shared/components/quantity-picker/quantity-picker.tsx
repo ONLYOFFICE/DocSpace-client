@@ -61,18 +61,16 @@ type QuantityPickerProps = {
   disableValue?: string;
   underContorlsTitle?: string | React.ReactNode;
   isZeroAllowed?: boolean;
-  enableIncrementFromZero?: boolean;
-  initialIncrementFromZero?: number;
+  enableZero?: boolean;
 };
 
 const shouldSetIncrementError = (
   newValue: number,
-  enableIncrementFromZero: boolean,
-  initialIncrementFromZero: number,
+  enableZero: boolean,
+  minValue: number,
 ): boolean => {
-  if (!enableIncrementFromZero) return false;
-  if (enableIncrementFromZero && newValue < initialIncrementFromZero)
-    return newValue !== 0;
+  if (!enableZero) return false;
+  if (enableZero && newValue < minValue) return newValue !== 0;
 
   return false;
 };
@@ -94,8 +92,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   withoutContorls,
   disableValue,
   underContorlsTitle,
-  enableIncrementFromZero = false,
-  initialIncrementFromZero = 100,
+  enableZero = false,
 }) => {
   const displayValue = showPlusSign
     ? value > maxValue
@@ -111,7 +108,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   });
 
   const titleUnderControlsClass = classNames(styles.underContorlsText, {
-    [styles.warningIncrementFromZero]: enableIncrementFromZero ? error : false,
+    [styles.warningIncrementFromZero]: enableZero ? error : false,
   });
 
   const inputClass = classNames(styles.countInput, {
@@ -137,18 +134,11 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     if (operation === "plus") {
       if (value <= maxValue) {
-        if (enableIncrementFromZero && newValue === 0) {
-          newValue = initialIncrementFromZero;
+        if (newValue < minValue) {
+          newValue = minValue;
           setError(false);
         } else {
           newValue += step;
-          setError(
-            shouldSetIncrementError(
-              newValue,
-              enableIncrementFromZero,
-              initialIncrementFromZero,
-            ),
-          );
         }
       }
     }
@@ -156,15 +146,11 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     if (operation === "minus") {
       if (value > maxValue) {
         newValue = maxValue;
-      } else if (value > minValue) {
+      } else if (newValue - step >= minValue) {
         newValue -= step;
-        setError(
-          shouldSetIncrementError(
-            newValue,
-            enableIncrementFromZero,
-            initialIncrementFromZero,
-          ),
-        );
+      } else {
+        newValue = enableZero ? 0 : minValue;
+        setError(false);
       }
     }
 
@@ -185,7 +171,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     if (Number.isNaN(numberValue)) return;
 
-    if (numberValue <= minValue) {
+    if (!enableZero && numberValue <= minValue) {
       onChange(minValue);
       setError(false);
       return;
@@ -193,13 +179,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     onChange(numberValue);
 
-    setError(
-      shouldSetIncrementError(
-        numberValue,
-        enableIncrementFromZero,
-        initialIncrementFromZero,
-      ),
-    );
+    setError(shouldSetIncrementError(numberValue, enableZero, minValue));
   };
 
   const buttonProps = isDisabled ? {} : { onClick: handleButtonClick };

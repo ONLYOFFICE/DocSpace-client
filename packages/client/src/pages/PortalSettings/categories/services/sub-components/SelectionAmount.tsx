@@ -171,7 +171,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     <div className={styles.selectionAmount}>
       <QuantityPicker
         value={amount}
-        minValue={0}
+        minValue={100}
         maxValue={maxStorageLimit}
         step={1}
         title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
@@ -183,8 +183,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
         underContorlsTitle={underContorlsTitle}
         {...disableValueProps}
         isLarge
-        enableIncrementFromZero
-        initialIncrementFromZero={MIN_VALUE}
+        enableZero
       />
     </div>
   );

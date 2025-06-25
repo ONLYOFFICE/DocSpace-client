@@ -29,7 +29,7 @@ import type { HeaderProps } from "./StartFillingPanel.types";
 
 export const Header = memo(
   forwardRef<HTMLDivElement, HeaderProps>(
-    ({ t, roleName, className, openInvitePanel }, ref) => (
+    ({ t, roleName, className, openInvitePanel, canEditRoom }, ref) => (
       <div className={className} ref={ref}>
         <h3
           title={t("Common:RoleFields", {
@@ -40,7 +40,9 @@ export const Header = memo(
             roleName,
           })}
         </h3>
-        <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
+        {canEditRoom ? (
+          <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
+        ) : null}
       </div>
     ),
   ),

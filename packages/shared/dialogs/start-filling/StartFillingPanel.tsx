@@ -68,6 +68,7 @@ const StartFillingPanel = ({
   inviteUserToRoom,
   setStartFillingPanelVisible,
   withBorder,
+  canEditRoom = false,
   ...props
 }: IStartFillingPanelProps) => {
   const [infoBarVisible, setInfoBarVisible] = useLocalStorage(
@@ -118,8 +119,10 @@ const StartFillingPanel = ({
   }, []);
 
   const openInvitePanel = useCallback(() => {
+    if (!canEditRoom) return;
+
     setIsInvitePanelVisible(true);
-  }, []);
+  }, [canEditRoom]);
 
   const onSubmit = async () => {
     startTransition(async () => {
@@ -278,6 +281,7 @@ const StartFillingPanel = ({
             injectedElement={
               <Header
                 t={t}
+                canEditRoom={canEditRoom}
                 className={styles.header}
                 roleName={roles[currentRoleIndex]?.name ?? ""}
                 openInvitePanel={openInvitePanel}

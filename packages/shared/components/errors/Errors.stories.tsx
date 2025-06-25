@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import FirebaseHelper from "../../utils/firebase";
 import {
   DeviceType,
@@ -55,12 +55,12 @@ export default {
   },
 } as Meta;
 
-const Template401: Story = () => <Error401 />;
-const Template403: Story = () => <Error403 />;
-const Template404: Story = () => <Error404 />;
-const TemplateOffline: Story = () => <ErrorOfflineContainer />;
-const TemplateUnavailable: Story = () => <ErrorUnavailable />;
-const TemplateAccessRestricted: Story = () => <AccessRestricted />;
+const Template401: StoryFn = () => <Error401 />;
+const Template403: StoryFn = () => <Error403 />;
+const Template404: StoryFn = () => <Error404 />;
+const TemplateOffline: StoryFn = () => <ErrorOfflineContainer />;
+const TemplateUnavailable: StoryFn = () => <ErrorUnavailable />;
+const TemplateAccessRestricted: StoryFn = () => <AccessRestricted />;
 
 export const Error401Page = Template401.bind({});
 Error401Page.storyName = "401 Error";
@@ -80,7 +80,7 @@ ErrorUnavailablePage.storyName = "Unavailable Error";
 export const AccessRestrictedPage = TemplateAccessRestricted.bind({});
 AccessRestrictedPage.storyName = "Access Restricted";
 
-const Template520: Story<Error520Props> = (args) => <Error520 {...args} />;
+const Template520: StoryFn<Error520Props> = (args) => <Error520 {...args} />;
 
 export const Error520Page = Template520.bind({});
 Error520Page.storyName = "520 Error";
@@ -114,6 +114,7 @@ Error520Page.args = {
     avatarSmall: "",
     profileUrl: "",
     hasAvatar: false,
+    isAnonim: false,
   },
   version: "1.0.0",
   firebaseHelper: {} as FirebaseHelper,

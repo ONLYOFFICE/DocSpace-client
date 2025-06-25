@@ -27,15 +27,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { FilesSelectorFilterTypes } from "../../../enums";
 
-import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
+import { FilesSelectorInput } from "../../../components/files-selector-input";
 import type {
   FileInfoType,
   FilesSelectorSettings,
-} from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import type { TBreadCrumb } from "@docspace/shared/components//selector/Selector.types";
-import type { Nullable } from "@docspace/shared/types";
+} from "../../../components/files-selector-input/FilesSelectorInput.types";
+import type { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { Nullable } from "../../../types";
 
 export interface RoomsModuleProps {
   settingsFileSelector: FilesSelectorSettings;

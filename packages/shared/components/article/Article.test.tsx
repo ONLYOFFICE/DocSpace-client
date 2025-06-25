@@ -79,6 +79,11 @@ const defaultProps = {
   showProgress: false,
   children: [],
   logoText: "",
+  showBackButton: false,
+  downloaddesktopUrl: "",
+  officeforandroidUrl: "",
+  officeforiosUrl: "",
+  limitedAccessDevToolsForUsers: false,
 };
 
 const renderComponent = (props = {}) => {

@@ -9,5 +9,6 @@
       "SRC_DIR/*": ["./src/*"],
       "PACKAGE_FILE": ["./package.json"]
     }
-  }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"]
 }

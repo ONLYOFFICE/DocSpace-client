@@ -26,6 +26,7 @@
 
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { Text } from "@docspace/shared/components/text";
@@ -127,8 +128,10 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
       saveButtonDisabled={
         canDisable
           ? areCheckedUsersEmpty ||
-            (quota.max ? totalUsedUsers > quota.max : false)
-          : null
+            (quota.max && typeof quota.max === "number"
+              ? totalUsedUsers > quota.max
+              : false)
+          : false
       }
       migrationCancelLabel={t("Settings:CancelImport")}
       onMigrationCancelClick={showCancelDialog}
@@ -153,11 +156,11 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
             size={InputSize.base}
           />
 
-          <AccountsTable t={t} accountsData={filteredAccounts} />
+          <AccountsTable t={t as TFunction} accountsData={filteredAccounts} />
 
           {withEmailUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
             <AccountsPaging
-              t={t}
+              t={t as TFunction}
               numberOfItems={withEmailUsers.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}

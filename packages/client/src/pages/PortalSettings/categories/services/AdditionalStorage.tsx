@@ -98,7 +98,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     const isEnabled = dataset.enabled?.toLowerCase() === "true";
     const id = dataset.id;
 
-    onToggle(id, !isEnabled);
+    onToggle?.(id!, !isEnabled);
   };
 
   const textTooltip = () => {
@@ -132,13 +132,22 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
       </Text>
       {isCardLinkedToPortal ? (
         <div className={styles.payerContainer}>
-          <PayerInformation />
+          <PayerInformation
+            style={undefined}
+            theme={undefined}
+            user={undefined}
+            accountLink={undefined}
+            payerInfo={undefined}
+            email={undefined}
+            isNotPaidPeriod={undefined}
+            isStripePortalAvailable={undefined}
+          />
         </div>
       ) : null}
       {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
         if (!item.title || !item.image) return null;
         const eventDisabled =
-          isDisabled || !hasStorageSubscription || nextStoragePlanSize >= 0;
+          isDisabled || !hasStorageSubscription || nextStoragePlanSize! >= 0;
         return (
           <div
             key={item.id}
@@ -163,7 +172,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 data-disabled={eventDisabled}
               >
                 <ToggleButton
-                  isChecked={currentStoragePlanSize > 0}
+                  isChecked={currentStoragePlanSize! > 0}
                   className={styles.serviceToggle}
                   isDisabled={eventDisabled}
                 />
@@ -181,7 +190,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 {item.priceTitle}
               </Text>
 
-              {nextStoragePlanSize >= 0 ? (
+              {nextStoragePlanSize! >= 0 ? (
                 <div
                   className={classNames(styles.changeShedule, {
                     [styles.warningColor]: true,
@@ -203,7 +212,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 </div>
               ) : null}
               {typeof nextStoragePlanSize !== "number" &&
-              currentStoragePlanSize > 0 ? (
+              currentStoragePlanSize! > 0 ? (
                 <div
                   className={classNames(styles.changeShedule, {
                     [styles.greenColor]: true,
@@ -214,8 +223,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                     {t("CurrentPaymentMonth", {
                       price: formatWalletCurrency(
                         calculateTotalPrice(
-                          currentStoragePlanSize,
-                          storagePriceIncrement,
+                          currentStoragePlanSize!,
+                          storagePriceIncrement!,
                         ),
                       ),
                       size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,

@@ -26,9 +26,8 @@
 
 import React from "react";
 
-import { classNames } from "@docspace/shared/utils/classNames";
-
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import { classNames } from "../../../utils";
 
 import {
   ContextMenuButton,

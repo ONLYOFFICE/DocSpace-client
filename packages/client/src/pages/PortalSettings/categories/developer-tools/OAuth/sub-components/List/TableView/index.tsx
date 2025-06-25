@@ -148,7 +148,10 @@ const TableView = ({
   if (!items.length) return null;
 
   return (
-    <TableWrapper forwardedRef={tableRef} useReactWindow>
+    <TableWrapper
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
       <Header
         sectionWidth={sectionWidth}
         tableRef={tableRef.current}

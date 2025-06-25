@@ -28,7 +28,7 @@
 
 import React from "react";
 
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../utils";
 
 import { ButtonKeys } from "../../enums";
 

@@ -87,9 +87,9 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       ? partialUpgradeFee
       : totalPrice;
 
-    const difference = Math.abs(walletBalance - amountValue);
+    const difference = Math.abs(walletBalance! - amountValue!);
 
-    setReccomendedAmount(Math.ceil(difference));
+    setReccomendedAmount?.(Math.ceil(difference));
 
     const getCardLink = () => {
       if (timeout) clearTimeout(timeout);
@@ -101,7 +101,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
 
         try {
           const url = `${window.location.href}?complete=true&amount=${amount}&recommendedAmount=${difference}`;
-          await fetchCardLinked(url);
+          await fetchCardLinked?.(url);
         } catch (e) {
           console.error(e);
         }
@@ -128,8 +128,8 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
   const disableValueProps = hasScheduledStorageChange
     ? {
         disableValue: getDirectionalText(
-          currentStoragePlanSize,
-          nextStoragePlanSize,
+          currentStoragePlanSize ?? 0,
+          nextStoragePlanSize ?? 0,
         ),
       }
     : {};

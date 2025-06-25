@@ -112,7 +112,7 @@ class ServicesStore {
     this.partialUpgradeFee = partialUpgradeFee;
   };
 
-  setVisibleWalletSetting = (isVisibleWalletSettings) => {
+  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
@@ -151,7 +151,7 @@ class ServicesStore {
       setPaymentAccount,
       isAlreadyPaid,
       initWalletPayerAndBalance,
-    } = this.paymentStore;
+    } = this.paymentStore!;
 
     const requests = [
       this.handleServicesQuotas(),
@@ -165,8 +165,8 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid || this.paymentStore.walletCustomerEmail) {
-        if (this.paymentStore.isStripePortalAvailable)
+      if (isAlreadyPaid || this.paymentStore!.walletCustomerEmail) {
+        if (this.paymentStore!.isStripePortalAvailable)
           requests.push(setPaymentAccount());
         requests.push(fetchAutoPayments());
       } else {

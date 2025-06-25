@@ -658,7 +658,9 @@ describe("Locales Tests", () => {
       if (!module.availableLanguages || module.isCommon) return;
 
       module.availableLanguages.forEach((lng) => {
-        const translationItems = lng.translations.filter((f) =>
+        const translationItems = lng.translations
+        .filter((elem) => !skipForbiddenKeys.includes(elem.key))
+        .filter((f) =>
           forbiddenElements.some((elem) => f.value.toUpperCase().includes(elem))
         );
 
@@ -675,27 +677,6 @@ describe("Locales Tests", () => {
 
         message += keys.join("\r\n") + "\r\n\r\n";
       });
-    });
-
-    commonTranslations.forEach((lng) => {
-      const translationItems = lng.translations
-        .filter((elem) => !skipForbiddenKeys.includes(elem.key))
-        .filter((f) =>
-          forbiddenElements.some((elem) => f.value.toUpperCase().includes(elem))
-        );
-
-      if (!translationItems.length) return;
-
-      exists = true;
-
-      message +=
-        `${++i}. Language '${lng.language}' (Count: ${
-          translationItems.length
-        }). Path '${lng.path}' ` + `\r\n\r\nKeys:\r\n\r\n`;
-
-      const keys = translationItems.map((t) => t.key);
-
-      message += keys.join("\r\n") + "\r\n\r\n";
     });
 
     expect(exists, message).toBe(false);

@@ -30,13 +30,13 @@ const fs = require("fs");
 const BASE_DIR = process.env.BASE_DIR || path.resolve(__dirname, "../../../");
 
 const moduleWorkspaces = [
-  "packages/client",
-  "packages/doceditor",
-  "packages/login",
-  "packages/shared",
-  "packages/management",
-  "packages/sdk",
-  "public/locales", // common
+  path.join("packages", "client"),
+  path.join("packages", "doceditor"),
+  path.join("packages", "login"),
+  path.join("packages", "shared"),
+  path.join("packages", "management"),
+  path.join("packages", "sdk"),
+  path.join("public", "locales"), // common
 ];
 
 const getWorkSpaces = () => {

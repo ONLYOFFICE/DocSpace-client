@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
@@ -57,7 +57,7 @@ const Amount = (props: AmountProps) => {
   } = props;
 
   const { amount, setAmount } = useAmountValue();
-
+  const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
   const { t } = useTranslation("Payments");
 
   const getAmountTabs = () => {
@@ -74,10 +74,11 @@ const Amount = (props: AmountProps) => {
   const onSelectAmount = (e: React.MouseEvent<HTMLDivElement>) => {
     const itemId = e.currentTarget.dataset.id;
     const currentAmount = amount ? parseInt(amount, 10) : 0;
-    const selectedValue = parseInt(itemId, 10);
+    const selectedValue = parseInt(itemId!, 10);
     const newTotal = (currentAmount + selectedValue).toString();
 
     const amountValue = newTotal.length <= MAX_LENGTH ? newTotal : amount;
+    setSelectedAmount(itemId);
     setAmount(amountValue);
   };
 

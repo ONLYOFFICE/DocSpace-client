@@ -34,7 +34,7 @@ import { Text } from "../text";
 import { Slider } from "../slider";
 import { TextInput } from "../text-input";
 import { InputType } from "../text-input/TextInput.enums";
-import { TabItem } from "@docspace/shared/components/tab-item";
+import { TabItem } from "../tab-item";
 
 import styles from "./quantity-picker.module.scss";
 

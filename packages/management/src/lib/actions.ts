@@ -759,7 +759,7 @@ export async function getFoldersTree() {
       throw error;
     }
     logger.error(`Error in getFoldersTree: ${error}`);
-    return;
+    return [];
   }
 }
 

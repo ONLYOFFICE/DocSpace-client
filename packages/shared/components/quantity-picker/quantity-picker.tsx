@@ -180,10 +180,8 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   };
 
   const onSelectTab = (e: React.MouseEvent<HTMLDivElement>) => {
-    const itemValue = e.currentTarget.dataset.value;
-    if (itemValue) {
-      onChange(value + +itemValue);
-    }
+    const itemValue = Number(e.currentTarget.dataset.value);
+    onChange(itemValue ?? 0);
   };
 
   const tabItems = createTabItems();

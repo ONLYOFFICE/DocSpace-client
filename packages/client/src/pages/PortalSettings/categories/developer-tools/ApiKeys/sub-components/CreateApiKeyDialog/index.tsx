@@ -27,6 +27,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import copy from "copy-to-clipboard";
+import { TFunction } from "i18next";
+
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { Trans, withTranslation } from "react-i18next";
@@ -501,7 +503,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
               />
               <Text fontSize="13px" fontWeight={600}>
                 <Trans
-                  t={t}
+                  t={t as TFunction}
                   ns="Settings"
                   i18nKey="APIKeyMaxDays"
                   values={{ days: maxKeyLifetimeDays }}
@@ -548,7 +550,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       {lifetimeIsChecked ? (
         <Text fontSize="12px" fontWeight={400}>
           <Trans
-            t={t}
+            t={t as TFunction}
             ns="Settings"
             i18nKey="ApiKeyLifetime"
             values={{ days: expiresInDays }}

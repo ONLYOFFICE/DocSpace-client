@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 import PublicRoomBar from "./index";
 import { PublicRoomBarProps } from "./PublicRoomBar.types";
 
@@ -30,7 +30,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<PublicRoomBarProps> = (args) => (
+const Template: StoryFn<PublicRoomBarProps> = (args) => (
   <PublicRoomBar {...args} />
 );
 

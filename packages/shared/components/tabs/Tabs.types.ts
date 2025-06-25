@@ -40,6 +40,8 @@ export type TTabItem = {
   onClick?: () => void;
   /** Badge shown after tab. Only for primary tabs type */
   badge?: React.ReactNode;
+
+  value?: number;
   /** Icon name. Only for secondary tabs type */
   iconName?: string;
 };

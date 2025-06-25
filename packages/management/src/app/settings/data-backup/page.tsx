@@ -31,7 +31,6 @@ import {
   getBackupStorage,
   getFoldersTree,
   getPortalTariff,
-  getQuota,
   getSettingsFiles,
   getSettingsThirdParty,
   getStorageRegions,

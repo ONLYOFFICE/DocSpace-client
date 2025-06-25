@@ -55,7 +55,7 @@ export type BackupSelectedStateType = {
   weekdayLabel: string;
   weekday: Nullable<string>;
   enableSchedule: boolean;
-  formSettings: Record<string, string>;
+  formSettings: { [key: string]: string };
 };
 
 export interface ErrorResponse {

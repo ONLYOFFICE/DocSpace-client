@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import Navigation from "./Navigation";
 import { TNavigationProps } from "./Navigation.types";
 import { DeviceType } from "../../enums";
@@ -17,7 +17,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<TNavigationProps> = (args) => <Navigation {...args} />;
+const Template: StoryFn<TNavigationProps> = (args) => <Navigation {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

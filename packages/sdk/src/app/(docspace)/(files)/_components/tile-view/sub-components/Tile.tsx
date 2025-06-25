@@ -51,10 +51,10 @@ import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
 import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
 
 import TileContent from "./TileContent";
-import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   if (item.isFolder) return undefined;

@@ -33,9 +33,9 @@ import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
+import { getCorrectDate } from "@docspace/shared/utils";
 import styles from "../../styles/TransactionHistory.module.scss";
 import { accountingLedgersFormat } from "../../utils";
-import { getCorrectDate } from "@docspace/shared/utils";
 
 interface TransactionRowProps {
   transaction: TTransactionCollection;

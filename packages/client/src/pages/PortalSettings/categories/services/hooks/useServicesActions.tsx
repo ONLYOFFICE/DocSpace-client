@@ -38,15 +38,14 @@ import {
 export const useServicesActions = () => {
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const { currentTariffStatusStore, paymentStore, authStore } = store;
+  const { currentTariffStatusStore, paymentStore } = store;
   const {
     currentStoragePlanSize,
     hasScheduledStorageChange,
     nextStoragePlanSize,
     hasStorageSubscription,
   } = currentTariffStatusStore;
-  const { walletCodeCurrency, walletBalance } = paymentStore;
-  const { language } = authStore;
+  const { walletBalance } = paymentStore;
 
   const maxStorageLimit = 9999;
 

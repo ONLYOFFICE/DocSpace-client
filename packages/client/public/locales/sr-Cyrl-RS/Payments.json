@@ -86,6 +86,7 @@
   "PayerDescription": "Овај корисник има приступ детаљима плац́ања и једини је корисник који може да прилагоди квоту и изврши плац́ања. Власник {{productName}}-а, као и сам менаџер плац́ања, могу да поново доделе улогу менаџера плац́ања користец́и портал за кориснике Stripe.",
   "PaymentMethod": "Начин плаћања",
   "PerStorage": "{{currency}} по {{amount}}/месечно",
+  "PerStorageWitnMinValue": "{{currency}} по {{amount}}/месечно <1>(минимум {{minValue}} {{storageUnit}})</1>",
   "PlanUpgrade": "Надоградња пакета",
   "PreviousPlan": "<1>Предходни план:</1> {{amount}} <2>({{price}}/месечно)</2>",
   "PriceCalculation": "Израчунај своју цену",
@@ -143,6 +144,5 @@
   "YouHaveNotAddedAnyPayment": "Нисте додали ниједан начин плаћања",
   "YourCurrentPayment": "Ваш тренутни начин плаћања",
   "YourCurrentPlan": "<1>Ваш тренутни план:</1> {{amount}} <2>({{price}}/месечно)</2>",
-  "YourPrice": "Ваша цена",
-  "PerStorageWitnMinValue": "{{currency}} по {{amount}}/месечно (минимум {{minValue}} {{storageUnit}})"
+  "YourPrice": "Ваша цена"
 }

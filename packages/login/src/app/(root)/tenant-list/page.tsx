@@ -32,8 +32,8 @@ import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { LoginContainer } from "@/components/LoginContainer";
 import { getSettings } from "@/utils/actions";
 
-import TenantList from "./page.client";
 import { logger } from "logger.mjs";
+import TenantList from "./page.client";
 
 export default async function Page(props: {
   searchParams: Promise<{ [key: string]: string }>;

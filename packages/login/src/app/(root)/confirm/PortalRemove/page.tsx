@@ -29,8 +29,8 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
 
-import RemovePortalForm from "./page.client";
 import { logger } from "logger.mjs";
+import RemovePortalForm from "./page.client";
 
 async function Page() {
   logger.info("PortalRemove page");

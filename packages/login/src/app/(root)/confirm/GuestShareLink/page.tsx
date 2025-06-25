@@ -35,8 +35,8 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getStringFromSearchParams } from "@/utils";
 
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
-import GuestShareLinkForm from "./page.client";
 import { logger } from "logger.mjs";
+import GuestShareLinkForm from "./page.client";
 
 type GuestShareLinkProps = {
   searchParams: Promise<{ [key: string]: string }>;

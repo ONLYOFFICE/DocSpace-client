@@ -40,8 +40,8 @@ import {
   getUserFromConfirm,
   getInvitationSettings,
 } from "@/utils/actions";
-import CreateUserForm from "./page.client";
 import { logger } from "logger.mjs";
+import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
   searchParams: Promise<{ [key: string]: string }>;

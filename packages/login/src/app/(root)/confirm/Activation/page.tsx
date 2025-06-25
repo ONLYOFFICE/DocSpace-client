@@ -31,8 +31,8 @@ import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 
-import ActivateUserForm from "./page.client";
 import { logger } from "logger.mjs";
+import ActivateUserForm from "./page.client";
 
 type ActivationProps = {
   searchParams: Promise<{ [key: string]: string }>;

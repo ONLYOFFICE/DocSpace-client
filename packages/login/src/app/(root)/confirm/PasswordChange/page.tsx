@@ -30,8 +30,8 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { getStringFromSearchParams } from "@/utils";
 
-import PasswordChangeForm from "./page.client";
 import { logger } from "logger.mjs";
+import PasswordChangeForm from "./page.client";
 
 type PasswordChangeProps = {
   searchParams: Promise<{ [key: string]: string }>;

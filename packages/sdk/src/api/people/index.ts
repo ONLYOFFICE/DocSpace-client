@@ -59,6 +59,5 @@ export async function getSelf(): Promise<TUser | undefined> {
     return self.response;
   } catch (error) {
     logger.error(`Error in getSelf: ${error}`);
-    return;
   }
 }

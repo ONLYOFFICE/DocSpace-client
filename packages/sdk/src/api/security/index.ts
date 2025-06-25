@@ -48,6 +48,5 @@ export async function getCSP(): Promise<TGetCSPSettings | undefined> {
     return csp.response;
   } catch (error) {
     logger.error(`Error in getCSP: ${error}`);
-    return;
   }
 }

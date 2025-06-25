@@ -30,8 +30,8 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams, encodeParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
-import TfaAuthForm from "./page.client";
 import { logger } from "logger.mjs";
+import TfaAuthForm from "./page.client";
 
 type TfaAuthProps = {
   searchParams: Promise<{ [key: string]: string }>;

@@ -71,7 +71,6 @@ export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
     return filesSettings.response;
   } catch (error) {
     logger.error(`Error in getFilesSettings: ${error}`);
-    return;
   }
 }
 

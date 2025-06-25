@@ -30,8 +30,8 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
-import ChangeOwnerForm from "./page.client";
 import { logger } from "logger.mjs";
+import ChangeOwnerForm from "./page.client";
 
 type PortalOwnerChangeProps = {
   searchParams: Promise<{ [key: string]: string }>;

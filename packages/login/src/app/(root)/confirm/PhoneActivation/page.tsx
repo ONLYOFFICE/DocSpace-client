@@ -29,8 +29,8 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getSettings } from "@/utils/actions";
 
-import ChangePhoneForm from "./page.client";
 import { logger } from "logger.mjs";
+import ChangePhoneForm from "./page.client";
 
 async function Page() {
   logger.info("PhoneActivation page");

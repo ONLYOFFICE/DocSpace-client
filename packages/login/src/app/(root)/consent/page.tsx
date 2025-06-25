@@ -40,8 +40,8 @@ import {
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { LoginContainer } from "@/components/LoginContainer";
 
-import Consent from "./page.client";
 import { logger } from "logger.mjs";
+import Consent from "./page.client";
 
 async function Page(props: {
   searchParams: Promise<{ [key: string]: string }>;

@@ -102,7 +102,6 @@ export const checkIsAuthenticated = async () => {
     return isAuth.response as boolean;
   } catch (error) {
     logger.error(`Error in checkIsAuthenticated: ${error}`);
-    return;
   }
 };
 
@@ -146,7 +145,6 @@ export async function getSettings() {
       throw error;
     }
     logger.error(`Error in getSettings: ${error}`);
-    return;
   }
 }
 
@@ -172,7 +170,6 @@ export async function getVersionBuild() {
     return versionBuild.response as TVersionBuild;
   } catch (error) {
     logger.error(`Error in getVersionBuild: ${error}`);
-    return;
   }
 }
 
@@ -201,7 +198,6 @@ export async function getColorTheme() {
       throw error;
     }
     logger.error(`Error in getColorTheme: ${error}`);
-    return;
   }
 }
 
@@ -233,7 +229,6 @@ export async function getThirdPartyProviders(inviteView: boolean = false) {
     return thirdParty.response as TThirdPartyProvider[];
   } catch (error) {
     logger.error(`Error in getThirdPartyProviders: ${error}`);
-    return;
   }
 }
 
@@ -261,7 +256,6 @@ export async function getCapabilities() {
     return capabilities.response as TCapabilities;
   } catch (error) {
     logger.error(`Error in getCapabilities: ${error}`);
-    return;
   }
 }
 
@@ -287,7 +281,6 @@ export async function getSSO() {
     return sso.response as TGetSsoSettings;
   } catch (error) {
     logger.error(`Error in getSSO: ${error}`);
-    return;
   }
 }
 
@@ -322,7 +315,6 @@ export async function getUser() {
     return user.response as TUser;
   } catch (error) {
     logger.error(`Error in getUser: ${error}`);
-    return;
   }
 }
 
@@ -354,7 +346,6 @@ export async function getUserByName() {
     return user.response as TUser;
   } catch (error) {
     logger.error(`Error in getUserByName: ${error}`);
-    return;
   }
 }
 
@@ -390,7 +381,6 @@ export async function getUserByEmail(
     return user.response as TUser;
   } catch (error) {
     logger.error(`Error in getUserByEmail: ${error}`);
-    return;
   }
 }
 
@@ -416,7 +406,6 @@ export async function getScopeList(token?: string) {
     return scopes as TScope[];
   } catch (error) {
     logger.error(`Error in getScopeList: ${error}`);
-    return;
   }
 }
 
@@ -470,7 +459,6 @@ export async function getPortalCultures() {
     return cultures.response as TPortalCultures;
   } catch (error) {
     logger.error(`Error in getPortalCultures: ${error}`);
-    return;
   }
 }
 
@@ -487,7 +475,6 @@ export async function getConfig() {
     return config;
   } catch (error) {
     logger.error(`Error in getConfig: ${error}`);
-    return;
   }
 }
 
@@ -518,7 +505,6 @@ export async function getCompanyInfoSettings() {
       throw error;
     }
     logger.error(`Error in getCompanyInfoSettings: ${error}`);
-    return;
   }
 }
 
@@ -547,7 +533,6 @@ export async function getPortalPasswordSettings(
     return passwordSettings.response as TPasswordSettings;
   } catch (error) {
     logger.error(`Error in getPortalPasswordSettings: ${error}`);
-    return;
   }
 }
 
@@ -582,7 +567,6 @@ export async function getUserFromConfirm(
     return user.response as TUser;
   } catch (error) {
     logger.error(`Error in getUserFromConfirm: ${error}`);
-    return;
   }
 }
 
@@ -830,6 +814,5 @@ export async function getInvitationSettings() {
     return invitationSettings.response as TInvitationSettings;
   } catch (error) {
     logger.error(`Error in getInvitationSettings: ${error}`);
-    return;
   }
 }

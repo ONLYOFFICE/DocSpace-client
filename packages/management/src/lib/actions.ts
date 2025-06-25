@@ -92,7 +92,6 @@ export async function getUser() {
       throw error;
     }
     logger.error(`Error in getUser: ${error}`);
-    return;
   }
 }
 
@@ -134,7 +133,6 @@ export async function getSettings(share?: string) {
       throw error;
     }
     logger.error(`Error in getSettings: ${error}`);
-    return;
   }
 }
 
@@ -162,7 +160,6 @@ export async function getVersionBuild() {
       throw error;
     }
     logger.error(`Error in getVersionBuild: ${error}`);
-    return;
   }
 }
 
@@ -202,7 +199,6 @@ export async function getQuota() {
       throw error;
     }
     logger.error(`Error in getQuota: ${error}`);
-    return;
   }
 }
 
@@ -235,7 +231,6 @@ export async function getAllPortals() {
       throw error;
     }
     logger.error(`Error in getAllPortals: ${error}`);
-    return;
   }
 }
 
@@ -276,7 +271,6 @@ export async function getPortalTariff() {
       throw error;
     }
     logger.error(`Error in getPortalTariff: ${error}`);
-    return;
   }
 }
 
@@ -305,7 +299,6 @@ export async function getColorTheme() {
       throw error;
     }
     logger.error(`Error in getColorTheme: ${error}`);
-    return;
   }
 }
 
@@ -336,7 +329,6 @@ export async function getWhiteLabelLogos() {
       throw error;
     }
     logger.error(`Error in getWhiteLabelLogos: ${error}`);
-    return;
   }
 }
 
@@ -366,7 +358,6 @@ export async function getWhiteLabelText() {
       throw error;
     }
     logger.error(`Error in getWhiteLabelText: ${error}`);
-    return;
   }
 }
 
@@ -396,7 +387,6 @@ export async function getWhiteLabelIsDefault() {
       throw error;
     }
     logger.error(`Error in getWhiteLabelIsDefault: ${error}`);
-    return;
   }
 }
 
@@ -427,7 +417,6 @@ export async function getAdditionalResources() {
       throw error;
     }
     logger.error(`Error in getAdditionalResources: ${error}`);
-    return;
   }
 }
 
@@ -458,7 +447,6 @@ export async function getCompanyInfo() {
       throw error;
     }
     logger.error(`Error in getCompanyInfo: ${error}`);
-    return;
   }
 }
 
@@ -489,7 +477,6 @@ export async function getPaymentSettings() {
       throw error;
     }
     logger.error(`Error in getPaymentSettings: ${error}`);
-    return;
   }
 }
 
@@ -522,7 +509,6 @@ export async function getSettingsThirdParty() {
       throw error;
     }
     logger.error(`Error in getSettingsThirdParty: ${error}`);
-    return;
   }
 }
 
@@ -559,7 +545,6 @@ export async function getBackupSchedule(dump: boolean = true) {
       throw error;
     }
     logger.error(`Error in getBackupSchedule: ${error}`);
-    return;
   }
 }
 
@@ -595,7 +580,6 @@ export async function getBackupStorage(dump: boolean = false) {
       throw error;
     }
     logger.error(`Error in getBackupStorage: ${error}`);
-    return;
   }
 }
 
@@ -626,7 +610,6 @@ export async function getStorageRegions() {
       throw error;
     }
     logger.error(`Error in getStorageRegions: ${error}`);
-    return;
   }
 }
 
@@ -790,6 +773,5 @@ export async function getEncryptionSettings() {
       throw error;
     }
     logger.error(`Error in getEncryptionSettings: ${error}`);
-    return;
   }
 }

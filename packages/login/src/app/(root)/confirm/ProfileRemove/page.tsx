@@ -26,8 +26,8 @@
 
 import { getSettings } from "@/utils/actions";
 
-import ProfileRemoveForm from "./page.client";
 import { logger } from "logger.mjs";
+import ProfileRemoveForm from "./page.client";
 
 async function Page() {
   logger.info("ProfileRemove page");

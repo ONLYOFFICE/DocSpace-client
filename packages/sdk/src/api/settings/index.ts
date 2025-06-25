@@ -86,7 +86,6 @@ export async function getSettings(
     return settings.response;
   } catch (error) {
     logger.error(`Error in getSettings: ${error}`);
-    return;
   }
 }
 
@@ -114,7 +113,6 @@ export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
     return colorTheme.response;
   } catch (error) {
     logger.error(`Error in getColorTheme: ${error}`);
-    return;
   }
 }
 
@@ -140,7 +138,6 @@ export async function getBuildInfo() {
     return buildInfo as TVersionBuild;
   } catch (error) {
     logger.error(`Error in getBuildInfo: ${error}`);
-    return;
   }
 }
 
@@ -162,7 +159,6 @@ export async function getCapabilities() {
     return capabilities.response as TCapabilities;
   } catch (error) {
     logger.error(`Error in getCapabilities: ${error}`);
-    return;
   }
 }
 
@@ -176,9 +172,9 @@ export async function getPortalCultures(): Promise<TPortalCultures> {
       "GET",
     );
 
-  const res = IS_TEST
-    ? portalCulturesHandler()
-    : await fetch(getPortalCulturesRes, { next: { revalidate: 300 } });
+    const res = IS_TEST
+      ? portalCulturesHandler()
+      : await fetch(getPortalCulturesRes, { next: { revalidate: 300 } });
 
     if (!res.ok) {
       logger.error(`GET /settings/cultures failed: ${res.status}`);

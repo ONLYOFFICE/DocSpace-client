@@ -91,7 +91,6 @@ export async function getFillingSession(
     }
   } catch (error) {
     logger.error(`Error in getFillingSession: ${error}`);
-    return;
   }
 }
 
@@ -300,22 +299,22 @@ export async function getUser(share?: string) {
     const hdrs = await headers();
     const cookie = hdrs.get("cookie");
 
-  const [getUserRes] = await createRequest(
-    [`/people/@self`],
-    [share ? ["Request-Token", share] : ["", ""]],
-    "GET",
-    undefined,
-  );
+    const [getUserRes] = await createRequest(
+      [`/people/@self`],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+      undefined,
+    );
 
-  if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = await fetch(getUserRes);
+    if (!cookie?.includes("asc_auth_key")) return undefined;
+    const userRes = await fetch(getUserRes);
 
     if (userRes.status === 401) return undefined;
 
-  if (!userRes.ok) {
-    const hedrs = await headers();
+    if (!userRes.ok) {
+      const hedrs = await headers();
 
-    const hostname = hedrs.get("x-forwarded-host");
+      const hostname = hedrs.get("x-forwarded-host");
 
       if (!share)
         logger.error(
@@ -330,7 +329,6 @@ export async function getUser(share?: string) {
     return user.response as TUser;
   } catch (error) {
     logger.error(`Error in getUser: ${error}`);
-    return;
   }
 }
 
@@ -341,23 +339,23 @@ export async function getSettings(share?: string) {
     const hdrs = await headers();
     const cookie = hdrs.get("cookie");
 
-  const [getSettingsRes] = await createRequest(
-    [
-      `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
-    ],
-    [share ? ["Request-Token", share] : ["", ""]],
-    "GET",
-    undefined,
-  );
+    const [getSettingsRes] = await createRequest(
+      [
+        `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+      ],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+      undefined,
+    );
 
-  const settingsRes = await fetch(getSettingsRes);
+    const settingsRes = await fetch(getSettingsRes);
 
     if (settingsRes.status === 403) return `access-restricted`;
 
-  if (!settingsRes.ok) {
-    const hedrs = await headers();
+    if (!settingsRes.ok) {
+      const hedrs = await headers();
 
-    const hostname = hedrs.get("x-forwarded-host");
+      const hostname = hedrs.get("x-forwarded-host");
 
       logger.error(
         `error: ${settingsRes}, url: ${hostname} GET /settings failed`,
@@ -371,7 +369,6 @@ export async function getSettings(share?: string) {
     return settings.response as TSettings;
   } catch (error) {
     logger.error(`Error in getSettings: ${error}`);
-    return;
   }
 }
 
@@ -404,7 +401,6 @@ export const checkIsAuthenticated = async () => {
     return isAuth.response as boolean;
   } catch (error) {
     logger.error(`Error in checkIsAuthenticated: ${error}`);
-    return;
   }
 };
 
@@ -435,7 +431,6 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
     return room;
   } catch (error) {
     logger.error(`Error in validatePublicRoomKey: ${error}`);
-    return;
   }
 }
 
@@ -580,7 +575,6 @@ export async function getColorTheme() {
     return colorTheme.response as TGetColorTheme;
   } catch (error) {
     logger.error(`Error in getColorTheme: ${error}`);
-    return;
   }
 }
 
@@ -612,7 +606,6 @@ export async function getDeepLinkSettings() {
     return deepLinkSettings.response;
   } catch (error) {
     logger.error(`Error in getDeepLinkSettings: ${error}`);
-    return;
   }
 }
 

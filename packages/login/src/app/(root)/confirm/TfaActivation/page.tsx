@@ -31,9 +31,9 @@ import {
   getUserFromConfirm,
 } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import { StyledForm } from "./page.styled";
 import TfaActivationForm from "./page.client";
-import { logger } from "logger.mjs";
 
 type TfaActivationProps = {
   searchParams: Promise<{ [key: string]: string }>;

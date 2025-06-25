@@ -100,7 +100,8 @@
   }
 
   &.secondary {
-    :global(.thumb) {
+    :global(.thumb),
+    :global(.track-horizontal) {
       display: none;
     }
   }
@@ -311,11 +312,18 @@
   position: absolute;
   z-index: 103;
   cursor: pointer;
+  min-width: 24px;
+  width: 32px;
+  height: 36px;
+
+  :hover {
+    background-color: var(--tabs-hover-background-color-secondary);
+  }
 
   div {
-    min-width: 24px;
-    width: 32px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px;
     display: flex;
     align-items: center;
     justify-content: center;

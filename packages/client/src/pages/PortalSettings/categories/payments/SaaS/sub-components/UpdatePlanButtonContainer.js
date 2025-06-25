@@ -154,7 +154,17 @@ const UpdatePlanButtonContainer = ({
       }
 
       previousManagersCount = maxCountManagersByQuota;
-      waitingForQuota();
+      const quotaRes = await api.portal.getPortalQuota(true);
+      const managersObject = quotaRes.features.find(
+        (obj) => obj.id === MANAGER,
+      );
+
+      if (managersObject?.value !== previousManagersCount) {
+        setPortalQuotaValue(quotaRes);
+        resetIntervalSuccess();
+      } else {
+        waitingForQuota();
+      }
     } catch (e) {
       toastr.error(t("ErrorNotification"));
       setIsLoading(false);

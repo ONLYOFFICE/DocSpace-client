@@ -56,6 +56,7 @@ type StorageDialogProps = {
   totalPrice?: number;
   usedTotalStorageSizeCount?: number;
   handleServicesQuotas?: () => void;
+  formatWalletCurrency?: (amount: number, fractionDigits?: number) => string;
 };
 
 const StoragePlanCancel: React.FC<StorageDialogProps> = ({
@@ -67,10 +68,11 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
   totalPrice,
   usedTotalStorageSizeCount,
   handleServicesQuotas,
+  formatWalletCurrency,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { t, formatWalletCurrency } = useServicesActions();
+  const { t } = useServicesActions();
 
   const handleStoragePlanChange = async () => {
     const timerId = setTimeout(() => {
@@ -123,7 +125,7 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
                 i18nKey="YourCurrentPlan"
                 values={{
                   amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-                  price: formatWalletCurrency(totalPrice),
+                  price: formatWalletCurrency(totalPrice, 2),
                 }}
                 components={{
                   1: <Text fontWeight={600} as="span" />,
@@ -177,6 +179,7 @@ export default inject(
       storageSizeIncrement,
       storagePriceIncrement,
       handleServicesQuotas,
+      formatWalletCurrency,
     } = paymentStore;
 
     const { usedTotalStorageSizeCount } = currentQuotaStore;
@@ -194,6 +197,7 @@ export default inject(
       totalPrice,
       currentStoragePlanSize,
       handleServicesQuotas,
+      formatWalletCurrency,
     };
   },
 )(observer(StoragePlanCancel));

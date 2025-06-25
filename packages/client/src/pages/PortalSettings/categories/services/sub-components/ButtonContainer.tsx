@@ -44,6 +44,7 @@ interface ButtonContainerProps {
   isCurrentStoragePlan?: boolean;
   hasStorageSubscription?: boolean;
   isDowngradeStoragePlan?: boolean;
+  isPaymentBlocked?: boolean;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {

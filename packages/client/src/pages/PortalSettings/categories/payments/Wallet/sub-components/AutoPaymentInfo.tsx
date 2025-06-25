@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { Link } from "@docspace/shared/components/link";
 
 import styles from "../styles/AutoPayments.module.scss";
@@ -42,6 +41,7 @@ type AutoPaymentInfoProps = {
   language?: string;
   walletCodeCurrency?: string;
   isPayer?: boolean;
+  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 const AutoPaymentInfo = (props: AutoPaymentInfoProps) => {
@@ -53,6 +53,7 @@ const AutoPaymentInfo = (props: AutoPaymentInfoProps) => {
     walletCodeCurrency,
     isPayer,
     onOpen,
+    formatWalletCurrency,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -72,8 +73,8 @@ const AutoPaymentInfo = (props: AutoPaymentInfoProps) => {
       <div className={styles.autoPaymentEditing}>
         <Text>
           {t("WhenBalanceDropsTo", {
-            min: formatCurrencyValue(language, minBalance, walletCodeCurrency),
-            max: formatCurrencyValue(language, upToBalance, walletCodeCurrency),
+            min: formatWalletCurrency(minBalance, 0),
+            max: formatWalletCurrency(upToBalance, 0),
           })}{" "}
           {isPayer ? (
             <Link onClick={onOpen} textDecoration="underline">
@@ -94,6 +95,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     walletCodeCurrency,
     isPayer,
     isAutoPaymentExist,
+    formatWalletCurrency,
   } = paymentStore;
 
   const minBalance = autoPayments?.minBalance ?? 0;
@@ -107,5 +109,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     isAutoPaymentExist,
     minBalance,
     upToBalance,
+    formatWalletCurrency,
   };
 })(observer(AutoPaymentInfo));

@@ -71,6 +71,7 @@ type AdditionalStorageProps = {
   hasScheduledStorageChange?: boolean;
   isTablet?: boolean;
   isMobile?: boolean;
+  formatWalletCurrency?: (amount: number, fractionDigits?: number) => string;
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
@@ -91,9 +92,10 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   hasScheduledStorageChange,
   isTablet,
   isMobile,
+  formatWalletCurrency,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
-  const { formatWalletCurrency, t } = useServicesActions();
+  const { t } = useServicesActions();
 
   const handleToggle = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -235,6 +237,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                               currentStoragePlanSize,
                               storagePriceIncrement,
                             ),
+                            2,
                           ),
                           size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
                         })}
@@ -245,7 +248,10 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                   <div className={styles.priceContainer}>
                     <Text fontSize="12px" fontWeight={600}>
                       {t("PerStorage", {
-                        currency: formatWalletCurrency(storagePriceIncrement),
+                        currency: formatWalletCurrency(
+                          storagePriceIncrement,
+                          2,
+                        ),
                         amount: getConvertedSize(t, storageSizeIncrement || 0),
                       })}
                     </Text>
@@ -274,6 +280,7 @@ export default inject(
       servicesQuotasFeatures,
       storageSizeIncrement,
       storagePriceIncrement,
+      formatWalletCurrency,
     } = paymentStore;
 
     const {
@@ -307,6 +314,7 @@ export default inject(
       hasScheduledStorageChange,
       isTablet,
       isMobile,
+      formatWalletCurrency,
     };
   },
 )(observer(AdditionalStorage));

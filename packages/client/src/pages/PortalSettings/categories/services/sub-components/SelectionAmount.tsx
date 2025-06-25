@@ -54,6 +54,7 @@ type SelectionAmountProps = {
   fetchCardLinked?: (url: string) => Promise<any>;
   isPaymentBlockedByBalance?: boolean;
   isCardLinkedToPortal?: boolean;
+  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 let timeout: NodeJS.Timeout;
@@ -79,9 +80,10 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     fetchCardLinked,
     isCardLinkedToPortal,
     isPaymentBlockedByBalance,
+    formatWalletCurrency,
   } = props;
 
-  const { maxStorageLimit, formatWalletCurrency, t } = useServicesActions();
+  const { maxStorageLimit, t } = useServicesActions();
 
   const { isRTL } = useInterfaceDirection();
 
@@ -204,6 +206,7 @@ export default inject(
       isCardLinkedToPortal,
       storageSizeIncrement,
       storagePriceIncrement,
+      formatWalletCurrency,
     } = paymentStore;
     const { partialUpgradeFee, setReccomendedAmount } = servicesStore;
 
@@ -223,6 +226,7 @@ export default inject(
       fetchCardLinked,
       setReccomendedAmount,
       isCardLinkedToPortal,
+      formatWalletCurrency,
     };
   },
 )(observer(SelectionAmount));

@@ -1424,17 +1424,16 @@ export const formatCurrencyValue = (
   language: string,
   amount: number,
   currency: string,
-  minimumFractionDigits: number = 0,
-  maximumFractionDigits: number = 0,
+  fractionDigits: number = 3,
 ) => {
-  const truncatedStr = truncateNumberToFraction(amount, maximumFractionDigits);
+  const truncatedStr = truncateNumberToFraction(amount, fractionDigits);
   const truncated = Number(truncatedStr);
 
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
     currency,
-    minimumFractionDigits,
-    maximumFractionDigits,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
   });
 
   return formatter.format(truncated);

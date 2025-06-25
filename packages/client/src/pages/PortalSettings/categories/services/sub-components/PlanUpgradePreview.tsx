@@ -47,11 +47,21 @@ import { usePaymentContext } from "../context/PaymentContext";
 let timeout: NodeJS.Timeout;
 let controller: AbortController;
 
+type PlanUpgradePreviewProps = {
+  amount: number;
+  currentStoragePlanSize?: number;
+  daysUntilStorageExpiry?: number;
+  setPartialUpgradeFee?: (amount: number) => void;
+  partialUpgradeFee?: number;
+  storageExpiryDate?: string;
+  formatWalletCurrency?: (amount: number, decimalPlaces?: number) => string;
+};
+
 const getDirectionalText = (isRTL) => {
   return isRTL ? `>1` : `<1`;
 };
 
-const PlanUpgradePreview = (props) => {
+const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
   const {
     currentStoragePlanSize,
     amount,
@@ -59,6 +69,7 @@ const PlanUpgradePreview = (props) => {
     setPartialUpgradeFee,
     partialUpgradeFee,
     storageExpiryDate,
+    formatWalletCurrency,
   } = props;
   const { isRTL } = useInterfaceDirection();
 
@@ -66,8 +77,7 @@ const PlanUpgradePreview = (props) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { formatWalletCurrency, calculateDifferenceBetweenPlan } =
-    useServicesActions();
+  const { calculateDifferenceBetweenPlan } = useServicesActions();
 
   const tooltipText = () => {
     return (
@@ -171,7 +181,7 @@ const PlanUpgradePreview = (props) => {
           ) : (
             <>
               <Text fontWeight="600" fontSize="14px">
-                {formatWalletCurrency(partialUpgradeFee, 3)}
+                {formatWalletCurrency(partialUpgradeFee)}
               </Text>
               <Text
                 fontWeight="600"
@@ -188,15 +198,22 @@ const PlanUpgradePreview = (props) => {
   );
 };
 
-export default inject(({ currentTariffStatusStore, servicesStore }: TStore) => {
-  const { currentStoragePlanSize, daysUntilStorageExpiry, storageExpiryDate } =
-    currentTariffStatusStore;
-  const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
-  return {
-    currentStoragePlanSize,
-    daysUntilStorageExpiry,
-    setPartialUpgradeFee,
-    partialUpgradeFee,
-    storageExpiryDate,
-  };
-})(observer(PlanUpgradePreview));
+export default inject(
+  ({ currentTariffStatusStore, servicesStore, paymentStore }: TStore) => {
+    const {
+      currentStoragePlanSize,
+      daysUntilStorageExpiry,
+      storageExpiryDate,
+    } = currentTariffStatusStore;
+    const { setPartialUpgradeFee, partialUpgradeFee } = servicesStore;
+    const { formatWalletCurrency } = paymentStore;
+    return {
+      currentStoragePlanSize,
+      daysUntilStorageExpiry,
+      setPartialUpgradeFee,
+      partialUpgradeFee,
+      storageExpiryDate,
+      formatWalletCurrency,
+    };
+  },
+)(observer(PlanUpgradePreview));

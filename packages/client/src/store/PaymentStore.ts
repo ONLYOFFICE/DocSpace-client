@@ -65,6 +65,7 @@ import {
   TNumericPaymentFeature,
 } from "@docspace/shared/api/portal/types";
 import { PaymentMethodStatus } from "@docspace/shared/enums";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -399,6 +400,18 @@ class PaymentStore {
   get storagePriceIncrement() {
     return this.servicesQuotas?.price.value ?? 0;
   }
+
+  formatWalletCurrency = (item: number = 0, fractionDigits: number = 3) => {
+    const { language } = authStore;
+    const amount = item || this.walletBalance;
+
+    return formatCurrencyValue(
+      language,
+      amount,
+      this.walletCodeCurrency,
+      fractionDigits,
+    );
+  };
 
   updatePreviousBalance = () => {
     this.previousBalance = this.balance;

@@ -26,7 +26,6 @@
 
 import { useTranslation } from "react-i18next";
 
-import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import store from "../../../../../store";
 import {
   calculateDifference,
@@ -50,21 +49,6 @@ export const useServicesActions = () => {
   const { language } = authStore;
 
   const maxStorageLimit = 9999;
-
-  const formatWalletCurrency = (
-    quantity?: number,
-    maximumFractionDigits: number = 2,
-  ) => {
-    const amount = quantity ?? walletBalance;
-
-    return formatCurrencyValue(
-      language,
-      amount,
-      walletCodeCurrency || "",
-      maximumFractionDigits,
-      maximumFractionDigits,
-    );
-  };
 
   const isWalletBalanceInsufficient = (totalPrice: number): boolean => {
     return walletBalance < totalPrice;
@@ -128,7 +112,6 @@ export const useServicesActions = () => {
   return {
     t,
     maxStorageLimit,
-    formatWalletCurrency,
     isWalletBalanceInsufficient,
     isPlanUpgrade,
     isStorageCancellation,

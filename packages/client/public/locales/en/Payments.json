@@ -84,6 +84,7 @@
   "Pay": "Pay",
   "Payer": "Payer",
   "PayerDescription": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
+  "RecommendedTopUpAmount": "Recommended top-up amount: {{amount}}",
   "PaymentMethod": "Payment method",
   "PerStorage": "{{currency}} per {{amount}}/month",
   "PerStorageWitnMinValue": "{{currency}} per {{amount}}/month <1>(min {{minValue}}{{storageUnit}})</1>",

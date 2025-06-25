@@ -32,7 +32,6 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { formatCurrencyValue } from "@docspace/shared/utils/common";
 
 import WalletInfo from "./sub-components/WalletInfo";
 import PaymentMethod from "./sub-components/PaymentMethod";
@@ -63,6 +62,7 @@ type TopUpModalProps = {
   wasFirstTopUp?: boolean;
   reccomendedAmount?: string;
   walletCustomerStatusNotActive?: boolean;
+  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 const TopUpModal = (props: TopUpModalProps) => {
@@ -73,26 +73,19 @@ const TopUpModal = (props: TopUpModalProps) => {
     walletCustomerEmail,
     fetchBalance,
     onClose,
-    language,
     cardLinked,
     accountLink,
     isEditAutoPayment,
     headerProps,
-    walletBalance = 0,
     wasFirstTopUp,
     reccomendedAmount,
     walletCustomerStatusNotActive,
+    formatWalletCurrency,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const balanceValue = formatCurrencyValue(
-    language!,
-    walletBalance,
-    currency,
-    3,
-    3,
-  );
+  const balanceValue = formatWalletCurrency();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -118,11 +111,11 @@ const TopUpModal = (props: TopUpModalProps) => {
             />
 
             <Amount
-              language={language!}
-              currency={currency}
+              formatWalletCurrency={formatWalletCurrency}
               walletCustomerEmail={walletCustomerEmail}
               isDisabled={isLoading || walletCustomerStatusNotActive}
               walletCustomerStatusNotActive={walletCustomerStatusNotActive}
+              reccomendedAmount={reccomendedAmount}
             />
 
             {wasFirstTopUp && walletCustomerEmail ? (
@@ -149,18 +142,17 @@ const TopUpModal = (props: TopUpModalProps) => {
   );
 };
 
-export default inject(({ paymentStore, authStore }: TStore) => {
-  const { language } = authStore;
+export default inject(({ paymentStore }: TStore) => {
   const {
     walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
     cardLinked,
     accountLink,
-    walletBalance,
     walletCodeCurrency,
     wasFirstTopUp,
     walletCustomerStatusNotActive,
+    formatWalletCurrency,
   } = paymentStore;
 
   return {
@@ -168,11 +160,10 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
-    language,
     cardLinked,
     accountLink,
-    walletBalance,
     wasFirstTopUp,
     walletCustomerStatusNotActive,
+    formatWalletCurrency,
   };
 })(observer(TopUpModal));

@@ -37,7 +37,6 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   calculateTotalPrice,
-  formatCurrencyValue,
   getConvertedSize,
 } from "@docspace/shared/utils/common";
 import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
@@ -52,8 +51,7 @@ type StorageTariffDeactivetedProps = {
   usedTotalStorageSizeCount?: number;
   maxTotalSizeByQuota?: number;
   isStorageTariffLimit?: boolean;
-  walletCodeCurrency?: string;
-  language?: string;
+  formatWalletCurrency?: (item: number, fractionDigits?: number) => string;
 };
 
 const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
@@ -64,8 +62,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
   usedTotalStorageSizeCount,
   maxTotalSizeByQuota,
   isStorageTariffLimit,
-  walletCodeCurrency,
-  language,
+  formatWalletCurrency,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const navigate = useNavigate();
@@ -110,13 +107,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
             i18nKey="PreviousPlan"
             values={{
               amount: `${previousStoragePlanSize} ${t("Common:Gigabyte")}`,
-              price: formatCurrencyValue(
-                language,
-                totalPrice,
-                walletCodeCurrency || "",
-                2,
-                2,
-              ),
+              price: formatWalletCurrency(totalPrice, 2),
             }}
             components={{
               1: <Text fontWeight={600} as="span" />,
@@ -176,13 +167,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
 };
 
 export default inject(
-  ({
-    paymentStore,
-    currentTariffStatusStore,
-
-    currentQuotaStore,
-    authStore,
-  }: TStore) => {
+  ({ paymentStore, currentTariffStatusStore, currentQuotaStore }: TStore) => {
     const {
       fetchPortalTariff,
       currentStoragePlanSize,
@@ -190,10 +175,10 @@ export default inject(
     } = currentTariffStatusStore;
     const {
       fetchBalance,
-      walletCodeCurrency,
       storageSizeIncrement,
       storagePriceIncrement,
       handleServicesQuotas,
+      formatWalletCurrency,
     } = paymentStore;
 
     const {
@@ -201,7 +186,7 @@ export default inject(
       maxTotalSizeByQuota,
       isStorageTariffLimit,
     } = currentQuotaStore;
-    const { language } = authStore;
+
     const totalPrice = calculateTotalPrice(
       previousStoragePlanSize,
       storagePriceIncrement,
@@ -218,8 +203,7 @@ export default inject(
       previousStoragePlanSize,
       maxTotalSizeByQuota,
       isStorageTariffLimit,
-      walletCodeCurrency,
-      language,
+      formatWalletCurrency,
     };
   },
 )(observer(StorageTariffDeactiveted));

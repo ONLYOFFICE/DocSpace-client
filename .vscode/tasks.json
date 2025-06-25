@@ -543,7 +543,7 @@
     {
       "label": "Test | Jest:images",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; npm run open-report",
       "group": {
         "kind": "build",
         "isDefault": true

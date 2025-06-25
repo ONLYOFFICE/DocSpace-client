@@ -27,7 +27,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { getAllFiles, getWorkSpaces, BASE_DIR } = require("../utils/files");
+const { getAllFiles, getWorkSpaces, BASE_DIR, convertPathToOS } = require("../utils/files");
 const { findImagesIntoFiles } = require("../utils/images");
 
 const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.)*.svg/);
@@ -55,6 +55,7 @@ beforeAll(() => {
     "storybook-static",
     "node_modules",
     ".meta",
+    "locales"
   ];
 
   const workspaces = getWorkSpaces();
@@ -67,7 +68,6 @@ beforeAll(() => {
       (filePath) =>
         filePath &&
         filesPattern.test(filePath) &&
-        !filePath.includes("locales/") &&
         !filePath.includes(".test.") &&
         !filePath.includes(".stories.")
     );
@@ -162,26 +162,24 @@ describe("Image Tests", () => {
       if (value.length > 1) {
         let skip = false;
         if (
-          value[0].path.includes("/logo/") ||
-          value[0].path.includes("/icons/")
+          value[0].path.includes(convertPathToOS("/logo/")) ||
+          value[0].path.includes(convertPathToOS("/icons/"))
         ) {
           skip = true;
-          value.forEach((v) => {
-            const isMain =
-              v.path.includes(`/logo/${key}`) ||
-              v.path.includes(`/icons/${key}`);
-            const isSubPath =
-              LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path);
-            skip = (isSubPath || isMain) && skip;
-          });
+          // value.forEach((v) => {
+          //   const isMain =
+          //     v.path.includes(convertPathToOS(`/logo/${key}`)) ||
+          //     v.path.includes(convertPathToOS(`/icons/${key}`));
+          //   const isSubPath =
+          //     LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path);
+          //   skip = (isSubPath || isMain) && skip;
+          // });
         }
         if (skip) return;
         message += `${++i}. ${key}:\r\n`;
         value.forEach(
           (v) =>
-            (message += `${v.path} ${
-              LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path)
-            }\r\n`)
+            (message += `${v.path}\r\n`)
         );
         message += "\r\n";
       }
@@ -215,7 +213,7 @@ describe("Image Tests", () => {
     let i = 0;
     uniqueImg.forEach((value, key) => {
       if (
-        value[0].path.includes("/logo/") ||
+        value[0].path.includes(convertPathToOS("/logo/")) ||
         value[0].path.includes("phoneFlags")
       )
         return;
@@ -260,10 +258,10 @@ describe("Image Tests", () => {
     uniqueImg.forEach((value, key) => {
       if (value.length > 1) {
         let skipLogo = false;
-        if (value[0].path.includes("/logo/")) {
+        if (value[0].path.includes(convertPathToOS("/logo/"))) {
           skipLogo = true;
           value.forEach((v) => {
-            const isMainLogo = v.path.includes(`/logo/${key}`);
+            const isMainLogo = v.path.includes(convertPathToOS(`/logo/${key}`));
             const isSubPath = LOGO_REGEX.test(v.path);
             skipLogo = (isSubPath || isMainLogo) && skipLogo;
           });

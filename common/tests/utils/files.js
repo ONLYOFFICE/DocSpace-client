@@ -35,6 +35,7 @@ const moduleWorkspaces = [
   "packages/login",
   "packages/shared",
   "packages/management",
+  "packages/sdk",
   "public/locales", // common
 ];
 
@@ -66,8 +67,8 @@ const getAllFiles = (dir, excludeDirs = []) => {
 
 const convertPathToOS = (filePath) => {
   return path.sep == "/"
-    ? filePath.replace("\\", "/")
-    : filePath.replace("/", "\\");
+    ? filePath.replaceAll("\\", "/")
+    : filePath.replaceAll("/", "\\");
 };
 
 module.exports = {

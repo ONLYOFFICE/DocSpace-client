@@ -136,5 +136,13 @@
   "YouHaveNotAddedAnyPayment": "No ha añadido ningún pago",
   "YourCurrentPayment": "Su pago actual",
   "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>",
-  "YourPrice": "Su precio"
+  "YourPrice": "Su precio",
+  "CardUnlinked": "Tarjeta desvinculada",
+  "GoToPayments": "Ir a Pagos",
+  "LinkNewCard": "Para vincular una nueva tarjeta, siga este enlace.",
+  "PartialPaymentDescription": "En adelante, el importe total se cargará una vez por ciclo de facturación en la fecha de facturación habitual.",
+  "PartialPaymentNoDate": "Hoy sólo pagará por la cantidad seleccionada de {{storageUnit}} durante los días restantes hasta la fecha de facturación.",
+  "PartialPaymentWithDate": "Hoy sólo pagará por la cantidad seleccionada de {{storageUnit}} durante los días restantes hasta la fecha de facturación (de {{startDate}} a {{endDate}}).",
+  "ServiceManagementUnavailable": "La gestión de servicios no está disponible durante el periodo de gracia, y no se aplicarán costes adicionales a los servicios durante este tiempo. Para recuperar la funcionalidad completa, actualice a un plan {{planName}}.",
+  "WalletToppedUp": "El Monedero se ha recargado correctamente"
 }

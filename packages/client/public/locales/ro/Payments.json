@@ -127,5 +127,22 @@
   "YouHaveNotAddedAnyPayment": "Nu a fost adăugată nicio metodă de plată",
   "YourCurrentPayment": "Metoda dvs de plată actuală",
   "YourCurrentPlan": "<1>Planul actual:</1> {{amount}} <2>({{price}}/lună)</2>",
-  "YourPrice": "Preţul dvs."
+  "YourPrice": "Preţul dvs.",
+  "AvailableLimit": "<1>Limită disponibilă pentru abonamentul actual:</1> {{amount}}",
+  "CardUnlinked": "Cardul este dezatașat",
+  "CurrentPaymentMonth": "Plata actuală: {{price}}/lună ({{size}})",
+  "GoToPayments": "Acces Plăți",
+  "GoToService": "Acces serviciu",
+  "LinkNewCard": "Pentru a atașa un card nou, urmăriți linkul de mai jos.",
+  "PartialPaymentDescription": "În continuare, suma totală va fi facturată o dată pe ciclu de facturare la data obişnuită de facturare.",
+  "PartialPaymentNoDate": "Astăzi, plătiți doar pentru spațiul de stocare selectat de {{storageUnit}} pentru zilele rămase până la data de facturare.",
+  "PartialPaymentWithDate": "Astăzi, plătiți doar pentru spațiul de stocare selectat de {{storageUnit}} pentru zilele rămase până la data de facturare de la ({{startDate}} până la {{endDate}}).",
+  "PerStorageWitnMinValue": "{{currency}} {{amount}}/lună (min {{minValue}} {{storageUnit}})",
+  "PreviousPlan": "<1>Planul precedent:</1> {{amount}} <2>({{price}}/lună)</2>",
+  "Reminder": "Memento:",
+  "ServiceManagementUnavailable": "Administrarea serviciilor nu este disponibilă în timpul perioadei de grație și nicio sumă de plată pentru servicii nu va fi percepută în această perioadă. Pentru a restabili funcționalitatea completă, treceţi la un abonament superior {{planName}}.",
+  "StorageRestrictions": "Dacă nu întreprindeţi nicio acţiune, încărcarea, crearea și editarea a fișierelor și folderelor va fi limitată până când va fi eliberat spațiu de stocare.",
+  "StorageTariffDeactivated": "Abonamentul cu spațiul de stocare suplimentar este dezactivat din cauza neplății.",
+  "TopUpToReactivateStorage": "Pentru a reîncepe abonamentul dvs, alimentați Portofelul dvs din secțiunea Servicii. După finalizarea plății spațiul de stocare suplimentar va deveni disponibil din nou.",
+  "WalletToppedUp": "Contul de Portofel a fost alimentat cu succes"
 }

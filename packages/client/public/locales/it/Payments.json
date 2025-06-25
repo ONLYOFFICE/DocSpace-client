@@ -137,5 +137,12 @@
   "YouHaveNotAddedAnyPayment": "Non hai aggiunto alcun metodo di pagamento",
   "YourCurrentPayment": "Il tuo pagamento attuale",
   "YourCurrentPlan": "<1>Piano attuale:</1> {{amount}} <2>({{price}}/mese)</2>",
-  "YourPrice": "Il tuo prezzo"
+  "YourPrice": "Il tuo prezzo",
+  "GoToPayments": "Vai ai pagamenti",
+  "PartialPaymentDescription": "D'ora in poi, l'importo completo verrà addebitato una volta per ogni ciclo di fatturazione, alla data di fatturazione regolare.",
+  "PartialPaymentNoDate": "Oggi paghi solo per la quantità selezionata di {{storageUnit}} per i giorni rimanenti fino alla data di fatturazione.",
+  "PartialPaymentWithDate": "Oggi paghi solo per la quantità selezionata di {{storageUnit}} per i giorni rimanenti fino alla data di fatturazione (dal {{startDate}} al {{endDate}}).",
+  "Reminder": "Promemoria:",
+  "ServiceManagementUnavailable": "La gestione del servizio non è disponibile durante il periodo di tolleranza e non verranno applicati addebiti per i servizi durante questo periodo. Per ripristinare la piena funzionalità, effettua l’upgrade al piano {{planName}}.",
+  "WalletToppedUp": "Il portafoglio è stato ricaricato con successo"
 }

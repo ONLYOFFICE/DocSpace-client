@@ -127,5 +127,7 @@
   "YouHaveNotAddedAnyPayment": "您尚未添加任何支付方式",
   "YourCurrentPayment": "您当前的支付方式",
   "YourCurrentPlan": "<1>您当前的套餐：</1>{{amount}} <2>({{price}}/月)</2>",
-  "YourPrice": "您的价格"
+  "YourPrice": "您的价格",
+  "AvailableLimit": "<1>当前套餐可用限额：</1> {{amount}}",
+  "CurrentPaymentMonth": "当前付款：{{price}}/月 ({{size}})"
 }

@@ -67,7 +67,6 @@ const LinkRow = (props: LinkRowProps) => {
     editExternalLink,
     setExternalLink,
     deleteExternalLink,
-    isShareLink,
   } = props;
 
   const { t } = useTranslation([

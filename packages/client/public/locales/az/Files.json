@@ -102,7 +102,7 @@
   "FinalizeVersion": "Versiyanı formalaşdır",
   "FolderRenamed": "'{{folderTitle}}' qovluğunun adı '{{newFoldedTitle}}' olaraq dəyişdirildi ",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1> qovluğu yaradıldı",
-  "GeneralLinkDeletedSuccessfully": "Yeni ümumi link uğurla yaradıldı",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Yeni ümumi link uğurla yaradıldı",
   "GoToMyRooms": "Otaqlarım bölməsinə keçin",
   "GoToSection": "{{sectionName}} bölməsinə keçin",
   "Index": "İndeks",

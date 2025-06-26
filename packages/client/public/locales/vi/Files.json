@@ -102,7 +102,7 @@
   "FinalizeVersion": "Hoàn thành phiên bản",
   "FolderRenamed": "Thư mục {{folderTitle}}, được đổi tên thành {{newFoldedTitle}}",
   "FolderSuccessfullyCreated": "Đã tạo thư mục <1>{{folderTitle}}</1>",
-  "GeneralLinkDeletedSuccessfully": "Đã tạo liên kết chung mới thành công",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Đã tạo liên kết chung mới thành công",
   "GoToMyRooms": "Vào Phòng của tôi",
   "GoToSection": "Đi tới {{sectionName}}",
   "Index": "Chỉ mục",

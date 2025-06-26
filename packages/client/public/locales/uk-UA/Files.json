@@ -102,7 +102,7 @@
   "FinalizeVersion": "Фіналізувати версію",
   "FolderRenamed": "Папку \"{{folderTitle}}\" перейменовано на \"{{newFoldedTitle}}\"",
   "FolderSuccessfullyCreated": "Папку <1>{{folderTitle}}</1> створено",
-  "GeneralLinkDeletedSuccessfully": "Нове загальне посилання успішно створено",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Нове загальне посилання успішно створено",
   "GoToMyRooms": "Перейти до розділу «Кімнати»",
   "GoToSection": "Перейти до {{sectionName}}",
   "Index": "Індекс",

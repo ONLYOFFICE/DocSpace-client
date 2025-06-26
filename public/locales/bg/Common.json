@@ -721,5 +721,6 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вие",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "PublicAuthorizeToast": "Тази стая е отворена в режим <1>{{roomMode}}</1>. Ако имате акаунт в този {{productName}}, моля авторизирайте се."
 }

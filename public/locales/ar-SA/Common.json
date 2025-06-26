@@ -721,5 +721,6 @@
   "Yes": "نعم",
   "Yesterday": "أمس",
   "You": "أنت",
-  "YourTurn": "دوركم الآن"
+  "YourTurn": "دوركم الآن",
+  "PublicAuthorizeToast": "هذه الغرفة مفتوحة في الوضع <1>{{roomMode}}</1>. إذا كان لديك حساب في {{productName}}، يرجى التفويض."
 }

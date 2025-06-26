@@ -721,5 +721,6 @@
   "Yes": "Sim",
   "Yesterday": "Ontem",
   "You": "Você",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "PublicAuthorizeToast": "Este quarto está aberto no modo <1>{{roomMode}}</1>. Se você possui uma conta neste {{productName}}, por favor, autorize."
 }

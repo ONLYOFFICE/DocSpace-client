@@ -721,5 +721,6 @@
   "Yes": "Bəli",
   "Yesterday": "Dünən",
   "You": "Siz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "PublicAuthorizeToast": "Bu otaq <1>{{roomMode}}</1> rejimində açılıb. Əgər bu {{productName}} məhsulunda hesabınız varsa, xahiş edirəm təsdiqləyin."
 }

@@ -721,5 +721,6 @@
   "Yes": "Áno",
   "Yesterday": "Včera",
   "You": "Vy",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "PublicAuthorizeToast": "Táto miestnosť je otvorená v režime <1>{{roomMode}}</1>. Ak máte účet v tomto {{productName}}, prosím, autorizujte."
 }

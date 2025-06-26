@@ -721,5 +721,6 @@
   "Yes": "Ja",
   "Yesterday": "Gisteren",
   "You": "U",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "PublicAuthorizeToast": "Deze kamer wordt geopend in de <1>{{roomMode}}</1> modus. Indien u een account heeft in dit {{productName}}, gelieve dan te autoriseren."
 }

@@ -721,5 +721,6 @@
   "Yes": "Ja",
   "Yesterday": "Gestern",
   "You": "Sie",
-  "YourTurn": "Jetzt sind Sie dran"
+  "YourTurn": "Jetzt sind Sie dran",
+  "PublicAuthorizeToast": "Dieser Raum ist im <1>{{roomMode}}</1>-Modus geöffnet. Wenn Sie ein Konto in diesem {{productName}} haben, autorisieren Sie es bitte."
 }

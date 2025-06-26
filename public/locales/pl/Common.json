@@ -721,5 +721,6 @@
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
   "You": "Ty",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "PublicAuthorizeToast": "Ten pokój został otwarty w trybie <1>{{roomMode}}</1>. Jeśli masz konto w tym {{productName}}, prosimy o autoryzację."
 }

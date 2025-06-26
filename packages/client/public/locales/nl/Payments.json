@@ -144,5 +144,7 @@
   "YouHaveNotAddedAnyPayment": "Je hebt nog geen betaling toegevoegd",
   "YourCurrentPayment": "Uw huidige betaling",
   "YourCurrentPlan": "<1>Uw huidige abonnement:</1> {{amount}} <2>({{price}}/maand)</2>",
-  "YourPrice": "Uw prijs"
+  "YourPrice": "Uw prijs",
+  "RecommendedTopUpAmount": "Aanbevolen opwaardeerbedrag: {{amount}}",
+  "TopUpTakeSomeTimeToComplete": "De aanvulling kan even duren om te voltooien."
 }

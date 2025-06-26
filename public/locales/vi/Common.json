@@ -721,5 +721,6 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "PublicAuthorizeToast": "Căn phòng này đang mở ở chế độ <1>{{roomMode}}</1>. Nếu bạn có tài khoản trong {{productName}} này, vui lòng xác thực."
 }

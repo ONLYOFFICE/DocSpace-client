@@ -721,5 +721,6 @@
   "Yes": "是",
   "Yesterday": "昨天",
   "You": "您",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "PublicAuthorizeToast": "此房间以<1>{{roomMode}}</1>模式开启。如果您已拥有此{{productName}}账户，请授权。"
 }

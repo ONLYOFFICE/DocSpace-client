@@ -721,5 +721,6 @@
   "Yes": "Da",
   "Yesterday": "Ieri",
   "You": "Dvs",
-  "YourTurn": "Acum e rândul dvs."
+  "YourTurn": "Acum e rândul dvs.",
+  "PublicAuthorizeToast": "Această sală este deschisă în modul <1>{{roomMode}}</1>. Vă rugăm să vă autentificați dacă aveți un cont {{productName}}."
 }

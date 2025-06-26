@@ -721,5 +721,6 @@
   "Yes": "はい",
   "Yesterday": "昨日",
   "You": "あなた",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "PublicAuthorizeToast": "このルームは<1>{{roomMode}}</1>モードで開かれています。この{{productName}}のアカウントをお持ちの場合は、認証してください。"
 }

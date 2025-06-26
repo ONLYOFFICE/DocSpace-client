@@ -721,5 +721,6 @@
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
   "You": "Sinä",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "PublicAuthorizeToast": "Tämä huone avautuu <1>{{roomMode}}</1> -tilassa. Jos sinulla on tili tässä {{productName}}-palvelussa, pyydämme valtuuttamaan."
 }

@@ -959,7 +959,7 @@ class InfoPanelStore {
     const file = this.filesStore.files.find((item) => item.id === fileId);
 
     /**
-     *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
+     *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType}
      */
     const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
 

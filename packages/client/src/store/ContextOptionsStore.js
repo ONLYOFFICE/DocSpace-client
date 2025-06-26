@@ -1476,6 +1476,17 @@ class ContextOptionsStore {
     return this.getFilesContextOptions(item, t, false, true);
   };
 
+  getManageLink = async (item, t) => {
+    const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
+
+    const primaryLink = await getPrimaryFileLink(item.id);
+
+    if (primaryLink) {
+      copyDocumentShareLink(primaryLink, t, this.getManageLinkOptions(item));
+      setShareChanged(true);
+    }
+  };
+
   getManageLinkOptions = (item, isRoom = false) => {
     const openTab = () => {
       if (isRoom) return this.infoPanelStore.openMembersTab();
@@ -1529,9 +1540,9 @@ class ContextOptionsStore {
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
-    const isShareable = this.treeFoldersStore.isPersonalRoom
-      ? item.canShare || (item.isFolder && item.security?.CreateRoomFrom)
-      : false;
+    // const isShareable = this.treeFoldersStore.isPersonalRoom
+    //   ? item.canShare || (item.isFolder && item.security?.CreateRoomFrom)
+    //   : false;
 
     const isMedia =
       item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
@@ -1897,34 +1908,50 @@ class ContextOptionsStore {
         disabled: false,
         action: item.id,
       },
-      {
-        id: "option_copy-general-link",
-        key: "copy-general-link",
-        label: t("Common:CopySharedLink"),
-        icon: TabletLinkReactSvgUrl,
-        disabled: !isShareable,
-        onClick: async () => {
-          const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
-
-          const primaryLink = await getPrimaryFileLink(item.id);
-
-          if (primaryLink) {
-            copyDocumentShareLink(
-              primaryLink,
-              t,
-              this.getManageLinkOptions(item),
-            );
-            setShareChanged(true);
-          }
-        },
-      },
+      // {
+      //   id: "option_copy-general-link",
+      //   key: "copy-general-link",
+      //   label: t("Common:CopySharedLink"),
+      //   icon: TabletLinkReactSvgUrl,
+      //   disabled: !isShareable,
+      //   onClick: () => this.getManageLink(item, t),
+      // },
       {
         id: "option_sharing-settings",
         key: "sharing-settings",
         label: t("Common:Share"),
         icon: ShareReactSvgUrl,
-        onClick: () => this.onClickShare(item),
-        disabled: !isShareable,
+        items: [
+          {
+            id: "option_copy-shared-link",
+            key: "copy-shared-link",
+            label: t("Common:CopySharedLink"),
+            icon: TabletLinkReactSvgUrl,
+            onClick: () => this.getManageLink(item, t),
+            disabled: false,
+          },
+          {
+            id: "option_manage-links",
+            key: "manage-links",
+            label: t("Common:ManageLinks"),
+            icon: SettingsReactSvgUrl,
+            onClick: () => this.onClickShare(item),
+            disabled: false,
+          },
+          {
+            key: "create-room-separator",
+            isSeparator: true,
+            disabled: !item.security?.CreateRoomFrom,
+          },
+          {
+            id: "option_create_room",
+            key: "create-room",
+            label: t("Common:CreateRoom"),
+            icon: CatalogRoomsReactSvgUrl,
+            onClick: () => this.onCreateRoom(item, true),
+            disabled: !item.security?.CreateRoomFrom,
+          },
+        ],
       },
       ...versionActions,
       {
@@ -2073,14 +2100,7 @@ class ContextOptionsStore {
         "data-action": "remove",
         action: "remove",
       },
-      {
-        id: "option_create_room",
-        key: "create-room",
-        label: t("Common:CreateRoom"),
-        icon: CatalogRoomsReactSvgUrl,
-        onClick: () => this.onCreateRoom(item, true),
-        disabled: !item.security?.CreateRoomFrom,
-      },
+
       {
         id: "option_create-duplicate-room",
         key: "duplicate-room",

@@ -102,7 +102,7 @@
   "FinalizeVersion": "Οριστικοποίηση έκδοσης",
   "FolderRenamed": "Ο φάκελος '{{folderTitle}}' μετονομάστηκε σε '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Δημιουργήθηκε ο φάκελος <1>{{folderTitle}}</1>",
-  "GeneralLinkDeletedSuccessfully": "Ο νέος γενικός σύνδεσμος δημιουργήθηκε με επιτυχία",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Ο νέος γενικός σύνδεσμος δημιουργήθηκε με επιτυχία",
   "GoToMyRooms": "Μετάβαση στο «Τα δωμάτιά»",
   "GoToSection": "Μετάβαση στο {{sectionName}}",
   "Index": "Ευρετήριο",

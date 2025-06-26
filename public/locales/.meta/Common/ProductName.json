@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-06-24T16:31:24.317Z",
+  "updated_at": "2025-06-26T19:00:18.110Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -1128,8 +1128,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 186,
-      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {isCardLinkedToPortal ? <PayerInformation /> : null}\n \n <div className={styles.balanceWrapper}>\n <div className={styles.headerContainer}>",
+      "line_number": 196,
+      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {walletHelpUrl ? (\n <Link\n textDecoration=\"underline\"",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Your additional storage subscription has been deactivated due to non-payment",
   "content_en_sha1_hash": "d95e5887fc80daff26ead869b2eb0182bf416e2c",
   "created_at": "2025-06-24T16:31:06.881Z",
-  "updated_at": "2025-06-24T16:31:52.885Z",
+  "updated_at": "2025-06-26T19:00:18.162Z",
   "comment": {
     "text": "This translation key is used for displaying a message indicating that an additional storage subscription has been deactivated due to non-payment. It appears in a modal dialog, informing users of the reason behind their subscription deactivation. The text \"Your additional storage subscription has been deactivated\" should match the provided English content and usage context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
-      "line_number": 104,
+      "line_number": 101,
       "context": "<Text fontSize=\"21px\" isBold>\n {t(\"Common:Warning\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>{t(\"StorageTariffDeactivated\")}</Text>\n <br />\n <Text as=\"span\">\n <Trans\n t={t}\n ns=\"Payments\"",
       "module": "/packages/client"
     }

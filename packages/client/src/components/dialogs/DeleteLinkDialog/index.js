@@ -79,10 +79,10 @@ const DeleteLinkDialogComponent = (props) => {
         const filterObj = FilesFilter.getFilter(window.location);
 
         if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
-          if (filterObj.key !== res.sharedTo.requestToken) {
-            setPublicRoomKey(res.sharedTo.requestToken);
+          if (filterObj.key !== res?.sharedTo?.requestToken) {
+            setPublicRoomKey(res?.sharedTo?.requestToken);
             setSearchParams((prev) => {
-              prev.set("key", res.sharedTo.requestToken);
+              prev.set("key", res?.sharedTo?.requestToken);
               return prev;
             });
           }
@@ -94,7 +94,10 @@ const DeleteLinkDialogComponent = (props) => {
           setSearchParams(searchParams);
         }
       })
-      .catch((err) => toastr.error(err.response?.data?.error.message))
+      .catch((err) => {
+        console.log(err);
+        toastr.error(err.response?.data?.error.message);
+      })
       .finally(() => {
         setIsLoading(false);
         onClose();
@@ -129,11 +132,6 @@ const DeleteLinkDialogComponent = (props) => {
 
     return t("Files:DeleteSharedLink");
   };
-
-  console.debug({
-    primary: link.sharedTo.primary,
-    isPublicRoomType,
-  });
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>

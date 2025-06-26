@@ -209,6 +209,7 @@ const LinkRow = (props: LinkRowProps) => {
         copyRoomShareLink(linkData, t);
       }
     } catch (err: unknown) {
+      console.log(err);
       toastr.error((err as Error)?.message);
     } finally {
       const currentDate = new Date();
@@ -237,6 +238,7 @@ const LinkRow = (props: LinkRowProps) => {
 
       toastr.success(t("Files:LinkDeletedSuccessfully"));
     } catch (err: unknown) {
+      console.log(err);
       toastr.error((err as Error)?.message);
     } finally {
       setLoadingLinks([]);
@@ -269,10 +271,11 @@ const LinkRow = (props: LinkRowProps) => {
       onCloseContextMenu={onCloseContextMenu}
       removedExpiredLink={removedExpiredLink}
       isRoomsLink
-      isPrimaryLink={!isShareLink || isPrimaryLink || false}
+      isPrimaryLink={isPrimaryLink ?? false}
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder!}
+      isFormRoom={isFormRoom}
     />
   );
 };

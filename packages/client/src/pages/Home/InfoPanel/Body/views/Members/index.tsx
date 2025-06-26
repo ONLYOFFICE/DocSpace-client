@@ -238,7 +238,7 @@ const Members = ({
             isPrimaryLink
             isShareLink
             roomId={infoPanelSelection!.id}
-            isPublicRoomType={isPublicRoomType!}
+            isPublicRoomType={isPublicRoom!}
             isFormRoom={isFormRoom!}
             isCustomRoom={isCustomRoom!}
           />,
@@ -253,7 +253,7 @@ const Members = ({
               key={link?.sharedTo?.id}
               isShareLink
               roomId={infoPanelSelection!.id}
-              isPublicRoomType={isPublicRoomType!}
+              isPublicRoomType={isPublicRoom!}
               isFormRoom={isFormRoom!}
               isCustomRoom={isCustomRoom!}
             />,

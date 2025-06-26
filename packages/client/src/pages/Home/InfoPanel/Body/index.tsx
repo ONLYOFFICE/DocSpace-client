@@ -121,8 +121,6 @@ const InfoPanelBodyContent = ({
 
   const currentView = isRooms ? roomsView : fileView;
 
-  console.log(isRooms, roomsView, fileView);
-
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
 

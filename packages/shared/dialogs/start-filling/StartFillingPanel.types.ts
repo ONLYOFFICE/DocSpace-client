@@ -46,11 +46,14 @@ export interface IStartFillingPanelProps {
     invitations: Invitation[],
   ) => Promise<unknown>;
   withBorder?: boolean;
+  canEditRoom?: boolean;
 }
 
 export interface HeaderProps {
-  className?: string;
+  canEditRoom: boolean;
   roleName: string;
   t: TTranslation;
   openInvitePanel: VoidFunction;
+
+  className?: string;
 }

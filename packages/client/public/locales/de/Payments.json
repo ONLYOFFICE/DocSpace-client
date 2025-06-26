@@ -33,7 +33,7 @@
   "CardLinked": "Karte verknüpft",
   "CardUnlinked": "Karte nicht verknüpft",
   "ChangeShedule": "Änderung geplant",
-  "ChargeAmount": "Ein Betrag von <1>{price}}</1> wird Ihrer gespeicherten Zahlungsmethode belastet.",
+  "ChargeAmount": "Ein Betrag von <1>{{price}}</1> wird Ihrer gespeicherten Zahlungsmethode belastet.",
   "ChooseNewPayer": "Wählen Sie einen neuen Zahler",
   "ChooseNewPlan": "Möchten Sie einen neuen Preisplan wählen?",
   "ConfirmPayment": "Zahlung bestätigen",

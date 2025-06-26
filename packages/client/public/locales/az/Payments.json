@@ -33,7 +33,7 @@
   "CardLinked": "Kart keçidləşdirilib",
   "CardUnlinked": "Kart ayrılıb",
   "ChangeShedule": "Cədvəl üzrə dəyişiklik",
-  "ChargeAmount": "Sizə əvvəlki ödəniş vasitənizlə <1>{price}}</1> məbləği hesablanacaq.",
+  "ChargeAmount": "Sizə əvvəlki ödəniş vasitənizlə <1>{{price}}</1> məbləği hesablanacaq.",
   "ChooseNewPayer": "Yeni Ödəyici seçin",
   "ChooseNewPlan": "Yeni qiymət planı seçmək istəyirsiniz?",
   "ConfirmPayment": "Ödənişi təsdiqləyin",

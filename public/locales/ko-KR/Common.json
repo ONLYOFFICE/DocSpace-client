@@ -721,5 +721,6 @@
   "Yes": "네",
   "Yesterday": "어제",
   "You": "나",
-  "YourTurn": "고객님의 차례입니다"
+  "YourTurn": "고객님의 차례입니다",
+  "PublicAuthorizeToast": "이 방은 <1>{{roomMode}}</1> 모드로 열려 있습니다. 이 {{productName}}에서 계정이 있으시면 인증해 주세요."
 }

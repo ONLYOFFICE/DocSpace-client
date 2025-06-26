@@ -721,5 +721,6 @@
   "Yes": "Da",
   "Yesterday": "Juče",
   "You": "Vi",
-  "YourTurn": "Vaš red"
+  "YourTurn": "Vaš red",
+  "PublicAuthorizeToast": "Ova soba je otvorena u <1>{{roomMode}}</1> režimu. Ako imate nalog u {{productName}}, molimo vas da se prijavite."
 }

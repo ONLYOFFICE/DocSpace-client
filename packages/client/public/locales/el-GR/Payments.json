@@ -144,5 +144,7 @@
   "YouHaveNotAddedAnyPayment": "Δεν έχετε προσθέσει καμία πληρωμή",
   "YourCurrentPayment": "Η τρέχουσα πληρωμή σας",
   "YourCurrentPlan": "<1>Το τρέχον πρόγραμμα σας:</1> {{amount}} <2>({{price}}/μήνα)</2>",
-  "YourPrice": "Η τιμή σας"
+  "YourPrice": "Η τιμή σας",
+  "RecommendedTopUpAmount": "Συνιστώμενη ποσότητα αναπλήρωσης: {{amount}}",
+  "TopUpTakeSomeTimeToComplete": "Η επαναφόρτιση ενδέχεται να χρειαστεί κάποιο χρόνο για να ολοκληρωθεί."
 }

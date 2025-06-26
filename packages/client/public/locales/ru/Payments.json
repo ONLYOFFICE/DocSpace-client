@@ -144,5 +144,7 @@
   "YouHaveNotAddedAnyPayment": "Вы не добавили ни одного платежа",
   "YourCurrentPayment": "Ваш текущий платеж",
   "YourCurrentPlan": "<1>Ваш текущий тарифный план:</1> {{amount}} <2>({{price}}/месяц)</2>",
-  "YourPrice": "Ваша стоимость"
+  "YourPrice": "Ваша стоимость",
+  "RecommendedTopUpAmount": "Рекомендуемая сумма пополнения: {{amount}}",
+  "TopUpTakeSomeTimeToComplete": "Пополнение может занять некоторое время."
 }

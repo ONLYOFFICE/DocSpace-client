@@ -721,5 +721,6 @@
   "Yes": "Po",
   "Yesterday": "Dje",
   "You": "Ti/Ju",
-  "YourTurn": "Radha jote"
+  "YourTurn": "Radha jote",
+  "PublicAuthorizeToast": "Kjo dhomë është e hapur në mënyrën <1>{{roomMode}}</1>. Nëse keni një llogari në këtë {{productName}}, ju lutem autorizoni."
 }

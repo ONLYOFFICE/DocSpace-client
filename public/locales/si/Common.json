@@ -721,5 +721,6 @@
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
   "You": "ඔබ",
-  "YourTurn": "ඔබේ වාරය."
+  "YourTurn": "ඔබේ වාරය.",
+  "PublicAuthorizeToast": "මෙම කාමරය <1>{{roomMode}}</1> ආකාරයෙන් විවෘත කර ඇත. ඔබට මෙම {{productName}} හි ගිණුමක් තිබේ නම්, කරුණාකර අවසර දෙන්න."
 }

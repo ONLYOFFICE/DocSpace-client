@@ -129,5 +129,22 @@
   "YouHaveNotAddedAnyPayment": "您尚未添加任何支付方式",
   "YourCurrentPayment": "您当前的支付方式",
   "YourCurrentPlan": "<1>您当前的套餐：</1>{{amount}} <2>({{price}}/月)</2>",
-  "YourPrice": "您的价格"
+  "YourPrice": "您的价格",
+  "CardUnlinked": "卡片已解绑",
+  "GoToPayments": "前往付款",
+  "GoToService": "前往服务",
+  "LinkNewCard": "关联新卡，请点击此链接。",
+  "PartialPaymentDescription": "之后，我们将在每个结算周期的常规结算日收取全额费用。",
+  "PartialPaymentNoDate": "今天，只需支付所选金额{{storageUnit}}，即可享受结算日期剩余天数的服务。",
+  "PartialPaymentWithDate": "今天，只需支付所选金额{{storageUnit}}，即可获得结算日期（{{startDate}} 至 {{endDate}}）剩余天数的服务。",
+  "TopUpToReactivateStorage": "要重新激活您的订阅，请通过服务为您的钱包充值。付款完成后，您的额外存储空间将再次可用。",
+  "ServiceManagementUnavailable": "宽限期内部分功能受限，服务不收取费用。恢复完整功能，请升级至{{planName}}套餐。",
+  "PerStorageWitnMinValue": "{{currency}} {{amount}}/月 <1>(最低 {{minValue}} {{storageUnit}})</1>",
+  "PreviousPlan": "<1>之前的套餐：</1> {{amount}} <2>({{price}}/月)</2>",
+  "RecommendedTopUpAmount": "建议充值金额：{{amount}}",
+  "Reminder": "提醒：",
+  "StorageRestrictions": "如果不执行任何操作，上传、创建和编辑文件及文件夹将受到限制，直到您释放空间为止。",
+  "StorageTariffDeactivated": "由于未付款，您的额外存储空间订阅已被停用。",
+  "TopUpTakeSomeTimeToComplete": "充值可能需要一段时间才能完成",
+  "WalletToppedUp": "钱包充值成功"
 }

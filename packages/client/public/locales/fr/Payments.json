@@ -144,5 +144,7 @@
   "YouHaveNotAddedAnyPayment": "Vous n'avez ajouté aucun paiement",
   "YourCurrentPayment": "Votre paiement actuel",
   "YourCurrentPlan": "<1>Votre plan actuel :</1> {{amount}} <2>({{price}}/mois)</2>",
-  "YourPrice": "Votre prix"
+  "YourPrice": "Votre prix",
+  "RecommendedTopUpAmount": "Montant recommandé pour le rechargement : {{amount}}",
+  "TopUpTakeSomeTimeToComplete": "Le rechargement peut prendre un certain temps"
 }

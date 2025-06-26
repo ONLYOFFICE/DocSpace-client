@@ -144,5 +144,7 @@
   "YouHaveNotAddedAnyPayment": "ທ່ານຍັງບໍ່ໄດ້ເພີ່ມການຈ່າຍເງິນໃດໆ",
   "YourCurrentPayment": "ການຈ່າຍເງິນຂອງທ່ານໃນປັດຈຸບັນ",
   "YourCurrentPlan": "<1>ແຜນການປັດຈຸບັນຂອງທ່ານ:</1> {{amount}} <2>({{price}}/ເດືອນ)</2>",
-  "YourPrice": "ລາຄາຂອງເຈົ້າ"
+  "YourPrice": "ລາຄາຂອງເຈົ້າ",
+  "RecommendedTopUpAmount": "ຈຳນວນການເຕີມເງິນທີ່ແນະນຳ: {{amount}}",
+  "TopUpTakeSomeTimeToComplete": "ການຕື່ມເງິນອາດຈະໃຊ້ເວລາຄາວໜຶ່ງເພື່ອໃຫ້ສຳເລັດ"
 }

@@ -144,5 +144,7 @@
   "YouHaveNotAddedAnyPayment": "Դուք որևէ վճարում չեք ավելացրել",
   "YourCurrentPayment": "Ձեր ընթացիկ վճարումը",
   "YourCurrentPlan": "<1>Ձեր ներկայիս սակագինը՝</1> {{amount}} <2>({{price}}/ամիս)</2>",
-  "YourPrice": "Ձեր գինը"
+  "YourPrice": "Ձեր գինը",
+  "TopUpTakeSomeTimeToComplete": "Լիցքավորումը կարող է որոշ ժամանակ պահանջել։",
+  "RecommendedTopUpAmount": "Առաջարկվող լիցքավորման գումար՝ {{amount}}"
 }

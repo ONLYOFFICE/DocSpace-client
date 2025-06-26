@@ -144,5 +144,7 @@
   "YouHaveNotAddedAnyPayment": "Нисте додали ниједан начин плаћања",
   "YourCurrentPayment": "Ваш тренутни начин плаћања",
   "YourCurrentPlan": "<1>Ваш тренутни план:</1> {{amount}} <2>({{price}}/месечно)</2>",
-  "YourPrice": "Ваша цена"
+  "YourPrice": "Ваша цена",
+  "RecommendedTopUpAmount": "Препоручени износ за допуну: {{amount}}",
+  "TopUpTakeSomeTimeToComplete": "Допуна може потрајати неко време да се обради"
 }

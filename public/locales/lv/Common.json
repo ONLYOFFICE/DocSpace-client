@@ -721,5 +721,6 @@
   "Yes": "Jā",
   "Yesterday": "어제",
   "You": "Jūs",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "PublicAuthorizeToast": "Šis numurs ir atvērts <1>{{roomMode}}</1> režīmā. Ja jums ir konts šajā {{productName}}, lūdzu, autorizējieties."
 }

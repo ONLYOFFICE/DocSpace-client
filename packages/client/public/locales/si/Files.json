@@ -102,7 +102,7 @@
   "FinalizeVersion": "අවසාන අනුවාදය",
   "FolderRenamed": "'{{folderTitle}}' බහාලුම '{{newFoldedTitle}}' ලෙස නම් කර ඇත",
   "FolderSuccessfullyCreated": "ෆෝල්ඩරය <1>{{folderTitle}}</1> සාදා ගන්නා ලදී",
-  "GeneralLinkDeletedSuccessfully": "නව සාමාන්‍ය සබැඳිය සාර්ථකව සෑදිණි",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "නව සාමාන්‍ය සබැඳිය සාර්ථකව සෑදිණි",
   "GoToMyRooms": "කාමර වෙත යන්න",
   "GoToSection": "Pojdi v {{sectionName}}",
   "Index": "ඉන්ඩෙක්ස්",

@@ -144,5 +144,7 @@
   "YouHaveNotAddedAnyPayment": "لم تقم بإضافة أي دفعة",
   "YourCurrentPayment": "دفعتك الحالية",
   "YourCurrentPlan": "<1>خطة الاشتراك الحالية:</1> {{amount}} <2>({{price}}/الشهر)</2>",
-  "YourPrice": "سعرك"
+  "YourPrice": "سعرك",
+  "RecommendedTopUpAmount": "المبلغ الموصى به لإعادة الشحن: {{amount}}",
+  "TopUpTakeSomeTimeToComplete": "قد يستغرق التعبئة بعض الوقت حتى تكتمل"
 }

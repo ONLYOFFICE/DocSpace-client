@@ -44,7 +44,7 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
-
+import { getPortal } from "@docspace/shared/api/portal";
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
@@ -132,28 +132,43 @@ const DataManagementWrapper = (props) => {
   }, [location.pathname]);
 
   useEffect(() => {
-    const { socketSubscribers } = SocketHelper;
+    let isMounted = true;
+    let tenantId = null;
 
-    if (!socketSubscribers.has("backup")) {
-      if (!isManagement()) {
-        SocketHelper.emit(SocketCommands.Subscribe, {
-          roomParts: "backup",
-        });
-      }
+    const fetchPortal = async () => {
+      try {
+        const { socketSubscribers } = SocketHelper;
+        const res = await getPortal();
 
-      if (standalone && isManagement()) {
-        SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
-          roomParts: "backup",
-        });
+        if (!isMounted) return;
+
+        tenantId = res.tenantId;
+
+        if (!socketSubscribers.has(`${tenantId}-backup`) && !isManagement()) {
+          SocketHelper.emit(SocketCommands.Subscribe, {
+            roomParts: `${tenantId}-backup`,
+          });
+        }
+
+        if (!socketSubscribers.has("backup") && standalone && isManagement()) {
+          SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+            roomParts: "backup",
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch portal:", err);
       }
-    }
+    };
+
+    fetchPortal();
 
     return () => {
+      isMounted = false;
       SocketHelper.off(SocketEvents.BackupProgress);
 
-      if (!isManagement()) {
+      if (tenantId && !isManagement()) {
         SocketHelper.emit(SocketCommands.Unsubscribe, {
-          roomParts: "backup",
+          roomParts: `${tenantId}-backup`,
         });
       }
 

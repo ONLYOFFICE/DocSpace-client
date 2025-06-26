@@ -136,6 +136,20 @@ const AutoPayments = ({
     }
   }, []);
 
+  const validateMaxUpToBalance = (value: string, minimumBalance: string) => {
+    const numValue = parseInt(value, 10);
+    const minInputValue = minimumBalance ? parseInt(minimumBalance, 10) : 5;
+
+    const minValue = minInputValue + 1;
+
+    if (Number.isNaN(numValue) || numValue < minValue || numValue > 5000) {
+      setUpToBalanceError!(true);
+      return;
+    }
+
+    setUpToBalanceError!(false);
+  };
+
   const validateMinBalance = (value: string) => {
     const numValue = parseInt(value, 10);
 
@@ -146,19 +160,10 @@ const AutoPayments = ({
 
     setMinBalanceError!(false);
     setMinUpToBalance(numValue + 1);
-  };
 
-  const validateMaxUpToBalance = (value: string) => {
-    const numValue = parseInt(value, 10);
-    const minInputValue = minBalance ? parseInt(minBalance, 10) : 5;
-    const minValue = minInputValue + 1;
-
-    if (Number.isNaN(numValue) || numValue < minValue || numValue > 5000) {
-      setUpToBalanceError!(true);
-      return;
+    if (upToBalance) {
+      validateMaxUpToBalance(upToBalance, value);
     }
-
-    setUpToBalanceError!(false);
   };
 
   const onMinBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -176,7 +181,7 @@ const AutoPayments = ({
     if (!validity.valid) return;
 
     setUpToBalance!(value);
-    validateMaxUpToBalance(value);
+    validateMaxUpToBalance(value, minBalance!);
   };
 
   const onSave = async (isEnable: boolean = true) => {

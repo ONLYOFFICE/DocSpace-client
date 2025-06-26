@@ -29,7 +29,7 @@
 import React, { useEffect } from "react";
 import { Navigate, useLocation, useSearchParams } from "react-router";
 
-import FilesFilter from "@docspace/shared/api/files/filter";
+import FilesFilter from "../api/files/filter";
 import AppLoader from "../components/app-loader";
 
 import { TenantStatus } from "../enums";

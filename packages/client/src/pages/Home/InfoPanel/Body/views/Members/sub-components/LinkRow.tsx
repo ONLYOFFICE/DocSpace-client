@@ -27,6 +27,7 @@
 import moment from "moment";
 import { useState } from "react";
 import copy from "copy-to-clipboard";
+import type { TFunction } from "i18next";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -132,7 +133,7 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
-    copyRoomShareLink(link, t);
+    copyRoomShareLink(link, t as TFunction);
     onCloseContextMenu();
   };
 

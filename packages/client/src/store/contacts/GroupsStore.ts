@@ -135,7 +135,7 @@ class GroupsStore {
       const group = await api.groups.getGroupById(id, true);
 
       if (contactsTab !== "groups") {
-        if (this.currentGroup.id !== group.id) return;
+        if (this.currentGroup?.id !== group.id) return;
 
         this.currentGroup = group;
         return;
@@ -152,7 +152,7 @@ class GroupsStore {
       const { contactsTab } = this.peopleStore.usersStore;
 
       if (contactsTab !== "groups") {
-        if (this.currentGroup.id !== id) return;
+        if (this.currentGroup?.id !== id) return;
 
         window.DocSpace.navigate("/accounts/groups/filter");
         return;

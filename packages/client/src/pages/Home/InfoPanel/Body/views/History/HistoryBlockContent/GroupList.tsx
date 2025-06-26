@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
+import { TFunction } from "i18next";
 import { useNavigate } from "react-router";
 import { decode } from "he";
 import { inject, observer } from "mobx-react";
@@ -141,7 +142,7 @@ const HistoryGroupList = ({
           onClick={onExpand}
         >
           <Trans
-            t={t}
+            t={t as TFunction}
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: groupsData.length - EXPANSION_THRESHOLD }}

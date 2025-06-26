@@ -27,6 +27,7 @@
   --article-catalog-profile-border-top: 1px solid #{$gray-light-mid};
   --article-catalog-vertical-line: 1px solid #{$gray-light-mid};
   --article-catalog-profile-background: #{$light-gray-hover};
+  --back-button-text-color: #{$gray-text};
 
   --article-item-header-color: #{$gray};
   --article-item-header-bg-color: #{$gray-strong};
@@ -372,6 +373,7 @@
   --article-catalog-profile-border-top: 1px solid #{$gray-dark-strong};
   --article-catalog-vertical-line: 1px solid #{$gray-dark-strong};
   --article-catalog-profile-background: #{$light-dark-gray-hover};
+  --back-button-text-color: #{$white};
 
   --article-item-header-color: #{$gray-dark};
   --article-item-header-bg-color: #{$gray-dark-strong};
@@ -2221,9 +2223,6 @@
   --selector-empty-screen-button-color: #{$light-gray-dark};
   --selector-empty-screen-hover-button-color: #{$black};
   --selector-empty-screen-description-color: #{$gray-text};
-
-  --selector-navigation-lifetime-fill: #{$gray};
-  --selector-navigation-lifetime-stroke: #{$gray};
 }
 
 .dark {
@@ -2245,9 +2244,6 @@
   --selector-empty-screen-button-color: #{$dark-gray-dark};
   --selector-empty-screen-hover-button-color: #{$white};
   --selector-empty-screen-description-color: #{$dark-gray-dark};
-
-  --selector-navigation-lifetime-fill: #{$dark-gray-dark};
-  --selector-navigation-lifetime-stroke: #{$gray};
 }
 
 .light {

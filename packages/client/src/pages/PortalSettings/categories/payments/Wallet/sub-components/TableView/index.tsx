@@ -50,14 +50,17 @@ const TableView = ({
 }: TransactionHistoryProps) => {
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <div className={styles.transactionHistoryBody}>
-      <TableContainer forwardedRef={ref} useReactWindow={false}>
+      <TableContainer
+        forwardedRef={ref as React.RefObject<HTMLDivElement>}
+        useReactWindow={false}
+      >
         <TableHeader
           sectionWidth={sectionWidth}
-          containerRef={ref}
+          containerRef={ref as React.RefObject<HTMLDivElement>}
           columnStorageName={columnStorageName}
           columnInfoPanelStorageName={columnInfoPanelStorageName}
           itemHeight={48}

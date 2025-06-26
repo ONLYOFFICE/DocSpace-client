@@ -93,6 +93,8 @@ const HistoryItemList = ({
   const isExpandable = totalItems > EXPANSION_THRESHOLD;
   const [isExpanded, setIsExpanded] = useState(!isExpandable);
 
+  const location = useLocation();
+
   const isStartedFilling = actionType === FeedAction.StartedFilling;
   const isSubmitted = actionType === FeedAction.Submitted;
 
@@ -146,17 +148,20 @@ const HistoryItemList = ({
         openItemAction!({ ...res });
       });
 
-      const isMedia =
-        item?.accessibility?.ImageView || item?.accessibility?.MediaView;
-      if (isMedia) {
-        return window.open(
-          combineUrl(
-            window.ClientConfig?.proxy?.url,
-            config.homepage,
-            MEDIA_VIEW_URL,
-            item.id,
-          ),
-        );
+      if ("viewAccessibility" in item) {
+        const isMedia =
+          item?.viewAccessibility?.ImageView ||
+          item?.viewAccessibility?.MediaView;
+        if (isMedia) {
+          return window.open(
+            combineUrl(
+              window.ClientConfig?.proxy?.url,
+              config.homepage,
+              MEDIA_VIEW_URL,
+              item.id,
+            ),
+          );
+        }
       }
     } catch (e) {
       toastr.error(e as unknown as string);
@@ -181,7 +186,9 @@ const HistoryItemList = ({
 
               <div
                 className="item-wrapper"
-                onClick={() => handleOpenFile(item)}
+                onClick={() =>
+                  handleOpenFile(item as unknown as TFile | TFolder | TRoom)
+                }
               >
                 <ReactSVG
                   className="icon"
@@ -265,7 +272,7 @@ const HistoryItemList = ({
           onClick={onExpand}
         >
           <Trans
-            t={t}
+            t={t as TFunction}
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: items.length - EXPANSION_THRESHOLD }}

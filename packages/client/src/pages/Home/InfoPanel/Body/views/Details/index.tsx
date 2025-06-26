@@ -224,7 +224,7 @@ const Details = ({
           })}
         >
           <img
-            src={`${"thumbnailUrl" in selection ? selection.thumbnailUrl : ""}&size=1280x720`}
+            src={`${selection.thumbnailUrl}&size=3840x2160`}
             alt="thumbnail-image"
             onError={onThumbnailError}
           />

@@ -727,10 +727,15 @@ class ContactsConextOptionsStore {
       },
     ];
 
-    !this.settingsStore.allowInvitingMembers &&
+    // Delete Invite
+    if (!this.settingsStore.allowInvitingMembers)
       accountsFullOptions.splice(0, 1);
 
-    return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
+    return isRoomAdmin
+      ? !this.settingsStore.allowInvitingMembers
+        ? []
+        : accountsUserOptions
+      : accountsFullOptions;
   };
 
   inviteUser = (userType: EmployeeType) => {

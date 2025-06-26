@@ -44,7 +44,7 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
-import { getPortal } from "@docspace/shared/api/portal";
+
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";

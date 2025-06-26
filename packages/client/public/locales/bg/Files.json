@@ -102,7 +102,7 @@
   "FinalizeVersion": "Финализираща версия",
   "FolderRenamed": "Папката '{{folderTitle}}' е преименувана на '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Папка <1>{{folderTitle}}</1> е създадена",
-  "GeneralLinkDeletedSuccessfully": "Нов главен линк създаден успешно",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Нов главен линк създаден успешно",
   "GoToMyRooms": "Отидете в стаи",
   "GoToSection": "Отиди до {{sectionName}}",
   "Index": "Индекс",

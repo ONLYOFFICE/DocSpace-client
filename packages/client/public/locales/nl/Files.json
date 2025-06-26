@@ -102,7 +102,7 @@
   "FinalizeVersion": "Versie afronden",
   "FolderRenamed": "De map '{{folderTitle}}' is hernoemd naar '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Map <1>{{folderTitle}}</1> aangemaakt",
-  "GeneralLinkDeletedSuccessfully": "Nieuwe algemene link succesvol aangemaakt",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Nieuwe algemene link succesvol aangemaakt",
   "GoToMyRooms": "Ga naar kamers",
   "GoToSection": "Ga naar {{sectionName}}",
   "Index": "Index",

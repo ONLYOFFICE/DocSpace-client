@@ -102,7 +102,7 @@
   "FinalizeVersion": "Finalizar versão",
   "FolderRenamed": "A pasta '{{folderTitle}}' é renomeada para '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Pasta <1>{{folderTitle}}</1> criada",
-  "GeneralLinkDeletedSuccessfully": "Novo link geral criado com sucesso",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Novo link geral criado com sucesso",
   "GoToMyRooms": "Ir para As Minhas Salas",
   "GoToSection": "Ir para {{sectionName}}",
   "Index": "Índice",

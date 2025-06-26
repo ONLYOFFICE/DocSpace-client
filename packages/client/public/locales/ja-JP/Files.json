@@ -102,7 +102,7 @@
   "FinalizeVersion": "最終版",
   "FolderRenamed": "フォルダ'{{folderTitle}}'の名前が'{{newFoldedTitle}}'に変更されます。'",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1>フォルダが作成された",
-  "GeneralLinkDeletedSuccessfully": "新しい一般リンクが正常に作成されました",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "新しい一般リンクが正常に作成されました",
   "GoToMyRooms": "「ルーム」へ",
   "GoToSection": "{{sectionName}} に移動",
   "Index": "インデックス",

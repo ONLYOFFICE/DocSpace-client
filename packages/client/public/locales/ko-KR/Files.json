@@ -102,7 +102,7 @@
   "FinalizeVersion": "Finalize version",
   "FolderRenamed": "'{{folderTitle}}' 폴더 이름이 '{{newFoldedTitle}}'으로 변경되었습니다",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1> 폴더가 생성되었습니다",
-  "GeneralLinkDeletedSuccessfully": "새로운 일반 링크가 생성되었습니다",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "새로운 일반 링크가 생성되었습니다",
   "GoToMyRooms": "내 방으로 이동",
   "GoToSection": "{{sectionName}}(으)로 이동",
   "Index": "인덱스",

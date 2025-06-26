@@ -135,6 +135,7 @@ const TopUpModal = (props: TopUpModalProps) => {
             walletCustomerEmail={walletCustomerEmail}
             setIsLoading={setIsLoading}
             isLoading={isLoading}
+            walletCustomerStatusNotActive={walletCustomerStatusNotActive}
           />
         </ModalDialog.Footer>
       </ModalDialog>

@@ -210,7 +210,7 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl || ""}
-          tooltipContent={tooltipContent}
+          tooltipContent={tooltipContent ?? undefined}
           hoverSrc={
             isRoom &&
             "EditRoom" in selection.security &&

@@ -250,7 +250,7 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl ?? undefined}
-            tooltipContent={tooltipContent}
+            tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             withEditing={"isRoom" in selection ? selection.isRoom : false}
           />

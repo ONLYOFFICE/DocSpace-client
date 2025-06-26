@@ -95,7 +95,7 @@ export function getRoomInfo(id) {
 export async function getRoomMembers(
   id: string | number,
   filter: {
-    filterType: number;
+    filterType?: number;
     filterValue?: string;
     count?: number;
     startIndex?: number;

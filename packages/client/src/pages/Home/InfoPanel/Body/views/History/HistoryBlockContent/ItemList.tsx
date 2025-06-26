@@ -29,6 +29,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
+import { TFunction } from "i18next";
 
 import {
   FeedAction,
@@ -93,8 +94,6 @@ const HistoryItemList = ({
   const isExpandable = totalItems > EXPANSION_THRESHOLD;
   const [isExpanded, setIsExpanded] = useState(!isExpandable);
 
-  const location = useLocation();
-
   const isStartedFilling = actionType === FeedAction.StartedFilling;
   const isSubmitted = actionType === FeedAction.Submitted;
 
@@ -150,8 +149,8 @@ const HistoryItemList = ({
 
       if ("viewAccessibility" in item) {
         const isMedia =
-          item?.viewAccessibility?.ImageView ||
-          item?.viewAccessibility?.MediaView;
+          (item?.viewAccessibility as { ImageView: boolean })?.ImageView ||
+          (item?.viewAccessibility as { MediaView: boolean })?.MediaView;
         if (isMedia) {
           return window.open(
             combineUrl(
@@ -186,9 +185,7 @@ const HistoryItemList = ({
 
               <div
                 className="item-wrapper"
-                onClick={() =>
-                  handleOpenFile(item as unknown as TFile | TFolder | TRoom)
-                }
+                onClick={() => handleOpenFile(item)}
               >
                 <ReactSVG
                   className="icon"

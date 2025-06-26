@@ -40,6 +40,7 @@ import { updatePayment } from "@docspace/shared/api/portal";
 import { Text } from "@docspace/shared/components/text";
 
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
+import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";
 
 const StyledBody = styled.div`
   button {
@@ -76,8 +77,11 @@ const UpdatePlanButtonContainer = ({
   tariffPlanTitle,
   totalPrice,
   formatPaymentCurrency,
+  canDowngradeTariff,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisiblePaymentConfirm, setIsVisiblePaymentConfirm] = useState(false);
+  const [isVisibleDowngradePlanDialog, setIsVisibleDowngradePlanDialog] =
+    useState(false);
 
   const resetIntervalSuccess = () => {
     intervalId &&
@@ -132,14 +136,14 @@ const UpdatePlanButtonContainer = ({
     }, 2000);
   };
   const onClose = () => {
-    setIsVisible(false);
+    setIsVisiblePaymentConfirm(false);
   };
 
   const onUpdateTariff = async () => {
     try {
       setIsLoading(true);
 
-      if (isVisible) onClose();
+      if (isVisiblePaymentConfirm) onClose();
 
       const res = await updatePayment(managersCount, isYearTariff);
 
@@ -171,6 +175,32 @@ const UpdatePlanButtonContainer = ({
       clearTimeout(timerId);
       timerId = null;
     }
+  };
+
+  const isPassedByQuota = () => {
+    return isAlreadyPaid ? canDowngradeTariff : canPayTariff;
+  };
+
+  const onDowngradeTariff = () => {
+    if (isPassedByQuota()) {
+      onUpdateTariff();
+      return;
+    }
+
+    setIsVisibleDowngradePlanDialog(true);
+  };
+
+  const onOpenPaymentDialog = () => {
+    if (isPassedByQuota()) {
+      setIsVisiblePaymentConfirm(true);
+      return;
+    }
+
+    setIsVisibleDowngradePlanDialog(true);
+  };
+
+  const onCloseDowngradePlanDialog = () => {
+    setIsVisibleDowngradePlanDialog(false);
   };
 
   useEffect(() => {
@@ -227,7 +257,7 @@ const UpdatePlanButtonContainer = ({
           size="medium"
           primary
           isDisabled={isLoading || isDisabled}
-          onClick={() => setIsVisible(true)}
+          onClick={onOpenPaymentDialog}
           isLoading={isLoading}
         />
       );
@@ -235,7 +265,7 @@ const UpdatePlanButtonContainer = ({
 
     return isDowngradePlan ? (
       <DowngradePlanButtonContainer
-        onUpdateTariff={onUpdateTariff}
+        onDowngradeTariff={onDowngradeTariff}
         isDisabled={isDisabled}
         buttonLabel={t("DowngradeNow")}
       />
@@ -253,15 +283,23 @@ const UpdatePlanButtonContainer = ({
       />
     );
   };
+
   return (
     <StyledBody>
       {isAlreadyPaid || cardLinkedOnFreeTariff
         ? updatingCurrentTariffButton()
         : payTariffButton()}
 
-      {isVisible ? (
+      {isVisibleDowngradePlanDialog ? (
+        <ChangePricingPlanDialog
+          visible={isVisibleDowngradePlanDialog}
+          onClose={onCloseDowngradePlanDialog}
+        />
+      ) : null}
+
+      {isVisiblePaymentConfirm ? (
         <ModalDialog
-          visible={isVisible}
+          visible={isVisiblePaymentConfirm}
           onClose={onClose}
           displayType={ModalDialogType.modal}
         >
@@ -354,6 +392,7 @@ export default inject(
       cardLinkedOnFreeTariff,
       totalPrice,
       formatPaymentCurrency,
+      canDowngradeTariff,
     } = paymentStore;
 
     return {
@@ -376,6 +415,7 @@ export default inject(
       tariffPlanTitle,
       formatPaymentCurrency,
       totalPrice,
+      canDowngradeTariff,
     };
   },
 )(observer(UpdatePlanButtonContainer));

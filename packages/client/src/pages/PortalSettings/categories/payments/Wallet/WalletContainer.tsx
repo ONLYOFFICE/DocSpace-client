@@ -239,9 +239,9 @@ const Wallet = (props: WalletProps) => {
             {t("AddPaymentMethod")}
           </Link>
         </div>
-      ) : null}
-
-      <AutoPaymentInfo onOpen={onOpenLink} />
+      ) : (
+        <AutoPaymentInfo onOpen={onOpenLink} />
+      )}
 
       {visible ? (
         <TopUpModal

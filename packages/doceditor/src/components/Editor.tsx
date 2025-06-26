@@ -218,7 +218,7 @@ const Editor = ({
     }
   }
 
-  const url = window.location.href;
+  const url = typeof window !== "undefined" ? window.location.href : "";
 
   if (url.indexOf("anchor") !== -1) {
     const splitUrl = url.split("anchor=");

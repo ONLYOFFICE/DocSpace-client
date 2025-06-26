@@ -574,10 +574,10 @@ class PaymentStore {
       if (this.isAlreadyPaid || this.walletCustomerEmail) {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
-        }
 
-        if (this.walletCustomerStatusNotActive) {
-          requests.push(this.fetchCardLinked());
+          if (this.walletCustomerStatusNotActive) {
+            requests.push(this.fetchCardLinked());
+          }
         }
 
         requests.push(this.fetchAutoPayments(), this.fetchTransactionHistory());
@@ -642,7 +642,12 @@ class PaymentStore {
       await setPayerInfo(this.walletCustomerEmail);
 
     if (this.isAlreadyPaid || this.walletCustomerEmail) {
-      if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());
+      if (this.isStripePortalAvailable) {
+        requests.push(this.setPaymentAccount());
+        if (this.walletCustomerStatusNotActive) {
+          requests.push(this.fetchCardLinked());
+        }
+      }
     } else {
       requests.push(this.getBasicPaymentLink(addedManagersCount));
     }

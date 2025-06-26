@@ -78,6 +78,8 @@ const UpdatePlanButtonContainer = ({
   totalPrice,
   formatPaymentCurrency,
   canDowngradeTariff,
+  walletCustomerStatusNotActive,
+  cardLinked,
 }) => {
   const [isVisiblePaymentConfirm, setIsVisiblePaymentConfirm] = useState(false);
   const [isVisibleDowngradePlanDialog, setIsVisibleDowngradePlanDialog] =
@@ -139,6 +141,12 @@ const UpdatePlanButtonContainer = ({
     setIsVisiblePaymentConfirm(false);
   };
 
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_self")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
+
   const onUpdateTariff = async () => {
     try {
       setIsLoading(true);
@@ -170,7 +178,24 @@ const UpdatePlanButtonContainer = ({
         waitingForQuota();
       }
     } catch (e) {
-      toastr.error(t("ErrorNotification"));
+      const errorText =
+        cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (
+          <>
+            {t("CardUnlinked")} <br />
+            {t("LinkNewCard")} {"  "}
+            <a
+              onClick={goLinkCard}
+              fontWeight={600}
+              style={{ textDecoration: "underline" }}
+            >
+              {t("AddPaymentMethod")}
+            </a>
+          </>
+        ) : (
+          t("ErrorNotification")
+        );
+
+      toastr.error(errorText);
       setIsLoading(false);
       clearTimeout(timerId);
       timerId = null;
@@ -393,6 +418,8 @@ export default inject(
       totalPrice,
       formatPaymentCurrency,
       canDowngradeTariff,
+      walletCustomerStatusNotActive,
+      cardLinked,
     } = paymentStore;
 
     return {
@@ -416,6 +443,8 @@ export default inject(
       formatPaymentCurrency,
       totalPrice,
       canDowngradeTariff,
+      walletCustomerStatusNotActive,
+      cardLinked,
     };
   },
 )(observer(UpdatePlanButtonContainer));

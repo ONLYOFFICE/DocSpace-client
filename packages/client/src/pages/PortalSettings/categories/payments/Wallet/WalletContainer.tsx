@@ -182,7 +182,7 @@ const Wallet = (props: WalletProps) => {
   const goLinkCard = () => {
     cardLinked
       ? window.open(cardLinked, "_self")
-      : toastr.error(t("ErrorNotification"));
+      : toastr.error(t("Common:UnexpectedError"));
   };
 
   return (

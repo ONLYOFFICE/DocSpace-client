@@ -36,6 +36,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 import { Link } from "@docspace/shared/components/link";
+import { TColorScheme } from "@docspace/shared/themes";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
@@ -83,6 +84,8 @@ type WalletProps = {
   cardLinked?: string;
   isPayer?: boolean;
   payerEmail?: string;
+  walletHelpUrl?: string;
+  currentColorScheme?: TColorScheme;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -112,6 +115,8 @@ const Wallet = (props: WalletProps) => {
     cardLinked,
     isPayer,
     payerEmail,
+    walletHelpUrl,
+    currentColorScheme,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -190,6 +195,18 @@ const Wallet = (props: WalletProps) => {
       <Text className={styles.walletDescription}>
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
+
+      {walletHelpUrl ? (
+        <Link
+          textDecoration="underline"
+          fontWeight={600}
+          href={walletHelpUrl}
+          color={currentColorScheme.main?.accent}
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
+
       {isCardLinkedToPortal ? <PayerInformation /> : null}
 
       <div className={styles.balanceWrapper}>
@@ -312,7 +329,8 @@ export default inject(
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, walletHelpUrl, currentColorScheme } =
+      settingsStore;
 
     const isMobile = currentDeviceType === DeviceType.mobile;
     return {
@@ -333,6 +351,8 @@ export default inject(
       isMobile,
       walletCustomerStatusNotActive,
       payerEmail: isPayerExist,
+      walletHelpUrl,
+      currentColorScheme,
     };
   },
 )(observer(Wallet));

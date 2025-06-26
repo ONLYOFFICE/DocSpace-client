@@ -44,7 +44,7 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
-import { getPortal } from "@docspace/shared/api/portal";
+
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
@@ -132,43 +132,28 @@ const DataManagementWrapper = (props) => {
   }, [location.pathname]);
 
   useEffect(() => {
-    let isMounted = true;
-    let tenantId = null;
+    const { socketSubscribers } = SocketHelper;
 
-    const fetchPortal = async () => {
-      try {
-        const { socketSubscribers } = SocketHelper;
-        const res = await getPortal();
-
-        if (!isMounted) return;
-
-        tenantId = res.tenantId;
-
-        if (!socketSubscribers.has(`${tenantId}-backup`) && !isManagement()) {
-          SocketHelper.emit(SocketCommands.Subscribe, {
-            roomParts: `${tenantId}-backup`,
-          });
-        }
-
-        if (!socketSubscribers.has("backup") && standalone && isManagement()) {
-          SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
-            roomParts: "backup",
-          });
-        }
-      } catch (err) {
-        console.error("Failed to fetch portal:", err);
+    if (!socketSubscribers.has("backup")) {
+      if (!isManagement()) {
+        SocketHelper.emit(SocketCommands.Subscribe, {
+          roomParts: "backup",
+        });
       }
-    };
 
-    fetchPortal();
+      if (standalone && isManagement()) {
+        SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
+    }
 
     return () => {
-      isMounted = false;
       SocketHelper.off(SocketEvents.BackupProgress);
 
-      if (tenantId && !isManagement()) {
+      if (!isManagement()) {
         SocketHelper.emit(SocketCommands.Unsubscribe, {
-          roomParts: `${tenantId}-backup`,
+          roomParts: "backup",
         });
       }
 
@@ -179,7 +164,6 @@ const DataManagementWrapper = (props) => {
       }
     };
   }, []);
-
   const onSelect = (e) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`

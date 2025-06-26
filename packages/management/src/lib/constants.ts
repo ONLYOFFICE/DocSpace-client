@@ -64,4 +64,3 @@ export const initBackupSelectedState = {
   enableSchedule: false,
   formSettings: {},
 } satisfies BackupSelectedStateType;
-

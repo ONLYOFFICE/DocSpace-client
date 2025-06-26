@@ -295,7 +295,7 @@ class PaymentStore {
 
     this.setIsUpdatingBasicSettings(true);
 
-    const requests = [fetchPortalTariff()];
+    const requests: unknown[] = [fetchPortalTariff()];
 
     if (this.isAlreadyPaid || this.walletCustomerEmail) {
       if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());
@@ -365,7 +365,7 @@ class PaymentStore {
   }
 
   get cardLinkedOnNonProfit() {
-    if (!this.currentQuotaStore.isNonProfit) return false;
+    if (!this.currentQuotaStore?.isNonProfit) return false;
 
     if (!this.walletCustomerEmail) return false;
 
@@ -396,15 +396,19 @@ class PaymentStore {
     console.log("fetchMoreTransactionHistory");
   };
 
+  formatDate = (date: moment.Moment) => {
+    return date.clone().locale("en").format("YYYY-MM-DDTHH:mm:ss");
+  };
+
   fetchTransactionHistory = async (
-    startDate = this.getStartTransactionDate(),
-    endDate = this.getEndTransactionDate(),
+    startDate = moment().subtract(4, "weeks"),
+    endDate = moment(),
     credit = true,
     withdrawal = true,
   ) => {
     const res = await getTransactionHistory(
-      startDate,
-      endDate,
+      this.formatDate(startDate),
+      this.formatDate(endDate),
       credit,
       withdrawal,
     );
@@ -437,8 +441,10 @@ class PaymentStore {
     this.walletPayer = res;
   };
 
-  fetchCardLinked = async () => {
-    const res = await getCardLinked(`${window.location.href}?complete=true`);
+  fetchCardLinked = async (url?: string) => {
+    const backUrl = url || `${window.location.href}?complete=true`;
+
+    const res = await getCardLinked(backUrl);
 
     if (!res) return;
 
@@ -464,12 +470,12 @@ class PaymentStore {
     }
   };
 
-  setVisibleWalletSetting = (isVisibleWalletSettings) => {
+  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
-  initWalletPayerAndBalance = async (isRefresh) => {
-    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
+  initWalletPayerAndBalance = async (isRefresh: boolean) => {
+    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore!;
 
     await Promise.all([
       this.fetchWalletPayer(isRefresh),
@@ -808,11 +814,14 @@ class PaymentStore {
     const { stepAddingQuotaManagers, stepAddingQuotaTotalSize } =
       this.paymentQuotasStore;
 
-    if (stepAddingQuotaManagers)
+    if (stepAddingQuotaManagers && typeof stepAddingQuotaManagers === "number")
       this.stepByQuotaForManager = stepAddingQuotaManagers;
     this.minAvailableManagersValue = this.stepByQuotaForManager;
 
-    if (stepAddingQuotaTotalSize)
+    if (
+      stepAddingQuotaTotalSize &&
+      typeof stepAddingQuotaTotalSize === "number"
+    )
       this.stepByQuotaForTotalSize = stepAddingQuotaTotalSize;
     this.minAvailableTotalSizeValue = this.stepByQuotaForManager;
   };
@@ -821,7 +830,7 @@ class PaymentStore {
     email: string,
     userName: string,
     message: string,
-    t,
+    t: TTranslation,
   ) => {
     try {
       await api.portal.sendPaymentRequest(email, userName, message);

@@ -219,7 +219,7 @@ class PeopleTableHeader extends React.Component<
       filter,
       sectionWidth,
       infoPanelVisible,
-      tableStorageName,
+
       columnStorageName,
       columnInfoPanelStorageName,
       setHideColumns,
@@ -235,7 +235,6 @@ class PeopleTableHeader extends React.Component<
         // fix types for table header and remove this
         containerRef={containerRef as unknown as { current: HTMLDivElement }}
         columns={columns as TTableColumn[]}
-        tableStorageName={tableStorageName!}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}
         sectionWidth={sectionWidth}

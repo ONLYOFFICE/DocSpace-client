@@ -83,4 +83,3 @@ export const StyledHeading = styled.div`
   gap: 12px;
   align-items: center;
 `;
-

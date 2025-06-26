@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ShareSkeleton from "./index";
 
 export default {
@@ -9,7 +9,7 @@ export default {
 
 const mockT = (key: string) => key;
 
-const Template: Story = (args) => <ShareSkeleton t={mockT} {...args} />;
+const Template: StoryFn = (args) => <ShareSkeleton t={mockT} {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

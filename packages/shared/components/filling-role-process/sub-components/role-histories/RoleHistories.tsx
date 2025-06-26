@@ -26,9 +26,9 @@
 
 import { decode } from "he";
 import { DateTime } from "luxon";
-import classNames from "classnames";
 import React, { useMemo } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { classNames } from "../../../../utils";
 
 import styles from "./RoleHistories.module.scss";
 import type { RoleHistoryProps } from "./RoleHistories.types";
@@ -75,7 +75,7 @@ const RoleHistories = ({
         const text = historyTexts[key];
 
         return (
-          <li aria-label={text} key={value} className={styles.roleHistoryItem}>
+          <li key={value} className={styles.roleHistoryItem}>
             <span className={styles.action}>{text}</span>
             <time className={styles.date} dateTime={value}>
               {date}

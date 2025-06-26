@@ -27,8 +27,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
+import { Text } from "../../../components/text";
+import { PaymentsStandaloneLoader } from "../../../skeletons/payments";
 
 import { BenefitsContainer } from "../Standalone/BenefitsContainer";
 import { ContactContainer } from "./ContactContainer";

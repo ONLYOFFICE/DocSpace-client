@@ -62,6 +62,7 @@ export type TBasePaymentFeature = {
 
 export type TStringPaymentFeature = TBasePaymentFeature & {
   title: string;
+  value?: number;
 };
 
 export type TNumericPaymentFeature = TBasePaymentFeature & {

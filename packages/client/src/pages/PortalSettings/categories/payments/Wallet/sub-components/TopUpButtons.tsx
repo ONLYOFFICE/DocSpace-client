@@ -61,14 +61,15 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
 
       const res = await saveDeposite(+amount, currency);
 
-      if (!res) return;
-      if (!res.includes("ok")) throw new Error(res);
+      if (!res) {
+        throw new Error(t("Common:UnexpectedError"));
+      }
 
       await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);
 
       onClose();
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as unknown as string);
     } finally {
       setIsLoading(false);
     }

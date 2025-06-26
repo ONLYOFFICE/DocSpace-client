@@ -32,6 +32,7 @@ import { TEditHistory } from "@docspace/shared/api/files/types";
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TFormRole } from "@/types";
+import { toastr } from "@docspace/shared/components/toast";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -53,21 +54,25 @@ export const getBackUrl = (
     backUrl = `/rooms/archived/${folderId}/filter?folder=${folderId}`;
   } else if (rootFolderType === FolderType.RoomTemplates) {
     backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}&searchArea=${RoomSearchArea.Templates}`;
+  } else if (
+    rootFolderType === FolderType.SHARE ||
+    rootFolderType === FolderType.Recent
+  ) {
+    backUrl = `/rooms/personal/filter?folder=recent`;
   } else {
-    if (
-      rootFolderType === FolderType.SHARE ||
-      rootFolderType === FolderType.Recent
-    ) {
-      backUrl = `/rooms/personal/filter?folder=recent`;
-    } else {
-      backUrl = `/rooms/personal/filter?folder=${folderId}`;
-    }
+    backUrl = `/rooms/personal/filter?folder=${folderId}`;
   }
 
   // const origin = url.substring(0, url.indexOf("/doceditor"));
   const origin = window.location.origin;
 
   return `${combineUrl(origin, backUrl)}`;
+};
+
+export const convertDocumentUrl = async (fileId: number | string) => {
+  const conversionInfo = await convertFile(fileId, null, null, true);
+
+  return conversionInfo && conversionInfo[0]?.result;
 };
 
 export const showDocEditorMessage = async (
@@ -80,14 +85,8 @@ export const showDocEditorMessage = async (
   if (result) {
     const newUrl = `${result.webUrl}#message/${splitUrl[1]}`;
 
-    history.pushState({}, "", newUrl);
+    window.history.pushState({}, "", newUrl);
   }
-};
-
-export const convertDocumentUrl = async (fileId: number | string) => {
-  const conversionInfo = await convertFile(fileId, null, null, true);
-
-  return conversionInfo && conversionInfo[0]?.result;
 };
 
 export const getDataSaveAs = async (params: string) => {
@@ -101,7 +100,15 @@ export const getDataSaveAs = async (params: string) => {
 
     return data as string;
   } catch (e) {
-    console.error("error");
+    let errorMessage = "";
+
+    if (typeof e === "object") {
+      errorMessage = (
+        e as { response: { data: { error: { message: string } } } }
+      )?.response?.data?.error?.message;
+    }
+
+    toastr.error(errorMessage);
   }
 };
 
@@ -115,7 +122,7 @@ export const saveAs = <T = string>(
   const options = {
     action,
     fileuri: url,
-    title: title,
+    title,
     folderid: folderId,
     response: openNewTab ? null : "message",
   };
@@ -123,18 +130,17 @@ export const saveAs = <T = string>(
   const params = toUrlParams(options, true);
   if (!openNewTab) {
     return getDataSaveAs(params) as Promise<T>;
-  } else {
-    const handlerUrl = combineUrl(
-      window.ClientConfig?.proxy?.url,
-
-      window["AscDesktopEditor"] !== undefined //FIX Save as with open new tab on DesktopEditors
-        ? "/Products/Files/HttpHandlers/"
-        : "",
-      `/filehandler.ashx?${params}`,
-    );
-
-    window.open(handlerUrl, "_blank");
   }
+  const handlerUrl = combineUrl(
+    window.ClientConfig?.proxy?.url,
+
+    window.AscDesktopEditor !== undefined // FIX Save as with open new tab on DesktopEditors
+      ? "/Products/Files/HttpHandlers/"
+      : "",
+    `/filehandler.ashx?${params}`,
+  );
+
+  window.open(handlerUrl, "_blank");
 };
 
 export const constructTitle = (
@@ -150,23 +156,21 @@ export const constructTitle = (
 export const checkIfFirstSymbolInStringIsRtl = (str: string | null) => {
   if (!str) return;
 
-  const rtlRegexp = new RegExp(
-    /[\u04c7-\u0591\u05D0-\u05EA\u05F0-\u05F4\u0600-\u06FF]/,
-  );
+  const rtlRegexp = /[\u04c7-\u0591\u05D0-\u05EA\u05F0-\u05F4\u0600-\u06FF]/;
 
   return rtlRegexp.test(str[0]);
 };
 
 export const setDocumentTitle = (
   t: TTranslation,
-  subTitle: string | null = null,
+  subTitle: string | null,
   fileType: string,
   documentReady: boolean,
   successAuth: boolean,
   organizationName: string,
   callback?: (value: string) => void,
 ) => {
-  const moduleTitle = "Documents"; //TODO: Replace to API variant
+  const moduleTitle = "Documents"; // TODO: Replace to API variant
 
   let newSubTitle = subTitle;
 

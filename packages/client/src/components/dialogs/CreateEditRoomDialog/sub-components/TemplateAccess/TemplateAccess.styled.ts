@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-export const TemplateAccess = styled.div`
+export const TemplateAccess = styled.div.attrs(injectDefaultTheme)`
   .template-access_description {
     margin-bottom: 8px;
   }
@@ -83,5 +83,3 @@ export const TemplateAccess = styled.div`
     }
   }
 `;
-
-TemplateAccess.defaultProps = { theme: Base };

@@ -63,6 +63,14 @@ class ServicesStore {
 
   isInitServicesPage = false;
 
+  isVisibleWalletSettings = false;
+
+  partialUpgradeFee: number = 0;
+
+  reccomendedAmount: number = 0;
+
+  featureCountData: number = 0;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -100,6 +108,14 @@ class ServicesStore {
     return this.servicesQuotas?.price.value ?? 0;
   }
 
+  setPartialUpgradeFee = (partialUpgradeFee: number) => {
+    this.partialUpgradeFee = partialUpgradeFee;
+  };
+
+  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
+    this.isVisibleWalletSettings = isVisibleWalletSettings;
+  };
+
   setIsInitServicesPage = (isInitServicesPage: boolean) => {
     this.isInitServicesPage = isInitServicesPage;
   };
@@ -109,25 +125,21 @@ class ServicesStore {
 
     if (!res) return;
 
-    const { hasStorageSubscription, hasScheduledStorageChange } =
-      this.currentTariffStatusStore;
-
     res[0].features.forEach((feature) => {
-      if (feature.id === TOTAL_SIZE) {
-        const enhancedFeature = feature as TPaymentFeature & {
-          enabled: boolean;
-          cancellation: boolean;
-        };
-        enhancedFeature.enabled = hasStorageSubscription;
-        enhancedFeature.cancellation = hasScheduledStorageChange;
-      }
-
       this.servicesQuotasFeatures.set(feature.id, feature);
     });
 
     this.servicesQuotas = res[0];
 
     return res;
+  };
+
+  setReccomendedAmount = (amount: number) => {
+    this.reccomendedAmount = amount;
+  };
+
+  setFeatureCountData = (featureCountData: number) => {
+    this.featureCountData = featureCountData;
   };
 
   servicesInit = async (t: TTranslation) => {
@@ -139,7 +151,7 @@ class ServicesStore {
       setPaymentAccount,
       isAlreadyPaid,
       initWalletPayerAndBalance,
-    } = this.paymentStore;
+    } = this.paymentStore!;
 
     const requests = [
       this.handleServicesQuotas(),
@@ -153,8 +165,8 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid || this.paymentStore.walletCustomerEmail) {
-        if (this.paymentStore.isStripePortalAvailable)
+      if (isAlreadyPaid || this.paymentStore!.walletCustomerEmail) {
+        if (this.paymentStore!.isStripePortalAvailable)
           requests.push(setPaymentAccount());
         requests.push(fetchAutoPayments());
       } else {
@@ -162,6 +174,29 @@ class ServicesStore {
       }
 
       this.setIsInitServicesPage(true);
+      if (isRefresh) {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+
+        const amountParam = params.get("amount");
+        const recommendedAmountParam = params.get("recommendedAmount");
+
+        if (amountParam && recommendedAmountParam) {
+          const amount = Number(amountParam);
+          const recommendedAmount = Number(recommendedAmountParam);
+
+          this.setReccomendedAmount(Math.ceil(recommendedAmount));
+          this.setFeatureCountData(amount);
+        }
+
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname,
+        );
+
+        this.setVisibleWalletSetting(true);
+      }
     } catch (e) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(e);

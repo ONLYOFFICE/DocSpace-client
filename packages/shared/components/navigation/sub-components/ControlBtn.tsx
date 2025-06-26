@@ -79,6 +79,8 @@ const ControlButtons = ({
   guidAnimationVisible,
   setGuidAnimationVisible,
   isContextButtonVisible,
+
+  isPlusButtonVisible,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -179,7 +181,7 @@ const ControlButtons = ({
       data-is-frame={isFrame}
       data-show-title={showTitle}
     >
-      {renderPlusButton()}
+      {isPlusButtonVisible ? renderPlusButton() : null}
       {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}

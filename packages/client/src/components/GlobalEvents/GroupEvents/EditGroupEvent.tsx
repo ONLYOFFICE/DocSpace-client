@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TGroup } from "@docspace/shared/api/groups/types";
 import EditGroupDialog from "SRC_DIR/components/dialogs/CreateEditGroupDialog/EditGroupDialog";
 
 interface CreateGroupEventProps {
+  item: TGroup;
   visible: boolean;
   onClose: () => void;
 }

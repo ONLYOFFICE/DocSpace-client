@@ -60,7 +60,13 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   const dateFormat = `L ${moment.localeData().longDateFormat("LT")}`;
 
   const getServiceQuantity = (quantity: number, service: string) => {
-    switch (service) {
+    let serviceName = service;
+
+    if (service != null && service.includes("disk-storage")) {
+      serviceName = "disk-storage";
+    }
+
+    switch (serviceName) {
       case "disk-storage":
         return `${quantity} ${t("Common:Gigabyte")}`;
       default:
@@ -82,7 +88,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(transaction.quantity, transaction.service)}
+          {getServiceQuantity(transaction.quantity, transaction.service!)}
         </Text>
       </TableCell>
       <TableCell>

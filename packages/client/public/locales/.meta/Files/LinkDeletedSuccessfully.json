@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
       "line_number": 77,
-      "context": ".then((res) => {\n deleteExternalLink(res, newLink.sharedTo.id);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n toastr.success(t(\"Files:GeneralLinkDeletedSuccessfully\"));\n } else toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n return api.rooms\n .getRoomMembers(roomId, { filterType: 2 })",
+      "context": ".then((res) => {\n deleteExternalLink(res, newLink.sharedTo.id);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n toastr.success(t(\"Files:GeneralLinkRevokedAndCreatedSuccessfully\"));\n } else toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n return api.rooms\n .getRoomMembers(roomId, { filterType: 2 })",
       "module": "/packages/client"
     },
     {

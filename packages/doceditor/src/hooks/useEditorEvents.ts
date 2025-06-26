@@ -293,7 +293,7 @@ const useEditorEvents = ({
             ? "pptx"
             : documentType === "cell"
               ? "xlsx"
-              : "docxf";
+              : "pdf";
 
       let fileName = t("Common:NewDocument");
 
@@ -304,8 +304,8 @@ const useEditorEvents = ({
         case "pptx":
           fileName = t("Common:NewPresentation");
           break;
-        case "docxf":
-          fileName = t("Common:NewMasterForm");
+        case "pdf":
+          fileName = t("Common:NewPDFForm");
           break;
         default:
           break;
@@ -327,9 +327,17 @@ const useEditorEvents = ({
 
     createFile(fileInfo.folderId, defaultFileName ?? "")
       ?.then((newFile) => {
+        const searchQuery = new URLSearchParams({
+          fileId: newFile.id.toString(),
+        });
+
+        if (newFile.isForm && newFile.security.Edit) {
+          searchQuery.append("action", "edit");
+        }
+
         const newUrl = combineUrl(
           window.ClientConfig?.proxy?.url,
-          `/doceditor?fileId=${encodeURIComponent(newFile.id)}`,
+          `/doceditor?${searchQuery.toString()}`,
         );
         window.open(newUrl, openOnNewPage ? "_blank" : "_self");
       })

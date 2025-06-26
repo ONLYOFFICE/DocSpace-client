@@ -26,7 +26,8 @@
 
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
+
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
@@ -80,6 +81,8 @@ type WalletProps = {
   isMobile?: boolean;
   walletCustomerStatusNotActive?: boolean;
   cardLinked?: string;
+  isPayer?: boolean;
+  payerEmail?: string;
 };
 
 const typeClassMap: Record<string, string> = {
@@ -107,6 +110,8 @@ const Wallet = (props: WalletProps) => {
     isMobile,
     walletCustomerStatusNotActive,
     cardLinked,
+    isPayer,
+    payerEmail,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
@@ -228,16 +233,38 @@ const Wallet = (props: WalletProps) => {
             {t("CardUnlinked")}
           </Text>
           <Text as="span" className={styles.warningColor}>
-            {t("LinkNewCard")}
+            {isPayer ? (
+              t("LinkNewCard")
+            ) : (
+              <Trans
+                t={t}
+                i18nKey="LinkNewCardEmail"
+                values={{
+                  email: payerEmail,
+                }}
+                components={{
+                  1: (
+                    <Link
+                      textDecoration="underline"
+                      fontWeight="600"
+                      className="error_description_link"
+                      href={`mailto:${payerEmail}`}
+                    />
+                  ),
+                }}
+              />
+            )}
           </Text>{" "}
-          <Link
-            as="span"
-            onClick={goLinkCard}
-            fontWeight={600}
-            textDecoration="underline"
-          >
-            {t("AddPaymentMethod")}
-          </Link>
+          {isPayer ? (
+            <Link
+              as="span"
+              onClick={goLinkCard}
+              fontWeight={600}
+              textDecoration="underline"
+            >
+              {t("AddPaymentMethod")}
+            </Link>
+          ) : null}
         </div>
       ) : (
         <AutoPaymentInfo onOpen={onOpenLink} />
@@ -281,6 +308,7 @@ export default inject(
       setVisibleWalletSetting,
       isCardLinkedToPortal,
       walletCustomerStatusNotActive,
+      isPayerExist,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
@@ -304,6 +332,7 @@ export default inject(
       isNotPaidPeriod,
       isMobile,
       walletCustomerStatusNotActive,
+      payerEmail: isPayerExist,
     };
   },
 )(observer(Wallet));

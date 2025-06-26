@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "We recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "We recommend contacting the {{productName}} owner to choose a new Payer.",
   "LinkNewCard": "To link a new card, please follow this link.",
+  "LinkNewCardEmail": "To link a new card, please reach out to the payer <1>{{email}}</1>",
   "ManagerTypesDescription": "Admin account types and their privileges",
   "NewRoomWillExceedLimit": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "NewStorageImmidiatelyAvailable": "The new storage will be available immediately after payment.",

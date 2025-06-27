@@ -2352,7 +2352,7 @@ class ContextOptionsStore {
     const menuGroupsConfig = [
       {
         groupKey: "manage",
-        groupLabel: "Common:Manage",
+        groupLabel: t("Common:Manage"),
         groupIcon: SettingsReactSvgUrl,
         itemKeys: [
           [{ key: "edit-room" }, { key: "save-as-template" }],
@@ -2364,7 +2364,7 @@ class ContextOptionsStore {
       },
       {
         groupKey: "share",
-        groupLabel: "Common:Share",
+        groupLabel: t("Common:Share"),
         groupIcon: ShareReactSvgUrl,
         itemKeys: [
           "invite-users-to-room",

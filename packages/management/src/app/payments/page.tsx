@@ -47,9 +47,12 @@ async function Page() {
       getLicenseQuota(),
     ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  const baseUrl = await getBaseUrl();
+
+  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
+
   if (!settings || !quota || !portalTariff || !paymentSettings || !licenseQuota)
-    redirect(`${getBaseUrl()}/login`);
+    redirect(`${baseUrl}/login`);
 
   const { logoText, externalResources } = settings;
   const { helpcenter } = externalResources;
@@ -61,7 +64,7 @@ async function Page() {
   const { salesEmail, buyUrl } = paymentSettings;
   const { license } = licenseQuota;
 
-  if (openSource) return redirect(`${getBaseUrl()}/error/403`);
+  if (openSource) return redirect(`${baseUrl}/error/403`);
 
   return (
     <PaymentsPage

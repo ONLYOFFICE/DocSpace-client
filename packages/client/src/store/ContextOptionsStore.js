@@ -2427,10 +2427,10 @@ class ContextOptionsStore {
     const menuGroups = [];
     let keysToRemove = [];
 
-    menuGroupsConfig.forEach((config) => {
+    menuGroupsConfig.forEach((configItem) => {
       const { group, keysToRemove: groupKeysToRemove } = this.createMenuGroup(
         newOptions,
-        config,
+        configItem,
         t,
       );
       if (group) {

@@ -47,6 +47,7 @@ import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
 import TopUpContainer from "./sub-components/TopUpContainer";
 import SelectionAmount from "./sub-components/SelectionAmount";
+import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -156,6 +157,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       toastr.success(t("StorageCapacityUpdated"));
       clearInterval(intervalRef.current);
       intervalRef.current = null;
+    }
+
+    if (localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== null) {
+      localStorage.removeItem(STORAGE_TARIFF_DEACTIVATED);
     }
 
     setIsLoading(false);

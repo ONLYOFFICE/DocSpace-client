@@ -3,7 +3,7 @@
   "content": "New in room",
   "content_en_sha1_hash": "345bcfe652a535d4a5764eb9e5e43036ffd0cf04",
   "created_at": "2025-05-19T21:30:55.889Z",
-  "updated_at": "2025-05-21T11:41:14.492Z",
+  "updated_at": "2025-06-26T19:00:18.130Z",
   "comment": {
     "text": "The translation key \"NewInRoom\" is used to display a label indicating that there are new files or content in a room. It appears as a header title within a modal dialog, specifically when the content is related to a room, and can be translated to various languages depending on the context (\"New in folder\" if not applicable).",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
-      "line_number": 217,
+      "line_number": 219,
       "context": "displayType={ModalDialogType.aside}\n withFooterBorder\n withBodyScroll\n >\n <ModalDialog.Header>\n {isRooms ? t(\"NewInRooms\") : isRoom ? t(\"NewInRoom\") : t(\"NewInFolder\")}\n </ModalDialog.Header>\n <ModalDialog.Body>{content}</ModalDialog.Body>\n <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>\n </ModalDialog>\n );",
       "module": "/packages/client"
     }

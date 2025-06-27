@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} për {{amount}}",
   "ProductNameWallet": "Portofoli {{productName}}",
   "Quantity": "Sasia",
+  "RecommendedTopUpAmount": "Sasia e rekomanduar për rimbushje: {{amount}}",
   "RemainingDays": "Ditët e mbetura të ciklit të faturimit: {{count}}",
   "Reminder": "Kujtesë:",
   "RenewSubscription": "Rinovoni abonimin në planin {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Ju keni mbushur me sukses portofolin tuaj.",
   "TopUp": "Mbusheni",
   "TopUpBalance": "Mbusheni bilancin",
+  "TopUpTakeSomeTimeToComplete": "Mbushja mund të zgjasë pak kohë për t'u përfunduar.",
   "TopUpToReactivateStorage": "Për të riaktivuar abonimin tuaj, ju lutem rimbushni portofolin tuaj përmes Shërbimeve. Kur pagesa të kryhet, ruajtja shtesë do të bëhet përsëri e disponueshme.",
   "TopUpWallet": "Mbushni portofolin",
   "Total": "Totali",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Nuk keni shtuar asnjë pagesë",
   "YourCurrentPayment": "Pagesa juaj aktuale",
   "YourCurrentPlan": "<1>Plani juaj aktual:</1> {{amount}} <2>({{price}}/muaj)</2>",
-  "YourPrice": "Çmimi juaj",
-  "RecommendedTopUpAmount": "Sasia e rekomanduar për rimbushje: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Mbushja mund të zgjasë pak kohë për t'u përfunduar."
+  "YourPrice": "Çmimi juaj"
 }

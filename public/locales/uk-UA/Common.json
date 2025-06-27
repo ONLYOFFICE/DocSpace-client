@@ -408,7 +408,6 @@
   "New": "Створити",
   "NewDocument": "Документ",
   "NewFolder": "Папку",
-  "NewMasterForm": "Шаблон форми",
   "NewPDFForm": "Нова форма PDF",
   "NewPresentation": "Презентація",
   "NewRoom": "Нова кімната",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Єдиний вхід",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Ця кімната відкрита в режимі <1>{{roomMode}}</1>. Якщо у вас є обліковий запис у {{productName}}, будь ласка, авторизуйтесь.",
   "PublicLink": "Публічне посилання",
   "PublicRoom": "Публічна кімната",
   "PublicRoomInfo": "Діліться документами для перегляду, редагування, коментування або рецензування без реєстрації. Ви також можете вбудувати цю кімнату в будь-який вебінтерфейс.",
@@ -721,6 +721,5 @@
   "Yes": "Так",
   "Yesterday": "Вчора",
   "You": "Ви",
-  "YourTurn": "Ваша черга",
-  "PublicAuthorizeToast": "Ця кімната відкрита в режимі <1>{{roomMode}}</1>. Якщо у вас є обліковий запис у {{productName}}, будь ласка, авторизуйтесь."
+  "YourTurn": "Ваша черга"
 }

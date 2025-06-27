@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}}당 {{amount}}",
   "ProductNameWallet": "{{productName}} 지갑",
   "Quantity": "수량",
+  "RecommendedTopUpAmount": "권장 충전 금액: {{amount}}",
   "RemainingDays": "청구 주기 남은 일수: {{count}}",
   "Reminder": "알림:",
   "RenewSubscription": "{{planName}} 요금제 구독 갱신",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "{{variables}}지갑 충전이 완료되었습니다.",
   "TopUp": "충전하기",
   "TopUpBalance": "잔액 충전",
+  "TopUpTakeSomeTimeToComplete": "충전 완료까지 시간이 다소 소요될 수 있습니다.",
   "TopUpToReactivateStorage": "구독을 다시 활성화하려면 Services를 통해 지갑에 충전해주세요. 결제가 완료되면 추가 저장 공간이 다시 사용 가능하게 됩니다.",
   "TopUpWallet": "지갑 충전하기",
   "Total": "총계",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "결제 정보를 추가하지 않으셨습니다.",
   "YourCurrentPayment": "현재 결제",
   "YourCurrentPlan": "<1>현재 요금제:</1> {{amount}} <2>({{price}}/월)</2>",
-  "YourPrice": "내 요금",
-  "RecommendedTopUpAmount": "권장 충전 금액: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "충전 완료까지 시간이 다소 소요될 수 있습니다."
+  "YourPrice": "내 요금"
 }

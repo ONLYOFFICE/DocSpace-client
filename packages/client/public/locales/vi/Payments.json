@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} mỗi {{amount}}",
   "ProductNameWallet": "Ví {{productName}}",
   "Quantity": "Số lượng",
+  "RecommendedTopUpAmount": "Số tiền nạp khuyến nghị: {{amount}}",
   "RemainingDays": "Những ngày còn lại của chu kỳ thanh toán: {{count}}",
   "Reminder": "Nhắc nhở:",
   "RenewSubscription": "Gia hạn gói dịch vụ {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Bạn đã nạp tiền thành công vào ví của mình.",
   "TopUp": "Nạp tiền",
   "TopUpBalance": "Nạp tiền vào tài khoản",
+  "TopUpTakeSomeTimeToComplete": "Việc nạp thêm có thể mất một chút thời gian để hoàn tất.",
   "TopUpToReactivateStorage": "Để kích hoạt lại đăng ký của bạn, vui lòng nạp tiền vào ví của bạn thông qua Services. Sau khi thanh toán hoàn tất, không gian lưu trữ bổ sung của bạn sẽ khả dụng trở lại.",
   "TopUpWallet": "Nạp tiền vào ví",
   "Total": "Tổng",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Bạn chưa thêm bất kỳ phương thức thanh toán nào.",
   "YourCurrentPayment": "Thanh toán hiện tại của bạn",
   "YourCurrentPlan": "<1>Gói cước hiện tại của bạn:</1> {{amount}} <2>({{price}}/tháng)</2>",
-  "YourPrice": "Phí thanh toán của bạn",
-  "RecommendedTopUpAmount": "Số tiền nạp khuyến nghị: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Việc nạp thêm có thể mất một chút thời gian để hoàn tất."
+  "YourPrice": "Phí thanh toán của bạn"
 }

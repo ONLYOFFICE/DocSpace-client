@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} za {{amount}}",
   "ProductNameWallet": "{{productName}} Portfel",
   "Quantity": "Ilość",
+  "RecommendedTopUpAmount": "Zalecana kwota doładowania: {{amount}}",
   "RemainingDays": "Pozostałe dni cyklu rozliczeniowego: {{count}}",
   "Reminder": "Przypomnienie:",
   "RenewSubscription": "Odnów subskrypcję planu {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Pomyślnie doładowano Twój portfel.",
   "TopUp": "Dopaść",
   "TopUpBalance": "Dopłata salda",
+  "TopUpTakeSomeTimeToComplete": "Uzupełnienie może zająć trochę czasu.",
   "TopUpToReactivateStorage": "Aby ponownie aktywować subskrypcję, doładuj swój portfel za pomocą Usług. Po dokonaniu płatności, dodatkowe miejsce na dane stanie się ponownie dostępne.",
   "TopUpWallet": "Dopłóż na portfel",
   "Total": "Całkowity",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Nie dodano jeszcze żadnej płatności.",
   "YourCurrentPayment": "Twoje aktualne płatności",
   "YourCurrentPlan": "<1>Twój aktualny plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
-  "YourPrice": "Twoja cena",
-  "RecommendedTopUpAmount": "Zalecana kwota doładowania: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Uzupełnienie może zająć trochę czasu."
+  "YourPrice": "Twoja cena"
 }

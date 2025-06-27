@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}}／{{amount}}",
   "ProductNameWallet": "{{productName}} ウォレット",
   "Quantity": "数量",
+  "RecommendedTopUpAmount": "推奨チャージ金額：{{amount}}",
   "RemainingDays": "請求サイクルの残り日数：{{count}}",
   "Reminder": "リマインダー：",
   "RenewSubscription": "{{planName}}プランの契約を更新する",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "ウォレットへのチャージが正常に完了しました。",
   "TopUp": "チャージ",
   "TopUpBalance": "チャージ金額",
+  "TopUpTakeSomeTimeToComplete": "チャージが完了するまでに時間がかかる場合があります",
   "TopUpToReactivateStorage": "購読を再開するには、Servicesを通じてウォレットにチャージアップしてください。お支払いが完了すると、追加ストレージが再度利用可能になります。",
   "TopUpWallet": "ウォレットのチャージ",
   "Total": "合計",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "お支払いは完了されていません",
   "YourCurrentPayment": "現在のお支払い",
   "YourCurrentPlan": "<1>現在のプラン：</1> {{amount}} <2>({{price}}/月)</2>",
-  "YourPrice": "価格",
-  "RecommendedTopUpAmount": "推奨チャージ金額：{{amount}}",
-  "TopUpTakeSomeTimeToComplete": "チャージが完了するまでに時間がかかる場合があります"
+  "YourPrice": "価格"
 }

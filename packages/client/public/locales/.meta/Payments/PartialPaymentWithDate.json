@@ -3,7 +3,7 @@
   "content": "Today, you're only paying for the selected amount of {{storageUnit}} for the remaining days until your billing date ({{startDate}} to {{endDate}}).",
   "content_en_sha1_hash": "a8e4956ca35dc7bdbe4ed44ed3e8ee229fba5f1f",
   "created_at": "2025-06-24T16:31:06.797Z",
-  "updated_at": "2025-06-24T16:32:07.293Z",
+  "updated_at": "2025-06-26T19:00:18.271Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a partial payment will be processed for a specific amount of storage until a certain date. The message appears in a UI component where users view their plan upgrades or settings, providing context about the billing period.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanUpgradePreview.tsx",
-      "line_number": 78,
+      "line_number": 88,
       "context": "return (\n <>\n <Text as=\"span\">\n {daysUntilStorageExpiry === 0\n ? t(\"PartialPaymentNoDate\")\n : t(\"PartialPaymentWithDate\", {\n startDate: moment().tz(window.timezone).format(\"LL\"),\n endDate: storageExpiryDate,\n })}\n </Text>{\" \"}\n <Text as=\"span\">{t(\"PartialPaymentDescription\")}</Text>",
       "module": "/packages/client"
     }

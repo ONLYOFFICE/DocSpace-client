@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} za {{amount}}",
   "ProductNameWallet": "{{productName}} Peněženka",
   "Quantity": "Množství",
+  "RecommendedTopUpAmount": "Doporučená výše doplnění: {{amount}}",
   "RemainingDays": "Zbývající dny účtovacího období: {{count}}",
   "Reminder": "Připomínka:",
   "RenewSubscription": "Obnovit předplatné tarifu {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Doplnili jste zůstatek na své peněžence.",
   "TopUp": "Doplatit",
   "TopUpBalance": "Doplnit zůstatek",
+  "TopUpTakeSomeTimeToComplete": "Doplnění může nějakou dobu trvat, než bude dokončeno.",
   "TopUpToReactivateStorage": "Pro opětovné aktivování předplatného, prosím, doplňte zůstatek na svém účtu přes Služby. Jakmile bude platba dokončena, vaše dodatečné úložiště bude zpět k dispozici.",
   "TopUpWallet": "Doplňit peněženku",
   "Total": "Celkem",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Nevložili jste žádnou platbu.",
   "YourCurrentPayment": "Vaše aktuální platba",
   "YourCurrentPlan": "<1>Váš aktuální tarif:</1> {{amount}} <2>({{price}}/měsíc)</2>",
-  "YourPrice": "Vaše cena",
-  "RecommendedTopUpAmount": "Doporučená výše doplnění: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Doplnění může nějakou dobu trvat, než bude dokončeno."
+  "YourPrice": "Vaše cena"
 }

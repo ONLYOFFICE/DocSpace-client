@@ -408,7 +408,6 @@
   "New": "Nový",
   "NewDocument": "Nový dokument",
   "NewFolder": "Nový priečinok",
-  "NewMasterForm": "Nová šablóna formulára",
   "NewPDFForm": "Nový PDF formulár",
   "NewPresentation": "Nová prezentácia",
   "NewRoom": "Nová miestnosť",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Single sign-on",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Táto miestnosť je otvorená v režime <1>{{roomMode}}</1>. Ak máte účet v tomto {{productName}}, prosím, autorizujte.",
   "PublicLink": "Verejný odkaz",
   "PublicRoom": "Verejná miestnosť",
   "PublicRoomInfo": "Zdieľajte dokumenty na prezeranie, úpravu, komentovanie alebo recenzovanie bez registrácie. Túto miestnosť môžete tiež vložiť do ľubovoľného webového rozhrania.",
@@ -721,6 +721,5 @@
   "Yes": "Áno",
   "Yesterday": "Včera",
   "You": "Vy",
-  "YourTurn": "Ste na rade",
-  "PublicAuthorizeToast": "Táto miestnosť je otvorená v režime <1>{{roomMode}}</1>. Ak máte účet v tomto {{productName}}, prosím, autorizujte."
+  "YourTurn": "Ste na rade"
 }

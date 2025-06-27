@@ -408,7 +408,6 @@
   "New": "Novo",
   "NewDocument": "Novo Documento",
   "NewFolder": "Nova pasta",
-  "NewMasterForm": "Novo modelo de formulário",
   "NewPDFForm": "Novo formulário PDF",
   "NewPresentation": "Nova apresentação",
   "NewRoom": "Nova sala",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Logon único",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Esta sala está aberta no modo <1>{{roomMode}}</1>. Se você possui uma conta neste {{productName}}, autorize.",
   "PublicLink": "Link público",
   "PublicRoom": "Sala pública",
   "PublicRoomInfo": "Compartilhe documentos para visualização, edição, comentários ou revisão sem registro. Você também pode incorporar essa sala em qualquer interface da Web.",
@@ -721,6 +721,5 @@
   "Yes": "Sim",
   "Yesterday": "Ontem",
   "You": "Você",
-  "YourTurn": "Sua vez",
-  "PublicAuthorizeToast": "Esta sala está aberta no modo <1>{{roomMode}}</1>. Se você possui uma conta neste {{productName}}, autorize."
+  "YourTurn": "Sua vez"
 }

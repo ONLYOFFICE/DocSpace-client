@@ -215,6 +215,7 @@ const useRoomsHelper = ({
       setIsFirstLoad(false);
     },
     [
+      searchArea,
       setIsNextPageLoading,
       withCreate,
       searchValue,

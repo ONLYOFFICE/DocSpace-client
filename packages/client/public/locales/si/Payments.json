@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} ක් {{amount}} ට",
   "ProductNameWallet": "{{productName}} සාචි",
   "Quantity": "ප්‍රමාණය",
+  "RecommendedTopUpAmount": "නිර්දේශිත පුරවන මුදල: {{amount}}",
   "RemainingDays": "ලිඛන චක්‍රයේ ඉතිරි දින: {{count}}",
   "Reminder": "සැලකිරීම:",
   "RenewSubscription": "{{planName}} සැලසුමට දායකත්‍වය අළුත් කරන්න",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "ඔබගේ සාචිපුරුද්ද සාර්ථකව ඉහළ දී ඇත.",
   "TopUp": "ඉහළ නැංවන්න",
   "TopUpBalance": "බාලන්ස් එක ඉහළට ගන්න",
+  "TopUpTakeSomeTimeToComplete": "ටොප්-අප් සම්පූර්ණ වීමට යම් කාලයක් ගතවනු ඇත.",
   "TopUpToReactivateStorage": "ඔබගේ දායකත්වය නැවත සක්‍රිය කිරීමට, කරුණාකර සේවා හරහා ඔබගේ මුදල් පසුම්බිය පුරවන්න. ගෙවීම සම්පූර්ණ වූ පසු, ඔබගේ අමතර ගබඩාව නැවත ලබා ගත හැකි වනු ඇත.",
   "TopUpWallet": "උප මුදල ගෙවන්න",
   "Total": "එකතුව",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "ඔබේ ගෙවීම් එකතු කර නැත.",
   "YourCurrentPayment": "ඔබේ දැනට පවතින ගෙවීම",
   "YourCurrentPlan": "<1>ඔබේ දැනට පවතින ගිවිසුම:</1> {{amount}} <2>({{price}}/මාසයක)</2>",
-  "YourPrice": "ඔබගේ මිල",
-  "RecommendedTopUpAmount": "නිර්දේශිත පුරවන මුදල: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "ටොප්-අප් සම්පූර්ණ වීමට යම් කාලයක් ගතවනු ඇත."
+  "YourPrice": "ඔබගේ මිල"
 }

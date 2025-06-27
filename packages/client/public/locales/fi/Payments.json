@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} per {{amount}}",
   "ProductNameWallet": "{{productName}} Lompakko",
   "Quantity": "Määrä",
+  "RecommendedTopUpAmount": "Suositeltu lisäättävä summa: {{amount}}",
   "RemainingDays": "Jäljellä olevat laskutusjakson päivät: {{count}}",
   "Reminder": "Muistutus:",
   "RenewSubscription": "Uusi tilaus {{planName}} ohjelmaan",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Olet onnistuneesti lisännyt saldoa lompakkoosi.",
   "TopUp": "Lisätä",
   "TopUpBalance": "Tasapainon lisääminen",
+  "TopUpTakeSomeTimeToComplete": "Lisäys voi kestää jonkin aikaa valmistua",
   "TopUpToReactivateStorage": "Jotta voit aktivoida tilauksesi uudelleen, lisää saldoasi Palvelut-osiossa. Kun maksu on valmis, lisäsäilytystilasi on jälleen käytettävissä.",
   "TopUpWallet": "Lataa lompakko",
   "Total": "Yhteensä",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPayment": "Nykyinen maksusi",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi",
-  "RecommendedTopUpAmount": "Suositeltu lisäättävä summa: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Lisäys voi kestää jonkin aikaa valmistua"
+  "YourPrice": "Hintasi"
 }

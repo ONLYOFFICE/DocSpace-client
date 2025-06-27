@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} ຕໍ່ {{amount}}",
   "ProductNameWallet": "ກະເງິນ {{productName}}",
   "Quantity": "ປະລິमाण",
+  "RecommendedTopUpAmount": "ຈຳນວນການເຕີມເງິນທີ່ແນະນຳ: {{amount}}",
   "RemainingDays": "ວັນທີ່ເຫຼືອຂອງໄລຍະການຄິດຄ່າບໍລິການ: {{count}}",
   "Reminder": "ເຕືອນໃຈ:",
   "RenewSubscription": "ຕໍ່ອາຍຸການສະໝັກໃຊ້ແຜນການ {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "ທ່ານເຕີມເງິນເຂົ້າໃນກະເປົ໋າຂອງທ່ານຢ່າງສໍາເລັດແລ້ວ។",
   "TopUp": "ເຕີມບັນຊີ",
   "TopUpBalance": "ເພີ່ມຍອດເງິນ",
+  "TopUpTakeSomeTimeToComplete": "ການຕື່ມເງິນອາດຈະໃຊ້ເວລາຄາວໜຶ່ງເພື່ອໃຫ້ສຳເລັດ",
   "TopUpToReactivateStorage": "ເພື່ອເປີດໃຊ້ການສະໝັກໃຊ້ຂອງທ່ານຄືນໃໝ່, ກະລຸນາຕື່ມເງິນໃສ່ກະເປົາເງິນຂອງທ່ານຜ່ານການບໍລິການ. ເມື່ອການຈ່າຍເງິນສຳເລັດແລ້ວ, ບ່ອນຈັດເກັບຂໍ້ມູນເພີ່ມເຕີມຂອງທ່ານຈະສາມາດໃຊ້ໄດ້ອີກຄັ້ງ.",
   "TopUpWallet": "ເຕີມເງິນເຂົ້າກະເປົາ້",
   "Total": "ລວມທັງ",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "ທ່ານຍັງບໍ່ໄດ້ເພີ່ມການຈ່າຍເງິນໃດໆ",
   "YourCurrentPayment": "ການຈ່າຍເງິນຂອງທ່ານໃນປັດຈຸບັນ",
   "YourCurrentPlan": "<1>ແຜນການປັດຈຸບັນຂອງທ່ານ:</1> {{amount}} <2>({{price}}/ເດືອນ)</2>",
-  "YourPrice": "ລາຄາຂອງເຈົ້າ",
-  "RecommendedTopUpAmount": "ຈຳນວນການເຕີມເງິນທີ່ແນະນຳ: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "ການຕື່ມເງິນອາດຈະໃຊ້ເວລາຄາວໜຶ່ງເພື່ອໃຫ້ສຳເລັດ"
+  "YourPrice": "ລາຄາຂອງເຈົ້າ"
 }

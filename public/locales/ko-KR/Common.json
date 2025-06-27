@@ -408,7 +408,6 @@
   "New": "신규",
   "NewDocument": "새 문서",
   "NewFolder": "새 폴더",
-  "NewMasterForm": "새 양식 템플릿",
   "NewPDFForm": "새로운 PDF 양식",
   "NewPresentation": "새 프레젠테이션",
   "NewRoom": "새로운 방",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "싱글 사인온",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "이 방은 <1>{{roomMode}}</1> 모드로 열려 있습니다. 이 {{productName}}에서 계정이 있으시면 인증해 주세요.",
   "PublicLink": "공개 링크",
   "PublicRoom": "퍼블릭 룸",
   "PublicRoomInfo": "등록하지 않고도 문서를 확인하고 편집하고 주석을 달거나 검토할 수 있도록 공유하세요. 또한 웹 인터페이스에 이 룸을 인베드할 수도 있습니다.",
@@ -721,6 +721,5 @@
   "Yes": "네",
   "Yesterday": "어제",
   "You": "나",
-  "YourTurn": "고객님의 차례입니다",
-  "PublicAuthorizeToast": "이 방은 <1>{{roomMode}}</1> 모드로 열려 있습니다. 이 {{productName}}에서 계정이 있으시면 인증해 주세요."
+  "YourTurn": "고객님의 차례입니다"
 }

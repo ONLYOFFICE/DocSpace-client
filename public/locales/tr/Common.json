@@ -408,7 +408,6 @@
   "New": "Yeni",
   "NewDocument": "Yeni Belge",
   "NewFolder": "Yeni dosya",
-  "NewMasterForm": "Yeni Form şablonu",
   "NewPDFForm": "Yeni PDF formu",
   "NewPresentation": "Yeni sunum",
   "NewRoom": "Yeni oda",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Tek oturum açma",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Bu oda <1>{{roomMode}}</1> modunda açılmıştır. Bu {{productName}} hesabınız varsa, lütfen yetkilendirin.",
   "PublicLink": "Genel bağlantı",
   "PublicRoom": "Herkese açık oda",
   "PublicRoomInfo": "Kaydolmadan görüntüleme, düzenleme, yorumlama veya inceleme için belgeleri paylaşın. Ayrıca bu odayı herhangi bir web arayüzüne gömebilirsiniz.",
@@ -721,6 +721,5 @@
   "Yes": "Evet",
   "Yesterday": "Dün",
   "You": "Siz",
-  "YourTurn": "Sıra sizde",
-  "PublicAuthorizeToast": "Bu oda <1>{{roomMode}}</1> modunda açılmıştır. Bu {{productName}} hesabınız varsa, lütfen yetkilendirin."
+  "YourTurn": "Sıra sizde"
 }

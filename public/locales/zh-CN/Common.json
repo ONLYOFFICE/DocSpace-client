@@ -408,7 +408,6 @@
   "New": "新建",
   "NewDocument": "新文档",
   "NewFolder": "新文件夹",
-  "NewMasterForm": "新表单模板",
   "NewPDFForm": "新建 PDF 表单",
   "NewPresentation": "新演示文稿",
   "NewRoom": "新建房间",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "单点登录",
   "ProviderTwitter": "Twitter推特",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "此房间以<1>{{roomMode}}</1>模式开启。如果您已拥有此{{productName}}账户，请授权。",
   "PublicLink": "公共链接",
   "PublicRoom": "公共房间",
   "PublicRoomInfo": "无需注册即可共享文档以供查看、编辑、评论或审阅。还可以将此房间嵌入到任何网页界面中。",
@@ -721,6 +721,5 @@
   "Yes": "是",
   "Yesterday": "昨天",
   "You": "您",
-  "YourTurn": "轮到您了",
-  "PublicAuthorizeToast": "此房间以<1>{{roomMode}}</1>模式开启。如果您已拥有此{{productName}}账户，请授权。"
+  "YourTurn": "轮到您了"
 }

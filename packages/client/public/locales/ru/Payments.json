@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} за {{amount}}",
   "ProductNameWallet": "Кошелек {{productName}}",
   "Quantity": "Количество",
+  "RecommendedTopUpAmount": "Рекомендуемая сумма пополнения: {{amount}}",
   "RemainingDays": "Оставшиеся дни расчетного периода: {{count}}",
   "Reminder": "Напоминание:",
   "RenewSubscription": "Продлить подписку на {{planName}} тариф",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Вы успешно пополнили свой кошелек.",
   "TopUp": "Пополнить",
   "TopUpBalance": "Пополнить баланс",
+  "TopUpTakeSomeTimeToComplete": "Пополнение может занять некоторое время.",
   "TopUpToReactivateStorage": "Чтобы повторно активировать подписку, пожалуйста, пополните свой кошелек через раздел Сервисы. После завершения оплаты дополнительное хранилище снова станет доступно.",
   "TopUpWallet": "Пополнить кошелек",
   "Total": "Итого",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Вы не добавили ни одного платежа",
   "YourCurrentPayment": "Ваш текущий платеж",
   "YourCurrentPlan": "<1>Ваш текущий тарифный план:</1> {{amount}} <2>({{price}}/месяц)</2>",
-  "YourPrice": "Ваша стоимость",
-  "RecommendedTopUpAmount": "Рекомендуемая сумма пополнения: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Пополнение может занять некоторое время."
+  "YourPrice": "Ваша стоимость"
 }

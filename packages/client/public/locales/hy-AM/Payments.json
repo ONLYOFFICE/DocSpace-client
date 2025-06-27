@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} մեկ {{amount}}-ի համար",
   "ProductNameWallet": "{{productName}} Wallet",
   "Quantity": "Քանակ",
+  "RecommendedTopUpAmount": "Առաջարկվող լիցքավորման գումար՝ {{amount}}",
   "RemainingDays": "Հաշվարկային ցիկլի մնացած օրերը՝ {{count}}",
   "Reminder": "Հիշողություն:",
   "RenewSubscription": "Թարմացրեք {{planName}} պլանի բաժանորդագրությունը",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Դուք հաջողությամբ լիցքավորել եք ձեր դրամապանակը։",
   "TopUp": "Լիցքավորել",
   "TopUpBalance": "Լիցքավորել մնացորդը",
+  "TopUpTakeSomeTimeToComplete": "Լիցքավորումը կարող է որոշ ժամանակ պահանջել։",
   "TopUpToReactivateStorage": "Բաժանորդագրությունը վերաակտիվացնելու համար խնդրում ենք լիցքավորել ձեր դրամապանակը «Ծառայություններ» բաժնի միջոցով։ Վճարումն ավարտելուց հետո ձեր լրացուցիչ պահեստային տարածքը կրկին հասանելի կլինի։",
   "TopUpWallet": "Լիցքավորել դրամապանակը",
   "Total": "Ընդհանուր",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Դուք որևէ վճարում չեք ավելացրել",
   "YourCurrentPayment": "Ձեր ընթացիկ վճարումը",
   "YourCurrentPlan": "<1>Ձեր ներկայիս սակագինը՝</1> {{amount}} <2>({{price}}/ամիս)</2>",
-  "YourPrice": "Ձեր գինը",
-  "TopUpTakeSomeTimeToComplete": "Լիցքավորումը կարող է որոշ ժամանակ պահանջել։",
-  "RecommendedTopUpAmount": "Առաջարկվող լիցքավորման գումար՝ {{amount}}"
+  "YourPrice": "Ձեր գինը"
 }

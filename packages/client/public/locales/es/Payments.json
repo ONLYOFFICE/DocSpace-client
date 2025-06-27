@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} por {{amount}}",
   "ProductNameWallet": "Monedero de{{productName}}",
   "Quantity": "Cantidad",
+  "RecommendedTopUpAmount": " Importe de recarga recomendado: {{amount}}",
   "RemainingDays": "Los días restantes del ciclo de facturación: {{count}}",
   "Reminder": "Recordatorio:",
   "RenewSubscription": "Renovar suscripción al plan {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Ha recargado su monedero correctamente.",
   "TopUp": "Recargar",
   "TopUpBalance": "Recargar saldo",
+  "TopUpTakeSomeTimeToComplete": "La recarga puede tardar algún tiempo en completarse",
   "TopUpToReactivateStorage": "Para reactivar su suscripción, por favor recargue su monedero a través de la sección Servicios. Una vez realizado el pago, su almacenamiento adicional volverá a estar disponible.",
   "TopUpWallet": "Recargar monedero",
   "Total": "Total",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "No ha añadido ningún pago",
   "YourCurrentPayment": "Su pago actual",
   "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>",
-  "YourPrice": "Su precio",
-  "TopUpTakeSomeTimeToComplete": "La recarga puede tardar algún tiempo en completarse",
-  "RecommendedTopUpAmount": " Importe de recarga recomendado: {{amount}}"
+  "YourPrice": "Su precio"
 }

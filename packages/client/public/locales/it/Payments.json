@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} per {{amount}}",
   "ProductNameWallet": "Wallet di {{productName}}",
   "Quantity": "Quantità",
+  "RecommendedTopUpAmount": "Importo di ricarica consigliato: {{amount}}",
   "RemainingDays": "Giorni rimanenti del ciclo di fatturazione: {{count}}",
   "Reminder": "Promemoria:",
   "RenewSubscription": "Rinnova la sottoscrizione al piano {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Hai ricaricato il tuo wallet con successo.",
   "TopUp": "Ricarica",
   "TopUpBalance": "Ricarica saldo",
+  "TopUpTakeSomeTimeToComplete": "Per essere completata la ricarica potrebbe richiedere del tempo",
   "TopUpToReactivateStorage": "Per riattivare l'abbonamento, si prega di ricaricare il portafoglio tramite Servizi. Una volta completato il pagamento, lo spazio di archiviazione aggiuntivo sarà nuovamente disponibile.",
   "TopUpWallet": "Ricarica portafoglio",
   "Total": "Totale",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Non hai aggiunto alcun metodo di pagamento",
   "YourCurrentPayment": "Il tuo pagamento attuale",
   "YourCurrentPlan": "<1>Piano attuale:</1> {{amount}} <2>({{price}}/mese)</2>",
-  "YourPrice": "Il tuo prezzo",
-  "RecommendedTopUpAmount": "Importo di ricarica consigliato: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Per essere completata la ricarica potrebbe richiedere del tempo"
+  "YourPrice": "Il tuo prezzo"
 }

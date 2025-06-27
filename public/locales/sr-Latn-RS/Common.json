@@ -408,7 +408,6 @@
   "New": "Novo",
   "NewDocument": "Novi dokument",
   "NewFolder": "Novi folder",
-  "NewMasterForm": "Novi obrazac šablon",
   "NewPDFForm": "Novi PDF obrazac",
   "NewPresentation": "Nova prezentacija",
   "NewRoom": "Nova soba",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Jedinstvena prijava",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Ova soba je otvorena u <1>{{roomMode}}</1> režimu. Ako imate nalog u {{productName}}, molimo vas da se prijavite.",
   "PublicLink": "Javni link",
   "PublicRoom": "Javna soba",
   "PublicRoomInfo": "Delite dokumente za pregled, uređivanje, komentarisanje ili pregledanje bez registracije. Takođe možete ugraditi ovu sobu u bilo koji veb interfejs.",
@@ -721,6 +721,5 @@
   "Yes": "Da",
   "Yesterday": "Juče",
   "You": "Vi",
-  "YourTurn": "Vaš red",
-  "PublicAuthorizeToast": "Ova soba je otvorena u <1>{{roomMode}}</1> režimu. Ako imate nalog u {{productName}}, molimo vas da se prijavite."
+  "YourTurn": "Vaš red"
 }

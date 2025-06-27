@@ -36,6 +36,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { calculateTotalPrice } from "@docspace/shared/utils/common";
 
+import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
 import { useServicesActions } from "./hooks/useServicesActions";
@@ -47,7 +48,6 @@ import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
 import TopUpContainer from "./sub-components/TopUpContainer";
 import SelectionAmount from "./sub-components/SelectionAmount";
-import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 
 type StorageDialogProps = {
   visible: boolean;

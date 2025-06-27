@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}}-ə {{amount}} pul",
   "ProductNameWallet": "{{productName}} Güzəştəsi",
   "Quantity": "Miqdar",
+  "RecommendedTopUpAmount": "Tövsiyə olunan doldurma məbləği: {{amount}}",
   "RemainingDays": "Ödəniş dövrünün qalan günləri: {{count}}",
   "Reminder": "Xatırlatma:",
   "RenewSubscription": "{{planName}} Plan abunəliyini yeniləyin",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Pulunuzu uğurla doldurmusunuz.",
   "TopUp": "Hesabınızı doldurun",
   "TopUpBalance": "Rəsmi hesabınızı doldurun",
+  "TopUpTakeSomeTimeToComplete": "Doldurma bir qədər vaxt apara bilər.",
   "TopUpToReactivateStorage": "Abunəçiliyinizi yenidən aktivləşdirmək üçün, xidmətlər vasitəsilə ərzənizi doldurun. Ödəniş tamamlandıqdan sonra, əlavə saxlama yeriniz yenidən əlçatmaz olacaq.",
   "TopUpWallet": "Walleti doldurun",
   "Total": "Ümumi",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Ödəniş əlavə etməmisiniz.",
   "YourCurrentPayment": "Hazırda olan ödənişiniz",
   "YourCurrentPlan": "<1>Hazırda olan planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Qiymətiniz",
-  "RecommendedTopUpAmount": "Tövsiyə olunan doldurma məbləği: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Doldurma bir qədər vaxt apara bilər."
+  "YourPrice": "Qiymətiniz"
 }

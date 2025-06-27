@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} por {{amount}}",
   "ProductNameWallet": "Carteira {{productName}}",
   "Quantity": "Quantidade",
+  "RecommendedTopUpAmount": "Valor de recarga recomendado: {{amount}}",
   "RemainingDays": "Dias restantes do ciclo de cobrança: {{count}}",
   "Reminder": "Lembrete:",
   "RenewSubscription": "Renove a assinatura do plano {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Você recarregou sua carteira com sucesso.",
   "TopUp": "Recarga",
   "TopUpBalance": "Recarregar saldo",
+  "TopUpTakeSomeTimeToComplete": "A recarga pode levar algum tempo para ser concluída",
   "TopUpToReactivateStorage": "Para reativar sua assinatura, carregue sua carteira por meio dos Serviços. Assim que o pagamento for concluído, seu armazenamento adicional ficará disponível novamente.",
   "TopUpWallet": "Recarregar carteira",
   "Total": "Total",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Você não adicionou nenhum pagamento",
   "YourCurrentPayment": "Seu pagamento atual",
   "YourCurrentPlan": "<1>Seu plano atual:</1> {{amount}} <2>({{price}}/mês)</2>",
-  "YourPrice": "Seu preço",
-  "RecommendedTopUpAmount": "Valor de recarga recomendado: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "A recarga pode levar algum tempo para ser concluída"
+  "YourPrice": "Seu preço"
 }

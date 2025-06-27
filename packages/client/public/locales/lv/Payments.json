@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} par {{amount}}",
   "ProductNameWallet": "{{productName}} Maja",
   "Quantity": "Kvantitāte",
+  "RecommendedTopUpAmount": "Ieteiktais papildinājuma apjoms: {{amount}}",
   "RemainingDays": "Atlikušie dienu skaits norēķinu periodā: {{count}}",
   "Reminder": "Atgādinājums:",
   "RenewSubscription": "Atjaunot {{planName}} plāna abonementu",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Jūsu maks ir veiksmīgi papildināts.",
   "TopUp": "Papildināt",
   "TopUpBalance": "Papildināt kontu",
+  "TopUpTakeSomeTimeToComplete": "Papildināšana varētu aizņemt kādu laiku, lai tā būtu pabeigta",
   "TopUpToReactivateStorage": "Lai aktivizētu savu abonementu, lūdzu, papildiniet savu maku, izmantojot pakalpojumus. Kad maksājums būs apstiprināts, jūsu papildu krātuve atkal būs pieejama.",
   "TopUpWallet": "Papildīt maku",
   "Total": "Kopā",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Jūs neesat pievienojis(-usi) nevienu maksājumu",
   "YourCurrentPayment": "Jūsu pašreizējais maksājums",
   "YourCurrentPlan": "<1>Jūsu pašreizējais plāns:</1> {{amount}} <2>({{price}}/mēnesī)</2>",
-  "YourPrice": "Jūsu cena",
-  "RecommendedTopUpAmount": "Ieteiktais papildinājuma apjoms: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Papildināšana varētu aizņemt kādu laiku, lai tā būtu pabeigta"
+  "YourPrice": "Jūsu cena"
 }

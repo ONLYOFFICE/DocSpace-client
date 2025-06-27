@@ -408,7 +408,6 @@
   "New": "I/E ri/e",
   "NewDocument": "Dokument i ri",
   "NewFolder": "Dosje e re",
-  "NewMasterForm": "From shablloni i ri",
   "NewPDFForm": "Format PDF i ri",
   "NewPresentation": "Prezantim i ri",
   "NewRoom": "Dhomë e re",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Hyrja e vetme",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Kjo dhomë është e hapur në mënyrën <1>{{roomMode}}</1>. Nëse keni një llogari në këtë {{productName}}, ju lutem autorizoni.",
   "PublicLink": "Lidhje publike",
   "PublicRoom": "Dhomë publike",
   "PublicRoomInfo": "Ndani dokumente për t'i parë, modifikuar, komentuar ose rishikuar pa regjistrim. Ju gjithashtu mund ta futni këtë dhomë në çdo ndërfaqe në internet.",
@@ -721,6 +721,5 @@
   "Yes": "Po",
   "Yesterday": "Dje",
   "You": "Ti/Ju",
-  "YourTurn": "Radha jote",
-  "PublicAuthorizeToast": "Kjo dhomë është e hapur në mënyrën <1>{{roomMode}}</1>. Nëse keni një llogari në këtë {{productName}}, ju lutem autorizoni."
+  "YourTurn": "Radha jote"
 }

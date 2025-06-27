@@ -408,7 +408,6 @@
   "New": "Nieuw",
   "NewDocument": "Nieuw document",
   "NewFolder": "Nieuwe map",
-  "NewMasterForm": "Nieuw Formulier sjabloon",
   "NewPDFForm": "Nieuw PDF-formulier",
   "NewPresentation": "Nieuwe presentatie",
   "NewRoom": "Nieuwe kamer",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Single Sign-On",
   "ProviderTwitter": "X (Twitter)",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Deze kamer wordt geopend in de <1>{{roomMode}}</1> modus. Indien u een account heeft in dit {{productName}}, gelieve dan te autoriseren.",
   "PublicLink": "Openbare link",
   "PublicRoom": "Openbare kamer",
   "PublicRoomInfo": "Deel documenten om ze te bekijken, bewerken, opmerkingen te plaatsen of te beoordelen zonder te registeren. U kunt deze kamer ook in elke webinterface integreren.",
@@ -721,6 +721,5 @@
   "Yes": "Ja",
   "Yesterday": "Gisteren",
   "You": "U",
-  "YourTurn": "Uw beurt",
-  "PublicAuthorizeToast": "Deze kamer wordt geopend in de <1>{{roomMode}}</1> modus. Indien u een account heeft in dit {{productName}}, gelieve dan te autoriseren."
+  "YourTurn": "Uw beurt"
 }

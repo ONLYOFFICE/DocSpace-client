@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} na {{amount}}",
   "ProductNameWallet": "{{productName}} Denarnica",
   "Quantity": "Količina",
+  "RecommendedTopUpAmount": "Priporočeno znesek dopolnitve: {{amount}}",
   "RemainingDays": "Preostali dnevi obračunskega cikla: {{count}}",
   "Reminder": "Opomnik:",
   "RenewSubscription": "Obnovi naročnino na {{planName}} paket",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Uspešno ste napolnili svojo denarnico.",
   "TopUp": "Dopolni",
   "TopUpBalance": "Dopolnite stanje",
+  "TopUpTakeSomeTimeToComplete": "Naknadno polnjenje se lahko nekaj časa podaljša.",
   "TopUpToReactivateStorage": "Za ponovno aktivacijo naročnine, prosim, napolnite denarnico preko Zvez. Ko bo plačila končana, bo dodatna shramba spet na voljo.",
   "TopUpWallet": "Napolnite denarnico",
   "Total": "Skupno",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Ni bilo dodanega nobenega plačila.",
   "YourCurrentPayment": "Vaša trenutna plačila",
   "YourCurrentPlan": "<1>Vaš trenutni načrt:</1> {{amount}} <2>({{price}}/mesec)</2>",
-  "YourPrice": "Vaša cena",
-  "RecommendedTopUpAmount": "Priporočeno znesek dopolnitve: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Naknadno polnjenje se lahko nekaj časa podaljša."
+  "YourPrice": "Vaša cena"
 }

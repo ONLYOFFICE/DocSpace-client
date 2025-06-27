@@ -408,7 +408,6 @@
   "New": "Նոր",
   "NewDocument": "Նոր փաստաթուղթ",
   "NewFolder": "Նոր թղթապանակ",
-  "NewMasterForm": "Նոր ձևանմուշ",
   "NewPDFForm": "Նոր PDF ձև",
   "NewPresentation": "Նոր ներկայացում",
   "NewRoom": "Նոր սենյակ",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Single sign-on",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Այս սենյակը բացված է <1>{{roomMode}}</1> ռեժիմով։ Եթե դուք ունեք հաշիվ այս {{productName}}-ում, խնդրում ենք հաստատել։",
   "PublicLink": "Հանրային հղում",
   "PublicRoom": "Հասարակական սենյակ",
   "PublicRoomInfo": "Կիսվեք փաստաթղթերով՝ առանց գրանցման դիտելու, խմբագրելու, մեկնաբանելու կամ վերանայելու համար: Դուք կարող եք նաև տեղադրել այս սենյակը ցանկացած վեբ ինտերֆեյսի մեջ:",
@@ -721,6 +721,5 @@
   "Yes": "Այո",
   "Yesterday": "Երեկ",
   "You": "Դու",
-  "YourTurn": "Ձեր հերթն է",
-  "PublicAuthorizeToast": "Այս սենյակը բացված է <1>{{roomMode}}</1> ռեժիմով։ Եթե դուք ունեք հաշիվ այս {{productName}}-ում, խնդրում ենք հաստատել։"
+  "YourTurn": "Ձեր հերթն է"
 }

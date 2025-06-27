@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} за {{amount}}",
   "ProductNameWallet": "{{productName}} Гаманець",
   "Quantity": "Кількість",
+  "RecommendedTopUpAmount": "Рекомендована сума поповнення: {{amount}}",
   "RemainingDays": "Залишилось днів у тарифікаційному циклі: {{count}}",
   "Reminder": "Нагадування:",
   "RenewSubscription": "Поновити підписку на план {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Ви успішно поповнили свій гаманець.",
   "TopUp": "Поповнити",
   "TopUpBalance": "Поповнити баланс",
+  "TopUpTakeSomeTimeToComplete": "Поповнення може зайняти деякий час.",
   "TopUpToReactivateStorage": "Щоб повторно активувати вашу підписку, будь ласка, поповніть свій гаманець через Сервіси. Після завершення оплати, ваш додатковий обсяг пам’яті знову стане доступним.",
   "TopUpWallet": "Поповнити гаманець",
   "Total": "Загалом",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Ви не додали жодного платежу",
   "YourCurrentPayment": "Ваш поточний платіж",
   "YourCurrentPlan": "<1>Ваш поточний план:</1> {{amount}} <2>({{price}}/місяць)</2>",
-  "YourPrice": "Ваша ціна",
-  "RecommendedTopUpAmount": "Рекомендована сума поповнення: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Поповнення може зайняти деякий час."
+  "YourPrice": "Ваша ціна"
 }

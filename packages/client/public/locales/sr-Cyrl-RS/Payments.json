@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} по {{amount}}",
   "ProductNameWallet": "{{productName}} новчаник",
   "Quantity": "Колиčina",
+  "RecommendedTopUpAmount": "Препоручени износ за допуну: {{amount}}",
   "RemainingDays": "Преостали дани обрачунског периода: {{count}}",
   "Reminder": "Подсетник:",
   "RenewSubscription": "Обновите претплату на план {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Успешно сте допунили новчаник.",
   "TopUp": "Допуни",
   "TopUpBalance": "Допуни стање рачуна",
+  "TopUpTakeSomeTimeToComplete": "Допуна може потрајати неко време да се обради",
   "TopUpToReactivateStorage": "Да бисте поново активирали претплату, допуните свој новчаник путем одељка Услуге. Након што уплата буде извршена, додатни простор ће поново бити доступан.",
   "TopUpWallet": "Допуни новчаник",
   "Total": "Укупно",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Нисте додали ниједан начин плаћања",
   "YourCurrentPayment": "Ваш тренутни начин плаћања",
   "YourCurrentPlan": "<1>Ваш тренутни план:</1> {{amount}} <2>({{price}}/месечно)</2>",
-  "YourPrice": "Ваша цена",
-  "RecommendedTopUpAmount": "Препоручени износ за допуну: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Допуна може потрајати неко време да се обради"
+  "YourPrice": "Ваша цена"
 }

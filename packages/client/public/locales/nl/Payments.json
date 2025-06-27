@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} per {{amount}}",
   "ProductNameWallet": "{{productName}} Portemonnee",
   "Quantity": "Hoeveelheid",
+  "RecommendedTopUpAmount": "Aanbevolen opwaardeerbedrag: {{amount}}",
   "RemainingDays": "De resterende dagen van de factuurperiode: {{count}}",
   "Reminder": "Herinnering:",
   "RenewSubscription": "Verleng abonnement op {{planName}} plan",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Uw portemonnee is succesvol bijgewerkt.",
   "TopUp": "Aanvullen",
   "TopUpBalance": "Saldo opladen",
+  "TopUpTakeSomeTimeToComplete": "De aanvulling kan even duren om te voltooien.",
   "TopUpToReactivateStorage": "Om uw abonnement te reactiveren, kunt u uw portemonnee opladen via Services. Zodra de betaling is voltooid, wordt uw extra opslagruimte weer beschikbaar.",
   "TopUpWallet": "Laad portemonnee bij",
   "Total": "Totaal",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Je hebt nog geen betaling toegevoegd",
   "YourCurrentPayment": "Uw huidige betaling",
   "YourCurrentPlan": "<1>Uw huidige abonnement:</1> {{amount}} <2>({{price}}/maand)</2>",
-  "YourPrice": "Uw prijs",
-  "RecommendedTopUpAmount": "Aanbevolen opwaardeerbedrag: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "De aanvulling kan even duren om te voltooien."
+  "YourPrice": "Uw prijs"
 }

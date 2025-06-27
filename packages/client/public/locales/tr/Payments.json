@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} başına {{amount}}",
   "ProductNameWallet": "{{productName}} Cüzdanı",
   "Quantity": "Miktar",
+  "RecommendedTopUpAmount": "Önerilen yükleme miktarı: {{amount}}",
   "RemainingDays": "Fatura döngüsünün kalan günleri: {{count}}",
   "Reminder": "Hatırlatma:",
   "RenewSubscription": "{{planName}} planı aboneliğini yenile",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Cüzdanınızla başarıyla para yatırdınız.",
   "TopUp": "Yükle",
   "TopUpBalance": "Bakiye Yükle",
+  "TopUpTakeSomeTimeToComplete": "Üst yükleme tamamlanması biraz zaman alabilir",
   "TopUpToReactivateStorage": "Aboneliğinizi yeniden etkinleştirmek için, lütfen Hizmetler aracılığıyla cüzdanınıza para yatırın. Ödeme tamamlandıktan sonra, ek depolama alanınız tekrar kullanılabilir hale gelecektir.",
   "TopUpWallet": "Cüzdanı Yenile",
   "Total": "Toplam",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Ödeme eklemeyi unuttunuz",
   "YourCurrentPayment": "Mevcut ödemeniz",
   "YourCurrentPlan": "<1>Mevcut planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Ücret",
-  "RecommendedTopUpAmount": "Önerilen yükleme miktarı: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Üst yükleme tamamlanması biraz zaman alabilir"
+  "YourPrice": "Ücret"
 }

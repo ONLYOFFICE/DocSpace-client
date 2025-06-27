@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} pentru {{amount}}",
   "ProductNameWallet": "Portofel {{productName}}",
   "Quantity": "Cantitate",
+  "RecommendedTopUpAmount": "Suma recomandată la alimentare: {{amount}}",
   "RemainingDays": "Zilele rămase din ciclul de facturare: {{count}}",
   "Reminder": "Memento:",
   "RenewSubscription": "Reînnoiți abonamentul {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Portofelul dvs a fost alimentat cu succes.",
   "TopUp": "Alimentare",
   "TopUpBalance": "Adăugare bani la sold",
+  "TopUpTakeSomeTimeToComplete": "Alimentarea contului va dura ceva timp",
   "TopUpToReactivateStorage": "Pentru a reîncepe abonamentul dvs, alimentați Portofelul dvs din secțiunea Servicii. După finalizarea plății spațiul de stocare suplimentar va deveni disponibil din nou.",
   "TopUpWallet": "Depunere bani în portofelul",
   "Total": "Total",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Nu a fost adăugată nicio metodă de plată",
   "YourCurrentPayment": "Metoda dvs de plată actuală",
   "YourCurrentPlan": "<1>Planul actual:</1> {{amount}} <2>({{price}}/lună)</2>",
-  "YourPrice": "Preţul dvs.",
-  "RecommendedTopUpAmount": "Suma recomandată la alimentare: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Alimentarea contului va dura ceva timp"
+  "YourPrice": "Preţul dvs."
 }

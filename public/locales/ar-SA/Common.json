@@ -408,7 +408,6 @@
   "New": "جديد",
   "NewDocument": "مستند جديد",
   "NewFolder": "مجلد جديد",
-  "NewMasterForm": "قالب نموذج جديد",
   "NewPDFForm": " نموذج PDF جديد",
   "NewPresentation": "عرض تقديمي جديد",
   "NewRoom": "غرفة جديدة",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "تسجيل الدخول الموحد",
   "ProviderTwitter": "تويتر",
   "ProviderZoom": "زووم",
+  "PublicAuthorizeToast": "هذه الغرفة مفتوحة في الوضع <1>{{roomMode}}</1>. إذا كان لديك حساب في {{productName}}، يرجى التفويض.",
   "PublicLink": "الرابط العام",
   "PublicRoom": "غرفة عامة",
   "PublicRoomInfo": "شارك المستندات للعرض أو التحرير أو التعليق أو المراجعة دون تسجيل. يمكنك أيضًا تضمين هذه الغرفة في أي واجهة ويب.",
@@ -721,6 +721,5 @@
   "Yes": "نعم",
   "Yesterday": "أمس",
   "You": "أنت",
-  "YourTurn": "دوركم الآن",
-  "PublicAuthorizeToast": "هذه الغرفة مفتوحة في الوضع <1>{{roomMode}}</1>. إذا كان لديك حساب في {{productName}}، يرجى التفويض."
+  "YourTurn": "دوركم الآن"
 }

@@ -408,7 +408,6 @@
   "New": "Nou",
   "NewDocument": "Document nou",
   "NewFolder": "Dosar nou",
-  "NewMasterForm": "Șablon formă nou",
   "NewPDFForm": "Formularul PDF nou",
   "NewPresentation": "Prezentare nouă",
   "NewRoom": "Sală nouă",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Autentificare unică",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Această sală este deschisă în modul <1>{{roomMode}}</1>. Vă rugăm să vă autentificați dacă aveți un cont {{productName}}.",
   "PublicLink": "Link public",
   "PublicRoom": "Sală publică",
   "PublicRoomInfo": "Partajați documente pentru vizualizarea, comentarea sau revizuirea fără înregistrare. De asemenea puteți incorpora acestă sală în orice interfață web.",
@@ -721,6 +721,5 @@
   "Yes": "Da",
   "Yesterday": "Ieri",
   "You": "Dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "PublicAuthorizeToast": "Această sală este deschisă în modul <1>{{roomMode}}</1>. Vă rugăm să vă autentificați dacă aveți un cont {{productName}}."
+  "YourTurn": "Acum e rândul dvs."
 }

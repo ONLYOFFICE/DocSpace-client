@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} на {{amount}}",
   "ProductNameWallet": "{{productName}} Портфейл",
   "Quantity": "Количество",
+  "RecommendedTopUpAmount": "Препоръчителна сума за попълване: {{amount}}",
   "RemainingDays": "Останалите дни от цикъла на фактуриране: {{count}}",
   "Reminder": "Напомняне:",
   "RenewSubscription": "Подновете абонамента за плана {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Успешно попълнихте портфейла си.",
   "TopUp": "Добавяне на средства",
   "TopUpBalance": "Попълни баланса",
+  "TopUpTakeSomeTimeToComplete": "Презареждането може да отнеме известно време за завършване.",
   "TopUpToReactivateStorage": "За да активирате отново абонамента си, моля, заредете портфейла си чрез „Услуги“. След като плащането приключи, допълнителното ви място за съхранение ще стане отново достъпно.",
   "TopUpWallet": "Попълни портфейла",
   "Total": "Общо",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Нямате добавени плащания.",
   "YourCurrentPayment": "Вашият настоящ платеж",
   "YourCurrentPlan": "<1>Вашият текущ план:</1> {{amount}} <2>({{price}}/месец)</2>",
-  "YourPrice": "Вашата цена",
-  "RecommendedTopUpAmount": "Препоръчителна сума за попълване: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Презареждането може да отнеме известно време за завършване."
+  "YourPrice": "Вашата цена"
 }

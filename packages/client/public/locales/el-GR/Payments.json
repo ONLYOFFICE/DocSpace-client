@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} ανά {{amount}}",
   "ProductNameWallet": "{{productName}} Πορτοφόλι",
   "Quantity": "Ποσότητα",
+  "RecommendedTopUpAmount": "Συνιστώμενη ποσότητα αναπλήρωσης: {{amount}}",
   "RemainingDays": "Οι υπόλοιπες ημέρες του κύκλου χρέωσης: {{count}}",
   "Reminder": "Υπενθύμιση:",
   "RenewSubscription": "Ανανεώστε τη συνδρομή στο πρόγραμμα {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "Έχετε προσθέσει επιτυχώς χρήματα στον λογαριασμό σας.",
   "TopUp": "Ανανέωση",
   "TopUpBalance": "Πρόσθεσε υπόλοιπο",
+  "TopUpTakeSomeTimeToComplete": "Η επαναφόρτιση ενδέχεται να χρειαστεί κάποιο χρόνο για να ολοκληρωθεί.",
   "TopUpToReactivateStorage": "Για να ενεργοποιήσετε ξανά τη συνδρομή σας, παρακαλούμε φορτώστε το πορτοφόλι σας μέσω Υπηρεσιών. Μόλις ολοκληρωθεί η πληρωμή, ο επιπλέον αποθηκευτικός σας χώρος θα είναι ξανά διαθέσιμος.",
   "TopUpWallet": "Συμπλήρωσε το πορτοφόλι σου",
   "Total": "Συνολικό",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "Δεν έχετε προσθέσει καμία πληρωμή",
   "YourCurrentPayment": "Η τρέχουσα πληρωμή σας",
   "YourCurrentPlan": "<1>Το τρέχον πρόγραμμα σας:</1> {{amount}} <2>({{price}}/μήνα)</2>",
-  "YourPrice": "Η τιμή σας",
-  "RecommendedTopUpAmount": "Συνιστώμενη ποσότητα αναπλήρωσης: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "Η επαναφόρτιση ενδέχεται να χρειαστεί κάποιο χρόνο για να ολοκληρωθεί."
+  "YourPrice": "Η τιμή σας"
 }

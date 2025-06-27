@@ -93,6 +93,7 @@
   "PriceForEach": "{{currency}} لكل {{amount}}",
   "ProductNameWallet": "محفظة {{productName}}",
   "Quantity": "الكمية",
+  "RecommendedTopUpAmount": "المبلغ الموصى به لإعادة الشحن: {{amount}}",
   "RemainingDays": "الأيام المتبقية من دورة الفوترة: {{count}}",
   "Reminder": "تذكير:",
   "RenewSubscription": "تجديد الاشتراك في خطة {{planName}}",
@@ -118,6 +119,7 @@
   "ToppedUpWallet": "تمت إضافة الرصيد إلى محفظتك بنجاح.",
   "TopUp": "إعادة الشحن",
   "TopUpBalance": "إضافة رصيد",
+  "TopUpTakeSomeTimeToComplete": "قد يستغرق التعبئة بعض الوقت حتى تكتمل",
   "TopUpToReactivateStorage": "لإعادة تفعيل اشتراكك، يرجى إعادة شحن محفظتك عبر الخدمات. بمجرد اكتمال الدفع، ستصبح مساحة التخزين الإضافية متاحة مرة أخرى.",
   "TopUpWallet": "إضافة رصيد إلى المحفظة",
   "Total": "إجمالي",
@@ -144,7 +146,5 @@
   "YouHaveNotAddedAnyPayment": "لم تقم بإضافة أي دفعة",
   "YourCurrentPayment": "دفعتك الحالية",
   "YourCurrentPlan": "<1>خطة الاشتراك الحالية:</1> {{amount}} <2>({{price}}/الشهر)</2>",
-  "YourPrice": "سعرك",
-  "RecommendedTopUpAmount": "المبلغ الموصى به لإعادة الشحن: {{amount}}",
-  "TopUpTakeSomeTimeToComplete": "قد يستغرق التعبئة بعض الوقت حتى تكتمل"
+  "YourPrice": "سعرك"
 }

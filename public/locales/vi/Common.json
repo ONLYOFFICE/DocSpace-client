@@ -408,7 +408,6 @@
   "New": "Mới",
   "NewDocument": "Tài liệu mới",
   "NewFolder": "Thư mục mới",
-  "NewMasterForm": "Mẫu biểu mẫu mới",
   "NewPDFForm": "Biểu mẫu PDF mới",
   "NewPresentation": "Bản trình bày mới",
   "NewRoom": "Phòng mới",
@@ -502,6 +501,7 @@
   "ProviderSsoSetting": "Đăng nhập một lần",
   "ProviderTwitter": "Twitter",
   "ProviderZoom": "Zoom",
+  "PublicAuthorizeToast": "Căn phòng này đang mở ở chế độ <1>{{roomMode}}</1>. Nếu bạn có tài khoản trong {{productName}} này, vui lòng xác thực.",
   "PublicLink": "Liên kết công khai",
   "PublicRoom": "Phòng công cộng",
   "PublicRoomInfo": "Chia sẻ tài liệu để xem, chỉnh sửa, nhận xét hoặc xem lại mà không cần đăng ký. Bạn cũng có thể nhúng phòng này vào bất kỳ giao diện web nào.",
@@ -721,6 +721,5 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "YourTurn": "Phiên của bạn",
-  "PublicAuthorizeToast": "Căn phòng này đang mở ở chế độ <1>{{roomMode}}</1>. Nếu bạn có tài khoản trong {{productName}} này, vui lòng xác thực."
+  "YourTurn": "Phiên của bạn"
 }

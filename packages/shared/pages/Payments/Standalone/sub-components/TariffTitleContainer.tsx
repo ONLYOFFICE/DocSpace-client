@@ -26,7 +26,7 @@
 
 import { Trans, useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "../../../../components/link";
 import { Text } from "../../../../components/text";
 
 import { StyledTitleComponent } from "../Payments.styled";

@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Wir empfehlen, einen neuen Payer zu wählen, der Zugriff auf die Abonnementeinstellungen in {{productName}} erhält.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Wir empfehlen, den {{productName}}-Eigentümer zu kontaktieren, um einen neuen Zahler zu wählen.",
   "LinkNewCard": "Um eine neue Karte zu verknüpfen, folgen Sie bitte diesem Link.",
+  "LinkNewCardEmail": "Um eine neue Karte zu verknüpfen, wenden Sie sich bitte an den Zahler <1>{{email}}</1>",
   "ManagerTypesDescription": "Administratorkontotypen und ihre Berechtigungen",
   "NewRoomWillExceedLimit": "Das Erstellen dieses Raums ist nicht möglich, da das Limit für die Anzahl der in Ihrem aktuellen Plan enthaltenen Räume erreicht ist.",
   "NewStorageImmidiatelyAvailable": "Der neue Speicherplatz steht Ihnen sofort nach Zahlungseingang zur Verfügung.",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "Sie haben keine Zahlung hinzugefügt",
   "YourCurrentPayment": "Ihre aktuelle Zahlung",
   "YourCurrentPlan": "<1>Ihr aktueller Plan:</1> {{amount}} <2>({{price}}/Monat)</2>",
-  "YourPrice": "Ihr Preis",
-  "LinkNewCardEmail": "Um eine neue Karte zu verknüpfen, wenden Sie sich bitte an den Zahler <1>{{email}}</1>"
+  "YourPrice": "Ihr Preis"
 }

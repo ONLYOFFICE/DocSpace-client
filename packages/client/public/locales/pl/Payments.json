@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Zalecamy wybrać nowego Płatnika, który będzie miał dostęp do ustawień subskrypcji w {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Zalecamy skontaktować się z właścicielem {{productName}}, aby wybrać nowego Płatnika.",
   "LinkNewCard": "Aby połączyć nową kartę, przejdź do tego linku.",
+  "LinkNewCardEmail": "Aby połączyć nową kartę, skontaktuj się z płatnikiem <1>{{email}}</1>",
   "ManagerTypesDescription": "Rodzaje kont administratora i ich uprawnienia",
   "NewRoomWillExceedLimit": "Utworzenie tego pokoju jest niemożliwe, ponieważ osiągnięto limit liczby pokoi w bieżącym planie.",
   "NewStorageImmidiatelyAvailable": "Nowy magazyn będzie dostępny natychmiast po dokonaniu płatności.",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "Nie dodano jeszcze żadnej płatności.",
   "YourCurrentPayment": "Twoje aktualne płatności",
   "YourCurrentPlan": "<1>Twój aktualny plan:</1> {{amount}} <2>({{price}}/miesiąc)</2>",
-  "YourPrice": "Twoja cena",
-  "LinkNewCardEmail": "Aby połączyć nową kartę, skontaktuj się z płatnikiem <1>{{email}}</1>"
+  "YourPrice": "Twoja cena"
 }

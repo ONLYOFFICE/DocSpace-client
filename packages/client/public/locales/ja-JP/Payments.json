@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "{{productName}}の購読設定にアクセスできる新しい支払人を選択することをお勧めします。",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "新しい支払人を選択するために、{{productName}}の所有者に連絡することをお勧めします。",
   "LinkNewCard": "新しいカードを紐付けるには、このリンクをご利用ください。",
+  "LinkNewCardEmail": "新しいカードをリンクするには、支払担当者までご連絡ください: <1>{{email}}</1>",
   "ManagerTypesDescription": "管理者アカウントの種類とその権限",
   "NewRoomWillExceedLimit": "現在のプランではルームの数の上限に達しているため、このルームを作成できません。",
   "NewStorageImmidiatelyAvailable": "お支払い後、すぐに新しいストレージをご利用いただけます。",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "お支払いは完了されていません",
   "YourCurrentPayment": "現在のお支払い",
   "YourCurrentPlan": "<1>現在のプラン：</1> {{amount}} <2>({{price}}/月)</2>",
-  "YourPrice": "価格",
-  "LinkNewCardEmail": "新しいカードをリンクするには、支払担当者までご連絡ください: <1>{{email}}</1>"
+  "YourPrice": "価格"
 }

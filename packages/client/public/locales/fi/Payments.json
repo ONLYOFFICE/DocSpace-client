@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Suosittelemme valitsemaan uuden Maksajan, joka saa pääsyn tilauksen asetuksiin {{productName}}-ssa.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Suosittelemme ottamaan yhteyttä {{productName}}-n omistajaan valitaksesi uuden Maksajan.",
   "LinkNewCard": "Uuden kortin linkittämiseksi, seuraa tätä linkkiä.",
+  "LinkNewCardEmail": "Uuden kortin linkittämiseksi, ota yhteyttä maksajaan <1>{{email}}</1>",
   "ManagerTypesDescription": "Järjestelmänvalvojan tilityypit ja niiden etuoikeudet",
   "NewRoomWillExceedLimit": "Tämän huoneen luominen ei ole mahdollista, koska huoneiden määrän raja, joka kuuluu tilaukseesi, on saavutettu.",
   "NewStorageImmidiatelyAvailable": "Uusi tallennustila on käytettävissä heti maksun jälkeen.",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPayment": "Nykyinen maksusi",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi",
-  "LinkNewCardEmail": "Uuden kortin linkittämiseksi, ota yhteyttä maksajaan <1>{{email}}</1>"
+  "YourPrice": "Hintasi"
 }

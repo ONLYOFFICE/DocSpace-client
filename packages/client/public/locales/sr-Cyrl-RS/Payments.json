@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Препоручујемо да изаберете новог Платиоца који добија приступ подешавањима претплате у {{productName}}-у.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Препоручујемо да контактирате власника {{productName}}-а да бисте изабрали новог Платиоца.",
   "LinkNewCard": "Да бисте повезали нову картицу, пратите овај линк.",
+  "LinkNewCardEmail": "Да бисте повезали нову картицу, обратите се плаћаочу на <1>{{email}}</1>",
   "ManagerTypesDescription": "Типови администраторских налога и њихове привилегије",
   "NewRoomWillExceedLimit": "Креирање ове просторије није могуће јер је достигнут лимит за број просторија укључених у ваш тренутни план.",
   "NewStorageImmidiatelyAvailable": "Нови простор биће доступан одмах након уплате.",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "Нисте додали ниједан начин плаћања",
   "YourCurrentPayment": "Ваш тренутни начин плаћања",
   "YourCurrentPlan": "<1>Ваш тренутни план:</1> {{amount}} <2>({{price}}/месечно)</2>",
-  "YourPrice": "Ваша цена",
-  "LinkNewCardEmail": "Да бисте повезали нову картицу, обратите се плаћаочу на <1>{{email}}</1>"
+  "YourPrice": "Ваша цена"
 }

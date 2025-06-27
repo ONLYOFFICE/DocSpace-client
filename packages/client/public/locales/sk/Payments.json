@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Odporúčame vybrať nového platiteľa, ktorý bude mať prístup k nastaveniam predplatného v {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Odporúčame vám kontaktovať vlastníka {{productName}} pred výberom nového platiteľa.",
   "LinkNewCard": "Na pripojenie novej karty, prosím, postupujte podľa tohto odkaz.",
+  "LinkNewCardEmail": "Na prepojenie novej karty, prosím, kontaktujte platiteľa <1>{{email}}</1>",
   "ManagerTypesDescription": "Typy účtov administrátorov a ich oprávnenia",
   "NewRoomWillExceedLimit": "Nie je možné vytvoriť túto miestnosť, pretože je dosiahnutý limit počtu miestností vo vašom aktuálnom tarifnom pláne.",
   "NewStorageImmidiatelyAvailable": "Nové úložisko bude dostupné bezprostredne po platbe.",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "Neboli pridané žiadne platby.",
   "YourCurrentPayment": "Vaša aktuálna platba",
   "YourCurrentPlan": "<1>Váš aktuálny plán:</1> {{amount}} <2>({{price}}/mesiac)</2>",
-  "YourPrice": "Vaša cena",
-  "LinkNewCardEmail": "Na prepojenie novej karty, prosím, kontaktujte platiteľa <1>{{email}}</1>"
+  "YourPrice": "Vaša cena"
 }

@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Mēs iesakām izvēlēties jaunu maksātāju, kurš saņem piekļuvi abonēšanas iestatījumiem {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Mēs iesakām sazināties ar {{productName}} īpašnieku, lai izvēlētos jaunu maksātāju.",
   "LinkNewCard": "Lai saistītu jaunu karti, lūdzu, sekojiet šai saitei.",
+  "LinkNewCardEmail": "Lai saistītu jaunu karti, lūdzu, sazinieties ar maksātāju <1>{{email}}</1>",
   "ManagerTypesDescription": "Administratora kontu veidi un to privilēģijas",
   "NewRoomWillExceedLimit": "Šīs telpas izveide nav iespējama, jo ir sasniegts jūsu pašreizējā plānā iekļauto telpu skaita ierobežojums.",
   "NewStorageImmidiatelyAvailable": "Jaunais uzglabāšanas vietas pieejamība būs pieejama uzreiz pēc apmaksas.",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "Jūs neesat pievienojis(-usi) nevienu maksājumu",
   "YourCurrentPayment": "Jūsu pašreizējais maksājums",
   "YourCurrentPlan": "<1>Jūsu pašreizējais plāns:</1> {{amount}} <2>({{price}}/mēnesī)</2>",
-  "YourPrice": "Jūsu cena",
-  "LinkNewCardEmail": "Lai saistītu jaunu karti, lūdzu, sazinieties ar maksātāju <1>{{email}}</1>"
+  "YourPrice": "Jūsu cena"
 }

@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "{{productName}}-də abunəlik parametrlərinə çıxışı olan yeni Ödəyici seçməyi tövsiyə edirik.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Yeni Ödəyici seçmək üçün {{productName}} sahibi ilə əlaqə saxlamağı tövsiyə edirik.",
   "LinkNewCard": "Yeni kartı əlaqələndirmək üçün bu linki izləyin.",
+  "LinkNewCardEmail": "Yeni bir kartı əlaqəlandırmaq üçün, xahiş edirik ödəyicidən <1>{{email}}</1> ilə əlaqə saxlayın.",
   "ManagerTypesDescription": "Admin hesabı növləri və imtiyazları",
   "NewRoomWillExceedLimit": "Bu otağı yaratmaq mümkün deyil, çünki cari planınıza daxil edilmiş otaqların sayı limitə çatıb.",
   "NewStorageImmidiatelyAvailable": "Ödənişdən sonra yeni saxlama dərhal mövcud olacaq.",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "Ödəniş əlavə etməmisiniz.",
   "YourCurrentPayment": "Hazırda olan ödənişiniz",
   "YourCurrentPlan": "<1>Hazırda olan planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Qiymətiniz",
-  "LinkNewCardEmail": "Yeni bir kartı əlaqəlandırmaq üçün, xahiş edirik ödəyicidən <1>{{email}}</1> ilə əlaqə saxlayın."
+  "YourPrice": "Qiymətiniz"
 }

@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "{{productName}} හි දායකත්‍ව සැකසුම් වෙත ප්‍රවේශය ලබන නව ගෙවන්නෙකු තේරීමට නිර්දේශ කෙරේ.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "නව ගෙවන්නෙකු තේරීම සඳහා {{productName}} හිමිකරු ඇමතීමට නිර්දේශ කෙරේ.",
   "LinkNewCard": "නව කාඩ්පතක් සම්බන්ධ කිරීමට, කරුණාකර මෙම සබැඳිය අනුගමනය කරන්න.",
+  "LinkNewCardEmail": "නව කාඩ්පතක් සම්බන්ධ කිරීමට, කරුණාකර ගෙවන්නා <1>{{email}}</1> අමතන්න.",
   "ManagerTypesDescription": "පරිපාලක ගිණුම් වර්ග සහ ඒවායේ වරප්‍රසාද",
   "NewRoomWillExceedLimit": "ඔබේ වත්මන් සැලැස්මේ ඇතුළත් කර ඇති කාමර සංඛ්‍යාව සඳහා සීමාව ළඟා වී ඇති නිසා මෙම කාමරය නිර්මාණය කිරීමේ හැකියාවක් නැත.",
   "NewStorageImmidiatelyAvailable": "නව నిల్වාගැනීමේ පහසුකම ගෙවීමෙන් අනතුරුව ක්ෂණිකව అందుబాటులోకి వస్తుంది.",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "ඔබේ ගෙවීම් එකතු කර නැත.",
   "YourCurrentPayment": "ඔබේ දැනට පවතින ගෙවීම",
   "YourCurrentPlan": "<1>ඔබේ දැනට පවතින ගිවිසුම:</1> {{amount}} <2>({{price}}/මාසයක)</2>",
-  "YourPrice": "ඔබගේ මිල",
-  "LinkNewCardEmail": "නව කාඩ්පතක් සම්බන්ධ කිරීමට, කරුණාකර ගෙවන්නා <1>{{email}}</1> අමතන්න."
+  "YourPrice": "ඔබගේ මිල"
 }

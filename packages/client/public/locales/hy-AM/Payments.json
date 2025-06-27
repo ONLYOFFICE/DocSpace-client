@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Խորհուրդ ենք տալիս ընտրել նոր վճարող, ով հասանելի է դառնում {{productName}}-ում բաժանորդագրության կարգավորումներին:",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Խորհուրդ ենք տալիս կապվել {{productName}}-ի սեփականատիրոջ հետ՝ նոր վճարող ընտրելու համար:",
   "LinkNewCard": "Նոր քարտ կցելու համար, խնդրում ենք հետևել այս հղմանը:",
+  "LinkNewCardEmail": "Նոր քարտ կցելու համար խնդրում ենք կապվել վճարողի հետ <1>{{email}}</1>",
   "ManagerTypesDescription": "Ադմինիստրատորի հաշվի տեսակները և դրանց արտոնությունները",
   "NewRoomWillExceedLimit": "Այս սենյակի ստեղծումը հնարավոր չէ, քանի որ ձեր ընթացիկ պլանում ներառված սենյակների քանակի սահմանաչափը սպառվել է:",
   "NewStorageImmidiatelyAvailable": "Նոր պահեստը հասանելի կլինի վճարումից անմիջապես հետո։",
@@ -146,6 +147,5 @@
   "YouHaveNotAddedAnyPayment": "Դուք որևէ վճարում չեք ավելացրել",
   "YourCurrentPayment": "Ձեր ընթացիկ վճարումը",
   "YourCurrentPlan": "<1>Ձեր ներկայիս սակագինը՝</1> {{amount}} <2>({{price}}/ամիս)</2>",
-  "YourPrice": "Ձեր գինը",
-  "LinkNewCardEmail": "Նոր քարտ կցելու համար խնդրում ենք կապվել վճարողի հետ <1>{{email}}</1>"
+  "YourPrice": "Ձեր գինը"
 }

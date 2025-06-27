@@ -526,7 +526,7 @@ export async function getEncryptionSettings() {
 export async function getLicenseQuota() {
   logger.debug("Start GET /portal/licensequota");
 
-  const [getLicenseQuota] = await createRequest(
+  const [getLicenseQuotaRequest] = await createRequest(
     ["/portal/licensequota"],
     [["", ""]],
     "GET",
@@ -534,7 +534,7 @@ export async function getLicenseQuota() {
     true,
   );
 
-  const licenseQuotaRes = await fetch(getLicenseQuota);
+  const licenseQuotaRes = await fetch(getLicenseQuotaRequest);
 
   if (!licenseQuotaRes.ok) return;
 
@@ -542,5 +542,3 @@ export async function getLicenseQuota() {
 
   return licenseQuota as TLicenseQuota;
 }
-
-

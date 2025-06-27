@@ -46,7 +46,7 @@ type ServicesProps = {
   servicesInit: (t: TTranslation) => void;
   isInitServicesPage: boolean;
   isVisibleWalletSettings: boolean;
-  isShowStorageTariffDeactivated: boolean;
+  isShowStorageTariffDeactivatedModal: boolean;
   isGracePeriod: boolean;
   previousStoragePlanSize: number;
 };
@@ -57,9 +57,9 @@ const Services: React.FC<ServicesProps> = ({
   servicesInit,
   isInitServicesPage,
   isVisibleWalletSettings,
-  isShowStorageTariffDeactivated,
   isGracePeriod,
   previousStoragePlanSize,
+  isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -73,10 +73,6 @@ const Services: React.FC<ServicesProps> = ({
   const location = useLocation();
   const navigate = useNavigate();
   const { openDialog } = location.state || {};
-
-  const [openWarningDialog, setOpenWarningDialog] = useState(
-    isShowStorageTariffDeactivated && !openDialog,
-  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -126,10 +122,6 @@ const Services: React.FC<ServicesProps> = ({
     setIsStorageVisible(false);
   };
 
-  const onCloseWarningDialog = () => {
-    setOpenWarningDialog(false);
-  };
-
   const onCloseStorageCancell = () => {
     setIsStorageCancellation(false);
   };
@@ -155,10 +147,9 @@ const Services: React.FC<ServicesProps> = ({
   ) : (
     <>
       <AdditionalStorage onClick={onClick} onToggle={onToggle} />
-      {openWarningDialog ? (
+      {isShowStorageTariffDeactivatedModal ? (
         <StorageTariffDeactiveted
-          visible={openWarningDialog}
-          onClose={onCloseWarningDialog}
+          visible={isShowStorageTariffDeactivatedModal}
         />
       ) : null}
       {isStorageVisible ? (
@@ -185,20 +176,16 @@ const Services: React.FC<ServicesProps> = ({
 };
 
 export const Component = inject(
-  ({ servicesStore, currentTariffStatusStore }: TStore) => {
+  ({ servicesStore, currentTariffStatusStore, paymentStore }: TStore) => {
     const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
       servicesStore;
-    const {
-      isShowStorageTariffDeactivated,
-      isGracePeriod,
-      previousStoragePlanSize,
-    } = currentTariffStatusStore;
-
+    const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
+    const { isShowStorageTariffDeactivatedModal } = paymentStore;
     return {
       servicesInit,
       isInitServicesPage,
       isVisibleWalletSettings,
-      isShowStorageTariffDeactivated,
+      isShowStorageTariffDeactivatedModal,
       isGracePeriod,
       previousStoragePlanSize,
     };

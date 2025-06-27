@@ -66,6 +66,7 @@ import {
 } from "@docspace/shared/api/portal/types";
 import { PaymentMethodStatus } from "@docspace/shared/enums";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
+import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -151,6 +152,8 @@ class PaymentStore {
   servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map(); // temporary solution, should be in the service store
 
   servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
+
+  isShowStorageTariffDeactivatedModal = false;
 
   constructor(
     userStore: UserStore,
@@ -300,7 +303,15 @@ class PaymentStore {
     const requests = [fetchPortalTariff()];
 
     if (this.isAlreadyPaid || this.walletCustomerEmail) {
-      if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());
+      if (this.isStripePortalAvailable) {
+        requests.push(this.setPaymentAccount());
+
+        if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+          this.setIsShowTariffDeactivatedModal(true);
+
+          await this.handleServicesQuotas();
+        }
+      }
     } else {
       requests.push(this.getBasicPaymentLink(addedManagersCount));
     }
@@ -545,6 +556,18 @@ class PaymentStore {
     return res;
   };
 
+  isShowStorageTariffDeactivated = () => {
+    const { previousStoragePlanSize } = this.currentTariffStatusStore;
+
+    if (!previousStoragePlanSize) return false;
+
+    return localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== "true";
+  };
+
+  setIsShowTariffDeactivatedModal = (value: boolean) => {
+    this.isShowStorageTariffDeactivatedModal = value;
+  };
+
   initWalletPayerAndBalance = async (isRefresh) => {
     const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
 
@@ -562,8 +585,7 @@ class PaymentStore {
 
     this.setVisibleWalletSetting(false);
 
-    const { isShowStorageTariffDeactivated, fetchPortalTariff } =
-      this.currentTariffStatusStore;
+    const { fetchPortalTariff } = this.currentTariffStatusStore;
 
     const requests = [fetchPortalTariff()];
 
@@ -587,7 +609,9 @@ class PaymentStore {
 
       await Promise.all(requests);
 
-      if (isShowStorageTariffDeactivated) {
+      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+        this.setIsShowTariffDeactivatedModal(true);
+
         await this.handleServicesQuotas();
       }
 
@@ -621,8 +645,7 @@ class PaymentStore {
     )
       return;
 
-    const { setPayerInfo, isShowStorageTariffDeactivated } =
-      this.currentTariffStatusStore;
+    const { setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
     const { setPortalPaymentQuotas } = this.paymentQuotasStore;
     const { fetchPortalTariff } = this.currentTariffStatusStore;
@@ -655,7 +678,10 @@ class PaymentStore {
     try {
       await Promise.all(requests);
 
-      if (isShowStorageTariffDeactivated) await this.handleServicesQuotas();
+      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+        this.setIsShowTariffDeactivatedModal(true);
+        await this.handleServicesQuotas();
+      }
 
       this.setRangeStepByQuota();
       this.setBasicTariffContainer();

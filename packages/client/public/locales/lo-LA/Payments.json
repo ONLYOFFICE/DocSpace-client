@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "ທ່ານຍັງບໍ່ໄດ້ເພີ່ມການຈ່າຍເງິນໃດໆ",
   "YourCurrentPayment": "ການຈ່າຍເງິນຂອງທ່ານໃນປັດຈຸບັນ",
   "YourCurrentPlan": "<1>ແຜນການປັດຈຸບັນຂອງທ່ານ:</1> {{amount}} <2>({{price}}/ເດືອນ)</2>",
-  "YourPrice": "ລາຄາຂອງເຈົ້າ"
+  "YourPrice": "ລາຄາຂອງເຈົ້າ",
+  "LinkNewCardEmail": "ເພື່ອເຊື່ອມຕໍ່ບັດໃໝ່, ກະລຸນາຕິດຕໍ່ຫາຜູ້ຈ່າຍເງິນ <1>{{email}}</1>"
 }

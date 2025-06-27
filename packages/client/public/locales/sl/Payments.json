@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Ni bilo dodanega nobenega plačila.",
   "YourCurrentPayment": "Vaša trenutna plačila",
   "YourCurrentPlan": "<1>Vaš trenutni načrt:</1> {{amount}} <2>({{price}}/mesec)</2>",
-  "YourPrice": "Vaša cena"
+  "YourPrice": "Vaša cena",
+  "LinkNewCardEmail": "Za povezavo nove kartice, se prosim obrnite na plačevalca <1>{{email}}</1>"
 }

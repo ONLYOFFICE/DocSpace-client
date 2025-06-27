@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Ви не додали жодного платежу",
   "YourCurrentPayment": "Ваш поточний платіж",
   "YourCurrentPlan": "<1>Ваш поточний план:</1> {{amount}} <2>({{price}}/місяць)</2>",
-  "YourPrice": "Ваша ціна"
+  "YourPrice": "Ваша ціна",
+  "LinkNewCardEmail": "Щоб прив’язати нову картку, будь ласка, зверніться до платника <1>{{email}}</1>"
 }

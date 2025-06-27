@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Вы не добавили ни одного платежа",
   "YourCurrentPayment": "Ваш текущий платеж",
   "YourCurrentPlan": "<1>Ваш текущий тарифный план:</1> {{amount}} <2>({{price}}/месяц)</2>",
-  "YourPrice": "Ваша стоимость"
+  "YourPrice": "Ваша стоимость",
+  "LinkNewCardEmail": "Чтобы привязать новую карту, пожалуйста, обратитесь к плательщику <1>{{email}}</1>"
 }

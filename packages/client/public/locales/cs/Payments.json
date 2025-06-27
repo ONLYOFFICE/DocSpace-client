@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Nevložili jste žádnou platbu.",
   "YourCurrentPayment": "Vaše aktuální platba",
   "YourCurrentPlan": "<1>Váš aktuální tarif:</1> {{amount}} <2>({{price}}/měsíc)</2>",
-  "YourPrice": "Vaše cena"
+  "YourPrice": "Vaše cena",
+  "LinkNewCardEmail": "Pro propojení nové karty, kontaktujte platitele <1>{{email}}</1>"
 }

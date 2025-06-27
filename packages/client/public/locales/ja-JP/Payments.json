@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "お支払いは完了されていません",
   "YourCurrentPayment": "現在のお支払い",
   "YourCurrentPlan": "<1>現在のプラン：</1> {{amount}} <2>({{price}}/月)</2>",
-  "YourPrice": "価格"
+  "YourPrice": "価格",
+  "LinkNewCardEmail": "新しいカードをリンクするには、支払担当者までご連絡ください: <1>{{email}}</1>"
 }

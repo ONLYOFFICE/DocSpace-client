@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Nuk keni shtuar asnjë pagesë",
   "YourCurrentPayment": "Pagesa juaj aktuale",
   "YourCurrentPlan": "<1>Plani juaj aktual:</1> {{amount}} <2>({{price}}/muaj)</2>",
-  "YourPrice": "Çmimi juaj"
+  "YourPrice": "Çmimi juaj",
+  "LinkNewCardEmail": "Për të lidhur një kartë të re, ju lutem kontaktoni pagesuesin <1>{{email}}</1>"
 }

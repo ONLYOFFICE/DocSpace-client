@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Δεν έχετε προσθέσει καμία πληρωμή",
   "YourCurrentPayment": "Η τρέχουσα πληρωμή σας",
   "YourCurrentPlan": "<1>Το τρέχον πρόγραμμα σας:</1> {{amount}} <2>({{price}}/μήνα)</2>",
-  "YourPrice": "Η τιμή σας"
+  "YourPrice": "Η τιμή σας",
+  "LinkNewCardEmail": "Για να συνδέσετε μια νέα κάρτα, παρακαλούμε επικοινωνήστε με τον πληρωτή <1>{{email}}</1>"
 }

@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "ඔබේ ගෙවීම් එකතු කර නැත.",
   "YourCurrentPayment": "ඔබේ දැනට පවතින ගෙවීම",
   "YourCurrentPlan": "<1>ඔබේ දැනට පවතින ගිවිසුම:</1> {{amount}} <2>({{price}}/මාසයක)</2>",
-  "YourPrice": "ඔබගේ මිල"
+  "YourPrice": "ඔබගේ මිල",
+  "LinkNewCardEmail": "නව කාඩ්පතක් සම්බන්ධ කිරීමට, කරුණාකර ගෙවන්නා <1>{{email}}</1> අමතන්න."
 }

@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Et ole lisännyt maksua",
   "YourCurrentPayment": "Nykyinen maksusi",
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
-  "YourPrice": "Hintasi"
+  "YourPrice": "Hintasi",
+  "LinkNewCardEmail": "Uuden kortin linkittämiseksi, ota yhteyttä maksajaan <1>{{email}}</1>"
 }

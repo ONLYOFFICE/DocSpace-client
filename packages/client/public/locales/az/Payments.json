@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Ödəniş əlavə etməmisiniz.",
   "YourCurrentPayment": "Hazırda olan ödənişiniz",
   "YourCurrentPlan": "<1>Hazırda olan planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
-  "YourPrice": "Qiymətiniz"
+  "YourPrice": "Qiymətiniz",
+  "LinkNewCardEmail": "Yeni bir kartı əlaqəlandırmaq üçün, xahiş edirik ödəyicidən <1>{{email}}</1> ilə əlaqə saxlayın."
 }

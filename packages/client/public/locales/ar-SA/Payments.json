@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "لم تقم بإضافة أي دفعة",
   "YourCurrentPayment": "دفعتك الحالية",
   "YourCurrentPlan": "<1>خطة الاشتراك الحالية:</1> {{amount}} <2>({{price}}/الشهر)</2>",
-  "YourPrice": "سعرك"
+  "YourPrice": "سعرك",
+  "LinkNewCardEmail": "لربط بطاقة جديدة، يرجى التواصل مع الدافع <1>{{email}}</1>"
 }

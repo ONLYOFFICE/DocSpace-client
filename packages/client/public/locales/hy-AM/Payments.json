@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "Դուք որևէ վճարում չեք ավելացրել",
   "YourCurrentPayment": "Ձեր ընթացիկ վճարումը",
   "YourCurrentPlan": "<1>Ձեր ներկայիս սակագինը՝</1> {{amount}} <2>({{price}}/ամիս)</2>",
-  "YourPrice": "Ձեր գինը"
+  "YourPrice": "Ձեր գինը",
+  "LinkNewCardEmail": "Նոր քարտ կցելու համար խնդրում ենք կապվել վճարողի հետ <1>{{email}}</1>"
 }

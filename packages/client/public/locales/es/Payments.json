@@ -146,5 +146,6 @@
   "YouHaveNotAddedAnyPayment": "No ha añadido ningún pago",
   "YourCurrentPayment": "Su pago actual",
   "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>",
-  "YourPrice": "Su precio"
+  "YourPrice": "Su precio",
+  "LinkNewCardEmail": "Para vincular una nueva tarjeta, póngase en contacto con el pagador a través de <1>{{email}}</1>"
 }

@@ -36,16 +36,13 @@ import WalletContainer from "./WalletContainer";
 let timerId = null;
 
 const Wallet = (props) => {
-  const { walletInit, isInitWalletPage, isShowStorageTariffDeactivated } =
+  const { walletInit, isInitWalletPage, isShowStorageTariffDeactivatedModal } =
     props;
 
   const { t, ready } = useTranslation(["Payments", "Common"]);
 
   const [showLoader, setShowLoader] = useState(false);
 
-  const [openWarningDialog, setOpenWarningDialog] = useState(
-    isShowStorageTariffDeactivated,
-  );
   const shouldShowLoader = !isInitWalletPage || !ready;
 
   useEffect(() => {
@@ -62,10 +59,6 @@ const Wallet = (props) => {
     };
   }, []);
 
-  const onCloseWarningDialog = () => {
-    setOpenWarningDialog(false);
-  };
-
   return shouldShowLoader ? (
     showLoader ? (
       <TransactionHistoryLoader />
@@ -73,22 +66,22 @@ const Wallet = (props) => {
   ) : (
     <>
       <WalletContainer t={t} />
-      {openWarningDialog ? (
+      {isShowStorageTariffDeactivatedModal ? (
         <StorageTariffDeactiveted
-          visible={openWarningDialog}
-          onClose={onCloseWarningDialog}
+          visible={isShowStorageTariffDeactivatedModal}
         />
       ) : null}
     </>
   );
 };
 
-export default inject(({ paymentStore, currentTariffStatusStore }) => {
-  const { walletInit, isInitWalletPage } = paymentStore;
-  const { isShowStorageTariffDeactivated } = currentTariffStatusStore;
+export default inject(({ paymentStore }) => {
+  const { walletInit, isInitWalletPage, isShowStorageTariffDeactivatedModal } =
+    paymentStore;
+
   return {
     walletInit,
     isInitWalletPage,
-    isShowStorageTariffDeactivated,
+    isShowStorageTariffDeactivatedModal,
   };
 })(observer(Wallet));

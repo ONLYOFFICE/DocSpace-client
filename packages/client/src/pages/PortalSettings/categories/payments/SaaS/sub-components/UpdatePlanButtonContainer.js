@@ -156,7 +156,24 @@ const UpdatePlanButtonContainer = ({
       const res = await updatePayment(managersCount, isYearTariff);
 
       if (res === false) {
-        toastr.error(t("ErrorNotification"));
+        const errorText =
+          cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (
+            <>
+              {t("CardUnlinked")} <br />
+              {t("LinkNewCard")} {"  "}
+              <a
+                onClick={goLinkCard}
+                fontWeight={600}
+                style={{ textDecoration: "underline" }}
+              >
+                {t("AddPaymentMethod")}
+              </a>
+            </>
+          ) : (
+            t("ErrorNotification")
+          );
+
+        toastr.error(errorText);
 
         setIsLoading(false);
         clearTimeout(timerId);
@@ -178,24 +195,7 @@ const UpdatePlanButtonContainer = ({
         waitingForQuota();
       }
     } catch (e) {
-      const errorText =
-        cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (
-          <>
-            {t("CardUnlinked")} <br />
-            {t("LinkNewCard")} {"  "}
-            <a
-              onClick={goLinkCard}
-              fontWeight={600}
-              style={{ textDecoration: "underline" }}
-            >
-              {t("AddPaymentMethod")}
-            </a>
-          </>
-        ) : (
-          t("ErrorNotification")
-        );
-
-      toastr.error(errorText);
+      toastr.error(t("ErrorNotification"));
       setIsLoading(false);
       clearTimeout(timerId);
       timerId = null;

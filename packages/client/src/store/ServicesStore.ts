@@ -146,8 +146,15 @@ class ServicesStore {
       if (!quotas) throw new Error();
 
       if (isAlreadyPaid || this.paymentStore.walletCustomerEmail) {
-        if (this.paymentStore.isStripePortalAvailable)
+        if (this.paymentStore.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
+          if (
+            this.paymentStore.isShowStorageTariffDeactivated() &&
+            this.paymentStore.isPayer
+          ) {
+            this.paymentStore.setIsShowTariffDeactivatedModal(true);
+          }
+        }
         requests.push(fetchAutoPayments());
       } else {
         requests.push(fetchCardLinked());

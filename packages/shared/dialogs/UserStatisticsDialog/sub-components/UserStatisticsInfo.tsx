@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/shared/components/text";
-import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { Trans, useTranslation } from "react-i18next";
+import { Text } from "../../../components/text";
+import { ProgressBar } from "../../../components/progress-bar";
 import { TUserStatisticsInfoProps } from "../UserStatisticsDialog.types";
 import styles from "../UserStatisticsDialog.module.scss";
 

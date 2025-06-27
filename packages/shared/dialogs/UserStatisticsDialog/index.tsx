@@ -25,14 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { Button, ButtonSize } from "../../components/button";
+import { Link, LinkTarget } from "../../components/link";
+import { Text } from "../../components/text";
 import { TUserStatisticsDialogProps } from "./UserStatisticsDialog.types";
 import styles from "./UserStatisticsDialog.module.scss";
 import { UserStatisticsInfo } from "./sub-components/UserStatisticsInfo";

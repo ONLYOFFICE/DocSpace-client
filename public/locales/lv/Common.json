@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Lai uzzinātu savus personīgos atjaunošanas noteikumus, sazinieties ar savu īpašo pārvaldnieku šajā jomā vai rakstiet mums uz <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Atjaunojiet {{license}} abonementu",
   "ActivateSwithToProHeader": "Pārslēgties uz pilno {{license}} versiju",
-  "ActivateTariffDescr": "Jūs izmantojat {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Jūsu izmēģinājuma periods beidzas šajā datumā: {{date}}.",
   "ActivateToProBannerHeaderTrial": "Iegādājieties pilnu {{license}} versiju, lai iegūtu:",
   "ActivateUploadDescr": "Lai aktivizētu savu licenci, augšupielādējiet to zemāk un noklikšķiniet uz Aktivizēt.",

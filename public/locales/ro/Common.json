@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Pentru termeni și condiții de reînnoire personale, contactați managerul dvs personal sau trimiteți un mesaj email la <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Reînnoire abonamentul {{license}}",
   "ActivateSwithToProHeader": "Comutare la versiunea completă {{license}}",
-  "ActivateTariffDescr": "Utilizați {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Versiunea dvs de încercare expiră pe {{date}}.",
   "ActivateToProBannerHeaderTrial": "Cumpărați versiunea completă {{license}} și obțineți:",
   "ActivateUploadDescr": "Pentru a activa licența, încărcați-o mai jos și faceți clic pe butonul Activare.",

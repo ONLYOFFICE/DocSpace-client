@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "للحصول على شروط التجديد الشخصية ، اتصل بمديرك المخصص أو راسلنا على <1> {{email}} </1>",
   "ActivateRenewSubscriptionHeader": "تجديد الاشتراك لـ {{license}}",
   "ActivateSwithToProHeader": "قم بالتبديل إلى الإصدار الكامل {{license}}.",
-  "ActivateTariffDescr": "أنت تستخدم {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "تنتهي الفترة التجريبية الخاصة بك في {{date}}.",
   "ActivateToProBannerHeaderTrial": "قم بشراء النسخة الكاملة من {{license}} للحصول على:",
   "ActivateUploadDescr": "لتنشيط الترخيص الخاص بك ، قم بتحميله بالأسفل وانقر فوق تنشيط.",

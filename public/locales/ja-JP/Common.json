@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "特別な更新条件を得るには、専属マネージャーに連絡するか、<1>{{email}}</1>までご連絡ください。",
   "ActivateRenewSubscriptionHeader": "{{license}}版サブスクリプションを更新する",
   "ActivateSwithToProHeader": "{{license}}版への切り替え",
-  "ActivateTariffDescr": "現在、{{organizationName}}の{{productName}}{{license}}を使用しています。",
   "ActivateTariffLicenseTrialExpiration": "試用版の有効期限は{{date}}です。",
   "ActivateToProBannerHeaderTrial": "すべての機能を利用するには、{{license}}の完全版を購入してください。",
   "ActivateUploadDescr": "ライセンスを有効にするには、以下のようにアップロードし、「有効にする」をクリックしてください。",

@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Om uw persoonlijke verlengvoorwaarden te ontvangen, neemt u contact op met uw aangewezen manager of schrijft u ons op <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Abonnement verlengen voor {{license}}",
   "ActivateSwithToProHeader": "Stap over naar de volledige {{license}} versie",
-  "ActivateTariffDescr": "U gebruikt {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Uw proefperiode verloopt op {{date}}.",
   "ActivateToProBannerHeaderTrial": "Koop de volledige {{license}} versie en ontvang het volgende:",
   "ActivateUploadDescr": "Om uw licentie te activeren, uploadt u deze hieronder en klikt u op Activeren.",

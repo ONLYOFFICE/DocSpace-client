@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "ເພື່ອ​ໄດ້​ຮັບ​ຂໍ້​ກໍາ​ນົດ​ການ​ຕໍ່​ອາ​ຍຸ​ສ່ວນ​ບຸກ​ຄົນ​ຂອງ​ທ່ານ​, ຕິດ​ຕໍ່​ຫາ​ຜູ້​ຈັດ​ການ​ທີ່​ອຸ​ທິດ​ຕົນ​ຂອງ​ທ່ານ​ຫຼື​ຂຽນ​ຫາ​ພວກ​ເຮົາ​ທີ່ <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "ຕໍ່ນະໃໝ່ການສັນຈີການໃຊ້ງານ {{license}}",
   "ActivateSwithToProHeader": "ປ່ຽນເປັນລຸ້ນ {{license}}ເຕັມ",
-  "ActivateTariffDescr": "ທ່ານກຳລັງໃຊ້ {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "ໄລຍະທົດລອງໃຊ້ຂອງທ່ານຈະໝົດອາຍຸໃນວັນທີ {{date}}.",
   "ActivateToProBannerHeaderTrial": "ຊື້ບູລິມະນູກຳເຕັມ {{license}} ເພື່ອຮັບ:",
   "ActivateUploadDescr": "ເພື່ອເປີດໃຊ້ໃບອະນຸຍາດຂອງທ່ານ, ອັບໂຫຼດມັນຢູ່ລຸ່ມນີ້ ແລະຄລິກທີ່ເປີດໃຊ້ງານ.",

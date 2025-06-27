@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Για να λάβετε τους προσωπικούς σας όρους ανανέωσης, επικοινωνήστε με τον ειδικό διαχειριστή σας ή στείλτε μας email στο <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Ανανέωση συνδρομής για {{license}}",
   "ActivateSwithToProHeader": "Αλλαγή σε πλήρη έκδοση {{license}}",
-  "ActivateTariffDescr": "Χρησιμοποιείτε το {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Η δοκιμαστική σας συνδρομή λήγει στις {{date}}.",
   "ActivateToProBannerHeaderTrial": "Αγοράστε την πλήρη έκδοση {{license}} για να αποκτήσετε τα παρακάτω:",
   "ActivateUploadDescr": "Για να ενεργοποιήσετε την άδειά σας, ανεβάστε την παρακάτω και κάντε κλικ στο Ενεργοποίηση.",

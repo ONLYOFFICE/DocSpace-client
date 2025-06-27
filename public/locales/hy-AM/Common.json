@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Ձեր անձնական նորացման պայմանները ստանալու համար դիմեք ձեր հատուկ մենեջերին կամ գրեք մեզ <1>{{email}}</1> հասցեով",
   "ActivateRenewSubscriptionHeader": "Թարմացրեք բաժանորդագրությունը {{license}}-ի համար",
   "ActivateSwithToProHeader": "Անցում ամբողջական {{license}} տարբերակին",
-  "ActivateTariffDescr": "Դուք օգտագործում եք {{organizationName}} {{productName}} {{license}}:",
   "ActivateTariffLicenseTrialExpiration": "Ձեր փորձաշրջանի ժամկետը լրանում է {{date}}-ին:",
   "ActivateToProBannerHeaderTrial": "Գնեք ամբողջական {{license}} տարբերակը, ստանալու համար՝",
   "ActivateUploadDescr": "Ձեր լիցենզիան ակտիվացնելու համար վերբեռնեք այն ստորև և սեղմեք Ակտիվացնել:",

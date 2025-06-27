@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Чтобы получить персональные условия продления, свяжитесь со специально назначенным менеджером или напишите нам по адресу <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Продлить подписку на {{license}}",
   "ActivateSwithToProHeader": "Перейдите на полную версию {{license}}",
-  "ActivateTariffDescr": "Вы используете {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Пробный период истекает {{date}}.",
   "ActivateToProBannerHeaderTrial": "Купите полную версию {{license}}, чтобы получить:",
   "ActivateUploadDescr": "Чтобы активировать лицензию, загрузите ее ниже и нажмите кнопку Активировать.",

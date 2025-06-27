@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "V prípade, že by ste chceli získať špeciálne podmienky obnovenia, kontaktujte svojho osobného manažéra alebo nám napíšte na adresu <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Obnoviť predplatné pre verziu {{license}}",
   "ActivateSwithToProHeader": "Prejsť na plnú verziu {{license}}",
-  "ActivateTariffDescr": "Používate {{organizationName}} {{productName}} {{license}}.",
   "ActivateTariffLicenseTrialExpiration": "Platnosť vašej skúšobnej verzie vyprší {{date}}.",
   "ActivateToProBannerHeaderTrial": "Zakúpením plnej verzie {{license}} získate:",
   "ActivateUploadDescr": "Aby ste aktivovali licenciu, nahrajte ju nižšie a kliknite na Aktivovať.",

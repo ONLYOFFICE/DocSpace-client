@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "Kişisel yenileme şartlarınızı öğrenmek için özel yöneticinizle iletişime geçin veya <1>{{email}}</1> adresinden bize yazın",
   "ActivateRenewSubscriptionHeader": "{{license}} aboneliğini yenileyin",
   "ActivateSwithToProHeader": "Tam {{license}} sürümüne geçin",
-  "ActivateTariffDescr": "{{organizationName}} {{productName}} {{license}} kullanıyorsunuz.",
   "ActivateTariffLicenseTrialExpiration": "Deneme süreniz {{date}} tarihinde sona eriyor.",
   "ActivateToProBannerHeaderTrial": "Aşağıdakileri elde etmek için Tam {{license}} Sürümünü satın alın:",
   "ActivateUploadDescr": "Lisansınızı etkinleştirmek için aşağıya yükleyin ve Etkinleştir'e tıklayın.",

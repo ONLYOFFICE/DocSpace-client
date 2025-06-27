@@ -22,7 +22,6 @@
   "ActivateRenewDescr": "要获取您的个人续订条款，请联系您的专属经理或给我们发送邮件至<1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "续订 {{license}}",
   "ActivateSwithToProHeader": "切换至完整的 {{license}} 版本",
-  "ActivateTariffDescr": "您正在使用 {{organizationName}} {{productName}} {{license}}。",
   "ActivateTariffLicenseTrialExpiration": "您的试用期在{{date}}到期。",
   "ActivateToProBannerHeaderTrial": "购买完整的 {{license}} 版本可获得：",
   "ActivateUploadDescr": "要激活您的许可证，请在下方上传许可证并单击“激活”。",

@@ -1361,6 +1361,75 @@ class ContextOptionsStore {
     downloadAction("", selectedFolder).catch((err) => toastr.error(err));
   };
 
+  createMenuGroup = (options, groupConfig, t) => {
+    const {
+      groupKey,
+      groupLabel,
+      groupIcon,
+      itemKeys,
+      needsGrouping = false,
+      minItemsCount = 1,
+    } = groupConfig;
+
+    let groupItems = [];
+
+    if (needsGrouping) {
+      let lastNonEmptyGroupIndex = -1;
+
+      itemKeys.forEach((group, groupIndex) => {
+        const groupSubItems = group
+          .map((groupItem) =>
+            options.find((option) => option.key === groupItem.key),
+          )
+          .filter((menuItem) => menuItem && menuItem.disabled !== true);
+
+        if (groupSubItems.length > 0) {
+          if (lastNonEmptyGroupIndex !== -1) {
+            groupItems.push({
+              key: `separator-after-group-${lastNonEmptyGroupIndex}`,
+              isSeparator: true,
+            });
+          }
+
+          groupSubItems.forEach((menuItem) => groupItems.push(menuItem));
+          lastNonEmptyGroupIndex = groupIndex;
+        }
+      });
+    } else {
+      groupItems = itemKeys
+        .map((item) =>
+          options.find(
+            (option) =>
+              option.key === (typeof item === "object" ? item.key : item),
+          ),
+        )
+        .filter((option) => option && option.disabled !== true);
+    }
+
+    const itemsCount = groupItems.filter(
+      (menuItem) => !menuItem.isSeparator && menuItem.disabled !== true,
+    ).length;
+
+    const shouldAddGroup = itemsCount > minItemsCount;
+
+    return {
+      group: shouldAddGroup
+        ? {
+            id: `option_${groupKey}`,
+            key: groupKey,
+            label: t(groupLabel),
+            icon: groupIcon,
+            items: groupItems,
+          }
+        : null,
+      keysToRemove: shouldAddGroup
+        ? needsGrouping
+          ? itemKeys.flat().map((item) => item.key)
+          : itemKeys.map((item) => (typeof item === "object" ? item.key : item))
+        : [],
+    };
+  };
+
   getHeaderOptions = (t, item) => {
     const {
       isRecycleBinFolder,
@@ -2274,125 +2343,142 @@ class ContextOptionsStore {
       isCollaborator: false,
     };
 
-    const newOptions = options.filter(
+    let newOptions = options.filter(
       (option, index) =>
         !(index === 0 && option.key === "separator1") &&
         !(isCollaborator && option.key === "create-room"),
     );
 
-    const manageGroups = [
-      [{ key: "edit-room" }, { key: "save-as-template" }],
-      [{ key: "download" }, { key: "duplicate-room" }],
-      [{ key: "change-room-owner" }, { key: "archive-room" }],
+    const menuGroupsConfig = [
+      {
+        groupKey: "manage",
+        groupLabel: "Common:Manage",
+        groupIcon: SettingsReactSvgUrl,
+        itemKeys: [
+          [{ key: "edit-room" }, { key: "save-as-template" }],
+          [{ key: "download" }, { key: "duplicate-room" }],
+          [{ key: "change-room-owner" }, { key: "archive-room" }],
+        ],
+        needsGrouping: true,
+        minItemsCount: 1,
+      },
+      {
+        groupKey: "share",
+        groupLabel: "Common:Share",
+        groupIcon: ShareReactSvgUrl,
+        itemKeys: [
+          "invite-users-to-room",
+          "copy-general-link",
+          "link-for-room-members",
+          "external-link",
+          "embedding-settings",
+        ],
+        minItemsCount: 1,
+      },
     ];
 
-    const manageItems = [];
-    let lastNonEmptyGroupIndex = -1;
+    const downloadOption = newOptions.find(
+      (option) => option.key === "download",
+    );
+    const downloadAsOption = newOptions.find(
+      (option) => option.key === "download-as",
+    );
 
-    manageGroups.forEach((group, groupIndex) => {
-      const groupItems = group
-        .map((groupItem) =>
-          newOptions.find((option) => option.key === groupItem.key),
-        )
-        .filter((menuItem) => menuItem && menuItem.disabled !== true);
+    if (downloadOption && downloadAsOption) {
+      const originalDownloadOption = {
+        ...downloadOption,
+        key: "download-original",
+        label: t("Common:OriginalFormat"),
+      };
 
-      if (groupItems.length > 0) {
-        if (lastNonEmptyGroupIndex !== -1) {
-          manageItems.push({
-            key: `separator-after-group-${lastNonEmptyGroupIndex}`,
-            isSeparator: true,
-          });
-        }
+      newOptions = [
+        ...newOptions.filter((option) => option.key !== "download"),
+        originalDownloadOption,
+      ];
 
-        groupItems.forEach((menuItem) => manageItems.push(menuItem));
+      menuGroupsConfig.push({
+        groupKey: "download",
+        groupLabel: downloadOption.label,
+        groupIcon: downloadOption.icon,
+        itemKeys: ["download-original", "download-as"],
+        needsGrouping: false,
+        minItemsCount: 1,
+      });
+    }
 
-        lastNonEmptyGroupIndex = groupIndex;
+    const showInfoOption = newOptions.find(
+      (option) => option.key === "show-info",
+    );
+    const showVersionHistoryOption = newOptions.find(
+      (option) => option.key === "show-version-history",
+    );
+
+    if (showInfoOption && showVersionHistoryOption) {
+      menuGroupsConfig.push({
+        groupKey: "info",
+        groupLabel: showInfoOption.label,
+        groupIcon: showInfoOption.icon,
+        itemKeys: ["show-info", "show-version-history"],
+        needsGrouping: false,
+        minItemsCount: 1,
+      });
+    }
+
+    const menuGroups = [];
+    let keysToRemove = [];
+
+    menuGroupsConfig.forEach((config) => {
+      const { group, keysToRemove: groupKeysToRemove } = this.createMenuGroup(
+        newOptions,
+        config,
+        t,
+      );
+      if (group) {
+        menuGroups.push(group);
+      }
+      if (groupKeysToRemove && groupKeysToRemove.length > 0) {
+        keysToRemove = [...keysToRemove, ...groupKeysToRemove];
       }
     });
 
-    const shareGroupItems = [
-      { key: "invite-users-to-room" },
-      { key: "copy-general-link" },
-      { key: "link-for-room-members" },
-      { key: "external-link" },
-      { key: "embedding-settings" },
-    ];
-
-    const shareItems = shareGroupItems
-      .map((shareItem) =>
-        newOptions.find((option) => option.key === shareItem.key),
-      )
-      .filter((shareOption) => shareOption && shareOption.disabled !== true);
-
-    const manageItemsCount = manageItems.filter(
-      (menuItem) => !menuItem.isSeparator && menuItem.disabled !== true,
-    ).length;
-    const shareItemsCount = shareItems.filter(
-      (menuItem) => !menuItem.isSeparator && menuItem.disabled !== true,
-    ).length;
-
-    const addManageGroup = manageItemsCount > 1;
-    const addShareGroup = shareItemsCount > 1;
-
-    const manageGroup = addManageGroup
-      ? {
-          id: "option_manage",
-          key: "manage",
-          label: t("Common:Manage"),
-          icon: SettingsReactSvgUrl,
-          items: manageItems,
-        }
-      : null;
-
-    const shareGroup = addShareGroup
-      ? {
-          id: "option_share",
-          key: "share",
-          label: t("Common:Share"),
-          icon: ShareReactSvgUrl,
-          items: shareItems,
-        }
-      : null;
-
-    let keysToRemove = [];
-
-    if (addManageGroup) {
-      keysToRemove = keysToRemove.concat([
-        "edit-room",
-        "save-as-template",
-        "download",
-        "duplicate-room",
-        "archive-room",
-        "change-room-owner",
-      ]);
+    if (downloadOption && downloadAsOption) {
+      keysToRemove.push("download-original");
     }
 
-    if (addShareGroup) {
-      keysToRemove = keysToRemove.concat([
-        "invite-users-to-room",
-        "copy-general-link",
-        "link-for-room-members",
-        "embedding-settings",
-        "external-link",
-      ]);
-    }
-
-    const filteredOptions = newOptions.filter(
+    const resultOptions = newOptions.filter(
       (option) => !keysToRemove.includes(option.key),
     );
 
-    const separatorIndex = filteredOptions.findIndex(
+    const separatorIndex = resultOptions.findIndex(
       (option) => option.key === "separator0",
     );
-
     const insertIndex = separatorIndex !== -1 ? separatorIndex + 1 : 1;
 
-    const resultOptions = [...filteredOptions];
+    if (menuGroups.length > 0) {
+      resultOptions.splice(insertIndex, 0, ...menuGroups);
+    }
 
-    const groupsToAdd = [manageGroup, shareGroup].filter(Boolean);
+    const downloadGroupIndex = resultOptions.findIndex(
+      (option) => option.key === "download",
+    );
+    const moveIndex = resultOptions.findIndex(
+      (option) => option.key === "move",
+    );
 
-    if (groupsToAdd.length > 0) {
-      resultOptions.splice(insertIndex, 0, ...groupsToAdd);
+    if (downloadGroupIndex !== -1 && moveIndex !== -1) {
+      // If download group is already before move, do nothing
+      if (
+        downloadGroupIndex < moveIndex &&
+        moveIndex - downloadGroupIndex > 1
+      ) {
+        // If there are other items between them, move download right before move
+        const downloadGroup = resultOptions.splice(downloadGroupIndex, 1)[0];
+        resultOptions.splice(moveIndex - 1, 0, downloadGroup);
+      } else if (downloadGroupIndex > moveIndex) {
+        // If download is after move, move it before move
+        const downloadGroup = resultOptions.splice(downloadGroupIndex, 1)[0];
+        resultOptions.splice(moveIndex, 0, downloadGroup);
+      }
     }
 
     return trimSeparator(resultOptions);

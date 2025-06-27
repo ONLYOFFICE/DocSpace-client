@@ -80,6 +80,7 @@ import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
+import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -2416,8 +2417,8 @@ class ContextOptionsStore {
     if (showInfoOption && showVersionHistoryOption) {
       menuGroupsConfig.push({
         groupKey: "info",
-        groupLabel: showInfoOption.label,
-        groupIcon: showInfoOption.icon,
+        groupLabel: t("InfoPanel:Properties"),
+        groupIcon: ViewRowsReactSvgUrl,
         itemKeys: ["show-info", "show-version-history"],
         needsGrouping: false,
         minItemsCount: 1,

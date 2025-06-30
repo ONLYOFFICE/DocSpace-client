@@ -31,6 +31,7 @@ import {
   RoomsType,
   ShareAccessRights,
   FileType,
+  FolderType,
 } from "../../enums";
 import { MergeTypes, Nullable, WithFlag } from "../../types";
 
@@ -111,6 +112,7 @@ export type TBreadCrumb = {
   roomType?: RoomsType;
   shared?: boolean;
   onClick?: TOnBreadCrumbClick;
+  rootFolderType?: FolderType;
 };
 
 export type TDisplayedItem = {
@@ -130,6 +132,7 @@ export type TSelectorBreadCrumbs = WithFlag<
     breadCrumbs: TBreadCrumb[];
     breadCrumbsLoader: React.ReactNode;
     onSelectBreadCrumb: (item: TBreadCrumb) => void;
+    bodyIsLoading: boolean;
   }
 >;
 

@@ -3,7 +3,7 @@
   "content": "Me and members ({{ membersCount }})",
   "content_en_sha1_hash": "a3d819681518616be864b842599d088e7cd38fae",
   "created_at": "2025-05-19T21:30:55.837Z",
-  "updated_at": "2025-05-26T07:57:32.263Z",
+  "updated_at": "2025-06-30T12:20:31.207Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether you are able to view or edit files based on your membership status among users and groups. It appears in the Create Edit Room Dialog component, specifically at line 99 of TemplateAccess.tsx, and depends on the number of members in the users list.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 98,
+      "line_number": 100,
       "context": "}\n \n const getAccessLabel = () => {\n if (usersList.length) {\n if (groupsList.length) {\n return t(\"Files:MeAndMembersAndGroups\", {\n membersCount: `${usersList.length}`,\n groupsCount: `${groupsList.length}`,\n });\n }\n return t(\"Files:MeAndMembers\", { membersCount: `${usersList.length}` });",
       "module": "/packages/client"
     }

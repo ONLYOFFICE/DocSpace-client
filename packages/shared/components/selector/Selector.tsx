@@ -493,6 +493,7 @@ const Selector = ({
         onSelectBreadCrumb,
         breadCrumbsLoader,
         isBreadCrumbsLoading,
+        bodyIsLoading: isLoading,
       }
     : {};
 

@@ -3,7 +3,7 @@
   "content": "Are you sure you want to cancel your additional storage subscription?",
   "content_en_sha1_hash": "8f3e79061fa11facaa3196241bc80245ebe6f22f",
   "created_at": "2025-06-03T20:59:26.905Z",
-  "updated_at": "2025-06-03T21:00:05.541Z",
+  "updated_at": "2025-06-26T19:00:18.269Z",
   "comment": {
     "text": "This translation key is used to display a warning message asking users if they are sure they want to cancel their additional storage subscription. It appears in a modal dialog header when the user selects the option to cancel a storage plan.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanCancel.tsx",
-      "line_number": 114,
+      "line_number": 119,
       "context": "isLarge\n >\n <ModalDialog.Header>{t(\"SubscriptionCancellation\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.cancelDialog}>\n <Text>{t(\"WantToCancelStoragePlan\")}</Text>\n <br />\n <Text as=\"span\">\n <Trans\n t={t}\n ns=\"Payments\"",
       "module": "/packages/client"
     }

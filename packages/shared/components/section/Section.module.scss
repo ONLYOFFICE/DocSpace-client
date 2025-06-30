@@ -387,7 +387,7 @@
 .withTabs {
   top: 114px;
 
-  @include mobile {
+  @include mixins.mobile {
     top: 106px;
   }
 }

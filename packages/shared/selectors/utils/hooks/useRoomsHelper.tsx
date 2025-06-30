@@ -58,7 +58,6 @@ const useRoomsHelper = ({
 
   isInit,
   setIsInit,
-  searchArea,
   withCreate,
   disableThirdParty,
   excludeItems,

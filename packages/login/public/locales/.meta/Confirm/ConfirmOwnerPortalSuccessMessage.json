@@ -3,7 +3,7 @@
   "content": "{{productName}} owner has been successfully changed. You will be redirected in 10 seconds.",
   "content_en_sha1_hash": "ce94e81ee8f269cf229fecdc54803f77e43fcd51",
   "created_at": "2025-05-19T21:30:57.338Z",
-  "updated_at": "2025-05-24T15:36:29.239Z",
+  "updated_at": "2025-06-30T12:20:31.659Z",
   "comment": {
     "text": "This translation key is used for a success message that informs users when they have successfully changed an owner in the portal. The message displays the name of the product being referenced and appears after a successful operation in a UI confirmation dialog.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalOwnerChange/page.client.tsx",
-      "line_number": 86,
-      "context": "return (\n <>\n {isOwnerChanged ? (\n <Text>\n {t(\"ConfirmOwnerPortalSuccessMessage\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : (\n <>",
+      "line_number": 84,
+      "context": "window.location.href = \"/\";\n };\n \n return isOwnerChanged ? (\n <Text>\n {t(\"ConfirmOwnerPortalSuccessMessage\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : (\n <>",
       "module": "/packages/login"
     }
   ],

@@ -2458,12 +2458,14 @@
   --quantity-picker-additional-title: #{$gray};
   --quantity-picker-track-number: #{$gray};
   --quantity-picker-rectangle-color: #{$light-gray-hover};
+  --quantity-picker-warning-color: #{$light-error-status};
 }
 .dark {
   --quantity-picker-disable-color: #{$gray-dark};
   --quantity-picker-additional-title: #{$gray-dark};
   --quantity-picker-track-number: #{$gray-dark};
   --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
+  --quantity-picker-warning-color: #{$dark-error-status};
 }
 
 .light {

@@ -37,15 +37,11 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
-import { formatCurrencyValue } from "./utils";
 
 import styles from "./styles/Wallet.module.scss";
 
 type WalletRefilledModalProps = {
   visible: boolean;
-  walletBalance?: number;
-  language?: string;
-  currency?: string;
   updateAutoPayments?: () => Promise<void>;
   isAutomaticPaymentsEnabled?: boolean;
   minBalanceError?: boolean;
@@ -53,14 +49,12 @@ type WalletRefilledModalProps = {
   upToBalance?: string;
   minBalance?: string;
   updatePreviousBalance?: () => void;
+  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 const WalletRefilledModal = (props: WalletRefilledModalProps) => {
   const {
     visible,
-    walletBalance = 0,
-    language = "",
-    currency = "",
     updateAutoPayments,
     isAutomaticPaymentsEnabled,
     minBalanceError,
@@ -68,19 +62,14 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
     upToBalance,
     minBalance,
     updatePreviousBalance,
+    formatWalletCurrency,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const formattedBalance = formatCurrencyValue(
-    language,
-    walletBalance,
-    currency,
-    2,
-    2,
-  );
+  const formattedBalance = formatWalletCurrency!();
 
   const onCloseDialog = () => {
     updatePreviousBalance!();
@@ -139,7 +128,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
       <ModalDialog.Footer>
         <Button
           key="EnableButton"
-          label={t("EnableAutoTopUp")}
+          label={t("Common:SaveButton")}
           size={ButtonSize.normal}
           primary
           scale
@@ -165,11 +154,8 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
   );
 };
 
-export default inject(({ paymentStore, authStore }: TStore) => {
-  const { language } = authStore;
+export default inject(({ paymentStore }: TStore) => {
   const {
-    walletBalance,
-    walletCodeCurrency,
     updateAutoPayments,
     isAutomaticPaymentsEnabled,
     upToBalanceError,
@@ -177,12 +163,10 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     upToBalance,
     minBalance,
     updatePreviousBalance,
+    formatWalletCurrency,
   } = paymentStore;
 
   return {
-    language,
-    walletBalance,
-    currency: walletCodeCurrency,
     updateAutoPayments,
     isAutomaticPaymentsEnabled,
     upToBalanceError,
@@ -190,5 +174,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     upToBalance,
     minBalance,
     updatePreviousBalance,
+    formatWalletCurrency,
   };
 })(observer(WalletRefilledModal));

@@ -43,7 +43,7 @@ import {
   getPaymentLink,
   getAutoTopUpSettings,
   updateAutoTopUpSettings,
-  getTenantExtra,
+  getLicenseQuota,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -61,7 +61,7 @@ import {
   TCustomerInfo,
   TAutoTopUpSettings,
   TTransactionCollection,
-  TDocServerLicense,
+  TLicenseQuota,
 } from "@docspace/shared/api/portal/types";
 
 // Constants for feature identifiers
@@ -78,7 +78,7 @@ class PaymentStore {
 
   paymentQuotasStore: PaymentQuotasStore | null = null;
 
-  docServerLicense: TDocServerLicense | null = null;
+  licenseQuota: TLicenseQuota | null = null;
 
   salesEmail = "";
 
@@ -640,7 +640,7 @@ class PaymentStore {
     try {
       await Promise.all([
         this.getSettingsPayment(),
-        this.getDocServerLicense(),
+        this.getPortalLicenseQuota(),
         getPaymentInfo(),
       ]);
     } catch (error) {
@@ -683,15 +683,12 @@ class PaymentStore {
     }
   };
 
-  getDocServerLicense = async () => {
+  getPortalLicenseQuota = async () => {
     try {
-      const tenantExtra = await getTenantExtra();
+      const licenseQuota = await getLicenseQuota();
+      if (!licenseQuota) return;
 
-      if (!tenantExtra) return;
-
-      const { docServerLicense } = tenantExtra;
-
-      this.docServerLicense = docServerLicense;
+      this.licenseQuota = licenseQuota;
     } catch (e) {
       console.error(e);
     }

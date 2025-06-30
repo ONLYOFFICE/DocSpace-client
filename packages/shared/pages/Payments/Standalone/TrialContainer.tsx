@@ -47,6 +47,7 @@ export const TrialContainer = ({
   isEnterprise,
   logoText,
   license,
+  openOnNewPage,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
@@ -68,6 +69,7 @@ export const TrialContainer = ({
         isDeveloper={isDeveloper}
         logoText={logoText}
         license={license}
+        openOnNewPage={openOnNewPage}
       />
 
       <BenefitsContainer

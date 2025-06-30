@@ -42,6 +42,7 @@ export interface IPaymentsProps {
   logoText: string;
   docspaceFaqUrl: string;
   license: TDocServerLicense;
+  openOnNewPage: boolean;
 }
 
 export interface IEnterpriseProps {

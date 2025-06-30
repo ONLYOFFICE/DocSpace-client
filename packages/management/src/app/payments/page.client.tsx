@@ -35,6 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
 import { TDocServerLicense } from "@docspace/shared/api/portal/types";
+import { TFilesSettings } from "@docspace/shared/api/files/types";
 
 const PaymentsPage = ({
   isTrial,
@@ -46,6 +47,7 @@ const PaymentsPage = ({
   logoText,
   docspaceFaqUrl,
   license,
+  filesSettings,
 }: {
   isTrial: boolean;
   salesEmail: string;
@@ -56,7 +58,9 @@ const PaymentsPage = ({
   logoText: string;
   docspaceFaqUrl: string;
   license: TDocServerLicense;
+  filesSettings: TFilesSettings;
 }) => {
+  console.log(filesSettings);
   const { t } = useTranslation("Common");
   const router = useRouter();
 
@@ -64,6 +68,15 @@ const PaymentsPage = ({
   const [paymentDate, setPaymentDate] = useState("");
   const [trialDaysLeft, setTrialDaysLeft] = useState(0);
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
+
+  const shouldOpenEditorInNewTab = () => {
+    if (
+      window.navigator.userAgent.includes("ZoomWebKit") ||
+      window.navigator.userAgent.includes("ZoomApps")
+    )
+      return false;
+    return !filesSettings.openEditorInSameTab;
+  };
 
   const setPaymentsLicense = async (
     confirmKey: string | null,
@@ -120,6 +133,7 @@ const PaymentsPage = ({
       logoText={logoText}
       docspaceFaqUrl={docspaceFaqUrl}
       license={license}
+      openOnNewPage={shouldOpenEditorInNewTab()}
     />
   );
 };

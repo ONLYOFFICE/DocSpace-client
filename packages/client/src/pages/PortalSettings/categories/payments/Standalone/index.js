@@ -52,7 +52,8 @@ const StandalonePage = (props) => {
     salesEmail,
     isEnterprise,
     docspaceFaqUrl,
-    license,
+    licenseQuota,
+    openOnNewPage,
   } = props;
 
   const { t, ready } = useTranslation("Common");
@@ -88,7 +89,8 @@ const StandalonePage = (props) => {
       paymentDate={paymentDate}
       isEnterprise={isEnterprise}
       docspaceFaqUrl={docspaceFaqUrl}
-      license={license}
+      license={licenseQuota.license}
+      openOnNewPage={openOnNewPage}
     />
   );
 };
@@ -99,6 +101,7 @@ export default inject(
     paymentStore,
     currentTariffStatusStore,
     settingsStore,
+    filesSettingsStore,
   }) => {
     const {
       standaloneInit,
@@ -109,7 +112,7 @@ export default inject(
       isLicenseCorrect,
       buyUrl,
       salesEmail,
-      docServerLicense: license,
+      licenseQuota,
     } = paymentStore;
     const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
     const {
@@ -122,6 +125,8 @@ export default inject(
     } = currentTariffStatusStore;
 
     const { docspaceFaqUrl } = settingsStore;
+
+    const { openOnNewPage } = filesSettingsStore;
 
     return {
       isTrial,
@@ -141,7 +146,8 @@ export default inject(
       salesEmail,
       isEnterprise,
       docspaceFaqUrl,
-      license,
+      licenseQuota,
+      openOnNewPage,
     };
   },
 )(observer(StandalonePage));

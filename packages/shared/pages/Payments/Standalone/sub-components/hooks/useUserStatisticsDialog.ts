@@ -28,7 +28,7 @@ import { useState } from "react";
 import { createLicenseQuotaReport } from "../../../../../api/management";
 import { toastr } from "../../../../../components/toast";
 
-export const useUserStatisticsDialog = () => {
+export const useUserStatisticsDialog = (openOnNewPage?: boolean) => {
   const [visible, setVisible] = useState(false);
 
   const open = () => setVisible(true);
@@ -37,7 +37,7 @@ export const useUserStatisticsDialog = () => {
   const downloadAndOpenReport = async () => {
     try {
       const url = await createLicenseQuotaReport();
-      window.open(url, "_blank");
+      window.open(url, openOnNewPage ? "_blank" : "_self");
     } catch (error) {
       toastr.error(error!);
     }

@@ -49,6 +49,7 @@ export const StandalonePage = ({
   logoText,
   docspaceFaqUrl,
   license,
+  openOnNewPage,
 }: IPaymentsProps) => {
   return (
     <StyledPageWrapper>
@@ -64,6 +65,7 @@ export const StandalonePage = ({
           logoText={logoText}
           docspaceFaqUrl={docspaceFaqUrl}
           license={license}
+          openOnNewPage={openOnNewPage}
         />
       ) : (
         <EnterpriseContainer
@@ -78,6 +80,7 @@ export const StandalonePage = ({
           logoText={logoText}
           docspaceFaqUrl={docspaceFaqUrl}
           license={license}
+          openOnNewPage={openOnNewPage}
         />
       )}
       <LicenseContainer

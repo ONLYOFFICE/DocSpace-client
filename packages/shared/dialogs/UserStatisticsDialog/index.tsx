@@ -86,6 +86,7 @@ const UserStatisticsDialog = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          className={styles.openReport}
           key="OkButton"
           label={t("DownloadAndOpenReport")}
           size={ButtonSize.normal}

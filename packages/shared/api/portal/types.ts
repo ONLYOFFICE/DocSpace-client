@@ -200,20 +200,6 @@ export type TLicenseQuota = {
   license: TDocServerLicense;
 };
 
-export type TTenantExtra = {
-  customMode: boolean;
-  opensource: boolean;
-  enterprise: boolean;
-  developer: boolean;
-  tariff: TTariff;
-  quota: TPaymentQuota;
-  notPaid: boolean;
-  licenseAccept: Date;
-  enableTariffPage: boolean;
-  docServerUserQuota: Record<string, unknown>;
-  docServerLicense: TDocServerLicense;
-};
-
 export type TCustomerInfo = {
   paymentMethodStatus: number;
   email: string | null;

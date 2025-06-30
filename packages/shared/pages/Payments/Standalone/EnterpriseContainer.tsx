@@ -50,6 +50,7 @@ export const EnterpriseContainer = ({
   logoText,
   docspaceFaqUrl,
   license,
+  openOnNewPage,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
@@ -72,6 +73,7 @@ export const EnterpriseContainer = ({
         logoText={logoText}
         docspaceFaqUrl={docspaceFaqUrl}
         license={license}
+        openOnNewPage={openOnNewPage}
       />
 
       {isLicenseDateExpired ? (

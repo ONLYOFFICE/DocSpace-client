@@ -44,6 +44,7 @@ export const TariffTitleContainer = ({
   logoText,
   docspaceFaqUrl,
   license,
+  openOnNewPage,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
@@ -54,7 +55,7 @@ export const TariffTitleContainer = ({
     openUserStatistics,
     closeUserStatistics,
     downloadAndOpenReport,
-  } = useUserStatisticsDialog();
+  } = useUserStatisticsDialog(openOnNewPage);
 
   const alertComponent = () => {
     if (isTrial) {

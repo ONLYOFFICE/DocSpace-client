@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { GoogleCloudSettingsProps } from "../../../../../components/google-cloud-settings";
+import type { GoogleCloudSettingsProps } from "../../../../../../components/google-cloud-settings";
 
 export interface GoogleCloudStorageProps
   extends Omit<GoogleCloudSettingsProps, "t" | "isNeedFilePath"> {

@@ -27,9 +27,9 @@
 import React from "react";
 import classNames from "classnames";
 
-import { BackupStorageType, ProvidersType } from "../../../enums";
-import { DirectThirdPartyConnection } from "../../../components/direct-third-party-connection";
-import { useDidMount } from "../../../hooks/useDidMount";
+import { BackupStorageType, ProvidersType } from "../../../../../enums";
+import { DirectThirdPartyConnection } from "../../../../../components/direct-third-party-connection";
+import { useDidMount } from "../../../../../hooks/useDidMount";
 
 import styles from "../../AutoBackup.module.scss";
 import { ScheduleComponent } from "../ScheduleComponent";

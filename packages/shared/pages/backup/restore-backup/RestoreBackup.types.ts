@@ -33,12 +33,12 @@ import type {
   StorageRegionsType,
   ThirdPartyAccountType,
   TTranslation,
-} from "../../types";
-import type { ButtonSize } from "../../components/button";
-import type { TenantStatus } from "../../enums";
-import type { FilesSelectorSettings } from "../../components/files-selector-input";
-import type { TBreadCrumb } from "../../components/selector/Selector.types";
-import type { TThirdParties, TUploadBackup } from "../../api/files/types";
+} from "../../../types";
+import type { ButtonSize } from "../../../components/button";
+import type { TenantStatus } from "../../../enums";
+import type { FilesSelectorSettings } from "../../../components/files-selector-input";
+import type { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type { TThirdParties, TUploadBackup } from "../../../api/files/types";
 
 export interface RestoreBackupProps {
   removeItem: ThirdPartyAccountType;

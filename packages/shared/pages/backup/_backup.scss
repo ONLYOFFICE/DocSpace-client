@@ -26,13 +26,13 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables";
+@use "../../styles/mixins";
+@use "../../styles/variables";
 
 $input-length: 350px;
 $text-length: 700px;
 
-@mixin common-styles {
+@mixin common-backup-styles {
   .backupModulesDescription {
     margin-bottom: 8px;
     max-width: $text-length;
@@ -111,34 +111,34 @@ $text-length: 700px;
       max-width: 700px;
     }
   }
+}
 
-  .comboboxItem {
-    display: flex;
+@mixin common-combobox-item-styles {
+  display: flex;
 
+  .dropDownItemText {
+    color: var(--text-color);
+  }
+
+  &.isDisabled {
     .dropDownItemText {
-      color: var(--text-color);
+      color: variables.$gray;
     }
+  }
 
-    &.isDisabled {
-      .dropDownItemText {
-        color: variables.$gray;
-      }
-    }
+  .dropDownItemIcon {
+    display: flex;
+    align-self: center;
 
-    .dropDownItemIcon {
+    div {
       display: flex;
-      align-self: center;
+    }
 
-      div {
-        display: flex;
-      }
+    margin-inline-start: auto;
 
-      margin-inline-start: auto;
-
-      svg {
-        min-height: 16px;
-        min-width: 16px;
-      }
+    svg {
+      min-height: 16px;
+      min-width: 16px;
     }
   }
 }

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { RefObject, useCallback } from "react";
+import React, { useCallback } from "react";
 import {
   FixedSizeList as List,
   type ListChildComponentProps,
@@ -36,13 +36,13 @@ import classNames from "classnames";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
 import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
 
-import { Text } from "../../../../components/text";
+import { Text } from "../../../../../components/text";
 import {
   CustomScrollbarsVirtualList,
   type CustomScrollbarsVirtualListProps,
-} from "../../../../components/scrollbar";
-import { RadioButton } from "../../../../components/radio-button";
-import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../constants";
+} from "../../../../../components/scrollbar";
+import { RadioButton } from "../../../../../components/radio-button";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../../constants";
 
 import type { BackupListBodyProps } from "./BackupList.types";
 import styles from "../../RestoreBackup.module.scss";

@@ -27,7 +27,7 @@
 import type {
   SelectedStorageType,
   StorageRegionsType,
-} from "@docspace/shared/types";
+} from "../../../../../types";
 
 export interface ThirdPartyStoragesModuleProps {
   defaultRegion: string;

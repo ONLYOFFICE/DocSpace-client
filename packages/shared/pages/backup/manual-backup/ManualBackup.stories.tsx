@@ -26,14 +26,14 @@
 
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType } from "../../../enums";
 
-import { createGetRoomsHandler } from "@docspace/shared/__mocks__/storybook/handlers/files/rooms";
+import { createGetRoomsHandler } from "../../../__mocks__/storybook/handlers/files/rooms";
 import {
   createGetFolderHandler,
   createGetFolderInfoHandler,
-} from "@docspace/shared/__mocks__/storybook/handlers/files/folders";
-import { createGetFolderTreeHandler } from "@docspace/shared/__mocks__/storybook/handlers/files/foldersTree";
+} from "../../../__mocks__/storybook/handlers/files/folders";
+import { createGetFolderTreeHandler } from "../../../__mocks__/storybook/handlers/files/foldersTree";
 
 import ManualBackup from "./index";
 import {
@@ -156,7 +156,7 @@ export const Default: Story = {
     isEmptyContentBeforeLoader: false,
     isNeedFilePath: false,
     settingsFileSelector: {
-      getIcon: () => {},
+      getIcon: () => "",
     },
     defaultRegion: "us-east-1",
     downloadingProgress: 100,

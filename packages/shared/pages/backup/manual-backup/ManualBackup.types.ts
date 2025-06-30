@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TThirdParties } from "@docspace/shared/api/files/types";
-import type { DeviceType, FolderType } from "@docspace/shared/enums";
+import type { TThirdParties } from "../../../api/files/types";
+import type { DeviceType, FolderType } from "../../../enums";
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
@@ -33,11 +33,11 @@ import type {
   StorageRegionsType,
   ThirdPartyAccountType,
   TTranslation,
-} from "@docspace/shared/types";
-import type { TColorScheme } from "@docspace/shared/themes";
-import type { ButtonSize } from "@docspace/shared/components/button";
-import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+} from "../../../types";
+import type { TColorScheme } from "../../../themes";
+import type { ButtonSize } from "../../../components/button";
+import type { FilesSelectorSettings } from "../../../components/files-selector-input";
+import type { TBreadCrumb } from "../../../components/selector/Selector.types";
 import {
   DOCUMENTS,
   TEMPORARY_STORAGE,

@@ -29,16 +29,15 @@ import type { Meta, StoryObj } from "@storybook/react";
 import {
   createDeleteBackupHistoryHandler,
   createGetBackupHistoryHandler,
-} from "@docspace/shared/__mocks__/storybook/handlers/portal/backupHistory";
-import { createDeleteBackupHandler } from "@docspace/shared/__mocks__/storybook/handlers/portal/backup";
-import { createStartRestoreHandler } from "@docspace/shared/__mocks__/storybook/handlers/portal/restore";
-
-import { createGetRoomsHandler } from "@docspace/shared/__mocks__/storybook/handlers/files/rooms";
+} from "../../../__mocks__/storybook/handlers/portal/backupHistory";
+import { createDeleteBackupHandler } from "../../../__mocks__/storybook/handlers/portal/backup";
+import { createStartRestoreHandler } from "../../../__mocks__/storybook/handlers/portal/restore";
+import { createGetRoomsHandler } from "../../../__mocks__/storybook/handlers/files/rooms";
 import {
   createGetFolderHandler,
   createGetFolderInfoHandler,
-} from "@docspace/shared/__mocks__/storybook/handlers/files/folders";
-import { createGetFolderTreeHandler } from "@docspace/shared/__mocks__/storybook/handlers/files/foldersTree";
+} from "../../../__mocks__/storybook/handlers/files/folders";
+import { createGetFolderTreeHandler } from "../../../__mocks__/storybook/handlers/files/foldersTree";
 
 import { RestoreBackup } from "./index";
 import {
@@ -111,7 +110,7 @@ export const Default: Story = {
     isEnableRestore: true,
     navigate: () => {},
     settingsFileSelector: {
-      getIcon: () => {},
+      getIcon: () => "",
     },
     isInitialLoading: false,
     standalone: false,

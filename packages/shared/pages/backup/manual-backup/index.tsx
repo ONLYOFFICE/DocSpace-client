@@ -30,28 +30,28 @@ import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "../../components/text";
-import { Button } from "../../components/button";
-import { Link, LinkTarget } from "../../components/link";
-import { startBackup } from "../../api/portal";
-import { RadioButton } from "../../components/radio-button";
-import { toastr } from "../../components/toast";
+import { Text } from "../../../components/text";
+import { Button } from "../../../components/button";
+import { Link, LinkTarget } from "../../../components/link";
+import { startBackup } from "../../../api/portal";
+import { RadioButton } from "../../../components/radio-button";
+import { toastr } from "../../../components/toast";
 import {
   BackupStorageLocalKey,
   BackupStorageType,
   FolderType,
-} from "../../enums";
-import StatusMessage from "../../components/status-message";
+} from "../../../enums";
+import StatusMessage from "../../../components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "../../utils/socket";
-import { OPERATIONS_NAME } from "../../constants";
-import OperationsProgressButton from "../../components/operations-progress-button";
-import DataBackupLoader from "../../skeletons/backup/DataBackup";
-import { getBackupProgressInfo } from "../../utils/common";
-import { getFromLocalStorage } from "../../utils/getFromLocalStorage";
-import { useDidMount } from "../../hooks/useDidMount";
+} from "../../../utils/socket";
+import { OPERATIONS_NAME } from "../../../constants";
+import OperationsProgressButton from "../../../components/operations-progress-button";
+import DataBackupLoader from "../../../skeletons/backup/DataBackup";
+import { getBackupProgressInfo } from "../../../utils/common";
+import { getFromLocalStorage } from "../../../utils";
+import { useDidMount } from "../../../hooks/useDidMount";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";

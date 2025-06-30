@@ -26,15 +26,15 @@
 
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { FolderType, ThirdPartyStorages } from "@docspace/shared/enums";
+import { FolderType, ThirdPartyStorages } from "../../../enums";
 
-import { createGetRoomsHandler } from "@docspace/shared/__mocks__/storybook/handlers/files/rooms";
+import { createGetRoomsHandler } from "../../../__mocks__/storybook/handlers/files/rooms";
 import {
   createGetFolderHandler,
   createGetFolderInfoHandler,
-} from "@docspace/shared/__mocks__/storybook/handlers/files/folders";
-import { createGetFolderTreeHandler } from "@docspace/shared/__mocks__/storybook/handlers/files/foldersTree";
-import type { Nullable } from "@docspace/shared/types";
+} from "../../../__mocks__/storybook/handlers/files/folders";
+import { createGetFolderTreeHandler } from "../../../__mocks__/storybook/handlers/files/foldersTree";
+import type { Nullable } from "../../../types";
 
 import AutomaticBackup from "./index";
 import {
@@ -145,7 +145,7 @@ export const Default: Story = {
     removeItem: mockThirdPartyAccounts[0],
     isEnableAuto: true,
     settingsFileSelector: {
-      getIcon: () => {},
+      getIcon: () => "",
     },
     isInitialLoading: false,
     isEmptyContentBeforeLoader: false,

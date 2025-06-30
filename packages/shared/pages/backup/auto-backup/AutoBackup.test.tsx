@@ -3,13 +3,13 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { BackupStorageType, FolderType } from "@docspace/shared/enums";
-import { ButtonSize } from "@docspace/shared/components/button";
-import { renderWithTheme } from "@docspace/shared/utils/render-with-theme";
+import { BackupStorageType, FolderType } from "../../../enums";
+import { ButtonSize } from "../../../components/button";
+import { renderWithTheme } from "../../../utils/render-with-theme";
 import {
   deleteBackupSchedule,
   createBackupSchedule,
-} from "@docspace/shared/api/portal";
+} from "../../../api/portal";
 
 import AutomaticBackup from "./index";
 import { selectedStorages, mockThirdPartyAccounts } from "../mockData";

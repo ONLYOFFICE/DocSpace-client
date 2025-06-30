@@ -29,7 +29,7 @@
 @use "../backup";
 
 .autoBackup {
-  @include backup.common-styles;
+  @include backup.common-backup-styles;
 
   .autoBackupThirdPartyModule {
     margin-top: 16px;
@@ -139,4 +139,8 @@
   .modules {
     margin-top: 20px;
   }
+}
+
+.comboboxItem {
+  @include backup.common-combobox-item-styles;
 }

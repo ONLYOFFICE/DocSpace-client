@@ -3,15 +3,11 @@ import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import {
-  BackupStorageType,
-  DeviceType,
-  FolderType,
-} from "@docspace/shared/enums";
-import { ButtonSize } from "@docspace/shared/components/button";
-import { renderWithTheme } from "@docspace/shared/utils/render-with-theme";
-import { startBackup } from "@docspace/shared/api/portal";
-import SocketHelper from "@docspace/shared/utils/socket";
+import { BackupStorageType, DeviceType, FolderType } from "../../../enums";
+import { ButtonSize } from "../../../components/button";
+import { renderWithTheme } from "../../../utils/render-with-theme";
+import { startBackup } from "../../../api/portal";
+import SocketHelper from "../../../utils/socket";
 
 import ManualBackup from "./index";
 import { selectedStorages, mockThirdPartyAccounts } from "../mockData";

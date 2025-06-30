@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import {
   AmazonSettings,
   formNames,
-} from "../../../../../components/amazon-settings";
-import { useDidMount } from "../../../../../hooks/useDidMount";
+} from "../../../../../../components/amazon-settings";
+import { useDidMount } from "../../../../../../hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 

@@ -29,20 +29,20 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
-import { Text } from "../../../components/text";
-import { ThirdPartyStorages } from "../../../enums";
+import { Text } from "../../../../../components/text";
+import { ThirdPartyStorages } from "../../../../../enums";
 import {
   ComboBox,
   ComboBoxSize,
   TComboboxProps,
-} from "../../../components/combobox";
-import { DropDownItem } from "../../../components/drop-down-item";
+} from "../../../../../components/combobox";
+import { DropDownItem } from "../../../../../components/drop-down-item";
 import {
   getOptions,
   type ReturnOptions,
-} from "../../../utils/getThirdPartyStoragesOptions";
-import { IconButton } from "../../../components/icon-button";
-import { THIRD_PARTY_SERVICES_URL } from "../../../constants";
+} from "../../../../../utils/getThirdPartyStoragesOptions";
+import { IconButton } from "../../../../../components/icon-button";
+import { THIRD_PARTY_SERVICES_URL } from "../../../../../constants";
 
 import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";
 import { AmazonStorage } from "../storages/AmazonStorage";

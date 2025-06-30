@@ -27,17 +27,23 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "../../../../components/button";
-import { BackupStorageLocalKey, ThirdPartyStorages } from "../../../../enums";
-import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
-import { useDidMount } from "../../../../hooks/useDidMount";
+import { Button, ButtonSize } from "../../../../../../components/button";
+import {
+  BackupStorageLocalKey,
+  ThirdPartyStorages,
+} from "../../../../../../enums";
+import { getFromLocalStorage } from "../../../../../../utils";
+import { useDidMount } from "../../../../../../hooks/useDidMount";
 
 import {
   GoogleCloudSettings,
   formNames,
-} from "../../../../components/google-cloud-settings";
+} from "../../../../../../components/google-cloud-settings";
 
-import type { SelectedStorageType, TTranslation } from "../../../../types";
+import type {
+  SelectedStorageType,
+  TTranslation,
+} from "../../../../../../types";
 
 import styles from "../../../ManualBackup.module.scss";
 

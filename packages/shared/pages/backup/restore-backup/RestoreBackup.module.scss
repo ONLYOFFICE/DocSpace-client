@@ -26,15 +26,15 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables";
+@use "../../../styles/mixins";
+@use "../../../styles/variables";
 
 @use "../backup";
 
 .restoreBackup {
   max-width: backup.$text-length;
 
-  @include backup.common-styles;
+  @include backup.common-backup-styles;
 
   .restoreBackupThirdPartyModule {
     margin-top: 16px;
@@ -150,11 +150,13 @@
       }
     }
   }
+}
 
-  .comboboxItem {
-    .dropDownItemIcon {
-      align-items: center;
-    }
+.comboboxItem {
+  @include backup.common-combobox-item-styles;
+
+  .dropDownItemIcon {
+    align-items: center;
   }
 }
 

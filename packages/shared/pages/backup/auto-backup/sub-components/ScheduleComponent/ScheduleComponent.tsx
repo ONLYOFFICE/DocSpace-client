@@ -28,12 +28,12 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "../../../../components/text";
-import { AutoBackupPeriod } from "../../../../enums";
-import { ComboBox } from "../../../../components/combobox";
-import { HelpButton } from "../../../../components/help-button";
-
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
+
+import { Text } from "../../../../../components/text";
+import { AutoBackupPeriod } from "../../../../../enums";
+import { ComboBox } from "../../../../../components/combobox";
+import { HelpButton } from "../../../../../components/help-button";
 
 import type { ScheduleComponentProps } from "./ScheduleComponent.types";
 import styles from "./ScheduleComponent.module.scss";

@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import {
   SelectelSettings,
   formNames,
-} from "../../../../../components/selectel-settings";
-import { useDidMount } from "../../../../../hooks/useDidMount";
+} from "../../../../../../components/selectel-settings";
+import { useDidMount } from "../../../../../../hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 import type { SelectelStorageProps } from "./SelectelStorage.types";

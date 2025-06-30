@@ -26,13 +26,13 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables";
+@use "../../../styles/mixins";
+@use "../../../styles/variables";
 
 @use "../backup";
 
 .manualBackup {
-  @include backup.common-styles;
+  @include backup.common-backup-styles;
 
   .backupModulesHeaderWrapper {
     .linkLearnMore {
@@ -102,10 +102,12 @@
       }
     }
   }
+}
 
-  .comboboxItem {
-    .dropDownItemIcon {
-      align-items: center;
-    }
+.comboboxItem {
+  @include backup.common-combobox-item-styles;
+
+  .dropDownItemIcon {
+    align-items: center;
   }
 }

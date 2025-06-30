@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import {
   GoogleCloudSettings,
   formNames,
-} from "../../../../../components/google-cloud-settings";
-import { useDidMount } from "../../../../../hooks/useDidMount";
+} from "../../../../../../components/google-cloud-settings";
+import { useDidMount } from "../../../../../../hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 

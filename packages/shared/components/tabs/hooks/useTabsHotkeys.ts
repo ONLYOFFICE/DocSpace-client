@@ -73,7 +73,7 @@ const useTabsHotkeys = ({
   };
 
   const hotkeysFilter = {
-    filter: (ev) => {
+    filter: (ev: KeyboardEvent) => {
       const eElement = ev.target as HTMLElement;
       const eInputElement = ev.target as HTMLInputElement;
       return (
@@ -105,7 +105,7 @@ const useTabsHotkeys = ({
 
   useHotkeys(
     "*",
-    (e) => {
+    (e: KeyboardEvent) => {
       const someDialogIsOpen = checkDialogsOpen();
 
       if (e.shiftKey || e.ctrlKey || someDialogIsOpen) return;

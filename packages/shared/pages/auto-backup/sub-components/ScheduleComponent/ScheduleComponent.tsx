@@ -29,10 +29,10 @@ import { useTranslation } from "react-i18next";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import { Text } from "@docspace/shared/components/text";
-import { AutoBackupPeriod } from "@docspace/shared/enums";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "../../../../components/text";
+import { AutoBackupPeriod } from "../../../../enums";
+import { ComboBox } from "../../../../components/combobox";
+import { HelpButton } from "../../../../components/help-button";
 
 import { StyledScheduleComponent } from "./ScheduleComponent.styled";
 import type { ScheduleComponentProps } from "./ScheduleComponent.types";

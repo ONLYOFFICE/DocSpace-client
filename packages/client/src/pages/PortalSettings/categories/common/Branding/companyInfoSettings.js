@@ -63,7 +63,7 @@ const CompanyInfoSettingsComponent = (props) => {
 
   useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
-    currentLocation: "company-info-settings",
+    currentLocation: "company-info",
     deviceType,
   });
 

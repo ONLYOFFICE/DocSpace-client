@@ -37,14 +37,17 @@ import styles from "../Article.module.scss";
 const BackButton = ({
   showText,
   currentDeviceType,
+  onLogoClickAction,
 }: {
   showText: boolean;
   currentDeviceType: DeviceType;
+  onLogoClickAction?: () => void;
 }) => {
   const { t } = useTranslation("Common");
   const navigate = useNavigate();
 
   const onClickBack = () => {
+    onLogoClickAction?.();
     navigate("/");
   };
 

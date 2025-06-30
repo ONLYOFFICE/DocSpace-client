@@ -28,43 +28,42 @@ import { inject, observer } from "mobx-react";
 import { useServicesActions } from "../hooks/useServicesActions";
 
 import WalletInfo from "../../payments/Wallet/sub-components/WalletInfo";
-import { usePaymentContext } from "../context/PaymentContext";
+
 import styles from "../styles/StorageSummary.module.scss";
 
 type WalletContainerProps = {
   onTopUp: () => void;
-  insufficientFunds: boolean;
   isExceedingStorageLimit: boolean;
   hasScheduledStorageChange?: boolean;
-  isUpgradeStoragePlan?: boolean;
-  currentStoragePlanSize?: boolean;
+  isPaymentBlockedByBalance: boolean;
+  isCurrentStoragePlan: boolean;
+  isDowngradeStoragePlan: boolean;
+  isLoading: boolean;
 };
 
 const WalletContainer = (props: WalletContainerProps) => {
   const {
     onTopUp,
-    insufficientFunds,
     isExceedingStorageLimit,
     hasScheduledStorageChange,
-    isUpgradeStoragePlan,
-    currentStoragePlanSize,
+    isPaymentBlockedByBalance,
+    isCurrentStoragePlan,
+    isDowngradeStoragePlan,
+    isLoading,
   } = props;
-  const { formatWalletCurrency, isWalletBalanceInsufficient } =
-    useServicesActions();
-  const { futurePayment } = usePaymentContext();
+  const { formatWalletCurrency } = useServicesActions();
 
   if (hasScheduledStorageChange) return null;
-
-  const isPaymentAnavalable =
-    isUpgradeStoragePlan && currentStoragePlanSize
-      ? isWalletBalanceInsufficient(futurePayment)
-      : insufficientFunds;
 
   return (
     <div className={styles.walletContainer}>
       <WalletInfo
         balance={formatWalletCurrency(null, 2, 2)}
-        {...(isPaymentAnavalable && !isExceedingStorageLimit && { onTopUp })}
+        {...(isPaymentBlockedByBalance &&
+          !isLoading &&
+          !isCurrentStoragePlan &&
+          !isDowngradeStoragePlan &&
+          !isExceedingStorageLimit && { onTopUp })}
       />
     </div>
   );

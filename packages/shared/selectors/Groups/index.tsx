@@ -165,7 +165,6 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       items={itemsList}
       submitButtonLabel={t("Common:SelectAction")}
       onSubmit={onSubmitAction}
-      cancelButtonLabel={t("Common:CancelButton")}
       emptyScreenImage={emptyScreenImg}
       emptyScreenHeader={t("Common:NotFoundGroups")}
       emptyScreenDescription={t("Common:GroupsNotFoundDescription")}

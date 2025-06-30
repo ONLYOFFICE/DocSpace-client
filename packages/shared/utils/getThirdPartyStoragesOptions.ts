@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ThirdPartyStorages } from "@docspace/shared/enums";
+import { ThirdPartyStorages } from "../enums";
 
-import type { SelectedStorageType } from "@docspace/shared/types";
+import type { SelectedStorageType } from "../types";
 
 export type ReturnOptions = {
   comboBoxOptions: {

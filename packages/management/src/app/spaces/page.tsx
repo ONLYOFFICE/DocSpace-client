@@ -39,7 +39,8 @@ const SpacesPage = async () => {
     getSettings(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (settings === "access-restricted")
+    redirect(`${await getBaseUrl()}/${settings}`);
 
   const isConnected =
     settings?.baseDomain &&

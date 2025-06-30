@@ -3,7 +3,7 @@
   "content": "Start filling",
   "content_en_sha1_hash": "3e49f427774cb5019a379c9d210feb129e86c45e",
   "created_at": "2025-05-19T21:30:49.045Z",
-  "updated_at": "2025-06-18T17:11:42.509Z",
+  "updated_at": "2025-06-30T12:20:31.621Z",
   "comment": {
     "text": "This translation key is used to display the text \"Start filling\" in various UI elements, such as a modal dialog header and a dropdown option, where it serves as an action label or button text.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 310,
-      "context": "disableSubmitButton={false}\n headerProps={invitePanelSelectorHeader}\n />\n ) : null}\n </ModalDialog.Container>\n <ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}",
+      "line_number": 315,
+      "context": "disableSubmitButton={false}\n headerProps={invitePanelSelectorHeader}\n />\n ) : null}\n </ModalDialog.Container>\n <ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar",
       "module": "/packages/shared"
     }
   ],

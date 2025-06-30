@@ -3,7 +3,7 @@
   "content": "The selected disabled guests will be removed from {{productName}}. This action cannot be undone.",
   "content_en_sha1_hash": "30d31508654a982388d1de3331d59f4101062ba0",
   "created_at": "2025-05-19T21:30:56.650Z",
-  "updated_at": "2025-05-24T13:21:35.827Z",
+  "updated_at": "2025-06-30T12:20:31.236Z",
   "comment": {
     "text": "This translation key is used in a \"Delete Profile Ever\" dialog to inform users that removing disabled guests from {{productName}} is an irreversible action. The text appears as a confirmation message when deleting guests without reassigning them.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 101,
+      "line_number": 112,
       "context": "if (deleteWithoutReassign) {\n return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 101,
+      "line_number": 112,
       "context": "if (deleteWithoutReassign) {\n return (\n <>\n <Text className=\"user-delete\">\n {onlyGuests\n ? t(\"ActionCannotBeUndoneGuests\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     }

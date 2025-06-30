@@ -48,8 +48,10 @@ async function Page() {
       getWhiteLabelIsDefault(),
     ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings) redirect(`${getBaseUrl()}/login`);
+  const baseUrl = await getBaseUrl();
+
+  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
+  if (!settings) redirect(`${baseUrl}/login`);
 
   const { displayAbout, standalone } = settings;
   const showAbout = standalone && displayAbout;

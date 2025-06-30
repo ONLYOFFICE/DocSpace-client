@@ -1,20 +1,20 @@
 {
-  "key_path": "LogoDocsEditorEmbedded",
-  "content": "Logo for the editors header - embedded mode",
-  "content_en_sha1_hash": "acd4021719b57df398e68c4eb926028436cadc43",
-  "created_at": "2025-05-26T07:15:44.902Z",
-  "updated_at": "2025-06-02T10:20:51.611Z",
+  "key_path": "GoToPayments",
+  "content": "Go to Payments",
+  "content_en_sha1_hash": "8eb6be26c70a671bde5e620f2eabfd5c0aabc71c",
+  "created_at": "2025-06-24T16:31:06.719Z",
+  "updated_at": "2025-06-24T16:32:19.125Z",
   "comment": {
-    "text": "This translation key is used for the \"LogoDocsEditorEmbedded\" string, which appears in the editor's header as a label displaying the logo with its size. The translation will be displayed when embedded mode is enabled.",
+    "text": "The translation key \"GoToPayments\" is used to translate the text \"Go to Payments\" which appears as a button label in a modal dialog. This text invites users to proceed to payments settings within a PortalSettings category page.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:51.886Z"
+    "updated_at": "2025-06-24T16:32:19.125Z"
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 402,
-      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoDocsEditorEmbedded\")} ({logoUrls[4].size.width}x\n {logoUrls[4].size.height})\n </Text>\n <Logo\n name={logoUrls[4].name}\n src={logoUrls[4].path.light}",
-      "module": "/packages/shared"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/GracePeriodModal.tsx",
+      "line_number": 103,
+      "context": "</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OkButton\"\n label={t(\"GoToPayments\")}\n size={ButtonSize.normal}\n primary\n onClick={onClick}\n />\n <Button",
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -60,12 +60,6 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
-    "es": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
@@ -79,12 +73,6 @@
       "approved_at": null
     },
     "hy-AM": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "it": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -138,12 +126,6 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
-    "ro": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
@@ -163,6 +145,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
@@ -193,12 +181,6 @@
       "approved_at": null
     },
     "vi": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

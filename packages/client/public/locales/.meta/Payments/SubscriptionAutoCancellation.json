@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically canceled on {{finalDate}}",
   "content_en_sha1_hash": "052b6c0869cca2a025f2225ae034b9d30f6d3f9b",
   "created_at": "2025-05-29T12:12:54.533Z",
-  "updated_at": "2025-06-18T17:09:45.926Z",
+  "updated_at": "2025-06-26T19:00:18.261Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a subscription will be automatically canceled on a specified date. It appears in UI elements such as storage plans and summaries, notifying users of an impending cancellation. The context is related to subscription auto-cancellation features.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 115,
+      "line_number": 128,
       "context": "toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">\n {nextStoragePlanSize === 0\n ? t(\"SubscriptionAutoCancellation\", {\n finalDate: storageExpiryDate,\n })\n : t(\"SubscriptionAutoRenewed\", {\n finalDate: storageExpiryDate,\n })}",
       "module": "/packages/client"
     },

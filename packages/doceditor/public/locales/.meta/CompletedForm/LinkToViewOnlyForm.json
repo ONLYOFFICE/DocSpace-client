@@ -3,7 +3,7 @@
   "content": "Link to view-only form:",
   "content_en_sha1_hash": "ec9955e53c0527bc3a7e111f0728d7009d75af78",
   "created_at": "2025-05-19T21:30:57.189Z",
-  "updated_at": "2025-05-26T07:57:32.851Z",
+  "updated_at": "2025-06-30T12:20:31.647Z",
   "comment": {
     "text": "This translation key is used for a label that indicates a link to view a form when it's available only for viewing. It appears in a UI element, likely as part of a button or dialog, and is associated with the \"CompletedForm:LinkToViewOnlyForm\" content string.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 136,
+      "line_number": 137,
       "context": "}, [socketUrl, formId]);\n \n const label = useMemo(() => {\n if (isStartFilling) return t(\"CompletedForm:LinkToFillOutForm\");\n \n if (completed) return t(\"CompletedForm:LinkToViewOnlyForm\");\n \n return t(\"CompletedForm:LinkToForm\");\n }, [t, isStartFilling, completed]);\n \n const header = useMemo(() => {",
       "module": "/packages/doceditor"
     }

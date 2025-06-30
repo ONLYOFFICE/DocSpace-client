@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import { observer } from "mobx-react";
@@ -97,7 +98,7 @@ const Restore = ({
     isBackupProgressVisible,
     errorsFieldsBeforeSafe,
     thirdPartyStorage,
-    defaults,
+
     isTheSameThirdPartyAccount,
     downloadingProgress,
     connectedThirdPartyAccount,
@@ -176,6 +177,7 @@ const Restore = ({
 
     const uploadUrl = combineUrl(window.ClientConfig?.proxy?.url, url);
 
+    // eslint-disable-next-line no-restricted-syntax
     for await (const value of uploadBackupFile(requestsDataArray, uploadUrl)) {
       if (!value) return false;
 

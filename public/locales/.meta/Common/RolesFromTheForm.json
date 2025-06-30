@@ -3,7 +3,7 @@
   "content": "Roles from the form:",
   "content_en_sha1_hash": "9aebb40c190759d663dcd420b90d3ba134b620a6",
   "created_at": "2025-05-19T21:30:48.131Z",
-  "updated_at": "2025-05-26T07:57:32.944Z",
+  "updated_at": "2025-06-26T19:00:18.307Z",
   "comment": {
     "text": "This translation key is used to display a label indicating that the roles selection is from a form. It appears as a title in a UI component where users can select roles, likely in a start filling or role assignment dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 317,
+      "line_number": 334,
       "context": "<p\n className={classNames(styles.title, {\n [styles.titleMargin]: !infoBarVisible,\n })}\n >\n {t(\"Common:RolesFromTheForm\")}\n </p>\n <FillingRoleSelector\n roles={roles}\n onSelect={onSelect}\n removeUserFromRole={removeUserFromRole}",
       "module": "/packages/shared"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, \"Formadan rollar:\" could be improved for clarity and natural flow in Azerbaijani. A more accurate and common translation would consider the context and what 'Roles from the form' represents. It could imply 'Roles listed on the form' or 'Roles requested in the form'.",
+          "suggestion": "Formaya daxil olan rolu"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -48,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Roles from the form:' implies a list of roles that were *selected* or *entered* on a form. The Czech translation 'Role z formuláře:' literally translates to 'Role from the form,' which doesn't convey the implication of selection or input. A more accurate translation would emphasize that these are roles *submitted* or *provided* via the form.",
-          "suggestion": "Consider 'Role zadané ve formuláři:' (Roles entered in the form) or 'Role uvedené ve formuláři:' (Roles listed in the form)."
+          "description": "The translation 'Role z formuláře:' is not ideal. While grammatically correct, 'Role' is singular. The English phrase 'Roles' implies multiple roles. A better translation would convey the plurality.",
+          "suggestion": "Role z formuláře:"
         }
       ],
       "approved_at": null
@@ -132,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Role z formularza:' is too literal. 'Roles' implies a plural, but 'Role' is singular.  A better translation would convey the meaning of multiple roles.",
+          "description": "The Polish translation 'Role z formularza:' translates to 'Role from the form:' but uses the singular 'Role' instead of the plural 'Roles' which matches the English content.",
           "suggestion": "Role z formularzy:"
         }
       ],
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පෝරමයෙන් ලැබූ භූමිකා:' literally translates to 'Roles received from the form:'. While understandable, 'Roles from the form:' implies a list or selection *within* the form, whereas 'received from' implies the form has already been processed. A more accurate translation would convey this distinction.",
-          "suggestion": "පෝරමයේ භූමිකා:"
+          "description": "The translation \"පෝරමයෙන් ලැබූ භූමිකා:\" is not the most natural or accurate translation of \"Roles from the form:\".  While technically correct, it implies 'roles *received* from the form.' A more accurate and common phrasing would be something along the lines of 'පෝරමයේ තිබුණු භූමිකා:' or 'පෝරමයේ සඳහන් භූමිකා:' which translates to 'roles listed on the form' or 'roles mentioned in the form'.",
+          "suggestion": "පෝරමයේ තිබුණු භූමිකා:"
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Улоге из обрасца:' is a literal translation that doesn't quite convey the intended meaning of 'Roles from the form:'. A more natural and accurate translation would be 'Поља за улоге из обрасца:' or 'Унесите улоге из обрасца:'. The original phrase likely refers to a list or input field for roles.",
-          "suggestion": "Поља за улоге из обрасца:"
+          "description": "The Serbian translation 'Улоге из обрасца:' is not the most natural or accurate translation of 'Roles from the form:'. 'Улоге' implies roles in a more formal or functional sense, whereas 'Roles' in this context might refer to a list of selected roles or options.",
+          "suggestion": "Consider 'Избор улога из обрасца:' (Selection of roles from the form:) or 'Наведене улоге из обрасца:' (Listed roles from the form:)."
         }
       ],
       "approved_at": null
@@ -210,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Formdan roller:' is a literal translation and while understandable, it doesn't quite capture the natural flow of the English phrase \"Roles from the form:\". A more natural Turkish equivalent might be something like \"Formdaki roller:\" or \"Form üzerindeki roller:\"",
+          "description": "The translation 'Formdan roller:' is technically correct but lacks the natural flow of Turkish. A more idiomatic translation would be 'Formdaki roller:' or 'Form üzerinde belirtilen roller:'",
           "suggestion": "Formdaki roller:"
         }
       ],
@@ -231,13 +237,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, '来自此表单的角色' sounds a bit stiff and unnatural in Chinese. A more fluent and common phrasing would be '表单中的角色' or '从表单获取的角色'.",
-          "suggestion": "表单中的角色"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

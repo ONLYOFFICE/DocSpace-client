@@ -125,7 +125,7 @@ export async function getCapabilities() {
 export async function getPortalCultures(): Promise<TPortalCultures> {
   logger.debug("Start GET /settings/cultures");
 
-  const [getPortalCultures] = await createRequest(
+  const [getPortalCulturesRes] = await createRequest(
     [`/settings/cultures`],
     [["", ""]],
     "GET",
@@ -133,7 +133,7 @@ export async function getPortalCultures(): Promise<TPortalCultures> {
 
   const res = IS_TEST
     ? portalCulturesHandler()
-    : await fetch(getPortalCultures, { next: { revalidate: 300 } });
+    : await fetch(getPortalCulturesRes, { next: { revalidate: 300 } });
 
   if (!res.ok) {
     throw new Error("Failed to get portal cultures");

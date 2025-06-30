@@ -41,11 +41,11 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 type TransactionHistoryProps = {
-  currentDeviceType: DeviceType;
   isTransactionHistoryExist: boolean;
   hasAppliedDateFilter: boolean;
   viewAs?: string;
   setViewAs?: (view: string) => void;
+  currentDeviceType?: DeviceType;
 };
 
 const TransactionBody = ({
@@ -58,7 +58,7 @@ const TransactionBody = ({
   useViewEffect({
     view: viewAs!,
     setView: setViewAs!,
-    currentDeviceType,
+    currentDeviceType: currentDeviceType!,
   });
 
   const { t } = useTranslation(["Payments", "Settings"]);
@@ -100,11 +100,12 @@ const TransactionBody = ({
   return isTransactionHistoryExist ? renderContent : emptyView;
 };
 
-export default inject(({ setup }: TStore) => {
+export default inject(({ setup, settingsStore }: TStore) => {
   const { viewAs, setViewAs } = setup;
-
+  const { currentDeviceType } = settingsStore;
   return {
     viewAs,
     setViewAs,
+    currentDeviceType,
   };
 })(observer(TransactionBody));

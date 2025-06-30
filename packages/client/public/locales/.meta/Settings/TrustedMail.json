@@ -3,7 +3,7 @@
   "content": "Trusted mail domain settings",
   "content_en_sha1_hash": "cad01243d98a7420bb73d72774f75a5a0388682f",
   "created_at": "2025-05-19T21:30:52.982Z",
-  "updated_at": "2025-06-08T12:02:32.823Z",
+  "updated_at": "2025-06-18T17:11:42.491Z",
   "comment": {
     "text": "\"TrustedMail domain settings are displayed on a portal's security page to allow users to configure their trusted mail domain.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 39,
-      "context": "import { Link } from \"@docspace/shared/components/link\";\n import { DeviceType } from \"@docspace/shared/enums\";\n import { MainContainer } from \"../StyledSecurity\";\n import { TfaSection } from \"./tfa\";\n import { PasswordStrengthSection } from \"./passwordStrength\";\n import { TrustedMailSection } from \"./trustedMail\";\n import { InvitationSettingsSection } from \"./invitationSettings\";\n import { IpSecuritySection } from \"./ipSecurity\";\n import { AdminMessageSection } from \"./adminMessage\";\n import { SessionLifetimeSection } from \"./sessionLifetime\";\n import { BruteForceProtectionSection } from \"./bruteForceProtection\";",
+      "line_number": 40,
+      "context": "import { DeviceType } from \"@docspace/shared/enums\";\n import { isDesktop } from \"@docspace/shared/utils/device\";\n import { MainContainer } from \"../StyledSecurity\";\n import { TfaSection } from \"./tfa\";\n import { PasswordStrengthSection } from \"./passwordStrength\";\n import { TrustedMailSection } from \"./trustedMail\";\n import { InvitationSettingsSection } from \"./invitationSettings\";\n import { IpSecuritySection } from \"./ipSecurity\";\n import { AdminMessageSection } from \"./adminMessage\";\n import { SessionLifetimeSection } from \"./sessionLifetime\";\n import { BruteForceProtectionSection } from \"./bruteForceProtection\";",
       "module": "/packages/client"
     },
     {

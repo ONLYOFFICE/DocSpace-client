@@ -24,16 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-declare module "*.ico?url" {
-  const content: string;
-  export default content;
-}
-
 declare module "*.svg?url" {
   const content: string;
   export default content;
 }
 
+declare module "*.svg" {
+  import React from "react";
+
+  const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
+  export default SVG;
+}
+
+declare module "*.png" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.ico" {
+  const content: string;
+  export default content;
+}
+
+declare module "*.ico?url" {
+  const content: string;
+  export default content;
+}
 declare module "resize-image" {
   type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";
 
@@ -43,15 +59,15 @@ declare module "resize-image" {
 
   interface ResizeImage extends ImageTypes {
     resize2Canvas: (
-      img: HTMLImageElement,
-      width: number,
-      heigh: number,
-    ) => HTMLCanvasElement;
-    resize: (
-      img: HTMLImageElement,
+      img: HTMLImageElement | ImageBitmap,
       width: number,
       height: number,
-      type: ImageFormat,
+    ) => HTMLCanvasElement;
+    resize: (
+      img: HTMLImageElement | HTMLCanvasElement,
+      width: number,
+      height: number,
+      type?: ImageFormat,
     ) => string;
   }
 

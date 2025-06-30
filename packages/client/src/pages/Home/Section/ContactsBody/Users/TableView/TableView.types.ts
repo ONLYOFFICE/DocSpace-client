@@ -174,6 +174,7 @@ export type TableRowProps = {
   item: TItem;
 
   isActive?: boolean;
+  inProgress?: boolean;
 
   getContextModel?: () => ContextMenuModel[];
 

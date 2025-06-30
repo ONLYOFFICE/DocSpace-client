@@ -59,6 +59,8 @@ const useDeepLink = ({
     const params = new URLSearchParams(window.location.search);
     const withoutRedirect = params.get("without_redirect");
     const isSDK = params.get("isSDK");
+    const isOpenOnlyApp =
+      defaultOpenDocument === "app" || deepLinkSettings === DeepLinkType.App;
 
     if (
       !isSDK &&
@@ -74,17 +76,14 @@ const useDeepLink = ({
       setIsShowDeepLink(true);
     }
 
-    if (
-      !isSDK &&
-      isMobile &&
-      (defaultOpenDocument === "app" || deepLinkSettings === DeepLinkType.App)
-    ) {
+    if (!isSDK && isMobile && isOpenOnlyApp) {
       getDeepLink(
         window.location.origin,
         email || "",
         fileInfo,
         settings?.deepLink,
         window.location.href,
+        isOpenOnlyApp,
       );
     }
   }, [fileInfo, settings?.deepLink, email, deepLinkSettings]);

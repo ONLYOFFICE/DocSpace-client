@@ -121,14 +121,14 @@ const FilesSelector = ({
           filterParam={FilterType.FilesOnly}
           withHeader
           headerProps={{
-            headerLabel: t("Common:Select"),
+            headerLabel: t("Common:SelectAction"),
             onCloseClick: toggleSelector,
             isCloseable: true,
           }}
           getIcon={getIcon}
           withCancelButton
           cancelButtonLabel={t("Common:CancelButton")}
-          submitButtonLabel={t("Common:Select")}
+          submitButtonLabel={t("Common:SelectAction")}
           onCancel={toggleSelector}
           filesSettings={{} as TFilesSettings}
           withBreadCrumbs={false}

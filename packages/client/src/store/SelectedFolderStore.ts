@@ -227,6 +227,7 @@ class SelectedFolderStore {
       external: this.external,
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
+      isAIRoom: this.isAIRoom,
     };
   };
 

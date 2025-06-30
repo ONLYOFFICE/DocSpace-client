@@ -109,7 +109,7 @@ export interface SimpleRunFlowResponse {
       results: {
         message: {
           text_key: string;
-          data: {
+          data?: {
             timestamp: string;
             sender: string;
             sender_name: string;

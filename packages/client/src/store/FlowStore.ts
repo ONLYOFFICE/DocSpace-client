@@ -262,7 +262,7 @@ class FlowStore {
 
       const msg = res.outputs[0].outputs[0].results.message;
 
-      delete msg.data;
+      delete msg?.data;
 
       const aiEvent = new CustomEvent(ChatEvents.ADD_AI_MESSAGE, {
         detail: msg,

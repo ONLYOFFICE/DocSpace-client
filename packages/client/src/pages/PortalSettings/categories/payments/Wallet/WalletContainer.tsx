@@ -325,7 +325,7 @@ export default inject(
       setVisibleWalletSetting,
       isCardLinkedToPortal,
       walletCustomerStatusNotActive,
-      isPayerExist,
+      walletCustomerEmail,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
@@ -350,7 +350,7 @@ export default inject(
       isNotPaidPeriod,
       isMobile,
       walletCustomerStatusNotActive,
-      payerEmail: isPayerExist,
+      payerEmail: walletCustomerEmail,
       walletHelpUrl,
       currentColorScheme,
     };

@@ -241,10 +241,14 @@ const PayerInformation = ({
 
 export default inject(
   ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
-    const { accountLink, isStripePortalAvailable, isPayerExist } = paymentStore;
+    const {
+      accountLink,
+      isStripePortalAvailable,
+      walletCustomerEmail,
+      walletCustomerInfo,
+    } = paymentStore;
     const { theme } = settingsStore;
-    const { isGracePeriod, isNotPaidPeriod, payerInfo } =
-      currentTariffStatusStore;
+    const { isGracePeriod, isNotPaidPeriod } = currentTariffStatusStore;
     const { user } = userStore;
 
     return {
@@ -254,8 +258,8 @@ export default inject(
       accountLink,
       isGracePeriod,
       isNotPaidPeriod,
-      email: isPayerExist,
-      payerInfo,
+      email: walletCustomerEmail,
+      payerInfo: walletCustomerInfo,
     };
   },
 )(observer(PayerInformation));

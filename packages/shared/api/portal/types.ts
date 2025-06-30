@@ -145,6 +145,18 @@ export type TCustomerInfo = {
   paymentMethodStatus: number;
   email: string | null;
   portalId: string | null;
+  payer: {
+    avatar: string;
+    avatarMax: string;
+    avatarMedium: string;
+    avatarOriginal: string;
+    avatarSmall: string;
+    displayName: string;
+    hasAvatar: boolean;
+    id: string;
+    isAnonim: boolean;
+    profileUrl: string;
+  } | null;
 };
 
 export type TBalance =

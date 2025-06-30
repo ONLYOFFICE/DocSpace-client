@@ -45,8 +45,6 @@ class CurrentTariffStatusStore {
 
   isLoaded = false;
 
-  payerInfo: TUser | null = null;
-
   language: string = "en";
 
   walletQuotas: TQuotas[] = [];
@@ -162,28 +160,6 @@ class CurrentTariffStatusStore {
   get licenseDate() {
     return this.portalTariffStatus?.licenseDate;
   }
-
-  setPayerInfo = async (payer?: string) => {
-    const payerInfo = payer ?? this.customerId;
-
-    try {
-      if (!payerInfo || !payerInfo?.length) {
-        this.payerInfo = null;
-        return;
-      }
-
-      const result = await getUserByEmail(payerInfo);
-      if (!result) {
-        this.payerInfo = null;
-        return;
-      }
-
-      this.payerInfo = result;
-    } catch (e) {
-      this.payerInfo = null;
-      console.error(e);
-    }
-  };
 
   get paymentDate() {
     moment.locale(this.language);

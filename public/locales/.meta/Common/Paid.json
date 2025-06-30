@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2025-06-02T10:20:51.256Z",
+  "updated_at": "2025-06-30T12:20:31.369Z",
   "comment": {
     "text": "This translation key is used to display a paid status label. It appears on a badge component in the contacts list, indicating that an account has made payments and should be considered paid. The text changes depending on whether a user is paying or not, using the \"Paid\" label for paid accounts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 214,
+      "line_number": 215,
       "context": "};\n \n const typeData = renderTypeData();\n \n const statusText =\n isVisitor || isCollaborator ? t(\"Common:Free\") : t(\"Common:Paid\");\n \n if (!ready) return <InfoPanelViewLoader view=\"users\" />;\n \n return (\n <StyledUsersContent>",
       "module": "/packages/client"
     },
@@ -120,13 +120,13 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 356,
+      "line_number": 358,
       "context": "id: \"menu_change-user_administrator\",\n className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n icon: isGuests ? PersonAdminReactSvgUrl : null,\n badgeLabel: isGuests ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 356,
+      "line_number": 358,
       "context": "id: \"menu_change-user_administrator\",\n className: \"group-menu_drop-down\",\n label: getUserTypeTranslation(EmployeeType.Admin, t),\n title: getUserTypeTranslation(EmployeeType.Admin, t),\n icon: isGuests ? PersonAdminReactSvgUrl : null,\n badgeLabel: isGuests ? t(\"Common:Paid\") : undefined,\n isPaidBadge: !standalone,\n onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),\n \"data-action\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: EmployeeType.Admin,",
       "module": "/packages/client"
     },
@@ -174,7 +174,7 @@
     },
     {
       "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 449,
+      "line_number": 445,
       "context": "backgroundColor={\n theme.isBase\n ? globalColors.favoritesStatus\n : globalColors.favoriteStatusDark\n }\n label={t(\"Common:Paid\")}\n fontWeight=\"700\"\n className=\"auto-backup_badge\"\n isPaidBadge\n />\n ) : null}",
       "module": "/packages/shared"
     },
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Ödənildi' translates to 'Paid for' or 'Has been paid'. While it conveys a related concept, 'Paid' directly translates to 'Ödənmiş' in Azerbaijani. 'Ödənildi' implies action completed on something already owned or agreed upon.",
-          "suggestion": "Use 'Ödənmiş' for a more direct translation of 'Paid'."
+          "description": "'Ödənildi' translates to 'Paid for' or 'Has been paid,' rather than simply 'Paid'. While related, it doesn't perfectly match the English content 'Paid'.",
+          "suggestion": "Consider 'Ödənmiş' or 'Ödənilmiş' for a more direct translation of 'Paid'."
         }
       ],
       "approved_at": null
@@ -243,7 +243,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Επί πληρωμή' is a valid Greek phrase, it's a bit formal and literal translation of 'Paid'. A more natural and commonly used translation for 'Paid' in a context like a product or service offering would be 'Πληρωμένο'.",
+          "suggestion": "Πληρωμένο"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -252,7 +258,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"De pago\" is a possible translation of \"Paid\", it's not the most natural or common translation in many contexts. \"Pagado\" would be a more direct and frequently used translation for 'Paid' in Spanish, implying something that has already been paid.",
+          "description": "While 'De pago' is a possible translation for 'Paid', it's not the most natural or common translation. It literally translates to 'of payment'. A more idiomatic and generally preferred translation would be 'Pagado'.",
           "suggestion": "Pagado"
         }
       ],
@@ -300,8 +306,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຈ່າຍແລ້ວ' (jai laeo) means 'already paid'. While it's related to 'Paid', it doesn't directly translate to the English word 'Paid' which implies the state of being paid or the cost itself. A more accurate translation, depending on the context, might be 'ຈ່າຍ' (jai) or 'ຄ່າ' (kha).",
-          "suggestion": "Consider 'ຈ່າຍ' (jai) or 'ຄ່າ' (kha) depending on the intended meaning. For example, 'ຄ່າຈ່າຍ' (kha jai) could mean 'payment'."
+          "description": "The Lao translation \"ຈ່າຍແລ້ວ\" (jai laeo) translates to \"already paid\" or \"paid already\". While related to the English 'Paid', it doesn't convey the same nuance. 'Paid' can simply refer to something that is paid for, not necessarily already.",
+          "suggestion": "Consider \"ຈ່າຍ\" (jai) for a more direct translation of 'Paid' if the context allows, or investigate more context-specific translations."
         }
       ],
       "approved_at": null
@@ -348,8 +354,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Платный' is a possible translation for 'Paid', it doesn't perfectly capture the nuance. 'Paid' often implies a pre-existing obligation or completed payment. 'Платный' generally means 'payable' or 'chargeable'. A more accurate translation depending on context might be 'Оплаченный' (Oplochennyy - Paid/Prepaid) or 'Вознаграждение' (Voznagrazhdenie - Fee/Reward).",
-          "suggestion": "Consider 'Оплаченный' or 'Вознаграждение' depending on the specific context."
+          "description": "The Russian translation \"Платный\" while technically meaning 'paid' or 'payable', doesn't perfectly capture the nuance of 'Paid' as a label for a category or field. A more accurate translation in this context might be 'Оплачено' (Oplacheno - Paid) or 'Оплата' (Oplata - Payment). \"Платный\" implies something *is* paid, rather than indicating it *has been* paid.",
+          "suggestion": "Consider 'Оплачено' or 'Оплата' depending on the exact context."
         }
       ],
       "approved_at": null
@@ -360,8 +366,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ගෙවන' (geewana) translates to 'pays' or 'paying', not 'paid'. The English 'Paid' indicates a state of having already paid, while 'ගෙවන' implies the act of paying.",
-          "suggestion": "Consider 'ගෙවා ඇති' (geva athi) which translates to 'having paid' or 'paid'. Another option is 'ගෙmaid' (gemaid) which although a loan word, is sometimes used to convey the meaning of 'paid'."
+          "description": "The Sinhala translation 'ගෙවන' (gevana) translates to 'pays' or 'giving' rather than 'paid'. 'Paid' implies a completed payment, whereas 'gevana' describes the act of paying.",
+          "suggestion": "A more accurate translation for 'Paid' would be 'ගෙවා ඇති' (geva athi) which means 'has paid' or 'paid'."
         }
       ],
       "approved_at": null
@@ -387,7 +393,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Latin) translation \"Plaćeno\" translates to 'Paid' or 'Paid for' in the past tense. The English content 'Paid' is in the present tense. A more accurate translation would be 'Plativo' or 'Naplata'.",
+          "suggestion": "Plativo"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -408,8 +420,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Đã thanh toán\" is a valid translation for 'Paid', it's a bit literal and might not be the most natural fit depending on the context. 'Paid' often implies a cost or fee. \"Đã thanh toán\" implies the action of paying.  A more contextually appropriate translation might be 'Trả phí' (to pay a fee) or simply 'Trả' (paid).",
-          "suggestion": "Consider 'Trả phí' or 'Trả' for a more contextually relevant translation, depending on the usage."
+          "description": "While 'Đã thanh toán' is a valid translation, 'Paid' often implies a status (e.g., 'Paid plan'). 'Đã thanh toán' is more literally 'has been paid'. A more accurate translation, depending on the context, could be 'Trả phí' or 'Đã trả'.",
+          "suggestion": "Consider 'Trả phí' or 'Đã trả' for a more nuanced translation, or clarify the context for a more precise choice."
         }
       ],
       "approved_at": null

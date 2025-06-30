@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { IndexRange } from "react-virtualized";
 
 import { ContextMenuModel } from "../context-menu";
@@ -81,6 +82,7 @@ export interface TableHeaderProps {
   theme: TTheme;
   isIndexEditingMode?: boolean;
   withoutWideColumn?: boolean;
+  style?: React.CSSProperties;
 }
 
 export interface TableHeaderCellProps {
@@ -158,15 +160,15 @@ interface TableGroupmenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
-  checkboxOptions: React.ReactElement<{ children?: React.ReactNode }>;
-  onClick: () => void;
+  checkboxOptions?: React.ReactElement<{ children?: React.ReactNode }>;
+  onClick?: () => void;
   onChange: (isChecked: boolean) => void;
   checkboxMargin?: string;
   withoutInfoPanelToggler: boolean;
   isInfoPanelVisible?: boolean;
   isMobileView?: boolean;
   isBlocked?: boolean;
-  toggleInfoPanel: () => void;
+  toggleInfoPanel?: () => void;
   withComboBox?: boolean;
   headerLabel?: string;
 }

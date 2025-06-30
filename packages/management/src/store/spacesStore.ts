@@ -39,6 +39,7 @@ export class SpacesStore {
   deletePortalDialogVisible = false;
 
   domainDialogVisible = false;
+
   connectDialogVisible = false;
 
   currentPortal: Nullable<TPortals> = null;
@@ -58,7 +59,7 @@ export class SpacesStore {
 
   setDomainName = async (domain: string) => {
     try {
-      const res = await setDomainName(domain);
+      await setDomainName(domain);
     } catch (error) {
       console.log(error);
     }
@@ -80,4 +81,3 @@ export class SpacesStore {
     this.connectDialogVisible = connectDialogVisible;
   };
 }
-

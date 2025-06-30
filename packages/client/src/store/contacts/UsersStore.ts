@@ -125,7 +125,7 @@ class UsersStore {
 
   roomParts: string = "";
 
-  activeUsers: TUser[] = [];
+  activeUsers: UsersStore["getUsersToMakeEmployees"] = [];
 
   constructor(
     public settingsStore: SettingsStore,
@@ -312,6 +312,8 @@ class UsersStore {
       const { id, data } = value;
 
       if (!data || !id) return;
+
+      if (this.groupsStore!.currentGroup?.id !== id) return;
 
       const group = await api.groups.getGroupById(id, true);
 
@@ -1393,7 +1395,7 @@ class UsersStore {
     setChangeUserStatusDialogVisible(true);
   };
 
-  setActiveUsers = (users: TUser[]) => {
+  setActiveUsers = (users: UsersStore["getUsersToMakeEmployees"]) => {
     this.activeUsers = users;
   };
 }

@@ -3,7 +3,7 @@
   "content": "You are about to delete this room. You won’t be able to restore it.",
   "content_en_sha1_hash": "fb6b2c204a51ddbae7a442c879a15e19ca601321",
   "created_at": "2025-05-19T21:30:56.706Z",
-  "updated_at": "2025-06-02T10:20:51.131Z",
+  "updated_at": "2025-06-18T17:11:42.366Z",
   "comment": {
     "text": "This translation key is used to display a message before deleting a room, informing the user that they will not be able to restore the deletion. The message appears in a confirmation dialog when the user initiates the deletion process. Translators should provide a clear and concise equivalent for this message to ensure a smooth user experience in various languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 117,
+      "line_number": 118,
       "context": "selection.forEach((item) => {\n item.fileExst ? filesId.push(item.id) : foldersId.push(item.id);\n });\n };\n \n const onDeleteRoom = async () => {\n const translations = {\n successRemoveRoom: t(\"Files:RoomRemoved\"),\n successRemoveRooms: t(\"Files:RoomsRemoved\"),\n };",
       "module": "/packages/client"
     }

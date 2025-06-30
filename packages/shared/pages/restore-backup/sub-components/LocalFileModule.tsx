@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { FileInput } from "@docspace/shared/components/file-input";
-import { InputSize } from "@docspace/shared/components/text-input";
+import { FileInput } from "../../../components/file-input";
+import { InputSize } from "../../../components/text-input";
 
 export type LocalFileProps = {
   setRestoreResource: (file: File | string) => void;

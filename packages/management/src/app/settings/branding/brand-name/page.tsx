@@ -45,8 +45,10 @@ async function Page() {
     getWhiteLabelText(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings) redirect(`${getBaseUrl()}/login`);
+  const baseUrl = await getBaseUrl();
+
+  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
+  if (!settings) redirect(`${baseUrl}/login`);
 
   const { standalone } = settings;
 
@@ -67,4 +69,3 @@ async function Page() {
 }
 
 export default Page;
-

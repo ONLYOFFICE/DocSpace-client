@@ -36,8 +36,8 @@ import {
 } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 
-import pkgFile from "../../package.json";
 import useDeviceType from "@/hooks/useDeviceType";
+import pkgFile from "../../package.json";
 
 type TErrorProvider = {
   user: TUser | undefined;

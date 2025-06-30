@@ -3,7 +3,7 @@
   "content": "Current space",
   "content_en_sha1_hash": "d57183d309dc0b116a6ffaefaf2638416e24c6d7",
   "created_at": "2025-05-19T21:30:57.422Z",
-  "updated_at": "2025-05-26T07:57:33.006Z",
+  "updated_at": "2025-06-30T12:20:31.758Z",
   "comment": {
     "text": "This translation key is used to display the text \"Current space\" in a specific UI component. It is intended to be truncated and styled as a title, appearing in a row view of spaces on a mobile view when not in a completed wizard state.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/multiple/row-content.tsx",
-      "line_number": 106,
+      "line_number": 108,
       "context": "fontSize=\"14px\"\n fontWeight={600}\n truncate\n className=\"spaces_row-current\"\n >\n {t(\"CurrentSpace\")}\n </Text>\n ) : !isWizardCompleted && isMobileView ? (\n <Text\n fontSize=\"12px\"\n fontWeight={600}",
       "module": "/packages/management"
     }

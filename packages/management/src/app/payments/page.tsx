@@ -44,16 +44,18 @@ async function Page() {
     getPaymentSettings(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  const baseUrl = await getBaseUrl();
+
+  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
   if (!settings || !quota || !portalTariff || !paymentSettings)
-    redirect(`${getBaseUrl()}/login`);
+    redirect(`${baseUrl}/login`);
 
   const { logoText } = settings;
   const { trial } = quota;
   const { enterprise, developer, dueDate, openSource } = portalTariff;
   const { salesEmail, buyUrl } = paymentSettings;
 
-  if (openSource) return redirect(`${getBaseUrl()}/error/403`);
+  if (openSource) return redirect(`${baseUrl}/error/403`);
 
   return (
     <PaymentsPage
@@ -69,4 +71,3 @@ async function Page() {
 }
 
 export default Page;
-

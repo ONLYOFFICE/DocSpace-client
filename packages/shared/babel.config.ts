@@ -36,8 +36,8 @@ const presets = [
 ];
 
 const plugins = [
-  "@babel/plugin-proposal-class-properties",
-  "@babel/plugin-proposal-export-namespace-from",
+  "@babel/plugin-transform-class-properties",
+  "@babel/plugin-transform-export-namespace-from",
   "babel-plugin-styled-components",
   "@babel/plugin-proposal-export-default-from",
 ];

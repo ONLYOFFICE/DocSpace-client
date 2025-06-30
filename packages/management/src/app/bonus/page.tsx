@@ -44,9 +44,11 @@ async function Page() {
     getPaymentSettings(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  const baseUrl = await getBaseUrl();
+
+  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
   if (!settings || !quota || !portalTariff || !paymentSettings)
-    redirect(`${getBaseUrl()}/login`);
+    redirect(`${baseUrl}/login`);
 
   const { logoText, externalResources } = settings;
   const { site, helpcenter, support } = externalResources;
@@ -64,7 +66,7 @@ async function Page() {
 
   const dataBackupUrl = `${helpcenter.domain}/administration/docspace-settings.aspx#CreatingBackup_block`;
 
-  if (!openSource) return redirect(`${getBaseUrl()}/error/403`);
+  if (!openSource) return redirect(`${baseUrl}/error/403`);
 
   return (
     <BonusPage
@@ -85,4 +87,3 @@ async function Page() {
 }
 
 export default Page;
-

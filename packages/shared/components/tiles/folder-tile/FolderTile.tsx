@@ -28,15 +28,12 @@ import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { isMobile } from "react-device-detect";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "../../checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
+} from "../../context-menu-button";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { FolderChildProps, FolderTileProps } from "./FolderTile.types";
 import { hasOwnProperty } from "../../../utils/object";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";

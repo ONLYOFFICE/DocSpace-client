@@ -49,8 +49,10 @@ async function Page() {
       getCompanyInfo(),
     ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings || !portalTariff) redirect(`${getBaseUrl()}/login`);
+  const baseUrl = await getBaseUrl();
+
+  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
+  if (!settings || !portalTariff) redirect(`${baseUrl}/login`);
 
   const { standalone, licenseAgreementsUrl, logoText, displayAbout } = settings;
   const { enterprise } = portalTariff;
@@ -62,7 +64,7 @@ async function Page() {
       displayAbout={displayAbout}
       companyInfoSettingsData={companyInfo}
       standalone={standalone}
-      licenseAgreementsUrl={licenseAgreementsUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl!}
       buildInfo={buildInfo!}
       isEnterprise={enterprise}
       logoText={logoText}
@@ -71,4 +73,3 @@ async function Page() {
 }
 
 export default Page;
-

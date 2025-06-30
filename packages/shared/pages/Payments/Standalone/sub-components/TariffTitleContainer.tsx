@@ -59,7 +59,7 @@ export const TariffTitleContainer = ({
           fontWeight={600}
           fontSize="14px"
         >
-          {t("FreeDaysLeft", { count: trialDaysLeft })}
+          {t("FreeDaysLeft", { count: Number(trialDaysLeft) })}
         </Text>
       );
     }

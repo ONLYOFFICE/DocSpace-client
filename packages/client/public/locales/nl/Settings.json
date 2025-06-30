@@ -156,6 +156,7 @@
   "LoginHistoryTitle": "Inloggeschiedenis",
   "LoginLatestText": "Alleen de laatste activiteit wordt op deze pagina getoond. De gegevens zelf worden opgeslagen gedurende de in het onderstaande veld aangegeven periode (maximaal 180 dagen).",
   "LoginSubheaderTitle": "Deze subsectie wordt gebruikt om de laatste aanmeldingsactiviteit van gebruikers te controleren, waaronder succesvolle aanmeldingen en mislukte pogingen met een indicatie van de redenen.",
+  "LogoLightSmall": "Logo voor de koptekst van de ruimte",
   "ManagementCategoryDataManagement": "Databeheer",
   "ManagementCategoryIntegration": "Integratie",
   "ManagementCategorySecurity": "Veiligheid",

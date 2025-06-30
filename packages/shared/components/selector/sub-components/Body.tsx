@@ -104,7 +104,8 @@ const Body = ({
   const isSearch = React.use(SearchValueContext);
   const { withInfoBar } = React.use(InfoBarContext);
 
-  const { withBreadCrumbs } = React.use(BreadCrumbsContext);
+  const { withBreadCrumbs, isBreadCrumbsLoading } =
+    React.useContext(BreadCrumbsContext);
 
   const { withTabs, tabsData, activeTabId } = React.use(TabsContext);
 
@@ -130,6 +131,15 @@ const Body = ({
       : isEmptyInput
         ? 1
         : items.length;
+
+  const isShareFormEmpty =
+    itemsCount === 0 &&
+    !isSearch &&
+    Boolean(items?.[0]?.isRoomsOnly) &&
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
+
+  const visibleInfoBar = !isShareFormEmpty && !isBreadCrumbsLoading;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -207,7 +217,7 @@ const Body = ({
         setInfoBarHeight(height + CONTAINER_PADDING);
       }
     }
-  }, [withInfoBar, itemsCount]);
+  }, [withInfoBar, itemsCount, visibleInfoBar]);
   useLayoutEffect(() => {
     if (injectedElement) {
       const element = injectedElementRef.current;
@@ -246,14 +256,6 @@ const Body = ({
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
-  const isShareFormEmpty =
-    itemsCount === 0 &&
-    Boolean(items?.[0]?.isRoomsOnly) &&
-    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
-      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
-
-  const cloneProps = { ref: injectedElementRef };
-
   const getFooterHeight = () => {
     if (withFooterCheckbox) return FOOTER_WITH_CHECKBOX_HEIGHT;
     if (withFooterInput) return FOOTER_WITH_NEW_NAME_HEIGHT;
@@ -264,6 +266,8 @@ const Body = ({
     if (withTabs) return HEADER_HEIGHT;
     return HEADER_HEIGHT + CONTAINER_PADDING;
   };
+
+  const cloneProps = { ref: injectedElementRef };
 
   return (
     <div
@@ -287,9 +291,9 @@ const Body = ({
       }
     >
       <InfoBar
-        className={styles.selectorInfoBar}
         ref={infoBarRef}
-        visible={itemsCount !== 0}
+        visible={visibleInfoBar}
+        className={styles.selectorInfoBar}
       />
       <BreadCrumbs visible={!isShareFormEmpty} />
 

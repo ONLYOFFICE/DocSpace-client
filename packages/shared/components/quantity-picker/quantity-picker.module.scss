@@ -174,5 +174,9 @@
     &.disabled {
       color: var(--quantity-picker-disable-color);
     }
+
+    &.warningIncrementFromZero {
+      color: var(--quantity-picker-warning-color);
+    }
   }
 }

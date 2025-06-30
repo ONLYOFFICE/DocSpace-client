@@ -58,7 +58,6 @@ const useRoomsHelper = ({
 
   isInit,
   setIsInit,
-
   withCreate,
   disableThirdParty,
   excludeItems,
@@ -144,6 +143,7 @@ const useRoomsHelper = ({
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
+      if (searchArea) filter.searchArea = searchArea;
       filter.filterValue = filterValue;
       filter.type = filterType as unknown as string | string[];
       filter.searchArea = searchArea || "";

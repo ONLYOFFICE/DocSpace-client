@@ -156,7 +156,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       ns="Payments"
       i18nKey="PerStorageWitnMinValue"
       values={{
-        currency: formatWalletCurrency(storagePriceIncrement),
+        currency: formatWalletCurrency!(storagePriceIncrement),
         amount: getConvertedSize(t, storageSizeIncrement || 0),
         storageUnit: t("Common:Gigabyte"),
         minValue: MIN_VALUE,

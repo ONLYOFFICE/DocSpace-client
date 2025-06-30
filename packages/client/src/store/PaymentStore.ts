@@ -431,13 +431,13 @@ class PaymentStore {
   formatPaymentCurrency = (item: number = 0, fractionDigits: number = 0) => {
     const { language } = authStore;
     const amount = item || this.walletBalance;
-    const { planCost } = this.paymentQuotasStore;
+    const { planCost } = this.paymentQuotasStore!;
     const { isoCurrencySymbol } = planCost;
 
     return formatCurrencyValue(
       language,
       amount,
-      isoCurrencySymbol,
+      isoCurrencySymbol || "USD",
       fractionDigits,
     );
   };
@@ -561,7 +561,7 @@ class PaymentStore {
   };
 
   isShowStorageTariffDeactivated = () => {
-    const { previousStoragePlanSize } = this.currentTariffStatusStore;
+    const { previousStoragePlanSize } = this.currentTariffStatusStore!;
 
     if (!previousStoragePlanSize) return false;
 
@@ -572,8 +572,8 @@ class PaymentStore {
     this.isShowStorageTariffDeactivatedModal = value;
   };
 
-  initWalletPayerAndBalance = async (isRefresh) => {
-    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
+  initWalletPayerAndBalance = async (isRefresh: boolean) => {
+    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore!;
 
     await Promise.all([
       this.fetchWalletPayer(isRefresh),
@@ -591,7 +591,7 @@ class PaymentStore {
 
     const { fetchPortalTariff } = this.currentTariffStatusStore;
 
-    const requests = [fetchPortalTariff()];
+    const requests: Promise<unknown>[] = [fetchPortalTariff()];
 
     try {
       await this.initWalletPayerAndBalance(isRefresh);

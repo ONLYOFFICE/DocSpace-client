@@ -130,9 +130,9 @@ class ServicesStore {
       isAlreadyPaid,
       initWalletPayerAndBalance,
       handleServicesQuotas,
-    } = this.paymentStore;
+    } = this.paymentStore!;
 
-    const { fetchPortalTariff } = this.currentTariffStatusStore;
+    const { fetchPortalTariff } = this.currentTariffStatusStore!;
 
     const requests = [
       handleServicesQuotas(),
@@ -145,14 +145,14 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid || this.paymentStore.walletCustomerEmail) {
-        if (this.paymentStore.isStripePortalAvailable) {
+      if (isAlreadyPaid || this.paymentStore!.walletCustomerEmail) {
+        if (this.paymentStore!.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
           if (
-            this.paymentStore.isShowStorageTariffDeactivated() &&
-            this.paymentStore.isPayer
+            this.paymentStore!.isShowStorageTariffDeactivated() &&
+            this.paymentStore!.isPayer
           ) {
-            this.paymentStore.setIsShowTariffDeactivatedModal(true);
+            this.paymentStore!.setIsShowTariffDeactivatedModal(true);
           }
         }
         requests.push(fetchAutoPayments());

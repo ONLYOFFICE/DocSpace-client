@@ -3,7 +3,7 @@
   "content": "Me and groups ({{ groupsCount }})",
   "content_en_sha1_hash": "056c8e719cd461f48ae982914d1324e06bffa247",
   "created_at": "2025-05-19T21:30:55.833Z",
-  "updated_at": "2025-05-26T07:57:32.263Z",
+  "updated_at": "2025-06-30T12:20:31.207Z",
   "comment": {
     "text": "This translation key is used to display a phrase indicating whether the user has a Me and Groups section. If groups are available, it shows the number of groups; otherwise, it displays an empty string. It appears in a dialog component at line 107, likely as part of a button or label.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 106,
+      "line_number": 108,
       "context": "});\n }\n return t(\"Files:MeAndMembers\", { membersCount: `${usersList.length}` });\n }\n if (groupsList.length) {\n return t(\"Files:MeAndGroups\", { groupsCount: `${groupsList.length}` });\n }\n \n return \"\";\n };",
       "module": "/packages/client"
     }

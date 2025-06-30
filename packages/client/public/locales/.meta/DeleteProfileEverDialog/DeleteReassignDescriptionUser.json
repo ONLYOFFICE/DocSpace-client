@@ -1,19 +1,19 @@
 {
   "key_path": "DeleteReassignDescriptionUser",
-  "content": "{{warningMessageMyDocuments}} Rooms created by this user and documents stored in these rooms will be reassigned automatically to an admin performing the deletion: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Reassign data manually to choose another destination user for reassignment.",
-  "content_en_sha1_hash": "6ca1132121220293ae8ee4328085dc43d0936065",
-  "created_at": "2025-05-19T21:30:56.664Z",
-  "updated_at": "2025-05-24T13:19:29.326Z",
+  "content": "{{warningMessageMyDocuments}} Rooms created by this user and documents stored in these rooms will be reassigned automatically to an admin performing the deletion: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reassign data manually to choose another destination user for reassignment.",
+  "content_en_sha1_hash": "353861a3f0411b234f9135860dd89e671befaab4",
+  "created_at": "2025-06-30T12:20:12.968Z",
+  "updated_at": "2025-06-30T12:20:50.260Z",
   "comment": {
-    "text": "This translation key is used to display a warning message when a user's account is deleted. It informs users that their documents and rooms will be automatically reassigned to an admin performing the deletion, and provides an option to manually reassign data to another user. This appears in a dialog box for deleting a profile.",
+    "text": "This translation key is used for a warning message that informs users when they delete a profile, explaining that rooms created by the deleted user and documents stored in those rooms will be automatically reassigned to an admin. The message appears as part of a dialog, prompting users to manually reassign data if they choose not to use an auto-reassignment feature.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:28.903Z"
+    "updated_at": "2025-06-30T12:20:50.260Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 72,
-      "context": "? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"\n ns=\"DeleteProfileEverDialog\"\n t={t}\n >\n {{ warningMessageMyDocuments }}\n <strong>",
+      "line_number": 73,
+      "context": "? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"\n ns=\"DeleteProfileEverDialog\"\n t={t as TFunction}\n values={{\n warningMessageMyDocuments,\n userPerformedDeletion: userPerformedDeletion!.displayName,",
       "module": "/packages/client"
     }
   ],
@@ -27,42 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Arabic translation maintains the original English formatting of bolding the `userPerformedDeletion` and `userYou` variables, which might not be the standard practice in Arabic UI/UX. Consider if bolding is necessary or preferred for clarity in the Arabic context.",
-          "suggestion": "Review the need for bolding in the Arabic UI. If bolding is not standard, remove it or adjust for Arabic readability."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'قم بإعادة تعيين البيانات بشكل يدوي' (Qum bi-i'adat ta'yin al-bayanaat bi-shakl yadiwi) translates to 'Manually reassign the data'. While accurate, it's a bit clunky. A more natural phrasing might focus on the action of choosing a destination user.",
-          "suggestion": "Consider a more natural phrasing like 'اختر وجهة أخرى لإعادة التعيين' (Ikhtar wijhat ukhra li-i'adat al-ta'yin) - 'Choose another destination for reassignment.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The use of triple curly braces `{{{userPerformedDeletion}}}` and `{{{userYou}}}` in the Azerbaijani translation is inconsistent with the English format, which uses double curly braces `{{userPerformedDeletion}}` and `{{userYou}}`.",
-          "suggestion": "Change `{{{userPerformedDeletion}}}` to `{{userPerformedDeletion}}` and `{{{userYou}}}` to `{{userYou}}` to match the English format."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'администраторът, който извършва изтриването' is a bit verbose and could be more concise.  While grammatically correct, it might sound awkward in this context.",
-          "suggestion": "администратор за изтриването"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -80,18 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The use of bolding (<strong/> tags) is consistent with the English version. Ensure this formatting is maintained throughout the Greek translation.",
-          "suggestion": "Verify that bolding is consistently applied to elements intended to be emphasized."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ανατεθούν' (anateθούν) is a valid translation of 'reassigned', it might sound a bit formal or technical in this context. A more natural phrasing might be considered.",
-          "suggestion": "Consider using a more conversational phrasing for 'reassigned'. For example, 'θα μεταφερθούν' (tha metaferthoun - 'will be transferred') or 'θα κατανεμηθούν' (tha katanemitoun - 'will be distributed'). The best option will depend on the overall tone desired."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -103,18 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The bold formatting around '{{userPerformedDeletion}} ({{userYou}})' is inconsistent with the English version. It should be consistent.",
-          "suggestion": "Ensure consistent bold formatting throughout the translation and the source to match the English version: '<strong>{{userPerformedDeletion}} ({{userYou}})</strong'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'siirretään' is a valid translation of 'reassigned', the overall flow feels slightly awkward in Finnish. Considering the context, a more natural phrasing might improve readability.",
-          "suggestion": "Consider alternative phrasing for 'siirretään' to convey 'reassigned' more naturally in Finnish. For example: 'Tämän käyttäjän luomat huoneet ja näihin huoneisiin tallennetut asiakirjat siirtyvät automaattisesti...' or 'Tämän käyttäjän luomat huoneet ja näihin huoneisiin tallennetut asiakirjat annetaan automaattisesti...'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -126,18 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses the same formatting as the English (strong tags), which might not be ideal for readability in Armenian. Consider if bolding is necessary or if a different emphasis is more appropriate.",
-          "suggestion": "Review the need for bolding in the Armenian context. Consider alternative formatting or remove the strong tags if they are not essential."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase \"վերահանձնարարել տվյալները ձեռքով\" could be more naturally phrased. The current phrasing implies 'manually reassign the data', which is redundant as the preceding sentence describes automatic reassignment.",
-          "suggestion": "Consider rephrasing to something like \"Ձեռքով ընտրել վերահանձնման համար այլ օգտագործող\" (Manually select another user for reassignment)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -173,18 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Reassign data manually' is a literal translation of 'Gegevens handmatig opnieuw toewijzen'. It's awkward in Dutch. A more natural phrasing would convey the user's ability to manually choose another user.",
-          "suggestion": "Gegevens handmatig toewijzen aan een andere gebruiker."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The repetition of 'opnieuw toewijzen' (reassign) is redundant and makes the sentence cumbersome. It's not necessary and can be removed for better flow.",
-          "suggestion": "Gegevens handmatig toewijzen aan een andere gebruiker."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -208,18 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The bolding is consistent between the English and Romanian versions.  However, review to ensure it's appropriate in the UI context.",
-          "suggestion": "Confirm bolding is appropriate for UI display."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Reatribuiți datele manual' is technically correct, it's slightly awkward. A more natural phrasing might be 'Puteți reatribui manual datele'.",
-          "suggestion": "Puteți reatribui manual datele"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -231,88 +153,43 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation retains the English formatting (strong tags) without proper localization. While technically correct, it's best to adapt the formatting to Sinhala conventions, potentially using appropriate emphasis techniques within the Sinhala text.",
-          "suggestion": "Consider rephrasing the sentence to avoid the direct carryover of the `<strong>` tags and use more natural Sinhala emphasis techniques."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'පරිශ්‍රීලකයා' (parishreelakayaa) translates to 'user' but feels slightly formal or technical in this context. A more conversational and natural word could be beneficial.",
-          "suggestion": "Consider replacing 'පරිශ්‍රීලකයා' with a more colloquial term for 'user', like 'භාවිතකරු' (bhavitakaru) or a more appropriate term based on the overall tone."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ස්වයංක්‍රීයව' (swayanakriyawa) is a direct translation of 'automatically' and may be perceived as too technical for the average user. A more common and understandable equivalent might be preferable.",
-          "suggestion": "Consider replacing 'ස්වයංක්‍රීයව' with a more accessible term, such as 'ඔහු/ඇය' (ohu/aey) + 'උදව්ව කරාවි' (udawwa karavi) or a similar phrasing that conveys the meaning of automatic reassignment in a simpler way."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'preradené administrátorovi, ktorý realizuje vymazávanie' is not the most natural or accurate translation of 'reassigned to an admin performing the deletion.' A more natural Slovak phrasing would be something like 'preradené administrátorovi, ktorý bude vymazávať'.",
-          "suggestion": "Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý bude vymazávať."
-        },
-        {
-          "type": "formatting",
-          "description": "While the usage of `<strong/>` tags is technically correct for bolding, consider the overall consistency with other translated strings. It's possible the application uses a different method for bolding. It’s also possible these tags should be replaced with HTML tags that are more appropriate for rendering within the application’s specific environment.",
-          "suggestion": "Review the application's bolding implementation and adjust accordingly, possibly removing the tags or using different formatting."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'reassigned' is translated as 'dodeljeni'. While technically correct, 'ponovno dodeljeni' (re-assigned) would be more accurate and clearer in the context of the original English sentence emphasizing that the reassignment is happening again.",
-          "suggestion": "Sobe, ki jih je ustvaril ta uporabnik, in dokumenti, shranjeni v teh sobah, bodo samodejno *ponovno dodeljeni* skrbniku, ki izvede brisanje..."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation maintains the same formatting as the English version, which is good. However, ensure consistent use of bolding and curly braces throughout the application's UI when displaying this message.",
-          "suggestion": "No change needed, but review overall UI consistency."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation preserves the same formatting as the English (using strong tags). While technically correct, consider if this is the desired style for the target locale. It might be more natural to use italics or a different emphasis.",
-          "suggestion": "Review whether the use of strong tags is stylistically appropriate for Serbian. Consider alternatives like italics or bold text within a paragraph, depending on the desired emphasis."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The bolding in the English content is replicated in the Turkish translation, which is correct but needs to be confirmed as the preferred style. It's acceptable, but needs explicit confirmation.",
-          "suggestion": "Confirm if the bolding should be maintained as is. If not, consider removing it for consistency with other UI elements."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -324,30 +201,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'chuyển giao lại' is used repeatedly and sounds awkward in Vietnamese. It literally translates to 're-transfer' or 're-assignment again'.",
-          "suggestion": "Consider using a more natural phrasing for 'reassignment'. For example, 'chuyển giao' or 'giao lại' would be more appropriate depending on the specific nuance desired. A rewrite such as: 'Các phòng được tạo bởi người dùng này và các tài liệu được lưu trữ trong các phòng này sẽ tự động được giao lại cho quản trị viên thực hiện việc xóa: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Giao dữ liệu theo cách thủ công để chọn người dùng đích khác để giao lại.'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The repetition of 'để chuyển giao lại' is redundant and clunky in Vietnamese.",
-          "suggestion": "Simplify the ending. Replace 'để chọn người dùng đích khác để chuyển giao lại' with 'để chọn người dùng khác để giao lại' or simply 'để chọn người dùng khác'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The use of double curly braces `{{...}}` in the Chinese translation is inconsistent with the English template. The English uses single curly braces.",
-          "suggestion": "Consider using single curly braces like the English version: `{{warningMessageMyDocuments}}`"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

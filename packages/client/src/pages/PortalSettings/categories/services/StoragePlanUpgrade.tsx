@@ -139,7 +139,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
-      setPartialUpgradeFee(0);
+      setPartialUpgradeFee!(0);
     };
   }, []);
 

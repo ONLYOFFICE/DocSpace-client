@@ -45,7 +45,7 @@ import styles from "./StorageTariff.module.scss";
 
 type StorageTariffDeactivetedProps = {
   visible: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   totalPrice?: number;
   previousStoragePlanSize?: number;
   usedTotalStorageSizeCount?: number;

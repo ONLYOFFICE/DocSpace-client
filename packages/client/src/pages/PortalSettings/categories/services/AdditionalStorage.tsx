@@ -232,7 +232,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                       />
                     </div>
                   ) : null}
-                  {!hasScheduledStorageChange && currentStoragePlanSize > 0 ? (
+                  {!hasScheduledStorageChange && currentStoragePlanSize! > 0 ? (
                     <div
                       className={classNames(styles.changeShedule, {
                         [styles.greenColor]: true,
@@ -241,10 +241,10 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                       <CheckIcon />
                       <Text>
                         {t("CurrentPaymentMonth", {
-                          price: formatWalletCurrency(
+                          price: formatWalletCurrency!(
                             calculateTotalPrice(
-                              currentStoragePlanSize,
-                              storagePriceIncrement,
+                              currentStoragePlanSize!,
+                              storagePriceIncrement!,
                             ),
                             2,
                           ),
@@ -257,8 +257,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                   <div className={styles.priceContainer}>
                     <Text fontSize="12px" fontWeight={600}>
                       {t("PerStorage", {
-                        currency: formatWalletCurrency(
-                          storagePriceIncrement,
+                        currency: formatWalletCurrency!(
+                          storagePriceIncrement!,
                           2,
                         ),
                         amount: getConvertedSize(t, storageSizeIncrement || 0),

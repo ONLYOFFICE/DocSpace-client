@@ -125,7 +125,7 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
                 i18nKey="YourCurrentPlan"
                 values={{
                   amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-                  price: formatWalletCurrency(totalPrice, 2),
+                  price: formatWalletCurrency!(totalPrice!, 2),
                 }}
                 components={{
                   1: <Text fontWeight={600} as="span" />,

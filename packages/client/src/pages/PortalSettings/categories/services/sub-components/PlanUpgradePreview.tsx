@@ -180,7 +180,7 @@ const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
           ) : (
             <>
               <Text fontWeight="600" fontSize="14px">
-                {formatWalletCurrency(partialUpgradeFee)}
+                {formatWalletCurrency!(partialUpgradeFee!)}
               </Text>
               <Text
                 fontWeight="600"

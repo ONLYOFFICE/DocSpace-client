@@ -67,7 +67,7 @@ const WalletContainer = (props: WalletContainerProps) => {
   return (
     <div className={styles.walletContainer}>
       <WalletInfo
-        balance={formatWalletCurrency()}
+        balance={formatWalletCurrency!()}
         isBalanceInsufficient={isBalanceInsufficient}
         {...(!isWaitingCalculation && { onTopUp })}
       />

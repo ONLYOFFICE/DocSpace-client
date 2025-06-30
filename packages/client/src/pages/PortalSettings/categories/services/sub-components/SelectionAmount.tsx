@@ -89,7 +89,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
 
   useEffect(() => {
     if (!isPaymentBlockedByBalance) {
-      setReccomendedAmount(0);
+      setReccomendedAmount!(0);
       return;
     }
 

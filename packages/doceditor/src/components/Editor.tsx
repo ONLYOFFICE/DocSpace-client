@@ -256,12 +256,6 @@ const Editor = ({
     onRequestRefreshFile,
   };
 
-  console.log(
-    getEditorTheme(theme as ThemeKeys),
-    isBase,
-    newConfig.editorConfig?.user?.image,
-  );
-
   if (
     newConfig.editorConfig?.user &&
     newConfig.editorConfig.user.image?.includes(

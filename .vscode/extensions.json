@@ -11,6 +11,8 @@
     "formulahendry.auto-rename-tag",
     "mrmlnc.vscode-duplicate",
     "ms-python.python",
-    "wix.vscode-import-cost"
+    "wix.vscode-import-cost",
+    "antfu.pnpm-catalog-lens",
+    "chavyleung.vscode-pnpm-verlens"
   ]
 }

@@ -120,13 +120,11 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
 
   return (
     <TableHeader
-      checkboxSize="48px"
       containerRef={tableRef as { current: HTMLDivElement }}
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
-      sectionWidth={sectionWidth}
-      checkboxMargin="12px"
+      sectionWidth={sectionWidth!}
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}

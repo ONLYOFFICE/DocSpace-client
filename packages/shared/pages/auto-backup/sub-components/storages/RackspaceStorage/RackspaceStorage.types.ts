@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { RackspaceSettingsProps } from "@docspace/shared/components/rackspace-settings/RackspaceSettings.types";
+import type { RackspaceSettingsProps } from "../../../../../components/rackspace-settings/RackspaceSettings.types";
 import type { ScheduleComponentProps } from "../../ScheduleComponent";
 
 export interface RackspaceStorageProps

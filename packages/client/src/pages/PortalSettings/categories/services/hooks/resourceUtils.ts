@@ -34,7 +34,7 @@ export const calculateDifference = (
   return Math.abs(currentAllocated - quantity);
 };
 
-export const getDaysUntilPayment = (date) => {
+export const getDaysUntilPayment = (date: string | Date) => {
   const today = moment();
   const dueDate = moment(date);
   return dueDate.diff(today, "days");

@@ -27,7 +27,7 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 import styles from "../Selector.module.scss";
@@ -51,6 +51,7 @@ import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
 import { Tabs } from "../../tabs";
+import InputItem from "./InputItem";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -374,6 +375,20 @@ const Body = ({
                 </div>
               ))}
             </Scrollbar>
+          ) : items.length === 2 && items[1]?.isInputItem ? (
+            <InputItem
+              defaultInputValue={savedInputValue ?? items[1].defaultInputValue}
+              onAcceptInput={items[1].onAcceptInput}
+              onCancelInput={items[1].onCancelInput}
+              style={{}}
+              color={items[1].color}
+              roomType={items[1].roomType}
+              cover={items[1].cover}
+              icon={items[1].icon}
+              setInputItemVisible={setInputItemVisible}
+              setSavedInputValue={setSavedInputValue}
+              placeholder={items[1].placeholder}
+            />
           ) : (
             <InfiniteLoader
               ref={listOptionsRef}

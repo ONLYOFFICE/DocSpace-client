@@ -90,7 +90,7 @@ async function Page() {
       additionalResources={additionalResources}
       companyInfo={companyInfo}
       buildInfo={buildInfo!}
-      licenseAgreementsUrl={licenseAgreementsUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl!}
       isEnterprise={enterprise}
       logoText={logoText}
     />
@@ -98,4 +98,3 @@ async function Page() {
 }
 
 export default Page;
-

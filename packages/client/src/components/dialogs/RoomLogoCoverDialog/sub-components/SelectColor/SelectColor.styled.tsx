@@ -157,10 +157,9 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
       width: 30px;
       height: 30px;
 
-      border: ${({ color }) =>
-        color === globalColors.white
-          ? `solid 2px ${globalColors.black}`
-          : `solid 2px ${color}`};
+      border: ${props.color === globalColors.white
+        ? `solid 2px ${globalColors.black}`
+        : `solid 2px ${props.color}`};
       @media ${tablet} {
         width: 40px;
         height: 40px;

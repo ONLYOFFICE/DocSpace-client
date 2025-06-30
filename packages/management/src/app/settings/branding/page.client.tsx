@@ -97,7 +97,7 @@ const BrandingPage = ({
       <MobileView
         isSettingPaid={isSettingPaid}
         displayAbout={showAbout}
-        displayAdditional={true}
+        displayAdditional
         baseUrl={baseUrl}
         onClickLink={onClickLink}
       />
@@ -112,7 +112,6 @@ const BrandingPage = ({
       />
       <WhiteLabelPage
         whiteLabelLogos={whiteLabelLogos}
-        whiteLabelText={whiteLabelText}
         showAbout={showAbout}
         isDefaultWhiteLabel={isDefaultWhiteLabel}
         standalone={standalone}

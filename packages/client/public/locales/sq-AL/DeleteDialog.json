@@ -9,9 +9,10 @@
   "DeleteRoom": "Ju jeni gati ta fshini këtë dhomë. Ju nuk do të jeni në gjendje ta rivendosni atë.",
   "DeleteRooms": "Ju jeni gati t'i fshini këto dhoma. Ju nuk do të jeni në gjendje që t'i rivendosni ato.",
   "DeleteSharedNote": "Ju lutem vini re se nëse e keni ndarë me dikë, ai do të bëhet i padisponueshëm.",
+  "DeleteTemplate": "A e dëshironi vërtet të fshani dhomën e modelit <1>«{{templateName}}»</1>? Modeli nuk mund të rivendoset.",
+  "DeleteTemplates": "A ju vërtetë doni të fshani qendrueshmëritë e dhoma të zgjedhura? Ato nuk mund të rivendosen.",
   "FolderPermanentlyDeleted": "Dosja do të fshihet përgjithmonë pas 30 ditësh.",
   "ItemsPermanentlyDeleted": "Artikujt do të fshihen përgjithmonë brenda 30 ditësh.",
-  "MoveToTrashButton": "Zhvendoseni te koshi",
   "UnsubscribeButton": "Çregjistrohuni",
   "UnsubscribeNote": "A jeni të sigurt që dëshironi të çregjistroheni nga artikujt e selektuar nga lista?",
   "UnsubscribeTitle": "Konfirmimi i çregjistrimit"

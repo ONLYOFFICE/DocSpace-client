@@ -62,4 +62,3 @@ const SpacesPage = async () => {
 };
 
 export default SpacesPage;
-

@@ -28,21 +28,22 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 
 import React, { useMemo, useState } from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import { ThirdPartyStorages } from "@docspace/shared/enums";
-import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Text } from "../../../components/text";
+import { ThirdPartyStorages } from "../../../enums";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TComboboxProps,
+} from "../../../components/combobox";
+import { DropDownItem } from "../../../components/drop-down-item";
 import {
   getOptions,
   type ReturnOptions,
-} from "@docspace/shared/utils/getThirdPartyStoragesOptions";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
+} from "../../../utils/getThirdPartyStoragesOptions";
+import { IconButton } from "../../../components/icon-button";
+import { THIRD_PARTY_SERVICES_URL } from "../../../constants";
 
-import type {
-  SelectedStorageType,
-  StorageRegionsType,
-} from "@docspace/shared/types";
+import type { SelectedStorageType, StorageRegionsType } from "../../../types";
 
 import { GoogleCloudStorage } from "./storages/GoogleCloudStorage";
 import { AmazonStorage } from "./storages/AmazonStorage";
@@ -161,7 +162,9 @@ const ThirdPartyStoragesModule = ({
     <>
       <ComboBox
         options={[]}
-        advancedOptions={advancedOptions}
+        advancedOptions={
+          advancedOptions as unknown as TComboboxProps["advancedOptions"]
+        }
         selectedOption={{ key: 0, label: selectedStorageTitle }}
         isDisabled={!thirdPartyStorage}
         size={ComboBoxSize.content}

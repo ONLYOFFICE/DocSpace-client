@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -34,6 +33,7 @@ import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
+import { getCorrectDate } from "@docspace/shared/utils";
 import styles from "../../styles/TransactionHistory.module.scss";
 import { accountingLedgersFormat } from "../../utils";
 
@@ -57,40 +57,36 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
     currency,
   );
 
-  const dateFormat = `L ${moment.localeData().longDateFormat("LT")}`;
-
-  const getServiceTitle = (service: string) => {
-    switch (service) {
-      case "disk-storage":
-        return t("DiskSpace");
-      default:
-        return t("Payments:BalanceTopUp");
-    }
-  };
   const getServiceQuantity = (quantity: number, service: string) => {
-    switch (service) {
+    let serviceName = service;
+
+    if (service != null && service.includes("disk-storage")) {
+      serviceName = "disk-storage";
+    }
+
+    switch (serviceName) {
       case "disk-storage":
         return `${quantity} ${t("Common:Gigabyte")}`;
       default:
         return "—";
     }
   };
-
+  const correctDate = getCorrectDate(language, transaction.date);
   return (
     <TableRow>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {moment(transaction.date).format(dateFormat)}
+          {correctDate}
         </Text>
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {getServiceTitle(transaction.service)}
+          {transaction.description}
         </Text>
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(transaction.quantity, transaction.service)}
+          {getServiceQuantity(transaction.quantity, transaction.service!)}
         </Text>
       </TableCell>
       <TableCell>

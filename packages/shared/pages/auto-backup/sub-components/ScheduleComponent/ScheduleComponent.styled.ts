@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import styled, { css } from "styled-components";
-import { mobile } from "@docspace/shared/utils";
+import { mobile } from "../../../../utils";
 import type { StyledScheduleComponentProps } from "./ScheduleComponent.types";
 
 const INPUT_LENGTH = "350px";

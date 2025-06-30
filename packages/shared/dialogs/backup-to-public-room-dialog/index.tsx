@@ -27,9 +27,9 @@
 import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "../../components/text";
+import { ModalDialog } from "../../components/modal-dialog";
+import { Button, ButtonSize } from "../../components/button";
 import type { BackupToPublicRoomProps } from "./BackupToPublicRoomDialog";
 
 const BackupToPublicRoom = ({

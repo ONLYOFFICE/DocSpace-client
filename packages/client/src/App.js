@@ -31,16 +31,17 @@ import { RouterProvider } from "react-router";
 import { Provider as MobxProvider } from "mobx-react";
 
 import store from "SRC_DIR/store";
-import ThemeProvider from "./components/ThemeProviderWrapper";
-import ErrorBoundary from "./components/ErrorBoundaryWrapper";
-
-import i18n from "./i18n";
 
 import "@docspace/shared/polyfills/broadcastchannel";
 
 import "@docspace/shared/styles/custom.scss";
 
+import ThemeProvider from "./components/ThemeProviderWrapper";
+import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+
 import router from "./router";
+
+import i18n from "./i18n";
 
 const App = () => {
   React.useEffect(() => {

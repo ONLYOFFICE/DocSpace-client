@@ -3,7 +3,7 @@
   "content": "Set lifetime to automatically deactivate  the secret key after a defined period. Lifetime begins of creation of the key.",
   "content_en_sha1_hash": "752153e2665fc818eb2ae85c84c0ad47c2f8b75f",
   "created_at": "2025-05-19T21:30:51.759Z",
-  "updated_at": "2025-06-24T16:31:24.422Z",
+  "updated_at": "2025-06-30T12:20:31.435Z",
   "comment": {
     "text": "This translation key is used to describe a setting option that determines when an API key is automatically deactivated after creation. It explains the lifecycle of the key and its deactivation process. This text appears in a dialog where users can configure API key settings, such as creation date and lifetime.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 458,
+      "line_number": 460,
       "context": "<Text\n fontSize=\"12px\"\n fontWeight={400}\n className=\"api-key_lifetime-description\"\n >\n {t(\"Settings:KeyLifetimeDescription\")}\n </Text>\n {lifetimeIsChecked ? (\n <div className=\"api-key_lifetime-input-block\">\n <TextInput\n className=\"api-key_lifetime-input\"",
       "module": "/packages/client"
     }

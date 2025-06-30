@@ -3,7 +3,7 @@
   "content": "Nothing found",
   "content_en_sha1_hash": "fed1f5cd946a327d187f842db23041ecd3553315",
   "created_at": "2025-05-19T21:30:46.918Z",
-  "updated_at": "2025-06-24T16:31:24.383Z",
+  "updated_at": "2025-06-30T12:20:31.320Z",
   "comment": {
     "text": "This translation key is used for \"Nothing found\" content, appearing as a header or button text in various screens of the application, such as an empty screen filter or gallery page. It indicates that no data or items were found based on user filters or criteria.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/Room/index.tsx",
-      "line_number": 266,
+      "line_number": 243,
       "context": "emptyScreenHeader={emptyScreenHeader ?? t(\"Common:EmptyRoomsHeader\")}\n emptyScreenDescription={\n emptyScreenDescription ?? t(\"Common:EmptyRoomsDescription\")\n }\n searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}\n searchEmptyScreenHeader={t(\"Common:NotFoundTitle\")}\n searchEmptyScreenDescription={t(\"Common:SearchEmptyRoomsDescription\")}\n totalItems={total}\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={onLoadNextPage}",
       "module": "/packages/shared"
     }

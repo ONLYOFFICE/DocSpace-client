@@ -3,7 +3,7 @@
   "content": "Change type",
   "content_en_sha1_hash": "6e6f60c8b6ac90dba84303fb48273c30945c6d3f",
   "created_at": "2025-05-19T21:30:56.926Z",
-  "updated_at": "2025-06-24T16:31:24.413Z",
+  "updated_at": "2025-06-30T12:20:31.423Z",
   "comment": {
     "text": "This translation key is used for the \"Change type\" button in a user settings dialog. It appears as a label on a dropdown menu or a button, allowing users to select a new user type. The text should be translated to fit different languages and cultures.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 153,
+      "line_number": 156,
       "context": "const onClearFilter = () => setSearchValue(\"\");\n \n const headerMenu = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions,\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 153,
+      "line_number": 156,
       "context": "const onClearFilter = () => setSearchValue(\"\");\n \n const headerMenu = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions,\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
       "line_number": 132,
-      "context": "};\n \n const headerMenu: TGroupMenuItem[] = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions,\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
+      "context": "};\n \n const headerMenu: TGroupMenuItem[] = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions as ContextMenuModel[],\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
       "line_number": 132,
-      "context": "};\n \n const headerMenu: TGroupMenuItem[] = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions,\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
+      "context": "};\n \n const headerMenu: TGroupMenuItem[] = [\n {\n id: \"change-type\",\n label: t(\"ChangeUserTypeDialog:ChangeUserTypeButton\"),\n disabled: false,\n withDropDown: true,\n options: typeOptions as ContextMenuModel[],\n iconUrl: ChangeTypeReactSvgUrl,\n onClick: () => {},",
       "module": "/packages/client"
     },
     {

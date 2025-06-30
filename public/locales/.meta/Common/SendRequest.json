@@ -3,7 +3,7 @@
   "content": "Send request",
   "content_en_sha1_hash": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
   "created_at": "2025-05-19T21:30:48.550Z",
-  "updated_at": "2025-06-26T19:00:18.191Z",
+  "updated_at": "2025-06-30T12:20:31.393Z",
   "comment": {
     "text": "This translation key is used for the label of a button that sends a request. It appears on various screens, such as in payment settings and registration modals, and should be translated to indicate sending a request or a similar action in different languages.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 142,
+      "line_number": 140,
       "context": "<ModalDialog.Footer>\n <Button\n id=\"registration-modal_send\"\n className=\"modal-dialog-button\"\n key=\"RegisterSendBtn\"\n label={loading ? t(\"Common:Sending\") : t(\"Common:SendRequest\")}\n size={ButtonSize.normal}\n scale={false}\n primary\n onClick={onSendRegisterRequest}\n isLoading={loading}",
       "module": "/packages/login"
     }

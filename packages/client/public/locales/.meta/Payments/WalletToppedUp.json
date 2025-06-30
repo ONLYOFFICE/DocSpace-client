@@ -3,7 +3,7 @@
   "content": "Wallet has been successfully topped up",
   "content_en_sha1_hash": "17e7ecec92293818e1ecd5eb2fcd5a4974f0a674",
   "created_at": "2025-06-24T16:31:06.984Z",
-  "updated_at": "2025-06-26T19:00:18.246Z",
+  "updated_at": "2025-06-30T12:20:31.570Z",
   "comment": {
     "text": "The \"WalletToppedUp\" translation key is used to display a success message when a user's wallet balance is successfully updated. It is typically shown in a dialog or notification after the user initiates a top-up process. Translators should ensure the phrase accurately conveys this positive outcome to users.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TopUpButtons.tsx",
       "line_number": 78,
-      "context": "throw new Error(t(\"Common:UnexpectedError\"));\n }\n \n await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);\n \n toastr.success(t(\"WalletToppedUp\"));\n onClose();\n } catch (e) {\n toastr.error(e);\n } finally {\n setIsLoading(false);",
+      "context": "throw new Error(t(\"Common:UnexpectedError\"));\n }\n \n await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);\n \n toastr.success(t(\"WalletToppedUp\"));\n onClose();\n } catch (e) {\n toastr.error(e as unknown as string);\n } finally {\n setIsLoading(false);",
       "module": "/packages/client"
     }
   ],

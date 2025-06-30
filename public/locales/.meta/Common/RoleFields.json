@@ -3,7 +3,7 @@
   "content": "{{roleName}} role fields",
   "content_en_sha1_hash": "20226340335e5021214756174c2a4e1c98126f6e",
   "created_at": "2025-05-19T21:30:48.021Z",
-  "updated_at": "2025-06-26T19:00:18.306Z",
+  "updated_at": "2025-06-30T12:20:31.719Z",
   "comment": {
     "text": "This translation key is used to display a title for a section of role fields in a user interface, specifically in a start-filling panel dialogue. The phrase should include the roleName variable and will appear within an h3 heading.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.helpers.tsx",
-      "line_number": 35,
-      "context": "export const Header = memo(\n forwardRef<HTMLDivElement, HeaderProps>(\n ({ t, roleName, className, openInvitePanel, canEditRoom }, ref) => (\n <div className={className} ref={ref}>\n <h3\n title={t(\"Common:RoleFields\", {\n roleName,\n })}\n >\n {t(\"Common:RoleFields\", {\n roleName,",
+      "line_number": 41,
+      "context": "openInvitePanel,\n canEditRoom,\n }: HeaderProps) => (\n <div className={className} ref={ref}>\n <h3\n title={t(\"Common:RoleFields\", {\n roleName,\n })}\n >\n {t(\"Common:RoleFields\", {\n roleName,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.helpers.tsx",
-      "line_number": 35,
-      "context": "export const Header = memo(\n forwardRef<HTMLDivElement, HeaderProps>(\n ({ t, roleName, className, openInvitePanel, canEditRoom }, ref) => (\n <div className={className} ref={ref}>\n <h3\n title={t(\"Common:RoleFields\", {\n roleName,\n })}\n >\n {t(\"Common:RoleFields\", {\n roleName,",
+      "line_number": 41,
+      "context": "openInvitePanel,\n canEditRoom,\n }: HeaderProps) => (\n <div className={className} ref={ref}>\n <h3\n title={t(\"Common:RoleFields\", {\n roleName,\n })}\n >\n {t(\"Common:RoleFields\", {\n roleName,",
       "module": "/packages/shared"
     }
   ],

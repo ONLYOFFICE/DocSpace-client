@@ -31,7 +31,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { ButtonSize } from "@docspace/shared/components/button";
+import { ButtonSize } from "../button";
 
 import DirectThirdPartyConnection from "./DirectThirdPartyConnection";
 import {
@@ -216,11 +216,15 @@ describe("DirectThirdPartyConnection", () => {
         },
       };
 
-      render(<DirectThirdPartyConnection {...enabledProps} />);
+      await act(async () => {
+        render(<DirectThirdPartyConnection {...enabledProps} />);
+      });
 
       const connectButton = screen.getByTestId("connect-button");
 
-      await userEvent.click(connectButton);
+      await act(async () => {
+        await userEvent.click(connectButton);
+      });
 
       expect(defaultProps.openConnectWindow).toHaveBeenCalled();
     } finally {

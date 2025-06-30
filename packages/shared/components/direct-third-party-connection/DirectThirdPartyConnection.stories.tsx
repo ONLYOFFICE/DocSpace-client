@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Meta, StoryObj } from "@storybook/react";
-import { ButtonSize } from "@docspace/shared/components/button";
+
+import { ButtonSize } from "../button";
 
 import DirectThirdPartyConnection from "./DirectThirdPartyConnection";
 import {

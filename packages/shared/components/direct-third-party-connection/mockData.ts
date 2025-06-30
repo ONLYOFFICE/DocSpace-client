@@ -27,9 +27,9 @@
 import type {
   ThirdPartyAccountType,
   ConnectedThirdPartyAccountType,
-} from "@docspace/shared/types";
-import type { TThirdParties } from "@docspace/shared/api/files/types";
-import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
+} from "../../types";
+import type { TThirdParties } from "../../api/files/types";
+import type { FilesSelectorSettings } from "../files-selector-input";
 
 export const mockAccounts: ThirdPartyAccountType[] = [
   {

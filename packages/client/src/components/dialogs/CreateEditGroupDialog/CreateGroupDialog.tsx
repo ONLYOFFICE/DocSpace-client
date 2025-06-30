@@ -35,6 +35,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
+import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
@@ -217,7 +218,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
           onParentPanelClose={onClose}
           groupManager={groupParams.groupManager}
           groupMembers={groupParams.groupMembers}
-          addMembers={addMembers}
+          addMembers={addMembers as unknown as TOnSubmit}
         />
       ) : null}
     </>

@@ -3,7 +3,7 @@
   "content": "Download as",
   "content_en_sha1_hash": "e10ee8f09efe43f28dc9a950ae25d485fde3ca5e",
   "created_at": "2025-05-19T21:30:44.663Z",
-  "updated_at": "2025-06-02T10:20:51.510Z",
+  "updated_at": "2025-06-18T17:11:42.511Z",
   "comment": {
     "text": "The translation key \"DownloadAs\" is used to display the text \"Download as\", which appears on a download button in the UI. This text allows users to select a file format or destination when downloading a file from an application. It may appear in dialog boxes or buttons related to file management and downloads.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2114,
+      "line_number": 2118,
       "context": "disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2114,
+      "line_number": 2118,
       "context": "disabled: this.userStore?.user?.isAdmin || !item.external,\n },\n {\n id: \"option_download-as\",\n key: \"download-as\",\n label: t(\"Common:DownloadAs\"),\n icon: DownloadAsReactSvgUrl,\n onClick: this.onClickDownloadAs,\n disabled: !item.security?.Download,\n },\n ...moveActions,",
       "module": "/packages/client"
     },
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"تحميل بصيغة\" (Tahmil bi suifat) translates more accurately as \"Download in format\" rather than the intended \"Download as\". While understandable, it's not the most natural phrasing.",
-          "suggestion": "Consider a translation like \"تنزيل كـ\" (Tanzil ka) or \"حفظ كـ\" (Hifaz ka) which more closely conveys 'Download as'."
+          "description": "The translation \"تحميل بصيغة\" (Tahmil bi sugha) translates to 'Download in format' which, while understandable, doesn't perfectly capture the nuance of 'Download as'. A more accurate translation would consider conveying the action of downloading *in a specific format*. The current translation lacks the directness of the English phrase.",
+          "suggestion": "Consider \"تنزيل كتنسيق\" (Tanzil katinsiq) - 'Download as format' or \"حفظ كتنسيق\" (Hifz katinsiq) - 'Save as format'."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Kimi yüklə\" doesn't accurately convey the meaning of \"Download as\". \"Kimi\" means \"who\" or \"whom\", which is not relevant to downloading.",
-          "suggestion": "A more accurate translation would be something like \"Yükləmə\" (Download) or \"Fərqində yüklə\" (Download as format), depending on the context."
+          "description": "The Azerbaijani translation \"Kimi yüklə\" doesn't accurately convey the meaning of \"Download as\". \"Kimi\" means \"who\" or \"whom\", which is not related to downloading. A more accurate translation would reflect the action of downloading in a specific format.",
+          "suggestion": "Consider alternatives like \"Fərqə yüklə\" (Download in format) or \"Faylı yüklə\" (Download file), or a more literal translation depending on the context."
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ներբեռնեք որպես՝\" is a literal translation of \"Download as\" but could be improved for naturalness in Armenian. While technically correct, it might sound slightly awkward. A more idiomatic translation might be preferable depending on the specific context (e.g., 'Փոխել ձևը', 'Բեռնել որպես').",
+          "suggestion": "Consider alternatives like 'Փոխել ձևը' or 'Բեռնել որպես' for a more natural-sounding translation, depending on the surrounding context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -135,7 +141,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"としてダウンロード\" is a literal translation and while understandable, it lacks the nuance and flow of a natural English equivalent.  'Download as' often implies a selection of file types. A more natural translation might be 'ファイル形式でダウンロード' (File format download) or 'ダウンロード形式を選択' (Select download format).",
+          "suggestion": "ファイル形式でダウンロード"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -144,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"다운로드 형식\" (daunrodeu hyusik) translates to 'download format' which isn't as accurate as 'Download as'. It describes the *type* of download, not the action of downloading as something.",
-          "suggestion": "Consider \"다운로드\" (daunrodeu) which simply means 'download' or \"다운로드 받기\" (daunrodeu batgi) which means 'download'. A more descriptive option, though perhaps longer, would be \"다운로드 받기 (다른 형식으로)\" (daunrodeu batgi (daneun hyusik-euro)) - 'Download (as a different format)'."
+          "description": "The Korean translation \"다운로드 형식\" (daunrodeo hyusik) translates to \"download format\" which isn't as direct or natural as \"Download as\". It doesn't convey the same action or functionality.",
+          "suggestion": "다운로드 (daunrodeo) or 다운로드 받기 (daunrodeo bati) would be more accurate translations, although context might dictate a better alternative."
         }
       ],
       "approved_at": null
@@ -156,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ດາວໂຫລດທີ່\" is a literal translation of \"Download as\" but doesn't quite capture the intended meaning in Lao. While technically understandable, it sounds awkward. A more natural Lao phrasing would be something like \"ບັນດາວໂຫລດເປັນ\" or \"ດາວໂຫລດໃນຮູບແບບ\".",
-          "suggestion": "Consider \"ບັນດາວໂຫລດເປັນ\" or \"ດາວໂຫລດໃນຮູບແບບ\" for a more natural and accurate translation."
+          "description": "The Lao translation \"ດາວໂຫລດທີ່\" is a literal translation of 'Download as' but doesn't convey the intended meaning naturally in Lao. A more natural phrasing would be something like \"ບັນດາວໂຫລດເປັນ\" or \"ດາວໂຫລດໃນຮູບແບບ\".",
+          "suggestion": "ບັນດາວໂຫລດເປັນ"
         }
       ],
       "approved_at": null
@@ -198,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Descărcare ca\" is a literal translation of 'Download as' but doesn't sound natural in Romanian. A more idiomatic translation would be 'Descarcă ca' or 'Ca descărcare'.",
-          "suggestion": "Descarcă ca"
+          "description": "The translation 'Descărcare ca' is not the most natural or accurate translation of 'Download as' in Romanian. 'Ca' literally means 'as', but in this context, a more common and natural phrasing would be 'Descarcă' or 'Descărcare'.",
+          "suggestion": "Descărcare"
         }
       ],
       "approved_at": null
@@ -216,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"මෙලෙස බාගන්න\" while understandable, doesn't precisely convey the meaning of \"Download as\". It translates more to \"Download like this\" or \"Download in this way\". A more accurate translation would be something like \"බාගත හැකි ආකාරය\" or \"බාගන්නා ආකාරය\".",
-          "suggestion": "බාගත හැකි ආකාරය"
+          "description": "The Sinhala translation \"මෙලෙස බාගන්න\" while understandable, isn't the most natural or accurate translation of \"Download as\".  \"Download as\" implies a selection of formats. \"මෙලෙස බාගන්න\" literally translates to \"Download like this\".",
+          "suggestion": "Consider alternatives like \"බාගත යුතු ආකාරය\" (Baagathe dharwaya) - \"How to download\", or \"බාගත හැකි ආකාරයන්\" (Baagathe hakī ākarayakān) - \"Downloadable formats\" if context allows."
         }
       ],
       "approved_at": null
@@ -237,7 +249,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Преузми као' while generally understandable, is not the most natural or common way to translate \"Download as\" in Serbian (Cyrillic). A more idiomatic translation would be \"Čuvaj kao\" or \"Sačuvaj kao\".",
+          "suggestion": "Čuvaj kao"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -252,7 +270,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Olarak indir\" is a literal translation of \"Download as\" but doesn't convey the intended meaning naturally in Turkish. \"Olarak indir\" implies downloading *as* something else, which isn't the intended function. A more appropriate translation would convey the act of downloading in a specific format.",
+          "description": "The Turkish translation 'Olarak indir' is a literal translation of 'Download as' but doesn't convey the intended meaning naturally. 'Olarak' implies 'as' in a more formal or specific sense, while the original phrase is used in a more general context (e.g., Download as PDF).",
           "suggestion": "İndir"
         }
       ],
@@ -267,13 +285,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tải xuống dưới dạng' is a literal translation of 'Download as'. While understandable, a more natural and idiomatic Vietnamese translation would be 'Tải xuống' or 'Lưu dưới dạng'. 'Tải xuống dưới dạng' can sound slightly awkward in certain contexts.",
-          "suggestion": "Lưu dưới dạng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

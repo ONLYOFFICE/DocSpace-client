@@ -80,5 +80,10 @@ import("./logger.mjs").then(({ logger }) => {
         `error: ${error}, stack: ${error.stack} Unhandled exception`,
       );
     });
+
+    process.on("SIGINT", function () {
+      console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
+      process.exit(0);
+    });
   });
 });

@@ -1,0 +1,9 @@
+{
+  "AllowButton": "Lejoni",
+  "ConsentDescription": "Të dhënat e ndara me <strong>{{displayName}}</strong> do të drejtohen nga <strong>{{nameApp}}</strong> <6>politikën e privatësisë</6> dhe <6>kushtet e shërbimit</6>. Ju mund ta revokoni këtë pëlqim në çdo kohë në cilësimet e llogarisë tuaj {{productName}}.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> do të dëshironte aftësinë për të hyrë në të dhënat e mëposhtme në <strong>llogarinë tuaj të {{productName}}</strong>:",
+  "DenyButton": "Mohoni",
+  "NotYou": "Jo ju?",
+  "SignedInAs": "I identifikuar si",
+  "ToContinue": "Për të vazhduar në"
+}

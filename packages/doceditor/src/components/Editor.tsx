@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+
 import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
@@ -37,7 +38,7 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
-import { getBackUrl, isFormRole } from "@/utils";
+import { getBackUrl } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -155,7 +156,7 @@ const Editor = ({
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
-  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
   let goBack: TGoBack = {} as TGoBack;
 
@@ -167,12 +168,13 @@ const Editor = ({
         i18n.getDataByLanguage(i18n.language) as unknown as {
           Editor: { [key: string]: string };
         }
-      )?.["Editor"] as {
+      )?.Editor as {
         [key: string]: string;
       }
-    )?.["FileLocation"]; // t("FileLocation");
+    )?.FileLocation; // t("FileLocation");
 
     if (editorGoBack === false || user?.isVisitor || !user) {
+      console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -219,7 +221,7 @@ const Editor = ({
     }
   }
 
-  //if (newConfig.document && newConfig.document.info)
+  // if (newConfig.document && newConfig.document.info)
   //  newConfig.document.info.favorite = false;
 
   // const url = window.location.href;

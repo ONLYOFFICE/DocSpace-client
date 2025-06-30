@@ -50,30 +50,22 @@ const StyledBody = styled.div`
       font-size: 48px;
     }
 
-    .payment_price_description,
+    ${(props) =>
+      props.isDisabled &&
+      css`
+        color: ${props.theme.client.settings.payment.priceContainer
+          .disableColor};
+      `};
+
     .payment_price_price-text,
     .total-tariff_description {
-      margin-bottom: 0px;
     }
-    .payment_price_description {
-      margin-top: 16px;
-    }
+
     .total-tariff_description {
       margin: auto;
     }
-    .payment_price_month-text {
-      margin: auto 0;
-      margin-bottom: 9px;
-      margin-inline-start: 8px;
-    }
-    .payment_price_month-text,
-    .payment_price_price-text {
-      ${(props) =>
-        props.isDisabled &&
-        css`
-          color: ${props.theme.client.settings.payment.priceContainer
-            .disableColor};
-        `};
+    p {
+      margin-bottom: 0;
     }
   }
 

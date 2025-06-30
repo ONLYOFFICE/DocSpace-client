@@ -24,19 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type {
   Nullable,
   ThirdPartyAccountType,
   ConnectedThirdPartyAccountType,
   TTranslation,
-} from "@docspace/shared/types";
-import type { ButtonSize } from "@docspace/shared/components/button";
+} from "../../types";
+import type { ButtonSize } from "../button";
 import type {
   FileInfoType,
   FilesSelectorSettings,
-} from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
-import type { TThirdParties } from "@docspace/shared/api/files/types";
+} from "../files-selector-input/FilesSelectorInput.types";
+import type { TThirdParties } from "../../api/files/types";
+import type { TBreadCrumb } from "../selector/Selector.types";
 
 export type StyledComboBoxItemProps = {
   isDisabled?: boolean;

@@ -3,7 +3,7 @@
   "content": "Choose the format for each file to be downloaded",
   "content_en_sha1_hash": "2fb71e2e0362cf2ae30e23c9be7d0d121a6aaa14",
   "created_at": "2025-05-19T21:30:43.447Z",
-  "updated_at": "2025-05-26T07:57:32.938Z",
+  "updated_at": "2025-05-28T09:30:02.964Z",
   "comment": {
     "text": "The translation key \"ChooseFormatText\" is used to display a message prompting users to select the format for files to be downloaded in a download dialog. This text appears as a label within a file selection interface, guiding users through the conversion process.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'اختر تنسيق كل ملف ليتم تنزيله' is a literal translation but not the most natural phrasing in Arabic. A more common and fluent way to express the English meaning would be something like 'اختر التنسيق المناسب لكل ملف للتحميل'.",
-          "suggestion": "اختر التنسيق المناسب لكل ملف للتحميل"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -41,9 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Yüklənəcək' is correctly spelled, but its use might be slightly less natural. A more common phrasing could be 'Endiriməcək' or 'Qoşulacaq' depending on the precise meaning intended. However, this is a nuance and not a strict error.",
-          "suggestion": "Consider 'Endiriməcək' or 'Qoşulacaq' for potentially more natural phrasing, though 'Yüklənəcək' is grammatically correct."
+          "type": "incorrect_translation",
+          "description": "The translation \"Yüklənəcək hər bir faylın formatını seçin \" is technically correct but sounds slightly unnatural in Azerbaijani. A more natural phrasing would be \"Hər bir yüklənəcək faylın formatını seçin\". The order of 'hər bir' and 'yüklənəcək' is reversed.",
+          "suggestion": "Hər bir yüklənəcək faylın formatını seçin"
         }
       ],
       "approved_at": null
@@ -54,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Избери формат за всеки файл, който ще бъде изтеглен' is a literal translation but sounds slightly unnatural in Bulgarian. A more natural phrasing would emphasize the selection process for *each* download.",
-          "suggestion": "Избери формата за изтегляне на всеки файл."
+          "description": "The translation 'Избери формат за всеки файл, който ще бъде изтеглен' is a literal translation and sounds a bit awkward in Bulgarian. A more natural phrasing would be 'Изберете формат за всеки файл при сваляне' or 'Изберете формат за сваляне на всеки файл'.",
+          "suggestion": "Изберете формат за сваляне на всеки файл"
         }
       ],
       "approved_at": null
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wählen Sie ein Format für das Herunterladen von Dateien aus' is a literal translation and sounds unnatural in German. A more natural phrasing would be 'Wählen Sie ein Format zum Herunterladen der Dateien'.",
-          "suggestion": "Wählen Sie ein Format zum Herunterladen der Dateien"
+          "description": "The translation 'Wählen Sie ein Format für das Herunterladen von Dateien aus' is a bit wordy and not the most natural phrasing. 'aus' at the end isn't necessary and makes it less concise.",
+          "suggestion": "Wählen Sie ein Format für den Download von Dateien."
         }
       ],
       "approved_at": null
@@ -90,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Elija el formato de cada archivo que desea descargar' is a bit verbose and not as concise as the English. A more direct and natural translation would be preferable.",
-          "suggestion": "Elija el formato para cada archivo a descargar."
+          "description": "The translation 'Elija el formato de cada archivo que desea descargar' is a bit too literal and clunky. While technically correct, it doesn't flow naturally in Spanish. 'Desea descargar' is somewhat formal and implies a choice that might not be necessary.",
+          "suggestion": "Elija el formato para cada archivo a descargar"
         }
       ],
       "approved_at": null
@@ -114,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ընտրեք յուրաքանչյուր ֆայլի ձևաչափը ներբեռնելու համար։' literally translates to 'Choose the format of each file for downloading.' While not entirely wrong, it's slightly awkward. A more natural Armenian phrasing would be 'Ընտրեք ձևաչափը յուրաքանչյուր ֆայլի համար, որը ներբեռնել եք։' or 'Ընտրեք յուրաքանչյուր ֆայլի ձևը ներբեռնման համար։'",
-          "suggestion": "Ընտրեք ձևաչափը յուրաքանչյուր ֆայլի համար, որը ներբեռնել եք։"
+          "description": "The Armenian translation 'Ընտրեք յուրաքանչյուր ֆայլի ձևաչափը ներբեռնելու համար։' is a literal translation and might not be the most natural or idiomatic way to express 'Choose the format for each file to be downloaded' in Armenian.  It emphasizes 'for downloading' which isn't as central to the meaning.",
+          "suggestion": "Ընտրեք ֆայլերի ձևաչափը ներբեռնման համար։ (Entrek fayleri dzevachapn nerbernman hamar.) - Choose the file formats for downloading."
         }
       ],
       "approved_at": null
@@ -141,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ດາວໂຫລດ' (download) is written with a space in the middle. It should be 'ດາວໂຫຼດ' without the space.",
+          "suggestion": "ດາວໂຫຼດ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Escolha o formato para cada ficheiro a ser transferido' is a literal translation that doesn't quite capture the intended meaning of 'downloaded'. 'Transferido' implies a general transfer, not specifically a download. A better phrasing would emphasize downloading.",
+          "description": "The translation 'Escolha o formato para cada ficheiro a ser transferido' is not the most natural or accurate translation of 'Choose the format for each file to be downloaded'.  'Transferido' implies a process of moving a file from one location to another, whereas 'downloaded' specifically refers to receiving a file from a remote server.  A better translation would convey the receiving action.",
           "suggestion": "Escolha o formato para cada arquivo a ser baixado"
         }
       ],
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'to be downloaded' is better translated as 'pentru descărcare' rather than 'de încărcat'. 'De încărcat' implies uploading, not downloading.",
-          "suggestion": "Selectați formatul pentru fiecare fișier pentru descărcare"
+          "description": "The translation 'Selectați formatul pentru fiecare fișier de încărcat' implies uploading files, while the English text refers to downloading. 'Încărcat' means 'uploaded'.",
+          "suggestion": "Selectați formatul pentru fiecare fișier de descărcat"
         }
       ],
       "approved_at": null
@@ -195,18 +195,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Выберите формат для каждого из файлов, которые нужно скачать' is overly verbose and not the most natural way to express 'Choose the format for each file to be downloaded' in Russian. While technically correct, it's less concise and potentially clunky.",
-          "suggestion": "Выберите формат для скачивания каждого файла"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'которые нужно скачать' (which need to be downloaded) is unnecessary. It's implied that the formats are for downloading.",
-          "suggestion": "Removing 'которые нужно скачать' makes the sentence more concise and natural."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -215,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'එක් එක් ගොනුව බාගැනීමට වුවමනා ආකෘතිය තෝරන්න' is a bit literal and could be improved for natural flow. 'වුවමනා' (vuwamanaya) means 'necessary' or 'desired,' which is not the best fit for 'Choose'.",
-          "suggestion": "තෝරාගන්නා ගොනුවලට සුදුසු ආකෘතියක් (Thoraagana gonuwala sudū aakṛthiyak)"
+          "description": "The translation \"එක් එක් ගොනුව බාගැනීමට වුවමනා ආකෘතිය තෝරන්න\" while understandable, doesn't perfectly capture the nuance of 'Choose the format for each file to be downloaded'. A more literal and accurate translation might better reflect the original meaning.",
+          "suggestion": "Perhaps \"බාගැනීම සඳහා එක් එක් ගොනුවේ ආකෘතිය තෝරන්න\" (Baaganeema sanada ekak ek gonawe aakruththiya thoraanna) - 'Choose the format for each file for download'."
         }
       ],
       "approved_at": null
@@ -239,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Изаберите формат за сваку датотеку коју желите да преузмете' is a bit verbose and not the most natural way to express the meaning of 'Choose the format for each file to be downloaded'. While technically correct, it's not the most concise or user-friendly option.",
+          "description": "The translation 'Изаберите формат за сваку датотеку коју желите да преузмете' is a bit verbose and could be more concise. While technically correct, it includes 'коју желите да преузмете' which translates to 'which you want to download'. This is redundant as 'download' is implied by 'format'.",
           "suggestion": "Изаберите формат сваке датотеке за преузимање"
         }
       ],
@@ -257,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İndirilecek her bir dosyanın türünü seçin' translates more literally to 'Choose the type of each file to be downloaded.' While understandable, 'format' implies a more specific designation than just 'type'.  'Format' in this context refers to the file type (e.g., PDF, DOCX, XLSX).",
-          "suggestion": "İndirilecek her bir dosyanın biçimini seçin"
+          "description": "The English phrase 'Choose the format for each file to be downloaded' is not perfectly conveyed by the Turkish translation 'İndirilecek her bir dosyanın türünü seçin'. 'Format' implies a more specific file type (e.g., PDF, DOCX, TXT) rather than just 'type' (tür).",
+          "suggestion": "İndirilecek her bir dosyanın dosya türünü seçin"
         }
       ],
       "approved_at": null
@@ -266,13 +255,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Виберіть формат кожного файлу, який буде завантажено' is a bit literal and could be improved for naturalness in Ukrainian. The passive voice ('який буде завантажено') is less common in this context.",
-          "suggestion": "Виберіть формат для кожного файлу для завантаження"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

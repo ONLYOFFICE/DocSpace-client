@@ -23,14 +23,21 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  workers: process.env.CI
+    ? 1
+    : undefined /* Reporter to use. See https://playwright.dev/docs/test-reporters */,
   reporter: [
     [
       process.env.CI ? "dot" : "html",
       {
         outputFolder: "../../playwright-report/sdk",
         open: "never",
+      },
+    ],
+    [
+      "json",
+      {
+        outputFile: "../../playwright-report/sdk/test-results.json",
       },
     ],
   ],
@@ -67,7 +74,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "yarn test:start",
+    command: "pnpm test:start",
     port: PORT,
     timeout: 1000 * 60 * 5,
   },

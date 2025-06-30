@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-06-02T10:20:50.994Z",
+  "updated_at": "2025-06-18T17:11:42.291Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -492,13 +492,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 256,
+      "line_number": 356,
       "context": "const uniqueTooltipId = `userTooltip_${Math.random()}`;\n \n const tooltipContent = `${\n user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n return user.isTitle ? (\n <StyledUserTypeHeader isExpect={isExpect}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 256,
+      "line_number": 356,
       "context": "const uniqueTooltipId = `userTooltip_${Math.random()}`;\n \n const tooltipContent = `${\n user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n return user.isTitle ? (\n <StyledUserTypeHeader isExpect={isExpect}>",
       "module": "/packages/client"
     },
@@ -510,13 +510,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 200,
+      "line_number": 204,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 200,
+      "line_number": 204,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
@@ -786,8 +786,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 198,
-      "context": "return (\n <StyledApiKeys>\n <div className=\"api-keys_description\">\n <Text lineHeight=\"20px\" className=\"api-keys_text\">\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>",
+      "line_number": 219,
+      "context": "withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className=\"api-keys_text\">\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -876,26 +876,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 221,
-      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", { productName: t(\"Common:ProductName\") })}\n <HelpButton\n className=\"csp-helpbutton\"",
+      "line_number": 222,
+      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 221,
-      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", { productName: t(\"Common:ProductName\") })}\n <HelpButton\n className=\"csp-helpbutton\"",
+      "line_number": 222,
+      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 221,
-      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", { productName: t(\"Common:ProductName\") })}\n <HelpButton\n className=\"csp-helpbutton\"",
+      "line_number": 222,
+      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/csp.js",
-      "line_number": 221,
-      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", { productName: t(\"Common:ProductName\") })}\n <HelpButton\n className=\"csp-helpbutton\"",
+      "line_number": 222,
+      "context": "}, [onAddByKey]);\n \n return (\n <>\n <CategoryHeader>\n {t(\"CSPHeader\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Container className=\"description-holder\">\n {t(\"CSPDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,",
       "module": "/packages/client"
     },
     {
@@ -906,7 +906,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
-      "line_number": 70,
+      "line_number": 73,
       "context": "<Trans\n ns=\"OAuth\"\n t={t}\n i18nKey=\"OAuthAppDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}\n />\n );",
       "module": "/packages/client"
     },
@@ -924,8 +924,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookInfo.js",
-      "line_number": 58,
-      "context": "return (\n <InfoWrapper>\n <InfoText as=\"p\">\n {t(\"WebhooksInfo\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </InfoText>\n {webhooksGuideUrl ? (\n <Link",
+      "line_number": 54,
+      "context": "return (\n <div>\n <InfoText as=\"p\">\n {t(\"WebhooksInfo\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </InfoText>\n {webhooksGuideUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {
@@ -942,7 +942,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 91,
+      "line_number": 95,
       "context": "<Trans\n t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (",
       "module": "/packages/client"
     },
@@ -1007,31 +1007,31 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
       "line_number": 104,
       "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n />\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
       "line_number": 104,
       "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n />\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
       "line_number": 104,
       "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n />\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
       "line_number": 104,
       "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n />\n );",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
       "line_number": 104,
       "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n />\n );",
       "module": "/packages/client"
@@ -1052,6 +1052,18 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
       "line_number": 144,
       "context": "<>\n <Text isBold>{t(\"ManagerTypesDescription\")}</Text>\n <br />\n <Text isBold>\n {t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text>\n {t(\"AdministratorDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
+      "line_number": 171,
+      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {isCardLinkedToPortal ? <PayerInformation /> : null}\n \n <div className={styles.balanceWrapper}>\n <div className={styles.headerContainer}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/WalletInfo.tsx",
+      "line_number": 63,
+      "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {t(\"ProductNameWallet\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: !!onTopUp,\n })}",
       "module": "/packages/client"
     },
     {
@@ -1068,32 +1080,32 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 67,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
@@ -1122,25 +1134,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 43,
-      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
+      "line_number": 44,
+      "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 43,
-      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
+      "line_number": 44,
+      "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 43,
-      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
+      "line_number": 44,
+      "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 179,
+      "line_number": 186,
       "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!tfaSettingsUrl}>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {tfaSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
@@ -1326,13 +1338,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1985,
+      "line_number": 1989,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1985,
+      "line_number": 1989,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -1393,7 +1405,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
       "line_number": 169,
-      "context": "<Trans\n t={t}\n i18nKey=\"SetAppDescription\"\n ns=\"Confirm\"\n productName={t(\"Common:ProductName\")}\n >\n The two-factor authentication is enabled to provide additional portal\n security. Configure your authenticator application to continue work on\n the portal. For example you could use Google Authenticator for\n <Link",
+      "context": "<Trans\n t={t}\n i18nKey=\"SetAppDescription\"\n ns=\"Confirm\"\n values={{ productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Link\n color={theme.currentColorScheme?.main?.accent}\n href={TFA_ANDROID_APP_URL}",
       "module": "/packages/login"
     },
     {
@@ -1422,8 +1434,8 @@
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
-      "line_number": 112,
-      "context": "i18nKey={roomName ? \"InvitationToRoom\" : \"InvitationToPortal\"}\n ns=\"Common\"\n defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomName ? { roomName } : { spaceAddress }),\n }}\n components={{\n 1: (\n <Text",
+      "line_number": 116,
+      "context": "i18nKey={keyProp.tKey}\n ns=\"Common\"\n defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomName ? { roomName } : { spaceAddress }),\n }}\n components={{\n 1: (\n <Text",
       "module": "/packages/login"
     },
     {
@@ -1458,7 +1470,7 @@
     },
     {
       "file_path": "/packages/shared/components/beta-badge/index.tsx",
-      "line_number": 51,
+      "line_number": 52,
       "context": "const { t } = useTranslation([\"Common\", \"Settings\"]);\n \n const tooltipDescription = (\n <>\n {t(\"Common:BetaBadgeDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n {!withOutFeedbackLink ? (\n <Trans\n t={t}\n ns=\"Common\"",
       "module": "/packages/shared"
     },
@@ -1584,13 +1596,13 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 638,
+      "line_number": 658,
       "context": "emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/utils/index.ts",
-      "line_number": 186,
+      "line_number": 192,
       "context": "return items;\n };\n \n export const getDefaultBreadCrumb = (t: TTranslation) => {\n return {\n label: t(\"Common:ProductName\"),\n id: 0,\n isRoom: false,\n };\n };",
       "module": "/packages/shared"
     },

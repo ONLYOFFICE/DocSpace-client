@@ -37,21 +37,17 @@ async function Page() {
     getCompanyInfoSettings(),
   ]);
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer greetingText={settings?.greetingSettings} />
-          <FormWrapper id="remove-portal-form">
-            <RemovePortalForm
-              onlyofficeUrl={settings?.externalResources.site.domain}
-              siteUrl={companyInfoSettings?.site}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer greetingText={settings?.greetingSettings} />
+      <FormWrapper id="remove-portal-form">
+        <RemovePortalForm
+          onlyofficeUrl={settings?.externalResources.site.domain}
+          siteUrl={companyInfoSettings?.site}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

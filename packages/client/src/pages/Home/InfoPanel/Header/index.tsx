@@ -245,6 +245,7 @@ export default inject(
     selectedFolderStore,
   }: TStore) => {
     const selectedId = selectedFolderStore.id;
+    const selectedRoomType = selectedFolderStore.roomType;
 
     const { infoPanelItemsList } = pluginStore;
 
@@ -276,6 +277,7 @@ export default inject(
       enablePlugins,
 
       selectedId,
+      selectedRoomType,
     };
   },
 )(observer(InfoPanelHeaderContent));

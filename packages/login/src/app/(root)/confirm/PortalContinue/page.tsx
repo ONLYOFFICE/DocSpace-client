@@ -34,18 +34,14 @@ import ContinuePortalForm from "./page.client";
 async function Page() {
   const settings = await getSettings();
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer greetingText={settings?.greetingSettings} />
-          <FormWrapper id="portal-continue-form">
-            <ContinuePortalForm />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer greetingText={settings?.greetingSettings} />
+      <FormWrapper id="portal-continue-form">
+        <ContinuePortalForm />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

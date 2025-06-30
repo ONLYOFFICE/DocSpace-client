@@ -3,7 +3,7 @@
   "content": "No guests match your search. Please adjust your search parameters or clear the search field to view the full list of guests.",
   "content_en_sha1_hash": "1297a129afd4993c61bd2730abb16504a0df9cfe",
   "created_at": "2025-05-19T21:30:46.855Z",
-  "updated_at": "2025-05-26T07:57:32.454Z",
+  "updated_at": "2025-06-18T17:09:45.752Z",
   "comment": {
     "text": "This translation key is used for a message that appears when no guests match the search criteria, prompting the user to adjust their search parameters or clear the search field. It is typically displayed on an empty screen in the Contacts section of a page.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 652,
+      "line_number": 672,
       "context": "? t(\"Common:NotFoundMembers\")\n : t(\"Common:NotFoundGroups\")\n }\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundUsersDescription\")\n : t(\"Common:GroupsNotFoundDescription\")\n }\n hasNextPage={hasNextPage}",
       "module": "/packages/shared"
     }
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'لا بوجد' is a common error. The correct form is 'لا يوجد'.",
+          "description": "The word 'لا بوجد' should be 'لا يوجد'.",
           "suggestion": "لا يوجد"
         }
       ],
@@ -111,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"검색 매개변수를 조정하거나\" is somewhat literal and could be phrased more naturally. A more common and user-friendly way to say 'adjust your search parameters' would be something like \"검색 조건을 변경하거나\" (change your search conditions).",
+          "suggestion": "검색 조건을 변경하거나"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -120,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ເຫັນດີກັບການຄົ້ນຫາຂອງທ່ານ\" (hen dee gap kan khon haa khong khun) translates to 'agree with your search' which isn't the intended meaning. It implies the guests are actively agreeing, not simply matching the search criteria.",
-          "suggestion": "ປ່ຽນເປັນ 'ຖືກຕ້ອງກັບການຄົ້ນຫາຂອງທ່ານ' (thook thong gap kan khon haa khong khun) which translates to 'match your search' or 'correspond to your search'."
+          "description": "The phrase 'ເຫັນດີກັບການຄົ້ນຫາຂອງທ່ານ' (hen dee gap kan khon haa khong khun) literally translates to 'agree with your search'. This doesn't accurately convey the meaning of 'match your search'.",
+          "suggestion": "Consider using a phrase like 'ຖືກຕ້ອງຕາມການຄົ້ນຫາຂອງທ່ານ' (thuk tong taam kan khon haa khong khun) which means 'corresponds to your search' or 'matches your search'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ລ້າງຄຳນຶ່ງການຄົ້ນຫາ' (laang kham neung kan khon haa) is awkward. 'ຄຳນຶ່ງ' isn't the correct word to use in this context. It means something like 'one word' or 'a word'.",
+          "suggestion": "Replace with 'ລ້າງຄຳສຸ່ມການຄົ້ນຫາ' (laang kham sum kan khon haa) which means 'clear the search terms', or more simply 'ລ້າງການຄົ້ນຫາ' (laang kan khon haa) - 'clear the search'."
         }
       ],
       "approved_at": null
@@ -141,13 +152,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"wyszukiwanej frazy\" is a less natural way to say \"your search.\" A more natural Polish phrasing would be \"Twojego wyszukiwania\" or simply \"Twoich parametrów wyszukiwania\".",
-          "suggestion": "Dostosuj parametry wyszukiwania lub wyczyść pole wyszukiwania, aby zobaczyć pełną listę gości."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -168,8 +173,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ceea ce căutați\" is a slightly awkward translation of \"your search.\" A more natural phrasing would be something like \"căutarea dumneavoastră\" or \"căutarea ta\".",
-          "suggestion": "Niciunul dintre invitații nu se potrivește cu căutarea dumneavoastră. Vă rugăm să configurați parametrii de căutare sau să goliți câmpul de căutare pentru a vizualiza lista completă de invitați."
+          "description": "The translation \"Niciunul dintre invitații nu se potrivește cu ceea ce căutați\" is a bit awkward. A more natural phrasing would be something along the lines of \"Niciun invitat nu se potrivește cu căutarea dumneavoastră.\" or \"Nu s-au găsit invitați care să corespundă căutării dumneavoastră.\" ",
+          "suggestion": "Nu s-au găsit invitați care să corespundă căutării dumneavoastră."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Vă rugăm să configurați parametrii de căutare\" could be improved. While technically correct, it's more formal than the original English. A more conversational and user-friendly phrasing would be better.",
+          "suggestion": "Vă rugăm să ajustați parametrii de căutare"
         }
       ],
       "approved_at": null
@@ -186,13 +196,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරාමිතීන්' (paramitheen) is a bit formal for this context. A more common and accessible word would be better.",
-          "suggestion": "පරාමිතීන් වෙනුවට 'වියූරුවා' (viyuruwa - criteria) or 'ආරම්භකයන්' (aaramabhakayan - initial settings) can be considered."
+          "description": "The word 'අමුත්තන්' (amuttan) is slightly informal in this context. While not incorrect, a more formal term like 'හිතකරුවන්' (hitakaruwan) might be more appropriate for a user interface.",
+          "suggestion": "Consider replacing 'අමුත්තන්' with 'හිතකරුවන්'."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'ඔබගේ සෙවුමට ගැලපෙන අමුත්තන් නොමැත' is grammatically correct but can be slightly improved for flow.  A more natural phrasing might be 'ඔබගේ සෙවුමට ගැලපෙන අමුත්තන් කීවම නැත' (kivema netha - none found).",
-          "suggestion": "ඔබගේ සෙවුමට ගැලපෙන අමුත්තන් කීවම නැත."
+          "description": "The phrase 'ඔබගේ සෙවුමට ගැලපෙන' (obage sewumato galappenen) could be slightly rephrased for better flow. It's grammatically correct, but sounds a little clunky.",
+          "suggestion": "Consider rephrasing to 'ඔබේ සෙවුමේදි' (obey sewumeyedi) or 'ඔබේ සෙවුමට අනුව' (obey sewumato anuv)"
         }
       ],
       "approved_at": null
@@ -215,8 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'прилагодите' could be slightly improved for clarity in this context. While technically correct, 'подесите' might flow better.",
-          "suggestion": "подесите"
+          "description": "The word 'гостију' (guests) is missing an acute accent. It should be 'гостију́'.",
+          "suggestion": "гостију́"
         }
       ],
       "approved_at": null
@@ -230,7 +240,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"adjust your search parameters\" is too literal. A more natural Turkish equivalent would be \"arama kriterlerinizi değiştirin\" or \"aramayı genişletin\".",
+          "suggestion": "Aramanızla eşleşen konuk yok. Konukların tam listesini görüntülemek için lütfen aramayı genişletin veya arama alanını temizleyin."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

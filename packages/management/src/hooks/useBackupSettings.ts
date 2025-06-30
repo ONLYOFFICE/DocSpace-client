@@ -26,7 +26,7 @@
 
 "use client";
 
-import { Reducer, useCallback, useMemo, useReducer, useState } from "react";
+import { useCallback, useMemo, useReducer, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AutoBackupPeriod } from "@docspace/shared/enums";
@@ -59,13 +59,7 @@ export const useBackupSettings = ({
     Nullable<TBackupSchedule>
   >(() => backupScheduleResponse ?? null);
 
-  const [defaults, setDefaults] = useReducer<
-    Reducer<
-      BackupDefaultStateType,
-      | Partial<BackupDefaultStateType>
-      | ((state: BackupDefaultStateType) => Partial<BackupDefaultStateType>)
-    >
-  >(
+  const [defaults, setDefaults] = useReducer(
     (state, action) => ({
       ...state,
       ...(typeof action === "function" ? action(state) : action),
@@ -77,14 +71,8 @@ export const useBackupSettings = ({
     },
   );
 
-  const [selected, setSelected] = useReducer<
-    Reducer<
-      BackupSelectedStateType,
-      | Partial<BackupSelectedStateType>
-      | ((state: BackupSelectedStateType) => Partial<BackupSelectedStateType>)
-    >
-  >(
-    (state, action) => ({
+  const [selected, setSelected] = useReducer(
+    (state, action: Partial<BackupSelectedStateType> | Function) => ({
       ...state,
       ...(typeof action === "function" ? action(state) : action),
     }),
@@ -114,11 +102,11 @@ export const useBackupSettings = ({
         };
 
         if (defaultFormSettings) {
-          setSelected((state) => ({
+          setSelected((state: BackupSelectedStateType) => ({
             ...state,
             formSettings: { ...defaultFormSettings },
           }));
-          setDefaults((state) => ({
+          setDefaults((state: BackupDefaultStateType) => ({
             ...state,
             formSettings: { ...defaultFormSettings },
           }));
@@ -133,7 +121,7 @@ export const useBackupSettings = ({
             ? "1"
             : day.toString();
 
-        setDefaults((state) => ({
+        setDefaults((state: BackupDefaultStateType) => ({
           ...state,
           day: day.toString(),
           hour: `${hour}:00`,
@@ -147,7 +135,7 @@ export const useBackupSettings = ({
           monthDay,
         }));
 
-        setSelected((state) => ({
+        setSelected((state: BackupSelectedStateType) => ({
           ...state,
           day: day.toString(),
           hour: `${hour}:00`,
@@ -173,12 +161,12 @@ export const useBackupSettings = ({
           }
           const weekdayLabel = weekdayArr[weekDay].label!;
 
-          setDefaults((state) => ({
+          setDefaults((state: BackupDefaultStateType) => ({
             ...state,
             weekday: day.toString(),
             weekdayLabel,
           }));
-          setSelected((state) => ({
+          setSelected((state: BackupSelectedStateType) => ({
             ...state,
             weekday: day.toString(),
             weekdayLabel,
@@ -187,13 +175,13 @@ export const useBackupSettings = ({
           const weekdayLabel = weekdayArr[0].label!;
           const weekday = weekdayArr[0].key.toString();
 
-          setDefaults((state) => ({
+          setDefaults((state: BackupDefaultStateType) => ({
             ...state,
             weekday,
             weekdayLabel,
           }));
 
-          setSelected((state) => ({
+          setSelected((state: BackupSelectedStateType) => ({
             ...state,
             weekday,
             weekdayLabel,
@@ -204,7 +192,7 @@ export const useBackupSettings = ({
         const weekdayLabel = weekdayArr[0].label!;
         const weekday = weekdayArr[0].key.toString();
 
-        setDefaults((state) => ({
+        setDefaults((state: BackupDefaultStateType) => ({
           ...state,
           weekday,
           periodLabel,
@@ -236,7 +224,7 @@ export const useBackupSettings = ({
   const deleteSchedule = (weekdayArr: TWeekdaysLabel[]) => {
     setBackupSchedule(null);
 
-    setDefaults((state) => ({
+    setDefaults((state: BackupDefaultStateType) => ({
       ...state,
       day: "0",
       hour: "12:00",
@@ -252,7 +240,7 @@ export const useBackupSettings = ({
       weekdayLabel: weekdayArr[0].label!,
     }));
 
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       day: "0",
       hour: "12:00",
@@ -272,7 +260,7 @@ export const useBackupSettings = ({
   };
 
   const setMaxCopies = (option: TOption) => {
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       maxCopiesNumber: option.key.toString(),
     }));
@@ -282,7 +270,7 @@ export const useBackupSettings = ({
     const key = options.key;
     const label = options.label;
 
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       periodNumber: `${key}`,
       periodLabel: label!,
@@ -293,7 +281,7 @@ export const useBackupSettings = ({
     const key = options.key;
     const label = options.label;
 
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       weekday: `${key}`,
       weekdayLabel: label!,
@@ -303,7 +291,7 @@ export const useBackupSettings = ({
   const setMonthNumber = (options: TOption) => {
     const label = options.label;
 
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       monthDay: label!,
     }));
@@ -312,7 +300,7 @@ export const useBackupSettings = ({
   const setTime = (options: TOption) => {
     const label = options.label;
 
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       hour: label!,
     }));
@@ -323,19 +311,22 @@ export const useBackupSettings = ({
     module?: string,
   ) => {
     if (module && module === defaults.storageId) {
-      setSelected((state) => ({
+      setSelected((state: BackupSelectedStateType) => ({
         ...state,
         formSettings: { ...defaults.formSettings },
       }));
       return;
     }
 
-    setSelected((state) => ({ ...state, formSettings: { ...values } }));
+    setSelected((state: BackupSelectedStateType) => ({
+      ...state,
+      formSettings: { ...values },
+    }));
     setErrorsFormFields({});
   };
 
   const addValueInFormSettings = (name: string, value: string) => {
-    setSelected((prevState) => {
+    setSelected((prevState: BackupSelectedStateType) => {
       const { formSettings } = prevState;
 
       const newFormSettings = { ...formSettings, [name]: value };
@@ -347,7 +338,7 @@ export const useBackupSettings = ({
   };
 
   const deleteValueFormSetting = (key: string) => {
-    setSelected((state) => {
+    setSelected((state: BackupSelectedStateType) => {
       const newSettings = { ...state.formSettings };
       delete newSettings[key];
       return {
@@ -357,21 +348,21 @@ export const useBackupSettings = ({
   };
 
   const setStorageId = (id: Nullable<string>) => {
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       storageId: id,
     }));
   };
 
   const seStorageType = (type: string) => {
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       storageType: type,
     }));
   };
 
   const setSelectedFolder = (folderId: string) => {
-    setSelected((state) => ({
+    setSelected((state: BackupSelectedStateType) => ({
       ...state,
       folderId,
     }));

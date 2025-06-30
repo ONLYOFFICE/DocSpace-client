@@ -3,7 +3,7 @@
   "content": "View all rooms",
   "content_en_sha1_hash": "591754375f09aba76e3a8dcea7c5fcb1e4f2fdfe",
   "created_at": "2025-05-19T21:30:47.074Z",
-  "updated_at": "2025-05-26T07:57:32.999Z",
+  "updated_at": "2025-05-28T09:30:03.012Z",
   "comment": {
     "text": "\"View all rooms\" is used to describe the content of a button or link that allows users to view all available rooms. This translation key appears in UI contexts where room management functionality is displayed, such as in settings or profile pages.",
     "is_auto": true,
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ver todos os quartos\" is a literal translation of 'View all rooms'. While understandable, it's not the most natural phrasing in Portuguese. 'View' implies a listing or overview, which 'Ver' captures, but a more idiomatic translation would be more suitable.",
-          "suggestion": "Visualizar todos os quartos"
+          "description": "The translation 'Ver todos os quartos' is a literal translation and might not be the most natural way to express 'View all rooms' in Portuguese. It focuses on 'rooms' rather than the action of viewing.",
+          "suggestion": "Consider a more idiomatic translation such as 'Visualizar todos os quartos', 'Ver a lista de quartos', or 'Acessar todos os quartos'."
         }
       ],
       "approved_at": null
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සියලුම කාමර බලන්න' is a literal translation but doesn't quite convey the intended meaning of 'View all rooms' in a user interface context. It's a bit too informal.",
+          "suggestion": "Consider a more formal and user-friendly translation like 'සියලුම గదుları දැකීම' (Siyālumuda gaduvā dakimmē) or 'සියලුම గదుları පෙනීම' (Siyālumuda gaduvā penimmē)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +177,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Poglej vse sobe' while literally meaning 'Look at all rooms', doesn't quite capture the intended meaning of 'View all rooms'. It sounds like a command rather than an indication of a viewable list.",
+          "suggestion": "Ogledi vseh sob"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -180,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Прикажи све собе\" is not the most natural or accurate translation of \"View all rooms.\" While it's understandable, it's a bit literal. A more common and idiomatic translation would be something like \"Покажи све собе\" or \"Види све собе\".",
+          "description": "The Serbian (Cyrillic) translation 'Прикажи све собе' translates to 'Show all rooms', not 'View all rooms'. While the meaning is close, the wording doesn't perfectly align with the English source.",
           "suggestion": "Покажи све собе"
         }
       ],

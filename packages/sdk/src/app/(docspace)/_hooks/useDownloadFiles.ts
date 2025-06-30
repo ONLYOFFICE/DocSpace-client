@@ -80,7 +80,7 @@ export default function useDownloadFiles() {
         const operation = operations?.[operations.length - 1];
 
         if (!operation) {
-          return Promise.reject();
+          return await Promise.reject();
         }
 
         if (operation.error) {

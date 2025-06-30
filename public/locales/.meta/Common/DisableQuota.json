@@ -3,7 +3,7 @@
   "content": "Disable quota",
   "content_en_sha1_hash": "13a8e1d1f088c27730510bb9d3e85366580a74b1",
   "created_at": "2025-05-19T21:30:44.544Z",
-  "updated_at": "2025-05-26T07:57:32.201Z",
+  "updated_at": "2025-06-18T17:11:42.317Z",
   "comment": {
     "text": "This translation key is used to display the label \"Disable quota\" in various UI elements, such as a storage management dialog and a settings menu. It appears on buttons and menus that allow users to disable or customize their quota limitations. The key should be translated to provide a clear indication of this action's purpose for end-users.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kvotanı deaktiv edin' while understandable, is a bit literal and not the most natural way to express 'Disable quota' in Azerbaijani. 'Deaktiv edin' directly translates to 'disable' and is acceptable but not ideal for a user interface.",
-          "suggestion": "Consider a more natural phrasing like 'Kvotayı söndürün' (Quota off) or 'Kvotanı ləğv edin' (Cancel quota). The best option depends on the specific context."
+          "description": "The English phrase \"Disable quota\" implies a setting or feature being turned off. \"Kvotanı deaktiv edin\" translates more literally to \"Disable my quota.\" The possessive \"my\" isn't present in the English source, making the translation slightly off.  A more accurate translation would depend on the context. If it's a system setting, a more general disablement might be preferable.",
+          "suggestion": "Consider a more general translation like \"Kvotanı ləğv edin\" or \"Kvotanı söndürün\" depending on the specific system functionality."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Quote deaktivieren\" translates to 'Quote disable' which doesn't accurately convey the meaning of \"Disable quota\". 'Quota' should be translated as 'Kontingent'.",
-          "suggestion": "Kontingent deaktivieren"
+          "description": "The translation 'Quote deaktivieren' is not the accurate translation of 'Disable quota'. 'Quote' refers to quotations, not 'quota'. The correct translation would convey the removal or deactivation of a quota system.",
+          "suggestion": "Deaktivierung der Kontingente"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Անջատել քվոտան\" literally translates to \"Disable the quota.\" While understandable, a more natural and common phrasing for disabling a quota would be \"Մեծացնել քվոտան\" (Metzangel kvot'an) or \"Հանում քվոտան\" (Hanum kvot'an). \"Անջատել\" is more commonly used for something like disconnecting a device.",
-          "suggestion": "Consider \"Մեծացնել քվոտան\" or \"Հանում քվոտան\" for a more natural phrasing."
+          "description": "While \"Անջատել քվոտան\" is literally \"Disable the quota\", a more natural and idiomatic translation in Armenian would be \"Աջակայել քվոտան\" or \"Դադարեցնել քվոտան\". \"Անջատել\" often implies a complete disconnection, which might not be the intended meaning of 'disable'.",
+          "suggestion": "Consider using \"Աջակայել քվոտան\" or \"Դադարեցնել քվոտան\"."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සලාකය අබල කරන්න\" is not an accurate translation of \"Disable quota\". \"සලාකය\" means 'salary' or 'allowance', and \"අබල කරන්න\" means 'to abolish' or 'to destroy'. This has a completely different meaning than 'disable'.",
-          "suggestion": "A more accurate translation would be something like \"කොටාව අයින් කරන්න\" (Kotawa aen kanna - remove the quota) or \"කොටාව නිශ්ක්‍රිය කරන්න\" (Kotawa nishkriya kanna - deactivate the quota)."
+          "description": "The Sinhala translation \"සලාකය අබල කරන්න\" doesn't accurately convey the meaning of \"Disable quota\". \"සලාකය\" (salakaya) means 'salad' or 'mixture', which is unrelated to quotas. \"අබල කරන්න\" (abala karanna) means 'to waste' or 'to spoil', which doesn't align with disabling a quota.",
+          "suggestion": "A more accurate translation might be \"කොටාව අයින් කරන්න\" (kotawa aain karanna - remove the quota) or \"කොටාව නිශ්ක්‍රීය කරන්න\" (kotawa nishkriya karanna - deactivate the quota)."
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Onemogući kvotu\" while technically meaning 'disable quota,' doesn't perfectly capture the tone of the English 'Disable quota.' It's a bit more formal and abrupt. A more natural and slightly softer translation might be preferable, depending on the overall context.",
-          "suggestion": "Consider \"Isključi kvotu\" or \"Uključi kvotu\" depending on the intended effect. 'Isključi' is more common for disengaging something, while 'Uključi' often implies reverting to a default state."
+          "description": "The translation \"Onemogući kvotu\" is a literal translation of 'Disable quota' but doesn't convey the intended meaning naturally in Serbian. A more appropriate translation would express the idea of removing or deactivating the quota.",
+          "suggestion": "Consider alternatives like \"Uključi kvotu\" (which implies removing the limit, depending on context) or a phrase clarifying the action being performed on the quota."
         }
       ],
       "approved_at": null

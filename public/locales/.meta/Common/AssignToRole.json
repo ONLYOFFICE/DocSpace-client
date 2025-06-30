@@ -3,7 +3,7 @@
   "content": "Assign to role",
   "content_en_sha1_hash": "c15c6b3c6eb69973c21796b22a961b9f5e454bd4",
   "created_at": "2025-05-19T21:30:43.120Z",
-  "updated_at": "2025-06-18T17:09:45.984Z",
+  "updated_at": "2025-06-26T19:00:18.306Z",
   "comment": {
     "text": "The \"Assign to role\" translation key is used to display a label on a panel header in a user interface. It appears as a button with this text and is part of a dialog that allows users to assign tasks to roles. The translators should provide a short and descriptive phrase that makes sense in the context of the application's workflow, such as \"Assign task to role\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 220,
+      "line_number": 223,
       "context": "const disabledSubmit = roles.some((role) => !role.user);\n \n const headerProps = useMemo(\n () =>\n ({\n headerLabel: t(\"Common:AssignToRole\"),\n withoutBackButton: false,\n withoutBorder: false,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/shared"
     }

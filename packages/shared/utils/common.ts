@@ -1045,7 +1045,7 @@ export const getEditorTheme = (theme?: ThemeKeys) => {
     case ThemeKeys.DarkStr:
       return "theme-night";
     case ThemeKeys.SystemStr:
-      return systemTheme;
+      return "theme-system";
     default:
       return systemTheme;
   }

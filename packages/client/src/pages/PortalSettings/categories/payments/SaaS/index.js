@@ -55,16 +55,13 @@ const SaaSPage = ({
   isDesktopClientInit,
   setIsDesktopClientInit,
   setIsUpdatingBasicSettings,
-  isShowStorageTariffDeactivated,
+  isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
   const shouldShowLoader =
     !isInitPaymentPage || !ready || isUpdatingTariff || isUpdatingBasicSettings;
 
   const [showLoader, setShowLoader] = useState(false);
-  const [openWarningDialog, setOpenWarningDialog] = useState(
-    isShowStorageTariffDeactivated,
-  );
 
   useEffect(() => {
     moment.locale(language);
@@ -113,10 +110,6 @@ const SaaSPage = ({
     };
   }, []);
 
-  const onCloseWarningDialog = () => {
-    setOpenWarningDialog(false);
-  };
-
   return shouldShowLoader ? (
     showLoader ? (
       <PaymentsLoader />
@@ -124,10 +117,9 @@ const SaaSPage = ({
   ) : (
     <>
       <PaymentContainer t={t} />
-      {openWarningDialog ? (
+      {isShowStorageTariffDeactivatedModal ? (
         <StorageTariffDeactiveted
-          visible={openWarningDialog}
-          onClose={onCloseWarningDialog}
+          visible={isShowStorageTariffDeactivatedModal}
         />
       ) : null}
     </>
@@ -150,15 +142,16 @@ export default inject(
     } = authStore;
     const { user } = userStore;
     const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
-    const { isLoaded: isLoadedTariffStatus, isShowStorageTariffDeactivated } =
-      currentTariffStatusStore;
+    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
     const {
       isInitPaymentPage,
       init,
       isUpdatingBasicSettings,
       resetTariffContainerToBasic,
       setIsUpdatingBasicSettings,
+      isShowStorageTariffDeactivatedModal,
     } = paymentStore;
+
     const {
       isEncryptionSupport,
       setEncryptionKeys,
@@ -184,7 +177,7 @@ export default inject(
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
       setIsUpdatingBasicSettings,
-      isShowStorageTariffDeactivated,
+      isShowStorageTariffDeactivatedModal,
     };
   },
 )(observer(SaaSPage));

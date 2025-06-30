@@ -730,6 +730,8 @@ class FilesStore {
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
 
       if (foundIndex === -1) {
+        frameCallEvent({ event: "onNotFound" });
+
         return this.redirectToParent(
           opt,
           pathParts,

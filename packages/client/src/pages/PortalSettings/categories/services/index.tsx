@@ -46,8 +46,9 @@ type ServicesProps = {
   servicesInit: (t: TTranslation) => void;
   isInitServicesPage: boolean;
   isVisibleWalletSettings: boolean;
-  isShowStorageTariffDeactivated: boolean;
+  isShowStorageTariffDeactivatedModal: boolean;
   isGracePeriod: boolean;
+  previousStoragePlanSize: number;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -56,24 +57,22 @@ const Services: React.FC<ServicesProps> = ({
   servicesInit,
   isInitServicesPage,
   isVisibleWalletSettings,
-  isShowStorageTariffDeactivated,
   isGracePeriod,
+  previousStoragePlanSize,
+  isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
+  const [previousValue, setPreviousValue] = useState(0);
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
   const location = useLocation();
   const navigate = useNavigate();
   const { openDialog } = location.state || {};
-
-  const [openWarningDialog, setOpenWarningDialog] = useState(
-    isShowStorageTariffDeactivated && !openDialog,
-  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,6 +94,7 @@ const Services: React.FC<ServicesProps> = ({
   useEffect(() => {
     if (openDialog) {
       setIsStorageVisible(openDialog);
+      setPreviousValue(previousStoragePlanSize);
       navigate(location.pathname, { replace: true });
     }
   }, [openDialog]);
@@ -122,10 +122,6 @@ const Services: React.FC<ServicesProps> = ({
     setIsStorageVisible(false);
   };
 
-  const onCloseWarningDialog = () => {
-    setOpenWarningDialog(false);
-  };
-
   const onCloseStorageCancell = () => {
     setIsStorageCancellation(false);
   };
@@ -151,14 +147,17 @@ const Services: React.FC<ServicesProps> = ({
   ) : (
     <>
       <AdditionalStorage onClick={onClick} onToggle={onToggle} />
-      {openWarningDialog ? (
+      {isShowStorageTariffDeactivatedModal ? (
         <StorageTariffDeactiveted
-          visible={openWarningDialog}
-          onClose={onCloseWarningDialog}
+          visible={isShowStorageTariffDeactivatedModal}
         />
       ) : null}
       {isStorageVisible ? (
-        <StoragePlanUpgrade visible={isStorageVisible} onClose={onClose} />
+        <StoragePlanUpgrade
+          visible={isStorageVisible}
+          onClose={onClose}
+          previousValue={previousValue}
+        />
       ) : null}
       {isStorageCancelattion ? (
         <StoragePlanCancel
@@ -177,18 +176,18 @@ const Services: React.FC<ServicesProps> = ({
 };
 
 export const Component = inject(
-  ({ servicesStore, currentTariffStatusStore }: TStore) => {
+  ({ servicesStore, currentTariffStatusStore, paymentStore }: TStore) => {
     const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
       servicesStore;
-    const { isShowStorageTariffDeactivated, isGracePeriod } =
-      currentTariffStatusStore;
-
+    const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
+    const { isShowStorageTariffDeactivatedModal } = paymentStore;
     return {
       servicesInit,
       isInitServicesPage,
       isVisibleWalletSettings,
-      isShowStorageTariffDeactivated,
+      isShowStorageTariffDeactivatedModal,
       isGracePeriod,
+      previousStoragePlanSize,
     };
   },
 )(observer(Services));

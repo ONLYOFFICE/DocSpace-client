@@ -3,7 +3,7 @@
   "content": "<1>Previous plan:</1> {{amount}} <2>({{price}}/month)</2>",
   "content_en_sha1_hash": "cb807c257bff1837397603e3ebded1258e038895",
   "created_at": "2025-06-24T16:31:06.824Z",
-  "updated_at": "2025-06-24T16:32:01.849Z",
+  "updated_at": "2025-06-26T19:00:18.162Z",
   "comment": {
     "text": "This translation key is used to display the previous storage plan details. It appears in a dialogue related to deactivating storage tariffs, showing the amount of gigabytes and monthly price of the previous plan chosen.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
-      "line_number": 110,
-      "context": "<br />\n <Text as=\"span\">\n <Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"PreviousPlan\"\n values={{\n amount: `${previousStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatCurrencyValue(\n language,\n totalPrice,",
+      "line_number": 107,
+      "context": "<br />\n <Text as=\"span\">\n <Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"PreviousPlan\"\n values={{\n amount: `${previousStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}\n components={{",
       "module": "/packages/client"
     }
   ],

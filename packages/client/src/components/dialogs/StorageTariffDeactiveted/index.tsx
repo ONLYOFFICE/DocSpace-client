@@ -52,6 +52,7 @@ type StorageTariffDeactivetedProps = {
   maxTotalSizeByQuota?: number;
   isStorageTariffLimit?: boolean;
   formatWalletCurrency?: (item: number, fractionDigits?: number) => string;
+  setIsShowTariffDeactivatedModal?: (value: boolean) => void;
 };
 
 const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
@@ -63,12 +64,15 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
   maxTotalSizeByQuota,
   isStorageTariffLimit,
   formatWalletCurrency,
+  setIsShowTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common"]);
   const navigate = useNavigate();
 
   const onCloseModal = () => {
     localStorage.setItem(STORAGE_TARIFF_DEACTIVATED, "true");
+
+    setIsShowTariffDeactivatedModal(false);
 
     onClose && onClose();
   };
@@ -179,6 +183,7 @@ export default inject(
       storagePriceIncrement,
       handleServicesQuotas,
       formatWalletCurrency,
+      setIsShowTariffDeactivatedModal,
     } = paymentStore;
 
     const {
@@ -204,6 +209,7 @@ export default inject(
       maxTotalSizeByQuota,
       isStorageTariffLimit,
       formatWalletCurrency,
+      setIsShowTariffDeactivatedModal,
     };
   },
 )(observer(StorageTariffDeactiveted));

@@ -43,6 +43,7 @@ interface TopUpButtonsProps {
   fetchTransactionHistory?: () => Promise<void>;
   onClose: () => void;
   walletCustomerEmail?: boolean;
+  walletCustomerStatusNotActive?: boolean;
 }
 
 const TopUpButtons: React.FC<TopUpButtonsProps> = ({
@@ -53,12 +54,15 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
   walletCustomerEmail,
   setIsLoading,
   isLoading,
+  walletCustomerStatusNotActive,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
   const { amount } = useAmountValue();
 
-  const isButtonDisabled = !amount || !walletCustomerEmail;
+  const isButtonDisabled =
+    walletCustomerStatusNotActive || !amount || !walletCustomerEmail;
+
   const onTopUp = async () => {
     try {
       setIsLoading(true);

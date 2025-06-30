@@ -73,7 +73,7 @@ const DeleteLinkDialogComponent = (props) => {
         deleteExternalLink(res, newLink.sharedTo.id);
 
         if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
-          toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
+          toastr.success(t("Files:GeneralLinkRevokedAndCreatedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
 
         const filterObj = FilesFilter.getFilter(window.location);

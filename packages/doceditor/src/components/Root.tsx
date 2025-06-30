@@ -124,6 +124,7 @@ const Root = ({
   const fileInfo = config?.file;
   const instanceId = config?.document?.referenceData.instanceId;
   const roomId = config?.document?.referenceData.roomId;
+  const canEditRoom = config?.document?.referenceData.canEditRoom;
 
   const [selectedFolderId, setSelectedFolderId] = React.useState<
     string | number | undefined
@@ -405,6 +406,7 @@ const Root = ({
           roomId={roomId}
           settings={settings}
           fileId={fileInfo.id}
+          canEditRoom={canEditRoom}
           onSubmit={onSubmitStartFilling}
           inviteUserToRoom={inviteUserToRoom}
           setStartFillingPanelVisible={setStartFillingPanelVisible}

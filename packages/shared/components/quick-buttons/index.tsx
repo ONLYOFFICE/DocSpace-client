@@ -172,7 +172,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {isAvailableLockFile ? (
+          {(locked && item.access === ShareAccessRights.Collaborator) ||
+          isAvailableLockFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconNode={<IconLock />}
@@ -182,11 +183,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               data-locked={!!locked}
               onClick={onClickLock}
               color={colorLock}
-              isDisabled={isDisabled}
+              isDisabled={isDisabled || !isAvailableLockFile}
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
             />
           ) : null}
+
           {isAvailableDownloadFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
@@ -194,7 +196,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge download-file icons-group"
               size={sizeQuickButton}
               onClick={onClickDownload}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Common:Download")}

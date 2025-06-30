@@ -42,4 +42,3 @@ export const StyledBar = styled.div`
     width: calc(100% - 48px);
   }
 `;
-

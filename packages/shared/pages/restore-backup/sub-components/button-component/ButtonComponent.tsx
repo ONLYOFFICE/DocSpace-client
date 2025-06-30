@@ -27,15 +27,15 @@
 import React, { useState } from "react";
 // import config from "PACKAGE_FILE";
 
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
-import { Button } from "@docspace/shared/components/button";
-import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
-import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import SocketHelper, { SocketCommands } from "../../../../utils/socket";
+import { Button } from "../../../../components/button";
+import OperationsProgressButton from "../../../../components/operations-progress-button";
+import { OPERATIONS_NAME } from "../../../../constants";
 
-import { TenantStatus } from "@docspace/shared/enums";
-import { startRestore } from "@docspace/shared/api/portal";
-import { toastr } from "@docspace/shared/components/toast";
-import { isManagement } from "@docspace/shared/utils/common";
+import { TenantStatus } from "../../../../enums";
+import { startRestore } from "../../../../api/portal";
+import { toastr } from "../../../../components/toast";
+import { isManagement } from "../../../../utils/common";
 
 import type { ButtonContainerProps } from "./ButtonContainer.types";
 

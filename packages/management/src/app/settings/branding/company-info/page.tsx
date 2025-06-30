@@ -62,7 +62,7 @@ async function Page() {
       displayAbout={displayAbout}
       companyInfoSettingsData={companyInfo}
       standalone={standalone}
-      licenseAgreementsUrl={licenseAgreementsUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl!}
       buildInfo={buildInfo!}
       isEnterprise={enterprise}
       logoText={logoText}
@@ -71,4 +71,3 @@ async function Page() {
 }
 
 export default Page;
-

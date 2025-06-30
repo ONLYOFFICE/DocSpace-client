@@ -144,7 +144,7 @@ class GroupsStore {
       }
 
       if (contactsTab !== "groups") {
-        if (this.currentGroup.id !== group.id) return;
+        if (this.currentGroup?.id !== group.id) return;
 
         this.currentGroup = group;
         return;
@@ -161,7 +161,7 @@ class GroupsStore {
       const idx = this.groups.findIndex((x) => x.id === id);
 
       if (contactsTab !== "groups") {
-        if (this.currentGroup.id !== id) return;
+        if (this.currentGroup?.id !== id) return;
 
         window.DocSpace.navigate("/accounts/groups/filter");
         return;

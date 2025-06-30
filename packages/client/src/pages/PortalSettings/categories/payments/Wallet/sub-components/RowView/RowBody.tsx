@@ -66,7 +66,13 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
   const formattedDate = moment(transaction.date).format(dateFormat);
 
   const getServiceQuantity = (quantity: number, service?: string) => {
-    switch (service) {
+    let serviceName = service;
+
+    if (service != null && service.includes("disk-storage")) {
+      serviceName = "disk-storage";
+    }
+
+    switch (serviceName) {
       case "disk-storage":
         return `${quantity} ${t("Common:Gigabyte")}`;
       default:
@@ -96,6 +102,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         <Text fontWeight={600} fontSize="15px">
           {transaction.description}
         </Text>
+        <div />
 
         <Text fontWeight={600} fontSize="11px">
           {formattedDate}

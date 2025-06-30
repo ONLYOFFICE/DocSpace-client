@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useCallback, useRef, startTransition } from "react";
+import { useState, useCallback, useRef } from "react";
 
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { setRoomSecurity } from "@docspace/shared/api/rooms";
@@ -49,14 +49,14 @@ export const useStartFillingPanel = (
   const resolveRef = useRef<() => void>(undefined);
 
   const inviteUserToRoom = useCallback(
-    (roomId: string, invitations: Invitation[]) => {
+    (rId: string, invitations: Invitation[]) => {
       const data = {
         message: "Invitation message",
         notify: true,
         invitations,
       };
 
-      return setRoomSecurity(roomId, data);
+      return setRoomSecurity(rId, data);
     },
     [],
   );
@@ -69,7 +69,7 @@ export const useStartFillingPanel = (
           typeof window !== "undefined" &&
           window.DocEditor?.instances[EDITOR_ID];
 
-        await new Promise<void>((resolve, reject) => {
+        await new Promise<void>((resolve) => {
           resolveRef.current = resolve;
           docEditor?.startFilling(true);
         });
@@ -100,8 +100,8 @@ export const useStartFillingPanel = (
     resolveRef.current = undefined;
   }, []);
 
-  const onStartFillingVDRPanel = useCallback((roles: TFormRole[]) => {
-    setRoles(roles);
+  const onStartFillingVDRPanel = useCallback((r: TFormRole[]) => {
+    setRoles(r);
     setStartFillingPanelVisible(true);
   }, []);
 

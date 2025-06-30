@@ -64,7 +64,6 @@ const meta = {
     containerRef: { control: false, table: { disable: true } },
     setHideColumns: { control: false, table: { disable: true } },
     tagRef: { control: false, table: { disable: true } },
-    theme: { control: false, table: { disable: true } },
     sortBy: {
       control: "select",
       options: [

@@ -28,7 +28,7 @@
 
 "use client";
 
-import { Reducer, useReducer } from "react";
+import { useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -41,7 +41,7 @@ import { Text } from "../text";
 import { toastr } from "../toast";
 import { Button } from "../button";
 import { getOAuthToken } from "../../utils/common";
-import { ComboBox, ComboBoxSize, TComboboxProps } from "../combobox";
+import { ComboBox, ComboBoxSize } from "../combobox";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";
@@ -320,9 +320,7 @@ const DirectThirdPartyConnection = ({
           forceCloseClickOutside
           size={ComboBoxSize.content}
           className="thirdparty-combobox"
-          advancedOptions={
-            advancedOptions as unknown as TComboboxProps["advancedOptions"]
-          }
+          advancedOptions={advancedOptions}
           isDisabled={isLoading}
           selectedOption={{
             key: 0,

@@ -28,7 +28,7 @@ import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 
-import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/icons/16/close.circle.react.svg?url";
+import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/icons/remove.session.svg?url";
 
 import { Text } from "../../../text";
 import { IconButton } from "../../../icon-button";

@@ -81,6 +81,7 @@ const StyledUser = styled.div`
     text-overflow: ellipsis;
     ${(props) =>
       props.isExpect && `color: ${props.theme.infoPanel.members.isExpectName}`};
+    ${(props) => props.isSystem && `cursor: default`};
   }
 
   .me-label {

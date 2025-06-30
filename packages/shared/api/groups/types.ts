@@ -38,6 +38,7 @@ export type TGroup = {
   membersCount: number;
   shared?: boolean;
   isLDAP: boolean;
+  isSystem?: boolean;
 };
 
 export type TGroupMemberInvitedInRoom = {

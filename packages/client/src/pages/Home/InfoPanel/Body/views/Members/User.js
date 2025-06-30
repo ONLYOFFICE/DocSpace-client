@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
+import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
 import api from "@docspace/shared/api";
@@ -337,6 +338,7 @@ const User = ({
   const typeLabel = getUserTypeTranslation(type, t);
 
   const onOpenGroup = (group) => {
+    if (group.isSystem) return;
     setEditMembersGroup(group);
     setEditGroupMembersDialogVisible(true);
   };
@@ -357,6 +359,12 @@ const User = ({
       : t("Common:PortalAdmin", { productName: t("Common:ProductName") })
   }. ${t("Common:HasFullAccess")}`;
 
+  const itemAvatar = user.isSystem
+    ? EveryoneIconUrl
+    : isExpect
+      ? AtReactSvgUrl
+      : userAvatar || "";
+
   return user.isTitle ? (
     <StyledUserTypeHeader isExpect={isExpect}>
       <Text className="title">{user.displayName}</Text>
@@ -373,12 +381,12 @@ const User = ({
       ) : null}
     </StyledUserTypeHeader>
   ) : (
-    <StyledUser isExpect={isExpect} key={user.id}>
+    <StyledUser isExpect={isExpect} isSystem={user.isSystem} key={user.id}>
       <Avatar
         role={type}
         className="avatar"
         size="min"
-        source={isExpect ? AtReactSvgUrl : userAvatar || ""}
+        source={itemAvatar}
         userName={isExpect ? "" : user.displayName || user.name}
         withTooltip={withTooltip}
         tooltipContent={tooltipContent}
@@ -392,6 +400,7 @@ const User = ({
               className="name"
               type="action"
               onClick={() => onOpenGroup(user)}
+              noHover={user.isSystem}
               title={decode(user.name)}
             >
               {decode(user.name)}

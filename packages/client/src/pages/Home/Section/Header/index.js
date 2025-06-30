@@ -173,6 +173,7 @@ const SectionHeaderContent = (props) => {
     showTemplateBadge,
     aiChatIsVisible,
     setAiChatIsVisible,
+    allowInvitingMembers,
     withChat,
   } = props;
 

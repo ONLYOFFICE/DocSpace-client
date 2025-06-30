@@ -58,7 +58,7 @@ const TransactionBody = ({
   useViewEffect({
     view: viewAs!,
     setView: setViewAs!,
-    currentDeviceType,
+    currentDeviceType: currentDeviceType!,
   });
 
   const { t } = useTranslation(["Payments", "Settings"]);

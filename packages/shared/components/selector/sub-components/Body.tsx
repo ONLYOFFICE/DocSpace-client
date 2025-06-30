@@ -267,6 +267,8 @@ const Body = ({
     return HEADER_HEIGHT + CONTAINER_PADDING;
   };
 
+  const cloneProps = { ref: injectedElementRef };
+
   return (
     <div
       ref={bodyRef}

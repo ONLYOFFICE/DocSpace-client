@@ -85,7 +85,7 @@ const TopUpModal = (props: TopUpModalProps) => {
 
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const balanceValue = formatWalletCurrency();
+  const balanceValue = formatWalletCurrency!();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -113,7 +113,7 @@ const TopUpModal = (props: TopUpModalProps) => {
             <Amount
               formatWalletCurrency={formatWalletCurrency}
               walletCustomerEmail={walletCustomerEmail}
-              isDisabled={isLoading || walletCustomerStatusNotActive}
+              isDisabled={(isLoading || walletCustomerStatusNotActive) ?? false}
               walletCustomerStatusNotActive={walletCustomerStatusNotActive}
               reccomendedAmount={reccomendedAmount}
             />

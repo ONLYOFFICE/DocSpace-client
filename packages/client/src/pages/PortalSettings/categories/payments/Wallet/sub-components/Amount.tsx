@@ -62,7 +62,7 @@ const Amount = (props: AmountProps) => {
   const amountTabs = () => {
     const amounts = [10, 20, 30, 50, 100];
     return amounts.map((item) => ({
-      name: `+${formatWalletCurrency(item, 0)}`,
+      name: `+${formatWalletCurrency!(item, 0)}`,
       id: item.toString(),
       value: item,
       content: null,
@@ -133,7 +133,7 @@ const Amount = (props: AmountProps) => {
         {reccomendedAmount ? (
           <Text className={styles.reccomendedAmount}>
             {t("RecommendedTopUpAmount", {
-              amount: formatWalletCurrency(+reccomendedAmount, 0),
+              amount: formatWalletCurrency!(+reccomendedAmount, 0),
             })}
           </Text>
         ) : null}

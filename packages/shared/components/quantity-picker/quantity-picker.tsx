@@ -210,7 +210,9 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     });
   };
 
-  const onSelectTab = (data) => {
+  const onSelectTab = (data: TTabItem) => {
+    if (data.value === undefined) return;
+
     onChange(value + data.value);
     setError(false);
   };

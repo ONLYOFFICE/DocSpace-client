@@ -33,6 +33,11 @@ import { TTranslation } from "@docspace/shared/types";
 import { TFormRole } from "@/types";
 import { toastr } from "@docspace/shared/components/toast";
 
+export const convertDocumentUrl = async (fileId: number | string) => {
+  const convert = await convertFile(fileId, null, null, true);
+  return convert && convert[0]?.result;
+};
+
 export const showDocEditorMessage = async (
   url: string,
   id: string | number,

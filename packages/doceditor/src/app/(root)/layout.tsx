@@ -80,7 +80,8 @@ export default async function RootLayout({
     (typeof settings === "object" && settings.culture) ||
     "en";
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (settings === "access-restricted")
+    redirect(`${await getBaseUrl()}/${settings}`);
 
   return (
     <html lang="en" translate="no">

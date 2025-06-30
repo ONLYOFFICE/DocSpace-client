@@ -355,7 +355,7 @@ export async function getPortalCultures() {
 }
 
 export async function getConfig() {
-  const baseUrl = getBaseUrl();
+  const baseUrl = await getBaseUrl();
   logger.debug(`Start GET ${baseUrl}/static/scripts/config.json`);
 
   const config = IS_TEST

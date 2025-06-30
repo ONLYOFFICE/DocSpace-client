@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { BrowserRouter } from "react-router";
 import { DeviceType } from "../../enums";
 import Article from ".";
@@ -62,6 +62,11 @@ const defaultProps: ArticleProps = {
   isMobileArticle: false,
   zendeskKey: "your-zendesk-key",
   showProgress: false,
+  showBackButton: false,
+  downloaddesktopUrl: "",
+  officeforandroidUrl: "",
+  officeforiosUrl: "",
+  limitedAccessDevToolsForUsers: false,
   children: [
     <Article.Header key="header">
       <h2>Article Header</h2>
@@ -75,7 +80,7 @@ const defaultProps: ArticleProps = {
   ],
 };
 
-const Template: Story<ArticleProps> = (args) => (
+const Template: StoryFn<ArticleProps> = (args) => (
   <div style={{ height: "600px", position: "relative" }}>
     <Article {...args} />
   </div>

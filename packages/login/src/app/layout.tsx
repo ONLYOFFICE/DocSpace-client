@@ -41,7 +41,7 @@ import {
 } from "@/utils/actions";
 
 import "../styles/globals.scss";
-import "../../../shared/styles/theme.scss";
+import "@docspace/shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
 import { TConfirmLinkParams } from "@/types";
 
@@ -56,7 +56,7 @@ export default async function RootLayout({
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     console.log("is health check");
-    return <></>;
+    return null;
   }
 
   const queryParams = Object.fromEntries(

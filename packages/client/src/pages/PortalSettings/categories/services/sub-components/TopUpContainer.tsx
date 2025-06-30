@@ -24,42 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const path = require("path");
-const fs = require("fs");
+import { inject, observer } from "mobx-react";
 
-const publishPath = path.join(
-  process.cwd(),
-  "..",
-  "..",
-  "..",
-  "publish",
-  "web",
-  "editor",
-);
+import TopUpModal from "../../payments/Wallet/TopUpModal";
+import { useServicesActions } from "../hooks/useServicesActions";
 
-const nextBuild = path.join(process.cwd(), ".next");
-const configFolder = path.join(process.cwd(), "config");
-const loggerFile = path.join(process.cwd(), "logger.mjs");
-const serverFile = path.join(process.cwd(), "server.prod.js");
+type TopUpContainerTypes = {
+  isVisibleContainer: boolean;
+  onCloseTopUpModal: () => void;
+  reccomendedAmount?: number;
+};
 
-fs.cpSync(configFolder, path.join(publishPath, "config"), { recursive: true });
+const TopUpContainer = (props: TopUpContainerTypes) => {
+  const { isVisibleContainer, onCloseTopUpModal, reccomendedAmount } = props;
+  const { formatWalletCurrency } = useServicesActions();
 
-fs.cpSync(
-  path.join(nextBuild, "standalone", "packages", "doceditor", ".next"),
-  path.join(publishPath, ".next"),
-  { recursive: true },
-);
-fs.cpSync(
-  path.join(nextBuild, "static"),
-  path.join(publishPath, ".next", "static"),
-  { recursive: true },
-);
+  return isVisibleContainer ? (
+    <TopUpModal
+      visible={isVisibleContainer}
+      onClose={onCloseTopUpModal}
+      headerProps={{
+        isBackButton: true,
+        onBackClick: onCloseTopUpModal,
+        onCloseClick: onCloseTopUpModal,
+      }}
+      reccomendedAmount={formatWalletCurrency(reccomendedAmount, 0, 0)}
+    />
+  ) : null;
+};
 
-fs.cpSync(
-  path.join(nextBuild, "standalone", "node_modules"),
-  path.join(publishPath, "node_modules"),
-  { recursive: true },
-);
-
-fs.copyFileSync(serverFile, path.join(publishPath, "server.js"));
-fs.copyFileSync(loggerFile, path.join(publishPath, "logger.mjs"));
+export default inject(({ servicesStore, currentTariffStatusStore }: TStore) => {
+  const { reccomendedAmount } = servicesStore;
+  const { currentStoragePlanSize } = currentTariffStatusStore;
+  return {
+    currentStoragePlanSize,
+    reccomendedAmount,
+  };
+})(observer(TopUpContainer));

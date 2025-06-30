@@ -98,34 +98,38 @@ class BrandingStore {
 
   getIsDefaultLogos = async () => {
     const res = await getIsDefaultWhiteLabelLogos(isManagement());
-    const isDefaultWhiteLabel = res.map((item) => item.default).includes(false);
+    if (!res) return;
+    const isDefaultWhiteLabel = (res as { default: boolean }[])
+      .map((item) => item.default)
+      .includes(false);
     this.setIsDefaultLogos(isDefaultWhiteLabel);
   };
 
   applyNewLogos = (logos: ILogo[]) => {
     const theme = this.settingsStore.theme.isBase ? "light" : "dark";
 
-    const favicon = document.getElementById("favicon");
-    const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
-    const logoBurger = document.getElementsByClassName("burger-logo")?.[0];
+    const favicon = document.getElementById("favicon") as HTMLLinkElement;
+    const logo = document.getElementsByClassName(
+      "logo-icon_svg",
+    )?.[0] as HTMLImageElement;
+    const logoBurger = document.getElementsByClassName(
+      "burger-logo",
+    )?.[0] as HTMLImageElement;
 
     runInAction(() => {
-      // eslint-disable-next-line
-      favicon && (favicon.href = logos?.[2]?.path?.["light"]); // we have single favicon for both themes
-      // eslint-disable-next-line
+      favicon && (favicon.href = logos?.[2]?.path?.light); // we have single favicon for both themes
       logo && (logo.src = logos?.[0]?.path?.[theme]);
-      // eslint-disable-next-line
       logoBurger && (logoBurger.src = logos?.[5]?.path?.[theme]);
     });
   };
 
-  saveBrandName = async (data) => {
+  saveBrandName = async (data: string) => {
     await setBrandName(data, isManagement());
     this.settingsStore.getPortalSettings();
     this.getBrandName();
   };
 
-  saveWhiteLabelLogos = async (data) => {
+  saveWhiteLabelLogos = async (data: ILogo[]) => {
     await setWhiteLabelLogos(data, isManagement());
     this.settingsStore.getPortalSettings();
     const logos = await this.getLogoUrls();

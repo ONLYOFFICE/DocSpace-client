@@ -79,7 +79,6 @@ const SelectGroup = ({
           tag=""
           as="p"
           color=""
-          textAlign=""
         >
           {label}{" "}
           <span style={{ color: globalColors.lightErrorStatus }}> *</span>
@@ -101,7 +100,6 @@ const SelectGroup = ({
         tag=""
         as="p"
         color=""
-        textAlign=""
         className="description"
       >
         {description}

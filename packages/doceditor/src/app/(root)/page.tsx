@@ -54,7 +54,8 @@ const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
 };
 
 async function Page(props: RootPageProps) {
-  const searchParams = await props.searchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const {
     fileId,
     fileid,
@@ -176,13 +177,13 @@ async function Page(props: RootPageProps) {
 
   return (
     <>
-      {url && (
+      {url ? (
         <Script
           id="onlyoffice-api-script"
           strategy="beforeInteractive"
           src={docApiUrl}
         />
-      )}
+      ) : null}
       <Root
         {...data}
         shareKey={share}

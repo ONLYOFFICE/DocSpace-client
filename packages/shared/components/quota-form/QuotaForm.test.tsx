@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
@@ -53,8 +53,10 @@ describe("QuotaForm", () => {
   it("calls onSetQuotaBytesSize when text input changes", async () => {
     render(<QuotaForm {...defaultProps} />);
     const input = screen.getByTestId("quota-text-input");
-    await userEvent.clear(input);
-    await userEvent.type(input, "2");
+    await act(async () => {
+      await userEvent.clear(input);
+      await userEvent.type(input, "2");
+    });
     expect(defaultProps.onSetQuotaBytesSize).toHaveBeenCalled();
   });
 
@@ -68,14 +70,18 @@ describe("QuotaForm", () => {
       />,
     );
     const checkbox = screen.getByRole("checkbox");
-    await userEvent.click(checkbox);
+    await act(async () => {
+      await userEvent.click(checkbox);
+    });
     expect(onSetQuotaBytesSize).toHaveBeenCalledWith("-1");
   });
 
   it("disables input fields when unlimited checkbox is checked", async () => {
     render(<QuotaForm {...defaultProps} checkboxLabel="Unlimited storage" />);
     const checkbox = screen.getByRole("checkbox");
-    await userEvent.click(checkbox);
+    await act(async () => {
+      await userEvent.click(checkbox);
+    });
     expect(screen.getByTestId("quota-text-input")).toBeDisabled();
   });
 
@@ -83,8 +89,10 @@ describe("QuotaForm", () => {
     const onSave = jest.fn();
     render(<QuotaForm {...defaultProps} isButtonsEnable onSave={onSave} />);
     const input = screen.getByTestId("quota-text-input");
-    await userEvent.type(input, "2");
-    await userEvent.click(screen.getByText("Common:SaveButton"));
+    await act(async () => {
+      await userEvent.type(input, "2");
+      await userEvent.click(screen.getByText("Common:SaveButton"));
+    });
     expect(onSave).toHaveBeenCalled();
   });
 
@@ -92,8 +100,10 @@ describe("QuotaForm", () => {
     const onCancel = jest.fn();
     render(<QuotaForm {...defaultProps} isButtonsEnable onCancel={onCancel} />);
     const input = screen.getByTestId("quota-text-input");
-    await userEvent.type(input, "2");
-    await userEvent.click(screen.getByText("Common:CancelButton"));
+    await act(async () => {
+      await userEvent.type(input, "2");
+      await userEvent.click(screen.getByText("Common:CancelButton"));
+    });
     expect(onCancel).toHaveBeenCalled();
   });
 
@@ -107,23 +117,27 @@ describe("QuotaForm", () => {
       />,
     );
     const input = screen.getByTestId("quota-text-input");
-    await userEvent.clear(input);
-    await userEvent.type(input, "2");
-    await userEvent.click(screen.getByText("Common:CancelButton"));
-    expect(input).toHaveValue(1);
+    await act(async () => {
+      await userEvent.clear(input);
+      await userEvent.type(input, "2");
+      await userEvent.click(screen.getByText("Common:CancelButton"));
+    });
+    expect(input).toHaveValue("1");
   });
 
   it("submits form when Enter key is pressed in input field", async () => {
     const onSave = jest.fn();
     render(<QuotaForm {...defaultProps} isButtonsEnable onSave={onSave} />);
     const input = screen.getByTestId("quota-text-input");
-    await userEvent.clear(input);
-    await userEvent.type(input, "2");
-    fireEvent.keyDown(input, {
-      key: "Enter",
-      code: "Enter",
-      keyCode: 13,
-      which: 13,
+    await act(async () => {
+      await userEvent.clear(input);
+      await userEvent.type(input, "2");
+      fireEvent.keyDown(input, {
+        key: "Enter",
+        code: "Enter",
+        keyCode: 13,
+        which: 13,
+      });
     });
     expect(onSave).toHaveBeenCalled();
   });
@@ -146,8 +160,10 @@ describe("QuotaForm", () => {
     const saveButton = screen.getByTestId("save-button");
     expect(saveButton).toBeDisabled();
     const input = screen.getByTestId("quota-text-input");
-    await userEvent.clear(input);
-    await userEvent.type(input, "2");
+    await act(async () => {
+      await userEvent.clear(input);
+      await userEvent.type(input, "2");
+    });
     expect(saveButton).not.toBeDisabled();
   });
 

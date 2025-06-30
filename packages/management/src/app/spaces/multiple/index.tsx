@@ -52,4 +52,3 @@ export const MultipleSpaces = ({
     </StyledWrapper>
   );
 };
-

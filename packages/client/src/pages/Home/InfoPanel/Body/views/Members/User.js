@@ -65,6 +65,7 @@ const User = ({
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
   setRemoveUserConfirmation,
+  convertMembers,
 }) => {
   const theme = useTheme();
 
@@ -200,27 +201,126 @@ const User = ({
 
           setMembersFilter(newMembersFilter);
         } else {
-          setInfoPanelMembers({
+          let newUser = null;
+
+          const newValue = {
             roomId: infoPanelSelection.id,
-            users: infoPanelMembers.users?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m,
-            ),
-            administrators: infoPanelMembers.administrators?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m,
-            ),
-            expected: infoPanelMembers.expected?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m,
-            ),
-            groups: infoPanelMembers.groups?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m,
-            ),
-            guests: infoPanelMembers.guests?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m,
-            ),
-          });
+            users: infoPanelMembers.users?.filter((m) => {
+              if (m.id === user.id) {
+                newUser = { ...m, access: option.access };
+                return false;
+              }
+              return true;
+            }),
+            administrators: infoPanelMembers.administrators?.filter((m) => {
+              if (m.id === user.id) {
+                newUser = { ...m, access: option.access };
+                return false;
+              }
+              return true;
+            }),
+            expected: infoPanelMembers.expected?.filter((m) => {
+              if (m.id === user.id) {
+                newUser = { ...m, access: option.access };
+                return false;
+              }
+              return true;
+            }),
+            groups: infoPanelMembers.groups?.filter((m) => {
+              if (m.id === user.id) {
+                newUser = { ...m, access: option.access };
+                return false;
+              }
+              return true;
+            }),
+            guests: infoPanelMembers.guests?.filter((m) => {
+              if (m.id === user.id) {
+                newUser = { ...m, access: option.access };
+                return false;
+              }
+              return true;
+            }),
+          };
+
+          const { administrators, users, expected, groups, guests } =
+            convertMembers(t, [newUser], true, false);
+
+          console.log(
+            administrators?.length,
+            users?.length,
+            expected?.length,
+            groups?.length,
+            guests?.length,
+            users[1],
+          );
+
+          if (administrators?.length) {
+            if (newValue.administrators.length) {
+              newValue.administrators.splice(1, 0, newUser);
+            } else {
+              newValue.administrators = [administrators[0], newUser];
+            }
+          }
+
+          if (users?.length) {
+            if (newValue.users.length) {
+              newValue.users.splice(1, 0, newUser);
+            } else {
+              newValue.users = [users[0], newUser];
+            }
+          }
+
+          if (expected?.length) {
+            if (newValue.expected.length) {
+              newValue.expected.splice(1, 0, newUser);
+            } else {
+              newValue.expected = [expected[0], newUser];
+            }
+          }
+
+          if (groups?.length) {
+            if (newValue.groups.length) {
+              newValue.groups.splice(1, 0, newUser);
+            } else {
+              newValue.groups = [groups[0], newUser];
+            }
+          }
+
+          if (guests?.length) {
+            if (newValue.guests.length) {
+              newValue.guests.splice(1, 0, newUser);
+            } else {
+              newValue.guests = [guests[0], newUser];
+            }
+          }
+
+          const minItemsCount = withoutTitles ? 0 : 1;
+
+          if (newValue.administrators.length <= minItemsCount) {
+            newValue.administrators = [];
+          }
+
+          if (newValue.users.length <= minItemsCount) {
+            newValue.users = [];
+          }
+
+          if (newValue.expected.length <= minItemsCount) {
+            newValue.expected = [];
+          }
+
+          if (newValue.groups.length <= minItemsCount) {
+            newValue.groups = [];
+          }
+
+          if (newValue.guests.length <= minItemsCount) {
+            newValue.guests = [];
+          }
+
+          setInfoPanelMembers(newValue);
         }
       })
       .catch((err) => {
+        console.log(err);
         toastr.error(err);
         setIsLoading(false);
       });
@@ -369,6 +469,7 @@ export default inject(
       setInfoPanelMembers,
       fetchMembers,
       searchValue,
+      convertMembers,
     } = infoPanelStore;
 
     const { membersFilter, setMembersFilter } = filesStore;
@@ -394,6 +495,7 @@ export default inject(
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
       setRemoveUserConfirmation,
+      convertMembers,
     };
   },
 )(observer(User));

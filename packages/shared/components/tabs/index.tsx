@@ -47,6 +47,7 @@ const Tabs = (props: TabsProps) => {
     multiple = false,
     allowNoSelection = false,
     withoutStickyIntend = false,
+    isCentered = false,
     ...rest
   } = props;
 
@@ -157,6 +158,7 @@ const Tabs = (props: TabsProps) => {
     [styles.multiple]: multiple,
     [styles.primary]: type === TabsTypes.Primary,
     [styles.secondary]: type === TabsTypes.Secondary,
+    [styles.centering]: isCentered,
   });
 
   const renderContent = (

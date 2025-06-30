@@ -62,6 +62,7 @@ export type TBasePaymentFeature = {
 
 export type TStringPaymentFeature = TBasePaymentFeature & {
   title: string;
+  value?: number;
 };
 
 export type TNumericPaymentFeature = TBasePaymentFeature & {
@@ -202,6 +203,7 @@ export type TTransactionCollection = {
   credit: number;
   withdrawal: number;
   currency: string;
+  description: string;
 };
 
 export type TTransactionHistory = {

@@ -42,6 +42,8 @@ import Badges from "@docspace/shared/components/badges";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
+import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { generateFilesItemValue } from "../../../_utils";
 
@@ -49,8 +51,6 @@ import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
 
 import styles from "../RowView.module.scss";
-import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
-import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const Row = observer(
   ({

@@ -5,11 +5,11 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
-import { useFilesSettingsStore } from "../_store/FilesSettingsStore";
-import { useSettingsStore } from "../_store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
 import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
 import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
+import { useSettingsStore } from "../_store/SettingsStore";
+import { useFilesSettingsStore } from "../_store/FilesSettingsStore";
 
 type UseFilesActionsProps = { t: TTranslation };
 

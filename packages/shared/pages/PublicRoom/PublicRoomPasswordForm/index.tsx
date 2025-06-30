@@ -37,7 +37,6 @@ import { Text } from "../../../components/text";
 import { PasswordInput } from "../../../components/password-input";
 import { Button, ButtonSize } from "../../../components/button";
 import { FieldContainer } from "../../../components/field-container";
-// import { createPasswordHash } from "@docspace/shared/utils/common";
 import { frameCallCommand } from "../../../utils/common";
 import { toastr } from "../../../components/toast";
 import { FormWrapper } from "../../../components/form-wrapper";

@@ -54,6 +54,11 @@ interface UserData {
   title?: string;
   oldIndex?: number;
   newIndex?: number;
+  version?: number;
+  oldTitle?: string;
+  newTitle?: string;
+  sharedTo?: { title: string };
+  lifeTime?: { period: number; value: number };
 }
 
 interface RelatedAction {

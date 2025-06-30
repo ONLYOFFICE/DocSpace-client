@@ -53,12 +53,13 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
 
         try {
           switch (methodName) {
-            case "setConfig":
+            case "setConfig": {
               const newConfig = merge(baseSdkConfig, data);
               setSdkConfig(newConfig);
               res = newConfig;
               break;
-            case "executeInEditor":
+            }
+            case "executeInEditor": {
               const instance = window.DocEditor?.instances[EDITOR_ID];
               const asc = window.Asc;
 
@@ -71,16 +72,17 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
                 );
 
                 cFn(instance, asc, data.data);
-              } catch (e) {
-                console.error("Error executing editor callback:", e);
+              } catch (err) {
+                console.error("Error executing editor callback:", err);
               }
 
               break;
+            }
             default:
               res = "Wrong method for this mode";
           }
-        } catch (e) {
-          res = e;
+        } catch (err) {
+          res = err as Error;
         }
 
         frameCallbackData(res);

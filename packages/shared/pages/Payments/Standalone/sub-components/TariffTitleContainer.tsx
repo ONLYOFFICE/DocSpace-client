@@ -28,7 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "../../../../components/text";
 
 import { getTwoDotsReplacing } from "../Standalone.helpers";
 import { IPaymentsProps } from "../Standalone.types";

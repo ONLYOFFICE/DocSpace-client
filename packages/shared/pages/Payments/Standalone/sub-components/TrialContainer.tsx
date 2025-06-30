@@ -27,7 +27,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
+import { Text } from "../../../../components/text";
 
 import { ButtonContainer } from "./ButtonContainer";
 import { TariffTitleContainer } from "./TariffTitleContainer";

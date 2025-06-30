@@ -27,8 +27,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Text } from "../../../../components/text";
+import { Link } from "../../../../components/link";
 
 import styles from "../Standalone.module.scss";
 

@@ -29,6 +29,8 @@
   flex-direction: column;
   gap: 8px;
   margin-top: 20px;
+  border-top: 1px solid var(--aside-header-border-color);
+  padding-top: 20px;
 
   &.noMargin {
     margin-top: 0;

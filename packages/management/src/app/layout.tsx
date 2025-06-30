@@ -64,14 +64,16 @@ export default async function RootLayout({
     ],
   );
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  const baseUrl = await getBaseUrl();
+
+  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
 
   if (
     (user && !user.isAdmin) ||
     (settings && settings.limitedAccessSpace) ||
     !portalTariff
   )
-    redirect(`${getBaseUrl()}/error/403`);
+    redirect(`${baseUrl}/error/403`);
 
   const cookieStore = await cookies();
 

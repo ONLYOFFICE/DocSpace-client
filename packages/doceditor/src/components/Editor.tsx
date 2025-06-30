@@ -38,7 +38,6 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
-import { getBackUrl } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -194,7 +193,7 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
+        goBack.url = newConfig.editorConfig?.customization?.goback?.url;
       }
     }
   }
@@ -223,18 +222,18 @@ const Editor = ({
 
   // if (newConfig.document && newConfig.document.info)
   //  newConfig.document.info.favorite = false;
+  const url = typeof window !== "undefined" ? window.location.href : "";
 
-  // const url = window.location.href;
+  if (url.indexOf("anchor") !== -1) {
+    const splitUrl = url.split("anchor=");
+    const decodeURI = decodeURIComponent(splitUrl[1]);
+    const obj = JSON.parse(decodeURI);
 
-  // if (url.indexOf("anchor") !== -1) {
-  //   const splitUrl = url.split("anchor=");
-  //   const decodeURI = decodeURIComponent(splitUrl[1]);
-  //   const obj = JSON.parse(decodeURI);
-
-  //   config.editorConfig.actionLink = {
-  //     action: obj.action,
-  //   };
-  // }
+    if (newConfig.editorConfig)
+      newConfig.editorConfig.actionLink = {
+        action: obj.action,
+      };
+  }
 
   newConfig.events = {
     onDocumentReady,

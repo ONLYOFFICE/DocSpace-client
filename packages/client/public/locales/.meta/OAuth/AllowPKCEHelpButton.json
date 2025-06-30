@@ -3,7 +3,7 @@
   "content": "PKCE is not a form of client authentication, and PKCE is not a replacement for a client secret or another client authentication type. PKCE is recommended even if a client is using a client secret or another form of client authentication like private_key_jwt.<br/> <strong>Note</strong>: Since PKCE is not a replacement for client authentication, it does not allow treating a public client as confidential one.",
   "content_en_sha1_hash": "496655408d794ecbf08fdb73df854af8a077605c",
   "created_at": "2025-05-19T21:30:53.790Z",
-  "updated_at": "2025-05-24T07:44:25.069Z",
+  "updated_at": "2025-06-30T12:20:31.463Z",
   "comment": {
     "text": "The translation key \"AllowPKCEHelpButton\" is used to display a help message that explains the purpose of Public Key Credentials (PKCE) in OAuth client authentication. The text appears as a button label or help tooltip in UI components related to OAuth settings and client configuration, aiming to clarify PKCE's role and limitations.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 125,
-      "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
+      "line_number": 126,
+      "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t as TFunction} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
       "module": "/packages/client"
     }
   ],

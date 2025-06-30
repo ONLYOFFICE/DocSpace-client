@@ -10,6 +10,20 @@ RUN apt-get -y update && \
 # Install PNPM
 RUN npm install -g pnpm@10.3.0
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fonts-noto-cjk \
+    fonts-noto-core \
+    fonts-noto-ui-core \
+    fonts-noto-color-emoji \
+    fonts-noto-mono \
+    fonts-noto-extra \
+    fonts-roboto \
+    fonts-open-sans \
+    fonts-liberation \
+    fontconfig \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Set PNPM store directory

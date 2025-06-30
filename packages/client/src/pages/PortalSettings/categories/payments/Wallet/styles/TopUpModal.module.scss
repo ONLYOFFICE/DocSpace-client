@@ -25,11 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 .modalBody {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 480px;
   margin: 20px auto 0 auto;
   padding: 0 0 24px;
   user-select: none;
+}
+
+.buttonContainerWrapper {
+  display: flex;
+  gap: inherit;
+  flex-direction: column;
+  width: 100%;
+}
+
+.buttonContainer {
+  gap: inherit;
+  display: flex;
+  width: 100%;
 }

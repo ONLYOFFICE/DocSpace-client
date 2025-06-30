@@ -28,17 +28,17 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { DeviceType, FolderType } from "@docspace/shared/enums";
-import FilesSelector from "@docspace/shared/selectors/Files";
-import { InputSize } from "@docspace/shared/components/text-input";
-import { FileInput } from "@docspace/shared/components/file-input";
-import { Portal } from "@docspace/shared/components/portal";
-import { Aside } from "@docspace/shared/components/aside";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { DeviceType, FolderType } from "../../enums";
+import FilesSelector from "../../selectors/Files";
+import { InputSize } from "../text-input";
+import { FileInput } from "../file-input";
+import { Portal } from "../portal";
+import { Aside } from "../aside";
+import { Backdrop } from "../backdrop";
+import { useUnmount } from "../../hooks/useUnmount";
 
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { FilesSelectorProps } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type { TBreadCrumb } from "../selector/Selector.types";
+import type { FilesSelectorProps } from "../../selectors/Files/FilesSelector.types";
 
 import {
   getAcceptButtonLabel,

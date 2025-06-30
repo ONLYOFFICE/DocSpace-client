@@ -61,8 +61,9 @@ export const DialogsStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const store = React.useMemo(() => new DialogsStore(), []);
   return (
-    <DialogsStoreContext.Provider value={new DialogsStore()}>
+    <DialogsStoreContext.Provider value={store}>
       {children}
     </DialogsStoreContext.Provider>
   );

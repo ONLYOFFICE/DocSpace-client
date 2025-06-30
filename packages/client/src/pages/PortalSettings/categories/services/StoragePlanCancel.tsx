@@ -86,7 +86,7 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
         return;
       }
 
-      await Promise.all([fetchPortalTariff!(), handleServicesQuotas()!]);
+      await Promise.all([fetchPortalTariff!(), handleServicesQuotas!()]);
 
       onClose();
       fetchBalance!();
@@ -134,7 +134,7 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
                 ns="Payments"
                 i18nKey="StorageUsed"
                 values={{
-                  amount: getConvertedSize(t, usedTotalStorageSizeCount),
+                  amount: getConvertedSize(t, usedTotalStorageSizeCount!),
                 }}
                 components={{
                   1: <Text fontWeight={600} as="span" />,

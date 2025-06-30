@@ -52,7 +52,7 @@ export default async function RootLayout({
   const hdrs = await headers();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    return <></>;
+    return null;
   }
 
   const cookieStore = await cookies();
@@ -79,7 +79,7 @@ export default async function RootLayout({
     | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
-    (theme) => theme.id === colorTheme.selected,
+    (t) => t.id === colorTheme.selected,
   );
 
   const dirClass = getDirectionByLanguage(locale || "en");

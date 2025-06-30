@@ -38,12 +38,12 @@ import {
   getPortalCultures,
 } from "@/utils/actions";
 
-import WizardForm from "./page.client";
 import WizardGreeting from "@/components/WizardGreeting/index.client";
 import { LoginContainer } from "@/components/LoginContainer";
 
 import { getUserTimezone } from "@docspace/shared/utils/common";
 import { LANGUAGE, TIMEZONE } from "@docspace/shared/constants";
+import WizardForm from "./page.client";
 
 async function Page() {
   const settings = await getSettings();

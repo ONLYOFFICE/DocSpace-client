@@ -276,6 +276,7 @@ const Article = ({
             <BackButton
               showText={showText}
               currentDeviceType={currentDeviceType}
+              onLogoClickAction={onLogoClickAction}
             />
           ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}

@@ -43,7 +43,7 @@ export default async function PublicRoomPasswordPage() {
         <PortalLogo isResizable />
       </div>
       <div className={styles.content}>
-        {<PublicRoomPasswordPageClient roomTitle={roomTitle || ""} />}
+        <PublicRoomPasswordPageClient roomTitle={roomTitle || ""} />
       </div>
     </div>
   );

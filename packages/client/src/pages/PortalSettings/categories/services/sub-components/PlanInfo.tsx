@@ -147,7 +147,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
           >
             {t("PriceForEach", {
               currency: formatWalletCurrency(storagePriceIncrement),
-              amount: getConvertedSize(t, storageSizeIncrement),
+              amount: getConvertedSize(t, storageSizeIncrement!),
             })}
           </Text>
         </div>

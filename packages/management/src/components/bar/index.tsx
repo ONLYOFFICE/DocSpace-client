@@ -39,4 +39,3 @@ export const Bar = ({ title }: { title: string }) => {
     </StyledBar>
   );
 };
-

@@ -42,7 +42,7 @@ const StyledThumbnail = styled.div.attrs(injectDefaultTheme)`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: ${(props) => (props.isImageOrMedia ? "center" : "top")};
+    object-position: top;
   }
 `;
 

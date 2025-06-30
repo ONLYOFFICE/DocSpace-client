@@ -65,7 +65,7 @@ const ArticleHeader = ({
   if (currentDeviceType === DeviceType.mobile)
     return (
       <AsideHeader
-        headerHeight="49px"
+        headerHeight={showBackButton ? "76px" : "49px"}
         isCloseable
         withoutBorder
         onCloseClick={onIconClick}

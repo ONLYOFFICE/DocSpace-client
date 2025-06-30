@@ -141,4 +141,3 @@ const EncryptDataPage = ({
 };
 
 export default EncryptDataPage;
-

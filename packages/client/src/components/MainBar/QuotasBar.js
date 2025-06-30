@@ -80,9 +80,6 @@ const QuotasBar = ({
       <Trans
         t={t}
         i18nKey="UserTariffAlmostReachedForAdmins"
-        values={{
-          productName: t("Common:ProductName"),
-        }}
         components={{
           1: (
             <Link

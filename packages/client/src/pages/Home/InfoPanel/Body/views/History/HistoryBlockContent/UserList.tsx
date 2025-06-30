@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
+import { TFunction } from "i18next";
+
 import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, NavigateFunction } from "react-router";
@@ -84,9 +86,7 @@ const HistoryUserList = ({
             key={user.id}
             className="StyledHistoryLink"
             style={
-              withWrapping
-                ? { display: "inline", wordBreak: "break-all" }
-                : null
+              withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
             }
           >
             {isVisitor || isCollaborator ? (
@@ -98,7 +98,7 @@ const HistoryUserList = ({
                 className="text link"
                 onClick={() => openUser!(user, navigate)}
                 style={
-                  withWrapping ? { display: "inline", textWrap: "wrap" } : null
+                  withWrapping ? { display: "inline", textWrap: "wrap" } : {}
                 }
                 title={userName}
               >
@@ -118,7 +118,7 @@ const HistoryUserList = ({
           onClick={onExpand}
         >
           <Trans
-            t={t}
+            t={t as TFunction}
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: usersData.length - EXPANSION_THRESHOLD }}

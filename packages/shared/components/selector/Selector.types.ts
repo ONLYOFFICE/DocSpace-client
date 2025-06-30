@@ -31,6 +31,7 @@ import {
   RoomsType,
   ShareAccessRights,
   FileType,
+  FolderType,
 } from "../../enums";
 import { MergeTypes, Nullable, WithFlag } from "../../types";
 
@@ -111,6 +112,7 @@ export type TBreadCrumb = {
   roomType?: RoomsType;
   shared?: boolean;
   onClick?: TOnBreadCrumbClick;
+  rootFolderType?: FolderType;
 };
 
 export type TDisplayedItem = {
@@ -130,6 +132,7 @@ export type TSelectorBreadCrumbs = WithFlag<
     breadCrumbs: TBreadCrumb[];
     breadCrumbsLoader: React.ReactNode;
     onSelectBreadCrumb: (item: TBreadCrumb) => void;
+    bodyIsLoading: boolean;
   }
 >;
 
@@ -502,6 +505,8 @@ export type TSelectorItemUser = MergeTypes<
     isCollaborator: boolean;
     isRoomAdmin: boolean;
     avatar: string;
+    avatarSmall?: string;
+    userName?: string;
     hasAvatar: boolean;
     role: AvatarRole;
     userType: EmployeeType;
@@ -552,6 +557,8 @@ export type TSelectorItemRoom = MergeTypes<
     color?: string;
     iconOriginal?: string;
     cover?: ICover;
+    tags?: string[];
+    title?: string;
   }
 >;
 
@@ -614,6 +621,8 @@ export type TSelectorItem = TSelectorItemType & {
   lifetimeTooltip?: string | null;
   viewUrl?: string;
   isTemplate?: boolean;
+  templateAccess?: ShareAccessRights;
+  templateIsOwner?: boolean;
 };
 
 export type Data = {

@@ -24,22 +24,22 @@
 # content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 # International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-FROM node:20-alpine
+FROM node:22-bookworm-slim
 
 # Install required dependencies
-RUN apk add --no-cache python3 make g++
-
-# Enable Corepack for Yarn 4 support
-RUN corepack enable
-
-# Set Yarn version to 4.3.0
-RUN corepack prepare yarn@4.3.0 --activate
+RUN apt-get -y update && \
+    apt-get install -yq
+    
+# Install PNPM
+RUN npm install -g pnpm@10.3.0
 
 WORKDIR /app
 
-# Copy yarn-related files
-COPY ../.yarn/ ./.yarn/
-COPY ../package.json ../yarn.lock ../.yarnrc.yml ./
+# Set PNPM store directory
+RUN pnpm config set store-dir /root/.local/share/pnpm/store
+
+# Copy package files first for better layer caching
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Copy the source code with correct directory structure
 COPY ../common/ ./common/
@@ -48,21 +48,12 @@ COPY ../public/ ./public/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 
-# Install dependencies
-RUN yarn install
+# Install dependencies with recursive installation and ignore scripts (prevents running scripts that may not be needed in production)
+RUN pnpm install --frozen-lockfile
 
-# Run before-build script (packages/runtime.json)
-RUN yarn ./common/scripts/before-build.js
-
-# Run build webpack apps
-RUN yarn workspace @docspace/client build --env lint=false 
-RUN yarn workspace @docspace/management build --env lint=false
-
-# Run build next apps
-RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/login build 
-RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/doceditor build
-RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/sdk build
+# Run build apps
+RUN pnpm run build
 
 EXPOSE 5001 5011 5013 5015 5099
 
-CMD [ "yarn", "start-prod" ]
+CMD ["pnpm", "start-prod"]

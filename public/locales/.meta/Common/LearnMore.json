@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2025-06-08T12:02:32.624Z",
+  "updated_at": "2025-06-30T12:20:31.203Z",
   "comment": {
     "text": "The translation key \"LearnMore\" is used to display a link or button that encourages users to access more information about a particular topic, in this case, privacy limitations warnings, DNS settings, or language and time zone settings. This text appears as a clickable link or button, prompting users to learn additional details.",
     "is_auto": true,
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 117,
+      "line_number": 121,
       "context": "color={currentColorScheme.main.accent}\n isHovered\n target=\"_blank\"\n href={ldapSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n {isMobileView ? (",
       "module": "/packages/client"
     },
@@ -86,6 +86,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
       "line_number": 217,
       "context": "color={currentColorScheme.main?.accent}\n isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n <div className=\"consumer-item-wrapper request-block\">\n <img",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
+      "line_number": 206,
+      "context": "textDecoration=\"underline\"\n fontWeight={600}\n href={walletHelpUrl}\n color={currentColorScheme?.main?.accent}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n {isCardLinkedToPortal ? (\n <PayerInformation",
       "module": "/packages/client"
     },
     {
@@ -108,44 +114,44 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 101,
-      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection />",
+      "line_number": 159,
+      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 101,
-      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection />",
+      "line_number": 159,
+      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 101,
-      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection />",
+      "line_number": 159,
+      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 101,
-      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection />",
+      "line_number": 159,
+      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 101,
-      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection />",
+      "line_number": 159,
+      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 101,
-      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection />",
+      "line_number": 159,
+      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 101,
-      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection />",
+      "line_number": 159,
+      "context": "target=\"_blank\"\n isHovered\n color={currentColorScheme.main?.accent}\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <PasswordStrengthSection {...settingsBeforeInvitationSettingsProps} />",
       "module": "/packages/client"
     },
     {
@@ -156,7 +162,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 263,
+      "line_number": 270,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={passwordStrengthSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n <Text fontSize=\"14px\" fontWeight=\"600\" className=\"length-subtitle\">\n {t(\"PasswordMinLenght\")}",
       "module": "/packages/client"
     },
@@ -168,13 +174,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 190,
+      "line_number": 197,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={tfaSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 235,
+      "line_number": 242,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={trustedMailDomainSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
@@ -186,13 +192,13 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 250,
+      "line_number": 253,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n href={customFilterExternalLink}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 419,
+      "line_number": 415,
       "context": "target={LinkTarget.blank}\n fontSize=\"13px\"\n color={currentColorScheme?.main?.accent}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div className=\"backup_toggle-wrapper\">",
       "module": "/packages/shared"
     },
@@ -318,7 +324,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Saiba ma\" is incomplete and doesn't accurately convey the meaning of \"Learn more\". It seems to be missing the rest of the phrase.",
+          "description": "The translation 'Saiba ma' is incomplete and does not accurately convey the meaning of 'Learn more'. 'Saiba' means 'know', but the phrase is cut off. A full and accurate translation would be 'Saiba mais'.",
           "suggestion": "Saiba mais"
         }
       ],

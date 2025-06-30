@@ -53,7 +53,8 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {
 
   const getProgress = useCallback(async () => {
     const setMessage = (error?: unknown) => {
-      const errorText = error ?? errorInternalServer;
+      const errorText = (error as string) ?? errorInternalServer;
+
       setErrorMessage(errorText);
     };
 

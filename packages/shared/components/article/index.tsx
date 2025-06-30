@@ -276,6 +276,8 @@ const Article = ({
             <BackButton
               showText={showText}
               currentDeviceType={currentDeviceType}
+              onLogoClickAction={onLogoClickAction}
+              isLoading={isBurgerLoading}
             />
           ) : null}
           {articleBodyContent ? articleBodyContent.props.children : null}

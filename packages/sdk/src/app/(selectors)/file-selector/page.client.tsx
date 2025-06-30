@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import FilesSelector from "@docspace/shared/selectors/Files";
@@ -41,6 +41,7 @@ import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { Nullable } from "@docspace/shared/types";
+import SocketHelper from "@docspace/shared/utils/socket";
 import type {
   TFile,
   TFilesSettings,
@@ -86,6 +87,7 @@ type FilesSelectorClientProps = {
   selectedItemType: "rooms" | "files";
   total: number;
   logoText: string;
+  socketUrl: string;
 };
 
 export default function FilesSelectorClient({
@@ -103,10 +105,13 @@ export default function FilesSelectorClient({
   selectedItemType,
   total,
   logoText,
+  socketUrl,
 }: FilesSelectorClientProps) {
-  const { sdkConfig } = useSDKConfig();
+  useSDKConfig();
 
   const { t } = useTranslation(["Common"]);
+
+  const isInit = useRef(false);
 
   useDocumentTitle("FileSelector");
 
@@ -127,10 +132,10 @@ export default function FilesSelectorClient({
 
   const onSubmit = useCallback(
     async (
-      selectedItemId: string | number | undefined,
+      selectedIId: string | number | undefined,
       folderTitle: string,
       isPublic: boolean,
-      breadCrumbs: TBreadCrumb[],
+      breadC: TBreadCrumb[],
       fileName: string,
       isChecked: boolean,
       selectedTreeNode: TFolder,
@@ -138,7 +143,7 @@ export default function FilesSelectorClient({
     ) => {
       const enrichedData = {
         ...selectedFileInfo,
-        //icon: getIcon(64, selectedFileInfo.fileExst),
+        // icon: getIcon(64, selectedFileInfo.fileExst),
       } as TSelectedFileInfo & {
         documentType: FileType | string | null;
         requestTokens?: {
@@ -190,8 +195,8 @@ export default function FilesSelectorClient({
     (
       isFirstLoad: boolean,
       isSelectedParentFolder: boolean,
-      selectedItemId: string | number | undefined,
-      selectedItemType: "rooms" | "files" | undefined,
+      selectedItemIdParam: string | number | undefined,
+      selectedItemT: "rooms" | "files" | undefined,
       isRoot: boolean,
       selectedItemSecurity:
         | TFileSecurity
@@ -203,12 +208,19 @@ export default function FilesSelectorClient({
     ) =>
       isFirstLoad ||
       !!isDisabledFolder ||
-      !!!selectedFileInfo ||
-      selectedItemType === "rooms" ||
+      !selectedFileInfo ||
+      selectedItemT === "rooms" ||
       isRoot ||
       isSelectedParentFolder,
     [],
   );
+
+  useEffect(() => {
+    if (isInit.current) return;
+
+    isInit.current = true;
+    SocketHelper.connect(socketUrl, "");
+  }, [socketUrl]);
 
   const getFilesArchiveError = useCallback(() => "", []);
 
@@ -229,7 +241,7 @@ export default function FilesSelectorClient({
 
   const headerProps = baseConfig?.header
     ? {
-        withHeader: true as true,
+        withHeader: true as const,
         headerProps: {
           headerLabel: t("SelectAction"),
           isCloseable: false,

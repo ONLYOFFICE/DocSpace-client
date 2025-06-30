@@ -43,7 +43,8 @@ async function Page() {
     getEncryptionSettings(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (settings === "access-restricted")
+    redirect(`${await getBaseUrl()}/${settings}`);
 
   const domain = settings?.externalResources?.helpcenter?.domain;
   const path = settings?.externalResources?.helpcenter?.entries?.encryption;

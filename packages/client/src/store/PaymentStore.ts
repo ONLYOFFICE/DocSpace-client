@@ -119,13 +119,6 @@ class PaymentStore {
 
   isInitWalletPage = false;
 
-  walletPayer: TCustomerInfo = {
-    portalId: null,
-    paymentMethodStatus: 0,
-    email: null,
-    payer: null,
-  };
-
   balance: TBalance = 0;
 
   previousBalance: TBalance = 0;
@@ -173,7 +166,7 @@ class PaymentStore {
   get isAlreadyPaid() {
     const isFreeTariff = this.currentQuotaStore?.isFreeTariff;
 
-    return this.walletCustomerEmail || !isFreeTariff;
+    return this.currentTariffStatusStore?.walletCustomerEmail || !isFreeTariff;
   }
 
   get isNeedRequest() {
@@ -185,13 +178,14 @@ class PaymentStore {
   }
 
   get isPayer() {
-    if (!this.userStore) return;
+    if (!this.userStore || !this.currentTariffStatusStore) return;
 
     const { user } = this.userStore;
+    const { walletCustomerEmail } = this.currentTariffStatusStore;
 
-    if (!user || !this.walletCustomerEmail) return false;
+    if (!user || !walletCustomerEmail) return false;
 
-    return user.email === this.walletCustomerEmail;
+    return user.email === walletCustomerEmail;
   }
 
   get isStripePortalAvailable() {
@@ -208,11 +202,12 @@ class PaymentStore {
     if (!this.userStore || !this.currentQuotaStore) return;
 
     const { user } = this.userStore;
+    const { walletCustomerEmail } = this.currentTariffStatusStore;
 
     if (!user) return false;
 
     if (this.currentQuotaStore.isNonProfit) {
-      if (!this.walletCustomerEmail) return true;
+      if (!walletCustomerEmail) return true;
       return this.isPayer;
     }
 
@@ -285,12 +280,12 @@ class PaymentStore {
   basicSettings = async () => {
     if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
 
-    const { fetchPortalTariff } = this.currentTariffStatusStore;
+    const { fetchPortalTariff, fetchPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
     this.setIsUpdatingBasicSettings(true);
 
-    await this.fetchWalletPayer();
+    await fetchPayerInfo();
 
     const requests = [];
 
@@ -325,30 +320,6 @@ class PaymentStore {
     this.isInitWalletPage = value;
   };
 
-  get walletCustomerEmail() {
-    return this.walletPayer.email;
-  }
-
-  get walletCustomerUnlinkedStatus() {
-    return this.walletPayer.paymentMethodStatus === PaymentMethodStatus.None;
-  }
-
-  get walletCustomerExpiredStatus() {
-    return this.walletPayer.paymentMethodStatus === PaymentMethodStatus.Expired;
-  }
-
-  get walletCustomerStatusNotActive() {
-    if (!this.walletCustomerEmail) return false;
-
-    return (
-      this.walletCustomerUnlinkedStatus || this.walletCustomerExpiredStatus
-    );
-  }
-
-  get walletCustomerInfo() {
-    return this.walletPayer.payer;
-  }
-
   get isAutoPaymentExist() {
     return this.autoPayments?.enabled;
   }
@@ -378,17 +349,23 @@ class PaymentStore {
   }
 
   get cardLinkedOnFreeTariff() {
-    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return;
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
     const { isFreeTariff } = this.currentQuotaStore;
+    const { walletCustomerEmail } = this.currentTariffStatusStore;
 
-    return isFreeTariff && !!this.walletCustomerEmail;
+    return isFreeTariff && !!walletCustomerEmail;
   }
 
   get cardLinkedOnNonProfit() {
-    if (!this.currentQuotaStore.isNonProfit) return false;
+    if (!this.currentQuotaStore || !this.currentTariffStatusStore) return false;
 
-    if (!this.walletCustomerEmail) return false;
+    const { walletCustomerEmail } = this.currentTariffStatusStore;
+    const { isNonProfit } = this.currentQuotaStore;
+
+    if (!isNonProfit) return false;
+
+    if (!walletCustomerEmail) return false;
 
     return true;
   }
@@ -491,14 +468,6 @@ class PaymentStore {
     }
   };
 
-  fetchWalletPayer = async (isRefresh?: boolean) => {
-    const res = await getWalletPayer(isRefresh);
-
-    if (!res) return;
-
-    this.walletPayer = res;
-  };
-
   fetchCardLinked = async (url?: string) => {
     const backUrl = url || `${window.location.href}?complete=true`;
 
@@ -570,12 +539,14 @@ class PaymentStore {
         toastr.error(res);
       }
     }
-
   };
 
-  initWalletPayerAndBalance = async (isRefresh) => {
+  initWalletPayerAndBalance = async (isRefresh: boolean) => {
+    if (!this.currentTariffStatusStore) return;
+    const { fetchPayerInfo } = this.currentTariffStatusStore;
+
     await Promise.all([
-      this.fetchWalletPayer(isRefresh),
+      fetchPayerInfo(isRefresh),
       this.fetchBalance(isRefresh),
     ]);
   };
@@ -586,7 +557,8 @@ class PaymentStore {
 
     this.setVisibleWalletSetting(false);
 
-    const { fetchPortalTariff } = this.currentTariffStatusStore;
+    const { fetchPortalTariff, walletCustomerStatusNotActive } =
+      this.currentTariffStatusStore;
 
     const requests = [];
 
@@ -600,7 +572,7 @@ class PaymentStore {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
 
-          if (this.walletCustomerStatusNotActive) {
+          if (walletCustomerStatusNotActive) {
             requests.push(this.fetchCardLinked());
           }
         }
@@ -649,7 +621,8 @@ class PaymentStore {
 
     const { addedManagersCount } = this.currentQuotaStore;
     const { setPortalPaymentQuotas } = this.paymentQuotasStore;
-    const { fetchPortalTariff } = this.currentTariffStatusStore;
+    const { fetchPortalTariff, fetchPayerInfo, walletCustomerStatusNotActive } =
+      this.currentTariffStatusStore;
 
     const requests = [];
 
@@ -657,12 +630,12 @@ class PaymentStore {
     requests.push(setPortalPaymentQuotas());
     requests.push(fetchPortalTariff());
 
-    await this.fetchWalletPayer();
+    await fetchPayerInfo();
 
     if (this.isAlreadyPaid) {
       if (this.isStripePortalAvailable) {
         requests.push(this.setPaymentAccount());
-        if (this.walletCustomerStatusNotActive) {
+        if (walletCustomerStatusNotActive) {
           requests.push(this.fetchCardLinked());
         }
       }

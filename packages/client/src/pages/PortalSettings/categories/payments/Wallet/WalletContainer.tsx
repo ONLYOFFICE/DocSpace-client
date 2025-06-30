@@ -324,11 +324,13 @@ export default inject(
       canUpdateTariff,
       setVisibleWalletSetting,
       isCardLinkedToPortal,
-      walletCustomerStatusNotActive,
-      walletCustomerEmail,
     } = paymentStore;
     const { isFreeTariff } = currentQuotaStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const {
+      isNotPaidPeriod,
+      walletCustomerStatusNotActive,
+      walletCustomerEmail,
+    } = currentTariffStatusStore;
     const { currentDeviceType, walletHelpUrl, currentColorScheme } =
       settingsStore;
 

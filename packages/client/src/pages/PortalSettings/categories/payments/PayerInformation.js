@@ -241,14 +241,14 @@ const PayerInformation = ({
 
 export default inject(
   ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
+    const { accountLink, isStripePortalAvailable } = paymentStore;
+    const { theme } = settingsStore;
     const {
-      accountLink,
-      isStripePortalAvailable,
+      isGracePeriod,
+      isNotPaidPeriod,
       walletCustomerEmail,
       walletCustomerInfo,
-    } = paymentStore;
-    const { theme } = settingsStore;
-    const { isGracePeriod, isNotPaidPeriod } = currentTariffStatusStore;
+    } = currentTariffStatusStore;
     const { user } = userStore;
 
     return {

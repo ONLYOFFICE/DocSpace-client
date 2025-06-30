@@ -145,7 +145,7 @@ class ServicesStore {
 
       if (!quotas) throw new Error();
 
-      if (isAlreadyPaid || this.paymentStore.walletCustomerEmail) {
+      if (isAlreadyPaid) {
         if (this.paymentStore.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
           if (

@@ -280,7 +280,8 @@ class PaymentStore {
   basicSettings = async () => {
     if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
 
-    const { fetchPortalTariff, fetchPayerInfo } = this.currentTariffStatusStore;
+    const { fetchPortalTariff, fetchPayerInfo, walletCustomerStatusNotActive } =
+      this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
     this.setIsUpdatingBasicSettings(true);
@@ -291,15 +292,17 @@ class PaymentStore {
 
     requests.push(fetchPortalTariff());
 
-    if (this.isAlreadyPaid) {
-      if (this.isStripePortalAvailable) {
-        requests.push(this.setPaymentAccount());
+    if (this.isAlreadyPaid && this.isStripePortalAvailable) {
+      requests.push(this.setPaymentAccount());
 
-        if (this.isShowStorageTariffDeactivated() && this.isPayer) {
-          this.setIsShowTariffDeactivatedModal(true);
+      if (this.isPayer && walletCustomerStatusNotActive) {
+        requests.push(this.fetchCardLinked());
+      }
 
-          await this.handleServicesQuotas();
-        }
+      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+        this.setIsShowTariffDeactivatedModal(true);
+
+        await this.handleServicesQuotas();
       }
     } else {
       requests.push(this.getBasicPaymentLink(addedManagersCount));
@@ -471,11 +474,15 @@ class PaymentStore {
   fetchCardLinked = async (url?: string) => {
     const backUrl = url || `${window.location.href}?complete=true`;
 
-    const res = await getCardLinked(backUrl);
+    try {
+      const res = await getCardLinked(backUrl);
 
-    if (!res) return;
+      if (!res) return;
 
-    this.cardLinked = res;
+      this.cardLinked = res;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   updateAutoPayments = async () => {
@@ -530,14 +537,18 @@ class PaymentStore {
   };
 
   setPaymentAccount = async () => {
-    const res = await api.portal.getPaymentAccount();
+    try {
+      const res = await api.portal.getPaymentAccount();
 
-    if (res) {
+      if (!res) return;
+
       if (res.indexOf("error") === -1) {
         this.accountLink = res;
       } else {
-        toastr.error(res);
+        console.error(res);
       }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -572,7 +583,7 @@ class PaymentStore {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
 
-          if (walletCustomerStatusNotActive) {
+          if (this.isPayer && walletCustomerStatusNotActive) {
             requests.push(this.fetchCardLinked());
           }
         }
@@ -632,12 +643,11 @@ class PaymentStore {
 
     await fetchPayerInfo();
 
-    if (this.isAlreadyPaid) {
-      if (this.isStripePortalAvailable) {
-        requests.push(this.setPaymentAccount());
-        if (walletCustomerStatusNotActive) {
-          requests.push(this.fetchCardLinked());
-        }
+    if (this.isAlreadyPaid && this.isStripePortalAvailable) {
+      requests.push(this.setPaymentAccount());
+
+      if (this.isPayer && walletCustomerStatusNotActive) {
+        requests.push(this.fetchCardLinked());
       }
     } else {
       requests.push(this.getBasicPaymentLink(addedManagersCount));

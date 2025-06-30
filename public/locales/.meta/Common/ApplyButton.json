@@ -3,7 +3,7 @@
   "content": "Apply",
   "content_en_sha1_hash": "cfea419c3b4e8b02ee586e70a28bf846e44cdda4",
   "created_at": "2025-05-19T21:30:43.032Z",
-  "updated_at": "2025-06-08T12:02:32.649Z",
+  "updated_at": "2025-06-30T12:20:31.260Z",
   "comment": {
     "text": "The \"Apply\" translation key is used to display the label for an apply button that confirms changes or applies settings in a color selection dialog. It appears as part of a larger dialog component and is also referenced as the primary action button within another variant of the same dialog. This translation can be found on buttons with the id \"applyButtonLabel\" in various dialogs.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 301,
+      "line_number": 310,
       "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n />\n <Button\n scale\n tabIndex={0}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
       "line_number": 165,
-      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
+      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
       "line_number": 165,
-      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
+      "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 463,
+      "line_number": 464,
       "context": "onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",\n label: t(\"Common:ApplyButton\"),\n onClick: onIndexApply,\n iconUrl: CheckIcon,\n },\n ]\n : isContactsPage",
       "module": "/packages/client"
     },

@@ -3,7 +3,7 @@
   "content": "In this panel you can monitor the completion of the form in which you participate or in which you are the organizer of completion",
   "content_en_sha1_hash": "2130725a61128be3361e05443b08ec2e1b5d4c33",
   "created_at": "2025-05-19T21:30:45.369Z",
-  "updated_at": "2025-05-26T07:57:32.932Z",
+  "updated_at": "2025-06-26T19:00:18.304Z",
   "comment": {
     "text": "\"Informs users about the purpose of the filling status panel and its functionality in monitoring form completion.\"",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 305,
-      "context": "<ModalDialog.Body>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}\n bodyText={t(\"Common:FillingStatusBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />\n </>",
+      "line_number": 322,
+      "context": "<section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}\n bodyText={t(\"Common:FillingStatusBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />\n </>",
       "module": "/packages/shared"
     }
   ],
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"in which you participate or in which you are the organizer of completion\" is not perfectly captured. The Arabic 'تنظيمه' refers to organizing something, not necessarily 'completion'. A more accurate translation focusing on 'completion' or 'execution' would be better.",
-          "suggestion": "في هذه اللوحة يمكنكم متابعة مدى تقدم تعبئة النموذج الذي تشاركون فيه أو الذي أنتم مسؤولون عن إتمامه."
+          "description": "The English phrase 'in which you participate or in which you are the organizer of completion' is not perfectly conveyed. 'مسؤولون عن تنظيمه' implies responsibility for organizing, which is slightly different from 'organizer of completion'. A more accurate translation might focus on being the person initiating/managing the form completion.",
+          "suggestion": "في هذه اللوحة يمكنكم متابعة مدى تقدم تعبئة النموذج الذي تشاركون فيه أو الذي أنتم مدراء لإكماله."
         },
         {
           "type": "formatting",
-          "description": "The Arabic sentence has a slightly awkward flow. While grammatically correct, it could be improved for better readability.",
-          "suggestion": "في هذه اللوحة يمكنكم متابعة مدى تقدم تعبئة النموذج الذي تشاركون به أو أنتم مسؤولون عن تنظيمه."
+          "description": "While grammatically correct, the sentence structure is somewhat complex for a status bar description. Consider simplifying for better readability.",
+          "suggestion": "في هذه اللوحة يمكنكم متابعة تقدم تعبئة النموذج الذي تشاركون فيه أو تديرونه."
         }
       ],
       "approved_at": null
@@ -52,9 +52,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"təşkilatçısı olduğunuz formanın\" is slightly awkward. It translates literally to 'the form of which you are the organizer'.",
-          "suggestion": "Bu paneldə iştirak etdiyiniz və ya siz təşkil etdiyiniz formanın doldurulmasını izləyə bilərsiniz."
+          "type": "incorrect_translation",
+          "description": "The translation 'təşkilatçısı olduğunuz' is a literal translation of 'organizer of completion' and is not idiomatic Azerbaijani. It implies that the form is being organized, rather than that the user is organizing the form's completion. A more natural phrasing would be something like 'təşkil etdiyiniz formanın' (the form you organized) or 'təşkilatçı olduğunuz formanın' (the form you are the organizer of).",
+          "suggestion": "Consider using 'təşkil etdiyiniz formanın' or 'təşkilatçı olduğunuz formanın'."
         }
       ],
       "approved_at": null
@@ -65,7 +65,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'organizer of completion' is awkward and doesn't accurately convey the meaning of 'organizer of the completion'. It sounds unnatural in Bulgarian.",
+          "description": "The phrase 'organizer of completion' is awkward and doesn't accurately reflect the English meaning of 'organizer of the completion'.",
           "suggestion": "В този панел можете да следите попълването на формуляра, в който участвате или който организирате."
         }
       ],
@@ -77,8 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"organizátorem vyplňování\" is awkward and not the most natural way to express \"organizer of completion.\" It implies the organizer is doing the filling out, which isn't the intent. A better translation would clarify the organizer's role in facilitating or managing the form completion.",
-          "suggestion": "Na tomto panelu můžete sledovat vyplňování formuláře, na kterém se podílíte nebo který organizujete."
+          "description": "The phrase \"in which you are the organizer of completion\" is awkward and doesn't translate naturally. 'Organizer' implies initiating the process, not necessarily overseeing its completion. The Czech translation focuses on 'vyplňování' (filling) rather than completion itself.",
+          "suggestion": "Na tomto panelu můžete sledovat vyplňování formuláře, na kterém participujete nebo který organizujete."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English mentions participating *or* being the organizer. The Czech uses 'nebo', which is a direct translation of 'or' but doesn't always flow naturally. 'Participujete' is technically correct but could be improved.",
+          "suggestion": "Na tomto panelu můžete sledovat vyplňování formuláře, na kterém se podílíte nebo který jste zorganizoval."
         }
       ],
       "approved_at": null
@@ -89,8 +94,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"bei dem Sie der Organisator der Ausfüllung sind\" is awkward and doesn't flow naturally in German. A more idiomatic translation for 'in which you are the organizer of completion' would be 'das Sie organisiert haben' or 'das Sie veranstalten'.",
-          "suggestion": "In diesem Bereich können Sie die Ausfüllung des Formulars überwachen, an dem Sie teilnehmen oder das Sie organisiert haben/veranstalten."
+          "description": "The phrase \"bei dem Sie der Organisator der Ausfüllung sind\" is overly literal and awkward. A more natural translation for 'in which you are the organizer of completion' would be 'das Sie organisiert haben' or 'das Sie als Organisator bearbeitet haben'.",
+          "suggestion": "In diesem Bereich können Sie die Ausfüllung des Formulars überwachen, an dem Sie teilnehmen oder das Sie organisiert haben."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be improved for readability. Splitting the sentence might help.",
+          "suggestion": "In diesem Bereich können Sie die Ausfüllung des Formulars überwachen. Dies gilt für Formulare, an denen Sie teilnehmen, oder für Formulare, die Sie organisiert haben."
         }
       ],
       "approved_at": null
@@ -101,18 +111,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ο διοργανωτής της συμπλήρωσης\" is awkward and doesn't accurately convey \"organizer of completion.\" It literally translates to 'the organizer of the completion'.",
-          "suggestion": "ο οργανωτής της φόρμας"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The whole phrase \"ο οποίος είστε ο διοργανωτής της συμπλήρωσης\" is overly verbose and could be simplified. It's not the most natural way to express the idea in Greek.",
-          "suggestion": "ή είστε ο διοργανωτής της"
+          "description": "The phrase \"διοργανωτής της συμπλήρωσης\" is awkward and doesn't accurately convey the meaning of \"organizer of completion.\" It literally translates to 'organizer of the completion'. A more natural Greek phrasing would be 'διοργανωτής της φόρμας' (organizer of the form) or 'ο διοργανωτής' (the organizer).",
+          "suggestion": "διοργανωτής της φόρμας"
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is a bit long and could be broken up for better readability. While grammatically correct, it’s not ideal for UI text.",
-          "suggestion": "Σε αυτόν τον πίνακα μπορείτε να παρακολουθείτε τη συμπλήρωση της φόρμας, είτε συμμετέχετε είτε είστε ο διοργανωτής."
+          "description": "The sentence structure is a bit long and complex for optimal readability in Greek. Consider breaking it down for clarity.",
+          "suggestion": "Σε αυτόν τον πίνακα μπορείτε να παρακολουθείτε τη συμπλήρωση της φόρμας. Αυτό ισχύει είτε συμμετέχετε στη φόρμα, είτε είστε ο διοργανωτής."
         }
       ],
       "approved_at": null
@@ -123,13 +128,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"organizador de la finalización\" is awkward and not a natural way to express 'organizer of completion' in Spanish. It's overly literal.",
-          "suggestion": "organizador del formulario"
+          "description": "The phrase 'organizador de la finalización' is awkward and not idiomatic Spanish. It literally translates to 'organizer of the completion'.",
+          "suggestion": "Consider rephrasing to 'En este panel puede supervisar la finalización del formulario en el que participa o del que es organizador.'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The use of 'puede' (can) implies formality. Considering the context of a panel for form completion, a more conversational 'puedes' might be more appropriate, although 'puede' isn't necessarily incorrect.",
-          "suggestion": "puedes"
+          "description": "The passive voice construction 'en el que es el organizador de la finalización' is less natural in Spanish.  While grammatically correct, it's not the most fluid phrasing.",
+          "suggestion": "Consider a more active construction: 'En este panel puede supervisar la finalización del formulario en el que participa o para el que usted es organizador.'"
         }
       ],
       "approved_at": null
@@ -140,8 +145,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'johon osallistut tai jossa olet järjestäjänä' is a bit clunky. A more natural Finnish phrasing would be 'johon olet osallistumassa tai jonka järjestäjänä toimit'. The current wording sounds somewhat literal.",
-          "suggestion": "johon olet osallistumassa tai jonka järjestäjänä toimit"
+          "description": "The English phrase 'in which you participate or in which you are the organizer of completion' is not perfectly captured in the Finnish translation. 'Järjestäjänä' implies being the organizer of the *form itself*, not the completion process.  A more accurate translation would reflect the act of completion.",
+          "suggestion": "Tässä paneelissa voit seurata lomakkeen täyttämisen edistymistä, johon osallistut tai jonka järjestäjänä toimit."
         }
       ],
       "approved_at": null
@@ -152,13 +157,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"organisateur du remplissage\" is awkward and less natural in French. It literally translates to 'organizer of the filling'.",
-          "suggestion": "organisateur du formulaire"
+          "description": "The phrase 'organisateur du remplissage' is overly literal and awkward in French. It translates to 'organizer of the filling' which doesn't convey the intended meaning.",
+          "suggestion": "Consider 'organisateur du formulaire' or 'organisateur de la participation' depending on the specific context. A more natural phrasing would be something like 'que vous organisez ou auquel vous participez'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'completion' is not well conveyed by 'remplissage'. It focuses only on the act of filling, not the process of completion or progress.",
-          "suggestion": "l'état d'avancement du formulaire"
+          "type": "grammar",
+          "description": "The sentence structure is a bit complex and could be improved for clarity. The repetition of 'remplissage' is also noticeable.",
+          "suggestion": "Restructure the sentence to be more concise and avoid repetition. For example: 'Dans ce panneau, vous pouvez suivre le remplissage des formulaires auxquels vous participez ou que vous organisez.'"
         }
       ],
       "approved_at": null
@@ -169,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"in which you participate or in which you are the organizer of completion\" is not perfectly captured. \"Ձեր մասնակցությամբ կազմակերպվող\" suggests the form is being organized *by* the participant, rather than that they are a participant in a form *being* organized. It's more accurate to reflect that the participant is involved in the form's completion.",
-          "suggestion": "Այս վահանակում կարող եք վերահսկել ձեր մասնակցությամբ կամ ձեր կողմից կազմակերպվող ձևի լրացման առաջընթացը:"
+          "description": "The translation of \"in which you participate or in which you are the organizer of completion\" is somewhat awkward. \"Ձեր մասնակցությամբ կազմակերպվող կամ ձեր կողմից լրացվող\" is a literal translation and can be improved for better flow.",
+          "suggestion": "Այս վահանակում կարող եք վերահսկել ձեր մասնակցությամբ կամ ձեր կողմից կազմակերպված ձևի լրացման առաջընթացը:"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Ձեր կողմից լրացվող' can be interpreted as 'being filled by you'. While not entirely wrong, it's slightly more natural and accurate to say 'Ձեր կողմից կազմակերպվող ձևի լրացման առաջընթացը' - 'the progress of the form organized by you'. The English phrasing suggests the organizer is overseeing the form's completion.",
-          "suggestion": "This is part of the previous correction. Revisions would alter the entire sentence."
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing \"ձեր մասնակցությամբ կամ ձեր կողմից\" could benefit from a slightly more concise wording.  It feels a little verbose.",
+          "suggestion": "Consider alternatives like \"Ձեր կողմից մասնակցվող կամ կազմակերպվող\" but requires careful consideration to maintain accuracy."
         }
       ],
       "approved_at": null
@@ -192,13 +197,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"organizer of completion\" is awkward and potentially inaccurate. 'Organizer' doesn't directly translate to a role in form completion; it's likely referring to the creator or administrator of the form.",
-          "suggestion": "このパネルでは、あなたが参加しているフォームの完了状況や、あなたが作成したフォームまたは管理しているフォームの完了状況を確認できます。"
+          "description": "The phrase \"あなたが完了の主催者であるフォーム\" is awkward and doesn't accurately convey the meaning of \"organizer of completion.\" It literally translates to \"form in which you are the organizer of completion,\" which is unnatural.",
+          "suggestion": "あなたがフォームの完了を主催している場合、またはあなたがフォームの完了を管理している場合のフォームの完了状況を確認できます。"
         },
         {
           "type": "grammar",
-          "description": "The repetition of \"完了状況\" is a bit clunky. While grammatically correct, it can be improved for better flow.",
-          "suggestion": "このパネルでは、あなたが参加しているフォームの完了状況や、あなたが作成したフォームまたは管理しているフォームの完了を確認できます。"
+          "description": "The sentence structure is a bit clunky. Combining the two clauses about completion status would improve flow.",
+          "suggestion": "このパネルでは、あなたが参加しているフォーム、またはあなたが完了を主催しているフォームの完了状況を確認できます。"
         }
       ],
       "approved_at": null
@@ -209,8 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content refers to forms in which the user participates *or* organizes. The Korean translation implies only participation, missing the 'organizer' aspect. It's a significant omission.",
-          "suggestion": "이 패널에서 고객님이 참가하거나 조직한 양식의 완료를 모니터링할 수 있습니다."
+          "description": "The translation '고객님이' (customer) doesn't quite capture the intended meaning of 'you' in the English sentence. It implies a customer-service context, while the English refers to a more general participant or organizer.",
+          "suggestion": "이 패널에서 참여하거나 조직한 양식의 완료를 모니터링할 수 있습니다. (This panel allows you to monitor the completion of forms you participate in or organize.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a passive voice ('can monitor'). While acceptable, a more direct phrasing might improve clarity in Korean.",
+          "suggestion": "이 패널에서 참여하거나 조직한 양식의 완료를 모니터링할 수 있습니다. (Consider rephrasing to a more active construction for more directness, but this is a stylistic choice)."
         }
       ],
       "approved_at": null
@@ -221,13 +231,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'in which you are the organizer of completion' is awkward and doesn't accurately reflect the English meaning. The English implies organizing the form's completion process.",
-          "suggestion": "ໃນຄະນະນີ້ທ່ານສາມາດຕິດຕາມການສໍາເລັດຂອງແບບຟອມທີ່ທ່ານເຂົ້າຮ່ວມຫຼືເປັນເຈົ້າພາບຈັດການສໍາເລັດ"
+          "description": "The English phrase \"in which you are the organizer of completion\" is awkward and doesn't translate well. The Lao translation 'ທີ່ທ່ານເປັນຜູ້ຈັດຕັ້ງການສໍາເລັດ' further emphasizes this awkwardness.",
+          "suggestion": "Consider rephrasing the English to something clearer like \"in which you are the organizer\" and adjusting the Lao accordingly. A possible Lao suggestion: 'ໃນແບບຟອມທີ່ທ່ານເປັນຜູ້ຈັດການ' (in the form that you are the manager)."
         },
         {
-          "type": "formatting",
-          "description": "While not a major issue, the Lao translation could benefit from a more fluid phrasing to improve readability. It currently sounds slightly stilted.",
-          "suggestion": "ໃນຄະນະນີ້ທ່ານສາມາດຕິດຕາມຄວາມຄືບໜ້າຂອງແບບຟອມທີ່ທ່ານເຂົ້າຮ່ວມຫຼືທ່ານເປັນເຈົ້າພາບຈັດການ"
+          "type": "grammar",
+          "description": "The phrasing 'ການສໍາເລັດ' is repeated, making the Lao sentence sound redundant. While technically correct, it could be improved for flow.",
+          "suggestion": "Consider removing one instance of 'ການສໍາເລັດ' or replacing one with a synonym for 'completion'. For instance, 'ໃນແບບຟອມທີ່ທ່ານເຂົ້າຮ່ວມຫຼືທ່ານເປັນຜູ້ຈັດການສ້າງມັນ' (in the form that you participate or you are the organizer to create it)."
         }
       ],
       "approved_at": null
@@ -238,13 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"aizpildīšanas organizators\" (completion organizer) is not a natural or common way to describe an organizer of a form completion process in Latvian. It's awkward and doesn't accurately convey the intended meaning.",
-          "suggestion": "Consider alternatives like \"veidlapas izveidotājs\" (form creator), \"veidlapas vadītājs\" (form leader/manager), or rephrasing to focus on the role of initiating or managing the completion, for example: 'kurā esat veidlapas iniciators' (in which you are the form initiator) or 'kuru esat veidlapas vadītājs' (in which you are the form leader)."
+          "description": "The phrase 'in which you are the organizer of completion' is awkward and doesn't accurately reflect the English meaning. The English implies someone who is organizing *the process* of form completion, not necessarily the completion itself.  'Organizer' also sounds very formal in this context.",
+          "suggestion": "Šajā panelī varat pārraudzīt veidlapas aizpildīšanu, kurā piedalāties vai kuru organizējāt."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is somewhat complex and could be simplified for better readability in Latvian.",
-          "suggestion": "Consider restructuring the sentence to separate the two roles, for example: 'Šajā panelī varat pārraudzīt veidlapas aizpildīšanu – vai nu veidlapā, kurā piedalāties, vai veidlapā, kuru esat izveidojis' (In this panel you can monitor the form completion - either a form in which you participate or a form you created)."
+          "description": "The translation lacks smooth flow. While grammatically correct, the sentence structure could be improved for readability.",
+          "suggestion": "Šajā panelī varat pārraudzīt veidlapas aizpildīšanu, vai nu piedaloties tajā, vai organizējot to."
         }
       ],
       "approved_at": null
@@ -255,18 +265,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"organizer of completion\" is awkward and doesn't accurately convey the meaning. \"Organizer\" implies someone who initiates or manages the completion process. The Dutch \"organisierende of afrondende partij bent\" is overly literal and doesn't flow naturally.",
-          "suggestion": "In dit paneel kunt u de voortgang van het formulier volgen waar u aan deelneemt of waar u de organisatie ervan beheert."
+          "description": "The phrase \"organizing or afrondende partij\" is awkward and doesn't accurately convey the meaning of \"organizer of completion.\"  \"Afrondende partij\" is not a common or natural way to express \"completion\" in this context. \"Organizer\" is more accurately translated as 'organisator' or 'beheerder'.",
+          "suggestion": "In dit paneel kunt u de voltooiing van het formulier volgen waaraan u deelneemt of waar u de organisator/beheerder van bent."
         },
         {
           "type": "grammar",
-          "description": "The phrase \"waarvan u de organisatie ervan beheert\" is slightly redundant because 'ervan' is repeated.",
-          "suggestion": "In dit paneel kunt u de voortgang van het formulier volgen waar u aan deelneemt of waar u de organisatie ervan beheert."
-        },
-        {
-          "type": "formatting",
-          "description": "The original English sentence is quite long. The Dutch translation maintains this length which can impact readability. While not strictly an error, breaking it up could improve clarity.",
-          "suggestion": "In dit paneel kunt u de voortgang van het formulier volgen. U kunt dit doen voor formulieren waar u aan deelneemt, of voor formulieren die u organiseert."
+          "description": "The conjunction 'of' is used excessively. While technically correct, it can be streamlined for better readability.",
+          "suggestion": "In dit paneel kunt u de voltooiing van het formulier volgen waaraan u deelneemt of dat u organiseert."
         }
       ],
       "approved_at": null
@@ -277,8 +282,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"in which you are the organizer of completion\" is not accurately reflected in the Polish translation \"za którego wypełnienie odpowiadasz jako organizator\". A more accurate translation would be something along the lines of \"którego jesteś organizatorem\" or \"którego organizujesz\".",
-          "suggestion": "W tym panelu możesz monitorować wypełnianie formularza, w którym uczestniczysz lub formularza, którego jesteś organizatorem"
+          "description": "The English phrase \"in which you are the organizer of completion\" is not accurately translated. 'Organizer of completion' is awkward phrasing in Polish. It's better to convey the meaning of 'organizing the completion' or 'responsible for the completion'.",
+          "suggestion": "W tym panelu możesz monitorować wypełnianie formularza, w którym uczestniczysz lub formularza, którego wypełnienie organizujesz jako organizator."
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of 'formularza' can be slightly improved for readability.",
+          "suggestion": "W tym panelu możesz monitorować wypełnianie formularza, w którym uczestniczysz lub formularza, którego organizujesz jako organizator."
         }
       ],
       "approved_at": null
@@ -289,7 +299,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'em que é o organizador do preenchimento' is slightly awkward and doesn't accurately convey 'in which you are the organizer of completion'. A more natural phrasing would be 'em que você é o organizador do preenchimento' or 'em que você organiza o preenchimento'.",
+          "description": "The translation 'em que é o organizador do preenchimento' is awkward and doesn't accurately convey the meaning of 'in which you are the organizer of completion'. A more natural phrasing would be 'em que você é o organizador do preenchimento' or 'em que você é o responsável pelo preenchimento'.",
           "suggestion": "em que você é o organizador do preenchimento"
         }
       ],
@@ -301,8 +311,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'organizador do preenchimento' is awkward and redundant. The original English implies the organizer of the form itself, not the completion process.",
-          "suggestion": "Neste painel você pode monitorar o preenchimento do formulário no qual você participa ou no qual você é o organizador."
+          "description": "The phrase \"organizador do preenchimento\" is redundant and awkward. 'Organizador' already implies involvement in the completion process.",
+          "suggestion": "Neste painel você pode monitorar o preenchimento do formulário no qual você participa ou organiza."
         }
       ],
       "approved_at": null
@@ -313,13 +323,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"in which you are the organizer of completion\" is awkward and doesn't directly translate the meaning of \"in which you are the organizer\". A more natural translation would be something like \"pe care îl organizați\" or \"pe care îl coordonați\".",
-          "suggestion": "Acest panou vă permite să monitorizați completarea formularului la care participați, sau completarea pe care o coordonați."
+          "description": "The translation of \"in which you are the organizer of completion\" is awkward. 'Inițiat' implies starting something, not necessarily organizing its completion. A better phrasing would reflect the role of the organizer more accurately.",
+          "suggestion": "Acest panou vă permite să monitorizați completarea formularului la care participați, sau completarea pe care o organizați dumneavoastră."
         },
         {
           "type": "formatting",
-          "description": "The use of a comma before 'sau' is stylistically questionable and potentially incorrect depending on the context and grammatical rules in Romanian. It should be verified for its appropriateness.",
-          "suggestion": "Acest panou vă permite să monitorizați completarea formularului la care participați sau completarea pe care o coordonați."
+          "description": "While grammatically correct, the sentence structure is a bit complex and could be simplified for better readability in Romanian. Separating the clauses with a clearer connector improves flow.",
+          "suggestion": "Acest panou vă permite să monitorizați completarea formularului la care participați sau pe care îl organizați dumneavoastră."
         }
       ],
       "approved_at": null
@@ -330,13 +340,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"для которой вы являетесь организатором заполнения\" is overly verbose and redundant. The word 'заполнения' is repeated unnecessarily.",
+          "description": "The phrase \"для которой вы являетесь организатором заполнения\" is redundant and awkward. The term 'организатор' already implies organization and completion.",
           "suggestion": "В этой панели вы можете отслеживать заполнение формы, в которой вы участвуете или являетесь организатором."
         },
         {
           "type": "grammar",
-          "description": "While technically correct, the sentence structure is a bit awkward. The use of 'в которой вы участвуете или для которой вы являетесь...' can be improved for better flow.",
-          "suggestion": "В этой панели вы можете отслеживать заполнение формы, в которой вы участвуете или являетесь ее организатором."
+          "description": "While grammatically correct, the sentence structure is quite long and complex. It could be more fluent and easily understandable.",
+          "suggestion": "В этой панели вы можете отслеживать ход заполнения формы, в которой вы участвуете или являетесь организатором."
         }
       ],
       "approved_at": null
@@ -347,13 +357,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English sentence 'in which you participate or in which you are the organizer of completion' is not accurately reflected in the Sinhala translation. The phrasing 'ඔබ සම්පූර්ණ කිරීමේ සංවිධායක වන' (oba sampurna karimine sanvidhayaka wana) is awkward and could be misinterpreted.  It literally translates to 'in which you are the organizer of completion,' which is less natural than it should be.",
-          "suggestion": "මෙම පැනලය තුළ ඔබ සහභාගී වන, නැත්නම් ඔබ සංවිධානය කරන, පෝරමය සම්පූර්ණ කිරීම නිරීක්ෂණය කළ හැකිය (This panel allows you to monitor the completion of the form you participate in or organize)."
+          "description": "The translation 'සම්පූර්ණ කිරීමේ සංවිධායක වන' is a bit awkward. While technically correct, it doesn't flow naturally in Sinhala. A more natural phrasing for 'organizer of completion' would be 'සම්පූර්ණ කිරීමට සංවිධායක වන' or 'සමත්ව පාලනය වන'.",
+          "suggestion": "මෙම පැනලය තුළ ඔබ සහභාගී වන හෝ ඔබ සමත්ව පාලනය වන පෝරමය සම්පූර්ණ කිරීම නිරීක්ෂණය කළ හැකිය"
         },
         {
           "type": "formatting",
-          "description": "The comma usage could be improved for readability in Sinhala. While a comma is present, the sentence structure could be modified for better flow.",
-          "suggestion": "මෙම පැනලය තුළ ඔබ සහභාගී වන, නැත්නම් ඔබ සංවිධානය කරන, පෝරමය සම්පූර්ණ කිරීම නිරීක්ෂණය කළ හැකිය"
+          "description": "While the sentence is grammatically correct, it feels slightly long and could benefit from breaking it into two sentences for better readability in Sinhala.",
+          "suggestion": "මෙම පැනලය තුළ ඔබ සහභාගී වන පෝරමය සම්පූර්ණ කිරීම නිරීක්ෂණය කළ හැකිය. ඔබට සංවිධායක වන පෝරමයේ සම්පූර්ණත්වයද නිරීක්ෂණය කළ හැකිය."
         }
       ],
       "approved_at": null
@@ -361,7 +371,18 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"in which you participate or in which you are the organizer of completion\" is not perfectly captured by \"na ktorom sa zúčastňujete alebo ste organizátorom jeho vyplnenia\".  The phrasing is a bit awkward in Slovak. It might be better to rephrase for clarity and natural flow.",
+          "suggestion": "Na tomto paneli môžete sledovať postup vyplnenia formulára, z ktorého sa zúčastňujete, alebo ak ste jeho organizátor."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrasing 'jeho vyplnenia' feels slightly formal and can be improved for a more natural feel. ",
+          "suggestion": "Consider using a simpler phrasing for better readability. See suggestion above for a complete example."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -370,13 +391,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"organizator izpolnjevanja\" is awkward and doesn't quite convey the meaning of \"organizer of completion\". It literally translates to 'organizer of filling'. A more natural phrasing would be something like 'organizator izpolnjevanja obrazca' or 'organizator, ki organizira izpolnjevanje obrazca'.",
-          "suggestion": "V tem panelu lahko spremljate izpolnjevanje obrazca, pri katerem sodelujete ali ste organizator obrazca."
-        },
-        {
-          "type": "formatting",
-          "description": "While not a critical error, the repetition of 'izpolnjevanje' could be slightly improved for flow. Consider slightly restructuring the sentence.",
-          "suggestion": "V tem panelu lahko spremljate napredek pri izpolnjevanju obrazca, pri katerem sodelujete ali ste organizator."
+          "description": "The phrase 'organizer of completion' is awkward and doesn't accurately reflect the English meaning of 'organizer of the completion.' A more natural Slovenian phrasing would be 'organizator izpolnjevanja' (organizer of the filling/completion).",
+          "suggestion": "V tem panelu lahko spremljate izpolnjevanje obrazca, pri katerem sodelujete ali ste organizator izpolnjevanja."
         }
       ],
       "approved_at": null
@@ -387,13 +403,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'in which you are the organizer of completion' is awkward and doesn't quite convey the intended meaning. 'Completion' is a bit redundant here.",
-          "suggestion": "У овом панелу можете пратити попуњавање обрасца у којем учествујете или га организовано попуњавате."
+          "description": "The phrase \"организатор попуњавања\" (organizer of filling) is awkward and doesn't quite capture the intended meaning. It's a literal translation that loses nuance. The English refers to being the 'organizer of completion', which is better conveyed with a different phrasing.",
+          "suggestion": "У овом панелу можете пратити попуњавање обрасца у којем учествујете или за који сте организатор."
         },
         {
-          "type": "formatting",
-          "description": "The Serbian translation uses a slightly passive voice that might not be ideal for a UI description. Consider a more active phrasing for clarity.",
-          "suggestion": "У овом панелу можете пратити попуњавање обрасца у којем учествујете или којега организовано попуњавате."
+          "type": "grammatical",
+          "description": "While technically correct, the sentence structure could be improved for better flow and readability.",
+          "suggestion": "У овом панелу можете пратити попуњавање обрасца у којем учествујете или који организујете."
         }
       ],
       "approved_at": null
@@ -403,9 +419,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'u kojem ste organizator popunjavanja' is slightly awkward. While grammatically correct, it's more natural to say 'u kojem ste organizator' or 'koji organizujete'.",
-          "suggestion": "U ovom panelu možete pratiti popunjavanje obrasca u kojem učestvujete ili u kojem ste organizator."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'in which you are the organizer of completion' is awkwardly translated. 'Organizer of completion' isn't a natural phrase in Serbian. It should be rephrased to accurately convey the meaning.",
+          "suggestion": "U ovom panelu možete pratiti popunjavanje obrasca u kojem učestvujete ili ga organizujete."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the Serbian sentence could benefit from a slightly more concise and flowing structure. It's a bit lengthy.",
+          "suggestion": "U ovom panelu možete pratiti popunjavanje obrasca, kao učesnik ili organizator."
         }
       ],
       "approved_at": null
@@ -416,13 +437,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'tamamlama organizatörü olduğunuz' is not a natural way to express 'organizer of completion.' It's a literal translation that doesn't convey the intended meaning clearly.",
-          "suggestion": "Consider alternatives like 'tamamlama düzenleyicisi olduğunuz' or 'tamamlama sürecini yönettiğiniz' to better reflect the meaning of 'organizer of completion.'"
+          "description": "The translation 'tamamlama organizatörü olduğunuz' is awkward and doesn't accurately convey the meaning of 'organizer of completion'. It's not a common or natural phrasing in Turkish.",
+          "suggestion": "Bu panelde katıldığınız veya formun düzenleyicisi olduğunuz formun tamamlanmasını izleyebilirsiniz."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure 'Bu panelde ... izleyebilirsiniz' is grammatically correct but slightly formal. A more conversational phrasing might improve readability.",
-          "suggestion": "Consider rephrasing to 'Bu panel ile katıldığınız veya tamamlama düzenleyicisi olduğunuz formun tamamlanma durumunu takip edebilirsiniz.'"
+          "type": "formatting",
+          "description": "The phrase 'veya formun düzenleyicisi olduğunuz' is slightly more natural to read when combined with 'katıldığınız' using 'veya' (or).",
+          "suggestion": "Bu panelde katıldığınız veya formun düzenleyicisi olduğunuz formun tamamlanmasını izleyebilirsiniz."
         }
       ],
       "approved_at": null
@@ -433,13 +454,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'in which you participate or in which you are the organizer of completion' is not accurately reflected in the Ukrainian translation. 'Organize completion' is awkward. It would be better to convey the meaning of 'organizing the form's completion'.",
-          "suggestion": "На цій панелі ви можете контролювати заповнення форми, в якій ви берете участь або організатор заповнення."
-        },
-        {
-          "type": "grammatical",
-          "description": "The use of 'заповнення' (zapolnennya - filling) is correct, but the phrase 'яке ви виконуєте або організовуєте' is grammatically awkward. A more natural phrasing would improve readability.",
-          "suggestion": "який ви заповнюєте або організовуєте"
+          "description": "The English phrase 'in which you participate or in which you are the organizer of completion' is not perfectly captured by 'яке ви виконуєте або організовуєте'. 'Виконуєте' implies 'execute' or 'perform', which doesn't directly convey the meaning of participating in or organizing the completion of a form.  'Організовуєте' is accurate but the 'participate' portion is lost.",
+          "suggestion": "На цій панелі ви можете контролювати заповнення форми, в якій ви берете участь або є організатором її заповнення."
         }
       ],
       "approved_at": null
@@ -450,13 +466,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'in which you participate or in which you are the organizer of completion' is not accurately conveyed. 'Organizer of completion' is awkward and doesn't quite match the English meaning. It suggests organizing the completion itself, rather than organizing the form.",
-          "suggestion": "Trong bảng này, bạn có thể theo dõi việc hoàn thành biểu mẫu mà bạn tham gia hoặc bạn là người tạo ra biểu mẫu đó."
+          "description": "The translation \"Trong bảng này, bạn có thể theo dõi việc hoàn thành biểu mẫu mà bạn tham gia hoặc bạn là người tổ chức thực hiện\" doesn't fully capture the nuance of 'organizer of completion'. A more accurate translation would convey the organizer's role in managing the form's completion.",
+          "suggestion": "Trong bảng này, bạn có thể theo dõi việc hoàn thành biểu mẫu mà bạn tham gia hoặc bạn là người tổ chức quản lý việc hoàn thành."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'tạo ra' (create) is a better translation for 'organizer' in this context. It conveys the idea of someone who created/built the form.",
-          "suggestion": "No change needed. This issue is already addressed by the suggested change in the previous issue."
+          "type": "grammar",
+          "description": "While grammatically correct, the repeated use of 'bạn' can sound slightly awkward. Considering a more varied sentence structure could improve the flow.",
+          "suggestion": "Trong bảng này, bạn có thể theo dõi việc hoàn thành biểu mẫu mà bạn tham gia hoặc là người tổ chức thực hiện."
         }
       ],
       "approved_at": null
@@ -467,8 +483,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'in which you participate or in which you are the organizer of completion' is not perfectly captured by '您参与或发起的'. The original English implies both participation and organization of the *process* of completion, while the translation focuses on initiating the form itself. A more accurate phrasing might emphasize the user's role in the completion process, whether as a participant or organizer.",
-          "suggestion": "您可以监控您参与或组织进行的表单的填写进度"
+          "description": "The English phrase \"in which you participate or in which you are the organizer of completion\" is not entirely accurately reflected in the Chinese translation. \"Organizer of completion\" is a less common and potentially confusing phrasing. A more natural and accurate translation for 'organizer' would be something like '创建者' (creator) or '发起人' (initiator).",
+          "suggestion": "在此面板中，您可以监控您参与或创建的表单的填写进度"
         }
       ],
       "approved_at": null

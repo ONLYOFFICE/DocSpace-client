@@ -1,4 +1,4 @@
-import { TTranslation } from "@docspace/shared/types";
+import { TTranslation } from "../../../types";
 
 export interface GuidanceConfig {
   t: TTranslation;

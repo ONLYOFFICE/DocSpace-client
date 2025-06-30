@@ -62,7 +62,7 @@ const AutoBackupWrapper = ({
   setErrorInformation,
   ...props
 }: AutoBackupWrapperProps) => {
-  const timerIdRef = useRef<number>();
+  const timerIdRef = useRef<number>(null);
   const { t, ready } = useTranslation(["Settings", "Common"]);
   const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
     useState(true);
@@ -104,8 +104,10 @@ const AutoBackupWrapper = ({
         setIsInitialError(true);
         toastr.error(error as Error);
       } finally {
-        clearTimeout(timerIdRef.current);
-        timerIdRef.current = undefined;
+        if (timerIdRef.current) {
+          clearTimeout(timerIdRef.current);
+          timerIdRef.current = null;
+        }
         setIsEmptyContentBeforeLoader(false);
         setIsInitialLoading(false);
       }
@@ -113,8 +115,10 @@ const AutoBackupWrapper = ({
   }, []);
 
   useUnmount(() => {
-    clearTimeout(timerIdRef.current);
-    timerIdRef.current = undefined;
+    if (timerIdRef.current) {
+      clearTimeout(timerIdRef.current);
+      timerIdRef.current = null;
+    }
     resetDownloadingProgress();
     props.setterSelectedEnableSchedule(false);
     props.toDefault();

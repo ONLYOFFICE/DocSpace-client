@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+
 import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
@@ -37,7 +38,6 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
-import { getBackUrl, isFormRole } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -155,7 +155,7 @@ const Editor = ({
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
-  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
   let goBack: TGoBack = {} as TGoBack;
 
@@ -167,12 +167,13 @@ const Editor = ({
         i18n.getDataByLanguage(i18n.language) as unknown as {
           Editor: { [key: string]: string };
         }
-      )?.["Editor"] as {
+      )?.Editor as {
         [key: string]: string;
       }
-    )?.["FileLocation"]; // t("FileLocation");
+    )?.FileLocation; // t("FileLocation");
 
     if (editorGoBack === false || user?.isVisitor || !user) {
+      console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -192,7 +193,7 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
+        goBack.url = newConfig.editorConfig?.customization?.goback?.url;
       }
     }
   }
@@ -219,20 +220,20 @@ const Editor = ({
     }
   }
 
-  //if (newConfig.document && newConfig.document.info)
+  // if (newConfig.document && newConfig.document.info)
   //  newConfig.document.info.favorite = false;
+  const url = typeof window !== "undefined" ? window.location.href : "";
 
-  // const url = window.location.href;
+  if (url.indexOf("anchor") !== -1) {
+    const splitUrl = url.split("anchor=");
+    const decodeURI = decodeURIComponent(splitUrl[1]);
+    const obj = JSON.parse(decodeURI);
 
-  // if (url.indexOf("anchor") !== -1) {
-  //   const splitUrl = url.split("anchor=");
-  //   const decodeURI = decodeURIComponent(splitUrl[1]);
-  //   const obj = JSON.parse(decodeURI);
-
-  //   config.editorConfig.actionLink = {
-  //     action: obj.action,
-  //   };
-  // }
+    if (newConfig.editorConfig)
+      newConfig.editorConfig.actionLink = {
+        action: obj.action,
+      };
+  }
 
   newConfig.events = {
     onDocumentReady,

@@ -28,7 +28,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
-import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { GuidanceRefKey } from "../guidance/sub-components/Guid.types";
 import { Text } from "../text";
 import { ContextMenu } from "../context-menu";
 import { MainButtonProps } from "./MainButton.types";

@@ -804,6 +804,9 @@ class FilesActionStore {
               ? data
               : await this.uploadDataStore.loopFilesOperations(data, pbData);
 
+          clearActiveOperations(fileIds, folderIds);
+          setDownloadItems([]);
+
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
           }
@@ -819,6 +822,8 @@ class FilesActionStore {
         },
       );
     } catch (err) {
+      clearActiveOperations(fileIds, folderIds);
+
       setSecondaryProgressBarData({
         operation: operationName,
         alert: true,
@@ -847,11 +852,9 @@ class FilesActionStore {
         setDownloadDialogVisible(true);
         return;
       }
+      setDownloadItems([]);
 
       return toastr.error(err, null, 0, true);
-    } finally {
-      clearActiveOperations(fileIds, folderIds);
-      setDownloadItems([]);
     }
   };
 
@@ -1042,6 +1045,8 @@ class FilesActionStore {
   ) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
 
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
@@ -1077,7 +1082,6 @@ class FilesActionStore {
             operation,
             operationId,
           });
-          this.updateCurrentFolder(null, operationId, operation);
         })
         .then(() =>
           toastr.success(
@@ -1090,6 +1094,11 @@ class FilesActionStore {
         )
         .finally(() => {
           this.setGroupMenuBlocked(false);
+          setSecondaryProgressBarData({
+            operation,
+            completed: true,
+            operationId,
+          });
         });
     }
 

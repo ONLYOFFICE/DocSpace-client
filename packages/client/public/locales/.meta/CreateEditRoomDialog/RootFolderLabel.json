@@ -3,7 +3,7 @@
   "content": "Root folder",
   "content_en_sha1_hash": "aa608b6955d74fbf2015416119d097d0da2bf762",
   "created_at": "2025-05-19T21:30:56.834Z",
-  "updated_at": "2025-05-24T13:43:59.265Z",
+  "updated_at": "2025-06-18T17:11:42.359Z",
   "comment": {
     "text": "The translation key \"RootFolderLabel\" is used as a fallback or default label when creating a new folder in a third-party storage system. It appears in the FolderInput component of a CreateEditRoomDialog and serves as the root folder title if no specific room title is provided. Translators should provide an alternative text that makes sense in their language and region, such as \"Folder\" or \"Root\".",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/FolderInput.js",
-      "line_number": 174,
+      "line_number": 173,
       "context": "console.log(thirdpartyAccount);\n \n if (!thirdpartyAccount.id) return null;\n \n let title = createNewFolderIsChecked || path ? \"/\" : t(\"RootFolderLabel\");\n title += path;\n if (createNewFolderIsChecked) {\n title += path ? \"/\" : \"\";\n title += roomTitle || t(\"Common:NewRoom\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/FolderInput.js",
-      "line_number": 174,
+      "line_number": 173,
       "context": "console.log(thirdpartyAccount);\n \n if (!thirdpartyAccount.id) return null;\n \n let title = createNewFolderIsChecked || path ? \"/\" : t(\"RootFolderLabel\");\n title += path;\n if (createNewFolderIsChecked) {\n title += path ? \"/\" : \"\";\n title += roomTitle || t(\"Common:NewRoom\");\n }",
       "module": "/packages/client"
     }

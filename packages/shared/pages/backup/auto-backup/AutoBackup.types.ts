@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import type { TBackupSchedule } from "../../api/portal/types";
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
@@ -32,16 +33,15 @@ import type {
   TTranslation,
   Option,
   TWeekdaysLabel,
-} from "@docspace/shared/types";
-import type { TOption } from "@docspace/shared/components/combobox";
-import type { FolderType } from "@docspace/shared/enums";
-import type { ButtonSize } from "@docspace/shared/components/button";
-import type { TColorScheme } from "@docspace/shared/themes";
-import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
-import type { TStorageBackup } from "@docspace/shared/api/settings/types";
-import type { TThirdParties } from "@docspace/shared/api/files/types";
+} from "../../types";
+import type { TOption } from "../../components/combobox";
+import type { FolderType } from "../../enums";
+import type { ButtonSize } from "../../components/button";
+import type { TColorScheme } from "../../themes";
+import type { FilesSelectorSettings } from "../../components/files-selector-input";
+import type { TBreadCrumb } from "../../components/selector/Selector.types";
+import type { TStorageBackup } from "../../api/settings/types";
+import type { TThirdParties } from "../../api/files/types";
 
 export interface AutomaticBackupProps {
   isManagement?: boolean;

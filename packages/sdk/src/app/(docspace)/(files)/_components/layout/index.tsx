@@ -31,5 +31,5 @@ type LayoutProps = {
 };
 
 export const Layout = ({ children }: LayoutProps) => {
-  return <>{children}</>;
+  return children;
 };

@@ -23,7 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
+
 import { observer } from "mobx-react";
 import React, { useMemo } from "react";
 import { useTheme } from "styled-components";
@@ -34,7 +36,6 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { useDefaultOptions } from "@docspace/shared/pages/Backup/auto-backup/hooks";
-import action from "@docspace/shared/utils/revalidateTag";
 
 import type {
   SettingsThirdPartyType,

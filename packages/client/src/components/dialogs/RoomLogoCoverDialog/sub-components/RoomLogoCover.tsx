@@ -30,6 +30,7 @@ import styled, { css } from "styled-components";
 
 import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { ICover, TRoom } from "@docspace/shared/api/rooms/types";
 
 import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
 import { globalColors } from "@docspace/shared/themes";
@@ -38,7 +39,7 @@ import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";
 import { SelectIcon } from "./SelectIcon";
 
-import { RoomLogoCoverProps } from "../RoomLogoCoverDialog.types";
+import { ILogo, RoomLogoCoverProps } from "../RoomLogoCoverDialog.types";
 
 const RoomLogoCoverContainer = styled.div<{
   isScrollLocked: boolean;
@@ -153,8 +154,8 @@ const RoomLogoCover = ({
   );
 
   const SelectedCover = React.useMemo(() => {
-    return covers?.filter((item) => item.id === cover?.cover)[0];
-  }, [cover?.cover, covers]);
+    return covers?.filter((item) => item.id === cover?.cover?.id)[0];
+  }, [cover?.cover?.id, covers]);
 
   const roomColor = cover?.color
     ? `#${cover?.color}`
@@ -171,7 +172,7 @@ const RoomLogoCover = ({
   React.useEffect(() => {
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,
-      icon: roomIcon,
+      icon: roomIcon as unknown as ILogo,
       color: roomColor,
       withoutIcon: typeof roomIcon === "string",
       customColor: globalColors.logoColors.includes(roomColor)
@@ -180,7 +181,9 @@ const RoomLogoCover = ({
     });
   }, [roomIcon]);
 
-  const coverId = roomCoverDialogProps.icon?.id || roomIcon?.id;
+  const coverId =
+    (roomCoverDialogProps.icon as unknown as ICover)?.id ||
+    (roomIcon as ICover)?.id;
 
   const scrollRef = useRef(null);
 
@@ -271,19 +274,21 @@ export default inject<TStore>(({ settingsStore, dialogsStore }) => {
     roomCoverDialogProps,
   } = dialogsStore;
 
-  const logo = createRoomDialogProps.visible ? null : coverSelection?.logo;
+  const room: TRoom = coverSelection as unknown as TRoom;
+
+  const logo = createRoomDialogProps.visible ? null : room?.logo;
   const title =
     createRoomDialogProps.visible || editRoomDialogProps.visible
       ? roomCoverDialogProps.title
-      : coverSelection?.title;
+      : room?.title;
 
   return {
     isBaseTheme: theme?.isBase,
-    logo: coverSelection?.isTemplate ? coverSelection?.logo : logo,
+    logo: room?.isTemplate ? room?.logo : logo,
     title,
     cover: cover ?? {
-      color: coverSelection?.color,
-      cover: coverSelection?.cover?.id,
+      color: logo?.color,
+      cover: logo?.cover?.id,
     },
     setCover,
     setRoomCoverDialogProps,

@@ -28,22 +28,19 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { toastr } from "@docspace/shared/components/toast";
-import StatusMessage from "@docspace/shared/components/status-message";
-import { getBackupProgressInfo } from "@docspace/shared/utils/common";
+import { toastr } from "../../components/toast";
+import StatusMessage from "../../components/status-message";
+import { getBackupProgressInfo } from "../../utils/common";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "@docspace/shared/utils/socket";
+} from "../../utils/socket";
 
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import {
-  BackupStorageType,
-  FilesSelectorFilterTypes,
-} from "@docspace/shared/enums";
-import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "../../components/text";
+import { Checkbox } from "../../components/checkbox";
+import { BackupStorageType, FilesSelectorFilterTypes } from "../../enums";
+import RestoreBackupLoader from "../../skeletons/backup/RestoreBackup";
+import { RadioButtonGroup } from "../../components/radio-button-group";
 
 import { InputSize } from "@docspace/shared/components/text-input";
 import { FileInput } from "@docspace/shared/components/file-input";

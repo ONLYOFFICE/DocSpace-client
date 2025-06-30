@@ -74,7 +74,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: "yarn test:start",
+    command: "pnpm test:start",
     port: PORT,
     timeout: 1000 * 60 * 5,
   },

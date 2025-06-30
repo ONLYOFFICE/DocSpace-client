@@ -30,20 +30,17 @@ import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
-import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { toastr } from "@docspace/shared/components/toast";
-import { THIRD_PARTY_SERVICES_URL } from "@docspace/shared/constants";
-import type { ButtonSize } from "@docspace/shared/components/button";
-import type {
-  SelectedStorageType,
-  StorageRegionsType,
-} from "@docspace/shared/types";
+import { Text } from "../../../components/text";
+import { ComboBox } from "../../../components/combobox";
+import { DropDownItem } from "../../../components/drop-down-item";
+import { BackupStorageType, ThirdPartyStorages } from "../../../enums";
+import { getOptions } from "../../../utils/getThirdPartyStoragesOptions";
+import { getFromLocalStorage } from "../../../utils/getFromLocalStorage";
+import { IconButton } from "../../../components/icon-button";
+import { toastr } from "../../../components/toast";
+import { THIRD_PARTY_SERVICES_URL } from "../../../constants";
+import type { ButtonSize } from "../../../components/button";
+import type { SelectedStorageType, StorageRegionsType } from "../../../types";
 
 import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";
 import { RackspaceStorage } from "../storages/RackspaceStorage";

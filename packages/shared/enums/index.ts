@@ -418,6 +418,25 @@ export const enum PortalFeaturesLimitations {
 }
 
 /**
+ * Enum for payment method status.
+ * @readonly
+ */
+export const enum PaymentMethodStatus {
+  None = 0,
+  Set = 1,
+  Expired = 2,
+}
+
+/**
+ * Enum for quota state.
+ * @readonly
+ */
+export const enum QuotaState {
+  Active = 0,
+  Overdue = 1,
+}
+
+/**
  * Enum for notifications.
  * @readonly
  */

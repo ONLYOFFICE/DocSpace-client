@@ -70,16 +70,33 @@ beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
 
   workspaces = getWorkSpaces();
-  workspaces.push(path.resolve(BASE_DIR, "public/locales"));
+
+  const excludeDirs = [
+    ".nx",
+    "e2e",
+    ".yarn",
+    ".github",
+    ".vscode",
+    ".git",
+    "__mocks__",
+    "dist",
+    "test",
+    "tests",
+    ".next",
+    "campaigns",
+    "storybook-static",
+    "node_modules",
+    ".meta",
+  ];
 
   const translations = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         filePath.endsWith(".json") &&
-        filePath.includes(convertPathToOS("public/locales")),
+        filePath.includes(convertPathToOS("public/locales"))
     );
   });
 
@@ -93,12 +110,17 @@ beforeAll(() => {
 
       const jsonTranslation = JSON.parse(fileContent);
 
+      const fileName = path.basename(tPath);
+      const namespace = fileName.replace(".json", "");
+
       const translationFile = {
         path: tPath,
-        fileName: path.basename(tPath),
+        fileName,
+        namespace,
         translations: Object.entries(jsonTranslation).map(([key, value]) => ({
           key,
           value,
+          namespace,
         })),
         md5hash: hash,
         language: path.dirname(tPath).split(path.sep).pop(),
@@ -108,7 +130,7 @@ beforeAll(() => {
     } catch (ex) {
       parseJsonErrors.push({ path: tPath, error: ex });
       console.log(
-        `File path = ${tPath} failed to parse with error: ${ex.message}`,
+        `File path = ${tPath} failed to parse with error: ${ex.message}`
       );
     }
   }
@@ -119,7 +141,7 @@ beforeAll(() => {
   const javascripts = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    return getAllFiles(clientDir).filter(
+    return getAllFiles(clientDir, excludeDirs).filter(
       (filePath) =>
         filePath &&
         searchPattern.test(filePath) &&
@@ -130,7 +152,7 @@ beforeAll(() => {
   });
 
   console.log(
-    `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`,
+    `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`
   );
 
   const pattern1 =
@@ -141,7 +163,7 @@ beforeAll(() => {
 
   const regexp = new RegExp(
     `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})`,
-    "gm",
+    "gm"
   );
 
   const notTranslatedToastsRegex = new RegExp(
@@ -149,12 +171,12 @@ beforeAll(() => {
       "|(?<=toastr.error\\([\"'`])(.*)(?=[\"'`])" +
       "|(?<=toastr.success\\([\"'`])(.*)(?=[\"'`])" +
       "|(?<=toastr.warning\\([\"'`])(.*)(?=[\"'`])",
-    "gm",
+    "gm"
   );
 
   const notTranslatedPropsRegex = new RegExp(
     "<[\\w\\n][^>]* (title|placeholder|label|text)={?[\"'](.*)[\"']}?",
-    "gm",
+    "gm"
   );
 
   javascripts.forEach((filePath) => {
@@ -245,7 +267,7 @@ beforeAll(() => {
     }, []);
 
   console.log(
-    `Found moduleJsTranslatedFiles = ${moduleJsTranslatedFiles.length}.`,
+    `Found moduleJsTranslatedFiles = ${moduleJsTranslatedFiles.length}.`
   );
 
   moduleWorkspaces.forEach((wsPath) => {
@@ -256,6 +278,7 @@ beforeAll(() => {
 
     moduleFolders.push({
       path: wsPath,
+      isCommon: wsPath.includes("public/locales"),
       availableLanguages: t?.languages,
       appliedJsTranslationKeys: j?.translationKeys,
     });
@@ -266,8 +289,8 @@ beforeAll(() => {
   commonTranslations = translationFiles
     .filter((file) =>
       file.path.startsWith(
-        convertPathToOS(path.join(BASE_DIR, "public/locales")),
-      ),
+        convertPathToOS(path.join(BASE_DIR, "public/locales"))
+      )
     )
     .map((t) => ({
       path: t.path,
@@ -297,7 +320,7 @@ beforeAll(() => {
   });
 
   const expectedTotalKeysCount = groupedByLngArray.find(
-    (t) => t.language === "en",
+    (t) => t.language === "en"
   ).totalKeysCount;
 
   let i = 0;
@@ -315,13 +338,15 @@ beforeAll(() => {
     const translated =
       lng.totalKeysCount === expectedTotalKeysCount
         ? Math.round(
-            100 - ((lng.emptyKeysCount * 100) / expectedTotalKeysCount) * 10,
+            100 - ((lng.emptyKeysCount * 100) / expectedTotalKeysCount) * 10
           ) / 10
         : Math.round(
-            ((lng.totalKeysCount * 100) / expectedTotalKeysCount) * 10,
+            ((lng.totalKeysCount * 100) / expectedTotalKeysCount) * 10
           ) / 10;
 
-    message += `${++i}. Language '${lng.language}' translated by '${translated}%'\n`;
+    message += `${++i}. Language '${
+      lng.language
+    }' translated by '${translated}%'\n`;
   });
 
   console.log(message);
@@ -329,16 +354,22 @@ beforeAll(() => {
 
 describe("Locales Tests", () => {
   test("ParseJsonTest: Verify that there are no errors in parsing JSON files", () => {
-    const message = `File path = '${parseJsonErrors.map((e) => e.path).join(", ")}' failed to parse with error: '${parseJsonErrors.map((e) => e.error).join(", ")}'`;
+    const message = `File path = '${parseJsonErrors
+      .map((e) => e.path)
+      .join(", ")}' failed to parse with error: '${parseJsonErrors
+      .map((e) => e.error)
+      .join(", ")}'`;
     expect(parseJsonErrors.length, message).toBe(0);
   });
 
   test("SingleKeyFilesTest: Verify that there are no translation files in the project that contain only a single key for the English language.", () => {
     const singleKeyTranslationFiles = translationFiles.filter(
-      (t) => t.language === "en" && t.translations.length === 1,
+      (t) => t.language === "en" && t.translations.length === 1
     );
 
-    const message = `Translations files with single key:\r\n${singleKeyTranslationFiles.map((d) => `\r\nKey='${d.translations[0].key}':\r\n${d.path}'`).join("\r\n")}`;
+    const message = `Translations files with single key:\r\n${singleKeyTranslationFiles
+      .map((d) => `\r\nKey='${d.translations[0].key}':\r\n${d.path}'`)
+      .join("\r\n")}`;
 
     expect(singleKeyTranslationFiles.length, message).toBe(0);
   });
@@ -362,7 +393,9 @@ describe("Locales Tests", () => {
       .sort((a, b) => b.count - a.count)
       .map((grp) => ({ key: grp.key, value: grp.value, count: grp.count }));
 
-    const message = `\r\n${duplicatesArray.map((d) => JSON.stringify(d, null, 2)).join("\r\n")}`;
+    const message = `\r\n${duplicatesArray
+      .map((d) => JSON.stringify(d, null, 2))
+      .join("\r\n")}`;
 
     expect(duplicatesArray.length, message).toBe(0);
   });
@@ -380,11 +413,13 @@ describe("Locales Tests", () => {
       .filter((value, index, self) => self.indexOf(value) === index); // Distinct
 
     const notFoundJsKeys = allJsTranslationKeys.filter(
-      (k) => !allEnKeys.includes(k),
+      (k) => !allEnKeys.includes(k)
     );
 
     let i = 0;
-    const message = `Some i18n-keys do not exist in translations in 'en' language:\r\n\r\nKeys:\r\n\r\n${notFoundJsKeys.join(`\r\n${++i}`)}`;
+    const message = `Some i18n-keys do not exist in translations in 'en' language:\r\n\r\nKeys:\r\n\r\n${notFoundJsKeys.join(
+      `\r\n${++i}`
+    )}`;
 
     expect(notFoundJsKeys.length, message).toBe(0);
   });
@@ -405,10 +440,12 @@ describe("Locales Tests", () => {
       .sort();
 
     const notFoundi18nKeys = allEnKeys.filter(
-      (k) => !allJsTranslationKeys.includes(k),
+      (k) => !allJsTranslationKeys.includes(k)
     );
 
-    const message = `Some i18n-keys are not found in js \r\n\r\nKeys:\r\n\r\n${notFoundi18nKeys.join("\r\n")}`;
+    const message = `Some i18n-keys are not found in js \r\n\r\nKeys:\r\n\r\n${notFoundi18nKeys.join(
+      "\r\n"
+    )}`;
 
     expect(notFoundi18nKeys.length, message).toBe(0);
   });
@@ -428,7 +465,9 @@ describe("Locales Tests", () => {
 
     Object.keys(groupedToasts).forEach((key) => {
       const group = groupedToasts[key];
-      message += `${++i}. Path='${key}'\r\n\r\n${group.map((v) => v.value).join("\r\n")}\r\n\r\n`;
+      message += `${++i}. Path='${key}'\r\n\r\n${group
+        .map((v) => v.value)
+        .join("\r\n")}\r\n\r\n`;
     });
 
     expect(notTranslatedToasts.length, message).toBe(0);
@@ -449,7 +488,9 @@ describe("Locales Tests", () => {
 
     Object.keys(groupedProps).forEach((key) => {
       const group = groupedProps[key];
-      message += `${++i}. Path='${key}'\r\n\r\n${group.map((v) => v.value).join("\r\n")}\r\n\r\n`;
+      message += `${++i}. Path='${key}'\r\n\r\n${group
+        .map((v) => v.value)
+        .join("\r\n")}\r\n\r\n`;
     });
 
     expect(notTranslatedProps.length, message).toBe(0);
@@ -465,18 +506,18 @@ describe("Locales Tests", () => {
       }
       acc[t.language].push(
         ...t.translations.map((k) => ({
-          key: `${t.fileName}=>${k.key}`,
+          key: `${t.namespace}:${k.key}`,
           value: k.value,
           variables: [...k.value.matchAll(regVariables)].map((m) =>
-            m[1]?.trim().replace(", lowercase", ""),
+            m[1]?.trim().replace(", lowercase", "")
           ),
-        })),
+        }))
       );
       return acc;
     }, {});
 
     const enWithVariables = groupedByLng["en"].filter(
-      (t) => t.variables.length > 0,
+      (t) => t.variables.length > 0
     );
 
     const otherLanguagesWithVariables = Object.keys(groupedByLng)
@@ -492,7 +533,7 @@ describe("Locales Tests", () => {
     enWithVariables.forEach((enKeyWithVariables) => {
       otherLanguagesWithVariables.forEach((lng) => {
         const lngKey = lng.translationsWithVariables.find(
-          (t) => t.key === enKeyWithVariables.key,
+          (t) => t.key === enKeyWithVariables.key
         );
 
         if (!lngKey) {
@@ -502,7 +543,9 @@ describe("Locales Tests", () => {
         if (enKeyWithVariables.variables.length !== lngKey.variables.length) {
           // wrong
           message +=
-            `${++i}. lng='${lng.language}' key='${lngKey.key}' has less variables than 'en' language have ` +
+            `${++i}. lng='${lng.language}' key='${
+              lngKey.key
+            }' has less variables than 'en' language have ` +
             `(en=${enKeyWithVariables.variables.length}|${lng.language}=${lngKey.variables.length})\r\n` +
             `'en': '${enKeyWithVariables.value}'\r\n'${lng.language}': '${lngKey.value}'\r\n\r\n`;
           errorsCount++;
@@ -510,14 +553,20 @@ describe("Locales Tests", () => {
 
         if (
           !lngKey.variables.every((v) =>
-            enKeyWithVariables.variables.includes(v),
+            enKeyWithVariables.variables.includes(v)
           )
         ) {
           // wrong
           message +=
-            `${++i}. lng='${lng.language}' key='${lngKey.key}' has not equals variables of 'en' language have \r\n` +
-            `'${enKeyWithVariables.value}' Variables=[${enKeyWithVariables.variables.join(",")}]\r\n` +
-            `'${lngKey.value}' Variables=[${lngKey.variables.join(",")}]\r\n\r\n`;
+            `${++i}. lng='${lng.language}' key='${
+              lngKey.key
+            }' has not equals variables of 'en' language have \r\n` +
+            `'${
+              enKeyWithVariables.value
+            }' Variables=[${enKeyWithVariables.variables.join(",")}]\r\n` +
+            `'${lngKey.value}' Variables=[${lngKey.variables.join(
+              ","
+            )}]\r\n\r\n`;
           errorsCount++;
         }
       });
@@ -537,12 +586,12 @@ describe("Locales Tests", () => {
       }
       acc[t.language].push(
         ...t.translations.map((k) => ({
-          key: k.key,
+          key: `${t.namespace}:${k.key}`,
           value: k.value,
           tags: [...k.value.matchAll(regTags)].map((m) =>
-            m[0].trim().replace(" ", ""),
+            m[0].trim().replace(" ", "")
           ),
-        })),
+        }))
       );
       return acc;
     }, {});
@@ -562,7 +611,7 @@ describe("Locales Tests", () => {
     enWithTags.forEach((enKeyWithTags) => {
       otherLanguagesWithTags.forEach((lng) => {
         const lngKey = lng.translationsWithTags.find(
-          (t) => t.key === enKeyWithTags.key,
+          (t) => t.key === enKeyWithTags.key
         );
 
         if (!lngKey) {
@@ -572,7 +621,9 @@ describe("Locales Tests", () => {
         if (enKeyWithTags.tags.length !== lngKey.tags.length) {
           // wrong
           message +=
-            `${++i}. lng='${lng.language}' key='${lngKey.key}' has less tags than 'en' language have ` +
+            `${++i}. lng='${lng.language}' key='${
+              lngKey.key
+            }' has less tags than 'en' language have ` +
             `(en=${enKeyWithTags.tags.length}|${lng.language}=${lngKey.tags.length})\r\n` +
             `'en': '${enKeyWithTags.value}'\r\n'${lng.language}': '${lngKey.value}'\r\n\r\n`;
           errorsCount++;
@@ -581,8 +632,12 @@ describe("Locales Tests", () => {
         if (!lngKey.tags.every((v) => enKeyWithTags.tags.includes(v))) {
           // wrong
           message +=
-            `${++i}. lng='${lng.language}' key='${lngKey.key}' has not equals tags of 'en' language have \r\n` +
-            `'${enKeyWithTags.value}' Tags=[${enKeyWithTags.tags.join(",")}]\r\n` +
+            `${++i}. lng='${lng.language}' key='${
+              lngKey.key
+            }' has not equals tags of 'en' language have \r\n` +
+            `'${enKeyWithTags.value}' Tags=[${enKeyWithTags.tags.join(
+              ","
+            )}]\r\n` +
             `'${lngKey.value}' Tags=[${lngKey.tags.join(",")}]\r\n\r\n`;
           errorsCount++;
         }
@@ -593,19 +648,21 @@ describe("Locales Tests", () => {
   });
 
   test("ForbiddenValueElementsTest: Verify that certain forbidden values are not present in the translation strings across different languages.", () => {
-    let message = `Next keys have forbidden values \`${forbiddenElements.join(",")}\`:\r\n\r\n`;
+    let message = `Next keys have forbidden values \`${forbiddenElements.join(
+      ","
+    )}\`:\r\n\r\n`;
 
     let exists = false;
     let i = 0;
 
     moduleFolders.forEach((module) => {
-      if (!module.availableLanguages) return;
+      if (!module.availableLanguages || module.isCommon) return;
 
       module.availableLanguages.forEach((lng) => {
-        const translationItems = lng.translations.filter((f) =>
-          forbiddenElements.some((elem) =>
-            f.value.toUpperCase().includes(elem),
-          ),
+        const translationItems = lng.translations
+        .filter((elem) => !skipForbiddenKeys.includes(elem.key))
+        .filter((f) =>
+          forbiddenElements.some((elem) => f.value.toUpperCase().includes(elem))
         );
 
         if (!translationItems.length) return;
@@ -613,42 +670,23 @@ describe("Locales Tests", () => {
         exists = true;
 
         message +=
-          `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
-          `\r\n\r\nKeys:\r\n\r\n`;
+          `${++i}. Language '${lng.language}' (Count: ${
+            translationItems.length
+          }). Path '${lng.path}' ` + `\r\n\r\nKeys:\r\n\r\n`;
 
         const keys = translationItems.map((t) => t.key);
 
         message += keys.join("\r\n") + "\r\n\r\n";
       });
-    });
-
-    commonTranslations.forEach((lng) => {
-      const translationItems = lng.translations
-        .filter((elem) => !skipForbiddenKeys.includes(elem.key))
-        .filter((f) =>
-          forbiddenElements.some((elem) =>
-            f.value.toUpperCase().includes(elem),
-          ),
-        );
-
-      if (!translationItems.length) return;
-
-      exists = true;
-
-      message +=
-        `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
-        `\r\n\r\nKeys:\r\n\r\n`;
-
-      const keys = translationItems.map((t) => t.key);
-
-      message += keys.join("\r\n") + "\r\n\r\n";
     });
 
     expect(exists, message).toBe(false);
   });
 
   test("ForbiddenKeysElementsTest: Verify that translation keys do not contain any forbidden elements in their names.", () => {
-    let message = `Next keys have forbidden elements in names \`${forbiddenElements.join(",")}\`:\r\n\r\n`;
+    let message = `Next keys have forbidden elements in names \`${forbiddenElements.join(
+      ","
+    )}\`:\r\n\r\n`;
 
     let exists = false;
     let i = 0;
@@ -658,7 +696,7 @@ describe("Locales Tests", () => {
 
       module.availableLanguages.forEach((lng) => {
         const translationItems = lng.translations.filter((f) =>
-          forbiddenElements.some((elem) => f.key.toUpperCase().includes(elem)),
+          forbiddenElements.some((elem) => f.key.toUpperCase().includes(elem))
         );
 
         if (!translationItems.length) return;
@@ -666,8 +704,9 @@ describe("Locales Tests", () => {
         exists = true;
 
         message +=
-          `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
-          `\r\n\r\nKeys:\r\n\r\n`;
+          `${++i}. Language '${lng.language}' (Count: ${
+            translationItems.length
+          }). Path '${lng.path}' ` + `\r\n\r\nKeys:\r\n\r\n`;
 
         const keys = translationItems.map((t) => t.key);
 
@@ -679,7 +718,7 @@ describe("Locales Tests", () => {
       const translationItems = lng.translations
         .filter((elem) => !skipForbiddenKeys.includes(elem.key))
         .filter((f) =>
-          forbiddenElements.some((elem) => f.key.toUpperCase().includes(elem)),
+          forbiddenElements.some((elem) => f.key.toUpperCase().includes(elem))
         );
 
       if (!translationItems.length) return;
@@ -687,8 +726,9 @@ describe("Locales Tests", () => {
       exists = true;
 
       message +=
-        `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
-        `\r\n\r\nKeys:\r\n\r\n`;
+        `${++i}. Language '${lng.language}' (Count: ${
+          translationItems.length
+        }). Path '${lng.path}' ` + `\r\n\r\nKeys:\r\n\r\n`;
 
       const keys = translationItems.map((t) => t.key);
 
@@ -715,8 +755,9 @@ describe("Locales Tests", () => {
         exists = true;
 
         message +=
-          `${++i}. Language '${lng.language}' (Count: ${emptyTranslationItems.length}). Path '${lng.path}' ` +
-          `Empty keys:\r\n\r\n`;
+          `${++i}. Language '${lng.language}' (Count: ${
+            emptyTranslationItems.length
+          }). Path '${lng.path}' ` + `Empty keys:\r\n\r\n`;
 
         const emptyKeys = emptyTranslationItems.map((t) => t.key);
 
@@ -732,8 +773,9 @@ describe("Locales Tests", () => {
       exists = true;
 
       message +=
-        `${++i}. Language '${lng.language}' (Count: ${emptyTranslationItems.length}). Path '${lng.path}' ` +
-        `Empty keys:\r\n\r\n`;
+        `${++i}. Language '${lng.language}' (Count: ${
+          emptyTranslationItems.length
+        }). Path '${lng.path}' ` + `Empty keys:\r\n\r\n`;
 
       const emptyKeys = emptyTranslationItems.map((t) => t.key);
 
@@ -749,12 +791,16 @@ describe("Locales Tests", () => {
     let exists = false;
     let i = 0;
 
-    const allEnKeys = translationFiles
-      .filter((file) => file.language === "en")
+    const allEnTranslations = translationFiles.filter(
+      (file) => file.language === "en"
+    );
+    const allEnKeys = allEnTranslations
       .flatMap((item) => item.translations)
-      .map((item) => item.key)
+      .map((item) => item.namespace + ":" + item.key)
       .filter((k) => !k.startsWith("Culture_"))
       .sort();
+
+    const movedKeys = [];
 
     moduleFolders.forEach((module) => {
       if (!module.availableLanguages) return;
@@ -762,30 +808,145 @@ describe("Locales Tests", () => {
       module.availableLanguages.forEach((lng) => {
         if (lng.language === "en") return;
 
-        const notFoundKeys = lng.translations
-          .filter((f) => f.key && !allEnKeys.includes(f.key))
-          .map((f) => f.key);
+        const notFoundKeys = lng.translations.filter(
+          (f) => f.key && !allEnKeys.includes(f.namespace + ":" + f.key)
+        );
 
         if (!notFoundKeys.length) return;
 
         exists = true;
 
         message +=
-          `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). Path '${lng.path}' ` +
-          `Keys:\r\n\r\n`;
+          `${++i}. Language '${lng.language}' (Count: ${
+            notFoundKeys.length
+          }). Path '${lng.path}' ` + `Keys:\r\n\r\n`;
 
-        message += notFoundKeys.join("\r\n") + "\r\n\r\n";
+        message +=
+          notFoundKeys.map((f) => f.namespace + ":" + f.key).join("\r\n") +
+          "\r\n\r\n";
+
+        // Add keys to movedKeys array with language information
+        movedKeys.push(
+          ...notFoundKeys.map((key) => ({
+            ...key,
+            language: lng.language,
+            path: lng.path,
+          }))
+        );
       });
     });
 
+    // Find keys from movedKeys in other namespaces and suggest correct namespace
+    if (movedKeys.length > 0) {
+      message += `\n\nAnalyzing ${movedKeys.length} missing translation keys for namespace corrections...\r\n\r\n`;
+
+      // Group English translation files by namespace
+      const enNamespaces = {};
+      allEnTranslations.forEach((file) => {
+        enNamespaces[file.namespace] = file.translations.map((t) => ({
+          key: t.key,
+          path: file.path,
+        }));
+      });
+
+      // Analysis results
+      const foundInOtherNamespace = [];
+      const notFoundAnywhere = [];
+
+      // Check each moved key
+      movedKeys.forEach((movedKey) => {
+        const keyToFind = movedKey.key;
+        let found = false;
+
+        // Check if key exists in any other namespace
+        for (const [namespace, keys] of Object.entries(enNamespaces)) {
+          if (namespace === movedKey.namespace) continue;
+
+          const foundKey = keys.find((t) => t.key === keyToFind);
+          if (foundKey) {
+            foundInOtherNamespace.push({
+              ...movedKey,
+              correctNamespace: namespace,
+              correctPath: path.dirname(path.dirname(foundKey.path)),
+              correctFileName: path.basename(foundKey.path),
+            });
+            found = true;
+            break;
+          }
+        }
+
+        // If not found in any namespace, suggest one based on key pattern
+        if (!found) {
+          notFoundAnywhere.push({
+            ...movedKey,
+          });
+        }
+      });
+
+      // Output analysis results
+      if (foundInOtherNamespace.length > 0) {
+        message += `\n${foundInOtherNamespace.length} keys found in other namespaces:\r\n\r\n`;
+        foundInOtherNamespace.forEach((key) => {
+          message += `  - Key: '${key.key}' in language '${key.language}'\r\n`;
+          message += `    Current namespace: '${key.namespace}', should be in: '${key.correctNamespace}'\r\n`;
+        });
+
+        if (process.env.FIX_MOVED_KEYS === "true") {
+          // Move keys from wrong namespaces to correctNamespace
+          foundInOtherNamespace.forEach((t) => {
+            const oldPath = t.path;
+            const newPath = path.join(
+              t.correctPath,
+              t.language,
+              t.correctFileName
+            );
+
+            const oldFile = fs.readFileSync(oldPath, "utf8");
+            const newFile = JSON.parse(fs.readFileSync(newPath, "utf8"));
+
+            const oldKeys = JSON.parse(oldFile);
+            if (!newFile[t.key] || newFile[t.key] !== oldKeys[t.key]) {
+              const newKeys = { ...newFile, [t.key]: oldKeys[t.key] };
+              fs.writeFileSync(newPath, JSON.stringify(newKeys, null, 2));
+            }
+
+            delete oldKeys[t.key];
+            fs.writeFileSync(oldPath, JSON.stringify(oldKeys, null, 2));
+          });
+        }
+      }
+
+      if (notFoundAnywhere.length > 0) {
+        message += `\n${notFoundAnywhere.length} keys not found in any English namespace:\r\n\r\n`;
+        notFoundAnywhere.forEach((key) => {
+          message += `  - Key: '${key.key}' in language '${key.language}'\r\n`;
+          message += `    Current namespace: '${key.namespace}' - need to remove\r\n`;
+        });
+
+        if (process.env.FIX_MOVED_KEYS === "true") {
+          // Remove keys from translation files
+          notFoundAnywhere.forEach((t) => {
+            const oldPath = t.path;
+            const oldFile = fs.readFileSync(oldPath, "utf8");
+            const oldKeys = JSON.parse(oldFile);
+            delete oldKeys[t.key];
+            fs.writeFileSync(oldPath, JSON.stringify(oldKeys, null, 2));
+          });
+        }
+      }
+    }
     expect(exists, message).toBe(false);
   });
 
   const skipBaseLanguagesTest = process.env.SKIP_BASE_LANGUAGES_TEST === "true";
   (skipBaseLanguagesTest ? test.skip : test)(
-    `NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(",")}) are properly translated.`,
+    `NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(
+      ","
+    )}) are properly translated.`,
     () => {
-      let message = `Next keys are not translated in base languages (${BASE_LANGUAGES.join(",")}):\r\n\r\n`;
+      let message = `Next keys are not translated in base languages (${BASE_LANGUAGES.join(
+        ","
+      )}):\r\n\r\n`;
 
       let exists = false;
       let i = 0;
@@ -795,8 +956,8 @@ describe("Locales Tests", () => {
       const allEnKeys = enKeys
         .flatMap((item) =>
           item.translations.map((t) => {
-            return item.fileName + " " + t.key;
-          }),
+            return `${item.namespace}:${t.key}`;
+          })
         )
         .sort();
 
@@ -804,7 +965,7 @@ describe("Locales Tests", () => {
 
       for (const lng of BASE_LANGUAGES) {
         const lngKeys = translationFiles.filter(
-          (file) => file.language === lng,
+          (file) => file.language === lng
         );
 
         const keys = lngKeys
@@ -812,8 +973,8 @@ describe("Locales Tests", () => {
             item.translations
               .filter((f) => f.value !== "")
               .map((t) => {
-                return item.fileName + " " + t.key;
-              }),
+                return `${item.namespace}:${t.key}`;
+              })
           )
           .sort();
 
@@ -828,14 +989,15 @@ describe("Locales Tests", () => {
         exists = true;
 
         message +=
-          `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). ` +
-          `Keys:\r\n\r\n`;
+          `${++i}. Language '${lng.language}' (Count: ${
+            notFoundKeys.length
+          }). ` + `Keys:\r\n\r\n`;
 
         message += notFoundKeys.join("\r\n") + "\r\n\r\n";
       }
 
       expect(exists, message).toBe(false);
-    },
+    }
   );
 
   test("IncorrectNamespaceUsageTest: Verify that translation keys are used with their correct namespace", () => {
@@ -865,7 +1027,7 @@ describe("Locales Tests", () => {
           // Check if the key exists in other namespaces
           const foundInNamespaces = Object.entries(namespaceKeys)
             .filter(
-              ([ns, keys]) => ns !== namespace && keys.has(translationKey),
+              ([ns, keys]) => ns !== namespace && keys.has(translationKey)
             )
             .map(([ns]) => ns);
 
@@ -885,7 +1047,9 @@ describe("Locales Tests", () => {
       message += incorrectUsages
         .map(
           (usage) =>
-            `${i++}. File: ${usage.file}\n   Key: ${usage.key}\n   Correct namespace(s): ${usage.correctNamespaces.join(", ")}\n`,
+            `${i++}. File: ${usage.file}\n   Key: ${
+              usage.key
+            }\n   Correct namespace(s): ${usage.correctNamespaces.join(", ")}\n`
         )
         .join("\n");
 

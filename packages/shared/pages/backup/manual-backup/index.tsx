@@ -30,28 +30,28 @@ import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { startBackup } from "@docspace/shared/api/portal";
-import { RadioButton } from "@docspace/shared/components/radio-button";
-import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "../../components/text";
+import { Button } from "../../components/button";
+import { Link, LinkTarget } from "../../components/link";
+import { startBackup } from "../../api/portal";
+import { RadioButton } from "../../components/radio-button";
+import { toastr } from "../../components/toast";
 import {
   BackupStorageLocalKey,
   BackupStorageType,
   FolderType,
-} from "@docspace/shared/enums";
-import StatusMessage from "@docspace/shared/components/status-message";
+} from "../../enums";
+import StatusMessage from "../../components/status-message";
 import SocketHelper, {
   SocketEvents,
   TSocketListener,
-} from "@docspace/shared/utils/socket";
-import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
-import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
-import { getBackupProgressInfo } from "@docspace/shared/utils/common";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+} from "../../utils/socket";
+import { OPERATIONS_NAME } from "../../constants";
+import OperationsProgressButton from "../../components/operations-progress-button";
+import DataBackupLoader from "../../skeletons/backup/DataBackup";
+import { getBackupProgressInfo } from "../../utils/common";
+import { getFromLocalStorage } from "../../utils/getFromLocalStorage";
+import { useDidMount } from "../../hooks/useDidMount";
 
 import { ThirdPartyModule } from "./sub-components/ThirdPartyModule";
 import { RoomsModule } from "./sub-components/RoomsModule";

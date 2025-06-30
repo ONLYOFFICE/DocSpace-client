@@ -27,20 +27,17 @@
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
+import { TFunction } from "i18next";
 import { Trans } from "react-i18next";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
-import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { RadioButton } from "@docspace/shared/components/radio-button";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { Text } from "../text";
+import { Checkbox } from "../checkbox";
+import { ComboBox, TOption } from "../combobox";
+import { InputSize, InputType, TextInput } from "../text-input";
+import { HelpButton } from "../help-button";
+import { RadioButton } from "../radio-button";
+import { useDidMount } from "../../hooks/useDidMount";
 
 import { StyledBody } from "./AmazonSettings.styled";
 import {
@@ -230,7 +227,7 @@ const AmazonSettings = ({
         offsetRight={0}
         iconName={HelpReactSvgUrl}
         tooltipContent={
-          <Trans t={t} i18nKey={`${helpInfo}`} ns="Common">
+          <Trans t={t as TFunction} i18nKey={`${helpInfo}`} ns="Common">
             {helpInfo}
           </Trans>
         }

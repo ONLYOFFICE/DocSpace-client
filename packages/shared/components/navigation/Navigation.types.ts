@@ -167,6 +167,7 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     addButtonRef?: RefObject<HTMLDivElement | null>;
     buttonRef?: React.RefObject<HTMLButtonElement>;
     isContextButtonVisible?: boolean;
+    isPlusButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &

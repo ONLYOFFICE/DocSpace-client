@@ -25,9 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 .amountContainer {
-  padding-bottom: 20px;
   margin-top: 20px;
-  border-bottom: 1px solid var(--aside-header-border-color);
 }
 
 .amountTitle {
@@ -46,4 +44,9 @@
 
 .storagePerMonth {
   margin-top: 4px;
+}
+
+.reccomendedAmount {
+  margin-top: 4px;
+  color: var(--payment-dialog-text);
 }

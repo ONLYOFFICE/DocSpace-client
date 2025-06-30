@@ -62,7 +62,7 @@ const ManualBackupWrapper = ({
   const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
     useState(true);
 
-  const timerId = useRef<number>();
+  const timerId = useRef<number>(null);
 
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -93,8 +93,10 @@ const ManualBackupWrapper = ({
       } catch (error) {
         toastr.error(error as Error);
       } finally {
-        window.clearTimeout(timerId.current);
-        timerId.current = undefined;
+        if (timerId.current) {
+          window.clearTimeout(timerId.current);
+          timerId.current = null;
+        }
 
         setIsInitialLoading(false);
         setIsEmptyContentBeforeLoader(false);
@@ -106,8 +108,10 @@ const ManualBackupWrapper = ({
 
   useEffect(() => {
     return () => {
-      clearTimeout(timerId.current);
-      timerId.current = undefined;
+      if (timerId.current) {
+        window.clearTimeout(timerId.current);
+        timerId.current = null;
+      }
       resetDownloadingProgress();
     };
   }, []);

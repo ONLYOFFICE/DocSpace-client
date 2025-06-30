@@ -35,8 +35,8 @@ import React, {
 import { useTheme } from "styled-components";
 import { isIOS } from "react-device-detect";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "../../button";
+import { Text } from "../../text";
 import { isMobile, classNames } from "../../../utils";
 import { AsideHeader } from "../../aside-header";
 

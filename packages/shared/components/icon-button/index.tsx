@@ -262,7 +262,9 @@ const IconButton = ({
           data-testid="icon-button-svg"
         />
       )}
-      <Tooltip float={isDesktop()} id={tooltipId} place="bottom" />
+      {tooltipId && tooltipContent ? (
+        <Tooltip float={isDesktop()} id={tooltipId} place="bottom" />
+      ) : null}
     </div>
   );
 };

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -34,20 +34,20 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
-import QuantityPicker from "@docspace/shared/components/quantity-picker";
-import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
-import { getConvertedSize } from "@docspace/shared/utils/common";
+import { calculateTotalPrice } from "@docspace/shared/utils/common";
 
+import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
-import TopUpModal from "../payments/Wallet/TopUpModal";
 import { useServicesActions } from "./hooks/useServicesActions";
 import { PaymentProvider } from "./context/PaymentContext";
 import ButtonContainer from "./sub-components/ButtonContainer";
-import { calculateTotalPrice } from "./hooks/resourceUtils";
+
 import StorageInformation from "./sub-components/StorageInformation";
 import WalletContainer from "./sub-components/WalletContainer";
 import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
+import TopUpContainer from "./sub-components/TopUpContainer";
+import SelectionAmount from "./sub-components/SelectionAmount";
 
 type StorageDialogProps = {
   visible: boolean;
@@ -55,151 +55,249 @@ type StorageDialogProps = {
   storagePriceIncrement?: number;
   hasStorageSubscription?: boolean;
   currentStoragePlanSize?: number;
-  fetchPortalTariff?: () => void;
-  fetchBalance?: () => void;
-  handleServicesQuotas?: () => void;
-  hasScheduledStorageChange?: boolean;
-  nextStoragePlanSize?: boolean;
-  storageSizeIncrement?: number;
+  fetchPortalTariff?: (
+    force?: boolean,
+  ) => Promise<{ walletQuotas: { quantity: number; nextQuantity?: number }[] }>;
+  fetchBalance?: () => Promise<void>;
+  isVisibleWalletSettings?: boolean;
+  setVisibleWalletSetting?: (value: boolean) => void;
+  partialUpgradeFee?: number;
+  featureCountData?: number;
+  setPartialUpgradeFee?: (value: number) => void;
+  hasScheduledStorageChange?: number;
+  previousValue?: number;
 };
+
+const MAX_ATTEMPTS = 30;
+const MIN_VALUE = 100;
 
 const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   visible,
   onClose,
   hasStorageSubscription,
-  currentStoragePlanSize,
+  currentStoragePlanSize = 0,
   fetchPortalTariff,
   fetchBalance,
-  hasScheduledStorageChange,
   storagePriceIncrement,
-  nextStoragePlanSize,
-  handleServicesQuotas,
-  storageSizeIncrement,
+  isVisibleWalletSettings,
+  setVisibleWalletSetting,
+  partialUpgradeFee,
+  featureCountData = 0,
+  setPartialUpgradeFee,
+  hasScheduledStorageChange,
+  previousValue = 0,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
-  const [amount, setAmount] = useState<number>(currentStoragePlanSize);
+  const [amount, setAmount] = useState<number>(
+    isVisibleWalletSettings
+      ? featureCountData
+      : previousValue || currentStoragePlanSize,
+  );
   const [isLoading, setIsLoading] = useState(false);
-  const [isVisibleContainer, setIsVisible] = useState(false);
+  const [isVisibleContainer, setIsVisibleContainer] = useState(
+    isVisibleWalletSettings,
+  );
   const [isRequestDialog, setIsRequestDialog] = useState(false);
 
   const {
-    maxStorageLimit,
     isExceedingPlanLimit,
     isCurrentPlan,
     calculateDifferenceBetweenPlan,
     isWalletBalanceInsufficient,
     isPlanUpgrade,
-    formatWalletCurrency,
+    buttonTitle,
+    isPlanDowngrade,
   } = useServicesActions();
-
-  const { isRTL } = useInterfaceDirection();
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
-  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement);
-  const insufficientFunds = isWalletBalanceInsufficient(totalPrice);
+  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement!);
+
   const isUpgradeStoragePlan = isPlanUpgrade(amount);
+  const isDowngradeStoragePlan = isPlanDowngrade(amount);
+  const newStorageSizeOnUpgrade =
+    isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
-  const handleStoragePlanChange = async (isCancellation = false) => {
-    const timerId = setTimeout(() => {
-      setIsLoading(true);
-    }, 200);
+  const isPaymentBlockedByBalance = newStorageSizeOnUpgrade
+    ? isWalletBalanceInsufficient(partialUpgradeFee!)
+    : isWalletBalanceInsufficient(totalPrice);
 
-    const difference = calculateDifferenceBetweenPlan(amount);
-    const productType = isUpgradeStoragePlan && !isCancellation ? 1 : 0;
-    const quantity = isUpgradeStoragePlan ? difference : amount;
-    const value = isCancellation ? null : quantity;
+  const buttonMainTitle = buttonTitle(amount);
+  const isPaymentBlocked =
+    !hasScheduledStorageChange && amount < MIN_VALUE && amount !== 0;
 
-    try {
-      const res = await updateWalletPayment(value, productType);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const isWaitingRef = useRef(false);
 
-      if (res === false) {
-        toastr.error(t("Common:UnexpectedError"));
+  const amountRef = useRef(amount);
+  useEffect(() => {
+    amountRef.current = amount;
+  }, [amount]);
 
-        clearTimeout(timerId);
-        setIsLoading(false);
-
-        return;
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
+      setPartialUpgradeFee!(0);
+    };
+  }, []);
 
-      const requests = [fetchPortalTariff!(), handleServicesQuotas()!];
+  const onCloseDialog = useCallback(() => {
+    onClose();
+  }, []);
 
-      if (!isCancellation) requests.push(fetchBalance!());
+  const resetIntervalSuccess = async (isCancellation: boolean) => {
+    if (isUpgradeStoragePlan) onCloseDialog();
 
-      await Promise.all(requests);
+    if (isCancellation || !isUpgradeStoragePlan)
+      setAmount(currentStoragePlanSize!);
 
-      if (value === 0) {
-        setAmount(currentStoragePlanSize);
-      }
-      if (isCancellation) {
-        setAmount(currentStoragePlanSize);
-
-        fetchBalance!();
-      }
-    } catch (e) {
-      const errorMessage = e instanceof Error ? e.message : String(e);
-      toastr.error(errorMessage);
+    if (intervalRef.current) {
+      toastr.success(t("StorageCapacityUpdated"));
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
 
-    clearTimeout(timerId);
+    if (localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== null) {
+      localStorage.removeItem(STORAGE_TARIFF_DEACTIVATED);
+    }
+
     setIsLoading(false);
   };
 
-  const onBuy = () => handleStoragePlanChange();
-  const onCancelChange = () => handleStoragePlanChange(true);
+  const isUpdatedTariff = (
+    walletQuotas: { quantity: number; nextQuantity?: number }[],
+    isCancellation: boolean,
+  ) => {
+    const walletQuantity =
+      isUpgradeStoragePlan || isCancellation
+        ? walletQuotas[0]?.quantity
+        : walletQuotas[0]?.nextQuantity;
 
-  const onSendRequest = () => {
-    setIsRequestDialog(true);
+    const updated = isCancellation
+      ? !walletQuotas[0]?.nextQuantity
+      : walletQuantity === amountRef.current;
+
+    return updated;
   };
+
+  const waitingForTariff = useCallback(
+    (isCancellation: boolean) => {
+      isWaitingRef.current = false;
+      let requestsCount = 0;
+
+      intervalRef.current = setInterval(async () => {
+        try {
+          if (requestsCount === MAX_ATTEMPTS) {
+            setIsLoading(false);
+            toastr.error(t("ErrorNotification"));
+            clearInterval(intervalRef.current!);
+            intervalRef.current = null;
+            return;
+          }
+
+          requestsCount++;
+
+          if (isWaitingRef.current) return;
+          isWaitingRef.current = true;
+
+          const { walletQuotas } = await fetchPortalTariff!(true);
+
+          if (isUpdatedTariff(walletQuotas, isCancellation)) {
+            resetIntervalSuccess(isCancellation);
+          }
+        } catch (e) {
+          setIsLoading(false);
+          toastr.error(e as unknown as string);
+          clearInterval(intervalRef.current!);
+          intervalRef.current = null;
+        } finally {
+          isWaitingRef.current = false;
+        }
+      }, 2000);
+    },
+    [isUpgradeStoragePlan],
+  );
+
+  const handleStoragePlanChange = useCallback(
+    async (isCancellation: boolean = false) => {
+      if (isLoading) return;
+
+      setIsLoading(true);
+
+      const amountValue = amountRef.current;
+      const difference = calculateDifferenceBetweenPlan(amountValue);
+      const productType = isUpgradeStoragePlan && !isCancellation ? 1 : 0;
+      const quantity = isUpgradeStoragePlan ? difference : amountValue;
+      const value = isCancellation ? null : quantity;
+
+      try {
+        const res = await updateWalletPayment(value, productType);
+
+        if (res === false) {
+          throw new Error(t("Common:UnexpectedError"));
+        }
+
+        if (isUpgradeStoragePlan) fetchBalance!();
+        const { walletQuotas } = await fetchPortalTariff!(true);
+
+        if (isUpdatedTariff(walletQuotas, isCancellation)) {
+          resetIntervalSuccess(isCancellation);
+        } else {
+          waitingForTariff(isCancellation);
+        }
+      } catch (e) {
+        toastr.error(e as Error);
+        setIsLoading(false);
+      }
+    },
+    [isLoading, isUpgradeStoragePlan],
+  );
+
+  const onBuy = useCallback(
+    () => handleStoragePlanChange(),
+    [handleStoragePlanChange],
+  );
+
+  const onCancelChange = useCallback(
+    () => handleStoragePlanChange(true),
+    [handleStoragePlanChange],
+  );
+
+  const onSendRequest = useCallback(() => {
+    setIsRequestDialog(true);
+  }, []);
+
+  const onTopUpClick = useCallback(() => {
+    setIsVisibleContainer(true);
+  }, []);
 
   const onChangeNumber = (value: number) => {
     setAmount(value);
   };
 
+  const onCloseTopUpModal = () => {
+    setIsVisibleContainer(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting!(false);
+  };
+
   const container = isVisibleContainer ? (
-    <TopUpModal
-      visible={isVisibleContainer}
-      onClose={() => setIsVisible(false)}
-      headerProps={{
-        isBackButton: true,
-        onBackClick: () => setIsVisible(false),
-        onCloseClick: () => setIsVisible(false),
-      }}
+    <TopUpContainer
+      isVisibleContainer={isVisibleContainer}
+      onCloseTopUpModal={onCloseTopUpModal}
     />
   ) : null;
-
-  const amountTabs = () => {
-    const amounts = [100, 200, 500, 800, 1024];
-    return amounts.map((item) => {
-      const name =
-        item > 800
-          ? `1 ${t("Common:Terabyte")}`
-          : `${item} ${t("Common:Gigabyte")}`;
-      return { value: item, name };
-    });
-  };
 
   if (isRequestDialog) {
     return (
       <SalesDepartmentRequestDialog
         visible={isRequestDialog}
         onClose={() => setIsRequestDialog(false)}
+        sendPaymentRequest={undefined}
       />
     );
   }
-
-  const getDirectionalText = (from, to) => {
-    return isRTL ? `${from} ← ${to}` : `${from} → ${to}`;
-  };
-
-  const disableValueProps = hasScheduledStorageChange
-    ? {
-        disableValue: getDirectionalText(
-          currentStoragePlanSize,
-          nextStoragePlanSize,
-        ),
-      }
-    : {};
 
   return (
     <PaymentProvider>
@@ -208,6 +306,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         onClose={onClose}
         displayType={ModalDialogType.aside}
         containerVisible={isVisibleContainer}
+        withBodyScroll
       >
         <ModalDialog.Container>{container}</ModalDialog.Container>
         <ModalDialog.Header>{t("DiskStorage")}</ModalDialog.Header>
@@ -215,27 +314,16 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           <div className={styles.dialogBody}>
             <StorageInformation />
 
-            <QuantityPicker
-              className="select-users-count-container"
-              value={amount}
-              minValue={0}
-              maxValue={maxStorageLimit}
-              step={1}
-              title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
-              showPlusSign
-              onChange={onChangeNumber}
-              isDisabled={hasScheduledStorageChange || isLoading}
-              items={amountTabs()}
-              withoutContorls={hasScheduledStorageChange}
-              underContorlsTitle={t("PerStorage", {
-                currency: formatWalletCurrency(storagePriceIncrement),
-                amount: getConvertedSize(t, storageSizeIncrement || 0),
-              })}
-              {...disableValueProps}
-              isLarge
+            <SelectionAmount
+              amount={amount}
+              onChangeNumber={onChangeNumber}
+              isLoading={isLoading}
+              isPaymentBlockedByBalance={isPaymentBlockedByBalance}
+              totalPrice={totalPrice}
+              newStorageSizeOnUpgrade={newStorageSizeOnUpgrade}
             />
 
-            {amount || hasStorageSubscription ? (
+            {!isPaymentBlocked && (amount || hasStorageSubscription) ? (
               <div className={styles.totalContainer}>
                 <StorageSummary
                   amount={amount}
@@ -248,27 +336,31 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               </div>
             ) : null}
 
-            {amount || hasStorageSubscription ? (
+            {!isPaymentBlocked && (amount || hasStorageSubscription) ? (
               <WalletContainer
-                onTopUp={() => setIsVisible(true)}
-                insufficientFunds={insufficientFunds}
+                onTopUp={onTopUpClick}
+                isPaymentBlockedByBalance={isPaymentBlockedByBalance}
                 isExceedingStorageLimit={isExceedingStorageLimit}
-                isUpgradeStoragePlan={isUpgradeStoragePlan}
+                isCurrentStoragePlan={isCurrentStoragePlan}
+                isDowngradeStoragePlan={isDowngradeStoragePlan}
+                isLoading={isLoading}
               />
             ) : null}
           </div>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <ButtonContainer
-            amount={amount}
+            title={buttonMainTitle}
             isCurrentStoragePlan={isCurrentStoragePlan}
-            isUpgradeStoragePlan={isUpgradeStoragePlan}
-            insufficientFunds={insufficientFunds}
             isExceedingStorageLimit={isExceedingStorageLimit}
-            onClose={onClose}
+            onClose={onCloseDialog}
             isLoading={isLoading}
             onBuy={onBuy}
             onSendRequest={onSendRequest}
+            isNullAmount={amount === 0}
+            isPaymentBlockedByBalance={isPaymentBlockedByBalance}
+            isDowngradeStoragePlan={isDowngradeStoragePlan}
+            isPaymentBlocked={isPaymentBlocked}
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -280,29 +372,32 @@ export default inject(
   ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
     const {
       fetchPortalTariff,
-      hasScheduledStorageChange,
       hasStorageSubscription,
       currentStoragePlanSize,
-      nextStoragePlanSize,
+      hasScheduledStorageChange,
     } = currentTariffStatusStore;
-    const { fetchBalance, walletBalance } = paymentStore;
+
+    const { fetchBalance, storagePriceIncrement } = paymentStore;
     const {
-      storageSizeIncrement,
-      storagePriceIncrement,
-      handleServicesQuotas,
+      isVisibleWalletSettings,
+      setVisibleWalletSetting,
+      partialUpgradeFee,
+      featureCountData,
+      setPartialUpgradeFee,
     } = servicesStore;
 
     return {
-      storageSizeIncrement,
       hasStorageSubscription,
       currentStoragePlanSize,
       fetchPortalTariff,
       fetchBalance,
-      walletBalance,
-      hasScheduledStorageChange,
       storagePriceIncrement,
-      nextStoragePlanSize,
-      handleServicesQuotas,
+      setVisibleWalletSetting,
+      isVisibleWalletSettings,
+      partialUpgradeFee,
+      featureCountData,
+      setPartialUpgradeFee,
+      hasScheduledStorageChange,
     };
   },
 )(observer(StoragePlanUpgrade));

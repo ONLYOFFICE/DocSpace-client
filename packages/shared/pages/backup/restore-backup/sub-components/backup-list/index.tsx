@@ -29,27 +29,27 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "../../../../utils/socket";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Link } from "@docspace/shared/components/link";
+} from "../../../../components/modal-dialog";
+import { Text } from "../../../../components/text";
+import { Button, ButtonSize } from "../../../../components/button";
+import { Link } from "../../../../components/link";
 import {
   deleteBackup,
   deleteBackupHistory,
   getBackupHistory,
   startRestore,
-} from "@docspace/shared/api/portal";
-import { toastr } from "@docspace/shared/components/toast";
-import ListLoader from "@docspace/shared/skeletons/list";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { isManagement } from "@docspace/shared/utils/common";
+} from "../../../../api/portal";
+import { toastr } from "../../../../components/toast";
+import ListLoader from "../../../../skeletons/list";
+import { Checkbox } from "../../../../components/checkbox";
+import { HelpButton } from "../../../../components/help-button";
+import { isManagement } from "../../../../utils/common";
 
-import { TenantStatus } from "@docspace/shared/enums";
+import { TenantStatus } from "../../../../enums";
 
 import BackupListBody from "./BackupListBody";
 import type {

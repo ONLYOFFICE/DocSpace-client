@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import {
   AmazonSettings,
   formNames,
-} from "@docspace/shared/components/amazon-settings";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+} from "../../../../../components/amazon-settings";
+import { useDidMount } from "../../../../../hooks/useDidMount";
 import type { AmazonStorageProps } from "./AmazonStorage.types";
 
 const AmazonStorage = ({

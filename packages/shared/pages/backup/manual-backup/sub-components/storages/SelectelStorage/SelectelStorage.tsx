@@ -27,18 +27,16 @@
 import React from "react";
 import classNames from "classnames";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import {
-  BackupStorageLocalKey,
-  ThirdPartyStorages,
-} from "@docspace/shared/enums";
+import { Button, ButtonSize } from "../../../../components/button";
+import { BackupStorageLocalKey, ThirdPartyStorages } from "../../../../enums";
+
 import {
   SelectelSettings,
   formNames,
-} from "@docspace/shared/components/selectel-settings";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
+} from "../../../../components/selectel-settings";
+import { useDidMount } from "../../../../hooks/useDidMount";
+import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
+import type { SelectedStorageType, TTranslation } from "../../../../types";
 
 import styles from "../../../ManualBackup.module.scss";
 

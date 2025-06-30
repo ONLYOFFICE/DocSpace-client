@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TError } from "../../utils/axiosClient";
-import type { TariffState, BackupStorageType } from "../../enums";
+import type { TariffState, BackupStorageType, QuotaState } from "../../enums";
 
 export type TQuotas = {
   id: number;
@@ -33,6 +33,7 @@ export type TQuotas = {
   wallet?: boolean;
   dueDate?: string;
   nextQuantity?: number;
+  state?: QuotaState;
 };
 
 export type TPortalTariff = {
@@ -62,6 +63,7 @@ export type TBasePaymentFeature = {
 
 export type TStringPaymentFeature = TBasePaymentFeature & {
   title: string;
+  value?: number;
 };
 
 export type TNumericPaymentFeature = TBasePaymentFeature & {

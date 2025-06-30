@@ -61,7 +61,6 @@ const TextAreaGroup = ({
           tag=""
           as="p"
           color=""
-          textAlign=""
         >
           {label}
         </Text>

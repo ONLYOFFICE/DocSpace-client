@@ -116,6 +116,7 @@ describe("ErrorBoundary", () => {
     isRoomAdmin: false,
     mobilePhoneActivationStatus: 0,
     hasAvatar: false,
+    isAnonim: false,
   };
 
   const mockFirebaseHelper = new MockFirebaseHelper();

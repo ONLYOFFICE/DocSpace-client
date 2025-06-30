@@ -115,7 +115,7 @@ const Wallet = (props: WalletProps) => {
 
   const onClose = () => {
     setVisible(false);
-    if (isVisibleWalletSettings) setVisibleWalletSetting(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting?.(false);
   };
 
   const onOpen = () => {
@@ -170,7 +170,18 @@ const Wallet = (props: WalletProps) => {
       <Text className={styles.walletDescription}>
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {isCardLinkedToPortal ? <PayerInformation /> : null}
+      {isCardLinkedToPortal ? (
+        <PayerInformation
+          style={undefined}
+          theme={undefined}
+          user={undefined}
+          accountLink={undefined}
+          payerInfo={undefined}
+          email={undefined}
+          isNotPaidPeriod={undefined}
+          isStripePortalAvailable={undefined}
+        />
+      ) : null}
 
       <div className={styles.balanceWrapper}>
         <div className={styles.headerContainer}>
@@ -195,7 +206,7 @@ const Wallet = (props: WalletProps) => {
         </div>
 
         <Button
-          size={ButtonSize.normal}
+          size={ButtonSize.small}
           primary
           label={t("TopUpBalance")}
           onClick={onOpen}

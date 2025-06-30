@@ -236,7 +236,9 @@ const InvitePanel = ({
     };
 
     const needRemoveGuests = !allowInvitingGuests
-      ? inviteItems.some((item) => item.userType === EmployeeType.Guest)
+      ? inviteItems.some(
+          (item) => item.userType === EmployeeType.Guest && !item.status,
+        )
       : false;
 
     setHasErrors(hasValidationErrors() || needRemoveGuests);

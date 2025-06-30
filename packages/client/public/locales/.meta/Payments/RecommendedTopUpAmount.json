@@ -1,0 +1,28 @@
+{
+  "key_path": "RecommendedTopUpAmount",
+  "content": "Recommended top-up amount: {{amount}}",
+  "content_en_sha1_hash": "3bc43aa133ab4cdef0136ff2d1be66e019573937",
+  "created_at": "2025-06-18T17:09:37.959Z",
+  "updated_at": "2025-06-18T17:09:54.941Z",
+  "comment": {
+    "text": "The translation key \"RecommendedTopUpAmount\" is used to display a recommended top-up amount for a wallet in a payment settings page. It appears as a labeled field and displays the recommended amount when available, providing context for users about how much they should top up their wallet balance.",
+    "is_auto": true,
+    "updated_at": "2025-06-18T17:09:54.941Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/Amount.tsx",
+      "line_number": 136,
+      "context": "isDisabled={isDisabled || !walletCustomerEmail}\n maxLength={MAX_LENGTH}\n />\n {reccomendedAmount ? (\n <Text className={styles.reccomendedAmount}>\n {t(\"RecommendedTopUpAmount\", { amount: reccomendedAmount })}\n </Text>\n ) : null}\n </div>\n {!walletCustomerEmail ? (\n <Tooltip",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

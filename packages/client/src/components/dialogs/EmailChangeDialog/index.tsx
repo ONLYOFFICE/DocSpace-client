@@ -33,7 +33,6 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput } from "@docspace/shared/components/email-input";
-import { InputType } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { Text } from "@docspace/shared/components/text";
 
@@ -86,7 +85,6 @@ const EmailChangeDialog = ({
             className="import-email-input"
             value={tempEmail}
             onChange={handleEmailChange}
-            type={InputType.email}
             onValidateInput={onValidateEmail}
             hasError={hasError}
             onBlur={checkEmailValidity}

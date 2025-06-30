@@ -122,7 +122,7 @@ export enum FeedActionKeys {
   RoomDenyDownloadDisabled = "RoomDenyDownloadDisabled",
   RoomArchived = "RoomArchived",
   RoomUnarchived = "RoomUnarchived",
-  RoomIndexExportLocation = "RoomIndexExportLocation",
+  RoomIndexExportSaved = "RoomIndexExportSaved",
   AddedRoomTags = "AddedRoomTags",
   DeletedRoomTags = "DeletedRoomTags",
   RoomLogoCreated = "RoomLogoCreated",
@@ -365,7 +365,7 @@ export const feedInfo = [
     actionType: `${FeedAction.Unarchived}`,
   },
   {
-    key: FeedActionKeys.RoomIndexExportLocation,
+    key: FeedActionKeys.RoomIndexExportSaved,
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Export}`,
   },

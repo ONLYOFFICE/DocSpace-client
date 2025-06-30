@@ -85,7 +85,7 @@ export const ScopeList = ({ selectedScopes, scopes, t }: TScopeListProps) => {
       {renderedScopes.map((scope) => (
         <div className={styles.scopeItem} key={`${scope}`}>
           <div className={styles.circle} />
-          {t(`Common:${scope}`)}
+          {scope}
         </div>
       ))}
     </div>

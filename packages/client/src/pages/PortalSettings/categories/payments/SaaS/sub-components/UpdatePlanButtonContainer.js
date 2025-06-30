@@ -40,6 +40,7 @@ import { updatePayment } from "@docspace/shared/api/portal";
 import { Text } from "@docspace/shared/components/text";
 
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
+import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";
 
 const StyledBody = styled.div`
   button {
@@ -75,9 +76,14 @@ const UpdatePlanButtonContainer = ({
   cardLinkedOnFreeTariff,
   tariffPlanTitle,
   totalPrice,
-  currencySymbol,
+  formatPaymentCurrency,
+  canDowngradeTariff,
+  walletCustomerStatusNotActive,
+  cardLinked,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisiblePaymentConfirm, setIsVisiblePaymentConfirm] = useState(false);
+  const [isVisibleDowngradePlanDialog, setIsVisibleDowngradePlanDialog] =
+    useState(false);
 
   const resetIntervalSuccess = () => {
     intervalId &&
@@ -132,19 +138,42 @@ const UpdatePlanButtonContainer = ({
     }, 2000);
   };
   const onClose = () => {
-    setIsVisible(false);
+    setIsVisiblePaymentConfirm(false);
+  };
+
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_self")
+      : toastr.error(t("Common:UnexpectedError"));
   };
 
   const onUpdateTariff = async () => {
     try {
       setIsLoading(true);
 
-      if (isVisible) onClose();
+      if (isVisiblePaymentConfirm) onClose();
 
       const res = await updatePayment(managersCount, isYearTariff);
 
       if (res === false) {
-        toastr.error(t("ErrorNotification"));
+        const errorText =
+          cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (
+            <>
+              {t("CardUnlinked")} <br />
+              {t("LinkNewCard")} {"  "}
+              <a
+                onClick={goLinkCard}
+                fontWeight={600}
+                style={{ textDecoration: "underline" }}
+              >
+                {t("AddPaymentMethod")}
+              </a>
+            </>
+          ) : (
+            t("ErrorNotification")
+          );
+
+        toastr.error(errorText);
 
         setIsLoading(false);
         clearTimeout(timerId);
@@ -154,13 +183,49 @@ const UpdatePlanButtonContainer = ({
       }
 
       previousManagersCount = maxCountManagersByQuota;
-      waitingForQuota();
+      const quotaRes = await api.portal.getPortalQuota(true);
+      const managersObject = quotaRes.features.find(
+        (obj) => obj.id === MANAGER,
+      );
+
+      if (managersObject?.value !== previousManagersCount) {
+        setPortalQuotaValue(quotaRes);
+        resetIntervalSuccess();
+      } else {
+        waitingForQuota();
+      }
     } catch (e) {
       toastr.error(t("ErrorNotification"));
       setIsLoading(false);
       clearTimeout(timerId);
       timerId = null;
     }
+  };
+
+  const isPassedByQuota = () => {
+    return isAlreadyPaid ? canDowngradeTariff : canPayTariff;
+  };
+
+  const onDowngradeTariff = () => {
+    if (isPassedByQuota()) {
+      onUpdateTariff();
+      return;
+    }
+
+    setIsVisibleDowngradePlanDialog(true);
+  };
+
+  const onOpenPaymentDialog = () => {
+    if (isPassedByQuota()) {
+      setIsVisiblePaymentConfirm(true);
+      return;
+    }
+
+    setIsVisibleDowngradePlanDialog(true);
+  };
+
+  const onCloseDowngradePlanDialog = () => {
+    setIsVisibleDowngradePlanDialog(false);
   };
 
   useEffect(() => {
@@ -217,7 +282,7 @@ const UpdatePlanButtonContainer = ({
           size="medium"
           primary
           isDisabled={isLoading || isDisabled}
-          onClick={() => setIsVisible(true)}
+          onClick={onOpenPaymentDialog}
           isLoading={isLoading}
         />
       );
@@ -225,7 +290,7 @@ const UpdatePlanButtonContainer = ({
 
     return isDowngradePlan ? (
       <DowngradePlanButtonContainer
-        onUpdateTariff={onUpdateTariff}
+        onDowngradeTariff={onDowngradeTariff}
         isDisabled={isDisabled}
         buttonLabel={t("DowngradeNow")}
       />
@@ -243,15 +308,23 @@ const UpdatePlanButtonContainer = ({
       />
     );
   };
+
   return (
     <StyledBody>
       {isAlreadyPaid || cardLinkedOnFreeTariff
         ? updatingCurrentTariffButton()
         : payTariffButton()}
 
-      {isVisible ? (
+      {isVisibleDowngradePlanDialog ? (
+        <ChangePricingPlanDialog
+          visible={isVisibleDowngradePlanDialog}
+          onClose={onCloseDowngradePlanDialog}
+        />
+      ) : null}
+
+      {isVisiblePaymentConfirm ? (
         <ModalDialog
-          visible={isVisible}
+          visible={isVisiblePaymentConfirm}
           onClose={onClose}
           displayType={ModalDialogType.modal}
         >
@@ -274,7 +347,7 @@ const UpdatePlanButtonContainer = ({
                   i18nKey="ChargeAmount"
                   ns="Payments"
                   t={t}
-                  values={{ currencySymbol, price: totalPrice }}
+                  values={{ price: formatPaymentCurrency(totalPrice) }}
                   components={{
                     1: <span style={{ fontWeight: 600 }} />,
                   }}
@@ -328,7 +401,7 @@ export default inject(
       currentTariffPlanTitle,
       isYearTariff,
     } = currentQuotaStore;
-    const { tariffPlanTitle, planCost } = paymentQuotasStore;
+    const { tariffPlanTitle } = paymentQuotasStore;
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
     const {
@@ -343,6 +416,10 @@ export default inject(
       canPayTariff,
       cardLinkedOnFreeTariff,
       totalPrice,
+      formatPaymentCurrency,
+      canDowngradeTariff,
+      walletCustomerStatusNotActive,
+      cardLinked,
     } = paymentStore;
 
     return {
@@ -363,8 +440,11 @@ export default inject(
       isYearTariff,
       cardLinkedOnFreeTariff,
       tariffPlanTitle,
-      currencySymbol: planCost.currencySymbol,
+      formatPaymentCurrency,
       totalPrice,
+      canDowngradeTariff,
+      walletCustomerStatusNotActive,
+      cardLinked,
     };
   },
 )(observer(UpdatePlanButtonContainer));

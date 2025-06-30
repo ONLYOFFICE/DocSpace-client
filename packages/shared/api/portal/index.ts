@@ -576,7 +576,6 @@ export async function getLicenseQuota() {
     method: "get",
     url: "/portal/licensequota",
   };
-  console.log("REQ", options);
   const res = (await request(options)) as TLicenseQuota;
   return res;
 }

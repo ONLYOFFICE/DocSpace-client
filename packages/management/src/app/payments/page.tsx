@@ -39,21 +39,34 @@ import {
 import PaymentsPage from "./page.client";
 
 async function Page() {
-  const [settings, quota, portalTariff, paymentSettings, licenseQuota, filesSettings] =
-    await Promise.all([
-      getSettings(),
-      getQuota(),
-      getPortalTariff(),
-      getPaymentSettings(),
-      getLicenseQuota(),
-      getSettingsFiles(),
-    ]);
+  const [
+    settings,
+    quota,
+    portalTariff,
+    paymentSettings,
+    licenseQuota,
+    filesSettings,
+  ] = await Promise.all([
+    getSettings(),
+    getQuota(),
+    getPortalTariff(),
+    getPaymentSettings(),
+    getLicenseQuota(),
+    getSettingsFiles(),
+  ]);
 
   const baseUrl = await getBaseUrl();
 
   if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
 
-  if (!settings || !quota || !portalTariff || !paymentSettings || !licenseQuota || !filesSettings)
+  if (
+    !settings ||
+    !quota ||
+    !portalTariff ||
+    !paymentSettings ||
+    !licenseQuota ||
+    !filesSettings
+  )
     redirect(`${baseUrl}/login`);
 
   const { logoText, externalResources } = settings;

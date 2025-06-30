@@ -614,6 +614,12 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get walletHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.configuringsettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.configuringsettings}`
+      : this.helpCenterDomain;
+  }
+
   get webhooksGuideUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.administrationguides
       ? `${this.helpCenterDomain}${this.helpCenterEntries.administrationguides}`

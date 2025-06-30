@@ -1,20 +1,20 @@
 {
-  "key_path": "NewMasterForm",
-  "content": "New form template",
-  "content_en_sha1_hash": "dd33fb07a6cc6e1d3265f06284317a86321d5d53",
-  "created_at": "2025-05-19T21:30:46.754Z",
-  "updated_at": "2025-06-18T17:11:42.549Z",
+  "key_path": "StorageTariffDeactivated",
+  "content": "Your additional storage subscription has been deactivated due to non-payment",
+  "content_en_sha1_hash": "d95e5887fc80daff26ead869b2eb0182bf416e2c",
+  "created_at": "2025-06-24T16:31:06.881Z",
+  "updated_at": "2025-06-30T12:20:31.268Z",
   "comment": {
-    "text": "NewMasterForm is used as a label for creating a new master form in certain file types. It appears on an editor interface likely used to create or edit documents.",
+    "text": "This translation key is used for displaying a message indicating that an additional storage subscription has been deactivated due to non-payment. It appears in a modal dialog, informing users of the reason behind their subscription deactivation. The text \"Your additional storage subscription has been deactivated\" should match the provided English content and usage context.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:22.784Z"
+    "updated_at": "2025-06-24T16:31:52.885Z"
   },
   "usage": [
     {
-      "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 332,
-      "context": "break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"docxf\":\n fileName = t(\"Common:NewMasterForm\");\n break;\n default:\n break;\n }",
-      "module": "/packages/doceditor"
+      "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
+      "line_number": 105,
+      "context": "<Text fontSize=\"21px\" isBold>\n {t(\"Common:Warning\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>{t(\"StorageTariffDeactivated\")}</Text>\n <br />\n <Text as=\"span\">\n <Trans\n t={t}\n ns=\"Payments\"",
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"قالب نموذج جديد\" is a literal translation but not the most natural or idiomatic way to express \"New form template\" in Arabic (Saudi Arabia). While understandable, it sounds slightly awkward.",
-          "suggestion": "Consider a more natural phrasing such as \"نموذج طلب جديد\" (Namouthaj Talab Jadeed) which translates to 'New application form' or \"تصميم نموذج جديد\" (Tasmeem Namouthaj Jadeed) which means 'New form design'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -123,18 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'template' is better translated as 'model' or 'voorbeeld' in this context. 'Sjabloon' is more technical and might not resonate with all users.",
-          "suggestion": "Nieuw Formulier model"
-        },
-        {
-          "type": "formatting",
-          "description": "The space before 'sjabloon' is unnecessary.",
-          "suggestion": "Nieuw Formulier sjabloon"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -155,18 +138,6 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
-    "ro": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Șablon formă nou\" is a literal translation but doesn't sound natural in Romanian. \"Șablon formă nouă\" would be a more accurate and natural-sounding translation.",
-          "suggestion": "Șablon formă nouă"
-        }
-      ],
-      "approved_at": null
-    },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
@@ -176,13 +147,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නව ආකෘතිපත්‍ර අච්චුවක්' translates to 'new form template mold' which is not the intended meaning of 'New form template'. 'ආකෘතිපත්‍ර' is correct for 'form' but 'අච්චුවක්' (mold) is not appropriate here.",
-          "suggestion": "නව ආකෘතිපත්‍රය (nava akruthipathraya) - This translates to 'New form' or 'New template'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -197,28 +162,22 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Нови образац шаблон' is a literal translation and doesn't flow naturally. 'Шаблон' (template) is redundant since 'образац' already implies a template.",
-          "suggestion": "Нови образац"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Novi obrazac šablon\" is a literal translation of \"New form template\" but doesn't sound natural in Serbian. \"Šablon\" is often unnecessary as \"obrazac\" already implies a template.",
-          "suggestion": "Novi obrazac"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -234,12 +193,6 @@
       "approved_at": null
     },
     "vi": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

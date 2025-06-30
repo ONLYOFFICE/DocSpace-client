@@ -3,7 +3,7 @@
   "content": "The file will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "0893b91fab956db6aa23b845defda697042a8cb4",
   "created_at": "2025-05-19T21:30:45.251Z",
-  "updated_at": "2025-06-18T17:11:42.367Z",
+  "updated_at": "2025-06-30T12:20:31.224Z",
   "comment": {
     "text": "The translation key \"FilePermanentlyDeleted\" is used to display a message indicating that a file will be permanently deleted in 30 days. It appears as part of a delete confirmation dialog in the UI, providing context for users who have chosen to delete a file and ensuring they understand the permanent nature of the action.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     {
       "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
       "line_number": 52,
-      "context": "})}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </span>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "context": "})}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n {t(\"Common:DeleteFile\")}\n {t(\"Common:FilePermanentlyDeleted\")}\n {t(\"Common:WantToContinue\")}\n </span>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/doceditor"
     }
   ],

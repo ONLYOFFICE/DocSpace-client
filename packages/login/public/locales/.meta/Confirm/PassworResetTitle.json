@@ -3,7 +3,7 @@
   "content": "Now you can create a new password.",
   "content_en_sha1_hash": "f9c8b3b6fa375c17d32d673a51e5ccfc8b276b9b",
   "created_at": "2025-05-19T21:30:57.374Z",
-  "updated_at": "2025-05-24T15:26:34.515Z",
+  "updated_at": "2025-06-30T12:20:31.657Z",
   "comment": {
     "text": "This translation key is used for the title of a password reset confirmation page, appearing as \"Now you can create a new password.\" in the UI. It provides context to users after they have successfully changed their password.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PasswordChange/page.client.tsx",
       "line_number": 134,
-      "context": "return (\n <>\n <div className=\"password-form\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"subtitle\">\n {t(\"PassworResetTitle\")}\n </Text>\n <FieldContainer\n isVertical={true}\n labelVisible={false}\n hasError={isPasswordErrorShow && !passwordValid}",
+      "context": "return (\n <>\n <div className=\"password-form\">\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"subtitle\">\n {t(\"PassworResetTitle\")}\n </Text>\n <FieldContainer\n isVertical\n labelVisible={false}\n hasError={isPasswordErrorShow ? !passwordValid : undefined}",
       "module": "/packages/login"
     }
   ],

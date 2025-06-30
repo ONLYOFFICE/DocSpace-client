@@ -143,18 +143,19 @@ const TopUpModal = (props: TopUpModalProps) => {
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
+export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
   const {
-    walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
     cardLinked,
     accountLink,
     walletCodeCurrency,
     wasFirstTopUp,
-    walletCustomerStatusNotActive,
     formatWalletCurrency,
   } = paymentStore;
+
+  const { walletCustomerStatusNotActive, walletCustomerEmail } =
+    currentTariffStatusStore;
 
   return {
     currency: walletCodeCurrency,

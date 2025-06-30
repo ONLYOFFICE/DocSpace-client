@@ -9,7 +9,6 @@ import type {
 } from "@docspace/shared/api/flows/flows.types";
 import { getCookie } from "@docspace/shared/utils/cookie";
 import { TFile } from "@docspace/shared/api/files/types";
-import { toastr } from "@docspace/shared/components/toast";
 import { ChatEvents } from "@docspace/shared/components/chat/enums";
 
 type VectorizeDocumentStatus = "added" | "error" | "exist" | "not_found";
@@ -127,7 +126,6 @@ class FlowStore {
       }
 
       if (msg === "error") {
-        toastr.error(`Error vectorizing document: ${file.title}`);
         this.wrongFiles = [...this.wrongFiles, file];
 
         return;
@@ -137,7 +135,6 @@ class FlowStore {
         await this.vectorizeDocument(file);
       }
     } catch (error) {
-      toastr.error(`Error vectorizing document: ${file.title}`);
       this.wrongFiles = [...this.wrongFiles, file];
 
       console.log(error);
@@ -169,7 +166,6 @@ class FlowStore {
         ?.message as VectorizeDocumentStatus;
 
       if (msg === "error") {
-        toastr.error(`Error checking vectorized documents`);
         return;
       }
 
@@ -204,7 +200,6 @@ class FlowStore {
 
       this.vectorizedFiles = [...this.vectorizedFiles, ...files];
     } catch (error) {
-      toastr.error(`Error checking vectorized documents`);
       this.wrongFiles = [...this.wrongFiles, ...filesId];
     }
   };
@@ -222,14 +217,12 @@ class FlowStore {
         .message as VectorizeDocumentStatus;
 
       if (msg === "error") {
-        toastr.error(`Error vectorizing document: ${file.title}`);
         this.wrongFiles = [...this.wrongFiles, file];
 
         return;
       }
 
       if (msg === "added") {
-        toastr.success(`Document ready for chat: ${file.title}`);
         this.vectorizedFiles = [...this.vectorizedFiles, file];
       }
 
@@ -239,7 +232,6 @@ class FlowStore {
 
       return msg;
     } catch (error) {
-      toastr.error(`Error vectorizing document: ${file.title}`);
       this.wrongFiles = [...this.wrongFiles, file];
 
       console.log(error);
@@ -279,10 +271,7 @@ class FlowStore {
 
     try {
       await FlowsApi.summarizeFileToFile(String(file.id));
-
-      toastr.success(`Document summarized: ${file.title}`);
     } catch (error) {
-      toastr.error(`Error summarizing document: ${file.title}`);
       console.log(error);
     }
   };

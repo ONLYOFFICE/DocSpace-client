@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
@@ -92,7 +92,10 @@ describe("FilesSelectorInput", () => {
     render(<FilesSelectorInput {...mockDefaultProps} />);
 
     const fileInput = screen.getByTestId("file-input");
-    await userEvent.click(fileInput);
+
+    await act(async () => {
+      await userEvent.click(fileInput);
+    });
 
     expect(screen.getByTestId("files-selector")).toHaveAttribute(
       "data-visible",

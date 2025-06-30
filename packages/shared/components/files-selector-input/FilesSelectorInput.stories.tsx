@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Meta, StoryObj } from "@storybook/react";
-import { DeviceType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import { DeviceType } from "../../enums";
+import type { TBreadCrumb } from "../selector/Selector.types";
 
-import type { FileInfoType } from "./FilesSelectorInput.types";
 import { FilesSelectorInput } from "./index";
 import {
   createCreateRoomsHandler,
@@ -133,13 +132,6 @@ const mockOnSelectFolder = (
   console.log("onSelectFolder called with:", { value, breadCrumbs });
 };
 
-const mockOnSelectFile = (
-  fileInfo: FileInfoType,
-  breadCrumbs?: TBreadCrumb[],
-) => {
-  console.log("onSelectFile called with:", { fileInfo, breadCrumbs });
-};
-
 const mockFilesSelectorSettings = {
   filesSettings: {
     canShare: true,
@@ -231,15 +223,6 @@ export const Default: Story = {
   },
 };
 
-export const WithDocumentFilter: Story = {
-  args: {
-    ...baseArgs,
-    filterParam: FilesSelectorFilterTypes.DOCX,
-    onSelectFile: mockOnSelectFile,
-    descriptionText: "Select a document file",
-  },
-};
-
 export const Disabled: Story = {
   args: {
     ...baseArgs,
@@ -253,22 +236,6 @@ export const WithError: Story = {
     ...baseArgs,
     isError: true,
     isErrorPath: true,
-    onSelectFolder: mockOnSelectFolder,
-  },
-};
-
-export const RoomsOnly: Story = {
-  args: {
-    ...baseArgs,
-    isRoomsOnly: true,
-    onSelectFolder: mockOnSelectFolder,
-  },
-};
-
-export const WithCreate: Story = {
-  args: {
-    ...baseArgs,
-    withCreate: true,
     onSelectFolder: mockOnSelectFolder,
   },
 };

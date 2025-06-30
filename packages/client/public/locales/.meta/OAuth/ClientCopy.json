@@ -3,7 +3,7 @@
   "content": "Client ID successfully copied to clipboard",
   "content_en_sha1_hash": "49dffc680fd02b354ebf3087f0826f4dec0a274f",
   "created_at": "2025-05-19T21:30:53.834Z",
-  "updated_at": "2025-05-24T07:40:06.401Z",
+  "updated_at": "2025-06-30T12:20:31.468Z",
   "comment": {
     "text": "The translation key \"ClientCopy\" is used to display a success message when a client ID is successfully copied to the clipboard in the OAuth settings form. This message appears as part of a button or dialog that triggers the copy action, indicating that the operation was successful.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/ClientBlock.tsx",
-      "line_number": 68,
+      "line_number": 69,
       "context": "const onChange = () => {};\n \n const onCopyClick = (name: string) => {\n if (name === \"id\") {\n copy(value[name]);\n toastr.success(t(\"ClientCopy\"));\n } else {\n copy(value[name]);\n toastr.success(t(\"SecretCopy\"));\n }\n };",
       "module": "/packages/client"
     }

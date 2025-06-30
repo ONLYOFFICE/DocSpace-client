@@ -200,7 +200,9 @@ export const NewFilesPanelComponent = ({
         <Scrollbar autoFocus>{content}</Scrollbar>
         {markAsReadButton}
       </StyledPanel>
-      {!isMobile() ? <Backdrop visible withoutBackground withoutBlur /> : null}
+      {!isMobile() ? (
+        <Backdrop visible withoutBackground withoutBlur onClick={onClose} />
+      ) : null}
     </>
   );
 

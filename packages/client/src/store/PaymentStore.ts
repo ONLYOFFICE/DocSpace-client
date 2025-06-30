@@ -43,6 +43,7 @@ import {
   getPaymentLink,
   getAutoTopUpSettings,
   updateAutoTopUpSettings,
+  getServicesQuotas,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -60,7 +61,13 @@ import {
   TCustomerInfo,
   TAutoTopUpSettings,
   TTransactionCollection,
+  TPaymentFeature,
+  TPaymentQuota,
+  TNumericPaymentFeature,
 } from "@docspace/shared/api/portal/types";
+import { PaymentMethodStatus } from "@docspace/shared/enums";
+import { formatCurrencyValue } from "@docspace/shared/utils/common";
+import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -144,6 +151,12 @@ class PaymentStore {
   upToBalanceError = false;
 
   minBalanceError = false;
+
+  servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map(); // temporary solution, should be in the service store
+
+  servicesQuotas: TPaymentQuota | null = null; // temporary solution, should be in the service store
+
+  isShowStorageTariffDeactivatedModal = false;
 
   constructor(
     userStore: UserStore,
@@ -294,7 +307,15 @@ class PaymentStore {
     const requests: unknown[] = [fetchPortalTariff()];
 
     if (this.isAlreadyPaid || this.walletCustomerEmail) {
-      if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());
+      if (this.isStripePortalAvailable) {
+        requests.push(this.setPaymentAccount());
+
+        if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+          this.setIsShowTariffDeactivatedModal(true);
+
+          await this.handleServicesQuotas();
+        }
+      }
     } else {
       requests.push(this.getBasicPaymentLink(addedManagersCount));
     }
@@ -318,6 +339,22 @@ class PaymentStore {
 
   get walletCustomerEmail() {
     return this.walletPayer.email;
+  }
+
+  get walletCustomerUnlinkedStatus() {
+    return this.walletPayer.paymentMethodStatus === PaymentMethodStatus.None;
+  }
+
+  get walletCustomerExpiredStatus() {
+    return this.walletPayer.paymentMethodStatus === PaymentMethodStatus.Expired;
+  }
+
+  get walletCustomerStatusNotActive() {
+    if (!this.walletCustomerEmail) return false;
+
+    return (
+      this.walletCustomerUnlinkedStatus || this.walletCustomerExpiredStatus
+    );
   }
 
   get isAutoPaymentExist() {
@@ -367,6 +404,43 @@ class PaymentStore {
 
     return true;
   }
+
+  get storageSizeIncrement() {
+    return (
+      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
+        ?.value || 0
+    );
+  }
+
+  get storagePriceIncrement() {
+    return this.servicesQuotas?.price.value ?? 0;
+  }
+
+  formatWalletCurrency = (item: number = 0, fractionDigits: number = 3) => {
+    const { language } = authStore;
+    const amount = item || this.walletBalance;
+
+    return formatCurrencyValue(
+      language,
+      amount,
+      this.walletCodeCurrency,
+      fractionDigits,
+    );
+  };
+
+  formatPaymentCurrency = (item: number = 0, fractionDigits: number = 0) => {
+    const { language } = authStore;
+    const amount = item || this.walletBalance;
+    const { planCost } = this.paymentQuotasStore;
+    const { isoCurrencySymbol } = planCost;
+
+    return formatCurrencyValue(
+      language,
+      amount,
+      isoCurrencySymbol,
+      fractionDigits,
+    );
+  };
 
   updatePreviousBalance = () => {
     this.previousBalance = this.balance;
@@ -470,8 +544,36 @@ class PaymentStore {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
-  initWalletPayerAndBalance = async (isRefresh: boolean) => {
-    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore!;
+  handleServicesQuotas = async () => {
+    // temporary solution, should be in the service store
+
+    const res = await getServicesQuotas();
+
+    if (!res) return;
+
+    res[0].features.forEach((feature) => {
+      this.servicesQuotasFeatures.set(feature.id, feature);
+    });
+
+    this.servicesQuotas = res[0];
+
+    return res;
+  };
+
+  isShowStorageTariffDeactivated = () => {
+    const { previousStoragePlanSize } = this.currentTariffStatusStore;
+
+    if (!previousStoragePlanSize) return false;
+
+    return localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== "true";
+  };
+
+  setIsShowTariffDeactivatedModal = (value: boolean) => {
+    this.isShowStorageTariffDeactivatedModal = value;
+  };
+
+  initWalletPayerAndBalance = async (isRefresh) => {
+    const { setPayerInfo, payerInfo } = this.currentTariffStatusStore;
 
     await Promise.all([
       this.fetchWalletPayer(isRefresh),
@@ -482,12 +584,14 @@ class PaymentStore {
   };
 
   walletInit = async (t: TTranslation) => {
-    const requests = [];
-
     const isRefresh = window.location.href.includes("complete=true");
     if (!this.currentTariffStatusStore) return;
 
     this.setVisibleWalletSetting(false);
+
+    const { fetchPortalTariff } = this.currentTariffStatusStore;
+
+    const requests = [fetchPortalTariff()];
 
     try {
       await this.initWalletPayerAndBalance(isRefresh);
@@ -496,6 +600,10 @@ class PaymentStore {
       if (this.isAlreadyPaid || this.walletCustomerEmail) {
         if (this.isStripePortalAvailable) {
           requests.push(this.setPaymentAccount());
+
+          if (this.walletCustomerStatusNotActive) {
+            requests.push(this.fetchCardLinked());
+          }
         }
 
         requests.push(this.fetchAutoPayments(), this.fetchTransactionHistory());
@@ -504,6 +612,12 @@ class PaymentStore {
       }
 
       await Promise.all(requests);
+
+      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+        this.setIsShowTariffDeactivatedModal(true);
+
+        await this.handleServicesQuotas();
+      }
 
       this.setIsInitWalletPage(true);
 
@@ -538,8 +652,13 @@ class PaymentStore {
     const { setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
     const { setPortalPaymentQuotas } = this.paymentQuotasStore;
+    const { fetchPortalTariff } = this.currentTariffStatusStore;
 
-    const requests = [this.getSettingsPayment(), setPortalPaymentQuotas()];
+    const requests = [
+      this.getSettingsPayment(),
+      setPortalPaymentQuotas(),
+      fetchPortalTariff(),
+    ];
 
     if (!this.isAlreadyPaid || !this.walletCustomerEmail) {
       await this.fetchWalletPayer();
@@ -550,13 +669,24 @@ class PaymentStore {
       await setPayerInfo(this.walletCustomerEmail);
 
     if (this.isAlreadyPaid || this.walletCustomerEmail) {
-      if (this.isStripePortalAvailable) requests.push(this.setPaymentAccount());
+      if (this.isStripePortalAvailable) {
+        requests.push(this.setPaymentAccount());
+        if (this.walletCustomerStatusNotActive) {
+          requests.push(this.fetchCardLinked());
+        }
+      }
     } else {
       requests.push(this.getBasicPaymentLink(addedManagersCount));
     }
 
     try {
       await Promise.all(requests);
+
+      if (this.isShowStorageTariffDeactivated() && this.isPayer) {
+        this.setIsShowTariffDeactivatedModal(true);
+        await this.handleServicesQuotas();
+      }
+
       this.setRangeStepByQuota();
       this.setBasicTariffContainer();
     } catch (error) {

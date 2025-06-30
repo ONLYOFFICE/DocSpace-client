@@ -1,20 +1,20 @@
 {
-  "key_path": "NewMasterForm",
-  "content": "New form template",
-  "content_en_sha1_hash": "dd33fb07a6cc6e1d3265f06284317a86321d5d53",
-  "created_at": "2025-05-19T21:30:46.754Z",
-  "updated_at": "2025-06-18T17:11:42.549Z",
+  "key_path": "ConnectAndConfigureServices",
+  "content": "This section is used to connect and configure the services.",
+  "content_en_sha1_hash": "56fead1ac3c0ee9e9cfc0757f75de60cb30caef9",
+  "created_at": "2025-06-24T16:31:06.652Z",
+  "updated_at": "2025-06-26T19:00:18.267Z",
   "comment": {
-    "text": "NewMasterForm is used as a label for creating a new master form in certain file types. It appears on an editor interface likely used to create or edit documents.",
+    "text": "\"This section is used to connect and configure services, appearing as a label when the 'ConnectAndConfigureServices' button is clicked or displayed in a dialog.\"",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:22.784Z"
+    "updated_at": "2025-06-24T16:32:20.928Z"
   },
   "usage": [
     {
-      "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 332,
-      "context": "break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"docxf\":\n fileName = t(\"Common:NewMasterForm\");\n break;\n default:\n break;\n }",
-      "module": "/packages/doceditor"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
+      "line_number": 143,
+      "context": "return (\n <div>\n <Text className={styles.storageDescription}>\n {isPayer || !isCardLinkedToPortal\n ? t(\"ConnectAndConfigureServices\")\n : t(\"ServiceConfigurationNotice\")}\n </Text>\n {isCardLinkedToPortal ? (\n <div className={styles.payerContainer}>\n <PayerInformation />",
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"قالب نموذج جديد\" is a literal translation but not the most natural or idiomatic way to express \"New form template\" in Arabic (Saudi Arabia). While understandable, it sounds slightly awkward.",
-          "suggestion": "Consider a more natural phrasing such as \"نموذج طلب جديد\" (Namouthaj Talab Jadeed) which translates to 'New application form' or \"تصميم نموذج جديد\" (Tasmeem Namouthaj Jadeed) which means 'New form design'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -123,18 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'template' is better translated as 'model' or 'voorbeeld' in this context. 'Sjabloon' is more technical and might not resonate with all users.",
-          "suggestion": "Nieuw Formulier model"
-        },
-        {
-          "type": "formatting",
-          "description": "The space before 'sjabloon' is unnecessary.",
-          "suggestion": "Nieuw Formulier sjabloon"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -158,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Șablon formă nou\" is a literal translation but doesn't sound natural in Romanian. \"Șablon formă nouă\" would be a more accurate and natural-sounding translation.",
-          "suggestion": "Șablon formă nouă"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -176,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නව ආකෘතිපත්‍ර අච්චුවක්' translates to 'new form template mold' which is not the intended meaning of 'New form template'. 'ආකෘතිපත්‍ර' is correct for 'form' but 'අච්චුවක්' (mold) is not appropriate here.",
-          "suggestion": "නව ආකෘතිපත්‍රය (nava akruthipathraya) - This translates to 'New form' or 'New template'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -197,28 +168,22 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Нови образац шаблон' is a literal translation and doesn't flow naturally. 'Шаблон' (template) is redundant since 'образац' already implies a template.",
-          "suggestion": "Нови образац"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Novi obrazac šablon\" is a literal translation of \"New form template\" but doesn't sound natural in Serbian. \"Šablon\" is often unnecessary as \"obrazac\" already implies a template.",
-          "suggestion": "Novi obrazac"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

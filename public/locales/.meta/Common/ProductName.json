@@ -3,7 +3,7 @@
   "content": "DocSpace",
   "content_en_sha1_hash": "ce0b96eab5006b875f6c4a6c31ad73c3c86edcf5",
   "created_at": "2025-05-19T21:30:47.504Z",
-  "updated_at": "2025-06-18T17:11:42.291Z",
+  "updated_at": "2025-06-26T19:00:18.110Z",
   "comment": {
     "text": "This translation key is used for the \"From Portal\" button label, which indicates that a document can be uploaded from DocSpace. It appears in a dropdown menu on a main button in a shell interface. Translators should provide a translated version of \"From Portal\" with the product name inserted.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 123,
+      "line_number": 121,
       "context": ");\n \n const archiveRoomsDescription =\n isVisitor || isCollaborator\n ? t(\"ArchiveEmptyScreenUser\")\n : t(\"ArchiveEmptyScreen\", { productName: t(\"Common:ProductName\") });\n \n const privateRoomHeader = t(\"PrivateRoomHeader\", {\n organizationName: logoText,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 123,
+      "line_number": 121,
       "context": ");\n \n const archiveRoomsDescription =\n isVisitor || isCollaborator\n ? t(\"ArchiveEmptyScreenUser\")\n : t(\"ArchiveEmptyScreen\", { productName: t(\"Common:ProductName\") });\n \n const privateRoomHeader = t(\"PrivateRoomHeader\", {\n organizationName: logoText,\n });",
       "module": "/packages/client"
     },
@@ -209,6 +209,18 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/ChangeStorageQuotaDialog/index.js",
+      "line_number": 125,
+      "context": "<ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeStorageQuotaDialog/index.js",
+      "line_number": 125,
+      "context": "<ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
       "line_number": 175,
       "context": "? t(\"DisableGuests\")\n : t(\"DisableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"DisableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"DisableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"DisableGuestsDescription\", {\n productName: t(\"Common:ProductName\"),\n })",
@@ -282,7 +294,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.js",
-      "line_number": 245,
+      "line_number": 242,
       "context": "const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:EnableThirdPartyIntegration\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );\n };",
       "module": "/packages/client"
     },
@@ -355,7 +367,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
       "line_number": 135,
-      "context": "<Trans\n t={t}\n ns=\"Translations\"\n i18nKey=\"GuestConversionNote\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n }}\n />\n </Text>\n {accessRightsLink ? (",
+      "context": "<Text fontSize=\"12px\" fontWeight={400} lineHeight=\"16px\" noSelect>\n <Trans\n t={t}\n ns=\"Translations\"\n i18nKey=\"GuestReleaseTipDescripton\"\n values={{ productName: t(\"Common:ProductName\") }}\n />\n </Text>\n {accessRightsLink ? (\n <ColorTheme\n tag=\"a\"",
       "module": "/packages/client"
     },
     {
@@ -384,13 +396,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 51,
+      "line_number": 52,
       "context": "t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n <StyledText>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 51,
+      "line_number": 52,
       "context": "t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n <StyledText>",
       "module": "/packages/client"
     },
@@ -491,6 +503,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/About/AboutContent.js",
+      "line_number": 179,
+      "context": "fontWeight=\"600\"\n href={linkRepo}\n target=\"_blank\"\n enableUserSelect\n >\n &nbsp;{logoName} {t(\"Common:ProductName\")}&nbsp;\n </ColorTheme>\n \n <Text\n className=\"row-el select-el\"\n fontSize=\"13px\"",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
       "line_number": 356,
       "context": "const uniqueTooltipId = `userTooltip_${Math.random()}`;\n \n const tooltipContent = `${\n user.isOwner\n ? t(\"Common:PortalOwner\", { productName: t(\"Common:ProductName\") })\n : t(\"Common:PortalAdmin\", { productName: t(\"Common:ProductName\") })\n }. ${t(\"Common:HasFullAccess\")}`;\n \n return user.isTitle ? (\n <StyledUserTypeHeader isExpect={isExpect}>",
@@ -504,20 +522,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 296,
+      "line_number": 294,
       "context": "headerText={t(\"Files:TemplateAvailable\")}\n bodyText={\n <>\n <div className=\"template-access_description\">\n {t(\"Files:TemplateAvailableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n {isTemplateOwner ? (\n <Link\n className=\"template-access_link\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 204,
+      "line_number": 207,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 204,
+      "line_number": 207,
       "context": "case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/MobileView.js",
+      "line_number": 74,
+      "context": "<>\n {displayAbout ? (\n <MobileCategoryWrapper\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info-settings`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
@@ -536,6 +560,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
       "line_number": 126,
       "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: t(\"Common:ProductName\") }),\n );\n setPortalName(portalNameInitially);\n const page = isMobileView ? \"language-and-time-zone\" : \"general\";\n if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/branding.js",
+      "line_number": 138,
+      "context": "{displayAbout ? (\n <>\n {isLoadedCompanyInfoSettingsData ? (\n <div className=\"section-description settings_unavailable\">\n {t(\"Settings:BrandingSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n ) : (\n <LoaderBrandingDescription />\n )}",
       "module": "/packages/client"
     },
     {
@@ -737,6 +767,42 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
+      "line_number": 521,
+      "context": "<StyledAutoBackup isEnableAuto={isEnableAuto}>\n <StatusMessage message={errorInformation} />\n <div className=\"backup_modules-header_wrapper\">\n <Text className=\"backup_modules-description settings_unavailable\">\n {t(\"AutoBackupDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!isManagement() ? (\n automaticBackupUrl ? (\n <Link",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/sub-components/ScheduleComponent.js",
+      "line_number": 62,
+      "context": "monthlySchedule,\n }) => {\n const { t } = useTranslation(\"Settings\");\n const renderHelpContent = () => (\n <Text className=\"schedule_description\" fontSize=\"12px\">\n {t(\"AutoSavePeriodHelp\", { productName: t(\"Common:ProductName\") })}\n </Text>\n );\n \n return (\n <StyledScheduleComponent",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/index.js",
+      "line_number": 246,
+      "context": "<Text\n className=\"restore-backup_warning-description settings_unavailable\"\n noSelect\n >\n {t(\"RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text\n className=\"restore-backup_warning-link settings_unavailable\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/index.js",
+      "line_number": 246,
+      "context": "<Text\n className=\"restore-backup_warning-description settings_unavailable\"\n noSelect\n >\n {t(\"RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text\n className=\"restore-backup_warning-link settings_unavailable\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/sub-components/backup-list/index.js",
+      "line_number": 213,
+      "context": "const { filesList, isLoading, selectedFileIndex, isChecked } = state;\n \n const helpContent = () => (\n <Text className=\"restore-backup_warning-description\">\n {t(\"RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text as=\"span\" className=\"restore-backup_warning-link\">\n {t(\"RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/sub-components/backup-list/index.js",
+      "line_number": 213,
+      "context": "const { filesList, isLoading, selectedFileIndex, isChecked } = state;\n \n const helpContent = () => (\n <Text className=\"restore-backup_warning-description\">\n {t(\"RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text as=\"span\" className=\"restore-backup_warning-link\">\n {t(\"RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/index.js",
       "line_number": 50,
       "context": "const [isLoading, setIsLoading] = useState(false);\n \n const data = [\n {\n id: \"deletion\",\n name: t(\"DeletePortal\", { productName: t(\"Common:ProductName\") }),\n content: <PortalDeletionSection />,\n },\n {\n id: \"deactivation\",\n name: t(\"PortalDeactivation\", { productName: t(\"Common:ProductName\") }),",
@@ -786,8 +852,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 219,
-      "context": "withEmptyScreen: !!error,\n })}\n >\n <Text lineHeight=\"20px\" className=\"api-keys_text\">\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>",
+      "line_number": 198,
+      "context": "return (\n <StyledApiKeys>\n <div className=\"api-keys_description\">\n <Text lineHeight=\"20px\" className=\"api-keys_text\">\n {t(\"Settings:ApiKeysDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>",
       "module": "/packages/client"
     },
     {
@@ -900,13 +966,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
-      "line_number": 62,
+      "line_number": 63,
       "context": "<Trans\n ns=\"OAuth\"\n t={t}\n i18nKey=\"OAuthAppDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}\n />\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
-      "line_number": 73,
+      "line_number": 71,
       "context": "<Trans\n ns=\"OAuth\"\n t={t}\n i18nKey=\"OAuthAppDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}\n />\n );",
       "module": "/packages/client"
     },
@@ -924,8 +990,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookInfo.js",
-      "line_number": 54,
-      "context": "return (\n <div>\n <InfoText as=\"p\">\n {t(\"WebhooksInfo\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </InfoText>\n {webhooksGuideUrl ? (\n <Link",
+      "line_number": 59,
+      "context": "return (\n <InfoWrapper>\n <InfoText as=\"p\">\n {t(\"WebhooksInfo\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </InfoText>\n {webhooksGuideUrl ? (\n <ColorTheme",
       "module": "/packages/client"
     },
     {
@@ -942,8 +1008,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 95,
-      "context": "<Trans\n t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (",
+      "line_number": 94,
+      "context": "<Text className=\"intro-text settings_unavailable\">\n <Trans\n t={t}\n i18nKey=\"LdapIntro\"\n ns=\"Ldap\"\n values={{ productName: t(\"Common:ProductName\"), link }}\n components={{\n 1: (\n <Link\n fontSize=\"13px\"\n fontWeight=\"600\"",
       "module": "/packages/client"
     },
     {
@@ -1055,15 +1121,21 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/sub-components/TariffTitleContainer.js",
+      "line_number": 100,
+      "context": ">\n <div className=\"payments_subscription\">\n <div className=\"title\">\n <Text fontWeight={600} fontSize=\"14px\" as=\"span\">\n {t(\"ActivateTariffDescr\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 171,
-      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {isCardLinkedToPortal ? <PayerInformation /> : null}\n \n <div className={styles.balanceWrapper}>\n <div className={styles.headerContainer}>",
+      "line_number": 196,
+      "context": "};\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>\n {t(\"WalletDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n {walletHelpUrl ? (\n <Link\n textDecoration=\"underline\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/WalletInfo.tsx",
-      "line_number": 63,
-      "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {t(\"ProductNameWallet\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: !!onTopUp,\n })}",
+      "line_number": 64,
+      "context": "<Text\n className={styles.walletInfoTitle}\n fontWeight=\"600\"\n fontSize=\"14px\"\n >\n {t(\"ProductNameWallet\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <div\n className={classNames(styles.walletInfoBalance, {\n [styles.warningColor]: isBalanceInsufficient,\n })}",
       "module": "/packages/client"
     },
     {
@@ -1134,19 +1206,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 44,
+      "line_number": 43,
       "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 44,
+      "line_number": 43,
       "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 44,
+      "line_number": 43,
       "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
       "module": "/packages/client"
     },
@@ -1175,6 +1247,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/GracePeriodModal.tsx",
+      "line_number": 96,
+      "context": "}}\n />\n </Text>{\" \"}\n <Text as=\"span\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Statistics.js",
       "line_number": 108,
       "context": "isPaidBadge\n />\n ) : null}\n </div>\n <Text className=\"statistics-description\">\n {t(\"StatisticDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n {isStatisticsAvailable ? (\n <>\n <RoomsList\n buttonProps={buttonProps}",
@@ -1182,13 +1260,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 51,
+      "line_number": 50,
       "context": "<MobileCategoryWrapper\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerUser\")}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 51,
+      "line_number": 50,
       "context": "<MobileCategoryWrapper\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper\n title={t(\"QuotaPerUser\")}",
       "module": "/packages/client"
     },
@@ -1337,20 +1415,26 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
+      "line_number": 119,
+      "context": "const roomMode = getAccessTranslation().toLowerCase();\n \n sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, \"true\");\n \n const content = isFormRoom ? (\n t(\"Common:FormAuthorizeToast\", { productName: t(\"Common:ProductName\") })\n ) : (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"PublicAuthorizeToast\"",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1989,
+      "line_number": 1986,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1989,
+      "line_number": 1986,
       "context": "},\n {\n id: \"option_link-for-portal-users\",\n key: \"link-for-portal-users\",\n label: t(\"LinkForPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onClickLinkForPortal(item, t),\n disabled: false,\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 671,
+      "line_number": 673,
       "context": "isOwner && {\n id: \"accounts-add_administrator\",\n className: \"main-button_drop-down\",\n icon: PersonAdminReactSvgUrl,\n label: t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n }),\n onClick: () => this.inviteUser(EmployeeType.Admin),\n \"data-type\": EmployeeType.Admin,\n action: EmployeeType.Admin,\n key: \"administrator\",",
       "module": "/packages/client"
     },
@@ -1423,37 +1507,37 @@
     {
       "file_path": "/packages/login/src/components/ConsentInfo.tsx",
       "line_number": 83,
-      "context": "{isConsentScreen ? (\n <Trans\n t={t}\n i18nKey=\"ConsentSubHeader\"\n ns=\"Consent\"\n values={{ nameApp: name, productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Link\n key=\"component_key\"\n className={\"login-link\"}",
+      "context": "{isConsentScreen ? (\n <Trans\n t={t}\n i18nKey=\"ConsentSubHeader\"\n ns=\"Consent\"\n values={{ nameApp: name, productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Link\n className={\"login-link\"}\n type={LinkType.page}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 99,
+      "line_number": 92,
       "context": "i18nKey=\"InvitationToPortal\"\n ns=\"Common\"\n defaults={DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomData.title\n ? { roomName: roomData.title }\n : { spaceAddress: hostName }),\n }}\n components={{",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
       "line_number": 116,
-      "context": "i18nKey={keyProp.tKey}\n ns=\"Common\"\n defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomName ? { roomName } : { spaceAddress }),\n }}\n components={{\n 1: (\n <Text",
+      "context": "i18nKey={keyProp.tKey}\n ns=\"Common\"\n defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}\n values={{\n displayName,\n productName: t(\"Common:ProductName\"),\n ...(roomName ? { roomName } : { spaceAddress }),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"strong\" fontSize=\"16px\" />,\n }}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingUserContainer.tsx",
       "line_number": 79,
-      "context": "i18nKey=\"AccountWillBeCreated\"\n ns=\"Confirm\"\n defaults={DEFAULT_CREATION_TEXT}\n values={{\n email,\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <Link key=\"component_key\" tag=\"a\" isHovered={false} color=\"accent\" />,\n }}\n />",
+      "context": "i18nKey=\"AccountWillBeCreated\"\n ns=\"Confirm\"\n defaults={DEFAULT_CREATION_TEXT}\n values={{\n email,\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <ColorTheme tag=\"a\" themeId={ThemeId.Link} isHovered={false} />,\n }}\n />",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/Invalid.tsx",
       "line_number": 87,
-      "context": "<Text fontSize=\"13px\" fontWeight=\"600\">\n <Trans\n t={t}\n i18nKey=\"ErrorInvalidText\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: (\n <Link\n key=\"component_key\"",
+      "context": "<Text fontSize=\"13px\" fontWeight=\"600\">\n <Trans\n t={t}\n i18nKey=\"ErrorInvalidText\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: (\n <Link\n className=\"error_description_link\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
       "line_number": 103,
-      "context": "i18nKey=\"UserIsAlreadyRegistered\"\n ns=\"Login\"\n defaults={DEFAULT_EMAIL_TEXT}\n values={{\n email: emailFromInvitation,\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: (\n <Link\n key=\"component_key\"",
+      "context": "i18nKey=\"UserIsAlreadyRegistered\"\n ns=\"Login\"\n defaults={DEFAULT_EMAIL_TEXT}\n values={{\n email: emailFromInvitation,\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: (\n <Link\n fontWeight={600}",
       "module": "/packages/login"
     },
     {
@@ -1461,12 +1545,6 @@
       "line_number": 38,
       "context": "const { t } = useTranslation([\"Wizard\", \"Common\"]);\n \n return (\n <GreetingContainer\n greetingText={t(\"Wizard:WelcomeTitle\", {\n productName: t(\"Common:ProductName\"),\n })}\n culture={culture}\n />\n );\n };",
       "module": "/packages/login"
-    },
-    {
-      "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 101,
-      "context": "href={linkRepo}\n target={LinkTarget.blank}\n enableUserSelect\n color=\"accent\"\n >\n &nbsp;{logoText} {t(\"Common:ProductName\")}&nbsp;\n </Link>\n \n <Text className=\"row-el select-el\" fontSize=\"13px\" fontWeight=\"600\">\n v.\n <span className=\"version-document-management\">",
-      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/beta-badge/index.tsx",
@@ -1500,98 +1578,38 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 71,
+      "line_number": 72,
       "context": "},\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n available?.None && {\n key: \"separator\",\n isSeparator: true,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 71,
+      "line_number": 72,
       "context": "},\n {\n internal: true,\n key: \"users\",\n label: t(\"Common:SpaceUsersOnly\", {\n productName: t(\"Common:ProductName\"),\n }),\n },\n available?.None && {\n key: \"separator\",\n isSeparator: true,",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 139,
-      "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
-      "line_number": 139,
-      "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:SetDiskSpaceQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 97,
-      "context": "styles.additionalDescription,\n \"settings_unavailable\",\n )}\n >\n {t(\"AdditionalResourcesDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox\n data-testid=\"show-feedback-support\"",
+      "line_number": 95,
+      "context": "{t(\"Settings:AdditionalResources\")}\n </div>\n </div>\n <div className=\"settings_unavailable additional-description\">\n {t(\"Settings:AdditionalResourcesDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className=\"branding-checkbox\">\n <Checkbox\n data-testid=\"show-feedback-support\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 124,
-      "context": "styles.wlSubtitle,\n \"wl-subtitle settings_unavailable\",\n )}\n fontSize=\"13px\"\n >\n {t(\"BrandNameSubtitle\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerBrandName\"",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 143,
-      "context": "styles.sectionDescription,\n \"section-description settings_unavailable\",\n )}\n >\n {t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n </div>\n <div\n className={classNames(styles.header, \"header settings_unavailable\")}\n >",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Branding/MobileView/index.tsx",
-      "line_number": 71,
-      "context": "/>\n {displayAbout ? (\n <MobileCategoryWrapper\n title={t(\"CompanyInfoSettings\")}\n subtitle={t(\"BrandingSectionDescription\", {\n productName: t(\"ProductName\"),\n })}\n url={`${baseUrl}/branding/company-info`}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Paid\")}\n onClickLink={onClickLink}",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 100,
-      "context": ">\n <div className=\"payments_subscription\">\n <div className=\"title\">\n <Text fontWeight={600} fontSize=\"14px\" as=\"span\">\n {t(\"ActivateTariffDescr\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}",
+      "line_number": 121,
+      "context": "/>\n ) : null}\n </div>\n \n <Text className=\"wl-subtitle settings_unavailable\" fontSize=\"13px\">\n {t(\"BrandNameSubtitle\", { productName: t(\"Common:ProductName\") })}\n </Text>\n \n <div className=\"settings-block\">\n <FieldContainer\n id=\"fieldContainerBrandName\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 144,
-      "context": "const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress\n text={t(\"PreparationPortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n percent={percent}\n />\n );\n return (",
+      "line_number": 153,
+      "context": "</div>\n <Text className=\"preparation-portal_percent\">{`${percent} %`}</Text>\n </div>\n <Text className=\"preparation-portal_text\">\n {t(\"PreparationPortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </ColorTheme>\n );\n return (",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 407,
-      "context": "<StyledAutoBackup>\n <StatusMessage message={errorInformation} />\n <div className=\"backup_modules-header_wrapper\">\n <Text className=\"backup_modules-description settings_unavailable\">\n {t(\"Common:AutoBackupDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!isManagement ? (\n <Link\n className=\"link-learn-more\"",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/auto-backup/sub-components/ScheduleComponent/ScheduleComponent.tsx",
-      "line_number": 74,
-      "context": "};\n }, [selectedPeriodNumber]);\n \n const renderHelpContent = () => (\n <Text className=\"schedule_description\" fontSize=\"12px\">\n {t(\"Common:AutoSavePeriodHelp\", { productName: t(\"Common:ProductName\") })}\n </Text>\n );\n \n return (\n <StyledScheduleComponent",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/restore-backup/index.tsx",
-      "line_number": 318,
-      "context": "<Text\n className=\"restore-backup_warning-description settings_unavailable\"\n noSelect\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text\n className=\"restore-backup_warning-link settings_unavailable\"",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/restore-backup/index.tsx",
-      "line_number": 318,
-      "context": "<Text\n className=\"restore-backup_warning-description settings_unavailable\"\n noSelect\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {!standalone ? (\n <Text\n className=\"restore-backup_warning-link settings_unavailable\"",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 202,
-      "context": "const { filesList, isLoading, selectedFileIndex, isChecked } = state;\n \n const helpContent = () => (\n <Text className=\"restore-backup_warning-description\">\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text as=\"span\" className=\"restore-backup_warning-link\">\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 202,
-      "context": "const { filesList, isLoading, selectedFileIndex, isChecked } = state;\n \n const helpContent = () => (\n <Text className=\"restore-backup_warning-description\">\n {t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text as=\"span\" className=\"restore-backup_warning-link\">\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),",
+      "file_path": "/packages/shared/selectors/Files/FilesSelector.utils.ts",
+      "line_number": 198,
+      "context": "return items;\n };\n \n export const getDefaultBreadCrumb = (t: TTranslation) => {\n return {\n label: t(\"Common:ProductName\"),\n id: 0,\n isRoom: false,\n };\n };",
       "module": "/packages/shared"
     },
     {
@@ -1601,26 +1619,20 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/selectors/utils/index.ts",
-      "line_number": 192,
-      "context": "return items;\n };\n \n export const getDefaultBreadCrumb = (t: TTranslation) => {\n return {\n label: t(\"Common:ProductName\"),\n id: 0,\n isRoom: false,\n };\n };",
-      "module": "/packages/shared"
-    },
-    {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 324,
+      "line_number": 320,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 324,
+      "line_number": 320,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 324,
+      "line_number": 320,
       "context": "switch (type) {\n case EmployeeType.Owner:\n return t(\"Common:Owner\");\n case EmployeeType.Admin:\n return t(\"Common:PortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n case EmployeeType.RoomAdmin:\n return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");",
       "module": "/packages/shared"
     },
@@ -1631,39 +1643,51 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 182,
-      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect={true}>\n {t(\"CreateSpaceDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
+      "line_number": 129,
+      "context": "{t(\"ConfigurationHeader\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>\n {t(\"ConfigurationDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n <div className=\"spaces-input-wrapper\">\n <div className=\"spaces-input-block\">",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 182,
-      "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect={true}>\n {t(\"CreateSpaceDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
+      "line_number": 129,
+      "context": "{t(\"ConfigurationHeader\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>\n {t(\"ConfigurationDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n <div className=\"spaces-input-wrapper\">\n <div className=\"spaces-input-block\">",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 74,
-      "context": "setIsLoading(true);\n const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") }),\n );\n router.refresh();\n } else {\n toastr.success(\n <Trans",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/CreatePortalDialog/index.tsx",
+      "line_number": 166,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>\n {t(\"CreateSpaceDescription\", {",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 74,
-      "context": "setIsLoading(true);\n const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") }),\n );\n router.refresh();\n } else {\n toastr.success(\n <Trans",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/CreatePortalDialog/index.tsx",
+      "line_number": 166,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {t(\"CreatingPortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect>\n {t(\"CreateSpaceDescription\", {",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 74,
-      "context": "setIsLoading(true);\n const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") }),\n );\n router.refresh();\n } else {\n toastr.success(\n <Trans",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
+      "line_number": 78,
+      "context": "const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n await getAllPortals();\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") })\n );\n } else {\n toastr.success(\n <Trans\n i18nKey=\"DeleteRequestSuccess\"",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 74,
-      "context": "setIsLoading(true);\n const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") }),\n );\n router.refresh();\n } else {\n toastr.success(\n <Trans",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
+      "line_number": 78,
+      "context": "const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n await getAllPortals();\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") })\n );\n } else {\n toastr.success(\n <Trans\n i18nKey=\"DeleteRequestSuccess\"",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
+      "line_number": 78,
+      "context": "const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n await getAllPortals();\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") })\n );\n } else {\n toastr.success(\n <Trans\n i18nKey=\"DeleteRequestSuccess\"",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
+      "line_number": 78,
+      "context": "const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n await getAllPortals();\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") })\n );\n } else {\n toastr.success(\n <Trans\n i18nKey=\"DeleteRequestSuccess\"",
       "module": "/packages/management"
     }
   ],

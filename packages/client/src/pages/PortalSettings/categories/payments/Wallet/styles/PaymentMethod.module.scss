@@ -72,7 +72,8 @@
     .tickedWrapper {
       display: flex;
       gap: 8px;
-      align-items: baseline;
+      align-items: center;
+
       svg {
         width: 16px;
         height: 16px;
@@ -80,9 +81,36 @@
           fill: var(--payment-credit-color);
         }
       }
+      p,
+      span {
+        z-index: 1;
+      }
     }
+
+    &.warningColor {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--warning-color);
+        opacity: 0.2;
+        z-index: 0;
+        pointer-events: none;
+        border-radius: 6px;
+      }
+
+      svg {
+        path {
+          fill: var(--warning-color);
+        }
+      }
+    }
+
     a {
       color: var(--payment-text-color);
+      z-index: 1;
     }
 
     &.cardLinkDisabled {

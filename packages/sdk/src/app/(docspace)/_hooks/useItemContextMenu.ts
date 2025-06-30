@@ -1,13 +1,10 @@
 import { useCallback } from "react";
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { TFile } from "@docspace/shared/api/files/types";
 
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
-import { isLockedSharedRoom } from "@docspace/shared/utils";
 
-type UseItemContextMenuProps = {};
-
-export default function useItemContextMenu({}: UseItemContextMenuProps) {
+export default function useItemContextMenu() {
   const getFilesContextMenu = useCallback((file: TFile) => {
     const model = new Set([
       AVAILABLE_CONTEXT_ITEMS.select,
@@ -60,7 +57,7 @@ export default function useItemContextMenu({}: UseItemContextMenuProps) {
     return Array.from(model);
   }, []);
 
-  const getFoldersContextMenu = useCallback((folder: TFolder) => {
+  const getFoldersContextMenu = useCallback(() => {
     return [
       AVAILABLE_CONTEXT_ITEMS.select,
       AVAILABLE_CONTEXT_ITEMS.open,

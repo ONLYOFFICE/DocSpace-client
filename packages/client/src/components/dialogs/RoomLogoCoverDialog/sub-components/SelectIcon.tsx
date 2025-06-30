@@ -161,12 +161,12 @@ export const SelectIcon = ({
               }
               return (
                 <StyledIconContainer
-                  isSelected={coverId === icon.id ? !withoutIcon : null}
+                  isSelected={coverId === icon.id ? !withoutIcon : false}
                   $currentColorScheme={$currentColorScheme}
                   onClick={
                     coverId === icon.id
                       ? toggleWithoutIcon
-                      : () => onSelectIcon(icon)
+                      : () => onSelectIcon(icon as unknown as string)
                   }
                   key={icon.id}
                   dangerouslySetInnerHTML={createMarkup()}

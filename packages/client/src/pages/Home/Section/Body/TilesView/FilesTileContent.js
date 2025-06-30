@@ -31,6 +31,7 @@ import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-ty
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
@@ -148,6 +149,12 @@ const FilesTileContent = ({
 
   const roomType = getRoomTypeTitleTranslation(t, item.roomType);
 
+  let linkProps = { ...linkStyles };
+
+  if (item?.isPlugin) {
+    linkProps = createPluginFileHandlers(item, linkProps);
+  }
+
   return (
     <SimpleFilesTileContent
       sideColor={theme.filesSection.tilesView.sideColor}
@@ -163,7 +170,7 @@ const FilesTileContent = ({
         title={title}
         fontWeight={isTemplate ? 700 : 600}
         target="_blank"
-        {...linkStyles}
+        {...linkProps}
         color={theme.filesSection.tilesView.color}
         isTextOverflow
         dir="auto"

@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import { MobileCategoryWrapper } from "./index";
 import { IMobileCategoryWrapperProps } from "./MobileCategoryWrapper.types";
@@ -47,7 +47,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<IMobileCategoryWrapperProps> = (args) => (
+const Template: StoryFn<IMobileCategoryWrapperProps> = (args) => (
   <MobileCategoryWrapper {...args} />
 );
 

@@ -48,4 +48,3 @@ export const Spaces = ({ portals, tenantAlias }: IProps) => {
     </StyledRowContainer>
   );
 };
-

@@ -39,9 +39,8 @@ const Error404 = dynamic(
   },
 );
 
-const NotFoundError = ({}) => {
+const NotFoundError = () => {
   return <Error404 />;
 };
 
 export default NotFoundError;
-

@@ -31,7 +31,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../../utils";
 
 import { RoomsType } from "../../../enums";
 

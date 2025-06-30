@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { ArticleProfileLoader } from ".";
 import { ProfileLoaderProps } from "./ProfileLoader.types";
 
@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ProfileLoaderProps> = (args) => (
+const Template: StoryFn<ProfileLoaderProps> = (args) => (
   <div style={{ position: "relative", height: "200px", width: "300px" }}>
     <ArticleProfileLoader {...args} />
   </div>

@@ -1,11 +1,13 @@
 import React, { useMemo } from "react";
 
 import { TUser } from "@docspace/shared/api/people/types";
-import type { TSettings } from "@docspace/shared/api/settings/types";
+import type {
+  TSettings,
+  TFirebaseSettings,
+} from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
-import type { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 
 import useI18N from "@/hooks/useI18N";
 import useTheme from "@/hooks/useTheme";

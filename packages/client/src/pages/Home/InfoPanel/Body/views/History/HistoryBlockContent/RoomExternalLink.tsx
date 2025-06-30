@@ -99,16 +99,14 @@ const HistoryRoomExternalLink = ({
 
   return (
     <StyledHistoryLink
-      style={
-        withWrapping ? { display: "inline", wordBreak: "break-all" } : null
-      }
+      style={withWrapping ? { display: "inline", wordBreak: "break-all" } : {}}
     >
       {canEditLink ? (
         <Link
           className="text link"
           onClick={onEditLink}
           isTextOverflow
-          style={withWrapping ? { display: "inline", textWrap: "wrap" } : null}
+          style={withWrapping ? { display: "inline", textWrap: "wrap" } : {}}
         >
           {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
         </Link>

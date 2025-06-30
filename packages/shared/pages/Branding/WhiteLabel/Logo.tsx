@@ -54,7 +54,7 @@ export const Logo = (props: ILogoProps) => {
     name,
   } = props;
 
-  const currentLogo = getLogoFromPath(src);
+  const currentLogo = getLogoFromPath(src) as string;
 
   const onLogoClick = () => {
     if (!isMobile()) return;

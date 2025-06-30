@@ -570,6 +570,7 @@ class FilesStore {
       api.files
         .getFolderInfo(folder.id)
         .then((f) => {
+          console.log(f);
           console.log("[WS] update folder", f.id, f.title);
 
           if (this.selection?.length) {
@@ -605,6 +606,10 @@ class FilesStore {
               navigationPath,
               pathParts,
             });
+
+            const item = this.getFilesListItems([f])[0];
+
+            setInfoPanelSelectedRoom(item, true);
           }
 
           this.setFolder(f);

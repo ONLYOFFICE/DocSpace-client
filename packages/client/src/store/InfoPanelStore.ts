@@ -185,7 +185,9 @@ class InfoPanelStore {
     this.isVisible = true;
   };
 
-  setInfoPanelRoom = (infoPanelRoom: Nullable<TRoom>) => {
+  setInfoPanelRoom = (infoPanelRoom: Nullable<TRoom>, withCheck?: boolean) => {
+    if (withCheck && infoPanelRoom?.id !== this.infoPanelRoom?.id) return;
+
     this.infoPanelRoom = infoPanelRoom;
   };
 

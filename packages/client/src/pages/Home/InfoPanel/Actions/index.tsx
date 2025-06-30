@@ -90,11 +90,11 @@ const InfoPanelActions = ({
   // Set selected room
   useEffect(() => {
     const setInfoPanelSelectedRoomHandler = (
-      e: CustomEvent<{ room: Nullable<TRoom> }>,
+      e: CustomEvent<{ room: Nullable<TRoom>; withCheck?: boolean }>,
     ) => {
-      const { room } = e.detail;
+      const { room, withCheck } = e.detail;
 
-      setInfoPanelRoom!(room);
+      setInfoPanelRoom!(room, withCheck);
     };
 
     window.addEventListener(

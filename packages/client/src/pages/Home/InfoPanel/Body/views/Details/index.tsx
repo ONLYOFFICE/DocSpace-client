@@ -239,11 +239,11 @@ const Details = ({
             radius="16px"
             // isRoom={"isRoom" in selection ? selection.isRoom : false}
             showDefault={showDefaultRoomIcon}
-            imgClassName={`no-thumbnail-img ${"isRoom" in selection && selection.isRoom && "is-room"} ${
+            imgClassName={`no-thumbnail-img ${"isRoom" in selection && selection.isRoom && styles.isRoom} ${
               "logo" in selection &&
               !isArchive &&
               selection.logo?.large &&
-              "custom-logo"
+              styles.customLogo
             }`}
             logo={currentIcon}
             model={model}

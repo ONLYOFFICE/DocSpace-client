@@ -41,9 +41,12 @@ export const hideInfoPanel = () => {
   window.dispatchEvent(event);
 };
 
-export const setInfoPanelSelectedRoom = (room: Nullable<TRoom>) => {
+export const setInfoPanelSelectedRoom = (
+  room: Nullable<TRoom>,
+  withCheck?: boolean,
+) => {
   const event = new CustomEvent(InfoPanelEvents.setInfoPanelSelectedRoom, {
-    detail: { room },
+    detail: { room, withCheck },
   });
 
   window.dispatchEvent(event);

@@ -3,7 +3,7 @@
   "content": "Process of filling out the form",
   "content_en_sha1_hash": "36deb08f4df20c19eabe41542bc1e2c97f64a231",
   "created_at": "2025-05-19T21:30:45.378Z",
-  "updated_at": "2025-06-18T17:09:45.980Z",
+  "updated_at": "2025-06-26T19:00:18.304Z",
   "comment": {
     "text": "The translation key \"FillingStatusBarTitle\" is used to display a status bar title indicating that a form is being filled out. It appears in a modal dialog header and also in a start filling panel, providing context for the user about the current process of filling the form.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
-      "line_number": 315,
-      "context": "<ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}\n bodyText={t(\"Common:FillingStatusBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />",
+      "line_number": 321,
+      "context": "<ModalDialog.Body>\n <section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}\n bodyText={t(\"Common:FillingStatusBarDescription\")}\n iconName={InfoSvgUrl}\n onClose={() => setInfoBarVisible(false)}\n />\n <hr className={styles.divider} />",
       "module": "/packages/shared"
     }
   ],

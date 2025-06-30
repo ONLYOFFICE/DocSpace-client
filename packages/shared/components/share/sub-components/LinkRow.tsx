@@ -81,7 +81,7 @@ const LinkRow = ({
   const { t } = useTranslation("Common");
   const [isMobileViewLink, setIsMobileViewLink] = useState(isMobile());
 
-  const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];
+  const shareOptions = getShareOptions(t) as TOption[];
   const accessOptions = availableExternalRights
     ? getAccessOptions(t, availableExternalRights)
     : [];
@@ -237,37 +237,25 @@ const LinkRow = ({
               />
             ) : null}
             {isRoomsLink ? (
-              <>
-                {!isFormRoom ? (
-                  <AccessRightSelect
-                    selectedOption={roomSelectedOptions ?? ({} as TOption)}
-                    onSelect={onAccessRightsSelect}
-                    accessOptions={roomAccessOptions}
-                    modernView
-                    directionY="both"
-                    type="onlyIcon"
-                    manualWidth="300px"
-                    isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
-                    withBlur={isMobileViewLink}
-                    isMobileView={isMobileViewLink}
-                    fixedDirection={isMobileViewLink}
-                    isAside={isMobileViewLink}
-                    topSpace={16}
-                    usePortalBackdrop
-                    shouldShowBackdrop={isMobileViewLink}
-                  />
-                ) : null}
-                {!isArchiveFolder ? (
-                  <ContextMenuButton
-                    getData={getData}
-                    title={t("Files:ShowLinkActions")}
-                    directionY="both"
-                    onClick={onOpenContextMenu}
-                    onClose={onCloseContextMenu}
-                    isDisabled={isExpiredLink || isLoaded}
-                  />
-                ) : null}
-              </>
+              !isFormRoom ? (
+                <AccessRightSelect
+                  selectedOption={roomSelectedOptions ?? ({} as TOption)}
+                  onSelect={onAccessRightsSelect}
+                  accessOptions={roomAccessOptions}
+                  modernView
+                  directionY="both"
+                  type="onlyIcon"
+                  manualWidth="300px"
+                  isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+                  withBlur={isMobileViewLink}
+                  isMobileView={isMobileViewLink}
+                  fixedDirection={isMobileViewLink}
+                  isAside={isMobileViewLink}
+                  topSpace={16}
+                  usePortalBackdrop
+                  shouldShowBackdrop={isMobileViewLink}
+                />
+              ) : null
             ) : (
               <ComboBox
                 directionY="both"
@@ -286,6 +274,17 @@ const LinkRow = ({
                 withBackdrop={false}
               />
             )}
+
+            {!isArchiveFolder ? (
+              <ContextMenuButton
+                getData={() => getData(link)}
+                title={t("Files:ShowLinkActions")}
+                directionY="both"
+                onClick={onOpenContextMenu}
+                onClose={onCloseContextMenu}
+                isDisabled={isExpiredLink || isLoaded}
+              />
+            ) : null}
           </div>
         </div>
       );

@@ -30,8 +30,11 @@ import moment from "moment";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { ShareAccessRights } from "../../enums";
+import { LinkEntityType, ShareAccessRights } from "../../enums";
 import { LINKS_LIMIT_COUNT } from "../../constants";
 import {
   addExternalLink,
@@ -76,6 +79,9 @@ const Share = (props: ShareProps) => {
     setShareChanged,
     onOpenPanel,
     onlyOneLink,
+    setIsScrollLocked,
+    setEditLinkPanelIsVisible,
+    setLinkParams,
   } = props;
   const { t } = useTranslation(["Common"]);
   const [fileLinks, setFileLinks] = useState<TLink[]>([]);
@@ -95,12 +101,15 @@ const Share = (props: ShareProps) => {
   const fetchLinks = React.useCallback(async () => {
     if (requestRunning.current || hideSharePanel) return;
     requestRunning.current = true;
-    const res = await getExternalLinks(infoPanelSelection.id);
+
+    const res = infoPanelSelection.isFolder
+      ? { items: [] }
+      : await getExternalLinks(infoPanelSelection.id);
 
     setFileLinks(res.items);
     setIsLoading(false);
     requestRunning.current = false;
-  }, [infoPanelSelection.id, hideSharePanel]);
+  }, [infoPanelSelection.id, hideSharePanel, infoPanelSelection.isFolder]);
 
   useEffect(() => {
     if (hideSharePanel) {
@@ -334,6 +343,25 @@ const Share = (props: ShareProps) => {
     updateAccessLink();
   };
 
+  const onCloseContextMenu = () => {
+    setIsScrollLocked?.(false);
+  };
+
+  const onOpenContextMenu = () => {
+    setIsScrollLocked?.(true);
+  };
+
+  const onEditLink = (link: TFileLink) => {
+    setEditLinkPanelIsVisible(true);
+    setLinkParams({
+      isEdit: true,
+      link,
+      roomId: infoPanelSelection.id,
+      type: LinkEntityType.FILE,
+    });
+    onCloseContextMenu();
+  };
+
   const changeExpirationOption = async (
     link: TFileLink,
     expirationDate: moment.Moment | null,
@@ -381,6 +409,38 @@ const Share = (props: ShareProps) => {
         {t("Common:MaximumNumberOfExternalLinksCreated")}
       </Text>
     );
+  };
+
+  const getData = (link: TFileLink): ContextMenuModel[] => {
+    return [
+      {
+        key: "edit-link-key",
+        label: t("Files:LinkSettings"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => onEditLink(link),
+      },
+      {
+        key: "copy-link-settings-key",
+        label: t("Common:CopySharedLink"),
+        icon: CopyToReactSvgUrl,
+        onClick: () => copyDocumentShareLink(link, t),
+      },
+      {
+        key: "delete-link-separator",
+        isSeparator: true,
+      },
+      {
+        key: "delete-link-key",
+        label: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        onClick: () => {
+          changeShareOption(
+            { key: "remove", access: ShareAccessRights.None },
+            link,
+          );
+        },
+      },
+    ];
   };
 
   if (hideSharePanel) return null;
@@ -439,6 +499,9 @@ const Share = (props: ShareProps) => {
               ({} as TAvailableExternalRights)
             }
             loadingLinks={loadingLinks}
+            getData={getData}
+            onCloseContextMenu={onCloseContextMenu}
+            onOpenContextMenu={onOpenContextMenu}
           />
         </div>
       )}

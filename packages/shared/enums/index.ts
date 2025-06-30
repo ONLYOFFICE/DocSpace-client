@@ -793,3 +793,9 @@ export enum ProvidersType {
   WebDav = "WebDav",
   Yandex = "Yandex",
 }
+
+export const enum LinkEntityType {
+  FILE,
+  FOLDER,
+  ROOM,
+}

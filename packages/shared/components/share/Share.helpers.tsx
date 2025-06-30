@@ -56,7 +56,7 @@ import type { TOption } from "../combobox";
 
 export const getShareOptions = (
   t: TTranslation,
-  available: TAvailableExternalRights | undefined,
+  // available: TAvailableExternalRights | undefined,
 ) => {
   return [
     {
@@ -71,16 +71,16 @@ export const getShareOptions = (
         productName: t("Common:ProductName"),
       }),
     },
-    available?.None && {
-      key: "separator",
-      isSeparator: true,
-    },
-    available?.None && {
-      key: "remove",
-      internal: true,
-      access: ShareAccessRights.None,
-      label: t("Common:Remove"),
-    },
+    // available?.None && {
+    //   key: "separator",
+    //   isSeparator: true,
+    // },
+    // available?.None && {
+    //   key: "remove",
+    //   internal: true,
+    //   access: ShareAccessRights.None,
+    //   label: t("Common:Remove"),
+    // },
   ];
 };
 

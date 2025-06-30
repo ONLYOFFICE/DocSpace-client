@@ -28,8 +28,10 @@ import { inject, observer } from "mobx-react";
 
 import Share from "@docspace/shared/components/share";
 
-export default inject<TStore>(({ infoPanelStore, userStore }) => {
+export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
   const selfId = userStore.user?.id ?? "";
+
+  const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
   const {
     setView,
@@ -39,6 +41,7 @@ export default inject<TStore>(({ infoPanelStore, userStore }) => {
     addFileLink,
     shareChanged,
     setShareChanged,
+    setIsScrollLocked,
   } = infoPanelStore;
 
   return {
@@ -50,5 +53,8 @@ export default inject<TStore>(({ infoPanelStore, userStore }) => {
     shareChanged,
     setShareChanged,
     selfId,
+    setIsScrollLocked,
+    setLinkParams,
+    setEditLinkPanelIsVisible,
   };
 })(observer(Share));

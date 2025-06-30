@@ -42,7 +42,7 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
 import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
-import LinkBlock from "./LinkBlock";
+// import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
@@ -74,6 +74,7 @@ const EditLinkPanel = (props) => {
     setLinkParams,
     passwordSettings,
     getPortalPasswordSettings,
+    type,
   } = props;
 
   const roomAccessOptions = useMemo(() => getRoomAccessOptions(t), [t]);
@@ -95,9 +96,6 @@ const EditLinkPanel = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [linkNameValue, setLinkNameValue] = useState(
-    link?.sharedTo?.title || "",
-  );
   const [passwordValue, setPasswordValue] = useState(password);
   const [expirationDate, setExpirationDate] = useState(date);
   const isExpiredDate = expirationDate
@@ -108,7 +106,6 @@ const EditLinkPanel = (props) => {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
-  const [linkValue, setLinkValue] = useState(shareLink);
   const [hasChanges, setHasChanges] = useState(false);
   const [isSameDate, setIsSameDate] = useState(false);
 
@@ -151,7 +148,6 @@ const EditLinkPanel = (props) => {
 
     const updatedLink = JSON.parse(JSON.stringify(externalLink));
 
-    updatedLink.sharedTo.title = linkNameValue;
     updatedLink.sharedTo.password = passwordAccessIsChecked
       ? passwordValue
       : null;
@@ -166,7 +162,7 @@ const EditLinkPanel = (props) => {
         setLinkParams({ link: response, roomId, isPublic, isFormRoom });
 
         if (isEdit) {
-          copyShareLink(linkValue);
+          copyShareLink(shareLink);
           // toastr.success(t("Files:LinkEditedSuccessfully"));
         } else {
           copyShareLink(response?.sharedTo?.shareLink);
@@ -189,7 +185,6 @@ const EditLinkPanel = (props) => {
     passwordValue: password,
     passwordAccessIsChecked: isLocked,
     denyDownload: isDenyDownload,
-    linkNameValue: link?.sharedTo?.title || "",
     accessLink: accessLink ?? ShareAccessRights.ReadOnly,
   };
 
@@ -198,7 +193,6 @@ const EditLinkPanel = (props) => {
       passwordValue,
       passwordAccessIsChecked,
       denyDownload,
-      linkNameValue,
       accessLink: selectedAccessOption.access,
     };
 
@@ -259,14 +253,11 @@ const EditLinkPanel = (props) => {
     setSelectedAccessOption(option);
   };
 
-  const linkNameIsValid = !!linkNameValue.trim();
-
   const expiredLinkText = getExpiredLinkText();
 
   const isPrimary = link?.sharedTo?.primary;
 
-  const isDisabledSaveButton =
-    !hasChanges || isLoading || !linkNameIsValid || isExpired;
+  const isDisabledSaveButton = !hasChanges || isLoading || isExpired;
 
   const editLinkPanelComponent = (
     <ModalDialog
@@ -299,7 +290,7 @@ const EditLinkPanel = (props) => {
               onSelect={handleSelectAccessOption}
             />
           ) : null}
-          <LinkBlock
+          {/* <LinkBlock
             t={t}
             isEdit={isEdit}
             isLoading={isLoading}
@@ -308,7 +299,7 @@ const EditLinkPanel = (props) => {
             setLinkNameValue={setLinkNameValue}
             linkValue={linkValue}
             setLinkValue={setLinkValue}
-          />
+          /> */}
           <PasswordAccessBlock
             t={t}
             isLoading={isLoading}
@@ -399,7 +390,8 @@ export default inject(
     const { currentDeviceType, passwordSettings, getPortalPasswordSettings } =
       settingsStore;
 
-    const { isEdit, roomId, isPublic, isFormRoom, isCustomRoom } = linkParams;
+    const { isEdit, roomId, isPublic, isFormRoom, isCustomRoom, type } =
+      linkParams;
 
     const linkId = linkParams?.link?.sharedTo?.id;
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
@@ -432,6 +424,7 @@ export default inject(
       passwordSettings,
       getPortalPasswordSettings,
       accessLink,
+      type,
     };
   },
 )(

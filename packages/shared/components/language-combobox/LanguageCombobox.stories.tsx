@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Story, Meta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 import { LanguageCombobox } from "./LanguageCombobox";
 import { ComboboxProps } from "./LanguageCombobox.types";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
@@ -50,7 +50,9 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ComboboxProps> = (args) => <LanguageCombobox {...args} />;
+const Template: StoryFn<ComboboxProps> = (args) => (
+  <LanguageCombobox {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef, RefObject, useCallback } from "react";
 import {
   FixedSizeList as List,
   type ListChildComponentProps,
@@ -35,13 +35,13 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
 import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
 
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "../../../../components/text";
 import {
   CustomScrollbarsVirtualList,
   type CustomScrollbarsVirtualListProps,
-} from "@docspace/shared/components/scrollbar";
-import { RadioButton } from "@docspace/shared/components/radio-button";
-import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+} from "../../../../components/scrollbar";
+import { RadioButton } from "../../../../components/radio-button";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../../constants";
 
 import { StyledBackupList } from "../../RestoreBackup.styled";
 import type { BackupListBodyProps } from "./BackupList.types";
@@ -49,7 +49,7 @@ import type { BackupListBodyProps } from "./BackupList.types";
 const VirtualScroll = forwardRef(
   (props: CustomScrollbarsVirtualListProps, ref) => (
     <CustomScrollbarsVirtualList
-      ref={ref}
+      ref={ref as RefObject<unknown>}
       {...props}
       paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
     />

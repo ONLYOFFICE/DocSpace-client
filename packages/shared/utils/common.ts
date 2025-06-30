@@ -1300,7 +1300,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
   const { width } = imageBitMap;
   const { height } = imageBitMap;
 
-  // @ts-expect-error imageBitMap
   const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
 
   async function resizeRecursiveAsync(
@@ -1309,7 +1308,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     depth = 0,
   ): Promise<unknown> {
     const data = resizeImage.resize(
-      // @ts-expect-error canvas
       canvas,
       img.width / compressionRatio,
       img.height / compressionRatio,

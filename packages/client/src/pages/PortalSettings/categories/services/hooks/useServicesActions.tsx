@@ -52,9 +52,9 @@ export const useServicesActions = () => {
   const maxStorageLimit = 9999;
 
   const formatWalletCurrency = (
-    quantity?: number,
+    quantity?: number | null,
     minimumFractionDigits: number = 2,
-    maximumFractionDigits: number = 7,
+    maximumFractionDigits: number = 2,
   ) => {
     const amount = quantity ?? walletBalance;
 
@@ -106,7 +106,7 @@ export const useServicesActions = () => {
   };
 
   const buttonTitle = (quantity: number, type: string = "storage"): string => {
-    if (isExceedingPlanLimit(quantity)) return t("SendRequest");
+    if (isExceedingPlanLimit(quantity)) return t("Common:SendRequest");
 
     let hasSubscription;
 
@@ -121,7 +121,7 @@ export const useServicesActions = () => {
 
     if (!hasSubscription) return t("Buy");
 
-    if (isPlanUpgrade(quantity)) return t("Upgrade");
+    if (isPlanUpgrade(quantity) || isCurrentPlan(quantity)) return t("Upgrade");
 
     return t("Downgrade");
   };

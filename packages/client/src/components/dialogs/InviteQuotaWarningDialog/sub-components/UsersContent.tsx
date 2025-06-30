@@ -107,7 +107,7 @@ const UsersContent = ({
   );
 };
 
-export default inject(({ currentQuotaStore, authStore }) => {
+export default inject(({ currentQuotaStore, authStore }: TStore) => {
   const {
     isUserTariffLimit,
 

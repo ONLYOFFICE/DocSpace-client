@@ -108,7 +108,7 @@ class CampaignsStore {
       standalone,
     );
 
-    const isHide = isHideBannerForUser(userType, config?.hideFor);
+    const isHide = isHideBannerForUser(userType as string, config?.hideFor);
     if (isHide) {
       this.setClosedCampaigns(currentCampaign);
       this.getBanner();

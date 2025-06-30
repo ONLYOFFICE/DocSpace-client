@@ -62,4 +62,3 @@ export const StyledMenuIcon = styled(MenuIcon)`
 
   cursor: pointer;
 `;
-

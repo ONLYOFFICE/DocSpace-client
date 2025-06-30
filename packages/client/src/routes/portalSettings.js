@@ -92,7 +92,7 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "customization/branding/company-info-settings",
+      path: "customization/branding/company-info",
       async lazy() {
         const { CompanyInfoSettings } = await componentLoader(
           () =>

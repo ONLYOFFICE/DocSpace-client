@@ -76,7 +76,7 @@ const EmailContainer = ({
 
   if (emailFromInvitation) {
     const onClickBack = () => {
-      history.go(-1);
+      window.history.go(-1);
     };
 
     return (
@@ -88,7 +88,7 @@ const EmailContainer = ({
               {t("Common:Back")}
             </Text>
           </div>
-          <Text fontWeight={600} fontSize={"16px"}>
+          <Text fontWeight={600} fontSize="16px">
             {t("Common:LoginButton")}
           </Text>
         </div>
@@ -121,12 +121,12 @@ const EmailContainer = ({
 
   return (
     <FieldContainer
-      isVertical={true}
+      isVertical
       labelVisible={false}
       hasError={isEmailErrorShow}
       errorMessage={
         errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
-      } //TODO: Add wrong login server error
+      } // TODO: Add wrong login server error
     >
       {isLdapLogin ? (
         <TextInput
@@ -139,8 +139,8 @@ const EmailContainer = ({
             ldap_domain: ldapDomain,
           })}
           size={InputSize.large}
-          scale={true}
-          isAutoFocussed={true}
+          scale
+          isAutoFocussed
           tabIndex={1}
           isDisabled={isLoading}
           autoComplete="off"
@@ -155,8 +155,8 @@ const EmailContainer = ({
           value={identifier}
           placeholder={t("RegistrationEmailWatermark")}
           size={InputSize.large}
-          scale={true}
-          isAutoFocussed={true}
+          scale
+          isAutoFocussed
           tabIndex={1}
           isDisabled={isLoading}
           autoComplete="username"

@@ -27,12 +27,8 @@
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 import React from "react";
 
-import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { InputSize, InputType, TextInput } from "../text-input";
+import { useDidMount } from "../../hooks/useDidMount";
 
 import { BUCKET, FILE_PATH } from "./GoogleCloudSettings.constants";
 import type { GoogleCloudSettingsProps } from "./GoogleCloudSettings.types";

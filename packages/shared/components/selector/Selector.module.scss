@@ -34,6 +34,11 @@
   flex-direction: column;
 
   overflow: hidden;
+
+  :global(.selector-item_label) {
+    line-height: 18px;
+    margin-inline-start: 8px;
+  }
 }
 
 .body {
@@ -418,14 +423,6 @@
     min-width: 32px;
   }
 
-  .userAvatar {
-    svg {
-      path {
-        fill: var(--selector-navigation-lifetime-fill) !important;
-      }
-    }
-  }
-
   .roomLogo {
     height: 32px;
 
@@ -521,7 +518,11 @@
 
   box-sizing: border-box;
 
-  &:hover {
+  div {
+    height: 16px;
+  }
+
+  &:not(.loading):hover {
     div {
       cursor: pointer;
     }
@@ -532,6 +533,11 @@
     path {
       fill: var(--selector-item-input-button-border-hover);
     }
+  }
+
+  &.loading {
+    background-color: var(--input-disabled-bg);
+    border: none;
   }
 }
 

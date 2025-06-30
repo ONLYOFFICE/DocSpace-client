@@ -79,6 +79,7 @@ import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import SummarizeReactSvgUrl from "PUBLIC_DIR/images/icons/16/summarize.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
@@ -134,6 +135,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
+import { ChatEvents } from "@docspace/shared/components/chat/enums";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -210,6 +212,7 @@ class ContextOptionsStore {
     indexingStore,
     clientLoadingStore,
     guidanceStore,
+    flowStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -232,6 +235,7 @@ class ContextOptionsStore {
     this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
     this.guidanceStore = guidanceStore;
+    this.flowStore = flowStore;
   }
 
   onOpenFolder = async (item, t) => {
@@ -1505,6 +1509,29 @@ class ContextOptionsStore {
     };
   };
 
+  summarizeToChat = async (item) => {
+    this.filesStore.setActiveFiles([item]);
+
+    try {
+      await this.flowStore.summarizeToChat(item);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.filesStore.removeActiveItem(item);
+    }
+  };
+
+  askAI = async (file) => {
+    if (!this.flowStore.aiChatIsVisible)
+      this.flowStore.setAiChatIsVisible(true);
+
+    // timeout need for open chat and start handle this event
+    setTimeout(() => {
+      const event = new CustomEvent(ChatEvents.ADD_FILE, { detail: file });
+      window.dispatchEvent(event);
+    }, 0);
+  };
+
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
       ? ["select", "room-info", "show-info"]
@@ -1843,6 +1870,26 @@ class ContextOptionsStore {
       {
         key: "separator-SubmitToGallery",
         isSeparator: true,
+      },
+      {
+        id: "summarize",
+        key: "summarize",
+        label: "Summarize",
+        icon: SummarizeReactSvgUrl,
+        onClick: () => {
+          this.summarizeToChat(item);
+        },
+        disabled: false,
+      },
+      {
+        id: "ask_ai",
+        key: "ask_ai",
+        label: "Ask AI",
+        icon: SummarizeReactSvgUrl,
+        onClick: () => {
+          this.askAI(item);
+        },
+        disabled: false,
       },
       {
         key: "separator4",

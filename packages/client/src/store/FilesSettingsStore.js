@@ -468,7 +468,9 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
-
+        case RoomsType.AIRoom:
+          path = "aiRoom.svg";
+          break;
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;

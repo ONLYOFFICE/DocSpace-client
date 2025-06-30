@@ -32,6 +32,8 @@ import React, { useEffect, useMemo } from "react";
 import { Provider } from "../../utils";
 import { DeviceType } from "../../enums";
 
+import { FloatingButton } from "../floating-button";
+
 import SectionContainer from "./sub-components/SectionContainer";
 import SubSectionHeader from "./sub-components/SectionHeader";
 import SubSectionFilter from "./sub-components/SectionFilter";
@@ -57,6 +59,7 @@ import {
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
 
+import { ChatWidget } from "./sub-components/ChatWidget";
 import OperationsProgressButton from "../operations-progress-button";
 
 export type { SectionProps };
@@ -120,6 +123,19 @@ const Section = (props: SectionProps) => {
 
     primaryOperationsAlert,
     needErrorChecking,
+    chatFiles,
+
+    aiChatIsVisible,
+    setAiChatIsVisible,
+    mainBarVisible,
+
+    getIcon,
+    displayFileExtension,
+    aiChatID,
+    aiSelectedFolder,
+    aiUserId,
+    vectorizedFiles,
+    user,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -317,10 +333,25 @@ const Section = (props: SectionProps) => {
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
-              isInfoPanelVisible={isInfoPanelVisible}
+              isInfoPanelVisible={isInfoPanelVisible || aiChatIsVisible}
             />
           ) : null}
         </SectionContainer>
+
+        <ChatWidget
+          viewAs={viewAs!}
+          isVisible={aiChatIsVisible!}
+          setIsVisible={setAiChatIsVisible!}
+          anotherDialogOpen={anotherDialogOpen!}
+          currentDeviceType={currentDeviceType!}
+          getIcon={getIcon!}
+          displayFileExtension={displayFileExtension!}
+          aiChatID={aiChatID!}
+          aiSelectedFolder={aiSelectedFolder!}
+          aiUserId={aiUserId!}
+          vectorizedFiles={vectorizedFiles!}
+          user={user!}
+        />
 
         {isInfoPanelAvailable ? (
           <InfoPanel

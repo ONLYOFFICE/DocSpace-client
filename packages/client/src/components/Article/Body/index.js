@@ -255,6 +255,10 @@ const ArticleBodyContent = (props) => {
       return setActiveItemId(rootFolderId || roomsFolderId);
     }
 
+    // if (location.pathname.includes("/flows")) {
+    //   return setActiveItemId("flows");
+    // }
+
     if (location.pathname.includes(MEDIA_VIEW_URL)) {
       setActiveItemId(rootFolderId);
     }

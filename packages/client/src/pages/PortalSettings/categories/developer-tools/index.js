@@ -42,6 +42,7 @@ import Webhooks from "./Webhooks";
 import Api from "./Api";
 import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
+import OnlyFlow from "./OnlyFlow";
 
 import SSOLoader from "./sub-components/ssoLoader";
 import ApiKeys from "./ApiKeys";
@@ -112,6 +113,12 @@ const DeveloperToolsWrapper = (props) => {
       content: <ApiKeys />,
     },
   ];
+
+  data.push({
+    id: "onlyflow",
+    name: t("OnlyFlow"),
+    content: <OnlyFlow />,
+  });
 
   useEffect(() => {
     const path = location.pathname;

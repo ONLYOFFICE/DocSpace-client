@@ -549,6 +549,13 @@ export const settingsTree = [
         tKey: "Settings:ApiKeys",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-onlyflow",
+        key: "7-6",
+        icon: "",
+        link: "onlyflow",
+        tKey: "Onlyflow:Onlyflow",
+      },
     ],
   },
   {

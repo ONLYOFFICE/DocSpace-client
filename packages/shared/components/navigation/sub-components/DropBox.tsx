@@ -64,6 +64,10 @@ const DropBox = ({
   onCloseDropBox,
   isContextButtonVisible,
   isPublicRoom,
+
+  chatOpen,
+  withChat,
+  toggleChat,
 }: TDropBoxProps) => {
   const [dropBoxHeight, setDropBoxHeight] = React.useState(0);
   const countItems = navigationItems.length;
@@ -154,6 +158,9 @@ const DropBox = ({
           showTitle
           isContextButtonVisible={isContextButtonVisible}
           isPublicRoom={isPublicRoom}
+          withChat={withChat}
+          chatOpen={chatOpen}
+          toggleChat={toggleChat}
         />
       </div>
 

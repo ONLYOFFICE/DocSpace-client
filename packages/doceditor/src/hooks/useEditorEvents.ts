@@ -811,7 +811,7 @@ const useEditorEvents = ({
 
     const res = await openEdit(
       fileInfo.id,
-      fileInfo.version,
+      undefined,
       doc,
       config?.editorConfig.mode,
       undefined,
@@ -823,7 +823,6 @@ const useEditorEvents = ({
     window.DocEditor?.instances[EDITOR_ID]?.refreshFile(res);
   }, [
     fileInfo?.id,
-    fileInfo?.version,
     doc,
     shareKey,
     config?.editorType,

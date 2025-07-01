@@ -54,18 +54,18 @@ const PaymentMethod = (props: PaymentMethodProps) => {
     walletCustomerStatusNotActive,
   } = props;
 
-  const { t } = useTranslation("Payments");
+  const { t } = useTranslation(["Payments", "Common"]);
 
   const goLinkCard = () => {
     cardLinked
       ? window.open(cardLinked, "_self")
-      : toastr.error(t("ErrorNotification"));
+      : toastr.error(t("Common:UnexpectedError"));
   };
 
   const goStripeAccount = () => {
     accountLink
       ? window.open(accountLink, "_blank")
-      : toastr.error(t("ErrorNotification"));
+      : toastr.error(t("Common:UnexpectedError"));
   };
 
   return (

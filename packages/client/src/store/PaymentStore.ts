@@ -285,6 +285,7 @@ class PaymentStore {
       fetchPayerInfo,
       isGracePeriod,
       isNotPaidPeriod,
+      walletCustomerStatusNotActive,
     } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
@@ -300,7 +301,7 @@ class PaymentStore {
       requests.push(this.getBasicPaymentLink(addedManagersCount));
     }
 
-	if (this.isAlreadyPaid && this.isStripePortalAvailable) {
+    if (this.isAlreadyPaid && this.isStripePortalAvailable) {
       requests.push(this.setPaymentAccount());
 
       if (this.isPayer && walletCustomerStatusNotActive) {
@@ -656,11 +657,11 @@ class PaymentStore {
 
     await fetchPayerInfo();
 
-	 if (isGracePeriod || isNotPaidPeriod) {
+    if (isGracePeriod || isNotPaidPeriod) {
       requests.push(this.getBasicPaymentLink(addedManagersCount));
     }
-    
-	if (this.isAlreadyPaid && this.isStripePortalAvailable) {
+
+    if (this.isAlreadyPaid && this.isStripePortalAvailable) {
       requests.push(this.setPaymentAccount());
 
       if (this.isPayer && walletCustomerStatusNotActive) {

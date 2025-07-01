@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2025-06-26T19:00:18.127Z",
+  "updated_at": "2025-07-01T15:57:35.909Z",
   "comment": {
     "text": "This translation key is used for the \"Cancel\" button in various UI elements such as dialogs and form buttons. It provides the text to be displayed when a user clicks the cancel action, allowing them to terminate an operation or return to their previous state. This key appears in files such as Dialog.js, QuotaForm, and ShareCollectSelector.",
     "is_auto": true,
@@ -366,7 +366,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
-      "line_number": 160,
+      "line_number": 164,
       "context": "primary\n onClick={onClick}\n />\n <Button\n className=\"cancel-button\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onCloseModal}\n />\n </ModalDialog.Footer>\n </ModalDialog>",
       "module": "/packages/client"
     },
@@ -498,7 +498,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 160,
+      "line_number": 164,
       "context": "init: true,\n showSelectorCancel: true,\n showSelectorHeader: true,\n withSearch: true,\n acceptButtonLabel: t(\"Common:SelectAction\"),\n cancelButtonLabel: t(\"Common:CancelButton\"),\n withSubtitle: true,\n filterParam: FilesSelectorFilterTypes.ALL,\n isButtonMode: false,\n buttonWithLogo: true,\n events: {",
       "module": "/packages/client"
     },
@@ -792,7 +792,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 575,
+      "line_number": 592,
       "context": "}\n scale\n />\n <Button\n key=\"CancelButton\"\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n onClick={onClose}\n scale\n />\n </ModalDialog.Footer>",
       "module": "/packages/shared"
     },

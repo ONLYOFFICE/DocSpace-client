@@ -3,7 +3,7 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-19T21:30:52.911Z",
-  "updated_at": "2025-06-03T20:59:42.053Z",
+  "updated_at": "2025-07-01T15:57:36.131Z",
   "comment": {
     "text": "The translation key \"ThirdPartyResource\" is used to display a description for a third-party resource filter option in various UI contexts, such as filtering options and radio button labels. It appears on screens related to data management and backup settings, informing users that this option selects a third-party resource. Translators should ensure the text accurately reflects the meaning of \"ThirdPartyResource\" in their target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1024,
+      "line_number": 1040,
       "context": "});\n \n filterOptions.push({\n key: FilterGroups.roomFilterProviderType,\n group: FilterGroups.roomFilterProviderType,\n label: t(\"Settings:ThirdPartyResource\"),\n isHeader: true,\n isLast: true,\n });\n \n filterOptions.push(...thirdPartyOptions);",
       "module": "/packages/client"
     },

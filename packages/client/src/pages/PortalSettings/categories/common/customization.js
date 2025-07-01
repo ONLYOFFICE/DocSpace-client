@@ -37,6 +37,7 @@ import { WelcomePageSettings } from "./Customization/welcome-page-settings";
 import { PortalRenaming } from "./Customization/portal-renaming";
 import { DNSSettings } from "./Customization/dns-settings";
 import { ConfigureDeepLink } from "./Customization/configure-deep-link";
+import { AdManagement } from "./Customization/ad-management";
 import CustomizationNavbar from "./customization-navbar";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 
@@ -96,6 +97,7 @@ const Customization = (props) => {
     isSettingPaid,
     enablePortalRename,
     resetIsInit,
+    standalone,
   } = props;
 
   const isLoadedSetting = isLoaded && tReady;
@@ -142,12 +144,18 @@ const Customization = (props) => {
       ) : null}
       <StyledSettingsSeparator />
       <ConfigureDeepLink />
+      {standalone ? (
+        <>
+          <StyledSettingsSeparator />
+          <AdManagement />
+        </>
+      ) : null}
     </StyledComponent>
   );
 };
 
 export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const { enablePortalRename } = settingsStore;
+  const { enablePortalRename, standalone } = settingsStore;
   const { isCustomizationAvailable } = currentQuotaStore;
   const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;
 
@@ -157,6 +165,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     isSettingPaid: isCustomizationAvailable,
     enablePortalRename,
     resetIsInit,
+    standalone,
   };
 })(
   withLoading(withTranslation(["Settings", "Common"])(observer(Customization))),

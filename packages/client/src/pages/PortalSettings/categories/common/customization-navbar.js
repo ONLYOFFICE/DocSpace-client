@@ -49,6 +49,7 @@ const CustomizationNavbar = ({
   isLoadedPage,
   isSettingPaid,
   enablePortalRename,
+  standalone,
 }) => {
   const isLoadedSetting = tReady;
   const navigate = useNavigate();
@@ -100,16 +101,25 @@ const CustomizationNavbar = ({
         url="/portal-settings/customization/general/configure-deep-link"
         onClickLink={onClickLink}
       />
+      {standalone ? (
+        <MobileCategoryWrapper
+          title={t("AdManagement")}
+          subtitle={t("AdManagementDescription")}
+          url="/portal-settings/customization/general/ad-management"
+          onClickLink={onClickLink}
+        />
+      ) : null}
     </StyledComponent>
   );
 };
 
 export default inject(({ common, settingsStore }) => {
-  const { enablePortalRename } = settingsStore;
+  const { enablePortalRename, standalone } = settingsStore;
   const { setIsLoadedCustomizationNavbar } = common;
   return {
     setIsLoadedCustomizationNavbar,
     enablePortalRename,
+    standalone,
   };
 })(
   withCultureNames(

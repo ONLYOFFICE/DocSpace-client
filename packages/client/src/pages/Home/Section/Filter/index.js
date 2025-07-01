@@ -616,6 +616,9 @@ const SectionFilterContent = ({
           case FilterType.Pdf.toString():
             label = getManyPDFTitle(t, false);
             break;
+          case FilterType.DiagramsOnly.toString():
+            label = t("Common:Diagrams");
+            break;
           default:
             break;
         }
@@ -887,6 +890,12 @@ const SectionFilterContent = ({
             key: FilterType.PDFForm.toString(),
             group: FilterGroups.filterType,
             label: getManyPDFTitle(t, true),
+          },
+          {
+            id: "filter_type-diagrams",
+            key: FilterType.DiagramsOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Common:Diagrams"),
           },
           ...archives,
           ...images,

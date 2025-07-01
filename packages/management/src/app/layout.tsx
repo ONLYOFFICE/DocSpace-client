@@ -65,10 +65,11 @@ export default async function RootLayout({
     ],
   );
 
+  const baseURL = await getBaseUrl();
+
   if (settings === "access-restricted") {
     logger.info("Management layout access-restricted");
 
-    const baseURL = await getBaseUrl();
     redirect(`${baseURL}/${settings}`);
   }
 
@@ -79,7 +80,6 @@ export default async function RootLayout({
   ) {
     logger.info("Management layout error/403");
 
-    const baseURL = await getBaseUrl();
     redirect(`${baseURL}/error/403`);
   }
 

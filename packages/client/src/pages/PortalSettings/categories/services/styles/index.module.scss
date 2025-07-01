@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-bottom: 20px;
+
   user-select: none;
 }
 
@@ -68,4 +68,8 @@
 .cancelDialog {
   margin-bottom: 16px;
   user-select: none;
+}
+
+.selectionAmount {
+  margin-bottom: 20px;
 }

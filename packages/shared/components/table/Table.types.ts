@@ -96,6 +96,7 @@ export interface TableHeaderCellProps {
   tagRef?:
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
+  testId?: string;
 }
 
 export interface TableSettingsProps {

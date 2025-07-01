@@ -1242,6 +1242,7 @@ export const TableHeader = (props: TableHeaderProps) => {
           "lengthen-header": isLengthenHeader,
         })}
         ref={headerRef}
+        data-testid="table-header"
       >
         <div className={styles.tableHeaderRow}>
           {columns.map((column, index) => {
@@ -1260,12 +1261,17 @@ export const TableHeader = (props: TableHeaderProps) => {
                 onMouseDown={onMouseDown}
                 sortingVisible={sortingVisible || false}
                 tagRef={tagRef}
+                testId={`column-${column.key}`}
               />
             );
           })}
 
           {showSettings ? (
-            <div className={styles.tableHeaderSettings} title={settingsTitle}>
+            <div
+              data-testid="settings-block"
+              className={styles.tableHeaderSettings}
+              title={settingsTitle}
+            >
               <TableSettings
                 columns={columns}
                 disableSettings={

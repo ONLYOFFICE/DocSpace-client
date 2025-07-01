@@ -47,6 +47,7 @@ const TableHeaderCell = ({
   defaultSize,
   sortingVisible,
   tagRef,
+  testId = "table-header-cell",
 }: TableHeaderCellProps) => {
   const {
     title,
@@ -96,7 +97,7 @@ const TableHeaderCell = ({
       data-min-width={minWidth}
       data-default-size={defaultSize}
       ref={withTagRef ? tagRef : null}
-      data-testid="table-header-cell"
+      data-testid={testId}
     >
       <div className={styles.tableHeaderItem}>
         <div className={styles.textWrapper} onClick={onClick}>

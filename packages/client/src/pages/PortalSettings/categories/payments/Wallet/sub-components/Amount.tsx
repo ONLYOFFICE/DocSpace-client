@@ -33,27 +33,26 @@ import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 
-import { formatCurrencyValue } from "../utils";
 import styles from "../styles/Amount.module.scss";
 import { useAmountValue } from "../context";
 
 type AmountProps = {
   isDisabled: boolean;
-  language: string;
-  currency: string;
   walletCustomerEmail?: boolean;
+  walletCustomerStatusNotActive?: boolean;
   reccomendedAmount?: string;
+  formatWalletCurrency?: (item: number, fractionDigits?: number) => string;
 };
 
 const MAX_LENGTH = 6;
 
 const Amount = (props: AmountProps) => {
   const {
-    language,
-    currency,
     walletCustomerEmail,
     isDisabled,
+    walletCustomerStatusNotActive,
     reccomendedAmount,
+    formatWalletCurrency,
   } = props;
 
   const { amount, setAmount } = useAmountValue();
@@ -63,7 +62,7 @@ const Amount = (props: AmountProps) => {
   const amountTabs = () => {
     const amounts = [10, 20, 30, 50, 100];
     return amounts.map((item) => ({
-      name: `+${formatCurrencyValue(language, item, currency)}`,
+      name: `+${formatWalletCurrency!(item, 0)}`,
       id: item.toString(),
       value: item,
       content: null,
@@ -133,11 +132,13 @@ const Amount = (props: AmountProps) => {
         />
         {reccomendedAmount ? (
           <Text className={styles.reccomendedAmount}>
-            {t("RecommendedTopUpAmount", { amount: reccomendedAmount })}
+            {t("RecommendedTopUpAmount", {
+              amount: formatWalletCurrency!(+reccomendedAmount, 0),
+            })}
           </Text>
         ) : null}
       </div>
-      {!walletCustomerEmail ? (
+      {!walletCustomerEmail || walletCustomerStatusNotActive ? (
         <Tooltip
           id="iconTooltip"
           place="bottom"

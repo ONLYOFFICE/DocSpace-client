@@ -3,7 +3,7 @@
   "content": "Individual rights in the room",
   "content_en_sha1_hash": "50106622971aec0a90a7902b87dffefc200e8765",
   "created_at": "2025-05-19T21:30:53.476Z",
-  "updated_at": "2025-05-26T07:57:32.305Z",
+  "updated_at": "2025-06-30T12:20:31.240Z",
   "comment": {
     "text": "This translation key is used to translate the phrase \"Individual rights\" which appears as a tooltip or label in a UI component, likely a button or dialog element, indicating that it relates to individual permissions or entitlements.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/sub-components/GroupMember/index.tsx",
-      "line_number": 169,
+      "line_number": 177,
       "context": "place=\"left\"\n offsetRight={0}\n openOnClick={false}\n tooltipContent={\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"PeopleTranslations:IndividualRights\")}\n </Text>\n }\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     }

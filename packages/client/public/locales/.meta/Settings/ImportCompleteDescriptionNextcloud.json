@@ -3,7 +3,7 @@
   "content": "Data import from Nextcloud to {{organizationName}} {{productName}} is complete!",
   "content_en_sha1_hash": "3fc84e679584c3062a1a842d78944f1be35528d6",
   "created_at": "2025-05-19T21:30:51.627Z",
-  "updated_at": "2025-05-26T07:57:32.497Z",
+  "updated_at": "2025-06-30T12:20:31.410Z",
   "comment": {
     "text": "This translation key is used to display a success message after completing data import from Nextcloud to an organization. It appears in the UI as a confirmation message, typically on a button or dialog that indicates successful import completion.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 162,
+      "line_number": 161,
       "context": "description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"Nextcloud\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),\n description: t(\"Settings:ImportCompleteDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <ImportCompleteStep t={t} />,\n },",
       "module": "/packages/client"
     }

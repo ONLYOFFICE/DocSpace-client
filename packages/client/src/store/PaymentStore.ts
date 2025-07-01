@@ -38,7 +38,6 @@ import {
 import {
   getBalance,
   getCardLinked,
-  getWalletPayer,
   getTransactionHistory,
   getPaymentLink,
   getAutoTopUpSettings,
@@ -57,14 +56,12 @@ import { TTranslation } from "@docspace/shared/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import {
   TBalance,
-  TCustomerInfo,
   TAutoTopUpSettings,
   TTransactionCollection,
   TPaymentFeature,
   TPaymentQuota,
   TNumericPaymentFeature,
 } from "@docspace/shared/api/portal/types";
-import { PaymentMethodStatus } from "@docspace/shared/enums";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
 import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 

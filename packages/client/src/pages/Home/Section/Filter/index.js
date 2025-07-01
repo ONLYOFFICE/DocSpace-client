@@ -92,7 +92,6 @@ const SectionFilterContent = ({
   infoPanelVisible,
   isRooms,
   isTrash,
-  userId,
   isPersonalRoom,
   isIndexing,
   isIndexEditingMode,
@@ -115,6 +114,10 @@ const SectionFilterContent = ({
   // users
   usersFilter,
   setUsersFilter,
+
+  isCollaborator,
+  isVisitor,
+  userId,
 
   showFilterLoader,
   isPublicRoom,
@@ -905,12 +908,7 @@ const SectionFilterContent = ({
         group: FilterGroups.roomFilterSubject,
         label: t("Common:MeLabel"),
       },
-      {
-        id: "filter_author-other",
-        key: FilterKeys.other,
-        group: FilterGroups.roomFilterSubject,
-        label: t("Common:OtherLabel"),
-      },
+
       {
         id: "filter_author-user",
         key: FilterKeys.user,
@@ -918,6 +916,15 @@ const SectionFilterContent = ({
         displaySelectorType: "link",
       },
     ];
+
+    if (!isCollaborator && !isVisitor) {
+      subjectOptions.push({
+        id: "filter_author-other",
+        key: FilterKeys.other,
+        group: FilterGroups.roomFilterSubject,
+        label: t("Common:OtherLabel"),
+      });
+    }
 
     const ownerOptions = [
       {
@@ -1046,12 +1053,7 @@ const SectionFilterContent = ({
           group: FilterGroups.filterAuthor,
           label: t("Common:MeLabel"),
         },
-        {
-          id: "filter_author-other",
-          key: FilterKeys.other,
-          group: FilterGroups.filterAuthor,
-          label: t("Common:OtherLabel"),
-        },
+
         {
           id: "filter_author-user",
           key: FilterKeys.user,
@@ -1059,6 +1061,15 @@ const SectionFilterContent = ({
           displaySelectorType: "link",
         },
       ];
+
+      if (!isCollaborator && !isVisitor) {
+        authorOption.push({
+          id: "filter_author-other",
+          key: FilterKeys.other,
+          group: FilterGroups.filterAuthor,
+          label: t("Common:OtherLabel"),
+        });
+      }
 
       !isPublicRoom && filterOptions.push(...authorOption);
       filterOptions.push(...typeOptions);
@@ -1097,6 +1108,8 @@ const SectionFilterContent = ({
     isTrash,
     isPublicRoom,
     isTemplatesFolder,
+    isCollaborator,
+    isVisitor,
     getContactsFilterData,
   ]);
 
@@ -1478,8 +1491,10 @@ export default inject(
       showStorageInfo,
       isDefaultRoomsQuotaSet,
 
-      user,
       userId: user?.id,
+
+      isCollaborator: user?.isCollaborator,
+      isVisitor: user?.isVisitor,
 
       filter,
       roomsFilter,

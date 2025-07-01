@@ -257,14 +257,15 @@ const Editor = ({
   };
 
   if (
+    typeof window !== "undefined" &&
     newConfig.editorConfig?.user &&
     newConfig.editorConfig.user.image?.includes(
       "default_user_photo_size_48-48.png",
     )
   ) {
     newConfig.editorConfig.user.image = isBase
-      ? UserAvatarBaseSvgUrl
-      : UserAvatarDarkSvgUrl;
+      ? `${window.location.origin}${UserAvatarBaseSvgUrl}`
+      : `${window.location.origin}${UserAvatarDarkSvgUrl}`;
   }
 
   if (successAuth) {

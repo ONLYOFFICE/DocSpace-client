@@ -24,35 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Meta, StoryObj } from "@storybook/react";
+.search {
+  width: calc(100% - 16px);
 
-import SearchLoader from "./Search";
-
-const meta = {
-  title: "Skeletons/Selector/Search",
-  component: SearchLoader,
-  parameters: {
-    docs: {
-      description: {
-        component: "Loading skeleton for search input",
-      },
-    },
-  },
-  argTypes: {
-    style: {
-      control: "object",
-      description: "Custom styles for the container",
-    },
-  },
-  tags: ["autodocs"],
-} satisfies Meta<typeof SearchLoader>;
-
-export default meta;
-
-type Story = StoryObj<typeof SearchLoader>;
-
-export const Default: Story = {
-  args: {
-    style: { margin: "20px" },
-  },
-};
+  rect {
+    width: calc(100% - 16px);
+  }
+}

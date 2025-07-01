@@ -280,8 +280,12 @@ class PaymentStore {
   basicSettings = async () => {
     if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
 
-    const { fetchPortalTariff, fetchPayerInfo, walletCustomerStatusNotActive } =
-      this.currentTariffStatusStore;
+    const {
+      fetchPortalTariff,
+      fetchPayerInfo,
+      isGracePeriod,
+      isNotPaidPeriod,
+    } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
     this.setIsUpdatingBasicSettings(true);
@@ -292,7 +296,11 @@ class PaymentStore {
 
     requests.push(fetchPortalTariff());
 
-    if (this.isAlreadyPaid && this.isStripePortalAvailable) {
+    if (isGracePeriod || isNotPaidPeriod) {
+      requests.push(this.getBasicPaymentLink(addedManagersCount));
+    }
+
+	if (this.isAlreadyPaid && this.isStripePortalAvailable) {
       requests.push(this.setPaymentAccount());
 
       if (this.isPayer && walletCustomerStatusNotActive) {
@@ -632,8 +640,13 @@ class PaymentStore {
 
     const { addedManagersCount } = this.currentQuotaStore;
     const { setPortalPaymentQuotas } = this.paymentQuotasStore;
-    const { fetchPortalTariff, fetchPayerInfo, walletCustomerStatusNotActive } =
-      this.currentTariffStatusStore;
+    const {
+      fetchPortalTariff,
+      fetchPayerInfo,
+      walletCustomerStatusNotActive,
+      isGracePeriod,
+      isNotPaidPeriod,
+    } = this.currentTariffStatusStore;
 
     const requests = [];
 
@@ -643,7 +656,11 @@ class PaymentStore {
 
     await fetchPayerInfo();
 
-    if (this.isAlreadyPaid && this.isStripePortalAvailable) {
+	 if (isGracePeriod || isNotPaidPeriod) {
+      requests.push(this.getBasicPaymentLink(addedManagersCount));
+    }
+    
+	if (this.isAlreadyPaid && this.isStripePortalAvailable) {
       requests.push(this.setPaymentAccount());
 
       if (this.isPayer && walletCustomerStatusNotActive) {

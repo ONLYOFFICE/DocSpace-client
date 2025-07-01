@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Preporučujemo da izaberete novog Platioca koji dobija pristup podešavanjima pretplate u {{productName}}-u.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Preporučujemo da kontaktirate vlasnika {{productName}}-a da biste izabrali novog Platioca.",
   "LinkNewCard": "Da biste povezali novu karticu, pratite ovaj link.",
+  "LinkNewCardEmail": "Da biste povezali novu karticu, obratite se platiocu na <1>{{email}}</1>",
   "ManagerTypesDescription": "Tipovi administratorskih naloga i njihove privilegije",
   "NewRoomWillExceedLimit": "Kreiranje ove prostorije nije moguće jer je dostignut limit za broj prostorija uključenih u vaš trenutni plan.",
   "NewStorageImmidiatelyAvailable": "Novi prostor biće dostupan odmah nakon uplate.",

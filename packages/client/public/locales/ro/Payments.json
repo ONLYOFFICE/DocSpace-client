@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Vă recomandăm să alegeți un Plătitor nou, care va avea acces la setările de abonament în spațiul {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Vă recomandăm să contactați proprietarul {{productName}} pentru a alege un Plătitor nou.",
   "LinkNewCard": "Pentru a atașa un card nou, urmăriți linkul de mai jos.",
+  "LinkNewCardEmail": "Pentru a atașa un card nou, vă rugăm să contactaţi plătitorul  <1>{{email}}</1>",
   "ManagerTypesDescription": "Tipurile de cont administrator şi privilegiile aferente",
   "NewRoomWillExceedLimit": "Imposibil de creat această sală deoarece limita maximă de săli permisă de planul dvs. actual a fost atinsă.",
   "NewStorageImmidiatelyAvailable": "Spațiul de stocare va deveni disponibil imediat după efectuarea plății.",

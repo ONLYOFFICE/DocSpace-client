@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Ne rekomandojmë zgjedhjen e një paguesi të ri i cili ka qasje te cilësimet e abonimit në {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Rekomandojmë të kontaktoni zotëruesin e {{productName}} për të zgjedhur një pagues të ri.",
   "LinkNewCard": "Për të lidhur një kartë të re, ju lutem ndiqni këtë lidhje.",
+  "LinkNewCardEmail": "Për të lidhur një kartë të re, ju lutem kontaktoni pagesuesin <1>{{email}}</1>",
   "ManagerTypesDescription": "Llojet e llogarive të administratorit dhe privilegjet e tyre",
   "NewRoomWillExceedLimit": "Krijimi i kësaj dhome nuk është i mundur pasi është arritur kufiri për numrin e dhomave të përfshira në planin tuaj aktual.",
   "NewStorageImmidiatelyAvailable": "Hapësira ruajtëse e re do të jetë e disponueshme menjëherë pas pagesës.",

@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Doporučujeme zvolit nového plátce, který získá přístup k nastavení předplatného v {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Doporučujeme kontaktovat vlastníka služby {{productName}} a zvolit nového Plátce.",
   "LinkNewCard": "Pro propojení nové karty, prosím, klikněte na tento odkaz.",
+  "LinkNewCardEmail": "Pro propojení nové karty, kontaktujte platitele <1>{{email}}</1>",
   "ManagerTypesDescription": "Typy účtů správce a jejich oprávnění",
   "NewRoomWillExceedLimit": "Vytvoření této místnosti není možné, protože byl dosažen limit počtu místností zahrnutých do vašeho aktuálního tarifu.",
   "NewStorageImmidiatelyAvailable": "Nové úložiště bude k dispozici ihned po zaplacení.",

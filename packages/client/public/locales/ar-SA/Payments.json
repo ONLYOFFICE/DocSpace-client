@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "نوصي باختيار دافع جديد يمكنه الوصول إلى إعدادات الاشتراك في {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "نوصي بالاتصال بمالك {{productName}} لاختيار دافع جديد.",
   "LinkNewCard": "لربط بطاقة جديدة، يرجى اتباع هذا الرابط.",
+  "LinkNewCardEmail": "لربط بطاقة جديدة، يرجى التواصل مع الدافع <1>{{email}}</1>",
   "ManagerTypesDescription": "أنواع حسابات المشرفين وامتيازاتهم",
   "NewRoomWillExceedLimit": "إنشاء هذه الغرفة غير ممكن نظرًا لبلوغ الحد الأقصى لعدد الغرف المضمنة في خطتك الحالية.",
   "NewStorageImmidiatelyAvailable": "سيتم توفير التخزين الجديد فورًا بعد الدفع.",

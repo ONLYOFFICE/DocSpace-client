@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Nous recommandons de choisir un nouveau payeur qui aura accès aux paramètres d’abonnement dans {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Nous recommandons de contacter le propriétaire de {{productName}} pour choisir un nouveau payeur.",
   "LinkNewCard": "Pour lier une nouvelle carte, suivez ce lien.",
+  "LinkNewCardEmail": "Pour lier une nouvelle carte, veuillez contacter le payeur <1>{{email}}</1>.",
   "ManagerTypesDescription": "Types de comptes administrateurs et leurs privilèges",
   "NewRoomWillExceedLimit": "La création de cette salle n'est pas possible car la limite du nombre de salles incluses dans votre plan actuel est atteinte.",
   "NewStorageImmidiatelyAvailable": "Le nouveau stockage sera disponible immédiatement après le paiement.",

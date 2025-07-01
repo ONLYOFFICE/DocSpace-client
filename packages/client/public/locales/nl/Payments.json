@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "Wij raden aan een nieuwe Betaler te kiezen die toegang krijgt tot de abonnementsinstellingen in {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Wij raden u aan contact op te nemen met de {{productName}} eigenaar om een nieuwe Betaler te kiezen.",
   "LinkNewCard": "Om een nieuwe kaart te koppelen, volg dan deze link.",
+  "LinkNewCardEmail": "Om een nieuwe kaart te koppelen, neem dan contact op met de betaler <1>{{email}}</1>",
   "ManagerTypesDescription": "Beheerder accounts en hun rechten",
   "NewRoomWillExceedLimit": "Deze kamer kan niet worden aangemaakt omdat de limiet is bereikt voor het aantal kamers in uw huidige plan.",
   "NewStorageImmidiatelyAvailable": "De nieuwe opslag is direct beschikbaar na betaling.",

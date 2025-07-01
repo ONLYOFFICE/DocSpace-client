@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "我们建议您选择一位可以访问{{productName}}中订阅设置的新付款人。",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "我们建议您联系{{productName}}所有者以选择新的付款人。",
   "LinkNewCard": "关联新卡，请点击此链接。",
+  "LinkNewCardEmail": "如果要绑定新卡，请联系付款方：<1>{{email}}</1>",
   "ManagerTypesDescription": "管理员账户类型及其权限",
   "NewRoomWillExceedLimit": "由于当前费用版本的房间数量已达上限，因此无法创建该房间。",
   "NewStorageImmidiatelyAvailable": "支付完成后，新存储空间将立即生效。",

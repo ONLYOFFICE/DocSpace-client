@@ -98,8 +98,8 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       : totalPrice;
 
     const difference = Math.abs(walletBalance - amountValue);
-
-    setReccomendedAmount(Math.ceil(difference));
+    const recommendedValue = Math.ceil(difference);
+    setReccomendedAmount(recommendedValue);
 
     const getCardLink = () => {
       if (timeout) clearTimeout(timeout);
@@ -110,7 +110,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
         controller = new AbortController();
 
         try {
-          const url = `${window.location.href}?complete=true&amount=${amount}&recommendedAmount=${difference}`;
+          const url = `${window.location.href}?complete=true&amount=${amount}&recommendedAmount=${recommendedValue}`;
           await fetchCardLinked(url);
         } catch (e) {
           console.error(e);
@@ -124,6 +124,8 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     isPaymentBlockedByBalance,
     totalPrice,
     partialUpgradeFee,
+    newStorageSizeOnUpgrade,
+    walletBalance,
   ]);
 
   const amountTabs = () => {

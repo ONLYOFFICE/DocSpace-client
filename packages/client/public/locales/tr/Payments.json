@@ -67,6 +67,7 @@
   "InvalidEmailWithoutActiveSubscription": "{{productName}}'te abonelik ayarlarına erişimi olan yeni bir Ödeme Yapan seçmenizi öneririz.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "Yeni bir Ödeme Yapan seçmek için {{productName}} sahibiyle iletişime geçmenizi öneririz.",
   "LinkNewCard": "Yeni bir kartı bağlamak için lütfen bu bağlantıyı takip edin.",
+  "LinkNewCardEmail": "Yeni bir kartı bağlamak için lütfen ödeyen kişiye <1>{{email}}</1> adresinden ulaşın.",
   "ManagerTypesDescription": "Yönetici hesabı türleri ve ayrıcalıkları",
   "NewRoomWillExceedLimit": "Mevcut planınıza dahil olan oda sayısı sınırına ulaşıldığı için bu odayı oluşturmak mümkün değil.",
   "NewStorageImmidiatelyAvailable": "Ödeme yapıldıktan sonra yeni depolama alanı hemen kullanıma hazır olacaktır.",

@@ -36,6 +36,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { calculateTotalPrice } from "@docspace/shared/utils/common";
 
+import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 import styles from "./styles/index.module.scss";
 import StorageSummary from "./sub-components/StorageSummary";
 import { useServicesActions } from "./hooks/useServicesActions";
@@ -156,6 +157,10 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       toastr.success(t("StorageCapacityUpdated"));
       clearInterval(intervalRef.current);
       intervalRef.current = null;
+    }
+
+    if (localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== null) {
+      localStorage.removeItem(STORAGE_TARIFF_DEACTIVATED);
     }
 
     setIsLoading(false);

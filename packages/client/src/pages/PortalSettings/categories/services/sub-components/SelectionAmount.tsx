@@ -55,6 +55,7 @@ type SelectionAmountProps = {
   isPaymentBlockedByBalance?: boolean;
   isCardLinkedToPortal?: boolean;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
+  isUpgradeStoragePlan?: boolean;
 };
 
 let timeout: NodeJS.Timeout;
@@ -81,6 +82,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     isCardLinkedToPortal,
     isPaymentBlockedByBalance,
     formatWalletCurrency,
+    isUpgradeStoragePlan,
   } = props;
 
   const { maxStorageLimit, t } = useServicesActions();
@@ -88,7 +90,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
   const { isRTL } = useInterfaceDirection();
 
   useEffect(() => {
-    if (!isPaymentBlockedByBalance) {
+    if (!isPaymentBlockedByBalance || !isUpgradeStoragePlan) {
       setReccomendedAmount(0);
       return;
     }

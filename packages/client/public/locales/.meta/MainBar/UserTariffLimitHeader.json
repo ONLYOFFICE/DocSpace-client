@@ -3,7 +3,7 @@
   "content": "The limit is reached for the number of admins: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "8c8cda0b845bc384cf6e3dcbdf312525fbefa4f0",
   "created_at": "2025-05-19T21:30:54.150Z",
-  "updated_at": "2025-05-21T07:39:28.590Z",
+  "updated_at": "2025-07-01T15:57:35.917Z",
   "comment": {
     "text": "The translation key \"UserTariffLimitHeader\" displays a message indicating when the user's admin quota is approaching its limit. It appears in a quotas bar component, specifically on the header section, and is used to notify users of their remaining quota capacity.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 269,
+      "line_number": 272,
       "context": "header: t(\"UserQuotaHeader\", { currentValue, maxValue }),\n description: getUserTariffAlmostLimit(),\n };\n case QuotaBarTypes.UsersTariffLimit:\n return {\n header: t(\"UserTariffLimitHeader\", { currentValue, maxValue }),\n description: getUserTariffLimit(),\n };\n case QuotaBarTypes.UserAndStorageTariff:\n return {\n header: t(\"StorageAndUserHeader\"),",
       "module": "/packages/client"
     }

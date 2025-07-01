@@ -132,7 +132,8 @@ class ServicesStore {
       handleServicesQuotas,
     } = this.paymentStore;
 
-    const { fetchPortalTariff } = this.currentTariffStatusStore;
+    const { fetchPortalTariff, walletCustomerStatusNotActive } =
+      this.currentTariffStatusStore;
 
     const requests = [
       handleServicesQuotas(),
@@ -148,6 +149,11 @@ class ServicesStore {
       if (isAlreadyPaid) {
         if (this.paymentStore.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
+
+          if (this.paymentStore.isPayer && walletCustomerStatusNotActive) {
+            requests.push(fetchCardLinked());
+          }
+
           if (
             this.paymentStore.isShowStorageTariffDeactivated() &&
             this.paymentStore.isPayer

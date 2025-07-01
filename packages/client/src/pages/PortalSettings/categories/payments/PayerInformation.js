@@ -32,6 +32,7 @@ import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { toastr } from "@docspace/shared/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 const StyledContainer = styled.div`
@@ -90,7 +91,13 @@ const PayerInformation = ({
 
   isStripePortalAvailable,
 }) => {
-  const { t } = useTranslation("Payments");
+  const { t } = useTranslation(["Payments", "Common"]);
+
+  const goToStripePortal = () => {
+    accountLink
+      ? window.open(accountLink, "_blank")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
 
   const renderTooltip = (
     <HelpButton
@@ -144,11 +151,11 @@ const PayerInformation = ({
           <ColorTheme
             noSelect
             fontWeight={600}
-            href={accountLink}
             tag="a"
             themeId={ThemeId.Link}
             target="_blank"
             className="payer-info_account-link"
+            onClick={goToStripePortal}
           >
             {t("ChooseNewPayer")}
           </ColorTheme>
@@ -161,11 +168,11 @@ const PayerInformation = ({
     <ColorTheme
       noSelect
       fontWeight={600}
-      href={accountLink}
       className="payer-info_account-link"
       tag="a"
       themeId={ThemeId.Link}
       target="_blank"
+      onClick={goToStripePortal}
     >
       {t("StripeCustomerPortal")}
     </ColorTheme>

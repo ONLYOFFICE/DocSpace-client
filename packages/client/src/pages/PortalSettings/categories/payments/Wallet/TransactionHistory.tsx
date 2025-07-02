@@ -251,7 +251,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   };
 
   const datesComponent = (
-    <Text fontWeight={600} fontSize="14px" className={styles.transactionDates}>
+    <div className={styles.transactionDates}>
       <Trans
         i18nKey="FromTo"
         ns="Payments"
@@ -287,7 +287,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
           ),
         }}
       />
-    </Text>
+    </div>
   );
 
   const filterCombobox = (

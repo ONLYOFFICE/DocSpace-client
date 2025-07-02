@@ -37,8 +37,11 @@ import {
 } from "@/lib/actions";
 
 import { CompanyInfoPage } from "./page.client";
+import { logger } from "../../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Branding company-info page");
+
   const [settings, buildInfo, quota, portalTariff, portals, companyInfo] =
     await Promise.all([
       getSettings(),
@@ -49,8 +52,20 @@ async function Page() {
       getCompanyInfo(),
     ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings || !portalTariff) redirect(`${getBaseUrl()}/login`);
+  if (settings === "access-restricted") {
+    const baseURL = await getBaseUrl();
+
+    logger.info("Branding company-info page access-restricted");
+    redirect(`${baseURL}/${settings}`);
+  }
+  if (!settings || !portalTariff) {
+    const baseURL = await getBaseUrl();
+
+    logger.info(
+      `Branding company-info page settings: ${settings}, portalTariff: ${portalTariff}`,
+    );
+    redirect(`${baseURL}/login`);
+  }
 
   const { standalone, licenseAgreementsUrl, logoText, displayAbout } = settings;
   const { enterprise } = portalTariff;

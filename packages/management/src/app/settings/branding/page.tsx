@@ -42,8 +42,11 @@ import {
 import { getIsDefaultWhiteLabel } from "@/lib";
 
 import BrandingPage from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Branding page");
+
   const [
     settings,
     buildInfo,
@@ -68,8 +71,20 @@ async function Page() {
     getCompanyInfo(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings || !portalTariff) redirect(`${getBaseUrl()}/login`);
+  if (settings === "access-restricted") {
+    logger.info("Branding page access-restricted");
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/${settings}`);
+  }
+  if (!settings || !portalTariff) {
+    logger.info(
+      `Branding page settings: ${settings}, portalTariff: ${portalTariff}`,
+    );
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/login`);
+  }
 
   const { displayAbout, standalone, licenseAgreementsUrl, logoText } = settings;
   const { enterprise } = portalTariff;

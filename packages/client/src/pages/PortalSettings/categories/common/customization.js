@@ -97,7 +97,7 @@ const Customization = (props) => {
     isSettingPaid,
     enablePortalRename,
     resetIsInit,
-    standalone,
+    isEnterprise,
   } = props;
 
   const isLoadedSetting = isLoaded && tReady;
@@ -144,7 +144,7 @@ const Customization = (props) => {
       ) : null}
       <StyledSettingsSeparator />
       <ConfigureDeepLink />
-      {standalone ? (
+      {isEnterprise ? (
         <>
           <StyledSettingsSeparator />
           <AdManagement />
@@ -154,19 +154,22 @@ const Customization = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const { enablePortalRename, standalone } = settingsStore;
-  const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;
+export default inject(
+  ({ settingsStore, common, currentQuotaStore, currentTariffStatusStore }) => {
+    const { enablePortalRename } = settingsStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
+    const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;
+    const { isEnterprise } = currentTariffStatusStore;
 
-  return {
-    isLoaded,
-    setIsLoadedCustomization,
-    isSettingPaid: isCustomizationAvailable,
-    enablePortalRename,
-    resetIsInit,
-    standalone,
-  };
-})(
+    return {
+      isLoaded,
+      setIsLoadedCustomization,
+      isSettingPaid: isCustomizationAvailable,
+      enablePortalRename,
+      resetIsInit,
+      isEnterprise,
+    };
+  },
+)(
   withLoading(withTranslation(["Settings", "Common"])(observer(Customization))),
 );

@@ -111,11 +111,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(false);
   const [isFormationHistory, setIsFormationHistory] = useState(false);
   const [isFilterDialogVisible, setIsFilterDialogVisible] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
 
   const onSelectType = async (option: TOption) => {
     setSelectedType(option);
     setHasAppliedDateFilter(true);
-    setIsFilterDialogVisible(false);
+
+    if (isFilterDialogVisible) {
+      setIsChanged(true);
+      return;
+    }
 
     const timerId = setTimeout(() => setIsLoading(true), 500);
 
@@ -139,7 +144,11 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setStartDate(date);
     setHasAppliedDateFilter(true);
-    setIsFilterDialogVisible(false);
+
+    if (isFilterDialogVisible) {
+      setIsChanged(true);
+      return;
+    }
 
     const timerId = setTimeout(() => setIsLoading(true), 500);
 
@@ -163,7 +172,11 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setEndDate(date);
     setHasAppliedDateFilter(true);
-    setIsFilterDialogVisible(false);
+
+    if (isFilterDialogVisible) {
+      setIsChanged(true);
+      return;
+    }
 
     const timerId = setTimeout(() => setIsLoading(true), 500);
 
@@ -215,6 +228,26 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
   const closeFilterDialog = () => {
     setIsFilterDialogVisible(false);
+  };
+
+  const onApplyFilter = async () => {
+    setIsFilterDialogVisible(false);
+    setIsChanged(false);
+
+    const timerId = setTimeout(() => setIsLoading(true), 500);
+
+    const { isCredit, isDebit } = getTransactionType(
+      selectedType.key as string,
+    );
+
+    try {
+      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
+
+      setIsLoading(false);
+      clearTimeout(timerId);
+    } catch (e) {
+      toastr.error(e as Error);
+    }
   };
 
   const datesComponent = (
@@ -373,6 +406,22 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               </div>
             </div>
           </ModalDialog.Body>
+          <ModalDialog.Footer>
+            <Button
+              onClick={onApplyFilter}
+              size={ButtonSize.medium}
+              label={t("Common:ApplyButton")}
+              isDisabled={!isChanged}
+              primary
+              scale
+            />
+            <Button
+              onClick={closeFilterDialog}
+              size={ButtonSize.medium}
+              label={t("Common:CancelButton")}
+              scale
+            />
+          </ModalDialog.Footer>
         </ModalDialog>
       ) : null}
     </>

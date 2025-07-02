@@ -3,7 +3,7 @@
   "content": "Copy shared link",
   "content_en_sha1_hash": "b175bcf3a07a90b8902c84d2fc6a79bcb9f7f620",
   "created_at": "2025-05-19T21:30:43.810Z",
-  "updated_at": "2025-07-01T15:57:36.109Z",
+  "updated_at": "2025-07-02T07:49:19.780Z",
   "comment": {
     "text": "The translation key \"CopySharedLink\" is used to display a button that allows users to copy a shared link in public rooms, typically found on a settings or options page within the application. The label and icon displayed will be localized for each language. It appears as a button with an icon and a tooltip that provides the label when hovered over.",
     "is_auto": true,
@@ -56,6 +56,12 @@
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
       "line_number": 227,
       "context": "size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor={theme.filesQuickButtons.sharedColor}\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile ? (\n <ColorTheme\n themeId={ThemeId.IconButton}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
+      "line_number": 215,
+      "context": "<IconButton\n className=\"link-actions_copy-icon\"\n size={16}\n iconName={CopyIcon}\n onClick={() => onCopyLink(link)}\n title={t(\"Common:CopySharedLink\")}\n isDisabled={isExpiredLink || isLoaded}\n />\n ) : null}\n {isRoomsLink ? (\n <>",
       "module": "/packages/shared"
     }
   ],

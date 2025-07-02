@@ -89,7 +89,7 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
           item.type === "size" ? getConvertedSize(t, usedValue) : usedValue;
 
         return (
-          <div key={maxValue}>
+          <div key={item.used.title}>
             <Text isBold noSelect fontSize="14px">
               {item.used.title}
               <Text

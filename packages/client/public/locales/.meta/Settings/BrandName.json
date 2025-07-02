@@ -3,7 +3,7 @@
   "content": "Brand name",
   "content_en_sha1_hash": "6b4b8b5df0e218b10da0dadc07407d9783d4e3ad",
   "created_at": "2025-05-19T21:30:50.751Z",
-  "updated_at": "2025-05-21T05:00:34.888Z",
+  "updated_at": "2025-07-02T07:49:19.793Z",
   "comment": {
     "text": "This translation key is used for \"Brand name\", a piece of content displayed as the title and subtitle in mobile categories on the PortalSettings page. It appears in a styled wrapper with a badge, indicating whether it's paid or not. Translators should provide a meaningful brand name that reflects the product identity in this context.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 103,
+      "line_number": 110,
       "context": "{\n id: \"portal-settings_catalog-brand-name\",\n key: \"0-1-0\",\n icon: \"\",\n link: \"brand-name\",\n tKey: \"BrandName\",\n },\n {\n id: \"portal-settings_catalog-white-label\",\n key: \"0-1-1\",\n icon: \"\",",
       "module": "/packages/client"
     },

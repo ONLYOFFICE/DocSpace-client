@@ -24,35 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
+.wrapper {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-export type DatePickerProps = {
-  /** Allows to change select date text */
-  selectDateText?: string;
-  /** Selected date */
-  initialDate?: moment.Moment | Date;
-  /** Allow you to handle changing events of component */
-  onChange: (d: null | moment.Moment) => void;
-  /** Allows to set classname */
-  className?: string;
-  /** Allows to set id */
-  id?: string;
-  /** Specifies min choosable calendar date */
-  minDate?: moment.Moment | Date;
-  /** Specifies max choosable calendar date */
-  maxDate?: moment.Moment | Date;
-  /** Specifies calendar locale */
-  locale: string;
-  /** Shows calendar icon in selected item */
-  showCalendarIcon?: boolean;
-  /** Allows to track date outside the component */
-  outerDate?: moment.Moment | null;
-  /** Allows to set first shown date in calendar */
-  openDate: moment.Moment;
-  isMobile?: boolean;
-  hideCross?: boolean;
-  /** Aligns calendar to the right side of the component when true */
-  rightAlign?: boolean;
-  /** Automatically positions the calendar based on available space */
-  autoPosition?: boolean;
-};
+.radioButtonGroup {
+  width: fit-content;
+  margin-top: 8px;
+}
+
+.saveCancelButtons {
+  margin-top: 16px;
+}

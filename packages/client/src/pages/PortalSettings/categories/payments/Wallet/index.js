@@ -52,8 +52,11 @@ const Wallet = (props) => {
 
   useEffect(() => {
     walletInit(t);
-    moment.locale(language);
   }, []);
+
+  useEffect(() => {
+    moment.locale(language);
+  }, [language]);
 
   useEffect(() => {
     timerId = setTimeout(() => {

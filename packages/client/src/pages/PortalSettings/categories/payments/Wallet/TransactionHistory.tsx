@@ -235,6 +235,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               maxDate={endDate}
               outerDate={startDate}
               hideCross
+              autoPosition={isTablet}
             />
           ),
           2: (
@@ -248,6 +249,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               maxDate={undefined}
               outerDate={endDate}
               hideCross
+              rightAlign={isTablet}
             />
           ),
         }}

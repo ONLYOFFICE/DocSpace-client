@@ -39,6 +39,7 @@ import { TSelectorItem } from "../../components/selector/Selector.types";
 import { createGetPeopleHandler } from "../../__mocks__/storybook/handlers/people/getPeople";
 
 import PeopleSelector from "./index";
+import type { PeopleSelectorProps } from "./PeopleSelector.types";
 
 const StyledRowLoader = styled.div`
   width: 100%;
@@ -69,10 +70,11 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof PeopleSelector>;
+} as Meta<typeof PeopleSelector>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof PeopleSelector>;
 
 // Create users with real names and emails
 const users: TSelectorItem[] = [
@@ -91,8 +93,6 @@ const users: TSelectorItem[] = [
     hasAvatar: false,
     userType: EmployeeType.Admin,
     status: EmployeeStatus.Active,
-    "aria-label": "User John Smith",
-    "data-user-id": "user-1",
   },
   {
     id: "user-2",
@@ -109,8 +109,6 @@ const users: TSelectorItem[] = [
     hasAvatar: false,
     userType: EmployeeType.User,
     status: EmployeeStatus.Active,
-    "aria-label": "User Sarah Johnson",
-    "data-user-id": "user-2",
   },
   {
     id: "user-3",
@@ -127,8 +125,6 @@ const users: TSelectorItem[] = [
     hasAvatar: false,
     userType: EmployeeType.User,
     status: EmployeeStatus.Active,
-    "aria-label": "User Michael Brown",
-    "data-user-id": "user-3",
   },
   {
     id: "user-4",
@@ -145,8 +141,6 @@ const users: TSelectorItem[] = [
     hasAvatar: false,
     userType: EmployeeType.Guest,
     status: EmployeeStatus.Active,
-    "aria-label": "User Emily Davis",
-    "data-user-id": "user-4",
   },
   {
     id: "user-5",
@@ -163,8 +157,6 @@ const users: TSelectorItem[] = [
     hasAvatar: false,
     userType: EmployeeType.Admin,
     status: EmployeeStatus.Active,
-    "aria-label": "User David Wilson",
-    "data-user-id": "user-5",
   },
 ];
 
@@ -175,37 +167,41 @@ const accessRights = [
     key: "fullAccess",
     label: "Full Access",
     description: "Can view, edit, and share",
+    access: ShareAccessRights.FullAccess,
   },
   {
-    id: ShareAccessRights.ReadWrite,
+    id: ShareAccessRights.ReadOnly,
     key: "readWrite",
     label: "Read & Write",
     description: "Can view and edit",
+    access: ShareAccessRights.ReadOnly,
   },
   {
-    id: ShareAccessRights.Read,
+    id: ShareAccessRights.ReadOnly,
     key: "readOnly",
     label: "Read Only",
     description: "Can only view",
+    access: ShareAccessRights.ReadOnly,
   },
   {
-    id: ShareAccessRights.Restrict,
+    id: ShareAccessRights.Editing,
     key: "restricted",
     label: "Restricted",
     description: "No access",
+    access: ShareAccessRights.Editing,
   },
 ];
 
 const selectedUsers = [users[0], users[2]];
 
-const Template = (args) => {
+const Template = (args: PeopleSelectorProps) => {
   const rowLoader = <StyledRowLoader />;
   const searchLoader = <StyledSearchLoader />;
 
   const [rendItems, setRendItems] = React.useState(users);
 
   const loadNextPage = React.useCallback(async (index: number) => {
-    setRendItems((val) => [...val, ...items.slice(index, index + 100)]);
+    setRendItems((val) => [...val, ...users.slice(index, index + 100)]);
   }, []);
 
   return (
@@ -253,32 +249,24 @@ export const Default: Story = {
       headerLabel: "Select People",
       onCloseClick: () => {},
     },
-    withSearch: false,
+    withSearch: true,
     onSearch: () => {},
-    onClearSearch: () => {},
     onSubmit: () => {},
     searchPlaceholder: "Search users",
     isMultiSelect: false,
     submitButtonLabel: "Select",
-    onBackClick: () => {},
-    searchPlaceholder: "Search",
     searchValue: "",
 
-    onSelect: () => {},
     selectedItems: selectedUsers,
-    acceptButtonLabel: "Add",
-    onAccept: () => {},
-    withSelectAll: false,
-    selectAllLabel: "All accounts",
 
-    onSelectAll: () => {},
-    withAccessRights: false,
+    withAccessRights: true,
     accessRights,
     selectedAccessRight: accessRights[1],
     onAccessRightsChange: () => {},
-    withCancelButton: false,
+    withCancelButton: true,
     cancelButtonLabel: "Cancel",
     onCancel: () => {},
+    disableSubmitButton: false,
     emptyScreenImage: EmptyScreenFilter,
     emptyScreenHeader: "No other accounts here yet",
     emptyScreenDescription:
@@ -287,14 +275,8 @@ export const Default: Story = {
     searchEmptyScreenHeader: "No other accounts here yet search",
     searchEmptyScreenDescription:
       " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-    totalItems: users.length,
-    hasNextPage: false,
-    isNextPageLoading: false,
+
     isLoading: false,
-    withoutBackButton: false,
-    alwaysShowFooter: false,
-    disableAcceptButton: false,
-    descriptionText: "",
   },
 };
 
@@ -325,21 +307,8 @@ export const WithAccessRights: Story = {
     isMultiSelect: true,
     accessRights,
     selectedAccessRight: accessRights[1],
-    accessRightsMode: SelectorAccessRightsMode.Dropdown,
-  },
-};
-
-export const WithCancelButton: Story = {
-  render: (args) => <Template {...args} />,
-  parameters: {
-    msw: {
-      handlers: [createGetPeopleHandler()],
-    },
-  },
-  args: {
-    ...Default.args,
-    withCancelButton: true,
-    cancelButtonLabel: "Cancel",
+    accessRightsMode: SelectorAccessRightsMode.Detailed,
+    onAccessRightsChange: () => {},
   },
 };
 
@@ -354,7 +323,7 @@ export const WithFooterCheckbox: Story = {
     ...Default.args,
     withFooterCheckbox: true,
     footerCheckboxLabel: "Notify users",
-    isChecked: false,
+    isChecked: true,
   },
 };
 
@@ -381,6 +350,6 @@ export const WithDisabledUsers: Story = {
   },
   args: {
     ...Default.args,
-    disableInvitedUsers: [users[1].id, users[3].id],
+    disableInvitedUsers: [String(users[1].id), String(users[3].id)],
   },
 };

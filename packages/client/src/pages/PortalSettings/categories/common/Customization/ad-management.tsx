@@ -132,7 +132,9 @@ const AdManagementComponent = ({
           {t("AdManagement")}
         </Text>
       ) : null}
-      <Text>{t("AdManagementDescription")}</Text>
+      <Text>
+        {t("AdManagementDescription", { productName: t("Common:ProductName") })}
+      </Text>
       <RadioButtonGroup
         className={styles.radioButtonGroup}
         fontSize="13px"

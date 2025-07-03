@@ -101,7 +101,10 @@ export const ThemeProvider = ({
 
   return (
     <InterfaceDirectionProvider interfaceDirection={theme.interfaceDirection}>
-      <CustomThemeProvider theme={theme.isBase ? "Base" : "Dark"}>
+      <CustomThemeProvider
+        theme={theme.isBase ? "Base" : "Dark"}
+        currentColorScheme={currentColorScheme}
+      >
         <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
       </CustomThemeProvider>
     </InterfaceDirectionProvider>

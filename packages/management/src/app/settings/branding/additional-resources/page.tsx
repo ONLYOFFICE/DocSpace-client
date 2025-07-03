@@ -27,8 +27,11 @@
 import { getQuota, getAllPortals, getAdditionalResources } from "@/lib/actions";
 
 import { AdditionalResourcesPage } from "./page.client";
+import { logger } from "../../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Branding additional-resources page");
+
   const [quota, portals, additionalResources] = await Promise.all([
     getQuota(),
     getAllPortals(),

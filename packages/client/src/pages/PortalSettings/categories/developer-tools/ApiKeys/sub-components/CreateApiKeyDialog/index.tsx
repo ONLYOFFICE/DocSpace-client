@@ -143,10 +143,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     isRequestRunning: isRequestRunningProp,
   } = props;
 
-  const selectedOption = getItemPermissions(
-    permissions,
-    actionItem?.permissions,
-  );
+  const selectedOption = getItemPermissions(actionItem?.permissions);
 
   const isEdit = !!actionItem;
 
@@ -301,7 +298,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         selectedPermissions = getRestrictedOptions();
         break;
       case "readonly": {
-        selectedPermissions = permissions.filter((p) => p.includes("read"));
+        selectedPermissions = ["*:read"];
         break;
       }
       default:

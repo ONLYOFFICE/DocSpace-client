@@ -83,8 +83,6 @@ export interface ILogoProps {
   inputId: string;
   linkId: string;
   imageClass?: string;
-  isEditor?: boolean;
-  isEditorHeader?: boolean;
   name: string;
 }
 

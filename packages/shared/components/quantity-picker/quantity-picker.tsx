@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { ChangeEvent, MouseEvent } from "react";
+import React, { ChangeEvent, MouseEvent, useState } from "react";
 import classNames from "classnames";
 
 import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
@@ -59,7 +59,20 @@ type QuantityPickerProps = {
   isLarge?: boolean;
   withoutContorls?: boolean;
   disableValue?: string;
-  underContorlsTitle?: string;
+  underContorlsTitle?: string | React.ReactNode;
+  isZeroAllowed?: boolean;
+  enableZero?: boolean;
+};
+
+const shouldSetIncrementError = (
+  newValue: number,
+  enableZero: boolean,
+  minValue: number,
+): boolean => {
+  if (!enableZero) return false;
+  if (enableZero && newValue < minValue) return newValue !== 0;
+
+  return false;
 };
 
 const QuantityPicker: React.FC<QuantityPickerProps> = ({
@@ -79,6 +92,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   withoutContorls,
   disableValue,
   underContorlsTitle,
+  enableZero = false,
 }) => {
   const displayValue = showPlusSign
     ? value > maxValue
@@ -86,9 +100,15 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
       : `${value}`
     : `${value}`;
 
+  const [error, setError] = useState(false);
+
   const containerClass = classNames(styles.container, className);
   const titleClass = classNames(styles.countTitle, {
     [styles.disabled]: isDisabled,
+  });
+
+  const titleUnderControlsClass = classNames(styles.underContorlsText, {
+    [styles.warningIncrementFromZero]: enableZero ? error : false,
   });
 
   const inputClass = classNames(styles.countInput, {
@@ -114,15 +134,23 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     if (operation === "plus") {
       if (value <= maxValue) {
-        newValue += step;
+        if (newValue < minValue) {
+          newValue = minValue;
+          setError(false);
+        } else {
+          newValue += step;
+        }
       }
     }
 
     if (operation === "minus") {
       if (value > maxValue) {
         newValue = maxValue;
-      } else if (value > minValue) {
+      } else if (newValue - step >= minValue) {
         newValue -= step;
+      } else {
+        newValue = enableZero ? 0 : minValue;
+        setError(false);
       }
     }
 
@@ -143,12 +171,15 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
     if (Number.isNaN(numberValue)) return;
 
-    if (numberValue <= minValue) {
+    if (!enableZero && numberValue <= minValue) {
       onChange(minValue);
+      setError(false);
       return;
     }
 
     onChange(numberValue);
+
+    setError(shouldSetIncrementError(numberValue, enableZero, minValue));
   };
 
   const buttonProps = isDisabled ? {} : { onClick: handleButtonClick };
@@ -180,7 +211,10 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   };
 
   const onSelectTab = (data: TTabItem) => {
-    onChange(value + (data.value ?? 0));
+    if (data.value === undefined) return;
+
+    onChange(value + data.value);
+    setError(false);
   };
 
   return (
@@ -240,7 +274,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
         )}
       </div>
 
-      <Text className={styles.underContorlsText}>{underContorlsTitle}</Text>
+      <Text className={titleUnderControlsClass}>{underContorlsTitle}</Text>
       {showSlider ? (
         <div className={styles.sliderWrapper}>
           <Slider

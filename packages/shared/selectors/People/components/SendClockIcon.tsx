@@ -24,12 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import type { StyledBodyWrapperProps } from "./FilesSelectorInput.types";
+import React from "react";
+import classNames from "classnames";
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
+import styles from "../PeopleSelector.module.scss";
 
-const StyledBodyWrapper = styled.div<StyledBodyWrapperProps>`
-  margin: 16px 0;
-  max-width: ${(props) => (props.maxWidth ? props.maxWidth : "350px")};
-`;
+interface SendClockIconProps {
+  className?: string;
+}
 
-export { StyledBodyWrapper };
+const StyledSendClockIcon: React.FC<SendClockIconProps> = ({ className }) => {
+  return (
+    <SendClockIcon className={classNames(styles.sendClockIcon, className)} />
+  );
+};
+
+export default StyledSendClockIcon;

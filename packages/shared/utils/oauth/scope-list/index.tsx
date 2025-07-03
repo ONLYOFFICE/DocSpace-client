@@ -24,37 +24,4 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
-
-import { commonIconsStyles } from "../../utils";
-
-const StyledUserTooltip = styled.div`
-  width: 233px;
-  min-height: 63px;
-  display: grid;
-  grid-template-columns: 33px 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 12px;
-
-  .block-info {
-    display: grid;
-    grid-template-rows: 1fr;
-
-    .email-text {
-      padding-bottom: 8px;
-    }
-  }
-`;
-
-export const StyledSendClockIcon = styled(SendClockIcon)`
-  min-width: 12px;
-
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.accountsBadges.pendingColor};
-  }
-`;
-
-export default StyledUserTooltip;
+export { ScopeList } from "./ScopeList";

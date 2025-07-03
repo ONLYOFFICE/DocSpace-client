@@ -2467,3 +2467,11 @@
   --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
   --quantity-picker-warning-color: #{$dark-error-status};
 }
+
+.light {
+  --accounts-badges-pending-color: #{$gray};
+}
+
+.dark {
+  --accounts-badges-pending-color: #{$gray-dark};
+}

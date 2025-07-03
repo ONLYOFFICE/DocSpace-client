@@ -51,8 +51,6 @@ export type DatePickerProps = {
   openDate: moment.Moment;
   isMobile?: boolean;
   hideCross?: boolean;
-  /** Aligns calendar to the right side of the component when true */
-  rightAlign?: boolean;
   /** Automatically positions the calendar based on available space */
   autoPosition?: boolean;
 };

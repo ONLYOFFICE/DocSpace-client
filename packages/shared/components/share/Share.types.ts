@@ -147,5 +147,6 @@ export type ShareProps = {
     isPublic?: boolean;
     isFormRoom?: boolean;
     isCustomRoom?: boolean;
+    updateLink: (newLink: TFileLink) => void;
   }) => void;
 };

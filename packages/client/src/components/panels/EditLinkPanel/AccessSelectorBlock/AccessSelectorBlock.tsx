@@ -23,42 +23,37 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { globalColors } from "@docspace/shared/themes";
-import styled from "styled-components";
 
-export const RoleLinkBlockWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
-  padding: 20px 16px;
+import { Text } from "@docspace/shared/components/text";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
-  .dropdown-container {
-    margin-top: 4px;
-  }
+import { AccessSelectorBlockProps } from "./AccessSelectorBlock.types";
 
-  .combo-button_selected-icon-container {
-    svg path {
-      fill: ${({ theme }) => theme.color};
-    }
-  }
+import styles from "./AccessSelectorBlock.module.scss";
 
-  .combo-button_selected-icon svg {
-    width: 16px;
-    height: 16px;
-  }
+const AccessSelectorBlock: FC<AccessSelectorBlockProps> = ({
+  options,
+  onSelect,
+  selectedOption,
+}) => {
+  const { t } = useTranslation("Common");
 
-  .combo-buttons_arrow-icon,
-  .combo-buttons_expander-icon > div {
-    width: 16px;
-    height: 16px;
+  return (
+    <div className={styles.accessSelectorBlock}>
+      <Text fontSize="16px" fontWeight={700}>
+        {t("Common:WhoHasAccess")}
+      </Text>
+      <ComboBox
+        options={options}
+        selectedOption={selectedOption}
+        scaledOptions
+        onSelect={onSelect}
+      />
+    </div>
+  );
+};
 
-    svg path {
-      fill: ${globalColors.gray};
-    }
-  }
-
-  .combo-buttons_expander-icon {
-    rotate: 90deg;
-  }
-`;
+export default AccessSelectorBlock;

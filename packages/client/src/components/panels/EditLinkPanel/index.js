@@ -27,6 +27,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import moment from "moment";
 import isEqual from "lodash/isEqual";
 
 import { Button } from "@docspace/shared/components/button";
@@ -36,10 +37,16 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import {
   copyRoomShareLink,
   getRoomAccessOptions,
+  getShareOptions,
 } from "@docspace/shared/components/share/Share.helpers";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { editExternalLink as editExternalLinkFile } from "@docspace/shared/api/files";
 
-import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  LinkEntityType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
 // import LinkBlock from "./LinkBlock";
@@ -47,6 +54,7 @@ import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
 import { RoleLinkBlock } from "./RoleLinkBlock";
+import { AccessSelectorBlock } from "./AccessSelectorBlock";
 
 const EditLinkPanel = (props) => {
   const {
@@ -75,9 +83,20 @@ const EditLinkPanel = (props) => {
     passwordSettings,
     getPortalPasswordSettings,
     type,
+    updateLink,
   } = props;
 
   const roomAccessOptions = useMemo(() => getRoomAccessOptions(t), [t]);
+
+  const linkAccessOptions = useMemo(() => getShareOptions(t), [t]);
+
+  const [selectedLinkAccess, setSelectedLinkAccess] = useState(() => {
+    return (
+      linkAccessOptions.find(
+        (item) => item.internal === link?.sharedTo.internal,
+      ) ?? linkAccessOptions[0]
+    );
+  });
 
   const [selectedAccessOption, setSelectedAccessOption] = useState(() => {
     if (isFormRoom) {
@@ -125,6 +144,9 @@ const EditLinkPanel = (props) => {
     hasChanges ? setUnsavedChangesDialog(true) : onClose();
   };
 
+  const handleSelectLinkAccess = (option) => {
+    setSelectedLinkAccess(option);
+  };
   const onSave = () => {
     if (
       (!passwordValue.trim() || !isPasswordValid) &&
@@ -154,31 +176,78 @@ const EditLinkPanel = (props) => {
     updatedLink.sharedTo.denyDownload = denyDownload;
     updatedLink.access = selectedAccessOption.access;
     if (!isSameDate) updatedLink.sharedTo.expirationDate = expirationDate;
+    updatedLink.sharedTo.internal = selectedLinkAccess.internal;
 
     setIsLoading(true);
-    editExternalLink(roomId, updatedLink)
-      .then((response) => {
-        setExternalLink(response);
-        setLinkParams({ link: response, roomId, isPublic, isFormRoom });
 
-        if (isEdit) {
-          copyShareLink(shareLink);
-          // toastr.success(t("Files:LinkEditedSuccessfully"));
-        } else {
-          copyShareLink(response?.sharedTo?.shareLink);
+    switch (type) {
+      case LinkEntityType.ROOM:
+        editExternalLink(roomId, updatedLink)
+          .then((response) => {
+            setExternalLink(response);
+            setLinkParams({ link: response, roomId, isPublic, isFormRoom });
 
-          // toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+            if (isEdit) {
+              copyShareLink(shareLink);
+              // toastr.success(t("Files:LinkEditedSuccessfully"));
+            } else {
+              copyShareLink(response?.sharedTo?.shareLink);
+
+              // toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+            }
+            copyRoomShareLink(response, t, false);
+            onClose();
+          })
+          .catch((err) => {
+            const error = err?.response?.data?.error?.message ?? err?.message;
+            toastr.error(error);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
+        break;
+
+      case LinkEntityType.FILE:
+        {
+          const { primary, internal, id } = updatedLink.sharedTo;
+
+          console.log({ updatedLink });
+
+          editExternalLinkFile(
+            roomId,
+            id,
+            updatedLink.access,
+            primary,
+            internal,
+            expirationDate,
+            updatedLink.sharedTo.password,
+            denyDownload,
+          )
+            .then((response) => {
+              setLinkParams({
+                isEdit: true,
+                roomId,
+                link: response,
+                type: LinkEntityType.FILE,
+              });
+
+              updateLink?.(response);
+              onClose();
+            })
+            .catch((err) => {
+              const error = err?.response?.data?.error?.message ?? err?.message;
+              toastr.error(error);
+            })
+            .finally(() => {
+              setIsLoading(false);
+            });
         }
-        copyRoomShareLink(response, t, false);
-        onClose();
-      })
-      .catch((err) => {
-        const error = err?.response?.data?.error?.message ?? err?.message;
-        toastr.error(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+
+        break;
+
+      default:
+        break;
+    }
   };
 
   const initState = {
@@ -186,6 +255,7 @@ const EditLinkPanel = (props) => {
     passwordAccessIsChecked: isLocked,
     denyDownload: isDenyDownload,
     accessLink: accessLink ?? ShareAccessRights.ReadOnly,
+    internal: link?.sharedTo?.internal ?? false,
   };
 
   useEffect(() => {
@@ -194,9 +264,11 @@ const EditLinkPanel = (props) => {
       passwordAccessIsChecked,
       denyDownload,
       accessLink: selectedAccessOption.access,
+      internal: selectedLinkAccess.internal,
     };
 
-    const isSameDateCheck = isEqual(date, expirationDate);
+    const isSameDateCheck =
+      date || expirationDate ? moment(date).isSame(expirationDate) : true;
     setIsSameDate(isSameDateCheck);
 
     if (!isEqual(data, initState) || !isSameDateCheck) {
@@ -290,6 +362,12 @@ const EditLinkPanel = (props) => {
               onSelect={handleSelectAccessOption}
             />
           ) : null}
+          <AccessSelectorBlock
+            options={linkAccessOptions}
+            selectedOption={selectedLinkAccess}
+            onSelect={handleSelectLinkAccess}
+          />
+
           {/* <LinkBlock
             t={t}
             isEdit={isEdit}
@@ -390,11 +468,25 @@ export default inject(
     const { currentDeviceType, passwordSettings, getPortalPasswordSettings } =
       settingsStore;
 
-    const { isEdit, roomId, isPublic, isFormRoom, isCustomRoom, type } =
-      linkParams;
+    const {
+      isEdit,
+      roomId,
+      isPublic,
+      isFormRoom,
+      isCustomRoom,
+      type,
+      updateLink,
+    } = linkParams;
 
     const linkId = linkParams?.link?.sharedTo?.id;
-    const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
+
+    const link =
+      type === LinkEntityType.ROOM
+        ? externalLinks.find((l) => l?.sharedTo?.id === linkId)
+        : linkParams.link;
+
+    console.log({ type });
+
     const shareLink = link?.sharedTo?.shareLink;
     const accessLink = linkParams.link?.access;
 
@@ -408,7 +500,7 @@ export default inject(
       setExternalLink,
       isLocked: !!link?.sharedTo?.password,
       password: link?.sharedTo?.password ?? "",
-      date: link?.sharedTo?.expirationDate,
+      date: link?.sharedTo?.expirationDate ?? null,
       isDenyDownload: link?.sharedTo?.denyDownload ?? false,
       shareLink,
       externalLinks,
@@ -425,6 +517,7 @@ export default inject(
       getPortalPasswordSettings,
       accessLink,
       type,
+      updateLink,
     };
   },
 )(

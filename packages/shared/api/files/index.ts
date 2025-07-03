@@ -1535,11 +1535,21 @@ export async function editExternalLink(
   primary: boolean,
   internal: boolean,
   expirationDate: moment.Moment,
+  password?: string,
+  denyDownload?: boolean,
 ) {
   const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
-    data: { linkId, access, primary, internal, expirationDate },
+    data: {
+      linkId,
+      access,
+      primary,
+      internal,
+      expirationDate,
+      password,
+      denyDownload,
+    },
   })) as TFileLink;
 
   return res;

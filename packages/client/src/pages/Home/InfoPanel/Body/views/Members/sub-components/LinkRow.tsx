@@ -38,7 +38,11 @@ import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  LinkEntityType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
@@ -61,6 +65,7 @@ type LinkRowProps = {
     isPublic?: boolean;
     isFormRoom?: boolean;
     isCustomRoom?: boolean;
+    type: LinkEntityType;
   }) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
   setDeleteLinkDialogVisible: (value: boolean) => void;
@@ -125,6 +130,7 @@ const LinkRow = (props: LinkRowProps) => {
       isPublic: isPublicRoomType,
       isFormRoom,
       isCustomRoom,
+      type: LinkEntityType.ROOM,
     });
     onCloseContextMenu();
   };
@@ -143,6 +149,7 @@ const LinkRow = (props: LinkRowProps) => {
       isPublic: isPublicRoomType,
       isFormRoom,
       isCustomRoom,
+      type: LinkEntityType.ROOM,
     });
     setEmbeddingPanelData({ visible: true });
     onCloseContextMenu();
@@ -155,6 +162,7 @@ const LinkRow = (props: LinkRowProps) => {
       isPublic: isPublicRoomType,
       isFormRoom,
       isCustomRoom,
+      type: LinkEntityType.ROOM,
     });
     setDeleteLinkDialogVisible(true);
     onCloseContextMenu();
@@ -231,6 +239,7 @@ const LinkRow = (props: LinkRowProps) => {
           isPublic: isPublicRoomType,
           isFormRoom,
           isCustomRoom,
+          type: LinkEntityType.ROOM,
         });
 
         if (linkData) {

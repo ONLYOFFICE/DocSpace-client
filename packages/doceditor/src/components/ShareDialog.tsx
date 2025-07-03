@@ -35,8 +35,9 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
-import { TFile } from "@docspace/shared/api/files/types";
+import { TFile, TFileLink } from "@docspace/shared/api/files/types";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { LinkEntityType } from "@docspace/shared/enums";
 
 const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   ${NoUserSelect}
@@ -84,6 +85,20 @@ const SharingDialog = ({
               selfId={selfId ?? ""}
               onOpenPanel={onOpenPanel}
               onlyOneLink={fileInfo.isForm}
+              setEditLinkPanelIsVisible={function (value: boolean): void {
+                throw new Error("Function not implemented.");
+              }}
+              setLinkParams={function (linkParams: {
+                link: TFileLink;
+                roomId: number | string;
+                type: LinkEntityType;
+                isEdit?: boolean;
+                isPublic?: boolean;
+                isFormRoom?: boolean;
+                isCustomRoom?: boolean;
+              }): void {
+                throw new Error("Function not implemented.");
+              }}
             />
           </div>
         </StyledWrapper>

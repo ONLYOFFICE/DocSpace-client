@@ -3,7 +3,7 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-19T21:30:53.215Z",
-  "updated_at": "2025-05-21T02:26:13.263Z",
+  "updated_at": "2025-07-02T07:49:19.794Z",
   "comment": {
     "text": "The translation key \"WhiteLabel\" is used to translate the label for a branding setting that determines the visibility of a paid badge on mobile views. It appears in a mobile category wrapper and has similar usage in a settings tree. Translators should provide a label that describes this brand-specific setting.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 110,
+      "line_number": 117,
       "context": "{\n id: \"portal-settings_catalog-white-label\",\n key: \"0-1-1\",\n icon: \"\",\n link: \"white-label\",\n tKey: \"WhiteLabel\",\n },\n {\n id: \"portal-settings_catalog-company-info-settings\",\n key: \"0-1-2\",\n icon: \"\",",
       "module": "/packages/client"
     },

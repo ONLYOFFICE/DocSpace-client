@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-19T21:30:52.842Z",
-  "updated_at": "2025-06-18T07:34:15.034Z",
+  "updated_at": "2025-07-02T07:49:19.795Z",
   "comment": {
     "text": "This translation key is used to display a success message when settings are successfully updated or saved, typically after clicking a button or submitting a form. It appears in various UI elements, such as dialog boxes and toast notifications, to inform users of the outcome of their actions. Its purpose is to provide positive feedback to the user after completing a task.",
     "is_auto": true,
@@ -50,6 +50,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
       "line_number": 64,
       "context": "}, []);\n \n const onRestoreDefault = async () => {\n try {\n await resetWhiteLabelLogos();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
+      "line_number": 112,
+      "context": "await setAdManagement(!type);\n setDisplayBanners(Boolean(type));\n setShowReminder(false);\n saveToSessionStorage(\"defaultDisplayBanners\", type);\n saveToSessionStorage(\"currentDisplayBanners\", type);\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e!);\n } finally {\n setIsSaving(false);\n }",
       "module": "/packages/client"
     },
     {

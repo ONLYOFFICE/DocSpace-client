@@ -3,7 +3,7 @@
   "content": "Additional resources",
   "content_en_sha1_hash": "a15fa56393dfeea6e8ddbb0e0c2a6f3cc24b93de",
   "created_at": "2025-05-19T21:30:50.350Z",
-  "updated_at": "2025-05-21T05:24:31.132Z",
+  "updated_at": "2025-07-02T07:49:19.794Z",
   "comment": {
     "text": "The translation key \"AdditionalResources\" is used to display an English label for a category title on a settings page. This label appears as part of a mobile view component and provides access to additional resources for branding purposes.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 124,
+      "line_number": 131,
       "context": "{\n id: \"portal-settings_catalog-additional-resources\",\n key: \"0-1-3\",\n icon: \"\",\n link: \"additional-resources\",\n tKey: \"AdditionalResources\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-appearance\",",
       "module": "/packages/client"
     },

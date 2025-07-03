@@ -3,7 +3,7 @@
   "content": "Developer Tools section",
   "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
   "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2025-06-18T07:34:15.189Z",
+  "updated_at": "2025-07-02T07:49:19.855Z",
   "comment": {
     "text": "The \"DeveloperToolsAccess\" translation key is used to display the title and description of a section in the Portal Settings application. This text appears as a category title and brief description within a settings page, providing context about developer tools access.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 189,
+      "line_number": 196,
       "context": "{\n id: \"portal-settings_catalog-access-dev-tools\",\n key: \"1-0-3\",\n icon: \"\",\n link: \"access-dev-tools\",\n tKey: \"DeveloperToolsAccess\",\n },\n {\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",",
       "module": "/packages/client"
     }

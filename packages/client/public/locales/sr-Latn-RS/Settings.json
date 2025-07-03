@@ -366,5 +366,7 @@
   "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
   "YourCurrentDomain": "Vaš trenutni domen",
-  "YourLogo": "Vaš logo"
+  "YourLogo": "Vaš logo",
+  "AdManagement": "Upravljanje oglasima",
+  "AdManagementDescription": "Izaberite da li će promotivni baneri biti prikazani u vašem {{productName}}."
 }

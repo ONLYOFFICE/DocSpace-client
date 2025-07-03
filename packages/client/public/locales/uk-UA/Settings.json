@@ -366,5 +366,7 @@
   "WithoutEmailHint": "У вас немає користувачів без електронної пошти. Перейдіть до наступного кроку.",
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
-  "YourLogo": "Ваш логотип"
+  "YourLogo": "Ваш логотип",
+  "AdManagement": "Управління рекламою",
+  "AdManagementDescription": "Оберіть, чи відображатимуться рекламні банери у вашому {{productName}}."
 }

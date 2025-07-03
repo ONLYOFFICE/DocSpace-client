@@ -2475,3 +2475,11 @@
 .dark {
   --accounts-badges-pending-color: #{$gray-dark};
 }
+
+.light {
+  --about-logo-color: #{$black};
+}
+
+.dark {
+  --about-logo-color: #{$white};
+}

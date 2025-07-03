@@ -48,7 +48,6 @@ const PureAccountsItem = ({
 }) => {
   const onClickAction = React.useCallback(
     (e) => {
-      console.log(filesController, roomsController);
       filesController?.abort();
       roomsController?.abort();
       onClick && onClick(e, "accounts");

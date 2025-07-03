@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
@@ -33,6 +32,7 @@ import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82
 
 import { DeviceType } from "../../../enums";
 import { Nullable } from "../../../types";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
@@ -57,6 +57,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
   const iconRef = useRef(null);
   const buttonMenuRef = useRef<ContextMenuRefType>(null);
   const menuRef = useRef<ContextMenuRefType>(null);
+  const { isRTL } = useInterfaceDirection();
 
   const isTabletView = currentDeviceType === DeviceType.tablet;
   const avatarSize = isTabletView ? AvatarSize.min : AvatarSize.base;
@@ -99,8 +100,6 @@ const ArticleProfile = (props: ArticleProfileProps) => {
 
   const displayName = user?.displayName;
 
-  const { interfaceDirection } = useTheme();
-  const isRtl = interfaceDirection === "rtl";
   const userAvatar = user?.hasAvatar ? user.avatar : DefaultUserPhotoPngUrl;
 
   if (currentDeviceType === DeviceType.mobile) return null;
@@ -127,8 +126,8 @@ const ArticleProfile = (props: ArticleProfileProps) => {
             ref={menuRef}
             onHide={onHide}
             scaled={false}
-            leftOffset={Number(!isRtl && -50)}
-            rightOffset={Number(isRtl && 54)}
+            leftOffset={Number(!isRTL && -50)}
+            rightOffset={Number(isRTL && 54)}
           />
         </div>
         {!isTabletView || showText ? (

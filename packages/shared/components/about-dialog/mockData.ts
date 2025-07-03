@@ -24,50 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { TCompanyInfo } from "../../api/settings/types";
+import { IBuildInfo } from "./About.types";
 
-import { ModalDialog, ModalDialogType } from "../modal-dialog";
+export const mockBuildInfo: IBuildInfo = {
+  docSpace: "4.2.0",
+  communityServer: "10.5.0",
+  documentServer: "7.3.0",
+};
 
-import { AboutContent } from "./About.content";
-import { IDialogProps } from "./About.types";
-import styles from "./About.module.scss";
+export const mockCompanyInfo: TCompanyInfo = {
+  companyName: "Company Name",
+  email: "info@example.com",
+  phone: "+1 (123) 456-7890",
+  site: "https://www.example.com",
+  address: "123 Main Street, Anytown, USA",
+  hideAbout: false,
+  isLicensor: true,
+  isDefault: false,
+};
 
-export const AboutDialog = ({
-  visible,
-  onClose,
-  buildVersionInfo,
-  previewData,
-  companyInfoSettingsData,
-  standalone,
-  licenseAgreementsUrl,
-  isEnterprise,
-  logoText,
-}: IDialogProps) => {
-  const { t, ready } = useTranslation("Common");
+export const mockPreviewCompanyInfo: TCompanyInfo = {
+  companyName: "Preview Company",
+  email: "preview@example.com",
+  phone: "+1 (800) 555-1234",
+  site: "https://www.preview.com",
+  address: "456 Preview Ave, Preview City, USA",
+  hideAbout: false,
+  isLicensor: false,
+  isDefault: true,
+};
 
-  return (
-    <ModalDialog
-      isLoading={!ready}
-      visible={visible}
-      onClose={onClose}
-      displayType={ModalDialogType.modal}
-      isLarge
-    >
-      <ModalDialog.Header>{t("AboutHeader")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.bodyContent}>
-          <AboutContent
-            buildVersionInfo={buildVersionInfo}
-            previewData={previewData}
-            companyInfoSettingsData={companyInfoSettingsData}
-            standalone={standalone}
-            licenseAgreementsUrl={licenseAgreementsUrl}
-            isEnterprise={isEnterprise}
-            logoText={logoText}
-          />
-        </div>
-      </ModalDialog.Body>
-    </ModalDialog>
-  );
+export const mockDefaultProps = {
+  visible: true,
+  onClose: () => {},
+  buildVersionInfo: mockBuildInfo,
+  previewData: mockCompanyInfo,
+  companyInfoSettingsData: mockCompanyInfo,
+  standalone: false,
+  licenseAgreementsUrl: "https://www.example.com/license-agreements",
+  isEnterprise: true,
+  logoText: "Company Name",
 };

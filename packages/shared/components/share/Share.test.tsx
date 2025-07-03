@@ -61,6 +61,8 @@ describe("Share component", () => {
   const createProps = (hideSharePanel: boolean) => ({
     hideSharePanel,
     selfId: "current-user-id",
+    setEditLinkPanelIsVisible: jest.fn(),
+    setLinkParams: jest.fn(),
     infoPanelSelection: {
       isFile: false,
       access: ShareAccessRights.None,

@@ -35,8 +35,11 @@ import {
 } from "@/lib/actions";
 
 import BonusPage from "./page.client";
+import { logger } from "../../../logger.mjs";
 
 async function Page() {
+  logger.info("Bonus page");
+
   const [settings, quota, portalTariff, paymentSettings] = await Promise.all([
     getSettings(),
     getQuota(),
@@ -44,11 +47,20 @@ async function Page() {
     getPaymentSettings(),
   ]);
 
-  const baseUrl = await getBaseUrl();
+  const baseURL = await getBaseUrl();
 
-  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
-  if (!settings || !quota || !portalTariff || !paymentSettings)
-    redirect(`${baseUrl}/login`);
+  if (settings === "access-restricted") {
+    logger.info("Bonus page access-restricted");
+
+    redirect(`${baseURL}/${settings}`);
+  }
+  if (!settings || !quota || !portalTariff || !paymentSettings) {
+    logger.info(
+      `Bonus page settings: ${settings}, quota: ${quota}, portalTariff: ${portalTariff}, paymentSettings: ${paymentSettings}`,
+    );
+
+    redirect(`${baseURL}/login`);
+  }
 
   const { logoText, externalResources } = settings;
   const { site, helpcenter, support } = externalResources;
@@ -66,7 +78,10 @@ async function Page() {
 
   const dataBackupUrl = `${helpcenter.domain}/administration/docspace-settings.aspx#CreatingBackup_block`;
 
-  if (!openSource) return redirect(`${baseUrl}/error/403`);
+  if (!openSource) {
+    logger.info(`Bonus page redirect${baseURL}/error/403`);
+    return redirect(`${baseURL}/error/403`);
+  }
 
   return (
     <BonusPage

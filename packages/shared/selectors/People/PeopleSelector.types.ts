@@ -32,6 +32,7 @@ import {
   TSelectorCheckbox,
   TSelectorHeader,
   TSelectorInfo,
+  TSelectorItem,
   TSelectorSubmitButton,
   TSelectorWithAside,
 } from "../../components/selector/Selector.types";
@@ -71,6 +72,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     filter?: PeopleFilter | (() => Filter);
 
     isMultiSelect?: boolean;
+    selectedItems?: TSelectorItem[];
 
     currentUserId?: string;
     filterUserId?: string;
@@ -94,14 +96,29 @@ export type PeopleSelectorProps = TSelectorHeader &
     withSearch?: boolean;
     searchPlaceholder?: string;
     onSearch?: (searchTerm: string) => void;
+    searchValue?: string;
     headerProps?: {
       headerLabel?: string;
     };
     items?: unknown[];
+    renderCustomItem?: TSelectorItem;
 
     // Accessibility attributes
     "aria-label"?: string;
     "data-selector-type"?: string;
     "data-test-id"?: string;
+
+    // Loading and pagination
+    loadNextPage?: (index: number) => Promise<void>;
+    isLoading?: boolean;
+    isSearchLoading?: boolean;
+    rowLoader?: React.ReactNode;
+    searchLoader?: React.ReactNode;
+
+    // Empty screen
+    emptyScreenImage?: string;
+    searchEmptyScreenImage?: string;
+    searchEmptyScreenHeader?: string;
+    searchEmptyScreenDescription?: string;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

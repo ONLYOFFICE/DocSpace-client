@@ -24,12 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import styled from "styled-components";
-
-import EmptyScreenFilter from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
-import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 
 import { EmployeeStatus, EmployeeType, ShareAccessRights } from "../../enums";
 import { AvatarRole } from "../../components/avatar";
@@ -41,25 +36,12 @@ import { createGetPeopleHandler } from "../../__mocks__/storybook/handlers/peopl
 import PeopleSelector from "./index";
 import type { PeopleSelectorProps } from "./PeopleSelector.types";
 
-const StyledRowLoader = styled.div`
-  width: 100%;
-  height: 48px;
-`;
-
-const StyledSearchLoader = styled.div`
-  width: 100%;
-  height: 32px;
-`;
-
 const meta = {
   title: "Components/Selectors/PeopleSelector",
   component: PeopleSelector,
   argTypes: {
-    withHeader: { control: "boolean" },
-    withSearch: { control: "boolean" },
     isMultiSelect: { control: "boolean" },
     withCancelButton: { control: "boolean" },
-    withAccessRights: { control: "boolean" },
     withFooterCheckbox: { control: "boolean" },
     withInfo: { control: "boolean" },
   },
@@ -192,18 +174,7 @@ const accessRights = [
   },
 ];
 
-const selectedUsers = [users[0], users[2]];
-
 const Template = (args: PeopleSelectorProps) => {
-  const rowLoader = <StyledRowLoader />;
-  const searchLoader = <StyledSearchLoader />;
-
-  const [rendItems, setRendItems] = React.useState(users);
-
-  const loadNextPage = React.useCallback(async (index: number) => {
-    setRendItems((val) => [...val, ...users.slice(index, index + 100)]);
-  }, []);
-
   return (
     <div
       style={{
@@ -214,22 +185,9 @@ const Template = (args: PeopleSelectorProps) => {
     >
       <PeopleSelector
         {...args}
-        items={rendItems}
-        renderCustomItem={rendItems[0]}
-        loadNextPage={loadNextPage}
-        rowLoader={rowLoader}
-        searchLoader={searchLoader}
-        emptyScreenImage={EmptyScreenPersonsSvgUrl}
-        emptyScreenHeader="No users found"
-        emptyScreenDescription="Try changing your search or filter criteria"
-        searchEmptyScreenImage={EmptyScreenFilter}
-        searchEmptyScreenHeader="No results found"
-        searchEmptyScreenDescription="Try changing your search query"
         aria-label="People selector"
         data-selector-type="people"
         data-test-id="people-selector"
-        isLoading={false}
-        isSearchLoading={false}
       />
     </div>
   );
@@ -243,23 +201,14 @@ export const Default: Story = {
     },
   },
   args: {
-    items: users,
-    withHeader: true,
     headerProps: {
       headerLabel: "Select People",
       onCloseClick: () => {},
     },
-    withSearch: true,
-    onSearch: () => {},
     onSubmit: () => {},
-    searchPlaceholder: "Search users",
     isMultiSelect: false,
     submitButtonLabel: "Select",
-    searchValue: "",
 
-    selectedItems: selectedUsers,
-
-    withAccessRights: true,
     accessRights,
     selectedAccessRight: accessRights[1],
     onAccessRightsChange: () => {},
@@ -267,16 +216,6 @@ export const Default: Story = {
     cancelButtonLabel: "Cancel",
     onCancel: () => {},
     disableSubmitButton: false,
-    emptyScreenImage: EmptyScreenFilter,
-    emptyScreenHeader: "No other accounts here yet",
-    emptyScreenDescription:
-      "The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-    searchEmptyScreenImage: EmptyScreenFilter,
-    searchEmptyScreenHeader: "No other accounts here yet search",
-    searchEmptyScreenDescription:
-      " SEARCH !!! The list of users previously invited to DocSpace or separate rooms will appear here. You will be able to invite these users for collaboration at any time.",
-
-    isLoading: false,
   },
 };
 
@@ -290,7 +229,6 @@ export const WithMultiSelect: Story = {
   args: {
     ...Default.args,
     isMultiSelect: true,
-    selectedItems: selectedUsers,
   },
 };
 

@@ -366,5 +366,7 @@
   "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
-  "YourLogo": "Votre logo"
+  "YourLogo": "Votre logo",
+  "AdManagement": "Gestion des publicités",
+  "AdManagementDescription": "Choisissez si les bannières promotionnelles sont affichées dans votre {productName}}."
 }

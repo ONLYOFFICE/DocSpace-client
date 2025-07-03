@@ -366,5 +366,7 @@
   "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
-  "YourLogo": "Vaše logo"
+  "YourLogo": "Vaše logo",
+  "AdManagement": "Správa reklám",
+  "AdManagementDescription": "Vyberte, či sa zobrazujú propagačné bannery vo vašom {{productName}}."
 }

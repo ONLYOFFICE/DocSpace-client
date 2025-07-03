@@ -115,7 +115,7 @@
   "DeleteThemeForever": "Poista teema lopullisesti?",
   "DeleteThemeNotice": "Teema poistetaan lopullisesti. Et voi kumota tätä toimintoa.",
   "DeveloperToolsAccess": "Rajatut kehittäjän työkalut-oikeudet",
-  "DeveloperToolsAccessDescription": "Tämän asetuksen avulla voit näyttää Kehittäjätyökalut-osion kaikille käyttäjille paitsi vieraille. Jos haluat rajoittaa pääsyä tähän osioon niin, että se on vain {{productName}}-omistajan ja järjestelmänvalvojien käytettävissä, valitse Poista käytöstä ja napsauta Tallenna-painiketta.",
+  "DeveloperToolsAccessDescription": "Tämän asetuksen avulla voit näyttää Kehittäjätyökalut-osion kaikille käyttäjille paitsi vieraille. Jos haluat rajoittaa tämän osion käyttöoikeuksia niin, että se on vain omistajan ja {{productName}}-järjestelmänvalvojien käytettävissä, valitse Poista käytöstä ja napsauta Tallenna-painiketta.",
   "DeveloperToolsAccessMobileDescription": "Tämän asetuksen avulla voit näyttää Kehittäjätyökalut-osion kaikille käyttäjille paitsi vieraille.",
   "DisableEmailDescription": "Jos tämä laatikko on valittu, {{sectionName}} – käyttäjien ei tarvitse vahvistaa sähköpostiosoitettaan {{productName}} :ssa tapahtuneen ensimmäisen valtuutuksen jälkeen.",
   "DisableEmailVerification": "Ota sähköpostivahvistus pois käytöstä",
@@ -366,5 +366,7 @@
   "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
-  "YourLogo": "Logosi"
+  "YourLogo": "Logosi",
+  "AdManagement": "Mainoshallinta",
+  "AdManagementDescription": "Valitse, näytetäänkö mainosbannerit {{productName}}-tuotteessasi."
 }

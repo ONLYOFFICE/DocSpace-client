@@ -1,4 +1,4 @@
-/*
+/*!
  * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
@@ -26,38 +26,34 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { cookies } from "next/headers";
+.scopeList {
+  width: 100%;
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import type { TUser } from "@docspace/shared/api/people/types";
-import { selfHandler } from "@docspace/shared/__mocks__/e2e";
-import { logger } from "@/../logger.mjs";
+  display: flex;
+  flex-direction: column;
 
-const IS_TEST = process.env.E2E_TEST;
+  gap: 4px;
+}
 
-export async function getSelf(): Promise<TUser | undefined> {
-  logger.debug("Start GET /people/@self");
+.scopeItem {
+  width: 100%;
 
-  try {
-    const cookieStore = await cookies();
-    const authToken = cookieStore.get("asc_auth_key");
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    if (!authToken) return;
+  gap: 8px;
 
-    const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
-    const res = IS_TEST
-      ? selfHandler()
-      : await fetch(req, { next: { revalidate: 300 } });
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
 
-    if (res.status === 401 || !res.ok) {
-      logger.error(`GET /people/@self failed: ${res.status}`);
-      return;
-    }
+  .circle {
+    width: 4px;
+    height: 4px;
 
-    const self = await res.json();
+    border-radius: 50%;
 
-    return self.response;
-  } catch (error) {
-    logger.error(`Error in getSelf: ${error}`);
+    background: var(--text-color);
   }
 }

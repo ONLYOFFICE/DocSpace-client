@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,59 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  getAllPortals,
-  getBackupProgress,
-  getBackupSchedule,
-  getBackupStorage,
-  getFoldersTree,
-  getPortalTariff,
-  getSettingsFiles,
-  getSettingsThirdParty,
-  getStorageRegions,
-} from "@/lib/actions";
-import DataBackup from "./page.client";
-import { logger } from "../../../../logger.mjs";
+import React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useTranslation } from "react-i18next";
 
-async function Page() {
-  logger.info("DataBackup page");
+import { ScopeList, type TScopeListProps } from "./ScopeList";
+import { mockScopes } from "./mockData";
 
-  const [
-    account,
-    backupSchedule,
-    backupStorage,
-    newStorageRegions,
-    backupProgress,
+const ScopeListWithTranslation = (props: Omit<TScopeListProps, "t">) => {
+  const { t } = useTranslation();
+  return <ScopeList {...props} t={t} />;
+};
 
-    portals,
-    settingsFiles,
-    foldersTree,
-    portalTariff,
-  ] = await Promise.all([
-    getSettingsThirdParty(),
-    getBackupSchedule(),
-    getBackupStorage(),
-    getStorageRegions(),
-    getBackupProgress(),
-    getAllPortals(),
-    getSettingsFiles(),
-    getFoldersTree(),
-    getPortalTariff(),
-  ]);
+const meta = {
+  title: "Utils/ScopeList",
+  component: ScopeListWithTranslation,
+  parameters: {
+    docs: {
+      description: {
+        component: "Component for displaying a list of OAuth scopes",
+      },
+    },
+  },
+  tags: ["autodocs"],
+} satisfies Meta<typeof ScopeListWithTranslation>;
 
-  return (
-    <DataBackup
-      account={account}
-      foldersTree={foldersTree}
-      portalTariff={portalTariff}
-      filesSettings={settingsFiles}
-      portals={portals?.tenants || []}
-      backupProgress={backupProgress}
-      backupScheduleResponse={backupSchedule}
-      backupStorageResponse={backupStorage ?? []}
-      newStorageRegions={newStorageRegions ?? []}
-    />
-  );
-}
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export default Page;
+export const Default: Story = {
+  args: {
+    selectedScopes: [
+      "files:read",
+      "files:write",
+      "accounts:read",
+      "accounts:write",
+      "accounts.self:read",
+      "accounts.self:write",
+      "rooms:read",
+      "rooms:write",
+      "claudeai",
+      "openid",
+    ],
+    scopes: mockScopes,
+  },
+};

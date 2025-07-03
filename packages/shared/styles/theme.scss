@@ -2469,6 +2469,14 @@
 }
 
 .light {
+  --accounts-badges-pending-color: #{$gray};
+}
+
+.dark {
+  --accounts-badges-pending-color: #{$gray-dark};
+}
+
+.light {
   --about-logo-color: #{$black};
 }
 

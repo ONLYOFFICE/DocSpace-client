@@ -554,15 +554,15 @@ class FilesStore {
     }
   };
 
-  wsModifyFolderUpdate = (opt) => {
+  wsModifyFolderUpdate = async (opt) => {
     if (opt?.type === "file" && opt?.data) {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;
 
-      this.getFileInfo(file.id); // this.setFile(file);
+      const fileInfo = await this.getFileInfo(file.id); // this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
 
-      this.checkSelection(file);
+      this.checkSelection(fileInfo);
     } else if (opt?.type === "folder" && opt?.data) {
       const folder = JSON.parse(opt?.data);
       if (!folder || !folder.id) return;
@@ -673,6 +673,8 @@ class FilesStore {
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
 
       if (foundIndex === -1) {
+        frameCallEvent({ event: "onNotFound" });
+
         return this.redirectToParent(
           opt,
           pathParts,
@@ -4190,31 +4192,7 @@ class FilesStore {
 
   getPrimaryLink = async (roomId) => {
     const link = await api.rooms.getPrimaryLink(roomId);
-    if (link) {
-      this.setRoomShared(roomId, true);
-    }
-
     return link;
-  };
-
-  setRoomShared = (roomId, shared) => {
-    const roomIndex = this.folders.findIndex((r) => r.id === roomId);
-
-    if (roomIndex !== -1) {
-      this.folders[roomIndex].shared = shared;
-    }
-
-    const navigationPath = [...this.selectedFolderStore.navigationPath];
-
-    if (this.selectedFolderStore.id === roomId) {
-      this.selectedFolderStore.setShared(shared);
-      return;
-    }
-
-    const pathPartsRoomIndex = navigationPath.findIndex((f) => f.id === roomId);
-    if (pathPartsRoomIndex === -1) return;
-    navigationPath[pathPartsRoomIndex].shared = shared;
-    this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
   setInRoomFolder = (roomId, inRoom) => {

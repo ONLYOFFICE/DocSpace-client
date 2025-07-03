@@ -133,17 +133,17 @@ const EmptyScreen = ({
       </Text>
       {createItem ? (
         <div className="buttons">
-          <div className="empty-folder_container-links">
+          <div
+            className="empty-folder_container-links"
+            onClick={onCreateClickAction}
+          >
             <IconButton
               className="empty-folder_container-icon"
               size={12}
-              onClick={onCreateClickAction}
               iconName={PlusSvgUrl}
               isFill
             />
-            <Link {...linkStyles} onClick={onCreateClickAction}>
-              {items[0].label}
-            </Link>
+            <Link {...linkStyles}>{items[0].label}</Link>
             {isOpenDropDown && createItem && createItem.dropDownItems ? (
               <NewItemDropDown
                 dropDownItems={createItem.dropDownItems}
@@ -152,26 +152,21 @@ const EmptyScreen = ({
               />
             ) : null}
           </div>
-          <div className="empty-folder_container-links">
+          <div
+            className="empty-folder_container-links"
+            onClick={
+              withSearch
+                ? () => onClearSearch?.(() => setIsSearch(false))
+                : createItem.onBackClick
+            }
+          >
             <IconButton
               className="empty-folder_container-icon"
               size={12}
-              onClick={
-                withSearch
-                  ? () => onClearSearch?.(() => setIsSearch(false))
-                  : createItem.onBackClick
-              }
               iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
               isFill
             />
-            <Link
-              {...linkStyles}
-              onClick={
-                withSearch
-                  ? () => onClearSearch?.(() => setIsSearch(false))
-                  : createItem.onBackClick
-              }
-            >
+            <Link {...linkStyles}>
               {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
             </Link>
           </div>

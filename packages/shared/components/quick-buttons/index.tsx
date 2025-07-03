@@ -171,7 +171,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {isAvailableLockFile ? (
+          {(locked && item.access === ShareAccessRights.Collaborator) ||
+          isAvailableLockFile ? (
             <IconButton
               iconNode={<IconLock />}
               className="badge lock-file icons-group"
@@ -180,11 +181,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               data-locked={!!locked}
               onClick={onClickLock}
               color={colorLock}
-              isDisabled={isDisabled}
+              isDisabled={isDisabled || !isAvailableLockFile}
               hoverColor="accent"
               title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
             />
           ) : null}
+
           {isAvailableDownloadFile ? (
             <IconButton
               iconNode={<FileActionsDownloadReactSvg />}

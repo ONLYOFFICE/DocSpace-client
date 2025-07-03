@@ -1042,6 +1042,8 @@ class FilesActionStore {
   ) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
 
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
@@ -1077,7 +1079,6 @@ class FilesActionStore {
             operation,
             operationId,
           });
-          this.updateCurrentFolder(null, operationId, operation);
         })
         .then(() =>
           toastr.success(
@@ -1090,6 +1091,11 @@ class FilesActionStore {
         )
         .finally(() => {
           this.setGroupMenuBlocked(false);
+          setSecondaryProgressBarData({
+            operation,
+            completed: true,
+            operationId,
+          });
         });
     }
 

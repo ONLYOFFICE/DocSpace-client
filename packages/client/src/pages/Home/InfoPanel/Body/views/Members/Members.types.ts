@@ -91,9 +91,9 @@ export type MembersProps = {
   setEditLinkPanelIsVisible?: DialogsStore["setEditLinkPanelIsVisible"];
 
   getPrimaryLink?: FilesStore["getPrimaryLink"];
-  setRoomShared?: FilesStore["setRoomShared"];
 
   currentId?: SelectedFolderStore["id"];
+  isRootFolder?: SelectedFolderStore["isRootFolder"];
 };
 
 export type UserProps = {

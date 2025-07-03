@@ -33,6 +33,7 @@ import { useTranslation } from "react-i18next";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 import PaymentsLoader from "@docspace/shared/skeletons/payments";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
 import PaymentContainer from "./PaymentContainer";
 
@@ -54,6 +55,7 @@ const SaaSPage = ({
   isDesktopClientInit,
   setIsDesktopClientInit,
   setIsUpdatingBasicSettings,
+  isShowStorageTariffDeactivatedModal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
   const shouldShowLoader =
@@ -113,7 +115,14 @@ const SaaSPage = ({
       <PaymentsLoader />
     ) : null
   ) : (
-    <PaymentContainer t={t} />
+    <>
+      <PaymentContainer t={t} />
+      {isShowStorageTariffDeactivatedModal ? (
+        <StorageTariffDeactiveted
+          visible={isShowStorageTariffDeactivatedModal}
+        />
+      ) : null}
+    </>
   );
 };
 
@@ -140,7 +149,9 @@ export default inject(
       isUpdatingBasicSettings,
       resetTariffContainerToBasic,
       setIsUpdatingBasicSettings,
+      isShowStorageTariffDeactivatedModal,
     } = paymentStore;
+
     const {
       isEncryptionSupport,
       setEncryptionKeys,
@@ -166,6 +177,7 @@ export default inject(
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
       setIsUpdatingBasicSettings,
+      isShowStorageTariffDeactivatedModal,
     };
   },
 )(observer(SaaSPage));

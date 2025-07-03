@@ -40,7 +40,9 @@
   }
 
   .loadingButton {
-    color: var(--circle-fill-color);
+    svg path {
+      fill: var(--circle-fill-color);
+    }
   }
 
   &.defaultMode {
@@ -49,12 +51,17 @@
     }
     .loadingButton {
       cursor: pointer;
-      color: var(--loading-button-default-bg);
+
+      svg path {
+        fill: var(--loading-button-default-bg);
+      }
     }
 
     &:hover {
       .loadingButton {
-        color: var(--loading-button-hover-color);
+        svg path {
+          fill: var(--loading-button-hover-color);
+        }
       }
     }
   }
@@ -125,12 +132,15 @@
   height: 12px;
   border-radius: 50%;
   text-align: center;
-  line-height: 12px;
+  line-height: 11px;
   background: var(--loading-button-custom-bg, var(--loading-button-bg));
 
   position: absolute;
   margin: 2px;
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--loading-button-color);
+
+  svg path {
+    font-weight: bold;
+
+    fill: var(--loading-button-color);
+  }
 }

@@ -3,7 +3,7 @@
   "content": "Complete the setup",
   "content_en_sha1_hash": "1bf0c07dc9bdea39a6c1bbaaf41f773da850cc1c",
   "created_at": "2025-05-19T21:30:57.412Z",
-  "updated_at": "2025-05-26T07:57:33.006Z",
+  "updated_at": "2025-06-30T12:20:31.758Z",
   "comment": {
     "text": "This translation key is used to display a label that indicates a setup process has been completed. It appears as a bold and truncated text element in the UI.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/management/src/app/spaces/multiple/row-content.tsx",
-      "line_number": 115,
-      "context": "fontSize=\"12px\"\n fontWeight={600}\n truncate\n className=\"complete-setup\"\n >\n {t(\"CompleteSetup\")}\n </Text>\n ) : null}\n \n {isMobileView ? null : isWizardCompleted ? (\n <Text fontSize=\"12px\" as=\"div\" fontWeight={600} truncate>",
+      "line_number": 117,
+      "context": "fontSize=\"12px\"\n fontWeight={600}\n truncate\n className=\"complete-setup\"\n >\n {t(\"CompleteSetup\")}\n </Text>\n ) : (\n <div />\n )}",
       "module": "/packages/management"
     },
     {
       "file_path": "/packages/management/src/app/spaces/multiple/row-content.tsx",
-      "line_number": 115,
-      "context": "fontSize=\"12px\"\n fontWeight={600}\n truncate\n className=\"complete-setup\"\n >\n {t(\"CompleteSetup\")}\n </Text>\n ) : null}\n \n {isMobileView ? null : isWizardCompleted ? (\n <Text fontSize=\"12px\" as=\"div\" fontWeight={600} truncate>",
+      "line_number": 117,
+      "context": "fontSize=\"12px\"\n fontWeight={600}\n truncate\n className=\"complete-setup\"\n >\n {t(\"CompleteSetup\")}\n </Text>\n ) : (\n <div />\n )}",
       "module": "/packages/management"
     }
   ],

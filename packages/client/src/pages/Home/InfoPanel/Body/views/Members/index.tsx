@@ -91,11 +91,10 @@ const Members = ({
 
   isMembersPanelUpdating,
   setIsMembersPanelUpdating,
-  setRoomShared,
-  currentId,
   setPublicRoomKey,
   setAccessSettingsIsVisible,
   templateAvailable,
+  isRootFolder,
 }: MembersProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -160,8 +159,7 @@ const Members = ({
 
         const filterObj = FilesFilter.getFilter(window.location);
 
-        if (isPublicRoomType && filterObj && !filterObj.key) {
-          setRoomShared!(currentId, true);
+        if (isPublicRoomType && filterObj && !filterObj.key && !isRootFolder) {
           setPublicRoomKey!(typeLink.sharedTo.requestToken);
           setSearchParams((prev) => {
             prev.set("key", typeLink.sharedTo.requestToken);
@@ -466,8 +464,6 @@ export default inject(
       updateInfoPanelMembers,
     } = infoPanelStore;
 
-    const { setRoomShared } = filesStore;
-
     const { id: selfId } = userStore.user!;
 
     const {
@@ -495,6 +491,8 @@ export default inject(
 
     const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
 
+    const { isRootFolder } = selectedFolderStore;
+
     return {
       infoPanelSelection: infoPanelRoomSelection,
       selfId,
@@ -516,11 +514,11 @@ export default inject(
 
       isMembersPanelUpdating,
       setIsMembersPanelUpdating,
-      setRoomShared,
       currentId: id,
       setPublicRoomKey,
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
+      isRootFolder,
     };
   },
 )(observer(Members));

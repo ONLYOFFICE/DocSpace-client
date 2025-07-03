@@ -269,7 +269,7 @@ declare global {
       opType: number;
     }) => void;
     RendererProcessVariable: {
-      theme?: { id: string; system: string };
+      theme?: { id: string; system: string; type: string; addlocal: string };
     };
     Tiff: new (arg: object) => {
       toDataURL: () => string;

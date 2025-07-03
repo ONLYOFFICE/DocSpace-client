@@ -27,7 +27,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { RoomMember } from "@docspace/shared/api/rooms/types";
+import type { RoomMember } from "@docspace/shared/api/rooms/types";
 import {
   EmployeeActivationStatus,
   RoomsType,

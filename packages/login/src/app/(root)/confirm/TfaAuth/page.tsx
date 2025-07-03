@@ -30,6 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams, encodeParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import TfaAuthForm from "./page.client";
 
 type TfaAuthProps = {
@@ -37,6 +38,7 @@ type TfaAuthProps = {
 };
 
 async function Page(props: TfaAuthProps) {
+  logger.info("TfaAuth page");
   const { searchParams: sp } = props;
   const searchParams = await sp;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));

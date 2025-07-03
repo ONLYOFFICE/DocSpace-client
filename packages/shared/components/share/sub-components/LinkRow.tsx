@@ -197,6 +197,8 @@ const LinkRow = ({
               />
             ) : (
               <Text
+                truncate
+                title={shareOption?.label}
                 className={classNames(styles.linkOptionsTitle, {
                   [styles.isExpired]: isExpiredLink,
                 })}

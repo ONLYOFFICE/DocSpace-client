@@ -68,6 +68,22 @@ const SharingDialog = ({
     moment.locale(i18n.language);
   }, [i18n.language]);
 
+  const handleSetEditLinkPanelIsVisible = (_value: boolean): void => {
+    throw new Error("Function not implemented.", { cause: _value });
+  };
+
+  const handleSetLinkParams = (_linkParams: {
+    link: TFileLink;
+    roomId: number | string;
+    type: LinkEntityType;
+    isEdit?: boolean;
+    isPublic?: boolean;
+    isFormRoom?: boolean;
+    isCustomRoom?: boolean;
+  }): void => {
+    throw new Error("Function not implemented.", { cause: _linkParams });
+  };
+
   return (
     <ModalDialog
       visible={isVisible}
@@ -85,20 +101,8 @@ const SharingDialog = ({
               selfId={selfId ?? ""}
               onOpenPanel={onOpenPanel}
               onlyOneLink={fileInfo.isForm}
-              setEditLinkPanelIsVisible={function (value: boolean): void {
-                throw new Error("Function not implemented.");
-              }}
-              setLinkParams={function (linkParams: {
-                link: TFileLink;
-                roomId: number | string;
-                type: LinkEntityType;
-                isEdit?: boolean;
-                isPublic?: boolean;
-                isFormRoom?: boolean;
-                isCustomRoom?: boolean;
-              }): void {
-                throw new Error("Function not implemented.");
-              }}
+              setEditLinkPanelIsVisible={handleSetEditLinkPanelIsVisible}
+              setLinkParams={handleSetLinkParams}
             />
           </div>
         </StyledWrapper>

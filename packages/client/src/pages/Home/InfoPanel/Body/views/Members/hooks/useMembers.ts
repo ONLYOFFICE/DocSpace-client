@@ -134,7 +134,7 @@ export const useMembers = ({
     [t],
   );
 
-  const convertMemebers = React.useCallback(
+  const convertMembers = React.useCallback(
     (membersList: RoomMember[], clearFilter: boolean): TInfoPanelMembers => {
       const users: TInfoPanelMember[] = [];
       const administrators: TInfoPanelMember[] = [];
@@ -234,7 +234,7 @@ export const useMembers = ({
     if (links) setExternalLinks(links);
     else setExternalLinks([]);
 
-    const convertedMembers = convertMemebers(data, true);
+    const convertedMembers = convertMembers(data, true);
 
     setMembers(convertedMembers);
 
@@ -260,7 +260,7 @@ export const useMembers = ({
 
     setTotal(data.total);
 
-    const convertedMembers = convertMemebers(data.items, false);
+    const convertedMembers = convertMembers(data.items, false);
 
     setMembers((value) => {
       if (!value) return convertedMembers;
@@ -355,7 +355,7 @@ export const useMembers = ({
 
         setTotal(data.total);
 
-        const convertedMembers = convertMemebers(data.items, false);
+        const convertedMembers = convertMembers(data.items, false);
 
         setMembers((value) => {
           if (!value) return convertedMembers;
@@ -377,7 +377,6 @@ export const useMembers = ({
     } else {
       setMembers((value) => {
         if (!value) return value;
-
         const newValue = {
           users: value.users?.map((m) =>
             m.id === userId ? { ...m, access: option.access as number } : m,
@@ -395,7 +394,6 @@ export const useMembers = ({
             m.id === userId ? { ...m, access: option.access as number } : m,
           ),
         };
-
         return newValue;
       });
     }

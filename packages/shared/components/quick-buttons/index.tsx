@@ -26,6 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { useMemo } from "react";
 import { isTablet as isTabletDevice } from "react-device-detect";
 
 import FileActionsLockedReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg";
@@ -35,9 +36,6 @@ import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import LockedReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
-
-import { useMemo } from "react";
-import { useTheme } from "styled-components";
 
 import { classNames, IconSizeType, isTablet } from "../../utils";
 import { DeviceType, RoomsType, ShareAccessRights } from "../../enums";
@@ -70,8 +68,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     isTemplatesFolder,
   } = props;
 
-  const theme = useTheme();
-
   const isMobile = currentDeviceType === DeviceType.mobile;
 
   const { id, shared } = item;
@@ -89,12 +85,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
     return locked ? FileActionsLockedReactSvg : LockedReactSvg;
   }, [locked, isMobile]);
-
-  const colorLock = locked
-    ? theme.filesQuickButtons.sharedColor
-    : theme.filesQuickButtons.color;
-
-  const colorShare = shared ? "accent" : theme.filesQuickButtons.color;
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;
 
@@ -180,7 +170,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               data-id={id}
               data-locked={!!locked}
               onClick={onClickLock}
-              color={colorLock}
+              color={locked ? "accent" : undefined}
               isDisabled={isDisabled || !isAvailableLockFile}
               hoverColor="accent"
               title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
@@ -204,7 +194,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge create-room icons-group"
               size={IconSizeType.medium}
               onClick={onCreateRoom}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CreateRoom")}
@@ -216,7 +205,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge copy-link icons-group"
               size={sizeQuickButton}
               onClick={onCopyPrimaryLink}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CopySharedLink")}
@@ -230,28 +218,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               })}
               size={sizeQuickButton}
               onClick={onClickShare}
-              color={colorShare}
+              color={shared ? "accent" : undefined}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CopySharedLink")}
             />
           ) : null}
-          {/* {fileExst && !isTrashFolder && displayBadges && (
-        <IconButton
-          iconName={iconLock}
-          className="badge lock-file icons-group"
-          size={sizeQuickButton}
-          data-id={id}
-          data-locked={locked ? true : false}
-          onClick={onClickLock}
-          color={colorLock}
-          isDisabled={isDisabled}
-          hoverColor="accent"
-          title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
-        />
-      )}
-
- */}
         </>
       ) : null}
     </div>

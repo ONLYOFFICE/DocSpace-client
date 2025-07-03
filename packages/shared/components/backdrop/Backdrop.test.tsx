@@ -28,7 +28,6 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
 
 import { Base } from "../../themes";
 import * as utils from "../../utils";
@@ -39,10 +38,6 @@ jest.mock("../../utils", () => ({
   isMobile: jest.fn(),
   isTablet: jest.fn(),
 }));
-
-const renderWithTheme = (ui: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{ui}</ThemeProvider>);
-};
 
 describe("<Backdrop />", () => {
   const mockOnClick = jest.fn();
@@ -59,17 +54,17 @@ describe("<Backdrop />", () => {
 
   describe("Rendering", () => {
     it("renders when visible is true", () => {
-      renderWithTheme(<Backdrop visible />);
+      render(<Backdrop visible />);
       expect(screen.getByTestId("backdrop")).toBeInTheDocument();
     });
 
     it("does not render when visible is false", () => {
-      renderWithTheme(<Backdrop visible={false} />);
+      render(<Backdrop visible={false} />);
       expect(screen.queryByTestId("backdrop")).not.toBeInTheDocument();
     });
 
     it("applies custom className", () => {
-      renderWithTheme(<Backdrop visible className="custom-class" />);
+      render(<Backdrop visible className="custom-class" />);
       expect(screen.getByTestId("backdrop")).toHaveClass(
         "custom-class",
         "backdrop-active",
@@ -78,7 +73,7 @@ describe("<Backdrop />", () => {
     });
 
     it("applies array of classNames", () => {
-      renderWithTheme(<Backdrop visible className={["class1", "class2"]} />);
+      render(<Backdrop visible className={["class1", "class2"]} />);
       const backdrop = screen.getByTestId("backdrop");
       expect(backdrop).toHaveClass(
         "class1",
@@ -90,30 +85,30 @@ describe("<Backdrop />", () => {
 
     it("applies custom styles", () => {
       const customStyle = { backgroundColor: "red" };
-      renderWithTheme(<Backdrop visible style={customStyle} />);
+      render(<Backdrop visible style={customStyle} />);
       expect(screen.getByTestId("backdrop")).toHaveStyle(customStyle);
     });
 
     it("applies custom id", () => {
-      renderWithTheme(<Backdrop visible id="custom-id" />);
+      render(<Backdrop visible id="custom-id" />);
       expect(screen.getByTestId("backdrop")).toHaveAttribute("id", "custom-id");
     });
 
     it("applies custom z-index", () => {
-      renderWithTheme(<Backdrop visible zIndex={999} />);
+      render(<Backdrop visible zIndex={999} />);
       expect(screen.getByTestId("backdrop")).toHaveStyle({ zIndex: 999 });
     });
   });
 
   describe("Background behavior", () => {
     it("shows background when withBackground is true", () => {
-      renderWithTheme(<Backdrop visible withBackground />);
+      render(<Backdrop visible withBackground />);
       // Note: actual background color should be checked in styled-components tests
       expect(screen.getByTestId("backdrop")).toBeInTheDocument();
     });
 
     it("hides background when withoutBackground is true", () => {
-      renderWithTheme(<Backdrop visible withBackground withoutBackground />);
+      render(<Backdrop visible withBackground withoutBackground />);
       // withoutBackground should take precedence over withBackground
       expect(screen.getByTestId("backdrop")).toBeInTheDocument();
     });
@@ -121,14 +116,14 @@ describe("<Backdrop />", () => {
 
   describe("Aside behavior", () => {
     it("renders with isAside", () => {
-      renderWithTheme(<Backdrop visible isAside />);
+      render(<Backdrop visible isAside />);
       expect(screen.getByTestId("backdrop")).toBeInTheDocument();
     });
 
     it("allows multiple backdrops when isAside is true", () => {
       // Render two backdrops
-      renderWithTheme(<Backdrop visible isAside />);
-      renderWithTheme(<Backdrop visible isAside />);
+      render(<Backdrop visible isAside />);
+      render(<Backdrop visible isAside />);
 
       const backdrops = document.querySelectorAll(".backdrop-active");
       expect(backdrops).toHaveLength(2);
@@ -137,14 +132,14 @@ describe("<Backdrop />", () => {
 
   describe("Event handling", () => {
     it("calls onClick handler when clicked", async () => {
-      renderWithTheme(<Backdrop visible onClick={mockOnClick} />);
+      render(<Backdrop visible onClick={mockOnClick} />);
       await userEvent.click(screen.getByTestId("backdrop"));
       expect(mockOnClick).toHaveBeenCalledTimes(1);
     });
 
     describe("Touch events", () => {
       it("prevents default touch events when not a modal dialog", () => {
-        renderWithTheme(<Backdrop visible />);
+        render(<Backdrop visible />);
         const backdrop = screen.getByTestId("backdrop");
 
         const touchMoveEvent = new TouchEvent("touchmove", {
@@ -160,7 +155,7 @@ describe("<Backdrop />", () => {
       });
 
       it("allows touch events when isModalDialog is true", () => {
-        renderWithTheme(<Backdrop visible isModalDialog />);
+        render(<Backdrop visible isModalDialog />);
         const backdrop = screen.getByTestId("backdrop");
 
         const touchMoveEvent = new TouchEvent("touchmove", {
@@ -180,21 +175,21 @@ describe("<Backdrop />", () => {
   describe("Mobile and Tablet Behavior", () => {
     it("shows background on mobile devices without withoutBlur", () => {
       (utils.isMobile as jest.Mock).mockReturnValue(true);
-      renderWithTheme(<Backdrop visible />);
+      render(<Backdrop visible />);
       const backdrop = screen.getByTestId("backdrop");
       expect(backdrop).toHaveStyle({ backgroundColor: expect.any(String) });
     });
 
     it("shows background on tablet devices without withoutBlur", () => {
       (utils.isTablet as jest.Mock).mockReturnValue(true);
-      renderWithTheme(<Backdrop visible />);
+      render(<Backdrop visible />);
       const backdrop = screen.getByTestId("backdrop");
       expect(backdrop).toHaveStyle({ backgroundColor: expect.any(String) });
     });
 
     it("respects withoutBlur on mobile devices", () => {
       (utils.isMobile as jest.Mock).mockReturnValue(true);
-      renderWithTheme(<Backdrop visible withoutBlur />);
+      render(<Backdrop visible withoutBlur />);
       const backdrop = screen.getByTestId("backdrop");
       expect(backdrop).toHaveStyle({
         backgroundColor: Base.backdrop.unsetBackgroundColor,
@@ -204,16 +199,16 @@ describe("<Backdrop />", () => {
 
   describe("Multiple Backdrop Handling", () => {
     it("allows multiple backdrops when isAside is true", () => {
-      renderWithTheme(<Backdrop visible isAside />);
-      renderWithTheme(<Backdrop visible isAside />);
+      render(<Backdrop visible isAside />);
+      render(<Backdrop visible isAside />);
 
       const backdrops = document.querySelectorAll(".backdrop-active");
       expect(backdrops).toHaveLength(2);
     });
 
     it("replaces existing backdrop when not isAside", () => {
-      renderWithTheme(<Backdrop visible />);
-      renderWithTheme(<Backdrop visible />);
+      render(<Backdrop visible />);
+      render(<Backdrop visible />);
 
       const backdrops = document.querySelectorAll(".backdrop-active");
       expect(backdrops).toHaveLength(1);
@@ -222,7 +217,7 @@ describe("<Backdrop />", () => {
 
   describe("Touch Events", () => {
     it("prevents default touch behavior when not a modal dialog", () => {
-      renderWithTheme(<Backdrop visible onClick={mockOnClick} />);
+      render(<Backdrop visible onClick={mockOnClick} />);
       const backdrop = screen.getByTestId("backdrop");
 
       const touchEvent = new TouchEvent("touchend", {
@@ -238,7 +233,7 @@ describe("<Backdrop />", () => {
     });
 
     it("allows default touch behavior for modal dialogs", () => {
-      renderWithTheme(<Backdrop visible isModalDialog onClick={mockOnClick} />);
+      render(<Backdrop visible isModalDialog onClick={mockOnClick} />);
       const backdrop = screen.getByTestId("backdrop");
 
       const touchEvent = new TouchEvent("touchend", {
@@ -256,7 +251,7 @@ describe("<Backdrop />", () => {
 
   describe("Cleanup", () => {
     it("removes backdrop when component unmounts", () => {
-      const { unmount } = renderWithTheme(<Backdrop visible />);
+      const { unmount } = render(<Backdrop visible />);
       expect(screen.getByTestId("backdrop")).toBeInTheDocument();
 
       unmount();
@@ -264,7 +259,7 @@ describe("<Backdrop />", () => {
     });
 
     it("removes backdrop when visible changes to false", () => {
-      const { rerender } = renderWithTheme(<Backdrop visible />);
+      const { rerender } = render(<Backdrop visible />);
       expect(screen.getByTestId("backdrop")).toBeInTheDocument();
 
       rerender(<Backdrop visible={false} />);
@@ -274,16 +269,16 @@ describe("<Backdrop />", () => {
 
   describe("Multiple backdrop behavior", () => {
     it("shows only one backdrop by default", () => {
-      renderWithTheme(<Backdrop visible />);
-      renderWithTheme(<Backdrop visible />);
+      render(<Backdrop visible />);
+      render(<Backdrop visible />);
 
       const backdrops = screen.queryAllByTestId("backdrop");
       expect(backdrops).toHaveLength(1);
     });
 
     it("allows up to two backdrops with isAside", () => {
-      renderWithTheme(<Backdrop visible isAside />);
-      renderWithTheme(<Backdrop visible isAside />);
+      render(<Backdrop visible isAside />);
+      render(<Backdrop visible isAside />);
 
       const backdrops = screen.queryAllByTestId("backdrop");
       expect(backdrops).toHaveLength(2);

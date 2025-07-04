@@ -232,6 +232,8 @@
   "Description": "Popis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Nástroje pro vývojáře",
+  "Diagram": "Diagram",
+  "Diagrams": "Diagramy",
   "Disable": "Zakázat",
   "Disabled": "Deaktivováno",
   "DisableQuota": "Zakázat kvóty",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě",
-  "Diagram": "Diagram",
-  "Diagrams": "Diagramy"
+  "YourTurn": "Jste na řadě"
 }

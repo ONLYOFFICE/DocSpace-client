@@ -231,6 +231,8 @@
   "Description": "Опис",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Інструменти розробника",
+  "Diagram": "Діаграма",
+  "Diagrams": "Діаграми",
   "Disable": "Деактивувати",
   "Disabled": "Вимкнено",
   "DisableQuota": "Вимкнути квоту",
@@ -859,7 +861,5 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга",
-  "Diagram": "Діаграма",
-  "Diagrams": "Діаграми"
+  "YourTurn": "Ваша черга"
 }

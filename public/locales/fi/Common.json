@@ -232,6 +232,8 @@
   "Description": "Kuvaus",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Kehittäjän työkalut",
+  "Diagram": "Kaavio",
+  "Diagrams": "Kaaviot",
   "Disable": "Poista käytöstä",
   "Disabled": "Poistettu käytöstä",
   "DisableQuota": "Poista kiintiö käytöstä",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
-  "YourTurn": "Sinun vuorosi",
-  "Diagram": "Kaavio",
-  "Diagrams": "Kaaviot"
+  "YourTurn": "Sinun vuorosi"
 }

@@ -232,6 +232,8 @@
   "Description": "Përshkrimi",
   "DeveloperLicense": "Zhvilluesi",
   "DeveloperTools": "Mjetet e Zhvilluesit",
+  "Diagram": "Diagram",
+  "Diagrams": "Diagramet",
   "Disable": "Çaktivizoni",
   "Disabled": "Me aftësi te kufizuara",
   "DisableQuota": "Çaktivizoni kuotën",
@@ -867,7 +869,5 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote",
-  "Diagram": "Diagram",
-  "Diagrams": "Diagramet"
+  "YourTurn": "Radha jote"
 }

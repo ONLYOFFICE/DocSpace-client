@@ -232,6 +232,8 @@
   "Description": "Descrierea",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Instrumente pentru dezvoltatori",
+  "Diagram": "Diagrama",
+  "Diagrams": "Diagrame",
   "Disable": "Dezactivare",
   "Disabled": "Dezactivat",
   "DisableQuota": "Dezactivare cotă",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "Diagram": "Diagrama",
-  "Diagrams": "Diagrame"
+  "YourTurn": "Acum e rândul dvs."
 }

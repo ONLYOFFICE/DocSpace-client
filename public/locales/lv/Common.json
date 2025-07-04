@@ -232,6 +232,8 @@
   "Description": "Apraksts",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Izstrādātāja rīki",
+  "Diagram": "Diagramma",
+  "Diagrams": "Diagrammas",
   "Disable": "Atspējot",
   "Disabled": "Atspējots",
   "DisableQuota": "Atspējot kvotu",
@@ -867,7 +869,5 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta",
-  "Diagram": "Diagramma",
-  "Diagrams": "Diagrammas"
+  "YourTurn": "Jūsu kārta"
 }

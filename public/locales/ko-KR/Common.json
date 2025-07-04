@@ -232,6 +232,8 @@
   "Description": "설명",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "개발자 도구",
+  "Diagram": "도식",
+  "Diagrams": "도표",
   "Disable": "비활성화",
   "Disabled": "비활성화",
   "DisableQuota": "할당량 비활성화",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
   "YourLogo": "로고",
-  "YourTurn": "고객님의 차례입니다",
-  "Diagrams": "도표",
-  "Diagram": "도식"
+  "YourTurn": "고객님의 차례입니다"
 }

@@ -232,6 +232,8 @@
   "Description": "Mô tả",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Công cụ nhà phát triển",
+  "Diagram": "Sơ đồ",
+  "Diagrams": "Sơ đồ",
   "Disable": "Tắt",
   "Disabled": "Đã vô hiệu hóa",
   "DisableQuota": "Vô hiệu hóa hạn mức",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn",
-  "Diagram": "Sơ đồ",
-  "Diagrams": "Sơ đồ"
+  "YourTurn": "Phiên của bạn"
 }

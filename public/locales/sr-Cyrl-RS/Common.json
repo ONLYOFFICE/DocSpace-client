@@ -232,6 +232,8 @@
   "Description": "Опис",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Алати програмера",
+  "Diagram": "Дијаграм",
+  "Diagrams": "Дијаграми",
   "Disable": "Онемогући",
   "Disabled": "Онемогућено",
   "DisableQuota": "Онемогући квоту",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред",
-  "Diagram": "Дијаграм",
-  "Diagrams": "Дијаграми"
+  "YourTurn": "Ваш ред"
 }

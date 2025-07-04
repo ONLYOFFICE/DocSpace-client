@@ -232,6 +232,8 @@
   "Description": "Opis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Razvijalska orodja",
+  "Diagram": "Diagram",
+  "Diagrams": "Diagrami",
   "Disable": "Onemogoči",
   "Disabled": "Onemogočeno",
   "DisableQuota": "Onemogoči kvoto",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti",
-  "Diagram": "Diagram",
-  "Diagrams": "Diagrami"
+  "YourTurn": "Vi ste na vrsti"
 }

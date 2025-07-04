@@ -232,6 +232,8 @@
   "Description": "Tanım",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Geliştirici Araçları",
+  "Diagram": "Şema",
+  "Diagrams": "Şemalar",
   "Disable": "Devre dışı bırak",
   "Disabled": "Devre dışı bırakıldı",
   "DisableQuota": "Kotayı devre dışı bırak",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde",
-  "Diagram": "Şema",
-  "Diagrams": "Şemalar"
+  "YourTurn": "Sıra sizde"
 }

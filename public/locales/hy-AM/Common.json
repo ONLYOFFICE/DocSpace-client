@@ -232,6 +232,8 @@
   "Description": "Նկարագրություն",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Մշակողի գործիքներ",
+  "Diagram": "Դիագրամ",
+  "Diagrams": "Դիագրամներ",
   "Disable": "Անջատել",
   "Disabled": "Անջատված է",
   "DisableQuota": "Անջատել քվոտան",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Դուք չպահված փոփոխություններ ունեք",
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
-  "YourTurn": "Ձեր հերթն է",
-  "Diagram": "Դիագրամ",
-  "Diagrams": "Դիագրամներ"
+  "YourTurn": "Ձեր հերթն է"
 }

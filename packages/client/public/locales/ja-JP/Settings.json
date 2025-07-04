@@ -286,11 +286,6 @@
   "WantToCancelDataImport": "データのインポートをキャンセルしますか？",
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinue": "ユーザーストレージ容量制限を継続または変更しますか？",
-  "WhiteLabel": "ロゴ設定",
   "WhiteLabelSubtitle": "会社名を入力し、ロゴをアップロードし、ブランディングに合わせたスタイリングにカスタマイズをしましょう。",
-  "WhiteLabelTooltip": "サイズはRetinaディスプレイ用に表示されています。標準的な解像度のディスプレイの場合、ロゴの幅と高さはアップロード時に適宜リサイズされます。",
-  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
-  "YouHaveUnsavedChanges": "未保存変更はあります。",
-  "YourCurrentDomain": "現在お使いのドメイン",
-  "YourLogo": "あなたのロゴ"
+  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
 }

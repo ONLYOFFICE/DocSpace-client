@@ -232,6 +232,8 @@
   "Description": "Təsvir",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Tərtibatçı Alətləri",
+  "Diagram": "Diaqram",
+  "Diagrams": "Diaqramlar",
   "Disable": "Deaktiv edin",
   "Disabled": "Deaktiv edildi",
   "DisableQuota": "Kvotanı deaktiv edin",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz",
-  "Diagram": "Diaqram",
-  "Diagrams": "Diaqramlar"
+  "YourTurn": "Sizin növbəniz"
 }

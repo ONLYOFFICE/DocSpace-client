@@ -232,6 +232,8 @@
   "Description": "Beschrijving",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Developer Tools",
+  "Diagram": "Diagram",
+  "Diagrams": "Diagrammen",
   "Disable": "Uitschakelen",
   "Disabled": "Uitgeschakeld",
   "DisableQuota": "Quota uitschakelen",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt",
-  "Diagram": "Diagram",
-  "Diagrams": "Diagrammen"
+  "YourTurn": "Uw beurt"
 }

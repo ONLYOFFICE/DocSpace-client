@@ -232,6 +232,8 @@
   "Description": "Beschreibung",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Entwicklungstools",
+  "Diagram": "Diagramm",
+  "Diagrams": "Diagramme",
   "Disable": "Deaktivieren",
   "Disabled": "Deaktiviert",
   "DisableQuota": "Quote deaktivieren",
@@ -868,7 +870,5 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran",
-  "Diagram": "Diagramm",
-  "Diagrams": "Diagramme"
+  "YourTurn": "Jetzt sind Sie dran"
 }

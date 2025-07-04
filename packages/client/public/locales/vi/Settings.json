@@ -286,11 +286,6 @@
   "WantToCancelDataImport": "Bạn có muốn hủy nhập dữ liệu không?",
   "WantToCancelUpload": "Bạn có muốn hủy tải lên không?",
   "WantToContinue": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
-  "WhiteLabel": "Cài đặt Logo",
   "WhiteLabelSubtitle": "Nhập tên công ty của bạn, tải logo lên và tùy chỉnh phong cách để phù hợp với thương hiệu của bạn.",
-  "WhiteLabelTooltip": "Các kích thước được hiển thị cho màn hình Retina. Đối với màn hình có độ phân giải tiêu chuẩn, chiều rộng và chiều cao logo sẽ được thay đổi kích thước tương ứng khi tải lên.",
-  "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo.",
-  "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
-  "YourCurrentDomain": "Tên miền hiện tại của bạn",
-  "YourLogo": "Logo của bạn"
+  "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo."
 }

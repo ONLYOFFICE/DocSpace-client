@@ -286,11 +286,6 @@
   "WantToCancelDataImport": "Ali želite preklicati uvoz podatkov?",
   "WantToCancelUpload": "Ali želite preklicati nalaganje?",
   "WantToContinue": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
-  "WhiteLabel": "Logo nastavitve",
   "WhiteLabelSubtitle": "Vnesite ime svojega podjetja, naložite logotip in prilagodite slog, da bo ustrezal vaši blagovni znamki.",
-  "WhiteLabelTooltip": "Velikosti so prikazane za zaslone Retina. Pri zaslonih s standardno ločljivostjo bosta širina in višina logotipa ustrezno spremenjeni ob nalaganju.",
-  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
-  "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
-  "YourCurrentDomain": "Vaša trenutna domena",
-  "YourLogo": "Vaš logotip"
+  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom."
 }

@@ -27,13 +27,7 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
 import { TimePicker } from ".";
-
-const renderWithTheme = (component: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
-};
 
 describe("<TimePicker />", () => {
   const mockOnChange = jest.fn();
@@ -50,12 +44,12 @@ describe("<TimePicker />", () => {
   });
 
   it("renders without error", () => {
-    const { container } = renderWithTheme(<TimePicker {...baseProps} />);
+    const { container } = render(<TimePicker {...baseProps} />);
     expect(container).toBeTruthy();
   });
 
   it("renders with correct initial time", () => {
-    renderWithTheme(<TimePicker {...baseProps} />);
+    render(<TimePicker {...baseProps} />);
     const hoursInput = screen.getByLabelText("Hours") as HTMLInputElement;
     const minutesInput = screen.getByLabelText("Minutes") as HTMLInputElement;
 
@@ -64,7 +58,7 @@ describe("<TimePicker />", () => {
   });
 
   it("handles hours input correctly", () => {
-    renderWithTheme(<TimePicker {...baseProps} />);
+    render(<TimePicker {...baseProps} />);
     const hoursInput = screen.getByLabelText("Hours") as HTMLInputElement;
 
     fireEvent.change(hoursInput, { target: { value: "15" } });
@@ -73,7 +67,7 @@ describe("<TimePicker />", () => {
   });
 
   it("handles minutes input correctly", () => {
-    renderWithTheme(<TimePicker {...baseProps} />);
+    render(<TimePicker {...baseProps} />);
     const minutesInput = screen.getByLabelText("Minutes") as HTMLInputElement;
 
     fireEvent.change(minutesInput, { target: { value: "45" } });
@@ -82,7 +76,7 @@ describe("<TimePicker />", () => {
   });
 
   it("validates hours input range", () => {
-    renderWithTheme(<TimePicker {...baseProps} />);
+    render(<TimePicker {...baseProps} />);
     const hoursInput = screen.getByLabelText("Hours") as HTMLInputElement;
 
     fireEvent.change(hoursInput, { target: { value: "24" } });
@@ -90,7 +84,7 @@ describe("<TimePicker />", () => {
   });
 
   it("handles blur events", () => {
-    renderWithTheme(<TimePicker {...baseProps} />);
+    render(<TimePicker {...baseProps} />);
     const minutesInput = screen.getByLabelText("Minutes");
     fireEvent.focus(minutesInput);
     fireEvent.change(minutesInput, { target: { value: "59" } });
@@ -100,7 +94,7 @@ describe("<TimePicker />", () => {
   });
 
   it("has correct accessibility attributes", () => {
-    renderWithTheme(<TimePicker {...baseProps} />);
+    render(<TimePicker {...baseProps} />);
     const timePicker = screen.getByRole("group");
     expect(timePicker).toHaveAttribute("aria-label", "Time picker");
     const hoursInput = screen.getByLabelText("Hours");

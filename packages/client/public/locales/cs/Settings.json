@@ -284,5 +284,13 @@
   "WantToCancelDataImport": "Chcete zrušit import dat?",
   "WantToCancelUpload": "Chcete zrušit nahrávání?",
   "WantToContinue": "Chcete pokračovat nebo změnit kvótu uživatelského úložiště?",
-  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku."
+  "WhiteLabel": "Nastavení Loga",
+  "WhiteLabelSubtitle": "Zadejte název společnosti, nahrajte logo a přizpůsobte styl tak, aby odpovídal vaší značce.",
+  "WhiteLabelTooltip": "Velikosti jsou uvedeny pro displeje Retina. U displejů se standardním rozlišením se šířka a výška loga při nahrávání odpovídajícím způsobem změní.",
+  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku.",
+  "YouHaveUnsavedChanges": "Máte neuložené změny",
+  "YourCurrentDomain": "Vaše aktuální doména",
+  "YourLogo": "Vaše logo",
+  "AdManagement": "Správa reklam",
+  "AdManagementDescription": "Vyberte, zda se zobrazují propagační bannery ve vašem {{productName}}."
 }

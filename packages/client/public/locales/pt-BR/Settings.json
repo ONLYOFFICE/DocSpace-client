@@ -284,5 +284,13 @@
   "WantToCancelDataImport": "Deseja cancelar a importação de dados?",
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Você quer continuar ou alterar a cota de armazenamento do usuário?",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
+  "WhiteLabel": "Configurações do logo",
+  "WhiteLabelSubtitle": "Insira o nome da sua empresa, carregue o logotipo e personalize o estilo para combinar com a sua marca.",
+  "WhiteLabelTooltip": "Os tamanhos são mostrados para as telas Retina. Para os monitores com resoluções padrão, a largura e a altura do logotipo serão redimensionadas de acordo com o upload.",
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
+  "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
+  "YourCurrentDomain": "Seu domínio atual",
+  "YourLogo": "Seu logotipo",
+  "AdManagement": "Gerenciamento de Anúncios",
+  "AdManagementDescription": "Escolha se deseja exibir banners promocionais no seu {{productName}}."
 }

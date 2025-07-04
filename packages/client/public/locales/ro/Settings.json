@@ -284,5 +284,13 @@
   "WantToCancelDataImport": "Doriți să anulați importul de date?",
   "WantToCancelUpload": "Doriți să anulați încărcarea?",
   "WantToContinue": "Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?",
-  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare."
+  "WhiteLabel": "Setări siglă",
+  "WhiteLabelSubtitle": "Introduceţi numele companiei dvs, încărcați sigla şi particularizați stilul pentru a se potrivi cu brandingul dvs.",
+  "WhiteLabelTooltip": "Dimensiunile sunt specificate pentru ecranele Retina. Pentru rezoluţie de ecran standard, lăţimea şi înălţimea siglei se scalează corespunzător la încărcare.",
+  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
+  "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
+  "YourCurrentDomain": "Domeniul dvs. actual",
+  "YourLogo": "Logo-ul dvs",
+  "AdManagementDescription": "Alegeți dacă doriți afișarea anunțurilor banner în {{productName}}.",
+  "AdManagement": "Gestionare anunțuri"
 }

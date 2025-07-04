@@ -284,5 +284,13 @@
   "WantToCancelDataImport": "Dëshironi të anuloni importimin e të dhënave?",
   "WantToCancelUpload": "Dëshironi ta anuloni ngarkimin?",
   "WantToContinue": "Dëshironi të vazhdoni apo të ndryshoni kuotën e ruajtjes së përdoruesit?",
-  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër."
+  "WhiteLabel": "Cilësimet e logos",
+  "WhiteLabelSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë.",
+  "WhiteLabelTooltip": "Madhësitë tregohen për ekranet Retina. Për ekranet me rezolucion standard, gjerësia dhe lartësia e logos do të ndryshohen në përputhje me rrethanat pas ngarkimit.",
+  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër.",
+  "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
+  "YourCurrentDomain": "Domeni juaj aktual",
+  "YourLogo": "Logos juaj",
+  "AdManagement": "Menaxhimi i reklamave",
+  "AdManagementDescription": "Zgjidhni nëse shfaqen banderolat promovuese në {{productName}} tuaj."
 }

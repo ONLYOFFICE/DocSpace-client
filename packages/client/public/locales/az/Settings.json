@@ -83,7 +83,7 @@
   "DeleteThemeForever": "Tema həmişəlik silinsin?",
   "DeleteThemeNotice": "Tema həmişəlik silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz.",
   "DeveloperToolsAccess": "Məhdud Tərtibatçı alətlərinə giriş",
-  "DeveloperToolsAccessDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir. Bu bölməyə girişi məhdudlaşdırmaq, onu yalnız {{productName}} sahibinə və administratorlara əlçatan etmək istəyirsinizsə, Deaktiv et seçin və Saxla düyməsini klikləyin.",
+  "DeveloperToolsAccessDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir. Bu bölməyə girişi məhdudlaşdırmaq, onu yalnız sahibinə və {{productName}} administratorlara əlçatan etmək istəyirsinizsə, Deaktiv et seçin və Saxla düyməsini klikləyin.",
   "DeveloperToolsAccessMobileDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir.",
   "DisableEmailDescription": "Bu xana işarələnərsə, {{sectionName}} istifadəçilərinin {{productName}} məhsulunda ilkin avtorizasiyadan sonra e-poçtlarını doğrulamasına ehtiyac qalmayacaq.",
   "DisableEmailVerification": "E-poçt doğrulamasını deaktiv edin",
@@ -284,5 +284,13 @@
   "WantToCancelDataImport": "Məlumat idxalını ləğv etmək istəyirsiniz?",
   "WantToCancelUpload": "Yükləməni ləğv etmək istəyirsiniz?",
   "WantToContinue": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
-  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin."
+  "WhiteLabel": "Loqo Parametrləri",
+  "WhiteLabelSubtitle": "Şirkətinizin adını daxil edin, loqonu yükləyin və stili brendinizə uyğunlaşdırın.",
+  "WhiteLabelTooltip": "Retina displeylər üçün göstərilən ölçülər. Standart ekranlar üçün loqonun eni və hündürlüyü yükləmə zamanı müvafiq olaraq dəyişdiriləcək.",
+  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
+  "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
+  "YourCurrentDomain": "Cari domen adınız",
+  "YourLogo": "Loqonuz",
+  "AdManagement": "Reklam İdarəçiliyi",
+  "AdManagementDescription": "{{productName}} məhsulunuzda reklam bannelerinin göstərilməsi seçimini edin."
 }

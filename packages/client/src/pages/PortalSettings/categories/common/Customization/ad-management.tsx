@@ -113,7 +113,7 @@ const AdManagementComponent = ({
       setShowReminder(false);
       saveToSessionStorage("defaultDisplayBanners", type);
       saveToSessionStorage("currentDisplayBanners", type);
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e!);
     } finally {

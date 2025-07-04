@@ -227,7 +227,7 @@ const Article = ({
 
   const hideDevTools =
     user?.isVisitor ||
-    (user?.isCollaborator && limitedAccessDevToolsForUsers) ||
+    (!user?.isAdmin && limitedAccessDevToolsForUsers) ||
     window.location.pathname.includes("portal-settings") ||
     window.location.pathname.includes("management");
 

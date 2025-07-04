@@ -69,6 +69,7 @@ export const mockFilesSelectorSettings: FilesSelectorSettings = {
     extsWebRestrictedEditing: [".docx"],
     extsWebReviewed: [".docx"],
     extsWebTemplate: [".docx"],
+    extsDiagram: [".vsdx"],
     favoritesSection: true,
     fileDownloadUrlString: "/download",
     fileRedirectPreviewUrlString: "/preview",

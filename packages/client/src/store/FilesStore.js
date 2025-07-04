@@ -292,6 +292,20 @@ class FilesStore {
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
 
+    SocketHelper.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
+      const { isFrame } = this.settingsStore;
+
+      if (res && res.featureId === "room" && isFrame) {
+        this.fetchFiles(
+          this.selectedFolderStore.id,
+          this.filter,
+          false,
+          false,
+          false,
+        );
+      }
+    });
+
     SocketHelper.on(SocketEvents.ModifyFolder, async (opt) => {
       const { socketSubscribers } = SocketHelper;
 
@@ -730,7 +744,9 @@ class FilesStore {
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
 
       if (foundIndex === -1) {
-        frameCallEvent({ event: "onNotFound" });
+        if (this.selectedFolderStore.id === opt.id) {
+          frameCallEvent({ event: "onNotFound" });
+        }
 
         return this.redirectToParent(
           opt,
@@ -1918,7 +1934,11 @@ class FilesStore {
         requestCounter++;
 
         if (isUserError && !isThirdPartyError) {
-          if (isPublicRoom()) return Promise.reject(err);
+          if (isPublicRoom()) {
+            frameCallEvent({ event: "onNotFound" });
+
+            return Promise.reject(err);
+          }
 
           if (err?.response?.status === NotFoundHttpCode) {
             frameCallEvent({ event: "onNotFound" });

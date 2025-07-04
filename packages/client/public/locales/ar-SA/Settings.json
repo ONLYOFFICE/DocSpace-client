@@ -366,5 +366,7 @@
   "WithoutEmailHint": "ليس لديك مستخدمون بدون بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية.",
   "YouHaveUnsavedChanges": "لقد قمت بعدم حفظ التغييرات",
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
-  "YourLogo": "شعاركم"
+  "YourLogo": "شعاركم",
+  "AdManagement": "إدارة الإعلانات",
+  "AdManagementDescription": "اختروا ما إذا كانت اللافتات الترويجية ستظهر في {{productName}} الخاص بكم."
 }

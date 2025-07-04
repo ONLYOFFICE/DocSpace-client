@@ -27,18 +27,12 @@
 import React from "react";
 import { screen, render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
 
 import { Slider } from "./index";
 
-const renderWithTheme = (component: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
-};
-
 describe("<Slider />", () => {
   it("renders without error", () => {
-    renderWithTheme(<Slider min={0} max={100} value={50} />);
+    render(<Slider min={0} max={100} value={50} />);
     expect(screen.getByTestId("slider")).toBeInTheDocument();
   });
 
@@ -54,7 +48,7 @@ describe("<Slider />", () => {
       isDisabled: false,
     };
 
-    renderWithTheme(<Slider {...props} />);
+    render(<Slider {...props} />);
     const slider = screen.getByTestId("slider");
 
     expect(slider).toHaveAttribute("id", "testId");
@@ -68,9 +62,7 @@ describe("<Slider />", () => {
 
   it("handles value changes correctly", () => {
     const handleChange = jest.fn();
-    renderWithTheme(
-      <Slider min={0} max={100} value={50} onChange={handleChange} />,
-    );
+    render(<Slider min={0} max={100} value={50} onChange={handleChange} />);
 
     const slider = screen.getByTestId("slider");
     fireEvent.change(slider, { target: { value: "75" } });
@@ -79,14 +71,14 @@ describe("<Slider />", () => {
   });
 
   it("respects disabled state", () => {
-    renderWithTheme(<Slider min={0} max={100} value={50} isDisabled />);
+    render(<Slider min={0} max={100} value={50} isDisabled />);
 
     const slider = screen.getByTestId("slider");
     expect(slider).toBeDisabled();
   });
 
   it("applies custom dimensions", () => {
-    renderWithTheme(
+    render(
       <Slider
         min={0}
         max={100}

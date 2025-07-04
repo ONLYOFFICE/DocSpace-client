@@ -276,7 +276,7 @@ export default function useFilesFilter({
 
       filterValues.push({
         key: `${filter.filterType}`,
-        label: label,
+        label,
         group: FilterGroups.filterType,
       });
     }

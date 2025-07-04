@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useMemo } from "react";
+import moment from "moment";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import moment from "moment";
+import { useSearchParams } from "react-router";
+import { useState, useEffect, useMemo } from "react";
+
 import isEqual from "lodash/isEqual";
 
 import { Button } from "@docspace/shared/components/button";
@@ -87,6 +89,7 @@ const EditLinkPanel = (props) => {
   } = props;
 
   const roomAccessOptions = useMemo(() => getRoomAccessOptions(t), [t]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const linkAccessOptions = useMemo(() => getShareOptions(t), [t]);
 
@@ -184,7 +187,12 @@ const EditLinkPanel = (props) => {
       case LinkEntityType.ROOM:
         editExternalLink(roomId, updatedLink)
           .then((response) => {
-            setExternalLink(response);
+            setExternalLink(
+              response,
+              searchParams,
+              setSearchParams,
+              isCustomRoom,
+            );
             setLinkParams({ link: response, roomId, isPublic, isFormRoom });
 
             if (isEdit) {

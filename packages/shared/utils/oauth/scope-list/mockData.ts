@@ -24,54 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTheme } from "styled-components";
-import { Avatar, AvatarRole, AvatarSize } from "../../../components/avatar";
-import { Text } from "../../../components/text";
+import { ScopeGroup, ScopeType } from "../../../enums";
+import { TScope } from "../types";
 
-import StyledUserTooltip from "../PeopleSelector.styled";
-import { UserTooltipProps } from "../PeopleSelector.types";
-
-const UserTooltip = ({
-  avatarUrl,
-  label,
-  email,
-  position,
-}: UserTooltipProps) => {
-  const theme = useTheme();
-
-  return (
-    <StyledUserTooltip>
-      <div className="block-avatar">
-        <Avatar
-          className="user-avatar"
-          size={AvatarSize.min}
-          role={AvatarRole.user}
-          source={avatarUrl}
-          userName=""
-          editing={false}
-        />
-      </div>
-
-      <div className="block-info">
-        <Text isBold fontSize="13px" fontWeight={600} truncate title={label}>
-          {label}
-        </Text>
-        <Text
-          color={theme.peopleSelector.textColor}
-          fontSize="13px"
-          className="email-text"
-          truncate
-          title={email}
-        >
-          {email}
-        </Text>
-        <Text fontSize="13px" fontWeight={600} truncate title={position}>
-          {position}
-        </Text>
-      </div>
-    </StyledUserTooltip>
-  );
-};
-
-export default UserTooltip;
+export const mockScopes: TScope[] = [
+  {
+    name: "accounts.self:read",
+    group: ScopeGroup.profiles,
+    type: ScopeType.read,
+  },
+  {
+    name: "accounts.self:write",
+    group: ScopeGroup.profiles,
+    type: ScopeType.write,
+  },
+  {
+    name: "accounts:read",
+    group: ScopeGroup.accounts,
+    type: ScopeType.read,
+  },
+  {
+    name: "accounts:write",
+    group: ScopeGroup.accounts,
+    type: ScopeType.write,
+  },
+  {
+    name: "claudeai",
+    group: ScopeGroup.rooms,
+    type: ScopeType.write,
+  },
+  {
+    name: "files:read",
+    group: ScopeGroup.files,
+    type: ScopeType.read,
+  },
+  {
+    name: "files:write",
+    group: ScopeGroup.files,
+    type: ScopeType.write,
+  },
+  {
+    name: "rooms:read",
+    group: ScopeGroup.rooms,
+    type: ScopeType.read,
+  },
+  {
+    name: "rooms:write",
+    group: ScopeGroup.rooms,
+    type: ScopeType.write,
+  },
+  {
+    name: "openid",
+    group: ScopeGroup.openid,
+    type: ScopeType.openid,
+  },
+];

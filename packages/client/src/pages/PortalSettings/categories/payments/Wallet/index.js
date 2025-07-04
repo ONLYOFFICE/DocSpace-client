@@ -27,6 +27,7 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import moment from "moment";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
@@ -36,8 +37,12 @@ import WalletContainer from "./WalletContainer";
 let timerId = null;
 
 const Wallet = (props) => {
-  const { walletInit, isInitWalletPage, isShowStorageTariffDeactivatedModal } =
-    props;
+  const {
+    walletInit,
+    isInitWalletPage,
+    isShowStorageTariffDeactivatedModal,
+    language,
+  } = props;
 
   const { t, ready } = useTranslation(["Payments", "Common"]);
 
@@ -48,6 +53,10 @@ const Wallet = (props) => {
   useEffect(() => {
     walletInit(t);
   }, []);
+
+  useEffect(() => {
+    moment.locale(language);
+  }, [language]);
 
   useEffect(() => {
     timerId = setTimeout(() => {
@@ -75,13 +84,15 @@ const Wallet = (props) => {
   );
 };
 
-export default inject(({ paymentStore }) => {
+export default inject(({ paymentStore, authStore }) => {
   const { walletInit, isInitWalletPage, isShowStorageTariffDeactivatedModal } =
     paymentStore;
+  const { language } = authStore;
 
   return {
     walletInit,
     isInitWalletPage,
     isShowStorageTariffDeactivatedModal,
+    language,
   };
 })(observer(Wallet));

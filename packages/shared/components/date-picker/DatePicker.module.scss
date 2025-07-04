@@ -122,4 +122,13 @@
     bottom: 0;
     inset-inline-start: 0;
   }
+
+  &.rightAligned {
+    right: 0;
+
+    @include mixins.tablet {
+      right: 0;
+      left: auto;
+    }
+  }
 }

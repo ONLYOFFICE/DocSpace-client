@@ -3669,7 +3669,7 @@ class FilesStore {
   }
 
   get cbMenuItems() {
-    const { isDocument, isPresentation, isSpreadsheet, isArchive } =
+    const { isDocument, isPresentation, isSpreadsheet, isArchive, isDiagram } =
       this.filesSettingsStore;
 
     let cbMenu = ["all"];
@@ -3696,6 +3696,7 @@ class FilesStore {
       else if (item.viewAccessibility?.MediaView)
         cbMenu.push(FilterType.MediaOnly);
       else if (isArchive(item.fileExst)) cbMenu.push(FilterType.ArchiveOnly);
+      else if (isDiagram(item.fileExst)) cbMenu.push(FilterType.DiagramsOnly);
     });
 
     const hasFiles = cbMenu.some(
@@ -3720,16 +3721,22 @@ class FilesStore {
   }
 
   get sortedFiles() {
-    const { isSpreadsheet, isPresentation, isDocument, isMasterFormExtension } =
-      this.filesSettingsStore;
+    const {
+      isDiagram,
+      isDocument,
+      isMasterFormExtension,
+      isPresentation,
+      isSpreadsheet,
+    } = this.filesSettingsStore;
 
     const sortedFiles = {
       documents: [],
       spreadsheets: [],
       presentations: [],
       masterForms: [],
-      other: [],
       pdfForms: [],
+      diagrams: [],
+      other: [],
     };
 
     let selection = this.selection.length
@@ -3751,6 +3758,8 @@ class FilesStore {
           sortedFiles.presentations.push(item);
         } else if (isMasterFormExtension(item.fileExst)) {
           sortedFiles.masterForms.push(item);
+        } else if (isDiagram(item.fileExst)) {
+          sortedFiles.diagrams.push(item);
         } else if (!item.isPDFForm && isDocument(item.fileExst)) {
           sortedFiles.documents.push(item);
         } else if (item.isPDFForm) {

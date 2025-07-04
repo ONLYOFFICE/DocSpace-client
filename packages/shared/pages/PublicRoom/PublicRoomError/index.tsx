@@ -46,7 +46,7 @@ const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {
   useEffect(() => {
     frameCallCommand("setIsLoaded");
     frameCallEvent({ event: isInvalid ? "onNotFound" : "onNoAccess" });
-  }, []);
+  }, [isInvalid]);
 
   return ready ? (
     <ErrorContainer headerText={headerText} bodyText={bodyText} />

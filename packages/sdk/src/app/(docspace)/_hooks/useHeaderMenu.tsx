@@ -46,7 +46,7 @@ export default function useItemList() {
 
   const { items } = useFilesListStore();
   const { setSelection } = useFilesSelectionStore();
-  const { isDocument, isPresentation, isSpreadsheet, isArchive } =
+  const { isDocument, isPresentation, isSpreadsheet, isArchive, isDiagram } =
     useFileType();
 
   const onSelect = useCallback(
@@ -79,6 +79,7 @@ export default function useItemList() {
           else if (item.viewAccessibility?.MediaView)
             type = FilterType.MediaOnly;
           else if (isArchive(item.fileExst)) type = FilterType.ArchiveOnly;
+          else if (isDiagram(item.fileExst)) type = FilterType.DiagramsOnly;
         }
 
         return type === +key;
@@ -86,7 +87,15 @@ export default function useItemList() {
 
       setSelection(selectedItems);
     },
-    [isArchive, isDocument, isPresentation, isSpreadsheet, items, setSelection],
+    [
+      isArchive,
+      isDocument,
+      isPresentation,
+      isSpreadsheet,
+      isDiagram,
+      items,
+      setSelection,
+    ],
   );
 
   const getHeaderMenu = useCallback(() => {
@@ -99,6 +108,8 @@ export default function useItemList() {
           menuItems.add(FilterType.PresentationsOnly);
         else if (isSpreadsheet(item.fileExst))
           menuItems.add(FilterType.SpreadsheetsOnly);
+        else if (isDiagram(item.fileExst))
+          menuItems.add(FilterType.DiagramsOnly);
         else if (item.viewAccessibility?.ImageView)
           menuItems.add(FilterType.ImagesOnly);
         else if (item.viewAccessibility?.MediaView)
@@ -138,6 +149,7 @@ export default function useItemList() {
     isDocument,
     isPresentation,
     isSpreadsheet,
+    isDiagram,
     items,
     onSelect,
     t,

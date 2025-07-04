@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Verifique la lista de usuarios no importados para importar a {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "No tiene usuarios con correos electrónicos. Continúe con el siguiente paso para añadirlos.",
   "AddTrustedDomain": "Añadir dominio seguro",
+  "AdManagement": "Gestión de anuncios",
+  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}.",
   "Admins": "Administradores",
   "AdminsMessage": "Configuración del mensaje del administrador",
   "AdminsMessageMobileDescription": "La configuración del mensaje del administrador es una forma de ponerse en contacto con el administrador del portal.",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "¿Desea cancelar la importación de datos?",
   "WantToCancelUpload": "¿Desea cancelar la carga?",
   "WantToContinue": "¿Desea continuar o cambiar la cuota de almacenamiento del usuario?",
+  "WhiteLabelSubtitle": "Introduzca el nombre de su empresa, cargue el logotipo y personalice el estilo para que coincida con su marca.",
   "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso."
 }

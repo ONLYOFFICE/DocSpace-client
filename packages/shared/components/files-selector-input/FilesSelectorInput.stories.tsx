@@ -132,6 +132,7 @@ const mockOnSelectFolder = (
   console.log("onSelectFolder called with:", { value, breadCrumbs });
 };
 
+// This is the correct structure for FilesSelectorSettings type
 const mockFilesSelectorSettings = {
   filesSettings: {
     canShare: true,
@@ -160,6 +161,7 @@ const mockFilesSelectorSettings = {
     extsCoAuthoring: [".docx", ".xlsx"],
     extsConvertible: { ".docx": [".pdf"] },
     extsDocument: [".doc", ".docx"],
+    extsDiagram: [".vsdx", ".vsd"],
     extsImage: [".jpg", ".png"],
     extsImagePreviewed: [".jpg", ".png"],
     extsMediaPreviewed: [".mp4", ".mp3"],
@@ -213,7 +215,10 @@ const baseArgs = {
   setBasePath: mockSetBasePath,
   toDefault: mockToDefault,
   setNewPath: mockSetNewPath,
-  filesSelectorSettings: mockFilesSelectorSettings,
+  // Explicitly set filesSelectorSettings to match the expected type
+  filesSelectorSettings: {
+    filesSettings: mockFilesSelectorSettings.filesSettings,
+  },
 };
 
 export const Default: Story = {

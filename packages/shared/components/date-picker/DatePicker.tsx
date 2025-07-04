@@ -52,18 +52,34 @@ const DatePicker = (props: DatePickerProps) => {
     openDate,
     isMobile,
     hideCross,
+    autoPosition,
   } = props;
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const selectorRef = useRef<HTMLDivElement | null>(null);
   const selectedItemRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [shouldAlignRight, setShouldAlignRight] = useState(false);
 
   const [date, setDate] = useState(initialDate ? moment(initialDate) : null);
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-  const toggleCalendar = () =>
-    setIsCalendarOpen((prevIsCalendarOpen) => !prevIsCalendarOpen);
+  const toggleCalendar = () => {
+    setIsCalendarOpen((prevIsCalendarOpen) => {
+      if (!prevIsCalendarOpen && autoPosition) {
+        const container = containerRef.current;
+        if (container) {
+          const rect = container.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          const spaceToRight = viewportWidth - rect.left;
+
+          setShouldAlignRight(spaceToRight < 340);
+        }
+      }
+      return !prevIsCalendarOpen;
+    });
+  };
 
   const closeCalendar = () => {
     setIsCalendarOpen(false);
@@ -130,6 +146,7 @@ const DatePicker = (props: DatePickerProps) => {
       id={id}
       data-testid="date-picker"
       role="presentation"
+      ref={containerRef}
     >
       {!date ? (
         <div
@@ -182,7 +199,9 @@ const DatePicker = (props: DatePickerProps) => {
 
       {isCalendarOpen ? (
         <Calendar
-          className={styles.calendar}
+          className={classNames(styles.calendar, {
+            [styles.rightAligned]: shouldAlignRight,
+          })}
           isMobile={isMobile}
           selectedDate={date ?? moment()}
           setSelectedDate={handleChange}

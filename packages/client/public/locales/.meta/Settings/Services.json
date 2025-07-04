@@ -3,7 +3,7 @@
   "content": "Services",
   "content_en_sha1_hash": "5cbd584046863bc7b753e57e8681a98a87f36f0f",
   "created_at": "2025-06-03T20:59:25.520Z",
-  "updated_at": "2025-06-24T16:31:24.404Z",
+  "updated_at": "2025-07-02T07:49:19.793Z",
   "comment": {
     "text": "The translation key \"Services\" is used to display the label for a section or category related to services in a UI setting. It appears as part of a settings tree structure and is likely used on a page that allows users to manage or configure their services. The exact location may vary, but it is commonly found on pages related to portal settings or configurations.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 609,
+      "line_number": 616,
       "context": "{\n id: \"portal-settings_catalog-services\",\n key: \"10\",\n type: PageType.services,\n link: \"services\",\n tKey: \"Services\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-services\",\n key: \"10-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 609,
+      "line_number": 616,
       "context": "{\n id: \"portal-settings_catalog-services\",\n key: \"10\",\n type: PageType.services,\n link: \"services\",\n tKey: \"Services\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-services\",\n key: \"10-0\",",
       "module": "/packages/client"
     }

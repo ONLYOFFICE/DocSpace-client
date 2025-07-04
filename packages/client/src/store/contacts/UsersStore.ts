@@ -265,20 +265,27 @@ class UsersStore {
         } catch (e) {
           console.error(e);
         }
+
+        return;
       }
 
       if (
         (isCollaborator || isVisitor) &&
-        (pathname.includes("accounts/people") ||
-          pathname.includes("portal-settings"))
+        (pathname.includes("accounts") || pathname.includes("portal-settings"))
       ) {
         window.DocSpace.navigate(
           combineUrl(window.ClientConfig?.proxy?.url, "/"),
         );
+
+        return;
       }
 
-      if ((isAdmin || isRoomAdmin) && pathname.includes("accounts/people")) {
+      if ((isAdmin || isRoomAdmin) && pathname.includes("accounts")) {
+        console.log("get here");
+
         this.getUsersList();
+
+        return;
       }
 
       const isArchive = pathname.includes("rooms/archived");
@@ -445,8 +452,8 @@ class UsersStore {
       this.contactsTab === "inside_group"
         ? `InsideGroupFilter=${this.userStore.user?.id}`
         : this.contactsTab === "guests"
-          ? `PeopleFilter=${this.userStore.user?.id}`
-          : `GuestsFilter=${this.userStore.user?.id}`;
+          ? `GuestsFilter=${this.userStore.user?.id}`
+          : `PeopleFilter=${this.userStore.user?.id}`;
 
     const guestsTabVisitedStorage = window.localStorage.getItem(
       `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
@@ -480,6 +487,12 @@ class UsersStore {
         "true",
       );
       this.guestsTabVisited = true;
+    }
+
+    if (this.contactsTab === "guests") {
+      filterData.area = "guests";
+    } else if (this.contactsTab === "people") {
+      filterData.area = "people";
     }
 
     this.requestRunning = true;

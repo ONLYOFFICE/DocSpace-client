@@ -203,7 +203,7 @@ class PaymentStore {
     if (!this.userStore || !this.currentQuotaStore) return;
 
     const { user } = this.userStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
+    const { walletCustomerEmail } = this.currentTariffStatusStore!;
 
     if (!user) return false;
 

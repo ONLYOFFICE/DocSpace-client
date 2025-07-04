@@ -366,5 +366,7 @@
   "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
   "YourCurrentDomain": "Seu domínio atual",
-  "YourLogo": "Seu logotipo"
+  "YourLogo": "Seu logotipo",
+  "AdManagement": "Gerenciamento de Anúncios",
+  "AdManagementDescription": "Escolha se deseja exibir banners promocionais no seu {{productName}}."
 }

@@ -366,5 +366,7 @@
   "WithoutEmailHint": "Нямате потребители без имейли. Моля, преминете към следващата стъпка.",
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
-  "YourLogo": "Вашето лого"
+  "YourLogo": "Вашето лого",
+  "AdManagement": "Управление на реклами",
+  "AdManagementDescription": "Изберете дали промоционални банери да се показват във вашия {{productName}}."
 }

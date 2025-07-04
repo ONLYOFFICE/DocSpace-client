@@ -366,5 +366,7 @@
   "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
-  "YourLogo": "Uw logo"
+  "YourLogo": "Uw logo",
+  "AdManagement": "Ad Management",
+  "AdManagementDescription": "Kies of promotiebanners worden weergegeven in uw {{productName}}."
 }

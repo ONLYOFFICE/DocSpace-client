@@ -366,5 +366,7 @@
   "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
-  "YourLogo": "Logo-ul dvs"
+  "YourLogo": "Logo-ul dvs",
+  "AdManagementDescription": "Alegeți dacă doriți afișarea anunțurilor banner în {{productName}}.",
+  "AdManagement": "Gestionare anunțuri"
 }

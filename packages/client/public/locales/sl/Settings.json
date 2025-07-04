@@ -366,5 +366,7 @@
   "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
-  "YourLogo": "Vaš logotip"
+  "YourLogo": "Vaš logotip",
+  "AdManagement": "Upravljanje oglasov",
+  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}."
 }

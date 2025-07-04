@@ -28,7 +28,7 @@ import React from "react";
 import classNames from "classnames";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 
-import { useTheme } from "styled-components";
+import { useTheme } from "../../hooks/useTheme";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
 import styles from "./SelectorAddButton.module.scss";

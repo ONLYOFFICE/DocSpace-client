@@ -72,7 +72,6 @@ import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
 import { NoUserSelect, TextUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
-import { commonTextStyles } from "./commonTextStyles";
 import {
   RoomsTypeValues,
   RoomsTypes,
@@ -112,7 +111,6 @@ export {
   NoUserSelect,
   TextUserSelect,
   commonInputStyles,
-  commonTextStyles,
   INFO_PANEL_WIDTH,
   EmailSettings,
   parseAddress,

@@ -10,6 +10,8 @@
   "AddEmailsDescription": "{{organizationName}} {{productName}}にインポートする未インポートユーザーのリストを確認します。",
   "AddEmailsWarning": "メールアドレスを持つユーザーがいません。次のステップに進んで追加してください。",
   "AddTrustedDomain": "信頼されたドメインを追加",
+  "AdManagement": "広告管理",
+  "AdManagementDescription": "{{productName}}にプロモーションバナーを表示するかどうかを選択します。",
   "Admins": "管理者",
   "AdminsMessage": "管理者メッセージの設定",
   "AdminsMessageMobileDescription": "管理者メッセージ設定は、ポータル管理者に連絡する方法です。",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
-  "YourLogo": "あなたのロゴ",
-  "AdManagement": "広告管理",
-  "AdManagementDescription": "{{productName}}にプロモーションバナーを表示するかどうかを選択します。"
+  "YourLogo": "あなたのロゴ"
 }

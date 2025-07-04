@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Zkontrolujte seznam neimportovaných uživatelů pro import do {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nemáte uživatele s e-maily. Přejděte k dalšímu kroku a přidejte je.",
   "AddTrustedDomain": "Přidat důvěryhodné domény",
+  "AdManagement": "Správa reklam",
+  "AdManagementDescription": "Vyberte, zda se zobrazují propagační bannery ve vašem {{productName}}.",
   "Admins": "Administrátoři",
   "AdminsMessage": "Nastavení zpráv administrátora",
   "AdminsMessageMobileDescription": "Nastavení zpráv správce je způsob, jak kontaktovat správce portálu.",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku.",
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
-  "YourLogo": "Vaše logo",
-  "AdManagement": "Správa reklam",
-  "AdManagementDescription": "Vyberte, zda se zobrazují propagační bannery ve vašem {{productName}}."
+  "YourLogo": "Vaše logo"
 }

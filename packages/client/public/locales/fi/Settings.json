@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Katso tuomattomien käyttäjien lista tuodaksesi ne {{organizationName}} {{productName}}:een. ",
   "AddEmailsWarning": "Sinulla ei ole käyttäjiä, joilla on sähköpostit. Ole hyvä ja jatka seuraavaan vaiheeseen lisätäksesi ne.",
   "AddTrustedDomain": "Lisää luotettu verkkotunnus",
+  "AdManagement": "Mainoshallinta",
+  "AdManagementDescription": "Valitse, näytetäänkö mainosbannerit {{productName}}-tuotteessasi.",
   "Admins": "Järjestelmänvalvojat",
   "AdminsMessage": "Järjestelmänvalvojan viestiasetukset",
   "AdminsMessageMobileDescription": "Järjestelmänvalvojan Viestiasetukset on helppo tapa ottaa yhteyttä järjestelmänvalvojaan.",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
-  "YourLogo": "Logosi",
-  "AdManagement": "Mainoshallinta",
-  "AdManagementDescription": "Valitse, näytetäänkö mainosbannerit {{productName}}-tuotteessasi."
+  "YourLogo": "Logosi"
 }

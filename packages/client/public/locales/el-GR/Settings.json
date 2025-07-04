@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Ελέγξτε τη λίστα εισαγωγής των χρηστών που δεν έχουν εισαχθεί στο {{productName}} του {{organizationName}}.",
   "AddEmailsWarning": "Δεν έχετε χρήστες με email. Προχωρήστε στο επόμενο βήμα για να τους προσθέσετε.",
   "AddTrustedDomain": "Προσθήκη αξιόπιστου domain",
+  "AdManagement": "Διαχείριση Διαφημίσεων",
+  "AdManagementDescription": "Επιλέξτε αν θα εμφανίζονται διαφημιστικές μπάνερ στο {{productName}} σας.",
   "Admins": "Διαχειριστές",
   "AdminsMessage": "Ρυθμίσεις μηνυμάτων διαχειριστή",
   "AdminsMessageMobileDescription": "Οι Ρυθμίσεις μηνυμάτων διαχειριστή είναι ένας τρόπος επικοινωνίας με τον διαχειριστή της πύλης..",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "Δεν έχετε χρήστες χωρίς email. Προχωρήστε στο επόμενο βήμα.",
   "YouHaveUnsavedChanges": "Έχετε μη αποθηκευμένες αλλαγές",
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
-  "YourLogo": "Το λογότυπό σας",
-  "AdManagement": "Διαχείριση Διαφημίσεων",
-  "AdManagementDescription": "Επιλέξτε αν θα εμφανίζονται διαφημιστικές μπάνερ στο {{productName}} σας."
+  "YourLogo": "Το λογότυπό σας"
 }

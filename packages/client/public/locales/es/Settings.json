@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Verifique la lista de usuarios no importados para importar a {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "No tiene usuarios con correos electrónicos. Continúe con el siguiente paso para añadirlos.",
   "AddTrustedDomain": "Añadir dominio seguro",
+  "AdManagement": "Gestión de anuncios",
+  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}.",
   "Admins": "Administradores",
   "AdminsMessage": "Configuración del mensaje del administrador",
   "AdminsMessageMobileDescription": "La configuración del mensaje del administrador es una forma de ponerse en contacto con el administrador del portal.",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso.",
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
-  "YourLogo": "Su logotipo",
-  "AdManagement": "Gestión de anuncios",
-  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}."
+  "YourLogo": "Su logotipo"
 }

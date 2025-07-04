@@ -10,6 +10,8 @@
   "AddEmailsDescription": "{{organizationName}} {{productName}} වෙතට ආනයනය කිරීමට නියමිතව ඇති ආනයනය කර නොතිබූ පරිශීලකයින්ගේ ලැයිස්තුව පරීක්ෂා කරන්න.",
   "AddEmailsWarning": "ඔබට වි-තැපෑලක් සහිත පරිශ්‍රීලකයින් නැත. කරුණාකර ඒවා එකතු කිරීමට ඊළඟ පියවරට යන්න.",
   "AddTrustedDomain": "විශ්වසනීය වසමක් යොදන්න",
+  "AdManagement": "දැන්වීම් කළමනාකරණය",
+  "AdManagementDescription": "ඔබේ {{productName}} හි ප්‍රවර්ධන බැනර් පෙන්වනවාද යන්න තෝරන්න.",
   "Admins": "පරිපාලකයින්",
   "AdminsMessage": "පරිපාලක පණිවිඩ සැකසුම්",
   "AdminsMessageMobileDescription": "පරිපාලක පණිවුඩ සැකසුම් යනු पोर्टल පරිපාලකයෙකු සම්බන්ධ කර ගැනීමට ඇති ක්‍රමයක් වේ.",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "ඔබට වි-තැපෑලක් රහිත පරිශ්‍රීලකයින් නැත. කරුණාකර ඊළඟ පියවරට යන්න.",
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
-  "YourLogo": "ඔබේ ලාංචනය",
-  "AdManagement": "දැන්වීම් කළමනාකරණය",
-  "AdManagementDescription": "ඔබේ {{productName}} හි ප්‍රවර්ධන බැනර් පෙන්වනවාද යන්න තෝරන්න."
+  "YourLogo": "ඔබේ ලාංචනය"
 }

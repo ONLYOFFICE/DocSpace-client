@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Sprawdź listę niezaimportowanych użytkowników do zaimportowania do {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nie masz użytkowników z adresami e-mail. Przejdź do kolejnego kroku, aby je dodać.",
   "AddTrustedDomain": "Dodaj zaufaną domenę",
+  "AdManagement": "Zarządzanie Reklamami",
+  "AdManagementDescription": "Wybierz, czy banery promocyjne są wyświetlane w Twoim {{productName}}.",
   "Admins": "Administratorzy",
   "AdminsMessage": "Ustawienia wiadomości administratora",
   "AdminsMessageMobileDescription": "Ustawienia wiadomości administratora to sposób na skontaktowanie się z administratorem portalu.",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku.",
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
-  "YourLogo": "Twoje Logo",
-  "AdManagement": "Zarządzanie Reklamami",
-  "AdManagementDescription": "Wybierz, czy banery promocyjne są wyświetlane w Twoim {{productName}}."
+  "YourLogo": "Twoje Logo"
 }

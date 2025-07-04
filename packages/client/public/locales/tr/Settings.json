@@ -10,6 +10,8 @@
   "AddEmailsDescription": "{{organizationName}}{{productName}}’e aktarılacak içe aktarılmamış kullanıcıların listesini kontrol edin.",
   "AddEmailsWarning": "E-postası olan kullanıcılarınız yok. Lütfen onları eklemek için bir sonraki adıma geçin.",
   "AddTrustedDomain": "Güvenilen alan adı ekle",
+  "AdManagement": "Reklam Yönetimi",
+  "AdManagementDescription": "{{productName}}'ınızda tanıtım afişlerinin gösterilip gösterilmeyeceğini seçin.",
   "Admins": "Yöneticiler",
   "AdminsMessage": "Yönetici Mesajı Ayarları",
   "AdminsMessageMobileDescription": "Yönetici Mesajı Ayarları, portal yöneticisiyle iletişim kurmanın bir yoludur.",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin.",
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
-  "YourLogo": "Logonuz",
-  "AdManagement": "Reklam Yönetimi",
-  "AdManagementDescription": "{{productName}}'ınızda tanıtım afişlerinin gösterilip gösterilmeyeceğini seçin."
+  "YourLogo": "Logonuz"
 }

@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Проверите листу неувезених корисника за увоз у {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Немате кориснике са емаил-ом. Молимо пређите на следећи корак да их додате.",
   "AddTrustedDomain": "Додајте поуздани домен",
+  "AdManagement": "Управљање огласима",
+  "AdManagementDescription": "Изаберите да ли ће промотивни банери бити приказани у вашем {{productName}}.",
   "Admins": "Администратори",
   "AdminsMessage": "Подешавања порука администратора",
   "AdminsMessageMobileDescription": "Подешавања порука администратора је начин да контактирате администратора портала.",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "Немате кориснике без емаил-ова. Молимо пређите на следећи корак.",
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
-  "YourLogo": "Ваш лого",
-  "AdManagement": "Управљање огласима",
-  "AdManagementDescription": "Изаберите да ли ће промотивни банери бити приказани у вашем {{productName}}."
+  "YourLogo": "Ваш лого"
 }

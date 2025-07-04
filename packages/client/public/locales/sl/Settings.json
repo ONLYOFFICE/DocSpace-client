@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Preverite seznam neuvoženih uporabnikov za uvoz v {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nimate uporabnikov z e-maili. Nadaljujte z naslednjim korakom, da jih dodate.",
   "AddTrustedDomain": "Dodaj zaupanja vredno domeno",
+  "AdManagement": "Upravljanje oglasov",
+  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}.",
   "Admins": "Administratorji",
   "AdminsMessage": "Nastavitve sporočil skrbnika",
   "AdminsMessageMobileDescription": "Nastavitve skrbniškega sporočila so način za stik s skrbnikom portala.",
@@ -290,7 +292,5 @@
   "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
-  "YourLogo": "Vaš logotip",
-  "AdManagement": "Upravljanje oglasov",
-  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}."
+  "YourLogo": "Vaš logotip"
 }

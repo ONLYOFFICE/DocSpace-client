@@ -29,7 +29,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { useTheme } from "styled-components";
 
 import RemoveIcon from "PUBLIC_DIR/images/remove.react.svg?url";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
@@ -59,7 +58,6 @@ export const PasswordRow = ({
 
   const { t } = useTranslation(["Common"]);
   const inputRef = useRef(null);
-  const theme = useTheme();
 
   const onInputClick = useCallback(() => {
     const newState = !showPasswordInput;
@@ -159,11 +157,7 @@ export const PasswordRow = ({
             size={16}
             iconName={ProtectedReactSvgUrl}
             onClick={onInputClick}
-            color={
-              showPasswordInput
-                ? theme.currentColorScheme?.main.accent
-                : undefined
-            }
+            color={showPasswordInput ? "accent" : undefined}
           />
           <div>{element}</div>
           <Text

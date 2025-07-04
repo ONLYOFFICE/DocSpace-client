@@ -281,8 +281,6 @@ class UsersStore {
       }
 
       if ((isAdmin || isRoomAdmin) && pathname.includes("accounts")) {
-        console.log("get here");
-
         this.getUsersList();
 
         return;

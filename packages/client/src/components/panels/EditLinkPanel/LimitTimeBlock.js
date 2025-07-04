@@ -37,7 +37,7 @@ const LimitTimeBlock = (props) => {
     setIsExpired,
     isExpired,
     language,
-    isPrimary,
+    canChangeLifetime,
     headerText,
     bodyText,
   } = props;
@@ -53,7 +53,7 @@ const LimitTimeBlock = (props) => {
     setIsExpired(expired);
   };
 
-  if (isPrimary) {
+  if (!canChangeLifetime) {
     return (
       <ToggleBlock
         headerText={headerText}

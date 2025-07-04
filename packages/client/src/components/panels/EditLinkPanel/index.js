@@ -331,6 +331,8 @@ const EditLinkPanel = (props) => {
 
   const isDisabledSaveButton = !hasChanges || isLoading || isExpired;
 
+  const canChangeLifetime = !isPrimary || type !== LinkEntityType.ROOM;
+
   const editLinkPanelComponent = (
     <ModalDialog
       isExpired={isExpired}
@@ -412,7 +414,7 @@ const EditLinkPanel = (props) => {
             setExpirationDate={setExpirationDate}
             setIsExpired={setIsExpired}
             language={language}
-            isPrimary={isPrimary}
+            canChangeLifetime={canChangeLifetime}
           />
         </StyledEditLinkBodyContent>
       </ModalDialog.Body>

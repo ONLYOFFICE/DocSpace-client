@@ -44,6 +44,10 @@ const AdManagementComponent = ({
   isMobileView,
   displayBanners,
   setDisplayBanners,
+}: {
+  isMobileView: boolean;
+  displayBanners: boolean;
+  setDisplayBanners: (value: boolean) => void;
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();

@@ -26,89 +26,52 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "../../styles/mixins";
-@use "../../styles/variables/colors";
+@use "sass:map";
 
-:global(.dark) {
-  :local {
-    .iconButton {
-      --icon-button-color: #{colors.$gray-dark};
-      --icon-button-hover-color: #{colors.$white};
+$icon-sizes: (
+  extraSmall: 8px,
+  small: 12px,
+  medium: 16px,
+  big: 24px,
+  scale: 100%,
+);
+
+@mixin icon-size($size) {
+  @if map.has-key($icon-sizes, $size) {
+    @if $size == scale {
+      &:not(:root) {
+        width: map.get($icon-sizes, scale);
+        height: map.get($icon-sizes, scale);
+      }
+    } @else {
+      width: map.get($icon-sizes, $size);
+      min-width: map.get($icon-sizes, $size);
+      height: map.get($icon-sizes, $size);
+      min-height: map.get($icon-sizes, $size);
     }
+  } @else {
+    width: #{$size}px;
+    height: #{$size}px;
   }
 }
 
-.iconButton {
-  --icon-button-color: #{colors.$gray};
-  --icon-button-hover-color: #{colors.$light-gray-dark};
-  --icon-button-size: 20px;
+@mixin common-icons-style {
+  overflow: hidden;
+  vertical-align: middle;
 
-  line-height: 0;
-  -webkit-tap-highlight-color: colors.$tap-highlight;
-  cursor: pointer;
-
-  color: var(--icon-button-color);
-
-  width: var(--icon-button-size);
-  height: var(--icon-button-size);
-
-  &.commonIconsStyle {
-    @include mixins.common-icons-style;
+  &[data-size="extraSmall"] {
+    @include icon-size(extraSmall);
   }
-
-  &.disabled {
-    cursor: default;
+  &[data-size="small"] {
+    @include icon-size(small);
   }
-
-  &.notClickable {
-    cursor: default;
+  &[data-size="medium"] {
+    @include icon-size(medium);
   }
-
-  &.stroke {
-    svg {
-      &:not(:root) {
-        width: 100%;
-        height: 100%;
-      }
-
-      path {
-        stroke: var(--icon-button-color);
-      }
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover:not(.disabled) {
-        svg {
-          path {
-            stroke: var(--icon-button-hover-color);
-          }
-        }
-      }
-    }
+  &[data-size="big"] {
+    @include icon-size(big);
   }
-
-  &.fill {
-    svg {
-      width: 100%;
-      height: 100%;
-
-      path {
-        fill: var(--icon-button-color);
-      }
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover:not(.disabled) {
-        svg {
-          path {
-            fill: var(--icon-button-hover-color);
-          }
-        }
-      }
-    }
-  }
-
-  .notSelectable {
-    @include mixins.no-user-select;
+  &[data-size="scale"] {
+    @include icon-size(scale);
   }
 }

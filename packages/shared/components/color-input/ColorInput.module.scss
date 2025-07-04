@@ -24,17 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "../../styles/variables";
-@use "../../styles/variables/colors";
 @use "../../styles/mixins";
-@use "../../styles/common-input-styles";
 
 .wrapper {
   position: relative;
 }
 
 .hexValue {
-  @include common-input-styles.common-input-styles;
+  @include mixins.common-input-styles;
   box-sizing: border-box;
   height: 32px;
   padding: 6px 8px;

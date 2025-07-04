@@ -26,7 +26,6 @@
 
 @use "../../styles/mixins";
 @use "../../styles/variables/colors";
-@use "../../styles/common-icons-style";
 
 .iframe {
   border: none;
@@ -150,7 +149,7 @@
 }
 
 .crossIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
 
   path {
     fill: #{colors.$gray};
@@ -158,7 +157,7 @@
 }
 
 .infoIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
 
   path {
     fill: var(--color);

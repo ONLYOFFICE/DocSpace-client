@@ -1,9 +1,8 @@
 @use "../../styles/variables";
-@use "../../styles/common-text-styles";
 @use "../../styles/mixins";
 
 .heading {
-  @include common-text-styles.common-text-styles;
+  @include mixins.common-text-styles;
 
   font-weight: var(--heading-font-weight);
   color: var(--heading-color);

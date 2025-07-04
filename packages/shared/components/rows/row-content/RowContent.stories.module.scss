@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "../../../styles/common-icons-style";
+@use "../../../styles/mixins";
 
 .sendClockIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
 }
 
 .catalogSpamIcon {
-  @include common-icons-style.common-icons-style;
+  @include mixins.common-icons-style;
 }

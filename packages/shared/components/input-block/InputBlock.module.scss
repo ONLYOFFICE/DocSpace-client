@@ -1,4 +1,4 @@
-@use "../../styles/common-input-styles";
+@use "../../styles/mixins";
 
 .iconBlock {
   display: flex;
@@ -30,7 +30,7 @@
 }
 
 .inputGroup {
-  @include common-input-styles.common-input-color-styles;
+  @include mixins.common-input-color-styles;
 
   width: 100%;
 

@@ -306,6 +306,7 @@ export type TFilesSettings = {
   extsCoAuthoring: string[];
   extsConvertible: Record<string, string[]>;
   extsDocument: string[];
+  extsDiagram: string[];
   extsImage: string[];
   extsImagePreviewed: string[];
   extsMediaPreviewed: string[];

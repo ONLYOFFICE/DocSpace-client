@@ -107,7 +107,7 @@ const Members = ({
   ]);
 
   const scrollContext = use(ScrollbarContext);
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const scrollToTop = React.useCallback(() => {
     scrollContext?.parentScrollbar?.scrollToTop();
@@ -145,7 +145,7 @@ const Members = ({
       setEditLinkPanelIsVisible!(true);
     } else {
       getPrimaryLink!(infoPanelSelection!.id).then((link) => {
-        setExternalLink!(link);
+        setExternalLink!(link, searchParams, setSearchParams, isCustomRoom);
 
         const typeLink = link as {
           sharedTo: { shareLink: string; requestToken: string };

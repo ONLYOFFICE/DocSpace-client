@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Sprawdź listę niezaimportowanych użytkowników do zaimportowania do {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nie masz użytkowników z adresami e-mail. Przejdź do kolejnego kroku, aby je dodać.",
   "AddTrustedDomain": "Dodaj zaufaną domenę",
+  "AdManagement": "Zarządzanie Reklamami",
+  "AdManagementDescription": "Wybierz, czy banery promocyjne są wyświetlane w Twoim {{productName}}.",
   "Admins": "Administratorzy",
   "AdminsMessage": "Ustawienia wiadomości administratora",
   "AdminsMessageMobileDescription": "Ustawienia wiadomości administratora to sposób na skontaktowanie się z administratorem portalu.",
@@ -83,7 +85,7 @@
   "DeleteThemeForever": "Usunąć motyw na zawsze?",
   "DeleteThemeNotice": "Motyw zostanie trwale usunięty. Nie będziesz w stanie cofnąć tego działania.",
   "DeveloperToolsAccess": "Ograniczony dostęp do narzędzi dla programistów",
-  "DeveloperToolsAccessDescription": "To ustawienie umożliwia udostępnienie sekcji Narzędzia programistyczne wszystkim użytkownikom z wyjątkiem gości. Jeśli chcesz ograniczyć dostęp do tej sekcji, tak aby był dostępny wyłącznie dla właściciela {{productName}} i administratorów, wybierz opcję Wyłącz i kliknij przycisk Zapisz.",
+  "DeveloperToolsAccessDescription": "To ustawienie umożliwia udostępnienie sekcji Narzędzia programistyczne wszystkim użytkownikom z wyjątkiem gości. Jeśli chcesz ograniczyć dostęp do tej sekcji, tak aby był dostępny wyłącznie dla właściciela i administratorów {{productName}}, wybierz opcję Wyłącz i kliknij przycisk Zapisz.",
   "DeveloperToolsAccessMobileDescription": "To ustawienie umożliwia udostępnienie sekcji Narzędzia programistyczne wszystkim użytkownikom z wyjątkiem gości.",
   "DisableEmailDescription": "Jeśli dane pole jest zaznaczone, użytkownicy sekcji {{sectionName}} nie będą musieli weryfikować swojego adresu e-mail po pierwszej autoryzacji w {{productName}}.",
   "DisableEmailVerification": "Wyłącz weryfikację adresu e-mail",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Czy chcesz anulować import danych?",
   "WantToCancelUpload": "Czy chcesz anulować przesyłanie?",
   "WantToContinue": "Chcesz kontynuować czy zmienić limit pamięci użytkownika?",
+  "WhiteLabelSubtitle": "Wpisz nazwę swojej firmy, wgraj logo i dostosuj stylizację, aby lepiej pasowała do Twojego brandingu.",
   "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku."
 }

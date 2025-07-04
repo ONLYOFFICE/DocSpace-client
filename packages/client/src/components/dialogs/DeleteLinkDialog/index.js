@@ -53,6 +53,7 @@ const DeleteLinkDialogComponent = (props) => {
     isCustomRoom,
     setPublicRoomKey,
     isRootFolder,
+    updateUrlKeyForCustomRoom,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -103,9 +104,7 @@ const DeleteLinkDialogComponent = (props) => {
             }
 
             if (isCustomRoom && filterObj.key) {
-              setPublicRoomKey(null);
-              searchParams.delete("key");
-              setSearchParams(searchParams);
+              updateUrlKeyForCustomRoom(searchParams, setSearchParams);
             }
 
             return res;
@@ -209,8 +208,12 @@ export default inject(
       setDeleteLinkDialogVisible: setIsVisible,
       linkParams,
     } = dialogsStore;
-    const { editExternalLink, deleteExternalLink, setPublicRoomKey } =
-      publicRoomStore;
+    const {
+      editExternalLink,
+      deleteExternalLink,
+      setPublicRoomKey,
+      updateUrlKeyForCustomRoom,
+    } = publicRoomStore;
     const { isRootFolder } = selectedFolderStore;
     const { isFormRoom, isCustomRoom } = linkParams;
 
@@ -227,6 +230,7 @@ export default inject(
       isPublicRoomType: linkParams.isPublic,
       setPublicRoomKey,
       isRootFolder,
+      updateUrlKeyForCustomRoom,
     };
   },
 )(observer(DeleteLinkDialog));

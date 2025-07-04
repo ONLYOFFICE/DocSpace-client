@@ -27,10 +27,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { ThemeProvider } from "styled-components";
 
 import PeopleSelector from "./index";
-import { Base } from "../../themes";
 import { EmployeeStatus, EmployeeType } from "../../enums";
 import * as peopleApi from "../../api/people";
 
@@ -270,10 +268,6 @@ const mockUsers = [
   },
 ];
 
-const renderWithTheme = (component: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
-};
-
 // We'll use the querySelector API directly instead of creating mock elements
 
 describe("PeopleSelector", () => {
@@ -292,7 +286,7 @@ describe("PeopleSelector", () => {
       total: mockUsers.length,
     });
 
-    renderWithTheme(
+    render(
       <PeopleSelector
         headerProps={{
           headerLabel: "Select People",

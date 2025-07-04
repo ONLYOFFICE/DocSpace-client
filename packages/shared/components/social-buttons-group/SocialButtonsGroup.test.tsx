@@ -26,14 +26,8 @@
 
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import { ThemeProvider } from "styled-components";
-import { Base } from "../../themes";
 import { SocialButtonsGroup } from ".";
 import type { SocialButtonProps } from "./SocialButtonsGroup.types";
-
-const renderWithTheme = (component: React.ReactElement) => {
-  return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
-};
 
 describe("<SocialButtonsGroup />", () => {
   const baseProps: SocialButtonProps = {
@@ -47,23 +41,17 @@ describe("<SocialButtonsGroup />", () => {
   };
 
   it("renders without error", () => {
-    const { container } = renderWithTheme(
-      <SocialButtonsGroup {...baseProps} />,
-    );
+    const { container } = render(<SocialButtonsGroup {...baseProps} />);
     expect(container).toBeTruthy();
   });
 
   it("renders correct number of social buttons", () => {
-    const { container } = renderWithTheme(
-      <SocialButtonsGroup {...baseProps} />,
-    );
+    const { container } = render(<SocialButtonsGroup {...baseProps} />);
     expect(container.querySelectorAll(".social-button")).toHaveLength(2);
   });
 
   it("handles click events", () => {
-    const { container } = renderWithTheme(
-      <SocialButtonsGroup {...baseProps} />,
-    );
+    const { container } = render(<SocialButtonsGroup {...baseProps} />);
     const button = container.querySelector(".social-button");
     if (button) fireEvent.click(button);
     expect(baseProps.onClick).toHaveBeenCalled();

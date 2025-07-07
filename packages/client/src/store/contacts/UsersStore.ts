@@ -28,11 +28,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
-import {
-  TFilterSortBy,
-  TSortOrder,
-  TUser,
-} from "@docspace/shared/api/people/types";
+import { TUser } from "@docspace/shared/api/people/types";
 import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
 
 import {

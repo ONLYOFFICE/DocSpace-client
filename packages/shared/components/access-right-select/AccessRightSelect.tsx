@@ -159,6 +159,7 @@ export const AccessRightSelectPure = ({
         } as TOption
       }
       forceCloseClickOutside
+      dropDownClassName={styles.accessRightSelectDropdown}
       {...props}
     />
   );

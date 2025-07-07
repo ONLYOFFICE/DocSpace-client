@@ -120,3 +120,9 @@
   align-items: center;
   gap: 8px;
 }
+
+.accessRightSelectDropdown:global(.dropdown-container) {
+  @include mixins.mobile {
+    border-radius: 6px 6px 0 0 !important;
+  }
+}

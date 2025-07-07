@@ -13,6 +13,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
 import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.svg?url";
 import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.svg?url";
 import {
@@ -20,7 +21,6 @@ import {
   StyledInfoRow,
   StyledModalDialog,
 } from "./StyledSocialAuthWelcome";
-import { globalColors } from "@docspace/shared/themes";
 
 interface SocialAuthWelcomeDialogProps extends WithTranslation {
   visible: boolean;

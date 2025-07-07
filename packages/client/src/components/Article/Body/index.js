@@ -40,11 +40,12 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_DOCUMENTS,
   FILTER_TRASH,
-  getUserFilter,
-} from "@docspace/shared/utils/userFilterUtils";
+} from "@docspace/shared/utils/filterConstants";
+
 import Banner from "./Banner";
 import Items from "./Items";
 

@@ -41,12 +41,14 @@ import { getUserType } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import {
-  FILTER_GUESTS,
-  FILTER_INSIDE_GROUPS,
-  FILTER_PEOPLE,
   getUserFilter,
   setUserFilter,
 } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_GUESTS,
+  FILTER_INSIDE_GROUPS,
+  FILTER_PEOPLE,
+} from "@docspace/shared/utils/filterConstants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

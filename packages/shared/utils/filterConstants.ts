@@ -24,54 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { FILTER_VERSION } from "./filterConstants";
+export const FILTER_VERSION = 1;
 
-// Define a more specific type for filter objects to avoid circular dependency
-interface FilterObject {
-  [key: string]:
-    | string
-    | number
-    | boolean
-    | null
-    | undefined
-    | string[]
-    | FilterObject
-    | (() => void);
-}
+// Document filters
+export const FILTER_DOCUMENTS = "UserFilter";
+export const FILTER_RECENT = "UserFilterRecent";
+export const FILTER_TRASH = "UserFilterTrash";
 
-export const cleanUpFilterObj = (filter: FilterObject) => {
-  const filterObject = Object.entries(filter).reduce(
-    (result, [key, value]) => {
-      if (typeof value === "function" || value === null || value === false) {
-        return result;
-      }
-      result[key] = value;
-      return result;
-    },
-    {} as Record<
-      string,
-      string | number | boolean | string[] | FilterObject | undefined
-    >,
-  );
+// Room filters
+export const FILTER_SHARED_ROOM = "UserRoomsSharedFilter";
+export const FILTER_ARCHIVE_ROOM = "UserRoomsArchivedFilter";
+export const FILTER_TEMPLATES_ROOM = "UserRoomsTemplatesFilter";
 
-  return JSON.stringify(filterObject);
-};
+// Room document filters
+export const FILTER_ROOM_DOCUMENTS = "UserFilterSharedRoom";
+export const FILTER_ARCHIVE_DOCUMENTS = "UserFilterArchiveRoom";
 
-export const getUserFilter = (storageKey: string) => {
-  const storageValue = localStorage.getItem(
-    `${storageKey}&ver=${FILTER_VERSION}`,
-  );
-  const filterValue = storageValue ? JSON.parse(storageValue) : {};
-
-  return filterValue;
-};
-
-export const setUserFilter = (storageKey: string, filterObj: FilterObject) => {
-  const filterValue = cleanUpFilterObj(filterObj);
-
-  localStorage.setItem(`${storageKey}&ver=${FILTER_VERSION}`, filterValue);
-};
-
-export const removeUserFilter = (storageKey: string) => {
-  localStorage.removeItem(`${storageKey}&ver=${FILTER_VERSION}`);
-};
+// People filters
+export const FILTER_PEOPLE = "PeopleFilter";
+export const FILTER_GUESTS = "GuestsFilter";
+export const FILTER_GROUPS = "GroupsFilter";
+export const FILTER_INSIDE_GROUPS = "InsideGroupFilter";

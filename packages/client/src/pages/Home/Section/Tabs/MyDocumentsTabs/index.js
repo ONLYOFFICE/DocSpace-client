@@ -31,11 +31,11 @@ import { Tabs } from "@docspace/shared/components/tabs";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
-  getUserFilter,
-} from "@docspace/shared/utils/userFilterUtils";
+} from "@docspace/shared/utils/filterConstants";
 
 const MyDocumentsTabs = ({
   isPersonalRoom,

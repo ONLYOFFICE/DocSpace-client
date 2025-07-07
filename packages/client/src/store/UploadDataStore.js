@@ -913,7 +913,7 @@ class UploadDataStore {
       const notUploadedFiles = this.tempConversionFiles.filter(
         (f) => !f.inAction,
       );
-      this.parallelUploading(notUploadedFiles);
+      this.parallelUploading(notUploadedFiles, t);
     }
 
     this.tempConversionFiles = [];

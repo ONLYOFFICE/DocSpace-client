@@ -88,7 +88,3 @@ export type FilesSelectorInputProps = {
     options: BackupToPublicRoomOptionType,
   ) => void;
 };
-
-export type StyledBodyWrapperProps = {
-  maxWidth?: string;
-};

@@ -3,7 +3,7 @@
   "content": "Add user to room",
   "content_en_sha1_hash": "9b33734023adbd4635df41d1fc1c3a3c350ea343",
   "created_at": "2025-05-19T21:30:42.944Z",
-  "updated_at": "2025-05-26T07:57:32.943Z",
+  "updated_at": "2025-06-30T12:20:31.720Z",
   "comment": {
     "text": "This translation key is used for the text \"Add user to room\", which is a button label displayed in a UI element. The button triggers an action related to adding a user to a room, and this phrase is intended to be clear and concise for users.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.helpers.tsx",
-      "line_number": 42,
-      "context": ">\n {t(\"Common:RoleFields\", {\n roleName,\n })}\n </h3>\n <span onClick={openInvitePanel}>{t(\"Common:AddUserToRoom\")}</span>\n </div>\n ),\n );\n \n Header.displayName = \"Header\";",
+      "line_number": 50,
+      "context": "{t(\"Common:RoleFields\", {\n roleName,\n })}\n </h3>\n {canEditRoom ? (\n <span onClick={openInvitePanel}>{t(\"Common:AddUserToRoom\")}</span>\n ) : null}\n </div>\n ),\n );",
       "module": "/packages/shared"
     }
   ],
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ավելացնել օգտատիրոջը սենյակում\" literally translates to 'Add the user in the room.' While understandable, it's not the most natural phrasing in Armenian. A more accurate and idiomatic translation would be something like 'Добавить пользователя в комнату' or 'Հավելել օգտագործողը խնձրի մեջ'.",
+          "suggestion": "Consider a more idiomatic translation like \"Ավելացնել օգտագործողը խնձրի մեջ\" or \"Ավելացնել օգտատիրոջը խնձրում\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Gebruiker aan kamer toevoegen' is not idiomatic Dutch. 'Aan' is not the correct preposition in this context. It should be 'in'.",
-          "suggestion": "Gebruiker aan kamer toevoegen -> Gebruiker aan kamer toevoegen."
+          "description": "The translation 'Gebruiker aan kamer toevoegen' is not the most natural or idiomatic way to say 'Add user to room' in Dutch. It's literal and slightly awkward.",
+          "suggestion": "Een gebruiker toevoegen aan een kamer"
         }
       ],
       "approved_at": null
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Adăugare utilizator la sală' is technically correct, 'sală' typically refers to a hall or gym. A more appropriate translation for 'room' in a digital context (like adding a user to a virtual room or group) would be 'grup' or 'cameră'.",
-          "suggestion": "Adăugare utilizator la grup"
+          "description": "The term 'sală' typically refers to a hall or a gym, not a room in the context of adding a user to a digital space or group. A more appropriate term would depend on the specific context, but 'grup' or 'spațiu' might be better.",
+          "suggestion": "Consider 'Adăugare utilizator la grup' or 'Adăugare utilizator la spațiu'"
         }
       ],
       "approved_at": null
@@ -167,14 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'කාමරයට' (kamarataya) is a valid word for 'to room' but can be improved for better flow. Consider 'කාමරයේ' (kamaraye) which means 'in the room' or 'කාමරයටයි' (kamaratayi) which also means 'to the room' and is a more common and natural phrasing.",
-          "suggestion": "කාමරයේ පරිශීලකයා එක් කරන්න"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'කාමරයට පරිශීලකයා එක් කරන්න' is technically correct, 'පරිශීලකයා' (parishilakayaa) translates literally to 'devotee' or 'enthusiast'. 'භාවිතාකරු' (bhavitakaru) or 'පරිශීලක' (parishilaka) is a better translation for 'user' in this context, referring to a person using a service or system.",
-          "suggestion": "කාමරයට භාවිතාකරු එක් කරන්න"
+          "description": "While technically correct, \"කාමරයට පරිශීලකයා එක් කරන්න\" is a very literal translation and sounds unnatural in Sinhala. \"පරිශීලකයා\" (parishilakayaa) translates to 'devotee' or 'enthusiast,' which isn't the intended meaning of 'user'.",
+          "suggestion": "A more natural translation would be something like \"කාමරයට සාමාජිකයෙකු එක් කරන්න\" (kaamaraya sahaamaajikayaak ek kanna) - 'Add a member to the room' or \"කාමරයට යාරිවරයා එක් කරන්න\" (kaamaraya yaariwariya ek kanna) - 'Add a user to the room'."
         }
       ],
       "approved_at": null

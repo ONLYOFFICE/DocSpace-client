@@ -106,13 +106,7 @@ const paymentStore = new PaymentStore(
   currentQuotaStore,
   paymentQuotasStore,
 );
-const servicesStore = new ServicesStore(
-  userStore,
-  currentTariffStatusStore,
-  currentQuotaStore,
-  paymentQuotasStore,
-  paymentStore,
-);
+const servicesStore = new ServicesStore(currentTariffStatusStore, paymentStore);
 
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();

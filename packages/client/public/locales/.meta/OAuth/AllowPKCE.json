@@ -3,7 +3,7 @@
   "content": "Allow public client (PKCE)",
   "content_en_sha1_hash": "1d8744c94f9db618bd1791df5c0f1839c47e717d",
   "created_at": "2025-05-19T21:30:53.787Z",
-  "updated_at": "2025-05-24T07:44:47.856Z",
+  "updated_at": "2025-06-30T12:20:31.467Z",
   "comment": {
     "text": "The \"AllowPKCE\" translation key is used to describe a toggle switch that enables public client (PKCE) authentication in an OAuth configuration. This text appears as a help button next to the toggle, providing context for users who need assistance understanding PKCE authentication. Translators should ensure this description accurately reflects the intended functionality and technical term \"PKCE\" to maintain consistency across languages.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 125,
-      "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
+      "line_number": 126,
+      "context": "img.src = URL.createObjectURL(file);\n }\n };\n \n const pkceHelpButtonText = (\n <Trans t={t as TFunction} i18nKey=\"AllowPKCEHelpButton\" ns=\"OAuth\" />\n );\n \n const isNameRequiredError = requiredErrorFields.includes(\"name\");\n const isWebsiteRequiredError = requiredErrorFields.includes(\"website_url\");\n const isNameError = errorFields.includes(\"name\");",
       "module": "/packages/client"
     }
   ],

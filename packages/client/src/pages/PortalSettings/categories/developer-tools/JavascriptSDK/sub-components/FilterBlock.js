@@ -139,6 +139,11 @@ export const FilterBlock = ({ t, config, setConfig }) => {
 
   const filterOptions = [
     {
+      key: "filter-type-folders",
+      label: t("Common:Folders"),
+      typeKey: FilterType.FoldersOnly,
+    },
+    {
       key: "filter-type-all",
       label: t("Common:Files"),
       typeKey: FilterType.FilesOnly,
@@ -149,24 +154,34 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       typeKey: FilterType.DocumentsOnly,
     },
     {
-      key: "filter-type-folders",
-      label: t("Common:Folders"),
-      typeKey: FilterType.FoldersOnly,
-    },
-    {
       key: "filter-type-spreadsheets",
       label: t("Common:Spreadsheets"),
       typeKey: FilterType.SpreadsheetsOnly,
     },
     {
-      key: "filter-type-archives",
-      label: t("Common:Archives"),
-      typeKey: FilterType.ArchiveOnly,
-    },
-    {
       key: "filter-type-presentations",
       label: t("Common:Presentations"),
       typeKey: FilterType.PresentationsOnly,
+    },
+    {
+      key: "filter-type-pdf",
+      label: getManyPDFTitle(t, false),
+      typeKey: FilterType.Pdf,
+    },
+    {
+      key: "filter-type-forms",
+      label: getManyPDFTitle(t, true),
+      typeKey: FilterType.PDFForm,
+    },
+    {
+      key: "filter-type-diagrams",
+      label: t("Common:Diagrams"),
+      typeKey: FilterType.DiagramsOnly,
+    },
+    {
+      key: "filter-type-archives",
+      label: t("Common:Archives"),
+      typeKey: FilterType.ArchiveOnly,
     },
     {
       key: "filter-type-images",
@@ -177,16 +192,6 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       key: "filter-type-media",
       label: t("Common:Media"),
       typeKey: FilterType.MediaOnly,
-    },
-    {
-      key: "filter-type-forms",
-      label: getManyPDFTitle(t, true),
-      typeKey: FilterType.PDFForm,
-    },
-    {
-      key: "filter-type-pdf",
-      label: getManyPDFTitle(t, false),
-      typeKey: FilterType.Pdf,
     },
   ];
 

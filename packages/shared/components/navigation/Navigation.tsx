@@ -277,6 +277,7 @@ const Navigation = ({
                 isFrame={isFrame}
                 isContextButtonVisible={isContextButtonVisible}
                 isPublicRoom={isPublicRoom}
+                isPlusButtonVisible={isPlusButtonVisible}
               />
             </>
           ) : null}

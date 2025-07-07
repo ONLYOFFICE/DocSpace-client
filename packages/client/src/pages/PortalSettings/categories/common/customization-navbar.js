@@ -50,6 +50,7 @@ const CustomizationNavbar = ({
   isLoadedPage,
   isSettingPaid,
   enablePortalRename,
+  isEnterprise,
 }) => {
   const isLoadedSetting = tReady;
   const navigate = useNavigate();
@@ -101,16 +102,26 @@ const CustomizationNavbar = ({
         url="/portal-settings/customization/general/configure-deep-link"
         onClickLink={onClickLink}
       />
+      {isEnterprise ? (
+        <MobileCategoryWrapper
+          title={t("AdManagement")}
+          subtitle={t("AdManagementDescription")}
+          url="/portal-settings/customization/general/ad-management"
+          onClickLink={onClickLink}
+        />
+      ) : null}
     </StyledComponent>
   );
 };
 
-export default inject(({ common, settingsStore }) => {
+export default inject(({ common, settingsStore, currentTariffStatusStore }) => {
   const { enablePortalRename } = settingsStore;
   const { setIsLoadedCustomizationNavbar } = common;
+  const { isEnterprise } = currentTariffStatusStore;
   return {
     setIsLoadedCustomizationNavbar,
     enablePortalRename,
+    isEnterprise,
   };
 })(
   withCultureNames(

@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Verifique a lista de usuários não importados para importar para o {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Você não tem usuários com e-mails. Prossiga para a próxima etapa para adicioná-los.",
   "AddTrustedDomain": "Adicionar domínio confiável",
+  "AdManagement": "Gestão de Anúncios",
+  "AdManagementDescription": "Escolha se os banners promocionais são exibidos no seu {{productName}}.",
   "Admins": "Administradores",
   "AdminsMessage": "Definições de Mensagens para Administrador",
   "AdminsMessageMobileDescription": "Configurações de mensagem do administrador é uma forma de entrar em contato com o administrador do portal.",
@@ -156,6 +158,7 @@
   "LoginHistoryTitle": "Histórico de Acessos",
   "LoginLatestText": "Nesta página, apenas a última atividade é mostrada. Os dados em si são armazenados durante o período especificado no campo abaixo (máximo 180 dias).",
   "LoginSubheaderTitle": "Esta subsecção é utilizada para monitorizar a última atividade de início de sessão do utilizador, incluindo inícios de sessão bem sucedidos e tentativas falhadas com indicação dos motivos.",
+  "LogoLightSmall": "Logo para o cabeçalho do espaço",
   "ManagementCategoryDataManagement": "Gestão de dados",
   "ManagementCategoryIntegration": "Integração",
   "ManagementCategorySecurity": "Segurança",
@@ -283,5 +286,6 @@
   "WantToCancelDataImport": "Deseja cancelar a importação de dados?",
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Deseja continuar ou alterar a cota de armazenamento do utilizador?",
+  "WhiteLabelSubtitle": "Introduza o nome da sua empresa, carregue o logótipo, e personalize o estilo para combinar com a sua imagem de marca.",
   "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
 }

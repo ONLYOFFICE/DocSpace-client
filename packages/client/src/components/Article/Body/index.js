@@ -71,6 +71,8 @@ const ArticleBodyContent = (props) => {
     userId,
     isFrame,
     setContactsTab,
+
+    displayBanners,
   } = props;
 
   const location = useLocation();
@@ -293,7 +295,8 @@ const ArticleBodyContent = (props) => {
       showText &&
       !firstLoad &&
       campaigns.length > 0 &&
-      !isFrame ? (
+      !isFrame &&
+      displayBanners ? (
         <Banner />
       ) : null}
     </>
@@ -343,6 +346,8 @@ export default inject(
       setIsBurgerLoading,
       currentDeviceType,
       isFrame,
+
+      displayBanners,
     } = settingsStore;
 
     const { campaigns } = campaignsStore;
@@ -376,6 +381,8 @@ export default inject(
       campaigns,
       isFrame,
       setContactsTab: peopleStore.usersStore.setContactsTab,
+
+      displayBanners,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

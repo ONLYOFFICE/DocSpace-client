@@ -1697,7 +1697,7 @@
 
 .light {
   --social-button-border: 1px solid #{$gray-strong};
-  --social-button-text-color: #{$gray};
+  --social-button-text-color: #{$black};
   --social-button-connect-text-color: #{$white};
   --social-button-background: #{$white};
   --social-button-hover-background: #{$white};
@@ -2458,10 +2458,35 @@
   --quantity-picker-additional-title: #{$gray};
   --quantity-picker-track-number: #{$gray};
   --quantity-picker-rectangle-color: #{$light-gray-hover};
+  --quantity-picker-warning-color: #{$light-error-status};
 }
 .dark {
   --quantity-picker-disable-color: #{$gray-dark};
   --quantity-picker-additional-title: #{$gray-dark};
   --quantity-picker-track-number: #{$gray-dark};
   --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
+  --quantity-picker-warning-color: #{$dark-error-status};
+}
+
+.light {
+  --accounts-badges-pending-color: #{$gray};
+}
+
+.dark {
+  --accounts-badges-pending-color: #{$gray-dark};
+}
+
+.light {
+  --about-logo-color: #{$black};
+}
+
+.dark {
+  --about-logo-color: #{$white};
+}
+
+.light {
+  --icon-button-color: #{$gray};
+}
+.dark {
+  --icon-button-color: #{$gray-dark};
 }

@@ -96,6 +96,7 @@ import { getFromLocalStorage } from "./getFromLocalStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
+import * as userFilterUtils from "./userFilterUtils";
 
 export {
   isBetaLanguage,
@@ -158,6 +159,7 @@ export {
   fakeFormFillingList,
   getCountTilesInRow,
   getSelectFormatTranslation,
+  userFilterUtils,
 };
 
 export const getModalType = () => {

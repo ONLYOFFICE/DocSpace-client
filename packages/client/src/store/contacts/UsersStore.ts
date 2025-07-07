@@ -44,6 +44,13 @@ import {
 import { getUserType } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import {
+  FILTER_GUESTS,
+  FILTER_INSIDE_GROUPS,
+  FILTER_PEOPLE,
+  getUserFilter,
+  setUserFilter,
+} from "@docspace/shared/utils/userFilterUtils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -379,16 +386,18 @@ class UsersStore {
 
     const key =
       this.contactsTab === "inside_group"
-        ? `InsideGroupFilter=${this.userStore.user?.id}`
+        ? `${FILTER_INSIDE_GROUPS}=${this.userStore.user?.id}`
         : this.contactsTab === "guests"
-          ? `PeopleFilter=${this.userStore.user?.id}`
-          : `GuestsFilter=${this.userStore.user?.id}`;
+          ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
+          : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
-    if (key) {
-      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    const value = {
+      sortBy: filter.sortBy,
+      pageCount: filter.pageCount,
+      sortOrder: filter.sortOrder,
+    };
+    setUserFilter(key, value);
 
-      localStorage.setItem(key, value);
-    }
     setContactsUsersFilterUrl(
       filter,
       this.contactsTab,
@@ -448,10 +457,10 @@ class UsersStore {
 
     const localStorageKey =
       this.contactsTab === "inside_group"
-        ? `InsideGroupFilter=${this.userStore.user?.id}`
+        ? `${FILTER_INSIDE_GROUPS}=${this.userStore.user?.id}`
         : this.contactsTab === "guests"
-          ? `GuestsFilter=${this.userStore.user?.id}`
-          : `PeopleFilter=${this.userStore.user?.id}`;
+          ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
+          : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
     const guestsTabVisitedStorage = window.localStorage.getItem(
       `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
@@ -460,14 +469,13 @@ class UsersStore {
     if (guestsTabVisitedStorage && !this.guestsTabVisited) {
       this.guestsTabVisited = true;
     }
-    const filterStorageItem = localStorage.getItem(localStorageKey);
 
-    if (filterStorageItem && withFilterLocalStorage) {
-      const splitFilter = filterStorageItem.split(",");
+    if (withFilterLocalStorage) {
+      const filterObj = getUserFilter(localStorageKey);
 
-      filterData.sortBy = splitFilter[0] as TFilterSortBy;
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2] as TSortOrder;
+      if (filterObj?.sortBy) filterData.sortBy = filterObj.sortBy;
+      if (filterObj?.pageCount) filterData.pageCount = filterObj.pageCount;
+      if (filterObj?.sortOrder) filterData.sortOrder = filterObj.sortOrder;
     }
 
     if (currentGroup?.id && this.contactsTab === "inside_group") {

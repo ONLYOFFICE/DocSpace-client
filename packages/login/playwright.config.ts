@@ -44,6 +44,11 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   snapshotPathTemplate: "{testDir}/screenshots{/projectName}/{arg}{ext}",
+  expect: {
+    toHaveScreenshot: {
+      threshold: 0.16,
+    },
+  },
 
   /* Configure projects for major browsers */
   projects: [

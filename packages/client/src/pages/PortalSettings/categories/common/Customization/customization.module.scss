@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,20 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+.wrapper {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-export const StyledBody = styled.div`
-  margin-bottom: 16px;
-  .backup_storage-tooltip {
-    display: flex;
-    align-items: center;
-    p {
-      margin-inline-end: 8px;
-    }
-  }
-  svg {
-    path {
-      fill: ${(props) => props.theme.iconButton.color} !important;
-    }
-  }
-`;
+.radioButtonGroup {
+  width: fit-content;
+  margin-top: 8px;
+}
+
+.saveCancelButtons {
+  margin-top: 16px;
+}

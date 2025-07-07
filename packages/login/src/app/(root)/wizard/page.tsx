@@ -43,9 +43,12 @@ import { LoginContainer } from "@/components/LoginContainer";
 
 import { getUserTimezone } from "@docspace/shared/utils/common";
 import { LANGUAGE, TIMEZONE } from "@docspace/shared/constants";
+import { logger } from "logger.mjs";
 import WizardForm from "./page.client";
 
 async function Page() {
+  logger.info("Wizard page");
+
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;

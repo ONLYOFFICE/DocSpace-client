@@ -85,12 +85,23 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
-import { toJSON } from "@docspace/shared/api/rooms/filter";
 import {
   mappingActiveItems,
   removeOptions,
   removeSeparator,
 } from "SRC_DIR/helpers/filesUtils";
+import {
+  FILTER_ARCHIVE_DOCUMENTS,
+  FILTER_ARCHIVE_ROOM,
+  FILTER_DOCUMENTS,
+  FILTER_RECENT,
+  FILTER_ROOM_DOCUMENTS,
+  FILTER_SHARED_ROOM,
+  FILTER_TEMPLATES_ROOM,
+  FILTER_TRASH,
+  getUserFilter,
+  setUserFilter,
+} from "@docspace/shared/utils/userFilterUtils";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -858,15 +869,15 @@ class FilesStore {
 
         filter.folder = pathPart.id;
 
-        const filterStorageItem =
-          userId && localStorage.getItem(`UserFilter=${userId}`);
+        if (userId) {
+          const filterObj = getUserFilter(`${FILTER_DOCUMENTS}=${userId}`);
 
-        if (filterStorageItem && myFolderId === pathPart.id) {
-          const splitFilter = filterStorageItem.split(",");
-
-          filter.sortBy = splitFilter[0];
-          filter.sortOrder = splitFilter[1];
+          if (myFolderId === pathPart.id) {
+            if (filterObj?.sortBy) filter.sortBy = filterObj.sortBy;
+            if (filterObj?.sortOrder) filter.sortOrder = filterObj.sortOrder;
+          }
         }
+
         const isPublic = this.publicRoomStore.isPublicRoom;
         if (isPublic) {
           filter.key = this.publicRoomStore.publicRoomKey;
@@ -1520,26 +1531,27 @@ class FilesStore {
     this.isLoadedFetchFiles = isLoadedFetchFiles;
   };
 
-  // TODO: FILTER
   setFilesFilter = (filter, folderId = null) => {
     const { recycleBinFolderId } = this.treeFoldersStore;
 
     const key =
       this.categoryType === CategoryType.Archive
-        ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+        ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
         : this.categoryType === CategoryType.SharedRoom
-          ? `UserFilterSharedRoom=${this.userStore.user?.id}`
+          ? `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`
           : folderId === "recent"
-            ? `UserFilterRecent=${this.userStore.user?.id}`
+            ? `${FILTER_RECENT}=${this.userStore.user?.id}`
             : +folderId === recycleBinFolderId
-              ? `UserFilterTrash=${this.userStore.user?.id}`
+              ? `${FILTER_TRASH}=${this.userStore.user?.id}`
               : !this.publicRoomStore.isPublicRoom
-                ? `UserFilter=${this.userStore.user?.id}`
+                ? `${FILTER_DOCUMENTS}=${this.userStore.user?.id}`
                 : null;
 
     if (key) {
-      const value = `${filter.sortBy},${filter.sortOrder}`;
-      localStorage.setItem(key, value);
+      setUserFilter(key, {
+        sortBy: filter.sortBy,
+        sortOrder: filter.sortOrder,
+      });
     }
 
     this.filter = filter;
@@ -1565,19 +1577,20 @@ class FilesStore {
     filter.pageCount = 100;
 
     const isArchive = this.categoryType === CategoryType.Archive;
+    const isTemplate = filter.searchArea === RoomSearchArea.Templates;
 
     const key = isArchive
-      ? `UserRoomsArchivedFilter=${this.userStore.user?.id}`
-      : `UserRoomsSharedFilter=${this.userStore.user?.id}`;
+      ? `${FILTER_ARCHIVE_ROOM}=${this.userStore.user?.id}`
+      : isTemplate
+        ? `${FILTER_TEMPLATES_ROOM}=${this.userStore.user?.id}`
+        : `${FILTER_SHARED_ROOM}=${this.userStore.user?.id}`;
 
-    const sharedStorageFilter = JSON.parse(localStorage.getItem(key));
-    if (sharedStorageFilter) {
-      sharedStorageFilter.sortBy = filter.sortBy;
-      sharedStorageFilter.sortOrder = filter.sortOrder;
+    const sharedStorageFilter = getUserFilter(key);
 
-      const value = toJSON(sharedStorageFilter);
-      localStorage.setItem(key, value);
-    }
+    sharedStorageFilter.sortBy = filter.sortBy;
+    sharedStorageFilter.sortOrder = filter.sortOrder;
+
+    setUserFilter(key, sharedStorageFilter);
 
     this.roomsFilter = filter;
 
@@ -1644,14 +1657,13 @@ class FilesStore {
     this.setIsErrorRoomNotAvailable(false);
     this.setIsLoadedFetchFiles(false);
 
-    const filterStorageItem =
-      this.userStore.user?.id &&
-      localStorage.getItem(`UserFilter=${this.userStore.user.id}`);
+    if (this.userStore.user?.id && !filter) {
+      const filterObj = getUserFilter(
+        `${FILTER_DOCUMENTS}=${this.userStore.user.id}`,
+      );
 
-    if (filterStorageItem && !filter) {
-      const splitFilter = filterStorageItem.split(",");
-      filterData.sortBy = splitFilter[0];
-      filterData.sortOrder = splitFilter[1];
+      filterData.sortBy = filterObj.sortBy;
+      filterData.sortOrder = filterObj.sortOrder;
     }
 
     filterData.page = 0;

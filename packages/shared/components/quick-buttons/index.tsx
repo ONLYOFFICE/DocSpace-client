@@ -193,7 +193,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge download-file icons-group"
               size={sizeQuickButton}
               onClick={onClickDownload}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:Download")}

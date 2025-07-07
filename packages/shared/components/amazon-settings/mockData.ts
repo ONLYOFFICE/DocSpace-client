@@ -24,97 +24,78 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { NoUserSelect, tablet } from "../../utils";
+import {
+  bucket,
+  REGION,
+  SERVICE_URL,
+  FORCEPATH_STYLE,
+  USE_HTTP,
+  SSE,
+  SSE_S3,
+  filePath,
+} from "./AmazonSettings.constants";
 
-export const StyledBodyContent = styled.div`
-  display: contents;
+export const mockStorageRegions = [
+  {
+    displayName: "US East (N. Virginia)",
+    systemName: "us-east-1",
+  },
+  {
+    displayName: "US East (Ohio)",
+    systemName: "us-east-2",
+  },
+  {
+    displayName: "US West (Oregon)",
+    systemName: "us-west-2",
+  },
+  {
+    displayName: "Europe (Ireland)",
+    systemName: "eu-west-1",
+  },
+  {
+    displayName: "Europe (Frankfurt)",
+    systemName: "eu-central-1",
+  },
+];
 
-  .warning-text {
-    margin: 20px 0;
-  }
+export const mockSelectedStorage = {
+  id: "1",
+  title: "Amazon S3",
+  tenantId: "1",
+  isSet: true,
+  isThirdParty: true,
+  properties: [
+    {
+      name: "bucket",
+      title: "Bucket",
+      value: "my-test-bucket",
+    },
+    {
+      name: "accessKey",
+      title: "Access Key",
+      value: "AKIAIOSFODNN7EXAMPLE",
+    },
+    {
+      name: "region",
+      title: "Region",
+      value: "eu-central-1",
+    },
+  ],
+};
 
-  .error-label {
-    position: absolute;
-    max-width: 100%;
-  }
+export const mockFormSettings = {
+  [bucket]: "my-test-bucket",
+  [REGION]: "eu-central-1",
+  [SERVICE_URL]: "s3.amazonaws.com",
+  [FORCEPATH_STYLE]: "true",
+  [USE_HTTP]: "false",
+  [SSE]: SSE_S3,
+  [filePath]: "backup",
+};
 
-  .field-body {
-    position: relative;
-  }
-`;
-
-export const StyledAboutContent = styled.div`
-  width: 100%;
-  user-select: text;
-
-  .avatar {
-    margin-top: 0px;
-    margin-bottom: 16px;
-
-    @media ${tablet} {
-      margin-top: 32px;
-    }
-  }
-
-  .row-el {
-    display: inline-block;
-  }
-
-  .copyright {
-    margin-top: 14px;
-    margin-bottom: 4px;
-    font-weight: 700;
-  }
-  .no-select {
-    ${NoUserSelect}
-  }
-
-  .row {
-    line-height: 20px;
-  }
-
-  .tel-title,
-  .address-title {
-    display: inline;
-  }
-  .select-el {
-    @media ${tablet} {
-      user-select: text;
-    }
-  }
-
-  .tel-title.select-el {
-    direction: ltr;
-  }
-
-  .program-with-version {
-    display: inline;
-    direction: ltr;
-  }
-
-  .logo-theme {
-    svg {
-      g:nth-child(2) {
-        path:nth-child(5) {
-          fill: ${(props) => props.theme.client.about.logoColor};
-        }
-
-        path:nth-child(6) {
-          fill: ${(props) => props.theme.client.about.logoColor};
-        }
-      }
-    }
-  }
-
-  .logo-docspace-theme {
-    height: 24px;
-    width: 211px;
-
-    svg {
-      path:nth-child(4) {
-        fill: ${(props) => props.theme.client.about.logoColor};
-      }
-    }
-  }
-`;
+export const mockErrorsFields = {
+  [bucket]: false,
+  [REGION]: false,
+  [SERVICE_URL]: false,
+  [filePath]: false,
+};

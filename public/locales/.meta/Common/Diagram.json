@@ -1,0 +1,34 @@
+{
+  "key_path": "Diagram",
+  "content": "Diagram",
+  "content_en_sha1_hash": "df5415960cfe95d2038cf9f52aaf8f174457596d",
+  "created_at": "2025-07-01T15:57:10.981Z",
+  "updated_at": "2025-07-01T15:57:50.641Z",
+  "comment": {
+    "text": "The translation key \"Diagram\" is used to display the label for a table cell indicating that the file type is a diagram. It appears in theTableView component and is part of the FileType enum context.",
+    "is_auto": true,
+    "updated_at": "2025-07-01T15:57:50.641Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
+      "line_number": 55,
+      "context": "case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.OForm:\n case FileType.OFormTemplate:\n case FileType.PDF: {\n return getSinglePDFTitle(t, isPDFForm);\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/utils/getFileType.ts",
+      "line_number": 22,
+      "context": "case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:\n case FileType.PDF:\n return t(\"Common:Document\");",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

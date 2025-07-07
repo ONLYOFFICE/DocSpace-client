@@ -10,6 +10,8 @@
   "AddEmailsDescription": "检查要导入 {{organizationName}}{{productName}}的未导入用户列表。",
   "AddEmailsWarning": "您没有拥有电子邮件的用户。请继续执行下一步添加。",
   "AddTrustedDomain": "添加受信任的域名",
+  "AdManagement": "广告管理",
+  "AdManagementDescription": "选择是否在您的{{productName}}中显示促销横幅。",
   "Admins": "管理员",
   "AdminsMessage": "管理员消息设置",
   "AdminsMessageMobileDescription": "您可通过“管理员留言设置”联系门户管理员",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "您是否要取消数据导入？",
   "WantToCancelUpload": "您是否要取消上传？",
   "WantToContinue": "您希望继续还是更改用户存储配额？",
+  "WhiteLabelSubtitle": "输入公司名称、上传徽标并自定义其风格以匹配您的品牌风格。",
   "WithoutEmailHint": "的用户全部拥有电子邮件。请继续执行下一步。"
 }

@@ -37,6 +37,10 @@ import {
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+
+import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
+import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
 
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
@@ -83,6 +87,7 @@ const Editor = ({
   onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
+  const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -254,6 +259,18 @@ const Editor = ({
     onSubmit,
     onRequestRefreshFile,
   };
+
+  if (
+    typeof window !== "undefined" &&
+    newConfig.editorConfig?.user &&
+    newConfig.editorConfig.user.image?.includes(
+      "default_user_photo_size_48-48.png",
+    )
+  ) {
+    newConfig.editorConfig.user.image = isBase
+      ? `${window.location.origin}${UserAvatarBaseSvgUrl}`
+      : `${window.location.origin}${UserAvatarDarkSvgUrl}`;
+  }
 
   if (successAuth) {
     newConfig.events.onRequestUsers = onSDKRequestUsers;

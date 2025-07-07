@@ -49,6 +49,10 @@ export interface GuidancePosition {
     value?: number;
     row?: number;
     rtl?: number;
+    left?: number;
+    top?: number;
+    width?: number;
+    height?: number;
   };
   smallBorder?: boolean;
   rects?: DOMRect;

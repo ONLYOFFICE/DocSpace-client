@@ -140,6 +140,8 @@ class FilesSettingsStore {
 
   extsDocument = [];
 
+  extsDiagram = [];
+
   internalFormats = {};
 
   masterFormExtension = "";
@@ -380,6 +382,8 @@ class FilesSettingsStore {
   isEbook = (extension) => presentInArray(EBOOK_EXST, extension);
 
   isDocument = (extension) => presentInArray(this.extsDocument, extension);
+
+  isDiagram = (extension) => presentInArray(this.extsDiagram, extension);
 
   isMasterFormExtension = (extension) => this.masterFormExtension === extension;
 

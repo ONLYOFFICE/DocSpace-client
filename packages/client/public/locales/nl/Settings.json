@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Controleer de lijst met niet-geïmporteerde gebruikers om te importeren in {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "U heeft geen gebruikers met e-mails. Ga door naar de volgende stap om ze toe te voegen.",
   "AddTrustedDomain": "Voeg vertrouwd domein toe",
+  "AdManagement": "Ad Management",
+  "AdManagementDescription": "Kies of promotiebanners worden weergegeven in uw {{productName}}.",
   "Admins": "Beheerders",
   "AdminsMessage": "Beheerder Bericht Instellingen",
   "AdminsMessageMobileDescription": "Beheerder Bericht Instellingen is een manier om contact op te nemen met de portaal beheerder.",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Wilt u het importeren van gegevens annuleren?",
   "WantToCancelUpload": "Wilt u het uploaden annuleren?",
   "WantToContinue": "Wilt u doorgaan of de opslagquota voor gebruikers wijzigen?",
+  "WhiteLabelSubtitle": "Voer uw bedrijfsnaam in, upload het logo en pas de styling aan aan uw huisstijl.",
   "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap."
 }

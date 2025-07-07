@@ -91,6 +91,10 @@ import {
   removeSeparator,
 } from "SRC_DIR/helpers/filesUtils";
 import {
+  getUserFilter,
+  setUserFilter,
+} from "@docspace/shared/utils/userFilterUtils";
+import {
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_ARCHIVE_ROOM,
   FILTER_DOCUMENTS,
@@ -99,9 +103,7 @@ import {
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
-  getUserFilter,
-  setUserFilter,
-} from "@docspace/shared/utils/userFilterUtils";
+} from "@docspace/shared/utils/filterConstants";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");

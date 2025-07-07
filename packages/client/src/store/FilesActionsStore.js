@@ -82,11 +82,11 @@ import {
   isLockedSharedRoom,
   isSystemFolder,
 } from "@docspace/shared/utils";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_ROOM_DOCUMENTS,
-  getUserFilter,
-} from "@docspace/shared/utils/userFilterUtils";
+} from "@docspace/shared/utils/filterConstants";
 import {
   getCategoryType,
   getCategoryTypeByFolderType,

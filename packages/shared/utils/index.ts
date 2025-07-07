@@ -97,6 +97,7 @@ import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 import * as userFilterUtils from "./userFilterUtils";
+import * as filterConstants from "./filterConstants";
 
 export {
   isBetaLanguage,
@@ -160,6 +161,7 @@ export {
   getCountTilesInRow,
   getSelectFormatTranslation,
   userFilterUtils,
+  filterConstants,
 };
 
 export const getModalType = () => {

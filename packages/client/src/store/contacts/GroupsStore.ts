@@ -36,10 +36,10 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
 import {
-  FILTER_GROUPS,
   getUserFilter,
   setUserFilter,
 } from "@docspace/shared/utils/userFilterUtils";
+import { FILTER_GROUPS } from "@docspace/shared/utils/filterConstants";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import api from "@docspace/shared/api";

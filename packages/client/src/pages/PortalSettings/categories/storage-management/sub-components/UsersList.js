@@ -31,10 +31,8 @@ import { useNavigate } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import Filter from "@docspace/shared/api/people/filter";
-import {
-  FILTER_PEOPLE,
-  removeUserFilter,
-} from "@docspace/shared/utils/userFilterUtils";
+import { removeUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import { FILTER_PEOPLE } from "@docspace/shared/utils/filterConstants";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 

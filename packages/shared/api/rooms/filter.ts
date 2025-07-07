@@ -39,9 +39,8 @@ import {
   FILTER_ARCHIVE_ROOM,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
-  getUserFilter,
-  setUserFilter,
-} from "../../utils/userFilterUtils";
+} from "../../utils/filterConstants";
+import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
 
 const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;

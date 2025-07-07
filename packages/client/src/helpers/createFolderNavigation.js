@@ -1,11 +1,11 @@
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { RoomsType } from "@docspace/shared/enums";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_ARCHIVE_DOCUMENTS,
   FILTER_ROOM_DOCUMENTS,
-  getUserFilter,
-} from "@docspace/shared/utils/userFilterUtils";
+} from "@docspace/shared/utils/filterConstants";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 

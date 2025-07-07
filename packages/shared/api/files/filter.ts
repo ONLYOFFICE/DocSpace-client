@@ -71,6 +71,7 @@ const EXTENSION = "extension";
 const SEARCH_AREA = "searchArea";
 const KEY = "key";
 const DATE = "date";
+const TAGS = "tags";
 
 // TODO: add next params
 // subjectGroup bool
@@ -98,6 +99,7 @@ const getOtherSearchParams = () => {
     SEARCH_AREA,
     KEY,
     DATE,
+    TAGS,
   ];
 
   filterSearchParams.forEach((param) => {

@@ -24,11 +24,77 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { TableContainer } from "./table-container";
-export { TableBody } from "./table-body";
-export { TableRow } from "./table-row";
-export { TableHeader } from "./table-header";
-export { TableGroupMenu } from "./table-group-menu";
-export { TableCell } from "./sub-components/table-cell";
+import type { Meta, StoryObj } from "@storybook/react";
 
-export type { TTableColumn, TGroupMenuItem } from "./Table.types";
+import { GroupMenuItem } from "./GroupMenuItem";
+import { TGroupMenuItem } from "../../Table.types";
+
+const meta = {
+  title: "Components/Table/GroupMenuItem",
+  component: GroupMenuItem,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "GroupMenuItem component for table group menu items with dropdown support",
+      },
+    },
+  },
+  argTypes: {
+    isBlocked: { control: "boolean" },
+  },
+} satisfies Meta<typeof GroupMenuItem>;
+
+export default meta;
+type Story = StoryObj<typeof GroupMenuItem>;
+
+const createMenuItem = (
+  overrides: Partial<TGroupMenuItem> = {},
+): TGroupMenuItem => {
+  return {
+    label: "Menu Item",
+    disabled: false,
+    onClick: () => {},
+    iconUrl: "",
+    title: "Menu Item Title",
+    withDropDown: false,
+    options: [],
+    id: "group-menu-item",
+    ...overrides,
+  };
+};
+
+export const Default: Story = {
+  args: {
+    item: createMenuItem(),
+    isBlocked: false,
+  },
+};
+
+export const WithDropdown: Story = {
+  args: {
+    item: createMenuItem({
+      withDropDown: true,
+      options: [
+        {
+          key: "option-1",
+          label: "Option 1",
+          onClick: () => {},
+        },
+        {
+          key: "option-2",
+          label: "Option 2",
+          onClick: () => {},
+        },
+      ],
+    }),
+    isBlocked: false,
+  },
+};
+
+export const Blocked: Story = {
+  args: {
+    item: createMenuItem(),
+    isBlocked: true,
+  },
+};

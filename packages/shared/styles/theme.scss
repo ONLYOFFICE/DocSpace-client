@@ -2490,3 +2490,79 @@
 .dark {
   --icon-button-color: #{$gray-dark};
 }
+
+.light {
+  --table-cell-border: 1px solid #{$gray-light-mid};
+
+  --table-header-text-color: #{$gray};
+  --table-header-text-hover-color: #{$light-gray-dark};
+  --table-header-border-bottom: 1px solid #{$gray-light-mid};
+  --table-header-border-image-source: linear-gradient(
+    to right,
+    #{$white} 21px,
+    #{$gray-light-mid} 21px,
+    #{$gray-light-mid} calc(100% - 20px),
+    #{$white} calc(100% - 20px)
+  );
+  --table-header-lengthen-border-image-source: linear-gradient(
+    to right,
+    #{$gray-light-mid},
+    #{$gray-light-mid}
+  );
+  --table-header-border-hover-image-source: linear-gradient(
+    to right,
+    #{$white} 0px,
+    #{$gray-light-mid} 0px,
+    #{$gray-light-mid} 100%,
+    #{$white} 100%
+  );
+
+  --table-container-border-right: 2px solid #{$gray-strong};
+  --table-container-border-hover-color: #{$light-gray-dark};
+  --table-container-indexing-separator: #{$light-blue-main};
+
+  --table-settings-icon-disable-color: #{$gray-strong};
+
+  --table-group-menu-border-bottom: 1px solid transparent;
+  --table-group-menu-border-right: 1px solid #{$gray-strong};
+  --table-group-menu-box-shadow: 0px 8px 16px #{$popup-shadow},
+    0px 0px 4px #{$menu-shadow};
+}
+
+.dark {
+  --table-cell-border: 1px solid #{$gray-dark-strong};
+
+  --table-header-text-color: #{$gray-dark};
+  --table-header-text-hover-color: #{$white};
+  --table-header-border-bottom: 1px solid #{$gray-dark-strong};
+  --table-header-border-image-source: linear-gradient(
+    to right,
+    #{$black} 21px,
+    #{$gray-dark-strong} 21px,
+    #{$gray-dark-strong} calc(100% - 20px),
+    #{$black} calc(100% - 20px)
+  );
+  --table-header-lengthen-border-image-source: linear-gradient(
+    to right,
+    #{$gray-dark-strong},
+    #{$gray-dark-strong}
+  );
+  --table-header-border-hover-image-source: linear-gradient(
+    to right,
+    #{$black} 0px,
+    #{$gray-dark-strong} 0px,
+    #{$gray-dark-strong} 100%,
+    #{$black} 100%
+  );
+
+  --table-container-border-right: 2px solid #{$gray-dark-strong};
+  --table-container-border-hover-color: #{$gray-dark-strong};
+  --table-container-indexing-separator: #{$white};
+
+  --table-settings-icon-disable-color: #{$gray-dark-strong};
+
+  --table-group-menu-border-bottom: 1px solid #{$gray-dark-strong};
+  --table-group-menu-border-right: 1px solid #{$gray-dark-strong};
+  --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
+    0px 0px 4px #{$menu-shadow-dark};
+}

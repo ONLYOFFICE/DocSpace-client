@@ -58,3 +58,9 @@
     @content;
   }
 }
+
+@mixin flip-in-rtl {
+  [data-dir="rtl"] & {
+    transform: scaleX(-1);
+  }
+}

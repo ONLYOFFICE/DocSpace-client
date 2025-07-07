@@ -24,11 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { TableContainer } from "./table-container";
-export { TableBody } from "./table-body";
-export { TableRow } from "./table-row";
-export { TableHeader } from "./table-header";
-export { TableGroupMenu } from "./table-group-menu";
-export { TableCell } from "./sub-components/table-cell";
+import React from "react";
+import classNames from "classnames";
 
-export type { TTableColumn, TGroupMenuItem } from "./Table.types";
+import { TableCellProps } from "../../Table.types";
+import styles from "./TableCell.module.scss";
+
+const TableCell = (props: TableCellProps) => {
+  const {
+    className,
+    forwardedRef,
+    style,
+    checked,
+    hasAccess,
+    children,
+    value,
+  } = props;
+
+  const classes = classNames(
+    styles.tableCell,
+    className,
+    "table-container_cell",
+    {
+      [styles.checked]: checked,
+      [styles.hasAccess]: hasAccess,
+    },
+  );
+
+  return (
+    <div
+      data-testid="table-cell"
+      className={classes}
+      ref={forwardedRef}
+      style={style}
+      // @ts-expect-error: value used by DnD and maybe somewhere else;
+      // TODO: Refactor logic to use data-value
+      value={value}
+    >
+      {children}
+    </div>
+  );
+};
+
+export { TableCell };

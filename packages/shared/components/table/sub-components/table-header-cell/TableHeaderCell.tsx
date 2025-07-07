@@ -25,16 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import SortDescReactSvgUrl from "PUBLIC_DIR/images/sort.desc.react.svg?url";
-import { Checkbox } from "../../checkbox";
 
-import { Text } from "../../text";
-import { IconButton } from "../../icon-button";
-import { globalColors } from "../../../themes/globalColors";
+import { Checkbox } from "../../../checkbox";
+import { Text } from "../../../text";
+import { IconButton } from "../../../icon-button";
+import { globalColors } from "../../../../themes";
 
-import { StyledTableHeaderCell } from "../Table.styled";
-import { TableHeaderCellProps } from "../Table.types";
+import { TableHeaderCellProps } from "../../Table.types";
+import styles from "./TableHeaderCell.module.scss";
 
 const TableHeaderCell = ({
   column,
@@ -46,6 +47,7 @@ const TableHeaderCell = ({
   defaultSize,
   sortingVisible,
   tagRef,
+  testId = "table-header-cell",
 }: TableHeaderCellProps) => {
   const {
     title,
@@ -73,63 +75,32 @@ const TableHeaderCell = ({
     e.stopPropagation();
   };
 
-  return withTagRef ? (
-    <StyledTableHeaderCell
-      sorted={sorted}
-      isActive={isActive}
-      isShort={isShort}
-      showIcon={!!column.onClick}
-      className="table-container_header-cell"
-      id={`column_${index}`}
-      data-default={isDefault}
-      data-enable={enable}
-      data-min-width={minWidth}
-      data-short-colum={isShort}
-      data-default-size={defaultSize}
-      sortingVisible={sortingVisible}
-      ref={tagRef}
-    >
-      <div className="table-container_header-item">
-        <div className="header-container-text-wrapper" onClick={onClick}>
-          <Text fontWeight={600} className="header-container-text">
-            {enable ? title : ""}
-          </Text>
+  const classes = classNames(
+    styles.tableHeaderCell,
+    "table-container_header-cell",
+    {
+      [styles.isActive]: isActive,
+      [styles.sorted]: sorted,
+      [styles.isShort]: isShort,
+      [styles.showIcon]: !!column.onClick,
+      [styles.sortingVisible]: sortingVisible,
+    },
+  );
 
-          {sortingVisible ? (
-            <IconButton
-              onClick={column.onIconClick ? onIconClick : onClick}
-              iconName={SortDescReactSvgUrl}
-              className="header-container-text-icon"
-              size={12}
-              color={isActive ? globalColors.gray : globalColors.gray}
-            />
-          ) : null}
-        </div>
-        {resizable ? (
-          <div
-            data-column={`${index}`}
-            className="resize-handle not-selectable"
-            onMouseDown={onMouseDown}
-          />
-        ) : null}
-      </div>
-    </StyledTableHeaderCell>
-  ) : (
-    <StyledTableHeaderCell
-      sorted={sorted}
-      isActive={isActive}
-      showIcon={!!column.onClick}
-      className="table-container_header-cell"
+  return (
+    <div
+      className={classes}
       id={`column_${index}`}
       data-enable={enable}
       data-default={isDefault}
       data-short-colum={isShort}
       data-min-width={minWidth}
       data-default-size={defaultSize}
-      sortingVisible={sortingVisible}
+      ref={withTagRef ? tagRef : null}
+      data-testid={testId}
     >
-      <div className="table-container_header-item">
-        <div className="header-container-text-wrapper" onClick={onClick}>
+      <div className={styles.tableHeaderItem}>
+        <div className={styles.textWrapper} onClick={onClick}>
           {checkbox && (checkbox.isIndeterminate || checkbox.value) ? (
             <Checkbox
               onChange={checkbox.onChange}
@@ -138,7 +109,10 @@ const TableHeaderCell = ({
             />
           ) : null}
 
-          <Text fontWeight={600} className="header-container-text">
+          <Text
+            fontWeight={600}
+            className={classNames(styles.text, "header-container-text")}
+          >
             {enable ? title : ""}
           </Text>
 
@@ -146,21 +120,23 @@ const TableHeaderCell = ({
             <IconButton
               onClick={column.onIconClick ? onIconClick : onClick}
               iconName={SortDescReactSvgUrl}
-              className="header-container-text-icon"
+              className={styles.sortIcon}
               size={12}
               color={globalColors.gray}
+              dataTestId="sort-icon"
             />
           ) : null}
         </div>
         {resizable ? (
           <div
             data-column={`${index}`}
-            className="resize-handle not-selectable"
+            className={classNames(styles.resizeHandle, "not-selectable")}
             onMouseDown={onMouseDown}
+            data-testid="resize-handle"
           />
         ) : null}
       </div>
-    </StyledTableHeaderCell>
+    </div>
   );
 };
 

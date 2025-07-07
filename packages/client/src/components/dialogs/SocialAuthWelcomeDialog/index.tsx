@@ -71,6 +71,11 @@ const SocialAuthWelcomeDialogComponent = ({
     navigate("/profile");
   };
 
+  const onChangeDomainClick = (): void => {
+    onClose();
+    navigate("/portal-settings/customization/general/dns-settings");
+  };
+
   if (!visible) return null;
 
   return (
@@ -118,6 +123,16 @@ const SocialAuthWelcomeDialogComponent = ({
                     ? `${baseDomain}`
                     : `${tenantAlias}.${baseDomain}`}
                 </Text>
+                <Link
+                  isHovered
+                  className="change-domain_link"
+                  type={LinkType.page}
+                  fontWeight={600}
+                  fontSize="13px"
+                  onClick={onChangeDomainClick}
+                >
+                  {t("Common:ChangeButton")}
+                </Link>
               </div>
             </StyledInfoRow>
 

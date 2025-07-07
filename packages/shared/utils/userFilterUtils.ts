@@ -24,28 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useCallback } from "react";
-import { useParams } from "react-router";
+import { FILTER_VERSION } from "./filterConstants";
 
-const usePublic = ({
-  location,
-  fetchFiles,
-  fetchPublicRoom,
-  fetchPreviewMediaFile,
-}) => {
-  const { id } = useParams();
+// Define a more specific type for filter objects to avoid circular dependency
+interface FilterObject {
+  [key: string]:
+    | string
+    | number
+    | boolean
+    | null
+    | undefined
+    | string[]
+    | FilterObject
+    | (() => void);
+}
 
-  const handleFetchPublicRoom = useCallback(() => {
-    fetchPublicRoom(fetchFiles);
-  }, [fetchPublicRoom, fetchFiles]);
+export const cleanUpFilterObj = (filter: FilterObject) => {
+  const filterObject = Object.entries(filter).reduce(
+    (result, [key, value]) => {
+      if (typeof value === "function" || value === null || value === false) {
+        return result;
+      }
+      result[key] = value;
+      return result;
+    },
+    {} as Record<
+      string,
+      string | number | boolean | string[] | FilterObject | undefined
+    >,
+  );
 
-  useEffect(() => {
-    const isMediaFile = fetchPreviewMediaFile(id, handleFetchPublicRoom);
-
-    if (isMediaFile) return;
-
-    handleFetchPublicRoom();
-  }, [id, location.search, fetchPreviewMediaFile, handleFetchPublicRoom]);
+  return JSON.stringify(filterObject);
 };
 
-export default usePublic;
+export const getUserFilter = (storageKey: string) => {
+  const storageValue = localStorage.getItem(
+    `${storageKey}&ver=${FILTER_VERSION}`,
+  );
+  const filterValue = storageValue ? JSON.parse(storageValue) : {};
+
+  return filterValue;
+};
+
+export const setUserFilter = (storageKey: string, filterObj: FilterObject) => {
+  const filterValue = cleanUpFilterObj(filterObj);
+
+  localStorage.setItem(`${storageKey}&ver=${FILTER_VERSION}`, filterValue);
+};
+
+export const removeUserFilter = (storageKey: string) => {
+  localStorage.removeItem(`${storageKey}&ver=${FILTER_VERSION}`);
+};

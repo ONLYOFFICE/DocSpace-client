@@ -24,28 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useCallback } from "react";
-import { useParams } from "react-router";
+export const FILTER_VERSION = 1;
 
-const usePublic = ({
-  location,
-  fetchFiles,
-  fetchPublicRoom,
-  fetchPreviewMediaFile,
-}) => {
-  const { id } = useParams();
+// Document filters
+export const FILTER_DOCUMENTS = "UserFilter";
+export const FILTER_RECENT = "UserFilterRecent";
+export const FILTER_TRASH = "UserFilterTrash";
 
-  const handleFetchPublicRoom = useCallback(() => {
-    fetchPublicRoom(fetchFiles);
-  }, [fetchPublicRoom, fetchFiles]);
+// Room filters
+export const FILTER_SHARED_ROOM = "UserRoomsSharedFilter";
+export const FILTER_ARCHIVE_ROOM = "UserRoomsArchivedFilter";
+export const FILTER_TEMPLATES_ROOM = "UserRoomsTemplatesFilter";
 
-  useEffect(() => {
-    const isMediaFile = fetchPreviewMediaFile(id, handleFetchPublicRoom);
+// Room document filters
+export const FILTER_ROOM_DOCUMENTS = "UserFilterSharedRoom";
+export const FILTER_ARCHIVE_DOCUMENTS = "UserFilterArchiveRoom";
 
-    if (isMediaFile) return;
-
-    handleFetchPublicRoom();
-  }, [id, location.search, fetchPreviewMediaFile, handleFetchPublicRoom]);
-};
-
-export default usePublic;
+// People filters
+export const FILTER_PEOPLE = "PeopleFilter";
+export const FILTER_GUESTS = "GuestsFilter";
+export const FILTER_GROUPS = "GroupsFilter";
+export const FILTER_INSIDE_GROUPS = "InsideGroupFilter";

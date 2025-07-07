@@ -82,6 +82,11 @@ import {
   isLockedSharedRoom,
   isSystemFolder,
 } from "@docspace/shared/utils";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_ARCHIVE_DOCUMENTS,
+  FILTER_ROOM_DOCUMENTS,
+} from "@docspace/shared/utils/filterConstants";
 import {
   getCategoryType,
   getCategoryTypeByFolderType,
@@ -1657,19 +1662,16 @@ class FilesActionStore {
     if (shareKey) filter.key = shareKey;
 
     if (isRoom || isTemplate) {
-      const key =
-        categoryType === CategoryType.Archive
-          ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
-          : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+      if (this.userStore.user?.id) {
+        const key =
+          categoryType === CategoryType.Archive
+            ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
+            : `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`;
 
-      const filterStorageSharedRoom =
-        this.userStore.user?.id && localStorage.getItem(key);
+        const filterSharedRoomObj = getUserFilter(key);
 
-      if (filterStorageSharedRoom) {
-        const splitFilter = filterStorageSharedRoom.split(",");
-
-        filter.sortBy = splitFilter[0];
-        filter.sortOrder = splitFilter[1];
+        filter.sortBy = filterSharedRoomObj.sortBy;
+        filter.sortOrder = filterSharedRoomObj.sortOrder;
       }
     }
 

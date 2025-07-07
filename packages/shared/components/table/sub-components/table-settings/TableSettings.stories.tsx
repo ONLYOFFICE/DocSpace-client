@@ -24,11 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { TableContainer } from "./table-container";
-export { TableBody } from "./table-body";
-export { TableRow } from "./table-row";
-export { TableHeader } from "./table-header";
-export { TableGroupMenu } from "./table-group-menu";
-export { TableCell } from "./sub-components/table-cell";
+import type { Meta, StoryObj } from "@storybook/react";
 
-export type { TTableColumn, TGroupMenuItem } from "./Table.types";
+import { SortByFieldName } from "../../../../enums";
+
+import { TableSettings } from "./TableSettings";
+
+const meta = {
+  title: "Components/Table/TableSettings",
+  component: TableSettings,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "TableSettings component for managing column visibility in tables",
+      },
+    },
+  },
+} satisfies Meta<typeof TableSettings>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    columns: [
+      {
+        key: "name",
+        title: "Name",
+        enable: true,
+        sortBy: SortByFieldName.Name,
+        onChange: () => {},
+      },
+      {
+        key: "type",
+        title: "Type",
+        enable: true,
+        sortBy: SortByFieldName.Type,
+        onChange: () => {},
+      },
+      {
+        key: "modified",
+        title: "Modified",
+        enable: false,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: () => {},
+      },
+      {
+        key: "owner",
+        title: "Owner",
+        enable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: () => {},
+      },
+    ],
+    disableSettings: false,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    disableSettings: true,
+  },
+};

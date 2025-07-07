@@ -25,18 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
+import classNames from "classnames";
 
-import { ContextMenu, ContextMenuRefType } from "../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "../context-menu-button";
+} from "../../context-menu-button";
+import { hasOwnProperty } from "../../../utils/object";
 
-import { StyledTableRow } from "./Table.styled";
-import { TableRowProps } from "./Table.types";
-
-import { TableCell } from "./sub-components/TableCell";
-import { hasOwnProperty } from "../../utils/object";
+import { TableCell } from "../sub-components/table-cell";
+import { TableRowProps } from "../Table.types";
+import styles from "./TableRow.module.scss";
 
 const TableRow = (props: TableRowProps) => {
   const {
@@ -52,7 +52,13 @@ const TableRow = (props: TableRowProps) => {
     badgeUrl,
     isIndexEditingMode,
     forwardedRef,
-    ...rest
+    checked,
+    isActive,
+    dragging,
+    hideColumns,
+    onClick,
+    onDoubleClick,
+    contextMenuCellStyle,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -76,22 +82,40 @@ const TableRow = (props: TableRowProps) => {
     return contextOptions || [];
   };
 
+  const tableRowClasses = classNames(
+    styles.tableRow,
+    className,
+    "table-container_row",
+    {
+      [styles.isIndexEditingMode]: isIndexEditingMode,
+      [styles.isActive]: isActive,
+      [styles.checked]: checked,
+      [styles.dragging]: dragging,
+      [styles.hideColumns]: hideColumns,
+    },
+  );
+
   return (
-    <StyledTableRow
+    <div
       onContextMenu={onContextMenu}
-      isIndexEditingMode={isIndexEditingMode}
-      className={`${className} table-container_row`}
+      className={tableRowClasses}
       ref={forwardedRef}
-      {...rest}
+      style={style}
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
+      data-testid="table-row"
     >
       {children}
       {isIndexEditingMode ? null : (
         <div className="context-menu-container">
           <TableCell
             {...selectionProp}
-            style={style}
             forwardedRef={row}
-            className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
+            className={classNames(
+              selectionProp?.className,
+              "table-container_row-context-menu-wrapper",
+            )}
+            style={contextMenuCellStyle}
           >
             <>
               <ContextMenu
@@ -120,7 +144,7 @@ const TableRow = (props: TableRowProps) => {
           </TableCell>
         </div>
       )}
-    </StyledTableRow>
+    </div>
   );
 };
 

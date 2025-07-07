@@ -2543,3 +2543,10 @@
 .dark {
   --about-logo-color: #{$white};
 }
+
+.light {
+  --icon-button-color: #{$gray};
+}
+.dark {
+  --icon-button-color: #{$gray-dark};
+}

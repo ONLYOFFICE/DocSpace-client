@@ -265,17 +265,21 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
     let missing = wsDepsItem.deps.filter((dep) => {
       let success =
         currentWorkspaceCodeImports.uniqueImports.has(dep.name) ||
-        currentWorkspaceCodeImports.uniqueImports.values().some((s) => {
-          return s.startsWith(`${dep.name}/`);
-        });
+        Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
+          (s) => {
+            return s.startsWith(`${dep.name}/`);
+          }
+        );
 
       if (!success && dep.name.startsWith("@types/")) {
         const name = dep.name.substring("@types/".length);
         success =
           currentWorkspaceCodeImports.uniqueImports.has(name) ||
-          currentWorkspaceCodeImports.uniqueImports.values().some((s) => {
-            return s.startsWith(`${name}/`);
-          });
+          Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
+            (s) => {
+              return s.startsWith(`${name}/`);
+            }
+          );
       }
 
       if (success) {

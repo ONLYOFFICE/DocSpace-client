@@ -65,6 +65,9 @@ export type RadioButtonProps = {
 
   /** Additional CSS class for the input element */
   classNameInput?: string;
+
+  /** Test ID for the radio button component */
+  testId?: string;
 } & PickedTextProps &
   PickedInputProps &
   PickedLabelProps;

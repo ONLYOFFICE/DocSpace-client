@@ -296,7 +296,7 @@
 
   --view-selector-items-count: unset;
 
-  --text-font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", sans-serif, Arial;
 
   --text-input-transition: all 0.2s ease 0s;
   --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
@@ -1471,7 +1471,7 @@
 
 .light {
   --text-color: #{$black};
-  --text-font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", sans-serif, Arial;
 }
 
 .light {

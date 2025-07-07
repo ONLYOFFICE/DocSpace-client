@@ -180,7 +180,7 @@ class PublicRoomStore {
     this.publicRoomKey = key;
   };
 
-  setExternalLink = (link) => {
+  setExternalLink = (link, searchParams, setSearchParams, isCustomRoom) => {
     const linkIndex = this.externalLinks.findIndex(
       (l) => l.sharedTo.id === link.sharedTo.id,
     );
@@ -191,6 +191,10 @@ class PublicRoomStore {
       this.externalLinks = externalLinks;
     } else {
       externalLinks[linkIndex] = link;
+    }
+
+    if (isCustomRoom && searchParams && setSearchParams) {
+      this.updateUrlKeyForCustomRoom(searchParams, setSearchParams);
     }
   };
 
@@ -299,6 +303,29 @@ class PublicRoomStore {
     if (isAuth) {
       localStorage.removeItem(PUBLIC_STORAGE_KEY);
       window.location.reload();
+    }
+  };
+
+  updateUrlKeyForCustomRoom = (searchParams, setSearchParams) => {
+    const primaryLink = this.primaryLink;
+
+    if (primaryLink) {
+      this.setPublicRoomKey(primaryLink.sharedTo.requestToken);
+      setSearchParams((prev) => {
+        prev.set("key", primaryLink.sharedTo.requestToken);
+        return prev;
+      });
+    } else if (this.roomLinks.length > 0) {
+      const firstAvailableLink = this.roomLinks[0];
+      this.setPublicRoomKey(firstAvailableLink.sharedTo.requestToken);
+      setSearchParams((prev) => {
+        prev.set("key", firstAvailableLink.sharedTo.requestToken);
+        return prev;
+      });
+    } else {
+      this.setPublicRoomKey(null);
+      searchParams.delete("key");
+      setSearchParams(searchParams);
     }
   };
 

@@ -321,6 +321,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
               isPaymentBlockedByBalance={isPaymentBlockedByBalance}
               totalPrice={totalPrice}
               newStorageSizeOnUpgrade={newStorageSizeOnUpgrade}
+              isUpgradeStoragePlan={isUpgradeStoragePlan}
             />
 
             {!isPaymentBlocked && (amount || hasStorageSubscription) ? (

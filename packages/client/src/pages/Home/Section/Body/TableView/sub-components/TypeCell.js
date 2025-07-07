@@ -51,6 +51,8 @@ const TypeCell = ({ t, item, sideColor }) => {
         return t("Common:Presentation");
       case FileType.Document:
         return t("Common:Document");
+      case FileType.Diagram:
+        return t("Common:Diagram");
       case FileType.OForm:
       case FileType.OFormTemplate:
       case FileType.PDF: {

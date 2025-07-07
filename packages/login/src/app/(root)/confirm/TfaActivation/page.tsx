@@ -31,6 +31,7 @@ import {
   getUserFromConfirm,
 } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import { StyledForm } from "./page.styled";
 import TfaActivationForm from "./page.client";
 
@@ -39,6 +40,8 @@ type TfaActivationProps = {
 };
 
 async function Page(props: TfaActivationProps) {
+  logger.info("TfaActivation page");
+
   const { searchParams: sp } = props;
   const searchParams = await sp;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));

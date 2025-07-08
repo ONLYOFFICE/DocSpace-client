@@ -1459,11 +1459,14 @@
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
 
   --files-section-table-view-exst-color: #{$gray};
+  --files-section-table-view-row-border-color: #{$gray-light-mid};
+  --files-section-table-view-row-index-update: #{$light-active};
+  --files-section-table-view-row-index-active: #{$light-blue-action};
+
+  --files-section-row-view-checked-background: #{$light-gray-hover};
 
   --files-badges-bg-color: #{$white};
-
   --files-badges-link-color: #{$light-gray-dark};
-
   --files-badges-border: 1px solid #{$white};
 }
 
@@ -1471,11 +1474,14 @@
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
 
   --files-section-table-view-exst-color: #{$gray};
+  --files-section-table-view-row-border-color: #{$gray-dark-strong};
+  --files-section-table-view-row-index-update: #{$dark-active};
+  --files-section-table-view-row-index-active: #{$dark-grey-action};
+
+  --files-section-row-view-checked-background: #{$light-dark-gray-hover};
 
   --files-badges-bg-color: #{$black};
-
   --files-badges-link-color: #{$white};
-
   --files-badges-border: 1px solid #{$black};
 }
 

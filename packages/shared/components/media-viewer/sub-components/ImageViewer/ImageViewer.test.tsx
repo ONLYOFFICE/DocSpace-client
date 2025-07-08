@@ -33,7 +33,6 @@ import { getCustomToolbar } from "../../MediaViewer.helpers";
 import ImageViewerProps from "./ImageViewer.props";
 
 const file: TFile = {
-  shortWebUrl: "",
   isFile: true,
   access: 0,
   canShare: true,

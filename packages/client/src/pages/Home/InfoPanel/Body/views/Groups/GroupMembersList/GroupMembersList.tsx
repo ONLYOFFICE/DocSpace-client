@@ -94,7 +94,7 @@ export const GroupMembersList = ({
     return (
       <div key={key} style={style}>
         {item ? (
-          <GroupMember groupMember={item} isManager={false} />
+          <GroupMember groupMember={item} />
         ) : (
           <RowLoader
             className="group-member-row-loader"

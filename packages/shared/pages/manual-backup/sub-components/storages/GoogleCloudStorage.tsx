@@ -26,17 +26,20 @@
 
 import React from "react";
 
-import { Button, ButtonSize } from "../../../../components/button";
-import { BackupStorageLocalKey, ThirdPartyStorages } from "../../../../enums";
-import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
-import { useDidMount } from "../../../../hooks/useDidMount";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  BackupStorageLocalKey,
+  ThirdPartyStorages,
+} from "@docspace/shared/enums";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import {
   GoogleCloudSettings,
   formNames,
-} from "../../../../components/google-cloud-settings";
+} from "@docspace/shared/components/google-cloud-settings";
 
-import type { SelectedStorageType, TTranslation } from "../../../../types";
+import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
 
 interface GoogleCloudStorageProps {
   t: TTranslation;

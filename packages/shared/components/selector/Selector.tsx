@@ -28,7 +28,7 @@
 
 import React from "react";
 
-import { classNames } from "../../utils";
+import { classNames } from "@docspace/shared/utils";
 
 import { ButtonKeys } from "../../enums";
 
@@ -493,7 +493,6 @@ const Selector = ({
         onSelectBreadCrumb,
         breadCrumbsLoader,
         isBreadCrumbsLoading,
-        bodyIsLoading: isLoading,
       }
     : {};
 

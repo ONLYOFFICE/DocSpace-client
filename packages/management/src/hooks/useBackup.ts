@@ -48,7 +48,7 @@ import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 import type { SettingsThirdPartyType } from "@docspace/shared/api/files/types";
 import type { TError } from "@docspace/shared/utils/axiosClient";
 
-import type { BackupSelectedStateType, ErrorResponse } from "@/types";
+import type { ErrorResponse } from "@/types";
 
 import { useStores } from "./useStores";
 import useAppState from "./useAppState";
@@ -134,31 +134,26 @@ export const useBackup = ({
 
   const [temporaryLink, setTemporaryLink] = useState<string | null>(null);
 
-  const setErrorInformation = useCallback(
-    (err: unknown, trans: TTranslation) => {
-      if (typeof err === "string") return setErrorInformationState(err);
+  const setErrorInformation = useCallback((err: unknown, t: TTranslation) => {
+    if (typeof err === "string") return setErrorInformationState(err);
 
-      if (axios.isAxiosError(err)) {
-        if ((err as AxiosError<ErrorResponse>).response?.status === 502)
-          return setErrorInformationState(trans("Common:UnexpectedError"));
+    if (axios.isAxiosError(err)) {
+      if (err.response?.status === 502)
+        return setErrorInformationState(t("Common:UnexpectedError"));
 
-        const message =
-          (err as AxiosError<ErrorResponse>).response?.data?.error?.message ||
-          (err as { message: string }).message ||
-          "";
+      const message =
+        (err as AxiosError<ErrorResponse>).response?.data?.error?.message ||
+        err.message ||
+        "";
 
-        return setErrorInformationState(
-          message || trans("Common:UnexpectedError"),
-        );
-      }
+      return setErrorInformationState(message || t("Common:UnexpectedError"));
+    }
 
-      return setErrorInformationState(trans("Common:UnexpectedError"));
-    },
-    [],
-  );
+    return setErrorInformationState(t("Common:UnexpectedError"));
+  }, []);
 
   const setterSelectedEnableSchedule = useCallback(() => {
-    setSelected((state: BackupSelectedStateType) => ({
+    setSelected((state) => ({
       ...state,
       enableSchedule: !selected.enableSchedule,
     }));
@@ -185,7 +180,7 @@ export const useBackup = ({
     let firstError = false;
 
     requiredFormSettings.forEach((key) => {
-      const elem = (selected.formSettings as { [key: string]: string })[key];
+      const elem = selected.formSettings[key];
 
       errors[key] = !elem.trim();
 
@@ -203,7 +198,7 @@ export const useBackup = ({
     if (!requiredFormSettings.length) return false;
 
     return !requiredFormSettings.some((key) => {
-      const value = (selected.formSettings as { [key: string]: string })[key];
+      const value = selected.formSettings[key];
 
       return !value || !value.trim();
     });
@@ -232,7 +227,7 @@ export const useBackup = ({
           value: arraySettings[i][1],
         };
 
-        storageParams.push(tmpObj as Option);
+        storageParams.push(tmpObj);
       }
     }
 
@@ -295,8 +290,8 @@ export const useBackup = ({
   };
 
   const setThirdPartyAccountsInfo = useCallback(
-    (trans: TTranslation) => {
-      return backupStore.setThirdPartyAccountsInfo(trans, isAdmin);
+    (t: TTranslation) => {
+      return backupStore.setThirdPartyAccountsInfo(t, isAdmin);
     },
     [backupStore, isAdmin],
   );

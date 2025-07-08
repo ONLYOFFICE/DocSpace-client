@@ -48,9 +48,9 @@ const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <span>
-          {t("Common:DeleteFile")}
-          {t("Common:FilePermanentlyDeleted")}
-          {t("Common:WantToContinue")}
+          <>{t("Common:DeleteFile")} </>
+          <>{t("Common:FilePermanentlyDeleted")} </>
+          <>{t("Common:WantToContinue")}</>
         </span>
       </ModalDialog.Body>
       <ModalDialog.Footer>

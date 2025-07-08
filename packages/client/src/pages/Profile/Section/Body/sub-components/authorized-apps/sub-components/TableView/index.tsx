@@ -64,10 +64,7 @@ const TableView = ({
   );
 
   return (
-    <TableWrapper
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
-    >
+    <TableWrapper forwardedRef={tableRef} useReactWindow>
       <Header
         sectionWidth={sectionWidth}
         tableRef={tableRef.current}

@@ -384,7 +384,7 @@ const NewFilesBadge = ({
   return (
     <>
       <Badge
-        ref={badgeRef as React.RefObject<HTMLDivElement>}
+        ref={badgeRef}
         fontSize="11px"
         fontWeight={600}
         className={`new-items${className ? ` ${className}` : ""}`}

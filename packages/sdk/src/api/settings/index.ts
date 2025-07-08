@@ -41,139 +41,91 @@ export async function getSettings(
 ): Promise<TSettings | string | undefined> {
   logger.debug(`Start GET /settings?withPassword=${withPassword}`);
 
-  try {
-    const [req] = await createRequest(
-      [`/settings?withPassword=${withPassword}`],
-      [["", ""]],
-      "GET",
-    );
+  const [req] = await createRequest(
+    [`/settings?withPassword=${withPassword}`],
+    [["", ""]],
+    "GET",
+  );
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
-    if (res.status === 403) {
-      logger.error(
-        `GET /settings?withPassword=${withPassword} failed: ${res.status}`,
-      );
-      return `access-restricted`;
-    }
+  if (res.status === 403) return `access-restricted`;
 
-    if (res.status === 404) {
-      logger.error(
-        `GET /settings?withPassword=${withPassword} failed: ${res.status}`,
-      );
-      return "portal-not-found";
-    }
+  if (res.status === 404) return "portal-not-found";
 
-    if (!res.ok) {
-      logger.error(
-        `GET /settings?withPassword=${withPassword} failed: ${res.status}`,
-      );
-      return;
-    }
+  if (!res.ok) return;
 
-    const settings = await res.json();
+  const settings = await res.json();
 
-    return settings.response;
-  } catch (error) {
-    logger.error(`Error in getSettings: ${error}`);
-  }
+  return settings.response;
 }
 
 export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
   logger.debug("Start GET /settings/colortheme");
 
-  try {
-    const [req] = await createRequest(
-      [`/settings/colortheme`],
-      [["", ""]],
-      "GET",
-    );
+  const [req] = await createRequest(
+    [`/settings/colortheme`],
+    [["", ""]],
+    "GET",
+  );
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
-    if (!res.ok) {
-      logger.error(`GET /settings/colortheme failed: ${res.status}`);
-      return;
-    }
+  if (!res.ok) return;
 
-    const colorTheme = await res.json();
+  const colorTheme = await res.json();
 
-    return colorTheme.response;
-  } catch (error) {
-    logger.error(`Error in getColorTheme: ${error}`);
-  }
+  return colorTheme.response;
 }
 
 export async function getBuildInfo() {
   logger.debug("Start GET /settings/version/build");
 
-  try {
-    const [req] = await createRequest(
-      [`/settings/version/build`],
-      [["", ""]],
-      "GET",
-    );
+  const [req] = await createRequest(
+    [`/settings/version/build`],
+    [["", ""]],
+    "GET",
+  );
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
-    if (!res.ok) {
-      logger.error(`GET /settings/version/build failed: ${res.status}`);
-      return;
-    }
+  if (!res.ok) return;
 
-    const buildInfo = await res.json();
+  const buildInfo = await res.json();
 
-    return buildInfo as TVersionBuild;
-  } catch (error) {
-    logger.error(`Error in getBuildInfo: ${error}`);
-  }
+  return buildInfo as TVersionBuild;
 }
 
 export async function getCapabilities() {
   logger.debug("Start GET /capabilities");
 
-  try {
-    const [req] = await createRequest([`/capabilities`], [["", ""]], "GET");
+  const [req] = await createRequest([`/capabilities`], [["", ""]], "GET");
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
-    if (!res.ok) {
-      logger.error(`GET /capabilities failed: ${res.status}`);
-      return;
-    }
+  if (!res.ok) return;
 
-    const capabilities = await res.json();
+  const capabilities = await res.json();
 
-    return capabilities.response as TCapabilities;
-  } catch (error) {
-    logger.error(`Error in getCapabilities: ${error}`);
-  }
+  return capabilities.response as TCapabilities;
 }
 
 export async function getPortalCultures(): Promise<TPortalCultures> {
   logger.debug("Start GET /settings/cultures");
 
-  try {
-    const [getPortalCulturesRes] = await createRequest(
-      [`/settings/cultures`],
-      [["", ""]],
-      "GET",
-    );
+  const [getPortalCultures] = await createRequest(
+    [`/settings/cultures`],
+    [["", ""]],
+    "GET",
+  );
 
-    const res = await fetch(getPortalCulturesRes, {
-      next: { revalidate: 300 },
-    });
+  const res = await fetch(getPortalCultures, { next: { revalidate: 300 } });
 
-    if (!res.ok) {
-      logger.error(`GET /settings/cultures failed: ${res.status}`);
-      throw new Error("Failed to get portal cultures");
-    }
-
-    const cultures = await res.json();
-
-    return cultures.response;
-  } catch (error) {
-    logger.error(`Error in getPortalCultures: ${error}`);
-    throw error;
+  if (!res.ok) {
+    throw new Error("Failed to get portal cultures");
   }
+
+  const cultures = await res.json();
+
+  return cultures.response;
 }

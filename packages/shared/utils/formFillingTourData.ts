@@ -28,9 +28,9 @@ import moment from "moment";
 
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg?url";
 
-import { getIconPathByFolderType } from "./common";
-import { iconSize32 } from "./image-helpers";
-import { FolderType } from "../enums";
+import { getIconPathByFolderType } from "@docspace/shared/utils/common";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
+import { FolderType } from "@docspace/shared/enums";
 
 const fakeCreatedBy = {
   id: "id",

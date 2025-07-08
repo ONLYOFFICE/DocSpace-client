@@ -27,14 +27,17 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "../../components/toast";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { Button, ButtonSize } from "../../components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 // import { inject, observer } from "mobx-react";
 
-import FilesFilter from "../../api/files/filter";
-import { isNullOrUndefined } from "../../utils/typeGuards";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
 import type { DeleteThirdPartyDialogProps } from "./DeleteThirdPartyDialog.types";
 

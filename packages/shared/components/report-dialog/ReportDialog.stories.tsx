@@ -92,7 +92,6 @@ const mockUser = {
   avatarSmall: "",
   profileUrl: "",
   hasAvatar: false,
-  isAnonim: false,
 };
 
 const mockError = new Error("Test error message");

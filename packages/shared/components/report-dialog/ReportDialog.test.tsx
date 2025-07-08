@@ -92,7 +92,6 @@ jest.mock("../../utils/firebase", () => {
 });
 
 const mockUser: TUser = {
-  isAnonim: false,
   id: "user-1",
   email: "user@example.com",
   displayName: "Test User",

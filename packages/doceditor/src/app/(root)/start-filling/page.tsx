@@ -40,8 +40,7 @@ interface PageProps {
 }
 
 async function Page(props: PageProps) {
-  const { searchParams: sp } = props;
-  const searchParams = await sp;
+  const searchParams = await props.searchParams;
   const { formId, roomId, share } = searchParams;
 
   logger.info("Open start filling form page");

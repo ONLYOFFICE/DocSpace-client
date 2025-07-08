@@ -71,7 +71,7 @@ export const Section = ({
     <StyledSection>
       <StyledSectionHeader>
         <StyledHeading>
-          {isSubPage ? (
+          {isSubPage && (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
               size={17}
@@ -79,12 +79,12 @@ export const Section = ({
               onClick={onBack}
               className="arrow-button"
             />
-          ) : null}
-          <Heading className="headline" type="content" truncate>
+          )}
+          <Heading className="headline" type="content" truncate={true}>
             {key}
           </Heading>
         </StyledHeading>
-        {showBar ? <Bar title={barTitle} /> : null}
+        {showBar && <Bar title={barTitle} />}
       </StyledSectionHeader>
       <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
         {children}

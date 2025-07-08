@@ -232,7 +232,7 @@ const LinkRow = ({
                 size={16}
                 iconName={CopyIcon}
                 onClick={() => onCopyLink(link)}
-                title={t("Common:CopySharedLink")}
+                title={t("Common:CreateAndCopy")}
                 isDisabled={isExpiredLink || isLoaded}
               />
             ) : null}

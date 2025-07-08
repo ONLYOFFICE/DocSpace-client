@@ -33,12 +33,15 @@ import type {
   StorageRegionsType,
   ThirdPartyAccountType,
   TTranslation,
-} from "../../types";
-import type { ButtonSize } from "../../components/button";
-import type { TenantStatus } from "../../enums";
-import type { FilesSelectorSettings } from "../../components/files-selector-input";
-import type { TBreadCrumb } from "../../components/selector/Selector.types";
-import type { TThirdParties, TUploadBackup } from "../../api/files/types";
+} from "@docspace/shared/types";
+import type { ButtonSize } from "@docspace/shared/components/button";
+import type { TenantStatus } from "@docspace/shared/enums";
+import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type {
+  TThirdParties,
+  TUploadBackup,
+} from "@docspace/shared/api/files/types";
 
 export type StyledBackupListProps = {
   isChecked?: boolean;

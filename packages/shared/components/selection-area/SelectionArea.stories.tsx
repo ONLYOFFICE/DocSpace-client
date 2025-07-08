@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import { SelectionArea } from "./SelectionArea";
 import { SelectionAreaProps } from "./SelectionArea.types";
 import styles from "./SelectionArea.stories.module.scss";
@@ -25,7 +25,7 @@ export default {
   ],
 } as Meta;
 
-const Template: StoryFn<SelectionAreaProps> = (args) => {
+const Template: Story<SelectionAreaProps> = (args) => {
   const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
 
   const handleMove = ({

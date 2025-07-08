@@ -35,7 +35,6 @@ import {
 
 export const files: TDownloadedFile[] = [
   {
-    shortWebUrl: "",
     access: 0,
     comment: "Uploaded",
     contentLength: "56.83 KB",
@@ -120,7 +119,6 @@ export const files: TDownloadedFile[] = [
     fileEntryType: 2,
   },
   {
-    shortWebUrl: "",
     access: 0,
     comment: "The file is unlocked",
     contentLength: "136 KB",
@@ -205,8 +203,6 @@ export const files: TDownloadedFile[] = [
     fileEntryType: 2,
   },
   {
-    shortWebUrl: "",
-
     access: 0,
     comment: "Uploaded",
     contentLength: "56.83 KB",
@@ -291,8 +287,6 @@ export const files: TDownloadedFile[] = [
     fileEntryType: 2,
   },
   {
-    shortWebUrl: "",
-
     access: 0,
     comment: "Uploaded",
     contentLength: "140.79 KB",
@@ -378,8 +372,6 @@ export const files: TDownloadedFile[] = [
   },
 
   {
-    shortWebUrl: "",
-
     access: 0,
     comment: "Uploaded",
     contentLength: "1.08 MB",
@@ -469,8 +461,6 @@ export const files: TDownloadedFile[] = [
     fileEntryType: 2,
   },
   {
-    shortWebUrl: "",
-
     access: 0,
     comment: "Uploaded",
     contentLength: "1.08 MB",
@@ -606,7 +596,6 @@ export const sortedFiles: TSortedFiles = {
   documents: files.filter((f) => isFile(f) && f.fileExst === ".docx"),
   spreadsheets: files.filter((f) => isFile(f) && f.fileExst === ".xlsx"),
   presentations: files.filter((f) => isFile(f) && f.fileExst === ".pptx"),
-  diagrams: [],
   masterForms: [],
   pdfForms: [],
   other: [],

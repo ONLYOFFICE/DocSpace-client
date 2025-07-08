@@ -148,7 +148,6 @@ export const enum FilterType {
   FormRooms = 21,
   Pdf = 22,
   PDFForm = 23,
-  DiagramsOnly = 25,
 }
 
 /**
@@ -167,7 +166,6 @@ export const enum FileType {
   OFormTemplate = 8,
   OForm = 9,
   PDF = 10,
-  Diagram = 11,
 }
 
 /**
@@ -417,25 +415,6 @@ export const enum TariffState {
 export const enum PortalFeaturesLimitations {
   Limitless = -1,
   Unavailable = 0,
-}
-
-/**
- * Enum for payment method status.
- * @readonly
- */
-export const enum PaymentMethodStatus {
-  None = 0,
-  Set = 1,
-  Expired = 2,
-}
-
-/**
- * Enum for quota state.
- * @readonly
- */
-export const enum QuotaState {
-  Active = 0,
-  Overdue = 1,
 }
 
 /**

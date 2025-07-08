@@ -28,13 +28,12 @@ import { useLayoutEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import type { TFunction } from "i18next";
 import { getStepsData } from "./Stepper";
 
 import SelectFileLoader from "../sub-components/SelectFileLoader";
 import StepLayout from "../sub-components/StepLayout";
 
-import { InjectedWorkspaceProps, WorkspaceProps } from "../types";
+import { InjectedWorkspaceProps, WorkspaceProps, TFunciton } from "../types";
 
 const GoogleWorkspace = (props: WorkspaceProps) => {
   const {
@@ -49,7 +48,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
     logoText,
   } = props as InjectedWorkspaceProps;
 
-  const { t, ready }: { t: TFunction; ready: boolean } = useTranslation([
+  const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
     "Common",
     "SMTPSettings",
     "Settings",
@@ -80,7 +79,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
       step={step}
       totalSteps={StepsData.length}
       title={StepsData[step - 1].title}
-      description={StepsData[step - 1].description as string}
+      description={StepsData[step - 1].description}
       component={StepsData[step - 1].component}
       logoText={logoText}
     />

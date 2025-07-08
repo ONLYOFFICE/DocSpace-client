@@ -36,8 +36,15 @@ import {
 import { Link, LinkType } from "@docspace/shared/components/link";
 import styled from "styled-components";
 
+import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import { getChangeTypeKey } from "./getChangeTypeKey";
+
+interface TStore {
+  peopleStore: {
+    dialogStore: DialogStore;
+  };
+}
 
 const StyledBody = styled.div`
   .note-text {
@@ -68,9 +75,9 @@ type ChangeUserTypeDialogProps = {
   onClose: VoidFunction;
   onChangeUserType: VoidFunction;
 
-  setDataReassignmentDialogVisible?: (visible: boolean) => void;
-  setDialogData?: (data: any) => void;
-  dialogData?: TChangeUserTypeDialogData;
+  setDataReassignmentDialogVisible: (visible: boolean) => void;
+  setDialogData: (data: any) => void;
+  dialogData: TChangeUserTypeDialogData;
   isDowngradeType: boolean;
   isDowngradeToUser: boolean;
   isCurrentUserOwner?: boolean;
@@ -100,7 +107,7 @@ const ChangeUserTypeDialog = ({
     reassignUserData,
     cancelReassignment,
     needReassignData,
-  } = dialogData!;
+  } = dialogData;
 
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
 
@@ -120,7 +127,7 @@ const ChangeUserTypeDialog = ({
   );
 
   const onClickReassignData = (currentUserAsDefault?: boolean) => {
-    setDialogData?.({
+    setDialogData({
       user,
       getReassignmentProgress,
       reassignUserData,
@@ -130,7 +137,7 @@ const ChangeUserTypeDialog = ({
       noRoomFilesToMove: true,
     });
 
-    setDataReassignmentDialogVisible?.(true);
+    setDataReassignmentDialogVisible(true);
 
     onClose();
   };
@@ -281,13 +288,13 @@ export default inject(({ peopleStore, userStore }: TStore) => {
     setDataReassignmentDialogVisible,
     setDialogData,
     data: dialogData,
-  } = peopleStore.dialogStore!;
+  } = peopleStore.dialogStore;
   const { user } = userStore;
 
   return {
     setDataReassignmentDialogVisible,
     setDialogData,
     dialogData,
-    isCurrentUserOwner: user!.isOwner,
+    isCurrentUserOwner: user.isOwner,
   };
 })(observer(ChangeUserTypeDialog));

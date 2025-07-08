@@ -35,24 +35,19 @@ import { logger } from "@/../logger.mjs";
 export async function getSelf(): Promise<TUser | undefined> {
   logger.debug("Start GET /people/@self");
 
-  try {
-    const cookieStore = await cookies();
-    const authToken = cookieStore.get("asc_auth_key");
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("asc_auth_key");
 
-    if (!authToken) return;
+  if (!authToken) return;
 
-    const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
-    const res = await fetch(req, { next: { revalidate: 300 } });
+  const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
-    if (res.status === 401 || !res.ok) {
-      logger.error(`GET /people/@self failed: ${res.status}`);
-      return;
-    }
-
-    const self = await res.json();
-
-    return self.response;
-  } catch (error) {
-    logger.error(`Error in getSelf: ${error}`);
+  if (res.status === 401 || !res.ok) {
+    return;
   }
+
+  const self = await res.json();
+
+  return self.response;
 }

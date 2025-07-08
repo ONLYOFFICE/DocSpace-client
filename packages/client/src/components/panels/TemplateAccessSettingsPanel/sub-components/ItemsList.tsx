@@ -92,9 +92,7 @@ const ItemsList = ({
   const [offsetTop, setOffsetTop] = useState(0);
   const [isTotalListHeight, setIsTotalListHeight] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
-  const { height } = useResizeObserver({
-    ref: bodyRef as React.RefObject<HTMLDivElement>,
-  });
+  const { height } = useResizeObserver({ ref: bodyRef });
   const { interfaceDirection } = useTheme();
 
   const listItems = [...inviteItems].filter(

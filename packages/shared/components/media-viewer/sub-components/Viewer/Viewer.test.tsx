@@ -77,7 +77,6 @@ jest.mock("../../MediaViewer.helpers", () => ({
 
 describe("Viewer", () => {
   const mockFile: TFile = {
-    shortWebUrl: "",
     id: 1,
     access: 0,
     canShare: true,

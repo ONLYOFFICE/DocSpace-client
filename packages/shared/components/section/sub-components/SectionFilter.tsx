@@ -69,7 +69,6 @@ const SectionFilter = React.memo(
       <div
         className={classNames(styles.filter, "section-filter", className, {
           [styles.isFixed]: !isDesktop() ? isFixed : false,
-          [styles.withTabs]: props.withTabs,
         })}
         {...props}
       />

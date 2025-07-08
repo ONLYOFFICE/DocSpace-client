@@ -157,7 +157,7 @@ class ImportAccountsStore {
   }
 
   get quota() {
-    return parseQuota(this.currentQuotaStore!.quotaCharacteristics[1]);
+    return parseQuota(this.currentQuotaStore?.quotaCharacteristics[1]);
   }
 
   get totalUsedUsers() {

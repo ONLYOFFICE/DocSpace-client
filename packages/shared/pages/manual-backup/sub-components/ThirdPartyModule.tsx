@@ -27,21 +27,21 @@
 import { useTranslation } from "react-i18next";
 import React, { useRef, useEffect, useState } from "react";
 
-import { BackupStorageType, ProvidersType } from "../../../enums";
-import { isNullOrUndefined } from "../../../utils/typeGuards";
-import { Button, type ButtonSize } from "../../../components/button";
-import { getFromLocalStorage } from "../../../utils/getFromLocalStorage";
-import { DirectThirdPartyConnection } from "../../../components/direct-third-party-connection";
+import { BackupStorageType, ProvidersType } from "@docspace/shared/enums";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import { Button, type ButtonSize } from "@docspace/shared/components/button";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+import { DirectThirdPartyConnection } from "@docspace/shared/components/direct-third-party-connection";
 
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
   ThirdPartyAccountType,
   TTranslation,
-} from "../../../types";
-import type { TBreadCrumb } from "../../../components/selector/Selector.types";
-import type { FilesSelectorSettings } from "../../../components/files-selector-input";
-import type { TThirdParties } from "../../../api/files/types";
+} from "@docspace/shared/types";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
+import type { TThirdParties } from "@docspace/shared/api/files/types";
 
 interface ThirdPartyModuleProps {
   onMakeCopy: (

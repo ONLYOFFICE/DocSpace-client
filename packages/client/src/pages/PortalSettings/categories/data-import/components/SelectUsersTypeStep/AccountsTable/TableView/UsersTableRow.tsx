@@ -130,7 +130,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
   };
 
   return (
-    <StyledTableRow>
+    <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
       <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
         <Text className="username" truncate>

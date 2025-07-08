@@ -85,10 +85,12 @@ const StyledModal = styled(ModalDialog)`
 
 export const CreatePortalDialog = observer(
   ({
+    tenantAlias,
     baseDomain,
     domainValidator,
     user,
   }: {
+    tenantAlias: string;
     baseDomain: string;
     domainValidator: TDomainValidator;
     user: TUser;
@@ -118,10 +120,6 @@ export const CreatePortalDialog = observer(
       if (registerError) setRegisterError(null);
     };
 
-    const onClose = () => {
-      setCreatePortalDialogVisible(false);
-    };
-
     const onHandleClick = async () => {
       const firstName = user?.firstName;
       const lastName = user?.lastName;
@@ -136,6 +134,7 @@ export const CreatePortalDialog = observer(
       };
 
       const protocol = window?.location?.protocol;
+      const host = `${tenantAlias}.${baseDomain}`;
 
       const isValidPortalName = validatePortalName(
         name,
@@ -147,8 +146,8 @@ export const CreatePortalDialog = observer(
       if (isValidPortalName) {
         setIsLoading(true);
         await createNewPortal(data)
-          .then(async (d) => {
-            const { tenant } = d as TNewPortalResponse;
+          .then(async (data) => {
+            const { tenant } = data as TNewPortalResponse;
             if (visit) {
               const portalUrl = `${protocol}//${tenant?.domain}/`;
 
@@ -168,6 +167,10 @@ export const CreatePortalDialog = observer(
       }
     };
 
+    const onClose = () => {
+      setCreatePortalDialogVisible(false);
+    };
+
     return (
       <StyledModal
         isLarge
@@ -179,7 +182,7 @@ export const CreatePortalDialog = observer(
           {t("CreatingPortal", { productName: t("Common:ProductName") })}
         </ModalDialog.Header>
         <ModalDialog.Body>
-          <Text noSelect>
+          <Text noSelect={true}>
             {t("CreateSpaceDescription", {
               productName: t("Common:ProductName"),
             })}
@@ -219,7 +222,7 @@ export const CreatePortalDialog = observer(
             <Checkbox
               className="create-portal-checkbox"
               label={t("VisitSpace")}
-              onChange={() => setVisit((v) => !v)}
+              onChange={() => setVisit((visit) => !visit)}
               isChecked={visit}
             />
 
@@ -252,3 +255,4 @@ export const CreatePortalDialog = observer(
     );
   },
 );
+

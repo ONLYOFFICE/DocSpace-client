@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2025-06-30T12:20:31.098Z",
+  "updated_at": "2025-06-08T12:02:32.559Z",
   "comment": {
     "text": "The \"FileUnlocked\" translation key is used to display a success message when a file is unlocked. It appears in various UI elements, including buttons and tooltips, such as on a button that unlocks a file or in an info panel displaying file history. The text should indicate that the file has been successfully unlocked, providing feedback to users about the outcome of the action.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 98,
+      "line_number": 95,
       "context": "});\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
       "module": "/packages/client"
     },

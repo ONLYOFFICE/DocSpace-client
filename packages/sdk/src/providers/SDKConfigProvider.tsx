@@ -40,8 +40,8 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
           default:
             res = "Wrong method for this mode";
         }
-      } catch (err) {
-        res = err;
+      } catch (e) {
+        res = e;
       }
 
       frameCallbackData(res);

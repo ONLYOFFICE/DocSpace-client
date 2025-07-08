@@ -45,8 +45,7 @@ interface PageProps {
 }
 
 async function Page(props: PageProps) {
-  const { searchParams: sp } = props;
-  const searchParams = await sp;
+  const searchParams = await props.searchParams;
   const { share, fillingSessionId, roomId, is_file, formId, type, isSDK } =
     searchParams;
 

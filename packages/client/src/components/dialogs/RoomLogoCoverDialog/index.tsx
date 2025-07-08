@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css, useTheme } from "styled-components";
+import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
@@ -42,7 +42,7 @@ import {
 } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
-import { CoverDialogProps, ILogo } from "./RoomLogoCoverDialog.types";
+import { CoverDialogProps } from "./RoomLogoCoverDialog.types";
 
 const PADDING_HEIGHT = 84;
 const HEIGHT_WITHOUT_BODY = 158;
@@ -128,7 +128,6 @@ const RoomLogoCoverDialog = ({
   setEnabledHotkeys,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover"]);
-  const theme = useTheme();
 
   const defaultHeight = isDesktop() ? DESKTOP_HEIGHT : TABLET_HEIGHT;
 
@@ -213,10 +212,7 @@ const RoomLogoCoverDialog = ({
     getCovers();
   }, [getCovers]);
 
-  const onCloseRoomLogo = (
-    e?: React.MouseEvent<HTMLButtonElement>,
-    withSelection = true,
-  ) => {
+  const onCloseRoomLogo = (withSelection = true) => {
     if (openColorPicker) return;
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,
@@ -231,19 +227,19 @@ const RoomLogoCoverDialog = ({
       ? ""
       : roomCoverDialogProps.icon;
 
-    setCover(roomCoverDialogProps.color!, icon as string);
+    setCover(roomCoverDialogProps.color, icon);
 
     if (
       createRoomDialogVisible ||
       editRoomDialogPropsVisible ||
       templateEventVisible
     ) {
-      onCloseRoomLogo(undefined, false);
+      onCloseRoomLogo(false);
       return;
     }
 
     setRoomLogoCover();
-    onCloseRoomLogo(undefined);
+    onCloseRoomLogo();
   };
 
   React.useEffect(() => {
@@ -264,10 +260,10 @@ const RoomLogoCoverDialog = ({
   }, []);
 
   React.useEffect(() => {
-    setEnabledHotkeys?.(false);
+    setEnabledHotkeys(false);
 
     return () => {
-      setEnabledHotkeys?.(true);
+      setEnabledHotkeys(true);
     };
   }, [roomLogoCoverDialogVisible]);
 
@@ -293,11 +289,6 @@ const RoomLogoCoverDialog = ({
           setOpenColorPicker={setOpenColorPicker}
           generalScroll={!!scrollBodyHeight}
           isScrollLocked={openColorPicker}
-          setCover={setCover}
-          cover={roomCoverDialogProps.icon as ILogo}
-          currentColorScheme={theme.currentColorScheme!}
-          setRoomCoverDialogProps={setRoomCoverDialogProps}
-          roomCoverDialogProps={roomCoverDialogProps}
         />
       </ModalDialog.Body>
 

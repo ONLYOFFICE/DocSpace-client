@@ -44,7 +44,6 @@ import {
   FolderType,
   RoomsType,
   FileType,
-  RoomSearchArea,
 } from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
 import { TGetIcon } from "../utils/types";
@@ -82,6 +81,7 @@ export type UseSocketHelperProps = {
 
 export type UseRoomsHelperProps = TUseInputItemHelper & {
   searchValue?: string;
+  searchArea?: string;
   disableThirdParty?: boolean;
   isRoomsOnly: boolean;
   roomType?: RoomsType | RoomsType[];
@@ -108,7 +108,6 @@ export type UseRoomsHelperProps = TUseInputItemHelper & {
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
-  searchArea?: RoomSearchArea;
 };
 
 export type UseFilesHelpersProps = {

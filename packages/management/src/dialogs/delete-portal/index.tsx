@@ -29,6 +29,7 @@
 import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
+import { useTheme } from "styled-components";
 import { useRouter } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
@@ -160,3 +161,4 @@ export const DeletePortalDialog = observer(() => {
     </ModalDialog>
   );
 });
+

@@ -1365,14 +1365,3 @@ export async function setInvitationSettings(data: {
 
   return res;
 }
-
-export async function setAdManagement(hidden: boolean) {
-  const data = { hidden };
-  const res = await request({
-    method: "post",
-    url: "/settings/banner",
-    data,
-  });
-
-  return res;
-}

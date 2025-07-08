@@ -53,15 +53,14 @@ const RemovePortalForm = ({
 
   const [isRemoved, setIsRemoved] = useState(false);
 
-  const url = siteUrl || onlyofficeUrl;
+  const url = siteUrl ? siteUrl : onlyofficeUrl;
 
   const onDeleteClick = async () => {
     try {
       const res = await deletePortal(linkData.confirmHeader);
       setIsRemoved(true);
       setTimeout(
-        () =>
-          (window.location.href = res && typeof res === "string" ? res : url),
+        () => (location.href = res && typeof res === "string" ? res : url),
         10000,
       );
     } catch (error) {
@@ -84,43 +83,47 @@ const RemovePortalForm = ({
   };
 
   const onCancelClick = () => {
-    window.location.href = "/";
+    location.href = "/";
   };
 
-  return isRemoved ? (
-    <Text>
-      <Trans t={t} i18nKey="SuccessRemoved" ns="Confirm">
-        Your account has been successfully removed. In 10 seconds you will be
-        redirected to the
-        <Link isHovered href={url}>
-          site
-        </Link>
-      </Trans>
-    </Text>
-  ) : (
+  return (
     <>
-      <Text className="subtitle">
-        {t("PortalRemoveTitle", {
-          productName: t("Common:ProductName"),
-        })}
-      </Text>
-      <ButtonsWrapper>
-        <Button
-          primary
-          scale
-          size={ButtonSize.medium}
-          label={t("Common:Delete")}
-          tabIndex={1}
-          onClick={onDeleteClick}
-        />
-        <Button
-          scale
-          size={ButtonSize.medium}
-          label={t("Common:CancelButton")}
-          tabIndex={1}
-          onClick={onCancelClick}
-        />
-      </ButtonsWrapper>
+      {isRemoved ? (
+        <Text>
+          <Trans t={t} i18nKey="SuccessRemoved" ns="Confirm">
+            Your account has been successfully removed. In 10 seconds you will
+            be redirected to the
+            <Link isHovered href={url}>
+              site
+            </Link>
+          </Trans>
+        </Text>
+      ) : (
+        <>
+          <Text className="subtitle">
+            {t("PortalRemoveTitle", {
+              productName: t("Common:ProductName"),
+            })}
+          </Text>
+          <ButtonsWrapper>
+            <Button
+              primary
+              scale
+              size={ButtonSize.medium}
+              label={t("Common:Delete")}
+              tabIndex={1}
+              onClick={onDeleteClick}
+            />
+            <Button
+              scale
+              size={ButtonSize.medium}
+              label={t("Common:CancelButton")}
+              tabIndex={1}
+              onClick={onCancelClick}
+            />
+          </ButtonsWrapper>
+        </>
+      )}
     </>
   );
 };

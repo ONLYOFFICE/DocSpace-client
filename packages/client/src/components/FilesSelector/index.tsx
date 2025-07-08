@@ -54,7 +54,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
-import { getAcceptButtonLabel, getIsDisabled } from "./utils";
+import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
 
 let disabledItems: (string | number)[] = [];
 
@@ -336,19 +336,19 @@ const FilesSelectorWrapper = ({
     }
   };
 
-  // const headerLabel = getHeaderLabel(
-  //   t,
-  //   isEditorDialog,
-  //   isCopy,
-  //   isRestoreAll,
-  //   isMove,
-  //   isSelect,
-  //   filterParam,
-  //   isRestore,
-  //   isFormRoom,
-  //   isThirdParty,
-  //   isSelectFolder,
-  // );
+  const headerLabel = getHeaderLabel(
+    t,
+    isEditorDialog,
+    isCopy,
+    isRestoreAll,
+    isMove,
+    isSelect,
+    filterParam,
+    isRestore,
+    isFormRoom,
+    isThirdParty,
+    isSelectFolder,
+  );
 
   const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
@@ -421,6 +421,7 @@ const FilesSelectorWrapper = ({
       onSubmit={onAccept}
       getIsDisabled={getIsDisabledAction}
       withHeader={withHeader}
+      headerLabel={headerLabel}
       submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       withCancelButton={withCancelButton}
       isPanelVisible={isPanelVisible}

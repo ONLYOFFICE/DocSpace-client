@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import classNames from "classnames";
 
 import { Portal } from ".";
@@ -24,7 +24,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<PortalProps> = (args) => {
+const Template: Story<PortalProps> = (args) => {
   return (
     <div>
       <h3>Content outside portal</h3>
@@ -49,7 +49,7 @@ Default.parameters = {
   },
 };
 
-export const CustomContainer: StoryFn<PortalProps> = () => {
+export const CustomContainer: Story<PortalProps> = () => {
   const [container, setContainer] = React.useState<HTMLElement | null>(null);
 
   return (
@@ -81,7 +81,7 @@ CustomContainer.parameters = {
   },
 };
 
-export const MultiplePortals: StoryFn<PortalProps> = () => (
+export const MultiplePortals: Story<PortalProps> = () => (
   <div>
     <h3>Multiple portals example</h3>
     <Portal

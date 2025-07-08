@@ -34,6 +34,7 @@ import { RowContent } from "@docspace/shared/components/rows";
 
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { InputType } from "@docspace/shared/components/text-input";
 
 import { isMobile } from "@docspace/shared/utils";
 
@@ -205,6 +206,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               className="import-email-input"
               value={tempEmail}
               onChange={handleEmailChange}
+              type={InputType.email}
               onValidateInput={onValidateEmail}
               hasError={hasError}
               onBlur={checkEmailValidity}

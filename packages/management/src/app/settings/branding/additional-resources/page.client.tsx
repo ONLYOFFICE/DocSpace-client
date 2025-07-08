@@ -28,7 +28,7 @@
 
 import React, { useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import {
   setAdditionalResources,
@@ -56,6 +56,7 @@ export const AdditionalResourcesPage = ({
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
+  const router = useRouter();
   const pathname = usePathname();
   const [additionalRes, setAdditionalRes] = useState(additionalResourcesData);
   const [isLoading, startTransition] = useTransition();
@@ -70,7 +71,7 @@ export const AdditionalResourcesPage = ({
     redirectUrl: "/settings/branding",
     currentLocation: "additional-resources",
     deviceType: currentDeviceType,
-    pathname,
+    pathname: pathname,
   });
 
   const onSave = async (feedbackEnabled: boolean, helpEnabled: boolean) => {
@@ -116,3 +117,4 @@ export const AdditionalResourcesPage = ({
     />
   );
 };
+

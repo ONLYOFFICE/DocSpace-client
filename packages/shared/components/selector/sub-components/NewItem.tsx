@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import { classNames } from "../../../utils";
+import { classNames } from "@docspace/shared/utils";
 import { SelectorAddButton } from "../../selector-add-button";
 
 import NewItemDropDown from "./NewItemDropDown";

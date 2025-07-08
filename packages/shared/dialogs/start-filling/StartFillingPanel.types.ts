@@ -46,15 +46,12 @@ export interface IStartFillingPanelProps {
     invitations: Invitation[],
   ) => Promise<unknown>;
   withBorder?: boolean;
-  canEditRoom?: boolean;
 }
 
 export interface HeaderProps {
   ref?: React.RefObject<HTMLDivElement>;
-  canEditRoom: boolean;
+  className?: string;
   roleName: string;
   t: TTranslation;
   openInvitePanel: VoidFunction;
-
-  className?: string;
 }

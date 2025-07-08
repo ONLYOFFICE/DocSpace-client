@@ -27,12 +27,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { FilesSelectorFilterTypes } from "../../../enums";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import {
   DirectThirdPartyConnection,
   DirectThirdPartyConnectionProps,
-} from "../../../components/direct-third-party-connection";
-import type { FileInfoType } from "../../../components/files-selector-input/FilesSelectorInput.types";
+} from "@docspace/shared/components/direct-third-party-connection";
+import type { FileInfoType } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
 
 export interface ThirdPartyResourcesProps
   extends Omit<

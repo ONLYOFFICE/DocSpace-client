@@ -33,20 +33,13 @@ import { logger } from "@/../logger.mjs";
 export async function getCSP(): Promise<TGetCSPSettings | undefined> {
   logger.debug("Start GET /security/csp");
 
-  try {
-    const [req] = await createRequest([`/security/csp`], [["", ""]], "GET");
+  const [req] = await createRequest([`/security/csp`], [["", ""]], "GET");
 
-    const res = await fetch(req, { next: { revalidate: 300 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
-    if (!res.ok) {
-      logger.error(`GET /security/csp failed: ${res.status}`);
-      return;
-    }
+  if (!res.ok) return;
 
-    const csp = await res.json();
+  const csp = await res.json();
 
-    return csp.response;
-  } catch (error) {
-    logger.error(`Error in getCSP: ${error}`);
-  }
+  return csp.response;
 }

@@ -32,7 +32,7 @@ import {
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-type ChangeLinkTypeDialogProps = {
+type ChangeLinkTypeDialog = {
   visible: boolean;
   onClose: VoidFunction;
   onSubmit: VoidFunction;
@@ -42,7 +42,7 @@ const ChangeLinkTypeDialog = ({
   visible,
   onClose,
   onSubmit,
-}: ChangeLinkTypeDialogProps) => {
+}: ChangeLinkTypeDialog) => {
   const { t } = useTranslation(["Common", "ChangeLinkTypeDialog"]);
 
   return (

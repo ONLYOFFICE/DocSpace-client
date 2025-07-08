@@ -258,7 +258,6 @@ const useFilesHelper = ({
                   roomsFolderId === id ||
                   (index === 0 && typeof nextItem?.roomType !== "undefined"),
                 roomType,
-                rootFolderType: current.rootFolderType,
               };
             },
           );

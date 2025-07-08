@@ -122,7 +122,7 @@ const PublicRoomPage = (props) => {
         t={t}
         ns="Common"
         i18nKey="PublicAuthorizeToast"
-        values={{ roomMode, productName: t("Common:ProductName") }}
+        values={{ roomMode }}
         components={{
           1: <Text as="span" fontSize="12px" fontWeight={700} />,
         }}

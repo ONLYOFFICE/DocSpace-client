@@ -27,7 +27,6 @@
 import moment from "moment";
 import { useState } from "react";
 import copy from "copy-to-clipboard";
-import type { TFunction } from "i18next";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -44,10 +43,7 @@ import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpe
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
 
 import type { Nullable, TTranslation } from "@docspace/shared/types";
-import type {
-  TAvailableExternalRights,
-  TFileLink,
-} from "@docspace/shared/api/files/types";
+import type { TFileLink } from "@docspace/shared/api/files/types";
 import type { TOption } from "@docspace/shared/components/combobox";
 
 type LinkRowProps = {
@@ -161,7 +157,7 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
-    copyRoomShareLink(link, t as TFunction);
+    copyRoomShareLink(link, t);
     onCloseContextMenu();
   };
 
@@ -234,7 +230,7 @@ const LinkRow = (props: LinkRowProps) => {
         });
 
         if (linkData) {
-          copyRoomShareLink(linkData, t as TFunction);
+          copyRoomShareLink(linkData, t);
         }
       })
       .catch((err: Error) => toastr.error(err?.message))
@@ -296,10 +292,6 @@ const LinkRow = (props: LinkRowProps) => {
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder}
       isFormRoom={isFormRoom}
-      onAddClick={async () => {}}
-      changeShareOption={async () => {}}
-      changeAccessOption={async () => {}}
-      availableExternalRights={{} as TAvailableExternalRights}
     />
   );
 };

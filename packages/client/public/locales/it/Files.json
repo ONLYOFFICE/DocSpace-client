@@ -96,7 +96,7 @@
   "FinalizeVersion": "Finalizza versione",
   "FolderRenamed": "La cartella '{{folderTitle}}' è stata rinominata in '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Cartella <1>{{folderTitle}}</1> creata",
-  "GeneralLinkRevokedAndCreatedSuccessfully": "Nuovo link generale è stato creato con successo",
+  "GeneralLinkDeletedSuccessfully": "Nuovo link generale è stato creato con successo",
   "GoToMyRooms": "Vai alle stanze",
   "GoToSection": "Vai a {{sectionName}}",
   "Index": "Indice",

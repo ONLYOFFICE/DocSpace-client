@@ -381,36 +381,42 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             {t("LogoDocsEditor")} ({logoUrls[3].size.width}x
             {logoUrls[3].size.height})
           </Text>
-          <div className={styles.logosWrapper}>
-            <Logo
-              name={logoUrls[4].name}
-              src={logoUrls[4].path.light}
-              imageClass={classNames(
-                styles.borderImg,
-                styles.logoDocsEditor,
-                styles.backgroundLightEditor,
-              )}
-              inputId={`logoUploader_${WhiteLabelLogoType.DocsEditorEmbed}_light`}
-              linkId="link-embedded-editor"
-              onChangeText={t("ChangeLogoButton")}
-              onChange={onChangeLogo}
-              isSettingPaid={isSettingPaid}
-            />
-            <Logo
-              name={logoUrls[3].name}
-              src={logoUrls[3].path.light}
-              imageClass={classNames(
-                styles.borderImg,
-                styles.logoDocsEditor,
-                styles.backgroundDarkEditor,
-              )}
-              inputId={`logoUploader_${WhiteLabelLogoType.DocsEditor}_light`}
-              linkId="link-editors-header"
-              onChangeText={t("ChangeLogoButton")}
-              onChange={onChangeLogo}
-              isSettingPaid={isSettingPaid}
-            />
-          </div>
+          <Logo
+            name={logoUrls[3].name}
+            isEditor
+            src={logoUrls[3].path.light}
+            inputId={`logoUploader_${WhiteLabelLogoType.DocsEditor}_light`}
+            linkId="link-editors-header"
+            onChangeText={t("ChangeLogoButton")}
+            onChange={onChangeLogo}
+            isSettingPaid={isSettingPaid}
+          />
+        </div>
+
+        <div className={styles.logoWrapper}>
+          <Text
+            fontSize="15px"
+            fontWeight="600"
+            className="settings_unavailable"
+          >
+            {t("LogoDocsEditorEmbedded")} ({logoUrls[4].size.width}x
+            {logoUrls[4].size.height})
+          </Text>
+          <Logo
+            name={logoUrls[4].name}
+            src={logoUrls[4].path.light}
+            imageClass={classNames(
+              styles.borderImg,
+              styles.logoEmbeddedEditor,
+              styles.backgroundWhite,
+            )}
+            inputId={`logoUploader_${WhiteLabelLogoType.DocsEditorEmbed}_light`}
+            linkId="link-embedded-editor"
+            onChangeText={t("ChangeLogoButton")}
+            onChange={onChangeLogo}
+            isSettingPaid={isSettingPaid}
+            isEditorHeader
+          />
         </div>
       </div>
       <div

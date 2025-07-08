@@ -89,7 +89,7 @@ export default async function DocspaceLayout({
             sectionHeaderContent={<Header {...navigationProps} />}
             sectionFilterContent={<Filter {...filterProps} />}
             sectionBodyContent={children}
-            isEmptyPage={folders.length === 0 ? files.length === 0 : false}
+            isEmptyPage={folders.length === 0 && files.length === 0}
             filesFilter={filter!}
           />
           <SelectionArea />

@@ -40,6 +40,7 @@ const Header = (props: HeaderProps) => {
       columns={defaultColumns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName="infoPanelAutorizedApps"
+      tableStorageName="autorizedApps"
       sectionWidth={sectionWidth}
       showSettings={false}
       useReactWindow

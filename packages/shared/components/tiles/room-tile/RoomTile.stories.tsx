@@ -29,9 +29,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import PublicRoomIconReactSvgUrl from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
-
-import { RoomsType } from "../../../enums";
-
 import { Link } from "../../link";
 import { IconButton } from "../../icon-button";
 import { IconSizeType } from "../../../utils";
@@ -129,7 +126,7 @@ export const Default: Story = {
       tags: [
         {
           label: "Collaboration",
-          roomType: RoomsType.EditingRoom,
+          roomType: "collaboration",
         },
       ],
       contextOptions,

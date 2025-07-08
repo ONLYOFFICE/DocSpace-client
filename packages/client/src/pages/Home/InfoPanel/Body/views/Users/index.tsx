@@ -32,11 +32,7 @@ import { useNavigate } from "react-router";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import {
-  ComboBox,
-  ComboBoxSize,
-  TOption,
-} from "@docspace/shared/components/combobox";
+import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
 import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
 
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
@@ -185,9 +181,12 @@ const Users = ({
 
     if (!canChange || isGuests || !selectedOption) return text;
 
-    const onSelect = (option: TOption) => {
-      if (option.onClick)
-        option.onClick(option as unknown as TContextMenuValueTypeOnClick);
+    const onSelect = (
+      option: TContextMenuValueTypeOnClick & {
+        onClick: (e: TContextMenuValueTypeOnClick) => void;
+      },
+    ) => {
+      if (option.onClick) option.onClick({ ...option });
     };
 
     const combobox = (

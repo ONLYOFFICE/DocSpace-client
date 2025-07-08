@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import moment from "moment";
 import { Trans } from "react-i18next";
+
 import isUndefined from "lodash/isUndefined";
 import isNull from "lodash/isNull";
-import type { TFunction } from "i18next";
 
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
@@ -289,7 +289,7 @@ export const getRoleNameByAccessRight = (
 
 export const getTranslationDate = (
   expirationDate: TFileLink["sharedTo"]["expirationDate"],
-  t: TFunction,
+  t: TTranslation,
 ) => {
   if (expirationDate) {
     const date = getDate(expirationDate);
@@ -341,7 +341,7 @@ export const canShowManageLink = (
 
 export const copyRoomShareLink = (
   link: TFileLink,
-  t: TFunction,
+  t: TTranslation,
   withCopy = true,
   linkOptions?: {
     canShowLink: boolean;
@@ -399,7 +399,7 @@ export const copyRoomShareLink = (
 
 export const copyDocumentShareLink = (
   link: TFileLink,
-  t: TFunction,
+  t: TTranslation,
   linkOptions?: {
     canShowLink: boolean;
     onClickLink: VoidFunction;

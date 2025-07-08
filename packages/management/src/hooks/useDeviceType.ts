@@ -57,3 +57,4 @@ const useDeviceType = () => {
 };
 
 export default useDeviceType;
+

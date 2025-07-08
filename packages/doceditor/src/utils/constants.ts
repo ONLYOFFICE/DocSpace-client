@@ -32,7 +32,9 @@ export const IS_ZOOM =
     window?.navigator?.userAgent?.includes("ZoomApps"));
 
 export const IS_DESKTOP_EDITOR =
-  typeof window !== "undefined" ? window.AscDesktopEditor !== undefined : false;
+  typeof window !== "undefined"
+    ? window["AscDesktopEditor"] !== undefined
+    : false;
 
 export const IS_VIEW =
   typeof window !== "undefined"

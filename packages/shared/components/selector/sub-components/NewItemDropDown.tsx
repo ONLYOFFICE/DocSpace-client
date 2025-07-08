@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { classNames, isMobile as isMobileUtils } from "../../../utils";
+import { classNames } from "@docspace/shared/utils";
+import { isMobile as isMobileUtils } from "../../../utils";
 import { Portal } from "../../portal";
 import { Backdrop } from "../../backdrop";
 

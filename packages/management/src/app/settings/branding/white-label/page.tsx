@@ -32,37 +32,32 @@ import {
   getQuota,
   getAllPortals,
   getWhiteLabelLogos,
+  getWhiteLabelText,
   getWhiteLabelIsDefault,
 } from "@/lib/actions";
 import { getIsDefaultWhiteLabel } from "@/lib";
 
 import { WhiteLabelPage } from "./page.client";
-import { logger } from "../../../../../logger.mjs";
 
 async function Page() {
-  logger.info("Branding white-label page");
+  const [
+    settings,
+    quota,
+    portals,
+    whiteLabelLogos,
+    whiteLabelText,
+    whiteLabelIsDefault,
+  ] = await Promise.all([
+    getSettings(),
+    getQuota(),
+    getAllPortals(),
+    getWhiteLabelLogos(),
+    getWhiteLabelText(),
+    getWhiteLabelIsDefault(),
+  ]);
 
-  const [settings, quota, portals, whiteLabelLogos, whiteLabelIsDefault] =
-    await Promise.all([
-      getSettings(),
-      getQuota(),
-      getAllPortals(),
-      getWhiteLabelLogos(),
-      getWhiteLabelIsDefault(),
-    ]);
-
-  if (settings === "access-restricted") {
-    const baseURL = await getBaseUrl();
-
-    logger.info("Branding white-label page access-restricted");
-    redirect(`${baseURL}/${settings}`);
-  }
-  if (!settings) {
-    const baseURL = await getBaseUrl();
-
-    logger.info("Branding white-label page empty settings");
-    redirect(`${baseURL}/login`);
-  }
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (!settings) redirect(`${getBaseUrl()}/login`);
 
   const { displayAbout, standalone } = settings;
   const showAbout = standalone && displayAbout;
@@ -72,6 +67,7 @@ async function Page() {
   return (
     <WhiteLabelPage
       whiteLabelLogos={whiteLabelLogos}
+      whiteLabelText={whiteLabelText}
       showAbout={showAbout}
       isDefaultWhiteLabel={isDefaultWhiteLabel}
       standalone={standalone}
@@ -82,3 +78,4 @@ async function Page() {
 }
 
 export default Page;
+

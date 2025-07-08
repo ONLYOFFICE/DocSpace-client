@@ -121,7 +121,6 @@ export type TDocument = {
     instanceId: string;
     key: string;
     roomId: string;
-    canEditRoom: boolean;
   };
   title: string;
   token: string;

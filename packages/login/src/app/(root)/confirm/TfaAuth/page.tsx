@@ -30,7 +30,6 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams, encodeParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
-import { logger } from "logger.mjs";
 import TfaAuthForm from "./page.client";
 
 type TfaAuthProps = {
@@ -38,9 +37,7 @@ type TfaAuthProps = {
 };
 
 async function Page(props: TfaAuthProps) {
-  logger.info("TfaAuth page");
-  const { searchParams: sp } = props;
-  const searchParams = await sp;
+  const searchParams = await props.searchParams;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;
 
@@ -49,17 +46,21 @@ async function Page(props: TfaAuthProps) {
     getUserFromConfirm(uid, confirmKey),
   ]);
 
-  return settings && typeof settings !== "string" ? (
+  return (
     <>
-      <GreetingContainer />
-      <FormWrapper id="tfa-auth-form">
-        <TfaAuthForm
-          passwordHash={settings.passwordHash}
-          userName={user?.userName}
-        />
-      </FormWrapper>
+      {settings && typeof settings !== "string" && (
+        <>
+          <GreetingContainer />
+          <FormWrapper id="tfa-auth-form">
+            <TfaAuthForm
+              passwordHash={settings.passwordHash}
+              userName={user?.userName}
+            />
+          </FormWrapper>
+        </>
+      )}
     </>
-  ) : null;
+  );
 }
 
 export default Page;

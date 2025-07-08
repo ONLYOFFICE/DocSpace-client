@@ -48,7 +48,6 @@ type PlanInfoProps = {
   storageSizeIncrement?: number;
   storagePriceIncrement?: number;
   isUpgradeStoragePlan?: boolean;
-  formatWalletCurrency?: (amount: number, fractionDigits?: number) => string;
 };
 
 const PlanInfo: React.FC<PlanInfoProps> = ({
@@ -60,12 +59,12 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
   nextStoragePlanSize,
   currentStoragePlanSize,
   hasScheduledStorageChange,
-  storageSizeIncrement = 1,
-  storagePriceIncrement = 1,
+  storageSizeIncrement,
+  storagePriceIncrement,
   isUpgradeStoragePlan,
-  formatWalletCurrency,
 }) => {
-  const { maxStorageLimit, t, isStorageCancellation } = useServicesActions();
+  const { maxStorageLimit, formatWalletCurrency, t, isStorageCancellation } =
+    useServicesActions();
 
   const getStorageStatusText = () => {
     if (!hasStorageSubscription) {
@@ -138,7 +137,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
         <div className={styles.planInfoPrice}>
           <Text fontWeight="600" fontSize="14px" className={styles.totalPrice}>
             {t("CurrencyPerMonth", {
-              currency: formatWalletCurrency!(totalPrice, 2),
+              currency: formatWalletCurrency(totalPrice),
             })}
           </Text>
           <Text
@@ -147,7 +146,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
             className={styles.priceForEach}
           >
             {t("PriceForEach", {
-              currency: formatWalletCurrency!(storagePriceIncrement, 2),
+              currency: formatWalletCurrency(storagePriceIncrement),
               amount: getConvertedSize(t, storageSizeIncrement),
             })}
           </Text>
@@ -157,27 +156,26 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
   );
 };
 
-export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
-  const {
-    walletBalance,
-    storageSizeIncrement,
-    storagePriceIncrement,
-    formatWalletCurrency,
-  } = paymentStore;
-  const {
-    nextStoragePlanSize,
-    hasStorageSubscription,
-    currentStoragePlanSize,
-    hasScheduledStorageChange,
-  } = currentTariffStatusStore;
-  return {
-    walletBalance,
-    nextStoragePlanSize,
-    hasStorageSubscription,
-    currentStoragePlanSize,
-    hasScheduledStorageChange,
-    storageSizeIncrement,
-    storagePriceIncrement,
-    formatWalletCurrency,
-  };
-})(observer(PlanInfo));
+export default inject(
+  ({ paymentStore, currentTariffStatusStore, servicesStore }: TStore) => {
+    const { walletBalance } = paymentStore;
+    const {
+      nextStoragePlanSize,
+      hasStorageSubscription,
+      currentStoragePlanSize,
+      hasScheduledStorageChange,
+    } = currentTariffStatusStore;
+
+    const { storageSizeIncrement, storagePriceIncrement } = servicesStore;
+
+    return {
+      walletBalance,
+      nextStoragePlanSize,
+      hasStorageSubscription,
+      currentStoragePlanSize,
+      hasScheduledStorageChange,
+      storageSizeIncrement,
+      storagePriceIncrement,
+    };
+  },
+)(observer(PlanInfo));

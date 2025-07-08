@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-
 import React, { useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
@@ -37,11 +36,8 @@ import {
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
-import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
-
+import { getBackUrl, isFormRole } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -87,7 +83,6 @@ const Editor = ({
   onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
-  const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -160,7 +155,7 @@ const Editor = ({
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
-  // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
   let goBack: TGoBack = {} as TGoBack;
 
@@ -172,13 +167,12 @@ const Editor = ({
         i18n.getDataByLanguage(i18n.language) as unknown as {
           Editor: { [key: string]: string };
         }
-      )?.Editor as {
+      )?.["Editor"] as {
         [key: string]: string;
       }
-    )?.FileLocation; // t("FileLocation");
+    )?.["FileLocation"]; // t("FileLocation");
 
     if (editorGoBack === false || user?.isVisitor || !user) {
-      console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -198,7 +192,7 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.url = newConfig.editorConfig?.customization?.goback?.url;
+        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
   }
@@ -225,20 +219,20 @@ const Editor = ({
     }
   }
 
-  // if (newConfig.document && newConfig.document.info)
+  //if (newConfig.document && newConfig.document.info)
   //  newConfig.document.info.favorite = false;
-  const url = typeof window !== "undefined" ? window.location.href : "";
 
-  if (url.indexOf("anchor") !== -1) {
-    const splitUrl = url.split("anchor=");
-    const decodeURI = decodeURIComponent(splitUrl[1]);
-    const obj = JSON.parse(decodeURI);
+  // const url = window.location.href;
 
-    if (newConfig.editorConfig)
-      newConfig.editorConfig.actionLink = {
-        action: obj.action,
-      };
-  }
+  // if (url.indexOf("anchor") !== -1) {
+  //   const splitUrl = url.split("anchor=");
+  //   const decodeURI = decodeURIComponent(splitUrl[1]);
+  //   const obj = JSON.parse(decodeURI);
+
+  //   config.editorConfig.actionLink = {
+  //     action: obj.action,
+  //   };
+  // }
 
   newConfig.events = {
     onDocumentReady,
@@ -259,18 +253,6 @@ const Editor = ({
     onSubmit,
     onRequestRefreshFile,
   };
-
-  if (
-    typeof window !== "undefined" &&
-    newConfig.editorConfig?.user &&
-    newConfig.editorConfig.user.image?.includes(
-      "default_user_photo_size_48-48.png",
-    )
-  ) {
-    newConfig.editorConfig.user.image = isBase
-      ? `${window.location.origin}${UserAvatarBaseSvgUrl}`
-      : `${window.location.origin}${UserAvatarDarkSvgUrl}`;
-  }
 
   if (successAuth) {
     newConfig.events.onRequestUsers = onSDKRequestUsers;

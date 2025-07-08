@@ -49,21 +49,23 @@ export const ManagementDialogs = observer(
       connectDialogVisible,
     } = spacesStore;
 
-    const { baseDomain, domainValidator } = settings;
+    const { tenantAlias, baseDomain, domainValidator } = settings;
 
     return (
       <>
-        {domainDialogVisible ? <ChangeDomainDialog /> : null}
-        {createPortalDialogVisible ? (
+        {domainDialogVisible && <ChangeDomainDialog />}
+        {createPortalDialogVisible && (
           <CreatePortalDialog
+            tenantAlias={tenantAlias}
             baseDomain={baseDomain}
             domainValidator={domainValidator}
             user={user}
           />
-        ) : null}
-        {deletePortalDialogVisible ? <DeletePortalDialog /> : null}
-        {connectDialogVisible ? <ConnectDialog /> : null}
+        )}
+        {deletePortalDialogVisible && <DeletePortalDialog />}
+        {connectDialogVisible && <ConnectDialog />}
       </>
     );
   },
 );
+

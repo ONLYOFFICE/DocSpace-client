@@ -13,10 +13,6 @@
     "babel.config.ts",
     "index.d.ts",
     "tsconfig.eslint.json",
-    "global.d.ts",
-    "playwright.config.ts",
-    "webpack.config.js",
-    "tests/**/*",
-    "module-declarations.d.ts"
+    "global.d.ts"
   ]
 }

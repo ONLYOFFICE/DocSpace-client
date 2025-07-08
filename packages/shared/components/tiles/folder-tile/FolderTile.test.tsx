@@ -26,7 +26,7 @@
 
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { ContextMenuRefType } from "../../context-menu/ContextMenu.types";
+import { ContextMenuRefType } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { FolderTile } from "./FolderTile";
 import { FolderTileProps } from "./FolderTile.types";
 

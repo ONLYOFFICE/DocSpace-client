@@ -38,39 +38,17 @@ beforeAll(() => {
   const javascripts = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
-    const excludeDirs = [
-      ".nx",
-      "e2e",
-      ".yarn",
-      ".github",
-      ".vscode",
-      ".git",
-      "__mocks__",
-      "dist",
-      "test",
-      "tests",
-      ".next",
-      "campaigns",
-      "storybook-static",
-      "node_modules",
-      ".meta",
-    ];
-
-    const excludePatterns = [
-      "themes",
-      ".test.",
-      ".stories.",
-      path.normalize("packages/shared/utils/encoder.ts"),
-      path.normalize(
-        "packages/shared/components/error-container/ErrorContainer.tsx"
-      ),
-    ];
-
-    return getAllFiles(clientDir, excludeDirs).filter(
+    return getAllFiles(clientDir).filter(
       (filePath) =>
         filePath &&
         searchPattern.test(filePath) &&
-        !excludePatterns.some((pattern) => filePath.includes(pattern))
+        !filePath.includes("themes") &&
+        !filePath.includes(".test.") &&
+        !filePath.includes(".stories.") &&
+        !filePath.includes("packages/shared/utils/encoder.ts") &&
+        !filePath.includes(
+          "packages/shared/components/error-container/ErrorContainer.tsx"
+        )
     );
   });
 
@@ -98,9 +76,7 @@ describe("Color Tests", () => {
       "Found inline colors in the code. Please use global colors instead.\r\n\r\n";
     let i = 0;
     issues.forEach((issue) => {
-      message += `${++i}. File: ${issue}\r\nColors: ${
-        hexColorIssues[issue]
-      }\r\n\r\n`;
+      message += `${++i}. File: ${issue}\r\nColors: ${hexColorIssues[issue]}\r\n\r\n`;
     });
 
     expect(issues.length, message).toBe(0);

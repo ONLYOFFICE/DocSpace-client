@@ -55,7 +55,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
     try {
       await ownerChange(ownerId, confirmKey);
       setIsOwnerChanged(true);
-      setTimeout(() => (window.location.href = "/"), 10000);
+      setTimeout(() => (location.href = "/"), 10000);
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -76,42 +76,46 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
   };
 
   const onCancelClick = () => {
-    window.location.href = "/";
+    location.href = "/";
   };
 
-  return isOwnerChanged ? (
-    <Text>
-      {t("ConfirmOwnerPortalSuccessMessage", {
-        productName: t("Common:ProductName"),
-      })}
-    </Text>
-  ) : (
+  return (
     <>
-      <Text className="subtitle">
-        {t("ConfirmOwnerPortalTitle", {
-          newOwner,
-          productName: t("Common:ProductName"),
-        })}
-      </Text>
-      <ButtonsWrapper>
-        <Button
-          primary
-          scale
-          size={ButtonSize.medium}
-          label={t("Common:SaveButton")}
-          tabIndex={2}
-          isDisabled={false}
-          onClick={onChangeOwnerClick}
-        />
-        <Button
-          scale
-          size={ButtonSize.medium}
-          label={t("Common:CancelButton")}
-          tabIndex={2}
-          isDisabled={false}
-          onClick={onCancelClick}
-        />
-      </ButtonsWrapper>
+      {isOwnerChanged ? (
+        <Text>
+          {t("ConfirmOwnerPortalSuccessMessage", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+      ) : (
+        <>
+          <Text className="subtitle">
+            {t("ConfirmOwnerPortalTitle", {
+              newOwner: newOwner,
+              productName: t("Common:ProductName"),
+            })}
+          </Text>
+          <ButtonsWrapper>
+            <Button
+              primary
+              scale
+              size={ButtonSize.medium}
+              label={t("Common:SaveButton")}
+              tabIndex={2}
+              isDisabled={false}
+              onClick={onChangeOwnerClick}
+            />
+            <Button
+              scale
+              size={ButtonSize.medium}
+              label={t("Common:CancelButton")}
+              tabIndex={2}
+              isDisabled={false}
+              onClick={onCancelClick}
+            />
+          </ButtonsWrapper>
+        </>
+      )}
     </>
   );
 };

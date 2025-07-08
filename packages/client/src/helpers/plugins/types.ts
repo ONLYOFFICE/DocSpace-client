@@ -32,7 +32,7 @@ import { CheckboxProps } from "@docspace/shared/components/checkbox/Checkbox.typ
 import { ToggleButtonProps } from "@docspace/shared/components/toggle-button/ToggleButton.types";
 import { TextareaProps } from "@docspace/shared/components/textarea/Textarea.types";
 import {
-  TComboboxProps,
+  ComboboxProps,
   TOption,
 } from "@docspace/shared/components/combobox/ComboBox.types";
 import { ToastProps } from "@docspace/shared/components/toast/Toast.type";
@@ -108,7 +108,7 @@ export interface IMessage {
     | ToggleButtonProps
     | ButtonProps
     | TextareaProps
-    | TComboboxProps;
+    | ComboboxProps;
   toastProps?: ToastProps[];
   contextProps?: {
     name: string;
@@ -116,7 +116,7 @@ export interface IMessage {
       | BoxProps
       | ButtonProps
       | CheckboxProps
-      | TComboboxProps
+      | ComboboxProps
       | IFrame
       | IImage
       | TextInputProps

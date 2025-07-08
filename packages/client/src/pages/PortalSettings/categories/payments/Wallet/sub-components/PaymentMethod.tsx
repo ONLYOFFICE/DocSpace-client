@@ -32,7 +32,6 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
-import CrossReactSvg from "PUBLIC_DIR/images/icons/16/cross.react.svg";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 
 import styles from "../styles/PaymentMethod.module.scss";
@@ -42,30 +41,23 @@ type PaymentMethodProps = {
   cardLinked: string;
   accountLink: string;
   isDisabled: boolean;
-  walletCustomerStatusNotActive: boolean;
 };
 
 const PaymentMethod = (props: PaymentMethodProps) => {
-  const {
-    walletCustomerEmail,
-    cardLinked,
-    accountLink,
-    isDisabled,
-    walletCustomerStatusNotActive,
-  } = props;
+  const { walletCustomerEmail, cardLinked, accountLink, isDisabled } = props;
 
-  const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation("Payments");
 
   const goLinkCard = () => {
     cardLinked
       ? window.open(cardLinked, "_self")
-      : toastr.error(t("Common:UnexpectedError"));
+      : toastr.error(t("ErrorNotification"));
   };
 
   const goStripeAccount = () => {
     accountLink
       ? window.open(accountLink, "_blank")
-      : toastr.error(t("Common:UnexpectedError"));
+      : toastr.error(t("ErrorNotification"));
   };
 
   return (
@@ -84,31 +76,20 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         <div
           className={classNames(styles.cardLinked, {
             [styles.cardLinkDisabled]: isDisabled,
-            [styles.warningColor]: walletCustomerStatusNotActive,
           })}
         >
           <div className={styles.tickedWrapper}>
-            {walletCustomerStatusNotActive ? (
-              <CrossReactSvg />
-            ) : (
-              <CheckReactSvg />
-            )}
+            <CheckReactSvg />
             <Text fontWeight={600} fontSize="14px">
-              {walletCustomerStatusNotActive
-                ? t("CardUnlinked")
-                : t("CardLinked")}
+              {t("CardLinked")}
             </Text>
           </div>
           <Link
             fontWeight={600}
-            onClick={
-              walletCustomerStatusNotActive ? goLinkCard : goStripeAccount
-            }
+            onClick={goStripeAccount}
             textDecoration="underline dashed"
           >
-            {walletCustomerStatusNotActive
-              ? t("AddPaymentMethod")
-              : t("GoToStripe")}
+            {t("GoToStripe")}
           </Link>
         </div>
       ) : (

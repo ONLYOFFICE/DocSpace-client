@@ -34,8 +34,6 @@ import { mobile } from "@docspace/shared/utils";
 const StyledBody = styled.div`
   max-width: 272px;
   margin: 0 auto;
-  word-break: break-word;
-  text-align: center;
 
   @media ${mobile} {
     max-width: 520px;
@@ -83,8 +81,8 @@ const TotalTariffContainer = ({
   theme,
   totalPrice,
   isNeedRequest,
+  currencySymbol,
   isYearTariff,
-  formatPaymentCurrency,
 }) => {
   return (
     <StyledBody isDisabled={isDisabled} theme={theme}>
@@ -108,10 +106,11 @@ const TotalTariffContainer = ({
                 t={t}
                 i18nKey="TotalPricePerYear"
                 ns="Payments"
-                values={{ price: formatPaymentCurrency(totalPrice) }}
+                values={{ currencySymbol, price: totalPrice }}
                 components={{
+                  1: <span className="lagerFontSize" />,
                   2: <span className="lagerFontSize" />,
-                  3: <Text fontWeight={600} />,
+                  3: <span />,
                 }}
               />
             ) : (
@@ -119,10 +118,11 @@ const TotalTariffContainer = ({
                 t={t}
                 i18nKey="TotalPricePerMonth"
                 ns="Payments"
-                values={{ price: formatPaymentCurrency(totalPrice) }}
+                values={{ currencySymbol, price: totalPrice }}
                 components={{
+                  1: <span className="lagerFontSize" />,
                   2: <span className="lagerFontSize" />,
-                  3: <Text fontWeight={600} />,
+                  3: <span />,
                 }}
               />
             )}
@@ -133,25 +133,23 @@ const TotalTariffContainer = ({
   );
 };
 
-export default inject(({ settingsStore, paymentStore, currentQuotaStore }) => {
-  const { theme } = settingsStore;
-  const {
-    isLoading,
-    totalPrice,
-    isNeedRequest,
-    maxAvailableManagersCount,
-    formatPaymentCurrency,
-  } = paymentStore;
+export default inject(
+  ({ settingsStore, paymentStore, paymentQuotasStore, currentQuotaStore }) => {
+    const { theme } = settingsStore;
+    const { isLoading, totalPrice, isNeedRequest, maxAvailableManagersCount } =
+      paymentStore;
 
-  const { isYearTariff } = currentQuotaStore;
+    const { planCost } = paymentQuotasStore;
+    const { isYearTariff } = currentQuotaStore;
 
-  return {
-    theme,
-    totalPrice,
-    isLoading,
-    isNeedRequest,
-    maxAvailableManagersCount,
-    isYearTariff,
-    formatPaymentCurrency,
-  };
-})(observer(TotalTariffContainer));
+    return {
+      theme,
+      totalPrice,
+      isLoading,
+      isNeedRequest,
+      maxAvailableManagersCount,
+      currencySymbol: planCost.currencySymbol,
+      isYearTariff,
+    };
+  },
+)(observer(TotalTariffContainer));

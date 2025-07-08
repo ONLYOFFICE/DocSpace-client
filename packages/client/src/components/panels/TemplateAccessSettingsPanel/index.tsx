@@ -42,7 +42,6 @@ import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-import { TUser } from "@docspace/shared/api/people/types";
 import {
   getRoomMembers,
   getTemplateAvailable,
@@ -121,7 +120,7 @@ const TemplateAccessSettingsPanel = ({
   templateIsAvailable,
   setTemplateIsAvailable,
 }: TemplateAccessSettingsPanelProps) => {
-  const [accessItems, setAccessItems] = useState<TSelectorItem[]>([]);
+  const [accessItems, setAccessItems] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsLoading, setModalIsLoading] = useState(false);
@@ -135,7 +134,7 @@ const TemplateAccessSettingsPanel = ({
 
   const prevIsAvailable = useRef<boolean>(undefined);
 
-  const setAccessItemsAction = (items: TSelectorItem[]) => {
+  const setAccessItemsAction = (items) => {
     if (isContainer) setInviteItems(items);
     else setAccessItems(items);
   };
@@ -204,8 +203,8 @@ const TemplateAccessSettingsPanel = ({
       getTemplateAvailable(templateId),
     ])
       .then(([members, available]) => {
-        if ((members as { items: TUser[] })?.items?.length) {
-          const convertedItems = (members as { items: TUser[] }).items.map(
+        if (members?.items?.length) {
+          const convertedItems = members.items.map(
             ({ access, isOwner, sharedTo }) => {
               return {
                 templateAccess: access,
@@ -214,11 +213,11 @@ const TemplateAccessSettingsPanel = ({
               };
             },
           );
-          setAccessItems(convertedItems as TSelectorItem[]);
+          setAccessItems(convertedItems);
         }
 
-        prevIsAvailable.current = available as boolean;
-        setIsAvailable(available as boolean);
+        prevIsAvailable.current = available;
+        setIsAvailable(available);
       })
       .catch((error) => {
         toastr.error(error as Error);
@@ -247,8 +246,8 @@ const TemplateAccessSettingsPanel = ({
     setIsLoading(true);
 
     if (prevIsAvailable.current !== isAvailable) {
-      setTemplateAvailable?.(templateId, isAvailable)
-        ?.then(() => updateInfoPanelMembers(t))
+      setTemplateAvailable(templateId, isAvailable)
+        .then(() => updateInfoPanelMembers(t))
         .finally(() => {
           setIsLoading(false);
           onClose();
@@ -416,7 +415,7 @@ const TemplateAccessSettingsPanel = ({
             onClose={onClosePanels}
             onCloseClick={onCloseClick}
             onBackClick={onCloseUsersPanel}
-            disableInvitedUsers={invitedUsers as string[]}
+            disableInvitedUsers={invitedUsers}
           />
         ) : null}
       </ModalDialog.Container>

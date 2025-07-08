@@ -134,9 +134,9 @@ const PasswordChangeForm = ({
           {t("PassworResetTitle")}
         </Text>
         <FieldContainer
-          isVertical
+          isVertical={true}
           labelVisible={false}
-          hasError={isPasswordErrorShow ? !passwordValid : undefined}
+          hasError={isPasswordErrorShow && !passwordValid}
           errorMessage={t("Common:IncorrectPassword")}
         >
           <PasswordInput
@@ -146,7 +146,7 @@ const PasswordChangeForm = ({
             inputName="password"
             placeholder={t("Common:Password")}
             inputValue={password}
-            hasError={isPasswordErrorShow ? !passwordValid : undefined}
+            hasError={isPasswordErrorShow && !passwordValid}
             inputType={InputType.password}
             size={InputSize.large}
             scale
@@ -167,7 +167,7 @@ const PasswordChangeForm = ({
             )}`}
             generatePasswordTitle={t("Common:GeneratePassword")}
             tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
-            isAutoFocussed
+            isAutoFocussed={true}
           />
         </FieldContainer>
       </div>

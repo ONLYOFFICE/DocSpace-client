@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import { ArticleButtonLoader } from ".";
 import { ButtonLoaderProps } from "./ArticleButtonLoader.types";
 
@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<ButtonLoaderProps> = (args) => (
+const Template: Story<ButtonLoaderProps> = (args) => (
   <ArticleButtonLoader {...args} />
 );
 

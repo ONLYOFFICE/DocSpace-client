@@ -38,7 +38,6 @@ import {
   StyledItemDescription,
   StyledItem,
   StyledWrapper,
-  GlobalStyle,
 } from "./AccessRightSelect.styled";
 import { AccessRightSelectProps } from "./AccessRightSelect.types";
 
@@ -141,28 +140,24 @@ export const AccessRightSelectPure = ({
   // console.log(formattedOptions);
 
   return (
-    <>
-      <GlobalStyle />
-      <StyledWrapper
-        className={className}
-        type={type}
-        advancedOptions={formattedOptions}
-        onSelect={onSelectCurrentItem}
-        options={[]}
-        selectedOption={
-          {
-            icon: currentItem?.icon,
-            default: true,
-            key: currentItem?.key,
-            label: type === "onlyIcon" ? "" : currentItem?.label,
-            description: type === "onlyIcon" ? "" : currentItem?.description,
-          } as TOption
-        }
-        forceCloseClickOutside
-        dropDownClassName="access-right-select-dropdown"
-        {...props}
-      />
-    </>
+    <StyledWrapper
+      className={className}
+      type={type}
+      advancedOptions={formattedOptions}
+      onSelect={onSelectCurrentItem}
+      options={[]}
+      selectedOption={
+        {
+          icon: currentItem?.icon,
+          default: true,
+          key: currentItem?.key,
+          label: type === "onlyIcon" ? "" : currentItem?.label,
+          description: type === "onlyIcon" ? "" : currentItem?.description,
+        } as TOption
+      }
+      forceCloseClickOutside
+      {...props}
+    />
   );
 };
 

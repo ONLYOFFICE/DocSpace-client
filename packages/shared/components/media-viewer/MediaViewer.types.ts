@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFunction } from "i18next";
-
 import type { TFile } from "../../api/files/types";
 import type { DeviceType } from "../../enums";
 
@@ -35,7 +33,7 @@ export type OmitSecondArg<F> = F extends (x: infer P, ...arg: never) => infer R
   ? (file: P) => R
   : F;
 
-export type TranslationType = TFunction;
+export type TranslationType = (key: string, opt?: object) => string;
 
 export type NumberOrString = number | string;
 

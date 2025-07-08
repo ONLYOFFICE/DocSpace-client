@@ -154,7 +154,7 @@ const GuestReleaseTip = ({
             ) : null}
           </StyledBody>
 
-          <ReactSVG src={icon} />
+          <ReactSVG src={icon} alt="tip" />
 
           <Button
             primary

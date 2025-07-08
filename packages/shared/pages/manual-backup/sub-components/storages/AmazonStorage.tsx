@@ -26,20 +26,23 @@
 
 import React from "react";
 
-import { Button, ButtonSize } from "../../../../components/button";
-import { BackupStorageLocalKey, ThirdPartyStorages } from "../../../../enums";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  BackupStorageLocalKey,
+  ThirdPartyStorages,
+} from "@docspace/shared/enums";
 import {
   AmazonSettings,
   formNames,
-} from "../../../../components/amazon-settings";
+} from "@docspace/shared/components/amazon-settings";
 
-import { useDidMount } from "../../../../hooks/useDidMount";
-import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 import type {
   SelectedStorageType,
   StorageRegionsType,
   TTranslation,
-} from "../../../../types";
+} from "@docspace/shared/types";
 
 interface AmazonStorageProps {
   t: TTranslation;

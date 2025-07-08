@@ -34,7 +34,6 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
-import { TFunction } from "i18next";
 
 type BodyComponentProps = {
   needReassignData: boolean;
@@ -72,16 +71,14 @@ const BodyComponent = ({
     <Trans
       i18nKey="DeleteReassignDescriptionUser"
       ns="DeleteProfileEverDialog"
-      t={t as TFunction}
-      values={{
-        warningMessageMyDocuments,
-        userPerformedDeletion: userPerformedDeletion!.displayName,
-        userYou: t("Common:You"),
-      }}
-      components={{
-        1: <strong />,
-      }}
-    />
+      t={t}
+    >
+      {{ warningMessageMyDocuments }}
+      <strong>
+        {{ userPerformedDeletion: userPerformedDeletion!.displayName }}
+        {{ userYou: t("Common:You") }}
+      </strong>
+    </Trans>
   );
 
   const warningMessage =
@@ -90,18 +87,10 @@ const BodyComponent = ({
       : warningMessageMyDocuments;
 
   const deleteMessage = (
-    <Trans
-      i18nKey="DeleteUserMessage"
-      ns="DeleteProfileEverDialog"
-      t={t as TFunction}
-      values={{
-        userCaption: onlyGuests ? t("Common:Guest") : t("Common:User"),
-        user: users[0].displayName,
-      }}
-      components={{
-        1: <strong />,
-      }}
-    />
+    <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>
+      {{ userCaption: onlyGuests ? t("Common:Guest") : t("Common:User") }}
+      <strong>{{ user: users[0].displayName }}</strong>
+    </Trans>
   );
 
   if (deleteWithoutReassign) {

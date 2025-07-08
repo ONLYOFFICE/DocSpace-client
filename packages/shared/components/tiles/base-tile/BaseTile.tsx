@@ -29,15 +29,18 @@ import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "../../checkbox";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "../../context-menu-button";
-import { ContextMenu, ContextMenuRefType } from "../../context-menu";
-import { hasOwnProperty } from "../../../utils/object";
-import { HeaderType } from "../../context-menu/ContextMenu.types";
-import { Loader, LoaderTypes } from "../../loader";
+} from "@docspace/shared/components/context-menu-button";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/shared/components/context-menu";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 import { BaseTileProps, TileChildProps } from "./BaseTile.types";
 

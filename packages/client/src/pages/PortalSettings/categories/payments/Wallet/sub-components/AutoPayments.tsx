@@ -35,18 +35,20 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TextInput, InputType } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TAutoTopUpSettings } from "@docspace/shared/api/portal/types";
-
 import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 
 import styles from "../styles/AutoPayments.module.scss";
+import { formatCurrencyValue } from "../utils";
 
 type AutoPaymentsProps = {
   onAdditionalSave?: () => void;
   noMargin?: boolean;
   walletCustomerEmail?: boolean;
+  currency?: string;
   updateAutoPayments?: () => Promise<void>;
   autoPayments?: TAutoTopUpSettings | null | undefined;
   isAutoPaymentExist?: boolean;
+  language?: string;
   setMinBalance?: (value: string) => void;
   setUpToBalance?: (value: string) => void;
   isAutomaticPaymentsEnabled?: boolean;
@@ -59,17 +61,18 @@ type AutoPaymentsProps = {
   setUpToBalanceError?: (value: boolean) => void;
   upToBalanceError?: boolean;
   isDisabled?: boolean;
-  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 type CurrentPaymentSettingsProps = {
   autoPayments: TAutoTopUpSettings;
-  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
+  language: string;
+  currency: string;
 };
 
 const CurrentPaymentSettings = ({
   autoPayments,
-  formatWalletCurrency,
+  language,
+  currency,
 }: CurrentPaymentSettingsProps) => {
   const { t } = useTranslation("Payments");
 
@@ -85,8 +88,8 @@ const CurrentPaymentSettings = ({
       </div>
       <Text fontSize="12px" fontWeight={400} className={styles.infoDescription}>
         {t("WhenBalanceDropsTo", {
-          min: formatWalletCurrency!(minBalance, 0),
-          max: formatWalletCurrency!(upToBalance, 0),
+          min: formatCurrencyValue(language, minBalance, currency),
+          max: formatCurrencyValue(language, upToBalance, currency),
         })}
       </Text>
     </div>
@@ -95,9 +98,11 @@ const CurrentPaymentSettings = ({
 
 const AutoPayments = ({
   walletCustomerEmail,
+  currency,
   updateAutoPayments,
   autoPayments,
   isAutoPaymentExist,
+  language,
   isEditAutoPayment,
   setMinBalance,
   setUpToBalance,
@@ -112,7 +117,6 @@ const AutoPayments = ({
   upToBalanceError,
   noMargin,
   isDisabled,
-  formatWalletCurrency,
 }: AutoPaymentsProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
@@ -177,7 +181,7 @@ const AutoPayments = ({
     if (!validity.valid) return;
 
     setUpToBalance!(value);
-    validateMaxUpToBalance(value, minBalance!);
+    validateMaxUpToBalance(value, minBalance);
   };
 
   const onSave = async (isEnable: boolean = true) => {
@@ -241,8 +245,8 @@ const AutoPayments = ({
       fontWeight={400}
     >
       {t("EnterAnIntegerAmountBetween", {
-        min: formatWalletCurrency!(min, 0),
-        max: formatWalletCurrency!(max, 0),
+        min: formatCurrencyValue(language!, min, currency!),
+        max: formatCurrencyValue(language!, max, currency!),
       })}
     </Text>
   );
@@ -328,7 +332,8 @@ const AutoPayments = ({
     >
       <CurrentPaymentSettings
         autoPayments={autoPayments!}
-        formatWalletCurrency={formatWalletCurrency}
+        language={language!}
+        currency={currency!}
       />
       <Button
         key="EditButton"
@@ -371,27 +376,8 @@ const AutoPayments = ({
   );
 };
 
-export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
+export default inject(({ paymentStore, authStore }: TStore) => {
   const {
-    updateAutoPayments,
-    autoPayments,
-    isAutoPaymentExist,
-    setMinBalance,
-    setUpToBalance,
-    isAutomaticPaymentsEnabled,
-    setIsAutomaticPaymentsEnabled,
-    minBalance,
-    upToBalance,
-    setMinBalanceError,
-    minBalanceError,
-    setUpToBalanceError,
-    upToBalanceError,
-    formatWalletCurrency,
-  } = paymentStore;
-
-  const { walletCustomerEmail } = currentTariffStatusStore;
-
-  return {
     walletCustomerEmail,
     updateAutoPayments,
     autoPayments,
@@ -402,10 +388,30 @@ export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
     setIsAutomaticPaymentsEnabled,
     minBalance,
     upToBalance,
+    walletCodeCurrency,
     setMinBalanceError,
     minBalanceError,
     setUpToBalanceError,
     upToBalanceError,
-    formatWalletCurrency,
+  } = paymentStore;
+  const { language } = authStore;
+
+  return {
+    walletCustomerEmail,
+    updateAutoPayments,
+    autoPayments,
+    isAutoPaymentExist,
+    currency: walletCodeCurrency,
+    language,
+    setMinBalance,
+    setUpToBalance,
+    isAutomaticPaymentsEnabled,
+    setIsAutomaticPaymentsEnabled,
+    minBalance,
+    upToBalance,
+    setMinBalanceError,
+    minBalanceError,
+    setUpToBalanceError,
+    upToBalanceError,
   };
 })(observer(AutoPayments));

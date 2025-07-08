@@ -96,7 +96,7 @@
   "FinalizeVersion": "Ավարտել տաբերակը",
   "FolderRenamed": "Պանակը '{{folderTitle}}'-ից վերանվանվել է'{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Թղթապանակը <1>{{folderTitle}}</1> ատեղծվել է",
-  "GeneralLinkRevokedAndCreatedSuccessfully": "Նոր ընդհանուր հղումը հաջողությամբ ստեղծվեց",
+  "GeneralLinkDeletedSuccessfully": "Նոր ընդհանուր հղումը հաջողությամբ ստեղծվեց",
   "GoToMyRooms": "Գնալ Իմ սենյակները",
   "GoToSection": "Անցեք {{sectionName}}",
   "Index": "Ինդեքս",

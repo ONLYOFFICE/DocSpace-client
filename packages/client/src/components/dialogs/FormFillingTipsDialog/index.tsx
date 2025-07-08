@@ -29,12 +29,11 @@ import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { TUser } from "@docspace/shared/api/people/types";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { UserStore } from "@docspace/shared/store/UserStore";
-
 import TutorialPreview from "PUBLIC_DIR/images/form_filling_tutorial.gif";
 import TutorialPreviewDark from "PUBLIC_DIR/images/form_filling_tutorial_dark.gif";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
 import {
   ModalDialog,
@@ -173,7 +172,7 @@ export default inject(
     userStore,
   }: {
     dialogsStore: DialogsStore;
-    userStore: UserStore;
+    userStore: UsersStore;
   }) => {
     const {
       welcomeFormFillingTipsVisible: visible,

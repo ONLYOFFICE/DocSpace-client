@@ -32,7 +32,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ButtonKeys, EmployeeType } from "@docspace/shared/enums";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { downgradeUserType } from "@docspace/shared/api/people";
-import { TUser } from "@docspace/shared/api/people/types";
 
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
@@ -98,7 +97,7 @@ const ChangeUserTypeEvent = ({
             : t("SuccessChangeUserType"),
         );
 
-        successCallback?.(users as TUser[]);
+        successCallback?.(users);
       })
       .catch(() => {
         toastr.error(
@@ -169,6 +168,7 @@ const ChangeUserTypeEvent = ({
     <ChangeUserTypeDialog
       visible
       isGuestsDialog={isGuestsDialog}
+      toType={toType}
       firstType={firstType ?? ""}
       secondType={secondType}
       onClose={onCloseAction}

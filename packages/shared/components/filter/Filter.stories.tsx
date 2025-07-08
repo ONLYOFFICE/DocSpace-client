@@ -1,16 +1,12 @@
 import React from "react";
-import { StoryFn, Meta } from "@storybook/react";
+import { Story, Meta } from "@storybook/react";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { DeviceType, FilterGroups } from "../../enums";
 import Filter from ".";
-import {
-  FilterProps,
-  TGetSelectedSortData,
-  TSortDataItem,
-} from "./Filter.types";
+import { FilterProps, TSortDataItem } from "./Filter.types";
 
 export default {
   title: "Layout components/Filter",
@@ -69,14 +65,14 @@ const mockSortData: TSortDataItem[] = [
   },
 ];
 
-const Template: StoryFn<FilterProps> = (args) => <Filter {...args} />;
+const Template: Story<FilterProps> = (args) => <Filter {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   placeholder: "Search...",
   isIndexEditingMode: false,
   getSortData: () => mockSortData,
-  getSelectedSortData: (() => {}) as TGetSelectedSortData,
+  getSelectedSortData: () => ({}) as TSortDataItem,
   view: "tile",
   viewAs: "tile",
   viewSelectorVisible: true,

@@ -59,7 +59,7 @@ import { isNextImage } from "../../utils/typeGuards";
 import { toastr } from "../../components/toast";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
-import StyledSendClockIcon from "./components/SendClockIcon";
+import { StyledSendClockIcon } from "./PeopleSelector.styled";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -178,11 +178,6 @@ const PeopleSelector = ({
 
   filterUserId,
   currentUserId,
-
-  // Accessibility attributes
-  "aria-label": ariaLabel,
-  "data-selector-type": dataSelectorType,
-  "data-test-id": dataTestId,
   withOutCurrentAuthorizedUser,
 
   withFooterCheckbox,
@@ -523,7 +518,6 @@ const PeopleSelector = ({
     return (
       <div
         style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
-        aria-label={`${isGroup ? "Group" : "User"}: ${label}${email ? `, ${email}` : ""}`}
       >
         <div
           style={{
@@ -539,8 +533,6 @@ const PeopleSelector = ({
             fontSize="14px"
             noSelect
             truncate
-            title={label}
-            aria-label={label}
             dir="auto"
           >
             {label}
@@ -642,9 +634,6 @@ const PeopleSelector = ({
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
-      aria-label={ariaLabel || "People Selector"}
-      data-selector-type={dataSelectorType || "people"}
-      data-test-id={dataTestId || "people-selector"}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}

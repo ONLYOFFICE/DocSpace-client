@@ -35,11 +35,9 @@ const version = pkg.version;
 
 const nextConfig = {
   basePath: "/doceditor",
+  output: "standalone",
   typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
+    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
   },
   serverExternalPackages: [
     "nconf",
@@ -80,21 +78,8 @@ const getBuildYear = () => {
   return today.getFullYear();
 };
 
-if (process.env.DEPLOY) {
-  nextConfig.output = "standalone";
-}
-
 module.exports = {
   webpack(config) {
-    // Add resolve configuration for shared package
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve?.alias,
-        "@docspace/shared": path.resolve(__dirname, "../shared"),
-      },
-    };
-
     config.devtool = "source-map";
 
     if (config.mode === "production") {

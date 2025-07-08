@@ -25,16 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Button, ButtonSize } from "../../../../components/button";
-import { BackupStorageLocalKey, ThirdPartyStorages } from "../../../../enums";
-import { useDidMount } from "../../../../hooks/useDidMount";
-import { getFromLocalStorage } from "../../../../utils/getFromLocalStorage";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  ThirdPartyStorages,
+  BackupStorageLocalKey,
+} from "@docspace/shared/enums";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 
 import {
   RackspaceSettings,
   formNames,
-} from "../../../../components/rackspace-settings";
-import type { SelectedStorageType, TTranslation } from "../../../../types";
+} from "@docspace/shared/components/rackspace-settings";
+import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
 
 interface RackspaceStorageProps {
   t: TTranslation;

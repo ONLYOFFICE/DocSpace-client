@@ -36,6 +36,14 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
+import {
+  StyledPage,
+  StyledContent,
+  StyledBody,
+  StyledSimpleNav,
+} from "./FilePassword.styled";
+import { FilePasswordProps } from "./FilePassword.types";
+
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
@@ -47,13 +55,6 @@ import { useTheme } from "styled-components";
 import { ValidationStatus, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
 import Image from "next/image";
-import { FilePasswordProps } from "./FilePassword.types";
-import {
-  StyledPage,
-  StyledContent,
-  StyledBody,
-  StyledSimpleNav,
-} from "./FilePassword.styled";
 
 const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const { t } = useTranslation(["Common"]);
@@ -70,6 +71,11 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     !passwordValid && setPasswordValid(true);
+  };
+  const onKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      onSubmit();
+    }
   };
 
   const onSubmit = async () => {
@@ -97,16 +103,11 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
 
       if (res?.status === ValidationStatus.InvalidPassword) {
         setErrorMessage(t("Common:IncorrectPassword"));
+        return;
       }
     } catch (error) {
       toastr.error(error as TData);
       setIsLoading(false);
-    }
-  };
-
-  const onKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      onSubmit();
     }
   };
 
@@ -170,7 +171,7 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
                   </div>
 
                   <FieldContainer
-                    isVertical
+                    isVertical={true}
                     labelVisible={false}
                     hasError={!!errorMessage}
                     errorMessage={errorMessage}

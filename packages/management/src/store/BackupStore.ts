@@ -48,18 +48,12 @@ import { getSettingsThirdParty } from "@/lib/actions";
 
 class BackupStore {
   public connectedThirdPartyAccount: Nullable<SettingsThirdPartyType> = null;
-
   public providers: TThirdParty[] = [];
-
   public connectingStorages: ConnectingStoragesType[] = [];
-
   public selectedThirdPartyAccount: Nullable<Partial<ThirdPartyAccountType>> =
     null;
-
   public accounts: ThirdPartyAccountType[] = [];
-
   public backupProgressError = "";
-
   public isBackupProgressVisible = false;
 
   constructor() {
@@ -77,7 +71,6 @@ class BackupStore {
   public setThirdPartyProviders = (providers: TThirdParty[]) => {
     this.providers = providers;
   };
-
   public setConnectingStorages = (storages: ConnectingStoragesType[]) => {
     this.connectingStorages = storages;
   };

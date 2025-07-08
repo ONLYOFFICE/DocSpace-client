@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -44,18 +44,13 @@ const ArchiveDialogComponent = (props) => {
     items,
   } = props;
 
-  const [isLoading, seIsLoading] = useState(false);
-
   const onClose = () => {
-    if (isLoading) return;
     setArchiveDialogVisible(false);
   };
 
-  const onAction = async () => {
-    seIsLoading(true);
-    await setArchiveAction("archive", items, t);
-    seIsLoading(false);
+  const onAction = () => {
     setArchiveDialogVisible(false);
+    setArchiveAction("archive", items, t);
   };
 
   const onKeyPress = (e) => {
@@ -103,8 +98,6 @@ const ArchiveDialogComponent = (props) => {
           primary
           onClick={onAction}
           scale
-          isDisabled={isLoading}
-          isLoading={isLoading}
         />
         <Button
           id="shared_move-to-archived-modal_cancel"
@@ -113,7 +106,6 @@ const ArchiveDialogComponent = (props) => {
           size="normal"
           onClick={onClose}
           scale
-          isDisabled={isLoading}
         />
       </ModalDialog.Footer>
     </ModalDialog>

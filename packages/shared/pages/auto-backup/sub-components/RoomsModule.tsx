@@ -27,16 +27,19 @@
 import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 
-import type { BackupToPublicRoomOptionType, Nullable } from "../../../types";
-import { BackupStorageType, type DeviceType } from "../../../enums";
+import { BackupStorageType, type DeviceType } from "@docspace/shared/enums";
 import {
   FilesSelectorInput,
   type FilesSelectorSettings,
-} from "../../../components/files-selector-input";
-import BackupToPublicRoom from "../../../dialogs/backup-to-public-room-dialog";
-import { useDidMount } from "../../../hooks/useDidMount";
+} from "@docspace/shared/components/files-selector-input";
+import BackupToPublicRoom from "@docspace/shared/dialogs/backup-to-public-room-dialog";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import type { TBreadCrumb } from "../../../components/selector/Selector.types";
+import type {
+  BackupToPublicRoomOptionType,
+  Nullable,
+} from "@docspace/shared/types";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 
 import {
   ScheduleComponent,

@@ -3,7 +3,7 @@
   "content": "No users found",
   "content_en_sha1_hash": "612eb3c64c413c645d13566a1cfa74199923df23",
   "created_at": "2025-05-19T21:30:46.927Z",
-  "updated_at": "2025-06-30T12:20:31.302Z",
+  "updated_at": "2025-05-26T07:57:32.375Z",
   "comment": {
     "text": "This translation key is used to display a message when users are not found or not imported. It appears in an empty screen component and serves as the header text of an empty table view, indicating that there are no users to select or import.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 138,
+      "line_number": 135,
       "context": "</>\n ) : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"",
       "module": "/packages/client"
     },
@@ -36,19 +36,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
-      "line_number": 139,
+      "line_number": 130,
       "context": "</>\n ) : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 201,
+      "line_number": 198,
       "context": "</>\n ) : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 200,
+      "line_number": 198,
       "context": "</>\n ) : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"",
       "module": "/packages/client"
     }

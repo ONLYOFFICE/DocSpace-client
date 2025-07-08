@@ -39,7 +39,7 @@ import {
   RoomTile,
   TemplateTile,
 } from "@docspace/shared/components/tiles";
-import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+import SpaceQuota from "@docspace/client/src/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
 import FilesTileContent from "./FilesTileContent";

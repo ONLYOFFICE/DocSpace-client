@@ -53,6 +53,7 @@ const BlockHeader = ({
         tag=""
         as="p"
         color=""
+        textAlign=""
       >
         {header}
         {isRequired ? (

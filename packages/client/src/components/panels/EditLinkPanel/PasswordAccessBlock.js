@@ -147,6 +147,7 @@ const PasswordAccessBlock = (props) => {
               fontWeight={600}
               isHovered
               type="action"
+              isDisabled={isLoading}
               onClick={onCleanClick}
             >
               {t("Files:Clean")}
@@ -156,6 +157,7 @@ const PasswordAccessBlock = (props) => {
               fontWeight={600}
               isHovered
               type="action"
+              isDisabled={isLoading}
               onClick={onCopyClick}
             >
               {t("Files:CopyPassword")}

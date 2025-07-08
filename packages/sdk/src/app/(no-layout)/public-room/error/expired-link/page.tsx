@@ -29,11 +29,8 @@
 import { PublicRoomError } from "@docspace/shared/pages/PublicRoom";
 
 import ClientOnly from "@/components/ClientOnly";
-import { logger } from "../../../../../../logger.mjs";
 
 export default async function ExpiredLinkPage() {
-  logger.info("Public-room error expired-link page");
-
   return (
     <ClientOnly>
       <PublicRoomError />

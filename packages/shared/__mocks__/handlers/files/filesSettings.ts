@@ -1113,7 +1113,6 @@ const getFilesSettings = (): TFilesSettings => {
       ".md",
       ".markdown",
     ],
-    extsDiagram: [".vsdm", ".vsdx", ".vssm", ".vssx", ".vstm", ".vstx"],
     internalFormats: {
       Document: ".docx",
       Spreadsheet: ".xlsx",

@@ -25,8 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { TFunction } from "i18next";
-
 import { Consumer } from "@docspace/shared/utils/context";
 
 import TableView from "./TableView";
@@ -42,13 +40,13 @@ const AccountsTable = (props: AccountsTableProps) => {
       {(context) =>
         viewAs === "table" ? (
           <TableView
-            t={t as TFunction}
+            t={t}
             sectionWidth={context.sectionWidth}
             accountsData={accountsData}
           />
         ) : (
           <RowView
-            t={t as TFunction}
+            t={t}
             sectionWidth={context.sectionWidth}
             accountsData={accountsData}
           />

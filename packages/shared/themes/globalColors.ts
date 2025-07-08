@@ -160,7 +160,4 @@ export const globalColors = {
     "#7757D9",
     "#FF7FD4",
   ],
-
-  lightEditorBackground: "#F3F3F3",
-  darkEditorBackground: "#222222",
 };

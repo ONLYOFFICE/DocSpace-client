@@ -96,7 +96,7 @@
   "FinalizeVersion": "Versioni përfundimtar",
   "FolderRenamed": "Dosja '{{folderTitle}}' është riemërtuar në '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Dosja<1>{{folderTitle}}</1> u krijua",
-  "GeneralLinkRevokedAndCreatedSuccessfully": "Lidhja e re e përgjithshme u krijua me sukses",
+  "GeneralLinkDeletedSuccessfully": "Lidhja e re e përgjithshme u krijua me sukses",
   "GoToMyRooms": "Shkoni te dhomat",
   "GoToSection": "Shkoni në {{sectionName}}",
   "Index": "Indeks",

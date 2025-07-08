@@ -28,7 +28,6 @@
 
 import React from "react";
 import { I18nextProvider } from "react-i18next";
-import { usePathname, useSearchParams } from "next/navigation";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
@@ -42,6 +41,7 @@ import useTheme from "@/hooks/useTheme";
 import pkgFile from "../../package.json";
 
 import ErrorBoundaryWrapper from "./ErrorBoundary";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export const Providers = ({
   children,
@@ -93,6 +93,7 @@ export const Providers = ({
     user,
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
+    i18n,
     lang: locale,
   });
 
@@ -104,9 +105,11 @@ export const Providers = ({
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
         >
-          {shouldRedirect && redirectURL && expectedPathName !== pathName
-            ? null
-            : children}
+          {shouldRedirect && redirectURL && expectedPathName !== pathName ? (
+            <></>
+          ) : (
+            children
+          )}
         </ErrorBoundaryWrapper>
       </I18nextProvider>
     </ThemeProvider>

@@ -29,8 +29,8 @@ import { useTranslation } from "react-i18next";
 import {
   RackspaceSettings,
   formNames,
-} from "../../../../../components/rackspace-settings";
-import { useDidMount } from "../../../../../hooks/useDidMount";
+} from "@docspace/shared/components/rackspace-settings";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import type { RackspaceStorageProps } from "./RackspaceStorage.types";
 
 const RackspaceStorage = ({

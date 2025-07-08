@@ -69,9 +69,9 @@ export default function GlobalError({ error }: { error: Error }) {
 
       setSettings(settingsData);
       setUser(userData);
-    } catch (e) {
+    } catch (error) {
       setError(true);
-      console.error(e);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -84,9 +84,9 @@ export default function GlobalError({ error }: { error: Error }) {
   if (isError) return;
 
   return (
-    <html lang={i18n.language}>
+    <html>
       <body>
-        {!isLoading ? (
+        {!isLoading && (
           <ThemeProvider theme={theme}>
             <Error520SSR
               i18nProp={i18n}
@@ -97,7 +97,7 @@ export default function GlobalError({ error }: { error: Error }) {
               currentDeviceType={currentDeviceType}
             />
           </ThemeProvider>
-        ) : null}
+        )}
       </body>
     </html>
   );

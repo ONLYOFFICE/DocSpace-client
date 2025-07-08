@@ -27,7 +27,13 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useContext, useLayoutEffect, useRef, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -46,7 +52,7 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { getUser } from "@docspace/shared/api/people";
 
 const AuthHandler = () => {
-  const searchParams = useSearchParams();
+  let searchParams = useSearchParams();
   const { t } = useTranslation(["Common"]);
 
   const [authorized, setAuthorized] = useState(false);
@@ -94,7 +100,7 @@ const AuthHandler = () => {
             return;
           }
 
-          const newUrl = window.location.search.split("referenceUrl=")[1];
+          const newUrl = location.search.split("referenceUrl=")[1];
 
           const token = getOAuthJWTSignature(user.id);
 
@@ -109,12 +115,13 @@ const AuthHandler = () => {
 
         if (referenceUrl) {
           try {
-            const url = new URL(referenceUrl);
+            new URL(referenceUrl);
             if (isFileHandler && isExternalDownloading) {
               setAuthorized(true);
               return;
+            } else {
+              return window.location.replace(referenceUrl);
             }
-            return window.location.replace(url.toString());
           } catch {
             return window.location.replace(
               combineUrl(window.location.origin, referenceUrl),

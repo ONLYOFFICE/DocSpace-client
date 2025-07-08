@@ -26,15 +26,12 @@
 
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { Trans } from "react-i18next";
 
 import QuantityPicker from "@docspace/shared/components/quantity-picker";
 import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { Text } from "@docspace/shared/components/text";
 
 import { useServicesActions } from "../hooks/useServicesActions";
-import styles from "../styles/index.module.scss";
 
 type SelectionAmountProps = {
   amount: number;
@@ -54,14 +51,10 @@ type SelectionAmountProps = {
   fetchCardLinked?: (url: string) => Promise<any>;
   isPaymentBlockedByBalance?: boolean;
   isCardLinkedToPortal?: boolean;
-  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
-  isUpgradeStoragePlan?: boolean;
 };
 
 let timeout: NodeJS.Timeout;
 let controller: AbortController;
-
-const MIN_VALUE = 100;
 
 const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
   const {
@@ -81,27 +74,22 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     fetchCardLinked,
     isCardLinkedToPortal,
     isPaymentBlockedByBalance,
-    formatWalletCurrency,
-    isUpgradeStoragePlan,
   } = props;
 
-  const { maxStorageLimit, t } = useServicesActions();
+  const { maxStorageLimit, formatWalletCurrency, t } = useServicesActions();
 
   const { isRTL } = useInterfaceDirection();
 
   useEffect(() => {
-    if (!isPaymentBlockedByBalance || !isUpgradeStoragePlan) {
-      setReccomendedAmount!(0);
-      return;
-    }
+    if (!isPaymentBlockedByBalance) return;
 
     const amountValue = newStorageSizeOnUpgrade
       ? partialUpgradeFee
       : totalPrice;
 
-    const difference = Math.abs(walletBalance! - amountValue!);
-    const recommendedValue = Math.ceil(difference);
-    setReccomendedAmount?.(recommendedValue);
+    const difference = Math.abs(walletBalance - amountValue);
+
+    setReccomendedAmount(Math.ceil(difference));
 
     const getCardLink = () => {
       if (timeout) clearTimeout(timeout);
@@ -112,23 +100,15 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
         controller = new AbortController();
 
         try {
-          const url = `${window.location.href}?complete=true&amount=${amount}&recommendedAmount=${recommendedValue}`;
-          await fetchCardLinked?.(url);
+          const url = `${window.location.href}?complete=true&amount=${amount}&recommendedAmount=${difference}`;
+          await fetchCardLinked(url);
         } catch (e) {
           console.error(e);
         }
       }, 1000);
     };
     if (!isCardLinkedToPortal) getCardLink();
-  }, [
-    amount,
-    isCardLinkedToPortal,
-    isPaymentBlockedByBalance,
-    totalPrice,
-    partialUpgradeFee,
-    newStorageSizeOnUpgrade,
-    walletBalance,
-  ]);
+  }, [amount, isCardLinkedToPortal, isPaymentBlockedByBalance]);
 
   const amountTabs = () => {
     const amounts = [100, 200, 500, 1024];
@@ -148,48 +128,32 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
   const disableValueProps = hasScheduledStorageChange
     ? {
         disableValue: getDirectionalText(
-          currentStoragePlanSize ?? 0,
-          nextStoragePlanSize ?? 0,
+          currentStoragePlanSize,
+          nextStoragePlanSize,
         ),
       }
     : {};
 
-  const underContorlsTitle = (
-    <Trans
-      t={t}
-      ns="Payments"
-      i18nKey="PerStorageWitnMinValue"
-      values={{
-        currency: formatWalletCurrency!(storagePriceIncrement),
-        amount: getConvertedSize(t, storageSizeIncrement || 0),
-        storageUnit: t("Common:Gigabyte"),
-        minValue: MIN_VALUE,
-      }}
-      components={{
-        1: <Text fontWeight={600} as="span" />,
-      }}
-    />
-  );
-
   return (
-    <div className={styles.selectionAmount}>
-      <QuantityPicker
-        value={amount}
-        minValue={100}
-        maxValue={maxStorageLimit}
-        step={1}
-        title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
-        showPlusSign
-        onChange={onChangeNumber}
-        isDisabled={hasScheduledStorageChange || isLoading}
-        items={amountTabs()}
-        withoutContorls={hasScheduledStorageChange}
-        underContorlsTitle={underContorlsTitle}
-        {...disableValueProps}
-        isLarge
-        enableZero
-      />
-    </div>
+    <QuantityPicker
+      className="select-users-count-container"
+      value={amount}
+      minValue={0}
+      maxValue={maxStorageLimit}
+      step={1}
+      title={t("ExtraStorage", { storageUnit: t("Common:Gigabyte") })}
+      showPlusSign
+      onChange={onChangeNumber}
+      isDisabled={hasScheduledStorageChange || isLoading}
+      items={amountTabs()}
+      withoutContorls={hasScheduledStorageChange}
+      underContorlsTitle={t("PerStorage", {
+        currency: formatWalletCurrency(storagePriceIncrement),
+        amount: getConvertedSize(t, storageSizeIncrement || 0),
+      })}
+      {...disableValueProps}
+      isLarge
+    />
   );
 };
 
@@ -203,15 +167,14 @@ export default inject(
       nextStoragePlanSize,
     } = currentTariffStatusStore;
 
+    const { walletBalance, fetchCardLinked, isCardLinkedToPortal } =
+      paymentStore;
     const {
-      walletBalance,
-      fetchCardLinked,
-      isCardLinkedToPortal,
       storageSizeIncrement,
       storagePriceIncrement,
-      formatWalletCurrency,
-    } = paymentStore;
-    const { partialUpgradeFee, setReccomendedAmount } = servicesStore;
+      partialUpgradeFee,
+      setReccomendedAmount,
+    } = servicesStore;
 
     return {
       storageSizeIncrement,
@@ -229,7 +192,6 @@ export default inject(
       fetchCardLinked,
       setReccomendedAmount,
       isCardLinkedToPortal,
-      formatWalletCurrency,
     };
   },
 )(observer(SelectionAmount));

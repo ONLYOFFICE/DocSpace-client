@@ -24,6 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import classNames from "classnames";
+
+import DocumentSample from "PUBLIC_DIR/images/logo/document_sample.svg?url";
+import PdfFormSample from "PUBLIC_DIR/images/logo/pdf_form_sample.svg?url";
+import SpreadsheetSample from "PUBLIC_DIR/images/logo/spreadsheet_sample.svg?url";
+import PresentationSample from "PUBLIC_DIR/images/logo/presentation_sample.svg?url";
+import EditorSample from "PUBLIC_DIR/images/logo/embedded_sample.svg?url";
+
 import { Text } from "../../../components/text";
 import { Link, LinkType } from "../../../components/link";
 import { getLogoFromPath, isMobile } from "../../../utils";
@@ -41,10 +49,12 @@ export const Logo = (props: ILogoProps) => {
     inputId,
     linkId,
     imageClass,
+    isEditor,
+    isEditorHeader,
     name,
   } = props;
 
-  const currentLogo = getLogoFromPath(src) as string;
+  const currentLogo = getLogoFromPath(src);
 
   const onLogoClick = () => {
     if (!isMobile()) return;
@@ -63,12 +73,73 @@ export const Logo = (props: ILogoProps) => {
             {title}
           </Text>
         ) : null}
-        <img
-          alt=""
-          className={imageClass}
-          src={currentLogo}
-          onClick={onLogoClick}
-        />
+        {isEditor ? (
+          <div className={styles.logosEditorWrapper} onClick={onLogoClick}>
+            <div className={styles.logosEditorContainer}>
+              <img
+                alt=""
+                className={classNames(
+                  styles.logoDocsEditor,
+                  styles.backgroundBlue,
+                )}
+                src={currentLogo}
+              />
+              <img alt="" src={DocumentSample} />
+            </div>
+            <div className={styles.logosEditorContainer}>
+              <img
+                alt=""
+                className={classNames(
+                  styles.logoDocsEditor,
+                  styles.backgroundOrange,
+                )}
+                src={currentLogo}
+              />
+              <img alt="" src={PresentationSample} />
+            </div>
+
+            <div className={styles.logosEditorContainer}>
+              <img
+                alt=""
+                className={classNames(
+                  styles.logoDocsEditor,
+                  styles.backgroundGreen,
+                )}
+                src={currentLogo}
+              />
+              <img alt="" src={SpreadsheetSample} />
+            </div>
+
+            <div className={styles.logosEditorContainer}>
+              <img
+                alt=""
+                className={classNames(
+                  styles.logoDocsEditor,
+                  styles.backgroundRed,
+                )}
+                src={currentLogo}
+              />
+              <img alt="" src={PdfFormSample} />
+            </div>
+          </div>
+        ) : isEditorHeader ? (
+          <div className={styles.editorHeaderContainer}>
+            <img
+              alt=""
+              className={classNames(imageClass, styles.editorLogoHeader)}
+              src={currentLogo}
+              onClick={onLogoClick}
+            />
+            <img alt="" src={EditorSample} />
+          </div>
+        ) : (
+          <img
+            alt=""
+            className={imageClass}
+            src={currentLogo}
+            onClick={onLogoClick}
+          />
+        )}
       </div>
       <label>
         <input

@@ -47,11 +47,9 @@ const getBuildYear = () => {
 
 const nextConfig = {
   basePath: "/login",
+  output: "standalone",
   typescript: {
-    ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
+    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
   },
   serverExternalPackages: [
     "nconf",
@@ -77,15 +75,6 @@ const nextConfig = {
     },
   },
   webpack: (config) => {
-    // Add resolve configuration for shared package
-    config.resolve = {
-      ...config.resolve,
-      alias: {
-        ...config.resolve?.alias,
-        "@docspace/shared": path.resolve(__dirname, "../shared"),
-      },
-    };
-
     config.devtool = "source-map";
 
     if (config.mode === "production") {
@@ -180,9 +169,5 @@ const nextConfig = {
   },
   devIndicators: false,
 };
-
-if (process.env.DEPLOY) {
-  nextConfig.output = "standalone";
-}
 
 module.exports = nextConfig;

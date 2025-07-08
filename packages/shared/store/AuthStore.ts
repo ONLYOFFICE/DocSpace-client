@@ -163,12 +163,7 @@ class AuthStore {
     this.setIsUpdatingTariff(true);
 
     await this.getPaymentInfo();
-
-    const user = this.userStore?.user;
-
-    if (user && user.isAdmin) {
-      await this.currentTariffStatusStore?.fetchPayerInfo();
-    }
+    await this.currentTariffStatusStore?.setPayerInfo();
 
     this.setIsUpdatingTariff(false);
   };

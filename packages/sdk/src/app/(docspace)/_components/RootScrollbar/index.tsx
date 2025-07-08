@@ -25,7 +25,6 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-
 "use client";
 
 import { observer } from "mobx-react";
@@ -33,8 +32,8 @@ import { observer } from "mobx-react";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { DeviceType } from "@docspace/shared/enums";
 
-import useDeviceType from "@/hooks/useDeviceType";
 import styles from "./RootScrollbar.module.scss";
+import useDeviceType from "@/hooks/useDeviceType";
 
 const RootScrollbar = ({ children }: React.PropsWithChildren) => {
   const { currentDeviceType } = useDeviceType();

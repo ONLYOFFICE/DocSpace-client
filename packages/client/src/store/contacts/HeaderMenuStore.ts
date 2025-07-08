@@ -148,8 +148,7 @@ class HeaderMenuStore {
     } = this.usersStore!;
     const { setSendInviteDialogVisible, setRemoveGuestDialogVisible } =
       this.dialogStore;
-    const { toggleDeleteProfileEverDialog, settingsStore } =
-      this.contextOptionsStore;
+    const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
     const { isVisible } = this.infoPanelStore;
     const { isRoomAdmin, isCollaborator } = this.userStore.user!;
 
@@ -266,13 +265,6 @@ class HeaderMenuStore {
         iconUrl: DisableReactSvgUrl,
       },
     ];
-
-    if (!settingsStore.allowInvitingMembers) {
-      const indexInvite = headerMenu.findIndex(
-        (item) => item.id === "menu-invite",
-      );
-      headerMenu.splice(indexInvite, 1);
-    }
 
     return headerMenu;
   };

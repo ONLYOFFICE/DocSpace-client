@@ -155,10 +155,7 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["9-0"]);
       }
 
-      if (
-        location.pathname.includes("services") &&
-        !location.pathname.includes("third-party-services")
-      ) {
+      if (location.pathname.includes("services")) {
         setSelectedKeys(["10-0"]);
       }
 

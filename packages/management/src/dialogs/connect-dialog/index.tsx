@@ -23,9 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 "use client";
-
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useCallback, useState } from "react";
@@ -97,8 +95,7 @@ export const ConnectDialog = observer(() => {
   };
 
   const setThirdPartyAccountsInfo = useCallback(
-    (trans: TTranslation) =>
-      backupStore.setThirdPartyAccountsInfo(trans, isAdmin),
+    (t: TTranslation) => backupStore.setThirdPartyAccountsInfo(t, isAdmin),
     [backupStore, isAdmin],
   );
 

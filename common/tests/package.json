@@ -12,15 +12,12 @@
     "test:skip-base-languages": "cross-env SKIP_BASE_LANGUAGES_TEST=true jest locales.test.js",
     "test:locales": "jest locales.test.js",
     "test:images": "jest images.test.js",
-    "test:colors": "jest colors.test.js",
-    "test:dependencies": "jest dependencies.test.js",
-    "open-report": "open-cli reports/tests-results.html"
+    "test:colors": "jest colors.test.js"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
     "jest": "29.7.0",
     "jest-expect-message": "1.1.3",
     "jest-html-reporter": "3.10.2",
-    "open-cli": "^8.0.0"
+    "cross-env": "^7.0.3"
   }
 }

@@ -26,16 +26,13 @@
 
 import { TTranslation } from "@docspace/shared/types";
 import { Trans } from "react-i18next";
-import { TFunction } from "i18next";
-
 import moment from "moment";
-import { FeedActionKeys } from "./FeedInfo";
+import { AnyFeedInfo, FeedActionKeys } from "./FeedInfo";
 import { HistoryText } from "./HistoryText";
-import { Feed } from "./HistoryBlockContent/HistoryBlockContent.types";
 
 export const useFeedTranslation = (
   t: TTranslation,
-  feed: Feed,
+  feed: { action: { key: AnyFeedInfo["key"] }; data: any },
   hasRelatedItems: boolean,
 ) => {
   const count = feed.related.length + 1;
@@ -141,17 +138,17 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomCreated:
       return (
         <Trans
-          t={t as TFunction}
+          t={t}
           ns="InfoPanel"
           i18nKey="HistoryRoomCreated"
           values={{ roomTitle: feed.data.title }}
-          components={{ 1: <HistoryText title={feed.data.title!} /> }}
+          components={{ 1: <HistoryText title={feed.data.title} /> }}
         />
       );
     case FeedActionKeys.RoomCopied:
       return (
         <Trans
-          t={t as TFunction}
+          t={t}
           ns="InfoPanel"
           i18nKey="HistoryRoomCopied"
           values={{ roomTitle: feed.data.title }}
@@ -161,7 +158,7 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomRenamed:
       return (
         <Trans
-          t={t as TFunction}
+          t={t}
           ns="InfoPanel"
           i18nKey="RoomRenamed"
           values={{
@@ -169,8 +166,8 @@ export const useFeedTranslation = (
             roomTitle: feed.data.newTitle,
           }}
           components={{
-            1: <HistoryText title={feed.data.oldTitle!} />,
-            2: <HistoryText title={feed.data.newTitle!} />,
+            1: <HistoryText title={feed.data.oldTitle} />,
+            2: <HistoryText title={feed.data.newTitle} />,
           }}
         />
       );
@@ -189,7 +186,7 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomExternalLinkRenamed:
       return (
         <Trans
-          t={t as TFunction}
+          t={t}
           ns="InfoPanel"
           i18nKey="RoomExternalLinkRenamed"
           values={{
@@ -202,7 +199,7 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomExternalLinkDeleted:
       return (
         <Trans
-          t={t as TFunction}
+          t={t}
           ns="InfoPanel"
           i18nKey="RoomExternalLinkDeleted"
           values={{
@@ -214,7 +211,7 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomExternalLinkRevoked:
       return (
         <Trans
-          t={t as TFunction}
+          t={t}
           ns="InfoPanel"
           i18nKey="RoomExternalLinkRevoked"
           values={{
@@ -253,8 +250,8 @@ export const useFeedTranslation = (
     case FeedActionKeys.RoomIndexingDisabled:
       return t("InfoPanel:RoomIndexingDisabled");
     case FeedActionKeys.RoomLifeTimeSet: {
-      const periodLifeTime = feed.data.lifeTime?.period;
-      const value = feed.data.lifeTime?.value;
+      const periodLifeTime = feed.data.lifeTime.period;
+      const value = feed.data.lifeTime.value;
       const maxValue = 9999;
       const period =
         periodLifeTime === 0
@@ -274,7 +271,7 @@ export const useFeedTranslation = (
 
       return (
         <Trans
-          t={t as TFunction}
+          t={t}
           ns="InfoPanel"
           i18nKey="RoomLifeTimeSet"
           values={{ data }}

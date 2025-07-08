@@ -249,7 +249,7 @@ const SectionBodyContent = (props) => {
           // 30 - it`s column padding
           Array.from(classElements).forEach((cl) => {
             if (cl.clientWidth - 30) {
-              cl.classList.remove("droppable-hover");
+              cl.classList.add("droppable-hover");
             }
           });
           if (isIndexEditingMode) {

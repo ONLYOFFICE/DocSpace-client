@@ -64,18 +64,11 @@ export default function useFileType() {
     [filesSettings?.masterFormExtension],
   );
 
-  const isDiagram = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsDiagram ?? [], extension),
-    [filesSettings?.extsDiagram],
-  );
-
   return {
     isDocument,
     isPresentation,
     isSpreadsheet,
     isArchive,
     isMasterForm,
-    isDiagram,
   };
 }

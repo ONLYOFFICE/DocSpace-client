@@ -115,12 +115,13 @@ const CalendarComponent = ({
     if (!date) return;
     const formattedDate = moment(date.format("YYYY-MM-DD"));
     setSelectedDate(date);
-    setCalendarDay(formattedDate.format("YYYY-MM-DD"));
+    // eslint-disable-next-line no-underscore-dangle
+    setCalendarDay(formattedDate._i);
     setIsOpen(false);
   };
 
   const formattedRoomCreationDate =
-    moment(roomCreationDate).format("YYYY-MM-DD");
+    moment(roomCreationDate).format("YYYY/MM/DD");
 
   return (
     <StyledCalendarComponent>

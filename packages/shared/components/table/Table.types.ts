@@ -24,16 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { IndexRange } from "react-virtualized";
 
 import { ContextMenuModel } from "../context-menu";
+import { TTheme } from "../../themes";
 
 export interface TableContainerProps {
-  forwardedRef: React.Ref<HTMLDivElement>;
+  forwardedRef: React.RefObject<HTMLDivElement>;
   useReactWindow: boolean;
   children?: React.ReactNode;
-  className?: string;
 }
 
 export type TTableColumn = {
@@ -79,9 +78,9 @@ export interface TableHeaderProps {
   tagRef?:
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
+  theme: TTheme;
   isIndexEditingMode?: boolean;
   withoutWideColumn?: boolean;
-  style?: React.CSSProperties;
 }
 
 export interface TableHeaderCellProps {
@@ -96,12 +95,11 @@ export interface TableHeaderCellProps {
   tagRef?:
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
-  testId?: string;
 }
 
 export interface TableSettingsProps {
   columns: TTableColumn[];
-  disableSettings?: boolean;
+  disableSettings: boolean;
 }
 
 export interface TableBodyProps {
@@ -124,21 +122,16 @@ export interface TableRowProps {
   children: React.ReactNode;
   contextOptions?: ContextMenuModel[];
   onHideContextMenu?: () => void;
-  selectionProp?: { className?: string; value?: string };
+  selectionProp?: { className: string };
   className?: string;
   style?: React.CSSProperties;
-  contextMenuCellStyle?: React.CSSProperties;
   title?: string;
   getContextModel?: () => ContextMenuModel[];
   badgeUrl?: string;
   isIndexEditingMode?: boolean;
   onClick?: (e: React.MouseEvent) => void;
-  onDoubleClick?: (e: React.MouseEvent) => void;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   hideColumns?: boolean;
-  isActive?: boolean;
-  checked?: boolean;
-  dragging?: boolean;
 }
 
 export interface TableCellProps {
@@ -148,7 +141,6 @@ export interface TableCellProps {
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   style?: React.CSSProperties;
   children?: React.ReactNode;
-  value?: string;
 }
 
 export type TGroupMenuItem = {
@@ -157,30 +149,30 @@ export type TGroupMenuItem = {
   onClick: (e: React.MouseEvent) => void;
   iconUrl: string;
   title: string;
-  withDropDown?: boolean;
-  options?: ContextMenuModel[];
+  withDropDown: boolean;
+  options: ContextMenuModel[];
   id: string;
 };
 
-interface TableGroupMenuBased {
+interface TableGroupmenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
-  checkboxOptions?: React.ReactElement<{ children?: React.ReactNode }>;
-  onClick?: () => void;
+  checkboxOptions: React.ReactElement<{ children?: React.ReactNode }>;
+  onClick: () => void;
   onChange: (isChecked: boolean) => void;
   checkboxMargin?: string;
   withoutInfoPanelToggler: boolean;
   isInfoPanelVisible?: boolean;
   isMobileView?: boolean;
   isBlocked?: boolean;
-  toggleInfoPanel?: () => void;
+  toggleInfoPanel: () => void;
   withComboBox?: boolean;
   headerLabel?: string;
 }
 export type TableGroupMenuProps =
-  | (TableGroupMenuBased & {
+  | (TableGroupmenuBased & {
       isCloseable?: undefined;
       onCloseClick?: undefined;
     })
-  | (TableGroupMenuBased & { isCloseable: boolean; onCloseClick: () => void });
+  | (TableGroupmenuBased & { isCloseable: boolean; onCloseClick: () => void });

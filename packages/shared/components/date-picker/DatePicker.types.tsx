@@ -51,6 +51,4 @@ export type DatePickerProps = {
   openDate: moment.Moment;
   isMobile?: boolean;
   hideCross?: boolean;
-  /** Automatically positions the calendar based on available space */
-  autoPosition?: boolean;
 };

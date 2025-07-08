@@ -104,7 +104,6 @@ jest.mock("../../../drop-down/sub-components/VirtualList", () => ({
 
 describe("ViewerWrapper", () => {
   const mockFile: TFile = {
-    shortWebUrl: "",
     isFile: true,
     access: ShareAccessRights.None,
     canShare: false,

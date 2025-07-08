@@ -54,9 +54,6 @@ export const getSelectFormatTranslation = (
     case FilterType.PresentationsOnly:
       return getTranslatedType("Common:Presentations");
 
-    case FilterType.DiagramsOnly:
-      return getTranslatedType("Common:Diagrams");
-
     case FilterType.ImagesOnly:
       return getTranslatedType("Common:Images");
 

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { TFunction } from "i18next";
 import { useNavigate } from "react-router";
 import { decode } from "he";
 import { inject, observer } from "mobx-react";
@@ -81,7 +80,7 @@ const HistoryGroupList = ({
   ];
 
   const onGroupClick = (groupId: string) => {
-    setSelectedFolder?.(null);
+    setSelectedFolder?.(t, null);
     setPeopleSelection?.([]);
     setPeopleBufferSelection?.(null);
     setFilesSelection?.([]);
@@ -100,7 +99,9 @@ const HistoryGroupList = ({
           <StyledHistoryLink
             key={group.id}
             style={
-              withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
+              withWrapping
+                ? { display: "inline", wordBreak: "break-all" }
+                : null
             }
           >
             {isVisitor || isCollaborator ? (
@@ -112,7 +113,7 @@ const HistoryGroupList = ({
                 className="text link"
                 onClick={() => onGroupClick(group.id)}
                 style={
-                  withWrapping ? { display: "inline", textWrap: "wrap" } : {}
+                  withWrapping ? { display: "inline", textWrap: "wrap" } : null
                 }
               >
                 {decode(group.name)}
@@ -131,7 +132,7 @@ const HistoryGroupList = ({
           onClick={onExpand}
         >
           <Trans
-            t={t as TFunction}
+            t={t}
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: groupsData.length - EXPANSION_THRESHOLD }}
@@ -146,8 +147,8 @@ const HistoryGroupList = ({
 export default inject<TStore>(
   ({ userStore, peopleStore, filesStore, selectedFolderStore }) => {
     return {
-      isVisitor: userStore.user!.isVisitor,
-      isCollaborator: userStore.user!.isCollaborator,
+      isVisitor: userStore.user.isVisitor,
+      isCollaborator: userStore.user.isCollaborator,
       setPeopleSelection: peopleStore.usersStore.setSelection,
       setPeopleBufferSelection: peopleStore.usersStore.setBufferSelection,
       setFilesSelection: filesStore.setSelection,

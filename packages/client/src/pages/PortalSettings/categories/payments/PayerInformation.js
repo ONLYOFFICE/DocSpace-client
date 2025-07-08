@@ -31,7 +31,6 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { toastr } from "@docspace/shared/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { Link } from "@docspace/shared/components/link";
 
@@ -91,13 +90,7 @@ const PayerInformation = ({
 
   isStripePortalAvailable,
 }) => {
-  const { t } = useTranslation(["Payments", "Common"]);
-
-  const goToStripePortal = () => {
-    accountLink
-      ? window.open(accountLink, "_blank")
-      : toastr.error(t("Common:UnexpectedError"));
-  };
+  const { t } = useTranslation("Payments");
 
   const renderTooltip = (
     <HelpButton
@@ -151,11 +144,11 @@ const PayerInformation = ({
           <Link
             noSelect
             fontWeight={600}
+            href={accountLink}
             tag="a"
             target="_blank"
             className="payer-info_account-link"
             color="accent"
-            onClick={goToStripePortal}
           >
             {t("ChooseNewPayer")}
           </Link>
@@ -168,11 +161,11 @@ const PayerInformation = ({
     <Link
       noSelect
       fontWeight={600}
+      href={accountLink}
       className="payer-info_account-link"
       tag="a"
       target="_blank"
       color="accent"
-      onClick={goToStripePortal}
     >
       {t("StripeCustomerPortal")}
     </Link>
@@ -243,14 +236,10 @@ const PayerInformation = ({
 
 export default inject(
   ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
-    const { accountLink, isStripePortalAvailable } = paymentStore;
+    const { accountLink, isStripePortalAvailable, isPayerExist } = paymentStore;
     const { theme } = settingsStore;
-    const {
-      isGracePeriod,
-      isNotPaidPeriod,
-      walletCustomerEmail,
-      walletCustomerInfo,
-    } = currentTariffStatusStore;
+    const { isGracePeriod, isNotPaidPeriod, payerInfo } =
+      currentTariffStatusStore;
     const { user } = userStore;
 
     return {
@@ -260,8 +249,8 @@ export default inject(
       accountLink,
       isGracePeriod,
       isNotPaidPeriod,
-      email: walletCustomerEmail,
-      payerInfo: walletCustomerInfo,
+      email: isPayerExist,
+      payerInfo,
     };
   },
 )(observer(PayerInformation));

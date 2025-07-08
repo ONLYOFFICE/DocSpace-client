@@ -52,7 +52,7 @@ const initDesktop = (
     (callback) => {
       getEncryptionAccess?.(fileId)
         ?.then((keys) => {
-          const data = {
+          var data = {
             keys,
           };
 

@@ -34,23 +34,15 @@ const UsersRow = (props: TypeSelectUsersRowProps) => {
 
   const roleSelectorRef = useRef<HTMLDivElement>(null);
 
-  const handleAccountToggle = (
-    e?:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.MouseEvent<Element>
-      | boolean,
-  ) => {
-    if (
-      e &&
-      typeof e !== "boolean" &&
-      !roleSelectorRef.current?.contains(e.target as Node)
-    ) {
+  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!roleSelectorRef.current?.contains(e.target)) {
       toggleAccount();
     }
   };
 
   return (
     <Row
+      sectionWidth={sectionWidth}
       key={data.key}
       checked={isChecked}
       contextButtonSpacerWidth="0"

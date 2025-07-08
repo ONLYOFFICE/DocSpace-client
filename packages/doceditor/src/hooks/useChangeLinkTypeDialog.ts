@@ -53,14 +53,14 @@ const useChangeLinkTypeDialog = () => {
 
   const openChangeLinkTypeDialog = useCallback(
     (
-      p: TResolver<
+      promise: TResolver<
         Nullable<(res: string) => void>,
         Nullable<(rej: string) => void>
       >,
     ) => {
       setChangeLinkTypeDialogVisible(true);
 
-      setPromise(p);
+      setPromise(promise);
     },
     [],
   );

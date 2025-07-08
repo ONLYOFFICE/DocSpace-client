@@ -117,7 +117,7 @@ export const Body = ({
         await setDomainName(domain);
         try {
           const result = (await setPortalName(name)) as string;
-          const url = new URL(result);
+          let url = new URL(result);
           url.searchParams.append("referenceUrl", "/management");
           window.location.replace(url);
         } catch (err) {
@@ -177,7 +177,7 @@ export const Body = ({
         }
         label={t("Common:Connect")}
         onClick={onConnectClick}
-        primary
+        primary={true}
         tabIndex={3}
         isLoading={isLoading}
         // scale={false}
@@ -185,3 +185,4 @@ export const Body = ({
     </StyledBody>
   );
 };
+

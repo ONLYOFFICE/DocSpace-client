@@ -27,6 +27,7 @@
 import { inject, observer } from "mobx-react";
 
 import TopUpModal from "../../payments/Wallet/TopUpModal";
+import { useServicesActions } from "../hooks/useServicesActions";
 
 type TopUpContainerTypes = {
   isVisibleContainer: boolean;
@@ -36,6 +37,7 @@ type TopUpContainerTypes = {
 
 const TopUpContainer = (props: TopUpContainerTypes) => {
   const { isVisibleContainer, onCloseTopUpModal, reccomendedAmount } = props;
+  const { formatWalletCurrency } = useServicesActions();
 
   return isVisibleContainer ? (
     <TopUpModal
@@ -46,9 +48,7 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
         onBackClick: onCloseTopUpModal,
         onCloseClick: onCloseTopUpModal,
       }}
-      {...(reccomendedAmount! > 0 && {
-        reccomendedAmount: reccomendedAmount!.toString(),
-      })}
+      reccomendedAmount={formatWalletCurrency(reccomendedAmount, 0, 0)}
     />
   ) : null;
 };

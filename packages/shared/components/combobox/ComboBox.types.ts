@@ -76,8 +76,6 @@ export type TComboboxProps = {
   children?: React.ReactNode;
   /** Accepts class */
   className?: string;
-  /** Class name for dropdown container */
-  dropDownClassName?: string;
   /** Icon for the combo button */
   comboIcon?: string;
   /** Disable icon click */

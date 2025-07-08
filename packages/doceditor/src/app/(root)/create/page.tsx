@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect, RedirectType } from "next/navigation";
+import { permanentRedirect, redirect, RedirectType } from "next/navigation";
 import { headers } from "next/headers";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
@@ -51,8 +51,7 @@ type TSearchParams = {
 };
 
 async function Page(props: { searchParams: Promise<TSearchParams> }) {
-  const { searchParams: sp } = props;
-  const searchParams = await sp;
+  const searchParams = await props.searchParams;
   const baseURL = await getBaseUrl();
 
   if (!searchParams) {
@@ -70,6 +69,7 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
     fromFile,
     templateId,
 
+    fromTemplate,
     formId,
     action,
     toForm,
@@ -97,8 +97,8 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
     `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, url: ${hostname} Create new file`,
   );
 
-  let fileId;
-  let fileError: Error | undefined;
+  let fileId = undefined;
+  let fileError: Error | undefined = undefined;
 
   if (!templateId && fromFile) {
     logger.debug(
@@ -164,23 +164,23 @@ async function Page(props: { searchParams: Promise<TSearchParams> }) {
   }
 
   if (fileId || !fileError) {
-    const newSearchParams = new URLSearchParams();
+    const searchParams = new URLSearchParams();
 
-    newSearchParams.append("fileId", fileId?.toString() ?? "");
+    searchParams.append("fileId", fileId?.toString() ?? "");
     if (action) {
-      newSearchParams.append("action", action);
+      searchParams.append("action", action);
     }
 
     if (share) {
-      newSearchParams.append("share", share);
+      searchParams.append("share", share);
     }
 
     logger.debug(
-      `fileTitle: ${fileTitle}, parentId: ${parentId}, fileId: ${fileId}, searchParams: ${newSearchParams}, File created success`,
+      `fileTitle: ${fileTitle}, parentId: ${parentId}, fileId: ${fileId}, searchParams: ${searchParams}, File created success`,
       "File created success",
     );
 
-    const redirectURL = `/?${newSearchParams.toString()}`;
+    const redirectURL = `/?${searchParams.toString()}`;
 
     return redirect(redirectURL, RedirectType.replace);
   }

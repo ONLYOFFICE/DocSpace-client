@@ -31,7 +31,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-import { classNames } from "../../../utils";
+import { classNames } from "@docspace/shared/utils";
 
 import { RoomsType } from "../../../enums";
 
@@ -133,17 +133,17 @@ const EmptyScreen = ({
       </Text>
       {createItem ? (
         <div className="buttons">
-          <div
-            className="empty-folder_container-links"
-            onClick={onCreateClickAction}
-          >
+          <div className="empty-folder_container-links">
             <IconButton
               className="empty-folder_container-icon"
               size={12}
+              onClick={onCreateClickAction}
               iconName={PlusSvgUrl}
               isFill
             />
-            <Link {...linkStyles}>{items[0].label}</Link>
+            <Link {...linkStyles} onClick={onCreateClickAction}>
+              {items[0].label}
+            </Link>
             {isOpenDropDown && createItem && createItem.dropDownItems ? (
               <NewItemDropDown
                 dropDownItems={createItem.dropDownItems}
@@ -152,21 +152,26 @@ const EmptyScreen = ({
               />
             ) : null}
           </div>
-          <div
-            className="empty-folder_container-links"
-            onClick={
-              withSearch
-                ? () => onClearSearch?.(() => setIsSearch(false))
-                : createItem.onBackClick
-            }
-          >
+          <div className="empty-folder_container-links">
             <IconButton
               className="empty-folder_container-icon"
               size={12}
+              onClick={
+                withSearch
+                  ? () => onClearSearch?.(() => setIsSearch(false))
+                  : createItem.onBackClick
+              }
               iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
               isFill
             />
-            <Link {...linkStyles}>
+            <Link
+              {...linkStyles}
+              onClick={
+                withSearch
+                  ? () => onClearSearch?.(() => setIsSearch(false))
+                  : createItem.onBackClick
+              }
+            >
               {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
             </Link>
           </div>

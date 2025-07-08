@@ -30,14 +30,21 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import { toastr } from "../../components/toast";
-import { Button, ButtonSize } from "../../components/button";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { InputSize, InputType, TextInput } from "../../components/text-input";
-import { PasswordInput } from "../../components/password-input";
-import { FieldContainer } from "../../components/field-container";
-import { getOAuthToken } from "../../utils/common";
-import { saveSettingsThirdParty } from "../../api/files";
+import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import { saveSettingsThirdParty } from "@docspace/shared/api/files";
 import type { ConnectDialogProps } from "./ConnectDialog.types";
 
 const ConnectDialog = ({

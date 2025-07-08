@@ -68,7 +68,6 @@ const StartFillingPanel = ({
   inviteUserToRoom,
   setStartFillingPanelVisible,
   withBorder,
-  canEditRoom = false,
   ...props
 }: IStartFillingPanelProps) => {
   const [infoBarVisible, setInfoBarVisible] = useLocalStorage(
@@ -119,10 +118,8 @@ const StartFillingPanel = ({
   }, []);
 
   const openInvitePanel = useCallback(() => {
-    if (!canEditRoom) return;
-
     setIsInvitePanelVisible(true);
-  }, [canEditRoom]);
+  }, []);
 
   const onSubmit = async () => {
     startTransition(async () => {
@@ -258,7 +255,6 @@ const StartFillingPanel = ({
       onClose={closeStartFillingPanel}
       displayType={ModalDialogType.aside}
       containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
-      withoutPadding
     >
       <ModalDialog.Container>
         {isRoleSelectorVisible && !isInvitePanelVisible ? (
@@ -281,7 +277,6 @@ const StartFillingPanel = ({
             injectedElement={
               <Header
                 t={t}
-                canEditRoom={canEditRoom}
                 className={styles.header}
                 roleName={roles[currentRoleIndex]?.name ?? ""}
                 openInvitePanel={openInvitePanel}
@@ -314,32 +309,30 @@ const StartFillingPanel = ({
       </ModalDialog.Container>
       <ModalDialog.Header>{t("Common:StartFilling")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <section className={styles.container}>
-          {infoBarVisible ? (
-            <>
-              <PublicRoomBar
-                headerText={t("Common:FillingStatusBarTitle")}
-                bodyText={t("Common:FillingStatusBarDescription")}
-                iconName={InfoSvgUrl}
-                onClose={() => setInfoBarVisible(false)}
-              />
-              <hr className={styles.divider} />
-            </>
-          ) : null}
-          <p
-            className={classNames(styles.title, {
-              [styles.titleMargin]: !infoBarVisible,
-            })}
-          >
-            {t("Common:RolesFromTheForm")}
-          </p>
-          <FillingRoleSelector
-            roles={roles}
-            onSelect={onSelect}
-            removeUserFromRole={removeUserFromRole}
-            currentUserId={user.id}
-          />
-        </section>
+        {infoBarVisible ? (
+          <>
+            <PublicRoomBar
+              headerText={t("Common:FillingStatusBarTitle")}
+              bodyText={t("Common:FillingStatusBarDescription")}
+              iconName={InfoSvgUrl}
+              onClose={() => setInfoBarVisible(false)}
+            />
+            <hr className={styles.divider} />
+          </>
+        ) : null}
+        <p
+          className={classNames(styles.title, {
+            [styles.titleMargin]: !infoBarVisible,
+          })}
+        >
+          {t("Common:RolesFromTheForm")}
+        </p>
+        <FillingRoleSelector
+          roles={roles}
+          onSelect={onSelect}
+          removeUserFromRole={removeUserFromRole}
+          currentUserId={user.id}
+        />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

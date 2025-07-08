@@ -121,10 +121,6 @@ const FileSelector = (props) => {
       label: getManyPDFTitle(t, false),
     },
     {
-      key: FilterType.DiagramsOnly,
-      label: t(`Common:Diagrams`),
-    },
-    {
       key: FilterType.ArchiveOnly,
       label: t(`Common:Archives`),
     },

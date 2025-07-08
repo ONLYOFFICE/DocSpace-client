@@ -27,7 +27,6 @@
 import React from "react";
 
 import { TUser } from "@docspace/shared/api/people/types";
-import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
 
 import { MembersSelector } from "../MembersSelector/MembersSelector";
 
@@ -36,7 +35,7 @@ type SelectMembersPanelProps = {
   onParentPanelClose: () => void;
   groupManager: TUser | null;
   groupMembers: TUser[];
-  addMembers: TOnSubmit;
+  addMembers: (members: TUser[]) => void;
 };
 
 export const SelectMembersPanel = ({
@@ -57,7 +56,6 @@ export const SelectMembersPanel = ({
     <MembersSelector
       onClose={onClose}
       onParentPanelClose={onParentPanelClose}
-      isVisible
       addMembers={addMembers}
       invitedUsers={invitedUsers}
     />

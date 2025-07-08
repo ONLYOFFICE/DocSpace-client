@@ -169,7 +169,6 @@ const PureHome = (props) => {
     allowInvitingGuests,
     checkGuests,
     hasGuests,
-    sectionWithTabs,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -364,7 +363,6 @@ const PureHome = (props) => {
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
   sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
-  sectionProps.withTabs = sectionWithTabs;
 
   const hasVisibleContent =
     !isEmptyPage ||
@@ -519,11 +517,6 @@ export const Component = inject(
       isRoomsFolder,
       isArchiveFolder,
       setSelectedNode,
-      isPersonalRoom,
-      isRecentTab,
-      isRoomsFolderRoot,
-      isTemplatesFolder,
-      isRoot,
     } = treeFoldersStore;
 
     const {
@@ -583,14 +576,6 @@ export const Component = inject(
       formFillingTipsVisible,
       setGuestReleaseTipDialogVisible,
     } = dialogsStore;
-
-    const { isRoomAdmin, isAdmin } = authStore;
-
-    const withDocumentTabs = isPersonalRoom || isRecentTab;
-    const withRoomsTabs =
-      (isRoomsFolderRoot || isTemplatesFolder) && (isRoomAdmin || isAdmin);
-
-    const sectionWithTabs = (withDocumentTabs || withRoomsTabs) && isRoot;
 
     // if (!firstLoad) {
     //   if (isLoading) {
@@ -713,7 +698,6 @@ export const Component = inject(
       allowInvitingGuests,
       checkGuests,
       hasGuests,
-      sectionWithTabs,
     };
   },
 )(observer(Home));

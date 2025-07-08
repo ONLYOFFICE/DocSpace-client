@@ -33,7 +33,6 @@ export const enum DownloadedDocumentType {
   MasterForms = "masterForms",
   Other = "other",
   PdfForms = "pdfForms",
-  Diagrams = "diagrams",
 }
 
 export const enum ProtectedFileCategoryType {

@@ -17,7 +17,7 @@
   transform: matrix(-1, 0, 0, 1, 0, 0);
   z-index: 1;
 
-  &[data-direction="rtl"] {
+  [dir="rtl"] & {
     background: linear-gradient(
       270deg,
       rgba(255, 255, 255, 0) 20.48%,
@@ -38,7 +38,7 @@
     var(--tabs-gradient-color) 100%
   );
 
-  &[data-direction="rtl"] {
+  [dir="rtl"] & {
     background: linear-gradient(
       270deg,
       rgba(255, 255, 255, 0) 20.48%,

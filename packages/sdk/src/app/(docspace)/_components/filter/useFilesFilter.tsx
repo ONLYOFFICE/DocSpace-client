@@ -13,7 +13,7 @@ import {
   FilterType,
   SortByFieldName,
 } from "@docspace/shared/enums";
-import { TSortBy, type TViewAs } from "@docspace/shared/types";
+import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
 import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
@@ -163,31 +163,31 @@ export default function useFilesFilter({
         id: "filter_type-folders",
         key: FilterType.FoldersOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Folders"),
+        label: t("Common:Folders").toLowerCase(),
       },
       {
         id: "filter_type-all-files",
         key: FilterType.FilesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Files"),
+        label: t("Common:Files").toLowerCase(),
       },
       {
         id: "filter_type-documents",
         key: FilterType.DocumentsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Documents"),
+        label: t("Common:Documents").toLowerCase(),
       },
       {
         id: "filter_type-spreadsheets",
         key: FilterType.SpreadsheetsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Spreadsheets"),
+        label: t("Common:Spreadsheets").toLowerCase(),
       },
       {
         id: "filter_type-presentations",
         key: FilterType.PresentationsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Presentations"),
+        label: t("Common:Presentations").toLowerCase(),
       },
       {
         id: "filter_type-forms",
@@ -202,28 +202,22 @@ export default function useFilesFilter({
         label: getManyPDFTitle(t, false),
       },
       {
-        id: "filter_type-diagrams",
-        key: FilterType.DiagramsOnly.toString(),
-        group: FilterGroups.filterType,
-        label: t("Common:Diagrams"),
-      },
-      {
         id: "filter_type-archive",
         key: FilterType.ArchiveOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Archives"),
+        label: t("Common:Archives").toLowerCase(),
       },
       {
         id: "filter_type-images",
         key: FilterType.ImagesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Images"),
+        label: t("Common:Images").toLowerCase(),
       },
       {
         id: "filter_type-media",
         key: FilterType.MediaOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Media"),
+        label: t("Common:Media").toLowerCase(),
       },
     ];
 
@@ -252,9 +246,6 @@ export default function useFilesFilter({
         case FilterType.PresentationsOnly.toString():
           label = t("Common:Presentations");
           break;
-        case FilterType.DiagramsOnly.toString():
-          label = t("Common:Diagrams");
-          break;
         case FilterType.ImagesOnly.toString():
           label = t("Common:Images");
           break;
@@ -276,7 +267,7 @@ export default function useFilesFilter({
 
       filterValues.push({
         key: `${filter.filterType}`,
-        label,
+        label: label.toLowerCase(),
         group: FilterGroups.filterType,
       });
     }
@@ -295,13 +286,13 @@ export default function useFilesFilter({
       {
         id: "view-switch_rows",
         value: "row",
-        label: t("Files:ViewList"),
+        label: t("Common:ViewList"),
         icon: <ViewRowsReactSvg />,
       },
       {
         id: "view-switch_tiles",
         value: "tile",
-        label: t("Files:ViewTiles"),
+        label: t("Common:ViewTiles"),
         icon: <ViewTilesReactSvg />,
       },
     ];
@@ -316,7 +307,7 @@ export default function useFilesFilter({
   }, [setFilesViewAs, filesViewAs]);
 
   const removeSelectedItem = React.useCallback(
-    ({ group }: { key: string | number; group?: FilterGroups }) => {
+    ({ key, group }: { key: string | number; group?: FilterGroups }) => {
       const newFilter = filter.clone();
 
       if (group === FilterGroups.filterType) {

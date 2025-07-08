@@ -334,8 +334,6 @@ class SettingsStore {
 
   scrollToSettings: boolean = false;
 
-  displayBanners: boolean = false;
-
   constructor() {
     makeAutoObservable(this);
   }
@@ -613,12 +611,6 @@ class SettingsStore {
   get automaticBackupUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.autobackup
       ? `${this.helpCenterDomain}${this.helpCenterEntries.autobackup}`
-      : this.helpCenterDomain;
-  }
-
-  get walletHelpUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.configuringsettings
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.configuringsettings}`
       : this.helpCenterDomain;
   }
 
@@ -1558,10 +1550,6 @@ class SettingsStore {
 
   setScrollToSettings = (scrollToSettings: boolean) => {
     this.scrollToSettings = scrollToSettings;
-  };
-
-  setDisplayBanners = (displayBanners: boolean) => {
-    this.displayBanners = displayBanners;
   };
 }
 

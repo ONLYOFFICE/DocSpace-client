@@ -113,6 +113,7 @@ const PaymentContainer = (props) => {
     theme,
     isNotPaidPeriod,
     isPaidPeriod,
+    currencySymbol,
     startValue,
     currentTariffPlanTitle,
     tariffPlanTitle,
@@ -127,7 +128,6 @@ const PaymentContainer = (props) => {
     isPaymentDateValid,
     isYearTariff,
     cardLinkedOnFreeTariff,
-    formatPaymentCurrency,
   } = props;
   const renderTooltip = () => {
     return (
@@ -329,7 +329,7 @@ const PaymentContainer = (props) => {
                     t={t}
                     i18nKey="PerUserYear"
                     ns="Common"
-                    values={{ price: formatPaymentCurrency(startValue) }}
+                    values={{ currencySymbol, price: startValue }}
                     components={{ 1: <span /> }}
                   />
                 ) : (
@@ -337,7 +337,7 @@ const PaymentContainer = (props) => {
                     t={t}
                     i18nKey="PerUserMonth"
                     ns="Common"
-                    values={{ price: formatPaymentCurrency(startValue) }}
+                    values={{ currencySymbol, price: startValue }}
                     components={{ 1: <span /> }}
                   />
                 )}
@@ -387,8 +387,7 @@ export default inject(
     const { planCost, tariffPlanTitle, portalPaymentQuotas } =
       paymentQuotasStore;
 
-    const { isAlreadyPaid, cardLinkedOnFreeTariff, formatPaymentCurrency } =
-      paymentStore;
+    const { isAlreadyPaid, cardLinkedOnFreeTariff } = paymentStore;
 
     return {
       paymentDate,
@@ -403,7 +402,7 @@ export default inject(
 
       isGracePeriod,
       theme,
-      formatPaymentCurrency,
+      currencySymbol: planCost.currencySymbol,
       startValue: planCost.value,
       isNotPaidPeriod,
       payerEmail: customerId,

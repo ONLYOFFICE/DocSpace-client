@@ -29,8 +29,8 @@ import { useTranslation } from "react-i18next";
 import {
   SelectelSettings,
   formNames,
-} from "../../../../../components/selectel-settings";
-import { useDidMount } from "../../../../../hooks/useDidMount";
+} from "@docspace/shared/components/selectel-settings";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import type { SelectelStorageProps } from "./SelectelStorage.types";
 

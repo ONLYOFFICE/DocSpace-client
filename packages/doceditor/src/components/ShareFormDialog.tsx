@@ -36,6 +36,7 @@ import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/di
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
+import StartFillingSelectorDialog from "./StartFillingSelectDialog";
 import { StartFillingSelectorDialogProps } from "@/types";
 import {
   addExternalLink,
@@ -45,7 +46,6 @@ import {
 import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";
 import { Nullable, TResolver } from "@docspace/shared/types";
-import StartFillingSelectorDialog from "./StartFillingSelectDialog";
 
 type SubmitFn = StartFillingSelectorDialogProps["onSubmit"];
 
@@ -61,6 +61,7 @@ type ShareFormDialogProps = {
   onCloseStartFillingSelectDialog: () => void;
   onSubmitStartFillingSelectDialog: SubmitFn;
   getIsDisabledStartFillingSelectDialog: StartFillingSelectorDialogProps["getIsDisabled"];
+  updateAccessLink?: () => void;
   openChangeLinkTypeDialog: (
     promise: TResolver<
       Nullable<(res: string) => void>,
@@ -81,6 +82,7 @@ const ShareFormDialog = ({
   onSubmitStartFillingSelectDialog,
   isVisibleStartFillingSelectDialog,
   createDefineRoomType,
+  updateAccessLink,
   openChangeLinkTypeDialog,
 }: ShareFormDialogProps) => {
   const { t } = useTranslation("Common");

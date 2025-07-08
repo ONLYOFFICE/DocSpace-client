@@ -48,7 +48,7 @@ module.exports = ({ config }) => {
     test: /\.s[ac]ss$/i,
     use: [
       // Creates `style` nodes from JS strings
-      { loader: "style-loader" },
+      "style-loader",
       // Translates CSS into CommonJS
       {
         loader: "css-loader",

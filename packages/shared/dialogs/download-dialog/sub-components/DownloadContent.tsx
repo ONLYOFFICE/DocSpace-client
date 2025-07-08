@@ -119,7 +119,20 @@ export const DownloadContent = (props: DownloadContentProps) => {
       });
     });
 
-    return type === "other" ? [] : formats;
+    switch (type) {
+      case "documents":
+        return formats;
+      case "spreadsheets":
+        return formats;
+      case "presentations":
+        return formats;
+      case "masterForms":
+        return formats;
+      case "pdfForms":
+        return formats;
+      default:
+        return [];
+    }
   };
 
   const isOther = type === "other";

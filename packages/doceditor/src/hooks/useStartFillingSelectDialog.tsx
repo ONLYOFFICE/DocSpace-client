@@ -23,9 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 "use client";
-
 import { useCallback, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -85,8 +83,7 @@ const useStartFillingSelectDialog = (
   openAssignRolesDialog: (form: TFile, roomName: string) => void,
 ) => {
   const { t } = useTranslation(["Common"]);
-  const resolveRef =
-    useRef<(value: string | PromiseLike<string>) => void>(undefined);
+  const resolveRef = useRef<(value: string | PromiseLike<string>) => void>(undefined);
 
   const [createDefineRoomType, setCreateDefineRoomType] = useState<RoomsType>(
     RoomsType.FormRoom,
@@ -95,6 +92,9 @@ const useStartFillingSelectDialog = (
   const [headerLabelSFSDialog, setHeaderLabelSFSDialog] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
+  const [conflictDataDialog, setConflictDataDialog] = useState(
+    DefaultConflictDataDialogState,
+  );
 
   const requestRunning = useRef(false);
 
@@ -141,6 +141,7 @@ const useStartFillingSelectDialog = (
       fileName: string,
       isChecked: boolean,
       selectedTreeNode: TFolder,
+      selectedFileInfo: TSelectedFileInfo,
     ) => {
       if (!fileInfo || !selectedItemId) return;
       requestRunning.current = true;
@@ -225,6 +226,7 @@ const useStartFillingSelectDialog = (
 
         if (key === "error") {
           toastr.error(value);
+          return;
         }
       } catch (e) {
         toastr.error(e as TData);
@@ -261,7 +263,7 @@ const useStartFillingSelectDialog = (
 
       if (isFirstLoad) return true;
       if (requestRunning.current) return true;
-      if (selectedFileInfo) return true;
+      if (!!selectedFileInfo) return true;
 
       if (!selectedItemSecurity) return false;
 
@@ -280,7 +282,7 @@ const useStartFillingSelectDialog = (
     getIsDisabledStartFillingSelectDialog: getIsDisabled,
     onDownloadAs,
     isVisibleStartFillingSelectDialog: isVisible,
-    conflictDataDialog: DefaultConflictDataDialogState,
+    conflictDataDialog,
     headerLabelSFSDialog,
   };
 };

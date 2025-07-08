@@ -67,7 +67,6 @@ const RadioButton = ({
   fontWeight,
   label,
   autoFocus,
-  testId = "radio-button",
 }: RadioButtonProps) => {
   const [isCheckedState, setIsCheckedState] = React.useState(isChecked);
   const labelRef = React.useRef<HTMLLabelElement>(null);
@@ -96,7 +95,7 @@ const RadioButton = ({
         ...style,
         ["--radio-button-spacing" as string]: spacing,
       }}
-      data-testid={testId}
+      data-testid="radio-button"
     >
       <input
         className={classNames(styles.input, classNameInput)}

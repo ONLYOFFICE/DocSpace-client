@@ -39,7 +39,6 @@ import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
-import { logger } from "@/../logger.mjs";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -50,13 +49,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  logger.info("SDK layout");
-
   const hdrs = await headers();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    logger.info("get health check and return empty layout");
-    return null;
+    return <></>;
   }
 
   const cookieStore = await cookies();
@@ -83,7 +79,7 @@ export default async function RootLayout({
     | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
-    (t) => t.id === colorTheme.selected,
+    (theme) => theme.id === colorTheme.selected,
   );
 
   const dirClass = getDirectionByLanguage(locale || "en");

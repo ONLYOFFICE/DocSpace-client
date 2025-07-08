@@ -253,11 +253,9 @@ class CurrentQuotasStore {
   get maxUsersCountInRoom() {
     const result = this.currentPortalQuotaFeatures.get(USERS_IN_ROOM);
 
-    if (!result) return PortalFeaturesLimitations.Limitless;
+    if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
 
-    if ("value" in result && result?.value) return result.value;
-
-    return PortalFeaturesLimitations.Limitless;
+    return result?.value;
   }
 
   get isRoomsTariffAlmostLimit() {

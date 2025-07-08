@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { TFunction } from "i18next";
 
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { InputSize } from "@docspace/shared/components/text-input";
@@ -118,12 +117,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
     <Wrapper>
       {Buttons}
 
-      <UsersInfoBlock
-        quota={undefined}
-        totalUsedUsers={undefined}
-        numberOfSelectedUsers={undefined}
-        totalUsers={undefined}
-      />
+      <UsersInfoBlock />
 
       {filteredUsers.length > 0 ? (
         <>
@@ -142,7 +136,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
           {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
             <AccountsPaging
-              t={t as TFunction}
+              t={t}
               numberOfItems={filteredUsers.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}

@@ -28,7 +28,7 @@
 
 import React, { useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import cloneDeep from "lodash/cloneDeep";
 
 import {
@@ -58,6 +58,7 @@ import type { TDefaultWhiteLabel } from "@/types";
 
 export const WhiteLabelPage = ({
   whiteLabelLogos,
+  whiteLabelText,
   showAbout,
   isDefaultWhiteLabel,
   standalone,
@@ -65,6 +66,7 @@ export const WhiteLabelPage = ({
   quota,
 }: {
   whiteLabelLogos: ILogo[];
+  whiteLabelText: string;
   showAbout: boolean;
   isDefaultWhiteLabel: boolean;
   standalone: boolean;
@@ -73,6 +75,7 @@ export const WhiteLabelPage = ({
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
+  const router = useRouter();
   const pathname = usePathname();
 
   const [logoUrls, setLogoUrls] = useState(cloneDeep(whiteLabelLogos));
@@ -90,7 +93,7 @@ export const WhiteLabelPage = ({
     redirectUrl: "/settings/branding",
     currentLocation: "white-label",
     deviceType: currentDeviceType,
-    pathname,
+    pathname: pathname,
   });
 
   const onSave = async (data: IWhiteLabelData) => {
@@ -98,13 +101,13 @@ export const WhiteLabelPage = ({
       try {
         await setWhiteLabelLogos(data, true);
         const logos = await getLogoUrls(null, true);
-        const isDef = (await getIsDefaultWhiteLabelLogos(
+        const isDefault = (await getIsDefaultWhiteLabelLogos(
           true,
         )) as TDefaultWhiteLabel;
 
         setLogoUrls(logos);
         setDefaultLogoUrls(cloneDeep(logos));
-        setIsDefault(getIsDefaultWhiteLabel(isDef));
+        setIsDefault(getIsDefaultWhiteLabel(isDefault));
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
@@ -116,13 +119,13 @@ export const WhiteLabelPage = ({
     try {
       await restoreWhiteLabelLogos(true);
       const logos = await getLogoUrls(null, true);
-      const isDef = (await getIsDefaultWhiteLabelLogos(
+      const isDefault = (await getIsDefaultWhiteLabelLogos(
         true,
       )) as TDefaultWhiteLabel;
 
       setLogoUrls(logos);
       setDefaultLogoUrls(cloneDeep(logos));
-      setIsDefault(getIsDefaultWhiteLabel(isDef));
+      setIsDefault(getIsDefaultWhiteLabel(isDefault));
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error!);
@@ -146,3 +149,4 @@ export const WhiteLabelPage = ({
     />
   );
 };
+

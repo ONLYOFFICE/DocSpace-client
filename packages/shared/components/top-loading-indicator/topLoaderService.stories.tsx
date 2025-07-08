@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect } from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import TopLoaderService from "./index";
 
 export default {
@@ -40,7 +40,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn = () => {
+const Template: Story = () => {
   useEffect(() => {
     // Create the progress bar element
     const progressBar = document.createElement("div");

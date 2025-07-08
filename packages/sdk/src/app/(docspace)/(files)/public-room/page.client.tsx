@@ -45,6 +45,11 @@ type PublicRoomPageProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
+  baseConfig: {
+    showHeader?: boolean;
+    showFilter?: boolean;
+    folder?: string;
+  };
 };
 
 function PublicRoomPage({
@@ -53,10 +58,11 @@ function PublicRoomPage({
   filesFilter,
   portalSettings,
   shareKey,
+  baseConfig,
 }: PublicRoomPageProps) {
   const { folders, files, total, current } = folderList;
 
-  useSDKConfig();
+  const { sdkConfig } = useSDKConfig();
 
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();

@@ -179,10 +179,11 @@ export const getConfirmDataFromInvitation = (
 export const getStringFromSearchParams = (searchParams: {
   [key: string]: string;
 }): string => {
-  const stringSearchParams = Object.entries(searchParams).reduce(
-    (acc, [key, value]) => `${acc}&${key}=${value}`,
-    "",
-  );
+  let stringSearchParams = "";
+
+  for (const [key, value] of Object.entries(searchParams)) {
+    stringSearchParams += `&${key}=${value}`;
+  }
 
   return stringSearchParams.slice(1);
 };
@@ -265,8 +266,9 @@ export async function getAvailablePortals(data: {
 
       const portals = (await Promise.all(portalsRes.map((res) => res.json())))
         .map(
-          (p: { tenants: { portalLink: string; portalName: string }[] }) =>
-            p.tenants,
+          (portals: {
+            tenants: { portalLink: string; portalName: string }[];
+          }) => portals.tenants,
         )
         .flat();
 

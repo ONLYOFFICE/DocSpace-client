@@ -48,7 +48,6 @@ class DownloadDialogStore {
     masterForms: [],
     other: [],
     pdfForms: [],
-    diagrams: [],
   };
 
   sortedDownloadFiles: TSortedDownloadFiles = {
@@ -241,6 +240,7 @@ class DownloadDialogStore {
 
     toastr.error(translations.passwordError, undefined, 0, true);
     this.setSortedDownloadFiles({ other: [...passwordArray] });
+    return;
   };
 }
 
@@ -252,9 +252,8 @@ export const DownloadDialogStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const store = React.useMemo(() => new DownloadDialogStore(), []);
   return (
-    <DownloadDialogStoreContext.Provider value={store}>
+    <DownloadDialogStoreContext.Provider value={new DownloadDialogStore()}>
       {children}
     </DownloadDialogStoreContext.Provider>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 
 import { DropDownItem } from ".";
@@ -20,9 +20,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<DropDownItemProps> = (args) => (
-  <DropDownItem {...args} />
-);
+const Template: Story<DropDownItemProps> = (args) => <DropDownItem {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

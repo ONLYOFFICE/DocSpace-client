@@ -241,5 +241,3 @@ export const thumbnailStatuses = {
 
 export const THIRD_PARTY_SERVICES_URL =
   "/portal-settings/integration/third-party-services?service=";
-
-export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";

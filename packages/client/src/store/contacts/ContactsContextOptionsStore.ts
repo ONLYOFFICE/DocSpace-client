@@ -271,15 +271,13 @@ class ContactsConextOptionsStore {
           };
 
         case "invite-again":
-          return !this.settingsStore.allowInvitingMembers
-            ? null
-            : {
-                id: "option_invite-again",
-                key: option,
-                icon: InviteAgainReactSvgUrl,
-                label: t("LblInviteAgain"),
-                onClick: () => onInviteAgainClick(item, t),
-              };
+          return {
+            id: "option_invite-again",
+            key: option,
+            icon: InviteAgainReactSvgUrl,
+            label: t("LblInviteAgain"),
+            onClick: () => onInviteAgainClick(item, t),
+          };
         case "reset-auth":
           return {
             id: "option_reset-auth",

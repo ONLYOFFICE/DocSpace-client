@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { mobile } from "../../utils";
+import { mobile } from "@docspace/shared/utils";
 
 import type {
   StyledBackupProps,

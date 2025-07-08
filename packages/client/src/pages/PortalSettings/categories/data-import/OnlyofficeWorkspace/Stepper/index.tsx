@@ -31,7 +31,6 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 
 import UserSolidIcon from "PUBLIC_DIR/images/icons/16/catalog.user.solid.react.svg?url";
 import SharedIcon from "PUBLIC_DIR/images/icons/16/catalog.old.share.react.svg?url";
-import type { TFunction } from "i18next";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
@@ -39,8 +38,10 @@ import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
 import ImportCompleteStep from "../../components/ImportCompleteStep";
 
+import { TFunciton } from "../../types";
+
 export const getStepsData = (
-  t: TFunction,
+  t: TFunciton,
   isTypeSelectEmpty: boolean,
   logoText: string,
 ) => {

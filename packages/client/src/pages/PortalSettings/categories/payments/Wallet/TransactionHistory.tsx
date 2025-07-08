@@ -28,7 +28,6 @@ import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
-import classNames from "classnames";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -57,8 +56,7 @@ type TransactionHistoryProps = {
   fetchTransactionHistory?: any;
   openOnNewPage?: boolean;
   isTransactionHistoryExist?: boolean;
-  isMobile?: boolean;
-  isTablet?: boolean;
+  currentDeviceType?: DeviceType;
   isNotPaidPeriod?: boolean;
   formatDate?: (date: moment.Moment) => string;
 };
@@ -77,8 +75,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     fetchTransactionHistory,
     openOnNewPage,
     isTransactionHistoryExist,
-    isMobile,
-    isTablet,
+    currentDeviceType,
     isNotPaidPeriod,
     formatDate,
   } = props;
@@ -111,18 +108,13 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(false);
   const [isFormationHistory, setIsFormationHistory] = useState(false);
   const [isFilterDialogVisible, setIsFilterDialogVisible] = useState(false);
-  const [isChanged, setIsChanged] = useState(false);
 
   const onSelectType = async (option: TOption) => {
     setSelectedType(option);
     setHasAppliedDateFilter(true);
+    setIsFilterDialogVisible(false);
 
-    if (isFilterDialogVisible) {
-      setIsChanged(true);
-      return;
-    }
-
-    const timerId = setTimeout(() => setIsLoading(true), 500);
+    const timerId = setTimeout(() => setIsLoading(true), 200);
 
     const { isCredit, isDebit } = getTransactionType(option.key as string);
 
@@ -144,13 +136,9 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setStartDate(date);
     setHasAppliedDateFilter(true);
+    setIsFilterDialogVisible(false);
 
-    if (isFilterDialogVisible) {
-      setIsChanged(true);
-      return;
-    }
-
-    const timerId = setTimeout(() => setIsLoading(true), 500);
+    const timerId = setTimeout(() => setIsLoading(true), 200);
 
     const { isCredit, isDebit } = getTransactionType(
       selectedType.key as string,
@@ -172,13 +160,9 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     setEndDate(date);
     setHasAppliedDateFilter(true);
+    setIsFilterDialogVisible(false);
 
-    if (isFilterDialogVisible) {
-      setIsChanged(true);
-      return;
-    }
-
-    const timerId = setTimeout(() => setIsLoading(true), 500);
+    const timerId = setTimeout(() => setIsLoading(true), 200);
 
     const { isCredit, isDebit } = getTransactionType(
       selectedType.key as string,
@@ -202,8 +186,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     try {
       const editorLink = await getTransactionHistoryReport(
-        formatDate!(startDate),
-        formatDate!(endDate),
+        formatDate(startDate),
+        formatDate(endDate),
         isCredit,
         isDebit,
       );
@@ -230,28 +214,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     setIsFilterDialogVisible(false);
   };
 
-  const onApplyFilter = async () => {
-    setIsFilterDialogVisible(false);
-    setIsChanged(false);
-
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
-      selectedType.key as string,
-    );
-
-    try {
-      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
-
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
-  };
-
   const datesComponent = (
-    <div className={styles.transactionDates}>
+    <Text fontWeight={600} fontSize="14px" className={styles.transactionDates}>
       <Trans
         i18nKey="FromTo"
         ns="Payments"
@@ -268,7 +232,6 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               maxDate={endDate}
               outerDate={startDate}
               hideCross
-              autoPosition={isTablet}
             />
           ),
           2: (
@@ -282,12 +245,11 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               maxDate={undefined}
               outerDate={endDate}
               hideCross
-              autoPosition={isTablet}
             />
           ),
         }}
       />
-    </div>
+    </Text>
   );
 
   const filterCombobox = (
@@ -309,15 +271,16 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   );
 
   const mobileFilter = (
-    <div className={styles.filterIconWrapper}>
-      <FilterIcon
-        id="filter-button"
-        onClick={openFilterDialog}
-        isOpen={isFilterDialogVisible}
-        isShowIndicator={hasAppliedDateFilter}
-      />
-    </div>
+    <FilterIcon
+      id="filter-button"
+      onClick={openFilterDialog}
+      isOpen={isFilterDialogVisible}
+      isShowIndicator={hasAppliedDateFilter}
+    />
   );
+
+  const isMobile = currentDeviceType === DeviceType.mobile;
+  const isTablet = currentDeviceType === DeviceType.tablet;
 
   return (
     <>
@@ -339,6 +302,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         <TransactionBody
           hasAppliedDateFilter={hasAppliedDateFilter}
           isTransactionHistoryExist={isTransactionHistoryExist!}
+          currentDeviceType={currentDeviceType!}
         />
       )}
 
@@ -350,19 +314,14 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
             })}
           </Text>
 
-          <div
-            className={classNames(styles.downloadWrapper, {
-              [styles.isMobileButton]: isMobile,
-            })}
-          >
+          <div className={styles.downloadWrapper}>
             <Button
               label={t("Settings:DownloadReportBtnText")}
-              size={isMobile ? ButtonSize.normal : ButtonSize.small}
+              size={ButtonSize.small}
               minWidth="auto"
               onClick={getReport}
               isLoading={isFormationHistory}
               isDisabled={isNotPaidPeriod}
-              scale={isMobile}
             />
             <Text as="span" className={styles.downloadReportDescription}>
               {t("Settings:ReportSaveLocation", {
@@ -408,22 +367,6 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               </div>
             </div>
           </ModalDialog.Body>
-          <ModalDialog.Footer>
-            <Button
-              onClick={onApplyFilter}
-              size={ButtonSize.medium}
-              label={t("Common:ApplyButton")}
-              isDisabled={!isChanged}
-              primary
-              scale
-            />
-            <Button
-              onClick={closeFilterDialog}
-              size={ButtonSize.medium}
-              label={t("Common:CancelButton")}
-              scale
-            />
-          </ModalDialog.Footer>
         </ModalDialog>
       ) : null}
     </>
@@ -444,12 +387,9 @@ export default inject(
     const { openOnNewPage } = filesSettingsStore;
 
     const { currentDeviceType } = settingsStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore!;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
 
     const userId = userStore.user?.id;
-
-    const isMobile = currentDeviceType === DeviceType.mobile;
-    const isTablet = currentDeviceType === DeviceType.tablet;
 
     return {
       getStartTransactionDate,
@@ -457,8 +397,7 @@ export default inject(
       fetchTransactionHistory,
       openOnNewPage,
       userId,
-      isMobile,
-      isTablet,
+      currentDeviceType,
       isTransactionHistoryExist,
       isNotPaidPeriod,
       formatDate,

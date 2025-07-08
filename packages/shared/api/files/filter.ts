@@ -371,8 +371,7 @@ class FilesFilter {
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
-    dtoFilter[SORT_ORDER] =
-      sortOrder === "ascending" ? "ascending" : "descending";
+    dtoFilter[SORT_ORDER] = sortOrder;
 
     const otherSearchParams = getOtherSearchParams();
 

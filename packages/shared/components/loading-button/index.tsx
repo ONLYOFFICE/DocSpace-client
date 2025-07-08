@@ -27,8 +27,6 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 
-import { ReactSVG } from "react-svg";
-import CloseIcon from "PUBLIC_DIR/images/loading.button.react.svg?url";
 import type { LoadingButtonProps } from "./LoadingButton.types";
 import styles from "./LoadingButton.module.scss";
 
@@ -92,7 +90,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
           }
           className={classNames(styles.loadingButton, "loading-button")}
         >
-          {!inConversion ? <ReactSVG src={CloseIcon} /> : null}
+          {!inConversion ? <>&times;</> : null}
         </div>
       </div>
     </div>

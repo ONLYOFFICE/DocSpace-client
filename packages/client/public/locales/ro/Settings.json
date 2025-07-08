@@ -10,8 +10,6 @@
   "AddEmailsDescription": "Verificați lista de utilizatori neimportați pentru a le importa în {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nu aveți utilizatori cu adrese de e-mail. Treceți la etapa următoare pentru a le adăuga.",
   "AddTrustedDomain": "Adăugare domeniu de încredere",
-  "AdManagement": "Gestionare anunțuri",
-  "AdManagementDescription": "Alegeți dacă doriți afișarea anunțurilor banner în {{productName}}.",
   "Admins": "Administratori",
   "AdminsMessage": "Setări mesagerie de administrator",
   "AdminsMessageMobileDescription": "Setări mesagerie de administrator este o modalitate de a contacta administratorul de portal.",
@@ -158,7 +156,6 @@
   "LoginHistoryTitle": "Istoricul conectărilor",
   "LoginLatestText": "Pe această pagină sunt afişate doar cele mai recente activităţi. Datele sunt stocate pe o perioadă specificată în câmpul de mai jos (180 de zile maxim).",
   "LoginSubheaderTitle": "Această subsecțiune este utilizată pentru a monitoriza cea mai recentă activitate de conectare a utilizatorilor, inclusiv conectările reuşite şi încercările eşuate, cu indicarea motivelor.",
-  "LogoLightSmall": "Logo-ul pentru antetul spațiului",
   "ManagementCategoryDataManagement": "Gestionarea datelor",
   "ManagementCategoryIntegration": "Integrare",
   "ManagementCategorySecurity": "Securitatea",
@@ -286,6 +283,5 @@
   "WantToCancelDataImport": "Doriți să anulați importul de date?",
   "WantToCancelUpload": "Doriți să anulați încărcarea?",
   "WantToContinue": "Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?",
-  "WhiteLabelSubtitle": "Introduceţi numele companiei dvs, încărcați sigla şi particularizați stilul pentru a se potrivi cu brandingul dvs.",
   "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare."
 }

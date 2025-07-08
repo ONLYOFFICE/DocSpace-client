@@ -36,11 +36,8 @@ import {
 import { getIsSettingsPaid, getIsCustomizationAvailable } from "@/lib";
 
 import { BrandNamePage } from "./page.client";
-import { logger } from "../../../../../logger.mjs";
 
 async function Page() {
-  logger.info("Branding brand-name page");
-
   const [settings, quota, portals, whiteLabelText] = await Promise.all([
     getSettings(),
     getQuota(),
@@ -48,18 +45,8 @@ async function Page() {
     getWhiteLabelText(),
   ]);
 
-  if (settings === "access-restricted") {
-    const baseURL = await getBaseUrl();
-
-    logger.info("Branding brand-name page access-restricted");
-    redirect(`${baseURL}/${settings}`);
-  }
-  if (!settings) {
-    const baseURL = await getBaseUrl();
-
-    logger.info(`Branding brand-name settings: ${settings}`);
-    redirect(`${baseURL}/login`);
-  }
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (!settings) redirect(`${getBaseUrl()}/login`);
 
   const { standalone } = settings;
 
@@ -80,3 +67,4 @@ async function Page() {
 }
 
 export default Page;
+

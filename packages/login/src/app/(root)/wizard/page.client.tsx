@@ -83,13 +83,13 @@ import {
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
 import { TError, TTimeZoneOption } from "@/types";
-import { toastr } from "@docspace/shared/components/toast";
 import {
   StyledAcceptTerms,
   StyledInfo,
   StyledLink,
   WizardContainer,
 } from "./page.styled";
+import { toastr } from "@docspace/shared/components/toast";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;
@@ -214,7 +214,7 @@ function WizardForm(props: WizardFormProps) {
     setHasErrorLicense(false);
     setInvalidLicense(false);
 
-    const fd = new FormData();
+    let fd = new FormData();
     fd.append("files", file as Blob);
 
     if (!wizardToken) return;
@@ -333,7 +333,7 @@ function WizardForm(props: WizardFormProps) {
       </Text>
       <FieldContainer
         className="wizard-field"
-        isVertical
+        isVertical={true}
         labelVisible={false}
         hasError={hasErrorEmail}
         errorMessage={t("ErrorEmail")}
@@ -342,13 +342,13 @@ function WizardForm(props: WizardFormProps) {
           name="wizard-email"
           tabIndex={1}
           size={InputSize.large}
-          scale
+          scale={true}
           value={email}
           placeholder={t("Common:Email")}
           emailSettings={emailSettings}
           hasError={hasErrorEmail}
           onValidateInput={onEmailChangeHandler}
-          isAutoFocussed
+          isAutoFocussed={true}
           onChange={onChangeEmail}
           isDisabled={isCreated}
         />
@@ -356,7 +356,7 @@ function WizardForm(props: WizardFormProps) {
 
       <FieldContainer
         className="wizard-field password-field"
-        isVertical
+        isVertical={true}
         labelVisible={false}
         hasError={hasErrorPass}
         errorMessage={t("ErrorPassword")}
@@ -365,13 +365,13 @@ function WizardForm(props: WizardFormProps) {
           ref={refPassInput}
           tabIndex={2}
           size={InputSize.large}
-          scale
+          scale={true}
           inputValue={password}
           inputType={InputType.password}
           passwordSettings={passwordSettings}
           isDisabled={isCreated}
           placeholder={t("Common:Password")}
-          isDisableTooltip
+          isDisableTooltip={true}
           hasError={hasErrorPass}
           onChange={onChangePassword}
           autoComplete="current-password"
@@ -389,17 +389,17 @@ function WizardForm(props: WizardFormProps) {
           className="generate-password-link"
           type={LinkType.action}
           fontWeight={600}
-          isHovered
+          isHovered={true}
           onClick={generatePassword}
         >
           {t("Common:GeneratePassword")}
         </Link>
       </StyledLink>
 
-      {isAmi ? (
+      {isAmi && (
         <FieldContainer
           className="wizard-field instance-id-field"
-          isVertical
+          isVertical={true}
           labelVisible={false}
           hasError={hasErrorInstanceId}
           errorMessage={t("ErrorInstanceId")}
@@ -412,18 +412,18 @@ function WizardForm(props: WizardFormProps) {
             hasError={hasErrorInstanceId}
             value={instanceId}
             placeholder={t("Common:InstanceId")}
-            scale
+            scale={true}
             tabIndex={3}
             isDisabled={isCreated}
             onChange={onChangeInstanceId}
           />
         </FieldContainer>
-      ) : null}
+      )}
 
-      {isRequiredLicense ? (
+      {isRequiredLicense && (
         <FieldContainer
           className="license-filed"
-          isVertical
+          isVertical={true}
           labelVisible={false}
           hasError={hasErrorLicense}
           errorMessage={
@@ -440,7 +440,7 @@ function WizardForm(props: WizardFormProps) {
             isDisabled={isCreated}
           />
         </FieldContainer>
-      ) : null}
+      )}
 
       <StyledInfo>
         <Text className="text" fontWeight={400}>
@@ -466,25 +466,25 @@ function WizardForm(props: WizardFormProps) {
             scaled={isMobileView}
             scaledOptions={false}
             size={ComboBoxSize.content}
-            showDisabledItems
+            showDisabledItems={true}
             dropDownMaxHeight={364}
             manualWidth="250px"
             isDefaultMode={!isMobileView}
             withBlur={isMobileView}
             fillIcon={false}
-            modernView
+            modernView={true}
           />
           {currentCulture &&
-          "isBeta" in currentCulture &&
-          currentCulture.isBeta ? (
-            <BetaBadge
-              withOutFeedbackLink
-              place="bottom"
-              forumLinkUrl={forumLinkUrl}
-              currentDeviceType={currentDeviceType}
-              documentationEmail={documentationEmail}
-            />
-          ) : null}
+            "isBeta" in currentCulture &&
+            currentCulture.isBeta && (
+              <BetaBadge
+                withOutFeedbackLink
+                place="bottom"
+                forumLinkUrl={forumLinkUrl}
+                currentDeviceType={currentDeviceType}
+                documentationEmail={documentationEmail}
+              />
+            )}
         </div>
       </StyledInfo>
 
@@ -503,13 +503,13 @@ function WizardForm(props: WizardFormProps) {
           scaled={isMobileView}
           scaledOptions={false}
           size={ComboBoxSize.content}
-          showDisabledItems
+          showDisabledItems={true}
           dropDownMaxHeight={364}
           manualWidth="350px"
           isDefaultMode={!isMobileView}
           withBlur={isMobileView}
           fillIcon={false}
-          modernView
+          modernView={true}
         />
       </StyledInfo>
 
@@ -542,7 +542,7 @@ function WizardForm(props: WizardFormProps) {
 
       <Button
         size={ButtonSize.medium}
-        scale
+        scale={true}
         primary
         label={t("Common:ContinueButton")}
         isLoading={isCreated}

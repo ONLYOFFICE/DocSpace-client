@@ -96,7 +96,7 @@
   "FinalizeVersion": "Сформировать версию",
   "FolderRenamed": "Папка '{{folderTitle}}' переименована в '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Создана папка <1>{{folderTitle}}</1>",
-  "GeneralLinkRevokedAndCreatedSuccessfully": "Новая общая ссылка успешно создана",
+  "GeneralLinkDeletedSuccessfully": "Новая общая ссылка успешно создана",
   "GoToMyRooms": "Перейти в комнаты",
   "GoToSection": "Перейти в  {{sectionName}}",
   "Index": "Индекс",

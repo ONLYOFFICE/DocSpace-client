@@ -39,14 +39,13 @@ import styles from "../styles/Wallet.module.scss";
 type WalletInfoProps = {
   balance?: string;
   onTopUp?: () => void;
-  isBalanceInsufficient?: boolean;
 };
 
 const WalletInfo = (props: WalletInfoProps) => {
-  const { balance, onTopUp, isBalanceInsufficient } = props;
+  const { balance, onTopUp } = props;
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const keyProp = isBalanceInsufficient
+  const keyProp = onTopUp
     ? { tKey: "BalanceInsufficient" }
     : { tKey: "Balance" };
 
@@ -65,7 +64,7 @@ const WalletInfo = (props: WalletInfoProps) => {
         </Text>
         <div
           className={classNames(styles.walletInfoBalance, {
-            [styles.warningColor]: isBalanceInsufficient,
+            [styles.warningColor]: !!onTopUp,
           })}
         >
           <Trans
@@ -74,7 +73,7 @@ const WalletInfo = (props: WalletInfoProps) => {
             ns="Payments"
             values={{ balance }}
             components={{
-              1: isBalanceInsufficient ? (
+              1: onTopUp ? (
                 <Text as="span" fontWeight={600} />
               ) : (
                 <Text fontWeight={600} isInline />

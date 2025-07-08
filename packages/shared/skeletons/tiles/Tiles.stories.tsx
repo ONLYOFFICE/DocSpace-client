@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 import { TilesSkeleton } from "./Tiles";
 import { TileSkeleton } from "./Tile";
 import type { TilesSkeletonProps, TileSkeletonProps } from "./Tiles.types";
@@ -9,7 +9,7 @@ export default {
   component: TilesSkeleton,
 } as Meta;
 
-const TilesTemplate: StoryFn<TilesSkeletonProps> = (args) => (
+const TilesTemplate: Story<TilesSkeletonProps> = (args) => (
   <TilesSkeleton {...args} />
 );
 
@@ -33,7 +33,7 @@ WithoutTitle.args = {
   withTitle: false,
 };
 
-const TileTemplate: StoryFn<TileSkeletonProps> = (args) => (
+const TileTemplate: Story<TileSkeletonProps> = (args) => (
   <TileSkeleton {...args} />
 );
 

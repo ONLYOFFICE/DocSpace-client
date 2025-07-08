@@ -37,10 +37,10 @@ import {
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 
-import { TEventData } from "@/types";
+import { TEventData, UseSelectFolderDialogProps } from "@/types";
 import { saveAs } from "@/utils";
 
-const useSelectFolderDialog = () => {
+const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -78,13 +78,13 @@ const useSelectFolderDialog = () => {
 
     const currentExst = fileName.split(".").pop();
 
-    const newTitle =
+    const title =
       currentExst !== extension ? fileName.concat(`.${extension}`) : fileName;
 
     if (isChecked) {
-      saveAs(newTitle, url, selectedItemId, isChecked);
+      saveAs(title, url, selectedItemId, isChecked);
     } else {
-      const savingInfo = await saveAs(newTitle, url, selectedItemId, isChecked);
+      const savingInfo = await saveAs(title, url, selectedItemId, isChecked);
 
       if (savingInfo) {
         const docEditor =
@@ -115,7 +115,7 @@ const useSelectFolderDialog = () => {
   ) => {
     if (isFirstLoad) return true;
     if (requestRunning.current) return true;
-    if (selectedFileInfo) return true;
+    if (!!selectedFileInfo) return true;
 
     if (!selectedItemSecurity) return false;
 

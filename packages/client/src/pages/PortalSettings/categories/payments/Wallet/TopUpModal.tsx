@@ -38,6 +38,7 @@ import PaymentMethod from "./sub-components/PaymentMethod";
 import Amount from "./sub-components/Amount";
 import TopUpButtons from "./sub-components/TopUpButtons";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
+import { formatCurrencyValue } from "./utils";
 import { AmountProvider } from "./context";
 import styles from "./styles/TopUpModal.module.scss";
 
@@ -61,8 +62,6 @@ type TopUpModalProps = {
   walletBalance?: number;
   wasFirstTopUp?: boolean;
   reccomendedAmount?: string;
-  walletCustomerStatusNotActive?: boolean;
-  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
 
 const TopUpModal = (props: TopUpModalProps) => {
@@ -73,24 +72,30 @@ const TopUpModal = (props: TopUpModalProps) => {
     walletCustomerEmail,
     fetchBalance,
     onClose,
+    language,
     cardLinked,
     accountLink,
     isEditAutoPayment,
     headerProps,
+    walletBalance = 0,
     wasFirstTopUp,
     reccomendedAmount,
-    walletCustomerStatusNotActive,
-    formatWalletCurrency,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const balanceValue = formatWalletCurrency!();
+  const balanceValue = formatCurrencyValue(
+    language!,
+    walletBalance,
+    currency,
+    2,
+    2,
+  );
 
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <AmountProvider initialAmount={reccomendedAmount}>
+    <AmountProvider>
       <ModalDialog
         visible={visible}
         onClose={onClose}
@@ -107,21 +112,20 @@ const TopUpModal = (props: TopUpModalProps) => {
               cardLinked={cardLinked!}
               accountLink={accountLink!}
               isDisabled={isLoading}
-              walletCustomerStatusNotActive={walletCustomerStatusNotActive!}
             />
 
             <Amount
-              formatWalletCurrency={formatWalletCurrency}
+              language={language!}
+              currency={currency}
               walletCustomerEmail={walletCustomerEmail}
-              isDisabled={(isLoading || walletCustomerStatusNotActive) ?? false}
-              walletCustomerStatusNotActive={walletCustomerStatusNotActive}
+              isDisabled={isLoading}
               reccomendedAmount={reccomendedAmount}
             />
 
             {wasFirstTopUp && walletCustomerEmail ? (
               <AutomaticPaymentsBlock
                 isEditAutoPayment={isEditAutoPayment!}
-                isDisabled={isLoading || walletCustomerStatusNotActive}
+                isDisabled={isLoading}
               />
             ) : null}
           </div>
@@ -135,7 +139,6 @@ const TopUpModal = (props: TopUpModalProps) => {
             walletCustomerEmail={walletCustomerEmail}
             setIsLoading={setIsLoading}
             isLoading={isLoading}
-            walletCustomerStatusNotActive={walletCustomerStatusNotActive}
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -143,29 +146,28 @@ const TopUpModal = (props: TopUpModalProps) => {
   );
 };
 
-export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
+export default inject(({ paymentStore, authStore }: TStore) => {
+  const { language } = authStore;
   const {
+    walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
     cardLinked,
     accountLink,
+    walletBalance,
     walletCodeCurrency,
     wasFirstTopUp,
-    formatWalletCurrency,
   } = paymentStore;
-
-  const { walletCustomerStatusNotActive, walletCustomerEmail } =
-    currentTariffStatusStore;
 
   return {
     currency: walletCodeCurrency,
     walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
+    language,
     cardLinked,
     accountLink,
+    walletBalance,
     wasFirstTopUp,
-    walletCustomerStatusNotActive,
-    formatWalletCurrency,
   };
 })(observer(TopUpModal));

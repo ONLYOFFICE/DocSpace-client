@@ -29,6 +29,7 @@ class ZendeskAPI {
 
   addChanges = (...args: (string | object)[]) => {
     if (typeof window?.document?.createElement !== "undefined" && window?.zE) {
+      // @ts-expect-error its ok
       window?.zE?.apply(null, args);
     } else {
       // console.warn("Zendesk is not initialized yet");

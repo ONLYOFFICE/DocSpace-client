@@ -27,7 +27,7 @@
 "use client";
 
 import { notFound, useSearchParams } from "next/navigation";
-import React, { createContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getCookie } from "@docspace/shared/utils";
@@ -64,7 +64,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   }
 
   useEffect(() => {
-    if (window.location.search.includes("culture")) return;
+    if (location.search.includes("culture")) return;
     const lng = getCookie(LANGUAGE);
 
     isAuthenticated && i18n.changeLanguage(lng);
@@ -72,9 +72,8 @@ function ConfirmRoute(props: ConfirmRouteProps) {
 
   if (!stateData) {
     switch (confirmLinkResult.result) {
-      case ValidationResult.Ok: {
+      case ValidationResult.Ok:
         const confirmHeader = searchParams?.toString();
-
         const linkData = {
           ...confirmLinkParams,
           confirmHeader,
@@ -86,7 +85,6 @@ function ConfirmRoute(props: ConfirmRouteProps) {
         };
         setStateData((val) => ({ ...val, linkData, roomData }));
         break;
-      }
       case ValidationResult.Invalid:
         console.error("invalid link", {
           confirmLinkParams,
@@ -120,16 +118,13 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     }
   }
 
-  const value = useMemo(
-    () => ({
-      linkData: stateData?.linkData ?? {},
-      roomData: stateData?.roomData ?? {},
-    }),
-    [stateData?.linkData, stateData?.roomData],
-  );
-
   return (
-    <ConfirmRouteContext.Provider value={value}>
+    <ConfirmRouteContext.Provider
+      value={{
+        linkData: stateData?.linkData ?? {},
+        roomData: stateData?.roomData ?? {},
+      }}
+    >
       {children}
     </ConfirmRouteContext.Provider>
   );

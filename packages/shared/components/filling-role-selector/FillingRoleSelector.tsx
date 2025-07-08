@@ -47,22 +47,10 @@ const FillingRoleSelector = ({
 }: IFillingRoleSelectorProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const onRemoveUserFromRole = (
-    event: React.MouseEvent<SVGSVGElement, MouseEvent>,
-    idx: number,
-  ) => {
-    event.stopPropagation();
-    removeUserFromRole(idx);
-  };
-
   return (
     <ol className={styles.roles}>
       {roles.map((role, idx) => (
-        <li
-          key={role.name}
-          className={styles.role}
-          onClick={() => onSelect(idx)}
-        >
+        <li className={styles.role} key={role.name}>
           <span className={styles.count}>{idx + 1}</span>
           {role.user ? (
             <>
@@ -82,13 +70,16 @@ const FillingRoleSelector = ({
               </div>
               <CrossIcon
                 className={styles.remove}
-                onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
-                  onRemoveUserFromRole(e, idx)
-                }
+                onClick={() => removeUserFromRole(idx)}
               />
             </>
           ) : (
-            <button title={role.name} type="button" className={styles.button}>
+            <button
+              title={role.name}
+              type="button"
+              className={styles.button}
+              onClick={() => onSelect(idx)}
+            >
               <span
                 className={styles.plus}
                 style={{ backgroundColor: role.color }}

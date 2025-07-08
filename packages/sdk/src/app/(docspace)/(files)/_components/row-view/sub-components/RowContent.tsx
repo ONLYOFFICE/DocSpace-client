@@ -133,7 +133,7 @@ const RowContent = observer(
             {mainInfo}
           </Text>
         ) : (
-          <div />
+          <></>
         )}
       </SimpleFilesRowContent>
     );

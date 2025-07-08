@@ -26,8 +26,8 @@
 
 import styled, { css } from "styled-components";
 
-import { mobile } from "../../utils";
-import { globalColors } from "../../themes";
+import { mobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const TEXT_LENGTH = "700px";
 const INPUT_LENGTH = "350px";

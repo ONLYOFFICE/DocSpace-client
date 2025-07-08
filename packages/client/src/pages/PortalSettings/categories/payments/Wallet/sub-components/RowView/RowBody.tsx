@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -34,7 +35,6 @@ import { Text } from "@docspace/shared/components/text";
 import { Row, RowContent } from "@docspace/shared/components/rows";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
-import { getCorrectDate } from "@docspace/shared/utils";
 import styles from "../../styles/TransactionHistory.module.scss";
 import { accountingLedgersFormat } from "../../utils";
 
@@ -62,6 +62,9 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
     currency,
   );
 
+  const dateFormat = `L ${moment.localeData().longDateFormat("LT")}`;
+  const formattedDate = moment(transaction.date).format(dateFormat);
+
   const getServiceQuantity = (quantity: number, service?: string) => {
     let serviceName = service;
 
@@ -76,7 +79,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         return "—";
     }
   };
-  const correctDate = getCorrectDate(language, transaction.date);
+
   return (
     <Row
       className={styles.transactionRow}
@@ -102,7 +105,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         <div />
 
         <Text fontWeight={600} fontSize="11px">
-          {correctDate}
+          {formattedDate}
         </Text>
 
         <Text fontWeight={600} fontSize="11px">

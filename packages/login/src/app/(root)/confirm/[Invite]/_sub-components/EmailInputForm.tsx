@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { InputSize } from "@docspace/shared/components/text-input";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 
 type EmailInputFormProps = {
@@ -74,9 +74,9 @@ const EmailInputForm = ({
       </Text>
       <FieldContainer
         className="form-field"
-        isVertical
+        isVertical={true}
         labelVisible={false}
-        hasError={isEmailErrorShow ? !emailValid : undefined}
+        hasError={isEmailErrorShow && !emailValid}
         errorMessage={
           emailErrorText
             ? t(`Common:${emailErrorText}`)
@@ -87,11 +87,11 @@ const EmailInputForm = ({
           id="login"
           name="login"
           size={InputSize.large}
-          hasError={isEmailErrorShow ? !emailValid : undefined}
+          hasError={isEmailErrorShow && !emailValid}
           value={email}
           placeholder={t("Common:Email")}
-          scale
-          isAutoFocussed
+          scale={true}
+          isAutoFocussed={true}
           tabIndex={1}
           isDisabled={isLoading || !!emailFromLink}
           autoComplete="username"
@@ -107,7 +107,7 @@ const EmailInputForm = ({
         className="login-button"
         primary
         size={ButtonSize.medium}
-        scale
+        scale={true}
         label={t("Common:ContinueButton")}
         tabIndex={1}
         isDisabled={isLoading}

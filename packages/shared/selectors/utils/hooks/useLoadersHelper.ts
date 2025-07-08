@@ -95,13 +95,12 @@ const useLoadersHelper = ({ withInit }: { withInit?: boolean }) => {
       if (breadCrumbsLoaderTimeout.current) {
         return;
       }
+      breadCrumbsStartLoader.current = new Date();
       breadCrumbsLoaderTimeout.current = setTimeout(() => {
-        breadCrumbsStartLoader.current = new Date();
-
         if (isMount.current) setShowBreadCrumbsLoader(true);
       }, SHOW_LOADER_TIMER);
     } else {
-      if (breadCrumbsLoaderTimeout.current && !breadCrumbsStartLoader.current) {
+      if (breadCrumbsLoaderTimeout.current) {
         clearTimeout(breadCrumbsLoaderTimeout.current);
         breadCrumbsLoaderTimeout.current = null;
         breadCrumbsStartLoader.current = null;

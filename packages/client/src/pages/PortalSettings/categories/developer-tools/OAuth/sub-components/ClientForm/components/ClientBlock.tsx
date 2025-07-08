@@ -26,7 +26,6 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
-import { TFunction } from "i18next";
 import copy from "copy-to-clipboard";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -73,9 +72,7 @@ const ClientBlock = ({
     }
   };
 
-  const helpButtonText = (
-    <Trans t={t as TFunction} i18nKey="ClientHelpButton" ns="OAuth" />
-  );
+  const helpButtonText = <Trans t={t} i18nKey="ClientHelpButton" ns="OAuth" />;
 
   return (
     <StyledBlock>

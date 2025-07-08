@@ -87,7 +87,7 @@ const TableView = (props: TableViewProps) => {
     ...rest
   } = props;
 
-  const tableRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef(null);
   const [hideColumns, setHideColumns] = useState(false);
 
   useViewEffect({
@@ -100,10 +100,7 @@ const TableView = (props: TableViewProps) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return (
-    <TableWrapper
-      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
-      useReactWindow
-    >
+    <TableWrapper forwardedRef={tableRef} useReactWindow>
       <TableHeader
         tableRef={tableRef}
         sectionWidth={sectionWidth}

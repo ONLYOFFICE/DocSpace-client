@@ -144,9 +144,7 @@ const UserContent = ({
         >
           {isGuests ? item.createdBy?.displayName : email}
         </Link>
-      ) : (
-        <div />
-      )}
+      ) : null}
       {isGuests && !isRoomAdminUser && !isPending && !isDisabled ? (
         <Link
           type={LinkType.page}
@@ -158,9 +156,7 @@ const UserContent = ({
         >
           {item.registrationDate}
         </Link>
-      ) : (
-        <div />
-      )}
+      ) : null}
       {showStorageInfo && !isGuests ? (
         <Link
           type={LinkType.page}
@@ -171,9 +167,7 @@ const UserContent = ({
         >
           {spaceQuota}
         </Link>
-      ) : (
-        <div />
-      )}
+      ) : null}
     </StyledRowContent>
   );
 };

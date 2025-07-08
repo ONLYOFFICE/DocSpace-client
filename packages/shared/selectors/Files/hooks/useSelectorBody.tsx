@@ -198,7 +198,6 @@ const useSelectorBody = ({
         isBreadCrumbsLoading: showBreadCrumbsLoader,
         withBreadCrumbs: true,
         onSelectBreadCrumb: onSelectBreadCrumb!,
-        bodyIsLoading: showLoader,
       }
     : {};
 

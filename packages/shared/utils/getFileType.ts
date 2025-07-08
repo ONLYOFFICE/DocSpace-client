@@ -18,8 +18,6 @@ export const getFileTypeName = (fileType: FileType | string, t: TFunction) => {
       return t("Common:Spreadsheet");
     case FileType.Presentation:
       return t("Common:Presentation");
-    case FileType.Diagram:
-      return t("Common:Diagram");
     case FileType.Document:
     case FileType.OFormTemplate:
     case FileType.OForm:

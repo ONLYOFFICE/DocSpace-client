@@ -596,7 +596,7 @@ class FilesStore {
     }
   };
 
-  wsModifyFolderUpdate = async (opt) => {
+  wsModifyFolderUpdate = (opt) => {
     const { infoPanelSelection, updateInfoPanelSelection } =
       this.infoPanelStore;
 
@@ -604,7 +604,7 @@ class FilesStore {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;
 
-      const fileInfo = await this.getFileInfo(file.id); // this.setFile(file);
+      this.getFileInfo(file.id); // this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
 
       if (
@@ -612,7 +612,7 @@ class FilesStore {
         !infoPanelSelection?.isFolder &&
         !infoPanelSelection?.isRoom
       ) {
-        const newInfoPanelSelection = this.getFilesListItems([fileInfo]);
+        const newInfoPanelSelection = this.getFilesListItems([file]);
         updateInfoPanelSelection(newInfoPanelSelection[0]);
       }
 
@@ -730,8 +730,6 @@ class FilesStore {
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
 
       if (foundIndex === -1) {
-        frameCallEvent({ event: "onNotFound" });
-
         return this.redirectToParent(
           opt,
           pathParts,
@@ -3665,7 +3663,7 @@ class FilesStore {
   }
 
   get cbMenuItems() {
-    const { isDocument, isPresentation, isSpreadsheet, isArchive, isDiagram } =
+    const { isDocument, isPresentation, isSpreadsheet, isArchive } =
       this.filesSettingsStore;
 
     let cbMenu = ["all"];
@@ -3692,7 +3690,6 @@ class FilesStore {
       else if (item.viewAccessibility?.MediaView)
         cbMenu.push(FilterType.MediaOnly);
       else if (isArchive(item.fileExst)) cbMenu.push(FilterType.ArchiveOnly);
-      else if (isDiagram(item.fileExst)) cbMenu.push(FilterType.DiagramsOnly);
     });
 
     const hasFiles = cbMenu.some(
@@ -3717,22 +3714,16 @@ class FilesStore {
   }
 
   get sortedFiles() {
-    const {
-      isDiagram,
-      isDocument,
-      isMasterFormExtension,
-      isPresentation,
-      isSpreadsheet,
-    } = this.filesSettingsStore;
+    const { isSpreadsheet, isPresentation, isDocument, isMasterFormExtension } =
+      this.filesSettingsStore;
 
     const sortedFiles = {
       documents: [],
       spreadsheets: [],
       presentations: [],
       masterForms: [],
-      pdfForms: [],
-      diagrams: [],
       other: [],
+      pdfForms: [],
     };
 
     let selection = this.selection.length
@@ -3754,8 +3745,6 @@ class FilesStore {
           sortedFiles.presentations.push(item);
         } else if (isMasterFormExtension(item.fileExst)) {
           sortedFiles.masterForms.push(item);
-        } else if (isDiagram(item.fileExst)) {
-          sortedFiles.diagrams.push(item);
         } else if (!item.isPDFForm && isDocument(item.fileExst)) {
           sortedFiles.documents.push(item);
         } else if (item.isPDFForm) {
@@ -4304,7 +4293,31 @@ class FilesStore {
 
   getPrimaryLink = async (roomId) => {
     const link = await api.rooms.getPrimaryLink(roomId);
+    if (link) {
+      this.setRoomShared(roomId, true);
+    }
+
     return link;
+  };
+
+  setRoomShared = (roomId, shared) => {
+    const roomIndex = this.folders.findIndex((r) => r.id === roomId);
+
+    if (roomIndex !== -1) {
+      this.folders[roomIndex].shared = shared;
+    }
+
+    const navigationPath = [...this.selectedFolderStore.navigationPath];
+
+    if (this.selectedFolderStore.id === roomId) {
+      this.selectedFolderStore.setShared(shared);
+      return;
+    }
+
+    const pathPartsRoomIndex = navigationPath.findIndex((f) => f.id === roomId);
+    if (pathPartsRoomIndex === -1) return;
+    navigationPath[pathPartsRoomIndex].shared = shared;
+    this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
   setInRoomFolder = (roomId, inRoom) => {

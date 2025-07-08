@@ -55,43 +55,37 @@ const getInitialState = (sortedFiles: TSortedFiles) => {
     documents: {
       isChecked: true,
       isIndeterminate: false,
-      format: null as string | null,
+      format: null,
       files: sortedFiles.documents,
     },
     spreadsheets: {
       isChecked: true,
       isIndeterminate: false,
-      format: null as string | null,
+      format: null,
       files: sortedFiles.spreadsheets,
     },
     presentations: {
       isChecked: true,
       isIndeterminate: false,
-      format: null as string | null,
+      format: null,
       files: sortedFiles.presentations,
     },
     masterForms: {
       isChecked: true,
       isIndeterminate: false,
-      format: null as string | null,
+      format: null,
       files: sortedFiles.masterForms,
     },
     pdfForms: {
       isChecked: true,
       isIndeterminate: false,
-      format: null as string | null,
-      files: sortedFiles.pdfForms,
-    },
-    diagrams: {
-      isChecked: true,
-      isIndeterminate: false,
       format: null,
-      files: sortedFiles.diagrams,
+      files: sortedFiles.pdfForms,
     },
     other: {
       isChecked: true,
       isIndeterminate: false,
-      format: null as string | null,
+      format: null,
       files: sortedFiles.other,
     },
   };
@@ -180,7 +174,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       masterForms,
       other,
       pdfForms,
-      diagrams,
     } = state;
 
     const itemList = [
@@ -189,7 +182,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       ...presentations.files,
       ...masterForms.files,
       ...pdfForms.files,
-      ...diagrams.files,
       ...other.files,
     ];
 
@@ -317,6 +309,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     switch (type) {
       case "documents":
         updateDocsState(DownloadedDocumentType.Documents, id);
+
         break;
       case "spreadsheets":
         updateDocsState(DownloadedDocumentType.Spreadsheets, id);
@@ -330,12 +323,10 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       case "pdfForms":
         updateDocsState(DownloadedDocumentType.PdfForms, id);
         break;
-      case "diagrams":
-        updateDocsState(DownloadedDocumentType.Diagrams, id);
-        break;
       case "other":
         updateDocsState(DownloadedDocumentType.Other, id);
         break;
+
       default:
         break;
     }
@@ -349,7 +340,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       masterForms,
       other,
       pdfForms,
-      diagrams,
     } = state;
 
     return (
@@ -358,7 +348,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       presentations.files.filter((f) => f.checked).length +
       masterForms.files.filter((f) => f.checked).length +
       pdfForms.files.filter((f) => f.checked).length +
-      diagrams.files.filter((f) => f.checked).length +
       other.files.filter((f) => f.checked).length
     );
   }, [state]);
@@ -460,6 +449,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           title={t("Common:Documents")}
         />
       ) : null}
+
       {state.spreadsheets.files.length > 0 ? (
         <DownloadContent
           {...downloadContentProps}
@@ -471,6 +461,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           title={t("Common:Spreadsheets")}
         />
       ) : null}
+
       {state.presentations.files.length > 0 ? (
         <DownloadContent
           {...downloadContentProps}
@@ -482,6 +473,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           title={t("Common:Presentations")}
         />
       ) : null}
+
       {state.masterForms.files.length > 0 ? (
         <DownloadContent
           {...downloadContentProps}
@@ -504,17 +496,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           title={t("Common:Forms")}
         />
       ) : null}
-      {state.diagrams.files.length > 0 ? (
-        <DownloadContent
-          {...downloadContentProps}
-          isChecked={state.diagrams.isChecked}
-          isIndeterminate={state.diagrams.isIndeterminate}
-          items={state.diagrams.files}
-          titleFormat={state.diagrams.format || t("Common:OriginalFormat")}
-          type={DownloadedDocumentType.Diagrams}
-          title={t("Common:Diagrams")}
-        />
-      ) : null}
+
       {state.other.files.length > 0 ? (
         <DownloadContent
           {...downloadContentProps}
@@ -525,6 +507,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           title={t("Common:Other")}
         />
       ) : null}
+
       <div className={styles.downloadDialogConvertMessage}>
         <Text noSelect>{t("Common:ConvertMessage")}</Text>
       </div>

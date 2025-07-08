@@ -25,9 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 const path = require("path");
-const beforeBuild = require(
-  path.join(__dirname, "../../shared/utils/beforeBuild.js"),
-);
+const beforeBuild = require("@docspace/shared/utils/beforeBuild");
 
 beforeBuild(
   [

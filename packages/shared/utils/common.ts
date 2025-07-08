@@ -1024,7 +1024,11 @@ export const getSystemTheme = () => {
   if (typeof window !== "undefined") {
     const isDesktopClient = window?.AscDesktopEditor !== undefined;
     const desktopClientTheme = window?.RendererProcessVariable?.theme;
-    const isDark = desktopClientTheme?.type === "dark";
+    const isDark =
+      desktopClientTheme?.id === "theme-dark" ||
+      desktopClientTheme?.id === "theme-contrast-dark" ||
+      (desktopClientTheme?.id === "theme-system" &&
+        desktopClientTheme?.system === "dark");
 
     return isDesktopClient
       ? isDark
@@ -1041,15 +1045,15 @@ export const getSystemTheme = () => {
 
 export const getEditorTheme = (theme?: ThemeKeys) => {
   const systemTheme =
-    getSystemTheme() === ThemeKeys.DarkStr ? "theme-night" : "theme-white";
+    getSystemTheme() === ThemeKeys.DarkStr ? "default-dark" : "default-light";
 
   switch (theme) {
     case ThemeKeys.BaseStr:
-      return "theme-white";
+      return "default-light";
     case ThemeKeys.DarkStr:
-      return "theme-night";
+      return "default-dark";
     case ThemeKeys.SystemStr:
-      return "theme-system";
+      return systemTheme;
     default:
       return systemTheme;
   }
@@ -1296,6 +1300,7 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
   const { width } = imageBitMap;
   const { height } = imageBitMap;
 
+  // @ts-expect-error imageBitMap
   const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
 
   async function resizeRecursiveAsync(
@@ -1304,6 +1309,7 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     depth = 0,
   ): Promise<unknown> {
     const data = resizeImage.resize(
+      // @ts-expect-error canvas
       canvas,
       img.width / compressionRatio,
       img.height / compressionRatio,
@@ -1404,39 +1410,4 @@ export const getSdkScriptUrl = (version: string) => {
   return typeof window !== "undefined"
     ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
     : "";
-};
-
-export const calculateTotalPrice = (
-  quantity: number,
-  unitPrice: number,
-): number => {
-  return Number((quantity * unitPrice).toFixed(2));
-};
-
-export const truncateNumberToFraction = (
-  value: number,
-  digits: number = 2,
-): string => {
-  const [intPart, fracPart = ""] = value.toString().split(".");
-  const truncated = fracPart.slice(0, digits).padEnd(digits, "0");
-  return `${intPart}.${truncated}`;
-};
-
-export const formatCurrencyValue = (
-  language: string,
-  amount: number,
-  currency: string,
-  fractionDigits: number = 3,
-) => {
-  const truncatedStr = truncateNumberToFraction(amount, fractionDigits);
-  const truncated = Number(truncatedStr);
-
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: fractionDigits,
-    maximumFractionDigits: fractionDigits,
-  });
-
-  return formatter.format(truncated);
 };

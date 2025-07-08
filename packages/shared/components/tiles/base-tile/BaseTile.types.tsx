@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TileItem } from "../tile-container/TileContainer.types";
-import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
+import type { TileItem } from "@docspace/shared/components/tiles/tile-container/TileContainer.types";
+import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
 
 export type BaseTileProps = {
   /** Indicates if the room is selected */

@@ -27,7 +27,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useSearchParams } from "react-router";
 import isEqual from "lodash/isEqual";
 
 import { Button } from "@docspace/shared/components/button";
@@ -78,7 +77,6 @@ const EditLinkPanel = (props) => {
   } = props;
 
   const roomAccessOptions = useMemo(() => getRoomAccessOptions(t), [t]);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const [selectedAccessOption, setSelectedAccessOption] = useState(() => {
     if (isFormRoom) {
@@ -164,7 +162,7 @@ const EditLinkPanel = (props) => {
     setIsLoading(true);
     editExternalLink(roomId, updatedLink)
       .then((response) => {
-        setExternalLink(response, searchParams, setSearchParams, isCustomRoom);
+        setExternalLink(response);
         setLinkParams({ link: response, roomId, isPublic, isFormRoom });
 
         if (isEdit) {

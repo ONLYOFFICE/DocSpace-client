@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TBreadCrumb } from "../components/selector/Selector.types";
-import { RoomsType, ShareAccessRights } from "../enums";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import { RoomsType } from "../enums";
 import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
 
@@ -137,7 +137,6 @@ export type TCreatedBy = {
   id: string;
   profileUrl: string;
   isAnonim?: boolean;
-  templateAccess?: ShareAccessRights;
 };
 export type ConnectingStoragesType = {
   id: string;
@@ -189,9 +188,7 @@ declare global {
     firebaseHelper: FirebaseHelper;
     Asc: unknown;
     zESettings: unknown;
-    zE: {
-      apply: Function;
-    };
+    zE: unknown;
     i18n: {
       loaded: {
         [key: string]: { data: { [key: string]: string }; namespaces: string };
@@ -269,7 +266,7 @@ declare global {
       opType: number;
     }) => void;
     RendererProcessVariable: {
-      theme?: { id: string; system: string; type: string; addlocal: string };
+      theme?: { id: string; system: string };
     };
     Tiff: new (arg: object) => {
       toDataURL: () => string;

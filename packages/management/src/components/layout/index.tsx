@@ -30,12 +30,14 @@ import React, { useEffect } from "react";
 
 import SocketHelper from "@docspace/shared/utils/socket";
 
-import type { TGetAllPortals } from "@docspace/shared/api/management/types";
-import useAppState from "@/hooks/useAppState";
 import { StyledLayout } from "./layout.styled";
 import { Article } from "../article";
 import { Section } from "../section";
 import { Header } from "../header";
+
+import type { TGetAllPortals } from "@docspace/shared/api/management/types";
+
+import useAppState from "@/hooks/useAppState";
 
 export const LayoutWrapper = ({
   children,

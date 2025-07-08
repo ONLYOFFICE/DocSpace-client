@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React from "react";
-import { Meta, StoryFn } from "@storybook/react";
+import { Meta, Story } from "@storybook/react";
 
 import DragAndDrop from "./DragAndDrop";
 import { DragAndDropProps } from "./DragAndDrop.types";
@@ -40,7 +40,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<DragAndDropProps> = (args) => {
+const Template: Story<DragAndDropProps> = (args) => {
   const [isDragging, setIsDragging] = React.useState(false);
 
   const handleDragOver = (

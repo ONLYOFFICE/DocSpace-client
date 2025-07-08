@@ -28,11 +28,6 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.s
 import { useState, Fragment } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router";
-import { TFunction } from "i18next";
-
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { TRoom } from "@docspace/shared/api/rooms/types";
 
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
@@ -96,8 +91,6 @@ const HistoryItemList = ({
   const isExpandable = totalItems > EXPANSION_THRESHOLD;
   const [isExpanded, setIsExpanded] = useState(!isExpandable);
 
-  const location = useLocation();
-
   const isStartedFilling = actionType === FeedAction.StartedFilling;
   const isSubmitted = actionType === FeedAction.Submitted;
 
@@ -109,11 +102,11 @@ const HistoryItemList = ({
     feed.data,
     ...feed.related.map((relatedFeeds) => relatedFeeds.data),
   ].map((item) => {
-    const fileExst = getFileExtension(item.title! || item.newTitle!);
+    const fileExst = getFileExtension(item.title || item.newTitle);
 
     return {
       ...item,
-      title: nameWithoutExtension!(item.title! || item.newTitle!),
+      title: nameWithoutExtension!(item.title || item.newTitle),
       fileExst,
       isFolder: actionType === FeedAction.Change ? !fileExst : isFolder,
     };
@@ -125,43 +118,40 @@ const HistoryItemList = ({
       : items;
 
   const oldItem = actionType === "rename" && {
-    title: nameWithoutExtension!(feed.data.oldTitle!),
-    fileExst: getFileExtension(feed.data.oldTitle!),
+    title: nameWithoutExtension!(feed.data.oldTitle),
+    fileExst: getFileExtension(feed.data.oldTitle),
   };
 
   const isDisabledOpenLocationButton = !(isStartedFilling || isSubmitted);
 
-  const handleOpenFile = async (item: TFile | TFolder | TRoom) => {
+  const handleOpenFile = async (item) => {
     try {
       if (isFolder) {
-        const folderId = getObjectByLocation(location)?.folder;
+        const folderId = getObjectByLocation(window.location)?.folder;
         if (Number(folderId) === item.id) return;
-        return await getFolderInfo?.(item.id, true).then((res) => {
+        return await getFolderInfo(item.id, true).then((res) => {
           openItemAction!({ ...res, isFolder: true });
         });
       }
 
-      await getFileInfo?.(item.id, true).then((res) => {
+      await getFileInfo(item.id, true).then((res) => {
         openItemAction!({ ...res });
       });
 
-      if ("viewAccessibility" in item) {
-        const isMedia =
-          item?.viewAccessibility?.ImageView ||
-          item?.viewAccessibility?.MediaView;
-        if (isMedia) {
-          return window.open(
-            combineUrl(
-              window.ClientConfig?.proxy?.url,
-              config.homepage,
-              MEDIA_VIEW_URL,
-              item.id,
-            ),
-          );
-        }
+      const isMedia =
+        item?.accessibility?.ImageView || item?.accessibility?.MediaView;
+      if (isMedia) {
+        return window.open(
+          combineUrl(
+            window.ClientConfig?.proxy?.url,
+            config.homepage,
+            MEDIA_VIEW_URL,
+            item.id,
+          ),
+        );
       }
     } catch (e) {
-      toastr.error(e as unknown as string);
+      toastr.error(e);
     }
   };
 
@@ -171,7 +161,7 @@ const HistoryItemList = ({
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
         return (
           <Fragment key={`${feed.action.id}_${item.id}`}>
-            <StyledHistoryBlockFile>
+            <StyledHistoryBlockFile isRoom={false}>
               {actionType === "changeIndex" ? (
                 <div className="change-index">
                   <div className="index old-index"> {item.oldIndex}</div>
@@ -183,9 +173,7 @@ const HistoryItemList = ({
 
               <div
                 className="item-wrapper"
-                onClick={() =>
-                  handleOpenFile(item as unknown as TFile | TFolder | TRoom)
-                }
+                onClick={() => handleOpenFile(item)}
               >
                 <ReactSVG
                   className="icon"
@@ -256,7 +244,7 @@ const HistoryItemList = ({
           onClick={onExpand}
         >
           <Trans
-            t={t as TFunction}
+            t={t}
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: items.length - EXPANSION_THRESHOLD }}

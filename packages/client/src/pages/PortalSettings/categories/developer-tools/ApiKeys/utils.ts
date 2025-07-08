@@ -95,11 +95,21 @@ export const getFilteredOptions = (
   return options;
 };
 
-export const getItemPermissions = (itemPermissions: string[] = []) => {
+export const getItemPermissions = (
+  permissions: string[],
+  itemPermissions: string[] = [],
+) => {
+  const hasWriteOption =
+    itemPermissions?.findIndex((p) => p.includes("write")) > -1;
+  const readPermissions = permissions.filter((p) => p.includes("read"));
+  const itemReadPermissions = itemPermissions
+    ? itemPermissions.filter((p) => p.includes("read"))
+    : [];
+
   const option =
     !itemPermissions.length || itemPermissions[0] === "*"
       ? "all"
-      : itemPermissions[0] === "*:read"
+      : !hasWriteOption && readPermissions.length === itemReadPermissions.length
         ? "readonly"
         : "restricted";
 

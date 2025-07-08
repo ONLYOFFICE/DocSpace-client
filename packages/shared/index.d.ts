@@ -33,11 +33,6 @@ declare module "*.png" {
   export default content;
 }
 
-declare module "*.gif" {
-  const content: string;
-  export default content;
-}
-
 declare module "*.ico" {
   const content: string;
   export default content;
@@ -73,15 +68,15 @@ declare module "resize-image" {
 
   interface ResizeImage extends ImageTypes {
     resize2Canvas: (
-      img: HTMLImageElement | ImageBitmap,
+      img: HTMLImageElement,
       width: number,
-      height: number,
+      heigh: number,
     ) => HTMLCanvasElement;
     resize: (
-      img: HTMLImageElement | HTMLCanvasElement,
+      img: HTMLImageElement,
       width: number,
       height: number,
-      type?: ImageFormat,
+      type: ImageFormat,
     ) => string;
   }
 

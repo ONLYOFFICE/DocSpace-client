@@ -111,7 +111,7 @@ export const ChangeDomainDialog = observer(() => {
     >
       <ModalDialog.Header>{t("DomainSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect fontSize="13px">
+        <Text noSelect={true} fontSize="13px">
           {t("ChangeDomainDescription")}
         </Text>
         <div className="create-portal-input-block">
@@ -132,18 +132,17 @@ export const ChangeDomainDialog = observer(() => {
             className="create-portal-input"
           />
           <div>
-            {domainNameError
-              ? domainNameError.map((err) => (
-                  <Text
-                    className="error-text"
-                    key={err.toString()}
-                    fontSize="12px"
-                    fontWeight="400"
-                  >
-                    {err.toString()}
-                  </Text>
-                ))
-              : null}
+            {domainNameError &&
+              domainNameError.map((err, index) => (
+                <Text
+                  className="error-text"
+                  key={index}
+                  fontSize="12px"
+                  fontWeight="400"
+                >
+                  {err.toString()}
+                </Text>
+              ))}
           </div>
         </div>
       </ModalDialog.Body>
@@ -155,16 +154,17 @@ export const ChangeDomainDialog = observer(() => {
           onClick={onClickDomainChange}
           size={ButtonSize.normal}
           primary
-          scale
+          scale={true}
         />
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
-          scale
+          scale={true}
         />
       </ModalDialog.Footer>
     </StyledModal>
   );
 });
+

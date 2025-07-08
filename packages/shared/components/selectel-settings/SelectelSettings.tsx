@@ -28,8 +28,12 @@
 
 import React from "react";
 
-import { useDidMount } from "../../hooks/useDidMount";
-import { InputSize, InputType, TextInput } from "../text-input";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import {
   FILE_PATH,

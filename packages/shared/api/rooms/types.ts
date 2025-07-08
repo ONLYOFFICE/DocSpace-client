@@ -125,7 +125,6 @@ export type TRoom = {
   quotaLimit?: number;
   isTemplate?: boolean;
   isAvailable?: boolean;
-  isRoom?: boolean;
 };
 
 export type TGetRooms = {

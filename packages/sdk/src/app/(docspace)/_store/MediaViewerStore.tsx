@@ -72,9 +72,8 @@ export const MediaViewerStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const store = React.useMemo(() => new MediaViewerStore(), []);
   return (
-    <MediaViewerStoreContext.Provider value={store}>
+    <MediaViewerStoreContext.Provider value={new MediaViewerStore()}>
       {children}
     </MediaViewerStoreContext.Provider>
   );

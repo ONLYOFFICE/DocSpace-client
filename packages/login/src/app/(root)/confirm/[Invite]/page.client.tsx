@@ -75,9 +75,9 @@ import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { RegisterContainer } from "@/components/RegisterContainer.styled";
-import { globalColors } from "@docspace/shared/themes";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
+import { globalColors } from "@docspace/shared/themes";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -280,34 +280,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setIsLoading(false);
   };
 
-  const createConfirmUser = async (
-    confirmUserData: TCreateUserData,
-    key: string,
-  ) => {
-    await createUser(confirmUserData, key);
-
-    const { userName, passwordHash: ph } = confirmUserData;
-    const res = await login(userName, ph);
-
-    if (res && res.tfa && res.confirmUrl) {
-      return window.location.replace(res.confirmUrl);
-    }
-
-    const finalUrl = roomData.roomId
-      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
-      : defaultPage;
-
-    const isConfirm = typeof res === "string" && res.includes("confirm");
-    if (isConfirm) {
-      sessionStorage.setItem("referenceUrl", finalUrl);
-      return window.location.replace(typeof res === "string" ? res : "/");
-    }
-
-    window.location.replace(finalUrl);
-  };
-
   const onSubmit = async () => {
-    const type = parseInt(linkData?.emplType ?? "", 10);
+    const type = parseInt(linkData?.emplType ?? "");
 
     setIsLoading(true);
     setErrorText("");
@@ -337,9 +311,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const hash = createPasswordHash(password, passwordHash);
 
-    const fromInviteLink = !!(
+    const fromInviteLink =
       linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
-    );
+        ? true
+        : false;
 
     const confirmUser: TCreateUserData = {
       fromInviteLink,
@@ -347,18 +322,18 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       passwordHash: hash,
       firstName: fname.trim(),
       lastName: sname.trim(),
-      email,
+      email: email,
       cultureName: currentCultureName,
       spam: isChecked,
     };
 
     confirmUser.fromInviteLink = fromInviteLink;
 
-    if (type) {
+    if (!!type) {
       confirmUser.type = type;
     }
 
-    if (linkData.key) {
+    if (!!linkData.key) {
       confirmUser.key = linkData.key;
     }
 
@@ -387,6 +362,32 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       setEmailValid(false);
       setIsLoading(false);
     }
+  };
+
+  const createConfirmUser = async (
+    confirmUserData: TCreateUserData,
+    key: string,
+  ) => {
+    await createUser(confirmUserData, key);
+
+    const { userName, passwordHash } = confirmUserData;
+    const res = await login(userName, passwordHash);
+
+    if (res && res.tfa && res.confirmUrl) {
+      return window.location.replace(res.confirmUrl);
+    }
+
+    const finalUrl = roomData.roomId
+      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
+      : defaultPage;
+
+    const isConfirm = typeof res === "string" && res.includes("confirm");
+    if (isConfirm) {
+      sessionStorage.setItem("referenceUrl", finalUrl);
+      return window.location.replace(typeof res === "string" ? res : "/");
+    }
+
+    window.location.replace(finalUrl);
   };
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -446,7 +447,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     let url = targetElement.dataset.url || "";
 
     try {
-      // Lifehack for Twitter
+      //Lifehack for Twitter
       if (providerName == "twitter") {
         url += "authCallback";
       }
@@ -482,13 +483,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     let existProviders = 0;
     thirdPartyProviders && thirdPartyProviders.length > 0;
-    thirdPartyProviders?.forEach((item) => {
-      const key = item.provider as keyof typeof PROVIDERS_DATA;
-      if (
-        Object.prototype.hasOwnProperty.call(PROVIDERS_DATA, key) &&
-        !PROVIDERS_DATA[key]
-      )
-        return;
+    thirdPartyProviders?.map((item) => {
+      let key = item.provider as keyof typeof PROVIDERS_DATA;
+      if (PROVIDERS_DATA.hasOwnProperty(key) && !PROVIDERS_DATA[key]) return;
       existProviders++;
     });
 
@@ -497,7 +494,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const ssoExists = () => {
     if (capabilities?.ssoUrl) return true;
-    return false;
+    else return false;
   };
 
   const onValidateEmail = (result: TValidate): undefined => {
@@ -534,7 +531,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           onBlur={onBlurEmail}
           onKeyPress={onKeyPress}
         />
-        {registrationForm ? (
+        {registrationForm && (
           <RegistrationForm
             isLoading={isLoading}
             email={email}
@@ -563,10 +560,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             isStandalone={isStandalone}
             organizationName={organizationName}
           />
-        ) : null}
+        )}
       </div>
 
-      {!emailFromLink && (oauthDataExists() || ssoExists()) ? (
+      {!emailFromLink && (oauthDataExists() || ssoExists()) && (
         <>
           <div className="line">
             <Text color={globalColors.gray} className="or-label">
@@ -581,7 +578,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             {...ssoProps}
           />
         </>
-      ) : null}
+      )}
     </RegisterContainer>
   );
 };

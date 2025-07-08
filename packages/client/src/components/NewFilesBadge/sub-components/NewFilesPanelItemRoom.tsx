@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
+import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";
@@ -38,6 +39,8 @@ const NewFilesPanelItemRoomComponent = ({
   openItemAction,
   onClose,
 }: NewFilesPanelItemRoomProps) => {
+  const theme = useTheme();
+
   const onClick = async () => {
     const roomInfo = await getFolderInfo!(room.id);
     openItemAction!({
@@ -56,7 +59,8 @@ const NewFilesPanelItemRoomComponent = ({
         logo={room.logo}
         title={room.title}
         color={room.logo.color ?? ""}
-        showDefault={!room.logo.medium ? !room.logo.cover : false}
+        showDefault={!room.logo.medium ? !room.logo.cover : null}
+        currentColorScheme={theme.currentColorScheme!}
         dropDownManualX="0"
         size="24px"
       />

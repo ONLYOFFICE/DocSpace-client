@@ -86,7 +86,6 @@ export type SectionFilterProps = {
   children: React.ReactNode;
   className?: string;
   viewAs?: TViewAs;
-  withTabs?: boolean;
 };
 
 export type SectionFooterProps = {
@@ -149,7 +148,6 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     onCancelOperation?: (callback: () => void) => void;
 
     mainBarVisible?: boolean;
-    withTabs?: boolean;
   };
 
 export type SectionContextMenuProps = {

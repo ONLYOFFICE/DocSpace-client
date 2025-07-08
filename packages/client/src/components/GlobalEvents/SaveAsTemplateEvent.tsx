@@ -164,7 +164,7 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
       item={item}
       onClose={onCloseEvent}
       fetchedTags={fetchedTags}
-      fetchedRoomParams={fetchedRoomParams as unknown as TRoom}
+      fetchedRoomParams={fetchedRoomParams}
       onSave={onSave}
       isLoading={isLoading}
     />

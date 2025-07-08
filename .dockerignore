@@ -3,6 +3,6 @@
 **/test-results
 **/Dockerfile
 **/compose.yaml
-**/.nx
+**/yarn/cache
 **/dist
 node_modules

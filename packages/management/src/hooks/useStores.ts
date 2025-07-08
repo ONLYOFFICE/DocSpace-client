@@ -30,3 +30,4 @@ import { StoreContext } from "@/providers/StoreProvider";
 export const useStores = () => {
   return useContext(StoreContext);
 };
+

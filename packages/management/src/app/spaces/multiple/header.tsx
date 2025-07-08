@@ -57,7 +57,7 @@ export const Header = observer(() => {
             : ButtonSize.normal
         }
         label={t("NewSpace")}
-        primary
+        primary={true}
         onClick={onNewSpaceClick}
         scale={false}
       />

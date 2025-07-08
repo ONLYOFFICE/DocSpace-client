@@ -136,9 +136,9 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           visible={articleOpen}
           onClick={() => setArticleOpen(false)}
           withBackground
-          // withBlur
+          //withBlur
         />
-        {articleOpen ? <StyledCrossIcon /> : null}
+        {articleOpen && <StyledCrossIcon />}
         {articleComponent}
       </>
     );
@@ -156,3 +156,4 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
     ? renderPortalArticle()
     : articleComponent;
 });
+

@@ -55,16 +55,16 @@ export const GreetingUserContainer = ({
   return (
     <div className="invitation-info-container">
       <div className="sign-in-container">
-        {type === "LinkInvite" && !emailFromLink ? (
+        {type === "LinkInvite" && !emailFromLink && (
           <div className="back-title">
             <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
             <Text fontWeight={600} onClick={onClickBack}>
               {t("Common:Back")}
             </Text>
           </div>
-        ) : null}
+        )}
 
-        <Text fontWeight={600} fontSize="16px">
+        <Text fontWeight={600} fontSize={"16px"}>
           {t("SignUp")}
         </Text>
       </div>
@@ -79,14 +79,7 @@ export const GreetingUserContainer = ({
             productName: t("Common:ProductName"),
           }}
           components={{
-            1: (
-              <Link
-                key="component_key"
-                tag="a"
-                isHovered={false}
-                color="accent"
-              />
-            ),
+            1: <Link key="component_key" tag="a" isHovered={false} color="accent" />,
           }}
         />
       </Text>

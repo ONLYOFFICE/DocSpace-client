@@ -44,3 +44,4 @@ export const StyledBrandingPage = styled.div`
     padding-bottom: 9px;
   }
 `;
+

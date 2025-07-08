@@ -39,7 +39,7 @@ class FilesListStore {
   }
 
   setItems = (items?: (TFileItem | TFolderItem)[]) => {
-    this.items = items || [];
+    this.items = items ? items : [];
   };
 
   get itemsCount() {
@@ -56,9 +56,8 @@ export const FilesListStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const store = React.useMemo(() => new FilesListStore(), []);
   return (
-    <FilesListStoreContext.Provider value={store}>
+    <FilesListStoreContext.Provider value={new FilesListStore()}>
       {children}
     </FilesListStoreContext.Provider>
   );

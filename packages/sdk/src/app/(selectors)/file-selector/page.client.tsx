@@ -107,7 +107,7 @@ export default function FilesSelectorClient({
   logoText,
   socketUrl,
 }: FilesSelectorClientProps) {
-  useSDKConfig();
+  const { sdkConfig } = useSDKConfig();
 
   const { t } = useTranslation(["Common"]);
 
@@ -132,10 +132,10 @@ export default function FilesSelectorClient({
 
   const onSubmit = useCallback(
     async (
-      selectedIId: string | number | undefined,
+      selectedItemId: string | number | undefined,
       folderTitle: string,
       isPublic: boolean,
-      breadC: TBreadCrumb[],
+      breadCrumbs: TBreadCrumb[],
       fileName: string,
       isChecked: boolean,
       selectedTreeNode: TFolder,
@@ -143,7 +143,7 @@ export default function FilesSelectorClient({
     ) => {
       const enrichedData = {
         ...selectedFileInfo,
-        // icon: getIcon(64, selectedFileInfo.fileExst),
+        //icon: getIcon(64, selectedFileInfo.fileExst),
       } as TSelectedFileInfo & {
         documentType: FileType | string | null;
         requestTokens?: {
@@ -195,8 +195,8 @@ export default function FilesSelectorClient({
     (
       isFirstLoad: boolean,
       isSelectedParentFolder: boolean,
-      selectedItemIdParam: string | number | undefined,
-      selectedItemT: "rooms" | "files" | undefined,
+      selectedItemId: string | number | undefined,
+      selectedItemType: "rooms" | "files" | undefined,
       isRoot: boolean,
       selectedItemSecurity:
         | TFileSecurity
@@ -208,8 +208,8 @@ export default function FilesSelectorClient({
     ) =>
       isFirstLoad ||
       !!isDisabledFolder ||
-      !selectedFileInfo ||
-      selectedItemT === "rooms" ||
+      !!!selectedFileInfo ||
+      selectedItemType === "rooms" ||
       isRoot ||
       isSelectedParentFolder,
     [],
@@ -241,7 +241,7 @@ export default function FilesSelectorClient({
 
   const headerProps = baseConfig?.header
     ? {
-        withHeader: true as const,
+        withHeader: true as true,
         headerProps: {
           headerLabel: t("SelectAction"),
           isCloseable: false,

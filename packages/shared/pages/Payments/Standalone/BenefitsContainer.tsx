@@ -28,11 +28,12 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 
+import { Text } from "@docspace/shared/components/text";
+
 import LifetimeLicenseReactSvgUrl from "PUBLIC_DIR/images/lifetime_license.react.svg?url";
 import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url";
 import MobileEditingReactSvgUrl from "PUBLIC_DIR/images/mobile_editing.react.svg?url";
 import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url";
-import { Text } from "../../../components/text";
 
 import { StyledBenefitsBody } from "./Payments.styled";
 import { IPaymentsProps } from "./Payments.types";

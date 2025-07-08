@@ -39,6 +39,7 @@ import {
 import { Nullable } from "../../types";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TFilterArea, TFilterSortBy, TSortOrder } from "./types";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 100;
@@ -84,6 +85,25 @@ const INVITED_BY_ME = "invitedbyme";
 const AREA = "area";
 const INCLUDE_STRANGERS = "includeStrangers";
 const INCLUDE_SHARED = "includeShared";
+
+const typeDefinition = {
+  sortBy: [
+    "AZ",
+    "displayname",
+    "type",
+    "department",
+    "email",
+    "usedspace",
+    "registrationDate",
+    "createdby",
+  ], // type TFilterSortBy
+  sortOrder: ["ascending", "descending"], // type TSortOrder
+  employeeStatus: ["1", "2", "4"], // enum EmployeeStatus
+  role: ["1", "2", "3", "4", "owner"], // enum EmployeeType
+  payments: ["0", "1"], // enum PaymentsType
+  accountLoginType: ["0", "1", "2"], // enum AccountLoginType
+  area: ["all", "people", "guests"], // type TFilterArea
+};
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -265,6 +285,8 @@ class Filter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       pageCount,
       sortBy,
@@ -283,7 +305,7 @@ class Filter {
       area,
       includeStrangers,
       includeShared,
-    } = this;
+    } = fixedValidObject;
 
     let employeetype = null;
 
@@ -320,6 +342,8 @@ class Filter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       pageCount,
       sortBy,
@@ -339,7 +363,7 @@ class Filter {
       area,
       includeStrangers,
       includeShared,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: {
       [PAGE]: typeof page;

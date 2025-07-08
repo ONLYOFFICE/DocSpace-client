@@ -32,6 +32,7 @@ import queryString from "query-string";
 import { ApplyFilterOption, FilterType } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
@@ -333,6 +334,38 @@ class FilesFilter {
   };
 
   toUrlParams = () => {
+    const typeDefinition = {
+      filterType: [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "20",
+        "21",
+        "22",
+        "23",
+        "25",
+      ], // enum FilterType
+      applyFilterOption: ["All", "Files", "Folder"], // enum ApplyFilterOption
+      sortBy: ["DateAndTime", "AZ", "Type", "Size", "Title", "Author"], // type TSortBy
+      sortOrder: ["ascending", "descending"], // type TSortOrder
+    };
+
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -350,7 +383,7 @@ class FilesFilter {
       extension,
       searchArea,
       key,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: { [key: string]: unknown } = {};
 
@@ -373,8 +406,7 @@ class FilesFilter {
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
-    dtoFilter[SORT_ORDER] =
-      sortOrder === "ascending" ? "ascending" : "descending";
+    dtoFilter[SORT_ORDER] = sortOrder;
 
     const otherSearchParams = getOtherSearchParams();
 

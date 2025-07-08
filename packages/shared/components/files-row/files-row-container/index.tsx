@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,53 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
 import React from "react";
-import { observer } from "mobx-react";
+import classNames from "classnames";
 
-import { FilesRowContainer } from "@docspace/shared/components/files-row";
-import { useIsServer } from "@docspace/shared/hooks/useIsServer";
+import { RowContainer } from "../../rows";
 
-import { Row } from "./sub-components/Row";
+import styles from "./FilesRowContainer.module.scss";
+import type { RowContainerProps } from "../../rows/row-container/RowContainer.types";
 
-import { RowViewProps } from "./RowView.types";
-
-const RowView = ({
-  total,
-  items,
-  hasMoreFiles,
-  filterSortBy,
-  timezone,
-  displayFileExtension,
-  fetchMoreFiles,
-}: RowViewProps) => {
-  const isSSR = useIsServer();
+export const FilesRowContainer = (props: RowContainerProps) => {
+  const { className } = props;
 
   return (
-    <FilesRowContainer
-      className="files-row-container"
-      filesLength={items.length}
-      itemCount={total}
-      hasMoreFiles={hasMoreFiles}
-      useReactWindow={!isSSR}
-      fetchMoreFiles={fetchMoreFiles}
-      itemHeight={58}
-      onScroll={() => {}}
-    >
-      {items.map((item, index) => (
-        <Row
-          key={`${item.id}`}
-          index={index}
-          item={item}
-          filterSortBy={filterSortBy}
-          timezone={timezone}
-          displayFileExtension={displayFileExtension}
-          isSSR={isSSR}
-        />
-      ))}
-    </FilesRowContainer>
+    <RowContainer
+      {...props}
+      className={classNames(styles.filesRowContainer, className)}
+    />
   );
 };
-
-export default observer(RowView);

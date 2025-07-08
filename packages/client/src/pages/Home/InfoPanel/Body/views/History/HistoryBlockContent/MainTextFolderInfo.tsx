@@ -79,7 +79,7 @@ const HistoryMainTextFolderInfo = ({
 
   const destination = isFolder
     ? t("FeedLocationLabel", {
-        folderTitle: isReorderFolder ? title : parentTitle,
+        folderTitle: isReorderFolder ? title! : parentTitle,
       })
     : isSection
       ? t("FeedLocationSectionLabel", { folderTitle: parentTitle })

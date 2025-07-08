@@ -184,6 +184,7 @@ const Tabs = (props: TabsProps) => {
               item.onClick?.();
               setSelectedItem(item, index);
             }}
+            data-testid={item.name}
           >
             <span className={styles.tabText}>{item.name}</span>
             <div
@@ -214,7 +215,13 @@ const Tabs = (props: TabsProps) => {
           className={classNames(styles.sticky, classes, "sticky")}
           style={{ top: stickyTop }}
         >
-          {!isViewFirstTab ? <div className={styles.blurAhead} /> : null}
+          {!isViewFirstTab ? (
+            <div
+              className={styles.blurAhead}
+              dir={interfaceDirection}
+              data-direction={interfaceDirection}
+            />
+          ) : null}
           <Scrollbar
             ref={scrollRef}
             autoHide={false}
@@ -224,7 +231,13 @@ const Tabs = (props: TabsProps) => {
           >
             {renderContent}
           </Scrollbar>
-          {!isViewLastTab ? <div className={styles.blurBack} /> : null}
+          {!isViewLastTab ? (
+            <div
+              className={styles.blurBack}
+              dir={interfaceDirection}
+              data-direction={interfaceDirection}
+            />
+          ) : null}
         </div>
       ) : null}
       {withoutStickyIntend ? null : (

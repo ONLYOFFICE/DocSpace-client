@@ -46,11 +46,11 @@ const UsersRow = (props: AddEmailUsersRowProps) => {
     data.email?.length > 0,
   );
 
-  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAccountToggle = (e: React.MouseEvent) => {
     if (
       isPrevEmailValid &&
-      !emailInputRef.current?.contains(e.target) &&
-      !emailTextRef.current?.contains(e.target)
+      !emailInputRef.current?.contains(e.target as Node) &&
+      !emailTextRef.current?.contains(e.target as Node)
     ) {
       toggleAccount();
     }

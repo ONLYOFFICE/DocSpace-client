@@ -65,7 +65,8 @@ const getAllFiles = (dir) => {
         filePath.includes("campaigns") ||
         filePath.includes("storybook-static") ||
         filePath.includes("node_modules") ||
-        filePath.includes(".meta")
+        filePath.includes(".meta") ||
+        filePath.includes(".nx")
       ) {
         return null;
       }

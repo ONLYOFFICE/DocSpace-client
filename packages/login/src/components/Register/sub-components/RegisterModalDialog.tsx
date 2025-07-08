@@ -35,7 +35,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { InputSize } from "@docspace/shared/components/text-input";
 import { TenantTrustedDomainsType } from "@docspace/shared/enums";
 
 import { RegisterModalDialogProps } from "@/types";
@@ -70,7 +70,7 @@ const RegisterModalDialog = ({
   const getDomains = () => {
     if (trustedDomains)
       return trustedDomains.map((domain, i) => (
-        <span key={i}>
+        <span key={domain}>
           <b>
             {domain}
             {i === trustedDomains.length - 1 ? "." : ", "}
@@ -84,9 +84,7 @@ const RegisterModalDialog = ({
       <>
         {t("RegisterTextBodyBeforeDomainsList")} {getDomains()}{" "}
       </>
-    ) : (
-      <></>
-    );
+    ) : null;
   };
 
   return (
@@ -109,14 +107,14 @@ const RegisterModalDialog = ({
             className="email-reg-field"
             key="e-mail"
             isVertical
-            hasError={isShowError && emailErr}
+            hasError={isShowError ? emailErr : undefined}
             labelVisible={false}
             errorMessage={
               errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
             }
           >
             <EmailInput
-              hasError={isShowError && emailErr}
+              hasError={isShowError ? emailErr : undefined}
               placeholder={t("Common:RegistrationEmail")}
               isAutoFocussed
               id="registration-modal_email"

@@ -80,9 +80,9 @@ export default async function Layout({
       <ContentWrapper id="content-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
-          {isComboboxVisible && (
+          {isComboboxVisible ? (
             <LanguageComboboxWrapper initialCultures={cultures} />
-          )}
+          ) : null}
 
           <StyledPage id="styled-page">{children}</StyledPage>
         </Scrollbar>

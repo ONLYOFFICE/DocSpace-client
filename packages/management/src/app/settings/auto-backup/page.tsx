@@ -37,8 +37,11 @@ import {
 } from "@/lib/actions";
 
 import AutoBackup from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("AutoBackup page");
+
   const [
     account,
     backupSchedule,
@@ -78,4 +81,3 @@ async function Page() {
 }
 
 export default Page;
-

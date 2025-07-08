@@ -3,7 +3,7 @@
   "content": "Security",
   "content_en_sha1_hash": "f25ce1b8a399bd8621a57427a20039b4b13935db",
   "created_at": "2025-05-19T21:30:51.918Z",
-  "updated_at": "2025-06-18T17:11:42.430Z",
+  "updated_at": "2025-07-02T07:49:19.789Z",
   "comment": {
     "text": "This translation key is used to display the label \"Security\" in a security settings section of a portal management interface. It likely appears as a header or category title, allowing users to navigate to related settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 201,
+      "line_number": 204,
       "context": "return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 152,
+      "line_number": 159,
       "context": "{\n id: \"portal-settings_catalog-security\",\n key: \"1\",\n type: PageType.security,\n link: \"security\",\n tKey: \"ManagementCategorySecurity\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-access-portal\",\n key: \"1-0\",",
       "module": "/packages/client"
     }
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Безбедност' is the correct spelling for 'Security'.",
-          "suggestion": null
+          "description": "The Serbian (Cyrillic) translation \"Безбедност\" is spelled incorrectly. The correct spelling is \"Безбедност\".",
+          "suggestion": "Безбедност"
         }
       ],
       "approved_at": null
@@ -219,13 +219,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"安全性\" (ānquánxìng) is a possible translation for 'Security', it's a more formal and complete term than just 'Security'. A more direct and common translation would be \"安全\" (ānquán).",
-          "suggestion": "安全"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

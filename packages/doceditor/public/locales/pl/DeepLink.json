@@ -3,5 +3,7 @@
   "OpenInApp": "Otwórz w aplikacji",
   "OpeningDocument": "Otwieranie dokumentu",
   "RememberChoice": "Zapamiętaj wybór podczas otwierania dokumentów następnym razem",
-  "StayInBrowser": "Pozostań w przeglądarce"
+  "StayInBrowser": "Pozostań w przeglądarce",
+  "DeepLinkOnlyAppText": "Można otworzyć dokument tylko w aplikacji mobilnej.",
+  "DownloadApp": "Pobierz aplikację"
 }

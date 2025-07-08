@@ -26,14 +26,14 @@
 
 import React from "react";
 
-import { BackupStorageType, ProvidersType } from "@docspace/shared/enums";
+import { BackupStorageType, ProvidersType } from "../../../enums";
 import {
   DirectThirdPartyConnection,
   type DirectThirdPartyConnectionProps,
-} from "@docspace/shared/components/direct-third-party-connection";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+} from "../../../components/direct-third-party-connection";
+import { useDidMount } from "../../../hooks/useDidMount";
 
-import type { Nullable } from "@docspace/shared/types";
+import type { Nullable } from "../../../types";
 
 import {
   ScheduleComponent,

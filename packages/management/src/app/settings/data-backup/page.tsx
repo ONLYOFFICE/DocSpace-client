@@ -31,14 +31,16 @@ import {
   getBackupStorage,
   getFoldersTree,
   getPortalTariff,
-  getQuota,
   getSettingsFiles,
   getSettingsThirdParty,
   getStorageRegions,
 } from "@/lib/actions";
 import DataBackup from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("DataBackup page");
+
   const [
     account,
     backupSchedule,

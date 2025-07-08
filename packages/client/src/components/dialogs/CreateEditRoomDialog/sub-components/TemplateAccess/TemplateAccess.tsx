@@ -83,9 +83,11 @@ const TemplateAccess = ({
         size={AvatarSize.min}
         role={AvatarRole.none}
         isDefaultSource={roomOwner.hasAvatar}
-        source={item?.avatarSmall ?? item.avatar}
+        source={
+          (("avatarSmall" in item && item?.avatarSmall) || item.avatar) ?? ""
+        }
         isGroup={item?.isGroup}
-        userName={item.userName ?? item.name}
+        userName={(("userName" in item && item?.userName) || item.name) ?? ""}
         key={index}
       />,
     );

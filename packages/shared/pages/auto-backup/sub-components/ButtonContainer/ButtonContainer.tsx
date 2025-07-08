@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Button } from "@docspace/shared/components/button";
+import { Button } from "../../../../components/button";
 
 import type { ButtonContainerProps } from "./ButtonContainer.types";
 

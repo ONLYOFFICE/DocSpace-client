@@ -74,7 +74,7 @@ const SelectionArea = ({
       if (viewAs === "tile") {
         let countOfMissingTiles = 0;
         const itemGap =
-          arrayTypes.find((x) => x.type === itemType)?.rowGap || 0;
+          arrayTypes?.find((x) => x.type === itemType)?.rowGap || 0;
 
         // TOP/BOTTOM item position
         if (itemIndex === 0) {
@@ -86,12 +86,14 @@ const SelectionArea = ({
           );
           const headersCount = indexOfType === 0 ? 0 : indexOfType;
 
-          itemTop = headersCount * defaultHeaderHeight;
+          itemTop = defaultHeaderHeight
+            ? headersCount * defaultHeaderHeight
+            : 0;
           const itemHeight =
             arrayOfTypes.current[indexOfType].itemHeight + itemGap;
 
           if (!headersCount) {
-            const rowIndex = Math.trunc(itemIndex / countTilesInRow);
+            const rowIndex = Math.trunc(itemIndex / countTilesInRow!);
 
             itemTop += elemRect.current.top + itemHeight * rowIndex - scrollTop;
             itemBottom = itemTop + itemHeight - itemGap;
@@ -99,7 +101,7 @@ const SelectionArea = ({
             let prevRowsCount = 0;
 
             for (let i = 0; i < indexOfType; i += 1) {
-              const item = arrayTypes.find(
+              const item = arrayTypes?.find(
                 (x) => x.type === arrayOfTypes.current[i].type,
               );
 
@@ -115,7 +117,7 @@ const SelectionArea = ({
             }
 
             const nextRow =
-              Math.floor((itemIndex + countOfMissingTiles) / countTilesInRow) -
+              Math.floor((itemIndex + countOfMissingTiles) / countTilesInRow!) -
               prevRowsCount;
 
             itemTop += elemRect.current.top + itemHeight * nextRow - scrollTop;
@@ -123,11 +125,11 @@ const SelectionArea = ({
           }
         }
 
-        let columnIndex = (itemIndex + countOfMissingTiles) % countTilesInRow;
+        let columnIndex = (itemIndex + countOfMissingTiles) % countTilesInRow!;
 
         // Mirror fileIndex for RTL interface (2, 1, 0 => 0, 1, 2)
         if (isRtl && viewAs === "tile") {
-          columnIndex = countTilesInRow - 1 - columnIndex;
+          columnIndex = countTilesInRow! - 1 - columnIndex;
         }
 
         // LEFT/RIGHT item position
@@ -455,7 +457,7 @@ const SelectionArea = ({
         if (scroll instanceof Element) {
           if (!isRooms && viewAs === "tile") {
             elemRect.current.top =
-              scroll.scrollTop + itemsContainerRect.top + folderHeaderHeight;
+              scroll.scrollTop + itemsContainerRect.top + folderHeaderHeight!;
             elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
           } else {
             elemRect.current.top = scroll.scrollTop + itemsContainerRect.top;

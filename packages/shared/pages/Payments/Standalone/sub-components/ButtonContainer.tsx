@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "../../../../components/button";
 
 import { StyledButtonComponent } from "../Payments.styled";
 

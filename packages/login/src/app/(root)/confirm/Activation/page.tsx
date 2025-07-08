@@ -31,6 +31,7 @@ import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 
+import { logger } from "logger.mjs";
 import ActivateUserForm from "./page.client";
 
 type ActivationProps = {
@@ -38,7 +39,10 @@ type ActivationProps = {
 };
 
 async function Page(props: ActivationProps) {
-  const searchParams = await props.searchParams;
+  logger.info("Activation page");
+
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const type = searchParams.type;
   const confirmKey = getStringFromSearchParams(searchParams);
 
@@ -50,21 +54,17 @@ async function Page(props: ActivationProps) {
     getPortalPasswordSettings(confirmKey),
   ]);
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingCreateUserContainer type={type} hostName={hostName} />
-          <FormWrapper id="activation-form">
-            <ActivateUserForm
-              passwordHash={settings.passwordHash}
-              passwordSettings={passwordSettings}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingCreateUserContainer type={type} hostName={hostName} />
+      <FormWrapper id="activation-form">
+        <ActivateUserForm
+          passwordHash={settings.passwordHash}
+          passwordSettings={passwordSettings}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

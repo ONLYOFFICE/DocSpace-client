@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { TFunction } from "i18next";
 import { Trans } from "react-i18next";
 import resizeImage from "resize-image";
 
@@ -122,7 +123,7 @@ const BasicBlock = ({
   };
 
   const pkceHelpButtonText = (
-    <Trans t={t} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
+    <Trans t={t as TFunction} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
   );
 
   const isNameRequiredError = requiredErrorFields.includes("name");

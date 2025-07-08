@@ -84,7 +84,7 @@ export const AdditionalResources = ({
             "settings_unavailable",
           )}
         >
-          {t("AdditionalResources")}
+          {t("Common:AdditionalResources")}
         </div>
       </div>
       <div

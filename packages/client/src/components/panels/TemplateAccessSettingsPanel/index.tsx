@@ -291,7 +291,6 @@ const TemplateAccessSettingsPanel = ({
     else onClose();
   };
 
-  const roomType = templateItem?.roomType;
   const hasInvitedUsers = !!accessItems.length;
 
   const filter = Filter.getDefault();
@@ -352,7 +351,6 @@ const TemplateAccessSettingsPanel = ({
             <InviteInput
               inviteItems={accessItems}
               setInviteItems={setAccessItemsAction}
-              roomType={roomType}
               setAddUsersPanelVisible={setPanelVisible}
               isDisabled={isAvailable}
               roomId={templateId}
@@ -444,7 +442,6 @@ const TemplateAccessSettingsPanel = ({
             <InviteInput
               inviteItems={accessItems}
               setInviteItems={setAccessItemsAction}
-              roomType={roomType}
               setAddUsersPanelVisible={setAddUsersPanelVisible}
               isDisabled={isAvailable}
               roomId={templateId}

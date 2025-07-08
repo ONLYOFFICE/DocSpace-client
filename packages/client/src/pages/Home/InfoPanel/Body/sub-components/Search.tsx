@@ -101,7 +101,7 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   );
 };
 
-export default inject(({ infoPanelStore }) => ({
+export default inject(({ infoPanelStore }: TStore) => ({
   resetSearch: infoPanelStore.resetSearch,
   setSearchValue: infoPanelStore.setSearchValue,
 }))(Search);

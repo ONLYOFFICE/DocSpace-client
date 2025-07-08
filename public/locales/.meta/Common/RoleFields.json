@@ -3,7 +3,7 @@
   "content": "{{roleName}} role fields",
   "content_en_sha1_hash": "20226340335e5021214756174c2a4e1c98126f6e",
   "created_at": "2025-05-19T21:30:48.021Z",
-  "updated_at": "2025-05-26T07:57:32.943Z",
+  "updated_at": "2025-06-30T12:20:31.719Z",
   "comment": {
     "text": "This translation key is used to display a title for a section of role fields in a user interface, specifically in a start-filling panel dialogue. The phrase should include the roleName variable and will appear within an h3 heading.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.helpers.tsx",
-      "line_number": 34,
-      "context": "export const Header = memo(\n ({ ref, t, roleName, className, openInvitePanel }: HeaderProps) => (\n <div className={className} ref={ref}>\n <h3\n title={t(\"Common:RoleFields\", {\n roleName,\n })}\n >\n {t(\"Common:RoleFields\", {\n roleName,",
+      "line_number": 41,
+      "context": "openInvitePanel,\n canEditRoom,\n }: HeaderProps) => (\n <div className={className} ref={ref}>\n <h3\n title={t(\"Common:RoleFields\", {\n roleName,\n })}\n >\n {t(\"Common:RoleFields\", {\n roleName,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.helpers.tsx",
-      "line_number": 34,
-      "context": "export const Header = memo(\n ({ ref, t, roleName, className, openInvitePanel }: HeaderProps) => (\n <div className={className} ref={ref}>\n <h3\n title={t(\"Common:RoleFields\", {\n roleName,\n })}\n >\n {t(\"Common:RoleFields\", {\n roleName,",
+      "line_number": 41,
+      "context": "openInvitePanel,\n canEditRoom,\n }: HeaderProps) => (\n <div className={className} ref={ref}>\n <h3\n title={t(\"Common:RoleFields\", {\n roleName,\n })}\n >\n {t(\"Common:RoleFields\", {\n roleName,",
       "module": "/packages/shared"
     }
   ],
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'حقول دور {{roleName}}' is a literal translation that doesn't quite convey the intended meaning of '{{roleName}} role fields'. A more natural Arabic phrasing would emphasize the fields *belonging to* the role. The current translation reads more like 'fields of a role'.",
-          "suggestion": "حقول خاصة بدور {{roleName}} (Fields specific to the {{roleName}} role) or حقول متعلقة بدور {{roleName}} (Fields related to the {{roleName}} role)"
-        },
-        {
-          "type": "formatting",
-          "description": "While not a critical error, the lack of punctuation (e.g., a colon or comma) after 'حقول' could improve readability in certain contexts. It's a stylistic choice, but might warrant consideration.",
-          "suggestion": "حقول: دور {{roleName}}"
+          "description": "The translation 'حقول دور {{roleName}}' is not the most natural or accurate translation of '{{roleName}} role fields'. A more natural translation might be 'حقول الدور {{roleName}}' or 'حقول خاصة بالدور {{roleName}}'.",
+          "suggestion": "حقول الدور {{roleName}}"
         }
       ],
       "approved_at": null
@@ -65,13 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"{{roleName}} pole role\" doesn't accurately translate \"{{roleName}} role fields\". The word order is unusual and 'pole' (fields) is placed incorrectly. It literally translates to '{{roleName}} fields role'.",
-          "suggestion": "{{roleName}} pole pro roli"
-        },
-        {
-          "type": "grammar",
-          "description": "The proposed suggestion \"{{roleName}} pole pro roli\" could potentially benefit from a more natural phrasing, depending on the specific context.  Consider if the article 'pro' is required or if a different preposition would flow better.",
-          "suggestion": "Consider reviewing with a native Czech speaker for optimal phrasing based on context. Possible alternatives include: '{{roleName}} pole spojené s rolí' or '{{roleName}} pole role'"
+          "description": "The Czech translation \"{{roleName}} pole role\" is not a natural or accurate translation of \"{{roleName}} role fields\". The word order is awkward, and 'pole' doesn't fully convey the meaning of 'fields' in this context. It feels like a literal, word-by-word translation that misses the idiomatic meaning.",
+          "suggestion": "A more appropriate translation would be something like \"{{roleName}} hodnoty polí\" or \"{{roleName}} pole dat\" or \"{{roleName}} pole\" (depending on the context - if 'fields' refers to columns or data fields, more context is needed)."
         }
       ],
       "approved_at": null
@@ -88,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Πεδία ρόλων {{roleName}}\" is not the most natural or accurate translation of \"{{roleName}} role fields\". A more idiomatic translation would be \"{{roleName}} πεδία ρόλων\" or \"πεδία για το ρόλο {{roleName}}\". The current word order sounds awkward in Greek.",
-          "suggestion": "πεδία για το ρόλο {{roleName}}"
+          "description": "The translation \"Πεδία ρόλων {{roleName}}\" is a literal translation and sounds slightly unnatural in Greek. A more natural phrasing would be something like \"πεδία για τον ρόλο {{roleName}}\" or \"πεδία που αφορούν τον ρόλο {{roleName}}\".",
+          "suggestion": "πεδία για τον ρόλο {{roleName}}"
         }
       ],
       "approved_at": null
@@ -109,13 +99,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Champs de rôle {{roleName}}\" is not the most natural or idiomatic translation of \"{{roleName}} role fields\". A more natural phrasing might be \"les champs du rôle {{roleName}}\" or \"les champs relatifs au rôle {{roleName}}\".",
-          "suggestion": "les champs du rôle {{roleName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -127,7 +111,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"{{roleName}} role fields\" is not directly equivalent to \"Campi del ruolo {{roleName}}\". A more accurate translation would incorporate the word 'for' or 'related to'.",
+          "suggestion": "Campi relativi al ruolo {{roleName}}"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -136,13 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"「{{roleName}}」役割のフィールド\" is a literal translation and doesn't flow naturally in Japanese. While technically correct, it's a bit clunky. A more natural phrasing would be \"{{roleName}} 役割の項目\" or \"{{roleName}} の役割項目\". The brackets around the variable name in the Japanese translation are unusual and unnecessary.",
-          "suggestion": "{{roleName}} 役割の項目"
+          "description": "The translation \"「{{roleName}}」役割のフィールド\" is a literal translation and doesn't flow naturally in Japanese. It includes unnecessary quotation marks and the word 'の' doesn't always need to be used in this construction. A more natural translation would be something like \"{{roleName}} の役割フィールド\" or \"{{roleName}} 役割フィールド\".",
+          "suggestion": "{{roleName}} 役割フィールド"
         },
         {
           "type": "formatting",
-          "description": "The use of brackets `「」` around the `{{roleName}}` variable in the Japanese translation is unusual and doesn't fit typical Japanese phrasing.  It implies a specific title or something being quoted that may not be intended.",
-          "suggestion": "Remove the brackets around {{roleName}}. Consider omitting them altogether depending on the overall style guide."
+          "description": "The use of quotation marks around {{roleName}} is unnatural in this context and makes the sentence feel stilted.",
+          "suggestion": "Remove the quotation marks."
         }
       ],
       "approved_at": null
@@ -159,13 +149,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບ່ອນເຮັດວຽກ {{roleName}} ບ່ອນເຮັດວຽກ\" does not accurately translate \"{{roleName}} role fields\". \"ບ່ອນເຮັດວຽກ\" means \"workplace\" and is repeated unnecessarily. It does not convey the meaning of 'role fields'.",
-          "suggestion": "A more accurate translation might be \"ຊຸດສໍານວນງານ {{roleName}}\" (for 'role fields') or \"ຂໍ້ມູນຂອງບົດບາດ {{roleName}}\" (for '{{roleName}} role information'). The best option depends on the overall context."
+          "description": "The Lao translation \"ບ່ອນເຮັດວຽກ {{roleName}} ບ່ອນເຮັດວຽກ\" is not an accurate translation of \"{{roleName}} role fields\". \"ບ່ອນເຮັດວຽກ\" means \"workplace\" or \"job\". The Lao translation repeats 'workplace', which is awkward and doesn't convey the meaning of 'role fields'.",
+          "suggestion": "A more accurate translation would depend on the specific context of 'role fields'. Potential suggestions include: \"ຄຳນາມຂອງບົດບາດ {{roleName}}\" (names of the {{roleName}} role), \"ຂໍ້ມູນຂອງບົດບາດ {{roleName}}\" (data of the {{roleName}} role), or a phrase that more closely reflects the role fields' purpose."
         },
         {
           "type": "formatting",
-          "description": "The repeated \"ບ່ອນເຮັດວຽກ\" creates an awkward phrasing.",
-          "suggestion": "Combine the repetition into a single phrase where appropriate (as suggested in the incorrect translation correction)."
+          "description": "The repetition of \"ບ່ອນເຮັດວຽກ\" makes the sentence feel redundant and awkward. This repetition is not present in the English source.",
+          "suggestion": "Eliminate the repeated \"ບ່ອນເຮັດວຽກ\" and replace with a more concise and accurate phrasing as suggested in the 'incorrect_translation' issue."
         }
       ],
       "approved_at": null
@@ -188,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Pola roli {{roleName}}\" is not the most natural or accurate rendering of \"{{roleName}} role fields\".  A more idiomatic translation would incorporate 'of' or a similar connecting word.  'Role fields of {{roleName}}' would be more common.",
-          "suggestion": "Pola roli {{roleName}}"
+          "description": "The translation 'Pola roli {{roleName}}' lacks the word 'the' which is implied in the English '{{roleName}} role fields'. A more accurate translation would incorporate this.",
+          "suggestion": "Pola dla roli {{roleName}}"
         }
       ],
       "approved_at": null
@@ -200,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'role' is translated as 'função', which can sometimes mean 'function' in a technical sense. 'Role' in this context refers to a user's role or position. A more accurate translation would be 'papel'.",
-          "suggestion": "{{roleName}} campos de papel"
+          "description": "The translation \"campos de função\" for \"role fields\" is not the most natural or accurate. \"Campos de função\" literally translates to \"function fields\".  A better translation would be something like \"campos de papel\" (role fields) or \"campos de cargo\" (position fields).",
+          "suggestion": "Consider \"campos de papel\" or \"campos de cargo\" for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -212,8 +202,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Campos de função {{roleName}}' is not the most natural or accurate translation of '{{roleName}} role fields'. A more appropriate translation might be 'Campos da função {{roleName}}' or 'Campos relacionados à função {{roleName}}'. 'Campos de função' can imply fields *of* a function in a programming sense, which isn't the intended meaning.",
-          "suggestion": "Campos da função {{roleName}}"
+          "description": "The translation 'Campos de função {{roleName}}' is not ideal. 'Função' implies 'function' in a technical sense, which might be misleading. 'Papel' is a more common and accurate translation for 'role' in this context.",
+          "suggestion": "Campos de papel {{roleName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "While the variable substitution is present, it's good to ensure consistency in capitalization and spacing between 'Campos de' and the role name in all translated contexts.",
+          "suggestion": "Campos do papel {{roleName}}"
         }
       ],
       "approved_at": null
@@ -224,7 +219,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'câmpuri de rol' is not the most natural way to say 'role fields' in Romanian. While technically correct, it sounds a bit clunky. A more idiomatic translation would be 'câmpuri de roluri'.",
+          "description": "The translation 'câmpuri de rol' while understandable, isn't the most natural Romanian phrasing for 'role fields'. A more common and natural translation would be 'câmpuri de roluri' or 'câmpuri specifice rolului'. 'De rol' implies fields *of* a role, whereas 'specifice rolului' more accurately conveys the English meaning.",
           "suggestion": "câmpuri de roluri"
         }
       ],
@@ -236,8 +231,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Поля роли {{roleName}}' is a literal translation but doesn't quite capture the intended meaning of \"{{roleName}} role fields\". It lacks the sense of 'of' or a possessive relationship. A better translation would include something to indicate this relationship.",
-          "suggestion": "Поля для роли {{roleName}}"
+          "description": "The English phrase '{{roleName}} role fields' implies that the fields *belong to* or are *associated with* the role. The Russian translation 'Поля роли {{roleName}}' literally translates to 'Fields of role {{roleName}}' which is not as clear and may be misinterpreted.  A more accurate translation might consider options like 'Поля, связанные с ролью {{roleName}}' or 'Поля для роли {{roleName}}'.",
+          "suggestion": "Consider 'Поля, связанные с ролью {{roleName}}' or 'Поля для роли {{roleName}}'"
         }
       ],
       "approved_at": null
@@ -248,8 +243,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{roleName}} භූමිකාව සඳහා වන ක්ෂේත්‍ර\" literally translates to \"{{roleName}} fields for the role.\"  A more natural and accurate translation would be \"{{roleName}} role fields\" or \"{{roleName}} සඳහා වන භූමිකා ක්ෂේත්‍ර\". The current translation sounds slightly awkward and doesn't fully convey the intended meaning of 'role fields'.",
-          "suggestion": "{{roleName}} සඳහා වන භූමිකා ක්ෂේත්‍ර"
+          "description": "The translation 'භූමිකාව සඳහා වන ක්ෂේත්‍ර' literally translates to 'fields for the role'.  A more natural and accurate translation would be something like '{{roleName}} සඳහා වන ක්ෂේත්‍ර' or '{{roleName}} සම්බන්ධ ක්ෂේත්‍ර'. The current translation is slightly awkward.",
+          "suggestion": "{{roleName}} සඳහා වන ක්ෂේත්‍ර"
         }
       ],
       "approved_at": null
@@ -260,8 +255,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Políčka pre rolu {{roleName}}\" is a literal translation of \"role fields\" but doesn't quite capture the intended meaning. \"Políčka\" (fields) sounds a bit awkward in this context. A more natural Slovak phrasing would be something like 'Záložné polia pre rolu' or 'Oblasti pre rolu'.",
-          "suggestion": "Consider alternatives like 'Záložné polia pre rolu' or 'Oblasti pre rolu'."
+          "description": "The Slovak translation \"Políčka pre rolu {{roleName}}\" is a literal translation and could be improved for naturalness. 'Políčka' directly translates to 'fields', but in this context, it sounds slightly awkward.  A more natural phrasing would be 'Pole pre rolu {{roleName}}' or 'Informácie o role {{roleName}}'.",
+          "suggestion": "Pole pre rolu {{roleName}}"
         }
       ],
       "approved_at": null
@@ -272,8 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'role fields' is not accurately translated. 'Role' should be 'vloga'. 'Fields' implies a list or set of attributes, but the translation doesn't quite capture that. While 'polja' is correct for 'fields', the overall phrase is slightly awkward.",
-          "suggestion": "V lastnostih vloge {{roleName}}"
+          "description": "The English phrase '{{roleName}} role fields' implies fields *associated with* a role. The Slovenian translation 'Polja vloge {{roleName}}' translates more literally as 'Fields of the role', which isn't as accurate. A better translation would incorporate the concept of association or belonging.",
+          "suggestion": "Polja, povezana z vlogo {{roleName}}"
         }
       ],
       "approved_at": null
@@ -284,7 +279,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{roleName}} поља улоге\" is technically correct but could be improved for naturalness in Serbian. \"У пољу улоге\" or \"Поља за улогу\" would be more idiomatic.",
+          "description": "The Serbian translation \"{{roleName}} поља улоге\" is a literal translation that doesn't flow naturally in Serbian.  It's more accurate to translate 'role fields' as 'polja za ulogu' or 'polja vezana za ulogu'.",
           "suggestion": "{{roleName}} поља за улогу"
         }
       ],
@@ -296,8 +291,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'polja uloge' is a literal translation but doesn't quite capture the intended meaning of 'role fields'. It's too generic.  'role fields' typically refers to fields *associated with* a role.",
-          "suggestion": "'polja vezana za ulogu' or 'polja vezana za određenu ulogu' would be more accurate.  Alternatively, depending on the context, 'karakteristike uloge' could also work."
+          "description": "The translation 'polja uloge' is a literal translation but doesn't fully convey the meaning of 'role fields'. A more natural phrasing in Serbian would be 'polja vezana za ulogu' or 'polja koja se odnose na ulogu'.",
+          "suggestion": "polja vezana za ulogu"
         }
       ],
       "approved_at": null
@@ -313,9 +308,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "Missing space after colon in 'Поля ролі {{roleName}}'.",
-          "suggestion": "Поля ролі {{roleName}}"
+          "type": "incorrect_translation",
+          "description": "The translation \"Поля ролі {{roleName}}\" is not idiomatic. A more natural translation would be something like \"Поля ролі {{roleName}}\" or \"Поля для ролі {{roleName}}\"",
+          "suggestion": "Поля для ролі {{roleName}}"
         }
       ],
       "approved_at": null
@@ -326,13 +321,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'trường vai trò {{roleName}}' doesn't accurately convey the meaning of '{{roleName}} role fields'. 'trường' means 'field' in a more general sense, and 'vai trò' translates to 'role'. It's missing the possessive relationship between the role and the fields. A more accurate translation would incorporate the concept of 'fields of a role'.",
-          "suggestion": "các trường của vai trò {{roleName}}"
-        },
-        {
-          "type": "formatting",
-          "description": "Missing article 'các' before 'trường' makes it sound a bit abrupt. The possessive relationship needs to be clearly indicated.",
-          "suggestion": "các trường của vai trò {{roleName}}"
+          "description": "The translation \"trường vai trò {{roleName}}\" doesn't accurately convey the meaning of \"{{roleName}} role fields\". \"trường\" typically refers to a field or attribute, but \"vai trò\" translates to \"role.\" Combining them doesn't create a natural or understandable phrase in Vietnamese.  It would be more accurate to translate as something like \"Các trường dữ liệu vai trò {{roleName}}\" or \"Các trường liên quan đến vai trò {{roleName}}\".",
+          "suggestion": "Các trường dữ liệu vai trò {{roleName}}"
         }
       ],
       "approved_at": null

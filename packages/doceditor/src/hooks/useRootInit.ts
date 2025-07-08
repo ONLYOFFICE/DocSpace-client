@@ -30,10 +30,12 @@ import { getCookie } from "@docspace/shared/utils";
 import { isRetina } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 
-import PresentationIcoUrl from "PUBLIC_DIR/images/presentation.ico?url";
-import SpreadSheetIcoUrl from "PUBLIC_DIR/images/spreadsheet.ico?url";
-import TextIcoUrl from "PUBLIC_DIR/images/text.ico?url";
-import PDFIcoUrl from "PUBLIC_DIR/images/pdf.ico?url";
+import SlideIcoUrl from "PUBLIC_DIR/images/slide.ico?url";
+import CellIcoUrl from "PUBLIC_DIR/images/cell.ico?url";
+import WordIcoUrl from "PUBLIC_DIR/images/word.ico?url";
+import PdfIcoUrl from "PUBLIC_DIR/images/pdf.ico?url";
+import DiagramIcoUrl from "PUBLIC_DIR/images/diagram.ico?url";
+
 import { calculateAsideHeight } from "@/utils";
 
 interface UseRootInitProps {
@@ -46,19 +48,22 @@ const useRootInit = ({ documentType }: UseRootInitProps) => {
 
     switch (documentType) {
       case "word":
-        icon = TextIcoUrl;
+        icon = WordIcoUrl;
         break;
       case "slide":
-        icon = PresentationIcoUrl;
+        icon = SlideIcoUrl;
         break;
       case "cell":
-        icon = SpreadSheetIcoUrl;
+        icon = CellIcoUrl;
         break;
       case "pdf":
-        icon = PDFIcoUrl;
+        icon = PdfIcoUrl;
+        break;
+      case "diagram":
+        icon = DiagramIcoUrl;
         break;
       default:
-        icon = TextIcoUrl;
+        icon = WordIcoUrl;
         break;
     }
 

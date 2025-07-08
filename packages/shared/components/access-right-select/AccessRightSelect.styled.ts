@@ -24,12 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled, { css, createGlobalStyle } from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import { injectDefaultTheme, mobile } from "../../utils";
 
 import { ComboBox } from "../combobox";
+
+const GlobalStyle = createGlobalStyle`
+  .access-right-select-dropdown.dropdown-container {
+    @media ${mobile} {
+      border-radius: 6px 6px 0px 0px !important;
+    }
+  }
+`;
 
 const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
   .combo-button {
@@ -131,4 +139,5 @@ export {
   StyledItemDescription,
   StyledItem,
   StyledWrapper,
+  GlobalStyle,
 };

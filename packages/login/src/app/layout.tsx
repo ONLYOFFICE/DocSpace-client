@@ -41,9 +41,10 @@ import {
 } from "@/utils/actions";
 
 import "../styles/globals.scss";
-import "../../../shared/styles/theme.scss";
+import "@docspace/shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
 import { TConfirmLinkParams } from "@/types";
+import { logger } from "@/../logger.mjs";
 
 export default async function RootLayout({
   children,
@@ -55,8 +56,8 @@ export default async function RootLayout({
   const searchParams = hdrs.get("x-confirm-query") ?? "";
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    console.log("is health check");
-    return <></>;
+    logger.info("get health check and return empty layout");
+    return null;
   }
 
   const queryParams = Object.fromEntries(

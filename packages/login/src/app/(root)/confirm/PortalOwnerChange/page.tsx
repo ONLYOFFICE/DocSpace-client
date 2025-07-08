@@ -30,6 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import ChangeOwnerForm from "./page.client";
 
 type PortalOwnerChangeProps = {
@@ -37,7 +38,10 @@ type PortalOwnerChangeProps = {
 };
 
 async function Page(props: PortalOwnerChangeProps) {
-  const searchParams = await props.searchParams;
+  logger.info("PortalOwnerChange page");
+
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 
@@ -46,18 +50,14 @@ async function Page(props: PortalOwnerChangeProps) {
     getUserFromConfirm(uid, confirmKey),
   ]);
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer greetingText={settings.greetingSettings} />
-          <FormWrapper id="owner-change-form">
-            <ChangeOwnerForm newOwner={user?.displayName} />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingContainer greetingText={settings.greetingSettings} />
+      <FormWrapper id="owner-change-form">
+        <ChangeOwnerForm newOwner={user?.displayName} />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

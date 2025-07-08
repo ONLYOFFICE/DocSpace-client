@@ -130,6 +130,7 @@ export type TSettings = {
   logoText: string;
   displayAbout: boolean;
   externalResources: TExternalResources;
+  licenseAgreementsUrl?: string;
 };
 
 export type TCustomSchema = {
@@ -203,6 +204,7 @@ export type THelpCenterEntries = {
   connectwordpress: string;
   connectyandex: string;
   creatingbackup: string;
+  configuringsettings: string;
   docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;

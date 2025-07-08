@@ -24,19 +24,4 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-
-import { StyledTableCell } from "../Table.styled";
-import { TableCellProps } from "../Table.types";
-
-const TableCell = ({ className, forwardedRef, ...rest }: TableCellProps) => {
-  return (
-    <StyledTableCell
-      className={`${className} table-container_cell`}
-      ref={forwardedRef}
-      {...rest}
-    />
-  );
-};
-
-export { TableCell };
+export { TableBody } from "./TableBody";

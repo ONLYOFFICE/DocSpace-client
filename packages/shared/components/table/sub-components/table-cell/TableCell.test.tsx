@@ -24,11 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { TableContainer } from "./table-container";
-export { TableBody } from "./table-body";
-export { TableRow } from "./table-row";
-export { TableHeader } from "./table-header";
-export { TableGroupMenu } from "./table-group-menu";
-export { TableCell } from "./sub-components/table-cell";
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-export type { TTableColumn, TGroupMenuItem } from "./Table.types";
+import { TableCell } from "./TableCell";
+
+describe("<TableCell />", () => {
+  it("renders without errors", () => {
+    render(<TableCell>Cell</TableCell>);
+
+    expect(screen.getByTestId("table-cell")).toBeInTheDocument();
+  });
+
+  it("pass value for DnD", () => {
+    const value = "DnD_Value";
+    render(<TableCell value={value}>Cell</TableCell>);
+
+    expect(screen.getByTestId("table-cell")).toHaveAttribute("value", value);
+  });
+});

@@ -65,3 +65,9 @@
     transform: scaleX(-1);
   }
 }
+
+@mixin can-hover {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}

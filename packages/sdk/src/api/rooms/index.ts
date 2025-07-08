@@ -26,8 +26,6 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { headers } from "next/headers";
-
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import {

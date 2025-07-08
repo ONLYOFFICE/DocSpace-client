@@ -24,21 +24,112 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import axios from "axios";
+import { request } from "../client";
+import {
+  TCreateAiProvider,
+  TAiProvider,
+  TGetAiProviders,
+  TUpdateAiProviders,
+  TDeleteAiProviders,
+  TModelList,
+  TCurrentModel,
+} from "./types";
 
-const client = axios.create({ baseURL: "/ai/v1" });
+const baseUrl = "/ai";
 
-export type AIModel = {
-  created: number;
-  display_name: string;
-  id: string;
-  object: "model";
-  owned_by: string;
-  type: "chat" | "embedding";
+export const createProvider = async (provider: TCreateAiProvider) => {
+  const res = (await request({
+    method: "post",
+    url: `${baseUrl}/providers`,
+    data: provider,
+  })) as TAiProvider;
+
+  return res;
 };
 
-export const getModels = async () => {
-  const res = (await client.get("/models")) as { data: { data: AIModel[] } };
+export const getProviders = async () => {
+  const res = (await request({
+    method: "get",
+    url: `${baseUrl}/providers`,
+  })) as TGetAiProviders;
 
-  return res.data.data as AIModel[];
+  return res;
 };
+
+export const updateProvider = async (
+  providerId: Pick<TAiProvider, "id">,
+  data: TUpdateAiProviders,
+) => {
+  const res = (await request({
+    method: "put",
+    url: `${baseUrl}/providers/${providerId.id}`,
+    data,
+  })) as TAiProvider;
+
+  return res;
+};
+
+export const deleteProvider = async (data: TDeleteAiProviders) => {
+  const res = (await request({
+    method: "delete",
+    url: `${baseUrl}/providers`,
+    data,
+  })) as TDeleteAiProviders;
+
+  return res;
+};
+
+export const getModels = async (providerId?: Pick<TAiProvider, "id">) => {
+  const searchParams = new URLSearchParams();
+  if (providerId) {
+    searchParams.append("providerId", providerId.id.toString());
+  }
+
+  const strSearch = providerId ? `?${searchParams.toString()}` : "";
+
+  const res = (await request({
+    method: "get",
+    url: `${baseUrl}/chats/models${strSearch}`,
+  })) as TModelList;
+
+  return res;
+};
+
+export const getCurrentModel = async () => {
+  const res = (await request({
+    method: "get",
+    url: `${baseUrl}/chats/configuration`,
+  })) as TCurrentModel | undefined;
+
+  return res;
+};
+
+export const setCurrentModel = async (data: TCurrentModel) => {
+  const res = (await request({
+    method: "put",
+    url: `${baseUrl}/chats/configuration`,
+    data,
+  })) as TCurrentModel;
+
+  return res;
+};
+
+export const startNewChat = (roomId: number | string) => {};
+
+export const sendMessageToChat = (chatId: string) => {};
+
+export const getChats = (
+  roomId: number | string,
+  startIndex: number,
+  count: number = 100,
+) => {};
+
+export const getChatMessages = (
+  chatId: string,
+  startIndex: number,
+  count: number = 100,
+) => {};
+
+export const renameChat = (chatId: string, name: string) => {};
+
+export const deleteChat = (chatId: string) => {};

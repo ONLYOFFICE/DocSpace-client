@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { typeDefinition as roomsTypeDefinition } from "../api/rooms/filter";
+import { typeDefinition as roomsTypeDefinition } from "../api/rooms/typeDefinition";
 import { typeDefinition as peopleTypeDefinition } from "../api/people/filter";
 import { typeDefinition as filesTypeDefinition } from "../api/files/filter";
 import { typeDefinition as groupsTypeDefinition } from "../api/groups/filter";

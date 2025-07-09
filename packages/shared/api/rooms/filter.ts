@@ -43,6 +43,7 @@ import {
 import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
+import { typeDefinition } from "./typeDefinition";
 
 const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;
 const DEFAULT_FILTER_VALUE: Nullable<string> = null;
@@ -81,19 +82,6 @@ const TAGS = "tags";
 const TYPE = "type";
 const WITHOUT_TAGS = "withoutTags";
 const START_INDEX = "startIndex";
-
-export const typeDefinition = {
-  sortBy: [
-    "DateAndTimeCreation",
-    "Tags",
-    "AZ",
-    "Author",
-    "Type",
-    "usedspace",
-    "Size",
-  ] as TSortBy[],
-  sortOrder: ["ascending", "descending"] as TSortOrder[],
-};
 
 class RoomsFilter {
   page: number;

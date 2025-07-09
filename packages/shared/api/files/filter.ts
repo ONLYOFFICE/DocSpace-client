@@ -116,6 +116,13 @@ const getOtherSearchParams = () => {
   return searchParams.toString();
 };
 
+const typeDefinition = {
+  filterType: Object.values(FilterType).map((value) => String(value)), // enum FilterType
+  applyFilterOption: Object.values(ApplyFilterOption), // enum ApplyFilterOption
+  sortBy: ["DateAndTime", "AZ", "Type", "Size", "Title", "Author"] as TSortBy[], // type TSortBy
+  sortOrder: ["ascending", "descending"] as TSortOrder[], // type TSortOrder
+};
+
 class FilesFilter {
   page: number;
 
@@ -334,36 +341,6 @@ class FilesFilter {
   };
 
   toUrlParams = () => {
-    const typeDefinition = {
-      filterType: [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17",
-        "20",
-        "21",
-        "22",
-        "23",
-        "25",
-      ], // enum FilterType
-      applyFilterOption: ["All", "Files", "Folder"], // enum ApplyFilterOption
-      sortBy: ["DateAndTime", "AZ", "Type", "Size", "Title", "Author"], // type TSortBy
-      sortOrder: ["ascending", "descending"], // type TSortOrder
-    };
-
     const fixedValidObject = validateAndFixObject(this, typeDefinition);
 
     const {

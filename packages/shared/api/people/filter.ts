@@ -96,13 +96,13 @@ const typeDefinition = {
     "usedspace",
     "registrationDate",
     "createdby",
-  ], // type TFilterSortBy
-  sortOrder: ["ascending", "descending"], // type TSortOrder
-  employeeStatus: ["1", "2", "4"], // enum EmployeeStatus
-  role: ["1", "2", "3", "4", "owner"], // enum EmployeeType
-  payments: ["0", "1"], // enum PaymentsType
-  accountLoginType: ["0", "1", "2"], // enum AccountLoginType
-  area: ["all", "people", "guests"], // type TFilterArea
+  ] as TFilterSortBy[],
+  sortOrder: ["ascending", "descending"] as TSortOrder[],
+  employeeStatus: Object.values(EmployeeStatus).map((value) => String(value)),
+  role: Object.values(EmployeeType).map((value) => String(value)),
+  payments: Object.values(PaymentsType).map((value) => String(value)),
+  accountLoginType: Object.values(AccountLoginType),
+  area: ["all", "people", "guests"] as TFilterArea[],
 };
 
 class Filter {

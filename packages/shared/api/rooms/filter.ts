@@ -82,6 +82,19 @@ const TYPE = "type";
 const WITHOUT_TAGS = "withoutTags";
 const START_INDEX = "startIndex";
 
+const typeDefinition = {
+  sortBy: [
+    "DateAndTimeCreation",
+    "Tags",
+    "AZ",
+    "Author",
+    "Type",
+    "usedspace",
+    "Size",
+  ] as TSortBy[],
+  sortOrder: ["ascending", "descending"] as TSortOrder[],
+};
+
 class RoomsFilter {
   page: number;
 
@@ -299,19 +312,6 @@ class RoomsFilter {
   };
 
   toApiUrlParams = () => {
-    const typeDefinition = {
-      sortBy: [
-        "DateAndTimeCreation",
-        "Tags",
-        "AZ",
-        "Author",
-        "Type",
-        "usedspace",
-        "Size",
-      ], // type TSortBy
-      sortOrder: ["ascending", "descending"], // type TSortOrder
-    };
-
     const fixedValidObject = validateAndFixObject(this, typeDefinition);
 
     const {

@@ -62,6 +62,7 @@ const ArchiveDialogComponent = (props) => {
     if (e.key === "Escape") {
       onClose();
     }
+    if (e.key === "Enter") onAction();
   };
 
   useEffect(() => {

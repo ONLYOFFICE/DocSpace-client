@@ -31,7 +31,10 @@ export const validateAndFixObject = <T extends Record<string, string>>(
   const result: Partial<T> = {};
 
   Object.entries(obj).forEach(([key, value]) => {
-    if (!(key in typeDefinition)) return;
+    if (!(key in typeDefinition)) {
+      result[key as keyof T] = value as T[keyof T];
+      return;
+    }
 
     const allowedValues = typeDefinition[key as keyof T];
 

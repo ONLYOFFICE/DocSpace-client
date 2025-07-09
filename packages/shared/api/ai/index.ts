@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { getCookie } from "../../utils";
+
 import { request } from "../client";
 import {
   TCreateAiProvider,
@@ -33,6 +35,8 @@ import {
   TDeleteAiProviders,
   TModelList,
   TCurrentModel,
+  TChat,
+  TMessage,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -42,18 +46,18 @@ export const createProvider = async (provider: TCreateAiProvider) => {
     method: "post",
     url: `${baseUrl}/providers`,
     data: provider,
-  })) as TAiProvider;
+  })) as { response: TAiProvider };
 
-  return res;
+  return (res as { response: TAiProvider }).response;
 };
 
 export const getProviders = async () => {
   const res = (await request({
     method: "get",
     url: `${baseUrl}/providers`,
-  })) as TGetAiProviders;
+  })) as { response: TGetAiProviders };
 
-  return res;
+  return (res as { response: TGetAiProviders }).response;
 };
 
 export const updateProvider = async (
@@ -64,9 +68,9 @@ export const updateProvider = async (
     method: "put",
     url: `${baseUrl}/providers/${providerId.id}`,
     data,
-  })) as TAiProvider;
+  })) as { response: TAiProvider };
 
-  return res;
+  return (res as { response: TAiProvider }).response;
 };
 
 export const deleteProvider = async (data: TDeleteAiProviders) => {
@@ -74,9 +78,9 @@ export const deleteProvider = async (data: TDeleteAiProviders) => {
     method: "delete",
     url: `${baseUrl}/providers`,
     data,
-  })) as TDeleteAiProviders;
+  })) as { response: TDeleteAiProviders };
 
-  return res;
+  return (res as { response: TDeleteAiProviders }).response;
 };
 
 export const getModels = async (providerId?: Pick<TAiProvider, "id">) => {
@@ -90,18 +94,18 @@ export const getModels = async (providerId?: Pick<TAiProvider, "id">) => {
   const res = (await request({
     method: "get",
     url: `${baseUrl}/chats/models${strSearch}`,
-  })) as TModelList;
+  })) as { response: TModelList };
 
-  return res;
+  return (res as { response: TModelList }).response;
 };
 
 export const getCurrentModel = async () => {
   const res = (await request({
     method: "get",
     url: `${baseUrl}/chats/configuration`,
-  })) as TCurrentModel | undefined;
+  })) as { response: TCurrentModel | undefined };
 
-  return res;
+  return (res as { response: TCurrentModel | undefined }).response;
 };
 
 export const setCurrentModel = async (data: TCurrentModel) => {
@@ -109,27 +113,97 @@ export const setCurrentModel = async (data: TCurrentModel) => {
     method: "put",
     url: `${baseUrl}/chats/configuration`,
     data,
-  })) as TCurrentModel;
+  })) as { response: TCurrentModel };
 
-  return res;
+  return (res as { response: TCurrentModel }).response;
 };
 
-export const startNewChat = (roomId: number | string) => {};
-
-export const sendMessageToChat = (chatId: string) => {};
-
-export const getChats = (
+export const startNewChat = async (
   roomId: number | string,
-  startIndex: number,
-  count: number = 100,
-) => {};
+  message: string,
+) => {
+  const authHeader = getCookie("asc_auth_key")!;
 
-export const getChatMessages = (
+  const response = await fetch(`/api/2.0/${baseUrl}/rooms/${roomId}/chats`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: authHeader,
+      body: JSON.stringify({ message }),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to start new chat: ${response.status}`);
+  }
+
+  return response.body;
+};
+
+export const sendMessageToChat = async (chatId: string, message: string) => {
+  const authHeader = getCookie("asc_auth_key")!;
+
+  const response = await fetch(`/api/2.0/${baseUrl}/chats/${chatId}/messages`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: authHeader,
+      body: JSON.stringify({ message }),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to send message to chat: ${response.status}`);
+  }
+
+  return response.body;
+};
+
+export const getChats = async (
+  roomId: number | string,
+  startIndex: number = 0,
+  count: number = 100,
+) => {
+  const searchParams = new URLSearchParams();
+  searchParams.append("startIndex", startIndex.toString());
+  searchParams.append("count", count.toString());
+  const res = await request({
+    method: "GET",
+    url: `${baseUrl}/rooms/${roomId}/chats?${searchParams.toString()}`,
+  });
+
+  return res as { response: TChat[]; total: number; count: number };
+};
+
+export const getChatMessages = async (
   chatId: string,
   startIndex: number,
   count: number = 100,
-) => {};
+) => {
+  const searchParams = new URLSearchParams();
+  searchParams.append("startIndex", startIndex.toString());
+  searchParams.append("count", count.toString());
+  const res = await request({
+    method: "GET",
+    url: `${baseUrl}/chats/${chatId}/messages?${searchParams.toString()}`,
+  });
 
-export const renameChat = (chatId: string, name: string) => {};
+  return res as { response: TMessage[]; total: number; count: number };
+};
 
-export const deleteChat = (chatId: string) => {};
+export const renameChat = async (chatId: string, name: string) => {
+  const res = await request({
+    method: "PUT",
+    url: `${baseUrl}/chats/${chatId}`,
+    data: { name },
+  });
+
+  return (res as { response: TChat }).response;
+};
+
+export const deleteChat = async (chatId: string) => {
+  await request({
+    method: "DELETE",
+    url: `${baseUrl}/chats/${chatId}`,
+  });
+};

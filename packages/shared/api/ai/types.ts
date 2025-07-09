@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ProviderType } from "./enums";
+import { TCreatedBy } from "../../types";
+import { ContentType, MessageType, ProviderType } from "./enums";
 
 export type TCreateAiProvider =
   | {
@@ -70,4 +71,23 @@ export type TModelList = TModel[];
 export type TCurrentModel = {
   providerId: Pick<TAiProvider, "id">;
   modelId: Pick<TModel, "modelId">;
+};
+
+export type TChat = {
+  id: string;
+  title: string;
+  createdOn: string;
+  modifiedOn: string;
+  createdBy: TCreatedBy;
+};
+
+export type TContent = {
+  type: ContentType;
+  text: string;
+};
+
+export type TMessage = {
+  messageType: MessageType;
+  contents: TContent[];
+  createdOn: string;
 };

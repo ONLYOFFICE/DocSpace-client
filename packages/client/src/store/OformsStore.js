@@ -79,6 +79,8 @@ class OformsStore {
 
   oformFilesLoaded = false;
 
+  templatesGalleryVisible = false;
+
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden",
   );
@@ -371,6 +373,11 @@ class OformsStore {
   hideSubmitToGalleryTile = () => {
     localStorage.setItem("submitToGalleryTileIsHidden", true);
     this.submitToGalleryTileIsVisible = false;
+  };
+
+  setTemplatesGalleryVisible = (templatesGalleryVisible) => {
+    console.log("setTemplatesGalleryVisible", templatesGalleryVisible);
+    this.templatesGalleryVisible = templatesGalleryVisible;
   };
 
   get hasGalleryFiles() {

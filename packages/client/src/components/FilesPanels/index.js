@@ -97,6 +97,8 @@ import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
 
+import TemplatesGallery from "../TemplatesGallery";
+
 const Panels = (props) => {
   const {
     uploadPanelVisible,
@@ -174,6 +176,7 @@ const Panels = (props) => {
     removeUserConfirmation,
     assignRolesDialogVisible,
     socialAuthWelcomeDialogVisible,
+    templatesGalleryVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -430,6 +433,7 @@ const Panels = (props) => {
     socialAuthWelcomeDialogVisible && (
       <SocialAuthWelcomeDialog key="joining-space-dialog" />
     ),
+    templatesGalleryVisible && <TemplatesGallery key="templates-gallery" />,
   ];
 };
 
@@ -447,6 +451,7 @@ export default inject(
     filesStore,
     userStore,
     guidanceStore,
+    oformsStore,
   }) => {
     const {
       copyPanelVisible,
@@ -539,6 +544,8 @@ export default inject(
     } = pluginStore;
 
     const { getRefElement, config } = guidanceStore;
+
+    const { templatesGalleryVisible } = oformsStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {
@@ -633,6 +640,7 @@ export default inject(
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
       socialAuthWelcomeDialogVisible,
+      templatesGalleryVisible,
     };
   },
 )(observer(Panels));

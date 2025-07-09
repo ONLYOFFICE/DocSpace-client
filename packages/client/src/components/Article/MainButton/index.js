@@ -184,6 +184,8 @@ const ArticleMainButtonContent = (props) => {
     contactsCanCreate,
     setRefMap,
     defaultOformLocale,
+
+    setTemplatesGalleryVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -292,6 +294,10 @@ const ArticleMainButtonContent = (props) => {
   }, []);
 
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
+
+  const onShowTemplatesGallery = () => {
+    setTemplatesGalleryVisible(true);
+  };
 
   const onShowGallery = () => {
     if (isMobile) {
@@ -556,6 +562,15 @@ const ArticleMainButtonContent = (props) => {
       key: "pptx",
     };
 
+    const openTemplatesGallery = {
+      id: "actions_open-templates-gallery",
+      className: "main-button_drop-down",
+      icon: CatalogFolderReactSvgUrl,
+      label: "Templates Gallery",
+      onClick: onShowTemplatesGallery,
+      key: "templates-gallery",
+    };
+
     const newUploadActions = [
       {
         id: "actions_upload-files",
@@ -621,6 +636,7 @@ const ArticleMainButtonContent = (props) => {
       createNewPresentationPptx,
       ...formActions,
       createNewFolder,
+      openTemplatesGallery,
     ];
 
     if (pluginItems.length > 0) {
@@ -872,8 +888,12 @@ export default inject(
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-    const { setOformFromFolderId, oformsFilter, defaultOformLocale } =
-      oformsStore;
+    const {
+      setOformFromFolderId,
+      oformsFilter,
+      defaultOformLocale,
+      setTemplatesGalleryVisible,
+    } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
@@ -942,6 +962,7 @@ export default inject(
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       setRefMap,
       defaultOformLocale,
+      setTemplatesGalleryVisible,
     };
   },
 )(

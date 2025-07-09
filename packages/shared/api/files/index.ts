@@ -1504,6 +1504,21 @@ export async function getExternalLinks(
   return res;
 }
 
+export async function getExternalFolderLinks(
+  fileId: number | string,
+  startIndex = 0,
+  count = 50,
+) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  const res = await request({
+    method: "get",
+    url: `files/folder/${fileId}/links${linkParams}`,
+  });
+
+  return res as TFileLink[];
+}
+
 export async function getPrimaryLink(fileId: number) {
   const res = (await request({
     method: "get",
@@ -1523,6 +1538,14 @@ export async function getPrimaryLinkIfNotExistCreate(
     method: "post",
     url: `/files/file/${fileId}/link`,
     data: { access, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
+export async function getPrimaryFolderLink(fileId: number | string) {
+  const res = (await request({
+    method: "get",
+    url: `/files/folder/${fileId}/link`,
   })) as TFileLink;
 
   return res;
@@ -1554,6 +1577,32 @@ export async function editExternalLink(
 
   return res;
 }
+export async function editExternalFolderLink(
+  fileId: number | string,
+  linkId: number | string,
+  access: ShareAccessRights,
+  primary: boolean,
+  internal: boolean,
+  expirationDate: moment.Moment,
+  password?: string,
+  denyDownload?: boolean,
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/folder/${fileId}/links`,
+    data: {
+      linkId,
+      access,
+      primary,
+      internal,
+      expirationDate,
+      password,
+      denyDownload,
+    },
+  })) as TFileLink;
+
+  return res;
+}
 
 export async function addExternalLink(
   fileId: number | string,
@@ -1565,6 +1614,21 @@ export async function addExternalLink(
   const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
+    data: { access, primary, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
+export async function addExternalFolderLink(
+  fileId: number | string,
+  access: ShareAccessRights,
+  primary: boolean,
+  internal: boolean,
+  expirationDate?: moment.Moment,
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/folder/${fileId}/links`,
     data: { access, primary, internal, expirationDate },
   })) as TFileLink;
 

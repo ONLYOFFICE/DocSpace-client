@@ -24,25 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
+import { useState, useEffect, useMemo } from "react";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
-import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
+import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
-import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
 import { isMobile } from "../../../utils";
 import { RowSkeleton } from "../../../skeletons/share";
-import { TFileLink } from "../../../api/files/types";
-import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
+import type { TFileLink } from "../../../api/files/types";
+
 import { Link } from "../../link";
-import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
-import { Loader, LoaderTypes } from "../../loader";
-import { Text } from "../../text";
+import { ContextMenuButton } from "../../context-menu-button";
 
 import {
   getShareOptions,
@@ -51,14 +48,14 @@ import {
   copyDocumentShareLink,
   copyRoomShareLink,
 } from "../Share.helpers";
-import { LinkRowProps } from "../Share.types";
-
-import ExpiredComboBox from "./ExpiredComboBox";
-
-import { AccessRightSelect } from "../../access-right-select";
-import { ContextMenuButton } from "../../context-menu-button";
+import type { LinkRowProps } from "../Share.types";
 
 import styles from "../Share.module.scss";
+
+import { AccessTypeIcon } from "./AccessTypeIcon";
+import { LinkTypeSelector } from "./LinkTypeSelector";
+import { LinkExpiration } from "./LinkExpiration";
+import { AccessRightSelector } from "./AccessRightSelector";
 
 const LinkRow = ({
   onAddClick,
@@ -68,31 +65,37 @@ const LinkRow = ({
   changeExpirationOption,
   availableExternalRights,
   loadingLinks,
-  isRoomsLink,
-  isPrimaryLink,
-  isArchiveFolder,
+  isFolder = false,
+  isFormRoom = false,
+  isRoomsLink = false,
+  isPrimaryLink = false,
+  isArchiveFolder = false,
   getData,
   onOpenContextMenu,
   onCloseContextMenu,
   onAccessRightsSelect,
   removedExpiredLink,
-  isFormRoom,
 }: LinkRowProps) => {
   const { t } = useTranslation("Common");
-  const [isMobileViewLink, setIsMobileViewLink] = useState(isMobile());
+  const [isMobileViewLink, setIsMobileViewLink] = useState(() => isMobile());
 
-  const shareOptions = getShareOptions(t) as TOption[];
-  const accessOptions = availableExternalRights
-    ? getAccessOptions(t, availableExternalRights)
-    : [];
+  const shareOptions = useMemo(() => getShareOptions(t), [t]);
+  const accessOptions = useMemo(() => {
+    return availableExternalRights
+      ? getAccessOptions(t, availableExternalRights)
+      : [];
+  }, [availableExternalRights, t]);
 
-  const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
-
-  const onCheckHeight = () => {
-    setIsMobileViewLink(isMobile());
-  };
+  const roomAccessOptions = useMemo(
+    () => (isRoomsLink || isFolder ? getRoomAccessOptions(t) : []),
+    [t, isFolder, isRoomsLink],
+  );
 
   useEffect(() => {
+    const onCheckHeight = () => {
+      setIsMobileViewLink(isMobile());
+    };
+
     onCheckHeight();
     window.addEventListener("resize", onCheckHeight);
     return () => {
@@ -108,190 +111,118 @@ const LinkRow = ({
     copyDocumentShareLink(link, t);
   };
 
-  return !links?.length ? (
-    <div className={styles.linkRow} onClick={onAddClick}>
-      <div className={styles.square}>
-        <IconButton size={12} iconName={PlusIcon} isDisabled />
-      </div>
-      <Link className={styles.createAndCopyLink} noHover fontWeight={600}>
-        {t("Common:CreateAndCopy")}
-      </Link>
-    </div>
-  ) : (
-    links.map((link, index) => {
-      if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
-        return <RowSkeleton key="loading-link" />;
+  console.log({ accessOptions, availableExternalRights });
 
-      const shareOption = shareOptions.find(
-        (option) => option.internal === link.sharedTo.internal,
-      );
-      const accessOption = accessOptions.find(
-        (option) =>
-          option && "access" in option && option.access === link.access,
-      );
-
-      const roomSelectedOptions = roomAccessOptions.find(
-        (option) =>
-          option && "access" in option && option.access === link.access,
-      );
-
-      const avatar = shareOption?.key === "anyone" ? UniverseIcon : PeopleIcon;
-
-      const isExpiredLink = link.sharedTo.isExpired;
-      const isLocked = !!link.sharedTo.password;
-      const linkTitle = link.sharedTo.title;
-
-      const isLoaded = loadingLinks.includes(link.sharedTo.id);
-
-      return (
-        <div
-          className={classNames(styles.linkRow, {
-            [styles.isDisabled]: isArchiveFolder,
-          })}
-          key={`share-link-row-${index * 5}`}
-        >
-          {isLoaded ? (
-            <Loader
-              className={styles.loader}
-              size="20px"
-              type={LoaderTypes.track}
-            />
-          ) : (
-            <Avatar
-              size={AvatarSize.min}
-              role={AvatarRole.user}
-              source={avatar}
-              roleIcon={isLocked ? <LockedReactSvg /> : undefined}
-              noClick
-            />
-          )}
-          <div className={styles.linkOptions}>
-            {isRoomsLink ? (
-              <Text
-                className={classNames(
-                  styles.linkOptionsTitle,
-                  styles.linkOptionsTitleRoom,
-                  {
-                    [styles.isExpired]: isExpiredLink,
-                  },
-                )}
-                truncate
-              >
-                {linkTitle}
-              </Text>
-            ) : !isExpiredLink ? (
-              <ComboBox
-                className={styles.internalCombobox}
-                directionY="both"
-                options={shareOptions}
-                selectedOption={shareOption ?? ({} as TOption)}
-                onSelect={(item) => changeShareOption(item, link)}
-                scaled={false}
-                scaledOptions={false}
-                showDisabledItems
-                size={ComboBoxSize.content}
-                manualWidth="auto"
-                fillIcon={false}
-                modernView
-                isDisabled={isLoaded}
-              />
-            ) : (
-              <Text
-                truncate
-                title={shareOption?.label}
-                className={classNames(styles.linkOptionsTitle, {
-                  [styles.isExpired]: isExpiredLink,
-                })}
-              >
-                {shareOption?.label}
-              </Text>
-            )}
-            {isPrimaryLink ? (
-              <Text
-                fontSize="12px"
-                fontWeight="400"
-                lineHeight="16px"
-                className={styles.linkTimeInfo}
-              >
-                {t("Common:NoTimeLimit")}
-              </Text>
-            ) : (
-              <ExpiredComboBox
-                link={link}
-                availableExternalRights={availableExternalRights}
-                changeExpirationOption={changeExpirationOption}
-                isDisabled={isLoaded || isArchiveFolder}
-                isRoomsLink={isRoomsLink}
-                changeAccessOption={changeAccessOption}
-                removedExpiredLink={removedExpiredLink}
-              />
-            )}
-          </div>
-          <div className={styles.linkActions}>
-            {!isArchiveFolder ? (
-              <IconButton
-                className={styles.linkActionsCopyIcon}
-                size={16}
-                iconName={CopyIcon}
-                onClick={() => onCopyLink(link)}
-                title={t("Common:CopySharedLink")}
-                isDisabled={isExpiredLink || isLoaded}
-              />
-            ) : null}
-            {isRoomsLink ? (
-              !isFormRoom ? (
-                <AccessRightSelect
-                  selectedOption={roomSelectedOptions ?? ({} as TOption)}
-                  onSelect={onAccessRightsSelect}
-                  accessOptions={roomAccessOptions}
-                  modernView
-                  directionY="both"
-                  type="onlyIcon"
-                  manualWidth="300px"
-                  isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
-                  withBlur={isMobileViewLink}
-                  isMobileView={isMobileViewLink}
-                  fixedDirection={isMobileViewLink}
-                  isAside={isMobileViewLink}
-                  topSpace={16}
-                  usePortalBackdrop
-                  shouldShowBackdrop={isMobileViewLink}
-                />
-              ) : null
-            ) : (
-              <ComboBox
-                directionY="both"
-                options={accessOptions}
-                selectedOption={accessOption ?? ({} as TOption)}
-                onSelect={(item) => changeAccessOption(item, link)}
-                scaled={false}
-                scaledOptions={false}
-                showDisabledItems
-                size={ComboBoxSize.content}
-                fillIcon
-                modernView
-                type="onlyIcon"
-                isDisabled={isExpiredLink || isLoaded}
-                manualWidth="auto"
-                withBackdrop={false}
-              />
-            )}
-
-            {!isArchiveFolder ? (
-              <ContextMenuButton
-                getData={() => getData(link)}
-                title={t("Files:ShowLinkActions")}
-                directionY="both"
-                onClick={onOpenContextMenu}
-                onClose={onCloseContextMenu}
-                isDisabled={isExpiredLink || isLoaded}
-              />
-            ) : null}
-          </div>
+  if (!links?.length) {
+    return (
+      <div className={styles.linkRow} onClick={onAddClick}>
+        <div className={styles.square}>
+          <IconButton size={12} iconName={PlusIcon} isDisabled />
         </div>
-      );
-    })
-  );
+        <Link className={styles.createAndCopyLink} noHover fontWeight={600}>
+          {t("Common:CreateAndCopy")}
+        </Link>
+      </div>
+    );
+  }
+
+  const className = classNames(styles.linkRow, {
+    [styles.isDisabled]: isArchiveFolder,
+  });
+
+  return links.map((link) => {
+    if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
+      return <RowSkeleton key="loading-link" />;
+
+    const shareOption = shareOptions.find(
+      (option) => option.internal === link.sharedTo.internal,
+    )!;
+
+    const selectedAccessOption = accessOptions.find(
+      (option) => option && "access" in option && option.access === link.access,
+    );
+
+    const roomSelectedOptions = roomAccessOptions.find(
+      (option) => option && "access" in option && option.access === link.access,
+    );
+
+    const avatar = shareOption.key === "anyone" ? UniverseIcon : PeopleIcon;
+
+    const isExpiredLink = link.sharedTo.isExpired;
+    const isLocked = !!link.sharedTo.password;
+    const linkTitle = link.sharedTo.title;
+
+    const isLoaded = loadingLinks.includes(link.sharedTo.id);
+
+    return (
+      <div className={className} key={link.sharedTo.id}>
+        <AccessTypeIcon
+          avatar={avatar}
+          isLoaded={isLoaded}
+          isLocked={isLocked}
+        />
+        <div className={styles.linkOptions}>
+          <LinkTypeSelector
+            isLoaded={isLoaded}
+            linkTitle={linkTitle}
+            isRoomsLink={isRoomsLink}
+            isExpiredLink={isExpiredLink}
+            onSelect={(item) => changeShareOption(item, link)}
+            selectedOption={shareOption}
+            options={shareOptions}
+          />
+          <LinkExpiration
+            t={t}
+            link={link}
+            isLoaded={isLoaded}
+            isRoomsLink={isRoomsLink}
+            isPrimaryLink={isPrimaryLink}
+            isArchiveFolder={isArchiveFolder}
+            removedExpiredLink={removedExpiredLink}
+            changeExpirationOption={changeExpirationOption}
+          />
+        </div>
+        <div className={styles.linkActions}>
+          {!isArchiveFolder ? (
+            <IconButton
+              className={styles.linkActionsCopyIcon}
+              size={16}
+              iconName={CopyIcon}
+              onClick={() => onCopyLink(link)}
+              title={t("Common:CopySharedLink")}
+              isDisabled={isExpiredLink || isLoaded}
+            />
+          ) : null}
+          <AccessRightSelector
+            link={link}
+            isFolder={isFolder}
+            isLoaded={isLoaded}
+            isFormRoom={isFormRoom}
+            isRoomsLink={isRoomsLink}
+            isExpiredLink={isExpiredLink}
+            accessOptions={accessOptions}
+            selectedAccessOption={selectedAccessOption}
+            isArchiveFolder={isArchiveFolder}
+            isMobileViewLink={isMobileViewLink}
+            roomAccessOptions={roomAccessOptions}
+            roomSelectedOptions={roomSelectedOptions}
+            changeAccessOption={changeAccessOption}
+            onAccessRightsSelect={onAccessRightsSelect}
+          />
+          {!isArchiveFolder ? (
+            <ContextMenuButton
+              directionY="both"
+              getData={() => getData(link)}
+              onClick={onOpenContextMenu}
+              onClose={onCloseContextMenu}
+              title={t("Files:ShowLinkActions")}
+              isDisabled={isExpiredLink || isLoaded}
+            />
+          ) : null}
+        </div>
+      </div>
+    );
+  });
 };
 
 export default LinkRow;

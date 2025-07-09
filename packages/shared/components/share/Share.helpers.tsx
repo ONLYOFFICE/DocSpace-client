@@ -71,16 +71,6 @@ export const getShareOptions = (
         productName: t("Common:ProductName"),
       }),
     },
-    // available?.None && {
-    //   key: "separator",
-    //   isSeparator: true,
-    // },
-    // available?.None && {
-    //   key: "remove",
-    //   internal: true,
-    //   access: ShareAccessRights.None,
-    //   label: t("Common:Remove"),
-    // },
   ];
 };
 

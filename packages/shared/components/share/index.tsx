@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
@@ -37,9 +37,13 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import { LinkEntityType, ShareAccessRights } from "../../enums";
 import { LINKS_LIMIT_COUNT } from "../../constants";
 import {
+  addExternalFolderLink,
   addExternalLink,
+  editExternalFolderLink,
   editExternalLink,
+  getExternalFolderLinks,
   getExternalLinks,
+  getPrimaryFolderLink,
   getPrimaryLink,
 } from "../../api/files";
 import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
@@ -73,8 +77,8 @@ const Share = (props: ShareProps) => {
     infoPanelSelection,
     getPrimaryFileLink,
     selfId,
-    editFileLink,
-    addFileLink,
+    // editFileLink,
+    // addFileLink,
     shareChanged,
     setShareChanged,
     onOpenPanel,
@@ -83,12 +87,17 @@ const Share = (props: ShareProps) => {
     setEditLinkPanelIsVisible,
     setLinkParams,
   } = props;
+
+  const isFolder = infoPanelSelection.isFolder;
+
   const { t } = useTranslation(["Common"]);
   const [fileLinks, setFileLinks] = useState<TLink[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingLinks, setLoadingLinks] = useState<(string | number)[]>([]);
 
   const mountedRef = useRef(true);
+
+  console.log({ infoPanelSelection });
 
   const [visibleBar, setVisibleBar] = useLocalStorage(
     `document-bar-${selfId}`,
@@ -101,7 +110,7 @@ const Share = (props: ShareProps) => {
 
   const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
 
-  const editFileLinkApi = editFileLink ?? editExternalLink;
+  const editLinkApi = isFolder ? editExternalFolderLink : editExternalLink;
 
   useEffect(() => {
     mountedRef.current = true;
@@ -112,16 +121,22 @@ const Share = (props: ShareProps) => {
 
   const fetchLinks = React.useCallback(async () => {
     if (requestRunning.current || hideSharePanel) return;
-    requestRunning.current = true;
+    try {
+      requestRunning.current = true;
 
-    const res = infoPanelSelection.isFolder
-      ? { items: [] }
-      : await getExternalLinks(infoPanelSelection.id);
+      const res = isFolder
+        ? await getExternalFolderLinks(infoPanelSelection.id)
+        : (await getExternalLinks(infoPanelSelection.id)).items;
 
-    setFileLinks(res.items);
-    setIsLoading(false);
-    requestRunning.current = false;
-  }, [infoPanelSelection.id, hideSharePanel, infoPanelSelection.isFolder]);
+      setFileLinks(res);
+    } catch (error) {
+      console.error(error);
+      setFileLinks([]);
+    } finally {
+      setIsLoading(false);
+      requestRunning.current = false;
+    }
+  }, [infoPanelSelection.id, hideSharePanel, isFolder]);
 
   useEffect(() => {
     if (hideSharePanel) {
@@ -145,9 +160,15 @@ const Share = (props: ShareProps) => {
     try {
       addLoaderLink();
 
-      const link = getPrimaryFileLink
-        ? await getPrimaryFileLink(infoPanelSelection.id)
-        : await getPrimaryLink(infoPanelSelection.id);
+      const getPrimaryFileLinkApi = getPrimaryFileLink ?? getPrimaryLink;
+
+      const id = infoPanelSelection.id;
+
+      const getPrimaryLinkApi = isFolder
+        ? getPrimaryFolderLink
+        : getPrimaryFileLinkApi;
+
+      const link = await getPrimaryLinkApi(id);
 
       if (link) {
         setFileLinks((links) => {
@@ -183,9 +204,9 @@ const Share = (props: ShareProps) => {
       const { access, internal, diffExpirationDate } =
         DEFAULT_CREATE_LINK_SETTINGS;
 
-      const addFileLinkApi = addFileLink ?? addExternalLink;
+      const addLinkApi = isFolder ? addExternalFolderLink : addExternalLink;
 
-      const newLink = await addFileLinkApi(
+      const newLink = await addLinkApi(
         infoPanelSelection.id,
         access,
         false,
@@ -246,26 +267,15 @@ const Share = (props: ShareProps) => {
 
       const expDate = moment(link.sharedTo.expirationDate);
 
-      const isRemoveOption = item.key === "remove";
-
-      const access = isRemoveOption
-        ? (item.access as ShareAccessRights)
-        : link.access;
-
-      const res = await editFileLinkApi(
+      const res = await editLinkApi(
         infoPanelSelection.id,
         link.sharedTo.id,
-        access,
+        link.access,
         link.sharedTo.primary,
         item.internal || false,
         expDate,
       );
 
-      if (isRemoveOption) {
-        deleteLink(link.sharedTo.id);
-        toastr.success(t("Common:LinkRemoved"));
-        return;
-      }
       updateLink(link, res);
       copyDocumentShareLink(res, t);
     } catch (e) {
@@ -279,7 +289,7 @@ const Share = (props: ShareProps) => {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
       try {
-        const res = await editFileLinkApi(
+        const res = await editLinkApi(
           infoPanelSelection.id,
           link.sharedTo.id,
           item.access ?? ({} as ShareAccessRights),
@@ -316,6 +326,29 @@ const Share = (props: ShareProps) => {
     updateAccessLink();
   };
 
+  const removeLink = async (link: TFileLink) => {
+    try {
+      const removeLinkApi = isFolder ? editExternalFolderLink : editLinkApi;
+
+      setLoadingLinks((val) => [...val, link.sharedTo.id]);
+
+      const expDate = moment(link.sharedTo.expirationDate);
+      await removeLinkApi(
+        infoPanelSelection.id,
+        link.sharedTo.id,
+        ShareAccessRights.None,
+        link.sharedTo.primary,
+        false,
+        expDate,
+      );
+
+      deleteLink(link.sharedTo.id);
+      toastr.success(t("Common:LinkRemoved"));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onCloseContextMenu = () => {
     setIsScrollLocked?.(false);
   };
@@ -325,15 +358,15 @@ const Share = (props: ShareProps) => {
   };
 
   const onEditLink = (link: TFileLink) => {
+    const type = isFolder ? LinkEntityType.FOLDER : LinkEntityType.FILE;
+
     setEditLinkPanelIsVisible(true);
     setLinkParams({
       isEdit: true,
       link,
       roomId: infoPanelSelection.id,
-      type: LinkEntityType.FILE,
+      type,
       updateLink: (newLink: TFileLink) => {
-        console.log({ newLink });
-
         if (!mountedRef.current) return;
         updateLink(link, newLink);
       },
@@ -350,7 +383,7 @@ const Share = (props: ShareProps) => {
 
       const expDate = moment(expirationDate);
 
-      const res = await editFileLinkApi(
+      const res = await editLinkApi(
         infoPanelSelection.id,
         link.sharedTo.id,
         link.access,
@@ -397,18 +430,18 @@ const Share = (props: ShareProps) => {
         label: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () => {
-          changeShareOption(
-            { key: "remove", access: ShareAccessRights.None },
-            link,
-          );
+          removeLink(link);
         },
       },
     ];
   };
 
-  if (hideSharePanel) return null;
+  const isEvenPrimaryLink = useMemo(
+    () => evenPrimaryLink(fileLinks as TFileLink[]),
+    [fileLinks],
+  );
 
-  const isEvenPrimaryLink = evenPrimaryLink(fileLinks as TFileLink[]);
+  if (hideSharePanel) return null;
 
   return (
     <div data-testid="shared-links">
@@ -452,19 +485,21 @@ const Share = (props: ShareProps) => {
             ) : null}
           </div>
           <LinkRow
-            onAddClick={addGeneralLink}
             links={fileLinks}
+            isFolder={isFolder}
+            loadingLinks={loadingLinks}
+            getData={getData}
+            onAddClick={addGeneralLink}
+            removedExpiredLink={removeLink}
             changeShareOption={changeShareOption}
+            onOpenContextMenu={onOpenContextMenu}
             changeAccessOption={changeAccessOption}
+            onCloseContextMenu={onCloseContextMenu}
             changeExpirationOption={changeExpirationOption}
             availableExternalRights={
               infoPanelSelection.availableExternalRights ??
               ({} as TAvailableExternalRights)
             }
-            loadingLinks={loadingLinks}
-            getData={getData}
-            onCloseContextMenu={onCloseContextMenu}
-            onOpenContextMenu={onOpenContextMenu}
           />
         </div>
       )}

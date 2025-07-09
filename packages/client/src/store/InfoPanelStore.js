@@ -31,9 +31,6 @@ import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
-  FileType,
-  // Events,
-  // FileType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -46,7 +43,6 @@ import {
 } from "@docspace/shared/components/share/Share.helpers";
 import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
-  getPrimaryLink,
   getExternalLinks,
   editExternalLink,
   addExternalLink,
@@ -963,30 +959,18 @@ class InfoPanelStore {
      */
     const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
 
-    if (value && file.isForm) {
+    if (file?.isForm) {
       value.access = ShareAccessRights.Editing;
-    }
-
-    if (
-      value &&
-      !file.isForm &&
-      file.fileType === FileType.PDF &&
-      (value.access === ShareAccessRights.Editing ||
-        value.access === ShareAccessRights.FormFilling)
-    ) {
-      value.access = ShareAccessRights.ReadOnly;
     }
 
     const { getFileInfo } = this.filesStore;
 
-    const res = await (value
-      ? getPrimaryLinkIfNotExistCreate(
-          fileId,
-          value.access,
-          value.internal,
-          getExpirationDate(value.diffExpirationDate),
-        )
-      : getPrimaryLink(fileId));
+    const res = await getPrimaryLinkIfNotExistCreate(
+      fileId,
+      value.access,
+      value.internal,
+      getExpirationDate(value.diffExpirationDate),
+    );
 
     await getFileInfo(fileId);
 

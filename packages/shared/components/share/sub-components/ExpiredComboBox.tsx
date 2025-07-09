@@ -31,15 +31,14 @@ import moment from "moment";
 import classNames from "classnames";
 
 import { Text } from "../../text";
-import { LinkWithDropdown } from "../../link-with-dropdown";
 import { Link, LinkType } from "../../link";
+import { globalColors } from "../../../themes";
+import { LinkWithDropdown } from "../../link-with-dropdown";
 
 import { getDate, getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";
 
 import ShareCalendar from "./ShareCalendar";
-import { globalColors } from "../../../themes";
-import { ShareAccessRights } from "../../../enums";
 import styles from "../Share.module.scss";
 
 const ExpiredComboBox = ({
@@ -47,8 +46,6 @@ const ExpiredComboBox = ({
   changeExpirationOption,
   isDisabled,
   isRoomsLink,
-  changeAccessOption,
-  availableExternalRights,
   removedExpiredLink,
 }: ExpiredComboBoxProps) => {
   const { t, i18n } = useTranslation(["Common"]);
@@ -100,15 +97,7 @@ const ExpiredComboBox = ({
   };
 
   const onRemoveLink = () => {
-    if (isRoomsLink) return removedExpiredLink?.(link);
-
-    if (availableExternalRights.None)
-      changeAccessOption(
-        {
-          access: ShareAccessRights.None,
-        },
-        link,
-      );
+    removedExpiredLink(link);
   };
 
   useEffect(() => {

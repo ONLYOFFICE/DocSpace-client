@@ -3104,7 +3104,9 @@ class FilesStore {
             (f) => !folderIds.includes(f.id) && f.isFolder,
           );
 
-      this.setIsEmptyPage(newFilter.total <= 0);
+      if (!this.isFiltered) {
+        this.setIsEmptyPage(newFilter.total <= 0);
+      }
 
       runInAction(() => {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);

@@ -26,46 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@use "../variables";
-
-@mixin mobile {
-  @media (max-width: #{variables.$mobile}) {
-    @content;
-  }
-}
-
-@mixin not-mobile {
-  @media (min-width: #{variables.$mobile + 0.1}) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media (min-width: #{variables.$mobile + 0.1}) and (max-width: #{variables.$desktop - 0.1}) {
-    @content;
-  }
-}
-
-@mixin tablet-and-below {
-  @media (max-width: #{variables.$desktop - 0.1}) {
-    @content;
-  }
-}
-
-@mixin desktop {
-  @media (min-width: #{variables.$desktop}) {
-    @content;
-  }
-}
-
-@mixin transitional-screen-size {
-  @media (max-width: #{variables.$desktop + variables.$info-panel-width}) {
-    @content;
-  }
-}
-
-@mixin can-hover {
-  @media (hover: hover) and (pointer: fine) {
-    @content;
+@mixin flip-in-rtl {
+  [data-dir="rtl"] & {
+    transform: scaleX(-1);
   }
 }

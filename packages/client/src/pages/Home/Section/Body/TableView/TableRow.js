@@ -215,7 +215,7 @@ const FilesTableRow = (props) => {
         key={item.id}
         className="table-row"
         forwardedRef={rowRef}
-        {...dragStyles}
+        contextMenuCellStyle={dragStyles.style}
         isDragging={dragging}
         dragging={dragging ? isDragging : null}
         selectionProp={selectionProp}

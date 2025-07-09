@@ -25,22 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
-import { StyledTableContainer } from "./Table.styled";
-import { TableContainerProps } from "./Table.types";
+import { RowContent } from "../../rows";
 
-const TableContainer = (props: TableContainerProps) => {
-  const { forwardedRef, useReactWindow, ...rest } = props;
+import styles from "./FilesRowContent.module.scss";
+import { RowContentProps } from "../../rows/row-content/RowContent.types";
+
+export const FilesRowContent = (props: RowContentProps) => {
+  const { className } = props;
 
   return (
-    <StyledTableContainer
-      id="table-container"
-      className="table-container"
-      useReactWindow={useReactWindow}
-      {...rest}
-      ref={forwardedRef}
+    <RowContent
+      {...props}
+      className={classNames(styles.filesRowContent, className)}
     />
   );
 };
-
-export { TableContainer };

@@ -27,115 +27,13 @@
 import React from "react";
 import { isChrome, browserVersion } from "react-device-detect";
 import { ReactSVG } from "react-svg";
-import styled from "styled-components";
+import classNames from "classnames";
 
-import { injectDefaultTheme, mobile, tablet } from "../../../utils";
-
-import { Button, ButtonSize } from "../../button";
-import { DropDown } from "../../drop-down";
-import { DropDownItem } from "../../drop-down-item";
-import { TGroupMenuItem } from "../Table.types";
-
-const StyledButton = styled(Button).attrs(injectDefaultTheme)`
-  && {
-    border: none !important;
-    padding: 0 12px;
-    height: 100%;
-    min-width: fit-content;
-
-    background-color: ${(props) => props.theme.button.backgroundColor.base};
-
-    .combo-button_selected-icon > div {
-      display: flex;
-      align-items: center;
-    }
-
-    svg {
-      path[fill] {
-        fill: ${(props) => props.theme.button.color.base};
-      }
-
-      path[stroke] {
-        stroke: ${(props) => props.theme.button.color.base};
-      }
-    }
-
-    &:hover,
-    &:active {
-      border: none !important;
-      background-color: unset !important;
-    }
-
-    &:hover {
-      svg {
-        path[fill] {
-          fill: ${(props) => props.theme.button.color.baseHover};
-        }
-
-        path[stroke] {
-          stroke: ${(props) => props.theme.button.color.baseHover};
-        }
-      }
-    }
-
-    &:active {
-      svg {
-        path[fill] {
-          fill: ${(props) => props.theme.button.color.baseActive};
-        }
-
-        path[stroke] {
-          stroke: ${(props) => props.theme.button.color.baseActive};
-        }
-      }
-    }
-
-    .btnIcon {
-      padding-inline-end: 8px;
-    }
-
-    .button-content {
-      @media ${tablet} {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      @media ${mobile} {
-        margin-top: 4px;
-      }
-
-      ${isChrome &&
-      +browserVersion <= 85 &&
-      `
-    /* TODO: remove if editors core version 85+ */
-      > div {
-        margin-right: 8px;
-
-        @media ${tablet} {
-          margin-right: 0px;
-        }
-      }
-    `}
-    }
-
-    @media ${tablet} {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      padding: 0px 12px;
-      .btnIcon {
-        padding: 0;
-        margin: 0 auto;
-      }
-    }
-
-    @media ${mobile} {
-      padding: 0 16px;
-      font-size: 0;
-      line-height: 0;
-    }
-  }
-`;
+import { Button, ButtonSize } from "../../../button";
+import { DropDown } from "../../../drop-down";
+import { DropDownItem } from "../../../drop-down-item";
+import { TGroupMenuItem } from "../../Table.types";
+import styles from "./GroupMenuItem.module.scss";
 
 const GroupMenuItem = ({
   item,
@@ -174,9 +72,13 @@ const GroupMenuItem = ({
   };
 
   return disabled ? null : (
-    <>
-      <StyledButton
+    <div data-testid="group-menu-item" className={styles.groupMenuItem}>
+      <Button
         id={id}
+        className={classNames(styles.button, styles.overrideNativeStyles, {
+          [styles.oldChrome]: isChrome && +browserVersion <= 85,
+          [styles.isBlocked]: isBlocked,
+        })}
         label={label}
         title={title || label}
         isDisabled={isBlocked}
@@ -184,6 +86,7 @@ const GroupMenuItem = ({
         icon={<ReactSVG src={iconUrl} className="combo-button_selected-icon" />}
         ref={buttonRef as React.RefObject<HTMLButtonElement>}
         size={ButtonSize.extraSmall}
+        testId="group-menu-item-button"
       />
       {withDropDown ? (
         <DropDown
@@ -201,7 +104,7 @@ const GroupMenuItem = ({
           })}
         </DropDown>
       ) : null}
-    </>
+    </div>
   );
 };
 

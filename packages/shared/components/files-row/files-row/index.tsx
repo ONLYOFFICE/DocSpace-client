@@ -24,19 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { type PropsWithChildren } from "react";
+import classNames from "classnames";
 
-import { StyledTableCell } from "../Table.styled";
-import { TableCellProps } from "../Table.types";
+import { Row } from "../../rows";
 
-const TableCell = ({ className, forwardedRef, ...rest }: TableCellProps) => {
-  return (
-    <StyledTableCell
-      className={`${className} table-container_cell`}
-      ref={forwardedRef}
-      {...rest}
-    />
-  );
+import { FilesRowProps } from "./FilesRow.types";
+import styles from "./FilesRow.module.scss";
+
+export const FilesRow = (props: PropsWithChildren<FilesRowProps>) => {
+  const {
+    className,
+    isThirdPartyFolder,
+    checked,
+    isActive,
+    isFirstElem,
+    isIndexUpdated,
+    isDragging,
+    showHotkeyBorder,
+    isHighlight,
+    canDrag,
+    isEdit,
+    folderCategory,
+    withAccess,
+    inProgress,
+    contextOptions,
+  } = props;
+
+  const classes = classNames(styles.filesRow, className, {
+    [styles.isThirdPartyFolder]: isThirdPartyFolder,
+    [styles.isActive]: isActive,
+    [styles.isFirstElem]: isFirstElem,
+    [styles.isIndexUpdated]: isIndexUpdated,
+    [styles.isDragging]: isDragging,
+    [styles.showHotkeyBorder]: showHotkeyBorder,
+    [styles.isHighlight]: isHighlight,
+    [styles.canDrag]: canDrag,
+    [styles.isEdit]: isEdit,
+    [styles.folderCategory]: folderCategory,
+    [styles.withAccess]: withAccess,
+    [styles.inProgress]: inProgress,
+    [styles.palmCursor]:
+      canDrag && (checked || isActive) && !isThirdPartyFolder,
+    [styles.hideLastDiv]: !contextOptions || isEdit,
+  });
+
+  return <Row {...props} className={classes} />;
 };
-
-export { TableCell };

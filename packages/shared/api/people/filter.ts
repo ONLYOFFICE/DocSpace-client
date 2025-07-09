@@ -86,7 +86,7 @@ const AREA = "area";
 const INCLUDE_STRANGERS = "includeStrangers";
 const INCLUDE_SHARED = "includeShared";
 
-const typeDefinition = {
+export const typeDefinition = {
   sortBy: [
     "AZ",
     "displayname",

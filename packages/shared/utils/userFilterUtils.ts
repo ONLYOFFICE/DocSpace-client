@@ -24,7 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { FILTER_VERSION } from "./filterConstants";
+import { typeDefinition as roomsTypeDefinition } from "../api/rooms/filter";
+import { typeDefinition as peopleTypeDefinition } from "../api/people/filter";
+import { typeDefinition as filesTypeDefinition } from "../api/files/filter";
+import { typeDefinition as groupsTypeDefinition } from "../api/groups/filter";
+import {
+  FILTER_VERSION,
+  FILTER_SHARED_ROOM,
+  FILTER_ARCHIVE_ROOM,
+  FILTER_TEMPLATES_ROOM,
+  FILTER_PEOPLE,
+  FILTER_GUESTS,
+  FILTER_INSIDE_GROUPS,
+  FILTER_DOCUMENTS,
+  FILTER_RECENT,
+  FILTER_TRASH,
+  FILTER_ROOM_DOCUMENTS,
+  FILTER_ARCHIVE_DOCUMENTS,
+  FILTER_GROUPS,
+} from "./filterConstants";
+import { validateAndFixObject } from "./filterValidator";
 
 // Define a more specific type for filter objects to avoid circular dependency
 interface FilterObject {
@@ -39,7 +58,32 @@ interface FilterObject {
     | (() => void);
 }
 
-export const cleanUpFilterObj = (filter: FilterObject) => {
+const getTypeDefinition = (storageKey: string) => {
+  const key = storageKey.split("=")?.[0];
+
+  switch (key) {
+    case FILTER_SHARED_ROOM:
+    case FILTER_ARCHIVE_ROOM:
+    case FILTER_TEMPLATES_ROOM:
+      return roomsTypeDefinition;
+    case FILTER_PEOPLE:
+    case FILTER_GUESTS:
+    case FILTER_INSIDE_GROUPS:
+      return peopleTypeDefinition;
+    case FILTER_DOCUMENTS:
+    case FILTER_RECENT:
+    case FILTER_TRASH:
+    case FILTER_ROOM_DOCUMENTS:
+    case FILTER_ARCHIVE_DOCUMENTS:
+      return filesTypeDefinition;
+    case FILTER_GROUPS:
+      return groupsTypeDefinition;
+    default:
+      return null;
+  }
+};
+
+export const cleanUpFilterObj = (filter: FilterObject, storageKey: string) => {
   const filterObject = Object.entries(filter).reduce(
     (result, [key, value]) => {
       if (typeof value === "function" || value === null || value === false) {
@@ -54,6 +98,17 @@ export const cleanUpFilterObj = (filter: FilterObject) => {
     >,
   );
 
+  const typeDefinition = getTypeDefinition(storageKey);
+
+  if (typeDefinition) {
+    const validObj = validateAndFixObject(
+      filterObject as Record<string, string>,
+      typeDefinition,
+    );
+
+    return JSON.stringify(validObj);
+  }
+
   return JSON.stringify(filterObject);
 };
 
@@ -67,7 +122,7 @@ export const getUserFilter = (storageKey: string) => {
 };
 
 export const setUserFilter = (storageKey: string, filterObj: FilterObject) => {
-  const filterValue = cleanUpFilterObj(filterObj);
+  const filterValue = cleanUpFilterObj(filterObj, storageKey);
 
   localStorage.setItem(`${storageKey}&ver=${FILTER_VERSION}`, filterValue);
 };

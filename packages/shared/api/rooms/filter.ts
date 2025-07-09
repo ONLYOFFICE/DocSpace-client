@@ -82,7 +82,7 @@ const TYPE = "type";
 const WITHOUT_TAGS = "withoutTags";
 const START_INDEX = "startIndex";
 
-const typeDefinition = {
+export const typeDefinition = {
   sortBy: [
     "DateAndTimeCreation",
     "Tags",

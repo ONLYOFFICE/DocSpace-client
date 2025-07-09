@@ -116,7 +116,7 @@ const getOtherSearchParams = () => {
   return searchParams.toString();
 };
 
-const typeDefinition = {
+export const typeDefinition = {
   filterType: Object.values(FilterType).map((value) => String(value)), // enum FilterType
   applyFilterOption: Object.values(ApplyFilterOption), // enum ApplyFilterOption
   sortBy: ["DateAndTime", "AZ", "Type", "Size", "Title", "Author"] as TSortBy[], // type TSortBy

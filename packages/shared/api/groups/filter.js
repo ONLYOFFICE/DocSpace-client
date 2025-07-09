@@ -47,7 +47,7 @@ const SORT_ORDER = "sortorder";
 const USER_ID = "subjectId";
 const SEARCH_BY_MANAGER = "manager";
 
-const typeDefinition = {
+export const typeDefinition = {
   sortBy: ["title", "membersCount", "manager"],
   sortOrder: ["ascending", "descending"],
 };

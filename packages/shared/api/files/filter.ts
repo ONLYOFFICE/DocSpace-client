@@ -287,6 +287,8 @@ class FilesFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -303,7 +305,7 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
-    } = this;
+    } = fixedValidObject;
 
     const isFilterSet =
       filterType ||

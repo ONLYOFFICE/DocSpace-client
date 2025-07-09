@@ -360,6 +360,8 @@ class RoomsFilter {
   };
 
   toUrlParams = (userId?: string, withLocalStorage?: boolean) => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       page,
       pageCount,
@@ -378,7 +380,7 @@ class RoomsFilter {
       subjectFilter,
       quotaFilter,
       storageFilter,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: Record<string, unknown> = {
       ...(filterValue && { [FILTER_VALUE]: filterValue }),

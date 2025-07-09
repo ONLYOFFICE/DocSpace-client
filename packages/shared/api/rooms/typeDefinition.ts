@@ -28,11 +28,11 @@ import { TSortOrder, TSortBy } from "../../types";
 
 export const typeDefinition = {
   sortBy: [
-    "DateAndTimeCreation",
+    "DateAndTime",
     "Tags",
     "AZ",
     "Author",
-    "Type",
+    "roomType",
     "usedspace",
     "Size",
   ] as TSortBy[],

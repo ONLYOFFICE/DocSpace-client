@@ -35,11 +35,11 @@ export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
 export type TSortOrder = "descending" | "ascending";
 export type TSortBy =
-  | "DateAndTimeCreation"
+  | "DateAndTime"
   | "Tags"
   | "AZ"
   | "Author"
-  | "Type"
+  | "roomType"
   | "usedspace"
   | "Size";
 

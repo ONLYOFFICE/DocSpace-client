@@ -437,7 +437,7 @@ export async function getConfig() {
 
     const config = await fetch(`${baseUrl}/static/scripts/config.json`);
 
-    return config;
+    return await config.json();
   } catch (error) {
     logger.error(`Error in getConfig: ${error}`);
   }

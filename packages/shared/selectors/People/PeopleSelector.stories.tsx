@@ -31,7 +31,7 @@ import { AvatarRole } from "../../components/avatar";
 import { SelectorAccessRightsMode } from "../../components/selector";
 import { TSelectorItem } from "../../components/selector/Selector.types";
 
-import { createGetPeopleHandler } from "../../__mocks__/storybook/handlers/people/getPeople";
+import { peopleHandler } from "../../__mocks__/handlers";
 
 import PeopleSelector from "./index";
 import type { PeopleSelectorProps } from "./PeopleSelector.types";
@@ -197,7 +197,7 @@ export const Default: Story = {
   render: (args) => <Template {...args} />,
   parameters: {
     msw: {
-      handlers: [createGetPeopleHandler()],
+      handlers: [peopleHandler()],
     },
   },
   args: {
@@ -223,7 +223,7 @@ export const WithMultiSelect: Story = {
   render: (args) => <Template {...args} />,
   parameters: {
     msw: {
-      handlers: [createGetPeopleHandler()],
+      handlers: [peopleHandler()],
     },
   },
   args: {
@@ -236,7 +236,7 @@ export const WithAccessRights: Story = {
   render: (args) => <Template {...args} />,
   parameters: {
     msw: {
-      handlers: [createGetPeopleHandler()],
+      handlers: [peopleHandler()],
     },
   },
   args: {
@@ -254,7 +254,7 @@ export const WithFooterCheckbox: Story = {
   render: (args) => <Template {...args} />,
   parameters: {
     msw: {
-      handlers: [createGetPeopleHandler()],
+      handlers: [peopleHandler()],
     },
   },
   args: {
@@ -269,7 +269,7 @@ export const WithInfo: Story = {
   render: (args) => <Template {...args} />,
   parameters: {
     msw: {
-      handlers: [createGetPeopleHandler()],
+      handlers: [peopleHandler()],
     },
   },
   args: {
@@ -283,7 +283,7 @@ export const WithDisabledUsers: Story = {
   render: (args) => <Template {...args} />,
   parameters: {
     msw: {
-      handlers: [createGetPeopleHandler()],
+      handlers: [peopleHandler()],
     },
   },
   args: {

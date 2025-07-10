@@ -26,14 +26,13 @@
 
 import { test as base, Page } from "@playwright/test";
 
-import { SetupServerApi } from "msw/node";
-import { WorkerFixture } from "@msw/playwright";
-
 import {
   BASE_URL,
   createNextTestServer,
   createServerRequestInterceptor,
   setupAndResetHandlersServer,
+  WorkerFixture,
+  SetupServer,
 } from "@docspace/shared/__mocks__/e2e";
 import path from "path";
 import { allHandlers } from "@docspace/shared/__mocks__/handlers";
@@ -45,7 +44,7 @@ export const test = base.extend<
     resetHandlersServer: void;
   },
   {
-    serverRequestInterceptor: SetupServerApi;
+    serverRequestInterceptor: SetupServer;
     port: string;
     baseUrl: string;
   }

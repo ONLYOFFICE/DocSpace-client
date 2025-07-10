@@ -24,34 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { setupServer, type SetupServer } from "./msw-compat";
-
-import { allHandlers } from "../handlers";
-
 /**
- * Creates and configures a request interceptor server for testing
- * @returns A configured MSW server instance
+ * This file provides compatibility exports for MSW v2 and @msw/playwright
+ * to be used across different packages in the monorepo.
  */
-export const createServerRequestInterceptor = async () => {
-  const requestInterceptor = setupServer();
 
-  requestInterceptor.listen({
-    onUnhandledRequest: "error",
-  });
+// Re-export from msw/node
+import { setupServer } from "msw/node";
+export { setupServer };
+export type SetupServer = ReturnType<typeof setupServer>;
 
-  return requestInterceptor;
-};
+// Re-export from @msw/playwright
+import { WorkerFixture } from "@msw/playwright";
+export { WorkerFixture };
 
-/**
- * Sets up handlers for the request interceptor server and provides a function to reset them
- * @param server - The MSW server instance
- * @param port - The port number for the handlers
- * @returns A function that can be used to reset the handlers
- */
-export const setupAndResetHandlersServer = async (
-  server: SetupServer,
-  port: string,
-) => {
-  server.use(...allHandlers(port));
-  return () => server.resetHandlers();
-};
+// Re-export other useful MSW utilities
+export { http, HttpResponse } from "msw";

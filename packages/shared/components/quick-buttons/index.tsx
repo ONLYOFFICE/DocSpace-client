@@ -172,7 +172,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {(locked && item.access === ShareAccessRights.Collaborator) ||
+          {(locked &&
+            (item.access === ShareAccessRights.Collaborator ||
+              item.access === ShareAccessRights.Editing)) ||
           isAvailableLockFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}

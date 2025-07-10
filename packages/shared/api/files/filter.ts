@@ -174,14 +174,14 @@ class FilesFilter {
     return new FilesFilter(DEFAULT_PAGE, pageCount, total);
   }
 
-  static getFilter(location: Location) {
+  static getFilter(location: Location): FilesFilter {
     if (!location) return this.getDefault();
 
     const urlFilter = getObjectByLocation(location);
 
-    if (!urlFilter) return null;
-
     const defaultFilter = FilesFilter.getDefault();
+
+    if (!urlFilter) return defaultFilter;
 
     const filterType =
       (urlFilter[FILTER_TYPE] && +urlFilter[FILTER_TYPE]) ||

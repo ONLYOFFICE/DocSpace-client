@@ -185,6 +185,15 @@ const useEditorEvents = ({
     }
   }, [config?.type]);
 
+  const checkAndRequestRoles = useCallback(() => {
+    const fillingStatus = window?.sessionStorage.getItem(FILLING_STATUS_ID);
+
+    if (fillingStatus === "true") {
+      docEditor?.requestRoles?.();
+      window?.sessionStorage.removeItem(FILLING_STATUS_ID);
+    }
+  }, []);
+
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
 
@@ -192,13 +201,6 @@ const useEditorEvents = ({
 
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
-
-    const fillingStatus = window?.sessionStorage.getItem(FILLING_STATUS_ID);
-
-    if (fillingStatus === "true") {
-      docEditor?.requestRoles?.();
-      window?.sessionStorage.removeItem(FILLING_STATUS_ID);
-    }
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;
@@ -241,6 +243,7 @@ const useEditorEvents = ({
     setDocumentReady(true);
 
     frameCallCommand("setIsLoaded");
+    checkAndRequestRoles();
 
     frameCallEvent({
       event: "onAppReady",
@@ -261,7 +264,7 @@ const useEditorEvents = ({
         docEditor,
       ); //Do not remove: it's for Back button on Mobile App
     }
-  }, [config?.errorMessage, sdkConfig?.frameId]);
+  }, [config?.errorMessage, sdkConfig?.frameId, checkAndRequestRoles]);
 
   const onUserActionRequired = React.useCallback(() => {
     frameCallCommand("setIsLoaded");

@@ -31,7 +31,8 @@ export const validateAndFixObject = <T extends Record<string, string>>(
   const result: Partial<T> = {};
 
   Object.entries(obj).forEach(([key, val]) => {
-    if (!(key in typeDefinition)) {
+    // Array.isArray(val) Bug 75924 - Fixed invalid role
+    if (!(key in typeDefinition) || Array.isArray(val)) {
       result[key as keyof T] = val as T[keyof T];
       return;
     }

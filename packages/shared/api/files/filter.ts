@@ -32,6 +32,7 @@ import queryString from "query-string";
 import { ApplyFilterOption, FilterType } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
@@ -113,6 +114,21 @@ const getOtherSearchParams = () => {
   });
 
   return searchParams.toString();
+};
+
+export const typeDefinition = {
+  filterType: Object.values(FilterType).map((value) => String(value)), // enum FilterType
+  applyFilterOption: Object.values(ApplyFilterOption), // enum ApplyFilterOption
+  sortBy: [
+    "DateAndTime",
+    "DateAndTimeCreation",
+    "AZ",
+    "Type",
+    "Size",
+    "Title",
+    "Author",
+  ] as TSortBy[], // type TSortBy
+  sortOrder: ["ascending", "descending"] as TSortOrder[], // type TSortOrder
 };
 
 class FilesFilter {
@@ -279,6 +295,8 @@ class FilesFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -295,7 +313,7 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
-    } = this;
+    } = fixedValidObject;
 
     const isFilterSet =
       filterType ||
@@ -333,6 +351,8 @@ class FilesFilter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -350,7 +370,7 @@ class FilesFilter {
       extension,
       searchArea,
       key,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: { [key: string]: unknown } = {};
 
@@ -373,8 +393,7 @@ class FilesFilter {
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
-    dtoFilter[SORT_ORDER] =
-      sortOrder === "ascending" ? "ascending" : "descending";
+    dtoFilter[SORT_ORDER] = sortOrder;
 
     const otherSearchParams = getOtherSearchParams();
 

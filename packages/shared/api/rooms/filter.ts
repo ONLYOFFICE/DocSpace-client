@@ -42,6 +42,8 @@ import {
 } from "../../utils/filterConstants";
 import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
+import { validateAndFixObject } from "../../utils/filterValidator";
+import { typeDefinition } from "./typeDefinition";
 
 const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;
 const DEFAULT_FILTER_VALUE: Nullable<string> = null;
@@ -298,6 +300,8 @@ class RoomsFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       page,
       pageCount,
@@ -317,7 +321,7 @@ class RoomsFilter {
       quotaFilter,
       storageFilter,
       startIndex,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter = {
       [PAGE]: page,
@@ -344,6 +348,8 @@ class RoomsFilter {
   };
 
   toUrlParams = (userId?: string, withLocalStorage?: boolean) => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       page,
       pageCount,
@@ -362,7 +368,7 @@ class RoomsFilter {
       subjectFilter,
       quotaFilter,
       storageFilter,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: Record<string, unknown> = {
       ...(filterValue && { [FILTER_VALUE]: filterValue }),

@@ -3,7 +3,7 @@
   "content": "Check the filled forms and analyze data automatically collected into a spreadsheet. Everything – within one room.",
   "content_en_sha1_hash": "4c9431d01e59d77faab35a63316a049bc247258b",
   "created_at": "2025-05-19T21:30:55.144Z",
-  "updated_at": "2025-05-21T10:45:46.749Z",
+  "updated_at": "2025-07-10T11:11:07.132Z",
   "comment": {
     "text": "The translation key \"TitleComplete\" is used to display a button title that indicates reviewing and analyzing completed forms within one room. This text is likely used in a form-filling dialog or header element to provide context for users. Translators should focus on conveying the idea of completing forms within a specific area.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 67,
+      "line_number": 70,
       "context": "],\n },\n {\n id: 4,\n header: t(\"FormFillingTipsDialog:HeaderComplete\"),\n description: t(\"FormFillingTipsDialog:TitleComplete\"),\n key: \"form-filling-complete\",\n placement: \"bottom\",\n position: [\n {\n type: GuidanceElementType.Mixed,",
       "module": "/packages/shared"
     }

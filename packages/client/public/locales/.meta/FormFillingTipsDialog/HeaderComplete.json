@@ -3,7 +3,7 @@
   "content": "Convenient analyzing of the collected responses",
   "content_en_sha1_hash": "76213a7bfed2be24315c6633b53e56087d84c82e",
   "created_at": "2025-05-19T21:30:55.135Z",
-  "updated_at": "2025-05-21T10:47:15.452Z",
+  "updated_at": "2025-07-10T11:11:07.132Z",
   "comment": {
     "text": "This translation key describes a header used in a dialog that provides analyzing capabilities of collected responses. The header is intended to be displayed as part of a form-filling tips dialog, guiding users on how to analyze their responses.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 66,
+      "line_number": 69,
       "context": "},\n ],\n },\n {\n id: 4,\n header: t(\"FormFillingTipsDialog:HeaderComplete\"),\n description: t(\"FormFillingTipsDialog:TitleComplete\"),\n key: \"form-filling-complete\",\n placement: \"bottom\",\n position: [\n {",
       "module": "/packages/shared"
     }

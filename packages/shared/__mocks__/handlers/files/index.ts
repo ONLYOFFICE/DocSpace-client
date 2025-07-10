@@ -26,10 +26,14 @@
 
 import { filesSettingsHandler } from "./filesSettings";
 import { foldersTreeHandler } from "./foldersTree";
-import { folderHandler } from "./folder";
+import { folderHandler, folderInfoHandler } from "./folder";
 import { validatePublicRoomKeyHandler } from "./validatePublicRoomKey";
 import { validatePublicRoomPasswordHandler } from "./validatePublicRoomPassword";
-import { roomListHandler, roomListResolver } from "./roomList";
+import {
+  roomListHandler,
+  roomListResolver,
+  createRoomHandler,
+} from "./roomList";
 import {
   externalLinksHandler,
   primaryLinkHandler,
@@ -45,11 +49,13 @@ export {
   validatePublicRoomKeyHandler,
   roomListHandler,
   folderHandler,
+  folderInfoHandler,
   validatePublicRoomPasswordHandler,
   roomListResolver,
   externalLinksHandler,
   primaryLinkHandler,
   editExternalLinkHandler,
+  createRoomHandler,
 };
 
 export const filesHandlers = (port: string) => [

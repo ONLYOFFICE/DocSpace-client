@@ -31,6 +31,7 @@ import { API_PREFIX } from "../../e2e/utils";
 import type { TFile, TFolder, TGetFolder } from "../../../api/files/types";
 
 export const PATH_FOLDER = "files/:id([0-9]+)*";
+export const PATH_FOLDER_INFO = "files/folder/:folderId([0-9]+)";
 
 export enum TypeFolder {
   IsEmpty = "isEmpty",
@@ -48,7 +49,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 4,
     fileExst: ".png",
     comment: "Uploaded",
@@ -156,7 +156,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 4,
     fileExst: ".png",
     comment: "Uploaded",
@@ -264,7 +263,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 4,
     fileExst: ".png",
     comment: "Uploaded",
@@ -372,7 +370,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 2,
     fileExst: ".mp4",
     comment: "Uploaded",
@@ -479,7 +476,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -586,7 +582,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -693,7 +688,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -800,7 +794,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -907,7 +900,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1014,7 +1006,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1121,7 +1112,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1228,7 +1218,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1335,7 +1324,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1442,7 +1430,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1549,7 +1536,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1656,7 +1642,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -1763,7 +1748,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1870,7 +1854,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -1977,7 +1960,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -2084,7 +2066,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -2191,7 +2172,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -2298,7 +2278,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -2405,7 +2384,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -2512,7 +2490,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2621,7 +2598,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2730,7 +2706,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2839,7 +2814,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2948,7 +2922,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -3057,7 +3030,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -3166,7 +3138,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -3275,7 +3246,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -3382,7 +3352,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3489,7 +3458,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3596,7 +3564,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3703,7 +3670,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3810,7 +3776,6 @@ const files: TFile[] = [
     mute: false,
     viewUrl: "",
     webUrl: "",
-    shortWebUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -4267,6 +4232,87 @@ const getEmptyFolder = () => {
   };
 };
 
+const getFolderInfo = () => {
+  return {
+    parentId: 5,
+    filesCount: 17,
+    foldersCount: 0,
+    new: 0,
+    mute: false,
+    pinned: false,
+    private: false,
+    indexing: false,
+    denyDownload: false,
+    fileEntryType: 1,
+    id: 12,
+    rootFolderId: 5,
+    canShare: false,
+    security: {
+      Read: true,
+      Create: true,
+      Delete: true,
+      EditRoom: true,
+      Rename: true,
+      CopyTo: true,
+      Copy: true,
+      MoveTo: true,
+      Move: true,
+      Pin: false,
+      Mute: false,
+      EditAccess: false,
+      Duplicate: true,
+      Download: true,
+      CopySharedLink: true,
+      Reconnect: false,
+      CreateRoomFrom: true,
+      CopyLink: true,
+      Embed: false,
+      ChangeOwner: false,
+      IndexExport: false,
+    },
+    title: "Folder 1",
+    access: 0,
+    shared: false,
+    created: "2025-01-23T14:30:52.0000000+01:00",
+    createdBy: {
+      id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+      displayName: "Administrator ",
+      avatar:
+        "/static/images/default_user_photo_size_82-82.png?hash=1976880553",
+      avatarOriginal:
+        "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
+      avatarMax:
+        "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
+      avatarMedium:
+        "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
+      avatarSmall:
+        "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
+      profileUrl: "",
+      hasAvatar: false,
+      isAnonim: false,
+    },
+    updated: "2025-01-29T21:52:21.0000000+01:00",
+    rootFolderType: 5,
+    updatedBy: {
+      id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+      displayName: "Administrator ",
+      avatar:
+        "/static/images/default_user_photo_size_82-82.png?hash=1976880553",
+      avatarOriginal:
+        "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
+      avatarMax:
+        "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
+      avatarMedium:
+        "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
+      avatarSmall:
+        "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
+      profileUrl: "",
+      hasAvatar: false,
+      isAnonim: false,
+    },
+  };
+};
+
 export const folderResolver = (type?: TypeFolder) => {
   if (type === TypeFolder.IsEmpty) {
     return new Response(JSON.stringify({ response: getEmptyFolder() }));
@@ -4280,10 +4326,33 @@ export const folderResolver = (type?: TypeFolder) => {
 };
 
 export const folderHandler = (port: string, type?: TypeFolder) => {
-  return http.get(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_FOLDER}`,
-    () => {
-      return folderResolver(type);
-    },
-  );
+  let baseUrl;
+  if (port) {
+    baseUrl = `http://localhost:${port}`;
+  } else {
+    baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost";
+  }
+
+  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_FOLDER}`, () => {
+    return folderResolver(type);
+  });
+};
+
+export const folderInfoHandler = (port?: string) => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `http://localhost:${port}`;
+  } else {
+    baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost";
+  }
+
+  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_FOLDER_INFO}`, () => {
+    return new Response(JSON.stringify({ response: getFolderInfo() }));
+  });
 };

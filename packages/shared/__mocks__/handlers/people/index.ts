@@ -35,6 +35,7 @@ import {
   createUserHandler,
 } from "./self";
 import { thirdPartyProvidersHandler } from "./thirdPartyProviders";
+import { peopleHandler } from "./people";
 
 export {
   selfHandler,
@@ -46,6 +47,7 @@ export {
   selfAddGuestHandler,
   createUserHandler,
   thirdPartyProvidersHandler,
+  peopleHandler,
 };
 
 export const peopleHandlers = (port: string) => [

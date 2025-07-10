@@ -31,3 +31,5 @@ export {
 export { createNextTestServer } from "./testServer";
 
 export * from "./utils";
+
+export * from "./msw-compat";

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
+import { v4 as uuidv4 } from "uuid";
 import { TGetRooms, TRoom } from "../../../api/rooms/types";
 import { API_PREFIX } from "../../e2e/utils";
 
@@ -2014,10 +2015,44 @@ export const roomListResolver = (roomListType?: TypeRoomList) => {
 };
 
 export const roomListHandler = (port: string, roomListType?: TypeRoomList) => {
-  return http.get(
-    `http://localhost:${port}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
-    () => {
-      return roomListResolver(roomListType);
+  let baseUrl;
+  if (port) {
+    baseUrl = `http://localhost:${port}`;
+  } else {
+    baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost";
+  }
+
+  return http.get(`${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`, () => {
+    return roomListResolver(roomListType);
+  });
+};
+
+export const createRoomHandler = (port?: string) => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `http://localhost:${port}`;
+  } else {
+    baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost";
+  }
+
+  http.post<{}, { title: string }>(
+    `${baseUrl}/${API_PREFIX}/${PATH_ROOMS_LIST}`,
+    async ({ request }) => {
+      const body = await request.json();
+
+      const response = {
+        ...getRoomList().folders[0],
+        title: body.title,
+        id: uuidv4(),
+      };
+
+      return new Response(JSON.stringify({ response }));
     },
   );
 };

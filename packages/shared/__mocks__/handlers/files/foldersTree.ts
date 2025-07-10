@@ -580,7 +580,17 @@ export const foldersTreeResolver = () => {
 };
 
 export const foldersTreeHandler = (port: string) => {
-  return http.get(`http://localhost:${port}/${API_PREFIX}/${PATH}`, () => {
+  let baseUrl;
+  if (port) {
+    baseUrl = `http://localhost:${port}`;
+  } else {
+    baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : "http://localhost";
+  }
+
+  return http.get(`${baseUrl}/${API_PREFIX}/${PATH}`, () => {
     return foldersTreeResolver();
   });
 };

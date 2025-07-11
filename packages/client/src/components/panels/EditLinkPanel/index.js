@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment from "moment";
+import { match, Pattern } from "ts-pattern";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
@@ -41,8 +42,11 @@ import {
   getRoomAccessOptions,
   getShareOptions,
 } from "@docspace/shared/components/share/Share.helpers";
-import { copyShareLink } from "@docspace/shared/utils/copy";
-import { editExternalLink as editExternalLinkFile } from "@docspace/shared/api/files";
+
+import {
+  editExternalFolderLink,
+  editExternalLink as editExternalLinkFile,
+} from "@docspace/shared/api/files";
 
 import {
   DeviceType,
@@ -69,7 +73,6 @@ const EditLinkPanel = (props) => {
     setIsVisible,
     editExternalLink,
     setExternalLink,
-    shareLink,
     unsavedChangesDialogVisible,
     setUnsavedChangesDialog,
     isLocked,
@@ -150,111 +153,115 @@ const EditLinkPanel = (props) => {
   const handleSelectLinkAccess = (option) => {
     setSelectedLinkAccess(option);
   };
-  const onSave = () => {
+
+  const validateInputs = () => {
+    const errors = [];
+
     if (
-      (!passwordValue.trim() || !isPasswordValid) &&
-      passwordAccessIsChecked
+      passwordAccessIsChecked &&
+      (!passwordValue.trim() || !isPasswordValid)
     ) {
+      errors.push("password");
+    }
+
+    if (
+      expirationDate &&
+      new Date(expirationDate).getTime() <= new Date().getTime()
+    ) {
+      errors.push("expiration");
+    }
+
+    return errors;
+  };
+
+  const handleValidationErrors = (errors) => {
+    if (errors.includes("password")) {
       setIsPasswordValid(false);
       setIsPasswordErrorShow(true);
-
-      return;
     }
-
-    const isExpiredCheck = expirationDate
-      ? new Date(expirationDate).getTime() <= new Date().getTime()
-      : false;
-    if (isExpiredCheck) {
-      setIsExpired(isExpiredCheck);
-      return;
+    if (errors.includes("expiration")) {
+      setIsExpired(true);
     }
+  };
 
+  const buildUpdatedLink = () => {
     const externalLink = link ?? { access: 2, sharedTo: {} };
 
-    const updatedLink = JSON.parse(JSON.stringify(externalLink));
+    const updatedLink = {
+      ...externalLink,
+      access: selectedAccessOption.access,
+      sharedTo: {
+        ...externalLink.sharedTo,
+        password: passwordAccessIsChecked ? passwordValue : null,
+        denyDownload,
+        internal: selectedLinkAccess.internal,
+        ...(!isSameDate && expirationDate && { expirationDate }),
+      },
+    };
 
-    updatedLink.sharedTo.password = passwordAccessIsChecked
-      ? passwordValue
-      : null;
-    updatedLink.sharedTo.denyDownload = denyDownload;
-    updatedLink.access = selectedAccessOption.access;
-    if (!isSameDate) updatedLink.sharedTo.expirationDate = expirationDate;
-    updatedLink.sharedTo.internal = selectedLinkAccess.internal;
+    return updatedLink;
+  };
 
-    setIsLoading(true);
+  const executeApiCall = async (updatedLink) => {
+    return match(type)
+      .with(LinkEntityType.ROOM, async () => {
+        const response = await editExternalLink(roomId, updatedLink);
+        setExternalLink(response, searchParams, setSearchParams, isCustomRoom);
+        setLinkParams({ link: response, roomId, isPublic, isFormRoom });
+        copyRoomShareLink(response, t);
+        return response;
+      })
+      .with(
+        Pattern.union(LinkEntityType.FILE, LinkEntityType.FOLDER),
+        async () => {
+          const editApi =
+            type === LinkEntityType.FILE
+              ? editExternalLinkFile
+              : editExternalFolderLink;
 
-    switch (type) {
-      case LinkEntityType.ROOM:
-        editExternalLink(roomId, updatedLink)
-          .then((response) => {
-            setExternalLink(
-              response,
-              searchParams,
-              setSearchParams,
-              isCustomRoom,
-            );
-            setLinkParams({ link: response, roomId, isPublic, isFormRoom });
-
-            if (isEdit) {
-              copyShareLink(shareLink);
-              // toastr.success(t("Files:LinkEditedSuccessfully"));
-            } else {
-              copyShareLink(response?.sharedTo?.shareLink);
-
-              // toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
-            }
-            copyRoomShareLink(response, t, false);
-            onClose();
-          })
-          .catch((err) => {
-            const error = err?.response?.data?.error?.message ?? err?.message;
-            toastr.error(error);
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
-        break;
-
-      case LinkEntityType.FILE:
-        {
-          const { primary, internal, id } = updatedLink.sharedTo;
-
-          console.log({ updatedLink });
-
-          editExternalLinkFile(
+          const response = await editApi(
             roomId,
-            id,
+            updatedLink.sharedTo.id,
             updatedLink.access,
-            primary,
-            internal,
+            updatedLink.sharedTo.primary,
+            updatedLink.sharedTo.internal,
             expirationDate,
             updatedLink.sharedTo.password,
             denyDownload,
-          )
-            .then((response) => {
-              setLinkParams({
-                isEdit: true,
-                roomId,
-                link: response,
-                type: LinkEntityType.FILE,
-              });
+          );
 
-              updateLink?.(response);
-              onClose();
-            })
-            .catch((err) => {
-              const error = err?.response?.data?.error?.message ?? err?.message;
-              toastr.error(error);
-            })
-            .finally(() => {
-              setIsLoading(false);
-            });
-        }
+          setLinkParams({ roomId, link: response, type });
+          updateLink?.(response);
+          return response;
+        },
+      )
+      .exhaustive();
+  };
 
-        break;
+  const handleApiError = (err) => {
+    const error = err?.response?.data?.error?.message ?? err?.message;
+    toastr.error(error);
+  };
 
-      default:
-        break;
+  const onSave = async () => {
+    const validationErrors = validateInputs();
+    if (validationErrors.length > 0) {
+      handleValidationErrors(validationErrors);
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const updatedLink = buildUpdatedLink();
+      console.log({ updatedLink });
+
+      await executeApiCall(updatedLink);
+    } catch (err) {
+      handleApiError(err);
+    } finally {
+      setIsLoading(false);
+      onClose();
     }
   };
 
@@ -497,7 +504,6 @@ export default inject(
 
     console.log({ type });
 
-    const shareLink = link?.sharedTo?.shareLink;
     const accessLink = linkParams.link?.access;
 
     return {
@@ -512,7 +518,6 @@ export default inject(
       password: link?.sharedTo?.password ?? "",
       date: link?.sharedTo?.expirationDate ?? null,
       isDenyDownload: link?.sharedTo?.denyDownload ?? false,
-      shareLink,
       externalLinks,
       unsavedChangesDialogVisible,
       setUnsavedChangesDialog,

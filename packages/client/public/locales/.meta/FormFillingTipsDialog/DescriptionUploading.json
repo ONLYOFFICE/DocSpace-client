@@ -3,7 +3,7 @@
   "content": "Create PDF forms in {{productName}}, e.g. in your {{sectionName}}, and upload the ready ones to the room. Make use of the integrated template library and choose among numerous ready PDF templates.",
   "content_en_sha1_hash": "4b99c1fb674838fdfc525e7511a701d0c391b7dd",
   "created_at": "2025-05-19T21:30:55.127Z",
-  "updated_at": "2025-05-21T10:48:16.683Z",
+  "updated_at": "2025-07-10T11:11:07.133Z",
   "comment": {
     "text": "Create a PDF form in {{productName}}, and upload ready templates from the integrated template library. This instruction is displayed in a guidance component for users to fill out forms.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 85,
+      "line_number": 88,
       "context": "],\n },\n {\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n key: \"form-filling-uploading\",\n placement: \"side\",",
       "module": "/packages/shared"
     }

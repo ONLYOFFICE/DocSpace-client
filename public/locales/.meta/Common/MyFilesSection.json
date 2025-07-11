@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:46.695Z",
-  "updated_at": "2025-06-24T16:31:24.323Z",
+  "updated_at": "2025-07-10T11:11:06.757Z",
   "comment": {
     "text": "This translation key is used to display the text \"Documents\" in a button within a file management component. It appears as part of a link that navigates to a personal section of documents, and its purpose is to provide a clear label for users.",
     "is_auto": true,
@@ -90,7 +90,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 334,
+      "line_number": 369,
       "context": "isDisabled={isNotPaidPeriod}\n scale={isMobile}\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
       "module": "/packages/client"
     },
@@ -120,7 +120,7 @@
     },
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 87,
+      "line_number": 90,
       "context": "{\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n key: \"form-filling-uploading\",\n placement: \"side\",\n position: [\n {",
       "module": "/packages/shared"
     },

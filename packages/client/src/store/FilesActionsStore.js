@@ -2679,7 +2679,6 @@ class FilesActionStore {
       if (openingNewTab(url, e)) return;
 
       setIsLoading(true);
-
       setSelection([]);
 
       window.DocSpace.navigate(url, { state });
@@ -2749,6 +2748,20 @@ class FilesActionStore {
     }
   };
 
+  closeMediaViewerAndRestoreUrl = async () => {
+    const { getFirstUrl, setMediaViewerData } = this.mediaViewerDataStore;
+
+    setMediaViewerData({ visible: false, id: null });
+
+    try {
+      const url = await getFirstUrl();
+      if (!url) return;
+      window.history.pushState("", "", url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   onClickBack = (fromHotkeys = true) => {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
@@ -2758,6 +2771,10 @@ class FilesActionStore {
     const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
+
+    if (this.mediaViewerDataStore.visible) {
+      return this.closeMediaViewerAndRestoreUrl();
+    }
 
     setBufferSelection(null);
 

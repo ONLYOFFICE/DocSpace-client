@@ -114,7 +114,6 @@ const NotFoundHttpCode = 404;
 const ForbiddenHttpCode = 403;
 const PaymentRequiredHttpCode = 402;
 const UnauthorizedHttpCode = 401;
-const BadRequestCode = 400;
 
 const THUMBNAILS_CACHE = 500;
 let timerId;
@@ -1417,8 +1416,12 @@ class FilesStore {
     if (selected === "close" || selected === "none") {
       clearBuffer && this.setBufferSelection(null);
 
-      this.setHotkeyCaretStart(this.selection.at(-1) ?? this.hotkeyCaretStart);
-      this.setHotkeyCaret(this.selection.at(-1) ?? this.hotkeyCaret);
+      if (this.hotkeyCaret) {
+        this.setHotkeyCaretStart(
+          this.selection.at(-1) ?? this.hotkeyCaretStart,
+        );
+        this.setHotkeyCaret(this.selection.at(-1) ?? this.hotkeyCaret);
+      }
     }
 
     this.selected = selected;
@@ -1932,16 +1935,6 @@ class FilesStore {
         return Promise.resolve(selectedFolder);
       })
       .catch((err) => {
-        if (err?.response?.status === BadRequestCode && requestCounter <= 0) {
-          requestCounter++;
-
-          // toastr.error(err);
-
-          return window.DocSpace.navigate(
-            `${window.DocSpace.location.pathname}?${FilesFilter.getDefault(100).toUrlParams()}`,
-          );
-        }
-
         if (err?.response?.status === 402)
           this.currentTariffStatusStore.setPortalTariff();
 
@@ -2163,26 +2156,6 @@ class FilesStore {
           return Promise.resolve(selectedFolder);
         })
         .catch((err) => {
-          if (err?.response?.status === BadRequestCode && requestCounter <= 0) {
-            requestCounter++;
-
-            // toastr.error(err);
-
-            const userId = this.userStore?.user?.id;
-
-            const searchArea = window.DocSpace.location.pathname.includes(
-              "shared",
-            )
-              ? filter.searchArea === RoomSearchArea.Templates
-                ? RoomSearchArea.Templates
-                : RoomSearchArea.Active
-              : RoomSearchArea.Archive;
-
-            return window.DocSpace.navigate(
-              `${window.DocSpace.location.pathname}?${RoomsFilter.getDefault(userId, searchArea).toUrlParams(userId)}`,
-            );
-          }
-
           if (err?.response?.status === 402)
             this.currentTariffStatusStore.setPortalTariff();
 
@@ -3135,7 +3108,9 @@ class FilesStore {
             (f) => !folderIds.includes(f.id) && f.isFolder,
           );
 
-      this.setIsEmptyPage(newFilter.total <= 0);
+      if (!this.isFiltered) {
+        this.setIsEmptyPage(newFilter.total <= 0);
+      }
 
       runInAction(() => {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);

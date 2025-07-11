@@ -171,22 +171,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {(locked && item.access === ShareAccessRights.Collaborator) ||
-          isAvailableLockFile ? (
-            <IconButton
-              iconNode={<IconLock />}
-              className="badge lock-file icons-group"
-              size={sizeQuickButton}
-              data-id={id}
-              data-locked={!!locked}
-              onClick={onClickLock}
-              color={colorLock}
-              isDisabled={isDisabled || !isAvailableLockFile}
-              hoverColor="accent"
-              title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
-            />
-          ) : null}
-
           {isAvailableDownloadFile ? (
             <IconButton
               iconNode={<FileActionsDownloadReactSvg />}
@@ -237,7 +221,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               title={t("Common:CopySharedLink")}
             />
           ) : null}
-          {isAvailableLockFile ? (
+
+          {(locked && item.access === ShareAccessRights.Collaborator) ||
+          isAvailableLockFile ? (
             <IconButton
               iconNode={<IconLock />}
               className={classNames("badge lock-file icons-group", {
@@ -248,8 +234,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               data-locked={!!locked}
               onClick={onClickLock}
               color={colorLock}
-              isDisabled={isDisabled}
-              hoverColor={theme.filesQuickButtons.sharedColor}
+              isDisabled={isDisabled || !isAvailableLockFile}
+              hoverColor="accent"
               title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
             />
           ) : null}

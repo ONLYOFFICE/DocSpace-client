@@ -69,6 +69,11 @@
       opacity: 1;
       pointer-events: auto;
     }
+
+    :global(.badges) :global(.lock-file) {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   &:not(:hover) {

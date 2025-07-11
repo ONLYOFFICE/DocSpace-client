@@ -24,53 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface CampaignsBannerProps {
-  /** Accepts id */
-  id?: string;
-  /** Accepts class */
-  className?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Background */
-  campaignBackground: string;
-  /** Icon */
-  campaignIcon: string;
-  /** Translations */
-  campaignTranslate: ITranslate;
-  /** Config */
-  campaignConfig: IConfig;
-  /** Disable text fitting */
-  disableFitText?: boolean;
-  /** Button/Link action */
-  onAction(type?: string, url?: string): void;
-  /** Close action */
-  onClose(): void;
-}
+import { globalColors } from "../../../themes";
 
-interface ITranslate {
-  Header?: string;
-  SubHeader?: string;
-  Text?: string;
-  ButtonLabel?: string;
-  Link?: string;
-}
+/**
+ * Translations for the Login History campaign banner
+ */
+export const loginHistoryTranslates = {
+  Header: "Login History",
+  SubHeader: "Enable two-factor authentication",
+  Text: "Login history helps you identify suspicious activities and enhance security",
+  Link: "/portal-help-center/security/login-history",
+};
 
-interface IStyle {
-  color?: string;
-  fontSize?: string;
-  fontWeight?: string;
-}
-
-interface IAction {
-  isButton?: boolean;
-  backgroundColor?: string;
-  type?: string;
-}
-
-interface IConfig {
-  borderColor?: string;
-  title?: IStyle;
-  body?: IStyle;
-  text?: IStyle;
-  action?: IStyle & IAction;
-}
+/**
+ * Configuration for the Login History campaign banner
+ */
+export const loginHistoryConfig = {
+  borderColor: globalColors.lightBlueMain,
+  title: {
+    color: globalColors.lightBlueMain,
+    fontSize: "11px",
+    fontWeight: "600",
+  },
+  body: {
+    fontSize: "13px",
+    fontWeight: "600",
+    color: globalColors.black,
+  },
+  text: {
+    fontSize: "12px",
+    fontWeight: "normal",
+    color: globalColors.grayText,
+  },
+};

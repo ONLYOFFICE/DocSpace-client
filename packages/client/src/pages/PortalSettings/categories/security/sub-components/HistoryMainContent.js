@@ -30,6 +30,11 @@ import { Text } from "@docspace/shared/components/text";
 // import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
+import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
+import {
+  loginHistoryTranslates,
+  loginHistoryConfig,
+} from "@docspace/shared/components/campaigns-banner/campaign/LoginHistoryCampaign";
 // import { toastr } from "@docspace/shared/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
@@ -104,6 +109,30 @@ const MainContainer = styled.div`
   }
 
   ${(props) => props.isSettingNotPaid && UnavailableStyles}
+`;
+
+const CustomBannerWrapper = styled.div`
+  max-width: 700px;
+  margin-bottom: 20px;
+
+  @media ${mobile} {
+    margin-bottom: 16px;
+  }
+
+  & > div[data-testid="campaigns-banner"] {
+    min-height: 72px !important;
+    max-height: 72px !important;
+
+    & > div {
+      padding: 12px !important;
+      gap: 2px;
+    }
+
+    @media ${mobile} {
+      min-height: 88px !important;
+      max-height: 88px !important;
+    }
+  }
 `;
 
 const DownLoadWrapper = styled.div`
@@ -224,6 +253,13 @@ const HistoryMainContent = (props) => {
           isPaidBadge
         />
       ) : null}
+      <CustomBannerWrapper>
+        <CampaignsBanner
+          campaignConfig={loginHistoryConfig}
+          campaignTranslate={loginHistoryTranslates}
+          disableFitText
+        />
+      </CustomBannerWrapper>
       <div className="main-wrapper">
         <Text fontSize="13px" className="login-history-description">
           {subHeader}

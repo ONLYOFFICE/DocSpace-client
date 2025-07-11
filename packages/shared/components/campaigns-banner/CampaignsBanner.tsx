@@ -47,6 +47,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
     campaignConfig,
     onAction,
     onClose,
+    disableFitText,
   } = props;
   const { Header, SubHeader, Text, ButtonLabel, Link } = campaignTranslate;
   const { borderColor, title, body, text, action } = campaignConfig;
@@ -56,10 +57,16 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
   const hasText = !!Text;
   const isButton = action?.isButton;
 
-  const { fontSize, ref, wrapperRef } = useFitText(
-    campaignBackground,
-    body?.fontSize,
-  );
+  const fitTextResult = useFitText(campaignBackground, body?.fontSize);
+
+  const staticRef = React.useRef<HTMLDivElement>(null);
+  const staticWrapperRef = React.useRef<HTMLDivElement>(null);
+
+  const fontSize = disableFitText ? body?.fontSize : fitTextResult.fontSize;
+  const ref = disableFitText ? staticRef : fitTextResult.ref;
+  const wrapperRef = disableFitText
+    ? staticWrapperRef
+    : fitTextResult.wrapperRef;
 
   const wrapperStyle = {
     "--campaign-background": `url(${campaignBackground})`,

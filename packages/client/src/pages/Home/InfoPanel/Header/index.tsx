@@ -214,6 +214,13 @@ const InfoPanelHeaderContent = ({
     });
   }
 
+  tabsData.push({
+    id: "ai_chat",
+    name: "Chat",
+    onClick: () => setView("ai_chat"),
+    content: null,
+  });
+
   return (
     <StyledInfoPanelHeader withTabs={withTabs}>
       <AsideHeader

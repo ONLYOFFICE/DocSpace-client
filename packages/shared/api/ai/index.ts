@@ -30,7 +30,6 @@ import { request } from "../client";
 import {
   TCreateAiProvider,
   TAiProvider,
-  TGetAiProviders,
   TUpdateAiProviders,
   TDeleteAiProviders,
   TModelList,
@@ -46,31 +45,31 @@ export const createProvider = async (provider: TCreateAiProvider) => {
     method: "post",
     url: `${baseUrl}/providers`,
     data: provider,
-  })) as { response: TAiProvider };
+  })) as TAiProvider;
 
-  return (res as { response: TAiProvider }).response;
+  return res;
 };
 
 export const getProviders = async () => {
   const res = (await request({
     method: "get",
     url: `${baseUrl}/providers`,
-  })) as { response: TGetAiProviders };
+  })) as { items: TAiProvider[]; total: number };
 
-  return (res as { response: TGetAiProviders }).response;
+  return res.items;
 };
 
 export const updateProvider = async (
-  providerId: Pick<TAiProvider, "id">,
+  providerId: TAiProvider["id"],
   data: TUpdateAiProviders,
 ) => {
   const res = (await request({
     method: "put",
-    url: `${baseUrl}/providers/${providerId.id}`,
+    url: `${baseUrl}/providers/${providerId}`,
     data,
-  })) as { response: TAiProvider };
+  })) as TAiProvider;
 
-  return (res as { response: TAiProvider }).response;
+  return res;
 };
 
 export const deleteProvider = async (data: TDeleteAiProviders) => {
@@ -78,15 +77,15 @@ export const deleteProvider = async (data: TDeleteAiProviders) => {
     method: "delete",
     url: `${baseUrl}/providers`,
     data,
-  })) as { response: TDeleteAiProviders };
+  })) as TDeleteAiProviders;
 
-  return (res as { response: TDeleteAiProviders }).response;
+  return res;
 };
 
-export const getModels = async (providerId?: Pick<TAiProvider, "id">) => {
+export const getModels = async (providerId?: TAiProvider["id"]) => {
   const searchParams = new URLSearchParams();
   if (providerId) {
-    searchParams.append("providerId", providerId.id.toString());
+    searchParams.append("provider", providerId.toString());
   }
 
   const strSearch = providerId ? `?${searchParams.toString()}` : "";
@@ -94,18 +93,18 @@ export const getModels = async (providerId?: Pick<TAiProvider, "id">) => {
   const res = (await request({
     method: "get",
     url: `${baseUrl}/chats/models${strSearch}`,
-  })) as { response: TModelList };
+  })) as TModelList;
 
-  return (res as { response: TModelList }).response;
+  return res;
 };
 
 export const getCurrentModel = async () => {
   const res = (await request({
     method: "get",
     url: `${baseUrl}/chats/configuration`,
-  })) as { response: TCurrentModel | undefined };
+  })) as TCurrentModel | undefined;
 
-  return (res as { response: TCurrentModel | undefined }).response;
+  return res;
 };
 
 export const setCurrentModel = async (data: TCurrentModel) => {
@@ -113,9 +112,9 @@ export const setCurrentModel = async (data: TCurrentModel) => {
     method: "put",
     url: `${baseUrl}/chats/configuration`,
     data,
-  })) as { response: TCurrentModel };
+  })) as TCurrentModel;
 
-  return (res as { response: TCurrentModel }).response;
+  return res;
 };
 
 export const startNewChat = async (
@@ -172,7 +171,7 @@ export const getChats = async (
     url: `${baseUrl}/rooms/${roomId}/chats?${searchParams.toString()}`,
   });
 
-  return res as { response: TChat[]; total: number; count: number };
+  return res as { items: TChat[]; total: number };
 };
 
 export const getChatMessages = async (
@@ -188,7 +187,16 @@ export const getChatMessages = async (
     url: `${baseUrl}/chats/${chatId}/messages?${searchParams.toString()}`,
   });
 
-  return res as { response: TMessage[]; total: number; count: number };
+  return res as { items: TMessage[]; total: number };
+};
+
+export const getChat = async (chatId: string) => {
+  const res = (await request({
+    method: "get",
+    url: `${baseUrl}/chats/${chatId}`,
+  })) as TChat;
+
+  return res;
 };
 
 export const renameChat = async (chatId: string, name: string) => {
@@ -198,7 +206,7 @@ export const renameChat = async (chatId: string, name: string) => {
     data: { name },
   });
 
-  return (res as { response: TChat }).response;
+  return res as TChat;
 };
 
 export const deleteChat = async (chatId: string) => {

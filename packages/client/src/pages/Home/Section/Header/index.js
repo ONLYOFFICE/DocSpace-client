@@ -171,10 +171,8 @@ const SectionHeaderContent = (props) => {
     deleteRefMap,
     isPersonalReadOnly,
     showTemplateBadge,
-    aiChatIsVisible,
-    setAiChatIsVisible,
+
     allowInvitingMembers,
-    withChat,
   } = props;
 
   const location = useLocation();
@@ -549,16 +547,6 @@ const SectionHeaderContent = (props) => {
     };
   }, [deleteRefMap]);
 
-  React.useEffect(() => {
-    if (!withChat) setAiChatIsVisible(false);
-  }, [withChat]);
-
-  React.useEffect(() => {
-    return () => {
-      setAiChatIsVisible(false);
-    };
-  }, [setAiChatIsVisible]);
-
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
@@ -718,12 +706,6 @@ const SectionHeaderContent = (props) => {
                 isPlusButtonVisible={
                   !allowInvitingMembers ? isPlusButtonVisible() : true
                 }
-                withChat={withChat}
-                chatOpen={aiChatIsVisible}
-                toggleChat={(visible) => {
-                  setAiChatIsVisible(visible);
-                  if (visible) setIsInfoPanelVisible(false);
-                }}
               />
               {showSignInButton ? (
                 <Button
@@ -783,7 +765,6 @@ export default inject(
     indexingStore,
     dialogsStore,
     guidanceStore,
-    flowStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -949,8 +930,6 @@ export default inject(
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
 
-    const { aiChatIsVisible, setAiChatIsVisible } = flowStore;
-
     const withChat = isAIRoom;
 
     return {
@@ -1057,8 +1036,7 @@ export default inject(
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
       allowInvitingMembers,
-      aiChatIsVisible,
-      setAiChatIsVisible,
+
       withChat,
     };
   },

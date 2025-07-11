@@ -47,7 +47,7 @@
 
 .chatMessageContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   gap: 24px;
 
@@ -56,20 +56,6 @@
   padding: 20px 0;
 
   margin: auto;
-
-  &.isFullScreen {
-    padding-inline-start: 20px;
-    padding-inline-end: calc(20px - var(--scrollbar-padding-inline-end));
-  }
-
-  @include tablet-and-below {
-    padding: 16px 0;
-
-    &.isFullScreen {
-      padding-inline-start: 16px;
-      padding-inline-end: calc(16px - var(--scrollbar-padding-inline-end));
-    }
-  }
 }
 
 .chatEmptyMessage {
@@ -78,15 +64,11 @@
 
   gap: 12px;
 
-  margin: 0 20px 120px;
+  margin: 0 0 120px;
 
   padding: 12px 16px;
 
   border-radius: 6px;
-
-  @include tablet-and-below {
-    margin: 0 16px 120px;
-  }
 
   @include mobile {
     margin-bottom: 40px;

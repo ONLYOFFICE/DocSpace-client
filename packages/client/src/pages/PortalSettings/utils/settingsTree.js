@@ -755,6 +755,12 @@ export const settingsTreeFull = [
         icon: "",
         link: "smtp-settings",
       },
+      {
+        title: "AI Settings",
+        key: "3-2",
+        icon: "",
+        link: "ai-settings",
+      },
     ],
   },
   {

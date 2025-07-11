@@ -80,6 +80,7 @@ const SubInfoPanelBody = ({
       scrollClass="section-scroll info-panel-scroll"
       createContext
       className={styles.scrollbar}
+      id="info-panel-body"
     >
       {children}
     </Scrollbar>

@@ -28,38 +28,23 @@ import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
-import { TFile } from "../../../../api/files/types";
-import { TUser } from "../../../../api/people/types";
-
-import { DeviceType } from "../../../../enums";
-
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
 
 import { useMessageStore } from "../../store/messageStore";
+import { useChatStore } from "../../store/chatStore";
 
 import EmptyScreen from "./sub-components/EmptyScreen";
 import Message from "./sub-components/message";
 
 import styles from "./ChatMessageBody.module.scss";
 
-const ChatMessageBody = ({
-  displayFileExtension,
-  vectorizedFiles,
-  user,
-  getIcon,
-  isFullScreen,
-  currentDeviceType,
-}: {
-  displayFileExtension: boolean;
-  vectorizedFiles: TFile[];
-  user: TUser;
-  getIcon: (size: number, fileExst: string) => string;
-  isFullScreen: boolean;
-  currentDeviceType: DeviceType;
-}) => {
+const ChatMessageBody = () => {
   const { messages } = useMessageStore();
+  const { currentChat } = useChatStore();
   const scrollbarRef = useRef<CustomScrollbar>(null);
+
+  console.log(messages.length);
 
   const isEmpty = messages.length === 0;
 
@@ -86,25 +71,13 @@ const ChatMessageBody = ({
         <EmptyScreen />
       ) : (
         <Scrollbar ref={scrollbarRef} className="chat-scroll-bar">
-          <div
-            className={classNames(styles.chatMessageContainer, {
-              [styles.isFullScreen]: isFullScreen,
-            })}
-          >
-            {messages.map((message) => {
-              if (!message) return;
-              if (message.message === "") return null;
-
+          <div className={classNames(styles.chatMessageContainer)}>
+            {messages.map((message, index) => {
               return (
                 <Message
-                  key={message.id}
+                  key={`${currentChat?.id}-${message.createdOn}-${index * 2}`}
                   message={message}
-                  displayFileExtension={displayFileExtension}
-                  vectorizedFiles={vectorizedFiles}
-                  user={user}
-                  getIcon={getIcon}
-                  isFullScreen={isFullScreen}
-                  currentDeviceType={currentDeviceType}
+                  idx={index}
                 />
               );
             })}

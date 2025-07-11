@@ -26,55 +26,52 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
 import SelectSessionReactSvg from "PUBLIC_DIR/images/select.session.react.svg";
 
+import { RectangleSkeleton } from "../../../../../skeletons";
+
 import { DropDown } from "../../../../drop-down";
 import { DropDownItem } from "../../../../drop-down-item";
 
+import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
-import { SelectChatProps } from "../../../types";
-import { getChateTranslationDate } from "../../../utils";
 
 import styles from "../ChatHeader.module.scss";
 
-const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
+const SelectChat = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const parentRef = React.useRef<HTMLDivElement>(null);
 
-  const {
-    selectSession,
-    isSelectSessionOpen,
-    setIsSelectSessionOpen,
-    preparedMessages,
-    isRequestRunning,
-  } = useMessageStore();
-
-  const { t } = useTranslation(["Common"]);
+  const { chats, isLoading, fetchChat } = useChatStore();
+  const { fetchMessages } = useMessageStore();
 
   const toggleOpen = () => {
-    if (isRequestRunning) return;
-
-    if (isFullScreen && currentDeviceType === "desktop") {
-      setIsSelectSessionOpen(!isSelectSessionOpen);
-
-      return;
-    }
-
     setIsOpen((value) => !value);
   };
 
-  const onSelectAction = (session: string) => {
-    if (isRequestRunning) return;
-
-    selectSession(session);
-    setIsOpen(false);
+  const onSelectAction = (id: string) => {
+    fetchChat(id);
+    fetchMessages(id);
+    toggleOpen();
   };
 
-  const maxHeight = preparedMessages.length > 7 ? { maxHeight: 300 } : {};
+  const maxHeight = chats.length > 7 ? { maxHeight: 300 } : {};
+
+  if (isLoading) {
+    return (
+      <RectangleSkeleton
+        width="32px"
+        height="32px"
+        borderRadius="50%"
+        style={{ minWidth: "32px" }}
+      />
+    );
+  }
+
+  if (!chats.length) return null;
 
   return (
     <>
@@ -89,31 +86,22 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
           clickOutsideAction={() => setIsOpen(false)}
           directionY="bottom"
           directionX="right"
-          topSpace={16}
           forwardedRef={parentRef}
           {...maxHeight}
           manualWidth="280px"
           isNoFixedHeightOptions
         >
-          {preparedMessages.map(({ title, value, isActive, isDate }) => {
-            const currentTitle =
-              !isDate || title ? title : getChateTranslationDate(t, value);
-
-            if (!currentTitle) return null;
-
+          {chats.map(({ title, id }) => {
             return (
               <DropDownItem
-                key={value}
+                key={id}
                 onClick={() => {
-                  if (!isDate) onSelectAction(value);
+                  onSelectAction(id);
                 }}
-                className={classNames("drop-down-item", {
-                  [styles.dropDownItemDate]: isDate,
-                })}
-                isActive={isActive}
-                noHover={isDate}
+                className={classNames("drop-down-item")}
+                isActive={false}
               >
-                {currentTitle}
+                {title}
               </DropDownItem>
             );
           })}

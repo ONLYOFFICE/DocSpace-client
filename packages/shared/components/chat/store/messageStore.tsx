@@ -26,515 +26,61 @@
 
 import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
-
-import FlowsApi from "../../../api/flows/flows.api";
-import { Flow, Tweaks } from "../../../api/flows/flows.types";
-
-import { TSelectorItem } from "../../selector";
-
-import { ChatMessageType, PropertiesType } from "../types/chat";
-import {
-  extractFilesFromMessage,
-  removeFolderFromMessage,
-  getSessionId,
-  getChatDate,
-} from "../utils";
-import { ChatEvents } from "../enums";
+import { TMessage } from "../../../api/ai/types";
+import { getChatMessages } from "../../../api/ai";
 
 export default class MessageStore {
-  flowId = "";
+  messages: TMessage[] = [];
 
-  saveToFileFlow: Flow | null = null;
+  startIndex: number = 0;
 
-  aiSelectedFolder: string | number = "";
+  totalMessages: number = 0;
 
-  aiUserId = "";
-
-  messages: ChatMessageType[] = [];
-
-  sessions: Map<string, ChatMessageType[]> = new Map();
-
-  sortedSessions: Array<[string, Date]> = [];
-
-  currentSession = "";
-
-  isInit = false;
-
-  isRequestRunning = false;
-
-  isSelectSessionOpen = false;
-
-  abortController: AbortController | null = null;
+  currentChat: string = "";
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setFlowId = (flowId: string) => {
-    this.flowId = flowId;
-  };
-
-  setAiUserId = (aiUserId: string) => {
-    this.aiUserId = aiUserId;
-  };
-
-  setAiSelectedFolder = (aiSelectedFolder: string | number) => {
-    this.aiSelectedFolder = aiSelectedFolder;
-
-    this.currentSession = getSessionId(aiSelectedFolder, this.aiUserId);
-  };
-
-  setIsSelectSessionOpen = (value: boolean) => {
-    this.isSelectSessionOpen = value;
-  };
-
-  fetchMessages = async () => {
-    if (this.isRequestRunning) return;
-
-    this.isRequestRunning = true;
-
-    const [messages, saveToFileFlow] = await Promise.all([
-      FlowsApi.getMessages(this.flowId, this.aiSelectedFolder.toString()),
-      FlowsApi.getSaveToFileFlow(),
-    ]);
-
-    const sessions = new Map<string, ChatMessageType[]>();
-
-    messages.forEach((message) => {
-      const { cleanedMessage, fileIds } = extractFilesFromMessage(message.text);
-
-      const msgWithoutFolder = removeFolderFromMessage(cleanedMessage);
-
-      const isSend = message.sender === "User";
-
-      const chatMessage: ChatMessageType = {
-        isSend,
-        message: isSend ? msgWithoutFolder : message.text,
-        sender_name: message.sender_name,
-        id: message.id,
-        timestamp: message.timestamp,
-        session: message.session_id,
-        edit: message.edit,
-        content_blocks: message.content_blocks || [],
-        category: message.category || "",
-        properties: (message.properties || {}) as PropertiesType,
-        fileIds,
-      };
-
-      if (!chatMessage.session) {
-        return;
-      }
-
-      if (!sessions.has(chatMessage.session)) {
-        sessions.set(chatMessage.session, []);
-      }
-
-      sessions.get(chatMessage.session)?.push(chatMessage);
-    });
-
-    const newSessions = new Map<string, ChatMessageType[]>();
-
-    const timestampSessions = new Map<string, Date>();
-
-    Array.from(sessions.entries()).forEach(([sessionId, sessionMessages]) => {
-      const sortedByTime = [...sessionMessages].sort(
-        (a, b) =>
-          new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
-      );
-
-      const finalSessionHistory: ChatMessageType[] = [];
-
-      const userMessages: ChatMessageType[] = [];
-      const aiMessages: ChatMessageType[] = [];
-
-      sortedByTime.forEach((msg) => {
-        if (msg.isSend) {
-          userMessages.push(msg);
-        } else {
-          aiMessages.push(msg);
-        }
-      });
-
-      for (
-        let i = 0;
-        i < Math.max(userMessages.length, aiMessages.length);
-        i += 1
-      ) {
-        if (i < userMessages.length) {
-          finalSessionHistory.push(userMessages[i]);
-        }
-
-        if (i < aiMessages.length) {
-          finalSessionHistory.push(aiMessages[i]);
-        }
-      }
-
-      newSessions.set(sessionId, finalSessionHistory);
-      timestampSessions.set(
-        sessionId,
-        new Date(finalSessionHistory[finalSessionHistory.length - 1].timestamp),
-      );
-    });
-
-    const sortedTimestampSessions = Array.from(timestampSessions.entries())
-      .sort((a, b) => {
-        return new Date(a[1]).getTime() - new Date(b[1]).getTime();
-      })
-      .reverse();
-
-    runInAction(() => {
-      this.sessions = newSessions;
-      this.saveToFileFlow = saveToFileFlow;
-      this.sortedSessions = sortedTimestampSessions;
-      this.isInit = true;
-      this.isRequestRunning = false;
-    });
-  };
-
-  addMessage = async (text: string, sender: string, sender_name: string) => {
-    if (!this.messages.length) {
-      const startMsg = extractFilesFromMessage(
-        removeFolderFromMessage(text.substring(0, 25)),
-      );
-
-      this.currentSession = `${this.currentSession}_${startMsg.cleanedMessage}`;
-    }
-
-    const msgs = await FlowsApi.addMessage(
-      text,
-      sender,
-      sender_name,
-      this.currentSession,
-      this.flowId,
-    );
-
-    const newMsgs = msgs.map((message) => {
-      const { cleanedMessage, fileIds } = extractFilesFromMessage(message.text);
-
-      const msgWithoutFolder = removeFolderFromMessage(cleanedMessage);
-
-      const isSend = message.sender === "User";
-
-      return {
-        isSend,
-        message: isSend ? msgWithoutFolder : message.text,
-        sender_name: message.sender_name,
-        id: message.id,
-        timestamp: message.timestamp,
-        session: message.session_id,
-        edit: message.edit,
-        content_blocks: message.content_blocks || [],
-        category: message.category || "",
-        properties: (message.properties || {}) as PropertiesType,
-        fileIds,
-      };
-    });
-
-    runInAction(() => {
-      this.messages = [...this.messages, ...newMsgs];
-
-      if (this.sessions.get(this.currentSession)) {
-        this.sessions.get(this.currentSession)!.push(...newMsgs);
-      } else {
-        this.sessions.set(this.currentSession, newMsgs);
-        this.sortedSessions = [
-          [
-            this.currentSession,
-            new Date(newMsgs[newMsgs.length - 1].timestamp),
-          ],
-          ...this.sortedSessions,
-        ];
-      }
-    });
-  };
-
-  sendMessage = async (
-    message: string,
-    files: TSelectorItem[],
-    callback: VoidFunction,
-  ) => {
-    if (this.isRequestRunning) return;
-    this.isRequestRunning = true;
-
-    try {
-      const textDecoder = new TextDecoder();
-
-      const filesStr = files.length
-        ? `\n@${files.map((f) => f.id).join(",@")}`
-        : "";
-
-      const folderStr = `\n@folder-${this.aiSelectedFolder}`;
-
-      this.abortController = new AbortController();
-
-      if (!this.messages.length) {
-        const startMsg = extractFilesFromMessage(
-          removeFolderFromMessage(message.substring(0, 25)),
-        );
-
-        this.currentSession = `${this.currentSession}_${startMsg.cleanedMessage}`;
-      }
-
-      const eventsResponse = await FlowsApi.sendMessage(
-        {
-          inputs: {
-            input_value: `${message}${filesStr}${folderStr}`,
-            session: this.currentSession,
-          },
-          files: [],
-        },
-        this.abortController!,
-      );
-
-      const reader = eventsResponse.getReader();
-
-      const stream = async () => {
-        if (this.abortController?.signal.aborted)
-          throw this.abortController.signal.reason;
-
-        const { done, value } = await reader.read();
-
-        if (done) {
-          return;
-        }
-
-        const decodedChunk = textDecoder.decode(value);
-
-        const allChunks = decodedChunk.split("\n\n").filter(Boolean);
-
-        try {
-          allChunks.forEach(async (c) => {
-            try {
-              if (
-                !c.includes('"event": "add_message"') &&
-                !c.includes('"event": "token"') &&
-                !c.includes('"event": "end"')
-              )
-                return;
-
-              const chunk = JSON.parse(c);
-
-              if (chunk.event === "add_message") {
-                const data = chunk.data;
-
-                const { cleanedMessage, fileIds } = extractFilesFromMessage(
-                  removeFolderFromMessage(data.text),
-                );
-
-                runInAction(() => {
-                  if (
-                    this.messages.length &&
-                    this.messages[this.messages.length - 1].id === data.id
-                  ) {
-                    this.messages[this.messages.length - 1] = {
-                      ...this.messages[this.messages.length - 1],
-                      message: cleanedMessage,
-                      fileIds,
-                      content_blocks: data.content_blocks,
-                    };
-
-                    return;
-                  }
-
-                  callback();
-
-                  this.messages = [
-                    ...this.messages,
-                    {
-                      ...data,
-                      message: cleanedMessage,
-                      fileIds,
-                      isSend:
-                        !this.messages[0] ||
-                        data.sender === this.messages[0].sender_name,
-                    },
-                  ];
-                });
-              }
-
-              if (chunk.event === "token") {
-                runInAction(() => {
-                  this.messages[this.messages.length - 1].message +=
-                    chunk.data.chunk;
-                });
-              }
-
-              if (chunk.event === "end") {
-                const userMsg = this.messages[this.messages.length - 2];
-                const msg = this.messages[this.messages.length - 1];
-
-                runInAction(() => {
-                  this.isRequestRunning = false;
-
-                  if (this.sessions.get(this.currentSession)) {
-                    this.sessions.get(this.currentSession)!.push(userMsg, msg);
-                  } else {
-                    this.sessions.set(this.currentSession, [userMsg, msg]);
-                    this.sortedSessions = [
-                      [this.currentSession, new Date(msg.timestamp)],
-                      ...this.sortedSessions,
-                    ];
-                  }
-                });
-              }
-            } catch (e: unknown) {
-              console.log(e);
-            }
-          });
-          if (this.isRequestRunning) await stream();
-        } catch (e: unknown) {
-          if (
-            (e as Error).name === "AbortError" ||
-            (e as Error).message.includes("aborted")
-          ) {
-            console.log("Request was canceled");
-            const userMsg = this.messages[this.messages.length - 2];
-            const msg = this.messages[this.messages.length - 1];
-
-            if (this.sessions.get(this.currentSession)) {
-              this.sessions.get(this.currentSession)!.push(userMsg, msg);
-            } else {
-              this.sessions.set(this.currentSession, [userMsg, msg]);
-              this.sortedSessions = [
-                [this.currentSession, new Date(msg.timestamp)],
-                ...this.sortedSessions,
-              ];
-            }
-            this.isRequestRunning = false;
-            this.abortController = null;
-          }
-        }
-      };
-
-      await stream();
-    } catch (e) {
-      if (
-        e instanceof Error &&
-        (e.name === "AbortError" ||
-          e.message.includes("aborted") ||
-          e.message.includes("abort"))
-      ) {
-        console.log("Request was canceled at outer level");
-        this.isRequestRunning = false;
-        this.abortController = null;
-        return;
-      }
-      console.log("Unexpected error in sendMessage:", e);
-      this.isRequestRunning = false;
-    }
-  };
-
-  saveMessageToFile = async (
-    message: string,
-    title: string,
-    folderId: number | string,
-  ) => {
-    if (!this.saveToFileFlow) return;
-
-    const tweaks: Tweaks = {};
-
-    this.saveToFileFlow.data.nodes.forEach((n) => {
-      if (n.id.includes("ContentInput")) {
-        tweaks[n.id] = { input_value: message };
-      }
-
-      if (n.id.includes("TitleInput")) {
-        tweaks[n.id] = { input_value: title.replace(".", "") };
-      }
-
-      if (n.id.includes("FolderIDInput")) {
-        tweaks[n.id] = { input_value: String(folderId) };
-      }
-    });
-
-    await FlowsApi.simpleRunFlow(
-      this.saveToFileFlow.id,
-      "",
-      "text",
-      "text",
-      tweaks,
-    );
-  };
-
-  cancelBuild = () => {
-    try {
-      if (this.abortController) {
-        this.abortController.abort();
-        this.isRequestRunning = false;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  selectSession = (session: string) => {
-    if (!this.sessions.has(session)) return;
-
-    this.currentSession = session;
-    this.messages = this.sessions.get(session) || [];
-  };
-
-  startNewSessions = () => {
-    if (this.isRequestRunning) return;
-
-    this.currentSession = getSessionId(this.aiSelectedFolder, this.aiUserId);
+  startNewChat = async () => {
+    this.currentChat = "";
     this.messages = [];
+    this.startIndex = 0;
+    this.totalMessages = 0;
   };
 
-  get isEmptyMessages() {
-    return this.messages.length === 0;
-  }
+  fetchMessages = async (chatId: string) => {
+    this.currentChat = chatId;
 
-  get preparedMessages() {
-    const messages: {
-      title: string;
-      value: string;
-      isActive?: boolean;
-      isDate?: boolean;
-    }[] = [];
+    if (!this.currentChat) return;
 
-    let prevDate: string = "";
+    const { items, total } = await getChatMessages(this.currentChat, 0);
 
-    this.sortedSessions.forEach(([value, date]) => {
-      const currentDate = getChatDate(date);
-      if (prevDate !== currentDate) {
-        prevDate = currentDate;
-
-        if (prevDate === "today") {
-          messages.push({
-            title: "",
-            value: prevDate,
-            isActive: false,
-            isDate: true,
-          });
-        } else if (prevDate === "yesterday") {
-          messages.push({
-            title: "",
-            value: prevDate,
-            isActive: false,
-            isDate: true,
-          });
-        } else if (prevDate) {
-          messages.push({
-            title: prevDate,
-            value: prevDate,
-            isActive: false,
-            isDate: true,
-          });
-        }
-      }
-
-      const splitedValue = value.split("_");
-
-      messages.push({
-        title: splitedValue[1],
-        value,
-        isActive: value === this.currentSession,
-      });
+    runInAction(() => {
+      this.messages = items;
+      this.startIndex = 100;
+      this.totalMessages = total;
     });
+  };
 
-    return messages;
-  }
+  fetchNextMessages = async () => {
+    if (!this.currentChat) return;
+
+    const { items, total } = await getChatMessages(
+      this.currentChat,
+      this.startIndex,
+    );
+
+    runInAction(() => {
+      this.messages = [...this.messages, ...items];
+      this.startIndex += 100;
+      this.totalMessages = total;
+    });
+  };
+
+  // startChat = async () => {};
+
+  // sendMessage = async () => {};
 }
 
 export const MessageStoreContext = React.createContext<MessageStore>(
@@ -543,61 +89,10 @@ export const MessageStoreContext = React.createContext<MessageStore>(
 
 export const MessageStoreContextProvider = ({
   children,
-  aiChatID,
-  aiSelectedFolder,
-  aiUserId,
 }: {
   children: React.ReactNode;
-  aiChatID: string;
-  aiSelectedFolder: string | number;
-  aiUserId: string;
 }) => {
   const store = React.useMemo(() => new MessageStore(), []);
-
-  React.useEffect(() => {
-    store.setFlowId(aiChatID);
-    store.setAiUserId(aiUserId);
-    store.setAiSelectedFolder(aiSelectedFolder);
-
-    store.fetchMessages();
-  }, [store, aiChatID, aiSelectedFolder, aiUserId]);
-
-  React.useEffect(() => {
-    const handleUserMessage = (event: CustomEvent) => {
-      const { file, isSummary } = event.detail;
-
-      if (isSummary) {
-        store.addMessage(`Summarize file \n @${file.id}`, "User", "User");
-      }
-    };
-
-    const handleAiMessage = (event: CustomEvent) => {
-      const { text, sender, sender_name: senderName } = event.detail;
-
-      store.addMessage(text, sender, senderName);
-    };
-
-    window.addEventListener(
-      ChatEvents.ADD_USER_MESSAGE,
-      handleUserMessage as EventListener,
-    );
-
-    window.addEventListener(
-      ChatEvents.ADD_AI_MESSAGE,
-      handleAiMessage as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        ChatEvents.ADD_USER_MESSAGE,
-        handleUserMessage as EventListener,
-      );
-      window.removeEventListener(
-        ChatEvents.ADD_AI_MESSAGE,
-        handleAiMessage as EventListener,
-      );
-    };
-  }, [store]);
 
   return (
     <MessageStoreContext.Provider value={store}>

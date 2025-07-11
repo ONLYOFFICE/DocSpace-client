@@ -27,10 +27,13 @@
 import React from "react";
 import { observer } from "mobx-react";
 
+import { RectangleSkeleton } from "../../../../../skeletons";
+
 import {
   ComboBox,
   ComboBoxDisplayType,
   ComboBoxSize,
+  TOption,
 } from "../../../../combobox";
 
 import { useModelStore } from "../../../store/modelStore";
@@ -38,10 +41,37 @@ import { useModelStore } from "../../../store/modelStore";
 import styles from "../ChatHeader.module.scss";
 
 const SelectModel = () => {
-  const { preparedModels, preparedSelectedModel, setCurrentModel } =
+  const { models, currentModel, isLoading, isRequestRunning, setCurrentModel } =
     useModelStore();
 
-  if (!preparedModels.length) return null;
+  const preparedModels: TOption[] = models.map((model) => ({
+    key: model.modelId,
+    title: model.modelId,
+    label: model.modelId,
+
+    className: styles.dropDownItemTruncate,
+  }));
+
+  const preparedSelectedModel: TOption = {
+    key: currentModel.modelId,
+    title: currentModel.modelId,
+    label: currentModel.modelId,
+  };
+
+  const onSelect = (model: TOption) => {
+    const selectedModel = models.find(
+      (m) => m.modelId === model.key.toString(),
+    );
+    setCurrentModel({
+      providerId: selectedModel!.providerId,
+      modelId: selectedModel!.modelId,
+    });
+  };
+
+  if (isLoading || isRequestRunning)
+    return <RectangleSkeleton width="100%" height="28px" />;
+
+  if (!models.length) return null;
 
   return (
     <ComboBox
@@ -53,13 +83,17 @@ const SelectModel = () => {
       displayType={ComboBoxDisplayType.default}
       size={ComboBoxSize.content}
       showDisabledItems
-      onSelect={setCurrentModel}
+      onSelect={onSelect}
       isDefaultMode
       noBorder
       directionX="right"
       modernView
-      style={{ overflow: "hidden", maxWidth: "fit-content" }}
       scaledOptions
+      dropDownMaxHeight={300}
+      // style={{
+      //   overflow: "hidden",
+      //   display: "flex",
+      // }}
     />
   );
 };

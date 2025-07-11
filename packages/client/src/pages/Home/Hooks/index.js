@@ -31,4 +31,3 @@ export { default as useContacts } from "./useContacts";
 export { default as useSettings } from "./useSettings";
 export { default as usePublic } from "./usePublic";
 export { default as useAccountsHotkeys } from "./useAccountsHotkeys";
-export { default as useFlows } from "./useFlows";

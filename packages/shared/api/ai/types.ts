@@ -50,27 +50,25 @@ export type TAiProvider = {
   modifiedOn: string;
 };
 
-export type TGetAiProviders = TAiProvider[];
-
 export type TUpdateAiProviders = {
-  title?: Pick<TCreateAiProvider, "title">;
-  key?: Pick<TCreateAiProvider, "key">;
-  url?: Pick<TCreateAiProvider, "url">;
+  title?: TCreateAiProvider["title"];
+  key?: TCreateAiProvider["key"];
+  url?: TCreateAiProvider["url"];
 };
 
-export type TDeleteAiProviders = Pick<TAiProvider, "id">[];
+export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
 
 export type TModel = {
-  providerId: Pick<TAiProvider, "id">;
-  providerTitle: Pick<TAiProvider, "title">;
+  providerId: TAiProvider["id"];
+  providerTitle: TAiProvider["title"];
   modelId: string;
 };
 
 export type TModelList = TModel[];
 
 export type TCurrentModel = {
-  providerId: Pick<TAiProvider, "id">;
-  modelId: Pick<TModel, "modelId">;
+  providerId: TAiProvider["id"];
+  modelId: TModel["modelId"];
 };
 
 export type TChat = {

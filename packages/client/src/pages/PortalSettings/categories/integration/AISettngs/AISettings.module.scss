@@ -24,32 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+.addProvider {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-import { TFile } from "@docspace/shared/api/files/types";
+  margin-bottom: 32px;
+}
 
-type UseFlowsProps = {
-  vectorizedFiles: TFile[];
-  wrongFiles: TFile[];
-  removeActiveItem: (file: TFile) => void;
-};
+.listProviders {
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
 
-const useFlows = ({
-  vectorizedFiles,
-  wrongFiles,
-  removeActiveItem,
-}: UseFlowsProps) => {
-  useEffect(() => {
-    vectorizedFiles.forEach((file) => {
-      removeActiveItem(file);
-    });
-  }, [vectorizedFiles]);
+.providerItem {
+  width: 292px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-  useEffect(() => {
-    wrongFiles.forEach((file) => {
-      removeActiveItem(file);
-    });
-  }, [wrongFiles]);
-};
+  border: var(--article-catalog-header-border-bottom);
 
-export default useFlows;
+  box-sizing: border-box;
+
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.providerItemTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

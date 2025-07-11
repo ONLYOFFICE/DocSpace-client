@@ -27,109 +27,67 @@
 import React from "react";
 import classNames from "classnames";
 
-import AIIconReactSvgUrl from "PUBLIC_DIR/images/ai.chat.avatar.react.svg?url";
-
-import { TFile } from "../../../../../../api/files/types";
+import { ContentType, MessageType } from "../../../../../../api/ai/enums";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 
 import { MessageProps } from "../../../../types";
-
-import FilePreview from "../../../file-preview";
+import { useChatStore } from "../../../../store/chatStore";
 
 import styles from "../../ChatMessageBody.module.scss";
-
-import Agent from "./agent";
 import Markdown from "./Markdown";
-import ButtonsBlock from "./ButtonsBlock";
 
-const Message = ({
-  message,
-  displayFileExtension,
-  vectorizedFiles,
-  user,
-  isFullScreen,
-  currentDeviceType,
-  getIcon,
-}: MessageProps) => {
-  const files: TFile[] = message.fileIds?.length
-    ? (message.fileIds
-        ?.map((id) => {
-          const file = vectorizedFiles.find((f) => String(f.id) === String(id));
+const Message = ({ message, idx }: MessageProps) => {
+  const { currentChat } = useChatStore();
+  const isUser = message.messageType === MessageType.UserMessage;
 
-          if (!file) return false;
+  if (!currentChat) return null;
 
-          return file;
-        })
-        .filter(Boolean) as TFile[])
-    : [];
+  if (isUser)
+    return (
+      <div
+        key={`${currentChat.id}-${message.createdOn}-${idx * 2}`}
+        className={classNames(styles.message, styles.userMessage)}
+      >
+        <Avatar
+          size={AvatarSize.min}
+          source={currentChat.createdBy.avatarSmall}
+          role={AvatarRole.user}
+          noClick
+          isNotIcon
+        />
 
-  console.log(message);
+        <div className={classNames(styles.chatMessageContent)}>
+          <div
+            className={classNames(
+              styles.chatMessagePadding,
+              styles.chatMessageBorderRadius,
+              styles.chatMessageUser,
+            )}
+          >
+            {message.contents.map((c) => {
+              if (c.type === ContentType.Text)
+                return <Markdown key={c.text} chatMessage={c.text} />;
+              return null;
+            })}
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <div
+      key={`${currentChat.id}-${message.createdOn}-${idx * 2}`}
       className={classNames(styles.message, {
-        [styles.userMessage]: message.isSend,
-        [styles.isFullScreen]: isFullScreen,
+        [styles.userMessage]: isUser,
       })}
     >
-      <Avatar
-        size={AvatarSize.min}
-        source={!message.isSend ? AIIconReactSvgUrl : user.avatarSmall || ""}
-        role={AvatarRole.user}
-        noClick
-        isNotIcon
-        imgClassName={!message.isSend ? styles.aiAvatar : ""}
-      />
+      {message.contents.map((c) => {
+        if (c.type === ContentType.Text)
+          return <Markdown key={c.text} chatMessage={c.text} />;
 
-      <div className={classNames(styles.chatMessageContent)}>
-        <div
-          className={classNames(
-            styles.chatMessagePadding,
-            styles.chatMessageBorderRadius,
-            {
-              [styles.chatMessageUser]: message.isSend,
-              [styles.chatMessageAI]: !message.isSend,
-              [styles.chatMessageError]: message.category === "error",
-            },
-          )}
-        >
-          {message.content_blocks &&
-          message.content_blocks.length > 0 &&
-          message.content_blocks.some((b) =>
-            b.contents.some((bc) => bc.type === "tool_use"),
-          ) ? (
-            <Agent content={message.content_blocks} />
-          ) : null}
-
-          <Markdown chatMessage={message.message as string} />
-        </div>
-
-        {message.isSend && files && files.length > 0 ? (
-          <FilePreview
-            files={files.map((f) => ({
-              id: f.id,
-              label: f.title.replace(f.fileExst, ""),
-              fileExst: f.fileExst,
-              fileType: f.fileType,
-              parentId: f.folderId,
-              rootFolderType: f.rootFolderType,
-              security: f.security,
-              icon: "",
-            }))}
-            displayFileExtension={displayFileExtension}
-            getIcon={getIcon}
-          />
-        ) : null}
-
-        {!message.isSend ? (
-          <ButtonsBlock
-            message={message.message as string}
-            getIcon={getIcon}
-            currentDeviceType={currentDeviceType}
-          />
-        ) : null}
-      </div>
+        return null;
+      })}
     </div>
   );
 };

@@ -27,90 +27,98 @@
 import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { TModel, TCurrentModel } from "../../../api/ai/types";
-import { getCurrentModel, getModels, setCurrentModel } from "../../../api/ai";
+import { Nullable } from "../../../types";
+import { TChat } from "../../../api/ai/types";
+import { getChat, getChats } from "../../../api/ai";
 
-export default class ModelStore {
-  currentModel: TCurrentModel = {} as TCurrentModel;
+import { TChatStoreProps } from "../types";
 
-  models: TModel[] = [];
+export default class ChatStore {
+  currentChat: Nullable<TChat> = null;
+
+  chats: TChat[] = [];
+
+  totalChats: number = 0;
+
+  startIndex: number = 0;
+
+  roomId: TChatStoreProps["roomId"];
 
   isLoading: boolean = false;
 
   isRequestRunning: boolean = false;
 
-  constructor() {
+  constructor(roomId: TChatStoreProps["roomId"]) {
+    this.roomId = roomId;
+
     makeAutoObservable(this);
   }
 
-  setCurrentModel = async (model: TCurrentModel) => {
+  setCurrentChat(chat: TChat) {
     runInAction(() => {
-      this.isRequestRunning = true;
+      this.currentChat = chat;
     });
+  }
 
-    const currentModel = await setCurrentModel(model);
+  fetchChat = async (id: string) => {
+    const chat = await getChat(id);
 
-    runInAction(() => {
-      this.currentModel = currentModel;
-      this.isRequestRunning = false;
-    });
+    this.setCurrentChat(chat);
   };
 
-  fetchCurrentModel = async () => {
-    runInAction(() => {
-      this.isRequestRunning = true;
-    });
-
-    try {
-      const model = await getCurrentModel();
-
-      runInAction(() => {
-        if (model) this.currentModel = model;
-      });
-    } catch (e) {
-      console.log(e);
-    }
-
-    runInAction(() => {
-      this.isRequestRunning = false;
-    });
-  };
-
-  fetchModels = async () => {
+  fetchChats = async () => {
+    if (this.isRequestRunning) return;
     runInAction(() => {
       this.isLoading = true;
+      this.isRequestRunning = true;
     });
 
-    const models = await getModels();
+    const { items, total } = await getChats(this.roomId);
 
     runInAction(() => {
-      if (models) this.models = models;
+      this.chats = items;
+      this.totalChats = total;
+      this.startIndex = 100;
+      this.isRequestRunning = false;
       this.isLoading = false;
+    });
+  };
+
+  fetchNextChats = async () => {
+    if (this.isRequestRunning) return;
+    runInAction(() => {
+      this.isRequestRunning = true;
+    });
+    const { items, total } = await getChats(this.roomId, this.startIndex);
+
+    runInAction(() => {
+      this.chats = items;
+      this.totalChats = total;
+      this.startIndex += 100;
+      this.isRequestRunning = false;
     });
   };
 }
 
-export const ModelStoreContext = React.createContext<ModelStore>(undefined!);
+export const ChatStoreContext = React.createContext<ChatStore>(undefined!);
 
-export const ModelStoreContextProvider = ({
+export const ChatStoreContextProvider = ({
+  roomId,
   children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new ModelStore(), []);
+}: TChatStoreProps) => {
+  const store = React.useMemo(() => new ChatStore(roomId), [roomId]);
 
   React.useEffect(() => {
-    store.fetchCurrentModel();
-    store.fetchModels();
+    store.fetchChats();
   }, [store]);
 
   return (
-    <ModelStoreContext.Provider value={store}>
+    <ChatStoreContext.Provider value={store}>
       {children}
-    </ModelStoreContext.Provider>
+    </ChatStoreContext.Provider>
   );
 };
 
-export const useModelStore = () => {
-  return React.useContext(ModelStoreContext);
+export const useChatStore = () => {
+  return React.useContext(ChatStoreContext);
 };

@@ -26,45 +26,33 @@
 
 import React from "react";
 
-import { CHAT_ID } from "../../api/flows/flows.constants";
+// import ChatHeader from "./components/chat-header";
+// import ChatMessageBody from "./components/chat-message-body";
+// import ChatInput from "./components/chat-input";
 
-import ChatHeader from "./components/chat-header";
-import ChatBody from "./components/chat-body";
-import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
-
-import { FilesStoreContextProvider } from "./store/filesStore";
 import { MessageStoreContextProvider } from "./store/messageStore";
 import { ModelStoreContextProvider } from "./store/modelStore";
+import { ChatStoreContextProvider } from "./store/chatStore";
 
 import { ChatProps } from "./types";
 
-const Chat = ({
-  currentDeviceType,
-  displayFileExtension,
-  aiChatID = CHAT_ID,
-  aiSelectedFolder,
-  aiUserId,
-  vectorizedFiles,
-  user,
-  isFullScreen,
+import ChatContainer from "./components/chat-container";
+import ChatHeader from "./components/chat-header";
+import ChatMessageBody from "./components/chat-message-body";
 
-  getIcon,
-}: ChatProps) => {
+const Chat = ({ roomId, userAvatar }: ChatProps) => {
   return (
-    <FilesStoreContextProvider>
-      <MessageStoreContextProvider
-        aiChatID={aiChatID}
-        aiSelectedFolder={aiSelectedFolder}
-        aiUserId={aiUserId}
-      >
-        <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
-          <ChatBody
-            isFullScreen={isFullScreen}
-            currentDeviceType={currentDeviceType}
-          >
-            <ChatHeader
-              isFullScreen={isFullScreen}
+    <ChatStoreContextProvider roomId={roomId}>
+      <ModelStoreContextProvider>
+        <MessageStoreContextProvider>
+          <ChatContainer>
+            <ChatHeader />
+            <ChatMessageBody />
+
+            {/* <ChatBody isFullScreen={false} currentDeviceType="desktop">
+              {userAvatar} */}
+            {/* <ChatHeader
+                isFullScreen={isFullScreen}
               currentDeviceType={currentDeviceType}
               isPanel={false}
             />
@@ -81,11 +69,12 @@ const Chat = ({
               displayFileExtension={displayFileExtension}
               getIcon={getIcon}
               vectorizedFiles={vectorizedFiles}
-            />
-          </ChatBody>
-        </ModelStoreContextProvider>
-      </MessageStoreContextProvider>
-    </FilesStoreContextProvider>
+            /> */}
+            {/* </ChatBody> */}
+          </ChatContainer>
+        </MessageStoreContextProvider>
+      </ModelStoreContextProvider>
+    </ChatStoreContextProvider>
   );
 };
 

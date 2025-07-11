@@ -65,9 +65,6 @@ const DropBox = ({
   isContextButtonVisible,
   isPublicRoom,
 
-  chatOpen,
-  withChat,
-  toggleChat,
   isPlusButtonVisible,
 }: TDropBoxProps) => {
   const [dropBoxHeight, setDropBoxHeight] = React.useState(0);
@@ -159,9 +156,6 @@ const DropBox = ({
           showTitle
           isContextButtonVisible={isContextButtonVisible}
           isPublicRoom={isPublicRoom}
-          withChat={withChat}
-          chatOpen={chatOpen}
-          toggleChat={toggleChat}
           isPlusButtonVisible={isPlusButtonVisible}
         />
 

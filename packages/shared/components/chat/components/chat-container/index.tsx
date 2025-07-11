@@ -24,29 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { observer } from "mobx-react";
+import React from "react";
 
-import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg";
+import styles from "./ChatContainer.module.scss";
 
-import { Text } from "../../../../text";
+const ChatContainer = ({ children }: { children: React.ReactNode }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
-import { useMessageStore } from "../../../store/messageStore";
-
-import styles from "../ChatHeader.module.scss";
-
-const CreateChat = () => {
-  const { messages, startNewChat } = useMessageStore();
-
-  if (messages.length === 0) return null;
+  React.useEffect(() => {
+    const infoBody = document.getElementById("info-panel-body");
+    if (infoBody && containerRef.current) {
+      containerRef.current.style.height = `${infoBody.offsetHeight - 24}px`;
+    }
+  }, []);
 
   return (
-    <div className={styles.createChat} onClick={startNewChat}>
-      <PlusReactSvgUrl />
-      <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
-        Create new chat
-      </Text>
+    <div ref={containerRef} className={styles.chatContainer}>
+      {children}
     </div>
   );
 };
 
-export default observer(CreateChat);
+export default ChatContainer;

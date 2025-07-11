@@ -31,7 +31,7 @@
   width: 100%;
   height: 64px;
 
-  padding: 16px 20px;
+  padding: 16px 0;
 
   box-sizing: border-box;
 
@@ -39,24 +39,6 @@
   align-items: center;
 
   gap: 16px;
-
-  &[data-panel="true"] {
-    padding-bottom: 0px;
-    height: 48px;
-  }
-
-  @include tablet-and-below {
-    padding: 16px;
-  }
-
-  .fullScreenContainer {
-    width: fit-content;
-
-    display: flex;
-    align-items: center;
-
-    gap: 16px;
-  }
 
   .selectChat {
     width: 32px;

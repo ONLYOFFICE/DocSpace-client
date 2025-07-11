@@ -92,8 +92,6 @@ import {
   removeSeparator,
 } from "SRC_DIR/helpers/filesUtils";
 
-import { FILE_EXSTS } from "./FlowStore";
-
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
 
@@ -271,7 +269,6 @@ class FilesStore {
     currentTariffStatusStore,
     settingsStore,
     indexingStore,
-    flowStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -291,7 +288,6 @@ class FilesStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
-    this.flowStore = flowStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -1200,29 +1196,6 @@ class FilesStore {
 
     this.files = files;
 
-    if (this.selectedFolderStore.isAIRoom) {
-      const filesId = files
-        .map((f) => {
-          if (this.flowStore.localCheckVectorizeDocument(f)) return false;
-
-          return f.id;
-        })
-        .filter(Boolean);
-
-      if (filesId.length > 0) {
-        if (filesId.length > 1) {
-          this.flowStore.checkVectorizedDocuments(
-            this.selectedFolderStore.id,
-            files.filter((f) => filesId.some((id) => id === f.id)),
-          );
-        } else {
-          this.flowStore.checkVectorizeDocument(this.files[0]);
-        }
-
-        this.setActiveFiles(filesId);
-      }
-    }
-
     if (roomPartsToSub.length > 0) {
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: roomPartsToSub,
@@ -1293,12 +1266,6 @@ class FilesStore {
     if (index !== -1) {
       this.files[index] = file;
       this.createThumbnail(file);
-
-      // if (this.selectedFolderStore.isAIRoom) {
-      //   if (this.flowStore.localCheckVectorizeDocument(file)) return;
-
-      //   this.flowStore.checkVectorizeDocument(file);
-      // }
     }
   };
 
@@ -2300,7 +2267,6 @@ class FilesStore {
         item.fileExst === ".docxf" || item.fileExst === ".oform"; // TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
 
-      const isAIRoom = this.selectedFolderStore.isAIRoom;
       const extsCustomFilter =
         this.filesSettingsStore?.extsWebCustomFilterEditing || [];
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
@@ -2363,14 +2329,6 @@ class FilesStore {
         "separate-stop-filling",
         "stop-filling",
       ];
-
-      if (!isAIRoom || !FILE_EXSTS.includes(item.fileExst.replace(".", ""))) {
-        fileOptions = removeOptions(fileOptions, [
-          "summarize",
-          "ask_ai",
-          "separator4",
-        ]);
-      }
 
       if (optionsToRemove.length) {
         fileOptions = removeOptions(fileOptions, optionsToRemove);

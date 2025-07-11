@@ -23,60 +23,21 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
 
-import { DeviceType } from "../../../enums";
-import { TFile } from "../../../api/files/types";
-import { TUser } from "../../../api/people/types";
+import { TMessage } from "../../../api/ai/types";
 
-import { TSelectorItem } from "../../selector";
-
-import { ChatMessageType } from "./chat";
-
-export type TGetIcon = (size: number, fileExst: string) => string;
-
-type GeneralTypes = {
-  isFullScreen: boolean;
-  currentDeviceType: DeviceType;
+export type TChatStoreProps = {
+  roomId: string | number;
+  children: React.ReactNode;
 };
 
-export type SelectChatProps = GeneralTypes;
-
-export type ChatHeaderProps = GeneralTypes & {
-  isPanel: boolean;
+export type ChatProps = {
+  roomId: TChatStoreProps["roomId"];
+  userAvatar: string;
 };
 
-export type ChatBodyProps = GeneralTypes;
-
-export type FilePreviewProps = {
-  files: TSelectorItem[];
-  displayFileExtension: boolean;
-
-  withRemoveFile?: boolean;
-
-  getIcon: TGetIcon;
+export type MessageProps = {
+  message: TMessage;
+  idx: number;
 };
-
-export type MessageProps = Pick<
-  FilePreviewProps,
-  "displayFileExtension" | "getIcon"
-> & {
-  message: ChatMessageType;
-
-  vectorizedFiles: TFile[];
-  user: TUser;
-
-  currentDeviceType: DeviceType;
-
-  isFullScreen: boolean;
-};
-
-export type ChatProps = GeneralTypes &
-  Pick<FilePreviewProps, "displayFileExtension" | "getIcon"> & {
-    aiChatID: string;
-    aiSelectedFolder: string | number;
-    aiUserId: string;
-
-    vectorizedFiles: TFile[];
-
-    user: TUser;
-  };

@@ -135,7 +135,6 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
-import { ChatEvents } from "@docspace/shared/components/chat/enums";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -212,7 +211,6 @@ class ContextOptionsStore {
     indexingStore,
     clientLoadingStore,
     guidanceStore,
-    flowStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -235,7 +233,6 @@ class ContextOptionsStore {
     this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
     this.guidanceStore = guidanceStore;
-    this.flowStore = flowStore;
   }
 
   onOpenFolder = async (item, t) => {
@@ -1507,29 +1504,6 @@ class ContextOptionsStore {
         openTab();
       },
     };
-  };
-
-  summarizeToChat = async (item) => {
-    this.filesStore.setActiveFiles([item]);
-
-    try {
-      await this.flowStore.summarizeToChat(item);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.filesStore.removeActiveItem(item);
-    }
-  };
-
-  askAI = async (file) => {
-    if (!this.flowStore.aiChatIsVisible)
-      this.flowStore.setAiChatIsVisible(true);
-
-    // timeout need for open chat and start handle this event
-    setTimeout(() => {
-      const event = new CustomEvent(ChatEvents.ADD_FILE, { detail: file });
-      window.dispatchEvent(event);
-    }, 0);
   };
 
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {

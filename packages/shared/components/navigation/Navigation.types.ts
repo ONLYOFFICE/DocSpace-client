@@ -134,17 +134,7 @@ export type TRowParam = {
 
 export type TRowData = [TNavigationItem[], TOnNavigationItemClick, TRowParam];
 
-export type TChatProps = {
-  chatOpen?: boolean;
-  toggleChat?: (value: boolean) => void;
-};
-
-type TChat = {
-  withChat?: boolean;
-} & TChatProps;
-
-export type TControlButtonProps = TChat &
-  Omit<TToggleInfoPanelButtonProps, "id"> &
+export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
   Omit<TPlusButtonProps, "getData" | "className"> &
   Omit<TContextButtonProps, "getData" | "className" | "id"> & {
     /** Controls visibility of PlusButton */

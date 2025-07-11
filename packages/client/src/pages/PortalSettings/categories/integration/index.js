@@ -37,7 +37,7 @@ import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Secti
 import SSO from "./SingleSignOn";
 import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
-
+import AISettngs from "./AISettngs";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
@@ -81,6 +81,11 @@ const IntegrationWrapper = (props) => {
       id: "smtp-settings",
       name: t("SMTPSettings"),
       content: <SMTPSettings />,
+    },
+    {
+      id: "ai-settings",
+      name: "AI settings",
+      content: <AISettngs />,
     },
   ];
 

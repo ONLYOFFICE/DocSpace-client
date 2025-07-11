@@ -448,10 +448,7 @@ test("DifferentDependencyVersionsTest: Verify that all workspaces use same depen
 
   if (mismatchedDeps.length > 0) {
     const report = mismatchedDeps.join("\n\n");
-    console.error("\nDependency version mismatches found:\n\n" + report);
-    throw new Error(`Found ${mismatchedDeps.length} dependencies with version mismatch.`);
-  } else {
-    console.log("✅ All dependency versions match across all workspaces.");
+    throw new Error(`Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`);
   }
 });
 

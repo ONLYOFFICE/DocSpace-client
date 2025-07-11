@@ -117,6 +117,10 @@ const InvitePanel = ({
     setInviteItems([]);
   };
 
+  const onBackClick = () => {
+    if (!hideSelector && addUsersPanelVisible) setAddUsersPanelVisible(false);
+  };
+
   const onCheckHeight = () => {
     setScrollAllPanelContent(!isDesktop());
     setIsMobileView(isMobile());
@@ -519,6 +523,7 @@ const InvitePanel = ({
     <ModalDialog
       visible={isVisible}
       onClose={onClose}
+      onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
       containerVisible={!hideSelector ? addUsersPanelVisible : null}
       isLoading={invitePanelIsLoding}

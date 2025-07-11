@@ -51,6 +51,7 @@ const Modal = ({
   autoMaxHeight,
   autoMaxWidth,
   onClose,
+  onBackClick,
   isLoading,
   header,
   body,
@@ -238,6 +239,7 @@ const Modal = ({
                       className={headerClassName}
                       header={headerComponent}
                       onCloseClick={onClose}
+                      onBackClick={onBackClick}
                       {...rest}
                     />
                   ) : null}

@@ -411,3 +411,47 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
 
   expect(unusedDependencies.length, message).toBe(0);
 });
+
+test("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
+  // List of packages to be ignored
+  const ignoredPackages = new Set([]);
+
+  const dependencyMap = {};
+
+  // Create a Map of dependencies and their versions in all workspaces
+  for (const { workspace, deps } of workspaceDeps) {
+    deps.forEach(({ name, version }) => {
+      if (ignoredPackages.has(name)) return;
+
+      if (!dependencyMap[name]) {
+        dependencyMap[name] = {};
+      }
+
+      dependencyMap[name][workspace] = version;
+    });
+  }
+
+  const mismatchedDeps = [];
+
+  // Check if each dependency has same version in all workspaces
+  for (const [depName, versionsByWorkspace] of Object.entries(dependencyMap)) {
+    const uniqueVersions = new Set(Object.values(versionsByWorkspace));
+
+    if (uniqueVersions.size > 1) {
+      const versionList = Object.entries(versionsByWorkspace)
+        .map(([ws, ver]) => `  - ${ws}: ${ver}`)
+        .join("\n");
+
+      mismatchedDeps.push(`❌ ${depName} has different versions:\n${versionList}`);
+    }
+  }
+
+  if (mismatchedDeps.length > 0) {
+    const report = mismatchedDeps.join("\n\n");
+    console.error("\nDependency version mismatches found:\n\n" + report);
+    throw new Error(`Found ${mismatchedDeps.length} dependencies with version mismatch.`);
+  } else {
+    console.log("✅ All dependency versions match across all workspaces.");
+  }
+});
+

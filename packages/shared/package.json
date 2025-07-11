@@ -158,7 +158,7 @@
     "react-values": "0.3.3",
     "remark-gfm": "4.0.1",
     "sass": "1.79.5",
-    "sass-loader": "^16.0.5",
+    "sass-loader": "16.0.5",
     "serve": "14.2.3",
     "storybook": "^8.6.14",
     "storybook-dark-mode": "^4.0.2",

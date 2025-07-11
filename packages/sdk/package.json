@@ -24,7 +24,7 @@
     "@docspace/shared": "workspace:*",
     "classnames": "2.5.1",
     "date-and-time": "3.6.0",
-    "framer-motion": "12.0.3",
+    "framer-motion": "^12.0.3",
     "i18next": "23.7.19",
     "lodash": "4.17.21",
     "mobx": "6.13.5",

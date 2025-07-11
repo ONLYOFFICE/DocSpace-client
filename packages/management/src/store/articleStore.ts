@@ -29,6 +29,7 @@ import { isTablet } from "react-device-detect";
 
 export class ArticleStore {
   showText = !isTablet;
+
   articleOpen = false;
 
   constructor() {
@@ -43,4 +44,3 @@ export class ArticleStore {
     this.articleOpen = articleOpen;
   };
 }
-

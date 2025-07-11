@@ -29,8 +29,11 @@
 import { PublicRoomError } from "@docspace/shared/pages/PublicRoom";
 
 import ClientOnly from "@/components/ClientOnly";
+import { logger } from "../../../../../../logger.mjs";
 
 export default async function InvalidLinkPage() {
+  logger.info("Public-room error invalid-link page");
+
   return (
     <ClientOnly>
       <PublicRoomError isInvalid />

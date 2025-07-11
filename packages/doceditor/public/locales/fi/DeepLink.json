@@ -3,5 +3,7 @@
   "OpenInApp": "Avaa sovelluksessa",
   "OpeningDocument": "Avataan asiakirjaa",
   "RememberChoice": "Muista valinta seuraavan kerran asiakirjoja avatessa",
-  "StayInBrowser": "Pysy selaimessa"
+  "StayInBrowser": "Pysy selaimessa",
+  "DeepLinkOnlyAppText": "Voit avata dokumentin vain mobiilisovelluksessa.",
+  "DownloadApp": "Lataa sovellus"
 }

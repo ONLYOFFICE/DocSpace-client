@@ -2,12 +2,12 @@
   "key_path": "YouHaveUnsavedChanges",
   "content": "You have unsaved changes",
   "content_en_sha1_hash": "5ea3902f149163da1cf57472568ec3a89d52e790",
-  "created_at": "2025-05-26T07:15:49.708Z",
-  "updated_at": "2025-06-02T10:20:51.176Z",
+  "created_at": "2025-05-19T21:30:53.245Z",
+  "updated_at": "2025-06-30T12:20:31.272Z",
   "comment": {
-    "text": "This translation key is used to display a reminder message when changes are unsaved. It will appear as a pop-up or notification in various UI elements, such as save and cancel buttons on portal settings pages. The key is used to provide context for users who attempt to leave the page without saving their changes.",
+    "text": "This translation key is used to display a reminder message when unsaved changes are made to a form or settings, prompting the user to save their work before leaving the page. It appears in various UI elements such as save buttons and dialogs, alerting users of potential data loss. The translation should convey a clear warning without being too intrusive.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:01:45.355Z"
+    "updated_at": "2025-05-20T09:44:05.387Z"
   },
   "usage": [
     {
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 314,
+      "line_number": 321,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
@@ -84,13 +84,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 231,
+      "line_number": 238,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 286,
+      "line_number": 292,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}",
       "module": "/packages/client"
     },
@@ -132,7 +132,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 437,
+      "line_number": 431,
       "context": "cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonDisabled={isEqualLogo}\n disableRestoreToDefault={!enableRestoreButton}\n isSaving={isSaving}\n additionalClassSaveButton=\"white-label-save\"\n additionalClassCancelButton=\"white-label-cancel\"",
       "module": "/packages/shared"
     }
@@ -147,13 +147,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"لقد قمت بعدم حفظ التغييرات\" is a literal and somewhat awkward translation of 'You have unsaved changes'. It implies the user *performed* the action of not saving, which is not the intended meaning. A more natural translation would focus on the fact that changes exist and haven't been saved.",
+          "suggestion": "لديك تغييرات لم تحفظ"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'dəyişiklikləriniz' is missing a hyphen. It should be 'dəyişikliklərinizdir'.",
+          "suggestion": "Yadda saxlanmayan dəyişikliklərinizdir"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -195,13 +207,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Vous avec des modifications non-sauvegardées' contains a grammatical error. The verb 'avoir' (to have) is incorrectly conjugated as 'avec'.",
+          "suggestion": "Vous avez des modifications non-sauvegardées"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Դուք չպահված փոփոխություններ ունեք' is a literal translation but might sound unnatural in Armenian. While technically correct, a more natural phrasing could be used.",
+          "suggestion": "Consider using a phrasing like 'Ձեր կատարած փոփոխությունները չենպահպանվել' (Your changes haven't been saved) or 'Միչնչպահպանված փոփոխություններ կա' (There are unsaved changes)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -213,7 +237,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"未保存変更はあります。\" is technically correct but sounds somewhat formal and indirect for a UI message like 'You have unsaved changes.' A more natural and concise phrasing would be preferable.",
+          "suggestion": "変更が保存されていません。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -261,7 +291,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nu ați salvat modificările efectuate de dvs\" is overly formal and verbose for a user interface message like 'You have unsaved changes'. The phrase 'efectuate de dvs' (performed by you) is unnecessary and makes the message sound awkward.",
+          "suggestion": "Nu ai salvat modificările."
+        },
+        {
+          "type": "formatting",
+          "description": "The translated text uses a formal 'dumneavoastră' (dumneavoastră/dumneavoastră) form. For a UI message, the more common and less formal 'tu' form is preferred.",
+          "suggestion": "Use 'ai' instead of 'ați' to match the more common informal 'tu' form."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -273,7 +314,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත' is a literal translation that doesn't quite capture the natural flow of the English phrase 'You have unsaved changes'. It sounds a bit formal and less user-friendly.",
+          "suggestion": "A more natural translation might be 'ඔබේ වෙනස්කම් සුරක්ෂිත කර නැති' or 'ඔබ වෙනස්කම් සුරක්ෂිත කර නොමැත'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -291,13 +338,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Имате несачуване промене' is not a correct translation of 'You have unsaved changes'. The word 'несачуване' is not a standard Serbian word and doesn't convey the meaning of 'unsaved'.",
+          "suggestion": "Имате несaчуване измeне / Постоје несaчуване измeне / Имате неизвршене промeне"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'несачуване' might be attempting to convey 'unsaved', it's not a recognized word. The suggested corrections provide alternatives with accurate spelling.",
+          "suggestion": "Refer to the 'suggestion' in the incorrect_translation issue."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Imate nesačuvane promene' is not the most natural or accurate translation of 'You have unsaved changes.' While understandable, it's a somewhat literal and clunky rendering.",
+          "suggestion": "A more natural and idiomatic translation would be 'Imate nečuvene izmjene' or 'Imate ne sačuvane promjene'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -315,7 +379,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Bạn có các thay đổi chưa được lưu' is a literal translation and sounds somewhat unnatural in Vietnamese. A more natural phrasing would be 'Bạn có thay đổi chưa lưu' or 'Có thay đổi chưa lưu'.",
+          "suggestion": "Bạn có thay đổi chưa lưu"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

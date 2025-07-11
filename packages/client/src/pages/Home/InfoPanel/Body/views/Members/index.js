@@ -92,17 +92,17 @@ const Members = ({
   membersIsLoading,
   searchValue,
   isMembersPanelUpdating,
-  setRoomShared,
-  currentId,
   setPublicRoomKey,
   setAccessSettingsIsVisible,
   templateAvailable,
+  isRootFolder,
+  isCustomRoom,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
   const scrollContext = use(ScrollbarContext);
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     updateInfoPanelMembers(t);
@@ -154,14 +154,13 @@ const Members = ({
       setEditLinkPanelIsVisible(true);
     } else {
       getPrimaryLink(infoPanelSelection.id).then((link) => {
-        setExternalLink(link);
+        setExternalLink(link, searchParams, setSearchParams, isCustomRoom);
         copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
         const filterObj = FilesFilter.getFilter(window.location);
 
-        if (isPublicRoomType && !filterObj.key) {
-          setRoomShared(currentId, true);
+        if (isPublicRoomType && !filterObj.key && !isRootFolder) {
           setPublicRoomKey(link.sharedTo.requestToken);
           setSearchParams((prev) => {
             prev.set("key", link.sharedTo.requestToken);
@@ -395,8 +394,9 @@ export default inject(
       isMembersPanelUpdating,
       templateAvailableToEveryone,
     } = infoPanelStore;
-    const { membersFilter, setRoomShared } = filesStore;
+    const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
+    const { isRootFolder } = selectedFolderStore;
 
     const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
       publicRoomStore;
@@ -407,8 +407,6 @@ export default inject(
       setEditLinkPanelIsVisible,
       setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
     } = dialogsStore;
-
-    const { id } = selectedFolderStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
@@ -446,11 +444,11 @@ export default inject(
       membersIsLoading,
       searchValue,
       isMembersPanelUpdating,
-      setRoomShared,
-      currentId: id,
       setPublicRoomKey,
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
+      isRootFolder,
+      isCustomRoom,
     };
   },
 )(

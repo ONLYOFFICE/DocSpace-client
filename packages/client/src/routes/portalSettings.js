@@ -92,7 +92,7 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "customization/branding/company-info-settings",
+      path: "customization/branding/company-info",
       async lazy() {
         const { CompanyInfoSettings } = await componentLoader(
           () =>
@@ -180,6 +180,19 @@ const PortalSettingsRoutes = {
         );
 
         return { Component: ConfigureDeepLink };
+      },
+    },
+    {
+      path: "customization/general/ad-management",
+      async lazy() {
+        const { AdManagement } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ad-management"
+            ),
+        );
+
+        return { Component: AdManagement };
       },
     },
     {

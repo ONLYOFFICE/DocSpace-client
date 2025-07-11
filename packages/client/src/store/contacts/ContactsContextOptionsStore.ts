@@ -271,13 +271,15 @@ class ContactsConextOptionsStore {
           };
 
         case "invite-again":
-          return {
-            id: "option_invite-again",
-            key: option,
-            icon: InviteAgainReactSvgUrl,
-            label: t("LblInviteAgain"),
-            onClick: () => onInviteAgainClick(item, t),
-          };
+          return !this.settingsStore.allowInvitingMembers
+            ? null
+            : {
+                id: "option_invite-again",
+                key: option,
+                icon: InviteAgainReactSvgUrl,
+                label: t("LblInviteAgain"),
+                onClick: () => onInviteAgainClick(item, t),
+              };
         case "reset-auth":
           return {
             id: "option_reset-auth",
@@ -731,10 +733,15 @@ class ContactsConextOptionsStore {
       },
     ];
 
-    !this.settingsStore.allowInvitingMembers &&
+    // Delete Invite
+    if (!this.settingsStore.allowInvitingMembers)
       accountsFullOptions.splice(0, 1);
 
-    return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
+    return isRoomAdmin
+      ? !this.settingsStore.allowInvitingMembers
+        ? []
+        : accountsUserOptions
+      : accountsFullOptions;
   };
 
   inviteUser = (userType: EmployeeType) => {

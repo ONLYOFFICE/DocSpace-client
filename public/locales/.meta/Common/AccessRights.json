@@ -3,7 +3,7 @@
   "content": "Access rights",
   "content_en_sha1_hash": "5939fde4330b1c7029b735347e474f73f8bfba71",
   "created_at": "2025-05-19T21:30:42.849Z",
-  "updated_at": "2025-06-08T12:02:32.724Z",
+  "updated_at": "2025-07-02T07:49:19.787Z",
   "comment": {
     "text": "The \"AccessRights\" translation key is used to display the English content \"Access rights\". It is typically displayed in UI elements such as settings or configuration pages where user access permissions are being managed.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 192,
+      "line_number": 195,
       "context": "};\n \n const mapKeys = (tKey) => {\n switch (tKey) {\n case \"AccessRights\":\n return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 233,
+      "line_number": 240,
       "context": "{\n id: \"portal-settings_catalog-access-rights\",\n key: \"1-1\",\n icon: \"\",\n link: \"access-rights\",\n tKey: \"AccessRights\",\n isCategory: true,\n children: [\n {\n key: \"1-1-0\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Giriş hüququ verin' is not the accurate translation of 'Access rights'. 'Giriş hüququ' translates to 'entry rights' or 'access rights' (in a literal sense), but 'verin' means 'give'.  The translation implies 'give access rights', which isn't the intended meaning. The phrase 'Access rights' describes the rights themselves, not the act of granting them.",
-          "suggestion": "İstifadə hüquqları"
+          "description": "The translation \"Giriş hüququ verin\" is not the standard translation of \"Access rights\". \"Verin\" means \"give\" and doesn't accurately convey the meaning. It's giving access rights, not the rights themselves.",
+          "suggestion": "The correct translation would be something like \"İstifadə hüquqları\" or \"Daxilolma hüquqları\"."
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Մատչման իրավունքներ\" is a possible translation, \"Access rights\" more accurately translates to \"մուտքի իրավունքներ\" or \"մուտքի իրավունք\". \"Մատչման\" implies matching or correspondence, which isn't the primary meaning of 'access'.",
+          "suggestion": "Մուտքի իրավունքներ or Մուտքի իրավունք"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '액세스 권리' is a literal translation of 'Access rights,' it's not the most natural or commonly used phrasing in Korean. A more common and natural translation would be '접근 권한'.",
+          "suggestion": "접근 권한"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -168,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ප්‍රවේශ අයිති\" is not the most natural or accurate translation of \"Access rights.\" While \"ප්‍රවේශ\" (pravesha) correctly translates to 'access,' \"අයිති\" (aithi) means 'ownership' or 'belonging,' which doesn't fully convey the concept of rights.",
-          "suggestion": "A more accurate translation would be \"ප්‍රවේශ හිමිකම්\" (pravesha himikama), which means 'access rights' or 'right of access'."
+          "description": "The Sinhala translation \"ප්‍රවේශ අයිති\" is not the most natural or accurate translation of \"Access rights.\" While it's understandable, it's a more literal translation and lacks the nuance of a more idiomatic rendering.",
+          "suggestion": "Consider alternatives like \"ප්‍රවේශ හිමිකම්\" (praveśa himikama) which is a more common and natural way to express \"access rights\" in Sinhala. Alternatively, \"ප්‍රවේශනයට හිමිකම්\" (praveśanayaṭa himikama) could also be appropriate."
         }
       ],
       "approved_at": null
@@ -192,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Приступи правима' does not accurately translate 'Access rights'. It seems to be a combination of words that don't form a correct meaning. 'Приступи' means 'approaches' or 'accesses' and 'правима' is the instrumental plural of 'право' (right).",
-          "suggestion": "The correct translation should be something like 'Права приступа' or 'Права коришћења' depending on the intended nuance. 'Права приступа' (Rights of access) is a more direct translation."
+          "description": "The Serbian (Cyrillic) translation 'Приступи правима' does not accurately translate 'Access rights'. 'Приступи' is a verb meaning 'to approach' or 'to start', which is not relevant to the meaning of 'Access rights'.",
+          "suggestion": "The correct translation should be something like 'Права приступа' or 'Права коришћења', which literally translates to 'Access rights' or 'Usage rights'."
         }
       ],
       "approved_at": null
@@ -204,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'Pristupi pravima' is not the standard or most accurate translation of 'Access rights'. While 'Pristupi' can mean 'accesses' or 'approaches', it's not a direct equivalent to 'Access rights'.",
+          "description": "The Serbian translation \"Pristupi pravima\" is not a direct or accurate translation of \"Access rights.\" \"Pristupi\" means \"approaches\" or \"accesses\" and \"pravima\" is the dative plural of \"pravo\" (right). A more accurate translation would be something like \"Prava pristupa\" or \"Prava pristupa korisniku\" (Access rights or User access rights).",
           "suggestion": "Prava pristupa"
         }
       ],

@@ -35,7 +35,7 @@ export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
           </Link>
         </Text>
       </ContentWrapper>
-      {null}
+      <div />
     </StyledRowContent>
   );
 };

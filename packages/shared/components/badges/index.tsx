@@ -42,12 +42,7 @@ import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
-import {
-  classNames,
-  getFillingStatusLabel,
-  getFillingStatusTitle,
-} from "@docspace/shared/utils";
+import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
@@ -57,7 +52,15 @@ import { Badge } from "../badge";
 import { RoomsType, ShareAccessRights } from "../../enums";
 import { globalColors } from "../../themes";
 
-import { IconSizeType, isDesktop, isTablet, size } from "../../utils";
+import {
+  classNames,
+  getFillingStatusLabel,
+  getFillingStatusTitle,
+  IconSizeType,
+  isDesktop,
+  isTablet,
+  size,
+} from "../../utils";
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";

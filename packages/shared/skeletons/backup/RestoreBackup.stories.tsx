@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import RestoreBackupLoader from "./RestoreBackup";
 import type { BackupLoaderProps } from "./Backup.types";
 
@@ -38,7 +38,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<BackupLoaderProps> = (args) => (
+const Template: StoryFn<BackupLoaderProps> = (args) => (
   <RestoreBackupLoader {...args} />
 );
 

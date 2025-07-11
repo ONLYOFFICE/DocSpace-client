@@ -156,7 +156,7 @@
     "react-docgen-typescript-plugin": "1.0.8",
     "react-dom": "19.1.0",
     "react-values": "0.3.3",
-    "remark-gfm": "^4.0.1",
+    "remark-gfm": "4.0.1",
     "sass": "1.79.5",
     "sass-loader": "^16.0.5",
     "serve": "14.2.3",

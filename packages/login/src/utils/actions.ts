@@ -377,6 +377,31 @@ export async function getUserFromConfirm(
   return user.response as TUser;
 }
 
+export async function getUserFromConfirmByEmail(
+  email: string,
+  confirmKey: string | null = null,
+) {
+  const [getUserFromConfirm] = createRequest(
+    [`/people/email?email=${email}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? selfHandler(null, headers())
+    : await fetch(getUserFromConfirm);
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+
+  if (user.response && user.response.displayName) {
+    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
+  }
+
+  return user.response as TUser;
+}
+
 export async function getMachineName(confirmKey: string | null = null) {
   const [getMachineName] = createRequest(
     [`/settings/machine`],

@@ -31,7 +31,7 @@ import { getStringFromSearchParams, encodeParams } from "@/utils";
 import {
   getSettings,
   getUserFromConfirm,
-  getUserFromConfirmByEmail,
+  getUserByEmail,
 } from "@/utils/actions";
 
 import TfaAuthForm from "./page.client";
@@ -50,7 +50,7 @@ async function Page({ searchParams }: TfaAuthProps) {
     uid
       ? getUserFromConfirm(uid, confirmKey)
       : email
-        ? getUserFromConfirmByEmail(email, confirmKey)
+        ? getUserByEmail(email, confirmKey)
         : undefined,
   ]);
 

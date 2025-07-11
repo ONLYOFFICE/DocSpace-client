@@ -39,6 +39,7 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
   getInvitationSettings,
+  getUserByEmail,
 } from "@/utils/actions";
 import CreateUserForm from "./page.client";
 
@@ -53,6 +54,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
 
   const type = searchParams.type;
   const uid = searchParams.uid;
+  const email = searchParams.email;
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = headers();
@@ -66,7 +68,11 @@ async function Page({ searchParams, params }: LinkInviteProps) {
     passwordSettings,
     invitationSettings,
   ] = await Promise.all([
-    getUserFromConfirm(uid, confirmKey),
+    uid
+      ? getUserFromConfirm(uid, confirmKey)
+      : email
+        ? getUserByEmail(email, confirmKey)
+        : undefined,
     getSettings(),
     getThirdPartyProviders(true),
     getCapabilities(),

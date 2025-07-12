@@ -37,21 +37,19 @@ import { useChatStore } from "../../../../store/chatStore";
 import styles from "../../ChatMessageBody.module.scss";
 import Markdown from "./Markdown";
 
-const Message = ({ message, idx }: MessageProps) => {
+const Message = ({ message, idx, userAvatar }: MessageProps) => {
   const { currentChat } = useChatStore();
   const isUser = message.messageType === MessageType.UserMessage;
-
-  if (!currentChat) return null;
 
   if (isUser)
     return (
       <div
-        key={`${currentChat.id}-${message.createdOn}-${idx * 2}`}
+        key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}
         className={classNames(styles.message, styles.userMessage)}
       >
         <Avatar
           size={AvatarSize.min}
-          source={currentChat.createdBy.avatarSmall}
+          source={currentChat?.createdBy.avatarSmall ?? userAvatar}
           role={AvatarRole.user}
           noClick
           isNotIcon
@@ -76,12 +74,7 @@ const Message = ({ message, idx }: MessageProps) => {
     );
 
   return (
-    <div
-      key={`${currentChat.id}-${message.createdOn}-${idx * 2}`}
-      className={classNames(styles.message, {
-        [styles.userMessage]: isUser,
-      })}
-    >
+    <div key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}>
       {message.contents.map((c) => {
         if (c.type === ContentType.Text)
           return <Markdown key={c.text} chatMessage={c.text} />;

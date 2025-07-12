@@ -32,12 +32,15 @@ export type TChatStoreProps = {
   children: React.ReactNode;
 };
 
-export type ChatProps = {
-  roomId: TChatStoreProps["roomId"];
-  userAvatar: string;
-};
-
 export type MessageProps = {
   message: TMessage;
   idx: number;
+  userAvatar: string;
+};
+
+export type MessageBodyProps = Pick<MessageProps, "userAvatar">;
+
+export type ChatProps = {
+  roomId: TChatStoreProps["roomId"];
+  userAvatar: MessageBodyProps["userAvatar"];
 };

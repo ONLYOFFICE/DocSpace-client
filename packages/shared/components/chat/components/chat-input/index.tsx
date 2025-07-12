@@ -24,110 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo } from "react";
+import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import SelectReactSvgUrl from "PUBLIC_DIR/images/select.react.svg?url";
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 
 import { Textarea } from "../../../textarea";
 import { IconButton } from "../../../icon-button";
-import { DropDown } from "../../../drop-down";
-import { DropDownItem } from "../../../drop-down-item";
-import { Text } from "../../../text";
-import { TSelectorItem } from "../../../selector";
 
-import { useFilesStore } from "../../store/filesStore";
 import { useMessageStore } from "../../store/messageStore";
-
-import FilePreview from "../file-preview";
-
-import FilesSelector from "./components/FileSelector";
+import { useChatStore } from "../../store/chatStore";
 
 import styles from "./ChatInput.module.scss";
-import { ChatInputProps } from "./ChatInput.types";
 
-const ChatInput = ({
-  currentDeviceType,
-  displayFileExtension,
-  vectorizedFiles,
-
-  getIcon,
-}: ChatInputProps) => {
+const ChatInput = () => {
   const { t } = useTranslation(["Common"]);
 
-  const {
-    sendMessage,
-    cancelBuild,
-    isInit,
-    isRequestRunning,
-    isEmptyMessages,
-    currentSession,
-  } = useMessageStore();
-  const { files, wrapperHeight, clearFiles, addFile } = useFilesStore();
+  const { startChat, stopMessage, isRequestRunning, currentChatId, messages } =
+    useMessageStore();
+  const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
-  const [fileValue, setFileValue] = React.useState("");
-  const [showSelector, setShowSelector] = React.useState(false);
-  const [showDropDown, setShowDropDown] = React.useState(false);
-  const [startPosition, setStartPosition] = React.useState(-1);
 
-  const prevSession = React.useRef(currentSession);
+  const prevSession = React.useRef(currentChatId);
   const inputRef = React.useRef<HTMLDivElement>(null);
 
-  const isSendDisabled = !isInit ? false : value ? isRequestRunning : false;
-
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (isSendDisabled) return;
-
     const val = e.target.value;
 
     if (val === "\n") {
-      setShowDropDown(false);
-      setStartPosition(-1);
       return;
-    }
-
-    const lastSymbol = val[val.length - 1];
-
-    if (lastSymbol === "@") {
-      setShowDropDown(true);
-      setStartPosition(val.length - 1);
-      setFileValue("");
-    }
-    if (lastSymbol === " " || !val) {
-      setShowDropDown(false);
-      setFileValue("");
-      setStartPosition(-1);
-    }
-
-    if (showDropDown) {
-      // Include all characters after '@' including the last one
-      setFileValue(val.substring(startPosition + 1));
     }
 
     setValue(val);
   };
 
-  const toggleSelector = () => {
-    setShowSelector((prev) => !prev);
-  };
+  const sendMessageAction = React.useCallback(async () => {
+    if (!currentChatId) {
+      startChat(value);
 
-  const sendMessageAction = React.useCallback(() => {
-    if (isRequestRunning || !value || showSelector) return;
-
-    sendMessage(value, files, () => {
       setValue("");
-      clearFiles();
-    });
-  }, [isRequestRunning, value, showSelector, files, sendMessage, clearFiles]);
+
+      return;
+    }
+
+    console.log("as");
+  }, [currentChatId, startChat, value]);
 
   const onKeyEnter = React.useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Enter" && !e.shiftKey) return sendMessageAction();
-      if (e.key === "Escape") return setShowSelector(false);
     },
     [sendMessageAction],
   );
@@ -141,171 +89,56 @@ const ChatInput = ({
   }, [onKeyEnter]);
 
   React.useEffect(() => {
-    if (currentSession.includes(prevSession.current)) return;
+    if (currentChatId && !currentChat) {
+      console.log(currentChatId, prevSession.current, currentChat);
+      fetchChat(currentChatId);
+    }
 
-    prevSession.current = currentSession;
+    prevSession.current = currentChatId;
+
     setValue("");
-    clearFiles();
-  }, [currentSession, clearFiles]);
+  }, [currentChatId, currentChat, fetchChat]);
 
-  const withFile = files.length !== 0;
+  const placeholder =
+    messages.length === 0
+      ? t("Common:AIChatInputFirstMessage")
+      : t("Common:AIChatInputAskAI");
 
-  const placeholder = isEmptyMessages
-    ? t("Common:AIChatInputFirstMessage")
-    : t("Common:AIChatInputAskAI");
-
-  const isDisabled = !isInit ? !value : isRequestRunning ? false : !value;
-
-  const sendIconProps = !isInit
-    ? { onClick: sendMessageAction, isDisabled, iconNode: null }
+  const sendIconProps = !isRequestRunning
+    ? { onClick: sendMessageAction, isDisabled: false, iconNode: null }
     : {
-        onClick: isRequestRunning ? cancelBuild : sendMessageAction,
-        isDisabled,
+        onClick: stopMessage,
+        isDisabled: false,
         iconNode: isRequestRunning ? (
           <div className={styles.whiteSquare} />
         ) : null,
       };
 
-  const dropDownItems = useMemo(() => {
-    const items = vectorizedFiles
-      .filter((file) => !files.find((f) => f.id === file.id))
-      .filter((file) => {
-        if (fileValue) {
-          return file.title.toLowerCase().includes(fileValue.toLowerCase());
-        }
-
-        return true;
-      })
-      .map((item) => (
-        <DropDownItem
-          key={item.id}
-          onClick={() => {
-            const selectorItem: TSelectorItem = {
-              label: item.title,
-              fileExst: item.fileExst,
-              id: item.id,
-              icon: "",
-              parentId: item.folderId,
-              rootFolderType: item.rootFolderType,
-              security: item.security,
-              fileType: item.fileType,
-            };
-
-            // Remove the '@' and any text after it from the input value
-            setValue((prev) => prev.substring(0, startPosition));
-
-            setFileValue("");
-            setShowDropDown(false);
-            setStartPosition(-1);
-
-            addFile(selectorItem);
-          }}
-        >
-          <img src={getIcon(24, item.fileExst)} alt={item.title} />
-          <Text truncate> {item.title}</Text>
-        </DropDownItem>
-      ));
-
-    return items;
-  }, [vectorizedFiles, getIcon, files, fileValue, addFile, startPosition]);
-
-  const style = useMemo(() => {
-    if (!inputRef.current || !showDropDown) return;
-
-    const rects = inputRef.current.getBoundingClientRect();
-
-    const width =
-      currentDeviceType === "desktop" ? rects.width - 40 : rects.width - 32;
-
-    return {
-      width: `${width}px`,
-      bottom: `${window.innerHeight - rects.bottom + rects.height + 4}px`,
-    };
-  }, [showDropDown, currentDeviceType]);
-
   return (
-    <div
-      className={classNames(styles.chatInput)}
-      style={
-        {
-          "--chat-input-textarea-wrapper-with-files-padding": `${wrapperHeight + 24}px 8px 44px`,
-          "--chat-input-textarea-wrapper-with-files-height": `${116 + wrapperHeight + 24}px`,
-          "--chat-input-textarea-wrapper-with-files-max-height": `${172 + wrapperHeight + 24}px`,
-        } as React.CSSProperties
-      }
-      ref={inputRef}
-    >
+    <div className={classNames(styles.chatInput)} ref={inputRef}>
       <Textarea
         onChange={handleChange}
         value={value}
         isFullHeight
         className={styles.chatInputTextArea}
         wrapperClassName={classNames({
-          [styles.chatInputTextAreaWrapperWithFiles]: withFile,
-          [styles.chatInputTextAreaWrapper]: !withFile,
+          [styles.chatInputTextAreaWrapper]: true,
         })}
         placeholder={placeholder}
         isChatMode
       />
-      <FilePreview
-        getIcon={getIcon}
-        displayFileExtension={displayFileExtension}
-        withRemoveFile
-        files={files}
-      />
-      <div className={styles.chatInputButtons}>
-        <IconButton
-          iconName={SelectReactSvgUrl}
-          size={16}
-          isClickable
-          onClick={toggleSelector}
-          className={styles.chatInputButtonsFile}
-        />
 
+      <div className={styles.chatInputButtons}>
         <IconButton
           iconName={SendReactSvgUrl}
           size={12}
           isClickable
-          className={classNames(
-            styles.chatInputButtonsFile,
-            styles.chatInputButtonsSend,
-            {
-              [styles.disabled]: isDisabled,
-            },
-          )}
+          className={classNames(styles.chatInputButtonsSend, {
+            [styles.disabled]: false,
+          })}
           {...sendIconProps}
         />
       </div>
-      {showSelector ? (
-        <FilesSelector
-          showSelector={showSelector}
-          toggleSelector={toggleSelector}
-          getIcon={getIcon}
-          currentDeviceType={currentDeviceType}
-          includedItems={vectorizedFiles.map((v) => v.id)}
-        />
-      ) : null}
-      {showDropDown ? (
-        <DropDown
-          open={showDropDown}
-          directionY="top"
-          forwardedRef={inputRef}
-          clickOutsideAction={() => setShowDropDown(false)}
-          style={style}
-          offsetLeft={currentDeviceType === "desktop" ? 20 : 16}
-          isNoFixedHeightOptions
-          maxHeight={dropDownItems.length > 7 ? 300 : undefined}
-          className={styles.selectFileDropDown}
-        >
-          {dropDownItems.length ? (
-            dropDownItems
-          ) : (
-            <DropDownItem noActive noHover>
-              No results
-            </DropDownItem>
-          )}
-        </DropDown>
-      ) : null}
     </div>
   );
 };

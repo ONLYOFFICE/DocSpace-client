@@ -38,17 +38,11 @@
 
   box-sizing: border-box;
 
-  padding: 0 20px;
-
   textarea {
     padding: 0;
     background-color: var(--chat-input-background-color);
 
     min-height: 66px;
-  }
-
-  @include tablet-and-below {
-    padding: 0 16px;
   }
 
   .chatInputTextAreaWrapper {
@@ -61,20 +55,8 @@
     border: none;
   }
 
-  .chatInputTextAreaWrapperWithFiles {
-    padding: var(--chat-input-textarea-wrapper-with-files-padding);
-    min-height: var(--chat-input-textarea-wrapper-with-files-height) !important;
-    max-height: var(
-      --chat-input-textarea-wrapper-with-files-max-height
-    ) !important;
-
-    background-color: var(--chat-input-background-color);
-    border: none;
-  }
-
   &.disabled {
-    .chatInputTextAreaWrapper,
-    .chatInputTextAreaWrapperWithFiles {
+    .chatInputTextAreaWrapper {
       background-color: var(--input-disabled-bg);
     }
   }
@@ -87,9 +69,8 @@
 
 .chatInputButtons {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
-  justify-content: space-between;
 
   position: absolute;
 
@@ -98,41 +79,25 @@
 
   box-sizing: border-box;
 
-  width: calc(100% - 40px);
+  width: 100%;
 
-  @include tablet-and-below {
-    width: calc(100% - 32px);
-  }
-
-  .chatInputButtonsFile {
+  .chatInputButtonsSend {
     width: 32px;
     height: 32px;
 
-    border: 1px solid var(--chat-input-button-file-border-color);
+    border: none;
 
-    background-color: var(--chat-button-file-background-color);
+    background-color: var(--accent-main);
 
     border-radius: 3px;
+
+    cursor: pointer;
 
     box-sizing: border-box;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
-    svg {
-      path {
-        fill: var(--chat-input-button-file-color) !important;
-      }
-    }
-  }
-
-  .chatInputButtonsSend {
-    border: none;
-
-    background-color: var(--accent-main);
-
-    cursor: pointer;
 
     svg {
       path {
@@ -155,8 +120,4 @@
       border-radius: 2px;
     }
   }
-}
-
-.selectFileDropDown {
-  top: unset !important;
 }

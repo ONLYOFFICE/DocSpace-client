@@ -26,10 +26,6 @@
 
 import React from "react";
 
-// import ChatHeader from "./components/chat-header";
-// import ChatMessageBody from "./components/chat-message-body";
-// import ChatInput from "./components/chat-input";
-
 import { MessageStoreContextProvider } from "./store/messageStore";
 import { ModelStoreContextProvider } from "./store/modelStore";
 import { ChatStoreContextProvider } from "./store/chatStore";
@@ -39,38 +35,17 @@ import { ChatProps } from "./types";
 import ChatContainer from "./components/chat-container";
 import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
+import ChatInput from "./components/chat-input";
 
 const Chat = ({ roomId, userAvatar }: ChatProps) => {
   return (
     <ChatStoreContextProvider roomId={roomId}>
       <ModelStoreContextProvider>
-        <MessageStoreContextProvider>
+        <MessageStoreContextProvider roomId={roomId}>
           <ChatContainer>
             <ChatHeader />
-            <ChatMessageBody />
-
-            {/* <ChatBody isFullScreen={false} currentDeviceType="desktop">
-              {userAvatar} */}
-            {/* <ChatHeader
-                isFullScreen={isFullScreen}
-              currentDeviceType={currentDeviceType}
-              isPanel={false}
-            />
-            <ChatMessageBody
-              displayFileExtension={displayFileExtension}
-              getIcon={getIcon}
-              vectorizedFiles={vectorizedFiles}
-              user={user}
-              isFullScreen={isFullScreen}
-              currentDeviceType={currentDeviceType}
-            />
-            <ChatInput
-              currentDeviceType={currentDeviceType}
-              displayFileExtension={displayFileExtension}
-              getIcon={getIcon}
-              vectorizedFiles={vectorizedFiles}
-            /> */}
-            {/* </ChatBody> */}
+            <ChatMessageBody userAvatar={userAvatar} />
+            <ChatInput />
           </ChatContainer>
         </MessageStoreContextProvider>
       </ModelStoreContextProvider>

@@ -68,6 +68,16 @@ const SelectModel = () => {
     });
   };
 
+  React.useEffect(() => {
+    if (isRequestRunning) return;
+
+    if (!models.length) return;
+
+    if (currentModel.modelId) return;
+
+    setCurrentModel(models[0]);
+  }, [isRequestRunning, currentModel, models, setCurrentModel]);
+
   if (isLoading || isRequestRunning)
     return <RectangleSkeleton width="100%" height="28px" />;
 

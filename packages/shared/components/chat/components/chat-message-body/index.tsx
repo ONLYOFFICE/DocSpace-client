@@ -39,12 +39,10 @@ import Message from "./sub-components/message";
 
 import styles from "./ChatMessageBody.module.scss";
 
-const ChatMessageBody = () => {
+const ChatMessageBody = ({ userAvatar }: { userAvatar: string }) => {
   const { messages } = useMessageStore();
   const { currentChat } = useChatStore();
   const scrollbarRef = useRef<CustomScrollbar>(null);
-
-  console.log(messages.length);
 
   const isEmpty = messages.length === 0;
 
@@ -78,6 +76,7 @@ const ChatMessageBody = () => {
                   key={`${currentChat?.id}-${message.createdOn}-${index * 2}`}
                   message={message}
                   idx={index}
+                  userAvatar={userAvatar}
                 />
               );
             })}

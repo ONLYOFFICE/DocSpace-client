@@ -28,7 +28,7 @@ import { observer } from "mobx-react";
 
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg";
 
-import { Text } from "../../../../text";
+// import { Text } from "../../../../text";
 
 import { useMessageStore } from "../../../store/messageStore";
 
@@ -42,9 +42,9 @@ const CreateChat = () => {
   return (
     <div className={styles.createChat} onClick={startNewChat}>
       <PlusReactSvgUrl />
-      <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
+      {/* <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
         Create new chat
-      </Text>
+      </Text> */}
     </div>
   );
 };

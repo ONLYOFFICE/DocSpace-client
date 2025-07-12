@@ -120,16 +120,18 @@ export const setCurrentModel = async (data: TCurrentModel) => {
 export const startNewChat = async (
   roomId: number | string,
   message: string,
+  abortController?: AbortController,
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
 
-  const response = await fetch(`/api/2.0/${baseUrl}/rooms/${roomId}/chats`, {
+  const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: authHeader,
-      body: JSON.stringify({ message }),
     },
+    signal: abortController?.signal,
+    body: JSON.stringify({ message }),
   });
 
   if (!response.ok) {

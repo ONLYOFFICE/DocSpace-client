@@ -82,11 +82,11 @@ const TfaAuthForm = ({
     try {
       setIsLoading(true);
 
-      if (userName && passwordHash) {
-        await loginWithTfaCode(userName, passwordHash, code);
-      } else {
-        await validateTfaCode(code, confirmHeader);
-      }
+      // if (userName && passwordHash?.salt) {
+      // await loginWithTfaCode(userName, passwordHash.salt, code);
+      // } else {
+      await validateTfaCode(code, confirmHeader);
+      // }
 
       let confirmData = "";
       try {

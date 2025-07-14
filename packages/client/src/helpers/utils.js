@@ -158,8 +158,10 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
   const cType = categoryType;
 
   switch (cType) {
-    case CategoryType.Personal:
     case CategoryType.Recent:
+      return "/recent/filter";
+
+    case CategoryType.Personal:
       return "/rooms/personal/filter";
 
     case CategoryType.Shared:

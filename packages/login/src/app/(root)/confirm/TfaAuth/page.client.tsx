@@ -50,16 +50,10 @@ import { useSearchParams } from "next/navigation";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 type TfaAuthFormProps = {
-  passwordHash: TPasswordHash;
-  userName?: string;
   defaultPage?: string;
 };
 
-const TfaAuthForm = ({
-  passwordHash,
-  userName,
-  defaultPage = "/",
-}: TfaAuthFormProps) => {
+const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -78,11 +72,7 @@ const TfaAuthForm = ({
     try {
       setIsLoading(true);
 
-      if (userName && passwordHash) {
-        await loginWithTfaCode(userName, passwordHash, code);
-      } else {
-        await validateTfaCode(code, confirmHeader);
-      }
+      await validateTfaCode(code, confirmHeader);
 
       let confirmData = "";
       try {

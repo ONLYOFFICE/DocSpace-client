@@ -60,16 +60,9 @@ import { useSearchParams } from "next/navigation";
 type TfaActivationFormProps = {
   secretKey: string;
   qrCode: string;
-  passwordHash: TPasswordHash;
-  userName?: string;
 };
 
-const TfaActivationForm = ({
-  secretKey,
-  qrCode,
-  passwordHash,
-  userName,
-}: TfaActivationFormProps) => {
+const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -95,11 +88,7 @@ const TfaActivationForm = ({
     try {
       setIsLoading(true);
 
-      if (userName && passwordHash) {
-        await loginWithTfaCode(userName, passwordHash, code);
-      } else {
-        await validateTfaCode(code, confirmHeader);
-      }
+      await validateTfaCode(code, confirmHeader);
 
       let confirmData = "";
       try {

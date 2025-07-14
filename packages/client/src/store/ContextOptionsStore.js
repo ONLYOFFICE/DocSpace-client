@@ -741,7 +741,7 @@ class ContextOptionsStore {
       endLoader(() =>
         runInAction(() => {
           setGroupMenuBlocked(false);
-          clearActiveOperations([item.id], null);
+          clearActiveOperations([item.id]);
         }),
       );
     }

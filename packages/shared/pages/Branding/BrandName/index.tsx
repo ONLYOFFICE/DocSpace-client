@@ -153,7 +153,7 @@ export const BrandName = ({
             onCancelClick={onCancelAction}
             saveButtonLabel={t("Common:SaveButton")}
             cancelButtonLabel={t("Common:CancelButton")}
-            reminderText={t("YouHaveUnsavedChanges")}
+            reminderText={t("Common:YouHaveUnsavedChanges")}
             displaySettings
             saveButtonDisabled={isEqualText}
             disableRestoreToDefault={isEqualText}

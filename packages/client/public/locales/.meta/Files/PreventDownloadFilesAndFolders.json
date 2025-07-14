@@ -3,7 +3,7 @@
   "content": "Enable this setting to disable downloads of files and folders from this room shared via a link",
   "content_en_sha1_hash": "2ea92290a035527ea6287be4963fdb388e78c6ae",
   "created_at": "2025-05-19T21:30:55.969Z",
-  "updated_at": "2025-05-26T07:57:32.353Z",
+  "updated_at": "2025-07-10T11:11:06.848Z",
   "comment": {
     "text": "This translation key enables or disables the download of files and folders from a shared room when accessed via a link. It is used in a toggle block within an edit link panel to provide users with a choice on how to manage file downloads.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 331,
+      "line_number": 333,
       "context": "/>\n {!isFormRoom ? (\n <ToggleBlock\n isLoading={isLoading}\n headerText={t(\"Files:DisableDownload\")}\n bodyText={t(\"Files:PreventDownloadFilesAndFolders\")}\n isChecked={denyDownload}\n onChange={onDenyDownloadChange}\n />\n ) : null}",
       "module": "/packages/client"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'قم بتمكين هذا الإعداد لتعطيل تنزيلات الملفات والمجلدات من هذه الغرفة المشتركة عبر رابط' is a literal translation and could be improved for naturalness. A more fluid translation would convey the same meaning more effectively for a Saudi Arabian audience.",
+          "suggestion": "فعِّل هذا الإعداد لمنع تنزيل الملفات والمجلدات من هذه الغرفة عند مشاركتها عبر رابط."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +42,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'otaq' (room) should ideally be 'ochan' (room) for better flow and accuracy within the context of a settings explanation.",
-          "suggestion": "Bu ochan link vasitəsilə paylaşılan fayl və qovluqların endirilməsini deaktiv etmək üçün bu tənzimləməni aktiv edin"
+          "description": "The word 'otaq' (room) is spelled correctly, but it's a more formal term. 'Otaq' can be replaced with a more casual equivalent like 'ochan'.",
+          "suggestion": "ochan"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure is slightly clunky. It could be improved for better flow.",
+          "suggestion": "Bu tənzimləməni aktiv etməklə, link vasitəsilə bu otaqdan (or ochan) paylaşılan fayl və qovluqların endirilməsi deaktiv ediləcək."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, 'deaktiv etmək' is a direct translation of 'disable'. A more natural-sounding option might be 'bağlamaq' or 'qapadmaq'",
+          "suggestion": "bağlamaq"
         }
       ],
       "approved_at": null
@@ -66,13 +82,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Enable this setting\" is translated as \"Ενεργοποιήστε αυτήν τη ρύθμιση\". While technically correct, it sounds slightly formal and less natural in Greek. A more user-friendly translation would be \"Ενεργοποιήστε αυτή την επιλογή\" or \"Ενεργοποιήστε αυτή τη λειτουργία\".",
-          "suggestion": "Ενεργοποιήστε αυτή την επιλογή"
+          "description": "The phrase 'Enable this setting' is translated as 'Ενεργοποιήστε αυτήν τη ρύθμιση', which is technically correct but sounds slightly formal and less conversational. A more natural translation might be 'Ενεργοποιήστε αυτή τη ρύθμιση...' or 'Για να απενεργοποιήσετε...' ",
+          "suggestion": "Ενεργοποιήστε αυτή τη ρύθμιση για να..."
         },
         {
           "type": "formatting",
-          "description": "The phrase \"files and folders\" is translated as \"αρχείων και φακέλων\". While correct, the definite article \"τα\" is missing before αρχείων.  This makes it slightly less natural.",
-          "suggestion": "τα αρχεία και τους φακέλους"
+          "description": "While not strictly incorrect, the translation maintains the structure of the English sentence closely. A slightly more fluent Greek phrasing could improve readability.",
+          "suggestion": "Για να απενεργοποιήσετε τη λειτουργία λήψης αρχείων και φακέλων από αυτό το δωμάτιο, το οποίο έχει κοινοποιηθεί μέσω συνδέσμου, ενεργοποιήστε αυτή τη ρύθμιση."
         }
       ],
       "approved_at": null
@@ -83,8 +99,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Active esta opción\" is not the most natural way to say 'Enable this setting'. A better translation would be 'Habilite esta opción' or 'Activa esta opción'.",
-          "suggestion": "Habilite esta opción"
+          "description": "The phrase 'Active esta opción' is a bit awkward. A more natural phrasing would be 'Habilite esta opción' or 'Para desactivar las descargas... habilite esta opción'.",
+          "suggestion": "Habilite esta opción para desactivar las descargas de archivos y carpetas de esta sala compartidos a través de un enlace."
         }
       ],
       "approved_at": null
@@ -95,13 +111,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is a bit too literal and sounds awkward in Finnish. 'Ota tämä asetus käyttöön, jos haluat poistaa käytöstä...' is a long and complex way to express the functionality. It's better to simplify it.",
-          "suggestion": "Ota tämä asetus käyttöön estääksesi tiedostojen ja kansioiden lataukset tästä linkin kautta jaetusta huoneesta."
+          "description": "The phrase \"Ota tämä asetus käyttöön, jos haluat poistaa käytöstä\" is a bit clunky. A more natural phrasing would be 'Käytä tätä asetusta estääksesi...' or 'Voit ottaa tämän asetuksen käyttöön estääksesi...'",
+          "suggestion": "Käytä tätä asetusta estääksesi tiedostojen ja kansioiden lataukset..."
         },
         {
-          "type": "formatting",
-          "description": "The use of '...' in the translation makes it sound hesitant and less confident. It would be better to avoid it.",
-          "suggestion": "Remove the ellipsis."
+          "type": "incorrect_translation",
+          "description": "The original English specifies \"from this room shared via a link\". The Finnish translation includes \"tässä linkin kautta jaetusta huoneesta\" which is accurate, but a little verbose. It could be simplified.",
+          "suggestion": "tässä linkin kautta jaetussa huoneessa"
         }
       ],
       "approved_at": null
@@ -118,13 +134,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Enable this setting\" is overly literal and sounds unnatural in Armenian. A more natural phrasing would be \"Ենթադրեք այս կարգավորումը\" or \"Ակտիվացրեք այս կարգավորումը\".",
-          "suggestion": "Ենթադրեք այս կարգավորումը"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"համօգտագործվում են հղման միջոցով\" is a bit convoluted. A simpler way to express \"shared via a link\" would be \"տրվում են հղմամբ\" or \"կիսվում են հղմամբ\".",
-          "suggestion": "տրվում են հղմամբ"
+          "description": "The phrase \"որոնք համօգտագործվում են հղման միջոցով\" (which are shared via a link) is a bit awkward and doesn't perfectly capture the meaning of 'shared via a link.' It implies a reciprocal sharing.",
+          "suggestion": "Consider revising to something like \"որոնք կիսվել են հղման միջոցով\" (which have been shared via a link) or \"որոնք հասանելի են հղման միջոցով\" (which are accessible via a link)."
         }
       ],
       "approved_at": null
@@ -132,18 +143,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'stanza' (room) might not be the most natural translation in this context. It implies a physical room, but a 'room' in this digital sharing context is better translated as 'area' or 'spazio'.",
-          "suggestion": "Abilita questa impostazione per disabilitare i download di file e cartelle da quest'area condivisa tramite un link"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation starts with a space before 'Abilita'.",
-          "suggestion": "Abilita questa impostazione per disabilitare i download di file e cartelle da quest'area condivisa tramite un link"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -152,13 +152,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"有効にした後\" (yuukou ni shita ato) which translates to \"after enabling\" is slightly awkward and doesn't flow naturally in this context. It implies a previous disabled state that isn't directly implied by the English. A more direct and natural phrasing would be better.",
-          "suggestion": "この設定を有効にすると、リンク経由で共有されたこの部屋からのファイルとフォルダのダウンロードが無効になります"
+          "description": "The translation is a bit too literal and doesn't flow naturally in Japanese. \"Enable this setting\" is awkwardly translated. It doesn't convey the intended meaning effectively.",
+          "suggestion": "リンク経由で共有されたこの部屋からのファイルとフォルダのダウンロードを禁止するには、この設定を有効にしてください。"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase '経由で共有された' (keiyu de kyouyousareta) meaning 'shared via' is technically correct, but slightly formal for a user-facing setting description. A more conversational alternative would improve clarity and user experience.",
-          "suggestion": "リンクで共有されたこの部屋からの"
+          "type": "formatting",
+          "description": "The sentence is quite long. While grammatically correct, shorter sentences often improve readability in UI text.",
+          "suggestion": "この設定を有効にすると、リンク経由で共有されたこの部屋からのファイルとフォルダのダウンロードが禁止されます。"
         }
       ],
       "approved_at": null
@@ -175,13 +175,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ເປີດໃຊ້' is a bit formal. While technically correct, 'ເປີດ' would be more natural in this context.",
-          "suggestion": "ເປີດການຕັ້ງຄ່ານີ້"
+          "description": "The word 'ເປີດໃຊ້' is sometimes translated as 'activate' instead of 'enable' depending on context. While not strictly incorrect, 'enable' aligns better with the English original in this specific context.",
+          "suggestion": "ປິດການດາວໂຫຼດ"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'ຈາກຫ້ອງນີ້ທີ່ແບ່ງປັນຜ່ານລິ້ງ' is a bit clunky.  A more natural phrasing would connect 'ຫ້ອງນີ້' directly to the sharing action.",
-          "suggestion": "ຈາກຫ້ອງນີ້ທີ່ຖືກແບ່ງປັນຜ່ານລິ້ງ"
+          "description": "The phrase 'ຈາກຫ້ອງນີ້ທີ່ແບ່ງປັນຜ່ານລິ້ງ' is slightly awkward in Lao. It would flow better if rephrased.",
+          "suggestion": "ຈາກຫ້ອງນີ້ທີ່ແບ່ງປັນຜ່ານລິ້ງສາມາດດາວໂຫຼດໄດ້"
         }
       ],
       "approved_at": null
@@ -189,13 +189,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase \"kopīgota, izmantojot saiti\" is a bit clunky. A more natural flow might be achieved by rephrasing.",
-          "suggestion": "Iespējojiet šo iestatījumu, lai atspējotu failu un mapju lejupielādi no šīs telpas, kas dalīta ar saiti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -225,13 +219,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The phrasing 'care au fost partajate printr-un link' is a bit clunky and could be improved for better flow. While technically correct, it isn't the most natural Romanian.",
-          "suggestion": "Activați această opțiune pentru a dezactiva descărcarea fișierelor și folderelor din această cameră partajate prin link."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -240,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'shared via a link' is not accurately reflected in the Russian translation. 'Предоставлен доступ по ссылке' is a bit awkward and doesn't convey the directness of sharing through a link.",
+          "description": "The phrase \"предоставлен доступ по ссылке\" (provided access via a link) is a bit awkward. A more natural phrasing would convey the idea that the files and folders are shared via a link.",
           "suggestion": "Включите этот параметр, чтобы запретить загрузку файлов и папок, которыми поделились по ссылке, из этой комнаты"
         }
       ],
@@ -252,13 +240,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'බාගැනීම' (baaganaeim) can be slightly ambiguous. While it generally means 'downloading', it could be more clearly expressed as 'බාගත' (baagath).",
-          "suggestion": "සබැඳියකින් බෙදා ගත් මෙම කාමරයේ ගොනු සහ බහාලුම් බාගත අබල කිරීමට මෙම සැකසුම සබල කරන්න"
+          "description": "The word 'බාගැනීම' is technically correct, but 'ගබඩා කිරීම' might be more accurate in this context (downloading implies storing, not just taking).",
+          "suggestion": "බාගැනීම වෙනුවට ගබඩා කිරීම භාවිතා කරන්න"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'බාගත අබල කිරීමට' is a bit awkward. A more natural phrasing would be 'බා ගැනීම වැළැක්වීමට'.",
-          "suggestion": "සබැඳියකින් බෙදා ගත් මෙම කාමරයේ ගොනු සහ බහාලුම් බා ගැනීම වැළැක්වීමට මෙම සැකසුම සබල කරන්න"
+          "description": "While understandable, the sentence structure could be slightly improved for better flow. 'මෙම සැකසුම සබල කරන්න' could be phrased more naturally.",
+          "suggestion": "මෙම සැකසුම සබල කිරීමෙන්, සබැඳියකින් බෙදාගත් කාමරයේ ගොනු සහ බහාලුම් බාගැනීම අබල කරන්න."
         }
       ],
       "approved_at": null
@@ -280,14 +268,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'да онемогућиш преузимање' is grammatically awkward. It would be more natural to use a more direct phrasing.",
-          "suggestion": "Омогући ово подешавање да би се забранило преузимање датотека и фолдера из ове собе дељених путем линка"
+          "type": "incorrect_translation",
+          "description": "The word 'онемогућиш' (you disable) is a bit too informal and direct for a settings description. A more polite phrasing would be more appropriate.",
+          "suggestion": "Омогући ово подешавање да бисте спречили преузимање датотека и фолдера из ове собе дељених путем линка"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Enable this setting' implies enabling a function that will disable downloads. The Serbian translation's phrasing, while technically correct, doesn't capture the intended implication of the original.",
-          "suggestion": "Омогући ову опцију да би се спречило преузимање датотека и фолдера из ове собе дељених путем линка"
+          "type": "formatting",
+          "description": "The translation lacks the consistency in capitalization. It should start with an uppercase letter as it's a full sentence.",
+          "suggestion": "Омогући ово подешавање да бисте спречили преузимање датотека и фолдера из ове собе дељених путем линка"
         }
       ],
       "approved_at": null
@@ -298,8 +286,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence structure is slightly awkward. 'Omogući ovo podešavanje da onemogućiš...' is a bit clunky. A more natural phrasing would be 'Omogući ovo podešavanje da spreči preuzimanje...'",
-          "suggestion": "Omogući ovo podešavanje da spreči preuzimanje datoteka i foldera iz ove sobe deljenih putem linka"
+          "description": "The sentence structure is slightly awkward. 'Omogući ovo podešavanje da onemogućiš...' feels less natural. It's better to phrase it more directly.",
+          "suggestion": "Omogući ovo podešavanje da sprečiš preuzimanje datoteka i foldera iz ove sobe deljenih putem linka"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'onemogućiš' (disable) is technically correct, 'sprečiš' (prevent) is often more natural and accurate in this context.",
+          "suggestion": "Replace 'onemogućiš' with 'sprečiš'"
         }
       ],
       "approved_at": null
@@ -315,9 +308,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a comma (,) instead of a period (.) at the end of the first sentence. Ukrainian typically uses a period for sentence termination.",
-          "suggestion": "Увімкніть цей параметр, щоб заборонити завантаження файлів і папок із цієї кімнати, доступ до яких надано за посиланням."
+          "type": "incorrect_translation",
+          "description": "The translation 'Увімкніть цей параметр, щоб заборонити завантаження файлів і папок із цієї кімнати, доступ до яких надано за посиланням' is a bit verbose and literal. A more natural and concise translation would improve readability.",
+          "suggestion": "Увімкніть цей параметр, щоб заборонити завантаження файлів і папок із кімнати, на яку є посилання."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'доступ до яких надано за посиланням' is unnecessarily complex. A simpler way to convey the same meaning exists.",
+          "suggestion": "на яку є посилання"
         }
       ],
       "approved_at": null
@@ -328,13 +326,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bật cài đặt này để tắt tải xuống tập tin và thư mục từ phòng này được chia sẻ qua liên kết' is a bit literal and could be improved for naturalness in Vietnamese. 'Tải xuống' is repetitive.",
-          "suggestion": "Bật cài đặt này để ngăn chặn việc tải xuống tập tin và thư mục từ phòng này được chia sẻ qua liên kết."
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, the use of 'tập tin' and 'thư mục' is slightly formal.  Consider a more colloquial alternative for broader appeal.",
-          "suggestion": "Bật cài đặt này để ngăn chặn việc tải xuống file và folder từ phòng này được chia sẻ qua liên kết."
+          "description": "The translation of \"Enable this setting\" is not ideal. \"Bật cài đặt này\" is technically correct, but sounds a bit clunky. A more natural phrasing would be \"Kích hoạt cài đặt này\" or \"Mở cài đặt này\".",
+          "suggestion": "Kích hoạt cài đặt này"
         }
       ],
       "approved_at": null

@@ -36,6 +36,7 @@ import { useChatStore } from "../../../../store/chatStore";
 
 import styles from "../../ChatMessageBody.module.scss";
 import Markdown from "./Markdown";
+import ToolCall from "./ToolCall";
 
 const Message = ({ message, idx, userAvatar }: MessageProps) => {
   const { currentChat } = useChatStore();
@@ -65,7 +66,12 @@ const Message = ({ message, idx, userAvatar }: MessageProps) => {
           >
             {message.contents.map((c) => {
               if (c.type === ContentType.Text)
-                return <Markdown key={c.text} chatMessage={c.text} />;
+                return (
+                  <Markdown
+                    key={`${currentChat?.id}-${c.text}-${idx * 2}`}
+                    chatMessage={c.text}
+                  />
+                );
               return null;
             })}
           </div>
@@ -79,7 +85,7 @@ const Message = ({ message, idx, userAvatar }: MessageProps) => {
         if (c.type === ContentType.Text)
           return <Markdown key={c.text} chatMessage={c.text} />;
 
-        return null;
+        return <ToolCall key={c.name} content={c} />;
       })}
     </div>
   );

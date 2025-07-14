@@ -25,3 +25,44 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+
+import { TContent } from "../../../../../../api/ai/types";
+import { ContentType } from "../../../../../../api/ai/enums";
+
+import { Text } from "../../../../../text";
+
+import { formatJsonWithMarkdown } from "../../../../utils";
+
+import styles from "../../ChatMessageBody.module.scss";
+import MarkdownField from "./Markdown";
+
+const ToolCall = ({ content }: { content: TContent }) => {
+  if (content.type === ContentType.Text) return null;
+
+  return (
+    <div className={styles.toolCall}>
+      <div className={styles.toolCallHeader}>
+        <Text fontSize="13px" lineHeight="20px">
+          {content.name}
+        </Text>
+        <Text fontSize="13px" lineHeight="20px">
+          {content.result ? "Finished" : "Pending"}
+        </Text>
+      </div>
+      <div className={styles.toolCallBody}>
+        <MarkdownField
+          propLanguage="Tool call arguments"
+          chatMessage={formatJsonWithMarkdown(content.arguments)}
+        />
+      </div>
+      <div className={styles.toolCallBody}>
+        <MarkdownField
+          chatMessage={formatJsonWithMarkdown(content.result)}
+          propLanguage="Tool call result"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default ToolCall;

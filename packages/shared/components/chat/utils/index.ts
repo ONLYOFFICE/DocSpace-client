@@ -103,3 +103,18 @@ export const getChateTranslationDate = (t: TTranslation, value: string) => {
       ? t("Common:Yesterday")
       : "";
 };
+
+/**
+ * Formats a JavaScript object into a nicely formatted JSON string with markdown code block syntax
+ * @param obj - The object to format as JSON
+ * @returns A string formatted as a markdown code block with JSON syntax highlighting
+ */
+export const formatJsonWithMarkdown = (
+  obj: Record<string, unknown>,
+): string => {
+  // Format the JSON with 2 space indentation
+  const formattedJson = JSON.stringify(obj, null, 2);
+
+  // Return the formatted JSON wrapped in markdown code block syntax
+  return `\`\`\`json\n${formattedJson}\n\`\`\``;
+};

@@ -79,10 +79,17 @@ export type TChat = {
   createdBy: TCreatedBy;
 };
 
-export type TContent = {
-  type: ContentType;
-  text: string;
-};
+export type TContent =
+  | {
+      type: ContentType.Text;
+      text: string;
+    }
+  | {
+      type: ContentType.Tool;
+      arguments: Record<string, unknown>;
+      name: string;
+      result: Record<string, unknown>;
+    };
 
 export type TMessage = {
   messageType: MessageType;

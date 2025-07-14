@@ -27,7 +27,11 @@
 import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
 import { TMessage } from "../../../api/ai/types";
-import { getChatMessages, startNewChat } from "../../../api/ai";
+import {
+  getChatMessages,
+  startNewChat,
+  sendMessageToChat,
+} from "../../../api/ai";
 import { ContentType, MessageType } from "../../../api/ai/enums";
 
 export default class MessageStore {
@@ -122,6 +126,34 @@ export default class MessageStore {
     this.messages[0] = msg;
   };
 
+  handleMetadata = (data: string) => {
+    const jsonData = data.split("data:")[1].trim();
+    const { chatId } = JSON.parse(jsonData);
+
+    if (chatId) {
+      this.setCurrentChatId(chatId);
+    }
+  };
+
+  handleNewToken = (data: string, msg: string) => {
+    let newMsg = msg;
+
+    const jsonData = data.split("data:")[1].trim();
+    const { text } = JSON.parse(jsonData);
+
+    if (text) {
+      if (newMsg) {
+        newMsg += text;
+        this.continueAIMessage(newMsg);
+      } else {
+        newMsg += text;
+        this.addNewAIMessage(newMsg);
+      }
+    }
+
+    return newMsg;
+  };
+
   startChat = async (message: string) => {
     this.addUserMessage(message);
 
@@ -139,65 +171,119 @@ export default class MessageStore {
 
     if (!stream) return;
 
-    const textDecoder = new TextDecoder();
+    try {
+      const textDecoder = new TextDecoder();
 
-    const reader = stream.getReader();
+      const reader = stream.getReader();
 
-    let msg = "";
+      let msg = "";
 
-    const streamHandler = async () => {
-      const { done, value } = await reader.read();
+      const streamHandler = async () => {
+        const { done, value } = await reader.read();
 
-      if (done) {
-        reader.cancel();
-        this.isRequestRunning = false;
-        return;
-      }
+        if (done) {
+          reader.cancel();
+          this.isRequestRunning = false;
+          return;
+        }
 
-      const decodedChunk = textDecoder.decode(value);
+        const decodedChunk = textDecoder.decode(value);
 
-      try {
-        const chunks = decodedChunk.split("\n\n");
+        try {
+          const chunks = decodedChunk.split("\n\n");
 
-        chunks.forEach((chunk) => {
-          const [event, data] = chunk.split("\n");
+          chunks.forEach(async (chunk) => {
+            const [event, data] = chunk.split("\n");
 
-          if (event.includes("metadata")) {
-            const jsonData = data.split("data:")[1].trim();
-            const { chatId } = JSON.parse(jsonData);
+            if (event.includes("metadata")) {
+              this.handleMetadata(data);
 
-            if (chatId) {
-              this.setCurrentChatId(chatId);
+              await streamHandler();
+
+              return;
             }
-          }
 
-          if (event.includes("new_token")) {
-            const jsonData = data.split("data:")[1].trim();
-            const { text } = JSON.parse(jsonData);
+            if (event.includes("new_token")) {
+              msg = this.handleNewToken(data, msg);
 
-            if (text) {
-              if (msg) {
-                msg += text;
-                this.continueAIMessage(msg);
-              } else {
-                msg += text;
-                this.addNewAIMessage(msg);
-              }
+              await streamHandler();
             }
-          }
-        });
+          });
+          await streamHandler();
+        } catch (e) {
+          this.isRequestRunning = false;
+          console.log(e);
+        }
+      };
 
-        await streamHandler();
-      } catch (e) {
-        this.isRequestRunning = false;
-        console.log(e);
-      }
-    };
-
-    await streamHandler();
+      await streamHandler();
+    } catch (e) {
+      this.isRequestRunning = false;
+      console.log(e);
+    }
   };
 
-  // sendMessage = async () => {};
+  sendMessage = async (message: string) => {
+    this.addUserMessage(message);
+
+    this.isRequestRunning = true;
+
+    this.abortController.abort();
+
+    this.abortController = new AbortController();
+
+    const stream = await sendMessageToChat(
+      this.currentChatId,
+      message,
+      this.abortController,
+    );
+
+    if (!stream) return;
+    try {
+      const textDecoder = new TextDecoder();
+
+      const reader = stream.getReader();
+
+      let msg = "";
+
+      const streamHandler = async () => {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          reader.cancel();
+          this.isRequestRunning = false;
+          return;
+        }
+
+        const decodedChunk = textDecoder.decode(value);
+
+        try {
+          const chunks = decodedChunk.split("\n\n");
+
+          chunks.forEach(async (chunk) => {
+            const [event, data] = chunk.split("\n");
+
+            if (event.includes("new_token")) {
+              msg = this.handleNewToken(data, msg);
+
+              await streamHandler();
+            }
+          });
+
+          await streamHandler();
+        } catch (e) {
+          this.isRequestRunning = false;
+          console.log(e);
+        }
+      };
+
+      await streamHandler();
+    } catch (e) {
+      this.isRequestRunning = false;
+
+      console.log(e);
+    }
+  };
 
   stopMessage = () => {
     if (this.isRequestRunning) this.abortController.abort();

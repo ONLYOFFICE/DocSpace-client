@@ -37,6 +37,7 @@ import CodeBlock from "./CodeBlock";
 
 type MarkdownFieldProps = {
   chatMessage: string;
+  propLanguage?: string;
 };
 
 // Function to replace <think> tags with a placeholder before markdown processing
@@ -47,7 +48,7 @@ const preprocessChatMessage = (text: string): string => {
     .replace(/<\/think>/g, "`</think>`");
 };
 
-const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
+const MarkdownField = ({ chatMessage, propLanguage }: MarkdownFieldProps) => {
   // Process the chat message to handle <think> tags
   const processedChatMessage = preprocessChatMessage(chatMessage);
 
@@ -134,7 +135,7 @@ const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
 
               return (
                 <CodeBlock
-                  language={match?.[1].toLowerCase()}
+                  language={propLanguage ?? match?.[1].toLowerCase()}
                   content={content}
                 />
               );

@@ -186,3 +186,29 @@
 
   white-space: normal;
 }
+
+.toolCall {
+  border: 1px solid var(--chat-message-code-block-separator-color);
+
+  border-radius: 6px;
+
+  .codeContainer,
+  pre {
+    margin: 0;
+  }
+
+  .toolCallHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--chat-message-code-block-separator-color);
+
+    padding: 8px;
+
+    box-sizing: border-box;
+
+    margin-bottom: 8px;
+  }
+}

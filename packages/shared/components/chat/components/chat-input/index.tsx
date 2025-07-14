@@ -42,8 +42,14 @@ import styles from "./ChatInput.module.scss";
 const ChatInput = () => {
   const { t } = useTranslation(["Common"]);
 
-  const { startChat, stopMessage, isRequestRunning, currentChatId, messages } =
-    useMessageStore();
+  const {
+    startChat,
+    sendMessage,
+    stopMessage,
+    isRequestRunning,
+    currentChatId,
+    messages,
+  } = useMessageStore();
   const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
@@ -70,8 +76,10 @@ const ChatInput = () => {
       return;
     }
 
-    console.log("as");
-  }, [currentChatId, startChat, value]);
+    sendMessage(value);
+
+    setValue("");
+  }, [currentChatId, startChat, sendMessage, value]);
 
   const onKeyEnter = React.useCallback(
     (e: KeyboardEvent) => {

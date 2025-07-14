@@ -141,16 +141,21 @@ export const startNewChat = async (
   return response.body;
 };
 
-export const sendMessageToChat = async (chatId: string, message: string) => {
+export const sendMessageToChat = async (
+  chatId: string,
+  message: string,
+  abortController?: AbortController,
+) => {
   const authHeader = getCookie("asc_auth_key")!;
 
-  const response = await fetch(`/api/2.0/${baseUrl}/chats/${chatId}/messages`, {
+  const response = await fetch(`/api/2.0${baseUrl}/chats/${chatId}/messages`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: authHeader,
-      body: JSON.stringify({ message }),
     },
+    signal: abortController?.signal,
+    body: JSON.stringify({ message }),
   });
 
   if (!response.ok) {

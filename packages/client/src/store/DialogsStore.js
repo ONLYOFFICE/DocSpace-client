@@ -180,6 +180,9 @@ class DialogsStore {
 
   submitToGalleryDialogVisible = false;
 
+  /**
+   * @type {?import("@docspace/shared/types").LinkParamsType}
+   */
   linkParams = null;
 
   leaveRoomDialogVisible = false;
@@ -790,6 +793,9 @@ class DialogsStore {
     this.formItem = formItem;
   };
 
+  /**
+   * @param {import("@docspace/shared/types").LinkParamsType} linkParams
+   */
   setLinkParams = (linkParams) => {
     this.linkParams = linkParams;
   };

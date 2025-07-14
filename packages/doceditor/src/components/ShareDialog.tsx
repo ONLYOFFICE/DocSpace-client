@@ -35,9 +35,9 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
-import { TFile, TFileLink } from "@docspace/shared/api/files/types";
+import { TFile } from "@docspace/shared/api/files/types";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { LinkEntityType } from "@docspace/shared/enums";
+import type { LinkParamsType } from "@docspace/shared/types";
 
 const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   ${NoUserSelect}
@@ -72,15 +72,7 @@ const SharingDialog = ({
     throw new Error("Function not implemented.", { cause: _value });
   };
 
-  const handleSetLinkParams = (_linkParams: {
-    link: TFileLink;
-    roomId: number | string;
-    type: LinkEntityType;
-    isEdit?: boolean;
-    isPublic?: boolean;
-    isFormRoom?: boolean;
-    isCustomRoom?: boolean;
-  }): void => {
+  const handleSetLinkParams = (_linkParams: LinkParamsType): void => {
     throw new Error("Function not implemented.", { cause: _linkParams });
   };
 

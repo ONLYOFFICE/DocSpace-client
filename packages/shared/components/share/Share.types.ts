@@ -26,13 +26,16 @@
 
 import React from "react";
 import moment from "moment";
-import {
+import type {
   TAvailableExternalRights,
   TFile,
   TFileLink,
+  TFolder,
 } from "../../api/files/types";
-import { LinkEntityType, ShareAccessRights } from "../../enums";
-import { TOption } from "../combobox";
+import type { LinkParamsType } from "../../types";
+import type { ShareAccessRights } from "../../enums";
+
+import type { TOption } from "../combobox";
 
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
@@ -66,7 +69,7 @@ export type LinkRowProps = {
 
   removedExpiredLink: (link: TFileLink) => void;
 
-  availableExternalRights: TAvailableExternalRights;
+  availableExternalRights?: TAvailableExternalRights;
 
   loadingLinks: (string | number)[];
 
@@ -104,7 +107,7 @@ export type ExpiredComboBoxProps = {
 };
 
 export type ShareProps = {
-  infoPanelSelection: TFile;
+  infoPanelSelection: TFile | TFolder;
 
   isRooms?: boolean;
   setView?: (view: string) => void;
@@ -139,14 +142,5 @@ export type ShareProps = {
 
   setIsScrollLocked?: (isScrollLocked: boolean) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
-  setLinkParams: (linkParams: {
-    link: TFileLink;
-    roomId: number | string;
-    type: LinkEntityType;
-    isEdit?: boolean;
-    isPublic?: boolean;
-    isFormRoom?: boolean;
-    isCustomRoom?: boolean;
-    updateLink: (newLink: TFileLink) => void;
-  }) => void;
+  setLinkParams: (linkParams: LinkParamsType) => void;
 };

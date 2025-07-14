@@ -58,15 +58,13 @@ const RoleLinkBlock = ({
         {t("SharingPanel:RoleForLink")}
       </Text>
       <AccessRightSelect
-        // innerContainer
-        // scaledOptions
-        // manualY="16px"
         fillIcon
-        onSelect={handleSelect}
-        manualWidth="auto"
+        scaledOptions
         fixedDirection
-        type="descriptive"
         directionY="both"
+        manualWidth="auto"
+        type="descriptive"
+        onSelect={handleSelect}
         directionX={directionX}
         isDefaultMode={isMobileView}
         isMobileView={isMobileView}

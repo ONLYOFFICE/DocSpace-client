@@ -34,7 +34,7 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.rea
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import { LinkEntityType, ShareAccessRights } from "../../enums";
+import { ShareAccessRights } from "../../enums";
 import { LINKS_LIMIT_COUNT } from "../../constants";
 import {
   addExternalFolderLink,
@@ -46,18 +46,18 @@ import {
   getPrimaryFolderLink,
   getPrimaryLink,
 } from "../../api/files";
-import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
+import type { TFileLink } from "../../api/files/types";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import { isDesktop } from "../../utils";
-import { TOption } from "../combobox";
-import { Text } from "../text";
-import { IconButton } from "../icon-button";
-import { Tooltip } from "../tooltip";
-import { toastr } from "../toast";
-import { TData } from "../toast/Toast.type";
-import PublicRoomBar from "../public-room-bar";
-
 import ShareLoader from "../../skeletons/share";
+import { isDesktop } from "../../utils";
+
+import { Text } from "../text";
+import { toastr } from "../toast";
+import { Tooltip } from "../tooltip";
+import { IconButton } from "../icon-button";
+import type { TOption } from "../combobox";
+import type { TData } from "../toast/Toast.type";
+import PublicRoomBar from "../public-room-bar";
 
 import LinkRow from "./sub-components/LinkRow";
 
@@ -358,14 +358,10 @@ const Share = (props: ShareProps) => {
   };
 
   const onEditLink = (link: TFileLink) => {
-    const type = isFolder ? LinkEntityType.FOLDER : LinkEntityType.FILE;
-
     setEditLinkPanelIsVisible(true);
     setLinkParams({
-      isEdit: true,
       link,
-      roomId: infoPanelSelection.id,
-      type,
+      item: infoPanelSelection,
       updateLink: (newLink: TFileLink) => {
         if (!mountedRef.current) return;
         updateLink(link, newLink);
@@ -441,6 +437,11 @@ const Share = (props: ShareProps) => {
     [fileLinks],
   );
 
+  const availableExternalRights =
+    infoPanelSelection && "availableExternalRights" in infoPanelSelection
+      ? infoPanelSelection.availableExternalRights
+      : undefined;
+
   if (hideSharePanel) return null;
 
   return (
@@ -496,10 +497,7 @@ const Share = (props: ShareProps) => {
             changeAccessOption={changeAccessOption}
             onCloseContextMenu={onCloseContextMenu}
             changeExpirationOption={changeExpirationOption}
-            availableExternalRights={
-              infoPanelSelection.availableExternalRights ??
-              ({} as TAvailableExternalRights)
-            }
+            availableExternalRights={availableExternalRights}
           />
         </div>
       )}

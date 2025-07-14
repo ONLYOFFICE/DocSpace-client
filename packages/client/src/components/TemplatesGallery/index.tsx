@@ -27,37 +27,47 @@
 import { inject, observer } from "mobx-react";
 import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Tabs } from "@docspace/shared/components/tabs";
+
+import Form from "./Form";
+
 import styles from "./TemplatesGallery.module.scss";
-// import { Tabs } from "@docspace/shared/components/tabs";
 
 const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
   const { templatesGalleryVisible } = props;
 
-  //   const tabs = [
-  //     {
-  //       id: "forms",
-  //       name: "Forms",
-  //     },
-  //     {
-  //       id: "documents",
-  //       name: "Documents",
-  //     },
-  //     {
-  //       id: "spreadsheet",
-  //       name: "Spreadsheet",
-  //     },
-  //     {
-  //       id: "presentation",
-  //       name: "Presentation",
-  //     },
-  //   ];
+  const tabs = [
+    {
+      id: "forms",
+      name: "Forms",
+      content: <Form />,
+    },
+    {
+      id: "documents",
+      name: "Documents",
+      content: <div />,
+    },
+    {
+      id: "spreadsheet",
+      name: "Spreadsheet",
+      content: <div />,
+    },
+    {
+      id: "presentation",
+      name: "Presentation",
+      content: <div />,
+    },
+  ];
 
   const nodeTemplatesGallery = (
     <>
       <Backdrop visible withBackground />
-      <div className={styles.templatesGallery}>
-        <div className={styles.header}>Template gallery</div>
-        {/* <Tabs items={tabs} selectedItemId={"forms"} /> */}
+      <div className={styles.container}>
+        <div className={styles.templatesGallery}>
+          <div className={styles.header}>Template gallery</div>
+
+          <Tabs items={tabs} selectedItemId="forms" />
+        </div>
       </div>
     </>
   );

@@ -24,30 +24,72 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables/colors";
+import styled from "styled-components";
 
-.container {
-  position: absolute;
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
+import CategoryFilter from "./CategoryFilter";
 
-  top: 90px;
-  bottom: 90px;
+export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 0 8px 0;
 
-  z-index: 204;
+  .form-only-filters {
+    height: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
 
-  width: 100%;
-}
+    &:empty {
+      display: none;
+    }
+  }
 
-.templatesGallery {
-  background-color: var(--background-color);
-  border-radius: 6px;
+  .general-filters {
+    height: 32px;
+    width: 100%;
+    max-width: 693px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+  }
 
-  margin-right: 60px;
-  margin-left: 60px;
+  .form-only-filters:empty + .general-filters {
+    justify-content: space-between;
+    max-width: 100%;
+  }
 
-  height: 100%;
-}
+  @media ${tablet} {
+    padding-bottom: 16px;
+  }
 
-.header {
-  height: 54px;
-}
+  @media ${mobile} {
+    flex-direction: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `column` : `column-reverse`};
+
+    .form-only-filters {
+      width: 100%;
+    }
+    .general-filters {
+      max-width: 100%;
+    }
+  }
+`;
+
+const SectionFilterContent = () => {
+  return (
+    <StyledFilter>
+      <div className="form-only-filters">
+        <CategoryFilter />
+      </div>
+    </StyledFilter>
+  );
+};
+
+export default SectionFilterContent;

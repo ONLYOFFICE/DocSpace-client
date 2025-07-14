@@ -24,30 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables/colors";
+import SectionFilterContent from "../Filter";
 
-.container {
-  position: absolute;
+const Form = () => {
+  return <SectionFilterContent />;
+};
 
-  top: 90px;
-  bottom: 90px;
-
-  z-index: 204;
-
-  width: 100%;
-}
-
-.templatesGallery {
-  background-color: var(--background-color);
-  border-radius: 6px;
-
-  margin-right: 60px;
-  margin-left: 60px;
-
-  height: 100%;
-}
-
-.header {
-  height: 54px;
-}
+export default Form;

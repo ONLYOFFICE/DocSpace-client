@@ -3,7 +3,7 @@
   "content": "Check the filled forms and analyze data automatically collected into a spreadsheet. Everything – within one room.",
   "content_en_sha1_hash": "4c9431d01e59d77faab35a63316a049bc247258b",
   "created_at": "2025-05-19T21:30:55.144Z",
-  "updated_at": "2025-05-24T10:55:46.742Z",
+  "updated_at": "2025-07-10T11:11:07.132Z",
   "comment": {
     "text": "The translation key \"TitleComplete\" is used to display a button title that indicates reviewing and analyzing completed forms within one room. This text is likely used in a form-filling dialog or header element to provide context for users. Translators should focus on conveying the idea of completing forms within a specific area.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 67,
+      "line_number": 70,
       "context": "],\n },\n {\n id: 4,\n header: t(\"FormFillingTipsDialog:HeaderComplete\"),\n description: t(\"FormFillingTipsDialog:TitleComplete\"),\n key: \"form-filling-complete\",\n placement: \"bottom\",\n position: [\n {\n type: GuidanceElementType.Mixed,",
       "module": "/packages/shared"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The em-dash (–) used in the English content is not consistently applied in the Arabic translation. It's only used after 'جدول بيانات'.",
-          "suggestion": "Consider consistently using an em-dash throughout the Arabic translation to mirror the English formatting: \"تحققوا من النماذج المعبأة وحلّلوا البيانات التي جُمعت تلقائيًا في جدول بيانات – كل ذلك – ضمن غرفة واحدة.\""
+          "description": "The Arabic translation uses an em dash (–) which is not the standard for Saudi Arabic. A hyphen (-) or an en dash (–, but rendered correctly) would be more appropriate.",
+          "suggestion": "Replace the em dash (–) with a hyphen (-)."
         }
       ],
       "approved_at": null
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Analyze data\" is translated as \"təhlil edin\", which is a general term for 'analyze'. A more specific translation that conveys the meaning of interpreting or examining the data would be better.  'İmkan edin' or 'Öyrənin' could be considered.",
-          "suggestion": "Tamamlanmış formaları yoxlayın və elektron cədvəldə avtomatik toplanan məlumatları öyrənin/imkan edin. Hər şey - bir otaqda."
-        },
-        {
-          "type": "formatting",
-          "description": "The English original uses an em dash (–) for a stylistic pause. The Azerbaijani translation uses a standard hyphen (-). While not strictly incorrect, using an em dash would maintain closer stylistic fidelity.",
-          "suggestion": "Tamamlanmış formaları yoxlayın və elektron cədvəldə avtomatik toplanan məlumatları təhlil edin. Hər şey – bir otaqda."
+          "description": "The phrase 'Everything – within one room' is not accurately translated. 'Hər şey - bir otaqda' implies 'Everything - in a room', which doesn't capture the nuance of 'within one room' suggesting the entire process happens in a single location. It also doesn't convey the convenience aspect.",
+          "suggestion": "Tamamlanmış formaları yoxlayın və elektron cədvəldə avtomatik toplanan məlumatları təhlil edin. Prosesin hamısı - bir otaqda."
         }
       ],
       "approved_at": null
@@ -65,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Everything – within one room\" implies everything related to form filling and data analysis is contained within a single physical space. The Czech translation, \"Vše - v jedné místnosti,\" is too literal and might not convey the intended meaning of comprehensive automation and data integration, which is the likely focus of the original English.",
-          "suggestion": "Consider a phrasing that emphasizes the comprehensive nature of the automation and data integration, rather than a strict physical location.  For example: 'Vše - automaticky a pohodlně.' (Everything - automatically and conveniently.) or 'Vše - na jednom místě.' (Everything - in one place.)"
+          "description": "The phrase 'Everything - in one room' doesn't quite capture the nuance of 'Everything – within one room'. While 'v jedné místnosti' is literally 'in one room', the original English implies a consolidated, all-encompassing process. A better translation would convey this consolidation.",
+          "suggestion": "Zkontrolujte vyplněné formuláře a analyzujte automaticky shromážděná data do tabulky. Všechny procesy - v jednom místě."
         }
       ],
       "approved_at": null
@@ -89,8 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'analyze data' is translated as 'analice los datos'. While technically correct, 'analizar los datos' would be a more natural and commonly used phrasing in Spanish. 'Analizar' is the infinitive form, typically used in this context.",
-          "suggestion": "Revise los formularios rellenados y analice los datos recopilados automáticamente en una hoja de cálculo. Todo dentro de una sala."
+          "description": "The English phrase 'analyze data' is better translated as 'analizar los datos' rather than 'analice los datos'. The latter implies a command/order, while the former is more descriptive.",
+          "suggestion": "Analice -> Analizar"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'within one room' is a bit awkward in Spanish. A more natural phrasing would be 'todo en un solo lugar'.",
+          "suggestion": "Todo dentro de una sala -> Todo en un solo lugar"
         }
       ],
       "approved_at": null
@@ -113,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Everything – within one room' is translated as 'Ամենը՝ մեկ սենյակում:'. While technically correct, it loses some of the nuance and impact of the English. 'Everything' implies a comprehensive and convenient solution.",
-          "suggestion": "Consider a more impactful translation for 'Everything' that conveys the feeling of convenience and comprehensiveness.  Possible suggestions include: 'Բոլորը՝ միասին մի սենյակում' (Everything – together in one room) or 'Բոլորը՝ առանց ջանքի մեկ սենյակում' (Everything – effortlessly in one room)."
+          "description": "The phrase \"Everything – within one room\" is translated as \"Ամենը՝ մեկ սենյակում:\". While technically correct, it loses some of the original's impact and flow. A more natural and impactful translation might emphasize the convenience aspect.",
+          "suggestion": "Consider a translation like \"Ամեն ինչ՝ հարմարավետորեն մեկ վայրում\" (Everything conveniently in one place) to better convey the original meaning and create a more compelling message."
         }
       ],
       "approved_at": null
@@ -131,13 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Analyze data automatically collected into a spreadsheet\" is not accurately reflected in the Japanese translation. The Japanese translation emphasizes saving everything into a single room, which is not the intended meaning of the original English.",
-          "suggestion": "記入されたフォームを確認し、収集されたデータを自動的にスプレッドシートで分析できます。 (Confirmation of filled forms, with analysis of collected data automatically in a spreadsheet.)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Everything – within one room\" is too literal and doesn't convey the intended meaning. It suggests physical location, which isn't the core message.",
-          "suggestion": "すべて、一箇所で管理できます。 (Everything can be managed in one place.)"
+          "description": "The phrase \"Everything – within one room\" is translated as \"すべてが一つのルームに保存されます\" which implies saving. The English implies everything is accessible in one location (room) rather than stored there.",
+          "suggestion": "記入されたフォームを確認し、自動的にスプレッドシートに収集されたデータを分析できます。すべて、一つの場所でご利用いただけます。"
         }
       ],
       "approved_at": null
@@ -148,13 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Check the filled forms\" is not accurately conveyed by \"작성된 양식을 확인하고\". The English implies a review or validation of already completed forms, while the Korean suggests checking forms that are being created or written.",
-          "suggestion": "작성된 양식을 검토하고"
+          "description": "The English phrase 'Analyze data automatically collected into a spreadsheet' is not accurately reflected in the Korean translation. '자동으로 수집된 데이터' implies the data is collected *then* analyzed, rather than the simultaneous action suggested by the original. A better phrasing would emphasize the simultaneous analysis.",
+          "suggestion": "룸 하나에서 작성된 양식을 확인하고 스프레드시트에 자동으로 수집되고 분석된 데이터를 확인하세요."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Everything – within one room\" is not completely captured by the Korean. The English emphasizes the convenience of having all functions contained within a single location. The Korean just states 'in one room' which lacks the implied benefit.",
-          "suggestion": "모든 기능을 한 공간에서"
+          "type": "formatting",
+          "description": "The original English has a stylistic flow emphasizing the convenience of having everything in one place. The Korean translation loses some of this flow. The sentence structure is slightly less impactful.",
+          "suggestion": "룸 하나에서 작성된 양식을 확인하고, 자동으로 수집되고 분석된 데이터를 스프레드시트에서 확인하세요. 모든 것을 한 곳에서."
         }
       ],
       "approved_at": null
@@ -165,13 +160,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'automatically collected into a spreadsheet' is not accurately reflected in the Lao translation. 'ອັດຕະນomy' is a direct transliteration of 'automatic' and doesn't convey the meaning of 'collected into a spreadsheet'.",
-          "suggestion": "ກວດຟອມທີ່ເຕີມຂໍ້ມູນ ແລະ ວິເຄາະຂໍ້ມູນທີ່ເຕົ້າໂຮມເຂົ້າໃນແຜ່ນເລກໂດຍອັດຕະໂນມັດ (Kuat fom thi tem khom lae wikhao khomun thi taohrom khao nai phaen lek doy attathomat)."
+          "description": "The word 'automatically' is not accurately conveyed in the Lao translation. 'ອັດຕະນomy' doesn't quite capture the meaning of automated or automatic.",
+          "suggestion": "ກວດຟອມທີ່ເຕີມຂໍ້ມູນ ແລະ ວິເຄາະຂໍ້ມູນທີ່ເຕົ້າໂຮມເຂົ້າໃນແຜ່ນເລກແບບອັດຕະໂນມັດ. (Using 'ອັດຕະໂນມັດ' which means 'automatic') or ວິເຄາະຂໍ້ມູນທີ່ເຕົ້າໂຮມເຂົ້າໃນແຜ່ນເລກດ້ວຍວິທີອັດຕະໂນມັດ (using 'ວິທີອັດຕະໂນມັດ' - automatic method)"
         },
         {
-          "type": "spelling",
-          "description": "'ອັດຕະນomy' is a misspelling of 'ອັດຕະໂນມັດ'.",
-          "suggestion": "ອັດຕະໂນມັດ"
+          "type": "formatting",
+          "description": "The Lao translation retains the English formatting ('–' for emphasis), which is not standard Lao practice.",
+          "suggestion": "Remove the dash or replace it with a standard Lao equivalent for emphasis (e.g., a pause in speech, rephrasing)."
         }
       ],
       "approved_at": null
@@ -200,13 +195,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'analyze data automatically collected into a spreadsheet' is not perfectly conveyed by 'analise os dados recolhidos automaticamente numa folha de cálculo'. A more accurate translation would emphasize the automated aspect of data collection. 'Análise os dados coletados automaticamente em uma planilha' or 'Analise os dados que foram coletados automaticamente em uma planilha' would be better.",
-          "suggestion": "Analise os dados que foram coletados automaticamente em uma planilha."
-        },
-        {
-          "type": "formatting",
-          "description": "The 'Everything - within one room' portion of the English translation isn't perfectly echoed by 'Tudo - dentro de uma sala'. The dash in the original English feels a bit less formal. While not incorrect, a more fluid translation could improve flow.",
-          "suggestion": "Tudo em um só lugar."
+          "description": "The English phrase 'automatically collected into a spreadsheet' is not perfectly conveyed by 'recolhidos automaticamente numa folha de cálculo'. While 'recolhidos automaticamente' captures 'automatically collected', the phrasing 'numa folha de cálculo' is more literal and less fluent than a more idiomatic expression that emphasizes the automation aspect. A more natural translation might consider phrasing like 'inseridos automaticamente numa folha de cálculo' or 'registados automaticamente numa folha de cálculo'.",
+          "suggestion": "Consider 'inseridos automaticamente numa folha de cálculo' or 'registados automaticamente numa folha de cálculo'."
         }
       ],
       "approved_at": null
@@ -223,8 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'within one room' is translated as 'într-o singură sală,' which literally means 'in a single room.' While understandable, it doesn't quite capture the intended meaning of comprehensive data analysis being done in a single location (e.g., a dedicated workspace).  A better translation might emphasize the centralized nature of the process.",
-          "suggestion": "A more appropriate translation for 'within one room' could be 'într-un singur loc' (in a single place) or 'într-un spațiu dedicat' (in a dedicated space)."
+          "description": "The English phrase \"Everything – within one room\" is not accurately conveyed by \"Totul într-o singură sală.\" While the literal meaning is similar, the English implies convenience and consolidation of all processes in a single place. \"Totul într-o singură sală\" sounds like a physical location constraint rather than a functional benefit.",
+          "suggestion": "Totul – centralizat și ușor accesibil."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence 'Verificați formulare completate și analizaţi datele colectate automat într-o foaie de calcul' is somewhat clunky. A more natural flow could improve readability.",
+          "suggestion": "Verificați formularele completate și analizați datele colectate automat într-o foaie de calcul."
         }
       ],
       "approved_at": null
@@ -240,19 +235,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'spreadsheet' is transliterated as 'ස්ප්‍රෙඩ්ෂීට් එක'. While understandable, a more Sinhala word might improve readability, such as 'තාක්ෂණ පත්‍රයක්'.",
-          "suggestion": "තාක්ෂණ පත්‍රයක්"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'එකම කාමරයක් තුළ' could be improved for flow and naturalness. It sounds slightly awkward.",
-          "suggestion": "සියල්ලම එකම ස්ථානයේදී"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Check the filled forms\" is translated as \"පිරවුණු ආකෘති පරීක්ෂා කර\". While understandable, a more natural and accurate translation would be something like \"පිරවූ ආකෘතීන් පරීක්ෂා කර\" (pirawaa aakruthin pariksha kara). The use of 'පිරවුණු' (piravaunu) sounds slightly awkward in this context.",
+          "suggestion": "පිරවූ ආකෘතීන් පරීක්ෂා කර"
         },
         {
           "type": "formatting",
-          "description": "The dash ('–') in the English source and the Sinhala translation feels disconnected. Consistent use of a Sinhala dash or omitting it altogether might improve the flow.",
-          "suggestion": " සියල්ලම එකම ස්ථානයේදී."
+          "description": "The English phrase \"Everything – within one room.\" is translated as \"සියල්ලම –එකම කාමරයක් තුළ.\". The hyphenated structure isn't perfectly mirrored. Consider a slightly more integrated translation.",
+          "suggestion": "සියල්ලම එකම කාමරයක් තුළ"
         }
       ],
       "approved_at": null
@@ -275,8 +265,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The em dash (–) in the English content is translated as a regular hyphen (-). While not technically incorrect, the em dash provides a slight pause and emphasis that a hyphen doesn't convey. Consistency with the original would be preferable.",
-          "suggestion": "Replace '-' with '–'."
+          "description": "The em dash (–) in the English content is replaced with a different dash in the Serbian translation (– instead of —). While functionally similar, maintaining consistent formatting would be preferable.",
+          "suggestion": "Replace the dash with a longer em dash (—) for consistency with the English source."
         }
       ],
       "approved_at": null
@@ -287,8 +277,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The em dash (–) in the English content is represented by a different dash in the Serbian translation (– vs. –). This impacts readability and consistency.",
-          "suggestion": "Replace the dash in \"tabeli – sve unutar jedne sobe\" with the proper em dash (–)."
+          "description": "The em dash (–) in the English content is not consistently used in the Serbian translation. While it appears once, the rest of the sentence uses a regular hyphen (-).",
+          "suggestion": "Ensure consistent use of the em dash (–) for the equivalent of '–' in the English version, or replace it with a regular hyphen if that's the preferred style."
         }
       ],
       "approved_at": null
@@ -299,8 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Everything – within one room' doesn't quite capture the nuance of the English original. It feels a bit literal and less impactful. The original suggests convenience and centralized data handling.",
-          "suggestion": "Doldurulan formları kontrol edin ve otomatik olarak toplanan verileri bir elektronik tabloda analiz edin. Her şey elinizin altında."
+          "description": "The English phrase 'Everything – within one room' is more loosely translated to 'Hepsi tek bir oda içinde.'  A more accurate translation would convey the idea of all actions/processes happening in a single location or system. It could be interpreted as referring to the room itself, which isn't the intended meaning.",
+          "suggestion": "Hepsi aynı ortamda veya Hepsi tek bir platformda."
         }
       ],
       "approved_at": null
@@ -314,13 +304,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Everything – within one room\" is a bit awkward and doesn't fully capture the intended meaning of convenience and centralization. While literally correct, it lacks nuance.",
-          "suggestion": "Kiểm tra các biểu mẫu đã điền và phân tích dữ liệu được thu thập tự động vào một bảng tính. Tất cả đều được thực hiện – trong một phòng duy nhất."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -329,8 +313,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Everything – within one room\" is translated as \"所有操作均可在同一房间内完成\". While technically correct, it's a bit clunky and loses the succinctness of the original. 'Everything' implies more than just 'operations'.",
-          "suggestion": "检查已填写的表单并分析自动收集到电子表格中的数据，所有内容均可在同一房间内处理。"
+          "description": "The phrase \"Everything – within one room\" is translated as \"所有操作均可在同一房间内完成.\" While technically correct, it loses the concise and impactful nature of the original. 'Everything' implies a comprehensive and easy process, which is somewhat diluted by the literal translation.",
+          "suggestion": "Consider a translation that conveys the same comprehensive and easy process feel, such as \"所有数据均可在一个房间内轻松处理\" or \"所有内容均可在同一房间内实现\"."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "You have appointed a new owner.",
   "content_en_sha1_hash": "bfdff63ec08042212380b8b5ed1aeed73a496e37",
   "created_at": "2025-05-19T21:30:55.262Z",
-  "updated_at": "2025-06-30T12:20:31.630Z",
+  "updated_at": "2025-07-10T11:11:07.104Z",
   "comment": {
     "text": "This translation key is used for notifications that a new owner has been appointed. It displays a success message when a user successfully leaves a room and appoints a new owner in files management.",
     "is_auto": true,

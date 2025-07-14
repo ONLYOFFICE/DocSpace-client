@@ -35,6 +35,7 @@ import { setCookie } from "@docspace/shared/utils/cookie";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { TUser } from "@docspace/shared/api/people/types";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 export interface UseThemeProps {
   user?: TUser;
@@ -93,6 +94,7 @@ const useTheme = ({ user, colorTheme, systemTheme, lang }: UseThemeProps) => {
       ...(newTheme ?? Base),
       currentColorScheme: currColorTheme,
       interfaceDirection,
+      fontFamily: getFontFamilyDependingOnLanguage(lang ?? "en"),
     };
   });
 
@@ -125,6 +127,7 @@ const useTheme = ({ user, colorTheme, systemTheme, lang }: UseThemeProps) => {
       ...(isBaseTheme ? Base : Dark),
       currentColorScheme: currentColorTheme,
       interfaceDirection,
+      fontFamily: getFontFamilyDependingOnLanguage(lang ?? "en"),
     });
     setCookie(SYSTEM_THEME_KEY, SYSTEM_THEME);
 

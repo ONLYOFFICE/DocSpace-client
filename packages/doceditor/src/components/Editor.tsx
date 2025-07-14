@@ -55,6 +55,7 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import { isPDFDocument } from "@/utils";
 
 const Editor = ({
   config,
@@ -283,8 +284,8 @@ const Editor = ({
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
-        IS_DESKTOP_EDITOR ||
-        (typeof window !== "undefined" && !openOnNewPage)
+        !isPDFDocument(fileInfo) &&
+        (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {
         newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
       }

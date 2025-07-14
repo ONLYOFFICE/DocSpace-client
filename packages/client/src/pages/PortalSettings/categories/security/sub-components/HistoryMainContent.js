@@ -256,7 +256,7 @@ const HistoryMainContent = (props) => {
               saveButtonLabel={saveButtonLabel}
               cancelButtonLabel={cancelButtonLabel}
               showReminder={loginLifeTimeReminder}
-              reminderText={t("YouHaveUnsavedChanges")}
+              reminderText={t("Common:YouHaveUnsavedChanges")}
               displaySettings={true}
               hasScroll={false}
               isDisabled={isSettingNotPaid}
@@ -279,7 +279,7 @@ const HistoryMainContent = (props) => {
               saveButtonLabel={saveButtonLabel}
               cancelButtonLabel={cancelButtonLabel}
               showReminder={auditLifeTimeReminder}
-              reminderText={t("YouHaveUnsavedChanges")}
+              reminderText={t("Common:YouHaveUnsavedChanges")}
               displaySettings={true}
               hasScroll={false}
               isDisabled={isSettingNotPaid}

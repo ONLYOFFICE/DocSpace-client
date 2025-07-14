@@ -71,11 +71,7 @@ const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
     try {
       setIsLoading(true);
 
-      // if (userName && passwordHash?.salt) {
-      // await loginWithTfaCode(userName, passwordHash.salt, code);
-      // } else {
       await validateTfaCode(code, confirmHeader);
-      // }
 
       let confirmData = "";
       try {

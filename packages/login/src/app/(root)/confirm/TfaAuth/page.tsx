@@ -49,7 +49,7 @@ async function Page(props: TfaAuthProps) {
   const uid = searchParams.uid;
   const email = searchParams.email;
 
-  const [settings, user] = await Promise.all([
+  const [settings] = await Promise.all([
     getSettings(),
     uid
       ? getUserFromConfirm(uid, confirmKey)
@@ -62,10 +62,7 @@ async function Page(props: TfaAuthProps) {
     <>
       <GreetingContainer />
       <FormWrapper id="tfa-auth-form">
-        <TfaAuthForm
-          passwordHash={settings.passwordHash}
-          userName={user?.userName}
-        />
+        <TfaAuthForm />
       </FormWrapper>
     </>
   ) : null;

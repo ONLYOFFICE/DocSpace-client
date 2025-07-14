@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "In una stanza di compilazione dei moduli, il collegamento principale è valido per un periodo di tempo illimitato.",
   "LimitTimeBlockPublicRoomDescription": "In una stanza pubblica, il link principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con un limite di tempo.",
   "LinkDeletedSuccessfully": "Link eliminato con successo",
-  "LinkEditedSuccessfully": "Link modificato e copiato con successo",
   "LinkForPortalUsers": "Collegamento per gli utenti di {{productName}}",
   "LinkSettings": "Impostazioni di link",
   "LinkSuccessfullyCreatedAndCopied": "Link creato e copiato con successo negli appunti",

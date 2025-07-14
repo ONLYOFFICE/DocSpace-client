@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "In einem Raum zum Ausfüllen von Formularen ist der Hauptlink für einen unbegrenzten Zeitraum gültig.",
   "LimitTimeBlockPublicRoomDescription": "In einem öffentlichen Raum ist der Hauptlink für einen unbegrenzten Zeitraum gültig. Sie können zusätzliche Links mit zeitlicher Begrenzung erstellen.",
   "LinkDeletedSuccessfully": "Link erfolgreich gelöscht",
-  "LinkEditedSuccessfully": "Link erfolgreich bearbeitet und kopiert",
   "LinkForPortalUsers": "Link für {{productName}}-Benutzer",
   "LinkSettings": "Linkeinstellungen",
   "LinkSuccessfullyCreatedAndCopied": "Link erfolgreich erstellt und in die Zwischenablage kopiert",

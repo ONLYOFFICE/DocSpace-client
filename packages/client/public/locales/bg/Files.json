@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "В Стая за попълване на формуляри главният линк е валиден за неограничен период от време.",
   "LimitTimeBlockPublicRoomDescription": "В Обществена стая главният линк е валиден за неограничен период от време. Можете да създадете допълнителни линкове с времеви лимит.",
   "LinkDeletedSuccessfully": "Линкът е изтрит успешно",
-  "LinkEditedSuccessfully": "Линкът беше успешно редактиран и копиран",
   "LinkForPortalUsers": "Линк за {{productName}} потребители",
   "LinkSettings": "Настройки на линковете",
   "LinkSuccessfullyCreatedAndCopied": "Линкът беше успешно създаден и копиран в клипборда",

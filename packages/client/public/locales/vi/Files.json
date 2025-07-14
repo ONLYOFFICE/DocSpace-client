@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "Trong phòng Điền Biểu mẫu, liên kết chính có giá trị trong một khoảng thời gian không giới hạn.",
   "LimitTimeBlockPublicRoomDescription": "Trong phòng công cộng, liên kết chính có giá trị trong một khoảng thời gian không giới hạn. Bạn có thể tạo các liên kết bổ sung với giới hạn thời gian. ",
   "LinkDeletedSuccessfully": "Đã xóa liên kết thành công",
-  "LinkEditedSuccessfully": "Đã chỉnh sửa và sao chép liên kết thành công",
   "LinkForPortalUsers": "Liên kết dành cho người dùng {{productName}}",
   "LinkSettings": "Cài đặt liên kết",
   "LinkSuccessfullyCreatedAndCopied": "Đã tạo và sao chép liên kết thành công vào bộ nhớ tạm",

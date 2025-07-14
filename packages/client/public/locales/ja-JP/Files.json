@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "フォーム記入ルームでは、メインリンクは無制限の時間有効です。",
   "LimitTimeBlockPublicRoomDescription": "パブリックルームでは、メインリンクは無制限の時間有効です。時間制限付きの追加リンクを作成できます。",
   "LinkDeletedSuccessfully": "リンクは正常に削除されました",
-  "LinkEditedSuccessfully": "リンクの編集とコピーに成功しました",
   "LinkForPortalUsers": "{{productName}}のユーザー用リンク",
   "LinkSettings": "リンクの設定",
   "LinkSuccessfullyCreatedAndCopied": "リンクが正常に作成され、クリップボードにコピーされました",

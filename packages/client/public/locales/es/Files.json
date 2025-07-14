@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "En una sala para rellenar formularios, el enlace principal es válido durante un periodo de tiempo ilimitado.",
   "LimitTimeBlockPublicRoomDescription": "En una sala pública, el enlace principal es válido durante un periodo de tiempo ilimitado. Puede crear enlaces adicionales con límite de tiempo.",
   "LinkDeletedSuccessfully": "El enlace se ha eliminado correctamente",
-  "LinkEditedSuccessfully": "El enlace se ha editado y copiado correctamente ",
   "LinkForPortalUsers": "Enlace para los usuarios de {{productName}}",
   "LinkSettings": "Configuración de enlace",
   "LinkSuccessfullyCreatedAndCopied": "El enlace se ha creado y copiado correctamente en el portapapeles ",

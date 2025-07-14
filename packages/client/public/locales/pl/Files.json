@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "W pokoju do wypełniania formularzy link główny jest ważny przez czas nieograniczony.",
   "LimitTimeBlockPublicRoomDescription": "W pokoju publicznym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu.",
   "LinkDeletedSuccessfully": "Link został pomyślnie usunięty",
-  "LinkEditedSuccessfully": "Link został pomyślnie edytowany i skopiowany",
   "LinkForPortalUsers": "Link dla użytkowników {{productName}}",
   "LinkSettings": "Ustawienia linku",
   "LinkSuccessfullyCreatedAndCopied": "Link został pomyślnie utworzony i skopiowany do schowka",

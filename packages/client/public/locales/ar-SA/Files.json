@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "في غرفة تعبئة النماذج، يكون الرابط الرئيسي صالحًا لفترة غير محدودة.",
   "LimitTimeBlockPublicRoomDescription": "في الغرفة العامة، يكون الرابط الرئيسي صالحًا لفترة غير محدودة. يمكنكم إنشاء روابط إضافية بمدة صلاحية محددة.",
   "LinkDeletedSuccessfully": "تم حذف الرابط بنجاح",
-  "LinkEditedSuccessfully": "تم تعديل ونسخ الرابط بنجاح",
   "LinkForPortalUsers": "رابط لمستخدمي {{productName}}",
   "LinkSettings": "إعدادات الرابط",
   "LinkSuccessfullyCreatedAndCopied": "تم إنشاء ونسخ الرابط في الحافظة بنجاح",

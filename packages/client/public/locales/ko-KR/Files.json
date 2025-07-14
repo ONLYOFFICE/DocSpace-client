@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "양식 작성 룸에서 메인 링크는 무제한의 기간 동안 유효합니다.",
   "LimitTimeBlockPublicRoomDescription": "공개 룸에서 메인 링크는 무제한의 기간 동안 유효합니다. 시간 제한이 있는 추가 링크를 생성할 수 있습니다. ",
   "LinkDeletedSuccessfully": "링크가 성공적으로 삭제되었습니다",
-  "LinkEditedSuccessfully": "링크가 수정 및 복사되었습니다",
   "LinkForPortalUsers": "{{productName}} 사용자를 위한 링크",
   "LinkSettings": "링크 설정",
   "LinkSuccessfullyCreatedAndCopied": "링크가 생성되어 클립보드에 복사되었습니다",

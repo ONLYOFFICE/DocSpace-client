@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "In een Kamer voor het invullen van formulieren is de hoofdlink voor onbepaalde tijd geldig.",
   "LimitTimeBlockPublicRoomDescription": "In een Openbare kamer is de hoofdlink voor onbepaalde tijd geldig. U kunt extra links met een tijdslimiet maken.",
   "LinkDeletedSuccessfully": "Link succesvol verwijderd",
-  "LinkEditedSuccessfully": "Link met succes bewerkt en gekopieerd",
   "LinkForPortalUsers": "Link voor {{productName}} gebruikers",
   "LinkSettings": "Link instellingen",
   "LinkSuccessfullyCreatedAndCopied": "Link succesvol gemaakt en gekopieerd naar klembord",

@@ -114,7 +114,6 @@
   "LimitTimeBlockFormRoomDescription": "In a Form Filling room, the main link is valid for an unlimited time period.",
   "LimitTimeBlockPublicRoomDescription": "In a Public room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "LinkDeletedSuccessfully": "Link deleted successfully",
-  "LinkEditedSuccessfully": "Link successfully edited and copied",
   "LinkForPortalUsers": "Link for {{productName}} users",
   "LinkSettings": "Link settings",
   "LinkSuccessfullyCreatedAndCopied": "Link successfully created and copied to clipboard",

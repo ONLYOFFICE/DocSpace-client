@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "Form Doldurma odasında ana bağlantı süresiz olarak geçerlidir.",
   "LimitTimeBlockPublicRoomDescription": "Herkese Açık odada ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz.",
   "LinkDeletedSuccessfully": "Bağlantı başarıyla silindi",
-  "LinkEditedSuccessfully": "Bağlantı başarıyla düzenlendi ve kopyalandı",
   "LinkForPortalUsers": "{{productName}} kullanıcıları için bağlantı",
   "LinkSettings": "Bağlantı ayarları",
   "LinkSuccessfullyCreatedAndCopied": "Bağlantı başarıyla oluşturuldu ve panoya kopyalandı",

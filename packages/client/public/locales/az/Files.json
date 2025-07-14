@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "Forma Doldurma otağında əsas link vaxt məhdudiyyəti olmadan etibarlıdır.",
   "LimitTimeBlockPublicRoomDescription": "İctimai otaqda əsas link vaxt məhdudiyyəti olmadan etibarlıdır. Vaxt məhdudiyyəti ilə əlavə linklər yarada bilərsiniz.",
   "LinkDeletedSuccessfully": "Keçid uğurla silindi",
-  "LinkEditedSuccessfully": "Link uğurla redaktə edildi və kopyalandı",
   "LinkForPortalUsers": " {{productName}} istifadəçiləri üçün keçid",
   "LinkSettings": "Link parametrləri",
   "LinkSuccessfullyCreatedAndCopied": "Link uğurla yaradıldı və mübadilə buferə kopyalandı",

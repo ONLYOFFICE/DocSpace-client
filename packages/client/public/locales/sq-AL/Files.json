@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "Në një dhomë të plotësimit të formularit, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar.",
   "LimitTimeBlockPublicRoomDescription": "Në një dhomë publike, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar. Ju mund të krijoni lidhje shtesë me afat kohor.",
   "LinkDeletedSuccessfully": "Lidhja u fshi me sukses",
-  "LinkEditedSuccessfully": "Lidhja u editua dhe kopjua me sukses",
   "LinkForPortalUsers": "Lidhja për përdoruesit e {{productName}}",
   "LinkSettings": "Cilësimet e lidhjes",
   "LinkSuccessfullyCreatedAndCopied": "LIdhja u krijua me sukses dhe u kopjua në kujtesën e fragmenteve",

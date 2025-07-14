@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "V Miestnosti na vyplňovanie formulárov je hlavný odkaz platný na neobmedzený čas. ",
   "LimitTimeBlockPublicRoomDescription": "Vo Verejnej miestnosti je hlavný odkaz platný na neobmedzený časový úsek. Môžete vytvoriť ďalšie odkazy s časovým obmedzením. ",
   "LinkDeletedSuccessfully": "Odkaz úspešne vymazaný",
-  "LinkEditedSuccessfully": "Odkaz úspešne upravený a skopírovaný",
   "LinkForPortalUsers": "Odkaz pre užívateľov {{productName}}",
   "LinkSettings": "Nastavenia odkazu",
   "LinkSuccessfullyCreatedAndCopied": "Odkaz úspešne vytvorený a skopírovaný do schránky",

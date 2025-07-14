@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "Veidlapu aizpildīšanas telpā galvenā saite ir derīga neierobežotu laiku.",
   "LimitTimeBlockPublicRoomDescription": "Publiskā telpā galvenā saite ir derīga neierobežotu laiku. Varat izveidot papildu saites ar laika ierobežojumu.",
   "LinkDeletedSuccessfully": "Saite ir veiksmīgi izdzēsta",
-  "LinkEditedSuccessfully": "Saite ir veiksmīgi rediģēta un nokopēta",
   "LinkForPortalUsers": "Saite {{productName}} lietotājiem",
   "LinkSettings": "Saites iestatījumi",
   "LinkSuccessfullyCreatedAndCopied": "Saite ir veiksmīgi izveidota un kopēta starpliktuvē",

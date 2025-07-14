@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "V sobi za izpolnjevanje obrazcev je glavna povezava veljavna neomejeno časovno obdobje.",
   "LimitTimeBlockPublicRoomDescription": "V javni sobi je glavna povezava veljavna neomejeno časovno obdobje. Ustvarite lahko dodatne povezave s časovno omejitvijo.",
   "LinkDeletedSuccessfully": "Povezava je bila uspešno izbrisana",
-  "LinkEditedSuccessfully": "Povezava je bila uspešno urejena in kopirana",
   "LinkForPortalUsers": "Povezava za {{productName}} uporabnike",
   "LinkSettings": "Nastavitve povezave",
   "LinkSuccessfullyCreatedAndCopied": "Povezava je bila uspešno ustvarjena in kopirana v odložišče",

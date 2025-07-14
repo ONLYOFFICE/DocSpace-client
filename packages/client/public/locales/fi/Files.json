@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "Lomakkeen täyttöhuoneessa päälinkki on voimassa rajoittamattoman ajanjakson.",
   "LimitTimeBlockPublicRoomDescription": "Julkisessa huoneessa päälinkki on voimassa rajoittamattoman ajanjakson. Voit luoda aikarajoitettuja lisälinkkejä.",
   "LinkDeletedSuccessfully": "Linkki onnistuneesti poistettu",
-  "LinkEditedSuccessfully": "Linkki onnistuneesti muokattu ja kopioitu",
   "LinkForPortalUsers": "Linkki {{productName}}:n käyttäjiin",
   "LinkSettings": "Linkkiasetukset",
   "LinkSuccessfullyCreatedAndCopied": "Linkki onnistuneesti luotu ja kopioitu leikepöydälle",

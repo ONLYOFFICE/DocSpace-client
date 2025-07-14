@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "У соби за попуњавање образаца, главни линк важи неограничено.",
   "LimitTimeBlockPublicRoomDescription": "У јавној соби, главни линк важи неограничено. Можете креирати додатне линкове са временским ограничењем.",
   "LinkDeletedSuccessfully": "Линк обрисан успешно",
-  "LinkEditedSuccessfully": "Линк успешно уређен и копиран",
   "LinkForPortalUsers": "Линк за {{productName}} кориснике",
   "LinkSettings": "Подешавања линка",
   "LinkSuccessfullyCreatedAndCopied": "Линк успешно креиран и копиран у привремену меморију",

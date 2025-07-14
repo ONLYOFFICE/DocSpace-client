@@ -112,7 +112,6 @@
   "LimitTimeBlockFormRoomDescription": "Ձևաթղթերի լրացման սենյակում հիմնական հղումը գործում է անսահմանափակ ժամկետով:",
   "LimitTimeBlockPublicRoomDescription": "Հանրային սենյակում հիմնական հղումը գործում է անսահմանափակ ժամանակով: Դուք կարող եք լրացուցիչ հղումներ ստեղծել ժամանակի սահմանափակումով:",
   "LinkDeletedSuccessfully": "Հղումը հաջողությամբ ջնջվեց",
-  "LinkEditedSuccessfully": "Հղումը հաջողությամբ խմբագրվել և պատճենվել է",
   "LinkForPortalUsers": "Հղում {{productName}}-ի օգտագործողների համար",
   "LinkSettings": "Հղման կարգավորումներ",
   "LinkSuccessfullyCreatedAndCopied": "Հղումը հաջողությամբ ստեղծվեց և պատճենվեց սեղմատախտակում",

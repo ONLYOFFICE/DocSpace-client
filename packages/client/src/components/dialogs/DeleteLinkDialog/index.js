@@ -32,6 +32,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { RoomsType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import api from "@docspace/shared/api";
 
@@ -204,6 +205,10 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
 );
 
 export default inject(
+  /**
+   * @param {TStore} param0
+   * @returns
+   */
   ({ dialogsStore, publicRoomStore, selectedFolderStore }) => {
     const {
       deleteLinkDialogVisible: visible,
@@ -217,19 +222,23 @@ export default inject(
       updateUrlKeyForCustomRoom,
     } = publicRoomStore;
     const { isRootFolder } = selectedFolderStore;
-    const { isFormRoom, isCustomRoom } = linkParams;
+    const item = linkParams.item;
+
+    const isFormRoom = item.roomType === RoomsType.FormRoom;
+    const isCustomRoom = item.roomType === RoomsType.CustomRoom;
+    const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
 
     return {
       linkParams,
       visible,
       setIsVisible,
-      roomId: linkParams.roomId,
+      roomId: item.id,
       link: linkParams.link,
       editExternalLink,
       deleteExternalLink,
       isFormRoom,
       isCustomRoom,
-      isPublicRoomType: linkParams.isPublic,
+      isPublicRoomType,
       setPublicRoomKey,
       isRootFolder,
       updateUrlKeyForCustomRoom,

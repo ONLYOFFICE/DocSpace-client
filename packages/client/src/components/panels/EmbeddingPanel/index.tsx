@@ -43,7 +43,8 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { TTranslation } from "@docspace/shared/types";
+import type { TFileLink } from "@docspace/shared/api/files/types";
+import type { LinkParamsType, TTranslation } from "@docspace/shared/types";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import {
   ModalDialog,
@@ -86,17 +87,10 @@ type LinkParamsLinkType = {
   subjectType: number;
 };
 
-type LinkParamsType = {
-  roomId: number | string;
-  isEdit?: boolean;
-  link: LinkParamsLinkType;
-};
-
 type EmbeddingPanelProps = {
   t: TTranslation;
   theme: TTheme;
   requestToken: string;
-  roomId: number;
   visible: boolean;
   setEmbeddingPanelData: (value: {
     visible: boolean;
@@ -106,7 +100,7 @@ type EmbeddingPanelProps = {
   currentColorScheme: TColorScheme;
   linkParams: LinkParamsType;
   setLinkParams: (linkParams: LinkParamsType) => void;
-  fetchExternalLinks: (roomId: string | number) => LinkParamsLinkType[];
+  fetchExternalLinks: (id: string | number) => Promise<LinkParamsLinkType[]>;
   isAdmin: boolean;
   itemId?: string | number;
   isRoom: boolean;
@@ -132,7 +126,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     isRoom,
   } = props;
 
-  const { roomId, link } = linkParams;
+  const { link } = linkParams;
 
   const [sharedLinksOptions, setSharedLinksOptions] = useState<TOptionType[]>(
     [],
@@ -171,7 +165,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     src: window.location.origin,
     frameId: "ds-frame",
     mode: "public-room",
-    id: roomId,
+    id: linkParams.item.id,
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
     showHeader: true,
@@ -233,17 +227,17 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     });
   };
 
-  const onChangeWidthDimension = (item: TOption) => {
-    setWidthDimension(item);
+  const onChangeWidthDimension = (option: TOption) => {
+    setWidthDimension(option);
     setEmbeddingConfig((config) => {
-      return { ...config, width: `${widthValue}${item.label}` };
+      return { ...config, width: `${widthValue}${option.label}` };
     });
   };
 
-  const onChangeHeightDimension = (item: TOption) => {
-    setHeightDimension(item);
+  const onChangeHeightDimension = (option: TOption) => {
+    setHeightDimension(option);
     setEmbeddingConfig((config) => {
-      return { ...config, height: `${heightValue}${item.label}` };
+      return { ...config, height: `${heightValue}${option.label}` };
     });
   };
 
@@ -272,18 +266,17 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const onEditLink = () => {
     setLinkParams({
       ...linkParams,
-      isEdit: true,
       link: selectedLink ?? link,
     } as LinkParamsType);
     setEditLinkPanelIsVisible(true);
   };
 
-  const onChangeSharedLink = (item: TOption) => {
-    setSelectedLink(item as TOptionType);
+  const onChangeSharedLink = (option: TOption) => {
+    setSelectedLink(option as TOptionType);
     setEmbeddingConfig((config) => {
       return {
         ...config,
-        requestToken: (item as TOptionType)?.sharedTo?.requestToken,
+        requestToken: (option as TOptionType)?.sharedTo?.requestToken,
       };
     });
   };
@@ -317,7 +310,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const getLinks = useCallback(async () => {
     try {
       setIsLoading(true);
-      const roomLinks = await fetchExternalLinks(roomId);
+      const roomLinks = await fetchExternalLinks(linkParams.item.id);
 
       if (roomLinks && roomLinks.length) {
         const linksOptions = roomLinks.map((l: LinkParamsLinkType) => {
@@ -338,7 +331,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     } finally {
       setIsLoading(false);
     }
-  }, [roomId, fetchExternalLinks]);
+  }, [linkParams.item.id, fetchExternalLinks]);
 
   useEffect(() => {
     if (itemId) {
@@ -346,8 +339,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     }
   }, [itemId, getLinks]);
 
-  const usePrevious = (value: LinkParamsLinkType | null) => {
-    const ref = useRef<LinkParamsLinkType | null>(undefined);
+  const usePrevious = (value: TFileLink | null) => {
+    const ref = useRef<TFileLink | null>(undefined);
     useEffect(() => {
       ref.current = value;
     });

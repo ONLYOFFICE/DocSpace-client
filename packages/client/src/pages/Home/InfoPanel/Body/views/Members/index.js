@@ -83,8 +83,6 @@ const Members = ({
   isPublicRoom,
   isFormRoom,
   additionalLinks,
-  setLinkParams,
-  setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
   withPublicRoomBlock,
@@ -149,26 +147,21 @@ const Members = ({
       guestsTitleCount;
 
   const onAddNewLink = async () => {
-    if (isPublicRoom || primaryLink) {
-      setLinkParams({ roomId: infoPanelSelection?.id, isEdit: false });
-      setEditLinkPanelIsVisible(true);
-    } else {
-      getPrimaryLink(infoPanelSelection.id).then((link) => {
-        setExternalLink(link, searchParams, setSearchParams, isCustomRoom);
-        copyShareLink(link.sharedTo.shareLink);
-        toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+    getPrimaryLink(infoPanelSelection.id).then((link) => {
+      setExternalLink(link, searchParams, setSearchParams, isCustomRoom);
+      copyShareLink(link.sharedTo.shareLink);
+      toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
-        const filterObj = FilesFilter.getFilter(window.location);
+      const filterObj = FilesFilter.getFilter(window.location);
 
-        if (isPublicRoomType && !filterObj.key && !isRootFolder) {
-          setPublicRoomKey(link.sharedTo.requestToken);
-          setSearchParams((prev) => {
-            prev.set("key", link.sharedTo.requestToken);
-            return prev;
-          });
-        }
-      });
-    }
+      if (isPublicRoomType && !filterObj.key && !isRootFolder) {
+        setPublicRoomKey(link.sharedTo.requestToken);
+        setSearchParams((prev) => {
+          prev.set("key", link.sharedTo.requestToken);
+          return prev;
+        });
+      }
+    });
   };
 
   const onOpenAccessSettings = () => {
@@ -402,11 +395,8 @@ export default inject(
       publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
-    const {
-      setLinkParams,
-      setEditLinkPanelIsVisible,
-      setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
-    } = dialogsStore;
+    const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
+      dialogsStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
@@ -435,8 +425,6 @@ export default inject(
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
       additionalLinks,
-      setLinkParams,
-      setEditLinkPanelIsVisible,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,

@@ -38,35 +38,29 @@ import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
-import {
-  LinkEntityType,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
 
-import type { Nullable, TTranslation } from "@docspace/shared/types";
+import type {
+  LinkParamsType,
+  Nullable,
+  TTranslation,
+} from "@docspace/shared/types";
 import type {
   TAvailableExternalRights,
   TFileLink,
 } from "@docspace/shared/api/files/types";
 import type { TOption } from "@docspace/shared/components/combobox";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
 type LinkRowProps = {
+  item: TRoom;
   t: TTranslation;
   link: TFileLink;
-  roomId: string | number;
-  setLinkParams: (linkParams: {
-    roomId: number | string;
-    isEdit?: boolean;
-    link: TFileLink;
-    isPublic?: boolean;
-    isFormRoom?: boolean;
-    isCustomRoom?: boolean;
-    type: LinkEntityType;
-  }) => void;
+
+  setLinkParams: (linkParams: LinkParamsType) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
   setDeleteLinkDialogVisible: (value: boolean) => void;
   setEmbeddingPanelData: (value: {
@@ -76,10 +70,7 @@ type LinkRowProps = {
 
   isArchiveFolder: boolean;
   setIsScrollLocked: (isScrollLocked: boolean) => void;
-  isPublicRoomType: boolean;
-  isFormRoom: boolean;
   isPrimaryLink: boolean;
-  isCustomRoom: boolean;
   setExternalLink: (link: TFileLink) => void;
   editExternalLink: (
     roomId: string | number,
@@ -94,21 +85,23 @@ const LinkRow = (props: LinkRowProps) => {
   const {
     t,
     link,
-    roomId,
     setLinkParams,
     setEditLinkPanelIsVisible,
     setDeleteLinkDialogVisible,
     setEmbeddingPanelData,
     isArchiveFolder,
     setIsScrollLocked,
-    isPublicRoomType,
-    isFormRoom,
-    isCustomRoom,
     isPrimaryLink,
     editExternalLink,
     setExternalLink,
     deleteExternalLink,
+    item,
   } = props;
+
+  const roomId = item.id;
+
+  const isFormRoom = item.roomType === RoomsType.FormRoom;
+  const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
 
   const { password, isExpired, primary } = link.sharedTo;
 
@@ -124,13 +117,8 @@ const LinkRow = (props: LinkRowProps) => {
   const onEditLink = () => {
     setEditLinkPanelIsVisible(true);
     setLinkParams({
-      isEdit: true,
       link,
-      roomId,
-      isPublic: isPublicRoomType,
-      isFormRoom,
-      isCustomRoom,
-      type: LinkEntityType.ROOM,
+      item,
     });
     onCloseContextMenu();
   };
@@ -145,11 +133,7 @@ const LinkRow = (props: LinkRowProps) => {
   const onEmbeddingClick = () => {
     setLinkParams({
       link,
-      roomId,
-      isPublic: isPublicRoomType,
-      isFormRoom,
-      isCustomRoom,
-      type: LinkEntityType.ROOM,
+      item,
     });
     setEmbeddingPanelData({ visible: true });
     onCloseContextMenu();
@@ -158,11 +142,7 @@ const LinkRow = (props: LinkRowProps) => {
   const onDeleteLink = () => {
     setLinkParams({
       link,
-      roomId,
-      isPublic: isPublicRoomType,
-      isFormRoom,
-      isCustomRoom,
-      type: LinkEntityType.ROOM,
+      item,
     });
     setDeleteLinkDialogVisible(true);
     onCloseContextMenu();
@@ -235,11 +215,7 @@ const LinkRow = (props: LinkRowProps) => {
         setExternalLink(linkData);
         setLinkParams({
           link: linkData,
-          roomId,
-          isPublic: isPublicRoomType,
-          isFormRoom,
-          isCustomRoom,
-          type: LinkEntityType.ROOM,
+          item,
         });
 
         if (linkData) {
@@ -281,7 +257,7 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const changeExpirationOption = async (
-    linkData: TFileLink,
+    _linkData: TFileLink,
     expirationDate: moment.Moment | null,
   ) => {
     const newLink = { ...link };
@@ -332,26 +308,20 @@ export default inject<TStore>(
     } = dialogsStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
 
-    const { id, roomType } = infoPanelSelection!;
-
     const { editExternalLink, setExternalLink, deleteExternalLink } =
       publicRoomStore;
 
     return {
       setLinkParams,
-      roomId: id,
+      item: infoPanelSelection,
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelData,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: roomType === RoomsType.PublicRoom,
-      isFormRoom: roomType === RoomsType.FormRoom,
-      isCustomRoom: roomType === RoomsType.CustomRoom,
       editExternalLink,
       setExternalLink,
       deleteExternalLink,
-      roomType,
     };
   },
 )(

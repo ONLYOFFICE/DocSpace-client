@@ -31,57 +31,31 @@ import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
-import { RoomsType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TFileLink } from "@docspace/shared/api/files/types";
 
 import { StyledHistoryLink } from "../../../styles/history";
 
-type TFeedData = {
-  access: number;
-  canEditAccess: boolean;
-  subjectType: number;
-  isOwner: boolean;
-  isLocked: boolean;
-  title?: string;
-  sharedTo?: {
-    title: string;
-    shareLink: string;
-    requestToken: string;
-    primary: boolean;
-    linkType: number;
-    isExpired: boolean;
-    internal: boolean;
-    id: string;
-    denyDownload: boolean;
-  };
-};
-
 interface HistoryRoomExternalLinkProps {
-  feedData: TFeedData;
-  roomId: number | string;
+  feedData: TFileLink;
   t: TTranslation;
-  canEditLink: boolean;
   setEditLinkPanelIsVisible: (value: boolean) => void;
-  setLinkParams: (data: {
-    isEdit: boolean;
-    link: TFeedData;
-    roomId: number | string;
-    isFormRoom?: boolean;
-  }) => void;
-  isFormRoom?: boolean;
+  setLinkParams: TStore["dialogsStore"]["setLinkParams"];
   withWrapping?: boolean;
+  item: TRoom;
 }
 
 const HistoryRoomExternalLink = ({
   t,
+  item,
   feedData,
-  canEditLink,
   setEditLinkPanelIsVisible,
   setLinkParams,
-  roomId,
-  isFormRoom,
   withWrapping,
 }: HistoryRoomExternalLinkProps) => {
+  const canEditLink = item?.security?.EditRoom ?? false;
+
   const onEditLink = () => {
     if (!feedData.sharedTo) {
       toastr.error(t("FeedLinkWasDeleted"));
@@ -89,10 +63,8 @@ const HistoryRoomExternalLink = ({
     }
 
     setLinkParams({
-      isEdit: true,
+      item,
       link: feedData,
-      roomId,
-      isFormRoom,
     });
     setEditLinkPanelIsVisible(true);
   };
@@ -108,11 +80,11 @@ const HistoryRoomExternalLink = ({
           isTextOverflow
           style={withWrapping ? { display: "inline", textWrap: "wrap" } : {}}
         >
-          {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
+          {decode(feedData.sharedTo?.title ?? "")}
         </Link>
       ) : (
         <Text as="span" className="text">
-          {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
+          {decode(feedData.sharedTo?.title ?? "")}
         </Text>
       )}
     </StyledHistoryLink>
@@ -122,16 +94,10 @@ const HistoryRoomExternalLink = ({
 export default inject<TStore>(({ dialogsStore, infoPanelStore }) => {
   const { infoPanelSelection } = infoPanelStore;
   const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
-  const { id, roomType, security } = infoPanelSelection!;
-  const { EditRoom } = security || {};
-
-  const isFormRoom = roomType === RoomsType.FormRoom;
 
   return {
-    canEditLink: EditRoom,
-    setEditLinkPanelIsVisible,
     setLinkParams,
-    roomId: id,
-    isFormRoom,
+    setEditLinkPanelIsVisible,
+    item: infoPanelSelection,
   };
 })(withTranslation(["InfoPanel"])(observer(HistoryRoomExternalLink)));

@@ -550,13 +550,8 @@ class ContextOptionsStore {
 
     if (!sharedItem) return;
 
-    const isPublicRoomType = sharedItem.roomType === RoomsType.PublicRoom;
-    const isFormRoom = sharedItem.roomType === RoomsType.FormRoom;
-
     setLinkParams({
-      roomId: sharedItem?.id,
-      isPublic: isPublicRoomType,
-      isFormRoom,
+      item: sharedItem,
     });
 
     setEmbeddingPanelData({ visible: true, item });

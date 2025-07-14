@@ -154,6 +154,53 @@ export default class MessageStore {
     return newMsg;
   };
 
+  handleToolCall = (data: string) => {
+    const jsonData = data.split("data:")[1].trim();
+
+    const { name, arguments: args } = JSON.parse(jsonData);
+
+    const newMsg: TMessage = {
+      messageType: MessageType.ToolCall,
+      createdOn: new Date().toString(),
+      contents: [
+        {
+          type: ContentType.Tool,
+          name,
+          arguments: args,
+        },
+      ],
+    };
+
+    this.messages = [newMsg, ...this.messages];
+  };
+
+  handleToolResult = (data: string) => {
+    const jsonData = data.split("data:")[1].trim();
+
+    const { result } = JSON.parse(jsonData);
+
+    const newMsg: TMessage = {
+      ...this.messages[0],
+
+      contents: [
+        {
+          type: ContentType.Tool,
+          result,
+          arguments:
+            "arguments" in this.messages[0].contents[0]
+              ? this.messages[0].contents[0].arguments!
+              : {},
+          name:
+            "name" in this.messages[0].contents[0]
+              ? this.messages[0].contents[0].name
+              : "",
+        },
+      ],
+    };
+
+    this.messages[0] = newMsg;
+  };
+
   startChat = async (message: string) => {
     this.addUserMessage(message);
 
@@ -166,6 +213,7 @@ export default class MessageStore {
     const stream = await startNewChat(
       this.roomId,
       message,
+      this.roomId,
       this.abortController,
     );
 
@@ -182,7 +230,6 @@ export default class MessageStore {
         const { done, value } = await reader.read();
 
         if (done) {
-          reader.cancel();
           this.isRequestRunning = false;
           return;
         }
@@ -197,16 +244,20 @@ export default class MessageStore {
 
             if (event.includes("metadata")) {
               this.handleMetadata(data);
-
-              await streamHandler();
-
-              return;
             }
 
             if (event.includes("new_token")) {
               msg = this.handleNewToken(data, msg);
+            }
 
-              await streamHandler();
+            if (event.includes("tool_call")) {
+              msg = "";
+              this.handleToolCall(data);
+            }
+
+            if (event.includes("tool_result")) {
+              msg = "";
+              this.handleToolResult(data);
             }
           });
           await streamHandler();
@@ -235,6 +286,7 @@ export default class MessageStore {
     const stream = await sendMessageToChat(
       this.currentChatId,
       message,
+      this.roomId,
       this.abortController,
     );
 
@@ -250,7 +302,6 @@ export default class MessageStore {
         const { done, value } = await reader.read();
 
         if (done) {
-          reader.cancel();
           this.isRequestRunning = false;
           return;
         }
@@ -265,8 +316,16 @@ export default class MessageStore {
 
             if (event.includes("new_token")) {
               msg = this.handleNewToken(data, msg);
+            }
 
-              await streamHandler();
+            if (event.includes("tool_call")) {
+              msg = "";
+              this.handleToolCall(data);
+            }
+
+            if (event.includes("tool_result")) {
+              msg = "";
+              this.handleToolResult(data);
             }
           });
 

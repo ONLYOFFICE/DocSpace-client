@@ -120,6 +120,7 @@ export const setCurrentModel = async (data: TCurrentModel) => {
 export const startNewChat = async (
   roomId: number | string,
   message: string,
+  contextFolderId: string | number,
   abortController?: AbortController,
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
@@ -131,7 +132,7 @@ export const startNewChat = async (
       Authorization: authHeader,
     },
     signal: abortController?.signal,
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message, contextFolderId }),
   });
 
   if (!response.ok) {
@@ -144,6 +145,7 @@ export const startNewChat = async (
 export const sendMessageToChat = async (
   chatId: string,
   message: string,
+  contextFolderId: string | number,
   abortController?: AbortController,
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
@@ -155,7 +157,7 @@ export const sendMessageToChat = async (
       Authorization: authHeader,
     },
     signal: abortController?.signal,
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ message, contextFolderId }),
   });
 
   if (!response.ok) {

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { TContent } from "../../../../../../api/ai/types";
 import { ContentType } from "../../../../../../api/ai/enums";
@@ -37,30 +38,39 @@ import styles from "../../ChatMessageBody.module.scss";
 import MarkdownField from "./Markdown";
 
 const ToolCall = ({ content }: { content: TContent }) => {
+  const [isHide, setIsHide] = React.useState(true);
+
   if (content.type === ContentType.Text) return null;
 
   return (
     <div className={styles.toolCall}>
-      <div className={styles.toolCallHeader}>
-        <Text fontSize="13px" lineHeight="20px">
+      <div
+        className={classNames(styles.toolCallHeader, { [styles.hide]: isHide })}
+        onClick={() => setIsHide((val) => !val)}
+      >
+        <Text fontSize="16px" lineHeight="20px" isBold>
           {content.name}
         </Text>
         <Text fontSize="13px" lineHeight="20px">
           {content.result ? "Finished" : "Pending"}
         </Text>
       </div>
-      <div className={styles.toolCallBody}>
-        <MarkdownField
-          propLanguage="Tool call arguments"
-          chatMessage={formatJsonWithMarkdown(content.arguments)}
-        />
-      </div>
-      <div className={styles.toolCallBody}>
-        <MarkdownField
-          chatMessage={formatJsonWithMarkdown(content.result)}
-          propLanguage="Tool call result"
-        />
-      </div>
+      {isHide ? null : (
+        <>
+          <div className={styles.toolCallBodyFirst}>
+            <MarkdownField
+              propLanguage="Tool call arguments"
+              chatMessage={formatJsonWithMarkdown(content.arguments)}
+            />
+          </div>
+          <div className={styles.toolCallBody}>
+            <MarkdownField
+              chatMessage={formatJsonWithMarkdown(content.result)}
+              propLanguage="Tool call result"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

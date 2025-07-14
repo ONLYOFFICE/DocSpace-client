@@ -210,7 +210,7 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
-      {!isNoItem ? (
+      {!isNoItem && roomsView !== "ai_chat" && fileView !== "ai_chat" ? (
         <ItemTitle
           {...defaultProps}
           selectionLength={selectedItems.length}

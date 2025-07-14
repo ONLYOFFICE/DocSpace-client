@@ -197,6 +197,10 @@
     margin: 0;
   }
 
+  .codeHeader {
+    border: none;
+  }
+
   .toolCallHeader {
     display: flex;
     flex-direction: row;
@@ -209,6 +213,18 @@
 
     box-sizing: border-box;
 
-    margin-bottom: 8px;
+    &.hide {
+      border-bottom: none;
+    }
+  }
+
+  .toolCallBodyFirst {
+    margin-bottom: 1px;
+  }
+}
+
+.markdownField {
+  a {
+    color: var(--link-color);
   }
 }

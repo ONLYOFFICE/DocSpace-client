@@ -68,17 +68,21 @@ const ChatInput = () => {
   };
 
   const sendMessageAction = React.useCallback(async () => {
-    if (!currentChatId) {
-      startChat(value);
+    try {
+      if (!currentChatId) {
+        startChat(value);
+
+        setValue("");
+
+        return;
+      }
+
+      sendMessage(value);
 
       setValue("");
-
-      return;
+    } catch (e) {
+      console.log(e);
     }
-
-    sendMessage(value);
-
-    setValue("");
   }, [currentChatId, startChat, sendMessage, value]);
 
   const onKeyEnter = React.useCallback(

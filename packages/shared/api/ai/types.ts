@@ -88,7 +88,7 @@ export type TContent =
       type: ContentType.Tool;
       arguments: Record<string, unknown>;
       name: string;
-      result: Record<string, unknown>;
+      result?: Record<string, unknown>;
     };
 
 export type TMessage = {

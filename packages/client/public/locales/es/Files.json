@@ -158,7 +158,6 @@
   "PrivateRoomHeader": "Bienvenido/a a la sala privada de {{organizationName}}, donde cada símbolo que usted escribe está cifrado.",
   "PrivateRoomSupport": "El trabajo en la sala privada está disponible a través de la aplicación de escritorio {{organizationName}}. <3>Instrucciones</3>",
   "Protected": "protegido",
-  "RecentlyAccessible": "Accesible recientemente mediante enlace",
   "RecentlyOpenedTooltip": "Abierto recientemente a través del enlace",
   "RecentViaLinkEmptyContainerDescription": "Aquí encontrará una lista de los archivos abiertos recientemente y compartidos con usted a través de un enlace externo.",
   "RemovedFromFavorites": "Quitado de favoritos",

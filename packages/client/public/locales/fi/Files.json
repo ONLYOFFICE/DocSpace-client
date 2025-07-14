@@ -158,7 +158,6 @@
   "PrivateRoomHeader": "Tervetuloa {{organizationName}}-n yksityiseen huoneeseen, jossa jokainen kirjoittamasi symboli on salattu",
   "PrivateRoomSupport": "Työskentely yksityishuoneessa on saatavilla työpöytäsovelluksen {{organizationName}} kautta. <3>Ohjeet</3>",
   "Protected": "suojattu",
-  "RecentlyAccessible": "Äskettäin saatavilla linkin kautta",
   "RecentlyOpenedTooltip": "Viimeaikoina avattu linkin kautta",
   "RecentViaLinkEmptyContainerDescription": "Tästä löydät listan äskettäin avatuista sinulle ulkoisen linkin kautta jaetuista tiedostoista.",
   "RemovedFromFavorites": "Poistettu suosikeista",

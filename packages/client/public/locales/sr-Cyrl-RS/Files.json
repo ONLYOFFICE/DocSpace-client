@@ -158,7 +158,6 @@
   "PrivateRoomHeader": "Добро дошли у {{organizationName}} приватну собу где је сваки симбол који куцате шифрован",
   "PrivateRoomSupport": "Рад у Приватној cоби је доступан путем {{organizationName}} десктоп апликације. <3>Инструкције</3>",
   "Protected": "заштићено",
-  "RecentlyAccessible": "Недавно приступно путем линка",
   "RecentlyOpenedTooltip": "Недавно отворено путем линка",
   "RecentViaLinkEmptyContainerDescription": "Овде ћете пронаћи листу недавно отворених датотека дељених са вама путем спољног линка.",
   "RemovedFromFavorites": "Уклоњено из омиљеног",

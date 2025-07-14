@@ -158,7 +158,6 @@
   "PrivateRoomHeader": "Добро пожаловать в Приватную комнату {{organizationName}}, где каждый символ, который вы вводите, шифруется",
   "PrivateRoomSupport": "Работа в Приватной комнате доступна через десктопное приложение {{organizationName}}. <3>Инструкции</3>",
   "Protected": "защищено",
-  "RecentlyAccessible": "Последние доступны по ссылке",
   "RecentlyOpenedTooltip": "Недавно открыто с помощью ссылки",
   "RecentViaLinkEmptyContainerDescription": "Здесь вы найдете список недавно открытых файлов, которым вам предоставили доступ по внешней ссылке.",
   "RemovedFromFavorites": "Удалено из избранного",

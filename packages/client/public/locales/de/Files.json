@@ -158,7 +158,6 @@
   "PrivateRoomHeader": "Willkommen im Privatraum von {{organizationName}}, wo jedes von Ihnen eingegebene Zeichen verschlüsselt wird",
   "PrivateRoomSupport": "Privaträume sind über {{organizationName}}-App für Desktop verfügbar. <3>Informationen</3>",
   "Protected": "geschützt",
-  "RecentlyAccessible": "Kürzlich per Link zugänglich",
   "RecentlyOpenedTooltip": "Zuletzt geöffnet über den Link",
   "RecentViaLinkEmptyContainerDescription": "Hier finden Sie eine Liste der zuletzt geöffneten Dateien, die über einen externen Link für Sie freigegeben wurden.",
   "RemovedFromFavorites": "Aus Favoriten entfernt",

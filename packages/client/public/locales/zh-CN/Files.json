@@ -158,7 +158,6 @@
   "PrivateRoomHeader": "欢迎来到{{organizationName}}私密房间，在这里您所输入的每一个字符都将被加密",
   "PrivateRoomSupport": "您可在{{organizationName}}桌面应用中使用私密房间。<3>操作指南</3>",
   "Protected": "受保护",
-  "RecentlyAccessible": "近期链接访问文档",
   "RecentlyOpenedTooltip": "最近通过链接打开",
   "RecentViaLinkEmptyContainerDescription": "您可以在此处查看近期打开的、通过外部链接与您共享的文件的列表。",
   "RemovedFromFavorites": "已从收藏中删除",

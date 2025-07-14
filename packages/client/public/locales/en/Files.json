@@ -160,7 +160,6 @@
   "PrivateRoomHeader": "Welcome to {{organizationName}} private room where every symbol you type is encrypted",
   "PrivateRoomSupport": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
   "Protected": "protected",
-  "RecentlyAccessible": "Recently accessible via link",
   "RecentlyOpenedTooltip": "Recently opened via the link",
   "RecentViaLinkEmptyContainerDescription": "Here you will find a list of the recently opened files shared with you via an external link.",
   "RemovedFromFavorites": "Removed from favorites",

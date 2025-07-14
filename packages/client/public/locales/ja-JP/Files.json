@@ -158,7 +158,6 @@
   "PrivateRoomHeader": "{{organizationName}}プライベートルームへようこそ！入力されるすべての記号が暗号化します。",
   "PrivateRoomSupport": "プライベートルームでの作業は、{{organizationName}}デスクトップアプリで可能です。<3>操作方法</3>",
   "Protected": "保護されている",
-  "RecentlyAccessible": "最近リンクから閲覧したファイル",
   "RecentlyOpenedTooltip": "最近リンクで開いたファイル",
   "RecentViaLinkEmptyContainerDescription": "ここでは、外部リンクを介して共有された最近開いたファイルのリストが表示されます。",
   "RemovedFromFavorites": "お気に入りから削除",

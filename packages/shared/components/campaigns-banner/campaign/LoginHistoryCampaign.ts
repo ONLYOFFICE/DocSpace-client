@@ -27,19 +27,9 @@
 import { globalColors } from "../../../themes";
 
 /**
- * Translations for the Login History campaign banner
- */
-export const loginHistoryTranslates = {
-  Header: "Login History",
-  SubHeader: "Enable two-factor authentication",
-  Text: "Login history helps you identify suspicious activities and enhance security",
-  Link: "/portal-help-center/security/login-history",
-};
-
-/**
  * Configuration for the Login History campaign banner
  */
-export const loginHistoryConfig = {
+export const getLoginHistoryConfig = (isBaseTheme: boolean) => ({
   borderColor: globalColors.lightBlueMain,
   title: {
     color: globalColors.lightBlueMain,
@@ -49,11 +39,17 @@ export const loginHistoryConfig = {
   body: {
     fontSize: "13px",
     fontWeight: "600",
-    color: globalColors.black,
+    color: isBaseTheme ? globalColors.black : globalColors.white,
   },
   text: {
     fontSize: "12px",
     fontWeight: "normal",
-    color: globalColors.grayText,
+    color: isBaseTheme ? globalColors.grayText : globalColors.darkGrayDark,
   },
-};
+  action: {
+    isButton: false,
+    type: "2fa-settings",
+  },
+});
+
+export const loginHistoryConfig = getLoginHistoryConfig(true);

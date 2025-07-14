@@ -45,6 +45,8 @@ export interface CampaignsBannerProps {
   onAction(type?: string, url?: string): void;
   /** Close action */
   onClose(): void;
+  /** Action icon */
+  actionIcon?: string;
 }
 
 interface ITranslate {

@@ -31,10 +31,8 @@ import { Text } from "@docspace/shared/components/text";
 import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
 import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
-import {
-  loginHistoryTranslates,
-  loginHistoryConfig,
-} from "@docspace/shared/components/campaigns-banner/campaign/LoginHistoryCampaign";
+import { getLoginHistoryConfig } from "@docspace/shared/components/campaigns-banner/campaign/LoginHistoryCampaign";
+import NextStepReactSvg from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 // import { toastr } from "@docspace/shared/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
@@ -114,6 +112,7 @@ const MainContainer = styled.div`
 const CustomBannerWrapper = styled.div`
   max-width: 700px;
   margin-bottom: 20px;
+  cursor: pointer;
 
   @media ${mobile} {
     margin-bottom: 16px;
@@ -122,9 +121,13 @@ const CustomBannerWrapper = styled.div`
   & > div[data-testid="campaigns-banner"] {
     min-height: 72px !important;
     max-height: 72px !important;
+    &::before {
+      border-radius: 6px !important;
+    }
 
     & > div {
       padding: 12px !important;
+      inset-inline-end: 2px !important;
       gap: 2px;
     }
 
@@ -208,6 +211,18 @@ const HistoryMainContent = (props) => {
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
 
   const theme = useTheme();
+  const isBaseTheme = theme.isBase;
+
+  const loginHistoryTranslates = {
+    Header: t("LoginHistoryCampaignHeader", {
+      productName: t("Common:ProductName"),
+    }),
+    SubHeader: t("LoginHistoryCampaignTitle"),
+    Text: t("LoginHistoryCampaignText"),
+    Link: "/portal-settings/security/access-portal/tfa",
+  };
+
+  const loginHistoryConfig = getLoginHistoryConfig(isBaseTheme);
 
   const getSettings = () => {
     const storagePeriodSettings = getFromSessionStorage("storagePeriod");
@@ -238,6 +253,10 @@ const HistoryMainContent = (props) => {
     saveToSessionStorage("storagePeriod", newSettings);
   }, [loginLifeTime, auditLifeTime]);
 
+  const navigateTo2FA = () => {
+    window.location.href = loginHistoryTranslates.Link;
+  };
+
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>
       {isSettingNotPaid ? (
@@ -253,11 +272,22 @@ const HistoryMainContent = (props) => {
           isPaidBadge
         />
       ) : null}
-      <CustomBannerWrapper>
+      <CustomBannerWrapper onClick={navigateTo2FA}>
         <CampaignsBanner
           campaignConfig={loginHistoryConfig}
           campaignTranslate={loginHistoryTranslates}
           disableFitText
+          actionIcon={NextStepReactSvg}
+          onAction={(type) => {
+            if (type === "2fa-settings") {
+              navigateTo2FA();
+            }
+          }}
+          onClose={(e) => {
+            e && e.stopPropagation && e.stopPropagation();
+
+            navigateTo2FA();
+          }}
         />
       </CustomBannerWrapper>
       <div className="main-wrapper">

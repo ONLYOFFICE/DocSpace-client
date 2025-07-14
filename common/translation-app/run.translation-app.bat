@@ -40,6 +40,27 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+echo Running scripts...
+cd /d "%BACKEND_DIR%"
+
+call npm run generate-metadata
+if %errorlevel% neq 0 (
+    echo Failed to run generate-metadata.
+    exit /b 1
+)
+
+call npm run save-meta-keys-usage
+if %errorlevel% neq 0 (
+    echo Failed to run save-meta-keys-usage.
+    exit /b 1
+)
+
+call npm run generate-auto-comments-metadata
+if %errorlevel% neq 0 (
+    echo Failed to run generate-auto-comments-metadata.
+    exit /b 1
+)
+
 echo.
 echo Starting backend server...
 start /b cmd /c "cd /d "%BACKEND_DIR%" && npm run dev > backend.log 2>&1"

@@ -3,7 +3,7 @@
   "content": "You can't pin more than 10 rooms to the top. Unpin some that are currently pinned.",
   "content_en_sha1_hash": "f7482a38a156fedb2aa60db7554e918934affe1d",
   "created_at": "2025-05-19T21:30:56.124Z",
-  "updated_at": "2025-06-26T19:00:18.286Z",
+  "updated_at": "2025-07-10T11:11:07.102Z",
   "comment": {
     "text": "This translation key is used for a warning message that informs users they cannot pin more rooms than the limit of 10 and suggests unpinning some pinned rooms to resolve the issue. It appears as an error notification when a user attempts to exceed the room pin limit in a UI component, such as an action button or dialog.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1326,
+      "line_number": 1331,
       "context": "if (!res.value) isError = true;\n });\n \n updatingFolderList(withFinishedOperation, isPin);\n \n isError && toastr.error(t(\"RoomsPinLimitMessage\"));\n \n return;\n }\n \n if (action === \"unpin\") {",
       "module": "/packages/client"
     }

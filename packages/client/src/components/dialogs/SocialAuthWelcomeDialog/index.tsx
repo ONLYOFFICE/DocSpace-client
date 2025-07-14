@@ -8,10 +8,12 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Badge } from "@docspace/shared/components/badge";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
 import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.svg?url";
 import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.svg?url";
 import {
@@ -117,23 +119,36 @@ const SocialAuthWelcomeDialogComponent = ({
                   productName: t("Common:ProductName"),
                 })}
               </Text>
-              <div className="info-value">
-                <Text fontWeight="600" truncate className="welcome-text">
-                  {baseDomain == "localhost"
-                    ? `${baseDomain}`
-                    : `${tenantAlias}.${baseDomain}`}
-                </Text>
-                <Link
-                  isHovered
-                  className="change-domain_link"
-                  type={LinkType.page}
-                  fontWeight={600}
-                  fontSize="13px"
-                  onClick={onChangeDomainClick}
-                >
-                  {t("Common:ChangeButton")}
-                </Link>
-              </div>
+              <Text fontWeight="600" truncate className="welcome-text">
+                {baseDomain == "localhost"
+                  ? `${baseDomain}`
+                  : `${tenantAlias}.${baseDomain}`}
+              </Text>
+            </StyledInfoRow>
+
+            <StyledInfoRow className="no-gap">
+              <Text className="welcome-text" />
+              <Link
+                isHovered
+                className="change-domain_link"
+                type={LinkType.page}
+                fontWeight={600}
+                fontSize="13px"
+                onClick={onChangeDomainClick}
+              >
+                {t("Common:ChangeButton")}
+              </Link>
+              <Badge
+                className="paid-badge"
+                fontWeight="700"
+                backgroundColor={
+                  theme.isBase
+                    ? globalColors.favoritesStatus
+                    : globalColors.favoriteStatusDark
+                }
+                label={t("Common:Paid")}
+                isPaidBadge
+              />
             </StyledInfoRow>
 
             <StyledInfoRow>

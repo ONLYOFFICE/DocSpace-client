@@ -3,7 +3,7 @@
   "content": "In a Public room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "content_en_sha1_hash": "79a4f8b269e2f9e04d5e7e9a2156982f8b68c54c",
   "created_at": "2025-05-19T21:30:55.771Z",
-  "updated_at": "2025-05-26T07:57:32.348Z",
+  "updated_at": "2025-07-10T11:11:06.844Z",
   "comment": {
     "text": "This translation key is used to describe a public room's link behavior in a file editing panel. The main link remains active indefinitely, while additional links can be created with time limits. It appears in a dialog related to linking files, guiding users on how their links work.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 234,
+      "line_number": 236,
       "context": "};\n \n const getExpiredLinkText = () => {\n if (link?.sharedTo?.primary) {\n if (isFormRoom) return t(\"Files:LimitTimeBlockFormRoomDescription\");\n if (isPublic) return t(\"Files:LimitTimeBlockPublicRoomDescription\");\n if (isCustomRoom) return t(\"Files:LimitTimeBlockCustomRoomDescription\");\n \n return \"\";\n }",
       "module": "/packages/client"
     }
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"You can create additional links with time limit\" is a slightly awkward translation. A more natural phrasing would convey the ability to set a time limit *on* the additional links.",
-          "suggestion": "يمكنكم إنشاء روابط إضافية بمدة صلاحية محددة."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -90,13 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"In a Public room\" is translated as \"Հանրային սենյակում\". While technically correct, a more natural and idiomatic translation might be \"Բացառիկ սենյակում\" or \"Հանրային տարածքում\" depending on the overall tone and context. \"Սենյակում\" (in a room) is a bit literal.",
-          "suggestion": "Consider alternative translations like \"Բացառիկ տարածքում\" or \"Հանրային տարածքում\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"the main link is valid for an unlimited time period\" is translated as \"հիմնական հղումը գործում է անսահմանափակ ժամանակով\". \"Գործում է\" (works/is active) is not the most natural way to describe a link's validity. A better translation would focus on the link's availability or function.",
-          "suggestion": "Consider alternatives like \"հիմնական հղումը գործուն է անսահմանափակ ժամանակով\" or \"հիմնական հղումը թույլատրված է անսահմանափակ ժամանակով\"."
+          "description": "The phrase \"Դուք կարող եք լրացուցիչ հղումներ ստեղծել ժամանակի սահմանափակումով:\" is a bit awkward.  A more natural Armenian phrasing for 'create additional links with a time limit' would be something like 'ստեղծել լրացուցիչ հղումներ ժամանակային սահմանափակումով' or 'ստեղծել լրացուցիչ հղումներ որոնք ժամանակային սահմանափակում ունեն:\" .",
+          "suggestion": "Consider rephrasing the second sentence to something like: 'Դուք կարող եք ստեղծել լրացուցիչ հղումներ ժամանակային սահմանափակումով:' or 'Դուք կարող եք ստեղծել լրացուցիչ հղումներ որոնք ժամանակային սահմանափակում ունեն:\""
         }
       ],
       "approved_at": null
@@ -125,13 +114,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"In a Public room\" is translated as \"ໃນຫ້ອງສາທາລະນະ\". While technically correct, a more natural translation might be \"ໃນຫ້ອງສາທາລະນະທົ່ວໄປ\" or \"ໃນຫ້ອງສາທາລະນະກຸຸ່ມ\".  The current translation is understandable but slightly awkward.",
-          "suggestion": "Consider translating \"In a Public room\" as \"ໃນຫ້ອງສາທາລະນະທົ່ວໄປ\" or \"ໃນຫ້ອງສາທາລະນະກຸຸ່ມ\"."
+          "description": "The phrase \"In a Public room\" is not accurately reflected in the Lao translation. While \"ໃນຫ້ອງສາທາລະນະ\" means 'in a public room,' the original English emphasizes the *nature* of the room being public. A more accurate translation might be something like \"ໃນຫ້ອງສາທາລະນະທົ່ວໄປ\" or \"ໃນຫ້ອງສາທາລະນະແບບບໍ່ຈຳກັດ\".",
+          "suggestion": "ໃນຫ້ອງສາທາລະນະທົ່ວໄປ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"link\" is consistently translated as \"ເຊື່ອມຕໍ່\". While this is a generally correct translation, it might benefit from a more specific term depending on the context. For example, if it's a download link, \"ລິ້ງ໌ດາວໂລດ\" might be more appropriate.  However, without further context, \"ເຊື່ອມຕໍ່\" is acceptable.",
-          "suggestion": "Consider if a more specific term for \"link\" is necessary based on the context. If it's a download link, consider \"ລິ້ງ໌ດາວໂລດ\"."
+          "description": "The English phrase 'main link' is not fully conveyed by \"ເຊື່ອມຕໍ່ຕົ້ນ.\" It implies the primary, original link.  A more nuanced translation may be needed depending on the specific context. It could be interpreted as 'initial link' rather than 'main link'.",
+          "suggestion": "ເຊື່ອມຕໍ່ຕົ້ນສະບັບ"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure and flow of the Lao translation could be slightly improved for better readability. The use of 'ທ່ານ ສາມາດ' could be smoother.",
+          "suggestion": "ທ່ານສາມາດສ້າງເຊື່ອມຕໍ່ເພີ່ມເຕີມທີ່ມີເວລາຈຳກັດໄດ້"
         }
       ],
       "approved_at": null
@@ -145,19 +139,19 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'unlimited time period' is translated as 'voor onbepaalde tijd'. While technically correct, 'onbeperkte tijd' would be a more natural and direct translation of 'unlimited time period' in this context.  'Onbepaalde tijd' implies a lack of definition, whereas 'onbeperkte tijd' more accurately conveys 'unlimited'.",
-          "suggestion": "In een Openbare kamer is de hoofdlink voor onbeperkte tijd geldig."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"limit time\" in the English content is best translated as \"ograniczeniem czasowym\" or \"określonym limitem czasowym\" in Polish to accurately convey the meaning of a time-bound limit.",
+          "suggestion": "W pokoju publicznym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z ograniczeniem czasowym."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -190,13 +184,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"main link\" is not accurately translated. \"ප්‍රධාන සබැඳිය\" (pradhana sabandiya) translates to 'main link', which is technically correct, but in this context, it might be better to use a more general term for 'link' to avoid confusion. It implies the primary link is different from the time-limited links.",
-          "suggestion": "Consider rephrasing to something like: පොදු කාමරයක, සබැඳිය අසීමිත කාල සීමාවක් සඳහා වලංගු වේ. ඔබට කාල සීමාවක් සමඟ අමතර සබැඳි නිර්මාණය කළ හැකිය."
+          "description": "The phrase \"You can create additional links with time limit\" could be more naturally translated. The current translation, \"ඔබට කාල සීමාවක් සමඟ අමතර සබැඳි නිර්මාණය කළ හැකිය,\" sounds a bit awkward.",
+          "suggestion": "ඔබට කාල සීමාවක් සහිත අමතර සබැඳි නිර්මාණය කළ හැකිය."
         },
         {
           "type": "formatting",
-          "description": "While not a major error, the punctuation could be improved for a more natural flow in Sinhala. Specifically, the comma after 'අසීමිත කාල සීමාවක් සඳහා' could be omitted for better readability.",
-          "suggestion": "පොදු කාමරයක, ප්‍රධාන සබැඳිය අසීමිත කාලසීමාවක් සඳහා වලංගු වේ. ඔබට කාල සීමාවක් සමඟ අමතර සබැඳි නිර්මාණය කළ හැකිය."
+          "description": "While not strictly incorrect, the punctuation could be improved.  Sinhala often uses a period at the end of each sentence, even shorter ones.",
+          "suggestion": "පොදු කාමරයක, ප්‍රධාන සබැඳිය අසීමිත කාල සීමාවක් සඳහා වලංගු වේ. ඔබට කාල සීමාවක් සහිත අමතර සබැඳි නිර්මාණය කළ හැකිය."
         }
       ],
       "approved_at": null
@@ -213,13 +207,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'unlimited time period' is not the most natural translation of 'unlimited time' in this context. It sounds slightly clunky in Slovenian. While technically correct, it's not idiomatic.",
-          "suggestion": "V javni sobi je glavna povezava veljavna za nedoločen čas. (or) V javni sobi je glavna povezava veljavna brez časovne omejitve."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'Ustvarite' is correct, a slightly more common and perhaps more suitable word in this context is 'Lahko ustvarite'.",
-          "suggestion": "Lahko ustvarite dodatne povezave s časovno omejitvijo."
+          "description": "The phrase 'unlimited time period' is not accurately reflected in the Slovenian translation 'neomejeno časovno obdobje'. While 'neomejeno' means unlimited, 'časovno obdobje' is a slightly awkward phrasing for 'time period' in this context. A more natural translation would be 'trajanje' or 'obdobje veljavnosti'.",
+          "suggestion": "Consider translating 'time period' as 'trajanje' or 'obdobje veljavnosti' for better flow."
         }
       ],
       "approved_at": null
@@ -230,13 +219,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'link' is transliterated as 'линк' instead of the more common and accepted 'веза'. While 'линк' is understandable, 'веза' would be more natural in Serbian.",
-          "suggestion": "У јавној соби, главна веза важи неограничено. Можете креирати додатне везе са временским ограничењем."
+          "description": "The word 'link' is consistently translated as 'link' which is an anglicism. It should be translated as 'veza'.",
+          "suggestion": "У јавној соби, главни веза важи неограничено. Можете креирати додатне везе са временским ограничењем."
         },
         {
-          "type": "grammar",
-          "description": "The word 'главни' (main) should agree in gender with 'веза'. It should be 'главна'.",
-          "suggestion": "У јавној соби, главна веза важи неограничено. Можете креирати додатне везе са временским ограничењем."
+          "type": "spelling",
+          "description": "The word 'временом' is misspelled. It should be 'временским'.",
+          "suggestion": "У јавној соби, главни веза важи неограничено. Можете креирати додатне везе са временским ограничењем."
         }
       ],
       "approved_at": null
@@ -250,7 +239,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Herkese Açık odada' is slightly awkward. While technically correct, a more natural phrasing might be 'Herkese açık odalarda'. The pluralization 'odalarda' better reflects the context of being able to create multiple rooms.",
+          "suggestion": "Herkese açık odalarda ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -268,18 +263,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"In a Public room\" is slightly awkward in the Chinese translation. A more natural phrasing would be '公共房间内'.",
-          "suggestion": "公共房间内，主链接的有效期是不限的。您可以创建有时效限制的其他链接。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"有效期是不限的\" (validity is unlimited) can be simplified to \"永不失效\" (never expires) for better flow and clarity in this context.",
-          "suggestion": "公共房间内，主链接永不失效。您可以创建有时效限制的其他链接。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -75,6 +75,7 @@ import {
   TFileFillingFormStatus,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
+import { mockRecentTreeFolder } from "../../__mocks__/recent";
 
 export async function openEdit(
   fileId: number | string,
@@ -208,6 +209,9 @@ export async function getFoldersTree() {
     method: "get",
     url: "/files/@root?filterType=2&count=1",
   })) as TGetFolder[];
+
+  // TODO: Temp value. Change later
+  res.push(mockRecentTreeFolder);
 
   const folders = sortInDisplayOrder(res);
 

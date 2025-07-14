@@ -82,10 +82,15 @@ const useFiles = ({
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const fetchDefaultFiles = () => {
+  const fetchDefaultFiles = (categoryType = CategoryType.Personal) => {
     const filter = FilesFilter.getDefault();
 
-    const url = getCategoryUrl(CategoryType.Personal);
+    if (categoryType === CategoryType.Recent) {
+      // TODO: Temp value. Change later
+      filter.folder = "recent";
+    }
+
+    const url = getCategoryUrl(categoryType);
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -195,9 +200,13 @@ const useFiles = ({
       }
     } else {
       filterObj = FilesFilter.getFilter(window.location);
+      const defaultCategoryType =
+        categoryType === CategoryType.Recent
+          ? CategoryType.Recent
+          : CategoryType.Personal;
 
       if (!filterObj) {
-        fetchDefaultFiles();
+        fetchDefaultFiles(defaultCategoryType);
 
         return;
       }

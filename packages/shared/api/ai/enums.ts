@@ -40,3 +40,11 @@ export const enum ProviderType {
   TogetherAi = 2,
   OpenAiCompatible = 3,
 }
+
+export const enum EventType {
+  metadata = "metadata",
+  new_token = "new_token",
+  tool_call = "tool_call",
+  tool_result = "tool_result",
+  error = "error",
+}

@@ -3,7 +3,7 @@
   "content": "In a Custom room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "content_en_sha1_hash": "75a48e105981cba6337213992c771ee2464de71d",
   "created_at": "2025-05-19T21:30:55.762Z",
-  "updated_at": "2025-05-26T07:57:32.348Z",
+  "updated_at": "2025-07-10T11:11:06.845Z",
   "comment": {
     "text": "\"In a Custom room, the main link is valid for an unlimited time period. This message explains that creating separate links with limited time periods is also available. It appears in edit link panel components.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 235,
+      "line_number": 237,
       "context": "const getExpiredLinkText = () => {\n if (link?.sharedTo?.primary) {\n if (isFormRoom) return t(\"Files:LimitTimeBlockFormRoomDescription\");\n if (isPublic) return t(\"Files:LimitTimeBlockPublicRoomDescription\");\n if (isCustomRoom) return t(\"Files:LimitTimeBlockCustomRoomDescription\");\n \n return \"\";\n }\n \n if (isExpired) {",
       "module": "/packages/client"
     }
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Şəxsi otaqda\" is a literal translation of \"In a Custom room\" but sounds unnatural in Azerbaijani. \"Xüsusi otaqda\" would be more appropriate as it accurately translates \"Custom room\".",
+          "description": "The English phrase \"In a Custom room\" is best translated as \"Xüsusi otaqda\" rather than \"Şəxsi otaqda\". \"Şəxsi\" implies personal or private, while \"Xüsusi\" accurately conveys the meaning of 'Custom'.",
           "suggestion": "Xüsusi otaqda"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'main link' could be better translated to reflect the nuance of a primary link or a base link. \"Əsas link\" is a possible translation, but a more descriptive term might improve clarity.",
-          "suggestion": "Baş link"
         }
       ],
       "approved_at": null
@@ -92,18 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Հատուկ սենյակում\" translates to \"In a special room\" instead of \"In a Custom room\". \"Հատուկ\" implies special, not custom.",
-          "suggestion": "Հատուկ սենյակում should be replaced with something like \"Պատվերով սենյակում\" or a similar term that accurately conveys \"Custom room\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The overall phrasing of \"գործում է անսահմանափակ ժամկետով\" is slightly awkward and doesn't completely match the meaning of \"valid for an unlimited time period.\" While not strictly incorrect, it lacks the clarity of the original.",
-          "suggestion": "Consider alternatives like \"ևավերջ անվավերության ժամկետով\" or \"չունի ժամկետ\" to better capture the \"unlimited time period\" meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -115,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You can create additional links with time limit\" is not a direct or natural translation of the English sentence. It lacks clarity and sounds somewhat awkward in Japanese.",
+          "suggestion": "時間制限付きの追加リンクを作成できます is better translated as \"時間制限付きの追加リンクを作成可能です (Jikan seisyo tsuki no tsuika link wo sakusei kanou desu)\" or  \"時間制限付きの追加リンクも作成できます (Jikan seisyo tsuki no tsuika link mo sakusei dekimasu).\" The former is more formal, the latter more conversational. Considering the rest of the sentence is fairly formal, the former is likely more appropriate."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -130,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'In a Custom room' is translated as 'ໃນຫ້ອງທີ່ກຳນົດຄຸ້ນ'. While technically correct, 'ໃນຫ້ອງທີ່ກຳນົດ' would be a more natural and common phrasing in Lao for 'In a Custom room'. 'ຄຸ້ນ' implies familiarity or customization which is redundant.",
-          "suggestion": "ໃນຫ້ອງທີ່ສ້າງຕັ້ງຂື້ນເອງ"
+          "description": "The phrase \"In a Custom room\" is not accurately translated. 'ກຳນົດຄຸ້ນ' doesn't convey the meaning of a custom room. It seems to be a literal, potentially incorrect, translation attempt.",
+          "suggestion": "Consider using a more descriptive term for 'Custom room' that accurately reflects its functionality within the application. Possible options depend on the specific meaning but something along the lines of 'ຫ້ອງທີ່ຜູ້ໃຊ້ສ້າງຕັ້ງ' or 'ຫ້ອງທີ່ປັບແກ້ໄຂໄດ້' might be more appropriate."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'main link' is translated as 'ເຊື່ອມຕໍ່ຕົ້ນ'. While understandable, 'ເຊື່ອມຕໍ່ຫຼັກ' would be a more direct and common translation of 'main link'.",
-          "suggestion": "ເຊື່ອມຕໍ່ຫຼັກ"
+          "description": "The phrase 'main link' is not well translated.  'ເຊື່ອມຕໍ່ຕົ້ນ' is awkward and doesn't clearly convey the meaning of the primary link. It’s not immediately obvious what “ຕົ້ນ” refers to in this context.",
+          "suggestion": "Consider a phrase like 'ເຊື່ອມຕໍ່ຫຼັກ' or 'ເຊື່ອມຕໍ່ຕົ້ນສະບັບ' to better represent the meaning of 'main link'."
         }
       ],
       "approved_at": null
@@ -189,13 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'අභිරුචි' (abiruchi) is a loanword and while understandable, 'අභිරුචි' is more commonly used for 'custom'.",
-          "suggestion": "අභිරුචි කාමරයක් (abiruchi kamarayak) should be සුවපහසු කාමරයක් (suwapahasu kamarayak) or වෙනස් කළ හැකි කාමරයක් (venas kalak kay kamarayak) depending on the desired nuance. Abiruchi is acceptable, but less common."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'කාල සීමාවක් සමඟ අමතර සබැඳි නිර්මාණය කළ හැකිය' can be improved for better flow. It literally translates to 'You can create additional links with a time limit'.",
-          "suggestion": "කාල සීමාවක් සහිත අමතර සබැඳි නිර්මාණය කරගත හැකිය (Kaal seemawaak sathith amaithra sabanda nirmanakara gathay) - This translates to 'You can create additional links with a time limit' but sounds more natural in Sinhala."
+          "description": "The word 'අභිරුචි' (abiruchi) is technically correct, but 'අභිරුචි' (abiruchi) is a more common and generally preferred spelling for 'custom' in this context. While 'අභිරුචි' is understood, it's slightly less natural.",
+          "suggestion": "අභිරුචි"
         }
       ],
       "approved_at": null
@@ -212,13 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'unlimited time period' is not the most natural translation of 'unlimited time' in this context. A more fluent translation would be 'brez časovne omejitve'.",
-          "suggestion": "V sobi po meri je glavna povezava veljavna brez časovne omejitve."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Ustvarite lahko dodatne povezave' could be improved to sound more natural. 'Lahko ustvarite dodatne povezave' is a better flow.",
-          "suggestion": "V sobi po meri je glavna povezava veljavna brez časovne omejitve. Lahko ustvarite dodatne povezave s časovno omejitvijo."
+          "description": "The phrase \"neomejeno časovno obdobje\" (unlimited time period) while technically correct, sounds somewhat formal and awkward in this context. A more natural phrasing would be \"za nedoločen čas\" or \"brez časovne omejitve\".",
+          "suggestion": "Consider using \"za nedoločen čas\" or \"brez časovne omejitve\" instead of \"za neomejeno časovno obdobje\"."
         }
       ],
       "approved_at": null
@@ -229,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"In a Custom room\" is best translated as \"У прилагођеној просторији\" rather than \"У прилагођеној соби.\" While 'soba' can mean room, 'prostorija' is more commonly used in this context and sounds more natural.",
-          "suggestion": "У прилагођеној просторији"
+          "description": "The phrase 'time limit' is translated as 'временским ограничењем'. While technically correct, 'временским ограничењем' sounds slightly formal and clunky in this context. A more natural and common phrasing would be 'временским роком'.",
+          "suggestion": "Change 'временским ограничењем' to 'временским роком'."
         }
       ],
       "approved_at": null
@@ -259,18 +239,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'In a Custom room' is a bit awkward in Vietnamese. A more natural translation would be something like 'Trong phòng tùy chỉnh' or 'Trong một phòng tùy chỉnh'.",
-          "suggestion": "Trong phòng tùy chỉnh"
+          "description": "The phrase \"In a Custom room\" could be better translated to convey the intended meaning. \"Trong phòng Tùy chỉnh\" is literal but might not be the most natural way to express it in Vietnamese.  It's acceptable but could be improved.",
+          "suggestion": "Trong phòng tùy chỉnh, hoặc Trong các phòng tùy chỉnh"
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'main link' as 'liên kết chính' is technically correct, but could be improved for clarity. Considering the context, 'liên kết chính' might not be immediately obvious to a Vietnamese speaker.",
-          "suggestion": "liên kết đầu tiên"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "'additional links' could be translated more naturally. 'liên kết bổ sung' is correct, but could be rephrased for better flow.",
-          "suggestion": "các liên kết khác"
+          "description": "The phrase 'main link' can be better translated to convey the intended meaning. 'liên kết chính' is literally 'main link', but might not be the best way to describe it in Vietnamese context. It might be better to reflect that it's the primary or original link.",
+          "suggestion": "liên kết gốc hoặc liên kết chính thức"
         }
       ],
       "approved_at": null

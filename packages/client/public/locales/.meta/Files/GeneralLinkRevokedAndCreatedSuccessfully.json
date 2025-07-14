@@ -3,7 +3,7 @@
   "content": "New general link created successfully",
   "content_en_sha1_hash": "58f4db47be46603e5a6da54723f845b9713e485d",
   "created_at": "2025-05-19T21:30:55.704Z",
-  "updated_at": "2025-06-24T16:31:24.356Z",
+  "updated_at": "2025-07-10T11:11:06.819Z",
   "comment": {
     "text": "\"This translation key is used for a success message that appears when a general link is deleted successfully in a public or form room. It notifies users of the deletion process and provides feedback after successful completion.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
-      "line_number": 76,
+      "line_number": 77,
       "context": "editExternalLink(roomId, newLink)\n .then((res) => {\n deleteExternalLink(res, newLink.sharedTo.id);\n \n if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {\n toastr.success(t(\"Files:GeneralLinkRevokedAndCreatedSuccessfully\"));\n } else toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n \n const filterObj = FilesFilter.getFilter(window.location);\n \n return api.rooms",
       "module": "/packages/client"
     }

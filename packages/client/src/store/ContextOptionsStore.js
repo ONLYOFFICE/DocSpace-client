@@ -1934,6 +1934,14 @@ class ContextOptionsStore {
             disabled: false,
           },
           {
+            id: "option_embedding-setting",
+            key: "embedding-settings",
+            label: t("Files:Embed"),
+            icon: CodeReactSvgUrl,
+            onClick: () => this.onOpenEmbeddingSettings(item),
+            disabled: !item.security?.Embed,
+          },
+          {
             key: "create-room-separator",
             isSeparator: true,
             disabled: !item.security?.CreateRoomFrom,
@@ -2021,14 +2029,7 @@ class ContextOptionsStore {
       //   icon: MailReactSvgUrl,
       //   disabled: emailSendIsDisabled,
       // },
-      {
-        id: "option_embedding-setting",
-        key: "embedding-settings",
-        label: t("Files:Embed"),
-        icon: CodeReactSvgUrl,
-        onClick: () => this.onOpenEmbeddingSettings(item),
-        disabled: !item.security?.Embed,
-      },
+
       {
         id: "option_show-info",
         key: "show-info",

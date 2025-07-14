@@ -394,7 +394,10 @@ class PaymentStore {
     return this.servicesQuotas?.price.value ?? 0;
   }
 
-  formatWalletCurrency = (item: number = null, fractionDigits: number = 3) => {
+  formatWalletCurrency = (
+    item: number | null = null,
+    fractionDigits: number = 3,
+  ) => {
     const { language } = authStore;
 
     const amount = item ?? this.walletBalance;

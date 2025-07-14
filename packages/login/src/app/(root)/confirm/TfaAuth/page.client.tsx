@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import { ChangeEvent, useContext, useState } from "react";
 
 import { validateTfaCode } from "@docspace/shared/api/settings";
-import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
@@ -41,7 +41,6 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";

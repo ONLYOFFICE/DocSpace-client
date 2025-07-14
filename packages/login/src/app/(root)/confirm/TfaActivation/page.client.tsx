@@ -41,8 +41,7 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
-import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import { ButtonKeys } from "@docspace/shared/enums";

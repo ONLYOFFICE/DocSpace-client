@@ -32,11 +32,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 
 import TfaAuthForm from "./page.client";
 
-type TfaAuthProps = {
-  searchParams: Promise<{ [key: string]: string }>;
-};
-
-async function Page(props: TfaAuthProps) {
+async function Page() {
   logger.info("TfaAuth page");
 
   return (

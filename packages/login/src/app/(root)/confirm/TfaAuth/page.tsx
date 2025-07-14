@@ -28,7 +28,11 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams, encodeParams } from "@/utils";
-import { getSettings, getUserFromConfirm } from "@/utils/actions";
+import {
+  getSettings,
+  getUserFromConfirm,
+  getUserByEmail,
+} from "@/utils/actions";
 
 import { logger } from "logger.mjs";
 import TfaAuthForm from "./page.client";
@@ -43,10 +47,15 @@ async function Page(props: TfaAuthProps) {
   const searchParams = await sp;
   const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;
+  const email = searchParams.email;
 
   const [settings, user] = await Promise.all([
     getSettings(),
-    getUserFromConfirm(uid, confirmKey),
+    uid
+      ? getUserFromConfirm(uid, confirmKey)
+      : email
+        ? getUserByEmail(email, confirmKey)
+        : undefined,
   ]);
 
   return settings && typeof settings !== "string" ? (

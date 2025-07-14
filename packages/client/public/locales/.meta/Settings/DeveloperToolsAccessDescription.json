@@ -1,13 +1,13 @@
 {
   "key_path": "DeveloperToolsAccessDescription",
-  "content": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the {{productName}} owner and administrators only, select Disable and click Save button.",
-  "content_en_sha1_hash": "881922997d04bb3e32d2b80d1ace55143381f4b0",
-  "created_at": "2025-05-19T21:30:51.173Z",
-  "updated_at": "2025-06-18T17:11:42.490Z",
+  "content": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click Save button.",
+  "content_en_sha1_hash": "01d2a8045315e8f0f4963266d4c08d273e77ec34",
+  "created_at": "2025-07-10T11:10:58.987Z",
+  "updated_at": "2025-07-10T11:11:12.688Z",
   "comment": {
-    "text": "This translation key is used for a setting that controls access to Developer Tools on a portal. It will appear in a dialog or settings panel and provides instructions for guests to make it accessible only to owners and administrators.",
+    "text": "This translation key is used to describe a setting that controls access to Developer Tools on a portal. It will appear in a dialog or settings page, providing guidance on how to restrict or enable access to this section.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:22.361Z"
+    "updated_at": "2025-07-10T11:11:12.688Z"
   },
   "usage": [
     {
@@ -33,35 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes the English phrase 'Disable' within the Arabic text. This breaks the flow and consistency of the Arabic translation. The verb 'تعطيل' (ta'til) should be used instead.",
-          "suggestion": "Replace 'Disable' with 'تعطيل' (ta'til)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'وجعله متاحًا' (wa ja'luhu mutaahan) could be more naturally translated as something like 'إتاحته' (itaahatu) or 'توفير الوصول إليه' (tawfeer al-wusool ilayh). The current phrasing is somewhat awkward.",
-          "suggestion": "Consider using 'إتاحته' (itaahatu) or 'توفير الوصول إليه' (tawfeer al-wusool ilayh) to improve the flow and naturalness."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"düyməsini\" is a bit awkward. A more natural phrasing would be \"buttonunu\".",
-          "suggestion": "Saxla buttonunu klikləyin."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"Deaktiv et seçin\" could be improved by using a more standard verb form. Consider \"Deaktiv etməyi seçin\" or simply \"Deaktiv et seçin\" if the tone is intended to be less formal.",
-          "suggestion": "Deaktiv etməyi seçin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -85,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation uses a semicolon (;) to separate sentences where a period (.) would be more appropriate for a more natural flow in Greek. Specifically, it's used before 'Εάν θέλετε'.",
-          "suggestion": "Replace ';' with '.' before 'Εάν θέλετε'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -103,42 +75,19 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'näin, että' is a bit awkward in this context. While technically correct, it can be improved for better flow.",
-          "suggestion": "Tämän asetuksen avulla voit näyttää Kehittäjätyökalut-osion kaikille käyttäjille paitsi vieraille. Jos haluat rajoittaa pääsyä tähän osioon vain {{productName}}-omistajan ja järjestelmänvalvojien käytettävyyteen, valitse Poista käytöstä ja napsauta Tallenna-painiketta."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'click Save button' is less natural in French. It should be 'cliquez sur le bouton Enregistrer'.",
-          "suggestion": "cliquez sur le bouton Enregistrer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses quotes around \"Developer Tools\". It's recommended to maintain consistency with English, which does not use quotes in this context. Using Armenian quotes also makes the text look visually awkward.",
-          "suggestion": "Remove the quotes around \"Developer Tools\"."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Այն հասանելի դարձնելով միայն {{productName}} սեփականատիրոջ և ադմինիստրատորների համար\" could be improved. A more natural phrasing would better convey the restriction.",
-          "suggestion": "Consider rephrasing to something like: \"...դարձնելով հասանելի միայն {{productName}}-ի սեփականատիրոջ և վարչատեսչների համար\" ( ...making it accessible only to the {{productName}} owner and administrators)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -150,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation uses quotation marks around \"開発者ツール\" (Developer Tools) which might be unnecessary and stylistically inconsistent. Consider removing them or ensuring consistency with other similar terms in the application.",
-          "suggestion": "Remove the quotation marks around \"開発者ツール\" or ensure consistent usage throughout the application."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -168,23 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Lao translation uses a mixture of Lao and English words. 'Developer Tools' should ideally be translated or consistently use the English term if that's the standard practice.",
-          "suggestion": "Consider translating 'Developer Tools' to a Lao equivalent or consistently using the English term throughout the text. For example: 'ເຄື່ອງມືພັດທະນາຊອບແວ' or just 'Developer Tools'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ເຮັດໃຫ້ສ່ວນ Developer Tools ປາກົດ' could be improved for clarity and natural Lao flow. It translates literally to 'make the Developer Tools section appear'.",
-          "suggestion": "Consider rephrasing to something like 'ເຮັດໃຫ້ສາມາດເຫັນໄດ້' (make it visible) or 'ປົດບລອກການໃຊ້ງານຂອງ' (unlock the usage of)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ໃຫ້ມັນສາມາດເຂົ້າເຖິງເຈົ້າຂອງ {{productName}} ແລະຜູ້ບໍລິຫານເທົ່ານັ້ນ' is somewhat clunky. It literally translates to 'Let it be accessible to the {{productName}} owner and administrators only'.",
-          "suggestion": "Rephrase to something like 'ໃຫ້ສາມາດເຂົ້າໄດ້ພຽງແຕ່ເຈົ້າຂອງ {{productName}} ແລະຜູ້ບໍລິຫານ' (Allow access only to the {{productName}} owner and administrators)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -202,13 +129,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'click Save button' is not grammatically correct. It should be 'click the Save button' or simply 'click Zapisz'.",
-          "suggestion": "click the Save button"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -226,18 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'making it accessible to the {{productName}} owner and administrators only' is slightly awkward in Romanian. While technically correct, it could be phrased more naturally.",
-          "suggestion": "making it accessible only to the {{productName}} owner and administrators"
-        },
-        {
-          "type": "formatting",
-          "description": "The original English uses 'Disable' in the instruction. The Romanian translation uses 'Dezactivare'. It's important to ensure consistency. It would be better to use the capitalized 'Dezactivare' for consistency with the English.",
-          "suggestion": "selectați Dezactivare"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -249,35 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ආගන්තුකයින් හැර අනෙකුත් සියලු පරිශීලකයින්\" is a bit verbose and could be simplified. A more natural translation for 'except guests' would be something like 'ආගන්තුකයින් හැර'.",
-          "suggestion": "මෙම සැකසුම ඔබට ආගන්තුකයින් හැර අනෙකුත් සියලු පරිශීලකයින් සඳහා සංවර්ධක මෙවලම් කොටස දැකීමට ඉඩ සලසයි.  -> මෙම සැකසුම ඔබට ආගන්තුකයින් හැර අනෙකුත් පරිශීලකයින් සඳහා සංවර්ධක මෙවලම් කොටස දැකීමට ඉඩ සලසයි."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"අක්‍රිය කරන්න සහ සුරකින්න බොත්තම මත ක්ලික් කරන්න\" is a bit clunky.  A more natural phrasing would be \"අක්‍රිය කර සුරකින්න බොත්තනය ක්ලික් කරන්න\" or \"අක්‍රිය කොට සුරකින්න බොත්තනය ක්ලික් කරන්න\".",
-          "suggestion": "අක්‍රිය කරන්න සහ සුරකින්න බොත්තම මත ක්ලික් කරන්න -> අක්‍රිය කර සුරකින්න බොත්තනය ක්ලික් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'make the Developer Tools section visible' is translated as 'sprístupniť sekciu Vývojárske nástroje'. While technically correct, a more natural Slovak phrasing would be 'zobraziť sekciu Vývojárske nástroje' or 'umožniť zobrazenie sekcie Vývojárske nástroje'.",
-          "suggestion": "zobraziť sekciu Vývojárske nástroje"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'restrict access' is translated as 'obmedziť prístup'. This is correct, but could be improved to convey the idea of explicitly denying access. A better translation would be 'zamedziť prístup'.",
-          "suggestion": "zamedziť prístup"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -286,50 +174,28 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase '{{productName}}' appears in the English content, and should be retained in the Serbian translation as is to maintain the same variable functionality.",
-          "suggestion": "Ensure '{{productName}}' is not translated and remains in the translated text."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'Алатке' (Alatke) is used for 'Developer Tools'. A more accurate and commonly used translation for 'Tools' in this context would be 'Алати' (Alati).",
-          "suggestion": "Replace 'Алатке' with 'Алати'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation includes '{{productName}}' without explanation. It's unclear if this should be replaced with the product name or if it's a placeholder.",
-          "suggestion": "Replace '{{productName}}' with the actual product name or provide a note explaining that it's a placeholder."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'odjeljak' is used, which is a correct, but perhaps slightly less common way to say 'section'. 'Sekcija' might be more widely understood.",
-          "suggestion": "Consider using 'sekcija' instead of 'odjeljak'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'Devre Dışı Bırak' is a direct translation of 'Disable' and may sound unnatural in Turkish. A more natural phrasing might be 'Geliştirici Araçlarını Devre Dışı Bırakın' or 'Geliştirici Araçlarını Kapatın'.",
-          "suggestion": "Geliştirici Araçlarını Kapatın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -341,30 +207,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'nhấp vào nút Lưu' sounds slightly unnatural. A more fluent phrasing would be 'nhấn nút Lưu'.",
-          "suggestion": "nhấn nút Lưu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'developer tools section' is translated as '开发者工具模块'. While technically correct, '开发者工具' alone would be more natural and common in Chinese when referring to the Developer Tools feature.",
-          "suggestion": "开发者工具"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'restrict access' is translated as '限制访问权限'. '限制访问' is a more concise and natural phrasing in this context.",
-          "suggestion": "限制访问"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

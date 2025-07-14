@@ -779,6 +779,12 @@ export const getFileExtension = (fileTitleParam: string) => {
 export const sortInDisplayOrder = (folders: TGetFolder[]) => {
   const sorted = [];
 
+  const recentFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Recent,
+  );
+  if (recentFolder) sorted.push(recentFolder);
+
   const myFolder = find(
     folders,
     (folder) => folder.current.rootFolderType === FolderType.USER,
@@ -808,12 +814,6 @@ export const sortInDisplayOrder = (folders: TGetFolder[]) => {
     (folder) => folder.current.rootFolderType === FolderType.Favorites,
   );
   if (favoritesFolder) sorted.push(favoritesFolder);
-
-  const recentFolder = find(
-    folders,
-    (folder) => folder.current.rootFolderType === FolderType.Recent,
-  );
-  if (recentFolder) sorted.push(recentFolder);
 
   const privateFolder = find(
     folders,

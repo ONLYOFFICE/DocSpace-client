@@ -364,9 +364,11 @@ const Items = ({
         );
       });
 
+      items.splice(1, 0, <CatalogDivider key="recent-divider" />);
+
       if (!isVisitor && !isCollaborator)
         items.splice(
-          3,
+          5,
           0,
           <AccountsItem
             key="accounts-item"
@@ -376,8 +378,8 @@ const Items = ({
           />,
         );
 
-      if (!isVisitor) items.splice(3, 0, <CatalogDivider key="other-header" />);
-      else items.splice(2, 0, <CatalogDivider key="other-header" />);
+      if (!isVisitor) items.splice(5, 0, <CatalogDivider key="other-header" />);
+      else items.splice(4, 0, <CatalogDivider key="other-header" />);
 
       if (isCommunity && isPaymentPageAvailable)
         items.push(<BonusItem key="bonus-item" />);

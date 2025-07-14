@@ -57,6 +57,7 @@ const ArticleBodyContent = (props) => {
     myFolderId,
     recycleBinFolderId,
     rootFolderId,
+    recentFolderId,
 
     isVisitor,
     setIsLoading,
@@ -96,6 +97,27 @@ const ArticleBodyContent = (props) => {
       };
 
       switch (folderId) {
+        case recentFolderId: {
+          const recentFilter = FilesFilter.getDefault();
+          // TODO: Temp value. Change later
+          recentFilter.folder = "recent";
+
+          const filterStorageItem =
+            userId && localStorage.getItem(`RecentFilter=${userId}`);
+
+          if (filterStorageItem) {
+            const splitFilter = filterStorageItem.split(",");
+
+            recentFilter.sortBy = splitFilter[0];
+            recentFilter.sortOrder = splitFilter[1];
+          }
+
+          params = recentFilter.toUrlParams();
+
+          path = getCategoryUrl(CategoryType.Recent);
+
+          break;
+        }
         case myFolderId: {
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
@@ -178,6 +200,7 @@ const ArticleBodyContent = (props) => {
       activeItemId,
       hashDate,
       roomsFilter,
+      recentFolderId,
     ],
   );
 
@@ -222,6 +245,12 @@ const ArticleBodyContent = (props) => {
   );
 
   React.useEffect(() => {
+    if (
+      location.pathname.includes("/recent") &&
+      activeItemId !== recentFolderId
+    )
+      return setActiveItemId(recentFolderId);
+
     if (
       location.pathname.includes("/rooms/shared") &&
       activeItemId !== roomsFolderId
@@ -269,6 +298,7 @@ const ArticleBodyContent = (props) => {
     recycleBinFolderId,
     isVisitor,
     rootFolderId,
+    recentFolderId,
   ]);
 
   React.useEffect(() => {
@@ -324,8 +354,13 @@ export default inject(
       // if (param && withTimer) showProgress();
     };
 
-    const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =
-      treeFoldersStore;
+    const {
+      roomsFolderId,
+      archiveFolderId,
+      myFolderId,
+      recycleBinFolderId,
+      recentFolderId,
+    } = treeFoldersStore;
 
     const selectedFolderId = selectedFolderStore.id;
 
@@ -365,6 +400,7 @@ export default inject(
       myFolderId,
       recycleBinFolderId,
       rootFolderId,
+      recentFolderId,
 
       setIsLoading,
 

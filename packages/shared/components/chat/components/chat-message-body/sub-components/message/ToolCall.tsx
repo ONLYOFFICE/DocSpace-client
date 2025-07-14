@@ -63,12 +63,14 @@ const ToolCall = ({ content }: { content: TContent }) => {
               chatMessage={formatJsonWithMarkdown(content.arguments)}
             />
           </div>
-          <div className={styles.toolCallBody}>
-            <MarkdownField
-              chatMessage={formatJsonWithMarkdown(content.result)}
-              propLanguage="Tool call result"
-            />
-          </div>
+          {content.result ? (
+            <div className={styles.toolCallBody}>
+              <MarkdownField
+                chatMessage={formatJsonWithMarkdown(content.result)}
+                propLanguage="Tool call result"
+              />
+            </div>
+          ) : null}
         </>
       )}
     </div>

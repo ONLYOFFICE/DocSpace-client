@@ -40,5 +40,5 @@ export type CircleSkeletonProps = {
   speed?: number;
   animate?: boolean;
   className?: string;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 };

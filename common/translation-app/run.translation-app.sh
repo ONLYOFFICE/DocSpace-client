@@ -66,6 +66,26 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+echo "Running scripts..."
+cd "$BACKEND_DIR"
+npm run generate-metadata
+if [ $? -ne 0 ]; then
+    echo "Failed to run generate-metadata."
+    exit 1
+fi
+
+npm run save-meta-keys-usage
+if [ $? -ne 0 ]; then
+    echo "Failed to run save-meta-keys-usage."
+    exit 1
+fi
+
+npm run generate-auto-comments-metadata
+if [ $? -ne 0 ]; then
+    echo "Failed to run generate-auto-comments-metadata"
+    exit 1
+fi
+
 echo
 echo "Starting backend server..."
 cd "$BACKEND_DIR"

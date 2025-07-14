@@ -519,8 +519,6 @@ export const Component = inject(
       isRoomsFolder,
       isArchiveFolder,
       setSelectedNode,
-      isPersonalRoom,
-      isRecentTab,
       isRoomsFolderRoot,
       isTemplatesFolder,
       isRoot,
@@ -586,11 +584,10 @@ export const Component = inject(
 
     const { isRoomAdmin, isAdmin } = authStore;
 
-    const withDocumentTabs = isPersonalRoom || isRecentTab;
     const withRoomsTabs =
       (isRoomsFolderRoot || isTemplatesFolder) && (isRoomAdmin || isAdmin);
 
-    const sectionWithTabs = (withDocumentTabs || withRoomsTabs) && isRoot;
+    const sectionWithTabs = withRoomsTabs && isRoot;
 
     // if (!firstLoad) {
     //   if (isLoading) {

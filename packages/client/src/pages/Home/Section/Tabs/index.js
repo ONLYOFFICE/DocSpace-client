@@ -29,12 +29,9 @@ import { useLocation } from "react-router";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { inject, observer } from "mobx-react";
 import ContactsTabs from "./ContactsTabs";
-import MyDocumentsTabs from "./MyDocumentsTabs";
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
 
 const SectionSubmenuContent = ({
-  isPersonalRoom,
-  isRecentTab,
   isRoomsFolderRoot,
   isTemplatesFolder,
   allowInvitingGuests,
@@ -56,7 +53,6 @@ const SectionSubmenuContent = ({
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
-  if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
   if (isContacts && (allowInvitingGuests || isCheckGuests))
     return (
       <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
@@ -66,14 +62,11 @@ const SectionSubmenuContent = ({
 };
 
 export default inject(({ treeFoldersStore, settingsStore }) => {
-  const { isPersonalRoom, isRecentTab, isRoomsFolderRoot, isTemplatesFolder } =
-    treeFoldersStore;
+  const { isRoomsFolderRoot, isTemplatesFolder } = treeFoldersStore;
 
   const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
 
   return {
-    isPersonalRoom,
-    isRecentTab,
     isRoomsFolderRoot,
     isTemplatesFolder,
     allowInvitingGuests,

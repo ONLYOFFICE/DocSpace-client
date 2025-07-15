@@ -31,7 +31,7 @@ import type { TFile, TFolder, TGetFolder } from "../../../../api/files/types";
 
 export const PATH_FOLDER = "files/[0-9]*?*";
 
-const files: TFile[] = [
+export const files: TFile[] = [
   {
     folderId: 5,
     version: 1,

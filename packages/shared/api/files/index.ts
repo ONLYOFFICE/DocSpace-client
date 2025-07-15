@@ -29,6 +29,7 @@
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import moment from "moment";
+
 import {
   ConflictResolveType,
   FolderType,
@@ -167,6 +168,11 @@ export async function getFolder(
 ) {
   let params = folderIdParam;
   let folderId = folderIdParam;
+
+  // TODO: Temp value. Change later
+  if (folderId === "recent") {
+    return mockRecentTreeFolder;
+  }
 
   if (folderId && typeof folderId === "string") {
     folderId = encodeURIComponent(folderId.replace(/\\\\/g, "\\"));

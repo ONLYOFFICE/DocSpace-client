@@ -37,9 +37,8 @@ import { StyledBadgesContainer } from "../StyledTable";
 
 const RecentRowDataComponent = (props) => {
   const {
+    roomRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
-    createdRecentColumnIsEnabled,
-    modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
     lastOpenedColumnIsEnabled,
@@ -82,10 +81,10 @@ const RecentRowDataComponent = (props) => {
         </StyledBadgesContainer>
       </TableCell>
 
-      {authorRecentColumnIsEnabled ? (
+      {roomRecentColumnIsEnabled ? (
         <TableCell
           style={
-            !authorRecentColumnIsEnabled
+            !roomRecentColumnIsEnabled
               ? { background: "none" }
               : dragStyles.style
           }
@@ -95,33 +94,7 @@ const RecentRowDataComponent = (props) => {
             lastColumn === "AuthorRecent" ? "no-extra-space" : "",
           )}
         >
-          <AuthorCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-
-      {createdRecentColumnIsEnabled ? (
-        <TableCell
-          style={
-            !createdRecentColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            lastColumn === "CreatedRecent" ? "no-extra-space" : "",
-          )}
-        >
-          <DateCell
-            create
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
+          <div>Room cell</div>
         </TableCell>
       ) : (
         <div />
@@ -149,20 +122,20 @@ const RecentRowDataComponent = (props) => {
         <div />
       )}
 
-      {modifiedRecentColumnIsEnabled ? (
+      {authorRecentColumnIsEnabled ? (
         <TableCell
           style={
-            !modifiedRecentColumnIsEnabled
+            !authorRecentColumnIsEnabled
               ? { background: "none" }
               : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "ModifiedRecent" ? "no-extra-space" : "",
+            lastColumn === "AuthorRecent" ? "no-extra-space" : "",
           )}
         >
-          <DateCell
+          <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
@@ -220,9 +193,8 @@ const RecentRowDataComponent = (props) => {
 
 export default inject(({ tableStore }) => {
   const {
+    roomRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
-    createdRecentColumnIsEnabled,
-    modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
     lastOpenedColumnIsEnabled,
@@ -230,9 +202,8 @@ export default inject(({ tableStore }) => {
   } = tableStore;
 
   return {
+    roomRecentColumnIsEnabled,
     authorRecentColumnIsEnabled,
-    createdRecentColumnIsEnabled,
-    modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
     lastOpenedColumnIsEnabled,

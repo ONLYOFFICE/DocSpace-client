@@ -35,7 +35,7 @@ class FilesTableHeader extends React.Component {
     super(props);
 
     const defaultColumns = this.getDefaultColumns();
-    const columns = props.getColumns(defaultColumns, props.isRecentTab);
+    const columns = props.getColumns(defaultColumns);
     const storageColumns = localStorage.getItem(props.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
@@ -50,7 +50,6 @@ class FilesTableHeader extends React.Component {
       sortOrder: props.isRooms
         ? props.roomsFilter.sortOrder
         : props.filter.sortOrder,
-      isRecentTab: props.isRecentTab,
     };
 
     const tableColumns = columns.map((c) => c.enable && c.key);
@@ -71,7 +70,7 @@ class FilesTableHeader extends React.Component {
       isTrashFolder,
       columnStorageName,
       columnInfoPanelStorageName,
-      isRecentTab,
+      isRecentFolder,
       isArchiveFolder,
       isIndexEditingMode,
       showStorageInfo,
@@ -86,11 +85,7 @@ class FilesTableHeader extends React.Component {
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
-    const {
-      isRecentTab: stateIsRecentTab,
-      sortBy: stateSortBy,
-      sortOrder: stateSortOrder,
-    } = this.state;
+    const { sortBy: stateSortBy, sortOrder: stateSortOrder } = this.state;
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
@@ -100,7 +95,7 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== stateIsRecentTab ||
+      isRecentFolder !== prevProps.isRecentFolder ||
       showStorageInfo !== prevProps.showStorageInfo ||
       (!changeDocumentsTabs && sortBy !== stateSortBy) ||
       (!changeDocumentsTabs && sortOrder !== stateSortOrder)
@@ -165,7 +160,6 @@ class FilesTableHeader extends React.Component {
       getColumns,
       columnStorageName,
       columnInfoPanelStorageName,
-      isRecentTab,
       tableStorageName,
       roomsFilter,
       filter,
@@ -173,7 +167,7 @@ class FilesTableHeader extends React.Component {
 
     const defaultColumns = this.getDefaultColumns();
 
-    const columns = getColumns(defaultColumns, isRecentTab);
+    const columns = getColumns(defaultColumns);
     const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
@@ -193,7 +187,6 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       sortBy,
       sortOrder,
-      isRecentTab,
     });
   };
 
@@ -201,7 +194,7 @@ class FilesTableHeader extends React.Component {
     const {
       isRooms,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
       isIndexing,
     } = this.props;
@@ -209,7 +202,7 @@ class FilesTableHeader extends React.Component {
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
-    if (isRecentTab) return this.getRecentTabColumns();
+    if (isRecentFolder) return this.getRecentFolderColumns();
     if (isIndexing) return this.getIndexingColumns();
     return this.getFilesColumns();
   };
@@ -393,30 +386,16 @@ class FilesTableHeader extends React.Component {
     return [...columns];
   };
 
-  getRecentTabColumns = () => {
+  getRecentFolderColumns = () => {
     const {
       t,
-      isPublicRoom,
-      authorRecentColumnIsEnabled,
       nameColumnIsEnabled,
-      createdRecentColumnIsEnabled,
+      roomRecentColumnIsEnabled,
       lastOpenedColumnIsEnabled,
-      modifiedRecentColumnIsEnabled,
+      authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
     } = this.props;
-
-    const authorBlock = !isPublicRoom
-      ? {
-          key: "AuthorRecent",
-          title: t("ByAuthor"),
-          enable: authorRecentColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.Author,
-          // onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        }
-      : {};
 
     const columns = [
       {
@@ -429,14 +408,12 @@ class FilesTableHeader extends React.Component {
         minWidth: 210,
         onClick: this.onFilter,
       },
-      { ...authorBlock },
       {
-        key: "CreatedRecent",
-        title: t("ByCreation"),
-        enable: createdRecentColumnIsEnabled,
+        key: "RoomRecent",
+        title: t("Common:Room"),
+        enable: roomRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.CreationDate,
-        // onClick: this.onFilter,
+        sortBy: SortByFieldName.Room,
         onChange: this.onColumnChange,
       },
       {
@@ -449,12 +426,11 @@ class FilesTableHeader extends React.Component {
         onChange: this.onColumnChange,
       },
       {
-        key: "ModifiedRecent",
-        title: t("ByLastModified"),
-        enable: modifiedRecentColumnIsEnabled,
+        key: "AuthorRecent",
+        title: t("ByAuthor"),
+        enable: authorRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.ModifiedDate,
-        // onClick: this.onFilter,
+        sortBy: SortByFieldName.Author,
         onChange: this.onColumnChange,
       },
       {
@@ -878,11 +854,11 @@ export default inject(
       indexColumnSize,
     } = filesStore;
     const {
-      isRecentTab,
       isArchiveFolder,
       isTrashFolder,
       isTemplatesFolder,
       isPersonalReadOnly,
+      isRecentFolder,
     } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
@@ -905,7 +881,6 @@ export default inject(
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
@@ -914,9 +889,9 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      roomRecentColumnIsEnabled,
+      lastOpenedColumnIsEnabled,
       authorRecentColumnIsEnabled,
-      modifiedRecentColumnIsEnabled,
-      createdRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
 
@@ -982,7 +957,6 @@ export default inject(
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
@@ -991,9 +965,9 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      roomRecentColumnIsEnabled,
+      lastOpenedColumnIsEnabled,
       authorRecentColumnIsEnabled,
-      modifiedRecentColumnIsEnabled,
-      createdRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
 
@@ -1019,7 +993,7 @@ export default inject(
       isPublicRoomType,
 
       isFrame,
-      isRecentTab,
+      isRecentFolder,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,
       showStorageInfo,

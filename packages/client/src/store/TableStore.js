@@ -102,13 +102,11 @@ class TableStore {
 
   typeColumnIsEnabled = false;
 
+  roomRecentColumnIsEnabled = true;
+
   authorRecentColumnIsEnabled = true;
 
-  modifiedRecentColumnIsEnabled = false;
-
-  createdRecentColumnIsEnabled = false;
-
-  sizeRecentColumnIsEnabled = true;
+  sizeRecentColumnIsEnabled = false;
 
   typeRecentColumnIsEnabled = false;
 
@@ -226,6 +224,10 @@ class TableStore {
     this.authorColumnIsEnabled = enable;
   };
 
+  setRoomRecentColumn = (enable) => {
+    this.roomRecentColumnIsEnabled = enable;
+  };
+
   setAuthorRecentColumn = (enable) => {
     this.authorRecentColumnIsEnabled = enable;
   };
@@ -242,20 +244,12 @@ class TableStore {
     this.createdColumnIsEnabled = enable;
   };
 
-  setCreatedRecentColumn = (enable) => {
-    this.createdRecentColumnIsEnabled = enable;
-  };
-
   setCreatedVDRColumn = (enable) => {
     this.createdVDRColumnIsEnabled = enable;
   };
 
   setModifiedColumn = (enable) => {
     this.modifiedColumnIsEnabled = enable;
-  };
-
-  setModifiedRecentColumn = (enable) => {
-    this.modifiedRecentColumnIsEnabled = enable;
   };
 
   setModifiedVDRColumn = (enable) => {
@@ -344,7 +338,7 @@ class TableStore {
   setInsideGroupColumnStorage = (enable) =>
     (this.storageInsideGroupColumnIsEnabled = enable);
 
-  setColumnsEnable = (frameTableColumns, isRecentTab) => {
+  setColumnsEnable = (frameTableColumns) => {
     const { contactsTab } = this.peopleStore.usersStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns
@@ -360,6 +354,7 @@ class TableStore {
         isTrashFolder,
         isTemplatesFolder,
         isPersonalReadOnly,
+        isRecentFolder,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -442,10 +437,9 @@ class TableStore {
         return;
       }
 
-      if (isRecentTab) {
-        this.setModifiedRecentColumn(splitColumns.includes("ModifiedRecent"));
+      if (isRecentFolder) {
+        this.setRoomRecentColumn(splitColumns.includes("RoomRecent"));
         this.setAuthorRecentColumn(splitColumns.includes("AuthorRecent"));
-        this.setCreatedRecentColumn(splitColumns.includes("CreatedRecent"));
         this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
         this.setSizeRecentColumn(splitColumns.includes("SizeRecent"));
         this.setTypeRecentColumn(splitColumns.includes("TypeRecent"));
@@ -491,7 +485,9 @@ class TableStore {
       case "Room":
         this.setRoomColumn(!this.roomColumnIsEnabled);
         return;
-
+      case "RoomRecent":
+        this.setRoomRecentColumn(!this.roomRecentColumnIsEnabled);
+        return;
       case "Author":
         this.setAuthorColumn(!this.authorColumnIsEnabled);
         return;
@@ -513,9 +509,6 @@ class TableStore {
       case "CreatedTrash":
         this.setCreatedTrashColumn(!this.createdTrashColumnIsEnabled);
         return;
-      case "CreatedRecent":
-        this.setCreatedRecentColumn(!this.createdRecentColumnIsEnabled);
-        return;
       case "CreatedIndexing":
         this.setCreatedVDRColumn(!this.createdVDRColumnIsEnabled);
         return;
@@ -529,9 +522,6 @@ class TableStore {
 
       case "Modified":
         this.setModifiedColumn(!this.modifiedColumnIsEnabled);
-        return;
-      case "ModifiedRecent":
-        this.setModifiedRecentColumn(!this.modifiedRecentColumnIsEnabled);
         return;
       case "ModifiedIndexing":
         this.setModifiedVDRColumn(!this.modifiedVDRColumnIsEnabled);
@@ -651,7 +641,7 @@ class TableStore {
     }
   };
 
-  getColumns = (defaultColumns, isRecentTab) => {
+  getColumns = (defaultColumns) => {
     const { isFrame, frameConfig } = this.settingsStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
@@ -660,7 +650,7 @@ class TableStore {
     const columns = [];
 
     if (splitColumns) {
-      this.setColumnsEnable(null, isRecentTab);
+      this.setColumnsEnable(null);
 
       defaultColumns.forEach((col) => {
         const column = splitColumns.find((key) => key === col.key);
@@ -688,7 +678,7 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -730,7 +720,7 @@ class TableStore {
       tableStorageName = `${TABLE_INSIDE_GROUP_COLUMNS}=${userId}`;
     else if (isTrashFolder)
       tableStorageName = `${TABLE_TRASH_COLUMNS}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       tableStorageName = `${TABLE_RECENT_COLUMNS}=${userId}`;
     else if (isIndexedFolder)
       tableStorageName = `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`;
@@ -748,7 +738,7 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -782,7 +772,7 @@ class TableStore {
     else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
     else if (isTrashFolder)
       columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
     else if (isIndexedFolder)
       columnStorageName = `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`;
@@ -808,7 +798,7 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isRecentTab,
+      isRecentFolder,
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
@@ -843,7 +833,7 @@ class TableStore {
       columnInfoPanelStorageName = `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
     else if (isTrashFolder)
       columnInfoPanelStorageName = `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`;
-    else if (isRecentTab)
+    else if (isRecentFolder)
       columnInfoPanelStorageName = `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`;
     else if (isIndexedFolder)
       columnInfoPanelStorageName = `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`;

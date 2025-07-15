@@ -105,12 +105,19 @@ export const getCategoryType = (location) => {
   if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
-    } else if (pathname.indexOf("shared") > -1) {
+    } else if (
+      pathname.indexOf("shared") > -1 ||
+      pathname.indexOf("chat") > -1
+    ) {
       const regexp = /(rooms)\/([\d])\/(shared)/;
 
       categoryType = !regexp.test(location)
         ? CategoryType.Shared
         : CategoryType.SharedRoom;
+
+      if (pathname.indexOf("chat") > -1) {
+        categoryType = CategoryType.SharedRoom;
+      }
     } else if (pathname.indexOf("share") > -1) {
       categoryType = CategoryType.PublicRoom;
     } else if (pathname.indexOf("archive") > -1) {

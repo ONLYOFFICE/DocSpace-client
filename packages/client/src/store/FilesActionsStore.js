@@ -1652,6 +1652,8 @@ class FilesActionStore {
       return this.moveToPublicRoom(item.id);
 
     const { id, isRoom, isTemplate, title, rootFolderType } = item;
+
+    console.log(item);
     const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
 
     const state = { title, rootFolderType, isRoot: false, isRoom };
@@ -2682,6 +2684,11 @@ class FilesActionStore {
 
       setIsLoading(true);
       setSelection([]);
+
+      if (item.roomType === RoomsType.CustomRoom) {
+        window.DocSpace.navigate(url.replace("shared", "chat"), { state });
+        return;
+      }
 
       window.DocSpace.navigate(url, { state });
     } else {

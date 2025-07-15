@@ -391,16 +391,6 @@ export const getOptions = (
         createPresentation,
         createForm,
       ])
-      .with([FolderType.Recent, P._, P._], () => [
-        {
-          ...actions.onGoToPersonal(),
-          icon: <PersonIcon />,
-          description: t("Files:GoToSection", {
-            sectionName: t("Common:MyFilesSection"),
-          }),
-          key: "empty-view-goto-personal",
-        },
-      ])
       .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
         {
           ...actions.onGoToShared(),

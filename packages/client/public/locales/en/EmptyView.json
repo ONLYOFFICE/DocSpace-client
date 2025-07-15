@@ -19,7 +19,7 @@
   "EmptyGroupAddedUserOptionDescription": "Add group members and assign the head",
   "EmptyGroupDeleteOptionDescription": "If you don't need this group anymore",
   "EmptyGroupsCreateGroupOptionDescription": "Create a group to add them to the room",
-  "EmptyRecentDescription": "Your last viewed or edited docs will be displayed in this section.",
+  "EmptyRecentDescription": "All recent files opened in the portal end up in this section. Files are stored for 90 days",
   "EmptyRootRoomUserDescription": "The shared room will appear here.",
   "EmptyRootRoomUserTitle": "There are no rooms here yet",
   "EmptyTemplatesDescription": "You can create a template from a room in the Room section",

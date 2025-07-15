@@ -391,7 +391,7 @@ class FilesTableHeader extends React.Component {
       t,
       nameColumnIsEnabled,
       roomRecentColumnIsEnabled,
-      lastOpenedColumnIsEnabled,
+      lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
@@ -417,9 +417,9 @@ class FilesTableHeader extends React.Component {
         onChange: this.onColumnChange,
       },
       {
-        key: "LastOpened",
+        key: "LastOpenedRecent",
         title: t("DateLastOpened"),
-        enable: lastOpenedColumnIsEnabled,
+        enable: lastOpenedRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.LastOpened,
         onClick: this.onFilter,
@@ -890,7 +890,7 @@ export default inject(
       roomQuotaColumnIsEnable,
 
       roomRecentColumnIsEnabled,
-      lastOpenedColumnIsEnabled,
+      lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,
@@ -966,7 +966,7 @@ export default inject(
       roomQuotaColumnIsEnable,
 
       roomRecentColumnIsEnabled,
-      lastOpenedColumnIsEnabled,
+      lastOpenedRecentColumnIsEnabled,
       authorRecentColumnIsEnabled,
       sizeRecentColumnIsEnabled,
       typeRecentColumnIsEnabled,

@@ -110,7 +110,7 @@ class TableStore {
 
   typeRecentColumnIsEnabled = false;
 
-  lastOpenedColumnIsEnabled = true;
+  lastOpenedRecentColumnIsEnabled = true;
 
   authorTrashColumnIsEnabled = true;
 
@@ -301,7 +301,8 @@ class TableStore {
 
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
 
-  setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
+  setLastOpenedRecentColumn = (enable) =>
+    (this.lastOpenedRecentColumnIsEnabled = enable);
 
   setGroupsColumnPeople = (enable) =>
     (this.peopleGroupsColumnIsEnabled = enable);
@@ -440,7 +441,9 @@ class TableStore {
       if (isRecentFolder) {
         this.setRoomRecentColumn(splitColumns.includes("RoomRecent"));
         this.setAuthorRecentColumn(splitColumns.includes("AuthorRecent"));
-        this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
+        this.setLastOpenedRecentColumn(
+          splitColumns.includes("LastOpenedRecent"),
+        );
         this.setSizeRecentColumn(splitColumns.includes("SizeRecent"));
         this.setTypeRecentColumn(splitColumns.includes("TypeRecent"));
         return;
@@ -461,7 +464,6 @@ class TableStore {
         this.setErasureColumn(splitColumns.includes("Erasure"));
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
-      this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
     }
   };
 
@@ -595,8 +597,8 @@ class TableStore {
         );
         return;
 
-      case "LastOpened":
-        this.setLastOpenedColumn(!this.lastOpenedColumnIsEnabled);
+      case "LastOpenedRecent":
+        this.setLastOpenedRecentColumn(!this.lastOpenedRecentColumnIsEnabled);
         return;
 
       case "Mail":

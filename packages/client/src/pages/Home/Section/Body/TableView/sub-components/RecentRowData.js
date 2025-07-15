@@ -44,7 +44,7 @@ const RecentRowDataComponent = (props) => {
     authorRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    lastOpenedColumnIsEnabled,
+    lastOpenedRecentColumnIsEnabled,
 
     dragStyles,
     selectionProp,
@@ -107,17 +107,17 @@ const RecentRowDataComponent = (props) => {
         <div />
       )}
 
-      {lastOpenedColumnIsEnabled ? (
+      {lastOpenedRecentColumnIsEnabled ? (
         <TableCell
           style={
-            !lastOpenedColumnIsEnabled
+            !lastOpenedRecentColumnIsEnabled
               ? { background: "none" }
               : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "LastOpened" ? "no-extra-space" : "",
+            lastColumn === "LastOpenedRecent" ? "no-extra-space" : "",
           )}
         >
           <DateCell
@@ -204,7 +204,7 @@ export default inject(({ tableStore }) => {
     authorRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    lastOpenedColumnIsEnabled,
+    lastOpenedRecentColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
@@ -213,7 +213,7 @@ export default inject(({ tableStore }) => {
     authorRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    lastOpenedColumnIsEnabled,
+    lastOpenedRecentColumnIsEnabled,
     tableStorageName,
   };
 })(observer(RecentRowDataComponent));

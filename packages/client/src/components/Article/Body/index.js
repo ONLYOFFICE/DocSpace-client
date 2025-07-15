@@ -225,8 +225,7 @@ const ArticleBodyContent = (props) => {
 
   React.useEffect(() => {
     if (
-      (location.pathname.includes("/rooms/shared") ||
-        location.pathname.includes("/rooms/chat")) &&
+      location.pathname.includes("/rooms/shared") &&
       activeItemId !== roomsFolderId
     )
       return setActiveItemId(roomsFolderId);

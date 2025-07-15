@@ -25,26 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useParams } from "react-router";
 
 import Chat from "@docspace/shared/components/chat";
 
-const ChatComponent = ({
-  id,
-  userAvatar,
-}: {
-  id: number;
-  userAvatar: string;
-}) => {
-  if (!id) return null;
-
-  return <Chat userAvatar={userAvatar} roomId={id ?? "1"} />;
+const ChatComponent = ({ userAvatar }: { userAvatar: string }) => {
+  const { room } = useParams();
+  return (
+    <div
+      style={{
+        padding: "20px",
+        width: "100%",
+        height: "100%",
+        boxSizing: "border-box",
+      }}
+    >
+      <Chat userAvatar={userAvatar} roomId={room ?? "1"} />
+    </div>
+  );
 };
 
 export const ChatView = inject((store: TStore) => {
-  const { selectedFolderStore, userStore } = store;
+  const { userStore } = store;
 
   return {
-    id: selectedFolderStore.id,
     userAvatar: userStore.user?.avatar,
   };
 })(observer(ChatComponent));

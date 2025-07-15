@@ -29,6 +29,7 @@ import { Navigate } from "react-router";
 import componentLoader from "@docspace/shared/utils/component-loader";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
+
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
@@ -240,42 +241,7 @@ const ClientRoutes = [
               return { Component };
             },
           },
-          {
-            path: "rooms/chat/:room",
-            async lazy() {
-              const { ChatView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Chat"),
-              );
 
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <ChatView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
-          {
-            path: "rooms/chat/:room/filter",
-            async lazy() {
-              const { ChatView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Chat"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <ChatView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
           {
             path: "rooms/archived",
             async lazy() {
@@ -476,6 +442,27 @@ const ClientRoutes = [
       return { Component };
     },
   },
+  {
+    path: "/chat/:room",
+    async lazy() {
+      const { ChatView } = await componentLoader(
+        () => import("SRC_DIR/pages/Home/View/Chat"),
+      );
+
+      const Component = () => {
+        return (
+          <PrivateRoute>
+            <ErrorBoundary>
+              <ChatView />
+            </ErrorBoundary>
+          </PrivateRoute>
+        );
+      };
+
+      return { Component };
+    },
+  },
+
   {
     path: "/form-gallery/:fromFolderId",
     async lazy() {

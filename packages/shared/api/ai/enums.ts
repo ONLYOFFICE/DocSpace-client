@@ -28,6 +28,7 @@ export const enum MessageType {
   UserMessage = 0,
   AssistantMessage = 1,
   ToolCall = 2,
+  Error = 10,
 }
 
 export const enum ContentType {
@@ -42,9 +43,9 @@ export const enum ProviderType {
 }
 
 export const enum EventType {
-  metadata = "metadata",
-  new_token = "new_token",
-  tool_call = "tool_call",
-  tool_result = "tool_result",
-  error = "error",
+  Metadata = "metadata",
+  NewToken = "new_token",
+  ToolCall = "tool_call",
+  ToolResult = "tool_result",
+  Error = "error",
 }

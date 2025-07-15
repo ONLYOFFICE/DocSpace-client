@@ -32,7 +32,7 @@ import {
   startNewChat,
   sendMessageToChat,
 } from "../../../api/ai";
-import { ContentType, MessageType } from "../../../api/ai/enums";
+import { ContentType, EventType, MessageType } from "../../../api/ai/enums";
 
 export default class MessageStore {
   messages: TMessage[] = [];
@@ -48,6 +48,8 @@ export default class MessageStore {
   abortController: AbortController = new AbortController();
 
   isRequestRunning: boolean = false;
+
+  isGetMessageRequestRunning: boolean = false;
 
   constructor(roomId: number | string) {
     makeAutoObservable(this);
@@ -67,18 +69,29 @@ export default class MessageStore {
   };
 
   fetchMessages = async (chatId: string) => {
+    if (this.isGetMessageRequestRunning) return;
+
+    this.isGetMessageRequestRunning = true;
+
     const { items, total } = await getChatMessages(chatId, 0);
 
     runInAction(() => {
       this.messages = items;
-      this.startIndex = 100;
+      this.startIndex = total > 100 ? 100 : total;
       this.totalMessages = total;
       this.currentChatId = chatId;
+      this.isGetMessageRequestRunning = false;
     });
   };
 
   fetchNextMessages = async () => {
     if (!this.currentChatId) return;
+
+    if (this.isGetMessageRequestRunning) return;
+
+    if (this.totalMessages <= this.startIndex) return;
+
+    this.isGetMessageRequestRunning = true;
 
     const { items, total } = await getChatMessages(
       this.currentChatId,
@@ -89,6 +102,7 @@ export default class MessageStore {
       this.messages = [...this.messages, ...items];
       this.startIndex += 100;
       this.totalMessages = total;
+      this.isGetMessageRequestRunning = false;
     });
   };
 
@@ -100,6 +114,9 @@ export default class MessageStore {
     };
 
     this.messages = [newMsg, ...this.messages];
+
+    this.totalMessages += 1;
+    this.startIndex += 1;
   };
 
   addNewAIMessage = (message: string) => {
@@ -110,6 +127,9 @@ export default class MessageStore {
     };
 
     this.messages = [newMsg, ...this.messages];
+
+    this.totalMessages += 1;
+    this.startIndex += 1;
   };
 
   continueAIMessage = (message: string) => {
@@ -126,8 +146,7 @@ export default class MessageStore {
     this.messages[0] = msg;
   };
 
-  handleMetadata = (data: string) => {
-    const jsonData = data.split("data:")[1].trim();
+  handleMetadata = (jsonData: string) => {
     const { chatId } = JSON.parse(jsonData);
 
     if (chatId) {
@@ -135,10 +154,9 @@ export default class MessageStore {
     }
   };
 
-  handleNewToken = (data: string, msg: string) => {
+  handleNewToken = (jsonData: string, msg: string) => {
     let newMsg = msg;
 
-    const jsonData = data.split("data:")[1].trim();
     const { text } = JSON.parse(jsonData);
 
     if (text) {
@@ -154,9 +172,7 @@ export default class MessageStore {
     return newMsg;
   };
 
-  handleToolCall = (data: string) => {
-    const jsonData = data.split("data:")[1].trim();
-
+  handleToolCall = (jsonData: string) => {
     const { name, arguments: args } = JSON.parse(jsonData);
 
     const newMsg: TMessage = {
@@ -172,11 +188,12 @@ export default class MessageStore {
     };
 
     this.messages = [newMsg, ...this.messages];
+
+    this.totalMessages += 1;
+    this.startIndex += 1;
   };
 
-  handleToolResult = (data: string) => {
-    const jsonData = data.split("data:")[1].trim();
-
+  handleToolResult = (jsonData: string) => {
     const { result } = JSON.parse(jsonData);
 
     const newMsg: TMessage = {
@@ -201,23 +218,26 @@ export default class MessageStore {
     this.messages[0] = newMsg;
   };
 
-  startChat = async (message: string) => {
-    this.addUserMessage(message);
+  handleStreamError = (jsonData: string) => {
+    const { message } = JSON.parse(jsonData);
 
-    this.isRequestRunning = true;
+    const newMsg: TMessage = {
+      messageType: MessageType.Error,
+      createdOn: new Date().toString(),
+      contents: [{ type: ContentType.Text, text: message }],
+    };
 
-    this.abortController.abort();
+    this.messages = [newMsg, ...this.messages];
+  };
 
-    this.abortController = new AbortController();
+  startStream = async (
+    stream: ReadableStream<Uint8Array<ArrayBufferLike>> | null,
+  ) => {
+    if (!stream) {
+      this.isRequestRunning = false;
 
-    const stream = await startNewChat(
-      this.roomId,
-      message,
-      this.roomId,
-      this.abortController,
-    );
-
-    if (!stream) return;
+      return;
+    }
 
     try {
       const textDecoder = new TextDecoder();
@@ -240,24 +260,43 @@ export default class MessageStore {
           const chunks = decodedChunk.split("\n\n");
 
           chunks.forEach(async (chunk) => {
+            if (!chunk) return;
+
             const [event, data] = chunk.split("\n");
 
-            if (event.includes("metadata")) {
-              this.handleMetadata(data);
+            const jsonData = data.split("data:")[1].trim();
+
+            if (event.includes(EventType.Metadata)) {
+              this.handleMetadata(jsonData);
+
+              return;
             }
 
-            if (event.includes("new_token")) {
-              msg = this.handleNewToken(data, msg);
+            if (event.includes(EventType.NewToken)) {
+              msg = this.handleNewToken(jsonData, msg);
+
+              return;
             }
 
-            if (event.includes("tool_call")) {
+            if (event.includes(EventType.ToolCall)) {
               msg = "";
-              this.handleToolCall(data);
+              this.handleToolCall(jsonData);
+
+              return;
             }
 
-            if (event.includes("tool_result")) {
+            if (event.includes(EventType.ToolResult)) {
               msg = "";
-              this.handleToolResult(data);
+              this.handleToolResult(jsonData);
+
+              return;
+            }
+
+            console.log(event);
+
+            if (event.includes(EventType.Error)) {
+              console.log(jsonData);
+              this.handleStreamError(jsonData);
             }
           });
           await streamHandler();
@@ -272,6 +311,25 @@ export default class MessageStore {
       this.isRequestRunning = false;
       console.log(e);
     }
+  };
+
+  startChat = async (message: string) => {
+    this.addUserMessage(message);
+
+    this.isRequestRunning = true;
+
+    this.abortController.abort();
+
+    this.abortController = new AbortController();
+
+    const stream = await startNewChat(
+      this.roomId,
+      message,
+      this.roomId,
+      this.abortController,
+    );
+
+    await this.startStream(stream);
   };
 
   sendMessage = async (message: string) => {
@@ -290,58 +348,7 @@ export default class MessageStore {
       this.abortController,
     );
 
-    if (!stream) return;
-    try {
-      const textDecoder = new TextDecoder();
-
-      const reader = stream.getReader();
-
-      let msg = "";
-
-      const streamHandler = async () => {
-        const { done, value } = await reader.read();
-
-        if (done) {
-          this.isRequestRunning = false;
-          return;
-        }
-
-        const decodedChunk = textDecoder.decode(value);
-
-        try {
-          const chunks = decodedChunk.split("\n\n");
-
-          chunks.forEach(async (chunk) => {
-            const [event, data] = chunk.split("\n");
-
-            if (event.includes("new_token")) {
-              msg = this.handleNewToken(data, msg);
-            }
-
-            if (event.includes("tool_call")) {
-              msg = "";
-              this.handleToolCall(data);
-            }
-
-            if (event.includes("tool_result")) {
-              msg = "";
-              this.handleToolResult(data);
-            }
-          });
-
-          await streamHandler();
-        } catch (e) {
-          this.isRequestRunning = false;
-          console.log(e);
-        }
-      };
-
-      await streamHandler();
-    } catch (e) {
-      this.isRequestRunning = false;
-
-      console.log(e);
-    }
+    await this.startStream(stream);
   };
 
   stopMessage = () => {

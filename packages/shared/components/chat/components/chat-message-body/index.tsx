@@ -40,15 +40,27 @@ import Message from "./sub-components/message";
 import styles from "./ChatMessageBody.module.scss";
 
 const ChatMessageBody = ({ userAvatar }: { userAvatar: string }) => {
-  const { messages } = useMessageStore();
+  const { messages, fetchNextMessages } = useMessageStore();
   const { currentChat } = useChatStore();
+
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
   const scrollbarRef = useRef<CustomScrollbar>(null);
+  const chatBodyRef = useRef<HTMLDivElement>(null);
+  const prevBodyHeight = useRef(0);
+  const currentScroll = useRef(0);
 
   const isEmpty = messages.length === 0;
+
+  useEffect(() => {
+    setIsScrolled(false);
+  }, [currentChat]);
 
   // Scroll to bottom whenever messages change
   useEffect(() => {
     if (isEmpty) return;
+
+    if (isScrolled) return;
 
     // Use requestAnimationFrame to ensure the DOM has been updated
     // Method 1: Use the scrollbar instance if available
@@ -59,6 +71,36 @@ const ChatMessageBody = ({ userAvatar }: { userAvatar: string }) => {
     });
   });
 
+  useEffect(() => {
+    if (!chatBodyRef.current) return;
+
+    const bodyHeight = chatBodyRef.current?.clientHeight;
+    const diff = bodyHeight - prevBodyHeight.current;
+    if (diff !== 0) {
+      prevBodyHeight.current = bodyHeight;
+    }
+
+    if (currentScroll.current === 0 && diff > 0) {
+      scrollbarRef.current?.scrollTo(0, diff);
+    }
+  }, [messages.length]);
+
+  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (
+      e.currentTarget.clientHeight + e.currentTarget.scrollTop ===
+      chatBodyRef.current?.offsetHeight
+    ) {
+      setIsScrolled(false);
+    }
+
+    if (e.currentTarget.scrollTop < 500 + e.currentTarget.clientHeight) {
+      setIsScrolled(true);
+      fetchNextMessages();
+    }
+
+    currentScroll.current = e.currentTarget.scrollTop;
+  };
+
   return (
     <div
       className={classNames(styles.chatMessageBody, {
@@ -68,8 +110,15 @@ const ChatMessageBody = ({ userAvatar }: { userAvatar: string }) => {
       {messages.length === 0 ? (
         <EmptyScreen />
       ) : (
-        <Scrollbar ref={scrollbarRef} className="chat-scroll-bar">
-          <div className={classNames(styles.chatMessageContainer)}>
+        <Scrollbar
+          ref={scrollbarRef}
+          className="chat-scroll-bar"
+          onScroll={onScroll}
+        >
+          <div
+            className={classNames(styles.chatMessageContainer)}
+            ref={chatBodyRef}
+          >
             {messages.map((message, index) => {
               return (
                 <Message

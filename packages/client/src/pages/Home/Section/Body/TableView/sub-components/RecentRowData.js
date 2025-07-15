@@ -26,14 +26,17 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+
 import { TableCell } from "@docspace/shared/components/table";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
+
+import { StyledBadgesContainer } from "../StyledTable";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { StyledBadgesContainer } from "../StyledTable";
+import RoomCell from "./RoomCell";
 
 const RecentRowDataComponent = (props) => {
   const {
@@ -54,6 +57,7 @@ const RecentRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     tableStorageName,
+    item,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
@@ -94,7 +98,10 @@ const RecentRowDataComponent = (props) => {
             lastColumn === "AuthorRecent" ? "no-extra-space" : "",
           )}
         >
-          <div>Room cell</div>
+          <RoomCell
+            item={item}
+            sideColor={theme.filesSection.tableView.row.sideColor}
+          />
         </TableCell>
       ) : (
         <div />

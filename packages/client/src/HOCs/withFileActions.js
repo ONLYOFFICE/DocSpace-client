@@ -282,7 +282,7 @@ export default function withFileActions(WrappedFileItem) {
         itemIndex,
         currentDeviceType,
         isDisabledDropItem,
-        isRecentTab,
+        isRecentFolder,
         canDrag,
         isIndexUpdated,
       } = this.props;
@@ -347,7 +347,7 @@ export default function withFileActions(WrappedFileItem) {
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
           badgeUrl={badgeUrl}
-          isRecentTab={isRecentTab}
+          isRecentFolder={isRecentFolder}
           canDrag={canDrag}
           {...this.props}
         />
@@ -387,7 +387,7 @@ export default function withFileActions(WrappedFileItem) {
         isRoomsFolder,
         isArchiveFolder,
         isTemplatesFolder,
-        isRecentTab,
+        isRecentFolder,
       } = treeFoldersStore;
       const {
         dragging,
@@ -531,7 +531,7 @@ export default function withFileActions(WrappedFileItem) {
         setSelection,
         currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
-        isRecentTab,
+        isRecentFolder,
         isIndexUpdated,
 
         canDrag: !dragIsDisabled,

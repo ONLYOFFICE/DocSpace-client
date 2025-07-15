@@ -2685,7 +2685,7 @@ class FilesActionStore {
       setIsLoading(true);
       setSelection([]);
 
-      if (item.roomType === RoomsType.CustomRoom) {
+      if (item.roomType === RoomsType.AIRoom) {
         window.DocSpace.navigate(url.replace("shared", "chat"), { state });
         return;
       }

@@ -94,7 +94,7 @@ const ChatMessageBody = ({ userAvatar }: { userAvatar: string }) => {
     }
 
     if (e.currentTarget.scrollTop < 500 + e.currentTarget.clientHeight) {
-      setIsScrolled(true);
+      // setIsScrolled(true);
       fetchNextMessages();
     }
 

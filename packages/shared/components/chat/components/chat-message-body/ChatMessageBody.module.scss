@@ -91,14 +91,6 @@
   background-color: #4781d11a;
 }
 
-.chatMessageError {
-  background-color: var(--chat-message-error-background-color);
-
-  p {
-    color: var(--text-color) !important;
-  }
-}
-
 .chatMessageTextColor {
   color: var(--chat-message-color);
 
@@ -227,4 +219,18 @@
   a {
     color: var(--link-color);
   }
+}
+
+.chatMessageError {
+  background-color: var(--chat-message-error-background-color);
+
+  p {
+    color: var(--text-color) !important;
+  }
+
+  padding: 8px;
+
+  border-radius: 6px;
+
+  box-sizing: border-box;
 }

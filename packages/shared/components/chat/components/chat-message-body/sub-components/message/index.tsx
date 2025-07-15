@@ -35,12 +35,15 @@ import { MessageProps } from "../../../../types";
 import { useChatStore } from "../../../../store/chatStore";
 
 import styles from "../../ChatMessageBody.module.scss";
+
 import Markdown from "./Markdown";
 import ToolCall from "./ToolCall";
+import Error from "./Error";
 
 const Message = ({ message, idx, userAvatar }: MessageProps) => {
   const { currentChat } = useChatStore();
   const isUser = message.messageType === MessageType.UserMessage;
+  const isError = message.messageType === MessageType.Error;
 
   if (isUser)
     return (
@@ -76,6 +79,13 @@ const Message = ({ message, idx, userAvatar }: MessageProps) => {
             })}
           </div>
         </div>
+      </div>
+    );
+
+  if (isError)
+    return (
+      <div key={`error-${currentChat?.id}-${message.createdOn}-${idx * 2}`}>
+        <Error content={message.contents[0]} />
       </div>
     );
 

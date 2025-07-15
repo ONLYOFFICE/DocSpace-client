@@ -228,6 +228,8 @@ const Section = (props: SectionProps) => {
     !primaryOperationsCompleted &&
     primaryOperationsArray.some((op) => op.operation === "upload");
 
+  const hideFilter = window.location.pathname.includes("chat");
+
   return (
     isSectionAvailable && (
       <Provider value={providerValue}>
@@ -255,6 +257,7 @@ const Section = (props: SectionProps) => {
               ) : null}
 
               {isSectionFilterAvailable &&
+              !hideFilter &&
               currentDeviceType === DeviceType.desktop ? (
                 <SubSectionFilter className="section-header_filter">
                   {sectionFilterContent}
@@ -294,6 +297,7 @@ const Section = (props: SectionProps) => {
                 <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
               ) : null}
               {isSectionFilterAvailable &&
+              !hideFilter &&
               currentDeviceType !== DeviceType.desktop ? (
                 <SubSectionFilter
                   withTabs={withTabs}

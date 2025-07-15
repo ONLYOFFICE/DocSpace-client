@@ -241,6 +241,42 @@ const ClientRoutes = [
             },
           },
           {
+            path: "rooms/chat/:room",
+            async lazy() {
+              const { ChatView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Chat"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <ChatView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "rooms/chat/:room/filter",
+            async lazy() {
+              const { ChatView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Chat"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <ChatView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
             path: "rooms/archived",
             async lazy() {
               const { FilesView } = await componentLoader(

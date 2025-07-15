@@ -100,10 +100,9 @@ const SelectModel = () => {
       modernView
       scaledOptions
       dropDownMaxHeight={300}
-      // style={{
-      //   overflow: "hidden",
-      //   display: "flex",
-      // }}
+      style={{
+        maxWidth: "300px",
+      }}
     />
   );
 };

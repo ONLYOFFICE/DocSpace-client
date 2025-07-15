@@ -32,9 +32,13 @@ const ChatContainer = ({ children }: { children: React.ReactNode }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const infoBody = document.getElementById("info-panel-body");
-    if (infoBody && containerRef.current) {
-      containerRef.current.style.height = `${infoBody.offsetHeight - 24}px`;
+    const section = document.getElementById("section");
+    const stickyHeader = document.getElementsByClassName(
+      "section-sticky-container",
+    );
+
+    if (section && stickyHeader[0] && containerRef.current) {
+      containerRef.current.style.height = `${section.offsetHeight - (stickyHeader[0] as HTMLElement).offsetHeight - 77}px`;
     }
   }, []);
 

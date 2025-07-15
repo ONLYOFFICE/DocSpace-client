@@ -24,11 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.chatContainer {
-  width: 100%;
-  height: 100%;
+import { inject, observer } from "mobx-react";
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+import Chat from "@docspace/shared/components/chat";
+
+const ChatComponent = ({
+  id,
+  userAvatar,
+}: {
+  id: number;
+  userAvatar: string;
+}) => {
+  if (!id) return null;
+
+  return <Chat userAvatar={userAvatar} roomId={id ?? "1"} />;
+};
+
+export const ChatView = inject((store: TStore) => {
+  const { selectedFolderStore, userStore } = store;
+
+  return {
+    id: selectedFolderStore.id,
+    userAvatar: userStore.user?.avatar,
+  };
+})(observer(ChatComponent));

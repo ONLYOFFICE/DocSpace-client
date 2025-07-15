@@ -32,7 +32,6 @@ import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archiv
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
 import CatalogPortfolioReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
 import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
-import CatalogRecentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.recent.react.svg?url";
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
@@ -56,7 +55,6 @@ import CatalogArchive20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.arch
 import CatalogShared20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.shared.react.svg?url";
 import CatalogPortfolio20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.portfolio.react.svg?url";
 import CatalogFavorites20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.favorites.react.svg?url";
-import CatalogRecent20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.recent.react.svg?url";
 import CatalogPrivate20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.private.react.svg?url";
 import CatalogTrash20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.trash.react.svg?url";
 import CatalogAccounts20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.accounts.react.svg?url";
@@ -98,7 +96,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [FolderType.SHARE]: CatalogSharedReactSvgUrl,
     [FolderType.COMMON]: CatalogPortfolioReactSvgUrl,
     [FolderType.Favorites]: CatalogFavoritesReactSvgUrl,
-    [FolderType.Recent]: CatalogRecentReactSvgUrl,
+    [FolderType.Recent]: CatalogSettingsRestoreReactSvgUrl,
     [FolderType.Privacy]: CatalogPrivateReactSvgUrl,
     [FolderType.TRASH]: CatalogTrashReactSvgUrl,
 
@@ -123,7 +121,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [FolderType.SHARE]: CatalogShared20ReactSvgUrl,
     [FolderType.COMMON]: CatalogPortfolio20ReactSvgUrl,
     [FolderType.Favorites]: CatalogFavorites20ReactSvgUrl,
-    [FolderType.Recent]: CatalogRecent20ReactSvgUrl,
+    [FolderType.Recent]: CatalogSettingsRestore20ReactSvgUrl,
     [FolderType.Privacy]: CatalogPrivate20ReactSvgUrl,
     [FolderType.TRASH]: CatalogTrash20ReactSvgUrl,
 

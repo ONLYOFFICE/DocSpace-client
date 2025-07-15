@@ -36,7 +36,6 @@ import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
 import { StyledInfoPanelBody } from "./styles/common";
-import ChatView from "./views/Chat";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
@@ -140,10 +139,8 @@ const InfoPanelBodyContent = ({
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
 
-    if (isNoItem) return <ChatView />;
-    if (isSeveralItems) return <ChatView />;
-
-    if (currentView === "ai_chat") return <ChatView />;
+    if (isNoItem) return viewHelper.NoItemView();
+    if (isSeveralItems) return viewHelper.SeveralItemsView();
 
     if (isGallery) return viewHelper.GalleryView();
     if (isUsers || isGuests) return viewHelper.UsersView();
@@ -210,7 +207,7 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
-      {!isNoItem && roomsView !== "ai_chat" && fileView !== "ai_chat" ? (
+      {!isNoItem ? (
         <ItemTitle
           {...defaultProps}
           selectionLength={selectedItems.length}

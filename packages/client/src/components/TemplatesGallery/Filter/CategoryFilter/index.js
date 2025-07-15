@@ -94,11 +94,14 @@ const CategoryFilter = ({
 
   useEffect(() => {
     (async () => {
+      console.log("oformsFilter.locale", oformsFilter.locale);
+
       if (!oformsFilter.locale) return;
       let newMenuItems = await fetchCategoryTypes();
       if (!newMenuItems) {
         filterOformsByLocaleIsLoading &&
           setFilterOformsByLocaleIsLoading(false);
+        console.log("setFilterOformsByLocaleIsLoading(false)");
         return;
       }
 
@@ -108,6 +111,7 @@ const CategoryFilter = ({
             resolve(fetchCategoriesOfCategoryType(item.attributes.categoryId));
           }),
       );
+      console.log("categoryPromises", categoryPromises);
 
       Promise.all(categoryPromises)
         .then((results) => {
@@ -137,9 +141,23 @@ const CategoryFilter = ({
     setCategoryFilterLoaded(menuItems.length !== 0);
   }, [menuItems.length]);
 
+  console.log("filterOformsByLocaleIsLoading", filterOformsByLocaleIsLoading);
+  console.log(
+    "categoryFilterLoaded languageFilterLoaded oformFilesLoaded",
+    categoryFilterLoaded,
+    languageFilterLoaded,
+    oformFilesLoaded,
+  );
+
+  // if (
+  //   filterOformsByLocaleIsLoading ||
+  //   !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
+  // )
+  //   return <StyledSkeleton $noLocales={noLocales} />;
+
   if (
     filterOformsByLocaleIsLoading ||
-    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
+    !(categoryFilterLoaded && languageFilterLoaded)
   )
     return <StyledSkeleton $noLocales={noLocales} />;
 

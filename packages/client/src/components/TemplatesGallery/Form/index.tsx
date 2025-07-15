@@ -24,10 +24,85 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SectionFilterContent from "../Filter";
+import { useState, useEffect } from "react";
+import { observer, inject } from "mobx-react";
+import { useLocation, useNavigate } from "react-router";
 
-const Form = () => {
-  return <SectionFilterContent />;
+import OformsFilter from "@docspace/shared/api/oforms/filter";
+
+import type { FC } from "react";
+import SectionFilterContent from "../Filter";
+import Tiles from "../Tiles";
+
+type FormProps = {
+  currentCategory: unknown;
+  fetchCurrentCategory: () => void;
+  defaultOformLocale: string | null;
+  fetchOformLocales: () => Promise<unknown>;
+  oformsFilter: OformsFilter;
+  fetchOforms: (filter: OformsFilter) => Promise<unknown>;
 };
 
-export default Form;
+const Form: FC<FormProps> = ({
+  currentCategory,
+  fetchCurrentCategory,
+  defaultOformLocale,
+  fetchOformLocales,
+  oformsFilter,
+  fetchOforms,
+}) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [isInitLoading, setIsInitLoading] = useState(true);
+
+  useEffect(() => {
+    const firstLoadFilter = OformsFilter.getFilter(location);
+
+    if (firstLoadFilter) {
+      Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
+        () => {
+          setIsInitLoading(false);
+        },
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      !isInitLoading &&
+      location.search !== `?${oformsFilter.toUrlParams()}`
+    ) {
+      if (!oformsFilter.locale) oformsFilter.locale = defaultOformLocale;
+      navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
+    }
+  }, [oformsFilter]);
+
+  useEffect(() => {
+    if (!currentCategory) fetchCurrentCategory();
+  }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
+
+  if (isInitLoading) return null;
+  return (
+    <>
+      <SectionFilterContent />
+      <Tiles />
+    </>
+  );
+};
+
+export default inject<TStore>(({ oformsStore }) => ({
+  oformsLoadError: oformsStore.oformsLoadError,
+
+  currentCategory: oformsStore.currentCategory,
+  fetchCurrentCategory: oformsStore.fetchCurrentCategory,
+
+  defaultOformLocale: oformsStore.defaultOformLocale,
+  fetchOformLocales: oformsStore.fetchOformLocales,
+
+  oformsFilter: oformsStore.oformsFilter,
+  setOformsFilter: oformsStore.setOformsFilter,
+
+  fetchOforms: oformsStore.fetchOforms,
+  setOformFromFolderId: oformsStore.setOformFromFolderId,
+}))(observer(Form));

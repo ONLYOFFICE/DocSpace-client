@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, reaction } from "mobx";
 import clone from "lodash/clone";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserType } from "@docspace/shared/utils/common";
@@ -141,6 +141,24 @@ class InfoPanelStore {
     this.userStore = userStore;
 
     makeAutoObservable(this);
+
+    reaction(
+      () => this.infoPanelSelection,
+
+      (infoPanelSelection) => {
+        if (this.getIsRooms() && infoPanelSelection) {
+          const isRoom = infoPanelSelection?.isRoom;
+
+          if (isRoom && this.roomsView === infoShare) {
+            this.setView(infoMembers);
+          }
+
+          if (!isRoom && this.roomsView === infoMembers) {
+            this.setView(infoShare);
+          }
+        }
+      },
+    );
   }
 
   // Setters
@@ -298,20 +316,20 @@ class InfoPanelStore {
   }
 
   getViewItem = () => {
-    const isRooms = this.getIsRooms();
+    // const isRooms = this.getIsRooms();
 
-    const pathname = window.location.pathname.toLowerCase();
-    const isMedia = pathname.indexOf("view") !== -1;
+    // const pathname = window.location.pathname.toLowerCase();
+    // const isMedia = pathname.indexOf("view") !== -1;
 
-    if (
-      (isRooms || isMedia) &&
-      this.roomsView === infoMembers &&
-      !this.infoPanelSelectedItems[0]?.isRoom
-    ) {
-      // if (!this.infoPanelSelection?.id) {
-      return this.getInfoPanelSelectedFolder();
-      // }
-    }
+    // if (
+    //   (isRooms || isMedia) &&
+    //   this.roomsView === infoMembers &&
+    //   !this.infoPanelSelectedItems[0]?.isRoom
+    // ) {
+    //   // if (!this.infoPanelSelection?.id) {
+    //   return this.getInfoPanelSelectedFolder();
+    //   // }
+    // }
     return this.infoPanelSelectedItems[0];
   };
 

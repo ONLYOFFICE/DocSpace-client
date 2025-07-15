@@ -109,7 +109,6 @@ export type ExpiredComboBoxProps = {
 export type ShareProps = {
   infoPanelSelection: TFile | TFolder;
 
-  isRooms?: boolean;
   setView?: (view: string) => void;
 
   shareChanged?: boolean;

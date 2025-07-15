@@ -141,6 +141,8 @@ const InfoPanelHeaderContent = ({
   const isRoomsType =
     selection &&
     "rootFolderType" in selection &&
+    "isRoom" in selection &&
+    selection.isRoom &&
     (selection.rootFolderType === FolderType.Rooms ||
       selection.rootFolderType === FolderType.Archive ||
       selection.rootFolderType === FolderType.RoomTemplates);

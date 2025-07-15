@@ -72,7 +72,6 @@ import styles from "./Share.module.scss";
 
 const Share = (props: ShareProps) => {
   const {
-    isRooms,
     setView,
     infoPanelSelection,
     getPrimaryFileLink,
@@ -108,7 +107,7 @@ const Share = (props: ShareProps) => {
 
   const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
 
-  const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
+  const hideSharePanel = !infoPanelSelection?.canShare;
 
   const editLinkApi = isFolder ? editExternalFolderLink : editExternalLink;
 

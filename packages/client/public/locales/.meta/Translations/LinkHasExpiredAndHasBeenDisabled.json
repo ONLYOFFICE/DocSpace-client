@@ -3,7 +3,7 @@
   "content": "The link has expired and has been disabled",
   "content_en_sha1_hash": "0d17398d6f4b329335a9bb4c55a3f6fff17c2689",
   "created_at": "2025-05-19T21:30:49.993Z",
-  "updated_at": "2025-05-26T07:57:32.349Z",
+  "updated_at": "2025-07-10T11:11:06.845Z",
   "comment": {
     "text": "This translation key is used to display a message when a link has expired and been disabled. It appears in the UI when editing a link, informing users about the status of their link. Translators should provide a clear and concise explanation for this state.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 241,
+      "line_number": 243,
       "context": "return \"\";\n }\n \n if (isExpired) {\n return t(\"Translations:LinkHasExpiredAndHasBeenDisabled\");\n }\n \n return expirationDate\n ? `${t(\"Files:LinkValidUntil\")}:`\n : t(\"Files:ChooseExpirationDate\");",
       "module": "/packages/client"
     }
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation 'Platnost odkazu vypršela a byl zakázán' is a bit formal and passive for user-facing messages. A more natural and user-friendly translation might be preferred.",
+          "suggestion": "Odkaz vypršel a je zneplatněn."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Այս հղումն ուժի մեջ \" translates to \"This link is in force\" which is not equivalent to \"The link has expired and has been disabled\". It doesn't convey the expiration and disabling aspects.",
-          "suggestion": "Consider a translation like \"Այս հղումը լրացել է ժամկետը և անջրկվել է\" (This link has expired and has been disabled) or a similar phrasing that accurately reflects the English meaning."
+          "description": "The Armenian translation \"Այս հղումն ուժի մեջ \" translates to \"This link is in effect\" or \"This link is active.\" It does not accurately convey the meaning of \"The link has expired and has been disabled,\" which implies the link is no longer valid and has been intentionally deactivated.",
+          "suggestion": "A more accurate translation would be something like \"Հղումը գործնականում չեղարկվել է և անջրկվել է\" (Hghumem gorznakanin chelgarkvel e ev anjrkvvel e) which translates to \"The link has been deactivated and disabled\"."
         }
       ],
       "approved_at": null
@@ -102,13 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, the Japanese translation \"リンクは有効期限が切れたため無効になっています\" is a bit formal and passive for a user-facing message. It sounds robotic. A more natural and user-friendly translation would convey the same meaning in simpler terms.",
-          "suggestion": "リンクが無効になっています (Rinku ga muko ni natteimasu) - The link is disabled."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"有効期限が切れたため\" (yuukou kigen ga kireta tame) is quite literal and not always the best way to express this in Japanese, especially in a notification.",
-          "suggestion": "リンクの有効期限が切れているため (Rinku no yuukou kigen ga kirete iru tame)"
+          "description": "The translation 'リンクは有効期限が切れたため無効になっています' is a bit literal and slightly awkward in Japanese. While technically correct, it doesn't flow naturally. A more natural phrasing would convey the same meaning with better flow.",
+          "suggestion": "リンクが無効になっています"
         }
       ],
       "approved_at": null

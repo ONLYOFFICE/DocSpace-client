@@ -222,13 +222,13 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             />
           ) : null}
 
-          {(locked && item.access === ShareAccessRights.Collaborator) ||
+          {(locked &&
+            (item.access === ShareAccessRights.Collaborator ||
+              item.access === ShareAccessRights.Editing)) ||
           isAvailableLockFile ? (
             <IconButton
               iconNode={<IconLock />}
-              className={classNames("badge lock-file icons-group", {
-                "file-locked": locked,
-              })}
+              className="badge lock-file icons-group"
               size={sizeQuickButton}
               data-id={id}
               data-locked={!!locked}

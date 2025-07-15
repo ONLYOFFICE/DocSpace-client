@@ -3,7 +3,7 @@
   "content": "Edit link",
   "content_en_sha1_hash": "ae7b279c96200b853008a352fa110ac2565f3dc5",
   "created_at": "2025-05-19T21:30:55.508Z",
-  "updated_at": "2025-05-26T07:57:32.351Z",
+  "updated_at": "2025-07-10T11:11:06.846Z",
   "comment": {
     "text": "This translation key is used for a button that allows users to edit links within files. The text will vary depending on the file type and access permissions.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 288,
+      "line_number": 290,
       "context": "{isEdit\n ? isPrimary\n ? t(\"Files:EditSharedLink\")\n : isPublic || isFormRoom\n ? t(\"Files:EditAdditionalLink\")\n : t(\"Files:EditLink\")\n : t(\"Files:CreateNewLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledEditLinkBodyContent className=\"edit-link_body\">\n {!isFormRoom ? (",
       "module": "/packages/client"
     }
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Linki redaktə edin' is a command ('Edit the link'). The English 'Edit link' is a label or a descriptive name, not a direct instruction. A more accurate translation would be a noun phrase.",
-          "suggestion": "Redaktə linki"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,25 +87,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Modifica il link\" is too literal and doesn't flow naturally in Italian. 'Edit link' typically implies a link that can be edited or changed. \"Modifica il link\" translates to 'Modify the link', which is a command rather than a description.",
-          "suggestion": "Link di modifica"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"リンクの変更\" while technically correct, doesn't fully capture the nuance of \"Edit link.\" \"リンクの変更\" implies changing the link itself. \"Edit link\" often means a link *to* an editable version of a file. A better translation would convey the meaning of 'link to edit'.",
-          "suggestion": "リンクを編集"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,25 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Edytuj link' is technically correct but doesn't quite capture the nuance of 'Edit link'. 'Edytuj' implies 'edit' or 'modify', but in this context, it refers to a direct link to an editing interface.  A more accurate translation might consider 'Link do edycji' or 'Link edycji'.",
-          "suggestion": "Link do edycji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Editar link\" is understandable, a more natural and accurate translation would be \"Link de edição\" or \"Link para editar\". \"Editar link\" is a literal translation and doesn't flow as well in Portuguese.",
-          "suggestion": "Link de edição"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'සබැඳිය සංස්කරණය' is technically correct, but a more natural and common translation for 'Edit link' in Sinhala would be 'සංශකරණය කරන සබැඳිය' or 'සංශකරණ සබැඳිය'. 'සබැඳිය සංස්කරණය' sounds slightly awkward.",
-          "suggestion": "සංශකරණය කරන සබැඳිය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Уреди линк' is understandable, a more natural and accurate translation of 'Edit link' in Serbian (Cyrillic) would be 'Линк за уређивање' or 'Линк за промену'. 'Уреди линк' is a literal translation that sounds slightly awkward.",
-          "suggestion": "Линк за уређивање"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

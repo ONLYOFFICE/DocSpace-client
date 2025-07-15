@@ -3,7 +3,7 @@
   "content": "Archiving data",
   "content_en_sha1_hash": "0b71d55f4a461ddcbdf534bd0d205365234b8127",
   "created_at": "2025-05-19T21:30:43.080Z",
-  "updated_at": "2025-06-26T19:00:18.281Z",
+  "updated_at": "2025-07-10T11:11:07.092Z",
   "comment": {
     "text": "This translation key is used as a label for a download action button in the context of archiving data. When clicked, this button initiates the archiving process.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2231,
+      "line_number": 2233,
       "context": "if (!this.isAvailableOption(\"download\")) return null;\n return {\n id: \"menu-download\",\n label: t(\"Common:Download\"),\n onClick: () =>\n this.downloadAction(t(\"Common:ArchivingData\")).catch((err) =>\n toastr.error(err),\n ),\n iconUrl: DownloadReactSvgUrl,\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 133,
+      "line_number": 139,
       "context": "i18nKey=\"PasswordProtectedFiles\"\n components={{ 1: <span /> }}\n />\n );\n const translations = {\n label: t(\"Common:ArchivingData\"),\n error: t(\"Common:ErrorInternalServer\"),\n passwordError,\n };\n \n return translations;",
       "module": "/packages/shared"
     }

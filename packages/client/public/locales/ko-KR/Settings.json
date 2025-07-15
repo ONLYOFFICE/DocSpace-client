@@ -10,6 +10,8 @@
   "AddEmailsDescription": "{{organizationName}} {{productName}}로 가져오기할 가져오기하지 않은 사용자 목록을 확인하세요.",
   "AddEmailsWarning": "이메일이 있는 사용자가 없습니다. 이메일이 있는 사용자를 추가하려면 다음 단계를 진행하세요.",
   "AddTrustedDomain": "신뢰할 수있는 도메인을 추가",
+  "AdManagement": "광고 관리",
+  "AdManagementDescription": "{{productName}}에서 프로모션 배너가 표시될지 여부를 선택하세요.",
   "Admins": "관리자",
   "AdminsMessage": "관리자 메시지 설정",
   "AdminsMessageMobileDescription": "관리자 메시지를 설정하여 포털 관리자에게 연락할 수 있습니다.",
@@ -83,7 +85,7 @@
   "DeleteThemeForever": "테마를 영구히 삭제하시겠습니까?",
   "DeleteThemeNotice": "테마가 영구적으로 삭제됩니다. 그리고 이 작업은 취소할 수 없습니다.",
   "DeveloperToolsAccess": "제한된 개발자 도구 액세스",
-  "DeveloperToolsAccessDescription": "이 설정을 사용하면 게스트를 제외한 모든 사용자에게 개발자 도구 섹션을 표시할 수 있습니다. 이 섹션에 대한 액세스를 제한하여 {{productName}} 소유자와 관리자만 액세스할 수 있도록 하려면 '비활성화'를 선택하고 '저장' 버튼을 클릭하세요.",
+  "DeveloperToolsAccessDescription": "이 설정을 사용하면 게스트를 제외한 모든 사용자에게 개발자 도구 섹션을 표시할 수 있습니다. 이 섹션에 대한 액세스를 제한하여 소유자와 {{productName}} 관리자만 액세스할 수 있도록 하려면 '비활성화'를 선택하고 '저장' 버튼을 클릭하세요.",
   "DeveloperToolsAccessMobileDescription": "이 설정을 사용하면 게스트를 제외한 모든 사용자에게 개발자 도구 섹션을 표시할 수 있습니다.",
   "DisableEmailDescription": "이 상자를 선택하면 {{sectionName}} 사용자는 {{productName}}에서 첫 번째로 인증한 후 이메일을 인증할 필요가 없습니다. ",
   "DisableEmailVerification": "이메일 인증 비활성화",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "데이터 가져오기를 취소하시겠습니까?",
   "WantToCancelUpload": "업로드를 취소하시겠습니까?",
   "WantToContinue": "사용자 스토리지 할당량을 계속 유지하거나 변경하시겠습니까?",
+  "WhiteLabelSubtitle": "회사 이름을 입력하고 로고를 업로드하고 브랜딩에 맞게 스타일을 사용자 정의하세요.",
   "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요."
 }

@@ -232,6 +232,8 @@
   "Description": "Описание",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Инструменты разработчика",
+  "Diagram": "Диаграмма",
+  "Diagrams": "Диаграммы",
   "Disable": "Отключить",
   "Disabled": "Отключено",
   "DisableQuota": "Отключить квоту",
@@ -535,7 +537,7 @@
   "OverwriteTitle": "Перезаписать с обновлением версии",
   "Owner": "Владелец",
   "PageOfTotalPage": "{{page}} из {{totalPage}}",
-  "Paid": "Платный",
+  "Paid": "Платно",
   "Password": "Пароль",
   "PasswordEntered": "Введен пароль",
   "PasswordLimitDigits": "цифры",
@@ -868,5 +870,7 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "Diagram": "Диаграмма",
+  "Diagrams": "Диаграммы"
 }

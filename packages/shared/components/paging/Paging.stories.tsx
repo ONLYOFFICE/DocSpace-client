@@ -98,7 +98,7 @@ const Template = ({
 
   useEffect(() => {
     setSelectedPageItems(pageItems[0]);
-  }, []);
+  }, [pageItems]);
 
   const onSelectPageNextHandler = () => {
     const currentPage = pageItems.filter(

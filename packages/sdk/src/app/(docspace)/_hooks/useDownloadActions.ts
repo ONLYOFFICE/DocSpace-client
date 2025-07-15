@@ -48,7 +48,7 @@ export default function useDownloadActions() {
 
   const { openDialog } = useDialogsStore();
   const { setSortedFiles } = useDownloadDialogStore();
-  const { isDocument, isMasterForm, isPresentation, isSpreadsheet } =
+  const { isDocument, isMasterForm, isPresentation, isSpreadsheet, isDiagram } =
     useFileType();
   const { downloadFiles } = useDownloadFiles();
 
@@ -102,6 +102,7 @@ export default function useDownloadActions() {
         isSpreadsheet,
         isPresentation,
         isMasterForm,
+        isDiagram,
       ),
     );
     openDialog(SDKDialogs.DownloadDialog);
@@ -111,6 +112,7 @@ export default function useDownloadActions() {
     isMasterForm,
     isPresentation,
     isSpreadsheet,
+    isDiagram,
     openDialog,
     setSortedFiles,
   ]);

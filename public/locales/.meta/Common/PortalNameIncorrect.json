@@ -2,30 +2,30 @@
   "key_path": "PortalNameIncorrect",
   "content": "Incorrect account name",
   "content_en_sha1_hash": "514e507c4bfba26b6fec61ecedbb846fb1c81756",
-  "created_at": "2025-05-26T07:15:46.239Z",
-  "updated_at": "2025-05-26T08:04:18.407Z",
+  "created_at": "2025-05-19T21:30:52.239Z",
+  "updated_at": "2025-07-10T11:11:06.909Z",
   "comment": {
-    "text": "The translation key \"PortalNameIncorrect\" is used to display an error message when a user attempts to rename their portal with an invalid name. The error message appears in a dialog box or settings page and is shown to the user if their input does not meet the required length or format specifications.",
+    "text": "This translation key is used to display an error message when a user attempts to save a portal name that does not meet the required length or format. It appears in the portal renaming dialog and will be displayed if the input value fails validation. Translators should provide a clear indication of this error for users.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:18.407Z"
+    "updated_at": "2025-05-20T09:44:45.830Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 265,
+      "line_number": 272,
       "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 265,
+      "line_number": 272,
       "context": "maxLength: domainValidator.maxLength,\n }),\n );\n break;\n case !validDomain.test(value):\n setErrorValue(t(\"PortalNameIncorrect\"));\n saveToSessionStorage(\"errorValue\", t(\"PortalNameIncorrect\"));\n break;\n default:\n saveToSessionStorage(\"errorValue\", null);\n setErrorValue(null);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 210,
-      "context": "minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):\n return setError(t(\"Common:PortalNameIncorrect\"));\n \n default:\n setError(null);\n }\n return validName.test(value);",
+      "line_number": 206,
+      "context": "minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):\n return setError(t(\"Settings:PortalNameIncorrect\"));\n \n default:\n setError(null);\n }\n return validName.test(value);",
       "module": "/packages/shared"
     }
   ],
@@ -51,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Incorrect account name\" is not perfectly captured by \"Неправилно име на профила\". \"Account name\" refers to the username or login name. \"Профила\" refers to the profile. While understandable, it's not the most accurate translation.",
+          "suggestion": "Неправилно име на потребителя"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -93,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Incorrect account name' is a bit more specific than the Armenian translation 'Հաշվի սխալ անուն'. 'Հաշվի սխալ անուն' literally translates to 'Incorrect account name', which is not wrong but potentially lacks the nuance of the original phrase, especially in the context of settings.",
+          "suggestion": "Consider a more natural or idiomatic Armenian equivalent. Something like 'Մուտքագրման սխալ անուն' (Incorrect login name) or 'Սխալվող անուն' (Incorrect name) depending on the precise intent."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'アカウント名が無効です。' (akauntōmei wa muko desu) translates to 'account name is invalid'. While functionally similar to 'Incorrect account name', '無効' (muko) implies an invalid or unusable state. A more accurate and natural-sounding translation for 'Incorrect account name' would be something like 'アカウント名が正しくありません' (akauntōmei ga seishiku arimasen) or 'アカウント名が違います' (akauntōmei ga chigaimasu).",
+          "suggestion": "アカウント名が正しくありません (akauntōmei ga seishiku arimasen) or アカウント名が違います (akauntōmei ga chigaimasu)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,7 +135,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ບໍ່ຖືກຕ້ອງ ບັນຊີ ຊື່ ' does not accurately convey the meaning of 'Incorrect account name'. It translates to 'Not correct account name'. A more accurate translation would include a word meaning 'name' that corresponds to 'account'.",
+          "suggestion": "Consider 'ຊື່ບັນຊີບໍ່ຖືກຕ້ອງ' (Sue banchee bot tooktong) which translates to 'Account name incorrect' or 'Incorrect account name'."
+        },
+        {
+          "type": "grammar",
+          "description": "The Lao sentence structure is slightly awkward. While understandable, it's not the most natural phrasing.",
+          "suggestion": "Reconsider sentence flow, as suggested in the incorrect translation section."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -159,13 +188,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Incorrect account name\" is not perfectly conveyed by \"Неверное имя портала\". While \"Неверное имя\" is correct for 'incorrect name', \"портала\" (of the portal) implies a specific type of account that might not be intended.  'Account name' can be more generic. A better translation might be 'Неправильное имя учетной записи' or 'Неверное имя учетной записи'.",
+          "suggestion": "Неправильное имя учетной записи"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ගිණුමේ නම වැරදිය' while literally meaning 'name of the account is wrong,' doesn't perfectly capture the meaning of 'Incorrect account name'. A more natural translation for this context, which implies a setting error, would be something like 'අවලංගු ගිණුමේ නම' (Avalangu Ginumae Nama - Invalid Account Name) or 'මිසමිත ගිණුමේ නම' (Misamith Ginumae Nama - Mismatched Account Name).",
+          "suggestion": "අවලංගු ගිණුමේ නම"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +230,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Netačno ime naloga' while literally correct, might be overly formal or technical for a user-facing setting. 'Netačno korisničko ime' (Incorrect username) or 'Pogrešno ime naloga' (Wrong account name) might be more natural and user-friendly.",
+          "suggestion": "Consider 'Netačno korisničko ime' or 'Pogrešno ime naloga'."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

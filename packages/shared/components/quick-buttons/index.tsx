@@ -171,7 +171,9 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {(locked && item.access === ShareAccessRights.Collaborator) ||
+          {(locked &&
+            (item.access === ShareAccessRights.Collaborator ||
+              item.access === ShareAccessRights.Editing)) ||
           isAvailableLockFile ? (
             <IconButton
               iconNode={<IconLock />}
@@ -193,7 +195,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge download-file icons-group"
               size={sizeQuickButton}
               onClick={onClickDownload}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:Download")}

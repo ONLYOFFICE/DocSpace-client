@@ -134,6 +134,10 @@ const CustomBannerWrapper = styled.div`
     @media ${mobile} {
       min-height: 88px !important;
       max-height: 88px !important;
+
+      & > div {
+        top: 24px !important;
+      }
     }
   }
 `;
@@ -205,6 +209,7 @@ const HistoryMainContent = (props) => {
     getReport,
     isSettingNotPaid,
     isLoadingDownloadReport,
+    tfaEnabled,
   } = props;
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
@@ -272,24 +277,26 @@ const HistoryMainContent = (props) => {
           isPaidBadge
         />
       ) : null}
-      <CustomBannerWrapper onClick={navigateTo2FA}>
-        <CampaignsBanner
-          campaignConfig={loginHistoryConfig}
-          campaignTranslate={loginHistoryTranslates}
-          disableFitText
-          actionIcon={NextStepReactSvg}
-          onAction={(type) => {
-            if (type === "2fa-settings") {
-              navigateTo2FA();
-            }
-          }}
-          onClose={(e) => {
-            e && e.stopPropagation && e.stopPropagation();
+      {!tfaEnabled ? (
+        <CustomBannerWrapper onClick={navigateTo2FA}>
+          <CampaignsBanner
+            campaignConfig={loginHistoryConfig}
+            campaignTranslate={loginHistoryTranslates}
+            disableFitText
+            actionIcon={NextStepReactSvg}
+            onAction={(type) => {
+              if (type === "2fa-settings") {
+                navigateTo2FA();
+              }
+            }}
+            onClose={(e) => {
+              e && e.stopPropagation && e.stopPropagation();
 
-            navigateTo2FA();
-          }}
-        />
-      </CustomBannerWrapper>
+              navigateTo2FA();
+            }}
+          />
+        </CustomBannerWrapper>
+      ) : null}
       <div className="main-wrapper">
         <Text fontSize="13px" className="login-history-description">
           {subHeader}

@@ -48,7 +48,7 @@ import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
 import i18n from "../i18n";
 
-class ThirdPartyStore {
+export class ThirdPartyStore {
   capabilities = null;
 
   providers = [];

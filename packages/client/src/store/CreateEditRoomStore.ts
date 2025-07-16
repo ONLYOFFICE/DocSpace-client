@@ -26,45 +26,66 @@
 
 import { makeAutoObservable } from "mobx";
 import isEqual from "lodash/isEqual";
+
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import { CategoryType } from "SRC_DIR/helpers/constants";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import {
   createTemplate,
   getCreateTemplateProgress,
   setTemplateAvailable,
   updateRoomMemberRole,
 } from "@docspace/shared/api/rooms";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { Nullable } from "@docspace/shared/types";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
+import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+
+import FilesStore from "./FilesStore";
+import InfoPanelStore from "./InfoPanelStore";
+import ClientLoadingStore from "./ClientLoadingStore";
+import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
+import DialogsStore from "./DialogsStore";
+import FilesActionsStore from "./FilesActionsStore";
+import SelectedFolderStore from "./SelectedFolderStore";
+import TagsStore from "./TagsStore";
+import { ThirdPartyStore } from "./ThirdPartyStore";
 
 class CreateEditRoomStore {
   roomParams = null;
 
-  isLoading = null;
+  isLoading = false;
 
   confirmDialogIsLoading = false;
 
-  onClose = null;
+  onClose: Nullable<VoidFunction> = null;
 
-  filesStore = null;
+  filesStore: Nullable<FilesStore> = null;
 
-  tagsStore = null;
+  tagsStore: Nullable<TagsStore> = null;
 
-  selectedFolderStore = null;
+  selectedFolderStore: Nullable<SelectedFolderStore> = null;
 
-  filesActionsStore = null;
+  filesActionsStore: Nullable<FilesActionsStore> = null;
 
-  thirdPartyStore = null;
+  thirdPartyStore: Nullable<ThirdPartyStore> = null;
 
-  settingsStore = null;
+  settingsStore: Nullable<SettingsStore> = null;
 
-  infoPanelStore = null;
+  infoPanelStore: Nullable<InfoPanelStore> = null;
 
-  currentQuotaStore = null;
+  currentQuotaStore: Nullable<CurrentQuotasStore> = null;
+
+  clientLoadingStore: Nullable<ClientLoadingStore> = null;
+
+  dialogsStore: Nullable<DialogsStore> = null;
+
+  avatarEditorDialogStore: Nullable<AvatarEditorDialogStore> = null;
 
   watermarksSettings = {};
 
@@ -72,22 +93,20 @@ class CreateEditRoomStore {
 
   isImageType = false;
 
-  dialogsStore = null;
-
-  selectedRoomType = null;
+  selectedRoomType: Nullable<RoomsType> = null;
 
   constructor(
-    filesStore,
-    filesActionsStore,
-    selectedFolderStore,
-    tagsStore,
-    thirdPartyStore,
-    settingsStore,
-    infoPanelStore,
-    currentQuotaStore,
-    clientLoadingStore,
-    dialogsStore,
-    avatarEditorDialogStore,
+    filesStore: FilesStore,
+    filesActionsStore: FilesActionsStore,
+    selectedFolderStore: SelectedFolderStore,
+    tagsStore: TagsStore,
+    thirdPartyStore: ThirdPartyStore,
+    settingsStore: SettingsStore,
+    infoPanelStore: InfoPanelStore,
+    currentQuotaStore: CurrentQuotasStore,
+    clientLoadingStore: ClientLoadingStore,
+    dialogsStore: DialogsStore,
+    avatarEditorDialogStore: AvatarEditorDialogStore,
   ) {
     makeAutoObservable(this);
 
@@ -104,7 +123,7 @@ class CreateEditRoomStore {
     this.avatarEditorDialogStore = avatarEditorDialogStore;
   }
 
-  setSelectedRoomType = (type) => {
+  setSelectedRoomType = (type: RoomsType) => {
     this.selectedRoomType = type;
   };
 
@@ -112,20 +131,16 @@ class CreateEditRoomStore {
     this.roomParams = roomParams;
   };
 
-  setIsLoading = (isLoading) => {
+  setIsLoading = (isLoading: boolean) => {
     this.isLoading = isLoading;
   };
 
-  setConfirmDialogIsLoading = (confirmDialogIsLoading) => {
+  setConfirmDialogIsLoading = (confirmDialogIsLoading: boolean) => {
     this.confirmDialogIsLoading = confirmDialogIsLoading;
   };
 
-  setOnClose = (onClose) => {
+  setOnClose = (onClose: Nullable<VoidFunction>) => {
     this.onClose = onClose;
-  };
-
-  setIsRoomCreatedByCurrentUser = (value) => {
-    this.isRoomCreatedByCurrentUser = value;
   };
 
   setInitialWatermarks = (watermarksSettings) => {
@@ -183,7 +198,6 @@ class CreateEditRoomStore {
         imageScale: watermarksSettings.imageScale,
         rotate: watermarksSettings.rotate,
         imageUrl: watermarksSettings.imageUrl,
-        // imageId: watermarksSettings.image.id,
         imageWidth: watermarksSettings.imageWidth,
         imageHeight: watermarksSettings.imageHeight,
       });

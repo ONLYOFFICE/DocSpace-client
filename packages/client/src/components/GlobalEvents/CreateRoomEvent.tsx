@@ -27,9 +27,60 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
+
 import { getFetchedRoomParams } from "@docspace/shared/utils/rooms";
 import { Text } from "@docspace/shared/components/text";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { RoomsType } from "@docspace/shared/enums";
+import { TFolder } from "@docspace/shared/api/files/types";
+
+import TagsStore from "SRC_DIR/store/TagsStore";
+import CreateEditRoomStore from "SRC_DIR/store/CreateEditRoomStore";
+import { ThirdPartyStore } from "SRC_DIR/store/ThirdPartyStore";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+
 import { CreateRoomDialog } from "../dialogs";
+
+type CreateRoomEventProps = {
+  title: string;
+  visible: boolean;
+  startRoomType: RoomsType;
+  item: TFolder;
+  onClose: VoidFunction;
+
+  processCreatingRoomFromData: FilesActionStore["processCreatingRoomFromData"];
+  setProcessCreatingRoomFromData: FilesActionStore["setProcessCreatingRoomFromData"];
+
+  fetchTags: TagsStore["fetchTags"];
+
+  setRoomParams: CreateEditRoomStore["setRoomParams"];
+  onCreateRoom: CreateEditRoomStore["onCreateRoom"];
+  setSelectedRoomType: CreateEditRoomStore["setSelectedRoomType"];
+  setIsLoading: CreateEditRoomStore["setIsLoading"];
+  setOnClose: CreateEditRoomStore["setOnClose"];
+  isCorrectWatermark: CreateEditRoomStore["isCorrectWatermark"];
+  confirmDialogIsLoading: CreateEditRoomStore["confirmDialogIsLoading"];
+  isLoading: CreateEditRoomStore["isLoading"];
+
+  createRoomConfirmDialogVisible: DialogsStore["createRoomConfirmDialogVisible"];
+  setCreateRoomConfirmDialogVisible: DialogsStore["setCreateRoomConfirmDialogVisible"];
+  connectDialogVisible: DialogsStore["connectDialogVisible"];
+  setCreateRoomDialogVisible: DialogsStore["setCreateRoomDialogVisible"];
+  setCover: DialogsStore["setCover"];
+
+  fetchThirdPartyProviders: ThirdPartyStore["fetchThirdPartyProviders"];
+  deleteThirdParty: ThirdPartyStore["deleteThirdParty"];
+  getThirdPartyIcon: ThirdPartyStore["getThirdPartyIcon"];
+
+  enableThirdParty: FilesSettingsStore["enableThirdParty"];
+
+  selectionItems: FilesStore["selection"];
+
+  isDefaultRoomsQuotaSet: CurrentQuotasStore["isDefaultRoomsQuotaSet"];
+};
 
 const CreateRoomEvent = ({
   title,
@@ -62,7 +113,7 @@ const CreateRoomEvent = ({
   getThirdPartyIcon,
   isDefaultRoomsQuotaSet,
   item,
-}) => {
+}: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState([]);
 
@@ -162,14 +213,13 @@ const CreateRoomEvent = ({
 export default inject(
   ({
     createEditRoomStore,
-
     tagsStore,
     dialogsStore,
     filesSettingsStore,
     filesStore,
     filesActionsStore,
     currentQuotaStore,
-  }) => {
+  }: TStore) => {
     const { fetchTags } = tagsStore;
     const { selections } = filesStore;
 

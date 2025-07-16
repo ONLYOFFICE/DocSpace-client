@@ -3,7 +3,7 @@
   "content": "The link you followed has expired.",
   "content_en_sha1_hash": "6adda4f7fd5f80e95e77211ab0f5b7ab26d04a11",
   "created_at": "2025-05-19T21:30:46.189Z",
-  "updated_at": "2025-05-28T09:30:02.982Z",
+  "updated_at": "2025-07-10T11:11:07.155Z",
   "comment": {
     "text": "This translation key is used for displaying a message when a shared link has expired. It appears on an error page and is selected as the fallback option if another error message is not applicable. Translators should provide a clear and concise phrase to convey this status in their native language.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomError/index.tsx",
       "line_number": 44,
-      "context": "const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");\n \n useEffect(() => {\n frameCallCommand(\"setIsLoaded\");\n }, []);",
+      "context": "const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");\n \n useEffect(() => {\n frameCallCommand(\"setIsLoaded\");\n frameCallEvent({ event: isInvalid ? \"onNotFound\" : \"onNoAccess\" });\n }, [isInvalid]);",
       "module": "/packages/shared"
     }
   ],

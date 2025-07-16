@@ -3,7 +3,7 @@
   "content": "Edit additional link",
   "content_en_sha1_hash": "b24e5fc30e6ff61b639c8b15b99d9f17a3f3af0a",
   "created_at": "2025-05-19T21:30:55.500Z",
-  "updated_at": "2025-05-26T07:57:32.350Z",
+  "updated_at": "2025-07-10T11:11:06.846Z",
   "comment": {
     "text": "This translation key is used for the label of a button or link that allows users to edit an existing connection or link in the application. It appears on a modal dialog header and can have different texts depending on the context (edit shared link, edit additional link, etc.). Translators should provide a clear and concise text that reflects the exact meaning of the original English content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 287,
+      "line_number": 289,
       "context": "<ModalDialog.Header>\n {isEdit\n ? isPrimary\n ? t(\"Files:EditSharedLink\")\n : isPublic || isFormRoom\n ? t(\"Files:EditAdditionalLink\")\n : t(\"Files:EditLink\")\n : t(\"Files:CreateNewLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledEditLinkBodyContent className=\"edit-link_body\">",
       "module": "/packages/client"
     }
@@ -171,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'link' is often spelled 'veza' in Serbian (Cyrillic) depending on the context. While 'link' is understandable, 'veza' would be more natural in this scenario.",
-          "suggestion": "Уреди додатну везу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

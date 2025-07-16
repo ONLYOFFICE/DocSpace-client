@@ -26,12 +26,14 @@
 
 import copy from "copy-to-clipboard";
 
-const wait = (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-
 export const copyShareLink = async (link: string) => {
-  await wait(100);
-  copy(link);
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(link);
+    } catch (err) {
+      console.error(err);
+    }
+  } else {
+    copy(link);
+  }
 };

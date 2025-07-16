@@ -36,11 +36,11 @@ import Tiles from "../Tiles";
 
 type FormProps = {
   currentCategory?: unknown;
-  fetchCurrentCategory?: () => void;
+  fetchCurrentCategory: () => void;
   defaultOformLocale?: string | null;
-  fetchOformLocales?: () => Promise<unknown>;
-  oformsFilter?: OformsFilter;
-  fetchOforms?: (filter: OformsFilter) => Promise<unknown>;
+  fetchOformLocales: () => Promise<unknown>;
+  oformsFilter: OformsFilter;
+  fetchOforms: (filter: OformsFilter) => Promise<unknown>;
 };
 
 const Form: FC<FormProps> = ({

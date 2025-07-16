@@ -70,7 +70,7 @@ const Tiles: FC<TilesProps> = ({
   }, [onMouseDown]);
 
   useEffect(() => {
-    setOformFilesLoaded(tReady && oformFiles);
+    setOformFilesLoaded(tReady && oformFiles.length > 0);
   }, [tReady, oformFiles]);
 
   console.log("oformFiles", oformFiles);

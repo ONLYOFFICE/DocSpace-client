@@ -35,12 +35,12 @@ import SectionFilterContent from "../Filter";
 import Tiles from "../Tiles";
 
 type FormProps = {
-  currentCategory: unknown;
-  fetchCurrentCategory: () => void;
-  defaultOformLocale: string | null;
-  fetchOformLocales: () => Promise<unknown>;
-  oformsFilter: OformsFilter;
-  fetchOforms: (filter: OformsFilter) => Promise<unknown>;
+  currentCategory?: unknown;
+  fetchCurrentCategory?: () => void;
+  defaultOformLocale?: string | null;
+  fetchOformLocales?: () => Promise<unknown>;
+  oformsFilter?: OformsFilter;
+  fetchOforms?: (filter: OformsFilter) => Promise<unknown>;
 };
 
 const Form: FC<FormProps> = ({
@@ -91,7 +91,7 @@ const Form: FC<FormProps> = ({
   );
 };
 
-export default inject<TStore>(({ oformsStore }) => ({
+const ConnectedForm = inject<TStore>(({ oformsStore }) => ({
   oformsLoadError: oformsStore.oformsLoadError,
 
   currentCategory: oformsStore.currentCategory,
@@ -105,4 +105,6 @@ export default inject<TStore>(({ oformsStore }) => ({
 
   fetchOforms: oformsStore.fetchOforms,
   setOformFromFolderId: oformsStore.setOformFromFolderId,
-}))(observer(Form));
+}))(observer(Form)) as unknown as React.ComponentType<{}>;
+
+export default ConnectedForm;

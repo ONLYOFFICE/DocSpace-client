@@ -30,8 +30,9 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs } from "@docspace/shared/components/tabs";
 
 import Form from "./Form";
-
 import styles from "./TemplatesGallery.module.scss";
+
+const FormComponent = Form as React.ComponentType;
 
 const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
   const { templatesGalleryVisible } = props;
@@ -40,7 +41,7 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
     {
       id: "forms",
       name: "Forms",
-      content: <Form />,
+      content: <FormComponent />,
     },
     {
       id: "documents",

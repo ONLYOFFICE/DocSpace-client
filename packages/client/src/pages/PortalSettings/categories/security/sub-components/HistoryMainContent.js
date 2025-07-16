@@ -285,7 +285,7 @@ const HistoryMainContent = (props) => {
           isPaidBadge
         />
       ) : null}
-      {!tfaEnabled ? (
+      {!tfaEnabled && withCampaign ? (
         <CustomBannerWrapper onClick={navigateTo2FA}>
           <CampaignsBanner
             campaignConfig={loginHistoryConfig}

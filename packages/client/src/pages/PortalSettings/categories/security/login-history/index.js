@@ -102,6 +102,7 @@ const LoginHistory = (props) => {
         getReport={getLoginHistoryReport}
         isSettingNotPaid={!isAuditAvailable}
         tfaEnabled={tfaEnabled}
+        withCampaign
       />
     )
   );

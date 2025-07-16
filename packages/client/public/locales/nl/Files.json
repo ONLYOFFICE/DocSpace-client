@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Aangepast filter inschakelen",
   "CustomFilterEnabled": "Aangepast filter voor geselecteerd bestand ingeschakeld",
   "CustomFilterEnableDiscription": "Aangepast filter is ingeschakeld voor deze tabel. Gebruikers die het bestand hebben geopend, kunnen de gegevensweergave in de tabel personaliseren.",
-  "DateLastOpened": "Datum laatst geopend",
   "DaysRemaining": "Aantal resterende dagen: {{daysRemaining}}",
   "DeleteLink": "Link verwijderen",
   "DeleteSharedCustomPublic": "De link wordt definitief verwijderd. U kunt deze actie niet ongedaan maken.",

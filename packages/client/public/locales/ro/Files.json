@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Activare Filtru particularizat",
   "CustomFilterEnabled": "Filtru particularizat pentru utilizatorul selectat este activat",
   "CustomFilterEnableDiscription": "Filtru particularizat este activ pentru acest tabel. Utilizatorii care au deschis acest fișier pot particulariza afișarea datelor din tabel.",
-  "DateLastOpened": "Deschis ultima dată",
   "DaysRemaining": "Zile rămase: {{daysRemaining}}",
   "DeleteLink": "Ștergere link",
   "DeleteSharedCustomPublic": "Link-ul va fi şters definitiv. Această acţiune nu poate fi anulată.",

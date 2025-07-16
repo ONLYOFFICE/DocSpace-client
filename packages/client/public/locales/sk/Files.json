@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Povoliť vlastný filter",
   "CustomFilterEnabled": "Vlastný filter pre vybraný súbor aktivovaný",
   "CustomFilterEnableDiscription": "Pre túto tabuľku je povolený vlastný filter. Používatelia, ktorí otvorili súbor, si budú môcť prispôsobiť zobrazenie údajov v tabuľke.",
-  "DateLastOpened": "Dátum posledného otvorenia",
   "DaysRemaining": "Zostávajúce dni: {{daysRemaining}}",
   "DeleteLink": "Vymazať odkaz",
   "DeleteSharedCustomPublic": "Odkaz bude natrvalo odstránený. Tento krok nebude možné vrátiť späť.",

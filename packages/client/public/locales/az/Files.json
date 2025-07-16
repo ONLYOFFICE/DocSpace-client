@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Xüsusi filtri aktivləşdirin",
   "CustomFilterEnabled": "Seçilmiş fayl üçün Xüsusi filtr aktiv edildi",
   "CustomFilterEnableDiscription": "Bu cədvəl üçün Xüsusi filtr aktivdir. Faylı açan istifadəçilər cədvəldə məlumatların göstərilməsini fərdiləşdirə bilərlər.",
-  "DateLastOpened": "Son açılma tarixi",
   "DaysRemaining": "Qalan günlər: {{daysRemaining}}",
   "DeleteLink": "Keçidi silin",
   "DeleteSharedCustomPublic": "Link həmişəlik silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz.",

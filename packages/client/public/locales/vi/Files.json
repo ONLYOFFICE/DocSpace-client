@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Bật Bộ lọc tùy chỉnh",
   "CustomFilterEnabled": "Bộ lọc tùy chỉnh cho tệp đã chọn đã bật",
   "CustomFilterEnableDiscription": "Bộ lọc tùy chỉnh đã được bật cho bảng này. Người dùng đã mở tệp sẽ có thể tùy chỉnh cách hiển thị dữ liệu trong bảng.",
-  "DateLastOpened": "Ngày mở lần cuối",
   "DaysRemaining": "Số ngày còn lại: {{daysRemaining}}",
   "DeleteLink": "Xóa liên kết",
   "DeleteSharedCustomPublic": "Liên kết sẽ bị xóa vĩnh viễn. Bạn sẽ không thể hoàn tác thao tác này.",

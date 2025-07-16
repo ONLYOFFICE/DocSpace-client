@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Omogoči Prilagojen filter",
   "CustomFilterEnabled": "Prilagojen filter za izbrano datoteko omogočen",
   "CustomFilterEnableDiscription": "Prilagojen filter je omogočen za to tabelo. Uporabniki, ki so odprli datoteko, bodo lahko prilagodili prikaz podatkov v tabeli.",
-  "DateLastOpened": "අවසාන විවෘත කළ දිනය",
   "DaysRemaining": "ඉතිරි දවස් ගණන: {{daysRemaining}}",
   "DeleteLink": "සබැඳිය මකන්න",
   "DeleteSharedCustomPublic": "මෙම සම්බන්ධතාවය ස්ථිරවම මකා දමනු ලැබේ. ඔබට මෙම ක්‍රියාව අහෝසි කිරීමට නොහැකි වනු ඇත.",

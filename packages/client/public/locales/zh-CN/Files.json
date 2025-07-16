@@ -42,7 +42,6 @@
   "CustomFilterEnable": "启用自定义过滤器",
   "CustomFilterEnabled": "所选文件的自定义过滤器已启用",
   "CustomFilterEnableDiscription": "该表已启用自定义过滤器。打开文件的用户可以个性化表格中的数据显示。",
-  "DateLastOpened": "上次打开日期",
   "DaysRemaining": "剩余天数：{{daysRemaining}}",
   "DeleteLink": "删除链接",
   "DeleteSharedCustomPublic": "该链接将被永久删除。您将无法撤销此操作。",

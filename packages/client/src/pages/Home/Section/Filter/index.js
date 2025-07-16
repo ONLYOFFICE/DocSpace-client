@@ -1168,7 +1168,7 @@ const SectionFilterContent = ({
     const lastOpenedDate = {
       id: "sort-by_last-opened",
       key: SortByFieldName.LastOpened,
-      label: t("DateLastOpened"),
+      label: t("LastOpened"),
       default: true,
     };
 

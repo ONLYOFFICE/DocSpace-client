@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Włącz niestandardowy filtr",
   "CustomFilterEnabled": "Niestandardowy filtr dla wybranego pliku włączony",
   "CustomFilterEnableDiscription": "Niestandardowy filtr jest włączony dla tej tabeli. Użytkownicy, którzy otworzyli plik, będą mogli personalizować sposób wyświetlania danych w tabeli.",
-  "DateLastOpened": "Data ostatniego otwarcia",
   "DaysRemaining": "Pozostało dni: {{daysRemaining}}",
   "DeleteLink": "Usuń link",
   "DeleteSharedCustomPublic": "Link zostanie trwale usunięty. Nie będziesz w stanie cofnąć tego działania.",

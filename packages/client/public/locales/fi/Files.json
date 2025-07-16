@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Ota mukautettu suodatin käyttöön",
   "CustomFilterEnabled": "Mukautettu suodatin valitulle tiedostolle käytössä",
   "CustomFilterEnableDiscription": "Mukautettu suodatin on käytössä tässä taulukossa. Tiedoston avanneet käyttäjät voivat mukauttaa tietojen näyttöä taulukossa.",
-  "DateLastOpened": "Päivä, jolloin viimeksi avattu",
   "DaysRemaining": "Päiviä jäljellä: {{daysRemaining}}",
   "DeleteLink": "Poista linkki",
   "DeleteSharedCustomPublic": "Linkki poistetaan lopullisesti. Et voi peruuttaa tätä toimintoa.",

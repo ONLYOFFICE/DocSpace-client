@@ -418,7 +418,7 @@ class FilesTableHeader extends React.Component {
       },
       {
         key: "LastOpenedRecent",
-        title: t("DateLastOpened"),
+        title: t("LastOpened"),
         enable: lastOpenedRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.LastOpened,

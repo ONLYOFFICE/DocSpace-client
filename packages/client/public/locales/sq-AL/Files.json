@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Aktivizoni filtrin e personalizuar",
   "CustomFilterEnabled": "Filtri i personalizuar për skedarin e zgjedhur është aktivizuar",
   "CustomFilterEnableDiscription": "Filtri i personalizuar është aktivizuar për këtë tabelë. Përdoruesit që hapën skedarin do të mund të personalizojnë shfaqjen e të dhënave në tabelë.",
-  "DateLastOpened": "Data e hapjes së fundit",
   "DaysRemaining": "Ditët e mbetura: {{daysRemaining}}",
   "DeleteLink": "Fshini lidhjen",
   "DeleteSharedCustomPublic": "Lidhja do të fshihet përgjithmonë. Nuk do të mund ta zhbëni këtë veprim.",

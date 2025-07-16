@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Iespējot pielāgoto filtru",
   "CustomFilterEnabled": "Pielāgotais filtrs atlasītajam failam ir aktivēts",
   "CustomFilterEnableDiscription": "Šai tabulai ir ieslēgts pielāgotais filtrs. Lietotāji, kas atvēruši failu, varēs pielāgot datu attēlojumu tabulā.",
-  "DateLastOpened": "Pēdējās atvēršanas datums",
   "DaysRemaining": "Atlikušās dienas: {{daysRemaining}}",
   "DeleteLink": "Dzēst saiti",
   "DeleteSharedCustomPublic": "Saite tiks neatgriezeniski dzēsta. Šo darbību nevarēsiet atcelt.",

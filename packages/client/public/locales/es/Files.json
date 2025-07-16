@@ -42,7 +42,6 @@
   "CustomFilterEnable": "Habilitar Filtro personalizado",
   "CustomFilterEnabled": "El Filtro personalizado para el archivo seleccionado se ha habilitado",
   "CustomFilterEnableDiscription": "El Filtro personalizado está habilitado para esta tabla. Los usuarios que han abierto el archivo podrán personalizar la visualización de los datos en la tabla.",
-  "DateLastOpened": "Fecha de última apertura",
   "DaysRemaining": "Días restantes: {{daysRemaining}}",
   "DeleteLink": "Eliminar enlace",
   "DeleteSharedCustomPublic": "El enlace se eliminará de forma permanente. No podrá deshacer esta acción.",

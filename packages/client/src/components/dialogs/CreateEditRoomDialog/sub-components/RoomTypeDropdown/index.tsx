@@ -29,10 +29,10 @@ import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
 import { isMobile } from "@docspace/shared/utils";
+import { RoomsType } from "@docspace/shared/enums";
 
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
-import { RoomsType } from "@docspace/shared/enums";
 
 const StyledRoomTypeDropdown = styled.div`
   display: flex;

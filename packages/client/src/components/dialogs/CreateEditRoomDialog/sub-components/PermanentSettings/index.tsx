@@ -46,7 +46,6 @@ type PermanentSettingsProps = {
   t: TFunction;
   isThirdparty: boolean;
   storageLocation: TRoomStorageLocation;
-  isPrivate: boolean;
 };
 
 const PermanentSettings = ({

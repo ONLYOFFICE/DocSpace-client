@@ -36,6 +36,7 @@ import { Text } from "@docspace/shared/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { RoomsType } from "@docspace/shared/enums";
 import { TFolder } from "@docspace/shared/api/files/types";
+import { TRoom } from "@docspace/shared/api/rooms/types";
 
 import TagsStore from "SRC_DIR/store/TagsStore";
 import CreateEditRoomStore from "SRC_DIR/store/CreateEditRoomStore";
@@ -46,7 +47,6 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 
 import { CreateRoomDialog } from "../dialogs";
-import { TRoom } from "@docspace/shared/api/rooms/types";
 
 type CreateRoomEventProps = {
   title: string;

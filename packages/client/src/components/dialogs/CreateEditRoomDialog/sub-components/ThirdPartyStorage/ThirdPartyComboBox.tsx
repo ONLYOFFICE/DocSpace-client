@@ -337,7 +337,12 @@ const ThirdPartyComboBox = ({
           className="thirdparty-combobox"
           selectedOption={selectedItem}
           options={[]}
-          advancedOptions={<React.Fragment>{advancedOptions}</React.Fragment>}
+          advancedOptions={
+            <>
+              {advancedOptions}
+              <div />
+            </>
+          }
           scaled
           withBackdrop={isMobile}
           size="content"

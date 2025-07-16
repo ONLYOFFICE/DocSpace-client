@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
 
 import { makeAutoObservable } from "mobx";
 import isEqual from "lodash/isEqual";
@@ -58,7 +59,6 @@ import FilesActionsStore from "./FilesActionsStore";
 import SelectedFolderStore from "./SelectedFolderStore";
 import TagsStore from "./TagsStore";
 import { ThirdPartyStore } from "./ThirdPartyStore";
-import React from "react";
 
 class CreateEditRoomStore {
   roomParams: Nullable<TRoomParams> = null;

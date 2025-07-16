@@ -34,16 +34,17 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import { StyledParam } from "../Params/StyledParam";
-import ToggleParam from "../Params/ToggleParam";
-
-import ThirdPartyComboBox from "./ThirdPartyComboBox";
-import FolderInput from "./FolderInput";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { ThirdPartyStore } from "SRC_DIR/store/ThirdPartyStore";
 import { TRoomStorageLocation } from "@docspace/shared/utils/rooms";
 import { TConnectingStorage } from "@docspace/shared/api/files/types";
+
+import { StyledParam } from "../Params/StyledParam";
+import ToggleParam from "../Params/ToggleParam";
+
+import ThirdPartyComboBox from "./ThirdPartyComboBox";
+import FolderInput from "./FolderInput";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;

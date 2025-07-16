@@ -30,11 +30,11 @@ import { TFunction } from "i18next";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
+import { TRoomParams } from "@docspace/shared/utils/rooms";
 
 import ViewerInfoWatermark from "./ViewerInfo";
 import { StyledBody } from "./StyledComponent";
 import ImageWatermark from "./ImageWatermark";
-import { TRoomParams } from "@docspace/shared/utils/rooms";
 
 const imageWatermark = "image";
 const viewerInfoWatermark = "viewerInfo";

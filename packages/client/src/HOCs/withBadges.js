@@ -168,7 +168,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
         isPublicRoom,
-        isRecentTab,
+        isRecentFolder,
         isTemplatesFolder,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
@@ -211,7 +211,7 @@ export default function withBadges(WrappedComponent) {
           isMutedBadge={isMutedBadge}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
-          isRecentTab={isRecentTab}
+          isRecentFolder={isRecentFolder}
           canEditing={canEditing}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
@@ -256,7 +256,7 @@ export default function withBadges(WrappedComponent) {
         isPrivacyFolder,
         isArchiveFolderRoot,
         isArchiveFolder,
-        isRecentTab,
+        isRecentFolder,
         isTemplatesFolder,
       } = treeFoldersStore;
       const {
@@ -309,7 +309,7 @@ export default function withBadges(WrappedComponent) {
         getPrimaryLink,
         isArchiveFolder,
         isPublicRoom: publicRoomStore.isPublicRoom,
-        isRecentTab,
+        isRecentFolder,
         checkAndOpenLocationAction,
         isTemplatesFolder,
         onCreateRoomFromTemplate,

@@ -79,7 +79,7 @@ export type BadgesProps = {
   isArchiveFolderRoot?: boolean;
   onCopyPrimaryLink?: () => void;
   isArchiveFolder?: boolean;
-  isRecentTab?: boolean;
+  isRecentFolder?: boolean;
   canEditing?: boolean;
   isTemplatesFolder?: boolean;
   onCreateRoom?: () => void;

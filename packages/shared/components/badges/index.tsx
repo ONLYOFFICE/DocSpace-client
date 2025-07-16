@@ -117,7 +117,7 @@ const Badges = ({
   isArchiveFolderRoot,
   onCopyPrimaryLink,
   isArchiveFolder,
-  isRecentTab,
+  isRecentFolder,
   canEditing,
   isTemplatesFolder,
   onCreateRoom,
@@ -316,7 +316,7 @@ const Badges = ({
         </BadgeWrapper>
       ) : null}
 
-      {isEditing && !(isRecentTab && !canEditing) ? (
+      {isEditing && !(isRecentFolder && !canEditing) ? (
         <IconButton
           iconNode={iconEdit}
           className={classNames(

@@ -1,11 +1,16 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import { IndexRange } from "react-virtualized";
 
 import { InfiniteLoaderComponent } from "./InfiniteLoader";
 import { Scrollbar } from "../scrollbar/Scrollbar";
+import { TViewAs } from "../../types";
 
-const generateItems = (count: number, startIndex: number = 0) =>
+const generateItems = (
+  count: number,
+  startIndex: number = 0,
+): React.ReactNode[] =>
   Array(count)
     .fill(null)
     .map((_, index) => (
@@ -22,37 +27,26 @@ const generateItems = (count: number, startIndex: number = 0) =>
       </div>
     ));
 
-interface ScrollStructureWrapperProps {
-  children: ReactNode;
-}
+const ScrollStructureWrapper = ({ children }: { children: ReactNode }) => (
+  <div style={{ height: "300px", position: "relative" }} id="sectionScroll">
+    <Scrollbar>
+      <div id="tileContainer" style={{ width: "100%" }}>
+        {children}
+      </div>
+    </Scrollbar>
+  </div>
+);
 
-const ScrollStructureWrapper = ({ children }: ScrollStructureWrapperProps) => {
-  return (
-    <div style={{ height: "300px", position: "relative" }} id="sectionScroll">
-      <Scrollbar>
-        <div id="tileContainer" style={{ width: "100%" }}>
-          {children}
-        </div>
-      </Scrollbar>
-    </div>
-  );
-};
-
-const withScrollStructure = (Story) => {
-  return (
-    <ScrollStructureWrapper>
-      <Story />
-    </ScrollStructureWrapper>
-  );
-};
-
-const InfiniteLoaderWrapper = (props) => {
-  const [items, setItems] = useState(generateItems(20, 0));
+const InfiniteLoaderDemo = () => {
+  const [items, setItems] = useState<React.ReactNode[]>(generateItems(20, 0));
   const [itemCount] = useState(100);
   const [loadedCount, setLoadedCount] = useState(20);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  const loadMoreItems = async ({ startIndex, stopIndex }) => {
+  const loadMoreItems = async ({
+    startIndex,
+    stopIndex,
+  }: IndexRange): Promise<void> => {
     action("loadMoreItems")({ startIndex, stopIndex });
 
     await new Promise((resolve) => {
@@ -72,7 +66,8 @@ const InfiniteLoaderWrapper = (props) => {
 
       const scrollElement = document.querySelector(
         "#sectionScroll .scroll-wrapper > .scroller",
-      );
+      ) as HTMLElement | null;
+
       if (scrollElement) {
         const scrollEvent = new Event("scroll", { bubbles: true });
         scrollElement.dispatchEvent(scrollEvent);
@@ -82,19 +77,22 @@ const InfiniteLoaderWrapper = (props) => {
 
   return (
     <InfiniteLoaderComponent
-      {...props}
+      viewAs={"tile" as TViewAs}
       itemCount={itemCount}
       filesLength={loadedCount}
       hasMoreFiles={loadedCount < itemCount}
       loadMoreItems={loadMoreItems}
-      isItemLoaded={(index) => index < loadedCount}
+      itemSize={20}
+      countTilesInRow={4}
+      isLoading={false}
     >
       {items}
     </InfiniteLoaderComponent>
   );
 };
 
-const meta: Meta<typeof InfiniteLoaderComponent> = {
+// Storybook metadata
+const meta = {
   title: "Components/InfiniteLoader",
   component: InfiniteLoaderComponent,
   parameters: {
@@ -105,44 +103,20 @@ const meta: Meta<typeof InfiniteLoaderComponent> = {
       },
     },
   },
-  argTypes: {
-    viewAs: {
-      control: { type: "select", options: ["tile"] },
-      description: "Display mode for the items",
-    },
-    isLoading: {
-      control: "boolean",
-      description: "Loading state of the component",
-    },
-    itemSize: {
-      control: "number",
-      description: "Height of each item in pixels",
-    },
-    countTilesInRow: {
-      control: "number",
-      description: "Number of tiles in a row",
-    },
-  },
-  decorators: [withScrollStructure],
-};
+  decorators: [
+    (Story) => (
+      <ScrollStructureWrapper>
+        <Story />
+      </ScrollStructureWrapper>
+    ),
+  ],
+} satisfies Meta<typeof InfiniteLoaderComponent>;
 
 export default meta;
-type Story = StoryObj<typeof InfiniteLoaderComponent>;
+type Story = StoryObj<typeof meta>;
 
-const Template: Story = {
-  render: (args) => <InfiniteLoaderWrapper {...args} />,
-  args: {
-    viewAs: "tile",
-    itemSize: 20,
-    countTilesInRow: 4,
-    isLoading: false,
-  },
-};
-
+// Default story
 export const Default = {
-  ...Template,
-  args: {
-    ...Template.args,
-    viewAs: "tile",
-  },
-};
+  args: {},
+  render: () => <InfiniteLoaderDemo />,
+} as unknown as Story;

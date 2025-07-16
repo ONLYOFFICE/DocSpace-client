@@ -1,7 +1,11 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { BrowserRouter } from "react-router";
-import { DeviceType } from "../../enums";
+import {
+  DeviceType,
+  EmployeeActivationStatus,
+  EmployeeStatus,
+} from "../../enums";
 import Article from ".";
 import { ArticleProps } from "./Article.types";
 import { ContextMenuModel } from "../context-menu";
@@ -35,7 +39,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ArticleProps> = (args) => (
+const Template: StoryFn<ArticleProps> = (args) => (
   <div style={{ height: "600px", position: "relative" }}>
     <Article {...args} />
   </div>
@@ -94,7 +98,31 @@ Default.args = {
     displayName: "John Smith",
     title: "Manager",
     avatarSmall: "https://via.placeholder.com/32",
-    role: 1,
+    access: 0,
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    status: EmployeeStatus.Active,
+    activationStatus: EmployeeActivationStatus.NotActivated,
+    department: "",
+    workFrom: "",
+    avatarMax: "",
+    avatarMedium: "",
+    avatarOriginal: "",
+    avatar: "",
+    isAdmin: false,
+    isRoomAdmin: false,
+    isLDAP: false,
+    listAdminModules: [],
+    isOwner: false,
+    isVisitor: false,
+    isCollaborator: false,
+    mobilePhoneActivationStatus: 0,
+    isSSO: false,
+    profileUrl: "",
+    hasAvatar: false,
+    isAnonim: false,
   },
   getActions: () =>
     [

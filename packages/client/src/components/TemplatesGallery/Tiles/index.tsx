@@ -31,26 +31,7 @@ import { withTranslation } from "react-i18next";
 
 import styled from "styled-components";
 
-const StyledEmptyContainerLinks = styled.div`
-  display: grid;
-  margin: 13px 0;
-  grid-template-columns: 12px 1fr;
-  grid-column-gap: 8px;
 
-  .icon {
-    height: 20px;
-    width: 12px;
-    margin-block: 4px 0;
-    margin-inline: 0 4px;
-    cursor: pointer;
-  }
-
-  .link {
-    color: ${({ theme }) => theme.filesEmptyContainer.linkColor};
-    margin-block: 0;
-    margin-inline: 0 7px;
-  }
-`;
 
 const Tiles = ({
   // t,

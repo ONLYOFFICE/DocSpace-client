@@ -31,6 +31,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 
 import { ContextMenu, ContextMenuModel, ContextMenuRefType } from ".";
 import { globalColors } from "../../themes";
+import { ContextMenuProps } from "./ContextMenu.types";
 
 const meta = {
   title: "Drop down components/ContextMenu",
@@ -72,27 +73,12 @@ In particular case, state is created containing options for particular Row eleme
       description: "Whether to show backdrop when menu is open",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
-      },
-    },
-    withBackground: {
-      control: "boolean",
-      description: "Whether to show background for the menu",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: true },
+        defaultValue: { summary: "false" },
       },
     },
     onHide: {
       action: "onHide",
       description: "Callback when menu is hidden",
-      table: {
-        type: { summary: "function" },
-      },
-    },
-    onClick: {
-      action: "onClick",
-      description: "Callback when menu item is clicked",
       table: {
         type: { summary: "function" },
       },
@@ -104,14 +90,6 @@ In particular case, state is created containing options for particular Row eleme
         type: { summary: "string" },
       },
     },
-    stopEvents: {
-      control: "boolean",
-      description: "Whether to stop propagation of events",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: true },
-      },
-    },
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof ContextMenu>;
@@ -119,7 +97,7 @@ type Story = StoryObj<typeof ContextMenu>;
 
 export default meta;
 
-const Template = (args) => {
+const Template = (args: ContextMenuProps) => {
   const cm = useRef<ContextMenuRefType>(null);
   const items: ContextMenuModel[] = [
     {
@@ -268,8 +246,4 @@ const Template = (args) => {
 
 export const Default: Story = {
   render: Template,
-  args: {
-    withBackground: true,
-    stopEvents: true,
-  },
 };

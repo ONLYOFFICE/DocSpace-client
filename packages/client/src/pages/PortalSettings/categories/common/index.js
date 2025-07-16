@@ -34,9 +34,12 @@ import { inject, observer } from "mobx-react";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { DeviceType } from "@docspace/shared/enums";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+
 import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
+import DefaultTemplates from "./DefaultTemplates";
+
 import LoaderTabs from "./sub-components/loaderTabs";
 import { resetSessionStorage } from "../../utils";
 
@@ -64,6 +67,11 @@ const TabsCommon = (props) => {
       id: "appearance",
       name: t("Appearance"),
       content: <Appearance />,
+    },
+    {
+      id: "default-templates",
+      name: t("DefaultTemplates"),
+      content: <DefaultTemplates />,
     },
   ];
 

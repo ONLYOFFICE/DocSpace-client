@@ -2572,3 +2572,21 @@
   --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
     0px 0px 4px #{$menu-shadow-dark};
 }
+
+.light {
+  --modified-text-color: #{$gray};
+  --modified-badge-background-color: #{$gray};
+  --modified-badge-active-background-color: var(
+    --color-scheme-main-accent,
+    #{$light-blue-main}
+  );
+}
+
+.dark {
+  --modified-text-color: #{$gray-dark};
+  --modified-badge-background-color: #{$gray-dark};
+  --modified-badge-active-background-color: var(
+    --color-scheme-main-accent,
+    #{$light-blue-main}
+  );
+}

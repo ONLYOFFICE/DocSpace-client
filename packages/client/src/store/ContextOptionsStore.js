@@ -2225,7 +2225,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: RemoveOutlineSvgUrl,
         onClick: () => this.onClickRemoveFromRecent(item),
-        disabled: !this.treeFoldersStore.isRecentTab,
+        disabled: !this.treeFoldersStore.isRecentFolder,
       },
       {
         key: "separate-stop-filling",
@@ -2492,7 +2492,7 @@ class ContextOptionsStore {
         icon: RemoveOutlineSvgUrl,
         onClick: () =>
           this.filesActionsStore.onClickRemoveFromRecent(selection),
-        disabled: !this.treeFoldersStore.isRecentTab,
+        disabled: !this.treeFoldersStore.isRecentFolder,
       },
       {
         key: "delete",

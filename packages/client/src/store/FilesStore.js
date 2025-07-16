@@ -2254,7 +2254,8 @@ class FilesStore {
     const isDocuSign = false; // TODO: need this prop;
     const isEditing = false; // (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
-    const { isRecycleBinFolder, isMy, isArchiveFolder } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isMy, isArchiveFolder, isRecentFolder } =
+      this.treeFoldersStore;
     const { security } = this.selectedFolderStore;
 
     const { enablePlugins } = this.settingsStore;
@@ -2621,7 +2622,7 @@ class FilesStore {
 
       if (
         !(
-          // isRecentFolder ||
+          isRecentFolder ||
           // isFavoritesFolder ||
           (isMyFolder && (this.filterType || this.filterSearch))
         )

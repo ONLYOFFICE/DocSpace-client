@@ -29,7 +29,10 @@ import { observer, inject } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
 
-const Tiles = ({
+import type { FC } from "react";
+import type { TilesProps } from "./Tiles.types";
+
+const Tiles: FC<TilesProps> = ({
   // t,
   tReady,
   // theme,
@@ -44,13 +47,14 @@ const Tiles = ({
   // languageFilterLoaded,
   // oformFilesLoaded,
 }) => {
-  const onMouseDown = (e) => {
+  const onMouseDown = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
     if (
-      e.target.closest(".scroll-body") &&
-      !e.target.closest(".files-item") &&
-      !e.target.closest(".not-selectable") &&
-      !e.target.closest(".info-panel") &&
-      !e.target.closest(".info-panel-toggle-bg")
+      target.closest(".scroll-body") &&
+      !target.closest(".files-item") &&
+      !target.closest(".not-selectable") &&
+      !target.closest(".info-panel") &&
+      !target.closest(".info-panel-toggle-bg")
     ) {
       setGallerySelected(null);
     }
@@ -91,4 +95,4 @@ export default inject<TStore>(
     languageFilterLoaded: oformsStore.languageFilterLoaded,
     oformFilesLoaded: oformsStore.oformFilesLoaded,
   }),
-)(withTranslation("Common", "FormGallery")(observer(Tiles)));
+)(withTranslation(["Common", "FormGallery"])(observer(Tiles)));

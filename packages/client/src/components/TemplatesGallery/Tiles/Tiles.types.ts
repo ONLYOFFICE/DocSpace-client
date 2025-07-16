@@ -24,41 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
+import type { Key } from "react";
 
-import { withTranslation } from "react-i18next";
+/**
+ * Minimal representation of a file inside the Templates Gallery.
+ * Currently only the `id` field is required by the UI layer but we keep the
+ * interface extensible for future use.
+ */
+export interface TOformFile {
+  id: Key | null | undefined;
+  // You can add other fields here when they become required by the UI
+}
 
-import type { FC } from "react";
-import type { TileProps } from "./Tiles.types";
+export interface TilesProps {
+  /** Flag returned by `react-i18next` hook that indicates that translations are ready. */
+  tReady: boolean;
+  /** Array with files that should be rendered in the gallery. */
+  oformFiles: TOformFile[];
 
-const Tile: FC<TileProps> = () => {
-  return null;
-};
+  /**
+   * Callback that sets selected file in global mobx store. Pass `null` to reset selection.
+   */
+  setGallerySelected: (id: Key | null) => void;
 
-export default inject<TStore>(
-  ({
-    filesStore,
-    filesSettingsStore,
+  /**
+   * Callback that informs mobx store whether the `oformFiles` have been fetched and can be displayed.
+   */
+  setOformFilesLoaded: (loaded: boolean) => void;
+}
 
-    oformsStore,
-    contextOptionsStore,
-    infoPanelStore,
-  }) => {
-    const { categoryType } = filesStore;
-    const { setGallerySelected } = oformsStore;
-    const { getIcon } = filesSettingsStore;
-    const { isVisible, setIsVisible } = infoPanelStore;
-
-    const { getFormGalleryContextOptions, onCreateOform } = contextOptionsStore;
-
-    return {
-      setGallerySelected,
-      onCreateOform,
-      getFormGalleryContextOptions,
-      getIcon,
-      setIsInfoPanelVisible: setIsVisible,
-      isInfoPanelVisible: isVisible,
-      categoryType,
-    };
-  },
-)(withTranslation(["FormGallery", "Common"])(observer(Tile)));
+export interface TileProps {
+  // Tile component currently receives everything via MobX inject and therefore
+  // has no own props. We leave an empty interface to keep API consistent and
+  // make future extension easier.
+}

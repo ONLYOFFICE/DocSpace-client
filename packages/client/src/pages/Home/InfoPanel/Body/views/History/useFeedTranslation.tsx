@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "@docspace/shared/types";
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
-
 import moment from "moment";
-import { FeedActionKeys } from "./FeedInfo";
+import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
+import { TTranslation } from "@docspace/shared/types";
+
 import { HistoryText } from "./HistoryText";
 import { Feed } from "./HistoryBlockContent/HistoryBlockContent.types";
 

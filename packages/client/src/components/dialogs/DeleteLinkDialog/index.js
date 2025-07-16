@@ -110,7 +110,10 @@ const DeleteLinkDialogComponent = (props) => {
             return res;
           });
       })
-      .catch((err) => toastr.error(err.response?.data?.error.message))
+      .catch((err) => {
+        console.log(err);
+        toastr.error(err.response?.data?.error.message);
+      })
       .finally(() => {
         setIsLoading(false);
         onClose();
@@ -145,11 +148,6 @@ const DeleteLinkDialogComponent = (props) => {
 
     return t("Files:DeleteSharedLink");
   };
-
-  console.debug({
-    primary: link.sharedTo.primary,
-    isPublicRoomType,
-  });
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>

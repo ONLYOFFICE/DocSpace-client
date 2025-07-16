@@ -1550,7 +1550,7 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment,
+  expirationDate?: moment.Moment | null,
 ) {
   const res = (await request({
     method: "put",

@@ -46,6 +46,39 @@ export type TContactsViewAs = "table" | "row";
 
 export type TContactsMenuItemdId = "active" | "pending" | "disabled" | "all";
 
+export type TPeopleListItem = {
+  id: string;
+  status: EmployeeStatus;
+  activationStatus: number;
+  statusType: string;
+  role: EmployeeType;
+  isOwner: boolean;
+  isAdmin: boolean;
+  isCollaborator: boolean;
+  isRoomAdmin: boolean;
+  isVisitor: boolean;
+  displayName: string;
+  avatar: string;
+  avatarMax: string | undefined;
+  hasAvatar: boolean;
+  email: string;
+  userName: string;
+  mobilePhone: string | undefined;
+  options: string[] | undefined;
+  groups: any[] | undefined;
+  position: string | undefined;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  isSSO: boolean;
+  isLDAP: boolean;
+  quotaLimit: number | undefined;
+  usedSpace: number | undefined;
+  isCustomQuota: boolean | string | undefined;
+  createdBy: any;
+  registrationDate: string | undefined;
+  tfaAppEnabled: boolean | undefined;
+};
+
 export type TChangeUserTypeDialogData = {
   toType: EmployeeType;
   fromType: EmployeeType[];

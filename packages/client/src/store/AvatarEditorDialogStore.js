@@ -50,12 +50,11 @@ class AvatarEditorDialogStore {
 
   avatarEditorDialogVisible = false;
 
-  constructor(filesStore, settingsStore, infoPanelStore) {
+  constructor(filesStore, settingsStore) {
     makeAutoObservable(this);
 
     this.filesStore = filesStore;
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
   }
 
   setAvatarEditorDialogVisible = (visible) => {
@@ -117,7 +116,6 @@ class AvatarEditorDialogStore {
         }
 
         needUpdate && updateRoom(item, room);
-        needUpdate && this.infoPanelStore.updateInfoPanelSelection(room);
         URL.revokeObjectURL(img.src);
         setActiveFolders([]);
         resolve();

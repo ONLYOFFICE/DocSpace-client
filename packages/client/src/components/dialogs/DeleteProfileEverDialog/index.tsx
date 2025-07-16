@@ -310,7 +310,7 @@ const DeleteProfileEverDialogComponent = ({
 
 export default inject(
   (
-    { peopleStore, setup }: TStore,
+    { peopleStore, setup, infoPanelStore }: TStore,
     { users }: { users: UsersStore["selection"] },
   ) => {
     const { dialogStore, usersStore, groupsStore } = peopleStore;
@@ -326,6 +326,8 @@ export default inject(
       selection,
       contactsTab,
     } = usersStore!;
+
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const {
       setDataReassignmentDialogVisible,
@@ -359,7 +361,7 @@ export default inject(
       setDialogData,
       setSelected,
       removeUsers,
-      needResetUserSelection,
+      needResetUserSelection: !infoPanelVisible || needResetUserSelection,
       filter,
       updateCurrentGroup,
       deleteWithoutReassign,

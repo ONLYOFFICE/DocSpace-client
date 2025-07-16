@@ -135,6 +135,15 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 import { FILLING_STATUS_ID } from "@docspace/shared/constants";
+import {
+  getInfoPanelOpen,
+  hideInfoPanel,
+  openMembersTab,
+  openShareTab,
+  setInfoPanelMobileHidden,
+  setView,
+  showInfoPanel,
+} from "SRC_DIR/helpers/info-panel";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -376,10 +385,9 @@ class ContextOptionsStore {
   };
 
   onMoveAction = (item) => {
-    const { setIsMobileHidden } = this.infoPanelStore;
     const { id, isFolder } = this.selectedFolderStore;
 
-    setIsMobileHidden(true);
+    setInfoPanelMobileHidden(true);
 
     const isFolderActions = id === item?.id && isFolder === item?.isFolder;
     if (isFolderActions) {
@@ -390,16 +398,14 @@ class ContextOptionsStore {
   };
 
   onRestoreAction = () => {
-    const { setIsMobileHidden } = this.infoPanelStore;
-    setIsMobileHidden(true);
+    setInfoPanelMobileHidden(true);
     this.dialogsStore.setRestorePanelVisible(true);
   };
 
   onCopyAction = (item) => {
-    const { setIsMobileHidden } = this.infoPanelStore;
     const { id, isFolder } = this.selectedFolderStore;
 
-    setIsMobileHidden(true);
+    setInfoPanelMobileHidden(true);
 
     const isFolderActions = id === item?.id && isFolder === item?.isFolder;
     if (isFolderActions) {
@@ -413,13 +419,11 @@ class ContextOptionsStore {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
-    const { setIsMobileHidden } = this.infoPanelStore;
-
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
     fetchFileVersions(`${id}`, security, requestToken);
     setIsVerHistoryPanel(true);
-    setIsMobileHidden(true);
+    setInfoPanelMobileHidden(true);
   };
 
   finalizeVersion = (id) => {
@@ -444,7 +448,6 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setInfoPanelSelection } = this.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -453,7 +456,6 @@ class ContextOptionsStore {
           ? toastr.success(t("Translations:FileUnlocked"))
           : toastr.success(t("Translations:FileLocked")),
       )
-      .then(() => setInfoPanelSelection({ ...item, locked: !locked }))
       .catch((err) => {
         toastr.error(err);
       });
@@ -829,7 +831,6 @@ class ContextOptionsStore {
   };
 
   onClickShare = (item) => {
-    const { openShareTab } = this.infoPanelStore;
     const { setShareFolderDialogVisible } = this.dialogsStore;
 
     if (item.isFolder) {
@@ -897,10 +898,11 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setIsVisible, setView } = this.infoPanelStore;
+    showInfoPanel();
 
-    setIsVisible(true);
-    view && setView(view);
+    if (item) {
+      setView(view);
+    }
   };
 
   onClickEditRoom = (item) => {
@@ -1183,7 +1185,7 @@ class ContextOptionsStore {
     const { getFolderInfo } = this.filesStore;
     const { getPublicKey } = this.filesActionsStore;
 
-    this.infoPanelStore.setIsVisible(false);
+    hideInfoPanel();
 
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
@@ -1209,7 +1211,7 @@ class ContextOptionsStore {
   };
 
   onShowOformTemplateInfo = (item) => {
-    this.infoPanelStore.setIsVisible(true);
+    showInfoPanel();
     this.oformsStore.setGallerySelected(item);
   };
 
@@ -1479,22 +1481,22 @@ class ContextOptionsStore {
 
   getManageLinkOptions = (item, isRoom = false) => {
     const openTab = () => {
-      if (isRoom) return this.infoPanelStore.openMembersTab();
+      if (isRoom) return openMembersTab();
 
-      this.infoPanelStore.openShareTab();
+      openShareTab();
     };
 
     const infoView = isRoom
       ? this.infoPanelStore.roomsView
       : this.infoPanelStore.fileView;
 
-    const { isVisible, infoPanelCurrentSelection } = this.infoPanelStore;
+    const { infoPanelRoomSelection } = this.infoPanelStore;
 
     return {
       canShowLink: canShowManageLink(
         item,
-        infoPanelCurrentSelection,
-        isVisible,
+        infoPanelRoomSelection,
+        getInfoPanelOpen(),
         infoView,
         isRoom,
       ),

@@ -37,7 +37,6 @@ import { Nullable } from "@docspace/shared/types";
 import type { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
 import AccessRightsStore from "../AccessRightsStore";
-import InfoPanelStore from "../InfoPanelStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 import ProfileActionsStore from "../ProfileActionsStore";
 import DialogsStore from "../DialogsStore";
@@ -78,7 +77,6 @@ class PeopleStore {
 
   constructor(
     public accessRightsStore: AccessRightsStore,
-    public infoPanelStore: InfoPanelStore,
     public userStore: UserStore,
     public tfaStore: TfaStore,
     public settingsStore: SettingsStore,
@@ -91,7 +89,6 @@ class PeopleStore {
     public filesStore: FilesStore,
     public selectedFolderStore: SelectedFolderStore,
   ) {
-    this.infoPanelStore = infoPanelStore;
     this.accessRightsStore = accessRightsStore;
     this.userStore = userStore;
     this.tfaStore = tfaStore;
@@ -111,7 +108,6 @@ class PeopleStore {
 
     this.groupsStore = new GroupsStore(
       this,
-      infoPanelStore,
       clientLoadingStore,
       userStore,
       settingsStore,
@@ -121,7 +117,6 @@ class PeopleStore {
 
     this.usersStore = new UsersStore(
       settingsStore,
-      infoPanelStore,
       userStore,
       this.targetUserStore,
       this.groupsStore,
@@ -137,7 +132,6 @@ class PeopleStore {
 
     this.contextOptionsStore = new ContactsConextOptionsStore(
       profileActionsStore,
-      infoPanelStore,
       userStore,
       tfaStore,
       settingsStore,
@@ -154,7 +148,6 @@ class PeopleStore {
       this.usersStore,
       this.dialogStore,
       this.contextOptionsStore,
-      infoPanelStore,
       userStore,
     );
 

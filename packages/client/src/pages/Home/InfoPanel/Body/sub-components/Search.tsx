@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import debounce from "lodash.debounce";
-import { inject } from "mobx-react";
+import debounce from "lodash/debounce";
 
 import XIconReactSvgUrl from "PUBLIC_DIR/images/x.react.svg?url";
 import {
@@ -36,18 +35,18 @@ import {
 } from "@docspace/shared/components/text-input";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
-import { StyledSearchContainer } from "../styles/common";
+import commonStyles from "../helpers/Common.module.scss";
 
-interface SearchProps {
+export type SearchProps = {
   setSearchValue: (value: string) => void;
-  resetSearch: () => void;
-}
+  resetSearch: VoidFunction;
+};
 
 const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   const [value, setValue] = useState("");
 
   const onClose = () => {
-    resetSearch();
+    resetSearch?.();
   };
 
   const onEscapeUp = (e: KeyboardEvent) => {
@@ -58,7 +57,7 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   };
 
   const debouncedSearch = useCallback(
-    debounce((debouncedValue: string) => setSearchValue(debouncedValue), 300),
+    debounce((debouncedValue: string) => setSearchValue?.(debouncedValue), 300),
     [],
   );
 
@@ -80,7 +79,7 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
   }, [debouncedSearch]);
 
   return (
-    <StyledSearchContainer>
+    <div className={commonStyles.searchContainer}>
       <TextInput
         id="info_panel_search_input"
         type={InputType.text}
@@ -97,11 +96,8 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
         onClick={onClose}
         isClickable
       />
-    </StyledSearchContainer>
+    </div>
   );
 };
 
-export default inject(({ infoPanelStore }: TStore) => ({
-  resetSearch: infoPanelStore.resetSearch,
-  setSearchValue: infoPanelStore.setSearchValue,
-}))(Search);
+export default Search;

@@ -45,6 +45,7 @@ import { Nullable } from "@docspace/shared/types";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import FilesStore from "./FilesStore";
 import InfoPanelStore from "./InfoPanelStore";
@@ -77,8 +78,6 @@ class CreateEditRoomStore {
 
   settingsStore: Nullable<SettingsStore> = null;
 
-  infoPanelStore: Nullable<InfoPanelStore> = null;
-
   currentQuotaStore: Nullable<CurrentQuotasStore> = null;
 
   clientLoadingStore: Nullable<ClientLoadingStore> = null;
@@ -102,7 +101,6 @@ class CreateEditRoomStore {
     tagsStore: TagsStore,
     thirdPartyStore: ThirdPartyStore,
     settingsStore: SettingsStore,
-    infoPanelStore: InfoPanelStore,
     currentQuotaStore: CurrentQuotasStore,
     clientLoadingStore: ClientLoadingStore,
     dialogsStore: DialogsStore,
@@ -116,7 +114,6 @@ class CreateEditRoomStore {
     this.filesActionsStore = filesActionsStore;
     this.thirdPartyStore = thirdPartyStore;
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
     this.currentQuotaStore = currentQuotaStore;
     this.clientLoadingStore = clientLoadingStore;
     this.dialogsStore = dialogsStore;
@@ -682,7 +679,6 @@ class CreateEditRoomStore {
   onOpenNewRoom = async (room) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { setSelection } = this.filesStore;
-    const { setView, setIsVisible } = this.infoPanelStore;
     const { getPublicKey } = this.filesActionsStore;
 
     const state = {
@@ -713,8 +709,8 @@ class CreateEditRoomStore {
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
     if (isDesktop()) {
-      setIsVisible(true);
-      setView("info_members");
+      showInfoPanel();
+      openMembersTab();
     }
   };
 }

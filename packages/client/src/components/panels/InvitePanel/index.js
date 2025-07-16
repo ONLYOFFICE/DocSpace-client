@@ -68,7 +68,6 @@ const InvitePanel = ({
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
-  isRoomMembersPanelOpen,
   setInviteLanguage,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
@@ -354,9 +353,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isRoomMembersPanelOpen) {
-        updateInfoPanelMembers(t);
-      }
+      updateInfoPanelMembers();
     } catch (err) {
       let error = err;
 
@@ -605,7 +602,6 @@ export default inject(
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -638,7 +634,6 @@ export default inject(
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

@@ -1,8 +1,11 @@
-import { TFunction } from "i18next";
+import { TTranslation } from "../types/index";
 
 import { FileType } from "../enums";
 
-export const getFileTypeName = (fileType: FileType | string, t: TFunction) => {
+export const getFileTypeName = (
+  fileType: FileType | string,
+  t: TTranslation,
+) => {
   switch (fileType) {
     case FileType.Unknown:
       return t("Common:Unknown");

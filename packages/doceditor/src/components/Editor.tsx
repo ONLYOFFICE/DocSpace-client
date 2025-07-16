@@ -226,19 +226,23 @@ const Editor = ({
     }
   }
 
-  // if (newConfig.document && newConfig.document.info)
-  //  newConfig.document.info.favorite = false;
-  const url = typeof window !== "undefined" ? window.location.href : "";
+  try {
+    // if (newConfig.document && newConfig.document.info)
+    //  newConfig.document.info.favorite = false;
+    const url = typeof window !== "undefined" ? window.location.href : "";
 
-  if (url.indexOf("anchor") !== -1) {
-    const splitUrl = url.split("anchor=");
-    const decodeURI = decodeURIComponent(splitUrl[1]);
-    const obj = JSON.parse(decodeURI);
+    if (url.indexOf("anchor") !== -1) {
+      const splitUrl = url.split("anchor=");
+      const decodeURI = decodeURIComponent(splitUrl[1]);
+      const obj = JSON.parse(decodeURI);
 
-    if (newConfig.editorConfig)
-      newConfig.editorConfig.actionLink = {
-        action: obj.action,
-      };
+      if (newConfig.editorConfig)
+        newConfig.editorConfig.actionLink = {
+          action: obj.action,
+        };
+    }
+  } catch (error) {
+    console.error(error);
   }
 
   newConfig.events = {

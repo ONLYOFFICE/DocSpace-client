@@ -3483,6 +3483,7 @@ class FilesStore {
         watermark,
         formFillingStatus,
         customFilterEnabled,
+        customFilterEnabledBy,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3663,6 +3664,7 @@ class FilesStore {
         watermark,
         formFillingStatus,
         customFilterEnabled,
+        customFilterEnabledBy,
       };
     });
   };

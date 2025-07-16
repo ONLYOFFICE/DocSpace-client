@@ -31,6 +31,11 @@ import { Tabs } from "@docspace/shared/components/tabs";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_DOCUMENTS,
+  FILTER_RECENT,
+} from "@docspace/shared/utils/filterConstants";
 
 const MyDocumentsTabs = ({
   isPersonalRoom,
@@ -63,18 +68,16 @@ const MyDocumentsTabs = ({
 
     const recent = e.id === "recent";
 
-    const filterStorageItem = user?.id
-      ? recent
-        ? localStorage.getItem(`UserFilterRecent=${user.id}`)
-        : localStorage.getItem(`UserFilter=${user.id}`)
-      : null;
+    if (user?.id) {
+      const filterObj = recent
+        ? getUserFilter(`${FILTER_RECENT}=${user.id}`)
+        : getUserFilter(`${FILTER_DOCUMENTS}=${user.id}`);
 
-    if (filterStorageItem) {
-      const splitFilter = filterStorageItem.split(",");
+      if (filterObj?.sortBy) filter.sortBy = filterObj.sortBy;
+      if (filterObj?.sortOrder) filter.sortOrder = filterObj.sortOrder;
 
-      filter.sortBy = splitFilter[0];
-      filter.sortOrder = splitFilter[1];
-    } else if (recent) filter.sortBy = "LastOpened";
+      if (recent && !filterObj.sortBy) filter.sortBy = "LastOpened";
+    }
 
     if (recent) {
       filter.folder = e.id;

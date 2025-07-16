@@ -3,7 +3,7 @@
   "content": "Submitting the responses",
   "content_en_sha1_hash": "680dd562c5f8ce531f4966abe2f99fa0c3763345",
   "created_at": "2025-05-19T21:30:55.141Z",
-  "updated_at": "2025-05-24T10:56:10.605Z",
+  "updated_at": "2025-07-10T11:11:07.131Z",
   "comment": {
     "text": "\"This translation key is used for the title of a dialog that provides tips on submitting form responses. The text will be displayed in the dialog's header and appears to be associated with button or form submission actions.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 48,
+      "line_number": 51,
       "context": "},\n ],\n },\n {\n id: 3,\n header: t(\"FormFillingTipsDialog:HeaderSubmitting\"),\n description: t(\"FormFillingTipsDialog:TitleSubmitting\"),\n key: \"form-filling-submitting\",\n placement: \"bottom\",\n position: [\n {",
       "module": "/packages/shared"
     }
@@ -102,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '응답 제출 중' is a literal translation of 'Submitting the responses' but implies an ongoing process.  'Submitting the responses' is often used as a label or title indicating the action of submitting, not necessarily that it's currently in progress.  A more appropriate translation might convey the action of submission without the 'in progress' connotation.",
+          "description": "The translation '응답 제출 중' is a literal translation of \"Submitting the responses\". While understandable, a more natural and commonly used phrase in Korean for this context would be something like '응답 제출' or '응답을 제출합니다'. '응답 제출 중' implies an ongoing action, which might not be the most appropriate tone.",
           "suggestion": "응답 제출"
         }
       ],
@@ -111,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ການສະເໜີຄໍາຕອບ' (kan sa-ner kham-top) is a literal translation that doesn't fully capture the nuance of 'Submitting the responses'. It implies 'presenting answers' rather than the action of submitting them. A more accurate translation would better convey the action of sending or delivering the responses.",
+          "suggestion": "Consider alternatives like 'ສົ່ງຄໍາຕອບ' (song kham-top - sending answers) or 'ຖອນຄໍາຕອບ' (thoun kham-top - submitting/handing in answers)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Trimitere răspunsuri' is a literal translation but doesn't flow naturally in Romanian. A more natural phrasing would convey the action of *sending* or *uploading* responses.",
-          "suggestion": "Consider alternatives like 'Încărcare răspunsuri' (Uploading responses) or 'Transmitere răspunsuri' (Transmitting responses)."
+          "description": "The translation 'Trimitere răspunsuri' is a literal translation but sounds unnatural in Romanian. A more natural phrasing would be 'Înregistrarea răspunsurilor' or 'Trimiteți răspunsurile'.",
+          "suggestion": "Înregistrarea răspunsurilor"
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රතිචාරය යොමු කිරීම' while understandable, doesn't perfectly capture the nuance of 'Submitting the responses'. A more precise translation would reflect the action of sending or processing the responses, rather than just 'referring' to them.",
-          "suggestion": "Consider 'ප්‍රතිචාරය ඉදිරිපත් කිරීම' (Prathicharaya Edhiripath karama) which means 'Presenting the responses' or 'Submitting the responses' more directly. Alternatively, 'ප්‍රතිචාරය යැවීම' (Prathicharaya Yavama) which means 'Sending the responses' could also be a viable option."
+          "description": "While 'ප්‍රතිචාරය යොමු කිරීම' is understandable, a more accurate and natural translation of 'Submitting the responses' would be something like 'පිළිතුරු సమర్పණය කිරීම' (Pilithuru samarpana karamu) or 'ගොනුව సమర్పණය කිරීම' (Gonuva samarpana karamu) depending on the context.",
+          "suggestion": "පිළිතුරු సమర్పණය කිරීම"
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Gửi câu trả lời' is understandable, it's a literal translation and not the most natural way to express 'Submitting the responses' in Vietnamese. It focuses on 'sending' the answers rather than the act of submission.",
-          "suggestion": "Đang gửi phản hồi"
+          "description": "While \"Gửi câu trả lời\" is understandable, it's a very literal translation of \"Submitting the responses.\" A more natural and contextually appropriate translation would convey the action of sending or processing the filled form.",
+          "suggestion": "Consider alternatives like \"Đang gửi\" (Sending), \"Đang xử lý\" (Processing), or \"Đang hoàn tất\" (Completing)."
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"提交回答\" is technically correct, it lacks the nuance of \"Submitting the responses\". It focuses on submitting *answers* rather than the act of submitting the *responses* as a whole. It's slightly too literal.",
-          "suggestion": "提交响应"
+          "description": "While \"提交回答\" (Tíjiāo huídá) is understandable, it's a slightly literal translation and not the most natural phrasing for a dialog header. \"正在提交回答\" (Zhèngzài tíjiāo huídá) or simply \"提交中\" (Tíjiān zhōng - Submitting) would be more common and idiomatic.",
+          "suggestion": "提交中"
         }
       ],
       "approved_at": null

@@ -210,6 +210,7 @@ const HistoryMainContent = (props) => {
     isSettingNotPaid,
     isLoadingDownloadReport,
     tfaEnabled,
+    withCampaign,
   } = props;
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
@@ -257,6 +258,13 @@ const HistoryMainContent = (props) => {
     };
     saveToSessionStorage("storagePeriod", newSettings);
   }, [loginLifeTime, auditLifeTime]);
+
+  const handleMouseDown = (e) => {
+    if (e.button === 0 || e.button === 1) {
+      getReport();
+      e.preventDefault();
+    }
+  };
 
   const navigateTo2FA = () => {
     window.location.href = loginHistoryTranslates.Link;
@@ -329,7 +337,7 @@ const HistoryMainContent = (props) => {
               saveButtonLabel={saveButtonLabel}
               cancelButtonLabel={cancelButtonLabel}
               showReminder={loginLifeTimeReminder}
-              reminderText={t("YouHaveUnsavedChanges")}
+              reminderText={t("Common:YouHaveUnsavedChanges")}
               displaySettings={true}
               hasScroll={false}
               isDisabled={isSettingNotPaid}
@@ -352,7 +360,7 @@ const HistoryMainContent = (props) => {
               saveButtonLabel={saveButtonLabel}
               cancelButtonLabel={cancelButtonLabel}
               showReminder={auditLifeTimeReminder}
-              reminderText={t("YouHaveUnsavedChanges")}
+              reminderText={t("Common:YouHaveUnsavedChanges")}
               displaySettings={true}
               hasScroll={false}
               isDisabled={isSettingNotPaid}
@@ -368,7 +376,7 @@ const HistoryMainContent = (props) => {
           label={downloadReport}
           size="normal"
           minWidth="auto"
-          onClick={() => getReport()}
+          onMouseDown={handleMouseDown}
           isDisabled={isSettingNotPaid}
           isLoading={isLoadingDownloadReport}
         />

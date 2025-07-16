@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -82,7 +82,7 @@ export default {
  * Basic template for Filter stories
  * This template wraps the Filter component in a container with fixed height
  */
-const Template: Story<FilterProps> = (args) => {
+const Template: StoryFn<FilterProps> = (args) => {
   return (
     <Wrapper>
       <Filter {...args} />
@@ -96,16 +96,15 @@ const Template: Story<FilterProps> = (args) => {
  */
 export const DocumentTypes = Template.bind({});
 DocumentTypes.args = {
-  sortData: mockSortData,
   viewAs: "row",
   view: "row",
   getSortData: () => mockSortData,
-  getSelectedSortData: () => ({ sortDirection: "asc", sortId: "name" }),
+  getSelectedSortData: () => ({ sortDirection: "asc", sortId: "AZ" }),
   getViewSettingsData: () => mockViewSettings,
   getSelectedFilterData: () => Promise.resolve([]),
   onSearch: (value) => console.log("Search:", value),
   onClearFilter: () => console.log("Clear filter"),
-  onChangeViewAs: (view) => console.log("View changed to:", view),
+  onChangeViewAs: () => console.log("View changed"),
   onSort: (key, direction) => console.log("Sort by:", key, direction),
   onFilter: (items) => console.log("Filter applied:", items),
   onSortButtonClick: (value) => console.log("Sort button clicked:", value),
@@ -152,11 +151,7 @@ DocumentTypes.args = {
         isLast: true,
       },
     ]),
-  selectedFilterData: [],
-  selectedSortData: [],
-  viewSelectorVisible: true,
-  deviceType: DeviceType.desktop,
-  placeholder: "Search...",
+  initSelectedFilterData: [],
 };
 
 DocumentTypes.parameters = {
@@ -224,7 +219,7 @@ WithSelectedFilters.args = {
         isSelected: false,
       },
     ]),
-  selectedFilterData: [],
+  initSelectedFilterData: [],
 };
 
 WithSelectedFilters.parameters = {
@@ -331,7 +326,7 @@ RoomsFilter.args = {
       },
       {
         id: "filter_room-all",
-        key: FilterKeys.withoutRoom,
+        key: FilterKeys.withContent,
         group: FilterGroups.filterRoom,
         label: "All Rooms",
       },

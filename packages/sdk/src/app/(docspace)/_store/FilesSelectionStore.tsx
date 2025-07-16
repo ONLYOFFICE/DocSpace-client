@@ -60,7 +60,7 @@ export class FilesSelectionStore {
       return;
     }
 
-    this.selection = items ? items : [];
+    this.selection = items || [];
   };
 
   addSelection = (item: TFileItem | TFolderItem) => {
@@ -94,6 +94,7 @@ export class FilesSelectionStore {
     isSpreadsheet: (exst: string) => boolean,
     isPresentation: (exst: string) => boolean,
     isMasterForm: (exst: string) => boolean,
+    isDiagram: (exst: string) => boolean,
   ) => {
     const newSortedFiles: TSortedFiles = {
       documents: [],
@@ -101,6 +102,7 @@ export class FilesSelectionStore {
       presentations: [],
       masterForms: [],
       pdfForms: [],
+      diagrams: [],
       other: [],
     };
 
@@ -129,6 +131,8 @@ export class FilesSelectionStore {
           newSortedFiles.masterForms.push(item);
         } else if (isDocument(item.fileExst)) {
           newSortedFiles.documents.push(item);
+        } else if (isDiagram(item.fileExst)) {
+          newSortedFiles.diagrams.push(item);
         } else {
           newSortedFiles.other.push(item);
         }
@@ -149,8 +153,9 @@ export const FilesSelectionStoreContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const store = React.useMemo(() => new FilesSelectionStore(), []);
   return (
-    <FilesSelectionStoreContext.Provider value={new FilesSelectionStore()}>
+    <FilesSelectionStoreContext.Provider value={store}>
       {children}
     </FilesSelectionStoreContext.Provider>
   );

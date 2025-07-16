@@ -64,6 +64,10 @@ export const configureFilterByFilterParam = (
       filter.filterType = FilterType.DocumentsOnly;
       break;
 
+    case FilterType.DiagramsOnly:
+      filter.filterType = FilterType.DiagramsOnly;
+      break;
+
     case FilterType.PDFForm:
       filter.filterType = FilterType.PDFForm;
       break;

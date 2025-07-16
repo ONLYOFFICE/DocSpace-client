@@ -1,5 +1,5 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 import PlanetIcon from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import PublicRoomBar from "./index";
 import { PublicRoomBarProps } from "./PublicRoomBar.types";
@@ -31,7 +31,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<PublicRoomBarProps> = (args) => (
+const Template: StoryFn<PublicRoomBarProps> = (args) => (
   <PublicRoomBar {...args} />
 );
 

@@ -53,9 +53,10 @@ const BonusPage = ({
       logoText={logoText}
       enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
       enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
+      forEnterprisesUrl=""
+      demoOrderUrl=""
     />
   );
 };
 
 export default BonusPage;
-

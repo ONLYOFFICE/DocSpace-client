@@ -154,6 +154,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
 
 const filesMock: TFile[] = [
   {
+    shortWebUrl: "",
     isFile: true,
     access: 0,
     canShare: true,
@@ -234,6 +235,7 @@ const filesMock: TFile[] = [
       "https://api.onlyoffice.com/assets/images/docs-preview-0b9d9065d713625e222dcfeb451de62c.png",
   },
   {
+    shortWebUrl: "",
     isFile: true,
     access: 0,
     canShare: true,

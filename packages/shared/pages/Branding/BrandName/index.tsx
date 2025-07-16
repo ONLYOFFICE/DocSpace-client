@@ -28,9 +28,9 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 import classNames from "classnames";
-import { Nullable } from "types";
+import { Nullable } from "../../../types";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "../../../themes";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "../../../components/text";
@@ -153,7 +153,7 @@ export const BrandName = ({
             onCancelClick={onCancelAction}
             saveButtonLabel={t("Common:SaveButton")}
             cancelButtonLabel={t("Common:CancelButton")}
-            reminderText={t("YouHaveUnsavedChanges")}
+            reminderText={t("Common:YouHaveUnsavedChanges")}
             displaySettings
             saveButtonDisabled={isEqualText}
             disableRestoreToDefault={isEqualText}

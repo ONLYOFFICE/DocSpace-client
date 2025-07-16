@@ -79,6 +79,7 @@ export const WebhookRowContent = ({
   sectionWidth,
   webhook,
   isChecked,
+  isDisabled,
   handleToggleEnabled,
 }) => {
   return (
@@ -107,6 +108,7 @@ export const WebhookRowContent = ({
           className="toggle toggleButton"
           id="toggle id"
           isChecked={isChecked}
+          isDisabled={isDisabled}
           onChange={handleToggleEnabled}
         />
       </ToggleButtonWrapper>

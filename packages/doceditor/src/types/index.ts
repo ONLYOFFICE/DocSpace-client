@@ -121,6 +121,7 @@ export type TDocument = {
     instanceId: string;
     key: string;
     roomId: string;
+    canEditRoom: boolean;
   };
   title: string;
   token: string;
@@ -337,6 +338,7 @@ export interface SelectFolderDialogProps {
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
   organizationName: string;
+  selectedFolderId?: string | number;
 }
 
 export interface SelectFileDialogProps {
@@ -372,6 +374,7 @@ export interface SelectFileDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
+  selectedFolderId?: string | number;
 }
 
 export interface UseSocketHelperProps {

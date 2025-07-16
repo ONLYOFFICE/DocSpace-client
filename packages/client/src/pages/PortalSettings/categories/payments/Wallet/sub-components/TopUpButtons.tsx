@@ -26,10 +26,14 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { saveDeposite } from "@docspace/shared/api/portal";
+import { Text } from "@docspace/shared/components/text";
+
 import { useAmountValue } from "../context";
+import styles from "../styles/TopUpModal.module.scss";
 
 interface TopUpButtonsProps {
   currency: string;
@@ -39,6 +43,7 @@ interface TopUpButtonsProps {
   fetchTransactionHistory?: () => Promise<void>;
   onClose: () => void;
   walletCustomerEmail?: boolean;
+  walletCustomerStatusNotActive?: boolean;
 }
 
 const TopUpButtons: React.FC<TopUpButtonsProps> = ({
@@ -49,52 +54,60 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
   walletCustomerEmail,
   setIsLoading,
   isLoading,
+  walletCustomerStatusNotActive,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
   const { amount } = useAmountValue();
 
-  const isButtonDisabled = !amount || !walletCustomerEmail;
+  const isButtonDisabled =
+    walletCustomerStatusNotActive || !amount || !walletCustomerEmail;
+
   const onTopUp = async () => {
     try {
       setIsLoading(true);
 
       const res = await saveDeposite(+amount, currency);
 
-      if (!res) return;
-      if (!res.includes("ok")) throw new Error(res);
+      if (!res) {
+        throw new Error(t("Common:UnexpectedError"));
+      }
 
       await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);
 
+      toastr.success(t("WalletToppedUp"));
       onClose();
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as unknown as string);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <>
-      <Button
-        key="OkButton"
-        label={t("TopUp")}
-        size={ButtonSize.normal}
-        primary
-        scale
-        isDisabled={isButtonDisabled}
-        onClick={onTopUp}
-        isLoading={isLoading}
-      />
-      <Button
-        key="CancelButton"
-        label={t("Common:CancelButton")}
-        size={ButtonSize.normal}
-        scale
-        onClick={onClose}
-        isDisabled={isLoading}
-      />
-    </>
+    <div className={styles.buttonContainerWrapper}>
+      {isLoading ? <Text>{t("TopUpTakeSomeTimeToComplete")}</Text> : null}
+      <div className={styles.buttonContainer}>
+        <Button
+          key="OkButton"
+          label={t("TopUp")}
+          size={ButtonSize.normal}
+          primary
+          scale
+          isDisabled={isButtonDisabled}
+          onClick={onTopUp}
+          isLoading={isLoading}
+        />
+        <Button
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          scale
+          onClick={onClose}
+          isDisabled={isLoading}
+        />
+      </div>
+    </div>
   );
 };
 

@@ -37,9 +37,9 @@ export const useStopFillingDialog = () => {
     setFormId(null);
   }, []);
 
-  const openStopFillingDialog = useCallback((formId: string | number) => {
+  const openStopFillingDialog = useCallback((f: string | number) => {
     setStopFillingDialogVisible(true);
-    setFormId(formId);
+    setFormId(f);
   }, []);
 
   const onSubmitStopFilling = useCallback(() => {

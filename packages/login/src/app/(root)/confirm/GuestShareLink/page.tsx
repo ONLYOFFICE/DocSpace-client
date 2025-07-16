@@ -26,7 +26,6 @@
 
 import {
   getSettings,
-  getUser,
   getUserByEmail,
   getUserFromConfirm,
 } from "@/utils/actions";
@@ -35,15 +34,19 @@ import { cookies } from "next/headers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getStringFromSearchParams } from "@/utils";
 
-import GuestShareLinkForm from "./page.client";
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
+import { logger } from "logger.mjs";
+import GuestShareLinkForm from "./page.client";
 
 type GuestShareLinkProps = {
   searchParams: Promise<{ [key: string]: string }>;
 };
 
 async function Page(props: GuestShareLinkProps) {
-  const searchParams = await props.searchParams;
+  logger.info("GuestShareLink page");
+
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const uid = searchParams.uid;
   const email = searchParams.email;
   const confirmKey = getStringFromSearchParams(searchParams);
@@ -65,12 +68,12 @@ async function Page(props: GuestShareLinkProps) {
         displayName={initiator?.displayName}
         culture={culture}
       />
-      {settings && typeof settings !== "string" && (
+      {settings && typeof settings !== "string" ? (
         <GuestShareLinkForm
           guestDisplayName={guest?.displayName}
           guestAvatar={guest?.avatar}
         />
-      )}
+      ) : null}
     </>
   );
 }

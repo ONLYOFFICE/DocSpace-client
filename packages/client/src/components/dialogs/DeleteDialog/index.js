@@ -52,6 +52,7 @@ const DeleteDialogComponent = (props) => {
     deleteRoomsAction,
     isPersonalRoom,
     isRoom,
+    isTemplatesFolder,
     selection: selectionProps,
   } = props;
 
@@ -237,7 +238,7 @@ const DeleteDialogComponent = (props) => {
       );
     }
 
-    if (isRoom) {
+    if (isRoom || isTemplatesFolder) {
       return isSingle ? (
         isFolder ? (
           <>
@@ -337,8 +338,13 @@ export default inject(
       setSelected,
     } = filesStore;
     const { deleteAction, deleteRoomsAction } = filesActionsStore;
-    const { isPrivacyFolder, isRecycleBinFolder, isPersonalRoom, isRoom } =
-      treeFoldersStore;
+    const {
+      isPrivacyFolder,
+      isRecycleBinFolder,
+      isPersonalRoom,
+      isRoom,
+      isTemplatesFolderRoot,
+    } = treeFoldersStore;
 
     const {
       deleteDialogVisible: visible,
@@ -374,6 +380,7 @@ export default inject(
       deleteRoomsAction,
       isPersonalRoom,
       isRoom,
+      isTemplatesFolder: isTemplatesFolderRoot,
     };
   },
 )(observer(DeleteDialog));

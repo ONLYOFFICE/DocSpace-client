@@ -243,7 +243,7 @@ const DNSSettingsComponent = (props) => {
           <FieldContainer
             id="fieldContainerDNSSettings"
             className="field-container-width settings_unavailable"
-            labelText={`${t("YourCurrentDomain")}`}
+            labelText={`${t("Common:YourCurrentDomain")}`}
             isVertical
           >
             <TextInput

@@ -3,7 +3,7 @@
   "content": "Submit a deletion request",
   "content_en_sha1_hash": "ed0ccae882e2f245b96f3b0c590e35d64ba7c4c7",
   "created_at": "2025-05-19T21:30:57.481Z",
-  "updated_at": "2025-05-26T07:57:33.010Z",
+  "updated_at": "2025-06-30T12:20:31.763Z",
   "comment": {
     "text": "This translation key is used for the confirmation message when submitting a deletion request. It appears on a modal dialog in a UI component and informs users of the action being taken, providing clarity and transparency.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 108,
+      "line_number": 107,
       "context": "displayType={ModalDialogType.modal}\n autoMaxHeight\n >\n <ModalDialog.Header>\n {isWizardCompleted\n ? t(\"SubmitDelete\")\n : t(\"Settings:DeletePortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>",
       "module": "/packages/management"
     }

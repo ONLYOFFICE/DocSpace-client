@@ -40,6 +40,12 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_DOCUMENTS,
+  FILTER_TRASH,
+} from "@docspace/shared/utils/filterConstants";
+
 import Banner from "./Banner";
 import Items from "./Items";
 
@@ -71,6 +77,8 @@ const ArticleBodyContent = (props) => {
     userId,
     isFrame,
     setContactsTab,
+
+    displayBanners,
   } = props;
 
   const location = useLocation();
@@ -98,14 +106,11 @@ const ArticleBodyContent = (props) => {
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
 
-          const filterStorageItem =
-            userId && localStorage.getItem(`UserFilter=${userId}`);
+          if (userId) {
+            const filterObj = getUserFilter(`${FILTER_DOCUMENTS}=${userId}`);
 
-          if (filterStorageItem) {
-            const splitFilter = filterStorageItem.split(",");
-
-            myFilter.sortBy = splitFilter[0];
-            myFilter.sortOrder = splitFilter[1];
+            if (filterObj?.sortBy) myFilter.sortBy = filterObj.sortBy;
+            if (filterObj?.sortOrder) myFilter.sortOrder = filterObj.sortOrder;
           }
 
           params = myFilter.toUrlParams();
@@ -129,14 +134,13 @@ const ArticleBodyContent = (props) => {
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
 
-          const filterStorageTrash =
-            userId && localStorage.getItem(`UserFilterTrash=${userId}`);
+          if (userId) {
+            const filterTrashObj = getUserFilter(`${FILTER_TRASH}=${userId}`);
 
-          if (filterStorageTrash) {
-            const splitFilterTrash = filterStorageTrash.split(",");
-
-            recycleBinFilter.sortBy = splitFilterTrash[0];
-            recycleBinFilter.sortOrder = splitFilterTrash[1];
+            if (filterTrashObj?.sortBy)
+              recycleBinFilter.sortBy = filterTrashObj.sortBy;
+            if (filterTrashObj?.sortOrder)
+              recycleBinFilter.sortOrder = filterTrashObj.sortOrder;
           }
 
           params = recycleBinFilter.toUrlParams();
@@ -289,7 +293,8 @@ const ArticleBodyContent = (props) => {
       showText &&
       !firstLoad &&
       campaigns.length > 0 &&
-      !isFrame ? (
+      !isFrame &&
+      displayBanners ? (
         <Banner />
       ) : null}
     </>
@@ -339,6 +344,8 @@ export default inject(
       setIsBurgerLoading,
       currentDeviceType,
       isFrame,
+
+      displayBanners,
     } = settingsStore;
 
     const { campaigns } = campaignsStore;
@@ -372,6 +379,8 @@ export default inject(
       campaigns,
       isFrame,
       setContactsTab: peopleStore.usersStore.setContactsTab,
+
+      displayBanners,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

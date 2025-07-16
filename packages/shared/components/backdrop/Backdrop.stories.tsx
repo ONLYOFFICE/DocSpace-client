@@ -65,7 +65,7 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       defaultValue: false,
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "" },
       },
     },
     zIndex: {
@@ -73,8 +73,8 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       control: "number",
       defaultValue: 203,
       table: {
-        type: { summary: "number" },
-        defaultValue: { summary: 203 },
+        type: { summary: "string" },
+        defaultValue: { summary: "203" },
       },
     },
     className: {
@@ -105,7 +105,7 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       defaultValue: false,
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     isAside: {
@@ -115,7 +115,7 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       defaultValue: false,
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     withoutBlur: {
@@ -125,7 +125,7 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       defaultValue: false,
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     withoutBackground: {
@@ -135,7 +135,7 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       defaultValue: false,
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     isModalDialog: {
@@ -145,7 +145,7 @@ The Backdrop component is designed to be highly flexible and can be used in vari
       defaultValue: false,
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     onClick: {

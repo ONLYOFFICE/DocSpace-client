@@ -46,7 +46,8 @@ import { cookies } from "next/headers";
 async function Page(props: {
   searchParams: Promise<{ [key: string]: string }>;
 }) {
-  const searchParams = await props.searchParams;
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const clientId = searchParams.client_id;
 
   const [settings, thirdParty, capabilities, ssoSettings, oauthData] =
@@ -80,56 +81,52 @@ async function Page(props: {
 
   const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
-          <>
-            <GreetingLoginContainer
-              greetingSettings={settings.greetingSettings}
-              culture={culture}
-            />
+  return settings && typeof settings !== "string" ? (
+    <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>
+      <>
+        <GreetingLoginContainer
+          greetingSettings={settings.greetingSettings}
+          culture={culture}
+        />
 
-            <FormWrapper id="login-form">
-              <Login>
-                <LoginForm
-                  hashSettings={settings?.passwordHash}
-                  cookieSettingsEnabled={settings?.cookieSettingsEnabled}
-                  clientId={clientId}
-                  client={oauthData?.client}
-                  reCaptchaPublicKey={settings?.recaptchaPublicKey}
-                  reCaptchaType={settings?.recaptchaType}
-                  ldapDomain={capabilities?.ldapDomain}
-                  ldapEnabled={capabilities?.ldapEnabled || false}
-                  baseDomain={settings?.baseDomain}
-                />
-                {!clientId && (
-                  <ThirdParty
-                    thirdParty={thirdParty}
-                    capabilities={capabilities}
-                    ssoExists={ssoExists}
-                    ssoUrl={ssoUrl}
-                    hideAuthPage={hideAuthPage}
-                    oauthDataExists={oauthDataExists}
-                  />
-                )}
-                {settings.enableAdmMess && <RecoverAccess />}
-                {settings.enabledJoin && (
-                  <Register
-                    id="login_register"
-                    enabledJoin
-                    trustedDomains={settings.trustedDomains}
-                    trustedDomainsType={settings.trustedDomainsType}
-                    isAuthenticated={false}
-                  />
-                )}
-              </Login>
-            </FormWrapper>
-          </>
-        </LoginContainer>
-      )}
-    </>
-  );
+        <FormWrapper id="login-form">
+          <Login>
+            <LoginForm
+              hashSettings={settings?.passwordHash}
+              cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+              clientId={clientId}
+              client={oauthData?.client}
+              reCaptchaPublicKey={settings?.recaptchaPublicKey}
+              reCaptchaType={settings?.recaptchaType}
+              ldapDomain={capabilities?.ldapDomain}
+              ldapEnabled={capabilities?.ldapEnabled || false}
+              baseDomain={settings?.baseDomain}
+            />
+            {!clientId ? (
+              <ThirdParty
+                thirdParty={thirdParty}
+                capabilities={capabilities}
+                ssoExists={ssoExists}
+                ssoUrl={ssoUrl}
+                hideAuthPage={hideAuthPage}
+                oauthDataExists={oauthDataExists}
+              />
+            ) : null}
+            {settings.enableAdmMess ? <RecoverAccess /> : null}
+            {settings.enabledJoin ? (
+              <Register
+                id="login_register"
+                enabledJoin
+                trustedDomains={settings.trustedDomains}
+                trustedDomainsType={settings.trustedDomainsType}
+                isAuthenticated={false}
+              />
+            ) : null}
+          </Login>
+        </FormWrapper>
+      </>
+    </LoginContainer>
+  ) : null;
 }
 
 export default Page;

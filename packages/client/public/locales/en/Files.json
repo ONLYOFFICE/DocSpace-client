@@ -98,7 +98,7 @@
   "FolderRenamed": "The folder '{{folderTitle}}' is renamed to '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Folder <1>{{folderTitle}}</1> created",
   "FormRoomCreationLimit": "Creation based on several files and folders is not available for this type of room. To create such a room, go to the {{sectionName}} section or use one of the PDF forms.",
-  "GeneralLinkDeletedSuccessfully": "New general link created successfully",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "New general link created successfully",
   "GoToMyRooms": "Go to rooms",
   "GoToSection": "Go to {{sectionName}}",
   "Index": "Index",

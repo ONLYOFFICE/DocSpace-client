@@ -3,7 +3,7 @@
   "content": "Rooms created by this user will be automatically assigned to you. To reassign the rooms to another person, click the corresponding link below.",
   "content_en_sha1_hash": "4fcfd1274d07f6576a2069f80370577c4c19ada8",
   "created_at": "2025-05-19T21:30:56.931Z",
-  "updated_at": "2025-05-24T14:03:35.052Z",
+  "updated_at": "2025-06-30T12:20:31.186Z",
   "comment": {
     "text": "This translation key describes a message that appears when reassigning user types, informing users that rooms they create will be automatically assigned to them and providing a link to change the room assignment again. It is displayed in a dialog component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 167,
+      "line_number": 160,
       "context": ") : null}\n \n <Text className=\"body-text\">\n {isDowngradeToUser ? (\n <Trans\n i18nKey=\"DataReassignmentInfo\"\n ns=\"ChangeUserTypeDialog\"\n t={t}\n />\n ) : (\n <>",
       "module": "/packages/client"
     }

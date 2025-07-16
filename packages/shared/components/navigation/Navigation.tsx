@@ -88,6 +88,7 @@ const Navigation = ({
   guidAnimationVisible,
   setGuidAnimationVisible,
   isContextButtonVisible,
+  isPlusButtonVisible,
 
   ...rest
 }: TNavigationProps) => {
@@ -268,6 +269,7 @@ const Navigation = ({
                 isFrame={isFrame}
                 isContextButtonVisible={isContextButtonVisible}
                 isPublicRoom={isPublicRoom}
+                isPlusButtonVisible={isPlusButtonVisible}
               />
             </>
           ) : null}
@@ -330,6 +332,7 @@ const Navigation = ({
               guidAnimationVisible={guidAnimationVisible}
               setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
+              isPlusButtonVisible={isPlusButtonVisible}
             />
           </div>
 

@@ -83,6 +83,7 @@ const PasswordStrength = (props) => {
     passwordStrengthSettingsUrl,
     currentDeviceType,
     getPortalPasswordSettings,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const navigate = useNavigate();
@@ -141,6 +142,12 @@ const PasswordStrength = (props) => {
       setUseSpecialSymbols(passwordSettings.specSymbols);
     }
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("PasswordStrength");
+  }, [currentDeviceType, isLoading, onSettingsSkeletonNotShown]);
 
   useEffect(() => {
     load();
@@ -311,7 +318,7 @@ const PasswordStrength = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings

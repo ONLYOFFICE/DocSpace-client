@@ -84,7 +84,7 @@ A dropdown component that appears as a link and expands to show a menu of option
         "Quick way to make text bold (equivalent to fontWeight: 'bold'). Takes precedence over fontWeight if both are specified",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     isTextOverflow: {
@@ -93,7 +93,7 @@ A dropdown component that appears as a link and expands to show a menu of option
         "When true, long text will be truncated with ellipsis (...). Useful for fixed-width containers",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     color: {
@@ -126,7 +126,7 @@ A dropdown component that appears as a link and expands to show a menu of option
       description: "Disables the dropdown functionality",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     withExpander: {
@@ -134,7 +134,7 @@ A dropdown component that appears as a link and expands to show a menu of option
       description: "Shows/hides the expander icon",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     isSemitransparent: {
@@ -142,7 +142,7 @@ A dropdown component that appears as a link and expands to show a menu of option
       description: "Makes the link semi-transparent",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     manualWidth: {

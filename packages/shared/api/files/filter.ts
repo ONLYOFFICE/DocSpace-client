@@ -32,6 +32,7 @@ import queryString from "query-string";
 import { ApplyFilterOption, FilterType } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
@@ -71,6 +72,7 @@ const EXTENSION = "extension";
 const SEARCH_AREA = "searchArea";
 const KEY = "key";
 const DATE = "date";
+const TAGS = "tags";
 
 // TODO: add next params
 // subjectGroup bool
@@ -98,6 +100,7 @@ const getOtherSearchParams = () => {
     SEARCH_AREA,
     KEY,
     DATE,
+    TAGS,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -111,6 +114,21 @@ const getOtherSearchParams = () => {
   });
 
   return searchParams.toString();
+};
+
+export const typeDefinition = {
+  filterType: Object.values(FilterType).map((value) => String(value)), // enum FilterType
+  applyFilterOption: Object.values(ApplyFilterOption), // enum ApplyFilterOption
+  sortBy: [
+    "DateAndTime",
+    "DateAndTimeCreation",
+    "AZ",
+    "Type",
+    "Size",
+    "Title",
+    "Author",
+  ] as TSortBy[], // type TSortBy
+  sortOrder: ["ascending", "descending"] as TSortOrder[], // type TSortOrder
 };
 
 class FilesFilter {
@@ -156,14 +174,14 @@ class FilesFilter {
     return new FilesFilter(DEFAULT_PAGE, pageCount, total);
   }
 
-  static getFilter(location: Location) {
+  static getFilter(location: Location): FilesFilter {
     if (!location) return this.getDefault();
 
     const urlFilter = getObjectByLocation(location);
 
-    if (!urlFilter) return null;
-
     const defaultFilter = FilesFilter.getDefault();
+
+    if (!urlFilter) return defaultFilter;
 
     const filterType =
       (urlFilter[FILTER_TYPE] && +urlFilter[FILTER_TYPE]) ||
@@ -277,6 +295,8 @@ class FilesFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -293,7 +313,7 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
-    } = this;
+    } = fixedValidObject;
 
     const isFilterSet =
       filterType ||
@@ -331,6 +351,8 @@ class FilesFilter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -348,7 +370,7 @@ class FilesFilter {
       extension,
       searchArea,
       key,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: { [key: string]: unknown } = {};
 

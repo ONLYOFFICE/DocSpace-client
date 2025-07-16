@@ -30,9 +30,14 @@ import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { getConvertedSize } from "@docspace/shared/utils/common";
+import {
+  calculateTotalPrice,
+  getConvertedSize,
+} from "@docspace/shared/utils/common";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { DeviceType } from "@docspace/shared/enums";
 
+import CheckIcon from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
 
 import styles from "./styles/AdditionalStorage.module.scss";
@@ -61,6 +66,12 @@ type AdditionalStorageProps = {
   nextStoragePlanSize?: number;
   storageExpiryDate?: string;
   isCardLinkedToPortal?: boolean;
+  hasStorageSubscription?: boolean;
+  isGracePeriod?: boolean;
+  hasScheduledStorageChange?: boolean;
+  isTablet?: boolean;
+  isMobile?: boolean;
+  formatWalletCurrency?: (amount: number, fractionDigits?: number) => string;
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
@@ -76,9 +87,15 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   nextStoragePlanSize,
   storageExpiryDate,
   isCardLinkedToPortal,
+  hasStorageSubscription,
+  isGracePeriod,
+  hasScheduledStorageChange,
+  isTablet,
+  isMobile,
+  formatWalletCurrency,
 }) => {
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
-  const { formatWalletCurrency, t } = useServicesActions();
+  const { t } = useServicesActions();
 
   const handleToggle = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -86,7 +103,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     const dataset = (e.currentTarget as HTMLElement).dataset;
     const handleDisabled = dataset.disabled?.toLowerCase() === "true";
 
-    if (handleDisabled) return;
+    if (handleDisabled || !hasStorageSubscription) return;
 
     e.preventDefault();
     e.stopPropagation();
@@ -94,7 +111,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     const isEnabled = dataset.enabled?.toLowerCase() === "true";
     const id = dataset.id;
 
-    onToggle(id, isEnabled);
+    onToggle?.(id!, !isEnabled);
   };
 
   const textTooltip = () => {
@@ -122,89 +139,138 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   return (
     <div>
       <Text className={styles.storageDescription}>
-        {isPayer ? t("SelectAndPayServices") : t("ServiceConfigurationNotice")}
+        {isPayer || !isCardLinkedToPortal
+          ? t("ConnectAndConfigureServices")
+          : t("ServiceConfigurationNotice")}
       </Text>
       {isCardLinkedToPortal ? (
         <div className={styles.payerContainer}>
-          <PayerInformation />
+          <PayerInformation
+            style={undefined}
+            theme={undefined}
+            user={undefined}
+            accountLink={undefined}
+            payerInfo={undefined}
+            email={undefined}
+            isNotPaidPeriod={undefined}
+            isStripePortalAvailable={undefined}
+          />
         </div>
       ) : null}
-      {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
-        if (!item.title || !item.image) return null;
-        const eventDisabled = isDisabled || item.cancellation;
+      <div
+        className={classNames(styles.servicesWrapper, {
+          [styles.servicesWrapperMobile]: isMobile,
+          [styles.servicesWrapperTablet]: isTablet,
+        })}
+      >
+        {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
+          if (!item.title || !item.image) return null;
+          const eventDisabled =
+            isGracePeriod || isDisabled || hasScheduledStorageChange;
 
-        return (
-          <div
-            key={item.id}
-            className={classNames(styles.serviceContainer, {
-              [styles.disabled]: isDisabled,
-            })}
-            {...(!isDisabled ? { onClick } : {})}
-          >
-            <div className={styles.headerContainer}>
-              <div className={styles.iconWrapper}>
-                <div
-                  dangerouslySetInnerHTML={{ __html: item.image }}
-                  className={styles.iconsContainer}
-                />
-              </div>
-
-              <div
-                onClick={handleToggle}
-                className={styles.toggleWrapper}
-                data-id={item.id}
-                data-enabled={item.enabled}
-                data-disabled={eventDisabled}
-              >
-                <ToggleButton
-                  isChecked={item.enabled}
-                  className={styles.serviceToggle}
-                  isDisabled={eventDisabled}
-                />
-              </div>
-            </div>
-            <div className={styles.contentContainer}>
-              <Text
-                fontWeight={600}
-                fontSize="14px"
-                className={styles.containerTitle}
-              >
-                {item.title}
-              </Text>
-              <Text fontSize="12px" className={styles.priceDescription}>
-                {item.priceTitle}
-              </Text>
-              {item.cancellation ? (
-                <div
-                  className={styles.changeShedule}
-                  data-tooltip-id="serviceTooltip"
-                >
-                  <InfoIcon />
-                  <Text fontWeight={600} fontSize="12px">
-                    {t("ChangeShedule")}
-                  </Text>
-
-                  <Tooltip
-                    id="serviceTooltip"
-                    place="bottom"
-                    maxWidth="300px"
-                    float
-                    getContent={textTooltip}
+          return (
+            <div
+              key={item.id}
+              className={classNames(styles.serviceContainer, {
+                [styles.disabled]: isDisabled,
+              })}
+              {...(!isDisabled ? { onClick } : {})}
+            >
+              <div className={styles.headerContainer}>
+                <div className={styles.iconWrapper}>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: item.image }}
+                    className={styles.iconsContainer}
                   />
                 </div>
-              ) : null}
-              <div className={styles.priceContainer}>
-                <Text fontSize="12px" fontWeight={600}>
-                  {t("PerStorage", {
-                    currency: formatWalletCurrency(storagePriceIncrement),
-                    amount: getConvertedSize(t, storageSizeIncrement || 0),
-                  })}
+
+                <div
+                  onClick={handleToggle}
+                  className={styles.toggleWrapper}
+                  data-id={item.id}
+                  data-enabled={item.enabled}
+                  data-disabled={eventDisabled}
+                >
+                  <ToggleButton
+                    isChecked={hasStorageSubscription}
+                    className={styles.serviceToggle}
+                    isDisabled={eventDisabled}
+                  />
+                </div>
+              </div>
+              <div className={styles.contentContainer}>
+                <Text
+                  fontWeight={600}
+                  fontSize="14px"
+                  className={styles.containerTitle}
+                >
+                  {item.title}
                 </Text>
+                <div className={styles.middleBlock}>
+                  <Text fontSize="12px" className={styles.priceDescription}>
+                    {item.priceTitle}
+                  </Text>
+
+                  {hasScheduledStorageChange ? (
+                    <div
+                      className={classNames(styles.changeShedule, {
+                        [styles.warningColor]: true,
+                      })}
+                      data-tooltip-id="serviceTooltip"
+                    >
+                      <InfoIcon />
+                      <Text fontWeight={600} fontSize="12px">
+                        {t("ChangeShedule")}
+                      </Text>
+
+                      <Tooltip
+                        id="serviceTooltip"
+                        place="bottom"
+                        maxWidth="300px"
+                        float
+                        getContent={textTooltip}
+                      />
+                    </div>
+                  ) : null}
+                  {!hasScheduledStorageChange && currentStoragePlanSize! > 0 ? (
+                    <div
+                      className={classNames(styles.changeShedule, {
+                        [styles.greenColor]: true,
+                      })}
+                    >
+                      <CheckIcon />
+                      <Text>
+                        {t("CurrentPaymentMonth", {
+                          price: formatWalletCurrency!(
+                            calculateTotalPrice(
+                              currentStoragePlanSize!,
+                              storagePriceIncrement!,
+                            ),
+                            2,
+                          ),
+                          size: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
+                        })}
+                      </Text>
+                    </div>
+                  ) : null}
+
+                  <div className={styles.priceContainer}>
+                    <Text fontSize="12px" fontWeight={600}>
+                      {t("PerStorage", {
+                        currency: formatWalletCurrency!(
+                          storagePriceIncrement!,
+                          2,
+                        ),
+                        amount: getConvertedSize(t, storageSizeIncrement || 0),
+                      })}
+                    </Text>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -214,19 +280,31 @@ export default inject(
     paymentStore,
     currentTariffStatusStore,
     currentQuotaStore,
-    servicesStore,
+    settingsStore,
   }: TStore) => {
-    const { cardLinkedOnFreeTariff, isPayer, isCardLinkedToPortal } =
-      paymentStore;
     const {
+      cardLinkedOnFreeTariff,
+      isPayer,
+      isCardLinkedToPortal,
       servicesQuotasFeatures,
       storageSizeIncrement,
       storagePriceIncrement,
-    } = servicesStore;
-    const { currentStoragePlanSize, nextStoragePlanSize, storageExpiryDate } =
-      currentTariffStatusStore;
+      formatWalletCurrency,
+    } = paymentStore;
+
+    const {
+      currentStoragePlanSize,
+      nextStoragePlanSize,
+      storageExpiryDate,
+      hasStorageSubscription,
+      isGracePeriod,
+      hasScheduledStorageChange,
+    } = currentTariffStatusStore;
 
     const { isFreeTariff } = currentQuotaStore;
+    const { currentDeviceType } = settingsStore;
+    const isMobile = currentDeviceType === DeviceType.mobile;
+    const isTablet = currentDeviceType === DeviceType.tablet;
 
     return {
       servicesQuotasFeatures,
@@ -237,9 +315,15 @@ export default inject(
 
       storagePriceIncrement,
       currentStoragePlanSize,
+      hasStorageSubscription,
       nextStoragePlanSize,
       storageExpiryDate,
       isCardLinkedToPortal,
+      isGracePeriod,
+      hasScheduledStorageChange,
+      isTablet,
+      isMobile,
+      formatWalletCurrency,
     };
   },
 )(observer(AdditionalStorage));

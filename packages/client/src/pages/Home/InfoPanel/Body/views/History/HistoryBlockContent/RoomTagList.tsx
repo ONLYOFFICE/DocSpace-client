@@ -26,12 +26,11 @@
 
 import { Tag } from "@docspace/shared/components/tag";
 import { StyledHistoryBlockTagList } from "../../../styles/history";
-import { ActionByTarget } from "../FeedInfo";
 import { Feed } from "./HistoryBlockContent.types";
 
 interface HistoryRoomTagListProps {
   feed: Feed;
-  actionType: ActionByTarget<"roomTag">;
+  actionType: "create" | "delete";
 }
 
 const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {

@@ -145,7 +145,7 @@ const UserFields = (props) => {
               : !regexp.test(input);
 
             return (
-              <StyledInputWrapper key={`user-input-${input}`}>
+              <StyledInputWrapper key={`user-input-${inputs.length - index}`}>
                 <TextInput
                   type={InputType.text}
                   size={InputSize.base}

@@ -30,8 +30,8 @@ import { useTranslation } from "react-i18next";
 import {
   RackspaceSettings,
   formNames,
-} from "@docspace/shared/components/rackspace-settings";
-import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+} from "../../../../../components/rackspace-settings";
+import { useDidMount } from "../../../../../hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 

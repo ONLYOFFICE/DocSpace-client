@@ -3,7 +3,7 @@
   "content": "Archives",
   "content_en_sha1_hash": "a50710e773e144dc2bef188e769e70476bfa5af3",
   "created_at": "2025-05-19T21:30:43.070Z",
-  "updated_at": "2025-06-08T12:02:32.717Z",
+  "updated_at": "2025-07-10T11:11:06.890Z",
   "comment": {
     "text": "This translation key is used for the label \"Archives\" in a filter dropdown menu, likely found on a page or button related to document or file management. It appears in the UI when filtering by type and selecting \"ArchiveOnly\". The translator should consider how this term will be displayed to users.",
     "is_auto": true,
@@ -12,32 +12,32 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 596,
+      "line_number": 599,
       "context": "break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 596,
+      "line_number": 599,
       "context": "break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():\n label = t(\"Common:Archives\");\n break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 125,
-      "context": "key: FilterType.Pdf,\n label: getManyPDFTitle(t, false),\n },\n {\n key: FilterType.ArchiveOnly,\n label: t(`Common:Archives`),\n },\n {\n key: FilterType.ImagesOnly,\n label: t(`Common:Images`),\n },",
+      "line_number": 129,
+      "context": "key: FilterType.DiagramsOnly,\n label: t(`Common:Diagrams`),\n },\n {\n key: FilterType.ArchiveOnly,\n label: t(`Common:Archives`),\n },\n {\n key: FilterType.ImagesOnly,\n label: t(`Common:Images`),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 158,
-      "context": "label: t(\"Common:Spreadsheets\"),\n typeKey: FilterType.SpreadsheetsOnly,\n },\n {\n key: \"filter-type-archives\",\n label: t(\"Common:Archives\"),\n typeKey: FilterType.ArchiveOnly,\n },\n {\n key: \"filter-type-presentations\",\n label: t(\"Common:Presentations\"),",
+      "line_number": 178,
+      "context": "label: t(\"Common:Diagrams\"),\n typeKey: FilterType.DiagramsOnly,\n },\n {\n key: \"filter-type-archives\",\n label: t(\"Common:Archives\"),\n typeKey: FilterType.ArchiveOnly,\n },\n {\n key: \"filter-type-images\",\n label: t(\"Common:Images\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 357,
-      "context": "case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");",
+      "line_number": 359,
+      "context": "case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");",
       "module": "/packages/shared"
     }
   ],
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The singular form 'Archive' is used for the English plural 'Archives'. While 'Archive' can sometimes be acceptable, the more accurate translation, depending on context, could be 'Archive' (singular) or 'Archive' (plural, slightly modified).",
-          "suggestion": "Consider 'Archive' (if referring to a single archive) or 'Archive' (if referring to multiple archives)."
+          "description": "The singular form 'Archive' is used for the English plural 'Archives'. The appropriate German translation would depend on the intended meaning (e.g., 'Archive' for a single archive, 'Archive' for a collection of archives, or 'Archiv' for a more formal/official context).",
+          "suggestion": "Consider 'Archiv', 'Archive' (for a collection) or 'Archiv' (formal) depending on the context."
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Αρχειοθετήσεις' is a valid Greek word, it doesn't directly translate to 'Archives'. It more accurately means 'archivings' or 'recordings for archiving'. 'Archives' implies a collection or repository of historical records, which could be better represented by terms like 'Αρχεία' (Archeia) or 'Αρχειακό υλικό' (Archeiako yliko).",
+          "suggestion": "Consider 'Αρχεία' (Archeia) for a more direct translation of 'Archives', or 'Αρχειακό υλικό' (Archeiako yliko) for 'archival material'."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຮວບຮວມ\" (ruap ruam) translates to 'collect' or 'gather', not 'archives'. 'Archives' implies a collection of historical records, which requires a more specific term in Lao.",
-          "suggestion": "Consider using a term like \"ເອກະສານບັນທຶກ\" (ekasane bantuek) for 'archives' or a similar phrase conveying the meaning of historical records."
+          "description": "The Lao translation \"ຮວບຮວມ\" (ruap ruam) means 'collect' or 'assemble', not 'archives'. 'Archives' implies a collection of historical records, which requires a different nuance.",
+          "suggestion": "Consider translations like \"ເອກະສານບັນທຶກ\" (ekasan bantuek - record documents) or \"ຫ້ອງເອກະສານ\" (hong ekasan - document room), depending on the specific context."
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'සංරක්‍ෂිත' (sanrakshita) while technically meaning 'protected' or 'preserved', doesn't accurately convey the English meaning of 'Archives'. Archives refers to a collection of historical records, not necessarily something that is simply protected. A more appropriate translation might focus on 'recordings', 'historical documents', or a similar concept depending on the context.",
-          "suggestion": "Consider alternatives like 'ලේඛන ගබඩාව' (lekana gabadawa - record repository) or 'ଐතිහාසික ලේඛనాలు' (itihasika lekhanaw - historical documents)."
+          "description": "The Sinhala translation \"සංරක්‍ෂිත\" (Sanrakshita) translates to 'protected' or 'preserved,' not 'archives.' 'Archives' implies a collection of historical records, which requires a more specific term.",
+          "suggestion": "Consider using \"ලේඛන ගබඩාව\" (Lekana Gabadawa) which means 'records archive' or a similar term that conveys the meaning of 'archives.'"
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Архиве\" is the genitive singular form of \"архива\" (archive). The English word 'Archives' (plural) typically requires the nominative plural form \"Архиве\" (Arhive) in Serbian (Cyrillic).",
-          "suggestion": "Архиве"
+          "description": "The Serbian (Cyrillic) translation \"Архиве\" is in the genitive singular case. \"Archives\" as a plural noun, likely requires the nominative plural form.",
+          "suggestion": "Архиве should be changed to Архиви."
         }
       ],
       "approved_at": null
@@ -228,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation 'Arhive' is a misspelling and does not accurately translate 'Archives'. The correct Serbian (Latin) translation is 'Arhiva'.",
+          "description": "The Serbian (Latin) translation 'Arhive' is a misspelling of 'Arhiva'. While it's recognizable, it's not the correct spelling.",
           "suggestion": "Arhiva"
         }
       ],

@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 const Tile = () => {
-  return <></>;
+  return null;
 };
 
 export default inject<TStore>(

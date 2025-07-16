@@ -53,19 +53,19 @@ const StyledEmptyContainerLinks = styled.div`
 `;
 
 const Tiles = ({
-  t,
+  // t,
   tReady,
-  theme,
+  // theme,
   oformFiles,
-  hasGalleryFiles,
+  // hasGalleryFiles,
   setGallerySelected,
-  resetFilters,
-  submitToGalleryTileIsVisible,
-  canSubmitToFormGallery,
+  // resetFilters,
+  // submitToGalleryTileIsVisible,
+  // canSubmitToFormGallery,
   setOformFilesLoaded,
-  categoryFilterLoaded,
-  languageFilterLoaded,
-  oformFilesLoaded,
+  // categoryFilterLoaded,
+  // languageFilterLoaded,
+  // oformFilesLoaded,
 }) => {
   const onMouseDown = (e) => {
     if (

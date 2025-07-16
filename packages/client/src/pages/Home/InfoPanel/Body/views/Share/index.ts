@@ -31,7 +31,8 @@ import Share from "@docspace/shared/components/share";
 export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
   const selfId = userStore.user?.id ?? "";
 
-  const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
+  const { setLinkParams, setEditLinkPanelIsVisible, setEmbeddingPanelData } =
+    dialogsStore;
 
   const {
     setView,
@@ -56,5 +57,6 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
     setIsScrollLocked,
     setLinkParams,
     setEditLinkPanelIsVisible,
+    setEmbeddingPanelData,
   };
 })(observer(Share));

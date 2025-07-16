@@ -159,6 +159,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     init: true,
     showTitle: false,
     showFilter: false,
+    requestToken: link?.sharedTo?.requestToken,
   };
 
   const roomConfig = {

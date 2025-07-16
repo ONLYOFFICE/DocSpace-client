@@ -108,6 +108,10 @@ export type ExpiredComboBoxProps = {
 
 export type ShareProps = {
   infoPanelSelection: TFile | TFolder;
+  setEmbeddingPanelData?: (value: {
+    visible: boolean;
+    item: TFile | TFolder;
+  }) => void;
 
   setView?: (view: string) => void;
 

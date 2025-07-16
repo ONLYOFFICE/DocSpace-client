@@ -33,6 +33,7 @@ import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
+import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 
 import { ShareAccessRights } from "../../enums";
 import { LINKS_LIMIT_COUNT } from "../../constants";
@@ -85,6 +86,7 @@ const Share = (props: ShareProps) => {
     setIsScrollLocked,
     setEditLinkPanelIsVisible,
     setLinkParams,
+    setEmbeddingPanelData,
   } = props;
 
   const isFolder = infoPanelSelection.isFolder;
@@ -369,6 +371,11 @@ const Share = (props: ShareProps) => {
     onCloseContextMenu();
   };
 
+  const onEmbeddingClick = (link: TFileLink) => {
+    setLinkParams({ link, item: infoPanelSelection });
+    setEmbeddingPanelData?.({ visible: true, item: infoPanelSelection });
+  };
+
   const changeExpirationOption = async (
     link: TFileLink,
     expirationDate: moment.Moment | null,
@@ -415,6 +422,13 @@ const Share = (props: ShareProps) => {
         label: t("Common:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: () => copyDocumentShareLink(link, t),
+      },
+      {
+        key: "embedding-settings-key",
+        label: t("Files:Embed"),
+        icon: CodeReactSvgUrl,
+        onClick: () => onEmbeddingClick(link),
+        disabled: !infoPanelSelection.security.Embed,
       },
       {
         key: "delete-link-separator",

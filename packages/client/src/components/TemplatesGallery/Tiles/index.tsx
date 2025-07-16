@@ -29,10 +29,6 @@ import { observer, inject } from "mobx-react";
 
 import { withTranslation } from "react-i18next";
 
-import styled from "styled-components";
-
-
-
 const Tiles = ({
   // t,
   tReady,

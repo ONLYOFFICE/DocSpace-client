@@ -29,7 +29,7 @@ import styled from "styled-components";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/shared/components/label";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
@@ -52,6 +52,26 @@ const StyledInputParam = styled(StyledParam)`
   }
 `;
 
+type InputParamProps = {
+  ref?: React.RefObject<HTMLInputElement | null>;
+  id: string;
+  title: string;
+  placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  isDisabled?: boolean;
+  isValidTitle?: boolean;
+  isWrongTitle?: boolean;
+  errorMessage?: string;
+  isAutoFocussed?: boolean;
+  onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  name?: string;
+  tooltipLabel?: string;
+};
+
 const InputParam = ({
   ref,
   id,
@@ -70,7 +90,7 @@ const InputParam = ({
   onKeyDown,
   name,
   tooltipLabel,
-}) => {
+}: InputParamProps) => {
   return (
     <StyledInputParam>
       <div className="input-label-wrapper">
@@ -117,6 +137,7 @@ const InputParam = ({
           onKeyDown={onKeyDown}
           maxLength={170}
           name={name}
+          type={InputType.text}
         />
       </FieldContainer>
     </StyledInputParam>

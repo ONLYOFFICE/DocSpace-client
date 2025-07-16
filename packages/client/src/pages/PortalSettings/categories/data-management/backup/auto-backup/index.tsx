@@ -46,7 +46,6 @@ import type { TColorScheme } from "@docspace/shared/themes";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {
   ExternalAutoBackupWrapperProps,
-  InjectedAutoBackupWrapperProps,
   AutoBackupWrapperProps,
 } from "./AutoBackup.types";
 
@@ -143,11 +142,7 @@ const AutoBackupWrapper = ({
   );
 };
 
-export default inject<
-  TStore,
-  ExternalAutoBackupWrapperProps,
-  InjectedAutoBackupWrapperProps
->(
+export default inject(
   ({
     backup,
     authStore,
@@ -158,7 +153,7 @@ export default inject<
     filesSelectorInput,
     thirdPartyStore,
     dialogsStore,
-  }) => {
+  }: TStore) => {
     const language = authStore.language;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
     const { getIcon, filesSettings } = filesSettingsStore;

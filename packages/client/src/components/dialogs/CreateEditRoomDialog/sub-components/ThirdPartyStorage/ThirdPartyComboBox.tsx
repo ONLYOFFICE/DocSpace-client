@@ -24,25 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 import { isMobileOnly, isMobile } from "react-device-detect";
+import { TFunction } from "i18next";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
-import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "SRC_DIR/helpers/filesUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
+import { TConnectingStorage } from "@docspace/shared/api/files/types";
+import { getOAuthToken } from "@docspace/shared/utils/common";
 
-import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import {
   THIRD_PARTY_SERVICES_URL,
   ThirdPartyServicesUrlName,
 } from "@docspace/shared/constants";
 import { injectDefaultTheme, isDesktop } from "@docspace/shared/utils";
+import api from "@docspace/shared/api";
+import { TRoomStorageLocation } from "@docspace/shared/utils/rooms";
+
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+
+import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "SRC_DIR/helpers/filesUtils";
+import { ThirdPartyStore } from "SRC_DIR/store/ThirdPartyStore";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
   display: flex;
@@ -96,7 +105,7 @@ const StyledStorageLocation = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledComboBoxItem = styled.div`
+const StyledComboBoxItem = styled.div<{ isDisabled?: boolean }>`
   display: flex;
 
   .drop-down-item_text {
@@ -120,6 +129,29 @@ const StyledComboBoxItem = styled.div`
   }
 `;
 
+type ThirdPartyComboBoxProps = {
+  t: TFunction;
+
+  storageLocation: TRoomStorageLocation;
+  onChangeStorageLocation: (value: TRoomStorageLocation) => void;
+  onChangeProvider: (value: TConnectingStorage) => void;
+  setConnectDialogVisible: (value: boolean) => void;
+  setRoomCreation: (value: boolean) => void;
+
+  saveThirdpartyResponse: DialogsStore["saveThirdpartyResponse"];
+
+  setSaveThirdpartyResponse: DialogsStore["setSaveThirdpartyResponse"];
+  setConnectItem: DialogsStore["setConnectItem"];
+
+  setIsOauthWindowOpen: (value: boolean) => void;
+
+  openConnectWindow: ThirdPartyStore["openConnectWindow"];
+  connectItems: ThirdPartyStore["connectingStorages"];
+
+  isDisabled: boolean;
+  isAdmin: boolean;
+};
+
 const ThirdPartyComboBox = ({
   t,
 
@@ -130,19 +162,17 @@ const ThirdPartyComboBox = ({
   connectItems,
   setConnectDialogVisible,
   setRoomCreation,
-  saveThirdParty,
 
   saveThirdpartyResponse,
   setSaveThirdpartyResponse,
   openConnectWindow,
   setConnectItem,
-  getOAuthToken,
 
   setIsOauthWindowOpen,
 
   isDisabled,
   isAdmin,
-}) => {
+}: ThirdPartyComboBoxProps) => {
   const defaultSelectedItem = {
     key: "length",
     label:
@@ -157,10 +187,13 @@ const ThirdPartyComboBox = ({
     title: ProviderKeyTranslation(item.providerKey, t),
   }));
 
-  const setStorageLocaiton = (thirparty, isConnected) => {
+  const setStorageLocaiton = (
+    thirparty: TConnectingStorage,
+    isConnected?: boolean,
+  ) => {
     if (!isConnected) {
       window.open(
-        `${THIRD_PARTY_SERVICES_URL}${ThirdPartyServicesUrlName[thirparty.id]}`,
+        `${THIRD_PARTY_SERVICES_URL}${ThirdPartyServicesUrlName[thirparty.id! as keyof typeof ThirdPartyServicesUrlName]}`,
         "_blank",
       );
       return;
@@ -172,27 +205,29 @@ const ThirdPartyComboBox = ({
     setRoomCreation(true);
     const provider = storageLocation.provider;
 
-    if (storageLocation.provider.isOauth) {
+    if (storageLocation.provider?.isOauth) {
       setIsOauthWindowOpen(true);
       const authModal = window.open(
         "",
         t("Common:Authorization"),
         "height=600, width=1020",
       );
-      openConnectWindow(provider.providerKey, authModal).then((modal) =>
+      openConnectWindow(provider!.providerKey!, authModal).then((modal) =>
         getOAuthToken(modal)
           .then((token) =>
-            saveThirdParty(
-              provider.oauthHref,
-              "",
-              "",
-              token,
-              false,
-              ProviderKeyTranslation(provider.providerKey, t),
-              provider.providerKey,
-              null,
-              true,
-            ).then((res) => setSaveThirdpartyResponse(res)),
+            api.files
+              .saveThirdParty(
+                provider!.oauthHref!,
+                "",
+                "",
+                token,
+                false,
+                ProviderKeyTranslation(provider!.providerKey, t),
+                provider!.providerKey!,
+                "",
+                true,
+              )
+              .then((res: unknown) => setSaveThirdpartyResponse(res)),
           )
           .catch((e) => {
             if (!e) return;
@@ -200,41 +235,43 @@ const ThirdPartyComboBox = ({
             console.error(e);
           })
           .finally(() => {
-            authModal.close();
+            authModal?.close();
             setIsOauthWindowOpen(false);
           }),
       );
     } else {
-      const providerTitle = ProviderKeyTranslation(provider.providerKey, t);
+      const providerTitle = ProviderKeyTranslation(provider!.providerKey, t);
       setConnectItem({
         title: providerTitle,
         customer_title: providerTitle,
-        provider_key: provider.providerKey,
+        provider_key: provider!.providerKey,
       });
       setConnectDialogVisible(true);
     }
   };
 
   useEffect(() => {
-    if (!saveThirdpartyResponse?.id) return;
+    if (!(saveThirdpartyResponse as unknown as { id: string })?.id) return;
     onChangeStorageLocation({
       ...storageLocation,
       thirdpartyAccount: saveThirdpartyResponse,
-      storageFolderId: saveThirdpartyResponse.id,
+      storageFolderId: (saveThirdpartyResponse as unknown as { id: string }).id,
     });
     setSaveThirdpartyResponse(null);
   }, [saveThirdpartyResponse]);
 
-  const onSelect = (event) => {
+  const onSelect = (
+    event: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const data = event.currentTarget.dataset;
 
     const thirdparty = thirdparties.find((elm) => {
       return elm.id === data.thirdPartyId;
     });
 
-    thirdparty && setStorageLocaiton(thirdparty, thirdparty.isConnected);
-    thirdparty.isConnected
-      ? setSelectedItem({ key: thirdparty.id, label: thirdparty.title })
+    thirdparty && setStorageLocaiton(thirdparty, thirdparty?.isConnected);
+    thirdparty?.isConnected
+      ? setSelectedItem({ key: thirdparty.id!, label: thirdparty.title })
       : setSelectedItem({ ...defaultSelectedItem });
   };
 
@@ -249,7 +286,9 @@ const ThirdPartyComboBox = ({
   };
 
   const advancedOptions = thirdparties
-    .sort((storage) => (storage.isConnected ? -1 : 1))
+    .sort((storage) => {
+      return storage.isConnected ? -1 : 1;
+    })
     ?.map((item) => {
       const disabled = !item.isConnected && !isAdmin;
       const itemLabel =
@@ -298,7 +337,7 @@ const ThirdPartyComboBox = ({
           className="thirdparty-combobox"
           selectedOption={selectedItem}
           options={[]}
-          advancedOptions={advancedOptions}
+          advancedOptions={<React.Fragment>{advancedOptions}</React.Fragment>}
           scaled
           withBackdrop={isMobile}
           size="content"
@@ -322,7 +361,7 @@ const ThirdPartyComboBox = ({
             isDisabled
           }
           className="set_room_params-thirdparty-connect"
-          size="small"
+          size={ButtonSize.small}
           label={t("Common:Connect")}
           onClick={onShowService}
         />

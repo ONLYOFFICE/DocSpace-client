@@ -230,9 +230,7 @@ export default class MessageStore {
     this.messages = [newMsg, ...this.messages];
   };
 
-  startStream = async (
-    stream: ReadableStream<Uint8Array<ArrayBufferLike>> | null,
-  ) => {
+  startStream = async (stream: ReadableStream<Uint8Array> | null) => {
     if (!stream) {
       this.isRequestRunning = false;
 

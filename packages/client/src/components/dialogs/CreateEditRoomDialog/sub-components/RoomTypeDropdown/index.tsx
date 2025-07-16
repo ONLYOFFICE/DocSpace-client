@@ -24,12 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { isMobile } from "@docspace/shared/utils";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import RoomType from "@docspace/shared/components/room-type";
+import { isMobile } from "@docspace/shared/utils";
+
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
+import { RoomsType } from "@docspace/shared/enums";
 
 const StyledRoomTypeDropdown = styled.div`
   display: flex;
@@ -41,14 +44,21 @@ const StyledRoomTypeDropdown = styled.div`
   }
 `;
 
+type RoomTypeDropdownProps = {
+  currentRoomType: RoomsType;
+  setRoomType: (roomType: RoomsType) => void;
+  setIsScrollLocked: (isScrollLocked: boolean) => void;
+  isDisabled: boolean;
+  forceHideDropdown: boolean;
+};
+
 const RoomTypeDropdown = ({
-  t,
   currentRoomType,
   setRoomType,
   setIsScrollLocked,
   isDisabled,
   forceHideDropdown,
-}) => {
+}: RoomTypeDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -62,7 +72,7 @@ const RoomTypeDropdown = ({
     }
   };
 
-  const chooseRoomType = (roomType) => {
+  const chooseRoomType = (roomType: RoomsType) => {
     if (isDisabled) return;
     setRoomType(roomType);
     toggleDropdown();
@@ -76,9 +86,8 @@ const RoomTypeDropdown = ({
   }, [forceHideDropdown]);
 
   return (
-    <StyledRoomTypeDropdown isOpen={isOpen}>
+    <StyledRoomTypeDropdown>
       <RoomType
-        t={t}
         roomType={currentRoomType}
         id="shared_select-room"
         selectedId={currentRoomType}
@@ -88,14 +97,13 @@ const RoomTypeDropdown = ({
       />
       {isMobile() ? (
         <DropdownMobile
-          t={t}
           open={isOpen}
           onClose={toggleDropdown}
           chooseRoomType={chooseRoomType}
           forceHideDropdown={forceHideDropdown}
         />
       ) : (
-        <DropdownDesktop t={t} open={isOpen} chooseRoomType={chooseRoomType} />
+        <DropdownDesktop open={isOpen} chooseRoomType={chooseRoomType} />
       )}
     </StyledRoomTypeDropdown>
   );

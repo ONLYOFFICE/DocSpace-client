@@ -24,70 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { createRandomTagId } from "@docspace/shared/utils/random";
+import TagHandler from "../../handlers/TagHandler";
 
-class TagHandler {
-  constructor(tags, setTags, fetchedTags) {
-    this.tags = tags;
-    this.setTags = setTags;
-    this.fetchedTags = fetchedTags;
-  }
+export type TagListProps = {
+  tagHandler: TagHandler;
 
-  refreshDefaultTag(name) {
-    const newTags = [...this.tags].filter((tag) => !tag.isDefault);
-    newTags.unshift({
-      id: createRandomTagId(),
-      name,
-      isDefault: true,
-    });
+  isDisabled: boolean;
+};
 
-    this.setTags(newTags);
-  }
-
-  addTag(name) {
-    const newTags = [...this.tags];
-
-    if (this.isAlreadyAdded(name)) {
-      return; // already added
-    }
-
-    newTags.push({
-      id: createRandomTagId(),
-      name,
-    });
-    this.setTags(newTags);
-  }
-
-  isAlreadyAdded(name) {
-    return !!this.tags.find((t) => t.name.toLowerCase() === name.toLowerCase());
-  }
-
-  isNew(name) {
-    return !this.fetchedTags.find(
-      (t) => t.toLowerCase() === name.toLowerCase(),
-    );
-  }
-
-  addNewTag(name) {
-    const newTags = [...this.tags];
-
-    if (this.isAlreadyAdded(name)) {
-      return; // already added
-    }
-
-    newTags.push({
-      id: createRandomTagId(),
-      isNew: this.isNew(name),
-      name,
-    });
-    this.setTags(newTags);
-  }
-
-  deleteTag(id) {
-    let newTags = [...this.tags];
-    newTags = newTags.filter((tag) => tag.id !== id);
-    this.setTags(newTags);
-  }
-}
-
-export default TagHandler;
+export type TagDropDownProps = {
+  tagHandler: TagHandler;
+  open: boolean;
+  tagInputValue: string;
+  setTagInputValue: (value: string) => void;
+  createTagLabel: string;
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  closeDropdown: () => void;
+};

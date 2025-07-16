@@ -54,13 +54,16 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { imageProcessing } from "@docspace/shared/utils/common";
 import { ButtonDelete } from "@docspace/shared/components/image-editor";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { TRoomParams } from "@docspace/shared/utils/rooms";
+import { TWatermark } from "@docspace/shared/api/rooms/types";
+import { InputSize } from "@docspace/shared/components/text-input";
 
 import { StyledWatermark } from "./StyledComponent";
 
@@ -79,7 +82,7 @@ const rotateOptions = [
   { key: -60, label: "60" },
   { key: -90, label: "90" },
 ];
-const getInitialScale = (scale, isEdit) => {
+const getInitialScale = (scale: number, isEdit: boolean) => {
   if (!isEdit || !scale) return scaleOptions[0];
 
   return scaleOptions.find((item) => {
@@ -87,7 +90,11 @@ const getInitialScale = (scale, isEdit) => {
   });
 };
 
-const getInitialRotate = (rotate, isEdit, isImage) => {
+const getInitialRotate = (
+  rotate: number,
+  isEdit: boolean,
+  isImage: boolean,
+) => {
   if (!isEdit || (isEdit && !isImage)) return rotateOptions[0];
 
   const item = rotateOptions.find((elm) => {
@@ -97,6 +104,14 @@ const getInitialRotate = (rotate, isEdit, isImage) => {
   return !item ? rotateOptions[0] : item;
 };
 
+type ImageWatermarkProps = {
+  isEdit: boolean;
+  roomParams: TRoomParams;
+  setRoomParams: (params: TRoomParams) => void;
+  isImage: boolean;
+  initialSettings: TWatermark;
+};
+
 const ImageWatermark = ({
   isEdit,
   roomParams,
@@ -104,10 +119,13 @@ const ImageWatermark = ({
   isImage,
 
   initialSettings,
-}) => {
+}: ImageWatermarkProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
-  const initialInfo = useRef(null);
+  const initialInfo = useRef<{
+    rotate: { key: number; label: string };
+    scale?: { key: number; label: string };
+  }>(null);
   const imageUrl = initialSettings?.imageUrl;
 
   let watermark = roomParams.watermark;
@@ -121,10 +139,10 @@ const ImageWatermark = ({
     if (isImage && initialSettings) watermark = initialSettings;
     else
       watermark = {
-        ...watermark,
+        ...watermark!,
         additions: 0,
         rotate: initialInfo.current.rotate.key,
-        scale: initialInfo.current.scale.key,
+        scale: initialInfo.current.scale?.key,
       };
   }
 
@@ -134,7 +152,7 @@ const ImageWatermark = ({
   const [selectedScale, setScale] = useState(initialInfoRef.scale);
   const [selectedImageUrl, setImageUrl] = useState(imageUrl);
 
-  const previewRef = useRef(null);
+  const previewRef = useRef<string | null>(null);
 
   useEffect(() => {
     setRoomParams({
@@ -143,18 +161,22 @@ const ImageWatermark = ({
     });
 
     return () => {
-      URL.revokeObjectURL(previewRef.current);
-      previewRef.current = null;
+      if (previewRef.current) {
+        URL.revokeObjectURL(previewRef.current);
+        previewRef.current = null;
+      }
     };
   }, []);
 
-  const onInput = (file) => {
+  const onInput = (file: File | File[]) => {
+    if (Array.isArray(file)) return;
+
     imageProcessing(file)
       .then((f) => {
         if (f instanceof File) {
           setRoomParams({
             ...roomParams,
-            watermark: { ...watermark, image: f },
+            watermark: { ...watermark!, image: f },
           });
 
           const img = new Image();
@@ -163,7 +185,9 @@ const ImageWatermark = ({
           img.src = previewRef.current;
 
           img.onload = () => {
-            setImageUrl(previewRef.current);
+            if (previewRef.current) {
+              setImageUrl(previewRef.current);
+            }
           };
         }
       })
@@ -177,20 +201,20 @@ const ImageWatermark = ({
       });
   };
 
-  const onScaleChange = (item) => {
-    setScale(item);
+  const onScaleChange = (item: TOption) => {
+    setScale(item as { key: number; label: string });
 
     setRoomParams({
       ...roomParams,
-      watermark: { ...watermark, imageScale: item.key },
+      watermark: { ...watermark!, imageScale: item.key as number },
     });
   };
 
-  const onRotateChange = (item) => {
-    setRotate(item);
+  const onRotateChange = (item: TOption) => {
+    setRotate(item as { key: number; label: string });
     setRoomParams({
       ...roomParams,
-      watermark: { ...watermark, rotate: item.key },
+      watermark: { ...watermark!, rotate: item.key as number },
     });
   };
 
@@ -202,7 +226,7 @@ const ImageWatermark = ({
 
     setRoomParams({
       ...roomParams,
-      watermark: { ...watermark, image: null, imageUrl: null },
+      watermark: { ...watermark!, image: undefined, imageUrl: undefined },
     });
 
     setImageUrl("");
@@ -242,15 +266,10 @@ const ImageWatermark = ({
     return <div style={{ display: "contents" }}>{items}</div>;
   };
 
-  // const onSelectFile = (fileInfo) => {
-  //   setWatermarks({ image: fileInfo });
-  // };
-
   return (
     <StyledWatermark
       rotate={selectedRotate.key}
-      scale={selectedScale.key / 100}
-      mainHeight={50}
+      scale={selectedScale!.key / 100}
     >
       {!selectedImageUrl ? (
         <FileInput
@@ -258,15 +277,9 @@ const ImageWatermark = ({
           onInput={onInput}
           scale
           isMultiple={false}
+          size={InputSize.base}
         />
       ) : null}
-
-      {/* <FilesSelectorInput
-        onSelectFile={onSelectFile}
-        filterParam={FilesSelectorFilterTypes.IMG}
-        isSelect
-        scale
-      /> */}
 
       {selectedImageUrl ? (
         <div className="image-wrapper">
@@ -304,9 +317,9 @@ const ImageWatermark = ({
                 scaledOptions
                 advancedOptions={scaleItems()}
                 options={[]}
-                selectedOption={{}}
+                selectedOption={{} as TOption}
               >
-                <div className="options">{selectedScale.label}&#37;</div>
+                <div className="options">{selectedScale?.label}&#37;</div>
               </ComboBox>
             </div>
             <div>
@@ -320,7 +333,7 @@ const ImageWatermark = ({
                 scaledOptions
                 advancedOptions={rotateItems()}
                 options={[]}
-                selectedOption={{}}
+                selectedOption={{} as TOption}
                 advancedOptionsCount={rotateOptions.length}
                 fillIcon={false}
               >

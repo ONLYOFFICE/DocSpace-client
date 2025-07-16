@@ -87,6 +87,10 @@ export type TWatermark = {
   imageWidth: number;
   rotate: number;
   imageUrl?: string;
+  text?: string;
+  scale?: number;
+  image?: File | string;
+  isImage?: boolean;
 };
 export type TRoom = {
   parentId: number;

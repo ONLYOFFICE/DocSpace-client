@@ -24,26 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useMemo } from "react";
-import { inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { decode } from "he";
 
-import { Avatar, AvatarRole } from "@docspace/shared/components/avatar";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/shared/components/link";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { TCreatedBy } from "@docspace/shared/types";
+
 import * as Styled from "./index.styled";
 
+type ChangeRoomOwnerProps = {
+  currentUserId?: string;
+  roomOwner: TCreatedBy;
+  onOwnerChange: () => void;
+  currentColorScheme?: SettingsStore["currentColorScheme"];
+  canChangeOwner: boolean;
+};
+
 const ChangeRoomOwner = ({
-  t,
   currentUserId,
   roomOwner,
   onOwnerChange,
   currentColorScheme,
   canChangeOwner,
-}) => {
+}: ChangeRoomOwnerProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const userName = useMemo(
-    () => decode(roomOwner.displayName ?? roomOwner.label),
-    [roomOwner.displayName, roomOwner.label],
+    () => decode(roomOwner.displayName),
+    [roomOwner.displayName],
   );
 
   return (
@@ -61,7 +77,7 @@ const ChangeRoomOwner = ({
         <div className="change-owner-display">
           <Avatar
             className="change-owner-display-avatar"
-            size="base"
+            size={AvatarSize.base}
             role={AvatarRole.none}
             isDefaultSource={roomOwner.hasAvatar}
             source={roomOwner.avatarSmall ?? roomOwner.avatar}
@@ -81,10 +97,10 @@ const ChangeRoomOwner = ({
           <Link
             className="change-owner-link"
             isHovered
-            type="action"
+            type={LinkType.action}
             fontWeight={600}
             fontSize="13px"
-            color={currentColorScheme.main?.accent}
+            color={currentColorScheme?.main?.accent}
             onClick={onOwnerChange}
           >
             {t("Common:ChangeButton")}
@@ -95,7 +111,7 @@ const ChangeRoomOwner = ({
   );
 };
 
-export default inject(({ settingsStore, userStore }) => ({
-  currentUserId: userStore.user.id,
+export default inject(({ settingsStore, userStore }: TStore) => ({
+  currentUserId: userStore.user?.id,
   currentColorScheme: settingsStore.currentColorScheme,
-}))(withTranslation(["Common"])(ChangeRoomOwner));
+}))(observer(ChangeRoomOwner));

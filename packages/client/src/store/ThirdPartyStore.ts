@@ -24,6 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { makeAutoObservable } from "mobx";
+
+import api from "@docspace/shared/api";
+import {
+  TConnectingStorages,
+  TThirdParties,
+  TThirdPartyCapabilities,
+} from "@docspace/shared/api/files/types";
+
 import IconBoxSmallReactSvgUrl from "PUBLIC_DIR/images/icon_box_small.react.svg?url";
 import IconBoxReactSvgUrl from "PUBLIC_DIR/images/icon_box.react.svg?url";
 import IconDropboxSmallReactSvgUrl from "PUBLIC_DIR/images/icon_dropbox_small.react.svg?url";
@@ -44,35 +53,29 @@ import IconNextcloudSmallReactSvgUrl from "PUBLIC_DIR/images/icon_nextcloud_smal
 import IconNextcloudReactSvgUrl from "PUBLIC_DIR/images/icon_nextcloud.react.svg?url";
 import IconWebdavSmallReactSvgUrl from "PUBLIC_DIR/images/icon_webdav_small.react.svg?url";
 import IconWebdavReactSvgUrl from "PUBLIC_DIR/images/icon_webdav.react.svg?url";
-import { makeAutoObservable } from "mobx";
-import api from "@docspace/shared/api";
+
 import i18n from "../i18n";
 
 export class ThirdPartyStore {
-  capabilities = null;
+  capabilities: TThirdPartyCapabilities = [];
 
-  providers = [];
+  providers: TThirdParties = [];
 
-  connectingStorages = [];
+  connectingStorages: TConnectingStorages = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setThirdPartyProviders = (providers) => {
+  setThirdPartyProviders = (providers: TThirdParties) => {
     this.providers = providers;
   };
 
-  setThirdPartyCapabilities = (capabilities) => {
+  setThirdPartyCapabilities = (capabilities: TThirdPartyCapabilities) => {
     this.capabilities = capabilities;
   };
 
-  /**
-   *
-   * @param {string} id
-   * @returns {Promise<void>}
-   */
-  deleteThirdParty = (id) => api.files.deleteThirdParty(id);
+  deleteThirdParty = (id: string) => api.files.deleteThirdParty(id);
 
   fetchThirdPartyProviders = async () => {
     const list = await api.files.getThirdPartyList();
@@ -84,6 +87,7 @@ export class ThirdPartyStore {
     const res = await api.files.getConnectingStorages();
 
     this.connectingStorages = res.map((storage) => ({
+      ...storage,
       id: storage.name,
       className: `storage_${storage.key}`,
       providerKey: storage.key !== "WebDav" ? storage.key : storage.name,
@@ -98,31 +102,7 @@ export class ThirdPartyStore {
     return res;
   };
 
-  saveThirdParty = (
-    url,
-    login,
-    password,
-    token,
-    isCorporate,
-    customerTitle,
-    providerKey,
-    providerId,
-    isRoomsStorage,
-  ) => {
-    return api.files.saveThirdParty(
-      url,
-      login,
-      password,
-      token,
-      isCorporate,
-      customerTitle,
-      providerKey,
-      providerId,
-      isRoomsStorage,
-    );
-  };
-
-  convertServiceName = (serviceName) => {
+  convertServiceName = (serviceName: string) => {
     // Docusign, OneDrive, Wordpress
     switch (serviceName) {
       case "GoogleDrive":
@@ -138,10 +118,10 @@ export class ThirdPartyStore {
     }
   };
 
-  oAuthPopup = (url, modal) => {
+  oAuthPopup = (url: string, modal: Window | null) => {
     let newWindow = modal;
 
-    if (modal) {
+    if (newWindow) {
       newWindow.location = url;
     }
 
@@ -160,14 +140,14 @@ export class ThirdPartyStore {
     return newWindow;
   };
 
-  openConnectWindow = (serviceName, modal) => {
+  openConnectWindow = (serviceName: string, modal: Window | null) => {
     const service = this.convertServiceName(serviceName);
     return api.files.openConnectWindow(service).then((link) => {
       return this.oAuthPopup(link, modal);
     });
   };
 
-  getThirdPartyIcon = (iconName, size = "big") => {
+  getThirdPartyIcon = (iconName: string, size: "big" | "small" = "big") => {
     switch (iconName) {
       case "Box":
         if (size === "small") return IconBoxSmallReactSvgUrl;

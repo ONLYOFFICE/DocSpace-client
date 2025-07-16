@@ -26,6 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 import isEqual from "lodash/isEqual";
+import { TFunction } from "i18next";
 
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -41,6 +42,8 @@ import {
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
+import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
+import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -48,7 +51,6 @@ import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import { openMembersTab, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import FilesStore from "./FilesStore";
-import InfoPanelStore from "./InfoPanelStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import DialogsStore from "./DialogsStore";
@@ -56,13 +58,14 @@ import FilesActionsStore from "./FilesActionsStore";
 import SelectedFolderStore from "./SelectedFolderStore";
 import TagsStore from "./TagsStore";
 import { ThirdPartyStore } from "./ThirdPartyStore";
+import React from "react";
 
 class CreateEditRoomStore {
-  roomParams = null;
+  roomParams: Nullable<TRoomParams> = null;
 
-  isLoading = false;
+  isLoading: boolean = false;
 
-  confirmDialogIsLoading = false;
+  confirmDialogIsLoading: boolean = false;
 
   onClose: Nullable<VoidFunction> = null;
 
@@ -86,11 +89,12 @@ class CreateEditRoomStore {
 
   avatarEditorDialogStore: Nullable<AvatarEditorDialogStore> = null;
 
-  watermarksSettings = {};
+  watermarksSettings: TWatermark = {} as TWatermark;
 
-  initialWatermarksSettings = {};
+  initialWatermarksSettings: TWatermark | { enabled: boolean } =
+    {} as TWatermark;
 
-  isImageType = false;
+  isImageType: boolean = false;
 
   selectedRoomType: Nullable<RoomsType> = null;
 
@@ -124,7 +128,7 @@ class CreateEditRoomStore {
     this.selectedRoomType = type;
   };
 
-  setRoomParams = (roomParams) => {
+  setRoomParams = (roomParams: TRoomParams) => {
     this.roomParams = roomParams;
   };
 
@@ -140,38 +144,38 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  setInitialWatermarks = (watermarksSettings) => {
+  setInitialWatermarks = (watermarksSettings: TWatermark) => {
     this.resetWatermarks();
 
     this.initialWatermarksSettings = !watermarksSettings
       ? { enabled: false }
       : watermarksSettings;
 
-    this.initialWatermarksSettings.isImage =
-      !!this.initialWatermarksSettings.imageUrl;
+    if (!("enabled" in this.initialWatermarksSettings)) {
+      this.initialWatermarksSettings.isImage =
+        !!this.initialWatermarksSettings.imageUrl;
 
-    this.initialWatermarksSettings.image = "";
+      this.initialWatermarksSettings.image = "";
+    }
 
-    this.setWatermarks(this.initialWatermarksSettings);
+    this.setWatermarks(this.initialWatermarksSettings as TWatermark, false);
   };
 
-  setWatermarks = (object, isInit) => {
+  setWatermarks = (object: TWatermark, isInit: boolean) => {
     if (isInit) {
       this.watermarksSettings = { ...object };
       return;
     }
 
-    Object.keys(object).forEach((key) => {
-      this.watermarksSettings[key] = object[key];
-    });
+    this.watermarksSettings = { ...object };
   };
 
   resetWatermarks = () => {
-    this.watermarksSettings = {};
-    this.initialWatermarksSettings = {};
+    this.watermarksSettings = {} as TWatermark;
+    this.initialWatermarksSettings = {} as TWatermark;
   };
 
-  isCorrectWatermark = (watermarkSettings) => {
+  isCorrectWatermark = (watermarkSettings: TWatermark) => {
     if (!watermarkSettings) return true;
 
     return !(
@@ -181,8 +185,8 @@ class CreateEditRoomStore {
     );
   };
 
-  getWatermarkRequest = async (watermarksSettings) => {
-    const watermarkImage = watermarksSettings.image;
+  getWatermarkRequest = async (watermarksSettings: TWatermark) => {
+    const watermarkImage = watermarksSettings.image as Blob;
     if (!watermarkImage && !watermarksSettings.imageUrl) {
       return Promise.resolve({
         rotate: watermarksSettings.rotate,
@@ -201,25 +205,25 @@ class CreateEditRoomStore {
     }
 
     const uploadWatermarkData = new FormData();
-    uploadWatermarkData.append(0, watermarkImage);
+    uploadWatermarkData.append("0", watermarkImage);
 
     const response = await api.rooms.uploadRoomLogo(uploadWatermarkData);
 
-    const getMeta = (url) => {
+    const getMeta = (url?: string): Promise<HTMLImageElement> => {
       // url for this.watermarksSettings.image.viewUrl
       return new Promise((resolve, reject) => {
         const img = new Image();
-        const imgUrl = url ?? URL.createObjectURL(watermarkImage);
+        const imgUrl = url ?? URL.createObjectURL(watermarkImage as File);
         img.onload = () => resolve(img);
         img.onerror = (err) => reject(err);
         img.src = imgUrl;
       });
     };
-    return getMeta().then((img) => {
+    return getMeta().then((img: HTMLImageElement) => {
       return {
         imageScale: watermarksSettings.imageScale,
         rotate: watermarksSettings.rotate,
-        imageUrl: response.data,
+        imageUrl: (response as { data: string }).data,
         // imageId: watermarksSettings.image.id,
         imageWidth: img.naturalWidth,
         imageHeight: img.naturalHeight,
@@ -227,7 +231,7 @@ class CreateEditRoomStore {
     });
   };
 
-  getLogoParams = (uploadedFile, icon) => {
+  getLogoParams = (uploadedFile: File, icon: TRoomIconParams) => {
     const img = new Image();
     const url = URL.createObjectURL(uploadedFile);
 
@@ -243,11 +247,15 @@ class CreateEditRoomStore {
     });
   };
 
-  onSaveEditRoom = async (t, newParams, room) => {
-    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover, clearCoverProps } = this.dialogsStore;
-    const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
-    const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
+  onSaveEditRoom = async (
+    t: TFunction,
+    newParams: TRoomParams,
+    room: TRoom,
+  ) => {
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
+    const { cover, clearCoverProps } = this.dialogsStore!;
+    const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore!;
+    const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore!;
 
     const {
       quota,
@@ -297,21 +305,22 @@ class CreateEditRoomStore {
       }),
       ...(isDefaultRoomsQuotaSet &&
         isQuotaChanged && {
-          quota: +quotaLimit,
+          quota: +quotaLimit!,
         }),
-      ...(cover && {
-        cover: cover.cover,
-        color: cover.color,
+      ...((cover as { cover: string; color: string } | null) && {
+        cover: (cover as { cover: string; color: string } | null)?.cover,
+        color: (cover as { cover: string; color: string } | null)?.color,
       }),
+      ...(isWatermarkChanged &&
+        this.isCorrectWatermark(watermark!) && {
+          watermark: watermark
+            ? ((await this.getWatermarkRequest(watermark)) as TWatermark)
+            : {
+                enabled: false,
+              },
+        }),
+      logo: undefined as unknown,
     };
-
-    if (isWatermarkChanged && this.isCorrectWatermark(watermark)) {
-      editRoomParams.watermark = watermark
-        ? await this.getWatermarkRequest(watermark)
-        : {
-            enabled: false,
-          };
-    }
 
     const isDeleteLogo = !!room.logo.original && !icon.uploadedFile;
     const additionalRequest = [];
@@ -333,12 +342,13 @@ class CreateEditRoomStore {
             await Promise.all(additionalRequest);
 
           editRoomParams.logo = {
-            tmpFile: uploadedData.responseData.data,
-            ...logoParamsData,
+            tmpFile: (uploadedData as { responseData: { data: string } })
+              .responseData.data,
+            ...logoParamsData!,
           };
         }
       } catch (e) {
-        toastr.error(e);
+        toastr.error(e as string);
       }
 
       if (Object.keys(editRoomParams).length)
@@ -372,14 +382,18 @@ class CreateEditRoomStore {
         await Promise.all(requests);
       }
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
-  onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
-    this.filesStore.setRoomCreated(true);
-    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover, clearCoverProps } = this.dialogsStore;
+  onSaveAsTemplate = async (
+    item: TRoom,
+    roomParams: TRoomParams,
+    openCreatedTemplate: Nullable<() => void>,
+  ) => {
+    this.filesStore!.setRoomCreated(true);
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
+    const { cover, clearCoverProps } = this.dialogsStore!;
 
     const {
       title,
@@ -393,9 +407,15 @@ class CreateEditRoomStore {
     } = roomParams;
 
     const logoCover = cover
-      ? { cover: cover.cover, color: cover.color }
+      ? {
+          cover: (cover as { cover: object }).cover,
+          color: (cover as { color: string }).color,
+        }
       : logo
-        ? { cover: logo.cover?.id, color: logo.color }
+        ? {
+            cover: (logo as { cover: { id: string } }).cover?.id,
+            color: (logo as { color: string }).color,
+          }
         : null;
 
     const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
@@ -413,6 +433,7 @@ class CreateEditRoomStore {
         quota: +quotaLimit,
       }),
       ...logoCover,
+      logo: null as unknown,
     };
 
     if (isDeleteLogo) {
@@ -430,14 +451,34 @@ class CreateEditRoomStore {
     let isError = false;
     let progressData;
 
-    const room = await createTemplate(roomData);
-    progressData = room;
+    const room = await createTemplate(
+      roomData as unknown as {
+        roomId: number;
+        title: string;
+        logo: TRoom["logo"];
+        share: any;
+        tags: TRoom["tags"];
+        public: boolean;
+        quota: number;
+      },
+    );
+    progressData = room as unknown as {
+      isCompleted: boolean;
+      error: boolean;
+      templateId: string;
+    };
 
     isCompleted = progressData?.isCompleted;
     isError = progressData?.error;
 
     while (!isCompleted) {
-      progressData = await this.getProgress(getCreateTemplateProgress);
+      progressData = (await this.getProgress(
+        getCreateTemplateProgress,
+      )) as unknown as {
+        isCompleted: boolean;
+        error: boolean;
+        templateId: string;
+      };
       isCompleted = progressData.isCompleted;
       isError = progressData.error;
 
@@ -462,41 +503,46 @@ class CreateEditRoomStore {
         title,
         roomType,
         rootFolderType: FolderType.RoomTemplates,
-      });
+      } as unknown as TRoom);
     }
 
     clearCoverProps();
     return Promise.resolve(progressData);
   };
 
-  getRoomLogo = async (icon) => {
+  getRoomLogo = async (icon: TRoomIconParams) => {
     try {
       const [logoParamsData, uploadedData] = await Promise.all([
-        this.getLogoParams(icon.uploadedFile, icon),
-        this.avatarEditorDialogStore.getUploadedLogoData(),
+        this.getLogoParams(icon.uploadedFile as unknown as File, icon),
+        this.avatarEditorDialogStore!.getUploadedLogoData(),
       ]);
 
       return {
-        tmpFile: uploadedData.responseData.data,
-        ...logoParamsData,
+        tmpFile: (uploadedData as { responseData: { data: string } })
+          .responseData.data,
+        ...logoParamsData!,
       };
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
     }
   };
 
-  onCreateRoom = async (t, withConfirm = false, successToast = null) => {
-    const roomParams = this.roomParams;
+  onCreateRoom = async (
+    t: TFunction,
+    withConfirm: boolean = false,
+    successToast: Element | null = null,
+  ) => {
+    const roomParams = this.roomParams!;
 
     const {
       processCreatingRoomFromData,
       setProcessCreatingRoomFromData,
       preparingDataForCopyingToRoom,
-    } = this.filesActionsStore;
-    const { deleteThirdParty } = this.thirdPartyStore;
-    const { createRoom, selection, bufferSelection } = this.filesStore;
-    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover, clearCoverProps } = this.dialogsStore;
+    } = this.filesActionsStore!;
+    const { deleteThirdParty } = this.thirdPartyStore!;
+    const { createRoom, selection, bufferSelection } = this.filesStore!;
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
+    const { cover, clearCoverProps } = this.dialogsStore!;
 
     const {
       denyDownload,
@@ -525,11 +571,16 @@ class CreateEditRoomStore {
     const tagsToAddList = tags.map((tag) => tag.name);
 
     const logoCover = cover
-      ? { cover: cover.cover, color: cover.color }
+      ? {
+          cover: (cover as { cover: object }).cover,
+          color: (cover as { color: string }).color,
+        }
       : logo
-        ? { cover: logo.cover?.id, color: logo.color }
+        ? {
+            cover: (logo as { cover: { id: string } }).cover?.id,
+            color: (logo as { color: string }).color,
+          }
         : null;
-
     const createRoomData = {
       roomId,
       roomType: type,
@@ -549,16 +600,17 @@ class CreateEditRoomStore {
       ...(tagsToAddList.length && {
         tags: tagsToAddList,
       }),
+      ...(watermark &&
+        this.isCorrectWatermark(watermark) && {
+          watermark: await this.getWatermarkRequest(watermark),
+        }),
+      logo: undefined as unknown,
     };
-
-    if (watermark && this.isCorrectWatermark(watermark)) {
-      createRoomData.watermark = await this.getWatermarkRequest(watermark);
-    }
 
     this.setIsLoading(true);
 
     const isDeleteLogo = isTemplate
-      ? !!logo?.original && !icon.uploadedFile
+      ? !!(logo as { original?: string })?.original && !icon.uploadedFile
       : false;
 
     let copyLogo =
@@ -575,30 +627,32 @@ class CreateEditRoomStore {
 
       withConfirm && this.setConfirmDialogIsLoading(true);
 
-      let room = null;
+      let room: Nullable<TRoom> = null;
       if (isThirdPartyRoom) {
-        room = await api.rooms.createRoomInThirdpary(
+        room = (await api.rooms.createRoomInThirdpary(
           storageFolderId,
           createRoomData,
-        );
+        )) as TRoom;
       } else if (isTemplate) {
-        room = await this.onCreateTemplateRoom({
+        room = (await this.onCreateTemplateRoom({
           ...createRoomData,
           copyLogo: !!copyLogo,
-        });
+        } as unknown as TRoomParams)) as unknown as TRoom;
       } else {
-        room = await createRoom(createRoomData);
+        room = (await createRoom(createRoomData)) as TRoom;
       }
 
-      if (room.errorMsg) {
-        return toastr.error(room.errorMsg);
+      if ((room as unknown as { errorMsg: string }).errorMsg) {
+        return toastr.error((room as unknown as { errorMsg: string }).errorMsg);
       }
 
-      this.dialogsStore.setIsNewRoomByCurrentUser(true);
+      this.dialogsStore!.setIsNewRoomByCurrentUser(true);
 
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
-        deleteThirdParty(thirdpartyAccount.providerId);
+        deleteThirdParty(
+          (thirdpartyAccount as { providerId: string })?.providerId,
+        );
 
       this.onOpenNewRoom(room);
 
@@ -615,24 +669,25 @@ class CreateEditRoomStore {
         );
       }
 
-      if (successToast) toastr.success(successToast);
+      if (successToast)
+        toastr.success(successToast as unknown as React.ReactNode);
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
     } finally {
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
-      this.onClose();
+      this.onClose?.();
       clearCoverProps();
 
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }
   };
 
-  getProgress = (request) => {
+  getProgress = (request: () => Promise<unknown> | undefined) => {
     return new Promise((resolve, reject) => {
       setTimeout(async () => {
         try {
-          await request().then((res) => {
+          await request()?.then((res) => {
             resolve(res);
           });
         } catch (error) {
@@ -642,8 +697,8 @@ class CreateEditRoomStore {
     });
   };
 
-  onCreateTemplateRoom = async (roomParams) => {
-    this.filesStore.setRoomCreated(true);
+  onCreateTemplateRoom = async (roomParams: TRoomParams) => {
+    this.filesStore!.setRoomCreated(true);
 
     const { roomId, ...rest } = roomParams;
 
@@ -663,12 +718,12 @@ class CreateEditRoomStore {
         api.rooms.getCreateRoomFromTemplateProgress,
       );
 
-      isFinished = progressData.isCompleted;
-      errorMsg = progressData.error;
+      isFinished = (progressData as { isCompleted: boolean }).isCompleted;
+      errorMsg = (progressData as { error: boolean }).error;
     }
 
     return {
-      id: progressData.roomId,
+      id: (progressData as { roomId: number }).roomId,
       title: roomParams.title,
       roomType: roomParams.roomType,
       rootFolderType: FolderType.Rooms,
@@ -676,10 +731,10 @@ class CreateEditRoomStore {
     };
   };
 
-  onOpenNewRoom = async (room) => {
-    const { setIsSectionBodyLoading } = this.clientLoadingStore;
-    const { setSelection } = this.filesStore;
-    const { getPublicKey } = this.filesActionsStore;
+  onOpenNewRoom = async (room: TRoom) => {
+    const { setIsSectionBodyLoading } = this.clientLoadingStore!;
+    const { setSelection } = this.filesStore!;
+    const { getPublicKey } = this.filesActionsStore!;
 
     const state = {
       isRoot: false,
@@ -690,7 +745,7 @@ class CreateEditRoomStore {
     };
 
     const newFilter = FilesFilter.getDefault();
-    newFilter.folder = room.id;
+    newFilter.folder = room.id.toString();
 
     if (
       room.roomType === RoomsType.PublicRoom ||

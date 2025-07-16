@@ -486,6 +486,12 @@ export type TConnectingStorage = {
   redirectUrl: string;
   clientId?: string;
   requiredConnectionUrl: boolean;
+  providerKey?: string;
+  isConnected?: boolean;
+  id?: string;
+  title?: string;
+  oauthHref?: string;
+  isOauth?: boolean;
 };
 
 export type TIndexItems = {

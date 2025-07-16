@@ -24,47 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { isMobile, DomHelpers } from "@docspace/shared/utils";
-import { StyledDropDown } from "../StyledDropdown";
+import { StyledDropDown } from "./StyledDropdown";
+import { TagDropDownProps } from "./TagInput.types";
 
 const MAX_ITEMS_COUNT = 7;
 
 const TagDropdown = ({
   open,
   tagHandler,
+
   tagInputValue,
   setTagInputValue,
+
   createTagLabel,
   inputRef,
   closeDropdown,
-}) => {
+}: TagDropDownProps) => {
   const dropdownRef = useRef(null);
 
   const [dropdownMaxHeight, setDropdownMaxHeight] = useState(0);
 
-  const preventDefault = (e) => {
-    e.preventDefault();
-  };
-
   const onClickOutside = () => {
-    /*     if (!e) return;
-    if (e.target.id === "shared_tags-input") return; */
-    // inputRef?.current?.blur();
     closeDropdown();
   };
 
   const addNewTag = () => {
     if (tagInputValue?.trim() === "") return;
+
     tagHandler.addNewTag(tagInputValue);
+
     setTagInputValue("");
+
     onClickOutside();
   };
 
-  const onKeyPress = (e) => e.key === "Enter" && addNewTag();
+  const onKeyPress = React.useCallback(
+    (e: KeyboardEvent) => {
+      e.key === "Enter" && addNewTag();
+    },
+    [addNewTag],
+  );
 
   useEffect(() => {
     inputRef?.current?.addEventListener("keyup", onKeyPress);
@@ -79,7 +83,7 @@ const TagDropdown = ({
       !chosenTags.includes(tag.toLowerCase()),
   );
 
-  const addFetchedTag = (name) => {
+  const addFetchedTag = (name: string) => {
     tagHandler.addTag(name);
     setTagInputValue("");
     onClickOutside();
@@ -93,7 +97,6 @@ const TagDropdown = ({
         heightTablet={32}
         key={tag}
         label={tag}
-        onMouseDown={preventDefault}
         onClick={() => addFetchedTag(tag)}
       />
     ));
@@ -108,7 +111,6 @@ const TagDropdown = ({
         <DropDownItem
           key={-2}
           className="dropdown-item"
-          onMouseDown={preventDefault}
           onClick={addNewTag}
           label={`${createTagLabel}  “${tagInputValue}”`}
           height={32}
@@ -123,7 +125,7 @@ const TagDropdown = ({
   useEffect(() => {
     if (dropdownRef && open) {
       const { top: offsetTop } = DomHelpers.getOffset(dropdownRef.current);
-      const offsetBottom = window.innerHeight - offsetTop;
+      const offsetBottom = window.innerHeight - Number(offsetTop);
       const maxHeight = Math.floor((offsetBottom - 22) / 32) * 32 - 2;
       const result = isMobile()
         ? Math.min(maxHeight, 158)

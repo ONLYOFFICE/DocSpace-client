@@ -28,7 +28,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { getFetchedRoomParams } from "@docspace/shared/utils/rooms";
+import {
+  getFetchedRoomParams,
+  TRoomParams,
+} from "@docspace/shared/utils/rooms";
 import { Text } from "@docspace/shared/components/text";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { RoomsType } from "@docspace/shared/enums";
@@ -43,6 +46,7 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 
 import { CreateRoomDialog } from "../dialogs";
+import { TRoom } from "@docspace/shared/api/rooms/types";
 
 type CreateRoomEventProps = {
   title: string;
@@ -115,9 +119,9 @@ const CreateRoomEvent = ({
   item,
 }: CreateRoomEventProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
-  const [fetchedTags, setFetchedTags] = useState([]);
+  const [fetchedTags, setFetchedTags] = useState<string[]>([]);
 
-  const onCreate = (roomParams) => {
+  const onCreate = (roomParams: TRoomParams) => {
     const itemLogo = roomParams.logo
       ? roomParams.logo
       : selectionItems.length
@@ -131,7 +135,7 @@ const CreateRoomEvent = ({
       roomParams.storageLocation.isThirdparty &&
       !roomParams.storageLocation.storageFolderId;
 
-    if (notConnectedThirdparty || !isCorrectWatermark(roomParams.watermark)) {
+    if (notConnectedThirdparty || !isCorrectWatermark(roomParams.watermark!)) {
       setCreateRoomConfirmDialogVisible(true);
 
       return;
@@ -151,11 +155,11 @@ const CreateRoomEvent = ({
       />
     ) : null;
 
-    onCreateRoom(t, false, successToast);
+    onCreateRoom(t, false, successToast as Element | null);
   };
 
   const fetchTagsAction = useCallback(async () => {
-    const tags = await fetchTags();
+    const tags = (await fetchTags()) as string[];
     setFetchedTags(tags);
   }, []);
 
@@ -174,12 +178,12 @@ const CreateRoomEvent = ({
   const roomParams = item
     ? {
         fetchedRoomParams: getFetchedRoomParams(
-          item,
+          item as TRoom,
           getThirdPartyIcon,
-          isDefaultRoomsQuotaSet,
+          isDefaultRoomsQuotaSet!,
         ),
       }
-    : {};
+    : { fetchedRoomParams: null };
 
   return (
     <CreateRoomDialog

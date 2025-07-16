@@ -27,30 +27,44 @@
 // import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
+import { TFunction } from "i18next";
+
+import { TRoomStorageLocation } from "@docspace/shared/utils/rooms";
 
 import { connectedCloudsTypeTitleTranslation as getProviderTypeTitle } from "SRC_DIR/helpers/filesUtils";
 
 import PermanentSetting from "./PermanentSetting";
 
-const StyledPermanentSettings = styled.div`
+const StyledPermanentSettings = styled.div<{ displayNone: boolean }>`
   display: ${(props) => (props.displayNone ? "none" : "flex")};
   flex-direction: row;
   gap: 8px;
   margin-top: -12px;
 `;
 
-const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
+type PermanentSettingsProps = {
+  t: TFunction;
+  isThirdparty: boolean;
+  storageLocation: TRoomStorageLocation;
+  isPrivate: boolean;
+};
+
+const PermanentSettings = ({
+  t,
+  isThirdparty,
+  storageLocation,
+}: PermanentSettingsProps) => {
   const thirdpartyTitle = getProviderTypeTitle(storageLocation?.providerKey, t);
   const thirdpartyFolderName = isThirdparty ? storageLocation?.title : "";
 
   return (
-    <StyledPermanentSettings displayNone={!(isPrivate || isThirdparty)}>
+    <StyledPermanentSettings displayNone={!isThirdparty}>
       {isThirdparty ? (
         <PermanentSetting
           type="storageLocation"
-          isFull={!isPrivate}
           icon={storageLocation.iconSrc}
           title={thirdpartyTitle}
+          isFull={false}
           content={
             <Trans
               i18nKey="ThirdPartyStoragePermanentSettingDescription"
@@ -59,18 +73,10 @@ const PermanentSettings = ({ t, isThirdparty, storageLocation, isPrivate }) => {
             >
               Files are stored in a third-party {{ thirdpartyTitle }} storage in
               the \"{{ thirdpartyFolderName }}\" folder.{" "}
-              {/* <strong>{{ thirdpartyPath }}</strong>" */}
             </Trans>
           }
         />
       ) : null}
-      {/* {isPrivate && (
-        <PermanentSetting
-          type="privacy"
-          isFull={!storageLocation}
-          icon={SecuritySvgUrl}
-        />
-      )} */}
     </StyledPermanentSettings>
   );
 };

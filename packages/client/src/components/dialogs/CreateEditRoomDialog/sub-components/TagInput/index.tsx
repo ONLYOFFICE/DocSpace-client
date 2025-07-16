@@ -26,13 +26,14 @@
 
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import { TFunction } from "i18next";
 
 import TagList from "./TagList";
 
 import InputParam from "../Params/InputParam";
 import TagDropdown from "./TagDropdown";
 
-const StyledTagInput = styled.div`
+const StyledTagInput = styled.div<{ hasTags: boolean }>`
   position: relative;
 
   .set_room_params-tag_input {
@@ -54,6 +55,17 @@ const StyledTagInput = styled.div`
   ${({ hasTags }) => !hasTags && "margin-bottom: -8px"}
 `;
 
+type TagInputProps = {
+  t: TFunction;
+  title: string;
+  tagHandler: any;
+  setIsScrollLocked: (value: boolean) => void;
+  isDisabled: boolean;
+  tooltipLabel?: string;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+};
+
 const TagInput = ({
   t,
   title,
@@ -63,8 +75,8 @@ const TagInput = ({
   tooltipLabel,
   onFocus,
   onBlur,
-}) => {
-  const inputRef = useRef();
+}: TagInputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [tagInput, setTagInput] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -79,7 +91,7 @@ const TagInput = ({
     setIsDropdownOpen(false);
   };
 
-  const onTagInputChange = (e) => {
+  const onTagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
 
     if (text.trim().length > 0 && !isDropdownOpen) {
@@ -91,20 +103,20 @@ const TagInput = ({
     setTagInput(text);
   };
 
-  const handleFocus = (event) => {
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     const text = event.target.value;
     if (text.trim().length > 0) {
       openDropdown();
     }
-    onFocus && onFocus();
+    onFocus && onFocus(event);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     closeDropdown();
-    onBlur && onBlur();
+    onBlur && onBlur(e);
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const keyCode = event.code;
 
     const isAcceptableEvents =
@@ -145,11 +157,7 @@ const TagInput = ({
         closeDropdown={closeDropdown}
       />
 
-      <TagList
-        tagHandler={tagHandler}
-        defaultTagLabel=""
-        isDisabled={isDisabled}
-      />
+      <TagList tagHandler={tagHandler} isDisabled={isDisabled} />
     </StyledTagInput>
   );
 };

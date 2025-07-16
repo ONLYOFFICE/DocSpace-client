@@ -24,19 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+import { TFunction } from "i18next";
+
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import { Link } from "@docspace/shared/components/link";
-import { getOAuthToken } from "@docspace/shared/utils/common";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+
 import { StyledParam } from "../Params/StyledParam";
 import ToggleParam from "../Params/ToggleParam";
-import ThirdPartyComboBox from "./ThirdPartyComboBox";
 
+import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { ThirdPartyStore } from "SRC_DIR/store/ThirdPartyStore";
+import { TRoomStorageLocation } from "@docspace/shared/utils/rooms";
+import { TConnectingStorage } from "@docspace/shared/api/files/types";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -47,6 +54,36 @@ const StyledThirdPartyStorage = styled(StyledParam)`
   }
 `;
 
+type ThirdPartyStorageProps = {
+  t: TFunction;
+  roomTitle: string;
+
+  storageLocation: TRoomStorageLocation;
+  onChangeStorageLocation: (value: TRoomStorageLocation) => void;
+
+  setIsOauthWindowOpen: (value: boolean) => void;
+
+  createNewFolderIsChecked: boolean;
+  onCreateFolderChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+
+  isDisabled: boolean;
+  isRoomAdmin?: boolean;
+  isAdmin?: boolean;
+
+  currentColorScheme?: SettingsStore["currentColorScheme"];
+
+  setRoomCreation?: DialogsStore["setRoomCreation"];
+  setConnectItem?: DialogsStore["setConnectItem"];
+  setConnectDialogVisible?: DialogsStore["setConnectDialogVisible"];
+  setSaveThirdpartyResponse?: DialogsStore["setSaveThirdpartyResponse"];
+  saveThirdpartyResponse?: DialogsStore["saveThirdpartyResponse"];
+
+  openConnectWindow?: ThirdPartyStore["openConnectWindow"];
+  deleteThirdParty?: ThirdPartyStore["deleteThirdParty"];
+  fetchConnectingStorages?: ThirdPartyStore["fetchConnectingStorages"];
+  connectItems?: ThirdPartyStore["connectingStorages"];
+};
+
 const ThirdPartyStorage = ({
   t,
 
@@ -54,7 +91,6 @@ const ThirdPartyStorage = ({
   storageLocation,
   onChangeStorageLocation,
 
-  setIsScrollLocked,
   setIsOauthWindowOpen,
 
   connectItems,
@@ -62,7 +98,6 @@ const ThirdPartyStorage = ({
   setRoomCreation,
   saveThirdpartyResponse,
   setSaveThirdpartyResponse,
-  saveThirdParty,
   deleteThirdParty,
   openConnectWindow,
   setConnectItem,
@@ -75,16 +110,16 @@ const ThirdPartyStorage = ({
   onCreateFolderChange,
 
   fetchConnectingStorages,
-}) => {
+}: ThirdPartyStorageProps) => {
   const channel = useRef(new BroadcastChannel("thirdpartyActivation"));
   channel.current.onmessage = (shouldRender) => {
-    shouldRender && fetchConnectingStorages();
+    shouldRender && fetchConnectingStorages!();
   };
 
   const onChangeIsThirdparty = () => {
     if (isDisabled) return;
 
-    if (!connectItems.length) {
+    if (!connectItems?.length) {
       const data = isRoomAdmin ? (
         <Text as="p">
           {t("ThirdPartyStorageRoomAdminNoStorageAlert", {
@@ -96,16 +131,16 @@ const ThirdPartyStorage = ({
           {t("ThirdPartyStorageNoStorageAlert")}{" "}
           <Link
             href="/portal-settings/integration/third-party-services"
-            type="page"
+            type={LinkType.page}
             noHover
-            color={currentColorScheme.main?.accent}
+            color={currentColorScheme?.main?.accent}
           >
             {t("Translations:ThirdPartyTitle")}
           </Link>
         </Text>
       );
 
-      toastr.warning(data, null, 5000, true, false);
+      toastr.warning(data, "", 5000, true, false);
 
       return;
     }
@@ -116,28 +151,31 @@ const ThirdPartyStorage = ({
     });
   };
 
-  const onChangeProvider = async (provider) => {
+  const onChangeProvider = async (provider: TConnectingStorage) => {
     if (storageLocation.thirdpartyAccount) {
       onChangeStorageLocation({
         ...storageLocation,
         provider,
         thirdpartyAccount: null,
       });
-      await deleteThirdParty(storageLocation.thirdpartyAccount.providerId);
+      await deleteThirdParty!(
+        (storageLocation.thirdpartyAccount as { providerId: string })
+          .providerId,
+      );
       return;
     }
 
     onChangeStorageLocation({ ...storageLocation, provider });
   };
 
-  const onChangeStorageFolderId = (storageFolderId) =>
+  const onChangeStorageFolderId = (storageFolderId: string) =>
     onChangeStorageLocation({
       ...storageLocation,
       storageFolderId,
     });
 
   useEffect(() => {
-    fetchConnectingStorages();
+    fetchConnectingStorages!();
   }, []);
 
   return (
@@ -146,7 +184,7 @@ const ThirdPartyStorage = ({
         id="shared_third-party-storage-toggle"
         title={t("Common:ThirdPartyStorage")}
         description={t("Common:ThirdPartyStorageDescription")}
-        isChecked={storageLocation.isThirdparty}
+        isChecked={storageLocation.isThirdparty ?? false}
         onCheckedChange={onChangeIsThirdparty}
       />
 
@@ -156,19 +194,16 @@ const ThirdPartyStorage = ({
           storageLocation={storageLocation}
           onChangeStorageLocation={onChangeStorageLocation}
           onChangeProvider={onChangeProvider}
-          connectItems={connectItems}
-          setConnectDialogVisible={setConnectDialogVisible}
-          setRoomCreation={setRoomCreation}
-          saveThirdParty={saveThirdParty}
-          saveThirdpartyResponse={saveThirdpartyResponse}
-          setSaveThirdpartyResponse={setSaveThirdpartyResponse}
-          openConnectWindow={openConnectWindow}
-          setConnectItem={setConnectItem}
-          getOAuthToken={getOAuthToken}
-          setIsScrollLocked={setIsScrollLocked}
+          connectItems={connectItems!}
+          setConnectDialogVisible={setConnectDialogVisible!}
+          setRoomCreation={setRoomCreation!}
+          saveThirdpartyResponse={saveThirdpartyResponse!}
+          setSaveThirdpartyResponse={setSaveThirdpartyResponse!}
+          openConnectWindow={openConnectWindow!}
+          setConnectItem={setConnectItem!}
           setIsOauthWindowOpen={setIsOauthWindowOpen}
           isDisabled={isDisabled}
-          isAdmin={isAdmin}
+          isAdmin={isAdmin!}
         />
       ) : null}
 
@@ -177,7 +212,9 @@ const ThirdPartyStorage = ({
           <FolderInput
             t={t}
             roomTitle={roomTitle}
-            thirdpartyAccount={storageLocation.thirdpartyAccount}
+            thirdpartyAccount={
+              storageLocation.thirdpartyAccount as Record<string, unknown>
+            }
             onChangeStorageFolderId={onChangeStorageFolderId}
             isDisabled={isDisabled}
             createNewFolderIsChecked={createNewFolderIsChecked}
@@ -196,23 +233,23 @@ const ThirdPartyStorage = ({
 };
 
 export default inject(
-  ({ authStore, settingsStore, filesSettingsStore, dialogsStore }) => {
+  ({ authStore, settingsStore, filesSettingsStore, dialogsStore }: TStore) => {
     const { currentColorScheme } = settingsStore;
 
-    const { openConnectWindow, saveThirdParty, deleteThirdParty } =
-      filesSettingsStore.thirdPartyStore;
+    const {
+      openConnectWindow,
+      deleteThirdParty,
+      connectingStorages: connectItems,
+      fetchConnectingStorages,
+    } = filesSettingsStore.thirdPartyStore;
 
     const {
       setConnectItem,
       setConnectDialogVisible,
       setRoomCreation,
-      saveThirdpartyResponse,
       setSaveThirdpartyResponse,
+      saveThirdpartyResponse,
     } = dialogsStore;
-
-    const thirdPartyStore = filesSettingsStore.thirdPartyStore;
-
-    const connectItems = thirdPartyStore.connectingStorages;
 
     const { isRoomAdmin, isAdmin } = authStore;
 
@@ -222,7 +259,6 @@ export default inject(
       setConnectDialogVisible,
       setRoomCreation,
 
-      saveThirdParty,
       deleteThirdParty,
 
       saveThirdpartyResponse,
@@ -233,7 +269,7 @@ export default inject(
       currentColorScheme,
       isRoomAdmin,
       isAdmin,
-      fetchConnectingStorages: thirdPartyStore.fetchConnectingStorages,
+      fetchConnectingStorages,
     };
   },
 )(observer(ThirdPartyStorage));

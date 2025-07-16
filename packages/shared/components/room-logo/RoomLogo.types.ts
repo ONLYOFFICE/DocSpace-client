@@ -28,7 +28,7 @@ import { RoomsType } from "../../enums";
 
 export interface RoomLogoProps {
   /** Accepts room type */
-  type: RoomsType;
+  type?: RoomsType;
   /** Adds privacy icon  */
   isPrivacy?: boolean;
   /** Adds archive icon  */

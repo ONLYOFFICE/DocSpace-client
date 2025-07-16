@@ -24,75 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Tag } from "@docspace/shared/components/tag";
-import styled from "styled-components";
-
-const StyledTagList = styled.div`
-  margin-top: 12px;
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  flex-wrap: wrap;
+.roomTypeList {
+  margin-top: 20px;
   width: 100%;
-
-  .set_room_params-tag_input-tag {
-    padding: 6px 8px;
-    border-radius: 3px;
-    margin: 0;
-    overflow: hidden;
-
-    svg {
-      width: 12px;
-      height: 12px;
-    }
-  }
-`;
-
-const TagList = ({ tagHandler, isDisabled }) => {
-  const { tags } = tagHandler;
-
-  const onDeleteAction = (id) => {
-    if (isDisabled) return;
-    tagHandler.deleteTag(id);
-  };
-
-  return (
-    <StyledTagList className="set_room_params-tag_input-tag_list">
-      {tags.map((tag) => (
-        <Tag
-          key={tag.id}
-          className="set_room_params-tag_input-tag"
-          tag="script"
-          label={tag.name}
-          isNewTag
-          onDelete={() => {
-            onDeleteAction(tag.id);
-          }}
-        />
-      ))}
-      {/* {tags.length ? (
-        tags.map((tag) => (
-          <Tag
-            key={tag.id}
-            className="set_room_params-tag_input-tag"
-            tag="script"
-            label={tag.name}
-            isNewTag
-            onDelete={() => {
-              onDeleteAction(tag.id);
-            }}
-          />
-        ))
-      ) : (
-        <Tag
-          className="set_room_params-tag_input-tag"
-          tag="script"
-          label={defaultTagLabel}
-          isDefault
-        />
-      )} */}
-    </StyledTagList>
-  );
-};
-
-export default TagList;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}

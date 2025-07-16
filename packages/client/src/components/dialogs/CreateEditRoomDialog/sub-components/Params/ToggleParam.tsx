@@ -24,59 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
-const StyledParam = styled.div.attrs(injectDefaultTheme)`
+import { StyledParam } from "./StyledParam";
+
+const StyledToggleParam = styled(StyledParam)`
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
   box-sizing: border-box;
-  display: flex;
-  width: 100%;
+  max-width: 100%;
 
-  ${(props) =>
-    props.storageLocation
-      ? css``
-      : props.folderName
-        ? css`
-            flex-direction: column;
-            gap: 4px;
-          `
-        : ""}
-
-  .set_room_params-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-
-    .set_room_params-info-title {
-      user-select: none;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 6px;
-
-      .set_room_params-info-title-text {
-        user-select: none;
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 20px;
-      }
-    }
-    .set_room_params-info-description {
-      user-select: none;
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 16px;
-      color: ${(props) =>
-        props.theme.createEditRoomDialog.commonParam.descriptionColor};
-    }
+  .set_room_params-info-description {
+    box-sizing: border-box;
+    max-width: 100%;
   }
 
   .set_room_params-toggle {
     width: 28px;
-    height: 16px;
-    margin: 2px 0;
+    min-width: 28px;
   }
 `;
 
-export { StyledParam };
+type ToggleParamProps = {
+  id: string;
+  title: string;
+  description: string;
+  isChecked: boolean;
+  onCheckedChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const ToggleParam = ({
+  id,
+  title,
+  description,
+  isChecked,
+  onCheckedChange,
+}: ToggleParamProps) => {
+  return (
+    <StyledToggleParam>
+      <div className="set_room_params-info">
+        <div className="set_room_params-info-title">
+          <div className="set_room_params-info-title-text">{title}</div>
+        </div>
+        <div className="set_room_params-info-description">{description}</div>
+      </div>
+      <ToggleButton
+        id={id}
+        className="set_room_params-toggle"
+        isChecked={isChecked}
+        onChange={onCheckedChange}
+      />
+    </StyledToggleParam>
+  );
+};
+
+export default ToggleParam;

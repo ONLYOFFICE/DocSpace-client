@@ -24,14 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { TFunction } from "i18next";
+
+import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { TFolder } from "@docspace/shared/api/files/types";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";
-import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
@@ -125,6 +128,15 @@ const StyledFolderInput = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
+type FolderInputProps = {
+  t: TFunction;
+  roomTitle: string;
+  thirdpartyAccount: Record<string, unknown>;
+  onChangeStorageFolderId: (storageFolderId: string) => void;
+  isDisabled: boolean;
+  createNewFolderIsChecked: boolean;
+};
+
 const FolderInput = ({
   t,
   roomTitle,
@@ -132,8 +144,8 @@ const FolderInput = ({
   onChangeStorageFolderId,
   isDisabled,
   createNewFolderIsChecked,
-}) => {
-  const [treeNode, setTreeNode] = useState(null);
+}: FolderInputProps) => {
+  const [treeNode, setTreeNode] = useState<TFolder | null>(null);
   const [path, setPath] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -149,10 +161,10 @@ const FolderInput = ({
     if (!treeNode) return;
 
     let currentPath = treeNode.path;
-    currentPath = currentPath.slice(1);
+    currentPath = currentPath?.slice(1);
 
     let result = "";
-    currentPath.map(
+    currentPath?.map(
       (node, i) =>
         (result += node.title + (i !== currentPath.length - 1 ? "/" : "")),
     );
@@ -162,11 +174,9 @@ const FolderInput = ({
 
   useEffect(() => {
     if (!treeNode) return;
-    onChangeStorageFolderId(treeNode.id);
+    onChangeStorageFolderId(treeNode?.id?.toString() || "");
     getPathValue();
   }, [treeNode]);
-
-  console.log(thirdpartyAccount);
 
   if (!thirdpartyAccount.id) return null;
 
@@ -179,7 +189,7 @@ const FolderInput = ({
 
   return (
     <>
-      <StyledFolderInput noRoomTitle={!roomTitle} onClick={onOpen}>
+      <StyledFolderInput onClick={onOpen}>
         <div className="folder-path-wrapper" title={title}>
           <span className="root_label">
             {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
@@ -197,14 +207,18 @@ const FolderInput = ({
       </StyledFolderInput>
 
       {isDialogOpen ? (
+        // @ts-expect-error need pass all props
         <FilesSelector
           isPanelVisible={isDialogOpen}
           onClose={onClose}
           isThirdParty
           isSelectFolder
           onSelectTreeNode={setTreeNode}
-          passedFoldersTree={[thirdpartyAccount]}
-          currentFolderId={treeNode ? treeNode.id : thirdpartyAccount.id}
+          currentFolderId={
+            treeNode
+              ? treeNode.id
+              : ((thirdpartyAccount as Record<string, unknown>).id as string)
+          }
         />
       ) : null}
     </>

@@ -34,8 +34,11 @@ import { Portal } from "@docspace/shared/components/portal";
 
 import { globalColors } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { RoomsType } from "@docspace/shared/enums";
 
-const StyledDropdownMobile = styled.div.attrs(injectDefaultTheme)`
+const StyledDropdownMobile = styled.div.attrs(injectDefaultTheme)<{
+  isOpen: boolean;
+}>`
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
   position: fixed;
   bottom: 0;
@@ -47,13 +50,19 @@ const StyledDropdownMobile = styled.div.attrs(injectDefaultTheme)`
     props.theme.createEditRoomDialog.roomTypeDropdown.mobile.background};
 `;
 
+type DropdownMobileProps = {
+  open: boolean;
+  onClose: () => void;
+  chooseRoomType: (roomType: RoomsType) => void;
+  forceHideDropdown: boolean;
+};
+
 const DropdownMobile = ({
-  t,
   open,
   onClose,
   chooseRoomType,
   forceHideDropdown,
-}) => {
+}: DropdownMobileProps) => {
   return (
     <Portal
       visible
@@ -71,12 +80,13 @@ const DropdownMobile = ({
             <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
               {RoomsTypeValues.map((roomType) => (
                 <RoomType
-                  id={roomType}
-                  t={t}
+                  id={roomType.toString()}
                   key={roomType}
                   roomType={roomType}
                   type="dropdownItem"
                   onClick={() => chooseRoomType(roomType)}
+                  isOpen
+                  selectedId={roomType.toString()}
                 />
               ))}
             </StyledDropdownMobile>

@@ -27,7 +27,6 @@
 import styled from "styled-components";
 
 import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
-
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { globalColors } from "@docspace/shared/themes";
 
@@ -36,7 +35,10 @@ const StyledDropDownWrapper = styled.div`
   position: relative;
 `;
 
-const StyledDropDown = styled(DropDown).attrs(injectDefaultTheme)`
+const StyledDropDown = styled(DropDown).attrs(injectDefaultTheme)<{
+  marginTop?: string;
+  hasItems?: boolean;
+}>`
   margin-top: ${(props) => (props.marginTop ? props.marginTop : "4px")};
   padding: 6px 0;
   background: ${(props) =>

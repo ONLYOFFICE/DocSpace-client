@@ -32,8 +32,12 @@ import { globalColors } from "@docspace/shared/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { RoomsType } from "@docspace/shared/enums";
 
-const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)`
+const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)<{
+  isOpen: boolean;
+  heightReady: boolean;
+}>`
   max-width: 100%;
   position: relative;
 
@@ -62,11 +66,17 @@ const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const DropdownDesktop = ({ t, open, chooseRoomType }) => {
-  const [heightList, setHeightList] = useState(null);
-  const dropdownRef = useRef(null);
+type DropdownDesktopProps = {
+  open: boolean;
+  chooseRoomType: (roomType: RoomsType) => void;
+};
+
+const DropdownDesktop = ({ open, chooseRoomType }: DropdownDesktopProps) => {
+  const [heightList, setHeightList] = useState<number | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const onHeightCalculation = () => {
+    if (!dropdownRef.current) return;
     const screenHeight = document.documentElement.clientHeight;
     const elementHeight = dropdownRef.current.getBoundingClientRect().bottom;
     const elementShadowHeight = 12;
@@ -105,12 +115,13 @@ const DropdownDesktop = ({ t, open, chooseRoomType }) => {
 
   const roomTypes = RoomsTypeValues.map((roomType) => (
     <RoomType
-      id={roomType}
-      t={t}
+      id={roomType.toString()}
       key={roomType}
       roomType={roomType}
       type="dropdownItem"
       onClick={() => chooseRoomType(roomType)}
+      isOpen={false}
+      selectedId={roomType.toString()}
     />
   ));
 

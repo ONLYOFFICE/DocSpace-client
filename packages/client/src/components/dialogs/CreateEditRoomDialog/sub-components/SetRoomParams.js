@@ -476,15 +476,6 @@ const SetRoomParams = ({
         }
       />
 
-      {/* //TODO: Uncomment when private rooms are done
-      {!isEdit && (
-        <IsPrivateParam
-          t={t}
-          isPrivate={roomParams.isPrivate}
-          onChangeIsPrivate={onChangeIsPrivate}
-        />
-      )} */}
-
       {isTemplate ? (
         <TemplateAccess
           roomOwner={createdBy ?? roomParams.roomOwner}

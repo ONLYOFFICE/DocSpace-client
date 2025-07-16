@@ -161,7 +161,7 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
   }
 };
 
-export const getCategoryUrl = (categoryType, folderId = null) => {
+export const getCategoryUrl = (categoryType, folderId) => {
   const cType = categoryType;
 
   switch (cType) {

@@ -26,17 +26,20 @@
 
 import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { TWatermark } from "@docspace/shared/api/rooms/types";
 
 import ViewerInfoWatermark from "./ViewerInfo";
 import { StyledBody } from "./StyledComponent";
 import ImageWatermark from "./ImageWatermark";
+import { TRoomParams } from "@docspace/shared/utils/rooms";
 
 const imageWatermark = "image";
 const viewerInfoWatermark = "viewerInfo";
 
-const options = (t) => [
+const options = (t: TFunction) => [
   {
     label: t("ViewerInfo"),
     value: viewerInfoWatermark,
@@ -47,7 +50,10 @@ const options = (t) => [
   },
 ];
 
-const getOptionType = (initialWatermarksSettings, isEdit) => {
+const getOptionType = (
+  initialWatermarksSettings: TWatermark,
+  isEdit: boolean,
+) => {
   if (isEdit) {
     return initialWatermarksSettings?.additions === 0 &&
       initialWatermarksSettings?.imageUrl
@@ -57,18 +63,26 @@ const getOptionType = (initialWatermarksSettings, isEdit) => {
 
   return viewerInfoWatermark;
 };
+
+type WatermarksProps = {
+  isEdit: boolean;
+  roomParams: TRoomParams;
+  setRoomParams: (params: TRoomParams) => void;
+  initialRoomParams: TRoomParams;
+};
+
 const Watermarks = ({
   isEdit,
   roomParams,
   setRoomParams,
   initialRoomParams,
-}) => {
+}: WatermarksProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const [type, setType] = useState(
-    getOptionType(initialRoomParams.watermark, isEdit),
+    getOptionType(initialRoomParams.watermark!, isEdit),
   );
 
-  const initialInfo = useRef(null);
+  const initialInfo = useRef<{ isImageType: boolean } | null>(null);
 
   if (initialInfo.current === null) {
     initialInfo.current = {
@@ -77,7 +91,7 @@ const Watermarks = ({
   }
   const initialInfoRef = initialInfo.current;
 
-  const onSelectType = (e) => {
+  const onSelectType = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
     setType(value);
@@ -99,7 +113,7 @@ const Watermarks = ({
       {type === imageWatermark ? (
         <ImageWatermark
           isEdit={isEdit}
-          initialSettings={initialRoomParams.watermark}
+          initialSettings={initialRoomParams.watermark!}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
           isImage={initialInfoRef.isImageType}
@@ -107,7 +121,7 @@ const Watermarks = ({
       ) : (
         <ViewerInfoWatermark
           isEdit={isEdit}
-          initialSettings={initialRoomParams.watermark}
+          initialSettings={initialRoomParams.watermark!}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
           isImage={initialInfoRef.isImageType}

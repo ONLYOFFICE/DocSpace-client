@@ -614,7 +614,7 @@ export const enum EditorConfigErrorType {
  * Enum for watermarks.
  * @readonly
  */
-export const enum WatermarkAdditions {
+export enum WatermarkAdditions {
   UserName = 1,
   UserEmail = 2,
   UserIpAdress = 4,

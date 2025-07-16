@@ -24,30 +24,76 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { globalColors } from "@docspace/shared/themes";
 import styled from "styled-components";
 
-import ToggleParam from "../Params/ToggleParam";
-import PrivacyLimitationsWarning from "./PrivacyLimitationsWarning";
+const StyledWatermark = styled.div<{
+  isEdit?: boolean;
+  rotate?: number;
+  scale?: number;
+}>`
+  margin-top: 16px;
 
-const StyledIsPrivateParam = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  .watermark-title {
+    margin: 16px 0 8px 0;
+  }
+  .title-without-top {
+    margin-top: 0px;
+  }
+  .watermark-checkbox {
+    margin: 18px 0 0 0;
+  }
+
+  .options-wrapper {
+    display: grid;
+    grid-template-rows: 56px 56px;
+    gap: 16px;
+
+    .options {
+      color: ${(props) => props.theme.comboBox.label.selectedColor};
+    }
+  }
+
+  .image-wrapper {
+    display: grid;
+    grid-template-columns: 216px auto;
+    gap: 16px;
+
+    .image-description {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+
+      .image-watermark_text {
+        margin-bottom: 8px;
+      }
+    }
+
+    .image-watermark_wrapper {
+      width: 216px;
+      height: 216px;
+      border: 1px solid ${globalColors.grayLightMid};
+
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 88%;
+        height: 88%;
+        transform: ${(props) =>
+          `rotate(${props.rotate}deg) scale(${props.scale})`};
+
+        opacity: 0.4;
+        margin: auto;
+      }
+    }
+  }
+`;
+const StyledBody = styled.div`
+  .types-content {
+  }
 `;
 
-const IsPrivateParam = ({ t, isPrivate, onChangeIsPrivate }) => {
-  return (
-    <StyledIsPrivateParam>
-      <ToggleParam
-        title={t("MakeRoomPrivateTitle")}
-        description={t("MakeRoomPrivateDescription")}
-        isChecked={isPrivate}
-        onCheckedChange={onChangeIsPrivate}
-      />
-      {isPrivate ? <PrivacyLimitationsWarning t={t} /> : null}
-    </StyledIsPrivateParam>
-  );
-};
-
-export default IsPrivateParam;
+export { StyledWatermark, StyledBody };

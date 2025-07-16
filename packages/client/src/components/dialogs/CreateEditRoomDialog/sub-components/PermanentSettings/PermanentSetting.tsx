@@ -32,7 +32,10 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import SecondaryInfoButton from "../SecondaryInfoButton";
 
-const StyledPermanentSetting = styled.div.attrs(injectDefaultTheme)`
+const StyledPermanentSetting = styled.div.attrs(injectDefaultTheme)<{
+  isFull: boolean;
+  type: string;
+}>`
   box-sizing: border-box;
   display: flex;
   flex-direction: ${(props) => (props.isFull ? "column" : "row")};
@@ -102,7 +105,21 @@ const StyledPermanentSetting = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const PermanentSetting = ({ isFull, type, icon, title, content }) => {
+type PermanentSettingProps = {
+  isFull: boolean;
+  type: string;
+  icon: string;
+  title: string;
+  content: React.ReactNode;
+};
+
+const PermanentSetting = ({
+  isFull,
+  type,
+  icon,
+  title,
+  content,
+}: PermanentSettingProps) => {
   return (
     <StyledPermanentSetting
       className="permanent_setting"

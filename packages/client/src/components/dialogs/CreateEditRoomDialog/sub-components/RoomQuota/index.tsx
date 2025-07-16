@@ -29,24 +29,32 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { QuotaForm } from "@docspace/shared/components/quota-form";
+import { TRoomParams } from "@docspace/shared/utils/rooms";
 
-const RoomQuota = (props) => {
-  const {
-    setRoomParams,
-    roomParams,
-    defaultRoomsQuota,
-    isEdit,
-    isTemplate,
-    isLoading,
-  } = props;
+type RoomQuotaProps = {
+  setRoomParams: (roomParams: any) => void;
+  roomParams: TRoomParams;
+  defaultRoomsQuota?: number;
+  isEdit: boolean;
+  isTemplate: boolean;
+  isLoading: boolean;
+};
 
+const RoomQuota = ({
+  setRoomParams,
+  roomParams,
+  defaultRoomsQuota,
+  isEdit,
+  isTemplate,
+  isLoading,
+}: RoomQuotaProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
-  const onSetQuotaBytesSize = (size) => {
+  const onSetQuotaBytesSize = (size: string) => {
     setRoomParams({ ...roomParams, quota: size });
   };
 
-  const defaultValue = useRef(roomParams.quota);
+  const defaultValue = useRef(roomParams.quota!);
 
   return (
     <QuotaForm
@@ -55,14 +63,16 @@ const RoomQuota = (props) => {
       checkboxLabel={t("DisableRoomQuota")}
       onSetQuotaBytesSize={onSetQuotaBytesSize}
       initialSize={
-        isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota
+        isEdit || isTemplate ? defaultValue.current : defaultRoomsQuota!
       }
       isDisabled={isLoading || roomParams.storageLocation.isThirdparty}
+      isLoading={false}
+      isError={false}
     />
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore }: TStore) => {
   const { defaultRoomsQuota } = currentQuotaStore;
 
   return { defaultRoomsQuota };

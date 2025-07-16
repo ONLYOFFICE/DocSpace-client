@@ -35,6 +35,7 @@ import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import { FolderType } from "@docspace/shared/enums";
+
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
@@ -197,7 +198,6 @@ const CreateRoomDialog = ({
     setTemplateItem({ ...item, title: item.label });
 
     const newRoomParams = getFetchedRoomParams(
-      // { ...roomParams, id: item?.id, title: item?.label, logo: item?.logo },
       { ...roomParams, ...item },
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,

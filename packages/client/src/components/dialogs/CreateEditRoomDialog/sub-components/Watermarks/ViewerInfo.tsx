@@ -26,44 +26,52 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 
-import { TextInput } from "@docspace/shared/components/text-input";
+import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
+import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
+import { TWatermark } from "@docspace/shared/api/rooms/types";
+import { TRoomParams } from "@docspace/shared/utils/rooms";
 
-import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import { StyledWatermark } from "./StyledComponent";
 
-const tabsOptions = (t) => [
+const tabsOptions = (t: TFunction) => [
   {
     id: "UserName",
     name: t("UserName"),
     index: 0,
+    content: null,
   },
   {
     id: "UserEmail",
     name: t("UserEmail"),
     index: 1,
+    content: null,
   },
   {
     id: "UserIpAdress",
     name: t("UserIPAddress"),
     index: 2,
+    content: null,
   },
   {
     id: "CurrentDate",
     name: t("Common:CurrentDate"),
     index: 3,
+    content: null,
   },
   {
     id: "RoomName",
     name: t("Common:RoomName"),
     index: 4,
+    content: null,
   },
 ];
 
-const getInitialState = (initialTab) => {
+const getInitialState = (initialTab: { id: string }[]) => {
   const state = {
     UserName: false,
     UserEmail: false,
@@ -73,23 +81,31 @@ const getInitialState = (initialTab) => {
   };
 
   initialTab.forEach((item) => {
-    state[item.id] = true;
+    state[item.id as keyof typeof state] = true;
   });
 
   return state;
 };
 
-const getInitialText = (text, isEdit) => {
+const getInitialText = (text: string, isEdit: boolean) => {
   return isEdit && text ? text : "";
 };
 
-const getTabsInfo = (additions, t, tabs) => {
+const getTabsInfo = (
+  additions: number,
+  t: TFunction,
+  tabs?: { id: string; index: number }[],
+) => {
   const dataTabs = tabs ?? tabsOptions(t);
 
-  return dataTabs.filter((item) => additions & WatermarkAdditions[item.id]);
+  return dataTabs.filter(
+    (item) =>
+      additions &
+      WatermarkAdditions[item.id as keyof typeof WatermarkAdditions],
+  );
 };
 
-const getInitialTabs = (additions, isEdit, t) => {
+const getInitialTabs = (additions: number, isEdit: boolean, t: TFunction) => {
   const dataTabs = tabsOptions(t);
 
   if (!isEdit || !additions) return [dataTabs[0]];
@@ -97,12 +113,17 @@ const getInitialTabs = (additions, isEdit, t) => {
   return getTabsInfo(additions, t, dataTabs);
 };
 
-const rotateOptions = (t) => [
+const rotateOptions = (t: TFunction) => [
   { key: -45, label: t("Diagonal") },
   { key: 0, label: t("Horizontal") },
 ];
 
-const getInitialRotate = (rotate, isEdit, isImage, t) => {
+const getInitialRotate = (
+  rotate: number,
+  isEdit: boolean,
+  isImage: boolean,
+  t: TFunction,
+) => {
   const dataRotate = rotateOptions(t);
 
   if (!isEdit || (isEdit && isImage)) return dataRotate[0];
@@ -114,6 +135,14 @@ const getInitialRotate = (rotate, isEdit, isImage, t) => {
   return !item ? dataRotate[0] : item;
 };
 
+type ViewerInfoWatermarkProps = {
+  isEdit: boolean;
+  setRoomParams: (params: TRoomParams) => void;
+  roomParams: TRoomParams;
+  isImage: boolean;
+  initialSettings: TWatermark;
+};
+
 const ViewerInfoWatermark = ({
   isEdit,
 
@@ -121,11 +150,17 @@ const ViewerInfoWatermark = ({
   roomParams,
   isImage,
   initialSettings,
-}) => {
+}: ViewerInfoWatermarkProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
-  const elements = useRef(null);
-  const initialInfo = useRef(null);
+  const elements = useRef<ReturnType<typeof getInitialState> | null>(null);
+  const initialInfo = useRef<{
+    dataRotate: { key: number; label: string }[];
+    dataTabs: { id: string; name: string; index: number; content: null }[];
+    tabs: { id: string; index: number }[];
+    rotate: { key: number; label: string };
+    text: string;
+  } | null>(null);
   let watermark = roomParams.watermark;
 
   if (initialInfo.current === null) {
@@ -134,7 +169,7 @@ const ViewerInfoWatermark = ({
       dataTabs: tabsOptions(t),
       tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
       rotate: getInitialRotate(initialSettings?.rotate, isEdit, isImage, t),
-      text: getInitialText(initialSettings?.text, isEdit),
+      text: getInitialText(initialSettings?.text!, isEdit),
     };
 
     elements.current = getInitialState(initialInfo.current.tabs);
@@ -168,47 +203,50 @@ const ViewerInfoWatermark = ({
     });
   }, []);
 
-  const onSelect = (item) => {
+  const onSelect = (item: { id: string }) => {
     const elementsData = elements.current;
     let flagsCount = 0;
 
     const key = item.id;
 
-    elementsData[key] = !elementsData[item.id];
+    if (!elementsData) return;
+
+    elementsData[key as keyof typeof elementsData] =
+      !elementsData[key as keyof typeof elementsData];
 
     Object.keys(elementsData).forEach((k) => {
-      const value = elementsData[k];
+      const value = elementsData[k as keyof typeof elementsData];
 
       if (value) {
-        flagsCount += WatermarkAdditions[k];
+        flagsCount += WatermarkAdditions[k as keyof typeof WatermarkAdditions];
       }
     });
 
     setRoomParams({
       ...roomParams,
-      watermark: { ...watermark, additions: flagsCount },
+      watermark: { ...watermark!, additions: flagsCount },
     });
 
     const tabs = getTabsInfo(flagsCount, t);
     elements.current = getInitialState(tabs);
   };
 
-  const onPositionChange = (item) => {
-    setSelectedPosition(item);
+  const onPositionChange = (item: TOption) => {
+    setSelectedPosition(item as { key: number; label: string });
 
     setRoomParams({
       ...roomParams,
-      watermark: { ...watermark, rotate: item.key },
+      watermark: { ...watermark!, rotate: item.key as number },
     });
   };
 
-  const onTextChange = (e) => {
+  const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setTextValue(value);
 
     setRoomParams({
       ...roomParams,
-      watermark: { ...watermark, text: value },
+      watermark: { ...watermark!, text: value },
     });
   };
 
@@ -219,11 +257,12 @@ const ViewerInfoWatermark = ({
       </Text>
 
       <Tabs
-        items={initialInfoRef.dataTabs}
-        selectedItems={initialInfoRef.tabs.map((item) => item.index)}
+        items={initialInfoRef?.dataTabs as TTabItem[]}
+        selectedItems={initialInfoRef?.tabs.map((item) => item.index)}
         onSelect={onSelect}
         type={TabsTypes.Secondary}
         multiple
+        selectedItemId={-1}
       />
 
       <Text
@@ -233,14 +272,20 @@ const ViewerInfoWatermark = ({
       >
         {t("AddStaticText")}
       </Text>
-      <TextInput scale value={textValue} tabIndex={1} onChange={onTextChange} />
+      <TextInput
+        scale
+        value={textValue}
+        tabIndex={1}
+        onChange={onTextChange}
+        type={InputType.text}
+      />
 
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
         {t("Position")}
       </Text>
       <ComboBox
         selectedOption={selectedPosition}
-        options={initialInfoRef.dataRotate}
+        options={initialInfoRef?.dataRotate as TOption[]}
         onSelect={onPositionChange}
         scaled
         scaledOptions

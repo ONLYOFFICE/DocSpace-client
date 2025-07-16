@@ -24,36 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+.tagList {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  flex-wrap: wrap;
+  width: 100%;
 
-import styled from "styled-components";
+  :global(.set_room_params-tag_input-tag) {
+    padding: 6px 8px;
+    border-radius: 3px;
+    margin: 0;
+    overflow: hidden;
 
-import { HelpButton } from "@docspace/shared/components/help-button";
-
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
-
-const StyledHelpButton = styled(HelpButton)`
-  border-radius: 50%;
-  background-color: ${(props) =>
-    props.theme.createEditRoomDialog.helpButton.background};
-  circle,
-  rect {
-    fill: ${(props) => props.theme.createEditRoomDialog.helpButton.fill};
+    svg {
+      width: 12px;
+      height: 12px;
+    }
   }
-`;
-
-const SecondaryInfoButton = ({ content }) => {
-  return (
-    <StyledHelpButton
-      displayType="auto"
-      className="set_room_params-info-title-help"
-      iconName={InfoReactSvgUrl}
-      tooltipProps={{ globalEventOff: "click" }}
-      tooltipContent={content}
-      offsetRight={0}
-      size={12}
-    />
-  );
-};
-
-export default SecondaryInfoButton;
+}

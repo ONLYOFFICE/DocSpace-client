@@ -24,52 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import React from "react";
-import styled from "styled-components";
-import { StyledParam } from "./StyledParam";
+import classNames from "classnames";
 
-const StyledToggleParam = styled(StyledParam)`
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 8px;
-  box-sizing: border-box;
-  max-width: 100%;
+import { Tag } from "@docspace/shared/components/tag";
 
-  .set_room_params-info-description {
-    box-sizing: border-box;
-    max-width: 100%;
-  }
+import styles from "./TagInput.module.scss";
+import { TagListProps } from "./TagInput.types";
 
-  .set_room_params-toggle {
-    width: 28px;
-    min-width: 28px;
-  }
-`;
+const TagList = ({ tagHandler, isDisabled }: TagListProps) => {
+  const { tags } = tagHandler;
 
-const ToggleParam = ({
-  id,
-  title,
-  description,
-  isChecked,
-  onCheckedChange,
-}) => {
+  const onDeleteAction = (id: string) => {
+    if (isDisabled) return;
+
+    tagHandler.deleteTag(id);
+  };
+
   return (
-    <StyledToggleParam isPrivate>
-      <div className="set_room_params-info">
-        <div className="set_room_params-info-title">
-          <div className="set_room_params-info-title-text">{title}</div>
-        </div>
-        <div className="set_room_params-info-description">{description}</div>
-      </div>
-      <ToggleButton
-        id={id}
-        className="set_room_params-toggle"
-        isChecked={isChecked}
-        onChange={onCheckedChange}
-      />
-    </StyledToggleParam>
+    <div
+      className={classNames(
+        styles.tagList,
+        "set_room_params-tag_input-tag_list",
+      )}
+    >
+      {tags.map((tag) => (
+        <Tag
+          key={tag.id}
+          className="set_room_params-tag_input-tag"
+          tag="script"
+          label={tag.name}
+          isNewTag
+          onDelete={() => {
+            onDeleteAction(tag.id.toString());
+          }}
+        />
+      ))}
+    </div>
   );
 };
 
-export default ToggleParam;
+export default TagList;

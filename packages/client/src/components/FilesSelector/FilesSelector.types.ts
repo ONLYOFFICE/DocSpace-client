@@ -69,7 +69,7 @@ export type FilesSelectorProps = TSelectorHeader & {
 
   filterParam?: string;
 
-  currentFolderId: number;
+  currentFolderId: number | string;
   fromFolderId?: number;
   parentId: number;
   rootFolderType: number;

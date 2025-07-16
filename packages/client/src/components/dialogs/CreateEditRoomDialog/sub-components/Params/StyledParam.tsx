@@ -24,72 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { globalColors } from "@docspace/shared/themes";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const StyledWatermark = styled.div`
-  margin-top: 16px;
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-  .watermark-title {
-    margin: 16px 0 8px 0;
-  }
-  .title-without-top {
-    margin-top: 0px;
-  }
-  .watermark-checkbox {
-    margin: 18px 0 0 0;
-  }
+const StyledParam = styled.div.attrs(injectDefaultTheme)<{
+  storageLocation?: boolean;
+  folderName?: string;
+}>`
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
 
-  .options-wrapper {
-    display: grid;
-    grid-template-rows: 56px 56px;
-    gap: 16px;
+  ${(props) =>
+    props.storageLocation
+      ? css``
+      : props.folderName
+        ? css`
+            flex-direction: column;
+            gap: 4px;
+          `
+        : ""}
 
-    .options {
-      color: ${(props) => props.theme.comboBox.label.selectedColor};
-    }
-  }
+  .set_room_params-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 
-  .image-wrapper {
-    display: grid;
-    grid-template-columns: 216px auto;
-    gap: 16px;
-
-    .image-description {
+    .set_room_params-info-title {
+      user-select: none;
       display: flex;
-      gap: 8px;
-      align-items: baseline;
-
-      .image-watermark_text {
-        margin-bottom: 8px;
-      }
-    }
-
-    .image-watermark_wrapper {
-      width: 216px;
-      height: 216px;
-      border: 1px solid ${globalColors.grayLightMid};
-
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
+      flex-direction: row;
       align-items: center;
+      gap: 6px;
 
-      img {
-        width: 88%;
-        height: 88%;
-        transform: ${(props) =>
-          `rotate(${props.rotate}deg) scale(${props.scale})`};
-
-        opacity: 0.4;
-        margin: auto;
+      .set_room_params-info-title-text {
+        user-select: none;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 20px;
       }
     }
+    .set_room_params-info-description {
+      user-select: none;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: ${(props) =>
+        props.theme.createEditRoomDialog.commonParam.descriptionColor};
+    }
   }
-`;
-const StyledBody = styled.div`
-  .types-content {
+
+  .set_room_params-toggle {
+    width: 28px;
+    height: 16px;
+    margin: 2px 0;
   }
 `;
 
-export { StyledWatermark, StyledBody };
+export { StyledParam };

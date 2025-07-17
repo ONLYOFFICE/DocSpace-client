@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { SocialButtonsGroup } from "./index";
 import type { SocialButtonProps } from "./SocialButtonsGroup.types";
 
@@ -84,7 +84,7 @@ export default {
 } as Meta;
 
 const StorybookSocialButtonsGroup = (props: SocialButtonProps) => {
-  const { onClick, ssoUrl, ...restProps } = props;
+  const { onClick, ...restProps } = props;
   const handleClick: (e: React.MouseEvent<Element, MouseEvent>) => void = (
     e,
   ) => {
@@ -98,7 +98,8 @@ const StorybookSocialButtonsGroup = (props: SocialButtonProps) => {
 
   const modifiedProps = { ...restProps, onClick: handleClick };
 
-  if (ssoUrl) {
+  // eslint-disable-next-line react/destructuring-assignment
+  if (props.ssoUrl) {
     // eslint-disable-next-line no-script-url
     modifiedProps.ssoUrl = "javascript:void(0);";
   }
@@ -106,7 +107,7 @@ const StorybookSocialButtonsGroup = (props: SocialButtonProps) => {
   return <SocialButtonsGroup {...modifiedProps} />;
 };
 
-const Template: Story<SocialButtonProps> = (args) => (
+const Template: StoryFn<SocialButtonProps> = (args) => (
   <StorybookSocialButtonsGroup {...args} />
 );
 

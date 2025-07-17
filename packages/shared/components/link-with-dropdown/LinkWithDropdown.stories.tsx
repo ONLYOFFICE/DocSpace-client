@@ -159,7 +159,7 @@ A dropdown component that appears as a link and expands to show a menu of option
       description: "Fixes the direction of the dropdown menu",
       table: {
         type: { summary: "boolean" },
-        defaultValue: { summary: false },
+        defaultValue: { summary: "false" },
       },
     },
     directionY: {

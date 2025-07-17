@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import Navigation from "./Navigation";
 import { TNavigationProps } from "./Navigation.types";
 import { DeviceType } from "../../enums";
@@ -21,7 +21,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
   <div style={{ height: "140px" }}>{children}</div>
 );
 
-const Template: Story<TNavigationProps> = (args) => (
+const Template: StoryFn<TNavigationProps> = (args) => (
   <Wrapper>
     <Navigation {...args} />
   </Wrapper>

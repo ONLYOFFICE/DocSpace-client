@@ -1650,7 +1650,6 @@ class FilesActionStore {
 
     const { id, isRoom, isTemplate, title, rootFolderType } = item;
 
-    console.log(item);
     const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
 
     const state = { title, rootFolderType, isRoot: false, isRoom };

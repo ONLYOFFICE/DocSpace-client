@@ -696,8 +696,7 @@ class ContextOptionsStore {
     this.filesActionsStore.setThirdpartyInfo(providerKey);
   };
 
-  onFillingStatus = (item) => {
-    console.log(item);
+  onFillingStatus = () => {
     this.dialogsStore.setFillingStatusPanelVisible(true);
   };
 
@@ -906,6 +905,7 @@ class ContextOptionsStore {
   };
 
   onClickEditRoom = (item) => {
+    console.log("item", item);
     const event = new Event(Events.ROOM_EDIT);
     event.item = item;
     window.dispatchEvent(event);

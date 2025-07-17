@@ -171,6 +171,10 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
+  chatSettings:
+    | { modelId: string; providerId: number; prompt: string }
+    | undefined;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -228,6 +232,7 @@ class SelectedFolderStore {
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
       isAIRoom: this.isAIRoom,
+      chatSettings: this.chatSettings,
     };
   };
 
@@ -281,6 +286,7 @@ class SelectedFolderStore {
     this.watermark = null;
     this.passwordProtected = false;
     this.external = false;
+    this.chatSettings = undefined;
   };
 
   setFilesCount = (filesCount: number) => {

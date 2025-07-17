@@ -109,7 +109,7 @@ const ShareFormDialog = ({
         return copyDocumentShareLink(link, t);
       }
 
-      if (res.items.length === 1) {
+      if (res.items.length >= 1) {
         const [link] = res.items;
 
         if (link.access !== ShareAccessRights.FormFilling) {

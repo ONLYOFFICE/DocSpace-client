@@ -203,7 +203,7 @@ export const getContactsCheckboxItemLabel = (
     case "disabled":
       return t("PeopleTranslations:DisabledEmployeeStatus");
     case "all":
-      return t("All");
+      return t("Common:All");
     default:
       return "";
   }

@@ -151,6 +151,18 @@ export const enum FilterType {
   DiagramsOnly = 25,
 }
 
+// TODO: Temp value. Change later
+/**
+ * Enum for filter location.
+ * @readonly
+ */
+export const enum FilterLocation {
+  All = 0,
+  Rooms = 1,
+  Documents = 2,
+  AccessibleViaLink = 3,
+}
+
 /**
  * Enum for file type.
  * @readonly
@@ -472,6 +484,7 @@ export const enum FilterGroups {
   filterAccount = "filter-account",
   filterOther = "filter-other",
   filterInviter = "filter-inviter",
+  filterLocation = "filter-location",
 }
 
 export const enum FilterKeys {

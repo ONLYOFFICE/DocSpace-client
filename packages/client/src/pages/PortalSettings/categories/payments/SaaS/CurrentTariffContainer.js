@@ -90,7 +90,7 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
 
         return (
           <div key={item.used.title}>
-            <Text isBold noSelect fontSize="14px">
+            <Text isBold fontSize="14px">
               {item.used.title}
               <Text
                 className="current-tariff_count"

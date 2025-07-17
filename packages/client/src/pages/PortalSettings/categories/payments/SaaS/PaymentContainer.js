@@ -161,7 +161,7 @@ const PaymentContainer = (props) => {
   const currentPlanTitle = () => {
     if (isFreeTariff) {
       return (
-        <Text noSelect fontSize="16px" isBold>
+        <Text fontSize="16px" isBold>
           <Trans t={t} i18nKey="StartupTitle" ns="Payments">
             {{ planName: currentTariffPlanTitle }}
           </Trans>
@@ -171,7 +171,7 @@ const PaymentContainer = (props) => {
 
     if (isPaidPeriod || isGracePeriod) {
       return (
-        <Text noSelect fontSize="16px" isBold>
+        <Text fontSize="16px" isBold>
           <Trans t={t} i18nKey="BusinessTitle" ns="Payments">
             {{ planName: currentTariffPlanTitle }}
           </Trans>
@@ -198,12 +198,7 @@ const PaymentContainer = (props) => {
   const planSuggestion = () => {
     if (isFreeTariff && !isNonProfit) {
       return (
-        <Text
-          noSelect
-          fontSize="16px"
-          isBold
-          className="payment-info_suggestion"
-        >
+        <Text fontSize="16px" isBold className="payment-info_suggestion">
           <Trans t={t} i18nKey="StartupSuggestion" ns="Payments">
             {{ planName: tariffPlanTitle }}
           </Trans>
@@ -283,7 +278,6 @@ const PaymentContainer = (props) => {
     if (isPaidPeriod && isPaymentDateValid && !isNonProfit)
       return (
         <Text
-          noSelect
           fontSize="14px"
           lineHeight="16px"
           className="payment-info_managers-price"
@@ -319,7 +313,6 @@ const PaymentContainer = (props) => {
           {!isNonProfit && !isGracePeriod && !isNotPaidPeriod ? (
             <div className="payment-info_wrapper">
               <Text
-                noSelect
                 fontWeight={600}
                 fontSize="14px"
                 className="payment-info_managers-price"

@@ -241,6 +241,7 @@ const InvitationSettings = ({
               fontWeight="600"
               lineHeight="20px"
               onClick={onChangeContacts}
+              noSelect
             >
               {t("InviteViaContacts", {
                 productName: t("Common:ProductName"),
@@ -274,6 +275,7 @@ const InvitationSettings = ({
               fontWeight="600"
               lineHeight="20px"
               onClick={onChangeGuests}
+              noSelect
             >
               {t("InvitationSettingsGuests")}
             </Text>

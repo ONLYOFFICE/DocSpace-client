@@ -40,7 +40,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
 
 import { Button } from "@docspace/shared/components/button";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, NoUserSelect } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -86,6 +86,10 @@ const RootContainer = styled.div`
     min-height: 116px;
     padding-block: 12px 8px;
     padding-inline: 20px 12px;
+
+    .integration-image {
+      ${NoUserSelect}
+    }
   }
 
   .request-block {

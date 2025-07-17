@@ -39,11 +39,10 @@ const EmptyView = ({ description, icon, options, title }: EmptyViewProps) => {
           fontWeight="700"
           lineHeight="22px"
           className={styles.headerTitle}
-          noSelect
         >
           {title}
         </Text>
-        <Text as="p" fontSize="12px" className={styles.subheading} noSelect>
+        <Text as="p" fontSize="12px" className={styles.subheading}>
           {description}
         </Text>
       </div>

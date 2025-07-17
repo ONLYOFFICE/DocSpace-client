@@ -53,13 +53,7 @@ const text = (value) => (
 );
 
 const link = (txt, onClick) => (
-  <Link
-    isTextOverflow
-    className="property-content"
-    isHovered
-    onClick={onClick}
-    enableUserSelect
-  >
+  <Link isTextOverflow className="property-content" isHovered onClick={onClick}>
     {txt}
   </Link>
 );

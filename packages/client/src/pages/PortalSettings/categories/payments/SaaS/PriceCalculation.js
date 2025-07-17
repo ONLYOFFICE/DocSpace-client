@@ -161,12 +161,7 @@ const PriceCalculation = ({
 
   return (
     <StyledBody className="price-calculation-container" isDisabled={isDisabled}>
-      <Text
-        fontSize="16px"
-        fontWeight={600}
-        noSelect
-        className="payment_main-title"
-      >
+      <Text fontSize="16px" fontWeight={600} className="payment_main-title">
         {isGracePeriod || isNotPaidPeriod
           ? t("YourPrice")
           : t("PriceCalculation")}

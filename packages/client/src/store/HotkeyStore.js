@@ -547,7 +547,7 @@ class HotkeyStore {
       this.filesStore;
 
     setSelected("all");
-    if (!hotkeyCaret) {
+    if (!hotkeyCaret && filesList.length) {
       this.setCaret(filesList[0]);
       setHotkeyCaretStart(filesList[0]);
     }

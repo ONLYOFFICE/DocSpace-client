@@ -220,14 +220,13 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
   return (
     <div className={containerClass}>
       {title ? (
-        <Text noSelect fontWeight={600} fontSize="16px" className={titleClass}>
+        <Text fontWeight={600} fontSize="16px" className={titleClass}>
           {title}
         </Text>
       ) : null}
 
       {subtitle ? (
         <Text
-          noSelect
           fontWeight={600}
           fontSize="11px"
           className={classNames(styles.subTitle, {

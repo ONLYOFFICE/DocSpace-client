@@ -586,7 +586,6 @@ const InviteInput = ({
         ) : null}
       </StyledSubHeader>
       <StyledDescription
-        noSelect
         noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}
       >
         {roomId === -1
@@ -603,7 +602,7 @@ const InviteInput = ({
       </StyledDescription>
       {roomId === -1 || allowInvitingGuests ? (
         <StyledInviteLanguage>
-          <Text className="invitation-language" noSelect>
+          <Text className="invitation-language">
             {t("InvitationLanguage")}:
           </Text>
           <div className="language-combo-box-wrapper">

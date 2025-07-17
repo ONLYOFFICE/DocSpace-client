@@ -307,22 +307,16 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
   const warningContent = (
     <>
-      <Text className="restore-backup_warning settings_unavailable" noSelect>
+      <Text className="restore-backup_warning settings_unavailable">
         {t("Common:Warning")}!
       </Text>
-      <Text
-        className="restore-backup_warning-description settings_unavailable"
-        noSelect
-      >
+      <Text className="restore-backup_warning-description settings_unavailable">
         {t("Common:RestoreBackupWarningText", {
           productName: t("Common:ProductName"),
         })}
       </Text>
       {!standalone ? (
-        <Text
-          className="restore-backup_warning-link settings_unavailable"
-          noSelect
-        >
+        <Text className="restore-backup_warning-link settings_unavailable">
           {t("Common:RestoreBackupResetInfoWarningText", {
             productName: t("Common:ProductName"),
           })}

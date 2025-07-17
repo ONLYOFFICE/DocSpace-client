@@ -58,7 +58,6 @@ const HotkeysPanel = ({
     fontSize: "13px",
     fontWeight: 600,
     className: "hotkey-key-description",
-    noSelect: true,
   };
   const keyTextStyles = {
     ...textStyles,

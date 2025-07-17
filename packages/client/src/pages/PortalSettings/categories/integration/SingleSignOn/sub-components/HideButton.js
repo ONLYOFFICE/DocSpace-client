@@ -59,7 +59,6 @@ const HideButton = (props) => {
           fontSize="16px"
           fontWeight={700}
           className="settings_unavailable"
-          noSelect
         >
           {text}
         </Text>

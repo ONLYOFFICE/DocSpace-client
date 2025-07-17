@@ -65,7 +65,6 @@ export const DownloadRow = (props: DownloadRowProps) => {
           title={file.title}
           fontSize="14px"
           fontWeight={600}
-          noSelect
           dir="auto"
         >
           {file.title}

@@ -359,9 +359,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const createBody = (
     <StyledBodyContent>
       {!isEdit ? (
-        <Text noSelect>
-          {t("Settings:CreateNewSecretKeyDialogDescription")}
-        </Text>
+        <Text>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
       ) : null}
       <div className="api-key_name">
         <Text fontSize="13px" fontWeight={600}>

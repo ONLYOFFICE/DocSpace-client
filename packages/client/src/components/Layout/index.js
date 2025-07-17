@@ -39,14 +39,14 @@ import {
 } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
-  user-select: none;
+  /* user-select: none; */
   width: 100%;
   height: 100dvh;
 
   #customScrollBar {
     z-index: 0;
     > .scroll-wrapper > .scroller > .scroll-body {
-      -webkit-user-select: none;
+      /* -webkit-user-select: none; */
     }
   }
 

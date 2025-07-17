@@ -120,6 +120,7 @@ const TariffBar = ({
         color={tariffBar.color}
         onClick={onClick}
         truncate
+        noSelect
       >
         {tariffBar.label}
       </Text>

@@ -47,7 +47,6 @@ const StyledInputParam = styled(StyledParam)`
 
     .input-label {
       cursor: pointer;
-      user-select: none;
     }
   }
 `;

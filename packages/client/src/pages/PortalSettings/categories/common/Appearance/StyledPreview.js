@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div.attrs(injectDefaultTheme)`
   display: inline-flex;
@@ -129,6 +129,10 @@ const StyledComponent = styled.div.attrs(injectDefaultTheme)`
     align-items: flex-start;
     padding-block: 26px 28px;
     padding-inline: 20px 0;
+
+    img {
+      ${NoUserSelect}
+    }
   }
 
   .section-header-loader {

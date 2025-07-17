@@ -3,7 +3,7 @@
   "content": "Stay in the browser",
   "content_en_sha1_hash": "81b7ba0cbfecd3f0d72de65ec0ce734703a85210",
   "created_at": "2025-05-19T21:30:57.148Z",
-  "updated_at": "2025-06-30T12:20:31.652Z",
+  "updated_at": "2025-07-10T11:11:07.115Z",
   "comment": {
     "text": "The translation key \"StayInBrowser\" is used to display a button label that encourages users to stay within the current browser. It appears on a deep link component in the doceditor application, prompting users to remain within the browser window. This phrase helps maintain context and user engagement.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/deep-link/index.tsx",
-      "line_number": 163,
-      "context": "isOpenInAppOnly ? onDownloadAppClick : onStayBrowserClick\n }\n >\n {isOpenInAppOnly\n ? t(\"DeepLink:DownloadApp\")\n : t(\"DeepLink:StayInBrowser\")}\n </Link>\n </StyledActionsWrapper>\n </StyledDeepLink>\n </FormWrapper>\n </StyledBody>",
+      "line_number": 166,
+      "context": "fontWeight=\"600\"\n isHovered\n color={theme.currentColorScheme?.main?.accent}\n onClick={onStayBrowserClick}\n >\n {t(\"DeepLink:StayInBrowser\")}\n </Link>\n )}\n </StyledActionsWrapper>\n </StyledDeepLink>\n </FormWrapper>",
       "module": "/packages/doceditor"
     }
   ],
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"متابعة من خلال المتصفح\" (mutaba'a min khilal al-mutasaffih) translates to 'Follow through the browser' or 'Continue through the browser'. It doesn't directly convey the meaning of 'Stay in the browser'. A more accurate translation would emphasize remaining within the browser environment.",
-          "suggestion": "بقاء في المتصفح (baqaa' fi al-mutasaffih) - meaning 'staying in the browser' or ابقاء في المتصفح (ibqaa' fi al-mutasaffih) - meaning 'remaining in the browser'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -63,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Παραμονή στο πρόγραμμα περιήγησης' while technically correct, sounds somewhat formal and less natural than a more conversational equivalent for 'Stay in the browser'.",
-          "suggestion": "Μένε στο πρόγραμμα περιήγησης"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -93,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Մնացեք բրաուզերո\" is not the most natural or accurate translation of \"Stay in the browser.\" While it literally means 'Stay in browser,' it sounds awkward in Armenian. A more appropriate phrasing would convey the meaning of remaining within the browser environment.",
-          "suggestion": "Consider alternatives such as \"Մնացեք ցանցի մեջ\" (Stay online) or \"Մնացեք բրաուզերի մեջ\" (Stay within the browser) depending on the specific intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,37 +93,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ブラウザのまま\" while technically meaning 'as is in the browser' or 'remain in the browser,' isn't the most natural or user-friendly way to convey 'Stay in the browser.' It feels somewhat literal and awkward.",
-          "suggestion": "Consider alternatives like: \"ブラウザ内で表示\" (Display in browser), \"ブラウザで表示\" (Display in browser), or \"ブラウザ内に表示\" (Display within the browser). The best option depends on the surrounding context and desired nuance."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '계속 브라우저 사용' translates more literally to 'Continue using the browser'. While understandable, it doesn't fully capture the nuance of 'Stay in the browser' which implies remaining within the browser environment rather than actively using it. It's a functional but not ideal translation.",
-          "suggestion": "Consider '브라우저 내에 머무르기' (beu-la-jeu-eo nae-e meo-mu-ri-gi) which translates more accurately to 'Stay within the browser' or 'Remain in the browser'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ຢູ່ໃນຕົວທ່ອງເວັບ' is a literal translation of 'in the browser', it might not convey the intended meaning of 'stay in the browser'. It's more like 'located in the browser'. A better translation would emphasize retaining focus or not opening an external link.",
-          "suggestion": "Consider 'ຢາກຢູ່ໃນຕົວທ່ອງເວັບ' (yaak nyuun nai tua thong web) which translates to 'prefer to stay in the browser' or 'want to stay in the browser' or 'ຮັກສາການທ່ຽວໃນຕົວທ່ອງເວັບ' (huk saa gaan thieo nai tua thong web) which means 'keep browsing in the browser'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Romanian translation \"Rămâi în browser-ul\" is grammatically awkward. The possessive suffix '-ul' is unnecessary and makes the phrase sound unnatural.",
-          "suggestion": "Rămâi în browser"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -195,18 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'බ්රවුසරයේ' is a transliteration and could benefit from a more standard Sinhala rendering. It's a close approximation but not entirely accurate.",
-          "suggestion": "බ්‍රවුසரில்"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While ' රැඳී සිටින්න' (raḍī sitinnā) means 'stay', in the context of a DeepLink it's more appropriate to convey the meaning of 'remain' or 'open within'. 'රැඳී සිටින්න' is grammatically correct, but might not fully capture the intended meaning.",
-          "suggestion": "බ්‍රවුසரில் විවෘතව සිටින්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -254,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"始终在浏览器中\" while conveying a similar concept, doesn't perfectly capture the nuance of \"Stay in the browser.\"  \"始终\" (shǐzhōng) implies a constant state, which isn't always intended. A better translation would emphasize keeping the user within the browser experience.",
-          "suggestion": "考虑使用更灵活的表达方式，例如“保持在浏览器内”或“留在浏览器中”。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

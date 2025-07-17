@@ -123,7 +123,8 @@ const StyledDiagramComponent = styled.div`
     display: flex;
     background: ${(props) =>
       props.theme.client.settings.payment.backgroundColor};
-    border-radius: 29px;
+    border-radius: 46px;
+    overflow: hidden;
   }
   .diagram_description {
     display: flex;
@@ -153,11 +154,6 @@ const StyledFolderTagSection = styled.div`
     `border-inline-end: 1px solid ${props.theme.client.settings.payment.backgroundColor}`};
   background: ${(props) => props.color};
   width: ${(props) => `${props.width}%`};
-
-  &:first-of-type {
-    border-start-start-radius: 46px;
-    border-end-start-radius: 46px;
-  }
 `;
 
 const StyledFolderTagColor = styled.div`

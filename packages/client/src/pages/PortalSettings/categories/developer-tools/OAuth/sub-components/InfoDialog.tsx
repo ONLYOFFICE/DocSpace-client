@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
-import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
+import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";

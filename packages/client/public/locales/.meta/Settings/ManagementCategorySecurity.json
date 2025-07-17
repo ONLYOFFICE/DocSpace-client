@@ -3,7 +3,7 @@
   "content": "Security",
   "content_en_sha1_hash": "f25ce1b8a399bd8621a57427a20039b4b13935db",
   "created_at": "2025-05-19T21:30:51.918Z",
-  "updated_at": "2025-06-24T16:31:24.400Z",
+  "updated_at": "2025-07-02T07:49:19.789Z",
   "comment": {
     "text": "This translation key is used to display the label \"Security\" in a security settings section of a portal management interface. It likely appears as a header or category title, allowing users to navigate to related settings.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 152,
+      "line_number": 159,
       "context": "{\n id: \"portal-settings_catalog-security\",\n key: \"1\",\n type: PageType.security,\n link: \"security\",\n tKey: \"ManagementCategorySecurity\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-access-portal\",\n key: \"1-0\",",
       "module": "/packages/client"
     }

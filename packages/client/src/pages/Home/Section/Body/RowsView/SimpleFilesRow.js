@@ -31,9 +31,9 @@ import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-compone
 import { isMobile as isMobileUtile, classNames } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import {
-  StyledWrapper,
-  StyledSimpleFilesRow,
-} from "@docspace/shared/styles/FilesRow.styled";
+  FilesRow,
+  FilesRowWrapper,
+} from "@docspace/shared/components/files-row";
 
 import FilesRowContent from "./FilesRowContent";
 
@@ -161,7 +161,7 @@ const SimpleFilesRow = (props) => {
     : (item.id ?? "");
 
   return (
-    <StyledWrapper
+    <FilesRowWrapper
       ref={rowRef}
       id={id}
       onDragOver={onDragOver}
@@ -191,13 +191,12 @@ const SimpleFilesRow = (props) => {
         onDragLeave={onDragLeaveEvent}
         style={dragStyles}
       >
-        <StyledSimpleFilesRow
+        <FilesRow
           key={item.id}
           data={item}
           isEdit={isEdit}
           element={element}
           mode="modern"
-          sectionWidth={sectionWidth}
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
@@ -247,9 +246,9 @@ const SimpleFilesRow = (props) => {
               isMobileDevice && !item.isTemplate ? badgesComponent : null
             }
           />
-        </StyledSimpleFilesRow>
+        </FilesRow>
       </DragAndDrop>
-    </StyledWrapper>
+    </FilesRowWrapper>
   );
 };
 

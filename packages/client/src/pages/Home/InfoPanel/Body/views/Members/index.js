@@ -96,12 +96,13 @@ const Members = ({
   setAccessSettingsIsVisible,
   templateAvailable,
   isRootFolder,
+  isCustomRoom,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
   const scrollContext = use(ScrollbarContext);
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     updateInfoPanelMembers(t);
@@ -153,7 +154,7 @@ const Members = ({
       setEditLinkPanelIsVisible(true);
     } else {
       getPrimaryLink(infoPanelSelection.id).then((link) => {
-        setExternalLink(link);
+        setExternalLink(link, searchParams, setSearchParams, isCustomRoom);
         copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
@@ -447,6 +448,7 @@ export default inject(
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
       isRootFolder,
+      isCustomRoom,
     };
   },
 )(

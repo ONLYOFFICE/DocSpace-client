@@ -35,16 +35,23 @@ import {
 } from "@/lib/actions";
 
 import EncryptDataPage from "./page.client";
+import { logger } from "../../../../logger.mjs";
 
 async function Page() {
+  logger.info("EncryptData page");
+
   const [settings, portals, encryptionSettings] = await Promise.all([
     getSettings(),
     getAllPortals(),
     getEncryptionSettings(),
   ]);
 
-  if (settings === "access-restricted")
-    redirect(`${await getBaseUrl()}/${settings}`);
+  if (settings === "access-restricted") {
+    logger.info("EncryptData page access-restricted");
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/${settings}`);
+  }
 
   const domain = settings?.externalResources?.helpcenter?.domain;
   const path = settings?.externalResources?.helpcenter?.entries?.encryption;

@@ -29,9 +29,12 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getSettings } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import ContinuePortalForm from "./page.client";
 
 async function Page() {
+  logger.info("PortalContinue page");
+
   const settings = await getSettings();
 
   return settings && typeof settings !== "string" ? (

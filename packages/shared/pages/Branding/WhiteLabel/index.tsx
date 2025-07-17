@@ -428,7 +428,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         hasScroll
         hideBorder
         showReminder={!isEqualLogo}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonDisabled={isEqualLogo}
         disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}

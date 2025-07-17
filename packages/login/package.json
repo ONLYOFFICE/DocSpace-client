@@ -1,6 +1,6 @@
 {
   "name": "@docspace/login",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "private": true,
   "scripts": {
     "build:translations": "node ./scripts/buildTranslations.js",
@@ -51,7 +51,7 @@
     "@playwright/test": "1.48.0",
     "@svgr/webpack": "8.1.0",
     "@types/crypto-js": "4.2.2",
-    "@types/nconf": "^0",
+    "@types/nconf": "0.10.7",
     "@types/node": "22.7.5",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",

@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Check list of unimported users to import into {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "You don't have users with emails. Please proceed to the next step to add them.",
   "AddTrustedDomain": "Add trusted domain",
+  "AdManagement": "Ad Management",
+  "AdManagementDescription": "Choose whether promotional banners are shown in your {{productName}}.",
   "Admins": "Admins",
   "AdminsMessage": "Administrator Message Settings",
   "AdminsMessageMobileDescription": "Administrator Message Settings is a way to contact the portal administrator.",
@@ -84,7 +86,7 @@
   "DeleteThemeForever": "Delete theme forever?",
   "DeleteThemeNotice": "The theme will be deleted permanently. You will not be able to undo this action.",
   "DeveloperToolsAccess": "Developer Tools section",
-  "DeveloperToolsAccessDescription": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the {{productName}} owner and administrators only, select Disable and click Save button.",
+  "DeveloperToolsAccessDescription": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click Save button.",
   "DeveloperToolsAccessMobileDescription": "This setting allows you to make the Developer Tools section visible to all users except guests.",
   "DisableEmailDescription": "If this box is checked, {{sectionName}} users will not need to verify their email after the first authorization in {{productName}}.",
   "DisableEmailVerification": "Disable email verification",
@@ -287,5 +289,6 @@
   "WantToCancelDataImport": "Do you want to cancel data import?",
   "WantToCancelUpload": "Do you want to cancel the upload?",
   "WantToContinue": "Do you want to continue or change the user storage quota?",
+  "WhiteLabelSubtitle": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
   "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step."
 }

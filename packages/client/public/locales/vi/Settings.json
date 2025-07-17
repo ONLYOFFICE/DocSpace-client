@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Kiểm tra danh sách người dùng chưa nhập để nhập vào {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Bạn không có người dùng có email. Vui lòng chuyển sang bước tiếp theo để thêm chúng.",
   "AddTrustedDomain": "Thêm tên miền được tin cậy",
+  "AdManagement": "Quản lý Quảng cáo",
+  "AdManagementDescription": "Chọn xem liệu các biểu ngữ quảng cáo có hiển thị trong {{productName}} của bạn hay không.",
   "Admins": "Quản trị viên",
   "AdminsMessage": "Cài đặt Tin nhắn Quản trị viên",
   "AdminsMessageMobileDescription": "Cài đặt Tin nhắn Quản trị viên là một cách để liên hệ với quản trị viên cổng thông tin.",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Bạn có muốn hủy nhập dữ liệu không?",
   "WantToCancelUpload": "Bạn có muốn hủy tải lên không?",
   "WantToContinue": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
+  "WhiteLabelSubtitle": "Nhập tên công ty của bạn, tải logo lên và tùy chỉnh phong cách để phù hợp với thương hiệu của bạn.",
   "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo."
 }

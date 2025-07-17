@@ -10,6 +10,8 @@
   "AddEmailsDescription": "{{organizationName}} {{productName}}-ə idxal etmək üçün idxal olunmayan istifadəçilərin siyahısını yoxlayın.",
   "AddEmailsWarning": "E-poçtu olan heç bir istifadəçiniz yoxdur. Onları əlavə etmək üçün növbəti addıma davam edin.",
   "AddTrustedDomain": "İnanılmış domen əlavə et",
+  "AdManagement": "Reklam İdarəçiliyi",
+  "AdManagementDescription": "{{productName}} məhsulunuzda reklam bannelerinin göstərilməsi seçimini edin.",
   "Admins": "Adminlər",
   "AdminsMessage": "Administrator Mesaj Parametrləri",
   "AdminsMessageMobileDescription": "Admin Mesaj Parametrləri portal administratoru ilə əlaqə qurmağın bir yoludur.",
@@ -83,7 +85,7 @@
   "DeleteThemeForever": "Tema həmişəlik silinsin?",
   "DeleteThemeNotice": "Tema həmişəlik silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz.",
   "DeveloperToolsAccess": "Məhdud Tərtibatçı alətlərinə giriş",
-  "DeveloperToolsAccessDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir. Bu bölməyə girişi məhdudlaşdırmaq, onu yalnız {{productName}} sahibinə və administratorlara əlçatan etmək istəyirsinizsə, Deaktiv et seçin və Saxla düyməsini klikləyin.",
+  "DeveloperToolsAccessDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir. Bu bölməyə girişi məhdudlaşdırmaq, onu yalnız sahibinə və {{productName}} administratorlara əlçatan etmək istəyirsinizsə, Deaktiv et seçin və Saxla düyməsini klikləyin.",
   "DeveloperToolsAccessMobileDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir.",
   "DisableEmailDescription": "Bu xana işarələnərsə, {{sectionName}} istifadəçilərinin {{productName}} məhsulunda ilkin avtorizasiyadan sonra e-poçtlarını doğrulamasına ehtiyac qalmayacaq.",
   "DisableEmailVerification": "E-poçt doğrulamasını deaktiv edin",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Məlumat idxalını ləğv etmək istəyirsiniz?",
   "WantToCancelUpload": "Yükləməni ləğv etmək istəyirsiniz?",
   "WantToContinue": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
+  "WhiteLabelSubtitle": "Şirkətinizin adını daxil edin, loqonu yükləyin və stili brendinizə uyğunlaşdırın.",
   "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin."
 }

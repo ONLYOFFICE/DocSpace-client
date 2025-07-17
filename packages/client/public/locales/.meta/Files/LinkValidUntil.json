@@ -3,7 +3,7 @@
   "content": "This link will be valid until",
   "content_en_sha1_hash": "529ee7a00442d6f484c8d84c00051941ecc9d956",
   "created_at": "2025-05-19T21:30:55.800Z",
-  "updated_at": "2025-05-26T07:57:32.349Z",
+  "updated_at": "2025-07-10T11:11:06.845Z",
   "comment": {
     "text": "\"This translation key is used to display a message indicating when a link's validity expires. It will appear in the UI as an expiration date prompt or confirmation message. For translators, it should describe the action of linking a valid time frame for a digital asset.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 245,
+      "line_number": 247,
       "context": "if (isExpired) {\n return t(\"Translations:LinkHasExpiredAndHasBeenDisabled\");\n }\n \n return expirationDate\n ? `${t(\"Files:LinkValidUntil\")}:`\n : t(\"Files:ChooseExpirationDate\");\n };\n \n useEffect(() => {\n if (!passwordSettings) {",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'سيكون الرابط صالح لغاية' is a literal translation, but not the most natural or idiomatic way to express 'This link will be valid until' in Arabic (Saudi Arabia). A more natural phrasing would convey a sense of expiration.",
-          "suggestion": "Consider 'ينتهي صلاحية الرابط بتاريخ' (Yanتهي Salahiyat al-rabit be-tarikh) - 'The link's validity expires on date' or 'سريان الرابط حتى' (Sariyan al-rabit hattan) - 'The link's validity until'."
+          "description": "The translation 'سيكون الرابط صالح لغاية' while understandable, is not the most natural or idiomatic way to express 'This link will be valid until' in Arabic (Saudi Arabia).  A more fluent option might consider phrases expressing expiration or a deadline.",
+          "suggestion": "Consider 'ينتهي صلاحية الرابط في' (Yanتهي salahiyat ar-rabit fi) - 'The link's validity ends on' or 'صلاحية الرابط تنتهي في' (Salahiyat ar-rabit tanتهي fi) - 'The link's validity ends on'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bu keçid vaxta qədər etibarlı olacaq\" is a literal translation and lacks nuance. A more natural-sounding translation would be \"Bu linkin keçərliyi vaxta qədər davam edəcək\" or \"Bu link vaxta qədər işlək olacaq\". The phrase 'vaxta qədər etibarlı olacaq' feels slightly awkward in Azerbaijani.",
-          "suggestion": "Bu linkin keçərliyi vaxta qədər davam edəcək"
+          "description": "The translation 'Bu keçid vaxta qədər etibarlı olacaq' is a literal translation and doesn't quite capture the natural flow of the English phrase 'This link will be valid until'. A more natural Azerbaijani phrasing would be preferred.",
+          "suggestion": "Bu keçid müddətinə qədər etibarlı olacaq."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Tämä linkki on voimassa\" while technically correct, doesn't fully convey the meaning of \"This link will be valid until.\" It implies validity but lacks the temporal aspect ('until'). A more accurate translation would include a time reference.",
-          "suggestion": "Tämä linkki on voimassa [päivämäärään/aikaan]"
+          "description": "The Finnish translation 'Tämä linkki on voimassa' while generally accurate, doesn't directly convey the 'until' aspect of the English phrase 'This link will be valid until'. It translates to 'This link is valid'.",
+          "suggestion": "Tämä linkki on voimassa asti"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Այս հղումը կգործի մինչև\" is a literal translation of \"This link will work until.\" A more accurate and natural translation of 'This link will be valid until' would be \"Այս հղումը կգործունե մինչև\" or \"Այս հղումը վավերական կլինի մինչև\".",
-          "suggestion": "Այս հղումը վավերական կլինի մինչև"
+          "description": "The translation 'Այս հղումը կգործի մինչև' is a literal translation of 'This link will work until'. A more natural and accurate translation for 'This link will be valid until' would be something like 'Այս հղումը կգործենար մինչև' or 'Այս հղումը կպահպանի իր գործողությունը մինչև'.",
+          "suggestion": "Այս հղումը կպահպանի իր գործողությունը մինչև"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'このリンクは次の期間まで有効です：' is a bit too formal and literal for a user-facing message. While technically correct, it doesn't flow naturally. '有効です' (yuukou desu) is a very formal way to say 'valid'.",
-          "suggestion": "Consider a more conversational translation such as: 'このリンクは[Date/Time]まで利用可能です：' or 'このリンクは[Date/Time]まで有効期限です：' depending on the desired tone."
+          "description": "The translation 'このリンクは次の期間まで有効です：' is a literal translation that while understandable, doesn't flow naturally in Japanese. It's overly formal and sounds slightly awkward.",
+          "suggestion": "Consider a more natural phrasing like 'このリンクは〇〇日まで利用可能です' (Kono link wa 〇〇 nani made riyō kanō desu) or 'このリンクは〇〇日まで有効です' (Kono link wa 〇〇 nani made yūkō desu)."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"이 링크의 유효 기간:\" (i link-ui yuhyo gigan:) literally translates to 'This link's validity period:'. While understandable, a more natural and user-friendly translation would be closer to 'Link valid until:' or 'Validity of this link:'. The colon feels a bit abrupt and formal in this context.",
-          "suggestion": "Consider '링크 유효 기간:' (link yuhyo gigan:) or '이 링크는 다음까지 유효합니다:' (i link-neun daeum-kkaji yuhyo-hamnida:), which conveys the same meaning with a more conversational tone."
+          "description": "The Korean translation \"이 링크의 유효 기간:\" literally translates to \"This link's validity period:\". While understandable, it lacks the natural flow of \"This link will be valid until\".  It's a bit too direct and formal for typical user interfaces.",
+          "suggestion": "Consider a more natural translation like \"유효 기간은\" (Validity period is) or \"만료 날짜는\" (Expiration date is)."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'සබැඳිය වලංගු කාලය:' is more literally \"Link valid time:\" rather than \"This link will be valid until\". While understandable, it's a less natural and less user-friendly phrasing in Sinhala. It reads more like a label than a complete sentence.",
-          "suggestion": "Consider a more natural phrasing like \"සබැඳිය වලංගු වන්නේ\" (Sabaṇdiya valaṅguvanne) which translates to \"This link will be valid until\" or \"සබැඳිය අවසන් වන තෙක්\" (Sabaṇdiya avasān vana tek) which translates to \"This link will be valid until...\"."
+          "description": "The Sinhala translation 'සබැඳිය වලංගු කාලය:' is a literal translation of 'Link Valid Until:' but lacks the 'This' from the English. It reads more like a label or header rather than a full sentence.",
+          "suggestion": "Consider a more natural phrasing like 'මෙම සබැඳිය වලංගු වන්නේ:' (This link is valid until:)"
         }
       ],
       "approved_at": null
@@ -225,37 +225,19 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Bu bağlantı şu tarihe kadar geçerli olacaktır:' is a bit formal and verbose for a simple notification. A more natural and concise phrasing would be preferable.",
-          "suggestion": "Bu bağlantı belirli bir tarihe kadar geçerli."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Це посилання діятиме до\" is too literal and doesn't flow naturally in Ukrainian. A more idiomatic translation would convey the meaning of 'valid until'.",
-          "suggestion": "Розгляньте варіант: 'Цей посилання буде дійсним до' or 'Термін дії цього посилання закінчується' or 'Це посилання буде активним до'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Liên kết này sẽ có hiệu lực đến\" is a literal translation and while understandable, it's not the most natural phrasing in Vietnamese for this context. It implies the link will *become* valid until a certain point, rather than simply being valid until then.",
-          "suggestion": "Liên kết này có hiệu lực đến"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

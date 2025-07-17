@@ -101,13 +101,17 @@ describe("<AdditionalResources />", () => {
     renderWithTheme(<AdditionalResources {...defaultProps} />);
 
     // Initially no reminder
-    expect(screen.queryByText("YouHaveUnsavedChanges")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Common:YouHaveUnsavedChanges"),
+    ).not.toBeInTheDocument();
 
     // Toggle checkbox to create changes
     const feedbackCheckbox = screen.getByTestId("show-feedback-support");
     fireEvent.click(feedbackCheckbox);
 
-    expect(screen.getByText("YouHaveUnsavedChanges")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:YouHaveUnsavedChanges"),
+    ).toBeInTheDocument();
   });
 
   it("disables restore button when additionalResourcesIsDefault is true", () => {
@@ -122,7 +126,9 @@ describe("<AdditionalResources />", () => {
   it("shows loading state", () => {
     renderWithTheme(<AdditionalResources {...defaultProps} isLoading />);
 
-    expect(screen.getByText("YouHaveUnsavedChanges")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:YouHaveUnsavedChanges"),
+    ).toBeInTheDocument();
     expect(screen.getByTestId("cancel-button")).toBeDisabled();
   });
 

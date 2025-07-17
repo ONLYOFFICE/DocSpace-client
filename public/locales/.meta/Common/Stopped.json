@@ -3,7 +3,7 @@
   "content": "Stopped",
   "content_en_sha1_hash": "51e9111b87116e60566740d13ba1c1eddb042333",
   "created_at": "2025-05-19T21:30:49.083Z",
-  "updated_at": "2025-06-08T12:02:32.884Z",
+  "updated_at": "2025-07-10T11:11:07.130Z",
   "comment": {
     "text": "This translation key displays a message indicating that a file is stopped in a filling process. It appears as part of a status indicator component, used to display the current status of a filing form. The translated content should reflect whether the file is being processed (YourTurn), has started but not completed (InProgress), or has been completely stopped.",
     "is_auto": true,

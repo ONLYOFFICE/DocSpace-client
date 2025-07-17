@@ -1,7 +1,7 @@
 @use "variables";
 
 @mixin common-text-styles {
-  font-family: var(--text-font-family);
+  font-family: var(--font-family);
   color: var(--text-color);
 
   &[data-align="left"] {

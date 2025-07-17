@@ -207,8 +207,15 @@ class PublicRoomStore {
   editExternalLink = (roomId, link) => {
     const linkType = LinkType.External;
 
-    const { id, title, expirationDate, password, disabled, denyDownload } =
-      link.sharedTo;
+    const {
+      id,
+      title,
+      expirationDate,
+      password,
+      disabled,
+      denyDownload,
+      internal,
+    } = link.sharedTo;
 
     return api.rooms.editExternalLink(
       roomId,
@@ -220,6 +227,7 @@ class PublicRoomStore {
       password,
       disabled,
       denyDownload,
+      internal,
     );
   };
 

@@ -267,6 +267,15 @@ const LinkRow = (props: LinkRowProps) => {
     editExternalLinkAction(newLink);
   };
 
+  const changeShareOption = (option: TOption): void => {
+    const newLink = { ...link };
+
+    if (option && "internal" in option)
+      newLink.sharedTo.internal = option.internal;
+
+    editExternalLinkAction(newLink);
+  };
+
   return (
     <LinkRowComponent
       loadingLinks={loadingLinks}
@@ -281,8 +290,9 @@ const LinkRow = (props: LinkRowProps) => {
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder}
       isFormRoom={isFormRoom}
+      isPublicRoom={isPublicRoomType}
       onAddClick={async () => {}}
-      changeShareOption={async () => {}}
+      changeShareOption={changeShareOption}
       changeAccessOption={async () => {}}
       availableExternalRights={{} as TAvailableExternalRights}
     />

@@ -34,7 +34,7 @@ import styles from "../Share.module.scss";
 
 export interface AccessOptionProps {
   isLoaded: boolean;
-  isRoomsLink: boolean;
+  isPublicRoom: boolean;
   isExpiredLink: boolean;
 
   linkTitle: string;
@@ -49,11 +49,11 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
   isLoaded,
   onSelect,
   linkTitle,
-  isRoomsLink,
+  isPublicRoom,
   isExpiredLink,
   selectedOption,
 }) => {
-  if (isRoomsLink) {
+  if (isPublicRoom) {
     return (
       <Text
         className={classNames(

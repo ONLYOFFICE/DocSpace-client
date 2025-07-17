@@ -422,6 +422,7 @@ export function editExternalLink(
   password: string,
   disabled: boolean,
   denyDownload: boolean,
+  internal: boolean,
 ) {
   const skipRedirect = true;
 
@@ -439,6 +440,7 @@ export function editExternalLink(
         password,
         disabled,
         denyDownload,
+        internal,
       },
     },
     skipRedirect,

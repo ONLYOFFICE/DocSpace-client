@@ -117,10 +117,6 @@
     }
   }
 
-  .linkOptionsTitleRoom {
-    margin-inline-start: 0;
-  }
-
   .expiredOptions {
     padding: 0;
 
@@ -148,6 +144,7 @@
 
   .linkTimeInfo {
     color: var(--info-panel-links-primary-color);
+    padding-inline-start: 8px;
   }
 
   .linkActions {

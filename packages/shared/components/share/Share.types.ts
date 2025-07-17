@@ -59,7 +59,7 @@ export type LinkRowProps = {
   onAddClick: () => Promise<void>;
   links: TLink[] | null;
 
-  changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
+  changeShareOption: (item: TOption, link: TFileLink) => void;
   changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
 
   changeExpirationOption: (
@@ -76,6 +76,7 @@ export type LinkRowProps = {
   isFormRoom?: boolean;
   isCustomRoom?: boolean;
   isFolder?: boolean;
+  isPublicRoom?: boolean;
 
   getData: (link: TFileLink) => ContextMenuModel[];
   onOpenContextMenu: (e: React.MouseEvent) => void;

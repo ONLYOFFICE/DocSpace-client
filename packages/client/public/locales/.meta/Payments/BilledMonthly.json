@@ -1,0 +1,28 @@
+{
+  "key_path": "BilledMonthly",
+  "content": "Billed monthly",
+  "content_en_sha1_hash": "cad51bd43867544605d337e3561e34fa74f94632",
+  "created_at": "2025-05-29T12:12:54.366Z",
+  "updated_at": "2025-06-26T19:00:18.270Z",
+  "comment": {
+    "text": "This translation key is used for the text \"Billed monthly\" which displays the subscription status in a plan information component. It will be rendered when the subscription is billed on a monthly basis and appears in the UI related to portal settings.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:58.425Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
+      "line_number": 99,
+      "context": "const getSubscriptionStatusText = () => {\n if (!amount || isStorageCancellation()) {\n return t(\"SubscriptionCancellation\");\n }\n \n return t(\"BilledMonthly\");\n };\n \n return (\n <div className={styles.planInfoContainer}>\n <div className={styles.planInfoIcon}>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

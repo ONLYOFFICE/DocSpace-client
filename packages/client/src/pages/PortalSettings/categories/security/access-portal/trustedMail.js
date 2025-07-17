@@ -66,6 +66,7 @@ const TrustedMail = (props) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const navigate = useNavigate();
@@ -112,6 +113,12 @@ const TrustedMail = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("TrustedMail");
+  }, [currentDeviceType, isLoading]);
 
   useEffect(() => {
     checkWidth();
@@ -274,7 +281,6 @@ const TrustedMail = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
-          isAutoFocussed
         />
       ) : null}
 
@@ -283,7 +289,7 @@ const TrustedMail = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings

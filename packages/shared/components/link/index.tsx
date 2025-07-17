@@ -47,9 +47,9 @@ const Link: React.FC<LinkProps> = ({
   isTextOverflow = false,
   noHover = false,
   enableUserSelect = false,
+  textDecoration,
   ariaLabel,
   dataTestId,
-  textDecoration,
   ...rest
 }: LinkProps) => {
   const linkClasses = classNames(

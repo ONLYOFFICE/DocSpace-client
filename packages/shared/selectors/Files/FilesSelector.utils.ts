@@ -35,8 +35,9 @@ export const configureFilterByFilterParam = (
   filter: FilesFilter,
   filterParam: string | number,
   extsWebEdited: string[],
+  applyFilterOption?: ApplyFilterOption,
 ) => {
-  filter.applyFilterOption = ApplyFilterOption.Files;
+  filter.applyFilterOption = applyFilterOption ?? ApplyFilterOption.Files;
   switch (filterParam) {
     case FilesSelectorFilterTypes.DOCX:
       filter.extension = FilesSelectorFilterTypes.DOCX;
@@ -61,6 +62,10 @@ export const configureFilterByFilterParam = (
 
     case FilterType.DocumentsOnly:
       filter.filterType = FilterType.DocumentsOnly;
+      break;
+
+    case FilterType.DiagramsOnly:
+      filter.filterType = FilterType.DiagramsOnly;
       break;
 
     case FilterType.PDFForm:

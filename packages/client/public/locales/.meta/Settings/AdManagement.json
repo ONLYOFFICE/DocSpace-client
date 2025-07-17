@@ -1,0 +1,40 @@
+{
+  "key_path": "AdManagement",
+  "content": "Ad Management",
+  "content_en_sha1_hash": "18c92cf5613e4306b2ab3e01e2c3b8b2c34e9b43",
+  "created_at": "2025-07-02T07:49:04.410Z",
+  "updated_at": "2025-07-10T11:11:06.903Z",
+  "comment": {
+    "text": "The \"AdManagement\" translation key is used for the label displayed on a configuration option page within the portal settings, guiding users to manage ads. This text appears in a mobile category wrapper and may also be referenced in tooltips or other UI elements related to ad management options.",
+    "is_auto": true,
+    "updated_at": "2025-07-02T07:49:34.712Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
+      "line_number": 37,
+      "context": "import { Text } from \"@docspace/shared/components/text\";\n import { RadioButtonGroup } from \"@docspace/shared/components/radio-button-group\";\n import { SaveCancelButtons } from \"@docspace/shared/components/save-cancel-buttons\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { DeviceType } from \"@docspace/shared/enums\";\n import { setAdManagement } from \"@docspace/shared/api/settings\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n \n import styles from \"./customization.module.scss\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
+      "line_number": 108,
+      "context": "url=\"/portal-settings/customization/general/configure-deep-link\"\n onClickLink={onClickLink}\n />\n {isEnterprise ? (\n <MobileCategoryWrapper\n title={t(\"AdManagement\")}\n subtitle={t(\"AdManagementDescription\")}\n url=\"/portal-settings/customization/general/ad-management\"\n onClickLink={onClickLink}\n />\n ) : null}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 93,
+      "context": "{\n id: \"portal-settings_catalog-ad-management\",\n key: \"0-0-5\",\n icon: \"\",\n link: \"ad-management\",\n tKey: \"AdManagement\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-branding\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -148,6 +148,7 @@ export const enum FilterType {
   FormRooms = 21,
   Pdf = 22,
   PDFForm = 23,
+  DiagramsOnly = 25,
 }
 
 /**
@@ -166,6 +167,7 @@ export const enum FileType {
   OFormTemplate = 8,
   OForm = 9,
   PDF = 10,
+  Diagram = 11,
 }
 
 /**
@@ -221,6 +223,7 @@ export const enum PageType {
   bonus = "bonus",
   dataImport = "dataImport",
   storageManagement = "storageManagement",
+  services = "services",
 }
 
 /**
@@ -417,6 +420,25 @@ export const enum PortalFeaturesLimitations {
 }
 
 /**
+ * Enum for payment method status.
+ * @readonly
+ */
+export const enum PaymentMethodStatus {
+  None = 0,
+  Set = 1,
+  Expired = 2,
+}
+
+/**
+ * Enum for quota state.
+ * @readonly
+ */
+export const enum QuotaState {
+  Active = 0,
+  Overdue = 1,
+}
+
+/**
  * Enum for notifications.
  * @readonly
  */
@@ -510,6 +532,7 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  // AIRoom = 9, //TODO: Restore when certs will be done
   PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done

@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import copy from "copy-to-clipboard";
+import { TFunction } from "i18next";
+
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { Trans, withTranslation } from "react-i18next";
@@ -43,6 +44,7 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
 import { globalColors } from "@docspace/shared/themes";
 import { CreateApiKeyDialogProps, TPermissionsList } from "../../types";
@@ -55,77 +57,7 @@ import {
   sortPermissions,
 } from "../../utils";
 
-const StyledBodyContent = styled.div`
-  .api-key_name {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-top: 16px;
-  }
-
-  .api-key_name-body-container {
-    display: flex;
-    gap: 4px;
-    margin-top: 16px;
-  }
-
-  .api-key_lifetime {
-    display: flex;
-  }
-
-  .api-key_toggle {
-    margin-inline-start: auto;
-    margin-inline-end: 28px;
-  }
-
-  .api-key_lifetime-description {
-    color: ${(props) => props.theme.text.disableColor};
-  }
-
-  .api-key_lifetime-input-block {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .api-key_lifetime-input {
-    max-width: 100px;
-  }
-
-  .sticky-indent {
-    display: none;
-  }
-
-  .api-key_permission-tab {
-    width: 100%;
-  }
-
-  .api-key_permission-container {
-    display: grid;
-    grid-template-columns: 1fr minmax(50px, auto) minmax(50px, auto);
-    gap: 8px 0;
-  }
-
-  .separator {
-    padding: 15px 0px 9px;
-    margin-bottom: 6px;
-    border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
-  }
-
-  .api-key_permission-container-text {
-    display: flex;
-    justify-content: center;
-  }
-
-  .api-key_permission-checkbox {
-    justify-content: center;
-    margin-left: 12px;
-  }
-
-  .api-key_permission-row {
-    margin-bottom: 8px;
-  }
-`;
+import { StyledBodyContent } from "./StyledCreateApiKeys";
 
 const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const {
@@ -139,12 +71,10 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     setActionItem,
     onChangeApiKeyParams,
     isRequestRunning: isRequestRunningProp,
+    isUser,
   } = props;
 
-  const selectedOption = getItemPermissions(
-    permissions,
-    actionItem?.permissions,
-  );
+  const selectedOption = getItemPermissions(actionItem?.permissions);
 
   const isEdit = !!actionItem;
 
@@ -181,6 +111,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     Object.entries(filteredOpt).forEach(([key, value]) => {
       const category = getCategoryTranslation(key as PermissionGroup, t);
       const readIsDisabled = value?.isWrite?.isChecked;
+      const showTooltip = value?.isWrite?.isDisabled;
 
       list.push(
         <React.Fragment key={key}>
@@ -201,25 +132,44 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
                 obj[key].isRead.isChecked = !value.isRead.isChecked;
                 setFilteredOpt(obj);
               }}
-              isDisabled={readIsDisabled || isRequestRunning}
+              isDisabled={
+                readIsDisabled || isRequestRunning || value.isRead.isDisabled
+              }
             />
           ) : (
             <div />
           )}
           {value.isWrite ? (
-            <Checkbox
-              className="api-key_permission-row api-key_permission-checkbox"
-              isChecked={value.isWrite.isChecked}
-              onChange={() => {
-                const obj = { ...filteredOpt };
-                obj[key].isWrite.isChecked = !value.isWrite.isChecked;
-                setFilteredOpt(obj);
-              }}
-              isDisabled={isRequestRunning}
-            />
+            <div
+              data-tooltip-id={showTooltip ? "emailTooltip" : ""}
+              data-tip="tooltip"
+            >
+              <Checkbox
+                className="api-key_permission-row api-key_permission-checkbox"
+                isChecked={value.isWrite.isChecked}
+                onChange={() => {
+                  const obj = { ...filteredOpt };
+                  obj[key].isWrite.isChecked = !value.isWrite.isChecked;
+                  setFilteredOpt(obj);
+                }}
+                isDisabled={isRequestRunning || value.isWrite.isDisabled}
+              />
+            </div>
           ) : (
             <div />
           )}
+
+          {showTooltip ? (
+            <Tooltip
+              id="emailTooltip"
+              getContent={() => (
+                <Text isInline fontSize="12px">
+                  {t("Common:YouDontHaveEnoughPermission")}
+                </Text>
+              )}
+              place="bottom"
+            />
+          ) : null}
         </React.Fragment>,
       );
     });
@@ -299,7 +249,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         selectedPermissions = getRestrictedOptions();
         break;
       case "readonly": {
-        selectedPermissions = permissions.filter((p) => p.includes("read"));
+        selectedPermissions = ["*:read"];
         break;
       }
       default:
@@ -358,6 +308,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   useEffect(() => {
     const filteredOptions = getFilteredOptions(
       permissions,
+      isUser,
       actionItem?.permissions,
     );
     setFilteredOpt(filteredOptions);
@@ -485,7 +436,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
               />
               <Text fontSize="13px" fontWeight={600}>
                 <Trans
-                  t={t}
+                  t={t as TFunction}
                   ns="Settings"
                   i18nKey="APIKeyMaxDays"
                   values={{ days: maxKeyLifetimeDays }}
@@ -532,7 +483,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       {lifetimeIsChecked ? (
         <Text fontSize="12px" fontWeight={400}>
           <Trans
-            t={t}
+            t={t as TFunction}
             ns="Settings"
             i18nKey="ApiKeyLifetime"
             values={{ days: expiresInDays }}

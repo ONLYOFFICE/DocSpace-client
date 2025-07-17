@@ -128,7 +128,7 @@ const DataManagementWrapper = (props) => {
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
 
     setIsLoaded(true);
   }, [location.pathname]);
@@ -166,7 +166,6 @@ const DataManagementWrapper = (props) => {
       }
     };
   }, []);
-
   const onSelect = (e) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`

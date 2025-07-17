@@ -3,7 +3,7 @@
   "content": "Public",
   "content_en_sha1_hash": "dc5eb704bbcae1aff4efb71c55461d47767dabe7",
   "created_at": "2025-05-19T21:30:47.669Z",
-  "updated_at": "2025-05-26T07:57:32.997Z",
+  "updated_at": "2025-07-10T11:11:07.167Z",
   "comment": {
     "text": "The PublicRoomLabel translation key is used to display the English content \"Public\" in a public room context, likely appearing as a button label or title. This text is used to identify and distinguish public rooms from other types of rooms in an application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 368,
+      "line_number": 374,
       "context": "case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");\n \n default:\n return \"\";",
       "module": "/packages/shared"
     }
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation \"Salles publiques\" translates to \"Public Rooms\" rather than simply \"Public\". While technically not incorrect, it's more literal and doesn't convey the intended meaning of the English 'Public' in this context, which likely signifies open to all or accessible to everyone.",
-          "suggestion": "While 'Salles publiques' isn't inherently wrong, a more concise and accurate translation might be 'Public' or 'Ouvert à tous'."
+          "description": "The translation \"Salles publiques\" is too literal and doesn't convey the intended meaning of \"Public\" in this context. \"Public\" refers to a room accessible to everyone, not necessarily a 'public hall' or 'public rooms'.",
+          "suggestion": "A better translation might be \"Public\" (keeping the original word), \"Commun(e)\" or \"Ouvert(e) à tous/toutes\" depending on the exact nuance desired."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation 'Публичная' is an adjective, not a noun like the English 'Public'. A more accurate translation, depending on the context, could be 'Общественный' (Obshchestvennyy) which is a noun meaning 'public' or 'community'. Alternatively, 'Публичный' (Publichnyy) could be used as an adjective.",
-          "suggestion": "Consider 'Общественный' or 'Публичный' depending on the intended meaning."
+          "description": "The Russian translation \"Публичная\" is an adjective, but \"Public\" in this context likely refers to a noun (Public Room). A more accurate translation would be \"Общественный\" (Obshchestvennyy).",
+          "suggestion": "Общественный"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Herkese Açık' is a possible translation for 'Public', it's quite literal and can sound a bit clunky in this context. 'Public' often implies accessibility and openness, and a more natural Turkish equivalent might be 'Açık' or 'Genel'.",
-          "suggestion": "Consider 'Açık' or 'Genel' as more natural alternatives."
+          "description": "While \"Herkese Açık\" is a valid translation, it's a bit verbose for a simple label like \"Public.\" A more concise and commonly used translation would be \"Herkese\" or possibly \"Açık\". \"Public\" often implies accessibility, and \"Herkese\" captures that but can feel heavy in UI contexts.",
+          "suggestion": "Consider \"Herkese\" or \"Açık\" for a more concise translation."
         }
       ],
       "approved_at": null
@@ -207,13 +207,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Публічна' is a grammatically correct adjective but doesn't fully convey the meaning of 'Public' in this context. While it means 'public' in a general sense, 'Public' in a user interface label typically refers to a space or area accessible to everyone.",
-          "suggestion": "Розміщена на видному місці"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -225,13 +219,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"公共房间\" (gōnggòng fángjiān) literally means \"public room\". While technically correct, it's unnecessarily verbose for a simple label like \"Public\". A more concise and standard translation would be \"公共\" (gōnggòng) or just \"公开\" (gōngkāi).",
-          "suggestion": "公共 (gōnggòng) or 公开 (gōngkāi)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

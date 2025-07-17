@@ -38,7 +38,14 @@ import {
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
-import { DeviceType, FolderType, RoomsType, FileType } from "../../enums";
+import {
+  ApplyFilterOption,
+  DeviceType,
+  FolderType,
+  RoomsType,
+  FileType,
+  RoomSearchArea,
+} from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
 import { TGetIcon } from "../utils/types";
 
@@ -75,7 +82,6 @@ export type UseSocketHelperProps = {
 
 export type UseRoomsHelperProps = TUseInputItemHelper & {
   searchValue?: string;
-  searchArea?: string;
   disableThirdParty?: boolean;
   isRoomsOnly: boolean;
   roomType?: RoomsType | RoomsType[];
@@ -102,6 +108,7 @@ export type UseRoomsHelperProps = TUseInputItemHelper & {
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
+  searchArea?: RoomSearchArea;
 };
 
 export type UseFilesHelpersProps = {
@@ -116,6 +123,7 @@ export type UseFilesHelpersProps = {
   setIsInit: (value: boolean) => void;
   searchValue?: string;
   disabledItems: (string | number)[];
+  includedItems?: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
@@ -142,6 +150,8 @@ export type UseFilesHelpersProps = {
   setSelectedItemType: (value?: "rooms" | "files") => void;
 
   withInit?: boolean;
+
+  applyFilterOption?: ApplyFilterOption;
 };
 
 export type TUseInputItemHelper = {
@@ -184,7 +194,8 @@ export type FilesSelectorProps = TInfoBar &
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
     disabledItems: (string | number)[];
-    filterParam?: string;
+    includedItems?: (string | number)[];
+    filterParam?: string | number;
     withoutBackButton: boolean;
     withBreadCrumbs: boolean;
     withSearch: boolean;
@@ -253,4 +264,9 @@ export type FilesSelectorProps = TInfoBar &
     formProps?: FormPropsType;
     withPadding?: boolean;
     checkCreating?: boolean;
+
+    applyFilterOption?: ApplyFilterOption;
+
+    isMultiSelect?: boolean;
+    onSelectItem?: (item: TSelectorItem) => void;
   };

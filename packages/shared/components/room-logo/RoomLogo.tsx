@@ -85,6 +85,7 @@ const RoomLogoPure = ({
           return VirtualDataTemplateSvg32Url;
         case RoomsType.FormRoom:
           return FormTemplateSvg32Url;
+
         default:
           return "";
       }
@@ -101,6 +102,7 @@ const RoomLogoPure = ({
         return VirtualDataRoomRoomSvg32Url;
       case RoomsType.FormRoom:
         return FormRoomSvg32Url;
+
       default:
         return "";
     }

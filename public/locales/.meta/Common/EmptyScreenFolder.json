@@ -3,7 +3,7 @@
   "content": "No docs here yet",
   "content_en_sha1_hash": "13f65c49b67384ae354aca724c941bd51b597bb5",
   "created_at": "2025-05-19T21:30:44.896Z",
-  "updated_at": "2025-06-02T10:20:51.011Z",
+  "updated_at": "2025-06-08T12:02:32.573Z",
   "comment": {
     "text": "This translation key displays a message indicating that there are no files or content available in an empty screen folder. It is used to inform users when they navigate to a folder without any contents, typically found on folders like \"EmptyFormFolder\" within the application's UI. The exact display of this message may vary depending on the context in which it appears.",
     "is_auto": true,
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Hier nog geen docs\" is understandable, but a more natural and idiomatic Dutch translation of \"No docs here yet\" would be something like \"Nog geen documenten hier\" or \"Geen documenten hier nog\". \"Docs\" is an English abbreviation and doesn't translate directly.",
-          "suggestion": "Nog geen documenten hier"
+          "description": "The translation \"Hier nog geen docs\" is a literal translation but doesn't quite capture the intended meaning of \"No docs here yet.\" It sounds slightly unnatural in Dutch. A more natural phrasing would be something like \"Nog geen documenten\" or \"Geen documenten voor nu\".",
+          "suggestion": "Nog geen documenten"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Niciun document încă nu există aici' is overly literal and slightly awkward in Romanian. A more natural phrasing would be 'Nu există documente aici încă' or 'Nu există documente aici' (depending on the desired emphasis).",
-          "suggestion": "Nu există documente aici încă"
+          "description": "The translation 'Niciun document încă nu există aici' is overly literal and sounds unnatural in Romanian. A more natural translation would be 'Niciun document aici încă' or 'Nu există documente aici încă'.",
+          "suggestion": "Niciun document aici încă"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙතැන ලේඛන නැත' while technically correct, is a bit stiff and doesn't convey the casual tone of 'No docs here yet'. A more natural translation would be something like 'මෙන්න මෙහි ලේඛන නොවී' or 'මේ chỗට ලේඛන නෑ'",
-          "suggestion": "Consider 'මෙන්න මෙහි ලේඛන නොවී' or 'මේ chỗට ලේඛන නෑ'"
+          "description": "The Sinhala translation 'මෙතැන ලේඛන නැත' translates literally to 'There are no documents here'. While understandable, it's slightly less natural than alternatives for an empty screen message. A more natural phrasing might focus on the absence of content rather than specifically mentioning 'documents'.",
+          "suggestion": "Consider 'මෙහි ඇතිcontent නැත' (mehi athi content nathe) which translates to 'There is no content here' or 'මෙතැනට content නැත' (methanata content nathe) - 'There is no content in this place'."
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Нема докумената овде још' is not the most natural or idiomatic way to say 'No docs here yet' in Serbian (Cyrillic). While technically correct, it sounds a bit awkward.",
-          "suggestion": "A more natural translation would be 'Овде још нема докумената' or 'Још нема докумената овде'."
+          "description": "The translation \"Нема докумената овде још\" is a literal translation and sounds unnatural in Serbian. A more natural and idiomatic translation would be \"Немa докумената овде\" or \"Овде нема докумената.\"",
+          "suggestion": "Немa докумената овде"
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Henüz burada döküman yok' is not the most natural or accurate translation of 'No docs here yet'. While technically correct, it sounds somewhat formal and less conversational. A more natural translation would be 'Şimdilik burada doküman yok' or 'Burada henüz doküman yok'.",
-          "suggestion": "Şimdilik burada doküman yok"
+          "description": "The translation 'Henüz burada döküman yok' is a literal translation but doesn't quite capture the natural flow of English 'No docs here yet.' A more natural Turkish equivalent would emphasize the lack of documents.",
+          "suggestion": "Henüz bir doküman bulunmuyor"
         }
       ],
       "approved_at": null
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '未找到任何文档' (wèi zhǎo dào rèn hé wén jiàn) is a literal translation of 'No docs here yet' but sounds overly formal and slightly awkward in this context. A more natural and user-friendly translation would be something like '暂无文档' (zàn wú wén jiàn) which means 'No documents yet' or 'Currently no documents'.",
-          "suggestion": "暂无文档"
+          "description": "The translation \"未找到任何文档\" while technically accurate, is a bit formal and literal for a user interface element like an empty screen message. It lacks the gentleness and user-friendliness of \"No docs here yet\". A better translation would convey a similar message in a more approachable tone.",
+          "suggestion": "Consider a translation like \"这里还没有文档\" (Here are no documents yet) or \"暂无文档\" (Currently no documents)"
         }
       ],
       "approved_at": null

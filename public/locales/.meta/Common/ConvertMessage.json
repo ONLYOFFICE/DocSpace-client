@@ -3,7 +3,7 @@
   "content": "If you choose to convert the file to a format different from the original, some data might be lost.",
   "content_en_sha1_hash": "289264301ed3356fa949a02e3ff83466c5f9d7be",
   "created_at": "2025-05-19T21:30:43.710Z",
-  "updated_at": "2025-05-26T07:57:32.940Z",
+  "updated_at": "2025-07-01T15:57:36.404Z",
   "comment": {
     "text": "This translation key is used to display a warning message when converting a file, indicating that some data might be lost. It appears in a download dialog box and serves as an explanation of the potential consequences of changing the file format.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 512,
-      "context": "title={t(\"Common:Other\")}\n />\n ) : null}\n \n <div className={styles.downloadDialogConvertMessage}>\n <Text noSelect>{t(\"Common:ConvertMessage\")}</Text>\n </div>\n </>\n );\n \n if (isOnePasswordFile) {",
+      "line_number": 529,
+      "context": "type={DownloadedDocumentType.Other}\n title={t(\"Common:Other\")}\n />\n ) : null}\n <div className={styles.downloadDialogConvertMessage}>\n <Text noSelect>{t(\"Common:ConvertMessage\")}</Text>\n </div>\n </>\n );\n \n if (isOnePasswordFile) {",
       "module": "/packages/shared"
     }
   ],
@@ -54,12 +54,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wenn Sie das Dateiformat ändern, können Sie möglicherweise einige Daten verloren.' doesn't fully convey the meaning of 'If you choose to convert the file to a format different from the original, some data might be lost.'. It implies that the user *might* lose data, whereas the original implies a potential consequence of the conversion choice.",
+          "description": "The translation 'Wenn Sie das Dateiformat ändern, können Sie möglicherweise einige Daten verloren' doesn't fully capture the nuance of the original sentence 'If you choose to convert the file to a format different from the original, some data might be lost.'  It lacks the explicit mention of *choosing* to convert and presents the data loss as a possibility affecting the user directly ('you').",
           "suggestion": "Wenn Sie das Dateiformat in ein anderes ändern, könnten Daten verloren gehen."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'können Sie möglicherweise' is a bit wordy. While grammatically correct, it's not the most natural phrasing in German for this context.",
+          "description": "While not strictly incorrect, 'können Sie möglicherweise' is a slightly awkward phrasing. 'möglicherweise' can be replaced with a more direct way to indicate possibility.",
           "suggestion": "könnten"
         }
       ],
@@ -131,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrasing \"Als u ervoor kiest het bestand om te zetten\" is a bit awkward. A more natural phrasing would be \"Als u ervoor kiest het bestand te converteren\".",
-          "suggestion": "Als u ervoor kiest het bestand te converteren"
+          "description": "The verb 'om te zetten' is slightly awkward. While grammatically correct, a more natural phrasing would improve readability.",
+          "suggestion": "Als u ervoor kiest het bestand naar een ander formaat dan het origineel om te zetten, kunnen sommige gegevens verloren gaan."
         }
       ],
       "approved_at": null
@@ -143,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation uses 'ryzykujesz utratę' which translates to 'you risk losing'. While not technically wrong, it introduces a stronger implication of risk than the English 'might be lost'. A more direct translation reflecting the possibility would be better.",
-          "suggestion": "Jeśli zdecydujesz się na konwersję pliku do innego formatu, niż oryginalny, część danych może zostać utracona."
+          "description": "The Polish translation \"ryzykujesz utratę\" (you risk losing) introduces a sense of personal responsibility or potential consequence that isn't explicitly present in the English \"some data might be lost.\" The English phrasing is more neutral and factual. \"ryzykujesz\" implies the user is doing something risky.",
+          "suggestion": "Jeśli zdecydujesz się na konwersję pliku do innego formatu niż oryginalny, część danych może ulec utracie."
         }
       ],
       "approved_at": null
@@ -152,7 +152,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'perder-se' (to get lost) implies an unintentional loss. It should convey a potential loss due to the conversion process, which is a known possibility.",
+          "suggestion": "Se optar por converter o ficheiro para um formato diferente do original, alguns dados poderão ser perdidos."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -179,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඇතැම් දත්ත නැති වීමට ඉඩ තිබේ' (aththam datta nethi vimita idai thibey) translates to 'there is a chance that some data might be lost'. While not entirely wrong, it's a less direct and slightly less clear phrasing compared to the English 'some data might be lost'. A more accurate and natural translation would be 'දත්ත verloren විය හැකිය' (datta verloren viyaa kayathaa) - 'data may be lost'.",
-          "suggestion": "Replace 'ඇතැම් දත්ත නැති වීමට ඉඩ තිබේ' with 'දත්ත verloren විය හැකිය'."
+          "description": "The translation 'ඇතැම් දත්ත නැති වීමට ඉඩ තිබේ' is a bit literal. A more natural and accurate translation would convey the *possibility* of data loss more smoothly. The original sentence implies it's a risk, not a certainty, and the Sinhala translation makes it sound more definitive.",
+          "suggestion": "මුල් පිටපතට වඩා වෙනස් ආකෘතියකට ගොනුව හැරවීමට තෝරා ගන්නේ නම්, දත්ත verloren වීමේ හැකියාව ఉంది."
         },
         {
-          "type": "spelling",
-          "description": "The word 'විට' is often used but 'යට' is more suitable in this context.",
-          "suggestion": "Replace 'විට' with 'යට'."
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure could be improved for better readability. Sinhala sentences often flow better with a slightly different order.",
+          "suggestion": "මුල් පිටපතට වඩා වෙනස් ආකෘතියකට ගොනුව හැරවන්නේ නම්, ඇතැම් දත්ත verloren වීමට ඉඩක් ఉంది."
         }
       ],
       "approved_at": null

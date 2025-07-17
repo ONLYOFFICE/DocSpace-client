@@ -170,6 +170,7 @@ export type FilterBlockProps = {
   isContactsInsideGroupPage: boolean;
   isContactsGuestsPage: boolean;
 
+  isFlowsPage?: boolean;
   disableThirdParty?: boolean;
 };
 

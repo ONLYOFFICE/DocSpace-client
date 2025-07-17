@@ -3,7 +3,7 @@
   "content": "Select room",
   "content_en_sha1_hash": "1cb6b5cee4e5862ec22f1890431e0589c7eacb25",
   "created_at": "2025-05-19T21:30:48.514Z",
-  "updated_at": "2025-05-26T07:57:32.460Z",
+  "updated_at": "2025-07-01T15:57:36.131Z",
   "comment": {
     "text": "This translation key is used for the label of a button in a filter section on a home page. It displays \"Select room\" and is typically used as a title or header for a dropdown or button that allows users to select a room.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1080,
+      "line_number": 1101,
       "context": "{\n id: \"filter_search-by-room-content\",\n key: \"filter_search-by-room-content\",\n group: FilterGroups.filterRoom,\n withoutHeader: true,\n label: t(\"Common:SelectRoom\"),\n displaySelectorType: \"button\",\n isLast: true,\n },\n ];\n filterOptions.push(...roomOption);",
       "module": "/packages/client"
     }
@@ -63,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Seleccionar sala\" is understandable, a more natural and common translation for \"Select room\" in Spanish would be \"Elegir sala\" or \"Seleccione la sala\" (formal). \"Seleccionar\" feels a bit technical or formal for this context.",
-          "suggestion": "Elegir sala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -90,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ընտրել Սենյակ' is a literal word-for-word translation and doesn't flow naturally. 'Ընտրել' means 'to choose' and 'Սենյակ' means 'room'. A more natural translation would be something like 'ընտրել աշխատասենյակ' (select workspace) or 'սենյակ ընտրել' (room select).",
-          "suggestion": "Ընտրել աշխատասենյակ or սենյակ ընտրել"
+          "description": "The Armenian translation 'Ընտրել Սենյակ' is a literal translation of 'Select room' but might not be the most natural or idiomatic way to express the concept in Armenian. A more common phrasing might be 'ընտրեք դրան' (entrek dran) or 'ընտրել սենյակը' (entrel senyaku).",
+          "suggestion": "Consider 'ընտրեք դրան' (entrek dran) or 'ընտրել սենյակը' (entrel senyaku) for a more natural sounding translation."
         }
       ],
       "approved_at": null
@@ -108,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ルームの選択' is a literal translation, a more natural and commonly used phrasing for a selection option would be '部屋の選択' (heya no sentaku). 'ルーム' (ruumu) is a loanword and while acceptable, '部屋' (heya) is more commonly used in this context.",
+          "description": "The translation 'ルームの選択' while technically correct, is a bit formal and literal. A more natural translation would be something like '部屋の選択' or just '選択'.",
           "suggestion": "部屋の選択"
         }
       ],
@@ -150,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Selecione o sala' is grammatically incorrect. 'Sala' is feminine and requires the definite article 'a'.",
+          "description": "The Portuguese translation 'Selecione o sala' is grammatically incorrect. The correct article should be 'a' instead of 'o'.",
           "suggestion": "Selecione a sala"
         }
       ],
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Selectare sala' is not the most natural or accurate translation of 'Select room'. 'Selectare' is a verbal noun (gerund) and doesn't quite fit the context of selecting a room. It's a bit awkward.",
-          "suggestion": "A better translation would be 'Alegere cameră' or 'Selectare cameră'. While 'Selectare cameră' is technically correct, 'Alegere cameră' is more common and flows better."
+          "description": "The translation 'Selectare sala' is not the most natural or accurate Romanian translation of 'Select room'. 'Selectare' implies a process of selecting, not the selection itself. 'Sala' translates to 'room' but the structure of the phrase is awkward.",
+          "suggestion": "A better translation would be 'Alege o cameră' or 'Selectează o cameră'."
         }
       ],
       "approved_at": null
@@ -183,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'කාමරය තෝරන්න' is understandable, a more formal and accurate translation of 'Select room' would be 'කාමරය තෝරා ගන්න'. 'කාමරය තෝරන්න' is more colloquial.",
-          "suggestion": "කාමරය තෝරා ගන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -210,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Изабери собу' is not the most natural or accurate translation of 'Select room'. 'Изабери собу' literally translates to 'Choose room', while 'Select room' implies a choice from a list or available options. A more accurate translation would be 'Одаберите собу' or 'Избери собу'.",
+          "description": "The translation 'Изабери собу' is not the most accurate or natural translation of 'Select room'. While 'Изабери' correctly translates to 'Select', 'собу' is an informal and potentially incorrect word for 'room'. A more appropriate translation would be 'Одаберите собу' or 'Избери собу'.",
           "suggestion": "Одаберите собу"
         }
       ],

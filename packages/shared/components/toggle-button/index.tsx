@@ -63,7 +63,8 @@ const ToggleIcon = ({
             r: [5, 6, 6],
             transition: {
               r: {
-                yoyo: Infinity,
+                repeat: Infinity,
+                repeatType: "reverse",
                 duration: 0.6,
                 ease: "easeOut",
               },

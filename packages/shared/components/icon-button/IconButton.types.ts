@@ -73,4 +73,7 @@ export type IconButtonProps = {
   title?: string;
   /** Id for testing */
   dataTestId?: string;
+
+  tooltipId?: string;
+  tooltipContent?: string;
 };

@@ -3,7 +3,7 @@
   "content": "The paid user limit has been reached.",
   "content_en_sha1_hash": "e1d3147e981910f2b0f7ffe1cc79d9fbc9a364c2",
   "created_at": "2025-05-19T21:30:47.705Z",
-  "updated_at": "2025-05-26T07:57:32.196Z",
+  "updated_at": "2025-06-30T12:20:31.152Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user's paid quota has been reached. It appears in various UI components, such as error messages and payment-related interfaces, indicating that the user has exceeded their paid limit. The text translates to \"The paid user limit has been reached.\"",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
-      "line_number": 105,
+      "line_number": 107,
       "context": "case ValidationResult.TariffLimit:\n console.error(\"tariff limit\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:QuotaPaidUserLimitError\"));\n case ValidationResult.QuotaFailed:\n console.error(\"access below quota\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
       "module": "/packages/login"
     },
@@ -39,7 +39,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"تم الوصول إلى الحد المدفوع للمستخدمين.\" while understandable, isn't the most natural or precise way to express \"The paid user limit has been reached.\" A better phrasing would convey the sense of a 'limit' being exceeded.",
+          "suggestion": "تم الوصول إلى الحد الأقصى للمستخدمين المدفوعين."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -48,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ödənişli istifadəçi limitinə çatıldı' is a literal translation and doesn't flow naturally in Azerbaijani. It sounds awkward.  A more natural phrasing would convey the meaning of 'reached the limit' in a more idiomatic way.",
-          "suggestion": "Ödənişli istifadəçi limiti dolduruldu."
+          "description": "The translation 'Ödənişli istifadəçi limitinə çatıldı' is a literal translation but doesn't quite convey the intended meaning of 'The paid user limit has been reached.' It sounds more like 'The paid user limit was reached' (past tense).",
+          "suggestion": "Consider a more idiomatic translation like 'Ödənişli istifadəçi limiti doldu.' or 'Ödənişli istifadəçi limiti keçildi.'"
         }
       ],
       "approved_at": null
@@ -72,7 +78,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Das Limit von Benutzern wurde erreicht' is too literal and doesn't convey the intended meaning of 'The paid user limit has been reached.' It simply states 'The limit of users has been reached' without specifying the 'paid' aspect.",
+          "description": "The German translation \"Das Limit von Benutzern wurde erreicht.\" is a literal translation that doesn't quite convey the meaning of \"The paid user limit has been reached.\" It doesn't specify that these are *paid* users.",
           "suggestion": "Das Limit für bezahlte Benutzer wurde erreicht."
         }
       ],
@@ -81,13 +87,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Έχει επιτευχθεί το όριο των χρηστών με πληρωμή\" is a literal translation but may not be the most natural or clear way to express the meaning of \"The paid user limit has been reached.\" It sounds somewhat formal and clunky in Greek. A more user-friendly and idiomatic translation might be better.",
-          "suggestion": "Consider alternatives like: \"Έχει συμπληρωθεί το όριο των πληρωμένων χρηστών.\" or \"Φτάσαμε στο όριο των χρηστών που έχουν πληρώσει.\" or \"Δεν μπορείτε να προσθέσετε άλλους πληρωμένους χρήστες - το όριο έχει συμπληρωθεί.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Վճարովի օգտագործողի սահմանաչափը հասել է:\" is a literal translation and while understandable, it's a bit clunky. A more natural Armenian phrasing might be preferred for a user-facing message.",
-          "suggestion": "Consider rephrasing to something like \"Մաքսիմալ թիվը վճարովի օգտագործողների համար հասել է:\" (The maximum number of paid users has been reached.) or \"Ձեռք բերել եք վճարովի օգտագործողների սահմանը:\" (You have reached the limit of paid users)."
+          "description": "The translation \"Վճարովի օգտագործողի սահմանաչափը հասել է:\" is a literal translation, but it sounds somewhat unnatural in Armenian. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Վճարովի օգտագործողների թիվը սահմանափակվել է։ (Vcharovi ogutsvoghneri tivu sahmanapakvel e.) - The number of paid users has reached the limit."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation conveys the general meaning, 'S-a atins limita maximă de utilizatori cu plată' is a bit clunky. A more natural Romanian phrasing would be 'S-a depășit limita de utilizatori plătitori' or 'S-a atins limita de utilizatori plătiți'.",
-          "suggestion": "S-a depășit limita de utilizatori plătitori"
+          "description": "While the translation conveys the meaning, \"S-a atins limita maximă de utilizatori cu plată\" is a bit clunky. A more natural Romanian phrasing would be preferred.",
+          "suggestion": "S-a depășit limita de utilizatori cu plată."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගෙවන ලද පරිශ්‍රීලකයින්ගේ සීමාවට ළඟා වී ඇත.' while understandable, is a bit literal and could be improved for naturalness in Sinhala. It translates directly to 'The limit of paying users has been reached.' A more common and natural phrasing would be more along the lines of 'maximum gewan karyakarthu srimaa patha/eliyata geyaa.'",
-          "suggestion": "ගෙවන ලද පරිශ්‍රීලකයින්ගේ උපරිමය සීමාවට ගියි."
+          "description": "The translation 'ගෙවන ලද පරිශ්‍රීලකයින්ගේ සීමාවට ළඟා වී ඇත.' is a literal translation and might not be the most natural way to express 'The paid user limit has been reached.' in Sinhala. It sounds a bit formal and clunky.",
+          "suggestion": "Consider a more natural phrasing like 'ගෙවන ලද පරිශ්‍රීලකයින් ප්‍රමාණය අවමයට ළඟා වී ඇත' (Gewana lada pariseelakinayın pramāṇaya awamātaya lăga vē atā) which translates to 'The number of paid users has reached the limit.'"
         }
       ],
       "approved_at": null
@@ -227,9 +227,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'plaćenog' is a correct grammatical form, but it might be more natural to use a synonym depending on the desired tone. While technically correct, it could be perceived as slightly formal.",
-          "suggestion": "Consider 'Dostignut je limit plaćenih korisnika' or 'Puna je količina plaćenih korisnika' for a more conversational feel, if appropriate for the context."
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Limit plaćenog korisnika je dostignut\" sounds unnatural in Serbian. A more idiomatic translation would be \"Dostignut je maksimalan broj plaćenih korisnika.\" or \"Prekošen je broj plaćenih korisnika.\"",
+          "suggestion": "Dostignut je maksimalan broj plaćenih korisnika."
         }
       ],
       "approved_at": null

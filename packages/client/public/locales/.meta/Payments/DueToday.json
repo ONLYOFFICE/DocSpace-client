@@ -1,0 +1,28 @@
+{
+  "key_path": "DueToday",
+  "content": "Due today",
+  "content_en_sha1_hash": "11ea0f15f8d263f67307d451b2091f4a3bed7537",
+  "created_at": "2025-06-03T20:59:26.723Z",
+  "updated_at": "2025-06-30T12:20:31.594Z",
+  "comment": {
+    "text": "The \"DueToday\" translation key is used to display a reminder that an item is due today. It appears in the portal settings as part of a plan upgrade preview, likely on a button or title label. Translators should provide a concise message indicating urgency, while maintaining cultural sensitivity and accuracy.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:47.356Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanUpgradePreview.tsx",
+      "line_number": 149,
+      "context": "return (\n <>\n <div className={styles.planInfoHeader}>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"DueToday\")}\n </Text>\n <HelpButton\n size={12}\n offsetRight={0}\n place={isRTL ? \"left\" : \"right\"}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

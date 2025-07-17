@@ -1,0 +1,28 @@
+{
+  "key_path": "TopUpWallet",
+  "content": "Top up wallet",
+  "content_en_sha1_hash": "155fb560e348142a6331187a877f862f8cc8df81",
+  "created_at": "2025-05-28T09:33:06.824Z",
+  "updated_at": "2025-06-26T19:00:18.243Z",
+  "comment": {
+    "text": "The translation key \"TopUpWallet\" is used to display a wallet top-up transaction on a payment settings page. It appears in a modal dialog header and should be translated as \"Top up wallet\".",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:34:53.247Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TopUpModal.tsx",
+      "line_number": 101,
+      "context": "onClose={onClose}\n displayType={ModalDialogType.aside}\n {...headerProps}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"TopUpWallet\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.modalBody}>\n <WalletInfo balance={balanceValue} />\n <PaymentMethod\n walletCustomerEmail={walletCustomerEmail!}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -59,7 +59,7 @@ export default function RoomSelectorClient({
   pageCount,
   roomList,
 }: RoomSelectorClientProps) {
-  const { sdkConfig } = useSDKConfig();
+  useSDKConfig();
 
   useDocumentTitle("RoomSelector");
 

@@ -332,6 +332,10 @@ class SettingsStore {
 
   hasGuests: boolean | null = null;
 
+  scrollToSettings: boolean = false;
+
+  displayBanners: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -378,6 +382,10 @@ class SettingsStore {
 
   get feedbackAndSupportUrl() {
     return this.externalResources?.support?.domain;
+  }
+
+  get suggestFeatureUrl() {
+    return this.externalResources?.common?.entries?.feedback;
   }
 
   get licenseAgreementsUrl() {
@@ -605,6 +613,12 @@ class SettingsStore {
   get automaticBackupUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.autobackup
       ? `${this.helpCenterDomain}${this.helpCenterEntries.autobackup}`
+      : this.helpCenterDomain;
+  }
+
+  get walletHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.configuringsettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.configuringsettings}`
       : this.helpCenterDomain;
   }
 
@@ -844,52 +858,48 @@ class SettingsStore {
   };
 
   getSettings = async () => {
-    let newSettings: Nullable<TSettings> = null;
-
-    if (window?.__ASC_INITIAL_EDITOR_STATE__?.portalSettings)
-      newSettings = window.__ASC_INITIAL_EDITOR_STATE__.portalSettings;
-    else newSettings = await api.settings.getSettings(true);
+    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
 
     if (window.AscDesktopEditor !== undefined) {
       const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
 
-    if (!newSettings) return;
+    if (!settings) return;
 
-    Object.keys(newSettings).forEach((forEachKey) => {
+    Object.keys(settings).forEach((forEachKey) => {
       const key = forEachKey as keyof TSettings;
 
-      if (key in this && newSettings) {
+      if (key in this && settings) {
         if (key === "socketUrl") {
-          this.setSocketUrl(newSettings[key]);
+          this.setSocketUrl(settings[key]);
           return;
         }
 
         this.setValue(
           key as keyof SettingsStore,
           key === "defaultPage"
-            ? combineUrl(window.ClientConfig?.proxy?.url, newSettings[key])
-            : newSettings[key],
+            ? combineUrl(window.ClientConfig?.proxy?.url, settings[key])
+            : settings[key],
         );
 
         if (key === "culture") {
-          if (newSettings?.wizardToken) return;
+          if (settings?.wizardToken) return;
           const language = getCookie(LANGUAGE);
           if (!language || language === "undefined") {
-            setCookie(LANGUAGE, newSettings[key], {
+            setCookie(LANGUAGE, settings[key], {
               "max-age": COOKIE_EXPIRATION_YEAR,
             });
           }
         }
-      } else if (key === "passwordHash" && newSettings) {
-        this.setValue("hashSettings", newSettings[key]);
+      } else if (key === "passwordHash" && settings) {
+        this.setValue("hashSettings", settings[key]);
       }
     });
 
-    this.setGreetingSettings(newSettings.greetingSettings);
+    this.setGreetingSettings(settings.greetingSettings);
 
-    return newSettings;
+    return settings;
   };
 
   getFolderPath = async (id: number) => {
@@ -1243,10 +1253,7 @@ class SettingsStore {
   };
 
   getBuildVersionInfo = async () => {
-    let versionInfo = null;
-    if (window?.__ASC_INITIAL_EDITOR_STATE__?.versionInfo)
-      versionInfo = window.__ASC_INITIAL_EDITOR_STATE__.versionInfo;
-    else versionInfo = await api.settings.getBuildVersion();
+    const versionInfo = await api.settings.getBuildVersion();
     this.setBuildVersionInfo(versionInfo);
   };
 
@@ -1431,10 +1438,8 @@ class SettingsStore {
   };
 
   getAppearanceTheme = async () => {
-    let res: Nullable<TGetColorTheme> = null;
-    if (window?.__ASC_INITIAL_EDITOR_STATE__?.appearanceTheme)
-      res = window.__ASC_INITIAL_EDITOR_STATE__.appearanceTheme;
-    else res = await api.settings.getAppearanceTheme();
+    const res: Nullable<TGetColorTheme> =
+      await api.settings.getAppearanceTheme();
 
     const currentColorScheme = res.themes.find((theme) => {
       return res && res.selected === theme.id;
@@ -1442,6 +1447,7 @@ class SettingsStore {
 
     this.setAppearanceTheme(res.themes);
     this.setSelectThemeId(res.selected);
+
     if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
   };
 
@@ -1548,6 +1554,14 @@ class SettingsStore {
     filterDefault.area = "guests";
     const res = await api.people.getUserList(filterDefault);
     this.hasGuests = !!res.total;
+  };
+
+  setScrollToSettings = (scrollToSettings: boolean) => {
+    this.scrollToSettings = scrollToSettings;
+  };
+
+  setDisplayBanners = (displayBanners: boolean) => {
+    this.displayBanners = displayBanners;
   };
 }
 

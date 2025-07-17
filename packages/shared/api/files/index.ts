@@ -78,7 +78,7 @@ import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialo
 
 export async function openEdit(
   fileId: number | string,
-  version: string | number,
+  version?: string | number,
   doc?: string,
   view?: string,
   headers?: Record<string, string>,
@@ -417,8 +417,9 @@ export async function deleteFolder(
   folderId: number,
   deleteAfter: boolean,
   immediately: boolean,
+  returnSingleOperation: boolean = true,
 ) {
-  const data = { deleteAfter, immediately };
+  const data = { deleteAfter, immediately, returnSingleOperation };
   const options: AxiosRequestConfig = {
     method: "delete",
     url: `/files/folder/${folderId}`,
@@ -574,8 +575,9 @@ export async function deleteFile(
   fileId: number,
   deleteAfter: boolean,
   immediately: boolean,
+  returnSingleOperation: boolean = true,
 ) {
-  const data = { deleteAfter, immediately };
+  const data = { deleteAfter, immediately, returnSingleOperation };
   const options: AxiosRequestConfig = {
     method: "delete",
     url: `/files/file/${fileId}`,
@@ -590,7 +592,7 @@ export async function deleteFile(
 export async function emptyTrash() {
   const res = (await request({
     method: "put",
-    url: "/files/fileops/emptytrash",
+    url: "/files/fileops/emptytrash?single=true",
   })) as TOperation[];
   return res;
 }
@@ -610,8 +612,15 @@ export async function removeFiles(
   fileIds: number[],
   deleteAfter: boolean,
   immediately: boolean,
+  returnSingleOperation: boolean = true,
 ) {
-  const data = { folderIds, fileIds, deleteAfter, immediately };
+  const data = {
+    folderIds,
+    fileIds,
+    deleteAfter,
+    immediately,
+    returnSingleOperation,
+  };
   const res = (await request({
     method: "put",
     url: "/files/fileops/delete",
@@ -721,8 +730,9 @@ export async function downloadFiles(
   fileIds: number[] | TFileConvertId[],
   folderIds: number[],
   shareKey: string,
+  returnSingleOperation: boolean = true,
 ) {
-  const data = { fileIds, folderIds };
+  const data = { fileIds, folderIds, returnSingleOperation };
   const share = shareKey ? `?share=${shareKey}` : "";
 
   const res = (await request({
@@ -734,10 +744,12 @@ export async function downloadFiles(
   return res;
 }
 
-export async function getProgress() {
+export async function getProgress(id?: string) {
+  const params = id ? `?id=${id}` : "";
+
   const res = (await request({
     method: "get",
-    url: "/files/fileops",
+    url: `/files/fileops${params}`,
   })) as TOperation[];
   return res;
 }
@@ -768,6 +780,7 @@ export async function copyToFolder(
   deleteAfter: boolean,
   content = false,
   toFillOut = false,
+  returnSingleOperation: boolean = true,
 ) {
   const data = {
     destFolderId,
@@ -777,6 +790,7 @@ export async function copyToFolder(
     deleteAfter,
     content,
     toFillOut,
+    returnSingleOperation,
   };
 
   const res = (await request({
@@ -788,10 +802,15 @@ export async function copyToFolder(
   return res;
 }
 
-export async function duplicate(folderIds: number[], fileIds: number[]) {
+export async function duplicate(
+  folderIds: number[],
+  fileIds: number[],
+  returnSingleOperation: boolean = true,
+) {
   const data = {
     folderIds,
     fileIds,
+    returnSingleOperation,
   };
 
   const res = (await request({
@@ -810,6 +829,7 @@ export async function moveToFolder(
   conflictResolveType: ConflictResolveType,
   deleteAfter: boolean,
   toFillOut = false,
+  returnSingleOperation: boolean = true,
 ) {
   const data = {
     destFolderId,
@@ -818,6 +838,7 @@ export async function moveToFolder(
     conflictResolveType,
     deleteAfter,
     toFillOut,
+    returnSingleOperation,
   };
   const res = (await request({
     method: "put",
@@ -836,8 +857,12 @@ export async function getFileVersionInfo(fileId: number) {
   return res;
 }
 
-export async function markAsRead(folderIds: number[], fileIds: number[]) {
-  const data = { folderIds, fileIds };
+export async function markAsRead(
+  folderIds: number[],
+  fileIds: number[],
+  returnSingleOperation: boolean = true,
+) {
+  const data = { folderIds, fileIds, returnSingleOperation };
   const res = (await request({
     method: "put",
     url: "/files/fileops/markasread",
@@ -943,13 +968,17 @@ export async function versionRestore(fileId: number, lastversion: number) {
 }
 
 export async function lockFile(fileId: number, lock: boolean) {
+  const skipRedirect = true;
   const data = { lockFile: lock };
 
-  const res = (await request({
-    method: "put",
-    url: `/files/file/${fileId}/lock`,
-    data,
-  })) as TFile;
+  const res = (await request(
+    {
+      method: "put",
+      url: `/files/file/${fileId}/lock`,
+      data,
+    },
+    skipRedirect,
+  )) as TFile;
 
   return res;
 }
@@ -1614,12 +1643,17 @@ export async function removeSharedFolder(folderIds: Array<string | number>) {
   });
 }
 
-export async function deleteVersionFile(fileId: number, versions: number[]) {
+export async function deleteVersionFile(
+  fileId: number,
+  versions: number[],
+  returnSingleOperation: boolean = true,
+) {
   const data = { fileId, versions };
   const res = (await request({
     method: "put",
     url: "/files/fileops/deleteversion",
     data,
+    returnSingleOperation,
   })) as TOperation[];
 
   return res;

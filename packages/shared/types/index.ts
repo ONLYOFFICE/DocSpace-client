@@ -24,13 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import {
-  TGetColorTheme,
-  TSettings,
-  TVersionBuild,
-} from "../api/settings/types";
-import { RoomsType } from "../enums";
+import type { TBreadCrumb } from "../components/selector/Selector.types";
+import { RoomsType, ShareAccessRights } from "../enums";
 import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
 
@@ -86,11 +81,13 @@ export type BackupToPublicRoomOptionType = {
 
 export type TSortOrder = "descending" | "ascending";
 export type TSortBy =
+  | "DateAndTime"
   | "DateAndTimeCreation"
   | "Tags"
+  | "Type"
   | "AZ"
   | "Author"
-  | "Type"
+  | "roomType"
   | "usedspace"
   | "Size";
 
@@ -142,6 +139,7 @@ export type TCreatedBy = {
   id: string;
   profileUrl: string;
   isAnonim?: boolean;
+  templateAccess?: ShareAccessRights;
 };
 export type ConnectingStoragesType = {
   id: string;
@@ -191,15 +189,11 @@ export interface StaticImageData {
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
-    __ASC_INITIAL_EDITOR_STATE__?: {
-      user: unknown;
-      portalSettings: TSettings;
-      appearanceTheme: TGetColorTheme;
-      versionInfo: TVersionBuild;
-    };
     Asc: unknown;
     zESettings: unknown;
-    zE: unknown;
+    zE: {
+      apply: Function;
+    };
     i18n: {
       loaded: {
         [key: string]: { data: { [key: string]: string }; namespaces: string };
@@ -277,7 +271,7 @@ declare global {
       opType: number;
     }) => void;
     RendererProcessVariable: {
-      theme?: { id: string; system: string };
+      theme?: { id: string; system: string; type: string; addlocal: string };
     };
     Tiff: new (arg: object) => {
       toDataURL: () => string;

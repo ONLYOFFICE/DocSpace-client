@@ -3,7 +3,7 @@
   "content": "Copy link",
   "content_en_sha1_hash": "2f84eea5d45da4f1ce1760b85db18a854f4e1b39",
   "created_at": "2025-05-19T21:30:43.782Z",
-  "updated_at": "2025-06-02T10:20:51.507Z",
+  "updated_at": "2025-06-30T12:20:31.622Z",
   "comment": {
     "text": "This translation key \"CopyLink\" is used to display a label that triggers the copy link functionality, appearing as a button in the Completed VDR Form component, prompting users to share or export a link. It appears on-screen when the user enables the \"Copy Link\" option, allowing them to share their file with others.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1929,
+      "line_number": 1933,
       "context": "},\n ...versionActions,\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => this.onCopyLink(item, t),\n disabled: item.isTemplate\n ? false\n : (isPublicRoomType && hasShareLinkRights) ||",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 260,
-      "context": "size={ButtonSize.medium}\n isLoading={isTurnToFill && isEditing}\n label={\n isTurnToFill\n ? t(\"CompletedForm:FillOutForm\")\n : t(\"Common:CopyLink\")\n }\n onClick={isTurnToFill ? handleFillForm : copyLinkFile}\n />\n <Button\n className=\"secondary-button\"",
+      "line_number": 261,
+      "context": "size={ButtonSize.medium}\n isLoading={isTurnToFill ? isEditing : false}\n label={\n isTurnToFill\n ? t(\"CompletedForm:FillOutForm\")\n : t(\"Common:CopyLink\")\n }\n onClick={isTurnToFill ? handleFillForm : copyLinkFile}\n />\n <Button\n className=\"secondary-button\"",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 260,
-      "context": "size={ButtonSize.medium}\n isLoading={isTurnToFill && isEditing}\n label={\n isTurnToFill\n ? t(\"CompletedForm:FillOutForm\")\n : t(\"Common:CopyLink\")\n }\n onClick={isTurnToFill ? handleFillForm : copyLinkFile}\n />\n <Button\n className=\"secondary-button\"",
+      "line_number": 261,
+      "context": "size={ButtonSize.medium}\n isLoading={isTurnToFill ? isEditing : false}\n label={\n isTurnToFill\n ? t(\"CompletedForm:FillOutForm\")\n : t(\"Common:CopyLink\")\n }\n onClick={isTurnToFill ? handleFillForm : copyLinkFile}\n />\n <Button\n className=\"secondary-button\"",
       "module": "/packages/doceditor"
     },
     {
@@ -108,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Leading space before the translated text.",
+          "description": "The Italian translation has a leading space.",
           "suggestion": "Copia il link"
         }
       ],
@@ -129,13 +129,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ລິ້ງ' (ling) is a transliteration of the English word 'link'. While understandable, a more accurate and culturally appropriate Lao equivalent might be considered, depending on the context. However, without further context, the transliteration is acceptable.",
-          "suggestion": "Consider if a more established Lao word for 'link' exists and is appropriate for the context. Examples might include 'ເຊື່ອມຕໍ່' (cheuam to)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +147,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kopiuj link' is technically correct but could be improved for naturalness and common usage in Polish. 'Link' is often used as is, or the full term 'odnośnik' might be preferred.",
+          "suggestion": "Kopiuj odnośnik or Kopiuj link"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Link de cópia' doesn't accurately convey the meaning of 'Copy link'. 'Link de cópia' literally translates to 'copy link', but it's not the standard or natural way to express this function in Portuguese. The intended meaning is to create a link that can be copied.",
-          "suggestion": "Link para copiar"
+          "description": "The translation \"Link de cópia\" is not the most natural or accurate translation of \"Copy link.\" While understandable, it's a literal translation and doesn't quite capture the intended meaning.",
+          "suggestion": "A more natural and accurate translation would be \"Copiar link\" or \"Link para copiar\"."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ලින්ක් එක පිටපත් කරන්න' is a literal translation but sounds somewhat awkward in Sinhala. A more natural phrasing would be 'සබැඳුම් පිටපත් කරන්න' or 'වෙන්කඩ පිටපත් කරන්න'.",
-          "suggestion": "සබැඳුම් පිටපත් කරන්න"
+          "description": "While the translation is understandable, a more natural and idiomatic Sinhala translation for 'Copy link' would be 'සබැඳිය පිටපත් කරන්න' (sabandiya pitapata karanna). 'ලින්ක් එක පිටපත් කරන්න' is a direct transliteration and sounds less fluent.",
+          "suggestion": "සබැඳිය පිටපත් කරන්න"
         }
       ],
       "approved_at": null
@@ -216,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Копирај линк\" is understandable, a more natural and idiomatic translation of \"Copy link\" in Serbian (Cyrillic) would be \"Прекопирај линк\" or \"Копиј линк\". \"Копирај\" is technically correct but less commonly used in this context.",
+          "description": "While \"Копирај линк\" is understandable, a more natural and accurate Serbian (Cyrillic) translation for \"Copy link\" would be \"Прекопирај линк\" or \"Копи линк\". \"Копирај\" implies a more complex process than simply copying.",
           "suggestion": "Прекопирај линк"
         }
       ],

@@ -1,0 +1,28 @@
+{
+  "key_path": "TransactionHistory",
+  "content": "Transaction history",
+  "content_en_sha1_hash": "aa7d3d7dd9d1706c1bda7bd97c31b7c47a7d310f",
+  "created_at": "2025-05-28T09:33:06.830Z",
+  "updated_at": "2025-06-24T16:31:24.462Z",
+  "comment": {
+    "text": "The \"Transaction History\" translation key is used for the label on a payment wallet settings page to display the title of the transaction history section. It appears as a combobox size option in the Wallet payment categories.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:34:48.768Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
+      "line_number": 42,
+      "context": "ComboBoxSize,\n TOption,\n } from \"@docspace/shared/components/combobox\";\n import { DatePicker } from \"@docspace/shared/components/date-picker\";\n import { toastr } from \"@docspace/shared/components/toast\";\n import { getTransactionHistoryReport } from \"@docspace/shared/api/portal\";\n import { DeviceType } from \"@docspace/shared/enums\";\n import {\n ModalDialog,\n ModalDialogType,\n } from \"@docspace/shared/components/modal-dialog\";",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

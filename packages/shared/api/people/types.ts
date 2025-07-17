@@ -95,6 +95,7 @@ export type TUser = {
   hasPersonalFolder?: boolean;
   isAnonim: boolean;
   tfaAppEnabled?: boolean;
+  sharedTo?: object;
 };
 
 export type TGetUserList = {

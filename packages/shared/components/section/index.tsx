@@ -32,8 +32,6 @@ import React, { useEffect, useMemo } from "react";
 import { Provider } from "../../utils";
 import { DeviceType } from "../../enums";
 
-import { FloatingButton } from "../floating-button";
-
 import SectionContainer from "./sub-components/SectionContainer";
 import SubSectionHeader from "./sub-components/SectionHeader";
 import SubSectionFilter from "./sub-components/SectionFilter";
@@ -58,6 +56,7 @@ import {
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
+
 import OperationsProgressButton from "../operations-progress-button";
 
 export type { SectionProps };
@@ -121,6 +120,7 @@ const Section = (props: SectionProps) => {
 
     primaryOperationsAlert,
     needErrorChecking,
+    withTabs,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -292,7 +292,10 @@ const Section = (props: SectionProps) => {
               ) : null}
               {isSectionFilterAvailable &&
               currentDeviceType !== DeviceType.desktop ? (
-                <SubSectionFilter className="section-body_filter">
+                <SubSectionFilter
+                  withTabs={withTabs}
+                  className="section-body_filter"
+                >
                   {sectionFilterContent}
                 </SubSectionFilter>
               ) : null}

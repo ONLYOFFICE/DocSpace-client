@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { createFile, deleteFile } from "../../api/files";
 
-import { FolderType, RoomsType, DeviceType } from "../../enums";
+import { FolderType, RoomsType, DeviceType, RoomSearchArea } from "../../enums";
 
 import { TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
@@ -59,6 +59,7 @@ import { getDefaultBreadCrumb } from "../utils";
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
     disabledItems,
+    includedItems,
     filterParam,
 
     treeFolders,
@@ -102,6 +103,9 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     initSearchValue,
     initTotal,
     initHasNextPage,
+
+    applyFilterOption,
+    onSelectItem,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } = use(LoadersContext);
@@ -181,6 +185,17 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     setIsInit,
   });
 
+  let rootFolderTypeItem;
+  const rootFolderTypeIndex = breadCrumbs.findIndex((tp) => tp.rootFolderType);
+  if (rootFolderTypeIndex > -1) {
+    rootFolderTypeItem = breadCrumbs[rootFolderTypeIndex].rootFolderType;
+  }
+
+  let searchArea;
+  if ((rootFolderType ?? rootFolderTypeItem) === FolderType.RoomTemplates) {
+    searchArea = RoomSearchArea.Templates;
+  }
+
   const { getRoomList } = useRoomsHelper({
     setBreadCrumbs,
     setHasNextPage,
@@ -201,6 +216,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     withCreate,
     createDefineRoomLabel,
     createDefineRoomType,
+    searchArea,
 
     withInit,
   });
@@ -225,6 +241,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     selectedItemId,
     searchValue,
     disabledItems,
+    includedItems,
     isThirdParty,
     filterParam,
     isRoomsOnly,
@@ -236,6 +253,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     shareKey,
 
     withInit,
+    applyFilterOption,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -316,6 +334,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       isDoubleClick: boolean,
       doubleClickCallback: () => Promise<void>,
     ) => {
+      onSelectItem?.(item);
       if (item.isFolder) {
         if (isDoubleClick) return;
 
@@ -393,6 +412,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       setSelectedItemType,
       t,
       setIsDisabledFolder,
+      onSelectItem,
     ],
   );
 

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { i18n } from "i18next";
+import { i18n as i18nType } from "i18next";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { TUser } from "@docspace/shared/api/people/types";
 
@@ -37,12 +37,10 @@ interface UseI18NProps {
 }
 
 const useI18N = ({ settings, user }: UseI18NProps) => {
-  const [i18n, setI18N] = React.useState<i18n>(
+  const [i18n, setI18N] = React.useState<i18nType>(
     () =>
-      getI18NInstance(
-        user?.cultureName ?? settings?.culture ?? "en",
-        settings?.culture ?? "en",
-      ) ?? ({} as i18n),
+      getI18NInstance(user?.cultureName ?? settings?.culture ?? "en") ??
+      ({} as i18nType),
   );
 
   const isInit = React.useRef(false);
@@ -57,7 +55,6 @@ const useI18N = ({ settings, user }: UseI18NProps) => {
 
     const instance = getI18NInstance(
       user?.cultureName ?? settings?.culture ?? "en",
-      settings?.culture ?? "en",
     );
 
     if (instance) setI18N(instance);

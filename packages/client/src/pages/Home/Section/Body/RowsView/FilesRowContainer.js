@@ -30,9 +30,7 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Context } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/rows";
-
-import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+import { FilesRowContainer as RowContainer } from "@docspace/shared/components/files-row";
 
 import withContainer from "../../../../../HOCs/withContainer";
 
@@ -99,7 +97,7 @@ const FilesRowContainer = ({
 
   return (
     <RowContainer
-      className={`files-row-container ${styles.filesRowContainer}`}
+      className="files-row-container"
       filesLength={list.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}

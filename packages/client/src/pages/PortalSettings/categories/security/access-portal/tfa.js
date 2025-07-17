@@ -62,6 +62,7 @@ const TwoFactorAuth = (props) => {
     appAvailable,
     tfaSettings,
     getTfaType,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const [type, setType] = useState("none");
@@ -95,6 +96,12 @@ const TwoFactorAuth = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("Tfa");
+  }, [currentDeviceType, isLoading]);
 
   useEffect(() => {
     checkWidth();
@@ -228,7 +235,7 @@ const TwoFactorAuth = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings

@@ -3,7 +3,7 @@
   "content": "Months",
   "content_en_sha1_hash": "200dcdce9b5a0627b291634c6a82ae25ce09f789",
   "created_at": "2025-05-19T21:30:46.604Z",
-  "updated_at": "2025-05-26T07:57:32.255Z",
+  "updated_at": "2025-06-08T12:02:32.623Z",
   "comment": {
     "text": "This translation key is used to display the label for a dropdown menu or input field that allows users to select a period (\"Days\", \"Months\", or \"Years\") in a file lifetime settings context. The text appears in a dialog component and is translated using the provided keys.",
     "is_auto": true,
@@ -114,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ເດືອນໆ\" while technically meaning 'months' or 'month by month', is overly repetitive and not the standard or most accurate translation of 'Months'. The doubling of the word 'ເດືອນ' is unusual and potentially awkward in Lao.",
+          "description": "The Lao translation \"ເດືອນໆ\" while meaning 'months', includes a reduplication (ເດືອນໆ). While reduplication can be used for emphasis or continuity in Lao, it's not necessary here and makes it sound less formal or slightly repetitive for a simple translation of 'Months'. A more standard and accurate translation would be 'ເດືອນ'.",
           "suggestion": "ເດືອນ"
         }
       ],
@@ -159,13 +159,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation 'Месяцев' is the genitive plural form of 'месяц' (month). While technically a valid form depending on the context, it's not a direct or appropriate translation of the English word 'Months' when used as a title or label. A more direct and appropriate translation would be 'Месяцы'.",
-          "suggestion": "Месяцы"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -186,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mesecev' is grammatically incorrect and doesn't accurately translate 'Months'. 'Mesecev' is the genitive singular form, implying 'of months', while 'Months' is simply the plural form.",
+          "description": "The Slovenian translation \"Mesecev\" is the genitive singular form of \"mesec\" (month). The correct translation for \"Months\" (plural) should be \"Meseci\".",
           "suggestion": "Meseci"
         }
       ],
@@ -225,7 +219,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"月数\" (yuè shù) is a literal translation of 'number of months', 'Months' in this context likely refers to the list of months or a data field containing the names of months.  '月数' implies a quantity. A better translation would be '月份' (yuè fèn).",
+          "suggestion": "月份"
+        }
+      ],
       "approved_at": null
     }
   }

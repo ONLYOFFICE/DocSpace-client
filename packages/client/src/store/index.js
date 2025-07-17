@@ -35,6 +35,7 @@ import {
 } from "@docspace/shared/store";
 
 import PaymentStore from "./PaymentStore";
+import ServicesStore from "./ServicesStore";
 import StorageManagement from "./StorageManagement";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
@@ -103,6 +104,8 @@ const paymentStore = new PaymentStore(
   currentQuotaStore,
   paymentQuotasStore,
 );
+const servicesStore = new ServicesStore(currentTariffStatusStore, paymentStore);
+
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore(authStore, thirdPartyStore);
@@ -202,6 +205,7 @@ const profileActionsStore = new ProfileActionsStore(
   userStore,
   settingsStore,
   currentTariffStatusStore,
+  infoPanelStore,
 );
 
 const peopleStore = new PeopleStore(
@@ -356,6 +360,7 @@ const store = {
   settingsStore,
 
   paymentStore,
+  servicesStore,
   wizardStore,
   setup: setupStore,
   confirm: confirmStore,

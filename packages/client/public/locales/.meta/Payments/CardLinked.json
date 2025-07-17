@@ -1,0 +1,28 @@
+{
+  "key_path": "CardLinked",
+  "content": "Card linked",
+  "content_en_sha1_hash": "31ca8a7e8fc03c83180ed05978d5b26c59bcdbb0",
+  "created_at": "2025-05-28T09:33:06.678Z",
+  "updated_at": "2025-06-24T16:31:24.465Z",
+  "comment": {
+    "text": "This translation key is used to display the text \"Card linked\" in the wallet payment settings page. It appears as a label next to a payment method indicator and is likely used by users to understand that their credit or debit card information has been successfully linked to their account.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:37:24.812Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
+      "line_number": 99,
+      "context": "<CheckReactSvg />\n )}\n <Text fontWeight={600} fontSize=\"14px\">\n {walletCustomerStatusNotActive\n ? t(\"CardUnlinked\")\n : t(\"CardLinked\")}\n </Text>\n </div>\n <Link\n fontWeight={600}\n onClick={",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

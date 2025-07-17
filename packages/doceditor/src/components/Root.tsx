@@ -30,13 +30,6 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
-const ErrorContainer = dynamic(
-  () => import("@docspace/shared/components/error-container/ErrorContainer"),
-  {
-    ssr: false,
-  },
-);
-
 import { TResponse } from "@/types";
 
 import useError from "@/hooks/useError";
@@ -51,16 +44,24 @@ import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import { useStartFillingPanel } from "@/hooks/useStartFillingPanel";
 import useSDK from "@/hooks/useSDK";
 
-import Editor from "./Editor";
-
 import { calculateAsideHeight } from "@/utils";
 import { useFillingStatusDialog } from "@/hooks/userFillingStatusDialog";
-import FillingStatusDialog from "./filling-status-dialog";
 import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { useShareFormDialog } from "@/hooks/useShareFormDialog";
 import useAssignRolesDialog from "@/hooks/useAssignRolesDialog";
 import useChangeLinkTypeDialog from "@/hooks/useChangeLinkTypeDialog";
+import { FolderType } from "@docspace/shared/enums";
+import { getPersonalFolderTree } from "@docspace/shared/api/files";
+import FillingStatusDialog from "./filling-status-dialog";
+import Editor from "./Editor";
+
+const ErrorContainer = dynamic(
+  () => import("@docspace/shared/components/error-container/ErrorContainer"),
+  {
+    ssr: false,
+  },
+);
 
 const DeepLink = dynamic(() => import("./deep-link"), {
   ssr: false,
@@ -122,6 +123,11 @@ const Root = ({
   const fileInfo = config?.file;
   const instanceId = config?.document?.referenceData.instanceId;
   const roomId = config?.document?.referenceData.roomId;
+  const canEditRoom = config?.document?.referenceData.canEditRoom;
+
+  const [selectedFolderId, setSelectedFolderId] = React.useState<
+    string | number | undefined
+  >(fileInfo?.folderId);
 
   const isSkipError =
     error?.status === "not-found" ||
@@ -149,7 +155,7 @@ const Root = ({
     deepLinkSettings,
   });
 
-  const { filesSettings } = useFilesSettings({});
+  const { filesSettings } = useFilesSettings();
 
   useSocketHelper({
     socketUrl: user ? (settings?.socketUrl ?? "") : "",
@@ -174,7 +180,7 @@ const Root = ({
     isVisibleSelectFolderDialog,
     titleSelectorFolderDialog,
     extensionSelectorFolderDialog,
-  } = useSelectFolderDialog({});
+  } = useSelectFolderDialog();
 
   const {
     onSDKRequestInsertImage,
@@ -200,7 +206,6 @@ const Root = ({
     onCloseShareFormDialog,
     openShareFormDialog,
     shareFormDialogVisible,
-    shareFormDialogData,
     onClickFormRoom,
     onClickVirtualDataRoom,
 
@@ -292,6 +297,23 @@ const Root = ({
 
   const organizationName = settings?.logoText || t("Common:OrganizationName");
 
+  React.useEffect(() => {
+    const getMy = async () => {
+      const res = await getPersonalFolderTree();
+
+      const folderId = res[0].id;
+
+      setSelectedFolderId(folderId);
+    };
+    if (fileInfo?.rootFolderType === FolderType.Recent) {
+      getMy();
+    }
+
+    if (fileInfo?.rootFolderType === FolderType.RoomTemplates) {
+      setSelectedFolderId(undefined);
+    }
+  }, [fileInfo?.rootFolderType]);
+
   return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
@@ -308,7 +330,7 @@ const Root = ({
     />
   ) : (
     <div style={{ width: "100%", height: "100%" }}>
-      {documentServerUrl && (
+      {documentServerUrl ? (
         <Editor
           config={config}
           user={user}
@@ -335,9 +357,9 @@ const Root = ({
           openShareFormDialog={openShareFormDialog}
           onStartFilling={onStartFilling}
         />
-      )}
+      ) : null}
 
-      {isVisibleSelectFolderDialog && fileInfo && (
+      {isVisibleSelectFolderDialog && fileInfo ? (
         <SelectFolderDialog
           isVisible={isVisibleSelectFolderDialog}
           onSubmit={onSubmitSelectFolderDialog}
@@ -348,9 +370,10 @@ const Root = ({
           filesSettings={filesSettings}
           fileSaveAsExtension={extensionSelectorFolderDialog}
           organizationName={organizationName}
+          selectedFolderId={selectedFolderId}
         />
-      )}
-      {selectFileDialogVisible && fileInfo && (
+      ) : null}
+      {selectFileDialogVisible && fileInfo ? (
         <SelectFileDialog
           filesSettings={filesSettings}
           isVisible={selectFileDialogVisible}
@@ -360,9 +383,10 @@ const Root = ({
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
           shareKey={shareKey}
+          selectedFolderId={selectedFolderId}
         />
-      )}
-      {isSharingDialogVisible && fileInfo && (
+      ) : null}
+      {isSharingDialogVisible && fileInfo ? (
         <SharingDialog
           isVisible={isSharingDialogVisible}
           fileInfo={fileInfo}
@@ -370,9 +394,9 @@ const Root = ({
           onCancel={onCloseSharingDialog}
           onOpenPanel={openShareFormDialog}
         />
-      )}
+      ) : null}
 
-      {user && settings && fileInfo && startFillingPanelVisible && roomId && (
+      {user && settings && fileInfo && startFillingPanelVisible && roomId ? (
         <StartFillingPanel
           withBorder
           user={user}
@@ -380,11 +404,12 @@ const Root = ({
           roomId={roomId}
           settings={settings}
           fileId={fileInfo.id}
+          canEditRoom={canEditRoom}
           onSubmit={onSubmitStartFilling}
           inviteUserToRoom={inviteUserToRoom}
           setStartFillingPanelVisible={setStartFillingPanelVisible}
         />
-      )}
+      ) : null}
       {fillingStatusDialogVisible && fileInfo && user ? (
         <FillingStatusDialog
           file={fileInfo}
@@ -395,16 +420,16 @@ const Root = ({
           onResetFilling={onResetFilling}
         />
       ) : null}
-      {stopFillingDialogVisible && (
+      {stopFillingDialogVisible ? (
         <StopFillingDialog
           formId={formId}
           visible={stopFillingDialogVisible}
           onClose={onCloseStopFillingDialog}
           onSubmit={onSubmitStopFilling}
         />
-      )}
+      ) : null}
 
-      {shareFormDialogVisible && fileInfo && (
+      {shareFormDialogVisible && fileInfo ? (
         <ShareFormDialog
           file={fileInfo}
           filesSettings={filesSettings}
@@ -419,27 +444,26 @@ const Root = ({
           onCloseStartFillingSelectDialog={onCloseStartFillingSelectDialog}
           onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
           isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
-          updateAccessLink={shareFormDialogData.updateAccessLink}
           openChangeLinkTypeDialog={openChangeLinkTypeDialog}
         />
-      )}
+      ) : null}
 
-      {assignRolesDialogData.visible && (
+      {assignRolesDialogData.visible ? (
         <AssignRolesDialog
           visible={assignRolesDialogData.visible}
           onClose={onCloseAssignRolesDialog}
           onSubmit={onSubmitAssignRoles}
           roomName={assignRolesDialogData.roomName}
         />
-      )}
+      ) : null}
 
-      {changeLinkTypeDialogVisible && (
+      {changeLinkTypeDialogVisible ? (
         <ChangeLinkTypeDialog
           visible={changeLinkTypeDialogVisible}
           onClose={onCloseChangeLinkTypeDialog}
           onSubmit={onSubmitChangeLinkType}
         />
-      )}
+      ) : null}
     </div>
   );
 };

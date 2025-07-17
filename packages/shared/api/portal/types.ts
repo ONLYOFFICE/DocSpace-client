@@ -25,9 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TError } from "../../utils/axiosClient";
-import type { TariffState, BackupStorageType } from "../../enums";
+import type { TariffState, BackupStorageType, QuotaState } from "../../enums";
 
-export type TQuotas = { id: number; quantity: number };
+export type TQuotas = {
+  id: number;
+  quantity: number;
+  wallet?: boolean;
+  dueDate?: string;
+  nextQuantity?: number;
+  state?: QuotaState;
+};
 
 export type TPortalTariff = {
   id: number;
@@ -54,6 +61,11 @@ export type TBasePaymentFeature = {
   };
 };
 
+export type TStringPaymentFeature = TBasePaymentFeature & {
+  title: string;
+  value?: number;
+};
+
 export type TNumericPaymentFeature = TBasePaymentFeature & {
   value: number;
 };
@@ -62,14 +74,18 @@ export type TBooleanPaymentFeature = TBasePaymentFeature & {
   value: boolean;
 };
 
-export type TPaymentFeature = TNumericPaymentFeature | TBooleanPaymentFeature;
+export type TPaymentFeature =
+  | TNumericPaymentFeature
+  | TBooleanPaymentFeature
+  | TStringPaymentFeature;
 
 export type TPaymentQuota = {
   id: number;
   title: string;
   price: {
-    value: string;
+    value: number;
     currencySymbol?: string;
+    isoCurrencySymbol?: string;
   };
   nonProfit: boolean;
   free: boolean;
@@ -164,4 +180,57 @@ export type TBackupProgress = {
   error?: TError;
   link?: string;
   isCompleted: boolean;
+};
+
+export type TCustomerInfo = {
+  paymentMethodStatus: number;
+  email: string | null;
+  portalId: string | null;
+  payer: {
+    avatar: string;
+    avatarMax: string;
+    avatarMedium: string;
+    avatarOriginal: string;
+    avatarSmall: string;
+    displayName: string;
+    hasAvatar: boolean;
+    id: string;
+    isAnonim: boolean;
+    profileUrl: string;
+  } | null;
+};
+
+export type TBalance =
+  | {
+      accountNumber?: number;
+      subAccounts: [{ currency: string; amount: number }];
+    }
+  | 0;
+
+export type TTransactionCollection = {
+  date: string;
+  service?: string;
+  serviceUnit?: string;
+  quantity: number;
+  amount: number;
+  credit: number;
+  withdrawal: number;
+  currency: string;
+  description: string;
+};
+
+export type TTransactionHistory = {
+  collection: TTransactionCollection[];
+  offset: number;
+  limit: number;
+  totalQuantity: number;
+  totalPage: number;
+  currentPage: number;
+};
+
+export type TAutoTopUpSettings = {
+  enabled: boolean;
+  minBalance: number;
+  upToBalance: number;
+  currency: string | null;
 };

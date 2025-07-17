@@ -46,6 +46,7 @@ const SelectFolderDialog = ({
 
   fileSaveAsExtension,
   organizationName,
+  selectedFolderId,
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation(["Common", "Editor"]);
   // const sessionPath = sessionStorage.getItem("filesSelectorPath");
@@ -87,13 +88,13 @@ const SelectFolderDialog = ({
       onSubmit={onSubmit}
       submitButtonLabel={t("Common:SaveHereButton")}
       submitButtonId="select-file-modal-submit"
-      footerInputHeader={t("Editor:FileName")}
+      footerInputHeader={t("Common:FileName")}
       currentFooterInputValue={titleSelectorFolder}
-      footerCheckboxLabel={t("Editor:OpenSavedDocument")}
+      footerCheckboxLabel={t("Common:OpenSavedDocument")}
       isPanelVisible={isVisible}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={fileInfo.folderId}
+      currentFolderId={selectedFolderId!}
       rootFolderType={fileInfo.rootFolderType}
       embedded={false}
       withFooterInput

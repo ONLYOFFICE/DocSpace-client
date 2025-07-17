@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2025-06-02T10:20:51.023Z",
+  "updated_at": "2025-07-10T11:11:06.758Z",
   "comment": {
     "text": "This translation key is used for the \"Create room\" button label in various UI components, such as buttons and dialog headers. It appears when a user clicks on the \"Create room\" link or button to initiate the creation of a new room.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 253,
+      "line_number": 251,
       "context": "onClick={onCreateRoom}\n iconName={PlusSvgUrl}\n isFill\n />\n <Link onClick={onCreateRoom} {...linkStyles}>\n {t(\"Common:CreateRoom\")}\n </Link>\n </div>\n );\n \n const archiveButtons = !isVisitor && (",
       "module": "/packages/client"
     },
@@ -48,38 +48,38 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1858,
+      "line_number": 1859,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1858,
+      "line_number": 1859,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1858,
+      "line_number": 1859,
       "context": "disabled: !item.security?.Reconnect || !item.security?.EditRoom,\n },\n {\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2214,
+      "line_number": 2222,
       "context": "case \"create-room\":\n if (!this.isAvailableOption(\"create-room\")) return null;\n return {\n id: \"menu-create-room\",\n label: t(\"Common:CreateRoom\"),\n onClick: this.onClickCreateRoom,\n iconUrl: CatalogRoomsReactSvgUrl,\n };\n \n case \"download\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 475,
-      "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile && isRoom ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
+      "line_number": 476,
+      "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showNew && !isTile && isRoom ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (\n <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 209,
-      "context": "size={IconSizeType.medium}\n onClick={onCreateRoom}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "line_number": 216,
+      "context": "size={IconSizeType.medium}\n onClick={onCreateRoom}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor={theme.filesQuickButtons.sharedColor}\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <ColorTheme\n themeId={ThemeId.IconButton}",
       "module": "/packages/shared"
     }
   ],
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq yaradın\" literally translates to \"You created a room.\" While technically correct, it's less natural than a more direct translation for a button or action label. A more suitable translation would convey 'Create Room' as a command or instruction.",
-          "suggestion": "Otaq yarat"
+          "description": "The translation \"Otaq yaradın\" directly translates to \"You created a room.\" The English phrase \"Create room\" is an imperative and more accurately translates to \"Yaradın otaq\" or \"Otaq yaradın!\" (Create a room!). The current translation implies that the user *has* already created a room.",
+          "suggestion": "Yaradın otaq"
         }
       ],
       "approved_at": null
@@ -225,13 +225,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'කාමරය සාදන්න' (kaamaraya saadan’na) is a literal translation of 'create room'. A more natural and common translation would be 'මමගෙම කාමරයක් සාදන්න' (mama gemo kaamaraayak saadan'na) meaning 'create my own room' or 'create a room'. Or simply 'කාමරයක් සාදා ගන්න' (kaamarayak saada gana) meaning 'to create a room'.",
-          "suggestion": "කාමරයක් සාදා ගන්න (kaamarayak saada gana)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -252,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Креирај собу' is understandable, a more natural and common Serbian (Cyrillic) translation for 'Create room' would be 'Направи собу'. 'Креирај' has a more formal or technical connotation.",
+          "description": "While \"Креирај собу\" is understandable, a more natural and commonly used translation of \"Create room\" in Serbian (Cyrillic) would be \"Направи собу\" or \"Отвори собу\". \"Креирај\" is more formal and less frequently used in this context.",
           "suggestion": "Направи собу"
         }
       ],

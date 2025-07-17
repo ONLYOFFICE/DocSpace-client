@@ -739,7 +739,7 @@ class ContextOptionsStore {
       endLoader(() =>
         runInAction(() => {
           setGroupMenuBlocked(false);
-          clearActiveOperations([item.id], null);
+          clearActiveOperations([item.id]);
         }),
       );
     }
@@ -1711,6 +1711,10 @@ class ContextOptionsStore {
       item.access === ShareAccessRights.None ||
       item.access === ShareAccessRights.FullAccess;
 
+    const isRoomAdmin =
+      item.access === ShareAccessRights.RoomManager ||
+      item.access === ShareAccessRights.None;
+
     const optionsModel = [
       {
         id: "option_select",
@@ -1842,6 +1846,10 @@ class ContextOptionsStore {
       },
       {
         key: "separator-SubmitToGallery",
+        isSeparator: true,
+      },
+      {
+        key: "separator4",
         isSeparator: true,
       },
       {
@@ -2019,7 +2027,12 @@ class ContextOptionsStore {
           : t("Files:CustomFilterEnable"),
         icon: CustomFilterReactSvgUrl,
         onClick: () => this.onSetUpCustomFilter(item, t),
-        disabled: false,
+        disabled: Boolean(
+          !isRoomAdmin &&
+            item.customFilterEnabled &&
+            item.customFilterEnabledBy &&
+            item.customFilterEnabledBy !== this.userStore?.user?.displayName,
+        ),
       },
       {
         id: "option_block-unblock-version",
@@ -2725,7 +2738,8 @@ class ContextOptionsStore {
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const { isRoomsFolder, isPrivacyFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder } =
+      this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
     const isFormRoomType =
@@ -2842,15 +2856,18 @@ class ContextOptionsStore {
     ];
 
     const showUploadFolder = !(isMobile || isTablet);
+
     const options = isRoomsFolder
-      ? [
-          {
-            key: "new-room",
-            label: t("Common:NewRoom"),
-            onClick: this.onCreateRoom,
-            icon: CatalogRoomsReactSvgUrl,
-          },
-        ]
+      ? isFlowsFolder
+        ? []
+        : [
+            {
+              key: "new-room",
+              label: t("Common:NewRoom"),
+              onClick: this.onCreateRoom,
+              icon: CatalogRoomsReactSvgUrl,
+            },
+          ]
       : [
           createNewDoc,
           createNewSpreadsheet,

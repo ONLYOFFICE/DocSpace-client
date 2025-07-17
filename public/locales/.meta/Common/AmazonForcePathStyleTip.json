@@ -2,17 +2,17 @@
   "key_path": "AmazonForcePathStyleTip",
   "content": "When true, requests will always use path style addressing.",
   "content_en_sha1_hash": "aa8a003db2e4e29f43424dc59bd485653b72906d",
-  "created_at": "2025-05-26T07:15:40.365Z",
-  "updated_at": "2025-05-26T08:08:01.862Z",
+  "created_at": "2025-06-08T12:02:00.501Z",
+  "updated_at": "2025-06-30T12:20:31.689Z",
   "comment": {
-    "text": "\"When using this setting, requests will always use path style addressing. This option appears as a tooltip in the Amazon settings component.\"",
+    "text": "This translation key is used for a tooltip that explains the meaning of \"force path style\" in Amazon settings. When checked, this option ensures requests always use path style addressing. It appears as a tooltip when users hover over or click a button related to backup storage options.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:08:01.862Z"
+    "updated_at": "2025-06-08T12:02:50.035Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/components/amazon-settings/AmazonSettings.tsx",
-      "line_number": 330,
+      "line_number": 327,
       "context": "onChange={onChangeCheckbox}\n tabIndex={4}\n helpButton={\n <div className=\"backup_storage-tooltip\">\n {renderTooltip(\n t(\"Common:AmazonForcePathStyleTip\"),\n \"force-path-style-tooltip\",\n )}\n </div>\n }\n />",
       "module": "/packages/shared"
     }

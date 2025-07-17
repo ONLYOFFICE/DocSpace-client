@@ -3,7 +3,7 @@
   "content": "Create copy",
   "content_en_sha1_hash": "2a18291e8ec941661e232592c51e0660eb1c89ef",
   "created_at": "2025-05-19T21:30:43.847Z",
-  "updated_at": "2025-05-26T07:57:32.968Z",
+  "updated_at": "2025-06-30T12:20:31.735Z",
   "comment": {
     "text": "This translation key is used to display the text \"Create copy\" on a button that creates a duplicate or backup of a selected folder or file in various UI components. The text appears as the label on a primary button, typically found within buttons labeled \"Backup To Public Room\", \"Third Party Module\" or \"Manual Backup\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/manual-backup/sub-components/RoomsModule.tsx",
-      "line_number": 194,
+      "line_number": 191,
       "context": "<Button\n primary\n id=\"create-copy\"\n size={buttonSize}\n onClick={handleMakeCopy}\n label={t(\"Common:CreateCopy\")}\n isDisabled={isModuleDisabled || !selectedFolder}\n />\n </div>\n </>\n );",
       "module": "/packages/shared"
     },
@@ -24,25 +24,25 @@
     },
     {
       "file_path": "/packages/shared/pages/manual-backup/sub-components/storages/AmazonStorage.tsx",
-      "line_number": 131,
+      "line_number": 128,
       "context": "setRequiredFormSettings={setRequiredFormSettings}\n />\n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || isDisabled}\n size={buttonSize}\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/manual-backup/sub-components/storages/GoogleCloudStorage.tsx",
-      "line_number": 118,
+      "line_number": 115,
       "context": "/>\n \n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || isDisabled}\n size={buttonSize}\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/manual-backup/sub-components/storages/RackspaceStorage.tsx",
-      "line_number": 116,
+      "line_number": 113,
       "context": "setIsThirdStorageChanged={setIsThirdStorageChanged}\n />\n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || isDisabled}\n size={buttonSize}\n />",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/manual-backup/sub-components/storages/SelectelStorage.tsx",
-      "line_number": 117,
+      "line_number": 114,
       "context": "/>\n \n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-copy\"\n label={t(\"Common:CreateCopy\")}\n onClick={onMakeCopyIntoStorage}\n primary\n isDisabled={!isValidForm || !isMaxProgress || isDisabled}\n size={buttonSize}\n />",
       "module": "/packages/shared"
     }
@@ -63,13 +63,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Sürətini yaratmaq\" is understandable, it's not the most natural or precise translation of \"Create copy\". It literally translates to 'create its copy'. A more accurate and natural translation would be something like \"Nüsxəsin yaradılması\" or \"Kopyasını yaratmaq\".",
-          "suggestion": "Nüsxəsin yaradılması"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

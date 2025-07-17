@@ -176,7 +176,7 @@ export default class MessageStore {
     const { name, arguments: args } = JSON.parse(jsonData);
 
     const newMsg: TMessage = {
-      messageType: MessageType.ToolCall,
+      messageType: MessageType.AssistantMessage,
       createdOn: new Date().toString(),
       contents: [
         {

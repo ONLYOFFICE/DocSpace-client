@@ -36,6 +36,8 @@ type BaseButtonProps = {
   title?: string;
   /** Sets the button primary */
   primary?: boolean;
+  filled?: boolean;
+  filledStroke?: boolean;
   /** Size of the button.
    * The normal size equals 36px and 40px in height on the Desktop and Touchscreen devices. */
   size?: ButtonSize;

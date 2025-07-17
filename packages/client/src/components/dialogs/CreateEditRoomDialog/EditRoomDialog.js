@@ -107,7 +107,10 @@ const EditRoomDialog = ({
       isEqual(prevParams.lifetime, currentParams.lifetime) &&
       isEqual(prevParams.watermark, currentParams.watermark) &&
       isEqual(prevInviteItems, currentInviteItems) &&
-      isAvailable === templateIsAvailable
+      isAvailable === templateIsAvailable &&
+      prevParams.modelId === currentParams.modelId &&
+      prevParams.providerId === currentParams.providerId &&
+      prevParams.prompt === currentParams.prompt
     );
   };
 

@@ -56,6 +56,8 @@ const getProviderLabel = (type: ProviderType) => {
       return "TogetherAI";
     case ProviderType.OpenAiCompatible:
       return "OpenAI-compatible";
+    case ProviderType.Anthropic:
+      return "Anthropic ";
     default:
       return "";
   }
@@ -67,9 +69,14 @@ const providerTypes: TOption[] = [
     key: ProviderType.TogetherAi,
     label: getProviderLabel(ProviderType.TogetherAi),
   },
+
   {
     key: ProviderType.OpenAiCompatible,
     label: getProviderLabel(ProviderType.OpenAiCompatible),
+  },
+  {
+    key: ProviderType.Anthropic,
+    label: getProviderLabel(ProviderType.Anthropic),
   },
 ];
 

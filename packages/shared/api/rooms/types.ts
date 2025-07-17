@@ -132,6 +132,7 @@ export type TRoom = {
   isTemplate?: boolean;
   isAvailable?: boolean;
   isRoom?: boolean;
+  chatSettings?: { prompt: string; providerId: number; modelId: string };
 };
 
 export type TGetRooms = {

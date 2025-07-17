@@ -31,6 +31,7 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 const StyledParam = styled.div.attrs(injectDefaultTheme)<{
   storageLocation?: boolean;
   folderName?: string;
+  increaseGap?: boolean;
 }>`
   box-sizing: border-box;
   display: flex;
@@ -49,7 +50,7 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
   .set_room_params-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: ${(props) => (props.increaseGap ? 12 : 4)}px;
 
     .set_room_params-info-title {
       user-select: none;
@@ -65,6 +66,7 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
         line-height: 20px;
       }
     }
+
     .set_room_params-info-description {
       user-select: none;
       font-weight: 400;
@@ -79,6 +81,45 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
     width: 28px;
     height: 16px;
     margin: 2px 0;
+  }
+
+  .ai-combobox {
+    padding: 0;
+  }
+
+  .ai-button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    .ai-button-icon {
+      div {
+        height: 16px;
+      }
+    }
+  }
+
+  .ai-mcp-group {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    .ai-mcp-item {
+      height: 32px;
+      padding: 0 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      background: var(--filled-button-background-color);
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
 `;
 

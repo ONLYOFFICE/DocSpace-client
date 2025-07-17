@@ -24,28 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum MessageType {
-  UserMessage = 0,
-  AssistantMessage = 1,
-  Error = 10,
-}
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export const enum ContentType {
-  Text = 0,
-  Tool = 1,
-}
+import { Text } from "@docspace/shared/components/text";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 
-export const enum ProviderType {
-  OpenAi = 1,
-  TogetherAi = 2,
-  OpenAiCompatible = 3,
-  Anthropic = 4,
-}
+import { StyledParam } from "../Params/StyledParam";
 
-export const enum EventType {
-  Metadata = "metadata",
-  NewToken = "new_token",
-  ToolCall = "tool_call",
-  ToolResult = "tool_result",
-  Error = "error",
-}
+const MCPSettings = () => {
+  const { t } = useTranslation(["AIRoom", "Common"]);
+
+  return (
+    <StyledParam increaseGap>
+      <div className=" set_room_params-info">
+        <div>
+          <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+            {t("MCP")}
+          </Text>
+          <Text
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={400}
+            className="set_room_params-info-description"
+            noSelect
+          >
+            {t("MCPDescription")}
+          </Text>
+        </div>
+        <div className="ai-mcp-group">
+          <div className="ai-mcp-item">
+            <img src="logo.ashx?logotype=3" alt="DocSpace" />
+            <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
+              {t("Common:ProductName")}
+            </Text>
+          </div>
+          <SelectorAddButton />
+        </div>
+      </div>
+    </StyledParam>
+  );
+};
+
+export default MCPSettings;

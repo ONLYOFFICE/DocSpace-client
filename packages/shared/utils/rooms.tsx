@@ -107,6 +107,9 @@ export type TRoomParams = {
   createAsNewFolder?: boolean;
   isTemplate?: boolean;
   copyLogo?: boolean;
+  prompt?: string;
+  providerId?: number;
+  modelId?: string;
 };
 
 const getFetchedRoomParams = (
@@ -145,6 +148,9 @@ const getFetchedRoomParams = (
     lifetime: item.lifetime,
     denyDownload: item.denyDownload,
     watermark: item.watermark,
+    prompt: item.chatSettings?.prompt,
+    providerId: item.chatSettings?.providerId,
+    modelId: item.chatSettings?.modelId,
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,
     }),

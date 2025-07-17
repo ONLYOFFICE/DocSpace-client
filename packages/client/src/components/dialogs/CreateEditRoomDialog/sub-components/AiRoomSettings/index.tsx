@@ -24,28 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum MessageType {
-  UserMessage = 0,
-  AssistantMessage = 1,
-  Error = 10,
-}
+import { TRoomParams } from "@docspace/shared/utils/rooms";
 
-export const enum ContentType {
-  Text = 0,
-  Tool = 1,
-}
+import ModelSettings from "./Model";
+import InstructionsSettings from "./Instructions";
+import KnowledgeSettings from "./Knowledge";
+import MCPSettings from "./MCP";
 
-export const enum ProviderType {
-  OpenAi = 1,
-  TogetherAi = 2,
-  OpenAiCompatible = 3,
-  Anthropic = 4,
-}
+type AiRoomSettingsProps = {
+  roomParams: TRoomParams;
+  setRoomParams: (value: TRoomParams) => void;
+};
 
-export const enum EventType {
-  Metadata = "metadata",
-  NewToken = "new_token",
-  ToolCall = "tool_call",
-  ToolResult = "tool_result",
-  Error = "error",
-}
+const AiRoomSettings = ({ roomParams, setRoomParams }: AiRoomSettingsProps) => {
+  return (
+    <>
+      <ModelSettings roomParams={roomParams} setRoomParams={setRoomParams} />
+      <InstructionsSettings
+        roomParams={roomParams}
+        setRoomParams={setRoomParams}
+      />
+      <KnowledgeSettings />
+      <MCPSettings />
+    </>
+  );
+};
+
+export default AiRoomSettings;

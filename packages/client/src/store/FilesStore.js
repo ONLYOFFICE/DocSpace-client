@@ -3383,6 +3383,7 @@ class FilesStore {
         watermark,
         formFillingStatus,
         customFilterEnabled,
+        chatSettings,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3563,6 +3564,7 @@ class FilesStore {
         watermark,
         formFillingStatus,
         customFilterEnabled,
+        chatSettings,
       };
     });
   };

@@ -2632,3 +2632,27 @@
   --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
     0px 0px 4px #{$menu-shadow-dark};
 }
+
+.light {
+  --filled-button-background-color: #{$gray-light-mid};
+  --filled-button-hover-background-color: #{$light-gray-selected};
+  --filled-button-active-background-color: #{$gray-strong};
+
+  --filled-button-icon-color: #{$light-gray-dark};
+  --filled-button-text-color: #{$gray-text};
+
+  --filled-button-icon-color-hover: #{$light-gray-dark};
+  --filled-button-text-color-hover: #{$gray-text};
+}
+
+.dark {
+  --filled-button-background-color: #{$gray-dark-mid};
+  --filled-button-hover-background-color: #{$gray-dark-strong};
+  --filled-button-active-background-color: #{$gray-dark-mid};
+
+  --filled-button-icon-color: #{$dark-gray-dark};
+  --filled-button-text-color: #{$dark-gray-dark};
+
+  --filled-button-icon-color-hover: #{$white};
+  --filled-button-text-color-hover: #{$white};
+}

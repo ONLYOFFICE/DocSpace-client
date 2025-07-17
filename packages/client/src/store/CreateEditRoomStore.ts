@@ -269,6 +269,9 @@ class CreateEditRoomStore {
       invitations,
       roomId,
       isAvailable,
+      prompt,
+      providerId,
+      modelId,
     } = newParams;
 
     const quotaLimit = quota || room.quotaLimit;
@@ -320,6 +323,13 @@ class CreateEditRoomStore {
               },
         }),
       logo: undefined as unknown,
+      ...((prompt || providerId || modelId) && {
+        chatSettings: {
+          prompt,
+          providerId,
+          modelId,
+        },
+      }),
     };
 
     const isDeleteLogo = !!room.logo.original && !icon.uploadedFile;
@@ -559,6 +569,9 @@ class CreateEditRoomStore {
       isTemplate,
       roomId,
       logo,
+      prompt,
+      providerId,
+      modelId,
     } = roomParams;
 
     const isThirdparty = storageLocation.isThirdparty;
@@ -605,6 +618,13 @@ class CreateEditRoomStore {
           watermark: await this.getWatermarkRequest(watermark),
         }),
       logo: undefined as unknown,
+      ...((prompt || providerId || modelId) && {
+        chatSettings: {
+          prompt,
+          providerId,
+          modelId,
+        },
+      }),
     };
 
     this.setIsLoading(true);

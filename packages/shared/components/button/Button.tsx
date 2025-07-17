@@ -48,6 +48,8 @@ export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
     type,
     id,
     minWidth,
+    filled,
+    filledStroke,
     style,
     ...rest
   } = props;
@@ -58,6 +60,8 @@ export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
       [styles.primary]: primary,
       [styles.scale]: scale,
       [styles[size]]: size,
+      [styles.filled]: filled,
+      [styles.filledStroke]: filledStroke,
       [styles.isLoading]: isLoading,
       [styles.isHovered]: isHovered,
       [styles.isClicked]: isClicked,

@@ -1282,13 +1282,14 @@ const SectionFilterContent = ({
       commonOptions.push(erasure);
       commonOptions.push(size);
       // commonOptions.push(type);
+    } else if (isRecentFolder) {
+      return [lastOpenedDate];
     } else {
       // commonOptions.push(authorOption);
       // commonOptions.push(creationDate);
       commonOptions.push(modifiedDate);
       commonOptions.push(size);
       // commonOptions.push(type);
-      isRecentFolder && commonOptions.push(lastOpenedDate);
     }
 
     return commonOptions;

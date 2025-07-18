@@ -185,7 +185,7 @@ class FilesStore {
 
   selected = "close";
 
-  filter = FilesFilter.getDefault(100);
+  filter = FilesFilter.getDefault({ pageCount: 100 });
 
   roomsFilter = RoomsFilter.getDefault();
 

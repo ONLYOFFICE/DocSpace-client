@@ -104,9 +104,8 @@ const ArticleBodyContent = (props) => {
 
       switch (folderId) {
         case recentFolderId: {
-          const recentFilter = FilesFilter.getDefault();
           // TODO: Temp value. Change later
-          recentFilter.folder = "recent";
+          const recentFilter = FilesFilter.getDefault({ isRecentFolder: true });
 
           const filterStorageItem =
             userId && localStorage.getItem(`RecentFilter=${userId}`);

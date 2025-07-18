@@ -29,7 +29,12 @@
 
 import queryString from "query-string";
 
-import { ApplyFilterOption, FilterLocation, FilterType } from "../../enums";
+import {
+  ApplyFilterOption,
+  FilterLocation,
+  FilterType,
+  SortByFieldName,
+} from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
@@ -130,6 +135,7 @@ export const typeDefinition = {
     "Size",
     "Title",
     "Author",
+    "LastOpened",
   ] as TSortBy[], // type TSortBy
   sortOrder: ["ascending", "descending"] as TSortOrder[], // type TSortOrder
 };
@@ -175,16 +181,39 @@ class FilesFilter {
 
   location: FilterLocation | null = null;
 
-  static getDefault(pageCount = DEFAULT_PAGE_COUNT, total = DEFAULT_TOTAL) {
-    return new FilesFilter(DEFAULT_PAGE, pageCount, total);
+  static getDefault(
+    options?: {
+      pageCount?: number;
+      total?: number;
+      isRecentFolder?: boolean;
+    } = {},
+  ) {
+    const {
+      pageCount = DEFAULT_PAGE_COUNT,
+      total = DEFAULT_TOTAL,
+      isRecentFolder = false,
+    } = options;
+
+    const filter = new FilesFilter(DEFAULT_PAGE, pageCount, total);
+
+    if (isRecentFolder) {
+      filter.sortBy = SortByFieldName.LastOpened;
+      filter.folder = "recent";
+    }
+
+    return filter;
   }
 
   static getFilter(location: Location): FilesFilter {
     if (!location) return this.getDefault();
 
+    // TODO: Temp value. Change later
+    const isRecentFolder = location.pathname.startsWith("/recent");
+
     const urlFilter = getObjectByLocation(location);
 
-    const defaultFilter = FilesFilter.getDefault();
+    // TODO: Temp value. Change later
+    const defaultFilter = FilesFilter.getDefault({ isRecentFolder });
 
     if (!urlFilter) return defaultFilter;
 
@@ -412,6 +441,7 @@ class FilesFilter {
     const otherSearchParams = getOtherSearchParams();
 
     const str = toUrlParams(dtoFilter, true);
+
     return `${str}&${otherSearchParams}`;
   };
 

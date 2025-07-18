@@ -406,7 +406,6 @@ class FilesTableHeader extends React.Component {
         default: true,
         sortBy: SortByFieldName.Name,
         minWidth: 210,
-        onClick: this.onFilter,
       },
       {
         key: "RoomRecent",
@@ -439,7 +438,6 @@ class FilesTableHeader extends React.Component {
         enable: sizeRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Size,
-        onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
@@ -448,7 +446,6 @@ class FilesTableHeader extends React.Component {
         enable: typeRecentColumnIsEnabled,
         resizable: true,
         sortBy: SortByFieldName.Type,
-        // onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
     ];

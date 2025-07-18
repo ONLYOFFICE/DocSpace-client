@@ -132,6 +132,7 @@ const Table = ({
 
   return !isUsersEmptyView ? (
     <StyledTableContainer
+      noSelect
       useReactWindow
       forwardedRef={ref as React.RefObject<HTMLDivElement>}
     >

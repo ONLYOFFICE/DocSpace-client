@@ -106,6 +106,7 @@ const GroupsTableView = ({
 
   return groups?.length ? (
     <GroupsTableContainer
+      noSelect
       useReactWindow
       forwardedRef={ref as React.RefObject<HTMLDivElement>}
     >

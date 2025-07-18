@@ -34,6 +34,10 @@
   max-width: 100%;
   margin-top: -25px;
 
+  &.noSelect {
+    user-select: none;
+  }
+
   &.useReactWindow {
     display: block;
     height: 100%;

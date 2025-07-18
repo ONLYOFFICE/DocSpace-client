@@ -43,8 +43,6 @@
   width: 100%;
   max-width: 100%;
 
-  // @include mixins.no-user-select;
-
   &.form-gallery {
     @include mixins.tablet-and-below {
       height: var(--section-header-height);
@@ -322,7 +320,6 @@
 
 .sectionBody {
   max-width: 100vw !important;
-  // user-select: none;
 
   &.withScroll {
     margin-inline-start: -20px;

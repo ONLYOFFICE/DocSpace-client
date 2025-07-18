@@ -250,6 +250,7 @@ const Table = ({
 
   return (
     <StyledTableContainer
+      noSelect
       useReactWindow
       forwardedRef={ref}
       isIndexEditingMode={isIndexEditingMode}

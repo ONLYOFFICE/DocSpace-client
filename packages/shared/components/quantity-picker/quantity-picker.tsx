@@ -291,12 +291,8 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             className={styles.slider}
           />
           <div className={styles.sliderTrack}>
-            <Text className={styles.sliderTrackValueMin} noSelect>
-              {minValue}
-            </Text>
-            <Text className={styles.sliderTrackValueMax} noSelect>
-              {`${maxValue}+`}
-            </Text>
+            <Text className={styles.sliderTrackValueMin}>{minValue}</Text>
+            <Text className={styles.sliderTrackValueMax}>{`${maxValue}+`}</Text>
           </div>
         </div>
       ) : null}

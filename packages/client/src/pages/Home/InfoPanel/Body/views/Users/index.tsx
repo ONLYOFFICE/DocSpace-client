@@ -165,13 +165,7 @@ const Users = ({
     const selectedOption = typesOptions.find((option) => option.key === role);
 
     const text = (
-      <Text
-        title={typeLabel}
-        fontSize="13px"
-        fontWeight={600}
-        truncate
-        noSelect
-      >
+      <Text title={typeLabel} fontSize="13px" fontWeight={600} truncate>
         {typeLabel}
       </Text>
     );
@@ -219,39 +213,37 @@ const Users = ({
   return (
     <StyledUsersContent>
       <div className="data__header">
-        <Text className="header__text" noSelect title={t("Data")}>
+        <Text className="header__text" title={t("Data")}>
           {t("InfoPanel:Data")}
         </Text>
       </div>
       <div className="data__body">
-        <Text className="info_field first-row" noSelect title={t("Data")}>
+        <Text className="info_field first-row" title={t("Data")}>
           {t("Common:Account")}
         </Text>
         <Text
           className="info_data first-row"
           fontSize="13px"
           fontWeight={600}
-          noSelect
           title={statusLabel}
         >
           {statusLabel}
         </Text>
 
-        <Text className="info_field" noSelect title={t("Common:Type")}>
+        <Text className="info_field" title={t("Common:Type")}>
           {t("Common:Type")}
         </Text>
         {typeData}
 
         {isGuests && infoPanelSelection.createdBy?.displayName ? (
           <>
-            <Text className="info_field" noSelect title={t("Common:Inviter")}>
+            <Text className="info_field" title={t("Common:Inviter")}>
               {t("Common:Inviter")}
             </Text>
             <Text
               className="info_data first-row"
               fontSize="13px"
               fontWeight={600}
-              noSelect
               title={statusLabel}
             >
               {infoPanelSelection.createdBy.displayName}
@@ -263,7 +255,6 @@ const Users = ({
           <>
             <Text
               className="info_field"
-              noSelect
               title={t("PeopleTranslations:RegistrationDate")}
             >
               {t("PeopleTranslations:RegistrationDate")}
@@ -272,7 +263,6 @@ const Users = ({
               className="info_data first-row"
               fontSize="13px"
               fontWeight={600}
-              noSelect
               title={infoPanelSelection.registrationDate}
             >
               {infoPanelSelection.registrationDate}
@@ -281,14 +271,13 @@ const Users = ({
         ) : null}
         {!standalone ? (
           <>
-            <Text className="info_field" noSelect title={t("UserStatus")}>
+            <Text className="info_field" title={t("UserStatus")}>
               {t("UserStatus")}
             </Text>
             <Text
               className="info_data first-row"
               fontSize="13px"
               fontWeight={600}
-              noSelect
               title={statusLabel}
             >
               {statusText}
@@ -297,7 +286,7 @@ const Users = ({
         ) : null}
         {showStorageInfo && !isGuests ? (
           <>
-            <Text className="info_field" noSelect title={t("Common:Storage")}>
+            <Text className="info_field" title={t("Common:Storage")}>
               {t("Common:Storage")}
             </Text>
             <SpaceQuota
@@ -314,7 +303,6 @@ const Users = ({
           <>
             <Text
               className="info_field info_field_groups"
-              noSelect
               title={t("Common:Group")}
             >
               {t("Common:Group")}

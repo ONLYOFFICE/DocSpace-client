@@ -24,8 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import moment from "moment";
 import { makeAutoObservable, reaction } from "mobx";
 import clone from "lodash/clone";
+
+import { toastr } from "@docspace/shared/components/toast";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -48,6 +51,7 @@ import {
   addExternalLink,
   // checkIsPDFForm,
   getPrimaryLinkIfNotExistCreate,
+  getOrCreatePrimaryFolderLink,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
@@ -967,6 +971,25 @@ class InfoPanelStore {
   openMembersTab = () => {
     this.setView(infoMembers);
     this.isVisible = true;
+  };
+
+  /**
+   * @param {number} folderId
+   */
+  getPrimaryFolderLink = async (folderId) => {
+    try {
+      const res = await getOrCreatePrimaryFolderLink(
+        folderId,
+        DEFAULT_CREATE_LINK_SETTINGS.access,
+        DEFAULT_CREATE_LINK_SETTINGS.internal,
+        moment(DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate),
+      );
+
+      return res;
+    } catch (error) {
+      console.log(error);
+      toastr.error(error);
+    }
   };
 
   getPrimaryFileLink = async (fileId) => {

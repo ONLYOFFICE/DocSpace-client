@@ -92,10 +92,15 @@ export default function withQuickButtons(WrappedComponent) {
         t,
         item,
         getPrimaryFileLink,
+        getPrimaryFolderLink,
         setShareChanged,
         getManageLinkOptions,
       } = this.props;
-      const primaryLink = await getPrimaryFileLink(item.id);
+
+      const primaryLink = await (item.isFolder
+        ? getPrimaryFolderLink(item.id)
+        : getPrimaryFileLink(item.id));
+
       if (primaryLink) {
         copyDocumentShareLink(primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
@@ -257,8 +262,12 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder || isArchiveFolderRoot || isDocumentsFolder;
 
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =
-        infoPanelStore;
+      const {
+        getPrimaryFileLink,
+        setShareChanged,
+        infoPanelRoom,
+        getPrimaryFolderLink,
+      } = infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
 
@@ -284,6 +293,7 @@ export default function withQuickButtons(WrappedComponent) {
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
+        getPrimaryFolderLink,
       };
     },
   )(observer(WithQuickButtons));

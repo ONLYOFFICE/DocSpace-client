@@ -1542,6 +1542,21 @@ export async function getPrimaryLinkIfNotExistCreate(
 
   return res;
 }
+export async function getOrCreatePrimaryFolderLink(
+  folderId: number | string,
+  access: ShareAccessRights,
+  internal: boolean,
+  expirationDate: moment.Moment,
+) {
+  const res = (await request({
+    method: "post",
+    url: `/files/folder/${folderId}/link`,
+    data: { access, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
+
 export async function getPrimaryFolderLink(fileId: number | string) {
   const res = (await request({
     method: "get",

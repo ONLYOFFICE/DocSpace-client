@@ -209,6 +209,13 @@ const HistoryMainContent = (props) => {
     saveToSessionStorage("storagePeriod", newSettings);
   }, [loginLifeTime, auditLifeTime]);
 
+  const handleMouseDown = (e) => {
+    if (e.button === 0 || e.button === 1) {
+      getReport();
+      e.preventDefault();
+    }
+  };
+
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>
       {isSettingNotPaid ? (
@@ -295,7 +302,7 @@ const HistoryMainContent = (props) => {
           label={downloadReport}
           size="normal"
           minWidth="auto"
-          onClick={() => getReport()}
+          onMouseDown={handleMouseDown}
           isDisabled={isSettingNotPaid}
           isLoading={isLoadingDownloadReport}
         />

@@ -43,6 +43,7 @@ import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
 import {
   FILTER_DOCUMENTS,
+  FILTER_RECENT,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 
@@ -107,14 +108,13 @@ const ArticleBodyContent = (props) => {
           // TODO: Temp value. Change later
           const recentFilter = FilesFilter.getDefault({ isRecentFolder: true });
 
-          const filterStorageItem =
-            userId && localStorage.getItem(`RecentFilter=${userId}`);
+          if (userId) {
+            const { sortBy, sortOrder } = getUserFilter(
+              `${FILTER_RECENT}=${userId}`,
+            );
 
-          if (filterStorageItem) {
-            const splitFilter = filterStorageItem.split(",");
-
-            recentFilter.sortBy = splitFilter[0];
-            recentFilter.sortOrder = splitFilter[1];
+            if (sortBy) recentFilter.sortBy = sortBy;
+            if (sortOrder) recentFilter.sortOrder = sortOrder;
           }
 
           params = recentFilter.toUrlParams();

@@ -112,5 +112,7 @@ export const configureFilterByFilterParam = (
       break;
 
     default:
+      filter.extension = filterParam.toString();
+      break;
   }
 };

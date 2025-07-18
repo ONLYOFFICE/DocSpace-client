@@ -567,7 +567,7 @@ export const helperOptions = (
   const createUploadFromDocSpace = (
     title: string,
     description: string,
-    filterType: FilesSelectorFilterTypes | FilterType,
+    filterType: FilesSelectorFilterTypes | FilterType | string,
   ) => ({
     title,
     description,

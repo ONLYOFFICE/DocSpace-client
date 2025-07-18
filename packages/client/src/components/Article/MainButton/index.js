@@ -68,6 +68,8 @@ import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
+import { CHAT_SUPPORTED_FORMATS } from "@docspace/shared/components/chat/constants";
+
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 
@@ -504,7 +506,7 @@ const ArticleMainButtonContent = (props) => {
           productName: t("Common:ProductName"),
         }),
         onClick: () =>
-          onShowFormRoomSelectFileDialog(FilterType.FilesOnly, true),
+          onShowFormRoomSelectFileDialog(CHAT_SUPPORTED_FORMATS, true),
         key: "upload-files-product",
       };
 
@@ -739,6 +741,8 @@ const ArticleMainButtonContent = (props) => {
     if (!isAccountsPage) visibilityValue = security?.Create;
 
     if (!isMobileArticle) visibilityValue = false;
+
+    if (isChatTab || isResultTab) visibilityValue = false;
     return visibilityValue;
   };
 

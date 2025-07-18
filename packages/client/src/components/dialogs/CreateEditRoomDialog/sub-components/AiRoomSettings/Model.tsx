@@ -116,7 +116,7 @@ const ModelSettings = ({ roomParams, setRoomParams }: ModelSettingsProps) => {
       }
     };
 
-    if (!selectedProvider?.id) return;
+    if (!selectedProvider?.id || selectedProvider.id === -1) return;
 
     setSelectedModel(null);
 

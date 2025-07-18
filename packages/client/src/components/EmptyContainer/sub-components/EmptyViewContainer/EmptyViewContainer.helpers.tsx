@@ -64,6 +64,7 @@ import type {
   EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { CHAT_SUPPORTED_FORMATS } from "@docspace/shared/components/chat/constants";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -459,7 +460,7 @@ export const getOptions = (
           sectionNameFirst: t("Common:MyFilesSection"),
           sectionNameSecond: t("Common:Rooms"),
         }),
-        FilterType.FilesOnly,
+        CHAT_SUPPORTED_FORMATS,
       );
 
       const uploadFilesFromDevice = createUploadFromDeviceOption(

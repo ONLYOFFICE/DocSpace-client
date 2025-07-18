@@ -26,6 +26,7 @@
 import React from "react";
 
 import { TMessage } from "../../../api/ai/types";
+import { TGetIcon } from "../../../selectors/utils/types";
 
 export type TChatStoreProps = {
   roomId: string | number;
@@ -40,7 +41,12 @@ export type MessageProps = {
 
 export type MessageBodyProps = Pick<MessageProps, "userAvatar">;
 
+export type ChatInputProps = {
+  getIcon: TGetIcon;
+};
+
 export type ChatProps = {
   roomId: TChatStoreProps["roomId"];
   userAvatar: MessageBodyProps["userAvatar"];
+  getIcon: ChatInputProps["getIcon"];
 };

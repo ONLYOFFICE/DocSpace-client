@@ -30,16 +30,24 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
+import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
+import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
 
 import { Textarea } from "../../../textarea";
 import { IconButton } from "../../../icon-button";
+import { Text } from "../../../text";
 
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
 
+import { ChatInputProps } from "../../types";
+
+import ToolsSettings from "./ToolsSettings";
+import Attachment from "./Attachment";
+
 import styles from "./ChatInput.module.scss";
 
-const ChatInput = () => {
+const ChatInput = ({ getIcon }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
   const {
@@ -48,14 +56,19 @@ const ChatInput = () => {
     stopMessage,
     isRequestRunning,
     currentChatId,
-    messages,
   } = useMessageStore();
   const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
+  const [inputWidth, setInputWidth] = React.useState(0);
+
+  const [isFilesSelectorVisible, setIsFilesSelectorVisible] =
+    React.useState(false);
+  const [isMcpToolsVisible, setIsMcpToolsVisible] = React.useState(false);
 
   const prevSession = React.useRef(currentChatId);
   const inputRef = React.useRef<HTMLDivElement>(null);
+  const toolSettingsRef = React.useRef<HTMLDivElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
@@ -92,6 +105,32 @@ const ChatInput = () => {
     [sendMessageAction],
   );
 
+  const showFilesSelector = () => {
+    setIsMcpToolsVisible(false);
+    setIsFilesSelectorVisible(true);
+  };
+  const hideFilesSelector = () => setIsFilesSelectorVisible(false);
+  const toggleFilesSelector = () => {
+    if (isFilesSelectorVisible) {
+      hideFilesSelector();
+    } else {
+      showFilesSelector();
+    }
+  };
+
+  const showMcpTools = () => {
+    setIsFilesSelectorVisible(false);
+    setIsMcpToolsVisible(true);
+  };
+  const hideMcpTools = () => setIsMcpToolsVisible(false);
+  const toggleMcpTools = () => {
+    if (isMcpToolsVisible) {
+      hideMcpTools();
+    } else {
+      showMcpTools();
+    }
+  };
+
   React.useEffect(() => {
     window.addEventListener("keydown", onKeyEnter);
 
@@ -102,7 +141,6 @@ const ChatInput = () => {
 
   React.useEffect(() => {
     if (currentChatId && !currentChat) {
-      console.log(currentChatId, prevSession.current, currentChat);
       fetchChat(currentChatId);
     }
 
@@ -111,10 +149,19 @@ const ChatInput = () => {
     setValue("");
   }, [currentChatId, currentChat, fetchChat]);
 
-  const placeholder =
-    messages.length === 0
-      ? t("Common:AIChatInputFirstMessage")
-      : t("Common:AIChatInputAskAI");
+  React.useEffect(() => {
+    const onResize = () => {
+      setInputWidth(inputRef.current?.offsetWidth ?? 0);
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  const placeholder = t("Common:AIChatInput");
 
   const sendIconProps = !isRequestRunning
     ? { onClick: sendMessageAction, isDisabled: false, iconNode: null }
@@ -127,31 +174,82 @@ const ChatInput = () => {
       };
 
   return (
-    <div className={classNames(styles.chatInput)} ref={inputRef}>
-      <Textarea
-        onChange={handleChange}
-        value={value}
-        isFullHeight
-        className={styles.chatInputTextArea}
-        wrapperClassName={classNames({
-          [styles.chatInputTextAreaWrapper]: true,
-        })}
-        placeholder={placeholder}
-        isChatMode
-      />
-
-      <div className={styles.chatInputButtons}>
-        <IconButton
-          iconName={SendReactSvgUrl}
-          size={12}
-          isClickable
-          className={classNames(styles.chatInputButtonsSend, {
-            [styles.disabled]: false,
+    <>
+      <div
+        className={classNames(styles.chatInput)}
+        ref={(ref) => {
+          if (ref) setInputWidth(ref.offsetWidth);
+          inputRef.current = ref;
+        }}
+      >
+        <Textarea
+          onChange={handleChange}
+          value={value}
+          isFullHeight
+          className={styles.chatInputTextArea}
+          wrapperClassName={classNames({
+            [styles.chatInputTextAreaWrapper]: true,
           })}
-          {...sendIconProps}
+          placeholder={placeholder}
+          isChatMode
         />
+
+        <div
+          className={styles.chatInputButtons}
+          style={{ width: `${inputWidth}px` }}
+        >
+          <div className={styles.chatInputButtonsTools}>
+            <div
+              className={classNames(styles.chatInputButton, {
+                [styles.activeChatInputButton]: isFilesSelectorVisible,
+              })}
+              onClick={toggleFilesSelector}
+            >
+              <IconButton
+                iconName={AttachmentReactSvgUrl}
+                size={16}
+                isFill={false}
+              />
+            </div>
+            <div
+              ref={toolSettingsRef}
+              className={classNames(styles.chatInputButton, {
+                [styles.activeChatInputButton]: isMcpToolsVisible,
+              })}
+              onClick={toggleMcpTools}
+            >
+              <IconButton
+                iconName={McpToolReactSvgUrl}
+                size={16}
+                isFill={false}
+              />
+              <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
+                {t("Tools")}
+              </Text>
+            </div>
+          </div>
+          <IconButton
+            iconName={SendReactSvgUrl}
+            size={16}
+            isClickable
+            className={classNames(styles.chatInputButtonsSend, {
+              [styles.disabled]: false,
+            })}
+            {...sendIconProps}
+          />
+        </div>
       </div>
-    </div>
+      <Attachment
+        isVisible={isFilesSelectorVisible}
+        toggleAttachment={toggleFilesSelector}
+        getIcon={getIcon}
+      />
+      <ToolsSettings
+        isVisible={isMcpToolsVisible}
+        toggleToolsSettings={toggleMcpTools}
+        forwardedRef={toolSettingsRef}
+      />
+    </>
   );
 };
 

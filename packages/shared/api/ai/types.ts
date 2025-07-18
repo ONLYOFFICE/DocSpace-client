@@ -96,3 +96,8 @@ export type TMessage = {
   contents: TContent[];
   createdOn: string;
 };
+
+export type TMCPTool = {
+  name: string;
+  enabled: boolean;
+};

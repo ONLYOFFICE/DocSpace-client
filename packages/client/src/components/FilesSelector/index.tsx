@@ -29,7 +29,7 @@ import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FilterType, FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -436,7 +436,11 @@ const FilesSelectorWrapper = ({
       withSearch={withSearch}
       withPadding={withPadding}
       descriptionText={
-        !withSubtitle || !filterParam || filterParam === "ALL"
+        !withSubtitle ||
+        !filterParam ||
+        filterParam === "ALL" ||
+        (filterParam as unknown as FilterType) !== FilterType.DocumentsOnly ||
+        !descriptionText
           ? ""
           : (descriptionText ?? t("Common:SelectDOCXFormat"))
       }

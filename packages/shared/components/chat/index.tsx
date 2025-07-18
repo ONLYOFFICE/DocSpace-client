@@ -37,7 +37,7 @@ import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
 
-const Chat = ({ roomId, userAvatar }: ChatProps) => {
+const Chat = ({ roomId, userAvatar, getIcon }: ChatProps) => {
   return (
     <ChatStoreContextProvider roomId={roomId}>
       <ModelStoreContextProvider>
@@ -45,7 +45,7 @@ const Chat = ({ roomId, userAvatar }: ChatProps) => {
           <ChatContainer>
             <ChatHeader />
             <ChatMessageBody userAvatar={userAvatar} />
-            <ChatInput />
+            <ChatInput getIcon={getIcon} />
           </ChatContainer>
         </MessageStoreContextProvider>
       </ModelStoreContextProvider>

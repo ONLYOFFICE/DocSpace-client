@@ -36,6 +36,7 @@ import {
   TCurrentModel,
   TChat,
   TMessage,
+  TMCPTool,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -223,4 +224,27 @@ export const deleteChat = async (chatId: string) => {
     method: "DELETE",
     url: `${baseUrl}/chats/${chatId}`,
   });
+};
+
+export const getMCPTools = async (room: number, mcpId: string) => {
+  const res = await request({
+    method: "get",
+    url: `${baseUrl}/rooms/${room}/mcp/${mcpId}/tools`,
+  });
+
+  return res as TMCPTool[];
+};
+
+export const changeMCPTools = async (
+  room: number,
+  mcpId: string,
+  disabledTools: string[],
+) => {
+  const res = await request({
+    method: "PUT",
+    url: `${baseUrl}/rooms/${room}/mcp/${mcpId}/tools`,
+    data: { disabledTools },
+  });
+
+  return res;
 };

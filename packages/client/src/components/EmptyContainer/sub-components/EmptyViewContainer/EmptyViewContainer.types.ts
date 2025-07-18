@@ -114,7 +114,7 @@ export type OptionActions = {
     t?: TTranslation,
   ) => void;
   uploadFromDocspace: (
-    filterParam: FilesSelectorFilterTypes | FilterType,
+    filterParam: FilesSelectorFilterTypes | FilterType | string,
     openRoot?: boolean,
   ) => void;
   onUploadAction: (type: UploadType) => void;

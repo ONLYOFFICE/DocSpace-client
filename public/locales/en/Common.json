@@ -39,13 +39,14 @@
   "AIChat": "AI Chat",
   "AIChatEmptyMessage": "Leverage the power of AI for quick data search and analysis. Just ask a question, and we'll provide the results for you.",
   "AIChatHelp": "How can i help?",
-  "AIChatInputAskAI": "Ask AI",
+  "AIChatInput": "Chat with AI",
   "AIChatInputFirstMessage": "Start chat with AI",
   "AINewChat": "New chat",
   "AIRoomDescription": "A versatile chat powered by your chosen text model. Use it to solve everyday tasks and collaborate on text documents, spreadsheets, and presentations. All files added to the room are automatically used as context during your conversations with the chat.",
   "AIRoomTitle": "AI Room",
   "Alert": "Alert",
   "All": "All",
+  "AllTools": "All tools",
   "AllowedCharacters": "Allowed characters",
   "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}",
   "AmazonBucketTip": "Enter the unique name of the Amazon S3 bucket where you want to store your backups.",
@@ -890,5 +891,6 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "Tools": "Tools"
 }

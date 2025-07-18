@@ -24,40 +24,4 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-import { useParams } from "react-router";
-
-import Chat from "@docspace/shared/components/chat";
-import { TGetIcon } from "@docspace/shared/selectors/utils/types";
-
-const ChatComponent = ({
-  userAvatar,
-  getIcon,
-}: {
-  userAvatar: string;
-  getIcon: TGetIcon;
-}) => {
-  const { room } = useParams();
-
-  return (
-    <div
-      style={{
-        padding: "20px",
-        width: "100%",
-        height: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <Chat userAvatar={userAvatar} roomId={room ?? "1"} getIcon={getIcon} />
-    </div>
-  );
-};
-
-export const ChatView = inject((store: TStore) => {
-  const { userStore, filesSettingsStore } = store;
-
-  return {
-    userAvatar: userStore.user?.avatar,
-    getIcon: filesSettingsStore.getIcon,
-  };
-})(observer(ChatComponent));
+export const CHAT_SUPPORTED_FORMATS = "doc,docx,txt,pdf,xls,xlsx";

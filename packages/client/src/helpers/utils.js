@@ -102,7 +102,11 @@ export const getCategoryType = (location) => {
   let categoryType = CategoryType.Shared;
   const { pathname } = location;
 
-  if (pathname.startsWith("/rooms")) {
+  if (pathname.startsWith("/trash/files")) {
+    categoryType = CategoryType.TrashFiles;
+  } else if (pathname.startsWith("/trash/rooms")) {
+    categoryType = CategoryType.TrashRooms;
+  } else if (pathname.startsWith("/rooms")) {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
     } else if (pathname.indexOf("shared") > -1) {
@@ -120,8 +124,6 @@ export const getCategoryType = (location) => {
     categoryType = CategoryType.Favorite;
   } else if (pathname.startsWith("/recent")) {
     categoryType = CategoryType.Recent;
-  } else if (pathname.startsWith("/files/trash")) {
-    categoryType = CategoryType.Trash;
   } else if (pathname.startsWith("/settings")) {
     categoryType = CategoryType.Settings;
   } else if (pathname.startsWith("/accounts")) {
@@ -147,7 +149,9 @@ export const getCategoryTypeByFolderType = (folderType, parentId) => {
       return CategoryType.Recent;
 
     case FolderType.TRASH:
-      return CategoryType.Trash;
+      return window.location.pathname.startsWith("/trash/files")
+        ? CategoryType.TrashFiles
+        : CategoryType.TrashRooms;
 
     default:
       return CategoryType.Personal;
@@ -177,8 +181,11 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
     case CategoryType.Favorite:
       return "/files/favorite/filter";
 
-    case CategoryType.Trash:
-      return "/files/trash/filter";
+    case CategoryType.TrashFiles:
+      return "/trash/files/filter";
+
+    case CategoryType.TrashRooms:
+      return "/trash/rooms/filter";
 
     case CategoryType.PublicRoom:
       return "/rooms/share";

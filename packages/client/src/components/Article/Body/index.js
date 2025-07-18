@@ -119,6 +119,24 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
+        // case "trash-files": {
+        //   const recycleBinFilter = FilesFilter.getDefault();
+        //   recycleBinFilter.folder = folderId;
+
+        //   if (userId) {
+        //     const filterTrashObj = getUserFilter(`${FILTER_TRASH}=${userId}`);
+
+        //     if (filterTrashObj?.sortBy)
+        //       recycleBinFilter.sortBy = filterTrashObj.sortBy;
+        //     if (filterTrashObj?.sortOrder)
+        //       recycleBinFilter.sortOrder = filterTrashObj.sortOrder;
+        //   }
+
+        //   params = recycleBinFilter.toUrlParams();
+        //   path = getCategoryUrl(CategoryType.TrashFiles);
+
+        //   break;
+        // }
         case archiveFolderId: {
           const archiveFilter = RoomsFilter.getDefault(
             userId,
@@ -144,7 +162,18 @@ const ArticleBodyContent = (props) => {
           }
 
           params = recycleBinFilter.toUrlParams();
-          path = getCategoryUrl(CategoryType.Trash);
+          path = getCategoryUrl(CategoryType.TrashFiles);
+
+          break;
+        }
+        case "trash-rooms": {
+          const trashFilter = RoomsFilter.getDefault(
+            userId,
+            RoomSearchArea.Trash,
+          );
+
+          params = trashFilter.toUrlParams(userId);
+          path = getCategoryUrl(CategoryType.TrashRooms);
 
           break;
         }
@@ -243,10 +272,16 @@ const ArticleBodyContent = (props) => {
       return setActiveItemId(myFolderId);
 
     if (
-      location.pathname.includes("/files/trash") &&
-      activeItemId !== recycleBinFolderId
+      location.pathname.includes("/trash/files") &&
+      activeItemId !== "trash-files"
     )
-      return setActiveItemId(recycleBinFolderId);
+      return setActiveItemId("trash-files");
+
+    if (
+      location.pathname.includes("/trash/rooms") &&
+      activeItemId !== "trash-rooms"
+    )
+      return setActiveItemId("trash-rooms");
 
     if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");

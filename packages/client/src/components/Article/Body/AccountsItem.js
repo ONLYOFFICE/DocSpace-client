@@ -50,7 +50,7 @@ const PureAccountsItem = ({
     (e) => {
       filesController?.abort();
       roomsController?.abort();
-      onClick && onClick(e, "accounts");
+      onClick && onClick(e, "trash");
 
       setContactsTab("people");
     },

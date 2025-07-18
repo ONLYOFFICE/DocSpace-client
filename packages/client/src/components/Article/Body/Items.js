@@ -146,12 +146,25 @@ const Item = ({
     [onClick, item.title, item.rootFolderType],
   );
 
-  const linkData = getLinkData(
-    item.id,
-    item.title,
-    item.rootFolderType,
-    item.security.Create,
-  );
+  let linkData;
+
+  const isTrash = item.rootFolderType === FolderType.TRASH;
+
+  if (isTrash && window.location.pathname.startsWith("/trash/rooms")) {
+    linkData = getLinkData(
+      "trash-rooms",
+      item.title,
+      item.rootFolderType,
+      item.security.Create,
+    );
+  } else {
+    linkData = getLinkData(
+      item.id,
+      item.title,
+      item.rootFolderType,
+      item.security.Create,
+    );
+  }
 
   return (
     <StyledDragAndDrop

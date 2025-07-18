@@ -529,7 +529,7 @@ class InfoPanelStore {
 
   getIsTrash = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("files/trash") !== -1;
+    return pathname.indexOf("trash/files") !== -1;
   };
 
   setInfoPanelMembers = (infoPanelMembers) => {

@@ -133,7 +133,7 @@ const ClientRoutes = [
             },
           },
           {
-            path: "files/trash",
+            path: "trash/files",
             async lazy() {
               const { FilesView } = await componentLoader(
                 () => import("SRC_DIR/pages/Home/View/Files"),
@@ -151,7 +151,43 @@ const ClientRoutes = [
             },
           },
           {
-            path: "files/trash/filter",
+            path: "trash/files/filter",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "trash/rooms",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "trash/rooms/filter",
             async lazy() {
               const { FilesView } = await componentLoader(
                 () => import("SRC_DIR/pages/Home/View/Files"),

@@ -33,6 +33,8 @@ import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.rea
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
+
 // import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 // import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 // import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
@@ -184,6 +186,11 @@ const ArticleMainButtonContent = (props) => {
     contactsCanCreate,
     setRefMap,
     defaultOformLocale,
+
+    isChatTab,
+    isResultTab,
+    isKnowledgeTab,
+    isAIRoom,
   } = props;
 
   const navigate = useNavigate();
@@ -245,8 +252,8 @@ const ArticleMainButtonContent = (props) => {
   }, [setSelectFileDialogVisible]);
 
   const onShowFormRoomSelectFileDialog = React.useCallback(
-    (filter = FilesSelectorFilterTypes.DOCX) => {
-      setSelectFileFormRoomDialogVisible(true, filter);
+    (filter = FilesSelectorFilterTypes.DOCX, openRoot = false) => {
+      setSelectFileFormRoomDialogVisible(true, filter, openRoot);
     },
     [setSelectFileFormRoomDialogVisible],
   );
@@ -476,6 +483,38 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
+    const newUploadActions = [
+      {
+        id: "actions_upload-files",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFiles"),
+        onClick: onUploadFileClick,
+        key: "upload-files",
+      },
+    ];
+
+    if (isAIRoom && isKnowledgeTab) {
+      newUploadActions[0].label = t("EmptyView:UploadDeviceOptionTitle");
+      const uploadFromDocspace = {
+        id: "actions_upload-files-product",
+        className: "main-button_drop-down",
+        icon: MoveReactSvgUrl,
+        label: t("EmptyView:UploadFromPortalTitle", {
+          productName: t("Common:ProductName"),
+        }),
+        onClick: () =>
+          onShowFormRoomSelectFileDialog(FilterType.FilesOnly, true),
+        key: "upload-files-product",
+      };
+
+      setActions([]);
+      setUploadActions([uploadFromDocspace, ...newUploadActions]);
+      setModel([uploadFromDocspace, ...newUploadActions]);
+
+      return;
+    }
+
     const pluginItems = [];
 
     if (mainButtonItemsList && enablePlugins && !isAccountsPage) {
@@ -555,17 +594,6 @@ const ArticleMainButtonContent = (props) => {
       action: "pptx",
       key: "pptx",
     };
-
-    const newUploadActions = [
-      {
-        id: "actions_upload-files",
-        className: "main-button_drop-down",
-        icon: ActionsUploadReactSvgUrl,
-        label: t("UploadFiles"),
-        onClick: onUploadFileClick,
-        key: "upload-files",
-      },
-    ];
 
     if (!(isMobile || isTablet)) {
       newUploadActions.push({
@@ -683,6 +711,9 @@ const ArticleMainButtonContent = (props) => {
     onUploadFolderClick,
     createActionsForFormRoom,
     isMobileArticle,
+
+    isAIRoom,
+    isKnowledgeTab,
   ]);
 
   const isProfile = location.pathname.includes("/profile");
@@ -726,6 +757,8 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
+  } else if ((isChatTab || isResultTab) && isAIRoom) {
+    isDisabled = true;
   } else {
     isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
@@ -741,7 +774,9 @@ const ArticleMainButtonContent = (props) => {
           titleProp={t("Upload")}
           actionOptions={actions}
           buttonOptions={!isAccountsPage ? uploadActions : null}
-          withoutButton={isRoomsFolder || isAccountsPage}
+          withoutButton={
+            isRoomsFolder || isAccountsPage || isChatTab || isResultTab
+          }
           withMenu={!isRoomsFolder}
           mainButtonMobileVisible={
             mainButtonMobileVisible ? mainButtonVisible : null
@@ -830,7 +865,9 @@ export default inject(
     currentQuotaStore,
     peopleStore,
     guidanceStore,
+    aiRoomStore,
   }) => {
+    const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
     const { setRefMap } = guidanceStore;
     const {
@@ -942,6 +979,11 @@ export default inject(
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       setRefMap,
       defaultOformLocale,
+
+      isChatTab,
+      isResultTab,
+      isKnowledgeTab,
+      isAIRoom: selectedFolderStore.isAIRoom,
     };
   },
 )(
@@ -952,5 +994,6 @@ export default inject(
     "Files",
     "People",
     "PeopleTranslations",
+    "EmptyView",
   ])(observer(ArticleMainButtonContent)),
 );

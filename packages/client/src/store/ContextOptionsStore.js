@@ -2632,8 +2632,15 @@ class ContextOptionsStore {
     element?.click();
   };
 
-  onShowFormRoomSelectFileDialog = (filter = FilesSelectorFilterTypes.DOCX) => {
-    this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter);
+  onShowFormRoomSelectFileDialog = (
+    filter = FilesSelectorFilterTypes.DOCX,
+    openRoot = false,
+  ) => {
+    this.dialogsStore.setSelectFileFormRoomDialogVisible(
+      true,
+      filter,
+      openRoot,
+    );
   };
 
   getContextOptionsPlusFormRoom = (t) => {
@@ -2731,7 +2738,7 @@ class ContextOptionsStore {
 
   getFolderModel = (t, isSectionMenu) => {
     const { isLoading } = this.clientLoadingStore;
-    const { security, roomType, parentRoomType, isFolder } =
+    const { security, roomType, parentRoomType, isFolder, isAIRoom } =
       this.selectedFolderStore;
     const { isPublicRoom } = this.publicRoomStore;
 
@@ -2868,6 +2875,30 @@ class ContextOptionsStore {
         ],
       },
     ];
+
+    if (isAIRoom) {
+      return [
+        {
+          id: "actions_upload-files-product",
+          className: "main-button_drop-down",
+          icon: MoveReactSvgUrl,
+          label: t("EmptyView:UploadFromPortalTitle", {
+            productName: t("Common:ProductName"),
+          }),
+          onClick: () =>
+            this.onShowFormRoomSelectFileDialog(FilterType.FilesOnly, true),
+          key: "upload-files-product",
+        },
+        {
+          id: "actions_upload-files",
+          className: "main-button_drop-down",
+          icon: ActionsUploadReactSvgUrl,
+          label: t("EmptyView:UploadDeviceOptionTitle"),
+          onClick: () => this.onUploadAction("file"),
+          key: "upload-files",
+        },
+      ];
+    }
 
     const showUploadFolder = !(isMobile || isTablet);
 

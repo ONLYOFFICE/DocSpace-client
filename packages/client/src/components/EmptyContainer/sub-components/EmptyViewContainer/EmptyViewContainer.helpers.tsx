@@ -47,7 +47,7 @@ import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.p
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
 import FormBlankIcon from "PUBLIC_DIR/images/form.blank.react.svg?url";
-
+import CreateChatIcon from "PUBLIC_DIR/images/emptyview/create.chat.svg";
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share-view.svg";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
@@ -63,6 +63,10 @@ import type {
   EmptyViewItemType,
   EmptyViewOptionsType,
 } from "@docspace/shared/components/empty-view";
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
@@ -93,8 +97,17 @@ export const getDescription = (
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
   security: Nullable<TFolderSecurity>,
+  isKnowledgeTab?: boolean,
+  isResultsTab?: boolean,
+  isAIRoom?: boolean,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
+
+  if (isAIRoom) {
+    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeDescription");
+
+    if (isResultsTab) return t("AIRoom:EmptyResultsDescription");
+  }
 
   if (isRootEmptyPage)
     return getRootDescription(
@@ -128,8 +141,17 @@ export const getTitle = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
+  isKnowledgeTab?: boolean,
+  isResultsTab?: boolean,
+  isAIRoom?: boolean,
 ): string => {
   const isNotAdmin = isUser(access);
+
+  if (isAIRoom) {
+    if (isKnowledgeTab) return t("AIRoom:EmptyKnowledgeTitle");
+
+    if (isResultsTab) return t("AIRoom:EmptyResultsTitle");
+  }
 
   if (isRootEmptyPage) return getRootTitle(t, access, rootFolderType);
 
@@ -177,6 +199,9 @@ export const getOptions = (
   logoText: string,
   isVisitor: boolean = true,
   isFrame: boolean = false,
+  isKnowledgeTab?: boolean,
+  isResultsTab?: boolean,
+  isAIRoom?: boolean,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
@@ -423,6 +448,49 @@ export const getOptions = (
   }
 
   if (isArchiveFolderRoot) return [];
+
+  if (isAIRoom) {
+    if (isKnowledgeTab) {
+      const uploadFilesFromDocSpace = createUploadFromDocSpace(
+        t("EmptyView:UploadFromPortalTitle", {
+          productName: t("Common:ProductName"),
+        }),
+        t("EmptyView:SectionsUploadDescription", {
+          sectionNameFirst: t("Common:MyFilesSection"),
+          sectionNameSecond: t("Common:Rooms"),
+        }),
+        FilterType.FilesOnly,
+      );
+
+      const uploadFilesFromDevice = createUploadFromDeviceOption(
+        t("EmptyView:UploadDeviceOptionTitle"),
+        t("EmptyView:UploadDeviceOptionDescription"),
+        "file",
+      );
+
+      return [uploadFilesFromDocSpace, uploadFilesFromDevice];
+    }
+
+    if (isResultsTab)
+      return [
+        {
+          key: "open-chat",
+          title: t("AIRoom:CreateChat"),
+          icon: <CreateChatIcon />,
+          onClick: () => {
+            const filesFilter = FilesFilter.getFilter(window.location);
+
+            filesFilter.aiTab = "empty";
+
+            const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
+
+            window.DocSpace.navigate(`${path}?${filesFilter.toUrlParams()}`);
+          },
+          description: t("AIRoom:CreateChatDescription"),
+          disabled: false,
+        },
+      ];
+  }
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])

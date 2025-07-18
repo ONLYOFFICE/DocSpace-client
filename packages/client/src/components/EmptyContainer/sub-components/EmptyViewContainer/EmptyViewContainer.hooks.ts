@@ -36,6 +36,7 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
   RoomSearchArea,
+  RoomsType,
 } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -71,10 +72,16 @@ export const useEmptyView = (
     rootFolderType,
     isPublicRoom,
     security,
+    selectedFolder,
+    isKnowledgeTab,
+    isResultsTab,
   }: EmptyViewContainerProps,
+
   t: TTranslation,
 ) => {
   const theme = useTheme();
+
+  const isAIRoom = selectedFolder?.roomType === RoomsType.AIRoom;
 
   const emptyViewOptions = useMemo(() => {
     const description = getDescription(
@@ -89,6 +96,9 @@ export const useEmptyView = (
       rootFolderType,
       isPublicRoom,
       security,
+      isKnowledgeTab,
+      isResultsTab,
+      isAIRoom,
     );
     const title = getTitle(
       type,
@@ -100,6 +110,9 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
+      isKnowledgeTab,
+      isResultsTab,
+      isAIRoom,
     );
     const icon = getIcon(
       type,
@@ -125,6 +138,9 @@ export const useEmptyView = (
     isArchiveFolderRoot,
     rootFolderType,
     isPublicRoom,
+    isAIRoom,
+    isKnowledgeTab,
+    isResultsTab,
   ]);
 
   return emptyViewOptions;
@@ -159,10 +175,14 @@ export const useOptions = (
     isVisitor,
     isFrame,
     logoText,
+    isKnowledgeTab,
+    isResultsTab,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
   const navigate = useNavigate();
+
+  const isAIRoom = selectedFolder?.roomType === RoomsType.AIRoom;
 
   const onGoToShared = useCallback(() => {
     const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
@@ -307,6 +327,9 @@ export const useOptions = (
         logoText,
         isVisitor,
         isFrame,
+        isKnowledgeTab,
+        isResultsTab,
+        isAIRoom,
       ),
     [
       type,
@@ -333,6 +356,9 @@ export const useOptions = (
       isVisitor,
       isFrame,
       logoText,
+      isKnowledgeTab,
+      isResultsTab,
+      isAIRoom,
     ],
   );
 

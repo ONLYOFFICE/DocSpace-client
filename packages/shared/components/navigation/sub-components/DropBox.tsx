@@ -159,7 +159,7 @@ const DropBox = ({
           isPlusButtonVisible={isPlusButtonVisible}
         />
 
-        <VariableSizeList
+        {/* <VariableSizeList
           direction={interfaceDirection as Direction}
           height={dropBoxHeight}
           width="auto"
@@ -173,7 +173,7 @@ const DropBox = ({
           outerElementType={CustomScrollbarsVirtualList}
         >
           {Row}
-        </VariableSizeList>
+        </VariableSizeList> */}
       </div>
 
       <VariableSizeList

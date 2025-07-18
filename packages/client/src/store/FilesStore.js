@@ -254,6 +254,8 @@ class FilesStore {
 
   mainButtonVisible = false;
 
+  aiRoomStore = null;
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -268,6 +270,7 @@ class FilesStore {
     currentTariffStatusStore,
     settingsStore,
     indexingStore,
+    aiRoomStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -286,6 +289,7 @@ class FilesStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
+    this.aiRoomStore = aiRoomStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -1772,6 +1776,16 @@ class FilesStore {
             })
             .reverse();
         });
+
+        if (data.current.roomType === RoomsType.AIRoom) {
+          this.aiRoomStore.setCurrentTab(
+            filterData.aiTab === "knowledge"
+              ? "knowledge"
+              : filterData.aiTab === "result"
+                ? "result"
+                : "chat",
+          );
+        }
 
         runInAction(() => {
           this.selectedFolderStore.setSelectedFolder({

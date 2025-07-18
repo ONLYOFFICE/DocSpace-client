@@ -31,9 +31,11 @@ import { inject, observer } from "mobx-react";
 import ContactsTabs from "./ContactsTabs";
 import MyDocumentsTabs from "./MyDocumentsTabs";
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
+import AiRoomTabs from "./AiRoomTabs";
 
 const SectionSubmenuContent = ({
   isPersonalRoom,
+  isAIRoom,
   isRecentTab,
   isRoomsFolderRoot,
   isTemplatesFolder,
@@ -57,6 +59,7 @@ const SectionSubmenuContent = ({
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
   if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
+  if (isAIRoom) return <AiRoomTabs />;
   if (isContacts && (allowInvitingGuests || isCheckGuests))
     return (
       <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
@@ -65,19 +68,26 @@ const SectionSubmenuContent = ({
   return null;
 };
 
-export default inject(({ treeFoldersStore, settingsStore }) => {
-  const { isPersonalRoom, isRecentTab, isRoomsFolderRoot, isTemplatesFolder } =
-    treeFoldersStore;
+export default inject(
+  ({ treeFoldersStore, settingsStore, selectedFolderStore }) => {
+    const {
+      isPersonalRoom,
+      isRecentTab,
+      isRoomsFolderRoot,
+      isTemplatesFolder,
+    } = treeFoldersStore;
 
-  const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
+    const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
 
-  return {
-    isPersonalRoom,
-    isRecentTab,
-    isRoomsFolderRoot,
-    isTemplatesFolder,
-    allowInvitingGuests,
-    checkGuests,
-    hasGuests,
-  };
-})(observer(SectionSubmenuContent));
+    return {
+      isPersonalRoom,
+      isAIRoom: selectedFolderStore.isAIRoom,
+      isRecentTab,
+      isRoomsFolderRoot,
+      isTemplatesFolder,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
+    };
+  },
+)(observer(SectionSubmenuContent));

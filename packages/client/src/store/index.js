@@ -87,8 +87,11 @@ import EditGroupStore from "./contacts/EditGroupStore";
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
+import AiRoomStore from "./AiRoomStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
+
+const aiRoomStore = new AiRoomStore();
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -165,6 +168,7 @@ const filesStore = new FilesStore(
   currentTariffStatusStore,
   settingsStore,
   indexingStore,
+  aiRoomStore,
 );
 
 const guidanceStore = new GuidanceStore();
@@ -406,6 +410,8 @@ const store = {
   brandingStore,
 
   guidanceStore,
+
+  aiRoomStore,
 };
 
 export default store;

@@ -173,6 +173,9 @@ const SectionHeaderContent = (props) => {
     showTemplateBadge,
 
     allowInvitingMembers,
+
+    isAIRoom,
+    isKnowledgeTab,
   } = props;
 
   const location = useLocation();
@@ -518,11 +521,12 @@ const SectionHeaderContent = (props) => {
           ? stateTitle
           : title;
 
-  const currentCanCreate = isFlowsPage
-    ? false
-    : isLoading && hasOwnProperty(location?.state, "canCreate")
-      ? stateCanCreate
-      : security?.Create;
+  const currentCanCreate =
+    isAIRoom && !isKnowledgeTab
+      ? false
+      : isLoading && hasOwnProperty(location?.state, "canCreate")
+        ? stateCanCreate
+        : security?.Create;
 
   const currentRootRoomTitle =
     isLoading && stateRootRoomTitle
@@ -765,6 +769,7 @@ export default inject(
     indexingStore,
     dialogsStore,
     guidanceStore,
+    aiRoomStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -930,7 +935,7 @@ export default inject(
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
 
-    const withChat = isAIRoom;
+    const { isKnowledgeTab } = aiRoomStore;
 
     return {
       showText: settingsStore.showText,
@@ -1037,7 +1042,8 @@ export default inject(
       showTemplateBadge: isTemplate && !isRoot,
       allowInvitingMembers,
 
-      withChat,
+      isAIRoom,
+      isKnowledgeTab,
     };
   },
 )(

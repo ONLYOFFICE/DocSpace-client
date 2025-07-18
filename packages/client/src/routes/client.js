@@ -241,6 +241,24 @@ const ClientRoutes = [
               return { Component };
             },
           },
+          {
+            path: "rooms/shared/:room/chat",
+            async lazy() {
+              const { ChatView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Chat"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <ChatView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
 
           {
             path: "rooms/archived",
@@ -438,26 +456,6 @@ const ClientRoutes = [
           </ErrorBoundary>
         </PrivateRoute>
       );
-
-      return { Component };
-    },
-  },
-  {
-    path: "/chat/:room",
-    async lazy() {
-      const { ChatView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Chat"),
-      );
-
-      const Component = () => {
-        return (
-          <PrivateRoute>
-            <ErrorBoundary>
-              <ChatView />
-            </ErrorBoundary>
-          </PrivateRoute>
-        );
-      };
 
       return { Component };
     },

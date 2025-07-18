@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { injectDefaultTheme } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 
 const StyledParam = styled.div.attrs(injectDefaultTheme)<{
   storageLocation?: boolean;
@@ -91,6 +91,10 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
     display: flex;
     flex-direction: row;
     gap: 8px;
+
+    @media ${mobile} {
+      flex-direction: column;
+    }
 
     .ai-button-icon {
       div {

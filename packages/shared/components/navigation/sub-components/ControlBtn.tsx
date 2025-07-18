@@ -183,16 +183,6 @@ const ControlButtons = ({
     >
       {isPlusButtonVisible ? renderPlusButton() : null}
       {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
-      {isRootFolder ? null : (
-        <Button
-          size={ButtonSize.extraSmall}
-          label="Open chat"
-          primary
-          onClick={() => {
-            window.open("/chat/19", "_blank");
-          }}
-        />
-      )}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
       {renderWarning()}

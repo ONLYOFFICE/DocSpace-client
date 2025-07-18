@@ -74,8 +74,7 @@ export const CategoryType = Object.freeze({
   Settings: 8,
   Accounts: 9,
   PublicRoom: 10,
-  Flows: 11,
-  AIRoom: 12,
+  Chat: 11,
 });
 
 /**

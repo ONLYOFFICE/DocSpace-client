@@ -97,6 +97,9 @@ export interface InjectedEmptyViewContainerProps
   isVisitor?: boolean;
   isFrame?: boolean;
   logoText: string;
+  isKnowledgeTab?: boolean;
+  isResultsTab?: boolean;
+  isAIRoom?: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

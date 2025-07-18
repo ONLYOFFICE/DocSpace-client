@@ -399,13 +399,13 @@ const PureHome = (props) => {
           </Section.SectionHeader>
         ) : null}
 
-        <Section.SectionSubmenu>
-          <SectionSubmenuContent />
-        </Section.SectionSubmenu>
-
         <Section.SectionWarning>
           <SectionWarningContent />
         </Section.SectionWarning>
+
+        <Section.SectionSubmenu>
+          <SectionSubmenuContent />
+        </Section.SectionSubmenu>
 
         {shouldRenderSectionFilter ? (
           <Section.SectionFilter>

@@ -39,6 +39,7 @@ import {
   FILTER_ARCHIVE_ROOM,
   FILTER_SHARED_ROOM,
   FILTER_TEMPLATES_ROOM,
+  FILTER_TRASH_ROOM,
 } from "../../utils/filterConstants";
 import { getUserFilter, setUserFilter } from "../../utils/userFilterUtils";
 import { TSortOrder, TSortBy, Nullable } from "../../types";
@@ -137,7 +138,9 @@ class RoomsFilter {
             ? `${FILTER_ARCHIVE_ROOM}=${userId}`
             : defaultFilter.searchArea === RoomSearchArea.Templates
               ? `${FILTER_TEMPLATES_ROOM}=${userId}`
-              : "";
+              : defaultFilter.searchArea === RoomSearchArea.Trash
+                ? `${FILTER_TRASH_ROOM}=${userId}`
+                : "";
 
       try {
         const filterStorageItem = getUserFilter(storageKey);

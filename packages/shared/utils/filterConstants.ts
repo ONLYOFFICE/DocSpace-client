@@ -35,6 +35,7 @@ export const FILTER_TRASH = "UserFilterTrash";
 export const FILTER_SHARED_ROOM = "UserRoomsSharedFilter";
 export const FILTER_ARCHIVE_ROOM = "UserRoomsArchivedFilter";
 export const FILTER_TEMPLATES_ROOM = "UserRoomsTemplatesFilter";
+export const FILTER_TRASH_ROOM = "UserRoomsTrashFilter";
 
 // Room document filters
 export const FILTER_ROOM_DOCUMENTS = "UserFilterSharedRoom";

@@ -28,7 +28,6 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 
 import moment from "moment";
-import classNames from "classnames";
 
 import { Text } from "../../text";
 import { Link, LinkType } from "../../link";
@@ -165,9 +164,7 @@ const ExpiredComboBox = ({
     <div ref={bodyRef}>
       {isExpired ? (
         <Text
-          className={classNames(styles.expireText, {
-            [styles.expireTextRoom]: isRoomsLink,
-          })}
+          className={styles.expireText}
           as="div"
           fontSize="12px"
           fontWeight="400"
@@ -185,9 +182,7 @@ const ExpiredComboBox = ({
         </Text>
       ) : (
         <Text
-          className={classNames(styles.expireText, {
-            [styles.expireTextRoom]: isRoomsLink,
-          })}
+          className={styles.expireText}
           as="div"
           fontSize="12px"
           fontWeight="400"

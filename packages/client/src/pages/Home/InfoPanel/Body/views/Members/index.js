@@ -49,6 +49,9 @@ import {
   LINKS_LIMIT_COUNT,
 } from "@docspace/shared/constants";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { createExternalLink } from "@docspace/shared/api/rooms";
+
+import { LinkType } from "SRC_DIR/helpers/constants";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
@@ -147,6 +150,24 @@ const Members = ({
       guestsTitleCount;
 
   const onAddNewLink = async () => {
+    if (isPublicRoom || primaryLink) {
+      const roomId = infoPanelSelection.id;
+
+      try {
+        await createExternalLink(
+          roomId,
+          ShareAccessRights.ReadOnly,
+          LinkType.External,
+          true,
+        );
+      } catch (error) {
+        toastr.error(error);
+        console.error(error);
+      }
+
+      return;
+    }
+
     getPrimaryLink(infoPanelSelection.id).then((link) => {
       setExternalLink(link, searchParams, setSearchParams, isCustomRoom);
       copyShareLink(link.sharedTo.shareLink);

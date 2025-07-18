@@ -446,6 +446,38 @@ export function editExternalLink(
     skipRedirect,
   );
 }
+export function createExternalLink(
+  roomId: number | string,
+  access: ShareAccessRights,
+  linkType: number,
+  internal: boolean,
+  denyDownload: boolean = false,
+  title?: string,
+  disabled?: boolean,
+  password?: string | null = null,
+  expirationDate?: moment.Moment,
+) {
+  const skipRedirect = true;
+
+  return request(
+    {
+      method: "put",
+
+      url: `/files/rooms/${roomId}/links`,
+      data: {
+        title,
+        access,
+        expirationDate,
+        linkType,
+        password,
+        disabled,
+        denyDownload,
+        internal,
+      },
+    },
+    skipRedirect,
+  );
+}
 
 export function getExternalLinks(roomId, type) {
   const linkType = `?type=${type}`;

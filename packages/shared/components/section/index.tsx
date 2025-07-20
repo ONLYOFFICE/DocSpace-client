@@ -124,6 +124,8 @@ const Section = (props: SectionProps) => {
     needErrorChecking,
 
     withTabs,
+
+    withoutFooter = false,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -309,7 +311,9 @@ const Section = (props: SectionProps) => {
               <SubSectionBodyContent>
                 {sectionBodyContent}
               </SubSectionBodyContent>
-              <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
+              {withoutFooter ? null : (
+                <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
+              )}
             </SubSectionBody>
           ) : null}
 

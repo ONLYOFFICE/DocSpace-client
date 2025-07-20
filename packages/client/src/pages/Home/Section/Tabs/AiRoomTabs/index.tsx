@@ -108,6 +108,7 @@ const AiRoomTabs = ({
       selectedItemId={currentTab ?? "chat"}
       items={items}
       onSelect={onSelect}
+      withoutStickyIntend
     />
   );
 };

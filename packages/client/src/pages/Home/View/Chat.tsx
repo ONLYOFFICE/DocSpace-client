@@ -40,16 +40,7 @@ const ChatComponent = ({
   const { room } = useParams();
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        width: "100%",
-        height: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <Chat userAvatar={userAvatar} roomId={room ?? "1"} getIcon={getIcon} />
-    </div>
+    <Chat userAvatar={userAvatar} roomId={room ?? "1"} getIcon={getIcon} />
   );
 };
 

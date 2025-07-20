@@ -398,7 +398,10 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <SectionWrapper {...sectionProps}>
+      <SectionWrapper
+        {...sectionProps}
+        withoutFooter={window.location.pathname.includes("chat")}
+      >
         {!isErrorRoomNotAvailable || isContactsPage || isSettingsPage ? (
           <Section.SectionHeader>
             <SectionHeaderContent />

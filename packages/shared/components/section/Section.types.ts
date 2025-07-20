@@ -162,6 +162,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     vectorizedFiles?: TFile[];
     user?: TUser;
     withTabs?: boolean;
+    withoutFooter?: boolean;
   };
 
 export type SectionContextMenuProps = {

@@ -25,9 +25,55 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { ReactSVG } from "react-svg";
 
-const FilesList = () => {
-  return <div>asd</div>;
+import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/close.circe.react.svg?url";
+
+import { TFile } from "../../../../api/files/types";
+
+import { Text } from "../../../text";
+import { IconButton } from "../../../icon-button";
+import { Scrollbar } from "../../../scrollbar";
+
+import { ChatProps } from "../../types";
+
+import styles from "./ChatInput.module.scss";
+
+type FilesListProps = {
+  files: Partial<TFile>[];
+  getIcon: ChatProps["getIcon"];
+  onRemove: (file: Partial<TFile>) => void;
+};
+
+const FilesList = ({ files, getIcon, onRemove }: FilesListProps) => {
+  if (!files.length) return null;
+
+  return (
+    <div className={styles.filesList}>
+      <Scrollbar noScrollY>
+        <div style={{ width: "fit-content", display: "flex", gap: 6 }}>
+          {files.map((file) => (
+            <div className={styles.filesListItem} key={file.id}>
+              <ReactSVG
+                src={getIcon(24, file.fileExst!)}
+                className={styles.filesListItemIcon}
+              />
+
+              <div className={styles.filesListItemInfo}>
+                <Text>{file.title}</Text>
+                <IconButton
+                  iconName={CloseCircleReactSvgUrl}
+                  size={16}
+                  isClickable
+                  onClick={() => onRemove(file)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </Scrollbar>
+    </div>
+  );
 };
 
 export default FilesList;

@@ -311,7 +311,7 @@ export default class MessageStore {
     }
   };
 
-  startChat = async (message: string) => {
+  startChat = async (message: string, files: string[]) => {
     this.addUserMessage(message);
 
     this.isRequestRunning = true;
@@ -323,6 +323,7 @@ export default class MessageStore {
     const stream = await startNewChat(
       this.roomId,
       message,
+      files,
       this.roomId,
       this.abortController,
     );
@@ -330,7 +331,7 @@ export default class MessageStore {
     await this.startStream(stream);
   };
 
-  sendMessage = async (message: string) => {
+  sendMessage = async (message: string, files: string[]) => {
     this.addUserMessage(message);
 
     this.isRequestRunning = true;
@@ -342,6 +343,7 @@ export default class MessageStore {
     const stream = await sendMessageToChat(
       this.currentChatId,
       message,
+      files,
       this.roomId,
       this.abortController,
     );

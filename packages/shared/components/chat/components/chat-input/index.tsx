@@ -29,13 +29,9 @@ import classNames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
-import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
-import AttachmentReactSvgUrl from "PUBLIC_DIR/images/attachment.react.svg?url";
+import { TFile } from "../../../../api/files/types";
 
 import { Textarea } from "../../../textarea";
-import { IconButton } from "../../../icon-button";
-import { Text } from "../../../text";
 
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
@@ -44,8 +40,10 @@ import { ChatInputProps } from "../../types";
 
 import ToolsSettings from "./ToolsSettings";
 import Attachment from "./Attachment";
+import FilesList from "./FilesList";
 
 import styles from "./ChatInput.module.scss";
+import Buttons from "./Buttons";
 
 const ChatInput = ({ getIcon }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
@@ -53,14 +51,16 @@ const ChatInput = ({ getIcon }: ChatInputProps) => {
   const {
     startChat,
     sendMessage,
-    stopMessage,
-    isRequestRunning,
+
     currentChatId,
   } = useMessageStore();
   const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
   const [inputWidth, setInputWidth] = React.useState(0);
+  const [selectedFiles, setSelectedFiles] = React.useState<Partial<TFile>[]>(
+    [],
+  );
 
   const [isFilesSelectorVisible, setIsFilesSelectorVisible] =
     React.useState(false);
@@ -80,23 +80,30 @@ const ChatInput = ({ getIcon }: ChatInputProps) => {
     setValue(val);
   };
 
+  const handleRemoveFile = (file: Partial<TFile>) => {
+    setSelectedFiles((prev) => prev.filter((f) => f.id !== file.id));
+  };
+
   const sendMessageAction = React.useCallback(async () => {
     try {
       if (!currentChatId) {
-        startChat(value);
-
-        setValue("");
-
-        return;
+        startChat(
+          value,
+          selectedFiles.map((file) => file.id!.toString()),
+        );
+      } else {
+        sendMessage(
+          value,
+          selectedFiles.map((file) => file.id!.toString()),
+        );
       }
 
-      sendMessage(value);
-
       setValue("");
+      setSelectedFiles([]);
     } catch (e) {
       console.log(e);
     }
-  }, [currentChatId, startChat, sendMessage, value]);
+  }, [currentChatId, startChat, sendMessage, value, selectedFiles]);
 
   const onKeyEnter = React.useCallback(
     (e: KeyboardEvent) => {
@@ -147,6 +154,7 @@ const ChatInput = ({ getIcon }: ChatInputProps) => {
     prevSession.current = currentChatId;
 
     setValue("");
+    setSelectedFiles([]);
   }, [currentChatId, currentChat, fetchChat]);
 
   React.useEffect(() => {
@@ -160,18 +168,6 @@ const ChatInput = ({ getIcon }: ChatInputProps) => {
       window.removeEventListener("resize", onResize);
     };
   }, []);
-
-  const placeholder = t("Common:AIChatInput");
-
-  const sendIconProps = !isRequestRunning
-    ? { onClick: sendMessageAction, isDisabled: false, iconNode: null }
-    : {
-        onClick: stopMessage,
-        isDisabled: false,
-        iconNode: isRequestRunning ? (
-          <div className={styles.whiteSquare} />
-        ) : null,
-      };
 
   return (
     <>
@@ -189,60 +185,33 @@ const ChatInput = ({ getIcon }: ChatInputProps) => {
           className={styles.chatInputTextArea}
           wrapperClassName={classNames({
             [styles.chatInputTextAreaWrapper]: true,
+            [styles.chatInputTextAreaWrapperFiles]: selectedFiles.length > 0,
           })}
-          placeholder={placeholder}
+          placeholder={t("Common:AIChatInput")}
           isChatMode
         />
 
-        <div
-          className={styles.chatInputButtons}
-          style={{ width: `${inputWidth}px` }}
-        >
-          <div className={styles.chatInputButtonsTools}>
-            <div
-              className={classNames(styles.chatInputButton, {
-                [styles.activeChatInputButton]: isFilesSelectorVisible,
-              })}
-              onClick={toggleFilesSelector}
-            >
-              <IconButton
-                iconName={AttachmentReactSvgUrl}
-                size={16}
-                isFill={false}
-              />
-            </div>
-            <div
-              ref={toolSettingsRef}
-              className={classNames(styles.chatInputButton, {
-                [styles.activeChatInputButton]: isMcpToolsVisible,
-              })}
-              onClick={toggleMcpTools}
-            >
-              <IconButton
-                iconName={McpToolReactSvgUrl}
-                size={16}
-                isFill={false}
-              />
-              <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
-                {t("Tools")}
-              </Text>
-            </div>
-          </div>
-          <IconButton
-            iconName={SendReactSvgUrl}
-            size={16}
-            isClickable
-            className={classNames(styles.chatInputButtonsSend, {
-              [styles.disabled]: false,
-            })}
-            {...sendIconProps}
-          />
-        </div>
+        <FilesList
+          files={selectedFiles}
+          getIcon={getIcon}
+          onRemove={handleRemoveFile}
+        />
+
+        <Buttons
+          inputWidth={inputWidth}
+          isFilesSelectorVisible={isFilesSelectorVisible}
+          toggleFilesSelector={toggleFilesSelector}
+          isMcpToolsVisible={isMcpToolsVisible}
+          toggleMcpTools={toggleMcpTools}
+          toolSettingsRef={toolSettingsRef}
+          sendMessageAction={sendMessageAction}
+        />
       </div>
       <Attachment
         isVisible={isFilesSelectorVisible}
         toggleAttachment={toggleFilesSelector}
         getIcon={getIcon}
+        setSelectedFiles={setSelectedFiles}
       />
       <ToolsSettings
         isVisible={isMcpToolsVisible}

@@ -30,7 +30,11 @@ import { useTranslation } from "react-i18next";
 import { DeviceType, FolderType } from "../../../../enums";
 import { isDesktop, isTablet } from "../../../../utils";
 
+import { TFile } from "../../../../api/files/types";
+
 import FilesSelector from "../../../../selectors/Files";
+
+import { TSelectorItem } from "../../../selector";
 
 import { ChatInputProps } from "../../types";
 import { CHAT_SUPPORTED_FORMATS } from "../../constants";
@@ -38,16 +42,39 @@ import { CHAT_SUPPORTED_FORMATS } from "../../constants";
 type AttachmentProps = {
   isVisible: boolean;
   toggleAttachment: VoidFunction;
-
   getIcon: ChatInputProps["getIcon"];
+  setSelectedFiles: (files: Partial<TFile>[]) => void;
 };
 
 const Attachment = ({
   isVisible,
   toggleAttachment,
   getIcon,
+  setSelectedFiles,
 }: AttachmentProps) => {
   const { t } = useTranslation(["Common"]);
+
+  const [tempSelectedFiles, setTempSelectedFiles] = React.useState<
+    Partial<TFile>[]
+  >([]);
+
+  const onSelectItem = (item: TSelectorItem) => {
+    if (!item.id || !item.fileExst) return;
+
+    if (tempSelectedFiles.some((file) => file.id === item.id)) {
+      setTempSelectedFiles((prev) =>
+        prev.filter((file) => file.id !== item.id),
+      );
+      return;
+    }
+
+    setTempSelectedFiles((prev) => [
+      ...prev,
+      { id: Number(item.id), title: item.label, fileExst: item.fileExst },
+    ]);
+  };
+
+  if (!isVisible) return null;
 
   return (
     <FilesSelector
@@ -70,17 +97,12 @@ const Attachment = ({
 
         return false;
       }}
-      onSubmit={(
-        selectedItemId,
-        folderTitle,
-        isPublic,
-        breadCrumbs,
-        fileName,
-        selectedTreeNode,
-        fileInfo,
-      ) => {
-        console.log(fileInfo);
+      onSubmit={() => {
+        setSelectedFiles(tempSelectedFiles);
+        setTempSelectedFiles([]);
+        toggleAttachment();
       }}
+      onSelectItem={onSelectItem}
       withHeader
       headerProps={{
         headerLabel: t("Common:SelectFile"),
@@ -107,6 +129,7 @@ const Attachment = ({
       descriptionText=""
       getFilesArchiveError={() => ""}
       filterParam={CHAT_SUPPORTED_FORMATS}
+      isMultiSelect
       currentDeviceType={
         isDesktop()
           ? DeviceType.desktop

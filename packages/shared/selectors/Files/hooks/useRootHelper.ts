@@ -94,6 +94,7 @@ const useRootHelper = ({
           security: folder.security,
           isFolder: true,
           avatar,
+          disableMultiSelect: true,
         });
       }
     });

@@ -215,6 +215,8 @@ const Selector = ({
     );
 
     if (isMultiSelect) {
+      if (item.disableMultiSelect) return;
+
       if (item.isSelected) {
         setNewSelectedItems((value) => {
           const newValue = value.filter((x) => x.id !== item.id);

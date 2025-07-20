@@ -124,6 +124,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       userType,
       fileExst: ext,
       isTemplate,
+      disableMultiSelect,
     } = item;
 
     if (isInputItem) {
@@ -303,16 +304,14 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           >
             {disabledText}
           </Text>
-        ) : (
-          isMultiSelect && (
-            <Checkbox
-              className={classNames(styles.checkbox, "checkbox")}
-              isChecked={isSelected}
-              isDisabled={isDisabled}
-              onChange={onChangeAction}
-            />
-          )
-        )}
+        ) : disableMultiSelect ? null : isMultiSelect ? (
+          <Checkbox
+            className={classNames(styles.checkbox, "checkbox")}
+            isChecked={isSelected}
+            isDisabled={isDisabled}
+            onChange={onChangeAction}
+          />
+        ) : null}
       </div>
     );
   };

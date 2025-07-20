@@ -623,6 +623,7 @@ export type TSelectorItem = TSelectorItemType & {
   isTemplate?: boolean;
   templateAccess?: ShareAccessRights;
   templateIsOwner?: boolean;
+  disableMultiSelect?: boolean;
 };
 
 export type Data = {

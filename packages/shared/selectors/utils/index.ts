@@ -81,6 +81,8 @@ export const convertRoomsToItems: (
       shared,
       lifetimeTooltip,
       cover,
+      disableMultiSelect: true,
+
       ...iconProp,
     };
   });
@@ -181,6 +183,7 @@ export const convertFoldersToItems: (
       rootFolderType,
       isFolder: true,
       isDisabled,
+      disableMultiSelect: true,
     };
   });
 

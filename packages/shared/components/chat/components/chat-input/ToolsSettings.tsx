@@ -126,6 +126,8 @@ const ToolsSettings = ({
     fetchTools();
   }, [roomId]);
 
+  if (!isVisible) return;
+
   return (
     <DropDown
       open={isVisible}

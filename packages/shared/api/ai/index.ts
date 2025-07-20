@@ -121,6 +121,7 @@ export const setCurrentModel = async (data: TCurrentModel) => {
 export const startNewChat = async (
   roomId: number | string,
   message: string,
+  files: string[],
   contextFolderId: string | number,
   abortController?: AbortController,
 ) => {
@@ -133,7 +134,7 @@ export const startNewChat = async (
       Authorization: authHeader,
     },
     signal: abortController?.signal,
-    body: JSON.stringify({ message, contextFolderId }),
+    body: JSON.stringify({ message, contextFolderId, files }),
   });
 
   if (!response.ok) {
@@ -146,6 +147,7 @@ export const startNewChat = async (
 export const sendMessageToChat = async (
   chatId: string,
   message: string,
+  files: string[],
   contextFolderId: string | number,
   abortController?: AbortController,
 ) => {
@@ -158,7 +160,7 @@ export const sendMessageToChat = async (
       Authorization: authHeader,
     },
     signal: abortController?.signal,
-    body: JSON.stringify({ message, contextFolderId }),
+    body: JSON.stringify({ message, contextFolderId, files }),
   });
 
   if (!response.ok) {

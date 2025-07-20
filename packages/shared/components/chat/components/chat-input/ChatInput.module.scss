@@ -61,6 +61,8 @@
   }
 
   .chatInputTextAreaWrapperFiles {
+    padding: 50px 8px 44px;
+
     min-height: 160px !important;
     max-height: 216px !important;
   }
@@ -102,16 +104,34 @@
 
     cursor: pointer;
 
+    p {
+      color: var(--chat-input-tools-button-color);
+    }
+
     svg {
       cursor: pointer;
       path {
-        fill: var(--text-color);
+        fill: var(--chat-input-tools-button-color);
       }
+    }
+
+    &:hover {
+      background-color: var(--chat-input-tools-button-hover-background);
     }
   }
 
   .activeChatInputButton {
-    background-color: #eceef1;
+    background-color: var(--chat-input-tools-button-active-background);
+
+    p {
+      color: var(--chat-input-tools-button-active-color);
+    }
+
+    svg {
+      path {
+        fill: var(--chat-input-tools-button-active-color);
+      }
+    }
   }
 }
 
@@ -121,7 +141,7 @@
 
   border: none;
 
-  background-color: var(--accent-main);
+  background-color: var(--chat-input-send-button-background);
 
   border-radius: 3px;
 
@@ -135,21 +155,19 @@
 
   svg {
     path {
-      fill: var(--chat-input-button-send-color) !important;
+      fill: var(--chat-input-send-button-color) !important;
     }
   }
 
-  &.disabled {
-    opacity: 0.6;
-
-    cursor: not-allowed;
+  &:hover {
+    opacity: 0.85;
   }
 
-  &.whiteSquare {
+  .square {
     width: 12px;
     height: 12px;
 
-    background-color: #fff;
+    background-color: var(--chat-input-send-button-color);
 
     border-radius: 2px;
   }
@@ -166,7 +184,11 @@
 }
 
 .filesList {
+  width: 100%;
+
   position: absolute;
+
+  height: 44px;
 
   top: 6px;
 
@@ -176,7 +198,42 @@
   flex-direction: row;
   align-items: center;
 
-  gap: 6px;
-
   box-sizing: border-box;
+
+  .filesListItem {
+    width: fit-content;
+    min-width: fit-content;
+    height: 32px;
+
+    padding-inline-end: 8px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid var(--chat-input-file-border-color);
+    background-color: var(--chat-input-file-background-color);
+
+    border-radius: 6px;
+
+    .filesListItemIcon {
+      width: 32px;
+      height: 32px;
+
+      div {
+        width: 32px;
+        height: 32px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  .filesListItemInfo {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+  }
 }

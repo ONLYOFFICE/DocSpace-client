@@ -506,6 +506,7 @@ class InfoPanelStore {
     return (
       pathname.indexOf("files") !== -1 ||
       pathname.indexOf("personal") !== -1 ||
+      pathname.indexOf("recent") !== -1 ||
       pathname.indexOf("media") !== -1
     );
   };

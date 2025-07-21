@@ -260,7 +260,7 @@ export const useOptions = (
 
   const uploadFromDocspace = useCallback(
     (
-      filterParam: FilesSelectorFilterTypes | FilterType,
+      filterParam: FilesSelectorFilterTypes | FilterType | string,
       openRoot: boolean = true,
     ) => {
       setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);

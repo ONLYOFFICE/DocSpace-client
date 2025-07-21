@@ -52,6 +52,7 @@ import RoomTypeDropdown from "./RoomTypeDropdown";
 import PermanentSettings from "./PermanentSettings";
 import ThirdPartyStorage from "./ThirdPartyStorage";
 import TemplateAccess from "./TemplateAccess/TemplateAccess";
+import RoomTrash from "./RoomTrash";
 // import IsPrivateParam from "./IsPrivateParam";
 
 const StyledSetRoomParams = styled.div`
@@ -522,6 +523,8 @@ const SetRoomParams = ({
           isTemplate={isTemplate || fromTemplate}
         />
       ) : null}
+
+      <RoomTrash />
 
       {!isEdit && enableThirdParty && isPublicRoom && !fromTemplate ? (
         <ThirdPartyStorage

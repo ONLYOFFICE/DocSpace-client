@@ -27,7 +27,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/close.circe.react.svg?url";
+import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
 import { TFile } from "../../../../api/files/types";
 

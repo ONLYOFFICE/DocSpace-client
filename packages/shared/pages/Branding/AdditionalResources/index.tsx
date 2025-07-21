@@ -125,7 +125,7 @@ export const AdditionalResources = ({
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         showReminder={(isSettingPaid && hasChanges) || isLoading}
         disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
         additionalClassSaveButton="additional-resources-save"

@@ -66,6 +66,13 @@ const ChangeNameDialog = (props) => {
   const [isNameValid, setIsNameValid] = useState(true);
   const [isSurnameValid, setIsSurnameValid] = useState(true);
 
+  const isLastNameFirst =
+    profile.displayName &&
+    profile.firstName &&
+    profile.lastName &&
+    profile.displayName.trim().indexOf(profile.lastName.trim()) <
+      profile.displayName.trim().indexOf(profile.firstName.trim());
+
   const handleNameChange = (e) => {
     setFirstName(e.target.value);
     setIsNameValid(nameRegex.test(e.target.value.trim()));
@@ -125,54 +132,64 @@ const ChangeNameDialog = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBodyContent>
-          <FieldContainer
-            isVertical
-            labelText={t("Common:FirstName")}
-            className="field"
-            hasError={!isNameValid}
-            errorMessage={
-              firstName.trim().length === 0
-                ? t("Common:RequiredField")
-                : t("Common:IncorrectFirstName")
-            }
-          >
-            <TextInput
-              className="first-name"
-              scale
-              isAutoFocussed
-              value={firstName}
-              onChange={handleNameChange}
-              placeholder={t("Common:FirstName")}
-              isDisabled={isSaving}
-              onKeyDown={onKeyDown}
-              tabIndex={1}
-              hasError={!isNameValid}
-            />
-          </FieldContainer>
+          {(() => {
+            const fields = [
+              {
+                id: "firstName",
+                label: t("Common:FirstName"),
+                value: firstName,
+                onChange: handleNameChange,
+                placeholder: t("Common:FirstName"),
+                hasError: !isNameValid,
+                errorMessage:
+                  firstName.trim().length === 0
+                    ? t("Common:RequiredField")
+                    : t("Common:IncorrectFirstName"),
+                className: "first-name",
+              },
+              {
+                id: "lastName",
+                label: t("Common:LastName"),
+                value: lastName,
+                onChange: handleSurnameChange,
+                placeholder: t("Common:LastName"),
+                hasError: !isSurnameValid,
+                errorMessage:
+                  lastName.trim().length === 0
+                    ? t("Common:RequiredField")
+                    : t("Common:IncorrectLastName"),
+                className: "last-name",
+              },
+            ];
 
-          <FieldContainer
-            isVertical
-            labelText={t("Common:LastName")}
-            className="field"
-            hasError={!isSurnameValid}
-            errorMessage={
-              lastName.trim().length === 0
-                ? t("Common:RequiredField")
-                : t("Common:IncorrectLastName")
-            }
-          >
-            <TextInput
-              className="last-name"
-              scale
-              value={lastName}
-              onChange={handleSurnameChange}
-              placeholder={t("Common:LastName")}
-              isDisabled={isSaving}
-              onKeyDown={onKeyDown}
-              tabIndex={2}
-              hasError={!isSurnameValid}
-            />
-          </FieldContainer>
+            const orderedFields = isLastNameFirst
+              ? [fields[1], fields[0]]
+              : fields;
+
+            return orderedFields.map((field, index) => (
+              <FieldContainer
+                key={field.id}
+                isVertical
+                labelText={field.label}
+                className="field"
+                hasError={field.hasError}
+                errorMessage={field.errorMessage}
+              >
+                <TextInput
+                  className={field.className}
+                  scale
+                  isAutoFocussed={index === 0}
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder={field.placeholder}
+                  isDisabled={isSaving}
+                  onKeyDown={onKeyDown}
+                  tabIndex={index + 1}
+                  hasError={field.hasError}
+                />
+              </FieldContainer>
+            ));
+          })()}
         </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>

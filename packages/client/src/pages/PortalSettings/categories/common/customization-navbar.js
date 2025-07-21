@@ -94,6 +94,8 @@ const CustomizationNavbar = ({
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
+          withPaidBadge={!isSettingPaid}
+          badgeLabel={t("Common:Paid")}
         />
       ) : null}
       <MobileCategoryWrapper

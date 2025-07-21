@@ -125,7 +125,9 @@ describe("BrandName", () => {
     renderComponent();
     const input = screen.getByTestId("logo-text-input");
     fireEvent.change(input, { target: { value: "New Brand" } });
-    expect(screen.getByText("YouHaveUnsavedChanges")).toBeInTheDocument();
+    expect(
+      screen.getByText("Common:YouHaveUnsavedChanges"),
+    ).toBeInTheDocument();
   });
 
   it("disables input when isSettingPaid is false", () => {

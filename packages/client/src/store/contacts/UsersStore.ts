@@ -28,11 +28,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
-import {
-  TFilterSortBy,
-  TSortOrder,
-  TUser,
-} from "@docspace/shared/api/people/types";
+import { TUser } from "@docspace/shared/api/people/types";
 import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
 
 import {
@@ -44,6 +40,15 @@ import {
 import { getUserType } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import {
+  getUserFilter,
+  setUserFilter,
+} from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_GUESTS,
+  FILTER_INSIDE_GROUPS,
+  FILTER_PEOPLE,
+} from "@docspace/shared/utils/filterConstants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -265,20 +270,25 @@ class UsersStore {
         } catch (e) {
           console.error(e);
         }
+
+        return;
       }
 
       if (
         (isCollaborator || isVisitor) &&
-        (pathname.includes("accounts/people") ||
-          pathname.includes("portal-settings"))
+        (pathname.includes("accounts") || pathname.includes("portal-settings"))
       ) {
         window.DocSpace.navigate(
           combineUrl(window.ClientConfig?.proxy?.url, "/"),
         );
+
+        return;
       }
 
-      if ((isAdmin || isRoomAdmin) && pathname.includes("accounts/people")) {
+      if ((isAdmin || isRoomAdmin) && pathname.includes("accounts")) {
         this.getUsersList();
+
+        return;
       }
 
       const isArchive = pathname.includes("rooms/archived");
@@ -374,16 +384,18 @@ class UsersStore {
 
     const key =
       this.contactsTab === "inside_group"
-        ? `InsideGroupFilter=${this.userStore.user?.id}`
+        ? `${FILTER_INSIDE_GROUPS}=${this.userStore.user?.id}`
         : this.contactsTab === "guests"
-          ? `PeopleFilter=${this.userStore.user?.id}`
-          : `GuestsFilter=${this.userStore.user?.id}`;
+          ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
+          : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
-    if (key) {
-      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    const value = {
+      sortBy: filter.sortBy,
+      pageCount: filter.pageCount,
+      sortOrder: filter.sortOrder,
+    };
+    setUserFilter(key, value);
 
-      localStorage.setItem(key, value);
-    }
     setContactsUsersFilterUrl(
       filter,
       this.contactsTab,
@@ -443,10 +455,10 @@ class UsersStore {
 
     const localStorageKey =
       this.contactsTab === "inside_group"
-        ? `InsideGroupFilter=${this.userStore.user?.id}`
+        ? `${FILTER_INSIDE_GROUPS}=${this.userStore.user?.id}`
         : this.contactsTab === "guests"
-          ? `PeopleFilter=${this.userStore.user?.id}`
-          : `GuestsFilter=${this.userStore.user?.id}`;
+          ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
+          : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
     const guestsTabVisitedStorage = window.localStorage.getItem(
       `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
@@ -455,14 +467,13 @@ class UsersStore {
     if (guestsTabVisitedStorage && !this.guestsTabVisited) {
       this.guestsTabVisited = true;
     }
-    const filterStorageItem = localStorage.getItem(localStorageKey);
 
-    if (filterStorageItem && withFilterLocalStorage) {
-      const splitFilter = filterStorageItem.split(",");
+    if (withFilterLocalStorage) {
+      const filterObj = getUserFilter(localStorageKey);
 
-      filterData.sortBy = splitFilter[0] as TFilterSortBy;
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2] as TSortOrder;
+      if (filterObj?.sortBy) filterData.sortBy = filterObj.sortBy;
+      if (filterObj?.pageCount) filterData.pageCount = filterObj.pageCount;
+      if (filterObj?.sortOrder) filterData.sortOrder = filterObj.sortOrder;
     }
 
     if (currentGroup?.id && this.contactsTab === "inside_group") {
@@ -480,6 +491,12 @@ class UsersStore {
         "true",
       );
       this.guestsTabVisited = true;
+    }
+
+    if (this.contactsTab === "guests") {
+      filterData.area = "guests";
+    } else if (this.contactsTab === "people") {
+      filterData.area = "people";
     }
 
     this.requestRunning = true;

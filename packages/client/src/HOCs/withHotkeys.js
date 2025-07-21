@@ -274,7 +274,14 @@ const withHotkeys = (Component) => {
     useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
-    useHotkeys("Backspace", onClickBack, hotkeysFilter);
+    useHotkeys(
+      "Backspace",
+      () => {
+        const someDialogIsOpen = checkDialogsOpen();
+        if (!someDialogIsOpen) onClickBack();
+      },
+      hotkeysFilter,
+    );
 
     // Change viewAs
     useHotkeys(

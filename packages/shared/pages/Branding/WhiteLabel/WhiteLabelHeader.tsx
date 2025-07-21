@@ -97,7 +97,7 @@ export const WhiteLabelHeader = ({
           {t("WhiteLabelSubtitle")}
           <HelpButton
             tooltipContent={
-              <Text fontSize="12px">{t("WhiteLabelTooltip")}</Text>
+              <Text fontSize="12px">{t("Common:WhiteLabelTooltip")}</Text>
             }
             place="right"
             offsetRight={0}

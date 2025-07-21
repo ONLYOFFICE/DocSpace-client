@@ -41,8 +41,7 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
-import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import { ButtonKeys } from "@docspace/shared/enums";
@@ -60,16 +59,9 @@ import { useSearchParams } from "next/navigation";
 type TfaActivationFormProps = {
   secretKey: string;
   qrCode: string;
-  passwordHash: TPasswordHash;
-  userName?: string;
 };
 
-const TfaActivationForm = ({
-  secretKey,
-  qrCode,
-  passwordHash,
-  userName,
-}: TfaActivationFormProps) => {
+const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -95,11 +87,7 @@ const TfaActivationForm = ({
     try {
       setIsLoading(true);
 
-      if (userName && passwordHash) {
-        await loginWithTfaCode(userName, passwordHash, code);
-      } else {
-        await validateTfaCode(code, confirmHeader);
-      }
+      await validateTfaCode(code, confirmHeader);
 
       let confirmData = "";
       try {

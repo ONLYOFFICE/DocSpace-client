@@ -37,6 +37,7 @@ export type MessageProps = {
   message: TMessage;
   idx: number;
   userAvatar: string;
+  getIcon: TGetIcon;
 };
 
 export type MessageBodyProps = Pick<MessageProps, "userAvatar">;

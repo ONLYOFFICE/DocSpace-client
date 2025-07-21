@@ -26,6 +26,7 @@
 
 import React from "react";
 import { ReactSVG } from "react-svg";
+import classNames from "classnames";
 
 import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
@@ -41,17 +42,22 @@ import styles from "./ChatInput.module.scss";
 
 type FilesListProps = {
   files: Partial<TFile>[];
+  isFixed?: boolean;
   getIcon: ChatProps["getIcon"];
-  onRemove: (file: Partial<TFile>) => void;
+  onRemove?: (file: Partial<TFile>) => void;
 };
 
-const FilesList = ({ files, getIcon, onRemove }: FilesListProps) => {
+const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
   if (!files.length) return null;
 
   return (
-    <div className={styles.filesList}>
+    <div
+      className={classNames(styles.filesList, {
+        [styles.filesListFixed]: isFixed,
+      })}
+    >
       <Scrollbar noScrollY>
-        <div style={{ width: "fit-content", display: "flex", gap: 6 }}>
+        <div className={styles.filesListWrapper}>
           {files.map((file) => (
             <div className={styles.filesListItem} key={file.id}>
               <ReactSVG
@@ -60,13 +66,28 @@ const FilesList = ({ files, getIcon, onRemove }: FilesListProps) => {
               />
 
               <div className={styles.filesListItemInfo}>
-                <Text>{file.title}</Text>
-                <IconButton
-                  iconName={CloseCircleReactSvgUrl}
-                  size={16}
-                  isClickable
-                  onClick={() => onRemove(file)}
-                />
+                <div className={styles.filesListItemInfoText}>
+                  <Text fontSize="12px" lineHeight="16px" fontWeight={600}>
+                    {file.title}
+                  </Text>
+                  <Text
+                    fontSize="12px"
+                    lineHeight="16px"
+                    fontWeight={600}
+                    as="span"
+                  >
+                    {file.fileExst}
+                  </Text>
+                </div>
+
+                {onRemove ? (
+                  <IconButton
+                    iconName={CloseCircleReactSvgUrl}
+                    size={16}
+                    isClickable
+                    onClick={() => onRemove(file)}
+                  />
+                ) : null}
               </div>
             </div>
           ))}

@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import { ContentType, MessageType } from "../../../../../../api/ai/enums";
+import { ContentType, RoleType } from "../../../../../../api/ai/enums";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 
@@ -39,17 +39,21 @@ import styles from "../../ChatMessageBody.module.scss";
 import Markdown from "./Markdown";
 import ToolCall from "./ToolCall";
 import Error from "./Error";
+import Files from "./Files";
 
-const Message = ({ message, idx, userAvatar }: MessageProps) => {
+const Message = ({ message, idx, userAvatar, getIcon }: MessageProps) => {
   const { currentChat } = useChatStore();
-  const isUser = message.messageType === MessageType.UserMessage;
-  const isError = message.messageType === MessageType.Error;
 
-  if (isUser)
+  const isUser = message.role === RoleType.UserMessage;
+  const isError = message.role === RoleType.Error;
+
+  if (isUser) {
+    const files = message.contents.filter((c) => c.type === ContentType.Files);
+
     return (
       <div
         key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}
-        className={classNames(styles.message, styles.userMessage)}
+        className={classNames(styles.userMessage)}
       >
         <Avatar
           size={AvatarSize.min}
@@ -60,27 +64,25 @@ const Message = ({ message, idx, userAvatar }: MessageProps) => {
         />
 
         <div className={classNames(styles.chatMessageContent)}>
-          <div
-            className={classNames(
-              styles.chatMessagePadding,
-              styles.chatMessageBorderRadius,
-              styles.chatMessageUser,
-            )}
-          >
-            {message.contents.map((c) => {
-              if (c.type === ContentType.Text)
-                return (
-                  <Markdown
-                    key={`${currentChat?.id}-${c.text}-${idx * 2}`}
-                    chatMessage={c.text}
-                  />
-                );
-              return null;
-            })}
-          </div>
+          {files ? <Files files={files} getIcon={getIcon} /> : null}
+
+          {message.contents.map((c) => {
+            if (c.type === ContentType.Text)
+              return (
+                <div
+                  key={`${currentChat?.id}-${c.text}-${idx * 2}`}
+                  className={classNames(styles.chatMessageUser)}
+                >
+                  <Markdown chatMessage={c.text} />
+                </div>
+              );
+
+            return null;
+          })}
         </div>
       </div>
     );
+  }
 
   if (isError)
     return (
@@ -95,7 +97,10 @@ const Message = ({ message, idx, userAvatar }: MessageProps) => {
         if (c.type === ContentType.Text)
           return <Markdown key={c.text} chatMessage={c.text} />;
 
-        return <ToolCall key={c.name} content={c} />;
+        if (c.type === ContentType.Tool)
+          return <ToolCall key={c.name} content={c} />;
+
+        return null;
       })}
     </div>
   );

@@ -40,7 +40,7 @@ const Chat = ({ roomId, userAvatar, getIcon, selectedModel }: ChatProps) => {
       <MessageStoreContextProvider roomId={roomId}>
         <ChatContainer>
           <ChatHeader selectedModel={selectedModel} />
-          <ChatMessageBody userAvatar={userAvatar} />
+          <ChatMessageBody userAvatar={userAvatar} getIcon={getIcon} />
           <ChatInput getIcon={getIcon} />
         </ChatContainer>
       </MessageStoreContextProvider>

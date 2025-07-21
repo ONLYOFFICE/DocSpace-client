@@ -200,40 +200,55 @@
 
   box-sizing: border-box;
 
-  .filesListItem {
+  .filesListWrapper {
     width: fit-content;
-    min-width: fit-content;
-    height: 32px;
-
-    padding-inline-end: 8px;
-
     display: flex;
-    align-items: center;
+    gap: 6px;
 
-    border: 1px solid var(--chat-input-file-border-color);
-    background-color: var(--chat-input-file-background-color);
-
-    border-radius: 6px;
-
-    .filesListItemIcon {
-      width: 32px;
+    .filesListItem {
+      width: fit-content;
+      min-width: fit-content;
       height: 32px;
 
-      div {
+      padding-inline-end: 8px;
+
+      display: flex;
+      align-items: center;
+
+      border: 1px solid var(--chat-input-file-border-color);
+      background-color: var(--chat-input-file-background-color);
+
+      border-radius: 6px;
+
+      .filesListItemIcon {
         width: 32px;
         height: 32px;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        div {
+          width: 32px;
+          height: 32px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
-  }
 
-  .filesListItemInfo {
-    display: flex;
-    align-items: center;
+    .filesListItemInfo {
+      display: flex;
+      align-items: center;
 
-    gap: 8px;
+      gap: 8px;
+
+      .filesListItemInfoText {
+        display: flex;
+        flex-direction: row;
+
+        span {
+          color: var(--chat-file-item-exst-color);
+        }
+      }
+    }
   }
 }

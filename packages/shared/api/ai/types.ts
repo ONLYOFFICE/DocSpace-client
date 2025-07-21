@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TCreatedBy } from "../../types";
-import { ContentType, MessageType, ProviderType } from "./enums";
+import { ContentType, ProviderType, RoleType } from "./enums";
 
 export type TCreateAiProvider =
   | {
@@ -89,10 +89,16 @@ export type TContent =
       arguments: Record<string, unknown>;
       name: string;
       result?: Record<string, unknown>;
+    }
+  | {
+      type: ContentType.Files;
+      id: number;
+      title: string;
+      extension: string;
     };
 
 export type TMessage = {
-  messageType: MessageType;
+  role: RoleType;
   contents: TContent[];
   createdOn: string;
 };

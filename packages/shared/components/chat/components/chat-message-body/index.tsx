@@ -28,6 +28,8 @@ import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
+import { TGetIcon } from "../../../../selectors/utils/types";
+
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
 
@@ -39,7 +41,13 @@ import Message from "./sub-components/message";
 
 import styles from "./ChatMessageBody.module.scss";
 
-const ChatMessageBody = ({ userAvatar }: { userAvatar: string }) => {
+const ChatMessageBody = ({
+  userAvatar,
+  getIcon,
+}: {
+  userAvatar: string;
+  getIcon: TGetIcon;
+}) => {
   const { messages, fetchNextMessages } = useMessageStore();
   const { currentChat } = useChatStore();
 
@@ -126,6 +134,7 @@ const ChatMessageBody = ({ userAvatar }: { userAvatar: string }) => {
                   message={message}
                   idx={index}
                   userAvatar={userAvatar}
+                  getIcon={getIcon}
                 />
               );
             })}

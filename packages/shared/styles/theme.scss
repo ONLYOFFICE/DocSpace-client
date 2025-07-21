@@ -2188,6 +2188,7 @@
   --chat-message-ai-background-color: #{$light-gray-hover};
   --chat-message-error-background-color: #{$light-error-status};
   --chat-message-code-block-background-color: #{$white};
+  --chat-message-code-block-border: 1px solid #{$gray-light-mid};
   --chat-message-code-block-separator-color: #{$gray-light-mid};
 }
 
@@ -2222,8 +2223,8 @@
   --chat-message-user-background-color: #{$light-dark-gray-hover};
   --chat-message-ai-background-color: #{$light-dark-gray-hover};
   --chat-message-error-background-color: #{$dark-error-status};
-
   --chat-message-code-block-background-color: #{$dark-gray-light};
+  --chat-message-code-block-border: none;
   --chat-message-code-block-separator-color: #{$gray-dark-strong};
 }
 

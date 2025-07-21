@@ -25,56 +25,57 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import classNames from "classnames";
+import { ReactSVG } from "react-svg";
 
+import { TGetIcon } from "../../../../../../selectors/utils/types";
 import { TContent } from "../../../../../../api/ai/types";
 import { ContentType } from "../../../../../../api/ai/enums";
 
 import { Text } from "../../../../../text";
 
-import { formatJsonWithMarkdown } from "../../../../utils";
-
 import styles from "../../ChatMessageBody.module.scss";
-import MarkdownField from "./Markdown";
 
-const ToolCall = ({ content }: { content: TContent }) => {
-  const [isHide, setIsHide] = React.useState(true);
-
-  if (content.type !== ContentType.Tool) return null;
+const Files = ({
+  files,
+  getIcon,
+}: {
+  files: TContent[];
+  getIcon: TGetIcon;
+}) => {
+  if (!files.length) return null;
 
   return (
-    <div className={styles.toolCall}>
-      <div
-        className={classNames(styles.toolCallHeader, { [styles.hide]: isHide })}
-        onClick={() => setIsHide((val) => !val)}
-      >
-        <Text fontSize="16px" lineHeight="20px" isBold>
-          {content.name}
-        </Text>
-        <Text fontSize="13px" lineHeight="20px">
-          {content.result ? "Finished" : "Pending"}
-        </Text>
-      </div>
-      {isHide ? null : (
-        <>
-          <div className={styles.toolCallBodyFirst}>
-            <MarkdownField
-              propLanguage="Tool call arguments"
-              chatMessage={formatJsonWithMarkdown(content.arguments)}
+    <div className={styles.filesListWrapper}>
+      {files.map((file) => {
+        if (file.type !== ContentType.Files) return;
+
+        return (
+          <div className={styles.filesListItem} key={file.id}>
+            <ReactSVG
+              src={getIcon(24, file.extension!)}
+              className={styles.filesListItemIcon}
             />
-          </div>
-          {content.result ? (
-            <div className={styles.toolCallBody}>
-              <MarkdownField
-                chatMessage={formatJsonWithMarkdown(content.result)}
-                propLanguage="Tool call result"
-              />
+
+            <div className={styles.filesListItemInfo}>
+              <div className={styles.filesListItemInfoText}>
+                <Text fontSize="12px" lineHeight="16px" fontWeight={600}>
+                  {file.title.replace(file.extension, "")}
+                </Text>
+                <Text
+                  fontSize="12px"
+                  lineHeight="16px"
+                  fontWeight={600}
+                  as="span"
+                >
+                  {file.extension}
+                </Text>
+              </div>
             </div>
-          ) : null}
-        </>
-      )}
+          </div>
+        );
+      })}
     </div>
   );
 };
 
-export default ToolCall;
+export default Files;

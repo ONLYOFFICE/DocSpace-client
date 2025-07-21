@@ -32,7 +32,7 @@ import {
   startNewChat,
   sendMessageToChat,
 } from "../../../api/ai";
-import { ContentType, EventType, MessageType } from "../../../api/ai/enums";
+import { ContentType, EventType, RoleType } from "../../../api/ai/enums";
 
 export default class MessageStore {
   messages: TMessage[] = [];
@@ -108,7 +108,7 @@ export default class MessageStore {
 
   addUserMessage = (message: string) => {
     const newMsg: TMessage = {
-      messageType: MessageType.UserMessage,
+      role: RoleType.UserMessage,
       createdOn: new Date().toString(),
       contents: [{ type: ContentType.Text, text: message }],
     };
@@ -121,7 +121,7 @@ export default class MessageStore {
 
   addNewAIMessage = (message: string) => {
     const newMsg: TMessage = {
-      messageType: MessageType.AssistantMessage,
+      role: RoleType.AssistantMessage,
       createdOn: new Date().toString(),
       contents: [{ type: ContentType.Text, text: message }],
     };
@@ -176,7 +176,7 @@ export default class MessageStore {
     const { name, arguments: args } = JSON.parse(jsonData);
 
     const newMsg: TMessage = {
-      messageType: MessageType.AssistantMessage,
+      role: RoleType.AssistantMessage,
       createdOn: new Date().toString(),
       contents: [
         {
@@ -222,7 +222,7 @@ export default class MessageStore {
     const { message } = JSON.parse(jsonData);
 
     const newMsg: TMessage = {
-      messageType: MessageType.Error,
+      role: RoleType.Error,
       createdOn: new Date().toString(),
       contents: [{ type: ContentType.Text, text: message }],
     };

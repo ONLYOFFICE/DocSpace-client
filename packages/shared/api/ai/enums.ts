@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum MessageType {
+export const enum RoleType {
   UserMessage = 0,
   AssistantMessage = 1,
   Error = 10,
@@ -33,6 +33,7 @@ export const enum MessageType {
 export const enum ContentType {
   Text = 0,
   Tool = 1,
+  Files = 2,
 }
 
 export const enum ProviderType {

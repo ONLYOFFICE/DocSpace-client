@@ -454,7 +454,7 @@ export function createExternalLink(
   denyDownload: boolean = false,
   title?: string,
   disabled?: boolean,
-  password?: string | null = null,
+  password: string | null = null,
   expirationDate?: moment.Moment,
 ) {
   const skipRedirect = true;

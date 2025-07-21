@@ -24,42 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.comboBox {
-  width: 41px !important;
-  height: 32px !important;
-  box-sizing: border-box !important;
-  padding: 0 !important;
+import styled from "styled-components";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-  :global {
-    .combo-button {
-      padding: 7px !important;
+const StyledApiKeys = styled.div`
+  width: 100%;
+
+  .api-keys_description {
+    box-sizing: border-box;
+    max-width: 700px;
+    margin-bottom: 25px;
+
+    &.withEmptyScreen {
+      margin-bottom: 0px;
     }
 
-    .combo-button_selected-icon-container {
-      margin-inline-end: 0;
+    .api-keys_text {
+      color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
 
-    .combo-buttons_arrow-icon {
-      margin: 0;
+    .api-keys_description-text {
+      line-height: 20px;
+      margin-bottom: 20px;
     }
-  }
-}
 
-.withoutBorder {
-  :global {
-    .combo-button {
-      border-width: 0;
-      background: transparent;
-    }
-  }
-}
-
-.withBorder {
-  :global {
-    .combo-button {
-      &:hover {
-        border-color: var(--language-combo-hover-border);
-      }
+    .api-keys_usage-text {
+      margin-bottom: 8px;
     }
   }
-}
+`;
+
+const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
+  position: fixed;
+  z-index: 1;
+  width: calc(100% - 32px);
+  height: 73px;
+  bottom: 0;
+  padding: 0 16px;
+
+  inset-inline-start: 0;
+  background-color: ${(props) => props.theme.backgroundColor};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export { StyledApiKeys, StyledMobileButton };

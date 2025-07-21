@@ -27,7 +27,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 import classNames from "classnames";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
@@ -41,7 +40,7 @@ import {
   TApiKey,
   TApiKeyParamsRequest,
 } from "@docspace/shared/api/api-keys/types";
-import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -50,52 +49,10 @@ import CreateApiKeyDialog from "./sub-components/CreateApiKeyDialog";
 import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
-
-const StyledApiKeys = styled.div`
-  width: 100%;
-
-  .api-keys_description {
-    box-sizing: border-box;
-    max-width: 700px;
-    margin-bottom: 25px;
-
-    &.withEmptyScreen {
-      margin-bottom: 0px;
-    }
-
-    .api-keys_text {
-      color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    }
-
-    .api-keys_description-text {
-      line-height: 20px;
-      margin-bottom: 20px;
-    }
-
-    .api-keys_usage-text {
-      margin-bottom: 8px;
-    }
-  }
-`;
-
-const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
-  position: fixed;
-  z-index: 1;
-  width: calc(100% - 32px);
-  height: 73px;
-  bottom: 0;
-  padding: 0 16px;
-
-  inset-inline-start: 0;
-  background-color: ${(props) => props.theme.backgroundColor};
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { StyledApiKeys, StyledMobileButton } from "./StyledApiKeys";
 
 const ApiKeys = (props: ApiKeysProps) => {
-  const { viewAs, currentColorScheme, apiKeysLink } = props;
+  const { viewAs, currentColorScheme, apiKeysLink, isUser } = props;
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -286,6 +243,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           actionItem={actionItem}
           onChangeApiKeyParams={onChangeApiKeyParams}
           isRequestRunning={isRequestRunning}
+          isUser={isUser}
         />
       ) : null}
 
@@ -304,13 +262,15 @@ const ApiKeys = (props: ApiKeysProps) => {
   );
 };
 
-export default inject(({ setup, settingsStore }: TStore) => {
+export default inject(({ setup, settingsStore, userStore }: TStore) => {
   const { viewAs } = setup;
   const { currentColorScheme, apiKeysLink } = settingsStore;
+  const { user } = userStore;
 
   return {
     viewAs,
     currentColorScheme,
     apiKeysLink,
+    isUser: user?.isCollaborator,
   };
 })(observer(ApiKeys));

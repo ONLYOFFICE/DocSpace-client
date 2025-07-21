@@ -2160,10 +2160,12 @@
   --chat-button-open-background-color: #{$light-gray-hover};
 
   --chat-header-button-background-color: #{$gray-light};
-  --chat-header-button-svg-color: #{$light-gray-dark};
 
-  --chat-header-select-session-date-color: #{$gray};
-  --chat-header-select-session-border-color: #{$gray-light-mid};
+  --chat-header-model-color: #{$gray};
+  --chat-header-border-color: #{$gray-light-mid};
+  --chat-header-button-svg-color: #{$black};
+  --chat-header-button-hover-background: #{$light-gray-hover};
+  --chat-header-button-active-background: #{$gray-light-mid};
 
   --chat-file-item-border-color: #{$gray-light-mid};
   --chat-file-item-background-color: #{$white};
@@ -2193,10 +2195,12 @@
   --chat-button-open-background-color: #{$dark-gray-light};
 
   --chat-header-button-background-color: #{$light-dark-gray-hover};
-  --chat-header-button-svg-color: #{$dark-gray-dark};
 
-  --chat-header-select-session-date-color: #{$gray-dark};
-  --chat-header-select-session-border-color: #{$gray-dark-strong};
+  --chat-header-model-color: #{$gray-dark};
+  --chat-header-border-color: #{$gray-dark-strong};
+  --chat-header-button-svg-color: #{$white};
+  --chat-header-button-hover-background: #{$light-dark-gray-hover};
+  --chat-header-button-active-background: #{$gray-dark-mid};
 
   --chat-file-item-border-color: #{$gray-dark-strong};
   --chat-file-item-background-color: unset;

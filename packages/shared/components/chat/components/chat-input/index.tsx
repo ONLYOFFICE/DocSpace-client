@@ -85,6 +85,7 @@ const ChatInput = ({ getIcon }: ChatInputProps) => {
   };
 
   const sendMessageAction = React.useCallback(async () => {
+    if (!value) return;
     try {
       if (!currentChatId) {
         startChat(

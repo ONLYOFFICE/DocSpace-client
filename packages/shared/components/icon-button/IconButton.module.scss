@@ -72,7 +72,8 @@
         height: 100%;
       }
 
-      path {
+      path,
+      rect {
         stroke: var(--icon-button-color);
       }
     }
@@ -80,7 +81,8 @@
     @media (hover: hover) and (pointer: fine) {
       &:hover:not(.disabled) {
         svg {
-          path {
+          path,
+          rect {
             stroke: var(--icon-button-hover-color);
           }
         }
@@ -93,7 +95,8 @@
       width: 100%;
       height: 100%;
 
-      path {
+      path,
+      rect {
         fill: var(--icon-button-color);
       }
     }
@@ -101,7 +104,8 @@
     @media (hover: hover) and (pointer: fine) {
       &:hover:not(.disabled) {
         svg {
-          path {
+          path,
+          rect {
             fill: var(--icon-button-hover-color);
           }
         }

@@ -29,7 +29,6 @@
 
 .chatHeader {
   width: 100%;
-  height: 64px;
 
   padding: 0 0 16px;
 
@@ -39,70 +38,89 @@
   align-items: center;
 
   gap: 16px;
+}
 
-  .selectChat {
-    width: 32px;
-    height: 32px;
+.createChat {
+  width: fit-content;
+  min-width: fit-content;
+  height: 32px;
 
-    min-width: 32px;
+  box-sizing: border-box;
 
-    box-sizing: border-box;
+  border-radius: 6px;
 
-    border-radius: 50%;
+  padding: 8px;
 
-    background-color: var(--chat-header-button-background-color);
+  display: flex;
+  align-items: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  gap: 8px;
 
-    cursor: pointer;
-
-    svg {
-      path {
-        fill: var(--chat-header-button-svg-color);
-      }
-    }
+  &:hover {
+    background-color: var(--chat-header-button-hover-background);
   }
 
-  .createChat {
-    width: fit-content;
-    min-width: fit-content;
-    height: 32px;
+  cursor: pointer;
 
-    box-sizing: border-box;
-
-    border-radius: 16px;
-
-    padding: 8px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    background-color: var(--chat-header-button-background-color);
-
-    cursor: pointer;
-
-    svg {
-      path {
-        fill: var(--chat-header-button-svg-color);
-      }
+  svg {
+    path {
+      fill: var(--chat-header-button-svg-color);
     }
   }
 }
 
-.dropDownItemDate {
-  padding-top: 8px;
+.selectChat {
+  width: 32px;
+  height: 32px;
 
-  color: var(--chat-header-select-session-date-color);
+  min-width: 32px;
+
+  box-sizing: border-box;
+
+  border-radius: 3px;
+
+  &:hover {
+    background-color: var(--chat-header-button-hover-background);
+
+    cursor: pointer;
+  }
+
+  &.open {
+    background-color: var(--chat-header-button-active-background);
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  svg {
+    path {
+      fill: var(--chat-header-button-svg-color);
+    }
+  }
+}
+
+.selectModel {
+  color: var(--chat-header-model-color);
 
   cursor: default;
 }
 
-.dropDownItemTruncate {
-  span {
-    @include truncate;
+.dropdowItemWrapper {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .iconButtonWrapper {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

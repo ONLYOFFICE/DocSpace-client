@@ -32,12 +32,12 @@ import SelectChat from "./sub-components/SelectChat";
 import CreateChat from "./sub-components/CreateChat";
 import SelectModel from "./sub-components/SelectModel";
 
-const ChatHeader = () => {
+const ChatHeader = ({ selectedModel }: { selectedModel: string }) => {
   return (
     <div className={styles.chatHeader}>
       <SelectChat />
       <CreateChat />
-      <SelectModel />
+      <SelectModel selectedModel={selectedModel} />
     </div>
   );
 };

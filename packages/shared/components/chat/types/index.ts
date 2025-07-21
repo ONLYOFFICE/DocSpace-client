@@ -48,5 +48,6 @@ export type ChatInputProps = {
 export type ChatProps = {
   roomId: TChatStoreProps["roomId"];
   userAvatar: MessageBodyProps["userAvatar"];
+  selectedModel: string;
   getIcon: ChatInputProps["getIcon"];
 };

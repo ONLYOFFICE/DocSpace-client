@@ -29,7 +29,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import { Nullable } from "../../../types";
 import { TChat } from "../../../api/ai/types";
-import { getChat, getChats } from "../../../api/ai";
+import { getChat, getChats, deleteChat, renameChat } from "../../../api/ai";
 
 import { TChatStoreProps } from "../types";
 
@@ -96,6 +96,26 @@ export default class ChatStore {
       this.totalChats = total;
       this.startIndex += 100;
       this.isRequestRunning = false;
+    });
+  };
+
+  renameChat = async (id: string, title: string) => {
+    await renameChat(id, title);
+
+    runInAction(() => {
+      this.chats = this.chats.map((chat) =>
+        chat.id === id ? { ...chat, title } : chat,
+      );
+    });
+  };
+
+  deleteChat = async (id: string) => {
+    await deleteChat(id);
+
+    runInAction(() => {
+      this.chats = this.chats.filter((chat) => chat.id !== id);
+      this.startIndex -= 1;
+      this.totalChats -= 1;
     });
   };
 }

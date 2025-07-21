@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg";
 
-// import { Text } from "../../../../text";
+import { Text } from "../../../../text";
 
 import { useMessageStore } from "../../../store/messageStore";
 
@@ -37,14 +38,16 @@ import styles from "../ChatHeader.module.scss";
 const CreateChat = () => {
   const { messages, startNewChat } = useMessageStore();
 
+  const { t } = useTranslation(["Common"]);
+
   if (messages.length === 0) return null;
 
   return (
     <div className={styles.createChat} onClick={startNewChat}>
       <PlusReactSvgUrl />
-      {/* <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
-        Create new chat
-      </Text> */}
+      <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
+        {t("AINewChat")}
+      </Text>
     </div>
   );
 };

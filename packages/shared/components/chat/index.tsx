@@ -24,10 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-
 import { MessageStoreContextProvider } from "./store/messageStore";
-import { ModelStoreContextProvider } from "./store/modelStore";
 import { ChatStoreContextProvider } from "./store/chatStore";
 
 import { ChatProps } from "./types";
@@ -37,18 +34,16 @@ import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
 
-const Chat = ({ roomId, userAvatar, getIcon }: ChatProps) => {
+const Chat = ({ roomId, userAvatar, getIcon, selectedModel }: ChatProps) => {
   return (
     <ChatStoreContextProvider roomId={roomId}>
-      <ModelStoreContextProvider>
-        <MessageStoreContextProvider roomId={roomId}>
-          <ChatContainer>
-            <ChatHeader />
-            <ChatMessageBody userAvatar={userAvatar} />
-            <ChatInput getIcon={getIcon} />
-          </ChatContainer>
-        </MessageStoreContextProvider>
-      </ModelStoreContextProvider>
+      <MessageStoreContextProvider roomId={roomId}>
+        <ChatContainer>
+          <ChatHeader selectedModel={selectedModel} />
+          <ChatMessageBody userAvatar={userAvatar} />
+          <ChatInput getIcon={getIcon} />
+        </ChatContainer>
+      </MessageStoreContextProvider>
     </ChatStoreContextProvider>
   );
 };

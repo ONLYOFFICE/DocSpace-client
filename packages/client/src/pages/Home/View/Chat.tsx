@@ -30,25 +30,37 @@ import { useParams } from "react-router";
 import Chat from "@docspace/shared/components/chat";
 import { TGetIcon } from "@docspace/shared/selectors/utils/types";
 
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+
 const ChatComponent = ({
   userAvatar,
   getIcon,
+  chatSettings,
 }: {
   userAvatar: string;
   getIcon: TGetIcon;
+  chatSettings: SelectedFolderStore["chatSettings"];
 }) => {
   const { room } = useParams();
 
+  if (!room || !chatSettings) return null;
+
   return (
-    <Chat userAvatar={userAvatar} roomId={room ?? "1"} getIcon={getIcon} />
+    <Chat
+      userAvatar={userAvatar}
+      roomId={room}
+      getIcon={getIcon}
+      selectedModel={chatSettings!.modelId}
+    />
   );
 };
 
 export const ChatView = inject((store: TStore) => {
-  const { userStore, filesSettingsStore } = store;
+  const { userStore, filesSettingsStore, selectedFolderStore } = store;
 
   return {
     userAvatar: userStore.user?.avatar,
     getIcon: filesSettingsStore.getIcon,
+    chatSettings: selectedFolderStore?.chatSettings,
   };
 })(observer(ChatComponent));

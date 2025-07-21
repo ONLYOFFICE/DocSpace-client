@@ -25,37 +25,83 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
 import SelectSessionReactSvg from "PUBLIC_DIR/images/select.session.react.svg";
+import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg?url";
+import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
+import RemoveSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
+import { isDesktop } from "../../../../../utils";
 import { RectangleSkeleton } from "../../../../../skeletons";
 
 import { DropDown } from "../../../../drop-down";
 import { DropDownItem } from "../../../../drop-down-item";
+import { IconButton } from "../../../../icon-button";
+import { ContextMenu, ContextMenuRefType } from "../../../../context-menu";
 
 import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
 
+import RenameChat from "./RenameChat";
+
 import styles from "../ChatHeader.module.scss";
 
 const SelectChat = () => {
+  const { t } = useTranslation(["Common"]);
+
   const [isOpen, setIsOpen] = React.useState(false);
+  const [hoveredItem, setHoveredItem] = React.useState("");
+  const [isRenameOpen, setIsRenameOpen] = React.useState(false);
 
   const parentRef = React.useRef<HTMLDivElement>(null);
+  const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
-  const { chats, isLoading, fetchChat } = useChatStore();
+  const { chats, isLoading, fetchChat, deleteChat } = useChatStore();
   const { fetchMessages } = useMessageStore();
 
   const toggleOpen = () => {
     setIsOpen((value) => !value);
+    setHoveredItem("");
   };
 
   const onSelectAction = (id: string) => {
     fetchChat(id);
     fetchMessages(id);
     toggleOpen();
+  };
+
+  const onRenameToggle = React.useCallback(() => {
+    setIsOpen(false);
+    setIsRenameOpen((value) => !value);
+  }, []);
+
+  const onDeleteAction = React.useCallback(() => {
+    deleteChat(hoveredItem);
+  }, [hoveredItem, deleteChat]);
+
+  const model = React.useMemo(() => {
+    return [
+      {
+        key: "rename",
+        label: t("Common:Rename"),
+        icon: RenameReactSvgUrl,
+        onClick: onRenameToggle,
+      },
+      { key: "separator", isSeparator: true },
+      {
+        key: "remove",
+        label: t("Common:Delete"),
+        icon: RemoveSvgUrl,
+        onClick: onDeleteAction,
+      },
+    ];
+  }, [t, onDeleteAction, onRenameToggle]);
+
+  const onShowContextMenu = (e: React.MouseEvent<HTMLElement>) => {
+    contextMenuRef.current?.show(e);
   };
 
   const maxHeight = chats.length > 7 ? { maxHeight: 300 } : {};
@@ -65,7 +111,7 @@ const SelectChat = () => {
       <RectangleSkeleton
         width="32px"
         height="32px"
-        borderRadius="50%"
+        borderRadius="3px"
         style={{ minWidth: "32px" }}
       />
     );
@@ -73,9 +119,15 @@ const SelectChat = () => {
 
   if (!chats.length) return null;
 
+  const desktop = isDesktop();
+
   return (
     <>
-      <div className={styles.selectChat} onClick={toggleOpen} ref={parentRef}>
+      <div
+        className={classNames(styles.selectChat, { [styles.open]: isOpen })}
+        onClick={toggleOpen}
+        ref={parentRef}
+      >
         <SelectSessionReactSvg />
       </div>
       {isOpen ? (
@@ -95,17 +147,54 @@ const SelectChat = () => {
             return (
               <DropDownItem
                 key={id}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
+
+                  const target = e.target as HTMLElement;
+                  const iconButtonWrapper = target.closest(
+                    `.${styles.iconButtonWrapper}`,
+                  );
+
+                  if (iconButtonWrapper) {
+                    return;
+                  }
+
                   onSelectAction(id);
                 }}
                 className={classNames("drop-down-item")}
-                isActive={false}
               >
-                {title}
+                <div
+                  className={styles.dropdowItemWrapper}
+                  onMouseEnter={() => setHoveredItem(id)}
+                >
+                  {title}
+                  {hoveredItem === id || !desktop ? (
+                    <div
+                      className={styles.iconButtonWrapper}
+                      onClick={onShowContextMenu}
+                    >
+                      <IconButton
+                        iconName={HorizontalDotsIcon}
+                        size={16}
+                        isClickable
+                        isFill
+                        onClick={() => {}}
+                      />
+                      <ContextMenu ref={contextMenuRef} model={model} />
+                    </div>
+                  ) : null}
+                </div>
               </DropDownItem>
             );
           })}
         </DropDown>
+      ) : null}
+      {isRenameOpen ? (
+        <RenameChat
+          chatId={hoveredItem}
+          prevTitle={chats.find((chat) => chat.id === hoveredItem)?.title || ""}
+          onRenameToggle={onRenameToggle}
+        />
       ) : null}
     </>
   );

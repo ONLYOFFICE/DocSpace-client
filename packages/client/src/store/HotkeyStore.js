@@ -138,14 +138,6 @@ class HotkeyStore {
     const isDefaultKeys =
       ["PageUp", "PageDown", "Home", "End"].indexOf(e.code) > -1;
 
-    if (
-      ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
-        e.code,
-      ) > -1
-    ) {
-      e.preventDefault();
-    }
-
     const { selection: s, hotkeyCaret, filesList } = this.filesStore;
     const selection = s.length ? s : filesList;
 
@@ -160,6 +152,8 @@ class HotkeyStore {
     }
 
     if (!hotkeyCaret || isDefaultKeys) return e;
+
+    e.preventDefault();
   };
 
   setCaret = (caret, withScroll = true) => {

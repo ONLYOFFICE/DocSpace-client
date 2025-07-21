@@ -154,6 +154,11 @@ const CreateRoomDialog = ({
     if ((hasFocus && value.length === 0) || !hasFocus) onCreateRoom();
   };
 
+  const onCloseCreateFromTemplateDialog = () => {
+    setRoomParams({ ...startRoomParams });
+    setTemplateDialogIsVisible(false);
+  };
+
   const goBack = () => {
     if (isLoading) return;
     if (isTemplateSelected) {
@@ -170,6 +175,8 @@ const CreateRoomDialog = ({
 
     if (isScrollLocked) setIsScrollLocked(false);
     setRoomParams({ ...startRoomParams });
+
+    if (templateDialogIsVisible) onCloseCreateFromTemplateDialog();
   };
 
   const onCloseAndDisconnectThirdparty = async () => {
@@ -211,11 +218,6 @@ const CreateRoomDialog = ({
     });
   };
 
-  const onCloseCreateFromTemplateDialog = () => {
-    setRoomParams({ ...startRoomParams });
-    setTemplateDialogIsVisible(false);
-  };
-
   const isTemplate = !roomParams.type && !isTemplateSelected;
 
   const dialogHeader = !roomParams.type
@@ -232,7 +234,7 @@ const CreateRoomDialog = ({
       hideContent={isOauthWindowOpen}
       isTemplate={isTemplate}
       isBackButton={roomParams.type}
-      onBackClick={goBack}
+      onBackClick={roomParams.type ? goBack : null}
       onSubmit={handleSubmit}
       withForm
       containerVisible={isTemplate ? templateDialogIsVisible : false}

@@ -29,7 +29,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { ComboBox } from "./ComboBox";
-import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
+import { ComboBoxDisplayType, ComboBoxSize } from "./ComboBox.enums";
 
 const mockOptions = [
   { key: "1", label: "Option 1" },

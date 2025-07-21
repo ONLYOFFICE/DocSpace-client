@@ -91,10 +91,8 @@ export const WarningQuotaDialog = ({
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect style={{ marginBottom: "16px" }}>
-          {getWarningDescription()}
-        </Text>
-        <Text noSelect>{t("Settings:WantToContinue")}</Text>
+        <Text style={{ marginBottom: "16px" }}>{getWarningDescription()}</Text>
+        <Text>{t("Settings:WantToContinue")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

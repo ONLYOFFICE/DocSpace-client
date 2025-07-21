@@ -459,7 +459,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
 
   const keyBody = (
     <StyledBodyContent>
-      <Text noSelect>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
+      <Text>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
       <div className="api-key_name">
         <InputBlock
           forwardedRef={inputRef}

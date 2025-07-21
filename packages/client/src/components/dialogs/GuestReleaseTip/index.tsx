@@ -97,7 +97,6 @@ const GuestReleaseTip = ({
                 fontSize="16px"
                 fontWeight={700}
                 lineHeight="22px"
-                noSelect
                 truncate
                 className="main-text"
               >
@@ -108,7 +107,6 @@ const GuestReleaseTip = ({
                 fontSize="16px"
                 fontWeight={700}
                 lineHeight="22px"
-                noSelect
                 truncate
                 className="accent-text"
               >
@@ -126,7 +124,7 @@ const GuestReleaseTip = ({
           </StyledHeader>
 
           <StyledBody>
-            <Text fontSize="12px" fontWeight={400} lineHeight="16px" noSelect>
+            <Text fontSize="12px" fontWeight={400} lineHeight="16px">
               <Trans
                 t={t}
                 ns="Translations"

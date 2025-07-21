@@ -126,12 +126,7 @@ const UsersItemTitle = ({
       />
       <div className="info-panel__info-text">
         <div className="info-panel__info-wrapper">
-          <Text
-            className="info-text__name"
-            noSelect
-            title={displayName}
-            truncate
-          >
+          <Text className="info-text__name" title={displayName} truncate>
             {isPending || !displayName ? infoPanelSelection.email : displayName}
           </Text>
           {isPending ? (

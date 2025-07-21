@@ -169,9 +169,7 @@ const UploadXML = (props) => {
             tabIndex={2}
           />
         </div>
-        <Text className="or-text" noSelect>
-          {t("Common:Or")}
-        </Text>
+        <Text className="or-text">{t("Common:Or")}</Text>
 
         <FileInput
           idButton="select-file"

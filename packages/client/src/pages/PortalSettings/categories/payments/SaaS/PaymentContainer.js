@@ -183,7 +183,6 @@ const PaymentContainer = (props) => {
   const expiredTitleSubscriptionWarning = () => {
     return (
       <Text
-        noSelect
         fontSize="16px"
         isBold
         color={theme.client.settings.payment.warningColor}
@@ -208,12 +207,7 @@ const PaymentContainer = (props) => {
 
     if (isPaidPeriod && !isNonProfit) {
       return (
-        <Text
-          noSelect
-          fontSize="16px"
-          isBold
-          className="payment-info_suggestion"
-        >
+        <Text fontSize="16px" isBold className="payment-info_suggestion">
           <Trans t={t} i18nKey="BusinessSuggestion" ns="Payments">
             {{ planName: tariffPlanTitle }}
           </Trans>
@@ -223,12 +217,7 @@ const PaymentContainer = (props) => {
 
     if (isNotPaidPeriod) {
       return (
-        <Text
-          noSelect
-          fontSize="16px"
-          isBold
-          className="payment-info_suggestion"
-        >
+        <Text fontSize="16px" isBold className="payment-info_suggestion">
           <Trans t={t} i18nKey="RenewSubscription" ns="Payments">
             {{ planName: tariffPlanTitle }}
           </Trans>
@@ -239,7 +228,6 @@ const PaymentContainer = (props) => {
     if (isGracePeriod) {
       return (
         <Text
-          noSelect
           fontSize="16px"
           isBold
           className="payment-info_grace-period"
@@ -258,7 +246,7 @@ const PaymentContainer = (props) => {
 
     if (isGracePeriod)
       return (
-        <Text noSelect fontSize="14px" lineHeight="16px">
+        <Text fontSize="14px" lineHeight="16px">
           <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
             Grace period activated
             <strong>

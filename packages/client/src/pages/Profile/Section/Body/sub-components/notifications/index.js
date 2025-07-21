@@ -87,7 +87,6 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
   const textProps = {
     fontSize: "13px",
     fontWeight: "600",
-    noSelect: true,
   };
   const textDescriptionsProps = {
     fontSize: "13px",

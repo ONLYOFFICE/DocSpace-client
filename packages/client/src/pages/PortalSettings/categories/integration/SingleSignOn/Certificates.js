@@ -108,7 +108,7 @@ const Certificates = (props) => {
   return (
     <StyledWrapper>
       <div className="certificates-box">
-        <Text as="h2" fontSize="15px" fontWeight={600} noSelect>
+        <Text as="h2" fontSize="15px" fontWeight={600}>
           {prefix === "idp" ? t("idpCertificates") : t("spCertificates")}
         </Text>
 

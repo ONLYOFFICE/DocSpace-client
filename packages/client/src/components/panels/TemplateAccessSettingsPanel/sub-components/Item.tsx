@@ -96,10 +96,10 @@ const Item = ({
       />
       <StyledInviteUserBody>
         <div className="invite-input-item">
-          <Text truncate noSelect className="invite-input-text">
+          <Text truncate className="invite-input-text">
             {Encoder.htmlDecode(name ?? "")}
           </Text>
-          <Text truncate noSelect className="invite-input-text_me">
+          <Text truncate className="invite-input-text_me">
             {item.isOwner ? `(${t("Common:MeLabel")})` : null}
           </Text>
         </div>

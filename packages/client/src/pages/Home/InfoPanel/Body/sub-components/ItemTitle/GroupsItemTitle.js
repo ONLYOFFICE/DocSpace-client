@@ -72,7 +72,7 @@ const GroupsItemTitle = ({
 
       <div className="info-panel__info-text">
         <div className="info-panel__info-wrapper">
-          <Text className="info-text__name" noSelect title={groupName} truncate>
+          <Text className="info-text__name" title={groupName} truncate>
             {groupName}
           </Text>
         </div>

@@ -26,12 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import {
-  mobile,
-  tablet,
-  desktop,
-  TextUserSelect,
-} from "@docspace/shared/utils";
+import { mobile, tablet, desktop } from "@docspace/shared/utils";
 
 const StyledOverflowText = css`
   white-space: pre-wrap;
@@ -77,8 +72,6 @@ const StyledTitle = styled.div<{ withBottomBorder: boolean }>`
   padding-inline: 20px 0;
   margin-inline-start: -20px;
   padding-inline-end: 20px;
-
-  ${TextUserSelect}
 
   background: ${(props) => props.theme.infoPanel.backgroundColor};
 
@@ -243,8 +236,6 @@ const StyledProperties = styled.div`
   width: 100%;
   gap: 8px;
   padding-bottom: 20px;
-
-  ${TextUserSelect}
 
   .property {
     width: 100%;

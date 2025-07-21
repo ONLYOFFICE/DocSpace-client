@@ -36,14 +36,12 @@ const Description = ({ dataReassignmentUrl, noRoomFilesToMove }) => {
 
   return (
     <StyledAvailableList className="list-container">
-      <Text className="list-item" noSelect>
+      <Text className="list-item">
         {noRoomFilesToMove
           ? t("RoomsOnlyReassignment")
           : t("DescriptionDataReassignment")}
       </Text>
-      <Text className="list-item" noSelect>
-        {t("NoteDataReassignment")}
-      </Text>
+      <Text className="list-item">{t("NoteDataReassignment")}</Text>
 
       {dataReassignmentUrl ? (
         <Link

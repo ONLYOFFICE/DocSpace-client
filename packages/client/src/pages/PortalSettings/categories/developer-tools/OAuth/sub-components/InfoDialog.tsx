@@ -135,13 +135,7 @@ const InfoDialog = ({
                 src={client?.logo}
               />
 
-              <Text
-                fontSize="16px"
-                lineHeight="22px"
-                fontWeight="700"
-                noSelect
-                truncate
-              >
+              <Text fontSize="16px" lineHeight="22px" fontWeight="700" truncate>
                 {client?.name}
               </Text>
             </div>
@@ -158,7 +152,6 @@ const InfoDialog = ({
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("Creator")}
@@ -174,7 +167,6 @@ const InfoDialog = ({
                   fontSize="14px"
                   lineHeight="16px"
                   fontWeight="600"
-                  noSelect
                   truncate
                 >
                   {client?.creatorDisplayName}
@@ -189,7 +181,6 @@ const InfoDialog = ({
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("Common:Description")}
@@ -201,7 +192,6 @@ const InfoDialog = ({
                 fontSize="13px"
                 lineHeight="20px"
                 fontWeight="400"
-                noSelect
               >
                 {client?.description}
               </Text>
@@ -225,7 +215,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Common:Website")}
@@ -246,7 +235,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Access")}
@@ -261,7 +249,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="16px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("Scopes")}
@@ -283,19 +270,12 @@ const InfoDialog = ({
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("AccessGranted")}
               </Text>
 
-              <Text
-                fontSize="13px"
-                lineHeight="20px"
-                fontWeight="600"
-                noSelect
-                truncate
-              >
+              <Text fontSize="13px" lineHeight="20px" fontWeight="600" truncate>
                 {modifiedDate}
               </Text>
             </>
@@ -305,7 +285,6 @@ const InfoDialog = ({
             fontSize="14px"
             lineHeight="20px"
             fontWeight="600"
-            noSelect
             truncate
           >
             {t("SupportAndLegalInfo")}
@@ -315,7 +294,6 @@ const InfoDialog = ({
             fontSize="13px"
             lineHeight="15px"
             fontWeight="600"
-            noSelect
             truncate
           >
             <Link
@@ -350,19 +328,12 @@ const InfoDialog = ({
                 fontSize="14px"
                 lineHeight="16px"
                 fontWeight="600"
-                noSelect
                 truncate
               >
                 {t("LastModified")}
               </Text>
 
-              <Text
-                fontSize="13px"
-                lineHeight="20px"
-                fontWeight="600"
-                noSelect
-                truncate
-              >
+              <Text fontSize="13px" lineHeight="20px" fontWeight="600" truncate>
                 {modifiedDate}
               </Text>
             </>

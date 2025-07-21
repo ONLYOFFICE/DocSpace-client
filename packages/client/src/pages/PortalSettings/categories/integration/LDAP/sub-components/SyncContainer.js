@@ -131,7 +131,6 @@ const SyncContainer = ({
             fontWeight={400}
             lineHeight="20px"
             className="ldap_cron-title"
-            noSelect
           >
             {t("LdapSyncCronTitle")}
           </Text>
@@ -142,7 +141,7 @@ const SyncContainer = ({
               isDisabled={!isLdapEnabledOnServer || isUIDisabled}
             />
           </div>
-          <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
+          <Text fontSize="12px" fontWeight={600} lineHeight="16px">
             {`${t("LdapNextSync")}: ${nextSyncDate?.toFormat("DDDD tt")} UTC`}
           </Text>
           <Button

@@ -180,13 +180,13 @@ const GenerateDeveloperTokenDialog = ({
         <StyledGenerateDevelopTokenContainer>
           {!token ? (
             <>
-              <Text style={{ marginBottom: "16px" }} noSelect>
+              <Text style={{ marginBottom: "16px" }}>
                 {t("OAuth:GenerateTokenDescription")}
               </Text>
-              <Text style={{ marginBottom: "16px" }} noSelect>
+              <Text style={{ marginBottom: "16px" }}>
                 {t("OAuth:GenerateTokenScope")}
               </Text>{" "}
-              <Text noSelect>
+              <Text>
                 <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
               </Text>
             </>
@@ -212,7 +212,7 @@ const GenerateDeveloperTokenDialog = ({
                   {`This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.`}
                 </Trans>
               </Text>
-              <Text style={{ marginBottom: "16px" }} noSelect>
+              <Text style={{ marginBottom: "16px" }}>
                 <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
               </Text>
               <InputBlock

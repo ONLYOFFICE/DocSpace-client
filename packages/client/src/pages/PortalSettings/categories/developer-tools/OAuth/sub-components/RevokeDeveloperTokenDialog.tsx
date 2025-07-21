@@ -157,10 +157,10 @@ const GenerateDeveloperTokenDialog = ({
       <ModalDialog.Header>{t("OAuth:RevokeDialogHeader")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div>
-          <Text style={{ marginBottom: "16px" }} noSelect>
+          <Text style={{ marginBottom: "16px" }}>
             {t("OAuth:RevokeDialogDescription")}
           </Text>
-          <Text style={{ marginBottom: "16px" }} noSelect>
+          <Text style={{ marginBottom: "16px" }}>
             {t("OAuth:RevokeDialogEnterToken")}
           </Text>
           <FieldContainer

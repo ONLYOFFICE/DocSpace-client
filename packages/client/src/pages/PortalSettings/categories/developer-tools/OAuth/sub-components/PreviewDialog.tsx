@@ -215,7 +215,7 @@ const PreviewDialog = ({
           </StyledPreviewContainer>
           <StyledBlocksContainer>
             <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 HTML
               </Text>
               <Textarea
@@ -226,7 +226,7 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 CSS
               </Text>
               <Textarea
@@ -237,7 +237,7 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 JavaScript
               </Text>
               <Textarea
@@ -248,7 +248,7 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                 {t("OAuth:AuthorizeLink")}
               </Text>
               <Textarea
@@ -261,12 +261,7 @@ const PreviewDialog = ({
 
             {!isClientSecretPost ? (
               <div className="block-container">
-                <Text
-                  fontWeight={600}
-                  lineHeight="20px"
-                  fontSize="13px"
-                  noSelect
-                >
+                <Text fontWeight={600} lineHeight="20px" fontSize="13px">
                   {t("OAuth:CodeVerifier")}
                 </Text>
                 <Textarea

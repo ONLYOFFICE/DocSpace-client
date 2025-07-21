@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { mobile, tablet, TextUserSelect } from "@docspace/shared/utils";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 const StyledUsersTitle = styled.div`
   min-height: 80px;
@@ -78,7 +78,6 @@ const StyledUsersTitle = styled.div`
       font-weight: 700;
       font-size: 16px;
       line-height: 22px;
-      ${TextUserSelect}
     }
 
     .info-text__email {

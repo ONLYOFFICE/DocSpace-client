@@ -143,7 +143,7 @@ const PayerInformation = ({
 
   const unknownPayerInformation = (
     <div>
-      <Text as="span" fontSize="13px" noSelect>
+      <Text as="span" fontSize="13px">
         {unknownPayerDescription()}
       </Text>
       <div>

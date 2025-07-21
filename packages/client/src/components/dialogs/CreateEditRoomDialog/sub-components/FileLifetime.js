@@ -144,7 +144,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
 
   return (
     <StyledFileLifetime className="virtual-data-room_file-lifetime">
-      <Text fontWeight={600} fontSize="13px" noSelect>
+      <Text fontWeight={600} fontSize="13px">
         {t("FilesOlderThan")}
       </Text>
 

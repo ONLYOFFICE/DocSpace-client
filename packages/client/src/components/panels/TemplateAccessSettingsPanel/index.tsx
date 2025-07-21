@@ -313,12 +313,7 @@ const TemplateAccessSettingsPanel = ({
           isFill
           isClickable
         />
-        <Text
-          fontSize="21px"
-          fontWeight={700}
-          className="header-component"
-          noSelect
-        >
+        <Text fontSize="21px" fontWeight={700} className="header-component">
           {t("Files:AccessSettings")}
         </Text>
         <IconButton

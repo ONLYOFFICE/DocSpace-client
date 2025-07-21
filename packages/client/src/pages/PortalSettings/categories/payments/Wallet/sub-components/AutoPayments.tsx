@@ -234,12 +234,7 @@ const AutoPayments = ({
   };
 
   const description = (min: number, max: number) => (
-    <Text
-      fontSize="12px"
-      className={styles.inputDescription}
-      noSelect
-      fontWeight={400}
-    >
+    <Text fontSize="12px" className={styles.inputDescription} fontWeight={400}>
       {t("EnterAnIntegerAmountBetween", {
         min: formatWalletCurrency!(min, 0),
         max: formatWalletCurrency!(max, 0),
@@ -250,12 +245,7 @@ const AutoPayments = ({
   const renderInputField = () => (
     <div className={styles.inputFields}>
       <div className={styles.inputField}>
-        <Text
-          fontSize="12px"
-          className={styles.inputLabel}
-          noSelect
-          fontWeight={600}
-        >
+        <Text fontSize="12px" className={styles.inputLabel} fontWeight={600}>
           {t("WhenBalanceGoesBellow")}
         </Text>
         <TextInput
@@ -271,12 +261,7 @@ const AutoPayments = ({
       </div>
 
       <div className={styles.inputField}>
-        <Text
-          fontSize="12px"
-          className={styles.inputLabel}
-          noSelect
-          fontWeight={600}
-        >
+        <Text fontSize="12px" className={styles.inputLabel} fontWeight={600}>
           {t("BringCreditBackUpTo")}
         </Text>
         <TextInput
@@ -347,7 +332,7 @@ const AutoPayments = ({
       })}
     >
       <div className={styles.autoPaymentHeader}>
-        <Text noSelect isBold fontSize="16px">
+        <Text isBold fontSize="16px">
           {t("AutomaticPayments")}
         </Text>
         <ToggleButton
@@ -358,7 +343,7 @@ const AutoPayments = ({
         />
       </div>
 
-      <Text fontSize="12px" className={styles.autoPaymentDescription} noSelect>
+      <Text fontSize="12px" className={styles.autoPaymentDescription}>
         {t("AutomaticallyTopUpCard")}
       </Text>
 

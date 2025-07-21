@@ -63,7 +63,7 @@ const FieldMapping = (props) => {
   return (
     <StyledWrapper>
       <div className="attribute-matching-box">
-        <Text as="h2" fontSize="15px" fontWeight={600} noSelect>
+        <Text as="h2" fontSize="15px" fontWeight={600}>
           {t("AttributeMatching")}
         </Text>
 

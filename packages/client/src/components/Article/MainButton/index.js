@@ -722,8 +722,8 @@ const ArticleMainButtonContent = (props) => {
 
   let isDisabled = false;
 
-  if (isSettingsPage || isRecentFolder) {
-    isDisabled = true;
+  if (isSettingsPage) {
+    isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
     isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else {

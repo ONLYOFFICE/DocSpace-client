@@ -822,15 +822,16 @@ class ContextOptionsStore {
     );
   };
 
-  onClickShare = (item) => {
+  onClickShare = () => {
     const { openShareTab } = this.infoPanelStore;
-    const { setShareFolderDialogVisible } = this.dialogsStore;
+    // const { setShareFolderDialogVisible } = this.dialogsStore;
 
-    if (item.isFolder) {
-      setShareFolderDialogVisible(true);
-    } else {
-      openShareTab();
-    }
+    openShareTab();
+    // if (item.isFolder) {
+    //   setShareFolderDialogVisible(true);
+    // } else {
+    // openShareTab();
+    // }
   };
 
   onClickMarkRead = (item) => {
@@ -1472,9 +1473,14 @@ class ContextOptionsStore {
   };
 
   getManageLink = async (item, t) => {
-    const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
+    const { getPrimaryFileLink, getPrimaryFolderLink, setShareChanged } =
+      this.infoPanelStore;
 
-    const primaryLink = await getPrimaryFileLink(item.id);
+    const getPrimaryLink = item.isFolder
+      ? getPrimaryFolderLink
+      : getPrimaryFileLink;
+
+    const primaryLink = await getPrimaryLink(item.id);
 
     if (primaryLink) {
       copyDocumentShareLink(primaryLink, t, this.getManageLinkOptions(item));
@@ -1923,7 +1929,7 @@ class ContextOptionsStore {
             label: t("Common:CopySharedLink"),
             icon: TabletLinkReactSvgUrl,
             onClick: () => this.getManageLink(item, t),
-            disabled: false,
+            disabled: !item.canShare,
           },
           {
             id: "option_manage-links",
@@ -1931,7 +1937,7 @@ class ContextOptionsStore {
             label: t("Common:ManageLinks"),
             icon: SettingsReactSvgUrl,
             onClick: () => this.onClickShare(item),
-            disabled: false,
+            disabled: !item.canShare,
           },
           {
             id: "option_embedding-setting",

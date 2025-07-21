@@ -2842,13 +2842,16 @@ class FilesStore {
       "open",
       // "separator0",
       "sharing-settings",
+      "copy-shared-link",
+      "manage-links",
+      "create-room-separator",
+      "create-room",
       "link-for-room-members",
       // "owner-change",
       "show-info",
       // "link-for-portal-users",
       "separator1",
       "open-location",
-      "create-room",
       "download",
       "move", // category
       "move-to",
@@ -2872,6 +2875,9 @@ class FilesStore {
       folderOptions = removeOptions(folderOptions, [
         "show-info",
         "sharing-settings",
+        "copy-shared-link",
+        "manage-links",
+        "create-room-separator",
         "separator1",
         "create-room",
       ]);

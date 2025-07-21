@@ -49,6 +49,7 @@ const BrandNameComponent = (props) => {
     getBrandName,
   } = props;
   const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     getBrandName();
@@ -68,6 +69,24 @@ const BrandNameComponent = (props) => {
     }
   };
 
+  const handleValidation = (value) => {
+    let errorCode = "";
+
+    if (!value) {
+      errorCode = "Empty";
+    } else if (value.length < 2) {
+      errorCode = "MinLength";
+    } else {
+      const brandNameRegex = /^[\p{L}\p{N}][\p{L}\p{N}\s-]*[\p{L}\p{N}]$/u; // any unicode letters are allowed, characters are prohibited
+      if (!brandNameRegex.test(value)) {
+        errorCode = "SpecSymbols";
+      }
+    }
+
+    setError(errorCode);
+    return errorCode;
+  };
+
   return !isBrandNameLoaded ? (
     <LoaderBrandName />
   ) : (
@@ -82,6 +101,8 @@ const BrandNameComponent = (props) => {
       brandName={brandName}
       onSave={onSave}
       deviceType={deviceType}
+      error={error}
+      onValidate={handleValidation}
     />
   );
 };

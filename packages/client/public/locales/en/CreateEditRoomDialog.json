@@ -40,5 +40,7 @@
   "UserName": "User Name",
   "ViewerInfo": "Viewer info",
   "WatermarkPreview": "Watermark Preview",
-  "WatermarkPreviewHelp": "This image preview roughly shows how the watermark will be displayed in your files."
+  "WatermarkPreviewHelp": "This image preview roughly shows how the watermark will be displayed in your files.",
+  "TrashRoomLabel": "Room trash",
+  "TrashRoomDescription": "Choose how long files are kept before permanent deletion."
 }

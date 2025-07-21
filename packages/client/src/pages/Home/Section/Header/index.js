@@ -93,7 +93,6 @@ const SectionHeaderContent = (props) => {
     getHeaderMenu,
     isRecycleBinFolder,
     isArchiveFolder,
-    isRecentFolder,
     isEmptyFilesList,
     isHeaderVisible,
     isIndexEditingMode,
@@ -630,7 +629,7 @@ const SectionHeaderContent = (props) => {
                 canCreate={
                   (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
                   !isSettingsPage
-                    ? !isPublicRoom && !isRecentFolder
+                    ? !isPublicRoom
                     : null
                 }
                 rootRoomTitle={currentRootRoomTitle}
@@ -803,7 +802,6 @@ export default inject(
       isRoomsFolder,
       isArchiveFolder,
       isPersonalReadOnly,
-      isRecentFolder,
     } = treeFoldersStore;
 
     const {
@@ -958,7 +956,6 @@ export default inject(
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
-      isRecentFolder,
 
       setIsLoading,
 

@@ -75,6 +75,9 @@ class TreeFoldersStore {
         case FolderType.TRASH:
           folder.title = i18n.t("Common:TrashSection");
           break;
+        case FolderType.Recent:
+          folder.title = i18n.t("Common:Recent");
+          break;
         default:
           break;
       }

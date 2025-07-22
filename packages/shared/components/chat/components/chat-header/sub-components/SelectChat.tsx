@@ -60,7 +60,8 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
   const parentRef = React.useRef<HTMLDivElement>(null);
   const contextMenuRef = React.useRef<ContextMenuRefType>(null);
 
-  const { chats, isLoading, fetchChat, deleteChat } = useChatStore();
+  const { chats, isLoading, currentChat, fetchChat, deleteChat } =
+    useChatStore();
   const { fetchMessages } = useMessageStore();
 
   const toggleOpen = () => {
@@ -163,6 +164,7 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
                   onSelectAction(id);
                 }}
                 className={classNames("drop-down-item")}
+                isActive={id === currentChat?.id}
               >
                 <div
                   className={styles.dropdowItemWrapper}

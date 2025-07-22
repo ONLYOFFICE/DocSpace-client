@@ -32,18 +32,26 @@ import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg";
 import { Text } from "../../../../text";
 
 import { useMessageStore } from "../../../store/messageStore";
+import { useChatStore } from "../../../store/chatStore";
 
 import styles from "../ChatHeader.module.scss";
 
 const CreateChat = () => {
   const { messages, startNewChat } = useMessageStore();
+  const { setCurrentChat } = useChatStore();
 
   const { t } = useTranslation(["Common"]);
 
   if (messages.length === 0) return null;
 
+  const onClickAction = () => {
+    console.log(setCurrentChat);
+    setCurrentChat(null);
+    startNewChat();
+  };
+
   return (
-    <div className={styles.createChat} onClick={startNewChat}>
+    <div className={styles.createChat} onClick={onClickAction}>
       <PlusReactSvgUrl />
       <Text fontSize="14px" lineHeight="16px" fontWeight={600}>
         {t("AINewChat")}

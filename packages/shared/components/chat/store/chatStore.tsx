@@ -54,16 +54,18 @@ export default class ChatStore {
     makeAutoObservable(this);
   }
 
-  setCurrentChat(chat: TChat) {
-    runInAction(() => {
-      this.currentChat = chat;
-    });
-  }
+  setCurrentChat = (chat: TChat | null) => {
+    this.currentChat = chat;
+  };
 
   fetchChat = async (id: string) => {
     const chat = await getChat(id);
 
     this.setCurrentChat(chat);
+
+    if (!this.chats.some((c) => c.id === chat.id)) {
+      this.chats = [chat, ...this.chats];
+    }
   };
 
   fetchChats = async () => {

@@ -886,5 +886,8 @@
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
-  "Tools": "Tools"
+  "Tools": "Tools",
+  "ToolCallExecuted": "Tool call executed",
+  "ToolCallArg": "Tool call arguments:",
+  "ToolCallResult": "Tool call result:"
 }

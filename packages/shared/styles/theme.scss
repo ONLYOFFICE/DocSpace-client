@@ -2190,6 +2190,7 @@
   --chat-message-code-block-background-color: #{$white};
   --chat-message-code-block-border: 1px solid #{$gray-light-mid};
   --chat-message-code-block-separator-color: #{$gray-light-mid};
+  --chat-message-tool-block-color: #{$gray-light};
 }
 
 .dark {
@@ -2226,6 +2227,7 @@
   --chat-message-code-block-background-color: #{$dark-gray-light};
   --chat-message-code-block-border: none;
   --chat-message-code-block-separator-color: #{$gray-dark-strong};
+  --chat-message-tool-block-color: #{$gray-dark-mid};
 }
 
 .light {

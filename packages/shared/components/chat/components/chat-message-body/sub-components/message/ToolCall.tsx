@@ -26,11 +26,17 @@
 
 import React from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
+
+import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
+import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 
 import { TContent } from "../../../../../../api/ai/types";
 import { ContentType } from "../../../../../../api/ai/enums";
 
 import { Text } from "../../../../../text";
+import { Loader, LoaderTypes } from "../../../../../loader";
 
 import { formatJsonWithMarkdown } from "../../../../utils";
 
@@ -38,6 +44,7 @@ import styles from "../../ChatMessageBody.module.scss";
 import MarkdownField from "./Markdown";
 
 const ToolCall = ({ content }: { content: TContent }) => {
+  const { t } = useTranslation(["Common"]);
   const [isHide, setIsHide] = React.useState(true);
 
   if (content.type !== ContentType.Tool) return null;
@@ -48,30 +55,37 @@ const ToolCall = ({ content }: { content: TContent }) => {
         className={classNames(styles.toolCallHeader, { [styles.hide]: isHide })}
         onClick={() => setIsHide((val) => !val)}
       >
-        <Text fontSize="16px" lineHeight="20px" isBold>
-          {content.name}
+        {content.result ? (
+          <ReactSVG src={ToolFinish} className={styles.toolFinishIcon} />
+        ) : (
+          <Loader type={LoaderTypes.track} size="12px" />
+        )}
+        <Text fontSize="13px" lineHeight="15px" fontWeight={600}>
+          {t("Common:ToolCallExecuted")}:<span> {content.name}</span>
         </Text>
-        <Text fontSize="13px" lineHeight="20px">
-          {content.result ? "Finished" : "Pending"}
-        </Text>
+        <ReactSVG src={ArrowRightIcon} className={styles.arrowRightIcon} />
       </div>
       {isHide ? null : (
-        <>
-          <div className={styles.toolCallBodyFirst}>
+        <div className={styles.toolCallBody}>
+          <div className={styles.toolCallBodyItem}>
+            <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
+              {t("Common:ToolCallArg")}
+            </Text>
             <MarkdownField
-              propLanguage="Tool call arguments"
               chatMessage={formatJsonWithMarkdown(content.arguments)}
             />
           </div>
           {content.result ? (
-            <div className={styles.toolCallBody}>
+            <div className={styles.toolCallBodyItem}>
+              <Text fontSize="15px" lineHeight="16px" fontWeight={600}>
+                {t("Common:ToolCallResult")}
+              </Text>
               <MarkdownField
                 chatMessage={formatJsonWithMarkdown(content.result)}
-                propLanguage="Tool call result"
               />
             </div>
           ) : null}
-        </>
+        </div>
       )}
     </div>
   );

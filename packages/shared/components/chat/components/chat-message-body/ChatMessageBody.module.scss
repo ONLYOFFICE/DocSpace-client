@@ -219,38 +219,73 @@
 }
 
 .toolCall {
-  border: 1px solid var(--chat-message-code-block-separator-color);
+  width: 100%;
 
-  border-radius: 6px;
-
-  .codeContainer,
-  pre {
-    margin: 0;
-  }
-
-  .codeHeader {
-    border: none;
-  }
+  box-sizing: border-box;
 
   .toolCallHeader {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
 
-    border-bottom: 1px solid var(--chat-message-code-block-separator-color);
+    gap: 8px;
 
-    padding: 8px;
+    padding: 8px 0;
 
     box-sizing: border-box;
+
+    div {
+      height: 15px;
+    }
+
+    .toolFinishIcon {
+      svg {
+        path {
+          fill: var(--chat-input-send-button-background);
+        }
+      }
+    }
 
     &.hide {
       border-bottom: none;
     }
+
+    &:not(.hide) {
+      .arrowRightIcon {
+        rotate: 90deg;
+      }
+    }
   }
 
-  .toolCallBodyFirst {
-    margin-bottom: 1px;
+  .toolCallBody {
+    margin-top: 6px;
+
+    padding: 12px;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    background-color: var(--chat-message-tool-block-color);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .toolCallBodyItem {
+      display: flex;
+      flex-direction: column;
+
+      gap: 8px;
+
+      pre {
+        margin: 0;
+
+        div {
+          margin: 0;
+        }
+      }
+    }
   }
 }
 

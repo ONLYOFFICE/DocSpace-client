@@ -35,6 +35,7 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getStringFromSearchParams } from "@/utils";
 
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
+import { logger } from "logger.mjs";
 import GuestShareLinkForm from "./page.client";
 
 type GuestShareLinkProps = {
@@ -42,6 +43,8 @@ type GuestShareLinkProps = {
 };
 
 async function Page(props: GuestShareLinkProps) {
+  logger.info("GuestShareLink page");
+
   const { searchParams: sp } = props;
   const searchParams = await sp;
   const uid = searchParams.uid;

@@ -45,11 +45,11 @@ const ButtonContainer = ({
   t,
   isNotPaidPeriod,
   isGracePeriod,
-  accountLink,
+  paymentLink,
 }) => {
-  const goToStripeAccount = () => {
-    accountLink
-      ? window.open(accountLink, "_blank")
+  const goToStripePortal = () => {
+    paymentLink
+      ? window.open(paymentLink, "_blank")
       : toastr.error(t("ErrorNotification"));
   };
 
@@ -62,7 +62,7 @@ const ButtonContainer = ({
           size="medium"
           primary
           isDisabled={isLoading || isDisabled}
-          onClick={goToStripeAccount}
+          onClick={goToStripePortal}
           isLoading={isLoading}
         />
       ) : isNeedRequest ? (
@@ -75,7 +75,7 @@ const ButtonContainer = ({
 };
 
 export default inject(({ currentTariffStatusStore, paymentStore }) => {
-  const { isNeedRequest, isLoading, accountLink } = paymentStore;
+  const { isNeedRequest, isLoading, accountLink, paymentLink } = paymentStore;
   const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
   return {
@@ -84,5 +84,6 @@ export default inject(({ currentTariffStatusStore, paymentStore }) => {
     isNotPaidPeriod,
     isGracePeriod,
     accountLink,
+    paymentLink,
   };
 })(observer(ButtonContainer));

@@ -94,6 +94,7 @@ module.exports = {
     "no-param-reassign": "off",
     "prefer-destructuring": "off",
     "@typescript-eslint/no-duplicate-enum-values": "off",
+    "@typescript-eslint/no-use-before-define": ["error", { functions: false }],
   },
   ignorePatterns: [
     "./tsconfig.json",

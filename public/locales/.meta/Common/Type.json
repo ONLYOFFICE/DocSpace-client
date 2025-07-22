@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-06-30T12:20:31.323Z",
+  "updated_at": "2025-07-10T11:11:06.869Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 240,
+      "line_number": 239,
       "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className=\"info_field\" noSelect title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && infoPanelSelection.createdBy?.displayName ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 240,
+      "line_number": 239,
       "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className=\"info_field\" noSelect title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && infoPanelSelection.createdBy?.displayName ? (",
       "module": "/packages/client"
     },
@@ -66,19 +66,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 777,
+      "line_number": 783,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 777,
+      "line_number": 783,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 777,
+      "line_number": 783,
       "context": "const typeOptions = isRooms\n ? [\n {\n key: FilterGroups.filterType,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:Type\"),\n isHeader: true,\n isLast: isLastTypeOptionsRooms,\n },\n ...RoomsTypeValues.map((roomType) => {\n switch (roomType) {",
       "module": "/packages/client"
     },
@@ -114,19 +114,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 432,
+      "line_number": 437,
       "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n />\n {isTypeFilterSet ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 432,
+      "line_number": 437,
       "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n />\n {isTypeFilterSet ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 353,
+      "line_number": 388,
       "context": "<ModalDialog.Header>{t(\"Filter\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.filterDialogContent}>\n <div className={styles.filterDialogSection}>\n <Text fontWeight={600} fontSize=\"15px\">\n {t(\"Common:Type\")}\n </Text>\n <ComboBox\n options={typeOfHistoty}\n selectedOption={selectedType}\n onSelect={onSelectType}",
       "module": "/packages/client"
     },

@@ -10,6 +10,8 @@
   "AddEmailsDescription": "{{organizationName}} {{productName}}にインポートする未インポートユーザーのリストを確認します。",
   "AddEmailsWarning": "メールアドレスを持つユーザーがいません。次のステップに進んで追加してください。",
   "AddTrustedDomain": "信頼されたドメインを追加",
+  "AdManagement": "広告管理",
+  "AdManagementDescription": "{{productName}}にプロモーションバナーを表示するかどうかを選択します。",
   "Admins": "管理者",
   "AdminsMessage": "管理者メッセージの設定",
   "AdminsMessageMobileDescription": "管理者メッセージ設定は、ポータル管理者に連絡する方法です。",
@@ -83,7 +85,7 @@
   "DeleteThemeForever": "このテーマを永遠に解除しますか？",
   "DeleteThemeNotice": "このテーマは永久に削除されます。このアクションを元に戻すことはできません。",
   "DeveloperToolsAccess": "制限された開発者ツールへのアクセス",
-  "DeveloperToolsAccessDescription": "この設定により、ゲストを除くすべてのユーザーに「開発者ツール」セクションを表示することができます。このセクションへのアクセスを制限し、 {{productName}} の所有者と管理者だけにアクセスを許可したい場合は、「無効」を選択し、「保存」ボタンをクリックしてください。",
+  "DeveloperToolsAccessDescription": "この設定により、開発者ツールセクションをゲスト以外のすべてのユーザーに表示することができます。このセクションへのアクセスを制限し、所有者と{{productName}}管理者のみがアクセスできるようにしたい場合は、無効を選択して保存ボタンをクリックしてください。",
   "DeveloperToolsAccessMobileDescription": "この設定により、ゲストを除くすべてのユーザーに「開発者ツール」セクションを表示することができます。",
   "DisableEmailDescription": "このボックスがチェックされている場合、{{sectionName}} ユーザーは {{productName}} で最初の認証後にメールを確認する必要がありません。",
   "DisableEmailVerification": "メール認証を無効にする",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "データのインポートをキャンセルしますか？",
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinue": "ユーザーストレージ容量制限を継続または変更しますか？",
+  "WhiteLabelSubtitle": "会社名を入力し、ロゴをアップロードし、ブランディングに合わせたスタイリングにカスタマイズをしましょう。",
   "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
 }

@@ -37,6 +37,10 @@ import {
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
+
+import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
+import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
 
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
@@ -51,6 +55,7 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
+import { isPDFDocument } from "@/utils";
 
 const Editor = ({
   config,
@@ -83,6 +88,7 @@ const Editor = ({
   onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
+  const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -220,19 +226,23 @@ const Editor = ({
     }
   }
 
-  // if (newConfig.document && newConfig.document.info)
-  //  newConfig.document.info.favorite = false;
-  const url = typeof window !== "undefined" ? window.location.href : "";
+  try {
+    // if (newConfig.document && newConfig.document.info)
+    //  newConfig.document.info.favorite = false;
+    const url = typeof window !== "undefined" ? window.location.href : "";
 
-  if (url.indexOf("anchor") !== -1) {
-    const splitUrl = url.split("anchor=");
-    const decodeURI = decodeURIComponent(splitUrl[1]);
-    const obj = JSON.parse(decodeURI);
+    if (url.indexOf("anchor") !== -1) {
+      const splitUrl = url.split("anchor=");
+      const decodeURI = decodeURIComponent(splitUrl[1]);
+      const obj = JSON.parse(decodeURI);
 
-    if (newConfig.editorConfig)
-      newConfig.editorConfig.actionLink = {
-        action: obj.action,
-      };
+      if (newConfig.editorConfig)
+        newConfig.editorConfig.actionLink = {
+          action: obj.action,
+        };
+    }
+  } catch (error) {
+    console.error(error);
   }
 
   newConfig.events = {
@@ -255,6 +265,18 @@ const Editor = ({
     onRequestRefreshFile,
   };
 
+  if (
+    typeof window !== "undefined" &&
+    newConfig.editorConfig?.user &&
+    newConfig.editorConfig.user.image?.includes(
+      "default_user_photo_size_48-48.png",
+    )
+  ) {
+    newConfig.editorConfig.user.image = isBase
+      ? `${window.location.origin}${UserAvatarBaseSvgUrl}`
+      : `${window.location.origin}${UserAvatarDarkSvgUrl}`;
+  }
+
   if (successAuth) {
     newConfig.events.onRequestUsers = onSDKRequestUsers;
     newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
@@ -262,8 +284,8 @@ const Editor = ({
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
-        IS_DESKTOP_EDITOR ||
-        (typeof window !== "undefined" && !openOnNewPage)
+        !isPDFDocument(fileInfo) &&
+        (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {
         newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
       }

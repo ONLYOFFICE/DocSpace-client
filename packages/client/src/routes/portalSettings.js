@@ -183,6 +183,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "customization/general/ad-management",
+      async lazy() {
+        const { AdManagement } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ad-management"
+            ),
+        );
+
+        return { Component: AdManagement };
+      },
+    },
+    {
       path: "security",
       element: <Navigate to="security/access-portal" replace />,
     },

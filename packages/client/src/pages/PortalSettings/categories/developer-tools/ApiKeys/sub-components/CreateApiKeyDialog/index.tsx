@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import copy from "copy-to-clipboard";
 import { TFunction } from "i18next";
 
@@ -43,8 +42,9 @@ import {
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { TabItem } from "@docspace/shared/components/tab-item";
+import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import { toastr } from "@docspace/shared/components/toast";
 import { globalColors } from "@docspace/shared/themes";
 import { CreateApiKeyDialogProps, TPermissionsList } from "../../types";
@@ -57,84 +57,7 @@ import {
   sortPermissions,
 } from "../../utils";
 
-const StyledBodyContent = styled.div`
-  .api-key_name {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-top: 16px;
-  }
-
-  .api-key_tabs-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 32px;
-  }
-
-  .api-key_name-body-container {
-    display: flex;
-    gap: 4px;
-    margin-top: 16px;
-  }
-
-  .api-key_lifetime {
-    display: flex;
-  }
-
-  .api-key_toggle {
-    margin-inline-start: auto;
-    margin-inline-end: 28px;
-  }
-
-  .api-key_lifetime-description {
-    color: ${(props) => props.theme.text.disableColor};
-  }
-
-  .api-key_lifetime-input-block {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .api-key_lifetime-input {
-    max-width: 100px;
-  }
-
-  .sticky-indent {
-    display: none;
-  }
-
-  .api-key_permission-tab {
-    width: 100%;
-  }
-
-  .api-key_permission-container {
-    display: grid;
-    grid-template-columns: 1fr minmax(50px, auto) minmax(50px, auto);
-    gap: 8px 0;
-  }
-
-  .separator {
-    padding: 11px 0px 9px;
-    margin-bottom: 6px;
-    border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
-  }
-
-  .api-key_permission-container-text {
-    display: flex;
-    justify-content: center;
-  }
-
-  .api-key_permission-checkbox {
-    justify-content: center;
-    margin-left: 12px;
-  }
-
-  .api-key_permission-row {
-    margin-bottom: 8px;
-  }
-`;
+import { StyledBodyContent } from "./StyledCreateApiKeys";
 
 const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const {
@@ -148,6 +71,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     setActionItem,
     onChangeApiKeyParams,
     isRequestRunning: isRequestRunningProp,
+    isUser,
   } = props;
 
   const selectedOption = getItemPermissions(actionItem?.permissions);
@@ -187,6 +111,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     Object.entries(filteredOpt).forEach(([key, value]) => {
       const category = getCategoryTranslation(key as PermissionGroup, t);
       const readIsDisabled = value?.isWrite?.isChecked;
+      const showTooltip = value?.isWrite?.isDisabled;
 
       list.push(
         <React.Fragment key={key}>
@@ -207,25 +132,44 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
                 obj[key].isRead.isChecked = !value.isRead.isChecked;
                 setFilteredOpt(obj);
               }}
-              isDisabled={readIsDisabled || isRequestRunning}
+              isDisabled={
+                readIsDisabled || isRequestRunning || value.isRead.isDisabled
+              }
             />
           ) : (
             <div />
           )}
           {value.isWrite ? (
-            <Checkbox
-              className="api-key_permission-row api-key_permission-checkbox"
-              isChecked={value.isWrite.isChecked}
-              onChange={() => {
-                const obj = { ...filteredOpt };
-                obj[key].isWrite.isChecked = !value.isWrite.isChecked;
-                setFilteredOpt(obj);
-              }}
-              isDisabled={isRequestRunning}
-            />
+            <div
+              data-tooltip-id={showTooltip ? "emailTooltip" : ""}
+              data-tip="tooltip"
+            >
+              <Checkbox
+                className="api-key_permission-row api-key_permission-checkbox"
+                isChecked={value.isWrite.isChecked}
+                onChange={() => {
+                  const obj = { ...filteredOpt };
+                  obj[key].isWrite.isChecked = !value.isWrite.isChecked;
+                  setFilteredOpt(obj);
+                }}
+                isDisabled={isRequestRunning || value.isWrite.isDisabled}
+              />
+            </div>
           ) : (
             <div />
           )}
+
+          {showTooltip ? (
+            <Tooltip
+              id="emailTooltip"
+              getContent={() => (
+                <Text isInline fontSize="12px">
+                  {t("Common:YouDontHaveEnoughPermission")}
+                </Text>
+              )}
+              place="bottom"
+            />
+          ) : null}
         </React.Fragment>,
       );
     });
@@ -244,6 +188,31 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     {
       id: "restricted",
       name: t("Common:Restricted"),
+      content: (
+        <div className="api-key_permission-tab">
+          <div className="api-key_permission-container">
+            <Text fontSize="13px" fontWeight={600} className="separator">
+              {t("OAuth:ScopesHeader")}
+            </Text>
+            <Text
+              className="api-key_permission-container-text separator"
+              fontWeight={600}
+            >
+              {t("OAuth:Read")}
+            </Text>
+            <Text
+              className="api-key_permission-container-text separator"
+              fontWeight={600}
+            >
+              {t("OAuth:Write")}
+            </Text>
+
+            {permissionsList.map((item) => {
+              return item;
+            })}
+          </div>
+        </div>
+      ),
     },
     {
       id: "readonly",
@@ -319,10 +288,8 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     }
   };
 
-  const onSelectPermission = (e: React.MouseEvent<HTMLDivElement>) => {
-    const itemId = e.currentTarget.dataset.id;
-
-    switch (itemId) {
+  const onSelectPermission = (data: TTabItem) => {
+    switch (data.id) {
       case "all":
         setSelectedItemId("all");
         break;
@@ -341,6 +308,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   useEffect(() => {
     const filteredOptions = getFilteredOptions(
       permissions,
+      isUser,
       actionItem?.permissions,
     );
     setFilteredOpt(filteredOptions);
@@ -417,44 +385,12 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         <Text fontSize="13px" fontWeight={600}>
           {t("Common:Permissions")}
         </Text>
-
-        <div className="api-key_tabs-container">
-          {tabsItems.map((item) => (
-            <TabItem
-              isActive={selectedItemId === item.id}
-              key={item.id}
-              data-id={item.id}
-              label={item.name}
-              onSelect={onSelectPermission}
-            />
-          ))}
-        </div>
-
-        {selectedItemId === "restricted" ? (
-          <div className="api-key_permission-tab">
-            <div className="api-key_permission-container">
-              <Text fontSize="13px" fontWeight={600} className="separator">
-                {t("OAuth:ScopesHeader")}
-              </Text>
-              <Text
-                className="api-key_permission-container-text separator"
-                fontWeight={600}
-              >
-                {t("OAuth:Read")}
-              </Text>
-              <Text
-                className="api-key_permission-container-text separator"
-                fontWeight={600}
-              >
-                {t("OAuth:Write")}
-              </Text>
-
-              {permissionsList.map((item) => {
-                return item;
-              })}
-            </div>
-          </div>
-        ) : null}
+        <Tabs
+          type={TabsTypes.Secondary}
+          items={tabsItems}
+          onSelect={onSelectPermission}
+          selectedItemId={selectedItemId}
+        />
       </div>
       {!isEdit ? (
         <div className="api-key_name">

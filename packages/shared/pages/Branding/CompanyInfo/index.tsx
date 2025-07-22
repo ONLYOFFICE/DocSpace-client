@@ -304,7 +304,7 @@ export const CompanyInfo = ({
           onCancelClick={onRestoreAction}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:Restore")}
-          reminderText={t("YouHaveUnsavedChanges")}
+          reminderText={t("Common:YouHaveUnsavedChanges")}
           displaySettings
           saveButtonDisabled={isDisabled}
           hasScroll

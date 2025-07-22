@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Skontrolujte zoznam používateľov, ktorí ešte neboli importovaní a ktorých chcete importovať do {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nemáte používateľov, ktorí majú uvedený e-mail. Prejdite na ďalší krok a pridajte ich.",
   "AddTrustedDomain": "Pridať dôveryhodnú doménu",
+  "AdManagement": "Správa reklám",
+  "AdManagementDescription": "Vyberte, či sa zobrazujú propagačné bannery vo vašom {{productName}}.",
   "Admins": "Administrátori",
   "AdminsMessage": "Nastavenia správ administrátora",
   "AdminsMessageMobileDescription": "Nastavenia sprav administrátorovi je spôsob ako kontaktovať administrátora portálu.",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Chcete zrušiť import údajov?",
   "WantToCancelUpload": "Chcete zrušiť nahrávanie?",
   "WantToContinue": "Chcete pokračovať alebo zmeniť kvótu úložiska používateľa?",
+  "WhiteLabelSubtitle": "Zadajte názov svojej spoločnosti, nahrajte logo a prispôsobte štýl tak, aby zodpovedal vašej značke.",
   "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok."
 }

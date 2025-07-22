@@ -38,21 +38,26 @@ const IS_TEST = process.env.E2E_TEST;
 export async function getSelf(): Promise<TUser | undefined> {
   logger.debug("Start GET /people/@self");
 
-  const cookieStore = await cookies();
-  const authToken = cookieStore.get("asc_auth_key");
+  try {
+    const cookieStore = await cookies();
+    const authToken = cookieStore.get("asc_auth_key");
 
-  if (!authToken) return;
+    if (!authToken) return;
 
-  const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
-  const res = IS_TEST
-    ? selfHandler()
-    : await fetch(req, { next: { revalidate: 300 } });
+    const [req] = await createRequest([`/people/@self`], [["", ""]], "GET");
+    const res = IS_TEST
+      ? selfHandler()
+      : await fetch(req, { next: { revalidate: 300 } });
 
-  if (res.status === 401 || !res.ok) {
-    return;
+    if (res.status === 401 || !res.ok) {
+      logger.error(`GET /people/@self failed: ${res.status}`);
+      return;
+    }
+
+    const self = await res.json();
+
+    return self.response;
+  } catch (error) {
+    logger.error(`Error in getSelf: ${error}`);
   }
-
-  const self = await res.json();
-
-  return self.response;
 }

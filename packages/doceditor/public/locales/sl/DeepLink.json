@@ -3,5 +3,7 @@
   "OpenInApp": "Odprite v aplikaciji",
   "OpeningDocument": "Odprite dokument",
   "RememberChoice": "Zapomni si izbiro za naslednja odpiranja dokumentov",
-  "StayInBrowser": "Ostanite v brskalniku"
+  "StayInBrowser": "Ostanite v brskalniku",
+  "DeepLinkOnlyAppText": "Dokument lahko odprete samo v mobilni aplikaciji.",
+  "DownloadApp": "Prenesite aplikacijo"
 }

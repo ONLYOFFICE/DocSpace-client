@@ -402,7 +402,8 @@ export default inject(
       isYearTariff,
     } = currentQuotaStore;
     const { tariffPlanTitle } = paymentQuotasStore;
-    const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { isNotPaidPeriod, isGracePeriod, walletCustomerStatusNotActive } =
+      currentTariffStatusStore;
 
     const {
       setIsLoading,
@@ -418,7 +419,6 @@ export default inject(
       totalPrice,
       formatPaymentCurrency,
       canDowngradeTariff,
-      walletCustomerStatusNotActive,
       cardLinked,
     } = paymentStore;
 

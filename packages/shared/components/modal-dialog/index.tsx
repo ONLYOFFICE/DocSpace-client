@@ -65,6 +65,7 @@ const ModalDialog = ({
   children,
   visible,
   onClose,
+  onBackClick,
 
   className,
   displayType = ModalDialogType.modal,
@@ -122,6 +123,16 @@ const ModalDialog = ({
 
     const onKeyPress = (e: KeyboardEvent) => {
       if ((e.key === "Esc" || e.key === "Escape") && visible) onCloseEvent();
+
+      if (
+        e.key === "Backspace" &&
+        e.target instanceof HTMLElement &&
+        e.target.nodeName !== "INPUT" &&
+        e.target.nodeName !== "TEXTAREA" &&
+        visible
+      ) {
+        onBackClick?.();
+      }
     };
 
     window.addEventListener("resize", onResize);
@@ -136,7 +147,14 @@ const ModalDialog = ({
       window.removeEventListener("touchmove", onSwipe);
       window.addEventListener("touchend", onSwipeEnd);
     };
-  }, [displayType, displayTypeDetailed, onClose, onCloseEvent, visible]);
+  }, [
+    displayType,
+    displayTypeDetailed,
+    onClose,
+    onCloseEvent,
+    visible,
+    onBackClick,
+  ]);
 
   useEffect(() => {
     return () => {
@@ -173,6 +191,7 @@ const ModalDialog = ({
             withFooterBorder ?? displayType === ModalDialogType.aside
           }
           onClose={onCloseEvent}
+          onBackClick={onBackClick}
           isLoading={isLoading}
           header={header}
           body={body}

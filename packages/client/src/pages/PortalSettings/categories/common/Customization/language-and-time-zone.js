@@ -232,13 +232,6 @@ const LanguageAndTimeZoneComponent = (props) => {
       }));
     }
 
-    if (!languageDefaultFromSessionStorage) {
-      setState((val) => ({
-        ...val,
-        languageDefault: languageFromSessionStorage,
-      }));
-    }
-
     if (timezoneDefaultFromSessionStorage || timezone) {
       checkChanges();
     }

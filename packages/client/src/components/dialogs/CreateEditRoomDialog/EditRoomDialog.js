@@ -181,6 +181,11 @@ const EditRoomDialog = ({
     onClose && onClose();
   };
 
+  const onBackClick = () => {
+    if (changeRoomOwnerIsVisible) setChangeRoomOwnerIsVisible(false);
+    if (addUsersPanelVisible) setAddUsersPanelVisible(false);
+  };
+
   const onOwnerChange = () => {
     setChangeRoomOwnerIsVisible(true);
   };
@@ -250,6 +255,7 @@ const EditRoomDialog = ({
       withBodyScroll
       visible={visible}
       onClose={onCloseAction}
+      onBackClick={onBackClick}
       isScrollLocked={isScrollLocked}
       isLoading={isInitLoading}
       containerVisible={

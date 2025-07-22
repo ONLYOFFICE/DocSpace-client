@@ -1714,6 +1714,10 @@ class ContextOptionsStore {
       item.access === ShareAccessRights.None ||
       item.access === ShareAccessRights.FullAccess;
 
+    const isRoomAdmin =
+      item.access === ShareAccessRights.RoomManager ||
+      item.access === ShareAccessRights.None;
+
     const optionsModel = [
       {
         id: "option_select",
@@ -2046,7 +2050,12 @@ class ContextOptionsStore {
           : t("Files:CustomFilterEnable"),
         icon: CustomFilterReactSvgUrl,
         onClick: () => this.onSetUpCustomFilter(item, t),
-        disabled: false,
+        disabled: Boolean(
+          !isRoomAdmin &&
+            item.customFilterEnabled &&
+            item.customFilterEnabledBy &&
+            item.customFilterEnabledBy !== this.userStore?.user?.displayName,
+        ),
       },
       {
         id: "option_block-unblock-version",

@@ -889,5 +889,6 @@
   "Tools": "Tools",
   "ToolCallExecuted": "Tool call executed",
   "ToolCallArg": "Tool call arguments:",
-  "ToolCallResult": "Tool call result:"
+  "ToolCallResult": "Tool call result:",
+  "YouDontHaveEnoughPermission": "You don't have enough permission"
 }

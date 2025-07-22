@@ -3398,6 +3398,7 @@ class FilesStore {
         formFillingStatus,
         customFilterEnabled,
         chatSettings,
+        customFilterEnabledBy,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3579,6 +3580,7 @@ class FilesStore {
         formFillingStatus,
         customFilterEnabled,
         chatSettings,
+        customFilterEnabledBy,
       };
     });
   };

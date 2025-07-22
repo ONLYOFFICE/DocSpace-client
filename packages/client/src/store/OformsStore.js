@@ -224,7 +224,7 @@ class OformsStore {
     return categoryType;
   };
 
-  getCategoryTitle = (category, locale = this.defaultOformLocale) => {
+  getCategoryTitle = (category, locale = this.oformsFilter.locale) => {
     if (!category) return "";
 
     const categoryType = this.getTypeOfCategory(category);

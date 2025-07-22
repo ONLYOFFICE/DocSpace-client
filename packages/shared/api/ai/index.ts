@@ -127,21 +127,25 @@ export const startNewChat = async (
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
 
-  const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: authHeader,
-    },
-    signal: abortController?.signal,
-    body: JSON.stringify({ message, contextFolderId, files }),
-  });
+  try {
+    const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authHeader,
+      },
+      signal: abortController?.signal,
+      body: JSON.stringify({ message, contextFolderId, files }),
+    });
 
-  if (!response.ok) {
-    throw new Error(`Failed to start new chat: ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`Failed to start new chat: ${response.status}`);
+    }
+
+    return response.body;
+  } catch (e) {
+    console.log(e);
   }
-
-  return response.body;
 };
 
 export const sendMessageToChat = async (
@@ -153,21 +157,28 @@ export const sendMessageToChat = async (
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
 
-  const response = await fetch(`/api/2.0${baseUrl}/chats/${chatId}/messages`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: authHeader,
-    },
-    signal: abortController?.signal,
-    body: JSON.stringify({ message, contextFolderId, files }),
-  });
+  try {
+    const response = await fetch(
+      `/api/2.0${baseUrl}/chats/${chatId}/messages`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: authHeader,
+        },
+        signal: abortController?.signal,
+        body: JSON.stringify({ message, contextFolderId, files }),
+      },
+    );
 
-  if (!response.ok) {
-    throw new Error(`Failed to send message to chat: ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`Failed to send message to chat: ${response.status}`);
+    }
+
+    return response.body;
+  } catch (e) {
+    console.log(e);
   }
-
-  return response.body;
 };
 
 export const getChats = async (
@@ -229,12 +240,16 @@ export const deleteChat = async (chatId: string) => {
 };
 
 export const getMCPTools = async (room: number, mcpId: string) => {
-  const res = await request({
-    method: "get",
-    url: `${baseUrl}/rooms/${room}/mcp/${mcpId}/tools`,
-  });
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/rooms/${room}/mcp/${mcpId}/tools`,
+    });
 
-  return res as TMCPTool[];
+    return res as TMCPTool[];
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const changeMCPTools = async (

@@ -313,7 +313,7 @@ export default class MessageStore {
 
     this.isRequestRunning = true;
 
-    this.abortController.abort();
+    this.abortController.abort("Start new chat");
 
     this.abortController = new AbortController();
 
@@ -333,7 +333,7 @@ export default class MessageStore {
 
     this.isRequestRunning = true;
 
-    this.abortController.abort();
+    this.abortController.abort("Start new message");
 
     this.abortController = new AbortController();
 
@@ -349,7 +349,13 @@ export default class MessageStore {
   };
 
   stopMessage = () => {
-    if (this.isRequestRunning) this.abortController.abort();
+    if (this.isRequestRunning) {
+      try {
+        this.abortController.abort("Stop message");
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 }
 

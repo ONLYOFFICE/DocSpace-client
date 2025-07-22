@@ -50,12 +50,7 @@ import Buttons from "./Buttons";
 const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const {
-    startChat,
-    sendMessage,
-
-    currentChatId,
-  } = useMessageStore();
+  const { startChat, sendMessage, currentChatId } = useMessageStore();
   const { fetchChat, currentChat } = useChatStore();
 
   const [value, setValue] = React.useState("");
@@ -87,7 +82,7 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   };
 
   const sendMessageAction = React.useCallback(async () => {
-    // if (!value) return;
+    if (!value) return;
     try {
       if (!currentChatId) {
         startChat(

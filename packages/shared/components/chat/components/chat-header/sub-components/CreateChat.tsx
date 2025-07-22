@@ -45,7 +45,6 @@ const CreateChat = () => {
   if (messages.length === 0) return null;
 
   const onClickAction = () => {
-    console.log(setCurrentChat);
     setCurrentChat(null);
     startNewChat();
   };

@@ -246,6 +246,7 @@ export default class MessageStore {
           const chunks = decodedChunk.split("\n\n");
 
           chunks.forEach(async (chunk) => {
+            console.log("chunk", chunk);
             if (!chunk) return;
 
             const [event, data] = chunk.split("\n");

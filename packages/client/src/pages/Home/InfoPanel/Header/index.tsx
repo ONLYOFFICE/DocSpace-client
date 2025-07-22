@@ -37,13 +37,14 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { hideInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import styles from "./Header.module.scss";
 import InfoPanelHeaderContentProps from "./Header.types";
 
 const InfoPanelHeaderContent = ({
   selection,
-  setIsVisible,
+  // setIsVisible,
   roomsView,
   fileView,
   setView,
@@ -84,7 +85,9 @@ const InfoPanelHeaderContent = ({
     "rootFolderType" in selection &&
     selection.rootFolderType === FolderType.RoomTemplates;
 
-  const closeInfoPanel = () => setIsVisible(false);
+  const closeInfoPanel = () => {
+    hideInfoPanel();
+  };
 
   const setMembers = () => setView(InfoPanelView.infoMembers);
   const setHistory = () => setView(InfoPanelView.infoHistory);

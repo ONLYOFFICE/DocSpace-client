@@ -30,6 +30,7 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { TFile } from "../../../../api/files/types";
+import { InfoPanelEvents } from "../../../../enums";
 
 import { Textarea } from "../../../textarea";
 
@@ -161,12 +162,18 @@ const ChatInput = ({ getIcon }: ChatInputProps) => {
   React.useEffect(() => {
     const onResize = () => {
       setInputWidth(inputRef.current?.offsetWidth ?? 0);
+
+      setTimeout(() => setInputWidth(inputRef.current?.offsetWidth ?? 0), 0);
     };
 
     window.addEventListener("resize", onResize);
 
+    window.addEventListener(InfoPanelEvents.showInfoPanel, onResize);
+    window.addEventListener(InfoPanelEvents.hideInfoPanel, onResize);
+
     return () => {
       window.removeEventListener("resize", onResize);
+      window.removeEventListener(InfoPanelEvents.showInfoPanel, onResize);
     };
   }, []);
 

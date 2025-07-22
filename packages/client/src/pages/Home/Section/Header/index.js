@@ -61,6 +61,10 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import {
+  showInfoPanel,
+  hideInfoPanel as hideInfoPanelEvent,
+} from "SRC_DIR/helpers/info-panel";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -114,7 +118,7 @@ const SectionHeaderContent = (props) => {
     setIsLoading,
 
     moveToRoomsPage,
-    setIsInfoPanelVisible,
+    // setIsInfoPanelVisible,
 
     getContactsHeaderMenu,
     isUsersHeaderVisible,
@@ -236,7 +240,12 @@ const SectionHeaderContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onToggleInfoPanel = () => {
-    setIsInfoPanelVisible(!isInfoPanelVisible);
+    if (!isInfoPanelVisible) {
+      showInfoPanel();
+    } else {
+      hideInfoPanelEvent();
+    }
+    // setIsInfoPanelVisible(!isInfoPanelVisible);
   };
 
   const contextButtonAnimation = (setAnimationClasses) => {

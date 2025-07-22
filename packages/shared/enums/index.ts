@@ -816,3 +816,19 @@ export enum ProvidersType {
   WebDav = "WebDav",
   Yandex = "Yandex",
 }
+
+export const enum InfoPanelEvents {
+  showInfoPanel = "SHOW_INFO_PANEL_EVENT",
+  hideInfoPanel = "HIDE_INFO_PANEL_EVENT",
+
+  setInfoPanelSelectedRoom = "SET_INFO_PANEL_SELECTED_ROOM_EVENT",
+
+  openShareTab = "OPEN_INFO_PANEL_SHARE_TAB_EVENT",
+  openMembersTab = "OPEN_INFO_PANEL_MEMBERS_TAB_EVENT",
+
+  setView = "SET_INFO_PANEL_VIEW_EVENT",
+  setFileView = "SET_INFO_PANEL_FILE_VIEW_EVENT",
+  setRoomsView = "SET_INFO_PANEL_ROOMS_VIEW_EVENT",
+
+  setInfoPanelMobileHidden = "SET_INFO_PANEL_MOBILE_HIDDEN_EVENT",
+}

@@ -30,8 +30,8 @@ import { inject, observer } from "mobx-react";
 import { Nullable } from "@docspace/shared/types";
 
 import { TRoom } from "@docspace/shared/api/rooms/types";
+import { InfoPanelEvents } from "@docspace/shared/enums";
 
-import { InfoPanelEvents } from "SRC_DIR/helpers/info-panel/enums";
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 
 type TInfoPanelActionsProps = {
@@ -52,6 +52,7 @@ const InfoPanelActions = ({
   // Show info panel
   useEffect(() => {
     const showInfoPanelHandler = () => {
+      console.log("call");
       setIsVisible!(true);
     };
 

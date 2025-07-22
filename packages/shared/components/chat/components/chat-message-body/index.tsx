@@ -44,9 +44,11 @@ import styles from "./ChatMessageBody.module.scss";
 const ChatMessageBody = ({
   userAvatar,
   getIcon,
+  isLoading,
 }: {
   userAvatar: string;
   getIcon: TGetIcon;
+  isLoading?: boolean;
 }) => {
   const { messages, fetchNextMessages } = useMessageStore();
   const { currentChat } = useChatStore();
@@ -116,7 +118,7 @@ const ChatMessageBody = ({
       })}
     >
       {messages.length === 0 ? (
-        <EmptyScreen />
+        <EmptyScreen isLoading={isLoading} />
       ) : (
         <Scrollbar
           ref={scrollbarRef}

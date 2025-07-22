@@ -27,11 +27,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import styles from "../ChatMessageBody.module.scss";
+import { RectangleSkeleton } from "../../../../../skeletons";
 
 import { Text } from "../../../../text";
 
-const EmptyScreen = () => {
+import styles from "../ChatMessageBody.module.scss";
+
+const EmptyScreen = ({ isLoading }: { isLoading?: boolean }) => {
   const { t } = useTranslation(["Common"]);
 
   return (
@@ -41,7 +43,11 @@ const EmptyScreen = () => {
       fontSize="18px"
       lineHeight="24px"
     >
-      {t("Common:AIChatHelp")}
+      {isLoading ? (
+        <RectangleSkeleton height="24px" width="140px" borderRadius="3px" />
+      ) : (
+        t("Common:AIChatHelp")
+      )}
     </Text>
   );
 };

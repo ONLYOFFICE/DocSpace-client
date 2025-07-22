@@ -34,14 +34,24 @@ import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
 
-const Chat = ({ roomId, userAvatar, getIcon, selectedModel }: ChatProps) => {
+const Chat = ({
+  roomId,
+  userAvatar,
+  getIcon,
+  selectedModel,
+  isLoading,
+}: ChatProps) => {
   return (
     <ChatStoreContextProvider roomId={roomId}>
       <MessageStoreContextProvider roomId={roomId}>
         <ChatContainer>
-          <ChatHeader selectedModel={selectedModel} />
-          <ChatMessageBody userAvatar={userAvatar} getIcon={getIcon} />
-          <ChatInput getIcon={getIcon} />
+          <ChatHeader selectedModel={selectedModel} isLoading={isLoading} />
+          <ChatMessageBody
+            userAvatar={userAvatar}
+            getIcon={getIcon}
+            isLoading={isLoading}
+          />
+          <ChatInput getIcon={getIcon} isLoading={isLoading} />
         </ChatContainer>
       </MessageStoreContextProvider>
     </ChatStoreContextProvider>

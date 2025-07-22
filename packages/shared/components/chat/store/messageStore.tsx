@@ -240,13 +240,10 @@ export default class MessageStore {
 
         const decodedChunk = textDecoder.decode(value);
 
-        console.log("decoded chunk", decodedChunk);
-
         try {
           const chunks = decodedChunk.split("\n\n");
 
           chunks.forEach(async (chunk) => {
-            console.log("chunk", chunk);
             if (!chunk) return;
 
             const [event, data] = chunk.split("\n");
@@ -263,9 +260,6 @@ export default class MessageStore {
               const { text } = JSON.parse(jsonData);
 
               msg += text;
-
-              console.log("text", text);
-              console.log("currentMessage", msg);
             }
 
             if (event.includes(EventType.ToolCall)) {

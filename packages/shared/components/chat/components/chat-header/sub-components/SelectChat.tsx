@@ -50,7 +50,7 @@ import RenameChat from "./RenameChat";
 
 import styles from "../ChatHeader.module.scss";
 
-const SelectChat = () => {
+const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
   const { t } = useTranslation(["Common"]);
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -107,7 +107,7 @@ const SelectChat = () => {
 
   const maxHeight = chats.length > 7 ? { maxHeight: 224 } : {};
 
-  if (isLoading) {
+  if (isLoading || isLoadingProp) {
     return (
       <RectangleSkeleton
         width="32px"

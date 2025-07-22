@@ -44,6 +44,7 @@ export type MessageBodyProps = Pick<MessageProps, "userAvatar">;
 
 export type ChatInputProps = {
   getIcon: TGetIcon;
+  isLoading?: boolean;
 };
 
 export type ChatProps = {
@@ -51,4 +52,5 @@ export type ChatProps = {
   userAvatar: MessageBodyProps["userAvatar"];
   selectedModel: string;
   getIcon: ChatInputProps["getIcon"];
+  isLoading?: boolean;
 };

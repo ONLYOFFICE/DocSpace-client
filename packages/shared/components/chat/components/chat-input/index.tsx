@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { TFile } from "../../../../api/files/types";
 import { InfoPanelEvents } from "../../../../enums";
+import { RectangleSkeleton } from "../../../../skeletons";
 
 import { Textarea } from "../../../textarea";
 
@@ -46,7 +47,7 @@ import FilesList from "./FilesList";
 import styles from "./ChatInput.module.scss";
 import Buttons from "./Buttons";
 
-const ChatInput = ({ getIcon }: ChatInputProps) => {
+const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
 
   const {
@@ -186,34 +187,41 @@ const ChatInput = ({ getIcon }: ChatInputProps) => {
           inputRef.current = ref;
         }}
       >
-        <Textarea
-          onChange={handleChange}
-          value={value}
-          isFullHeight
-          className={styles.chatInputTextArea}
-          wrapperClassName={classNames({
-            [styles.chatInputTextAreaWrapper]: true,
-            [styles.chatInputTextAreaWrapperFiles]: selectedFiles.length > 0,
-          })}
-          placeholder={t("Common:AIChatInput")}
-          isChatMode
-        />
+        {isLoading ? (
+          <RectangleSkeleton width="100%" height="116px" borderRadius="3px" />
+        ) : (
+          <>
+            <Textarea
+              onChange={handleChange}
+              value={value}
+              isFullHeight
+              className={styles.chatInputTextArea}
+              wrapperClassName={classNames({
+                [styles.chatInputTextAreaWrapper]: true,
+                [styles.chatInputTextAreaWrapperFiles]:
+                  selectedFiles.length > 0,
+              })}
+              placeholder={t("Common:AIChatInput")}
+              isChatMode
+            />
 
-        <FilesList
-          files={selectedFiles}
-          getIcon={getIcon}
-          onRemove={handleRemoveFile}
-        />
+            <FilesList
+              files={selectedFiles}
+              getIcon={getIcon}
+              onRemove={handleRemoveFile}
+            />
 
-        <Buttons
-          inputWidth={inputWidth}
-          isFilesSelectorVisible={isFilesSelectorVisible}
-          toggleFilesSelector={toggleFilesSelector}
-          isMcpToolsVisible={isMcpToolsVisible}
-          toggleMcpTools={toggleMcpTools}
-          toolSettingsRef={toolSettingsRef}
-          sendMessageAction={sendMessageAction}
-        />
+            <Buttons
+              inputWidth={inputWidth}
+              isFilesSelectorVisible={isFilesSelectorVisible}
+              toggleFilesSelector={toggleFilesSelector}
+              isMcpToolsVisible={isMcpToolsVisible}
+              toggleMcpTools={toggleMcpTools}
+              toolSettingsRef={toolSettingsRef}
+              sendMessageAction={sendMessageAction}
+            />
+          </>
+        )}
       </div>
       <Attachment
         isVisible={isFilesSelectorVisible}

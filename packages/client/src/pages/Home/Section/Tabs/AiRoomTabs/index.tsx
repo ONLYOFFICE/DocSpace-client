@@ -58,7 +58,8 @@ const AiRoomTabs = ({
 }: AiRoomTabsProps) => {
   const navigate = useNavigate();
 
-  if (showTabsLoader) return <SectionSubmenuSkeleton />;
+  if (showTabsLoader)
+    return <SectionSubmenuSkeleton style={{ marginBottom: 0 }} />;
 
   const onSelect = (tab: TTabItem) => {
     setCurrentTab(tab.id as "chat" | "knowledge" | "result");

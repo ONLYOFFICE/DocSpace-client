@@ -36,10 +36,12 @@ const ChatComponent = ({
   userAvatar,
   getIcon,
   chatSettings,
+  isLoading,
 }: {
   userAvatar: string;
   getIcon: TGetIcon;
   chatSettings: SelectedFolderStore["chatSettings"];
+  isLoading: boolean;
 }) => {
   const { room } = useParams();
 
@@ -51,16 +53,23 @@ const ChatComponent = ({
       roomId={room}
       getIcon={getIcon}
       selectedModel={chatSettings!.modelId}
+      isLoading={isLoading}
     />
   );
 };
 
 export const ChatView = inject((store: TStore) => {
-  const { userStore, filesSettingsStore, selectedFolderStore } = store;
+  const {
+    userStore,
+    filesSettingsStore,
+    selectedFolderStore,
+    clientLoadingStore,
+  } = store;
 
   return {
     userAvatar: userStore.user?.avatar,
     getIcon: filesSettingsStore.getIcon,
     chatSettings: selectedFolderStore?.chatSettings,
+    isLoading: clientLoadingStore.showBodyLoader,
   };
 })(observer(ChatComponent));

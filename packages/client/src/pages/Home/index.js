@@ -323,6 +323,8 @@ const PureHome = (props) => {
 
   let sectionProps = {};
 
+  const isChat = window.location.pathname.includes("chat");
+
   if (isSettingsPage) {
     sectionProps.isInfoPanelAvailable = false;
     sectionProps.viewAs = "settings";
@@ -339,7 +341,7 @@ const PureHome = (props) => {
 
     if (!isContactsPage) {
       sectionProps.dragging = dragging;
-      sectionProps.uploadFiles = true;
+      sectionProps.uploadFiles = !isChat;
       sectionProps.onDrop =
         isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
 
@@ -356,7 +358,7 @@ const PureHome = (props) => {
 
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
-  sectionProps.getContextModel = getContextModel;
+  sectionProps.getContextModel = isChat ? null : getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
@@ -398,10 +400,7 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <SectionWrapper
-        {...sectionProps}
-        withoutFooter={window.location.pathname.includes("chat")}
-      >
+      <SectionWrapper {...sectionProps} withoutFooter={isChat}>
         {!isErrorRoomNotAvailable || isContactsPage || isSettingsPage ? (
           <Section.SectionHeader>
             <SectionHeaderContent />

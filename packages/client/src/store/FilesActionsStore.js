@@ -2780,6 +2780,10 @@ class FilesActionStore {
       CategoryType.Trash !== categoryType && urlFilter?.folder
     );
 
+    if (roomType === RoomsType.AIRoom) {
+      return this.moveToRoomsPage();
+    }
+
     if (this.publicRoomStore.isPublicRoom) {
       return this.backToParentFolder();
     }
@@ -2865,7 +2869,8 @@ class FilesActionStore {
     const filter = RoomsFilter.getDefault();
 
     const correctCategoryType =
-      categoryType === CategoryType.SharedRoom
+      categoryType === CategoryType.SharedRoom ||
+      categoryType === CategoryType.Chat
         ? CategoryType.Shared
         : CategoryType.ArchivedRoom === categoryType
           ? CategoryType.Archive

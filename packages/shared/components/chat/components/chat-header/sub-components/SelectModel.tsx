@@ -24,11 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { RectangleSkeleton } from "../../../../../skeletons/rectangle";
+
 import { Text } from "../../../../text";
 
 import styles from "../ChatHeader.module.scss";
 
-const SelectModel = ({ selectedModel }: { selectedModel: string }) => {
+const SelectModel = ({
+  selectedModel,
+  isLoading,
+}: {
+  selectedModel: string;
+  isLoading?: boolean;
+}) => {
+  if (isLoading) {
+    return (
+      <RectangleSkeleton
+        width="96px"
+        height="32px"
+        borderRadius="3px"
+        style={{ minWidth: "32px" }}
+      />
+    );
+  }
+
   return (
     <Text
       fontSize="13px"

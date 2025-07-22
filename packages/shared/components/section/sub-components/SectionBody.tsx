@@ -126,7 +126,7 @@ const SectionBody = React.memo(
           </div>
         )}
 
-        {!isIndexEditingMode ? (
+        {!isIndexEditingMode && getContextModel ? (
           <SectionContextMenu getContextModel={getContextModel} />
         ) : null}
       </DragAndDrop>
@@ -158,7 +158,9 @@ const SectionBody = React.memo(
         ) : (
           <div className="section-wrapper">{children}</div>
         )}
-        <SectionContextMenu getContextModel={getContextModel} />
+        {getContextModel ? (
+          <SectionContextMenu getContextModel={getContextModel} />
+        ) : null}
       </div>
     );
   },

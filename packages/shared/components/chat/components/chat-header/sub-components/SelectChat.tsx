@@ -41,6 +41,7 @@ import { DropDown } from "../../../../drop-down";
 import { DropDownItem } from "../../../../drop-down-item";
 import { IconButton } from "../../../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../../../context-menu";
+import { Text } from "../../../../text";
 
 import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
@@ -167,7 +168,7 @@ const SelectChat = () => {
                   className={styles.dropdowItemWrapper}
                   onMouseEnter={() => setHoveredItem(id)}
                 >
-                  {title}
+                  <Text truncate>{title}</Text>
                   {hoveredItem === id || !desktop ? (
                     <div
                       className={styles.iconButtonWrapper}

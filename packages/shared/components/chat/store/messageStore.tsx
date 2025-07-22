@@ -154,24 +154,6 @@ export default class MessageStore {
     }
   };
 
-  handleNewToken = (jsonData: string, msg: string) => {
-    let newMsg = msg;
-
-    const { text } = JSON.parse(jsonData);
-
-    if (text) {
-      if (newMsg) {
-        newMsg += text;
-        this.continueAIMessage(newMsg);
-      } else {
-        newMsg += text;
-        this.addNewAIMessage(newMsg);
-      }
-    }
-
-    return newMsg;
-  };
-
   handleToolCall = (jsonData: string) => {
     const { name, arguments: args } = JSON.parse(jsonData);
 
@@ -242,6 +224,8 @@ export default class MessageStore {
 
       const reader = stream.getReader();
 
+      let prevMsg = "";
+
       let msg = "";
 
       const streamHandler = async () => {
@@ -271,7 +255,9 @@ export default class MessageStore {
             }
 
             if (event.includes(EventType.NewToken)) {
-              msg = this.handleNewToken(jsonData, msg);
+              const { text } = JSON.parse(jsonData);
+
+              msg += text;
 
               return;
             }
@@ -290,13 +276,20 @@ export default class MessageStore {
               return;
             }
 
-            console.log(event);
-
             if (event.includes(EventType.Error)) {
-              console.log(jsonData);
               this.handleStreamError(jsonData);
             }
           });
+
+          if (msg) {
+            if (prevMsg) {
+              this.continueAIMessage(msg);
+            } else {
+              this.addNewAIMessage(msg);
+            }
+            prevMsg = msg;
+          }
+
           await streamHandler();
         } catch (e) {
           this.isRequestRunning = false;

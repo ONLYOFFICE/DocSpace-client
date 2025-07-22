@@ -777,11 +777,19 @@ class CreateEditRoomStore {
 
     setIsSectionBodyLoading(true);
 
-    const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
-
     setSelection && setSelection([]);
 
-    window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
+    if (room.roomType === RoomsType.AIRoom) {
+      const path = getCategoryUrl(CategoryType.Chat, room.id);
+
+      newFilter.aiTab = "empty";
+
+      window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
+    } else {
+      const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
+
+      window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
+    }
 
     if (isDesktop()) {
       showInfoPanel();

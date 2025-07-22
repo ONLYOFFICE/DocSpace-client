@@ -32,7 +32,7 @@ const StyledWrapper = styled.div`
   width: 100%;
 
   display: grid;
-  grid-gap: 32px;
+  grid-gap: 18px;
 
   .toggle-btn-wrapper {
     display: flex;
@@ -58,6 +58,16 @@ const StyledWrapper = styled.div`
     box-sizing: border-box;
     display: grid;
     grid-gap: 12px;
+  }
+
+  .start-page-setting {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .combo-button-label {
+      font-weight: 400 !important;
+    }
   }
 `;
 

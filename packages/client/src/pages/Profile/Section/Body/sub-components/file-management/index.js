@@ -31,6 +31,8 @@ import { useTranslation } from "react-i18next";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { FolderType } from "@docspace/shared/enums";
 
 import StyledWrapper from "./styled-file-management";
 
@@ -95,9 +97,40 @@ const FileManagement = ({
     setOpenEditorInSameTab(!openEditorInSameTab);
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
+  const startPageOptions = [
+    {
+      label: t("Common:Rooms"),
+      key: FolderType.Rooms,
+      value: FolderType.Rooms,
+    },
+    {
+      label: t("Common:Documents"),
+      key: FolderType.USER,
+      value: FolderType.USER,
+    },
+    {
+      label: t("Common:Recent"),
+      key: FolderType.Recent,
+      value: FolderType.Recent,
+    },
+  ];
+
   if (!ready) return <SettingsCommonSkeleton />;
+
   return (
     <StyledWrapper showTitle={showTitle} hideAdminSettings={!showAdminSettings}>
+      <div className="start-page-setting">
+        <Text lineHeight="20px" fontWeight={600}>
+          {t("FilesSettings:StartPageSettingTitle")}
+        </Text>
+        <ComboBox
+          options={startPageOptions}
+          selectedOption={startPageOptions[0]}
+          scaled={false}
+          scaledOptions
+          displaySelectedOption
+        />
+      </div>
       <div className="settings-section">
         <div className="toggle-btn-wrapper">
           <ToggleButton

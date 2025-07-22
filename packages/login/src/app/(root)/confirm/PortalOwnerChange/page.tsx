@@ -30,6 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import ChangeOwnerForm from "./page.client";
 
 type PortalOwnerChangeProps = {
@@ -37,6 +38,8 @@ type PortalOwnerChangeProps = {
 };
 
 async function Page(props: PortalOwnerChangeProps) {
+  logger.info("PortalOwnerChange page");
+
   const { searchParams: sp } = props;
   const searchParams = await sp;
   const uid = searchParams.uid;

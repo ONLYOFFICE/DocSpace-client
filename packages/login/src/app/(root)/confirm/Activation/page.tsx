@@ -31,6 +31,7 @@ import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 
+import { logger } from "logger.mjs";
 import ActivateUserForm from "./page.client";
 
 type ActivationProps = {
@@ -38,6 +39,8 @@ type ActivationProps = {
 };
 
 async function Page(props: ActivationProps) {
+  logger.info("Activation page");
+
   const { searchParams: sp } = props;
   const searchParams = await sp;
   const type = searchParams.type;

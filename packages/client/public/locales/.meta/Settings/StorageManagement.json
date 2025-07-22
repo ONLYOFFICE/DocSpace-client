@@ -3,7 +3,7 @@
   "content": "Storage management",
   "content_en_sha1_hash": "aee08f8d5281c4277ee7ebdfe0a0f452865e73b5",
   "created_at": "2025-05-19T21:30:52.780Z",
-  "updated_at": "2025-06-24T16:31:24.404Z",
+  "updated_at": "2025-07-02T07:49:19.792Z",
   "comment": {
     "text": "The \"StorageManagement\" translation key is used to display the storage management section title on the Portal Settings page. It provides a clear and concise label for this section, helping users navigate through the settings. This translation key appears in a header context, likely as part of a category or tab navigation menu.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 416,
+      "line_number": 423,
       "context": "{\n id: \"portal-settings_catalog-portal-storageManagement\",\n key: \"6\",\n type: PageType.storageManagement,\n link: \"management\",\n tKey: \"StorageManagement\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-storageManagement\",\n key: \"6-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 416,
+      "line_number": 423,
       "context": "{\n id: \"portal-settings_catalog-portal-storageManagement\",\n key: \"6\",\n type: PageType.storageManagement,\n link: \"management\",\n tKey: \"StorageManagement\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-storageManagement\",\n key: \"6-0\",",
       "module": "/packages/client"
     }

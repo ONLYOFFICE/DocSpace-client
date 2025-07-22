@@ -94,7 +94,7 @@
   :global {
     .combo-button {
       min-height: 40px;
-      padding-inline-start: 16px;
+      padding-inline-start: 16px !important;
     }
 
     .combo-button-label,

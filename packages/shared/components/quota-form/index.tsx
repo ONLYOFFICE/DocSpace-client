@@ -253,7 +253,7 @@ export const QuotaForm = ({
           onCancelClick={onCancelClick}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:CancelButton")}
-          reminderText={t("YouHaveUnsavedChanges")}
+          reminderText={t("Common:YouHaveUnsavedChanges")}
           displaySettings
           saveButtonDisabled={isDefaultQuota}
           disableRestoreToDefault={isDefaultQuota}

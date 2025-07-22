@@ -3,7 +3,7 @@
   "content": "Convenient analyzing of the collected responses",
   "content_en_sha1_hash": "76213a7bfed2be24315c6633b53e56087d84c82e",
   "created_at": "2025-05-19T21:30:55.135Z",
-  "updated_at": "2025-05-24T10:57:03.144Z",
+  "updated_at": "2025-07-10T11:11:07.132Z",
   "comment": {
     "text": "This translation key describes a header used in a dialog that provides analyzing capabilities of collected responses. The header is intended to be displayed as part of a form-filling tips dialog, guiding users on how to analyze their responses.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 66,
+      "line_number": 69,
       "context": "},\n ],\n },\n {\n id: 4,\n header: t(\"FormFillingTipsDialog:HeaderComplete\"),\n description: t(\"FormFillingTipsDialog:TitleComplete\"),\n key: \"form-filling-complete\",\n placement: \"bottom\",\n position: [\n {",
       "module": "/packages/shared"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Convenient analyzing of the collected responses' implies ease and efficiency in analyzing the responses. While 'تحليل مريح للإجابات المجمعة' translates to 'Comfortable analysis of the collected responses', 'مريح' (comfortable) doesn't fully capture the intended meaning of 'convenient' in this context. 'سهل' (easy) or 'يسير' (straightforward/simple) would be more accurate alternatives.",
+          "suggestion": "تحليل سهل/يسير للإجابات المجمعة"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -57,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Βολική ανάλυση των απαντήσεων που συλλέγονται' is somewhat literal and could be improved for flow and naturalness in Greek. While technically correct, it doesn't convey the 'convenient' aspect as smoothly as other options.",
-          "suggestion": "Εύκολη ανάλυση των συλλεχθέντων απαντήσεων"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kätevä kerättyjen vastausten analysointi' is not a precise equivalent of 'Convenient analyzing of the collected responses'. While 'kerättyjen vastausten analysointi' accurately translates 'analyzing of the collected responses', 'Kätevä' (convenient) is a bit clunky. A more natural Finnish phrasing would be needed to capture the nuance of 'convenient'.",
-          "suggestion": "Consider 'Helppo kerättyjen vastausten analysointi' or 'Vaivaton kerättyjen vastausten analysointi' for a more natural and accurate translation of 'Convenient analyzing of the collected responses'."
+          "description": "The translation 'Kätevä kerättyjen vastausten analysointi' is a literal translation and doesn't convey the same meaning as 'Convenient analyzing of the collected responses'. It sounds slightly awkward in Finnish. 'Kerättyjen vastausten analysointi' is a bit too technical and formal for a dialog header offering a tip.",
+          "suggestion": "A better translation would be something like 'Helppo analysoida kerättyjä vastauksia' or 'Helppoa analysoida vastauksia'."
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Convenient analyzing' is better translated as 'Analyse aisée' or 'Analyse facile' to convey the same meaning of ease or simplicity. 'Pratique' implies practicality or usefulness, which is a slightly different nuance.",
+          "suggestion": "Analyse aisée des réponses collectées"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Convenient analyzing' implies ease and efficiency. 'Pratica' in Italian translates to 'practical' or 'hands-on,' which doesn't fully convey the meaning of 'convenient'. While not incorrect, it's a less ideal translation.",
-          "suggestion": "Consider a translation that emphasizes convenience, such as 'Analisi agevole delle risposte raccolte' or 'Analisi semplice delle risposte raccolte'."
+          "description": "The English phrase 'Convenient analyzing' implies ease and efficiency. 'Pratica' in Italian, while meaning practical, doesn't fully capture the 'convenient' aspect. A better translation might emphasize ease or simplicity.",
+          "suggestion": "Analisi semplice delle risposte raccolte"
         }
       ],
       "approved_at": null
@@ -120,13 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"수집된 응답 간단 분석\" doesn't fully capture the meaning of \"Convenient analyzing of the collected responses.\" The word 'convenient' is missing, and the phrasing is a bit abrupt.",
-          "suggestion": "수집된 응답의 간편한 분석 (Sujipdoen ungdabeun-ui ganpyeonhan bunseok)"
+          "description": "The translation '수집된 응답 간단 분석' is too literal and doesn't convey the nuance of 'Convenient analyzing of the collected responses.' It lacks the implication of ease or benefit.",
+          "suggestion": "수집된 응답의 간편 분석 (Suejp-doen ungeop-ui ganpyeon bunseok)"
         },
         {
-          "type": "formatting",
-          "description": "The sentence could benefit from a more natural flow in Korean.  The current translation is quite direct and sounds slightly robotic.",
-          "suggestion": "수집된 응답을 간편하게 분석할 수 있습니다. (Sujipdoen ungdabeun-eul ganpyeonhage bunseokhal su issseumnida)"
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure feels somewhat abrupt in Korean. Adding a particle or restructuring could improve flow.",
+          "suggestion": "수집된 응답을 간편하게 분석 (Suejp-doen ungeop-eul ganpyeonhage bunseok)"
         }
       ],
       "approved_at": null
@@ -137,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Convenient analyzing of the collected responses\" implies ease and efficiency in analyzing the data. The Lao translation \"ການວິເຄາະຜົນການຕອບສະແດງທີ່ເຕົ້າໂຮມໄວ້ຢ່າງສະດວກສະບາຍ\" while technically correct, doesn't quite capture the same sense of convenience and ease. \"ທີ່ເຕົ້າໂຮມໄວ້\" (that are collected) makes it slightly more formal than the original.",
-          "suggestion": "ການວິເຄາະຜົນການຕອບສະແດງທີ່ເຕົ້າໂຮມໄວ້ຢ່າງງ່າຍດາຍ"
+          "description": "The Lao translation \"ການວິເຄາະຜົນການຕອບສະແດງທີ່ເຕົ້າໂຮມໄວ້ຢ່າງສະດວກສະບາຍ\" is a literal translation and doesn't quite capture the nuance of 'Convenient analyzing of the collected responses'. It sounds a bit clunky and formal. A more natural translation might emphasize the ease and efficiency of the analysis.",
+          "suggestion": "Consider a translation like \"ການວິເຄາະຂໍ້ມູນທີ່ເຕົ້າໂຮມໄວ້ ງ່າຍດາຍ ແລະ ມີປະສິດທິພາບ\" (Easy and efficient analysis of collected data) or \"ວິເຄາະຂໍ້ມູນທີ່ເຕົ້າໂຮມໄວ້ຢ່າງສະຫງ່າງາມ\" (Elegant analysis of collected data)."
         }
       ],
       "approved_at": null
@@ -167,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Convenient analyzing' doesn't directly translate to 'Análise cómoda'. 'Convenient' implies ease of use or efficiency, which 'cómoda' (comfortable) doesn't necessarily convey. A better translation would focus on the ease or efficiency of the analysis.",
-          "suggestion": "Análise fácil das respostas recolhidas"
+          "description": "The English phrase 'Convenient analyzing' is better translated as 'Análise facilitada' or 'Análise simples' rather than 'Análise cómoda'. 'Cómoda' implies comfortable, which isn't the intended meaning in this context.",
+          "suggestion": "Análise facilitada das respostas recolhidas"
         }
       ],
       "approved_at": null
@@ -197,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'එකතු කරන ලද ප්‍රතිචාර විශ්ලේෂණය කිරීම පහසුයි.' is a literal translation and doesn't fully capture the meaning of 'Convenient analyzing of the collected responses'. It sounds somewhat formal and less natural in Sinhala. A more natural phrasing would emphasize ease or simplicity.",
-          "suggestion": "Consider a translation like 'එකතු කරන ප්‍රතිචාර විශ්ලේෂණය කිරීම සරලයි.' (Collecting and analyzing responses is simple.) or 'එකතු කරන ලද ප්‍රතිචාර විශ්ලේෂණය කිරීමේ පහසුවක්.' (The convenience of analyzing collected responses)."
+          "description": "The translation 'එකතු කරන ලද ප්‍රතිචාර විශ්ලේෂණය කිරීම පහසුයි.' while conveying a similar meaning, isn't the most natural or precise translation of 'Convenient analyzing of the collected responses'. A more accurate translation would emphasize the convenience aspect more directly.",
+          "suggestion": "ගබර ලද ප්‍රතිචාර විශ්ලේෂණය කිරීමේ පහසුව."
         }
       ],
       "approved_at": null
@@ -221,7 +227,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Лако анализирање прикупљених одговора' does not accurately convey the meaning of 'Convenient analyzing of the collected responses'. 'Лако' translates to 'easily' or 'lightly', which doesn't capture the meaning of 'convenient'.",
+          "description": "The Serbian translation \"Лако анализирање прикупљених одговора\" doesn't fully capture the meaning of \"Convenient analyzing of the collected responses.\" 'Лако' translates to 'easily' or 'lightly,' which doesn't convey the 'convenient' aspect. A more accurate translation would emphasize convenience or ease of use.",
           "suggestion": "Погодно анализирање прикупљених одговора"
         }
       ],
@@ -233,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Lako analiziranje prikupljenih odgovora' while understandable, isn't the most natural or precise translation of 'Convenient analyzing of the collected responses'. 'Lako' implies ease, but 'convenient' encompasses more functionality and efficiency.",
-          "suggestion": "Pogodnije bi bilo: 'Praktičan/Efikasan pregled prikupljenih odgovora' or 'Udoban/Jednostavan pregled prikupljenih odgovora', depending on the nuance desired."
+          "description": "The translation 'Lako analiziranje prikupljenih odgovora' doesn't fully capture the nuance of 'Convenient analyzing of the collected responses'. 'Lako' implies 'easy' rather than 'convenient'.",
+          "suggestion": "Pogodno analiziranje prikupljenih odgovora"
         }
       ],
       "approved_at": null
@@ -257,13 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Phân tích thuận tiện các câu trả lời thu thập được' is a literal translation but sounds awkward in Vietnamese. 'Thuận tiện' (convenient) is not the most natural word choice here.",
+          "description": "The translation 'Phân tích thuận tiện các câu trả lời thu thập được' is somewhat literal and doesn't fully capture the nuance of 'Convenient analyzing of the collected responses'. It sounds a bit clunky in Vietnamese.",
           "suggestion": "Phân tích dễ dàng các câu trả lời đã thu thập"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, 'các câu trả lời đã thu thập' can be simplified for better flow.",
-          "suggestion": "các câu trả lời"
         }
       ],
       "approved_at": null
@@ -274,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Convenient analyzing of the collected responses' implies ease and efficiency in analyzing the data. While '方便分析收集到的回答' is technically correct, it doesn't fully capture the 'convenient' aspect. '方便' focuses solely on ease, while the original emphasizes both ease and functionality.",
-          "suggestion": "便捷地分析收集到的回答"
+          "description": "The translation '方便分析收集到的回答' doesn't fully capture the nuance of 'Convenient analyzing of the collected responses'. While '方便分析' means 'convenient analysis', the phrasing is a bit clunky.  'Analyzing' implies a process or capability, and '方便' only addresses the ease of the analysis.  It misses the 'convenient' aspect of the whole process.",
+          "suggestion": "可便捷地分析收集到的回答"
         }
       ],
       "approved_at": null

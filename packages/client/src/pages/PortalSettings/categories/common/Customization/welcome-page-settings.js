@@ -378,7 +378,7 @@ const WelcomePageSettingsComponent = (props) => {
         onSaveClick={onSaveGreetingSettings}
         onCancelClick={onRestoreGreetingSettings}
         showReminder={state.showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings

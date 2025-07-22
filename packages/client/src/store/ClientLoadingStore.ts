@@ -130,7 +130,6 @@ class ClientLoadingStore {
 
         return;
       }
-
       this.updateLoading(type, isLoading);
     } else {
       this.loaderStates[type].pendingLoaders = isLoading;
@@ -159,6 +158,8 @@ class ClientLoadingStore {
           setTimeout(
             () => {
               this.updateLoading(type, isLoading);
+              this.loaderStates[type].timer &&
+                clearTimeout(this.loaderStates[type].timer);
               this.loaderStates[type].startTime = null;
               this.loaderStates[type].timer = null;
             },

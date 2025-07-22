@@ -35,8 +35,11 @@ import {
 } from "@/lib/actions";
 
 import PaymentsPage from "./page.client";
+import { logger } from "../../../logger.mjs";
 
 async function Page() {
+  logger.info("Payments page");
+
   const [settings, quota, portalTariff, paymentSettings] = await Promise.all([
     getSettings(),
     getQuota(),
@@ -44,16 +47,32 @@ async function Page() {
     getPaymentSettings(),
   ]);
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-  if (!settings || !quota || !portalTariff || !paymentSettings)
-    redirect(`${getBaseUrl()}/login`);
+  if (settings === "access-restricted") {
+    logger.info("Payments page access-restricted");
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/${settings}`);
+  }
+  if (!settings || !quota || !portalTariff || !paymentSettings) {
+    logger.info(
+      `Payments page settings: ${settings}, quota: ${quota}, portalTariff: ${portalTariff}, paymentSettings: ${paymentSettings}`,
+    );
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/login`);
+  }
 
   const { logoText } = settings;
   const { trial } = quota;
   const { enterprise, developer, dueDate, openSource } = portalTariff;
   const { salesEmail, buyUrl } = paymentSettings;
 
-  if (openSource) return redirect(`${getBaseUrl()}/error/403`);
+  if (openSource) {
+    const baseURL = await getBaseUrl();
+
+    logger.info(`Payments page redirect${baseURL}/error/403`);
+    return redirect(`${baseURL}/error/403`);
+  }
 
   return (
     <PaymentsPage

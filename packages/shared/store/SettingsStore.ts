@@ -334,6 +334,8 @@ class SettingsStore {
 
   scrollToSettings: boolean = false;
 
+  displayBanners: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -1556,6 +1558,10 @@ class SettingsStore {
 
   setScrollToSettings = (scrollToSettings: boolean) => {
     this.scrollToSettings = scrollToSettings;
+  };
+
+  setDisplayBanners = (displayBanners: boolean) => {
+    this.displayBanners = displayBanners;
   };
 }
 

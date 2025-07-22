@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Controlla l'elenco degli utenti non importati da importare in {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Non hai utenti con email. Procedi al passo successivo per aggiungerli.",
   "AddTrustedDomain": "Aggiungi dominio affidabile",
+  "AdManagement": "Gestione annunci",
+  "AdManagementDescription": "Scegli se mostrare o meno i banner promozionali in {{productName}}.",
   "Admins": "Amministratori",
   "AdminsMessage": "Impostazioni dei Messaggi dell’Amministratore",
   "AdminsMessageMobileDescription": "Le impostazioni dei messaggi dell'amministratore rappresentano un modo per contattare l'amministratore del portale",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Vuoi annullare l'importazione dei dati?",
   "WantToCancelUpload": "Vuoi annullare il caricamento?",
   "WantToContinue": "Vuoi continuare o modificare la quota di archiviazione degli utenti?",
+  "WhiteLabelSubtitle": "Inserisci il nome della tua azienda, carica il logo e personalizza lo stile in modo che corrisponda al tuo marchio.",
   "WithoutEmailHint": "Non hai utenti senza email. Ti preghiamo di procedere al passaggio successivo."
 }

@@ -3,5 +3,7 @@
   "OpenInApp": "ເປີດໃນແອັບ",
   "OpeningDocument": "ກຳລັງເປີດເອກະສານ",
   "RememberChoice": "ຊື້ມຈໍາການເລືອກເວລາເປີດເອກະສານຄັ້ງຕໍ່ໄປ",
-  "StayInBrowser": "ຢູ່ໃນຕົວທ່ອງເວັບ"
+  "StayInBrowser": "ຢູ່ໃນຕົວທ່ອງເວັບ",
+  "DeepLinkOnlyAppText": "ທ່ານສາມາດເປີດເອກະສານໄດ້ພຽງແຕ່ໃນແອັບພລິເຄຊັນມືຖື",
+  "DownloadApp": "ແຜນວາດ"
 }

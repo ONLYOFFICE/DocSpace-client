@@ -27,6 +27,7 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
@@ -95,11 +96,15 @@ const SpaceQuota = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation(["Common"]);
 
+  const theme = useTheme();
+
   const usedQuota = getConvertedQuota(t, item?.usedSpace);
   const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
   const defaultQuotaSize = getConvertedQuota(t, defaultSize);
 
   const options = getOptions(t, item, spaceLimited);
+
+  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
 
   const successCallback = (users) => {
     onSuccess && onSuccess(users);
@@ -171,7 +176,7 @@ const SpaceQuota = (props) => {
 
   if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (
-      <StyledText fontWeight={600} $withoutLimitQuota>
+      <StyledText fontWeight={600} $withoutLimitQuota color={sideInfoColor}>
         {usedQuota}
       </StyledText>
     );
@@ -179,7 +184,7 @@ const SpaceQuota = (props) => {
 
   if (isReadOnly) {
     return (
-      <StyledText fontWeight={600} $isReadOnly>
+      <StyledText fontWeight={600} $isReadOnly color={sideInfoColor}>
         {usedQuota} / {spaceLimited}
       </StyledText>
     );

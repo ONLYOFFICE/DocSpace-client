@@ -263,7 +263,8 @@ export default class MessageStore {
 
               msg += text;
 
-              return;
+              console.log("text", text);
+              console.log("currentMessage", msg);
             }
 
             if (event.includes(EventType.ToolCall)) {

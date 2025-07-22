@@ -105,7 +105,7 @@ const SelectChat = () => {
     contextMenuRef.current?.show(e);
   };
 
-  const maxHeight = chats.length > 7 ? { maxHeight: 300 } : {};
+  const maxHeight = chats.length > 7 ? { maxHeight: 224 } : {};
 
   if (isLoading) {
     return (

@@ -27,6 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 import McpToolReactSvgUrl from "PUBLIC_DIR/images/mcp.tool.svg?url";
@@ -114,4 +115,4 @@ const Buttons = ({
   );
 };
 
-export default Buttons;
+export default observer(Buttons);

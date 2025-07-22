@@ -232,7 +232,9 @@ export default class MessageStore {
         const { done, value } = await reader.read();
 
         if (done) {
-          this.isRequestRunning = false;
+          runInAction(() => {
+            this.isRequestRunning = false;
+          });
           return;
         }
 
@@ -292,14 +294,18 @@ export default class MessageStore {
 
           await streamHandler();
         } catch (e) {
-          this.isRequestRunning = false;
+          runInAction(() => {
+            this.isRequestRunning = false;
+          });
           console.log(e);
         }
       };
 
       await streamHandler();
     } catch (e) {
-      this.isRequestRunning = false;
+      runInAction(() => {
+        this.isRequestRunning = false;
+      });
       console.log(e);
     }
   };

@@ -240,6 +240,8 @@ export default class MessageStore {
 
         const decodedChunk = textDecoder.decode(value);
 
+        console.log("decoded chunk", decodedChunk);
+
         try {
           const chunks = decodedChunk.split("\n\n");
 

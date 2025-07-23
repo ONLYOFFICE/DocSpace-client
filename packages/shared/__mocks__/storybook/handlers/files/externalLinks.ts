@@ -65,6 +65,7 @@ const generateFileLink = ({
       requestToken: "",
       expirationDate,
     },
+    canEditDenyDownload: false,
     isLocked: false,
     isOwner: false,
     canEditAccess: false,

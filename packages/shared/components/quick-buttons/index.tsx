@@ -78,7 +78,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const fileExst = "fileExst" in item ? item.fileExst : undefined;
   const locked = "locked" in item ? item.locked : undefined;
-  const lockedBy = "lockedBy" in item ? item.lockedBy : undefined;
+  const lockedBy = "lockedBy" in item ? (item.lockedBy as string) : "";
   const canLock = "Lock" in item.security ? item.security.Lock : undefined;
 
   const isTile = viewAs === "tile";
@@ -146,7 +146,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const getLockTooltip = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
-      {t("Common:LockedBy", { userName: lockedBy || "" })}
+      {t("Common:LockedBy", { userName: lockedBy })}
     </Text>
   );
 
@@ -155,7 +155,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
       return;
     }
 
-    onClickLock && onClickLock();
+    if (onClickLock) onClickLock();
   };
 
   return (

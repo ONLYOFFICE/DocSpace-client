@@ -164,6 +164,10 @@ const DeleteDialogComponent = (props) => {
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
+    if (isRoom)
+      return t("Common:SectionMoveConfirmation", {
+        sectionName: t("Common:TrashRoomsSection"),
+      });
     return t("Common:SectionMoveConfirmation", {
       sectionName: t("Common:TrashSection"),
     });
@@ -238,7 +242,31 @@ const DeleteDialogComponent = (props) => {
       );
     }
 
-    if (isRoom || isTemplatesFolder) {
+    if (isRoom) {
+      return isSingle ? (
+        isFolder ? (
+          <>
+            <>{t("DeleteFolderInRoom")} </>
+            <>{t("UsersWithDeleteRights")} </>
+            <>{t("ContinueProcess")}</>
+          </>
+        ) : (
+          <>
+            <>{t("DeleteFileInRoom")} </>
+            <>{t("UsersWithDeleteRights")} </>
+            <>{t("ContinueProcess")}</>
+          </>
+        )
+      ) : (
+        <>
+          <>{t("DeleteItemsInRoom")} </>
+          <>{t("UsersWithDeleteRights")} </>
+          <>{t("ContinueProcess")}</>
+        </>
+      );
+    }
+
+    if (isTemplatesFolder) {
       return isSingle ? (
         isFolder ? (
           <>
@@ -276,17 +304,21 @@ const DeleteDialogComponent = (props) => {
 
   const noteText = unsubscribe ? t("UnsubscribeNote") : moveToTrashNoteText();
 
-  const accessButtonLabel = isTemplate
-    ? t("Common:Delete")
-    : isRoomDelete || isRecycleBinFolder
-      ? t("EmptyTrashDialog:DeleteForeverButton")
-      : isPrivacyFolder || selection[0]?.providerKey
-        ? t("Common:OKButton")
-        : unsubscribe
-          ? t("UnsubscribeButton")
-          : t("Common:MoveToSection", {
-              sectionName: t("Common:TrashSection"),
-            });
+  const accessButtonLabel = isRoom
+    ? t("Common:MoveToSection", {
+        sectionName: t("Common:TrashRoomsSection"),
+      })
+    : isTemplate
+      ? t("Common:Delete")
+      : isRoomDelete || isRecycleBinFolder
+        ? t("EmptyTrashDialog:DeleteForeverButton")
+        : isPrivacyFolder || selection[0]?.providerKey
+          ? t("Common:OKButton")
+          : unsubscribe
+            ? t("UnsubscribeButton")
+            : t("Common:MoveToSection", {
+                sectionName: t("Common:TrashSection"),
+              });
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>

@@ -212,7 +212,7 @@ export default class MessageStore {
     this.messages = [newMsg, ...this.messages];
   };
 
-  startStream = async (stream: ReadableStream<Uint8Array> | null) => {
+  startStream = async (stream?: ReadableStream<Uint8Array> | null) => {
     if (!stream) {
       this.isRequestRunning = false;
 
@@ -260,10 +260,20 @@ export default class MessageStore {
               const { text } = JSON.parse(jsonData);
 
               msg += text;
+
+              if (msg) {
+                if (prevMsg) {
+                  this.continueAIMessage(msg);
+                } else {
+                  this.addNewAIMessage(msg);
+                }
+                prevMsg = msg;
+              }
             }
 
             if (event.includes(EventType.ToolCall)) {
               msg = "";
+              prevMsg = "";
               this.handleToolCall(jsonData);
 
               return;
@@ -271,6 +281,7 @@ export default class MessageStore {
 
             if (event.includes(EventType.ToolResult)) {
               msg = "";
+              prevMsg = "";
               this.handleToolResult(jsonData);
 
               return;
@@ -280,15 +291,6 @@ export default class MessageStore {
               this.handleStreamError(jsonData);
             }
           });
-
-          if (msg) {
-            if (prevMsg) {
-              this.continueAIMessage(msg);
-            } else {
-              this.addNewAIMessage(msg);
-            }
-            prevMsg = msg;
-          }
 
           await streamHandler();
         } catch (e) {

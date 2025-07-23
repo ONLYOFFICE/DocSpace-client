@@ -40,6 +40,7 @@ import Markdown from "./Markdown";
 import ToolCall from "./ToolCall";
 import Error from "./Error";
 import Files from "./Files";
+import Buttons from "./Buttons";
 
 const Message = ({ message, idx, userAvatar, getIcon }: MessageProps) => {
   const { currentChat } = useChatStore();
@@ -91,6 +92,17 @@ const Message = ({ message, idx, userAvatar, getIcon }: MessageProps) => {
       </div>
     );
 
+  const fullText = message.contents
+    .map((c) => {
+      if (c.type === ContentType.Text) return c.text;
+
+      if (c.type === ContentType.Tool)
+        return `\n\n${JSON.stringify(c.arguments)}\n${JSON.stringify(c.result)}`;
+
+      return "";
+    })
+    .join("");
+
   return (
     <div key={`${currentChat?.id}-${message.createdOn}-${idx * 2}`}>
       {message.contents.map((c) => {
@@ -102,6 +114,7 @@ const Message = ({ message, idx, userAvatar, getIcon }: MessageProps) => {
 
         return null;
       })}
+      <Buttons text={fullText} />
     </div>
   );
 };

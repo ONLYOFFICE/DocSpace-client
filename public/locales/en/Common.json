@@ -890,5 +890,8 @@
   "ToolCallExecuted": "Tool call executed",
   "ToolCallArg": "Tool call arguments:",
   "ToolCallResult": "Tool call result:",
+  "CopyMessage": "Copy message",
+  "MessageCopiedSuccess": "Message copied successfully",
+
   "YouDontHaveEnoughPermission": "You don't have enough permission"
 }

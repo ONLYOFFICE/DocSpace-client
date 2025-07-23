@@ -23,13 +23,41 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { ReactSVG } from "react-svg";
+import copy from "copy-to-clipboard";
+import { useTranslation } from "react-i18next";
 
-const Buttons = () => {
+import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import RefreshIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
+
+import { toastr } from "../../../../../toast";
+
+import styles from "../../ChatMessageBody.module.scss";
+
+const Buttons = ({ text }: { text: string }) => {
+  const { t } = useTranslation(["Common"]);
+
+  const onCopyAction = () => {
+    copy(text);
+    toastr.success(t("MessageCopiedSuccess"));
+  };
+
   return (
-    <div>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
+    <div className={styles.buttonsBlock}>
+      <div
+        className={styles.buttonsBlockItem}
+        onClick={onCopyAction}
+        title={t("CopyMessage")}
+      >
+        <ReactSVG src={CopyIconUrl} />
+      </div>
+      <div className={styles.buttonsBlockItem}>
+        <ReactSVG src={RefreshIconUrl} />
+      </div>
+      <div className={styles.buttonsBlockItem}>
+        <ReactSVG src={SaveToFileIconUrl} />
+      </div>
     </div>
   );
 };

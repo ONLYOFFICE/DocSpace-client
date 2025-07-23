@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "../../styles/variables/colors";
+@use "../../styles/z-index" as z;
 
 :global(.dark) {
   :local {
@@ -56,7 +57,7 @@
     padding: 8px 12px;
     max-width: min(100vw, var(--tooltip-max-width));
     color: var(--tooltip-text-color);
-    z-index: 999;
+    z-index: z.$system-top;
     box-sizing: border-box;
 
     p,

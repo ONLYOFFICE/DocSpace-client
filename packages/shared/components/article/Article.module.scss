@@ -26,6 +26,7 @@
 
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 :global(.rtl) {
   :local(.wrapper) {
@@ -140,7 +141,7 @@
   background-color: var(--files-article-body-dev-tools-background-color);
   opacity: var(--files-article-body-dev-tools-background-opacity);
   border-radius: 6px;
-  z-index: -1;
+  z-index: z.$below;
 }
 
 .hideArticleMenuButton {
@@ -148,7 +149,7 @@
   align-items: center;
   position: absolute;
   height: 44px;
-  z-index: 209;
+  z-index: z.$sticky;
   background: var(--article-catalog-background);
   inset-inline-start: 0;
   cursor: pointer;
@@ -255,7 +256,6 @@
   align-items: center;
   -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
-
   @include mixins.tablet {
     padding: 15px 11px 18px 6px;
     margin: 0;
@@ -342,7 +342,7 @@
 }
 
 .profileWrapper {
-  z-index: 209;
+  z-index: z.$sticky;
   position: absolute;
   bottom: 0;
   inset-inline-start: 0;
@@ -417,7 +417,7 @@
   box-sizing: border-box;
   user-select: none;
   border-inline-end: var(--article-catalog-vertical-line);
-  z-index: 205;
+  z-index: z.$sticky;
 
   @include mixins.tablet {
     height: 100%;
@@ -438,7 +438,7 @@
   }
 
   @include mixins.mobile {
-    z-index: 230;
+    z-index: z.$floating-ui;
 
     &[data-open="true"] {
       display: flex;

@@ -27,6 +27,7 @@
 @use "../../styles/variables";
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 .circle {
   position: relative;
@@ -118,7 +119,7 @@
 
 .circleWrap {
   position: relative;
-  z-index: 500;
+  z-index: z.$floating-ui;
   width: 48px;
   height: 48px;
   background: var(
@@ -179,7 +180,7 @@
 .floatingButtonWrapper {
   @include mixins.desktop {
     position: absolute;
-    z-index: 300;
+    z-index: z.$floating-ui;
     inset-inline-end: 0;
     width: 100px;
     height: 70px;

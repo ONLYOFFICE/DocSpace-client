@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../../../styles/z-index" as z;
+
 :global(.rtl) {
   :local {
     .container {
@@ -52,7 +54,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 307;
+  z-index: z.$floating-ui;
 
   .title {
     text-align: center;

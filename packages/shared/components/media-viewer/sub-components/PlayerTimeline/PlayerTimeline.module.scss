@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "../../../../styles/mixins";
+@use "../../../../styles/z-index" as z;
 
 @mixin mobileStyles {
   margin-top: 16px;
@@ -148,7 +149,7 @@
     );
     background-repeat: no-repeat;
 
-    z-index: 1;
+    z-index: z.$content;
 
     &:hover {
       cursor: pointer;

@@ -27,6 +27,7 @@
  */
 
 @use "@docspace/shared/styles/mixins";
+@use "../../../styles/z-index" as z;
 
 .tableGroupMenu {
   position: relative;
@@ -44,7 +45,7 @@
   width: 100%;
   height: 100%;
 
-  z-index: 199;
+  z-index: z.$sticky;
 
   margin: 0;
 

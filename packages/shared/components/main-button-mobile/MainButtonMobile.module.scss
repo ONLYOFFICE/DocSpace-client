@@ -2,10 +2,11 @@
 
 @use "../../styles/variables/colors";
 @use "../../styles/common-icons-style";
+@use "../../styles/z-index" as z;
 
 .floatingButton {
   position: relative;
-  z-index: 1010;
+  z-index: z.$floating-ui;
   background: var(--main-button-mobile-button-color);
   -webkit-tap-highlight-color: #{colors.$tap-highlight};
 
@@ -202,7 +203,7 @@
 
 .wrapperAlertIcon {
   position: absolute;
-  z-index: 1010;
+  z-index: z.$floating-ui;
   width: 12px;
   height: 12px;
   top: 10px;

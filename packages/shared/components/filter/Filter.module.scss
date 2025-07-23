@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @use "../../styles/mixins";
 @use "../../styles/variables/colors";
+@use "../../styles/z-index" as z;
 
 .filterInput {
   width: 100%;
@@ -134,7 +135,7 @@
 
   inset-inline-start: 25px;
 
-  z-index: 10;
+  z-index: z.$content;
 
   background: var(--accent-main);
 
@@ -152,7 +153,7 @@
   width: 480px;
   height: 100%;
 
-  z-index: 400;
+  z-index: z.$backdrop;
 
   display: flex;
   flex-direction: column;

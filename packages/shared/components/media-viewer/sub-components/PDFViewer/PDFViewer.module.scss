@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../../../styles/z-index" as z;
+
 :global(.rtl) {
   :local {
     .viewerWrapper {
@@ -54,7 +56,7 @@
 
 .viewerWrapper {
   position: fixed;
-  z-index: 305;
+  z-index: z.$floating-ui;
   inset: 0;
   display: flex;
   flex-direction: row;
@@ -79,7 +81,7 @@
 
 .errorWrapper {
   position: fixed;
-  z-index: 305;
+  z-index: z.$floating-ui;
   inset: 0;
   display: flex;
   justify-content: center;
@@ -217,7 +219,7 @@
 
 .container {
   position: fixed;
-  z-index: 308;
+  z-index: z.$floating-ui;
   width: 100%;
 }
 

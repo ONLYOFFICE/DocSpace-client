@@ -1,4 +1,5 @@
 @use "../../styles/variables";
+@use "../../styles/z-index" as z;
 
 .stickyIndent {
   height: 20px;
@@ -15,7 +16,7 @@
     var(--tabs-gradient-color) 100%
   );
   transform: matrix(-1, 0, 0, 1, 0, 0);
-  z-index: 1;
+  z-index: z.$content;
 
   &[data-direction="rtl"] {
     background: linear-gradient(
@@ -53,7 +54,7 @@
   position: -webkit-sticky;
   top: 0;
   background: var(--tabs-background-color-primary);
-  z-index: 1;
+  z-index: z.$content;
 
   display: flex;
   flex-direction: row;
@@ -83,7 +84,7 @@
   }
 
   :global(.track) {
-    z-index: 0;
+    z-index: z.$base;
     padding: 0;
   }
 
@@ -217,7 +218,7 @@
 
 .tabSubLine {
   grid-area: 2/1;
-  z-index: 1;
+  z-index: z.$content;
   width: 100%;
   height: 4px;
   bottom: 0px;

@@ -27,6 +27,7 @@
 import styled, { css, createGlobalStyle } from "styled-components";
 import { ReactSVG } from "react-svg";
 
+import { zIndex } from "../../themes";
 import { injectDefaultTheme, mobile } from "../../utils";
 
 import { ComboBox } from "../combobox";
@@ -72,10 +73,10 @@ const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
   @media ${mobile} {
     .backdrop-active {
       top: -64px;
-      z-index: 560;
+      z-index: ${zIndex.backdrop};
     }
     .dropdown-container {
-      z-index: 561;
+      z-index: ${zIndex.overlay};
     }
   }
 `;

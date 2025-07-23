@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../../../styles/z-index" as z;
+
 .wrapper {
   position: relative;
   display: flex;
@@ -56,7 +58,7 @@
   padding: 4px 0px;
   position: absolute;
   bottom: 48px;
-  z-index: 50;
+  z-index: z.$backdrop;
   color: var(--player-speed-control-dropdown-color);
   background: var(--player-speed-control-dropdown-bg);
   text-align: center;

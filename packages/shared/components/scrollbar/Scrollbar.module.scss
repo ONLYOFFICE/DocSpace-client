@@ -26,6 +26,7 @@
 @use "../../styles/variables";
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 :global(.rtl) {
   :local {
@@ -85,7 +86,7 @@
   padding: 4px;
   border-radius: 8px !important;
   background: transparent !important;
-  z-index: 201;
+  z-index: z.$sticky;
 
   @include mixins.desktop {
     &:hover {

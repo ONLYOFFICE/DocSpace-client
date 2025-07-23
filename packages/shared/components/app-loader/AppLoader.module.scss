@@ -1,4 +1,5 @@
 @use "../../styles/variables/colors";
+@use "../../styles/z-index" as z;
 
 .loaderContainer {
   width: 100vw;
@@ -9,7 +10,7 @@
   justify-content: center;
   overflow: hidden;
   background: var(--app-loader-background-color);
-  z-index: 5000;
+  z-index: z.$system-top;
   position: fixed;
   top: 0;
   inset-inline-start: 0;

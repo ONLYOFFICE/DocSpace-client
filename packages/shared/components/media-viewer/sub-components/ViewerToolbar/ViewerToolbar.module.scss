@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "../../../../styles/mixins";
+@use "../../../../styles/z-index" as z;
 
 .toolbarWrapper {
   height: 48px;
@@ -33,7 +34,7 @@
   position: fixed;
   bottom: 24px;
   left: 50%;
-  z-index: 307;
+  z-index: z.$floating-ui;
   transform: translateX(-50%);
   text-align: center;
   transition: all 0.26s ease-out;

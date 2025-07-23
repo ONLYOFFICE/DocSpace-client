@@ -1,5 +1,6 @@
 @use "../../styles/mixins";
 @use "../../styles/variables/colors";
+@use "../../styles/z-index" as z;
 
 .dropDown {
   font-style: normal;
@@ -22,7 +23,7 @@
   padding: 8px 0;
   table-layout: fixed;
 
-  z-index: var(--z-index, 400);
+  z-index: var(--z-index, z.$backdrop);
 
   display: none;
 

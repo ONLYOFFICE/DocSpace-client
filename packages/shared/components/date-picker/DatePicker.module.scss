@@ -27,6 +27,7 @@
 @use "../../styles/variables";
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 .dropDownStyle {
   position: relative;
@@ -55,7 +56,7 @@
   }
 
   .backdrop-active {
-    z-index: 210;
+    z-index: z.$backdrop;
   }
 }
 

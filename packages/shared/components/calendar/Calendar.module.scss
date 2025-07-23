@@ -27,6 +27,7 @@
 @use "../../styles/variables";
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 .container {
   box-sizing: border-box;
@@ -36,7 +37,7 @@
   box-shadow: var(--calendar-box-shadow);
   border: 1px solid var(--calendar-border-color);
   border-radius: 6px;
-  z-index: 320;
+  z-index: z.$backdrop;
   background-color: var(--background-color);
 
   &.isScroll {

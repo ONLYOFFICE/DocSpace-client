@@ -1,6 +1,7 @@
 @use "../../styles/mixins";
 @use "../../styles/common-icons-style";
 @use "../../styles/variables/colors";
+@use "../../styles/z-index" as z;
 
 :global(.rtl) {
   :local {
@@ -343,7 +344,7 @@
   padding: 0 20px;
   padding-top: 18px;
   width: unset;
-  z-index: 401;
+  z-index: z.$sticky;
   display: table;
   margin: auto;
   flex-direction: column;

@@ -26,6 +26,7 @@
 @use "../../styles/variables";
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 :global(.light) {
   :local {
@@ -104,7 +105,7 @@
 }
 
 .articleItemBadgeWrapper {
-  z-index: 3;
+  z-index: z.$sticky;
   margin-inline-start: 8px;
   margin-inline-end: -2px;
 
@@ -194,7 +195,7 @@
 
   line-height: 20px;
 
-  z-index: 1;
+  z-index: z.$content;
 
   align-items: center;
 
@@ -227,7 +228,7 @@
   align-items: center;
   justify-content: center;
 
-  z-index: 1;
+  z-index: z.$content;
 
   pointer-events: none;
 

@@ -28,6 +28,7 @@
 
 @use "../../../styles/mixins";
 @use "../../../styles/variables";
+@use "../../../styles/z-index" as z;
 
 @mixin marginStyles {
   margin-inline: -24px;
@@ -99,7 +100,7 @@
 
   &.showHotkeyBorder {
     border-color: variables.$light-second-main !important;
-    z-index: 1;
+    z-index: z.$content;
     position: relative;
 
     margin-inline: -24px;

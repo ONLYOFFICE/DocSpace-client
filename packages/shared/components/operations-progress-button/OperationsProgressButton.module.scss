@@ -27,6 +27,7 @@
 @use "../../styles/variables/colors";
 
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 .styledDropDown {
   margin-bottom: 8px;
@@ -55,7 +56,7 @@
   position: fixed;
   inset-inline-end: 24px;
   bottom: 24px;
-  z-index: 400;
+  z-index: z.$floating-ui;
   opacity: 1;
   transform: translateY(0);
   animation: none;
@@ -78,7 +79,7 @@
   }
 
   @include mixins.tablet-and-below {
-    z-index: 200;
+    z-index: z.$sticky;
     bottom: 16px;
 
     @keyframes hideButton {

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @use "../../styles/variables/colors";
+@use "../../styles/z-index" as z;
 
 .label {
   display: flex;
@@ -188,5 +189,5 @@
   opacity: 0.0001;
   position: absolute;
   inset-inline-end: 0;
-  z-index: -1;
+  z-index: z.$below;
 }

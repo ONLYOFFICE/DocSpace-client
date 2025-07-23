@@ -28,6 +28,7 @@
 
 @use "../../styles/variables";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 .combobox {
   position: relative;
@@ -95,6 +96,6 @@
   }
 
   :global(.backdrop-active) {
-    z-index: 210;
+    z-index: z.$backdrop;
   }
 }

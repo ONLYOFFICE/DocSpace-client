@@ -1,6 +1,7 @@
 @use "../../../styles/variables";
 @use "../../../styles/variables/colors";
 @use "../../../styles/mixins";
+@use "../../../styles/z-index" as z;
 
 .content {
   box-sizing: border-box;
@@ -49,7 +50,7 @@
 
 :global {
   .guidance-dialog {
-    z-index: 1000;
+    z-index: z.$system-top;
     .modal-header {
       margin: 20px 20px 12px 20px;
       height: auto;
@@ -107,7 +108,7 @@
 .guidElement {
   position: absolute;
   border-radius: 7px;
-  z-index: 1;
+  z-index: z.$content;
 
   &.smallBorderRadius {
     border-radius: 4px;
@@ -116,7 +117,7 @@
   &.iosBackdrop {
     -webkit-backdrop-filter: var(--backdrop-filter-value);
     backdrop-filter: var(--backdrop-filter-value);
-    z-index: 1000;
+    z-index: z.$system-top;
   }
 }
 
@@ -130,7 +131,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 999;
+  z-index: z.$backdrop;
   background-color: var(--backdrop-background-color);
   transition: opacity 0.2s;
   opacity: 1;

@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../../styles/z-index" as z;
+
 .rombsLoader {
   position: absolute;
   width: var(--loader-size);
@@ -42,19 +44,19 @@
 
   &.blue {
     background: var(--rombs-loader-blue);
-    z-index: 1;
+    z-index: z.$content;
     animation: keyFrameBlue 2s ease-in-out 0s infinite;
   }
 
   &.green {
     background: var(--rombs-loader-green);
-    z-index: 2;
+    z-index: z.$sticky;
     animation: keyFrameGreen 2s ease-in-out 0s infinite;
   }
 
   &.red {
     background: var(--rombs-loader-red);
-    z-index: 3;
+    z-index: z.$floating-ui;
     animation: keyFrameRed 2s ease-in-out 0s infinite;
   }
 }

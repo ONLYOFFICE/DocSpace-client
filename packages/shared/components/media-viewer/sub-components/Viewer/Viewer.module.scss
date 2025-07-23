@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../../../styles/z-index" as z;
+
 :global(.rtl) {
   :local {
     .container {
@@ -74,7 +76,7 @@
   > span {
     position: fixed;
     bottom: 5px;
-    z-index: 305;
+    z-index: z.$floating-ui;
   }
 
   .deleteBtnContainer,
@@ -93,7 +95,7 @@
   }
 
   .details {
-    z-index: 307;
+    z-index: z.$floating-ui;
     padding-top: 21px;
     height: 64px;
     width: 100%;

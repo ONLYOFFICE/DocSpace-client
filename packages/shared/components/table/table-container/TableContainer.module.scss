@@ -27,6 +27,7 @@
  */
 
 @use "@docspace/shared/styles/variables";
+@use "../../../styles/z-index" as z;
 
 .tableContainer {
   user-select: none;
@@ -55,7 +56,7 @@
 
     .table-container_group-menu,
     .table-container_header {
-      z-index: 200;
+      z-index: z.$sticky;
       padding: 0 20px;
 
       border-bottom: 1px solid;

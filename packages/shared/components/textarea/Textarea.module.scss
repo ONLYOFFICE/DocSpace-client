@@ -1,12 +1,13 @@
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
 @use "../../styles/common-input-styles";
+@use "../../styles/z-index" as z;
 
 .copyIconWrapper {
   position: absolute;
   width: 20px;
   height: 20px;
-  z-index: 2;
+  z-index: z.$content;
 
   inset-inline-end: 18px;
   top: 6px;

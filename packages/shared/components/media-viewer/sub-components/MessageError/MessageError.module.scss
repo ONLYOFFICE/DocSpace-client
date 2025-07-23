@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../../../styles/z-index" as z;
+
 .mediaError {
   position: fixed;
-  z-index: 1006;
+  z-index: z.$system-top;
 
   // doesn't require mirroring for RTL
   left: 50%;
@@ -50,7 +52,7 @@
   position: fixed;
 
   // doesn't require mirroring for RTL
-  z-index: 1006;
+  z-index: z.$system-top;
   left: 50%;
 
   bottom: 24px;

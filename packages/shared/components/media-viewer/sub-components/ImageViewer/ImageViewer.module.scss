@@ -24,13 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../../../styles/z-index" as z;
+
 .container {
   width: 100%;
   height: 100%;
   position: fixed;
   inset: 0;
   overflow: hidden;
-  z-index: 300;
+  z-index: z.$floating-ui;
   user-select: none;
   touch-action: none;
 

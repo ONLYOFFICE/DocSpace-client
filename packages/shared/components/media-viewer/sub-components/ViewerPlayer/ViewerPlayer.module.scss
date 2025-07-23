@@ -25,11 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "../../../../styles/mixins";
+@use "../../../../styles/z-index" as z;
 
 .containerPlayer {
   position: fixed;
   inset: 0;
-  z-index: 305;
+  z-index: z.$floating-ui;
   touch-action: none;
 
   &.isFullScreen {
@@ -72,7 +73,7 @@
   position: fixed;
   inset-inline: 0;
   bottom: 0px;
-  z-index: 307;
+  z-index: z.$floating-ui;
   display: flex;
   width: 100%;
   height: 188px;

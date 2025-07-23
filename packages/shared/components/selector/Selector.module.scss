@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @use "../../../shared/styles/mixins.scss";
 @use "../../../shared/styles/variables/devices.scss";
+@use "../../../shared/styles/z-index" as z;
 
 .selector {
   width: 100%;
@@ -563,7 +564,7 @@
   position: absolute;
   top: 48px;
   inset-inline-start: 16px;
-  z-index: 453;
+  z-index: z.$backdrop;
   padding-top: 8px;
 
   background-color: var(--background-color);

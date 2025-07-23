@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "../../../../styles/z-index" as z;
+
 .buttonScroll {
-  z-index: 307;
+  z-index: z.$floating-ui;
   position: fixed;
   top: calc(50% - 20px);
 
@@ -40,7 +42,7 @@
 
 .switchToolbar {
   height: 100%;
-  z-index: 306;
+  z-index: z.$floating-ui;
   position: fixed;
   width: 73px;
   background: inherit;

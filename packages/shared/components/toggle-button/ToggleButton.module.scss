@@ -27,6 +27,7 @@
 @use "../../styles/variables";
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 :global(.light) {
   :local {
@@ -159,5 +160,5 @@
   opacity: 0.0001;
   position: absolute;
   inset-inline-end: 0;
-  z-index: -1;
+  z-index: z.$below;
 }

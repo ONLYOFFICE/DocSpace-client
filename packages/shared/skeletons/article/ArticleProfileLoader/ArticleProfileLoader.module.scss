@@ -1,8 +1,9 @@
 @use "../../../styles/variables/colors";
 @use "../../../styles/mixins";
+@use "../../../styles/z-index" as z;
 
 .container {
-  z-index: 209;
+  z-index: z.$sticky;
   position: absolute;
   bottom: 0;
   inset-inline-start: 0;

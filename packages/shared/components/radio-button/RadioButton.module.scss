@@ -26,6 +26,7 @@
 @use "../../styles/common-icons-style";
 @use "../../styles/variables/colors";
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 :global(.dark) {
   .label {
@@ -136,6 +137,6 @@
 
 .input {
   position: absolute;
-  z-index: -1;
+  z-index: z.$below;
   opacity: 0.0001;
 }

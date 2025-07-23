@@ -28,7 +28,7 @@ import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
 import styled from "styled-components";
 import { desktop, tablet, mobile } from "@docspace/shared/utils";
-import { TColorScheme } from "@docspace/shared/themes";
+import { TColorScheme, zIndex } from "@docspace/shared/themes";
 
 export const StyledArticle = styled.article<{
   showText?: boolean;
@@ -60,7 +60,7 @@ export const StyledArticle = styled.article<{
   }
 
   @media ${mobile} {
-    z-index: 204;
+    z-index: ${zIndex.floatingUI};
     display: ${(props) => (props.articleOpen ? "flex" : "none")};
     flex-direction: column;
     min-width: 100dvw;
@@ -97,7 +97,7 @@ export const StyledCrossIcon = styled(CrossIcon)`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 290;
+  z-index: ${zIndex.backdrop};
   width: 17px;
   height: 17px;
   path {

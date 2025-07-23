@@ -93,9 +93,9 @@ const EditLinkPanel = (props) => {
   const date = link?.sharedTo?.expirationDate ?? null;
   const isDenyDownload = link?.sharedTo?.denyDownload ?? false;
 
-  const isPublic = item.type === RoomsType.PublicRoom;
-  const isFormRoom = item.type === RoomsType.FormRoom;
-  const isCustomRoom = item.type === RoomsType.CustomRoom;
+  const isPublic = item.roomType === RoomsType.PublicRoom;
+  const isFormRoom = item.roomType === RoomsType.FormRoom;
+  const isCustomRoom = item.roomType === RoomsType.CustomRoom;
 
   const accessOptions = useMemo(() => {
     if (item.isRoom || item.isFolder) return getRoomAccessOptions(t);
@@ -356,6 +356,12 @@ const EditLinkPanel = (props) => {
 
   const canChangeLifetime = !isPrimary || !item.isRoom;
 
+  console.log(
+    { link, isPublic, isFormRoom, item },
+    link?.canEditDenyDownload === false,
+  );
+  const disabledDenyDownload = link?.canEditDenyDownload === false;
+
   const editLinkPanelComponent = (
     <ModalDialog
       isExpired={isExpired}
@@ -411,8 +417,10 @@ const EditLinkPanel = (props) => {
               isLoading={isLoading}
               headerText={t("Files:DisableDownload")}
               bodyText={t("Files:PreventDownloadFilesAndFolders")}
-              isChecked={denyDownload}
+              isChecked={denyDownload || disabledDenyDownload}
               onChange={onDenyDownloadChange}
+              isDisabled={disabledDenyDownload}
+              tooltipContent={t("Common:RestrictionDownloadCopyRoom")}
             />
           ) : null}
 

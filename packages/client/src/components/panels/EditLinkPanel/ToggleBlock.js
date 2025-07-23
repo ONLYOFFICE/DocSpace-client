@@ -27,6 +27,7 @@
 import React from "react";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const ToggleBlock = ({
   isLoading,
@@ -37,38 +38,58 @@ const ToggleBlock = ({
   children,
   withToggle = true,
   isExpired,
+  isDisabled = false,
+  tooltipContent,
 }) => {
-  return (
-    <div className="edit-link-toggle-block">
-      <div className="edit-link-toggle-header">
-        <Text fontSize="16px" fontWeight={700}>
-          {headerText}
-        </Text>
-        {withToggle ? (
-          <ToggleButton
-            isDisabled={isLoading}
-            isChecked={isChecked}
-            onChange={onChange}
-            className="edit-link-toggle"
-          />
-        ) : null}
-      </div>
-      {bodyText ? (
-        <Text
-          className={
-            isExpired
-              ? "edit-link-toggle-description_expired"
-              : "edit-link-toggle-description"
-          }
-          fontSize="12px"
-          fontWeight={400}
-        >
-          {bodyText}
-        </Text>
-      ) : null}
+  const tooltipId = React.useId();
 
-      {children}
-    </div>
+  return (
+    <>
+      <div id={tooltipId} className="edit-link-toggle-block">
+        <div className="edit-link-toggle-header">
+          <Text fontSize="16px" fontWeight={700}>
+            {headerText}
+          </Text>
+          {withToggle ? (
+            <ToggleButton
+              isLoading={isLoading}
+              isDisabled={isDisabled}
+              isChecked={isChecked}
+              onChange={onChange}
+              className="edit-link-toggle"
+            />
+          ) : null}
+        </div>
+        {bodyText ? (
+          <Text
+            className={
+              isExpired
+                ? "edit-link-toggle-description_expired"
+                : "edit-link-toggle-description"
+            }
+            fontSize="12px"
+            fontWeight={400}
+          >
+            {bodyText}
+          </Text>
+        ) : null}
+
+        {children}
+      </div>
+      {isDisabled && tooltipContent ? (
+        <Tooltip
+          anchorSelect={`#${tooltipId}`}
+          place="bottom"
+          getContent={() => {
+            return (
+              <Text fontSize="13px" noSelect>
+                {tooltipContent}
+              </Text>
+            );
+          }}
+        />
+      ) : null}
+    </>
   );
 };
 

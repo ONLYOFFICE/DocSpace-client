@@ -438,6 +438,7 @@ export type TDocServiceLocation = {
 export type TFileLink = {
   access: ShareAccessRights;
   canEditAccess: boolean;
+  canEditDenyDownload: boolean;
   isLocked: boolean;
   isOwner: boolean;
   sharedTo: {

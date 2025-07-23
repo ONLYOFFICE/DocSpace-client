@@ -620,6 +620,7 @@
   "RequiredField": "Required field",
   "ResetAndStartFilling": "Reset and start filling",
   "ResetApplication": "Reset application",
+  "RestrictionDownloadCopyRoom": "You cannot disable the restriction on downloading and copying data because this setting is enforced at the room level for all files.",
   "Restore": "Restore",
   "RestoreBackup": "Restore",
   "RestoreBackupDescription": "Use this option to restore your space from the previously saved backup file.",

@@ -27,6 +27,7 @@
 import { getCookie } from "../../utils";
 
 import { request } from "../client";
+import { TFile } from "../files/types";
 import {
   TCreateAiProvider,
   TAiProvider,
@@ -122,7 +123,6 @@ export const startNewChat = async (
   roomId: number | string,
   message: string,
   files: string[],
-  contextFolderId: string | number,
   abortController?: AbortController,
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
@@ -135,7 +135,7 @@ export const startNewChat = async (
         Authorization: authHeader,
       },
       signal: abortController?.signal,
-      body: JSON.stringify({ message, contextFolderId, files }),
+      body: JSON.stringify({ message, files }),
     });
 
     if (!response.ok) {
@@ -152,7 +152,6 @@ export const sendMessageToChat = async (
   chatId: string,
   message: string,
   files: string[],
-  contextFolderId: string | number,
   abortController?: AbortController,
 ) => {
   const authHeader = getCookie("asc_auth_key")!;
@@ -167,7 +166,7 @@ export const sendMessageToChat = async (
           Authorization: authHeader,
         },
         signal: abortController?.signal,
-        body: JSON.stringify({ message, contextFolderId, files }),
+        body: JSON.stringify({ message, files }),
       },
     );
 
@@ -264,4 +263,31 @@ export const changeMCPTools = async (
   });
 
   return res;
+};
+
+export const exportChat = async (chatId: string) => {
+  try {
+    await request({
+      method: "POST",
+      url: `${baseUrl}/chats/${chatId}/messages/export`,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const exportChatMessage = async (
+  messageId: number,
+  folderId: string | number,
+  title: string,
+) => {
+  try {
+    return (await request({
+      method: "POST",
+      url: `${baseUrl}/messages/${messageId}/export`,
+      data: { folderId, title },
+    })) as TFile;
+  } catch (e) {
+    console.log(e);
+  }
 };

@@ -33,9 +33,11 @@ import SelectSessionReactSvg from "PUBLIC_DIR/images/select.session.react.svg";
 import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 
 import { isDesktop } from "../../../../../utils";
 import { RectangleSkeleton } from "../../../../../skeletons";
+import { exportChat } from "../../../../../api/ai";
 
 import { DropDown } from "../../../../drop-down";
 import { DropDownItem } from "../../../../drop-down-item";
@@ -84,6 +86,10 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
     deleteChat(hoveredItem);
   }, [hoveredItem, deleteChat]);
 
+  const onSaveToFileAction = React.useCallback(async () => {
+    await exportChat(hoveredItem);
+  }, [hoveredItem]);
+
   const model = React.useMemo(() => {
     return [
       {
@@ -91,6 +97,12 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
         label: t("Common:Rename"),
         icon: RenameReactSvgUrl,
         onClick: onRenameToggle,
+      },
+      {
+        key: "save_to_file",
+        label: t("Common:SaveToFile"),
+        icon: SaveToFileIconUrl,
+        onClick: onSaveToFileAction,
       },
       { key: "separator", isSeparator: true },
       {
@@ -100,7 +112,7 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
         onClick: onDeleteAction,
       },
     ];
-  }, [t, onDeleteAction, onRenameToggle]);
+  }, [t, onDeleteAction, onRenameToggle, onSaveToFileAction]);
 
   const onShowContextMenu = (e: React.MouseEvent<HTMLElement>) => {
     contextMenuRef.current?.show(e);
@@ -165,6 +177,7 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
                 }}
                 className={classNames("drop-down-item")}
                 isActive={id === currentChat?.id}
+                data-id={id}
               >
                 <div
                   className={styles.dropdowItemWrapper}

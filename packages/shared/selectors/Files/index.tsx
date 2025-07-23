@@ -106,9 +106,13 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     applyFilterOption,
     onSelectItem,
+
+    initAiRoom,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } = use(LoadersContext);
+
+  const [isAIRoom, setIsAIRoom] = React.useState(initAiRoom ?? false);
 
   const currentSelectedItemId = React.useRef<undefined | number | string>(
     undefined,
@@ -254,6 +258,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
 
     withInit,
     applyFilterOption,
+
+    isAIRoom,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -339,6 +345,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
         if (isDoubleClick) return;
 
         const isFormRoom = item.roomType === RoomsType.FormRoom;
+        const isAi = item.roomType === RoomsType.AIRoom;
 
         if (isFormRoom && formProps?.isRoomFormAccessible === false)
           return toastr.warning(formProps.message);
@@ -359,6 +366,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
         setSelectedItemId(item.id);
         setSearchValue("");
         setSelectedFileInfo(null);
+        if (isAi) setIsAIRoom(true);
+        else setIsAIRoom(false);
 
         if (item.parentId === 0 && item.rootFolderType === FolderType.Rooms) {
           setSelectedItemType("rooms");

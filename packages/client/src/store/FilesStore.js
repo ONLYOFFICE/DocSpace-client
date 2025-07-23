@@ -38,6 +38,7 @@ import {
   Events,
   FilterKeys,
   RoomSearchArea,
+  SearchArea,
 } from "@docspace/shared/enums";
 import SocketHelper, {
   SocketCommands,
@@ -1779,9 +1780,9 @@ class FilesStore {
 
         if (data.current.roomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab(
-            filterData.aiTab === "knowledge"
+            filterData.searchArea === SearchArea.Knowledge
               ? "knowledge"
-              : filterData.aiTab === "result"
+              : filterData.searchArea === SearchArea.ResultStorage
                 ? "result"
                 : "chat",
           );

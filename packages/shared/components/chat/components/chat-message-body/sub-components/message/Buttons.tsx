@@ -26,40 +26,159 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import copy from "copy-to-clipboard";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 
 import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import RefreshIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import SaveToFileIconUrl from "PUBLIC_DIR/images/message.save.svg?url";
 
+import { DeviceType, FolderType } from "../../../../../../enums";
+import { exportChatMessage } from "../../../../../../api/ai";
+import { isDesktop, isTablet } from "../../../../../../utils";
+
+import FilesSelector from "../../../../../../selectors/Files";
+import { TGetIcon } from "../../../../../../selectors/utils/types";
+import { TBreadCrumb } from "../../../../../selector/Selector.types";
+
 import { toastr } from "../../../../../toast";
+
+import { useMessageStore } from "../../../../store/messageStore";
 
 import styles from "../../ChatMessageBody.module.scss";
 
-const Buttons = ({ text }: { text: string }) => {
+const Buttons = ({
+  text,
+  chatName,
+  messageId,
+  isLast,
+  getIcon,
+}: {
+  text: string;
+  chatName?: string;
+  messageId?: number;
+  isLast: boolean;
+  getIcon: TGetIcon;
+}) => {
   const { t } = useTranslation(["Common"]);
+  const { roomId } = useMessageStore();
+
+  const [showFolderSelector, setShowFolderSelector] = React.useState(false);
+
+  const onCloseFolderSelector = () => setShowFolderSelector(false);
 
   const onCopyAction = () => {
     copy(text);
     toastr.success(t("MessageCopiedSuccess"));
   };
 
+  const onExportMessage = async (
+    selectedItemId: string | number | undefined,
+    folderTitle: string,
+    isPublic: boolean,
+    breadCrumbs: TBreadCrumb[],
+    fileName: string,
+    isChecked: boolean,
+  ) => {
+    if (!messageId || !selectedItemId) return;
+
+    const exportResult = await exportChatMessage(
+      messageId,
+      selectedItemId,
+      fileName,
+    );
+
+    if (isChecked) {
+      window.open(exportResult?.webUrl, "_blank");
+    }
+
+    setShowFolderSelector(false);
+  };
+
   return (
-    <div className={styles.buttonsBlock}>
-      <div
-        className={styles.buttonsBlockItem}
-        onClick={onCopyAction}
-        title={t("CopyMessage")}
-      >
-        <ReactSVG src={CopyIconUrl} />
+    <>
+      <div className={styles.buttonsBlock}>
+        <div
+          className={styles.buttonsBlockItem}
+          onClick={onCopyAction}
+          title={t("CopyMessage")}
+        >
+          <ReactSVG src={CopyIconUrl} />
+        </div>
+        {isLast ? (
+          <div className={styles.buttonsBlockItem} title={t("RefreshMessage")}>
+            <ReactSVG src={RefreshIconUrl} />
+          </div>
+        ) : null}
+        <div
+          className={styles.buttonsBlockItem}
+          onClick={() => setShowFolderSelector(true)}
+          title={t("SaveToFile")}
+        >
+          <ReactSVG src={SaveToFileIconUrl} />
+        </div>
       </div>
-      <div className={styles.buttonsBlockItem}>
-        <ReactSVG src={RefreshIconUrl} />
-      </div>
-      <div className={styles.buttonsBlockItem}>
-        <ReactSVG src={SaveToFileIconUrl} />
-      </div>
-    </div>
+      {showFolderSelector ? (
+        <FilesSelector
+          isPanelVisible={showFolderSelector}
+          onCancel={onCloseFolderSelector}
+          getIcon={getIcon}
+          getIsDisabled={(
+            isFirstLoad,
+            isSelectedParentFolder,
+            selectedItemId,
+            selectedItemType,
+            isRoot,
+            selectedItemSecurity,
+          ) => {
+            if (selectedItemType === "rooms") return true;
+
+            if (
+              selectedItemSecurity &&
+              "Create" in selectedItemSecurity &&
+              selectedItemSecurity.Create
+            )
+              return false;
+
+            return true;
+          }}
+          onSubmit={onExportMessage}
+          withHeader
+          headerProps={{
+            headerLabel: t("Common:SaveButton"),
+            isCloseable: true,
+            onCloseClick: onCloseFolderSelector,
+          }}
+          withSearch
+          withBreadCrumbs
+          withoutBackButton
+          withCancelButton
+          withCreate={false}
+          initAiRoom
+          withFooterCheckbox
+          withFooterInput
+          cancelButtonLabel={t("Common:CancelButton")}
+          submitButtonLabel={t("Common:SaveButton")}
+          disabledItems={[]}
+          isRoomsOnly={false}
+          isThirdParty={false}
+          currentFolderId={roomId}
+          rootFolderType={FolderType.Rooms}
+          footerCheckboxLabel={t("Common:OpenSavedDocument")}
+          footerInputHeader={t("Common:FileName")}
+          currentFooterInputValue={`${chatName}_${messageId}`}
+          descriptionText=""
+          getFilesArchiveError={() => ""}
+          currentDeviceType={
+            isDesktop()
+              ? DeviceType.desktop
+              : isTablet()
+                ? DeviceType.tablet
+                : DeviceType.mobile
+          }
+        />
+      ) : null}
+    </>
   );
 };
 
-export default Buttons;
+export default observer(Buttons);

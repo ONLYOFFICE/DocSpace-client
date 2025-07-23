@@ -832,3 +832,13 @@ export const enum InfoPanelEvents {
 
   setInfoPanelMobileHidden = "SET_INFO_PANEL_MOBILE_HIDDEN_EVENT",
 }
+
+export const enum SearchArea {
+  Active,
+  Archive,
+  Any,
+  RecentByLinks,
+  Templates,
+  Knowledge,
+  ResultStorage,
+}

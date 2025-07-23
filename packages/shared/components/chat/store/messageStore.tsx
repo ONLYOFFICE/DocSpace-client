@@ -106,6 +106,10 @@ export default class MessageStore {
     });
   };
 
+  addMessageId = (id: number) => {
+    this.messages[0] = { ...this.messages[0], id };
+  };
+
   addUserMessage = (message: string) => {
     const newMsg: TMessage = {
       role: RoleType.UserMessage,
@@ -323,7 +327,6 @@ export default class MessageStore {
       this.roomId,
       message,
       files,
-      this.roomId,
       this.abortController,
     );
 
@@ -343,7 +346,6 @@ export default class MessageStore {
       this.currentChatId,
       message,
       files,
-      this.roomId,
       this.abortController,
     );
 

@@ -29,6 +29,7 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 
 import { TGetIcon } from "../../../../selectors/utils/types";
+import socket, { SocketCommands, SocketEvents } from "../../../../utils/socket";
 
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
@@ -50,7 +51,7 @@ const ChatMessageBody = ({
   getIcon: TGetIcon;
   isLoading?: boolean;
 }) => {
-  const { messages, fetchNextMessages } = useMessageStore();
+  const { messages, fetchNextMessages, addMessageId } = useMessageStore();
   const { currentChat } = useChatStore();
 
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -61,6 +62,26 @@ const ChatMessageBody = ({
   const currentScroll = useRef(0);
 
   const isEmpty = messages.length === 0;
+
+  useEffect(() => {
+    if (!currentChat?.id) return;
+
+    socket.emit(SocketCommands.Subscribe, {
+      roomParts: `CHAT-${currentChat?.id}`,
+    });
+
+    return () => {
+      socket.emit(SocketCommands.Unsubscribe, {
+        roomParts: `CHAT-${currentChat?.id}`,
+      });
+    };
+  }, [currentChat?.id]);
+
+  useEffect(() => {
+    socket.on(SocketEvents.ChatMessageId, (data) => {
+      addMessageId(data.messageId);
+    });
+  }, [addMessageId]);
 
   useEffect(() => {
     setIsScrolled(false);
@@ -136,6 +157,7 @@ const ChatMessageBody = ({
                   message={message}
                   idx={index}
                   userAvatar={userAvatar}
+                  isLast={index === 0}
                   getIcon={getIcon}
                 />
               );

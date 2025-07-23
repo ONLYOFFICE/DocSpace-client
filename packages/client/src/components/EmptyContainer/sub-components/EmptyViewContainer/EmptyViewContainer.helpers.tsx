@@ -34,6 +34,7 @@ import {
   FilterType,
   FolderType,
   RoomsType,
+  SearchArea,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
@@ -481,7 +482,7 @@ export const getOptions = (
           onClick: () => {
             const filesFilter = FilesFilter.getFilter(window.location);
 
-            filesFilter.aiTab = "empty";
+            filesFilter.searchArea = SearchArea.ResultStorage;
 
             const path = getCategoryUrl(CategoryType.Chat, filesFilter.folder);
 

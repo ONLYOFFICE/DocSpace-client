@@ -52,7 +52,6 @@ const InfoPanelActions = ({
   // Show info panel
   useEffect(() => {
     const showInfoPanelHandler = () => {
-      console.log("call");
       setIsVisible!(true);
     };
 

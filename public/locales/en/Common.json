@@ -892,6 +892,7 @@
   "ToolCallResult": "Tool call result:",
   "CopyMessage": "Copy message",
   "MessageCopiedSuccess": "Message copied successfully",
-
+  "SaveToFile": "Save to file",
+  "RefreshMessage": "Refresh message",
   "YouDontHaveEnoughPermission": "You don't have enough permission"
 }

@@ -152,6 +152,7 @@ export type UseFilesHelpersProps = {
   withInit?: boolean;
 
   applyFilterOption?: ApplyFilterOption;
+  isAIRoom: boolean;
 };
 
 export type TUseInputItemHelper = {
@@ -269,4 +270,6 @@ export type FilesSelectorProps = TInfoBar &
 
     isMultiSelect?: boolean;
     onSelectItem?: (item: TSelectorItem) => void;
+
+    initAiRoom?: boolean;
   };

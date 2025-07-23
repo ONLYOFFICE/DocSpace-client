@@ -101,6 +101,7 @@ export type TMessage = {
   role: RoleType;
   contents: TContent[];
   createdOn: string;
+  id?: number;
 };
 
 export type TMCPTool = {

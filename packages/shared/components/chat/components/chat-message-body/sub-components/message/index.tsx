@@ -42,7 +42,13 @@ import Error from "./Error";
 import Files from "./Files";
 import Buttons from "./Buttons";
 
-const Message = ({ message, idx, userAvatar, getIcon }: MessageProps) => {
+const Message = ({
+  message,
+  idx,
+  userAvatar,
+  isLast,
+  getIcon,
+}: MessageProps) => {
   const { currentChat } = useChatStore();
 
   const isUser = message.role === RoleType.UserMessage;
@@ -114,7 +120,15 @@ const Message = ({ message, idx, userAvatar, getIcon }: MessageProps) => {
 
         return null;
       })}
-      <Buttons text={fullText} />
+      {message.id ? (
+        <Buttons
+          text={fullText}
+          chatName={currentChat?.title}
+          isLast={isLast}
+          messageId={message.id}
+          getIcon={getIcon}
+        />
+      ) : null}
     </div>
   );
 };

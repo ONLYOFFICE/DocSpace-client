@@ -33,7 +33,7 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType, SearchArea } from "@docspace/shared/enums";
 import {
   createTemplate,
   getCreateTemplateProgress,
@@ -782,7 +782,7 @@ class CreateEditRoomStore {
     if (room.roomType === RoomsType.AIRoom) {
       const path = getCategoryUrl(CategoryType.Chat, room.id);
 
-      newFilter.aiTab = "empty";
+      newFilter.searchArea = SearchArea.Any;
 
       window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
     } else {

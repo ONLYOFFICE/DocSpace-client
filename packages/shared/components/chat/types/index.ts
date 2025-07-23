@@ -37,6 +37,7 @@ export type MessageProps = {
   message: TMessage;
   idx: number;
   userAvatar: string;
+  isLast: boolean;
   getIcon: TGetIcon;
 };
 

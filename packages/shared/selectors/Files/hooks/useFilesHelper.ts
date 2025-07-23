@@ -32,7 +32,7 @@ import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
 import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
-import { FolderType } from "../../../enums";
+import { FolderType, SearchArea } from "../../../enums";
 import { toastr } from "../../../components/toast";
 import { TSelectorItem } from "../../../components/selector";
 import { TData } from "../../../components/toast/Toast.type";
@@ -86,6 +86,7 @@ const useFilesHelper = ({
   shareKey,
 
   applyFilterOption,
+  isAIRoom,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -145,6 +146,7 @@ const useFilesHelper = ({
       filter.search = currentSearch;
       filter.applyFilterOption = null;
       filter.withSubfolders = false;
+      if (isAIRoom) filter.searchArea = SearchArea.ResultStorage;
       if (filterParam) {
         configureFilterByFilterParam(
           filter,
@@ -391,6 +393,7 @@ const useFilesHelper = ({
       shareKey,
       applyFilterOption,
       includedItems,
+      isAIRoom,
     ],
   );
 

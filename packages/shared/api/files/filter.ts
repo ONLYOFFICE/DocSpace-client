@@ -29,7 +29,7 @@
 
 import queryString from "query-string";
 
-import { ApplyFilterOption, FilterType } from "../../enums";
+import { ApplyFilterOption, FilterType, SearchArea } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
@@ -50,9 +50,8 @@ const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
 const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
 const DEFAULT_APPLY_FILTER_OPTION: ApplyFilterOption | null = null;
 const DEFAULT_EXTENSION: string | null = null;
-const DEFAULT_SEARCH_AREA: number | null = 3;
+const DEFAULT_SEARCH_AREA: number | SearchArea | null = 3;
 const DEFAULT_KEY: string | null = null;
-const DEFAULT_AI_TAB: "knowledge" | "result" | "empty" = "empty";
 
 const SEARCH_TYPE = "withSubfolders";
 const AUTHOR_TYPE = "authorType";
@@ -74,7 +73,6 @@ const SEARCH_AREA = "searchArea";
 const KEY = "key";
 const DATE = "date";
 const TAGS = "tags";
-const AI_TAB = "aiTab";
 
 // TODO: add next params
 // subjectGroup bool
@@ -103,7 +101,6 @@ const getOtherSearchParams = () => {
     KEY,
     DATE,
     TAGS,
-    AI_TAB,
   ];
 
   filterSearchParams.forEach((param) => {
@@ -173,8 +170,6 @@ class FilesFilter {
 
   key: string | null = null;
 
-  aiTab: "knowledge" | "result" | "empty" = "empty";
-
   static getDefault(pageCount = DEFAULT_PAGE_COUNT, total = DEFAULT_TOTAL) {
     return new FilesFilter(DEFAULT_PAGE, pageCount, total);
   }
@@ -222,8 +217,6 @@ class FilesFilter {
       (urlFilter[SEARCH_AREA] && urlFilter[SEARCH_AREA]) ||
       defaultFilter.searchArea;
     const key = (urlFilter[KEY] && urlFilter[KEY]) || defaultFilter.key;
-    const aiTab =
-      (urlFilter[AI_TAB] && urlFilter[AI_TAB]) || defaultFilter.aiTab;
 
     const newFilter = new FilesFilter(
       page,
@@ -244,7 +237,6 @@ class FilesFilter {
       extension,
       searchArea,
       key,
-      aiTab,
     );
 
     return newFilter;
@@ -269,7 +261,6 @@ class FilesFilter {
     extension = DEFAULT_EXTENSION,
     searchArea = DEFAULT_SEARCH_AREA,
     key = DEFAULT_KEY,
-    aiTab = DEFAULT_AI_TAB,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -289,7 +280,6 @@ class FilesFilter {
     this.extension = extension;
     this.searchArea = searchArea;
     this.key = key;
-    this.aiTab = aiTab;
   }
 
   getStartIndex = () => {
@@ -323,7 +313,6 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
-      aiTab,
     } = fixedValidObject;
 
     const isFilterSet =
@@ -355,7 +344,6 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
-      aiTab,
     };
 
     const str = toUrlParams(dtoFilter, true);
@@ -382,7 +370,6 @@ class FilesFilter {
       extension,
       searchArea,
       key,
-      aiTab,
     } = fixedValidObject;
 
     const dtoFilter: { [key: string]: unknown } = {};
@@ -403,7 +390,6 @@ class FilesFilter {
     if (extension) dtoFilter[EXTENSION] = extension;
     if (searchArea) dtoFilter[SEARCH_AREA] = searchArea;
     if (key) dtoFilter[KEY] = key;
-    if (aiTab) dtoFilter[AI_TAB] = aiTab;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -453,7 +439,6 @@ class FilesFilter {
       this.extension,
       this.searchArea,
       this.key,
-      this.aiTab,
     );
   }
 
@@ -474,8 +459,7 @@ class FilesFilter {
       this.excludeSubject === filter.excludeSubject &&
       this.applyFilterOption === filter.applyFilterOption &&
       this.extension === filter.extension &&
-      this.searchArea === filter.searchArea &&
-      this.aiTab === filter.aiTab;
+      this.searchArea === filter.searchArea;
 
     return equals;
   }

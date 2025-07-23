@@ -29,13 +29,14 @@ import { useNavigate } from "react-router";
 
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { SearchArea } from "@docspace/shared/enums";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
-import FilesFilter from "@docspace/shared/api/files/filter";
 
 type AiRoomTabsProps = {
   id?: SelectedFolderStore["id"];
@@ -71,13 +72,16 @@ const AiRoomTabs = ({
     if (tab.id === "chat") {
       const path = getCategoryUrl(CategoryType.Chat, id);
 
-      filesFilter.aiTab = "empty";
+      filesFilter.searchArea = SearchArea.Any;
 
       navigate(`${path}?${filesFilter.toUrlParams()}`);
     } else {
       const path = getCategoryUrl(CategoryType.SharedRoom, id);
 
-      filesFilter.aiTab = tab.id === "knowledge" ? "knowledge" : "result";
+      filesFilter.searchArea =
+        tab.id === "knowledge"
+          ? SearchArea.Knowledge
+          : SearchArea.ResultStorage;
 
       setIsSectionBodyLoading?.(true, true);
 

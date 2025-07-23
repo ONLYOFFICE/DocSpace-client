@@ -15,5 +15,10 @@
   "ItemsPermanentlyDeleted": "Items will be permanently deleted in 30 days.",
   "UnsubscribeButton": "Unsubscribe",
   "UnsubscribeNote": "Are you sure you want to unsubscribe from the selected items from the list?",
-  "UnsubscribeTitle": "Unsubscribe confirmation"
+  "UnsubscribeTitle": "Unsubscribe confirmation",
+  "DeleteFileInRoom": "This file will be moved to the Room Trash and hidden from other participants.",
+  "DeleteFolderInRoom": "This folder will be moved to the Room Trash and hidden from other participants.",
+  "DeleteItemsInRoom": "These items will be moved to the Room Trash and hidden from other participants.",
+  "UsersWithDeleteRights": "Only users with the Content Creator or higher roles can restore it.",
+  "ContinueProcess": "Do you want to proceed?"
 }

@@ -3,7 +3,7 @@
   "content": "Duplicating",
   "content_en_sha1_hash": "6f75681e8d81ebb045245dae8d40dea9d892c025",
   "created_at": "2025-05-19T21:30:55.495Z",
-  "updated_at": "2025-05-22T11:56:37.546Z",
+  "updated_at": "2025-06-03T20:59:41.994Z",
   "comment": {
     "text": "This translation key is used to display the label \"Duplicating\" in various UI elements, such as buttons or dialogs, related to file operations. It appears in a specific context where files can be duplicated, and its purpose is to inform users of the action being performed on their files.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 272,
       "context": "case copy:\n return i18n.t(\"Common:CopyOperation\");\n case download:\n return i18n.t(\"Files:Downloading\");\n case duplicate:\n return i18n.t(\"Files:Duplicating\");\n case exportIndex:\n return i18n.t(\"Files:ExportingIndex\");\n case markAsRead:\n return i18n.t(\"Files:MarkingRead\");\n case deletePermanently:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

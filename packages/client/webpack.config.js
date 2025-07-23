@@ -317,6 +317,20 @@ const config = {
       ],
     }),
   ],
+
+  // Extract css processed by MiniCssExtractPlugin in a single file
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
 };
 
 const getBuildDate = () => {
@@ -332,8 +346,6 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  console.log("ENV", { env });
-
   config.devtool = "source-map";
 
   const isProduction = argv.mode === "production";
@@ -361,38 +373,20 @@ module.exports = (env, argv) => {
 
   if (isProduction) {
     config.mode = "production";
-    config.optimization = {
-      splitChunks: {
-        chunks: "all",
-      },
-      minimize: !env.minimize,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            format: {
-              comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
-            },
+    config.optimization.splitChunks.chunks = "all";
+    config.optimization.minimize = !env.minimize;
+    config.optimization.minimizer = [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
           },
-          extractComments: false,
-          parallel: false,
-        }),
-      ],
-    };
-  }
-
-  // Extract css processed by MiniCssExtractPlugin in a single file
-  config.optimization = {
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: "styles",
-          type: "css/mini-extract",
-          chunks: "all",
-          enforce: true,
         },
-      },
-    },
-  };
+        extractComments: false,
+        parallel: false,
+      }),
+    ];
+  }
 
   config.plugins.push(
     new ModuleFederationPlugin({
@@ -467,6 +461,7 @@ module.exports = (env, argv) => {
     htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
       runtime.checksums["browserDetector.js"] || dateHash
     }`;
+
     htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
       runtime.checksums["config.json"] || dateHash
     }`;

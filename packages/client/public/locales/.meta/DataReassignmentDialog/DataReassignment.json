@@ -3,7 +3,7 @@
   "content": "Data reassignment",
   "content_en_sha1_hash": "a4efa2d93573777f5a04956a929f586e12bbe4ac",
   "created_at": "2025-05-19T21:30:56.735Z",
-  "updated_at": "2025-05-22T11:56:37.379Z",
+  "updated_at": "2025-05-28T09:30:02.249Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when reassigning data in a dialogue. The text \"Data Reassignment\" appears in a header within the dialog and is translated based on the specified usage contexts.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DataReassignmentDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/index.js",
       "line_number": 260,
       "context": "onClose={onClose}\n containerVisible={selectorVisible}\n withBodyScroll\n >\n <ModalDialog.Header>\n {t(\"DataReassignmentDialog:DataReassignment\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Body\n t={t}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

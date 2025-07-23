@@ -45,6 +45,7 @@ import {
   TThirdPartyProvider,
   TTimeZone,
   TVersionBuild,
+  TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import {
@@ -72,6 +73,7 @@ import {
   scopesHandler,
   companyInfoHandler,
   oauthSignInHelper,
+  invitationSettingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -517,4 +519,22 @@ export async function getOauthJWTToken() {
   const jwtToken = await res.json();
 
   return jwtToken.response as string;
+}
+
+export async function getInvitationSettings() {
+  const [getInvitationSettings] = createRequest(
+    [`/settings/invitationsettings`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? invitationSettingsHandler()
+    : await fetch(getInvitationSettings);
+
+  if (!res.ok) return;
+
+  const invitationSettings = await res.json();
+
+  return invitationSettings.response as TInvitationSettings;
 }

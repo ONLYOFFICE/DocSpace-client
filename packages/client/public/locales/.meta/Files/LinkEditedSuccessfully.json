@@ -3,7 +3,7 @@
   "content": "Link successfully edited and copied",
   "content_en_sha1_hash": "cb5242ae321d8a7d77464290445a8fc5c67d8d3a",
   "created_at": "2025-05-19T21:30:55.781Z",
-  "updated_at": "2025-05-22T11:56:37.481Z",
+  "updated_at": "2025-07-10T11:11:06.843Z",
   "comment": {
     "text": "The translation key \"LinkEditedSuccessfully\" is used to display a success message when editing a link is successfully completed in the Edit Link Panel. This message appears after clicking the \"Edit\" button and copying the shared link. Translators should provide a descriptive phrase that reflects this action's completion.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\EditLinkPanel\\index.js",
-      "line_number": 170,
-      "context": "setExternalLink(response);\n setLinkParams({ link: response, roomId, isPublic, isFormRoom });\n \n if (isEdit) {\n copyShareLink(linkValue);\n // toastr.success(t(\"Files:LinkEditedSuccessfully\"));\n } else {\n copyShareLink(response?.sharedTo?.shareLink);\n \n // toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n }",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
+      "line_number": 172,
+      "context": "setExternalLink(response, searchParams, setSearchParams, isCustomRoom);\n setLinkParams({ link: response, roomId, isPublic, isFormRoom });\n \n if (isEdit) {\n copyShareLink(linkValue);\n // toastr.success(t(\"Files:LinkEditedSuccessfully\"));\n } else {\n copyShareLink(response?.sharedTo?.shareLink);\n \n // toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n }",
+      "module": "/packages/client"
     }
   ],
   "languages": {

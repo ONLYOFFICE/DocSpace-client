@@ -3,7 +3,7 @@
   "content": "Change link type",
   "content_en_sha1_hash": "85b52eccc3ad049741c44630c48bebcececce91a",
   "created_at": "2025-05-19T21:30:57.198Z",
-  "updated_at": "2025-05-22T11:56:37.796Z",
+  "updated_at": "2025-05-28T09:30:02.865Z",
   "comment": {
     "text": "The translation key \"Change link type\" is used to display a title for a dialog that allows users to change the link type. It appears as part of a modal dialog in the DocEditor application, providing context for the user's interaction.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\ChangeLinkTypeDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/ChangeLinkTypeDialog.tsx",
       "line_number": 56,
       "context": "withBodyScroll\n visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"ChangeLinkTypeDialog:Title\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"ChangeLinkTypeDialog:Description\")}\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

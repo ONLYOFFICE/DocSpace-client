@@ -3,7 +3,7 @@
   "content": "Form room",
   "content_en_sha1_hash": "d52d36abd86c722b352cf2a1f855ae5a1408dd21",
   "created_at": "2025-05-19T21:30:45.520Z",
-  "updated_at": "2025-05-22T11:56:37.531Z",
+  "updated_at": "2025-07-10T11:11:06.860Z",
   "comment": {
     "text": "The translation key \"Common:FormRoom\" is used to display the label \"Form room\" in the UI, likely on a filter selection button or dropdown option. This text helps distinguish between different types of rooms, such as form rooms, public rooms, and collaboration rooms, in the application.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 66,
       "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoom\");\n \n case RoomsType.FormRoom:\n return t(\"Common:FormRoom\");\n default:\n break;\n }\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 857,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 822,
       "context": "case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:FormRoom\"),\n };\n case RoomsType.PublicRoom:\n return {\n id: \"filter_type-public\",\n key: RoomsType.PublicRoom,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\index.ts",
-      "line_number": 361,
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 371,
       "context": "return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");\n \n case `room-${RoomsType.FormRoom}`:\n return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

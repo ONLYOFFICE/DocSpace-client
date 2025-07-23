@@ -3,7 +3,7 @@
   "content": "Session Lifetime allows to set time (in minutes) before the {{productName}} users will need to enter the space credentials again in order to access the space.",
   "content_en_sha1_hash": "044392ac82e8db7a4c5bc674f8ca2ef7321edd16",
   "created_at": "2025-05-19T21:30:52.644Z",
-  "updated_at": "2025-05-21T03:09:13.574Z",
+  "updated_at": "2025-05-28T09:30:02.785Z",
   "comment": {
     "text": "\"Defines the session lifetime duration message to be displayed to mobile users, explaining how long their access credentials are valid before needing re-entry.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 117,
+      "line_number": 131,
       "context": "url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"SessionLifetime\")}\n subtitle={t(\"SessionLifetimeMobileDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n url=\"/portal-settings/security/access-portal/lifetime\"\n onClickLink={onClickLink}\n />",
       "module": "/packages/client"
     }

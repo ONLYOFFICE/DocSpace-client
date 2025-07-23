@@ -3,7 +3,7 @@
   "content": "Folders moved to Trash.",
   "content_en_sha1_hash": "839f71d0f29b83415a366762ebd381369313b22b",
   "created_at": "2025-05-19T21:30:54.854Z",
-  "updated_at": "2025-05-22T11:56:37.590Z",
+  "updated_at": "2025-05-28T09:30:02.430Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that files have been moved to the trash. It appears in the UI on information panels related to file actions and history, likely as an action confirmation or status indicator.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 116,
       "context": "count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case \"FolderMovedToTrash\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedToTrashCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMovedToTrash\");\n case \"FolderCopied\":\n if (hasRelatedItems)",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

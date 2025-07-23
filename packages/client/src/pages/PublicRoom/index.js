@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router";
 import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
@@ -96,13 +96,16 @@ const PublicRoom = (props) => {
     );
   };
 
-  const renderPage = () => {
+  useEffect(() => {
     if (
       roomStatus === ValidationStatus.Invalid ||
       roomStatus === ValidationStatus.Expired
-    )
+    ) {
       setClientError(true);
+    }
+  }, [roomStatus, setClientError]);
 
+  const renderPage = () => {
     switch (roomStatus) {
       case ValidationStatus.Ok:
         return <PublicRoomPage />;
@@ -112,7 +115,6 @@ const PublicRoom = (props) => {
         return <PublicRoomError />;
       case ValidationStatus.Password:
         return <RoomPassword roomKey={key} />;
-
       default:
         return renderLoader();
     }

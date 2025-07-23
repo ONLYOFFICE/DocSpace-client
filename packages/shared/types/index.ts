@@ -24,11 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  TGetColorTheme,
-  TSettings,
-  TVersionBuild,
-} from "../api/settings/types";
 import { RoomsType } from "../enums";
 import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
@@ -40,11 +35,13 @@ export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
 export type TSortOrder = "descending" | "ascending";
 export type TSortBy =
+  | "DateAndTime"
   | "DateAndTimeCreation"
   | "Tags"
+  | "Type"
   | "AZ"
   | "Author"
-  | "Type"
+  | "roomType"
   | "usedspace"
   | "Size";
 
@@ -65,6 +62,10 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
 >;
 
 export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
+
+export type WithFlag<K extends string, V> =
+  | ({ [P in K]: true } & V)
+  | ({ [P in K]?: undefined } & Partial<Record<keyof V, undefined>>);
 
 export type NonNullableFields<T> = {
   [P in keyof T]: NonNullable<T[P]>;
@@ -118,12 +119,6 @@ export interface StaticImageData {
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
-    __ASC_INITIAL_EDITOR_STATE__?: {
-      user: unknown;
-      portalSettings: TSettings;
-      appearanceTheme: TGetColorTheme;
-      versionInfo: TVersionBuild;
-    };
     Asc: unknown;
     zESettings: unknown;
     zE: unknown;
@@ -204,7 +199,7 @@ declare global {
       opType: number;
     }) => void;
     RendererProcessVariable: {
-      theme?: { id: string; system: string };
+      theme?: { id: string; system: string; type: string; addlocal: string };
     };
     Tiff: new (arg: object) => {
       toDataURL: () => string;

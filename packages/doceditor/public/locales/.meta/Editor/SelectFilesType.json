@@ -3,7 +3,7 @@
   "content": "Select files type: {{fileType}}",
   "content_en_sha1_hash": "c64f6411e3fd9b49bb6c3279ce1ac24d94710f73",
   "created_at": "2025-05-19T21:30:57.134Z",
-  "updated_at": "2025-05-22T11:56:37.810Z",
+  "updated_at": "2025-06-18T07:34:15.304Z",
   "comment": {
     "text": "This translation key is used to display a label asking the user to select a file type. It appears in a dialog box or file selection interface, prompting the user to choose their preferred file format, such as Excel or other types supported by the editor.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\SelectFileDialog.tsx",
-      "line_number": 72,
+      "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
+      "line_number": 73,
       "context": "const selectFilesListTitle = React.useCallback(() => {\n const type = getFileTypeTranslation();\n return fileTypeDetection.filterParam === FilesSelectorFilterTypes.XLSX\n ? type\n : t\n ? t(\"Editor:SelectFilesType\", { fileType: type })\n : \"\";\n }, [fileTypeDetection.filterParam, getFileTypeTranslation, t]);\n \n const listTitle = selectFilesListTitle();",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

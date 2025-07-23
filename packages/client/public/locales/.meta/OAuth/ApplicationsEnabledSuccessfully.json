@@ -3,7 +3,7 @@
   "content": "Applications enabled successfully",
   "content_en_sha1_hash": "f63f04dc0b9858fce06d3d50f025938ad4a4b088",
   "created_at": "2025-05-19T21:30:53.809Z",
-  "updated_at": "2025-05-22T11:56:37.790Z",
+  "updated_at": "2025-05-28T09:30:02.853Z",
   "comment": {
     "text": "This translation key is used to display a success message when an application is enabled successfully in the OAuth store. It appears as a toast notification in the UI and indicates that the application has been enabled after clicking a button or similar action. The message is displayed if multiple applications are being enabled at once, otherwise, it displays a singular \"Application enabled successfully\" message.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\store\\OAuthStore.ts",
+      "file_path": "/packages/client/src/store/OAuthStore.ts",
       "line_number": 526,
       "context": "await Promise.all(actions);\n \n this.setSelection(\"\");\n if (this.selectionToEnable.length > 1)\n toastr.success(t(\"OAuth:ApplicationsEnabledSuccessfully\"));\n else {\n toastr.success(t(\"OAuth:ApplicationEnabledSuccessfully\"));\n }\n } catch (e) {\n const err = e as TData;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -45,6 +45,7 @@ const Banner = ({
   campaignConfig,
   currentCampaign,
 }) => {
+  const [isVisible, setIsVisible] = React.useState(true);
   const updateBanner = async () => {
     await getBanner();
   };
@@ -71,6 +72,14 @@ const Banner = ({
     const adsInterval = setInterval(updateBanner, ADS_TIMEOUT);
     return () => clearInterval(adsInterval);
   }, []);
+
+  useEffect(() => {
+    const isVisibleStorage = localStorage.getItem("integrationUITests");
+
+    if (isVisibleStorage) setIsVisible(false);
+  }, []);
+
+  if (!isVisible) return null;
 
   return (
     <StyledWrapper>

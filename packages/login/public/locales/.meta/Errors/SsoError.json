@@ -3,7 +3,7 @@
   "content": "Internal server error",
   "content_en_sha1_hash": "fbb5b2a6d5252a4f6e3d33341268fab223c77c30",
   "created_at": "2025-05-19T21:30:57.305Z",
-  "updated_at": "2025-05-22T11:56:37.828Z",
+  "updated_at": "2025-05-28T09:30:02.909Z",
   "comment": {
     "text": "The \"SsoError\" translation key is used to display an internal server error message, indicating a problem occurred during Single Sign-On authentication. This error is typically displayed in UI elements such as login dialogs or button captions when SSO authentication fails.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\utils\\index.ts",
+      "file_path": "/packages/login/src/utils/index.ts",
       "line_number": 100,
       "context": "case \"SsoSettingsCantCreateUser\":\n return t(\"Errors:SsoSettingsCantCreateUser\");\n case \"SsoSettingsUserTerminated\":\n return t(\"Errors:SsoSettingsUserTerminated\");\n case \"SsoError\":\n return t(\"Errors:SsoError\");\n case \"SsoAuthFailed\":\n return t(\"Errors:SsoAuthFailed\");\n case \"SsoAttributesNotFound\":\n return t(\"Errors:SsoAttributesNotFound\");\n case \"QuotaPaidUserLimitError\":",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

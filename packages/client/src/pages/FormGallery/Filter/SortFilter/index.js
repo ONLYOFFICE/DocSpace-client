@@ -104,7 +104,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
               key={item.key}
               data-value={item.key}
               isSelected={oformsFilter.sortBy === item.key}
-              isDescending={oformsFilter.sortOrder === "desc"}
+              $isDescending={oformsFilter.sortOrder === "desc"}
             >
               <Text fontWeight={600}>{item.label}</Text>
               <SortDesc className="sortorder-arrow" />

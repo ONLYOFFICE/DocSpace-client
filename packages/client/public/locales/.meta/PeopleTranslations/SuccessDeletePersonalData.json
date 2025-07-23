@@ -3,7 +3,7 @@
   "content": "Personal data has been successfully deleted",
   "content_en_sha1_hash": "e256cc198af35fcc4ab33a823b0b291ec5372e4b",
   "created_at": "2025-05-19T21:30:53.528Z",
-  "updated_at": "2025-05-22T11:56:37.525Z",
+  "updated_at": "2025-05-28T09:30:02.381Z",
   "comment": {
     "text": "Personal data deletion confirmation message used to notify users when their personal data has been successfully deleted. This translation key is likely used in a button or dialog prompt within the application, where it will be displayed to confirm that personal data removal was successful.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\contacts\\utils.ts",
+      "file_path": "/packages/client/src/helpers/contacts/utils.ts",
       "line_number": 237,
       "context": "window.dispatchEvent(event);\n };\n \n export const onDeletePersonalDataClick = (t: TTranslation) => {\n toastr.success(t(\"PeopleTranslations:SuccessDeletePersonalData\"));\n };\n \n export const onInviteAgainClick = (\n item: ReturnType<UsersStore[\"getPeopleListItem\"]>,\n t: TTranslation,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

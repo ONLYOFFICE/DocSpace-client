@@ -3,7 +3,7 @@
   "content": "The invitation was successfully sent",
   "content_en_sha1_hash": "111da91469d6f8d042a07154deded5ad1c84977e",
   "created_at": "2025-05-19T21:30:53.530Z",
-  "updated_at": "2025-05-22T11:56:37.424Z",
+  "updated_at": "2025-05-28T09:30:02.295Z",
   "comment": {
     "text": "The translation key \"SuccessSentInvitation\" is used to display a success message when an invitation is successfully sent to users. It appears in a toast notification after resending invitations to selected user IDs, typically triggered by sending an invitation via the Send Invite Dialog component.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\SendInviteDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/SendInviteDialog/index.js",
       "line_number": 60,
       "context": "const { userIds } = this.state;\n \n this.setState({ isRequestRunning: true }, () => {\n resendUserInvites(userIds)\n .then(() =>\n toastr.success(t(\"PeopleTranslations:SuccessSentInvitation\")),\n )\n .catch((error) => toastr.error(error))\n .finally(() => {\n this.setState({ isRequestRunning: false }, () => {\n setSelected(\"close\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

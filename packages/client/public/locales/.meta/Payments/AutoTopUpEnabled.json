@@ -1,0 +1,28 @@
+{
+  "key_path": "AutoTopUpEnabled",
+  "content": "Auto top-up is enabled.",
+  "content_en_sha1_hash": "d059ddbb172f9f5958175fdd741bd18b28822a06",
+  "created_at": "2025-05-28T09:33:06.639Z",
+  "updated_at": "2025-06-26T19:00:18.245Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating whether auto-top-up functionality is enabled for wallet payments. It appears as a label in a component that displays information about auto-payment settings on a portal settings page.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:38:06.485Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPaymentInfo.tsx",
+      "line_number": 72,
+      "context": ")\n return null;\n \n return (\n <div className={styles.autoPaymentInformation}>\n <Text fontWeight={600}>{t(\"AutoTopUpEnabled\")}</Text>\n <div className={styles.autoPaymentEditing}>\n <Text>\n {t(\"WhenBalanceDropsTo\", {\n min: formatWalletCurrency(minBalance, 0),\n max: formatWalletCurrency(upToBalance, 0),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

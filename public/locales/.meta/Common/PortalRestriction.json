@@ -3,7 +3,7 @@
   "content": "Your IP address is not included in the list of allowed IP addresses to access this {{productName}}. Turn off a VPN if it's enabled and reload the page, or use another IP address to log in.",
   "content_en_sha1_hash": "7757cc59017d043dfa9a644e5a686d93b5f7d6da",
   "created_at": "2025-05-19T21:30:47.430Z",
-  "updated_at": "2025-05-22T11:56:37.841Z",
+  "updated_at": "2025-05-28T09:30:02.935Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to access a product with an IP address not in the list of allowed IP addresses. The message informs the user to turn off their VPN and reload the page or use another IP address to log in. It appears on an Access Restricted screen.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\errors\\AccessRestricted.tsx",
+      "file_path": "/packages/shared/components/errors/AccessRestricted.tsx",
       "line_number": 45,
       "context": "return (\n ready && (\n <div className={styles.accessRestrictedWrapper}>\n <ErrorContainer\n headerText={t(\"AccessDenied\")}\n bodyText={t(\"PortalRestriction\", {\n productName: t(\"Common:ProductName\"),\n })}\n />\n </div>\n )",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

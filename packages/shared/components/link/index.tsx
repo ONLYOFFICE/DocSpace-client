@@ -47,6 +47,7 @@ const Link: React.FC<LinkProps> = ({
   isTextOverflow = false,
   noHover = false,
   enableUserSelect = false,
+  textDecoration,
   ariaLabel,
   dataTestId,
   ...rest
@@ -76,6 +77,7 @@ const Link: React.FC<LinkProps> = ({
       style={{
         color,
         lineHeight,
+        textDecoration,
       }}
       aria-label={ariaLabel || children}
       data-testid={dataTestId || "link"}

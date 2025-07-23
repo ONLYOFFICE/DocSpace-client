@@ -3,7 +3,7 @@
   "content": "kDrive directory",
   "content_en_sha1_hash": "511e7a3843fca1fac23d32cb4e3c38073aaa218a",
   "created_at": "2025-05-19T21:30:49.978Z",
-  "updated_at": "2025-05-22T11:56:37.538Z",
+  "updated_at": "2025-06-03T20:59:41.989Z",
   "comment": {
     "text": "The translation key \"FolderTitlekDrive\" is used to display the label for a kDrive directory in various UI elements. It is typically used as the text displayed on buttons, dialog windows, or other interactive elements when interacting with a kDrive directory in the application.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 118,
       "context": "case \"SharePoint\":\n return t(\"Translations:FolderTitleSharePoint\");\n case \"WebDav\":\n return t(\"Translations:FolderTitleWebDav\");\n case \"kDrive\":\n return t(\"Translations:FolderTitlekDrive\");\n case \"Yandex\":\n return t(\"Translations:FolderTitleYandex\");\n \n default:\n return key;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

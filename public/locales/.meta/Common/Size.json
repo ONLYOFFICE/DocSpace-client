@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2025-05-22T11:56:37.562Z",
+  "updated_at": "2025-07-01T15:57:36.081Z",
   "comment": {
     "text": "This translation key is used to display the label \"Size\" in various UI elements, such as file extensions and table column headers, providing a clear and concise way to indicate size-related information.",
     "is_auto": true,
@@ -11,52 +11,52 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\helpers\\DetailsHelper.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
       "line_number": 181,
       "context": "return this.t(\"FileExtension\");\n \n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n \n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 288,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 288,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 288,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 288,
       "context": "onChange: this.onColumnChange,\n },\n { ...erasureBlock },\n {\n key: \"Size\",\n title: t(\"Common:Size\"),\n enable: sizeColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.Size,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 1215,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1196,
       "context": "default: true,\n };\n const size = {\n id: \"sort-by_size\",\n key: SortByFieldName.Size,\n label: t(\"Common:Size\"),\n default: true,\n };\n \n const roomType = {\n id: \"sort-by_room-type\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 106,
       "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 106,
       "context": "const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

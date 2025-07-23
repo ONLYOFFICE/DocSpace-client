@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useCallback, useRef } from "react";
+import axios from "axios";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -55,6 +56,7 @@ import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "../../components/text";
 import { globalColors } from "../../themes";
 import { isNextImage } from "../../utils/typeGuards";
+import { toastr } from "../../components/toast";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import { StyledSendClockIcon } from "./PeopleSelector.styled";
@@ -238,6 +240,9 @@ const PeopleSelector = ({
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
   const searchTab = useRef(PEOPLE_TAB_ID);
+  const abortControllerRef = useRef(new AbortController());
+
+  useEffect(() => () => abortControllerRef.current.abort(), []);
 
   const onSelect = (
     item: TSelectorItem,
@@ -288,104 +293,119 @@ const PeopleSelector = ({
 
   const loadNextPage = useCallback(
     async (startIndex: number) => {
-      if (searchTab.current !== activeTabId && searchValue) {
-        setSearchValue("");
-        searchTab.current = activeTabId;
-        return;
-      }
-      const pageCount = 100;
+      try {
+        if (searchTab.current !== activeTabId && searchValue) {
+          setSearchValue("");
+          searchTab.current = activeTabId;
+          return;
+        }
+        const pageCount = 100;
 
-      setIsNextPageLoading(true);
+        setIsNextPageLoading(true);
 
-      let searchArea = AccountsSearchArea.People;
+        let searchArea = AccountsSearchArea.People;
 
-      if (withGroups || withGuests) {
-        searchArea =
-          activeTabId !== GROUP_TAB_ID
-            ? AccountsSearchArea.People
-            : AccountsSearchArea.Groups;
-      }
+        if (withGroups || withGuests) {
+          searchArea =
+            activeTabId !== GROUP_TAB_ID
+              ? AccountsSearchArea.People
+              : AccountsSearchArea.Groups;
+        }
 
-      const currentFilter: Filter =
-        typeof filter === "function"
-          ? filter()
-          : (filter ?? Filter.getDefault());
+        const currentFilter: Filter =
+          typeof filter === "function"
+            ? filter()
+            : (filter ?? Filter.getDefault());
 
-      currentFilter.page = startIndex / pageCount;
-      currentFilter.pageCount = pageCount;
+        currentFilter.page = startIndex / pageCount;
+        currentFilter.pageCount = pageCount;
 
-      currentFilter.search = searchValue || "";
+        currentFilter.search = searchValue || "";
 
-      if (activeTabId === GUESTS_TAB_ID) {
-        currentFilter.area = "guests";
-      } else if (activeTabId === PEOPLE_TAB_ID) {
-        currentFilter.area = "people";
-      }
+        if (activeTabId === GUESTS_TAB_ID) {
+          currentFilter.area = "guests";
+        } else if (activeTabId === PEOPLE_TAB_ID) {
+          currentFilter.area = "people";
+        }
 
-      if (onlyRoomMembers) {
-        currentFilter.includeShared = true;
-      }
+        if (onlyRoomMembers) {
+          currentFilter.includeShared = true;
+        }
 
-      const response = !roomId
-        ? await getUserList(currentFilter)
-        : await getMembersList(searchArea, roomId, currentFilter);
+        abortControllerRef.current.abort();
+        abortControllerRef.current = new AbortController();
 
-      let totalDifferent = startIndex ? response.total - totalRef.current : 0;
+        const response = !roomId
+          ? await getUserList(currentFilter, abortControllerRef.current?.signal)
+          : await getMembersList(
+              searchArea,
+              roomId,
+              currentFilter,
+              abortControllerRef.current?.signal,
+            );
 
-      const data = response.items
-        .filter((item) => {
-          if (excludeItems && excludeItems.includes(item.id)) {
-            totalDifferent += 1;
-            return false;
-          }
-          return true;
-        })
-        .map((item) =>
-          toListItem(
-            item,
-            t,
-            disableDisabledUsers,
-            disableInvitedUsers,
-            !!roomId,
-            checkIfUserInvited,
-          ),
-        );
+        let totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
-      const newTotal = withOutCurrentAuthorizedUser
-        ? response.total - totalDifferent - 1
-        : response.total - totalDifferent;
-
-      if (isFirstLoadRef.current) {
-        const newItems = withOutCurrentAuthorizedUser
-          ? removeCurrentUserFromList(data)
-          : moveCurrentUserToTopOfList(data);
-
-        setHasNextPage(newItems.length < newTotal);
-        setItemsList(newItems);
-      } else {
-        setItemsList((i) => {
-          const tempItems = [...i, ...data];
-
-          const ids = new Set();
-          const filteredTempItems = tempItems.filter(
-            (item) => !ids.has(item.id) && ids.add(item.id),
+        const data = response.items
+          .filter((item) => {
+            if (excludeItems && excludeItems.includes(item.id)) {
+              totalDifferent += 1;
+              return false;
+            }
+            return true;
+          })
+          .map((item) =>
+            toListItem(
+              item,
+              t,
+              disableDisabledUsers,
+              disableInvitedUsers,
+              !!roomId,
+              checkIfUserInvited,
+            ),
           );
 
+        const newTotal = withOutCurrentAuthorizedUser
+          ? response.total - totalDifferent - 1
+          : response.total - totalDifferent;
+
+        if (isFirstLoadRef.current) {
           const newItems = withOutCurrentAuthorizedUser
-            ? removeCurrentUserFromList(filteredTempItems)
-            : moveCurrentUserToTopOfList(filteredTempItems);
+            ? removeCurrentUserFromList(data)
+            : moveCurrentUserToTopOfList(data);
 
           setHasNextPage(newItems.length < newTotal);
+          setItemsList(newItems);
+        } else {
+          setItemsList((i) => {
+            const tempItems = [...i, ...data];
 
-          return newItems;
-        });
+            const ids = new Set();
+            const filteredTempItems = tempItems.filter(
+              (item) => !ids.has(item.id) && ids.add(item.id),
+            );
+
+            const newItems = withOutCurrentAuthorizedUser
+              ? removeCurrentUserFromList(filteredTempItems)
+              : moveCurrentUserToTopOfList(filteredTempItems);
+
+            setHasNextPage(newItems.length < newTotal);
+
+            return newItems;
+          });
+        }
+
+        setTotal(newTotal);
+        totalRef.current = newTotal;
+
+        setIsNextPageLoading(false);
+        isFirstLoadRef.current = false;
+      } catch (error) {
+        if (axios.isCancel(error)) return;
+
+        console.error(error);
+        toastr.error(error as Error);
       }
-
-      setTotal(newTotal);
-      totalRef.current = newTotal;
-
-      setIsNextPageLoading(false);
-      isFirstLoadRef.current = false;
     },
     [
       activeTabId,

@@ -1,0 +1,28 @@
+{
+  "key_path": "Important",
+  "content": "Important",
+  "content_en_sha1_hash": "4b6d6a30150a506f9b79caf45da5aecb76b0018e",
+  "created_at": "2025-06-03T20:59:07.572Z",
+  "updated_at": "2025-06-03T20:59:59.160Z",
+  "comment": {
+    "text": "This translation key is used for displaying a critical message \"Important\" on a portal settings page, specifically within a storage warning component. It's intended to grab attention in a cautionary context, likely as part of an error or alert notification.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T20:59:59.160Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/StorageWarning.tsx",
+      "line_number": 51,
+      "context": "return (\n <div className={styles.warningBlock}>\n <div className={styles.warningTitle}>\n <InfoIcon />\n <Text fontWeight={600}>{t(\"Important\")}</Text>\n </div>\n <Text>\n {t(\"Warning\", {\n amount: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n storageUnit: t(\"Common:Gigabyte\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

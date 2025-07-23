@@ -3,7 +3,7 @@
   "content": "Continue with",
   "content_en_sha1_hash": "6433fa548ad1a2cc4485d28f06039cc50f7d86ce",
   "created_at": "2025-05-19T21:30:43.701Z",
-  "updated_at": "2025-05-22T11:56:37.877Z",
+  "updated_at": "2025-05-28T09:30:02.970Z",
   "comment": {
     "text": "This translation key is used for a button or label that invites users to continue with a process. It appears in a modal dialog and provides the prompt \"Continue with\" when visible, prompting the user to proceed.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\more-login-modal\\index.tsx",
+      "file_path": "/packages/shared/dialogs/more-login-modal/index.tsx",
       "line_number": 63,
       "context": "visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.aside}\n withBodyScroll\n >\n <ModalDialog.Header>{t(\"Common:ContinueWith\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {ssoUrl ? (\n <div className={styles.providerRow} key=\"ProviderItemSSO\">\n <ReactSVG src={SsoReactSvgUrl} />\n <Text",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

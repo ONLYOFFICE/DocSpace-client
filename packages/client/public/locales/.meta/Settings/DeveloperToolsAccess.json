@@ -3,7 +3,7 @@
   "content": "Developer Tools section",
   "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
   "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2025-05-21T04:33:43.532Z",
+  "updated_at": "2025-07-02T07:49:19.855Z",
   "comment": {
     "text": "The \"DeveloperToolsAccess\" translation key is used to display the title and description of a section in the Portal Settings application. This text appears as a category title and brief description within a settings page, providing context about developer tools access.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 163,
-      "context": "<TrustedMailSection />\n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"DeveloperToolsAccess\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"DeveloperToolsAccessDescription\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 222,
+      "context": "<TrustedMailSection {...settingsBeforeInvitationSettingsProps} />\n <StyledSettingsSeparator />\n \n <Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"DeveloperToolsAccess\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"DeveloperToolsAccessDescription\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 82,
+      "line_number": 83,
       "context": "}\n url=\"/portal-settings/security/access-portal/trusted-mail\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"DeveloperToolsAccess\")}\n subtitle={\n <Trans\n i18nKey=\"DeveloperToolsAccessMobileDescription\"\n ns=\"Settings\"\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 189,
+      "line_number": 196,
       "context": "{\n id: \"portal-settings_catalog-access-dev-tools\",\n key: \"1-0-3\",\n icon: \"\",\n link: \"access-dev-tools\",\n tKey: \"DeveloperToolsAccess\",\n },\n {\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",",
       "module": "/packages/client"
     }

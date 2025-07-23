@@ -3,7 +3,7 @@
   "content": "Download {{organizationName}} Desktop Editors for Windows",
   "content_en_sha1_hash": "21500349b53348f21c32cf3672412c49c1c0f8fc",
   "created_at": "2025-05-19T21:30:46.594Z",
-  "updated_at": "2025-05-22T11:56:37.831Z",
+  "updated_at": "2025-06-18T07:34:15.330Z",
   "comment": {
     "text": "This translation key is used to display a button label that prompts users to download desktop editors for Windows. The text will appear on a button in an application, likely as part of a download link or \"Get Desktop Editors\" action.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\article\\sub-components\\Apps.tsx",
-      "line_number": 76,
+      "file_path": "/packages/shared/components/article/sub-components/Apps.tsx",
+      "line_number": 82,
       "context": "onClick={() => window.open(downloaddesktopUrl)}\n iconName={WindowsReactSvgUrl}\n size={32}\n isFill\n hoverColor={theme.filesArticleBody.downloadAppList.winHoverColor}\n title={t(\"Common:MobileWin\", {\n organizationName: logoText,\n })}\n />\n <IconButton\n onClick={() => window.open(downloaddesktopUrl)}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

@@ -47,6 +47,10 @@
 
   background-color: var(--avatar-image-container-background);
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &[data-has-username="true"]:not([data-is-group="true"]):not(
       [data-has-source="true"]
     ) {

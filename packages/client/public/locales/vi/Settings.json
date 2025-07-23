@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Chọn các phần để nhập. Chúng sẽ xuất hiện trong các phần tương ứng của {{productName}}.",
   "IncludedInBusiness": "Đã bao gồm trong gói Business",
   "IntegrationRequest": "Bạn thấy thiếu một tích hợp hoặc thành phần hữu ích trong {{organizationName}} {{productName}}? Xin hãy gửi yêu cầu cho nhóm của chúng tôi và chúng tôi sẽ xem xét điều đó.",
+  "InvitationSettings": "Cài đặt Mời",
+  "InvitationSettingsContacts": "Mời các thành viên {{productName}} thông qua Danh bạ",
+  "InvitationSettingsContactsDescription": "Bật tùy chọn này để cho phép gửi lời mời đến các thành viên {{productName}} mới thông qua phần Contacts. Tắt tùy chọn này nếu bạn muốn mời các thành viên mới thông qua LDAP.",
+  "InvitationSettingsDescription": "Cấu hình các tùy chọn mời cho thành viên nội bộ và khách mời bên ngoài của {{productName}} của bạn. Các cài đặt này có thể giúp bạn tuân thủ các hướng dẫn bảo mật của công ty, ví dụ như khi bạn sử dụng LDAP hoặc các hệ thống quản lý người dùng khác.",
+  "InvitationSettingsGuests": "Cho phép mời khách",
+  "InvitationSettingsGuestsDescription": "Bật tùy chọn này để cho phép tất cả thành viên {{productName}} mời khách bên ngoài vào phòng.",
+  "InvitationSettingsMobile": "Cấu hình các tùy chọn mời cho thành viên nội bộ và khách mời bên ngoài của {{productName}} của bạn.",
   "InviteLetterTooltip": "Nếu được chọn, tất cả người dùng mới sẽ nhận được thư chào mừng với các chi tiết việc ủy quyền.",
   "IPSecurity": "Bảo mật IP",
   "IPSecurityMobileDescription": "Bảo mật IP được sử dụng để hạn chế đăng nhập vào cổng thông tin từ tất cả các địa chỉ IP ngoại trừ một số địa chỉ nhất định.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Logo cho trang Giới thiệu",
   "LogoCompact": "Logo cho menu nhỏ gọn bên trái",
   "LogoDocsEditor": "Logo cho tiêu đề trình chỉnh sửa",
-  "LogoDocsEditorEmbedded": "Logo cho tiêu đề của biên tập viên - chế độ nhúng",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo cho tiêu đề không gian",
   "LogoLogin": "Logo cho trang Đăng nhập và email",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Gửi thư mời",
   "SendNotificationAboutRestoring": "Gửi thông báo về khôi phục không gian cho người dùng",
   "ServerSideEncryptionMethod": "Phương pháp mã hóa phía máy chủ",
+  "Services": "Dịch vụ",
   "ServiceUrl": "Url dịch vụ",
   "SessionLifetime": "Thời gian tồn tại của phiên",
   "SessionLifetimeMobileDescription": "Thời gian tồn tại của phiên cho phép đặt thời gian (tính bằng phút) trước khi người dùng {{productName}} cần nhập lại thông tin đăng nhập không gian để truy cập không gian. ",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo.",
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
-  "YourLogo": "Logo của bạn"
+  "YourLogo": "Logo của bạn",
+  "AdManagement": "Quản lý Quảng cáo",
+  "AdManagementDescription": "Chọn xem liệu các biểu ngữ quảng cáo có hiển thị trong {{productName}} của bạn hay không."
 }

@@ -59,7 +59,8 @@ const HideArticleMenuButton = ({
           <Text
             className="article-hide-menu-text"
             fontWeight={600}
-            fontSize="12px"
+            fontSize="15px"
+            lineHeight="16px"
             noSelect
             truncate
           >

@@ -3,7 +3,7 @@
   "content": "Profile",
   "content_en_sha1_hash": "ff4fc0276e960c348647b647235f68200887c9d2",
   "created_at": "2025-05-19T21:30:47.037Z",
-  "updated_at": "2025-05-22T11:56:37.705Z",
+  "updated_at": "2025-05-28T09:30:02.556Z",
   "comment": {
     "text": "This translation key is used for the label of a permission group that corresponds to the OAuth profile. It appears in a UI element related to portal settings and is intended to be displayed as \"Profile\" for users. Translators should provide a localized version of this phrase for their respective languages.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\utils.ts",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/utils.ts",
       "line_number": 48,
       "context": "group: PermissionGroup,\n t: TTranslation,\n ) => {\n switch (group) {\n case PermissionGroup.profile:\n return t(\"Common:OAuthProfilesName\");\n case PermissionGroup.accounts:\n return t(\"Common:OAuthAccountsName\");\n case PermissionGroup.files:\n return t(\"Common:OAuthFilesName\");\n case PermissionGroup.rooms:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\oauth\\index.ts",
+      "file_path": "/packages/shared/utils/oauth/index.ts",
       "line_number": 145,
       "context": "return t(\"Common:OAuthFilesName\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n return t(\"Common:OAuthAccountsName\");\n case ScopeGroup.profiles:\n return t(\"Common:OAuthProfilesName\");\n case ScopeGroup.rooms:\n return t(\"Common:OAuthRoomsName\");\n case ScopeGroup.openid:\n return t(\"Common:OAuthOpenidName\");\n default:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

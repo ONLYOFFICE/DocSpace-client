@@ -28,6 +28,8 @@
 
 import React from "react";
 
+import { classNames } from "@docspace/shared/utils";
+
 import { ButtonKeys } from "../../enums";
 
 import { Aside } from "../aside";
@@ -36,8 +38,8 @@ import { Backdrop } from "../backdrop";
 import { Header } from "./sub-components/Header";
 import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
+import styles from "./Selector.module.scss";
 
-import { StyledSelector } from "./Selector.styled";
 import {
   TAccessRight,
   SelectorProps,
@@ -491,6 +493,7 @@ const Selector = ({
         onSelectBreadCrumb,
         breadCrumbsLoader,
         isBreadCrumbsLoading,
+        bodyIsLoading: isLoading,
       }
     : {};
 
@@ -614,9 +617,9 @@ const Selector = ({
   }, [tabsData]);
 
   const selectorComponent = (
-    <StyledSelector
+    <div
       id={id}
-      className={className}
+      className={classNames(styles.selector, className)}
       style={style}
       data-testid="selector"
     >
@@ -688,7 +691,7 @@ const Selector = ({
           />
         ) : null}
       </Providers>
-    </StyledSelector>
+    </div>
   );
 
   return useAside ? (

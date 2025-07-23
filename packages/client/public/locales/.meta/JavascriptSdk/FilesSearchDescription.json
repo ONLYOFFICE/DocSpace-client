@@ -3,7 +3,7 @@
   "content": "File search within the opened folder/room.",
   "content_en_sha1_hash": "95f0c2077da6a6debdffb60f637b128300446cff",
   "created_at": "2025-05-19T21:30:54.506Z",
-  "updated_at": "2025-05-21T09:07:19.625Z",
+  "updated_at": "2025-07-01T15:57:36.195Z",
   "comment": {
     "text": "File search within the opened folder or room is used as a tooltip description to help users understand the purpose of the file selector tool in the PortalSettings page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 394,
+      "line_number": 398,
       "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Common:Search\")}\n description={t(\"FilesSearchDescription\")}\n img={theme.isBase ? SearchUrl : SearchUrlDark}\n />\n }\n />\n </LabelGroup>",
       "module": "/packages/client"
     }

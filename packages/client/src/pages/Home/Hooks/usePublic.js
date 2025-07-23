@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useCallback } from "react";
+import { useParams } from "react-router";
 
 const usePublic = ({
   location,
@@ -35,15 +35,17 @@ const usePublic = ({
 }) => {
   const { id } = useParams();
 
-  useEffect(() => {
-    const isMedia = fetchPreviewMediaFile(id, () =>
-      fetchPublicRoom(fetchFiles),
-    );
-
-    if (isMedia) return;
-
+  const handleFetchPublicRoom = useCallback(() => {
     fetchPublicRoom(fetchFiles);
-  }, [location.search]);
+  }, [fetchPublicRoom, fetchFiles]);
+
+  useEffect(() => {
+    const isMediaFile = fetchPreviewMediaFile(id, handleFetchPublicRoom);
+
+    if (isMediaFile) return;
+
+    handleFetchPublicRoom();
+  }, [id, location.search, fetchPreviewMediaFile, handleFetchPublicRoom]);
 };
 
 export default usePublic;

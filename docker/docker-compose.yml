@@ -1,0 +1,19 @@
+services:
+  onlyoffice-frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: onlyoffice-frontend
+    ports:
+      - "5001:5001" # Client
+      - "5011:5011" # Management
+      - "5013:5013" # Login
+      - "5015:5015" # DocEditor
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+networks:
+  default:
+    name: onlyoffice
+    external: true

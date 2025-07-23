@@ -38,7 +38,7 @@ const StyledLoadingButton = styled.div.attrs(
   height: 12px;
   border-radius: 50%;
   text-align: center;
-  line-height: 12px;
+  line-height: 11px;
   background: ${(props) =>
     props.backgroundColor
       ? props.backgroundColor
@@ -46,9 +46,14 @@ const StyledLoadingButton = styled.div.attrs(
 
   position: absolute;
   margin: 2px;
-  font-size: 16px;
-  font-weight: bold;
-  color: ${(props) => props.theme.filesPanels.upload.loadingButton.color};
+
+  svg {
+    font-weight: bold;
+
+    path {
+      fill: ${(props) => props.theme.filesPanels.upload.loadingButton.color};
+    }
+  }
 `;
 
 export default StyledLoadingButton;

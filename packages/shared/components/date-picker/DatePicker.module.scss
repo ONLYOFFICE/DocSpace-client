@@ -94,7 +94,7 @@
       height: 12px;
       padding: 0 10px 0 2px;
       path {
-        fill: #{$light-gray-dark};
+        fill: var(--data-picker-calendar-icon);
       }
     }
   }
@@ -121,5 +121,14 @@
     position: fixed;
     bottom: 0;
     inset-inline-start: 0;
+  }
+
+  &.rightAligned {
+    right: 0;
+
+    @include tablet {
+      right: 0;
+      left: auto;
+    }
   }
 }

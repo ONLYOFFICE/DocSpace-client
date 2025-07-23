@@ -106,6 +106,7 @@ const Backdrop: React.FC<BackdropProps> = ({
       if (!isModalDialog) {
         e.preventDefault();
       }
+
       onClick?.(e as unknown as React.MouseEvent);
     },
     [isModalDialog, onClick],

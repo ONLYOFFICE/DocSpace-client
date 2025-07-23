@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2025-05-22T11:56:37.302Z",
+  "updated_at": "2025-07-01T15:57:35.880Z",
   "comment": {
     "text": "The translation key \"Presentation\" is used as a label for buttons related to creating presentations. It appears in various UI elements, such as main buttons and links, where it is displayed alongside an icon and allows users to create new presentations.",
     "is_auto": true,
@@ -11,34 +11,34 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\Article\\MainButton\\index.js",
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
       "line_number": 553,
       "context": "const createNewPresentationPptx = {\n id: \"actions_new-presentation\",\n className: \"main-button_drop-down\",\n icon: ActionsPresentationReactSvgUrl,\n label: t(\"Common:Presentation\"),\n onClick: onCreate,\n action: \"pptx\",\n key: \"pptx\",\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\EmptyContainer\\sub-components\\CommonButtons.js",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/CommonButtons.js",
       "line_number": 69,
       "context": "</div>\n <Link data-format=\"xlsx\" onClick={onCreate} {...linkStyles}>\n {t(\"Spreadsheet\")},\n </Link>\n <Link data-format=\"pptx\" onClick={onCreate} {...linkStyles}>\n {t(\"Presentation\")},\n </Link>\n <Link data-format=\"pdf\" onClick={onCreate} {...linkStyles}>\n {t(\"Translations:NewForm\")}\n </Link>\n </div>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\EmptyContainer\\sub-components\\EmptyViewContainer\\EmptyViewContainer.helpers.tsx",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 360,
       "context": "icon: SpreadsheetReactSvgUrl,\n onClick: () => actions.onCreate(\"xlsx\"),\n },\n {\n key: \"create-presentation\",\n label: t(\"Common:Presentation\"),\n icon: PresentationReactSvgUrl,\n onClick: () => actions.onCreate(\"pptx\"),\n },\n {\n key: \"create-pdf-form\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\sub-components\\TypeCell.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 51,
-      "context": "case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.OForm:\n case FileType.OFormTemplate:\n case FileType.PDF: {",
-      "module": "\\packages\\client"
+      "context": "case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.OForm:",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\getFileType.ts",
+      "file_path": "/packages/shared/utils/getFileType.ts",
       "line_number": 20,
-      "context": "case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:\n case FileType.PDF:\n return t(\"Common:Document\");",
-      "module": "\\packages\\shared"
+      "context": "case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "rootDir": "./",
     "baseUrl": "./",
+    "jsx": "react-jsx",
     "paths": {
       "PUBLIC_DIR/*": ["../../public/*"],
       "SRC_DIR/*": ["./src/*"],

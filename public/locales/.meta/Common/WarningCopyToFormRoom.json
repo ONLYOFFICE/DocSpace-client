@@ -3,7 +3,7 @@
   "content": "The file cannot be copied to this room. Please try to copy the {{organizationName}} PDF form.",
   "content_en_sha1_hash": "a1c3d143cde07c3cc51c27c08a8705ae800f1435",
   "created_at": "2025-05-19T21:30:49.585Z",
-  "updated_at": "2025-05-22T11:56:37.471Z",
+  "updated_at": "2025-06-18T07:34:14.802Z",
   "comment": {
     "text": "This translation key displays a warning message when attempting to copy a file to a form room. It indicates that the file cannot be copied due to its format (pdf) and suggests copying the organization's pdf form instead. This message appears in the Files Selector component.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\index.tsx",
+      "file_path": "/packages/client/src/components/FilesSelector/index.tsx",
       "line_number": 219,
       "context": "const option = { organizationName: logoText };\n \n if (isCopy)\n return several\n ? t(\"Files:WarningCopyToFormRoomServal\", option)\n : t(\"Common:WarningCopyToFormRoom\", option);\n \n if (isMove)\n return several\n ? t(\"Files:WarningMoveToFormRoomServal\", option)\n : t(\"Files:WarningMoveToFormRoom\", option);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\SelectFolderDialog.tsx",
-      "line_number": 65,
+      "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
+      "line_number": 66,
       "context": "const withFooterCheckbox =\n fileSaveAsExtension !== \"zip\" && fileInfo.fileExst !== \"fb2\";\n \n const formProps = useMemo(() => {\n return {\n message: t(\"Common:WarningCopyToFormRoom\", {\n organizationName,\n }),\n isRoomFormAccessible:\n Boolean(fileInfo.isForm) && fileSaveAsExtension === \"pdf\",\n };",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

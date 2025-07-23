@@ -3,7 +3,7 @@
   "content": "Two-factor authentication is a more secure way for the users to enter the portal. After the credentials are entered, the user will have to enter the code from the SMS received to the mobile phone with the number which was specified at the first portal login or the code from an authentication application.",
   "content_en_sha1_hash": "17442d3c8dced44f68862422d941606211c022f5",
   "created_at": "2025-05-19T21:30:53.021Z",
-  "updated_at": "2025-05-21T02:40:20.688Z",
+  "updated_at": "2025-05-28T09:30:02.782Z",
   "comment": {
     "text": "This translation key is used to describe the mobile verification process for two-factor authentication. The description will appear in a category title on a mobile view of access portal settings and explains how users receive a code via SMS or an authentication app to complete the login process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 68,
+      "line_number": 69,
       "context": "onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"TwoFactorAuth\")}\n subtitle={\n <Trans i18nKey=\"TwoFactorAuthMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/tfa\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper",
       "module": "/packages/client"
     }

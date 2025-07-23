@@ -3,7 +3,7 @@
   "content": "Sorry, the resource cannot be found.",
   "content_en_sha1_hash": "d4e3df2d7bea3293966c553952c59e1ed35b47f7",
   "created_at": "2025-05-19T21:30:45.054Z",
-  "updated_at": "2025-05-22T11:56:37.843Z",
+  "updated_at": "2025-05-28T09:30:02.936Z",
   "comment": {
     "text": "The \"Error404Text\" translation key is used to display a generic error message when a resource cannot be found. It appears in an ErrorContainer component, likely on a 404 Not Found page or similar UI element, and should be translated to provide a consistent user experience across different languages and regions.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\errors\\Error404.tsx",
+      "file_path": "/packages/shared/components/errors/Error404.tsx",
       "line_number": 38,
       "context": "import ErrorContainer from \"../error-container/ErrorContainer\";\n \n const Error404 = () => {\n const { t, ready } = useTranslation([\"Common\"]);\n \n return ready && <ErrorContainer headerText={t(\"Error404Text\")} />;\n };\n \n export default Error404;",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

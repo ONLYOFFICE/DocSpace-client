@@ -3,7 +3,7 @@
   "content": "Invalid email or expired link",
   "content_en_sha1_hash": "c0a2370e7342390662dccc58db6ad239d084d6a5",
   "created_at": "2025-05-19T21:30:57.274Z",
-  "updated_at": "2025-05-22T11:56:37.824Z",
+  "updated_at": "2025-05-28T09:30:02.895Z",
   "comment": {
     "text": "The \"ErrorConfirmURLError\" translation key is used to display an error message when a user tries to confirm a URL that has expired or is invalid. This message appears as part of an error dialog or alert when the user attempts to perform an action involving the potentially incorrect link, such as logging in to an account.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\utils\\index.ts",
+      "file_path": "/packages/login/src/utils/index.ts",
       "line_number": 76,
       "context": "case \"ErrorExpiredActivationLink\":\n return t(\"Errors:ErrorExpiredActivationLink\");\n case \"ErrorInvalidActivationLink\":\n return t(\"Errors:ErrorInvalidActivationLink\");\n case \"ErrorConfirmURLError\":\n return t(\"Errors:ErrorConfirmURLError\");\n case \"ErrorNotCorrectEmail\":\n return t(\"Common:IncorrectEmail\");\n case \"LoginWithBruteForce\":\n return t(\"Errors:LoginWithBruteForce\");\n case \"RecaptchaInvalid\":",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

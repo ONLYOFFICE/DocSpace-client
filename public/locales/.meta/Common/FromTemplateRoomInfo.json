@@ -3,7 +3,7 @@
   "content": "Create a room based on a template. All settings, folders and files will be taken from the selected room template.",
   "content_en_sha1_hash": "b89a841711cd249943ab4f6618eec95188f6198c",
   "created_at": "2025-05-19T21:30:45.605Z",
-  "updated_at": "2025-05-22T11:56:37.851Z",
+  "updated_at": "2025-06-03T20:59:42.344Z",
   "comment": {
     "text": "This translation key is used for a UI element that describes creating a room based on a template. It will appear in a settings or options section, likely as part of a button or dialog title. Translators should replace \"Create a room\" with a phrase that accurately reflects the specific context where this text appears.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\room-type\\RoomType.utils.ts",
-      "line_number": 32,
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 33,
       "context": "export const getRoomTypeDescriptionTranslation = (\n t: TTranslation,\n roomType: RoomsType = 1,\n isTemplate: boolean = false,\n ) => {\n if (isTemplate) return t(\"Common:FromTemplateRoomInfo\");\n \n switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

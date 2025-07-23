@@ -26,8 +26,8 @@
 
 import React from "react";
 
-import { HeaderProps } from "../Selector.types";
 import { AsideHeader } from "../../aside-header";
+import { HeaderProps } from "../Selector.types";
 
 const Header = React.memo(
   ({

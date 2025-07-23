@@ -3,7 +3,7 @@
   "content": "In a Public room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "content_en_sha1_hash": "79a4f8b269e2f9e04d5e7e9a2156982f8b68c54c",
   "created_at": "2025-05-19T21:30:55.771Z",
-  "updated_at": "2025-05-22T11:56:37.483Z",
+  "updated_at": "2025-07-10T11:11:06.844Z",
   "comment": {
     "text": "This translation key is used to describe a public room's link behavior in a file editing panel. The main link remains active indefinitely, while additional links can be created with time limits. It appears in a dialog related to linking files, guiding users on how their links work.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\EditLinkPanel\\index.js",
-      "line_number": 234,
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
+      "line_number": 236,
       "context": "};\n \n const getExpiredLinkText = () => {\n if (link?.sharedTo?.primary) {\n if (isFormRoom) return t(\"Files:LimitTimeBlockFormRoomDescription\");\n if (isPublic) return t(\"Files:LimitTimeBlockPublicRoomDescription\");\n if (isCustomRoom) return t(\"Files:LimitTimeBlockCustomRoomDescription\");\n \n return \"\";\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

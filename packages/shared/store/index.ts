@@ -35,7 +35,7 @@ import { SettingsStore } from "./SettingsStore";
 export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
 
-export const currentTariffStatusStore = new CurrentTariffStatusStore();
+export const currentTariffStatusStore = new CurrentTariffStatusStore(userStore);
 export const currentQuotaStore = new CurrentQuotasStore(
   userStore,
   currentTariffStatusStore,

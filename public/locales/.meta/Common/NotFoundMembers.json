@@ -3,7 +3,7 @@
   "content": "No members found",
   "content_en_sha1_hash": "2f9524453596c315ea26d2daec2af8d6792b16f1",
   "created_at": "2025-05-19T21:30:46.909Z",
-  "updated_at": "2025-05-22T11:56:37.397Z",
+  "updated_at": "2025-06-18T17:09:45.686Z",
   "comment": {
     "text": "This translation key is used for the text \"No members found\", which appears on an empty screen in various components when a group of members does not exist. It is typically displayed above or below an image, and its purpose is to inform users that they are looking at an empty list or container.",
     "is_auto": true,
@@ -11,34 +11,34 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\EditGroupMembersDialog\\EmptyContainer.tsx",
+      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/EmptyContainer.tsx",
       "line_number": 52,
       "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\ChangeRoomOwnerPanel\\index.js",
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
       "line_number": 147,
       "context": "disableDisabledUsers\n withInfo\n infoText={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}\n emptyScreenHeader={t(\"Common:NotFoundMembers\")}\n emptyScreenDescription={t(\"CreateEditRoomDialog:PeopleSelectorInfo\", {\n productName: t(\"Common:ProductName\"),\n })}\n className=\"change-owner_people-selector\"\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Members\\sub-components\\EmptyContainer.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/EmptyContainer.tsx",
       "line_number": 52,
       "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 88,
       "context": "const title = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundGuestsFilter\")\n : t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : t(\"Common:NotFoundGuestsDescription\")",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\People\\index.tsx",
-      "line_number": 647,
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 667,
       "context": "searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundMembers\")\n : t(\"Common:NotFoundGroups\")\n }\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundFilterGuestsDescription\")",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

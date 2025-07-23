@@ -1,6 +1,6 @@
 {
   "name": "@docspace/doceditor",
-  "version": "3.1.1",
+  "version": "3.2.1",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
@@ -13,7 +13,7 @@
     "deploy": "node ./scripts/deploy.js"
   },
   "dependencies": {
-    "@onlyoffice/document-editor-react": "1.6.0",
+    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-1.6.2.tgz",
     "@serdnam/pino-cloudwatch-transport": "1.0.4",
     "framer-motion": "^12.0.3",
     "i18next": "20.6.1",

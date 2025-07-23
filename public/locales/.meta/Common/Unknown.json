@@ -3,7 +3,7 @@
   "content": "Unknown",
   "content_en_sha1_hash": "bc7819b34ff87570745fbe461e36a16f80e562ce",
   "created_at": "2025-05-19T21:30:49.397Z",
-  "updated_at": "2025-05-22T11:56:37.621Z",
+  "updated_at": "2025-05-28T09:30:02.458Z",
   "comment": {
     "text": "The translation key \"Common:Unknown\" is used to display a placeholder for unknown file types in the client's table view. It appears in the 'TypeCell' component, typically on buttons or dialogues related to file management, and should be translated to reflect an accurate description of the unknown file type.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\sub-components\\TypeCell.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 39,
       "context": "const TypeCell = ({ t, item, sideColor }) => {\n const { fileExst, fileTypeName, fileType, roomType, isPDFForm } = item;\n const getItemType = () => {\n switch (fileType) {\n case FileType.Unknown:\n return fileTypeName || t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\getFileType.ts",
+      "file_path": "/packages/shared/utils/getFileType.ts",
       "line_number": 8,
       "context": "import { FileType } from \"../enums\";\n \n export const getFileTypeName = (fileType: FileType | string, t: TFunction) => {\n switch (fileType) {\n case FileType.Unknown:\n return t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

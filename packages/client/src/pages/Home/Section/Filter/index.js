@@ -26,7 +26,7 @@
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 import { withTranslation } from "react-i18next";
 
@@ -92,7 +92,6 @@ const SectionFilterContent = ({
   infoPanelVisible,
   isRooms,
   isTrash,
-  userId,
   isPersonalRoom,
   isIndexing,
   isIndexEditingMode,
@@ -116,6 +115,10 @@ const SectionFilterContent = ({
   usersFilter,
   setUsersFilter,
 
+  isCollaborator,
+  isVisitor,
+  userId,
+
   showFilterLoader,
   isPublicRoom,
   publicRoomKey,
@@ -135,8 +138,7 @@ const SectionFilterContent = ({
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
-
-  const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
+  const isFlowsPage = location.pathname.includes("flows");
 
   const {
     onContactsFilter,
@@ -614,6 +616,9 @@ const SectionFilterContent = ({
           case FilterType.Pdf.toString():
             label = getManyPDFTitle(t, false);
             break;
+          case FilterType.DiagramsOnly.toString():
+            label = t("Common:Diagrams");
+            break;
           default:
             break;
         }
@@ -662,47 +667,7 @@ const SectionFilterContent = ({
       }
     }
 
-    // return filterValues;
-    const currentFilterValues = [];
-
-    if (!selectedFilterValues) {
-      currentFilterValues.push(...filterValues);
-      setSelectedFilterValues(filterValues.map((f) => ({ ...f })));
-    } else {
-      const items = selectedFilterValues.map((v) => {
-        const item = filterValues.find((f) => f.group === v.group);
-
-        if (item) {
-          if (item.isMultiSelect) {
-            let isEqual = true;
-
-            item.key.forEach((k) => {
-              if (!v.key.includes(k)) {
-                isEqual = false;
-              }
-            });
-
-            if (isEqual) return item;
-
-            return false;
-          }
-          if (item.key === v.key) return item;
-          return false;
-        }
-        return false;
-      });
-
-      const newItems = filterValues.filter(
-        (v) => !items.find((i) => i.group === v.group),
-      );
-
-      items.push(...newItems);
-      currentFilterValues.push(...items.filter((i) => i));
-
-      setSelectedFilterValues(items.filter((i) => i));
-    }
-
-    return currentFilterValues;
+    return filterValues;
   }, [
     filter.authorType,
     filter.roomId,
@@ -926,6 +891,12 @@ const SectionFilterContent = ({
             group: FilterGroups.filterType,
             label: getManyPDFTitle(t, true),
           },
+          {
+            id: "filter_type-diagrams",
+            key: FilterType.DiagramsOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Common:Diagrams"),
+          },
           ...archives,
           ...images,
           ...media,
@@ -946,12 +917,7 @@ const SectionFilterContent = ({
         group: FilterGroups.roomFilterSubject,
         label: t("Common:MeLabel"),
       },
-      {
-        id: "filter_author-other",
-        key: FilterKeys.other,
-        group: FilterGroups.roomFilterSubject,
-        label: t("Common:OtherLabel"),
-      },
+
       {
         id: "filter_author-user",
         key: FilterKeys.user,
@@ -959,6 +925,15 @@ const SectionFilterContent = ({
         displaySelectorType: "link",
       },
     ];
+
+    if (!isCollaborator && !isVisitor) {
+      subjectOptions.push({
+        id: "filter_author-other",
+        key: FilterKeys.other,
+        group: FilterGroups.roomFilterSubject,
+        label: t("Common:OtherLabel"),
+      });
+    }
 
     const ownerOptions = [
       {
@@ -1087,12 +1062,7 @@ const SectionFilterContent = ({
           group: FilterGroups.filterAuthor,
           label: t("Common:MeLabel"),
         },
-        {
-          id: "filter_author-other",
-          key: FilterKeys.other,
-          group: FilterGroups.filterAuthor,
-          label: t("Common:OtherLabel"),
-        },
+
         {
           id: "filter_author-user",
           key: FilterKeys.user,
@@ -1100,6 +1070,15 @@ const SectionFilterContent = ({
           displaySelectorType: "link",
         },
       ];
+
+      if (!isCollaborator && !isVisitor) {
+        authorOption.push({
+          id: "filter_author-other",
+          key: FilterKeys.other,
+          group: FilterGroups.filterAuthor,
+          label: t("Common:OtherLabel"),
+        });
+      }
 
       !isPublicRoom && filterOptions.push(...authorOption);
       filterOptions.push(...typeOptions);
@@ -1138,6 +1117,8 @@ const SectionFilterContent = ({
     isTrash,
     isPublicRoom,
     isTemplatesFolder,
+    isCollaborator,
+    isVisitor,
     getContactsFilterData,
   ]);
 
@@ -1440,6 +1421,7 @@ const SectionFilterContent = ({
       isContactsGroupsPage={isContactsGroupsPage}
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
+      isFlowsPage={isFlowsPage}
     />
   );
 };
@@ -1518,10 +1500,11 @@ export default inject(
       showStorageInfo,
       isDefaultRoomsQuotaSet,
 
-      user,
       userId: user?.id,
 
-      selectedItem: filter.selectedItem,
+      isCollaborator: user?.isCollaborator,
+      isVisitor: user?.isVisitor,
+
       filter,
       roomsFilter,
       viewAs,

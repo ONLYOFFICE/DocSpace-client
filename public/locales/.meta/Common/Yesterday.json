@@ -3,7 +3,7 @@
   "content": "Yesterday",
   "content_en_sha1_hash": "da24830f1f7072d55862afb6969c1a4c433ac056",
   "created_at": "2025-05-19T21:30:49.639Z",
-  "updated_at": "2025-05-22T11:56:37.479Z",
+  "updated_at": "2025-06-03T20:59:41.828Z",
   "comment": {
     "text": "This translation key is used to display a generic date phrase indicating \"yesterday\" when comparing two dates in a week-by-week or month-to-month context. It appears on a component that displays historical data, such as a calendar or information panel, and is triggered when the current date matches the previous date.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\NewFilesBadge\\sub-components\\NewFilesPanelItemDate.tsx",
+      "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanelItemDate.tsx",
       "line_number": 55,
       "context": "}\n \n now.setDate(now.getDate() - 1);\n \n if (now.getDate() === enteredDate.getDate()) {\n return t(\"Yesterday\");\n }\n \n const locale = getCookie(LANGUAGE);\n \n const correctDate = getCorrectDate(",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\helpers\\HistoryHelper.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/HistoryHelper.js",
       "line_number": 44,
       "context": "const weekAgo = moment().subtract(1, \"week\");\n const halfYearAgo = moment().subtract(6, \"month\");\n \n if (given.isAfter(weekAgo)) {\n if (now.weekday() === given.weekday()) return t(\"Common:Today\");\n if (now.weekday() - 1 === given.weekday()) return t(\"Common:Yesterday\");\n \n const weekday = moment.weekdays(given.weekday());\n return weekday.charAt(0).toUpperCase() + weekday.slice(1);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

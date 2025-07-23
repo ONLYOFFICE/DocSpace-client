@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2025-05-22T11:56:37.572Z",
+  "updated_at": "2025-06-26T19:00:18.177Z",
   "comment": {
     "text": "The translation key \"EditButton\" is used to display the label \"Edit\" in various UI elements such as buttons and toggle switches. It is intended to be used in situations where users need to make changes or edits, typically in contexts related to commenting, theme editing, or API key management.",
     "is_auto": true,
@@ -11,70 +11,82 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\sub-components\\CommentEditor.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.js",
       "line_number": 113,
       "context": ") : null}\n {changeVersionHistoryAbility ? (\n <div className=\"edit_toggle\" onClick={onOpenEditor}>\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\appearance.js",
-      "line_number": 814,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 821,
       "context": "isDisabled={isDisabledSaveButton}\n />\n \n <Button\n className=\"edit-current-theme button\"\n label={t(\"Common:EditButton\")}\n onClick={onClickEdit}\n size={buttonSize}\n isDisabled={isDisabledEditButton}\n />\n {isShowDeleteButton ? (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\sub-components\\CreateApiKeyDialog\\index.tsx",
-      "line_number": 552,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 549,
       "context": "const createFooter = (\n <>\n <Button\n key=\"OKButton\"\n label={isEdit ? t(\"Common:EditButton\") : t(\"Webhooks:Generate\")}\n size={ButtonSize.normal}\n primary\n onClick={onGenerate}\n scale\n isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\sub-components\\useContextOptions.ts",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/useContextOptions.ts",
       "line_number": 41,
       "context": "onDeleteApiKey: (id: TApiKey[\"id\"]) => void,\n ) => {\n const contextOptions = [\n {\n key: \"api-key_edit\",\n label: t(\"Common:EditButton\"),\n icon: SettingsReactSvgUrl,\n onClick: () => onEditApiKey(item.id),\n },\n {\n key: \"separator\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SingleSignOn\\sub-components\\CertificatesTable.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/CertificatesTable.js",
       "line_number": 70,
       "context": "const contextOptions = [\n {\n id: \"edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: onEdit,\n },\n {\n id: \"delete\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPaymentInfo.tsx",
+      "line_number": 81,
+      "context": "min: formatWalletCurrency(minBalance, 0),\n max: formatWalletCurrency(upToBalance, 0),\n })}{\" \"}\n {isPayer ? (\n <Link onClick={onOpen} textDecoration=\"underline\">\n {t(\"Common:EditButton\")}\n </Link>\n ) : null}\n </Text>\n </div>\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
+      "line_number": 335,
+      "context": "autoPayments={autoPayments!}\n formatWalletCurrency={formatWalletCurrency}\n />\n <Button\n key=\"EditButton\"\n label={t(\"Common:EditButton\")}\n size={ButtonSize.small}\n onClick={onEditClick}\n isDisabled={isDisabled}\n />\n </div>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1747,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1747,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\OAuthStore.ts",
+      "file_path": "/packages/client/src/store/OAuthStore.ts",
       "line_number": 731,
       "context": "}\n \n const editOption = {\n key: \"edit\",\n icon: PencilReactSvgUrl,\n label: t(\"Common:EditButton\"),\n onClick: () => this.editClient(clientId),\n };\n \n const authButtonOption = {\n key: \"auth-button\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\components\\badges\\index.tsx",
-      "line_number": 330,
+      "file_path": "/packages/shared/components/badges/index.tsx",
+      "line_number": 326,
       "context": "styles.iconBadge,\n \"badge icons-group is-editing tablet-badge tablet-edit\",\n )}\n onClick={onFilesClick}\n hoverColor={theme.filesBadges.hoverIconColor}\n title={t(\"Common:EditButton\")}\n />\n ) : null}\n {item.viewAccessibility?.MustConvert &&\n security &&\n \"Convert\" in security &&",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\components\\media-viewer\\MediaViewer.helpers.tsx",
+      "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
       "line_number": 62,
       "context": ") => {\n const options: ContextMenuModel[] = [\n {\n id: \"option_edit\",\n key: \"edit\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => funcs.onClickLinkEdit?.(item),\n disabled: !item.viewAccessibility.WebEdit,\n },\n {",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\management\\src\\categories\\spaces\\sub-components\\MultipleSpaces.tsx",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/MultipleSpaces.tsx",
       "line_number": 98,
       "context": "</div>\n \n <Button\n className=\"spaces-button\"\n size={buttonSize}\n label={t(\"Common:EditButton\")}\n primary\n onClick={() => setChangeDomainDialogVisible(true)}\n />\n </div>\n </div>",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     }
   ],
   "languages": {

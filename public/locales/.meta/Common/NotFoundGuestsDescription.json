@@ -3,7 +3,7 @@
   "content": "New guests will be added here once you invite them to the room.",
   "content_en_sha1_hash": "67fb4d9324338a8ac05bfb73179d010e43aecfd7",
   "created_at": "2025-05-19T21:30:46.881Z",
-  "updated_at": "2025-05-22T11:56:37.625Z",
+  "updated_at": "2025-06-18T17:09:45.752Z",
   "comment": {
     "text": "This translation key describes a message that appears on an empty screen when there are no invited guests to display. It is used in the \"Contacts\" section of the Home page and is displayed as a default message when no guests have been added yet.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 93,
       "context": ": t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : t(\"Common:NotFoundGuestsDescription\")\n : isEmptyGroup\n ? t(\"Common:EmptyGroupDescription\")\n : t(\"Common:NotFoundUsersDescription\");\n \n const setIsLoading = (param: boolean) => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\People\\index.tsx",
-      "line_number": 635,
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 655,
       "context": ": t(\"Common:NotFoundGroups\"))\n }\n emptyScreenDescription={\n emptyScreenDescription ??\n (activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:EmptyDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"Common:GroupsNotFoundDescription\"))",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

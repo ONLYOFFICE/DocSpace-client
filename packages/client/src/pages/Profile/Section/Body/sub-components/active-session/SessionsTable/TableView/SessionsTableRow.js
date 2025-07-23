@@ -30,7 +30,7 @@ import styled from "styled-components";
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { convertTime } from "@docspace/shared/utils/convertTime";
+import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 import { globalColors } from "@docspace/shared/themes";
@@ -72,6 +72,7 @@ const SessionsTableRow = (props) => {
     currentSession,
     setPlatformModalData,
     setLogoutDialogVisible,
+    locale,
   } = props;
 
   const { platform, browser, date, country, city, ip } = item;
@@ -105,7 +106,7 @@ const SessionsTableRow = (props) => {
 
       <TableCell>
         <Text className="session-info" truncate>
-          {convertTime(date)}
+          {getCorrectDate(locale, date)}
         </Text>
       </TableCell>
 
@@ -137,11 +138,15 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, settingsStore, userStore }) => {
   const { currentSession, setLogoutDialogVisible, setPlatformModalData } =
     setup;
+  const { culture } = settingsStore;
+  const { user } = userStore;
+  const locale = (user && user.cultureName) || culture || "en";
 
   return {
+    locale,
     currentSession,
     setLogoutDialogVisible,
     setPlatformModalData,

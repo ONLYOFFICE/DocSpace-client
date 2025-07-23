@@ -3,7 +3,7 @@
   "content": "Images",
   "content_en_sha1_hash": "09e871c98fef3b901a775def173e4126aaf73b42",
   "created_at": "2025-05-19T21:30:45.836Z",
-  "updated_at": "2025-05-22T11:56:37.632Z",
+  "updated_at": "2025-07-10T11:11:06.891Z",
   "comment": {
     "text": "This translation key is used to display the label for a filter option that selects images. It is likely used in a file manager or media library UI element, such as a button or dropdown menu, where users can choose to view only images among other types of files.",
     "is_auto": true,
@@ -11,34 +11,34 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 603,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 605,
       "context": "break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 603,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 605,
       "context": "break;\n case FilterType.PresentationsOnly.toString():\n label = t(\"Common:Presentations\");\n break;\n case FilterType.ImagesOnly.toString():\n label = t(\"Common:Images\");\n break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\FileSelector.js",
-      "line_number": 129,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 133,
       "context": "key: FilterType.ArchiveOnly,\n label: t(`Common:Archives`),\n },\n {\n key: FilterType.ImagesOnly,\n label: t(`Common:Images`),\n },\n {\n key: FilterType.MediaOnly,\n label: t(`Common:Media`),\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\sub-components\\FilterBlock.js",
-      "line_number": 168,
-      "context": "label: t(\"Common:Presentations\"),\n typeKey: FilterType.PresentationsOnly,\n },\n {\n key: \"filter-type-images\",\n label: t(\"Common:Images\"),\n typeKey: FilterType.ImagesOnly,\n },\n {\n key: \"filter-type-media\",\n label: t(\"Common:Media\"),",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
+      "line_number": 183,
+      "context": "label: t(\"Common:Archives\"),\n typeKey: FilterType.ArchiveOnly,\n },\n {\n key: \"filter-type-images\",\n label: t(\"Common:Images\"),\n typeKey: FilterType.ImagesOnly,\n },\n {\n key: \"filter-type-media\",\n label: t(\"Common:Media\"),",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\index.ts",
-      "line_number": 347,
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 355,
       "context": "case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

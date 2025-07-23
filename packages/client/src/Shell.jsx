@@ -26,7 +26,7 @@
 
 import moment from "moment-timezone";
 import React, { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -47,7 +47,7 @@ import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
+import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
 import "@docspace/shared/styles/theme.scss";
 
 import config from "PACKAGE_FILE";
@@ -63,7 +63,6 @@ import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
-import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {

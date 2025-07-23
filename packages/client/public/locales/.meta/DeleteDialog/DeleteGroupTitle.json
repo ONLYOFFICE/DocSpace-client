@@ -3,7 +3,7 @@
   "content": "Delete group",
   "content_en_sha1_hash": "b6f15b2f40a093d6920368a98483c94f1ae50aa1",
   "created_at": "2025-05-19T21:30:56.701Z",
-  "updated_at": "2025-05-22T11:56:37.389Z",
+  "updated_at": "2025-05-28T09:30:02.256Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'Delete group' in a modal dialog and on an empty screen, indicating that the user can delete a group.\"",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteGroupDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
       "line_number": 81,
       "context": "return (\n <ModalDialog visible={visible} onClose={onClose} displayType=\"modal\">\n <ModalDialog.Header>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupsTitle\")\n : t(\"DeleteDialog:DeleteGroupTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupDescription\", {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 129,
       "context": "icon: <InviteUserIcon />,\n onClick: () => editGroup(currentGroup),\n },\n {\n key: \"delete-group\",\n title: t(\"DeleteDialog:DeleteGroupTitle\"),\n description: t(\"EmptyView:EmptyGroupDeleteOptionDescription\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP,\n icon: <TrashIcon />,\n onClick: () => deleteGroup!(currentGroup, true),\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

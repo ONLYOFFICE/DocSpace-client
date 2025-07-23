@@ -196,6 +196,92 @@ const getQuotaFilter = (filterValues: TGroupItem[] | TItem[]) => {
   return filterType?.toString() ? +filterType : null;
 };
 
+const convertFilterDataToSelectedFilterValues = (
+  filterData: TItem[],
+): Map<FilterGroups, Map<string | number, TItem>> => {
+  const newValue: Map<FilterGroups, Map<string | number, TItem>> = new Map();
+
+  filterData.forEach((item) => {
+    const groupItems = Array.isArray(item.key)
+      ? (item.key.map((key) => ({
+          key,
+          group: item.group,
+          label: key,
+        })) as TItem[])
+      : [item];
+
+    if (!newValue.has(item.group)) {
+      const groupItemsMap = new Map(
+        groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
+      );
+
+      newValue.set(item.group, groupItemsMap);
+    } else {
+      groupItems.forEach((groupItem) => {
+        newValue.get(item.group)?.set(groupItem.key as string, groupItem);
+      });
+    }
+  });
+
+  return newValue;
+};
+
+const convertFilterDataToSelectedItems = (filterData: TItem[]): TItem[] => {
+  const newSelectedItems: TItem[] = [];
+
+  filterData.forEach((item) => {
+    const groupItems = Array.isArray(item.key)
+      ? (item.key.map((key) => ({
+          key,
+          group: item.group,
+          label: key,
+        })) as TItem[])
+      : [item];
+
+    newSelectedItems.push(...groupItems);
+  });
+
+  return newSelectedItems;
+};
+
+const replaceEqualFilterValuesWithPrev = (
+  prevFilterValues: TItem[] | null,
+  newFilterValues: TItem[],
+): TItem[] => {
+  if (!prevFilterValues) return newFilterValues;
+
+  const items = prevFilterValues.map((v) => {
+    const item = newFilterValues.find((f) => f.group === v.group);
+
+    if (item) {
+      if (item.isMultiSelect && Array.isArray(item.key)) {
+        let isEqual = true;
+
+        item.key.forEach((k) => {
+          if (!Array.isArray(v.key) || !v.key.includes(k)) {
+            isEqual = false;
+          }
+        });
+
+        if (isEqual) return item;
+
+        return false;
+      }
+      if (item.key === v.key) return item;
+      return false;
+    }
+    return false;
+  });
+
+  const newItems = newFilterValues.filter(
+    (v) => !items.find((i) => i && i.group === v.group),
+  );
+
+  items.push(...newItems);
+
+  return [...items.filter((i) => i !== false)];
+};
+
 export {
   getFilterType,
   getSubjectFilter,
@@ -208,4 +294,7 @@ export {
   getFilterContent,
   getTags,
   getQuotaFilter,
+  convertFilterDataToSelectedFilterValues,
+  convertFilterDataToSelectedItems,
+  replaceEqualFilterValuesWithPrev,
 };

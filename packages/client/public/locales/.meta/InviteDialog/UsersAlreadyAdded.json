@@ -3,7 +3,7 @@
   "content": "Some users have already been added",
   "content_en_sha1_hash": "11ba705efbb4050c93a4d4827ad25f4eb90bb39d",
   "created_at": "2025-05-19T21:30:54.741Z",
-  "updated_at": "2025-05-22T11:56:37.355Z",
+  "updated_at": "2025-06-18T07:34:14.859Z",
   "comment": {
     "text": "\"This translation key is used to display a message when a user has already been added to a group or panel, indicating that they cannot be added again. It appears in warning notifications and dialog boxes, typically triggered by actions such as adding users to a group or editing invite panels.\"",
     "is_auto": true,
@@ -11,10 +11,40 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditGroupDialog\\CreateGroupDialog.tsx",
-      "line_number": 125,
+      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
+      "line_number": 115,
       "context": "}\n resultGroupMembers.push(groupMember);\n });\n \n if (showErrorWasSelected) {\n toastr.warning(t(\"InviteDialog:UsersAlreadyAdded\"));\n }\n \n setGroupMembers(resultGroupMembers);\n onHideSelectMembersPanel();\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
+      "line_number": 402,
+      "context": "isUnique && unique.push(current);\n \n return unique;\n }, []);\n \n if (items.length > filtered.length) toastr.warning(t(\"UsersAlreadyAdded\"));\n \n return filtered;\n };\n \n const bodyInvitePanel = useMemo(() => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 341,
+      "context": "const addUser = () => {\n if (isDisabled) {\n toastr.warning(t(\"UsersCannotBeAdded\"));\n } else if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n if (isGroup && checkIfAccessPaid(item.access)) {\n item = fixAccess(item, t, roomType);\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 341,
+      "context": "const addUser = () => {\n if (isDisabled) {\n toastr.warning(t(\"UsersCannotBeAdded\"));\n } else if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n if (isGroup && checkIfAccessPaid(item.access)) {\n item = fixAccess(item, t, roomType);\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
+      "line_number": 261,
+      "context": "const saveEdit = async () => {\n if (searchRequestRunning) return;\n \n if (isSharedUser) {\n return toastr.warning(t(\"UsersAlreadyAdded\"));\n }\n \n const value = inputValue === \"\" ? name : inputValue;\n \n setEdit(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
+      "line_number": 185,
+      "context": "isGroup = false,\n } = item;\n \n const addUser = () => {\n if (shared) {\n toastr.warning(t(\"UsersAlreadyAdded\"));\n } else {\n setInviteItems([item, ...inviteItems]);\n }\n \n setInputValue(\"\");",
+      "module": "/packages/client"
     }
   ],
   "languages": {

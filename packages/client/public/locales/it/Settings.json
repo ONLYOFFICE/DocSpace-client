@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Seleziona le sezioni per l'importazione. Appariranno nelle sezioni corrispondenti di {{productName}}.",
   "IncludedInBusiness": "Incluso nel piano Business",
   "IntegrationRequest": "Ti manca un'integrazione o un componente utile in {{organizationName}} {{productName}}? Lascia la tua richiesta al nostro team e lo studieremo.",
+  "InvitationSettings": "Impostazioni di invito",
+  "InvitationSettingsContacts": "Invita membri di {{productName}} tramite Contatti",
+  "InvitationSettingsContactsDescription": "Abilita questa opzione per inviare inviti ai nuovi membri di {{productName}} tramite la sezione Contatti. Disabilita questa opzione se desideri invitarli solo tramite LDAP.",
+  "InvitationSettingsDescription": "Configura le opzioni di invito per i membri interni e gli ospiti esterni del tuo {{productName}}. Queste impostazioni ti aiutano a rispettare le linee guida di sicurezza aziendali, ad esempio se utilizzi LDAP o altri sistemi di gestione utenti.",
+  "InvitationSettingsGuests": "Consenti di invitare ospiti",
+  "InvitationSettingsGuestsDescription": "Abilita questa opzione per consentire a tutti i membri di {{productName}} di invitare ospiti esterni nelle stanze.",
+  "InvitationSettingsMobile": "Configura le opzioni di invito per i membri interni e gli ospiti esterni del tuo {{productName}}.",
   "InviteLetterTooltip": "Se selezionato, tutti i nuovi utenti riceveranno una lettera di invito con i dettagli dell'autorizzazione.",
   "IPSecurity": "Sicurezza IP",
   "IPSecurityMobileDescription": "La sicurezza IP viene utilizzata per limitare l'accesso al portale da tutti gli indirizzi IP tranne determinati indirizzi.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Logo per la pagina Informazioni",
   "LogoCompact": "Logo per il menu compatto di sinistra",
   "LogoDocsEditor": "Logo per l'intestazione degli editor",
-  "LogoDocsEditorEmbedded": "Logo per l’intestazione degli editor - modalità incorporata",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo per l'intestazione dello spazio",
   "LogoLogin": "Logo per la pagina di login e le email",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Invia una lettera di invito",
   "SendNotificationAboutRestoring": "Invia agli utenti una notifica relativa al ripristino dello spazio",
   "ServerSideEncryptionMethod": "Metodo di crittografia lato server",
+  "Services": "Servizi",
   "ServiceUrl": "URL di servizio",
   "SessionLifetime": "Durata della sessione",
   "SessionLifetimeMobileDescription": "Session Lifetime consente di impostare il tempo (in minuti) prima che gli utenti di {{productName}} debbano inserire nuovamente le credenziali dello spazio per accedervi.",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "Non hai utenti senza email. Ti preghiamo di procedere al passaggio successivo.",
   "YouHaveUnsavedChanges": "Hai delle modifiche non salvate",
   "YourCurrentDomain": "Il tuo dominio attuale",
-  "YourLogo": "Il tuo logo"
+  "YourLogo": "Il tuo logo",
+  "AdManagement": "Gestione annunci",
+  "AdManagementDescription": "Scegli se mostrare o meno i banner promozionali in {{productName}}."
 }

@@ -714,6 +714,15 @@ class HotkeyStore {
     const { createFoldersTree } = this.filesActionsStore;
     const { startUpload } = this.uploadDataStore;
 
+    // Return early if the event target is an input or textarea element
+    if (
+      event &&
+      event.target &&
+      (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA")
+    ) {
+      return;
+    }
+
     if (this.filesStore.hotkeysClipboard.length) {
       return this.moveFilesFromClipboard(t);
     }

@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useContext, useCallback } from "react";
-
 import { SearchInput } from "../../search-input";
 import { InputSize } from "../../text-input";
 
 import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+import { SearchProps } from "../Selector.types";
 
-const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
+const Search = React.memo(({ isSearch }: SearchProps) => {
   const {
     searchPlaceholder,
     searchValue,
@@ -44,7 +44,8 @@ const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
   } = useContext(SearchContext);
   const setIsSearch = useContext(SearchDispatchContext);
 
-  const { isBreadCrumbsLoading } = useContext(BreadCrumbsContext);
+  const { isBreadCrumbsLoading, bodyIsLoading } =
+    useContext(BreadCrumbsContext);
 
   const onClearSearchAction = useCallback(() => {
     onClearSearch?.(() => setIsSearch(false));
@@ -61,7 +62,8 @@ const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
     [onClearSearchAction, onSearch, setIsSearch],
   );
 
-  if (isBreadCrumbsLoading || isSearchLoading) return searchLoader;
+  if (isBreadCrumbsLoading || isSearchLoading || (!isSearch && bodyIsLoading))
+    return searchLoader;
 
   if (!withSearch || !isSearch) return null;
 

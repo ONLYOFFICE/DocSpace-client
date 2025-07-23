@@ -248,7 +248,6 @@ const FileTile = (props) => {
         dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
-        contextOptions={item.contextOptions}
       >
         {renderTile()}
       </StyledDragAndDrop>

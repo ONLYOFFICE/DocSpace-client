@@ -332,7 +332,7 @@ const TemplateAccessSettingsPanel = ({
       <Scrollbar>
         <StyledTemplateAccessSettingsBody>
           <StyledBlock>
-            <StyledSubHeader inline>
+            <StyledSubHeader $inline>
               {t("Files:TemplateAvailable")}
 
               <StyledToggleButton
@@ -424,7 +424,7 @@ const TemplateAccessSettingsPanel = ({
       <ModalDialog.Body>
         <>
           <StyledBlock>
-            <StyledSubHeader inline>
+            <StyledSubHeader $inline>
               {t("Files:TemplateAvailable")}
 
               <StyledToggleButton

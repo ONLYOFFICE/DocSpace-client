@@ -27,7 +27,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import {

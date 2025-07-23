@@ -3,7 +3,7 @@
   "content": "Save here",
   "content_en_sha1_hash": "2f59885d38dc68521d61e5eb75fd8f19891f7b1e",
   "created_at": "2025-05-19T21:30:48.310Z",
-  "updated_at": "2025-05-22T11:56:37.477Z",
+  "updated_at": "2025-06-18T07:34:14.807Z",
   "comment": {
     "text": "This translation key is used for a button that instructs users to save their selection (\"Save here\") in a file management system, typically appearing as a submit or save button in a dialog or UI element. It's part of a broader set of translations related to file editing and saving, specifically in the context of a select folder dialog.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\utils.ts",
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 93,
       "context": "if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t(\"Common:SubmitToGallery\");\n if (filterParam) return t(\"Common:SaveButton\");\n \n return t(\"Common:SaveHereButton\");\n };\n \n export const getIsDisabled = (\n isFirstLoad: boolean,\n isSelectedParentFolder: boolean,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\SelectFolderDialog.tsx",
-      "line_number": 88,
-      "context": "withSearch\n withoutBackButton\n withCancelButton\n disabledItems={[]}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Editor:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Editor:OpenSavedDocument\")}\n isPanelVisible={isVisible}",
-      "module": "\\packages\\doceditor"
+      "file_path": "/packages/doceditor/src/components/SelectFolderDialog.tsx",
+      "line_number": 89,
+      "context": "withSearch\n withoutBackButton\n withCancelButton\n disabledItems={[]}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:SaveHereButton\")}\n submitButtonId=\"select-file-modal-submit\"\n footerInputHeader={t(\"Common:FileName\")}\n currentFooterInputValue={titleSelectorFolder}\n footerCheckboxLabel={t(\"Common:OpenSavedDocument\")}\n isPanelVisible={isVisible}",
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

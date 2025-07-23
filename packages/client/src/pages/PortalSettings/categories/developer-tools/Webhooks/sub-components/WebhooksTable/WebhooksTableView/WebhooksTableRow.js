@@ -31,7 +31,7 @@ import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_s
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -87,6 +87,7 @@ const WebhooksTableRow = (props) => {
   const { t } = useTranslation(["Webhooks", "Common"]);
 
   const [isChecked, setIsChecked] = useState(webhook.enabled);
+  const [isLoading, setIsLoading] = useState(false);
 
   const redirectToHistory = () => {
     navigate(`${window.location.pathname}/${webhook.id}`);
@@ -106,15 +107,21 @@ const WebhooksTableRow = (props) => {
 
     redirectToHistory();
   };
-  const handleToggleEnabled = () => {
-    toggleEnabled(webhook, t);
-    setIsChecked((prevIsChecked) => !prevIsChecked);
+
+  const handleToggleEnabled = async () => {
+    setIsLoading(true);
+    const res = await toggleEnabled(webhook, t);
+    if (res) {
+      setIsChecked(!!res.enabled);
+    }
+    setIsLoading(false);
   };
 
   const onSettingsOpen = () => {
     setCurrentWebhook(webhook);
     openSettingsModal();
   };
+
   const onDeleteOpen = () => {
     setCurrentWebhook(webhook);
     openDeleteModal();
@@ -196,6 +203,7 @@ const WebhooksTableRow = (props) => {
             id="toggle id"
             isChecked={isChecked}
             onChange={handleToggleEnabled}
+            isDisabled={isLoading}
           />
         </TableCell>
       </StyledTableRow>

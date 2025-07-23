@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 import { WhiteLabel } from "client/WhiteLabelPage";
 import { BrandName } from "client/BrandNamePage";
@@ -54,6 +55,9 @@ const routes = [
           <App />
         </PrivateRouteWrapper>
       </ErrorBoundary>
+    ),
+    hydrateFallbackElement: (
+      <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
     ),
     errorElement: <Error404 />,
     children: [
@@ -104,6 +108,14 @@ const routes = [
       },
       {
         path: "/management/payments",
+        element: <Payments />,
+      },
+      {
+        path: "/management/payments/portal-payments",
+        element: <Payments />,
+      },
+      {
+        path: "/management/payments/wallet",
         element: <Payments />,
       },
       {

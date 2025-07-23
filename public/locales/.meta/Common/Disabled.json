@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:44.535Z",
-  "updated_at": "2025-05-22T11:56:37.507Z",
+  "updated_at": "2025-06-18T17:09:45.720Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disabled\" when a feature or setting is disabled in the UI. It appears as part of dropdown menus and options lists in various admin settings and configuration pages.",
     "is_auto": true,
@@ -11,52 +11,52 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\InvitePanel\\sub-components\\InviteInput.js",
-      "line_number": 398,
-      "context": "</div>\n {shared ? (\n <SearchItemText info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n {isDisabled ? (\n <SearchItemText disabled>{t(\"Common:Disabled\")}</SearchItemText>\n ) : null}\n </DropDownItem>\n );\n };",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
+      "line_number": 399,
+      "context": "</div>\n {shared ? (\n <SearchItemText $info>{t(\"Common:Invited\")}</SearchItemText>\n ) : null}\n {isDisabled ? (\n <SearchItemText info>{t(\"Common:Disabled\")}</SearchItemText>\n ) : null}\n </DropDownItem>\n );\n };",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\access-portal\\adminMessage.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
       "line_number": 196,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"admin-message-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"admin-message-enable\",\n label: t(\"Common:Enable\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\access-portal\\devToolsAccess.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
       "line_number": 229,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"dev-tools-access-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"true\",\n },\n {\n id: \"dev-tools-access-enable\",\n label: t(\"Common:Enable\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\access-portal\\ipSecurity.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
       "line_number": 270,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"ip-security-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"ip-security-enable\",\n label: t(\"Common:Enable\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\access-portal\\sessionLifetime.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
       "line_number": 264,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"session-lifetime-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n },\n {\n id: \"session-lifetime-enable\",\n label: t(\"Common:Enable\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\access-portal\\tfa.js",
-      "line_number": 205,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
+      "line_number": 212,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"tfa-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"none\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {\n id: \"by-sms\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\access-portal\\trustedMail.js",
-      "line_number": 250,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
+      "line_number": 257,
       "context": "orientation=\"vertical\"\n spacing=\"8px\"\n options={[\n {\n id: \"trusted-mail-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"0\",\n },\n {\n id: \"any-domains\",\n label: t(\"AllDomains\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\People\\index.tsx",
-      "line_number": 110,
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 112,
       "context": "disableDisabledUsers && status === EmployeeStatus.Disabled;\n \n const disabledText = isInvited\n ? t(\"Common:Invited\")\n : isDisabled\n ? t(\"Common:Disabled\")\n : \"\";\n \n const avatarRole = getUserAvatarRoleByType(role);\n \n const i: TSelectorItem = {",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Here you can change your portal address.",
   "content_en_sha1_hash": "59ec9d0245a1f9bbe4e4fa064ce1101ce42d8162",
   "created_at": "2025-05-19T21:30:52.285Z",
-  "updated_at": "2025-05-21T03:36:00.026Z",
+  "updated_at": "2025-07-10T11:11:06.914Z",
   "comment": {
     "text": "This translation key is used for the subtitle in a navigation category that describes portal renaming functionality. It will be displayed to users when they access portal renaming settings, providing context about their current location within the settings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 92,
-      "context": "badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\")}\n subtitle={t(\"PortalRenamingNavDescription\")}\n url=\"/portal-settings/customization/general/portal-renaming\"\n onClickLink={onClickLink}\n />\n ) : null}\n <MobileCategoryWrapper",
+      "line_number": 93,
+      "context": "badgeLabel={t(\"Common:Paid\")}\n />\n {enablePortalRename ? (\n <MobileCategoryWrapper\n title={t(\"PortalRenaming\")}\n subtitle={t(\"PortalRenamingNavDescription\")}\n url=\"/portal-settings/customization/general/portal-renaming\"\n onClickLink={onClickLink}\n withPaidBadge={!isSettingPaid}\n badgeLabel={t(\"Common:Paid\")}\n />",
       "module": "/packages/client"
     }
   ],

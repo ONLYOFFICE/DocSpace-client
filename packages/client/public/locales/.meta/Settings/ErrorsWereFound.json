@@ -3,7 +3,7 @@
   "content": "{{errors}} errors were found",
   "content_en_sha1_hash": "11d153f3db1683b3e3c58c3ddd299e7ff10894bf",
   "created_at": "2025-05-19T21:30:51.557Z",
-  "updated_at": "2025-05-22T11:56:37.656Z",
+  "updated_at": "2025-05-28T09:30:02.513Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that errors were found during data import, typically when importing failed users. It appears on screen in the case of an import failure, providing context to the user about what went wrong.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\ImportCompleteStep.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
       "line_number": 147,
       "context": "})}\n </InfoText>\n \n {importResult.failedUsers > 0 ? (\n <ErrorText>\n {t(\"Settings:ErrorsWereFound\", {\n errors: importResult.failedUsers,\n })}\n </ErrorText>\n ) : null}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Import from Nextcloud",
   "content_en_sha1_hash": "404cbbe6db5d9f6a20a347688fdc4598b4e7dce7",
   "created_at": "2025-05-19T21:30:51.664Z",
-  "updated_at": "2025-05-21T04:09:34.862Z",
+  "updated_at": "2025-07-10T11:11:06.900Z",
   "comment": {
     "text": "Import from Nextcloud is used to describe a button or action that allows users to import data from their Nextcloud account. This translation key appears in the Portal Settings UI, specifically on the layout of the header section. It should be translated to provide a clear and descriptive label for users to understand what option they are selecting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 317,
+      "line_number": 319,
       "context": "const translatedHeader =\n header === IMPORT_HEADER_CONST\n ? workspace === \"GoogleWorkspace\"\n ? t(\"ImportFromGoogle\")\n : workspace === \"Nextcloud\"\n ? t(\"ImportFromNextcloud\")\n : workspace === \"Workspace\"\n ? t(\"ImportFromPortal\", {\n organizationName: logoText,\n })\n : t(\"DataImport\")",
       "module": "/packages/client"
     }

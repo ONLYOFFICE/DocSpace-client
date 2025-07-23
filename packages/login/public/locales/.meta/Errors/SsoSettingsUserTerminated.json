@@ -3,7 +3,7 @@
   "content": "This user is disabled",
   "content_en_sha1_hash": "0e9c3deb45147da572671a87a2d7616bd6ae6b14",
   "created_at": "2025-05-19T21:30:57.313Z",
-  "updated_at": "2025-05-22T11:56:37.828Z",
+  "updated_at": "2025-05-28T09:30:02.909Z",
   "comment": {
     "text": "\"This translation key is used for displaying a message indicating that a user has been terminated or disabled. It is typically displayed in error messages related to SSO settings and appears in UI contexts where errors or invalidations occur.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\utils\\index.ts",
+      "file_path": "/packages/login/src/utils/index.ts",
       "line_number": 98,
       "context": "case \"SsoSettingsNotValidToken\":\n return t(\"Errors:SsoSettingsNotValidToken\");\n case \"SsoSettingsCantCreateUser\":\n return t(\"Errors:SsoSettingsCantCreateUser\");\n case \"SsoSettingsUserTerminated\":\n return t(\"Errors:SsoSettingsUserTerminated\");\n case \"SsoError\":\n return t(\"Errors:SsoError\");\n case \"SsoAuthFailed\":\n return t(\"Errors:SsoAuthFailed\");\n case \"SsoAttributesNotFound\":",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

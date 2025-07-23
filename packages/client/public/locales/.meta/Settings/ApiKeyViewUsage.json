@@ -3,7 +3,7 @@
   "content": "View usage per API key on the",
   "content_en_sha1_hash": "7fb63f56b0f710797397bac7b4ab4ee84d6c2d62",
   "created_at": "2025-05-19T21:30:50.560Z",
-  "updated_at": "2025-05-22T11:56:37.693Z",
+  "updated_at": "2025-05-28T09:30:02.546Z",
   "comment": {
     "text": "The translation key \"ApiKeyViewUsage\" is used to describe the functionality of viewing API key usage. It appears in a link on the PortalSettings page, informing users that clicking on it will display usage details for each API key. This text helps to explain the purpose of the link and provides context for translators.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
       "line_number": 206,
       "context": "<Text className=\"api-keys_text api-keys_description-text\">\n {t(\"Settings:ApiKeysShareDescription\")}\n </Text>\n \n <Text className=\"api-keys_text api-keys_usage-text\">\n {t(\"Settings:ApiKeyViewUsage\")}\n </Text>\n <Link\n isHovered\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

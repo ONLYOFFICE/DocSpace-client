@@ -102,7 +102,7 @@
   "FinalizeVersion": "Finaliser la version",
   "FolderRenamed": "Le dossier '{{folderTitle}}' est renommé en '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Dossier <1>{{folderTitle}}</1> créé",
-  "GeneralLinkDeletedSuccessfully": "Nouveau lien général créé avec succès",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Nouveau lien général créé avec succès",
   "GoToMyRooms": "Aller dans les salles",
   "GoToSection": "Accéder à {{sectionName}}",
   "Index": "Index",

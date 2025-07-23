@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Sélectionnez les sections à importer. Ces sections apparaîtront dans les sections appropriées de l'espace {{productName}}.",
   "IncludedInBusiness": "Inclus dans le plan Business",
   "IntegrationRequest": "Il manque une intégration ou un composant utile dans {{organizationName}} {{productName}} ? Laissez une demande à notre équipe et nous nous en occuperons.",
+  "InvitationSettings": "Paramètres de l'invitation",
+  "InvitationSettingsContacts": "Invitez les membres de {{productName}} via Contacts",
+  "InvitationSettingsContactsDescription": "Activez cette option pour permettre l'envoi d'invitations aux nouveaux membres de {{productName}} via la section Contacts. Désactivez cette option si vous souhaitez inviter de nouveaux membres uniquement via LDAP.",
+  "InvitationSettingsDescription": "Configurez les options d'invitation pour les membres internes et les invités externes de votre {{productName}}. Ces paramètres peuvent vous aider à respecter les directives de sécurité de votre entreprise, par exemple si vous utilisez LDAP ou d'autres systèmes de gestion des utilisateurs.",
+  "InvitationSettingsGuests": "Autoriser les invitations d'invités",
+  "InvitationSettingsGuestsDescription": "Activez cette option pour permettre à tous les membres de {{productName}} d'inviter des personnes extérieures dans les salles.",
+  "InvitationSettingsMobile": "Configurez les options d'invitation pour les membres internes et les invités externes de votre {{productName}}.",
   "InviteLetterTooltip": "Si cette case est cochée, tous les nouveaux utilisateurs recevront une lettre d'invitation avec les détails d'autorisation.",
   "IPSecurity": "Sécurité IP",
   "IPSecurityMobileDescription": "La sécurité IP est utilisée pour restreindre la connexion au portail à partir de toutes les adresses IP, à l'exception de certaines adresses.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Logo pour la page À propos",
   "LogoCompact": "Logo pour le menu compact à gauche",
   "LogoDocsEditor": "Logo pour l'en-tête des éditeurs",
-  "LogoDocsEditorEmbedded": "Logo pour l’en-tête des éditeurs - mode intégré",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo pour l'en-tête de l’espace",
   "LogoLogin": "Logo pour la page de connexion et les e-mails",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Envoyer une invitation",
   "SendNotificationAboutRestoring": "Informer les utilisateurs sur la restauration de l’espace",
   "ServerSideEncryptionMethod": "Méthode de chiffrement partie serveur",
+  "Services": "Services",
   "ServiceUrl": "Lien de service",
   "SessionLifetime": "Durée de vie de la session",
   "SessionLifetimeMobileDescription": "La durée de vie de la session permet de définir le temps (en minutes) avant que les utilisateurs du {{productName}} ne doivent à nouveau entrer leurs informations d'identification pour accéder à l'espace.",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
-  "YourLogo": "Votre logo"
+  "YourLogo": "Votre logo",
+  "AdManagement": "Gestion des publicités",
+  "AdManagementDescription": "Choisissez si les bannières promotionnelles sont affichées dans votre {{productName}}."
 }

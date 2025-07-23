@@ -3,7 +3,7 @@
   "content": "Stop filling?",
   "content_en_sha1_hash": "b3fff789a91323a06fd3adcd922650270391f583",
   "created_at": "2025-05-19T21:30:49.074Z",
-  "updated_at": "2025-05-22T11:56:37.880Z",
+  "updated_at": "2025-05-28T09:30:02.974Z",
   "comment": {
     "text": "This translation key is used for the title of a modal dialog that prompts the user to stop filling a form field. It appears on the header of the dialog and is displayed when the \"Stop Filling\" button is clicked or visible in certain contexts.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\stop-filling\\StopFillingDialog.tsx",
+      "file_path": "/packages/shared/dialogs/stop-filling/StopFillingDialog.tsx",
       "line_number": 68,
       "context": "visible={visible}\n displayType={ModalDialogType.modal}\n onClose={onClose}\n data-testid=\"stop-filling-dialog\"\n >\n <ModalDialog.Header>{t(\"Common:StopFillingTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OKButton\"",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

@@ -37,7 +37,14 @@ import {
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
-import { DeviceType, FolderType, RoomsType, FileType } from "../../enums";
+import {
+  ApplyFilterOption,
+  DeviceType,
+  FolderType,
+  RoomsType,
+  FileType,
+  RoomSearchArea,
+} from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
 import { Nullable } from "../../types";
 
@@ -68,7 +75,7 @@ export type UseSocketHelperProps = {
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
-  filterParam?: string;
+  filterParam?: string | number;
   withCreate: boolean;
 };
 
@@ -99,6 +106,7 @@ export type UseRoomsHelperProps = {
   >;
   subscribe: (id: number) => void;
   withInit?: boolean;
+  searchArea?: RoomSearchArea;
 };
 
 export type UseFilesHelpersProps = {
@@ -113,6 +121,7 @@ export type UseFilesHelpersProps = {
   setIsInit: (value: boolean) => void;
   searchValue?: string;
   disabledItems: (string | number)[];
+  includedItems?: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
@@ -139,6 +148,8 @@ export type UseFilesHelpersProps = {
   setSelectedItemType: (value?: "rooms" | "files") => void;
 
   withInit?: boolean;
+
+  applyFilterOption?: ApplyFilterOption;
 };
 
 export type TUseInputItemHelper = {
@@ -191,7 +202,8 @@ export type FilesSelectorProps = TSelectorHeader &
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
     disabledItems: (string | number)[];
-    filterParam?: string;
+    includedItems?: (string | number)[];
+    filterParam?: string | number;
     withoutBackButton: boolean;
     withBreadCrumbs: boolean;
     withSearch: boolean;
@@ -259,4 +271,9 @@ export type FilesSelectorProps = TSelectorHeader &
     formProps?: FormPropsType;
     withPadding?: boolean;
     checkCreating?: boolean;
+
+    applyFilterOption?: ApplyFilterOption;
+
+    isMultiSelect?: boolean;
+    onSelectItem?: (item: TSelectorItem) => void;
   };

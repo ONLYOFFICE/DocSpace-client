@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { ReactSVG } from "react-svg";
 
 import DeveloperReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.developer.react.svg?url";

@@ -26,7 +26,7 @@
 
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 

@@ -3,7 +3,7 @@
   "content": "This group is empty",
   "content_en_sha1_hash": "92cdac96181278d5430dfaee93246a757cea59d6",
   "created_at": "2025-05-19T21:30:44.850Z",
-  "updated_at": "2025-05-22T11:56:37.626Z",
+  "updated_at": "2025-05-28T09:30:02.460Z",
   "comment": {
     "text": "\"This translation key is used to display a message when a group on the Home page is empty. It appears as part of an 'Empty Screen' component.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 95,
       "context": "const description = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : t(\"Common:NotFoundGuestsDescription\")\n : isEmptyGroup\n ? t(\"Common:EmptyGroupDescription\")\n : t(\"Common:NotFoundUsersDescription\");\n \n const setIsLoading = (param: boolean) => {\n setIsSectionBodyLoading?.(param);\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

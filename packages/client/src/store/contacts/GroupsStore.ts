@@ -35,6 +35,11 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
+import {
+  getUserFilter,
+  setUserFilter,
+} from "@docspace/shared/utils/userFilterUtils";
+import { FILTER_GROUPS } from "@docspace/shared/utils/filterConstants";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import api from "@docspace/shared/api";
@@ -144,6 +149,8 @@ class GroupsStore {
       }
 
       if (contactsTab !== "groups") {
+        if (this.currentGroup.id !== group.id) return;
+
         this.currentGroup = group;
         return;
       }
@@ -159,6 +166,8 @@ class GroupsStore {
       const idx = this.groups.findIndex((x) => x.id === id);
 
       if (contactsTab !== "groups") {
+        if (this.currentGroup.id !== id) return;
+
         window.DocSpace.navigate("/accounts/groups/filter");
         return;
       }
@@ -177,10 +186,15 @@ class GroupsStore {
   // Groups Filter
 
   setGroupsFilter = (filter = GroupsFilter.getDefault()) => {
-    const key = `GroupsFilter=${this.userStore.user!.id}`;
+    const key = `${FILTER_GROUPS}=${this.userStore.user!.id}`;
 
-    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
-    localStorage.setItem(key, value);
+    const value = {
+      sortBy: filter.sortBy,
+      pageCount: filter.pageCount,
+      sortOrder: filter.sortOrder,
+    };
+
+    setUserFilter(key, value);
 
     this.groupsFilter = filter;
   };
@@ -238,15 +252,14 @@ class GroupsStore {
     this.setSelection([]);
     this.setBufferSelection(null);
 
-    const filterStorageItem = localStorage.getItem(
-      `GroupsFilter=${this.userStore.user?.id}`,
-    );
+    if (withFilterLocalStorage) {
+      const filterObj = getUserFilter(
+        `${FILTER_GROUPS}=${this.userStore.user?.id}`,
+      );
 
-    if (filterStorageItem && withFilterLocalStorage) {
-      const splitFilter = filterStorageItem.split(",");
-      filterData.sortBy = splitFilter[0];
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2];
+      if (filterObj?.sortBy) filterData.sortBy = filterObj.sortBy;
+      if (filterObj?.pageCount) filterData.pageCount = filterObj.pageCount;
+      if (filterObj?.sortOrder) filterData.sortOrder = filterObj.sortOrder;
     }
 
     const isCustomCountPage =

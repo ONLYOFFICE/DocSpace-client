@@ -3,7 +3,7 @@
   "content": "New color scheme",
   "content_en_sha1_hash": "3c17e031c8936402d74774e9b5de79de0c318835",
   "created_at": "2025-05-19T21:30:51.962Z",
-  "updated_at": "2025-05-22T11:56:37.642Z",
+  "updated_at": "2025-05-28T09:30:02.492Z",
   "comment": {
     "text": "This translation key is used to display the text \"New color scheme\" as a header in settings pages, specifically in the PortalSettings categories. It appears on a button labeled \"Add Theme\".",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\appearance.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
       "line_number": 82,
       "context": "const defaultAppliedColorAccent = currentColorScheme.main?.accent;\n const defaultAppliedColorButtons = currentColorScheme.main.buttons;\n \n const isMobileView = currentDeviceType === DeviceType.mobile;\n \n const headerAddTheme = t(\"Settings:NewColorScheme\");\n const headerEditTheme = t(\"Settings:EditColorScheme\");\n \n const checkImgHover = (\n <ReactSVG className=\"check-hover\" src={CheckWhiteSvgUrl} />\n );",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2025-05-22T11:56:37.707Z",
+  "updated_at": "2025-07-02T07:49:19.824Z",
   "comment": {
     "text": "OAuth 2.0 is a translation key used to display the English content \"OAuth 2.0\" in various UI contexts throughout the application, primarily for title settings and button labels, such as on create and edit pages of OAuth-related settings.",
     "is_auto": true,
@@ -11,28 +11,46 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\index.js",
-      "line_number": 82,
-      "context": ");\n \n const oauthData = identityServerEnabled\n ? {\n id: \"oauth\",\n name: t(\"OAuth:OAuth\"),\n content: <OAuth />,\n }\n : {};\n \n const data = [",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage/index.tsx",
+      "line_number": 35,
+      "context": "import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import ClientForm from \"../sub-components/ClientForm\";\n \n const Component = () => {\n const { t } = useTranslation([\"OAuth\"]);\n \n React.useEffect(() => {\n setDocumentTitle(t(\"OAuth\"));\n }, [t]);",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage/index.tsx",
+      "line_number": 38,
+      "context": "import ClientForm from \"../sub-components/ClientForm\";\n \n const Component = () => {\n const { id } = useParams();\n \n const { t } = useTranslation([\"OAuth\"]);\n \n React.useEffect(() => {\n setDocumentTitle(t(\"OAuth\"));\n }, [t]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/index.tsx",
+      "line_number": 34,
+      "context": "import { useTranslation } from \"react-i18next\";\n \n import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n \n import useViewEffect from \"SRC_DIR/Hooks/useViewEffect\";\n import OAuthStore from \"SRC_DIR/store/OAuthStore\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import { OAuthContainer } from \"./OAuth.styled\";\n import { OAuthProps } from \"./OAuth.types\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
       "line_number": 93,
       "context": "href={apiOAuthLink}\n tag=\"a\"\n themeId={ThemeId.Link}\n style={{ marginBottom: \"20px\" }}\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </ColorTheme>\n ) : null}\n </p>\n \n <RegisterNewButton />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\List\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
       "line_number": 98,
       "context": "href={apiOAuthLink}\n tag=\"a\"\n themeId={ThemeId.Link}\n style={{ marginBottom: \"20px\" }}\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </ColorTheme>\n ) : null}\n <RegisterNewButton currentDeviceType={currentDeviceType} />\n {isLoading ? (\n <OAuthLoader viewAs={viewAs} />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\settingsTree.js",
-      "line_number": 534,
-      "context": "{\n id: \"portal-settings_catalog-oauth\",\n key: \"7-4\",\n icon: \"\",\n link: \"oauth\",\n tKey: \"OAuth:OAuth\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-oauth\",\n key: \"7-5\",",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/index.js",
+      "line_number": 82,
+      "context": ");\n \n const oauthData = identityServerEnabled\n ? {\n id: \"oauth\",\n name: t(\"OAuth:OAuth\"),\n content: <OAuth />,\n }\n : {};\n \n const data = [",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 548,
+      "context": "{\n id: \"portal-settings_catalog-oauth\",\n key: \"7-4\",\n icon: \"\",\n link: \"oauth\",\n tKey: \"OAuth:OAuth\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-api-keys\",\n key: \"7-5\",",
+      "module": "/packages/client"
     }
   ],
   "languages": {

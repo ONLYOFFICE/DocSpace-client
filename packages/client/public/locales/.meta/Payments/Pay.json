@@ -3,7 +3,7 @@
   "content": "Pay",
   "content_en_sha1_hash": "80c37573afed72cb3ec54133cd32508d33bcb52d",
   "created_at": "2025-05-19T21:30:53.714Z",
-  "updated_at": "2025-05-21T06:31:53.329Z",
+  "updated_at": "2025-07-01T15:57:36.286Z",
   "comment": {
     "text": "The translation key \"Pay\" is used to display the label for a payment-related button, typically found on a portal settings page. Translators should provide a clear and concise word or phrase that represents making a payment, such as \"Make Payment\" or \"Pay Now\".",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/ButtonContainer.js",
-      "line_number": 62,
-      "context": "return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod || isFreeAfterPaidPeriod ? (\n <Button\n className=\"pay-button\"\n label={t(\"Pay\")}\n size=\"medium\"\n primary\n isDisabled={isLoading || isDisabled}\n onClick={goToStripeAccount}\n isLoading={isLoading}",
+      "line_number": 61,
+      "context": "return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod ? (\n <Button\n className=\"pay-button\"\n label={t(\"Pay\")}\n size=\"medium\"\n primary\n isDisabled={isLoading || isDisabled}\n onClick={goToStripePortal}\n isLoading={isLoading}",
       "module": "/packages/client"
     }
   ],

@@ -102,7 +102,7 @@
   "FinalizeVersion": "Pabeigt versiju",
   "FolderRenamed": "Mape '{{folderTitle}}' ir pārvietota uz '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Mape <1>{{folderTitle}}</1> ir izveidota",
-  "GeneralLinkDeletedSuccessfully": "Jauna vispārīga saite ir veiksmīgi izveidota",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Jauna vispārīga saite ir veiksmīgi izveidota",
   "GoToMyRooms": "Doties uz telpas",
   "GoToSection": "Doties uz {{sectionName}}",
   "Index": "Indekss",

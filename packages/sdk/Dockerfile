@@ -1,5 +1,19 @@
 FROM node:20-bookworm-slim
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fonts-noto-cjk \
+    fonts-noto-core \
+    fonts-noto-ui-core \
+    fonts-noto-color-emoji \
+    fonts-noto-mono \
+    fonts-noto-extra \
+    fonts-roboto \
+    fonts-open-sans \
+    fonts-liberation \
+    fontconfig \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY  .yarn/plugins .yarn/plugins

@@ -26,7 +26,7 @@
 
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { Consumer } from "@docspace/shared/utils/context";
 import { RowsSkeleton, TableSkeleton } from "@docspace/shared/skeletons";

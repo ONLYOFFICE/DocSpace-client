@@ -3,7 +3,7 @@
   "content": "Subtitle with additional comments or descriptions for the current directory.",
   "content_en_sha1_hash": "9046b4a5b638c7549e8ae0bb284653c19d93c2e2",
   "created_at": "2025-05-19T21:30:54.700Z",
-  "updated_at": "2025-05-21T08:32:45.192Z",
+  "updated_at": "2025-07-01T15:57:36.195Z",
   "comment": {
     "text": "This translation key is used to provide a subtitle for a tooltip that displays additional information about a file selection option. It appears in a file selector UI component and serves as a descriptive title for the tooltip's content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 374,
+      "line_number": 378,
       "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Subtitle\")}\n description={t(\"SubtitleDescription\")}\n img={theme.isBase ? SubtitleUrl : SubtitleUrlDark}\n />\n }\n />\n </LabelGroup>",
       "module": "/packages/client"
     }

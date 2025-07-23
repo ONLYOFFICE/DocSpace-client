@@ -3,7 +3,7 @@
   "content": "Exporting index",
   "content_en_sha1_hash": "7723c7225d5966b8c4fd4be17b0302e3f2fbd5ef",
   "created_at": "2025-05-19T21:30:55.652Z",
-  "updated_at": "2025-05-22T11:56:37.546Z",
+  "updated_at": "2025-06-03T20:59:41.994Z",
   "comment": {
     "text": "This translation key is used to display a human-readable message indicating that an index is being exported. It appears in a UI component likely related to file management or uploading, such as a download or export button, providing context for users when they choose to export their index.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 274,
       "context": "case download:\n return i18n.t(\"Files:Downloading\");\n case duplicate:\n return i18n.t(\"Files:Duplicating\");\n case exportIndex:\n return i18n.t(\"Files:ExportingIndex\");\n case markAsRead:\n return i18n.t(\"Files:MarkingRead\");\n case deletePermanently:\n return i18n.t(\"Files:DeletingPermanently\");\n case upload:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

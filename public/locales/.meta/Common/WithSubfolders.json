@@ -3,7 +3,7 @@
   "content": "With subfolders",
   "content_en_sha1_hash": "bbacf97a73d40195b05d23b1680d86eb7a229fab",
   "created_at": "2025-05-19T21:30:49.612Z",
-  "updated_at": "2025-05-22T11:56:37.714Z",
+  "updated_at": "2025-05-28T09:30:02.583Z",
   "comment": {
     "text": "WithSubfolders is a term used to describe an option that allows users to search within subfolders. It appears as a checkbox label in a UI component, enabling or disabling this feature based on user configuration.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\sub-components\\SearchTerm.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SearchTerm.js",
       "line_number": 74,
       "context": "value={value}\n tabIndex={5}\n />\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:WithSubfolders\")}\n onChange={onChangeWithSubfolders}\n isChecked={config.withSubfolders}\n />\n </ColumnContainer>\n </>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

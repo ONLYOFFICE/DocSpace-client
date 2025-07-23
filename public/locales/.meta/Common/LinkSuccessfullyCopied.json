@@ -3,7 +3,7 @@
   "content": "Link successfully copied to clipboard",
   "content_en_sha1_hash": "0fdcf87a27dad18e3dbd7da5c4f771eb628a25c6",
   "created_at": "2025-05-19T21:30:46.217Z",
-  "updated_at": "2025-05-22T11:56:37.549Z",
+  "updated_at": "2025-06-03T20:59:41.769Z",
   "comment": {
     "text": "The \"LinkSuccessfullyCopied\" translation key is used to display a success message when a link is copied to the clipboard. This message appears as a toast notification when the user copies a primary link. It provides feedback after copying a successful link in various UI contexts such as withQuickButtons and onCopyPrimaryLink.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\HOCs\\withBadges.js",
+      "file_path": "/packages/client/src/HOCs/withBadges.js",
       "line_number": 129,
       "context": "onCopyPrimaryLink = async () => {\n const { t, item, getPrimaryLink } = this.props;\n const primaryLink = await getPrimaryLink(item.id);\n if (primaryLink) {\n copyShareLink(primaryLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkSuccessfullyCopied\"));\n }\n };\n \n openLocationFile = () => {\n const { checkAndOpenLocationAction, item } = this.props;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\HOCs\\withQuickButtons.js",
+      "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
       "line_number": 116,
       "context": "t,\n true,\n getManageLinkOptions(item, true),\n );\n // copyShareLink(primaryLink.sharedTo.shareLink);\n // toastr.success(t(\"Common:LinkSuccessfullyCopied\"));\n }\n };\n \n getStartDate = () => {\n const { roomLifetime, item } = this.props;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 585,
       "context": "true,\n this.getManageLinkOptions(item, true),\n );\n // copyShareLink(primaryLink.sharedTo.shareLink);\n // item.shared\n //   ? toastr.success(t(\"Common:LinkSuccessfullyCopied\"))\n //   : toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n \n this.publicRoomStore.setExternalLink(primaryLink);\n }\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

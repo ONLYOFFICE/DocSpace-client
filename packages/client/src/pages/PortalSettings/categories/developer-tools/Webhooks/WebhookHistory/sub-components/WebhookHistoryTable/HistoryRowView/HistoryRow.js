@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 import { Row } from "@docspace/shared/components/rows";
 import { retryWebhook } from "@docspace/shared/api/settings";

@@ -3,7 +3,7 @@
   "content": "Error when changing index. The problem may be caused on the server side. Reload the page or check your Internet connection settings.",
   "content_en_sha1_hash": "9b054804550dbcb34d17ee9af90ca617d5ef96c4",
   "created_at": "2025-05-19T21:30:55.600Z",
-  "updated_at": "2025-05-22T11:56:37.788Z",
+  "updated_at": "2025-07-10T11:11:07.105Z",
   "comment": {
     "text": "Error message displayed when there's a problem changing the index of files, possibly due to server-side issues. It instructs users to reload the page or check their internet connection settings. Appears as an error notification in the application.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\store\\FilesActionsStore.js",
-      "line_number": 3290,
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 3298,
       "context": ": filesList[newRepIndex - 1];\n \n this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\FilesActionsStore.js",
-      "line_number": 3290,
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 3298,
       "context": ": filesList[newRepIndex - 1];\n \n this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\FilesActionsStore.js",
-      "line_number": 3290,
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 3298,
       "context": ": filesList[newRepIndex - 1];\n \n this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);\n this.filesStore.setSelected(\"none\");\n } catch (e) {\n toastr.error(t(\"Files:ErrorChangeIndex\"));\n }\n };\n \n saveIndexOfFiles = async (t) => {\n const { getIndexingArray } = this.indexingStore;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -28,47 +28,10 @@ import { toUrlParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { request } from "@docspace/shared/api/client";
 import { convertFile } from "@docspace/shared/api/files";
-import { TEditHistory } from "@docspace/shared/api/files/types";
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import { TEditHistory, TFile } from "@docspace/shared/api/files/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFormRole } from "@/types";
-
-export const getBackUrl = (
-  rootFolderType: FolderType,
-  folderId: string | number,
-) => {
-  const search = window.location.search;
-  const shareIndex = search.indexOf("share=");
-  const key = shareIndex > -1 ? search.substring(shareIndex + 6) : null;
-
-  let backUrl = "";
-
-  if (rootFolderType === FolderType.Rooms) {
-    if (key) {
-      backUrl = `/rooms/share?key=${key}&folder=${folderId}`;
-    } else {
-      backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}`;
-    }
-  } else if (rootFolderType === FolderType.Archive) {
-    backUrl = `/rooms/archived/${folderId}/filter?folder=${folderId}`;
-  } else if (rootFolderType === FolderType.RoomTemplates) {
-    backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}&searchArea=${RoomSearchArea.Templates}`;
-  } else {
-    if (
-      rootFolderType === FolderType.SHARE ||
-      rootFolderType === FolderType.Recent
-    ) {
-      backUrl = `/rooms/personal/filter?folder=recent`;
-    } else {
-      backUrl = `/rooms/personal/filter?folder=${folderId}`;
-    }
-  }
-
-  // const origin = url.substring(0, url.indexOf("/doceditor"));
-  const origin = window.location.origin;
-
-  return `${combineUrl(origin, backUrl)}`;
-};
+import { toastr } from "@docspace/shared/components/toast";
 
 export const showDocEditorMessage = async (
   url: string,
@@ -101,7 +64,15 @@ export const getDataSaveAs = async (params: string) => {
 
     return data as string;
   } catch (e) {
-    console.error("error");
+    let errorMessage = "";
+
+    if (typeof e === "object") {
+      errorMessage = (
+        e as { response: { data: { error: { message: string } } } }
+      )?.response?.data?.error?.message;
+    }
+
+    toastr.error(errorMessage);
   }
 };
 
@@ -255,4 +226,10 @@ export const calculateAsideHeight = (callback?: () => void) => {
 
 export const isFormRole = (role: unknown): role is TFormRole[] => {
   return typeof role === "object" && Array.isArray(role) && "name" in role[0];
+};
+
+export const isPDFDocument = (file: TFile | undefined) => {
+  if (!file) return false;
+
+  return file.fileExst === ".pdf" && !file.isForm;
 };

@@ -363,6 +363,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
       display: flex;
       flex-direction: column;
       margin: -2px 0 0 0;
+      width: 100%;
     }
   }
 `;

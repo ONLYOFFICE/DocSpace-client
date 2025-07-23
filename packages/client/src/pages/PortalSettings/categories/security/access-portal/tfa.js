@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
@@ -62,6 +62,7 @@ const TwoFactorAuth = (props) => {
     appAvailable,
     tfaSettings,
     getTfaType,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const [type, setType] = useState("none");
@@ -95,6 +96,12 @@ const TwoFactorAuth = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("Tfa");
+  }, [currentDeviceType, isLoading]);
 
   useEffect(() => {
     checkWidth();

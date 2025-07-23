@@ -3,7 +3,7 @@
   "content": "No internet connection",
   "content_en_sha1_hash": "836f41ede479860e44d418cf75284a89bfc38c4a",
   "created_at": "2025-05-19T21:30:45.091Z",
-  "updated_at": "2025-05-22T11:56:37.844Z",
+  "updated_at": "2025-05-28T09:30:02.937Z",
   "comment": {
     "text": "This translation key is used for displaying a message when there is no internet connection. It appears as the header text in an error container component and provides feedback to users about their network status.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\errors\\ErrorOffline.tsx",
+      "file_path": "/packages/shared/components/errors/ErrorOffline.tsx",
       "line_number": 35,
       "context": "import ErrorContainer from \"../error-container/ErrorContainer\";\n \n export const ErrorOfflineContainer = () => {\n const { t } = useTranslation(\"Common\");\n \n return <ErrorContainer headerText={t(\"ErrorOfflineText\")} />;\n };",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

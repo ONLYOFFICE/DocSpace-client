@@ -37,7 +37,6 @@ import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { Encoder } from "@docspace/shared/utils/encoder";
-
 import * as Styled from "./TemplateAccess.styled";
 
 const MAX_AVATARS_COUNT = 3;

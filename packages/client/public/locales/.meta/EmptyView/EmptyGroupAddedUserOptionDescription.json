@@ -3,7 +3,7 @@
   "content": "Add group members and assign the head",
   "content_en_sha1_hash": "9a4a1f9a41fc7dac52783546c78743d3ecfbbb4b",
   "created_at": "2025-05-19T21:30:56.478Z",
-  "updated_at": "2025-05-22T11:56:37.626Z",
+  "updated_at": "2025-05-28T09:30:02.461Z",
   "comment": {
     "text": "The \"EmptyGroupAddedUserOptionDescription\" translation key is used to display a message when a new group is created and users can be added. It appears on an empty screen where users can add members and assign a head. The translator should provide a descriptive title for this option to indicate its purpose in the UI.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 122,
       "context": "if (isEmptyGroup && currentGroup) {\n return [\n {\n key: \"group-add-user\",\n title: t(\"PeopleTranslations:AddMembers\"),\n description: t(\"EmptyView:EmptyGroupAddedUserOptionDescription\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP,\n icon: <InviteUserIcon />,\n onClick: () => editGroup(currentGroup),\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

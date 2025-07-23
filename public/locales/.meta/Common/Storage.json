@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2025-05-22T11:56:37.564Z",
+  "updated_at": "2025-07-01T15:57:36.082Z",
   "comment": {
     "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
     "is_auto": true,
@@ -11,64 +11,64 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\helpers\\DetailsHelper.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
       "line_number": 205,
       "context": "return this.t(\"Common:Tags\");\n case \"Storage\":\n if (this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Users\\index.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
       "line_number": 299,
       "context": "</Text>\n </>\n ) : null}\n {showStorageInfo && !isGuests ? (\n <>\n <Text className=\"info_field\" noSelect title={t(\"Common:Storage\")}>\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"\n item={infoPanelSelection}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Users\\index.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
       "line_number": 299,
       "context": "</Text>\n </>\n ) : null}\n {showStorageInfo && !isGuests ? (\n <>\n <Text className=\"info_field\" noSelect title={t(\"Common:Storage\")}>\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"\n item={infoPanelSelection}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 633,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 633,
       "context": "showStorageInfo &&\n columns.splice(columns.length, 0, {\n key: \"Storage\",\n title:\n isDefaultRoomsQuotaSet && !isArchiveFolder\n ? t(\"Common:StorageAndQuota\")\n : t(\"Common:Storage\"),\n enable: roomQuotaColumnIsEnable,\n sortBy: SortByFieldName.UsedSpace,\n resizable: true,\n onChange: this.onColumnChange,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 737,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 702,
       "context": "const getFilterData = React.useCallback(async () => {\n const quotaFilter = [\n {\n key: FilterGroups.filterQuota,\n group: FilterGroups.filterQuota,\n label: t(\"Common:StorageQuota\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 776,
       "context": "};\n \n const storage = {\n id: \"sort-quota\",\n key: SortByFieldName.UsedSpace,\n label: t(\"Common:Storage\"),\n default: true,\n };\n \n const inviter = {\n id: \"inviter\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\components\\tiles\\template-tile\\TemplateTile.tsx",
+      "file_path": "/packages/shared/components/tiles/template-tile/TemplateTile.tsx",
       "line_number": 43,
       "context": "};\n \n export const TemplateTile = ({\n item,\n children,\n showStorageInfo,\n openUser,\n badges,\n SpaceQuotaComponent,\n onSelect,\n ...rest",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\management\\src\\categories\\settings\\index.tsx",
+      "file_path": "/packages/management/src/categories/settings/index.tsx",
       "line_number": 71,
       "context": "name: t(\"Settings:RestoreBackup\"),\n content: <Restore logoText={logoText} />,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: <EncryptDataPage logoText={logoText} />,\n },\n ];\n \n if (!isCommunity) {",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     },
     {
-      "file_path": "\\packages\\management\\src\\utils\\settingsTree.ts",
+      "file_path": "/packages/management/src/utils/settingsTree.ts",
       "line_number": 118,
       "context": "{\n id: \"management-settings_catalog-encrypt\",\n key: \"1-5\",\n icon: \"\",\n link: \"encrypt-data\",\n tKey: \"Common:Storage\",\n isHeader: true,\n },\n {\n id: \"management-settings_catalog-payments\",\n key: \"2\",",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     }
   ],
   "languages": {

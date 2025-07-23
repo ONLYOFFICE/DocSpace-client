@@ -3,7 +3,7 @@
   "content": "Show Folder Actions",
   "content_en_sha1_hash": "bef5318e8ccef5256166f49092d119670d1acc28",
   "created_at": "2025-05-19T21:30:50.017Z",
-  "updated_at": "2025-05-22T11:56:37.574Z",
+  "updated_at": "2025-06-18T07:34:14.987Z",
   "comment": {
     "text": "This translation key is used to display a title for a button or menu that shows folder actions. It appears in various UI elements, such as buttons and row headers, indicating whether a selected item is a folder and prompting the user to view its actions.",
     "is_auto": true,
@@ -11,22 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\sub-components\\ItemTitle\\Rooms\\context-btn.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/Rooms/context-btn.js",
       "line_number": 70,
       "context": "<ContextMenuButton\n id=\"info-options\"\n className=\"expandButton\"\n title={\n selection.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n onClick={onContextMenu}\n getData={getData}\n directionX=\"right\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableRow.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableRow.js",
       "line_number": 239,
       "context": "isIndexUpdated={isIndexUpdated}\n showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}\n displayFileExtension={displayFileExtension}\n title={\n item.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n isRoom={item.isRoom}\n isHighlight={isHighlight}\n hideColumns={hideColumns}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Header\\index.js",
-      "line_number": 647,
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 659,
       "context": "titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}\n onPlusClick={onCreateRoom}\n isEmptyPage={isEmptyPage}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/tiles/base-tile/BaseTile.tsx",
+      "line_number": 213,
+      "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"Translations:TitleShowFolderActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

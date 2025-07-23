@@ -26,6 +26,7 @@
 
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import Planet12ReactSvg from "PUBLIC_DIR/images/icons/12/planet.react.svg";
 import LifetimeRoomIcon from "PUBLIC_DIR/images/lifetime-room.react.svg";
@@ -38,11 +39,11 @@ import { Checkbox } from "../../checkbox";
 import { RoomIcon } from "../../room-icon";
 import { Tooltip } from "../../tooltip";
 
-import { StyledItem } from "../Selector.styled";
 import { ItemProps, Data, TSelectorItem } from "../Selector.types";
 import { EmployeeType, RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
 import InputItem from "./InputItem";
+import styles from "../Selector.module.scss";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -202,19 +203,24 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     );
 
     return (
-      <StyledItem
+      <div
         key={`${label}-${avatar}-${role}`}
-        isSelected={isSelected}
-        isMultiSelect={isMultiSelect}
         style={style}
         onClick={onClick}
-        className="test-22"
-        isDisabled={isDisabled}
+        className={classNames(
+          styles.selectorItem,
+          {
+            [styles.disabled]: isDisabled,
+            [styles.selectedSingle]: isSelected && !isMultiSelect,
+            [styles.hoverable]: !isDisabled,
+          },
+          "test-22",
+        )}
         data-testid={`selector-item-${index}`}
       >
         {avatar || isGroup ? (
           <Avatar
-            className="user-avatar"
+            className={styles.userAvatar}
             source={avatar ?? ""}
             role={currentRole}
             size={AvatarSize.min}
@@ -228,7 +234,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             logo={{ cover, large: "", original: "", small: "", medium: "" }}
             showDefault={false}
             badgeIconNode={badgeIconNode ?? undefined}
-            className="item-logo"
+            className={styles.itemLogo}
             isTemplate={isTemplate}
           />
         ) : color ? (
@@ -237,14 +243,14 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             title={label}
             showDefault
             badgeIconNode={badgeIconNode ?? undefined}
-            className="item-logo"
+            className={styles.itemLogo}
             isTemplate={isTemplate}
           />
         ) : icon ? (
           <RoomIcon
             title={label}
-            className="item-logo"
-            imgClassName="room-logo"
+            className={styles.itemLogo}
+            imgClassName={styles.roomLogo}
             logo={icon}
             showDefault={false}
             badgeIconNode={badgeIconNode ?? undefined}
@@ -254,9 +260,9 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         {renderCustomItem ? (
           renderCustomItem(label, typeLabel, email, isGroup, status)
         ) : (
-          <div className="selector-item_name">
+          <div className={styles.selectorItemName}>
             <Text
-              className="selector-item_label label-disabled"
+              className={classNames(styles.selectorItemLabel, "label-disabled")}
               fontWeight={600}
               fontSize="14px"
               noSelect
@@ -265,7 +271,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             >
               {label}
               {displayFileExtension && ext ? (
-                <span className="item-file-exst">{ext}</span>
+                <span className={styles.itemFileExst}>{ext}</span>
               ) : null}
             </Text>
 
@@ -273,7 +279,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
               <>
                 <div
                   data-tooltip-id={`${item.id}_iconTooltip`}
-                  className="title-icon"
+                  className={styles.titleIcon}
                 >
                   <LifetimeRoomIcon />
                 </div>
@@ -290,7 +296,10 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
         {isDisabled && disabledText ? (
           <Text
-            className="selector-item_label disabled-text"
+            className={classNames(
+              styles.selectorItemLabel,
+              styles.disabledText,
+            )}
             fontWeight={600}
             fontSize="13px"
             lineHeight="20px"
@@ -301,14 +310,14 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         ) : (
           isMultiSelect && (
             <Checkbox
-              className="checkbox"
+              className={classNames(styles.checkbox, "checkbox")}
               isChecked={isSelected}
               isDisabled={isDisabled}
               onChange={onChangeAction}
             />
           )
         )}
-      </StyledItem>
+      </div>
     );
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 import { DeviceType } from "../../enums";
 import Article from ".";
 import { ArticleProps } from "./Article.types";

@@ -3,7 +3,7 @@
   "content": "Create file copy",
   "content_en_sha1_hash": "c53615e6b0064e7275aa77e2122140291698d2e9",
   "created_at": "2025-05-19T21:30:43.875Z",
-  "updated_at": "2025-05-22T11:56:37.343Z",
+  "updated_at": "2025-05-28T09:30:02.217Z",
   "comment": {
     "text": "The translation key \"CreateFileCopy\" is used to display the text for a file copy creation action in a UI component, typically found in a conflict resolution dialog or file management interface. It appears as a button label or title within the dialog, prompting users to create a duplicate of a file. This text should be clear and concise for the end-user to understand the action's purpose.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 287,
       "context": ": t(\"Common:MultiplyOverwrite\");\n };\n \n const getDuplicateTitle = () => {\n return isFileDialog\n ? t(\"Common:CreateFileCopy\")\n : isFolderDialog\n ? t(\"Common:CopyAndKeepBothFolders\")\n : t(\"Common:CopyAndKeepAll\");\n };\n const getDuplicateDescription = () => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\ConflictResolveDialog\\ConflictResolveDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
       "line_number": 63,
       "context": "/>\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

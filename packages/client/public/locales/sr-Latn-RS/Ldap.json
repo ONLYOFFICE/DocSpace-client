@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "Atribut Imena Grupe",
   "LdapGroupNameAttributeTooltip": "Molimo navedite atribut objekta koji odgovara imenu grupe.",
   "LdapGroupUserAttributeTooltip": "Unesite korisnički atribut objekta korišćen da odredi da li je ovaj korisnik član grupa.",
-  "LdapIntro": "LDAP je način da se uvezu korisnici i grupe sa LDAP servera, kao i da se obezbedi autentifikacija korisnika na portalu korišćenjem prijava/lozinki uskladištenih na LDAP serveru. Korisnici će biti uvezeni odmah nakon što se podešavanja sačuvaju. Korisnici dodati kasnije će biti uvezeni tokom njihove prve autentifikacije na portalu.",
+  "LdapIntro": "Uvezite korisnike i grupe putem LDAP-a i omogućite autentifikaciju korisnika pomoću korisničkih imena/šifri sa LDAP servera. Korisnici će biti uvezeni odmah nakon čuvanja podešavanja. Kasnije dodati korisnici biće uvezeni prilikom prve autentifikacije. Ako želite da pristup obezbedite samo preko LDAP-a, onemogućite opciju za pozivanje novih {{productName}} članova preko Kontakata: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atribut Prijave",
   "LdapLoginAttributeTooltip": "Unesite atribut objekta koji odgovara korisničkoj prijavi.",
   "LdapLoginTooltip": "Molimo navedite korisnika za Prijavu koji ima prava pristupa za čitanje LDAP servera",

@@ -3,7 +3,7 @@
   "content": "Archive",
   "content_en_sha1_hash": "2621c6fd51a58e1d1d5c491aac71488647b20224",
   "created_at": "2025-05-19T21:30:43.051Z",
-  "updated_at": "2025-05-22T11:56:37.622Z",
+  "updated_at": "2025-05-28T09:30:02.458Z",
   "comment": {
     "text": "This translation key is used to display the text \"Archive\" as a label when indicating that a file has been archived. It appears in a table view cell on the Home page, displaying information about different types of files.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\sub-components\\TypeCell.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 41,
       "context": "const getItemType = () => {\n switch (fileType) {\n case FileType.Unknown:\n return fileTypeName || t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\getFileType.ts",
+      "file_path": "/packages/shared/utils/getFileType.ts",
       "line_number": 10,
       "context": "export const getFileTypeName = (fileType: FileType | string, t: TFunction) => {\n switch (fileType) {\n case FileType.Unknown:\n return t(\"Common:Unknown\");\n case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

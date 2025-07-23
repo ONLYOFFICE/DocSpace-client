@@ -3,7 +3,7 @@
   "content": "We recommend contacting the {{productName}} owner to choose a new Payer.",
   "content_en_sha1_hash": "b5344d317fd4c5a20440282f49db1b7581e966d7",
   "created_at": "2025-05-19T21:30:53.699Z",
-  "updated_at": "2025-05-21T06:34:36.718Z",
+  "updated_at": "2025-07-01T15:57:36.282Z",
   "comment": {
     "text": "This translation key is used to display a message when an admin attempts to pay using an email address without an active subscription. It recommends contacting the product owner to choose a new Payer. This message appears in the UI when an invalid payment method is detected.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PayerInformationContainer.js",
-      "line_number": 127,
-      "context": "if (isNotPaidPeriod || isFreeAfterPaidPeriod) {\n invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return userNotFound + invalidEmailDescription;\n }",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
+      "line_number": 134,
+      "context": "if (isNotPaidPeriod) {\n invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return userNotFound + invalidEmailDescription;\n }",
       "module": "/packages/client"
     }
   ],

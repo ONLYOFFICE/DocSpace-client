@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Outlet, useParams, useLocation } from "react-router-dom";
+import { Outlet, useParams, useLocation } from "react-router";
 
 import Section from "@docspace/shared/components/section";
 

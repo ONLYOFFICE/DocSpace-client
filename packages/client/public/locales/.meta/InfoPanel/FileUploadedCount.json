@@ -3,7 +3,7 @@
   "content": "Files added ({{count}}).",
   "content_en_sha1_hash": "6967f445fbc05fa8f07f7d586b8da6d95254bbeb",
   "created_at": "2025-05-19T21:30:54.829Z",
-  "updated_at": "2025-05-22T11:56:37.579Z",
+  "updated_at": "2025-05-28T09:30:02.423Z",
   "comment": {
     "text": "This translation key displays a message indicating the number of files uploaded, used to provide feedback on file addition in a history view. It appears as a count value within the \"Files added\" section of the UI.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 45,
       "context": "switch (feed.action.key) {\n case \"FileCreated\":\n return t(\"InfoPanel:FileCreated\");\n case \"FileUploaded\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FileUploadedCount\", {\n count,\n });\n return t(\"InfoPanel:FileUploaded\");\n case \"UserFileUpdated\":\n return t(\"InfoPanel:UserFileUpdated\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -50,7 +50,7 @@
   flex-direction: column;
   gap: 8px;
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 11px;
 
   &[data-with-dev-tools="false"] {
     margin-top: auto;
@@ -64,12 +64,21 @@
     &[data-show-text="true"] {
       margin-inline-start: 8px;
     }
+
+    &[data-with-dev-tools="false"] {
+      margin-bottom: 61px;
+    }
+
+    &[data-with-dev-tools="true"] {
+      margin-bottom: 20px;
+    }
   }
 
   @include mobile {
     position: relative;
     bottom: 0px;
     margin-top: 32px;
+    margin-bottom: 0;
 
     &[data-with-dev-tools="true"] {
       margin-top: 16px;
@@ -82,7 +91,7 @@
 
   :global(.download-app-list) {
     display: flex;
-    gap: 8px;
+    gap: 13px;
   }
 }
 
@@ -174,7 +183,7 @@
 
   :global(.article-hide-menu-container) {
     align-items: center;
-    margin-inline-start: 16px;
+    margin-inline-start: 19px;
 
     @include tablet {
       &[data-show-text="true"] {
@@ -186,7 +195,7 @@
     }
 
     :global(.article-hide-menu-text) {
-      margin-inline-start: 8px;
+      margin-inline-start: 12px;
       color: var(--accent-main);
     }
   }
@@ -248,7 +257,7 @@
   -webkit-tap-highlight-color: #{$tap-highlight};
 
   @include tablet {
-    padding: 20px 8px 17px;
+    padding: 15px 11px 18px 6px;
     margin: 0;
     height: 61px;
     min-height: 61px;
@@ -261,6 +270,7 @@
 
     &[data-show-text="false"] {
       justify-content: center;
+      padding: 14px 11px 17px 8px;
     }
   }
 
@@ -516,8 +526,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 22px;
+  margin-top: 8px;
   cursor: pointer;
+  color: var(--back-button-text-color);
 
   p {
     font-size: 15px;
@@ -528,16 +540,29 @@
     p {
       font-size: 13px;
     }
+    margin-inline-start: 12px;
   }
 
   @include tablet {
+    margin-top: 9px;
+
     &[data-show-article="false"] {
       justify-content: center;
+      margin-top: 5px;
+      margin-inline-end: 3px;
+    }
+    &[data-show-article="true"] {
+      margin-inline-start: 10px;
+      gap: 11px;
+      margin-top: 5px;
     }
   }
 
   @include mobile {
     margin-bottom: 0;
+    margin-inline-start: 4px;
+    margin-top: 2px;
+    gap: 12px;
   }
 
   .arrowIcon {

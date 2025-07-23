@@ -27,7 +27,7 @@
 import React, { useState, useEffect, useTransition, Suspense } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";

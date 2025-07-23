@@ -739,7 +739,7 @@ class ContextOptionsStore {
       endLoader(() =>
         runInAction(() => {
           setGroupMenuBlocked(false);
-          clearActiveOperations([item.id], null);
+          clearActiveOperations([item.id]);
         }),
       );
     }
@@ -1842,6 +1842,10 @@ class ContextOptionsStore {
         isSeparator: true,
       },
       {
+        key: "separator4",
+        isSeparator: true,
+      },
+      {
         id: "option_reconnect-storage",
         key: "reconnect-storage",
         label: t("Common:ReconnectStorage"),
@@ -2720,7 +2724,8 @@ class ContextOptionsStore {
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const { isRoomsFolder, isPrivacyFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isPrivacyFolder, isFlowsFolder } =
+      this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
     const isFormRoomType =
@@ -2837,15 +2842,18 @@ class ContextOptionsStore {
     ];
 
     const showUploadFolder = !(isMobile || isTablet);
+
     const options = isRoomsFolder
-      ? [
-          {
-            key: "new-room",
-            label: t("Common:NewRoom"),
-            onClick: this.onCreateRoom,
-            icon: CatalogRoomsReactSvgUrl,
-          },
-        ]
+      ? isFlowsFolder
+        ? []
+        : [
+            {
+              key: "new-room",
+              label: t("Common:NewRoom"),
+              onClick: this.onCreateRoom,
+              icon: CatalogRoomsReactSvgUrl,
+            },
+          ]
       : [
           createNewDoc,
           createNewSpreadsheet,

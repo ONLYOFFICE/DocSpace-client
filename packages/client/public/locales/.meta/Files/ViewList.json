@@ -3,7 +3,7 @@
   "content": "List",
   "content_en_sha1_hash": "a1fffaaafb7cc996685bceb829c053cc4f7de43d",
   "created_at": "2025-05-19T21:30:56.303Z",
-  "updated_at": "2025-05-21T11:02:25.106Z",
+  "updated_at": "2025-07-01T15:57:36.132Z",
   "comment": {
     "text": "The translation key \"ViewList\" is used to display the label for a filter option that controls the layout of data in a list view. In the UI, it appears as a button or toggle on the filtering options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1149,
+      "line_number": 1130,
       "context": "const getViewSettingsData = React.useCallback(() => {\n const viewSettings = [\n {\n id: \"view-switch_rows\",\n value: \"row\",\n label: t(\"ViewList\"),\n icon: ViewRowsReactSvgUrl,\n },\n {\n id: \"view-switch_tiles\",\n value: \"tile\",",
       "module": "/packages/client"
     }

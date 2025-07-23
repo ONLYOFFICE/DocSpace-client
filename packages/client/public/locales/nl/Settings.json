@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Selecteer secties om te importeren. Ze verschijnen in de overeenkomstige secties van {{productName}}.",
   "IncludedInBusiness": "Inbegrepen in Business plan",
   "IntegrationRequest": "Mist u een handige integratie of component in {{organizationName}} {{productName}}? Laat een verzoek achter bij ons team en wij zullen ernaar kijken.",
+  "InvitationSettings": "Uitnodigingsinstellingen",
+  "InvitationSettingsContacts": "Nodig {{productName}} leden uit via Contacten",
+  "InvitationSettingsContactsDescription": "Schakel deze optie in om toe te staan dat uitnodigingen naar nieuwe {{productName}} leden worden verzonden via de Contacten sectie. Schakel deze optie uit als u nieuwe leden uitsluitend via LDAP wilt uitnodigen.",
+  "InvitationSettingsDescription": "Configureer de uitnodigingsopties voor interne leden en externe gasten van uw {{productName}}. Deze instellingen kunnen u helpen om te voldoen aan de beveiligingsrichtlijnen van uw bedrijf, bijvoorbeeld als u LDAP of andere gebruikersbeheersystemen gebruikt.",
+  "InvitationSettingsGuests": "Sta gasten uit te nodigen",
+  "InvitationSettingsGuestsDescription": "Schakel deze optie in om alle {{productName}} leden de mogelijkheid te geven externe gasten uit te nodigen voor ruimtes.",
+  "InvitationSettingsMobile": "Configureer de uitnodigingsopties voor interne leden en externe gasten van uw {{productName}}.",
   "InviteLetterTooltip": "Als u deze optie aanvinkt, ontvangen alle nieuwe gebruikers een uitnodigingsbrief met autorisatiegegevens.",
   "IPSecurity": "IP Beveiliging",
   "IPSecurityMobileDescription": "IP Beveiliging wordt gebruikt om het inloggen op het portaal te beperken vanaf alle IP-adressen behalve bepaalde adressen.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Logo voor de Over pagina",
   "LogoCompact": "Logo voor het compacte linkermenu",
   "LogoDocsEditor": "Logo voor de koptekst van de editors",
-  "LogoDocsEditorEmbedded": "Logo voor de koptekst van de editors - ingesloten modus",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo voor de koptekst van de ruimte",
   "LogoLogin": "Logo voor de inlogpagina en e-mails",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Stuur uitnodigingsbrief",
   "SendNotificationAboutRestoring": "Stuur notificatie over ruimte herstel aan gebruikers",
   "ServerSideEncryptionMethod": "Server Side Encryptiemethode",
+  "Services": "Diensten",
   "ServiceUrl": "Service Url",
   "SessionLifetime": "Duur van de sessie",
   "SessionLifetimeMobileDescription": "Duur van de sessie hiermee kan de tijd (in minuten) worden ingesteld waarna de gebruikers van de {{productName}} opnieuw de inloggegevens moeten invoeren om toegang te krijgen tot de ruimte..",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
-  "YourLogo": "Uw logo"
+  "YourLogo": "Uw logo",
+  "AdManagement": "Ad Management",
+  "AdManagementDescription": "Kies of promotiebanners worden weergegeven in uw {{productName}}."
 }

@@ -26,24 +26,25 @@
 
 import React from "react";
 
+import { classNames } from "@docspace/shared/utils/classNames";
+
+import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "../../context-menu-button";
 import { ContextMenuModel } from "../../context-menu";
-
 import {
-  BreadCrumbsProps,
   TBreadCrumb,
   TDisplayedItem,
+  BreadCrumbsProps,
 } from "../Selector.types";
-import {
-  StyledBreadCrumbs,
-  StyledItemText,
-  StyledArrowRightSvg,
-} from "../Selector.styled";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";
+import styles from "../Selector.module.scss";
+import { Text } from "../../text";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 const calculateDisplayedItems = (
   items: TBreadCrumb[],
@@ -159,8 +160,11 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     breadCrumbsLoader,
     isBreadCrumbsLoading,
     onSelectBreadCrumb,
+    bodyIsLoading,
   } = React.useContext(BreadCrumbsContext);
   const setIsSearch = React.useContext(SearchDispatchContext);
+
+  const { isRTL } = useInterfaceDirection();
 
   const onClickItem = React.useCallback(
     ({ item }: { item: TBreadCrumb }) => {
@@ -195,20 +199,30 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
       "minmax(1px, max-content) 12px minmax(1px, max-content)";
   }
 
-  if (!withBreadCrumbs || !visible) return null;
+  if (!withBreadCrumbs || !visible) {
+    if (withBreadCrumbs && !visible && bodyIsLoading) return breadCrumbsLoader;
+
+    return null;
+  }
 
   if (isBreadCrumbsLoading) return breadCrumbsLoader;
 
   return (
-    <StyledBreadCrumbs
-      itemsCount={displayedItems.length}
-      gridTemplateColumns={gridTemplateColumns}
+    <div
+      id="selector_bread_crumbs"
+      className={styles.breadCrumbs}
+      style={
+        {
+          "--items-count": displayedItems.length,
+          "--grid-template-columns": gridTemplateColumns,
+        } as React.CSSProperties
+      }
     >
       {displayedItems.map((item, index) =>
         item.isList ? (
           <ContextMenuButton
             key={`bread-crumb-item-${item.id}`}
-            className="context-menu-button"
+            className={styles.contextMenuButton}
             displayType={ContextMenuButtonDisplayType.dropdown}
             getData={() => {
               const items = item.listItems
@@ -218,17 +232,24 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
             }}
           />
         ) : item.isArrow ? (
-          <StyledArrowRightSvg key={`bread-crumb-item-${item.id}`} />
+          <ArrowIcon
+            className={classNames(styles.arrowRightSvg, {
+              [styles.rtl]: isRTL,
+            })}
+            key={`bread-crumb-item-${item.id}`}
+          />
         ) : (
-          <StyledItemText
+          <Text
             key={`bread-crumb-item-${item.id}`}
             fontSize="16px"
             fontWeight={600}
             lineHeight="22px"
+            className={classNames(styles.itemText, {
+              [styles.isNotCurrent]: index !== displayedItems.length - 1,
+              [styles.isNotLoading]: !isBreadCrumbsLoading,
+            })}
             noSelect
             truncate
-            isCurrent={index === displayedItems.length - 1}
-            isLoading={isBreadCrumbsLoading}
             onClick={() => {
               if (index === displayedItems.length - 1 || isBreadCrumbsLoading)
                 return;
@@ -243,10 +264,10 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
             }}
           >
             {item.label}
-          </StyledItemText>
+          </Text>
         ),
       )}
-    </StyledBreadCrumbs>
+    </div>
   );
 };
 

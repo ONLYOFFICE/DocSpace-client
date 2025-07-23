@@ -102,7 +102,7 @@
   "FinalizeVersion": "Versiyonu sonlandır",
   "FolderRenamed": "'{{folderTitle}}' isimli klasörün adı '{{newFoldedTitle}}' olarak değiştirildi",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1> klasörü oluşturuldu",
-  "GeneralLinkDeletedSuccessfully": "Yeni genel bağlantı başarıyla oluşturuldu",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Yeni genel bağlantı başarıyla oluşturuldu",
   "GoToMyRooms": "Odalarıma git",
   "GoToSection": "{{sectionName}} bölümüne git",
   "Index": "Dizin",

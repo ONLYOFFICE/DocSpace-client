@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { NavigateFunction, Location } from "react-router-dom";
+import { NavigateFunction, Location } from "react-router";
 
 import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";

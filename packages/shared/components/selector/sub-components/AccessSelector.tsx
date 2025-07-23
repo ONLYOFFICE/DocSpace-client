@@ -26,11 +26,12 @@
 
 import React, { useEffect, useState } from "react";
 
-import { ComboBoxSize, TOption } from "../../combobox";
+import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { AccessSelectorProps, TAccessRight } from "../Selector.types";
 import { isMobile } from "../../../utils";
-import { StyledAccessSelector, StyledComboBox } from "../Selector.styled";
+import { AccessRightSelect } from "../../access-right-select";
 import { SelectorAccessRightsMode } from "../Selector.enums";
+import styles from "../Selector.module.scss";
 
 const SELECTOR_PADDINGS = 32;
 
@@ -58,7 +59,8 @@ const AccessSelector = (props: AccessSelectorProps) => {
   }, [footerRef]);
 
   return accessRightsMode === SelectorAccessRightsMode.Compact ? (
-    <StyledComboBox
+    <ComboBox
+      className={styles.comboBox}
       onSelect={onSelect}
       options={accessRights as TOption[]}
       size={ComboBoxSize.content}
@@ -71,8 +73,8 @@ const AccessSelector = (props: AccessSelectorProps) => {
       forceCloseClickOutside
     />
   ) : (
-    <StyledAccessSelector
-      className=""
+    <AccessRightSelect
+      className={styles.accessRightSelect}
       selectedOption={selectedAccessRight as TOption}
       onSelect={onSelect}
       accessOptions={accessRights as TOption[]}

@@ -1,0 +1,28 @@
+{
+  "key_path": "ForDays",
+  "content": "for days: {{count}}",
+  "content_en_sha1_hash": "cd1bd72ae73cdaf3571fecf9fcbf41003be98818",
+  "created_at": "2025-06-03T20:59:26.739Z",
+  "updated_at": "2025-06-26T19:00:18.271Z",
+  "comment": {
+    "text": "This translation key is used to display a duration-based pricing indicator (\"for days: {{count}}\") in a UI component, likely in a payment or subscription settings page. It appears on screen at line 139 of the PortalSettings/categories/services/sub-components/PlanUpgradePreview.tsx file, and its purpose is to show users how long they will be charged for a specific service period.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:42.535Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanUpgradePreview.tsx",
+      "line_number": 191,
+      "context": "<Text\n fontWeight=\"600\"\n fontSize=\"11px\"\n className={styles.priceForEach}\n >\n {t(\"ForDays\", { count: days })}\n </Text>\n </>\n )}\n </div>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

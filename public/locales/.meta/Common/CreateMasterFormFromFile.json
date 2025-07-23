@@ -3,7 +3,7 @@
   "content": "Create PDF form from file",
   "content_en_sha1_hash": "fce44ddb1a5172dbad9272208f3605d3c3304562",
   "created_at": "2025-05-19T21:30:43.903Z",
-  "updated_at": "2025-05-22T11:56:37.353Z",
+  "updated_at": "2025-05-28T09:30:02.133Z",
   "comment": {
     "text": "This translation key is used to display a button label that indicates the user should create a PDF form from a file. It appears in a dialog where users can select files and convert them into forms. The text helps provide context for translators when describing the \"Create Master Form From File\" functionality.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConvertPasswordDialog\\index.js",
-      "line_number": 70,
-      "context": "formCreationInfo.fromExst === \".docxf\" &&\n formCreationInfo.toExst === \".oform\";\n \n const dialogHeading = makeForm\n ? t(\"Common:MakeForm\")\n : t(\"Common:CreateMasterFormFromFile\");\n \n const onClose = () => {\n setConvertPasswordDialogVisible(false);\n setFormCreationInfo(null);\n };",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\utils.ts",
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 65,
       "context": "productName: t(\"Common:ProductName\"),\n });\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");\n \n return t(\"Common:SaveButton\");\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConvertPasswordDialog/index.js",
+      "line_number": 70,
+      "context": "formCreationInfo.fromExst === \".docxf\" &&\n formCreationInfo.toExst === \".oform\";\n \n const dialogHeading = makeForm\n ? t(\"Common:MakeForm\")\n : t(\"Common:CreateMasterFormFromFile\");\n \n const onClose = () => {\n setConvertPasswordDialogVisible(false);\n setFormCreationInfo(null);\n };",
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -98,10 +98,12 @@ export const convertFilesToItems: (
   files: TFile[],
   getIcon: (fileExst: string) => string,
   filterParam?: string | number,
+  includedItems?: (number | string)[],
 ) => TSelectorItem[] = (
   files: TFile[],
   getIcon: (fileExst: string) => string,
   filterParam?: string | number,
+  includedItems?: (number | string)[],
 ) => {
   const items = files.map((file) => {
     const {
@@ -118,6 +120,10 @@ export const convertFilesToItems: (
     const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
     const label = getTitleWithoutExtension(file, false);
 
+    const isDisabled = includedItems?.length
+      ? !includedItems.includes(id)
+      : false;
+
     return {
       id,
       label,
@@ -126,7 +132,7 @@ export const convertFilesToItems: (
       security,
       parentId: folderId,
       rootFolderType,
-      isDisabled: !filterParam,
+      isDisabled: !filterParam || isDisabled,
       fileExst,
       fileType,
       viewUrl,
@@ -199,8 +205,9 @@ export const configureFilterByFilterParam = (
   filter: FilesFilter,
   filterParam: string | number,
   extsWebEdited: string[],
+  applyFilterOption?: ApplyFilterOption,
 ) => {
-  filter.applyFilterOption = ApplyFilterOption.Files;
+  filter.applyFilterOption = applyFilterOption ?? ApplyFilterOption.Files;
   switch (filterParam) {
     case FilesSelectorFilterTypes.DOCX:
       filter.extension = FilesSelectorFilterTypes.DOCX;
@@ -225,6 +232,10 @@ export const configureFilterByFilterParam = (
 
     case FilterType.DocumentsOnly:
       filter.filterType = FilterType.DocumentsOnly;
+      break;
+
+    case FilterType.DiagramsOnly:
+      filter.filterType = FilterType.DiagramsOnly;
       break;
 
     case FilterType.PDFForm:

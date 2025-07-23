@@ -102,7 +102,7 @@
   "FinalizeVersion": "Viimeistele versio",
   "FolderRenamed": "Kansio ’{{folderTitle}}’ nimettiin uudelleen nimeksi ’{{newFoldedTitle}}’",
   "FolderSuccessfullyCreated": "Kansio <1>{{folderTitle}}</1> luotu",
-  "GeneralLinkDeletedSuccessfully": "Uusi yleinen linkki onnistuneesti luotu",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Uusi yleinen linkki onnistuneesti luotu",
   "GoToMyRooms": "Mene huoneisiin",
   "GoToSection": "Siirry {{sectionName}}-osioon",
   "Index": "Indeksi",

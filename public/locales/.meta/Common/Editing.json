@@ -3,7 +3,7 @@
   "content": "Editing",
   "content_en_sha1_hash": "3b9ba1a2515114c2d31fe79b93a1d942f595ac41",
   "created_at": "2025-05-19T21:30:44.758Z",
-  "updated_at": "2025-05-22T11:56:37.858Z",
+  "updated_at": "2025-05-28T09:30:02.950Z",
   "comment": {
     "text": "This translation key is used to display \"Editing\" as a label for editing permissions in a share component, likely on a share settings button or within a settings dialog. The translator should focus on creating a clear and concise phrase that accurately represents this permission type.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\share\\Share.helpers.tsx",
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 96,
       "context": ") => {\n const accessOptions = [\n available.Editing && {\n access: ShareAccessRights.Editing,\n key: \"editing\",\n label: t(\"Common:Editing\"),\n icon: AccessEditReactSvgUrl,\n },\n available.CustomFilter && {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\components\\share\\Share.helpers.tsx",
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 96,
       "context": ") => {\n const accessOptions = [\n available.Editing && {\n access: ShareAccessRights.Editing,\n key: \"editing\",\n label: t(\"Common:Editing\"),\n icon: AccessEditReactSvgUrl,\n },\n available.CustomFilter && {\n access: ShareAccessRights.CustomFilter,\n key: \"custom-filter\",",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

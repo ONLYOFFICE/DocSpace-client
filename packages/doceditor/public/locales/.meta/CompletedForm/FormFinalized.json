@@ -3,7 +3,7 @@
   "content": "Form Finalized",
   "content_en_sha1_hash": "7aeacfbbcf22d3c00d1d10f7dcb449748be00879",
   "created_at": "2025-05-19T21:30:57.167Z",
-  "updated_at": "2025-05-22T11:56:37.803Z",
+  "updated_at": "2025-05-28T09:30:02.870Z",
   "comment": {
     "text": "The translation key \"FormFinalized\" is used to display the message \"Form Finalized\" when a form is successfully completed. This text appears in the UI as a confirmation header on a form that has been finalized, likely on a button or dialog prompt.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\completed-form\\CompletedVDRForm.tsx",
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
       "line_number": 146,
       "context": "const header = useMemo(() => {\n if (isStartFilling) {\n return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");\n }\n \n if (completed) return t(\"CompletedForm:FormFinalized\");\n \n return t(\"CompletedForm:FormSectionCompleted\");\n }, [t, isStartFilling, completed]);\n \n const headerDescription = useMemo(() => {",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

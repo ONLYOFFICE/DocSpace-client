@@ -3,7 +3,7 @@
   "content": "Easy form uploading",
   "content_en_sha1_hash": "53b5cd8f127b338e857ffd707341bec35ab11adc",
   "created_at": "2025-05-19T21:30:55.142Z",
-  "updated_at": "2025-05-21T10:46:01.732Z",
+  "updated_at": "2025-07-10T11:11:07.133Z",
   "comment": {
     "text": "This translation key is used for the header text in a guidance component that explains easy form uploading. It appears in a guidance dialog and displays the product name and section name related to file uploads.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 84,
+      "line_number": 87,
       "context": "},\n ],\n },\n {\n id: 5,\n header: t(\"FormFillingTipsDialog:HeaderUploading\"),\n description: t(\"FormFillingTipsDialog:DescriptionUploading\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n key: \"form-filling-uploading\",",
       "module": "/packages/shared"
     }

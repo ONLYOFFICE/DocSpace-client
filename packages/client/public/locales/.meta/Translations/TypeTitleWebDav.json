@@ -3,7 +3,7 @@
   "content": "WebDAV",
   "content_en_sha1_hash": "521b4c8ba2a9f86f88840731a57458aa7c896b1c",
   "created_at": "2025-05-19T21:30:50.032Z",
-  "updated_at": "2025-05-22T11:56:37.542Z",
+  "updated_at": "2025-06-03T20:59:41.991Z",
   "comment": {
     "text": "This translation key is used to display a title for different cloud storage services on a web interface. It appears in contexts such as buttons or dialogs where users can select cloud storage options. The translation depends on the specific service being chosen.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 151,
       "context": "return t(\"Translations:TypeTitleSkyDrive\");\n \n case \"SharePoint\":\n return t(\"Translations:TypeTitleSharePoint\");\n case \"WebDav\":\n return t(\"Translations:TypeTitleWebDav\");\n case \"kDrive\":\n return t(\"Translations:TypeTitlekDrive\");\n case \"Yandex\":\n return t(\"Translations:TypeTitleYandex\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

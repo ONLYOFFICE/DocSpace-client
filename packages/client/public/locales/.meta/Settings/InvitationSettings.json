@@ -1,0 +1,46 @@
+{
+  "key_path": "InvitationSettings",
+  "content": "Invitation Settings",
+  "content_en_sha1_hash": "8a0e33d62c6b19c6f0e574b7a75348dbf29f66a4",
+  "created_at": "2025-05-28T09:33:04.830Z",
+  "updated_at": "2025-07-02T07:49:19.835Z",
+  "comment": {
+    "text": "The \"InvitationSettings\" translation key is used to display the title of a section related to invitation settings in a security access portal. This title appears on a mobile view and is part of a category list. The translator should ensure that this text accurately reflects the content and functionality of the UI component.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:39:04.699Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
+      "line_number": 85,
+      "context": "return () => window.removeEventListener(\"resize\", onCheckView);\n }, [isLdapAvailable, load, t]);\n \n if (!isLoaded && isLdapAvailable) return <LdapLoader />;\n \n const link = `${`${t(\"Settings:ManagementCategorySecurity\")} > ${t(\"Settings:InvitationSettings\")}.`}`;\n \n return (\n <StyledLdapPage isSmallWindow={isSmallWindow}>\n <Text className=\"intro-text settings_unavailable\">\n <Trans",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
+      "line_number": 41,
+      "context": "import { isDesktop } from \"@docspace/shared/utils/device\";\n import { MainContainer } from \"../StyledSecurity\";\n import { TfaSection } from \"./tfa\";\n import { PasswordStrengthSection } from \"./passwordStrength\";\n import { TrustedMailSection } from \"./trustedMail\";\n import { InvitationSettingsSection } from \"./invitationSettings\";\n import { IpSecuritySection } from \"./ipSecurity\";\n import { AdminMessageSection } from \"./adminMessage\";\n import { SessionLifetimeSection } from \"./sessionLifetime\";\n import { BruteForceProtectionSection } from \"./bruteForceProtection\";\n import { DevToolsAccessSection } from \"./devToolsAccess\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
+      "line_number": 95,
+      "context": "}\n url=\"/portal-settings/security/access-portal/access-dev-tools\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"InvitationSettings\")}\n subtitle={\n <Trans\n i18nKey=\"InvitationSettingsMobile\"\n ns=\"Settings\"\n t={t}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 210,
+      "context": "{\n id: \"portal-settings_catalog-invitation-settings\",\n key: \"1-0-5\",\n icon: \"\",\n link: \"invitation-settings\",\n tKey: \"InvitationSettings\",\n },\n {\n id: \"portal-settings_catalog-brute-force-protection\",\n key: \"1-0-6\",\n icon: \"\",",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "An unexpected error occurred. Try again later or contact support.",
   "content_en_sha1_hash": "25ad5a8afd50db67da636bee026c36dbe54b15d6",
   "created_at": "2025-05-19T21:30:49.388Z",
-  "updated_at": "2025-05-22T11:56:37.533Z",
+  "updated_at": "2025-07-01T15:57:36.066Z",
   "comment": {
     "text": "This translation key is used to display an error message when an unexpected issue occurs while performing a specific action, such as opening a link or sending a test email. It appears in a notification dialog, typically triggered by user interaction, and informs the user that they should try again later or contact support for assistance.",
     "is_auto": true,
@@ -11,76 +11,148 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 88,
       "context": "return i18n.t(\"Common:NewFolder\");\n }\n };\n \n export const getUnexpectedErrorText = () => {\n return i18n.t(\"Common:UnexpectedError\");\n };\n \n export const connectedCloudsTitleTranslation = (key, t) => {\n switch (key) {\n case \"Box\":",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SMTPSettings\\sub-components\\ButtonContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
       "line_number": 136,
       "context": "isWaitRequest = true;\n \n const result = await getSendingTestMailStatus();\n \n if (!result) {\n intervalId && toastr.error(t(\"Common:UnexpectedError\"));\n clearInterval(intervalId);\n intervalId = null;\n isWaitRequest = false;\n \n setSMTPSettingsLoading(false);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\Standalone\\sub-components\\ButtonContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
+      "line_number": 99,
+      "context": "const { t } = useTranslation([\"Payments\", \"Common\"]);\n \n const goToStripePortal = () => {\n accountLink\n ? window.open(accountLink, \"_blank\")\n : toastr.error(t(\"Common:UnexpectedError\"));\n };\n \n const renderTooltip = (\n <HelpButton\n className=\"payer-tooltip\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
+      "line_number": 147,
+      "context": "};\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(cardLinked, \"_self\")\n : toastr.error(t(\"Common:UnexpectedError\"));\n };\n \n const onUpdateTariff = async () => {\n try {\n setIsLoading(true);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Standalone/sub-components/ButtonContainer.js",
       "line_number": 39,
       "context": "const ButtonContainer = ({ t, buyUrl, siteDomain }) => {\n const onClickBuy = () => {\n const url = buyUrl || siteDomain;\n url\n ? window.open(url, \"_blank\")\n : toastr.error(t(\"Common:UnexpectedError\"));\n };\n return (\n <StyledButtonComponent>\n <Button\n label={t(\"ActivatePurchaseBuyNow\")}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\BackupStore.js",
-      "line_number": 547,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
+      "line_number": 190,
+      "context": "};\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(cardLinked, \"_self\")\n : toastr.error(t(\"Common:UnexpectedError\"));\n };\n \n return (\n <div className={styles.walletContainer}>\n <Text className={styles.walletDescription}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
+      "line_number": 62,
+      "context": "const { t } = useTranslation([\"Payments\", \"Common\"]);\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(cardLinked, \"_self\")\n : toastr.error(t(\"Common:UnexpectedError\"));\n };\n \n const goStripeAccount = () => {\n accountLink\n ? window.open(accountLink, \"_blank\")",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/PaymentMethod.tsx",
+      "line_number": 62,
+      "context": "const { t } = useTranslation([\"Payments\", \"Common\"]);\n \n const goLinkCard = () => {\n cardLinked\n ? window.open(cardLinked, \"_self\")\n : toastr.error(t(\"Common:UnexpectedError\"));\n };\n \n const goStripeAccount = () => {\n accountLink\n ? window.open(accountLink, \"_blank\")",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TopUpButtons.tsx",
+      "line_number": 73,
+      "context": "setIsLoading(true);\n \n const res = await saveDeposite(+amount, currency);\n \n if (!res) {\n throw new Error(t(\"Common:UnexpectedError\"));\n }\n \n await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);\n \n toastr.success(t(\"WalletToppedUp\"));",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanCancel.tsx",
+      "line_number": 86,
+      "context": "try {\n const res = await updateWalletPayment(0, 0);\n \n if (res === false) {\n toastr.error(t(\"Common:UnexpectedError\"));\n \n clearTimeout(timerId);\n setIsLoading(false);\n \n return;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanUpgrade.tsx",
+      "line_number": 239,
+      "context": "try {\n const res = await updateWalletPayment(value, productType);\n \n if (res === false) {\n throw new Error(t(\"Common:UnexpectedError\"));\n }\n \n if (isUpgradeStoragePlan) fetchBalance!();\n const { walletQuotas } = await fetchPortalTariff(true);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/index.tsx",
+      "line_number": 83,
+      "context": "const fetchData = async () => {\n try {\n await servicesInit(t);\n } catch (error) {\n console.error(error);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n fetchData();\n }, [servicesInit]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanUpgradePreview.tsx",
+      "line_number": 118,
+      "context": "1,\n controller.signal,\n );\n \n if (!currentWriteOff) {\n toastr.error(t(\"Common:UnexpectedError\"));\n return;\n }\n \n const paymentAmount = currentWriteOff.amount;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/BackupStore.js",
+      "line_number": 548,
       "context": "message =\n (\"response\" in err && err.response?.data?.error?.message) ||\n (\"message\" in err && err.message) ||\n \"\";\n \n if (err?.response?.status === 502) message = t(\"Common:UnexpectedError\");\n \n this.errorInformation = message ?? t(\"Common:UnexpectedError\");\n };\n \n getProgress = async (t) => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\BackupStore.js",
-      "line_number": 547,
+      "file_path": "/packages/client/src/store/BackupStore.js",
+      "line_number": 548,
       "context": "message =\n (\"response\" in err && err.response?.data?.error?.message) ||\n (\"message\" in err && err.message) ||\n \"\";\n \n if (err?.response?.status === 502) message = t(\"Common:UnexpectedError\");\n \n this.errorInformation = message ?? t(\"Common:UnexpectedError\");\n };\n \n getProgress = async (t) => {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\LdapFormStore.js",
+      "file_path": "/packages/client/src/store/LdapFormStore.js",
       "line_number": 545,
       "context": ") {\n status = {\n completed: true,\n percents: 100,\n certificateConfirmRequest: null,\n error: t(\"Common:UnexpectedError\"),\n };\n }\n \n this.setProgress(status);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\PaymentStore.ts",
-      "line_number": 141,
-      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/store/PaymentStore.ts",
+      "line_number": 321,
+      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\PaymentStore.ts",
-      "line_number": 141,
-      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/store/PaymentStore.ts",
+      "line_number": 321,
+      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\PaymentStore.ts",
-      "line_number": 141,
-      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/store/PaymentStore.ts",
+      "line_number": 321,
+      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\PaymentStore.ts",
-      "line_number": 141,
-      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n if (this.isAlreadyPaid) await setPayerInfo();",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/store/PaymentStore.ts",
+      "line_number": 321,
+      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ProfileActionsStore.js",
-      "line_number": 240,
+      "file_path": "/packages/client/src/store/PaymentStore.ts",
+      "line_number": 321,
+      "context": "try {\n await Promise.all(requests);\n this.setBasicTariffContainer();\n } catch (error) {\n // toastr.error(t(\"Common:UnexpectedError\"));\n console.error(error);\n }\n \n this.setIsUpdatingBasicSettings(false);\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
+      "line_number": 252,
       "context": "window.location.replace(\n combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || \"/login\"),\n );\n } catch (e) {\n console.error(e);\n toastr.error(t(\"Common:UnexpectedError\"));\n }\n };\n \n onDebugClick = () => {\n this.setIsDebugDialogVisible(true);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\hooks\\useDeleteFileDialog.ts",
+      "file_path": "/packages/client/src/store/ServicesStore.ts",
+      "line_number": 194,
+      "context": ");\n \n this.setVisibleWalletSetting(true);\n }\n } catch (e) {\n toastr.error(t(\"Common:UnexpectedError\"));\n console.error(e);\n }\n };\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/hooks/useDeleteFileDialog.ts",
       "line_number": 49,
       "context": "[Symbol.asyncIterator]() {\n return {\n async next() {\n const item = await getOperationProgressApi(\n id,\n t(\"Common:UnexpectedError\"),\n );\n return {\n done: item?.finished ?? true,\n value: item,\n };",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

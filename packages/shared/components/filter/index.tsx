@@ -40,6 +40,11 @@ import useSearch from "./hooks/useSearch";
 
 import styles from "./Filter.module.scss";
 import { FilterProps, TItem } from "./Filter.types";
+import {
+  convertFilterDataToSelectedFilterValues,
+  convertFilterDataToSelectedItems,
+  replaceEqualFilterValuesWithPrev,
+} from "./Filter.utils";
 
 const FilterInput = React.memo(
   ({
@@ -70,6 +75,7 @@ const FilterInput = React.memo(
     isContactsGroupsPage,
     isContactsInsideGroupPage,
     isContactsGuestsPage,
+    isFlowsPage,
     isIndexing,
     isIndexEditingMode,
 
@@ -87,6 +93,7 @@ const FilterInput = React.memo(
     disableThirdParty,
 
     initSearchValue,
+    initSelectedFilterData,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -104,84 +111,25 @@ const FilterInput = React.memo(
     >(getViewSettingsData());
     const [selectedFilterValue, setSelectedFilterValue] = React.useState<
       Map<FilterGroups, Map<string | number, TItem>>
-    >(() => {
-      const value = getSelectedFilterData();
-
-      if (!value || !Array.isArray(value)) return new Map();
-
-      const newValue: Map<
-        FilterGroups,
-        Map<string | number, TItem>
-      > = new Map();
-      const newSelectedItems: TItem[] = [];
-
-      value.forEach((item) => {
-        const groupItems = Array.isArray(item.key)
-          ? (item.key.map((key) => ({
-              key,
-              group: item.group,
-              label: key,
-            })) as TItem[])
-          : [item];
-
-        newSelectedItems.push(...groupItems);
-
-        if (!newValue.has(item.group)) {
-          const groupItemsMap = new Map(
-            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
-          );
-
-          newValue.set(item.group, groupItemsMap);
-        } else {
-          groupItems.forEach((groupItem) => {
-            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
-          });
-        }
-      });
-
-      return newValue;
-    });
-    const [selectedItems, setSelectedItems] = React.useState<TItem[]>(() => {
-      const value = getSelectedFilterData();
-
-      if (!value || !Array.isArray(value)) return [];
-
-      const newValue: Map<
-        FilterGroups,
-        Map<string | number, TItem>
-      > = new Map();
-      const newSelectedItems: TItem[] = [];
-
-      value.forEach((item) => {
-        const groupItems = Array.isArray(item.key)
-          ? (item.key.map((key) => ({
-              key,
-              group: item.group,
-              label: key,
-            })) as TItem[])
-          : [item];
-
-        newSelectedItems.push(...groupItems);
-
-        if (!newValue.has(item.group)) {
-          const groupItemsMap = new Map(
-            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
-          );
-
-          newValue.set(item.group, groupItemsMap);
-        } else {
-          groupItems.forEach((groupItem) => {
-            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
-          });
-        }
-      });
-
-      return newSelectedItems;
-    });
+    >(() =>
+      initSelectedFilterData
+        ? convertFilterDataToSelectedFilterValues(initSelectedFilterData)
+        : new Map(),
+    );
+    const [selectedItems, setSelectedItems] = React.useState<TItem[]>(() =>
+      initSelectedFilterData
+        ? convertFilterDataToSelectedItems(initSelectedFilterData)
+        : [],
+    );
+    const currentSelectedFilterDataRef = React.useRef<TItem[] | null>(
+      initSelectedFilterData || null,
+    );
 
     const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
+
+    const isFirstRenderRef = React.useRef(true);
 
     React.useEffect(() => {
       const value = getViewSettingsData?.();
@@ -190,47 +138,32 @@ const FilterInput = React.memo(
     }, [getViewSettingsData]);
 
     const getSelectedFilterDataAction = React.useCallback(async () => {
-      const value = await getSelectedFilterData();
+      const newSelectedFilterData = await getSelectedFilterData();
+      const processedFilterData = replaceEqualFilterValuesWithPrev(
+        currentSelectedFilterDataRef.current,
+        newSelectedFilterData,
+      );
+
+      currentSelectedFilterDataRef.current = processedFilterData;
 
       if (!mountRef.current) return;
 
-      const newValue: Map<
-        FilterGroups,
-        Map<string | number, TItem>
-      > = new Map();
-      const newSelectedItems: TItem[] = [];
+      const newSelectedValue =
+        convertFilterDataToSelectedFilterValues(processedFilterData);
+      const newSelectedItems =
+        convertFilterDataToSelectedItems(processedFilterData);
 
-      value.forEach((item) => {
-        const groupItems = Array.isArray(item.key)
-          ? (item.key.map((key) => ({
-              key,
-              group: item.group,
-              label: key,
-            })) as TItem[])
-          : [item];
-
-        newSelectedItems.push(...groupItems);
-
-        if (!newValue.has(item.group)) {
-          const groupItemsMap = new Map(
-            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
-          );
-
-          newValue.set(item.group, groupItemsMap);
-        } else {
-          groupItems.forEach((groupItem) => {
-            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
-          });
-        }
-      });
-
-      setSelectedFilterValue(newValue);
+      setSelectedFilterValue(newSelectedValue);
       setSelectedItems(newSelectedItems);
     }, [getSelectedFilterData]);
 
     React.useEffect(() => {
+      if (isFirstRenderRef.current && currentSelectedFilterDataRef.current) {
+        return;
+      }
+
       getSelectedFilterDataAction();
-    }, [getSelectedFilterDataAction, getSelectedFilterData]);
+    }, [getSelectedFilterDataAction]);
 
     const removeSelectedItemAction = React.useCallback(
       (
@@ -259,11 +192,15 @@ const FilterInput = React.memo(
       };
     }, []);
 
+    React.useEffect(() => {
+      isFirstRenderRef.current = false;
+    }, []);
+
     return (
       <div className={styles.filterInput}>
         <div className="filter-input_filter-row">
           {searchComponent}
-          {!isIndexEditingMode ? (
+          {!isIndexEditingMode && !isFlowsPage ? (
             <FilterButton
               id="filter-button"
               onFilter={onFilter}
@@ -283,7 +220,7 @@ const FilterInput = React.memo(
             />
           ) : null}
 
-          {!isIndexing ? (
+          {!isIndexing && !isFlowsPage ? (
             <SortButton
               id="sort-by-button"
               onSort={onSort}
@@ -304,6 +241,7 @@ const FilterInput = React.memo(
           ) : null}
           {viewSettings &&
           !isIndexing &&
+          !isFlowsPage &&
           currentDeviceType === DeviceType.desktop &&
           viewSelectorVisible ? (
             <ViewSelector

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";

@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
@@ -66,6 +66,7 @@ const TrustedMail = (props) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const navigate = useNavigate();
@@ -112,6 +113,12 @@ const TrustedMail = (props) => {
     }
     setIsLoading(true);
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("TrustedMail");
+  }, [currentDeviceType, isLoading]);
 
   useEffect(() => {
     checkWidth();
@@ -274,7 +281,6 @@ const TrustedMail = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
-          isAutoFocussed
         />
       ) : null}
 

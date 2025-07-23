@@ -44,6 +44,7 @@ const keyedCollections = {
   uk: "uk-UA",
   ja: "ja-JP",
   zh: "zh-CN",
+  sq: "sq-AL",
 };
 
 const convertToCulture = (key) => {

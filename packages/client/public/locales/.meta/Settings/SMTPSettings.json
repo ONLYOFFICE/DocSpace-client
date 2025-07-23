@@ -3,7 +3,7 @@
   "content": "SMTP Settings",
   "content_en_sha1_hash": "52ff101f3a7156bd8a868fbddda28dc2f4dfb972",
   "created_at": "2025-05-19T21:30:52.745Z",
-  "updated_at": "2025-05-22T11:56:37.740Z",
+  "updated_at": "2025-07-02T07:49:19.842Z",
   "comment": {
     "text": "SMTP Settings translation key is used to display the title of a page or section within the PortalSettings category, typically in a tab or header. It appears in the integration settings file and is related to sending emails via SMTP (Simple Mail Transfer Protocol).",
     "is_auto": true,
@@ -11,10 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SMTPSettings\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
       "line_number": 77,
       "context": "timerId = null;\n };\n }, []);\n \n useEffect(() => {\n if (ready) setDocumentTitle(t(\"Settings:SMTPSettings\"));\n }, [ready]);\n \n const isLoadingContent = isLoading || !ready;\n \n if (!isLoading && !isInit) return null;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/index.js",
+      "line_number": 41,
+      "context": "import SSO from \"./SingleSignOn\";\n import LDAP from \"./LDAP\";\n import ThirdParty from \"./ThirdPartyServicesSettings\";\n \n import SMTPSettings from \"./SMTPSettings\";\n import DocumentService from \"./DocumentService\";\n import PluginPage from \"./Plugins\";\n \n const IntegrationWrapper = (props) => {\n const {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 397,
+      "context": "{\n id: \"portal-settings_catalog-smtp-settings\",\n key: \"4-5\",\n icon: \"\",\n link: \"smtp-settings\",\n tKey: \"SMTPSettings\",\n isCategory: true,\n },\n ],\n },\n {",
+      "module": "/packages/client"
     }
   ],
   "languages": {

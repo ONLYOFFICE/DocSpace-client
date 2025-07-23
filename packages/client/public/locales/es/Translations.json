@@ -23,7 +23,7 @@
   "RoleGuestDescriprion": "Los invitados pueden acceder a las salas a las que se les ha invitado, así como crear y editar documentos si se les han asignado los roles adecuados en la sala.",
   "SearchByHeadOfGroup": "Buscar por Jefe de grupo",
   "SearchByOwner": "Búsqueda por propietarios",
-  "SubNewForm": "Da zero",
+  "SubNewForm": "En blanco",
   "SubNewFormFile": "Desde archivo de texto",
   "ThirdPartyInfo": "Cambiar la información de terceros",
   "ThirdPartyTitle": "Servicios de terceros",

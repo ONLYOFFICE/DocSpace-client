@@ -102,7 +102,7 @@
   "FinalizeVersion": "Version abschließen",
   "FolderRenamed": "Der Ordner wurde von '{{folderTitle}}' in '{{newFoldedTitle}}' umbenannt",
   "FolderSuccessfullyCreated": "Ordner <1>{{folderTitle}}</1> erstellt",
-  "GeneralLinkDeletedSuccessfully": "Neuer allgemeiner Link erfolgreich erstellt",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Neuer allgemeiner Link erfolgreich erstellt",
   "GoToMyRooms": "Zu Räume",
   "GoToSection": "Zu {{sectionName}} gehen",
   "Index": "Index",

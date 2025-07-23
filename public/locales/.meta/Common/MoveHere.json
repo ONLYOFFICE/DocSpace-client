@@ -3,7 +3,7 @@
   "content": "Move here",
   "content_en_sha1_hash": "d6f5b75c92e201012666c9d9865972c786decb4e",
   "created_at": "2025-05-19T21:30:46.622Z",
-  "updated_at": "2025-05-22T11:56:37.476Z",
+  "updated_at": "2025-05-28T09:30:02.135Z",
   "comment": {
     "text": "This translation key is used for a button label that encourages users to move files or content to a new location. In the UI, it likely appears in a file management system or dialog where restoration or movement options are available.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\utils.ts",
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 84,
       "context": "isRestore?: boolean,\n isFormRoom?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreHere\");\n if (isMove) return t(\"Common:MoveHere\");\n if (isCopy && !isEditorDialog) return t(\"Common:CopyHere\");\n if (isRestoreAll) return t(\"Common:RestoreHere\");\n if (isSelect || isFormRoom || isSelectFolder) return t(\"Common:SelectAction\");\n \n if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

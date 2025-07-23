@@ -77,4 +77,6 @@ export type AvatarProps = {
   onChangeFile?: () => void;
 
   model?: TAvarModel[];
+  isNotIcon?: boolean;
+  imgClassName?: string;
 };

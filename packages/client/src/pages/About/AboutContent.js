@@ -226,7 +226,6 @@ const AboutContent = (props) => {
           </Text>
           {isCommercial ? (
             <ColorTheme
-              {...props}
               tag="a"
               themeId={ThemeId.Link}
               className="row-el"
@@ -273,7 +272,6 @@ const AboutContent = (props) => {
           </Text>
 
           <ColorTheme
-            {...props}
             tag="a"
             themeId={ThemeId.Link}
             className="row-el"
@@ -292,7 +290,6 @@ const AboutContent = (props) => {
           </Text>
 
           <ColorTheme
-            {...props}
             tag="a"
             themeId={ThemeId.Link}
             className="row-el"

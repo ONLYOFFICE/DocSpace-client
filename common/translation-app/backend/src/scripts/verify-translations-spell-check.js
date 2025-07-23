@@ -55,6 +55,7 @@ const languageMap = {
   ro: "Romanian",
   si: "Sinhala",
   sl: "Slovenian",
+  "sq-AL": "Albanian",
   "sr-Cyrl-RS": "Serbian (Cyrillic)",
   "sr-Latn-RS": "Serbian (Latin)",
   "uk-UA": "Ukrainian",
@@ -170,13 +171,15 @@ If no issues are found, return an empty array [].
         try {
           // Check if response is wrapped in markdown code blocks and extract the JSON
           let jsonText = responseText;
-          
+
           // Handle markdown code blocks (```json ... ```)
-          const markdownMatch = responseText.match(/```(?:json)?\s*([\s\S]*?)```/);
+          const markdownMatch = responseText.match(
+            /```(?:json)?\s*([\s\S]*?)```/
+          );
           if (markdownMatch && markdownMatch[1]) {
             jsonText = markdownMatch[1].trim();
           }
-          
+
           // Try to parse as JSON
           const issues = JSON.parse(jsonText);
           if (Array.isArray(issues)) {

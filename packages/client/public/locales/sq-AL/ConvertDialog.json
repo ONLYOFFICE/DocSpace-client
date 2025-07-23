@@ -1,0 +1,13 @@
+{
+  "ConversionMessage": "Të gjitha dokumentet që ndarkoni do të konvertohen në formatin Office Open XML (docx, xlsx ose pptx) për redaktim më të shpejtë.",
+  "ConversionXmlMessage": "Skedari që hapani dë të konvertohet në formatin Office Open XML (docx ose xlsx) për shikim dhe redaktim më të shpejtë.",
+  "ConvertedFileDestination": "Kopja e skedarit dp të krijohet në dosjen<strong>{{folderTitle}}</strong>.",
+  "DocumentConversionTitle": "Konvertimi i dokumentit",
+  "FailedToConvert": "Konvertimi dështoi",
+  "FileUploadTitle": "Ngarkimi skedarit",
+  "HideMessage": "Mos e shfaqni më këtë mesazh",
+  "InfoCreateFileIn": "Skedari i ri '{{fileTitle}}' është krijuar në '{{folderTitle}}'",
+  "OpenFileMessage": "Skedari i dokumentit që hapni do të konvertohet në formatin Office Open XML për shikim dhe redaktim të shpejtë.",
+  "SaveOriginalFormatMessage": "Ruani kopjen e skedarit në formatin origjinal",
+  "SelectFileType": "Ju lutem zgjidhni një lloj skedari"
+}

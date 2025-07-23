@@ -3,7 +3,7 @@
   "content": "Start",
   "content_en_sha1_hash": "952f375412e89ff213a8aca383d18e5691354347",
   "created_at": "2025-05-19T21:30:49.036Z",
-  "updated_at": "2025-05-22T11:56:37.880Z",
+  "updated_at": "2025-06-26T19:00:18.307Z",
   "comment": {
     "text": "This translation key is used to display the text \"Start\" on a button or in a dialog, likely initiating an action or starting a process. It appears on the StartFillingPanel in the /packages/shared/dialogs/ folder and is part of a modal dialog's header.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\start-filling\\StartFillingPanel.tsx",
-      "line_number": 299,
-      "context": "},\n }}\n />\n ) : null}\n </ModalDialog.Container>\n <ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {infoBarVisible ? (\n <>\n <PublicRoomBar\n headerText={t(\"Common:FillingStatusBarTitle\")}",
-      "module": "\\packages\\shared"
+      "file_path": "/packages/shared/dialogs/start-filling/StartFillingPanel.tsx",
+      "line_number": 315,
+      "context": "disableSubmitButton={false}\n headerProps={invitePanelSelectorHeader}\n />\n ) : null}\n </ModalDialog.Container>\n <ModalDialog.Header>{t(\"Common:StartFilling\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <section className={styles.container}>\n {infoBarVisible ? (\n <>\n <PublicRoomBar",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

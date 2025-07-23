@@ -102,7 +102,7 @@
   "FinalizeVersion": "Dokončaj različico",
   "FolderRenamed": "Mapa '{{folderTitle}}' je preimenovana v '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Mapa <1>{{folderTitle}}</1> ustvarjena",
-  "GeneralLinkDeletedSuccessfully": "Nova splošna povezava je bila uspešno ustvarjena",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Nova splošna povezava je bila uspešno ustvarjena",
   "GoToMyRooms": "Pojdi na sobe",
   "GoToSection": "Pojdite v {{sectionName}}",
   "Index": "Indeks",

@@ -52,6 +52,8 @@ const TextPure = React.forwardRef<HTMLDivElement, TextProps>(
       truncate,
       className,
       style,
+      containerWidth,
+      containerMinWidth,
       ...rest
     },
     ref,

@@ -3,7 +3,7 @@
   "content": "This room and all its contents are available to anyone with the link. Do you want to continue?",
   "content_en_sha1_hash": "c7cd74e1e3a7c4f3074d7470ce92ceeaf876ff92",
   "created_at": "2025-05-19T21:30:55.870Z",
-  "updated_at": "2025-05-22T11:56:37.310Z",
+  "updated_at": "2025-05-28T09:30:02.183Z",
   "comment": {
     "text": "This translation key is used to display a message that prompts the user to confirm moving a file or room to make it publicly accessible. The message appears in a modal dialog when the user initiates this action.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\BackupToPublicRoom\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/BackupToPublicRoom/index.js",
       "line_number": 75,
       "context": "return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:SaveToPublicRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>{t(\"Files:MoveToPublicRoom\")}</Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\MoveToPublicRoom\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/MoveToPublicRoom/index.js",
       "line_number": 127,
       "context": "});\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"Files:MoveToPublicRoomTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>{t(\"Files:MoveToPublicRoom\")}</Text>\n </div>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

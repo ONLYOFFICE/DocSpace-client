@@ -376,9 +376,19 @@
   top: 61px;
   background: var(--section-header-bg);
   z-index: 200;
+  padding: 0 16px;
+  margin: 0 -16px !important;
 
   @include mobile {
     top: 53px;
+  }
+}
+
+.withTabs {
+  top: 114px;
+
+  @include mobile {
+    top: 106px;
   }
 }
 
@@ -451,5 +461,236 @@
     width: 100vw !important;
     max-width: 100vw !important;
     box-sizing: border-box;
+  }
+}
+
+.progressBarContainer {
+  position: fixed;
+  inset-inline-end: 24px;
+  bottom: 24px;
+  z-index: 400;
+  opacity: 1;
+  transform: translateY(0);
+  animation: none;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out,
+    bottom 0.3s ease-in-out;
+
+  @keyframes hideButton {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(72px);
+    }
+  }
+
+  @include tablet-and-below {
+    z-index: 200;
+    bottom: 16px;
+
+    @keyframes hideButton {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(16px);
+      }
+    }
+
+    &.mainButtonVisible {
+      bottom: 88px;
+
+      @keyframes hideButton {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(64px);
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    bottom: 16px;
+    inset-inline-end: 16px;
+
+    &.mainButtonVisible {
+      bottom: 80px;
+    }
+  }
+
+  &.autoHide {
+    animation: hideButton 0.3s ease-in-out 4s forwards;
+
+    &.laterHide {
+      animation-delay: 8s;
+    }
+
+    &.immidiateHide {
+      animation-delay: 1s;
+    }
+  }
+
+  &:not(.autoHide) {
+    opacity: 1;
+    transform: translateY(0);
+    animation: none;
+  }
+
+  .progressBarWrapper {
+    display: none;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 8px 16px;
+    background: var(--background-primary);
+    border-top: 1px solid var(--progress-bar-border);
+    border-bottom: 1px solid var(--progress-bar-border);
+
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out;
+    opacity: 1;
+
+    &.fadeOut {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &.isUploading {
+      display: flex;
+    }
+  }
+
+  .progressWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    width: 100%;
+  }
+
+  .progressHeader {
+    color: var(--text-primary);
+    margin-right: 8px;
+
+    &.withClick {
+      cursor: pointer;
+    }
+  }
+
+  .progressInfoWrapper {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      path {
+        fill: var(--progress-bar-icon-color) !important;
+      }
+      &:hover {
+        cursor: pointer;
+        path {
+          fill: var(--progress-bar-hover-icon) !important;
+        }
+      }
+    }
+  }
+  .progressMainContainer {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+    div:first-child {
+      position: relative;
+    }
+
+    &.withClick {
+      cursor: pointer;
+    }
+  }
+
+  .progressLoader {
+    margin: auto;
+    width: 12px;
+    height: 12px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background-image: linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
+      conic-gradient(
+        from 0.25turn at 50% 30%,
+        rgb(85, 95, 101),
+        10deg,
+        rgb(85, 95, 101),
+        140deg,
+        white
+      );
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    animation: loader 1.3s linear infinite;
+  }
+
+  @keyframes loader {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .infoIcon {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    inset-inline-start: 20px;
+    top: -7px;
+    left: 9px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &.alert {
+      svg {
+        path {
+          fill: var(--status-icon-color-negative) !important;
+        }
+      }
+    }
+
+    &.complete {
+      svg {
+        path {
+          fill: var(--status-icon-color-positive) !important;
+        }
+      }
+    }
+  }
+
+  .labelWrapper {
+    display: flex;
+    align-items: baseline;
+  }
+
+  :global {
+    .layout-progress-bar_wrapper {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      .layout-progress-bar_close-icon {
+        position: static;
+        width: 24px;
+        height: 24px;
+        margin-inline-end: 8px;
+      }
+    }
   }
 }

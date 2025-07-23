@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2025-05-22T11:56:37.557Z",
+  "updated_at": "2025-07-01T15:57:36.078Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -11,88 +11,88 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\Filter\\SearchFilter\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/SearchFilter/index.js",
       "line_number": 59,
       "context": "return (\n <SearchInput\n forwardedRef={ref}\n scale\n tabIndex={1}\n placeholder={t(\"Common:Search\")}\n value={value}\n onChange={onChangeValue}\n onClick={onInputClick}\n onClearSearch={onClear}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\sub-components\\ItemTitle\\Rooms\\index.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/Rooms/index.js",
       "line_number": 174,
       "context": "<div className=\"info_title-icons\">\n {isRoomMembersPanel ? (\n <IconButton\n id=\"info_search\"\n className=\"icon\"\n title={t(\"Common:Search\")}\n iconName={SearchIconReactSvgUrl}\n onClick={onSearchClick}\n size={16}\n />\n ) : null}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 1421,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1402,
       "context": "getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\AddEmailsStep\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/index.tsx",
       "line_number": 139,
       "context": "<UsersInfoBlock />\n \n <SearchInput\n id=\"search-users-input\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\SelectUsersStep\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/index.tsx",
       "line_number": 148,
       "context": "<UsersInfoBlock />\n \n <SearchInput\n id=\"search-users-input\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\SelectUsersTypeStep\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/index.tsx",
       "line_number": 127,
       "context": "{filteredUsers.length > 0 ? (\n <>\n <SearchInput\n id=\"search-checkedUsers-type-input\"\n className=\"importUsersSearch\"\n placeholder={t(\"Common:Search\")}\n value={searchValue}\n onChange={onChangeInput}\n refreshTimeout={REFRESH_TIMEOUT}\n onClearSearch={onClearSearchInput}\n size={InputSize.base}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\FileSelector.js",
-      "line_number": 383,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 387,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n />\n <HelpButton\n place=\"right\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\FileSelector.js",
-      "line_number": 383,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 387,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n />\n <HelpButton\n place=\"right\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\RoomSelector.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
       "line_number": 259,
       "context": "<ControlsSection>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n />\n <SelectTextInput t={t} config={config} setConfig={setConfig} />\n <CancelTextInput t={t} config={config} setConfig={setConfig} />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\sub-components\\SearchTerm.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SearchTerm.js",
       "line_number": 68,
       "context": "<Label className=\"label\" text={t(\"SearchTerm\")} />\n <ColumnContainer>\n <TextInput\n scale\n onChange={onChangeSearch}\n placeholder={t(\"Common:Search\")}\n value={value}\n tabIndex={5}\n />\n <Checkbox\n className=\"checkbox\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\Files\\hooks\\useSelectorBody.tsx",
-      "line_number": 152,
+      "file_path": "/packages/shared/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 154,
       "context": "const searchProps: TSelectorSearch = withSearch\n ? {\n withSearch,\n searchLoader: <SearchLoader />,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n isSearchLoading: showBreadCrumbsLoader,\n onSearch: onSearch!,\n onClearSearch: onClearSearch!,\n }",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\Groups\\index.tsx",
+      "file_path": "/packages/shared/selectors/Groups/index.tsx",
       "line_number": 158,
       "context": "onCloseClick: () => {},\n headerLabel: headerProps?.headerLabel || t(\"Common:Groups\"),\n }}\n alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}\n withSearch\n searchPlaceholder={t(\"Common:Search\")}\n onSearch={onSearch}\n searchValue={searchValue}\n onClearSearch={onClearSearch}\n isSearchLoading={false}\n disableSubmitButton={!selectedItem}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\People\\index.tsx",
-      "line_number": 467,
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 487,
       "context": "}\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch,\n onClearSearch,\n searchLoader: <SearchLoader />,\n isSearchLoading:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\Room\\index.tsx",
+      "file_path": "/packages/shared/selectors/Room/index.tsx",
       "line_number": 236,
       "context": ": {};\n \n const searchSelectorProps: TSelectorSearch = withSearch\n ? {\n withSearch: true,\n searchPlaceholder: t(\"Common:Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

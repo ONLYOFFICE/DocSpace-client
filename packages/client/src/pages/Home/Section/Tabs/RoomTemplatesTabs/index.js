@@ -37,7 +37,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const RoomTemplatesTabs = ({
   setFilter,
-  showBodyLoader,
+  showTabsLoader,
   isRoot,
   isRoomsFolderRoot,
   isTemplatesFolder,
@@ -84,7 +84,7 @@ const RoomTemplatesTabs = ({
       ? "templates"
       : "rooms";
 
-  if (showTabs && showBodyLoader) return <SectionSubmenuSkeleton />;
+  if (showTabs && showTabsLoader) return <SectionSubmenuSkeleton />;
 
   return showTabs ? (
     <Tabs items={tabs} selectedItemId={startSelectId} onSelect={onSelect} />
@@ -102,11 +102,11 @@ export default inject(
     const { isRoomAdmin, isAdmin } = authStore;
     const { isRoomsFolderRoot, isTemplatesFolder, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
-    const { showBodyLoader } = clientLoadingStore;
+    const { showTabsLoader } = clientLoadingStore;
 
     return {
       setFilter,
-      showBodyLoader,
+      showTabsLoader,
       isRoot,
       isRoomsFolderRoot,
       isTemplatesFolder,

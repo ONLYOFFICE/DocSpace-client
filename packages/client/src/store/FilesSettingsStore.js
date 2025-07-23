@@ -137,6 +137,8 @@ class FilesSettingsStore {
 
   extsDocument = [];
 
+  extsDiagram = [];
+
   internalFormats = {};
 
   masterFormExtension = "";
@@ -378,6 +380,8 @@ class FilesSettingsStore {
 
   isDocument = (extension) => presentInArray(this.extsDocument, extension);
 
+  isDiagram = (extension) => presentInArray(this.extsDiagram, extension);
+
   isMasterFormExtension = (extension) => this.masterFormExtension === extension;
 
   isPresentation = (extension) =>
@@ -466,6 +470,7 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "customRoom.svg";
           break;
+
         case RoomsType.EditingRoom:
           path = "editingRoom.svg";
           break;

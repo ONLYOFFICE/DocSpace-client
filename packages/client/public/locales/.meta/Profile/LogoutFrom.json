@@ -3,7 +3,7 @@
   "content": "Log out from {{platform}} {{browser}}?",
   "content_en_sha1_hash": "229f1ff3f1b7fecb7a9e75830718a8d7d88e0175",
   "created_at": "2025-05-19T21:30:53.370Z",
-  "updated_at": "2025-05-22T11:56:37.412Z",
+  "updated_at": "2025-05-28T09:30:02.283Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message for logging out from a specific platform and browser combination. It appears in a logout dialog modal, asking the user to confirm their action. The text includes placeholders for platform and browser names to ensure accurate representation of the device being logged out from.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\LogoutSessionDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/LogoutSessionDialog/index.js",
       "line_number": 48,
       "context": "<ModalDialog visible={visible} onClose={onClose} displayType=\"modal\">\n <ModalDialog.Header>\n {t(\"Profile:LogoutActiveConnection\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {t(\"Profile:LogoutFrom\", {\n platform: data.platform,\n browser: data.browser,\n })}\n </ModalDialog.Body>\n <ModalDialog.Footer>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Your subscription is expiring on {{date}}",
   "content_en_sha1_hash": "8188a3ae6c5b0e34b2926ddc70d79038d6e78b7f",
   "created_at": "2025-05-19T21:30:49.205Z",
-  "updated_at": "2025-05-22T11:56:37.522Z",
+  "updated_at": "2025-05-28T09:30:02.175Z",
   "comment": {
     "text": "This translation key is used to display a notification about an expiring subscription on the client's tariff bar. The date of expiration is inserted into the translated string. It appears in the tariff bar component, typically as an orange notification indicator.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\TariffBar\\helpers.js",
+      "file_path": "/packages/client/src/components/TariffBar/helpers.js",
       "line_number": 75,
       "context": "return {\n label: t(\"Common:SubscriptionExpiredTitle\"),\n color: RED,\n };\n return {\n label: t(\"Common:SubscriptionIsExpiring\", { date: paymentDate }),\n color: ORANGE,\n };\n }\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

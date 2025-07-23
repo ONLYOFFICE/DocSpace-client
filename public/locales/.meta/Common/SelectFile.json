@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2025-05-22T11:56:37.475Z",
+  "updated_at": "2025-06-18T07:34:14.805Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -11,58 +11,58 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\utils.ts",
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 55,
       "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: t(\"Common:ProductName\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\utils.ts",
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 55,
       "context": "if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {\n return t(\"Common:SelectFromPortal\", {\n productName: t(\"Common:ProductName\"),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\NextcloudWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
       "line_number": 50,
       "context": "isTypeSelectEmpty: boolean,\n logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionNextcloud\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload={false}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\OnlyofficeWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
       "line_number": 50,
       "context": "isTypeSelectEmpty: boolean,\n logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Editor.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
       "line_number": 204,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Viewer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
       "line_number": 205,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SingleSignOn\\sub-components\\UploadXML.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/UploadXML.js",
       "line_number": 179,
       "context": "</Text>\n \n <FileInput\n idButton=\"select-file\"\n accept={[\".xml\"]}\n buttonLabel={t(\"Common:SelectFile\")}\n className=\"xml-upload-file\"\n isDisabled={!enableSso || isLoadingXml}\n onInput={uploadXml}\n size=\"middle\"\n tabIndex={3}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\getStepTitle.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepTitle.js",
       "line_number": 32,
       "context": "export const getStepTitle = (t, stepIndex) => {\n const isGoogleWorkspace = window.location.pathname.includes(\"google\");\n switch (stepIndex) {\n case 1:\n return isGoogleWorkspace\n ? t(\"Common:SelectFiles\")\n : t(\"Common:SelectFile\");\n case 2:\n return t(\"Settings:SelectUsers\");\n case 3:\n return t(\"Settings:SelectUserTypes\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\SelectFileDialog.tsx",
-      "line_number": 51,
+      "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
+      "line_number": 52,
       "context": "const { t } = useTranslation();\n \n // const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

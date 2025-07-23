@@ -7,17 +7,10 @@ import {
   TOnFilter,
 } from "@docspace/shared/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { getFilterType } from "@docspace/shared/components/filter/Filter.utils";
 import {
-  getFilterType,
-  getAuthorType,
-  getSearchParams,
-  getFilterContent,
-  getRoomId,
-} from "@docspace/shared/components/filter/Filter.utils";
-import {
-  FilterType,
   FilterGroups,
-  FilterKeys,
+  FilterType,
   SortByFieldName,
 } from "@docspace/shared/enums";
 import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
@@ -47,13 +40,6 @@ export default function useFilesFilter({
   const [filter, setFilter] = React.useState<FilesFilter>(
     FilesFilter.getFilter({ search: `?${filesFilter}` } as Location)!,
   );
-  const [, setSelectedFilterValues] = React.useState<Nullable<TItem[]>>(null);
-
-  const isSSR = React.useRef<boolean>(true);
-
-  React.useEffect(() => {
-    isSSR.current = false;
-  }, []);
 
   React.useEffect(() => {
     setFilter(FilesFilter.getFilter(window.location)!);
@@ -150,18 +136,10 @@ export default function useFilesFilter({
     (data) => {
       const filterType = getFilterType(data) || null;
 
-      const withSubfolders = getSearchParams(data);
-      const withContent = getFilterContent(data);
-
       const newFilter = filter.clone();
       newFilter.page = 0;
 
       newFilter.filterType = filterType;
-
-      newFilter.withSubfolders =
-        withSubfolders === FilterKeys.excludeSubfolders ? false : true;
-
-      newFilter.searchInContent = withContent === "true" ? true : null;
 
       setFilter(newFilter);
 
@@ -185,31 +163,31 @@ export default function useFilesFilter({
         id: "filter_type-folders",
         key: FilterType.FoldersOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Folders").toLowerCase(),
+        label: t("Common:Folders"),
       },
       {
         id: "filter_type-all-files",
         key: FilterType.FilesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Files").toLowerCase(),
+        label: t("Common:Files"),
       },
       {
         id: "filter_type-documents",
         key: FilterType.DocumentsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Documents").toLowerCase(),
+        label: t("Common:Documents"),
       },
       {
         id: "filter_type-spreadsheets",
         key: FilterType.SpreadsheetsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Spreadsheets").toLowerCase(),
+        label: t("Common:Spreadsheets"),
       },
       {
         id: "filter_type-presentations",
         key: FilterType.PresentationsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Presentations").toLowerCase(),
+        label: t("Common:Presentations"),
       },
       {
         id: "filter_type-forms",
@@ -224,22 +202,28 @@ export default function useFilesFilter({
         label: getManyPDFTitle(t, false),
       },
       {
+        id: "filter_type-diagrams",
+        key: FilterType.DiagramsOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Common:Diagrams"),
+      },
+      {
         id: "filter_type-archive",
         key: FilterType.ArchiveOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Archives").toLowerCase(),
+        label: t("Common:Archives"),
       },
       {
         id: "filter_type-images",
         key: FilterType.ImagesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Images").toLowerCase(),
+        label: t("Common:Images"),
       },
       {
         id: "filter_type-media",
         key: FilterType.MediaOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Media").toLowerCase(),
+        label: t("Common:Media"),
       },
     ];
 
@@ -268,6 +252,9 @@ export default function useFilesFilter({
         case FilterType.PresentationsOnly.toString():
           label = t("Common:Presentations");
           break;
+        case FilterType.DiagramsOnly.toString():
+          label = t("Common:Diagrams");
+          break;
         case FilterType.ImagesOnly.toString():
           label = t("Common:Images");
           break;
@@ -289,73 +276,19 @@ export default function useFilesFilter({
 
       filterValues.push({
         key: `${filter.filterType}`,
-        label: label.toLowerCase(),
+        label: label,
         group: FilterGroups.filterType,
       });
     }
 
-    if (filter.withSubfolders) {
-      filterValues.push({
-        key: FilterKeys.withSubfolders,
-        label: t("Common:WithSubfolders"),
-        group: FilterGroups.filterFolders,
-      });
-    }
+    return filterValues;
+  }, [filter.filterType, t]);
 
-    if (filter.searchInContent) {
-      filterValues.push({
-        key: "true",
-        label: t("FileContents"),
-        group: FilterGroups.filterContent,
-      });
-    }
-
-    const currentFilterValues: TItem[] = [];
-
-    setSelectedFilterValues((value: Nullable<TItem[]>) => {
-      if (!value) {
-        currentFilterValues.push(...filterValues);
-
-        return filterValues.map((f) => ({ ...f }));
-      }
-
-      const items = value.map((v) => {
-        const item = filterValues.find((f) => f.group === v.group);
-
-        if (item) {
-          if (item.isMultiSelect) {
-            let isEqual = true;
-
-            if (Array.isArray(item.key))
-              item.key.forEach((k) => {
-                if (Array.isArray(v.key) && !v.key.includes(k)) {
-                  isEqual = false;
-                }
-              });
-
-            if (isEqual) return item;
-
-            return false;
-          }
-          if (item.key === v.key) return item;
-          return false;
-        }
-        return false;
-      });
-
-      const newItems = filterValues.filter(
-        (v) => !items.find((i) => i && i.group === v.group),
-      );
-
-      const filteredItems = items.filter((i) => i) as TItem[];
-
-      currentFilterValues.push(...filteredItems);
-
-      return filteredItems;
-    });
-
-    return isSSR ? filterValues : currentFilterValues;
-  }, [filter.filterType, filter.searchInContent, filter.withSubfolders, t]);
+  const initSelectedFilterData = React.useMemo(
+    () => getSelectedFilterData(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [], // should be calculated once
+  );
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [
@@ -393,12 +326,6 @@ export default function useFilesFilter({
         newFilter.authorType = null;
         newFilter.excludeSubject = null;
       }
-      if (group === FilterGroups.filterFolders) {
-        newFilter.withSubfolders = null;
-      }
-      if (group === FilterGroups.filterContent) {
-        newFilter.searchInContent = null;
-      }
       if (group === FilterGroups.filterRoom) {
         newFilter.roomId = null;
       }
@@ -432,5 +359,6 @@ export default function useFilesFilter({
     onChangeViewAs,
     removeSelectedItem,
     clearAll,
+    initSelectedFilterData,
   };
 }

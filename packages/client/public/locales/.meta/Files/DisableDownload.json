@@ -3,7 +3,7 @@
   "content": "Restrict file content copy, file download and printing",
   "content_en_sha1_hash": "160894504c4b276653db9d748e5009deed27a789",
   "created_at": "2025-05-19T21:30:55.457Z",
-  "updated_at": "2025-05-22T11:56:37.488Z",
+  "updated_at": "2025-07-10T11:11:06.848Z",
   "comment": {
     "text": "\"This translation key describes the content for 'Files:DisableDownload', which restricts file content copy, download, and printing. It will appear as a toggle block in a panel to prevent users from copying or downloading files.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\EditLinkPanel\\index.js",
-      "line_number": 330,
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
+      "line_number": 332,
       "context": "setIsPasswordErrorShow={setIsPasswordErrorShow}\n />\n {!isFormRoom ? (\n <ToggleBlock\n isLoading={isLoading}\n headerText={t(\"Files:DisableDownload\")}\n bodyText={t(\"Files:PreventDownloadFilesAndFolders\")}\n isChecked={denyDownload}\n onChange={onDenyDownloadChange}\n />\n ) : null}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

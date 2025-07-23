@@ -35,7 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobile, isDesktop } from "@docspace/shared/utils/device";
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";

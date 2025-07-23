@@ -29,7 +29,7 @@ import PersonSvgUrl from "PUBLIC_DIR/images/icons/12/person.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";

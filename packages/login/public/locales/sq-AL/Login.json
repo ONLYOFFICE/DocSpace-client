@@ -1,0 +1,23 @@
+{
+  "ChangePasswordSuccess": "Fjalëkalimi është ndryshuar me sukses",
+  "CodeTitle": "Kodi ju është dërguar me email",
+  "ErrorInvalidText": "për 10 sekonda do të ridrejtoheni te <1>{{productName}}</1>",
+  "ForgotPassword": "Keni harruar fjalëkalimin tuaj?",
+  "LDAPUsernamePlaceholder": "Emri i përdoruesit të {{ldap_domain}}",
+  "MessageAuthorize": "Identifikohu për të vazhduar",
+  "MessageEmailConfirmed": "Adresa juaj e emailit u aktivizua me sukses.",
+  "MessageSendPasswordRecoveryInstructionsOnEmail": "Ju lutemi, shkruani adresën e emailit që keni përdorur për regjistrim. Udhëzimet e rikuperimit të fjalëkalimit do t'i dërgohen atij.",
+  "PasswordRecoveryTitle": "Rikuperimi i fjalëkalimit",
+  "RecoverAccess": "Rikuperoni aksesin",
+  "RecoverContactEmailPlaceholder": "Email kontakti",
+  "RecoverTextBody": "Nëse nuk mund të identifikoheni me llogarinë tuaj ekzistuese ose dëshironi të regjistroheni si përdorues i ri, kontaktoni administratorin e portalit.",
+  "Register": "Regjistrohuni",
+  "RegisterTextBodyAfterDomainsList": "Për t'u regjistruar, shkruani adresën tuaj të emailit dhe klikoni Dërgo kërkesën. Një mesazh me një lidhje për të aktivizuar llogarinë tuaj do të dërgohet në adresën e specifikuar.",
+  "RegisterTextBodyBeforeDomainsList": "Regjistrimi është i disponueshëm për përdoruesit me një llogari emaili në",
+  "RegisterTitle": "Kërkesa për regjistrim",
+  "RegistrationEmailWatermark": "Email",
+  "RememberHelper": "Jetëgjatësia e parazgjedhur e sesionit është 20 minuta. Kontrolloni këtë opsion për ta vendosur atë në 1 vit. Për të vendosur vlerën tuaj, shkoni te Cilësimet.",
+  "SignInLDAP": "Identifikohuni në: {{ldap_domain}}",
+  "SignInLdapHelper": "Përdorni kredencialet për domenin e korporatës",
+  "UserIsAlreadyRegistered": "Përdoruesi <1>{{email}}</1> është regjistruar tashmë në këtë {{productName}}, fut fjalëkalimin tënd ose kthehu për të vazhduar me një email tjetër."
+}

@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:54.705Z",
-  "updated_at": "2025-05-22T11:56:37.749Z",
+  "updated_at": "2025-07-02T07:49:19.815Z",
   "comment": {
     "text": "The translation key \"Viewer\" is used to display the label for a viewer action or button, typically found in share-related UI elements. It appears in dialogues and interfaces where users can select a sharing permission level, such as \"ReadOnly\" access.",
     "is_auto": true,
@@ -11,10 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\settingsTree.js",
-      "line_number": 502,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
+      "line_number": 41,
+      "context": "import PortalImg from \"PUBLIC_DIR/images/sdk-presets_portal.react.svg?url\";\n import PublicRoomImg from \"PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url\";\n import RoomSelectorImg from \"PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url\";\n import FileSelectorImg from \"PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url\";\n import EditorImg from \"PUBLIC_DIR/images/sdk-presets_editor.react.svg?url\";\n import ViewerImg from \"PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url\";\n import CustomImg from \"PUBLIC_DIR/images/sdk-presets_custom.react.svg?url\";\n \n import PortalImgDark from \"PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url\";\n import PublicRoomImgDark from \"PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url\";\n import RoomSelectorImgDark from \"PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 516,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"7-1-5\",\n icon: \"\",\n link: \"viewer\",\n tKey: \"JavascriptSdk:Viewer\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"7-1-6\",\n icon: \"\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 183,
+      "context": "},\n {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"JavascriptSdk:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n ];\n };",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
+      "line_number": 183,
+      "context": "},\n {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"JavascriptSdk:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n ];\n };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

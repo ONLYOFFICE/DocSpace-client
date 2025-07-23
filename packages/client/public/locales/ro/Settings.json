@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Selectați secțiuni pentru imoprt. Aceste secţiuni  vor apărea în secțiunile corespunzătoare ale spațiului {{productName}}.",
   "IncludedInBusiness": "Inclus în abonamentul Business",
   "IntegrationRequest": "Vă lipsește o soluție de integrare sau o componentă utilă în {{productName}} {{organizationName}}? Trimiteți o solicitare către echipa noastră și vom analiza propunerea dvs.",
+  "InvitationSettings": "Setări de invitație",
+  "InvitationSettingsContacts": "Invitați membrii ai {{productName}} din secțiunea Contacte",
+  "InvitationSettingsContactsDescription": "Activați această opțiune pentru a permite ca invitațiile să fie trimise noilor membrii ai {{productName}} din secțiunea Contacte. Această opțiune trebuie dezactivată dacă doriți să invitați membrii noi numai prin server LDAP.",
+  "InvitationSettingsDescription": "Configurați opțiunile de invitație pentru membrii interni și invitații externi ai {{productName}}. Aceste setări vă pot ajuta să respectați standardele de securitate ale companiei dvs, de exemplu, dacă utilizați LDAP sau alte sisteme de gestionare a utilizatorilor.",
+  "InvitationSettingsGuests": "Se permite invitarea în calitate de invitat",
+  "InvitationSettingsGuestsDescription": "Activați această opțiune pentru a le permite membrilor ai {{productName}} trimiterea invitațiilor în sala către participanții externi în calitate de invitați.",
+  "InvitationSettingsMobile": "Configurați opțiunile de invitație pentru membrii interni și invitații externi ai {{productName}}.",
   "InviteLetterTooltip": "Dacă opțiunea este bifată, toți utilizatorii noi vor primi o scrisoare de invitație cu detalii de autorizare.",
   "IPSecurity": "Securitate IP",
   "IPSecurityMobileDescription": "Securitatea IP este utilizată pentru a restricționa accesul la portalul de la toate adresele IP exceptând anumite adrese.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Siglă pentru pagina Despre",
   "LogoCompact": "Meniul compact din partea stângă",
   "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
-  "LogoDocsEditorEmbedded": "Siglă pentru antetul editorului - modul încorporat",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo-ul pentru antetul spațiului",
   "LogoLogin": "Siglă pentru pagina de conectare și mesaje de e-mail",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Trimite scrisoarea de invitație",
   "SendNotificationAboutRestoring": "Trimite o notificare privind restaurarea spațiului către utilizatori",
   "ServerSideEncryptionMethod": "Metoda de criptare pe partea de server",
+  "Services": "Servicii",
   "ServiceUrl": "Url a serverului",
   "SessionLifetime": "Durata de expirare a sesiunii ",
   "SessionLifetimeMobileDescription": "Durata de expirare a sesiunii permite stabilirea perioadei de timp (exprimată în minute) înainte ca utilizatorii spațiului {{productName}} vor fi nevoiți să introducă din nou datele de autentificare pentru a accesa spaţiul.",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
-  "YourLogo": "Logo-ul dvs"
+  "YourLogo": "Logo-ul dvs",
+  "AdManagementDescription": "Alegeți dacă doriți afișarea anunțurilor banner în {{productName}}.",
+  "AdManagement": "Gestionare anunțuri"
 }

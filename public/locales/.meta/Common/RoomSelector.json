@@ -3,7 +3,7 @@
   "content": "Room selector",
   "content_en_sha1_hash": "19415158fe52171efbd6c6c03e13605aae21b7db",
   "created_at": "2025-05-19T21:30:48.245Z",
-  "updated_at": "2025-05-22T11:56:37.709Z",
+  "updated_at": "2025-07-02T07:49:19.815Z",
   "comment": {
     "text": "The \"RoomSelector\" translation key is used to describe a room selection component in the Portal Settings, likely appearing on buttons or labels within the UI. This description will help users understand the purpose of selecting a room in this context.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
       "line_number": 114,
       "context": "description: t(\"ViewerDescription\"),\n image: theme.isBase ? ViewerImg : ViewerImgDark,\n handleOnClick: navigateToViewer,\n },\n {\n title: t(\"Common:RoomSelector\"),\n description: t(\"RoomSelectorDescription\"),\n image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,\n handleOnClick: navigateToRoomSelector,\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\settingsTree.js",
-      "line_number": 481,
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
+      "line_number": 495,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_room-selector\",\n key: \"7-1-2\",\n icon: \"\",\n link: \"room-selector\",\n tKey: \"Common:RoomSelector\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_file-selector\",\n key: \"7-1-3\",\n icon: \"\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

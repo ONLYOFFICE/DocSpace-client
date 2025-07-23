@@ -3,7 +3,7 @@
   "content": "Document Editing Service Address",
   "content_en_sha1_hash": "2037511e6913a8851e1e8816a96493aa5d74fd87",
   "created_at": "2025-05-19T21:30:51.384Z",
-  "updated_at": "2025-05-22T11:56:37.728Z",
+  "updated_at": "2025-05-28T09:30:02.626Z",
   "comment": {
     "text": "This translation key is used for the label on a form input field that allows users to enter the address of a document editing service. It appears in a location form within the PortalSettings page and is intended to provide clear context for users when they are entering this specific information.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\DocumentService\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
       "line_number": 257,
       "context": "<Styled.LocationForm onSubmit={onSubmit}>\n <div className=\"form-inputs\">\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"docServiceAdress\"\n text={t(\"Settings:DocumentServiceLocationUrlApi\")}\n />\n <InputBlock\n id=\"docServiceAdress\"\n type=\"text\"\n autoComplete=\"off\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

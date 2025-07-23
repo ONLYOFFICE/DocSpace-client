@@ -27,7 +27,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import type { Location } from "@remix-run/router";
+import type { Location } from "react-router";
 
 import {
   AccountLoginType,
@@ -39,6 +39,7 @@ import {
 import { Nullable } from "../../types";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TFilterArea, TFilterSortBy, TSortOrder } from "./types";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 100;
@@ -84,6 +85,25 @@ const INVITED_BY_ME = "invitedbyme";
 const AREA = "area";
 const INCLUDE_STRANGERS = "includeStrangers";
 const INCLUDE_SHARED = "includeShared";
+
+export const typeDefinition = {
+  sortBy: [
+    "AZ",
+    "displayname",
+    "type",
+    "department",
+    "email",
+    "usedspace",
+    "registrationDate",
+    "createdby",
+  ] as TFilterSortBy[],
+  sortOrder: ["ascending", "descending"] as TSortOrder[],
+  employeeStatus: Object.values(EmployeeStatus).map((value) => String(value)),
+  role: Object.values(EmployeeType).map((value) => String(value)),
+  payments: Object.values(PaymentsType).map((value) => String(value)),
+  accountLoginType: Object.values(AccountLoginType),
+  area: ["all", "people", "guests"] as TFilterArea[],
+};
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -265,6 +285,8 @@ class Filter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       pageCount,
       sortBy,
@@ -283,7 +305,7 @@ class Filter {
       area,
       includeStrangers,
       includeShared,
-    } = this;
+    } = fixedValidObject;
 
     let employeetype = null;
 
@@ -320,6 +342,8 @@ class Filter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       pageCount,
       sortBy,
@@ -339,7 +363,7 @@ class Filter {
       area,
       includeStrangers,
       includeShared,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: {
       [PAGE]: typeof page;

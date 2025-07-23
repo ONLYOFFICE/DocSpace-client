@@ -271,13 +271,15 @@ class ContactsConextOptionsStore {
           };
 
         case "invite-again":
-          return {
-            id: "option_invite-again",
-            key: option,
-            icon: InviteAgainReactSvgUrl,
-            label: t("LblInviteAgain"),
-            onClick: () => onInviteAgainClick(item, t),
-          };
+          return !this.settingsStore.allowInvitingMembers
+            ? null
+            : {
+                id: "option_invite-again",
+                key: option,
+                icon: InviteAgainReactSvgUrl,
+                label: t("LblInviteAgain"),
+                onClick: () => onInviteAgainClick(item, t),
+              };
         case "reset-auth":
           return {
             id: "option_reset-auth",
@@ -340,7 +342,7 @@ class ContactsConextOptionsStore {
     const isGuests = contactsTab === "guests";
 
     const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
-    const { standalone } = this.settingsStore;
+    const { standalone, allowInvitingGuests } = this.settingsStore;
 
     const { isCollaborator, isRoomAdmin, isAdmin, isVisitor } =
       item ?? selectionUsersRights;
@@ -409,7 +411,8 @@ class ContactsConextOptionsStore {
 
       options.push(roomAdminOption);
       options.push(userOption);
-      if (!isVisitor) options.push(guestOption);
+
+      if (!isVisitor && allowInvitingGuests) options.push(guestOption);
     }
 
     return options;
@@ -730,7 +733,15 @@ class ContactsConextOptionsStore {
       },
     ];
 
-    return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
+    // Delete Invite
+    if (!this.settingsStore.allowInvitingMembers)
+      accountsFullOptions.splice(0, 1);
+
+    return isRoomAdmin
+      ? !this.settingsStore.allowInvitingMembers
+        ? []
+        : accountsUserOptions
+      : accountsFullOptions;
   };
 
   inviteUser = (userType: EmployeeType) => {

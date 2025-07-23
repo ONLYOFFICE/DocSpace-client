@@ -29,7 +29,7 @@ import "moment/locale/en-gb";
 
 export default function getCorrectDate(
   locale: string,
-  date: string | Date,
+  date: string | Date | Moment,
   dateFormat = "L",
   timeFormat = "LT",
   tz?: string,

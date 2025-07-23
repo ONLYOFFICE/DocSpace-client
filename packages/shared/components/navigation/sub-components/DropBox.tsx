@@ -69,8 +69,10 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
       currentDeviceType,
       navigationTitleContainerNode,
       onCloseDropBox,
+
       isContextButtonVisible,
       isPublicRoom,
+      isPlusButtonVisible,
     },
     ref,
   ) => {
@@ -163,6 +165,7 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
             showTitle
             isContextButtonVisible={isContextButtonVisible}
             isPublicRoom={isPublicRoom}
+            isPlusButtonVisible={isPlusButtonVisible}
           />
         </div>
 

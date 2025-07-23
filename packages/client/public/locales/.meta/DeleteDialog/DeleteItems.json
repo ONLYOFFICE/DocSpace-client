@@ -3,7 +3,7 @@
   "content": "You are about to delete these items.",
   "content_en_sha1_hash": "b1d5aa32b50eb60054a839e1db625efe3155a510",
   "created_at": "2025-05-19T21:30:56.703Z",
-  "updated_at": "2025-05-20T09:38:23.090Z",
+  "updated_at": "2025-06-18T07:34:14.879Z",
   "comment": {
     "text": "\"This translation key is used to display a message before deleting items permanently. It appears as a dialog title in the Delete Dialog component, prompting users to confirm their action.\"",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 205,
+      "line_number": 206,
       "context": "<>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 205,
+      "line_number": 206,
       "context": "<>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 205,
+      "line_number": 206,
       "context": "<>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>\n <>{t(\"DeleteItems\")} </>\n <>{t(\"ItemsPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n );\n }",
       "module": "/packages/client"
     }

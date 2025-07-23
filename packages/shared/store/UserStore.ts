@@ -50,10 +50,7 @@ class UserStore {
   }
 
   loadCurrentUser = async () => {
-    let user = null;
-    if (window?.__ASC_INITIAL_EDITOR_STATE__?.user)
-      user = window.__ASC_INITIAL_EDITOR_STATE__.user;
-    else user = await api.people.getUser();
+    const user = await api.people.getUser();
 
     this.setUser(user as TUser);
 

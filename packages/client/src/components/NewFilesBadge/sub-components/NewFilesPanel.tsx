@@ -197,10 +197,12 @@ export const NewFilesPanelComponent = ({
   const panel = (
     <>
       <StyledPanel className="new-files-panel" position={position}>
-        <Scrollbar>{content}</Scrollbar>
+        <Scrollbar autoFocus>{content}</Scrollbar>
         {markAsReadButton}
       </StyledPanel>
-      {!isMobile() ? <Backdrop visible withoutBackground withoutBlur /> : null}
+      {!isMobile() ? (
+        <Backdrop visible withoutBackground withoutBlur onClick={onClose} />
+      ) : null}
     </>
   );
 

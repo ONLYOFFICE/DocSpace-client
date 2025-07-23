@@ -3,7 +3,7 @@
   "content": "The destination already contains a file named «<1>{{fileName}}</1>».",
   "content_en_sha1_hash": "c76660403b19106f373e22284611e0a17e7e4ffc",
   "created_at": "2025-05-19T21:30:45.242Z",
-  "updated_at": "2025-05-22T11:56:37.338Z",
+  "updated_at": "2025-05-28T09:30:02.212Z",
   "comment": {
     "text": "The FileActionRequired translation key is used to display a message indicating that a file already exists at the destination, prompting the user to take alternative action. It appears in a conflict resolution dialog and button labels, providing context for translators on how to handle existing files during file actions.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 242,
       "context": "const getMessageText = () => {\n const singleFileMessage = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName: items[0].title }}\n components={{ 1: <span className=\"bold truncate\" /> }}\n />\n );",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\ConflictResolveDialog\\ConflictResolveDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
       "line_number": 55,
       "context": "submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Items in Trash are automatically deleted after 30 days.",
   "content_en_sha1_hash": "efb29be1a65077ab83e127bff8d6e583328edadd",
   "created_at": "2025-05-19T21:30:56.270Z",
-  "updated_at": "2025-05-21T11:05:12.159Z",
+  "updated_at": "2025-06-18T07:34:15.024Z",
   "comment": {
     "text": "The TrashErasureWarning translation key is used to display a notification that files in the trash will be automatically deleted after 30 days. This message appears on desktop devices as part of a warning section, reminding users of this retention policy. The translator should ensure the wording accurately conveys this automated deletion process.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 573,
-      "context": ": {};\n \n const badgeLabel = showTemplateBadge ? t(\"Files:Template\") : \"\";\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashErasureWarning\")\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";\n \n const isContextButtonVisible = () => {",
+      "line_number": 576,
+      "context": "const badgeLabel =\n stateShowTemplateBadge || showTemplateBadge ? t(\"Files:Template\") : \"\";\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashErasureWarning\")\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";\n \n const isContextButtonVisible = () => {",
       "module": "/packages/client"
     },
     {

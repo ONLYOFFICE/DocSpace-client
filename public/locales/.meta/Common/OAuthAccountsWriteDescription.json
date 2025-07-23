@@ -3,7 +3,7 @@
   "content": "View and manage all contacts",
   "content_en_sha1_hash": "f7289c71c27551c49981978e5345662aa8dd1dbc",
   "created_at": "2025-05-19T21:30:46.982Z",
-  "updated_at": "2025-05-22T11:56:37.909Z",
+  "updated_at": "2025-05-28T09:30:03.011Z",
   "comment": {
     "text": "This translation key is used to display a label for managing all contacts. It is likely used in an OAuth authorization or settings interface, where users can view and manage their contact information.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\utils\\oauth\\index.ts",
+      "file_path": "/packages/shared/utils/oauth/index.ts",
       "line_number": 122,
       "context": "return t(\"Common:OAuthFilesWriteDescription\");\n case ScopeGroup.accounts:\n case ScopeGroup.contacts:\n if (type === ScopeType.read)\n return t(\"Common:OAuthAccountsReadDescription\");\n return t(\"Common:OAuthAccountsWriteDescription\");\n case ScopeGroup.profiles:\n if (type === ScopeType.read)\n return t(\"Common:OAuthProfilesReadDescription\");\n return t(\"Common:OAuthProfilesWriteDescription\");\n case ScopeGroup.rooms:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "You",
   "content_en_sha1_hash": "905cb326c779f0123e079bf8ccb223176a3cf32d",
   "created_at": "2025-05-19T21:30:49.648Z",
-  "updated_at": "2025-05-22T11:56:37.382Z",
+  "updated_at": "2025-05-28T09:30:02.251Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that data is being reassigned or interrupted, typically in a dialog or button context. It appears in UI elements such as Data Reassignment Dialog and Delete Profile Ever Dialog, and is intended to notify users that an action is in progress related to their own data.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DataReassignmentDialog\\sub-components\\Body\\Progress.js",
+      "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
       "line_number": 168,
       "context": "<InterruptIcon className=\"status-icon\" />\n <Text className=\"status\">{t(\"DataReassignmentDialog:Interrupted\")}</Text>\n </div>\n );\n \n const you = `${`(${t(\"Common:You\")})`}`;\n \n const reassigningDataStart = isReassignCurrentUser ? (\n <Trans\n i18nKey=\"ReassigningDataToItself\"\n ns=\"DataReassignmentDialog\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteProfileEverDialog\\sub-components\\BodyComponent.tsx",
+      "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 79,
       "context": "t={t}\n >\n {{ warningMessageMyDocuments }}\n <strong>\n {{ userPerformedDeletion: userPerformedDeletion!.displayName }}\n {{ userYou: t(\"Common:You\") }}\n </strong>\n </Trans>\n );\n \n const warningMessage =",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

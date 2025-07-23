@@ -3,7 +3,7 @@
   "content": "Key lifetime",
   "content_en_sha1_hash": "4542cdd571d747286d9eef72438ab8529c366c75",
   "created_at": "2025-05-19T21:30:51.751Z",
-  "updated_at": "2025-05-22T11:56:37.700Z",
+  "updated_at": "2025-06-24T16:31:24.421Z",
   "comment": {
     "text": "The translation key \"KeyLifetime\" is used to display the lifetime of an API key. It appears in a dialog when creating or editing an API key, providing users with information about the key's validity period.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\sub-components\\CreateApiKeyDialog\\index.tsx",
-      "line_number": 448,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 445,
       "context": "</div>\n {!isEdit ? (\n <div className=\"api-key_name\">\n <div className=\"api-key_lifetime\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Settings:KeyLifetime\")}\n </Text>\n <ToggleButton\n className=\"api-key_toggle\"\n isChecked={lifetimeIsChecked}\n onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Protected files",
   "content_en_sha1_hash": "8fc834540fa832640cdb544ad1edfaa397a8daa0",
   "created_at": "2025-05-19T21:30:47.531Z",
-  "updated_at": "2025-05-22T11:56:37.873Z",
+  "updated_at": "2025-05-28T09:30:02.967Z",
   "comment": {
     "text": "The \"ProtectedFiles\" translation key is used to display a message indicating file protection in a download dialog. This message is part of a public room bar component that appears when accessing certain files. Translators should provide a description for this label that accurately conveys the concept of file protection without revealing sensitive information.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\PasswordContent.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordContent.tsx",
       "line_number": 103,
       "context": "className={styles.downloadDialogPasswordContent}\n data-testid=\"password-content\"\n >\n {barIsVisible ? (\n <PublicRoomBar\n headerText={t(\"Common:ProtectedFiles\")}\n bodyText={t(\"Common:FileProtectionMessage\")}\n iconName={InfoSvgUrl}\n onClose={onClose}\n />\n ) : null}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

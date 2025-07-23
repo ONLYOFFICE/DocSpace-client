@@ -61,6 +61,8 @@ import {
 } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import api from "@docspace/shared/api";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 const observedKeys = [
   "id",
@@ -464,6 +466,10 @@ class InfoPanelStore {
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
     this.filesStore.resetSelections();
+
+    const locale = getCookie(LANGUAGE);
+
+    user.registrationDate = getCorrectDate(locale, user.registrationDate);
 
     navigate(combineUrl(...path), { state: { user } });
   };

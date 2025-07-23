@@ -27,7 +27,7 @@
 import React, { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import queryString from "query-string";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";

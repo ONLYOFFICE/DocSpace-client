@@ -3,7 +3,7 @@
   "content": "Opening a document",
   "content_en_sha1_hash": "4a7eafc9df868a113f57ca2b0bb89644be660ffe",
   "created_at": "2025-05-19T21:30:57.145Z",
-  "updated_at": "2025-05-22T11:56:37.805Z",
+  "updated_at": "2025-07-01T15:57:36.364Z",
   "comment": {
     "text": "This translation key is used for a UI element that displays the text \"Opening a document\" as part of a deep link functionality. It appears on a file tile in a document editor interface and helps users understand the purpose of the deep link.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\deep-link\\index.tsx",
-      "line_number": 117,
+      "file_path": "/packages/doceditor/src/components/deep-link/index.tsx",
+      "line_number": 123,
       "context": "<PortalLogo className=\"portal-logo\" isResizable />\n </LogoWrapper>\n <FormWrapper>\n <StyledDeepLink>\n <StyledBodyWrapper>\n <Text className=\"title\">{t(\"DeepLink:OpeningDocument\")}</Text>\n <StyledFileTile>\n <img src={getFileIcon() ?? \"\"} alt=\"portal-logo\" />\n <Text fontSize=\"14px\" fontWeight=\"600\" truncate>\n {getFileTitle()}\n </Text>",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

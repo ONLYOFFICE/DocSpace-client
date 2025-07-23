@@ -3,7 +3,7 @@
   "content": "You can't use the same email address",
   "content_en_sha1_hash": "f85d5552131bdd2fc625627ca72a0cb482f3e288",
   "created_at": "2025-05-19T21:30:48.291Z",
-  "updated_at": "2025-05-22T11:56:37.315Z",
+  "updated_at": "2025-05-28T09:30:02.187Z",
   "comment": {
     "text": "This translation key displays an error message indicating that a user cannot use the same email address. It is used in a change email dialog to inform users of a validation rule when attempting to send a new email.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ChangeEmailDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 125,
       "context": "}\n \n if (isEmailValid) {\n const sameEmailError = email.toLowerCase() === user.email.toLowerCase();\n if (sameEmailError) {\n this.setState({ errorMessage: t(\"Common:SameEmail\"), hasError: true });\n } else {\n this.setState({ errorMessage: \"\", hasError: false });\n this.onSendEmailChangeInstructions();\n }\n } else {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -155,6 +155,7 @@ class SettingsSetupStore {
         this.settingsStore.getIpRestrictions(),
         this.settingsStore.getSessionLifetime(),
         this.settingsStore.getBruteForceProtection(),
+        this.settingsStore.getInvitationSettings(),
       ]);
       this.setIsInit(true);
     }

@@ -3,7 +3,7 @@
   "content": "New in folder",
   "content_en_sha1_hash": "e5ef7b6c7c00114460d0779f23ffaafda3613917",
   "created_at": "2025-05-19T21:30:55.884Z",
-  "updated_at": "2025-05-21T11:41:39.479Z",
+  "updated_at": "2025-06-26T19:00:18.131Z",
   "comment": {
     "text": "This translation key is used to display the label \"New in folder\" in a modal dialog header. It appears in the UI when a new file is added to a folder, providing a clear indication of the file's origin within that folder.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
-      "line_number": 217,
+      "line_number": 219,
       "context": "displayType={ModalDialogType.aside}\n withFooterBorder\n withBodyScroll\n >\n <ModalDialog.Header>\n {isRooms ? t(\"NewInRooms\") : isRoom ? t(\"NewInRoom\") : t(\"NewInFolder\")}\n </ModalDialog.Header>\n <ModalDialog.Body>{content}</ModalDialog.Body>\n <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>\n </ModalDialog>\n );",
       "module": "/packages/client"
     }

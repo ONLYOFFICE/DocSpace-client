@@ -70,7 +70,6 @@ beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
 
   workspaces = getWorkSpaces();
-  workspaces.push(path.resolve(BASE_DIR, "public/locales"));
 
   const translations = workspaces.flatMap((wsPath) => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
@@ -93,12 +92,17 @@ beforeAll(() => {
 
       const jsonTranslation = JSON.parse(fileContent);
 
+      const fileName = path.basename(tPath);
+      const namespace = fileName.replace(".json", "");
+
       const translationFile = {
         path: tPath,
-        fileName: path.basename(tPath),
+        fileName,
+        namespace,
         translations: Object.entries(jsonTranslation).map(([key, value]) => ({
           key,
           value,
+          namespace,
         })),
         md5hash: hash,
         language: path.dirname(tPath).split(path.sep).pop(),
@@ -255,6 +259,7 @@ beforeAll(() => {
 
     moduleFolders.push({
       path: wsPath,
+      isCommon: wsPath.includes("public/locales"),
       availableLanguages: t?.languages,
       appliedJsTranslationKeys: j?.translationKeys,
     });
@@ -464,7 +469,7 @@ describe("Locales Tests", () => {
       }
       acc[t.language].push(
         ...t.translations.map((k) => ({
-          key: `${t.fileName}=>${k.key}`,
+          key: `${t.namespace}:${k.key}`,
           value: k.value,
           variables: [...k.value.matchAll(regVariables)].map((m) =>
             m[1]?.trim().replace(", lowercase", "")
@@ -536,7 +541,7 @@ describe("Locales Tests", () => {
       }
       acc[t.language].push(
         ...t.translations.map((k) => ({
-          key: k.key,
+          key: `${t.namespace}:${k.key}`,
           value: k.value,
           tags: [...k.value.matchAll(regTags)].map((m) =>
             m[0].trim().replace(" ", "")
@@ -598,7 +603,7 @@ describe("Locales Tests", () => {
     let i = 0;
 
     moduleFolders.forEach((module) => {
-      if (!module.availableLanguages) return;
+      if (!module.availableLanguages || module.isCommon) return;
 
       module.availableLanguages.forEach((lng) => {
         const translationItems = lng.translations.filter((f) =>
@@ -744,12 +749,16 @@ describe("Locales Tests", () => {
     let exists = false;
     let i = 0;
 
-    const allEnKeys = translationFiles
-      .filter((file) => file.language === "en")
+    const allEnTranslations = translationFiles.filter(
+      (file) => file.language === "en"
+    );
+    const allEnKeys = allEnTranslations
       .flatMap((item) => item.translations)
-      .map((item) => item.key)
+      .map((item) => item.namespace + ":" + item.key)
       .filter((k) => !k.startsWith("Culture_"))
       .sort();
+
+    const movedKeys = [];
 
     moduleFolders.forEach((module) => {
       if (!module.availableLanguages) return;
@@ -757,9 +766,9 @@ describe("Locales Tests", () => {
       module.availableLanguages.forEach((lng) => {
         if (lng.language === "en") return;
 
-        const notFoundKeys = lng.translations
-          .filter((f) => f.key && !allEnKeys.includes(f.key))
-          .map((f) => f.key);
+        const notFoundKeys = lng.translations.filter(
+          (f) => f.key && !allEnKeys.includes(f.namespace + ":" + f.key)
+        );
 
         if (!notFoundKeys.length) return;
 
@@ -769,10 +778,120 @@ describe("Locales Tests", () => {
           `${++i}. Language '${lng.language}' (Count: ${notFoundKeys.length}). Path '${lng.path}' ` +
           `Keys:\r\n\r\n`;
 
-        message += notFoundKeys.join("\r\n") + "\r\n\r\n";
+        message +=
+          notFoundKeys.map((f) => f.namespace + ":" + f.key).join("\r\n") +
+          "\r\n\r\n";
+
+        // Add keys to movedKeys array with language information
+        movedKeys.push(
+          ...notFoundKeys.map((key) => ({
+            ...key,
+            language: lng.language,
+            path: lng.path,
+          }))
+        );
       });
     });
 
+    // Find keys from movedKeys in other namespaces and suggest correct namespace
+    if (movedKeys.length > 0) {
+      message += `\n\nAnalyzing ${movedKeys.length} missing translation keys for namespace corrections...\r\n\r\n`;
+
+      // Group English translation files by namespace
+      const enNamespaces = {};
+      allEnTranslations.forEach((file) => {
+        enNamespaces[file.namespace] = file.translations.map((t) => ({
+          key: t.key,
+          path: file.path,
+        }));
+      });
+
+      // Analysis results
+      const foundInOtherNamespace = [];
+      const notFoundAnywhere = [];
+
+      // Check each moved key
+      movedKeys.forEach((movedKey) => {
+        const keyToFind = movedKey.key;
+        let found = false;
+
+        // Check if key exists in any other namespace
+        for (const [namespace, keys] of Object.entries(enNamespaces)) {
+          if (namespace === movedKey.namespace) continue;
+
+          const foundKey = keys.find((t) => t.key === keyToFind);
+          if (foundKey) {
+            foundInOtherNamespace.push({
+              ...movedKey,
+              correctNamespace: namespace,
+              correctPath: path.dirname(path.dirname(foundKey.path)),
+              correctFileName: path.basename(foundKey.path),
+            });
+            found = true;
+            break;
+          }
+        }
+
+        // If not found in any namespace, suggest one based on key pattern
+        if (!found) {
+          notFoundAnywhere.push({
+            ...movedKey,
+          });
+        }
+      });
+
+      // Output analysis results
+      if (foundInOtherNamespace.length > 0) {
+        message += `\n${foundInOtherNamespace.length} keys found in other namespaces:\r\n\r\n`;
+        foundInOtherNamespace.forEach((key) => {
+          message += `  - Key: '${key.key}' in language '${key.language}'\r\n`;
+          message += `    Current namespace: '${key.namespace}', should be in: '${key.correctNamespace}'\r\n`;
+        });
+
+        if (process.env.FIX_MOVED_KEYS === "true") {
+          // Move keys from wrong namespaces to correctNamespace
+          foundInOtherNamespace.forEach((t) => {
+            const oldPath = t.path;
+            const newPath = path.join(
+              t.correctPath,
+              t.language,
+              t.correctFileName
+            );
+
+            const oldFile = fs.readFileSync(oldPath, "utf8");
+            const newFile = JSON.parse(fs.readFileSync(newPath, "utf8"));
+
+            const oldKeys = JSON.parse(oldFile);
+            if (!newFile[t.key] || newFile[t.key] !== oldKeys[t.key]) {
+              const newKeys = { ...newFile, [t.key]: oldKeys[t.key] };
+              fs.writeFileSync(newPath, JSON.stringify(newKeys, null, 2));
+            }
+
+            delete oldKeys[t.key];
+            fs.writeFileSync(oldPath, JSON.stringify(oldKeys, null, 2));
+          });
+        }
+      }
+
+      if (notFoundAnywhere.length > 0) {
+        message += `\n${notFoundAnywhere.length} keys not found in any English namespace:\r\n\r\n`;
+        notFoundAnywhere.forEach((key) => {
+          message += `  - Key: '${key.key}' in language '${key.language}'\r\n`;
+          message += `    Current namespace: '${key.namespace}' - need to remove\r\n`;
+        });
+
+        if (process.env.FIX_MOVED_KEYS === "true") {
+          // Remove keys from translation files
+          notFoundAnywhere.forEach((t) => {
+            const oldPath = t.path;
+            const oldFile = fs.readFileSync(oldPath, "utf8");
+            const oldKeys = JSON.parse(oldFile);
+            delete oldKeys[t.key];
+            fs.writeFileSync(oldPath, JSON.stringify(oldKeys, null, 2));
+          });
+        }
+      }
+    }
     expect(exists, message).toBe(false);
   });
 
@@ -790,7 +909,7 @@ describe("Locales Tests", () => {
       const allEnKeys = enKeys
         .flatMap((item) =>
           item.translations.map((t) => {
-            return item.fileName + " " + t.key;
+            return `${item.namespace}:${t.key}`;
           })
         )
         .sort();
@@ -807,7 +926,7 @@ describe("Locales Tests", () => {
             item.translations
               .filter((f) => f.value !== "")
               .map((t) => {
-                return item.fileName + " " + t.key;
+                return `${item.namespace}:${t.key}`;
               })
           )
           .sort();

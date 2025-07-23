@@ -3,7 +3,7 @@
   "content": "Third-party storage",
   "content_en_sha1_hash": "f9863ef0415f207037f70275c921c5f88e760b2e",
   "created_at": "2025-05-19T21:30:49.279Z",
-  "updated_at": "2025-05-22T11:56:37.373Z",
+  "updated_at": "2025-05-28T09:30:02.241Z",
   "comment": {
     "text": "This translation key is used to display a label for \"Third-party storage\" in various UI components, such as radio buttons and toggle parameters, indicating a storage option for files. It appears in dialog windows and page settings for data management and backup features.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditRoomDialog\\sub-components\\ThirdPartyStorage\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/index.js",
       "line_number": 147,
       "context": "return (\n <StyledThirdPartyStorage>\n <ToggleParam\n id=\"shared_third-party-storage-toggle\"\n title={t(\"Common:ThirdPartyStorage\")}\n description={t(\"ThirdPartyStorageDescription\")}\n isChecked={storageLocation.isThirdparty}\n onCheckedChange={onChangeIsThirdparty}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-management\\backup\\auto-backup\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
       "line_number": 628,
       "context": "</StyledModules>\n <StyledModules>\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-storage\"\n label={t(\"Common:ThirdPartyStorage\")}\n name={`${StorageModuleType}`}\n isChecked={isCheckedThirdPartyStorage}\n isDisabled={isLoadingData}\n />\n <Text className=\"backup-description\">",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-management\\backup\\manual-backup\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/index.js",
       "line_number": 449,
       "context": ") : null}\n </StyledModules>\n <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>\n <RadioButton\n id=\"third-party-storage\"\n label={t(\"Common:ThirdPartyStorage\")}\n name=\"isCheckedThirdPartyStorage\"\n key={3}\n isChecked={isCheckedThirdPartyStorage}\n isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}\n {...commonRadioButtonProps}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-management\\backup\\restore-backup\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/index.js",
       "line_number": 210,
       "context": "label: t(\"ThirdPartyResource\"),\n },\n {\n id: \"third-party-storage\",\n value: STORAGE_SPACE,\n label: t(\"Common:ThirdPartyStorage\"),\n },\n ]}\n onClick={onChangeRadioButton}\n selected={radioButtonState}\n spacing=\"16px\"",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

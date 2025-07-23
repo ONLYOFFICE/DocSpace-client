@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
@@ -126,7 +126,7 @@ const DataManagementWrapper = (props) => {
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
 
     setIsLoaded(true);
   }, [location.pathname]);
@@ -164,7 +164,6 @@ const DataManagementWrapper = (props) => {
       }
     };
   }, []);
-
   const onSelect = (e) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`

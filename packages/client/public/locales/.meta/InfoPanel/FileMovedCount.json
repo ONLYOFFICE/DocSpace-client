@@ -3,7 +3,7 @@
   "content": "Files moved ({{count}}).",
   "content_en_sha1_hash": "63c34a945bf73b0cfeb83951dd5f8d83de11f174",
   "created_at": "2025-05-19T21:30:54.814Z",
-  "updated_at": "2025-05-22T11:56:37.582Z",
+  "updated_at": "2025-05-28T09:30:02.425Z",
   "comment": {
     "text": "The \"FileMovedCount\" translation key displays a count of files moved in the history panel. It is used when showing related items after a file has been moved to a trash or folder, providing context to the user about how many files have been affected.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 62,
       "context": "return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FileMoved\");\n case \"FileMovedToTrash\":\n if (hasRelatedItems)",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

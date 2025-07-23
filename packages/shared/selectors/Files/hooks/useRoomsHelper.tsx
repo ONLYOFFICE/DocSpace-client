@@ -59,7 +59,7 @@ const useRoomsHelper = ({
 
   isInit,
   setIsInit,
-
+  searchArea,
   withCreate,
   createDefineRoomLabel,
   createDefineRoomType,
@@ -131,7 +131,7 @@ const useRoomsHelper = ({
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
-
+      if (searchArea) filter.searchArea = searchArea;
       filter.filterValue = filterValue;
       filter.type = (createDefineRoomType as unknown as string) ?? undefined;
 
@@ -215,6 +215,7 @@ const useRoomsHelper = ({
       setIsFirstLoad(false);
     },
     [
+      searchArea,
       setIsNextPageLoading,
       withCreate,
       searchValue,

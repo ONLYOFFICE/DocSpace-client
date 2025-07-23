@@ -1341,3 +1341,36 @@ export function getEncryptionSettings() {
 
   return request(options) as TEncryptionSettings;
 }
+
+export async function getInvitationSettings() {
+  const res = (await request({
+    method: "get",
+    url: "/settings/invitationsettings",
+  })) as TInvitationSettings;
+
+  return res;
+}
+
+export async function setInvitationSettings(data: {
+  allowInvitingGuests: boolean;
+  allowInvitingMembers: boolean;
+}) {
+  const res = (await request({
+    method: "put",
+    url: "/settings/invitationsettings",
+    data,
+  })) as TInvitationSettings;
+
+  return res;
+}
+
+export async function setAdManagement(hidden: boolean) {
+  const data = { hidden };
+  const res = await request({
+    method: "post",
+    url: "/settings/banner",
+    data,
+  });
+
+  return res;
+}

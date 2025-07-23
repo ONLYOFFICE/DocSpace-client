@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router";
 
 import api from "@docspace/shared/api";
 import { UrlActionType, ValidationStatus } from "@docspace/shared/enums";

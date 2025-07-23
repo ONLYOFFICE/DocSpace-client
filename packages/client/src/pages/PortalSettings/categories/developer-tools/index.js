@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import config from "PACKAGE_FILE";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { Tabs } from "@docspace/shared/components/tabs";
@@ -113,10 +113,6 @@ const DeveloperToolsWrapper = (props) => {
     },
   ];
 
-  // const load = async () => {
-  //   // await loadBaseInfo();
-  // };
-
   useEffect(() => {
     const path = location.pathname;
 
@@ -132,10 +128,6 @@ const DeveloperToolsWrapper = (props) => {
 
     setIsLoading(true);
   }, [location.pathname]);
-
-  // useEffect(() => {
-  //   ready && startTransition(load);
-  // }, [ready]);
 
   const onSelect = (e) => {
     const path = location.pathname.includes("/portal-settings")

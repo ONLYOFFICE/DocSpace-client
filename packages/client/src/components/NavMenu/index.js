@@ -33,7 +33,7 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 

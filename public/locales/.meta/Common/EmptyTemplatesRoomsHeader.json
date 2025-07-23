@@ -3,7 +3,7 @@
   "content": "No templates found",
   "content_en_sha1_hash": "f11224d0c5d283fb61cb849c74ff0e760a29e1b4",
   "created_at": "2025-05-19T21:30:44.914Z",
-  "updated_at": "2025-05-22T11:56:37.360Z",
+  "updated_at": "2025-05-28T09:30:02.228Z",
   "comment": {
     "text": "The \"EmptyTemplatesRoomsHeader\" translation key is used to display a message when no templates are found in a room's template selection. It appears as a header label in a modal dialog that allows users to create or edit rooms.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditRoomDialog\\CreateRoomDialog.js",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
       "line_number": 256,
       "context": "headerLabel: t(\"Common:FromTemplate\"),\n withoutBackButton: false,\n withoutBorder: false,\n }}\n withSearch\n emptyScreenHeader={t(\"Common:EmptyTemplatesRoomsHeader\")}\n emptyScreenDescription={t(\"Common:EmptyTemplatesRoomsDescription\")}\n />\n </ModalDialog.Container>\n ) : null}\n <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

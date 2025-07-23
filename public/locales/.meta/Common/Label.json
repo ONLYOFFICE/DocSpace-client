@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2025-05-22T11:56:37.357Z",
+  "updated_at": "2025-07-01T15:57:35.975Z",
   "comment": {
     "text": "The \"Label\" translation key is used to display a descriptive title for input fields, such as group names or room tags. It appears in a dialog box, specifically within the CreateEditGroupDialog and CreateEditRoomDialog components, where it provides context for users to enter a name. Translators should replace the English content with a translated version of \"Name\" while maintaining this descriptive purpose.",
     "is_auto": true,
@@ -11,100 +11,100 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditGroupDialog\\sub-components\\GroupNameParam\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/GroupNameParam/index.tsx",
       "line_number": 48,
       "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <Styled.GroupNameParam>\n <Label\n title={t(\"Common:Label\")}\n className=\"input-label\"\n display=\"display\"\n htmlFor=\"create-group-name\"\n text={t(\"Common:Label\")}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditGroupDialog\\sub-components\\GroupNameParam\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/sub-components/GroupNameParam/index.tsx",
       "line_number": 48,
       "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <Styled.GroupNameParam>\n <Label\n title={t(\"Common:Label\")}\n className=\"input-label\"\n display=\"display\"\n htmlFor=\"create-group-name\"\n text={t(\"Common:Label\")}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditRoomDialog\\sub-components\\SetRoomParams.js",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
       "line_number": 412,
       "context": "const tagsTitle = isTemplateSelected || isTemplate ? t(\"Files:RoomTags\") : \"\";\n \n const inputTitle =\n isTemplateSelected || isTemplate\n ? `${t(\"Files:TemplateName\")}:`\n : `${t(\"Common:Label\")}:`;\n \n return (\n <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>\n {isEdit || disabledChangeRoomType || isTemplateSelected || isTemplate ? (\n <RoomType",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\Filter\\SortFilter\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/SortFilter/index.js",
       "line_number": 45,
       "context": "const sortData = [\n {\n id: \"sort-by_name\",\n key: \"name_form\",\n label: t(\"Common:Label\"),\n default: false,\n isSelected: false,\n },\n {\n id: \"sort-by_updatedAt\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 258,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 258,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 258,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 258,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 258,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Body\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
       "line_number": 258,
       "context": ": {};\n \n const columns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: nameColumnIsEnabled,\n default: true,\n sortBy: SortByFieldName.Name,\n minWidth: 210,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 1172,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1153,
       "context": "const commonOptions = [];\n \n const name = {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\"),\n default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\sub-components\\CreateApiKeyDialog\\index.tsx",
-      "line_number": 417,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 414,
       "context": "{t(\"Settings:CreateNewSecretKeyDialogDescription\")}\n </Text>\n ) : null}\n <div className=\"api-key_name\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Label\")}\n </Text>\n <TextInput\n placeholder={t(\"Settings:NewSecretKey\")}\n value={inputValue}\n type={InputType.text}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\sub-components\\TableView\\TableHeader.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/TableView/TableHeader.tsx",
       "line_number": 51,
       "context": "const { t } = useTranslation([\"Webhooks\", \"Common\", \"Files\", \"Settings\"]);\n \n const defaultColumns: TableHeaderColumn[] = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: true,\n default: true,\n minWidth: 110,\n },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 138,
       "context": "const [columnDisplay, setColumnDisplay] = useState(\n columnDisplayOptions[0].value,\n );\n const [selectedColumns, setSelectedColumns] = useState([\n { key: \"Index\", label: t(\"Files:Index\") },\n { key: \"Name\", label: t(\"Common:Label\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Tags\", label: t(\"Common:Tags\") },\n ]);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\List\\TableView\\sub-components\\Header.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/TableView/sub-components/Header.tsx",
       "line_number": 40,
       "context": "const { t } = useTranslation([\"OAuth\", \"Files\", \"Webhooks\", \"Common\"]);\n \n const defaultColumns: TTableColumn[] = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: true,\n default: true,\n active: false,\n minWidth: 210,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\sub-components\\WebhooksTable\\WebhooksTableView\\WebhookTableHeader.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhookTableHeader.js",
       "line_number": 94,
       "context": ": {};\n \n const defaultColumns = [\n {\n key: \"Name\",\n title: t(\"Common:Label\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 210,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

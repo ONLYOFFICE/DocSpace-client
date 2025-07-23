@@ -24,26 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components/button";
+import { Trans } from "react-i18next";
 import styled from "styled-components";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import api from "@docspace/shared/api";
-
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { updatePayment } from "@docspace/shared/api/portal";
+import { Text } from "@docspace/shared/components/text";
+
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
+import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";
 
 const StyledBody = styled.div`
   button {
     width: 100%;
   }
 `;
+const StyledModalBody = styled.div`
+  .text-warning {
+    margin-top: 16px;
+  }
+`;
+
 const MANAGER = "manager";
 let timerId = null;
 let intervalId = null;
 let isWaitRequest = false;
 let previousManagersCount = null;
+
 const UpdatePlanButtonContainer = ({
   setIsLoading,
   paymentLink,
@@ -58,7 +73,18 @@ const UpdatePlanButtonContainer = ({
   t,
   canPayTariff,
   isYearTariff,
+  cardLinkedOnFreeTariff,
+  tariffPlanTitle,
+  totalPrice,
+  formatPaymentCurrency,
+  canDowngradeTariff,
+  walletCustomerStatusNotActive,
+  cardLinked,
 }) => {
+  const [isVisiblePaymentConfirm, setIsVisiblePaymentConfirm] = useState(false);
+  const [isVisibleDowngradePlanDialog, setIsVisibleDowngradePlanDialog] =
+    useState(false);
+
   const resetIntervalSuccess = () => {
     intervalId &&
       toastr.success(
@@ -91,7 +117,7 @@ const UpdatePlanButtonContainer = ({
         }
 
         isWaitRequest = true;
-        const res = await api.portal.getPortalQuota();
+        const res = await api.portal.getPortalQuota(true);
 
         const managersObject = res.features.find((obj) => obj.id === MANAGER);
 
@@ -111,17 +137,43 @@ const UpdatePlanButtonContainer = ({
       isWaitRequest = false;
     }, 2000);
   };
+  const onClose = () => {
+    setIsVisiblePaymentConfirm(false);
+  };
+
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_self")
+      : toastr.error(t("Common:UnexpectedError"));
+  };
 
   const onUpdateTariff = async () => {
     try {
-      timerId = setTimeout(() => {
-        setIsLoading(true);
-      }, 500);
+      setIsLoading(true);
+
+      if (isVisiblePaymentConfirm) onClose();
 
       const res = await updatePayment(managersCount, isYearTariff);
 
       if (res === false) {
-        toastr.error(t("ErrorNotification"));
+        const errorText =
+          cardLinkedOnFreeTariff && walletCustomerStatusNotActive ? (
+            <>
+              {t("CardUnlinked")} <br />
+              {t("LinkNewCard")} {"  "}
+              <a
+                onClick={goLinkCard}
+                fontWeight={600}
+                style={{ textDecoration: "underline" }}
+              >
+                {t("AddPaymentMethod")}
+              </a>
+            </>
+          ) : (
+            t("ErrorNotification")
+          );
+
+        toastr.error(errorText);
 
         setIsLoading(false);
         clearTimeout(timerId);
@@ -131,13 +183,49 @@ const UpdatePlanButtonContainer = ({
       }
 
       previousManagersCount = maxCountManagersByQuota;
-      waitingForQuota();
+      const quotaRes = await api.portal.getPortalQuota(true);
+      const managersObject = quotaRes.features.find(
+        (obj) => obj.id === MANAGER,
+      );
+
+      if (managersObject?.value !== previousManagersCount) {
+        setPortalQuotaValue(quotaRes);
+        resetIntervalSuccess();
+      } else {
+        waitingForQuota();
+      }
     } catch (e) {
       toastr.error(t("ErrorNotification"));
       setIsLoading(false);
       clearTimeout(timerId);
       timerId = null;
     }
+  };
+
+  const isPassedByQuota = () => {
+    return isAlreadyPaid ? canDowngradeTariff : canPayTariff;
+  };
+
+  const onDowngradeTariff = () => {
+    if (isPassedByQuota()) {
+      onUpdateTariff();
+      return;
+    }
+
+    setIsVisibleDowngradePlanDialog(true);
+  };
+
+  const onOpenPaymentDialog = () => {
+    if (isPassedByQuota()) {
+      setIsVisiblePaymentConfirm(true);
+      return;
+    }
+
+    setIsVisibleDowngradePlanDialog(true);
+  };
+
+  const onCloseDowngradePlanDialog = () => {
+    setIsVisibleDowngradePlanDialog(false);
   };
 
   useEffect(() => {
@@ -186,9 +274,23 @@ const UpdatePlanButtonContainer = ({
     const isDowngradePlan = managersCount < maxCountManagersByQuota;
     const isTheSameCount = managersCount === maxCountManagersByQuota;
 
+    if (cardLinkedOnFreeTariff) {
+      return (
+        <Button
+          className="upgrade-now-button"
+          label={t("UpgradeNow")}
+          size="medium"
+          primary
+          isDisabled={isLoading || isDisabled}
+          onClick={onOpenPaymentDialog}
+          isLoading={isLoading}
+        />
+      );
+    }
+
     return isDowngradePlan ? (
       <DowngradePlanButtonContainer
-        onUpdateTariff={onUpdateTariff}
+        onDowngradeTariff={onDowngradeTariff}
         isDisabled={isDisabled}
         buttonLabel={t("DowngradeNow")}
       />
@@ -209,21 +311,99 @@ const UpdatePlanButtonContainer = ({
 
   return (
     <StyledBody>
-      {isAlreadyPaid ? updatingCurrentTariffButton() : payTariffButton()}
+      {isAlreadyPaid || cardLinkedOnFreeTariff
+        ? updatingCurrentTariffButton()
+        : payTariffButton()}
+
+      {isVisibleDowngradePlanDialog ? (
+        <ChangePricingPlanDialog
+          visible={isVisibleDowngradePlanDialog}
+          onClose={onCloseDowngradePlanDialog}
+        />
+      ) : null}
+
+      {isVisiblePaymentConfirm ? (
+        <ModalDialog
+          visible={isVisiblePaymentConfirm}
+          onClose={onClose}
+          displayType={ModalDialogType.modal}
+        >
+          <ModalDialog.Header>{t("PlanUpgrade")}</ModalDialog.Header>
+          <ModalDialog.Body>
+            <StyledModalBody>
+              <Text>
+                <Trans
+                  i18nKey="SwitchPlan"
+                  ns="Payments"
+                  t={t}
+                  values={{ planName: tariffPlanTitle }}
+                  components={{
+                    1: <span style={{ fontWeight: 600 }} />,
+                  }}
+                />
+              </Text>
+              <Text>
+                <Trans
+                  i18nKey="ChargeAmount"
+                  ns="Payments"
+                  t={t}
+                  values={{ price: formatPaymentCurrency(totalPrice) }}
+                  components={{
+                    1: <span style={{ fontWeight: 600 }} />,
+                  }}
+                />
+              </Text>
+              <Text className="text-warning">
+                <Trans
+                  i18nKey="ActionCannotBeUndone"
+                  ns="Payments"
+                  t={t}
+                  components={{
+                    1: <span style={{ fontWeight: 600 }} />,
+                  }}
+                />
+              </Text>
+            </StyledModalBody>
+          </ModalDialog.Body>
+          <ModalDialog.Footer>
+            <Button
+              key="OkButton"
+              label={t("ConfirmPayment")}
+              size={ButtonSize.normal}
+              primary
+              scale
+              onClick={onUpdateTariff}
+            />
+            <Button
+              key="CancelButton"
+              label={t("Common:CancelButton")}
+              size={ButtonSize.normal}
+              scale
+              onClick={onClose}
+            />
+          </ModalDialog.Footer>
+        </ModalDialog>
+      ) : null}
     </StyledBody>
   );
 };
 
 export default inject(
-  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
+  ({
+    currentQuotaStore,
+    paymentStore,
+    currentTariffStatusStore,
+    paymentQuotasStore,
+  }) => {
     const {
       maxCountManagersByQuota,
       setPortalQuotaValue,
       currentTariffPlanTitle,
       isYearTariff,
     } = currentQuotaStore;
-
-    const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { tariffPlanTitle } = paymentQuotasStore;
+    const { isNotPaidPeriod, isGracePeriod, walletCustomerStatusNotActive } =
+      currentTariffStatusStore;
 
     const {
       setIsLoading,
@@ -235,6 +415,11 @@ export default inject(
       accountLink,
       isAlreadyPaid,
       canPayTariff,
+      cardLinkedOnFreeTariff,
+      totalPrice,
+      formatPaymentCurrency,
+      canDowngradeTariff,
+      cardLinked,
     } = paymentStore;
 
     return {
@@ -253,6 +438,13 @@ export default inject(
       setPortalQuotaValue,
       currentTariffPlanTitle,
       isYearTariff,
+      cardLinkedOnFreeTariff,
+      tariffPlanTitle,
+      formatPaymentCurrency,
+      totalPrice,
+      canDowngradeTariff,
+      walletCustomerStatusNotActive,
+      cardLinked,
     };
   },
 )(observer(UpdatePlanButtonContainer));

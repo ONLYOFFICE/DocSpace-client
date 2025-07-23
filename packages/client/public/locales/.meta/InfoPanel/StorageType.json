@@ -3,7 +3,7 @@
   "content": "Storage type",
   "content_en_sha1_hash": "8f4523e42a13768b2f537d048ba0d978c0098600",
   "created_at": "2025-05-19T21:30:54.967Z",
-  "updated_at": "2025-05-22T11:56:37.561Z",
+  "updated_at": "2025-05-28T09:30:02.409Z",
   "comment": {
     "text": "This translation key is used to display different storage type labels in a user interface. It appears on an info panel and is referenced in code when displaying various storage-related information. Translators should provide equivalent descriptions for \"Storage Type\" in different languages.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\helpers\\DetailsHelper.js",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
       "line_number": 173,
       "context": "return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");\n \n case \"File extension\":\n return this.t(\"FileExtension\");\n \n case \"Content\":",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

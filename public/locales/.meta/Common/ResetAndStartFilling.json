@@ -3,7 +3,7 @@
   "content": "Reset and start filling",
   "content_en_sha1_hash": "fa6a4c3b2b734af36fa7e82b2f344fd875383107",
   "created_at": "2025-05-19T21:30:47.883Z",
-  "updated_at": "2025-05-22T11:56:37.779Z",
+  "updated_at": "2025-06-03T20:59:42.294Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Reset and start filling\" in various UI elements. It appears on a button within a filling status panel, indicating an option to reset the filling process, and may also be referenced in a context options store where it enables or disables this functionality.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1827,
       "context": "disabled: false,\n },\n {\n id: \"option_reset-and-start-filling\",\n key: \"reset-and-start-filling\",\n label: t(\"Common:ResetAndStartFilling\"),\n icon: BackupSvgUrl,\n onClick: () => this.onClickResetAndStartFilling(item),\n disabled: false,\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\FillingStatusPanel\\index.tsx",
+      "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
       "line_number": 213,
       "context": "scale\n primary\n onClick={() => onResetFilling(file)}\n id=\"panel_button_reset-and-start\"\n key=\"panel_button_reset-and-start\"\n label={t(\"Common:ResetAndStartFilling\")}\n size={ButtonSize.normal}\n />\n ) : null}\n {file.security?.Delete && onDelete ? (\n <Button",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

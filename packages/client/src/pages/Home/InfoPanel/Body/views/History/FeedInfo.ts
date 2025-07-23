@@ -300,7 +300,7 @@ export const feedInfo = [
     actionType: `${FeedAction.Unarchived}`,
   },
   {
-    key: "RoomIndexExportLocation",
+    key: "RoomIndexExportSaved",
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Export}`,
   },

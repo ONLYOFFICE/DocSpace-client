@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
+import api from "@docspace/shared/api";
 
 import { withTranslation } from "react-i18next";
 import { DeleteLinkDialogContainer } from "./DeleteLinkDialog.styled";
@@ -50,8 +51,9 @@ const DeleteLinkDialogComponent = (props) => {
     isPublicRoomType,
     isFormRoom,
     isCustomRoom,
-    setRoomShared,
     setPublicRoomKey,
+    isRootFolder,
+    updateUrlKeyForCustomRoom,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -69,30 +71,44 @@ const DeleteLinkDialogComponent = (props) => {
 
     editExternalLink(roomId, newLink)
       .then((res) => {
-        setRoomShared(roomId, !!res);
         deleteExternalLink(res, newLink.sharedTo.id);
 
         if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
-          toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
+          toastr.success(t("Files:GeneralLinkRevokedAndCreatedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
 
         const filterObj = FilesFilter.getFilter(window.location);
 
-        if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
-          if (filterObj.key !== res.sharedTo.requestToken) {
-            setPublicRoomKey(res.sharedTo.requestToken);
-            setSearchParams((prev) => {
-              prev.set("key", res.sharedTo.requestToken);
-              return prev;
-            });
-          }
-        }
+        return api.rooms
+          .getRoomMembers(roomId, { filterType: 2 })
+          .then((updatedLinks) => {
+            const primaryLink = updatedLinks.items.find(
+              (item) => item.sharedTo.primary,
+            );
 
-        if (isCustomRoom && filterObj.key) {
-          setPublicRoomKey(null);
-          searchParams.delete("key");
-          setSearchParams(searchParams);
-        }
+            if (
+              link.sharedTo.primary &&
+              (isPublicRoomType || isFormRoom) &&
+              !isRootFolder
+            ) {
+              if (
+                primaryLink &&
+                filterObj.key !== primaryLink.sharedTo.requestToken
+              ) {
+                setPublicRoomKey(primaryLink.sharedTo.requestToken);
+                setSearchParams((prev) => {
+                  prev.set("key", primaryLink.sharedTo.requestToken);
+                  return prev;
+                });
+              }
+            }
+
+            if (isCustomRoom && filterObj.key) {
+              updateUrlKeyForCustomRoom(searchParams, setSearchParams);
+            }
+
+            return res;
+          });
       })
       .catch((err) => toastr.error(err.response?.data?.error.message))
       .finally(() => {
@@ -187,28 +203,36 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
   DeleteLinkDialogComponent,
 );
 
-export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
-  const {
-    deleteLinkDialogVisible: visible,
-    setDeleteLinkDialogVisible: setIsVisible,
-    linkParams,
-  } = dialogsStore;
-  const { editExternalLink, deleteExternalLink, setPublicRoomKey } =
-    publicRoomStore;
-  const { isFormRoom, isCustomRoom } = linkParams;
+export default inject(
+  ({ dialogsStore, publicRoomStore, selectedFolderStore }) => {
+    const {
+      deleteLinkDialogVisible: visible,
+      setDeleteLinkDialogVisible: setIsVisible,
+      linkParams,
+    } = dialogsStore;
+    const {
+      editExternalLink,
+      deleteExternalLink,
+      setPublicRoomKey,
+      updateUrlKeyForCustomRoom,
+    } = publicRoomStore;
+    const { isRootFolder } = selectedFolderStore;
+    const { isFormRoom, isCustomRoom } = linkParams;
 
-  return {
-    linkParams,
-    visible,
-    setIsVisible,
-    roomId: linkParams.roomId,
-    link: linkParams.link,
-    editExternalLink,
-    deleteExternalLink,
-    isFormRoom,
-    isCustomRoom,
-    isPublicRoomType: linkParams.isPublic,
-    setRoomShared: filesStore.setRoomShared,
-    setPublicRoomKey,
-  };
-})(observer(DeleteLinkDialog));
+    return {
+      linkParams,
+      visible,
+      setIsVisible,
+      roomId: linkParams.roomId,
+      link: linkParams.link,
+      editExternalLink,
+      deleteExternalLink,
+      isFormRoom,
+      isCustomRoom,
+      isPublicRoomType: linkParams.isPublic,
+      setPublicRoomKey,
+      isRootFolder,
+      updateUrlKeyForCustomRoom,
+    };
+  },
+)(observer(DeleteLinkDialog));

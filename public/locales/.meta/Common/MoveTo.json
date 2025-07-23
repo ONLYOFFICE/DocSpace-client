@@ -3,7 +3,7 @@
   "content": "Move to",
   "content_en_sha1_hash": "349f807a5e5497d0e5f0e5eb83dd8a59d2dd2c7d",
   "created_at": "2025-05-19T21:30:46.631Z",
-  "updated_at": "2025-05-22T11:56:37.474Z",
+  "updated_at": "2025-07-10T11:11:06.764Z",
   "comment": {
     "text": "The translation key \"MoveTo\" is used to display the label for a button that allows users to move files or items to a new location. It appears in various UI elements, such as file management dialogs and context menus, providing an intuitive way for users to select a destination. This text should be translated to provide a clear and consistent experience across different languages.",
     "is_auto": true,
@@ -11,40 +11,40 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\FilesSelector\\utils.ts",
+      "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
       "line_number": 51,
       "context": "isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1614,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1614,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1614,
       "context": "icon: CopyReactSvgUrl,\n items: [\n {\n id: \"option_move-to\",\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: isEditing\n ? () => this.onShowEditingToast(t)\n : () => this.onMoveAction(item),\n disabled: false,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\FilesActionsStore.js",
-      "line_number": 2244,
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2252,
       "context": "case \"moveTo\":\n if (!this.isAvailableOption(\"moveTo\")) return null;\n return {\n id: \"menu-move-to\",\n label: t(\"Common:MoveTo\"),\n onClick: () => setMoveToPanelVisible(true),\n iconUrl: MoveReactSvgUrl,\n };\n case \"pin\":\n return {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\components\\media-viewer\\MediaViewer.helpers.tsx",
+      "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
       "line_number": 183,
       "context": "onClick: () => onClickDownload?.(targetFile, t),\n disabled: !targetFile.security.Download,\n },\n {\n key: \"move-to\",\n label: t(\"Common:MoveTo\"),\n icon: MoveReactSvgUrl,\n onClick: onMoveAction,\n disabled: !targetFile.security.Move || isPublicFile,\n },\n {",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

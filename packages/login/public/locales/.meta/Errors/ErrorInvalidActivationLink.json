@@ -3,7 +3,7 @@
   "content": "Invalid activation link",
   "content_en_sha1_hash": "c00b15ad0ed79f2357c60341218f3ccebf7bfa5d",
   "created_at": "2025-05-19T21:30:57.282Z",
-  "updated_at": "2025-05-22T11:56:37.824Z",
+  "updated_at": "2025-05-28T09:30:02.895Z",
   "comment": {
     "text": "This translation key is used to display an error message when an invalid activation link is encountered. It typically appears as a tooltip or dialog title in a login UI element, indicating that the user's account cannot be accessed due to a malformed or non-existent activation link. Translators should focus on conveying this concept accurately and concisely.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\utils\\index.ts",
+      "file_path": "/packages/login/src/utils/index.ts",
       "line_number": 74,
       "context": "case \"ErrorUserNotFound\":\n return t(\"Errors:ErrorUserNotFound\");\n case \"ErrorExpiredActivationLink\":\n return t(\"Errors:ErrorExpiredActivationLink\");\n case \"ErrorInvalidActivationLink\":\n return t(\"Errors:ErrorInvalidActivationLink\");\n case \"ErrorConfirmURLError\":\n return t(\"Errors:ErrorConfirmURLError\");\n case \"ErrorNotCorrectEmail\":\n return t(\"Common:IncorrectEmail\");\n case \"LoginWithBruteForce\":",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2025-05-22T11:56:37.308Z",
+  "updated_at": "2025-05-28T09:30:02.181Z",
   "comment": {
     "text": "The \"RoomCover\" translation key is used to display a localized string for a room cover image. It appears in a dialog box for editing room logos, where it serves as a title or placeholder text until an image is selected.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\AvatarEditorDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
       "line_number": 134,
       "context": "const editorBorderRadius = isProfileUpload ? 400 : 110;\n \n const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : t(\"RoomLogoCover:RoomCover\");\n \n const onResize = () => {\n const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;\n const screenHeight = document.documentElement.clientHeight;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\RoomLogoCoverDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
       "line_number": 282,
       "context": "withBodyScroll\n scrollBodyHeight={scrollBodyHeight}\n withBodyScrollForcibly={!!scrollBodyHeight}\n isScrollLocked={openColorPicker}\n >\n <ModalDialog.Header>{t(\"RoomLogoCover:RoomCover\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <RoomLogoCover\n forwardedRef={contentRef}\n scrollHeight={scrollH}\n covers={covers}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

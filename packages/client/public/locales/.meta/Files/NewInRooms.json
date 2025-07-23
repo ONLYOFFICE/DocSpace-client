@@ -3,7 +3,7 @@
   "content": "New in rooms",
   "content_en_sha1_hash": "35539a6e5b3dcf8e30c6ae6f55d001db21c969b3",
   "created_at": "2025-05-19T21:30:55.894Z",
-  "updated_at": "2025-05-21T11:40:46.283Z",
+  "updated_at": "2025-06-26T19:00:18.130Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that new files have been added to a room. It appears in a modal dialog as a header, typically when viewing an \"aside\" type of dialog with a file list or other related content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
-      "line_number": 217,
+      "line_number": 219,
       "context": "displayType={ModalDialogType.aside}\n withFooterBorder\n withBodyScroll\n >\n <ModalDialog.Header>\n {isRooms ? t(\"NewInRooms\") : isRoom ? t(\"NewInRoom\") : t(\"NewInFolder\")}\n </ModalDialog.Header>\n <ModalDialog.Body>{content}</ModalDialog.Body>\n <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>\n </ModalDialog>\n );",
       "module": "/packages/client"
     }

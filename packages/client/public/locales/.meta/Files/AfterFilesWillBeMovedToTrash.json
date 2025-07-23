@@ -3,7 +3,7 @@
   "content": "After files will be moved to Trash.",
   "content_en_sha1_hash": "97ce5e46857d29b0df8701d11ef53f2c78b39f8b",
   "created_at": "2025-05-19T21:30:55.253Z",
-  "updated_at": "2025-05-22T11:56:37.638Z",
+  "updated_at": "2025-06-18T07:34:15.023Z",
   "comment": {
     "text": "This translation key is used to display a message when files are moved to trash. It appears on-screen after a file has been deleted permanently and informs users of the action's outcome. The message should be translated to indicate that files will be moved to trash instead of being permanently deleted.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Header\\index.js",
-      "line_number": 439,
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 441,
       "context": "days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:AfterFilesWillBeMovedToTrash\")\n }`;\n \n return null;\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -173,6 +173,8 @@ const Appearance = (props) => {
     [previewAccent, selectThemeId, colorCheckImg, tReady],
   );
 
+  const [selectedItemId, setSelectedItemId] = useState(arrayItems[0].id);
+
   // const getSettings = () => {
   //   const selectColorId = getFromSessionStorage("selectColorId");
   //   const defaultColorId = selectedThemeId;
@@ -797,7 +799,12 @@ const Appearance = (props) => {
             }
           />
         </div>
-        <Tabs items={arrayItems} type={TabsTypes.Secondary} />
+        <Tabs
+          items={arrayItems}
+          type={TabsTypes.Secondary}
+          onSelect={(e) => setSelectedItemId(e.id)}
+          selectedItemId={selectedItemId}
+        />
 
         <div className="buttons-container">
           <Button

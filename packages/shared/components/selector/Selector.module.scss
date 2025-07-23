@@ -1,0 +1,596 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+@import "../../../shared/styles/mixins.scss";
+@import "../../../shared/styles/variables/devices.scss";
+
+.selector {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  :global(.selector-item_label) {
+    line-height: 18px;
+    margin-inline-start: 8px;
+  }
+}
+
+.body {
+  width: 100%;
+
+  &.withHeaderAndFooter {
+    height: calc(100% - var(--footer-height) - var(--header-height));
+  }
+
+  &.withFooterOnly {
+    height: calc(100% - var(--footer-height));
+  }
+
+  &.withHeaderOnly {
+    height: calc(100% - var(--header-height));
+  }
+
+  &.noHeaderFooter {
+    height: 100%;
+  }
+
+  &.withPadding {
+    padding: 16px 0 0;
+  }
+
+  :global {
+    .search-input,
+    .search-loader {
+      padding: 0 16px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .bodyDescriptionText {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 12px;
+    padding: 0 16px;
+    color: var(--selector-body-description-text);
+  }
+
+  .selectorInfoBar {
+    margin: 0px 20px 16px;
+  }
+}
+
+.comboBox,
+.accessRightSelect {
+  margin-bottom: 2px;
+  max-height: 50px;
+
+  :global {
+    .combo-button {
+      min-height: 40px;
+      padding-inline-start: 16px;
+    }
+
+    .combo-button-label,
+    .combo-button-label:hover {
+      font-size: 14px;
+      text-decoration: none;
+    }
+  }
+}
+
+.footer {
+  width: calc(100% - 32px);
+  padding: 0 16px;
+
+  &.withFooterInput {
+    height: 145px;
+    max-height: 145px;
+    min-height: 145px;
+  }
+
+  &.withFooterCheckbox {
+    height: 181px;
+    max-height: 181px;
+    min-height: 181px;
+  }
+
+  &.defaultHeight {
+    height: 73px;
+    max-height: 73px;
+    min-height: 73px;
+  }
+
+  .newNameContainer {
+    margin-top: 16px;
+
+    .newNameHeader {
+      margin-bottom: 4px;
+    }
+
+    .newFileInput {
+      margin-bottom: 16px;
+    }
+  }
+
+  .buttonContainer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    margin-top: 16px;
+
+    .button {
+      min-height: 40px;
+      margin-bottom: 2px;
+    }
+  }
+
+  border-top: var(--selector-border);
+  background-color: var(--background-color);
+}
+
+.tabs {
+  padding: 0 16px;
+  margin-bottom: 16px;
+
+  :global {
+    .sticky-indent {
+      height: 0;
+    }
+  }
+}
+
+.emptyScreen {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 0 28px;
+
+  box-sizing: border-box;
+
+  margin-top: 64px;
+
+  &.withSearch {
+    margin-top: 80px;
+  }
+
+  :global {
+    .buttons {
+      position: relative;
+
+      width: 100%;
+
+      margin-top: 32px;
+
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+
+      .empty-folder_container-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+
+        .empty-folder_link {
+          color: var(--selector-empty-screen-button-color);
+        }
+
+        &:hover {
+          .empty-folder_link {
+            color: var(--selector-empty-screen-hover-button-color);
+          }
+
+          svg path {
+            fill: var(--selector-empty-screen-hover-button-color);
+          }
+        }
+      }
+    }
+
+    .empty-image {
+      max-width: 72px;
+      max-height: 72px;
+
+      margin-bottom: 32px;
+    }
+
+    .empty-header {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 22px;
+
+      margin: 0;
+    }
+
+    .empty-description {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+
+      text-align: center;
+
+      color: var(--selector-empty-screen-description-color);
+
+      margin-top: 8px;
+    }
+  }
+}
+
+.newEmptyScreen {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 0 28px;
+
+  box-sizing: border-box;
+
+  :global {
+    .empty-image {
+      margin-top: 64px;
+    }
+
+    .empty-header {
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 700;
+      text-align: center;
+
+      margin: 0;
+
+      margin-top: 32px;
+    }
+
+    .empty-description {
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+
+      margin-top: 8px;
+
+      color: var(--selector-empty-screen-pressed-button-color);
+    }
+
+    .empty_button-wrapper {
+      display: flex;
+      justify-content: flex-start;
+
+      align-self: flex-start;
+
+      align-items: center;
+      gap: 16px;
+
+      padding: 12px 0;
+      margin-top: 16px;
+
+      .empty-button > div {
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        box-sizing: border-box;
+
+        .icon-button_svg {
+          aspect-ratio: 1;
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    .empty-button p {
+      padding-inline-start: 16px;
+    }
+  }
+}
+
+.breadCrumbs {
+  width: 100%;
+
+  height: 38px;
+
+  padding: 0 16px 16px;
+
+  box-sizing: border-box;
+
+  display: grid;
+
+  grid-template-columns: var(--grid-template-columns);
+
+  grid-column-gap: 8px;
+
+  align-items: center;
+
+  .contextMenuButton {
+    transform: rotate(90deg);
+    svg {
+      path {
+        fill: var(--selector-breadcrumbs-prev-item-color);
+      }
+    }
+  }
+  .arrowRightSvg {
+    path {
+      fill: var(--selector-breadcrumbs-arrow-right-color);
+    }
+
+    &.rtl {
+      transform: scaleX(-1);
+    }
+  }
+
+  .itemText {
+    &.isNotCurrent {
+      color: var(--selector-breadcrumbs-prev-item-color);
+    }
+    &.isNotCurrent.isNotLoading {
+      cursor: pointer;
+    }
+  }
+}
+
+.selectAll {
+  width: 100%;
+  max-height: 61px;
+  height: 61px;
+  min-height: 61px;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  border-bottom: var(--selector-border);
+
+  box-sizing: border-box;
+
+  padding: 8px 16px 20px;
+
+  .avatar {
+    min-width: 32px;
+  }
+
+  .label {
+    line-height: 16px;
+
+    margin-inline-start: 8px;
+  }
+
+  .checkbox {
+    svg {
+      margin-inline-end: 0px;
+    }
+  }
+}
+
+.info {
+  width: calc(100% - 32px);
+
+  padding: 12px 16px;
+  margin: 0 16px 12px;
+
+  border-radius: 6px;
+  box-sizing: border-box;
+  background-color: var(--selector-info-background-color);
+
+  .infoTextWrapper {
+    display: flex;
+    gap: 8px;
+
+    .text {
+      color: var(--selector-info-color);
+    }
+  }
+}
+
+.selectorItem {
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px;
+
+  box-sizing: border-box;
+
+  .roomLogoContainer {
+    margin: 0;
+  }
+
+  .roomLogo,
+  .userAvatar {
+    min-width: 32px;
+  }
+
+  .roomLogo {
+    height: 32px;
+
+    border-radius: 6px;
+  }
+
+  .selectorItemLabel {
+    // width: 100%;
+    // max-width: 100%;
+
+    line-height: 18px;
+
+    margin-inline-start: 8px;
+  }
+
+  .clickedLabel {
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  :global {
+    .input-component {
+      margin-inline-start: 8px;
+    }
+  }
+
+  .checkbox {
+    svg {
+      margin-inline-end: 0px;
+    }
+  }
+
+  .itemLogo {
+    min-width: 32px;
+  }
+
+  .selectorItemName {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: calc(100% - 32px);
+
+    .selectorItemLabel {
+      width: unset;
+
+      .itemFileExst {
+        color: var(--files-section-table-view-exst-color);
+      }
+    }
+  }
+
+  .titleIcon {
+    cursor: pointer;
+  }
+
+  &.disabled {
+    .itemLogo,
+    .userAvatar {
+      opacity: 0.5;
+    }
+
+    .selectorItemLabel {
+      color: var(--selector-item-disabled-text-color);
+    }
+
+    .disabledText {
+      text-align: end;
+    }
+  }
+
+  &.selectedSingle {
+    background: var(--selector-item-selected-background);
+  }
+
+  &.hoverable:hover {
+    cursor: pointer;
+    background: var(--selector-item-hover-background);
+  }
+}
+
+.inputWrapper {
+  width: 32px;
+  height: 32px;
+
+  margin-inline-start: 8px;
+
+  border: var(--selector-item-input-button-border);
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  div {
+    height: 16px;
+  }
+
+  &:not(.loading):hover {
+    div {
+      cursor: pointer;
+    }
+    cursor: pointer;
+
+    border-color: var(--selector-item-input-button-border-hover);
+
+    path {
+      fill: var(--selector-item-input-button-border-hover);
+    }
+  }
+
+  &.loading {
+    background-color: var(--input-disabled-bg);
+    border: none;
+  }
+}
+
+.createDropDown {
+  width: calc(100% - 32px);
+  height: fit-content;
+  position: absolute;
+  top: 48px;
+  inset-inline-start: 16px;
+  z-index: 453;
+  padding-top: 8px;
+
+  background-color: var(--background-color);
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  border: var(--selector-item-input-button-border);
+  border-radius: 6px;
+  box-shadow: var(--dropdown-box-shadow);
+
+  overflow: hidden;
+
+  &.isEmpty {
+    width: calc(100% + 24px);
+    top: 32px;
+    inset-inline-start: -12px;
+  }
+
+  @include mobile {
+    width: 100%;
+    position: fixed;
+    top: unset;
+    bottom: 0;
+    inset-inline: 0;
+
+    border-radius: 6px 6px 0 0;
+  }
+}

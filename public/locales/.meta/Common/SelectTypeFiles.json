@@ -3,7 +3,7 @@
   "content": "Select {{type}}",
   "content_en_sha1_hash": "362dad28aa0bb6ca287f03d3b542c0aea7263bf8",
   "created_at": "2025-05-19T21:30:48.523Z",
-  "updated_at": "2025-05-22T11:56:37.904Z",
+  "updated_at": "2025-05-28T09:30:03.005Z",
   "comment": {
     "text": "The translation key \"Select {{type}}\" is used to display a prompt in user interfaces that asks users to select a file type. This text appears as a button label or dialog title, guiding users through the process of choosing a specific type of file. Translators should consider the context and conventions of their language when translating this text.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\utils\\getSelectFormatTranslation.ts",
+      "file_path": "/packages/shared/utils/getSelectFormatTranslation.ts",
       "line_number": 44,
       "context": "const getTranslatedType = (key: string, typeToLowerCase = true) => {\n let type = t(key);\n \n if (typeToLowerCase) type = type.toLowerCase();\n \n return t(\"Common:SelectTypeFiles\", { type });\n };\n \n switch (filterParam) {\n case FilterType.DocumentsOnly:\n return getTranslatedType(\"Common:Documents\");",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

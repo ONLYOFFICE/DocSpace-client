@@ -3,7 +3,7 @@
   "content": "Language and Time Zone Settings",
   "content_en_sha1_hash": "392b7f827b97606957ef5bc78968a32a3ca7ad0b",
   "created_at": "2025-05-19T21:30:52.811Z",
-  "updated_at": "2025-05-21T02:56:09.245Z",
+  "updated_at": "2025-07-02T07:49:19.788Z",
   "comment": {
     "text": "This translation key is used to display the title of a page that controls language and time zone settings, commonly found in portal settings or customization sections. It appears as a document title, typically displayed at the top of a page or dialog, guiding users to this specific configuration section.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 193,
+      "line_number": 200,
       "context": "return t(\"Common:AccessRights\");\n case \"Customization\":\n return t(\"Customization\");\n case \"SettingsGeneral\":\n return t(\"SettingsGeneral\");\n case \"StudioTimeLanguageSettings\":\n return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 70,
+      "line_number": 71,
       "context": "return !isLoadedPage ? (\n <LoaderCustomizationNavbar />\n ) : (\n <StyledComponent>\n <MobileCategoryWrapper\n title={t(\"StudioTimeLanguageSettings\")}\n subtitle={t(\"LanguageAndTimeZoneSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/language-and-time-zone\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper",
       "module": "/packages/client"
     },

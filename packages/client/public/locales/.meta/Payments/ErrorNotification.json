@@ -3,7 +3,7 @@
   "content": "Failed to update tariff plan. Try again later or contact the sales department.",
   "content_en_sha1_hash": "bc9b4b305a68ff27847f763ef309786faf03e5d0",
   "created_at": "2025-05-19T21:30:53.686Z",
-  "updated_at": "2025-05-21T06:39:35.211Z",
+  "updated_at": "2025-07-01T15:57:36.286Z",
   "comment": {
     "text": "This translation key is used to display an error message when a tariff plan update fails, prompting the user to try again later or contact the sales department. It appears as an error notification in a UI component that handles payment updates, such as a button click event handler.",
     "is_auto": true,
@@ -12,32 +12,38 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/ButtonContainer.js",
-      "line_number": 54,
-      "context": "isFreeAfterPaidPeriod,\n }) => {\n const goToStripeAccount = () => {\n accountLink\n ? window.open(accountLink, \"_blank\")\n : toastr.error(t(\"ErrorNotification\"));\n };\n \n return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod || isFreeAfterPaidPeriod ? (",
+      "line_number": 53,
+      "context": "paymentLink,\n }) => {\n const goToStripePortal = () => {\n paymentLink\n ? window.open(paymentLink, \"_blank\")\n : toastr.error(t(\"ErrorNotification\"));\n };\n \n return (\n <StyledBody>\n {isNotPaidPeriod || isGracePeriod ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 80,
+      "line_number": 106,
       "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = null;\n \n return;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 80,
+      "line_number": 106,
       "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = null;\n \n return;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 80,
+      "line_number": 106,
       "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = null;\n \n return;\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 80,
+      "line_number": 106,
       "context": "intervalId = setInterval(async () => {\n try {\n if (requestsCount === 30) {\n setIsLoading(false);\n \n intervalId && toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalId);\n intervalId = null;\n \n return;\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanUpgrade.tsx",
+      "line_number": 194,
+      "context": "intervalRef.current = setInterval(async () => {\n try {\n if (requestsCount === MAX_ATTEMPTS) {\n setIsLoading(false);\n toastr.error(t(\"ErrorNotification\"));\n clearInterval(intervalRef.current!);\n intervalRef.current = null;\n return;\n }",
       "module": "/packages/client"
     }
   ],

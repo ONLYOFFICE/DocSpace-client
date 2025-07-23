@@ -3,7 +3,7 @@
   "content": "or drop file here",
   "content_en_sha1_hash": "a14bf554e59e9cd5cf0f303dcfd839a050b061d2",
   "created_at": "2025-05-19T21:30:44.718Z",
-  "updated_at": "2025-05-22T11:56:37.739Z",
+  "updated_at": "2025-05-28T09:30:02.648Z",
   "comment": {
     "text": "This translation key is used to display a secondary label on dropzone buttons, typically indicating that files can be dropped here instead of being selected. It appears in various UI elements where a file input or drag-and-drop functionality is present, such as portal settings categories and an image editor component. Translators should focus on providing a clear and descriptive phrase for this context.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\Plugins\\sub-components\\Dropzone.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/Dropzone.tsx",
       "line_number": 49,
       "context": "isDisabled={isDisabled}\n isLoading={isLoading}\n onDrop={onDrop}\n accept={[\".zip\"]}\n linkMainText={t(\"Article:Upload\")}\n linkSecondaryText={t(\"Common:DropzoneTitleSecondary\")}\n exstsText=\"(ZIP)\"\n />\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\components\\image-editor\\Dropzone\\index.tsx",
+      "file_path": "/packages/shared/components/image-editor/Dropzone/index.tsx",
       "line_number": 104,
       "context": "maxFiles={0}\n isDisabled={isDisabled}\n accept={[\"image/png\", \"image/jpeg\"]}\n onDrop={onDrop}\n linkMainText={t(\"Common:DropzoneTitleLink\")}\n linkSecondaryText={t(\"Common:DropzoneTitleSecondary\")}\n exstsText={t(\"Common:DropzoneTitleExsts\")}\n />\n );\n };",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

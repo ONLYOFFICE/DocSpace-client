@@ -33,7 +33,7 @@ import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?
 import HistoryIcon from "PUBLIC_DIR/images/history.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { WebhookRowContent } from "./WebhookRowContent";
 
@@ -50,10 +50,15 @@ const WebhookRow = (props) => {
   const { t } = useTranslation(["Webhooks", "Common"]);
 
   const [isChecked, setIsChecked] = useState(webhook.enabled);
+  const [isLoading, setIsLoading] = useState(webhook.enabled);
 
-  const handleToggleEnabled = () => {
-    toggleEnabled(webhook, t);
-    setIsChecked((prevIsChecked) => !prevIsChecked);
+  const handleToggleEnabled = async () => {
+    setIsLoading(true);
+    const res = await toggleEnabled(webhook, t);
+    if (res) {
+      setIsChecked(!!res.enabled);
+    }
+    setIsLoading(false);
   };
 
   const redirectToHistory = () => {
@@ -121,6 +126,7 @@ const WebhookRow = (props) => {
         sectionWidth={sectionWidth}
         webhook={webhook}
         isChecked={isChecked}
+        isDisabled={isLoading}
         handleToggleEnabled={handleToggleEnabled}
       />
     </Row>

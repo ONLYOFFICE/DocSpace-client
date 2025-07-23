@@ -375,7 +375,7 @@
   :global {
     .combo-button {
       background: var(--filter-sort-button-background);
-      padding-inline-end: 4px;
+      padding-inline: 4px;
       width: 32px;
       height: 32px;
 
@@ -383,9 +383,9 @@
         cursor: pointer;
       }
 
-      :hover {
+      &:hover {
         border-color: var(--icon-button-hover-color);
-        svg {
+        .optionalBlock .icon-button_svg svg {
           path {
             fill: var(--icon-button-hover-color);
           }

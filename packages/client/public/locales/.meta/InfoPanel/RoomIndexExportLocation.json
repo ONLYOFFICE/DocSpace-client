@@ -3,7 +3,7 @@
   "content": "Export of the room index saved to {{sectionName}}",
   "content_en_sha1_hash": "0bcf2b9b4084c5312b362571de6bc7eab5374c07",
   "created_at": "2025-05-19T21:30:54.927Z",
-  "updated_at": "2025-05-22T11:56:37.601Z",
+  "updated_at": "2025-06-18T07:34:15.004Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that the room index has been exported and saved to a specific location. It is typically displayed in a UI element related to file management or history, such as a button label or dialog title. The \"sectionName\" variable refers to the name of the \"My Files\" section.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 289,
-      "context": "case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportLocation\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case \"FormSubmit\":\n return t(\"InfoPanel:FilledOutForm\");\n case \"FormOpenedForFilling\":",
-      "module": "\\packages\\client"
+      "context": "case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportSaved\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case \"FormSubmit\":\n return t(\"InfoPanel:FilledOutForm\");\n case \"FormOpenedForFilling\":",
+      "module": "/packages/client"
     }
   ],
   "languages": {

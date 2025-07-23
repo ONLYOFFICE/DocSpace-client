@@ -3,10 +3,8 @@
   "DocumentsFileType": "Έγγραφα",
   "ErrorConnectionLost": "Η σύνδεση χάθηκε",
   "FileLocation": "Άνοιγμα τοποθεσίας αρχείου",
-  "FileName": "Όνομα αρχείου",
   "ImageFileType": "Εικόνες",
   "MailMergeFileType": "Επιλέξτε το αρχείο σε μορφή XLSX",
-  "OpenSavedDocument": "Άνοιγμα αποθηκευμένου εγγράφου σε νέα καρτέλα",
   "SelectFilesType": "Επιλέξτε αρχεία τύπου: {{fileType}}",
   "UsersWithoutAccess": "Ορισμένοι χρήστες τους οποίους θέλετε να αναφέρετε δεν έχουν πρόσβαση στο δωμάτιο: {{users}}"
 }

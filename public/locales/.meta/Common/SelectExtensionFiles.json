@@ -3,7 +3,7 @@
   "content": "Select {{extension}} files",
   "content_en_sha1_hash": "ab8ac6b36fb55c14e37315654ed97c7fb6119fde",
   "created_at": "2025-05-19T21:30:48.401Z",
-  "updated_at": "2025-05-22T11:56:37.904Z",
+  "updated_at": "2025-07-01T15:57:36.423Z",
   "comment": {
     "text": "This translation key is used for the \"Select [extension] files\" text that appears when filtering by media type in a UI component. The text is intended to be displayed on a button or similar element that allows users to select multiple file extensions related to media. Translators should provide a phrase that accurately reflects this context, using the correct plural form for their language.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\utils\\getSelectFormatTranslation.ts",
-      "line_number": 67,
+      "file_path": "/packages/shared/utils/getSelectFormatTranslation.ts",
+      "line_number": 70,
       "context": "case FilterType.FoldersOnly:\n return getTranslatedType(\"Common:Folders\");\n \n case FilterType.MediaOnly:\n return t(\"Common:SelectExtensionFiles\", {\n extension: t(\"Common:Media\").toLowerCase(),\n });\n \n case FilterType.Pdf:\n return getTranslatedType(getManyPDFTitle(t, false));",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

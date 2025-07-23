@@ -3,7 +3,7 @@
   "content": "Use VDR for advanced file security and transparency. Set watermarks, automatically index and track all content, restrict downloading and copying.",
   "content_en_sha1_hash": "442334b85570c01c1f3c6137eb5b49e4dc948796",
   "created_at": "2025-05-19T21:30:49.557Z",
-  "updated_at": "2025-05-22T11:56:37.852Z",
+  "updated_at": "2025-06-03T20:59:42.345Z",
   "comment": {
     "text": "This translation key is used to describe a virtual data room feature, explaining its purpose and key benefits. The translated text will be displayed in a UI context where users interact with this feature, such as a settings or configuration page.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\room-type\\RoomType.utils.ts",
-      "line_number": 38,
-      "context": "switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:",
-      "module": "\\packages\\shared"
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 39,
+      "context": "switch (roomType) {\n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

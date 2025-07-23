@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import Section from "@docspace/shared/components/section";
 import { observer, inject } from "mobx-react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 import SectionWrapper from "SRC_DIR/components/Section";

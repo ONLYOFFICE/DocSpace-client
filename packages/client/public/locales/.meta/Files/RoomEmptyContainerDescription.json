@@ -3,7 +3,7 @@
   "content": "Please create the first room.",
   "content_en_sha1_hash": "d81ffd8917231e32c17f72ee8658dc82cb505c46",
   "created_at": "2025-05-19T21:30:56.086Z",
-  "updated_at": "2025-05-22T11:56:37.460Z",
+  "updated_at": "2025-06-03T20:59:41.795Z",
   "comment": {
     "text": "The translation key \"RoomEmptyContainerDescription\" is used to display a message indicating that a room is empty, suggesting the user create their first room. This message appears in UI components related to room management and is intended for visitors or collaborators who are presented with an empty room view. The text should convey a welcoming and instructive tone.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\EmptyContainer\\sub-components\\EmptyViewContainer\\EmptyViewContainer.utils.tsx",
+      "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
+      "line_number": 113,
+      "context": "<>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>\n </>\n ) : isVisitor || isCollaborator ? (\n t(\"RoomEmptyContainerDescriptionUser\")\n ) : (\n t(\"RoomEmptyContainerDescription\")\n );\n \n const archiveRoomsDescription =",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
       "line_number": 180,
       "context": "isPublicRoom: boolean,\n security: Nullable<TFolderSecurity>,\n ) => {\n return match([rootFolderType, access])\n .with([FolderType.Rooms, ShareAccessRights.None], () =>\n t(\"Files:RoomEmptyContainerDescription\"),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserDescription\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

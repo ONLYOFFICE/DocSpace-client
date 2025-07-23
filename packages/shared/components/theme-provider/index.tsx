@@ -55,7 +55,8 @@ export const ThemeProvider = ({
     body.classList.remove("ltr", "rtl");
     body.classList.add(themeStr);
     body.classList.add(dir);
-  }, [theme.isBase, theme.interfaceDirection]);
+    body.style.setProperty("--font-family", theme.fontFamily);
+  }, [theme.isBase, theme.interfaceDirection, theme.fontFamily]);
 
   useEffect(() => {
     const root = document.documentElement;

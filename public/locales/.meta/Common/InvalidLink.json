@@ -3,7 +3,7 @@
   "content": "Invalid link",
   "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
   "created_at": "2025-05-19T21:30:45.936Z",
-  "updated_at": "2025-05-22T11:56:37.811Z",
+  "updated_at": "2025-07-10T11:11:07.116Z",
   "comment": {
     "text": "This translation key is used to display an error message when a link provided is invalid. It appears as a message shown by the docEditor component, typically in response to user interactions such as clicking on a button or attempting to load content.",
     "is_auto": true,
@@ -11,34 +11,34 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\hooks\\useEditorEvents.ts",
-      "line_number": 194,
-      "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n const fillingStatus = window?.sessionStorage.getItem(FILLING_STATUS_ID);\n \n if (fillingStatus === \"true\") {\n docEditor?.requestRoles?.();",
-      "module": "\\packages\\doceditor"
+      "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
+      "line_number": 203,
+      "context": "docEditor = window.DocEditor.instances[EDITOR_ID];\n \n fixSize();\n \n if (errorMessage || isSkipError)\n return docEditor?.showMessage?.(errorMessage || t(\"Common:InvalidLink\"));\n \n console.log(\"ONLYOFFICE Document Editor is ready\", docEditor);\n const url = window.location.href;\n \n const index = url.indexOf(\"#message/\");",
+      "module": "/packages/doceditor"
     },
     {
-      "file_path": "\\packages\\login\\src\\components\\ConfirmRoute.tsx",
+      "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
       "line_number": 93,
       "context": "case ValidationResult.Invalid:\n console.error(\"invalid link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:InvalidLink\"));\n case ValidationResult.Expired:\n console.error(\"expired link\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\login\\src\\utils\\index.ts",
+      "file_path": "/packages/login/src/utils/index.ts",
       "line_number": 108,
       "context": "case \"SsoAttributesNotFound\":\n return t(\"Errors:SsoAttributesNotFound\");\n case \"QuotaPaidUserLimitError\":\n return t(\"Common:QuotaPaidUserLimitError\");\n case \"InvalidLink\":\n return t(\"Common:InvalidLink\");\n default:\n return t(\"Common:Error\");\n }\n };",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\shared\\components\\errors\\ErrorInvalidLink.tsx",
+      "file_path": "/packages/shared/components/errors/ErrorInvalidLink.tsx",
       "line_number": 36,
       "context": "export const ErrorInvalidLink = () => {\n const { t, ready } = useTranslation([\"Errors\", \"Common\"]);\n \n return ready ? (\n <ErrorContainer\n headerText={t(\"Common:InvalidLink\")}\n bodyText={t(\"Common:LinkDoesNotExist\")}\n />\n ) : null;\n };",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\pages\\PublicRoom\\PublicRoomError\\index.tsx",
+      "file_path": "/packages/shared/pages/PublicRoom/PublicRoomError/index.tsx",
       "line_number": 40,
       "context": "import ErrorContainer from \"../../../components/error-container/ErrorContainer\";\n \n const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {\n const { t, ready } = useTranslation([\"Errors\", \"Common\"]);\n const headerText = isInvalid\n ? t(\"Common:InvalidLink\")\n : t(\"Common:ExpiredLink\");\n const bodyText = isInvalid\n ? t(\"Common:LinkDoesNotExist\")\n : t(\"Common:LinkHasExpired\");",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

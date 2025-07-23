@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Vyberte sekcie na import. Zobrazia sa v príslušných sekciách {{productName}}.",
   "IncludedInBusiness": "Zahrnuté v Obchodnom pláne",
   "IntegrationRequest": "Chýba vám v {{organizationName}} {{productName}} užitočná integrácia alebo komponent? Napíšte nášmu tímu svoju požiadavku a my sa na ňu pozrieme.",
+  "InvitationSettings": "Nastavenia pozvánok",
+  "InvitationSettingsContacts": "Pozývajte členov {{productName}} cez Kontakty",
+  "InvitationSettingsContactsDescription": "Zapnite túto možnosť, aby bolo možné posielať pozvánky novým členom {{productName}} cez sekciu Kontakty. Vypnite túto možnosť, ak chcete pozývať nových členov len cez LDAP.",
+  "InvitationSettingsDescription": "Konfigurujte možnosti pozvánok pre interných členov a externých hostí vášho {{productName}}. Tieto nastavenia vám môžu pomôcť dodržiavať bezpečnostné pokyny vašej spoločnosti, napríklad ak používate LDAP alebo iné systémy na správu používateľov.",
+  "InvitationSettingsGuests": "Povoliť pozývanie hostí",
+  "InvitationSettingsGuestsDescription": "Zapnite túto možnosť, aby všetci členovia {{productName}} mohli pozývať externých hostí do miestností.",
+  "InvitationSettingsMobile": "Konfigurujte možnosti pozvánok pre interných členov a externých hostí vášho {{productName}}.",
   "InviteLetterTooltip": "Ak je táto možnosť označená, všetci noví používatelia dostanú pozvánku s autorizačnými údajmi.",
   "IPSecurity": "IP Bezpečnosť",
   "IPSecurityMobileDescription": "IP bezpečnosť sa používa na obmedzenie prihlasovania do portálu zo všetkých IP adries okrem určitých adries.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Logo pre stránku Informácie",
   "LogoCompact": "Logo pre kompaktné ľavé menu",
   "LogoDocsEditor": "Logo pre hlavičku editora",
-  "LogoDocsEditorEmbedded": "Logo pre hlavičku editorov - vložený režim",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo pre hlavičku priestoru",
   "LogoLogin": "Logo pre prihlasovaciu stránku a e-maily",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Poslať pozvánku",
   "SendNotificationAboutRestoring": "Odošlite používateľom upozornenie o obnovení priestoru",
   "ServerSideEncryptionMethod": "Metóda šifrovania na strane servera",
+  "Services": "Služby",
   "ServiceUrl": "URL adresa služby",
   "SessionLifetime": "Doba trvania relácie",
   "SessionLifetimeMobileDescription": "Čas trvania relácie umožňuje nastaviť čas (v minútach), za ktorý budú musieť používatelia {{productName}} znovu zadať prihlasovacie údaje do priestoru, aby získali prístup do priestoru.",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
-  "YourLogo": "Vaše logo"
+  "YourLogo": "Vaše logo",
+  "AdManagement": "Správa reklám",
+  "AdManagementDescription": "Vyberte, či sa zobrazujú propagačné bannery vo vašom {{productName}}."
 }

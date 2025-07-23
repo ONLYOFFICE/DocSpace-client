@@ -3,7 +3,7 @@
   "content": "Try Business",
   "content_en_sha1_hash": "1355ceed14169abd7406ec07f2a5ad9a56c2c888",
   "created_at": "2025-05-19T21:30:49.352Z",
-  "updated_at": "2025-05-22T11:56:37.520Z",
+  "updated_at": "2025-05-28T09:30:02.173Z",
   "comment": {
     "text": "This translation key is used for the label on a tariff-related component. It displays \"Try Business\" when applicable and indicates whether a user can try a free business tariff or not, depending on the page context.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\TariffBar\\helpers.js",
+      "file_path": "/packages/client/src/components/TariffBar/helpers.js",
       "line_number": 41,
       "context": "isFreeTariff,\n isGracePeriod,\n ) => {\n if (isPaymentPageAvailable) {\n if (isFreeTariff && !isNonProfit)\n return { label: t(\"Common:TryBusiness\"), color: ORANGE };\n if (isGracePeriod) return { label: t(\"Common:LatePayment\"), color: RED };\n }\n };\n \n export const getEnterpriseBar = (",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

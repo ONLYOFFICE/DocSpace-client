@@ -3,7 +3,7 @@
   "content": "Fill in",
   "content_en_sha1_hash": "d20fc7ca1f2cd76352a54a4eafef3df897d87c84",
   "created_at": "2025-05-19T21:30:55.156Z",
-  "updated_at": "2025-05-22T11:56:37.401Z",
+  "updated_at": "2025-05-28T09:30:02.271Z",
   "comment": {
     "text": "The translation key \"FillOutButtonLabel\" is used to display the label on a button that prompts users to fill in information. In this case, it appears as part of a dialog titled \"FillPDFDialog\", where the user is prompted to fill in data.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\FillPDFDialog\\FillPDFDialog.tsx",
+      "file_path": "/packages/client/src/components/dialogs/FillPDFDialog/FillPDFDialog.tsx",
       "line_number": 108,
       "context": "const cards = [\n {\n id: \"form-yourself\",\n title: t(\"FillPDFDialog:FillOutTitle\"),\n description: t(\"FillPDFDialog:FillOutDescription\"),\n buttonLabel: t(\"FillPDFDialog:FillOutButtonLabel\"),\n onClick: openEditorFill,\n icon: <FillOutYourselfIcon />,\n },\n {\n id: \"form-data-collection\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Change {{productName}} owner",
   "content_en_sha1_hash": "b3bac1aca6a46d00f19fb61e5298c3e7a5b510ac",
   "created_at": "2025-05-19T21:30:56.985Z",
-  "updated_at": "2025-05-22T11:56:37.324Z",
+  "updated_at": "2025-05-28T09:30:02.196Z",
   "comment": {
     "text": "\"Change the owner of a portal. This message is used in the 'ChangePortalOwner' dialog to prompt users to update the owner of a specific portal.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ChangePortalOwnerDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
       "line_number": 120,
       "context": "t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: t(\"Common:ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: t(\"Common:ProductName\"),\n }),\n t(\"BackupPortal\", { productName: t(\"Common:ProductName\") }),\n t(\"DeactivateOrDeletePortal\", { productName: t(\"Common:ProductName\") }),\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "Qrup Adı Xüsusiyyəti",
   "LdapGroupNameAttributeTooltip": "Qrup adına uyğun olan obyekt xüsusiyyətini göstərin.",
   "LdapGroupUserAttributeTooltip": "Bu istifadəçinin qrupların üzvü olub-olmadığını müəyyən etmək üçün istifadə olunan istifadəçi obyekti xüsusiyyətini daxil edin.",
-  "LdapIntro": "LDAP istifadəçi və qrupları LDAP serverindən idxal etmək, həmçinin LDAP serverində saxlanılan giriş/şifrələrdən istifadə edərək portala istifadəçi identifikasiyasını təmin etmək üsuludur. İstifadəçilər parametrlər saxlandıqdan dərhal sonra idxal ediləcək. Sonradan əlavə edilən istifadəçilər portalda ilkin autentifikasiya zamanı idxal olunacaqlar.",
+  "LdapIntro": "LDAP vasitəsilə istifadəçiləri və qrupları idxal edin və LDAP serverdə saxlanılan daxilolmalar/parollar vasitəsilə istifadəçi tərifini aktiv edin. İstifadəçilər, parametrlər saxlanıldıqdan sonra dərhal idxal ediləcək. Daha sonra əlavə edilən istifadəçilər onların ilk tərifində idxal ediləcək. Əgər LDAP vasitəsilə giriş təmin etmək istəyirsinizsə, Əlaqələr vasitəsilə yeni {{productName}} üzvlərini dəvət etmək seçiminə xitam verin: <1>{{link}}</1>",
   "LdapLoginAttribute": "Giriş Xüsusiyyəti",
   "LdapLoginAttributeTooltip": "İstifadəçinin giriş məlumatına uyğun olan obyekt xüsusiyyətini daxil edin.",
   "LdapLoginTooltip": "Lütfən, LDAP server oxumaq hüququna malik olan Giriş istifadəçisini göstərin.",

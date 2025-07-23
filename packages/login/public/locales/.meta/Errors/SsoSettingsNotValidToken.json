@@ -3,7 +3,7 @@
   "content": "Invalid authentication token",
   "content_en_sha1_hash": "2b6aa5f974e1fe0e3f58d5b94bda783466a39448",
   "created_at": "2025-05-19T21:30:57.312Z",
-  "updated_at": "2025-05-22T11:56:37.827Z",
+  "updated_at": "2025-05-28T09:30:02.896Z",
   "comment": {
     "text": "This translation key is used to display an error message when an invalid authentication token is encountered. It will be displayed in a UI context where user authentication fails, such as a login or authorization process. The exact appearance may vary depending on the specific application and localization setup.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\utils\\index.ts",
+      "file_path": "/packages/login/src/utils/index.ts",
       "line_number": 94,
       "context": "case \"ErrorNotAllowedOption\":\n return t(\"Errors:ErrorNotAllowedOption\");\n case \"SsoSettingsEmptyToken\":\n return t(\"Errors:SsoSettingsEmptyToken\");\n case \"SsoSettingsNotValidToken\":\n return t(\"Errors:SsoSettingsNotValidToken\");\n case \"SsoSettingsCantCreateUser\":\n return t(\"Errors:SsoSettingsCantCreateUser\");\n case \"SsoSettingsUserTerminated\":\n return t(\"Errors:SsoSettingsUserTerminated\");\n case \"SsoError\":",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

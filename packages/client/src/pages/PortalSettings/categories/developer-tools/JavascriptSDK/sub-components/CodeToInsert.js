@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useState } from "react";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Text } from "@docspace/shared/components/text";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
@@ -140,5 +141,15 @@ export const CodeToInsert = ({ t, codeBlock, config, theme, scriptUrl }) => {
       content: npm,
     },
   ];
-  return <Tabs type={TabsTypes.Secondary} items={tabs} />;
+
+  const [selectedItemId, setSelectedItemId] = useState(tabs[0].id);
+
+  return (
+    <Tabs
+      type={TabsTypes.Secondary}
+      items={tabs}
+      selectedItemId={selectedItemId}
+      onSelect={(e) => setSelectedItemId(e.id)}
+    />
+  );
 };

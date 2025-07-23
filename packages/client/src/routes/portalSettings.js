@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import componentLoader from "@docspace/shared/utils/component-loader";
@@ -183,6 +183,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "customization/general/ad-management",
+      async lazy() {
+        const { AdManagement } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ad-management"
+            ),
+        );
+
+        return { Component: AdManagement };
+      },
+    },
+    {
       path: "security",
       element: <Navigate to="security/access-portal" replace />,
     },
@@ -257,6 +270,19 @@ const PortalSettingsRoutes = {
         );
 
         return { Component: DevToolsAccessSection };
+      },
+    },
+    {
+      path: "security/access-portal/invitation-settings",
+      async lazy() {
+        const { InvitationSettingsSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/invitationSettings"
+            ),
+        );
+
+        return { Component: InvitationSettingsSection };
       },
     },
     {
@@ -421,6 +447,20 @@ const PortalSettingsRoutes = {
       lazy: () =>
         componentLoader(
           () => import("SRC_DIR/pages/PortalSettings/categories/payments"),
+        ),
+    },
+    {
+      path: "payments/wallet",
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/payments"),
+        ),
+    },
+    {
+      path: "services",
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/services"),
         ),
     },
     {

@@ -1,0 +1,16 @@
+{
+  "DeletePlugin": "Fshini shtojcën",
+  "DeletePluginDescription": "Kjo shtojcë nuk do të jetë më e disponueshme për përdoruesit e {{productName}}. Je i sigurt që dëshiron të vazhdosh?",
+  "DeletePluginTitle": "Fshini shtojcën?",
+  "ExpandFunctionality": "Zgjeroni funksionalitetin duke përdorur Plugin SDK",
+  "GoToRepo": "Shkoni te depoja",
+  "Metadata": "Meta të dhënat",
+  "NeedSettings": "Duhet të futni cilësimet",
+  "NoPlugins": "Asnjë shtojcë e shtuar",
+  "NotNeedSettings": "Not need enter settings",
+  "PluginSamples": "Mostrat e shtojcave",
+  "PluginSDK": "Shtojca SDK",
+  "PluginSDKDescription": "Duke përdorur Plugin SDK, mund të zgjeroni funksionalitetin tuaj të {{productName}}, të lidhni shërbimet e palëve të treta ose të përmirësoni përvojën ekzistuese të përdoruesit. Këtu mund të gjeni mostrat e shtojcave me burim kodi të disponueshëm në GitHub.",
+  "PluginSDKInstruction": "Klikoni butonin për udhëzime të hollësishme se si të krijoni shtojcat tuaja.",
+  "UploadDescription": "Mund të shtoni shtojca për të zgjeruar funksionalitetin e {{productName}} me veçori shtesë. Klikoni Ngarkoni shtojcën ose hidhni skedarin në arkivin ZIP."
+}

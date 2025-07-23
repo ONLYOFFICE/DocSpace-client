@@ -3,7 +3,7 @@
   "content": "The last full access space cannot be deleted",
   "content_en_sha1_hash": "b684b6f8185450f454f665f01f5c551f723dd323",
   "created_at": "2025-05-19T21:30:57.434Z",
-  "updated_at": "2025-05-22T11:56:37.912Z",
+  "updated_at": "2025-05-28T09:30:03.017Z",
   "comment": {
     "text": "This translation key \"DeleteWarning\" is used to display a message when deleting the last full access space in a specific UI component. It informs users that they cannot delete this item and may prompt them to consider alternative actions or provide more information. This message appears as an error notification within the UI component's delete functionality.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\management\\src\\categories\\spaces\\sub-components\\RowView\\SpacesRoomRow.tsx",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/RowView/SpacesRoomRow.tsx",
       "line_number": 84,
       "context": "const [isVisibleDialog, setIsVisibleDialog] = useState(false);\n const [isDisableQuota, setIsDisableQuota] = useState(false);\n \n const onDelete = () => {\n if (portals.length === 1) {\n return toastr.error(t(\"Management:DeleteWarning\"));\n }\n setCurrentPortal(item);\n setDeletePortalDialogVisible(true);\n };",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     }
   ],
   "languages": {

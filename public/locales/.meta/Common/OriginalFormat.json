@@ -3,7 +3,7 @@
   "content": "Original format",
   "content_en_sha1_hash": "32d4ceda713d1116543fff259f4533b8366ff84f",
   "created_at": "2025-05-19T21:30:47.157Z",
-  "updated_at": "2025-05-22T11:56:37.785Z",
+  "updated_at": "2025-07-01T15:57:36.346Z",
   "comment": {
     "text": "The translation key \"OriginalFormat\" is used to display the original format when a file has a custom format or is an image. It appears in the download dialog box and will be displayed if the file does not have a specified single document format.",
     "is_auto": true,
@@ -11,106 +11,112 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\store\\DialogsStore.js",
+      "file_path": "/packages/client/src/store/DialogsStore.js",
       "line_number": 479,
       "context": "itemList.forEach((item) => {\n if (item.checked) {\n if (!!item.fileExst || item.contentLength) {\n const format =\n !item.format || item.format === t(\"Common:OriginalFormat\")\n ? item.fileExst\n : item.format;\n if (!singleFileUrl) {\n singleFileUrl = item.viewUrl;\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\index.tsx",
-      "line_number": 212,
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
       "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\index.tsx",
-      "line_number": 212,
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
       "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\index.tsx",
-      "line_number": 212,
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
       "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\index.tsx",
-      "line_number": 212,
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
       "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\index.tsx",
-      "line_number": 212,
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
       "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\index.tsx",
-      "line_number": 212,
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
       "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\index.tsx",
-      "line_number": 212,
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
       "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\index.tsx",
-      "line_number": 212,
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
       "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\DownloadContent.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 220,
+      "context": "if (!fileId) {\n array.forEach((file) => {\n file.format =\n format === t(\"Common:CustomFormat\") ||\n (isFile(file) && file.fileExst === format)\n ? t(\"Common:OriginalFormat\")\n : format;\n });\n return array;\n }\n // Set single document format",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/DownloadContent.tsx",
       "line_number": 78,
       "context": "arr = arr.filter((x, pos) => arr.indexOf(x) === pos);\n \n const formats = [\n {\n key: \"original\",\n label: t(\"Common:OriginalFormat\"),\n onClick: onSelectFormat,\n \"data-format\": t(\"Common:OriginalFormat\"),\n \"data-type\": type,\n },\n ];",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\DownloadContent.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/DownloadContent.tsx",
       "line_number": 78,
       "context": "arr = arr.filter((x, pos) => arr.indexOf(x) === pos);\n \n const formats = [\n {\n key: \"original\",\n label: t(\"Common:OriginalFormat\"),\n onClick: onSelectFormat,\n \"data-format\": t(\"Common:OriginalFormat\"),\n \"data-type\": type,\n },\n ];",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\DownloadContent.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/DownloadContent.tsx",
       "line_number": 78,
       "context": "arr = arr.filter((x, pos) => arr.indexOf(x) === pos);\n \n const formats = [\n {\n key: \"original\",\n label: t(\"Common:OriginalFormat\"),\n onClick: onSelectFormat,\n \"data-format\": t(\"Common:OriginalFormat\"),\n \"data-type\": type,\n },\n ];",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\DownloadContent.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/DownloadContent.tsx",
       "line_number": 78,
       "context": "arr = arr.filter((x, pos) => arr.indexOf(x) === pos);\n \n const formats = [\n {\n key: \"original\",\n label: t(\"Common:OriginalFormat\"),\n onClick: onSelectFormat,\n \"data-format\": t(\"Common:OriginalFormat\"),\n \"data-type\": type,\n },\n ];",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\DownloadRow.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/DownloadRow.tsx",
       "line_number": 93,
       "context": "manualWidth={isMobile() ? \"148px\" : undefined}\n directionX=\"left\"\n isAside\n withoutBackground\n >\n {file.format || t(\"Common:OriginalFormat\")}\n </LinkWithDropdown>\n ) : null}\n {isOther && isFile(file) && file.fileExst ? (\n <Text\n className={styles.downloadDialogOtherText}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\DownloadRow.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/DownloadRow.tsx",
       "line_number": 93,
       "context": "manualWidth={isMobile() ? \"148px\" : undefined}\n directionX=\"left\"\n isAside\n withoutBackground\n >\n {file.format || t(\"Common:OriginalFormat\")}\n </LinkWithDropdown>\n ) : null}\n {isOther && isFile(file) && file.fileExst ? (\n <Text\n className={styles.downloadDialogOtherText}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\OnePasswordRow.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/OnePasswordRow.tsx",
       "line_number": 130,
       "context": "const getOptions = () => {\n const options = [\n {\n key: \"original-format\",\n label: t(\"Common:OriginalFormat\"),\n onClick: onDownloadInOriginal,\n disabled: false,\n icon: DownloadAsReactSvgUrl,\n },\n {",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\dialogs\\download-dialog\\sub-components\\PasswordRow.tsx",
+      "file_path": "/packages/shared/dialogs/download-dialog/sub-components/PasswordRow.tsx",
       "line_number": 117,
       "context": "const options: ContextMenuModel[] = [];\n \n if (type !== \"original\") {\n options.push({\n key: \"original-format\",\n label: t(\"Common:OriginalFormat\"),\n onClick: onChangeInOriginal,\n disabled: false,\n icon: DownloadAsReactSvgUrl,\n });\n }",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

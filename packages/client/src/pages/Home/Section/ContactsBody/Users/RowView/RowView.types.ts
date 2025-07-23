@@ -98,6 +98,8 @@ export type SimpleUserRowProps = {
   contactsTab: UsersStore["contactsTab"];
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
+
+  inProgress?: boolean;
 };
 
 export type UserContentProps = {

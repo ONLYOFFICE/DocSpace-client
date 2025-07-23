@@ -3,7 +3,7 @@
   "content": "The sales team will contact you after creating the request.",
   "content_en_sha1_hash": "4268b91ebf92921eaa139f9b54281c0a0b68f201",
   "created_at": "2025-05-19T21:30:53.286Z",
-  "updated_at": "2025-05-21T05:31:27.837Z",
+  "updated_at": "2025-06-18T07:34:14.909Z",
   "comment": {
     "text": "The translation key \"YouWillBeContacted\" is used to display a message indicating that the sales team will contact the user after creating a request. It appears in the body of a sales department request dialog and serves as a notification to inform the user about the next steps.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 124,
-      "context": "key=\"text-body\"\n className=\"text-body\"\n isBold={false}\n fontSize=\"13px\"\n >\n {t(\"YouWillBeContacted\")}\n </Text>\n \n <FieldContainer\n className=\"name_field\"\n key=\"name\"",
+      "line_number": 166,
+      "context": "key=\"text-body\"\n className=\"text-body\"\n isBold={false}\n fontSize=\"13px\"\n >\n {t(\"YouWillBeContacted\")}\n </Text>\n \n <br />\n <FieldContainer\n className=\"name_field\"",
       "module": "/packages/client"
     }
   ],

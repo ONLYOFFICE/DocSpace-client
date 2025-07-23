@@ -32,7 +32,7 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { inject } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { StyledTitle } from "../../styles/common";
 

@@ -91,6 +91,7 @@ const Item = ({
   isUserTariffLimit,
   roomId,
   style,
+  allowInvitingGuests,
 }) => {
   const {
     avatar,
@@ -123,6 +124,7 @@ const Item = ({
 
   const [searchRequestRunning, setSearchRequestRunning] = useState(false);
   const [isSharedUser, setIsSharedUser] = useState(false);
+  const [userExistsOnPortal, setUserExistsOnPortal] = useState(null);
 
   const searchByQuery = async (value) => {
     if (!value) {
@@ -152,6 +154,8 @@ const Item = ({
     const user = users.items.find((userItem) => userItem.email === value);
 
     setIsSharedUser(user && (roomId === -1 || user?.shared));
+
+    roomId !== -1 && setUserExistsOnPortal(user);
   };
 
   const debouncedSearch = useCallback(
@@ -207,7 +211,14 @@ const Item = ({
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((elm) => !!elm.errors?.length);
-    setHasErrors(hasErrors);
+    const needRemoveGuests = !allowInvitingGuests
+      ? inviteItems.some(
+          (inviteItem) =>
+            inviteItem.userType === EmployeeType.Guest && !inviteItem.status,
+        )
+      : false;
+
+    setHasErrors(hasErrors || needRemoveGuests);
   };
 
   const onEdit = (e) => {
@@ -229,9 +240,18 @@ const Item = ({
     const currentErrors = validationErrors.length ? validationErrors : [];
 
     setParseErrors(currentErrors);
-    changeInviteItem({ id, email: value, errors: currentErrors, access }).then(
-      () => errorsInList(),
-    );
+
+    const newValue = userExistsOnPortal || {
+      id,
+      email: value,
+      errors: currentErrors,
+      access,
+    };
+
+    const addExisting = !!userExistsOnPortal;
+    const oldId = addExisting ? id : null;
+
+    changeInviteItem(newValue, addExisting, oldId).then(() => errorsInList());
   };
 
   const saveEdit = async () => {
@@ -289,6 +309,10 @@ const Item = ({
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
+  const hasNotFoundEmail = isGroup
+    ? false
+    : !allowInvitingGuests && type === EmployeeType.Guest && !status;
+
   const displayBody = (
     <>
       <StyledInviteUserBody>
@@ -314,13 +338,17 @@ const Item = ({
         ) : null}
       </StyledInviteUserBody>
 
-      {hasError ? (
+      {hasError || hasNotFoundEmail ? (
         <ErrorWrapper>
           <StyledHelpButton
             iconName={InfoEditReactSvgUrl}
             displayType="auto"
             offsetRight={0}
-            tooltipContent={t("EmailErrorMessage")}
+            tooltipContent={
+              hasNotFoundEmail
+                ? t("EmailErrorMessageUserNotFound")
+                : t("EmailErrorMessage")
+            }
             openOnClick={false}
             size={16}
             color={theme.infoPanel.errorColor}

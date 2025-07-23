@@ -3,7 +3,7 @@
   "content": "This link will be valid until",
   "content_en_sha1_hash": "529ee7a00442d6f484c8d84c00051941ecc9d956",
   "created_at": "2025-05-19T21:30:55.800Z",
-  "updated_at": "2025-05-22T11:56:37.484Z",
+  "updated_at": "2025-07-10T11:11:06.845Z",
   "comment": {
     "text": "\"This translation key is used to display a message indicating when a link's validity expires. It will appear in the UI as an expiration date prompt or confirmation message. For translators, it should describe the action of linking a valid time frame for a digital asset.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\EditLinkPanel\\index.js",
-      "line_number": 245,
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
+      "line_number": 247,
       "context": "if (isExpired) {\n return t(\"Translations:LinkHasExpiredAndHasBeenDisabled\");\n }\n \n return expirationDate\n ? `${t(\"Files:LinkValidUntil\")}:`\n : t(\"Files:ChooseExpirationDate\");\n };\n \n useEffect(() => {\n if (!passwordSettings) {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "The paid user limit has been reached.",
   "content_en_sha1_hash": "e1d3147e981910f2b0f7ffe1cc79d9fbc9a364c2",
   "created_at": "2025-05-19T21:30:47.705Z",
-  "updated_at": "2025-05-22T11:56:37.480Z",
+  "updated_at": "2025-05-28T09:30:02.154Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user's paid quota has been reached. It appears in various UI components, such as error messages and payment-related interfaces, indicating that the user has exceeded their paid limit. The text translates to \"The paid user limit has been reached.\"",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\PaidQuotaLimitError\\index.js",
+      "file_path": "/packages/client/src/components/PaidQuotaLimitError/index.js",
       "line_number": 60,
       "context": "});\n };\n \n return (\n <>\n <Text>{t(\"Common:QuotaPaidUserLimitError\")}</Text>\n {!isRoomAdmin ? (\n <ColorTheme themeId={ThemeId.Link} isHovered onClick={onClickPayments}>\n {t(\"Common:PaymentsTitle\")}\n </ColorTheme>\n ) : null}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\login\\src\\components\\ConfirmRoute.tsx",
+      "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
       "line_number": 105,
       "context": "case ValidationResult.TariffLimit:\n console.error(\"tariff limit\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });\n throw new Error(t(\"Common:QuotaPaidUserLimitError\"));\n case ValidationResult.QuotaFailed:\n console.error(\"access below quota\", {\n confirmLinkParams,\n validationResult: confirmLinkResult.result,\n });",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\login\\src\\utils\\index.ts",
+      "file_path": "/packages/login/src/utils/index.ts",
       "line_number": 106,
       "context": "case \"SsoAuthFailed\":\n return t(\"Errors:SsoAuthFailed\");\n case \"SsoAttributesNotFound\":\n return t(\"Errors:SsoAttributesNotFound\");\n case \"QuotaPaidUserLimitError\":\n return t(\"Common:QuotaPaidUserLimitError\");\n case \"InvalidLink\":\n return t(\"Common:InvalidLink\");\n default:\n return t(\"Common:Error\");\n }",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

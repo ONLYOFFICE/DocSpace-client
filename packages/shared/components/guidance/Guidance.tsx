@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Portal } from "../portal";
@@ -100,9 +100,40 @@ const Guidance = ({
     };
   }, [currentGuidance, viewAs, isRTL, getRefElement]);
 
+  const isStepValid = useCallback(
+    (stepIndex: number) => {
+      const stepConfig = config[stepIndex];
+      if (!stepConfig) return false;
+
+      return (
+        !stepConfig.position ||
+        stepConfig.position.some((pos) => {
+          const element = getRefElement(pos.refKey as GuidanceRefKey);
+          if (!element) return false;
+
+          const clientRects = element.getClientRects?.();
+          if (!clientRects || clientRects.length === 0) return false;
+
+          return clientRects[0].width > 0;
+        })
+      );
+    },
+    [config, getRefElement],
+  );
+
   const handleNext = () => {
     if (currentStepIndex < config.length - 1) {
-      setCurrentStepIndex(currentStepIndex + 1);
+      let nextStepIndex = currentStepIndex + 1;
+      while (nextStepIndex < config.length && !isStepValid(nextStepIndex)) {
+        console.warn(`Skipping step ${nextStepIndex} - no valid elements`);
+        nextStepIndex += 1;
+      }
+
+      if (nextStepIndex < config.length) {
+        setCurrentStepIndex(nextStepIndex);
+      } else {
+        onClose?.();
+      }
     } else {
       onClose?.();
     }
@@ -110,12 +141,25 @@ const Guidance = ({
 
   const handlePrev = () => {
     if (currentStepIndex > 0) {
-      setCurrentStepIndex(currentStepIndex - 1);
+      let prevStepIndex = currentStepIndex - 1;
+      while (prevStepIndex >= 0 && !isStepValid(prevStepIndex)) {
+        console.warn(`Skipping step ${prevStepIndex} - no valid elements`);
+        prevStepIndex -= 1;
+      }
+
+      if (prevStepIndex >= 0) {
+        setCurrentStepIndex(prevStepIndex);
+      }
     }
   };
 
   useEffect(() => {
-    setCurrentGuidance(config[currentStepIndex]);
+    const currentConfig = config[currentStepIndex];
+    if (currentConfig) {
+      setCurrentGuidance(currentConfig);
+    } else {
+      setCurrentGuidance(null);
+    }
   }, [currentStepIndex, config]);
 
   if (!currentGuidance || !config.length) return null;

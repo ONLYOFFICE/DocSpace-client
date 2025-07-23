@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-19T21:30:52.842Z",
-  "updated_at": "2025-05-22T11:56:37.644Z",
+  "updated_at": "2025-07-02T07:49:19.795Z",
   "comment": {
     "text": "This translation key is used to display a success message when settings are successfully updated or saved, typically after clicking a button or submitting a form. It appears in various UI elements, such as dialog boxes and toast notifications, to inform users of the outcome of their actions. Its purpose is to provide positive feedback to the user after completing a task.",
     "is_auto": true,
@@ -11,112 +11,190 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\appearance.js",
-      "line_number": 344,
-      "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\appearance.js",
-      "line_number": 344,
-      "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\appearance.js",
-      "line_number": 344,
-      "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\appearance.js",
-      "line_number": 344,
-      "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Branding\\additionalResources.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
       "line_number": 72,
       "context": "const settings = JSON.parse(JSON.stringify(additionalResourcesData));\n settings.feedbackAndSupportEnabled = feedbackEnabled;\n settings.helpCenterEnabled = helpEnabled;\n await setAdditionalResources(settings);\n await getAdditionalResources();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n } finally {\n setIsLoading(false);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Branding\\additionalResources.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
       "line_number": 72,
       "context": "const settings = JSON.parse(JSON.stringify(additionalResourcesData));\n settings.feedbackAndSupportEnabled = feedbackEnabled;\n settings.helpCenterEnabled = helpEnabled;\n await setAdditionalResources(settings);\n await getAdditionalResources();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n } finally {\n setIsLoading(false);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Branding\\brandName.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/brandName.js",
       "line_number": 63,
       "context": "try {\n setIsSaving(true);\n await saveBrandName(data);\n setBrandName(data.logoText);\n \n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n } finally {\n setIsSaving(false);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Branding\\companyInfoSettings.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
       "line_number": 72,
       "context": "setIsLoading(true);\n \n try {\n await setCompanyInfoSettings(address, companyName, email, phone, site);\n await getCompanyInfoSettings();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n } finally {\n setIsLoading(false);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Branding\\companyInfoSettings.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
       "line_number": 72,
       "context": "setIsLoading(true);\n \n try {\n await setCompanyInfoSettings(address, companyName, email, phone, site);\n await getCompanyInfoSettings();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n } finally {\n setIsLoading(false);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Branding\\whitelabel.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
       "line_number": 64,
       "context": "}, []);\n \n const onRestoreDefault = async () => {\n try {\n await resetWhiteLabelLogos();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Branding\\whitelabel.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
       "line_number": 64,
       "context": "}, []);\n \n const onRestoreDefault = async () => {\n try {\n await resetWhiteLabelLogos();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Customization\\configure-deep-link.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
+      "line_number": 112,
+      "context": "await setAdManagement(!type);\n setDisplayBanners(Boolean(type));\n setShowReminder(false);\n saveToSessionStorage(\"defaultDisplayBanners\", type);\n saveToSessionStorage(\"currentDisplayBanners\", type);\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e!);\n } finally {\n setIsSaving(false);\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
       "line_number": 131,
       "context": "setIsSaving(true);\n await saveDeepLinkSettings(type);\n setShowReminder(false);\n saveToSessionStorage(\"defaultConfigureDeepLink\", type);\n saveToSessionStorage(\"currentConfigureDeepLink\", type);\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e!);\n } finally {\n setIsSaving(false);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\Customization\\dns-settings.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
       "line_number": 161,
       "context": "timerId = setTimeout(() => {\n setIsLoading(true);\n }, [200]);\n \n await saveDNSSettings();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n setIsError(true);\n toastr.error(e);\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\LDAP\\sub-components\\SyncContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
+      "line_number": 413,
+      "context": "setCookie(LANGUAGE, state.language.key || \"en\", {\n \"max-age\": COOKIE_EXPIRATION_YEAR,\n });\n window.timezone = state.timezone.key;\n })\n .then(() => toastr.success(t(\"SuccessfullySaveSettingsMessage\")))\n .then(\n () =>\n !user.cultureName &&\n lng !== state.language.key &&\n window.location.reload(),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 346,
+      "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 346,
+      "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 346,
+      "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
+      "line_number": 346,
+      "context": "if (!selectThemeId) return;\n \n try {\n await api.settings.sendAppearanceTheme({ selected: selectThemeId });\n await getAppearanceTheme();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n saveToSessionStorage(\"selectColorId\", selectThemeId);\n saveToSessionStorage(\"defaultColorId\", selectThemeId);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
+      "line_number": 428,
+      "context": "getBackupStorage(isManagement()),\n ]);\n setBackupSchedule(selectedSchedule);\n setThirdPartyStorage(storageInfo);\n setDefaultOptions(t, this.periodsObject, this.weekdaysLabelArray);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n \n this.setState({\n isLoadingData: false,\n isError: false,\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
+      "line_number": 428,
+      "context": "getBackupStorage(isManagement()),\n ]);\n setBackupSchedule(selectedSchedule);\n setThirdPartyStorage(storageInfo);\n setDefaultOptions(t, this.periodsObject, this.weekdaysLabelArray);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n \n this.setState({\n isLoadingData: false,\n isError: false,\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
       "line_number": 77,
       "context": "return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);\n \n const onSaveClick = React.useCallback(() => {\n saveCronLdap()\n .then(() => toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\")))\n .catch((e) => toastr.error(e));\n }, []);\n \n const onSync = React.useCallback(() => {\n syncLdap(t).catch((e) => toastr.error(e));",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\LDAP\\sub-components\\ToggleAutoSync.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleAutoSync.js",
       "line_number": 92,
       "context": "toggleCron();\n \n if (!e.target.checked) {\n saveCronLdap()\n .then(() =>\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\")),\n )\n .catch((err) => toastr.error(err));\n }\n },\n [toggleCron],",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SMTPSettings\\sub-components\\ButtonContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
       "line_number": 113,
       "context": "setButtonOperation({ ...buttonOperation, save: true });\n }, [200]);\n \n try {\n await updateSMTPSettings();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e);\n }\n \n clearTimeout(timerId);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SMTPSettings\\sub-components\\ButtonContainer.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/ButtonContainer.js",
       "line_number": 113,
       "context": "setButtonOperation({ ...buttonOperation, save: true });\n }, [200]);\n \n try {\n await updateSMTPSettings();\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (e) {\n toastr.error(e);\n }\n \n clearTimeout(timerId);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\SsoFormStore.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
+      "line_number": 147,
+      "context": "};\n \n const onSaveClick = () => {\n const turnOn = type === \"enable\";\n setMessageSettings(turnOn);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n saveToSessionStorage(\"currentAdminMessageSettings\", type);\n saveToSessionStorage(\"defaultAdminMessageSettings\", type);\n setShowReminder(false);\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
+      "line_number": 234,
+      "context": "});\n \n getBruteForceProtection();\n setShowReminder(false);\n setIsLoadingSave(false);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n toastr.error(error);\n });\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
+      "line_number": 177,
+      "context": "await setDevToolsAccessSettings(accessEnabled);\n setAccessEnabled(accessEnabled);\n setShowReminder(false);\n saveToSessionStorage(\"defaultDevToolsAccessSettings\", accessEnabled);\n saveToSessionStorage(\"currentDevToolsAccessSettings\", accessEnabled);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n } catch (error: unknown) {\n const message = (error as { message: string }).message\n ? ((error as { message: string }).message as TData)\n : (error as string);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
+      "line_number": 190,
+      "context": "allowInvitingMembers: isCheckedContacts,\n allowInvitingGuests: isCheckedGuests,\n });\n setShowReminder(false);\n \n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error as TData);\n }\n \n setIsSaving(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
+      "line_number": 222,
+      "context": "saveToSessionStorage(\"defaultIPSettings\", {\n enable,\n ips: newIps,\n });\n setShowReminder(false);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
+      "line_number": 231,
+      "context": "useSpecialSymbols,\n );\n setShowReminder(false);\n saveToSessionStorage(\"currentPasswordSettings\", data);\n saveToSessionStorage(\"defaultPasswordSettings\", data);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
+      "line_number": 212,
+      "context": "});\n }\n \n setSessionLifetimeSettings(sessionValue, type)\n .then(() => {\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n saveToSessionStorage(\"defaultSessionLifetimeSettings\", {\n lifetime: sessionValue?.toString(),\n type,\n });\n setShowReminder(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
+      "line_number": 157,
+      "context": "const res = await setTfaSettings(type);\n setType(type);\n setShowReminder(false);\n saveToSessionStorage(\"defaultTfaSettings\", type);\n saveToSessionStorage(\"currentTfaSettings\", type);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n \n if (res) {\n setIsInit(false);\n window.location.replace(res);\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
+      "line_number": 205,
+      "context": "saveToSessionStorage(\"defaultTrustedMailSettings\", {\n type,\n domains,\n });\n setShowReminder(false);\n toastr.success(t(\"SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/SsoFormStore.js",
       "line_number": 456,
       "context": "this.isSubmitLoading = true;\n \n try {\n await submitSsoForm(data);\n toastr.success(t(\"Settings:SuccessfullySaveSettingsMessage\"));\n this.isSubmitLoading = false;\n this.load();\n } catch (err) {\n toastr.error(err);\n console.error(err);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

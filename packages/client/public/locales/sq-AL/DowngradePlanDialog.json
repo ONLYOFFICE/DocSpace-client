@@ -1,0 +1,7 @@
+{
+  "CannotChangePlan": "Ju nuk mund ta ndryshoni planin tuaj sepse vëllimi i hapësirës së përdorur ose numri i administratorëve tejkalon kufizimet e planit të selektuar:",
+  "ChangePricingPlan": "Ndryshoni planin e çmimeve",
+  "PlanStorageLimit": "Kufizimi i tarifës së re është<1>{{storageValue}}</1> i hapësirës ruajtëse, dhe ruajtja juaj aktuale e përdorur është <1>{{currentStorageValue}}</1>.",
+  "PlanUsersLimit": "Ju dëshironi ta ulni ekipin në administratorë<1>{{usersCount}}</1> dhe numri aktual i këtyre përdoruesve në {{productName}} është <1>{{currentUsersCount}}</1>.",
+  "SaveOrChange": "Ju lutemi eliminoni mospërputhjen në parametrin kundërshtues për të vazhduar ose mbajtur planin tuaj aktiv të çmimeve."
+}

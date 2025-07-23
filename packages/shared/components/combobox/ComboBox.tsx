@@ -241,6 +241,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     tabIndex,
     onClickSelectedItem,
     shouldShowBackdrop,
+    dropDownClassName,
   } = props;
 
   React.useEffect(() => {
@@ -373,6 +374,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       isDefaultMode,
       clickOutsideAction: handleClickOutside,
       shouldShowBackdrop,
+      className: dropDownClassName,
     };
 
     const dropDownOptions = advancedOptions || renderOptions();

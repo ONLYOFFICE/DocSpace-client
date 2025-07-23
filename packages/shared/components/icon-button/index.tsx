@@ -29,6 +29,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
+
+import { isDesktop } from "../../utils/device";
+
+import { Tooltip } from "../tooltip";
+
 import styles from "./IconButton.module.scss";
 import { IconButtonProps } from "./IconButton.types";
 
@@ -68,6 +73,9 @@ const IconButton = ({
   onMouseDown,
   onMouseUp,
   onClick,
+
+  tooltipContent,
+  tooltipId,
 
   ...rest
 }: IconButtonProps) => {
@@ -236,6 +244,8 @@ const IconButton = ({
       style={buttonStyle}
       data-testid="icon-button"
       data-iconname={currentIcon.name}
+      data-tooltip-id={tooltipId}
+      data-tooltip-content={tooltipContent}
       {...rest}
     >
       {iconNode ? (
@@ -253,6 +263,9 @@ const IconButton = ({
           data-testid="icon-button-svg"
         />
       )}
+      {tooltipId && tooltipContent ? (
+        <Tooltip float={isDesktop()} id={tooltipId} place="bottom" />
+      ) : null}
     </div>
   );
 };

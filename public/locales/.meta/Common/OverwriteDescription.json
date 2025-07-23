@@ -3,7 +3,7 @@
   "content": "The new file will replace the existing one as a new version.",
   "content_en_sha1_hash": "0d9f5c9f81c7babac9ce4dd02769692be95654fb",
   "created_at": "2025-05-19T21:30:47.186Z",
-  "updated_at": "2025-05-22T11:56:37.341Z",
+  "updated_at": "2025-05-28T09:30:02.216Z",
   "comment": {
     "text": "The translation key \"OverwriteDescription\" is used to display a message when a user chooses to overwrite an existing file. This message informs users that their new file will replace the current one as a new version. It appears in dialog boxes, such as the ConflictResolveDialog, where users can select action options.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 279,
       "context": ": t(\"Common:MergeAndOverwrite\");\n };\n \n const getOverwriteDescription = () => {\n return isFileDialog\n ? t(\"Common:OverwriteDescription\")\n : isFolderDialog\n ? t(\"Common:MergeFoldersDescription\")\n : t(\"Common:MultiplyOverwrite\");\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\ConflictResolveDialog\\ConflictResolveDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
       "line_number": 62,
       "context": "components={{ 1: <strong className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

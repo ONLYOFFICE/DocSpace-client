@@ -3,7 +3,7 @@
   "content": "Clean",
   "content_en_sha1_hash": "fa893d87e1fa0a69c7942dd1e65f3bd1932e53d1",
   "created_at": "2025-05-19T21:30:55.333Z",
-  "updated_at": "2025-05-22T11:56:37.493Z",
+  "updated_at": "2025-07-10T11:11:06.843Z",
   "comment": {
     "text": "This translation key is used for a button label in an edit link panel, specifically to clean files, and its appearance changes based on hover state. The text appears as part of a password access block on a file-related interface.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\EditLinkPanel\\PasswordAccessBlock.js",
-      "line_number": 153,
-      "context": "isHovered\n type=\"action\"\n isDisabled={isLoading}\n onClick={onCleanClick}\n >\n {t(\"Files:Clean\")}\n </Link>\n <Link\n fontSize=\"13px\"\n fontWeight={600}\n isHovered",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/PasswordAccessBlock.js",
+      "line_number": 152,
+      "context": "fontWeight={600}\n isHovered\n type=\"action\"\n onClick={onCleanClick}\n >\n {t(\"Files:Clean\")}\n </Link>\n <Link\n fontSize=\"13px\"\n fontWeight={600}\n isHovered",
+      "module": "/packages/client"
     }
   ],
   "languages": {

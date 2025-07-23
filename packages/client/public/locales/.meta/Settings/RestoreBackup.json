@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:52.395Z",
-  "updated_at": "2025-05-21T03:29:50.888Z",
+  "updated_at": "2025-07-02T07:49:19.791Z",
   "comment": {
     "text": "This translation key \"RestoreBackup\" is used to display the text \"Restore\" in the user interface, specifically on a button or link that allows users to restore backup data. It appears in the Portal Settings page, under the Data Management category, and is part of the third-party integration settings for managing backups.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 219,
+      "line_number": 226,
       "context": "return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"RestoreBackup\":\n return t(\"RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");",
       "module": "/packages/client"
     },
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 286,
+      "line_number": 300,
       "context": "{\n id: \"portal-settings_catalog-restore\",\n key: \"3\",\n type: PageType.restore,\n link: \"restore\",\n tKey: \"RestoreBackup\",\n isHeader: true,\n children: [\n {\n key: \"3-0\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 286,
+      "line_number": 300,
       "context": "{\n id: \"portal-settings_catalog-restore\",\n key: \"3\",\n type: PageType.restore,\n link: \"restore\",\n tKey: \"RestoreBackup\",\n isHeader: true,\n children: [\n {\n key: \"3-0\",\n icon: \"\",",
       "module": "/packages/client"
     },

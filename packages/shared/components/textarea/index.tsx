@@ -68,6 +68,7 @@ const Textarea = ({
   hasNumeration = false,
   isFullHeight = false,
   classNameCopyIcon,
+  isChatMode = false,
 }: TextareaProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -146,6 +147,7 @@ const Textarea = ({
         [styles.defaultHeight]: !heightScale && !isFullHeight,
         [styles.isJSONField]: isJSONField && enableCopy,
         [styles.copy]: enableCopy,
+        [styles.scrollbar]: isChatMode,
       })}
       style={
         {
@@ -165,12 +167,13 @@ const Textarea = ({
       ) : null}
 
       <Scrollbar
-        className={classNames(styles.scrollbar, className, {
+        className={classNames(className, {
           [styles.heightScale]: heightScale,
           [styles.isFullHeight]: isFullHeight,
           [styles.defaultHeight]: !heightScale && !isFullHeight,
           [styles.hasError]: isError || hasError,
           [styles.isDisabled]: isDisabled,
+          [styles.scrollbar]: !isChatMode,
         })}
         style={
           {
@@ -191,6 +194,7 @@ const Textarea = ({
             {numerationValue}
           </pre>
         ) : null}
+        {/*  @ts-expect-error: Passing pointer events causes a React warning - "Unknown event handler". TextareaAutosize types are outdated */}
         <TextareaAutosize
           id={id}
           className={classNames(styles.textarea, {
@@ -217,8 +221,6 @@ const Textarea = ({
           dir="auto"
           data-dir={isRTL ? "rtl" : undefined}
           data-testid="textarea"
-          onPointerEnterCapture={() => {}}
-          onPointerLeaveCapture={() => {}}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
         />

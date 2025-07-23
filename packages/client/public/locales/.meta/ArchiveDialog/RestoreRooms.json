@@ -3,7 +3,7 @@
   "content": "Are you sure you want to restore rooms?",
   "content_en_sha1_hash": "7af07531b9775b705e2ba1b5184a2bf685879a24",
   "created_at": "2025-05-19T21:30:57.063Z",
-  "updated_at": "2025-05-22T11:56:37.420Z",
+  "updated_at": "2025-05-28T09:30:02.291Z",
   "comment": {
     "text": "The translation key \"RestoreRooms\" is used to display a confirmation message when restoring multiple rooms. It appears in a restore room dialog and informs the user that their actions will affect all selected items.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\RestoreRoomDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/RestoreRoomDialog/index.js",
       "line_number": 86,
       "context": "}\n \n if (restoreAll) return t(\"ArchiveDialog:RestoreAllRooms\");\n \n return items.length > 1\n ? t(\"ArchiveDialog:RestoreRooms\")\n : t(\"ArchiveDialog:RestoreRoom\");\n };\n \n const description = getDescription();",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

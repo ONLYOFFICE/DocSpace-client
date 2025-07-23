@@ -3,7 +3,7 @@
   "content": "Your registration email address",
   "content_en_sha1_hash": "8cc0ae7ce8d6f84fb6f6364ece769b5cac5b2cd4",
   "created_at": "2025-05-19T21:30:47.781Z",
-  "updated_at": "2025-05-22T11:56:37.423Z",
+  "updated_at": "2025-06-18T07:34:15.244Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Your registration email address\" in various UI components, typically as a placeholder or label for an input field related to user registration. It appears in sales department request dialogs and modal dialogs for accessing portal services, prompting users to enter their registration email address.",
     "is_auto": true,
@@ -11,28 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\SalesDepartmentRequestDialog\\index.js",
-      "line_number": 167,
-      "context": "name=\"e-mail\"\n type=\"text\"\n size=\"base\"\n scale\n tabIndex={2}\n placeholder={t(\"Common:RegistrationEmail\")}\n isDisabled={isLoading}\n value={email}\n onChange={onChangeEmail}\n />\n </FieldContainer>",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalUnavailable\\index.js",
+      "file_path": "/packages/client/src/pages/PortalUnavailable/index.js",
       "line_number": 81,
       "context": "return (\n <StyledBody>\n <RecoverAccessModalDialog\n visible={isVisible}\n t={t}\n emailPlaceholderText={t(\"Common:RegistrationEmail\")}\n textBody={t(\"PortalUnavailable:AccessingProblem\", {\n productName: t(\"Common:ProductName\"),\n })}\n onClose={onCloseDialog}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\login\\src\\components\\LoginForm\\sub-components\\ForgotPasswordModalDialog.tsx",
+      "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
       "line_number": 147,
       "context": "errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n >\n <EmailInput\n hasError={isShowError && emailError}\n placeholder={t(\"Common:RegistrationEmail\")}\n isAutoFocussed\n id=\"forgot-password-modal_email\"\n name=\"e-mail\"\n size={InputSize.base}\n scale",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\login\\src\\components\\Register\\sub-components\\RegisterModalDialog.tsx",
+      "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
       "line_number": 120,
       "context": "errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n >\n <EmailInput\n hasError={isShowError && emailErr}\n placeholder={t(\"Common:RegistrationEmail\")}\n isAutoFocussed\n id=\"registration-modal_email\"\n name=\"e-mail\"\n size={InputSize.base}\n scale",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

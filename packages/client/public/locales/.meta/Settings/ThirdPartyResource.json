@@ -3,7 +3,7 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-19T21:30:52.911Z",
-  "updated_at": "2025-05-22T11:56:37.634Z",
+  "updated_at": "2025-07-01T15:57:36.131Z",
   "comment": {
     "text": "The translation key \"ThirdPartyResource\" is used to display a description for a third-party resource filter option in various UI contexts, such as filtering options and radio button labels. It appears on screens related to data management and backup settings, informing users that this option selects a third-party resource. Translators should ensure the text accurately reflects the meaning of \"ThirdPartyResource\" in their target language.",
     "is_auto": true,
@@ -11,10 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 1065,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1040,
       "context": "});\n \n filterOptions.push({\n key: FilterGroups.roomFilterProviderType,\n group: FilterGroups.roomFilterProviderType,\n label: t(\"Settings:ThirdPartyResource\"),\n isHeader: true,\n isLast: true,\n });\n \n filterOptions.push(...thirdPartyOptions);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/auto-backup/index.js",
+      "line_number": 605,
+      "context": "// isDisabled={isDisabledThirdPartyList}\n >\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-resource\"\n label={t(\"ThirdPartyResource\")}\n name={`${ResourcesModuleType}`}\n isChecked={isCheckedThirdParty}\n isDisabled={\n isLoadingData\n // || isDisabledThirdPartyList",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/manual-backup/index.js",
+      "line_number": 72,
+      "context": "? selectedStorageType === \"Documents\"\n : false;\n const checkedTemporary = selectedStorageType\n ? selectedStorageType === \"TemporaryStorage\"\n : true;\n const checkedThirdPartyResource = selectedStorageType\n ? selectedStorageType === \"ThirdPartyResource\"\n : false;\n const checkedThirdPartyStorage = selectedStorageType\n ? selectedStorageType === \"ThirdPartyStorage\"\n : false;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/index.js",
+      "line_number": 51,
+      "context": "import SocketHelper, { SocketEvents } from \"@docspace/shared/utils/socket\";\n \n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import LocalFileModule from \"./sub-components/LocalFileModule\";\n import ThirdPartyStoragesModule from \"./sub-components/ThirdPartyStoragesModule\";\n import ThirdPartyResourcesModule from \"./sub-components/ThirdPartyResourcesModule\";\n import BackupListModalDialog from \"./sub-components/backup-list\";\n import RoomsModule from \"./sub-components/RoomsModule\";\n import ButtonContainer from \"./sub-components/ButtonComponent\";\n import { StyledRestoreBackup } from \"../StyledBackup\";",
+      "module": "/packages/client"
     }
   ],
   "languages": {

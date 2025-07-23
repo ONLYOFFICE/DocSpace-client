@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Selecione seções para importação. Eles aparecerão nas seções correspondentes do {{productName}}.",
   "IncludedInBusiness": "Incluído no plano de negócios",
   "IntegrationRequest": "Está a faltar uma integração ou componente útil no {{organizationName}} {{productName}}? Deixe um pedido à nossa equipa e analisaremos o assunto.",
+  "InvitationSettings": "Configurações do Convite",
+  "InvitationSettingsContacts": "Convide membros do {{productName}} via Contatos",
+  "InvitationSettingsContactsDescription": "Habilite esta opção para permitir que convites sejam enviados para novos membros do {{productName}} através da seção Contatos. Desabilite esta opção caso queira convidar novos membros apenas por meio do LDAP.",
+  "InvitationSettingsDescription": "Configure as opções de convite para membros internos e convidados externos do seu {{productName}}. Essas configurações podem ajudar você a cumprir as diretrizes de segurança da sua empresa, por exemplo, se você usa LDAP ou outros sistemas de gerenciamento de usuários.",
+  "InvitationSettingsGuests": "Permitir convidar convidados",
+  "InvitationSettingsGuestsDescription": "Habilite esta opção para permitir que todos os membros do {{productName}} convidem convidados externos para salas.",
+  "InvitationSettingsMobile": "Configure as opções de convite para membros internos e convidados externos do seu {{productName}}.",
   "InviteLetterTooltip": "Se marcado, todos os novos usuários receberão uma carta-convite com detalhes de autorização.",
   "IPSecurity": "Segurança IP",
   "IPSecurityMobileDescription": "A Segurança IP é usada para restringir o login no portal de todos os endereços IP, exceto determinados endereços.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Logótipo para a página Sobre",
   "LogoCompact": "Logótipo para o menu compacto à esquerda",
   "LogoDocsEditor": "Logotipo para o cabeçalho dos editores",
-  "LogoDocsEditorEmbedded": "Logótipo para o cabeçalho dos editores – modo incorporado",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo para o cabeçalho do espaço",
   "LogoLogin": "Logótipo para a Página de Início de Sessão",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Enviar carta de convite",
   "SendNotificationAboutRestoring": "Enviar uma notificação sobre a restauração do espaço aos utilizadores",
   "ServerSideEncryptionMethod": "Método de Encriptação do Lado do Servidor",
+  "Services": "Serviços",
   "ServiceUrl": "URL do Serviço",
   "SessionLifetime": "Duração da Sessão",
   "SessionLifetimeMobileDescription": "O Session Lifetime permite definir o tempo (em minutos) antes que os usuários do {{productName}} precisem inserir as credenciais do espaço novamente para acessar o espaço.",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
-  "YourLogo": "O seu logótipo"
+  "YourLogo": "O seu logótipo",
+  "AdManagement": "Gestão de Anúncios",
+  "AdManagementDescription": "Escolha se os banners promocionais são exibidos no seu {{productName}}."
 }

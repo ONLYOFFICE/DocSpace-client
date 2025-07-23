@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "Atribút Názov skupiny",
   "LdapGroupNameAttributeTooltip": "Zadajte atribút objektu, ktorý zodpovedá názvu skupiny.",
   "LdapGroupUserAttributeTooltip": "Zadajte atribút objektu používateľa, ktorý sa používa na určenie, či je tento používateľ členom skupín.",
-  "LdapIntro": "LDAP umožňuje importovať používateľov a skupiny zo servera LDAP, ako aj poskytovať overovanie používateľov na portáli pomocou prihlasovacích mien/hesiel uložených na serveri LDAP. Používatelia sa importujú okamžite po uložení nastavení. Neskôr pridaní používatelia budú importovaní počas ich prvého overenia na portáli.",
+  "LdapIntro": "Importujte používateľov a skupiny cez LDAP a povoľte autentifikáciu používateľov pomocou prihlásení/hesiel uložených na LDAP serveri. Používatelia budú importovaní okamžite po uložení nastavení. Používatelia pridávaní neskôr budú importovaní pri ich prvom overení. Ak chcete poskytnúť prístup len cez LDAP, deaktivujte možnosť pozývať nových členov {{productName}} cez Kontakty: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atribút Prihlásenie",
   "LdapLoginAttributeTooltip": "Zadajte atribút objektu zodpovedajúci prihlasovaciemu menu používateľa.",
   "LdapLoginTooltip": "Zadajte prihlasovacie meno používateľa, ktorý má prístupové práva na čítanie zo servera LDAP.",

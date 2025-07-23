@@ -26,7 +26,7 @@
 
 /* eslint-disable react/prop-types */
 
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router";
 
 import { TenantStatus } from "../enums";
 import { combineUrl } from "../utils/combineUrl";

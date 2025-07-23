@@ -30,7 +30,7 @@ import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touc
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { useTheme } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -180,6 +180,8 @@ const SectionHeaderContent = (props) => {
 
   const isAvailableSettings = (key) => {
     switch (key) {
+      case "PortalRenaming":
+        return isCustomizationAvailable;
       case "DNSSettings":
         return isCustomizationAvailable;
       case "RestoreBackup":
@@ -323,6 +325,7 @@ const SectionHeaderContent = (props) => {
       : t(header, {
           organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
+          productName: t("Common:ProductName"),
         });
 
   // console.log(translatedHeader, header);

@@ -45,16 +45,21 @@ const Tabs = (props: TabsProps) => {
     stickyTop,
     onSelect,
     multiple = false,
+    allowNoSelection = false,
+    withoutStickyIntend = false,
+    isCentered = false,
     ...rest
   } = props;
 
   const { interfaceDirection } = useInterfaceDirection();
 
   const selectedItemIndex = !selectedItemId
-    ? 0
+    ? allowNoSelection
+      ? -1
+      : 0
     : items.findIndex((item) => item.id === selectedItemId);
 
-  const [currentItem, setCurrentItem] = useState(selectedItemIndex);
+  // const [currentItem, setCurrentItem] = useState(selectedItemIndex);
   const [multipleItems, setMultipleItems] = useState(selectedItems);
 
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -114,10 +119,10 @@ const Tabs = (props: TabsProps) => {
   );
 
   useEffect(() => {
-    if (!multiple) setCurrentItem(selectedItemIndex);
+    // if (!multiple) setCurrentItem(selectedItemIndex);
 
     scrollToTab(selectedItemIndex);
-  }, [selectedItemIndex, items, scrollToTab, multiple]);
+  }, [selectedItemIndex, items, scrollToTab, /* multiple, */ type]);
 
   const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
     if (multiple) {
@@ -143,7 +148,7 @@ const Tabs = (props: TabsProps) => {
       return;
     }
 
-    setCurrentItem(index);
+    // setCurrentItem(index);
     onSelect?.(selectedTabItem);
 
     scrollToTab(index);
@@ -153,6 +158,7 @@ const Tabs = (props: TabsProps) => {
     [styles.multiple]: multiple,
     [styles.primary]: type === TabsTypes.Primary,
     [styles.secondary]: type === TabsTypes.Secondary,
+    [styles.centering]: isCentered,
   });
 
   const renderContent = (
@@ -160,7 +166,7 @@ const Tabs = (props: TabsProps) => {
       {items.map((item, index) => {
         const isSelected = multiple
           ? multipleItems.indexOf(index) !== -1
-          : index === currentItem;
+          : index === selectedItemIndex;
 
         return (
           <div
@@ -174,10 +180,11 @@ const Tabs = (props: TabsProps) => {
               classes,
             )}
             onClick={() => {
-              if (index === currentItem) return;
+              if (index === selectedItemIndex) return;
               item.onClick?.();
               setSelectedItem(item, index);
             }}
+            data-testid={item.name}
           >
             <span className={styles.tabText}>{item.name}</span>
             <div
@@ -208,7 +215,13 @@ const Tabs = (props: TabsProps) => {
           className={classNames(styles.sticky, classes, "sticky")}
           style={{ top: stickyTop }}
         >
-          {!isViewFirstTab ? <div className={styles.blurAhead} /> : null}
+          {!isViewFirstTab ? (
+            <div
+              className={styles.blurAhead}
+              dir={interfaceDirection}
+              data-direction={interfaceDirection}
+            />
+          ) : null}
           <Scrollbar
             ref={scrollRef}
             autoHide={false}
@@ -218,13 +231,21 @@ const Tabs = (props: TabsProps) => {
           >
             {renderContent}
           </Scrollbar>
-          {!isViewLastTab ? <div className={styles.blurBack} /> : null}
+          {!isViewLastTab ? (
+            <div
+              className={styles.blurBack}
+              dir={interfaceDirection}
+              data-direction={interfaceDirection}
+            />
+          ) : null}
         </div>
       ) : null}
-      <div className={classNames(styles.stickyIndent, "sticky-indent")} />
-      {!multiple && items[currentItem]?.content ? (
+      {withoutStickyIntend ? null : (
+        <div className={classNames(styles.stickyIndent, "sticky-indent")} />
+      )}
+      {!multiple && items[selectedItemIndex]?.content ? (
         <div className={`${styles.tabsBody} tabs-body`}>
-          {items[currentItem].content}
+          {items[selectedItemIndex].content}
         </div>
       ) : null}
     </div>

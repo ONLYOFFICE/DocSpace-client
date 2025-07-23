@@ -38,6 +38,8 @@ import {
   getSettings,
   getThirdPartyProviders,
   getUserFromConfirm,
+  getInvitationSettings,
+  getUserByEmail,
 } from "@/utils/actions";
 import CreateUserForm from "./page.client";
 
@@ -52,19 +54,31 @@ async function Page({ searchParams, params }: LinkInviteProps) {
 
   const type = searchParams.type;
   const uid = searchParams.uid;
+  const email = searchParams.email;
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
-  const [user, settings, thirdParty, capabilities, passwordSettings] =
-    await Promise.all([
-      getUserFromConfirm(uid, confirmKey),
-      getSettings(),
-      getThirdPartyProviders(true),
-      getCapabilities(),
-      getPortalPasswordSettings(confirmKey),
-    ]);
+  const [
+    user,
+    settings,
+    thirdParty,
+    capabilities,
+    passwordSettings,
+    invitationSettings,
+  ] = await Promise.all([
+    uid
+      ? getUserFromConfirm(uid, confirmKey)
+      : email
+        ? getUserByEmail(email, confirmKey)
+        : undefined,
+    getSettings(),
+    getThirdPartyProviders(true),
+    getCapabilities(),
+    getPortalPasswordSettings(confirmKey),
+    getInvitationSettings(),
+  ]);
 
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
@@ -93,6 +107,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               licenseUrl={settings.externalResources.common?.entries.license}
               isStandalone={settings.standalone}
               logoText={settings.logoText}
+              invitationSettings={invitationSettings}
             />
           </FormWrapper>
         </>

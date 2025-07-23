@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 

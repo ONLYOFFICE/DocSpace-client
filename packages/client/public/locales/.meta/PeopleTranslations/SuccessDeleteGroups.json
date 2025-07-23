@@ -3,7 +3,7 @@
   "content": "Groups were deleted successfully",
   "content_en_sha1_hash": "583bba7040608f8de20a30e546a10a26271233d7",
   "created_at": "2025-05-19T21:30:53.526Z",
-  "updated_at": "2025-05-22T11:56:37.772Z",
+  "updated_at": "2025-07-10T11:11:07.112Z",
   "comment": {
     "text": "The \"Groups were deleted successfully\" translation key is used to display a success message after deleting groups. It will appear when the user deletes a group and is associated with a confirmation dialog or button action in the GroupsStore.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\store\\contacts\\GroupsStore.ts",
-      "line_number": 424,
+      "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
+      "line_number": 437,
       "context": "Promise.all(\n this.selection.map(async (group) => groupsApi.deleteGroup(group.id)),\n ).then(() => {\n toastr.success(\n t(\n \"PeopleTranslations:SuccessDeleteGroups\",\n ) as unknown as React.ReactNode,\n );\n this.setSelection([]);\n this.getGroups(this.groupsFilter, true);\n this.setIsLoading(false);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

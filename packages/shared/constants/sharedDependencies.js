@@ -43,9 +43,9 @@ module.exports = {
     requiredVersion: deps["react-dom"],
   },
 
-  "react-router-dom": {
+  "react-router": {
     singleton: true,
-    requiredVersion: deps["react-router-dom"],
+    requiredVersion: deps["react-router"],
   },
   "styled-components": {
     singleton: true,

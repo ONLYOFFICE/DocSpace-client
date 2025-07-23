@@ -3,7 +3,7 @@
   "content": "Share documents for viewing, editing, commenting, or reviewing without registration. You can also embed this room into any web interface.",
   "content_en_sha1_hash": "9eb88d5eef886330584cd438a6dc42214e1d9081",
   "created_at": "2025-05-19T21:30:47.660Z",
-  "updated_at": "2025-05-22T11:56:37.711Z",
+  "updated_at": "2025-07-01T15:57:36.197Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining that PublicRoomInfo allows sharing documents without registration, and can be embedded in web interfaces. It appears as a HelpButton in a LabelGroup within a ComboBox, providing context for users configuring portal settings.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\FileSelector.js",
-      "line_number": 435,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 439,
       "context": "/>\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n />\n </LabelGroup>\n <ComboBox\n scaled",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 597,
       "context": "/>\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n />\n </LabelGroup>\n <ComboBox\n scaled",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\SimpleRoom.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 329,
       "context": "/>\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n />\n </LabelGroup>\n <ComboBox\n scaled",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\components\\room-type\\RoomType.utils.ts",
-      "line_number": 42,
-      "context": "case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:\n return \"\";\n }",
-      "module": "\\packages\\shared"
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 44,
+      "context": "return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:\n return \"\";\n }",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

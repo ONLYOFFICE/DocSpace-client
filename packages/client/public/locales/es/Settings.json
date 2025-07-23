@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Seleccione secciones para importar. Aparecerán en las secciones correspondientes de {{productName}}.",
   "IncludedInBusiness": "Incluido en el plan Business",
   "IntegrationRequest": "¿Falta una integración o componente útil en {{organizationName}} {{productName}}? Envíe una solicitud a nuestro equipo y la analizaremos.",
+  "InvitationSettings": "Configuración de invitación",
+  "InvitationSettingsContacts": "Invite a miembros de {{productName}} a través de Contactos",
+  "InvitationSettingsContactsDescription": "Active esta opción para permitir que se envíen invitaciones a los nuevos miembros de {{productName}} a través de la sección Contactos. Desactive esta opción si desea invitar a nuevos miembros únicamente a través de LDAP.",
+  "InvitationSettingsDescription": "Configure las opciones de invitación para miembros internos e invitados externos de su {{productName}}. Estos ajustes pueden ayudarte a cumplir las directrices de seguridad de su empresa, por ejemplo, si utiliza LDAP u otros sistemas de gestión de usuarios.",
+  "InvitationSettingsGuests": "Permitir invitar a invitados",
+  "InvitationSettingsGuestsDescription": "Active esta opción para permitir que todos los miembros de {{productName}} inviten a invitados externos a las salas.",
+  "InvitationSettingsMobile": "Configure las opciones de invitación para miembros internos e invitados externos de su {{productName}}.",
   "InviteLetterTooltip": "Si está marcada, todos los nuevos usuarios recibirán una carta de invitación con los datos de autorización.",
   "IPSecurity": "Seguridad IP",
   "IPSecurityMobileDescription": "La seguridad IP se utiliza para restringir el inicio de sesión en el portal desde todas las direcciones IP excepto determinadas direcciones.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Logotipo para la página Acerca de",
   "LogoCompact": "Logotipo para el menú compacto de la izquierda",
   "LogoDocsEditor": "Logo para los encabezados de los editores",
-  "LogoDocsEditorEmbedded": "Logotipo para el encabezado de los editores - modo incrustado",
   "LogoFavicon": "Favicono",
   "LogoLightSmall": "Logo para el encabezado del espacio",
   "LogoLogin": "Logotipo para la página de inicio de sesión y los correos electrónicos",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Enviar carta de invitación",
   "SendNotificationAboutRestoring": "Avisar a usuarios sobre restauración del espacio",
   "ServerSideEncryptionMethod": "Método de cifrado del lado del servidor",
+  "Services": "Servicios",
   "ServiceUrl": "URL de servicio",
   "SessionLifetime": "Duración de la sesión",
   "SessionLifetimeMobileDescription": "La duración de la sesión permite establecer el tiempo (en minutos) antes de que los usuarios de {{productName}} tengan que volver a introducir las credenciales del espacio para acceder al mismo.",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso.",
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
-  "YourLogo": "Su logotipo"
+  "YourLogo": "Su logotipo",
+  "AdManagement": "Gestión de anuncios",
+  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}."
 }

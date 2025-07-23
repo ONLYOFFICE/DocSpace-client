@@ -3,7 +3,7 @@
   "content": "The room link you are trying to open does not exist or has expired.",
   "content_en_sha1_hash": "c16f473a9fbf86a65ac485294a575a3b10d7278a",
   "created_at": "2025-05-19T21:30:48.190Z",
-  "updated_at": "2025-05-22T11:56:37.613Z",
+  "updated_at": "2025-07-10T11:11:06.884Z",
   "comment": {
     "text": "The translation key \"RoomLinkExpired\" is used to display a message indicating that a room link has expired or does not exist. It appears in an error message when trying to open an external item, and serves as a fallback for cases where the item is locked or unavailable.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\NoItem\\ExpiredItem.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/ExpiredItem.tsx",
       "line_number": 88,
       "context": "size={HeadingSize.xsmall}\n >\n {t(\"Common:RoomNotAvailable\")}\n </Heading>\n <Text className=\"expired-text\" textAlign=\"center\">\n {t(\"Common:RoomLinkExpired\")}\n </Text>\n </div>\n </StyledNoItemContainer>\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 242,
       "context": "onOpenFolder = async (item, t) => {\n const { isExpiredLinkAsync } = this.filesActionsStore;\n \n if (item.external && (item.expired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 242,
       "context": "onOpenFolder = async (item, t) => {\n const { isExpiredLinkAsync } = this.filesActionsStore;\n \n if (item.external && (item.expired || (await isExpiredLinkAsync(item))))\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\FilesActionsStore.js",
-      "line_number": 2615,
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2623,
       "context": "if (\n item.external &&\n (item.expired || (await this.isExpiredLinkAsync(item)))\n )\n return toastr.error(\n t(\"Common:RoomLinkExpired\"),\n t(\"Common:RoomNotAvailable\"),\n );\n \n if (isLockedSharedRoom(item))\n return this.dialogsStore.setPasswordEntryDialog(true, item);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

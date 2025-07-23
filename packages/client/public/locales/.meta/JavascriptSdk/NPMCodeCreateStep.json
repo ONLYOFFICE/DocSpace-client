@@ -3,7 +3,7 @@
   "content": "Create HTML element with id from config and insert it inside document body for place SDK frame:",
   "content_en_sha1_hash": "d26d5cf18e35d7c6302f29f1f6f2e1c25a844581",
   "created_at": "2025-05-19T21:30:54.593Z",
-  "updated_at": "2025-05-21T08:54:25.829Z",
+  "updated_at": "2025-05-28T09:30:02.576Z",
   "comment": {
     "text": "This translation key is used to describe the action of creating an HTML element and inserting it into the document body. It appears in a UI component, likely a button or dialog prompt, that guides users through a step-by-step process for placing a Software Development Kit (SDK) frame.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 95,
+      "line_number": 96,
       "context": "isReadOnly\n enableCopy\n isJSONField\n />\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeCreateStep\")}\n </Text>\n <Textarea\n value={`const container = document.createElement('div');\n container.id = '${config.frameId}';\n document.body.appendChild(container);`}",
       "module": "/packages/client"
     }

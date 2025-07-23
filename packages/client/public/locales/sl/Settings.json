@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Izberite razdelke za uvoz. Prikazali se bodo v ustreznih razdelkih {{productName}}.",
   "IncludedInBusiness": "Vključeno v poslovni načrt",
   "IntegrationRequest": "Pogrešate uporabno integracijo ali komponento v {{organizationName}} {{productName}}? Zaupajte zahtevo naši ekipi in preučili jo bomo.",
+  "InvitationSettings": "Nastavitve povabil",
+  "InvitationSettingsContacts": "Povabite člane {{productName}} preko kontaktov.",
+  "InvitationSettingsContactsDescription": "Omogočite to možnost, da dovolite pošiljanje povabil na nove člane {{productName}} preko razdelka Kontakti. Onemogočite to možnost, če želite povabiti nove člane samo preko LDAP.",
+  "InvitationSettingsDescription": "Nastavite možnosti povabila za notranje člane in zunanje goste vašega {{productName}}. Te nastavitve vam lahko pomagajo upoštevati smernice vaše družbe glede varnosti, na primer, če uporabljate LDAP ali druge sisteme za upravljanje uporabnikov.",
+  "InvitationSettingsGuests": "Dovolite povabiti goste",
+  "InvitationSettingsGuestsDescription": "Omogočite to možnost, da omogočite vsem članom {{productName}}, da povabijo zunanje goste v sobe.",
+  "InvitationSettingsMobile": "Nastavite možnosti povabila za notranje člane in zunanje goste vašega {{productName}}.",
   "InviteLetterTooltip": "Če je označeno, bodo vsi novi uporabniki prejeli povabilo s podrobnostmi o avtorizaciji.",
   "IPSecurity": "IP varnost",
   "IPSecurityMobileDescription": "Varnost IP se uporablja za omejitev prijave na portal z vseh naslovov IP, razen z določenih naslovov.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Logotip za stran O nas",
   "LogoCompact": "Logotip za kompaktni levi meni",
   "LogoDocsEditor": "Logotip za glavo urednika",
-  "LogoDocsEditorEmbedded": "Logotip za glavo urednikov - vdelan način",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logotip za glavo prostora",
   "LogoLogin": "Logotip za prijavno stran in emaile",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Pošlji pismo s povabilom",
   "SendNotificationAboutRestoring": "Pošlji uporabnikom obvestilo o obnovi prostora",
   "ServerSideEncryptionMethod": "Šifrirna metoda na strani strežnika",
+  "Services": "Storitev/i",
   "ServiceUrl": "Url storitve",
   "SessionLifetime": "Tempo da sessão",
   "SessionLifetimeMobileDescription": "Življenjska doba seje omogoča nastavitev časa (v minutah), preden bodo morali uporabniki {{productName}} znova vnesti poverilnice prostora za dostop do prostora.",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
-  "YourLogo": "Vaš logotip"
+  "YourLogo": "Vaš logotip",
+  "AdManagement": "Upravljanje oglasov",
+  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}."
 }

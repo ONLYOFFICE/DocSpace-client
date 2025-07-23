@@ -27,7 +27,7 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
-import { useNavigate, NavigateFunction } from "react-router-dom";
+import { useNavigate, NavigateFunction } from "react-router";
 import { TTranslation } from "@docspace/shared/types";
 import { decode } from "he";
 import { Link } from "@docspace/shared/components/link";

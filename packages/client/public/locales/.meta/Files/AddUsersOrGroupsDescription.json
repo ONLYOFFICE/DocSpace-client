@@ -3,7 +3,7 @@
   "content": "The added administrators will be able to create rooms using this template.",
   "content_en_sha1_hash": "142277329e2796f1214bc37fec792b75d985bbb8",
   "created_at": "2025-05-19T21:30:55.233Z",
-  "updated_at": "2025-05-22T11:56:37.509Z",
+  "updated_at": "2025-05-28T09:30:02.379Z",
   "comment": {
     "text": "The \"AddUsersOrGroupsDescription\" translation key describes a text that explains the purpose of adding administrators to create rooms using a specific template. It is used in the UI to provide context and clarity when allowing users to add administrators or groups for room creation.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\TemplateAccessSettingsPanel\\sub-components\\InviteInput.tsx",
+      "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/sub-components/InviteInput.tsx",
       "line_number": 272,
       "context": ">\n {t(\"Translations:ChooseFromList\")}\n </StyledLink>\n </StyledSubHeader>\n <StyledDescription>\n {t(\"Files:AddUsersOrGroupsDescription\")}\n </StyledDescription>\n \n <StyledInviteInputContainer>\n <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>\n <TextInput",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

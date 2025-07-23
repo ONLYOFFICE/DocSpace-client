@@ -3,7 +3,7 @@
   "content": "Folders moved.",
   "content_en_sha1_hash": "95d3399265d8232c4895fbd790a035ba8ae0057d",
   "created_at": "2025-05-19T21:30:54.849Z",
-  "updated_at": "2025-05-22T11:56:37.589Z",
+  "updated_at": "2025-05-28T09:30:02.430Z",
   "comment": {
     "text": "This translation key displays a message indicating that a folder has been moved, likely appearing as a notification or confirmation in the user interface.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 110,
       "context": "return t(\"InfoPanel:FolderCreated\");\n case \"FolderRenamed\":\n return t(\"InfoPanel:FolderRenamed\");\n case \"FolderMoved\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case \"FolderMovedToTrash\":\n if (hasRelatedItems)",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 74,
+      "context": "return t(\"FolderDeleted\");\n case WebhookTriggers.FolderRestored:\n return t(\"FolderRestored\");\n case WebhookTriggers.FolderCopied:\n return t(\"FolderCopied\");\n case WebhookTriggers.FolderMoved:\n return t(\"FolderMoved\");\n case WebhookTriggers.RoomCreated:\n return t(\"Files:RoomCreated\");\n case WebhookTriggers.RoomUpdated:\n return t(\"RoomUpdated\");",
+      "module": "/packages/client"
     }
   ],
   "languages": {

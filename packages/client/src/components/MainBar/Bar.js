@@ -28,7 +28,7 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import difference from "lodash/difference";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { ADS_TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 

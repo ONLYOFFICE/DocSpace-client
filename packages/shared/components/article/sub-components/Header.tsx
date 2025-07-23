@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router";
 import { useTheme } from "styled-components";
 
 import { getLogoUrl } from "../../../utils";
@@ -65,12 +65,17 @@ const ArticleHeader = ({
   if (currentDeviceType === DeviceType.mobile)
     return (
       <AsideHeader
-        headerHeight="49px"
+        headerHeight={showBackButton ? "76px" : "49px"}
         isCloseable
         withoutBorder
         onCloseClick={onIconClick}
         headerComponent={
-          showBackButton ? <BackButton showText={showText} /> : null
+          showBackButton ? (
+            <BackButton
+              showText={showText}
+              currentDeviceType={currentDeviceType}
+            />
+          ) : null
         }
       />
     );

@@ -74,6 +74,8 @@ async function generateMetadata(projectName) {
     updatedKeys: 0,
     unchangedKeys: 0,
     metadataFiles: 0,
+    deletedMetadataFiles: 0,
+    deletedEmptyNamespaces: 0,
     namespaces: {},
     errors: [],
   };
@@ -103,6 +105,33 @@ async function generateMetadata(projectName) {
     } catch (dirError) {
       console.error(`Error creating metadata directory: ${metaDir}`, dirError);
       throw dirError;
+    }
+
+    // Track existing and active metadata files
+    const existingMetaFiles = new Set();
+    const activeMetaFiles = new Set();
+    const existingNamespaces = new Set();
+
+    // Find all existing metadata files
+    if (await fs.pathExists(metaDir)) {
+      const metaGlobPattern = path.join(metaDir, "**", "*.json").replace(/\\/g, "/");
+      const existingFiles = glob.sync(metaGlobPattern);
+      existingFiles.forEach(file => existingMetaFiles.add(file));
+      console.log(`Found ${existingFiles.length} existing metadata files`);
+
+      // Track existing namespace directories
+      try {
+        const namespaceDirs = await fs.readdir(metaDir);
+        namespaceDirs.forEach(dir => {
+          const nsPath = path.join(metaDir, dir);
+          if (fs.statSync(nsPath).isDirectory()) {
+            existingNamespaces.add(nsPath);
+          }
+        });
+        console.log(`Found ${existingNamespaces.size} existing namespace directories`);
+      } catch (error) {
+        console.error(`Error reading namespace directories: ${error.message}`);
+      }
     }
 
     // Find all language directories
@@ -195,6 +224,9 @@ async function generateMetadata(projectName) {
             `${sanitizedKeyPath}.json`
           );
           console.log(`Key metadata file path: ${keyMetaFile}`);
+          
+          // Add this metadata file to the active set
+          activeMetaFiles.add(keyMetaFile);
 
           // Read existing metadata for this key if available
           let keyMetadata = null;
@@ -340,6 +372,51 @@ async function generateMetadata(projectName) {
       );
     }
 
+    // Clean up stale metadata files
+    console.log("Checking for stale metadata files...");
+    const staleFiles = [...existingMetaFiles].filter(file => !activeMetaFiles.has(file));
+    
+    if (staleFiles.length > 0) {
+      console.log(`Found ${staleFiles.length} stale metadata files to remove`);
+      
+      for (const staleFile of staleFiles) {
+        try {
+          await fs.remove(staleFile);
+          console.log(`Removed stale metadata file: ${staleFile}`);
+          stats.deletedMetadataFiles++;
+        } catch (error) {
+          console.error(`Error removing stale metadata file ${staleFile}:`, error);
+          stats.errors.push({
+            type: "stale-file-removal",
+            file: staleFile,
+            error: error.message,
+          });
+        }
+      }
+    } else {
+      console.log("No stale metadata files found");
+    }
+
+    // Clean up empty namespace directories
+    console.log("Checking for empty namespace directories...");
+    for (const namespaceDir of existingNamespaces) {
+      try {
+        const files = await fs.readdir(namespaceDir);
+        if (files.length === 0) {
+          await fs.rmdir(namespaceDir);
+          console.log(`Removed empty namespace directory: ${namespaceDir}`);
+          stats.deletedEmptyNamespaces++;
+        }
+      } catch (error) {
+        console.error(`Error checking/removing namespace directory ${namespaceDir}:`, error);
+        stats.errors.push({
+          type: "namespace-dir-removal",
+          directory: namespaceDir,
+          error: error.message,
+        });
+      }
+    }
+
     console.log("Metadata generation completed");
     console.log("Stats:", JSON.stringify(stats, null, 2));
 
@@ -399,6 +476,12 @@ async function generateAllMetadata() {
       overallStats.totalNamespaces += Object.keys(
         projectStats.namespaces || {}
       ).length;
+      
+      // Add cleanup stats to overall stats
+      if (!overallStats.deletedMetadataFiles) overallStats.deletedMetadataFiles = 0;
+      if (!overallStats.deletedEmptyNamespaces) overallStats.deletedEmptyNamespaces = 0;
+      overallStats.deletedMetadataFiles += projectStats.deletedMetadataFiles || 0;
+      overallStats.deletedEmptyNamespaces += projectStats.deletedEmptyNamespaces || 0;
 
       // Log namespace statistics
       if (
@@ -438,6 +521,9 @@ if (require.main === module) {
       );
       console.log(
         `Metadata files: ${stats.metadataFiles} files (existing files were skipped)`
+      );
+      console.log(
+        `Cleanup: ${stats.deletedMetadataFiles} stale metadata files removed, ${stats.deletedEmptyNamespaces} empty namespace directories removed`
       );
 
       if (stats.processingErrors > 0) {

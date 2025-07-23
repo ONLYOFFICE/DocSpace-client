@@ -47,9 +47,10 @@ export const getDayElements = (
       <button
         type="button"
         className={classNames(styles.dateItem, "day", {
-          [styles.disabled]: moment(day.key, dateFormat) < minDate,
-          [styles.disabled]: moment(day.key, dateFormat) > maxDate,
           [styles.isSecondary]: true,
+          [styles.disabled]:
+            moment(day.key, dateFormat) < minDate ||
+            moment(day.key, dateFormat) > maxDate,
         })}
         key={day.key}
         onClick={() => handleDateChange(moment(day.key, dateFormat))}
@@ -65,8 +66,9 @@ export const getDayElements = (
       <button
         type="button"
         className={classNames(styles.dateItem, "day", {
-          [styles.disabled]: moment(day.key, dateFormat) < minDate,
-          [styles.disabled]: moment(day.key, dateFormat) > maxDate,
+          [styles.disabled]:
+            moment(day.key, dateFormat) < minDate ||
+            moment(day.key, dateFormat) > maxDate,
         })}
         key={day.key}
         onClick={() => handleDateChange(moment(day.key, dateFormat))}
@@ -82,9 +84,10 @@ export const getDayElements = (
       <button
         type="button"
         className={classNames(styles.dateItem, "day", {
-          [styles.disabled]: moment(day.key, dateFormat) < minDate,
-          [styles.disabled]: moment(day.key, dateFormat) > maxDate,
           [styles.isSecondary]: true,
+          [styles.disabled]:
+            moment(day.key, dateFormat) < minDate ||
+            moment(day.key, dateFormat) > maxDate,
         })}
         key={day.key}
         onClick={() => handleDateChange(moment(day.key, dateFormat))}
@@ -114,9 +117,10 @@ export const getDayElements = (
             <button
               type="button"
               className={classNames(styles.dateItem, "day", {
-                [styles.disabled]: moment(day.key, dateFormat) < minDate,
-                [styles.disabled]: moment(day.key, dateFormat) > maxDate,
                 [styles.isCurrent]: true,
+                [styles.disabled]:
+                  moment(day.key, dateFormat) < minDate ||
+                  moment(day.key, dateFormat) > maxDate,
               })}
               key={day.key}
               onClick={() => handleDateChange(moment(day.key, dateFormat))}
@@ -133,9 +137,10 @@ export const getDayElements = (
             <button
               type="button"
               className={classNames(styles.dateItem, "day", {
-                [styles.disabled]: moment(day.key, dateFormat) < minDate,
-                [styles.disabled]: moment(day.key, dateFormat) > maxDate,
                 [styles.focused]: true,
+                [styles.disabled]:
+                  moment(day.key, dateFormat) < minDate ||
+                  moment(day.key, dateFormat) > maxDate,
               })}
               key={day.key}
               onClick={() => handleDateChange(moment(day.key, dateFormat))}

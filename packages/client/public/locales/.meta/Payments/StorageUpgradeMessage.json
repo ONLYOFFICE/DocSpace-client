@@ -1,0 +1,40 @@
+{
+  "key_path": "StorageUpgradeMessage",
+  "content": "{{fromSize}} → {{toSize}} in total",
+  "content_en_sha1_hash": "f5956c89eebee8013effcde95cc2ef4fb441a16b",
+  "created_at": "2025-06-03T20:59:26.840Z",
+  "updated_at": "2025-06-26T19:00:18.250Z",
+  "comment": {
+    "text": "This translation key is used to display a tooltip indicating the total storage upgrade from one plan size to another. It appears in a plan info section of a UI component and provides context about storage size changes. The format includes \"fromSize\" and \"toSize\" variables that represent the original and upgraded storage sizes, respectively.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:26.224Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
+      "line_number": 121,
+      "context": "const textTooltip = () => {\n return (\n <>\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${nextStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text fontSize=\"12px\">",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
+      "line_number": 78,
+      "context": "amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
+      "line_number": 78,
+      "context": "amount: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }\n \n if (!isCurrentStoragePlan) {\n return t(\"StorageUpgradeMessage\", {\n fromSize: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n toSize: `${amount} ${t(\"Common:Gigabyte\")}`,\n });\n }",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

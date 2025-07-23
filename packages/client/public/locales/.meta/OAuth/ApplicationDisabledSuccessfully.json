@@ -3,7 +3,7 @@
   "content": "Application disabled successfully",
   "content_en_sha1_hash": "ee1b1d3be510ef689d9259c5f9947f99980f8670",
   "created_at": "2025-05-19T21:30:53.798Z",
-  "updated_at": "2025-05-22T11:56:37.716Z",
+  "updated_at": "2025-05-28T09:30:02.597Z",
   "comment": {
     "text": "This translation key is used to display a success message when an application is successfully disabled. It appears as a toast notification in various UI elements, such as dialog boxes and row views, indicating that the application has been successfully disabled.",
     "is_auto": true,
@@ -11,10 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\DisableDialog.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/DisableDialog.tsx",
       "line_number": 62,
       "context": "setIsRequestRunning(true);\n toastr.success(\n isGroup\n ? t(\"OAuth:ApplicationsDisabledSuccessfully\")\n : t(\"OAuth:ApplicationDisabledSuccessfully\"),\n );\n onClose?.();\n } catch (error: unknown) {\n const e = error as TData;\n toastr.error(e);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/RowView/Row.tsx",
+      "line_number": 63,
+      "context": "await changeClientStatus(item.clientId, !item.enabled);\n \n if (!item.enabled) {\n toastr.success(t(\"ApplicationEnabledSuccessfully\"));\n } else {\n toastr.success(t(\"ApplicationDisabledSuccessfully\"));\n }\n } catch (e) {\n toastr.error(e as string);\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/TableView/sub-components/Row.tsx",
+      "line_number": 77,
+      "context": "await changeClientStatus(item.clientId, !item.enabled);\n \n if (!item.enabled) {\n toastr.success(t(\"ApplicationEnabledSuccessfully\"));\n } else {\n toastr.success(t(\"ApplicationDisabledSuccessfully\"));\n }\n } catch (e) {\n toastr.error(e as string);\n }\n };",
+      "module": "/packages/client"
     }
   ],
   "languages": {

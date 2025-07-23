@@ -3,7 +3,7 @@
   "content": "Action",
   "content_en_sha1_hash": "97c89a4d6630adeb18fa12ba9976a31413fe293e",
   "created_at": "2025-05-19T21:30:42.859Z",
-  "updated_at": "2025-05-22T11:56:37.745Z",
+  "updated_at": "2025-05-28T09:30:02.680Z",
   "comment": {
     "text": "The translation key \"Action\" is used to display the English content \"Action\", which likely serves as a title or header in a UI element, possibly in a table header or a settings page, guiding users to take a specific action.",
     "is_auto": true,
@@ -11,16 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\audit-trail\\TableView\\TableHeader.js",
-      "line_number": 68,
-      "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"Action\",\n title: t(\"Common:Action\"),\n enable: true,\n resizable: true,\n default: true,\n onChange: this.onColumnChange,\n },",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/TableView/TableHeader.tsx",
+      "line_number": 56,
+      "context": "active: true,\n minWidth: 150,\n },\n {\n key: \"Action\",\n title: t(\"Common:Action\"),\n enable: true,\n resizable: true,\n minWidth: 120,\n },\n {",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\security\\login-history\\TableView\\TableHeader.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/audit-trail/TableView/TableHeader.js",
+      "line_number": 68,
+      "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"Action\",\n title: t(\"Common:Action\"),\n enable: true,\n resizable: true,\n default: true,\n onChange: this.onColumnChange,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/TableView/TableHeader.js",
       "line_number": 61,
       "context": "resizable: true,\n onChange: this.onColumnChange,\n },\n {\n key: \"Action\",\n title: t(\"Common:Action\"),\n enable: true,\n resizable: true,\n onChange: this.onColumnChange,\n },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

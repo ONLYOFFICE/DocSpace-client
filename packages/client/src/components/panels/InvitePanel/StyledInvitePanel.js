@@ -136,7 +136,7 @@ const StyledSubHeader = styled(Heading)`
   margin: 16px 0 8px;
 
   ${(props) =>
-    props.inline &&
+    props.$inline &&
     css`
       display: inline-flex;
       align-items: center;
@@ -152,6 +152,12 @@ const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
+
+  ${(props) =>
+    props.noAllowInvitingGuests &&
+    css`
+      margin-bottom: 12px;
+    `};
 `;
 
 const StyledRow = styled.div`
@@ -395,6 +401,12 @@ const StyledDropDown = styled(DropDown)`
       }
     }
   }
+
+  .no-users-list {
+    height: 23px;
+    padding-left: 8px;
+    padding-top: 2px;
+  }
 `;
 
 const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
@@ -403,14 +415,14 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.primary ? "14px" : props.info ? "11px" : "12px"};
-  font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
+    props.$primary ? "14px" : props.$info ? "11px" : "12px"};
+  font-weight: ${(props) => (props.$primary || props.$info ? "600" : "400")};
 
   color: ${(props) =>
-    (props.primary && !props.disabled) || props.info
+    (props.$primary && !props.disabled) || props.$info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => (props.info || props.disabled) && `margin-inline-start: auto`}
+  ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
 const StyledEditButton = styled(Button)`

@@ -27,7 +27,7 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router";
 import Section from "@docspace/shared/components/section";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
@@ -122,7 +122,7 @@ const PublicRoomPage = (props) => {
         t={t}
         ns="Common"
         i18nKey="PublicAuthorizeToast"
-        values={{ roomMode }}
+        values={{ roomMode, productName: t("Common:ProductName") }}
         components={{
           1: <Text as="span" fontSize="12px" fontWeight={700} />,
         }}

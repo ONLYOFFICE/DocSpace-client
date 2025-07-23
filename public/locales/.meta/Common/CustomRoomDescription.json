@@ -3,7 +3,7 @@
   "content": "Apply your own settings to use this room for any custom purpose.",
   "content_en_sha1_hash": "2e2225d6e3f84acd6c2f9e2cd4deb6c09ea5f37e",
   "created_at": "2025-05-19T21:30:44.367Z",
-  "updated_at": "2025-05-22T11:56:37.853Z",
+  "updated_at": "2025-06-03T20:59:42.345Z",
   "comment": {
     "text": "This translation key is used to display a custom room description that can be tailored to suit specific purposes. It appears on a button or similar UI element where users can customize their room settings.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\room-type\\RoomType.utils.ts",
-      "line_number": 40,
-      "context": "case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n default:",
-      "module": "\\packages\\shared"
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 41,
+      "context": "case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRoomDescription\");\n case RoomsType.VirtualDataRoom:\n return t(\"Common:VirtualDataRoomDescription\");\n case RoomsType.CustomRoom:\n return t(\"Common:CustomRoomDescription\");\n \n case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

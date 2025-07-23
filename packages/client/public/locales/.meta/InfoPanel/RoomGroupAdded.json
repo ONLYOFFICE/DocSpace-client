@@ -3,7 +3,7 @@
   "content": "Groups added.",
   "content_en_sha1_hash": "b5a565f02102919ca707ad4dfe829242fca68461",
   "created_at": "2025-05-19T21:30:54.921Z",
-  "updated_at": "2025-05-22T11:56:37.596Z",
+  "updated_at": "2025-05-28T09:30:02.435Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Groups added\" in a user interface. It appears as the title of an info panel or modal window, possibly after a group has been successfully created or updated. The goal is to inform users that their group has been successfully added or updated.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 230,
       "context": "return t(\"InfoPanel:RoomRemoveUser\");\n case \"RoomInviteResend\":\n return t(\"InfoPanel:RoomInviteResend\");\n case \"RoomGroupAdded\":\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });\n return t(\"InfoPanel:RoomGroupAdded\");\n case \"RoomUpdateAccessForGroup\":\n return t(\"InfoPanel:RoomUpdateAccess\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

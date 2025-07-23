@@ -28,7 +28,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { isMobile } from "@docspace/shared/utils";
-import { convertTime } from "@docspace/shared/utils/convertTime";
+import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/rows";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -59,6 +59,7 @@ const SessionsRowContent = ({
   sectionWidth,
   showTickIcon,
   theme,
+  locale,
 }) => {
   return (
     <StyledRowContent
@@ -76,7 +77,7 @@ const SessionsRowContent = ({
           color={globalColors.tickColor}
         />
       ) : null}
-      <Text truncate>{convertTime(date)}</Text>
+      <Text truncate>{getCorrectDate(locale, date)}</Text>
       {country || city ? (
         <Text fontSize="12px" fontWeight="600">
           {country}
@@ -90,8 +91,11 @@ const SessionsRowContent = ({
   );
 };
 
-export default inject(({ settingsStore }) => {
-  const { theme } = settingsStore;
+export default inject(({ settingsStore, userStore }) => {
+  const { theme, culture } = settingsStore;
 
-  return { theme };
+  const { user } = userStore;
+  const locale = (user && user.cultureName) || culture || "en";
+
+  return { theme, locale };
 })(observer(SessionsRowContent));

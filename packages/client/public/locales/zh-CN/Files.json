@@ -102,7 +102,7 @@
   "FinalizeVersion": "最终版本",
   "FolderRenamed": "文件夹'{{folderTitle}}'已重命名为'{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1>文件夹已创建",
-  "GeneralLinkDeletedSuccessfully": "已成功创建新的通用链接",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "已成功创建新的通用链接",
   "GoToMyRooms": "转到房间",
   "GoToSection": "前往{{sectionName}}",
   "Index": "索引",

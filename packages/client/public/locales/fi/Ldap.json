@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "Ryhmän nimiattribuutti",
   "LdapGroupNameAttributeTooltip": "Ole hyvä ja määrittele objektiattribuutti, joska vastaa ryhmän nimeä.",
   "LdapGroupUserAttributeTooltip": "Syötä käyttäjäobjektiattribuutti, jota käytetään määrittelemään onko käyttäjä näiden ryhmien jäsen.",
-  "LdapIntro": "LDAP on tapa tuoda käyttäjiä ja ryhmiä LDAP-palvelimelta, ja tarjota käyttäjän todennus portaalissa käyttäen käyttäjänimiä/salasanoja, jotka on tallennettu LDAP-palvelimelle. Käyttäjät tuodaan välittömästi, kun asetukset on tallennettu. Myöhemmin lisätyt käyttäjät tuodaan heidän ensimmäisen todennuksen yhteydessä.",
+  "LdapIntro": "Tuo käyttäjät ja ryhmät LDAP:n kautta ja mahdollista käyttäjien tunnistautuminen LDAP-palvelimella olevilla kirjautumistunnuksilla/salasanoilla. Käyttäjät tuodaan heti asetusten tallentamisen jälkeen. Myöhemmin lisätyt käyttäjät tuodaan ensimmäisen tunnistautumisen yhteydessä. Jos haluat tarjota pääsyn ainoastaan LDAP:n kautta, poista käytöstä mahdollisuus kutsua uusia {{productName}}-jäseniä Yhteystietojen kautta: <1>{{link}}</1>",
   "LdapLoginAttribute": "Kirjautumisattribuutti",
   "LdapLoginAttributeTooltip": "Syötä objektiattribuutti, joka vastaa käyttäjän käyttäjätunnusta.",
   "LdapLoginTooltip": "Ole hyvä ja määrittele Käyttäjätunnus, jolla on LDAP-palvelimen lukuoikeudet.",

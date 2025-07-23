@@ -3,7 +3,7 @@
   "content": "Upload folder",
   "content_en_sha1_hash": "e77a1496f8e8093547d02f31abdfb67b6e95e806",
   "created_at": "2025-05-19T21:30:57.049Z",
-  "updated_at": "2025-05-22T11:56:37.502Z",
+  "updated_at": "2025-06-03T20:59:41.784Z",
   "comment": {
     "text": "The translation key \"UploadFolder\" is used to display the text for an upload folder button. It appears in a button component, where it allows users to select a folder for uploading files, and its purpose is to provide a clear label for this action.",
     "is_auto": true,
@@ -11,16 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\HotkeysPanel\\UploadBlock.js",
-      "line_number": 41,
-      "context": "<Text {...keyTextStyles}>Shift + u</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"Article:UploadFolder\")}</Text>\n <Text {...keyTextStyles}>Shift + i</Text>\n </>\n </Row>\n </>\n );",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/components/Article/MainButton/index.js",
+      "line_number": 286,
+      "context": "encryptedFile,\n encryptionUploadDialog,\n startUpload,\n ]);\n \n const onUploadFolderClick = React.useCallback(() => {\n inputFolderElement.current.click();\n }, []);\n \n const onUploadPDFFilesClick = React.useCallback(() => {\n inputPDFFilesElement.current?.click();",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
-      "line_number": 2806,
+      "file_path": "/packages/client/src/components/panels/HotkeysPanel/UploadBlock.js",
+      "line_number": 41,
+      "context": "<Text {...keyTextStyles}>Shift + u</Text>\n </>\n </Row>\n <Row className=\"hotkeys_row\">\n <>\n <Text {...textStyles}>{t(\"Article:UploadFolder\")}</Text>\n <Text {...keyTextStyles}>Shift + i</Text>\n </>\n </Row>\n </>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 2811,
       "context": "icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {\n key: \"upload-folder\",\n label: t(\"Article:UploadFolder\"),\n onClick: () => this.onUploadAction(\"folder\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n if (isFormRoomType) {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

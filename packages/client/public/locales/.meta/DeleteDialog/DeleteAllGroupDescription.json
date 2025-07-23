@@ -3,7 +3,7 @@
   "content": "The selected groups will be deleted. Users in the groups will not be removed from {{productName}}. Are you sure you want to continue?",
   "content_en_sha1_hash": "43a6c854bb42f03891dff31046f1958d09345f95",
   "created_at": "2025-05-19T21:30:56.686Z",
-  "updated_at": "2025-05-22T11:56:37.389Z",
+  "updated_at": "2025-05-28T09:30:02.257Z",
   "comment": {
     "text": "This translation key is used to display a message when deleting groups, informing users that their groups will be deleted but not themselves. The message appears in a dialog box. Translators should focus on conveying a clear warning of the consequences of deletion.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteGroupDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
       "line_number": 86,
       "context": ": t(\"DeleteDialog:DeleteGroupTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {hasMoreGroups\n ? t(\"DeleteDialog:DeleteAllGroupDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"DeleteDialog:DeleteGroupDescription\", {\n productName: t(\"Common:ProductName\"),\n groupName,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

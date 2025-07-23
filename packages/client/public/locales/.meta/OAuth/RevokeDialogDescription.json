@@ -3,7 +3,7 @@
   "content": "Any integrations using this token will no longer be able to access the API. You cannot undo this action.",
   "content_en_sha1_hash": "79302397ee86c7a499f68d74b556077608115ed1",
   "created_at": "2025-05-19T21:30:54.021Z",
-  "updated_at": "2025-05-22T11:56:37.724Z",
+  "updated_at": "2025-05-28T09:30:02.606Z",
   "comment": {
     "text": "This translation key is used to display a warning message when revoking an OAuth token, informing users that any integrations using the token will be disabled. The message appears in a modal dialog header.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\OAuth\\sub-components\\RevokeDeveloperTokenDialog.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RevokeDeveloperTokenDialog.tsx",
       "line_number": 161,
       "context": ">\n <ModalDialog.Header>{t(\"OAuth:RevokeDialogHeader\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:RevokeDialogDescription\")}\n </Text>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:RevokeDialogEnterToken\")}\n </Text>\n <FieldContainer",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

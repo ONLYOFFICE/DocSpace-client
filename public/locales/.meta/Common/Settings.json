@@ -3,7 +3,7 @@
   "content": "Settings",
   "content_en_sha1_hash": "c7f73bb54d928922c3838bb789ee9fb8a5b1eb37",
   "created_at": "2025-05-19T21:30:48.587Z",
-  "updated_at": "2025-05-22T11:56:37.425Z",
+  "updated_at": "2025-06-18T07:34:14.911Z",
   "comment": {
     "text": "This translation key is used as a title for the settings page. It appears on the header of a dialog when accessing settings in the application, and it will be displayed if the user navigates to the settings page. The exact text (\"Common:Settings\") will be translated by the translator based on the defined context.",
     "is_auto": true,
@@ -11,82 +11,82 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\SettingsPluginDialog\\sub-components\\Header.js",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Header.js",
       "line_number": 43,
       "context": "`;\n \n const Header = ({ t, name }) => {\n return (\n <StyledHeader>\n {t(\"Common:Settings\")}&nbsp;\n <div>({name})</div>\n </StyledHeader>\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Hooks\\useSettings.js",
+      "file_path": "/packages/client/src/pages/Home/Hooks/useSettings.js",
       "line_number": 40,
       "context": "setIsLoading,\n }) => {\n React.useEffect(() => {\n if (!isSettingsPage) return;\n \n setDocumentTitle(t(\"Common:Settings\"));\n \n setIsLoading(false);\n }, [isSettingsPage]);\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Header\\index.js",
-      "line_number": 504,
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 506,
       "context": "tableGroupMenuProps.withoutInfoPanelToggler =\n isIndexEditingMode || isPublicRoom;\n }\n \n const currentTitle = isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : isLoading && stateTitle",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\sub-components\\WebhooksTable\\WebhooksRowView\\WebhookRow.js",
-      "line_number": 88,
-      "context": "const contextOptions = [\n {\n id: \"settings\",\n key: \"Settings dropdownItem\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: onSettingsOpen,\n },\n {\n id: \"webhook-history\",",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\sub-components\\WebhooksTable\\WebhooksTableView\\WebhooksTableRow.js",
-      "line_number": 126,
-      "context": "};\n \n const contextOptions = [\n {\n key: \"Settings dropdownItem\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: onSettingsOpen,\n },\n {\n key: \"Webhook history dropdownItem\",",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\Layout\\Article\\Header\\index.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Header/index.js",
       "line_number": 33,
       "context": "import { useTranslation } from \"react-i18next\";\n \n const ArticleHeaderContent = () => {\n const { t } = useTranslation(\"Common\");\n \n return <>{t(\"Settings\")}</>;\n };\n \n export default React.memo(ArticleHeaderContent);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ProfileActionsStore.js",
-      "line_number": 275,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksRowView/WebhookRow.js",
+      "line_number": 93,
+      "context": "const contextOptions = [\n {\n id: \"settings\",\n key: \"Settings dropdownItem\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: onSettingsOpen,\n },\n {\n id: \"webhook-history\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
+      "line_number": 133,
+      "context": "};\n \n const contextOptions = [\n {\n key: \"Settings dropdownItem\",\n label: t(\"Common:Settings\"),\n icon: SettingsIcon,\n onClick: onSettingsOpen,\n },\n {\n key: \"Webhook history dropdownItem\",",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ProfileActionsStore.js",
+      "line_number": 287,
       "context": "const settings = isAdmin\n ? {\n key: \"user-menu-settings\",\n icon: CatalogSettingsReactSvgUrl,\n label: t(\"Common:Settings\"),\n onClick: (obj) => this.onSettingsClick(\"/portal-settings\", obj),\n url: SETTINGS_URL,\n preventNewTab: true,\n }\n : null;",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\management\\src\\categories\\spaces\\sub-components\\RowView\\SpacesRoomRow.tsx",
+      "file_path": "/packages/management/src/categories/spaces/sub-components/RowView/SpacesRoomRow.tsx",
       "line_number": 120,
       "context": "if (item.wizardSettings.completed) {\n contextOptionsProps.splice(\n 1,\n 0,\n {\n label: t(\"Common:Settings\"),\n key: \"space_settings\",\n icon: CatalogSettingsReactSvgUrl,\n onClick: () =>\n window.open(`${protocol}//${item.domain}/portal-settings/`, \"_blank\"),\n },",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     },
     {
-      "file_path": "\\packages\\management\\src\\utils\\settingsTree.ts",
+      "file_path": "/packages/management/src/utils/settingsTree.ts",
       "line_number": 49,
       "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     },
     {
-      "file_path": "\\packages\\management\\src\\utils\\settingsTree.ts",
+      "file_path": "/packages/management/src/utils/settingsTree.ts",
       "line_number": 49,
       "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     },
     {
-      "file_path": "\\packages\\management\\src\\utils\\settingsTree.ts",
+      "file_path": "/packages/management/src/utils/settingsTree.ts",
       "line_number": 49,
       "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     },
     {
-      "file_path": "\\packages\\management\\src\\utils\\settingsTree.ts",
+      "file_path": "/packages/management/src/utils/settingsTree.ts",
       "line_number": 49,
       "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     },
     {
-      "file_path": "\\packages\\management\\src\\utils\\settingsTree.ts",
+      "file_path": "/packages/management/src/utils/settingsTree.ts",
       "line_number": 49,
       "context": "{\n id: \"management-settings_catalog-settings\",\n key: \"1\",\n icon: SettingsReactSvgUrl,\n link: \"settings\",\n tKey: \"Common:Settings\",\n isHeader: true,\n isArticle: true,\n },\n {\n id: \"management-settings_catalog-branding\",",
-      "module": "\\packages\\management"
+      "module": "/packages/management"
     }
   ],
   "languages": {

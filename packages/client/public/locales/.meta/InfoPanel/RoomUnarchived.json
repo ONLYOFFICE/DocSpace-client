@@ -3,7 +3,7 @@
   "content": "Room recovered from Archive",
   "content_en_sha1_hash": "df906b7f69e29c3630918bf077fe4e4d2d56cebb",
   "created_at": "2025-05-19T21:30:54.949Z",
-  "updated_at": "2025-05-22T11:56:37.601Z",
+  "updated_at": "2025-06-18T07:34:15.004Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a room has been recovered from an archive. It appears in the UI as part of an info panel on a history view page, and is displayed when viewing archived rooms or other related information. Translators should provide a description that reflects this context.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 287,
-      "context": "case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportLocation\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case \"FormSubmit\":",
-      "module": "\\packages\\client"
+      "context": "case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportSaved\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case \"FormSubmit\":",
+      "module": "/packages/client"
     }
   ],
   "languages": {

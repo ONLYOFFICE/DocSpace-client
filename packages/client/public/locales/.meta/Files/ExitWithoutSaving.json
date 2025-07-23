@@ -3,7 +3,7 @@
   "content": "Exit without saving?",
   "content_en_sha1_hash": "73ba4e3217e4b6c986b82b340dfcc5db9cec0519",
   "created_at": "2025-05-19T21:30:55.642Z",
-  "updated_at": "2025-05-22T11:56:37.334Z",
+  "updated_at": "2025-05-28T09:30:02.211Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears when exiting an edit mode without saving changes. It is part of a warning message in a file editing dialog, prompting users to consider the potential consequences of leaving unsaved work.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CloseEditIndexDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CloseEditIndexDialog/index.tsx",
       "line_number": 75,
       "context": "autoMaxHeight\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ExitWithoutSaving\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ExitWithoutSavingDescription\")}\n </Text>\n </ModalDialog.Body>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

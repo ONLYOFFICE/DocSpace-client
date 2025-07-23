@@ -102,7 +102,7 @@
   "FinalizeVersion": "Dokončit verzi",
   "FolderRenamed": "Složka '{{folderTitle}}' je přejmenována na '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Složka <1>{{{folderTitle}}</1> vytvořena",
-  "GeneralLinkDeletedSuccessfully": "Úspěšně vytvořen nový obecný odkaz",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Úspěšně vytvořen nový obecný odkaz",
   "GoToMyRooms": "Přejít do sekce místnosti",
   "GoToSection": "Přejít do {{sectionName}}",
   "Index": "Index",

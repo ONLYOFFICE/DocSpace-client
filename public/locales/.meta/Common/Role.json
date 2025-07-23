@@ -3,7 +3,7 @@
   "content": "Role",
   "content_en_sha1_hash": "c3f104d1365744b538bfde9f4adb6a6df4b80355",
   "created_at": "2025-05-19T21:30:47.956Z",
-  "updated_at": "2025-05-22T11:56:37.399Z",
+  "updated_at": "2025-06-18T07:34:14.890Z",
   "comment": {
     "text": "This translation key is used for the title of a dropdown menu or select field, typically appearing as \"Role\". It is displayed in various contexts within the application, including dialogs and info panels, to identify the user's role.",
     "is_auto": true,
@@ -11,28 +11,28 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\EditGroupMembersDialog\\sub-components\\GroupMember\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/sub-components/GroupMember/index.tsx",
       "line_number": 187,
       "context": "options={userRoleOptions}\n scaled={false}\n withBackdrop={isMobile}\n size={ComboBoxSize.content}\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption\n onSelect={onChangeRole}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\EditGroupMembersDialog\\sub-components\\GroupMember\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/sub-components/GroupMember/index.tsx",
       "line_number": 187,
       "context": "options={userRoleOptions}\n scaled={false}\n withBackdrop={isMobile}\n size={ComboBoxSize.content}\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption\n onSelect={onChangeRole}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Members\\User.js",
-      "line_number": 345,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
+      "line_number": 445,
       "context": "onSelect={onOptionClick}\n scaled={false}\n withBackdrop={isMobile}\n size=\"content\"\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isLoading={isLoading}\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\Members\\User.js",
-      "line_number": 345,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
+      "line_number": 445,
       "context": "onSelect={onOptionClick}\n scaled={false}\n withBackdrop={isMobile}\n size=\"content\"\n modernView\n title={t(\"Common:Role\")}\n manualWidth=\"auto\"\n isLoading={isLoading}\n isMobileView={isMobileOnly}\n directionY=\"both\"\n displaySelectedOption",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

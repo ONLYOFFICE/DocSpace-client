@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { mobile } from "@docspace/shared/utils";
 import { isPublicPreview } from "@docspace/shared/utils/common";
@@ -64,8 +64,16 @@ const MainBar = ({
 }) => {
   const { pathname } = useLocation();
 
+  const [isVisible, setIsVisible] = React.useState(true);
+
   React.useEffect(() => {
     return () => setMaintenanceExist && setMaintenanceExist(false);
+  }, []);
+
+  React.useEffect(() => {
+    const isVisibleStorage = localStorage.getItem("integrationUITests");
+
+    if (isVisibleStorage) setIsVisible(false);
   }, []);
 
   const isVisibleBar =
@@ -75,6 +83,8 @@ const MainBar = ({
     !pathname.includes("confirm") &&
     !pathname.includes("preparation-portal") &&
     !isPublicPreview();
+
+  if (!isVisible) return null;
 
   return (
     <StyledContainer id="main-bar" className="main-bar">

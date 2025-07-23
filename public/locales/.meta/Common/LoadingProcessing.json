@@ -3,7 +3,7 @@
   "content": "Loading...",
   "content_en_sha1_hash": "b04ba49f848624bb97ab094a2631d2ad74913498",
   "created_at": "2025-05-19T21:30:46.280Z",
-  "updated_at": "2025-05-22T11:56:37.815Z",
+  "updated_at": "2025-06-18T07:34:15.319Z",
   "comment": {
     "text": "This translation key is used to display a loading message when an operation is in progress. It appears on various buttons, including confirm and continue buttons, as well as a registration form button, and is intended to provide visual feedback to the user that something is happening behind the scenes.",
     "is_auto": true,
@@ -11,40 +11,40 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\app\\(root)\\confirm\\TfaActivation\\page.client.tsx",
-      "line_number": 249,
+      "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
+      "line_number": 243,
       "context": "scale\n primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"SetAppButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\login\\src\\app\\(root)\\confirm\\TfaAuth\\page.client.tsx",
+      "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
       "line_number": 190,
       "context": "primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\login\\src\\app\\(root)\\confirm\\[Invite]\\_sub-components\\RegistrationForm.tsx",
+      "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
       "line_number": 285,
       "context": "id=\"register-singup\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale={true}\n label={isLoading ? t(\"Common:LoadingProcessing\") : t(\"SignUp\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\login\\src\\components\\LoginForm\\index.tsx",
+      "file_path": "/packages/login/src/components/LoginForm/index.tsx",
       "line_number": 650,
       "context": "className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:LoginButton\")\n }\n tabIndex={5}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\login\\src\\components\\LoginForm\\sub-components\\ForgotPasswordModalDialog.tsx",
+      "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
       "line_number": 169,
       "context": "<Button\n id=\"forgot-password-modal_send\"\n className=\"modal-dialog-button\"\n key=\"ForgotSendBtn\"\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:SendButton\")\n }\n size={ButtonSize.normal}\n scale\n primary\n onClick={onSendPasswordInstructions}",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\shared\\utils\\desktop.ts",
+      "file_path": "/packages/shared/utils/desktop.ts",
       "line_number": 129,
       "context": "break;\n case 1:\n message = t?.(\"Common:EncryptingFile\");\n break;\n default:\n message = t?.(\"Common:LoadingProcessing\");\n }\n }\n toastr.info(message);\n break;\n default:",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

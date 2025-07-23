@@ -26,7 +26,7 @@
   "LdapGroupNameAttribute": "그룹 이름 속성",
   "LdapGroupNameAttributeTooltip": "그룹 이름에 해당하는 개체 속성을 지정하세요.",
   "LdapGroupUserAttributeTooltip": "이 사용자가 해당 그룹의 멤버인지 여부를 확인하는 데 사용되는 사용자 개체 속성을 입력하세요.",
-  "LdapIntro": "LDAP는 LDAP 서버에서 사용자 및 그룹을 가져오기하고 LDAP 서버에 저장된 로그인/비밀번호를 사용하여 포털에서 사용자 인증을 제공하는 방법입니다. 사용자는 설정이 저장되는 즉시 가져오기됩니다. 나중에 추가된 사용자는 포털에서 첫 번째 인증 시 가져오기됩니다.",
+  "LdapIntro": "LDAP를 통해 사용자 및 그룹을 가져오고, LDAP 서버에 저장된 로그인/비밀번호를 통해 사용자 인증을 활성화합니다. 설정이 저장되는 즉시 사용자가 즉시 가져오기 시작합니다. 나중에 추가된 사용자는 첫 번째 인증 시에 가져오기 됩니다. LDAP를 통해서만 접근을 제공하려면, 연락처를 통해 새로운 {{productName}} 멤버를 초대하는 옵션을 비활성화하세요: <1>{{link}}</1>",
   "LdapLoginAttribute": "로그인 속성",
   "LdapLoginAttributeTooltip": "사용자 로그인에 해당하는 개체 속성을 입력하세요.",
   "LdapLoginTooltip": "LDAP 서버 읽기 액세스 권한을 가진 로그인 사용자를 지정하세요.",

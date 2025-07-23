@@ -1,0 +1,28 @@
+{
+  "key_path": "PriceForEach",
+  "content": "{{currency}} per {{amount}}",
+  "content_en_sha1_hash": "49787df4d26bfef077628e3e2480e9ccda406974",
+  "created_at": "2025-06-03T20:59:26.805Z",
+  "updated_at": "2025-06-26T19:00:18.270Z",
+  "comment": {
+    "text": "This translation key is used to display a price format in a Portal Settings page, specifically showing the cost per unit in a currency format. It appears as part of a plan information component and requires translation into multiple languages. Translators should replace \"{currency}\" and \"{amount}\" with local currency symbols and numerical values, respectively.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:35.325Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
+      "line_number": 149,
+      "context": "<Text\n fontWeight=\"600\"\n fontSize=\"11px\"\n className={styles.priceForEach}\n >\n {t(\"PriceForEach\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement),\n })}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

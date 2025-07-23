@@ -3,7 +3,7 @@
   "content": "Users",
   "content_en_sha1_hash": "57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9",
   "created_at": "2025-05-19T21:30:54.976Z",
-  "updated_at": "2025-05-22T11:56:37.789Z",
+  "updated_at": "2025-06-18T07:34:15.278Z",
   "comment": {
     "text": "This translation key is used to display the label \"Users\" in the InfoPanelStore.js file. It appears as a title when users are displayed and needs to be translated into different languages, providing a user-friendly interface for various contexts.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\store\\InfoPanelStore.js",
-      "line_number": 609,
+      "file_path": "/packages/client/src/store/InfoPanelStore.js",
+      "line_number": 615,
       "context": "const hasPrevUsersTitle = this.getHasPrevTitle(users, \"user\");\n \n if (users.length && !hasPrevUsersTitle) {\n users.unshift({\n id: \"user\",\n displayName: t(\"InfoPanel:Users\"),\n isTitle: true,\n });\n }\n \n const hasPrevGuestsTitle = this.getHasPrevTitle(users, \"guest\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

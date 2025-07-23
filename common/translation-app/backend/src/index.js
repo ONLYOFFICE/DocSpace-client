@@ -48,6 +48,9 @@ async function registerRoutes() {
   });
   server.register(require("./routes/ollama"), { prefix: "/api/ollama" });
   server.register(require("./routes/search"), { prefix: "/api/search" });
+  server.register(require("./routes/export-import"), {
+    prefix: "/api/export-import",
+  });
 
   // Register key usage routes
   server.register(require("./routes/keyUsageRoutes"));
@@ -68,9 +71,9 @@ async function registerRoutes() {
 async function startServer() {
   try {
     // Initialize translation metadata
-    console.log("Initializing translation metadata...");
-    await initializeMetadata();
-    console.log("Translation metadata initialization completed");
+    // console.log("Initializing translation metadata...");
+    // await initializeMetadata();
+    // console.log("Translation metadata initialization completed");
 
     // Register plugins and routes
     await registerPlugins();

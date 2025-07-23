@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router";
 
 import Panels from "SRC_DIR/components/FilesPanels";
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";

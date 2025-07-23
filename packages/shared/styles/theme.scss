@@ -27,6 +27,7 @@
   --article-catalog-profile-border-top: 1px solid #{$gray-light-mid};
   --article-catalog-vertical-line: 1px solid #{$gray-light-mid};
   --article-catalog-profile-background: #{$light-gray-hover};
+  --back-button-text-color: #{$gray-text};
 
   --article-item-header-color: #{$gray};
   --article-item-header-bg-color: #{$gray-strong};
@@ -295,7 +296,7 @@
 
   --view-selector-items-count: unset;
 
-  --text-font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", sans-serif, Arial;
 
   --text-input-transition: all 0.2s ease 0s;
   --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
@@ -372,6 +373,7 @@
   --article-catalog-profile-border-top: 1px solid #{$gray-dark-strong};
   --article-catalog-vertical-line: 1px solid #{$gray-dark-strong};
   --article-catalog-profile-background: #{$light-dark-gray-hover};
+  --back-button-text-color: #{$white};
 
   --article-item-header-color: #{$gray-dark};
   --article-item-header-bg-color: #{$gray-dark-strong};
@@ -1095,8 +1097,8 @@
 
 .dark {
   --disabled-selected-item-color: #{$gray-dark-text};
-  --filter-input-selected-items-background: #{$gray-dark-mid};
-  --filter-input-selected-items-hover-background: #{$light-dark-gray-hover};
+  --filter-input-selected-items-background: #{$gray-dark-strong};
+  --filter-input-selected-items-hover-background: #{$dark-gray-light};
 }
 
 .light {
@@ -1446,6 +1448,8 @@
 .light {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
 
+  --files-section-table-view-exst-color: #{$gray};
+
   --files-badges-bg-color: #{$white};
 
   --files-badges-link-color: #{$light-gray-dark};
@@ -1456,6 +1460,8 @@
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
 
+  --files-section-table-view-exst-color: #{$gray};
+
   --files-badges-bg-color: #{$black};
 
   --files-badges-link-color: #{$white};
@@ -1465,7 +1471,7 @@
 
 .light {
   --text-color: #{$black};
-  --text-font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", sans-serif, Arial;
 }
 
 .light {
@@ -1489,6 +1495,10 @@
   --input-border-color: #{$gray-strong};
   --input-border-hover: #{$gray};
   --input-border-focus: #{$light-second-main};
+
+  // Selection
+  --input-selection-text-color: #{$black};
+  --input-selection-color: #{$light-blue-hover};
 
   // Disabled state
   --input-disabled-bg: #{$gray-light};
@@ -1554,6 +1564,9 @@
   --input-border-color: #{$gray-dark-strong};
   --input-border-hover: #{$gray-dark};
   --input-border-focus: #{$white};
+
+  --input-selection-text-color: #{$white};
+  --input-selection-color: #{$gray-dark-text};
 
   --input-disabled-bg: #{$gray-dark-strong};
   --input-disabled-color: #{$gray-dark-text};
@@ -1649,6 +1662,7 @@
   --date-picker-border: 1px solid #{$gray-strong};
   --date-picker-cell-background: #{$gray-light-mid};
   --date-picker-icon-color: #{$light-gray-dark};
+  --data-picker-calendar-icon: #{$light-gray-dark};
 }
 
 .dark {
@@ -1656,6 +1670,7 @@
   --date-picker-border: 1px solid #{$gray-dark-strong};
   --date-picker-cell-background: #{$gray-dark-mid};
   --date-picker-icon-color: #{$dark-gray-dark};
+  --data-picker-calendar-icon: #{$dark-gray-dark};
 }
 
 .light {
@@ -1672,7 +1687,7 @@
 
 .light {
   --social-button-border: 1px solid #{$gray-strong};
-  --social-button-text-color: #{$gray};
+  --social-button-text-color: #{$black};
   --social-button-connect-text-color: #{$white};
   --social-button-background: #{$white};
   --social-button-hover-background: #{$white};
@@ -2071,9 +2086,161 @@
 }
 
 .light {
-  --modal-dialog-border-color: #{$gray-light-mid};
+  --payment-background-color: #{$gray-light};
+  --payment-text-color: #{$light-gray-dark};
+  --payment-credit-color: #{$light-status-positive};
+  --payment-icon-background: #{$gray-light-mid};
+  --payment-icon-color: #{$light-gray-dark};
+  --payment-dialog-text: #{$gray};
+  --payment-devider-color: #{$gray-light-mid};
+  --warning-color: #{$light-error-status};
+  --background-service-color: #{$light-gray-hover};
+  --border-service-color: #{$gray-light-mid};
 }
 
 .dark {
+  --payment-background-color: #{$light-dark-gray-hover};
+  --payment-text-color: #{$dark-gray-dark};
+  --payment-credit-color: #{$dark-status-positive};
+  --payment-icon-background: #{$gray-dark-mid};
+  --payment-icon-color: #{$dark-gray-dark};
+  --payment-dialog-text: #{$gray-dark};
+  --payment-devider-color: #{$gray-dark-mid};
+  --warning-color: #{$dark-error-status};
+  --background-service-color: #{$light-dark-gray-hover};
+  --border-service-color: #{$gray-dark-strong};
   --modal-dialog-border-color: #{$gray-dark-strong};
+}
+
+.light {
+  --modal-dialog-border-color: #{$gray-light-mid};
+}
+
+.light {
+  --chat-button-open-background-color: #{$light-gray-hover};
+
+  --chat-header-button-background-color: #{$gray-light};
+  --chat-header-button-svg-color: #{$light-gray-dark};
+
+  --chat-header-select-session-date-color: #{$gray};
+  --chat-header-select-session-border-color: #{$gray-light-mid};
+
+  --chat-file-item-border-color: #{$gray-light-mid};
+  --chat-file-item-background-color: #{$white};
+  --chat-file-item-exst-color: #{$gray};
+
+  --chat-input-background-color: #{$gray-light};
+  --chat-input-button-file-border-color: #{$gray-strong};
+  --chat-input-button-file-background-color: unset;
+  --chat-input-button-file-color: #{$light-gray-dark};
+  --chat-input-button-send-color: #{$white};
+
+  --chat-message-color: #{$gray-text};
+  --chat-message-user-background-color: #{$light-gray-hover};
+  --chat-message-ai-background-color: #{$light-gray-hover};
+  --chat-message-error-background-color: #{$light-error-status};
+  --chat-message-code-block-background-color: #{$white};
+  --chat-message-code-block-separator-color: #{$gray-light-mid};
+}
+
+.dark {
+  --chat-button-open-background-color: #{$dark-gray-light};
+
+  --chat-header-button-background-color: #{$light-dark-gray-hover};
+  --chat-header-button-svg-color: #{$dark-gray-dark};
+
+  --chat-header-select-session-date-color: #{$gray-dark};
+  --chat-header-select-session-border-color: #{$gray-dark-strong};
+
+  --chat-file-item-border-color: #{$gray-dark-strong};
+  --chat-file-item-background-color: unset;
+  --chat-file-item-exst-color: #{$gray-dark};
+
+  --chat-input-background-color: #{$dark-gray-light};
+  --chat-input-button-file-border-color: #{$black};
+  --chat-input-button-file-background-color: #{$black};
+  --chat-input-button-file-color: #{$gray};
+  --chat-input-button-send-color: #{$white};
+
+  --chat-message-color: #{$dark-gray-dark};
+  --chat-message-user-background-color: #{$light-dark-gray-hover};
+  --chat-message-ai-background-color: #{$light-dark-gray-hover};
+  --chat-message-error-background-color: #{$dark-error-status};
+
+  --chat-message-code-block-background-color: #{$dark-gray-light};
+  --chat-message-code-block-separator-color: #{$gray-dark-strong};
+}
+
+.light {
+  --selector-body-description-text: #{$gray};
+  --selector-breadcrumbs-prev-item-color: #{$light-gray-dark};
+  --selector-breadcrumbs-arrow-right-color: #{$light-gray-dark};
+
+  --selector-info-background-color: #{$gray-light};
+  --selector-info-color: #{$gray-text};
+
+  --selector-item-hover-background: #{$gray-light};
+  --selector-item-disabled-text-color: #{$gray};
+  --selector-item-selected-background: #{$light-gray-hover};
+  --selector-item-input-button-border: 1px solid #{$gray-strong};
+  --selector-item-input-button-border-hover: #{$light-gray-dark};
+
+  --selector-empty-screen-pressed-button-color: #{$gray-text};
+  --selector-empty-screen-button-color: #{$light-gray-dark};
+  --selector-empty-screen-hover-button-color: #{$black};
+  --selector-empty-screen-description-color: #{$gray-text};
+}
+
+.dark {
+  --selector-body-description-text: #{$gray-dark};
+
+  --selector-breadcrumbs-prev-item-color: #{$dark-gray-dark};
+  --selector-breadcrumbs-arrow-right-color: #{$dark-gray-dark};
+
+  --selector-info-background-color: #{$dark-gray-light};
+  --selector-info-color: #{$dark-gray-dark};
+
+  --selector-item-hover-background: #{$light-dark-gray-hover};
+  --selector-item-disabled-text-color: #{$gray-dark};
+  --selector-item-selected-background: #{$light-dark-gray-hover};
+  --selector-item-input-button-border: 1px solid #{$gray-dark-strong};
+  --selector-item-input-button-border-hover: #{$white};
+
+  --selector-empty-screen-pressed-button-color: #{$gray-dark-text};
+  --selector-empty-screen-button-color: #{$dark-gray-dark};
+  --selector-empty-screen-hover-button-color: #{$white};
+  --selector-empty-screen-description-color: #{$dark-gray-dark};
+}
+
+.light {
+  // --quantity-picker-disable-color: #{$light-gray-hover};
+  --payment-rectangle-color: #{$light-gray-hover};
+
+  --payment-price-container-disable-background: #{$gray-light};
+
+  --payment-warning-color: #{$light-status-warning};
+  --payment-accent-color: var(--color-scheme-main-buttons);
+}
+.dark {
+  // --quantity-picker-disable-color: #{$light-dark-gray-hover};
+  --payment-rectangle-color: #{$light-dark-gray-hover};
+
+  --payment-price-container-disable-background: #{$dark-gray-light};
+  --payment-warning-color: #{$dark-status-warning};
+  --payment-accent-color: var(--color-scheme-main-buttons);
+}
+
+.light {
+  --quantity-picker-disable-color: #{$gray};
+  --quantity-picker-additional-title: #{$gray};
+  --quantity-picker-track-number: #{$gray};
+  --quantity-picker-rectangle-color: #{$light-gray-hover};
+  --quantity-picker-warning-color: #{$light-error-status};
+}
+.dark {
+  --quantity-picker-disable-color: #{$gray-dark};
+  --quantity-picker-additional-title: #{$gray-dark};
+  --quantity-picker-track-number: #{$gray-dark};
+  --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
+  --quantity-picker-warning-color: #{$dark-error-status};
 }

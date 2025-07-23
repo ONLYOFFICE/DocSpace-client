@@ -3,7 +3,7 @@
   "content": "Errors occurred during data import. Download the log to check them.",
   "content_en_sha1_hash": "aabe25d4edb5d4821ac11cc9654982a6b1cee13a",
   "created_at": "2025-05-19T21:30:51.549Z",
-  "updated_at": "2025-05-22T11:56:37.657Z",
+  "updated_at": "2025-05-28T09:30:02.514Z",
   "comment": {
     "text": "This translation key is used for an error message that displays when data import fails. It prompts users to download a log file to diagnose and resolve issues. This text appears as an error notification in the \"Import Complete Step\" component.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\ImportCompleteStep.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
       "line_number": 154,
       "context": "})}\n </ErrorText>\n ) : null}\n \n {importResult.errors?.length > 0 ? (\n <ErrorText>{t(\"Settings:ErrorOccuredDownloadLog\")}</ErrorText>\n ) : null}\n \n <Wrapper>\n <Checkbox\n label={t(\"Settings:SendInviteLetter\")}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "The folder will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "bee930c857053441f9edbd43b195e83dd1fae72e",
   "created_at": "2025-05-19T21:30:56.715Z",
-  "updated_at": "2025-05-20T09:38:20.903Z",
+  "updated_at": "2025-06-18T07:34:14.879Z",
   "comment": {
     "text": "This translation key is used in a delete dialog to display a message when a folder will be permanently deleted after 30 days. The message informs the user of the permanent deletion action and provides an option to continue.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 217,
+      "line_number": 218,
       "context": "if (isPersonalRoom) {\n return isSingle ? (\n isFolder ? (\n <>\n <>{t(\"DeleteFolder\")} </>\n <>{t(\"FolderPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 217,
+      "line_number": 218,
       "context": "if (isPersonalRoom) {\n return isSingle ? (\n isFolder ? (\n <>\n <>{t(\"DeleteFolder\")} </>\n <>{t(\"FolderPermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>",
       "module": "/packages/client"
     }

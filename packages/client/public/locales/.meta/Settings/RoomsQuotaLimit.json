@@ -3,7 +3,7 @@
   "content": "{{roomsQuotaLimit}} for rooms",
   "content_en_sha1_hash": "ee9270f5c126fdf6af89661d474505448542d564",
   "created_at": "2025-05-19T21:30:52.473Z",
-  "updated_at": "2025-05-22T11:56:37.438Z",
+  "updated_at": "2025-05-28T09:30:02.305Z",
   "comment": {
     "text": "This translation key is used to display a quota limit value for rooms. It appears in a warning quota dialog and will be translated as a string of numbers followed by \" for rooms\".",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\WarningQuotaDialog\\WarningQuotaDialog.tsx",
+      "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
       "line_number": 54,
       "context": "const getWarningDescription = () => {\n const quotaLimits = [];\n \n if (isDefaultRoomsQuotaSet) {\n quotaLimits.push(\n t(\"Settings:RoomsQuotaLimit\", {\n roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),\n }),\n );\n }\n if (isDefaultUsersQuotaSet) {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

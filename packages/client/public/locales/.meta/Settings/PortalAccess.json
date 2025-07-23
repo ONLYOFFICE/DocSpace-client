@@ -3,7 +3,7 @@
   "content": "{{productName}} access",
   "content_en_sha1_hash": "47d03f020b562535e6eb17ded31112639c75a4e8",
   "created_at": "2025-05-19T21:30:52.162Z",
-  "updated_at": "2025-05-21T03:45:05.658Z",
+  "updated_at": "2025-07-02T07:49:19.789Z",
   "comment": {
     "text": "The \"PortalAccess\" translation key displays a label indicating access to a portal, typically found on a page or button related to security settings in a software application. The label includes the product name, making it context-specific and user-friendly for end-users. It appears on various pages within the Portal Settings section.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 199,
+      "line_number": 206,
       "context": "return t(\"StudioTimeLanguageSettings\");\n case \"CustomTitlesWelcome\":\n return t(\"CustomTitlesWelcome\");\n case \"ManagementCategorySecurity\":\n return t(\"ManagementCategorySecurity\");\n case \"PortalAccess\":\n return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 66,
-      "context": "limitedDevToolsBlockHelpUrl,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => resetIsInit();\n }, []);",
+      "line_number": 88,
+      "context": "if (setting === \"TrustedMail\") setTrustedMailLoaded(true);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n \n return () => {\n resetIsInit();\n setScrollToSettings(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 42,
-      "context": "const { t } = useTranslation([\"Settings\", \"Common\"]);\n const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
+      "line_number": 43,
+      "context": "const navigate = useNavigate();\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalAccess\", { productName: t(\"Common:ProductName\") }),\n );\n }, []);\n \n const onClickLink = (e) => {\n e.preventDefault();",
       "module": "/packages/client"
     },
     {
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 160,
+      "line_number": 167,
       "context": "{\n id: \"portal-settings_catalog-access-portal\",\n key: \"1-0\",\n icon: \"\",\n link: \"access-portal\",\n tKey: \"PortalAccess\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-password\",\n key: \"1-0-0\",",
       "module": "/packages/client"
     }

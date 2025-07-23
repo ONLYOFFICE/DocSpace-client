@@ -26,11 +26,10 @@
 
 import React from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { getUserById } from "@docspace/shared/api/people";
 import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import {
@@ -244,17 +243,13 @@ const useFiles = ({
 
     if (!dataObj) return;
 
-    const { filter, itemId, type } = dataObj;
+    const { filter } = dataObj;
     let newFilter = filter
       ? filter.clone()
       : isRooms
         ? RoomsFilter.getDefault(userId, filterObj.searchArea)
         : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
-
-    if (type === "user") {
-      requests.push(getUserById(itemId));
-    }
 
     axios
       .all(requests)
@@ -269,22 +264,10 @@ const useFiles = ({
       })
       .then((data) => {
         newFilter = data[0];
-        const result = data[1];
-        if (result) {
-          const newType = result.displayName ? "user" : "group";
-          const selectedItem = {
-            key: result.id,
-            label: newType === "user" ? result.displayName : result.name,
-            type: newType,
-          };
-          if (!isRooms) {
-            newFilter.selectedItem = selectedItem;
-          }
-        }
 
         if (newFilter) {
           if (isRooms) {
-            return fetchRooms(null, newFilter, undefined, undefined, undefined);
+            return fetchRooms(null, newFilter, undefined, undefined, false);
           }
           const folderId = newFilter.folder;
           return fetchFiles(folderId, newFilter)?.finally(() => {

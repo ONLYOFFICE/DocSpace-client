@@ -28,14 +28,19 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { DocumentEditor } from "@onlyoffice/document-editor-react";
-import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
+import {
+  DocumentEditor,
+  type IConfig,
+} from "@onlyoffice/document-editor-react";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
-import { getBackUrl, isFormRole } from "@/utils";
+import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
+import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
+
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -45,25 +50,11 @@ import {
   onSDKWarning,
   onSDKError,
   onSDKRequestRename,
-  onOutdatedVersion,
+  // onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
-
-type IConfigType = IConfig & {
-  events?: {
-    onRequestStartFilling?: (event: object) => void;
-    onSubmit?: (event: object) => void;
-    onRequestFillingStatus?: (event: object) => void;
-    onStartFilling?: (data: object) => void;
-    onUserActionRequired?: (event: object) => void;
-  };
-  editorConfig?: {
-    customization?: {
-      close?: Record<string, unknown>;
-    };
-  };
-};
+import { isPDFDocument } from "@/utils";
 
 const Editor = ({
   config,
@@ -81,6 +72,8 @@ const Editor = ({
   organizationName = "",
   filesSettings,
 
+  shareKey,
+
   onDownloadAs,
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
@@ -94,6 +87,7 @@ const Editor = ({
   onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
+  const { isBase } = useTheme();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -121,6 +115,8 @@ const Editor = ({
     onSubmit,
     onRequestFillingStatus,
     onRequestStartFilling,
+
+    onRequestRefreshFile,
   } = useEditorEvents({
     user,
     successAuth,
@@ -136,6 +132,7 @@ const Editor = ({
     setFillingStatusDialogVisible,
     openShareFormDialog,
     onStartFillingVDRPanel,
+    shareKey,
   });
 
   useInit({
@@ -149,7 +146,7 @@ const Editor = ({
     organizationName,
   });
 
-  const newConfig: IConfigType = useMemo(() => {
+  const newConfig: IConfig = useMemo(() => {
     return config
       ? {
           document: config.document,
@@ -200,7 +197,7 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
+        goBack.url = newConfig.editorConfig?.customization?.goback?.url;
       }
     }
   }
@@ -227,20 +224,18 @@ const Editor = ({
     }
   }
 
-  //if (newConfig.document && newConfig.document.info)
-  //  newConfig.document.info.favorite = false;
+  const url = typeof window !== "undefined" ? window.location.href : "";
 
-  // const url = window.location.href;
+  if (url.indexOf("anchor") !== -1) {
+    const splitUrl = url.split("anchor=");
+    const decodeURI = decodeURIComponent(splitUrl[1]);
+    const obj = JSON.parse(decodeURI);
 
-  // if (url.indexOf("anchor") !== -1) {
-  //   const splitUrl = url.split("anchor=");
-  //   const decodeURI = decodeURIComponent(splitUrl[1]);
-  //   const obj = JSON.parse(decodeURI);
-
-  //   config.editorConfig.actionLink = {
-  //     action: obj.action,
-  //   };
-  // }
+    if (newConfig.editorConfig)
+      newConfig.editorConfig.actionLink = {
+        action: obj.action,
+      };
+  }
 
   newConfig.events = {
     onDocumentReady,
@@ -255,11 +250,24 @@ const Editor = ({
     onDocumentStateChange,
     onMetaChange,
     onMakeActionLink,
-    onOutdatedVersion,
+    // onOutdatedVersion,
     onDownloadAs,
     onUserActionRequired,
     onSubmit,
+    onRequestRefreshFile,
   };
+
+  if (
+    typeof window !== "undefined" &&
+    newConfig.editorConfig?.user &&
+    newConfig.editorConfig.user.image?.includes(
+      "default_user_photo_size_48-48.png",
+    )
+  ) {
+    newConfig.editorConfig.user.image = isBase
+      ? `${window.location.origin}${UserAvatarBaseSvgUrl}`
+      : `${window.location.origin}${UserAvatarDarkSvgUrl}`;
+  }
 
   if (successAuth) {
     newConfig.events.onRequestUsers = onSDKRequestUsers;
@@ -268,8 +276,8 @@ const Editor = ({
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
-        IS_DESKTOP_EDITOR ||
-        (typeof window !== "undefined" && !openOnNewPage)
+        !isPDFDocument(fileInfo) &&
+        (IS_DESKTOP_EDITOR || (typeof window !== "undefined" && !openOnNewPage))
       ) {
         newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
       }

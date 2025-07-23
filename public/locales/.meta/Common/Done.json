@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:44.608Z",
-  "updated_at": "2025-05-22T11:56:37.702Z",
+  "updated_at": "2025-06-24T16:31:24.423Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Done\" in various contexts throughout the application, typically as a confirmation message or label. It appears on buttons, such as the OK button and navigation headers, where it indicates completion or success of an action. Translators should provide a complete and accurate translation that maintains consistency across these different UI elements.",
     "is_auto": true,
@@ -11,40 +11,40 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\ApiKeys\\sub-components\\CreateApiKeyDialog\\index.tsx",
-      "line_number": 572,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 569,
       "context": ");\n \n const keyFooter = (\n <Button\n key=\"OKButton\"\n label={t(\"Common:Done\")}\n size={ButtonSize.normal}\n primary\n onClick={onClose}\n scale\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\WebhookEventDetails\\sub-components\\DetailsNavigationHeader.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader.js",
       "line_number": 118,
       "context": "navigate(`${path}/developer-tools/webhooks/${id}`);\n };\n \n const handleRetryEvent = async () => {\n await retryWebhook(eventId);\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n return (\n <HeaderContainer>\n <div className=\"headerNavigation\">",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\WebhookHistory\\sub-components\\HistoryHeader.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader.js",
       "line_number": 229,
       "context": "...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(\n `${t(\"WebhookRedilivered\")}: ${checkedEventIds.length}`,\n <b>{t(\"Common:Done\")}</b>,\n );\n } catch (error) {\n console.error(error);\n toastr.error(error);\n } finally {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\WebhookHistory\\sub-components\\WebhookHistoryTable\\HistoryRowView\\HistoryRow.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryRowView/HistoryRow.js",
       "line_number": 66,
       "context": "await retryWebhook(historyItem.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n const handleOnSelect = () => toggleEventId(historyItem.id);\n const handleRowClick = (e) => {\n if (\n e.target.closest(\".checkbox\") ||",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\WebhookHistory\\sub-components\\WebhookHistoryTable\\HistoryTableView\\HistoryTableRow.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/WebhookHistoryTable/HistoryTableView/HistoryTableRow.js",
       "line_number": 107,
       "context": "await retryWebhook(item.id);\n await fetchHistoryItems({\n ...(historyFilters ? formatFilters(historyFilters) : {}),\n configId: id,\n });\n toastr.success(t(\"WebhookRedilivered\"), <b>{t(\"Common:Done\")}</b>);\n };\n \n const contextOptions = [\n {\n id: \"webhook-details\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\components\\toast\\sub-components\\Toastr.tsx",
+      "file_path": "/packages/shared/components/toast/sub-components/Toastr.tsx",
       "line_number": 71,
       "context": "type: ToastType;\n defaultTitleKey: \"Done\" | \"Warning\" | \"Alert\" | \"Info\";\n }\n \n const TOAST_CONFIGS: Record<ToastType, NotifyConfig> = {\n [ToastType.success]: { type: ToastType.success, defaultTitleKey: \"Done\" }, // t(\"Common:Done\")\n [ToastType.error]: { type: ToastType.error, defaultTitleKey: \"Warning\" }, // t(\"Common:Warning\")\n [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: \"Alert\" }, // t(\"Common:Alert\")\n [ToastType.info]: { type: ToastType.info, defaultTitleKey: \"Info\" }, // t(\"Common:Info\")\n };",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

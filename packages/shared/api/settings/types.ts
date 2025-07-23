@@ -169,6 +169,7 @@ export type TCommonEntries = {
   license: string;
   paymentemail: string;
   supportemail: string;
+  feedback: string;
 };
 
 export type THelpCenterEntries = {
@@ -201,6 +202,7 @@ export type THelpCenterEntries = {
   connectwordpress: string;
   connectyandex: string;
   creatingbackup: string;
+  configuringsettings: string;
   docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;
@@ -384,6 +386,11 @@ export type TIpRestrictionSettings = {
     forAdmin: boolean;
   }[];
   enable: boolean;
+};
+
+export type TInvitationSettings = {
+  allowInvitingGuests: boolean;
+  allowInvitingMembers: boolean;
 };
 
 export type TCookieSettings = {

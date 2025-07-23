@@ -152,6 +152,7 @@
   :global(#modal-scroll > .scroll-wrapper > .scroller > .scroll-body) {
     margin-inline-end: 0 !important;
     padding-inline-end: 16px !important;
+    height: 100%;
   }
 
   &.scrollLocked {

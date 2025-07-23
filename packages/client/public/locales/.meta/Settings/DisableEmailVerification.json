@@ -3,7 +3,7 @@
   "content": "Disable email verification",
   "content_en_sha1_hash": "6752c83196d2f72faefb0d749546f8b3600209a5",
   "created_at": "2025-05-19T21:30:51.198Z",
-  "updated_at": "2025-05-22T11:56:37.735Z",
+  "updated_at": "2025-05-28T09:30:02.632Z",
   "comment": {
     "text": "This translation key is used to display a label for a checkbox that controls email verification settings. In the PortalSettings page, it will be used as a label in an Advanced Settings component. The content should convey that this setting disables email verification, providing clarity for users navigating the portal's settings.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\LDAP\\sub-components\\AdvancedSettings.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AdvancedSettings.js",
       "line_number": 74,
       "context": "</div>\n \n <div className=\"ldap_advanced-settings-header\">\n <Checkbox\n className=\"ldap_checkbox-disable-email-verification\"\n label={t(\"Settings:DisableEmailVerification\")}\n isChecked={disableEmailVerification}\n onChange={onChangeDisableEmailVerification}\n isDisabled={!isLdapEnabled || isUIDisabled}\n />\n <HelpButton",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SingleSignOn\\AdvancedSettings.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
       "line_number": 100,
       "context": "<div className=\"advanced-block\">\n <Checkbox\n id=\"disable-email-verification\"\n className=\"checkbox-input\"\n label={t(\"Settings:DisableEmailVerification\")}\n name=\"disableEmailVerification\"\n isChecked={disableEmailVerification}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

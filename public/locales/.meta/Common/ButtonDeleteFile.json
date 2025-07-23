@@ -3,7 +3,7 @@
   "content": "Delete file",
   "content_en_sha1_hash": "b9ea4b3f01ac764edaec436479e4ef578ca45644",
   "created_at": "2025-05-19T21:30:43.338Z",
-  "updated_at": "2025-05-22T11:56:37.876Z",
+  "updated_at": "2025-05-28T09:30:02.961Z",
   "comment": {
     "text": "The translation key \"ButtonDeleteFile\" represents the text displayed on a delete button within a modal dialog. This button is used to confirm the deletion of a file when the user selects it for removal in a file management interface.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\FillingStatusPanel\\index.tsx",
+      "file_path": "/packages/shared/dialogs/FillingStatusPanel/index.tsx",
       "line_number": 222,
       "context": "{file.security?.Delete && onDelete ? (\n <Button\n id=\"panel_button_file-delete\"\n key=\"panel_button_file-delete\"\n onClick={() => onDelete(file)}\n label={t(\"Common:ButtonDeleteFile\")}\n size={ButtonSize.normal}\n scale\n />\n ) : null}\n </ModalDialog.Footer>",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

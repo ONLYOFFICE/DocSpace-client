@@ -3,7 +3,7 @@
   "content": "Downloading and copying unrestricted",
   "content_en_sha1_hash": "9e8a817fcbaa95bf1b658a33183cf17250c1fd2d",
   "created_at": "2025-05-19T21:30:54.907Z",
-  "updated_at": "2025-05-22T11:56:37.600Z",
+  "updated_at": "2025-06-18T07:34:15.003Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that downloading and copying are restricted. It appears in a UI context where room management settings are being shown or applied, likely on a page related to room history or permissions.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 283,
-      "context": "case \"RoomLifeTimeDisabled\":\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case \"RoomDenyDownloadEnabled\":\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportLocation\":",
-      "module": "\\packages\\client"
+      "context": "case \"RoomLifeTimeDisabled\":\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case \"RoomDenyDownloadEnabled\":\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportSaved\":",
+      "module": "/packages/client"
     }
   ],
   "languages": {

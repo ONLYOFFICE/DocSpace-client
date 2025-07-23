@@ -82,6 +82,11 @@ import {
   isLockedSharedRoom,
   isSystemFolder,
 } from "@docspace/shared/utils";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_ARCHIVE_DOCUMENTS,
+  FILTER_ROOM_DOCUMENTS,
+} from "@docspace/shared/utils/filterConstants";
 import {
   getCategoryType,
   getCategoryTypeByFolderType,
@@ -493,7 +498,7 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         await removeFiles(folderIds, fileIds, deleteAfter, immediately)
           .then(async (res) => {
-            const result = res[res.length - 1];
+            const result = res[0];
 
             if (result?.error) return Promise.reject(result.error);
 
@@ -588,7 +593,7 @@ class FilesActionStore {
 
     try {
       await emptyTrash().then(async (res) => {
-        const result = res[res.length - 1];
+        const result = res[0];
 
         if (result?.error) return Promise.reject(result.error);
         const data = result ?? null;
@@ -727,7 +732,7 @@ class FilesActionStore {
 
     try {
       await removeFiles(folderIds, [], true, true).then(async (res) => {
-        const result = res[res.length - 1];
+        const result = res[0];
 
         if (result?.error) return Promise.reject(result.error);
         const data = result ?? null;
@@ -785,7 +790,7 @@ class FilesActionStore {
     try {
       await downloadFiles(fileConvertIds, folderIds, shareKey).then(
         async (res) => {
-          const result = res[res.length - 1];
+          const result = res[0];
 
           if (result?.error) return Promise.reject(result.error);
           const data = result ?? null;
@@ -804,6 +809,9 @@ class FilesActionStore {
               ? data
               : await this.uploadDataStore.loopFilesOperations(data, pbData);
 
+          clearActiveOperations(fileIds, folderIds);
+          setDownloadItems([]);
+
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
           }
@@ -819,6 +827,8 @@ class FilesActionStore {
         },
       );
     } catch (err) {
+      clearActiveOperations(fileIds, folderIds);
+
       setSecondaryProgressBarData({
         operation: operationName,
         alert: true,
@@ -847,11 +857,9 @@ class FilesActionStore {
         setDownloadDialogVisible(true);
         return;
       }
+      setDownloadItems([]);
 
       return toastr.error(err, null, 0, true);
-    } finally {
-      clearActiveOperations(fileIds, folderIds);
-      setDownloadItems([]);
     }
   };
 
@@ -1042,13 +1050,15 @@ class FilesActionStore {
   ) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
 
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
       return deleteFile(itemId).then(async (res) => {
-        const result = res[res.length - 1];
+        const result = res[0];
 
         if (result?.error) return Promise.reject(result.error);
         const data = result ?? null;
@@ -1069,7 +1079,7 @@ class FilesActionStore {
       this.setGroupMenuBlocked(true);
       return removeFiles(items, [], false, true)
         .then(async (res) => {
-          const result = res[res.length - 1];
+          const result = res[0];
 
           if (result?.error) return Promise.reject(result.error);
           const data = result ?? null;
@@ -1077,7 +1087,6 @@ class FilesActionStore {
             operation,
             operationId,
           });
-          this.updateCurrentFolder(null, operationId, operation);
         })
         .then(() =>
           toastr.success(
@@ -1090,12 +1099,17 @@ class FilesActionStore {
         )
         .finally(() => {
           this.setGroupMenuBlocked(false);
+          setSecondaryProgressBarData({
+            operation,
+            completed: true,
+            operationId,
+          });
         });
     }
 
     addActiveItems(null, [itemId], destFolderId);
     return deleteFolder(itemId).then(async (res) => {
-      const result = res[res.length - 1];
+      const result = res[0];
 
       if (result?.error) return Promise.reject(result.error);
       const data = result ?? null;
@@ -1117,7 +1131,7 @@ class FilesActionStore {
       const res = await lockFile(id, locked);
       setFile(res);
     } catch (err) {
-      toastr.error(err);
+      throw new Error(err?.response?.data?.error?.message ?? err);
     }
   };
 
@@ -1187,12 +1201,12 @@ class FilesActionStore {
 
     return duplicate(folderIds, fileIds)
       .then(async (res) => {
-        const lastResult = res[res.length - 1];
+        const result = res[0];
 
-        if (lastResult?.error) return Promise.reject(lastResult.error);
+        if (result?.error) return Promise.reject(result.error);
 
         const pbData = { operation: operationName, operationId };
-        const data = lastResult ?? null;
+        const data = result ?? null;
 
         if (!data) {
           return Promise.reject();
@@ -1413,11 +1427,11 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         return moveToFolder(archiveRoomsId, items)
           .then(async (res) => {
-            const lastResult = res[res.length - 1];
+            const result = res[0];
 
-            if (lastResult?.error) return Promise.reject(lastResult.error);
+            if (result?.error) return Promise.reject(result.error);
 
-            const data = lastResult ?? null;
+            const data = result ?? null;
 
             const operationData =
               await this.uploadDataStore.loopFilesOperations(data, pbData);
@@ -1486,11 +1500,11 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         return moveToFolder(myRoomsId, items)
           .then(async (res) => {
-            const lastResult = res[res.length - 1];
+            const result = res[0];
 
-            if (lastResult?.error) return Promise.reject(lastResult.error);
+            if (result?.error) return Promise.reject(result.error);
 
-            const data = lastResult ?? null;
+            const data = result ?? null;
 
             console.log(pbData.label, { data, res });
 
@@ -1648,19 +1662,16 @@ class FilesActionStore {
     if (shareKey) filter.key = shareKey;
 
     if (isRoom || isTemplate) {
-      const key =
-        categoryType === CategoryType.Archive
-          ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
-          : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+      if (this.userStore.user?.id) {
+        const key =
+          categoryType === CategoryType.Archive
+            ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
+            : `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`;
 
-      const filterStorageSharedRoom =
-        this.userStore.user?.id && localStorage.getItem(key);
+        const filterSharedRoomObj = getUserFilter(key);
 
-      if (filterStorageSharedRoom) {
-        const splitFilter = filterStorageSharedRoom.split(",");
-
-        filter.sortBy = splitFilter[0];
-        filter.sortOrder = splitFilter[1];
+        filter.sortBy = filterSharedRoomObj.sortBy;
+        filter.sortOrder = filterSharedRoomObj.sortOrder;
       }
     }
 
@@ -1793,9 +1804,7 @@ class FilesActionStore {
 
     return markAsRead(folderIds, fileIds)
       .then(async (res) => {
-        const result = res[res.length - 1];
-
-        const data = result ?? null;
+        const data = res[0] ?? null;
 
         await this.uploadDataStore.loopFilesOperations(data, pbData);
       })
@@ -1803,7 +1812,6 @@ class FilesActionStore {
         if (!item) return;
 
         // this.setNewBadgeCount(item);
-
         const { getFileIndex, updateFileStatus } = this.filesStore;
 
         const index = getFileIndex(item.id);
@@ -2671,7 +2679,6 @@ class FilesActionStore {
       if (openingNewTab(url, e)) return;
 
       setIsLoading(true);
-
       setSelection([]);
 
       window.DocSpace.navigate(url, { state });
@@ -2741,6 +2748,20 @@ class FilesActionStore {
     }
   };
 
+  closeMediaViewerAndRestoreUrl = async () => {
+    const { getFirstUrl, setMediaViewerData } = this.mediaViewerDataStore;
+
+    setMediaViewerData({ visible: false, id: null });
+
+    try {
+      const url = await getFirstUrl();
+      if (!url) return;
+      window.history.pushState("", "", url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   onClickBack = (fromHotkeys = true) => {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
@@ -2750,6 +2771,10 @@ class FilesActionStore {
     const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
+
+    if (this.mediaViewerDataStore.visible) {
+      return this.closeMediaViewerAndRestoreUrl();
+    }
 
     setBufferSelection(null);
 
@@ -3495,7 +3520,7 @@ class FilesActionStore {
     try {
       await deleteVersionFile(fileId, versions)
         .then(async (res) => {
-          const result = res[res.length - 1];
+          const result = res[0];
 
           if (result?.error) return Promise.reject(result.error);
           const data = result ?? null;

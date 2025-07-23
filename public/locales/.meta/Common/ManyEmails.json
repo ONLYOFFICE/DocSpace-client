@@ -3,7 +3,7 @@
   "content": "Too many email addresses parsed",
   "content_en_sha1_hash": "7531bc36e27ca0a753d1abb3356083e66a1e9e71",
   "created_at": "2025-05-19T21:30:46.366Z",
-  "updated_at": "2025-05-22T11:56:37.319Z",
+  "updated_at": "2025-06-18T07:34:14.839Z",
   "comment": {
     "text": "This translation key is used to display an error message when too many email addresses are parsed. It appears in a dialog box, specifically when the user attempts to change their email address and exceeds the maximum allowed limit.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ChangeEmailDialog\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 152,
       "context": "case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"Common:ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"Common:EmptyEmail\");\n default:\n throw new Error(\"Unknown translation key\");\n }",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
+      "line_number": 135,
+      "context": "case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"Common:ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"Common:EmptyEmail\");\n default:\n throw new Error(\"Unknown translation key\");\n }",
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "The destination already contains a folder named «<1>{{folderName}}</1>».",
   "content_en_sha1_hash": "84e03768c28e7d8864816ce977c8c2b9f91a4f66",
   "created_at": "2025-05-19T21:30:45.425Z",
-  "updated_at": "2025-05-22T11:56:37.338Z",
+  "updated_at": "2025-05-28T09:30:02.212Z",
   "comment": {
     "text": "This translation key is used to display a message when a user attempts to add a new folder that already exists in the destination. The message informs the user that a folder with the same name already exists and cannot be created. It appears in the ConflictResolveDialog component where the user encounters conflicting actions for resolving folder additions.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 252,
       "context": "const singleFolderMessage = (\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FolderActionRequired\"\n values={{ folderName: items[0].title }}\n components={{ 1: <span className=\"bold\" /> }}\n />\n );",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

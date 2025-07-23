@@ -194,6 +194,7 @@ const GroupMenuItem = ({
         >
           {options?.map((option) => {
             const { key, ...rest } = option;
+
             return (
               <DropDownItem key={option.key} {...rest} setOpen={setOpen} />
             );

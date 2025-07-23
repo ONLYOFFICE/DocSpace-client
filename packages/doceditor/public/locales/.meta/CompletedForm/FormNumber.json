@@ -3,7 +3,7 @@
   "content": "Form number",
   "content_en_sha1_hash": "8feafd9dc8642d4a785b24eec0fb59f939b46f05",
   "created_at": "2025-05-19T21:30:57.169Z",
-  "updated_at": "2025-05-22T11:56:37.799Z",
+  "updated_at": "2025-05-28T09:30:02.868Z",
   "comment": {
     "text": "This translation key is used to display the label \"Form Number\" in a form context. It appears as part of a button component in the Completed Form component, providing visual and contextual information to users about the form number.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\completed-form\\CompletedForm.tsx",
+      "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
       "line_number": 172,
       "context": "iconName={isAnonym ? DownloadIconUrl : LinkIconUrl}\n onClick={isAnonym ? handleDownload : copyLinkFile}\n />\n </Box>\n <FormNumberWrapper>\n <span className=\"label\">{t(\"CompletedForm:FormNumber\")}</span>\n <Box>\n <Text\n className={classNames(\"completed-form__form-number\", {\n [\"form-number--big\"]: formNumber > BIG_FORM_NUMBER,\n })}",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

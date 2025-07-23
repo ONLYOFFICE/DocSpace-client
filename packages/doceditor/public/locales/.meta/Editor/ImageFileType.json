@@ -3,7 +3,7 @@
   "content": "images",
   "content_en_sha1_hash": "19f49d852660fe0a079cbf95c3efb34ba88de911",
   "created_at": "2025-05-19T21:30:57.130Z",
-  "updated_at": "2025-05-22T11:56:37.809Z",
+  "updated_at": "2025-06-18T07:34:15.302Z",
   "comment": {
     "text": "The \"ImageFileType\" translation key is used to display the text \"images\" in a file selector dialog, likely as part of a file type label or button in the Editor component. This text appears in a specific UI element when selecting files with an IMG filter parameter. Translators should provide a corresponding text for the English content \"images\".",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\SelectFileDialog.tsx",
-      "line_number": 59,
+      "file_path": "/packages/doceditor/src/components/SelectFileDialog.tsx",
+      "line_number": 60,
       "context": "const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:\n return t?.(\"Editor:MailMergeFileType\") ?? \"\";\n case FilesSelectorFilterTypes.IMG:\n return t?.(\"Editor:ImageFileType\") ?? \"\";\n case FilesSelectorFilterTypes.DOCX:\n return t?.(\"Editor:DocumentsFileType\") ?? \"\";\n default:\n return \"\";\n }",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

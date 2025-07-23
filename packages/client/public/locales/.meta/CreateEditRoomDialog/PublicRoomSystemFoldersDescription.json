@@ -3,7 +3,7 @@
   "content": "System folders store copies of forms at different stages of completion. Forms that are being filled are stored in the In progress folder, and completed forms are stored in the Complete folder.",
   "content_en_sha1_hash": "f7efc621f4e44f6c9a7111717b6f07066014c1d7",
   "created_at": "2025-05-19T21:30:56.823Z",
-  "updated_at": "2025-05-22T11:56:37.368Z",
+  "updated_at": "2025-05-28T09:30:02.236Z",
   "comment": {
     "text": "The \"PublicRoomSystemFoldersDescription\" translation key describes the purpose of system folders in storing forms at different stages of completion. It is used to display a tooltip or message in a Create/Edit Room dialog, providing context for users about where to find specific form copies.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditRoomDialog\\sub-components\\SystemFolders\\SystemFolders.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SystemFolders/SystemFolders.tsx",
       "line_number": 48,
       "context": "{t(\"CreateEditRoomDialog:PublicRoomSystemFoldersTitle\")}\n </SystemFoldersTitle>\n <SystemFoldersToggleButton isChecked isDisabled onChange={() => {}} />\n </SystemFoldersHeader>\n <SystemFoldersDescription>\n {t(\"CreateEditRoomDialog:PublicRoomSystemFoldersDescription\")}\n </SystemFoldersDescription>\n </section>\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

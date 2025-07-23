@@ -3,7 +3,7 @@
   "content": "External link",
   "content_en_sha1_hash": "66305476ff6932547d4b8aa6c41b8e0c5f410286",
   "created_at": "2025-05-19T21:30:50.202Z",
-  "updated_at": "2025-05-22T11:56:37.710Z",
+  "updated_at": "2025-07-01T15:57:36.197Z",
   "comment": {
     "text": "This translation key is used for the label \"External link\" which appears as a help tooltip when hovering over the ExternalLink button in the PortalSettings categories. Its purpose is to provide additional information about the button's functionality.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\FileSelector.js",
-      "line_number": 429,
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 433,
       "context": "{sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label\n className=\"label\"\n text={t(\"SharingPanel:ExternalLink\")}\n />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 591,
       "context": "{sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label\n className=\"label\"\n text={t(\"SharingPanel:ExternalLink\")}\n />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\SimpleRoom.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 323,
       "context": "{sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label\n className=\"label\"\n text={t(\"SharingPanel:ExternalLink\")}\n />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

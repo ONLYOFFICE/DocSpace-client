@@ -3,7 +3,7 @@
   "content": "Quota per room",
   "content_en_sha1_hash": "c6d44419e178bb95bb2e8d662bb28b6b56efd1ec",
   "created_at": "2025-05-19T21:30:52.338Z",
-  "updated_at": "2025-05-21T03:31:59.514Z",
+  "updated_at": "2025-07-02T07:49:19.861Z",
   "comment": {
     "text": "The translation key \"QuotaPerRoom\" represents the label for a quota setting related to room capacity in a storage management system. It is used as a title on a category page where users can set and manage quotas per room, typically in a portal settings interface.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 425,
+      "line_number": 439,
       "context": "{\n id: \"portal-settings_catalog-storageManagement_quota-per-room\",\n key: \"6-0-1\",\n icon: \"\",\n link: \"quota-per-room\",\n tKey: \"QuotaPerRoom\",\n },\n {\n id: \"portal-settings_catalog-storageManagement_quota-per-user\",\n key: \"6-0-2\",\n icon: \"\",",
       "module": "/packages/client"
     }

@@ -736,12 +736,18 @@ class DialogsStore {
     );
   };
 
-  changeInviteItem = async (item) =>
+  changeInviteItem = async (item, addExisting, oldId) =>
     runInAction(() => {
-      const index = this.inviteItems.findIndex((iItem) => iItem.id === item.id);
+      const index = this.inviteItems.findIndex((iItem) => {
+        return iItem.id === (addExisting ? oldId : item.id);
+      });
+
+      const addFields = addExisting
+        ? { access: this.inviteItems[index].access }
+        : this.inviteItems[index];
 
       this.inviteItems[index] = {
-        ...this.inviteItems[index],
+        ...addFields,
         ...item,
         warning: false,
       };

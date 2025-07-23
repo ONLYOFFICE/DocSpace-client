@@ -103,15 +103,15 @@ const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)`
     }
 
     .action-title {
-      text-wrap: nowrap;
+      white-space: nowrap;
       &-text {
         font-size: 14px;
         font-weight: 600;
-        text-wrap: wrap;
+        white-space: wrap;
       }
 
       .text-combined {
-        text-wrap: nowrap;
+        white-space: nowrap;
         padding-right: 4px;
       }
     }

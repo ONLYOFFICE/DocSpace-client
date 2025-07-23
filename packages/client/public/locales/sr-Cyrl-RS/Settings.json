@@ -173,6 +173,13 @@
   "ImportSectionDescription": "Изаберите секције за увоз. Оне ће се појавити у одговарајућим секцијама {{productName}}-а.",
   "IncludedInBusiness": "Укључено у Пословни план",
   "IntegrationRequest": "Недостаје вам корисна интеграција или компонента у {{organizationName}} {{productName}}-у? Оставите захтев нашем тиму и истражићемо то.",
+  "InvitationSettings": "Поставке позива",
+  "InvitationSettingsContacts": "Позовите чланове {{productName}} преко Контаката",
+  "InvitationSettingsContactsDescription": "Омогућите ову опцију да би позиви могли да се шаљу новим {{productName}} члановима преко секције Контакти. Онемогућите ову опцију ако желите да нове чланове позивате само преко LDAP-а.",
+  "InvitationSettingsDescription": "Поставите опције позива за интерне чланове и спољне госте вашег {{productName}}. Ова подешавања могу вам помоћи да испуните безбедносне смернице ваше компаније, на пример ако користите LDAP или друге системе за управљање корисницима.",
+  "InvitationSettingsGuests": "Дозволи позивање гостију",
+  "InvitationSettingsGuestsDescription": "Омогућите ову опцију да сви {{productName}} чланови могу да позивају спољне госте у собе.",
+  "InvitationSettingsMobile": "Поставите опције позива за интерне чланове и спољне госте вашег {{productName}}.",
   "InviteLetterTooltip": "Ако је означено, сви нови корисници ће добити позивно писмо са детаљима о ауторизацији.",
   "IPSecurity": "IP безбедност",
   "IPSecurityMobileDescription": "IP безбедност се користи како би се ограничио приступ порталу са свих IP адреса осим одређених адреса.",
@@ -194,7 +201,6 @@
   "LogoAbout": "Логотип за У вези страницу",
   "LogoCompact": "Логотип за компактни леви мени",
   "LogoDocsEditor": "Логотип за заглавље уређивача",
-  "LogoDocsEditorEmbedded": "Логотип за заглавље уређивача - уграђени режим",
   "LogoFavicon": "Фавикона",
   "LogoLightSmall": "Логотип за просторно заглавље",
   "LogoLogin": "Логотип за Пријава страницу и емаил-ове",
@@ -278,6 +284,7 @@
   "SendInviteLetter": "Пошаљи позивно писмо",
   "SendNotificationAboutRestoring": "Пошаљи нотификацију у вези обнављања простора корисницима",
   "ServerSideEncryptionMethod": "Метод шифровања на серверској страни",
+  "Services": "Услуге",
   "ServiceUrl": "URL сервиса",
   "SessionLifetime": "Трајање сесије",
   "SessionLifetimeMobileDescription": "Трајање сесије омогућава постављање времена (у минутима) пре него што ће корисницима {{productName}}-а поново бити потребно да унесу приступне податке како би приступили простору.",
@@ -359,5 +366,7 @@
   "WithoutEmailHint": "Немате кориснике без емаил-ова. Молимо пређите на следећи корак.",
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
-  "YourLogo": "Ваш лого"
+  "YourLogo": "Ваш лого",
+  "AdManagement": "Управљање огласима",
+  "AdManagementDescription": "Изаберите да ли ће промотивни банери бити приказани у вашем {{productName}}."
 }

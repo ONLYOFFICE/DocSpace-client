@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -49,6 +49,7 @@ const CustomizationNavbar = ({
   isLoadedPage,
   isSettingPaid,
   enablePortalRename,
+  isEnterprise,
 }) => {
   const isLoadedSetting = tReady;
   const navigate = useNavigate();
@@ -92,6 +93,8 @@ const CustomizationNavbar = ({
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
+          withPaidBadge={!isSettingPaid}
+          badgeLabel={t("Common:Paid")}
         />
       ) : null}
       <MobileCategoryWrapper
@@ -100,16 +103,26 @@ const CustomizationNavbar = ({
         url="/portal-settings/customization/general/configure-deep-link"
         onClickLink={onClickLink}
       />
+      {isEnterprise ? (
+        <MobileCategoryWrapper
+          title={t("AdManagement")}
+          subtitle={t("AdManagementDescription")}
+          url="/portal-settings/customization/general/ad-management"
+          onClickLink={onClickLink}
+        />
+      ) : null}
     </StyledComponent>
   );
 };
 
-export default inject(({ common, settingsStore }) => {
+export default inject(({ common, settingsStore, currentTariffStatusStore }) => {
   const { enablePortalRename } = settingsStore;
   const { setIsLoadedCustomizationNavbar } = common;
+  const { isEnterprise } = currentTariffStatusStore;
   return {
     setIsLoadedCustomizationNavbar,
     enablePortalRename,
+    isEnterprise,
   };
 })(
   withCultureNames(

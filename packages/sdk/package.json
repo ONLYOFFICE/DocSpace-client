@@ -1,6 +1,6 @@
 {
   "name": "@docspace/sdk",
-  "version": "3.1.1",
+  "version": "3.2.1",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",

@@ -119,6 +119,7 @@ export type TDocument = {
     instanceId: string;
     key: string;
     roomId: string;
+    canEditRoom: boolean;
   };
   title: string;
   token: string;
@@ -198,7 +199,7 @@ export interface IInitialConfig {
   document: TDocument;
   documentType: TDocumentType;
   editorConfig: TEditorConfig;
-  editorType: number;
+  editorType: string;
   editorUrl: string;
   file: TFile;
   token: string;
@@ -264,6 +265,7 @@ export type EditorProps = {
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
   organizationName?: string;
+  shareKey?: string;
 
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
@@ -334,6 +336,7 @@ export interface SelectFolderDialogProps {
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
   organizationName: string;
+  selectedFolderId?: string | number;
 }
 
 export interface SelectFileDialogProps {
@@ -369,6 +372,7 @@ export interface SelectFileDialogProps {
   ) => Promise<void>;
   fileInfo: TFile;
   filesSettings: TFilesSettings;
+  selectedFolderId?: string | number;
 }
 
 export interface UseSocketHelperProps {
@@ -391,6 +395,7 @@ export interface UseEventsProps {
 
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
+  shareKey?: string;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;

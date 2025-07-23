@@ -24,12 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled, { css, createGlobalStyle } from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import { injectDefaultTheme, mobile } from "../../utils";
 
 import { ComboBox } from "../combobox";
+
+const GlobalStyle = createGlobalStyle`
+  .access-right-select-dropdown.dropdown-container {
+    @media ${mobile} {
+      border-radius: 6px 6px 0px 0px !important;
+    }
+  }
+`;
 
 const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
   .combo-button {
@@ -97,15 +105,15 @@ const StyledItemDescription = styled.div.attrs(injectDefaultTheme)`
   color: ${(props) => props.theme.accessRightSelect.descriptionColor};
 `;
 
-const StyledItemIcon = styled(ReactSVG)<{ isShortenIcon?: boolean }>`
+const StyledItemIcon = styled(ReactSVG)<{ $isShortenIcon?: boolean }>`
   /* margin-inline-end: 8px; */
 
   path[fill] {
     fill: ${(props) => props.theme.dropDownItem.icon.color};
   }
 
-  ${({ isShortenIcon }) =>
-    isShortenIcon &&
+  ${({ $isShortenIcon }) =>
+    $isShortenIcon &&
     css`
       padding-top: 2px;
       width: 16px;
@@ -131,4 +139,5 @@ export {
   StyledItemDescription,
   StyledItem,
   StyledWrapper,
+  GlobalStyle,
 };

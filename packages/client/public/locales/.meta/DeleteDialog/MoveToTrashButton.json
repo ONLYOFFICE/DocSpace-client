@@ -3,7 +3,7 @@
   "content": "Move to Trash",
   "content_en_sha1_hash": "dffd3b9a8af6c5f81130b3b3e75c9ab26f670bfa",
   "created_at": "2025-05-19T21:30:56.718Z",
-  "updated_at": "2025-05-20T09:38:20.237Z",
+  "updated_at": "2025-06-18T07:34:14.881Z",
   "comment": {
     "text": "This translation key is used for a button that allows users to move files to the trash when deleting or unsubscribing. In the UI, it appears as a \"Move to Trash\" button in a delete dialog modal. It should be translated to provide the correct action label in different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 282,
+      "line_number": 283,
       "context": "? t(\"EmptyTrashDialog:DeleteForeverButton\")\n : isPrivacyFolder || selection[0]?.providerKey\n ? t(\"Common:OKButton\")\n : unsubscribe\n ? t(\"UnsubscribeButton\")\n : t(\"MoveToTrashButton\");\n \n return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{title}</ModalDialog.Header>\n <ModalDialog.Body>",
       "module": "/packages/client"
     }

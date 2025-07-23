@@ -1,10 +1,10 @@
 {
   "name": "@docspace/login",
-  "version": "3.1.1",
+  "version": "3.2.1",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
-    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
+    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development PORT=5011 node server.js",
     "start-prod": "NODE_ENV=production node server.js",
     "start:internal": "node ./scripts/buildTranslations.js && NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",

@@ -102,7 +102,7 @@
   "FinalizeVersion": "Završi verziju",
   "FolderRenamed": "Folder '{{folderTitle}}' je preimenovan u '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Folder <1>{{folderTitle}}</1> kreiran",
-  "GeneralLinkDeletedSuccessfully": "Novi generalni link uspešno kreiran",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Novi generalni link uspešno kreiran",
   "GoToMyRooms": "Idi u sobe",
   "GoToSection": "Idi na {{sectionName}}",
   "Index": "Indeks",

@@ -1,0 +1,28 @@
+{
+  "key_path": "YourCurrentPlan",
+  "content": "<1>Your current plan:</1> {{amount}} <2>({{price}}/month)</2>",
+  "content_en_sha1_hash": "af4d7920977d822cc7285b7a7dd65bad51970d18",
+  "created_at": "2025-06-03T20:59:26.920Z",
+  "updated_at": "2025-06-26T19:00:18.269Z",
+  "comment": {
+    "text": "This translation key is used to display a user's current storage plan details. It appears in a portal settings page and formats the amount and price of the current plan.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:01.300Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanCancel.tsx",
+      "line_number": 125,
+      "context": "<br />\n <Text as=\"span\">\n <Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"YourCurrentPlan\"\n values={{\n amount: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}\n components={{",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

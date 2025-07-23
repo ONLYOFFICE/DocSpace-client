@@ -28,7 +28,7 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
 import { Scrollbar } from "@docspace/shared/components/scrollbar";

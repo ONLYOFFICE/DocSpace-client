@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 import { DeviceType } from "@docspace/shared/enums";
 import Section from "@docspace/shared/components/section";

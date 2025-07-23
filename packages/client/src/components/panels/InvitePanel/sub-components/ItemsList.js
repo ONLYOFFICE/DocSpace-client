@@ -61,6 +61,7 @@ const Row = memo(({ data, index, style }) => {
     setIsOpenItemAccess,
     isMobileView,
     standalone,
+    allowInvitingGuests,
   } = data;
 
   const theme = useTheme();
@@ -87,6 +88,7 @@ const Row = memo(({ data, index, style }) => {
       setIsOpenItemAccess={setIsOpenItemAccess}
       isMobileView={isMobileView}
       standalone={standalone}
+      allowInvitingGuests={allowInvitingGuests}
     />
   );
 });
@@ -108,6 +110,7 @@ const ItemsList = ({
   invitePanelBodyRef,
   isMobileView,
   standalone,
+  allowInvitingGuests,
 }) => {
   const [bodyHeight, setBodyHeight] = useState(0);
   const [offsetTop, setOffsetTop] = useState(0);
@@ -198,6 +201,7 @@ const ItemsList = ({
           isMobileView,
           t,
           standalone,
+          allowInvitingGuests,
         }}
         outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
       >
@@ -210,7 +214,7 @@ const ItemsList = ({
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
   const { isOwner, isAdmin } = userStore.user;
-  const { standalone } = settingsStore;
+  const { standalone, allowInvitingGuests } = settingsStore;
 
   return {
     setInviteItems,
@@ -219,5 +223,6 @@ export default inject(({ userStore, dialogsStore, settingsStore }) => {
     isOwner,
     isAdmin,
     standalone,
+    allowInvitingGuests,
   };
 })(observer(ItemsList));

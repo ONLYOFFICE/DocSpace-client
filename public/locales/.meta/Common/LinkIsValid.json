@@ -3,7 +3,7 @@
   "content": "The link is valid for <1>{{date}}</1>",
   "content_en_sha1_hash": "963d9b3a0d59aabbefdcf5cad77bdbe0fa590621",
   "created_at": "2025-05-19T21:30:46.198Z",
-  "updated_at": "2025-05-22T11:56:37.862Z",
+  "updated_at": "2025-05-28T09:30:02.953Z",
   "comment": {
     "text": "This translation key is used to format a message indicating the validity period of a link. It will be displayed in various UI components, such as expired options dialog, likely informing users about the remaining time before a link expires or becomes invalid.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\share\\Share.helpers.tsx",
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 312,
       "context": "}\n const date = t(\"Common:Unlimited\").toLowerCase();\n return (\n <Trans\n t={t}\n i18nKey=\"LinkIsValid\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong /> }}\n />\n );",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\components\\share\\Share.helpers.tsx",
+      "file_path": "/packages/shared/components/share/Share.helpers.tsx",
       "line_number": 312,
       "context": "}\n const date = t(\"Common:Unlimited\").toLowerCase();\n return (\n <Trans\n t={t}\n i18nKey=\"LinkIsValid\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong /> }}\n />\n );",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     },
     {
-      "file_path": "\\packages\\shared\\components\\share\\sub-components\\ExpiredComboBox.tsx",
+      "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
       "line_number": 155,
       "context": ");\n }\n const date = t(\"Common:Unlimited\").toLowerCase();\n \n return (\n <Trans t={t} i18nKey=\"LinkIsValid\" ns=\"Common\">\n The link is valid for\n <LinkWithDropdown\n className=\"expired-options\"\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

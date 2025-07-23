@@ -5,6 +5,7 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import TranslationStats from "@/components/TranslationStats";
 import SearchInput from "@/components/SearchInput";
+import ExportImportPanel from "@/components/ExportImportPanel";
 
 export default function Home() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -77,7 +78,7 @@ export default function Home() {
           Search Translations
         </h2>
 
-        <div className="mb-6">
+        <div className="flex gap-2 mb-2">
           <SearchInput
             value={searchQuery}
             onChange={(value) => {
@@ -87,7 +88,7 @@ export default function Home() {
               }
             }}
             placeholder="Search for projects, namespaces, keys or values..."
-            className="mb-4"
+            className="flex-[4]"
             inputClassName="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white"
           />
           <button
@@ -113,7 +114,7 @@ export default function Home() {
               }
             }}
             disabled={isSearching || !searchQuery.trim()}
-            className={`px-4 py-2 rounded-lg text-white font-medium ${isSearching || !searchQuery.trim() ? "bg-gray-400 cursor-not-allowed" : "bg-primary-600 hover:bg-primary-700"} transition-colors`}
+            className={`flex-[1] h-[42px] px-4 py-2 rounded-lg text-white font-medium ${isSearching || !searchQuery.trim() ? "bg-gray-400 cursor-not-allowed" : "bg-primary-600 hover:bg-primary-700"} transition-colors`}
           >
             {isSearching ? (
               <>
@@ -300,11 +301,14 @@ export default function Home() {
                 href={`/projects/${project.name}`}
                 passHref
               >
-                <div className={`block p-6 border rounded-lg hover:shadow-md transition-all duration-200 ease-in-out group
-                  ${project.fullyTranslated 
-                    ? 'border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/10 hover:bg-green-100 dark:hover:bg-green-900/20' 
-                    : 'border-pink-200 dark:border-pink-700 bg-pink-50 dark:bg-pink-900/10 hover:bg-pink-100 dark:hover:bg-pink-900/20'
-                  }`}>
+                <div
+                  className={`block p-6 border rounded-lg hover:shadow-md transition-all duration-200 ease-in-out group
+                  ${
+                    project.fullyTranslated
+                      ? "border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/10 hover:bg-green-100 dark:hover:bg-green-900/20"
+                      : "border-pink-200 dark:border-pink-700 bg-pink-50 dark:bg-pink-900/10 hover:bg-pink-100 dark:hover:bg-pink-900/20"
+                  }`}
+                >
                   <div className="flex items-center mb-3">
                     <div className="h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mr-3 text-primary-600 dark:text-primary-400">
                       <svg
@@ -326,10 +330,16 @@ export default function Home() {
                       <h3 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                         {project.name}
                       </h3>
-                      <span className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full ${project.fullyTranslated 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                        : 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200'}`}>
-                        {project.fullyTranslated ? 'Fully Translated' : 'Needs Translation'}
+                      <span
+                        className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full ${
+                          project.fullyTranslated
+                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                            : "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200"
+                        }`}
+                      >
+                        {project.fullyTranslated
+                          ? "Fully Translated"
+                          : "Needs Translation"}
                       </span>
                     </div>
                   </div>
@@ -379,6 +389,9 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      {/* Export/Import Section */}
+      <ExportImportPanel projects={projects} />
 
       {/* Test Runner Section */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto mb-8">

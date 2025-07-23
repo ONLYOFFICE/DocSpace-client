@@ -3,7 +3,7 @@
   "content": "Dark theme",
   "content_en_sha1_hash": "d51c5960ec071d2f7d544efc540c4d3f56821bd5",
   "created_at": "2025-05-19T21:30:53.344Z",
-  "updated_at": "2025-05-22T11:56:37.643Z",
+  "updated_at": "2025-05-28T09:30:02.493Z",
   "comment": {
     "text": "This translation key is used for the label \"DarkTheme\" which appears as a button and theme preview in the Profile settings page, guiding users to select or enable the dark theme.",
     "is_auto": true,
@@ -11,10 +11,46 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\common\\appearance.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
       "line_number": 161,
       "context": "/>\n ),\n },\n {\n id: \"dark-theme\",\n name: t(\"Profile:DarkTheme\"),\n content: (\n <Preview\n appliedColorAccent={appliedColorAccent}\n previewAccent={previewAccent}\n selectThemeId={selectThemeId}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
+      "line_number": 174,
+      "context": "}\n onChangeTheme={onChangeTheme}\n />\n <ThemePreview\n className=\"dark-theme\"\n label={t(\"DarkTheme\")}\n theme=\"Dark\"\n accentColor={currentColorScheme.main?.accent}\n themeId={selectedThemeId}\n value={ThemeKeys.DarkStr}\n isChecked={",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
+      "line_number": 174,
+      "context": "}\n onChangeTheme={onChangeTheme}\n />\n <ThemePreview\n className=\"dark-theme\"\n label={t(\"DarkTheme\")}\n theme=\"Dark\"\n accentColor={currentColorScheme.main?.accent}\n themeId={selectedThemeId}\n value={ThemeKeys.DarkStr}\n isChecked={",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 220,
+      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"Profile:DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass=\"logo-header background-dark\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 220,
+      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"Profile:DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass=\"logo-header background-dark\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 220,
+      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"Profile:DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass=\"logo-header background-dark\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 220,
+      "context": "onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"Profile:DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass=\"logo-header background-dark\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

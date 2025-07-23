@@ -112,6 +112,12 @@
   &.smallBorderRadius {
     border-radius: 4px;
   }
+
+  &.iosBackdrop {
+    -webkit-backdrop-filter: var(--backdrop-filter-value);
+    backdrop-filter: var(--backdrop-filter-value);
+    z-index: 1000;
+  }
 }
 
 .guidBackdrop {

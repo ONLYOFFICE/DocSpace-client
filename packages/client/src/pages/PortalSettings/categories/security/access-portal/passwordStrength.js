@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
@@ -83,6 +83,7 @@ const PasswordStrength = (props) => {
     passwordStrengthSettingsUrl,
     currentDeviceType,
     getPortalPasswordSettings,
+    onSettingsSkeletonNotShown,
   } = props;
 
   const navigate = useNavigate();
@@ -141,6 +142,12 @@ const PasswordStrength = (props) => {
       setUseSpecialSymbols(passwordSettings.specSymbols);
     }
   };
+
+  useEffect(() => {
+    if (!onSettingsSkeletonNotShown) return;
+    if (!(currentDeviceType !== DeviceType.desktop && !isLoading))
+      onSettingsSkeletonNotShown("PasswordStrength");
+  }, [currentDeviceType, isLoading, onSettingsSkeletonNotShown]);
 
   useEffect(() => {
     load();

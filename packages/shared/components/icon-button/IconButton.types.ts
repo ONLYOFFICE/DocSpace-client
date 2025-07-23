@@ -71,4 +71,7 @@ export type IconButtonProps = {
   dataTip?: string;
   /** Data when user hover on icon */
   title?: string;
+
+  tooltipId?: string;
+  tooltipContent?: string;
 };

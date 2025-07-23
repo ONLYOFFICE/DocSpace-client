@@ -31,7 +31,7 @@ import PropTypes from "prop-types";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { isMobile } from "@docspace/shared/utils";
 import {

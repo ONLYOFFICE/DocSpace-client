@@ -1,26 +1,26 @@
 {
   "key_path": "PerUserMonth",
-  "content": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/month",
-  "content_en_sha1_hash": "d3eb0f575626630961e0da29da3a6896ee7cc824",
-  "created_at": "2025-05-19T21:30:47.342Z",
-  "updated_at": "2025-05-22T11:56:37.743Z",
+  "content": "<1>{{price}}</1> per admin/month",
+  "content_en_sha1_hash": "ee1751fb32f00cbb5cca892cb55738d92dbfd492",
+  "created_at": "2025-06-26T08:14:36.292Z",
+  "updated_at": "2025-06-26T19:00:30.953Z",
   "comment": {
-    "text": "This translation key is used to format a price per admin/user/month, displayed in a specific format with currency symbol and value. It appears as part of UI components that calculate or display payment costs, typically in settings or configuration pages. Translators should focus on adapting the price and currency symbol for different languages.",
+    "text": "This translation key \"PerUserMonth\" is used to display a dynamic price value per admin/month. It appears in payment-related settings on the Portal Settings page and is formatted to show currency values using the formatPaymentCurrency function.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:02.903Z"
+    "updated_at": "2025-06-26T19:00:30.953Z"
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\SaaS\\PaymentContainer.js",
-      "line_number": 345,
-      "context": "components={{ 1: <span /> }}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"PerUserMonth\"\n ns=\"Common\"\n values={{ currencySymbol, price: startValue }}\n components={{ 1: <span /> }}\n />\n )}",
-      "module": "\\packages\\client"
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
+      "line_number": 338,
+      "context": "components={{ 1: <span /> }}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"PerUserMonth\"\n ns=\"Common\"\n values={{ price: formatPaymentCurrency(startValue) }}\n components={{ 1: <span /> }}\n />\n )}",
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\payments\\SaaS\\PriceCalculation.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PriceCalculation.js",
       "line_number": 150,
-      "context": "components={{ 1: <strong style={{ fontSize: \"16px\" }} /> }}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"PerUserMonth\"\n ns=\"Common\"\n values={{ currencySymbol, price: priceManagerPerMonth }}\n components={{ 1: <strong style={{ fontSize: \"16px\" }} /> }}\n />\n )}",
-      "module": "\\packages\\client"
+      "context": "components={{ 1: <strong style={{ fontSize: \"16px\" }} /> }}\n />\n ) : (\n <Trans\n t={t}\n i18nKey=\"PerUserMonth\"\n ns=\"Common\"\n values={{ price: formatPaymentCurrency(priceManagerPerMonth) }}\n components={{ 1: <strong style={{ fontSize: \"16px\" }} /> }}\n />\n )}",
+      "module": "/packages/client"
     }
   ],
   "languages": {
@@ -33,30 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'admin' is translated as 'مشرف' (mushrif). While 'mushrif' can mean supervisor, 'admin' often implies a broader administrative role. A more precise translation might depend on the specific context, but a direct equivalent is difficult.",
-          "suggestion": "Consider if 'مدير' (mudeer - manager) or another more contextually appropriate term would be better, or if 'مشرف' is sufficient in this specific use case."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Admin/aylıq' doesn't accurately convey the meaning of 'per admin/month'. It's too literal and doesn't flow naturally in Azerbaijani. 'Aylıq' implies a subscription or recurring charge for the admin role, which isn't explicitly stated in the English.",
-          "suggestion": "Consider a more descriptive translation like 'Administrator başına' or 'Administrator üçün' followed by 'hər ay' for 'per month'. For example: 'Administrator başına hər ay <1>{{currencySymbol}}</1><1>{{price}}</1>'"
-        },
-        {
-          "type": "formatting",
-          "description": "The spacing around the tags <1>{{currencySymbol}}</1><1>{{price}}</1> is consistent in both the English and Azerbaijani versions. No change is needed, but it's worth noting for consistency across all translations.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -68,25 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/month' is not accurately translated. 'admin' is treated as a noun, but the intent seems to be 'per user' or 'per administrator.' The direct translation 'za administrátora/měsíc' is grammatically correct but may not convey the intended meaning accurately depending on the context.",
-          "suggestion": "Consider translating 'per admin/month' as 'za uživatele/měsíc' or 'za administrátora/měsíc' depending on whether it refers to a generic user or a specific administrator role."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term \"admin\" should be translated to a more appropriate German equivalent in this context. \"Admin\" is often used in German, but a more formal term like \"Administrator\" or \"Benutzeradministrator\" would be better.",
-          "suggestion": "pro Administrator/Monat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -98,165 +69,73 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'per admin/month' is not the most natural way to say 'per administrador/mes' in Spanish. A more accurate and common translation would be 'por administrador al mes' or 'por administrador mensual'.",
-          "suggestion": "por administrador al mes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'admin' is translated to 'ylläpitäjä'. While technically correct, 'ylläpitäjä' can sound formal and might not be the most natural phrasing in all contexts. A more common or user-friendly alternative might be preferred depending on the target audience. 'Admin' is often used directly in Finnish too, especially in technical contexts.",
-          "suggestion": "Consider using 'admin' directly or explore more colloquial Finnish equivalents for 'admin' depending on the overall tone of the product/service."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/month' translates more accurately to 'par utilisateur/mois' in French. 'Administrateur' implies a specific role, while 'utilisateur' is more general and aligns better with 'admin'.",
-          "suggestion": "par utilisateur/mois"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ամսվա համար\" translates to 'for a month' which is less natural than simply indicating 'per month'. A more natural Armenian phrasing would be something like 'ամսեկան' or 'ամսային'.",
-          "suggestion": "<1>{{currencySymbol}}</1><1>{{price}}</1> մեկ ադմինիստրատորի / ամսական"
-        },
-        {
-          "type": "formatting",
-          "description": "The Armenian translation includes a slash '/' which matches the English content but may not be the preferred formatting in Armenian for this type of description. Consider if this slash is truly necessary and aligns with Armenian conventions.",
-          "suggestion": "Review the necessity of the slash '/' in the Armenian translation. It might be better to replace it with a hyphen or remove it entirely depending on the desired style."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'admin' to 'amministratore' is not quite right in this context. 'Admin' refers to an administrator account, and a more accurate translation would be 'utente amministratore' or simply 'amministratore'. While 'amministratore' isn't inherently wrong, it lacks the specific nuance of the English term related to user accounts.",
-          "suggestion": "utente amministratore"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'admin' is not accurately translated. '管理者' (kanrisha) is generally used for managers or administrators but can be overly formal in this context. A more natural phrasing might be 'ユーザー' (yuuzaa) or '担当者' (tantousha) depending on the precise meaning.",
-          "suggestion": "Consider using 'ユーザー' (yuuzaa) or '担当者' (tantousha) instead of '管理者' (kanrisha)."
-        },
-        {
-          "type": "formatting",
-          "description": "The spacing after the currency symbol and before '管理者 / 月額' could be improved for better readability.",
-          "suggestion": "Add a space between the price and '管理者 / 月額'.  Example:  '<1>{{currencySymbol}}</1><1>{{price}}</1>  管理者 / 月額'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'per admin/month' in English is not accurately translated. '관리자, 월' literally translates to 'admin, month' and lacks the 'per' indicating a rate.",
-          "suggestion": "Consider translating 'per admin/month' as '관리자 1인당, 월' or '관리자 1명당, 월' to accurately convey 'per admin/month'."
-        },
-        {
-          "type": "formatting",
-          "description": "The placement of the commas in '관리자, 월' might feel less natural.  A more natural Korean sentence structure might place the comma after '관리자'.",
-          "suggestion": "Consider '관리자, 월' or '관리자, 월별' (if monthly is crucial to specify)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'admin' is not appropriately translated. It should reflect the meaning of 'administrator' or a similar role in Lao.",
-          "suggestion": "Consider translating 'admin' to something like 'ຜູ້ບໍລິຫານ' (phu borihan - administrator) or a more contextually appropriate term.  The best translation would depend on the specific product/service and the intended audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The spacing after the closing tag </1> is incorrect. There should be a space before the next tag.",
-          "suggestion": "<1>{{currencySymbol}} </1> <1>{{price}} </1> vienam administratoram/mēnesī"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'admin' is translated as 'administratoram'. While not incorrect, 'administratoram' is more formal. A more suitable and common translation might be 'lietotājam' or 'vadītājam'.",
-          "suggestion": "<1>{{currencySymbol}} </1><1>{{price}} </1> vienam lietotājam/mēnesī"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'admin' is translated as 'beheerder'. While 'beheerder' is a valid translation for 'administrator', in a subscription context, 'admin' might be better translated as 'gebruiker' or kept as 'admin' (especially if the platform uses the English term internally).",
-          "suggestion": "Consider using 'gebruiker' or keeping 'admin' depending on the platform's terminology."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/month' is not accurately translated. 'admin' is a role, and the Polish translation lacks a possessive or equivalent term indicating 'per administrator'. A more accurate translation would include 'na administratora' (per administrator).",
-          "suggestion": "<1>{{currencySymbol}}</1><1>{{price}}</1> na administratora miesięcznie"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'per admin/month' is translated as 'por administrador/mês'. While technically correct, a more natural Portuguese phrasing would be 'por usuário/mês' (per user/month) to align with the key name 'Common:PerUserMonth'.",
-          "suggestion": "por usuário/mês"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -268,153 +147,73 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'admin' is translated as 'administrator'. While technically correct, 'admin' is a common and widely understood term in this context, and keeping it might be preferable for consistency and naturalness, especially in technical documentation or software interfaces.",
-          "suggestion": "Consider translating 'admin' as 'administrator' or, depending on the context, leaving it as 'admin' for broader understanding."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'per admin/month' has been translated as 'за администратора/месяц'. While technically correct, it could be improved for clarity and naturalness in Russian. A more common phrasing would be 'на администратора в месяц'.",
-          "suggestion": "на администратора в месяц"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"per admin/month\" is not accurately translated. 'මාසයකට එක් පරිපාලකයකට' literally translates to 'per one administrator per month' which is overly verbose and less natural in Sinhala. A more natural translation would capture the meaning of 'per administrator per month' in a more concise way.",
-          "suggestion": "මාසයකට පරිපාලකයකට"
-        },
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation maintains the `<1>` and `</1>` tags from the English content. These tags are likely placeholders and should be removed if they're not needed in the Sinhala context.  It's unclear if they are intended to be preserved or not, so this is a potential formatting issue.",
-          "suggestion": "Remove the `<1>` and `</1>` tags if they're not necessary."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"per admin/month\" is not accurately translated. \"admin\" should be translated to its Slovak equivalent, which is likely \"správca\" or \"administrátor\". The current translation uses \"administrátor\" which, while understandable, feels less natural in this context.",
-          "suggestion": "<1>{{currencySymbol}}</1><1>{{price}}</1> za správcu/mesiac"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'admin' is translated to 'skrbnika'. While 'skrbnika' can mean 'caretaker', in this context, 'admin' refers to an administrator and a more direct translation like 'administrator' or a more common local equivalent would be preferred. Using 'skrbnika' might be confusing to the user.",
-          "suggestion": "Consider translating 'admin' as 'administrator' or investigate a more common Slovenian term for system administrator."
-        }
-      ],
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation uses 'по' which doesn't quite capture the meaning of 'per'. A more accurate translation would use 'на'.",
-          "suggestion": "<1>{{currencySymbol}}</1><1> {{price}}</1> на администратора/месец"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"per admin/month\" is not accurately translated to \"po administratoru/mesec\".  While 'po' means 'per', the phrasing in Serbian is a bit awkward and less natural. A more idiomatic translation would be 'po administratora mesečno' or 'za administratora mesečno'.",
-          "suggestion": "po administratora mesečno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/month' is not accurately translated. 'Yönetici/ay başına' directly translates to 'per admin/month', but the phrasing sounds slightly unnatural in Turkish. A more natural phrasing would be 'ay başına yöneticiye'.",
-          "suggestion": "ay başına yöneticiye <1>{{price}}</1><1>{{currencySymbol}}</1>"
-        },
-        {
-          "type": "formatting",
-          "description": "The order of the tags <1>{{price}}</1> and <1>{{currencySymbol}}</1> are switched from the English version. This might lead to confusion and inconsistent rendering.",
-          "suggestion": "Yönetici/ay başına <1>{{currencySymbol}}</1><1>{{price}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'per admin/month' is not accurately reflected in the Ukrainian translation.  'per admin/month' specifically means 'for each administrator per month'.  The current translation, 'за адміністратора на місяць', translates to 'for an administrator per month', which is slightly different. It needs to be more explicit about 'each'.",
-          "suggestion": "за кожного адміністратора на місяць"
-        },
-        {
-          "type": "formatting",
-          "description": "The order of the tags <1> and <1> is reversed between the English and Ukrainian versions.",
-          "suggestion": "Reorder the tags to match the English order: <1>{{currencySymbol}}</1><1>{{price}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect. In Vietnamese, it's more natural to place the currency symbol after the price. Also, \"per\" should be translated more naturally.",
-          "suggestion": "<1>{{price}} {{currencySymbol}}</1><1> mỗi quản trị viên/tháng"
-        },
-        {
-          "type": "formatting",
-          "description": "The position of currencySymbol and price tags are reversed compared to the original English.",
-          "suggestion": "Ensure the tags are in the same order as the original English: <1>{{currencySymbol}}</1><1>{{price}}</1> mỗi quản trị viên/tháng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"per admin/month\" has been translated as \"每个管理员/月\". While technically correct, a more natural and common translation in Chinese would be \"每个月/位管理员\" or \"每月/位管理员\".  The current translation is too literal and doesn't flow as well.",
-          "suggestion": "每个月/位管理员 or 每月/位管理员"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

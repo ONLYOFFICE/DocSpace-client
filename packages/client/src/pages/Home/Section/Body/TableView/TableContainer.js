@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
 import React, {
   useEffect,

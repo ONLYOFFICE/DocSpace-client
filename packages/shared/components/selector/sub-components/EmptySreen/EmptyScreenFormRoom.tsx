@@ -37,18 +37,13 @@ import { RoomsType } from "../../../../enums";
 import { Text } from "../../../text";
 import { Heading } from "../../../heading";
 import { SelectorAddButton } from "../../../selector-add-button";
-
-import { StyledNewEmptyScreen } from "../../Selector.styled";
-
-type Props = {
-  onCreateClickAction: VoidFunction;
-  createDefineRoomType: RoomsType;
-};
+import styles from "../../Selector.module.scss";
+import { EmptyScreenFormRoomProps } from "../../Selector.types";
 
 const EmptyScreenFormRoom = ({
   onCreateClickAction,
   createDefineRoomType,
-}: Props) => {
+}: EmptyScreenFormRoomProps) => {
   const { t } = useTranslation(["Common"]);
 
   const theme = useTheme();
@@ -68,7 +63,7 @@ const EmptyScreenFormRoom = ({
       : t("Common:CreateVirtualDataRoom");
 
   return (
-    <StyledNewEmptyScreen>
+    <section className={styles.newEmptyScreen}>
       <img
         className="empty-image"
         src={formRoomEmptyScreenImage}
@@ -92,7 +87,7 @@ const EmptyScreenFormRoom = ({
           noSelect
         />
       </div>
-    </StyledNewEmptyScreen>
+    </section>
   );
 };
 

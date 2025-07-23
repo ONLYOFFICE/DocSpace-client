@@ -3,7 +3,7 @@
   "content": "Last modified date",
   "content_en_sha1_hash": "db142287f88a07da18a28455cfab95c90749ca33",
   "created_at": "2025-05-19T21:30:46.056Z",
-  "updated_at": "2025-05-22T11:56:37.557Z",
+  "updated_at": "2025-07-01T15:57:36.078Z",
   "comment": {
     "text": "The translation key \"LastModifiedDate\" refers to a date field that displays the last modified date of a file or item. It is used in sorting and filtering contexts to allow users to sort results by this field. This label appears in various UI elements such as filters, sorting menus, and data tables.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\FormGallery\\Filter\\SortFilter\\index.js",
+      "file_path": "/packages/client/src/pages/FormGallery/Filter/SortFilter/index.js",
       "line_number": 52,
       "context": "isSelected: false,\n },\n {\n id: \"sort-by_updatedAt\",\n key: \"updatedAt\",\n label: t(\"Common:LastModifiedDate\"),\n default: false,\n isSelected: false,\n },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\index.js",
-      "line_number": 1178,
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 1159,
       "context": "default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastModifiedDate\"),\n default: true,\n };\n const activityDate = {\n id: \"sort-by_activity\",\n key: SortByFieldName.ModifiedDate,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\presets\\Manager.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 103,
       "context": "const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Are you sure you want to stop filling? It will be impossible to resume filling out this form after cancellation. Filling out the form will be stopped at the stage it is currently at. The file will be marked as \"Stopped\".",
   "content_en_sha1_hash": "2561d6901b3b3e363f37554ebafa3fb369555825",
   "created_at": "2025-05-19T21:30:49.064Z",
-  "updated_at": "2025-05-22T11:56:37.881Z",
+  "updated_at": "2025-05-28T09:30:02.975Z",
   "comment": {
     "text": "This translation key is used to display a warning message when a user attempts to stop filling out a form. The message informs the user that stopping filling will cancel any further progress and mark the file as \"Stopped\". It appears in a modal dialog.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\dialogs\\stop-filling\\StopFillingDialog.tsx",
+      "file_path": "/packages/shared/dialogs/stop-filling/StopFillingDialog.tsx",
       "line_number": 69,
       "context": "displayType={ModalDialogType.modal}\n onClose={onClose}\n data-testid=\"stop-filling-dialog\"\n >\n <ModalDialog.Header>{t(\"Common:StopFillingTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>{t(\"Common:StopFillingBody\")}</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"stop-filling-dialog_submit\"\n key=\"OKButton\"\n label={t(\"Common:StopFilling\")}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

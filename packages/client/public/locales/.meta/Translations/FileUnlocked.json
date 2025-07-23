@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2025-05-22T11:56:37.550Z",
+  "updated_at": "2025-06-03T20:59:41.771Z",
   "comment": {
     "text": "The \"FileUnlocked\" translation key is used to display a success message when a file is unlocked. It appears in various UI elements, including buttons and tooltips, such as on a button that unlocks a file or in an info panel displaying file history. The text should indicate that the file has been successfully unlocked, providing feedback to users about the outcome of the action.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\HOCs\\withQuickButtons.js",
+      "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
       "line_number": 60,
       "context": "if (security?.Lock && !isLoading) {\n this.setState({ isLoading: true });\n return lockFileAction(id, !locked)\n .then(() =>\n locked\n ? toastr.success(t(\"Translations:FileUnlocked\"))\n : toastr.success(t(\"Translations:FileLocked\")),\n )\n .catch(\n (err) => toastr.error(err),\n this.setState({ isLoading: false }),",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\InfoPanel\\Body\\views\\History\\useFeedTranslation.tsx",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 92,
       "context": "});\n return t(\"InfoPanel:FileDeleted\");\n case \"FileLocked\":\n return `${t(\"Translations:FileLocked\")}.`;\n case \"FileUnlocked\":\n return `${t(\"Translations:FileUnlocked\")}.`;\n case \"FileVersionRemoved\":\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\store\\ContextOptionsStore.js",
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 452,
       "context": "this.filesActionsStore\n .lockFileAction(id, !locked)\n .then(() =>\n locked\n ? toastr.success(t(\"Translations:FileUnlocked\"))\n : toastr.success(t(\"Translations:FileLocked\")),\n )\n .then(() => setInfoPanelSelection({ ...item, locked: !locked }))\n .catch((err) => {\n toastr.error(err);",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

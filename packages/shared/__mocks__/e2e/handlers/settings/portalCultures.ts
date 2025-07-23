@@ -22,6 +22,7 @@ export const portalCulturesSuccess = {
     "ro",
     "sk",
     "sl",
+    "sq-AL",
     "fi",
     "vi",
     "tr",

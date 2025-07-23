@@ -3,7 +3,7 @@
   "content": "Google Drive",
   "content_en_sha1_hash": "07c2964c41f409a224efb389f282268e4928b85f",
   "created_at": "2025-05-19T21:30:50.024Z",
-  "updated_at": "2025-05-22T11:56:37.541Z",
+  "updated_at": "2025-06-03T20:59:41.990Z",
   "comment": {
     "text": "The TypeTitleGoogle translation key is used to display the title \"Google Drive\" in various UI contexts, such as file lists and dialogs, indicating that it's a Google Drive-related file or folder. This translation key helps ensure consistency and clarity across the application when referencing Google Drive storage.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 142,
       "context": "case \"DocuSign\":\n return t(\"Translations:TypeTitleDocuSign\");\n \n case \"Google\":\n case \"GoogleDrive\":\n return t(\"Translations:TypeTitleGoogle\");\n \n case \"OneDrive\":\n case \"SkyDrive\":\n return t(\"Translations:TypeTitleSkyDrive\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

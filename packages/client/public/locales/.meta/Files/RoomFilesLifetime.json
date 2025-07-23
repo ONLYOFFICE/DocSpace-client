@@ -3,7 +3,7 @@
   "content": "The file lifetime is set to {{days}} {{period}} in this room",
   "content_en_sha1_hash": "c7afb68ede38e6aec1c4f6d16110d1acb00d1aaa",
   "created_at": "2025-05-19T21:30:56.096Z",
-  "updated_at": "2025-05-22T11:56:37.637Z",
+  "updated_at": "2025-06-18T07:34:15.022Z",
   "comment": {
     "text": "This translation key is used to display the file lifetime duration in a room. It will be shown as a tooltip when hovering over a file or in a selector, indicating how long the files will remain available in the room. The format includes days and period (e.g., \"1 day\" or \"2 weeks\").",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Header\\index.js",
-      "line_number": 433,
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 435,
       "context": "const getTitleIconTooltip = () => {\n if (sharedType) return t(\"Files:RecentlyOpenedTooltip\");\n \n if (lifetime)\n return `${t(\"Files:RoomFilesLifetime\", {\n days: lifetime.value,\n period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/selectors/Files/FilesSelector.utils.ts",
+      "line_number": 169,
+      "context": "const cover = logo?.cover;\n \n const iconProp = icon ? { icon } : { color: logo.color as string };\n \n const lifetimeTooltip = lifetime\n ? t(\"Files:RoomFilesLifetime\", {\n days: String(lifetime.value),\n period: getLifetimePeriodTranslation(lifetime.period, t),\n })\n : null;",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

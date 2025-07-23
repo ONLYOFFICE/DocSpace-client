@@ -3,7 +3,7 @@
   "content": "Please ask a {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.",
   "content_en_sha1_hash": "35e9604b801c1ceaa5a2a8906693118c1ffb1762",
   "created_at": "2025-05-19T21:30:44.932Z",
-  "updated_at": "2025-05-22T11:56:37.374Z",
+  "updated_at": "2025-05-28T09:30:02.240Z",
   "comment": {
     "text": "This translation key is used to provide a tooltip or hint for users when they need to enable third-party integration in the {{productName}} settings. The text appears as a tooltip next to a button that triggers this action in the Create/Edit Room Dialog component, indicating the step required to proceed further.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CreateEditRoomDialog\\sub-components\\ThirdPartyStorage\\ThirdPartyComboBox.js",
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.js",
       "line_number": 241,
       "context": "};\n \n const getTextTooltip = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Common:EnableThirdPartyIntegration\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n );\n };",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

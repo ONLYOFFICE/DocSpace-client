@@ -1,0 +1,28 @@
+{
+  "key_path": "CurrencyPerMonth",
+  "content": "{{currency}}/month",
+  "content_en_sha1_hash": "07d88a8bbfdeee28f45bb577ddf0c5ce0722bd10",
+  "created_at": "2025-05-29T12:12:54.415Z",
+  "updated_at": "2025-06-26T19:00:18.270Z",
+  "comment": {
+    "text": "This translation key is used to display a price with currency format in the Plan Info section of Portal Settings. It appears on a price component and formats the total monthly cost of a plan using a specific currency symbol.",
+    "is_auto": true,
+    "updated_at": "2025-06-03T21:00:51.346Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanInfo.tsx",
+      "line_number": 140,
+      "context": ")}\n </div>\n {!isStorageCancellation() && !isExceedingStorageLimit && amount ? (\n <div className={styles.planInfoPrice}>\n <Text fontWeight=\"600\" fontSize=\"14px\" className={styles.totalPrice}>\n {t(\"CurrencyPerMonth\", {\n currency: formatWalletCurrency(totalPrice, 2),\n })}\n </Text>\n <Text\n fontWeight=\"600\"",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

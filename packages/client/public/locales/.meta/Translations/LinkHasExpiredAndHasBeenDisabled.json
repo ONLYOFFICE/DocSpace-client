@@ -3,7 +3,7 @@
   "content": "The link has expired and has been disabled",
   "content_en_sha1_hash": "0d17398d6f4b329335a9bb4c55a3f6fff17c2689",
   "created_at": "2025-05-19T21:30:49.993Z",
-  "updated_at": "2025-05-22T11:56:37.484Z",
+  "updated_at": "2025-07-10T11:11:06.845Z",
   "comment": {
     "text": "This translation key is used to display a message when a link has expired and been disabled. It appears in the UI when editing a link, informing users about the status of their link. Translators should provide a clear and concise explanation for this state.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\panels\\EditLinkPanel\\index.js",
-      "line_number": 241,
+      "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
+      "line_number": 243,
       "context": "return \"\";\n }\n \n if (isExpired) {\n return t(\"Translations:LinkHasExpiredAndHasBeenDisabled\");\n }\n \n return expirationDate\n ? `${t(\"Files:LinkValidUntil\")}:`\n : t(\"Files:ChooseExpirationDate\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

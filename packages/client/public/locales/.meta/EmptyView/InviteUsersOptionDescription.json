@@ -3,7 +3,7 @@
   "content": "Add members for joint editing in the room",
   "content_en_sha1_hash": "dd3d55974b01e5c72167bb188cb7036fcffbce1b",
   "created_at": "2025-05-19T21:30:56.522Z",
-  "updated_at": "2025-05-22T11:56:37.446Z",
+  "updated_at": "2025-05-28T09:30:02.116Z",
   "comment": {
     "text": "This translation key is used to describe the option to add members for joint editing in a room. It appears in a button or dialog related to sharing and inviting users to edit files. Translators should provide a clear and concise description of this action in various languages.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\EmptyContainer\\sub-components\\EmptyViewContainer\\EmptyViewContainer.helpers.tsx",
+      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 222,
       "context": "\"pdf\",\n );\n \n const inviteUser = createInviteOption(\n t(\"Common:InviteContacts\"),\n t(\"EmptyView:InviteUsersOptionDescription\", {\n productName: t(\"Common:ProductName\"),\n }),\n );\n \n const shareFillingRoom = {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

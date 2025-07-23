@@ -28,7 +28,7 @@ import styled from "styled-components";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs } from "@docspace/shared/components/tabs";

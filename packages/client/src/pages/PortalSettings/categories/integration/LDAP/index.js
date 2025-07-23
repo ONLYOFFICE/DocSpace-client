@@ -26,12 +26,13 @@
 
 import { useState, useEffect } from "react";
 import { isDesktop } from "react-device-detect";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-
+import { useNavigate } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { isMobile } from "@docspace/shared/utils/device";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -51,9 +52,11 @@ const LDAP = ({
   isMobileView,
   isLdapEnabled,
   isLoaded,
+  setScrollToSettings,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
+  const navigate = useNavigate();
 
   const onCheckView = () => {
     if (isDesktop && window.innerWidth < 795) {
@@ -61,6 +64,11 @@ const LDAP = ({
     } else {
       setIsSmallWindow(false);
     }
+  };
+
+  const onGoToInvitationSettings = () => {
+    if (!isMobile()) setScrollToSettings(true);
+    navigate(`/portal-settings/security/access-portal/invitation-settings`);
   };
 
   useEffect(() => {
@@ -73,9 +81,31 @@ const LDAP = ({
   }, [isLdapAvailable, load, t]);
 
   if (!isLoaded && isLdapAvailable) return <LdapLoader />;
+
+  const link = `${`${t("Settings:ManagementCategorySecurity")} > ${t("Settings:InvitationSettings")}.`}`;
+
   return (
     <StyledLdapPage isSmallWindow={isSmallWindow}>
-      <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
+      <Text className="intro-text settings_unavailable">
+        <Trans
+          t={t}
+          i18nKey="LdapIntro"
+          ns="Ldap"
+          values={{ productName: t("Common:ProductName"), link }}
+          components={{
+            1: (
+              <Link
+                fontSize="13px"
+                fontWeight="600"
+                lineHeight="20px"
+                color={currentColorScheme?.main?.accent}
+                isHovered
+                onClick={onGoToInvitationSettings}
+              />
+            ),
+          }}
+        />
+      </Text>
       <div className="settings_unavailable-box">
         {ldapSettingsUrl ? (
           <Link
@@ -111,8 +141,12 @@ const LDAP = ({
 
 export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
-  const { ldapSettingsUrl, currentColorScheme, currentDeviceType } =
-    settingsStore;
+  const {
+    ldapSettingsUrl,
+    currentColorScheme,
+    currentDeviceType,
+    setScrollToSettings,
+  } = settingsStore;
   const { load, isLdapEnabled, isLoaded } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -125,5 +159,6 @@ export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
     isMobileView,
     isLdapEnabled,
     isLoaded,
+    setScrollToSettings,
   };
 })(observer(LDAP));

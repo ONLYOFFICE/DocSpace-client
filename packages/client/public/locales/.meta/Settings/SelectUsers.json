@@ -3,7 +3,7 @@
   "content": "Select users",
   "content_en_sha1_hash": "8f2012e6097eda31bbf0f7e51ae403b08862e983",
   "created_at": "2025-05-19T21:30:52.552Z",
-  "updated_at": "2025-05-22T11:56:37.672Z",
+  "updated_at": "2025-05-28T09:30:02.501Z",
   "comment": {
     "text": "\"Select users\" is used to describe a step or action in data import processes within Google Workspace and OnlyOffice Workspaces. It appears on a settings page as part of a stepper component, guiding users through selecting specific files or users for import.",
     "is_auto": true,
@@ -11,22 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\GoogleWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
       "line_number": 61,
       "context": "acceptedExtensions={[\".zip\"]}\n />\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\OnlyofficeWorkspace\\Stepper\\index.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
       "line_number": 65,
       "context": "acceptedExtensions={[\".gz\", \".tar\", \".tar.gz\"]}\n />\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\utils\\getStepTitle.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/utils/getStepTitle.js",
       "line_number": 35,
       "context": "case 1:\n return isGoogleWorkspace\n ? t(\"Common:SelectFiles\")\n : t(\"Common:SelectFile\");\n case 2:\n return t(\"Settings:SelectUsers\");\n case 3:\n return t(\"Settings:SelectUserTypes\");\n case 4:\n return t(\"Settings:DataImport\");\n case 5:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

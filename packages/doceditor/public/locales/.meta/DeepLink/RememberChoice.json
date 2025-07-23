@@ -3,7 +3,7 @@
   "content": "Remember the choice when opening documents next time",
   "content_en_sha1_hash": "8a94a37909ee99414cba5dc3b7611377996e73b7",
   "created_at": "2025-05-19T21:30:57.146Z",
-  "updated_at": "2025-05-22T11:56:37.806Z",
+  "updated_at": "2025-07-01T15:57:36.365Z",
   "comment": {
     "text": "This translation key is used to display a reminder message when opening documents next time. It appears as a checkbox label in the \"Deep Link\" component and provides context for users who have chosen to remember their actions.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\deep-link\\index.tsx",
-      "line_number": 128,
-      "context": "</StyledFileTile>\n <Text>{t(\"DeepLink:DeepLinkText\")}</Text>\n </StyledBodyWrapper>\n <StyledActionsWrapper>\n <Checkbox\n label={t(\"DeepLink:RememberChoice\")}\n isChecked={isRemember}\n onChange={onChangeCheckbox}\n />\n <Button\n size={ButtonSize.medium}",
-      "module": "\\packages\\doceditor"
+      "file_path": "/packages/doceditor/src/components/deep-link/index.tsx",
+      "line_number": 139,
+      "context": "</Text>\n </StyledBodyWrapper>\n <StyledActionsWrapper>\n {!isOpenInAppOnly ? (\n <Checkbox\n label={t(\"DeepLink:RememberChoice\")}\n isChecked={isRemember}\n onChange={onChangeCheckbox}\n />\n ) : null}\n <Button",
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

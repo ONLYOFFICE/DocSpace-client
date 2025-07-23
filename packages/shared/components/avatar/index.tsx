@@ -68,6 +68,8 @@ const AvatarPure = ({
   model,
   hasAvatar,
   noClick = false,
+  isNotIcon = false,
+  imgClassName = "",
 }: AvatarProps) => {
   const { isRTL } = useInterfaceDirection();
   const { isBase } = useTheme();
@@ -95,14 +97,14 @@ const AvatarPure = ({
   else if (source?.includes(".svg")) isIcon = true;
 
   const avatarContent = source ? (
-    isIcon ? (
+    isIcon && !isNotIcon ? (
       <div className={styles.iconWrapper}>
         <IconButton iconName={source} className="icon" isDisabled />
       </div>
     ) : (
       <img
         src={source}
-        className={styles.image}
+        className={`${styles.image}${imgClassName ? ` ${imgClassName}` : ""}`}
         data-is-default={isDefault}
         alt=""
         style={

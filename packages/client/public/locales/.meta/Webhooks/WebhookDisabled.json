@@ -3,7 +3,7 @@
   "content": "Webhook disabled",
   "content_en_sha1_hash": "a207e115d41b80aa7eba032b14687ed66099830b",
   "created_at": "2025-05-19T21:30:49.872Z",
-  "updated_at": "2025-05-21T00:51:11.731Z",
+  "updated_at": "2025-06-18T07:34:15.295Z",
   "comment": {
     "text": "The translation key \"WebhookDisabled\" is used to display a message indicating that a webhook is currently disabled. It appears in a success notification after enabling or disabling a webhook in the UI, providing feedback to the user about the current state of their webhook settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/store/WebhooksStore.js",
       "line_number": 146,
-      "context": ");\n this.webhooks[index].enabled = !this.webhooks[index].enabled;\n toastr.success(\n this.webhooks[index].enabled\n ? t(\"WebhookEnabled\")\n : t(\"WebhookDisabled\"),\n );\n } catch (error) {\n toastr.error(error);\n }\n };",
+      "context": ");\n this.webhooks[index].enabled = !this.webhooks[index].enabled;\n toastr.success(\n this.webhooks[index].enabled\n ? t(\"WebhookEnabled\")\n : t(\"WebhookDisabled\"),\n );\n \n return res;\n } catch (error) {\n toastr.error(error);",
       "module": "/packages/client"
     }
   ],

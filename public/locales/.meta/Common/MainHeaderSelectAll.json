@@ -3,7 +3,7 @@
   "content": "Select all",
   "content_en_sha1_hash": "913afff1faf79724f1f685fe8b1e36a729123ca2",
   "created_at": "2025-05-19T21:30:46.332Z",
-  "updated_at": "2025-05-22T11:56:37.866Z",
+  "updated_at": "2025-05-28T09:30:02.958Z",
   "comment": {
     "text": "This translation key is used for the text \"Select all\" which appears as the title of a checkbox in a table group menu. It is likely used to indicate that clicking on this checkbox will select or deselect all items in the table group.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\table\\TableGroupMenu.tsx",
+      "file_path": "/packages/shared/components/table/TableGroupMenu.tsx",
       "line_number": 96,
       "context": "id=\"menu-checkbox_selected-all-file\"\n className=\"table-container_group-menu-checkbox\"\n onChange={onCheckboxChange}\n isChecked={isChecked}\n isIndeterminate={isIndeterminate}\n title={t(\"Common:MainHeaderSelectAll\")}\n />\n )}\n \n {withComboBox ? (\n <ComboBox",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

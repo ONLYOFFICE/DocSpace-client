@@ -3,7 +3,7 @@
   "content": "{{selectedUsers}}/{{importedUsers}} users were imported successfully.",
   "content_en_sha1_hash": "04dc717736a56bbad5ee1b15ee74f64a7f797b7e",
   "created_at": "2025-05-19T21:30:51.642Z",
-  "updated_at": "2025-05-22T11:56:37.656Z",
+  "updated_at": "2025-05-28T09:30:02.513Z",
   "comment": {
     "text": "This translation key is used to display a success message when importing users in the Portal Settings. It shows the total number of imported users and indicates that some users were successfully imported. The translated text appears on an info text element within an import complete step component.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\ImportCompleteStep.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
       "line_number": 139,
       "context": "}, [getMigrationStatus, t]);\n \n return (\n <>\n <InfoText>\n {t(\"Settings:ImportedUsers\", {\n selectedUsers: importResult.succeedUsers,\n importedUsers: importResult.succeedUsers + importResult.failedUsers,\n })}\n </InfoText>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

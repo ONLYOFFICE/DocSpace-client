@@ -3,7 +3,7 @@
   "content": "Share your form to a Virtual Data Room. Assign roles to the room participants to fill out the form. Select an existing room or create a new one.",
   "content_en_sha1_hash": "a1fad26982aedd280bbc995fc51025041a8925ca",
   "created_at": "2025-05-19T21:30:48.486Z",
-  "updated_at": "2025-05-22T11:56:37.514Z",
+  "updated_at": "2025-05-28T09:30:02.161Z",
   "comment": {
     "text": "\"Describe a Virtual Data Room option to share forms and manage room roles. This text is used in the selector bar when creating or selecting a form room in collaboration tools.\"",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\ShareCollectSelector\\ShareCollectSelector.tsx",
+      "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
       "line_number": 256,
       "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\doceditor\\src\\components\\StartFillingSelectDialog.tsx",
+      "file_path": "/packages/doceditor/src/components/StartFillingSelectDialog.tsx",
       "line_number": 67,
       "context": "const infoBarData: TInfoBarData = {\n title: t(\"Common:SelectorInfoBarTitle\"),\n description:\n createDefineRoomType === RoomsType.FormRoom\n ? t(\"Common:SelectorInfoBarDescription\")\n : t(\"Common:SelectorInfoBarVDRDescription\"),\n icon: InfoIcon,\n onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {",
-      "module": "\\packages\\doceditor"
+      "module": "/packages/doceditor"
     }
   ],
   "languages": {

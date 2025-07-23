@@ -3,10 +3,8 @@
   "DocumentsFileType": "documents",
   "ErrorConnectionLost": "Connection is lost",
   "FileLocation": "Open file location",
-  "FileName": "File name",
   "ImageFileType": "images",
   "MailMergeFileType": "Select .XLSX file",
-  "OpenSavedDocument": "Open saved document in new tab",
   "SelectFilesType": "Select files type: {{fileType}}",
   "UsersWithoutAccess": "Some users whom you want to mention don't have access to the room: {{users}}"
 }

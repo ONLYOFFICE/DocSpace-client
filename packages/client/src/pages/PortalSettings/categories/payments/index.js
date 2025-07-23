@@ -25,20 +25,78 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { Tabs } from "@docspace/shared/components/tabs";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { isManagement } from "@docspace/shared/utils/common";
 
+import config from "../../../../../package.json";
 import PaymentsEnterprise from "./Standalone";
 import PaymentsSaaS from "./SaaS";
+import Wallet from "./Wallet";
 
-const PaymentsPage = (props) => {
-  const { standalone } = props;
+const PaymentsPage = ({ currentDeviceType, standalone }) => {
+  const [currentTabId, setCurrentTabId] = useState();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { t } = useTranslation(["Payments"]);
 
-  return standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />;
+  const data = [
+    {
+      id: "portal-payments",
+      name: t("TariffPlan"),
+      content: <PaymentsSaaS />,
+    },
+    {
+      id: "wallet",
+      name: t("Wallet"),
+      content: <Wallet />,
+    },
+  ];
+
+  const onSelect = (e) => {
+    const url = isManagement()
+      ? `/management/payments/${e.id}`
+      : `/portal-settings/payments/${e.id}`;
+
+    navigate(
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+    );
+
+    setIsLoaded(false);
+  };
+
+  useEffect(() => {
+    const path = location.pathname;
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab && data.length) setCurrentTabId(currentTab.id);
+
+    setIsLoaded(true);
+  }, [location.pathname]);
+
+  if (standalone) return <PaymentsEnterprise />;
+
+  if (!isLoaded) return null;
+
+  return (
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
+      onSelect={(e) => onSelect(e)}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+    />
+  );
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { standalone } = settingsStore;
+  const { standalone, currentDeviceType } = settingsStore;
 
   return {
     standalone,
+    currentDeviceType,
   };
 })(observer(PaymentsPage));

@@ -3,7 +3,7 @@
   "content": "No guests match your search. Please adjust your search parameters or clear the search field to view the full list of guests.",
   "content_en_sha1_hash": "1297a129afd4993c61bd2730abb16504a0df9cfe",
   "created_at": "2025-05-19T21:30:46.855Z",
-  "updated_at": "2025-05-22T11:56:37.625Z",
+  "updated_at": "2025-06-18T17:09:45.752Z",
   "comment": {
     "text": "This translation key is used for a message that appears when no guests match the search criteria, prompting the user to adjust their search parameters or clear the search field. It is typically displayed on an empty screen in the Contacts section of a page.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 92,
       "context": ": t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : t(\"Common:NotFoundGuestsDescription\")\n : isEmptyGroup\n ? t(\"Common:EmptyGroupDescription\")\n : t(\"Common:NotFoundUsersDescription\");",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\People\\index.tsx",
-      "line_number": 652,
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 672,
       "context": "? t(\"Common:NotFoundMembers\")\n : t(\"Common:NotFoundGroups\")\n }\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundUsersDescription\")\n : t(\"Common:GroupsNotFoundDescription\")\n }\n hasNextPage={hasNextPage}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

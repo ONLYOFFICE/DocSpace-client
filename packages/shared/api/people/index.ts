@@ -111,10 +111,15 @@ export async function getUser(userName = null, headers = null) {
 export async function getUserByEmail(
   userEmail: string,
   confirmKey: Nullable<string> = null,
+  culture?: string,
 ) {
+  const urlEmail = `/people/email?email=${userEmail}`;
+
+  const url = culture ? `${urlEmail}&culture=${culture}` : urlEmail;
+
   const options = {
     method: "get",
-    url: `/people/email?email=${userEmail}`,
+    url,
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };
@@ -609,6 +614,7 @@ export async function getMembersList(
   searchArea: AccountsSearchArea,
   roomId: string | number,
   filter = Filter.getDefault(),
+  signal?: AbortSignal,
 ) {
   let params = "";
 
@@ -642,6 +648,7 @@ export async function getMembersList(
   const res = (await request({
     method: "get",
     url,
+    signal,
   })) as { items: (TUser | TGroup)[]; total: number };
 
   res.items = res.items.map((member) => {

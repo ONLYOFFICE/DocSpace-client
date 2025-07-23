@@ -285,7 +285,7 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomArchived");
     case "RoomUnarchived":
       return t("InfoPanel:RoomUnarchived");
-    case "RoomIndexExportLocation":
+    case "RoomIndexExportSaved":
       return t("InfoPanel:RoomIndexExportLocation", {
         sectionName: t("Common:MyFilesSection"),
       });

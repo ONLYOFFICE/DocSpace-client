@@ -29,6 +29,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
 import { TableCell } from "@docspace/shared/components/table";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";
 
 const FileNameCell = ({
   item,
@@ -50,7 +51,8 @@ const FileNameCell = ({
   };
 
   const indexingClass = isIndexEditingMode ? "item-file-name-index" : "";
-  const linkProps = isIndexEditingMode ? null : { ...linkStyles };
+  const baseProps = isIndexEditingMode ? null : { ...linkStyles };
+  const linkProps = createPluginFileHandlers(item, baseProps);
 
   return (
     <>

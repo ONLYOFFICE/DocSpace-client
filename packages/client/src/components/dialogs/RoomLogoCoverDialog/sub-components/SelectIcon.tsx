@@ -169,6 +169,7 @@ export const SelectIcon = ({
                       : () => onSelectIcon(icon)
                   }
                   key={icon.id}
+                  id={`cover-icon-${icon?.id}`}
                   dangerouslySetInnerHTML={createMarkup()}
                 />
               );

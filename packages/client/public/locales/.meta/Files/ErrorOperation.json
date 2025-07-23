@@ -3,7 +3,7 @@
   "content": "{{operationName}}: Error",
   "content_en_sha1_hash": "fc9d9def89921a1111c4a1f171621e15bb946342",
   "created_at": "2025-05-19T21:30:55.633Z",
-  "updated_at": "2025-05-20T09:39:47.143Z",
+  "updated_at": "2025-06-18T07:34:15.342Z",
   "comment": {
     "text": "This translation key is used to display an error message when an operation fails. It is typically displayed in a button or similar UI element to inform users of operation outcome, usually on a progress bar or file-related interface.",
     "is_auto": true,

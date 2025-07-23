@@ -3,7 +3,7 @@
   "content": "This action cannot be undone. Are you sure you want to continue?",
   "content_en_sha1_hash": "ed75e0115029ce43938bc85f25cc6b237829c81d",
   "created_at": "2025-05-19T21:30:55.197Z",
-  "updated_at": "2025-05-22T11:56:37.394Z",
+  "updated_at": "2025-07-10T11:11:06.820Z",
   "comment": {
     "text": "This translation key is used to display a warning message when a user attempts to delete a file or action that cannot be undone. It appears as a message in a dialog box, prompting the user to confirm their intention to proceed.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\DeleteLinkDialog\\index.js",
-      "line_number": 152,
+      "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
+      "line_number": 168,
       "context": "<Text lineHeight=\"20px\" noSelect>\n {getDescription()}\n </Text>\n {link.sharedTo.primary ? (\n <Text lineHeight=\"20px\" noSelect>\n {t(\"Files:ActionCannotUndone\")}\n </Text>\n ) : null}\n </DeleteLinkDialogContainer>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

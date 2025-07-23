@@ -3,7 +3,7 @@
   "content": "Do you want to cancel the current process?",
   "content_en_sha1_hash": "c7c374f03228c44cfeaed59926e6745be6dc0052",
   "created_at": "2025-05-19T21:30:43.370Z",
-  "updated_at": "2025-05-22T11:56:37.311Z",
+  "updated_at": "2025-05-28T09:30:02.184Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when canceling the current process. It appears as a button in a modal dialog, prompting the user to confirm their action before proceeding.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\CancelOperationDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",
       "line_number": 86,
       "context": "setIsChecked(!isChecked);\n };\n \n const bodyText = isSecondaryProgressVisbile\n ? t(\"Common:CancelUploadingProcess\")\n : t(\"Common:CancelCurrentProcess\");\n \n return (\n <ModalDialog visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:Confirmation\")}</ModalDialog.Header>\n <ModalDialog.Body>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -3,7 +3,7 @@
   "content": "Version",
   "content_en_sha1_hash": "2da600bf9404843107a9531694f654e5662959e0",
   "created_at": "2025-05-19T21:30:49.494Z",
-  "updated_at": "2025-05-22T11:56:37.426Z",
+  "updated_at": "2025-05-28T09:30:02.150Z",
   "comment": {
     "text": "This translation key is used to display the version number of a software or application. It is typically displayed in a label format, often accompanied by a button or link that provides more information about the version. The translation will be used in various UI contexts, such as a navigation menu header and a plugin settings dialog, where it needs to be rendered with different styles and formatting.",
     "is_auto": true,
@@ -11,28 +11,22 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\SettingsPluginDialog\\sub-components\\Info.js",
-      "line_number": 116,
-      "context": "fontWeight={400}\n lineHeight=\"20px\"\n noSelect\n truncate\n >\n {t(\"Common:Version\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\" noSelect>\n {plugin.version}\n </Text>\n </>",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\components\\NavMenu\\sub-components\\header.js",
+      "file_path": "/packages/client/src/components/NavMenu/sub-components/header.js",
       "line_number": 237,
       "context": "as=\"a\"\n href={`https://github.com/ONLYOFFICE/Docspace/releases`}\n target=\"_blank\"\n {...versionBadgeProps}\n >\n {t(\"Common:Version\")} {version}\n </Link>\n <Text as=\"span\" {...versionBadgeProps}>\n {\" \"}\n -{\" \"}\n </Text>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\JavascriptSDK\\sub-components\\VersionSelector.tsx",
+      "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
+      "line_number": 116,
+      "context": "fontWeight={400}\n lineHeight=\"20px\"\n noSelect\n truncate\n >\n {t(\"Common:Version\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\" noSelect>\n {plugin.version}\n </Text>\n </>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/VersionSelector.tsx",
       "line_number": 93,
       "context": "selectedOption={source}\n displaySelectedOption\n directionY=\"bottom\"\n />\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:Version\")} />\n {disabled ? (\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={",
-      "module": "\\packages\\client"
-    },
-    {
-      "file_path": "\\packages\\client\\src\\pages\\VersionHistory\\Section\\Body\\VersionBadge.js",
-      "line_number": 31,
-      "context": "import React from \"react\";\n import styled, { css } from \"styled-components\";\n import { Text } from \"@docspace/shared/components/text\";\n import { ColorTheme, ThemeId } from \"@docspace/shared/components/color-theme\";\n import VersionSvg from \"PUBLIC_DIR/images/versionrevision_active.react.svg\";\n import { useTranslation } from \"react-i18next\";\n \n const VersionMarkIcon = styled(VersionSvg)`\n path {\n fill: ${(props) =>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -102,7 +102,7 @@
   "FinalizeVersion": "ສະບັບສຸດທ້າຍ",
   "FolderRenamed": "ໂຟນເດີ '{{folderTitle}}' ຖືກປ່ຽນເປັນ '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "ໂຟນເດີ <1>{{folderTitle}}</1> ສ້າງແລ້ວ",
-  "GeneralLinkDeletedSuccessfully": "ສ້າງລິ້ງທົ່ວໄປໃໝ່ສຳເລັດແລ້ວ ",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "ສ້າງລິ້ງທົ່ວໄປໃໝ່ສຳເລັດແລ້ວ ",
   "GoToMyRooms": "ໄປທີ່ຫ້ອງຂອງຂ້ອຍ",
   "GoToSection": "ໄປທີ່ {{sectionName}}",
   "Index": "ດຶກສັນ",

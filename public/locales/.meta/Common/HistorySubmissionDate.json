@@ -3,7 +3,7 @@
   "content": "Submitted their part. The form was sent to the next role.",
   "content_en_sha1_hash": "25d6df1a12d798516c51580f39929ec2f2c02654",
   "created_at": "2025-05-19T21:30:45.791Z",
-  "updated_at": "2025-05-22T11:56:37.845Z",
+  "updated_at": "2025-05-28T09:30:02.938Z",
   "comment": {
     "text": "This translation key is used to display the date when a filling form was submitted. It appears on the \"History\" panel within a filling role process, indicating a milestone in the process. The translated text will be shown instead of the original date value.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\filling-role-process\\sub-components\\role-histories\\RoleHistories.tsx",
+      "file_path": "/packages/shared/components/filling-role-process/sub-components/role-histories/RoleHistories.tsx",
       "line_number": 52,
       "context": "return {\n [FillingFormStatusHistory.OpenedAtDate.toString()]: t(\n \"Common:HistoryOpenedAtDate\",\n ),\n [FillingFormStatusHistory.SubmissionDate.toString()]: t(\n \"Common:HistorySubmissionDate\",\n ),\n [FillingFormStatusHistory.StopDate.toString()]: (\n <Trans\n t={t}\n i18nKey=\"HistoryStopDate\"",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

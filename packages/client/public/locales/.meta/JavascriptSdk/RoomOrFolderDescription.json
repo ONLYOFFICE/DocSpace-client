@@ -3,7 +3,7 @@
   "content": "You can select the section, room or folder you want to display",
   "content_en_sha1_hash": "35bc5102629f27da03df522abca9976c119d659a",
   "created_at": "2025-05-19T21:30:54.629Z",
-  "updated_at": "2025-05-21T08:47:19.904Z",
+  "updated_at": "2025-07-01T15:57:36.196Z",
   "comment": {
     "text": "This translation key is used for the description of a button or label that explains the purpose of selecting a room or folder in a file selection UI. It appears as a tooltip or tooltip content and provides contextual information to help users understand their options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 413,
+      "line_number": 417,
       "context": "<Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>\n }\n />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput",
       "module": "/packages/client"
     },

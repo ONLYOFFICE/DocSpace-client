@@ -1,0 +1,28 @@
+{
+  "key_path": "EmailErrorMessageUserNotFound",
+  "content": "User not found. You can edit the email by double-clicking on it.",
+  "content_en_sha1_hash": "a69a2a02c45d24c439ce46372f59b9cb3857ef41",
+  "created_at": "2025-05-28T09:33:07.777Z",
+  "updated_at": "2025-06-18T07:34:14.956Z",
+  "comment": {
+    "text": "This translation key is used to display a message when an email cannot be found, guiding the user to double-click on the email to edit it. It appears in the InvitePanel component as a tooltip and is triggered when the \"EmailErrorMessageUserNotFound\" condition is met.",
+    "is_auto": true,
+    "updated_at": "2025-05-28T09:34:13.620Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/Item.js",
+      "line_number": 349,
+      "context": "iconName={InfoEditReactSvgUrl}\n displayType=\"auto\"\n offsetRight={0}\n tooltipContent={\n hasNotFoundEmail\n ? t(\"EmailErrorMessageUserNotFound\")\n : t(\"EmailErrorMessage\")\n }\n openOnClick={false}\n size={16}\n color={theme.infoPanel.errorColor}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

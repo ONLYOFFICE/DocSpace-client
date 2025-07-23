@@ -3,7 +3,7 @@
   "content": "Single sign-on is disabled",
   "content_en_sha1_hash": "389c1b2a152f3b998ef97aafc11a5af93e69a5ad",
   "created_at": "2025-05-19T21:30:57.309Z",
-  "updated_at": "2025-05-22T11:56:37.826Z",
+  "updated_at": "2025-05-28T09:30:02.896Z",
   "comment": {
     "text": "This translation key is used to display an error message when single sign-on (SSO) is disabled in a login system. It appears as part of a larger error notification dialog or button prompt, indicating that SSO cannot be utilized due to configuration settings. Translators should ensure the text accurately conveys this disabling of SSO functionality.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\login\\src\\utils\\index.ts",
+      "file_path": "/packages/login/src/utils/index.ts",
       "line_number": 88,
       "context": "case \"LoginWithAccountNotFound\":\n return t(\"Errors:LoginWithAccountNotFound\");\n case \"InvalidUsernameOrPassword\":\n return t(\"Errors:InvalidUsernameOrPassword\");\n case \"SsoSettingsDisabled\":\n return t(\"Errors:SsoSettingsDisabled\");\n case \"ErrorNotAllowedOption\":\n return t(\"Errors:ErrorNotAllowedOption\");\n case \"SsoSettingsEmptyToken\":\n return t(\"Errors:SsoSettingsEmptyToken\");\n case \"SsoSettingsNotValidToken\":",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     }
   ],
   "languages": {

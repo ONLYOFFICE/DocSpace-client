@@ -32,6 +32,7 @@ import queryString from "query-string";
 import { ApplyFilterOption, FilterType } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
@@ -44,7 +45,6 @@ const DEFAULT_SEARCH_TYPE: boolean | null = null; // withSubfolders
 const DEFAULT_SEARCH: string | null = null;
 const DEFAULT_AUTHOR_TYPE: string | null = null;
 const DEFAULT_ROOM_ID: number | null = null;
-const DEFAULT_SELECTED_ITEM = {};
 const DEFAULT_FOLDER = "@my";
 const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
 const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
@@ -71,6 +71,8 @@ const APPLY_FILTER_OPTION = "applyFilterOption";
 const EXTENSION = "extension";
 const SEARCH_AREA = "searchArea";
 const KEY = "key";
+const DATE = "date";
+const TAGS = "tags";
 
 // TODO: add next params
 // subjectGroup bool
@@ -97,19 +99,36 @@ const getOtherSearchParams = () => {
     EXTENSION,
     SEARCH_AREA,
     KEY,
+    DATE,
+    TAGS,
   ];
 
-  Array.from(searchParams.keys()).forEach((key) => {
-    if (
-      filterSearchParams.some(
-        (param) => param.toLowerCase() === key.toLowerCase(),
-      )
-    ) {
-      searchParams.delete(key);
+  filterSearchParams.forEach((param) => {
+    const keys = Array.from(searchParams.keys());
+    const keyToDelete = keys.find(
+      (key) => key.toLowerCase() === param.toLowerCase(),
+    );
+    if (keyToDelete) {
+      searchParams.delete(keyToDelete);
     }
   });
 
   return searchParams.toString();
+};
+
+export const typeDefinition = {
+  filterType: Object.values(FilterType).map((value) => String(value)), // enum FilterType
+  applyFilterOption: Object.values(ApplyFilterOption), // enum ApplyFilterOption
+  sortBy: [
+    "DateAndTime",
+    "DateAndTimeCreation",
+    "AZ",
+    "Type",
+    "Size",
+    "Title",
+    "Author",
+  ] as TSortBy[], // type TSortBy
+  sortOrder: ["ascending", "descending"] as TSortOrder[], // type TSortOrder
 };
 
 class FilesFilter {
@@ -135,8 +154,6 @@ class FilesFilter {
 
   total: number;
 
-  selectedItem: { key?: string | number };
-
   folder: string;
 
   searchInContent: boolean | null;
@@ -153,18 +170,18 @@ class FilesFilter {
 
   key: string | null = null;
 
-  static getDefault(total = DEFAULT_TOTAL) {
-    return new FilesFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
+  static getDefault(pageCount = DEFAULT_PAGE_COUNT, total = DEFAULT_TOTAL) {
+    return new FilesFilter(DEFAULT_PAGE, pageCount, total);
   }
 
-  static getFilter(location: Location) {
+  static getFilter(location: Location): FilesFilter {
     if (!location) return this.getDefault();
 
     const urlFilter = getObjectByLocation(location);
 
-    if (!urlFilter) return null;
-
     const defaultFilter = FilesFilter.getDefault();
+
+    if (!urlFilter) return defaultFilter;
 
     const filterType =
       (urlFilter[FILTER_TYPE] && +urlFilter[FILTER_TYPE]) ||
@@ -213,7 +230,6 @@ class FilesFilter {
       search,
       roomId,
       authorType,
-      defaultFilter.selectedItem,
       folder,
       searchInContent,
       excludeSubject,
@@ -238,7 +254,6 @@ class FilesFilter {
     search = DEFAULT_SEARCH,
     roomId = DEFAULT_ROOM_ID,
     authorType = DEFAULT_AUTHOR_TYPE,
-    selectedItem = DEFAULT_SELECTED_ITEM,
     folder = DEFAULT_FOLDER,
     searchInContent = DEFAULT_SEARCH_IN_CONTENT,
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
@@ -258,7 +273,6 @@ class FilesFilter {
     this.roomId = roomId;
     this.authorType = authorType;
     this.total = total;
-    this.selectedItem = selectedItem;
     this.folder = folder;
     this.searchInContent = searchInContent;
     this.excludeSubject = excludeSubject;
@@ -281,6 +295,8 @@ class FilesFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -297,7 +313,7 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
-    } = this;
+    } = fixedValidObject;
 
     const isFilterSet =
       filterType ||
@@ -335,6 +351,8 @@ class FilesFilter {
   };
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       authorType,
       filterType,
@@ -352,7 +370,7 @@ class FilesFilter {
       extension,
       searchArea,
       key,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter: { [key: string]: unknown } = {};
 
@@ -414,7 +432,6 @@ class FilesFilter {
       this.search,
       this.roomId,
       this.authorType,
-      this.selectedItem,
       this.folder,
       this.searchInContent,
       this.excludeSubject,
@@ -436,7 +453,6 @@ class FilesFilter {
       this.sortOrder === filter.sortOrder &&
       this.viewAs === filter.viewAs &&
       this.page === filter.page &&
-      this.selectedItem.key === filter.selectedItem.key &&
       this.folder === filter.folder &&
       this.pageCount === filter.pageCount &&
       this.searchInContent === filter.searchInContent &&

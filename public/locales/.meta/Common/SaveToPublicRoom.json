@@ -3,7 +3,7 @@
   "content": "Save to Public room",
   "content_en_sha1_hash": "b0398b1b707409a986e91a9ea5fb56db1a4d3012",
   "created_at": "2025-05-19T21:30:48.318Z",
-  "updated_at": "2025-05-22T11:56:37.310Z",
+  "updated_at": "2025-05-28T09:30:02.183Z",
   "comment": {
     "text": "The translation key \"SaveToPublicRoom\" is used to display the text \"Save to Public room\" in a public room backup confirmation dialog. This text is expected to appear on a button or label within the dialog, prompting the user to save changes to a publicly accessible location.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\BackupToPublicRoom\\index.js",
+      "file_path": "/packages/client/src/components/dialogs/BackupToPublicRoom/index.js",
       "line_number": 72,
       "context": "};\n }, []);\n \n return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:SaveToPublicRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>{t(\"Files:MoveToPublicRoom\")}</Text>\n </div>\n </ModalDialog.Body>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

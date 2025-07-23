@@ -3,7 +3,7 @@
   "content": "Selected: {{selectedUsers}}/{{totalUsers}} users",
   "content_en_sha1_hash": "9b00a102a6fe3ea3e6ed152aa20c7df4a8d326dd",
   "created_at": "2025-05-19T21:30:52.512Z",
-  "updated_at": "2025-05-22T11:56:37.686Z",
+  "updated_at": "2025-05-28T09:30:02.528Z",
   "comment": {
     "text": "This translation key displays a counter showing the number of selected users out of total users. It is used in the Users Info Block component to provide a summary of user selection status on a Portal Settings page.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\sub-components\\UsersInfoBlock.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/UsersInfoBlock.tsx",
       "line_number": 57,
       "context": "</Text>\n ) : null}\n \n <div className=\"users-info-wrapper\">\n <Text className=\"selected-users-count\" truncate>\n {t(\"Settings:SelectedUsersCounter\", {\n selectedUsers: numberOfSelectedUsers,\n totalUsers,\n })}\n </Text>\n <Text as=\"div\" className=\"selected-admins-count\" truncate>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

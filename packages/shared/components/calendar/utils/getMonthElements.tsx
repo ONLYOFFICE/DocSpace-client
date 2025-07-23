@@ -61,8 +61,7 @@ export const getMonthElements = (
       type="button"
       className={classNames(styles.dateItem, "month", {
         [styles.disabled]:
-          moment(month.key, dateFormat).endOf("month") < minDate,
-        [styles.disabled]:
+          moment(month.key, dateFormat).endOf("month") < minDate ||
           moment(month.key, dateFormat).startOf("month") > maxDate,
         [styles.big]: true,
       })}
@@ -82,8 +81,7 @@ export const getMonthElements = (
         type="button"
         className={classNames(styles.dateItem, "month", {
           [styles.disabled]:
-            moment(months[i].key, dateFormat).endOf("month") < minDate,
-          [styles.disabled]:
+            moment(months[i].key, dateFormat).endOf("month") < minDate ||
             moment(months[i].key, dateFormat).startOf("month") > maxDate,
           [styles.big]: true,
           [styles.isSecondary]: true,
@@ -134,8 +132,7 @@ export const getMonthElements = (
           type="button"
           className={classNames(styles.dateItem, "month", {
             [styles.disabled]:
-              moment(month.key, dateFormat).endOf("month") < minDate,
-            [styles.disabled]:
+              moment(month.key, dateFormat).endOf("month") < minDate ||
               moment(month.key, dateFormat).startOf("month") > maxDate,
             [styles.big]: true,
             [styles.focused]: true,

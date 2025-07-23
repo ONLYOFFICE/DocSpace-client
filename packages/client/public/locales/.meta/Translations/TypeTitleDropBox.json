@@ -3,7 +3,7 @@
   "content": "Dropbox",
   "content_en_sha1_hash": "ac88abd7dfaa8f7a7ddc7b890eb6757030e093f4",
   "created_at": "2025-05-19T21:30:50.023Z",
-  "updated_at": "2025-05-22T11:56:37.540Z",
+  "updated_at": "2025-06-03T20:59:41.990Z",
   "comment": {
     "text": "This translation key is used to display the title \"Dropbox\" in various UI elements. It likely appears as a button label or a dialog title, allowing users to select Dropbox as an option when choosing file services. Translators should provide a matching translation for their language.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\helpers\\filesUtils.js",
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
       "line_number": 135,
       "context": "case \"BoxNet\":\n return t(\"Translations:TypeTitleBoxNet\");\n \n case \"DropBox\":\n case \"DropboxV2\":\n return t(\"Translations:TypeTitleDropBox\");\n \n case \"DocuSign\":\n return t(\"Translations:TypeTitleDocuSign\");\n \n case \"Google\":",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

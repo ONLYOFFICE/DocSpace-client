@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2025-05-22T11:56:37.432Z",
+  "updated_at": "2025-07-10T11:11:06.837Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -11,76 +11,76 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\SocialAuthWelcomeDialog\\index.tsx",
-      "line_number": 149,
+      "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
+      "line_number": 164,
       "context": "className=\"welcome-text\"\n >{`${user?.firstName} ${user?.lastName}`}</Text>\n </StyledInfoRow>\n \n <StyledInfoRow>\n <Text className=\"welcome-text\">{t(\"Common:Email\")}</Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {user?.email}\n </Text>\n </StyledInfoRow>",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\Filter\\useContacts.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 769,
       "context": "};\n \n const email = {\n id: \"sort-by_email\",\n key: \"email\",\n label: t(\"Common:Email\"),\n default: true,\n };\n \n const storage = {\n id: \"sort-quota\",",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\AddEmailsStep\\AccountsTable\\TableView\\UsersTableHeader.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableHeader.tsx",
       "line_number": 110,
       "context": "},\n onChange: onColumnChange,\n },\n {\n key: \"Email\",\n title: t(\"Common:Email\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\SelectUsersStep\\AccountsTable\\TableView\\UsersTableHeader.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/UsersTableHeader.tsx",
       "line_number": 109,
       "context": "},\n onChange: onColumnChange,\n },\n {\n key: \"Email\",\n title: t(\"Common:Email\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n {",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\data-import\\components\\SelectUsersTypeStep\\AccountsTable\\TableView\\UsersTableHeader.tsx",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/UsersTableHeader.tsx",
       "line_number": 110,
       "context": "minWidth: 100,\n onChange: onColumnChange,\n },\n {\n key: \"Email\",\n title: t(\"Common:Email\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n ];",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\integration\\SingleSignOn\\FieldMapping.js",
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
       "line_number": 98,
       "context": "value={lastName}\n hasError={lastNameHasError}\n />\n \n <SsoFormField\n labelText={t(\"Common:Email\")}\n name=\"email\"\n placeholder={SSO_EMAIL}\n tabIndex={18}\n value={email}\n hasError={emailHasError}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Profile\\Section\\Body\\sub-components\\main-profile\\index.js",
-      "line_number": 376,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
+      "line_number": 372,
       "context": "onClick={() => setChangeNameVisible(true)}\n />\n ) : null}\n </div>\n \n <StyledLabel as=\"div\">{t(\"Common:Email\")}</StyledLabel>\n <div className=\"email-container\">\n <div className=\"email-edit-container\">\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Profile\\Section\\Body\\sub-components\\main-profile\\index.js",
-      "line_number": 376,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
+      "line_number": 372,
       "context": "onClick={() => setChangeNameVisible(true)}\n />\n ) : null}\n </div>\n \n <StyledLabel as=\"div\">{t(\"Common:Email\")}</StyledLabel>\n <div className=\"email-container\">\n <div className=\"email-edit-container\">\n <Text\n data-tooltip-id=\"emailTooltip\"\n data-tooltip-content={t(\"EmailNotVerified\")}",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\client\\src\\pages\\Profile\\Section\\Body\\sub-components\\notifications\\index.js",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/index.js",
       "line_number": 130,
       "context": "<StyledTextContent>\n {isLoadingContent ? (\n <RectangleSkeleton height=\"22px\" width=\"57px\" />\n ) : (\n <Text fontSize=\"14px\" fontWeight={600} className=\"email-title\">\n {t(\"Common:Email\")}\n </Text>\n )}\n </StyledTextContent>\n {isLoadingContent ? (\n <NotificationsLoader count={3} />",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\login\\src\\app\\(root)\\confirm\\[Invite]\\_sub-components\\EmailInputForm.tsx",
+      "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
       "line_number": 92,
       "context": "id=\"login\"\n name=\"login\"\n size={InputSize.large}\n hasError={isEmailErrorShow && !emailValid}\n value={email}\n placeholder={t(\"Common:Email\")}\n scale={true}\n isAutoFocussed={true}\n tabIndex={1}\n isDisabled={isLoading || !!emailFromLink}\n autoComplete=\"username\"",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\login\\src\\app\\(root)\\wizard\\page.client.tsx",
+      "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
       "line_number": 347,
       "context": "name=\"wizard-email\"\n tabIndex={1}\n size={InputSize.large}\n scale={true}\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed={true}\n onChange={onChangeEmail}",
-      "module": "\\packages\\login"
+      "module": "/packages/login"
     },
     {
-      "file_path": "\\packages\\shared\\pages\\Branding\\CompanyInfo\\index.tsx",
+      "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
       "line_number": 141,
       "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n testId=\"email-input\"\n id=\"textInputContainerEmail\"",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

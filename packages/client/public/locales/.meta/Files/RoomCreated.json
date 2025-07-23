@@ -3,7 +3,7 @@
   "content": "Room created",
   "content_en_sha1_hash": "e6343cefd4d7c4911de4502175b5289b119c5532",
   "created_at": "2025-05-19T21:30:56.082Z",
-  "updated_at": "2025-05-22T11:56:37.727Z",
+  "updated_at": "2025-05-28T09:30:02.088Z",
   "comment": {
     "text": "This translation key is used to display the message \"Room created\" in various parts of the application. It appears as a notification or confirmation message when a new room is created, typically on a button or dialog triggered by user action.",
     "is_auto": true,
@@ -11,10 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\PortalSettings\\categories\\developer-tools\\Webhooks\\Webhooks.helpers.ts",
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyContainer.helper.ts",
+      "line_number": 83,
+      "context": ") => {\n const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {\n [EmptyScreenTypeEnum.Done]: t(\"EmptyFormFolderDoneHeaderText\"),\n [EmptyScreenTypeEnum.InProgress]: t(\"EmptyFormFolderProgressHeaderText\"),\n [EmptyScreenTypeEnum.Default]: t(\"Common:EmptyScreenFolder\"),\n [EmptyScreenTypeEnum.Corporate]: t(\"RoomCreated\"),\n [EmptyScreenTypeEnum.SubFolderDone]: t(\"EmptyFormSubFolderHeaderText\"),\n [EmptyScreenTypeEnum.SubFolderinProgress]: t(\n \"EmptyFormSubFolderHeaderText\",\n ),\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
       "line_number": 77,
       "context": "case WebhookTriggers.FolderCopied:\n return t(\"FolderCopied\");\n case WebhookTriggers.FolderMoved:\n return t(\"FolderMoved\");\n case WebhookTriggers.RoomCreated:\n return t(\"Files:RoomCreated\");\n case WebhookTriggers.RoomUpdated:\n return t(\"RoomUpdated\");\n case WebhookTriggers.RoomArchived:\n return t(\"RoomArchived\");\n case WebhookTriggers.RoomDeleted:",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

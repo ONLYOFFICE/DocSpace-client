@@ -3,7 +3,7 @@
   "content": "Webhook enabled",
   "content_en_sha1_hash": "8c79b8000073cc21ee1f30fb7d537fe079a7a6b3",
   "created_at": "2025-05-19T21:30:49.876Z",
-  "updated_at": "2025-05-21T00:50:41.179Z",
+  "updated_at": "2025-06-18T07:34:15.293Z",
   "comment": {
     "text": "The \"WebhookEnabled\" translation key is used to display a success message when enabling or disabling a webhook. It will show \"Webhook enabled\" when the webhook is active and \"Webhook disabled\" when it's inactive. This text appears in an alert dialog after toggling a webhooks setting.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/store/WebhooksStore.js",
       "line_number": 145,
-      "context": "(webhook) => webhook.id === desiredWebhook.id,\n );\n this.webhooks[index].enabled = !this.webhooks[index].enabled;\n toastr.success(\n this.webhooks[index].enabled\n ? t(\"WebhookEnabled\")\n : t(\"WebhookDisabled\"),\n );\n } catch (error) {\n toastr.error(error);\n }",
+      "context": "(webhook) => webhook.id === desiredWebhook.id,\n );\n this.webhooks[index].enabled = !this.webhooks[index].enabled;\n toastr.success(\n this.webhooks[index].enabled\n ? t(\"WebhookEnabled\")\n : t(\"WebhookDisabled\"),\n );\n \n return res;\n } catch (error) {",
       "module": "/packages/client"
     }
   ],

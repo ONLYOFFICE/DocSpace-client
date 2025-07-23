@@ -3,7 +3,7 @@
   "content": "No guests found",
   "content_en_sha1_hash": "b91968e9823bf736346896bcc6a5923a94d5c5b3",
   "created_at": "2025-05-19T21:30:46.891Z",
-  "updated_at": "2025-05-22T11:56:37.624Z",
+  "updated_at": "2025-06-18T17:09:45.752Z",
   "comment": {
     "text": "The \"NotFoundGuestsFilter\" translation key is used to display a message when no guests are found in a contacts list. It appears as a header on an empty screen in the Home/ContactsBody section, informing users that there are no guest groups or members.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\pages\\Home\\Section\\ContactsBody\\EmptyScreen.tsx",
+      "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 86,
       "context": "const isEmptyGroup = contactsTab === \"inside_group\";\n const isEmptyGuests = contactsTab === \"guests\";\n \n const title = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundGuestsFilter\")\n : t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     },
     {
-      "file_path": "\\packages\\shared\\selectors\\People\\index.tsx",
-      "line_number": 645,
+      "file_path": "/packages/shared/selectors/People/index.tsx",
+      "line_number": 665,
       "context": ": t(\"Common:GroupsNotFoundDescription\"))\n }\n searchEmptyScreenImage={emptyScreenImage}\n searchEmptyScreenHeader={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundGuestsFilter\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundMembers\")\n : t(\"Common:NotFoundGroups\")\n }\n searchEmptyScreenDescription={",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

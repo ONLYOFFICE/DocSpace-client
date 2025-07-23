@@ -123,6 +123,8 @@ const useSelectorBody = ({
   totalItems,
   loadNextPage,
   withInit,
+
+  isMultiSelect,
 }: Omit<FilesSelectorProps, "withSearch" | "onSubmit"> &
   PickedSearchProps &
   PickedSubmitButtonProps &
@@ -196,6 +198,7 @@ const useSelectorBody = ({
         isBreadCrumbsLoading: showBreadCrumbsLoader,
         withBreadCrumbs: true,
         onSelectBreadCrumb: onSelectBreadCrumb!,
+        bodyIsLoading: showLoader,
       }
     : {};
 
@@ -208,7 +211,7 @@ const useSelectorBody = ({
       {...footerInputProps}
       {...footerCheckboxProps}
       {...breadCrumbsProps}
-      isMultiSelect={false}
+      isMultiSelect={isMultiSelect ?? false}
       items={items}
       onSelect={onSelect}
       emptyScreenImage={

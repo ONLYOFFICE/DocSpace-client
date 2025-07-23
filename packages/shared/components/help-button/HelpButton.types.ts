@@ -1,7 +1,7 @@
 import { IconButtonProps } from "../icon-button/IconButton.types";
 import { TTooltipPlace, TooltipProps } from "../tooltip/Tooltip.types";
 
-export type HelpButtonProps = IconButtonProps & {
+export type HelpButtonProps = Omit<IconButtonProps, "tooltipContent"> & {
   /** Displays the child elements */
   children?: React.ReactNode;
   /** Sets the unique identifier for the component. */

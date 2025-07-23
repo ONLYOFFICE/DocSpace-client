@@ -3,7 +3,7 @@
   "content": "Day of the week",
   "content_en_sha1_hash": "a2dfedeffd1ead187411349e305b1fe627303452",
   "created_at": "2025-05-19T21:30:44.414Z",
-  "updated_at": "2025-05-22T11:56:37.841Z",
+  "updated_at": "2025-05-28T09:30:02.935Z",
   "comment": {
     "text": "The \"DayOfTheWeek\" translation key represents the English word for a specific day of the week, used in a calendar component that displays options for selecting weekdays. This text appears as an option label in a select menu within the WeekDays component.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\shared\\components\\cron\\sub-components\\WeekDays.tsx",
+      "file_path": "/packages/shared/components/cron/sub-components/WeekDays.tsx",
       "line_number": 46,
       "context": "isDisabled,\n }: WeekDaysProps) => {\n const placeholder = useMemo(() => {\n const isEmpty = monthDays.length === 0;\n \n return isEmpty || isWeek ? t(\"EveryDayOfTheWeek\") : t(\"DayOfTheWeek\");\n }, [monthDays.length, isWeek, t]);\n \n return (\n <Select\n unit={unit}",
-      "module": "\\packages\\shared"
+      "module": "/packages/shared"
     }
   ],
   "languages": {

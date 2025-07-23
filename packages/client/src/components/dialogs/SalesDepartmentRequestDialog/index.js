@@ -26,24 +26,20 @@
 
 import { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-
-import { inject, observer } from "mobx-react";
-
-const StyledBodyContent = styled.div`
-  display: contents;
-
-  .text-body {
-    margin-bottom: 16px;
-  }
-`;
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { ErrorKeys } from "@docspace/shared/enums";
 
 const SalesDepartmentRequestDialog = ({
   visible,
@@ -53,13 +49,14 @@ const SalesDepartmentRequestDialog = ({
   const { t, ready } = useTranslation([
     "SalesDepartmentRequestDialog",
     "Common",
+    "SMTPSettings",
   ]);
 
-  // TODO: setIsLoading is useless
-  const [isLoading, setIsLoading] = useState(false); // eslint-disable-line @typescript-eslint/no-unused-vars
+  const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const [emailError, setEmailError] = useState("");
 
   const [description, setDescription] = useState("");
   const [isValidDescription, setIsValidDescription] = useState(true);
@@ -96,8 +93,54 @@ const SalesDepartmentRequestDialog = ({
       return;
     }
 
-    await sendPaymentRequest(email, name, description);
+    if (emailError) {
+      setIsValidEmail(false);
+      return;
+    }
+
+    setIsLoading(true);
+
+    await sendPaymentRequest(email, name, description, t);
+
     onClose && onClose();
+  };
+
+  const onValidateEmailInput = (result) => {
+    if (result.isValid) {
+      setEmailError("");
+      return;
+    }
+
+    const translatedErrors = result.errors.map((errorKey) => {
+      switch (errorKey) {
+        case ErrorKeys.LocalDomain:
+          return t("Common:LocalDomain");
+        case ErrorKeys.IncorrectDomain:
+          return t("Common:IncorrectDomain");
+        case ErrorKeys.DomainIpAddress:
+          return t("Common:DomainIpAddress");
+        case ErrorKeys.PunycodeDomain:
+          return t("Common:PunycodeDomain");
+        case ErrorKeys.PunycodeLocalPart:
+          return t("Common:PunycodeLocalPart");
+        case ErrorKeys.IncorrectLocalPart:
+          return t("Common:IncorrectLocalPart");
+        case ErrorKeys.SpacesInLocalPart:
+          return t("Common:SpacesInLocalPart");
+        case ErrorKeys.MaxLengthExceeded:
+          return t("Common:MaxLengthExceeded");
+        case ErrorKeys.IncorrectEmail:
+          return t("Common:IncorrectEmail");
+        case ErrorKeys.ManyEmails:
+          return t("Common:ManyEmails");
+        case ErrorKeys.EmptyEmail:
+          return t("Common:EmptyEmail");
+        default:
+          throw new Error("Unknown translation key");
+      }
+    });
+
+    setEmailError(translatedErrors[0]);
   };
 
   return (
@@ -105,8 +148,8 @@ const SalesDepartmentRequestDialog = ({
       visible={visible}
       onClose={onCloseModal}
       autoMaxHeight
-      isLarge
       isLoading={!ready}
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>
         <Text isBold fontSize="21px">
@@ -114,83 +157,81 @@ const SalesDepartmentRequestDialog = ({
         </Text>
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
-          <Text
-            key="text-body"
-            className="text-body"
-            isBold={false}
-            fontSize="13px"
-          >
-            {t("YouWillBeContacted")}
-          </Text>
+        <Text
+          key="text-body"
+          className="text-body"
+          isBold={false}
+          fontSize="13px"
+        >
+          {t("YouWillBeContacted")}
+        </Text>
 
-          <FieldContainer
-            className="name_field"
-            key="name"
-            isVertical
+        <br />
+        <FieldContainer
+          className="name_field"
+          key="name"
+          isVertical
+          hasError={!isValidName}
+          labelVisible={false}
+          errorMessage={t("Common:RequiredField")}
+        >
+          <TextInput
+            id="your-name"
             hasError={!isValidName}
-            labelVisible={false}
-            errorMessage={t("Common:RequiredField")}
-          >
-            <TextInput
-              id="your-name"
-              hasError={!isValidName}
-              name="name"
-              type="text"
-              size="base"
-              scale
-              tabIndex={1}
-              placeholder={t("YourName")}
-              isAutoFocussed
-              isDisabled={isLoading}
-              value={name}
-              onChange={onChangeName}
-            />
-          </FieldContainer>
+            name="name"
+            type="text"
+            size="base"
+            scale
+            tabIndex={1}
+            placeholder={t("YourName")}
+            isAutoFocussed
+            isDisabled={isLoading}
+            value={name}
+            onChange={onChangeName}
+          />
+        </FieldContainer>
 
-          <FieldContainer
-            className="e-mail_field"
-            key="e-mail"
-            isVertical
-            labelVisible={false}
+        <FieldContainer
+          className="e-mail_field"
+          key="e-mail"
+          isVertical
+          labelVisible={false}
+          hasError={!isValidEmail}
+          errorMessage={emailError}
+        >
+          <EmailInput
+            id="registration-email"
+            name="e-mail"
+            scale
+            value={email}
+            onChange={onChangeEmail}
+            onValidateInput={onValidateEmailInput}
             hasError={!isValidEmail}
-            errorMessage={t("Common:RequiredField")}
-          >
-            <TextInput
-              hasError={!isValidEmail}
-              id="registration-email"
-              name="e-mail"
-              type="text"
-              size="base"
-              scale
-              tabIndex={2}
-              placeholder={t("Common:RegistrationEmail")}
-              isDisabled={isLoading}
-              value={email}
-              onChange={onChangeEmail}
-            />
-          </FieldContainer>
+            placeholder={t("SMTPSettings:EnterEmail")}
+          />
+        </FieldContainer>
 
-          <FieldContainer
-            className="description_field"
-            key="text-description"
-            isVertical
+        <FieldContainer
+          className="description_field"
+          key="text-description"
+          isVertical
+          hasError={!isValidDescription}
+          labelVisible={false}
+          errorMessage={t("Common:RequiredField")}
+        >
+          <Textarea
+            id="request-details"
+            heightScale={false}
             hasError={!isValidDescription}
-            labelVisible={false}
-            errorMessage={t("Common:RequiredField")}
-          >
-            <Textarea
-              id="request-details"
-              heightScale={false}
-              hasError={!isValidDescription}
-              placeholder={t("RequestDetails")}
-              tabIndex={3}
-              value={description}
-              onChange={onChangeDescription}
-              isDisabled={isLoading}
-            />
-          </FieldContainer>
-        </StyledBodyContent>
+            placeholder={t("RequestDetails")}
+            tabIndex={3}
+            value={description}
+            onChange={onChangeDescription}
+            isDisabled={isLoading}
+            heightTextArea={100}
+            maxLength={255}
+          />
+        </FieldContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

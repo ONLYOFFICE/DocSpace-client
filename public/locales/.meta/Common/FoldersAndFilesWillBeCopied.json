@@ -3,7 +3,7 @@
   "content": "Folders and files will be copied in the destination",
   "content_en_sha1_hash": "ed4d4023708822fb6b8b2fba6bbc8907ef33e46a",
   "created_at": "2025-05-19T21:30:45.452Z",
-  "updated_at": "2025-05-22T11:56:37.345Z",
+  "updated_at": "2025-05-28T09:30:02.219Z",
   "comment": {
     "text": "\"This translation key is used in a conflict resolution dialog, specifically when resolving file conflicts, and provides a message to the user indicating that folders and files will be copied in the destination.\"",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "\\packages\\client\\src\\components\\dialogs\\ConflictResolveDialog\\index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/ConflictResolveDialog/index.tsx",
       "line_number": 297,
       "context": "const getDuplicateDescription = () => {\n return isFileDialog\n ? t(\"Common:CreateDescription\")\n : isFolderDialog\n ? t(\"Common:CreateFolderDescription\")\n : t(\"Common:FoldersAndFilesWillBeCopied\");\n };\n const getSkipDescription = () => {\n return isFileDialog\n ? t(\"Common:SkipDescription\")\n : isFolderDialog",
-      "module": "\\packages\\client"
+      "module": "/packages/client"
     }
   ],
   "languages": {

@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Base, { TTheme, TColorScheme } from "./base";
-import { TInterfaceDirection } from "./commonTheme";
-
-import Dark from "./dark";
-
-export { globalColors } from "./globalColors";
-export { zIndex } from "./zIndex";
-
-export { Base, Dark };
-export type { TTheme, TColorScheme, TInterfaceDirection };
+export const zIndex = {
+  below: -1,
+  base: 0,
+  content: 10,
+  sticky: 20,
+  floatingUI: 30,
+  modal: 40,
+  backdrop: 45,
+  overlay: 50,
+  systemTop: 100,
+};

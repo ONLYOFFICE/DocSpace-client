@@ -49,6 +49,7 @@ const SectionBody = React.memo(
     getContextModel,
     isIndexEditingMode,
     pathname,
+    withoutFooter,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -116,13 +117,17 @@ const SectionBody = React.memo(
           <div className="section-wrapper">
             <div className="section-wrapper-content" {...focusProps}>
               {children}
-              <div className={classNames(styles.spacer)} />
+              {withoutFooter ? null : (
+                <div className={classNames(styles.spacer)} />
+              )}
             </div>
           </div>
         ) : (
           <div className="section-wrapper">
             {children}
-            <div className={classNames(styles.spacer)} />
+            {withoutFooter ? null : (
+              <div className={classNames(styles.spacer)} />
+            )}
           </div>
         )}
 
@@ -152,7 +157,9 @@ const SectionBody = React.memo(
           <div className="section-wrapper">
             <div className="section-wrapper-content" {...focusProps}>
               {children}
-              <div className={classNames(styles.spacer, "settings-mobile")} />
+              {withoutFooter ? null : (
+                <div className={classNames(styles.spacer, "settings-mobile")} />
+              )}
             </div>
           </div>
         ) : (

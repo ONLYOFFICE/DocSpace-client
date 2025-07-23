@@ -120,6 +120,8 @@ const ToolsSettings = ({
     const fetchTools = async () => {
       const tools = await getMCPTools(Number(roomId), DOCSPACE_MCP);
 
+      if (!tools) return;
+
       setMCPTools(new Map([[DOCSPACE_MCP, tools]]));
     };
 
@@ -136,7 +138,7 @@ const ToolsSettings = ({
       clickOutsideAction={toggleToolsSettings}
       directionY="both"
       directionX="right"
-      maxHeight={mobile ? undefined : 300}
+      maxHeight={mobile ? window.innerHeight - 64 : 300}
       manualWidth={mobile ? undefined : "300px"}
       isMobileView={mobile}
       usePortalBackdrop={mobile}

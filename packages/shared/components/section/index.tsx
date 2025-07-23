@@ -281,6 +281,7 @@ const Section = (props: SectionProps) => {
               getContextModel={getContextModel}
               isIndexEditingMode={isIndexEditingMode}
               pathname={pathname}
+              withoutFooter={withoutFooter}
             >
               {isSectionHeaderAvailable &&
               currentDeviceType === DeviceType.mobile ? (

@@ -72,6 +72,7 @@ export type SectionBodyProps = {
   getContextModel?: () => ContextMenuModel[];
   pathname?: string;
   isIndexEditingMode?: boolean;
+  withoutFooter?: boolean;
 };
 
 export type SectionContainerProps = {

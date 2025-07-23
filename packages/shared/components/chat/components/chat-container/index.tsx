@@ -39,6 +39,8 @@ const ChatContainer = ({ children }: { children: React.ReactNode }) => {
     const resizeObserver = new ResizeObserver((el) => {
       if (!containerRef.current || !el[0]) return;
 
+      console.log(el[0].contentRect.height);
+
       containerRef.current.style.height = `${window.innerHeight - el[0].contentRect.height - 40}px`;
     });
 

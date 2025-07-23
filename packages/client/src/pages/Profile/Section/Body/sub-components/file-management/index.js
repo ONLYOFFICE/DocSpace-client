@@ -32,7 +32,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { FolderType } from "@docspace/shared/enums";
+import { StartPageRoutes } from "@docspace/shared/enums";
 
 import StyledWrapper from "./styled-file-management";
 
@@ -60,6 +60,8 @@ const FileManagement = ({
   logoText,
   hideConfirmCancelOperation,
   setHideConfirmCancelOperation,
+  startPage,
+  setStartPage,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -97,24 +99,37 @@ const FileManagement = ({
     setOpenEditorInSameTab(!openEditorInSameTab);
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
-  const startPageOptions = [
-    {
-      label: t("Common:Rooms"),
-      key: FolderType.Rooms,
-      value: FolderType.Rooms,
-    },
-    {
-      label: t("Common:Documents"),
-      key: FolderType.USER,
-      value: FolderType.USER,
-    },
-    {
-      label: t("Common:Recent"),
-      key: FolderType.Recent,
-      value: FolderType.Recent,
-    },
-  ];
+  const startPageOptions = React.useMemo(
+    () => [
+      {
+        label: t("Common:Rooms"),
+        key: StartPageRoutes.Rooms,
+      },
+      {
+        label: t("Common:Documents"),
+        key: StartPageRoutes.Documents,
+      },
+      {
+        label: t("Common:Recent"),
+        key: StartPageRoutes.Recent,
+      },
+    ],
+    [t],
+  );
 
+  const getSelectedStartPage = React.useCallback(() => {
+    return (
+      startPageOptions.find((option) => option.key === startPage) ||
+      startPageOptions[0]
+    );
+  }, [startPageOptions, startPage]);
+
+  const onSelectStartPage = React.useCallback(
+    (option) => {
+      setStartPage(option.key);
+    },
+    [setStartPage],
+  );
   if (!ready) return <SettingsCommonSkeleton />;
 
   return (
@@ -125,7 +140,8 @@ const FileManagement = ({
         </Text>
         <ComboBox
           options={startPageOptions}
-          selectedOption={startPageOptions[0]}
+          selectedOption={getSelectedStartPage()}
+          onSelect={onSelectStartPage}
           scaled={false}
           scaledOptions
           displaySelectedOption
@@ -222,7 +238,7 @@ export default inject(
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
     } = filesSettingsStore;
-    const { logoText } = settingsStore;
+    const { logoText, startPage, setStartPage } = settingsStore;
 
     const { myFolderId, commonFolderId } = treeFoldersStore;
 
@@ -252,6 +268,8 @@ export default inject(
       logoText,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
+      startPage,
+      setStartPage,
     };
   },
 )(observer(FileManagement));

@@ -32,6 +32,7 @@ import Error404 from "@docspace/shared/components/errors/Error404";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
+import { StartPageRedirect } from "../pages/Home/StartPageRedirect";
 
 import { generalRoutes } from "./general";
 import { contanctsRoutes } from "./contacts";
@@ -68,7 +69,7 @@ const ClientRoutes = [
             index: true,
             element: (
               <PrivateRoute>
-                <Navigate to="/rooms/shared" replace />
+                <StartPageRedirect />
               </PrivateRoute>
             ),
           },

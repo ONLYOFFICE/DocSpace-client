@@ -146,8 +146,12 @@ const useFiles = ({
   React.useEffect(() => {
     if (isContactsPage || isSettingsPage) return;
 
-    if (location.pathname === "/") setIsLoading(true, true, true);
-    else setIsLoading(true, false, false);
+    if (location.pathname === "/") {
+      setIsLoading(true, true, true);
+      return;
+    }
+
+    setIsLoading(true, false, false);
 
     const categoryType = getCategoryType(location);
 

@@ -192,7 +192,13 @@ const TemplateAccessSettingsPanel = ({
 
   const onKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Esc" || e.key === "Escape") onClose();
-    if (e.key === "Backspace") onCloseAccessSettings?.();
+    if (
+      e.key === "Backspace" &&
+      e.target instanceof HTMLElement &&
+      e.target.nodeName !== "INPUT" &&
+      e.target.nodeName !== "TEXTAREA"
+    )
+      onCloseAccessSettings?.();
   };
 
   useEffect(() => {

@@ -83,26 +83,6 @@ const TrashRowDataComponent = (props) => {
         </StyledBadgesContainer>
       </TableCell>
 
-      {roomColumnIsEnabled ? (
-        <TableCell
-          style={
-            !roomColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            lastColumn === "Room" ? "no-extra-space" : "",
-          )}
-        >
-          <RoomCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-
       {authorTrashColumnIsEnabled ? (
         <TableCell
           style={

@@ -503,15 +503,6 @@ class FilesTableHeader extends React.Component {
         onClick: this.onFilter,
       },
       {
-        key: "Room",
-        title: t("Common:Room"),
-        enable: roomColumnIsEnabled,
-        resizable: true,
-        sortBy: SortByFieldName.Room,
-        // onClick: this.onFilter,
-        onChange: this.onColumnChange,
-      },
-      {
         key: "AuthorTrash",
         title: t("ByAuthor"),
         enable: authorTrashColumnIsEnabled,

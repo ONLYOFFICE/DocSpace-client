@@ -27,6 +27,7 @@
 import styled from "styled-components";
 
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 export const StyledRegister = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
@@ -34,7 +35,7 @@ export const StyledRegister = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 184;
+  z-index: ${zIndex.modal};
   width: 100%;
   height: 68px;
   padding: 1.5em;

@@ -27,6 +27,7 @@
  */
 
 @use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/z-index" as z;
 
 .loginContainer {
   user-select: none;
@@ -34,7 +35,7 @@
   flex-direction: column;
   align-items: center;
   max-width: 960px;
-  z-index: 0;
+  z-index: z.$base;
 
   margin-top: 56px;
   margin-bottom: 56px;

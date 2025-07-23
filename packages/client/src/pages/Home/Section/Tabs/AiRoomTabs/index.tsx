@@ -31,6 +31,7 @@ import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { SearchArea } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";
@@ -63,6 +64,11 @@ const AiRoomTabs = ({
     return <SectionSubmenuSkeleton style={{ marginBottom: 0 }} />;
 
   const onSelect = (tab: TTabItem) => {
+    if (tab.id === "knowledge") {
+      toastr.info("Work in progress");
+      return;
+    }
+
     setCurrentTab(tab.id as "chat" | "knowledge" | "result");
 
     const filesFilter = FilesFilter.getDefault();

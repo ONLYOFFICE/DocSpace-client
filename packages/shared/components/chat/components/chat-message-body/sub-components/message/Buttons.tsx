@@ -105,7 +105,13 @@ const Buttons = ({
           <ReactSVG src={CopyIconUrl} />
         </div>
         {isLast ? (
-          <div className={styles.buttonsBlockItem} title={t("RefreshMessage")}>
+          <div
+            className={styles.buttonsBlockItem}
+            title={t("RefreshMessage")}
+            onClick={() => {
+              toastr.info("Work in progress");
+            }}
+          >
             <ReactSVG src={RefreshIconUrl} />
           </div>
         ) : null}

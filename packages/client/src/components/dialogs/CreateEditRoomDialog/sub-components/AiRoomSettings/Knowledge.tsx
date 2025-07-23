@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
@@ -38,6 +39,8 @@ import { StyledParam } from "../Params/StyledParam";
 
 const KnowledgeSettings = () => {
   const { t } = useTranslation(["AIRoom", "Common", "Article"]);
+
+  const onClickAction = () => toastr.info("Work in progress");
 
   return (
     <StyledParam increaseGap>
@@ -71,6 +74,7 @@ const KnowledgeSettings = () => {
             scale
             filled
             filledStroke
+            onClick={onClickAction}
           />
           <Button
             size={ButtonSize.small}
@@ -80,6 +84,7 @@ const KnowledgeSettings = () => {
             })}
             scale
             filled
+            onClick={onClickAction}
           />
         </div>
       </div>

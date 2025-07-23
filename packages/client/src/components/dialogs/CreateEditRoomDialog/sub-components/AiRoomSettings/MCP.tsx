@@ -29,11 +29,14 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { StyledParam } from "../Params/StyledParam";
 
 const MCPSettings = () => {
   const { t } = useTranslation(["AIRoom", "Common"]);
+
+  const onClickAction = () => toastr.info("Work in progress");
 
   return (
     <StyledParam increaseGap>
@@ -59,7 +62,7 @@ const MCPSettings = () => {
               {t("Common:ProductName")}
             </Text>
           </div>
-          <SelectorAddButton />
+          <SelectorAddButton onClick={onClickAction} />
         </div>
       </div>
     </StyledParam>

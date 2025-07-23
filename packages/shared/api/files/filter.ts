@@ -182,7 +182,7 @@ class FilesFilter {
   location: FilterLocation | null = null;
 
   static getDefault(
-    options?: {
+    options: {
       pageCount?: number;
       total?: number;
       isRecentFolder?: boolean;

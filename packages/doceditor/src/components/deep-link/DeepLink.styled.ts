@@ -26,6 +26,7 @@
 
 import styled from "styled-components";
 import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 export const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
@@ -41,7 +42,7 @@ export const StyledDeepLink = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  z-index: 1;
+  z-index: ${zIndex.content};
 
   @media ${mobile} {
     width: calc(100% - 32px);
@@ -93,7 +94,7 @@ export const BgBlock = styled.div<{ bgPattern: string }>`
   background-size: cover;
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: ${zIndex.base};
 
   @media ${mobile} {
     background-image: none;

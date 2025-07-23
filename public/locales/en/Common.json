@@ -439,6 +439,7 @@
   "LocalDomain": "Local domains are not supported",
   "LocalFile": "Local file",
   "Location": "Location",
+  "LockedBy": "This file is locked by {{userName}}",
   "Login": "Login",
   "LoginButton": "Sign in",
   "LogoAbout": "Logo for the About page",

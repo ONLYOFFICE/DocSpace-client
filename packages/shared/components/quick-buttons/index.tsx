@@ -78,6 +78,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const fileExst = "fileExst" in item ? item.fileExst : undefined;
   const locked = "locked" in item ? item.locked : undefined;
+  const lockedBy = "lockedBy" in item ? item.lockedBy : undefined;
+  const canLock = "Lock" in item.security ? item.security.Lock : undefined;
 
   const isTile = viewAs === "tile";
   const isRow = viewAs === "row";
@@ -107,12 +109,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     tabletViewQuickButton;
 
   const isAvailableLockFile =
-    !isPublicRoom &&
-    !folderCategory &&
-    fileExst &&
-    displayBadges &&
-    "Lock" in item.security &&
-    item.security.Lock;
+    !isPublicRoom && !folderCategory && fileExst && displayBadges && canLock;
 
   const isAvailableDownloadFile =
     isPublicRoom && item.security?.Download && viewAs === "tile";
@@ -147,6 +144,20 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     </Text>
   );
 
+  const getLockTooltip = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {t("Common:LockedBy", { userName: lockedBy || "" })}
+    </Text>
+  );
+
+  const onIconLockClick = () => {
+    if (!canLock) {
+      return;
+    }
+
+    onClickLock && onClickLock();
+  };
+
   return (
     <div className="badges additional-badges badges__quickButtons">
       {!isIndexEditingMode ? (
@@ -171,22 +182,31 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             </>
           ) : null}
 
-          {(locked &&
-            (item.access === ShareAccessRights.Collaborator ||
-              item.access === ShareAccessRights.Editing)) ||
-          isAvailableLockFile ? (
-            <IconButton
-              iconNode={<IconLock />}
-              className="badge lock-file icons-group"
-              size={sizeQuickButton}
-              data-id={id}
-              data-locked={!!locked}
-              onClick={onClickLock}
-              color={colorLock}
-              isDisabled={isDisabled || !isAvailableLockFile}
-              hoverColor="accent"
-              title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
-            />
+          {locked ? (
+            <>
+              <IconButton
+                iconNode={<IconLock />}
+                className="badge lock-file icons-group"
+                size={sizeQuickButton}
+                data-id={id}
+                data-locked={!!locked}
+                onClick={onIconLockClick}
+                color={colorLock}
+                isDisabled={isDisabled || !isAvailableLockFile}
+                hoverColor="accent"
+                title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
+                data-tooltip-id={`lockTooltip${item.id}`}
+              />
+              {lockedBy && !canLock ? (
+                <Tooltip
+                  id={`lockTooltip${item.id}`}
+                  place="bottom"
+                  getContent={getLockTooltip}
+                  maxWidth="300px"
+                  openOnClick
+                />
+              ) : null}
+            </>
           ) : null}
 
           {isAvailableDownloadFile ? (

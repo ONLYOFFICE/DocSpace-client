@@ -26,17 +26,21 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Tabs } from "@docspace/shared/components/tabs";
 
 import { useTranslation } from "react-i18next";
-import { isMobile } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
+
+import { Tabs } from "@docspace/shared/components/tabs";
+
+import { isMobile } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
+
 import ResponseDetails from "./ResponseDetails";
 import RequestDetails from "./RequestDetails";
 
 const TabsWrapper = styled.div`
   .sticky {
-    z-index: 3;
+    z-index: ${zIndex.sticky};
 
     top: ${isMobile() ? "68px" : "0px"};
   }

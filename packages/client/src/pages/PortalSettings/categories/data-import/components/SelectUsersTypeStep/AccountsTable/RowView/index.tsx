@@ -40,7 +40,7 @@ import { Text } from "@docspace/shared/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import UsersRow from "./UsersRow";
 import {
   InjectedTypeSelectRowViewProps,
@@ -53,7 +53,7 @@ const StyledRowContainer = styled(RowContainer)`
   .table-group-menu {
     height: 61px;
     position: sticky;
-    z-index: 201;
+    z-index: ${zIndex.sticky};
     margin-inline-start: -16px;
     width: 100%;
 

@@ -33,6 +33,7 @@ import { mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+import { zIndex } from "@docspace/shared/themes";
 import { StyledUserTypeHeader } from "../../../styles/members";
 
 const MainStyles = styled.div`
@@ -42,7 +43,7 @@ const MainStyles = styled.div`
     height: 52px;
     width: calc(100% - 32px);
     padding: 0;
-    z-index: 1;
+    z-index: ${zIndex.content};
     background: ${(props) => props.theme.infoPanel.backgroundColor};
 
     @media ${mobile} {

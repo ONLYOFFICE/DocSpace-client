@@ -34,6 +34,7 @@ import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs } from "@docspace/shared/components/tabs";
 
 import { tablet } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import MainProfile from "./sub-components/main-profile";
@@ -57,7 +58,7 @@ const Wrapper = styled.div`
 
 const StyledTabs = styled(Tabs)`
   > .sticky {
-    z-index: 201;
+    z-index: ${zIndex.sticky};
   }
 `;
 

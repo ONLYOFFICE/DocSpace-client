@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-
+import { zIndex } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const LinksBlock = styled.div.attrs(injectDefaultTheme)`
@@ -137,7 +137,7 @@ export const StyledPublicRoomBarContainer = styled.div`
   top: ${ROOMS_ITEM_HEADER_HEIGHT};
   background: ${(props) => props.theme.backgroundColor};
   overflow: hidden;
-  z-index: 1;
+  z-index: ${zIndex.content};
 
   .public-room-bar {
     margin-top: 0;

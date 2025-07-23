@@ -32,6 +32,7 @@ import {
   desktop,
 } from "@docspace/shared/utils/device";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 import { showPreviewThreshold } from "../constants";
 
 export const SDKContainer = styled.div`
@@ -339,7 +340,7 @@ export const GetCodeButtonWrapper = styled.div`
   bottom: 0;
   margin-top: 32px;
   background-color: ${({ theme }) => theme.backgroundColor};
-  z-index: 1;
+  z-index: ${zIndex.content};
 
   @media ${mobile} {
     position: fixed;

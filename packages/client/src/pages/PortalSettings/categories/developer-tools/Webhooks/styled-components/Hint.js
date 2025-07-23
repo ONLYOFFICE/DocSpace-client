@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { zIndex } from "@docspace/shared/themes";
 
 export const Hint = styled.div`
   box-sizing: border-box;
@@ -37,13 +38,13 @@ export const Hint = styled.div`
   line-height: 16px;
 
   position: relative;
-  z-index: 3;
+  z-index: ${zIndex.floatingUI};
 
   ${(props) =>
     props.isTooltip &&
     css`
       position: absolute;
-      z-index: 2;
+      z-index: ${zIndex.floatingUI};
 
       width: calc(100% - 32px);
     `}

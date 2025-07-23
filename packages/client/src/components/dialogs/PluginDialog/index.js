@@ -35,13 +35,14 @@ import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledFullScreen = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
   top: 0;
   // doesn't require mirroring for RTL
   left: 0;
-  z-index: 500;
+  z-index: ${zIndex.modal};
   background: ${(props) => props.theme.backgroundColor};
 
   width: 100%;

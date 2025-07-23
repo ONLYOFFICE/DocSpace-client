@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
@@ -214,7 +214,7 @@ const StyledTableRow = styled(TableRow)`
     ${(props) =>
       props.showHotkeyBorder &&
       css`
-        z-index: 1;
+        z-index: ${zIndex.content};
         border-color: ${globalColors.lightSecondMain} !important;
       `}
   }

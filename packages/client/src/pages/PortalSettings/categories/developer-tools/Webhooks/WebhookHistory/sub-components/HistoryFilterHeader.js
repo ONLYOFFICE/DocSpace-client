@@ -34,6 +34,8 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
 
 import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
+
 import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";
 
@@ -76,7 +78,8 @@ const FilterButton = styled.div.attrs(injectDefaultTheme)`
   width: 32px;
   height: 32px;
 
-  z-index: ${(props) => (props.isGroupMenuVisible ? 199 : 201)};
+  z-index: ${(props) =>
+    props.isGroupMenuVisible ? zIndex.sticky : zIndex.floatingUI};
 
   border: ${(props) => props.theme.client.settings.webhooks.filterBorder};
   border-radius: 3px;
@@ -96,7 +99,7 @@ const FilterButton = styled.div.attrs(injectDefaultTheme)`
   }
 
   span {
-    z-index: 203;
+    z-index: ${zIndex.content};
     width: 8px;
     height: 8px;
     background-color: ${(props) =>

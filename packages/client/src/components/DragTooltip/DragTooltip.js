@@ -29,12 +29,13 @@ import styled, { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledTooltip = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
   display: none;
   padding: 8px;
-  z-index: 250;
+  z-index: ${zIndex.overlay};
   background: ${(props) => props.theme.filesDragTooltip.background};
   border-radius: 6px;
   font-size: 15px;

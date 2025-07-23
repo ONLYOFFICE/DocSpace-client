@@ -35,6 +35,7 @@ import {
   injectDefaultTheme,
   tablet,
 } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
@@ -85,7 +86,7 @@ const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
     css`
       position: absolute;
       width: calc(100% - 18px);
-      z-index: 1;
+      z-index: ${zIndex.content};
       gap: 4px;
 
       background-color: ${({ theme }) =>

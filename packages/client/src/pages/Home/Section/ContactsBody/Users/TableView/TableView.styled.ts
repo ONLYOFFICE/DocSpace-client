@@ -27,6 +27,7 @@ import styled, { css } from "styled-components";
 
 import { TableContainer, TableRow } from "@docspace/shared/components/table";
 import { ComboBox } from "@docspace/shared/components/combobox";
+import { zIndex } from "@docspace/shared/themes";
 
 const userNameCss = css`
   margin-inline-start: -24px;
@@ -254,6 +255,6 @@ export const StyledGroupsComboBox = styled(ComboBox)`
   }
 
   .dropdown {
-    z-index: 105;
+    z-index: ${zIndex.backdrop};
   }
 `;

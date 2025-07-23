@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/z-index" as z;
+
 .addPaymentMethod {
   padding-bottom: 21px;
   padding-top: 21px;
@@ -83,7 +85,7 @@
       }
       p,
       span {
-        z-index: 1;
+        z-index: z.$content;
       }
     }
 
@@ -96,7 +98,7 @@
         inset: 0;
         background: var(--warning-color);
         opacity: 0.2;
-        z-index: 0;
+        z-index: z.$base;
         pointer-events: none;
         border-radius: 6px;
       }
@@ -110,7 +112,7 @@
 
     a {
       color: var(--payment-text-color);
-      z-index: 1;
+      z-index: z.$content;
     }
 
     &.cardLinkDisabled {

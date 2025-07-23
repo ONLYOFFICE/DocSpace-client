@@ -29,7 +29,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { isMobileOnly, isMobile } from "react-device-detect";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledNav = styled.nav.attrs(injectDefaultTheme)`
@@ -43,7 +43,7 @@ const StyledNav = styled.nav.attrs(injectDefaultTheme)`
   top: 0;
   transition: width 0.3s ease-in-out;
   width: ${(props) => (props.opened ? "240px" : "0")};
-  z-index: 200;
+  z-index: ${zIndex.sticky};
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .version-box {

@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { mobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledWrapper = styled.div`
   height: ${(props) =>
@@ -39,7 +40,7 @@ const StyledWrapper = styled.div`
         ? "calc(var(--vh, 1vh) * 100)"
         : "100vh"};
   width: 100vw;
-  z-index: 0;
+  z-index: ${zIndex.base};
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
@@ -62,7 +63,7 @@ const BgBlock = styled.div`
   right: 0;
   left: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: ${zIndex.below};
 
   @media ${mobile} {
     background-image: none;

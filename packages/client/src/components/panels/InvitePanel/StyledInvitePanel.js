@@ -44,7 +44,7 @@ import {
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const fillAvailableWidth = css`
@@ -60,7 +60,7 @@ const StyledInvitePanel = styled.div`
     height: auto;
     width: auto;
     background: ${(props) => props.theme.infoPanel.blurColor};
-    z-index: 309;
+    z-index: ${zIndex.modal};
     position: fixed;
     inset: 0;
 

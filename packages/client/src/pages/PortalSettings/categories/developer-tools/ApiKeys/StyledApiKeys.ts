@@ -26,6 +26,7 @@
 
 import styled from "styled-components";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledApiKeys = styled.div`
   width: 100%;
@@ -56,7 +57,7 @@ const StyledApiKeys = styled.div`
 
 const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
-  z-index: 1;
+  z-index: ${zIndex.content};
   width: calc(100% - 32px);
   height: 73px;
   bottom: 0;

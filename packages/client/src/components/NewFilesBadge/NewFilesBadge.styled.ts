@@ -27,6 +27,7 @@
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 import { TPanelPosition } from "./NewFilesBadge.types";
 
@@ -45,7 +46,7 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
   border-radius: ${(props) => props.theme.newFilesPanel.borderRadius};
 
   box-shadow: ${(props) => props.theme.newFilesPanel.boxShadow};
-  z-index: 600;
+  z-index: ${zIndex.backdrop};
 
   box-sizing: border-box;
 

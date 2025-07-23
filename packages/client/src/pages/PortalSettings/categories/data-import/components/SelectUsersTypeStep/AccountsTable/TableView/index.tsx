@@ -26,7 +26,7 @@
 
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
@@ -56,7 +56,7 @@ const UserSelectTableContainer = styled(StyledTableContainer).attrs(
   .table-group-menu {
     height: 69px;
     position: sticky;
-    z-index: 201;
+    z-index: ${zIndex.sticky};
     width: calc(100% + 40px);
     margin-top: -33px;
     margin-inline-start: -20px;

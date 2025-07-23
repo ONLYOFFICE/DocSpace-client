@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-
+import { zIndex } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const strikethroughStyles = css`
@@ -42,7 +42,7 @@ const StyledHistorySubtitle = styled.div.attrs(injectDefaultTheme)`
   position: sticky;
   background: ${(props) => props.theme.infoPanel.backgroundColor};
   top: 80px;
-  z-index: 99;
+  z-index: ${zIndex.sticky};
 
   padding: 16px 0 12px;
   font-weight: 600;

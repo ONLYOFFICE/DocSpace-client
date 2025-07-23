@@ -35,6 +35,8 @@ import {
   mobile,
   commonInputStyles,
 } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
+
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 const fillAvailableWidth = css`
@@ -400,7 +402,7 @@ const StyledTemplateAccessSettingsFooter = styled.div`
   padding: 0px 16px;
   background-color: ${(props) => props.theme.backgroundColor};
   border-top: ${(props) => props.theme.selector.border};
-  z-index: 1;
+  z-index: ${zIndex.content};
 
   display: flex;
   align-items: center;

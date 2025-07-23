@@ -29,11 +29,12 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledMain = styled.main`
   height: ${(props) => props.mainHeight && `${props.mainHeight}px`};
   width: 100%;
-  z-index: 0;
+  z-index: ${zIndex.base};
   display: flex;
   flex-direction: column;
   box-sizing: border-box;

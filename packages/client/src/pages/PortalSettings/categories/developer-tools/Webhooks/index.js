@@ -36,6 +36,8 @@ import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
+import { zIndex } from "@docspace/shared/themes";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { EmptyServerErrorContainer } from "SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer";
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
@@ -55,7 +57,7 @@ const MainWrapper = styled.div`
 
 const ButtonSeating = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
-  z-index: 2;
+  z-index: ${zIndex.content};
   width: 100vw;
   height: 73px;
   bottom: 0;

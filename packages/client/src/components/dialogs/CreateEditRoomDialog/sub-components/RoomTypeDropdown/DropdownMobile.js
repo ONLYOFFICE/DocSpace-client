@@ -32,14 +32,14 @@ import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Portal } from "@docspace/shared/components/portal";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledDropdownMobile = styled.div.attrs(injectDefaultTheme)`
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
   position: fixed;
   bottom: 0;
-  z-index: 500;
+  z-index: ${zIndex.backdrop};
   padding-top: 6px;
   box-shadow: 0px -4px 60px ${globalColors.popupShadow};
   border-radius: 6px 6px 0px 0px;

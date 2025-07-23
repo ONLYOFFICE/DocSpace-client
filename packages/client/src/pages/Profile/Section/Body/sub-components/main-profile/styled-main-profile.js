@@ -26,6 +26,8 @@
 
 import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
+
 import { Text } from "@docspace/shared/components/text";
 
 export const getDropdownHoverRules = () => [
@@ -320,7 +322,7 @@ export const StyledInfo = styled.div`
         }
 
         .backdrop-active {
-          z-index: 203 !important;
+          z-index: ${zIndex.backdrop} !important;
         }
       }
 

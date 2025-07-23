@@ -32,10 +32,11 @@ import { mobile } from "@docspace/shared/utils";
 
 import { MainButtonMobile } from "@docspace/shared/components/main-button-mobile";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
-  z-index: 200;
+  z-index: ${zIndex.content};
 
   inset-inline-end: 24px;
   bottom: 24px;

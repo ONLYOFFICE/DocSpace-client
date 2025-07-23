@@ -40,6 +40,7 @@ import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { isPublicPreview } from "@docspace/shared/utils/common";
+import { zIndex } from "@docspace/shared/themes";
 
 import HeaderUnAuth from "./sub-components/header-unauth";
 import HeaderNav from "./sub-components/header-nav";
@@ -64,7 +65,7 @@ const StyledContainer = styled.header.attrs(injectDefaultTheme)`
             .profileMenuIcon,
             .navMenuHeaderUnAuth {
               position: absolute;
-              z-index: 160;
+              z-index: ${zIndex.sticky};
               top: 0;
               // top: ${({ isVisible }) => (isVisible ? "0" : "-48px")};
 

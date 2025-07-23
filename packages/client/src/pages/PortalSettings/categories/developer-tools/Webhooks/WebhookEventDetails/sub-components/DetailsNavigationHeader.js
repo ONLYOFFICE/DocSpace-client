@@ -32,6 +32,7 @@ import { retryWebhook } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { useNavigate, useParams, useLocation } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -40,13 +41,13 @@ import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import { tablet, mobile } from "@docspace/shared/utils";
-import { useTranslation } from "react-i18next";
+import { zIndex } from "@docspace/shared/themes";
 
 const HeaderContainer = styled.div`
   position: sticky;
   top: 0;
   background-color: ${(props) => props.theme.backgroundColor};
-  z-index: 310;
+  z-index: ${zIndex.sticky};
   display: flex;
   align-items: center;
   max-width: calc(100vw - 32px);

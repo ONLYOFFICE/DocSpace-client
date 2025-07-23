@@ -26,6 +26,7 @@
 
 import styled from "styled-components";
 import { mobile, tablet, TextUserSelect } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledUsersTitle = styled.div`
   min-height: 80px;
@@ -41,7 +42,7 @@ const StyledUsersTitle = styled.div`
   padding-block: 24px;
   padding-inline: 20px 0;
   background: ${(props) => props.theme.infoPanel.backgroundColor};
-  z-index: 100;
+  z-index: ${zIndex.sticky};
 
   @media ${tablet} {
     width: 440px;
@@ -132,7 +133,7 @@ const StyledUsersContent = styled.div`
       .backdrop-active {
         height: 100%;
         width: 100%;
-        z-index: 1000;
+        z-index: ${zIndex.backdrop};
       }
     }
 

@@ -28,7 +28,7 @@ import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import RoomType from "@docspace/shared/components/room-type";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
@@ -47,7 +47,7 @@ const StyledDropdownDesktop = styled.div.attrs(injectDefaultTheme)`
         props.theme.createEditRoomDialog.roomTypeDropdown.desktop.borderColor};
     margin-top: 4px;
     overflow: visible;
-    z-index: 400;
+    z-index: ${zIndex.backdrop};
     top: 0;
 
     inset-inline-start: 0;

@@ -37,6 +37,7 @@ import {
   mobileMore,
   tablet,
 } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   user-select: none;
@@ -44,7 +45,7 @@ const StyledContainer = styled.div`
   height: 100dvh;
 
   #customScrollBar {
-    z-index: 0;
+    z-index: ${zIndex.base};
     > .scroll-wrapper > .scroller > .scroll-body {
       -webkit-user-select: none;
     }

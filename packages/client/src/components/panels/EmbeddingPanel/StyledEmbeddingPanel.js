@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 
 const StyledBody = styled.div`
   padding-left: 16px;
@@ -115,7 +115,7 @@ const StyledBody = styled.div`
 
   .embedding-panel_copy-icon {
     position: absolute;
-    z-index: 1;
+    z-index: ${zIndex.content};
     margin: 8px;
     inset-inline-end: 32px;
   }

@@ -27,11 +27,12 @@
  */
 
 @use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/_z-index" as z;
 
 .indicatorLoader {
   :global(#ipl-progress-indicator) {
     position: fixed;
-    z-index: 390;
+    z-index: z.$overlay;
     top: 0;
     inset-inline-start: -6px;
     width: 0;

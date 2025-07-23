@@ -30,7 +30,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { tablet } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import ProfileActions from "./profile-actions";
 
 const StyledNav = styled.nav`
@@ -44,7 +44,7 @@ const StyledNav = styled.nav`
 
   inset-inline-end: 0;
   height: 48px;
-  z-index: 180 !important;
+  z-index: ${zIndex.sticky} !important;
 
   & > div {
     margin: 0 16px;
@@ -59,7 +59,7 @@ const StyledNav = styled.nav`
   .icon-profile-menu {
     cursor: pointer;
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-    z-index: 300;
+    z-index: ${zIndex.floatingUI};
   }
 `;
 const HeaderNav = ({

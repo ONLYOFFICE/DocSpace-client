@@ -33,7 +33,7 @@ import { Button } from "@docspace/shared/components/button";
 // import { toastr } from "@docspace/shared/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
@@ -95,7 +95,7 @@ const MainContainer = styled.div`
     margin-bottom: 24px;
     .table-container_header {
       position: absolute;
-      z-index: 1 !important;
+      z-index: ${zIndex.content} !important;
     }
 
     .history-row-container {

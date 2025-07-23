@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
@@ -89,7 +89,7 @@ const StyledTile = styled.div`
 
   .p-contextmenu {
     @media ${mobile} {
-      z-index: 2000 !important;
+      z-index: ${zIndex.backdrop} !important;
       height: auto;
       position: fixed;
       width: 100%;
@@ -125,7 +125,7 @@ const StyledFileTileTop = styled.div`
       width: 100%;
       object-fit: cover;
       border-radius: 6px 6px 0 0;
-      z-index: 0;
+      z-index: ${zIndex.base};
     }
   }
 

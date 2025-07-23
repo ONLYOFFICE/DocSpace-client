@@ -52,7 +52,7 @@ import { useTranslation } from "react-i18next";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 
 import { retryWebhooks } from "@docspace/shared/api/settings";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
@@ -61,7 +61,7 @@ const HeaderContainer = styled.div.attrs(injectDefaultTheme)`
   position: sticky;
   top: 0;
   background-color: ${(props) => props.theme.backgroundColor};
-  z-index: 201;
+  z-index: ${zIndex.sticky};
   display: flex;
   align-items: center;
   width: 100%;

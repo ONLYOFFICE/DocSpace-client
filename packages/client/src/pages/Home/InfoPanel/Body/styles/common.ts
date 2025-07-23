@@ -32,6 +32,7 @@ import {
   desktop,
   TextUserSelect,
 } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledOverflowText = css`
   white-space: pre-wrap;
@@ -72,7 +73,7 @@ const StyledInfoPanelBody = styled.div`
 const StyledTitle = styled.div<{ withBottomBorder: boolean }>`
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: ${zIndex.sticky};
   padding-block: 24px;
   padding-inline: 20px 0;
   margin-inline-start: -20px;
@@ -202,7 +203,7 @@ const StyledSearchContainer = styled.div`
   padding: 0 16px;
   border-radius: 0 0 6px 6px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
-  z-index: 101;
+  z-index: ${zIndex.floatingUI};
   box-shadow: ${({ theme }) => theme.infoPanel.search.boxShadow};
 
   @media ${tablet} {

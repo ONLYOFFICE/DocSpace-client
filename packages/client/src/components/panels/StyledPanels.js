@@ -32,7 +32,7 @@ import {
   mobile,
   tablet,
 } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors, zIndex } from "@docspace/shared/themes";
 
 const PanelStyles = css`
   .panel_combo-box {
@@ -62,7 +62,7 @@ const PanelStyles = css`
 `;
 
 const StyledAsidePanel = styled.div.attrs(injectDefaultTheme)`
-  z-index: 310;
+  z-index: ${zIndex.modal};
 
   .sharing_panel-header {
     width: 100%;
@@ -393,7 +393,7 @@ const StyledModalRowContainer = styled.div.attrs(injectDefaultTheme)`
 
   .embedding-panel_copy-icon {
     position: absolute;
-    z-index: 1;
+    z-index: ${zIndex.content};
     margin: 8px;
     inset-inline-end: 0;
   }
@@ -430,7 +430,7 @@ const StyledModalRowContainer = styled.div.attrs(injectDefaultTheme)`
 
   .embedding-panel_copy-icon {
     position: absolute;
-    z-index: 1;
+    z-index: ${zIndex.content};
     margin: 8px;
     inset-inline-end: 0;
   }

@@ -37,11 +37,12 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 import { Portal } from "@docspace/shared/components/portal";
+import { zIndex } from "@docspace/shared/themes";
 
 const StyledWrapper = styled.div``;
 
 const StyledDropDown = styled(DropDown)`
-  z-index: 500 !important;
+  z-index: ${zIndex.backdrop} !important;
 
   top: ${(props) =>
     props.isBannerVisible && props.withPortal ? "134px" : "54px"} !important;
@@ -78,7 +79,7 @@ const StyledControlContainer = styled.div.attrs(injectDefaultTheme)`
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 290;
+  z-index: ${zIndex.content};
 
   @media ${mobile} {
     display: flex;

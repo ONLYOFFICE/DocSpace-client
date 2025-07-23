@@ -26,6 +26,7 @@
 
 import styled from "styled-components";
 import { injectDefaultTheme } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 export const TemplateAccess = styled.div.attrs(injectDefaultTheme)`
   .template-access_description {
@@ -52,17 +53,17 @@ export const TemplateAccess = styled.div.attrs(injectDefaultTheme)`
 
       .template-access_avatar:not(:first-child) {
         margin-inline-start: -8px;
-        z-index: 2;
+        z-index: ${zIndex.content};
       }
 
       .template-access_avatar:last-child {
-        z-index: 1;
+        z-index: ${zIndex.base};
       }
 
       .template-access_avatar {
         border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
         border-radius: 50%;
-        z-index: 3;
+        z-index: ${zIndex.sticky};
 
         min-width: 32px;
       }

@@ -192,7 +192,9 @@ const ArticleBodyContent = (props) => {
       const withTimer = isAccountsClick
         ? window.location.pathname.includes("accounts") &&
           !window.location.pathname.includes("groups")
-        : !!selectedFolderId;
+        : window.location.pathname.includes("chat")
+          ? false
+          : !!selectedFolderId;
 
       if (isAccountsClick) {
         clearFiles();

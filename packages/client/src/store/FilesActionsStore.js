@@ -2905,6 +2905,10 @@ class FilesActionStore {
       filter.searchArea = RoomSearchArea.Templates;
     }
 
+    if (categoryType === CategoryType.Chat) {
+      this.clientLoadingStore.setIsSectionBodyLoading(true, false);
+    }
+
     window.DocSpace.navigate(
       `${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`,
       {

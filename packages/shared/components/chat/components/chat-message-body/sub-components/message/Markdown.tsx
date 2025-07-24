@@ -65,7 +65,7 @@ const MarkdownField = ({ chatMessage, propLanguage }: MarkdownFieldProps) => {
                 lineHeight="20px"
                 fontWeight={400}
                 className={styles.chatMessageTextColor}
-                style={{ whiteSpace: "pre-line" }}
+                style={{ whiteSpace: "pre-line", padding: "8px 0" }}
               >
                 {children as React.ReactNode}
               </Text>

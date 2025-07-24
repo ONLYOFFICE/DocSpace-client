@@ -70,7 +70,10 @@ const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
               />
 
               <div className={styles.filesListItemInfo}>
-                <div className={styles.filesListItemInfoText}>
+                <div
+                  className={styles.filesListItemInfoText}
+                  style={{ maxWidth: "100%" }}
+                >
                   <Text
                     fontSize="12px"
                     lineHeight="16px"

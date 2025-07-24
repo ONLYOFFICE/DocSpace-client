@@ -579,7 +579,7 @@ const SubMenu = (props: SubMenuProps) => {
       return 36;
     });
 
-    const height = rowHeights.reduce((a, b) => a + b);
+    const height = rowHeights.reduce((a, b) => a + b, 0);
     const viewport = DomHelpers.getViewport();
     const paddingList = 12;
     const marginsList = 32;

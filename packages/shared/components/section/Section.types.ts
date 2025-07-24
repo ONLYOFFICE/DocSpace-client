@@ -85,7 +85,6 @@ export type SectionContainerProps = {
 export type SectionFilterProps = {
   children: React.ReactNode;
   className?: string;
-  viewAs?: TViewAs;
   withTabs?: boolean;
 };
 

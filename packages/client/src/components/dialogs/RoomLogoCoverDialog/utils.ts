@@ -24,42 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.comboBox {
-  width: 41px !important;
-  height: 32px !important;
-  box-sizing: border-box !important;
-  padding: 0 !important;
+/**
+ * Fixes SVG icons that have clip-path issues by removing clip-path attributes
+ * and corresponding defs sections that can cause visual clipping when scaled
+ *
+ * @param svgData - Raw SVG string data
+ * @returns Processed SVG string with clip-path issues fixed
+ */
+export const fixSvgClipPath = (svgData: string): string => {
+  if (!svgData) return svgData;
 
-  :global {
-    .combo-button {
-      padding: 7px !important;
-    }
-
-    .combo-button_selected-icon-container {
-      margin-inline-end: 0;
-    }
-
-    .combo-buttons_arrow-icon {
-      margin: 0;
-    }
+  if (svgData.includes('clip-path="url(#')) {
+    let processed = svgData.replace(/clip-path="[^"]*"/gi, "");
+    processed = processed.replace(/<defs>.*?<\/defs>/gi, "");
+    return processed;
   }
-}
 
-.withoutBorder {
-  :global {
-    .combo-button {
-      border-width: 0;
-      background: transparent;
-    }
-  }
-}
-
-.withBorder {
-  :global {
-    .combo-button {
-      &:hover {
-        border-color: var(--language-combo-hover-border);
-      }
-    }
-  }
-}
+  return svgData;
+};

@@ -24,31 +24,80 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { PropsWithChildren, use } from "react";
-import { ThemeContext } from "styled-components";
+import styled from "styled-components";
 
-import { StyledThemeComboButton } from "./Combobox.styled";
-import type { TComboButtonThemeProps } from "./ComboBox.types";
+const StyledBodyContent = styled.div`
+  .api-key_name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 16px;
+  }
 
-const ComboButtonTheme = ({
-  ref,
-  ...props
-}: PropsWithChildren<TComboButtonThemeProps> & {
-  ref?: React.RefObject<HTMLDivElement>;
-}) => {
-  const defaultTheme = use(ThemeContext);
+  .api-key_name-body-container {
+    display: flex;
+    gap: 4px;
+    margin-top: 16px;
+  }
 
-  const currentColorScheme = defaultTheme?.currentColorScheme;
+  .api-key_lifetime {
+    display: flex;
+  }
 
-  return (
-    <StyledThemeComboButton
-      {...props}
-      ref={ref}
-      $currentColorScheme={currentColorScheme}
-    />
-  );
-};
+  .api-key_toggle {
+    margin-inline-start: auto;
+    margin-inline-end: 28px;
+  }
 
-ComboButtonTheme.displayName = "ComboButtonTheme";
+  .api-key_lifetime-description {
+    color: ${(props) => props.theme.text.disableColor};
+  }
 
-export default ComboButtonTheme;
+  .api-key_lifetime-input-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .api-key_lifetime-input {
+    max-width: 100px;
+  }
+
+  .sticky-indent {
+    display: none;
+  }
+
+  .api-key_permission-tab {
+    width: 100%;
+  }
+
+  .api-key_permission-container {
+    display: grid;
+    grid-template-columns: 1fr minmax(50px, auto) minmax(50px, auto);
+    gap: 8px 0;
+  }
+
+  .separator {
+    padding: 15px 0px 9px;
+    margin-bottom: 6px;
+    border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
+  }
+
+  .api-key_permission-container-text {
+    display: flex;
+    justify-content: center;
+  }
+
+  .api-key_permission-checkbox {
+    justify-content: center;
+    margin-left: 12px;
+
+    cursor: pointer !important;
+  }
+
+  .api-key_permission-row {
+    margin-bottom: 8px;
+  }
+`;
+
+export { StyledBodyContent };

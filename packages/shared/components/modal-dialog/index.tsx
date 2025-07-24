@@ -128,6 +128,7 @@ const ModalDialog = ({
         e.key === "Backspace" &&
         e.target instanceof HTMLElement &&
         e.target.nodeName !== "INPUT" &&
+        e.target.nodeName !== "TEXTAREA" &&
         visible
       ) {
         onBackClick?.();

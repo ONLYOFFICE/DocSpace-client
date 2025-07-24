@@ -66,7 +66,7 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
 
   const { chats, isLoading, currentChat, fetchChat, deleteChat } =
     useChatStore();
-  const { fetchMessages } = useMessageStore();
+  const { fetchMessages, startNewChat } = useMessageStore();
 
   const toggleOpen = () => {
     setIsOpen((value) => !value);
@@ -84,9 +84,14 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
     setIsRenameOpen((value) => !value);
   }, []);
 
-  const onDeleteAction = React.useCallback(() => {
-    deleteChat(hoveredItem);
-  }, [hoveredItem, deleteChat]);
+  const onDeleteAction = React.useCallback(async () => {
+    await deleteChat(hoveredItem);
+    if (hoveredItem === currentChat?.id) {
+      startNewChat();
+    }
+    setIsOpen(false);
+    setHoveredItem("");
+  }, [hoveredItem, deleteChat, currentChat?.id, startNewChat]);
 
   const onSaveToFileAction = React.useCallback(async () => {
     const res = await exportChat(hoveredItem);

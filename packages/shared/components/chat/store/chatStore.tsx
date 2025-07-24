@@ -116,6 +116,7 @@ export default class ChatStore {
 
     runInAction(() => {
       this.chats = this.chats.filter((chat) => chat.id !== id);
+
       this.startIndex -= 1;
       this.totalChats -= 1;
     });

@@ -29,6 +29,7 @@ import { useParams } from "react-router";
 
 import Chat from "@docspace/shared/components/chat";
 import { TGetIcon } from "@docspace/shared/selectors/utils/types";
+import { availableList, availableListName } from "@docspace/shared/api/ai";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
@@ -47,12 +48,18 @@ const ChatComponent = ({
 
   if (!room || !chatSettings) return null;
 
+  const modelNameIdx = availableList.findIndex((item) =>
+    chatSettings.modelId.includes(item),
+  );
+
+  const modelName = availableListName[modelNameIdx];
+
   return (
     <Chat
       userAvatar={userAvatar}
       roomId={room}
       getIcon={getIcon}
-      selectedModel={chatSettings!.modelId}
+      selectedModel={modelName ?? chatSettings!.modelId}
       isLoading={isLoading}
     />
   );

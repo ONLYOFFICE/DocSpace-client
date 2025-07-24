@@ -903,7 +903,6 @@ class ContextOptionsStore {
   };
 
   onClickEditRoom = (item) => {
-    console.log("item", item);
     const event = new Event(Events.ROOM_EDIT);
     event.item = item;
     window.dispatchEvent(event);

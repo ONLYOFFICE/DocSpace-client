@@ -65,8 +65,6 @@ const EditRoomDialog = ({
     ...fetchedRoomParams,
   });
 
-  console.log(fetchedRoomParams);
-
   const prevRoomParams = useRef(
     Object.freeze({
       ...roomParams,

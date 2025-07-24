@@ -160,7 +160,7 @@ const ModelSettings = ({ roomParams, setRoomParams }: ModelSettingsProps) => {
     return models.map((model) => ({
       key: model.modelId,
       value: model.modelId,
-      label: model.modelId,
+      label: model.modelName,
     }));
   }, [models]);
 
@@ -169,7 +169,7 @@ const ModelSettings = ({ roomParams, setRoomParams }: ModelSettingsProps) => {
       ? {
           key: selectedModel.modelId,
           value: selectedModel.modelId,
-          label: selectedModel.modelId,
+          label: selectedModel.modelName,
         }
       : {
           key: "empty-selected-option",

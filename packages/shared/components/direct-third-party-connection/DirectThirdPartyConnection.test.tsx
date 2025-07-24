@@ -41,16 +41,16 @@ import {
   mockFilesSelectorSettings,
 } from "./mockData";
 
-jest.mock("@docspace/shared/api/files", () => ({
+jest.mock("../../api/files", () => ({
   saveSettingsThirdParty: jest.fn().mockResolvedValue({}),
 }));
 
-jest.mock("@docspace/shared/utils/common", () => ({
+jest.mock("../../utils/common", () => ({
   getOAuthToken: jest.fn().mockResolvedValue("mock-oauth-token"),
   getIconPathByFolderType: jest.fn().mockReturnValue("folder-icon-path"),
 }));
 
-jest.mock("@docspace/shared/components/toast", () => ({
+jest.mock("../toast", () => ({
   toastr: {
     error: jest.fn(),
     success: jest.fn(),
@@ -59,13 +59,7 @@ jest.mock("@docspace/shared/components/toast", () => ({
   },
 }));
 
-jest.mock("@docspace/shared/utils/image-helpers", () => ({
-  iconSize32: {
-    get: jest.fn().mockReturnValue("icon-url"),
-  },
-}));
-
-jest.mock("@docspace/shared/components/files-selector-input", () => ({
+jest.mock("../files-selector-input", () => ({
   __esModule: true,
   FilesSelectorInput: ({
     isDisabled,

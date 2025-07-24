@@ -2642,3 +2642,11 @@
   --combobox-children-button-default-disabled-color: #{$gray-dark};
   --combobox-children-button-selected-color: #{$white};
 }
+
+.light {
+  --access-right-select-description-color: #{$gray};
+}
+
+.dark {
+  --access-right-select-description-color: #{$gray-dark};
+}

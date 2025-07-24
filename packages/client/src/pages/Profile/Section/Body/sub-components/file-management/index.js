@@ -31,10 +31,9 @@ import { useTranslation } from "react-i18next";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { StartPageRoutes } from "@docspace/shared/enums";
 
 import StyledWrapper from "./styled-file-management";
+import { StartPageSetting } from "./sub-components/StartPageSetting";
 
 const FileManagement = ({
   storeOriginalFiles,
@@ -60,8 +59,6 @@ const FileManagement = ({
   logoText,
   hideConfirmCancelOperation,
   setHideConfirmCancelOperation,
-  startPage,
-  setStartPage,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -99,54 +96,11 @@ const FileManagement = ({
     setOpenEditorInSameTab(!openEditorInSameTab);
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
-  const startPageOptions = React.useMemo(
-    () => [
-      {
-        label: t("Common:Rooms"),
-        key: StartPageRoutes.Rooms,
-      },
-      {
-        label: t("Common:Documents"),
-        key: StartPageRoutes.Documents,
-      },
-      {
-        label: t("Common:Recent"),
-        key: StartPageRoutes.Recent,
-      },
-    ],
-    [t],
-  );
-
-  const getSelectedStartPage = React.useCallback(() => {
-    return (
-      startPageOptions.find((option) => option.key === startPage) ||
-      startPageOptions[0]
-    );
-  }, [startPageOptions, startPage]);
-
-  const onSelectStartPage = React.useCallback(
-    (option) => {
-      setStartPage(option.key);
-    },
-    [setStartPage],
-  );
   if (!ready) return <SettingsCommonSkeleton />;
 
   return (
     <StyledWrapper showTitle={showTitle} hideAdminSettings={!showAdminSettings}>
-      <div className="start-page-setting">
-        <Text lineHeight="20px" fontWeight={600}>
-          {t("FilesSettings:StartPageSettingTitle")}
-        </Text>
-        <ComboBox
-          options={startPageOptions}
-          selectedOption={getSelectedStartPage()}
-          onSelect={onSelectStartPage}
-          scaled={false}
-          scaledOptions
-          displaySelectedOption
-        />
-      </div>
+      <StartPageSetting />
       <div className="settings-section">
         <div className="toggle-btn-wrapper">
           <ToggleButton
@@ -238,7 +192,7 @@ export default inject(
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
     } = filesSettingsStore;
-    const { logoText, startPage, setStartPage } = settingsStore;
+    const { logoText } = settingsStore;
 
     const { myFolderId, commonFolderId } = treeFoldersStore;
 
@@ -268,8 +222,6 @@ export default inject(
       logoText,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
-      startPage,
-      setStartPage,
     };
   },
 )(observer(FileManagement));

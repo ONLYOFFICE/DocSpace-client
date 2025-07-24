@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
-import CheckReactSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg?url";
 
 import React from "react";
 import { ReactSVG } from "react-svg";
@@ -158,7 +157,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
       <IconButton
         size={12}
         className={styles.closeIcon}
-        onClick={() => onClose && onClose()}
+        onClick={onClose}
         iconName={actionIcon || CrossReactSvg}
       />
     </div>

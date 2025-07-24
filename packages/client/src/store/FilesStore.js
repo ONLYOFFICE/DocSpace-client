@@ -3484,6 +3484,7 @@ class FilesStore {
         formFillingStatus,
         customFilterEnabled,
         customFilterEnabledBy,
+        lockedBy,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3599,6 +3600,7 @@ class FilesStore {
         isFolder,
         logo,
         locked,
+        lockedBy,
         new: item.new,
         mute,
         parentId,

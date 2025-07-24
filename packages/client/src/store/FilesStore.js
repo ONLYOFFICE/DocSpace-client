@@ -650,7 +650,9 @@ class FilesStore {
 
       api.files
         .getFolderInfo(folder.id)
-        .then((f) => {
+        .then((response) => {
+          const f = { isFolder: true, ...response };
+
           console.log("[WS] update folder", f.id, f.title);
 
           if (this.selection?.length) {
@@ -3518,7 +3520,7 @@ class FilesStore {
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
-      let isFolder = false;
+      let isFolder = item.isFolder ?? false;
       this.folders.forEach((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
       });

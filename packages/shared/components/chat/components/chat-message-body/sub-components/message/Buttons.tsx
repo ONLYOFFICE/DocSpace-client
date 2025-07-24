@@ -25,7 +25,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import copy from "copy-to-clipboard";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
 import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
@@ -41,6 +41,7 @@ import { TGetIcon } from "../../../../../../selectors/utils/types";
 import { TBreadCrumb } from "../../../../../selector/Selector.types";
 
 import { toastr } from "../../../../../toast";
+import { Link, LinkType, LinkTarget } from "../../../../../link";
 
 import { useMessageStore } from "../../../../store/messageStore";
 
@@ -89,6 +90,26 @@ const Buttons = ({
 
     if (isChecked) {
       window.open(exportResult?.webUrl, "_blank");
+    } else {
+      const toastMsg = (
+        <Trans
+          ns="Common"
+          i18nKey="MessageExported"
+          values={{ fileName }}
+          t={t}
+          components={{
+            1: (
+              <Link
+                type={LinkType.page}
+                target={LinkTarget.blank}
+                href={exportResult?.webUrl}
+              />
+            ),
+          }}
+        />
+      );
+
+      toastr.success(toastMsg);
     }
 
     setShowFolderSelector(false);

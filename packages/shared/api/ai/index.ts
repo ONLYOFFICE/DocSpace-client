@@ -267,10 +267,10 @@ export const changeMCPTools = async (
 
 export const exportChat = async (chatId: string) => {
   try {
-    await request({
+    return (await request({
       method: "POST",
       url: `${baseUrl}/chats/${chatId}/messages/export`,
-    });
+    })) as TFile;
   } catch (e) {
     console.log(e);
   }

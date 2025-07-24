@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -42,8 +42,10 @@ import { exportChat } from "../../../../../api/ai";
 import { DropDown } from "../../../../drop-down";
 import { DropDownItem } from "../../../../drop-down-item";
 import { IconButton } from "../../../../icon-button";
+import { toastr } from "../../../../toast";
 import { ContextMenu, ContextMenuRefType } from "../../../../context-menu";
 import { Text } from "../../../../text";
+import { Link, LinkType, LinkTarget } from "../../../../link";
 
 import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
@@ -87,8 +89,30 @@ const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
   }, [hoveredItem, deleteChat]);
 
   const onSaveToFileAction = React.useCallback(async () => {
-    await exportChat(hoveredItem);
-  }, [hoveredItem]);
+    const res = await exportChat(hoveredItem);
+
+    const title = chats.find((chat) => chat.id === hoveredItem)?.title;
+    const toastMsg = (
+      <Trans
+        ns="Common"
+        i18nKey="ChatExported"
+        t={t}
+        values={{ fileName: res?.title, title }}
+        components={{
+          1: <b />,
+          2: (
+            <Link
+              type={LinkType.page}
+              target={LinkTarget.blank}
+              href={res?.webUrl}
+            />
+          ),
+        }}
+      />
+    );
+
+    toastr.success(toastMsg);
+  }, [hoveredItem, chats, t]);
 
   const model = React.useMemo(() => {
     return [

@@ -52,8 +52,6 @@ const ToolCall = ({ content }: { content: TContent }) => {
   const result = (content.result?.content as Record<string, unknown>[])?.[0]
     ?.text;
 
-  console.log(result);
-
   return (
     <div className={styles.toolCall}>
       <div

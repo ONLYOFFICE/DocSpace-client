@@ -1,4 +1,5 @@
 @use "variables/devices";
+@forward "common-icons-style";
 
 @mixin no-user-select {
   -webkit-user-select: none;

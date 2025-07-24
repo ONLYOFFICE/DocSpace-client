@@ -64,7 +64,7 @@ const Message = ({
       >
         <Avatar
           size={AvatarSize.min}
-          source={currentChat?.createdBy.avatarSmall ?? userAvatar}
+          source={currentChat?.createdBy.avatarOriginal ?? userAvatar}
           role={AvatarRole.user}
           noClick
           isNotIcon

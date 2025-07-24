@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Verificați lista de utilizatori neimportați pentru a le importa în {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nu aveți utilizatori cu adrese de e-mail. Treceți la etapa următoare pentru a le adăuga.",
   "AddTrustedDomain": "Adăugare domeniu de încredere",
+  "AdManagement": "Gestionare anunțuri",
+  "AdManagementDescription": "Alegeți dacă doriți afișarea anunțurilor banner în {{productName}}.",
   "Admins": "Administratori",
   "AdminsMessage": "Setări mesagerie de administrator",
   "AdminsMessageMobileDescription": "Setări mesagerie de administrator este o modalitate de a contacta administratorul de portal.",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Doriți să anulați importul de date?",
   "WantToCancelUpload": "Doriți să anulați încărcarea?",
   "WantToContinue": "Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?",
+  "WhiteLabelSubtitle": "Introduceţi numele companiei dvs, încărcați sigla şi particularizați stilul pentru a se potrivi cu brandingul dvs.",
   "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare."
 }

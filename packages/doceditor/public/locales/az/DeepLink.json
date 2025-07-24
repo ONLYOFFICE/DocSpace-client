@@ -3,5 +3,7 @@
   "OpenInApp": "Tətbiqdə açın",
   "OpeningDocument": "Sənədin açılması",
   "RememberChoice": "Növbəti dəfə sənədləri açanda seçimi yadda saxlayın",
-  "StayInBrowser": "Brauzerdə qalın"
+  "StayInBrowser": "Brauzerdə qalın",
+  "DeepLinkOnlyAppText": "Sənədi yalnız mobil proqramda aça bilərsiniz",
+  "DownloadApp": "Tətbiqi yükləyin"
 }

@@ -3,7 +3,7 @@
   "content": "Link successfully edited and copied",
   "content_en_sha1_hash": "cb5242ae321d8a7d77464290445a8fc5c67d8d3a",
   "created_at": "2025-05-19T21:30:55.781Z",
-  "updated_at": "2025-05-26T07:57:32.347Z",
+  "updated_at": "2025-07-10T11:11:06.843Z",
   "comment": {
     "text": "The translation key \"LinkEditedSuccessfully\" is used to display a success message when editing a link is successfully completed in the Edit Link Panel. This message appears after clicking the \"Edit\" button and copying the shared link. Translators should provide a descriptive phrase that reflects this action's completion.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 170,
-      "context": "setExternalLink(response);\n setLinkParams({ link: response, roomId, isPublic, isFormRoom });\n \n if (isEdit) {\n copyShareLink(linkValue);\n // toastr.success(t(\"Files:LinkEditedSuccessfully\"));\n } else {\n copyShareLink(response?.sharedTo?.shareLink);\n \n // toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n }",
+      "line_number": 172,
+      "context": "setExternalLink(response, searchParams, setSearchParams, isCustomRoom);\n setLinkParams({ link: response, roomId, isPublic, isFormRoom });\n \n if (isEdit) {\n copyShareLink(linkValue);\n // toastr.success(t(\"Files:LinkEditedSuccessfully\"));\n } else {\n copyShareLink(response?.sharedTo?.shareLink);\n \n // toastr.success(t(\"Files:LinkSuccessfullyCreatedAndCopied\"));\n }",
       "module": "/packages/client"
     }
   ],
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Link successfully edited and copied' implies a process. While the Spanish 'El enlace se ha editado y copiado correctamente' is technically correct, it lacks the implied sequential nature. A more accurate translation would emphasize the completion of both actions.",
+          "description": "While grammatically correct, the translation 'El enlace se ha editado y copiado correctamente' is a bit literal and could be improved for a more natural Spanish flow. A more common phrasing would imply that the link was both edited and successfully copied.",
           "suggestion": "El enlace se editó y copió correctamente"
         }
       ],
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සබැඳිය සංස්කරණය වී පිටපත් විය' while literally translating to 'Link edited and copied', doesn't fully capture the nuance of 'Link successfully edited and copied'. The word 'සංස්කරණය' (sanskaranya) can imply an editing process that might not always be a success. It lacks the sense of successful completion.",
-          "suggestion": "Consider a translation that conveys success, such as 'සබැඳිය සාර්ථකව සංස්කරණය වී පිටපත් විය' (sabandiya sartakava sanskaranya vi pitakatha viya) which translates to 'Link successfully edited and copied'."
+          "description": "The translation 'සබැඳිය සංස්කරණය වී පිටපත් විය' is a literal translation that doesn't quite convey the natural English phrasing 'Link successfully edited and copied.' It sounds slightly awkward in Sinhala.",
+          "suggestion": "Consider a more natural phrasing like 'සබැඳිය සාර්ථකව සංස්කරණය කර පිටපත් කරන ලදි' (Sabandiya saathakava sanskarannya kara pitakarthana ladi) or 'සබැඳිය සංස්කරණය කර, පිටපත් කරන ලදුව' (Sabandiya sanskaranya kara, pitakarthana kaladuwa)."
         }
       ],
       "approved_at": null
@@ -183,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Линк' is a transliteration of 'Link' and while understandable, a more native Serbian word for 'Link' would improve readability.",
-          "suggestion": "Veza (Веза)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

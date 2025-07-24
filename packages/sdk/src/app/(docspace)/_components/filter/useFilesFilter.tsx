@@ -163,31 +163,31 @@ export default function useFilesFilter({
         id: "filter_type-folders",
         key: FilterType.FoldersOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Folders").toLowerCase(),
+        label: t("Common:Folders"),
       },
       {
         id: "filter_type-all-files",
         key: FilterType.FilesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Files").toLowerCase(),
+        label: t("Common:Files"),
       },
       {
         id: "filter_type-documents",
         key: FilterType.DocumentsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Documents").toLowerCase(),
+        label: t("Common:Documents"),
       },
       {
         id: "filter_type-spreadsheets",
         key: FilterType.SpreadsheetsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Spreadsheets").toLowerCase(),
+        label: t("Common:Spreadsheets"),
       },
       {
         id: "filter_type-presentations",
         key: FilterType.PresentationsOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Presentations").toLowerCase(),
+        label: t("Common:Presentations"),
       },
       {
         id: "filter_type-forms",
@@ -202,22 +202,28 @@ export default function useFilesFilter({
         label: getManyPDFTitle(t, false),
       },
       {
+        id: "filter_type-diagrams",
+        key: FilterType.DiagramsOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Common:Diagrams"),
+      },
+      {
         id: "filter_type-archive",
         key: FilterType.ArchiveOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Archives").toLowerCase(),
+        label: t("Common:Archives"),
       },
       {
         id: "filter_type-images",
         key: FilterType.ImagesOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Images").toLowerCase(),
+        label: t("Common:Images"),
       },
       {
         id: "filter_type-media",
         key: FilterType.MediaOnly.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Media").toLowerCase(),
+        label: t("Common:Media"),
       },
     ];
 
@@ -246,6 +252,9 @@ export default function useFilesFilter({
         case FilterType.PresentationsOnly.toString():
           label = t("Common:Presentations");
           break;
+        case FilterType.DiagramsOnly.toString():
+          label = t("Common:Diagrams");
+          break;
         case FilterType.ImagesOnly.toString():
           label = t("Common:Images");
           break;
@@ -267,7 +276,7 @@ export default function useFilesFilter({
 
       filterValues.push({
         key: `${filter.filterType}`,
-        label: label.toLowerCase(),
+        label,
         group: FilterGroups.filterType,
       });
     }

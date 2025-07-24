@@ -3,7 +3,7 @@
   "content": "Change the space address that appears next to {{ domain }}.",
   "content_en_sha1_hash": "a7117de6c5149e0cb5b59057f4fa245e0e895b19",
   "created_at": "2025-05-19T21:30:52.262Z",
-  "updated_at": "2025-05-24T04:32:43.234Z",
+  "updated_at": "2025-07-10T11:11:06.909Z",
   "comment": {
     "text": "Change the space address that appears next to {{ domain }}. This translation is used to display a descriptive text in a portal settings page, likely on a button or similar UI element, informing users about the customization option for renaming the domain's space address.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 337,
-      "context": "</div>\n </div>\n ) : null}\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"PortalRenamingDescriptionText\", { domain })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400}>\n <Trans t={t} i18nKey=\"PortalRenamingNote\" />\n </Text>\n {renamingSettingsUrl ? (",
+      "line_number": 362,
+      "context": "</div>\n ) : null}\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"PortalRenamingDescriptionText\", { domain })}\n </Text>\n <Text fontSize=\"13px\" fontWeight={400}>\n <Trans t={t} i18nKey=\"PortalRenamingNote\" />\n </Text>\n {renamingSettingsUrl ? (",
       "module": "/packages/client"
     }
   ],
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'قم بتغير' is not the most natural way to say 'change'. A more common and natural translation would be 'غيّر'.",
+          "description": "The translation 'قم بتغير' (qim bi taghyir) is not the most natural or accurate way to say \"Change\". A better phrasing would be \"غيّر\" (ghayyer).  'قم بتغير' sounds awkward and overly formal.",
           "suggestion": "غيّر عنوان المساحة الذي يظهر بجانب {{ domain }}."
         }
       ],
@@ -41,9 +41,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'space address' doesn't directly translate to a single term in Azerbaijani. 'Domen ünvanı' is a more accurate translation for 'domain address'.  'Space address' implies a physical location or a specific path which is not what is intended.",
+          "suggestion": "Domen sahəsini dəyişdirin"
+        },
+        {
           "type": "formatting",
-          "description": "The Azerbaijani translation retains the double curly braces '{{ domain }}'. This should likely be replaced with the actual domain name, or the placeholder should be removed if the user interface handles the domain insertion dynamically.",
-          "suggestion": "Consider removing the double curly braces or replacing them with the appropriate variable/placeholder if it's dynamically inserted."
+          "description": "The use of \"{{ domain }}\" is consistent with the English and should be maintained in the Azerbaijani translation. There are no apparent formatting issues beyond that.",
+          "suggestion": "No change needed; maintain \"{{ domain }}\""
         }
       ],
       "approved_at": null
@@ -66,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Raumadresse' (room address) doesn't accurately convey the meaning of 'space address' in the context of a domain. It implies a physical room rather than a domain name or URL.",
-          "suggestion": "Ändern Sie die Domainadresse, die neben {{ domain }} erscheint."
+          "description": "The translation 'Raumadresse' is a literal translation of 'space address' which doesn't convey the intended meaning of a domain address. 'Raum' means 'room', while 'domain' refers to a website address.",
+          "suggestion": "Ändern Sie die Domain-Adresse, die neben {{ domain }} angezeigt wird."
         }
       ],
       "approved_at": null
@@ -78,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'domain' is translated as 'τομέα'. While technically correct, 'domain' in this context typically refers to a portal or workspace, not just a network domain. A more accurate translation might be 'περιοχή' or 'χώρο εργασίας'.",
-          "suggestion": "Αλλαγή της διεύθυνσης χώρου που εμφανίζεται δίπλα στην περιοχή {{ domain }}."
+          "description": "The word 'domain' is translated as 'τομέα'. While technically correct, 'domain' in this context refers to a portal or workspace, and a more accurate translation might be 'χώρο εργασίας' or 'χώρο'.",
+          "suggestion": "Αλλαγή της διεύθυνσης χώρου εργασίας που εμφανίζεται δίπλα στον τομέα {{ domain }}."
         }
       ],
       "approved_at": null
@@ -90,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cambie la dirección del espacio' is not the most natural or accurate translation of 'Change the space address'. 'Dirección del espacio' is a bit literal and stiff. A more natural phrasing might be 'Modifique la ubicación del espacio'.",
-          "suggestion": "Modifique la ubicación del espacio"
+          "description": "The translation 'Cambie la dirección del espacio que aparece junto a {{ domain }}' is a literal translation but doesn't convey the nuance of 'space address' in the context of a portal. It might be misinterpreted.",
+          "suggestion": "Cambie la dirección del portal que aparece junto a {{ domain }}."
         }
       ],
       "approved_at": null
@@ -102,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Muuta tilan osoite, joka näkyy {{ domain }} vieressä.' is a literal translation that doesn't quite convey the intended meaning of 'Change the space address that appears next to {{ domain }}'. 'Tilan osoite' translates to 'space address,' which is not a common or natural phrasing in Finnish in this context. It's more natural to refer to the 'name' or 'label' of the space.",
-          "suggestion": "Muuta tilan nimeä, joka näkyy {{ domain }} vieressä."
+          "description": "The translation 'Muuta tilan osoite, joka näkyy {{ domain }} vieressä.' is a literal translation and could be improved for naturalness in Finnish. A more idiomatic phrasing would convey the meaning more effectively. The word 'osoite' (address) might not be the most appropriate word in this context; 'nimi' (name) might be more suitable depending on what is being renamed.",
+          "suggestion": "Muuta {{ domain }} -verkkotunnuksen nimi."
         }
       ],
       "approved_at": null
@@ -119,9 +124,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"appears next to\" is not accurately reflected in the Armenian translation.  \"Կողքին\" implies 'beside' which isn't quite the meaning of 'appears next to' in this context. It could be interpreted as literally beside, rather than within the displayed text.",
-          "suggestion": "Փոխեք տարածության հասցեն, որը գտնվում է {{ domain }}-ի մոտ:"
+          "type": "formatting",
+          "description": "The Armenian translation uses a hyphen (-) instead of a more appropriate joining character for indicating possession or adjacency in this context. Using «» or a similar construction would be more natural.",
+          "suggestion": "Փոխեք տարածության հասցեն, որը հայտնվում է {{ domain }} կողմում:"
         }
       ],
       "approved_at": null
@@ -150,13 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'space address' isn't the most accurate translation of 'address' in this context. 'Address' refers to the URL or domain name itself.",
-          "suggestion": "ປ່ຽນທີ່ຢູ່ຂອງ {{ domain }}."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ຊ່ອງ' is unusual and might not be the correct term for 'address' or 'space'.",
-          "suggestion": "ປ່ຽນທີ່ຢູ່ຂອງ {{ domain }}."
+          "description": "The Lao translation \"ປ່ຽນທີ່ຢູ່ຊ່ອງທີ່ປາກົດຢູ່ຖັດຈາກ {{ domain }}.\" is a bit awkward. 'ຊ່ອງ' (chong) usually refers to a channel or slot, not a space address. A more accurate translation for 'space address' would be something like 'ທີ່ຢູ່ຂອງເຂດ' or 'ທີ່ຢູ່ຂອງສະຖານທີ່'.",
+          "suggestion": "ປ່ຽນທີ່ຢູ່ຂອງສະຖານທີ່ທີ່ປາກົດຢູ່ຖັດຈາກ {{ domain }}."
         }
       ],
       "approved_at": null
@@ -167,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mainiet vietas adresi' is a literal translation of 'Change the space address' which is not idiomatic in Latvian. 'Space address' doesn't convey the intended meaning of a domain name or portal address.",
-          "suggestion": "Izmainiet adresi, kas parādās blakus {{ domain }}.  or  Mainiet adresi, kas redzama blakus {{ domain }}.  (Both suggestions mean 'Change the address that appears next to {{ domain }}')"
+          "description": "The translation \"Mainiet vietas adresi, kas parādās blakus {{ domain }}.\" is not the most natural or precise translation of 'Change the space address that appears next to {{ domain }}'. \"Vieta\" generally refers to a physical location, while \"space address\" suggests a URL or identifier. \"Mainiet adresi, kas parādās blakus {{ domain }}.\" or \"Izmainiet adresi, kas parādās blakus {{ domain }}.\" would be better.",
+          "suggestion": "Izmainiet adresi, kas parādās blakus {{ domain }}."
         }
       ],
       "approved_at": null
@@ -179,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wijzig het adres van de ruimte die naast {{ domain }} verschijnt' is a bit literal and doesn't quite capture the nuance of 'Change the space address that appears next to {{ domain }}'. A more natural translation would convey the idea of altering the displayed name or label.",
-          "suggestion": "Wijzig de weergave van de ruimte die naast {{ domain }} wordt weergegeven."
+          "description": "The English phrase 'space address' isn't perfectly captured by 'adres van de ruimte'. 'Ruimte' can mean 'space' but 'adres' implies a physical address. Depending on the context, 'weergavenaam' (display name) or 'aanduiding' (indication) might be more accurate.",
+          "suggestion": "Consider 'Wijzig de weergavenaam van de ruimte die naast {{ domain }} verschijnt.' or 'Wijzig de aanduiding van de ruimte die naast {{ domain }} verschijnt.'"
         }
       ],
       "approved_at": null
@@ -188,13 +188,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zmień adres obszaru widoczny obok {{ domain }}' is not the most natural or precise translation of 'Change the space address that appears next to {{ domain }}'. 'Adres obszaru' isn't the best way to refer to a 'space address' in this context. It's quite literal.",
-          "suggestion": "Zmień adres, który wyświetla się obok {{ domain }}. or Zmień nazwę przestrzeni widoczną obok {{ domain }}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -203,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"space address\" is a bit ambiguous. In this context, it likely refers to the URL or shortlink of the portal. \"Endereço do espaço\" is a literal translation but might not convey the intended meaning clearly to a Portuguese speaker.  A more accurate translation might consider using a term like \"endereço do link\" or \"endereço da página\".",
-          "suggestion": "Consider 'Altere o endereço do link que aparece ao lado de {{ domain }}.' or 'Altere o endereço da página que aparece ao lado de {{ domain }}.'"
+          "description": "The English phrase \"Change the space address\" is a bit vague and potentially confusing. 'Space address' isn't standard terminology. It would be more accurate to translate it as 'portal address' or 'domain address' to align with the context of {{ domain }}.",
+          "suggestion": "Altere o endereço do portal que aparece ao lado de {{ domain }}."
         }
       ],
       "approved_at": null
@@ -212,13 +206,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Change the space address' is better translated as 'Alter o endereço do espaço' or 'Modifique o endereço do espaço' in Portuguese. 'Altere o endereço do espaço' is technically correct but less natural.",
-          "suggestion": "Modifique o endereço do espaço que aparece ao lado de {{ domain }}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -227,8 +215,9 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Schimbați adresa spațiului afișată pe lângă de {{ domain }}.' is not the most natural or accurate rendering of 'Change the space address that appears next to {{ domain }}.' The phrase 'pe lângă de' is slightly awkward.  A more natural phrasing would focus on the 'next to' part.",
-          "suggestion": "Schimbați adresa spațiului care apare lângă {{ domain }}."
+          "description": "The translation 'Schimbați adresa spațiului afișată pe lângă de {{ domain }}.' is not the most natural or accurate translation of 'Change the space address that appears next to {{ domain }}.'  'Pe lângă de' is slightly awkward.",
+          "suggestion": "Schimbați adresa spațiului care apare lângă {{ domain }}.",
+          "severity": "medium"
         }
       ],
       "approved_at": null
@@ -236,7 +225,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'space address' is a bit ambiguous. While 'адрес рабочего пространства' (address of workspace) is technically correct, it might be clearer to use a more common term for a domain address, like 'адрес домена' (domain address) or 'доменное имя' (domain name), depending on the context.  'Рабочее пространство' is correct, but might be less familiar to some users.",
+          "suggestion": "Измените адрес домена/имя домена, который будет отображаться рядом с {{ domain }}."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -245,8 +240,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අසලින් දිස්වන අවකාශයේ ලිපිනය' is a bit clunky and doesn't perfectly capture the meaning of 'space address that appears next to'. A more natural translation might focus on the specific address being changed.",
-          "suggestion": "අසලින් පෙනෙන {{ domain }} හි ලිපිනය වෙනස් කරන්න."
+          "description": "The English phrase 'Change the space address' is not accurately translated. 'Space address' is vague. It should be more clearly translated as 'location address' or 'website address'.",
+          "suggestion": "අසලින් දිස්වන ස්ථානයේ ලිපිනය වෙනස් කරන්න."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of double curly braces '{{ domain }}' in the Sinhala translation mirrors the English. While technically acceptable, it might be more natural to avoid this pattern in Sinhala if it's not integral to the UI/UX.",
+          "suggestion": "domain අසලින් දිස්වන ස්ථානයේ ලිපිනය වෙනස් කරන්න."
         }
       ],
       "approved_at": null
@@ -263,15 +263,15 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Spremenite naslov prostora, ki se pojavi poleg {{ domain }}.' is a literal translation but doesn't quite capture the meaning of 'Change the space address'. A more natural phrasing would convey the purpose of the change, perhaps relating to visibility or accessibility.",
-          "suggestion": "Spremenite prikaz naslova prostora, ki se prikaže poleg {{ domain }}.",
+          "description": "The translation 'Spremenite naslov prostora, ki se pojavi poleg {{ domain }}' isn't the most natural or accurate translation of 'Change the space address that appears next to {{ domain }}'. 'Naslov prostora' translates to 'space address', but 'prostor' can imply a physical space. A better translation might focus on the 'address' aspect.",
+          "suggestion": "Spremenite naslov za {{ domain }}.",
           "confidence": 0.7
         },
         {
-          "type": "spelling",
-          "description": "While 'prikaz' is acceptable, 'prikaže' might be more accurate in conveying the action of displaying something.",
-          "suggestion": "Spremenite prikaz naslova prostora, ki se prikaže poleg {{ domain }}.",
-          "confidence": 0.6
+          "type": "formatting",
+          "description": "The Slovenian translation preserves the {{ domain }} placeholder, which is consistent with the English, but consider if any localization is needed for such placeholders in the Slovenian context.",
+          "suggestion": "No change needed. Confirm if {{ domain }} should be localized.",
+          "confidence": 0.5
         }
       ],
       "approved_at": null
@@ -279,7 +279,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Промени адресу простора које се налази поред {{ domain }}' is a literal translation but sounds awkward in Serbian. A more natural phrasing would be needed.",
+          "suggestion": "Промените адресу простора која се приказује поред {{ domain }}. or Промените простор за појављивања {{ domain }}."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -288,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Promeni' is a command form (imperative). The context indicates a description, so a declarative form would be more appropriate. 'Promena' (noun) or 'Izmenite' (conditional) might be better choices depending on the desired tone.",
-          "suggestion": "Izmenite adresu prostora koja se nalazi pored {{ domain }}."
+          "description": "The term 'space address' is not the most natural translation of 'domain' in this context. 'Domain' typically refers to a website address or a digital property. A more accurate translation would be 'web adresa' or 'domen'.",
+          "suggestion": "Promeni web adresu domena koja se nalazi pored {{ domain }}."
         }
       ],
       "approved_at": null
@@ -306,13 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Змініть адресу простору, яка відображається поруч із {{ domain }}' is a literal translation and could be improved for clarity and naturalness in Ukrainian. The phrase 'адресу простору' (address of space) is a bit awkward. A better phrasing would convey the meaning of 'space address' more naturally.",
-          "suggestion": "Змініть адресу вашого робочого простору, яка відображається поруч із {{ domain }}."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the use of 'яка' (which) might benefit from a more concise construction depending on the overall tone of the UI. It might sound slightly formal.",
-          "suggestion": "Змініть адресу робочого простору, що відображається поруч із {{ domain }}."
+          "description": "The translation 'Змініть адресу простору, яка відображається поруч із {{ domain }}' is slightly awkward. 'Адреса простору' could be more naturally translated as 'простір'.",
+          "suggestion": "Змініть адресу простору, яка відображається поруч із {{ domain }}."
         }
       ],
       "approved_at": null
@@ -320,7 +321,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"space address\" doesn't accurately reflect the meaning of \"domain\" in this context. 'Domain' refers to a web domain, not a physical space.",
+          "suggestion": "Thay đổi tên miền hiển thị bên cạnh {{ domain }}."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"hiển thị\" (display) might be more natural than \"xuất hiện\" (appear) in this context.",
+          "suggestion": "Thay đổi tên miền hiển thị bên cạnh {{ domain }}."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -329,13 +341,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '更改显示在 {{ domain }} 旁的空间的地址' is slightly awkward and not the most natural way to express the original meaning. '空间' (space) is too literal and not the best fit. It implies a physical space.",
-          "suggestion": "更改 {{ domain }} 旁显示的地址。"
-        },
-        {
-          "type": "formatting",
-          "description": "The suggestion '更改 {{ domain }} 旁显示的地址' maintains the use of the variable '{{ domain }}', aligning with the original English content's formatting.",
-          "suggestion": null
+          "description": "The translation '更改显示在 {{ domain }} 旁的空间的地址' is a bit awkward. '空间' (space) is not the best word to describe a portal address. It's overly literal and doesn't flow naturally in Chinese. The sentence could be misinterpreted.",
+          "suggestion": "更改显示在 {{ domain }} 旁边的入口地址。"
         }
       ],
       "approved_at": null

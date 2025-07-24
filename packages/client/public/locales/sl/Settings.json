@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Preverite seznam neuvoženih uporabnikov za uvoz v {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nimate uporabnikov z e-maili. Nadaljujte z naslednjim korakom, da jih dodate.",
   "AddTrustedDomain": "Dodaj zaupanja vredno domeno",
+  "AdManagement": "Upravljanje oglasov",
+  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}.",
   "Admins": "Administratorji",
   "AdminsMessage": "Nastavitve sporočil skrbnika",
   "AdminsMessageMobileDescription": "Nastavitve skrbniškega sporočila so način za stik s skrbnikom portala.",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Ali želite preklicati uvoz podatkov?",
   "WantToCancelUpload": "Ali želite preklicati nalaganje?",
   "WantToContinue": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
+  "WhiteLabelSubtitle": "Vnesite ime svojega podjetja, naložite logotip in prilagodite slog, da bo ustrezal vaši blagovni znamki.",
   "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom."
 }

@@ -3,5 +3,7 @@
   "OpenInApp": "Otvoriť v aplikácii",
   "OpeningDocument": "Otvorenie dokumentu",
   "RememberChoice": "Zapamätať voľbu pre otváranie dokumentov nabudúce",
-  "StayInBrowser": "Zostať v prehliadači"
+  "StayInBrowser": "Zostať v prehliadači",
+  "DeepLinkOnlyAppText": "Dokument je možné otvoriť len v mobilnej aplikácii.",
+  "DownloadApp": "Stiahnite si aplikáciu"
 }

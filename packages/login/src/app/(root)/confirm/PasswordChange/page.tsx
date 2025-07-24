@@ -30,6 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { getStringFromSearchParams } from "@/utils";
 
+import { logger } from "logger.mjs";
 import PasswordChangeForm from "./page.client";
 
 type PasswordChangeProps = {
@@ -37,6 +38,8 @@ type PasswordChangeProps = {
 };
 
 async function Page(props: PasswordChangeProps) {
+  logger.info("PasswordChange page");
+
   const { searchParams: sp } = props;
   const searchParams = await sp;
   const confirmKey = getStringFromSearchParams(searchParams);

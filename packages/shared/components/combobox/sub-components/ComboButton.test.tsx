@@ -30,7 +30,7 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { renderWithTheme } from "../../../utils/render-with-theme";
 import { ComboButton } from "./ComboButton";
-import { ComboBoxSize } from "../Combobox.enums";
+import { ComboBoxSize } from "../ComboBox.enums";
 import type { TCombobox, TOption } from "../ComboBox.types";
 
 describe("ComboButton", () => {

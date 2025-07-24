@@ -148,6 +148,7 @@ export const enum FilterType {
   FormRooms = 21,
   Pdf = 22,
   PDFForm = 23,
+  DiagramsOnly = 25,
 }
 
 /**
@@ -166,6 +167,7 @@ export const enum FileType {
   OFormTemplate = 8,
   OForm = 9,
   PDF = 10,
+  Diagram = 11,
 }
 
 /**

@@ -32,8 +32,11 @@ import PublicRoomPasswordPageClient from "@/app/(no-layout)/public-room/password
 import { PUBLIC_ROOM_TITLE_HEADER } from "@/utils/constants";
 import styles from "@/app/(no-layout)/public-room/password/PasswordPage.module.scss";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
+import { logger } from "../../../../../logger.mjs";
 
 export default async function PublicRoomPasswordPage() {
+  logger.info("Public-room password page");
+
   const hdrs = await headers();
   const roomTitle = hdrs.get(PUBLIC_ROOM_TITLE_HEADER);
 

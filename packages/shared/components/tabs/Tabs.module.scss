@@ -318,6 +318,9 @@
 
   :hover {
     background-color: var(--tabs-hover-background-color-secondary);
+    svg path {
+      fill: var(--tabs-hover-background-icon-color-secondary);
+    }
   }
 
   div {

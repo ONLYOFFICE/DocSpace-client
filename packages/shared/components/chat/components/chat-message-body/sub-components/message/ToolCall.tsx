@@ -49,8 +49,11 @@ const ToolCall = ({ content }: { content: TContent }) => {
 
   if (content.type !== ContentType.Tool) return null;
 
-  const result = (content.result?.content as Record<string, unknown>[])?.[0]
-    ?.text;
+  const result = JSON.stringify(
+    content.result?.content as Record<string, unknown>[],
+  );
+
+  console.log(result);
 
   return (
     <div className={styles.toolCall}>
@@ -84,9 +87,7 @@ const ToolCall = ({ content }: { content: TContent }) => {
                 {t("Common:ToolCallResult")}
               </Text>
               <MarkdownField
-                chatMessage={formatJsonWithMarkdown(
-                  JSON.parse(result as string),
-                )}
+                chatMessage={formatJsonWithMarkdown(JSON.parse(result))}
               />
             </div>
           ) : null}

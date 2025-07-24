@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/BrandName";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
+import { BRAND_NAME_REGEX } from "@docspace/shared/constants";
 
 import LoaderBrandName from "../sub-components/loaderBrandName";
 
@@ -76,11 +77,8 @@ const BrandNameComponent = (props) => {
       errorCode = "Empty";
     } else if (value.length < 2) {
       errorCode = "MinLength";
-    } else {
-      const brandNameRegex = /^[\p{L}\p{N}][\p{L}\p{N}\s-]*[\p{L}\p{N}]$/u; // any unicode letters are allowed, characters are prohibited
-      if (!brandNameRegex.test(value)) {
-        errorCode = "SpecSymbols";
-      }
+    } else if (!BRAND_NAME_REGEX.test(value)) {
+      errorCode = "SpecSymbols";
     }
 
     setError(errorCode);

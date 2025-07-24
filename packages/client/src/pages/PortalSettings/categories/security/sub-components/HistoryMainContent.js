@@ -137,7 +137,7 @@ const CustomBannerWrapper = styled.div`
       max-width: 100% !important;
 
       &:first-child {
-        margin-inline-start: 24px;
+        margin-inline-end: 24px;
       }
 
       .icon-button {

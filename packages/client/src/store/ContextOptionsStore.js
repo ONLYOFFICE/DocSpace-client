@@ -1922,6 +1922,10 @@ class ContextOptionsStore {
         key: "sharing-settings",
         label: t("Common:Share"),
         icon: ShareReactSvgUrl,
+        disabled:
+          !item.canShare &&
+          !item.security?.CreateRoomFrom &&
+          !item.security?.Embed,
         items: [
           {
             id: "option_copy-shared-link",

@@ -134,7 +134,7 @@ const CustomBannerWrapper = styled.div`
       inset-inline-end: 2px !important;
       gap: 0px;
       top: auto !important;
-      max-width: 90% !important;
+      max-width: 80% !important;
 
       .icon-button {
         ${(props) =>

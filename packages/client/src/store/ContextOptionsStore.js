@@ -79,9 +79,7 @@ import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
-import SummarizeReactSvgUrl from "PUBLIC_DIR/images/icons/16/summarize.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
-
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -1849,30 +1847,6 @@ class ContextOptionsStore {
       },
       {
         key: "separator-SubmitToGallery",
-        isSeparator: true,
-      },
-      {
-        id: "summarize",
-        key: "summarize",
-        label: "Summarize",
-        icon: SummarizeReactSvgUrl,
-        onClick: () => {
-          this.summarizeToChat(item);
-        },
-        disabled: false,
-      },
-      {
-        id: "ask_ai",
-        key: "ask_ai",
-        label: "Ask AI",
-        icon: SummarizeReactSvgUrl,
-        onClick: () => {
-          this.askAI(item);
-        },
-        disabled: false,
-      },
-      {
-        key: "separator4",
         isSeparator: true,
       },
       {

@@ -29,18 +29,15 @@ import React from "react";
 import { TContent } from "../../../../../../api/ai/types";
 import { ContentType } from "../../../../../../api/ai/enums";
 
-import styles from "../../ChatMessageBody.module.scss";
+// import styles from "../../ChatMessageBody.module.scss";
 
-import MarkdownField from "./Markdown";
+// import MarkdownField from "./Markdown";
+import StatusMessage from "../../../../../status-message";
 
 const Error = ({ content }: { content: TContent }) => {
   if (content.type !== ContentType.Text) return null;
 
-  return (
-    <div className={styles.chatMessageError}>
-      <MarkdownField chatMessage={content.text} />
-    </div>
-  );
+  return <StatusMessage message={content.text} />;
 };
 
 export default Error;

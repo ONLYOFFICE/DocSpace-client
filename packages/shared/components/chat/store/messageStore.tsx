@@ -127,7 +127,11 @@ export default class MessageStore {
       contents: [{ type: ContentType.Text, text: message }, ...filesContent],
     };
 
-    this.messages = [newMsg, ...this.messages];
+    if (this.messages[0]?.role === RoleType.Error) {
+      this.messages[0] = newMsg;
+    } else {
+      this.messages = [newMsg, ...this.messages];
+    }
 
     this.totalMessages += 1;
     this.startIndex += 1;

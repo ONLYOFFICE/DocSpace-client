@@ -89,7 +89,7 @@ const AiRoomTabs = ({
           ? SearchArea.Knowledge
           : SearchArea.ResultStorage;
 
-      setIsSectionBodyLoading?.(true, true);
+      setIsSectionBodyLoading?.(true, false);
 
       navigate(`${path}?${filesFilter.toUrlParams()}`);
     }
@@ -119,7 +119,7 @@ const AiRoomTabs = ({
       selectedItemId={currentTab ?? "chat"}
       items={items}
       onSelect={onSelect}
-      withoutStickyIntend
+      withoutStickyIntend={currentTab === "chat"}
     />
   );
 };

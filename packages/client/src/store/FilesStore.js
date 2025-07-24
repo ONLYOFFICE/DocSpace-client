@@ -2290,9 +2290,7 @@ class FilesStore {
         "show-info",
         "block-unblock-version", // need split
         "separator1",
-        "summarize",
-        "ask_ai",
-        "separator4",
+
         "open-location",
         "mark-read",
         // "mark-as-favorite",

@@ -35,6 +35,7 @@ import { getLoginHistoryConfig } from "@docspace/shared/components/campaigns-ban
 import NextStepReactSvg from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 // import { toastr } from "@docspace/shared/components/toast";
 import { mobile, tablet } from "@docspace/shared/utils";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
@@ -118,9 +119,12 @@ const CustomBannerWrapper = styled.div`
     margin-bottom: 16px;
   }
 
-  & > div[data-testid="campaigns-banner"] {
+  & > div {
+    display: flex;
+    align-items: center;
     min-height: 72px !important;
-    max-height: 72px !important;
+    max-height: none !important;
+    height: auto !important;
     &::before {
       border-radius: 6px !important;
     }
@@ -128,7 +132,17 @@ const CustomBannerWrapper = styled.div`
     & > div {
       padding: 12px !important;
       inset-inline-end: 2px !important;
-      gap: 2px;
+      gap: 0px;
+      top: auto !important;
+      max-width: 90% !important;
+
+      .icon-button {
+        ${(props) =>
+          props.isRTL &&
+          `
+              transform: rotate(180deg);
+          `}
+      }
     }
 
     @media ${mobile} {
@@ -136,7 +150,7 @@ const CustomBannerWrapper = styled.div`
       max-height: 88px !important;
 
       & > div {
-        top: 24px !important;
+        top: auto !important;
       }
     }
   }
@@ -216,6 +230,7 @@ const HistoryMainContent = (props) => {
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
 
+  const { isRTL } = useInterfaceDirection();
   const theme = useTheme();
   const isBaseTheme = theme.isBase;
 
@@ -272,21 +287,8 @@ const HistoryMainContent = (props) => {
 
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>
-      {isSettingNotPaid ? (
-        <Badge
-          className="paid-badge"
-          fontWeight="700"
-          backgroundColor={
-            theme.isBase
-              ? globalColors.favoritesStatus
-              : globalColors.favoriteStatusDark
-          }
-          label={t("Common:Paid")}
-          isPaidBadge
-        />
-      ) : null}
       {!tfaEnabled && withCampaign ? (
-        <CustomBannerWrapper onClick={navigateTo2FA}>
+        <CustomBannerWrapper onClick={navigateTo2FA} isRTL={isRTL}>
           <CampaignsBanner
             campaignConfig={loginHistoryConfig}
             campaignTranslate={loginHistoryTranslates}
@@ -304,6 +306,19 @@ const HistoryMainContent = (props) => {
             }}
           />
         </CustomBannerWrapper>
+      ) : null}
+      {isSettingNotPaid ? (
+        <Badge
+          className="paid-badge"
+          fontWeight="700"
+          backgroundColor={
+            theme.isBase
+              ? globalColors.favoritesStatus
+              : globalColors.favoriteStatusDark
+          }
+          label={t("Common:Paid")}
+          isPaidBadge
+        />
       ) : null}
       <div className="main-wrapper">
         <Text fontSize="13px" className="login-history-description">

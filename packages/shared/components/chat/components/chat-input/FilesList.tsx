@@ -59,7 +59,11 @@ const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
       <Scrollbar noScrollY>
         <div className={styles.filesListWrapper}>
           {files.map((file) => (
-            <div className={styles.filesListItem} key={file.id}>
+            <div
+              className={styles.filesListItem}
+              key={file.id}
+              style={{ maxWidth: "300px" }}
+            >
               <ReactSVG
                 src={getIcon(24, file.fileExst!)}
                 className={styles.filesListItemIcon}
@@ -67,7 +71,12 @@ const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
 
               <div className={styles.filesListItemInfo}>
                 <div className={styles.filesListItemInfoText}>
-                  <Text fontSize="12px" lineHeight="16px" fontWeight={600}>
+                  <Text
+                    fontSize="12px"
+                    lineHeight="16px"
+                    fontWeight={600}
+                    truncate
+                  >
                     {file.title}
                   </Text>
                   <Text

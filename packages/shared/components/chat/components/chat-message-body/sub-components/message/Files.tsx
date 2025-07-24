@@ -50,7 +50,11 @@ const Files = ({
         if (file.type !== ContentType.Files) return;
 
         return (
-          <div className={styles.filesListItem} key={file.id}>
+          <div
+            className={styles.filesListItem}
+            key={file.id}
+            style={{ maxWidth: "300px" }}
+          >
             <ReactSVG
               src={getIcon(24, file.extension!)}
               className={styles.filesListItemIcon}
@@ -58,7 +62,12 @@ const Files = ({
 
             <div className={styles.filesListItemInfo}>
               <div className={styles.filesListItemInfoText}>
-                <Text fontSize="12px" lineHeight="16px" fontWeight={600}>
+                <Text
+                  fontSize="12px"
+                  lineHeight="16px"
+                  fontWeight={600}
+                  truncate
+                >
                   {file.title.replace(file.extension, "")}
                 </Text>
                 <Text

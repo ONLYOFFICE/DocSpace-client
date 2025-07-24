@@ -1,4 +1,4 @@
-/*
+/*!
  * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
@@ -26,29 +26,45 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import type { TTranslation, TViewAs } from "../../types";
-import { type TRoom, TRoomLifetime } from "../../api/rooms/types";
-import { type TFile, type TFolder } from "../../api/files/types";
+.quotaForm {
+  .quotaContainer {
+    display: flex;
+    grid-gap: 4px;
+    margin-bottom: 16px;
+  }
 
-type TQuickButtonItem = TFile | TFolder | TRoom;
+  &.isCheckbox {
+    .quotaContainer {
+      margin-bottom: 8px;
+    }
+  }
 
-export type QuickButtonsProps = {
-  t: TTranslation;
-  item: TQuickButtonItem;
-  viewAs: TViewAs;
-  roomLifetime?: TRoomLifetime;
-  expiredDate?: string | null;
+  &.isLabel {
+    .quotaContainer {
+      margin-top: 8px;
+    }
+  }
 
-  isDisabled?: boolean;
-  isPublicRoom?: boolean;
-  isPersonalRoom?: boolean;
-  isArchiveFolder?: boolean;
-  isTemplatesFolder?: boolean;
-  isIndexEditingMode?: boolean;
-  showLifetimeIcon?: boolean;
+  .quotaLimit {
+    max-height: 32px;
+  }
 
-  onClickDownload?: VoidFunction;
-  onCopyPrimaryLink?: VoidFunction;
-  onClickShare?: VoidFunction;
-  onCreateRoom?: VoidFunction;
-};
+  .quotaCheckbox {
+    &.isButtonsEnable {
+      margin-bottom: 8px;
+    }
+
+    svg {
+      margin-inline-end: 8px;
+    }
+  }
+
+  .quotaValue {
+    max-width: fit-content;
+    padding: 0;
+  }
+
+  .quotaDescription {
+    color: var(--text-disable-color);
+  }
+}

@@ -166,6 +166,7 @@ export const mockFilesSelectorSettings: FilesSelectorSettings = {
     extsAudio: [".mp3", ".wav"],
     extsCoAuthoring: [".docx", ".xlsx"],
     extsConvertible: { docx: [".doc", ".docx"] },
+    extsDiagram: [".vsdm", ".vsdx", ".vssm", ".vssx", ".vstm", ".vstx"],
     extsDocument: [".doc", ".docx", ".pdf"],
     extsImage: [".jpg", ".png"],
     extsImagePreviewed: [".jpg", ".png"],

@@ -1782,7 +1782,7 @@ class FilesStore {
           this.aiRoomStore.setCurrentTab(
             filterData.searchArea === SearchArea.Knowledge
               ? "knowledge"
-              : filterData.searchArea === SearchArea.ResultStorage
+              : +filterData.searchArea === SearchArea.ResultStorage
                 ? "result"
                 : "chat",
           );

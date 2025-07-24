@@ -26,13 +26,14 @@
 
 import React from "react";
 import { makeAutoObservable, runInAction } from "mobx";
-import { TMessage } from "../../../api/ai/types";
+import { TContent, TMessage } from "../../../api/ai/types";
 import {
   getChatMessages,
   startNewChat,
   sendMessageToChat,
 } from "../../../api/ai";
 import { ContentType, EventType, RoleType } from "../../../api/ai/enums";
+import { TFile } from "../../../api/files/types";
 
 export default class MessageStore {
   messages: TMessage[] = [];
@@ -110,11 +111,20 @@ export default class MessageStore {
     this.messages[0] = { ...this.messages[0], id };
   };
 
-  addUserMessage = (message: string) => {
+  addUserMessage = (message: string, files: Partial<TFile>[]) => {
+    const filesContent: TContent[] = files.map((f) => {
+      return {
+        type: ContentType.Files,
+        extension: f.fileExst!,
+        title: f.title!,
+        id: f.id!,
+      };
+    });
+
     const newMsg: TMessage = {
       role: RoleType.UserMessage,
       createdOn: new Date().toString(),
-      contents: [{ type: ContentType.Text, text: message }],
+      contents: [{ type: ContentType.Text, text: message }, ...filesContent],
     };
 
     this.messages = [newMsg, ...this.messages];
@@ -314,8 +324,8 @@ export default class MessageStore {
     }
   };
 
-  startChat = async (message: string, files: string[]) => {
-    this.addUserMessage(message);
+  startChat = async (message: string, files: Partial<TFile>[]) => {
+    this.addUserMessage(message, files);
 
     this.isRequestRunning = true;
 
@@ -326,15 +336,15 @@ export default class MessageStore {
     const stream = await startNewChat(
       this.roomId,
       message,
-      files,
+      files.map((f) => f.id!.toString()),
       this.abortController,
     );
 
     await this.startStream(stream);
   };
 
-  sendMessage = async (message: string, files: string[]) => {
-    this.addUserMessage(message);
+  sendMessage = async (message: string, files: Partial<TFile>[]) => {
+    this.addUserMessage(message, files);
 
     this.isRequestRunning = true;
 
@@ -345,7 +355,7 @@ export default class MessageStore {
     const stream = await sendMessageToChat(
       this.currentChatId,
       message,
-      files,
+      files.map((f) => f.id!.toString()),
       this.abortController,
     );
 

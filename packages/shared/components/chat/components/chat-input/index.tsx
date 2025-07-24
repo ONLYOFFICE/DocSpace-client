@@ -85,15 +85,9 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
     if (!value) return;
     try {
       if (!currentChatId) {
-        startChat(
-          value,
-          selectedFiles.map((file) => file.id!.toString()),
-        );
+        startChat(value, selectedFiles);
       } else {
-        sendMessage(
-          value,
-          selectedFiles.map((file) => file.id!.toString()),
-        );
+        sendMessage(value, selectedFiles);
       }
 
       setValue("");

@@ -40,7 +40,11 @@ export default function withBadges(WrappedComponent) {
     constructor(props) {
       super(props);
 
-      this.state = { disableBadgeClick: false, disableUnpinClick: false };
+      this.state = {
+        disableBadgeClick: false,
+        disableUnpinClick: false,
+        isLoading: false,
+      };
     }
 
     onShowVersionHistory = () => {
@@ -152,6 +156,20 @@ export default function withBadges(WrappedComponent) {
       onCreateRoomFromTemplate(item, true);
     };
 
+    onClickLock = () => {
+      const { item, lockFileAction, t } = this.props;
+      const { locked, id, security } = item;
+      const { isLoading } = this.state;
+
+      if (!security?.Lock || isLoading) return;
+
+      this.setState({ isLoading: true });
+      return lockFileAction(id, !locked)
+        .then(() => toastr.success(t("Translations:FileUnlocked")))
+        .catch((err) => toastr.error(err))
+        .finally(() => this.setState({ isLoading: false }));
+    };
+
     render() {
       const {
         t,
@@ -206,6 +224,7 @@ export default function withBadges(WrappedComponent) {
           onUnmuteClick={this.onUnmuteClick}
           openLocationFile={this.openLocationFile}
           setConvertDialogVisible={this.setConvertDialogVisible}
+          onClickLock={this.onClickLock}
           onFilesClick={onFilesClick}
           viewAs={viewAs}
           isMutedBadge={isMutedBadge}
@@ -265,6 +284,7 @@ export default function withBadges(WrappedComponent) {
         setMuteAction,
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
+        lockFileAction,
       } = filesActionsStore;
       const {
         isTabletView,
@@ -315,6 +335,7 @@ export default function withBadges(WrappedComponent) {
         onCreateRoomFromTemplate,
         isExtsCustomFilter,
         docspaceManagingRoomsHelpUrl,
+        lockFileAction,
       };
     },
   )(observer(WithBadges));

@@ -24,31 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { PropsWithChildren, use } from "react";
-import { ThemeContext } from "styled-components";
+/**
+ * Fixes SVG icons that have clip-path issues by removing clip-path attributes
+ * and corresponding defs sections that can cause visual clipping when scaled
+ *
+ * @param svgData - Raw SVG string data
+ * @returns Processed SVG string with clip-path issues fixed
+ */
+export const fixSvgClipPath = (svgData: string): string => {
+  if (!svgData) return svgData;
 
-import { StyledThemeComboButton } from "./Combobox.styled";
-import type { TComboButtonThemeProps } from "./ComboBox.types";
+  if (svgData.includes('clip-path="url(#')) {
+    let processed = svgData.replace(/clip-path="[^"]*"/gi, "");
+    processed = processed.replace(/<defs>.*?<\/defs>/gi, "");
+    return processed;
+  }
 
-const ComboButtonTheme = ({
-  ref,
-  ...props
-}: PropsWithChildren<TComboButtonThemeProps> & {
-  ref?: React.RefObject<HTMLDivElement>;
-}) => {
-  const defaultTheme = use(ThemeContext);
-
-  const currentColorScheme = defaultTheme?.currentColorScheme;
-
-  return (
-    <StyledThemeComboButton
-      {...props}
-      ref={ref}
-      $currentColorScheme={currentColorScheme}
-    />
-  );
+  return svgData;
 };
-
-ComboButtonTheme.displayName = "ComboButtonTheme";
-
-export default ComboButtonTheme;

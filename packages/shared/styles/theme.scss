@@ -2572,3 +2572,81 @@
   --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
     0px 0px 4px #{$menu-shadow-dark};
 }
+
+.light {
+  --combobox-background: #{$light-gray-selected};
+
+  --combobox-button-bg: #{$white};
+  --combobox-button-color: #{$black};
+  --combobox-button-disabled-color: #{$gray-strong};
+  --combobox-button-border: 1px solid #{$gray-strong};
+  --combobox-button-open-border-color: var(--accent-main);
+  --combobox-button-disabled-border-color: #{$gray-light-mid};
+  --combobox-button-disabled-bg: #{$gray-light};
+  --combobox-button-focus-bg-modern-view: #{$light-gray-selected};
+  --combobox-button-icon-button-color: #{$gray};
+  --combobox-button-icon-button-hover-color: #{$light-gray-dark};
+  --combobox-button-hover-border-color: #{$gray};
+  --combobox-button-hover-border-color-open: #{$light-second-main};
+  --combobox-button-hover-disabled-border-color: #{$gray-light-mid};
+  --combobox-button-hover-bg-modern-view: #{$gray-light-mid};
+  --combobox-button-focus-open-border-color: var(--accent-main);
+
+  --combobox-label-selected-color: #{$black};
+  --combobox-label-disabled-color: #{$gray-strong};
+  --combobox-label-alternative-color: #{$gray};
+
+  --combobox-plus-badge-bg-color: #{$gray};
+  --combobox-plus-badge-selected-bg-color: #{$light-gray-dark};
+  --combobox-plus-badge-color: #{$white};
+
+  --combobox-children-button-color: #{$black};
+  --combobox-children-button-disabled-color: #{$gray-strong};
+  --combobox-children-button-default-color: #{$gray};
+  --combobox-children-button-default-disabled-color: #{$gray-strong};
+  --combobox-children-button-selected-color: #{$black};
+}
+
+.dark {
+  --combobox-background: #{$black};
+
+  --combobox-button-bg: #{$black};
+  --combobox-button-color: #{$gray-dark};
+  --combobox-button-disabled-color: #{$gray-dark};
+  --combobox-button-border: 1px solid #{$gray-dark-strong};
+  --combobox-button-open-border-color: #{$white};
+  --combobox-button-disabled-border-color: #{$gray-dark-strong};
+  --combobox-button-disabled-bg: #{$gray-dark-strong};
+  --combobox-button-focus-bg-modern-view: #{$gray-dark-mid};
+  --combobox-button-icon-button-color: #{$gray-dark};
+  --combobox-button-icon-button-hover-color: #{$white};
+  --combobox-button-hover-border-color: #{$gray-dark};
+  --combobox-button-hover-border-color-open: #{$white};
+  --combobox-button-hover-disabled-border-color: #{$gray-dark-strong};
+  --combobox-button-hover-bg-modern-view: #{$gray-dark-strong};
+  --combobox-button-focus-open-border-color: var(
+    --combobox-button-hover-border-color
+  );
+
+  --combobox-label-selected-color: #{$white};
+  --combobox-label-disabled-color: #{$gray-dark};
+  --combobox-label-alternative-color: #{$gray-dark};
+
+  --combobox-plus-badge-bg-color: #{$gray-dark};
+  --combobox-plus-badge-selected-bg-color: #{$dark-gray-dark};
+  --combobox-plus-badge-color: #{$black};
+
+  --combobox-children-button-color: #{$white};
+  --combobox-children-button-disabled-color: #{$gray-dark};
+  --combobox-children-button-default-color: #{$white};
+  --combobox-children-button-default-disabled-color: #{$gray-dark};
+  --combobox-children-button-selected-color: #{$white};
+}
+
+.light {
+  --access-right-select-description-color: #{$gray};
+}
+
+.dark {
+  --access-right-select-description-color: #{$gray-dark};
+}

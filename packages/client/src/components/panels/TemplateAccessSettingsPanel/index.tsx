@@ -158,6 +158,10 @@ const TemplateAccessSettingsPanel = ({
     setIsVisible(false);
   }, [setInfoPanelIsMobileHidden, setIsVisible]);
 
+  const onBackClick = () => {
+    if (addUsersPanelVisible) setAddUsersPanelVisible(false);
+  };
+
   const onCloseUsersPanel = () => {
     if (isContainer) setUsersPanelIsVisible(false);
     else setAddUsersPanelVisible(false);
@@ -187,8 +191,16 @@ const TemplateAccessSettingsPanel = ({
     };
   }, [isMobileView, onMouseDown]);
 
-  const onKeyPress = (e: KeyboardEvent) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
+  const onKeyPress = (e: KeyboardEvent) => {
+    if (e.key === "Esc" || e.key === "Escape") onClose();
+    if (
+      e.key === "Backspace" &&
+      e.target instanceof HTMLElement &&
+      e.target.nodeName !== "INPUT" &&
+      e.target.nodeName !== "TEXTAREA"
+    )
+      onCloseAccessSettings?.();
+  };
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyPress);
@@ -401,6 +413,7 @@ const TemplateAccessSettingsPanel = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
+      onBackClick={onBackClick}
       withBodyScroll
       isLoading={!tReady || modalIsLoading}
       onSubmit={onSubmit}

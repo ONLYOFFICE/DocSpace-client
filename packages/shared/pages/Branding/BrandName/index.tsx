@@ -57,6 +57,8 @@ export const BrandName = ({
   isBrandNameLoaded,
   defaultBrandName,
   brandName,
+  error,
+  onValidate,
 }: IBrandNameProps) => {
   const { t } = useTranslation("Common");
 
@@ -64,15 +66,24 @@ export const BrandName = ({
 
   const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
     useState<Nullable<string>>(null);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isBrandNameLoaded || !brandName) return;
     setBrandNameWhiteLabel(brandName);
   }, [brandName, isBrandNameLoaded]);
 
+  useEffect(() => {
+    setHasError(!!error);
+  }, [error]);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setBrandNameWhiteLabel(value);
+
+    if (onValidate) {
+      onValidate(value);
+    }
   };
 
   const onSaveAction = (): void => {
@@ -85,10 +96,31 @@ export const BrandName = ({
 
   const onCancelAction = (): void => {
     setBrandNameWhiteLabel(defaultBrandName);
+    if (onValidate) {
+      onValidate(defaultBrandName);
+    }
   };
 
   const isEqualText = defaultBrandName === (brandNameWhiteLabel ?? "");
   const showReminder = !isEqualText && brandNameWhiteLabel !== null;
+
+  const getErrorText = () => {
+    if (!error) return "";
+
+    switch (error) {
+      case "Empty":
+        return t("Common:EmptyFieldError");
+      case "MinLength":
+        return t("Common:BrandNameLength", {
+          minLength: 2,
+          maxLength: 40,
+        });
+      case "SpecSymbols":
+        return t("Common:BrandNameForbidden");
+      default:
+        return t("Common:Error");
+    }
+  };
 
   return (
     <div className={styles.brandName}>
@@ -142,7 +174,13 @@ export const BrandName = ({
             maxLength={40}
             type={InputType.text}
             size={InputSize.base}
+            hasError={hasError}
           />
+          {hasError ? (
+            <Text fontSize="12px" className={styles.errorText}>
+              {getErrorText()}
+            </Text>
+          ) : null}
           <SaveCancelButtons
             id="btnBrandName"
             className={classNames(
@@ -155,7 +193,7 @@ export const BrandName = ({
             cancelButtonLabel={t("Common:CancelButton")}
             reminderText={t("Common:YouHaveUnsavedChanges")}
             displaySettings
-            saveButtonDisabled={isEqualText}
+            saveButtonDisabled={isEqualText || hasError}
             disableRestoreToDefault={isEqualText}
             showReminder={showReminder}
           />

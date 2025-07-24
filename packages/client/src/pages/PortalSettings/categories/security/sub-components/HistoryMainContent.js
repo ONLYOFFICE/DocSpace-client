@@ -272,19 +272,6 @@ const HistoryMainContent = (props) => {
 
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>
-      {isSettingNotPaid ? (
-        <Badge
-          className="paid-badge"
-          fontWeight="700"
-          backgroundColor={
-            theme.isBase
-              ? globalColors.favoritesStatus
-              : globalColors.favoriteStatusDark
-          }
-          label={t("Common:Paid")}
-          isPaidBadge
-        />
-      ) : null}
       {!tfaEnabled && withCampaign ? (
         <CustomBannerWrapper onClick={navigateTo2FA}>
           <CampaignsBanner
@@ -304,6 +291,19 @@ const HistoryMainContent = (props) => {
             }}
           />
         </CustomBannerWrapper>
+      ) : null}
+      {isSettingNotPaid ? (
+        <Badge
+          className="paid-badge"
+          fontWeight="700"
+          backgroundColor={
+            theme.isBase
+              ? globalColors.favoritesStatus
+              : globalColors.favoriteStatusDark
+          }
+          label={t("Common:Paid")}
+          isPaidBadge
+        />
       ) : null}
       <div className="main-wrapper">
         <Text fontSize="13px" className="login-history-description">

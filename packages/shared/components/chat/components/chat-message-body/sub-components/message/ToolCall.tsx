@@ -49,7 +49,7 @@ const ToolCall = ({ content }: { content: TContent }) => {
 
   if (content.type !== ContentType.Tool) return null;
 
-  const result = (content.result?.content as Record<string, unknown>[])[0]
+  const result = (content.result?.content as Record<string, unknown>[])?.[0]
     .text as string;
 
   let isJson = false;

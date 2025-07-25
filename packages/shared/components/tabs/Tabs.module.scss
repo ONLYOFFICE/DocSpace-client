@@ -316,11 +316,15 @@
   width: 32px;
   height: 36px;
 
-  :hover {
+  &:hover:not(.disabled) {
     background-color: var(--tabs-hover-background-color-secondary);
     svg path {
       fill: var(--tabs-hover-background-icon-color-secondary);
     }
+  }
+
+  &.disabled {
+    cursor: default;
   }
 
   div {

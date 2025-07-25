@@ -154,7 +154,6 @@ const SecondaryTabs = (props: TabsProps) => {
   }, [selectedItemIndex, items, scrollToTab]);
 
   const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
-    // setCurrentItem(index);
     onSelect?.(selectedTabItem);
 
     scrollToTab(index);
@@ -221,7 +220,6 @@ const SecondaryTabs = (props: TabsProps) => {
                 [styles.selected]: isSelected,
                 [styles.focused]: isFocused,
                 [styles.disabled]: item.isDisabled,
-                // [styles.referenceSize]: !!referenceTabSize,
               },
               classes,
             )}
@@ -232,7 +230,7 @@ const SecondaryTabs = (props: TabsProps) => {
             }}
             style={
               scaled
-                ? {} // overflow: "hidden"
+                ? {}
                 : {
                     width: referenceTabSize ?? "fit-content",
                     minWidth: referenceTabSize ?? "unset",
@@ -278,7 +276,9 @@ const SecondaryTabs = (props: TabsProps) => {
       >
         {withArrows ? (
           <ReactSVG
-            className={classNames(styles.arrowIcon, styles.arrowLeft)}
+            className={classNames(styles.arrowIcon, styles.arrowLeft, {
+              [styles.disabled]: selectedItemIndex === 0,
+            })}
             src={ArrowReactUrl}
             onClick={onSelectPrev}
           />
@@ -296,7 +296,9 @@ const SecondaryTabs = (props: TabsProps) => {
 
         {withArrows ? (
           <ReactSVG
-            className={classNames(styles.arrowIcon, styles.arrowRight)}
+            className={classNames(styles.arrowIcon, styles.arrowRight, {
+              [styles.disabled]: selectedItemIndex === items.length - 1,
+            })}
             src={ArrowReactUrl}
             onClick={onSelectNext}
           />

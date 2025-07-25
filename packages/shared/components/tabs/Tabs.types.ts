@@ -69,7 +69,7 @@ export type TabsProps = {
   /** Scales tabs to container width */
   scaled?: boolean;
   /** Used to identify hotkeys */
-  hotkeysId?: boolean;
+  hotkeysId?: string;
 };
 
 export type TTabsHotkey = {
@@ -86,5 +86,5 @@ export type TTabsHotkey = {
   /** Sets a callback function that is triggered when the tab is selected */
   onSelect?: (element: TTabItem) => void;
   /** Used to identify hotkeys */
-  hotkeysId?: boolean;
+  hotkeysId?: string;
 };

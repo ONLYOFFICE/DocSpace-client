@@ -26,13 +26,13 @@
 
 import React from "react";
 
-import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
-import { Text } from "@docspace/shared/components/text";
-import { isMobile } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
-import type { TOption } from "@docspace/shared/components/combobox";
-
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
+
+import { AccessRightSelect } from "../../../components/access-right-select";
+import { Text } from "../../../components/text";
+import { isMobile } from "../../../utils";
+import { DeviceType } from "../../../enums";
+import type { TOption } from "../../../components/combobox";
 
 import { RoleLinkBlockWrapper } from "./RoleLinkBlock.styled";
 import type { RoleLinkBlockProps } from "./RoleLinkBlock.types";

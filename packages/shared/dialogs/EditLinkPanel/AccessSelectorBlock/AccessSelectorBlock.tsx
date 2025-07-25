@@ -27,8 +27,8 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { Text } from "../../../components/text";
+import { ComboBox } from "../../../components/combobox";
 
 import { AccessSelectorBlockProps } from "./AccessSelectorBlock.types";
 

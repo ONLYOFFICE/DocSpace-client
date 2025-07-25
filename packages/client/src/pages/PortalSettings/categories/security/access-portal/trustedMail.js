@@ -234,6 +234,7 @@ const TrustedMail = (props) => {
         {trustedMailDomainSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="trusted_mail_component_learn_more"
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
@@ -256,16 +257,19 @@ const TrustedMail = (props) => {
             id: "trusted-mail-disabled",
             label: t("Common:Disabled"),
             value: "0",
+            dataTestId: "trusted_mail_disabled",
           },
           {
             id: "any-domains",
             label: t("AllDomains"),
             value: "2",
+            dataTestId: "trusted_mail_any_domains",
           },
           {
             id: "custom-domains",
             label: t("CustomDomains"),
             value: "1",
+            dataTestId: "trusted_mail_custom_domains",
           },
         ]}
         selected={type}
@@ -281,6 +285,9 @@ const TrustedMail = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
+          inputDataTestId="trusted_mail_domain_input"
+          deleteIconDataTestId="trusted_mail_delete_domain_icon"
+          addButtonDataTestId="trusted_mail_add_domain_button"
         />
       ) : null}
 
@@ -297,6 +304,8 @@ const TrustedMail = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="trusted-mail-save"
         additionalClassCancelButton="trusted-mail-cancel"
+        cancelButtonDataTestId="trusted_mail_cancel_button"
+        saveButtonDataTestId="trusted_mail_save_button"
       />
     </MainContainer>
   );

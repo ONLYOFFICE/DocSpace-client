@@ -207,6 +207,7 @@ const AccessPortal = (props) => {
         {trustedMailDomainSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="trusted_mail_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}

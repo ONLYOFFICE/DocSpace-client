@@ -55,6 +55,7 @@ const SecondaryTabs = (props: TabsProps) => {
     layoutId,
     isLoading,
     scaled,
+    hotkeysId,
     ...rest
   } = props;
 
@@ -73,6 +74,7 @@ const SecondaryTabs = (props: TabsProps) => {
     focusedTabIndex,
     setFocusedTabIndex,
     onSelect,
+    hotkeysId,
   });
 
   const { interfaceDirection } = useInterfaceDirection();
@@ -166,8 +168,17 @@ const SecondaryTabs = (props: TabsProps) => {
     scrollToTab(selectedItemIndex);
   }, [selectedItemIndex, items, scrollToTab]);
 
+  useEffect(() => {
+    const tabsIsActive = !!document.activeElement?.classList.contains(
+      `secondary-tabs-scroll-${hotkeysId}`,
+    );
+
+    setHotkeysIsActive(tabsIsActive);
+  });
+
   const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
     onSelect?.(selectedTabItem);
+    setFocusedTabIndex(index);
 
     scrollToTab(index);
   };
@@ -202,6 +213,7 @@ const SecondaryTabs = (props: TabsProps) => {
 
   const renderContent = (
     <div
+      id={layoutId}
       style={
         {
           "--tabs-count": items.length,
@@ -299,7 +311,7 @@ const SecondaryTabs = (props: TabsProps) => {
 
         {!isViewFirstTab ? (
           <div
-            className={styles.blurAhead}
+            className={classNames(styles.blurAhead, classes)}
             dir={interfaceDirection}
             data-direction={interfaceDirection}
           />
@@ -310,6 +322,7 @@ const SecondaryTabs = (props: TabsProps) => {
           autoHide={false}
           noScrollY
           paddingInlineEnd="0"
+          scrollBodyClassName={`secondary-tabs-scroll-${hotkeysId}`}
           className={classNames(styles.scroll, classes)}
         >
           {renderContent}
@@ -317,7 +330,7 @@ const SecondaryTabs = (props: TabsProps) => {
 
         {!isViewLastTab ? (
           <div
-            className={styles.blurBack}
+            className={classNames(styles.blurBack, classes)}
             dir={interfaceDirection}
             data-direction={interfaceDirection}
           />

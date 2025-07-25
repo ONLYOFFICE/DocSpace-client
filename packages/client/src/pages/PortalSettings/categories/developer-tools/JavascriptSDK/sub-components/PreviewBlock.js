@@ -108,6 +108,7 @@ export const PreviewBlock = ({
     <Preview>
       <Tabs
         layoutId="preview"
+        hotkeysId="preview"
         type={TabsTypes.Secondary}
         onSelect={(e) => {
           setSelectedItemId(e.id);

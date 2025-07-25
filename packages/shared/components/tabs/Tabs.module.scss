@@ -24,6 +24,10 @@
       var(--tabs-gradient-color) 100%
     );
   }
+
+  &.secondary {
+    height: 36px;
+  }
 }
 
 .blurBack {
@@ -44,6 +48,10 @@
       rgba(255, 255, 255, 0) 20.48%,
       var(--tabs-gradient-color) 100%
     );
+  }
+
+  &.secondary {
+    height: 36px;
   }
 }
 

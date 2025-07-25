@@ -154,6 +154,7 @@ export const CodeToInsert = ({
   return (
     <Tabs
       layoutId="codeToInsert"
+      hotkeysId="codeToInsert"
       type={TabsTypes.Secondary}
       items={tabs}
       selectedItemId={selectedItemId}

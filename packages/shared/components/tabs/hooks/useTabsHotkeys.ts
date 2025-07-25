@@ -37,18 +37,24 @@ const useTabsHotkeys = ({
   focusedTabIndex,
   setFocusedTabIndex,
   onSelect,
+  hotkeysId,
 }: TTabsHotkey) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
   const activateHotkeys = useCallback(
     (e: KeyboardEvent) => {
-      e.preventDefault();
-
       if (e.key === "Tab" && !isMobile) {
+        e.preventDefault();
+
+        const tabsElement = document.getElementsByClassName(
+          `secondary-tabs-scroll-${hotkeysId}`,
+        );
+
+        (tabsElement[0] as HTMLElement)?.focus();
         setHotkeysIsActive(!enabledHotkeys);
       }
     },
-    [enabledHotkeys, setHotkeysIsActive],
+    [enabledHotkeys, setHotkeysIsActive, hotkeysId],
   );
 
   const focusNextTab = () => {

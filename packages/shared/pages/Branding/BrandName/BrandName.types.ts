@@ -36,4 +36,7 @@ export interface IBrandNameProps {
   brandName: string;
   error?: string;
   onValidate?: (value: string) => string;
+  inputTestId?: string;
+  saveButtonDataTestId?: string;
+  cancelButtonDataTestId?: string;
 }

@@ -59,6 +59,9 @@ export const BrandName = ({
   brandName,
   error,
   onValidate,
+  saveButtonDataTestId,
+  cancelButtonDataTestId,
+  inputTestId,
 }: IBrandNameProps) => {
   const { t } = useTranslation("Common");
 
@@ -163,7 +166,7 @@ export const BrandName = ({
           className="settings_unavailable"
         >
           <TextInput
-            testId="logo-text-input"
+            testId={inputTestId ?? "logo-text-input"}
             className="brand-name input"
             value={brandNameWhiteLabel ?? ""}
             onChange={onChange}
@@ -196,6 +199,8 @@ export const BrandName = ({
             saveButtonDisabled={isEqualText || hasError}
             disableRestoreToDefault={isEqualText}
             showReminder={showReminder}
+            saveButtonDataTestId={saveButtonDataTestId}
+            cancelButtonDataTestId={cancelButtonDataTestId}
           />
         </FieldContainer>
       </div>

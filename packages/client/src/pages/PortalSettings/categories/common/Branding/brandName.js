@@ -101,6 +101,9 @@ const BrandNameComponent = (props) => {
       deviceType={deviceType}
       error={error}
       onValidate={handleValidation}
+      saveButtonDataTestId="portal_settings_brand_name_save_button"
+      cancelButtonDataTestId="portal_settings_brand_name_cancel_button"
+      inputTestId="portal_settings_brand_name_input"
     />
   );
 };

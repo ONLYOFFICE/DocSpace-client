@@ -99,13 +99,14 @@ const ToggleButton = ({
   name,
   fontWeight,
   fontSize,
+  dataTestId,
 }: ToggleButtonProps) => {
   return (
     <div
       id={id}
       className={classNames(styles.container, className)}
       style={style}
-      data-testid="toggle-button"
+      data-testid={dataTestId ?? "toggle-button"}
     >
       <label
         id={id}

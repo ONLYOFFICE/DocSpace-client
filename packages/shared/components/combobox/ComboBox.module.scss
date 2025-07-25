@@ -1,4 +1,4 @@
-/*
+/*!
  * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
@@ -26,29 +26,75 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import type { TTranslation, TViewAs } from "../../types";
-import { type TRoom, TRoomLifetime } from "../../api/rooms/types";
-import { type TFile, type TFolder } from "../../api/files/types";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
-type TQuickButtonItem = TFile | TFolder | TRoom;
+.combobox {
+  position: relative;
+  outline: 0;
+  -webkit-tap-highlight-color: variables.$tap-highlight;
 
-export type QuickButtonsProps = {
-  t: TTranslation;
-  item: TQuickButtonItem;
-  viewAs: TViewAs;
-  roomLifetime?: TRoomLifetime;
-  expiredDate?: string | null;
+  padding: 4px 0;
 
-  isDisabled?: boolean;
-  isPublicRoom?: boolean;
-  isPersonalRoom?: boolean;
-  isArchiveFolder?: boolean;
-  isTemplatesFolder?: boolean;
-  isIndexEditingMode?: boolean;
-  showLifetimeIcon?: boolean;
+  &.base {
+    width: 173px;
+  }
 
-  onClickDownload?: VoidFunction;
-  onCopyPrimaryLink?: VoidFunction;
-  onClickShare?: VoidFunction;
-  onCreateRoom?: VoidFunction;
-};
+  &.middle {
+    width: 300px;
+  }
+
+  &.big {
+    width: 350px;
+  }
+
+  &.huge {
+    width: 500px;
+  }
+
+  &.content {
+    width: fit-content;
+  }
+
+  &.scaled {
+    width: 100%;
+  }
+
+  &.withoutPadding {
+    padding: 0;
+  }
+
+  &.isOpen.noBorder {
+    background: var(--combobox-background);
+    border-radius: 3px;
+  }
+
+  &.advancedOptions {
+    :global(.dropdown-container) {
+      padding: 6px 0;
+    }
+  }
+
+  &:not(.disableMobileView) {
+    -webkit-user-select: none;
+
+    &:global(.dropdown-container) {
+      @include mixins.mobile {
+        position: fixed;
+        top: unset !important;
+        inset-inline: 0;
+        bottom: 0 !important;
+        width: 100%;
+        width: -moz-available;
+        width: -webkit-fill-available;
+        width: fill-available;
+        border: none;
+        border-radius: 6px 6px 0 0;
+      }
+    }
+  }
+
+  :global(.backdrop-active) {
+    z-index: 210;
+  }
+}

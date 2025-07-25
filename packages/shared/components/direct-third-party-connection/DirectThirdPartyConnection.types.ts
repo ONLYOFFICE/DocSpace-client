@@ -38,15 +38,6 @@ import type {
 import type { TThirdParties } from "../../api/files/types";
 import type { TBreadCrumb } from "../selector/Selector.types";
 
-export type StyledComboBoxItemProps = {
-  isDisabled?: boolean;
-};
-
-export type StyledBackupProps = {
-  isConnectedAccount?: boolean;
-  isMobileScale?: boolean;
-};
-
 export type DirectThirdPartyConnectionState = {
   // folderList: {};
   isLoading: boolean;

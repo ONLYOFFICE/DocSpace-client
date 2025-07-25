@@ -30,7 +30,8 @@ import styled, { css } from "styled-components";
 import { tablet } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
-import { ILogo, SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { SelectIconProps, ILogo } from "../RoomLogoCoverDialog.types";
+import { fixSvgClipPath } from "../utils";
 
 interface WithoutIconProps {
   isSelected?: boolean;
@@ -157,7 +158,7 @@ export const SelectIcon = ({
         {covers
           ? covers?.map((icon) => {
               function createMarkup() {
-                return { __html: icon.data };
+                return { __html: fixSvgClipPath(icon.data) };
               }
               return (
                 <StyledIconContainer

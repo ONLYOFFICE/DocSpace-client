@@ -24,38 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+/**
+ * Fixes SVG icons that have clip-path issues by removing clip-path attributes
+ * and corresponding defs sections that can cause visual clipping when scaled
+ *
+ * @param svgData - Raw SVG string data
+ * @returns Processed SVG string with clip-path issues fixed
+ */
+export const fixSvgClipPath = (svgData: string): string => {
+  if (!svgData) return svgData;
 
-export const StyledBody = styled.div<{
-  isCheckbox: boolean;
-  isLabel: boolean;
-  maxInputWidth: string;
-}>`
-  margin-top: 16px;
-
-  .quota-container {
-    display: flex;
-    grid-gap: 4px;
-    margin-bottom: ${(props) => (props.isCheckbox ? "8px" : "16px")};
-    ${(props) => props.isLabel && " margin-top: 8px"};
-  }
-  .quota_limit {
-    ${(props) => props.maxInputWidth && `max-width: ${props.maxInputWidth}`};
-    max-height: 32px;
+  if (svgData.includes('clip-path="url(#')) {
+    let processed = svgData.replace(/clip-path="[^"]*"/gi, "");
+    processed = processed.replace(/<defs>.*?<\/defs>/gi, "");
+    return processed;
   }
 
-  .quota_checkbox {
-    svg {
-      margin-inline-end: 8px;
-    }
-  }
-
-  .quota_value {
-    max-width: fit-content;
-    padding: 0;
-  }
-
-  .quota_description {
-    color: ${(props) => props.theme.text.disableColor};
-  }
-`;
+  return svgData;
+};

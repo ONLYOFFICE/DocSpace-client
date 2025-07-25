@@ -243,3 +243,7 @@ export const THIRD_PARTY_SERVICES_URL =
   "/portal-settings/integration/third-party-services?service=";
 
 export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
+
+// any unicode letters are allowed, characters are prohibited
+export const BRAND_NAME_REGEX =
+  /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;

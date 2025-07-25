@@ -151,6 +151,7 @@ const AccessPortal = (props) => {
         {passwordStrengthSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="password_strength_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}

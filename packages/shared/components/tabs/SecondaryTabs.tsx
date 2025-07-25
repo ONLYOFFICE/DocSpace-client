@@ -42,6 +42,8 @@ import {
 } from "./Tabs.constants";
 import styles from "./Tabs.module.scss";
 import useTabsHotkeys from "./hooks/useTabsHotkeys";
+import { useViewTab } from "./hooks/useViewTab";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 const SecondaryTabs = (props: TabsProps) => {
   const {
@@ -73,6 +75,8 @@ const SecondaryTabs = (props: TabsProps) => {
     onSelect,
   });
 
+  const { interfaceDirection } = useInterfaceDirection();
+
   const [referenceTabSize, setReferenceTabSize] = useState<number | null>(null);
   const [tabsIsOverflowing, setTabsIsOverflowing] = useState(false);
 
@@ -80,6 +84,9 @@ const SecondaryTabs = (props: TabsProps) => {
   const scrollRef = useRef<ScrollbarType>(null);
   const tabItemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
+
+  const isViewFirstTab = useViewTab(scrollRef, tabsRef, 0);
+  const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
 
   const scrollToTab = useCallback(
     (index: number): void => {
@@ -290,6 +297,14 @@ const SecondaryTabs = (props: TabsProps) => {
           />
         ) : null}
 
+        {!isViewFirstTab ? (
+          <div
+            className={styles.blurAhead}
+            dir={interfaceDirection}
+            data-direction={interfaceDirection}
+          />
+        ) : null}
+
         <Scrollbar
           ref={scrollRef}
           autoHide={false}
@@ -299,6 +314,14 @@ const SecondaryTabs = (props: TabsProps) => {
         >
           {renderContent}
         </Scrollbar>
+
+        {!isViewLastTab ? (
+          <div
+            className={styles.blurBack}
+            dir={interfaceDirection}
+            data-direction={interfaceDirection}
+          />
+        ) : null}
 
         {withArrows ? (
           <ReactSVG

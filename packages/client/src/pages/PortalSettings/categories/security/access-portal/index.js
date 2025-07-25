@@ -180,6 +180,7 @@ const AccessPortal = (props) => {
         {tfaSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="tfa_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}

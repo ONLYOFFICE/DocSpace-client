@@ -1789,7 +1789,6 @@ class FilesStore {
                 external = room.external;
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
-                this.infoPanelStore.setInfoPanelRoom(room);
               } else {
                 const newInfoPanelSelection = this.getFilesListItems([room]);
 

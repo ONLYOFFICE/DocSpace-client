@@ -190,11 +190,12 @@ class InfoPanelStore {
     if (
       (selectedFolderIsRoomOrFolderInRoom ||
         archivedFolderIsRoomOrFolderInRoom) &&
-      isFolderOpenedThroughSectionHeader
+      isFolderOpenedThroughSectionHeader &&
+      this.selectedFolderStore.isRoom
     ) {
       this.setView(infoMembers);
     } else {
-      this.setView(infoDetails);
+      this.setView(infoShare);
     }
 
     this.isVisible = bool;

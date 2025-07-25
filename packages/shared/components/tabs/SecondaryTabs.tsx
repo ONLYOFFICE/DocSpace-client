@@ -62,6 +62,7 @@ const SecondaryTabs = (props: TabsProps) => {
 
   const [focusedTabIndex, setFocusedTabIndex] = useState(selectedItemIndex);
   const [hotkeysIsActive, setHotkeysIsActive] = useState(false);
+  const [tabsCountInContainer, setTabsCountInContainer] = useState(0);
 
   useTabsHotkeys({
     enabledHotkeys: hotkeysIsActive,
@@ -80,30 +81,34 @@ const SecondaryTabs = (props: TabsProps) => {
   const tabItemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
 
-  const scrollToTab = useCallback((index: number): void => {
-    if (!scrollRef.current || !tabsRef.current) return;
+  const scrollToTab = useCallback(
+    (index: number): void => {
+      if (!scrollRef.current || !tabsRef.current) return;
 
-    const containerElement = scrollRef.current.scrollerElement;
-    const tabElement = tabsRef.current.children[index] as HTMLDivElement;
+      const containerElement = scrollRef.current.scrollerElement;
+      const tabElement = tabsRef.current.children[index] as HTMLDivElement;
 
-    if (!containerElement || !tabElement) return;
+      if (!containerElement || !tabElement) return;
 
-    const containerWidth = containerElement.offsetWidth;
-    const tabWidth = tabElement?.offsetWidth;
-    const tabOffsetLeft = tabElement?.offsetLeft;
-    const arrowsWidth = isMobile ? 0 : ARROW_WIDTH;
+      const containerWidth = containerElement.offsetWidth;
+      const tabWidth = tabElement?.offsetWidth;
+      const tabOffsetLeft = tabElement?.offsetLeft;
+      const arrowsWidth = isMobile ? 0 : ARROW_WIDTH;
 
-    if (tabOffsetLeft - TABS_GAP < containerElement.scrollLeft) {
-      scrollRef.current.scrollTo(
-        tabOffsetLeft - containerWidth + tabWidth + TABS_GAP + arrowsWidth,
-      );
-    } else if (
-      tabOffsetLeft + tabWidth >
-      containerElement.scrollLeft + containerWidth
-    ) {
-      scrollRef.current.scrollTo(tabOffsetLeft - TABS_GAP - arrowsWidth);
-    }
-  }, []);
+      if (tabOffsetLeft - TABS_GAP < containerElement.scrollLeft) {
+        scrollRef.current.scrollTo(tabOffsetLeft - TABS_GAP - arrowsWidth);
+      } else if (
+        tabOffsetLeft + tabWidth >
+        containerElement.scrollLeft + containerWidth
+      ) {
+        const tabsWidth = (tabsCountInContainer - 1) * tabWidth;
+        scrollRef.current.scrollTo(
+          tabOffsetLeft - TABS_GAP - arrowsWidth - tabsWidth,
+        );
+      }
+    },
+    [tabsCountInContainer],
+  );
 
   useEffect(() => {
     if (isLoading) return;
@@ -145,6 +150,7 @@ const SecondaryTabs = (props: TabsProps) => {
           TABS_GAP;
 
         setReferenceTabSize(size);
+        setTabsCountInContainer(maxTabsCount);
       }
     }
   }, [referenceTabSize, items.length, tabsIsOverflowing]);

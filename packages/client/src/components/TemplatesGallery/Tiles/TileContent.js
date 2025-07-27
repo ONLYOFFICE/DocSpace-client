@@ -24,35 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables/colors";
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  StyledTileContent,
+  MainContainerWrapper,
+  MainContainer,
+} from "./TileContent.styled";
 
-.container {
-  position: absolute;
+const TileContent = (props) => {
+  const { children, id, className, style, onClick } = props;
 
-  top: 60px;
-  bottom: 60px;
+  return (
+    <StyledTileContent
+      id={id}
+      className={className}
+      style={style}
+      onClick={onClick}
+    >
+      <MainContainerWrapper
+        mainContainerWidth={
+          children.props ? children.props.containerWidth : null
+        }
+      >
+        <MainContainer className="row-main-container">{children}</MainContainer>
+      </MainContainerWrapper>
+    </StyledTileContent>
+  );
+};
 
-  z-index: 204;
+TileContent.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  onClick: PropTypes.func,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+};
 
-  width: 100%;
-}
-
-.templatesGallery {
-  background-color: var(--background-color);
-  border-radius: 6px;
-
-  margin-right: 60px;
-  margin-left: 60px;
-
-  height: 100%;
-}
-
-.header {
-  height: 54px;
-
-  font-weight: 700;
-  font-size: 21px;
-
-  line-height: 28px;
-}
+export default TileContent;

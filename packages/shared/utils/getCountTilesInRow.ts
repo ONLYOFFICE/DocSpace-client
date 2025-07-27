@@ -32,7 +32,27 @@ import { isDesktop, isMobile } from "./device";
 export const getCountTilesInRow = (
   isRooms?: boolean,
   isTemplates?: boolean,
+  isTemplatesGallery?: boolean,
 ) => {
+  if (isTemplatesGallery) {
+    if (window.innerWidth > 600 && window.innerWidth <= 959) {
+      return 3;
+    }
+
+    if (window.innerWidth >= 960 && window.innerWidth <= 1319) {
+      return 4;
+    }
+
+    if (window.innerWidth >= 1320 && window.innerWidth <= 1559) {
+      return 5;
+    }
+
+    if (window.innerWidth >= 1560) {
+      return 6;
+    }
+
+    return 2;
+  }
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
   const tileGap = 16;

@@ -24,35 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables/colors";
+import styled, { css } from "styled-components";
 
-.container {
-  position: absolute;
+import { tablet } from "@docspace/shared/utils";
 
-  top: 60px;
-  bottom: 60px;
+const commonCss = css`
+  margin: 0;
+  font-family: ${(props) => props.theme.fontFamily};
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+`;
 
-  z-index: 204;
+const truncateCss = css`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
+export const MainContainer = styled.div`
+  height: 20px;
+
+  @media ${tablet} {
+    ${truncateCss};
+  }
+`;
+
+export const MainContainerWrapper = styled.div`
+  ${commonCss};
+
+  display: flex;
+  align-self: center;
+  margin-inline-end: auto;
+`;
+
+export const StyledTileContent = styled.div`
   width: 100%;
-}
-
-.templatesGallery {
-  background-color: var(--background-color);
-  border-radius: 6px;
-
-  margin-right: 60px;
-  margin-left: 60px;
-
-  height: 100%;
-}
-
-.header {
-  height: 54px;
-
-  font-weight: 700;
-  font-size: 21px;
-
-  line-height: 28px;
-}
+  display: inline-flex;
+`;

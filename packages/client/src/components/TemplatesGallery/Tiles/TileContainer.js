@@ -24,35 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@use "@docspace/shared/styles/mixins";
-@use "@docspace/shared/styles/variables/colors";
+import React from "react";
+import { withTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+import { StyledTileContainer } from "./StyledTileView";
+import InfiniteGrid from "./InfiniteGrid";
 
-.container {
-  position: absolute;
+class TileContainer extends React.PureComponent {
+  render() {
+    const { children, ...rest } = this.props;
 
-  top: 60px;
-  bottom: 60px;
-
-  z-index: 204;
-
-  width: 100%;
+    return (
+      <StyledTileContainer {...rest}>
+        <InfiniteGrid>{children}</InfiniteGrid>
+      </StyledTileContainer>
+    );
+  }
 }
 
-.templatesGallery {
-  background-color: var(--background-color);
-  border-radius: 6px;
+TileContainer.propTypes = {
+  children: PropTypes.any.isRequired,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  useReactWindow: PropTypes.bool,
+};
 
-  margin-right: 60px;
-  margin-left: 60px;
+TileContainer.defaultProps = {
+  useReactWindow: true,
+  id: "tileContainer",
+};
 
-  height: 100%;
-}
-
-.header {
-  height: 54px;
-
-  font-weight: 700;
-  font-size: 21px;
-
-  line-height: 28px;
-}
+export default withTranslation(["Files", "Common"])(TileContainer);

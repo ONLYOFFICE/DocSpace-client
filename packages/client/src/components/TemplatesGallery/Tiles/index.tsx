@@ -31,6 +31,9 @@ import { withTranslation } from "react-i18next";
 
 import type { FC } from "react";
 import type { TilesProps } from "./Tiles.types";
+import FileTile from "./FileTile";
+
+import TileContainer from "./TileContainer";
 
 const Tiles: FC<TilesProps> = ({
   // t,
@@ -73,12 +76,13 @@ const Tiles: FC<TilesProps> = ({
     setOformFilesLoaded(tReady && oformFiles.length > 0);
   }, [tReady, oformFiles]);
 
-  console.log("oformFiles", oformFiles);
-
-  return oformFiles.map((item: { id: Key | null | undefined }) => (
-    // eslint-disable-next-line react/no-unknown-property
-    <div key={item.id} />
-  ));
+  return (
+    <TileContainer className="tile-container">
+      {oformFiles.map((item: { id: Key | null | undefined }, index) => {
+        return <FileTile key={item.id} item={item} selectableRef={undefined} />;
+      })}
+    </TileContainer>
+  );
 };
 
 export default inject<TStore>(

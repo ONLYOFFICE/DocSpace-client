@@ -29,10 +29,142 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import type { FC } from "react";
+
+import { useRef } from "react";
+
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+
+import { Link } from "@docspace/shared/components/link";
+
+import { ReactSVG } from "react-svg";
+import { useNavigate } from "react-router";
+
+import { isMobile } from "@docspace/shared/utils";
+import {
+  StyledTile,
+  StyledFileTileTop,
+  StyledFileTileBottom,
+  StyledContent,
+  StyledOptionButton,
+  StyledContextMenu,
+} from "./StyledTileView";
+
 import type { TileProps } from "./Tiles.types";
 
-const Tile: FC<TileProps> = () => {
-  return null;
+const Tile: FC<TileProps> = ({
+  t,
+  thumbnailClick,
+  item = {},
+
+  onCreateOform,
+  getFormGalleryContextOptions,
+
+  setGallerySelected,
+  children,
+  contextButtonSpacerWidth = "32px",
+  tileContextClick,
+  isActive,
+  isSelected,
+  title,
+  showHotkeyBorder,
+  getIcon,
+}) => {
+  const cm = useRef();
+  const tile = useRef();
+
+  const navigate = useNavigate();
+
+  const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
+  const previewLoader = () => <div style={{ width: "96px" }} />;
+
+  const onSelectForm = () => setGallerySelected(item);
+
+  const onCreateForm = () => onCreateOform(navigate);
+
+  const getContextModel = () => getFormGalleryContextOptions(item, t, navigate);
+
+  const contextMenuHeader = {
+    icon: getIcon(32, ".pdf"),
+    title: item?.attributes?.name_form,
+  };
+
+  const getOptions = () =>
+    getFormGalleryContextOptions(item, t, navigate).map((elm) => elm.key);
+
+  const onOpenContextMenu = (e) => {
+    tileContextClick && tileContextClick();
+    if (!cm.current.menuRef.current) tile.current.click(e); // TODO: need fix context menu to global
+    cm.current.show(e);
+  };
+
+  // TODO: OFORM isActive
+
+  return (
+    <StyledTile
+      ref={tile}
+      isSelected={isSelected}
+      onContextMenu={onOpenContextMenu}
+      isActive={isActive}
+      showHotkeyBorder={showHotkeyBorder}
+      onDoubleClick={onCreateForm}
+      onClick={onSelectForm}
+      className="files-item"
+    >
+      <StyledFileTileTop isActive={isActive}>
+        {previewSrc ? (
+          <Link
+            className="thumbnail-image-link"
+            type="page"
+            onClick={thumbnailClick}
+          >
+            <img
+              src={previewSrc}
+              className="thumbnail-image"
+              alt="Thumbnail-img"
+            />
+          </Link>
+        ) : (
+          <ReactSVG
+            className="temporary-icon"
+            src={previewSrc || ""}
+            loading={previewLoader}
+          />
+        )}
+      </StyledFileTileTop>
+
+      <StyledFileTileBottom isSelected={isSelected} isActive={isActive}>
+        {/* <div className="file-icon_container">
+          <div className="file-icon">
+            <img
+              className="react-svg-icon"
+              src={getIcon(32, ".pdf")}
+              alt="File"
+            />
+          </div>
+        </div>  */}
+
+        <StyledContent>{children}</StyledContent>
+
+        {/* <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
+          <ContextMenuButton
+            className="expandButton"
+            directionX="right"
+            getData={getOptions}
+            displayType="toggle"
+            onClick={onOpenContextMenu}
+            title={title}
+          />
+          <StyledContextMenu
+            ignoreChangeView={isMobile()}
+            getContextModel={getContextModel}
+            header={contextMenuHeader}
+            ref={cm}
+            withBackdrop
+          />
+        </StyledOptionButton> */}
+      </StyledFileTileBottom>
+    </StyledTile>
+  );
 };
 
 export default inject<TStore>(

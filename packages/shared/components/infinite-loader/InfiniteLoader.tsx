@@ -30,6 +30,7 @@ import { MAX_INFINITE_LOADER_SHIFT, isMobile } from "../../utils/device";
 
 import ListComponent from "./sub-components/List";
 import GridComponent from "./sub-components/Grid";
+import GridDynamicHeight from "./sub-components/GridDynamicHeight";
 
 import { InfiniteLoaderProps } from "./InfiniteLoader.types";
 
@@ -72,7 +73,13 @@ const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
 
   if (isLoading) return null;
 
-  return viewAs === "tile" ? (
+  return viewAs === "tileDynamicHeight" ? (
+    <GridDynamicHeight
+      scroll={scroll ?? window}
+      showSkeleton={showSkeleton}
+      {...props}
+    />
+  ) : viewAs === "tile" ? (
     <GridComponent
       scroll={scroll ?? window}
       showSkeleton={showSkeleton}

@@ -31,6 +31,11 @@ import { useLocation, useNavigate } from "react-router";
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 
 import type { FC } from "react";
+import Section from "@docspace/shared/components/section";
+
+import SectionWrapper from "SRC_DIR/components/Section";
+
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import SectionFilterContent from "../Filter";
 import Tiles from "../Tiles";
 
@@ -83,11 +88,14 @@ const Form: FC<FormProps> = ({
   }, [oformsFilter.categorizeBy, oformsFilter.categoryId]);
 
   if (isInitLoading) return null;
+
   return (
-    <>
+    <div style={{ width: "100%", paddingLeft: "16px" }}>
       <SectionFilterContent />
-      <Tiles />
-    </>
+      <Scrollbar style={{ height: "calc(100vh - 286px)" }}>
+        <Tiles />
+      </Scrollbar>
+    </div>
   );
 };
 

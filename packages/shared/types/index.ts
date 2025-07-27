@@ -40,7 +40,13 @@ export type TWeekdaysLabel = Pick<Option, "key" | "label">;
 export type TDirectionX = "left" | "right";
 export type TDirectionY = "bottom" | "top" | "both";
 
-export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
+export type TViewAs =
+  | "tile"
+  | "table"
+  | "row"
+  | "settings"
+  | "profile"
+  | "tileDynamicHeight";
 
 export type ProviderType = {
   provider_id: unknown;

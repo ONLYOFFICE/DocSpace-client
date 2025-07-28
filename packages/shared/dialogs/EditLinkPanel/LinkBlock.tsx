@@ -24,14 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/shared/components/text";
-import { TextInput } from "@docspace/shared/components/text-input";
+import type { FC, ChangeEvent } from "react";
 
-const LinkBlock = (props) => {
+import { Text } from "../../components/text";
+import { InputSize, InputType, TextInput } from "../../components/text-input";
+import type { LinkBlockProps } from "./EditLinkPanel.types";
+
+const LinkBlock: FC<LinkBlockProps> = (props) => {
   const { t, isEdit, isLoading, linkNameValue, setLinkNameValue, linkValue } =
     props;
 
-  const onChangeLinkName = (e) => {
+  const onChangeLinkName = (e: ChangeEvent<HTMLInputElement>) => {
     setLinkNameValue(e.target.value);
   };
 
@@ -44,26 +47,28 @@ const LinkBlock = (props) => {
 
       <TextInput
         scale
-        size="base"
         withBorder
         isAutoFocussed
-        className="edit-link_name-input"
+        size={InputSize.base}
+        type={InputType.text}
         value={linkNameValue}
+        isDisabled={isLoading}
         onChange={onChangeLinkName}
         placeholder={t("LinkName")}
-        isDisabled={isLoading}
+        className="edit-link_name-input"
       />
 
       {isEdit ? (
         <TextInput
           scale
-          size="base"
+          size={InputSize.base}
           withBorder
           isDisabled
           isReadOnly
-          className="edit-link_link-input"
           value={linkValue}
+          type={InputType.text}
           placeholder={t("LinkName")}
+          className="edit-link_link-input"
         />
       ) : null}
     </div>

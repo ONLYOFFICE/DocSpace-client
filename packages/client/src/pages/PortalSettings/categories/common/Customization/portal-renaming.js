@@ -314,6 +314,7 @@ const PortalRenamingComponent = (props) => {
           id="textInputContainerPortalRenaming"
           scale
           value={portalName}
+          testId="customization_portal_renaming_text_input"
           onChange={onChangePortalName}
           isDisabled={
             (!isSettingPaid && !standalone) || isLoadingPortalNameSave
@@ -371,6 +372,7 @@ const PortalRenamingComponent = (props) => {
             target="_blank"
             isHovered
             href={renamingSettingsUrl}
+            dataTestId="portal_renaming_learn_more"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -392,6 +394,8 @@ const PortalRenamingComponent = (props) => {
         saveButtonDisabled={!!errorValue}
         additionalClassSaveButton="portal-renaming-save"
         additionalClassCancelButton="portal-renaming-cancel"
+        saveButtonDataTestId="customization_portal_renaming_save_button"
+        cancelButtonDataTestId="customization_portal_renaming_cancel_button"
       />
       <PortalRenamingDialog
         visible={isShowModal}

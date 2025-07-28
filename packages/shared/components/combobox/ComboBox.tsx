@@ -243,6 +243,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     onClickSelectedItem,
     shouldShowBackdrop,
     dropDownClassName,
+    dataTestId,
   } = props;
 
   React.useEffect(() => {
@@ -403,7 +404,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       className={comboboxClasses}
       ref={ref}
       onClick={comboBoxClick}
-      data-testid="combobox"
+      data-testid={dataTestId ?? "combobox"}
       title={title}
       data-scaled={scaledOptions || undefined}
       style={style}

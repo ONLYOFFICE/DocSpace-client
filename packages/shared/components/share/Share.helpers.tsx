@@ -112,7 +112,7 @@ export const getAccessOptions = (
     available.FillForms && {
       access: ShareAccessRights.FormFilling,
       key: "filling",
-      label: t("Common:FormFilling"),
+      label: t("Common:Filling"),
       icon: FillFormsReactSvgUrl,
     },
     // available.Restrict && {

@@ -494,7 +494,7 @@ export default inject(
     const { isRootFolder } = selectedFolderStore;
 
     return {
-      infoPanelSelection: infoPanelRoomSelection,
+      infoPanelSelection: { ...infoPanelRoomSelection, isRoom: true },
       selfId,
       isPublicRoomType,
       isFormRoom,

@@ -198,7 +198,7 @@ const RoomsItemHeader = ({
 
       <div className="item-icon">
         <RoomIcon
-          isTemplate={isTemplate}
+          isTemplate={isRoom ? isTemplate : false}
           color={color}
           title={title}
           isArchive={

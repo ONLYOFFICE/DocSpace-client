@@ -1509,7 +1509,7 @@ class ContextOptionsStore {
 
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
-      ? ["select", "room-info", "show-info"]
+      ? ["select", "open", "room-info", "show-info"]
       : isHeader
         ? ["select"]
         : [];

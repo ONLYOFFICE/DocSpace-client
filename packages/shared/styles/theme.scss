@@ -2702,3 +2702,19 @@
   --combobox-children-button-default-disabled-color: #{$gray-dark};
   --combobox-children-button-selected-color: #{$white};
 }
+
+.light {
+  --access-right-select-description-color: #{$gray};
+}
+
+.dark {
+  --access-right-select-description-color: #{$gray-dark};
+}
+
+.light {
+  --settings-backup-separator-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --settings-backup-separator-border: 1px solid #{$gray-dark-strong};
+}

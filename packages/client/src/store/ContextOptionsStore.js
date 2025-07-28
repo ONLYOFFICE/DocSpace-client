@@ -2621,7 +2621,7 @@ class ContextOptionsStore {
   };
 
   onShowFormRoomSelectFileDialog = (filter = FilesSelectorFilterTypes.DOCX) => {
-    this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter);
+    this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter, true);
   };
 
   getContextOptionsPlusFormRoom = (t) => {

@@ -310,6 +310,7 @@ const AccessPortal = (props) => {
         {administratorMessageSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="administrator_message_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}

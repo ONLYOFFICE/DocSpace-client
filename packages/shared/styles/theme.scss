@@ -2664,3 +2664,11 @@
 .dark {
   --access-right-select-description-color: #{$gray-dark};
 }
+
+.light {
+  --settings-backup-separator-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --settings-backup-separator-border: 1px solid #{$gray-dark-strong};
+}

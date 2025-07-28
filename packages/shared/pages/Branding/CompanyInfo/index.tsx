@@ -167,6 +167,7 @@ export const CompanyInfo = ({
                     className={classNames(styles.link, "link")}
                     onClick={showExample}
                     noHover
+                    dataTestId="company_info_settings_link"
                   />
                 ),
               }}
@@ -207,7 +208,7 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerCompanyName"
-              testId="company-name-input"
+              testId="company_info_settings_company_name_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -226,7 +227,7 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerEmail"
-              testId="email-input"
+              testId="company_info_settings_email_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -245,7 +246,7 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerPhone"
-              testId="phone-input"
+              testId="company_info_settings_phone_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -264,7 +265,7 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerWebsite"
-              testId="site-input"
+              testId="company_info_settings_site_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -283,7 +284,7 @@ export const CompanyInfo = ({
           >
             <TextInput
               id="textInputContainerAddress"
-              testId="address-input"
+              testId="company_info_settings_address_input"
               className={classNames(styles.textInput, "text-input")}
               isDisabled={!isSettingPaid}
               scale
@@ -313,6 +314,8 @@ export const CompanyInfo = ({
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
           additionalClassSaveButton="company-info-save"
           additionalClassCancelButton="company-info-cancel"
+          saveButtonDataTestId="company_info_settings_save_button"
+          cancelButtonDataTestId="company_info_settings_cancel_button"
         />
       </div>
     </>

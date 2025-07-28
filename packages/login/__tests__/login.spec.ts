@@ -26,6 +26,7 @@
 import {
   HEADER_LIST_CAPABILITIES,
   HEADER_LIST_THIRD_PARTY_PROVIDERS,
+  endpoints,
 } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
@@ -37,4 +38,38 @@ test("login render", async ({ page, mockRequest }) => {
   await page.goto("/login");
 
   await expect(page).toHaveScreenshot(["desktop", "login", "login-render.png"]);
+});
+
+test("login error authentication failed", async ({ page, mockRequest }) => {
+  await mockRequest.router([endpoints.loginError]);
+
+  await page.goto("/login");
+
+  await page.getByTestId("email-input").fill("email@mail.ru");
+
+  await page.getByTestId("text-input").fill("qwerty123");
+
+  await page.getByTestId("form-wrapper").getByTestId("button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-error-authentication-failed.png",
+  ]);
+});
+
+test("login error not validated", async ({ page }) => {
+  await page.goto("/login");
+
+  await page.getByTestId("email-input").fill("");
+
+  await page.getByTestId("text-input").fill("");
+
+  await page.getByTestId("form-wrapper").getByTestId("button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-error-not-validated.png",
+  ]);
 });

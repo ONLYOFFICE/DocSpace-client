@@ -24,24 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { type FC, type PropsWithChildren, useId } from "react";
 
-const ToggleBlock = ({
+import { Text } from "../../components/text";
+import { Tooltip } from "../../components/tooltip";
+import { ToggleButton } from "../../components/toggle-button";
+
+import type { ToggleBlockProps } from "./EditLinkPanel.types";
+
+const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
   isLoading,
   headerText,
   bodyText,
   isChecked,
   onChange,
   children,
-  withToggle = true,
   isExpired,
-  isDisabled = false,
   tooltipContent,
+  withToggle = true,
+  isDisabled = false,
 }) => {
-  const tooltipId = React.useId();
+  const tooltipId = useId();
 
   return (
     <>

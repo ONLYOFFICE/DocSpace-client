@@ -27,7 +27,10 @@
  */
 
 import { TGetFolder } from "../api/files/types";
-import { files as mockFiles } from "./e2e/handlers/files/folder";
+import {
+  files as mockFiles,
+  folders as mockFolders,
+} from "./e2e/handlers/files/folder";
 
 const getRecentMockFiles = () => {
   return mockFiles.map((f) => ({
@@ -38,9 +41,16 @@ const getRecentMockFiles = () => {
   }));
 };
 
+const getRecentMockFolders = () => {
+  return mockFolders.map((f) => ({
+    ...f,
+    lastOpened: f.updated,
+  }));
+};
+
 export const mockRecentTreeFolder = {
   files: getRecentMockFiles(),
-  folders: [],
+  folders: getRecentMockFolders(),
   current: {
     parentId: 0,
     filesCount: 13,

@@ -3867,7 +3867,7 @@ export const files: TFile[] = [
   },
 ];
 
-const folders: TFolder[] = [
+export const folders: TFolder[] = [
   {
     parentId: 5,
     filesCount: 17,

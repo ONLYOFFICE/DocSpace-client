@@ -336,6 +336,7 @@ const AccessPortal = (props) => {
         {lifetimeSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="session_lifetime_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}

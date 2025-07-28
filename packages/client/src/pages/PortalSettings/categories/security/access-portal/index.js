@@ -233,6 +233,7 @@ const AccessPortal = (props) => {
         {limitedDevToolsBlockHelpUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="developer_tools_access_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}

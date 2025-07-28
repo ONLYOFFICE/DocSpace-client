@@ -203,6 +203,7 @@ const config = {
                     params: {
                       overrides: {
                         removeViewBox: false,
+                        cleanupIds: false,
                       },
                     },
                   },

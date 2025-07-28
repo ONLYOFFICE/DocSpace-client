@@ -57,6 +57,7 @@ const RoomCell = ({ sideColor, item, isRecentFolder }) => {
 
   const canVisibleTitle = originRoomTitle || originTitle;
   const emptyTitle = isRecentFolder ? "—" : "";
+  const showTooltip = isRecentFolder ? canVisibleTitle : true;
 
   return [
     <StyledText
@@ -72,25 +73,32 @@ const RoomCell = ({ sideColor, item, isRecentFolder }) => {
       {originRoomTitle || originTitle || emptyTitle}
     </StyledText>,
 
-    <Tooltip
-      place="bottom"
-      key="tooltip"
-      id={`${item.id}`}
-      afterShow={getPath}
-      getContent={() => (
-        <span>
-          {isTooltipLoading ? (
-            <Loader color={globalColors.black} size="12px" type="track" />
-          ) : (
-            path.map((pathPart, i) => (
-              <Text key={pathPart.id} isBold={i === 0} isInline fontSize="12px">
-                {i === 0 ? pathPart.title : `/${pathPart.title}`}
-              </Text>
-            ))
-          )}
-        </span>
-      )}
-    />,
+    showTooltip ? (
+      <Tooltip
+        place="bottom"
+        key="tooltip"
+        id={`${item.id}`}
+        afterShow={getPath}
+        getContent={() => (
+          <span>
+            {isTooltipLoading ? (
+              <Loader color={globalColors.black} size="12px" type="track" />
+            ) : (
+              path.map((pathPart, i) => (
+                <Text
+                  key={pathPart.id}
+                  isBold={i === 0}
+                  isInline
+                  fontSize="12px"
+                >
+                  {i === 0 ? pathPart.title : `/${pathPart.title}`}
+                </Text>
+              ))
+            )}
+          </span>
+        )}
+      />
+    ) : null,
   ];
 };
 

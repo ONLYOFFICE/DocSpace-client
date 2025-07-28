@@ -114,8 +114,12 @@ const Manager = (props) => {
   ];
 
   const columnDisplayOptions = [
-    { value: "default", label: t("DefaultColumnsOption") },
-    { value: "custom", label: t("SetItUp") },
+    {
+      value: "default",
+      label: t("DefaultColumnsOption"),
+      testId: "default_radio_button",
+    },
+    { value: "custom", label: t("SetItUp"), testId: "custom_radio_button" },
   ];
 
   const [columnsOptions, setColumnsOptions] = useState([
@@ -443,6 +447,7 @@ const Manager = (props) => {
                   label={t("Menu")}
                   onChange={onChangeShowMenu}
                   isChecked={config.showMenu}
+                  testId="show_menu_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -455,6 +460,7 @@ const Manager = (props) => {
                       img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
                     />
                   }
+                  dataTestId="show_menu_help_button"
                 />
               </LabelGroup>
 
@@ -464,6 +470,7 @@ const Manager = (props) => {
                   label={t("Common:Title")}
                   onChange={onChangeShowTitle}
                   isChecked={config.showTitle}
+                  testId="show_title_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -476,6 +483,7 @@ const Manager = (props) => {
                       img={theme.isBase ? TitleUrl : TitleDarkUrl}
                     />
                   }
+                  dataTestId="show_title_help_button"
                 />
               </LabelGroup>
               <LabelGroup>
@@ -484,6 +492,7 @@ const Manager = (props) => {
                   label={t("SettingUpColumns")}
                   onChange={toggleShowSettings}
                   isChecked={config.showSettings}
+                  testId="show_settings_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -496,6 +505,7 @@ const Manager = (props) => {
                       img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
                     />
                   }
+                  dataTestId="show_settings_help_button"
                 />
               </LabelGroup>
               <LabelGroup>
@@ -504,6 +514,7 @@ const Manager = (props) => {
                   label={t("ActionButton")}
                   onChange={toggleActionButton}
                   isChecked={!config.disableActionButton}
+                  testId="action_button_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -516,6 +527,7 @@ const Manager = (props) => {
                       img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
                     />
                   }
+                  dataTestId="action_button_help_button"
                 />
               </LabelGroup>
               <LabelGroup>
@@ -524,6 +536,7 @@ const Manager = (props) => {
                   label={t("SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
+                  testId="show_filter_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -536,6 +549,7 @@ const Manager = (props) => {
                       img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     />
                   }
+                  dataTestId="show_filter_help_button"
                 />
               </LabelGroup>
               <LabelGroup>
@@ -544,6 +558,7 @@ const Manager = (props) => {
                   label={t("Header")}
                   onChange={onChangeShowHeader}
                   isChecked={config.showHeader}
+                  testId="show_header_checkbox"
                 />
                 <Text color="gray">{`(${t("MobileOnly")})`}</Text>
                 <HelpButton
@@ -559,6 +574,7 @@ const Manager = (props) => {
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />
                   }
+                  dataTestId="show_header_help_button"
                 />
               </LabelGroup>
             </CheckboxGroup>
@@ -574,6 +590,7 @@ const Manager = (props) => {
                   tooltipContent={
                     <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
                   }
+                  dataTestId="room_or_folder_help_button"
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
@@ -605,6 +622,8 @@ const Manager = (props) => {
                   selectedOption={selectedLink}
                   displaySelectedOption
                   directionY="bottom"
+                  dataTestId="shared_link_combobox"
+                  dropDownTestId="shared_link_dropdown"
                 />
 
                 {selectedLink ? (
@@ -635,6 +654,8 @@ const Manager = (props) => {
                 selectedOption={sortBy}
                 displaySelectedOption
                 directionY="top"
+                testId="sort_by_combobox"
+                dropDownTestId="sort_by_dropdown"
               />
             </ControlsGroup>
             <ControlsGroup>
@@ -646,6 +667,8 @@ const Manager = (props) => {
                 selectedOption={sortOrder}
                 displaySelectedOption
                 directionY="top"
+                testId="sort_order_combobox"
+                dropDownTestId="sort_order_dropdown"
               />
             </ControlsGroup>
             <ItemsCountBlock
@@ -662,6 +685,7 @@ const Manager = (props) => {
               selected={columnDisplay}
               onClick={changeColumnsOption}
               spacing="8px"
+              testId="columns_display_radiobutton_group"
             />
             {columnDisplay === "custom" ? (
               <ControlsGroup>
@@ -679,6 +703,8 @@ const Manager = (props) => {
                     key: "Select",
                     label: t("Common:SelectAction"),
                   }}
+                  testId="columns_combobox"
+                  dropDownTestId="columns_dropdown"
                 />
 
                 <SelectedItemsContainer>

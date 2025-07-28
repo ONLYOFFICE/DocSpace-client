@@ -99,6 +99,7 @@ const ToggleButton = ({
   name,
   fontWeight,
   fontSize,
+  testId,
 }: ToggleButtonProps) => {
   return (
     <div
@@ -114,7 +115,7 @@ const ToggleButton = ({
           [styles.checked]: isChecked,
         })}
         style={style}
-        data-testid="toggle-button-container"
+        data-testid={testId ?? "toggle-button-container"}
       >
         <input
           className={styles.hiddenInput}

@@ -124,6 +124,7 @@ const SelectedDateTime = ({
         onClose={deleteSelectedDate}
         label={filters.deliveryDate.format("DD MMM YYYY") + formattedTime}
         onClick={toggleCalendar}
+        testId="selected_delivery_date"
       />
       {isCalendarOpen ? (
         <CalendarElement
@@ -260,6 +261,7 @@ const DeliveryDatePicker = ({
             selectDateText={t("Common:SelectDate")}
             showCalendarIcon={false}
             locale={i18n.language}
+            testId="delivery_date_picker"
           />
         )}
         {filters.deliveryDate !== null && isDefaultTime ? (
@@ -281,6 +283,7 @@ const DeliveryDatePicker = ({
                   tabIndex={1}
                   locale={i18n.language}
                   initialTime={filters.deliveryFrom}
+                  testId="delivery_time_picker_from"
                 />
               </span>
 
@@ -300,6 +303,7 @@ const DeliveryDatePicker = ({
                 tabIndex={2}
                 locale={i18n.language}
                 initialTime={filters.deliveryTo}
+                testId="delivery_time_picker_to"
               />
             </TimePickerCell>
           ) : (

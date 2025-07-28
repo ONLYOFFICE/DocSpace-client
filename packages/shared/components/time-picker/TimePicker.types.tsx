@@ -45,4 +45,6 @@ export type TimePickerProps = {
   focusOnRender?: boolean;
   /** Forwarded ref */
   forwardedRef?: React.RefObject<HTMLDivElement | null>;
+  /** Test id */
+  testId?: string;
 };

@@ -70,6 +70,7 @@ export const HeightSetter = (props) => {
           placeholder={t("EnterHeight")}
           value={height}
           tabIndex={3}
+          testId="height_dimension_input"
         />
         <ComboBox
           size="content"
@@ -80,6 +81,8 @@ export const HeightSetter = (props) => {
           selectedOption={heightDimension}
           displaySelectedOption
           directionY="bottom"
+          testId="height_dimension_combobox"
+          dropDownTestId="height_dimension_dropdown"
         />
       </RowContainer>
     </ControlsGroup>

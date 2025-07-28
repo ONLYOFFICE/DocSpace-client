@@ -99,6 +99,7 @@ const InputBlock = React.memo(
     // Other props
     children,
     forwardedRef,
+    testId,
   }: InputBlockProps) => {
     const [isFocus, setIsFocus] = useState(isAutoFocussed);
     const iconButtonSize = useIconSize(size, iconSize);
@@ -131,6 +132,7 @@ const InputBlock = React.memo(
 
     const inputProps = {
       id,
+      testId,
       name,
       type,
       value,

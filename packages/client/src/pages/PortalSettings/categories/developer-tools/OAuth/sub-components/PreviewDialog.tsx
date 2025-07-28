@@ -211,6 +211,7 @@ const PreviewDialog = ({
               onClick={() => {
                 window.open(link, "login", linkParams);
               }}
+              testId="social_OAuth_button"
             />
           </StyledPreviewContainer>
           <StyledBlocksContainer>
@@ -223,6 +224,7 @@ const PreviewDialog = ({
                 enableCopy
                 isReadOnly
                 value={htmlBlock}
+                testId="html_block_textarea"
               />
             </div>
             <div className="block-container">
@@ -234,6 +236,7 @@ const PreviewDialog = ({
                 enableCopy
                 isReadOnly
                 value={styleBlock}
+                testId="style_block_textarea"
               />
             </div>
             <div className="block-container">
@@ -245,6 +248,7 @@ const PreviewDialog = ({
                 enableCopy
                 isReadOnly
                 value={scriptBlock}
+                testId="script_block_textarea"
               />
             </div>
             <div className="block-container">
@@ -256,6 +260,7 @@ const PreviewDialog = ({
                 enableCopy
                 isReadOnly
                 value={link}
+                testId="authorize_link_textarea"
               />
             </div>
 
@@ -286,6 +291,7 @@ const PreviewDialog = ({
           scale
           label={t("Common:OKButton")}
           onClick={onClose}
+          testId="preview_dialog_ok_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

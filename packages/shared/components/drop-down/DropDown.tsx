@@ -71,6 +71,7 @@ const DropDown = ({
   style,
   topSpace,
   backDrop,
+  testId,
 }: DropDownProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -330,7 +331,7 @@ const DropDown = ({
           ref={dropDownRef}
           style={dropDownStyles}
           className={dropDownClasses}
-          data-testid="dropdown"
+          data-testid={testId ?? "dropdown"}
           role="listbox"
         >
           <VirtualList

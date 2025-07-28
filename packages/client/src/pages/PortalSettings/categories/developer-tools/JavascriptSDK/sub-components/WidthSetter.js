@@ -70,6 +70,7 @@ export const WidthSetter = (props) => {
           placeholder={t("EnterWidth")}
           value={width}
           tabIndex={2}
+          testId="width_dimension_input"
         />
         <ComboBox
           size="content"
@@ -80,6 +81,8 @@ export const WidthSetter = (props) => {
           selectedOption={widthDimension}
           displaySelectedOption
           directionY="bottom"
+          testId="width_dimension_combobox"
+          dropDownTestId="width_dimension_dropdown"
         />
       </RowContainer>
     </ControlsGroup>

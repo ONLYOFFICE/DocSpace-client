@@ -79,6 +79,7 @@ const CheckboxPure = ({
   name,
   tabIndex = -1,
   helpButton,
+  testId,
   ...rest
 }: CheckboxProps) => {
   const [checked, setChecked] = React.useState(isChecked);
@@ -122,7 +123,7 @@ const CheckboxPure = ({
         [styles.error]: hasError,
       })}
       title={title}
-      data-testid="checkbox"
+      data-testid={testId ?? "checkbox"}
     >
       <input
         className={styles.hiddenInput}

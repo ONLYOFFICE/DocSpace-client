@@ -50,6 +50,7 @@ export type TBaseOption = {
   access?: ShareAccessRights;
   className?: string;
   title?: string;
+  testId?: string;
   action?: unknown;
   onClick?: (opt: TContextMenuValueTypeOnClick) => void;
   pageNumber?: number;
@@ -98,6 +99,8 @@ export type TComboboxProps = {
   displayArrow?: boolean;
   /** Height of Dropdown */
   dropDownMaxHeight?: number;
+  /** Test id for dropdown */
+  dropDownTestId?: string;
   /** Shows disabled items when displayType !== toggle */
   showDisabledItems?: boolean;
   /** Fill icon */
@@ -168,6 +171,8 @@ export type TComboboxProps = {
   title?: string;
   /** Top space */
   topSpace?: number;
+  /** Test id */
+  testId?: string;
   /** Type */
   type?: TCombobox;
   /** Use portal backdrop */

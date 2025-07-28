@@ -146,6 +146,7 @@ const BasicBlock = ({
           isRequired
           isError={isNameRequiredError || isNameError}
           onBlur={onBlur}
+          testId="app_name_input_group"
         />
         <InputGroup
           label={t("WebsiteUrl")}
@@ -162,6 +163,7 @@ const BasicBlock = ({
           isRequired
           isError={isWebsiteRequiredError || isWebsiteError}
           onBlur={onBlur}
+          testId="app_website_url_input_group"
         />
         <FieldContainer
           isVertical
@@ -169,6 +171,7 @@ const BasicBlock = ({
           errorMessage={t("ThisRequiredField")}
           hasError={isLogoRequiredError}
           className="icon-field"
+          testId="app_icon_field"
         >
           <SelectGroup
             label={t("AppIcon")}

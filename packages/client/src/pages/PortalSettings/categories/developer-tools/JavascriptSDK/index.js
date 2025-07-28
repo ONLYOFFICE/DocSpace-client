@@ -163,6 +163,7 @@ const PortalIntegration = (props) => {
           color={currentColorScheme?.main?.accent}
           fontSize="13px"
           fontWeight="400"
+          dataTestId="sdk_api_library_link"
           onClick={() => window.open(sdkLink, "_blank")}
         >
           {" "}
@@ -185,6 +186,7 @@ const PortalIntegration = (props) => {
             description={data.description}
             image={data.image}
             handleOnClick={data.handleOnClick}
+            testId={`sdk_preset_${data.title}_container`}
           />
         ))}
       </PresetsContainer>

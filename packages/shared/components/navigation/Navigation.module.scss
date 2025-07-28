@@ -126,10 +126,10 @@
 }
 
 .heading {
-  font-weight: 700;
+  font-weight: 700 !important;
   font-size: 18px !important;
-  line-height: 24px;
-  margin: 0;
+  line-height: 24px !important;
+  margin: 0 !important;
 
   &.rootFolderTitle {
     color: var(--navigation-root-folder-title-color);
@@ -137,12 +137,12 @@
 
   @include mixins.tablet-and-below {
     font-size: 21px !important;
-    line-height: 28px;
+    line-height: 28px !important;
   }
 
   @include mixins.mobile {
     font-size: 18px !important;
-    line-height: 24px;
+    line-height: 24px !important;
   }
 }
 

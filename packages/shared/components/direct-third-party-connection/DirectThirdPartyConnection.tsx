@@ -28,19 +28,20 @@
 
 "use client";
 
+import { useReducer } from "react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
-import { useReducer } from "react";
-import { useTranslation } from "react-i18next";
-
 import { Text } from "../text";
 import { toastr } from "../toast";
 import { Button } from "../button";
 import { getOAuthToken } from "../../utils/common";
-import { ComboBox, ComboBoxSize, TComboboxProps } from "../combobox";
+import { ComboBox, ComboBoxSize } from "../combobox";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";
@@ -53,12 +54,9 @@ import { useDidMount } from "../../hooks/useDidMount";
 import { useUnmount } from "../../hooks/useUnmount";
 import type { ConnectedThirdPartyAccountType } from "../../types";
 
-import {
-  StyledBackup,
-  StyledComboBoxItem,
-} from "./DirectThirdPartyConnection.styled";
 import { initialState } from "./DirectThirdPartyConnection.constants";
 import { DirectThirdPartyConnectionProps } from "./DirectThirdPartyConnection.types";
+import styles from "./DirectThirdPartyConnection.module.scss";
 
 const DirectThirdPartyConnection = ({
   openConnectWindow,
@@ -250,45 +248,62 @@ const DirectThirdPartyConnection = ({
   const folderList: Partial<ConnectedThirdPartyAccountType> =
     connectedThirdPartyAccount ?? {};
 
-  const advancedOptions = accounts?.map((item) => {
-    return (
-      <StyledComboBoxItem
-        isDisabled={item.disabled}
-        key={`${item.key}_${item.name}`}
-      >
-        <DropDownItem
-          onClick={() => onSelectAccount(item.name)}
-          className={item.className}
-          data-third-party-key={item.key}
-          disabled={item.disabled}
-        >
-          <Text className="drop-down-item_text" fontWeight={600}>
-            {item.title}
-          </Text>
-
-          {!item.disabled && !item.connected ? (
-            <IconButton
-              className="drop-down-item_icon"
-              size={16}
+  const advancedOptions = (
+    <div style={{ display: "contents" }}>
+      {accounts?.map((item) => {
+        return (
+          <div
+            key={`${item.key}_${item.name}`}
+            className={classNames(styles.comboboxItem, {
+              [styles.isDisabled]: item.disabled,
+            })}
+          >
+            <DropDownItem
               onClick={() => onSelectAccount(item.name)}
-              iconName={ExternalLinkReactSvgUrl}
-              isFill
-            />
-          ) : null}
-        </DropDownItem>
-      </StyledComboBoxItem>
-    );
-  });
+              className={item.className}
+              data-third-party-key={item.key}
+              disabled={item.disabled}
+            >
+              <Text
+                className={classNames(
+                  styles.dropDownItemText,
+                  "drop-down-item_text",
+                )}
+                fontWeight={600}
+              >
+                {item.title}
+              </Text>
+
+              {!item.disabled && !item.connected ? (
+                <IconButton
+                  className={classNames(
+                    styles.dropDownItemIcon,
+                    "drop-down-item_icon",
+                  )}
+                  size={16}
+                  onClick={() => onSelectAccount(item.name)}
+                  iconName={ExternalLinkReactSvgUrl}
+                  isFill
+                />
+              ) : null}
+            </DropDownItem>
+          </div>
+        );
+      })}
+    </div>
+  );
 
   const isConnectedAccount =
     Boolean(connectedThirdPartyAccount) && isTheSameThirdPartyAccount;
 
   return (
-    <StyledBackup
-      isConnectedAccount={isConnectedAccount}
-      isMobileScale={isMobileScale}
+    <div
+      className={classNames(styles.directThirdPartyConnection, {
+        [styles.isConnectedAccount]: isConnectedAccount,
+        [styles.isMobileScale]: isMobileScale,
+      })}
     >
-      <div className="backup_connection">
+      <div className={classNames(styles.backupConnection, "backup_connection")}>
         <ComboBox
           scaled
           options={[]}
@@ -305,9 +320,7 @@ const DirectThirdPartyConnection = ({
           forceCloseClickOutside
           size={ComboBoxSize.content}
           className="thirdparty-combobox"
-          advancedOptions={
-            advancedOptions as unknown as TComboboxProps["advancedOptions"]
-          }
+          advancedOptions={advancedOptions}
           isDisabled={isLoading}
           selectedOption={{
             key: 0,
@@ -320,7 +333,10 @@ const DirectThirdPartyConnection = ({
         isTheSameThirdPartyAccount ? (
           <ContextMenuButton
             zIndex={402}
-            className="backup_third-party-context"
+            className={classNames(
+              styles.backupThirdPartyContext,
+              "backup_third-party-context",
+            )}
             iconName={VerticalDotsReactSvgUrl}
             size={15}
             getData={getContextOptions}
@@ -338,6 +354,7 @@ const DirectThirdPartyConnection = ({
           onClick={onConnect}
           size={buttonSize}
           isDisabled={isDisabledComponent}
+          testId="connect-button"
         />
       ) : (
         folderList.id &&
@@ -381,45 +398,8 @@ const DirectThirdPartyConnection = ({
           removeItem={removeItem}
         />
       ) : null}
-    </StyledBackup>
+    </div>
   );
 };
 
 export default DirectThirdPartyConnection;
-
-// export default inject(({ backup, dialogsStore, filesSettingsStore }) => {
-//   const {
-//     clearLocalStorage,
-//     setSelectedThirdPartyAccount,
-//     selectedThirdPartyAccount,
-//     connectedThirdPartyAccount,
-//     isTheSameThirdPartyAccount,
-
-//     accounts,
-//     setThirdPartyAccountsInfo,
-//   } = backup;
-//   const { openConnectWindow } = filesSettingsStore.thirdPartyStore;
-
-//   const {
-//     connectDialogVisible,
-//     setConnectDialogVisible,
-//     setDeleteThirdPartyDialogVisible,
-//     deleteThirdPartyDialogVisible,
-//   } = dialogsStore;
-
-//   return {
-//     isTheSameThirdPartyAccount,
-//     clearLocalStorage,
-//     openConnectWindow,
-//     setConnectDialogVisible,
-//     connectDialogVisible,
-//     setDeleteThirdPartyDialogVisible,
-//     deleteThirdPartyDialogVisible,
-//     setSelectedThirdPartyAccount,
-//     selectedThirdPartyAccount,
-//     connectedThirdPartyAccount,
-
-//     accounts,
-//     setThirdPartyAccountsInfo,
-//   };
-// })(observer(DirectThirdPartyConnection));

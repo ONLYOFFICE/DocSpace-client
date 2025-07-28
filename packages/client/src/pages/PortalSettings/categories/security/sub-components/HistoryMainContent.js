@@ -173,6 +173,7 @@ const HistoryMainContent = (props) => {
     getReport,
     isSettingNotPaid,
     isLoadingDownloadReport,
+    loginHistory,
   } = props;
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
@@ -298,6 +299,11 @@ const HistoryMainContent = (props) => {
       <DownLoadWrapper>
         <Button
           className="download-report_button"
+          dataTestId={
+            loginHistory
+              ? "login_history_download_report_button"
+              : "audit_trail_download_report_button"
+          }
           primary
           label={downloadReport}
           size="normal"

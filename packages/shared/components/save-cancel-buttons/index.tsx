@@ -53,6 +53,8 @@ const SaveCancelButtons = ({
   additionalClassCancelButton,
   saveButtonDisabled,
   getTopComponent,
+  saveButtonDataTestId,
+  cancelButtonDataTestId,
 }: SaveCancelButtonProps) => {
   const onKeydown = React.useCallback(
     (e: KeyboardEvent) => {
@@ -128,7 +130,7 @@ const SaveCancelButtons = ({
           tabIndex={tabIndexSaveButton}
           isLoading={isSaving}
           isDisabled={saveButtonDisabled || showReminder === false}
-          testId="save-button"
+          testId={saveButtonDataTestId ?? "save-button"}
           aria-label={`${saveButtonLabel} changes`}
           minWidth={displaySettings ? "auto" : ""}
           scale={isMobile()}
@@ -139,7 +141,7 @@ const SaveCancelButtons = ({
           onClick={onCancelClick}
           tabIndex={tabIndexCancelButton}
           isDisabled={cancelButtonDisabled || isSaving}
-          testId="cancel-button"
+          testId={cancelButtonDataTestId ?? "cancel-button"}
           aria-label={`${cancelButtonLabel} changes`}
           minWidth={displaySettings ? "auto" : ""}
           scale={isMobile()}

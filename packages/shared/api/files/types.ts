@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
 import type {
   EmployeeActivationStatus,
@@ -450,8 +449,8 @@ export type TFileLink = {
     requestToken: string;
     shareLink: string;
     title: string;
-    expirationDate?: moment.Moment | null;
-    internal?: boolean;
+    expirationDate?: string | null;
+    internal: boolean;
     password?: string;
   };
   subjectType: number;

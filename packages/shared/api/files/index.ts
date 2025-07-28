@@ -1572,7 +1572,7 @@ export async function editExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment,
+  expirationDate: moment.Moment | string | null,
   password?: string,
   denyDownload?: boolean,
 ) {
@@ -1598,7 +1598,7 @@ export async function editExternalFolderLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment,
+  expirationDate: moment.Moment | string | null,
   password?: string,
   denyDownload?: boolean,
 ) {

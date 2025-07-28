@@ -38,12 +38,10 @@ import FillFormsReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?u
 // import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
-import { Link } from "../link";
-import { toastr } from "../toast";
 import { globalColors } from "../../themes";
 import { FileType, ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
-import { isFolder } from "../../utils/typeGuards";
+import { isFolderOrRoom } from "../../utils/typeGuards";
 
 import type { TTranslation } from "../../types";
 import type {
@@ -52,7 +50,9 @@ import type {
   TFileLink,
   TFolder,
 } from "../../api/files/types";
-import type { TOption } from "../combobox";
+
+import { Link } from "../link";
+import { toastr } from "../toast";
 
 export const getShareOptions = (
   t: TTranslation,
@@ -133,13 +133,11 @@ export const getAccessOptions = (
     // },
   ];
 
-  const items: TOption[] = [];
+  type ItemValue<T> = T extends false ? never : T;
 
-  accessOptions.forEach((item) => {
-    if (item) return items.push(item as TOption);
-  });
-
-  return items;
+  return accessOptions.filter(
+    (item): item is ItemValue<(typeof accessOptions)[number]> => Boolean(item),
+  );
 };
 
 export const getRoomAccessOptions = (t: TTranslation) => {
@@ -222,11 +220,11 @@ export const getExpiredOptions = (
   ];
 };
 
-export const getDate = (expirationDate: moment.Moment) => {
+export const getDate = (expirationDate: string) => {
   if (!expirationDate) return "";
 
   const currentDare = moment(new Date());
-  const expDate = moment(new Date(expirationDate as unknown as string));
+  const expDate = moment(new Date(expirationDate));
   const calculatedDate = expDate.diff(currentDare, "days");
 
   if (calculatedDate < 1) {
@@ -313,14 +311,14 @@ export const canShowManageLink = (
   infoPanelView: string,
   isRoom: boolean = false,
 ): boolean => {
-  if (isFolder(item) && !item.security.EditAccess) return false;
+  if (isFolderOrRoom(item) && !item.security.EditAccess) return false;
 
   if (!buffer) return true;
 
   const isEqual =
     item.id === buffer.id &&
     item.title === buffer.title &&
-    isFolder(item) === isFolder(buffer);
+    isFolderOrRoom(item) === isFolderOrRoom(buffer);
 
   const view =
     (isRoom && infoPanelView !== "info_members") ||

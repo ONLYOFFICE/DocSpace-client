@@ -33,14 +33,14 @@ import { ToggleButton } from "../../components/toggle-button";
 import type { ToggleBlockProps } from "./EditLinkPanel.types";
 
 const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
-  isLoading,
   headerText,
   bodyText,
-  isChecked,
   onChange,
   children,
-  isExpired,
   tooltipContent,
+  isLoading = false,
+  isExpired = false,
+  isChecked = false,
   withToggle = true,
   isDisabled = false,
 }) => {

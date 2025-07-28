@@ -24,14 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { type FC, useId } from "react";
+import moment from "moment";
 import { useTranslation } from "react-i18next";
-import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
-import ToggleBlock from "./ToggleBlock";
 
-const LimitTimeBlock = (props) => {
+import { DateTimePicker } from "../../components/date-time-picker";
+import type { Nullable } from "../../types";
+
+import ToggleBlock from "./ToggleBlock";
+import type { LimitTimeBlockProps } from "./EditLinkPanel.types";
+
+const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
+  const id = useId();
+
   const {
-    isLoading,
     expirationDate,
     setExpirationDate,
     setIsExpired,
@@ -44,21 +50,21 @@ const LimitTimeBlock = (props) => {
 
   const { t } = useTranslation(["Common"]);
 
-  const onChange = (date) => {
+  const onChange = (date: Nullable<moment.Moment>) => {
     const expired = date
-      ? new Date(date).getTime() <= new Date().getTime()
+      ? moment(date).toDate().getTime() <= new Date().getTime()
       : false;
 
-    setExpirationDate(date);
+    setExpirationDate(date?.toDate().toISOString() ?? null);
     setIsExpired(expired);
   };
 
   if (!canChangeLifetime) {
     return (
       <ToggleBlock
-        headerText={headerText}
-        bodyText={bodyText}
         withToggle={false}
+        bodyText={bodyText}
+        headerText={headerText}
       />
     );
   }
@@ -71,14 +77,14 @@ const LimitTimeBlock = (props) => {
   return (
     <ToggleBlock {...props} withToggle={false}>
       <DateTimePicker
-        className="public-room_date-picker"
-        isDisabled={isLoading}
-        initialDate={expirationDate}
-        onChange={onChange}
-        minDate={minDate}
-        openDate={new Date()}
-        hasError={isExpired}
+        id={id}
         locale={language}
+        minDate={minDate}
+        hasError={isExpired}
+        onChange={onChange}
+        openDate={new Date()}
+        initialDate={expirationDate}
+        className="public-room_date-picker"
         selectDateText={t("Common:SelectDate")}
       />
     </ToggleBlock>

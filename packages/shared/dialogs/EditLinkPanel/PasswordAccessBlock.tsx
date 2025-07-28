@@ -40,22 +40,21 @@ import type { PasswordInputHandle } from "../../components/password-input";
 import ToggleBlock from "./ToggleBlock";
 import type { PasswordAccessBlockProps } from "./EditLinkPanel.types";
 
-const PasswordAccessBlock: FC<PasswordAccessBlockProps> = (props) => {
-  const {
-    t,
-    isLoading,
-    isChecked,
-    passwordValue,
-    setPasswordValue,
-    isPasswordValid,
-    setIsPasswordValid,
-    passwordSettings,
-    isPasswordErrorShow,
-    setIsPasswordErrorShow,
-    headerText,
-    bodyText,
-  } = props;
-
+const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
+  t,
+  bodyText,
+  onChange,
+  isLoading,
+  isChecked,
+  headerText,
+  passwordValue,
+  setPasswordValue,
+  isPasswordValid,
+  setIsPasswordValid,
+  passwordSettings,
+  isPasswordErrorShow,
+  setIsPasswordErrorShow,
+}) => {
   const passwordInputRef = useRef<PasswordInputHandle>(null);
 
   const onGeneratePasswordClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -117,6 +116,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = (props) => {
       isLoading={isLoading}
       isChecked={isChecked}
       headerText={headerText}
+      onChange={onChange}
     >
       {isChecked ? (
         <div>

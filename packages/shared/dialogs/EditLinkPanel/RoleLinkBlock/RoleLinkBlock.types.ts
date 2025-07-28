@@ -30,7 +30,7 @@ import type { TTranslation } from "../../../types";
 
 export type AccessOption = {
   access: ShareAccessRights;
-  description: string;
+  description?: string;
   key: string;
   label: string;
   icon: string;

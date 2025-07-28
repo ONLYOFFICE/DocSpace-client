@@ -35,6 +35,7 @@ export type TRadioButtonOption = {
   disabled?: boolean;
   type?: "text" | "radio";
   autoFocus?: boolean;
+  dataTestId?: string;
 } & PicketRadioButtonPropsForOption;
 
 type PickedDivProps = Pick<
@@ -56,5 +57,7 @@ export type RadioButtonGroupProps = {
   selected?: string | number;
   /** Position of radio buttons  */
   width?: string;
+  /** Data test id for the radio button group */
+  dataTestId?: string;
 } & PickedDivProps &
   PicketRadioButtonProps;

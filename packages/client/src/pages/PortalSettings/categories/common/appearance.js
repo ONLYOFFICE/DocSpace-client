@@ -707,6 +707,7 @@ const Appearance = (props) => {
                   style={{ background: item.main?.accent }}
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
+                  data-testid={`appearance_standard_theme_${item.id}`}
                 >
                   {selectThemeId === item.id ? (
                     <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
@@ -734,6 +735,7 @@ const Appearance = (props) => {
                     colorCheckImgHover={colorCheckImgHover}
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
+                    data-testid={`appearance_custom_theme_${item.id}`}
                   >
                     {selectThemeId === item.id ? (
                       <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
@@ -748,6 +750,7 @@ const Appearance = (props) => {
               data-tooltip-id="theme-add"
               data-tip="tooltip"
               className="theme-add"
+              data-testid="appearance_add_theme"
               onClick={onAddTheme}
             />
             {!abilityAddTheme ? (
@@ -782,6 +785,7 @@ const Appearance = (props) => {
           {t("Common:Preview")}
           <HelpButton
             place="right"
+            dataTestId="appearance_preview_help_button"
             tooltipContent={
               <div>
                 <Text fontSize="12px" fontWeight={400}>
@@ -792,6 +796,7 @@ const Appearance = (props) => {
                   type="page"
                   href={appearanceBlockHelpUrl}
                   target="_blank"
+                  dataTestId="appearance_preview_help_button_link"
                 >
                   {t("Common:LearnMore")}
                 </Link>
@@ -814,6 +819,7 @@ const Appearance = (props) => {
             primary
             size={buttonSize}
             isDisabled={isDisabledSaveButton}
+            testId="appearance_save_button"
           />
 
           <Button
@@ -822,6 +828,7 @@ const Appearance = (props) => {
             onClick={onClickEdit}
             size={buttonSize}
             isDisabled={isDisabledEditButton}
+            testId="appearance_edit_button"
           />
           {isShowDeleteButton ? (
             <Button
@@ -830,6 +837,7 @@ const Appearance = (props) => {
               onClick={onOpenDialogDelete}
               size={buttonSize}
               isDisabled={isDisabledDeleteButton}
+              testId="appearance_delete_button"
             />
           ) : null}
         </div>

@@ -63,7 +63,7 @@ const generateFileLink = ({
       primary,
       internal,
       requestToken: "",
-      expirationDate,
+      expirationDate: expirationDate?.toISOString(),
     },
     canEditDenyDownload: false,
     isLocked: false,

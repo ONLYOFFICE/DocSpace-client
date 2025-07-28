@@ -194,8 +194,8 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
     onClose();
   };
 
-  const handleSelectLinkAccess = (option: ShareOptionType) => {
-    setSelectedLinkAccess(option);
+  const handleSelectLinkAccess = (option: TOption) => {
+    setSelectedLinkAccess(option as ShareOptionType);
   };
 
   const validateInputs = useCallback(() => {

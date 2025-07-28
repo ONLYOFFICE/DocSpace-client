@@ -262,7 +262,7 @@ const LinkRow = (props: LinkRowProps) => {
   ) => {
     const newLink = { ...link };
     newLink.sharedTo.expirationDate = expirationDate
-      ? moment(expirationDate)
+      ? moment(expirationDate).toISOString()
       : null;
     editExternalLinkAction(newLink);
   };
@@ -270,7 +270,7 @@ const LinkRow = (props: LinkRowProps) => {
   const changeShareOption = (option: TOption): void => {
     const newLink = { ...link };
 
-    if (option && "internal" in option)
+    if ("internal" in option && typeof option.internal === "boolean")
       newLink.sharedTo.internal = option.internal;
 
     editExternalLinkAction(newLink);

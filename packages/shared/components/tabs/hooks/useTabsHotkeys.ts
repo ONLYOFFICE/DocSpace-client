@@ -36,6 +36,7 @@ const useTabsHotkeys = ({
   items,
   focusedTabIndex,
   setFocusedTabIndex,
+  scrollToTab,
   onSelect,
   hotkeysId,
 }: TTabsHotkey) => {
@@ -57,14 +58,19 @@ const useTabsHotkeys = ({
     [enabledHotkeys, setHotkeysIsActive, hotkeysId],
   );
 
+  const setFocusedTab = (index: number) => {
+    setFocusedTabIndex(index);
+    scrollToTab(index);
+  };
+
   const focusNextTab = () => {
-    if (focusedTabIndex === items.length - 1) setFocusedTabIndex(0);
-    else setFocusedTabIndex(focusedTabIndex + 1);
+    if (focusedTabIndex === items.length - 1) setFocusedTab(0);
+    else setFocusedTab(focusedTabIndex + 1);
   };
 
   const focusPrevTab = () => {
-    if (focusedTabIndex === 0) setFocusedTabIndex(items.length - 1);
-    else setFocusedTabIndex(focusedTabIndex - 1);
+    if (focusedTabIndex === 0) setFocusedTab(items.length - 1);
+    else setFocusedTab(focusedTabIndex - 1);
   };
 
   const onSelectTab = () => {
@@ -72,10 +78,10 @@ const useTabsHotkeys = ({
   };
 
   const focusFirstTab = () => {
-    setFocusedTabIndex(0);
+    setFocusedTab(0);
   };
   const focusLastTab = () => {
-    setFocusedTabIndex(items.length - 1);
+    setFocusedTab(items.length - 1);
   };
 
   const hotkeysFilter = {
@@ -95,6 +101,23 @@ const useTabsHotkeys = ({
     (e: KeyboardEvent) => {
       const someDialogIsOpen = checkDialogsOpen();
       setIsEnabled(!someDialogIsOpen);
+
+      const isDefaultKeys =
+        [
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End",
+          "Space",
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+        ].indexOf(e.code) > -1;
+
+      if (isDefaultKeys) {
+        e.preventDefault();
+      }
 
       activateHotkeys(e);
     },

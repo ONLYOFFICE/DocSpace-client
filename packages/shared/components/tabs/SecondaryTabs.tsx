@@ -67,16 +67,6 @@ const SecondaryTabs = (props: TabsProps) => {
   const [hotkeysIsActive, setHotkeysIsActive] = useState(false);
   const [tabsCountInContainer, setTabsCountInContainer] = useState(0);
 
-  useTabsHotkeys({
-    enabledHotkeys: hotkeysIsActive,
-    setHotkeysIsActive,
-    items,
-    focusedTabIndex,
-    setFocusedTabIndex,
-    onSelect,
-    hotkeysId,
-  });
-
   const { interfaceDirection } = useInterfaceDirection();
 
   const [referenceTabSize, setReferenceTabSize] = useState<number | null>(null);
@@ -118,6 +108,17 @@ const SecondaryTabs = (props: TabsProps) => {
     },
     [tabsCountInContainer],
   );
+
+  useTabsHotkeys({
+    enabledHotkeys: hotkeysIsActive,
+    setHotkeysIsActive,
+    items,
+    focusedTabIndex,
+    setFocusedTabIndex,
+    scrollToTab,
+    onSelect,
+    hotkeysId,
+  });
 
   useEffect(() => {
     if (isLoading) return;

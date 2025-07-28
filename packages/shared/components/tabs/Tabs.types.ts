@@ -32,7 +32,7 @@ export type TTabItem = {
   id: string;
   /** Tab text. */
   name: string | React.ReactNode;
-  /** Content that is shown when you click on the tab.  */
+  /** Content that is shown when you click on the tab. */
   content: React.ReactNode;
   /** State of tab inclusion. State only works for tabs with a secondary theme. */
   isDisabled?: boolean;
@@ -68,7 +68,7 @@ export type TabsProps = {
   isLoading?: boolean;
   /** Scales tabs to container width */
   scaled?: boolean;
-  /** Used to identify hotkeys */
+  /** Unique identifier for hotkey functionality */
   hotkeysId?: string;
 };
 
@@ -83,8 +83,10 @@ export type TTabsHotkey = {
   focusedTabIndex: number;
   /** Sets the index of the focused tab */
   setFocusedTabIndex: (focusedTabIndex: number) => void;
+  /**  Scrolls to bring a specific tab into view */
+  scrollToTab: (index: number) => void;
   /** Sets a callback function that is triggered when the tab is selected */
   onSelect?: (element: TTabItem) => void;
-  /** Used to identify hotkeys */
+  /** Unique identifier for hotkey functionality */
   hotkeysId?: string;
 };

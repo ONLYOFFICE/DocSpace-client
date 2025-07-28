@@ -23,13 +23,15 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import isNil from "lodash/isNil";
 
 import type { StaticImageData } from "../types";
-import type { TFolder } from "../api/files/types";
+import type { TFile, TFolder } from "../api/files/types";
 import type {
   ContextMenuModel,
   SeparatorType,
 } from "../components/context-menu";
+import type { TRoom } from "../api/rooms/types";
 
 export const isNumber = (value: unknown): value is number => {
   return typeof value === "number";
@@ -50,7 +52,7 @@ export const isNullOrUndefined = (arg: unknown): arg is null | undefined => {
   return arg === undefined || arg === null;
 };
 
-export const isFolder = (item: unknown): item is TFolder => {
+export const isFolderOrRoom = (item: unknown): item is TFolder | TRoom => {
   return (
     typeof item === "object" &&
     item !== null &&
@@ -61,4 +63,32 @@ export const isFolder = (item: unknown): item is TFolder => {
 
 export const isNextImage = (item: unknown): item is StaticImageData => {
   return typeof item === "object" && item !== null && "src" in item;
+};
+
+export const isFolder = (item: unknown): item is TFolder => {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    "isFolder" in item &&
+    item.isFolder === true
+  );
+};
+
+export const isRoom = (item: unknown): item is TRoom => {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    "isRoom" in item &&
+    item.isRoom === true
+  );
+};
+
+export const isFile = (item: unknown): item is TFile => {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    (("isFile" in item && item.isFile === true) ||
+      ("fileType" in item && !isNil(item.fileType)) ||
+      ("fileExst" in item && !isNil(item.fileExst)))
+  );
 };

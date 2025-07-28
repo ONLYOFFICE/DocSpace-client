@@ -386,6 +386,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           {t("Common:Permissions")}
         </Text>
         <Tabs
+          hotkeysId="apiKeys"
           type={TabsTypes.Secondary}
           items={tabsItems}
           onSelect={onSelectPermission}

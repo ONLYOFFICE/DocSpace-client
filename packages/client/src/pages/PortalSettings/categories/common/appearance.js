@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
+import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
+import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
@@ -155,6 +157,7 @@ const Appearance = (props) => {
             themePreview="Light"
           />
         ),
+        iconName: LightSvgUrl,
       },
       {
         id: "dark-theme",
@@ -168,6 +171,7 @@ const Appearance = (props) => {
             themePreview="Dark"
           />
         ),
+        iconName: DarkSvgUrl,
       },
     ],
     [previewAccent, selectThemeId, colorCheckImg, tReady],
@@ -809,6 +813,8 @@ const Appearance = (props) => {
           type={TabsTypes.Secondary}
           onSelect={(e) => setSelectedItemId(e.id)}
           selectedItemId={selectedItemId}
+          isLoading={!tReady}
+          scaled
         />
 
         <div className="buttons-container">

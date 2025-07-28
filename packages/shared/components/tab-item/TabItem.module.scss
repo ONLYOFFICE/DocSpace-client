@@ -24,79 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { globalColors } from "@docspace/shared/themes";
-import styled from "styled-components";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
-const StyledWatermark = styled.div`
-  margin-top: 16px;
+.tabItem {
+  max-width: 100%;
 
-  .watermark-title {
-    margin: 16px 0 8px 0;
-  }
-  .title-without-top {
-    margin-top: 0px;
-  }
-  .watermark-checkbox {
-    margin: 18px 0 0 0;
-  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-  .options-wrapper {
-    display: grid;
-    grid-template-rows: 56px 56px;
-    gap: 16px;
+  border: var(--tab-item-tag-border);
+  border-radius: 16px;
 
-    .options {
-      color: ${(props) => props.theme.comboBox.label.selectedColor};
+  box-sizing: border-box;
+
+  padding: 4px 16px;
+
+  cursor: pointer;
+
+  &.active {
+    background: var(--tab-item-selected-background-color);
+    border-color: var(--tab-item-selected-background-color);
+
+    &:hover {
+      background: var(--tab-item-selected-background-color);
+      border-color: var(--tab-item-selected-background-color);
     }
   }
 
-  .image-wrapper {
-    display: grid;
-    grid-template-columns: 216px auto;
-    gap: 16px;
-
-    .image-description {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
-
-      .image-watermark_text {
-        margin-bottom: 8px;
-      }
-    }
-
-    .image-watermark_wrapper {
-      width: 216px;
-      height: 216px;
-      border: 1px solid ${globalColors.grayLightMid};
-
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 88%;
-        height: 88%;
-        transform: ${(props) =>
-          `rotate(${props.rotate}deg) scale(${props.scale})`};
-
-        opacity: 0.4;
-        margin: auto;
-      }
-    }
+  &.disabled:not(&.active) {
+    pointer-events: none;
+    opacity: 0.5;
   }
 
-  .watermark-tab_items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-bottom: 20px;
-  }
-`;
-const StyledBody = styled.div`
-  .types-content {
-  }
-`;
+  --webkit-tap-highlight-color: #{colors.$tap-highlight};
+}
 
-export { StyledWatermark, StyledBody };
+.tabItemText {
+  height: 20px;
+
+  &.active {
+    font-weight: 600;
+    color: var(--tab-item-selected-item-color);
+  }
+}

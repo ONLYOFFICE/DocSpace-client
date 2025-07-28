@@ -56,9 +56,9 @@ export interface EditLinkPanelProps {
   unsavedChangesDialogVisible: boolean;
   setUnsavedChangesDialog: (visible: boolean) => void;
   currentDeviceType: DeviceType;
+  passwordSettings: TPasswordSettings | undefined;
+  getPortalPasswordSettings: () => Promise<void>;
 
-  passwordSettings: TPasswordSettings;
-  getPortalPasswordSettings: () => Promise<TPasswordSettings>;
   updateLink?: (link: TFileLink) => void;
 }
 
@@ -92,7 +92,7 @@ export interface PasswordAccessBlockProps {
   setPasswordValue: (value: string) => void;
   isPasswordValid: boolean;
   setIsPasswordValid: (value: boolean) => void;
-  passwordSettings: TPasswordSettings;
+  passwordSettings: TPasswordSettings | undefined;
   isPasswordErrorShow: boolean;
   setIsPasswordErrorShow: (value: boolean) => void;
   onChange?: ChangeEventHandler<HTMLInputElement>;

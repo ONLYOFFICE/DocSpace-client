@@ -33,7 +33,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import { globalColors } from "@docspace/shared/themes";
 import { StyledText } from "./CellStyles";
 
-const RoomCell = ({ sideColor, item }) => {
+const RoomCell = ({ sideColor, item, isRecentFolder }) => {
   const { originRoomTitle, originId, originTitle } = item;
 
   const [path, setPath] = useState([]);
@@ -56,6 +56,7 @@ const RoomCell = ({ sideColor, item }) => {
   };
 
   const canVisibleTitle = originRoomTitle || originTitle;
+  const emptyTitle = isRecentFolder ? "—" : "";
 
   return [
     <StyledText
@@ -68,7 +69,7 @@ const RoomCell = ({ sideColor, item }) => {
       data-tooltip-id={`${item.id}`}
       data-tip=""
     >
-      {originRoomTitle || originTitle || ""}
+      {originRoomTitle || originTitle || emptyTitle}
     </StyledText>,
 
     <Tooltip

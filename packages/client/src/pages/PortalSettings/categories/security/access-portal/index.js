@@ -271,6 +271,7 @@ const AccessPortal = (props) => {
         {ipSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="ip_security_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}

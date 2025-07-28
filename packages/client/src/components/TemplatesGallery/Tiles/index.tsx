@@ -78,8 +78,8 @@ const Tiles: FC<TilesProps> = ({
 
   return (
     <TileContainer className="tile-container">
-      {oformFiles.map((item: { id: Key | null | undefined }, index) => {
-        return <FileTile key={item.id} item={item} selectableRef={undefined} />;
+      {oformFiles.map((item: { id: Key | null | undefined }) => {
+        return <FileTile key={item.id} item={item} />;
       })}
     </TileContainer>
   );

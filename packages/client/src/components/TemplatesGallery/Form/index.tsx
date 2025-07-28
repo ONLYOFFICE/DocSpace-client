@@ -31,9 +31,6 @@ import { useLocation, useNavigate } from "react-router";
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 
 import type { FC } from "react";
-import Section from "@docspace/shared/components/section";
-
-import SectionWrapper from "SRC_DIR/components/Section";
 
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import SectionFilterContent from "../Filter";

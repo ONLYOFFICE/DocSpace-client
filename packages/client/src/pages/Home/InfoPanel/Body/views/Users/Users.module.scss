@@ -63,6 +63,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    user-select: text;
 
     .infoWrapper {
       display: flex;
@@ -76,6 +77,7 @@
 
     .infoTextEmail {
       color: var(--info-panel-name-color);
+      user-select: text;
     }
 
     .ssoBadge,

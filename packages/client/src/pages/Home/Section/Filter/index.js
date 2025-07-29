@@ -755,28 +755,25 @@ const SectionFilterContent = ({
 
     const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
 
-    const folders =
-      !isFavoritesFolder && !isRecentFolder
-        ? [
-            {
-              id: "filter_type-folders",
-              key: FilterType.FoldersOnly.toString(),
-              group: FilterGroups.filterType,
-              label: t("Common:Folders"),
-            },
-          ]
-        : "";
-
-    const files = !isRecentFolder
+    const folders = !isFavoritesFolder
       ? [
           {
-            id: "filter_type-all-files",
-            key: FilterType.FilesOnly.toString(),
+            id: "filter_type-folders",
+            key: FilterType.FoldersOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Common:Files"),
+            label: t("Common:Folders"),
           },
         ]
-      : [];
+      : "";
+
+    const files = [
+      {
+        id: "filter_type-all-files",
+        key: FilterType.FilesOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Common:Files"),
+      },
+    ];
 
     const images = [
       {

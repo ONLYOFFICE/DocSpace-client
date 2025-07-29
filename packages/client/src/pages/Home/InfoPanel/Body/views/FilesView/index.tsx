@@ -152,7 +152,7 @@ const FilesView = ({
     const onStartAnimation = () => {
       const event = new CustomEvent(TabsEvent.START_ANIMATION, {
         detail: {
-          infoPanel: true,
+          id: "info-panel-tabs",
         },
       });
       window.dispatchEvent(event);

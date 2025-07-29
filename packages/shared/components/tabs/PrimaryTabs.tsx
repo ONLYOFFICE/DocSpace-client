@@ -120,7 +120,7 @@ const PrimaryTabs = (props: TabsProps) => {
   useEffect(() => {
     const onStartAnimation = (e: Event) => {
       const eventId = (e as CustomEvent)?.detail?.id;
-      if (eventId === id) {
+      if (id && eventId === id) {
         setIsAnimation(true);
         setIsFinishing(false);
       }
@@ -192,7 +192,7 @@ const PrimaryTabs = (props: TabsProps) => {
                 classes,
               )}
               onAnimationEnd={(e) => {
-                if (e.animationName === "fillWidth" && isFinishing) {
+                if (e.animationName === styles.fillWidth && isFinishing) {
                   setIsFinishing(false);
                 }
               }}

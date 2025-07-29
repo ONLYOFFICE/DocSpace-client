@@ -123,7 +123,6 @@ const InfoPanelBodyContent = ({
   const defferedCurrentView = React.useDeferredValue(currentView);
 
   React.useEffect(() => {
-    console.log("call");
     setCurrentView(isRooms ? roomsView : fileView);
   }, [isRooms, roomsView, fileView]);
 

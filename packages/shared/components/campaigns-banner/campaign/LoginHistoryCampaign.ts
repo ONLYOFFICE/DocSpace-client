@@ -24,56 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface CampaignsBannerProps {
-  /** Accepts id */
-  id?: string;
-  /** Accepts class */
-  className?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Background */
-  campaignBackground: string;
-  /** Icon */
-  campaignIcon: string;
-  /** Translations */
-  campaignTranslate: ITranslate;
-  /** Config */
-  campaignConfig: IConfig;
-  /** Disable text fitting */
-  disableFitText?: boolean;
-  /** Button/Link action */
-  onAction(type?: string, url?: string): void;
-  /** Close action */
-  onClose(): void;
-  /** Action icon */
-  actionIcon?: string;
-}
+import { globalColors } from "../../../themes";
 
-interface ITranslate {
-  Header?: string;
-  SubHeader?: string;
-  Text?: string;
-  ButtonLabel?: string;
-  Link?: string;
-}
+/**
+ * Configuration for the Login History campaign banner
+ */
+export const getLoginHistoryConfig = (
+  isBaseTheme: boolean,
+  isMobile: boolean = false,
+  currentColorScheme?: { main?: { accent?: string; buttons?: string } } | null,
+) => {
+  const accentColor =
+    currentColorScheme?.main?.accent || globalColors.lightBlueMain;
 
-interface IStyle {
-  color?: string;
-  fontSize?: string;
-  fontWeight?: string;
-  lineHeight?: string;
-}
+  return {
+    borderColor: accentColor,
+    title: {
+      color: accentColor,
+      fontSize: isMobile ? "12px" : "11px",
+      lineHeight: isMobile ? "16px" : "12px",
+      fontWeight: "600",
+    },
+    body: {
+      fontSize: isMobile ? "14px" : "13px",
+      lineHeight: isMobile ? "22px" : "20px",
+      fontWeight: "600",
+      color: isBaseTheme ? globalColors.black : globalColors.white,
+    },
+    text: {
+      fontSize: isMobile ? "13px" : "12px",
+      lineHeight: isMobile ? "20px" : "16px",
+      fontWeight: "normal",
+      color: isBaseTheme ? globalColors.grayText : globalColors.darkGrayDark,
+    },
+    action: {
+      isButton: false,
+      type: "2fa-settings",
+    },
+  };
+};
 
-interface IAction {
-  isButton?: boolean;
-  backgroundColor?: string;
-  type?: string;
-}
-
-interface IConfig {
-  borderColor?: string;
-  title?: IStyle;
-  body?: IStyle;
-  text?: IStyle;
-  action?: IStyle & IAction;
-}
+export const loginHistoryConfig = getLoginHistoryConfig(true);

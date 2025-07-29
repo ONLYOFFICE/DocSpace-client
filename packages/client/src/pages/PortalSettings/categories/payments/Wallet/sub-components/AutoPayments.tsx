@@ -371,9 +371,8 @@ const AutoPayments = ({
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
+export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
   const {
-    walletCustomerEmail,
     updateAutoPayments,
     autoPayments,
     isAutoPaymentExist,
@@ -389,6 +388,8 @@ export default inject(({ paymentStore }: TStore) => {
     upToBalanceError,
     formatWalletCurrency,
   } = paymentStore;
+
+  const { walletCustomerEmail } = currentTariffStatusStore;
 
   return {
     walletCustomerEmail,

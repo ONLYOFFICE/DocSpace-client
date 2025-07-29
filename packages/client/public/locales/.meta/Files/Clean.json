@@ -3,7 +3,7 @@
   "content": "Clean",
   "content_en_sha1_hash": "fa893d87e1fa0a69c7942dd1e65f3bd1932e53d1",
   "created_at": "2025-05-19T21:30:55.333Z",
-  "updated_at": "2025-05-26T07:57:32.346Z",
+  "updated_at": "2025-07-10T11:11:06.843Z",
   "comment": {
     "text": "This translation key is used for a button label in an edit link panel, specifically to clean files, and its appearance changes based on hover state. The text appears as part of a password access block on a file-related interface.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/PasswordAccessBlock.js",
-      "line_number": 153,
-      "context": "isHovered\n type=\"action\"\n isDisabled={isLoading}\n onClick={onCleanClick}\n >\n {t(\"Files:Clean\")}\n </Link>\n <Link\n fontSize=\"13px\"\n fontWeight={600}\n isHovered",
+      "line_number": 152,
+      "context": "fontWeight={600}\n isHovered\n type=\"action\"\n onClick={onCleanClick}\n >\n {t(\"Files:Clean\")}\n </Link>\n <Link\n fontSize=\"13px\"\n fontWeight={600}\n isHovered",
       "module": "/packages/client"
     }
   ],
@@ -33,49 +33,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Təmizləyin\" means \"Clean it\" (imperative form). The English word \"Clean\" is an adjective or a noun describing a state of being clean, not an instruction to clean. A better translation would be \"Təmiz\" (Clean).",
-          "suggestion": "Təmiz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Изчисти\" (Izchisti) means \"Clean up\" or \"To clean\". While related to \"Clean\", it doesn't convey the same meaning as the English key 'Clean', which suggests a state of being clean. A more accurate translation might be \"Чисто\" (Chisto) which means \"Clean\".",
-          "suggestion": "Чисто"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation \"Vymazat\" translates to \"Delete\" or \"Erase\", not \"Clean\". While related, it doesn't accurately convey the meaning of \"Clean\".",
-          "suggestion": "Consider alternatives like \"Čistý\" (Clean), \"Uklizený\" (Tidy/Cleaned), or \"Očistit\" (To Clean), depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Löschen\" means \"delete\" or \"erase\", not \"clean\". \"Clean\" in the context of files would likely refer to sanitizing or removing unwanted content, not deleting the files themselves.",
-          "suggestion": "Consider alternatives like \"Bereinigen\" (to clean), \"Sanitieren\" (to sanitize), or \"Reinigen\" (to cleanse) depending on the exact meaning intended."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -93,25 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Puhdista\" means \"Clean\" or \"Clean up\", it's an imperative verb. \"Clean\" in this context likely refers to a descriptive adjective (e.g., 'Clean Files'). A more accurate translation would be \"Siisti\" or \"Puhtaat\".",
-          "suggestion": "Siisti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Clean' can have several French translations depending on the context. 'Effacer' primarily means 'to erase' or 'to delete,' which may not be the intended meaning of 'Clean'. Other possible translations include 'propre' (for physical cleanliness) or 'nettoyer' (to clean).",
-          "suggestion": "Consider the context of 'Files:Clean' to determine the most appropriate French translation. Possible suggestions include 'Propre', 'Nettoyer', or a more specific term depending on the file type and what 'Clean' refers to."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -123,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Elimina' translates to 'Delete' or 'Erase,' not 'Clean.' While related, it doesn't convey the same meaning as 'Clean'.",
-          "suggestion": "Consider 'Pulisci' for a more accurate translation of 'Clean'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -141,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'삭제' translates to 'delete' or 'remove', not 'clean'. 'Clean' typically implies sanitizing or making something spotless, while '삭제' refers to removing something entirely.",
-          "suggestion": "Consider translations like '정리' (jeongni - organize/tidy) or '청소' (cheongso - cleaning) which better convey the meaning of 'Clean'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -171,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation \"Wyczyść\" translates to \"Clean it\" or \"Clear it\", rather than simply \"Clean\". It's an imperative form, not a noun.",
-          "suggestion": "Consider \"Czysty\" (Clean - adjective) or \"Czyszczenie\" (Cleaning - noun) depending on the intended meaning within the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -189,25 +135,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word \"Clean\" can have multiple Portuguese translations depending on the context. \"Limpar\" translates to 'to clean' (as in an action). \"Clean\" as an adjective meaning 'tidy', 'unspoiled' or 'pure' would be better translated to 'limpo'. Without further context, 'limpo' would be a safer default.",
-          "suggestion": "Consider context. Potential alternatives: 'limpo' (adjective), or clarify context for more appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Golire\" does not accurately convey the meaning of \"Clean\". \"Golire\" means \"emptying\" or \"draining\".",
-          "suggestion": "Possible alternatives include: \"Curat\", \"Curățenie\", or a more context-dependent translation depending on the specific meaning of 'Clean'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -219,25 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මකන්න\" (makanna) primarily means 'to erase' or 'to delete', not 'clean'. While 'clean' can imply removing something, 'මකන්න' carries a stronger connotation of deletion. A more accurate translation for 'clean' would depend on the specific context (e.g., 'to clean' something physically, 'clean' data, etc.).",
-          "suggestion": "Consider alternatives like \"පවිත්‍ර කරන්න\" (pavitrakanna) for a general 'clean', \"පොඟවා ගන්න\" (pogawa ganne) if referring to cleaning something, or a more context-specific term."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"Očistiť\" is a verb meaning \"to clean\" or \"to purify\". The English word \"Clean\" is an adjective describing a state of being clean. While \"Očistiť\" could be used in a sentence describing the action of cleaning, it doesn't directly translate the adjective 'Clean'. A more appropriate translation might be 'Čistý'.",
-          "suggestion": "Čistý"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -249,37 +171,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Очистити\" translates to \"To clean\" or \"Clean (imperative)\" rather than simply \"Clean\".  It's an action, not a state.",
-          "suggestion": "Consider \"Чисто\" (Čisto) which means 'Clean' as an adjective or noun."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Očistiti\" means \"to clean\" (infinitive form). The English \"Clean\" is an adjective or a noun referring to a state of being clean. A more accurate translation might be \"Čist\" (adjective - clean) or \"Čišćenje\" (noun - cleaning).",
-          "suggestion": "Čist"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation \"Temizle\" means \"Clean up\" or \"To clean\". The English word \"Clean\" as a noun (describing something that is clean) requires the Turkish word \"Temiz\". \"Temizle\" implies an action, not a state.",
-          "suggestion": "Temiz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -291,25 +195,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word \"Clean\" (in the context of files) typically refers to removing unwanted items or data, not just deleting them. \"Xóa\" primarily means 'delete.' A better translation might be \"Làm sạch\" (to clean) or \"Dọn dẹp\" (to tidy up/clean).",
-          "suggestion": "Làm sạch"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word \"Clean\" has multiple possible translations in Chinese depending on the context. \"清理\" (qīnglǐ) primarily means 'to clean up' or 'to clear away', often implying removing clutter or debris. It's a reasonable translation, but \"Clean\" can also mean 'pure', 'untainted' or simply 'clean' in a general sense. A more contextually appropriate translation might be required.",
-          "suggestion": "Consider the context of 'Files:Clean' and evaluate if '清理' is the best fit. Other options include '清洁' (qīngjié) for a more general 'clean' or '纯净' (chúnjìng) for 'pure'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

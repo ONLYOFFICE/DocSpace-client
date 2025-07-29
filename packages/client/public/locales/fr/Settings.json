@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Vérifiez la liste des utilisateurs non importés à importer dans {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Il n'y a aucun utilisateur avec l'adresse e-mail.  Veuillez passer à l'étape suivante pour les ajouter.",
   "AddTrustedDomain": "Ajouter domaine autorisé",
+  "AdManagement": "Gestion des publicités",
+  "AdManagementDescription": "Choisissez si les bannières promotionnelles sont affichées dans votre {{productName}}.",
   "Admins": "Administrateurs",
   "AdminsMessage": "Paramètres des messages de l’administrateur",
   "AdminsMessageMobileDescription": "Les paramètres du message de l'administrateur permettent de contacter l'administrateur du portail.",
@@ -284,5 +286,8 @@
   "WantToCancelDataImport": "Voulez-vous annuler l'importation des données?",
   "WantToCancelUpload": "Voulez-vous annuler le téléchargement?",
   "WantToContinue": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
-  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante."
+  "WhiteLabelSubtitle": "Saisissez le nom de votre entreprise, téléchargez le logo et personnalisez le style pour qu’il corresponde à votre image de marque.",
+  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
+  "AdManagement": "Gestion des publicités",
+  "AdManagementDescription": "Choisissez si les bannières promotionnelles sont affichées dans votre {{productName}}."
 }

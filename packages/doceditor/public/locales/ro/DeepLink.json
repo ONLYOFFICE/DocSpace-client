@@ -3,5 +3,7 @@
   "OpenInApp": "Deschide din aplicația",
   "OpeningDocument": "Deschidere document",
   "RememberChoice": "Salvează alegerea pentru deschiderea documentelor data viitoare",
-  "StayInBrowser": "Rămâi în browser-ul"
+  "StayInBrowser": "Rămâi în browser-ul",
+  "DeepLinkOnlyAppText": "Puteți să deschideți documentul numai din aplicația mobilă",
+  "DownloadApp": "Descărcare aplicaţie"
 }

@@ -29,6 +29,7 @@ import type { Metadata } from "next";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 import "@docspace/shared/styles/theme.scss";
 
@@ -39,6 +40,7 @@ import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
+import { logger } from "@/../logger.mjs";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -49,9 +51,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  logger.info("SDK layout");
+
   const hdrs = await headers();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
+    logger.info("get health check and return empty layout");
     return null;
   }
 
@@ -95,6 +100,8 @@ export default async function RootLayout({
     "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
 
     "--interface-direction": dirClass,
+
+    "--font-family": getFontFamilyDependingOnLanguage(locale),
   } as React.CSSProperties;
 
   return (

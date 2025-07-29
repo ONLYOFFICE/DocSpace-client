@@ -3,7 +3,7 @@
   "content": "Changes saved successfully",
   "content_en_sha1_hash": "f280abfbdd2b446b83b726202b040224495bff89",
   "created_at": "2025-05-19T21:30:43.416Z",
-  "updated_at": "2025-05-26T07:57:32.210Z",
+  "updated_at": "2025-07-10T11:11:06.786Z",
   "comment": {
     "text": "The translation key \"ChangesSavedSuccessfully\" is used to display a success message when changes are saved successfully in various dialogues. It informs users that their modifications have been applied and confirms the update process.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 102,
+      "line_number": 109,
       "context": "newProfile.firstName = firstName.trim();\n newProfile.lastName = lastName.trim();\n \n const currentProfile = await updateProfile(newProfile);\n fromList && (await updateProfileInUsers(currentProfile));\n toastr.success(t(\"Common:ChangesSavedSuccessfully\"));\n \n setIsSaving(false);\n onClose();\n } catch (error) {\n toastr.error(error);",
       "module": "/packages/client"
     },
@@ -96,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb tense in the Spanish translation is incorrect. 'se ha guardado' should be 'se han guardado' to agree with the plural noun 'cambios'.",
+          "description": "The verb tense is incorrect. 'se ha guardado' should be 'se han guardado' to agree with the plural noun 'cambios'.",
           "suggestion": "Los cambios se han guardado correctamente"
         }
       ],
@@ -207,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Промене успешно сачуване' doesn't accurately convey the meaning of 'Changes saved successfully'. 'Промене' is a declined form and doesn't directly translate to 'Changes'. The correct translation should use a word that indicates the changes were successful.",
-          "suggestion": "Измене са успешно сачуване (Izmene sa uspešno sačuvane) - Changes were successfully saved, or Успешно сачуване промена (Uspešno sačuvane promene) - Changes successfully saved"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -222,13 +216,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Promene uspešno sačuvane' does not accurately convey the meaning of 'Changes saved successfully'. 'Promene' means 'changes' which is redundant.  'uspešno' means 'successfully', which is correct, and 'sačuvane' means 'saved'.  The translation is clunky and doesn't flow naturally.",
-          "suggestion": "Izmene uspešno sačuvane"
+          "description": "The Serbian translation \"Promene uspešno sačuvane\" does not accurately convey the meaning of \"Changes saved successfully.\" \"Promene\" translates to \"Changes\" but the rest of the phrasing is awkward and doesn't reflect the original intent of a successful save.",
+          "suggestion": "Uspešno sačuvane izmene"
         },
         {
-          "type": "spelling",
-          "description": "While 'uspešno' and 'sačuvane' are correctly spelled, the word 'Promene' might be a typo and should be 'Izmene'.",
-          "suggestion": "Izmene"
+          "type": "grammar",
+          "description": "While not strictly incorrect, the phrase 'Uspešno sačuvane izmene' is more natural and grammatically sound in Serbian.",
+          "suggestion": "Uspešno sačuvane izmene"
         }
       ],
       "approved_at": null

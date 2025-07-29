@@ -28,11 +28,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment-timezone";
 
-import { QuotaState, TariffState } from "../enums";
 import api from "../api";
-import { getUserByEmail } from "../api/people";
-import { TPortalTariff, TQuotas } from "../api/portal/types";
-import { TUser } from "../api/people/types";
+import { getWalletPayer } from "../api/portal";
+
+import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
+
+import { TCustomerInfo, TPortalTariff, TQuotas } from "../api/portal/types";
 import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
 import { Nullable } from "../types";
@@ -45,13 +46,18 @@ class CurrentTariffStatusStore {
 
   isLoaded = false;
 
-  payerInfo: TUser | null = null;
-
   language: string = "en";
 
   walletQuotas: TQuotas[] = [];
 
   previousWalletQuota: TQuotas[] = [];
+
+  payerInfo: TCustomerInfo = {
+    portalId: null,
+    paymentMethodStatus: 0,
+    email: null,
+    payer: null,
+  };
 
   constructor(userStore: UserStore) {
     makeAutoObservable(this);
@@ -163,28 +169,6 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus?.licenseDate;
   }
 
-  setPayerInfo = async (payer?: string) => {
-    const payerInfo = payer ?? this.customerId;
-
-    try {
-      if (!payerInfo || !payerInfo?.length) {
-        this.payerInfo = null;
-        return;
-      }
-
-      const result = await getUserByEmail(payerInfo);
-      if (!result) {
-        this.payerInfo = null;
-        return;
-      }
-
-      this.payerInfo = result;
-    } catch (e) {
-      this.payerInfo = null;
-      console.error(e);
-    }
-  };
-
   get paymentDate() {
     moment.locale(this.language);
     if (this.dueDate === null) return "";
@@ -235,6 +219,40 @@ class CurrentTariffStatusStore {
 
     return getDaysLeft(this.dueDate);
   }
+
+  get walletCustomerEmail() {
+    return this.payerInfo.email;
+  }
+
+  get walletCustomerUnlinkedStatus() {
+    return this.payerInfo.paymentMethodStatus === PaymentMethodStatus.None;
+  }
+
+  get walletCustomerExpiredStatus() {
+    return this.payerInfo.paymentMethodStatus === PaymentMethodStatus.Expired;
+  }
+
+  get walletCustomerStatusNotActive() {
+    if (!this.walletCustomerEmail) return false;
+
+    return (
+      this.walletCustomerUnlinkedStatus || this.walletCustomerExpiredStatus
+    );
+  }
+
+  get walletCustomerInfo() {
+    return this.payerInfo.payer;
+  }
+
+  fetchPayerInfo = async (isRefresh?: boolean) => {
+    const res = await getWalletPayer(isRefresh);
+
+    if (!res) return;
+
+    this.payerInfo = res;
+
+    return res;
+  };
 
   fetchPortalTariff = async (refresh?: boolean) => {
     return api.portal.getPortalTariff(refresh).then((res) => {

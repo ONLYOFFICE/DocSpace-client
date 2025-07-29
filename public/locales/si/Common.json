@@ -226,6 +226,8 @@
   "Description": "සවිස්තරය",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "සංවර්ධක මෙවලම්",
+  "Diagram": "රූප සටහන",
+  "Diagrams": "රූප සටහන්",
   "Disable": "අබල කරන්න",
   "Disabled": "අබලයි",
   "DisableQuota": "සලාකය අබල කරන්න",
@@ -854,5 +856,7 @@
   "Yesterday": "ඊයේ",
   "You": "ඔබ",
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
-  "YourCurrentDomain": "ඔබගේ වත්මන් වසම"
+  "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
+  "YourLogo": "ඔබේ ලාංචනය",
+  "YourTurn": "ඔබේ වාරය."
 }

@@ -30,7 +30,7 @@ import { isTablet } from "@docspace/shared/utils";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { SimpleFilesRowContent } from "@docspace/shared/styles/FilesRow.styled";
+import { FilesRowContent as SimpleFilesRowContent } from "@docspace/shared/components/files-row";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { createPluginFileHandlers } from "@docspace/shared/utils/plugin-file-utils";

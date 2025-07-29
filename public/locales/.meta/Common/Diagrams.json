@@ -1,0 +1,58 @@
+{
+  "key_path": "Diagrams",
+  "content": "Diagrams",
+  "content_en_sha1_hash": "ecf4d503679532de632c70286cab2a70bfaa2235",
+  "created_at": "2025-07-01T15:57:10.991Z",
+  "updated_at": "2025-07-10T11:11:06.892Z",
+  "comment": {
+    "text": "This translation key is used to display a label that refers to diagrams. It is used in the filter options section of a UI component, likely on a file selector or portal settings page. Translators should update this text to reflect different language versions of \"diagrams\".",
+    "is_auto": true,
+    "updated_at": "2025-07-01T15:57:48.338Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 620,
+      "context": "break;\n case FilterType.Pdf.toString():\n label = getManyPDFTitle(t, false);\n break;\n case FilterType.DiagramsOnly.toString():\n label = t(\"Common:Diagrams\");\n break;\n default:\n break;\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
+      "line_number": 620,
+      "context": "break;\n case FilterType.Pdf.toString():\n label = getManyPDFTitle(t, false);\n break;\n case FilterType.DiagramsOnly.toString():\n label = t(\"Common:Diagrams\");\n break;\n default:\n break;\n }",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
+      "line_number": 125,
+      "context": "key: FilterType.Pdf,\n label: getManyPDFTitle(t, false),\n },\n {\n key: FilterType.DiagramsOnly,\n label: t(`Common:Diagrams`),\n },\n {\n key: FilterType.ArchiveOnly,\n label: t(`Common:Archives`),\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
+      "line_number": 173,
+      "context": "label: getManyPDFTitle(t, true),\n typeKey: FilterType.PDFForm,\n },\n {\n key: \"filter-type-diagrams\",\n label: t(\"Common:Diagrams\"),\n typeKey: FilterType.DiagramsOnly,\n },\n {\n key: \"filter-type-archives\",\n label: t(\"Common:Archives\"),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
+      "line_number": 515,
+      "context": "isChecked={state.diagrams.isChecked}\n isIndeterminate={state.diagrams.isIndeterminate}\n items={state.diagrams.files}\n titleFormat={state.diagrams.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.Diagrams}\n title={t(\"Common:Diagrams\")}\n />\n ) : null}\n {state.other.files.length > 0 ? (\n <DownloadContent\n {...downloadContentProps}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/utils/index.ts",
+      "line_number": 363,
+      "context": "case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

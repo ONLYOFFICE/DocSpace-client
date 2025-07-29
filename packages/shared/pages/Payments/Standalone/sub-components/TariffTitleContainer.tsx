@@ -24,16 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Link } from "../../../../components/link";
 import { Text } from "../../../../components/text";
 
-import { StyledTitleComponent } from "../Payments.styled";
-import { getTwoDotsReplacing, parseUserStatistics } from "../Payments.helpers";
-import { IPaymentsProps } from "../Payments.types";
-import { useUserStatisticsDialog } from "./hooks/useUserStatisticsDialog";
+import {
+  getTwoDotsReplacing,
+  parseUserStatistics,
+} from "../Standalone.helpers";
+import { IPaymentsProps } from "../Standalone.types";
+import styles from "../Standalone.module.scss";
 import UserStatisticsDialog from "../../../../dialogs/UserStatisticsDialog";
+import { useUserStatisticsDialog } from "./hooks/useUserStatisticsDialog";
 
 export const TariffTitleContainer = ({
   isLicenseDateExpired,
@@ -61,7 +66,7 @@ export const TariffTitleContainer = ({
     if (isTrial) {
       return isLicenseDateExpired ? (
         <Text
-          className="payments_subscription-expired"
+          className={styles.paymentsSubscriptionExpired}
           fontWeight={600}
           fontSize="14px"
         >
@@ -69,7 +74,7 @@ export const TariffTitleContainer = ({
         </Text>
       ) : (
         <Text
-          className="payments_subscription-expired"
+          className={styles.paymentsSubscriptionExpired}
           fontWeight={600}
           fontSize="14px"
         >
@@ -80,7 +85,11 @@ export const TariffTitleContainer = ({
 
     return (
       isLicenseDateExpired && (
-        <Text className="payments_subscription-expired" isBold fontSize="14px">
+        <Text
+          className={styles.paymentsSubscriptionExpired}
+          isBold
+          fontSize="14px"
+        >
           {t("SubscriptionExpired")}
         </Text>
       )
@@ -104,13 +113,15 @@ export const TariffTitleContainer = ({
   };
 
   return (
-    <StyledTitleComponent
-      limitedWidth={isTrial ? true : isLicenseDateExpired}
-      isLicenseDateExpired={isLicenseDateExpired}
+    <div
+      className={classNames(styles.titleComponent, {
+        [styles.limitedWidth]: isTrial ? true : isLicenseDateExpired,
+        [styles.isLicenseDateExpired]: isLicenseDateExpired,
+      })}
     >
-      <div className="payments_subscription">
-        <div className="title">
-          <Text fontWeight={600} fontSize="13px" lineHeight="20px" as="span">
+      <div className={styles.paymentsSubscription}>
+        <div className={styles.title}>
+          <Text fontWeight={600} fontSize="14px" as="span">
             <Trans
               i18nKey="ActivateTariffDescrUsers"
               values={{
@@ -150,6 +161,6 @@ export const TariffTitleContainer = ({
         onClose={closeUserStatistics}
         onDownloadAndReport={downloadAndOpenReport}
       />
-    </StyledTitleComponent>
+    </div>
   );
 };

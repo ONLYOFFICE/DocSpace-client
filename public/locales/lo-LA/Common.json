@@ -222,6 +222,8 @@
   "Description": "ລາຍລະອຽດ",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "ເຄື່ອງມືພັດທະນາ",
+  "Diagram": "ແຜນວາດ",
+  "Diagrams": "ແຜນວາດ",
   "Disable": "ປິດການໃຊ້ງານ",
   "Disabled": "ປິດສິດ",
   "DisableQuota": "ປິດການນຳໃຊ້ໂຄຕ້າ",
@@ -853,5 +855,6 @@
   "You": "ເຈົ້າ",
   "YouHaveUnsavedChanges": "ທ່ານມີການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກ",
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
+  "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
 }

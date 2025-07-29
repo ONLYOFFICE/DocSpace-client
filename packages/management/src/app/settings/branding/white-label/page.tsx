@@ -37,8 +37,11 @@ import {
 import { getIsDefaultWhiteLabel } from "@/lib";
 
 import { WhiteLabelPage } from "./page.client";
+import { logger } from "../../../../../logger.mjs";
 
 async function Page() {
+  logger.info("Branding white-label page");
+
   const [settings, quota, portals, whiteLabelLogos, whiteLabelIsDefault] =
     await Promise.all([
       getSettings(),
@@ -48,10 +51,18 @@ async function Page() {
       getWhiteLabelIsDefault(),
     ]);
 
-  const baseUrl = await getBaseUrl();
+  if (settings === "access-restricted") {
+    const baseURL = await getBaseUrl();
 
-  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
-  if (!settings) redirect(`${baseUrl}/login`);
+    logger.info("Branding white-label page access-restricted");
+    redirect(`${baseURL}/${settings}`);
+  }
+  if (!settings) {
+    const baseURL = await getBaseUrl();
+
+    logger.info("Branding white-label page empty settings");
+    redirect(`${baseURL}/login`);
+  }
 
   const { displayAbout, standalone } = settings;
   const showAbout = standalone && displayAbout;

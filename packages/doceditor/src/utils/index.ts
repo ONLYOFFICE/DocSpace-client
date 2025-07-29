@@ -28,7 +28,7 @@ import { toUrlParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { request } from "@docspace/shared/api/client";
 import { convertFile } from "@docspace/shared/api/files";
-import { TEditHistory } from "@docspace/shared/api/files/types";
+import { TEditHistory, TFile } from "@docspace/shared/api/files/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFormRole } from "@/types";
 import { toastr } from "@docspace/shared/components/toast";
@@ -222,4 +222,10 @@ export const calculateAsideHeight = (callback?: () => void) => {
 
 export const isFormRole = (role: unknown): role is TFormRole[] => {
   return typeof role === "object" && Array.isArray(role) && "name" in role[0];
+};
+
+export const isPDFDocument = (file: TFile | undefined) => {
+  if (!file) return false;
+
+  return file.fileExst === ".pdf" && !file.isForm;
 };

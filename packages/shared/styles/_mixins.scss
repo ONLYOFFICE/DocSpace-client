@@ -1,4 +1,5 @@
 @use "variables/devices";
+@forward "common-icons-style";
 
 @mixin no-user-select {
   -webkit-user-select: none;
@@ -55,6 +56,18 @@
 
 @mixin keyframes($name) {
   @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin flip-in-rtl {
+  [data-dir="rtl"] & {
+    transform: scaleX(-1);
+  }
+}
+
+@mixin can-hover {
+  @media (hover: hover) and (pointer: fine) {
     @content;
   }
 }

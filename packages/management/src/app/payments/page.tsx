@@ -37,8 +37,11 @@ import {
 } from "@/lib/actions";
 
 import PaymentsPage from "./page.client";
+import { logger } from "../../../logger.mjs";
 
 async function Page() {
+  logger.info("Payments page");
+
   const [
     settings,
     quota,
@@ -55,10 +58,12 @@ async function Page() {
     getSettingsFiles(),
   ]);
 
-  const baseUrl = await getBaseUrl();
+  if (settings === "access-restricted") {
+    logger.info("Payments page access-restricted");
 
-  if (settings === "access-restricted") redirect(`${baseUrl}/${settings}`);
-
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/${settings}`);
+  }
   if (
     !settings ||
     !quota ||
@@ -66,8 +71,14 @@ async function Page() {
     !paymentSettings ||
     !licenseQuota ||
     !filesSettings
-  )
-    redirect(`${baseUrl}/login`);
+  ) {
+    logger.info(
+      `Payments page settings: ${settings}, quota: ${quota}, portalTariff: ${portalTariff}, paymentSettings: ${paymentSettings}, licenseQuota: ${licenseQuota}, filesSettings: ${filesSettings}`,
+    );
+
+    const baseURL = await getBaseUrl();
+    redirect(`${baseURL}/login`);
+  }
 
   const { logoText, externalResources } = settings;
   const { helpcenter } = externalResources;
@@ -79,7 +90,12 @@ async function Page() {
   const { salesEmail, buyUrl } = paymentSettings;
   const { license } = licenseQuota;
 
-  if (openSource) return redirect(`${baseUrl}/error/403`);
+  if (openSource) {
+    const baseURL = await getBaseUrl();
+
+    logger.info(`Payments page redirect${baseURL}/error/403`);
+    return redirect(`${baseURL}/error/403`);
+  }
 
   return (
     <PaymentsPage

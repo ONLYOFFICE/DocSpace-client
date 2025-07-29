@@ -606,6 +606,7 @@ export const sortedFiles: TSortedFiles = {
   documents: files.filter((f) => isFile(f) && f.fileExst === ".docx"),
   spreadsheets: files.filter((f) => isFile(f) && f.fileExst === ".xlsx"),
   presentations: files.filter((f) => isFile(f) && f.fileExst === ".pptx"),
+  diagrams: [],
   masterForms: [],
   pdfForms: [],
   other: [],

@@ -144,24 +144,28 @@ const DeepLink = ({
                 <Button
                   size={ButtonSize.medium}
                   primary
-                  label={t("DeepLink:OpenInApp")}
-                  onClick={onOpenAppClick}
-                />
-                <Link
-                  className="stay-link"
-                  type={LinkType.action}
-                  fontSize="13px"
-                  fontWeight="600"
-                  isHovered
-                  color={theme.currentColorScheme?.main?.accent}
-                  onClick={
-                    isOpenInAppOnly ? onDownloadAppClick : onStayBrowserClick
+                  label={
+                    isOpenInAppOnly
+                      ? t("DeepLink:DownloadApp")
+                      : t("DeepLink:OpenInApp")
                   }
-                >
-                  {isOpenInAppOnly
-                    ? t("DeepLink:DownloadApp")
-                    : t("DeepLink:StayInBrowser")}
-                </Link>
+                  onClick={
+                    isOpenInAppOnly ? onDownloadAppClick : onOpenAppClick
+                  }
+                />
+                {isOpenInAppOnly ? null : (
+                  <Link
+                    className="stay-link"
+                    type={LinkType.action}
+                    fontSize="13px"
+                    fontWeight="600"
+                    isHovered
+                    color={theme.currentColorScheme?.main?.accent}
+                    onClick={onStayBrowserClick}
+                  >
+                    {t("DeepLink:StayInBrowser")}
+                  </Link>
+                )}
               </StyledActionsWrapper>
             </StyledDeepLink>
           </FormWrapper>

@@ -872,5 +872,6 @@
   "YourTurn": "Radha jote",
   "Viewer": "Shikuesi",
   "ManageNotifications": "Menaxhoni",
-  "LimitTimeBlockFormRoomDescription": "Në një dhomë të plotësimit të formularit, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar."
+  "LimitTimeBlockFormRoomDescription": "Në një dhomë të plotësimit të formularit, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar.",
+  "LimitTimeBlockPublicRoomDescription": "Në një dhomë publike, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar. Ju mund të krijoni lidhje shtesë me afat kohor."
 }

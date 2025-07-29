@@ -873,5 +873,6 @@
   "YourTurn": "Sıra sizde",
   "Viewer": "Görüntüleyici",
   "ManageNotifications": "Yönet",
-  "LimitTimeBlockFormRoomDescription": "Form Doldurma odasında ana bağlantı süresiz olarak geçerlidir."
+  "LimitTimeBlockFormRoomDescription": "Form Doldurma odasında ana bağlantı süresiz olarak geçerlidir.",
+  "LimitTimeBlockPublicRoomDescription": "Herkese Açık odada ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz."
 }

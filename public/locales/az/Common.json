@@ -873,5 +873,6 @@
   "YourTurn": "Sizin növbəniz",
   "Viewer": "İzləyici",
   "ManageNotifications": "İdarə etmək",
-  "LimitTimeBlockFormRoomDescription": "Forma Doldurma otağında əsas link vaxt məhdudiyyəti olmadan etibarlıdır."
+  "LimitTimeBlockFormRoomDescription": "Forma Doldurma otağında əsas link vaxt məhdudiyyəti olmadan etibarlıdır.",
+  "LimitTimeBlockPublicRoomDescription": "İctimai otaqda əsas link vaxt məhdudiyyəti olmadan etibarlıdır. Vaxt məhdudiyyəti ilə əlavə linklər yarada bilərsiniz."
 }

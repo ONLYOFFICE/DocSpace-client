@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Los archivos antiguos cuya vida útil se haya superado se eliminarán",
   "LimitByTimePeriod": "Limitar por periodo de tiempo",
   "LimitTimeBlockCustomRoomDescription": "En una sala personalizada, el enlace principal es válido durante un periodo de tiempo ilimitado. Puede crear enlaces adicionales con límite de tiempo.",
-  "LimitTimeBlockPublicRoomDescription": "En una sala pública, el enlace principal es válido durante un periodo de tiempo ilimitado. Puede crear enlaces adicionales con límite de tiempo.",
   "LinkDeletedSuccessfully": "El enlace se ha eliminado correctamente",
   "LinkForPortalUsers": "Enlace para los usuarios de {{productName}}",
   "LinkSettings": "Configuración de enlace",

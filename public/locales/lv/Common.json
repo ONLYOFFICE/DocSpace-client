@@ -872,5 +872,6 @@
   "YourTurn": "Jūsu kārta",
   "Viewer": "Skatītājs",
   "ManageNotifications": "Pārvaldīt",
-  "LimitTimeBlockFormRoomDescription": "Veidlapu aizpildīšanas telpā galvenā saite ir derīga neierobežotu laiku."
+  "LimitTimeBlockFormRoomDescription": "Veidlapu aizpildīšanas telpā galvenā saite ir derīga neierobežotu laiku.",
+  "LimitTimeBlockPublicRoomDescription": "Publiskā telpā galvenā saite ir derīga neierobežotu laiku. Varat izveidot papildu saites ar laika ierobežojumu."
 }

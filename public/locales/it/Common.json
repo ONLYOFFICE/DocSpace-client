@@ -873,5 +873,6 @@
   "YourTurn": "Il tuo turno",
   "Viewer": "Visualizzatore",
   "ManageNotifications": "Gestisci",
-  "LimitTimeBlockFormRoomDescription": "In una stanza di compilazione dei moduli, il collegamento principale è valido per un periodo di tempo illimitato."
+  "LimitTimeBlockFormRoomDescription": "In una stanza di compilazione dei moduli, il collegamento principale è valido per un periodo di tempo illimitato.",
+  "LimitTimeBlockPublicRoomDescription": "In una stanza pubblica, il link principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con un limite di tempo."
 }

@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "I file più vecchi che hanno superato la durata di vita verranno eliminati.",
   "LimitByTimePeriod": "Limite in base al periodo di tempo",
   "LimitTimeBlockCustomRoomDescription": "In una stanza personalizzata, il collegamento principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con limiti di tempo.",
-  "LimitTimeBlockPublicRoomDescription": "In una stanza pubblica, il link principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con un limite di tempo.",
   "LinkDeletedSuccessfully": "Link eliminato con successo",
   "LinkForPortalUsers": "Collegamento per gli utenti di {{productName}}",
   "LinkSettings": "Impostazioni di link",

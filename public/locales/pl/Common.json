@@ -873,5 +873,6 @@
   "YourTurn": "Twoja kolej",
   "Viewer": "Przeglądarka",
   "ManageNotifications": "Zarządzaj",
-  "LimitTimeBlockFormRoomDescription": "W pokoju do wypełniania formularzy link główny jest ważny przez czas nieograniczony."
+  "LimitTimeBlockFormRoomDescription": "W pokoju do wypełniania formularzy link główny jest ważny przez czas nieograniczony.",
+  "LimitTimeBlockPublicRoomDescription": "W pokoju publicznym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu."
 }

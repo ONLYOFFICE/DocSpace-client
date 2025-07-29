@@ -864,5 +864,6 @@
   "YourTurn": "Vaš red",
   "Viewer": "Pregledač",
   "ManageNotifications": "Upravljaj",
-  "LimitTimeBlockFormRoomDescription": "U sobi za popunjavanje obrazaca, glavni link važi neograničeno."
+  "LimitTimeBlockFormRoomDescription": "U sobi za popunjavanje obrazaca, glavni link važi neograničeno.",
+  "LimitTimeBlockPublicRoomDescription": "U javnoj sobi, glavni link važi neograničeno. Možete kreirati dodatne linkove sa vremenskim ograničenjem."
 }

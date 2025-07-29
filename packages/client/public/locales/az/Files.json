@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "İstifadə müddətini keçmiş köhnə fayllar silinəcək",
   "LimitByTimePeriod": "Zamana görə məhdudiyyət",
   "LimitTimeBlockCustomRoomDescription": "Şəxsi otaqda əsas link vaxt məhdudiyyəti olmadan etibarlıdır. Vaxt məhdudiyyəti ilə əlavə linklər yarada bilərsiniz.",
-  "LimitTimeBlockPublicRoomDescription": "İctimai otaqda əsas link vaxt məhdudiyyəti olmadan etibarlıdır. Vaxt məhdudiyyəti ilə əlavə linklər yarada bilərsiniz.",
   "LinkDeletedSuccessfully": "Keçid uğurla silindi",
   "LinkForPortalUsers": " {{productName}} istifadəçiləri üçün keçid",
   "LinkSettings": "Link parametrləri",

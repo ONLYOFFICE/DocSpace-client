@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Oudere bestanden met een overschreden levensduur worden verwijderd",
   "LimitByTimePeriod": "Beperken op tijdsperiode",
   "LimitTimeBlockCustomRoomDescription": "In een Aangepaste ruimte is de hoofdlink voor een onbepaalde tijd geldig. U kunt extra links met een tijdslimiet maken.",
-  "LimitTimeBlockPublicRoomDescription": "In een Openbare kamer is de hoofdlink voor onbepaalde tijd geldig. U kunt extra links met een tijdslimiet maken.",
   "LinkDeletedSuccessfully": "Link succesvol verwijderd",
   "LinkForPortalUsers": "Link voor {{productName}} gebruikers",
   "LinkSettings": "Link instellingen",

@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "有効期限を過ぎた古いファイルは削除されます。",
   "LimitByTimePeriod": "期間による制限",
   "LimitTimeBlockCustomRoomDescription": "カスタムルームでは、メインリンクは無制限の時間有効です。時間制限付きの追加リンクを作成できます。",
-  "LimitTimeBlockPublicRoomDescription": "パブリックルームでは、メインリンクは無制限の時間有効です。時間制限付きの追加リンクを作成できます。",
   "LinkDeletedSuccessfully": "リンクは正常に削除されました",
   "LinkForPortalUsers": "{{productName}}のユーザー用リンク",
   "LinkSettings": "リンクの設定",

@@ -860,5 +860,6 @@
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
   "Viewer": "ຜູ້ຊົມ",
   "ManageNotifications": "ຈັດການ",
-  "LimitTimeBlockFormRoomDescription": "ໃນຫ້ອງຕື່ມແບບຟອມ, ລິ້ງຕົ້ນເອກສາມາດໃຊ້ໄດ້ຕະຫຼອດເວລາ."
+  "LimitTimeBlockFormRoomDescription": "ໃນຫ້ອງຕື່ມແບບຟອມ, ລິ້ງຕົ້ນເອກສາມາດໃຊ້ໄດ້ຕະຫຼອດເວລາ.",
+  "LimitTimeBlockPublicRoomDescription": "ໃນຫ້ອງສາທາລະນະ, ເຊື່ອມຕໍ່ຕົ້ນແມ່ນໃຊ້ໄດ້ຕະຫຼອດເວລາ. ທ່ານ ສາມາດ ສ້າງເຊື່ອມຕໍ່ເພີ່ມເຕີມທີ່ມີເວລາຈຳກັດໄດ້."
 }

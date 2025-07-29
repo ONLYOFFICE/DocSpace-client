@@ -873,5 +873,6 @@
   "YourTurn": "Ste na rade",
   "Viewer": "Prehliadač",
   "ManageNotifications": "Spravovať",
-  "LimitTimeBlockFormRoomDescription": "V Miestnosti na vyplňovanie formulárov je hlavný odkaz platný na neobmedzený čas. "
+  "LimitTimeBlockFormRoomDescription": "V Miestnosti na vyplňovanie formulárov je hlavný odkaz platný na neobmedzený čas. ",
+  "LimitTimeBlockPublicRoomDescription": "Vo Verejnej miestnosti je hlavný odkaz platný na neobmedzený časový úsek. Môžete vytvoriť ďalšie odkazy s časovým obmedzením. "
 }

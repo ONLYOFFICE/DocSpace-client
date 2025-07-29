@@ -884,5 +884,6 @@
   "WhoHasAccess": "Who has access",
   "Viewer": "Viewer",
   "ManageNotifications": "Manage",
-  "LimitTimeBlockFormRoomDescription": "In a Form Filling room, the main link is valid for an unlimited time period."
+  "LimitTimeBlockFormRoomDescription": "In a Form Filling room, the main link is valid for an unlimited time period.",
+  "LimitTimeBlockPublicRoomDescription": "In a Public room, the main link is valid for an unlimited time period. You can create additional links with time limit."
 }

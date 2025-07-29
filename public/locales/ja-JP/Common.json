@@ -873,5 +873,6 @@
   "YourTurn": "あなたの番です",
   "Viewer": "ビューア",
   "ManageNotifications": "管理",
-  "LimitTimeBlockFormRoomDescription": "フォーム記入ルームでは、メインリンクは無制限の時間有効です。"
+  "LimitTimeBlockFormRoomDescription": "フォーム記入ルームでは、メインリンクは無制限の時間有効です。",
+  "LimitTimeBlockPublicRoomDescription": "パブリックルームでは、メインリンクは無制限の時間有効です。時間制限付きの追加リンクを作成できます。"
 }

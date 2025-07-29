@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Starejše datoteke s prekoračeno življenjsko dobo bodo izbrisane",
   "LimitByTimePeriod": "Omejitev po časovnem obdobju",
   "LimitTimeBlockCustomRoomDescription": "V sobi po meri je glavna povezava veljavna neomejeno časovno obdobje. Ustvarite lahko dodatne povezave s časovno omejitvijo.",
-  "LimitTimeBlockPublicRoomDescription": "V javni sobi je glavna povezava veljavna neomejeno časovno obdobje. Ustvarite lahko dodatne povezave s časovno omejitvijo.",
   "LinkDeletedSuccessfully": "Povezava je bila uspešno izbrisana",
   "LinkForPortalUsers": "Povezava za {{productName}} uporabnike",
   "LinkSettings": "Nastavitve povezave",

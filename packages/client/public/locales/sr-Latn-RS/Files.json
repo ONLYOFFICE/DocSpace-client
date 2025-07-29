@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Stariji fajlovi koji premašuju vek trajanja će biti obrisani",
   "LimitByTimePeriod": "Ograniči vremenskim periodom",
   "LimitTimeBlockCustomRoomDescription": "U prilagođenoj sobi, glavni link važi neograničeno. Možete kreirati dodatne linkove sa vremenskim ograničenjem.",
-  "LimitTimeBlockPublicRoomDescription": "U javnoj sobi, glavni link važi neograničeno. Možete kreirati dodatne linkove sa vremenskim ograničenjem.",
   "LinkDeletedSuccessfully": "Link obrisan uspešno",
   "LinkForPortalUsers": "Link za {{productName}} korisnike",
   "LinkSettings": "Podešavanja linka",

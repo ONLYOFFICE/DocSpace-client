@@ -873,5 +873,6 @@
   "YourTurn": "Ваш ред",
   "Viewer": "Прегледач",
   "ManageNotifications": "Управљај",
-  "LimitTimeBlockFormRoomDescription": "У соби за попуњавање образаца, главни линк важи неограничено."
+  "LimitTimeBlockFormRoomDescription": "У соби за попуњавање образаца, главни линк важи неограничено.",
+  "LimitTimeBlockPublicRoomDescription": "У јавној соби, главни линк важи неограничено. Можете креирати додатне линкове са временским ограничењем."
 }

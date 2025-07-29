@@ -862,5 +862,6 @@
   "YourTurn": "ඔබේ වාරය.",
   "Viewer": "නරඹනය",
   "ManageNotifications": "කළමනාකරණය",
-  "LimitTimeBlockFormRoomDescription": "පෝරම පිරවීමේ කාමරයකදී, ප්‍රධාන සබැඳිය අසීමිත කාලයක් සඳහා වලංගු වේ."
+  "LimitTimeBlockFormRoomDescription": "පෝරම පිරවීමේ කාමරයකදී, ප්‍රධාන සබැඳිය අසීමිත කාලයක් සඳහා වලංගු වේ.",
+  "LimitTimeBlockPublicRoomDescription": "පොදු කාමරයක, ප්‍රධාන සබැඳිය අසීමිත කාල සීමාවක් සඳහා වලංගු වේ. ඔබට කාල සීමාවක් සමඟ අමතර සබැඳි නිර්මාණය කළ හැකිය."
 }

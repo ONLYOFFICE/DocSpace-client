@@ -873,5 +873,6 @@
   "YourTurn": "A sua vez",
   "Viewer": "Visualizador",
   "ManageNotifications": "Gerir",
-  "LimitTimeBlockFormRoomDescription": "Numa sala de Preenchimento de Formulários, o link principal é válido por um período de tempo ilimitado."
+  "LimitTimeBlockFormRoomDescription": "Numa sala de Preenchimento de Formulários, o link principal é válido por um período de tempo ilimitado.",
+  "LimitTimeBlockPublicRoomDescription": "Numa sala Pública, o link principal é válido por um período de tempo ilimitado. Pode criar links adicionais com limite de tempo."
 }

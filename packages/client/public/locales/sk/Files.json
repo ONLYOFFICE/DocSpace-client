@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Staršie súbory s prekročenou dobou používania budú vymazané",
   "LimitByTimePeriod": "Obmedzenie podľa časového obdobia",
   "LimitTimeBlockCustomRoomDescription": "Vo Vlastnej miestnosti je hlavný odkaz platný na neobmedzený čas. Môžete vytvoriť ďalšie odkazy s časovým obmedzením. ",
-  "LimitTimeBlockPublicRoomDescription": "Vo Verejnej miestnosti je hlavný odkaz platný na neobmedzený časový úsek. Môžete vytvoriť ďalšie odkazy s časovým obmedzením. ",
   "LinkDeletedSuccessfully": "Odkaz úspešne vymazaný",
   "LinkForPortalUsers": "Odkaz pre užívateľov {{productName}}",
   "LinkSettings": "Nastavenia odkazu",

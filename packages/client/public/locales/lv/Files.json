@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Vecāki faili ar pārsniegtu kalpošanas laiku tiks izdzēsti",
   "LimitByTimePeriod": "Ierobežots pēc laika perioda",
   "LimitTimeBlockCustomRoomDescription": "Pielāgotā telpā galvenā saite ir derīga neierobežotu laiku. Varat izveidot papildu saites ar laika ierobežojumu.",
-  "LimitTimeBlockPublicRoomDescription": "Publiskā telpā galvenā saite ir derīga neierobežotu laiku. Varat izveidot papildu saites ar laika ierobežojumu.",
   "LinkDeletedSuccessfully": "Saite ir veiksmīgi izdzēsta",
   "LinkForPortalUsers": "Saite {{productName}} lietotājiem",
   "LinkSettings": "Saites iestatījumi",

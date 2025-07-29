@@ -406,7 +406,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   const getExpiredLinkText = () => {
     if (link?.sharedTo?.primary) {
       if (isFormRoom) return t("Common:LimitTimeBlockFormRoomDescription");
-      if (isPublic) return t("Files:LimitTimeBlockPublicRoomDescription");
+      if (isPublic) return t("Common:LimitTimeBlockPublicRoomDescription");
       if (isCustomRoom) return t("Files:LimitTimeBlockCustomRoomDescription");
 
       return "";

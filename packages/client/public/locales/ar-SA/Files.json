@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "سيتم حذف الملفات القديمة التي تجاوزت عمرها",
   "LimitByTimePeriod": "تقييد بفترة زمنية",
   "LimitTimeBlockCustomRoomDescription": "في الغرفة المخصصة، يكون الرابط الرئيسي صالحًا لفترة غير محدودة. يمكنكم إنشاء روابط إضافية بمدة صلاحية محددة.",
-  "LimitTimeBlockPublicRoomDescription": "في الغرفة العامة، يكون الرابط الرئيسي صالحًا لفترة غير محدودة. يمكنكم إنشاء روابط إضافية بمدة صلاحية محددة.",
   "LinkDeletedSuccessfully": "تم حذف الرابط بنجاح",
   "LinkForPortalUsers": "رابط لمستخدمي {{productName}}",
   "LinkSettings": "إعدادات الرابط",

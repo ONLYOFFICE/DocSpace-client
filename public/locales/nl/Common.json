@@ -873,5 +873,6 @@
   "YourTurn": "Uw beurt",
   "Viewer": "Kijker",
   "ManageNotifications": "Beheer",
-  "LimitTimeBlockFormRoomDescription": "In een Kamer voor het invullen van formulieren is de hoofdlink voor onbepaalde tijd geldig."
+  "LimitTimeBlockFormRoomDescription": "In een Kamer voor het invullen van formulieren is de hoofdlink voor onbepaalde tijd geldig.",
+  "LimitTimeBlockPublicRoomDescription": "In een Openbare kamer is de hoofdlink voor onbepaalde tijd geldig. U kunt extra links met een tijdslimiet maken."
 }

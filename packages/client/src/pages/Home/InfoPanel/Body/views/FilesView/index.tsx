@@ -104,7 +104,7 @@ const FilesView = ({
     fetchExternalLinks,
     abortController: shareAbortController,
   } = useShare({
-    id: selection.id.toString(),
+    id: selection.id?.toString() || "",
   });
 
   const scrollContext = React.use(ScrollbarContext);

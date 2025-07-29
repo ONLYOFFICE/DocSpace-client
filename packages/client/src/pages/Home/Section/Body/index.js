@@ -41,6 +41,8 @@ import {
   VDRIndexingAction,
   RoomsType,
 } from "@docspace/shared/enums";
+import { zIndex } from "@docspace/shared/themes";
+
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
@@ -49,7 +51,7 @@ import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
 
-const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: 1;`;
+const separatorStyles = `width: 100vw;  position: absolute; height: 3px; z-index: ${zIndex.content};`;
 const sectionClass = "section-wrapper-content";
 
 let currentDroppable = null;

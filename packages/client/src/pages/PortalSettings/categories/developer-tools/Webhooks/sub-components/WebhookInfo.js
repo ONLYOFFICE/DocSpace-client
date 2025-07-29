@@ -65,6 +65,7 @@ const WebhookInfo = (props) => {
           type={LinkType.page}
           isHovered
           color="accent"
+          dataTestId="webhooks_info_link"
         >
           {t("WebhooksGuide")}
         </Link>

@@ -43,6 +43,7 @@ const TimePicker = ({
   onBlur,
   focusOnRender = false,
   forwardedRef,
+  testId,
 }: TimePickerProps) => {
   const hoursInputRef = useRef<HTMLInputElement>(null);
   const minutesInputRef = useRef<HTMLInputElement>(null);
@@ -195,7 +196,7 @@ const TimePicker = ({
         [styles.isFocused]: isInputFocused,
       })}
       ref={forwardedRef}
-      data-testid="time-picker"
+      data-testid={testId ?? "time-picker"}
       role="group"
       aria-label="Time picker"
     >

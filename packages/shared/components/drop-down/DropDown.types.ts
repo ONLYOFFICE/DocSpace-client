@@ -71,6 +71,8 @@ export interface DropDownProps {
   withBlur?: boolean;
   /** Specifies the offset */
   offsetLeft?: number;
+  /** Test id */
+  dataTestId?: string;
 
   right?: string;
   top?: string;

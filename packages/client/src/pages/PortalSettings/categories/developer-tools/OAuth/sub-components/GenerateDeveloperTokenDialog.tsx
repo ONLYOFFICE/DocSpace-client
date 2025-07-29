@@ -205,6 +205,7 @@ const GenerateDeveloperTokenDialog = ({
                       <Link
                         href={`mailto:${email}`}
                         color={theme?.currentColorScheme?.main?.accent}
+                        dataTestId="generate_token_email_link"
                       />
                     ),
                   }}
@@ -224,6 +225,7 @@ const GenerateDeveloperTokenDialog = ({
                 onIconClick={onCopyClick}
                 type={InputType.text}
                 maxLength={10000}
+                testId="generate_token_input"
               />
               <Text className="dates">
                 <strong>{t("Files:ByCreation")}</strong>: {dates.created}
@@ -246,6 +248,7 @@ const GenerateDeveloperTokenDialog = ({
           onClick={onGenerate}
           isLoading={requestRunning}
           size={ButtonSize.normal}
+          testId="generate_token_button"
         />
         <Button
           label={token ? t("Revoke") : t("Common:CancelButton")}
@@ -253,6 +256,7 @@ const GenerateDeveloperTokenDialog = ({
           onClick={token ? onRevoke : onClose}
           size={ButtonSize.normal}
           isDisabled={requestRunning || !secret}
+          testId="generate_token_revoke_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

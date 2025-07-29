@@ -31,13 +31,14 @@ import { Scrollbar } from "../scrollbar";
 import { AsideProps } from "./Aside.types";
 import { AsideHeader } from "../aside-header";
 import styles from "./Aside.module.scss";
+import { zIndex as z } from "../../themes/zIndex";
 
 const AsidePure = (props: AsideProps) => {
   const {
     visible,
     children,
     scale = false,
-    zIndex = 400,
+    zIndex = z.modal,
     className,
     withoutBodyScroll = false,
     onClose,

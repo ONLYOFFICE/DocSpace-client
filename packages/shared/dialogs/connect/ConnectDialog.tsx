@@ -39,6 +39,7 @@ import { FieldContainer } from "../../components/field-container";
 import { getOAuthToken } from "../../utils/common";
 import { saveSettingsThirdParty } from "../../api/files";
 import type { ConnectDialogProps } from "./ConnectDialog.types";
+import { zIndex as z } from "../../themes/zIndex";
 
 const ConnectDialog = ({
   visible,
@@ -282,7 +283,7 @@ const ConnectDialog = ({
     <ModalDialog
       isLoading={!ready}
       visible={visible}
-      zIndex={310}
+      zIndex={z.modal}
       isLarge={!isAccount}
       autoMaxHeight
       onClose={onClose}

@@ -31,6 +31,7 @@ import { Backdrop } from "../backdrop";
 
 import { DropDownProps } from "./DropDown.types";
 import { EnhancedComponent } from "./DropDown";
+import { zIndex } from "../../themes/zIndex";
 
 const DropDown = (props: DropDownProps) => {
   const {
@@ -71,7 +72,7 @@ const DropDown = (props: DropDownProps) => {
   const backDrop = withBackdrop ? (
     <Backdrop
       visible={open || false}
-      zIndex={usePortalBackdrop ? 400 : 199}
+      zIndex={usePortalBackdrop ? zIndex.modal : zIndex.backdrop}
       onClick={toggleDropDown}
       withoutBlur={!withBlur}
       isAside={isAside}

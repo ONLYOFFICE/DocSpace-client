@@ -57,6 +57,7 @@ import type { ConnectedThirdPartyAccountType } from "../../types";
 import { initialState } from "./DirectThirdPartyConnection.constants";
 import { DirectThirdPartyConnectionProps } from "./DirectThirdPartyConnection.types";
 import styles from "./DirectThirdPartyConnection.module.scss";
+import { zIndex as z } from "../../themes/zIndex";
 
 const DirectThirdPartyConnection = ({
   openConnectWindow,
@@ -332,7 +333,7 @@ const DirectThirdPartyConnection = ({
         selectedThirdPartyAccount &&
         isTheSameThirdPartyAccount ? (
           <ContextMenuButton
-            zIndex={402}
+            zIndex={z.backdrop}
             className={classNames(
               styles.backupThirdPartyContext,
               "backup_third-party-context",

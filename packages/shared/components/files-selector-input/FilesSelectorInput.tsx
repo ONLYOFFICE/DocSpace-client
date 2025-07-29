@@ -52,6 +52,7 @@ import type {
 } from "./FilesSelectorInput.types";
 
 import styles from "./FilesSelectorInput.module.scss";
+import { zIndex as z } from "../../themes/zIndex";
 
 const FilesSelectorInput = ({
   id,
@@ -190,13 +191,13 @@ const FilesSelectorInput = ({
         visible={isPanelVisible}
         isAside
         withBackground
-        zIndex={309}
+        zIndex={z.backdrop}
         onClick={onClose}
       />
       <Aside
         visible={isPanelVisible}
         withoutBodyScroll
-        zIndex={310}
+        zIndex={z.overlay}
         onClose={onClose}
         withoutHeader
       >

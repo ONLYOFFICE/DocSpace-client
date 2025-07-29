@@ -33,6 +33,7 @@ import { Scrollbar } from "../../scrollbar";
 
 import styles from "../Selector.module.scss";
 import { NewItemDropDownProps } from "../Selector.types";
+import { zIndex as z } from "../../../themes/zIndex";
 
 export const DROPDOWN_CLASS_NAME = "selector-create-new-dropdown";
 
@@ -104,7 +105,7 @@ const NewItemDropDown = ({
               withBackground
               withoutBlur={false}
               isAside
-              zIndex={450}
+              zIndex={z.backdrop}
             />
             <div
               className={classNames(

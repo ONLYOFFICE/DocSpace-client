@@ -55,6 +55,7 @@ import {
   TSelectorCancelButton,
 } from "./Selector.types";
 import { Providers } from "./contexts";
+import { zIndex as z } from "../../themes/zIndex";
 
 const Selector = ({
   id,
@@ -699,7 +700,7 @@ const Selector = ({
       <Backdrop
         onClick={onClose}
         visible
-        zIndex={310}
+        zIndex={z.backdrop}
         isAside
         withoutBackground={withoutBackground}
         withoutBlur={!withBlur}

@@ -31,6 +31,7 @@ import { isMobile, isTablet } from "../../utils";
 import { BackdropProps } from "./Backdrop.types";
 
 import styles from "./Backdrop.module.scss";
+import { zIndex as z } from "../../themes/zIndex";
 
 const Backdrop: React.FC<BackdropProps> = ({
   visible = false,
@@ -40,7 +41,7 @@ const Backdrop: React.FC<BackdropProps> = ({
   isAside = false,
   withoutBackground = false,
   isModalDialog = false,
-  zIndex = 203,
+  zIndex = z.backdrop,
   onClick,
   shouldShowBackdrop: shouldShowBackdropProp = false,
   ...restProps

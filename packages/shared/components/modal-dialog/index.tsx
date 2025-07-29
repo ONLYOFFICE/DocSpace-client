@@ -46,6 +46,7 @@ import {
 } from "./ModalDialog.constants";
 import { ModalDialogProps } from "./ModalDialog.types";
 import { ModalDialogType } from "./ModalDialog.enums";
+import { zIndex as z } from "../../themes/zIndex";
 
 const Header = ({ children }: { children: React.ReactNode }) => null;
 Header.displayName = MODAL_DIALOG_HEADER_NAME;
@@ -81,7 +82,7 @@ const ModalDialog = ({
   embedded,
   withForm,
   withFooterBorder,
-  zIndex = 310,
+  zIndex = z.modal,
   isLarge = false,
   isHuge = false,
   isLoading = false,

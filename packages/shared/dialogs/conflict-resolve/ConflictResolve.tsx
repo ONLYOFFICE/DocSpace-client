@@ -35,6 +35,7 @@ import { ConflictResolveType } from "../../enums";
 import { ConflictResolveProps } from "./ConflictResolve.types";
 
 import styles from "./ConflictResolve.module.scss";
+import { zIndex as z } from "../../themes/zIndex";
 
 const ConflictResolve = (props: ConflictResolveProps) => {
   const {
@@ -110,7 +111,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
     <ModalDialog
       withForm
       isLarge
-      zIndex={312}
+      zIndex={z.modal}
       onClose={onClose}
       visible={visible}
       isLoading={isLoading}

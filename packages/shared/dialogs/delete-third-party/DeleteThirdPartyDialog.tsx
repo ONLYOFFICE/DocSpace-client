@@ -37,6 +37,7 @@ import FilesFilter from "../../api/files/filter";
 import { isNullOrUndefined } from "../../utils/typeGuards";
 
 import type { DeleteThirdPartyDialogProps } from "./DeleteThirdPartyDialog.types";
+import { zIndex as z } from "../../themes/zIndex";
 
 const DeleteThirdPartyDialog = ({
   visible,
@@ -109,7 +110,7 @@ const DeleteThirdPartyDialog = ({
 
   return (
     <ModalDialog
-      zIndex={310}
+      zIndex={z.modal}
       onClose={onClose}
       visible={visible}
       isLoading={!ready}

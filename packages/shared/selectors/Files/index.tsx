@@ -55,6 +55,7 @@ import {
   LoadersContextProvider,
 } from "../utils/contexts/Loaders";
 import { getDefaultBreadCrumb } from "../utils";
+import { zIndex as z } from "../../themes/zIndex";
 
 const FilesSelectorComponent = (props: FilesSelectorProps) => {
   const {
@@ -633,13 +634,13 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
         visible={isPanelVisible}
         isAside
         withBackground
-        zIndex={309}
+        zIndex={z.backdrop}
         onClick={onCancel}
       />
       <Aside
         visible={isPanelVisible}
         withoutBodyScroll
-        zIndex={310}
+        zIndex={z.overlay}
         onClose={onCancel}
         withoutHeader
       >

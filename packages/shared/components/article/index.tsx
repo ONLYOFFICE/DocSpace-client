@@ -46,6 +46,7 @@ import BackButton from "./sub-components/BackButton";
 import styles from "./Article.module.scss";
 import { HEADER_NAME, MAIN_BUTTON_NAME, BODY_NAME } from "./Article.constants";
 import { ArticleProps } from "./Article.types";
+import { zIndex } from "../../themes/zIndex";
 
 const ArticleHeader = ({ children }: { children: React.ReactNode }) => null;
 ArticleHeader.displayName = HEADER_NAME;
@@ -346,7 +347,7 @@ const Article = ({
         <Backdrop
           onClick={toggleArticleOpen}
           visible
-          zIndex={210}
+          zIndex={zIndex.backdrop}
           withBackground
         />
       ) : null}

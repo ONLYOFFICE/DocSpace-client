@@ -32,6 +32,7 @@ import styles from "./Dialog.module.scss";
 
 import { DialogAsideSkeletonProps } from "./Dialog.types";
 import { DialogInvitePanelSkeleton } from "./Dialog.invite";
+import { zIndex } from "../../themes/zIndex";
 
 const DialogAsideSkeleton = ({
   isPanel,
@@ -40,8 +41,6 @@ const DialogAsideSkeleton = ({
   isInvitePanelLoader,
   onClose,
 }: DialogAsideSkeletonProps) => {
-  const zIndex = 310;
-
   if (isInvitePanelLoader) return <DialogInvitePanelSkeleton />;
 
   const renderClearDialogAsideLoader = () => {
@@ -70,7 +69,7 @@ const DialogAsideSkeleton = ({
     renderClearDialogAsideLoader()
   ) : (
     <>
-      <Backdrop visible isAside zIndex={zIndex} onClick={onClose} />
+      <Backdrop visible isAside zIndex={zIndex.backdrop} onClick={onClose} />
 
       <div
         className={styles.dialogAsideLoader}
@@ -80,7 +79,7 @@ const DialogAsideSkeleton = ({
         <Aside
           className="dialog-aside-loader"
           visible
-          zIndex={zIndex}
+          zIndex={zIndex.overlay}
           onClose={() => onClose?.()}
         >
           {renderClearDialogAsideLoader()}

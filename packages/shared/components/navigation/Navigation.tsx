@@ -41,6 +41,7 @@ import { DeviceType } from "../../enums";
 import styles from "./Navigation.module.scss";
 import { TNavigationProps } from "./Navigation.types";
 import Badges from "./sub-components/Badges";
+import { zIndex as z } from "../../themes/zIndex";
 
 const Navigation = ({
   showText,
@@ -240,7 +241,7 @@ const Navigation = ({
                 visible={isOpen}
                 withBackground={false}
                 withoutBlur
-                zIndex={400}
+                zIndex={z.backdrop}
                 onClick={onCloseDropBox}
               />
 

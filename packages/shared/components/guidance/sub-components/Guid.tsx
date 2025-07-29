@@ -50,6 +50,7 @@ import {
   GuidancePlacement,
 } from "./Guid.types";
 import { SIDE_OFFSET, RTL_ROW_OFFSET } from "./Guid.constants";
+import { zIndex as z } from "../../../themes/zIndex";
 
 const getModalPosition = (
   positions: ClippedPosition[],
@@ -254,7 +255,7 @@ const Guid = ({
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex: 998,
+          zIndex: z.systemTop,
         }}
       >
         <defs>

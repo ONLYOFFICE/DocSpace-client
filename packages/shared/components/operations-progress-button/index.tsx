@@ -45,6 +45,7 @@ import { OPERATIONS_NAME } from "../../constants/index";
 import { HelpButton } from "../help-button";
 import { Backdrop } from "../backdrop";
 import { Text } from "../text";
+import { zIndex as z } from "../../themes/zIndex";
 
 type ValueOf<T> = T[keyof T];
 
@@ -317,7 +318,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   return (
     <>
       <Backdrop
-        zIndex={210}
+        zIndex={z.backdrop}
         visible={isOpenDropdown}
         onClick={() => setIsOpenDropdown(false)}
       />
@@ -332,7 +333,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
           [styles.mainButtonVisible]: mainButtonVisible,
           [styles.infoPanelVisible]: isInfoPanelVisible,
         })}
-        style={{ zIndex: isOpenDropdown ? "211" : "201" }}
+        style={{ zIndex: isOpenDropdown ? z.overlay : z.backdrop }}
         onMouseEnter={!isMobile ? handleMouseEnter : undefined}
         onMouseLeave={!isMobile ? handleMouseLeave : undefined}
       >

@@ -51,6 +51,7 @@ import {
   ButtonOption,
   MainButtonMobileProps,
 } from "./MainButtonMobile.types";
+import { zIndex as z } from "../../themes/zIndex";
 
 const MainButtonMobile = (props: MainButtonMobileProps) => {
   const {
@@ -332,11 +333,15 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
 
   return (
     <>
-      <Backdrop zIndex={210} visible={isOpen || false} onClick={outsideClick} />
+      <Backdrop
+        zIndex={z.backdrop}
+        visible={isOpen || false}
+        onClick={outsideClick}
+      />
       <div
         ref={mainButtonRef}
         className={className}
-        style={{ zIndex: `${isOpen ? "211" : "201"}`, ...style }}
+        style={{ zIndex: `${isOpen ? z.overlay : z.backdrop}`, ...style }}
         data-testid="main-button-mobile"
       >
         <FloatingButton

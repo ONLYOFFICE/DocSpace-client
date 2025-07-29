@@ -34,6 +34,7 @@ import { DropDown } from "../../../drop-down";
 import { DropDownItem } from "../../../drop-down-item";
 import { TGroupMenuItem } from "../../Table.types";
 import styles from "./GroupMenuItem.module.scss";
+import { zIndex as z } from "../../../../themes/zIndex";
 
 const GroupMenuItem = ({
   item,
@@ -93,7 +94,7 @@ const GroupMenuItem = ({
           open={open}
           clickOutsideAction={onClickOutside}
           forwardedRef={buttonRef as unknown as React.RefObject<HTMLDivElement>}
-          zIndex={250}
+          zIndex={z.backdrop}
         >
           {options?.map((option) => {
             const { key, ...rest } = option;

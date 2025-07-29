@@ -33,10 +33,11 @@ import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
 import { Zendesk } from "../../zendesk";
 import { zendeskAPI } from "../../zendesk/Zendesk.utils";
 import { ArticleZendeskProps } from "../Article.types";
+import { zIndex } from "../../../themes/zIndex";
 
 const baseConfig = {
   webWidget: {
-    zIndex: 201,
+    zIndex: zIndex.floatingUI,
     chat: {
       menuOptions: { emailTranscript: false },
     },

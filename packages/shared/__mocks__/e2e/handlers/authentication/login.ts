@@ -51,13 +51,11 @@ export const successLogin = {
 
 export const errorLogin401 = {
   count: 1,
-  response: {
-    error: {
-      message: "User authentication failed",
-      type: null,
-      stack: null,
-      hresult: 0,
-    },
+  error: {
+    message: "User authentication failed",
+    type: null,
+    stack: null,
+    hresult: 0,
   },
   links: [
     {

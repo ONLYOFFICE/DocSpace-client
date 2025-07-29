@@ -100,6 +100,7 @@ export async function getRoomMembers(
     count?: number;
     startIndex?: number;
   },
+  signal?: AbortSignal,
 ) {
   let params = "";
 
@@ -109,6 +110,7 @@ export async function getRoomMembers(
   const options = {
     method: "get",
     url: `/files/rooms/${id}/share${params}`,
+    signal,
   };
 
   const res = (await request(options)) as TGetRoomMembers;

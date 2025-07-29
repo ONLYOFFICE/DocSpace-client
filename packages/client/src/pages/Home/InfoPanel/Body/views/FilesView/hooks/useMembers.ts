@@ -77,6 +77,8 @@ export const useMembers = ({
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFirstLoading, setIsFirstLoading] = React.useState(false);
 
+  const abortController = React.useRef<AbortController>(null);
+
   const addMembersTitle = React.useCallback(
     (
       administrators: TMemberTuple,
@@ -187,6 +189,8 @@ export const useMembers = ({
   const fetchMembers = React.useCallback(async () => {
     setIsFirstLoading(true);
 
+    abortController.current = new AbortController();
+
     const roomId = room.id;
     const roomType = room.roomType;
     const isTemplate = room.isTemplate;
@@ -199,17 +203,23 @@ export const useMembers = ({
 
     const requests = [
       api.rooms
-        .getRoomMembers(roomId, {
-          filterType: 0,
-          startIndex: 0,
-          count: PAGE_COUNT,
-          filterValue: searchValue,
-        })
+        .getRoomMembers(
+          roomId,
+          {
+            filterType: 0,
+            startIndex: 0,
+            count: PAGE_COUNT,
+            filterValue: searchValue,
+          },
+          abortController.current?.signal,
+        )
         .then((res) => {
           setTotal(res.total);
           return res.items;
         }),
     ];
+
+    abortController.current = null;
 
     if (
       isPublicRoomType &&
@@ -261,6 +271,8 @@ export const useMembers = ({
     setTotal(data.total);
 
     const convertedMembers = convertMembers(data.items, false);
+
+    abortController.current = null;
 
     setMembers((value) => {
       if (!value) return convertedMembers;
@@ -404,5 +416,7 @@ export const useMembers = ({
     fetchMoreMembers,
     total,
     changeUserRole,
+
+    abortController,
   };
 };

@@ -1493,12 +1493,14 @@ export async function getExternalLinks(
   fileId: number | string,
   startIndex = 0,
   count = 50,
+  signal?: AbortSignal,
 ) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;
 
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/links${linkParams}`,
+    signal,
   })) as { items: TFileLink[] };
 
   return res;

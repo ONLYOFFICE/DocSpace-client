@@ -110,14 +110,14 @@ export const useHistory = ({
   const [isFirstLoading, setIsFirstLoading] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const abortController = React.useRef<AbortController>(new AbortController());
+  const abortController = React.useRef<AbortController>(null);
 
   const fetchHistory = React.useCallback(async () => {
     if (!selection?.id) return;
 
     setIsFirstLoading(true);
 
-    abortController.current.abort();
+    abortController.current?.abort();
     abortController.current = new AbortController();
 
     const isFolder = "isFolder" in selection && selection.isFolder;
@@ -146,6 +146,8 @@ export const useHistory = ({
         selectionRequestToken,
       );
 
+      abortController.current = null;
+
       setTotal(response.total);
       setFilter({
         page: 0,
@@ -172,6 +174,7 @@ export const useHistory = ({
       setHistory(parseHistory(response.items));
     } catch (error) {
       console.error("Error fetching history:", error);
+      throw error;
     } finally {
       setIsFirstLoading(false);
     }
@@ -189,7 +192,7 @@ export const useHistory = ({
 
     setIsLoading(true);
 
-    abortController.current.abort();
+    abortController.current?.abort();
     abortController.current = new AbortController();
 
     const isFolder = "isFolder" in selection && selection.isFolder;
@@ -219,6 +222,8 @@ export const useHistory = ({
         abortController.current.signal,
         requestToken,
       );
+
+      abortController.current = null;
 
       let feedWithLinks: ReturnType<typeof addLinksToHistory> = data;
 
@@ -260,10 +265,6 @@ export const useHistory = ({
     }
   };
 
-  React.useEffect(() => {
-    fetchHistory();
-  }, [fetchHistory]);
-
   const { showLoading } = useLoader({
     isFirstLoading,
   });
@@ -277,5 +278,7 @@ export const useHistory = ({
     isFirstLoading,
     fetchHistory,
     fetchMoreHistory,
+
+    abortController,
   };
 };

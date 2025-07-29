@@ -26,12 +26,14 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import ShareLoader from "@docspace/shared/skeletons/share";
 
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
@@ -48,6 +50,7 @@ import Plugin from "../Plugin";
 
 import { useHistory } from "./hooks/useHistory";
 import { useMembers } from "./hooks/useMembers";
+import { useShare } from "./hooks/useShare";
 
 type FilesViewProps = {
   currentView: InfoPanelView | `info_plugin-${string}`;
@@ -72,6 +75,7 @@ const FilesView = ({
   isMembersPanelUpdating,
   setIsMembersPanelUpdating,
 }: FilesViewProps) => {
+  const { t } = useTranslation(["Common"]);
   const isThirdParty = "providerId" in selection && selection?.providerId;
 
   const [value, setValue] = React.useState<string | null>(null);
@@ -89,9 +93,18 @@ const FilesView = ({
     isFirstLoading: historyIsFirstLoading,
     fetchHistory,
     fetchMoreHistory,
+    abortController,
   } = useHistory({
     selection,
     setExternalLinks: setExternalLinks!,
+  });
+
+  const {
+    filesLink,
+    fetchExternalLinks,
+    abortController: shareAbortController,
+  } = useShare({
+    id: selection.id.toString(),
   });
 
   const scrollContext = React.use(ScrollbarContext);
@@ -109,6 +122,7 @@ const FilesView = ({
     fetchMoreMembers,
     changeUserRole,
     setSearchValue,
+    abortController: membersAbortController,
   } = useMembers({
     room: infoPanelRoomSelection!,
     isMembersPanelUpdating: isMembersPanelUpdating!,
@@ -117,42 +131,88 @@ const FilesView = ({
     scrollToTop,
   });
 
-  const fetchValue = async (v: FilesViewProps["currentView"]) => {
-    if (v === InfoPanelView.infoDetails) {
+  const fetchValue = React.useCallback(
+    async (v: FilesViewProps["currentView"]) => {
+      abortController.current?.abort();
+      membersAbortController.current?.abort();
+      shareAbortController.current?.abort();
+
+      if (v === InfoPanelView.infoDetails) {
+        setIsLoadingSuspense(false);
+        setIsFirstLoadingSuspense(false);
+
+        return v;
+      }
+
+      if (v === InfoPanelView.infoHistory) {
+        if (isThirdParty) return v;
+
+        setIsLoadingSuspense(true);
+
+        try {
+          await fetchHistory();
+
+          setIsLoadingSuspense(false);
+          setIsFirstLoadingSuspense(false);
+
+          return v;
+        } catch (e) {
+          console.log(e);
+
+          return undefined;
+        }
+      }
+
+      if (v === InfoPanelView.infoMembers) {
+        setIsLoadingSuspense(true);
+
+        try {
+          await fetchMembers();
+          scrollToTop();
+
+          setIsLoadingSuspense(false);
+          setIsFirstLoadingSuspense(false);
+
+          return v;
+        } catch (e) {
+          console.log(e);
+
+          return undefined;
+        }
+      }
+
+      if (v === InfoPanelView.infoShare) {
+        setIsLoadingSuspense(true);
+
+        try {
+          await fetchExternalLinks();
+
+          setIsLoadingSuspense(false);
+          setIsFirstLoadingSuspense(false);
+
+          return v;
+        } catch (e) {
+          console.log(e);
+
+          return undefined;
+        }
+      }
+
       setIsFirstLoadingSuspense(false);
-
-      return v;
-    }
-
-    if (v === InfoPanelView.infoHistory) {
-      if (isThirdParty) return v;
-
-      setIsLoadingSuspense(true);
-
-      await fetchHistory();
-
       setIsLoadingSuspense(false);
-      setIsFirstLoadingSuspense(false);
 
       return v;
-    }
-
-    if (v === InfoPanelView.infoMembers) {
-      setIsLoadingSuspense(true);
-
-      await fetchMembers();
-      scrollToTop();
-
-      setIsLoadingSuspense(false);
-      setIsFirstLoadingSuspense(false);
-
-      return v;
-    }
-
-    setIsFirstLoadingSuspense(false);
-
-    return v;
-  };
+    },
+    [
+      abortController,
+      membersAbortController,
+      shareAbortController,
+      fetchHistory,
+      fetchMembers,
+      fetchExternalLinks,
+      scrollToTop,
+    ],
+  );
 
   const { showLoading: showLoadingSuspense } = useLoader({
     isFirstLoading: isLoadingSuspense,
@@ -182,8 +242,12 @@ const FilesView = ({
   }, [showLoadingSuspense]);
 
   React.useEffect(() => {
-    fetchValue(currentView).then((v) => setValue(v));
-  }, [currentView]);
+    fetchValue(currentView).then((v) => {
+      if (!v) return;
+
+      setValue(v);
+    });
+  }, [currentView, fetchValue]);
 
   const getView = () => {
     if (value === InfoPanelView.infoDetails)
@@ -223,7 +287,7 @@ const FilesView = ({
     if (value === InfoPanelView.infoShare) {
       if (!("fileExst" in selection)) return null;
 
-      return <Share infoPanelSelection={selection} />;
+      return <Share infoPanelSelection={selection} fileLinkProps={filesLink} />;
     }
 
     // @ts-expect-error fixed after rewrite plugin to ts
@@ -261,15 +325,19 @@ const FilesView = ({
         }}
       >
         {isFirstLoadingSuspense ? (
-          <InfoPanelViewLoader
-            view={
-              currentView === InfoPanelView.infoMembers
-                ? "members"
-                : currentView === InfoPanelView.infoHistory
-                  ? "history"
-                  : "details"
-            }
-          />
+          currentView === InfoPanelView.infoShare ? (
+            <ShareLoader t={t} />
+          ) : (
+            <InfoPanelViewLoader
+              view={
+                currentView === InfoPanelView.infoMembers
+                  ? "members"
+                  : currentView === InfoPanelView.infoHistory
+                    ? "history"
+                    : "details"
+              }
+            />
+          )
         ) : (
           getView()
         )}

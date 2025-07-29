@@ -76,10 +76,11 @@ const Share = (props: ShareProps) => {
     setShareChanged,
     onOpenPanel,
     onlyOneLink,
+    fileLinkProps,
   } = props;
   const { t } = useTranslation(["Common"]);
-  const [fileLinks, setFileLinks] = useState<TLink[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [fileLinks, setFileLinks] = useState<TLink[]>(fileLinkProps ?? []);
+  const [isLoading, setIsLoading] = useState(!fileLinkProps);
   const [loadingLinks, setLoadingLinks] = useState<(string | number)[]>([]);
   const [visibleBar, setVisibleBar] = useLocalStorage(
     `document-bar-${selfId}`,

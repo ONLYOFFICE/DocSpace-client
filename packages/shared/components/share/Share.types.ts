@@ -144,4 +144,6 @@ export type ShareProps = {
     fileId: string | number;
   }) => void;
   onlyOneLink?: boolean;
+
+  fileLinkProps?: TFileLink[];
 };

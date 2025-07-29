@@ -42,7 +42,6 @@ import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-import { TUser } from "@docspace/shared/api/people/types";
 import {
   getRoomMembers,
   getTemplateAvailable,
@@ -89,7 +88,7 @@ type TemplateAccessSettingsContainer =
       onSetAccessSettings?: undefined;
       inviteItems?: undefined;
       setInviteItems?: undefined;
-      updateInfoPanelMembers: (t: TTranslation) => void;
+      updateInfoPanelMembers: () => void;
       templateIsAvailable: undefined;
       setTemplateIsAvailable: undefined;
     };
@@ -216,8 +215,8 @@ const TemplateAccessSettingsPanel = ({
       getTemplateAvailable(templateId),
     ])
       .then(([members, available]) => {
-        if ((members as { items: TUser[] })?.items?.length) {
-          const convertedItems = (members as { items: TUser[] }).items.map(
+        if (members?.items?.length) {
+          const convertedItems = members.items.map(
             ({ access, isOwner, sharedTo }) => {
               return {
                 templateAccess: access,
@@ -226,7 +225,7 @@ const TemplateAccessSettingsPanel = ({
               };
             },
           );
-          setAccessItems(convertedItems as TSelectorItem[]);
+          setAccessItems(convertedItems as unknown as TSelectorItem[]);
         }
 
         prevIsAvailable.current = available as boolean;
@@ -260,7 +259,7 @@ const TemplateAccessSettingsPanel = ({
 
     if (prevIsAvailable.current !== isAvailable) {
       setTemplateAvailable?.(templateId, isAvailable)
-        ?.then(() => updateInfoPanelMembers(t))
+        ?.then(() => updateInfoPanelMembers())
         .finally(() => {
           setIsLoading(false);
           onClose();
@@ -283,7 +282,7 @@ const TemplateAccessSettingsPanel = ({
       notify: false,
       sharingMessage: "",
     })
-      .then(() => updateInfoPanelMembers(t))
+      .then(() => updateInfoPanelMembers())
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsLoading(false);

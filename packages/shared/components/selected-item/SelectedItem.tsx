@@ -45,7 +45,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     classNameCloseButton,
     hideCross,
     title,
-    testId,
+    dataTestId,
   } = props;
   if (!label) return null;
 
@@ -83,7 +83,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       className={selectedItemClassNames}
       id={id}
       ref={forwardedRef}
-      data-testid={testId ?? "selected-item"}
+      data-testid={dataTestId ?? "selected-item"}
       title={title}
     >
       <div className={labelClassNames}>{label}</div>

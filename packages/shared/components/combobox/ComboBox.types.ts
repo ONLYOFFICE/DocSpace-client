@@ -50,7 +50,7 @@ export type TBaseOption = {
   access?: ShareAccessRights;
   className?: string;
   title?: string;
-  testId?: string;
+  dataTestId?: string;
   action?: unknown;
   onClick?: (opt: TContextMenuValueTypeOnClick) => void;
   pageNumber?: number;
@@ -202,6 +202,8 @@ export type TComboboxProps = {
 
   /** Indicates if the backdrop should be shown */
   shouldShowBackdrop?: boolean;
+  /** Data test id */
+  dataTestId?: string;
 };
 
 export type TComboButtonProps = {

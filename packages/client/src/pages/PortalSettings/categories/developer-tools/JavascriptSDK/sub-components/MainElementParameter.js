@@ -52,7 +52,7 @@ export const MainElementParameter = ({
     {
       value: "element",
       label: t("ElementItself"),
-      testId: "element_radio_button",
+      dataTestId: "element_radio_button",
     },
     {
       value: "button",
@@ -62,7 +62,7 @@ export const MainElementParameter = ({
           <Text color="gray">{`(${t("ElementCalledAfterClicking")})`}</Text>
         </RowContainer>
       ),
-      testId: "button_radio_button",
+      dataTestId: "button_radio_button",
     },
   ];
 
@@ -115,7 +115,7 @@ export const MainElementParameter = ({
         onClick={toggleButtonMode}
         spacing="8px"
         isDisabled
-        testId="element_display_radio_button_group"
+        dataTestId="element_display_radio_button_group"
       />
       {config.isButtonMode ? (
         <>
@@ -126,7 +126,7 @@ export const MainElementParameter = ({
               scale
               handleChange={setButtonColor}
               defaultColor={globalColors.lightSecondMain}
-              testId="button_mode_color_input"
+              dataTestId="button_mode_color_input"
             />
           </ControlsGroup>
           <ControlsGroup>
@@ -146,7 +146,7 @@ export const MainElementParameter = ({
               label={t("Logo")}
               onChange={toggleWithLogo}
               isChecked={config.buttonWithLogo}
-              testId="button_mode_logo_checkbox"
+              dataTestId="button_mode_logo_checkbox"
             />
           </ControlsGroup>
         </>

@@ -79,10 +79,10 @@ const TileContainer = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const PresetTile = (props) => {
-  const { t, title, description, image, handleOnClick, testId } = props;
+  const { t, title, description, image, handleOnClick, dataTestId } = props;
 
   return (
-    <TileContainer onClick={handleOnClick} data-testid={testId}>
+    <TileContainer onClick={handleOnClick} data-testid={dataTestId}>
       <div className="tileContent">
         <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
           {title}

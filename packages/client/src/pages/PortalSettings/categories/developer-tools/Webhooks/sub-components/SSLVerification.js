@@ -84,13 +84,13 @@ export const SSLVerification = ({ onChange, value, isDisabled }) => {
             id: "enable-ssl",
             label: t("EnableSSL"),
             value: "true",
-            testId: "enable_ssl_radio_button",
+            dataTestId: "enable_ssl_radio_button",
           },
           {
             id: "disable-ssl",
             label: t("DisableSSL"),
             value: "false",
-            testId: "disable_ssl_radio_button",
+            dataTestId: "disable_ssl_radio_button",
           },
         ]}
         selected={value ? "true" : "false"}
@@ -98,7 +98,7 @@ export const SSLVerification = ({ onChange, value, isDisabled }) => {
         orientation="vertical"
         spacing="8px"
         isDisabled={isDisabled}
-        testId="ssl_verification_radio_button_group"
+        dataTestId="ssl_verification_radio_button_group"
       />
     </div>
   );

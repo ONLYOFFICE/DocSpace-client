@@ -81,7 +81,7 @@ export const WidthSetter = (props) => {
           selectedOption={widthDimension}
           displaySelectedOption
           directionY="bottom"
-          testId="width_dimension_combobox"
+          dataTestId="width_dimension_combobox"
           dropDownTestId="width_dimension_dropdown"
         />
       </RowContainer>

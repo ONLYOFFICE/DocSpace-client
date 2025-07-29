@@ -276,7 +276,6 @@ const SimpleRoom = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
@@ -385,7 +384,7 @@ const SimpleRoom = (props) => {
                   label={t("Common:Title")}
                   onChange={onChangeShowTitle}
                   isChecked={config.showTitle}
-                  testId="title_checkbox"
+                  dataTestId="title_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -407,7 +406,7 @@ const SimpleRoom = (props) => {
                   label={t("SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
-                  testId="filter_checkbox"
+                  dataTestId="filter_checkbox"
                 />
                 <HelpButton
                   place="right"

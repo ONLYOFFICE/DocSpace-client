@@ -146,7 +146,7 @@ const BasicBlock = ({
           isRequired
           isError={isNameRequiredError || isNameError}
           onBlur={onBlur}
-          testId="app_name_input_group"
+          dataTestId="app_name_input_group"
         />
         <InputGroup
           label={t("WebsiteUrl")}
@@ -163,7 +163,7 @@ const BasicBlock = ({
           isRequired
           isError={isWebsiteRequiredError || isWebsiteError}
           onBlur={onBlur}
-          testId="app_website_url_input_group"
+          dataTestId="app_website_url_input_group"
         />
         <FieldContainer
           isVertical
@@ -171,7 +171,7 @@ const BasicBlock = ({
           errorMessage={t("ThisRequiredField")}
           hasError={isLogoRequiredError}
           className="icon-field"
-          testId="app_icon_field"
+          dataTestId="app_icon_field"
         >
           <SelectGroup
             label={t("AppIcon")}
@@ -179,7 +179,7 @@ const BasicBlock = ({
             selectLabel={t("SelectNewImage")}
             description={t("IconDescription")}
             onSelect={onSelect}
-            testId="select_new_image_container"
+            dataTestId="select_new_image_container"
           />
         </FieldContainer>
 
@@ -190,7 +190,7 @@ const BasicBlock = ({
           value={descriptionValue}
           onChange={onChange}
           increaseHeight={isLogoRequiredError}
-          testId="description_textarea_group"
+          dataTestId="description_textarea_group"
         />
         <InputGroup
           label={t("AuthenticationMethod")}
@@ -199,7 +199,7 @@ const BasicBlock = ({
           value={websiteUrlValue}
           error=""
           onChange={() => {}}
-          testId="auth_method_input_group"
+          dataTestId="auth_method_input_group"
         >
           <div className="pkce">
             <Checkbox
@@ -208,7 +208,7 @@ const BasicBlock = ({
               onChange={() => {
                 changeValue("allow_pkce", !allowPkce);
               }}
-              testId="allow_pkce_checkbox"
+              dataTestId="allow_pkce_checkbox"
             />
             <HelpButton
               dataTestId="allow_pkce_help_button"

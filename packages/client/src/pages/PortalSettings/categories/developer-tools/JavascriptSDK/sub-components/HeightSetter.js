@@ -81,7 +81,7 @@ export const HeightSetter = (props) => {
           selectedOption={heightDimension}
           displaySelectedOption
           directionY="bottom"
-          testId="height_dimension_combobox"
+          dataTestId="height_dimension_combobox"
           dropDownTestId="height_dimension_dropdown"
         />
       </RowContainer>

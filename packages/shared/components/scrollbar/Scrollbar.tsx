@@ -52,6 +52,7 @@ const Scrollbar = (props: ScrollbarProps) => {
     scrollClass,
     fixedSize = false,
     className,
+    scrollBodyClassName,
     autoFocus,
     tabIndex = -1,
     paddingAfterLastItem,
@@ -130,7 +131,11 @@ const Scrollbar = (props: ScrollbarProps) => {
         key="scroll-body-renderer-div"
         ref={elementRef}
         data-testid="scroll-body"
-        className={classNames(styles.scrollBody, "scroll-body")}
+        className={classNames(
+          styles.scrollBody,
+          "scroll-body",
+          scrollBodyClassName,
+        )}
         {...tabIndexProp}
         {...autoHideContentProps}
       />

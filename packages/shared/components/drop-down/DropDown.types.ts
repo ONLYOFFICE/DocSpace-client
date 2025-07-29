@@ -72,7 +72,7 @@ export interface DropDownProps {
   /** Specifies the offset */
   offsetLeft?: number;
   /** Test id */
-  testId?: string;
+  dataTestId?: string;
 
   right?: string;
   top?: string;

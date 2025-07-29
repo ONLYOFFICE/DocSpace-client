@@ -179,7 +179,7 @@ const SecretKeyInput = (props) => {
           passwordSettings={passwordSettings}
           key={passwordInputKey}
           isDisabled={isDisabled}
-          testId="secret_key_input"
+          dataTestId="secret_key_input"
         />
         <Link
           id="generate-link"

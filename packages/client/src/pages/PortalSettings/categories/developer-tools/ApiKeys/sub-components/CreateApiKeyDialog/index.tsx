@@ -125,7 +125,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
 
           {value.isRead ? (
             <Checkbox
-              testId={`permission_${value.isRead.name}_checkbox`}
+              dataTestId={`permission_${value.isRead.name}_checkbox`}
               className="api-key_permission-row api-key_permission-checkbox"
               isChecked={value.isRead.isChecked || readIsDisabled}
               onChange={() => {
@@ -146,7 +146,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
               data-tip="tooltip"
             >
               <Checkbox
-                testId={`permission_${value.isWrite.name}_checkbox`}
+                dataTestId={`permission_${value.isWrite.name}_checkbox`}
                 className="api-key_permission-row api-key_permission-checkbox"
                 isChecked={value.isWrite.isChecked}
                 onChange={() => {
@@ -389,6 +389,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           {t("Common:Permissions")}
         </Text>
         <Tabs
+          hotkeysId="apiKeys"
           type={TabsTypes.Secondary}
           items={tabsItems}
           onSelect={onSelectPermission}
@@ -405,7 +406,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
               className="api-key_toggle"
               isChecked={lifetimeIsChecked}
               onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}
-              testId="secret_key_lifetime_toggle_button"
+              dataTestId="secret_key_lifetime_toggle_button"
             />
           </div>
           <Text

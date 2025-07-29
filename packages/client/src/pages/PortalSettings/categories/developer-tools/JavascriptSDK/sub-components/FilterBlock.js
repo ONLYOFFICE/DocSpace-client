@@ -393,7 +393,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         onChange={toggleAuthor}
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
-        testId="files_author_toggle_button"
+        dataTestId="files_author_toggle_button"
       />
       {isUserFilterSet ? (
         "authorType" in config.filter ? (
@@ -427,7 +427,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 clickOutsideAction={closeInviteInputPanel}
                 eventTypes="click"
                 {...dropDownMaxHeight}
-                testId="files_author_dropdown"
+                dataTestId="files_author_dropdown"
               >
                 {usersList.length ? foundUsers : ""}
               </StyledDropDown>
@@ -441,7 +441,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         onChange={toggleFilterType}
         isChecked={isTypeFilterSet}
         isDisabled={!!config.requestToken}
-        testId="filter_type_toggle_button"
+        dataTestId="filter_type_toggle_button"
       />
       {isTypeFilterSet ? (
         "filterType" in config.filter ? (
@@ -458,7 +458,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             selectedOption={filterBy}
             displaySelectedOption
             directionY="top"
-            testId="filter_type_combobox"
+            dataTestId="filter_type_combobox"
             dropDownTestId="filter_type_dropdown"
           />
         )
@@ -472,7 +472,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         label={t("Common:Member")}
         onChange={toggleMembers}
         isChecked={isUserFilterSet}
-        testId="member_toggle_button"
+        dataTestId="member_toggle_button"
       />
       {isUserFilterSet ? (
         <>
@@ -506,7 +506,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   showDisabledItems
                   clickOutsideAction={closeInviteInputPanel}
                   eventTypes="click"
-                  testId="author_dropdown"
+                  dataTestId="author_dropdown"
                   {...dropDownMaxHeight}
                 >
                   {usersList.length ? foundUsers : ""}
@@ -520,7 +520,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             label={t("Translations:SearchByOwner")}
             onChange={toggleSubjectFilter}
             isChecked={false}
-            testId="subject_filter_checkbox"
+            dataTestId="subject_filter_checkbox"
           />
         </>
       ) : null}
@@ -529,7 +529,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         label={t("Common:Type")}
         onChange={toggleType}
         isChecked={isTypeFilterSet}
-        testId="room_type_toggle_button"
+        dataTestId="room_type_toggle_button"
       />
       {isTypeFilterSet ? (
         "type" in config.filter ? (
@@ -546,7 +546,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             selectedOption={filterBy}
             displaySelectedOption
             directionY="top"
-            testId="room_type_combobox"
+            dataTestId="room_type_combobox"
             dropDownTestId="room_type_dropdown"
           />
         )

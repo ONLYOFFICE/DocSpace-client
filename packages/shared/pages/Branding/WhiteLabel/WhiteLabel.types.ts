@@ -84,6 +84,7 @@ export interface ILogoProps {
   linkId: string;
   imageClass?: string;
   name: string;
+  dataTestId?: string;
 }
 
 export interface ILogoOptions {

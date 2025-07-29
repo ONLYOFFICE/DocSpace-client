@@ -117,9 +117,9 @@ const Manager = (props) => {
     {
       value: "default",
       label: t("DefaultColumnsOption"),
-      testId: "default_radio_button",
+      dataTestId: "default_radio_button",
     },
-    { value: "custom", label: t("SetItUp"), testId: "custom_radio_button" },
+    { value: "custom", label: t("SetItUp"), dataTestId: "custom_radio_button" },
   ];
 
   const [columnsOptions, setColumnsOptions] = useState([
@@ -400,7 +400,6 @@ const Manager = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
@@ -447,7 +446,7 @@ const Manager = (props) => {
                   label={t("Menu")}
                   onChange={onChangeShowMenu}
                   isChecked={config.showMenu}
-                  testId="show_menu_checkbox"
+                  dataTestId="show_menu_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -470,7 +469,7 @@ const Manager = (props) => {
                   label={t("Common:Title")}
                   onChange={onChangeShowTitle}
                   isChecked={config.showTitle}
-                  testId="show_title_checkbox"
+                  dataTestId="show_title_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -492,7 +491,7 @@ const Manager = (props) => {
                   label={t("SettingUpColumns")}
                   onChange={toggleShowSettings}
                   isChecked={config.showSettings}
-                  testId="show_settings_checkbox"
+                  dataTestId="show_settings_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -514,7 +513,7 @@ const Manager = (props) => {
                   label={t("ActionButton")}
                   onChange={toggleActionButton}
                   isChecked={!config.disableActionButton}
-                  testId="action_button_checkbox"
+                  dataTestId="action_button_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -536,7 +535,7 @@ const Manager = (props) => {
                   label={t("SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
-                  testId="show_filter_checkbox"
+                  dataTestId="show_filter_checkbox"
                 />
                 <HelpButton
                   place="right"
@@ -558,7 +557,7 @@ const Manager = (props) => {
                   label={t("Header")}
                   onChange={onChangeShowHeader}
                   isChecked={config.showHeader}
-                  testId="show_header_checkbox"
+                  dataTestId="show_header_checkbox"
                 />
                 <Text color="gray">{`(${t("MobileOnly")})`}</Text>
                 <HelpButton
@@ -654,7 +653,7 @@ const Manager = (props) => {
                 selectedOption={sortBy}
                 displaySelectedOption
                 directionY="top"
-                testId="sort_by_combobox"
+                dataTestId="sort_by_combobox"
                 dropDownTestId="sort_by_dropdown"
               />
             </ControlsGroup>
@@ -667,7 +666,7 @@ const Manager = (props) => {
                 selectedOption={sortOrder}
                 displaySelectedOption
                 directionY="top"
-                testId="sort_order_combobox"
+                dataTestId="sort_order_combobox"
                 dropDownTestId="sort_order_dropdown"
               />
             </ControlsGroup>
@@ -685,7 +684,7 @@ const Manager = (props) => {
               selected={columnDisplay}
               onClick={changeColumnsOption}
               spacing="8px"
-              testId="columns_display_radiobutton_group"
+              dataTestId="columns_display_radiobutton_group"
             />
             {columnDisplay === "custom" ? (
               <ControlsGroup>
@@ -703,7 +702,7 @@ const Manager = (props) => {
                     key: "Select",
                     label: t("Common:SelectAction"),
                   }}
-                  testId="columns_combobox"
+                  dataTestId="columns_combobox"
                   dropDownTestId="columns_dropdown"
                 />
 

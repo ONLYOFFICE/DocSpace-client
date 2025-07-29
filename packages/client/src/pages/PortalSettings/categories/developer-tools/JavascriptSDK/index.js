@@ -186,7 +186,7 @@ const PortalIntegration = (props) => {
             description={data.description}
             image={data.image}
             handleOnClick={data.handleOnClick}
-            testId={`sdk_preset_${data.title}_container`}
+            dataTestId={`sdk_preset_${data.title}_container`}
           />
         ))}
       </PresetsContainer>

@@ -132,9 +132,8 @@ const InputBlock = React.memo(
 
     const inputProps = {
       id,
-      testId,
-      name,
       type,
+      name,
       value,
       placeholder,
       maxLength,
@@ -156,6 +155,7 @@ const InputBlock = React.memo(
       onKeyDown,
       tabIndex,
       onChange: handleChange,
+      testId,
     };
 
     const inputGroupClassName = classNames(styles.inputGroup, className, {

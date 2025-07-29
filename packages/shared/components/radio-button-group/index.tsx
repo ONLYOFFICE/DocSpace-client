@@ -50,7 +50,7 @@ const RadioButtonGroup = ({
   onClick,
   isDisabled,
   spacing,
-  testId,
+  dataTestId,
 }: RadioButtonGroupProps) => {
   const [selectedOption, setSelectedOption] = React.useState(selected);
   const radioButtonGroupRef = React.useRef<HTMLDivElement>(null);
@@ -86,7 +86,7 @@ const RadioButtonGroup = ({
         className,
       )}
       style={{ width, ...style }}
-      data-testid={testId ?? "radio-button-group"}
+      data-testid={dataTestId ?? "radio-button-group"}
     >
       {options.map((option: TRadioButtonOption) => {
         if (option.type === "text")
@@ -94,7 +94,7 @@ const RadioButtonGroup = ({
             <Text
               key="radio-text"
               className={styles.subtext}
-              data-testid={option.testId ?? "radio-button-group_text"}
+              data-testid={option.dataTestId ?? "radio-button-group_text"}
             >
               {option.label}
             </Text>
@@ -118,7 +118,7 @@ const RadioButtonGroup = ({
             spacing={spacing}
             orientation={orientation}
             autoFocus={option.autoFocus}
-            testId={option.testId}
+            testId={option.dataTestId}
           />
         );
       })}

@@ -75,7 +75,7 @@ export const SearchTerm = ({ t, config, setConfig }) => {
           label={t("Common:WithSubfolders")}
           onChange={onChangeWithSubfolders}
           isChecked={config.withSubfolders}
-          testId="with_subfolders_checkbox"
+          dataTestId="with_subfolders_checkbox"
         />
       </ColumnContainer>
     </>

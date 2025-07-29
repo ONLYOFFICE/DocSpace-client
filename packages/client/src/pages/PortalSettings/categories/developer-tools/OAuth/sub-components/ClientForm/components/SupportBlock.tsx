@@ -91,7 +91,7 @@ const SupportBlock = ({
           isRequired
           isError={policyError || policyRequiredError}
           onBlur={onBlur}
-          testId="policy_url_input_group"
+          dataTestId="policy_url_input_group"
         />
         <InputGroup
           label={t("TermsOfServiceURL")}
@@ -109,7 +109,7 @@ const SupportBlock = ({
           isRequired
           isError={termsError || termsRequiredError}
           onBlur={onBlur}
-          testId="terms_url_input_group"
+          dataTestId="terms_url_input_group"
         />
       </StyledInputBlock>
     </StyledBlock>

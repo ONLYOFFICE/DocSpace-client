@@ -215,7 +215,7 @@ const WebhookDialog = (props) => {
             className={isSettingsModal ? "margin-0" : ""}
             isDisabled={isLoading}
             required
-            testId="webhook_name_input"
+            dataTestId="webhook_name_input"
           />
           <LabledInput
             id={`${additionalId}-payload-url-input`}
@@ -227,7 +227,7 @@ const WebhookDialog = (props) => {
             hasError={!isValid.uri}
             isDisabled={isLoading}
             required
-            testId="payload_url_input"
+            dataTestId="payload_url_input"
           />
           <SecretKeyInput
             isResetVisible={isResetVisible}
@@ -262,7 +262,7 @@ const WebhookDialog = (props) => {
             onChange={onInputChange}
             isDisabled={isLoading}
             maxLength={36}
-            testId="target-id-input"
+            dataTestId="target-id-input"
           />
           <button
             type="submit"

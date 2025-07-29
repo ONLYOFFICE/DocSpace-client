@@ -88,19 +88,19 @@ const FileSelector = (props) => {
     {
       value: FilesSelectorFilterTypes.ALL,
       label: t("AllTypes"),
-      testId: "all_types_radio_button",
+      dataTestId: "all_types_radio_button",
     },
     {
       value: "EditorSupportedTypes",
       label: t("AllTypesSupportedByEditor", {
         organizationName: logoText,
       }),
-      testId: "editor_radio_button",
+      dataTestId: "editor_radio_button",
     },
     {
       value: "SelectorTypes",
       label: t("SelectTypes"),
-      testId: "selector_radio_button",
+      dataTestId: "selector_radio_button",
     },
   ];
 
@@ -323,7 +323,6 @@ const FileSelector = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
@@ -376,7 +375,7 @@ const FileSelector = (props) => {
                 label={t("Subtitle")}
                 onChange={toggleWithSubtitle}
                 isChecked={config.withSubtitle}
-                testId="subtitle_checkbox"
+                dataTestId="subtitle_checkbox"
               />
               <HelpButton
                 place="right"
@@ -398,7 +397,7 @@ const FileSelector = (props) => {
                 label={t("Common:Search")}
                 onChange={toggleWithSearch}
                 isChecked={config.withSearch}
-                testId="search_checkbox"
+                dataTestId="search_checkbox"
               />
               <HelpButton
                 place="right"
@@ -462,7 +461,7 @@ const FileSelector = (props) => {
                   selectedOption={sharedLinks[0]}
                   displaySelectedOption
                   directionY="bottom"
-                  testId="external_link_combobox"
+                  dataTestId="external_link_combobox"
                 />
               </ControlsGroup>
             ) : null}
@@ -478,7 +477,7 @@ const FileSelector = (props) => {
               selected={typeDisplay}
               onClick={changeColumnsOption}
               spacing="8px"
-              testId="file_type_display_radiobutton_group"
+              dataTestId="file_type_display_radiobutton_group"
             />
             {typeDisplay === "SelectorTypes" ? (
               <ComboBox
@@ -492,7 +491,7 @@ const FileSelector = (props) => {
                 scaled
                 directionY="top"
                 selectedOption={selectedType}
-                testId="file_type_combobox"
+                dataTestId="file_type_combobox"
                 dropDownTestId="file_type_dropdown"
               />
             ) : null}

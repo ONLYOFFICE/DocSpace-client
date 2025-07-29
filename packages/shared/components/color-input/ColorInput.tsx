@@ -46,7 +46,7 @@ const ColorInput = ({
   isDisabled,
   hasError,
   hasWarning,
-  testId,
+  dataTestId,
 }: ColorInputProps) => {
   const [color, setColor] = useState(
     defaultColor || globalColors.lightBlueMain,
@@ -67,7 +67,7 @@ const ColorInput = ({
 
   return (
     <div
-      data-testid={testId ?? "color-input"}
+      data-testid={dataTestId ?? "color-input"}
       className={classNames(styles.wrapper, className)}
       id={id}
     >

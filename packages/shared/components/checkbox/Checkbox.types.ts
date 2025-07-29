@@ -56,5 +56,5 @@ export type CheckboxProps = PickedTextProps &
     /** Notifies if the error occurs */
     hasError?: boolean;
     /** Test id for the checkbox */
-    testId?: string;
+    dataTestId?: string;
   };

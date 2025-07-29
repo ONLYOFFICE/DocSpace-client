@@ -46,5 +46,5 @@ export type ColorInputProps = {
   /** Indicates the input field has a warning */
   hasWarning?: boolean;
   /** Test id for the color input */
-  testId?: string;
+  dataTestId?: string;
 };

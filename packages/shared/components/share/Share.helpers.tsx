@@ -167,7 +167,7 @@ export const getRoomAccessOptions = (t: TTranslation) => {
       access: ShareAccessRights.ReadOnly,
       description: t("Common:RoleViewerDescription"),
       key: "viewing",
-      label: t("JavascriptSdk:Viewer"),
+      label: t("Common:Viewer"),
       icon: EyeReactSvgUrl,
     },
   ];
@@ -267,7 +267,7 @@ export const getRoleNameByAccessRight = (
     case ShareAccessRights.Comment:
       return t("Common:Commentator");
     case ShareAccessRights.ReadOnly:
-      return t("JavascriptSdk:Viewer");
+      return t("Common:Viewer");
     case ShareAccessRights.FormFilling:
       return t("Common:RoleFormFiller");
     default:

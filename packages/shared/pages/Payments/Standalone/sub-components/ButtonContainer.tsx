@@ -27,7 +27,7 @@
 import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "../../../../components/button";
 
-import { StyledButtonComponent } from "../Payments.styled";
+import styles from "../Standalone.module.scss";
 
 export const ButtonContainer = ({ buyUrl }: { buyUrl?: string }) => {
   const { t } = useTranslation("Common");
@@ -37,13 +37,13 @@ export const ButtonContainer = ({ buyUrl }: { buyUrl?: string }) => {
   };
 
   return (
-    <StyledButtonComponent>
+    <div className={styles.buttonComponent}>
       <Button
         label={t("ActivatePurchaseBuyNow")}
         size={ButtonSize.small}
         primary
         onClick={onClickBuy}
       />
-    </StyledButtonComponent>
+    </div>
   );
 };

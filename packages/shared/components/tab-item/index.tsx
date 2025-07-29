@@ -24,59 +24,76 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { useCallback, useEffect, useState } from "react";
+import classNames from "classnames";
+import { Text } from "../text";
+import styles from "./TabItem.module.scss";
+import { TTabItemProps } from "./TabItem.types";
 
-import { Text } from "../../../components/text";
+const TabItem = ({
+  label,
+  onSelect,
+  isActive: isActiveInit = false,
+  isDisabled,
+  className,
+  allowNoSelection,
+  withMultiSelect = false,
+  ...rest
+}: TTabItemProps) => {
+  const [isActive, setIsActive] = useState(isActiveInit);
 
-import { ButtonContainer } from "./sub-components/ButtonContainer";
-import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
+  const onSelectItem = useCallback(
+    (itemIsActive: boolean) => {
+      if (!allowNoSelection) {
+        setIsActive(itemIsActive);
+      }
+    },
+    [allowNoSelection],
+  );
 
-import { BenefitsContainer } from "./BenefitsContainer";
+  const onItemClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDisabled) return;
+    if (!(isActive && !withMultiSelect)) {
+      onSelectItem(!isActive);
+      onSelect?.(e);
+    }
+  };
 
-import { StyledEnterpriseComponent } from "./Payments.styled";
-import { IPaymentsProps } from "./Payments.types";
-
-export const TrialContainer = ({
-  isDeveloper,
-  buyUrl,
-  isLicenseDateExpired,
-  isTrial,
-  trialDaysLeft,
-  paymentDate,
-  isEnterprise,
-  logoText,
-}: Partial<IPaymentsProps>) => {
-  const { t } = useTranslation("Common");
+  useEffect(() => {
+    onSelectItem(isActiveInit);
+  }, [isActiveInit, onSelectItem]);
 
   return (
-    <StyledEnterpriseComponent>
-      <Text fontWeight={700} fontSize="16px">
-        {t("ActivateSwithToProHeader", {
-          license: isDeveloper
-            ? t("Common:DeveloperLicense")
-            : t("Common:EnterpriseLicense"),
+    <div
+      className={classNames(
+        styles.tabItem,
+        {
+          [styles.active]: isActive,
+          [styles.disabled]: isDisabled,
+        },
+        className,
+        "tab-item",
+      )}
+      onClick={onItemClick}
+      aria-selected={isActive}
+      data-testid="tab-item"
+      {...rest}
+    >
+      <Text
+        className={classNames(styles.tabItemText, {
+          [styles.active]: isActive,
         })}
+        noSelect
+        truncate
+        fontSize="13px"
+        fontWeight={600}
+        lineHeight="20px"
+        data-testid="tab-item-text"
+      >
+        {label}
       </Text>
-
-      <TariffTitleContainer
-        isLicenseDateExpired={isLicenseDateExpired}
-        isTrial={isTrial}
-        trialDaysLeft={trialDaysLeft}
-        paymentDate={paymentDate}
-        isDeveloper={isDeveloper}
-        logoText={logoText}
-      />
-
-      <BenefitsContainer
-        isTrial={isTrial}
-        isEnterprise={isEnterprise}
-        isDeveloper={isDeveloper}
-      />
-      <Text fontSize="14px" className="payments_renew-subscription">
-        {t("ActivatePurchaseBuyLicense")}
-      </Text>
-      <ButtonContainer buyUrl={buyUrl} />
-    </StyledEnterpriseComponent>
+    </div>
   );
 };
+
+export { TabItem };

@@ -24,14 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Text } from "@docspace/shared/components/text";
 // import { TextInput } from "@docspace/shared/components/text-input";
 // import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
+import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
+import { getLoginHistoryConfig } from "@docspace/shared/components/campaigns-banner/campaign/LoginHistoryCampaign";
+import NextStepReactSvg from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 // import { toastr } from "@docspace/shared/components/toast";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { mobile, tablet, size } from "@docspace/shared/utils";
+import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
@@ -106,6 +110,53 @@ const MainContainer = styled.div`
   ${(props) => props.isSettingNotPaid && UnavailableStyles}
 `;
 
+const CustomBannerWrapper = styled.div`
+  max-width: 700px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  @media ${mobile} {
+    margin-bottom: 16px;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    min-height: 72px !important;
+    max-height: none !important;
+    height: auto !important;
+    &::before {
+      border-radius: 6px !important;
+    }
+
+    & > div {
+      padding: 12px !important;
+      inset-inline-end: 2px !important;
+      gap: 0px;
+      top: auto !important;
+      max-width: 100% !important;
+
+      &:first-child {
+        margin-inline-end: 24px;
+      }
+
+      .icon-button {
+        ${(props) =>
+          props.isRTL &&
+          `
+              transform: rotate(180deg);
+          `}
+      }
+    }
+
+    @media ${mobile} {
+      & > div {
+        top: auto !important;
+      }
+    }
+  }
+`;
+
 const DownLoadWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -173,13 +224,44 @@ const HistoryMainContent = (props) => {
     getReport,
     isSettingNotPaid,
     isLoadingDownloadReport,
+    tfaEnabled,
+    withCampaign,
+    currentColorScheme,
     loginHistory,
   } = props;
+
+  const { isRTL } = useInterfaceDirection();
 
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= size.mobile);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= size.mobile);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const theme = useTheme();
+  const isBaseTheme = theme.isBase;
+
+  const loginHistoryTranslates = {
+    Header: t("LoginHistoryCampaignHeader", {
+      productName: t("Common:ProductName"),
+    }),
+    SubHeader: t("LoginHistoryCampaignTitle"),
+    Text: t("LoginHistoryCampaignText"),
+    Link: "/portal-settings/security/access-portal/tfa",
+  };
+
+  const loginHistoryConfig = useMemo(
+    () => getLoginHistoryConfig(isBaseTheme, isMobile, currentColorScheme),
+    [isBaseTheme, isMobile, currentColorScheme],
+  );
 
   const getSettings = () => {
     const storagePeriodSettings = getFromSessionStorage("storagePeriod");
@@ -217,8 +299,32 @@ const HistoryMainContent = (props) => {
     }
   };
 
+  const navigateTo2FA = () => {
+    window.location.href = loginHistoryTranslates.Link;
+  };
+
   return (
     <MainContainer isSettingNotPaid={isSettingNotPaid}>
+      {!tfaEnabled && withCampaign ? (
+        <CustomBannerWrapper onClick={navigateTo2FA} isRTL={isRTL}>
+          <CampaignsBanner
+            campaignConfig={loginHistoryConfig}
+            campaignTranslate={loginHistoryTranslates}
+            disableFitText
+            actionIcon={NextStepReactSvg}
+            onAction={(type) => {
+              if (type === "2fa-settings") {
+                navigateTo2FA();
+              }
+            }}
+            onClose={(e) => {
+              e && e.stopPropagation && e.stopPropagation();
+
+              navigateTo2FA();
+            }}
+          />
+        </CustomBannerWrapper>
+      ) : null}
       {isSettingNotPaid ? (
         <Badge
           className="paid-badge"

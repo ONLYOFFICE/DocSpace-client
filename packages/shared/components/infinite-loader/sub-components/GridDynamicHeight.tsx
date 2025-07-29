@@ -55,6 +55,10 @@ const GridDynamicHeight = ({
 }: GridComponentProps) => {
   // Reference to the List component for recomputing row heights
   const listRef = useRef<List | null>(null);
+  // Reference to track if a synchronization is already scheduled
+  const synchronizationScheduled = useRef(false);
+  // Reference to store any pending timeout
+  const resizeTimerRef = useRef<number | null>(null);
 
   // Create a cache to store height measurements
   const [cache] = useState(
@@ -411,7 +415,8 @@ const GridDynamicHeight = ({
     });
 
     // Force reflow to ensure measurements are accurate
-    // document.body.offsetHeight;
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    document.body.offsetHeight;
 
     // Process each row again to find max heights
     const rowMaxHeights: Record<string, number> = {};
@@ -467,24 +472,22 @@ const GridDynamicHeight = ({
 
   // Handle window resize specifically with a more robust approach
   useEffect(() => {
-    // Debounced resize handler
-    let resizeTimer: number | null = null;
     const handleResize = () => {
-      if (resizeTimer) {
-        window.clearTimeout(resizeTimer);
+      if (resizeTimerRef.current) {
+        window.clearTimeout(resizeTimerRef.current);
+        resizeTimerRef.current = null;
       }
 
       // Clear cache to force complete recalculation
       cache.clearAll();
 
-      // Schedule multiple synchronizations at different times
-      // This ensures we catch all possible layout changes
-      resizeTimer = window.setTimeout(synchronizeCardHeights, 50);
+      // Schedule synchronization with debouncing
+      resizeTimerRef.current = window.setTimeout(() => {
+        synchronizeCardHeights();
 
-      // Additional synchronizations to ensure stability
-      setTimeout(synchronizeCardHeights, 100);
-      setTimeout(synchronizeCardHeights, 300);
-      setTimeout(synchronizeCardHeights, 600);
+        // Additional synchronizations with reduced frequency
+        setTimeout(synchronizeCardHeights, 300);
+      }, 100);
     };
 
     // Add resize listener
@@ -492,8 +495,13 @@ const GridDynamicHeight = ({
 
     // Start observing DOM changes
     const mutationObserver = new MutationObserver(() => {
+      // Add a debouncing mechanism to avoid excessive calls
+      if (synchronizationScheduled.current) return;
+
+      synchronizationScheduled.current = true;
       requestAnimationFrame(() => {
         synchronizeCardHeights();
+        synchronizationScheduled.current = false;
       });
     });
 
@@ -504,17 +512,19 @@ const GridDynamicHeight = ({
       attributeFilter: ["style", "class"],
     });
 
-    // Perform initial synchronization
-    setTimeout(synchronizeCardHeights, 0);
-    setTimeout(synchronizeCardHeights, 100);
-    setTimeout(synchronizeCardHeights, 300);
+    // Perform initial synchronization - reduce redundant calls
+    requestAnimationFrame(() => {
+      synchronizeCardHeights();
+      // One additional sync after a delay to catch any late-rendered items
+      setTimeout(synchronizeCardHeights, 300);
+    });
 
     // Clean up
     return () => {
       window.removeEventListener("resize", handleResize);
       mutationObserver.disconnect();
-      if (resizeTimer) {
-        window.clearTimeout(resizeTimer);
+      if (resizeTimerRef.current) {
+        window.clearTimeout(resizeTimerRef.current);
       }
     };
   }, [cache]);

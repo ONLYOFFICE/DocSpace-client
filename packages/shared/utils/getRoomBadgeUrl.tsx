@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import Link12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/link.svg?url";
+import BasketIconUrl from "PUBLIC_DIR/images/icons/12/basket.react.svg?url";
 
 import SharedLinkIconURL from "PUBLIC_DIR/images/icons/24/shared.svg?url";
 import PlanetIconURL from "PUBLIC_DIR/images/icons/24/planet.react.svg?url";
@@ -60,6 +61,10 @@ export const getRoomBadgeUrl = (
   if (!item) return null;
 
   const { link, planet } = icons[size];
+
+  const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
+
+  if (isTrashRooms) return BasketIconUrl;
 
   if (item.external) return link;
 

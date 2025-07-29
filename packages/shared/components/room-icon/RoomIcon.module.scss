@@ -255,7 +255,7 @@
     margin-inline: 80px 0;
   }
 
-  .roomIconButton {
+  .roomIconButton:not(.isTrash) {
     svg {
       path {
         fill: var(--room-icon-background-color) !important;
@@ -294,6 +294,9 @@
     &.isBig {
       width: 28px;
       height: 28px;
+    }
+    &.isTrash {
+      border: none;
     }
   }
 

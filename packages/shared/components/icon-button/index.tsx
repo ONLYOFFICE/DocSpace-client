@@ -205,12 +205,16 @@ const IconButton = ({
     [isDisabled, onClick],
   );
 
+  const isTrash = window
+    ? window.location.pathname.startsWith("/trash/rooms")
+    : false;
+
   const buttonClasses = classNames(
     styles.iconButton,
     {
       [styles.disabled]: isDisabled,
       [styles.notClickable]: !onClick && !isClickable,
-      [styles.fill]: isFill && !isStroke,
+      [styles.fill]: isFill && !isStroke && !isTrash,
       [styles.stroke]: isStroke,
       [styles.commonIconsStyle]: isIconSizeType(size),
     },

@@ -193,6 +193,8 @@ const RoomIcon = ({
   const isImage =
     typeof logo === "string" || (typeof logo === "object" && logo?.medium);
 
+  const isTrash = window.location.pathname.startsWith("/trash/rooms");
+
   return (
     <>
       <div
@@ -262,7 +264,8 @@ const RoomIcon = ({
                 size={12}
                 iconName={PlusSvgUrl}
                 onClick={onToggleOpenEditLogo}
-                isFill
+                isFill={!isTrash}
+                isStroke={false}
               />
               {dropdownElement}
             </div>
@@ -323,6 +326,7 @@ const RoomIcon = ({
           <div
             className={classNames(styles.roomIconBadge, {
               [styles.isBig]: isBigSize,
+              [styles.isTrash]: isTrash,
             })}
             data-testid="badge-container"
           >
@@ -337,6 +341,7 @@ const RoomIcon = ({
                 {
                   [styles.isBig]: isBigSize,
                   [styles.isHovered]: !!tooltipContent,
+                  [styles.isTrash]: isTrash,
                 },
                 "room-icon_button",
               )}

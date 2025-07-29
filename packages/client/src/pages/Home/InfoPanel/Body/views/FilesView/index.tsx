@@ -31,6 +31,7 @@ import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
@@ -77,6 +78,9 @@ const FilesView = ({
 
   const [isLoadingSuspense, setIsLoadingSuspense] = React.useState(false);
 
+  const [isFirstLoadingSuspense, setIsFirstLoadingSuspense] =
+    React.useState(true);
+
   const {
     history,
     total: historyTotal,
@@ -115,6 +119,8 @@ const FilesView = ({
 
   const fetchValue = async (v: FilesViewProps["currentView"]) => {
     if (v === InfoPanelView.infoDetails) {
+      setIsFirstLoadingSuspense(false);
+
       return v;
     }
 
@@ -126,6 +132,7 @@ const FilesView = ({
       await fetchHistory();
 
       setIsLoadingSuspense(false);
+      setIsFirstLoadingSuspense(false);
 
       return v;
     }
@@ -137,9 +144,12 @@ const FilesView = ({
       scrollToTop();
 
       setIsLoadingSuspense(false);
+      setIsFirstLoadingSuspense(false);
 
       return v;
     }
+
+    setIsFirstLoadingSuspense(false);
 
     return v;
   };
@@ -250,7 +260,19 @@ const FilesView = ({
           pointerEvents: isLoadingSuspense ? "none" : "auto",
         }}
       >
-        {getView()}
+        {isFirstLoadingSuspense ? (
+          <InfoPanelViewLoader
+            view={
+              currentView === InfoPanelView.infoMembers
+                ? "members"
+                : currentView === InfoPanelView.infoHistory
+                  ? "history"
+                  : "details"
+            }
+          />
+        ) : (
+          getView()
+        )}
       </div>
     </>
   );

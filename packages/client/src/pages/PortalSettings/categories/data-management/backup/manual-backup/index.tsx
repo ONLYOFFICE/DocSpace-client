@@ -81,10 +81,21 @@ const ManualBackupWrapper = ({
       try {
         getProgress(t);
 
-        const [account, backupStorage, storageRegionsS3] = await Promise.all([
+        const baseRequests = [
           getSettingsThirdParty(),
           getBackupStorage(),
           getStorageRegions(),
+        ] as const;
+
+        const optionalRequests = [];
+
+        if (isObjectEmpty(rootFoldersTitles)) {
+          optionalRequests.push(fetchTreeFolders());
+        }
+
+        const [account, backupStorage, storageRegionsS3] = await Promise.all([
+          ...baseRequests,
+          ...optionalRequests,
         ]);
 
         setConnectedThirdPartyAccount(account ?? null);
@@ -102,8 +113,6 @@ const ManualBackupWrapper = ({
         setIsEmptyContentBeforeLoader(false);
       }
     })();
-
-    if (isObjectEmpty(rootFoldersTitles)) fetchTreeFolders();
   }, []);
 
   useEffect(() => {

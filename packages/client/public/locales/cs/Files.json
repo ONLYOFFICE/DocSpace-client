@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "Odpočet životnosti začíná datem vytvoření souboru. Některé soubory v této místnosti překročí navrhovanou dobu životnosti a budou odstraněny, jakmile toto nastavení povolíte.",
   "LifetimeDialogDescriptionHeader": "Starší soubory s překročenou dobou životnosti budou odstraněny.",
   "LimitByTimePeriod": "Omezení podle časového období",
-  "LimitTimeBlockCustomRoomDescription": "Ve Vlastní místnosti je hlavní odkaz platný po neomezenou dobu. Můžete vytvořit další odkazy s časovým omezením.",
   "LinkDeletedSuccessfully": "Odkaz úspěšně odstraněn",
   "LinkForPortalUsers": "Odkaz pro uživatele {{productName}}",
   "LinkSettings": "Nastavení odkazů",

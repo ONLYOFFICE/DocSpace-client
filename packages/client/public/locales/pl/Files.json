@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "Odliczanie okresu ważności rozpoczyna się w dniu utworzenia pliku. Niektóre pliki w tym pokoju przekroczyły swój okres ważności i zostaną usunięte po włączeniu ustawienia.",
   "LifetimeDialogDescriptionHeader": "Starsze pliki, które przekroczyły swój okres ważności, zostaną usunięte",
   "LimitByTimePeriod": "Ograniczenie czasowe",
-  "LimitTimeBlockCustomRoomDescription": "W pokoju niestandardowym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu.",
   "LinkDeletedSuccessfully": "Link został pomyślnie usunięty",
   "LinkForPortalUsers": "Link dla użytkowników {{productName}}",
   "LinkSettings": "Ustawienia linku",

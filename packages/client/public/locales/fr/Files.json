@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "Le décompte de la durée de vie commence à la date de création du fichier. Certains fichiers de cette salle dépassent la durée de vie proposée et seront supprimés une fois que vous aurez activé le paramètre.",
   "LifetimeDialogDescriptionHeader": "Les fichiers plus anciens dont la durée de vie est dépassée seront supprimés",
   "LimitByTimePeriod": "Limite par période",
-  "LimitTimeBlockCustomRoomDescription": "Dans une salle personnalisée, le lien principal est valable pour une durée illimitée. Vous pouvez créer des liens supplémentaires avec une limite de temps.",
   "LinkDeletedSuccessfully": "Le lien a été supprimé avec succès",
   "LinkForPortalUsers": "Lien pour les utilisateurs de {{productName}}",
   "LinkSettings": "Paramètres des liens",

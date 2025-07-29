@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "Der Lebensdauer-Countdown beginnt mit dem Erstellungsdatum der Datei. Einige Dateien in diesem Raum überschreiten die vorgeschlagene Lebensdauer und werden gelöscht, sobald Sie die Einstellung aktivieren.",
   "LifetimeDialogDescriptionHeader": "Ältere Dateien mit überschrittener Lebensdauer werden gelöscht",
   "LimitByTimePeriod": "Zeitlich begrenzen",
-  "LimitTimeBlockCustomRoomDescription": "In einem benutzerdefinierten Raum ist der Hauptlink für einen unbegrenzten Zeitraum gültig. Sie können zusätzliche Links mit zeitlicher Begrenzung erstellen.",
   "LinkDeletedSuccessfully": "Link erfolgreich gelöscht",
   "LinkForPortalUsers": "Link für {{productName}}-Benutzer",
   "LinkSettings": "Linkeinstellungen",

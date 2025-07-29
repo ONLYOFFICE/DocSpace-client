@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "A contagem regressiva da vida útil começa na data de criação do arquivo. Alguns arquivos nessa sala excedem a vida útil proposta e serão excluídos quando você ativar a configuração.",
   "LifetimeDialogDescriptionHeader": "Os arquivos mais antigos com tempo de vida excedido serão excluídos",
   "LimitByTimePeriod": "Limite por período de tempo",
-  "LimitTimeBlockCustomRoomDescription": "Em uma sala personalizada, o link principal é válido por um período de tempo ilimitado. Você pode criar links adicionais com limite de tempo.",
   "LinkDeletedSuccessfully": "Link excluído com sucesso",
   "LinkForPortalUsers": "Link para usuários do {{productName}}",
   "LinkSettings": "Configurações de link",

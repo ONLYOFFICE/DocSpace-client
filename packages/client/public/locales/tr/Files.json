@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "Yaşam süresi geri sayımı dosya oluşturma tarihinde başlar. Bu odadaki bazı dosyalar önerilen yaşam süresini aşıyor ve ayarı etkinleştirdiğinizde silinecektir.",
   "LifetimeDialogDescriptionHeader": "Yaşam süresini aşmış eski dosyalar silinecek",
   "LimitByTimePeriod": "Zaman aralığına göre limitlendirme",
-  "LimitTimeBlockCustomRoomDescription": "Özel bir odada ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz.",
   "LinkDeletedSuccessfully": "Bağlantı başarıyla silindi",
   "LinkForPortalUsers": "{{productName}} kullanıcıları için bağlantı",
   "LinkSettings": "Bağlantı ayarları",

@@ -874,5 +874,6 @@
   "Viewer": "Viewer",
   "ManageNotifications": "Verwalten",
   "LimitTimeBlockFormRoomDescription": "In einem Raum zum Ausfüllen von Formularen ist der Hauptlink für einen unbegrenzten Zeitraum gültig.",
-  "LimitTimeBlockPublicRoomDescription": "In einem öffentlichen Raum ist der Hauptlink für einen unbegrenzten Zeitraum gültig. Sie können zusätzliche Links mit zeitlicher Begrenzung erstellen."
+  "LimitTimeBlockPublicRoomDescription": "In einem öffentlichen Raum ist der Hauptlink für einen unbegrenzten Zeitraum gültig. Sie können zusätzliche Links mit zeitlicher Begrenzung erstellen.",
+  "LimitTimeBlockCustomRoomDescription": "In einem benutzerdefinierten Raum ist der Hauptlink für einen unbegrenzten Zeitraum gültig. Sie können zusätzliche Links mit zeitlicher Begrenzung erstellen."
 }

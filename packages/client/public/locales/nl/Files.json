@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "Het aftellen van de levensduur begint vanaf de aanmaakdatum van het bestand. Sommige bestanden in deze ruimte overschrijden de voorgestelde levensduur en zullen worden verwijderd zodra u de instelling inschakelt.",
   "LifetimeDialogDescriptionHeader": "Oudere bestanden met een overschreden levensduur worden verwijderd",
   "LimitByTimePeriod": "Beperken op tijdsperiode",
-  "LimitTimeBlockCustomRoomDescription": "In een Aangepaste ruimte is de hoofdlink voor een onbepaalde tijd geldig. U kunt extra links met een tijdslimiet maken.",
   "LinkDeletedSuccessfully": "Link succesvol verwijderd",
   "LinkForPortalUsers": "Link voor {{productName}} gebruikers",
   "LinkSettings": "Link instellingen",

@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "ファイル作成日より有効期限のカウントダウンが始まります。このルーム内の一部のファイルは、提案された有効期限を超過しており、設定を有効にすると削除されます。",
   "LifetimeDialogDescriptionHeader": "有効期限を過ぎた古いファイルは削除されます。",
   "LimitByTimePeriod": "期間による制限",
-  "LimitTimeBlockCustomRoomDescription": "カスタムルームでは、メインリンクは無制限の時間有効です。時間制限付きの追加リンクを作成できます。",
   "LinkDeletedSuccessfully": "リンクは正常に削除されました",
   "LinkForPortalUsers": "{{productName}}のユーザー用リンク",
   "LinkSettings": "リンクの設定",

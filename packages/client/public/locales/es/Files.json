@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "La cuenta atrás de la vida útil comienza en la fecha de creación del archivo. Algunos archivos de esta sala superan la vida útil propuesta y se eliminarán una vez que active la configuración.",
   "LifetimeDialogDescriptionHeader": "Los archivos antiguos cuya vida útil se haya superado se eliminarán",
   "LimitByTimePeriod": "Limitar por periodo de tiempo",
-  "LimitTimeBlockCustomRoomDescription": "En una sala personalizada, el enlace principal es válido durante un periodo de tiempo ilimitado. Puede crear enlaces adicionales con límite de tiempo.",
   "LinkDeletedSuccessfully": "El enlace se ha eliminado correctamente",
   "LinkForPortalUsers": "Enlace para los usuarios de {{productName}}",
   "LinkSettings": "Configuración de enlace",

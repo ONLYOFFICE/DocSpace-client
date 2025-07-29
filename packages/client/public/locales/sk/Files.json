@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "Odpočítavanie doby používania sa začína od dátumu vytvorenia súboru. Pri niektorých súboroch v tejto miestnosti je prekročená navrhovaná doba používania a po zapnutí tohto nastavenia tieto súbory budú vymazané.",
   "LifetimeDialogDescriptionHeader": "Staršie súbory s prekročenou dobou používania budú vymazané",
   "LimitByTimePeriod": "Obmedzenie podľa časového obdobia",
-  "LimitTimeBlockCustomRoomDescription": "Vo Vlastnej miestnosti je hlavný odkaz platný na neobmedzený čas. Môžete vytvoriť ďalšie odkazy s časovým obmedzením. ",
   "LinkDeletedSuccessfully": "Odkaz úspešne vymazaný",
   "LinkForPortalUsers": "Odkaz pre užívateľov {{productName}}",
   "LinkSettings": "Nastavenia odkazu",

@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "文件有效期的倒计时从文件创建日期开始。在此房间中，超过建议有效期的文件会在您启用此设置后删除。",
   "LifetimeDialogDescriptionHeader": "超过有效期的旧文件将被删除。",
   "LimitByTimePeriod": "按时间段限制",
-  "LimitTimeBlockCustomRoomDescription": "在自定义房间中，主链接的有效期是不限的。您可以创建有时效限制的其他链接。",
   "LinkDeletedSuccessfully": "链接删除成功",
   "LinkForPortalUsers": "{{productName}}用户的链接",
   "LinkSettings": "链接设置",

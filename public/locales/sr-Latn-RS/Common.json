@@ -865,5 +865,6 @@
   "Viewer": "Pregledač",
   "ManageNotifications": "Upravljaj",
   "LimitTimeBlockFormRoomDescription": "U sobi za popunjavanje obrazaca, glavni link važi neograničeno.",
-  "LimitTimeBlockPublicRoomDescription": "U javnoj sobi, glavni link važi neograničeno. Možete kreirati dodatne linkove sa vremenskim ograničenjem."
+  "LimitTimeBlockPublicRoomDescription": "U javnoj sobi, glavni link važi neograničeno. Možete kreirati dodatne linkove sa vremenskim ograničenjem.",
+  "LimitTimeBlockCustomRoomDescription": "U prilagođenoj sobi, glavni link važi neograničeno. Možete kreirati dodatne linkove sa vremenskim ograničenjem."
 }

@@ -874,5 +874,6 @@
   "Viewer": "Prohlížeč",
   "ManageNotifications": "Správa",
   "LimitTimeBlockFormRoomDescription": "V místnosti pro vyplňování formulářů je hlavní odkaz platný po neomezenou dobu. ",
-  "LimitTimeBlockPublicRoomDescription": "Ve veřejné místnosti je hlavní odkaz platný po neomezenou dobu. Můžete vytvořit další odkazy s časovým omezením. "
+  "LimitTimeBlockPublicRoomDescription": "Ve veřejné místnosti je hlavní odkaz platný po neomezenou dobu. Můžete vytvořit další odkazy s časovým omezením. ",
+  "LimitTimeBlockCustomRoomDescription": "Ve Vlastní místnosti je hlavní odkaz platný po neomezenou dobu. Můžete vytvořit další odkazy s časovým omezením."
 }

@@ -874,5 +874,6 @@
   "Viewer": "Esikatselu",
   "ManageNotifications": "Hallitse",
   "LimitTimeBlockFormRoomDescription": "Lomakkeen täyttöhuoneessa päälinkki on voimassa rajoittamattoman ajanjakson.",
-  "LimitTimeBlockPublicRoomDescription": "Julkisessa huoneessa päälinkki on voimassa rajoittamattoman ajanjakson. Voit luoda aikarajoitettuja lisälinkkejä."
+  "LimitTimeBlockPublicRoomDescription": "Julkisessa huoneessa päälinkki on voimassa rajoittamattoman ajanjakson. Voit luoda aikarajoitettuja lisälinkkejä.",
+  "LimitTimeBlockCustomRoomDescription": "Custom-huoneessa päälinkki on voimassa rajoittamattoman ajanjakson. Voit luoda aikarajoitettuja lisälinkkejä."
 }

@@ -407,7 +407,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     if (link?.sharedTo?.primary) {
       if (isFormRoom) return t("Common:LimitTimeBlockFormRoomDescription");
       if (isPublic) return t("Common:LimitTimeBlockPublicRoomDescription");
-      if (isCustomRoom) return t("Files:LimitTimeBlockCustomRoomDescription");
+      if (isCustomRoom) return t("Common:LimitTimeBlockCustomRoomDescription");
 
       return "";
     }

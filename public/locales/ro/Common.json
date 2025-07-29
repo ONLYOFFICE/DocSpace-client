@@ -874,5 +874,6 @@
   "Viewer": "Vizualizator",
   "ManageNotifications": "Gestionare",
   "LimitTimeBlockFormRoomDescription": "În Sala de completare a formularelor, link-ul principal rămâne valabil pentru o perioadă nelimitată de timp.",
-  "LimitTimeBlockPublicRoomDescription": "În Sala publică, link-ul principal rămâne valabil  pentru o perioadă nelimitată de timp. Puteți crea linkuri suplimentare limitate la o anumită perioadă de timp."
+  "LimitTimeBlockPublicRoomDescription": "În Sala publică, link-ul principal rămâne valabil  pentru o perioadă nelimitată de timp. Puteți crea linkuri suplimentare limitate la o anumită perioadă de timp.",
+  "LimitTimeBlockCustomRoomDescription": "În Sala particularizată, link-ul principal rămâne valabil  pentru o perioadă nelimitată de timp. Puteți crea linkuri suplimentare limitate la o anumită perioadă de timp."
 }

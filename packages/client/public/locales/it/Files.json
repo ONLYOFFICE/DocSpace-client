@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "l conto alla rovescia della durata inizia alla data di creazione del file. Alcuni file in questa stanza superano la durata proposta e verranno eliminati una volta abilitata l'impostazione.",
   "LifetimeDialogDescriptionHeader": "I file più vecchi che hanno superato la durata di vita verranno eliminati.",
   "LimitByTimePeriod": "Limite in base al periodo di tempo",
-  "LimitTimeBlockCustomRoomDescription": "In una stanza personalizzata, il collegamento principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con limiti di tempo.",
   "LinkDeletedSuccessfully": "Link eliminato con successo",
   "LinkForPortalUsers": "Collegamento per gli utenti di {{productName}}",
   "LinkSettings": "Impostazioni di link",

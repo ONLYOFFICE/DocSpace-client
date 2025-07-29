@@ -108,7 +108,6 @@
   "LifetimeDialogDescription": "Käyttöiän laskenta alkaa tiedoston luontipäivämäärästä. Jotkut tämän huoneen tiedostot ylittävät esitetyn käyttöiän ja poistetaan, kun otat asetuksen käyttöön.",
   "LifetimeDialogDescriptionHeader": "Vanhat käyttöiän ylittäneet tiedostot poistetaan",
   "LimitByTimePeriod": "Rajoita ajanjaksolla",
-  "LimitTimeBlockCustomRoomDescription": "Custom-huoneessa päälinkki on voimassa rajoittamattoman ajanjakson. Voit luoda aikarajoitettuja lisälinkkejä.",
   "LinkDeletedSuccessfully": "Linkki onnistuneesti poistettu",
   "LinkForPortalUsers": "Linkki {{productName}}:n käyttäjiin",
   "LinkSettings": "Linkkiasetukset",

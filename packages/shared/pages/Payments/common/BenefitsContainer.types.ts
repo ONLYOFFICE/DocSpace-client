@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,32 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-
-import { Text } from "../../../components/text";
-
-import { StyledContactContainer } from "./Payments.styled";
-import { Link } from "../../../components/link";
-
-export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
-  const { t } = useTranslation("Common");
-  return (
-    <StyledContactContainer>
-      {salesEmail ? (
-        <Text as="span" noSelect fontWeight={600}>
-          {t("ContactUs")}
-          <Link
-            className="sales-email-link"
-            tag="a"
-            fontWeight="600"
-            href={`mailto:${salesEmail}`}
-            color="accent"
-          >
-            {salesEmail}
-          </Link>
-        </Text>
-      ) : null}
-    </StyledContactContainer>
-  );
+export type TBenefitsContainerProps = {
+  isTrial?: boolean;
+  isEnterprise?: boolean;
+  isDeveloper?: boolean;
 };

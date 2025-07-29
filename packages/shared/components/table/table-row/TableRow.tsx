@@ -59,6 +59,7 @@ const TableRow = (props: TableRowProps) => {
     onClick,
     onDoubleClick,
     contextMenuCellStyle,
+    contextMenuTestId,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -125,6 +126,7 @@ const TableRow = (props: TableRowProps) => {
                 getContextModel={getContextModel}
                 withBackdrop
                 badgeUrl={badgeUrl}
+                dataTestId={contextMenuTestId}
               />
               {renderContext ? (
                 <ContextMenuButton

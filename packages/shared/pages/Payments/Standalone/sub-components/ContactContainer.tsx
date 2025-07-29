@@ -27,56 +27,29 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
+import { Text } from "../../../../components/text";
+import { Link } from "../../../../components/link";
 
-import { ButtonContainer } from "./sub-components/ButtonContainer";
-import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
+import styles from "../Standalone.module.scss";
 
-import { BenefitsContainer } from "./BenefitsContainer";
-
-import { StyledEnterpriseComponent } from "./Payments.styled";
-import { IPaymentsProps } from "./Payments.types";
-
-export const TrialContainer = ({
-  isDeveloper,
-  buyUrl,
-  isLicenseDateExpired,
-  isTrial,
-  trialDaysLeft,
-  paymentDate,
-  isEnterprise,
-  logoText,
-}: Partial<IPaymentsProps>) => {
+export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
   const { t } = useTranslation("Common");
-
   return (
-    <StyledEnterpriseComponent>
-      <Text fontWeight={700} fontSize="16px">
-        {t("ActivateSwithToProHeader", {
-          license: isDeveloper
-            ? t("Common:DeveloperLicense")
-            : t("Common:EnterpriseLicense"),
-        })}
-      </Text>
-
-      <TariffTitleContainer
-        isLicenseDateExpired={isLicenseDateExpired}
-        isTrial={isTrial}
-        trialDaysLeft={trialDaysLeft}
-        paymentDate={paymentDate}
-        isDeveloper={isDeveloper}
-        logoText={logoText}
-      />
-
-      <BenefitsContainer
-        isTrial={isTrial}
-        isEnterprise={isEnterprise}
-        isDeveloper={isDeveloper}
-      />
-      <Text fontSize="14px" className="payments_renew-subscription">
-        {t("ActivatePurchaseBuyLicense")}
-      </Text>
-      <ButtonContainer buyUrl={buyUrl} />
-    </StyledEnterpriseComponent>
+    <div className={styles.contactContainer}>
+      {salesEmail ? (
+        <Text as="span" noSelect fontWeight={600}>
+          {t("ContactUs")}
+          <Link
+            className="sales-email-link"
+            tag="a"
+            fontWeight="600"
+            href={`mailto:${salesEmail}`}
+            color="accent"
+          >
+            {salesEmail}
+          </Link>
+        </Text>
+      ) : null}
+    </div>
   );
 };

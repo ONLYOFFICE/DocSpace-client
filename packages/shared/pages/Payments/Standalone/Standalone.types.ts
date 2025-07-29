@@ -41,12 +41,6 @@ export interface IPaymentsProps {
   logoText: string;
 }
 
-export interface IEnterpriseProps {
-  salesEmail: string;
-  isLicenseDateExpired: boolean;
-  isDeveloper: boolean;
-}
-
 export interface ILicenseProps {
   setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
   acceptPaymentsLicense: (t: TTranslation) => void;

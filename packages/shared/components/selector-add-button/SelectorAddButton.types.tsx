@@ -59,4 +59,6 @@ export type SelectorAddButtonProps = {
   truncate?: boolean;
   /** Size  the icon container */
   size?: string;
+  /** Test id */
+  testId?: string;
 };

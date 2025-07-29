@@ -61,6 +61,7 @@ interface IStyle {
   color?: string;
   fontSize?: string;
   fontWeight?: string;
+  lineHeight?: string;
 }
 
 interface IAction {

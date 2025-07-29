@@ -93,7 +93,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             color={title?.color ?? globalColors.black}
             fontSize={title?.fontSize ?? "13px"}
             fontWeight={title?.fontWeight ?? "normal"}
-            lineHeight="12px"
+            lineHeight={title?.lineHeight ?? "12px"}
           >
             {Header}
           </TextComponent>
@@ -104,6 +104,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
               color={body?.color ?? globalColors.black}
               fontSize={fontSize ?? "13px"}
               fontWeight={body?.fontWeight ?? "normal"}
+              lineHeight={body?.lineHeight ?? "20px"}
             >
               {SubHeader}
             </TextComponent>
@@ -113,6 +114,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
               color={text?.color ?? globalColors.black}
               fontSize={text?.fontSize ?? "13px"}
               fontWeight={text?.fontWeight ?? "normal"}
+              lineHeight={text?.lineHeight ?? "16px"}
             >
               {Text}
             </TextComponent>

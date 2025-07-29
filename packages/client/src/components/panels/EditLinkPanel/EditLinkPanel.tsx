@@ -43,8 +43,6 @@ const EditLinkPanelWrapper = ({
   editExternalLink,
   setExternalLink,
   currentDeviceType,
-  unsavedChangesDialogVisible,
-  setUnsavedChangesDialog,
   getPortalPasswordSettings,
 }: InjectedEditLinkPanelProps) => {
   return (
@@ -61,8 +59,6 @@ const EditLinkPanelWrapper = ({
         setExternalLink,
         passwordSettings,
         currentDeviceType,
-        unsavedChangesDialogVisible,
-        setUnsavedChangesDialog,
         getPortalPasswordSettings,
       }}
     />
@@ -74,8 +70,6 @@ export default inject<TStore>(
     const {
       editLinkPanelIsVisible,
       setEditLinkPanelIsVisible,
-      unsavedChangesDialogVisible,
-      setUnsavedChangesDialog,
       linkParams,
       setLinkParams,
     } = dialogsStore;
@@ -104,9 +98,6 @@ export default inject<TStore>(
       setLinkParams,
       editExternalLink,
       setExternalLink,
-
-      unsavedChangesDialogVisible,
-      setUnsavedChangesDialog,
 
       currentDeviceType,
       getPortalPasswordSettings,

@@ -57,6 +57,8 @@ import type { TFileLink } from "../../api/files/types";
 import type { TError } from "../../utils/axiosClient";
 import type { TOption } from "../../components/combobox";
 
+import UnsavedChangesDialog from "../unsaved-changes-dialog";
+
 import { DeviceType, RoomsType, ShareAccessRights } from "../../enums";
 import { StyledEditLinkBodyContent } from "./EditLinkPanel.styled";
 
@@ -85,9 +87,6 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
     editExternalLink,
     setExternalLink,
     setLinkParams,
-
-    unsavedChangesDialogVisible,
-    setUnsavedChangesDialog,
 
     currentDeviceType,
     passwordSettings,
@@ -129,8 +128,8 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const linkAccessOptions = useMemo(() => getShareOptions(t), [t]);
-
-  console.log({ accessOptions });
+  const [unsavedChangesDialogVisible, setUnsavedChangesDialog] =
+    useState(false);
 
   const [selectedLinkAccess, setSelectedLinkAccess] = useState(() => {
     return (
@@ -420,6 +419,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
     }
   };
 
+  const onCloseUnsavedChangesDialog = () => {
+    setUnsavedChangesDialog(false);
+  };
+
   const expiredLinkText = getExpiredLinkText();
 
   const isPrimary = link?.sharedTo?.primary;
@@ -435,97 +438,105 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
   const disabledDenyDownload = link?.canEditDenyDownload === false;
 
   const editLinkPanelComponent = (
-    <ModalDialog
-      isLarge
-      zIndex={310}
-      withBodyScroll
-      withoutPadding
-      visible={visible}
-      onClose={onClosePanel}
-      displayType={ModalDialogType.aside}
-    >
-      <ModalDialog.Header>
-        {isPrimary
-          ? t("Files:EditSharedLink")
-          : isPublic || isFormRoom
-            ? t("Files:EditAdditionalLink")
-            : t("Files:EditLink")}
-      </ModalDialog.Header>
-      <ModalDialog.Body>
-        <StyledEditLinkBodyContent className="edit-link_body">
-          {!isFormRoom ? (
-            <RoleLinkBlock
+    <>
+      <UnsavedChangesDialog
+        visible={unsavedChangesDialogVisible}
+        onClose={onCloseUnsavedChangesDialog}
+        onCloseEditLinkPanel={onClose}
+      />
+
+      <ModalDialog
+        isLarge
+        zIndex={310}
+        withBodyScroll
+        withoutPadding
+        visible={visible}
+        onClose={onClosePanel}
+        displayType={ModalDialogType.aside}
+      >
+        <ModalDialog.Header>
+          {isPrimary
+            ? t("Files:EditSharedLink")
+            : isPublic || isFormRoom
+              ? t("Files:EditAdditionalLink")
+              : t("Files:EditLink")}
+        </ModalDialog.Header>
+        <ModalDialog.Body>
+          <StyledEditLinkBodyContent className="edit-link_body">
+            {!isFormRoom ? (
+              <RoleLinkBlock
+                t={t}
+                accessOptions={accessOptions}
+                selectedOption={selectedAccessOption}
+                currentDeviceType={currentDeviceType}
+                onSelect={handleSelectAccessOption}
+              />
+            ) : null}
+            <AccessSelectorBlock
+              options={linkAccessOptions}
+              selectedOption={selectedLinkAccess}
+              onSelect={handleSelectLinkAccess}
+            />
+
+            <PasswordAccessBlock
               t={t}
-              accessOptions={accessOptions}
-              selectedOption={selectedAccessOption}
-              currentDeviceType={currentDeviceType}
-              onSelect={handleSelectAccessOption}
-            />
-          ) : null}
-          <AccessSelectorBlock
-            options={linkAccessOptions}
-            selectedOption={selectedLinkAccess}
-            onSelect={handleSelectLinkAccess}
-          />
-
-          <PasswordAccessBlock
-            t={t}
-            isLoading={isLoading}
-            headerText={t("Files:PasswordAccess")}
-            bodyText={t("Files:PasswordLink")}
-            isChecked={passwordAccessIsChecked}
-            isPasswordValid={isPasswordValid}
-            passwordValue={passwordValue}
-            setPasswordValue={setPasswordValue}
-            setIsPasswordValid={setIsPasswordValid}
-            onChange={onPasswordAccessChange}
-            passwordSettings={passwordSettings}
-            isPasswordErrorShow={isPasswordErrorShow}
-            setIsPasswordErrorShow={setIsPasswordErrorShow}
-          />
-          {!isFormRoom ? (
-            <ToggleBlock
               isLoading={isLoading}
-              headerText={t("Files:DisableDownload")}
-              bodyText={t("Files:PreventDownloadFilesAndFolders")}
-              isChecked={denyDownload || disabledDenyDownload}
-              onChange={onDenyDownloadChange}
-              isDisabled={disabledDenyDownload}
-              tooltipContent={t("Common:RestrictionDownloadCopyRoom")}
+              headerText={t("Files:PasswordAccess")}
+              bodyText={t("Files:PasswordLink")}
+              isChecked={passwordAccessIsChecked}
+              isPasswordValid={isPasswordValid}
+              passwordValue={passwordValue}
+              setPasswordValue={setPasswordValue}
+              setIsPasswordValid={setIsPasswordValid}
+              onChange={onPasswordAccessChange}
+              passwordSettings={passwordSettings}
+              isPasswordErrorShow={isPasswordErrorShow}
+              setIsPasswordErrorShow={setIsPasswordErrorShow}
             />
-          ) : null}
+            {!isFormRoom ? (
+              <ToggleBlock
+                isLoading={isLoading}
+                headerText={t("Files:DisableDownload")}
+                bodyText={t("Files:PreventDownloadFilesAndFolders")}
+                isChecked={denyDownload || disabledDenyDownload}
+                onChange={onDenyDownloadChange}
+                isDisabled={disabledDenyDownload}
+                tooltipContent={t("Common:RestrictionDownloadCopyRoom")}
+              />
+            ) : null}
 
-          <LimitTimeBlock
-            language={language}
-            isExpired={isExpired}
-            isLoading={isLoading}
-            bodyText={expiredLinkText}
-            setIsExpired={setIsExpired}
-            expirationDate={expirationDate}
-            setExpirationDate={setExpirationDate}
-            canChangeLifetime={canChangeLifetime}
-            headerText={t("Files:LimitByTimePeriod")}
+            <LimitTimeBlock
+              language={language}
+              isExpired={isExpired}
+              isLoading={isLoading}
+              bodyText={expiredLinkText}
+              setIsExpired={setIsExpired}
+              expirationDate={expirationDate}
+              setExpirationDate={setExpirationDate}
+              canChangeLifetime={canChangeLifetime}
+              headerText={t("Files:LimitByTimePeriod")}
+            />
+          </StyledEditLinkBodyContent>
+        </ModalDialog.Body>
+        <ModalDialog.Footer>
+          <Button
+            scale
+            primary
+            onClick={onSave}
+            size={ButtonSize.normal}
+            label={t("Common:SaveButton")}
+            isDisabled={isDisabledSaveButton}
           />
-        </StyledEditLinkBodyContent>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          scale
-          primary
-          onClick={onSave}
-          size={ButtonSize.normal}
-          label={t("Common:SaveButton")}
-          isDisabled={isDisabledSaveButton}
-        />
-        <Button
-          scale
-          onClick={onClose}
-          isDisabled={isLoading}
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+          <Button
+            scale
+            onClick={onClose}
+            isDisabled={isLoading}
+            size={ButtonSize.normal}
+            label={t("Common:CancelButton")}
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+    </>
   );
 
   const renderPortal = () => {

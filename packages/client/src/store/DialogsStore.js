@@ -101,8 +101,6 @@ class DialogsStore {
 
   changeQuotaDialogVisible = false;
 
-  unsavedChangesDialogVisible = false;
-
   moveToPublicRoomVisible = false;
 
   moveToPublicRoomData = null;
@@ -798,10 +796,6 @@ class DialogsStore {
    */
   setLinkParams = (linkParams) => {
     this.linkParams = linkParams;
-  };
-
-  setUnsavedChangesDialog = (unsavedChangesDialogVisible) => {
-    this.unsavedChangesDialogVisible = unsavedChangesDialogVisible;
   };
 
   setEditLinkPanelIsVisible = (editLinkPanelIsVisible) => {

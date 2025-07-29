@@ -24,41 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {
-  TFile,
-  TFileLink,
-  TFolder,
-} from "@docspace/shared/api/files/types";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TPasswordSettings } from "@docspace/shared/api/settings/types";
-import type { LinkParamsType } from "@docspace/shared/types";
-import type { DeviceType } from "@docspace/shared/enums";
-
-export interface InjectedEditLinkPanelProps {
-  link: TFileLink;
-  item: TRoom | TFile | TFolder;
-
-  language: string;
-
-  passwordSettings: TPasswordSettings | undefined;
+export interface UnsavedChangesDialogProps {
   visible: boolean;
-  setIsVisible: (isVisible: boolean) => void;
-
-  updateLink?: (link: TFileLink) => void;
-  setLinkParams: (linkParams: LinkParamsType) => void;
-
-  editExternalLink: (
-    roomId: string | number,
-    link: TFileLink,
-  ) => Promise<TFileLink>;
-  setExternalLink: (
-    link: TFileLink,
-    searchParams: URLSearchParams,
-    setSearchParams: (searchParams: URLSearchParams) => void,
-    isCustomRoom: boolean,
-  ) => void;
-
-  currentDeviceType: DeviceType;
-
-  getPortalPasswordSettings: () => Promise<void>;
+  onClose: VoidFunction;
+  onCloseEditLinkPanel: VoidFunction;
 }

@@ -53,8 +53,6 @@ export interface EditLinkPanelProps {
     isCustomRoom: boolean,
   ) => void;
   setLinkParams: (linkParams: LinkParamsType) => void;
-  unsavedChangesDialogVisible: boolean;
-  setUnsavedChangesDialog: (visible: boolean) => void;
   currentDeviceType: DeviceType;
   passwordSettings: TPasswordSettings | undefined;
   getPortalPasswordSettings: () => Promise<void>;

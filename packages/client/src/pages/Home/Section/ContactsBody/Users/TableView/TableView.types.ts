@@ -180,7 +180,7 @@ export type TableRowProps = {
 
   element: JSX.Element;
 
-  isGuests: boolean;
+  contactsTab: UsersStore["contactsTab"];
 
   checkedProps?: { checked: boolean };
   onContentRowSelect?: (checked: boolean, user: TItem) => void;

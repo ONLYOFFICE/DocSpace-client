@@ -48,6 +48,7 @@ class DownloadDialogStore {
     masterForms: [],
     other: [],
     pdfForms: [],
+    diagrams: [],
   };
 
   sortedDownloadFiles: TSortedDownloadFiles = {

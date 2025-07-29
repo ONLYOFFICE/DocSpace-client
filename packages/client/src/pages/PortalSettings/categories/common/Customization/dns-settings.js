@@ -54,6 +54,7 @@ const toggleStyle = {
 
 const textInputProps = {
   id: "textInputContainerDNSSettings",
+  testId: "customization_dns_settings_text_input",
   className: "dns-textarea",
   scale: true,
   tabIndex: 8,
@@ -62,6 +63,7 @@ const textInputProps = {
 const buttonProps = {
   tabIndex: 9,
   className: "save-cancel-buttons send-request-button",
+  testId: "customization_dns_settings_button",
   primary: true,
 };
 let timerId = null;
@@ -197,6 +199,7 @@ const DNSSettingsComponent = (props) => {
         <>
           <ToggleButton
             className="settings-dns_toggle-button"
+            dataTestId="customization_dns_settings_toggle_button"
             label={t("CustomDomainName")}
             onChange={onClickToggle}
             isChecked={enable ?? false}
@@ -243,7 +246,7 @@ const DNSSettingsComponent = (props) => {
           <FieldContainer
             id="fieldContainerDNSSettings"
             className="field-container-width settings_unavailable"
-            labelText={`${t("YourCurrentDomain")}`}
+            labelText={`${t("Common:YourCurrentDomain")}`}
             isVertical
           >
             <TextInput
@@ -312,6 +315,7 @@ const DNSSettingsComponent = (props) => {
           <Link
             className="link-learn-more"
             color={currentColorScheme.main?.accent}
+            dataTestId="customization_dns_settings_learn_more"
             target="_blank"
             isHovered
             href={dnsSettingsUrl}

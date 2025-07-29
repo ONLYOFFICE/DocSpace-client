@@ -10,6 +10,8 @@
   "AddEmailsDescription": "{{organizationName}}{{productName}}’e aktarılacak içe aktarılmamış kullanıcıların listesini kontrol edin.",
   "AddEmailsWarning": "E-postası olan kullanıcılarınız yok. Lütfen onları eklemek için bir sonraki adıma geçin.",
   "AddTrustedDomain": "Güvenilen alan adı ekle",
+  "AdManagement": "Reklam Yönetimi",
+  "AdManagementDescription": "{{productName}}'ınızda tanıtım afişlerinin gösterilip gösterilmeyeceğini seçin.",
   "Admins": "Yöneticiler",
   "AdminsMessage": "Yönetici Mesajı Ayarları",
   "AdminsMessageMobileDescription": "Yönetici Mesajı Ayarları, portal yöneticisiyle iletişim kurmanın bir yoludur.",
@@ -83,7 +85,7 @@
   "DeleteThemeForever": "Tema sonsuza kadar silinsin mi?",
   "DeleteThemeNotice": "Tema kalıcı olarak silinecek. Bu işlemi geri alamazsınız.",
   "DeveloperToolsAccess": "Sınırlı Geliştirici Araçları erişimi",
-  "DeveloperToolsAccessDescription": "Bu ayar, Geliştirici Araçları bölümünü misafirler haricindeki tüm kullanıcılara görünür hale getirmenizi sağlar. Bu bölüme erişimi kısıtlamak ve yalnızca {{productName}} sahibinin ve yöneticilerin erişebilmesini sağlamak istiyorsanız Devre Dışı Bırak'ı seçin ve Kaydet düğmesine tıklayın.",
+  "DeveloperToolsAccessDescription": "Bu ayar, Geliştirici Araçları bölümünü misafirler haricindeki tüm kullanıcılara görünür hale getirmenizi sağlar. Bu bölüme erişimi kısıtlamak ve yalnızca sahibinin ve {{productName}} yöneticilerin erişebilmesini sağlamak istiyorsanız Devre Dışı Bırak'ı seçin ve Kaydet düğmesine tıklayın.",
   "DeveloperToolsAccessMobileDescription": "Bu ayar, Geliştirici Araçları bölümünü misafirler haricindeki tüm kullanıcılara görünür hale getirmenizi sağlar.",
   "DisableEmailDescription": "Bu kutu işaretlenirse, {{sectionName}} kullanıcılarının {{productName}} içinde ilk yetkilendirmeden sonra e-posta doğrulaması yapması gerekmez.",
   "DisableEmailVerification": "E-posta doğrulamasını devre dışı bırak",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Veri içe aktarmayı iptal etmek istiyor musunuz?",
   "WantToCancelUpload": "Yüklemeyi iptal etmek istiyor musunuz?",
   "WantToContinue": "Devam etmek mi yoksa kullanıcı kotasını değiştirmek mi istiyorsunuz?",
+  "WhiteLabelSubtitle": "Şirketinizin adını girin, logoyu yükleyin ve stili markanıza uyacak şekilde özelleştirin.",
   "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin."
 }

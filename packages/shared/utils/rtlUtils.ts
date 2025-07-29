@@ -104,7 +104,8 @@ export const getCorrectBorderRadius = (
 
 /* Returns system font family for arabic lang */
 export const getFontFamilyDependingOnLanguage = (lng: string) => {
-  const shouldUseSystemFont = lng === "ar-SA";
+  const arabicLocale = "ar-SA";
+  const shouldUseSystemFont = lng?.toLowerCase() === arabicLocale.toLowerCase();
 
   return shouldUseSystemFont ? SYSTEM_FONT_FAMILY : DEFAULT_FONT_FAMILY;
 };

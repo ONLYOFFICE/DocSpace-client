@@ -99,6 +99,8 @@ import { getFromLocalStorage } from "./getFromLocalStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
+import * as userFilterUtils from "./userFilterUtils";
+import * as filterConstants from "./filterConstants";
 
 export {
   isBetaLanguage,
@@ -162,6 +164,8 @@ export {
   fakeFormFillingList,
   getCountTilesInRow,
   getSelectFormatTranslation,
+  userFilterUtils,
+  filterConstants,
 };
 
 export const getModalType = () => {
@@ -310,6 +314,8 @@ export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
       return "selected-only-presentations";
     case FilterType.SpreadsheetsOnly:
       return "selected-only-spreadsheets";
+    case FilterType.DiagramsOnly:
+      return "selected-only-diagrams";
     case FilterType.ImagesOnly:
       return "selected-only-images";
     case FilterType.MediaOnly:
@@ -357,6 +363,8 @@ export const getCheckboxItemLabel = (
       return t("Common:Archives");
     case FilterType.FilesOnly:
       return t("Common:Files");
+    case FilterType.DiagramsOnly:
+      return t("Common:Diagrams");
 
     case `room-${RoomsType.CustomRoom}`:
       return t("Common:CustomRooms");

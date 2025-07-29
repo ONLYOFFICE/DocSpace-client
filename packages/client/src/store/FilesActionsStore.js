@@ -82,6 +82,11 @@ import {
   isLockedSharedRoom,
   isSystemFolder,
 } from "@docspace/shared/utils";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_ARCHIVE_DOCUMENTS,
+  FILTER_ROOM_DOCUMENTS,
+} from "@docspace/shared/utils/filterConstants";
 import {
   getCategoryType,
   getCategoryTypeByFolderType,
@@ -1657,19 +1662,16 @@ class FilesActionStore {
     if (shareKey) filter.key = shareKey;
 
     if (isRoom || isTemplate) {
-      const key =
-        categoryType === CategoryType.Archive
-          ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
-          : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+      if (this.userStore.user?.id) {
+        const key =
+          categoryType === CategoryType.Archive
+            ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
+            : `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`;
 
-      const filterStorageSharedRoom =
-        this.userStore.user?.id && localStorage.getItem(key);
+        const filterSharedRoomObj = getUserFilter(key);
 
-      if (filterStorageSharedRoom) {
-        const splitFilter = filterStorageSharedRoom.split(",");
-
-        filter.sortBy = splitFilter[0];
-        filter.sortOrder = splitFilter[1];
+        filter.sortBy = filterSharedRoomObj.sortBy;
+        filter.sortOrder = filterSharedRoomObj.sortOrder;
       }
     }
 
@@ -2679,7 +2681,6 @@ class FilesActionStore {
       if (openingNewTab(url, e)) return;
 
       setIsLoading(true);
-
       setSelection([]);
 
       window.DocSpace.navigate(url, { state });
@@ -2749,15 +2750,32 @@ class FilesActionStore {
     }
   };
 
+  closeMediaViewerAndRestoreUrl = async () => {
+    const { getFirstUrl, setMediaViewerData } = this.mediaViewerDataStore;
+
+    setMediaViewerData({ visible: false, id: null });
+
+    try {
+      const url = await getFirstUrl();
+      if (!url) return;
+      window.history.pushState("", "", url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   onClickBack = (fromHotkeys = true) => {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
-    const { insideGroupBackUrl, setInsideGroupTempTitle } =
-      this.peopleStore.groupsStore;
+    const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
+
+    if (this.mediaViewerDataStore.visible) {
+      return this.closeMediaViewerAndRestoreUrl();
+    }
 
     setBufferSelection(null);
 
@@ -2811,14 +2829,12 @@ class FilesActionStore {
     if (categoryType === CategoryType.Accounts) {
       const contactsTab = getContactsView();
 
-      setInsideGroupTempTitle(null);
-
       if (insideGroupBackUrl) {
         console.log("set");
         setIsSectionBodyLoading(true, false);
 
         setContactsTab("groups");
-        window.DocSpace.navigate(-1);
+        window.DocSpace.navigate(insideGroupBackUrl);
 
         return;
       }

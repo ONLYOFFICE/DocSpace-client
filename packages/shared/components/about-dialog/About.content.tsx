@@ -25,17 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { Text } from "../text";
 import { Link, LinkTarget } from "../link";
 
 import { getLogoUrl } from "../../utils";
 import { WhiteLabelLogoType } from "../../enums";
+import { useTheme } from "../../hooks/useTheme";
 
-import { StyledAboutContent } from "./About.styled";
 import { IContentProps } from "./About.types";
+import styles from "./About.module.scss";
 
 export const AboutContent = ({
   buildVersionInfo,
@@ -47,7 +48,7 @@ export const AboutContent = ({
   logoText,
 }: IContentProps) => {
   const { t } = useTranslation("Common");
-  const theme = useTheme();
+  const { isBase } = useTheme();
   const isCommercial = !standalone || isEnterprise;
   const license = isCommercial ? t("Common:Commercial") : "AGPL-3.0";
   const linkRepo = "https://github.com/ONLYOFFICE/DocSpace";
@@ -71,26 +72,35 @@ export const AboutContent = ({
     ? previewData.address
     : companyInfoSettingsData?.address;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase, true);
+  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !isBase, true);
 
   return (
     companyInfoSettingsData && (
-      <StyledAboutContent>
-        <div className="avatar">
+      <div className={styles.aboutContent}>
+        <div className={classNames(styles.avatar, "avatar")}>
           <img
             src={logo}
             alt="Logo"
-            className="logo-docspace-theme no-select"
+            className={classNames(
+              styles.logoDocspaceTheme,
+              styles.noSelect,
+              "logo-docspace-theme",
+            )}
           />
         </div>
-        <div className="row">
-          <Text className="row-el" fontSize="13px">
+        <div className={classNames(styles.row, "row")}>
+          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
             {t("DocumentManagement")}:
           </Text>
-          <div className="program-with-version">
+          <div
+            className={classNames(
+              styles.programWithVersion,
+              "program-with-version",
+            )}
+          >
             <Link
               tag="a"
-              className="row-el"
+              className={classNames(styles.rowEl, "row-el")}
               fontSize="13px"
               fontWeight="600"
               href={linkRepo}
@@ -101,7 +111,15 @@ export const AboutContent = ({
               &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
             </Link>
 
-            <Text className="row-el select-el" fontSize="13px" fontWeight="600">
+            <Text
+              className={classNames(
+                styles.rowEl,
+                styles.selectEl,
+                "row-el select-el",
+              )}
+              fontSize="13px"
+              fontWeight="600"
+            >
               v.
               <span className="version-document-management">
                 {buildVersionInfo.docSpace}&nbsp;
@@ -110,14 +128,19 @@ export const AboutContent = ({
           </div>
         </div>
 
-        <div className="row">
-          <Text className="row-el" fontSize="13px">
+        <div className={classNames(styles.row, "row")}>
+          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
             {t("OnlineEditors")}:
           </Text>
-          <div className="program-with-version">
+          <div
+            className={classNames(
+              styles.programWithVersion,
+              "program-with-version",
+            )}
+          >
             <Link
               tag="a"
-              className="row-el"
+              className={classNames(styles.rowEl, "row-el")}
               fontSize="13px"
               fontWeight="600"
               href={linkDocs}
@@ -127,7 +150,15 @@ export const AboutContent = ({
             >
               &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
             </Link>
-            <Text className="row-el select-el" fontSize="13px" fontWeight="600">
+            <Text
+              className={classNames(
+                styles.rowEl,
+                styles.selectEl,
+                "row-el select-el",
+              )}
+              fontSize="13px"
+              fontWeight="600"
+            >
               v.
               <span className="version-online-editors">
                 {buildVersionInfo.documentServer}&nbsp;
@@ -136,14 +167,14 @@ export const AboutContent = ({
           </div>
         </div>
 
-        <div className="row">
-          <Text className="row-el" fontSize="13px">
+        <div className={classNames(styles.row, "row")}>
+          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
             {t("SoftwareLicense")}:{" "}
           </Text>
           {isCommercial ? (
             <Link
               tag="a"
-              className="row-el"
+              className={classNames(styles.rowEl, "row-el")}
               fontSize="13px"
               fontWeight="600"
               href={licenseAgreementsUrl}
@@ -154,42 +185,70 @@ export const AboutContent = ({
               &nbsp;{license}
             </Link>
           ) : (
-            <Text className="row-el" fontSize="13px" fontWeight="600">
+            <Text
+              className={classNames(styles.rowEl, "row-el")}
+              fontSize="13px"
+              fontWeight="600"
+            >
               &nbsp;{license}
             </Text>
           )}
         </div>
 
-        <Text className="copyright" fontSize="14px" fontWeight="600">
+        <Text
+          className={classNames(styles.copyright, "copyright")}
+          fontSize="14px"
+          fontWeight="600"
+        >
           © {companyName}
         </Text>
 
-        <div className="row">
-          <Text className="address-title" fontSize="13px">
+        <div className={classNames(styles.row, "row")}>
+          <Text
+            className={classNames(styles.addressTitle, "address-title")}
+            fontSize="13px"
+          >
             {t("Common:Address")}:{" "}
           </Text>
-          <Text className="address-title select-el" fontSize="13px">
+          <Text
+            className={classNames(
+              styles.addressTitle,
+              styles.selectEl,
+              "address-title select-el",
+            )}
+            fontSize="13px"
+          >
             {address}
           </Text>
         </div>
 
-        <div className="row">
-          <Text className="tel-title" fontSize="13px">
+        <div className={classNames(styles.row, "row")}>
+          <Text
+            className={classNames(styles.telTitle, "tel-title")}
+            fontSize="13px"
+          >
             {t("Common:Phone")}:{" "}
           </Text>
-          <Text className="tel-title select-el" fontSize="13px">
+          <Text
+            className={classNames(
+              styles.telTitle,
+              styles.selectEl,
+              "tel-title select-el",
+            )}
+            fontSize="13px"
+          >
             {phone}
           </Text>
         </div>
 
-        <div className="row">
-          <Text className="row-el" fontSize="13px">
+        <div className={classNames(styles.row, "row")}>
+          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
             {t("AboutCompanyEmailTitle")}:
           </Text>
 
           <Link
             tag="a"
-            className="row-el"
+            className={classNames(styles.rowEl, "row-el")}
             fontSize="13px"
             fontWeight="600"
             href={`mailto:${companyInfoSettingsData.email}`}
@@ -200,14 +259,14 @@ export const AboutContent = ({
           </Link>
         </div>
 
-        <div className="row">
-          <Text className="row-el" fontSize="13px">
+        <div className={classNames(styles.row, "row")}>
+          <Text className={classNames(styles.rowEl, "row-el")} fontSize="13px">
             {t("Site")}:
           </Text>
 
           <Link
             tag="a"
-            className="row-el"
+            className={classNames(styles.rowEl, "row-el")}
             fontSize="13px"
             fontWeight="600"
             target={LinkTarget.blank}
@@ -218,7 +277,7 @@ export const AboutContent = ({
             &nbsp;{site?.replace(/^https?\:\/\//i, "")}
           </Link>
         </div>
-      </StyledAboutContent>
+      </div>
     )
   );
 };

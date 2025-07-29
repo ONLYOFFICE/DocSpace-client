@@ -78,7 +78,7 @@ import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialo
 
 export async function openEdit(
   fileId: number | string,
-  version: string | number,
+  version?: string | number,
   doc?: string,
   view?: string,
   headers?: Record<string, string>,

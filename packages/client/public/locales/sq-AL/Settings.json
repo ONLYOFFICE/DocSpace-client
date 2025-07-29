@@ -10,6 +10,8 @@
   "AddEmailsDescription": "Kontrolloni listën e përdoruesve të paimportuar për t'u importuar në {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "Nuk keni përdorues me email. Ju lutemi vazhdoni në hapin tjetër për t'i shtuar ato.",
   "AddTrustedDomain": "Shtoni domen të besuar",
+  "AdManagement": "Menaxhimi i reklamave",
+  "AdManagementDescription": "Zgjidhni nëse shfaqen banderolat promovuese në {{productName}} tuaj.",
   "Admins": "Administratorët",
   "AdminsMessage": "Cilësimet e mesazheve të administratorit",
   "AdminsMessageMobileDescription": "Cilësimet e mesazheve të administratorit janë një mënyrë për të kontaktuar administratorin e portalit.",
@@ -284,5 +286,6 @@
   "WantToCancelDataImport": "Dëshironi të anuloni importimin e të dhënave?",
   "WantToCancelUpload": "Dëshironi ta anuloni ngarkimin?",
   "WantToContinue": "Dëshironi të vazhdoni apo të ndryshoni kuotën e ruajtjes së përdoruesit?",
+  "WhiteLabelSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë.",
   "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër."
 }

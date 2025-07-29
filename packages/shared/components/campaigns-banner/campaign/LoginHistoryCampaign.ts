@@ -29,20 +29,26 @@ import { globalColors } from "../../../themes";
 /**
  * Configuration for the Login History campaign banner
  */
-export const getLoginHistoryConfig = (isBaseTheme: boolean) => ({
+export const getLoginHistoryConfig = (
+  isBaseTheme: boolean,
+  isMobile: boolean = false,
+) => ({
   borderColor: globalColors.lightBlueMain,
   title: {
     color: globalColors.lightBlueMain,
-    fontSize: "11px",
+    fontSize: isMobile ? "12px" : "11px",
+    lineHeight: isMobile ? "16px" : "12px",
     fontWeight: "600",
   },
   body: {
-    fontSize: "13px",
+    fontSize: isMobile ? "14px" : "13px",
+    lineHeight: isMobile ? "22px" : "20px",
     fontWeight: "600",
     color: isBaseTheme ? globalColors.black : globalColors.white,
   },
   text: {
-    fontSize: "12px",
+    fontSize: isMobile ? "13px" : "12px",
+    lineHeight: isMobile ? "20px" : "16px",
     fontWeight: "normal",
     color: isBaseTheme ? globalColors.grayText : globalColors.darkGrayDark,
   },

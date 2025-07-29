@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Text } from "@docspace/shared/components/text";
 // import { TextInput } from "@docspace/shared/components/text-input";
 // import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -34,7 +34,7 @@ import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
 import { getLoginHistoryConfig } from "@docspace/shared/components/campaigns-banner/campaign/LoginHistoryCampaign";
 import NextStepReactSvg from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 // import { toastr } from "@docspace/shared/components/toast";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { mobile, tablet, size } from "@docspace/shared/utils";
 import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirection";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
@@ -150,9 +150,6 @@ const CustomBannerWrapper = styled.div`
     }
 
     @media ${mobile} {
-      min-height: 88px !important;
-      max-height: 88px !important;
-
       & > div {
         top: auto !important;
       }
@@ -231,10 +228,22 @@ const HistoryMainContent = (props) => {
     withCampaign,
   } = props;
 
+  const { isRTL } = useInterfaceDirection();
+
   const [loginLifeTime, setLoginLifeTime] = useState(String(lifetime) || "180");
   const [auditLifeTime, setAuditLifeTime] = useState(String(lifetime) || "180");
 
-  const { isRTL } = useInterfaceDirection();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= size.mobile);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= size.mobile);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const theme = useTheme();
   const isBaseTheme = theme.isBase;
 
@@ -247,7 +256,10 @@ const HistoryMainContent = (props) => {
     Link: "/portal-settings/security/access-portal/tfa",
   };
 
-  const loginHistoryConfig = getLoginHistoryConfig(isBaseTheme);
+  const loginHistoryConfig = useMemo(
+    () => getLoginHistoryConfig(isBaseTheme, isMobile),
+    [isBaseTheme, isMobile],
+  );
 
   const getSettings = () => {
     const storagePeriodSettings = getFromSessionStorage("storagePeriod");

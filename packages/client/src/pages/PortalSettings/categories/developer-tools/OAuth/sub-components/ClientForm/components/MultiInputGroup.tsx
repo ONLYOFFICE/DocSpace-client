@@ -202,7 +202,7 @@ const MultiInputGroup = ({
             size={InputSize.base}
             type={InputType.text}
             noIcon
-            dataTestId={`${dataTestId}_input`}
+            testId={`${dataTestId}_input`}
           />
           <StyledInputAddBlock
             ref={addRef}

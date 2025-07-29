@@ -24,38 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import React from "react";
 
-export const StyledBody = styled.div<{
-  isCheckbox: boolean;
-  isLabel: boolean;
-  maxInputWidth: string;
-}>`
-  margin-top: 16px;
-
-  .quota-container {
-    display: flex;
-    grid-gap: 4px;
-    margin-bottom: ${(props) => (props.isCheckbox ? "8px" : "16px")};
-    ${(props) => props.isLabel && " margin-top: 8px"};
-  }
-  .quota_limit {
-    ${(props) => props.maxInputWidth && `max-width: ${props.maxInputWidth}`};
-    max-height: 32px;
-  }
-
-  .quota_checkbox {
-    svg {
-      margin-inline-end: 8px;
-    }
-  }
-
-  .quota_value {
-    max-width: fit-content;
-    padding: 0;
-  }
-
-  .quota_description {
-    color: ${(props) => props.theme.text.disableColor};
-  }
-`;
+export type TTabItemProps = {
+  /** Tab item text. */
+  label: string | React.ReactNode;
+  /** Callback function when tab is selected. */
+  onSelect?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  /** Determines if the tab is currently active. */
+  isActive?: boolean;
+  /** Determines if the tab is disabled and cannot be interacted with. */
+  isDisabled?: boolean;
+  /** Allows the tab to be deselected, resulting in no active tab. */
+  allowNoSelection?: boolean;
+  /** Enables multi-select functionality */
+  withMultiSelect?: boolean;
+  /** Sets a tab class name */
+  className?: string;
+};

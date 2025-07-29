@@ -163,7 +163,7 @@ export const BrandName = ({
           className="settings_unavailable"
         >
           <TextInput
-            testId="logo-text-input"
+            testId="brand_name_input"
             className="brand-name input"
             value={brandNameWhiteLabel ?? ""}
             onChange={onChange}
@@ -196,6 +196,8 @@ export const BrandName = ({
             saveButtonDisabled={isEqualText || hasError}
             disableRestoreToDefault={isEqualText}
             showReminder={showReminder}
+            saveButtonDataTestId="brand_name_cancel_button"
+            cancelButtonDataTestId="brand_name_save_button"
           />
         </FieldContainer>
       </div>

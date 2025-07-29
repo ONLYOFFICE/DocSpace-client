@@ -27,10 +27,10 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
-import { Link, LinkTarget } from "../../../components/link";
+import { Text } from "../../../../components/text";
+import { Link, LinkTarget } from "../../../../components/link";
 
-import { StyledBonus } from "./Bonus.styled";
+import styles from "../Bonus.module.scss";
 
 export const OfficialDocumentation = ({
   dataBackupUrl,
@@ -44,8 +44,8 @@ export const OfficialDocumentation = ({
   const { t } = useTranslation("Common");
 
   return (
-    <StyledBonus>
-      <div className="official-documentation">
+    <div className={styles.bonus}>
+      <div className={styles.officialDocumentation}>
         —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemDocker")}{" "}
@@ -90,7 +90,7 @@ export const OfficialDocumentation = ({
         </Text>
       </div>
 
-      <Text className="upgrade-info">
+      <Text className={styles.upgradeInfo}>
         <Trans i18nKey="UpgradeToProBannerInstructionNote" ns="Common" t={t}>
           Please note that the editors will be unavailable during the upgrade.
           We also recommend to
@@ -106,6 +106,6 @@ export const OfficialDocumentation = ({
           before you start.
         </Trans>
       </Text>
-    </StyledBonus>
+    </div>
   );
 };

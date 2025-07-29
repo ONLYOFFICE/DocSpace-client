@@ -24,21 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/**
- * Fixes SVG icons that have clip-path issues by removing clip-path attributes
- * and corresponding defs sections that can cause visual clipping when scaled
- *
- * @param svgData - Raw SVG string data
- * @returns Processed SVG string with clip-path issues fixed
- */
-export const fixSvgClipPath = (svgData: string): string => {
-  if (!svgData) return svgData;
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-  if (svgData.includes('clip-path="url(#')) {
-    let processed = svgData.replace(/clip-path="[^"]*"/gi, "");
-    processed = processed.replace(/<defs>.*?<\/defs>/gi, "");
-    return processed;
-  }
+import { Text } from "../../../../components/text";
+import { Link } from "../../../../components/link";
 
-  return svgData;
+import styles from "../Standalone.module.scss";
+
+export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
+  const { t } = useTranslation("Common");
+  return (
+    <div className={styles.contactContainer}>
+      {salesEmail ? (
+        <Text as="span" noSelect fontWeight={600}>
+          {t("ContactUs")}
+          <Link
+            className="sales-email-link"
+            tag="a"
+            fontWeight="600"
+            href={`mailto:${salesEmail}`}
+            color="accent"
+          >
+            {salesEmail}
+          </Link>
+        </Text>
+      ) : null}
+    </div>
+  );
 };

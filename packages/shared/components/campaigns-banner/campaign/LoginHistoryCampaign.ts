@@ -32,30 +32,36 @@ import { globalColors } from "../../../themes";
 export const getLoginHistoryConfig = (
   isBaseTheme: boolean,
   isMobile: boolean = false,
-) => ({
-  borderColor: globalColors.lightBlueMain,
-  title: {
-    color: globalColors.lightBlueMain,
-    fontSize: isMobile ? "12px" : "11px",
-    lineHeight: isMobile ? "16px" : "12px",
-    fontWeight: "600",
-  },
-  body: {
-    fontSize: isMobile ? "14px" : "13px",
-    lineHeight: isMobile ? "22px" : "20px",
-    fontWeight: "600",
-    color: isBaseTheme ? globalColors.black : globalColors.white,
-  },
-  text: {
-    fontSize: isMobile ? "13px" : "12px",
-    lineHeight: isMobile ? "20px" : "16px",
-    fontWeight: "normal",
-    color: isBaseTheme ? globalColors.grayText : globalColors.darkGrayDark,
-  },
-  action: {
-    isButton: false,
-    type: "2fa-settings",
-  },
-});
+  currentColorScheme?: { main?: { accent?: string; buttons?: string } } | null,
+) => {
+  const accentColor =
+    currentColorScheme?.main?.accent || globalColors.lightBlueMain;
+
+  return {
+    borderColor: accentColor,
+    title: {
+      color: accentColor,
+      fontSize: isMobile ? "12px" : "11px",
+      lineHeight: isMobile ? "16px" : "12px",
+      fontWeight: "600",
+    },
+    body: {
+      fontSize: isMobile ? "14px" : "13px",
+      lineHeight: isMobile ? "22px" : "20px",
+      fontWeight: "600",
+      color: isBaseTheme ? globalColors.black : globalColors.white,
+    },
+    text: {
+      fontSize: isMobile ? "13px" : "12px",
+      lineHeight: isMobile ? "20px" : "16px",
+      fontWeight: "normal",
+      color: isBaseTheme ? globalColors.grayText : globalColors.darkGrayDark,
+    },
+    action: {
+      isButton: false,
+      type: "2fa-settings",
+    },
+  };
+};
 
 export const loginHistoryConfig = getLoginHistoryConfig(true);

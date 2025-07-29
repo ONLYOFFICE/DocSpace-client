@@ -48,6 +48,7 @@ const LoginHistory = (props) => {
     isAuditAvailable,
     resetIsInit,
     tfaEnabled,
+    currentColorScheme,
   } = props;
 
   useEffect(() => {
@@ -102,6 +103,7 @@ const LoginHistory = (props) => {
         getReport={getLoginHistoryReport}
         isSettingNotPaid={!isAuditAvailable}
         tfaEnabled={tfaEnabled}
+        currentColorScheme={currentColorScheme}
         withCampaign
       />
     )
@@ -120,7 +122,7 @@ export default inject(
       securityLifetime,
       resetIsInit,
     } = setup;
-    const { theme } = settingsStore;
+    const { theme, currentColorScheme } = settingsStore;
 
     const { isAuditAvailable } = currentQuotaStore;
 
@@ -134,6 +136,7 @@ export default inject(
       securityLifetime,
       historyUsers: security.loginHistory.users,
       theme,
+      currentColorScheme,
       viewAs,
       getLoginHistoryReport,
       isAuditAvailable,

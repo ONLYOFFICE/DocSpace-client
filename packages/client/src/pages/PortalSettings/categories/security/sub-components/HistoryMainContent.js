@@ -226,6 +226,7 @@ const HistoryMainContent = (props) => {
     isLoadingDownloadReport,
     tfaEnabled,
     withCampaign,
+    currentColorScheme,
   } = props;
 
   const { isRTL } = useInterfaceDirection();
@@ -257,8 +258,8 @@ const HistoryMainContent = (props) => {
   };
 
   const loginHistoryConfig = useMemo(
-    () => getLoginHistoryConfig(isBaseTheme, isMobile),
-    [isBaseTheme, isMobile],
+    () => getLoginHistoryConfig(isBaseTheme, isMobile, currentColorScheme),
+    [isBaseTheme, isMobile, currentColorScheme],
   );
 
   const getSettings = () => {

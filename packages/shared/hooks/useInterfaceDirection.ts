@@ -30,7 +30,8 @@ import { InterfaceDirectionContext } from "../context/InterfaceDirectionContext"
 export const useInterfaceDirection = () => {
   const interfaceDirection = use(InterfaceDirectionContext);
 
+  const isLTR = interfaceDirection === "ltr";
   const isRTL = interfaceDirection === "rtl";
 
-  return { interfaceDirection, isRTL };
+  return { interfaceDirection, isRTL, isLTR };
 };

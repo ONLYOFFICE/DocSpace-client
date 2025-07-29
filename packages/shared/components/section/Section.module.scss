@@ -108,12 +108,12 @@
   height: auto;
   width: auto;
   background: var(--info-panel-blur-color);
-  z-index: 300;
+  z-index: z.$overlay;
 
   @include mixins.no-user-select;
 
   @include mixins.tablet-and-below {
-    z-index: 309;
+    z-index: z.$overlay;
     position: fixed;
     inset: 0;
   }
@@ -161,7 +161,7 @@
 .submenu {
   background: var(--section-header-bg);
   width: 100%;
-  z-index: 1;
+  z-index: z.$content;
 
   @include mixins.tablet-and-below {
     width: calc(100% + 32px);
@@ -356,7 +356,7 @@
       top: 0;
       background: var(--section-header-bg);
       padding-inline-end: 0;
-      z-index: 201;
+      z-index: z.$sticky;
 
       @include mixins.mobile {
         min-width: 100vw;
@@ -376,7 +376,7 @@
   position: sticky;
   top: 61px;
   background: var(--section-header-bg);
-  z-index: 200;
+  z-index: z.$sticky;
   padding: 0 16px;
   margin: 0 -16px !important;
 
@@ -447,7 +447,7 @@
       position: sticky;
       top: 0;
       background: var(--section-header-bg);
-      z-index: 201;
+      z-index: z.$sticky;
       padding-inline: 20px;
       margin-inline: -20px -17px;
 
@@ -469,7 +469,7 @@
   position: fixed;
   inset-inline-end: 24px;
   bottom: 24px;
-  z-index: 400;
+  z-index: z.$floating-ui;
   opacity: 1;
   transform: translateY(0);
   animation: none;
@@ -488,7 +488,7 @@
   }
 
   @include mixins.tablet-and-below {
-    z-index: 200;
+    z-index: z.$floating-ui;
     bottom: 16px;
 
     @keyframes hideButton {

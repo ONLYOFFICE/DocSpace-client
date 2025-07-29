@@ -28,6 +28,7 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
+import { zIndex as z } from "./zIndex";
 import { DEFAULT_FONT_FAMILY } from "../constants";
 
 export type TColorScheme = {
@@ -285,7 +286,7 @@ export const getBaseTheme = () => {
 
         width: "400px",
 
-        zIndex: "202",
+        zIndex: z.backdrop,
 
         mobile: {
           right: "32px",
@@ -439,7 +440,7 @@ export const getBaseTheme = () => {
       tabletHeight: "56px",
       padding: "0 18px 19px 0",
       width: "100%",
-      zIndex: "189",
+      zIndex: z.sticky,
       marginTop: "1px",
 
       closeButton: {
@@ -1297,7 +1298,7 @@ export const getBaseTheme = () => {
     dropDown: {
       fontWeight: "600",
       fontSize: "13px",
-      zIndex: "400",
+      zIndex: z.backdrop,
       background: white,
       borderRadius: "6px",
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
@@ -1361,7 +1362,7 @@ export const getBaseTheme = () => {
         warning: "none",
       },
 
-      zIndex: "9999",
+      zIndex: z.systemTop,
       position: "fixed",
       padding: "4px",
       width: "320px",

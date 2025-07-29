@@ -28,6 +28,7 @@ import AvatarDarkReactSvgUrl from "PUBLIC_DIR/images/avatar.dark.react.svg?url";
 
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
+import { zIndex as z } from "./zIndex";
 
 import { TTheme } from "./base";
 import { DEFAULT_FONT_FAMILY } from "../constants";
@@ -282,7 +283,7 @@ const Dark: TTheme = {
 
       width: "400px",
 
-      zIndex: "202",
+      zIndex: z.backdrop,
 
       mobile: {
         right: "32px",
@@ -438,7 +439,7 @@ const Dark: TTheme = {
     tabletHeight: "56px",
     padding: "0 18px 19px 0",
     width: "100%",
-    zIndex: "189",
+    zIndex: z.sticky,
     marginTop: "1px",
 
     closeButton: {
@@ -1289,7 +1290,7 @@ const Dark: TTheme = {
   dropDown: {
     fontWeight: "600",
     fontSize: "13px",
-    zIndex: "400",
+    zIndex: z.backdrop,
     background: black,
     borderRadius: "6px",
     boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
@@ -1353,7 +1354,7 @@ const Dark: TTheme = {
       warning: `2px solid ${darkToastWarning}`,
     },
 
-    zIndex: "9999",
+    zIndex: z.systemTop,
     position: "fixed",
     padding: "4px",
     width: "320px",

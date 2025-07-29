@@ -1,4 +1,5 @@
 @use "./variables/colors" as *;
+@use "./z-index" as z;
 
 .light {
   --row-side-color: #{$gray};
@@ -322,7 +323,7 @@
   --main-button-mobile-dropdown-width: 400px;
   --main-button-mobile-dropdown-right: 48px;
   --main-button-mobile-dropdown-bottom: 48px;
-  --main-button-mobile-dropdown-z-index: 202;
+  --main-button-mobile-dropdown-z-index: z.$floating-ui;
   --main-button-mobile-dropdown-mobile-width: calc(100vw - 64px);
   --main-button-mobile-dropdown-mobile-right: 32px;
   --main-button-mobile-dropdown-mobile-bottom: 40px;
@@ -756,7 +757,7 @@
   --main-button-mobile-dropdown-width: 400px;
   --main-button-mobile-dropdown-right: 48px;
   --main-button-mobile-dropdown-bottom: 48px;
-  --main-button-mobile-dropdown-z-index: 202;
+  --main-button-mobile-dropdown-z-index: z.$floating-ui;
   --main-button-mobile-dropdown-mobile-width: calc(100vw - 64px);
   --main-button-mobile-dropdown-mobile-right: 32px;
   --main-button-mobile-dropdown-mobile-bottom: 40px;
@@ -1760,7 +1761,7 @@
   --mobile-details-text-color: #{$white};
   --mobile-details-icon-color: #{$white};
   --mobile-details-height: 53px;
-  --mobile-details-z-index: 307;
+  --mobile-details-z-index: z.$floating-ui;
 
   --bookmarks-text-color: #{$white};
   --bookmarks-color: #{$gray-dark-strong};
@@ -1863,7 +1864,7 @@
   --mobile-details-text-color: #{$white};
   --mobile-details-icon-color: #{$white};
   --mobile-details-height: 53px;
-  --mobile-details-z-index: 307;
+  --mobile-details-z-index: z.$floating-ui;
 
   --bookmarks-text-color: #{$white};
   --bookmarks-color: #{$gray-dark-strong};

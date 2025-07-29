@@ -27,6 +27,7 @@
  */
 
 @use "../../styles/mixins";
+@use "../../styles/z-index" as z;
 
 .wrapper {
   &:not(.descriptive) {
@@ -63,11 +64,11 @@
     @include mixins.mobile {
       :global(.backdrop-active) {
         top: -64px;
-        z-index: 560;
+        z-index: z.$backdrop;
       }
 
       :global(.dropdown-container) {
-        z-index: 561;
+        z-index: z.$overlay;
       }
     }
   }

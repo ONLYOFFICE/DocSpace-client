@@ -3712,7 +3712,6 @@ class FilesStore {
   get cbMenuItems() {
     const { isDocument, isPresentation, isSpreadsheet, isArchive, isDiagram } =
       this.filesSettingsStore;
-    const { isRecentFolder } = this.treeFoldersStore;
 
     let cbMenu = ["all"];
     const filesItems = [...this.files, ...this.folders];
@@ -3755,7 +3754,7 @@ class FilesStore {
         elem !== `room-${RoomsType.VirtualDataRoom}`,
     );
 
-    if (hasFiles && !isRecentFolder) cbMenu.push(FilterType.FilesOnly);
+    if (hasFiles) cbMenu.push(FilterType.FilesOnly);
 
     cbMenu = cbMenu.filter((item, index) => cbMenu.indexOf(item) === index);
 

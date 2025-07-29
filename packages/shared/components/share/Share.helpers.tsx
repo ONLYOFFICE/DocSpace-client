@@ -378,7 +378,7 @@ export const copyRoomShareLink = (
           isHovered
           onClick={linkOptions.onClickLink}
         >
-          {t("Notifications:ManageNotifications")}
+          {t("Common:ManageNotifications")}
         </Link>
       ) : null}
     </span>,
@@ -430,7 +430,7 @@ export const copyDocumentShareLink = (
             isHovered
             onClick={linkOptions.onClickLink}
           >
-            {t("Notifications:ManageNotifications")}
+            {t("Common:ManageNotifications")}
           </Link>
         </>
       ) : null}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,32 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "../../../types";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export interface IPaymentsProps {
-  isTrial: boolean;
-  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
-  acceptPaymentsLicense: (t: TTranslation) => void;
-  isLicenseCorrect: boolean;
-  salesEmail: string;
-  isLicenseDateExpired: boolean;
-  isDeveloper: boolean;
-  buyUrl: string;
-  trialDaysLeft: string | number;
-  paymentDate: string;
-  isEnterprise: boolean;
-  logoText: string;
-}
+import { Text } from "../../../../components/text";
+import { Link } from "../../../../components/link";
 
-export interface IEnterpriseProps {
-  salesEmail: string;
-  isLicenseDateExpired: boolean;
-  isDeveloper: boolean;
-}
+import styles from "../Standalone.module.scss";
 
-export interface ILicenseProps {
-  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
-  acceptPaymentsLicense: (t: TTranslation) => void;
-  isLicenseCorrect: boolean;
-  isTrial: boolean;
-}
+export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
+  const { t } = useTranslation("Common");
+  return (
+    <div className={styles.contactContainer}>
+      {salesEmail ? (
+        <Text as="span" noSelect fontWeight={600}>
+          {t("ContactUs")}
+          <Link
+            className="sales-email-link"
+            tag="a"
+            fontWeight="600"
+            href={`mailto:${salesEmail}`}
+            color="accent"
+          >
+            {salesEmail}
+          </Link>
+        </Text>
+      ) : null}
+    </div>
+  );
+};

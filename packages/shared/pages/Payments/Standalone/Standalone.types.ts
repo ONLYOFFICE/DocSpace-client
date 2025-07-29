@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,53 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import { TTranslation } from "../../../types";
 
-export const StyledBonus = styled.div`
-  max-width: 660px;
-  .official-documentation {
-    margin: 15px 0 12px 0;
+export interface IPaymentsProps {
+  isTrial: boolean;
+  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
+  acceptPaymentsLicense: (t: TTranslation) => void;
+  isLicenseCorrect: boolean;
+  salesEmail: string;
+  isLicenseDateExpired: boolean;
+  isDeveloper: boolean;
+  buyUrl: string;
+  trialDaysLeft: string | number;
+  paymentDate: string;
+  isEnterprise: boolean;
+  logoText: string;
+}
 
-    display: grid;
-    row-gap: 6px;
-    grid-template-columns: 20px 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    a {
-      text-decoration: underline;
-    }
-  }
-  .upgrade-info {
-    margin-bottom: 21px;
-  }
-
-  .benefits-container {
-    margin: 0 0 19px 0;
-  }
-`;
-
-export const StyledContactComponent = styled.div`
-  margin-top: 16px;
-  max-width: 504px;
-  .payments_contact {
-    display: flex;
-    width: 100%;
-    p {
-      margin-inline-end: 4px;
-      margin-bottom: 4px;
-    }
-
-    a {
-      text-decoration: underline;
-    }
-
-    .text {
-      color: ${(props) =>
-        props.theme.client.settings.payment.contactContainer.textColor};
-    }
-
-    .link {
-      color: ${(props) =>
-        props.theme.client.settings.payment.contactContainer.linkColor};
-    }
-  }
-`;
+export interface ILicenseProps {
+  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
+  acceptPaymentsLicense: (t: TTranslation) => void;
+  isLicenseCorrect: boolean;
+  isTrial: boolean;
+}

@@ -186,7 +186,7 @@ export type TDocServerLicense = {
   branding: boolean;
   customization: boolean;
   timeLimited: boolean;
-  end_date: Date;
+  end_date: string;
   trial: boolean;
   customer_id: string;
   resource_key: string;

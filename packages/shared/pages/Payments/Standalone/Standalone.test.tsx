@@ -19,6 +19,21 @@ describe("StandalonePage", () => {
     paymentDate: "2025-06-11",
     isEnterprise: true,
     logoText: "DocSpace",
+    openOnNewPage: false,
+    license: {
+      branding: false,
+      customization: false,
+      timeLimited: false,
+      end_date: "2025-06-11",
+      trial: false,
+      customer_id: "1",
+      resource_key: "1",
+      users_count: 10,
+      users_expire: 30,
+      connections: 10,
+      docspace_dev: false,
+    },
+    docspaceFaqUrl: "https://example.com/faq",
   };
 
   it("renders without errors", () => {

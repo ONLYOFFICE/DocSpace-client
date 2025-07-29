@@ -195,7 +195,7 @@ export const CompanyInfo = ({
               isDisabled={!isBrandingAvailable || !isSettingPaid}
               isChecked={showAbout}
               onChange={onChangeDisplayAbout}
-              data-testid="show-about-window-checkbox"
+              dataTestId="show-about-window-checkbox"
               label={t("Common:ShowAboutWindow")}
             />
           </FieldContainer>

@@ -55,6 +55,8 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     dir,
     truncate,
 
+    testId = "selector-add-button",
+
     ...rest
   } = props;
 
@@ -97,7 +99,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
         title={title}
         className={buttonClassName}
         onClick={onClickAction}
-        data-testid="selector-add-button"
+        data-testid={testId}
       >
         <IconButton
           size={iconSize}

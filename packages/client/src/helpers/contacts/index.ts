@@ -43,6 +43,7 @@ export type {
   TContactsMenuItemdId,
   TChangeUserTypeDialogData,
   TChangeUserStatusDialogData,
+  TPeopleListItem,
 } from "./types";
 
 export {

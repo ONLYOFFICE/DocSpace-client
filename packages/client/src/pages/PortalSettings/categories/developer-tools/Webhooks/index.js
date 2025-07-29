@@ -152,6 +152,7 @@ const Webhooks = (props) => {
                   size="normal"
                   onClick={openCreateModal}
                   isDisabled={isLoading}
+                  testId="create_webhook_button"
                 />
               </ButtonSeating>
             ) : (
@@ -162,6 +163,7 @@ const Webhooks = (props) => {
                 size="small"
                 onClick={openCreateModal}
                 isDisabled={isLoading}
+                testId="create_webhook_button"
               />
             )}
 

@@ -243,6 +243,8 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     onClickSelectedItem,
     shouldShowBackdrop,
     dropDownClassName,
+    dropDownTestId,
+    dataTestId,
   } = props;
 
   React.useEffect(() => {
@@ -322,7 +324,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
           label={label}
           icon={icon}
           isBeta={isBeta}
-          data-testid="drop-down-item"
+          testId={option.dataTestId}
           data-focused={isOpen ? isActiveOption : undefined}
           data-is-separator={option.isSeparator || undefined}
           data-type={option.type || undefined}
@@ -376,6 +378,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       clickOutsideAction: handleClickOutside,
       shouldShowBackdrop,
       className: dropDownClassName,
+      dataTestId: dropDownTestId,
     };
 
     const dropDownOptions = advancedOptions || renderOptions();
@@ -403,7 +406,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       className={comboboxClasses}
       ref={ref}
       onClick={comboBoxClick}
-      data-testid="combobox"
+      data-testid={dataTestId ?? "combobox"}
       title={title}
       data-scaled={scaledOptions || undefined}
       style={style}

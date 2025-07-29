@@ -62,6 +62,7 @@ interface InputGroupProps {
   children?: React.ReactNode;
 
   onBlur?: (name: string) => void;
+  dataTestId?: string;
 }
 
 const InputGroup = ({
@@ -88,6 +89,7 @@ const InputGroup = ({
   isRequired,
   isError,
   children,
+  dataTestId,
 }: InputGroupProps) => {
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
@@ -113,6 +115,7 @@ const InputGroup = ({
         errorMessage={error}
         removeMargin
         hasError={isError}
+        dataTestId={dataTestId}
       >
         {children || (
           <>
@@ -140,6 +143,7 @@ const InputGroup = ({
                 onBlur={() => onBlur?.(name)}
                 hasError={isError}
                 noIcon={!withCopy}
+                testId={`${dataTestId}_input`}
               />
             )}
             {buttonLabel ? (
@@ -148,6 +152,7 @@ const InputGroup = ({
                 size={ButtonSize.small}
                 onClick={onButtonClickAction}
                 isDisabled={isRequestRunning}
+                testId={`${dataTestId}_button`}
               />
             ) : null}
           </>

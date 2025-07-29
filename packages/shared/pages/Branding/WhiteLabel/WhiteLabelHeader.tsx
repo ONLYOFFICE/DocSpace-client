@@ -102,6 +102,7 @@ export const WhiteLabelHeader = ({
             place="right"
             offsetRight={0}
             className="settings_unavailable"
+            dataTestId="white_label_helper_button"
           />
         </Text>
       </div>
@@ -134,7 +135,11 @@ export const WhiteLabelHeader = ({
               withBorder={false}
             />
 
-            <div className={styles.append} onClick={onClear}>
+            <div
+              className={styles.append}
+              onClick={onClear}
+              data-testid="white_label_input_clear"
+            >
               <CrossIcon />
             </div>
           </div>

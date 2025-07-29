@@ -108,6 +108,7 @@ const PluginSDK = ({
           scale
           label={t("GoToRepo")}
           size="small"
+          testId="go_to_repo_button"
         />
       </div>
     ));
@@ -145,6 +146,7 @@ const PluginSDK = ({
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
         onClick={() => window.open(apiPluginSDKLink, "_blank")}
+        testId="read_instructions_button"
       />
       {!isEmptyList && list.length > 0 ? (
         <>

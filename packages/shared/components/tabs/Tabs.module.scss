@@ -25,6 +25,10 @@
       var(--tabs-gradient-color) 100%
     );
   }
+
+  &.secondary {
+    height: 36px;
+  }
 }
 
 .blurBack {
@@ -46,6 +50,10 @@
       var(--tabs-gradient-color) 100%
     );
   }
+
+  &.secondary {
+    height: 36px;
+  }
 }
 
 .sticky {
@@ -62,15 +70,13 @@
   &.primary {
     border-bottom: 1px solid var(--tabs-line-color);
   }
+  &.secondary {
+    height: 36px;
+  }
 }
 
 .tabs {
   font-family: var(--font-family);
-
-  &.multiple {
-    display: flex;
-    flex-direction: column;
-  }
 }
 
 .scroll {
@@ -103,7 +109,8 @@
   }
 
   &.secondary {
-    :global(.thumb) {
+    :global(.thumb),
+    :global(.track-horizontal) {
       display: none;
     }
   }
@@ -132,12 +139,30 @@
   }
 
   &.secondary {
-    gap: 8px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(var(--tabs-count), 1fr);
+    background-color: var(--tabs-background-color-secondary);
+    gap: 4px;
+    padding: 4px;
+    border-radius: 5px;
+    height: 36px;
+    width: var(--tabs-width, 100%);
   }
 
-  &.multiple {
-    flex-wrap: wrap;
-    height: fit-content;
+  &.withArrows {
+    padding: 4px 32px;
+  }
+
+  &.secondary:not(.scaled) {
+    &.referenceSize {
+      display: flex;
+      visibility: visible;
+      width: fit-content;
+    }
+    &:not(.referenceSize) {
+      visibility: hidden;
+    }
   }
 }
 
@@ -177,34 +202,74 @@
   }
 
   &.secondary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
     padding: 4px 16px;
+    border-radius: 3px;
+    gap: 6px;
+    width: calc(100% - 32px);
 
     .tabText {
       color: var(--tabs-text-color-secondary);
+      z-index: 102;
     }
 
-    background-color: var(--tabs-background-color-secondary);
-    border: 1px solid var(--tabs-line-color);
-    border-radius: 16px;
-
     &.selected {
-      background-color: var(--tabs-active-background-color-secondary);
-      border: 1px solid var(--tabs-hover-background-color-secondary);
+      .tabText {
+        color: var(--tabs-active-text-color-secondary);
+      }
+
+      .tabIcon {
+        z-index: 102;
+        svg path {
+          fill: var(--tabs-active-text-color-secondary);
+        }
+        svg circle {
+          stroke: var(--tabs-active-text-color-secondary);
+        }
+      }
+    }
+
+    &.focused,
+    &:hover:not(.selected) {
+      background-color: var(--tabs-hover-background-color-secondary);
 
       .tabText {
         color: var(--tabs-active-text-color-secondary);
       }
-    }
 
-    &:hover:not(.selected) {
-      background-color: var(--tabs-hover-background-color-secondary);
-      border: 1px solid var(--tabs-hover-background-color-secondary);
+      .tabIcon {
+        svg path {
+          fill: var(--tabs-active-text-color-secondary);
+        }
+        svg circle {
+          stroke: var(--tabs-active-text-color-secondary);
+        }
+      }
     }
   }
 
   &.disabled {
     pointer-events: none;
     opacity: 0.5;
+  }
+}
+
+.tabIcon {
+  z-index: 99;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+
+  svg path {
+    fill: var(--tabs-text-color-secondary);
+  }
+  svg circle {
+    stroke: var(--tabs-text-color-secondary);
   }
 }
 
@@ -241,4 +306,53 @@
   display: flex;
   align-items: center;
   user-select: none;
+}
+
+.motionBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 101;
+  background-color: var(--tabs-active-background-color-secondary);
+  height: 28px;
+  border-radius: 3px;
+}
+
+.arrowIcon {
+  position: absolute;
+  z-index: 103;
+  cursor: pointer;
+  min-width: 24px;
+  width: 32px;
+  height: 36px;
+
+  &:hover:not(.disabled) {
+    background-color: var(--tabs-hover-background-color-secondary);
+    svg path {
+      fill: var(--tabs-hover-background-icon-color-secondary);
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+  }
+
+  div {
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.arrowLeft {
+  background-color: var(--tabs-background-color-secondary);
+  inset-inline-start: 0px;
+}
+
+.arrowRight {
+  background-color: var(--tabs-background-color-secondary);
+  inset-inline-end: 0px;
+  rotate: 180deg;
 }

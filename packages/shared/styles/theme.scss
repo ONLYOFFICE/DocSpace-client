@@ -1165,12 +1165,13 @@
   --tabs-background-color-primary: #{$white};
 
   /* Secondary tabs */
-  --tabs-text-color-secondary: #{$black};
-  --tabs-active-text-color-secondary: #{$white};
-  --tabs-background-color-secondary: #{$white};
-  --tabs-hover-background-color-secondary: #{$light-gray-hover};
+  --tabs-text-color-secondary: #{$light-gray-dark};
+  --tabs-active-text-color-secondary: #{$black};
+  --tabs-background-color-secondary: #{$light-gray-hover};
+  --tabs-hover-background-color-secondary: #{$gray-light-mid};
   --tabs-pressed-background-color-secondary: #{$gray-light-mid};
-  --tabs-active-background-color-secondary: #{$blue-light-mid};
+  --tabs-active-background-color-secondary: #{$white};
+  --tabs-hover-background-icon-color-secondary: #{$black};
 }
 
 /* Dark theme variables */
@@ -1186,12 +1187,13 @@
   --tabs-background-color-primary: #{$black};
 
   /* Secondary tabs */
-  --tabs-text-color-secondary: #{$white};
-  --tabs-active-text-color-secondary: #{$black};
-  --tabs-background-color-secondary: #{$black};
-  --tabs-hover-background-color-secondary: #{$gray-dark-strong};
+  --tabs-text-color-secondary: #{$dark-gray-dark};
+  --tabs-active-text-color-secondary: #{$white};
+  --tabs-background-color-secondary: #{$dark-gray-light};
+  --tabs-hover-background-color-secondary: #{$gray-dark-mid};
   --tabs-pressed-background-color-secondary: #{$dark-gray-light};
-  --tabs-active-background-color-secondary: #{$white};
+  --tabs-active-background-color-secondary: #{$black};
+  --tabs-hover-background-icon-color-secondary: #{$white};
 }
 
 .light {
@@ -2134,6 +2136,9 @@
   --payment-icon-color: #{$light-gray-dark};
   --payment-dialog-text: #{$gray};
   --payment-devider-color: #{$gray-light-mid};
+  --payment-contact-container-text-color: #{$gray};
+  --payment-contact-container-link-color: #{$light-gray-dark};
+
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
@@ -2147,6 +2152,9 @@
   --payment-icon-color: #{$dark-gray-dark};
   --payment-dialog-text: #{$gray-dark};
   --payment-devider-color: #{$gray-dark-mid};
+  --payment-contact-container-text-color: #{$dark-gray-dark};
+  --payment-contact-container-link-color: #{$gray-dark};
+
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};
@@ -2476,6 +2484,18 @@
 }
 
 .light {
+  --tab-item-selected-background-color: var(--accent-main, #{$light-blue-main});
+  --tab-item-selected-item-color: #{$white};
+  --tab-item-tag-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --tab-item-selected-background-color: #{$white};
+  --tab-item-selected-item-color: #{$black};
+  --tab-item-tag-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
   --accounts-badges-pending-color: #{$gray};
 }
 
@@ -2658,4 +2678,18 @@
 
 .dark {
   --settings-backup-separator-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --settings-payment-warning-color: #{$light-error-status};
+  --settings-payment-color: #{$light-status-warning};
+  --settings-payment-border: 1px solid #{$gray-light};
+  --settings-payment-bg-benefits-color: #{$gray-light};
+}
+
+.dark {
+  --settings-payment-warning-color: #{$dark-error-status};
+  --settings-payment-color: #{$dark-status-warning};
+  --settings-payment-border: 1px solid #{$gray-dark-strong};
+  --settings-payment-bg-benefits-color: #{$black};
 }

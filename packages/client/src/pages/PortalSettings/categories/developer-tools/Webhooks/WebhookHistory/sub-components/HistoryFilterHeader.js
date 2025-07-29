@@ -156,6 +156,7 @@ const HistoryFilterHeader = (props) => {
             id="filter-button"
             onClick={openFiltersModal}
             isGroupMenuVisible={isGroupMenuVisible}
+            data-testid="webhook_filter_button"
           >
             <IconButton iconName={FilterReactSvrUrl} size={16} />
             <span hidden={historyFilters === null} />

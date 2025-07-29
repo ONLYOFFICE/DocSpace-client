@@ -91,7 +91,7 @@ describe("<AdditionalResources />", () => {
     fireEvent.click(feedbackCheckbox);
 
     // Click save button
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("additional-resources-save-button");
     fireEvent.click(saveButton);
 
     expect(onSave).toHaveBeenCalledWith(false, true);
@@ -119,7 +119,9 @@ describe("<AdditionalResources />", () => {
       <AdditionalResources {...defaultProps} additionalResourcesIsDefault />,
     );
 
-    const restoreButton = screen.getByTestId("cancel-button");
+    const restoreButton = screen.getByTestId(
+      "additional-resources-cancel-button",
+    );
     expect(restoreButton).toBeDisabled();
   });
 
@@ -129,7 +131,9 @@ describe("<AdditionalResources />", () => {
     expect(
       screen.getByText("Common:YouHaveUnsavedChanges"),
     ).toBeInTheDocument();
-    expect(screen.getByTestId("cancel-button")).toBeDisabled();
+    expect(
+      screen.getByTestId("additional-resources-cancel-button"),
+    ).toBeDisabled();
   });
 
   it("calls onRestore when restore button is clicked", () => {
@@ -138,7 +142,9 @@ describe("<AdditionalResources />", () => {
       <AdditionalResources {...defaultProps} onRestore={onRestore} />,
     );
 
-    const restoreButton = screen.getByTestId("cancel-button");
+    const restoreButton = screen.getByTestId(
+      "additional-resources-cancel-button",
+    );
     fireEvent.click(restoreButton);
 
     expect(onRestore).toHaveBeenCalled();

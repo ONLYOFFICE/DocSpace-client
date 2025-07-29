@@ -30,9 +30,9 @@ import { useTranslation } from "react-i18next";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
+import { TabItem } from "@docspace/shared/components/tab-item";
 import { WatermarkAdditions } from "@docspace/shared/enums";
 
-import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import { StyledWatermark } from "./StyledComponent";
 
 const tabsOptions = (t) => [
@@ -168,13 +168,12 @@ const ViewerInfoWatermark = ({
     });
   }, []);
 
-  const onSelect = (item) => {
+  const onSelect = (e) => {
+    const itemKey = e.currentTarget.dataset.key;
     const elementsData = elements.current;
+    elementsData[itemKey] = !elementsData[itemKey];
+
     let flagsCount = 0;
-
-    const key = item.id;
-
-    elementsData[key] = !elementsData[item.id];
 
     Object.keys(elementsData).forEach((k) => {
       const value = elementsData[k];
@@ -218,13 +217,24 @@ const ViewerInfoWatermark = ({
         {t("AddWatermarkElements")}
       </Text>
 
-      <Tabs
-        items={initialInfoRef.dataTabs}
-        selectedItems={initialInfoRef.tabs.map((item) => item.index)}
-        onSelect={onSelect}
-        type={TabsTypes.Secondary}
-        multiple
-      />
+      <div className="watermark-tab_items">
+        {initialInfoRef.dataTabs.map((item) => {
+          const isActive =
+            initialInfoRef.tabs.findIndex((i) => i.index === item.index) > -1;
+
+          return (
+            <TabItem
+              key={item.id}
+              data-key={item.id}
+              label={item.name}
+              isActive={isActive}
+              isDisabled={isActive}
+              onSelect={onSelect}
+              withMultiSelect
+            />
+          );
+        })}
+      </div>
 
       <Text
         className="watermark-title title-without-top"

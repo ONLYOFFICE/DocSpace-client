@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,31 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
-
-import { StyledContactContainer } from "./Payments.styled";
-import { Link } from "../../../components/link";
-
-export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
-  const { t } = useTranslation("Common");
-  return (
-    <StyledContactContainer>
-      {salesEmail ? (
-        <Text as="span" noSelect fontWeight={600}>
-          {t("ContactUs")}
-          <Link
-            className="sales-email-link"
-            tag="a"
-            fontWeight="600"
-            href={`mailto:${salesEmail}`}
-            color="accent"
-          >
-            {salesEmail}
-          </Link>
-        </Text>
-      ) : null}
-    </StyledContactContainer>
-  );
+export type TTabItemProps = {
+  /** Tab item text. */
+  label: string | React.ReactNode;
+  /** Callback function when tab is selected. */
+  onSelect?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  /** Determines if the tab is currently active. */
+  isActive?: boolean;
+  /** Determines if the tab is disabled and cannot be interacted with. */
+  isDisabled?: boolean;
+  /** Allows the tab to be deselected, resulting in no active tab. */
+  allowNoSelection?: boolean;
+  /** Enables multi-select functionality */
+  withMultiSelect?: boolean;
+  /** Sets a tab class name */
+  className?: string;
 };

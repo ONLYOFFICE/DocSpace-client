@@ -28,11 +28,11 @@ import React from "react";
 
 import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
-import { Link, LinkTarget } from "../../../components/link";
+import { Text } from "../../../../components/text";
+import { Link, LinkTarget } from "../../../../components/link";
 
-import { StyledContactComponent } from "./Bonus.styled";
-import { IBonusProps } from "./Bonus.types";
+import { IBonusProps } from "../Bonus.types";
+import styles from "../Bonus.module.scss";
 
 export const ContactContainer = ({
   salesEmail,
@@ -46,9 +46,12 @@ export const ContactContainer = ({
   return (
     <>
       {isCommunity ? (
-        <StyledContactComponent>
-          <div className="payments_contact">
-            <Text className="text" fontWeight={600}>
+        <div
+          data-testid="community-contact-container"
+          className={styles.contactComponent}
+        >
+          <div className={styles.paymentsContact}>
+            <Text className={styles.text} fontWeight={600}>
               <Trans
                 i18nKey="UpgradeToProBannerInformationAboutShort"
                 ns="Common"
@@ -57,19 +60,20 @@ export const ContactContainer = ({
                 components={{
                   1: (
                     <Link
+                      key="enterprise-license-link"
                       target={LinkTarget.blank}
                       tag="a"
                       fontWeight="600"
                       href={forEnterprisesUrl}
-                      className="link"
+                      className={styles.link}
                     />
                   ),
                 }}
               />
             </Text>
           </div>
-          <div className="payments_contact">
-            <Text className="text" fontWeight={600}>
+          <div className={styles.paymentsContact}>
+            <Text className={styles.text} fontWeight={600}>
               <Trans
                 i18nKey="UpgradeToProBannerInformationDemo"
                 ns="Common"
@@ -81,18 +85,18 @@ export const ContactContainer = ({
                   tag="a"
                   fontWeight="600"
                   href={demoOrderUrl}
-                  className="link"
+                  className={styles.link}
                 >
                   here
                 </Link>
               </Trans>
             </Text>
           </div>
-        </StyledContactComponent>
+        </div>
       ) : null}
-      <StyledContactComponent>
-        <div className="payments_contact">
-          <Text className="text" fontWeight={600}>
+      <div className={styles.contactComponent}>
+        <div className={styles.paymentsContact}>
+          <Text className={styles.text} fontWeight={600}>
             <Trans
               t={t}
               i18nKey="UpgradeToProBannerInformationPurchase"
@@ -101,19 +105,20 @@ export const ContactContainer = ({
               components={{
                 1: (
                   <Link
+                    key="upgrade-to-pro-banner-purchase-link"
                     fontWeight="600"
                     target={LinkTarget.blank}
                     tag="a"
                     href={`mailto:${salesEmail}`}
-                    className="link"
+                    className={styles.link}
                   />
                 ),
               }}
             />
           </Text>
         </div>
-        <div className="payments_contact">
-          <Text className="text" fontWeight={600}>
+        <div className={styles.paymentsContact}>
+          <Text className={styles.text} fontWeight={600}>
             <Trans
               t={t}
               i18nKey="UpgradeToProBannerInformationSupport"
@@ -122,18 +127,19 @@ export const ContactContainer = ({
               components={{
                 1: (
                   <Link
+                    key="upgrade-to-pro-banner-support-link"
                     target={LinkTarget.blank}
                     tag="a"
                     fontWeight="600"
                     href={feedbackAndSupportUrl}
-                    className="link"
+                    className={styles.link}
                   />
                 ),
               }}
             />
           </Text>
         </div>
-      </StyledContactComponent>
+      </div>
     </>
   );
 };

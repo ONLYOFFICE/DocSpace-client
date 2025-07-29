@@ -197,6 +197,8 @@ export type TComboboxProps = {
 
   /** Indicates if the backdrop should be shown */
   shouldShowBackdrop?: boolean;
+  /** Data test id */
+  dataTestId?: string;
 };
 
 export type TComboButtonProps = {

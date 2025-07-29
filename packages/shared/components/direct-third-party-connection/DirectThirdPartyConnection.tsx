@@ -28,7 +28,7 @@
 
 "use client";
 
-import { useReducer } from "react";
+import { Reducer, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -55,8 +55,16 @@ import { useUnmount } from "../../hooks/useUnmount";
 import type { ConnectedThirdPartyAccountType } from "../../types";
 
 import { initialState } from "./DirectThirdPartyConnection.constants";
-import { DirectThirdPartyConnectionProps } from "./DirectThirdPartyConnection.types";
+import {
+  DirectThirdPartyConnectionState,
+  DirectThirdPartyConnectionProps,
+} from "./DirectThirdPartyConnection.types";
 import styles from "./DirectThirdPartyConnection.module.scss";
+
+const reducer: Reducer<
+  DirectThirdPartyConnectionState,
+  Partial<DirectThirdPartyConnectionState>
+> = (prevState, newState) => ({ ...prevState, ...newState });
 
 const DirectThirdPartyConnection = ({
   className,
@@ -102,10 +110,7 @@ const DirectThirdPartyConnection = ({
   toDefault,
   checkCreating = false,
 }: DirectThirdPartyConnectionProps) => {
-  const [state, setState] = useReducer(
-    (prevState, newState) => ({ ...prevState, ...newState }),
-    initialState,
-  );
+  const [state, setState] = useReducer(reducer, initialState);
 
   const { t } = useTranslation(["Common"]);
 

@@ -179,6 +179,7 @@ const BasicBlock = ({
             selectLabel={t("SelectNewImage")}
             description={t("IconDescription")}
             onSelect={onSelect}
+            testId="select_new_image_container"
           />
         </FieldContainer>
 
@@ -189,6 +190,7 @@ const BasicBlock = ({
           value={descriptionValue}
           onChange={onChange}
           increaseHeight={isLogoRequiredError}
+          testId="description_textarea_group"
         />
         <InputGroup
           label={t("AuthenticationMethod")}
@@ -197,6 +199,7 @@ const BasicBlock = ({
           value={websiteUrlValue}
           error=""
           onChange={() => {}}
+          testId="auth_method_input_group"
         >
           <div className="pkce">
             <Checkbox
@@ -205,8 +208,12 @@ const BasicBlock = ({
               onChange={() => {
                 changeValue("allow_pkce", !allowPkce);
               }}
+              testId="allow_pkce_checkbox"
             />
-            <HelpButton tooltipContent={pkceHelpButtonText} />
+            <HelpButton
+              dataTestId="allow_pkce_help_button"
+              tooltipContent={pkceHelpButtonText}
+            />
           </div>
         </InputGroup>
       </StyledInputBlock>

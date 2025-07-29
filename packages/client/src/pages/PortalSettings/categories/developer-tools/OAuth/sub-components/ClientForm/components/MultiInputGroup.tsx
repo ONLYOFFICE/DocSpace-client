@@ -59,6 +59,8 @@ interface MultiInputGroupProps {
   helpButtonText?: string;
 
   isDisabled?: boolean;
+
+  testId?: string;
 }
 
 const MultiInputGroup = ({
@@ -71,6 +73,7 @@ const MultiInputGroup = ({
   hasError,
   helpButtonText,
   isDisabled,
+  testId,
 }: MultiInputGroupProps) => {
   const [value, setValue] = React.useState("");
 
@@ -199,8 +202,13 @@ const MultiInputGroup = ({
             size={InputSize.base}
             type={InputType.text}
             noIcon
+            testId={`${testId}_input`}
           />
-          <StyledInputAddBlock ref={addRef} onClick={onAddAction}>
+          <StyledInputAddBlock
+            ref={addRef}
+            onClick={onAddAction}
+            data-testid={`${testId}_add_button`}
+          >
             <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
               {value}
             </Text>
@@ -230,6 +238,7 @@ const MultiInputGroup = ({
             onClose={() => {
               if (!isDisabled) onAdd(name as keyof IClientReqDTO, v, true);
             }}
+            testId={`${testId}_${v}`}
           />
         ))}
       </StyledChipsContainer>

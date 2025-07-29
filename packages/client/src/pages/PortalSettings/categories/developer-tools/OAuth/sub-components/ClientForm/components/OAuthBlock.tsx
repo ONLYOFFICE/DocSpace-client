@@ -73,6 +73,7 @@ const OAuthBlock = ({
           helpButtonText={t("RedirectsURLSHelpButton")}
           isDisabled={isEdit}
           hasError={requiredErrorFields.includes("redirect_uris")}
+          testId="redirect_uris"
         />
         <MultiInputGroup
           t={t}
@@ -83,6 +84,7 @@ const OAuthBlock = ({
           currentValue={allowedOriginsValue}
           helpButtonText={t("AllowedOriginsHelpButton")}
           hasError={requiredErrorFields.includes("allowed_origins")}
+          testId="allowed_origins"
         />
       </StyledInputBlock>
     </StyledBlock>

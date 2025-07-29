@@ -143,7 +143,7 @@ const InputGroup = ({
                 onBlur={() => onBlur?.(name)}
                 hasError={isError}
                 noIcon={!withCopy}
-                testId={testId}
+                testId={`${testId}_input`}
               />
             )}
             {buttonLabel ? (
@@ -152,6 +152,7 @@ const InputGroup = ({
                 size={ButtonSize.small}
                 onClick={onButtonClickAction}
                 isDisabled={isRequestRunning}
+                testId={`${testId}_button`}
               />
             ) : null}
           </>

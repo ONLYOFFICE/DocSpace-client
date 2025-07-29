@@ -89,6 +89,7 @@ const ClientBlock = ({
           onChange={onChange}
           withCopy
           onCopyClick={() => onCopyClick("id")}
+          testId="id_input_group"
         />
         <InputGroup
           label={t("Secret")}
@@ -101,6 +102,7 @@ const ClientBlock = ({
           buttonLabel={t("Reset")}
           onButtonClick={onResetClick}
           onCopyClick={() => onCopyClick("secret")}
+          testId="secret_input_group"
         />
       </StyledInputBlock>
     </StyledBlock>

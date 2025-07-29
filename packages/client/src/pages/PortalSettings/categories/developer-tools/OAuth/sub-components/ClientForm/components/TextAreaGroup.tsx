@@ -38,6 +38,7 @@ interface TextAreaProps {
   placeholder: string;
   increaseHeight: boolean;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  testId?: string;
 }
 
 const TextAreaGroup = ({
@@ -49,6 +50,7 @@ const TextAreaGroup = ({
   increaseHeight,
 
   onChange,
+  testId,
 }: TextAreaProps) => {
   return (
     <StyledInputGroup>
@@ -73,6 +75,7 @@ const TextAreaGroup = ({
         tabIndex={0}
         heightTextArea={increaseHeight ? 81 : 60}
         maxLength={255}
+        testId={testId}
       />
     </StyledInputGroup>
   );

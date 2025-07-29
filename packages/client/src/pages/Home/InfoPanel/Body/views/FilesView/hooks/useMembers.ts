@@ -37,14 +37,14 @@ import api from "@docspace/shared/api";
 import { Nullable } from "@docspace/shared/types";
 import { TOption } from "@docspace/shared/components/combobox";
 
-import {
+import type {
   TInfoPanelMember,
   TInfoPanelMembers,
-  TInfoPanelMemberType,
   TMemberTuple,
   TTitleMember,
   UseMembersProps,
-} from "../Members.types";
+} from "../../Members/Members.types";
+import { TInfoPanelMemberType } from "../../Members/Members.types";
 
 const PAGE_COUNT = 100;
 
@@ -280,11 +280,6 @@ export const useMembers = ({
     });
     setIsLoading(false);
   };
-
-  React.useEffect(() => {
-    fetchMembers();
-    scrollToTop();
-  }, [fetchMembers, scrollToTop]);
 
   React.useEffect(() => {
     if (isMembersPanelUpdating) {

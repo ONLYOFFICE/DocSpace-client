@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -44,7 +44,6 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import {
   GENERAL_LINK_HEADER_KEY,
   LINKS_LIMIT_COUNT,
@@ -54,10 +53,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 
-import ItemTitle from "../../sub-components/ItemTitle";
 import { useLoader } from "../../helpers/useLoader";
-
-import { useMembers } from "./hooks/useMembers";
 
 import User from "./sub-components/User";
 import MembersList from "./sub-components/MembersList";
@@ -72,6 +68,15 @@ const TooltipContent = ({ content }: { content: React.ReactNode }) => (
 );
 
 const Members = ({
+  members,
+  total,
+  searchValue,
+  isFirstLoading,
+
+  fetchMoreMembers,
+  changeUserRole,
+  scrollToTop,
+
   infoPanelSelection,
   selfId,
   isPublicRoomType,
@@ -87,10 +92,8 @@ const Members = ({
   setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
-  setExternalLinks,
 
   isMembersPanelUpdating,
-  setIsMembersPanelUpdating,
   setPublicRoomKey,
   setAccessSettingsIsVisible,
   templateAvailable,
@@ -106,29 +109,7 @@ const Members = ({
     "CreateEditRoomDialog",
   ]);
 
-  const scrollContext = use(ScrollbarContext);
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const scrollToTop = React.useCallback(() => {
-    scrollContext?.parentScrollbar?.scrollToTop();
-  }, []);
-
-  const {
-    members,
-    total,
-    searchValue,
-    isFirstLoading,
-
-    fetchMoreMembers,
-    changeUserRole,
-    setSearchValue,
-  } = useMembers({
-    room: infoPanelSelection!,
-    isMembersPanelUpdating: isMembersPanelUpdating!,
-    setIsMembersPanelUpdating: setIsMembersPanelUpdating!,
-    setExternalLinks: setExternalLinks!,
-    scrollToTop,
-  });
 
   const { showLoading } = useLoader({
     isFirstLoading,
@@ -427,21 +408,7 @@ const Members = ({
 
   if (!infoPanelSelection) return null;
 
-  return (
-    <>
-      <ItemTitle
-        isRoomMembersPanel
-        infoPanelSelection={infoPanelSelection}
-        searchProps={{
-          setSearchValue,
-          resetSearch: () => {
-            setSearchValue("");
-          },
-        }}
-      />
-      {getContent()}
-    </>
-  );
+  return getContent();
 };
 
 export default inject(
@@ -466,13 +433,8 @@ export default inject(
 
     const { id: selfId } = userStore.user!;
 
-    const {
-      primaryLink,
-      additionalLinks,
-      setExternalLink,
-      setExternalLinks,
-      setPublicRoomKey,
-    } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
+      publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
     const {
@@ -510,7 +472,6 @@ export default inject(
       setEditLinkPanelIsVisible,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
-      setExternalLinks,
 
       isMembersPanelUpdating,
       setIsMembersPanelUpdating,

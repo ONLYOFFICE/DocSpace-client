@@ -40,8 +40,8 @@ import {
 
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
-import { getFeedInfo } from "../FeedInfo";
-import { TSelectionHistory } from "../History.types";
+import { getFeedInfo } from "../../History/FeedInfo";
+import { TSelectionHistory } from "../../History/History.types";
 import { useLoader } from "../../../helpers/useLoader";
 
 const PAGE_COUNT = 100;

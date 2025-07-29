@@ -36,6 +36,8 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
+import { useMembers } from "../FilesView/hooks/useMembers";
+
 export enum TInfoPanelMemberType {
   users = "users",
   groups = "groups",
@@ -94,6 +96,16 @@ export type MembersProps = {
 
   currentId?: SelectedFolderStore["id"];
   isRootFolder?: SelectedFolderStore["isRootFolder"];
+
+  members: ReturnType<typeof useMembers>["members"];
+  total: ReturnType<typeof useMembers>["total"];
+  searchValue: ReturnType<typeof useMembers>["searchValue"];
+  isFirstLoading: ReturnType<typeof useMembers>["isFirstLoading"];
+
+  fetchMoreMembers: ReturnType<typeof useMembers>["fetchMoreMembers"];
+  changeUserRole: ReturnType<typeof useMembers>["changeUserRole"];
+
+  scrollToTop: VoidFunction;
 };
 
 export type UserProps = {

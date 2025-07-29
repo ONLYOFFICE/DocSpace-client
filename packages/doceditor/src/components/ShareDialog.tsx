@@ -24,24 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import React, { useEffect, useRef, useState } from "react";
+
 import moment from "moment";
 import "moment/min/locales.min";
-import Share from "@docspace/shared/components/share";
+
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
-import { TFile } from "@docspace/shared/api/files/types";
+import Share from "@docspace/shared/components/share";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import type { LinkParamsType } from "@docspace/shared/types";
+import { editExternalLink } from "@docspace/shared/api/rooms";
+import { getPortalPasswordSettings } from "@docspace/shared/api/settings";
+import type { TFile, TFileLink } from "@docspace/shared/api/files/types";
+import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
+import EditLinkPanel, {
+  type EditLinkPanelRef,
+} from "@docspace/shared/dialogs/EditLinkPanel";
+import type { LinkParamsType, Nullable } from "@docspace/shared/types";
+import { DeviceType } from "@docspace/shared/enums";
+import { TPasswordSettings } from "@docspace/shared/api/settings/types";
 
 const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   ${NoUserSelect}
-  margin-top: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -63,27 +71,89 @@ const SharingDialog = ({
   onOpenPanel,
 }: SharingDialogProps) => {
   const { t, i18n } = useTranslation(["Common"]);
+  const ref = useRef<EditLinkPanelRef>(null);
+  const [editLinkPanelVisible, setEditLinkPanelVisible] = useState(false);
+  const [linkParams, setLinkParams] = useState<Nullable<LinkParamsType>>(null);
+  const [passwordSettings, setPasswordSettings] = useState<TPasswordSettings>();
 
   useEffect(() => {
     moment.locale(i18n.language);
   }, [i18n.language]);
 
-  const handleSetEditLinkPanelIsVisible = (_value: boolean): void => {
-    throw new Error("Function not implemented.", { cause: _value });
+  // Wrapper function to match the expected type for EditLinkPanel
+  const handleGetPortalPasswordSettings = async (): Promise<void> => {
+    try {
+      const res = await getPortalPasswordSettings();
+      setPasswordSettings(res);
+    } catch (error) {
+      console.error("Error fetching password settings:", error);
+    }
   };
 
-  const handleSetLinkParams = (_linkParams: LinkParamsType): void => {
-    throw new Error("Function not implemented.", { cause: _linkParams });
+  const handleSetEditLinkPanelIsVisible = (value: boolean): void => {
+    setEditLinkPanelVisible(value);
+  };
+
+  const handleEditExternalLink = (roomId: string | number, link: TFileLink) => {
+    return editExternalLink(
+      roomId,
+      link.sharedTo.id,
+      link.sharedTo.title,
+      link.access,
+      link.sharedTo.expirationDate ?? null,
+      link.sharedTo.linkType,
+      link.sharedTo.password,
+      false,
+      link.sharedTo.denyDownload,
+      link.sharedTo.internal,
+    )!;
+  };
+
+  const closeEditLinkPanel = () => {
+    setEditLinkPanelVisible(false);
+    setLinkParams(null);
+  };
+
+  const onClosePanel = () => {
+    if (ref.current?.hasChanges()) {
+      ref.current?.openChangesDialog("close");
+      return;
+    }
+
+    closeEditLinkPanel();
+    onCancel();
   };
 
   return (
     <ModalDialog
-      visible={isVisible}
-      onClose={onCancel}
-      displayType={ModalDialogType.aside}
-      withBodyScroll
       withBorder
+      withBodyScroll
+      onClose={onClosePanel}
+      visible={isVisible}
+      displayType={ModalDialogType.aside}
+      containerVisible={editLinkPanelVisible}
     >
+      <ModalDialog.Container>
+        {linkParams ? (
+          <EditLinkPanel
+            ref={ref}
+            withBackButton
+            item={fileInfo}
+            link={linkParams.link}
+            language={i18n.language}
+            visible={editLinkPanelVisible}
+            setIsVisible={closeEditLinkPanel}
+            updateLink={linkParams.updateLink}
+            editExternalLink={handleEditExternalLink}
+            setLinkParams={setLinkParams}
+            currentDeviceType={DeviceType.desktop}
+            passwordSettings={passwordSettings}
+            getPortalPasswordSettings={handleGetPortalPasswordSettings}
+            onClose={onClosePanel}
+          />
+        ) : null}
+      </ModalDialog.Container>
+
       <ModalDialog.Header>{t("Common:Share")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWrapper>
@@ -94,7 +164,7 @@ const SharingDialog = ({
               onOpenPanel={onOpenPanel}
               onlyOneLink={fileInfo.isForm}
               setEditLinkPanelIsVisible={handleSetEditLinkPanelIsVisible}
-              setLinkParams={handleSetLinkParams}
+              setLinkParams={setLinkParams}
             />
           </div>
         </StyledWrapper>

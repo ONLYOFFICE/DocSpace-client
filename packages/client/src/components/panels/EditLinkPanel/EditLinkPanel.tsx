@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import type { FC } from "react";
 import { inject, observer } from "mobx-react";
+import { useSearchParams } from "react-router";
 
 import EditLinkPanel from "@docspace/shared/dialogs/EditLinkPanel";
 import { isRoom } from "@docspace/shared/utils/typeGuards";
@@ -45,6 +46,8 @@ const EditLinkPanelWrapper = ({
   currentDeviceType,
   getPortalPasswordSettings,
 }: InjectedEditLinkPanelProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   return (
     <EditLinkPanel
       {...{
@@ -60,6 +63,8 @@ const EditLinkPanelWrapper = ({
         passwordSettings,
         currentDeviceType,
         getPortalPasswordSettings,
+        searchParams,
+        setSearchParams,
       }}
     />
   );

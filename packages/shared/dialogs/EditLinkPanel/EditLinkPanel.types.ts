@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { ChangeEventHandler } from "react";
+import type { ChangeEventHandler, Ref } from "react";
 
 import type { DeviceType } from "../../enums";
 import type { TRoom } from "../../api/rooms/types";
@@ -36,7 +36,29 @@ import type {
   getShareOptions,
 } from "../../components/share/Share.helpers";
 
-export interface EditLinkPanelProps {
+export interface EditLinkPanelRef {
+  hasChanges: () => boolean;
+  openChangesDialog: (from: "back" | "close") => void;
+}
+
+type ExternalLinkType =
+  | {
+      searchParams?: never;
+      setExternalLink?: never;
+      setSearchParams?: never;
+    }
+  | {
+      setExternalLink: (
+        link: TFileLink,
+        searchParams: URLSearchParams,
+        setSearchParams: (searchParams: URLSearchParams) => void,
+        isCustomRoom: boolean,
+      ) => void;
+      searchParams: URLSearchParams;
+      setSearchParams: (searchParams: URLSearchParams) => void;
+    };
+
+export type EditLinkPanelProps = ExternalLinkType & {
   link: TFileLink;
   item: TFolder | TRoom | TFile;
   language: string;
@@ -46,19 +68,18 @@ export interface EditLinkPanelProps {
     itemId: string | number,
     link: TFileLink,
   ) => Promise<TFileLink>;
-  setExternalLink: (
-    link: TFileLink,
-    searchParams: URLSearchParams,
-    setSearchParams: (searchParams: URLSearchParams) => void,
-    isCustomRoom: boolean,
-  ) => void;
-  setLinkParams: (linkParams: LinkParamsType) => void;
+
+  setLinkParams: (linkParams: LinkParamsType | null) => void;
   currentDeviceType: DeviceType;
   passwordSettings: TPasswordSettings | undefined;
   getPortalPasswordSettings: () => Promise<void>;
 
+  ref?: Ref<EditLinkPanelRef>;
+  withBackButton?: boolean;
+
+  onClose?: VoidFunction;
   updateLink?: (link: TFileLink) => void;
-}
+};
 
 export interface ToggleBlockProps {
   headerText: string;

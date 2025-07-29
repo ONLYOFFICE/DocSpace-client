@@ -55,8 +55,8 @@ const ToggleIcon = ({
     >
       <motion.rect width="28" height="16" rx="8" />
       <motion.circle
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         cy="8"
         variants={{
           isLoading: {

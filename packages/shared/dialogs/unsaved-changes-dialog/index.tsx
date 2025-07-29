@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { type FC, useCallback, useEffect } from "react";
+import { type FC, useEffect } from "react";
 
 import { Text } from "../../components/text";
 import { Button, ButtonSize } from "../../components/button";
@@ -35,26 +35,22 @@ import type { UnsavedChangesDialogProps } from "./UnsavedChangesDialog.types";
 const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
   visible,
   onClose,
-  onCloseEditLinkPanel,
+  onCancel,
+  onConfirm,
 }) => {
   const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
-
-  const onCloseMenu = useCallback(() => {
-    onCloseEditLinkPanel();
-    onClose();
-  }, [onCloseEditLinkPanel, onClose]);
 
   useEffect(() => {
     const onKeyPress = (e: KeyboardEvent) => {
       if (e.key === "Enter") {
-        onCloseMenu();
+        onConfirm();
       }
     };
 
     window.addEventListener("keydown", onKeyPress);
 
     return () => window.removeEventListener("keydown", onKeyPress);
-  }, [onCloseMenu]);
+  }, [onConfirm]);
 
   return (
     <ModalDialog
@@ -75,13 +71,13 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
           scale
           primary
           key="OKButton"
-          onClick={onCloseMenu}
+          onClick={onConfirm}
           size={ButtonSize.normal}
           label={t("Settings:CloseMenu")}
         />
         <Button
           scale
-          onClick={onClose}
+          onClick={onCancel}
           key="CancelButton"
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}

@@ -417,16 +417,16 @@ export function editExternalLink(
   linkId: number | string,
   title: string,
   access: ShareAccessRights,
-  expirationDate: moment.Moment,
+  expirationDate: moment.Moment | string | null,
   linkType: number,
-  password: string,
+  password: string | undefined,
   disabled: boolean,
   denyDownload: boolean,
   internal: boolean,
 ) {
   const skipRedirect = true;
 
-  return request(
+  return request<TFileLink>(
     {
       method: "put",
 

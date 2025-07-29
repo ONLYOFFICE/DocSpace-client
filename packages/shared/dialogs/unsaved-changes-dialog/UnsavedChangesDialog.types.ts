@@ -27,5 +27,6 @@
 export interface UnsavedChangesDialogProps {
   visible: boolean;
   onClose: VoidFunction;
-  onCloseEditLinkPanel: VoidFunction;
+  onCancel: VoidFunction;
+  onConfirm: VoidFunction;
 }

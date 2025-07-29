@@ -27,8 +27,14 @@
 import moment from "moment";
 import isEqual from "lodash/isEqual";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router";
-import { useState, useEffect, useMemo, FC, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  useMemo,
+  FC,
+  useCallback,
+  useImperativeHandle,
+} from "react";
 
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 
@@ -73,27 +79,30 @@ import type {
   AccessOptionType,
   EditLinkPanelProps,
   ShareOptionType,
+  EditLinkPanelRef,
 } from "./EditLinkPanel.types";
 
-const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
-  const {
-    link,
-    item,
-    language,
+const EditLinkPanel: FC<EditLinkPanelProps> = ({
+  ref,
+  link,
+  item,
+  language,
 
-    visible,
-    setIsVisible,
+  visible,
+  setIsVisible,
 
-    editExternalLink,
-    setExternalLink,
-    setLinkParams,
+  editExternalLink,
+  setExternalLink,
+  setLinkParams,
 
-    currentDeviceType,
-    passwordSettings,
-    getPortalPasswordSettings,
-    updateLink,
-  } = props;
-
+  currentDeviceType,
+  passwordSettings,
+  getPortalPasswordSettings,
+  updateLink,
+  searchParams,
+  setSearchParams,
+  withBackButton = false,
+}) => {
   const { t } = useTranslation(["SharingPanel", "Common", "Files"]);
 
   const itemId = item.id;
@@ -126,7 +135,6 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
     return getAccessOptions(t, item.availableExternalRights);
   }, [t, item]);
 
-  const [searchParams, setSearchParams] = useSearchParams();
   const linkAccessOptions = useMemo(() => getShareOptions(t), [t]);
   const [unsavedChangesDialogVisible, setUnsavedChangesDialog] =
     useState(false);
@@ -182,7 +190,9 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
 
   const onDenyDownloadChange = () => setDenyDownload(!denyDownload);
 
-  const onClose = useCallback(() => setIsVisible(false), [setIsVisible]);
+  const onClose = useCallback(() => {
+    setIsVisible(false);
+  }, [setIsVisible]);
 
   const onClosePanel = () => {
     if (hasChanges) {
@@ -258,7 +268,12 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
     async (updatedLink: TFileLink) => {
       if (isRoom(item)) {
         const response = await editExternalLink(itemId.toString(), updatedLink);
-        setExternalLink(response, searchParams, setSearchParams, isCustomRoom);
+        setExternalLink?.(
+          response,
+          searchParams,
+          setSearchParams,
+          isCustomRoom,
+        );
         setLinkParams({ link: response, item });
         copyRoomShareLink(response, t);
         return response;
@@ -437,12 +452,25 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
   );
   const disabledDenyDownload = link?.canEditDenyDownload === false;
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      hasChanges: () => hasChanges,
+      openChangesDialog: () => setUnsavedChangesDialog(true),
+    }),
+    [hasChanges, setUnsavedChangesDialog],
+  );
+
   const editLinkPanelComponent = (
     <>
       <UnsavedChangesDialog
         visible={unsavedChangesDialogVisible}
         onClose={onCloseUnsavedChangesDialog}
-        onCloseEditLinkPanel={onClose}
+        onCancel={onCloseUnsavedChangesDialog}
+        onConfirm={() => {
+          onCloseUnsavedChangesDialog();
+          onClose();
+        }}
       />
 
       <ModalDialog
@@ -452,6 +480,8 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
         withoutPadding
         visible={visible}
         onClose={onClosePanel}
+        onBackClick={onClosePanel}
+        isBackButton={withBackButton}
         displayType={ModalDialogType.aside}
       >
         <ModalDialog.Header>
@@ -557,6 +587,8 @@ const EditLinkPanel: FC<EditLinkPanelProps> = (props) => {
 };
 
 export default EditLinkPanel;
+
+export type { EditLinkPanelRef };
 
 // export default inject(
 //   /**

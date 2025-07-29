@@ -48,6 +48,7 @@ import {
 import { TTranslation } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
+import { zIndex } from "@docspace/shared/themes";
 
 import {
   StyledSubHeader,
@@ -291,7 +292,7 @@ const InviteInput = ({
             showDisabledItems
             eventTypes="click"
             withBackdrop={false}
-            zIndex={399}
+            zIndex={zIndex.backdrop}
             className="add-manually-dropdown"
             {...dropDownMaxHeight}
             isRequestRunning={searchRequestRunning}

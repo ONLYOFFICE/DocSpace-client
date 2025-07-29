@@ -41,6 +41,8 @@ import {
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
 import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
+import { zIndex } from "@docspace/shared/themes";
+
 import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
@@ -277,7 +279,7 @@ const EditLinkPanel = (props) => {
       visible={visible}
       onClose={onClosePanel}
       isLarge
-      zIndex={310}
+      zIndex={zIndex.modal}
       withBodyScroll
       withoutPadding
     >

@@ -59,6 +59,7 @@ import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { zIndex } from "@docspace/shared/themes";
 import {
   StyledSubHeader,
   StyledLink,
@@ -672,7 +673,7 @@ const InviteInput = ({
             showDisabledItems
             eventTypes="click"
             withBackdrop={false}
-            zIndex={399}
+            zIndex={zIndex.backdrop}
             className="add-manually-dropdown"
             {...dropDownMaxHeight}
             isRequestRunning={searchRequestRunning}

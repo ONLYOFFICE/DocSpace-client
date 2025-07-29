@@ -29,6 +29,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import { RoomsType } from "@docspace/shared/enums";
+import { zIndex } from "@docspace/shared/themes";
 
 const CreateRoomConfirmDialog = ({
   t,
@@ -57,7 +58,7 @@ const CreateRoomConfirmDialog = ({
       visible={visible || confirmDialogIsLoading}
       onClose={onClose}
       isLarge
-      zIndex={310}
+      zIndex={zIndex.modal}
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>{bodyText}</ModalDialog.Body>

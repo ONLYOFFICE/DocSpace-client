@@ -34,6 +34,8 @@ import RoomSelector from "@docspace/shared/selectors/Room";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
+import { zIndex } from "@docspace/shared/themes";
+
 import { StyledBodyWrapper } from "./StyledComponents";
 
 const RoomsSelectorInput = (props) => {
@@ -129,13 +131,13 @@ const RoomsSelectorInput = (props) => {
         visible={isPanelVisible}
         isAside
         withBackground
-        zIndex={309}
+        zIndex={zIndex.backdrop}
         onClick={onClose}
       />
       <Aside
         visible={isPanelVisible}
         withoutBodyScroll
-        zIndex={310}
+        zIndex={zIndex.overlay}
         onClose={onClose}
         withoutHeader
       >

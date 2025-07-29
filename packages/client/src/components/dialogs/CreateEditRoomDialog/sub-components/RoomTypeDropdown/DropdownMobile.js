@@ -65,7 +65,7 @@ const DropdownMobile = ({
             withBackground
             withoutBlur={false}
             isAside
-            zIndex={450}
+            zIndex={zIndex.backdrop}
           />
           {!forceHideDropdown ? (
             <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>

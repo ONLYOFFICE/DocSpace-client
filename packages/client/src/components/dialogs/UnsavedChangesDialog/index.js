@@ -31,6 +31,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { zIndex } from "@docspace/shared/themes";
 
 const UnsavedChangesDialogComponent = (props) => {
   const {
@@ -68,7 +69,7 @@ const UnsavedChangesDialogComponent = (props) => {
       visible={visible}
       onClose={onClose}
       displayType="modal"
-      zIndex={401}
+      zIndex={zIndex.modal}
     >
       <ModalDialog.Header>
         {t("Common:YouHaveUnsavedChanges")}

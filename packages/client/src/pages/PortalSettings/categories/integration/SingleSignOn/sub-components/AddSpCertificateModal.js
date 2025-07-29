@@ -32,6 +32,7 @@ import { Link } from "@docspace/shared/components/link";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
+import { zIndex } from "@docspace/shared/themes";
 
 import ModalComboBox from "./ModalComboBox";
 import StyledBodyContent from "../styled-containers/StyledModalDialog";
@@ -57,7 +58,7 @@ const AddSpCertificateModal = (props) => {
 
   return (
     <ModalDialog
-      zIndex={310}
+      zIndex={zIndex.modal}
       isLoading={!ready}
       autoMaxHeight
       autoMaxWidth

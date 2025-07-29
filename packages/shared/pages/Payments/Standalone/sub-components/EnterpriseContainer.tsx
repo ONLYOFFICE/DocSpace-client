@@ -25,22 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
-import { Text } from "../../../components/text";
+import { Text } from "../../../../components/text";
+import { Link, LinkTarget } from "../../../../components/link";
 
-import { ButtonContainer } from "./sub-components/ButtonContainer";
-import { TariffTitleContainer } from "./sub-components/TariffTitleContainer";
+import { ButtonContainer } from "./ButtonContainer";
+import { TariffTitleContainer } from "./TariffTitleContainer";
 
-import { BenefitsContainer } from "./BenefitsContainer";
+import { BenefitsContainer } from "../../common/BenefitsContainer";
+import { IPaymentsProps } from "../Standalone.types";
+import styles from "../Standalone.module.scss";
 
-import { StyledEnterpriseComponent } from "./Payments.styled";
-import { IPaymentsProps } from "./Payments.types";
-
-export const TrialContainer = ({
+export const EnterpriseContainer = ({
+  salesEmail,
+  isLicenseDateExpired,
   isDeveloper,
   buyUrl,
-  isLicenseDateExpired,
   isTrial,
   trialDaysLeft,
   paymentDate,
@@ -50,9 +51,9 @@ export const TrialContainer = ({
   const { t } = useTranslation("Common");
 
   return (
-    <StyledEnterpriseComponent>
+    <div className={styles.enterpriseComponent}>
       <Text fontWeight={700} fontSize="16px">
-        {t("ActivateSwithToProHeader", {
+        {t("ActivateRenewSubscriptionHeader", {
           license: isDeveloper
             ? t("Common:DeveloperLicense")
             : t("Common:EnterpriseLicense"),
@@ -68,15 +69,44 @@ export const TrialContainer = ({
         logoText={logoText}
       />
 
-      <BenefitsContainer
-        isTrial={isTrial}
-        isEnterprise={isEnterprise}
-        isDeveloper={isDeveloper}
-      />
-      <Text fontSize="14px" className="payments_renew-subscription">
-        {t("ActivatePurchaseBuyLicense")}
+      {isLicenseDateExpired ? (
+        <BenefitsContainer
+          isTrial={isTrial}
+          isEnterprise={isEnterprise}
+          isDeveloper={isDeveloper}
+        />
+      ) : null}
+
+      {isLicenseDateExpired ? <BenefitsContainer /> : null}
+      <Text fontSize="14px" className={styles.paymentsRenewSubscription}>
+        {isLicenseDateExpired
+          ? t("ActivatePurchaseBuyLicense")
+          : t("ActivatePurchaseRenewLicense")}
       </Text>
       <ButtonContainer buyUrl={buyUrl} />
-    </StyledEnterpriseComponent>
+
+      <div className={styles.paymentsSupport}>
+        <Text>
+          <Trans
+            t={t}
+            i18nKey="ActivateRenewDescr"
+            ns="Common"
+            values={{ email: salesEmail }}
+            components={{
+              1: (
+                <Link
+                  key="activate-renew-descr-key"
+                  fontWeight="600"
+                  target={LinkTarget.blank}
+                  tag="a"
+                  href={`mailto:${salesEmail}`}
+                  color="accent"
+                />
+              ),
+            }}
+          />
+        </Text>
+      </div>
+    </div>
   );
 };

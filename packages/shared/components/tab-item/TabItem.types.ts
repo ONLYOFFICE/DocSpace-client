@@ -24,79 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { globalColors } from "@docspace/shared/themes";
-import styled from "styled-components";
+import React from "react";
 
-const StyledWatermark = styled.div`
-  margin-top: 16px;
-
-  .watermark-title {
-    margin: 16px 0 8px 0;
-  }
-  .title-without-top {
-    margin-top: 0px;
-  }
-  .watermark-checkbox {
-    margin: 18px 0 0 0;
-  }
-
-  .options-wrapper {
-    display: grid;
-    grid-template-rows: 56px 56px;
-    gap: 16px;
-
-    .options {
-      color: ${(props) => props.theme.comboBox.label.selectedColor};
-    }
-  }
-
-  .image-wrapper {
-    display: grid;
-    grid-template-columns: 216px auto;
-    gap: 16px;
-
-    .image-description {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
-
-      .image-watermark_text {
-        margin-bottom: 8px;
-      }
-    }
-
-    .image-watermark_wrapper {
-      width: 216px;
-      height: 216px;
-      border: 1px solid ${globalColors.grayLightMid};
-
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 88%;
-        height: 88%;
-        transform: ${(props) =>
-          `rotate(${props.rotate}deg) scale(${props.scale})`};
-
-        opacity: 0.4;
-        margin: auto;
-      }
-    }
-  }
-
-  .watermark-tab_items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-bottom: 20px;
-  }
-`;
-const StyledBody = styled.div`
-  .types-content {
-  }
-`;
-
-export { StyledWatermark, StyledBody };
+export type TTabItemProps = {
+  /** Tab item text. */
+  label: string | React.ReactNode;
+  /** Callback function when tab is selected. */
+  onSelect?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  /** Determines if the tab is currently active. */
+  isActive?: boolean;
+  /** Determines if the tab is disabled and cannot be interacted with. */
+  isDisabled?: boolean;
+  /** Allows the tab to be deselected, resulting in no active tab. */
+  allowNoSelection?: boolean;
+  /** Enables multi-select functionality */
+  withMultiSelect?: boolean;
+  /** Sets a tab class name */
+  className?: string;
+};

@@ -1164,12 +1164,13 @@
   --tabs-background-color-primary: #{$white};
 
   /* Secondary tabs */
-  --tabs-text-color-secondary: #{$black};
-  --tabs-active-text-color-secondary: #{$white};
-  --tabs-background-color-secondary: #{$white};
-  --tabs-hover-background-color-secondary: #{$light-gray-hover};
+  --tabs-text-color-secondary: #{$light-gray-dark};
+  --tabs-active-text-color-secondary: #{$black};
+  --tabs-background-color-secondary: #{$light-gray-hover};
+  --tabs-hover-background-color-secondary: #{$gray-light-mid};
   --tabs-pressed-background-color-secondary: #{$gray-light-mid};
-  --tabs-active-background-color-secondary: #{$blue-light-mid};
+  --tabs-active-background-color-secondary: #{$white};
+  --tabs-hover-background-icon-color-secondary: #{$black};
 }
 
 /* Dark theme variables */
@@ -1185,12 +1186,13 @@
   --tabs-background-color-primary: #{$black};
 
   /* Secondary tabs */
-  --tabs-text-color-secondary: #{$white};
-  --tabs-active-text-color-secondary: #{$black};
-  --tabs-background-color-secondary: #{$black};
-  --tabs-hover-background-color-secondary: #{$gray-dark-strong};
+  --tabs-text-color-secondary: #{$dark-gray-dark};
+  --tabs-active-text-color-secondary: #{$white};
+  --tabs-background-color-secondary: #{$dark-gray-light};
+  --tabs-hover-background-color-secondary: #{$gray-dark-mid};
   --tabs-pressed-background-color-secondary: #{$dark-gray-light};
-  --tabs-active-background-color-secondary: #{$white};
+  --tabs-active-background-color-secondary: #{$black};
+  --tabs-hover-background-icon-color-secondary: #{$white};
 }
 
 .light {
@@ -2478,6 +2480,18 @@
   --quantity-picker-track-number: #{$gray-dark};
   --quantity-picker-rectangle-color: #{$light-dark-gray-hover};
   --quantity-picker-warning-color: #{$dark-error-status};
+}
+
+.light {
+  --tab-item-selected-background-color: var(--accent-main, #{$light-blue-main});
+  --tab-item-selected-item-color: #{$white};
+  --tab-item-tag-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --tab-item-selected-background-color: #{$white};
+  --tab-item-selected-item-color: #{$black};
+  --tab-item-tag-border: 1px solid #{$gray-dark-strong};
 }
 
 .light {

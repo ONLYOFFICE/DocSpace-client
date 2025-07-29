@@ -150,11 +150,13 @@ const AdManagementComponent = ({
             id: "disable",
             label: t("Common:Disable"),
             value: 0,
+            dataTestId: "ad_management_disable",
           },
           {
             id: "enable",
             label: t("Common:Enable"),
             value: 1,
+            dataTestId: "ad_management_enable",
           },
         ]}
         selected={type}
@@ -171,6 +173,8 @@ const AdManagementComponent = ({
         displaySettings
         hasScroll={false}
         isSaving={isSaving}
+        saveButtonDataTestId="ad_management_save_button"
+        cancelButtonDataTestId="ad_management_cancel_button"
       />
     </div>
   );

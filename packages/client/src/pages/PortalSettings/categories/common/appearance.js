@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
+import LightSvgUrl from "PUBLIC_DIR/images/icons/16/light.svg?url";
+import DarkSvgUrl from "PUBLIC_DIR/images/icons/16/dark.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
@@ -155,6 +157,7 @@ const Appearance = (props) => {
             themePreview="Light"
           />
         ),
+        iconName: LightSvgUrl,
       },
       {
         id: "dark-theme",
@@ -168,6 +171,7 @@ const Appearance = (props) => {
             themePreview="Dark"
           />
         ),
+        iconName: DarkSvgUrl,
       },
     ],
     [previewAccent, selectThemeId, colorCheckImg, tReady],
@@ -707,6 +711,7 @@ const Appearance = (props) => {
                   style={{ background: item.main?.accent }}
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
+                  data-testid={`appearance_standard_theme_${item.id}`}
                 >
                   {selectThemeId === item.id ? (
                     <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
@@ -734,6 +739,7 @@ const Appearance = (props) => {
                     colorCheckImgHover={colorCheckImgHover}
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
+                    data-testid={`appearance_custom_theme_${item.id}`}
                   >
                     {selectThemeId === item.id ? (
                       <ReactSVG className="check-img" src={CheckWhiteSvgUrl} />
@@ -748,6 +754,7 @@ const Appearance = (props) => {
               data-tooltip-id="theme-add"
               data-tip="tooltip"
               className="theme-add"
+              data-testid="appearance_add_theme"
               onClick={onAddTheme}
             />
             {!abilityAddTheme ? (
@@ -782,6 +789,7 @@ const Appearance = (props) => {
           {t("Common:Preview")}
           <HelpButton
             place="right"
+            dataTestId="appearance_preview_help_button"
             tooltipContent={
               <div>
                 <Text fontSize="12px" fontWeight={400}>
@@ -792,6 +800,7 @@ const Appearance = (props) => {
                   type="page"
                   href={appearanceBlockHelpUrl}
                   target="_blank"
+                  dataTestId="appearance_preview_help_button_link"
                 >
                   {t("Common:LearnMore")}
                 </Link>
@@ -804,6 +813,8 @@ const Appearance = (props) => {
           type={TabsTypes.Secondary}
           onSelect={(e) => setSelectedItemId(e.id)}
           selectedItemId={selectedItemId}
+          isLoading={!tReady}
+          scaled
         />
 
         <div className="buttons-container">
@@ -814,6 +825,7 @@ const Appearance = (props) => {
             primary
             size={buttonSize}
             isDisabled={isDisabledSaveButton}
+            testId="appearance_save_button"
           />
 
           <Button
@@ -822,6 +834,7 @@ const Appearance = (props) => {
             onClick={onClickEdit}
             size={buttonSize}
             isDisabled={isDisabledEditButton}
+            testId="appearance_edit_button"
           />
           {isShowDeleteButton ? (
             <Button
@@ -830,6 +843,7 @@ const Appearance = (props) => {
               onClick={onOpenDialogDelete}
               size={buttonSize}
               isDisabled={isDisabledDeleteButton}
+              testId="appearance_delete_button"
             />
           ) : null}
         </div>

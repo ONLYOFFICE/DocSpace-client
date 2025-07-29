@@ -32,7 +32,14 @@ import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
 
-export const CodeToInsert = ({ t, codeBlock, config, theme, scriptUrl }) => {
+export const CodeToInsert = ({
+  t,
+  tReady,
+  codeBlock,
+  config,
+  theme,
+  scriptUrl,
+}) => {
   const html = (
     <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">
@@ -146,10 +153,13 @@ export const CodeToInsert = ({ t, codeBlock, config, theme, scriptUrl }) => {
 
   return (
     <Tabs
+      layoutId="codeToInsert"
+      hotkeysId="codeToInsert"
       type={TabsTypes.Secondary}
       items={tabs}
       selectedItemId={selectedItemId}
       onSelect={(e) => setSelectedItemId(e.id)}
+      isLoading={!tReady}
     />
   );
 };

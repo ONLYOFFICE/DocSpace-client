@@ -24,21 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/**
- * Fixes SVG icons that have clip-path issues by removing clip-path attributes
- * and corresponding defs sections that can cause visual clipping when scaled
- *
- * @param svgData - Raw SVG string data
- * @returns Processed SVG string with clip-path issues fixed
- */
-export const fixSvgClipPath = (svgData: string): string => {
-  if (!svgData) return svgData;
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
-  if (svgData.includes('clip-path="url(#')) {
-    let processed = svgData.replace(/clip-path="[^"]*"/gi, "");
-    processed = processed.replace(/<defs>.*?<\/defs>/gi, "");
-    return processed;
+.tabItem {
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border: var(--tab-item-tag-border);
+  border-radius: 16px;
+
+  box-sizing: border-box;
+
+  padding: 4px 16px;
+
+  cursor: pointer;
+
+  &.active {
+    background: var(--tab-item-selected-background-color);
+    border-color: var(--tab-item-selected-background-color);
+
+    &:hover {
+      background: var(--tab-item-selected-background-color);
+      border-color: var(--tab-item-selected-background-color);
+    }
   }
 
-  return svgData;
-};
+  &.disabled:not(&.active) {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  --webkit-tap-highlight-color: #{colors.$tap-highlight};
+}
+
+.tabItemText {
+  height: 20px;
+
+  &.active {
+    font-weight: 600;
+    color: var(--tab-item-selected-item-color);
+  }
+}

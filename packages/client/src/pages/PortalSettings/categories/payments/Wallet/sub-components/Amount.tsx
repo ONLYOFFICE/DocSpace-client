@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
-import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
+import { TabItem } from "@docspace/shared/components/tab-item";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
@@ -56,10 +56,10 @@ const Amount = (props: AmountProps) => {
   } = props;
 
   const { amount, setAmount } = useAmountValue();
-
+  const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
   const { t } = useTranslation("Payments");
 
-  const amountTabs = () => {
+  const getAmountTabs = () => {
     const amounts = [10, 20, 30, 50, 100];
     return amounts.map((item) => ({
       name: `+${formatWalletCurrency!(item, 0)}`,
@@ -70,12 +70,14 @@ const Amount = (props: AmountProps) => {
     }));
   };
 
-  const onSelectAmount = (data: TTabItem) => {
+  const onSelectAmount = (e: React.MouseEvent<HTMLDivElement>) => {
+    const itemId = e.currentTarget.dataset.id;
     const currentAmount = amount ? parseInt(amount, 10) : 0;
-    const selectedValue = parseInt(data.id, 10);
+    const selectedValue = parseInt(itemId!, 10);
     const newTotal = (currentAmount + selectedValue).toString();
 
     const amountValue = newTotal.length <= MAX_LENGTH ? newTotal : amount;
+    setSelectedAmount(itemId);
     setAmount(amountValue);
   };
 
@@ -95,6 +97,8 @@ const Amount = (props: AmountProps) => {
     );
   };
 
+  const amountTabs = getAmountTabs();
+
   return (
     <div className={styles.amountContainer}>
       <div data-tooltip-id="iconTooltip">
@@ -106,14 +110,18 @@ const Amount = (props: AmountProps) => {
           >
             {t("AmountSelection")}
           </Text>
-          <Tabs
-            items={amountTabs()}
-            selectedItemId=""
-            onSelect={onSelectAmount}
-            type={TabsTypes.Secondary}
-            allowNoSelection
-            withoutStickyIntend
-          />
+          <div className={styles.amountTabItemsContainer}>
+            {amountTabs.map((item) => (
+              <TabItem
+                key={item.id}
+                data-id={item.id}
+                label={item.name}
+                isActive={selectedAmount === item.id}
+                onSelect={onSelectAmount}
+                isDisabled={item.isDisabled}
+              />
+            ))}
+          </div>
         </div>
         <Text fontWeight={600} className={styles.amountTitle}>
           {t("Amount")}

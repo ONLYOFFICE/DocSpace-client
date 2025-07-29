@@ -24,6 +24,11 @@ pre-push:
       skip_empty: true
       follow: true
       skip_on_fail: false
+    zIndex:
+      run: npm --prefix ./common/tests run test:zIndex
+      skip_empty: true
+      follow: true
+      skip_on_fail: false
     dependencies:
       run: npm --prefix ./common/tests run test:dependencies
       skip_empty: true

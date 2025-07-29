@@ -244,7 +244,14 @@ const FilesView = ({
         }
         {...roomMembersProps}
       />
-      <div style={{ opacity: isLoadingSuspense ? 0.5 : 1 }}>{getView()}</div>
+      <div
+        style={{
+          opacity: isLoadingSuspense ? 0.5 : 1,
+          pointerEvents: isLoadingSuspense ? "none" : "auto",
+        }}
+      >
+        {getView()}
+      </div>
     </>
   );
 };

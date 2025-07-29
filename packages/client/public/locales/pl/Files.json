@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Starsze pliki, które przekroczyły swój okres ważności, zostaną usunięte",
   "LimitByTimePeriod": "Ograniczenie czasowe",
   "LimitTimeBlockCustomRoomDescription": "W pokoju niestandardowym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu.",
-  "LimitTimeBlockFormRoomDescription": "W pokoju do wypełniania formularzy link główny jest ważny przez czas nieograniczony.",
   "LimitTimeBlockPublicRoomDescription": "W pokoju publicznym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu.",
   "LinkDeletedSuccessfully": "Link został pomyślnie usunięty",
   "LinkForPortalUsers": "Link dla użytkowników {{productName}}",

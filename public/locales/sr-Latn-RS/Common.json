@@ -863,5 +863,6 @@
   "YourLogo": "Vaš logo",
   "YourTurn": "Vaš red",
   "Viewer": "Pregledač",
-  "ManageNotifications": "Upravljaj"
+  "ManageNotifications": "Upravljaj",
+  "LimitTimeBlockFormRoomDescription": "U sobi za popunjavanje obrazaca, glavni link važi neograničeno."
 }

@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Các tập tin cũ hơn vượt quá thời gian tồn tại sẽ bị xóa",
   "LimitByTimePeriod": "Giới hạn theo khoảng thời gian",
   "LimitTimeBlockCustomRoomDescription": "Trong phòng Tùy chỉnh, liên kết chính có giá trị trong một khoảng thời gian không giới hạn. Bạn có thể tạo các liên kết bổ sung với giới hạn thời gian.",
-  "LimitTimeBlockFormRoomDescription": "Trong phòng Điền Biểu mẫu, liên kết chính có giá trị trong một khoảng thời gian không giới hạn.",
   "LimitTimeBlockPublicRoomDescription": "Trong phòng công cộng, liên kết chính có giá trị trong một khoảng thời gian không giới hạn. Bạn có thể tạo các liên kết bổ sung với giới hạn thời gian. ",
   "LinkDeletedSuccessfully": "Đã xóa liên kết thành công",
   "LinkForPortalUsers": "Liên kết dành cho người dùng {{productName}}",

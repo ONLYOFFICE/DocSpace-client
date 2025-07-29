@@ -872,5 +872,6 @@
   "YourLogo": "Vaše logo",
   "YourTurn": "Ste na rade",
   "Viewer": "Prehliadač",
-  "ManageNotifications": "Spravovať"
+  "ManageNotifications": "Spravovať",
+  "LimitTimeBlockFormRoomDescription": "V Miestnosti na vyplňovanie formulárov je hlavný odkaz platný na neobmedzený čas. "
 }

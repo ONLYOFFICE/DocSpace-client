@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Yaşam süresini aşmış eski dosyalar silinecek",
   "LimitByTimePeriod": "Zaman aralığına göre limitlendirme",
   "LimitTimeBlockCustomRoomDescription": "Özel bir odada ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz.",
-  "LimitTimeBlockFormRoomDescription": "Form Doldurma odasında ana bağlantı süresiz olarak geçerlidir.",
   "LimitTimeBlockPublicRoomDescription": "Herkese Açık odada ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz.",
   "LinkDeletedSuccessfully": "Bağlantı başarıyla silindi",
   "LinkForPortalUsers": "{{productName}} kullanıcıları için bağlantı",

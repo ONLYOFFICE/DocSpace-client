@@ -872,5 +872,6 @@
   "YourLogo": "Logonuz",
   "YourTurn": "Sıra sizde",
   "Viewer": "Görüntüleyici",
-  "ManageNotifications": "Yönet"
+  "ManageNotifications": "Yönet",
+  "LimitTimeBlockFormRoomDescription": "Form Doldurma odasında ana bağlantı süresiz olarak geçerlidir."
 }

@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Ältere Dateien mit überschrittener Lebensdauer werden gelöscht",
   "LimitByTimePeriod": "Zeitlich begrenzen",
   "LimitTimeBlockCustomRoomDescription": "In einem benutzerdefinierten Raum ist der Hauptlink für einen unbegrenzten Zeitraum gültig. Sie können zusätzliche Links mit zeitlicher Begrenzung erstellen.",
-  "LimitTimeBlockFormRoomDescription": "In einem Raum zum Ausfüllen von Formularen ist der Hauptlink für einen unbegrenzten Zeitraum gültig.",
   "LimitTimeBlockPublicRoomDescription": "In einem öffentlichen Raum ist der Hauptlink für einen unbegrenzten Zeitraum gültig. Sie können zusätzliche Links mit zeitlicher Begrenzung erstellen.",
   "LinkDeletedSuccessfully": "Link erfolgreich gelöscht",
   "LinkForPortalUsers": "Link für {{productName}}-Benutzer",

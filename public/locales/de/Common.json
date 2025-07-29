@@ -872,5 +872,6 @@
   "YourLogo": "Ihr Logo",
   "YourTurn": "Jetzt sind Sie dran",
   "Viewer": "Viewer",
-  "ManageNotifications": "Verwalten"
+  "ManageNotifications": "Verwalten",
+  "LimitTimeBlockFormRoomDescription": "In einem Raum zum Ausfüllen von Formularen ist der Hauptlink für einen unbegrenzten Zeitraum gültig."
 }

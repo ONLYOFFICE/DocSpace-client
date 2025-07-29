@@ -871,5 +871,6 @@
   "YourLogo": "Jūsu logotips",
   "YourTurn": "Jūsu kārta",
   "Viewer": "Skatītājs",
-  "ManageNotifications": "Pārvaldīt"
+  "ManageNotifications": "Pārvaldīt",
+  "LimitTimeBlockFormRoomDescription": "Veidlapu aizpildīšanas telpā galvenā saite ir derīga neierobežotu laiku."
 }

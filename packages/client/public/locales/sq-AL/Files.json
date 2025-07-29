@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Skedarët e vjetër me jetëgjatësi të tejkaluar do të fshihen",
   "LimitByTimePeriod": "Kufizoni sipas periudhës kohore",
   "LimitTimeBlockCustomRoomDescription": "Në një dhomë të personalizuar, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar. Ju mund të krijoni lidhje shtesë me afat kohor.",
-  "LimitTimeBlockFormRoomDescription": "Në një dhomë të plotësimit të formularit, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar.",
   "LimitTimeBlockPublicRoomDescription": "Në një dhomë publike, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar. Ju mund të krijoni lidhje shtesë me afat kohor.",
   "LinkDeletedSuccessfully": "Lidhja u fshi me sukses",
   "LinkForPortalUsers": "Lidhja për përdoruesit e {{productName}}",

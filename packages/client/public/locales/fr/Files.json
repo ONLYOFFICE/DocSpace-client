@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Les fichiers plus anciens dont la durée de vie est dépassée seront supprimés",
   "LimitByTimePeriod": "Limite par période",
   "LimitTimeBlockCustomRoomDescription": "Dans une salle personnalisée, le lien principal est valable pour une durée illimitée. Vous pouvez créer des liens supplémentaires avec une limite de temps.",
-  "LimitTimeBlockFormRoomDescription": "Dans une salle de remplissage de formulaires, le lien principal est valable pour une durée illimitée.",
   "LimitTimeBlockPublicRoomDescription": "Dans une salle publique, le lien principal est valable pour une durée illimitée. Vous pouvez créer des liens supplémentaires avec une limite de temps.",
   "LinkDeletedSuccessfully": "Le lien a été supprimé avec succès",
   "LinkForPortalUsers": "Lien pour les utilisateurs de {{productName}}",

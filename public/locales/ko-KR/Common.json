@@ -872,5 +872,6 @@
   "YourLogo": "로고",
   "YourTurn": "고객님의 차례입니다",
   "Viewer": "뷰어",
-  "ManageNotifications": "관리"
+  "ManageNotifications": "관리",
+  "LimitTimeBlockFormRoomDescription": "양식 작성 룸에서 메인 링크는 무제한의 기간 동안 유효합니다."
 }

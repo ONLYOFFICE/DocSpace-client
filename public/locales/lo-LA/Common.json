@@ -859,5 +859,6 @@
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
   "Viewer": "ຜູ້ຊົມ",
-  "ManageNotifications": "ຈັດການ"
+  "ManageNotifications": "ຈັດການ",
+  "LimitTimeBlockFormRoomDescription": "ໃນຫ້ອງຕື່ມແບບຟອມ, ລິ້ງຕົ້ນເອກສາມາດໃຊ້ໄດ້ຕະຫຼອດເວລາ."
 }

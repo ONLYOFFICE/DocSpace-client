@@ -872,5 +872,6 @@
   "YourLogo": "Vaše logo",
   "YourTurn": "Jste na řadě",
   "Viewer": "Prohlížeč",
-  "ManageNotifications": "Správa"
+  "ManageNotifications": "Správa",
+  "LimitTimeBlockFormRoomDescription": "V místnosti pro vyplňování formulářů je hlavní odkaz platný po neomezenou dobu. "
 }

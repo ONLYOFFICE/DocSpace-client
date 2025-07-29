@@ -872,5 +872,6 @@
   "YourLogo": "Το λογότυπό σας",
   "YourTurn": "Η σειρά σας",
   "Viewer": "Πρόγραμμα προβολής",
-  "ManageNotifications": "Διαχείριση"
+  "ManageNotifications": "Διαχείριση",
+  "LimitTimeBlockFormRoomDescription": "Σε ένα δωμάτιο Συμπλήρωσης Φορμών, ο κύριος σύνδεσμος ισχύει για απεριόριστο χρονικό διάστημα."
 }

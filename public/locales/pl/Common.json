@@ -872,5 +872,6 @@
   "YourLogo": "Twoje Logo",
   "YourTurn": "Twoja kolej",
   "Viewer": "Przeglądarka",
-  "ManageNotifications": "Zarządzaj"
+  "ManageNotifications": "Zarządzaj",
+  "LimitTimeBlockFormRoomDescription": "W pokoju do wypełniania formularzy link główny jest ważny przez czas nieograniczony."
 }

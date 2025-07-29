@@ -863,5 +863,6 @@
   "YourLogo": "Votre logo",
   "YourTurn": "Votre tour",
   "Viewer": "Lecteur",
-  "ManageNotifications": "Gérer"
+  "ManageNotifications": "Gérer",
+  "LimitTimeBlockFormRoomDescription": "Dans une salle de remplissage de formulaires, le lien principal est valable pour une durée illimitée."
 }

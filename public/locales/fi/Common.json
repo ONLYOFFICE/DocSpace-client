@@ -872,5 +872,6 @@
   "YourLogo": "Logosi",
   "YourTurn": "Sinun vuorosi",
   "Viewer": "Esikatselu",
-  "ManageNotifications": "Hallitse"
+  "ManageNotifications": "Hallitse",
+  "LimitTimeBlockFormRoomDescription": "Lomakkeen täyttöhuoneessa päälinkki on voimassa rajoittamattoman ajanjakson."
 }

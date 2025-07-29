@@ -872,5 +872,6 @@
   "YourLogo": "O seu logótipo",
   "YourTurn": "A sua vez",
   "Viewer": "Visualizador",
-  "ManageNotifications": "Gerir"
+  "ManageNotifications": "Gerir",
+  "LimitTimeBlockFormRoomDescription": "Numa sala de Preenchimento de Formulários, o link principal é válido por um período de tempo ilimitado."
 }

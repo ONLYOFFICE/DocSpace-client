@@ -872,5 +872,6 @@
   "YourLogo": "您的logo",
   "YourTurn": "轮到您了",
   "Viewer": "仅查看",
-  "ManageNotifications": "管理"
+  "ManageNotifications": "管理",
+  "LimitTimeBlockFormRoomDescription": "在表单填写房间中，主链接的有效期是不限的。"
 }

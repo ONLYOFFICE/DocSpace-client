@@ -883,5 +883,6 @@
   "YourTurn": "Your turn",
   "WhoHasAccess": "Who has access",
   "Viewer": "Viewer",
-  "ManageNotifications": "Manage"
+  "ManageNotifications": "Manage",
+  "LimitTimeBlockFormRoomDescription": "In a Form Filling room, the main link is valid for an unlimited time period."
 }

@@ -872,5 +872,6 @@
   "YourLogo": "Ձեր լոգոն",
   "YourTurn": "Ձեր հերթն է",
   "Viewer": "Դիտող",
-  "ManageNotifications": "Կառավարել"
+  "ManageNotifications": "Կառավարել",
+  "LimitTimeBlockFormRoomDescription": "Ձևաթղթերի լրացման սենյակում հիմնական հղումը գործում է անսահմանափակ ժամկետով:"
 }

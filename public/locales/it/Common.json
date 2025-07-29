@@ -872,5 +872,6 @@
   "YourLogo": "Il tuo logo",
   "YourTurn": "Il tuo turno",
   "Viewer": "Visualizzatore",
-  "ManageNotifications": "Gestisci"
+  "ManageNotifications": "Gestisci",
+  "LimitTimeBlockFormRoomDescription": "In una stanza di compilazione dei moduli, il collegamento principale è valido per un periodo di tempo illimitato."
 }

@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "超过有效期的旧文件将被删除。",
   "LimitByTimePeriod": "按时间段限制",
   "LimitTimeBlockCustomRoomDescription": "在自定义房间中，主链接的有效期是不限的。您可以创建有时效限制的其他链接。",
-  "LimitTimeBlockFormRoomDescription": "在表单填写房间中，主链接的有效期是不限的。",
   "LimitTimeBlockPublicRoomDescription": "在公共房间中，主链接的有效期是不限的。您可以创建有时效限制的其他链接。",
   "LinkDeletedSuccessfully": "链接删除成功",
   "LinkForPortalUsers": "{{productName}}用户的链接",

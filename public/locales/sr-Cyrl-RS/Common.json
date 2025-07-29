@@ -872,5 +872,6 @@
   "YourLogo": "Ваш лого",
   "YourTurn": "Ваш ред",
   "Viewer": "Прегледач",
-  "ManageNotifications": "Управљај"
+  "ManageNotifications": "Управљај",
+  "LimitTimeBlockFormRoomDescription": "У соби за попуњавање образаца, главни линк важи неограничено."
 }

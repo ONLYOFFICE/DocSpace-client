@@ -872,5 +872,6 @@
   "YourLogo": "Ваш логотип",
   "YourTurn": "Ваша очередь",
   "Viewer": "Просмотрщик",
-  "ManageNotifications": "Управление"
+  "ManageNotifications": "Управление",
+  "LimitTimeBlockFormRoomDescription": "В комнате для заполнения форм основная ссылка действительна в течение неограниченного периода времени."
 }

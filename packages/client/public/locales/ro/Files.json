@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "Fișierele mai vechi a căror durata de viață este depășită vor fi șterse",
   "LimitByTimePeriod": "Setare limită de timp",
   "LimitTimeBlockCustomRoomDescription": "În Sala particularizată, link-ul principal rămâne valabil  pentru o perioadă nelimitată de timp. Puteți crea linkuri suplimentare limitate la o anumită perioadă de timp.",
-  "LimitTimeBlockFormRoomDescription": "În Sala de completare a formularelor, link-ul principal rămâne valabil pentru o perioadă nelimitată de timp.",
   "LimitTimeBlockPublicRoomDescription": "În Sala publică, link-ul principal rămâne valabil  pentru o perioadă nelimitată de timp. Puteți crea linkuri suplimentare limitate la o anumită perioadă de timp.",
   "LinkDeletedSuccessfully": "Link-ul a fost șters cu succes",
   "LinkForPortalUsers": "Linkul pentru utilizatorii {{productName}}",

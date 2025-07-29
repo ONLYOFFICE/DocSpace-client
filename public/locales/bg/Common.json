@@ -872,5 +872,6 @@
   "YourLogo": "Вашето лого",
   "YourTurn": "Ваш ред",
   "Viewer": "Зрител",
-  "ManageNotifications": "Управление"
+  "ManageNotifications": "Управление",
+  "LimitTimeBlockFormRoomDescription": "В Стая за попълване на формуляри главният линк е валиден за неограничен период от време."
 }

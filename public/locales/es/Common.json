@@ -872,5 +872,6 @@
   "YourLogo": "Su logotipo",
   "YourTurn": "Su turno",
   "Viewer": "Visor",
-  "ManageNotifications": "Gestionar"
+  "ManageNotifications": "Gestionar",
+  "LimitTimeBlockFormRoomDescription": "En una sala para rellenar formularios, el enlace principal es válido durante un periodo de tiempo ilimitado."
 }

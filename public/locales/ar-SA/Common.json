@@ -872,5 +872,6 @@
   "Diagram": "مخطط",
   "Diagrams": "مخططات",
   "Viewer": "مشاهد",
-  "ManageNotifications": "إدارة"
+  "ManageNotifications": "إدارة",
+  "LimitTimeBlockFormRoomDescription": "في غرفة تعبئة النماذج، يكون الرابط الرئيسي صالحًا لفترة غير محدودة."
 }

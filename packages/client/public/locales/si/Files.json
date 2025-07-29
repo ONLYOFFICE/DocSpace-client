@@ -109,7 +109,6 @@
   "LifetimeDialogDescriptionHeader": "ඉකුත් කාල සීමාව ඉක්මවා ගිය පැරණි ලිපි ඉවත් කරනු ලැබේ.",
   "LimitByTimePeriod": "කාලය අනුව සීමා කරන්න",
   "LimitTimeBlockCustomRoomDescription": "අභිරුචි කාමරයක, ප්‍රධාන සබැඳිය අසීමිත කාල සීමාවක් සඳහා වලංගු වේ. ඔබට කාල සීමාවක් සමඟ අමතර සබැඳි නිර්මාණය කළ හැකිය.",
-  "LimitTimeBlockFormRoomDescription": "පෝරම පිරවීමේ කාමරයකදී, ප්‍රධාන සබැඳිය අසීමිත කාලයක් සඳහා වලංගු වේ.",
   "LimitTimeBlockPublicRoomDescription": "පොදු කාමරයක, ප්‍රධාන සබැඳිය අසීමිත කාල සීමාවක් සඳහා වලංගු වේ. ඔබට කාල සීමාවක් සමඟ අමතර සබැඳි නිර්මාණය කළ හැකිය.",
   "LinkDeletedSuccessfully": "සබැඳිය මැකිණි",
   "LinkForPortalUsers": "{{productName}} පරිශ්‍රීලකයින් සඳහා සබැඳිය",

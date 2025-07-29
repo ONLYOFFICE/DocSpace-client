@@ -872,5 +872,6 @@
   "YourLogo": "Loqonuz",
   "YourTurn": "Sizin növbəniz",
   "Viewer": "İzləyici",
-  "ManageNotifications": "İdarə etmək"
+  "ManageNotifications": "İdarə etmək",
+  "LimitTimeBlockFormRoomDescription": "Forma Doldurma otağında əsas link vaxt məhdudiyyəti olmadan etibarlıdır."
 }

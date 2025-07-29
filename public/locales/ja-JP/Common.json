@@ -872,5 +872,6 @@
   "YourLogo": "あなたのロゴ",
   "YourTurn": "あなたの番です",
   "Viewer": "ビューア",
-  "ManageNotifications": "管理"
+  "ManageNotifications": "管理",
+  "LimitTimeBlockFormRoomDescription": "フォーム記入ルームでは、メインリンクは無制限の時間有効です。"
 }

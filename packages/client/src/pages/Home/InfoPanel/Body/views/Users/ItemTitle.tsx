@@ -123,7 +123,6 @@ const ItemTitle = ({
         <div className={styles.infoWrapper}>
           <Text
             className={styles.infoTextName}
-            noSelect
             title={displayName}
             truncate
             fontSize="16px"
@@ -143,7 +142,6 @@ const ItemTitle = ({
             fontSize="13px"
             fontWeight={600}
             lineHeight="20px"
-            noSelect
           >
             {userSelection.email}
           </Text>

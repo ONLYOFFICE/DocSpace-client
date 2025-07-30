@@ -64,6 +64,7 @@ const MenuItem = ({
     <li
       id={item.id}
       key={item.key}
+      data-testid={item.dataTestId ?? item.key}
       role="none"
       className={className}
       style={{ ...item.style, ...style }}

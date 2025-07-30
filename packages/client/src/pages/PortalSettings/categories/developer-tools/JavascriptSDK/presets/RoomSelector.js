@@ -76,26 +76,31 @@ const RoomSelector = (props) => {
       label: t("AllTypes"),
       roomType: undefined,
       default: true,
+      // dataTestId: "room_type_all_option",
     },
     {
       key: "room-filling-form-collaboration",
       label: t("Common:FormFilingRoomTitle"),
       roomType: RoomsType.FormRoom,
+      // dataTestId: "room_type_form_option",
     },
     {
       key: "room-type-collaboration",
       label: t("Common:CollaborationRoomTitle"),
       roomType: RoomsType.EditingRoom,
+      // dataTestId: "room_type_editing_option",
     },
     {
       key: "room-type-public",
       label: t("Common:PublicRoom"),
       roomType: RoomsType.PublicRoom,
+      // dataTestId: "room_type_public_option",
     },
     {
       key: "room-type-custom",
       label: t("Common:CustomRoomTitle"),
       roomType: RoomsType.CustomRoom,
+      // dataTestId: "room_type_custom_option",
     },
   ];
 
@@ -258,6 +263,7 @@ const RoomSelector = (props) => {
               label={t("Common:Search")}
               onChange={toggleWithSearch}
               isChecked={config.withSearch}
+              dataTestId="search_checkbox"
             />
             <SelectTextInput t={t} config={config} setConfig={setConfig} />
             <CancelTextInput t={t} config={config} setConfig={setConfig} />
@@ -274,6 +280,8 @@ const RoomSelector = (props) => {
               selectedOption={roomType}
               displaySelectedOption
               directionY="top"
+              dataTestId="room_type_combobox"
+              dropDownTestId="room_type_dropdown"
             />
           </ControlsSection>
 

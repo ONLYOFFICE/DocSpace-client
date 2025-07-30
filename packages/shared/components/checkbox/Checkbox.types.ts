@@ -55,6 +55,6 @@ export type CheckboxProps = PickedTextProps &
     helpButton?: React.ReactNode;
     /** Notifies if the error occurs */
     hasError?: boolean;
-    /** Accepts dataTestId */
+    /** Test id for the checkbox */
     dataTestId?: string;
   };

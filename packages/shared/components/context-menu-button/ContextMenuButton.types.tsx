@@ -91,4 +91,5 @@ export interface ContextMenuButtonProps {
   isFill?: boolean;
   zIndex?: number;
   asideHeader?: React.ReactNode;
+  testId?: string;
 }

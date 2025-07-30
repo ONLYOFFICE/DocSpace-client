@@ -25,32 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import styled, { useTheme } from "styled-components";
 
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
-const StyledEmptyScreen = styled(EmptyScreenContainer)`
-  box-sizing: border-box;
-  width: 100%;
-  padding: 45px 3px 0;
-`;
+import styles from "../Members.module.scss";
 
 const EmptyContainer = () => {
   const { t } = useTranslation("Common");
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const imageSrc = theme.isBase
+  const imageSrc = isBase
     ? EmptyScreenPersonSvgUrl
     : EmptyScreenPersonSvgDarkUrl;
 
   return (
-    <StyledEmptyScreen
+    <EmptyScreenContainer
       imageSrc={imageSrc}
       imageAlt="Empty screen image"
       headerText={t("NotFoundMembers")}
       descriptionText={t("NotFoundUsersDescription")}
+      className={styles.emptyScreen}
     />
   );
 };

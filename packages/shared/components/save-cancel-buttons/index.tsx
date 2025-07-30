@@ -52,9 +52,9 @@ const SaveCancelButtons = ({
   additionalClassSaveButton,
   additionalClassCancelButton,
   saveButtonDisabled,
-  getTopComponent,
   saveButtonDataTestId,
   cancelButtonDataTestId,
+  getTopComponent,
 }: SaveCancelButtonProps) => {
   const onKeydown = React.useCallback(
     (e: KeyboardEvent) => {

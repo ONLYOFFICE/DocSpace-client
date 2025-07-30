@@ -876,5 +876,6 @@
   "LimitTimeBlockFormRoomDescription": "In een Kamer voor het invullen van formulieren is de hoofdlink voor onbepaalde tijd geldig.",
   "LimitTimeBlockPublicRoomDescription": "In een Openbare kamer is de hoofdlink voor onbepaalde tijd geldig. U kunt extra links met een tijdslimiet maken.",
   "LimitTimeBlockCustomRoomDescription": "In een Aangepaste ruimte is de hoofdlink voor een onbepaalde tijd geldig. U kunt extra links met een tijdslimiet maken.",
-  "LinkValidUntil": "Deze link is geldig tot"
+  "LinkValidUntil": "Deze link is geldig tot",
+  "ChooseExpirationDate": "Beperk de beschikbaarheidsperiode voor deze link door een vervaldatum in te stellen."
 }

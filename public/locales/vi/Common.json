@@ -876,5 +876,6 @@
   "LimitTimeBlockFormRoomDescription": "Trong phòng Điền Biểu mẫu, liên kết chính có giá trị trong một khoảng thời gian không giới hạn.",
   "LimitTimeBlockPublicRoomDescription": "Trong phòng công cộng, liên kết chính có giá trị trong một khoảng thời gian không giới hạn. Bạn có thể tạo các liên kết bổ sung với giới hạn thời gian. ",
   "LimitTimeBlockCustomRoomDescription": "Trong phòng Tùy chỉnh, liên kết chính có giá trị trong một khoảng thời gian không giới hạn. Bạn có thể tạo các liên kết bổ sung với giới hạn thời gian.",
-  "LinkValidUntil": "Liên kết này sẽ có hiệu lực đến"
+  "LinkValidUntil": "Liên kết này sẽ có hiệu lực đến",
+  "ChooseExpirationDate": "Giới hạn thời gian còn hiệu lực cho liên kết này bằng cách đặt ngày hết hạn."
 }

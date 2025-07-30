@@ -876,5 +876,6 @@
   "LimitTimeBlockFormRoomDescription": "Form Doldurma odasında ana bağlantı süresiz olarak geçerlidir.",
   "LimitTimeBlockPublicRoomDescription": "Herkese Açık odada ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz.",
   "LimitTimeBlockCustomRoomDescription": "Özel bir odada ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz.",
-  "LinkValidUntil": "Bu bağlantı şu tarihe kadar geçerli olacaktır:"
+  "LinkValidUntil": "Bu bağlantı şu tarihe kadar geçerli olacaktır:",
+  "ChooseExpirationDate": "Bir son kullanma tarihi belirleyerek bu bağlantının kullanılabilirlik süresini sınırlandırın."
 }

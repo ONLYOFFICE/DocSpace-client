@@ -31,6 +31,7 @@
 import { AxiosRequestConfig } from "axios";
 
 import moment from "moment";
+import { Nullable } from "types";
 import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
 import { request } from "../client";
 import {
@@ -45,6 +46,8 @@ import {
   TPublicRoomPassword,
   TValidateShareRoom,
   TRoom,
+  TGetRoomMembers,
+  TFeed,
 } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
@@ -89,7 +92,16 @@ export function getRoomInfo(id) {
   });
 }
 
-export function getRoomMembers(id, filter) {
+export async function getRoomMembers(
+  id: string | number,
+  filter: {
+    filterType?: number;
+    filterValue?: string;
+    count?: number;
+    startIndex?: number;
+  },
+  signal?: AbortSignal,
+) {
   let params = "";
 
   const str = toUrlParams(filter);
@@ -98,17 +110,18 @@ export function getRoomMembers(id, filter) {
   const options = {
     method: "get",
     url: `/files/rooms/${id}/share${params}`,
+    signal,
   };
 
-  return request(options).then((res) => {
-    res.items.forEach((item) => {
-      if (item.subjectType === MembersSubjectType.Group) {
-        item.sharedTo.isGroup = true;
-      }
-    });
+  const res = (await request(options)) as TGetRoomMembers;
 
-    return res;
+  res.items.forEach((item) => {
+    if (item.subjectType === MembersSubjectType.Group) {
+      item.sharedTo.isGroup = true;
+    }
   });
+
+  return res;
 }
 
 export function updateRoomMemberRole(id, data) {
@@ -119,16 +132,16 @@ export function updateRoomMemberRole(id, data) {
   };
 
   return request(options).then((res) => {
-    return res;
+    return res as { error?: RoomSecurityError };
   });
 }
 
 export function getHistory(
   selectionType: "file" | "folder",
-  id,
-  requestToken,
-  filter,
-  signal = null,
+  id: number | string,
+  filter: { page: number; startIndex: number; count: number },
+  signal: Nullable<AbortSignal> = null,
+  requestToken?: string,
 ) {
   let params = "";
 
@@ -143,29 +156,7 @@ export function getHistory(
 
   if (requestToken) options.headers = { "Request-Token": requestToken };
 
-  return request(options).then((res) => res);
-}
-
-export function getRoomHistory(id) {
-  const options = {
-    method: "get",
-    url: `/feed/filter?module=rooms&withRelated=true&id=${id}`,
-  };
-
-  return request(options).then((res) => {
-    return res;
-  });
-}
-
-export function getFileHistory(id) {
-  const options = {
-    method: "get",
-    url: `/feed/filter?module=files&withRelated=true&id=${id}`,
-  };
-
-  return request(options).then((res) => {
-    return res;
-  });
+  return request<TFeed>(options).then((res) => res);
 }
 
 export function createRoom(data) {
@@ -633,7 +624,7 @@ export function getTemplateAvailable(id: number) {
     url: `/files/roomtemplate/${id}/public`,
   };
 
-  return request(options);
+  return request(options) as Promise<boolean>;
 }
 
 export function setTemplateAvailable(id: number, isAvailable: boolean) {

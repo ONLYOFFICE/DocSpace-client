@@ -151,6 +151,7 @@ const AccessPortal = (props) => {
         {passwordStrengthSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="password_strength_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -179,6 +180,7 @@ const AccessPortal = (props) => {
         {tfaSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="tfa_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -205,6 +207,7 @@ const AccessPortal = (props) => {
         {trustedMailDomainSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="trusted_mail_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -230,6 +233,7 @@ const AccessPortal = (props) => {
         {limitedDevToolsBlockHelpUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="developer_tools_access_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -267,6 +271,7 @@ const AccessPortal = (props) => {
         {ipSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="ip_security_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -305,6 +310,7 @@ const AccessPortal = (props) => {
         {administratorMessageSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="administrator_message_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}
@@ -330,6 +336,7 @@ const AccessPortal = (props) => {
         {lifetimeSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="session_lifetime_learn_more"
             target="_blank"
             isHovered
             color={currentColorScheme.main?.accent}

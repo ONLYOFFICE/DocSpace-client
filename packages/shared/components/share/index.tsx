@@ -77,8 +77,6 @@ const Share = (props: ShareProps) => {
     infoPanelSelection,
     getPrimaryFileLink,
     selfId,
-    // editFileLink,
-    // addFileLink,
     shareChanged,
     setShareChanged,
     onOpenPanel,
@@ -87,13 +85,14 @@ const Share = (props: ShareProps) => {
     setEditLinkPanelIsVisible,
     setLinkParams,
     setEmbeddingPanelData,
+    fileLinkProps,
   } = props;
 
   const isFolder = infoPanelSelection.isFolder;
 
   const { t } = useTranslation(["Common"]);
-  const [fileLinks, setFileLinks] = useState<TLink[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [fileLinks, setFileLinks] = useState<TLink[]>(fileLinkProps ?? []);
+  const [isLoading, setIsLoading] = useState(!fileLinkProps);
   const [loadingLinks, setLoadingLinks] = useState<(string | number)[]>([]);
 
   const mountedRef = useRef(true);

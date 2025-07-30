@@ -56,11 +56,11 @@ export type AccessItem = { access?: ShareAccessRights };
 export type TLink = TFileLink | { isLoaded: boolean };
 
 export type LinkRowProps = {
-  onAddClick: () => Promise<void>;
+  onAddClick?: () => Promise<void>;
   links: TLink[] | null;
 
   changeShareOption: (item: TOption, link: TFileLink) => void;
-  changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
+  changeAccessOption?: (item: AccessItem, link: TFileLink) => Promise<void>;
 
   changeExpirationOption: (
     link: TFileLink,
@@ -136,7 +136,7 @@ export type ShareProps = {
     expirationDate?: moment.Moment | null,
   ) => Promise<TFileLink>;
 
-  selfId: string;
+  selfId?: string;
   onOpenPanel?: (options: {
     visible: boolean;
     updateAccessLink: () => Promise<void>;
@@ -147,4 +147,5 @@ export type ShareProps = {
   setIsScrollLocked?: (isScrollLocked: boolean) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
   setLinkParams: (linkParams: LinkParamsType) => void;
+  fileLinkProps?: TFileLink[];
 };

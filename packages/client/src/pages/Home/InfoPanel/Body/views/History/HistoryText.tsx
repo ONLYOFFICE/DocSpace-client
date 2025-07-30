@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+
 import { Text } from "@docspace/shared/components/text";
 
 const StyledHistoryText = styled.span`

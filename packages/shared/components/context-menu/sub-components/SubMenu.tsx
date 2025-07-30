@@ -362,7 +362,11 @@ const SubMenu = (props: SubMenuProps) => {
       ));
 
     const label = item.label && (
-      <span className="p-menuitem-text not-selectable" dir="auto">
+      <span
+        className="p-menuitem-text not-selectable"
+        dir="auto"
+        data-testid={item.id}
+      >
         {item.label}
       </span>
     );
@@ -455,6 +459,7 @@ const SubMenu = (props: SubMenuProps) => {
         <li
           id={item.id}
           key={item.key}
+          data-testid={item.dataTestId ?? item.key}
           role="none"
           className={classNames(className, styles.subMenuItem)}
           style={{ ...item.style, ...style }}
@@ -476,6 +481,7 @@ const SubMenu = (props: SubMenuProps) => {
       <li
         id={item.id}
         key={item.key}
+        data-testid={item.dataTestId ?? item.key}
         role="none"
         className={className || ""}
         style={{ ...item.style, ...style }}

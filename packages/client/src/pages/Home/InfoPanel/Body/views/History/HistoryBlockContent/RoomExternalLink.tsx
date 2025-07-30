@@ -25,36 +25,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { decode } from "he";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
-import { TTranslation } from "@docspace/shared/types";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFileLink } from "@docspace/shared/api/files/types";
+import { RoomsType } from "@docspace/shared/enums";
+import { TFeedData } from "@docspace/shared/api/rooms/types";
 
-import { StyledHistoryLink } from "../../../styles/history";
+import DialogsStore from "SRC_DIR/store/DialogsStore";
 
-interface HistoryRoomExternalLinkProps {
-  feedData: TFileLink;
-  t: TTranslation;
-  setEditLinkPanelIsVisible: (value: boolean) => void;
-  setLinkParams: TStore["dialogsStore"]["setLinkParams"];
+import styles from "../History.module.scss";
+
+type HistoryRoomExternalLinkProps = {
+  feedData: TFeedData;
+  roomId?: number | string;
+  canEditLink?: boolean;
+
+  isFormRoom?: boolean;
   withWrapping?: boolean;
-  item: TRoom;
-}
+
+  setEditLinkPanelIsVisible?: DialogsStore["setEditLinkPanelIsVisible"];
+  setLinkParams?: DialogsStore["setLinkParams"];
+};
 
 const HistoryRoomExternalLink = ({
-  t,
-  item,
   feedData,
   setEditLinkPanelIsVisible,
   setLinkParams,
   withWrapping,
 }: HistoryRoomExternalLinkProps) => {
-  const canEditLink = item?.security?.EditRoom ?? false;
+  const { t } = useTranslation(["InfoPanel"]);
 
   const onEditLink = () => {
     if (!feedData.sharedTo) {
@@ -62,15 +64,16 @@ const HistoryRoomExternalLink = ({
       return;
     }
 
-    setLinkParams({
-      item,
+    setLinkParams?.({
+      isEdit: true,
       link: feedData,
     });
-    setEditLinkPanelIsVisible(true);
+    setEditLinkPanelIsVisible?.(true);
   };
 
   return (
-    <StyledHistoryLink
+    <div
+      className={styles.historyLink}
       style={withWrapping ? { display: "inline", wordBreak: "break-all" } : {}}
     >
       {canEditLink ? (
@@ -87,7 +90,7 @@ const HistoryRoomExternalLink = ({
           {decode(feedData.sharedTo?.title ?? "")}
         </Text>
       )}
-    </StyledHistoryLink>
+    </div>
   );
 };
 
@@ -95,9 +98,25 @@ export default inject<TStore>(({ dialogsStore, infoPanelStore }) => {
   const { infoPanelSelection } = infoPanelStore;
   const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
-  return {
-    setLinkParams,
-    setEditLinkPanelIsVisible,
-    item: infoPanelSelection,
-  };
-})(withTranslation(["InfoPanel"])(observer(HistoryRoomExternalLink)));
+  if (!infoPanelSelection || Array.isArray(infoPanelSelection))
+    return { setLinkParams, setEditLinkPanelIsVisible };
+
+  const { id, security } = infoPanelSelection;
+
+  if ("roomType" in infoPanelSelection && "EditRoom" in security) {
+    const { roomType } = infoPanelSelection;
+
+    const { EditRoom } = security;
+
+    const isFormRoom = roomType === RoomsType.FormRoom;
+
+    return {
+      canEditLink: EditRoom,
+      setEditLinkPanelIsVisible,
+      setLinkParams,
+      roomId: id,
+      isFormRoom,
+    };
+  }
+  return { setLinkParams, setEditLinkPanelIsVisible, roomId: id };
+})(observer(HistoryRoomExternalLink));

@@ -57,8 +57,6 @@ class DialogsStore {
 
   versionHistoryStore;
 
-  infoPanelStore;
-
   moveToPanelVisible = false;
 
   restorePanelVisible = false;
@@ -311,7 +309,6 @@ class DialogsStore {
     filesStore,
     selectedFolderStore,
     versionHistoryStore,
-    infoPanelStore,
   ) {
     makeAutoObservable(this);
 
@@ -320,7 +317,6 @@ class DialogsStore {
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
-    this.infoPanelStore = infoPanelStore;
   }
 
   /**
@@ -387,8 +383,7 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection &&
-      !this.infoPanelStore.infoPanelSelection
+      !this.filesStore.hasBufferSelection
     )
       return;
 
@@ -416,8 +411,7 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection &&
-      !this.infoPanelStore.infoPanelSelection
+      !this.filesStore.hasBufferSelection
     ) {
       console.log("No files selected");
       return;
@@ -956,11 +950,8 @@ class DialogsStore {
   };
 
   setRoomLogoCover = async (roomId) => {
-    const res = await setRoomCover(
-      roomId || this.coverSelection?.id,
-      this.cover,
-    );
-    this.infoPanelStore.updateInfoPanelSelection(res);
+    await setRoomCover(roomId || this.coverSelection?.id, this.cover);
+
     this.setRoomCoverDialogProps({
       ...this.roomCoverDialogProps,
       withSelection: true,
@@ -969,9 +960,10 @@ class DialogsStore {
   };
 
   deleteRoomLogo = async () => {
+    console.log(this.coverSelection);
     if (!this.coverSelection) return;
-    const res = await removeLogoFromRoom(this.coverSelection.id);
-    this.infoPanelStore.updateInfoPanelSelection(res);
+
+    await removeLogoFromRoom(this.coverSelection.id);
   };
 
   getLogoCoverModel = (t, hasImage, onDelete) => {

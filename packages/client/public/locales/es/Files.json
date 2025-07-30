@@ -134,7 +134,6 @@
   "OpenCreatedTemplate": "Abrir plantilla creada",
   "OpenLocation": "Abrir ubicación",
   "OtherProcesses": "Otros procesos",
-  "PasswordLink": "Añada una contraseña para proteger su enlace.",
   "PasswordSuccessfullyCopied": "La contraseña se ha copiado correctamente",
   "PersonalContentRemovalNotice": "Sus archivos y carpetas personales en la sección {{sectionName}} se <1>eliminarán</1> ya que los Invitados no tienen acceso a esta sección. Los archivos seguirán disponibles para su vizualización y descarga durante <1>30 días</1>.",
   "PersonalFolderErasureWarning": "Su tipo de usuario se ha cambiado a Invitado. Sus archivos personales se eliminarán en 30 días.",

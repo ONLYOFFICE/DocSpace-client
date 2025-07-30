@@ -881,5 +881,6 @@
   "EditSharedLink": "تعديل الرابط المشترك",
   "EditAdditionalLink": "تعديل الرابط الإضافي",
   "EditLink": "تعديل الرابط",
-  "PasswordAccess": "إمكانية الوصول لكلمة المرور"
+  "PasswordAccess": "إمكانية الوصول لكلمة المرور",
+  "PasswordLink": "إضافة كلمة مرور لحماية الرابط الخاص بك"
 }

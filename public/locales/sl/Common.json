@@ -881,5 +881,6 @@
   "EditSharedLink": "Uredi povezavo v skupni rabi",
   "EditAdditionalLink": "Uredi dodatno povezavo",
   "EditLink": "Uredi povezavo",
-  "PasswordAccess": "Dostop z geslom"
+  "PasswordAccess": "Dostop z geslom",
+  "PasswordLink": "Dodajte geslo, da zaščitite svojo povezavo."
 }

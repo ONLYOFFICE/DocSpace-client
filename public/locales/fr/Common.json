@@ -872,5 +872,6 @@
   "EditSharedLink": "Modifier le lien partagé",
   "EditAdditionalLink": "Modifier le lien supplémentaire",
   "EditLink": "Modifier le lien",
-  "PasswordAccess": "Accès par mot de passe"
+  "PasswordAccess": "Accès par mot de passe",
+  "PasswordLink": "Ajoutez un mot de passe pour protéger votre lien."
 }

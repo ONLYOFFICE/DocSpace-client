@@ -881,5 +881,6 @@
   "EditSharedLink": "Bewerk gedeelde link",
   "EditAdditionalLink": "Bewerk aanvullende link",
   "EditLink": "Link bewerken",
-  "PasswordAccess": "Wachtwoord toegang"
+  "PasswordAccess": "Wachtwoord toegang",
+  "PasswordLink": "Voeg een wachtwoord toe om uw link te beschermen."
 }

@@ -892,5 +892,6 @@
   "EditSharedLink": "Edit shared link",
   "EditAdditionalLink": "Edit additional link",
   "EditLink": "Edit link",
-  "PasswordAccess": "Password access"
+  "PasswordAccess": "Password access",
+  "PasswordLink": "Add a password to protect your link."
 }

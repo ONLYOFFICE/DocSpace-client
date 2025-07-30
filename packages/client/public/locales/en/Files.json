@@ -136,7 +136,6 @@
   "OpenCreatedTemplate": "Open created template",
   "OpenLocation": "Open location",
   "OtherProcesses": "Other processes",
-  "PasswordLink": "Add a password to protect your link.",
   "PasswordSuccessfullyCopied": "Password successfully copied",
   "PersonalContentRemovalNotice": "Your personal files and folders in the {{sectionName}} section will be <1>deleted</1> since Guests don't have access to this section. Files remain available for viewing and downloading <1>for 30 days</1>.",
   "PersonalFolderErasureWarning": "Your user type has been changed to Guest. Personal files will be deleted in 30 days.",

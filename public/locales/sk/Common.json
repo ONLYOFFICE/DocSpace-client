@@ -881,5 +881,6 @@
   "EditSharedLink": "Upraviť zdieľaný odkaz",
   "EditAdditionalLink": "Upraviť dodatočný odkaz",
   "EditLink": "Upraviť odkaz",
-  "PasswordAccess": "Prístup je chránený heslom"
+  "PasswordAccess": "Prístup je chránený heslom",
+  "PasswordLink": "Pridajte heslo na ochranu vášho odkazu."
 }

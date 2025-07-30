@@ -868,5 +868,6 @@
   "EditSharedLink": "ແກ້ໄຂລິ້ງທີ່ແບ່ງປັນ",
   "EditAdditionalLink": "ແກ້ໄຂລິ້ງເພີ່ມເຕີມ",
   "EditLink": "ແກ້ໄຂລິ້ງ",
-  "PasswordAccess": "ການເຂົ້າເຖິງລະຫັດຜ່ານ"
+  "PasswordAccess": "ການເຂົ້າເຖິງລະຫັດຜ່ານ",
+  "PasswordLink": "ເພີ່ມລະຫັດຜ່ານເພື່ອປົກປ້ອງລິ້ງຂອງທ່ານ."
 }

@@ -134,7 +134,6 @@
   "OpenCreatedTemplate": "Erstellte Vorlage öffnen",
   "OpenLocation": "Ordner öffnen",
   "OtherProcesses": "Andere Prozesse",
-  "PasswordLink": "Fügen Sie ein Passwort hinzu, um Ihren Link zu schützen.",
   "PasswordSuccessfullyCopied": "Passwort erfolgreich kopiert",
   "PersonalContentRemovalNotice": "Ihre persönlichen Dateien und Ordner im Bereich {{sectionName}} werden <1>gelöscht</1>, da Gäste keinen Zugriff auf diesen Bereich haben. Die Dateien bleiben <1>30 Tage lang</1> zum Anzeigen und Herunterladen verfügbar.",
   "PersonalFolderErasureWarning": "Ihr Benutzertyp wurde auf Gast geändert. Persönliche Dateien werden in 30 Tagen gelöscht.",

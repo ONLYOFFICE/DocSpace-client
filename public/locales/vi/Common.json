@@ -881,5 +881,6 @@
   "EditSharedLink": "Chỉnh sửa liên kết được chia sẻ",
   "EditAdditionalLink": "Chỉnh sửa liên kết bổ sung",
   "EditLink": "Chỉnh sửa liên kết",
-  "PasswordAccess": "Truy cập có mật khẩu"
+  "PasswordAccess": "Truy cập có mật khẩu",
+  "PasswordLink": "Thêm mật khẩu để bảo vệ liên kết của bạn."
 }

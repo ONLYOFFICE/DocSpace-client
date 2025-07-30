@@ -880,5 +880,6 @@
   "EditSharedLink": "Redaktoni lidhjen e shpërndarë",
   "EditAdditionalLink": "Redaktoni lidhjen shtesë",
   "EditLink": "Redaktoni lidhjen",
-  "PasswordAccess": "Akses me fjalëkalim"
+  "PasswordAccess": "Akses me fjalëkalim",
+  "PasswordLink": "Shtoni një fjalëkalim për të mbrojtur lidhjen tuaj."
 }

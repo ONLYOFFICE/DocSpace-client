@@ -881,5 +881,6 @@
   "EditSharedLink": "Muokkaa jaettua linkkiä",
   "EditAdditionalLink": "Muokkaa lisälinkkiä",
   "EditLink": "Muokkaa linkkiä",
-  "PasswordAccess": "Salasanapääsy"
+  "PasswordAccess": "Salasanapääsy",
+  "PasswordLink": "Lisää salasana suojataksesi linkkiäsi."
 }

@@ -872,5 +872,6 @@
   "EditSharedLink": "Uredi deljeni link",
   "EditAdditionalLink": "Uredi dodatni link",
   "EditLink": "Uredi link",
-  "PasswordAccess": "Pristup lozinki"
+  "PasswordAccess": "Pristup lozinki",
+  "PasswordLink": "Dodaj lozinku da zaštitiš svoj link."
 }

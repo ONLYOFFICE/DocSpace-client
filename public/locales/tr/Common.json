@@ -881,5 +881,6 @@
   "EditSharedLink": "Paylaşılan bağlantıyı düzenle",
   "EditAdditionalLink": "Ek bağlantıyı düzenle",
   "EditLink": "Bağlantıyı düzenle",
-  "PasswordAccess": "Şifre erişimi"
+  "PasswordAccess": "Şifre erişimi",
+  "PasswordLink": "Bağlantınızı korumak için bir şifre ekleyin."
 }

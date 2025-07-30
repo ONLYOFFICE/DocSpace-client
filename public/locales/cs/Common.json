@@ -881,5 +881,6 @@
   "EditSharedLink": "Upravit sdílený odkaz",
   "EditAdditionalLink": "Upravit další odkaz",
   "EditLink": "Upravit odkaz",
-  "PasswordAccess": "Přístup pomocí hesla"
+  "PasswordAccess": "Přístup pomocí hesla",
+  "PasswordLink": "Přidejte heslo pro ochranu odkazu."
 }

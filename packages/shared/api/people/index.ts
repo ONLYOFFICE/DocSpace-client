@@ -244,7 +244,7 @@ export async function updateActivationStatus(
     url: `/people/activationstatus/${activationStatus}`,
     data: { userIds: [userId] },
     headers: { confirm: key },
-  })) as TUser;
+  })) as TUser[];
 
   return res;
 }

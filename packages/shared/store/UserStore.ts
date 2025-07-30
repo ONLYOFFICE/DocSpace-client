@@ -110,13 +110,13 @@ class UserStore {
   ) => {
     this.setIsLoading(true);
 
-    const user = await api.people.updateActivationStatus(
+    const users = await api.people.updateActivationStatus(
       activationStatus,
       userId,
       key,
     );
 
-    this.setUser(user);
+    this.setUser(users[0]);
     this.setIsLoading(false);
   };
 

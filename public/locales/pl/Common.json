@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "Ogranicz okres dostępności dla tego linku, ustawiając datę wygaśnięcia.",
   "EditSharedLink": "Edytuj link udostępniania",
   "EditAdditionalLink": "Edytuj link dodatkowy",
-  "EditLink": "Edytuj link"
+  "EditLink": "Edytuj link",
+  "PasswordAccess": "Dostęp chroniony hasłem"
 }

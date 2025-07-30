@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "Ограничи период доступности за овај линк постављањем рока употребе.",
   "EditSharedLink": "Уреди дељени линк",
   "EditAdditionalLink": "Уреди додатни линк",
-  "EditLink": "Уреди линк"
+  "EditLink": "Уреди линк",
+  "PasswordAccess": "Приступ лозинки"
 }

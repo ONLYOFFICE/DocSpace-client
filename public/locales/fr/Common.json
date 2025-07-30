@@ -871,5 +871,6 @@
   "ChooseExpirationDate": "Limitez la période de disponibilité de ce lien en fixant une date d'expiration.",
   "EditSharedLink": "Modifier le lien partagé",
   "EditAdditionalLink": "Modifier le lien supplémentaire",
-  "EditLink": "Modifier le lien"
+  "EditLink": "Modifier le lien",
+  "PasswordAccess": "Accès par mot de passe"
 }

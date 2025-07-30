@@ -134,7 +134,6 @@
   "OpenCreatedTemplate": "생성된 템플릿 열기",
   "OpenLocation": "위치 열기",
   "OtherProcesses": "기타 프로세스",
-  "PasswordAccess": "비밀번호 액세스",
   "PasswordLink": "링크를 보호하려면 비밀번호를 추가하세요.",
   "PasswordSuccessfullyCopied": "비밀번호가 성공적으로 복사되었습니다",
   "PersonalContentRemovalNotice": "게스트가 {{sectionName}} 섹션에 액세스할 수 없으므로 이 섹션의 개인 파일 및 폴더는 <1>삭제</1>됩니다. 파일은 <1>30일</1> 동안 확인 및 다운로드할 수 있게 유지됩니다.",

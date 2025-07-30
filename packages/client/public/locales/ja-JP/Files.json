@@ -134,7 +134,6 @@
   "OpenCreatedTemplate": "作成したテンプレートを開く",
   "OpenLocation": "オープンロケーション",
   "OtherProcesses": "他のプロセス",
-  "PasswordAccess": "パスワードアクセス",
   "PasswordLink": "リンクを保護するためにパスワードを追加します。",
   "PasswordSuccessfullyCopied": "パスワードのコピーに成功",
   "PersonalContentRemovalNotice": "あなたの{{sectionName}}セクション内の個人ファイルとフォルダは、ゲストはこのセクションにアクセスできないため<1>削除されます</1>。ファイルは<1>30日間</1>、閲覧およびダウンロードが可能です。",

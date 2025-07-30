@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "만료 날짜를 설정하여 이 링크의 사용 가능 기간을 제한하세요.",
   "EditSharedLink": "공유 링크 편집",
   "EditAdditionalLink": "추가 링크 수정",
-  "EditLink": "링크 수정"
+  "EditLink": "링크 수정",
+  "PasswordAccess": "비밀번호 액세스"
 }

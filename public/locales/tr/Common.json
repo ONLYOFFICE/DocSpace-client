@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "Bir son kullanma tarihi belirleyerek bu bağlantının kullanılabilirlik süresini sınırlandırın.",
   "EditSharedLink": "Paylaşılan bağlantıyı düzenle",
   "EditAdditionalLink": "Ek bağlantıyı düzenle",
-  "EditLink": "Bağlantıyı düzenle"
+  "EditLink": "Bağlantıyı düzenle",
+  "PasswordAccess": "Şifre erişimi"
 }

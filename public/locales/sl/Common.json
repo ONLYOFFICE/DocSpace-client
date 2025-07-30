@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "Omejite obdobje razpoložljivosti te povezave tako, da nastavite datum poteka.",
   "EditSharedLink": "Uredi povezavo v skupni rabi",
   "EditAdditionalLink": "Uredi dodatno povezavo",
-  "EditLink": "Uredi povezavo"
+  "EditLink": "Uredi povezavo",
+  "PasswordAccess": "Dostop z geslom"
 }

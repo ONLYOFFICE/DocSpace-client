@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "Rajoita saatavuusaika tälle linkille asettamalla viimeinen voimassaolopäivä.",
   "EditSharedLink": "Muokkaa jaettua linkkiä",
   "EditAdditionalLink": "Muokkaa lisälinkkiä",
-  "EditLink": "Muokkaa linkkiä"
+  "EditLink": "Muokkaa linkkiä",
+  "PasswordAccess": "Salasanapääsy"
 }

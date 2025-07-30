@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "通过设置失效日期，限制此链接的有效期。",
   "EditSharedLink": "编辑分享链接",
   "EditAdditionalLink": "编辑附加链接",
-  "EditLink": "编辑链接"
+  "EditLink": "编辑链接",
+  "PasswordAccess": "通过密码访问"
 }

@@ -891,5 +891,6 @@
   "ChooseExpirationDate": "Limit availability period for this link by setting an expiration date.",
   "EditSharedLink": "Edit shared link",
   "EditAdditionalLink": "Edit additional link",
-  "EditLink": "Edit link"
+  "EditLink": "Edit link",
+  "PasswordAccess": "Password access"
 }

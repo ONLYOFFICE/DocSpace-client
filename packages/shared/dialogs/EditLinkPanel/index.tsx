@@ -511,7 +511,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
             <PasswordAccessBlock
               t={t}
               isLoading={isLoading}
-              headerText={t("Files:PasswordAccess")}
+              headerText={t("Common:PasswordAccess")}
               bodyText={t("Files:PasswordLink")}
               isChecked={passwordAccessIsChecked}
               isPasswordValid={isPasswordValid}

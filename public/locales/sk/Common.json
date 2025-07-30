@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "Nastavte dátum vypršania platnosti, aby ste obmedzili obdobie platnosti tohto odkazu.",
   "EditSharedLink": "Upraviť zdieľaný odkaz",
   "EditAdditionalLink": "Upraviť dodatočný odkaz",
-  "EditLink": "Upraviť odkaz"
+  "EditLink": "Upraviť odkaz",
+  "PasswordAccess": "Prístup je chránený heslom"
 }

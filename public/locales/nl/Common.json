@@ -880,5 +880,6 @@
   "ChooseExpirationDate": "Beperk de beschikbaarheidsperiode voor deze link door een vervaldatum in te stellen.",
   "EditSharedLink": "Bewerk gedeelde link",
   "EditAdditionalLink": "Bewerk aanvullende link",
-  "EditLink": "Link bewerken"
+  "EditLink": "Link bewerken",
+  "PasswordAccess": "Wachtwoord toegang"
 }

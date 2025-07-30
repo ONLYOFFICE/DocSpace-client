@@ -227,7 +227,7 @@ const GenerateDeveloperTokenDialog = ({
                 maxLength={10000}
                 testId="generate_token_input"
               />
-              <Text className="dates">
+              <Text dataTestId="generate_token_dates" className="dates">
                 <strong>{t("Files:ByCreation")}</strong>: {dates.created}
                 <br />
                 <strong>{t("Expires")}</strong>: {dates.expires}

@@ -876,5 +876,6 @@
   "PreventDownloadFilesAndFolders": "සබැඳියකින් බෙදා ගත් මෙම කාමරයේ ගොනු සහ බහාලුම් බාගැනීම අබල කිරීමට මෙම සැකසුම සබල කරන්න",
   "LimitByTimePeriod": "කාලය අනුව සීමා කරන්න",
   "Clean": "මකන්න",
-  "CopyPassword": "මුරපදයේ පිටපතක්"
+  "CopyPassword": "මුරපදයේ පිටපතක්",
+  "PasswordSuccessfullyCopied": "මුරපදය පිටපත් විය"
 }

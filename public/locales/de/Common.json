@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Aktivieren Sie diese Einstellung, um das Herunterladen von Dateien und Ordnern aus diesem über einen Link freigegebenen Raum zu deaktivieren",
   "LimitByTimePeriod": "Zeitlich begrenzen",
   "Clean": "Löschen",
-  "CopyPassword": "Passwort kopieren"
+  "CopyPassword": "Passwort kopieren",
+  "PasswordSuccessfullyCopied": "Passwort erfolgreich kopiert"
 }

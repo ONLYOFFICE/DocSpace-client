@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Povoľte toto nastavenie, aby ste zakázali sťahovanie súborov a priečinkov z tejto miestnosti, ktoré sú sprístupnené cez odkaz",
   "LimitByTimePeriod": "Obmedzenie podľa časového obdobia",
   "Clean": "Očistiť",
-  "CopyPassword": "Kopírovať heslo"
+  "CopyPassword": "Kopírovať heslo",
+  "PasswordSuccessfullyCopied": "Heslo úspešne skopírované"
 }

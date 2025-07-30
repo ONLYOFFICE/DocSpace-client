@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Omogoči to nastavitev, če želiš onemogočiti prenose datotek in map iz te sobe v skupni rabi prek povezave",
   "LimitByTimePeriod": "Omejitev po časovnem obdobju",
   "Clean": "Počisti",
-  "CopyPassword": "Kopiraj povezavo"
+  "CopyPassword": "Kopiraj povezavo",
+  "PasswordSuccessfullyCopied": "Geslo uspešno kopirano"
 }

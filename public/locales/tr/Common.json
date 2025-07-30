@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Bu odadan bir bağlantı yoluyla paylaşılan dosya ve klasörlerin indirilmesini devre dışı bırakmak için bu ayarı etkinleştirin",
   "LimitByTimePeriod": "Zaman aralığına göre limitlendirme",
   "Clean": "Temizle",
-  "CopyPassword": "Şifreyi kopyala"
+  "CopyPassword": "Şifreyi kopyala",
+  "PasswordSuccessfullyCopied": "Şifre başarıyla kopyalandı"
 }

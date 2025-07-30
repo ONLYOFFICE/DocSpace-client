@@ -878,5 +878,6 @@
   "PreventDownloadFilesAndFolders": "Activez ce paramètre pour désactiver les téléchargements de fichiers et de dossiers de cette salle partagés via un lien",
   "LimitByTimePeriod": "Limite par période",
   "Clean": "Effacer",
-  "CopyPassword": "Copier le mot de passe"
+  "CopyPassword": "Copier le mot de passe",
+  "PasswordSuccessfullyCopied": "Le mot de passe a été copié avec succès"
 }

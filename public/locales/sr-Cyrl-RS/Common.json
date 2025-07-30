@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Омогући ово подешавање да онемогућиш преузимање датотека и фолдера из ове собе дељених путем линка",
   "LimitByTimePeriod": "Ограничи временским периодом",
   "Clean": "Очистити",
-  "CopyPassword": "Копирај лозинку"
+  "CopyPassword": "Копирај лозинку",
+  "PasswordSuccessfullyCopied": "Лозинка успешно копирана"
 }

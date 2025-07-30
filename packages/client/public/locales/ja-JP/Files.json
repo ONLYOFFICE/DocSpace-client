@@ -130,7 +130,6 @@
   "OpenCreatedTemplate": "作成したテンプレートを開く",
   "OpenLocation": "オープンロケーション",
   "OtherProcesses": "他のプロセス",
-  "PasswordSuccessfullyCopied": "パスワードのコピーに成功",
   "PersonalContentRemovalNotice": "あなたの{{sectionName}}セクション内の個人ファイルとフォルダは、ゲストはこのセクションにアクセスできないため<1>削除されます</1>。ファイルは<1>30日間</1>、閲覧およびダウンロードが可能です。",
   "PersonalFolderErasureWarning": "ユーザータイプが「ゲスト」に変更されました。個人ファイルは30日後に削除されます。",
   "Pin": "固定",

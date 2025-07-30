@@ -886,5 +886,6 @@
   "PreventDownloadFilesAndFolders": "Iespējojiet šo iestatījumu, lai atspējotu failu un mapju lejupielādi no šīs telpas, kas kopīgota, izmantojot saiti",
   "LimitByTimePeriod": "Ierobežots pēc laika perioda",
   "Clean": "Notīrīt",
-  "CopyPassword": "Kopēt paroli"
+  "CopyPassword": "Kopēt paroli",
+  "PasswordSuccessfullyCopied": "Parole veiksmīgi nokopēta"
 }

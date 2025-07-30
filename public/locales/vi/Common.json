@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Bật cài đặt này để tắt tải xuống tập tin và thư mục từ phòng này được chia sẻ qua liên kết",
   "LimitByTimePeriod": "Giới hạn theo khoảng thời gian",
   "Clean": "Xóa",
-  "CopyPassword": "Sao chép mật khẩu"
+  "CopyPassword": "Sao chép mật khẩu",
+  "PasswordSuccessfullyCopied": "Đã sao chép mật khẩu thành công"
 }

@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Ative esta configuração para desativar downloads de arquivos e pastas desta sala compartilhada por meio de um link",
   "LimitByTimePeriod": "Limite por período de tempo",
   "Clean": "Limpar",
-  "CopyPassword": "Copiar senha"
+  "CopyPassword": "Copiar senha",
+  "PasswordSuccessfullyCopied": "Senha copiada com sucesso"
 }

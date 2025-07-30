@@ -130,7 +130,6 @@
   "OpenCreatedTemplate": "Abra os templates criados",
   "OpenLocation": "Abrir a localização",
   "OtherProcesses": "Outros processos",
-  "PasswordSuccessfullyCopied": "Senha copiada com sucesso",
   "PersonalContentRemovalNotice": "Os seus ficheiros e pastas pessoais na secção {{sectionName}} serão <1>eliminados</1>, uma vez que os Convidados não têm acesso a esta secção. Os ficheiros permanecem disponíveis para visualização e transferência <1>durante 30 dias</1>.",
   "PersonalFolderErasureWarning": "O seu tipo de utilizador foi alterado para Convidado. Os ficheiros pessoais serão eliminados em 30 dias.",
   "Pin": "Afixar",

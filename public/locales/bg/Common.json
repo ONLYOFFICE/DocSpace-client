@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Активирайте тази настройка, за да деактивирате изтеглянето на файлове и папки, споделени чрез линк, от тази стая",
   "LimitByTimePeriod": "Ограничи по времеви период",
   "Clean": "Изчисти",
-  "CopyPassword": "Копирай парола"
+  "CopyPassword": "Копирай парола",
+  "PasswordSuccessfullyCopied": "Паролата е копирана успешно"
 }

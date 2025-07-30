@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Bu otaqdan link vasitəsilə paylaşılan fayl və qovluqların endirilməsini deaktiv etmək üçün bu tənzimləməni aktiv edin",
   "LimitByTimePeriod": "Zamana görə məhdudiyyət",
   "Clean": "Təmizləyin",
-  "CopyPassword": "Şifrəni nüsxələyin"
+  "CopyPassword": "Şifrəni nüsxələyin",
+  "PasswordSuccessfullyCopied": "Şifrə uğurla nüsxələndi"
 }

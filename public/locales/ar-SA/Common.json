@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "قم بتمكين هذا الإعداد لتعطيل تنزيلات الملفات والمجلدات من هذه الغرفة المشتركة عبر رابط",
   "LimitByTimePeriod": "تقييد بفترة زمنية",
   "Clean": "تنظيف",
-  "CopyPassword": "نسخ كلمة المرور"
+  "CopyPassword": "نسخ كلمة المرور",
+  "PasswordSuccessfullyCopied": "تم نسخ كلمة المرور بنجاح"
 }

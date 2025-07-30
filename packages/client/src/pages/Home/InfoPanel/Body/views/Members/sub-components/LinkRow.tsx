@@ -126,7 +126,7 @@ const LinkRow = (props: LinkRowProps) => {
   const onCopyPassword = () => {
     if (password) {
       copy(password);
-      toastr.success(t("Files:PasswordSuccessfullyCopied"));
+      toastr.success(t("Common:PasswordSuccessfullyCopied"));
     }
   };
 

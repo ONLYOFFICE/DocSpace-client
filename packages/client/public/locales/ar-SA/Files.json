@@ -130,7 +130,6 @@
   "OpenCreatedTemplate": "فتح القالب المُنشأ",
   "OpenLocation": "افتح الموقع",
   "OtherProcesses": "عمليات أخرى",
-  "PasswordSuccessfullyCopied": "تم نسخ كلمة المرور بنجاح",
   "PersonalContentRemovalNotice": "<1>سيتم حذف</1> ملفاتكم الشخصية والمجلدات الموجودة في قسم {{sectionName}}، لأن الضيوف لا يمكنهم الوصول إلى هذا القسم. تظل الملفات متاحة للعرض والتنزيل لمدة <1>30 يومًا</1>.",
   "PersonalFolderErasureWarning": "تم تغيير نوع المستخدم الخاص بكم إلى ضيف. سيتم حذف الملفات الشخصية خلال 30 يومًا.",
   "Pin": "تثبيت",

@@ -874,5 +874,6 @@
   "PreventDownloadFilesAndFolders": "ເປີດໃຊ້ການຕັ້ງຄ່ານີ້ເພື່ອປິດການດາວໂຫຼດໄຟລ໌ ແລະໂຟນເດີ້ຕ່າງໆຈາກຫ້ອງນີ້ທີ່ແບ່ງປັນຜ່ານລິ້ງ",
   "LimitByTimePeriod": "ຈໍາກັດໂດຍໄລຍະເວລາ",
   "Clean": "ສະອາດ",
-  "CopyPassword": "ສຳເນົາລະຫັດຜ່ານ"
+  "CopyPassword": "ສຳເນົາລະຫັດຜ່ານ",
+  "PasswordSuccessfullyCopied": "ສຳເນົາລະຫັດຜ່ານສຳເລັດແລ້ວ"
 }

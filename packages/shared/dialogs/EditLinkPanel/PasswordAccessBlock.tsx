@@ -71,7 +71,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
     const isValid = !!passwordValue.trim();
     if (isValid) {
       copy(passwordValue);
-      toastr.success(t("Files:PasswordSuccessfullyCopied"));
+      toastr.success(t("Common:PasswordSuccessfullyCopied"));
     }
   };
 

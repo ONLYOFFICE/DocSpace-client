@@ -887,5 +887,6 @@
   "PreventDownloadFilesAndFolders": "Schakel deze instelling in om downloads uit te schakelen van bestanden en mappen uit deze kamer die worden gedeeld via een link",
   "LimitByTimePeriod": "Beperken op tijdsperiode",
   "Clean": "Reinig",
-  "CopyPassword": "Kopieer wachtwoord"
+  "CopyPassword": "Kopieer wachtwoord",
+  "PasswordSuccessfullyCopied": "Wachtwoord succesvol gekopieerd"
 }

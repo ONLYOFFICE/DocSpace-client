@@ -130,7 +130,6 @@
   "OpenCreatedTemplate": "Oluşturulan şablonu aç",
   "OpenLocation": "Konumu aç",
   "OtherProcesses": "Diğer işlemler",
-  "PasswordSuccessfullyCopied": "Şifre başarıyla kopyalandı",
   "PersonalContentRemovalNotice": "{{sectionName}} bölümündeki kişisel dosya ve klasörleriniz, konukların bu bölüme erişimi olmamasından ötürü <1>silinecektir</1>. Dosyalar <1>30 gün boyunca</1> görüntülenip indirilebilir durumda kalacaktır.",
   "PersonalFolderErasureWarning": "Kullanıcı türünüz Konuk olarak değiştirildi. Kişisel dosyalarınız 30 gün içinde silinecektir.  ",
   "Pin": "Sabitle",

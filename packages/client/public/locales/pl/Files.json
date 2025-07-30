@@ -130,7 +130,6 @@
   "OpenCreatedTemplate": "Otwórz utworzony szablon",
   "OpenLocation": "Otwórz lokalizację",
   "OtherProcesses": "Inne procesy",
-  "PasswordSuccessfullyCopied": "Hasło zostało pomyślnie skopiowane",
   "PersonalContentRemovalNotice": "Twoje pliki osobiste oraz katalogi w sekcji {{sectionName}} zostaną <1>usunięte</1>, ponieważ Goście nie mają dostępu do tej sekcji. Pliki pozostaną dostępne do przeglądania i pobierania przez <1>for 30 dni</1>.",
   "PersonalFolderErasureWarning": "Twój rodzaj użytkownika został zmieniony na Gościa. Pliki osobiste zostaną usunięte za 30 dni.",
   "Pin": "Przypnij",

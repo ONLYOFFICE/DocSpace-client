@@ -130,7 +130,6 @@
   "OpenCreatedTemplate": "Apri modello creato",
   "OpenLocation": "Apri posizione",
   "OtherProcesses": "Altri processi",
-  "PasswordSuccessfullyCopied": "Password copiata con successo",
   "PersonalContentRemovalNotice": "I tuoi file e cartelle personali nella sezione {{sectionName}} verranno <1>eliminati</1> poiché gli Ospiti non hanno accesso a questa sezione. I file resteranno disponibili per la visualizzazione e il download <1>per 30 giorni</1>.",
   "PersonalFolderErasureWarning": "Il tuo tipo di utente è stato modificato in Ospite. I file personali verranno eliminati entro 30 giorni.",
   "Pin": "Fissa",

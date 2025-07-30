@@ -886,5 +886,6 @@
   "PreventDownloadFilesAndFolders": "Aktivizoni këtë cilësim për të çaktivizuar shkarkimet e skedarëve dhe dosjeve nga kjo dhomë të ndarë nëpërmjet një lidhjeje",
   "LimitByTimePeriod": "Kufizoni sipas periudhës kohore",
   "Clean": "Pastroni",
-  "CopyPassword": "Kopjoni fjalëkalimin"
+  "CopyPassword": "Kopjoni fjalëkalimin",
+  "PasswordSuccessfullyCopied": "Fjalëkalimi u kopjua me sukses"
 }

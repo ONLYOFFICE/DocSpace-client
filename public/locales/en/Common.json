@@ -898,5 +898,6 @@
   "PreventDownloadFilesAndFolders": "Enable this setting to disable downloads of files and folders from this room shared via a link",
   "LimitByTimePeriod": "Limit by time period",
   "Clean": "Clean",
-  "CopyPassword": "Copy password"
+  "CopyPassword": "Copy password",
+  "PasswordSuccessfullyCopied": "Password successfully copied"
 }

@@ -76,7 +76,7 @@ const getFetchedRoomParams = (
     },
     isPrivate: false,
     icon: {
-      uploadedFile: item.logo.original,
+      uploadedFile: item?.logo?.original,
       tmpFile: "",
       x: 0.5,
       y: 0.5,

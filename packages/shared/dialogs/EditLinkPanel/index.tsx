@@ -486,7 +486,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       >
         <ModalDialog.Header>
           {isPrimary
-            ? t("Files:EditSharedLink")
+            ? t("Common:EditSharedLink")
             : isPublic || isFormRoom
               ? t("Files:EditAdditionalLink")
               : t("Files:EditLink")}

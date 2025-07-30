@@ -877,5 +877,6 @@
   "LimitTimeBlockPublicRoomDescription": "Em uma sala pública, o link principal é válido por um período de tempo ilimitado. Você pode criar links adicionais com limite de tempo.",
   "LimitTimeBlockCustomRoomDescription": "Em uma sala personalizada, o link principal é válido por um período de tempo ilimitado. Você pode criar links adicionais com limite de tempo.",
   "LinkValidUntil": "Este link será válido até",
-  "ChooseExpirationDate": "Limite o período de disponibilidade deste link definindo uma data de expiração."
+  "ChooseExpirationDate": "Limite o período de disponibilidade deste link definindo uma data de expiração.",
+  "EditSharedLink": "Editar link compartilhado"
 }

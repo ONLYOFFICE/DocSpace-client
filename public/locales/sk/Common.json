@@ -877,5 +877,6 @@
   "LimitTimeBlockPublicRoomDescription": "Vo Verejnej miestnosti je hlavný odkaz platný na neobmedzený časový úsek. Môžete vytvoriť ďalšie odkazy s časovým obmedzením. ",
   "LimitTimeBlockCustomRoomDescription": "Vo Vlastnej miestnosti je hlavný odkaz platný na neobmedzený čas. Môžete vytvoriť ďalšie odkazy s časovým obmedzením. ",
   "LinkValidUntil": "Tento odkaz bude platný do",
-  "ChooseExpirationDate": "Nastavte dátum vypršania platnosti, aby ste obmedzili obdobie platnosti tohto odkazu."
+  "ChooseExpirationDate": "Nastavte dátum vypršania platnosti, aby ste obmedzili obdobie platnosti tohto odkazu.",
+  "EditSharedLink": "Upraviť zdieľaný odkaz"
 }

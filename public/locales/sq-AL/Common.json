@@ -876,5 +876,6 @@
   "LimitTimeBlockPublicRoomDescription": "Në një dhomë publike, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar. Ju mund të krijoni lidhje shtesë me afat kohor.",
   "LimitTimeBlockCustomRoomDescription": "Në një dhomë të personalizuar, lidhja kryesore është e vlefshme për një periudhë kohore të pakufizuar. Ju mund të krijoni lidhje shtesë me afat kohor.",
   "LinkValidUntil": "Kjo lidhje do të jetë e vlefshme deri",
-  "ChooseExpirationDate": "Kufizoni periudhën e disponueshmërisë për këtë lidhje duke vendosur një datë skadimi."
+  "ChooseExpirationDate": "Kufizoni periudhën e disponueshmërisë për këtë lidhje duke vendosur një datë skadimi.",
+  "EditSharedLink": "Redaktoni lidhjen e shpërndarë"
 }

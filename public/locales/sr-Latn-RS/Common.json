@@ -868,5 +868,6 @@
   "LimitTimeBlockPublicRoomDescription": "U javnoj sobi, glavni link važi neograničeno. Možete kreirati dodatne linkove sa vremenskim ograničenjem.",
   "LimitTimeBlockCustomRoomDescription": "U prilagođenoj sobi, glavni link važi neograničeno. Možete kreirati dodatne linkove sa vremenskim ograničenjem.",
   "LinkValidUntil": "Ovaj link će biti validan do",
-  "ChooseExpirationDate": "Ograniči period dostupnosti za ovaj link postavljanjem roka upotrebe."
+  "ChooseExpirationDate": "Ograniči period dostupnosti za ovaj link postavljanjem roka upotrebe.",
+  "EditSharedLink": "Uredi deljeni link"
 }

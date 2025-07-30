@@ -893,5 +893,6 @@
   "RoleForLink": "Vloga za povezavo",
   "LinkHasExpiredAndHasBeenDisabled": "Povezava je potekla in je onemogočena",
   "UnsavedChangesBody": "Če zdaj zaprete meni z nastavitvami povezave, vaše spremembe ne bodo shranjene.",
-  "CloseMenu": "Zapri menu"
+  "CloseMenu": "Zapri menu",
+  "LinkSettings": "Nastavitve povezave"
 }

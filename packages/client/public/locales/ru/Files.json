@@ -102,7 +102,6 @@
   "LifetimeDialogDescriptionHeader": "Файлы с истекшим сроком действия будут удалены.",
   "LinkDeletedSuccessfully": "Ссылка успешно удалена",
   "LinkForPortalUsers": "Ссылка для пользователей {{productName}}",
-  "LinkSettings": "Параметры ссылки",
   "LinkSuccessfullyCreatedAndCopied": "Ссылка успешно создана и скопирована в буфер обмена",
   "MarkAsFavorite": "Добавить в избранное",
   "MarkAsRevision": "Отметить как ревизию",

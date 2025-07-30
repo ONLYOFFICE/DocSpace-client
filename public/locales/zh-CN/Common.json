@@ -893,5 +893,6 @@
   "RoleForLink": "链接的权限",
   "LinkHasExpiredAndHasBeenDisabled": "此链接过期，已被禁用",
   "UnsavedChangesBody": "如果您现在关闭链接设置菜单，您所做的更改可能不会被保存。",
-  "CloseMenu": "关闭菜单"
+  "CloseMenu": "关闭菜单",
+  "LinkSettings": "链接设置"
 }

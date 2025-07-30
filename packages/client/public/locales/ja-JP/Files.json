@@ -102,7 +102,6 @@
   "LifetimeDialogDescriptionHeader": "有効期限を過ぎた古いファイルは削除されます。",
   "LinkDeletedSuccessfully": "リンクは正常に削除されました",
   "LinkForPortalUsers": "{{productName}}のユーザー用リンク",
-  "LinkSettings": "リンクの設定",
   "LinkSuccessfullyCreatedAndCopied": "リンクが正常に作成され、クリップボードにコピーされました",
   "MarkAsFavorite": "お気に入りに登録",
   "MarkAsRevision": "修正マーク",

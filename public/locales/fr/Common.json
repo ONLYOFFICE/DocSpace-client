@@ -884,5 +884,6 @@
   "RoleForLink": "Rôle pour le lien",
   "LinkHasExpiredAndHasBeenDisabled": "Le lien a expiré et a été désactivé",
   "UnsavedChangesBody": "Si vous fermez le menu des paramètres du lien maintenant, vos modifications ne seront pas sauvegardées.",
-  "CloseMenu": "Fermer le menu"
+  "CloseMenu": "Fermer le menu",
+  "LinkSettings": "Paramètres des liens"
 }

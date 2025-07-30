@@ -893,5 +893,6 @@
   "RoleForLink": "Роля за линк",
   "LinkHasExpiredAndHasBeenDisabled": "Линкът изтече и беше деактивиран",
   "UnsavedChangesBody": "Ако затворите менюто с настройки на линка точно сега, промените Ви няма да бъдат запазени.",
-  "CloseMenu": "Затвори меню"
+  "CloseMenu": "Затвори меню",
+  "LinkSettings": "Настройки на линковете"
 }

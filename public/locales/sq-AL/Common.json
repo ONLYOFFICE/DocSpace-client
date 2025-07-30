@@ -892,5 +892,6 @@
   "RoleForLink": "Roli për lidhje",
   "LinkHasExpiredAndHasBeenDisabled": "Lidhja ka skaduar dhe është çaktivizuar",
   "UnsavedChangesBody": "Nëse mbyllni menunë e cilësimeve të lidhjes tani, ndryshimet tuaja nuk do të ruhen.",
-  "CloseMenu": "Mbyllni menunë"
+  "CloseMenu": "Mbyllni menunë",
+  "LinkSettings": "Cilësimet e lidhjes"
 }

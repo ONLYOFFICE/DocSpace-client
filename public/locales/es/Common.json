@@ -893,5 +893,6 @@
   "RoleForLink": "Rol para el enlace",
   "LinkHasExpiredAndHasBeenDisabled": "El enlace ha expirado y se ha desactivado",
   "UnsavedChangesBody": "Si usted cierra el menú de configuración de enlaces en este momento, sus cambios no se guardarán.",
-  "CloseMenu": "Cerrar menú"
+  "CloseMenu": "Cerrar menú",
+  "LinkSettings": "Configuración de enlace"
 }

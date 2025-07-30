@@ -893,5 +893,6 @@
   "RoleForLink": "リンクの役割",
   "LinkHasExpiredAndHasBeenDisabled": "リンクは有効期限が切れたため無効になっています",
   "UnsavedChangesBody": "今すぐリンク設定メニューを閉じると、変更は保存されません。",
-  "CloseMenu": "メニューを閉じる"
+  "CloseMenu": "メニューを閉じる",
+  "LinkSettings": "リンクの設定"
 }

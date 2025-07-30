@@ -884,5 +884,6 @@
   "RoleForLink": "Uloga za link",
   "LinkHasExpiredAndHasBeenDisabled": "Link je istekao i onemogućen je",
   "UnsavedChangesBody": "Ako sada zatvorite meni za podešavanje linkova, vaše promene neće biti sačuvane.",
-  "CloseMenu": "Zatvori meni"
+  "CloseMenu": "Zatvori meni",
+  "LinkSettings": "Podešavanja linka"
 }

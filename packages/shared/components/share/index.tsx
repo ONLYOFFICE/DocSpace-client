@@ -413,7 +413,7 @@ const Share = (props: ShareProps) => {
     return [
       {
         key: "edit-link-key",
-        label: t("Files:LinkSettings"),
+        label: t("Common:LinkSettings"),
         icon: SettingsReactSvgUrl,
         onClick: () => onEditLink(link),
       },

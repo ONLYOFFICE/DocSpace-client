@@ -893,5 +893,6 @@
   "RoleForLink": "Bağlantı için rol",
   "LinkHasExpiredAndHasBeenDisabled": "Bağlantının süresi doldu ve devre dışı bırakıldı",
   "UnsavedChangesBody": "Bağlantı ayarları menüsünü hemen kapatırsanız değişiklikleriniz kaydedilmeyecektir.",
-  "CloseMenu": "Menüyü kapat"
+  "CloseMenu": "Menüyü kapat",
+  "LinkSettings": "Bağlantı ayarları"
 }

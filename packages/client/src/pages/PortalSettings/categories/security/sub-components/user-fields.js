@@ -97,6 +97,9 @@ const UserFields = (props) => {
     regexp,
     classNameAdditional,
     isAutoFocussed = false,
+    inputDataTestId,
+    deleteIconDataTestId,
+    addButtonDataTestId,
   } = props;
 
   const [errors, setErrors] = useState(new Array(inputs.length).fill(false));
@@ -159,11 +162,13 @@ const UserFields = (props) => {
                   onBlur={() => onBlur(index)}
                   onFocus={() => onFocus(index)}
                   hasError={errors[index] ? error : null}
+                  testId={inputDataTestId}
                 />
                 <StyledTrashIcon
                   className={`${classNameAdditional}-delete-icon`}
                   size="medium"
                   onClick={() => onDelete(index)}
+                  data-testid={deleteIconDataTestId}
                 />
               </StyledInputWrapper>
             );
@@ -174,6 +179,7 @@ const UserFields = (props) => {
         className={classNameAdditional}
         onClick={onClickAdd}
         inputsLength={inputs.length}
+        data-testid={addButtonDataTestId}
       >
         <StyledPlusIcon size="small" />
         <Link type="action" isHovered fontWeight={600}>

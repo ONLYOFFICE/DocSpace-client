@@ -62,8 +62,8 @@ export const mockRecentTreeFolder = {
     indexing: false,
     denyDownload: false,
     fileEntryType: 1,
-    id: 6,
-    rootFolderId: 6,
+    id: 268,
+    rootFolderId: 268,
     canShare: false,
     security: {
       Read: true,

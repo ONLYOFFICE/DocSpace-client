@@ -25,11 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { type FC, useEffect } from "react";
+import { type FC } from "react";
 
 import { Text } from "../../components/text";
 import { Button, ButtonSize } from "../../components/button";
+import { useEventListener } from "../../hooks/useEventListener";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+
 import type { UnsavedChangesDialogProps } from "./UnsavedChangesDialog.types";
 
 const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
@@ -40,17 +42,11 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
 }) => {
   const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
 
-  useEffect(() => {
-    const onKeyPress = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        onConfirm();
-      }
-    };
-
-    window.addEventListener("keydown", onKeyPress);
-
-    return () => window.removeEventListener("keydown", onKeyPress);
-  }, [onConfirm]);
+  useEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Enter") {
+      onConfirm();
+    }
+  });
 
   return (
     <ModalDialog

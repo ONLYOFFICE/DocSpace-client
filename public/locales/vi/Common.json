@@ -882,5 +882,6 @@
   "EditAdditionalLink": "Chỉnh sửa liên kết bổ sung",
   "EditLink": "Chỉnh sửa liên kết",
   "PasswordAccess": "Truy cập có mật khẩu",
-  "PasswordLink": "Thêm mật khẩu để bảo vệ liên kết của bạn."
+  "PasswordLink": "Thêm mật khẩu để bảo vệ liên kết của bạn.",
+  "DisableDownload": "Hạn chế sao chép nội dung tập tin, tải xuống và in tập tin"
 }

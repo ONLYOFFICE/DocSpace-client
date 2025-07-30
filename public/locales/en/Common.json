@@ -893,5 +893,6 @@
   "EditAdditionalLink": "Edit additional link",
   "EditLink": "Edit link",
   "PasswordAccess": "Password access",
-  "PasswordLink": "Add a password to protect your link."
+  "PasswordLink": "Add a password to protect your link.",
+  "DisableDownload": "Restrict file content copy, file download and printing"
 }

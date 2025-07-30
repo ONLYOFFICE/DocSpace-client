@@ -882,5 +882,6 @@
   "EditAdditionalLink": "编辑附加链接",
   "EditLink": "编辑链接",
   "PasswordAccess": "通过密码访问",
-  "PasswordLink": "添加密码保护链接。"
+  "PasswordLink": "添加密码保护链接。",
+  "DisableDownload": "限制文件内容复制、文件下载和打印"
 }

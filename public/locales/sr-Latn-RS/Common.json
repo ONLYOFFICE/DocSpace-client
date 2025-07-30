@@ -873,5 +873,6 @@
   "EditAdditionalLink": "Uredi dodatni link",
   "EditLink": "Uredi link",
   "PasswordAccess": "Pristup lozinki",
-  "PasswordLink": "Dodaj lozinku da zaštitiš svoj link."
+  "PasswordLink": "Dodaj lozinku da zaštitiš svoj link.",
+  "DisableDownload": "Ograniči kopiranje sadržaja datoteke, preuzimanje i štampanje"
 }

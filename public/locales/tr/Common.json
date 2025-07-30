@@ -882,5 +882,6 @@
   "EditAdditionalLink": "Ek bağlantıyı düzenle",
   "EditLink": "Bağlantıyı düzenle",
   "PasswordAccess": "Şifre erişimi",
-  "PasswordLink": "Bağlantınızı korumak için bir şifre ekleyin."
+  "PasswordLink": "Bağlantınızı korumak için bir şifre ekleyin.",
+  "DisableDownload": "Dosya içeriği kopyalamayı, dosya indirmeyi ve yazdırmayı kısıtla"
 }

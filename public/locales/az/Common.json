@@ -882,5 +882,6 @@
   "EditAdditionalLink": "Əlavə linki redaktə edin",
   "EditLink": "Linki redaktə edin",
   "PasswordAccess": "Şifrə girişi",
-  "PasswordLink": "Keçidinizi qorumaq üçün şifrə əlavə edin."
+  "PasswordLink": "Keçidinizi qorumaq üçün şifrə əlavə edin.",
+  "DisableDownload": "Fayl məzmununun kopyalanmasını, faylın endirilməsini və çapını məhdudlaşdırın"
 }

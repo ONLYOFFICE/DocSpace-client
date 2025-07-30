@@ -882,5 +882,6 @@
   "EditAdditionalLink": "Uredi dodatno povezavo",
   "EditLink": "Uredi povezavo",
   "PasswordAccess": "Dostop z geslom",
-  "PasswordLink": "Dodajte geslo, da zaščitite svojo povezavo."
+  "PasswordLink": "Dodajte geslo, da zaščitite svojo povezavo.",
+  "DisableDownload": "Omeji kopiranje vsebine datoteke, prenos datoteke in tiskanje"
 }

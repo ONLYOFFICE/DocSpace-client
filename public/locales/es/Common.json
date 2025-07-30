@@ -882,5 +882,6 @@
   "EditAdditionalLink": "Editar enlace adicional ",
   "EditLink": "Editar enlace",
   "PasswordAccess": "Acceso con contraseña",
-  "PasswordLink": "Añada una contraseña para proteger su enlace."
+  "PasswordLink": "Añada una contraseña para proteger su enlace.",
+  "DisableDownload": "Restringir la copia, descarga e impresión del contenido de los archivos "
 }

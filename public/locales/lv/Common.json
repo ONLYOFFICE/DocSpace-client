@@ -881,5 +881,6 @@
   "EditAdditionalLink": "Rediģēt papildu saiti",
   "EditLink": "Rediģēt saiti",
   "PasswordAccess": "Piekļuve parolei",
-  "PasswordLink": "Pievienojiet paroli, lai aizsargātu savu saiti."
+  "PasswordLink": "Pievienojiet paroli, lai aizsargātu savu saiti.",
+  "DisableDownload": "Ierobežojiet failu satura kopēšanu, lejupielādi un drukāšanu"
 }

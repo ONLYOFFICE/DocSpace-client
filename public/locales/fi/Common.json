@@ -882,5 +882,6 @@
   "EditAdditionalLink": "Muokkaa lisälinkkiä",
   "EditLink": "Muokkaa linkkiä",
   "PasswordAccess": "Salasanapääsy",
-  "PasswordLink": "Lisää salasana suojataksesi linkkiäsi."
+  "PasswordLink": "Lisää salasana suojataksesi linkkiäsi.",
+  "DisableDownload": "Rajoita tiedostosisällön kopiointia, latausta ja tulostusta"
 }

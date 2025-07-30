@@ -882,5 +882,6 @@
   "EditAdditionalLink": "Upravit další odkaz",
   "EditLink": "Upravit odkaz",
   "PasswordAccess": "Přístup pomocí hesla",
-  "PasswordLink": "Přidejte heslo pro ochranu odkazu."
+  "PasswordLink": "Přidejte heslo pro ochranu odkazu.",
+  "DisableDownload": "Omezení kopírování obsahu souborů, stahování souborů a tisku"
 }

@@ -882,5 +882,6 @@
   "EditAdditionalLink": "Bewerk aanvullende link",
   "EditLink": "Link bewerken",
   "PasswordAccess": "Wachtwoord toegang",
-  "PasswordLink": "Voeg een wachtwoord toe om uw link te beschermen."
+  "PasswordLink": "Voeg een wachtwoord toe om uw link te beschermen.",
+  "DisableDownload": "Beperk het kopiëren van materiaal, downloaden en afdrukken van bestanden"
 }

@@ -882,5 +882,6 @@
   "EditAdditionalLink": "追加リンクの編集",
   "EditLink": "リンクの変更",
   "PasswordAccess": "パスワードアクセス",
-  "PasswordLink": "リンクを保護するためにパスワードを追加します。"
+  "PasswordLink": "リンクを保護するためにパスワードを追加します。",
+  "DisableDownload": "ファイル内容のコピー、ファイルのダウンロード、印刷の制限"
 }

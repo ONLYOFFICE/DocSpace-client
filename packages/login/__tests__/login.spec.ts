@@ -73,3 +73,35 @@ test("login error not validated", async ({ page }) => {
     "login-error-not-validated.png",
   ]);
 });
+
+test("login error incorrect email", async ({ page }) => {
+  await page.goto("/login");
+
+  await page.getByTestId("email-input").fill("email");
+
+  await page.getByTestId("text-input").fill("qwerty123");
+
+  await page.getByTestId("form-wrapper").getByTestId("button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-error-incorrect-email.png",
+  ]);
+});
+
+test("login error incorrect email domain", async ({ page }) => {
+  await page.goto("/login");
+
+  await page.getByTestId("email-input").fill("email@mail.com2");
+
+  await page.getByTestId("text-input").fill("qwerty123");
+
+  await page.getByTestId("form-wrapper").getByTestId("button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "login",
+    "login-error-incorrect-email-domain.png",
+  ]);
+});

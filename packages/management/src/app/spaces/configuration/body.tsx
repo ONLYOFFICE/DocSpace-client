@@ -154,7 +154,7 @@ export const Body = ({
       </FieldContainer>
       <FieldContainer
         isVertical
-        labelText={t("PortalName")}
+        labelText={t("PortalName", { productName: t("Common:ProductName") })}
         labelVisible
         hasError={!!(portalNameError || checkDomainError)}
         errorMessage={portalNameError || checkDomainError}

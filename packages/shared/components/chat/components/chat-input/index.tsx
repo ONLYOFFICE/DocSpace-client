@@ -38,14 +38,14 @@ import { Textarea } from "../../../textarea";
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
 
-import { ChatInputProps } from "../../types";
+import { ChatInputProps } from "../../Chat.types";
 
 import ToolsSettings from "./ToolsSettings";
 import Attachment from "./Attachment";
 import FilesList from "./FilesList";
+import Buttons from "./Buttons";
 
 import styles from "./ChatInput.module.scss";
-import Buttons from "./Buttons";
 
 const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   const { t } = useTranslation(["Common"]);
@@ -58,7 +58,6 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   const [selectedFiles, setSelectedFiles] = React.useState<Partial<TFile>[]>(
     [],
   );
-
   const [isFilesSelectorVisible, setIsFilesSelectorVisible] =
     React.useState(false);
   const [isMcpToolsVisible, setIsMcpToolsVisible] = React.useState(false);
@@ -83,6 +82,7 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
 
   const sendMessageAction = React.useCallback(async () => {
     if (!value) return;
+
     try {
       if (!currentChatId) {
         startChat(value, selectedFiles);

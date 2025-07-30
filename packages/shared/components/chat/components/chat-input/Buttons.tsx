@@ -38,17 +38,9 @@ import { Text } from "../../../text";
 
 import { useMessageStore } from "../../store/messageStore";
 
-import styles from "./ChatInput.module.scss";
+import { ButtonsProps } from "../../Chat.types";
 
-type ButtonsProps = {
-  inputWidth: number;
-  isFilesSelectorVisible: boolean;
-  toggleFilesSelector: () => void;
-  isMcpToolsVisible: boolean;
-  toggleMcpTools: () => void;
-  toolSettingsRef: React.RefObject<HTMLDivElement | null>;
-  sendMessageAction: () => Promise<void>;
-};
+import styles from "./ChatInput.module.scss";
 
 const Buttons = ({
   inputWidth,

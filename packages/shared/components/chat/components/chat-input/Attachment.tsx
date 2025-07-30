@@ -36,15 +36,8 @@ import FilesSelector from "../../../../selectors/Files";
 
 import { TSelectorItem } from "../../../selector";
 
-import { ChatInputProps } from "../../types";
-import { CHAT_SUPPORTED_FORMATS } from "../../constants";
-
-type AttachmentProps = {
-  isVisible: boolean;
-  toggleAttachment: VoidFunction;
-  getIcon: ChatInputProps["getIcon"];
-  setSelectedFiles: (files: Partial<TFile>[]) => void;
-};
+import { AttachmentProps } from "../../Chat.types";
+import { CHAT_SUPPORTED_FORMATS } from "../../Chat.constants";
 
 const Attachment = ({
   isVisible,

@@ -50,11 +50,13 @@ import { Link, LinkType, LinkTarget } from "../../../../link";
 import { useChatStore } from "../../../store/chatStore";
 import { useMessageStore } from "../../../store/messageStore";
 
-import RenameChat from "./RenameChat";
+import { SelectChatProps } from "../../../Chat.types";
 
 import styles from "../ChatHeader.module.scss";
 
-const SelectChat = ({ isLoadingProp }: { isLoadingProp?: boolean }) => {
+import RenameChat from "./RenameChat";
+
+const SelectChat = ({ isLoadingProp }: SelectChatProps) => {
   const { t } = useTranslation(["Common"]);
 
   const [isOpen, setIsOpen] = React.useState(false);

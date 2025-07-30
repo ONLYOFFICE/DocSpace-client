@@ -100,27 +100,27 @@
       fill: var(--chat-header-button-svg-color);
     }
   }
+
+  .dropdowItemWrapper {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .iconButtonWrapper {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 .selectModel {
   color: var(--chat-header-model-color);
 
   cursor: default;
-}
-
-.dropdowItemWrapper {
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .iconButtonWrapper {
-    width: 32px;
-    height: 32px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }

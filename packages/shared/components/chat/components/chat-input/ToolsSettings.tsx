@@ -40,16 +40,11 @@ import { Text } from "../../../text";
 
 import { useChatStore } from "../../store/chatStore";
 
+import { ToolsSettingsProps } from "../../Chat.types";
+
 import styles from "./ChatInput.module.scss";
 
 const DOCSPACE_MCP = "883da87d-5ae0-49fd-8cb9-2cb82181667e";
-
-type ToolsSettingsProps = {
-  isVisible: boolean;
-  toggleToolsSettings: VoidFunction;
-
-  forwardedRef: React.RefObject<HTMLDivElement | null>;
-};
 
 const ToolsSettings = ({
   isVisible,

@@ -28,15 +28,11 @@ import { RectangleSkeleton } from "../../../../../skeletons/rectangle";
 
 import { Text } from "../../../../text";
 
+import { SelectModelProps } from "../../../Chat.types";
+
 import styles from "../ChatHeader.module.scss";
 
-const SelectModel = ({
-  selectedModel,
-  isLoading,
-}: {
-  selectedModel: string;
-  isLoading?: boolean;
-}) => {
+const SelectModel = ({ selectedModel, isLoading }: SelectModelProps) => {
   if (isLoading) {
     return (
       <RectangleSkeleton

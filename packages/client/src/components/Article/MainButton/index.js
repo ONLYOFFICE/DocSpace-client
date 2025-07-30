@@ -68,7 +68,7 @@ import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
-import { CHAT_SUPPORTED_FORMATS } from "@docspace/shared/components/chat/constants";
+import { CHAT_SUPPORTED_FORMATS } from "@docspace/shared/components/chat";
 
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";

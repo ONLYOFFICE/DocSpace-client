@@ -30,22 +30,13 @@ import classNames from "classnames";
 
 import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
-import { TFile } from "../../../../api/files/types";
-
 import { Text } from "../../../text";
 import { IconButton } from "../../../icon-button";
 import { Scrollbar } from "../../../scrollbar";
 
-import { ChatProps } from "../../types";
+import { FilesListProps } from "../../Chat.types";
 
 import styles from "./ChatInput.module.scss";
-
-type FilesListProps = {
-  files: Partial<TFile>[];
-  isFixed?: boolean;
-  getIcon: ChatProps["getIcon"];
-  onRemove?: (file: Partial<TFile>) => void;
-};
 
 const FilesList = ({ files, isFixed, getIcon, onRemove }: FilesListProps) => {
   if (!files.length) return null;

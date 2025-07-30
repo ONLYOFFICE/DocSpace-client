@@ -28,7 +28,6 @@ import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
-import { TGetIcon } from "../../../../selectors/utils/types";
 import socket, { SocketCommands, SocketEvents } from "../../../../utils/socket";
 
 import { Scrollbar } from "../../../scrollbar";
@@ -36,6 +35,8 @@ import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scr
 
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
+
+import { MessageBodyProps } from "../../Chat.types";
 
 import EmptyScreen from "./sub-components/EmptyScreen";
 import Message from "./sub-components/message";
@@ -46,11 +47,7 @@ const ChatMessageBody = ({
   userAvatar,
   getIcon,
   isLoading,
-}: {
-  userAvatar: string;
-  getIcon: TGetIcon;
-  isLoading?: boolean;
-}) => {
+}: MessageBodyProps) => {
   const { messages, fetchNextMessages, addMessageId } = useMessageStore();
   const { currentChat } = useChatStore();
 

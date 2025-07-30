@@ -31,14 +31,11 @@ import classNames from "classnames";
 
 import { Text } from "../../../../../text";
 
+import { MessageMarkdownFieldProps } from "../../../../Chat.types";
+
 import styles from "../../ChatMessageBody.module.scss";
 
 import CodeBlock from "./CodeBlock";
-
-type MarkdownFieldProps = {
-  chatMessage: string;
-  propLanguage?: string;
-};
 
 // Function to replace <think> tags with a placeholder before markdown processing
 const preprocessChatMessage = (text: string): string => {
@@ -48,7 +45,10 @@ const preprocessChatMessage = (text: string): string => {
     .replace(/<\/think>/g, "`</think>`");
 };
 
-const MarkdownField = ({ chatMessage, propLanguage }: MarkdownFieldProps) => {
+const MarkdownField = ({
+  chatMessage,
+  propLanguage,
+}: MessageMarkdownFieldProps) => {
   // Process the chat message to handle <think> tags
   const processedChatMessage = preprocessChatMessage(chatMessage);
 

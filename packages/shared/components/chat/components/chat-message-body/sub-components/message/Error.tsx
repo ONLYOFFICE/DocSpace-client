@@ -26,15 +26,13 @@
 
 import React from "react";
 
-import { TContent } from "../../../../../../api/ai/types";
 import { ContentType } from "../../../../../../api/ai/enums";
 
-// import styles from "../../ChatMessageBody.module.scss";
-
-// import MarkdownField from "./Markdown";
 import StatusMessage from "../../../../../status-message";
 
-const Error = ({ content }: { content: TContent }) => {
+import { MessageErrorProps } from "../../../../Chat.types";
+
+const Error = ({ content }: MessageErrorProps) => {
   if (content.type !== ContentType.Text) return null;
 
   return <StatusMessage message={content.text} />;

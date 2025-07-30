@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
+
 import { TContent, TMessage } from "../../../api/ai/types";
 import {
   getChatMessages,
@@ -34,6 +35,10 @@ import {
 } from "../../../api/ai";
 import { ContentType, EventType, RoleType } from "../../../api/ai/enums";
 import { TFile } from "../../../api/files/types";
+
+import { toastr } from "../../toast";
+
+import { TMessageStoreProps } from "../Chat.types";
 
 export default class MessageStore {
   messages: TMessage[] = [];
@@ -62,27 +67,51 @@ export default class MessageStore {
     this.currentChatId = chatId;
   };
 
+  setMessages = (messages: TMessage[]) => {
+    this.messages = messages;
+  };
+
+  setStartIndex = (startIndex: number) => {
+    this.startIndex = startIndex;
+  };
+
+  setTotalMessages = (totalMessages: number) => {
+    this.totalMessages = totalMessages;
+  };
+
+  setIsGetMessageRequestRunning = (isGetMessageRequestRunning: boolean) => {
+    this.isGetMessageRequestRunning = isGetMessageRequestRunning;
+  };
+
+  setIsRequestRunning = (isRequestRunning: boolean) => {
+    this.isRequestRunning = isRequestRunning;
+  };
+
   startNewChat = async () => {
-    this.currentChatId = "";
-    this.messages = [];
-    this.startIndex = 0;
-    this.totalMessages = 0;
+    this.setCurrentChatId("");
+    this.setMessages([]);
+    this.setStartIndex(0);
+    this.setTotalMessages(0);
   };
 
   fetchMessages = async (chatId: string) => {
     if (this.isGetMessageRequestRunning) return;
 
-    this.isGetMessageRequestRunning = true;
+    this.setIsGetMessageRequestRunning(true);
 
-    const { items, total } = await getChatMessages(chatId, 0);
+    try {
+      const { items, total } = await getChatMessages(chatId, 0);
 
-    runInAction(() => {
-      this.messages = items;
-      this.startIndex = total > 100 ? 100 : total;
-      this.totalMessages = total;
-      this.currentChatId = chatId;
-      this.isGetMessageRequestRunning = false;
-    });
+      this.setMessages(items);
+      this.setStartIndex(total > 100 ? 100 : total);
+      this.setTotalMessages(total);
+      this.setCurrentChatId(chatId);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      this.setIsGetMessageRequestRunning(false);
+    }
   };
 
   fetchNextMessages = async () => {
@@ -92,19 +121,23 @@ export default class MessageStore {
 
     if (this.totalMessages <= this.startIndex) return;
 
-    this.isGetMessageRequestRunning = true;
+    this.setIsGetMessageRequestRunning(true);
 
-    const { items, total } = await getChatMessages(
-      this.currentChatId,
-      this.startIndex,
-    );
+    try {
+      const { items, total } = await getChatMessages(
+        this.currentChatId,
+        this.startIndex,
+      );
 
-    runInAction(() => {
-      this.messages = [...this.messages, ...items];
-      this.startIndex += 100;
-      this.totalMessages = total;
-      this.isGetMessageRequestRunning = false;
-    });
+      this.setMessages([...this.messages, ...items]);
+      this.setStartIndex(this.startIndex + 100);
+      this.setTotalMessages(total);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      this.setIsGetMessageRequestRunning(false);
+    }
   };
 
   addMessageId = (id: number) => {
@@ -130,11 +163,11 @@ export default class MessageStore {
     if (this.messages[0]?.role === RoleType.Error) {
       this.messages[0] = newMsg;
     } else {
-      this.messages = [newMsg, ...this.messages];
+      this.setMessages([newMsg, ...this.messages]);
     }
 
-    this.totalMessages += 1;
-    this.startIndex += 1;
+    this.setTotalMessages(this.totalMessages + 1);
+    this.setStartIndex(this.startIndex + 1);
   };
 
   addNewAIMessage = (message: string) => {
@@ -144,10 +177,10 @@ export default class MessageStore {
       contents: [{ type: ContentType.Text, text: message }],
     };
 
-    this.messages = [newMsg, ...this.messages];
+    this.setMessages([newMsg, ...this.messages]);
 
-    this.totalMessages += 1;
-    this.startIndex += 1;
+    this.setTotalMessages(this.totalMessages + 1);
+    this.setStartIndex(this.startIndex + 1);
   };
 
   continueAIMessage = (message: string) => {
@@ -187,10 +220,9 @@ export default class MessageStore {
       ],
     };
 
-    this.messages = [newMsg, ...this.messages];
-
-    this.totalMessages += 1;
-    this.startIndex += 1;
+    this.setMessages([newMsg, ...this.messages]);
+    this.setTotalMessages(this.totalMessages + 1);
+    this.setStartIndex(this.startIndex + 1);
   };
 
   handleToolResult = (jsonData: string) => {
@@ -227,12 +259,12 @@ export default class MessageStore {
       contents: [{ type: ContentType.Text, text: message }],
     };
 
-    this.messages = [newMsg, ...this.messages];
+    this.setMessages([newMsg, ...this.messages]);
   };
 
   startStream = async (stream?: ReadableStream<Uint8Array> | null) => {
     if (!stream) {
-      this.isRequestRunning = false;
+      this.setIsRequestRunning(false);
 
       return;
     }
@@ -250,9 +282,7 @@ export default class MessageStore {
         const { done, value } = await reader.read();
 
         if (done) {
-          runInAction(() => {
-            this.isRequestRunning = false;
-          });
+          this.setIsRequestRunning(false);
           return;
         }
 
@@ -318,26 +348,24 @@ export default class MessageStore {
 
           await streamHandler();
         } catch (e) {
-          runInAction(() => {
-            this.isRequestRunning = false;
-          });
           console.log(e);
+        } finally {
+          this.setIsRequestRunning(false);
         }
       };
 
       await streamHandler();
     } catch (e) {
-      runInAction(() => {
-        this.isRequestRunning = false;
-      });
       console.log(e);
+    } finally {
+      this.setIsRequestRunning(false);
     }
   };
 
   startChat = async (message: string, files: Partial<TFile>[]) => {
     this.addUserMessage(message, files);
 
-    this.isRequestRunning = true;
+    this.setIsRequestRunning(true);
 
     this.abortController.abort("Start new chat");
 
@@ -356,7 +384,7 @@ export default class MessageStore {
   sendMessage = async (message: string, files: Partial<TFile>[]) => {
     this.addUserMessage(message, files);
 
-    this.isRequestRunning = true;
+    this.setIsRequestRunning(true);
 
     this.abortController.abort("Start new message");
 
@@ -390,10 +418,7 @@ export const MessageStoreContext = React.createContext<MessageStore>(
 export const MessageStoreContextProvider = ({
   children,
   roomId,
-}: {
-  children: React.ReactNode;
-  roomId: number | string;
-}) => {
+}: TMessageStoreProps) => {
   const store = React.useMemo(() => new MessageStore(roomId), [roomId]);
 
   return (

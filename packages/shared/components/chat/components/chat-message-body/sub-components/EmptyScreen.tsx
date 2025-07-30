@@ -31,9 +31,11 @@ import { RectangleSkeleton } from "../../../../../skeletons";
 
 import { Text } from "../../../../text";
 
+import { MessageEmptyProps } from "../../../Chat.types";
+
 import styles from "../ChatMessageBody.module.scss";
 
-const EmptyScreen = ({ isLoading }: { isLoading?: boolean }) => {
+const EmptyScreen = ({ isLoading }: MessageEmptyProps) => {
   const { t } = useTranslation(["Common"]);
 
   return (

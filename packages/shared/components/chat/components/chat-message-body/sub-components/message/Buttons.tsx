@@ -37,7 +37,6 @@ import { exportChatMessage } from "../../../../../../api/ai";
 import { isDesktop, isTablet } from "../../../../../../utils";
 
 import FilesSelector from "../../../../../../selectors/Files";
-import { TGetIcon } from "../../../../../../selectors/utils/types";
 import { TBreadCrumb } from "../../../../../selector/Selector.types";
 
 import { toastr } from "../../../../../toast";
@@ -47,19 +46,15 @@ import { useMessageStore } from "../../../../store/messageStore";
 
 import styles from "../../ChatMessageBody.module.scss";
 
+import { MessageButtonsProps } from "../../../../Chat.types";
+
 const Buttons = ({
   text,
   chatName,
   messageId,
   isLast,
   getIcon,
-}: {
-  text: string;
-  chatName?: string;
-  messageId?: number;
-  isLast: boolean;
-  getIcon: TGetIcon;
-}) => {
+}: MessageButtonsProps) => {
   const { t } = useTranslation(["Common"]);
   const { roomId } = useMessageStore();
 

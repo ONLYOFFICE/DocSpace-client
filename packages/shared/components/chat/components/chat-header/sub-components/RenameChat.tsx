@@ -33,15 +33,9 @@ import { Button, ButtonSize } from "../../../../button";
 
 import { useChatStore } from "../../../store/chatStore";
 
-const RenameChat = ({
-  chatId,
-  prevTitle,
-  onRenameToggle,
-}: {
-  chatId: string;
-  prevTitle: string;
-  onRenameToggle: () => void;
-}) => {
+import { RenameChatProps } from "../../../Chat.types";
+
+const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {
   const { t } = useTranslation(["Common"]);
 
   const { renameChat } = useChatStore();

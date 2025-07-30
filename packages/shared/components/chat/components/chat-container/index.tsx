@@ -26,9 +26,11 @@
 
 import React from "react";
 
+import { ChatContainerProps } from "../../Chat.types";
+
 import styles from "./ChatContainer.module.scss";
 
-const ChatContainer = ({ children }: { children: React.ReactNode }) => {
+const ChatContainer = ({ children }: ChatContainerProps) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {

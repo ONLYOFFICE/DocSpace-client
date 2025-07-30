@@ -31,7 +31,7 @@ import { ContentType, RoleType } from "../../../../../../api/ai/enums";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 
-import { MessageProps } from "../../../../types";
+import { MessageProps } from "../../../../Chat.types";
 import { useChatStore } from "../../../../store/chatStore";
 
 import styles from "../../ChatMessageBody.module.scss";

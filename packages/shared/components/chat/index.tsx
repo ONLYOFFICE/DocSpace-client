@@ -27,19 +27,24 @@
 import { MessageStoreContextProvider } from "./store/messageStore";
 import { ChatStoreContextProvider } from "./store/chatStore";
 
-import { ChatProps } from "./types";
+import { ChatProps } from "./Chat.types";
 
 import ChatContainer from "./components/chat-container";
 import ChatHeader from "./components/chat-header";
 import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
 
+import { CHAT_SUPPORTED_FORMATS } from "./Chat.constants";
+
+export { CHAT_SUPPORTED_FORMATS };
+
 const Chat = ({
   roomId,
   userAvatar,
-  getIcon,
   selectedModel,
   isLoading,
+
+  getIcon,
 }: ChatProps) => {
   return (
     <ChatStoreContextProvider roomId={roomId}>
@@ -48,10 +53,10 @@ const Chat = ({
           <ChatHeader selectedModel={selectedModel} isLoading={isLoading} />
           <ChatMessageBody
             userAvatar={userAvatar}
-            getIcon={getIcon}
             isLoading={isLoading}
+            getIcon={getIcon}
           />
-          <ChatInput getIcon={getIcon} isLoading={isLoading} />
+          <ChatInput isLoading={isLoading} getIcon={getIcon} />
         </ChatContainer>
       </MessageStoreContextProvider>
     </ChatStoreContextProvider>

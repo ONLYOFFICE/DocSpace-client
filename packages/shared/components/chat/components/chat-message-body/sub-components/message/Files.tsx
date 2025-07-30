@@ -27,21 +27,15 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import { TGetIcon } from "../../../../../../selectors/utils/types";
-import { TContent } from "../../../../../../api/ai/types";
 import { ContentType } from "../../../../../../api/ai/enums";
 
 import { Text } from "../../../../../text";
 
+import { MessageFilesProps } from "../../../../Chat.types";
+
 import styles from "../../ChatMessageBody.module.scss";
 
-const Files = ({
-  files,
-  getIcon,
-}: {
-  files: TContent[];
-  getIcon: TGetIcon;
-}) => {
+const Files = ({ files, getIcon }: MessageFilesProps) => {
   if (!files.length) return null;
 
   return (

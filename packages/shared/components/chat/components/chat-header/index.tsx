@@ -26,19 +26,15 @@
 
 import { observer } from "mobx-react";
 
+import { ChatHeaderProps } from "../../Chat.types";
+
 import styles from "./ChatHeader.module.scss";
 
 import SelectChat from "./sub-components/SelectChat";
 import CreateChat from "./sub-components/CreateChat";
 import SelectModel from "./sub-components/SelectModel";
 
-const ChatHeader = ({
-  selectedModel,
-  isLoading,
-}: {
-  selectedModel: string;
-  isLoading?: boolean;
-}) => {
+const ChatHeader = ({ selectedModel, isLoading }: ChatHeaderProps) => {
   return (
     <div className={styles.chatHeader}>
       <SelectChat isLoadingProp={isLoading} />

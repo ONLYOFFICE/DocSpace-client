@@ -32,7 +32,6 @@ import { ReactSVG } from "react-svg";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import ToolFinish from "PUBLIC_DIR/images/tool.finish.svg?url";
 
-import { TContent } from "../../../../../../api/ai/types";
 import { ContentType } from "../../../../../../api/ai/enums";
 
 import { Text } from "../../../../../text";
@@ -40,10 +39,12 @@ import { Loader, LoaderTypes } from "../../../../../loader";
 
 import { formatJsonWithMarkdown } from "../../../../utils";
 
+import { MessageToolCallProps } from "../../../../Chat.types";
+
 import styles from "../../ChatMessageBody.module.scss";
 import MarkdownField from "./Markdown";
 
-const ToolCall = ({ content }: { content: TContent }) => {
+const ToolCall = ({ content }: MessageToolCallProps) => {
   const { t } = useTranslation(["Common"]);
   const [isHide, setIsHide] = React.useState(true);
 

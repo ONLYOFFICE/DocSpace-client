@@ -40,12 +40,9 @@ import { IconButton } from "../../../../../icon-button";
 
 import styles from "../../ChatMessageBody.module.scss";
 
-type CodeBlockProps = {
-  language?: string;
-  content: string;
-};
+import { MessageCodeBlockProps } from "../../../../Chat.types";
 
-const CodeBlock = ({ language, content }: CodeBlockProps) => {
+const CodeBlock = ({ language, content }: MessageCodeBlockProps) => {
   const { isBase } = useTheme();
 
   const onCopy = () => {

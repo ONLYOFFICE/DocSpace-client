@@ -25,13 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 import { Nullable } from "../../../types";
 import { TChat } from "../../../api/ai/types";
 import { getChat, getChats, deleteChat, renameChat } from "../../../api/ai";
 
-import { TChatStoreProps } from "../types";
+import { toastr } from "../../toast";
+
+import { TChatStoreProps } from "../Chat.types";
 
 export default class ChatStore {
   currentChat: Nullable<TChat> = null;
@@ -54,72 +56,108 @@ export default class ChatStore {
     makeAutoObservable(this);
   }
 
+  setTotalChats = (value: number) => {
+    this.totalChats = value;
+  };
+
+  setStartIndex = (value: number) => {
+    this.startIndex = value;
+  };
+
+  setChats = (value: TChat[]) => {
+    this.chats = value;
+  };
+
   setCurrentChat = (chat: TChat | null) => {
     this.currentChat = chat;
   };
 
+  setIsRequestRunning = (value: boolean) => {
+    this.isRequestRunning = value;
+  };
+
+  setIsLoading = (value: boolean) => {
+    this.isLoading = value;
+  };
+
   fetchChat = async (id: string) => {
-    const chat = await getChat(id);
+    try {
+      const chat = await getChat(id);
 
-    this.setCurrentChat(chat);
+      this.setCurrentChat(chat);
 
-    if (!this.chats.some((c) => c.id === chat.id)) {
-      this.chats = [chat, ...this.chats];
+      if (!this.chats.some((c) => c.id === chat.id)) {
+        this.chats = [chat, ...this.chats];
+      }
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
     }
   };
 
   fetchChats = async () => {
     if (this.isRequestRunning) return;
-    runInAction(() => {
-      this.isLoading = true;
-      this.isRequestRunning = true;
-    });
 
-    const { items, total } = await getChats(this.roomId);
+    this.setIsLoading(true);
+    this.setIsRequestRunning(true);
 
-    runInAction(() => {
-      this.chats = items;
-      this.totalChats = total;
-      this.startIndex = 100;
-      this.isRequestRunning = false;
-      this.isLoading = false;
-    });
+    try {
+      const { items, total } = await getChats(this.roomId);
+
+      this.setChats(items);
+      this.setTotalChats(total);
+      this.setStartIndex(100);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      this.setIsRequestRunning(false);
+      this.setIsLoading(false);
+    }
   };
 
   fetchNextChats = async () => {
     if (this.isRequestRunning) return;
-    runInAction(() => {
-      this.isRequestRunning = true;
-    });
-    const { items, total } = await getChats(this.roomId, this.startIndex);
 
-    runInAction(() => {
-      this.chats = items;
-      this.totalChats = total;
-      this.startIndex += 100;
-      this.isRequestRunning = false;
-    });
+    this.setIsRequestRunning(true);
+
+    try {
+      const { items, total } = await getChats(this.roomId, this.startIndex);
+
+      this.setChats(items);
+      this.setTotalChats(total);
+      this.setStartIndex(this.startIndex + 100);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      this.setIsRequestRunning(false);
+    }
   };
 
   renameChat = async (id: string, title: string) => {
-    await renameChat(id, title);
+    try {
+      await renameChat(id, title);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    }
 
-    runInAction(() => {
-      this.chats = this.chats.map((chat) =>
-        chat.id === id ? { ...chat, title } : chat,
-      );
-    });
+    this.chats = this.chats.map((c) => (c.id === id ? { ...c, title } : c));
   };
 
   deleteChat = async (id: string) => {
-    await deleteChat(id);
+    try {
+      await deleteChat(id);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    }
 
-    runInAction(() => {
-      this.chats = this.chats.filter((chat) => chat.id !== id);
+    this.chats = this.chats.filter((chat) => chat.id !== id);
 
-      this.startIndex -= 1;
-      this.totalChats -= 1;
-    });
+    this.setStartIndex(this.startIndex - 1);
+    this.setTotalChats(this.totalChats - 1);
   };
 }
 

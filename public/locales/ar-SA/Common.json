@@ -894,5 +894,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله",
   "UnsavedChangesBody": "لن يتم حفظ التغييرات إذا قمت بإغلاق قائمة الإعدادات الآن.",
   "CloseMenu": "أغلاق القائمة",
-  "LinkSettings": "إعدادات الرابط"
+  "LinkSettings": "إعدادات الرابط",
+  "Embed": "إدراج"
 }

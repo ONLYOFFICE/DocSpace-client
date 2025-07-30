@@ -894,5 +894,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä",
   "UnsavedChangesBody": "Jos nyt suljet linkkiasetukset-menun, muutoksia ei tallenneta.",
   "CloseMenu": "Sulje menu ",
-  "LinkSettings": "Linkkiasetukset"
+  "LinkSettings": "Linkkiasetukset",
+  "Embed": "Upota"
 }

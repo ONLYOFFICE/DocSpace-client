@@ -893,5 +893,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "Saitei ir beidzies derīguma termiņš, un tā ir atspējota",
   "UnsavedChangesBody": "Ja tūlīt aizvērsiet saites iestatījumu izvēlni, izmaiņas netiks saglabātas.",
   "CloseMenu": "Aizvērt izvēlni",
-  "LinkSettings": "Saites iestatījumi"
+  "LinkSettings": "Saites iestatījumi",
+  "Embed": "Iegult"
 }

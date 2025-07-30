@@ -425,7 +425,7 @@ const Share = (props: ShareProps) => {
       },
       {
         key: "embedding-settings-key",
-        label: t("Files:Embed"),
+        label: t("Common:Embed"),
         icon: CodeReactSvgUrl,
         onClick: () => onEmbeddingClick(link),
         disabled: !infoPanelSelection.security.Embed,

@@ -894,5 +894,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "Bağlantının süresi doldu ve devre dışı bırakıldı",
   "UnsavedChangesBody": "Bağlantı ayarları menüsünü hemen kapatırsanız değişiklikleriniz kaydedilmeyecektir.",
   "CloseMenu": "Menüyü kapat",
-  "LinkSettings": "Bağlantı ayarları"
+  "LinkSettings": "Bağlantı ayarları",
+  "Embed": "Göm"
 }

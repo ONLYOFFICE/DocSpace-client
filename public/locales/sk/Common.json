@@ -894,5 +894,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "Platnosť odkazu vypršala a bol deaktivovaný",
   "UnsavedChangesBody": "Ak zatvoríte menu nastavení odkazu práve teraz, vaše zmeny sa neuložia.",
   "CloseMenu": "Zatvoriť menu",
-  "LinkSettings": "Nastavenia odkazu"
+  "LinkSettings": "Nastavenia odkazu",
+  "Embed": "Vložiť"
 }

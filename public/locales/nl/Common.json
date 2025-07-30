@@ -894,5 +894,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "De link is verlopen en uitgeschakeld",
   "UnsavedChangesBody": "Als u het menu met linkinstellingen nu sluit, worden uw wijzigingen niet opgeslagen.",
   "CloseMenu": "Sluit menu",
-  "LinkSettings": "Link instellingen"
+  "LinkSettings": "Link instellingen",
+  "Embed": "Insluiten"
 }

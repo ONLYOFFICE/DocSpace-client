@@ -883,5 +883,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "සබැඳිය කල් ඉකුත් වී අබල කර ඇත",
   "UnsavedChangesBody": "ඔබ දැන් සබැඳි සැකසුම් වට්ටෝරුව වසා දැමුවහොත්, ඔබගේ වෙනස්කම් සුරැකෙන්නේ නැත.",
   "CloseMenu": "වට්ටෝරුව වසන්න",
-  "LinkSettings": "සබැඳියේ සැකසුම්"
+  "LinkSettings": "සබැඳියේ සැකසුම්",
+  "Embed": "එම්බෙඩ් කරන්න"
 }

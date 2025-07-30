@@ -894,5 +894,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "Keçidin vaxtı bitib və deaktiv edilib",
   "UnsavedChangesBody": "Bağlantı parametrləri menyusunu dərhal bağlasanız, dəyişiklikləriniz yadda saxlanmayacaq.",
   "CloseMenu": "Menyunu bağlayın",
-  "LinkSettings": "Link parametrləri"
+  "LinkSettings": "Link parametrləri",
+  "Embed": "Yerləşdirin"
 }

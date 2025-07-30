@@ -1946,7 +1946,7 @@ class ContextOptionsStore {
           {
             id: "option_embedding-setting",
             key: "embedding-settings",
-            label: t("Files:Embed"),
+            label: t("Common:Embed"),
             icon: CodeReactSvgUrl,
             onClick: () => this.onOpenEmbeddingSettings(item),
             disabled: !item.security?.Embed,

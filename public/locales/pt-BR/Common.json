@@ -894,5 +894,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "O link expirou e foi desativado",
   "UnsavedChangesBody": "Se você fechar o menu de configurações do link agora, suas alterações não serão salvas.",
   "CloseMenu": "Fechar menu",
-  "LinkSettings": "Configurações de link"
+  "LinkSettings": "Configurações de link",
+  "Embed": "Embutir"
 }

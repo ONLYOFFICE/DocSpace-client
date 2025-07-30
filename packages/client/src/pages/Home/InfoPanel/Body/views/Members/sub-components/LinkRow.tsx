@@ -181,7 +181,7 @@ const LinkRow = (props: LinkRowProps) => {
       },
       {
         key: "embedding-settings-key",
-        label: t("Files:Embed"),
+        label: t("Common:Embed"),
         icon: CodeReactSvgUrl,
         onClick: onEmbeddingClick,
         disabled: isDisabled,

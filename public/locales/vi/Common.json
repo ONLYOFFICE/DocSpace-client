@@ -894,5 +894,6 @@
   "LinkHasExpiredAndHasBeenDisabled": "Liên kết đã hết hạn và đã bị vô hiệu hóa",
   "UnsavedChangesBody": "Nếu bạn đóng menu cài đặt liên kết ngay bây giờ, các thay đổi của bạn sẽ không được lưu.",
   "CloseMenu": "Đóng menu",
-  "LinkSettings": "Cài đặt liên kết"
+  "LinkSettings": "Cài đặt liên kết",
+  "Embed": "Nhúng"
 }
